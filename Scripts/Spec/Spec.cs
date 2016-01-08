@@ -17,6 +17,13 @@ namespace Server.Mobiles
 	Powerplayer
     }
 
+    public enum AttackType
+    {
+	Magic,
+	Melee,
+	Ranged
+    }
+
     [PropertyObject]
     public class Spec
     {
@@ -55,7 +62,7 @@ namespace Server.Mobiles
 		}
 		else
 		{
-		    return ( 1.0 + ((double)m_specLevel * 0.10) ); // +10% per level
+		    return ( 1.0 + ((double)m_SpecLevel * 0.10) ); // +10% per level
 		}
 	    }
 	}
@@ -177,6 +184,9 @@ namespace Server.Mobiles
 	    //also note that total is in "x10" notation, whereas skillname.value is in regular decimal form
 
 	    double total = m_ClassSkills.Total / 10;
+
+	    //thief TODO incomplete.
+	    double thiefSkills = m_ClassSkills.Hiding.Value;
 
 	    //bard
 	    double bardSkills = m_ClassSkills.Begging.Value + 
