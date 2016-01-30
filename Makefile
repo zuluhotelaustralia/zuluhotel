@@ -1,9 +1,11 @@
 CC=mcs
-LDFLAGS=-r:System.Drawing,OpenUO.Core.dll,OpenUO.Ultima.dll,OpenUO.Ultima.Windows.Forms.dll,SevenZipSharp.dll
+LDFLAGS=
 OPTFLAGS=-optimize+
-CFLAGS=-d:MONO -unsafe -nowarn:219,414 -out:RunUO.exe
+CFLAGS=-d:MONO -unsafe -nowarn:219,414 -t:exe -out:RunUO.exe
 RECURSE=-recurse:'Server/*.cs'
 DFLAGS=-debug
+
+# mcs -optimize+ -unsafe -t:exe -out:RunUO.exe -win32icon:Server/runuo.ico -nowarn:219,414 -d:MONO -recurse:Server/*.cs
 
 all: release
 
@@ -19,10 +21,10 @@ configure:
 	@echo "Folder muls/ created, you should put a copy of the client files here."
 
 release:
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OPTFLAGS) $(RECURSE)
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(RECURSE)
 
 debug:
-	$(CC) $(CFLAGS) $(LDFLAGS) $(DFLAGS) $(RECURSE)
+	$(CC) $(CFLAGS) $(DFLAGS) $(RECURSE)
 
 clean:
 	rm RunUO.exe
