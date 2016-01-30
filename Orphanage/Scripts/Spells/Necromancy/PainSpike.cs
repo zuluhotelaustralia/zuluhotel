@@ -41,7 +41,7 @@ namespace Server.Spells.Necromancy
 				//SpellHelper.CheckReflect( (int)this.Circle, Caster, ref m ); //Irrelevent asfter AoS
 
 				/* Temporarily causes intense physical pain to the target, dealing direct damage.
-				 * After 10 seconds the spell wears off, and if the target is still alive, 
+				 * After 10 seconds the spell wears off, and if the target is still alive,
 				 * some of the Hit Points lost through Pain Spike are restored.
 				 */
 
@@ -116,25 +116,5 @@ namespace Server.Spells.Necromancy
 			}
 		}
 
-		private class InternalTarget : Target
-		{
-			private PainSpikeSpell m_Owner;
-
-			public InternalTarget( PainSpikeSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-			{
-				m_Owner = owner;
-			}
-
-			protected override void OnTarget( Mobile from, object o )
-			{
-				if ( o is Mobile )
-					m_Owner.Target( (Mobile) o );
-			}
-
-			protected override void OnTargetFinish( Mobile from )
-			{
-				m_Owner.FinishSequence();
-			}
-		}
 	}
 }
