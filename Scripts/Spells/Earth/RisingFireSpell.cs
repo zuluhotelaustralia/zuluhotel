@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class RisingFireSpell : Spell
+    public class RisingFireSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Rising Fire", "Batida Do Fogo"

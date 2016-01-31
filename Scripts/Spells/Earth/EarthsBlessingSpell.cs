@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class EarthsBlessingSpell : Spell
+    public class EarthsBlessingSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Earths Blessing", "Foria Da Terra"

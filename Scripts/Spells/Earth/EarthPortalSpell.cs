@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class EarthPortalSpell : Spell
+    public class EarthPortalSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Earth Portal", "Destraves Limites Da Natureza"

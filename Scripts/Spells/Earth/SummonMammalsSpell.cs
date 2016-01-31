@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class SummonMammalsSpell : Spell
+    public class SummonMammalsSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Summon Mammals", "Chame O Mamifero Agora"

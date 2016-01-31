@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class ShiftingEarthSpell : Spell
+    public class ShiftingEarthSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Shifting Earth", "Esmagamento Con Pedra"

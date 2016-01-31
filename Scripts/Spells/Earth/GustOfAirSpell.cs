@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class GustOfAirSpell : Spell
+    public class GustOfAirSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Gust Of Air", "Gusto Do Ar"

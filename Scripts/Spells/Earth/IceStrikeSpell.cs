@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class IceStrikeSpell : Spell
+    public class IceStrikeSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Ice Strike", "Geada Com Inverno"

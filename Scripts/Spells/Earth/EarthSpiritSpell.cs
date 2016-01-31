@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class EarthSpiritSpell : Spell
+    public class EarthSpiritSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Earth Spirit", "Chame A Terra Elemental"

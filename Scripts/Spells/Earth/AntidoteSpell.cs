@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class AntidoteSpell : Spell
+    public class AntidoteSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Antidote", "Puissante Terre Traite Ce Patient"

@@ -33,7 +33,7 @@ CLASS({
     {
       name: 'baseClass',
       defaultValueFn: function() {
-        return this.type === 'Necromancy' ? 'NecromancerSpell' : 'Spell';
+        return this.type === 'Necromancy' ? 'NecromancerSpell' : 'AbstractEarthSpell';
       }
     },
     {

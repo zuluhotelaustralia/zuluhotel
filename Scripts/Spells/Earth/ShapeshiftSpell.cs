@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class ShapeshiftSpell : Spell
+    public class ShapeshiftSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Shapeshift", "Mude Minha Forma"

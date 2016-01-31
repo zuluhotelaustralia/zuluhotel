@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class NaturesTouchSpell : Spell
+    public class NaturesTouchSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Natures Touch", "Guerissez Par Terre"
