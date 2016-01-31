@@ -92,14 +92,9 @@ namespace Server.Spells.Chivalry
 
 					m.Paralyzed = false;
 
-					EvilOmenSpell.TryEndEffect( m );
-					StrangleSpell.RemoveCurse( m );
-					CorpseSkinSpell.RemoveCurse( m );
 					CurseSpell.RemoveEffect( m );
 					MortalStrike.EndWound( m );
-					if (Core.ML) { BloodOathSpell.RemoveCurse ( m ); }
-					MindRotSpell.ClearMindRotScalar ( m );
-
+					
 					BuffInfo.RemoveBuff( m, BuffIcon.Clumsy );
 					BuffInfo.RemoveBuff( m, BuffIcon.FeebleMind );
 					BuffInfo.RemoveBuff( m, BuffIcon.Weaken );

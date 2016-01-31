@@ -1034,9 +1034,9 @@ namespace Server.Items
 
 							target.Paralyzed = false;
 
-							EvilOmenSpell.TryEndEffect(target);
+							/*EvilOmenSpell.TryEndEffect(target);
 							StrangleSpell.RemoveCurse(target);
-							CorpseSkinSpell.RemoveCurse(target);
+							CorpseSkinSpell.RemoveCurse(target);*/
 							CurseSpell.RemoveEffect(target);
 
 							BuffInfo.RemoveBuff(target, BuffIcon.Clumsy);
