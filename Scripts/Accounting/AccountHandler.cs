@@ -220,7 +220,10 @@ namespace Server.Misc
 		}
 
 		public static bool CanCreate( IPAddress ip )
-		{
+                {
+                    // Allow unlimited accounts per ip for now. --daleron
+                    return true;
+
 			if ( !IPTable.ContainsKey( ip ) )
 				return true;
 
