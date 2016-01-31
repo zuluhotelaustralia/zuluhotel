@@ -106,22 +106,22 @@ namespace Server.Spells
 	    Register( 115, typeof( Necromancy.SpellbindSpell ) );
 
 	    // Earth Spells to replace SpellweavingSpells
-	    Register( 600, typeof( Spellweaving.AntidoteSpell ) );
-	    Register( 601, typeof( Spellweaving.OwlSightSpell ) );
-	    Register( 602, typeof( Spellweaving.ShiftingEarthSpell ) );
-	    Register( 603, typeof( Spellweaving.SummonMammalsSpell ) );
-	    Register( 604, typeof( Spellweaving.CallLightningSpell ) );
-	    Register( 605, typeof( Spellweaving.EarthsBlessingSpell ) );
-	    Register( 606, typeof( Spellweaving.EarthPortalSpell ) );
-	    Register( 607, typeof( Spellweaving.NaturesTouchSpell ) );
-	    Register( 608, typeof( Spellweaving.GustOfAirSpell ) );
-	    Register( 610, typeof( Spellweaving.RisingFireSpell ) );
-	    Register( 612, typeof( Spellweaving.ShapeshiftSpell ) );
-	    Register( 613, typeof( Spellweaving.IceStrikeSpell ) );
-	    Register( 614, typeof( Spellweaving.EarthSpiritSpell ) );
-	    Register( 615, typeof( Spellweaving.FireSpiritSpell ) );
-	    Register( 616, typeof( Spellweaving.StormSpiritSpell ) );
-	    Register( 617, typeof( Spellweaving.WaterSpiritSpell ) );
+	    Register( 600, typeof( Earth.AntidoteSpell ) );
+	    Register( 601, typeof( Earth.OwlSightSpell ) );
+	    Register( 602, typeof( Earth.ShiftingEarthSpell ) );
+	    Register( 603, typeof( Earth.SummonMammalsSpell ) );
+	    Register( 604, typeof( Earth.CallLightningSpell ) );
+	    Register( 605, typeof( Earth.EarthsBlessingSpell ) );
+	    Register( 606, typeof( Earth.EarthPortalSpell ) );
+	    Register( 607, typeof( Earth.NaturesTouchSpell ) );
+	    Register( 608, typeof( Earth.GustOfAirSpell ) );
+	    Register( 610, typeof( Earth.RisingFireSpell ) );
+	    Register( 612, typeof( Earth.ShapeshiftSpell ) );
+	    Register( 613, typeof( Earth.IceStrikeSpell ) );
+	    Register( 614, typeof( Earth.EarthSpiritSpell ) );
+	    Register( 615, typeof( Earth.FireSpiritSpell ) );
+	    Register( 616, typeof( Earth.StormSpiritSpell ) );
+	    Register( 617, typeof( Earth.WaterSpiritSpell ) );
 
 	    if ( Core.AOS ) //this can probably just be deleted dbh, but I'll keep it for reference --sith
 	    {

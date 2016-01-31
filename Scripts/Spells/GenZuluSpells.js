@@ -39,41 +39,6 @@ CLASS({
   ],
   methods: [
     function execute() {
-      this.dao.select(COUNT())(function(c) {
-        console.log("Count is ", c.count);
-        if ( c.count != 0 ) return;
-
-        console.log("Generating initial spell list.");
-
-        var names = [
-          "ControlUndead",
-          "Darkness",
-          "SpectresTouch",
-          "AbyssalFlame",
-          "AnimateDead",
-          "Sacrifice",
-          "WraithBreath",
-          "SorcerorsBane",
-          "SummonSpirit",
-          "WraithForm",
-          "WyvernStrike",
-          "KillSpell",
-          "LicheForm",
-          "Plague",
-          "Spellbind"
-        ];
-
-        var spells = names.map(function(n) {
-          console.log("Creating spell", n);
-          return this.NecroSpell.create({
-            name: n
-          });
-        }.bind(this));
-
-
-        spells.select(this.dao);
-      }.bind(this));
-
       this.dao.select({
         put: function(spell) {
 

@@ -1,95 +1,191 @@
 [
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "AbyssalFlame",
-     "type": "Necromancy",
-     "wordsOfPower": "Orinundus Barathrum Erado Hostes Hostium"
+      "name": "AbyssalFlame",
+      "type": "Necromancy",
+      "wordsOfPower": "Orinundus Barathrum Erado Hostes Hostium"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "AnimateDead",
-     "className": "ZuluAnimateDeadSpell",
-     "type": "Necromancy",
-     "wordsOfPower": "Corpus Sine Nomine Expergefaceret"
+      "name": "AnimateDead",
+      "type": "Necromancy",
+      "wordsOfPower": "Corpus Sine Nomine Expergefaceret",
+      "className": "ZuluAnimateDeadSpell"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "ControlUndead",
-     "type": "Necromancy",
-     "wordsOfPower": "Nutu Magistri Supplicare"
+      "name": "Antidote",
+     "type": "Earth",
+     "wordsOfPower": "Puissante Terre Traite Ce Patient"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "Darkness",
-     "type": "Necromancy",
-     "wordsOfPower": "In Caligne Abditus"
+      "name": "CallLightning",
+     "type": "Earth",
+     "wordsOfPower": "Batida Do Deus"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "Kill",
-     "type": "Necromancy",
-     "wordsOfPower": "Ulties Manum Necarent"
+      "name": "ControlUndead",
+      "type": "Necromancy",
+      "wordsOfPower": "Nutu Magistri Supplicare"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "LicheForm",
-     "type": "Necromancy",
-     "wordsOfPower": "Umbrae Tenebrae Miserere"
+      "name": "Darkness",
+      "type": "Necromancy",
+      "wordsOfPower": "In Caligne Abditus"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "Plague",
-     "type": "Necromancy",
-     "wordsOfPower": "Fluctus Puter Se Aresceret"
+      "name": "EarthPortal",
+     "type": "Earth",
+     "wordsOfPower": "Destraves Limites Da Natureza"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "Sacrifice",
-     "type": "Necromancy",
-     "wordsOfPower": "Animus Ex Corporis Resolveretur"
+      "name": "EarthsBlessing",
+     "type": "Earth",
+     "wordsOfPower": "Foria Da Terra"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "SorcerorsBane",
-     "type": "Necromancy",
-     "wordsOfPower": "Fluctus Perturbo Magus Navitas",
-     "label": "Sorceror's Bane"
+      "name": "EarthSpirit",
+     "type": "Earth",
+     "wordsOfPower": "Chame A Terra Elemental"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "SpectresTouch",
-     "type": "Necromancy",
-     "wordsOfPower": "Enevare"
+      "name": "FireSpirit",
+     "type": "Earth",
+     "wordsOfPower": "Chame O Fogo Elemental"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "Spellbind",
-     "type": "Necromancy",
-     "wordsOfPower": "Nutu Magistri Se Compellere"
+      "name": "GustOfAir",
+     "type": "Earth",
+     "wordsOfPower": "Gusto Do Ar"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "SummonSpirit",
-     "type": "Necromancy",
-     "wordsOfPower": "Manes Turbidi Sollictique Resolverent"
+      "name": "IceStrike",
+     "type": "Earth",
+     "wordsOfPower": "Geada Com Inverno"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "WraithBreath",
-     "type": "Necromancy",
-     "wordsOfPower": "Manes Sollicti Mi Compellere"
+      "name": "Kill",
+      "type": "Necromancy",
+      "wordsOfPower": "Ulties Manum Necarent"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "WraithForm",
-     "className": "ZuluWraithFormSpell",
-     "type": "Necromancy",
-     "wordsOfPower": "Manes Sollicti Mihi Infundite"
+      "name": "LicheForm",
+      "type": "Necromancy",
+      "wordsOfPower": "Umbrae Tenebrae Miserere"
    },
    {
       "model_": "Scripts.Spells.ZuluSpell",
-     "name": "WyvernStrike",
-     "type": "Necromancy",
-     "wordsOfPower": "Ubrae Tenebrae Venarent"
+      "name": "NaturesTouch",
+     "type": "Earth",
+     "wordsOfPower": "Guerissez Par Terre"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "OwlSight",
+     "type": "Earth",
+     "wordsOfPower": "Vista Da Noite"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "Plague",
+      "type": "Necromancy",
+      "wordsOfPower": "Fluctus Puter Se Aresceret"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "RisingFire",
+     "type": "Earth",
+     "wordsOfPower": "Batida Do Fogo"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "Sacrifice",
+      "type": "Necromancy",
+      "wordsOfPower": "Animus Ex Corporis Resolveretur"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "Shapeshift",
+     "type": "Earth",
+     "wordsOfPower": "Mude Minha Forma"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "ShiftingEarth",
+     "type": "Earth",
+     "wordsOfPower": "Esmagamento Con Pedra"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "SorcerorsBane",
+      "label": "Sorceror's Bane",
+      "type": "Necromancy",
+      "wordsOfPower": "Fluctus Perturbo Magus Navitas"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "SpectresTouch",
+      "type": "Necromancy",
+      "wordsOfPower": "Enevare"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "Spellbind",
+      "type": "Necromancy",
+      "wordsOfPower": "Nutu Magistri Se Compellere"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "StormSpirit",
+     "type": "Earth",
+     "wordsOfPower": "Chame O Ar Elemental"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "SummonMammals",
+     "type": "Earth",
+     "wordsOfPower": "Chame O Mamifero Agora"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "SummonSpirit",
+      "type": "Necromancy",
+      "wordsOfPower": "Manes Turbidi Sollictique Resolverent"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "WaterSpirit",
+     "type": "Earth",
+     "wordsOfPower": "Chame O Agua Elemental"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "WraithBreath",
+      "type": "Necromancy",
+      "wordsOfPower": "Manes Sollicti Mi Compellere"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "WraithForm",
+      "type": "Necromancy",
+      "wordsOfPower": "Manes Sollicti Mihi Infundite",
+      "className": "ZuluWraithFormSpell"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+      "name": "WyvernStrike",
+      "type": "Necromancy",
+      "wordsOfPower": "Ubrae Tenebrae Venarent"
    }
 ]
