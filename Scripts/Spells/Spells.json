@@ -1,0 +1,95 @@
+[
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "AbyssalFlame",
+     "type": "Necromancy",
+     "wordsOfPower": "Orinundus Barathrum Erado Hostes Hostium"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "AnimateDead",
+     "className": "ZuluAnimateDead",
+     "type": "Necromancy",
+     "wordsOfPower": "Corpus Sine Nomine Expergefaceret"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "ControlUndead",
+     "type": "Necromancy",
+     "wordsOfPower": "Nutu Magistri Supplicare"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "Darkness",
+     "type": "Necromancy",
+     "wordsOfPower": "In Caligne Abditus"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "Kill",
+     "type": "Necromancy",
+     "wordsOfPower": "Ulties Manum Necarent"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "LicheForm",
+     "type": "Necromancy",
+     "wordsOfPower": "Umbrae Tenebrae Miserere"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "Plague",
+     "type": "Necromancy",
+     "wordsOfPower": "Fluctus Puter Se Aresceret"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "Sacrifice",
+     "type": "Necromancy",
+     "wordsOfPower": "Animus Ex Corporis Resolveretur"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "SorcerorsBane",
+     "type": "Necromancy",
+     "wordsOfPower": "Fluctus Perturbo Magus Navitas",
+     "label": "Sorceror's Bane"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "SpectresTouch",
+     "type": "Necromancy",
+     "wordsOfPower": "Enevare"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "Spellbind",
+     "type": "Necromancy",
+     "wordsOfPower": "Nutu Magistri Se Compellere"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "SummonSpirit",
+     "type": "Necromancy",
+     "wordsOfPower": "Manes Turbidi Sollictique Resolverent"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "WraithBreath",
+     "type": "Necromancy",
+     "wordsOfPower": "Manes Sollicti Mi Compellere"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "WraithForm",
+     "className": "ZuluWraithForm",
+     "type": "Necromancy",
+     "wordsOfPower": "Manes Sollicti Mihi Infundite"
+   },
+   {
+      "model_": "Scripts.Spells.ZuluSpell",
+     "name": "WyvernStrike",
+     "type": "Necromancy",
+     "wordsOfPower": "Ubrae Tenebrae Venarent"
+   }
+]

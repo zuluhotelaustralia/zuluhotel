@@ -6,23 +6,24 @@ using Server.Targeting;
 
 namespace Server.Spells.Necromancy
 {
-    public class DecayingRaySpell : NecromancerSpell
+    public class ControlUndeadSpell : NecromancerSpell
     {
-        private static SpellInfo m_Info = new SpellInfo("Decaying Ray", "Umbra Aufero Vita");
-//                                                    Reagent.VialOfBlood, Reagent.VialOfBlood,
-//                                                    Reagent.VolcanicAsh, Reagent.DaemonBone);
+        private static SpellInfo m_Info = new SpellInfo(
+                "Control Undead", "Nutu Magistri Supplicare"
+                );
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1.0 ); } }
-        public override double RequiredSkill { get { return 80.0; } }
-        public override int RequiredMana { get { return 40; } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public DecayingRaySpell( Mobile caster, Item scroll ) : base ( caster, scroll, m_Info )
+        public override double RequiredSkill{ get{ return 0.0; } }
+        public override int RequiredMana{ get{ return 0; } }
+
+        public ControlUndeadSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
         }
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget ( this );
+            Caster.Target = new InternalTarget( this );
         }
 
         public void Target( Mobile m )
@@ -39,24 +40,19 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            // Prevent stacking of DecayingRay.
-            if ( ! m.BeginAction( typeof( DecayingRaySpell ) ) ) {
+            if ( ! m.BeginAction( typeof( ControlUndeadSpell ) ) ) {
                 goto Return;
             }
 
-            // Turn caster towards the target.
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell Effects.
+            // TODO: Spell graphical and sound effects.
 
             Caster.DoHarmful( m );
 
-            // TODO: Compute an appropriate mod value.
-            int val = 10;
+            // TODO: Spell action ( buff/debuff/damage/etc. )
 
-            m.VirtualArmorMod -= val;
-
-            new InternalTimer( m, Caster, val ).Start();
+            new InternalTimer( m, Caster ).Start();
 
         Return:
             FinishSequence();
@@ -65,11 +61,9 @@ namespace Server.Spells.Necromancy
         private class InternalTimer : Timer
         {
             private Mobile m_Target;
-            private int m_Value;
 
-            public InternalTimer( Mobile target, Mobile caster, int value ) : base( TimeSpan.FromSeconds( 0 ) )
+            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
             {
-                m_Value = value;
                 m_Target = target;
 
                 // TODO: Compute a reasonable duration, this is stolen from ArchProtection
@@ -82,17 +76,16 @@ namespace Server.Spells.Necromancy
 
             protected override void OnTick()
             {
-                m_Target.EndAction( typeof( DecayingRaySpell ) );
-                m_Target.VirtualArmorMod += m_Value;
+                m_Target.EndAction( typeof( ControlUndeadSpell ) );
             }
         }
 
         private class InternalTarget : Target
         {
-            private DecayingRaySpell m_Owner;
+            private ControlUndeadSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( DecayingRaySpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+            public InternalTarget( ControlUndeadSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
             {
                 m_Owner = owner;
             }
@@ -108,5 +101,6 @@ namespace Server.Spells.Necromancy
                 m_Owner.FinishSequence();
             }
         }
+
     }
 }
