@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Necromancy
 {
-    public class ZuluAnimateDeadSpell : NecromancerSpell
+    public class AnimateDeadSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Animate Dead", "Corpus Sine Nomine Expergefaceret"
@@ -17,7 +17,7 @@ namespace Server.Spells.Necromancy
         public override double RequiredSkill{ get{ return 0.0; } }
         public override int RequiredMana{ get{ return 0; } }
 
-        public ZuluAnimateDeadSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
+        public AnimateDeadSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
         }
 
@@ -40,7 +40,7 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( ZuluAnimateDeadSpell ) ) ) {
+            if ( ! m.BeginAction( typeof( AnimateDeadSpell ) ) ) {
                 goto Return;
             }
 
@@ -76,16 +76,16 @@ namespace Server.Spells.Necromancy
 
             protected override void OnTick()
             {
-                m_Target.EndAction( typeof( ZuluAnimateDeadSpell ) );
+                m_Target.EndAction( typeof( AnimateDeadSpell ) );
             }
         }
 
         private class InternalTarget : Target
         {
-            private ZuluAnimateDeadSpell m_Owner;
+            private AnimateDeadSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( ZuluAnimateDeadSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+            public InternalTarget( AnimateDeadSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
             {
                 m_Owner = owner;
             }

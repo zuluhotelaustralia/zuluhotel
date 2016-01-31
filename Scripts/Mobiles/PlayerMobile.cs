@@ -3193,33 +3193,9 @@ namespace Server.Mobiles
 
 	public override void Damage( int amount, Mobile from )
 	{
-	    if ( Spells.Necromancy.EvilOmenSpell.TryEndEffect( this ) )
-		amount = (int)(amount * 1.25);
-
-	    Mobile oath = Spells.Necromancy.BloodOathSpell.GetBloodOath( from );
-
 	    /* Per EA's UO Herald Pub48 (ML):
 	     * ((resist spellsx10)/20 + 10=percentage of damage resisted)
 	     */
-
-	    if ( oath == this )
-	    {
-		amount = (int)(amount * 1.1);
-
-		if( amount > 35 && from is PlayerMobile )  /* capped @ 35, seems no expansion */
-		{
-		    amount = 35;
-		}
-
-		if( Core.ML )
-		{
-		    from.Damage( (int)(amount * ( 1 - ((( from.Skills.MagicResist.Value * .5 ) + 10) / 100 ))), this );
-		}
-		else
-		{
-		    from.Damage( amount, this );
-		}
-	    }
 
 	    if ( from != null && Talisman is BaseTalisman )
 	    {
@@ -3243,9 +3219,6 @@ namespace Server.Mobiles
 	{
 	    if ( !Alive )
 		return ApplyPoisonResult.Immune;
-
-	    if ( Spells.Necromancy.EvilOmenSpell.TryEndEffect( this ) )
-		poison = PoisonImpl.IncreaseLevel( poison );
 
 	    ApplyPoisonResult result = base.ApplyPoison( from, poison );
 

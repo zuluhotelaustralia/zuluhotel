@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Necromancy
 {
-    public class ZuluWraithFormSpell : NecromancerSpell
+    public class WraithFormSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Wraith Form", "Manes Sollicti Mihi Infundite"
@@ -17,7 +17,7 @@ namespace Server.Spells.Necromancy
         public override double RequiredSkill{ get{ return 0.0; } }
         public override int RequiredMana{ get{ return 0; } }
 
-        public ZuluWraithFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
+        public WraithFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
         }
 
@@ -40,7 +40,7 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( ZuluWraithFormSpell ) ) ) {
+            if ( ! m.BeginAction( typeof( WraithFormSpell ) ) ) {
                 goto Return;
             }
 
@@ -76,16 +76,16 @@ namespace Server.Spells.Necromancy
 
             protected override void OnTick()
             {
-                m_Target.EndAction( typeof( ZuluWraithFormSpell ) );
+                m_Target.EndAction( typeof( WraithFormSpell ) );
             }
         }
 
         private class InternalTarget : Target
         {
-            private ZuluWraithFormSpell m_Owner;
+            private WraithFormSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( ZuluWraithFormSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+            public InternalTarget( WraithFormSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
             {
                 m_Owner = owner;
             }

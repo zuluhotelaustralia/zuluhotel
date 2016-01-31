@@ -1477,7 +1477,7 @@ namespace Server.Items
 
 			TransformContext context = TransformationSpellHelper.GetContext( defender );
 
-			if( (m_Slayer == SlayerName.Silver || m_Slayer2 == SlayerName.Silver) && context != null && context.Spell is NecromancerSpell && context.Type != typeof( HorrificBeastSpell ) )
+			if( (m_Slayer == SlayerName.Silver || m_Slayer2 == SlayerName.Silver) && context != null && context.Spell is NecromancerSpell )
 			{
 				// Every necromancer transformation other than horrific beast takes an additional 25% damage
 				percentageBonus += 25;
@@ -1611,9 +1611,6 @@ namespace Server.Items
 					lifeLeech += 50; // Additional 50% life leech for cursed weapons (necro spell)
 
 				context = TransformationSpellHelper.GetContext( attacker );
-
-				if ( context != null && context.Type == typeof( VampiricEmbraceSpell ) )
-					lifeLeech += 20; // Vampiric embrace gives an additional 20% life leech
 
 				if ( context != null && context.Type == typeof( WraithFormSpell ) )
 				{
@@ -2245,10 +2242,6 @@ namespace Server.Items
 			 * Capped at 100% total.
 			 */
 			int damageBonus = AosAttributes.GetValue( attacker, AosAttribute.WeaponDamage );
-
-			// Horrific Beast transformation gives a +25% bonus to damage.
-			if( TransformationSpellHelper.UnderTransformation( attacker, typeof( HorrificBeastSpell ) ) )
-				damageBonus += 25;
 
 			// Divine Fury gives a +10% bonus to damage.
 			if ( Spells.Chivalry.DivineFurySpell.UnderEffect( attacker ) )

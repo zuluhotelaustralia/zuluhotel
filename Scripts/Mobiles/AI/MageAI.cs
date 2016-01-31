@@ -239,11 +239,11 @@ namespace Server.Mobiles
 
 			switch( Utility.Random( bound ) )
 			{
-				case 0: m_Mobile.DebugSay( "Pain Spike" ); return new PainSpikeSpell( m_Mobile, null );
-				case 1: m_Mobile.DebugSay( "Poison Strike" ); return new PoisonStrikeSpell( m_Mobile, null );
-				case 2: m_Mobile.DebugSay( "Strangle" ); return new StrangleSpell( m_Mobile, null );
-				case 3: m_Mobile.DebugSay( "Wither" ); return new WitherSpell( m_Mobile, null );
-				default: m_Mobile.DebugSay( "Vengeful Spirit" ); return new VengefulSpiritSpell( m_Mobile, null );
+				case 0: m_Mobile.DebugSay( "Spectre's Touch" ); return new SpectresTouchSpell( m_Mobile, null );
+				case 1: m_Mobile.DebugSay( "Abyssal Flame" ); return new AbyssalFlameSpell( m_Mobile, null );
+				case 2: m_Mobile.DebugSay( "Wraith Breath" ); return new WraithBreathSpell( m_Mobile, null );
+				case 3: m_Mobile.DebugSay( "Wyvern Strike" ); return new WyvernStrikeSpell( m_Mobile, null );
+				default: m_Mobile.DebugSay( "Kill" ); return new KillSpell( m_Mobile, null );
 			}
 		}
 
@@ -283,10 +283,10 @@ namespace Server.Mobiles
 		{
 			switch( Utility.Random( 4 ) )
 			{
-				case 0: m_Mobile.DebugSay( "Blood Oath" ); return new BloodOathSpell( m_Mobile, null );
-				case 1: m_Mobile.DebugSay( "Corpse Skin" ); return new CorpseSkinSpell( m_Mobile, null );
-				case 2: m_Mobile.DebugSay( "Evil Omen" ); return new EvilOmenSpell( m_Mobile, null );
-				default: m_Mobile.DebugSay( "Mind Rot" ); return new MindRotSpell( m_Mobile, null );
+				case 0: m_Mobile.DebugSay( "Sorceror's Bane" ); return new SorcerorsBaneSpell( m_Mobile, null );
+				case 1: m_Mobile.DebugSay( "DecayingRay" ); return new DecayingRaySpell( m_Mobile, null );
+				case 2: m_Mobile.DebugSay( "Wraith Breath" ); return new WraithBreathSpell( m_Mobile, null );
+				default: m_Mobile.DebugSay( "Darkness" ); return new DarknessSpell( m_Mobile, null );
 			}
 		}
 
@@ -352,7 +352,7 @@ namespace Server.Mobiles
 					double psDamage = ( ( m_Mobile.Skills[ SkillName.SpiritSpeak ].Value - c.Skills[ SkillName.MagicResist ].Value ) / 10 ) + ( c.Player ? 18 : 30 );
 
 					if( psDamage > c.Hits )
-						return new PainSpikeSpell( m_Mobile, null );
+						return new WyvernStrikeSpell( m_Mobile, null );
 				}
 
 				switch (Utility.Random(16))
@@ -500,7 +500,7 @@ namespace Server.Mobiles
 				if( !c.Poisoned )
 					spell = new PoisonSpell( m_Mobile, null );
 				else if ( IsNecromancer )
-					spell = new StrangleSpell( m_Mobile, null );
+					spell = new WyvernStrikeSpell( m_Mobile, null );
 
 				++m_Combo; // Move to next spell
 			}
@@ -534,7 +534,7 @@ namespace Server.Mobiles
 						}
 					default:
 						{
-							spell = new PainSpikeSpell( m_Mobile, null );
+							spell = new AbyssalFlameSpell( m_Mobile, null );
 							m_Combo = -1; // Reset combo state
 							break;
 						}

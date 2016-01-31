@@ -350,7 +350,7 @@ namespace Server.Spells
 
 				TransformContext context = TransformationSpellHelper.GetContext( defender );
 
-				if( (atkBook.Slayer == SlayerName.Silver || atkBook.Slayer2 == SlayerName.Silver) && context != null && context.Type != typeof( HorrificBeastSpell ) )
+				if( (atkBook.Slayer == SlayerName.Silver || atkBook.Slayer2 == SlayerName.Silver) && context != null )
 					scalar +=.25; // Every necromancer transformation other than horrific beast take an additional 25% damage
 
 				if( scalar != 1.0 )
@@ -499,7 +499,7 @@ namespace Server.Spells
 			{
 				m_Caster.SendLocalizedMessage( 502642 ); // You are already casting a spell.
 			}
-			else if ( BlockedByHorrificBeast && TransformationSpellHelper.UnderTransformation( m_Caster, typeof( HorrificBeastSpell ) ) || ( BlockedByAnimalForm && AnimalForm.UnderTransformation( m_Caster ) ))
+			else if ( BlockedByAnimalForm && AnimalForm.UnderTransformation( m_Caster ) )
 			{
 				m_Caster.SendLocalizedMessage( 1061091 ); // You cannot cast that spell in this form.
 			}
@@ -614,9 +614,6 @@ namespace Server.Spells
 		public virtual int ScaleMana( int mana )
 		{
 			double scalar = 1.0;
-
-			if ( !Necromancy.MindRotSpell.GetMindRotScalar( Caster, ref scalar ) )
-				scalar = 1.0;
 
 			// Lower Mana Cost = 40%
 			int lmc = AosAttributes.GetValue( m_Caster, AosAttribute.LowerManaCost );
@@ -792,7 +789,7 @@ namespace Server.Spells
 				if ( karma != 0 )
 					Misc.Titles.AwardKarma( Caster, karma, true );
 
-				if( TransformationSpellHelper.UnderTransformation( m_Caster, typeof( VampiricEmbraceSpell ) ) )
+				/*if( TransformationSpellHelper.UnderTransformation( m_Caster, typeof( VampiricEmbraceSpell ) ) )
 				{
 					bool garlic = false;
 
@@ -804,7 +801,7 @@ namespace Server.Spells
 						m_Caster.SendLocalizedMessage( 1061651 ); // The garlic burns you!
 						AOS.Damage( m_Caster, Utility.RandomMinMax( 17, 23 ), 100, 0, 0, 0, 0 );
 					}
-				}
+				}*/
 
 				return true;
 			}
