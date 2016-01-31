@@ -1072,7 +1072,6 @@ namespace Server.Items
 
 							MagicReflectSpell.EndReflect(target);
 							ReactiveArmorSpell.EndArmor(target);
-							ProtectionSpell.EndProtection(target);
 
 							target.SendLocalizedMessage(1072402); // Your wards have been removed!
 

@@ -8,9 +8,9 @@ namespace Server.Spells.Necromancy
 {
     public class DecayingRaySpell : NecromancerSpell
     {
-        private static SpellInfo m_Info = new SpellInfo("Decaying Ray", "Umbra Aufero Vita");
-//                                                    Reagent.VialOfBlood, Reagent.VialOfBlood,
-//                                                    Reagent.VolcanicAsh, Reagent.DaemonBone);
+        private static SpellInfo m_Info = new SpellInfo("Decaying Ray", "Umbra Aufero Vita",
+							Reagent.VialOfBlood, Reagent.VialOfBlood,
+							Reagent.VolcanicAsh, Reagent.DaemonBone);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1.0 ); } }
         public override double RequiredSkill { get { return 80.0; } }
@@ -51,8 +51,16 @@ namespace Server.Spells.Necromancy
 
             Caster.DoHarmful( m );
 
-            // TODO: Compute an appropriate mod value.
-            int val = 10;
+            // Feel free to fck with this formula, I just mostly copied it from POL 093.  I don't care so long as it's balanced --sith
+            int val = (int)(Caster.Skills[SkillName.SpiritSpeak].Value);
+	    val /= 10;
+	    val += 5;
+	    val *= 2;
+
+	    if( val < 0 )
+		val = 0;
+	    else if ( val > 75 )
+		val = 75;
 
             m.VirtualArmorMod -= val;
 
@@ -73,6 +81,7 @@ namespace Server.Spells.Necromancy
                 m_Target = target;
 
                 // TODO: Compute a reasonable duration, this is stolen from ArchProtection
+		// durations are done in POL under scripts/include/dotempmods.inc under GetModDuration or somesuch --sith
                 double time = caster.Skills[SkillName.Magery].Value * 1.2;
                 if ( time > 144 )
                     time = 144;
