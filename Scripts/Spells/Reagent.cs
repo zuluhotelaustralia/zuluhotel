@@ -5,7 +5,7 @@ namespace Server.Spells
 {
     public class Reagent
     {
-	private static Type[] m_Types = new Type[27]
+	private static Type[] m_Types = new Type[25]
 	    {
 		typeof( BlackPearl ),
 		typeof( Bloodmoss ),
@@ -20,11 +20,9 @@ namespace Server.Spells
 		typeof( DaemonBlood ),
 		typeof( NoxCrystal ),
 		typeof( PigIron ),
-		typeof( BatWing ),
 		typeof( Blackmoor ),
 		typeof( Bloodspawn ),
 		typeof( Brimstone ),
-		typeof( DaemonBlood ),
 		typeof( DaemonBone ),
 		typeof( DragonsBlood ),
 		typeof( EyeOfNewt ),
@@ -118,89 +116,77 @@ namespace Server.Spells
 	    get{ return m_Types[12]; }
 	    set{ m_Types[12] = value; }
 	}
-
-	public static Type BatWing
+	
+	public static Type Blackmoor
 	{
 	    get{ return m_Types[13]; }
 	    set{ m_Types[13] = value; }
 	}
-	
-	public static Type Blackmoor
+
+	public static Type Bloodspawn
 	{
 	    get{ return m_Types[14]; }
 	    set{ m_Types[14] = value; }
 	}
-
-	public static Type Bloodspawn
+	
+	public static Type Brimstone
 	{
 	    get{ return m_Types[15]; }
 	    set{ m_Types[15] = value; }
 	}
-	
-	public static Type Brimstone
+
+	public static Type DaemonBone
 	{
 	    get{ return m_Types[16]; }
 	    set{ m_Types[16] = value; }
 	}
 
-	public static Type DaemonBlood
+	public static Type DragonsBlood
 	{
 	    get{ return m_Types[17]; }
 	    set{ m_Types[17] = value; }
 	}
 
-	public static Type DaemonBone
+	public static Type EyeOfNewt
 	{
 	    get{ return m_Types[18]; }
 	    set{ m_Types[18] = value; }
 	}
 
-	public static Type DragonsBlood
+	public static Type Obsidian
 	{
 	    get{ return m_Types[19]; }
 	    set{ m_Types[19] = value; }
 	}
 
-	public static Type EyeOfNewt
+	public static Type Pumice
 	{
 	    get{ return m_Types[20]; }
 	    set{ m_Types[20] = value; }
 	}
 
-	public static Type Obsidian
+	public static Type SerpentsScales
 	{
 	    get{ return m_Types[21]; }
 	    set{ m_Types[21] = value; }
 	}
-
-	public static Type Pumice
+	
+	public static Type VialOfBlood
 	{
 	    get{ return m_Types[22]; }
 	    set{ m_Types[22] = value; }
 	}
 
-	public static Type SerpentsScales
+	public static Type VolcanicAsh
 	{
 	    get{ return m_Types[23]; }
 	    set{ m_Types[23] = value; }
 	}
-	
-	public static Type VialOfBlood
-	{
-	    get{ return m_Types[24]; }
-	    set{ m_Types[24] = value; }
-	}
-
-	public static Type VolcanicAsh
-	{
-	    get{ return m_Types[25]; }
-	    set{ m_Types[25] = value; }
-	}
 
 	public static Type WyrmsHeart
 	{
-	    get{ return m_Types[26]; }
-	    set{ m_Types[26] = value; }
+	    get{ return m_Types[24]; }
+	    set{ m_Types[24] = value; }
 	}
     }
 }
