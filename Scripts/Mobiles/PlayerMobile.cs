@@ -176,7 +176,7 @@ namespace Server.Mobiles
 	private DesignContext m_DesignContext;
 
 	private Spec m_Spec;
-	
+
 	private NpcGuild m_NpcGuild;
 	private DateTime m_NpcGuildJoinTime;
 	private DateTime m_NextBODTurnInTime;
@@ -203,7 +203,7 @@ namespace Server.Mobiles
 	private List<Mobile> m_AllFollowers;
 	private List<Mobile> m_RecentlyReported;
 
-	    
+
 
 	#region Getters & Setters
 
@@ -215,7 +215,7 @@ namespace Server.Mobiles
 		return m_Spec;
 	    }
 	}
-	
+
 	public List<Mobile> RecentlyReported
 	{
 	    get
@@ -1387,7 +1387,8 @@ namespace Server.Mobiles
 	    InvalidateMyRunUO();
 	}
 
-	public override double ArmorRating
+        [CommandProperty( AccessLevel.GameMaster )]
+        public override double ArmorRating
 	{
 	    get
 	    {
