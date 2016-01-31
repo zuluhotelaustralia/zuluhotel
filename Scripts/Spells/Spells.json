@@ -8,7 +8,7 @@
    {
       "model_": "Scripts.Spells.ZuluSpell",
      "name": "AnimateDead",
-     "className": "ZuluAnimateDead",
+     "className": "ZuluAnimateDeadSpell",
      "type": "Necromancy",
      "wordsOfPower": "Corpus Sine Nomine Expergefaceret"
    },
@@ -82,7 +82,7 @@
    {
       "model_": "Scripts.Spells.ZuluSpell",
      "name": "WraithForm",
-     "className": "ZuluWraithForm",
+     "className": "ZuluWraithFormSpell",
      "type": "Necromancy",
      "wordsOfPower": "Manes Sollicti Mihi Infundite"
    },

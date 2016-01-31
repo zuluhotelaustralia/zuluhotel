@@ -16,7 +16,7 @@ namespace Server.Spells
 	    Register( 05, typeof( First.NightSightSpell ) );
 	    Register( 06, typeof( First.ReactiveArmorSpell ) );
 	    Register( 07, typeof( First.WeakenSpell ) );
-	    
+
 	    // Second circle
 	    Register( 08, typeof( Second.AgilitySpell ) );
 	    Register( 09, typeof( Second.CunningSpell ) );
@@ -93,12 +93,12 @@ namespace Server.Spells
 	    Register( 102, typeof( Necromancy.DecayingRaySpell ) );
 	    Register( 103, typeof( Necromancy.SpectresTouchSpell ) );
 	    Register( 104, typeof( Necromancy.AbyssalFlameSpell ) );
-	    Register( 105, typeof( Necromancy.AnimateDeadSpell ) );
+	    Register( 105, typeof( Necromancy.ZuluAnimateDeadSpell ) );
 	    Register( 106, typeof( Necromancy.SacrificeSpell ) );
 	    Register( 107, typeof( Necromancy.WraithBreathSpell ) );
 	    Register( 108, typeof( Necromancy.SorcerorsBaneSpell ) );
 	    Register( 109, typeof( Necromancy.SummonSpiritSpell ) );
-	    Register( 110, typeof( Necromancy.WraithFormSpell ) );
+	    Register( 110, typeof( Necromancy.ZuluWraithFormSpell ) );
 	    Register( 111, typeof( Necromancy.WyvernStrikeSpell ) );
 	    Register( 112, typeof( Necromancy.KillSpell ) );
 	    Register( 113, typeof( Necromancy.LicheFormSpell ) );
@@ -122,13 +122,13 @@ namespace Server.Spells
 	    Register( 615, typeof( Spellweaving.FireSpiritSpell ) );
 	    Register( 616, typeof( Spellweaving.StormSpiritSpell ) );
 	    Register( 617, typeof( Spellweaving.WaterSpiritSpell ) );
-	    
+
 	    if ( Core.AOS ) //this can probably just be deleted dbh, but I'll keep it for reference --sith
 	    {
-		
+
 		if( Core.SE )
 		    Register( 116, typeof( Necromancy.ExorcismSpell ) );
-		
+
 		// Paladin abilities
 		Register( 200, typeof( Chivalry.CleanseByFireSpell ) );
 		Register( 201, typeof( Chivalry.CloseWoundsSpell ) );
