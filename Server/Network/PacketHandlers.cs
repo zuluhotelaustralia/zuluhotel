@@ -410,7 +410,7 @@ namespace Server.Network
 					byte layer = pvSrc.ReadByte();
 					Serial serial = pvSrc.ReadInt32();
 					int amount = pvSrc.ReadInt16();
-				
+
 					buyList.Add( new BuyItemResponse( serial, amount ) );
 				}
 
@@ -1869,6 +1869,9 @@ namespace Server.Network
 				if ( !from.CheckContextMenuDisplay( target ) )
 					return;
 
+                                // Early return to diable context menus. --daleron
+                                return;
+
 				ContextMenu c = new ContextMenu( from, target );
 
 				if ( c.Entries.Length > 0 )
@@ -1970,11 +1973,11 @@ namespace Server.Network
 
 		public static PlayCharCallback ThirdPartyAuthCallback = null, ThirdPartyHackedCallback = null;
 
-		private static byte[] m_ThirdPartyAuthKey = new byte[] 
-			{ 
-				0x9, 0x11, 0x83, (byte)'+', 0x4, 0x17, 0x83, 
-				0x5, 0x24, 0x85, 
-				0x7, 0x17, 0x87, 
+		private static byte[] m_ThirdPartyAuthKey = new byte[]
+			{
+				0x9, 0x11, 0x83, (byte)'+', 0x4, 0x17, 0x83,
+				0x5, 0x24, 0x85,
+				0x7, 0x17, 0x87,
 				0x6, 0x19, 0x88,
 			};
 
@@ -2022,7 +2025,7 @@ namespace Server.Network
 					bool match = true;
 					for ( int i=0; match && i < m_ThirdPartyAuthKey.Length; i++ )
 						match = match && pvSrc.ReadByte() == m_ThirdPartyAuthKey[i];
-						
+
 					if ( match )
 						authOK = true;
 				}
@@ -2369,7 +2372,7 @@ namespace Server.Network
 
 			byte raceID = (byte)(genderRace < 4 ? 0 : ((genderRace / 2) - 1));
 			race = Race.Races[raceID];
-		
+
 			if( race == null )
 				race = Race.DefaultRace;
 
@@ -2460,7 +2463,7 @@ namespace Server.Network
 		private static Dictionary<int, AuthIDPersistence> m_AuthIDWindow = new Dictionary<int, AuthIDPersistence>( m_AuthIDWindowSize );
 
 		private static int GenerateAuthID( NetState state )
-		{			
+		{
 			if ( m_AuthIDWindow.Count == m_AuthIDWindowSize ) {
 				int oldestID = 0;
 				DateTime oldest = DateTime.MaxValue;
@@ -2474,7 +2477,7 @@ namespace Server.Network
 
 				m_AuthIDWindow.Remove( oldestID );
 			}
-			
+
 			int authID;
 
 			do {
@@ -2485,7 +2488,7 @@ namespace Server.Network
 			} while ( m_AuthIDWindow.ContainsKey( authID ) );
 
 			m_AuthIDWindow[authID] = new AuthIDPersistence( state.Version );
-			
+
 			return authID;
 		}
 
@@ -2511,7 +2514,7 @@ namespace Server.Network
 				state.Dispose();
 				return;
 			}
-			
+
 			if ( state.m_AuthID != 0 && authID != state.m_AuthID )
 			{
 				Console.WriteLine( "Login: {0}: Invalid client detected, disconnecting", state );
