@@ -1,0 +1,189 @@
+=====
+Things that need to be looked at
+=====
+* Scripts/Misc/ResourceInfo.cs has a big enum of all resources, get rid of this and use polymorphism
+* Scripts/Misc/ResourceInfo.cs has static instances of CraftAttributeInfo for each type of ore, get rid of this and use polymorphism
+
+=====
+Types at play in relation to resources:
+=====
++++
++ CraftAttributeInfo
++++
+- Weapon/Armor Fire/Cold/Poison/Energy/Chaos/DirectDamage
+- Weapon/Armor Durability/Luck/GoldIncrease/LowerRequirements
+- Runic Min/Max Attributes
+- Runic Min/Max Intensity
+
++++
++ CraftResourceInfo
++++
+- Hue/Number/Name/AttributeInfo/CraftResource/ResourceTypes
+Number is used in ObjectPropertyList which is a packet.  Not sure what it means yet.
+ResourceTypes[0] is used for scissoring/resmelting items back ingots/cloth
+ResourceTypes.Length is also checked in Scripts.Engines.Craft.Enhance, i guess you can only enhance things that were crafted with resources?
+
++++
++ OreInfo
++++
+- Level
+- Hue
+- Name
+
+As far as I can tell, Level is only used to in ResourceInfo.GetFromOreInfo, which takes an OreInfo and returns the associated CraftResource
+
+God this is retarted
+
++++
++ CraftResource
++++
+An enum of all resources that can be used in crafting.  All the woods, ores, leathers, scales, etc.
+
+In Scripts/Items/Armor/BaseAmor.ArmorRating:
+We have a switch statement that boost the armor rating based upon the CraftResource.
+This is probably because world save isn't sophisticated, so we just save the enum.
+
+=====
+Notes about current system
+=====
+Scripts/Engines/Harvest:
+-most of the harvest system
+
+Possible Bugs:
+-Harvest with multiple tools simultaneously
+-with sand, multiple harvests with a single tool
+  -lock is released in FinishHarvesting, which is called
+  once per HarvestTimer
+
+Also lol:
+
+"Optimizing for 4 64-bit processors"
+all it does is use two threads for world save instead of one.
+that's some serious "optimization".
+
+It looks like you can harvest multiple things at a time if you have multiple tools.  That doesn't sound right.
+
+HarvestTimer appears to be for doing harvesting effects.  But after every cycle, it triggers a HarvestSoundTimer.  HarvestSoundTimer falls through to FinishHarvesting.  How does this not cause multiple harvests?
+
+Sand has 6 "HarvestEffects"  It should trigger HarvestSystem.OnHarvesting 6 times per use of the tool.
+
+=====
+Walkthrough of harvesting flow
+=====
+Starting from Shovel:
+
+Shovel : BaseHarvestTool
+private HarvestSystem = Mining.System
+
+BaseHarvestTool : Item, IUsesRemaining
+public ToolsQuality Quality
+public int UsesRemaining
+abstract HarvestSystem
+
+OnDoubleClick( Mobile from ) {
+  item in backpack or hands?
+    HarvestSystem.BeginHarvesting
+}
+
+Mining : HarvestSystem
+BeginHarvesting( Mobile from, Item tool ) {
+
+in HarvestSystem {
+  CheckHarvest() {
+    CheckTool() {
+      check item == null, Item.Deleted, Item.UsesRemaining < 1 :
+        "You've worn out your tool."
+    }
+
+    check Mounted ? "You can't mine while riding"
+    check IsBodyMode && ! body.IsHuman ? "You can't mine while polymorphed"
+  }
+
+  new HarvestTarget() : "Where do you with to dig?"
+
+  in HarvestTarget.OnTarget() {
+    check is Mining and isStatic && isGrave && player is doing witch apprentice quest, lol
+    check is luberjacking && target.isChoppable
+    else check is luberjacking && target is carvable
+    else check is lumberjack && target is furnature
+      destroyfunature
+    else check is mining && target is treasuremap
+      target.OnBeginDig
+    else
+      system.StartHarvesting
+  }
+
+  in Mining.StartHarvesting {
+    CheckHarvest()
+      CheckTool()
+      check not mounted and not polymophed
+      
+
+    GetHarvestDetails() {
+      check is Static && !movable
+      or check is StaticTarget
+      or check is LandTarget
+      or fail
+    }
+
+    GetDefinition( tileid )
+
+    check range
+    check resources
+      get bank, check bank has enough resources
+    CheckHarvest
+
+    acquire action lock based upon tool
+      fail: OnConcurrentHarvest() return;
+
+    new HarvestTimer()
+    OnHarvestStarted()
+      if mondain's legacy -> revealing action
+
+    HarvestTimer.OnTick()
+    System.OnHarvesting() {
+      CheckHarvest()
+      check GetHarvestDetails
+      check ! HarvestDefinition.Validate(tile) // check tileID
+      check range
+      check resources
+      check harvest
+
+      DoHarvestingEffect
+      new HarvestSoundTimer
+      return not last
+    }
+  }
+
+  HarvestSoundTimer.OnTick() {
+    System.DoSound
+    System.FinishHarvesting() {
+      EndAction
+      CheckHarvest
+      check GetHarvestDetails
+      check Definition.Validate
+      check range
+      check resoureces
+      check harvest
+
+      definition.getBank
+      bank.getVein
+      vein = MutateVein(vein)
+
+      compute received resource
+      mark tool usage
+
+      OnHarvestFinished() implemented in Mining {
+        if tool is gargoyles pickaxe, and mining ore/stone and 10% rnadom chance
+	and if harvest resource == vein.PrimaryResource
+	and if harvest resource.types.length > 3 ?
+	  third type is elemental creature for those that have one
+	  spawn elemental (third type )
+      }
+    }
+  }
+}
+
+
+LOL what a clusterf,
+fair amount of redundant code.
