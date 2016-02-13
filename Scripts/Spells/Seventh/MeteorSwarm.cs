@@ -23,6 +23,7 @@ namespace Server.Spells.Seventh
 
 		public MeteorSwarmSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
+		    m_DamageType = DamageType.Air;
 		}
 
 		public override void OnCast()

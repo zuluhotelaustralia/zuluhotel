@@ -1,4 +1,5 @@
 using System;
+using Server;
 using Server.Targeting;
 using Server.Network;
 
@@ -17,6 +18,7 @@ namespace Server.Spells.Third
 
 		public PoisonSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
+		    m_DamageType = DamageType.Poison;
 		}
 
 		public override void OnCast()

@@ -10,6 +10,8 @@ namespace Server.Spells.Necromancy
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Abyssal Flame", "Orinundus Barathrum Erado Hostes Hostium"
+		227, 9031,
+		Reagent.
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
@@ -19,6 +21,7 @@ namespace Server.Spells.Necromancy
 
         public AbyssalFlameSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
+	    m_DamageType = DamageType.Necro;
         }
 
         public override void OnCast()

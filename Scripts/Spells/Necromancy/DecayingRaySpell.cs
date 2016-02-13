@@ -9,6 +9,7 @@ namespace Server.Spells.Necromancy
     public class DecayingRaySpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo("Decaying Ray", "Umbra Aufero Vita",
+							227, 9031,
 							Reagent.VialOfBlood, Reagent.VialOfBlood,
 							Reagent.VolcanicAsh, Reagent.DaemonBone);
 

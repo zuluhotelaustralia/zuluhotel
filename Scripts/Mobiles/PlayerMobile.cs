@@ -3085,6 +3085,8 @@ namespace Server.Mobiles
 
 	public PlayerMobile()
 	{
+	    m_Spec = new Spec(this);
+	    
 	    m_AutoStabled = new List<Mobile>();
 
 	    m_VisList = new List<Mobile>();

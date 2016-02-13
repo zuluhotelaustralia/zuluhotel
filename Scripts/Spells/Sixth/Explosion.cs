@@ -1,4 +1,5 @@
 using System;
+using Server;
 using Server.Targeting;
 using Server.Network;
 
@@ -19,6 +20,7 @@ namespace Server.Spells.Sixth
 		public ExplosionSpell( Mobile caster, Item scroll )
 			: base( caster, scroll, m_Info )
 		{
+		    m_DamageType = DamageType.Fire;
 		}
 
 		public override bool DelayedDamageStacking { get { return !Core.AOS; } }

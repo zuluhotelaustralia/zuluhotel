@@ -1,4 +1,5 @@
 using System;
+using Server;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
@@ -20,6 +21,9 @@ namespace Server.Spells
 	private SpellState m_State;
 	private long m_StartCastTime;
 
+	protected DamageType m_DamageType;
+
+	public DamageType DamageType{ get{ return m_DamageType; } set{ m_DamageType = value; } }
 	public SpellState State{ get{ return m_State; } set{ m_State = value; } }
 	public Mobile Caster{ get{ return m_Caster; } }
 	public SpellInfo Info{ get{ return m_Info; } }

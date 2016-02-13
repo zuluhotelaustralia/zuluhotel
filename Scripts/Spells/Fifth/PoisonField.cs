@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server;
 using Server.Targeting;
 using Server.Network;
 using Server.Misc;
@@ -24,6 +25,7 @@ namespace Server.Spells.Fifth
 
 		public PoisonFieldSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
+		    m_DamageType = DamageType.Poison;
 		}
 
 		public override void OnCast()
