@@ -1,6 +1,6 @@
 namespace Server {
-    
     public enum DamageType {
+	Raw,
 	Physical,
 	Magical,
 	Air,

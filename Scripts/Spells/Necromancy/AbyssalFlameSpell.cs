@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
@@ -9,10 +10,11 @@ namespace Server.Spells.Necromancy
     public class AbyssalFlameSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Abyssal Flame", "Orinundus Barathrum Erado Hostes Hostium"
-		227, 9031,
-		Reagent.
-                );
+							"Abyssal Flame", "Orinundus Barathrum Erado Hostes Hostium",
+							227, 9031,
+							Reagent.Brimstone, Reagent.Obsidian, Reagent.VolcanicAsh,
+							Reagent.DaemonBone, Reagent.DragonsBlood
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -26,84 +28,52 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
-        {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( AbyssalFlameSpell ) ) ) {
-                goto Return;
-            }
+	    List<Mobile> targets = new List<Mobile>();
+	    Map map = Caster.Map;
+	    if( map != null ){
+		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[SkillName.Magery].Value / 15.0)) ) {
+		    if ( Caster != m && SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false) && Caster.InLOS(m)){
+			targets.Add(m);
+		    }
+		}
+	    }
 
-            SpellHelper.Turn( Caster, m );
+	    Caster.PlaySound( 0x208 );
 
-            // TODO: Spell graphical and sound effects.
+	    for( int i=0; i<targets.Count; ++i ) {
+		Mobile m = targets[i];
+		int dmg = Utility.Random(30, 30);
 
-            Caster.DoHarmful( m );
+		Caster.DoHarmful( m );
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+		m.Damage( dmg, Caster, m_DamageType );
+		m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
 
-            new InternalTimer( m, Caster ).Start();
-
+		new AbyssalFlameTimer(Caster, m).Start();
+	    }
+	    
         Return:
             FinishSequence();
         }
 
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
+	private class AbyssalFlameTimer : Timer {
+	    private Mobile m_Target;
+	    private Mobile m_Caster;
+	    public AbyssalFlameTimer(Mobile caster, Mobile target) : base(TimeSpan.Zero, TimeSpan.FromSeconds(1), 3){
+		m_Target = target;
+		m_Caster = caster;
+	    }
 
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( AbyssalFlameSpell ) );
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private AbyssalFlameSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( AbyssalFlameSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
+	    protected override void OnTick()
+	    {
+		m_Target.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
+		m_Target.PlaySound( 0x208 ); //foom
+	    }
+	}
     }
 }
