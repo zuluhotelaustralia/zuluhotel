@@ -2925,7 +2925,7 @@ namespace Server
 				m_CancelCallback = cancelCallback;
 				m_State = state;
 			}
-			public SimpleStatePrompt(PromptStateCallback<T> callback, bool callbackHandlesCancel, T state)
+			public SimpleStatePrompt(PromptStateCallback<T> callback, bool callbackHandlesCancel, T state)
 			{
 				m_Callback = callback;
 				m_State = state;
@@ -5120,26 +5120,41 @@ namespace Server
 		/// <seealso cref="Hits" />
 		/// <seealso cref="Kill" />
 		/// </summary>
-		public virtual void OnDamage( int amount, Mobile from, bool willKill )
+		public virtual void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 		}
 
 		public virtual void Damage( int amount )
 		{
-			Damage( amount, null );
+			Damage( amount, null, DamageType.Physical );
+		}
+		
+		public virtual void Damage( int amount, Mobile from )
+		{
+			Damage( amount, from, DamageType.Physical );
 		}
 
+		public virtual void Damage( int amount, DamageType type )
+		{
+			Damage( amount, null, type );
+		}
+
+		public virtual void Damage( int amount, Mobile from, DamageType type )
+		{
+			Damage( amount, from, true, type );
+		}
+
+		public virtual void Damage( int amount, Mobile from, bool informMount ) {
+		        Damage( amount, from, informMount, DamageType.Physical );
+		}
+		
 		public virtual bool CanBeDamaged()
 		{
 			return !m_Blessed;
 		}
 
-		public virtual void Damage( int amount, Mobile from )
-		{
-			Damage( amount, from, true );
-		}
 
-		public virtual void Damage( int amount, Mobile from, bool informMount )
+		public virtual void Damage( int amount, Mobile from, bool informMount, DamageType type )
 		{
 			if( !CanBeDamaged() || m_Deleted )
 				return;
@@ -5184,7 +5199,7 @@ namespace Server
 						}
 				}
 
-				OnDamage( amount, from, newHits < 0 );
+				OnDamage( amount, type, from, newHits < 0 );
 
 				IMount m = this.Mount;
 				if( m != null && informMount )

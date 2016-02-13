@@ -86,11 +86,11 @@ namespace Server.Mobiles
 				return base.IsEnemy( m );
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			SolenHelper.OnBlackDamage( from );
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public BlackSolenInfiltratorWarrior( Serial serial ) : base( serial )

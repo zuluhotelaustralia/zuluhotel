@@ -179,7 +179,7 @@ namespace Server.Mobiles
 			return newItem;
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			Delete();
 		}

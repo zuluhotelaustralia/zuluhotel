@@ -83,12 +83,12 @@ namespace Server.Mobiles
 			return 0x584;
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if( Utility.RandomDouble() < 0.1 )
 				DropOoze();
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		private int RandomPoint( int mid )

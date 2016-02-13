@@ -1423,7 +1423,7 @@ namespace Server.Mobiles
 	    }
 	}
 
-	public override void OnDamage( int amount, Mobile from, bool willKill )
+	public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 	{
 	    if ( BardPacified && (HitsMax - Hits) * 0.001 > Utility.RandomDouble() )
 		Unpacify();
@@ -1470,7 +1470,7 @@ namespace Server.Mobiles
 		Timer.DelayCall( TimeSpan.FromSeconds( 10 ), new TimerCallback( ( ( PlayerMobile )from ).RecoverAmmo ) );
 	    }
 
-	    base.OnDamage( amount, from, willKill );
+	    base.OnDamage( amount, type, from, willKill );
 	}
 
 	public virtual void OnDamagedBySpell( Mobile from )

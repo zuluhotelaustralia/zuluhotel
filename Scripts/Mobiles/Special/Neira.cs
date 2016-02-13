@@ -95,10 +95,10 @@ namespace Server.Mobiles
 		
 		private bool m_SpeedBoost;
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			CheckSpeedBoost();
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 		
 		private const double SpeedBoostScalar = 1.2;

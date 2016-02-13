@@ -98,7 +98,7 @@ namespace Server.Mobiles
 			return bad;
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if( Utility.RandomBool() )
 			{
@@ -108,7 +108,7 @@ namespace Server.Mobiles
 				}
 			}
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public PumpkinHead( Serial serial )

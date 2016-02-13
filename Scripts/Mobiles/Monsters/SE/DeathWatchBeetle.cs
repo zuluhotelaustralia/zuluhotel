@@ -105,7 +105,7 @@ namespace Server.Mobiles
 			}
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			Mobile combatant = Combatant;
 
@@ -115,7 +115,7 @@ namespace Server.Mobiles
 			if( Utility.Random( 10 ) == 0 )
 				PoisonAttack( combatant );
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public void PoisonAttack( Mobile m )

@@ -163,12 +163,12 @@ namespace Server.Mobiles
 				CacophonicAttack( defender );
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if( Utility.RandomDouble() < 0.1 )
 				DropOoze();
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public override int GetAngerSound()

@@ -66,7 +66,7 @@ namespace Server.Mobiles
 			AddLoot( LootPack.Average );
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if ( from != null && !willKill && amount > 5 && from.Player && 5 > Utility.Random( 100 ) )
 			{
@@ -81,7 +81,7 @@ namespace Server.Mobiles
 				this.Say( true, String.Format( toSay[Utility.Random( toSay.Length )], from.Name ) );
 			}
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public override int GetIdleSound()

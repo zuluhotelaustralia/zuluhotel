@@ -2593,7 +2593,7 @@ namespace Server.Mobiles
 	    base.OnBeneficialAction( target, isCriminal );
 	}
 
-	public override void OnDamage( int amount, Mobile from, bool willKill )
+	public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 	{
 	    int disruptThreshold;
 
@@ -2625,7 +2625,7 @@ namespace Server.Mobiles
 	    if ( willKill && from is PlayerMobile )
 		Timer.DelayCall( TimeSpan.FromSeconds( 10 ), new TimerCallback( ((PlayerMobile) from).RecoverAmmo ) );
 
-	    base.OnDamage( amount, from, willKill );
+	    base.OnDamage( amount, type, from, willKill );
 	}
 
 	public override void Resurrect()

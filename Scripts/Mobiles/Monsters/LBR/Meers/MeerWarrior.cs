@@ -52,7 +52,7 @@ namespace Server.Mobiles
 
 		public override bool InitialInnocent{ get{ return true; } }
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if ( from != null && !willKill && amount > 3 && from != null && !InRange( from, 7 ) )
 			{
@@ -60,7 +60,7 @@ namespace Server.Mobiles
 				SpellHelper.Damage( TimeSpan.FromSeconds( 1.0 ), from, this, Utility.RandomMinMax( 30, 40 ) - (Core.AOS ? 0 : 10), 100, 0, 0, 0, 0 );
 			}
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public override int GetHurtSound()

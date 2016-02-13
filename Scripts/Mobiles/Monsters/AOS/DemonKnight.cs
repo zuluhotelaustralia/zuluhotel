@@ -223,7 +223,7 @@ namespace Server.Mobiles
 
 		private static bool m_InHere;
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if ( from != null && from != this && !m_InHere )
 			{

@@ -183,7 +183,7 @@ namespace Server.Mobiles
 			m_Stunning = false;
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if ( Controlled || Summoned )
 			{
@@ -207,7 +207,7 @@ namespace Server.Mobiles
 				}
 			}
 
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public override bool BardImmune{ get{ return !Core.AOS || Controlled; } }

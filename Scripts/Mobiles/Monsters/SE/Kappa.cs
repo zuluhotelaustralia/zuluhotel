@@ -146,7 +146,7 @@ namespace Server.Mobiles
 			m.SendLocalizedMessage( 1070849 ); // The drain on your life force is gone.
 		}
 
-		public override void OnDamage( int amount, Mobile from, bool willKill )
+		public override void OnDamage( int amount, DamageType type, Mobile from, bool willKill )
 		{
 			if ( from != null && from.Map != null )
 			{
@@ -171,7 +171,7 @@ namespace Server.Mobiles
 					amt ^= amt;
 				}
 			}
-			base.OnDamage( amount, from, willKill );
+			base.OnDamage( amount, type, from, willKill );
 		}
 
 		public override Item NewHarmfulItem()
