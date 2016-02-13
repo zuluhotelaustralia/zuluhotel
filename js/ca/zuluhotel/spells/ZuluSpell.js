@@ -1,5 +1,5 @@
 CLASS({
-  package: 'Scripts.Spells',
+  package: 'ca.zuluhotel.spells',
   name: 'ZuluSpell',
   ids: ['name'],
   properties: [

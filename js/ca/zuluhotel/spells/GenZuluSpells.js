@@ -1,8 +1,8 @@
 CLASS({
-  package: 'Scripts.Spells',
+  package: 'ca.zuluhotel.spells',
   name: 'GenZuluSpells',
   requires: [
-    'Scripts.Spells.ZuluSpell',
+    'ca.zuluhotel.spells.ZuluSpell',
     'foam.dao.EasyDAO',
     'foam.node.dao.JSONFileDAO'
   ],
