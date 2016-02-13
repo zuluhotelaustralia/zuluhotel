@@ -5153,6 +5153,10 @@ namespace Server
 			return !m_Blessed;
 		}
 
+		public virtual int ScaleDamage( int amount, DamageType type, Mobile from )
+		{
+		  return amount;
+		}
 
 		public virtual void Damage( int amount, Mobile from, bool informMount, DamageType type )
 		{
@@ -5162,6 +5166,8 @@ namespace Server
 			if( !this.Region.OnDamage( this, ref amount ) )
 				return;
 
+			amount = ScaleDamage(amount, from, type);
+			
 			if( amount > 0 )
 			{
 				int oldHits = Hits;
