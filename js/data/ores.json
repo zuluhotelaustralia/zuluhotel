@@ -1,0 +1,23 @@
+[
+   {
+      "model_": "ca.zuluhotel.Ore",
+      "name": "DullCopper",
+      "className": "ZuluDullCopper",
+      "minSkill": 10,
+      "maxSkill": 100,
+      "reqSkill": 10,
+      "veinChance": 30.069930069930066,
+      "abundance": 43,
+      "fallbackChance": 0
+   },
+   {
+      "model_": "ca.zuluhotel.Ore",
+      "name": "Iron",
+      "className": "ZuluIron",
+      "maxSkill": 100,
+      "reqSkill": 0,
+      "veinChance": 69.93006993006993,
+      "abundance": 100,
+      "fallbackChance": 0
+   }
+]

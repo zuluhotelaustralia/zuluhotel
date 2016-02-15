@@ -1,0 +1,28 @@
+<%
+  var ores = arguments[1];
+
+%>using Server.Items;
+using Server.Mobiles;
+
+namespace Server.Engines.Harvest
+{
+        public class MiningResources
+        {
+                public static HarvestResource[] OreResources = new HarvestResource[]
+                {<%
+for ( var i = 0 ; i < ores.length ; i++ ) {
+  var ore = ores[i]; %>
+                        new HarvestResource( <%= ore.reqSkill.toFixed(2) %>, <%= ore.minSkill.toFixed(2) %>, <%= ore.maxSkill.toFixed(2) %>, 1007072, typeof( <%= ore.className %>Ore ), typeof( Granite ) ),<%
+  } %>
+                };
+
+                public static HarvestVein[] OreVeins = new HarvestVein[]
+                {<%
+for ( var i = 0 ; i < ores.length ; i++ ) {
+  var ore = ores[i]; %>                
+                        new HarvestVein( <%= ore.veinChance.toFixed(2) %>, <%= ore.fallbackChance.toFixed(2) %>, OreResources[<%= i %>], OreResources[0] ),<%
+  }
+%>
+                };
+        }
+};
