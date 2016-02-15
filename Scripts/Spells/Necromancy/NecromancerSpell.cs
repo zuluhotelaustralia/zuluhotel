@@ -20,6 +20,7 @@ namespace Server.Spells.Necromancy
 
 		public NecromancerSpell( Mobile caster, Item scroll, SpellInfo info ) : base( caster, scroll, info )
 		{
+		    m_DamageType = DamageType.Necro;
 		}
 
 		public override int ComputeKarmaAward()

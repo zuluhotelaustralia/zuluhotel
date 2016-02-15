@@ -31,12 +31,13 @@ namespace Server.Spells.Necromancy
             if ( ! CheckSequence() )
             {
                 goto Return;
+
             }
 
 	    List<Mobile> targets = new List<Mobile>();
 	    Map map = Caster.Map;
 	    if( map != null ){
-		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[SkillName.Magery].Value / 15.0)) ) {
+		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ) {
 		    if ( Caster != m && SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false) && Caster.InLOS(m)){
 			targets.Add(m);
 		    }
@@ -48,10 +49,11 @@ namespace Server.Spells.Necromancy
 	    for( int i=0; i<targets.Count; ++i ) {
 		Mobile m = targets[i];
 		int dmg = Utility.Random(30, 30);
+		
 
 		Caster.DoHarmful( m );
 
-		m.Damage( dmg, Caster, m_DamageType );
+		m.Damage( dmg, Caster, m_DamageType ); //resist?  reflect?
 		m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
 
 		new AbyssalFlameTimer(Caster, m).Start();

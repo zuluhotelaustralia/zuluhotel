@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections;
 using Server.Network;
 using Server.Items;
@@ -10,6 +11,8 @@ namespace Server.Spells.Necromancy
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Spectres Touch", "Enevare"
+		227, 9031,
+		Reagent.ExecutionersCap, Reagent.Brimstone, Reagent.DaemonBone
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
@@ -23,37 +26,32 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
-        {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
-            }
-
-            if ( ! m.BeginAction( typeof( SpectresTouchSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
-
+            }   
+            List<Mobile> targets = new List<Mobile>();
+	    Map map = Caster.Map;
+	    if( map != null ){
+		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ) {
+		    if( Caster != m &&
+			SpellHelper.ValidIndirectTarget(Caster, m) &&
+			Caster.CanBeHarmful(m, false) &&
+			Caster.InLOS(m)
+			) {
+			targets.Add(m);
+		    }
+		}
+	    }
+	    
+	    Caster.PlaySound( 0x1F1 );
+	    for(int i=0; i<targets.Count; i++) {
+		Mobile m = targets[i];
+		int dmg = 
             Caster.DoHarmful( m );
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
-
+	    m.FixedParticles( 0x374A, 10, 15, 5013, EffectLayer.Waist );
+	    
         Return:
             FinishSequence();
         }
