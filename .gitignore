@@ -12,3 +12,5 @@
 *.suo
 /Backups
 /Saves
+
+*~
