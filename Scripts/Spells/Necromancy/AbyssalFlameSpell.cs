@@ -34,30 +34,23 @@ namespace Server.Spells.Necromancy
 
             }
 
-	    List<Mobile> targets = new List<Mobile>();
 	    Map map = Caster.Map;
 	    if( map != null ){
 		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ) {
 		    if ( Caster != m && SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false) && Caster.InLOS(m)){
-			targets.Add(m);
+			int dmg = Utility.Random(30, 30);		
+			
+			Caster.DoHarmful( m );
+			
+			m.Damage( dmg, Caster, m_DamageType ); //resist?  reflect?
+			m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
+			
+			new AbyssalFlameTimer(Caster, m).Start();
 		    }
 		}
 	    }
-
+	    
 	    Caster.PlaySound( 0x208 );
-
-	    for( int i=0; i<targets.Count; ++i ) {
-		Mobile m = targets[i];
-		int dmg = Utility.Random(30, 30);
-		
-
-		Caster.DoHarmful( m );
-
-		m.Damage( dmg, Caster, m_DamageType ); //resist?  reflect?
-		m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
-
-		new AbyssalFlameTimer(Caster, m).Start();
-	    }
 	    
         Return:
             FinishSequence();
