@@ -26,12 +26,11 @@ CLASS({
       name: 'dao',
       hidden: true,
       factory: function() {
-        console.log("cwd", process.cwd());
         return this.EasyDAO.create({
           model: this.ZuluSpell,
           daoType: this.JSONFileDAO.xbind({
             model: this.ZuluSpell,
-            filename: 'Scripts/Spells/Spells.json'
+            filename: 'js/ca/zuluhotel/spells/Spells.json'
           })
         });
       }
@@ -39,8 +38,11 @@ CLASS({
   ],
   methods: [
     function execute() {
+      console.log("Generation currently disabled.");
       this.dao.select({
         put: function(spell) {
+	  console.log("Found spell", spell.name, spell.wordsOfPower);
+	  return;
 
           var dest = this.outpath + this.path.sep + spell.type + this.path.sep + spell.className + '.cs';
 
