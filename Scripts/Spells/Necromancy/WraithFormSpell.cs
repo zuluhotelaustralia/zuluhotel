@@ -12,7 +12,7 @@ namespace Server.Spells.Necromancy
         private static SpellInfo m_Info = new SpellInfo(
 							"Wraith Form", "Manes Sollicti Mihi Infundite",
 							227, 9031,
-							Reagent.DaemonBone, Reagent.Brimstone, Reagent.Bloodspawn,
+							Reagent.DaemonBone, Reagent.Brimstone, Reagent.Bloodspawn
 							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
@@ -102,8 +102,8 @@ namespace Server.Spells.Necromancy
 	{
 	    private Mobile m_Owner;
 
-	    public WraithFormTimer( Mobile owner, List<Mobile> targets, TimeSpan interval, TimeSpawn duration ) :
-		base( TimeSpan.FromSeconds( 1 ), TimeSpan.FromSeconds( interval ), TimeSpawn.FromSeconds( duration ) )
+	    public WraithFormTimer( Mobile owner, List<Mobile> targets, TimeSpan interval, TimeSpan duration ) :
+		base( TimeSpan.FromSeconds( 1 ), TimeSpan.FromSeconds( interval ), TimeSpan.FromSeconds( duration ) )
 	    {
 		m_Owner = owner;
 		Priority = TimerPriority.OneSecond;

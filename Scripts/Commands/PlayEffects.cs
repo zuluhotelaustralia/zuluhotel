@@ -4,14 +4,14 @@ using Server;
 using Server.Accounting;
 
 namespace Server.Commands {
-    public class PlaySound{
+    public class PlaySFX{
 	public static void Initialize(){
-	    CommandSystem.Register( "PlaySound", AccessLevel.Developer, new CommandEventHandler( EventSink_Command ) );
+	    CommandSystem.Register( "PlaySFX", AccessLevel.Developer, new CommandEventHandler( PlaySFX_OnCommand ) );
 	}
 
-	[Usage( "PlaySound <sfx number>")]
+	[Usage( "PlaySFX <sfx number>")]
 	[Description("Plays a sound effect.")]
-	private static void PlaySound_OnCommand(CommandEventArgs e){
+	private static void PlaySFX_OnCommand(CommandEventArgs e){
 	    if( e.Length >=1 ){
 		e.Mobile.PlaySound( e.GetInt32(0) );
 	    }
@@ -20,12 +20,12 @@ namespace Server.Commands {
 
     public class PlayParticles{
 	public static void Initialize(){
-	    CommandSystem.Register( "PlayParticles", AccessLevel.Developer, new CommandEventHandler( EventSink_Command ) );
+	    CommandSystem.Register( "PlayParticles", AccessLevel.Developer, new CommandEventHandler( PlayParticles_OnCommand ) );
 	}
 	
 	[Usage( "PlayParticles <id>")]
 	[Description("Plays a sound effect.")]
-	private static void PlaySound_OnCommand(CommandEventArgs e){
+	private static void PlayParticles_OnCommand(CommandEventArgs e){
 	    
 	    // 	public void FixedParticles( int itemID, int speed, int duration, int effect, EffectLayer layer )
 	    //  e.g.  m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
@@ -37,7 +37,7 @@ namespace Server.Commands {
     
     public class PlayEffect{
 	public static void Initialize(){
-	    CommandSystem.Register( "PlayEffect", AccessLevel.Developer, new CommandEventHandler( EventSink_Command ) );
+	    CommandSystem.Register( "PlayEffect", AccessLevel.Developer, new CommandEventHandler( PlayEffect_OnCommand ) );
 	}
 
 	[Usage( "PlayEffect <sfx number>")]

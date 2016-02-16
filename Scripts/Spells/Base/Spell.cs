@@ -23,6 +23,8 @@ namespace Server.Spells
 
 	protected DamageType m_DamageType;
 
+	public abstract SpellCircle Circle { get; }
+	
 	public DamageType DamageType{ get{ return m_DamageType; } set{ m_DamageType = value; } }
 	public SpellState State{ get{ return m_State; } set{ m_State = value; } }
 	public Mobile Caster{ get{ return m_Caster; } }
@@ -596,6 +598,40 @@ namespace Server.Spells
 	public virtual void GetCastSkills( out double min, out double max )
 	{
 	    min = max = 0;	//Intended but not required for overriding.
+	}
+
+	public virtual bool CheckResisted( Mobile target )
+	{
+	    double n = GetResistPercent( target );
+
+	    n /= 100.0; //TODO:  change this --sith
+
+	    if( n <= 0.0 )
+		return false;
+
+	    if( n >= 1.0 )
+		return true;
+
+	    int maxSkill = (1 + (int)Circle) * 10;
+	    maxSkill += (1 + ((int)Circle / 6)) * 25;
+
+	    if( target.Skills[SkillName.MagicResist].Value < maxSkill )
+		target.CheckSkill( SkillName.MagicResist, 0.0, target.Skills[SkillName.MagicResist].Cap );
+
+	    return (n >= Utility.RandomDouble());
+	}
+
+	public virtual double GetResistPercentForCircle( Mobile target, SpellCircle circle )
+	{
+	    double firstPercent = target.Skills[SkillName.MagicResist].Value / 5.0;
+	    double secondPercent = target.Skills[SkillName.MagicResist].Value - (((Caster.Skills[CastSkill].Value - 20.0) / 5.0) + (1 + (int)circle) * 5.0);
+
+	    return (firstPercent > secondPercent ? firstPercent : secondPercent) / 2.0; // Seems should be about half of what stratics says.
+	}
+
+	public virtual double GetResistPercent( Mobile target )
+	{
+	    return GetResistPercentForCircle( target, Circle );
 	}
 
 	public virtual bool CheckFizzle()

@@ -9,11 +9,11 @@ namespace Server.Spells.Necromancy
     public class PlagueSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Plague", "Fluctus Puter Se Aresceret"
-		227, 9031,
-		Reagent.VolcanicAsh, Reagent.BatWing, Reagent.DaemonBone, Reagent.DragonsBlood,
-		Reagent.Bloodspawn, Reagent.Pumice, Reagent.SerpentsScales
-                );
+							"Plague", "Fluctus Puter Se Aresceret",
+							227, 9031,
+							Reagent.VolcanicAsh, Reagent.BatWing, Reagent.DaemonBone, Reagent.DragonsBlood,
+							Reagent.Bloodspawn, Reagent.Pumice, Reagent.SerpentsScales
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 

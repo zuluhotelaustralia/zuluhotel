@@ -3,18 +3,19 @@ using System.Collections;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
+using Server.Mobiles;
 
 namespace Server.Spells.Necromancy
 {
     public class KillSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Kill", "Ulties Manum Necarent"
-		227, 9031,
-		Reagent.DaemonBone, Reagent.ExecutionersCap, Reagent.VialOfBlood,
-		Reagent.DragonsBlood, Reagent.WyrmsHeart, Reagent.VolcanicAsh,
-		Reagent.EyeOfNewt
-                );
+							"Kill", "Ulties Manum Necarent",
+							227, 9031,
+							Reagent.DaemonBone, Reagent.ExecutionersCap, Reagent.VialOfBlood,
+							Reagent.DragonsBlood, Reagent.WyrmsHeart, Reagent.VolcanicAsh,
+							Reagent.EyeOfNewt
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -53,8 +54,8 @@ namespace Server.Spells.Necromancy
 	    // if they have more than that they get a chance to resist and take half damage, otherwise
 	    // they take 90% of the instakill threshhold as damage
 	    double power = Caster.Skills[DamageSkill].Value / 3;
-	    if(Caster.Spec.SpecName == SpecName.Mage && Caster.Spec.SpecLevel != 0){
-		power *= 2.0 * Caster.Spec.Bonus;
+	    if(Caster is PlayerMobile && (PlayerMobile)(Caster).Spec.SpecName == SpecName.Mage && (PlayerMobile)(Caster).Spec.SpecLevel != 0){
+		power *= 2.0 * (PlayerMobile)(Caster).Spec.Bonus;
 	    }
 	    
 	    double safetymargin = power * 0.25;
@@ -65,12 +66,14 @@ namespace Server.Spells.Necromancy
 	    }
 	    else {
 		double damage = 0.9 * m.Hits;
-
+		
 		if( CheckResisted(m) ){
 		    damage *= 0.5;
-
+		    
 		    m.SendLocalizedMessage( 501783 ); //you resist the blah blah blah
 		}
+
+		m.Damage((int)damage, Caster, DamageType.Necro);
 	    }	
 	    
         Return:

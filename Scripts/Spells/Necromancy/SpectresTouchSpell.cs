@@ -10,10 +10,10 @@ namespace Server.Spells.Necromancy
     public class SpectresTouchSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Spectres Touch", "Enevare"
-		227, 9031,
-		Reagent.ExecutionersCap, Reagent.Brimstone, Reagent.DaemonBone
-                );
+							"Spectres Touch", "Enevare",
+							227, 9031,
+							Reagent.ExecutionersCap, Reagent.Brimstone, Reagent.DaemonBone
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -43,21 +43,23 @@ namespace Server.Spells.Necromancy
 		    }
 		}
 	    }
+
+	    double dmg = Utility.Dice(3,5) + (Caster.Skills[DamageSkill].Value / 4.0); //avg 41 or so
 	    
 	    Caster.PlaySound( 0x1F1 );
 	    for(int i=0; i<targets.Count; i++) {
 		Mobile m = targets[i];
-		int dmg = 
-            Caster.DoHarmful( m );
-
+		Caster.DoHarmful( m );
+		m.Damage( (int)dmg, Caster, DamageType.Necro );
+	    }	
 	    m.FixedParticles( 0x374A, 10, 15, 5013, EffectLayer.Waist );
 	    
-        Return:
+	Return:
             FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
+	}
+	    
+	private class InternalTimer : Timer
+	{
             private Mobile m_Target;
 
             public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
