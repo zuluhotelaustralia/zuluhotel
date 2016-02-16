@@ -10,7 +10,7 @@ namespace Server.Spells.Necromancy
 	public abstract int RequiredMana{ get; }
 	    
 	public override SpellCircle Circle { get { return SpellCircle.Necro; } }
-	    
+	
 
 	public override SkillName CastSkill{ get{ return SkillName.Magery; } }
 	public override SkillName DamageSkill{ get{ return SkillName.SpiritSpeak; } }

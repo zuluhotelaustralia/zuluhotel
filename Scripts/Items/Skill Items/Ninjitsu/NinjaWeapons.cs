@@ -2,7 +2,6 @@ using System;
 using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 using Server.Targeting;
 
 /*
@@ -214,17 +213,7 @@ namespace Server.Items
 		defSkillValue = -19.9;
 	    }
 
-	    if (Spells.Chivalry.DivineFurySpell.UnderEffect(attacker))
-	    {
-		attackValue += 10;
-	    }
-
-	    if (AnimalForm.UnderTransformation(attacker, typeof(GreyWolf)) || AnimalForm.UnderTransformation(attacker, typeof(BakeKitsune)))
-	    {
-		attackValue += 20;
-	    }
-
-	    if (HitLower.IsUnderAttackEffect(attacker))
+       	    if (HitLower.IsUnderAttackEffect(attacker))
 	    {
 		attackValue -= 25;
 	    }
@@ -237,11 +226,6 @@ namespace Server.Items
 	    attackValue = (atSkillValue + 20.0) * (100 + attackValue);
 
 	    double defenseValue = AosAttributes.GetValue(defender, AosAttribute.DefendChance);
-
-	    if (Spells.Chivalry.DivineFurySpell.UnderEffect(defender))
-	    {
-		defenseValue -= 20;
-	    }
 
 	    if (HitLower.IsUnderDefenseEffect(defender))
 	    {

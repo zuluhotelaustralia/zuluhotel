@@ -123,42 +123,6 @@ namespace Server.Spells
 	    Register( 616, typeof( Earth.StormSpiritSpell ) );
 	    Register( 617, typeof( Earth.WaterSpiritSpell ) );
 
-	    if ( Core.AOS ) //this can probably just be deleted dbh, but I'll keep it for reference --sith
-	    {
-
-		// Paladin abilities
-		Register( 200, typeof( Chivalry.CleanseByFireSpell ) );
-		Register( 201, typeof( Chivalry.CloseWoundsSpell ) );
-		Register( 202, typeof( Chivalry.ConsecrateWeaponSpell ) );
-		Register( 203, typeof( Chivalry.DispelEvilSpell ) );
-		Register( 204, typeof( Chivalry.DivineFurySpell ) );
-		Register( 205, typeof( Chivalry.EnemyOfOneSpell ) );
-		Register( 206, typeof( Chivalry.HolyLightSpell ) );
-		Register( 207, typeof( Chivalry.NobleSacrificeSpell ) );
-		Register( 208, typeof( Chivalry.RemoveCurseSpell ) );
-		Register( 209, typeof( Chivalry.SacredJourneySpell ) );
-
-		if ( Core.SE )
-		{
-		    // Samurai abilities
-		    Register( 400, typeof( Bushido.HonorableExecution ) );
-		    Register( 401, typeof( Bushido.Confidence ) );
-		    Register( 402, typeof( Bushido.Evasion ) );
-		    Register( 403, typeof( Bushido.CounterAttack ) );
-		    Register( 404, typeof( Bushido.LightningStrike ) );
-		    Register( 405, typeof( Bushido.MomentumStrike ) );
-
-		    // Ninja abilities
-		    Register( 500, typeof( Ninjitsu.FocusAttack ) );
-		    Register( 501, typeof( Ninjitsu.DeathStrike ) );
-		    Register( 502, typeof( Ninjitsu.AnimalForm ) );
-		    Register( 503, typeof( Ninjitsu.KiAttack ) );
-		    Register( 504, typeof( Ninjitsu.SurpriseAttack ) );
-		    Register( 505, typeof( Ninjitsu.Backstab ) );
-		    Register( 506, typeof( Ninjitsu.Shadowjump ) );
-		    Register( 507, typeof( Ninjitsu.MirrorImage ) );
-		}
-	    }
 	}
 
 	public static void Register( int spellID, Type type )

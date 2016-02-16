@@ -1,6 +1,5 @@
 using System;
 using Server;
-using Server.Spells.Spellweaving;
 
 namespace Server.Items
 {
@@ -17,8 +16,6 @@ namespace Server.Items
 		public override int AbsorbDamage( Mobile attacker, Mobile defender, int damage )
 		{
 			damage = base.AbsorbDamage( attacker, defender, damage );
-
-			AttuneWeaponSpell.TryAbsorb( defender, ref damage );
 
 			if ( Core.AOS )
 				return damage;

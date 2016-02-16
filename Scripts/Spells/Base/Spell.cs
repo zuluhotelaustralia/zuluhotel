@@ -6,10 +6,7 @@ using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells.Second;
 using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 using System.Collections.Generic;
-using Server.Spells.Spellweaving;
-using Server.Spells.Bushido;
 
 namespace Server.Spells
 {
@@ -151,11 +148,6 @@ namespace Server.Spells
 		sdiBonus = 15;
 
 	    damageBonus += sdiBonus;
-
-	    TransformContext context = TransformationSpellHelper.GetContext( Caster );
-
-	    if( context != null && context.Spell is ReaperFormSpell )
-		damageBonus += ((ReaperFormSpell)context.Spell).SpellDamageBonus;
 
 	    damage = AOS.Scale( damage, 100 + damageBonus );
 
@@ -331,9 +323,6 @@ namespace Server.Spells
 
 	    target.Region.SpellDamageScalar( m_Caster, target, ref scalar );
 
-	    if( Evasion.CheckSpellEvasion( target ) )	//Only single target spells an be evaded
-		scalar = 0;
-
 	    return scalar;
 	}
 
@@ -504,10 +493,6 @@ namespace Server.Spells
 	    else if ( m_Caster.Spell != null && m_Caster.Spell.IsCasting )
 	    {
 		m_Caster.SendLocalizedMessage( 502642 ); // You are already casting a spell.
-	    }
-	    else if ( BlockedByAnimalForm && AnimalForm.UnderTransformation( m_Caster ) )
-	    {
-		m_Caster.SendLocalizedMessage( 1061091 ); // You cannot cast that spell in this form.
 	    }
 	    else if ( !(m_Scroll is BaseWand) && (m_Caster.Paralyzed || m_Caster.Frozen) )
 	    {
@@ -690,8 +675,6 @@ namespace Server.Spells
 
 	    int fcr = AosAttributes.GetValue( m_Caster, AosAttribute.CastRecovery );
 
-	    fcr -= ThunderstormSpell.GetCastRecoveryMalus( m_Caster );
-
 	    int fcrDelay = -(CastRecoveryFastScalar * fcr);
 
 	    int delay = CastRecoveryBase + fcrDelay;
@@ -734,9 +717,6 @@ namespace Server.Spells
 
 	    if ( ProtectionSpell.Registry.Contains( m_Caster ) )
 		fc -= 2;
-
-	    if( EssenceOfWindSpell.IsDebuffed( m_Caster ) )
-		fc -= EssenceOfWindSpell.GetFCMalus( m_Caster );
 
 	    TimeSpan baseDelay = CastDelayBase;
 

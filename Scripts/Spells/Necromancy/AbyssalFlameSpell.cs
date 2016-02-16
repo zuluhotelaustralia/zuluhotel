@@ -23,9 +23,8 @@ namespace Server.Spells.Necromancy
 
         public AbyssalFlameSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
-	    m_DamageType = DamageType.Necro;
-        }
-
+	}
+	
         public override void OnCast()
         {
             if ( ! CheckSequence() )

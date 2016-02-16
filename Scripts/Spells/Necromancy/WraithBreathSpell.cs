@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
@@ -26,13 +27,6 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
@@ -40,6 +34,8 @@ namespace Server.Spells.Necromancy
 
 	    List<Mobile> targets = new List<Mobile>();
 	    Map map = Caster.Map;
+	    double duration = 10.0 + (Caster.Skills[DamageSkill].Value * 0.2);
+	
 	    if( map != null ){
 		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ){
 		    if( Caster != m &&
@@ -48,30 +44,25 @@ namespace Server.Spells.Necromancy
 			&& Caster.InLOS(m) &&
 			!m.Paralyzed &&
 			!m.Frozen){
-			targets.Add(m);
+				    
+			if ( ! m.BeginAction( typeof( WraithBreathSpell ) ) ) {
+			    break;
+			}
+			
+			Caster.DoHarmful(m);
+			
+			if ( CheckResisted(m) ){
+			    duration *= 0.5;
+			}
+			
+			m.FixedEffect( 0x376A, 6, 1 );
+			m.PlaySound(0x204);
+			m.Paralyze( TimeSpan.FromSeconds( duration ) );	
 		    }
 		}
 	    }
 
 	    Caster.PlaySound( 0x204 );
-
-	    for ( int i=0; i<targets.Count; i++ ) {
-		Mobile m = targets[i];
-		Caster.DoHarmful(m);
-
-		double duration = 10.0 + (Caster.Skills[DamageSkill].Value * 0.2);
-		if ( CheckResisted(m) ){
-		    duration *= 0.5;
-		}
-		
-		m.FixedEffect( 0x376A, 6, 1 );
-		m.PlaySound(0x204);
-		m.Paralyze( TimeSpan.FromSeconds( duration ) );
-	    }
-	    
-            if ( ! m.BeginAction( typeof( WraithBreathSpell ) ) ) {
-                goto Return;
-            }
 	    
         Return:
             FinishSequence();

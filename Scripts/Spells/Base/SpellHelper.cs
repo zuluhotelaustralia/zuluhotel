@@ -8,9 +8,7 @@ using Server.Mobiles;
 using Server.Targeting;
 using Server.Engines.PartySystem;
 using Server.Misc;
-using Server.Spells.Bushido;
 using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 using System.Collections.Generic;
 using Server.Spells.Seventh;
 using Server.Spells.Fifth;
@@ -1273,12 +1271,7 @@ namespace Server.Spells
 		caster.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
 		return false;
 	    }
-	    else if( AnimalForm.UnderTransformation( caster ) )
-	    {
-		caster.SendLocalizedMessage( 1061091 ); // You cannot cast that spell in this form.
-		return false;
-	    }
-
+	    
 	    return true;
 	}
 
@@ -1301,10 +1294,6 @@ namespace Server.Spells
 	    {
 		caster.SendLocalizedMessage( 1061631 ); // You can't do that while disguised.
 		return false;
-	    }
-	    else if( AnimalForm.UnderTransformation( caster ) )
-	    {
-		caster.SendLocalizedMessage( 1061091 ); // You cannot cast that spell in this form.
 	    }
 	    else if( !caster.CanBeginAction( typeof( IncognitoSpell ) ) || (caster.IsBodyMod && GetContext( caster ) == null) )
 	    {

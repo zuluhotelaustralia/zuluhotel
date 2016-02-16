@@ -44,16 +44,17 @@ namespace Server.Spells.Necromancy
 		}
 	    }
 
-	    double dmg = Utility.Dice(3,5) + (Caster.Skills[DamageSkill].Value / 4.0); //avg 41 or so
+	    double dmg = Utility.Dice( 3,5, (int)(Caster.Skills[DamageSkill].Value / 4.0) ); //avg 41 or so
 	    
 	    Caster.PlaySound( 0x1F1 );
 	    for(int i=0; i<targets.Count; i++) {
 		Mobile m = targets[i];
 		Caster.DoHarmful( m );
-		m.Damage( (int)dmg, Caster, DamageType.Necro );
+		m.Damage( (int)dmg, Caster, m_DamageType );
+		m.FixedParticles( 0x374A, 10, 15, 5013, EffectLayer.Waist );
+		m.PlaySound( 0x1f2 );
 	    }	
-	    m.FixedParticles( 0x374A, 10, 15, 5013, EffectLayer.Waist );
-	    
+          
 	Return:
             FinishSequence();
 	}
@@ -79,28 +80,5 @@ namespace Server.Spells.Necromancy
                 m_Target.EndAction( typeof( SpectresTouchSpell ) );
             }
         }
-
-        private class InternalTarget : Target
-        {
-            private SpectresTouchSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( SpectresTouchSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }

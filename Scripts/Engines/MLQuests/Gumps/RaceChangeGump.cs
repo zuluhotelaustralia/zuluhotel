@@ -7,7 +7,6 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells.Fifth;
-using Server.Spells.Ninjitsu;
 using Server.Spells.Seventh;
 
 namespace Server.Engines.MLQuests.Gumps
@@ -174,7 +173,7 @@ namespace Server.Engines.MLQuests.Gumps
 				from.SendLocalizedMessage( 1073646 ); // Only the living may proceed...
 			else if ( from.Mounted )
 				from.SendLocalizedMessage( 1073647 ); // You may not continue while mounted...
-			else if ( !from.CanBeginAction( typeof( PolymorphSpell ) ) || DisguiseTimers.IsDisguised( from ) || AnimalForm.UnderTransformation( from ) || !from.CanBeginAction( typeof( IncognitoSpell ) ) || from.IsBodyMod ) // TODO: Does this cover everything?
+			else if ( !from.CanBeginAction( typeof( PolymorphSpell ) ) || DisguiseTimers.IsDisguised( from ) || !from.CanBeginAction( typeof( IncognitoSpell ) ) || from.IsBodyMod ) // TODO: Does this cover everything?
 				from.SendLocalizedMessage( 1073648 ); // You may only proceed while in your original state...
 			else if ( from.Spell != null && from.Spell.IsCasting )
 				from.SendLocalizedMessage( 1073649 ); // One may not proceed while embracing magic...

@@ -13,8 +13,6 @@ using Server.Spells;
 using Server.Spells.Fifth;
 using Server.Spells.Seventh;
 using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
-using Server.Spells.Bushido;
 using Server.Targeting;
 using Server.Engines.Quests;
 using Server.Factions;
@@ -22,7 +20,6 @@ using Server.Regions;
 using Server.Accounting;
 using Server.Engines.CannedEvil;
 using Server.Engines.Craft;
-using Server.Spells.Spellweaving;
 using Server.Engines.PartySystem;
 using Server.Engines.MLQuests;
 
@@ -137,21 +134,8 @@ namespace Server.Mobiles
 	    }
 	    else
 	    {
-		if (!Flying)
-		{
-		    // No message?
-		    if (Spell is FlySpell)
-		    {
-			FlySpell spell = (FlySpell)Spell;
-			spell.Stop();
-		    }
-		    new FlySpell(this).Cast();
-		}
-		else
-		{
-		    Flying = false;
-		    BuffInfo.RemoveBuff(this, BuffIcon.Fly);
-		}
+		Flying = false;
+		BuffInfo.RemoveBuff(this, BuffIcon.Fly);
 	    }
 	}
 	#endregion
@@ -799,10 +783,6 @@ namespace Server.Mobiles
 		{
 		    this.Mount.Rider = null;
 		}
-		else if( AnimalForm.UnderTransformation( this ) )
-		{
-		    AnimalForm.RemoveContext(this, true);
-		}
 	    }
 
 	    if( ( m_MountBlock == null ) || !m_MountBlock.m_Timer.Running || ( m_MountBlock.m_Timer.Next < ( DateTime.UtcNow + duration ) ) )
@@ -909,13 +889,6 @@ namespace Server.Mobiles
 	public override void OnManaChange(int oldValue)
 	{
 	    base.OnManaChange(oldValue);
-	    if (m_ExecutesLightningStrike > 0)
-	    {
-		if (Mana < m_ExecutesLightningStrike)
-		{
-		    LightningStrike.ClearCurrentMove(this);
-		}
-	    }
 	}
 
 	private static void OnLogin( LoginEventArgs e )
@@ -1431,9 +1404,6 @@ namespace Server.Mobiles
 
 		    if ( Core.ML && strOffs > 25 && AccessLevel <= AccessLevel.Player )
 			strOffs = 25;
-
-		    if ( AnimalForm.UnderTransformation( this, typeof( BakeKitsune ) ) || AnimalForm.UnderTransformation( this, typeof( GreyWolf ) ) )
-			strOffs += 20;
 		}
 		else
 		{
@@ -1588,18 +1558,6 @@ namespace Server.Mobiles
 
 	public override bool AllowSkillUse( SkillName skill )
 	{
-	    if ( AnimalForm.UnderTransformation( this ) )
-	    {
-		for( int i = 0; i < m_AnimalFormRestrictedSkills.Length; i++ )
-		{
-		    if( m_AnimalFormRestrictedSkills[i] == skill )
-		    {
-			SendLocalizedMessage( 1070771 ); // You cannot use that skill in this form.
-			return false;
-		    }
-		}
-	    }
-
 	    #region Dueling
 	    if ( m_DuelContext != null && !m_DuelContext.AllowSkillUse( this, skill ) )
 		return false;
@@ -2611,9 +2569,6 @@ namespace Server.Mobiles
 		if ( c != null )
 		    c.Slip();
 	    }
-
-	    if( Confidence.IsRegenerating( this ) )
-		Confidence.StopRegenerating( this );
 
 	    WeightOverloading.FatigueOnDamage( this, amount );
 
@@ -4221,16 +4176,14 @@ namespace Server.Mobiles
 
 	    TransformContext context = TransformationSpellHelper.GetContext( this );
 
-	    if ( context != null && context.Type == typeof( ReaperFormSpell ) )
+	    if ( context != null )
 		return Mobile.WalkFoot;
 
 	    bool running = ( (dir & Direction.Running) != 0 );
 
 	    bool onHorse = ( this.Mount != null );
 
-	    AnimalFormContext animalContext = AnimalForm.GetContext( this );
-
-	    if( onHorse || (animalContext != null && animalContext.SpeedBoost) )
+	    if( onHorse )
 		return ( running ? Mobile.RunMount : Mobile.WalkMount );
 
 	    return ( running ? Mobile.RunFoot : Mobile.WalkFoot );

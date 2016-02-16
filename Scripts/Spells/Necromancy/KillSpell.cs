@@ -54,8 +54,8 @@ namespace Server.Spells.Necromancy
 	    // if they have more than that they get a chance to resist and take half damage, otherwise
 	    // they take 90% of the instakill threshhold as damage
 	    double power = Caster.Skills[DamageSkill].Value / 3;
-	    if(Caster is PlayerMobile && (PlayerMobile)(Caster).Spec.SpecName == SpecName.Mage && (PlayerMobile)(Caster).Spec.SpecLevel != 0){
-		power *= 2.0 * (PlayerMobile)(Caster).Spec.Bonus;
+	    if(Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage && ((PlayerMobile)Caster).Spec.SpecLevel != 0){
+		power *= 2.0 * ((PlayerMobile)Caster).Spec.Bonus;
 	    }
 	    
 	    double safetymargin = power * 0.25;
@@ -73,7 +73,7 @@ namespace Server.Spells.Necromancy
 		    m.SendLocalizedMessage( 501783 ); //you resist the blah blah blah
 		}
 
-		m.Damage((int)damage, Caster, DamageType.Necro);
+		m.Damage((int)damage, Caster, m_DamageType);
 	    }	
 	    
         Return:

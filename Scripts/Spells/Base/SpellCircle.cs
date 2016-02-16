@@ -13,6 +13,7 @@ namespace Server.Spells
 		Seventh,
 		Eighth,
 		Earth,
-		Necro
+		Necro,
+		System
 	}
 }
