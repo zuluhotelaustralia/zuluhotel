@@ -14,6 +14,10 @@ CLASS({
       preSet: function(_, s) { return this.path.normalize(s); }
     },
     {
+      name: 'resourceInfo',
+      preSet: function(_, s) { return this.path.normalize(s); }
+    },
+    {
       name: 'fs',
       type: 'foam.node.NodeRequire'
     },
@@ -42,7 +46,8 @@ CLASS({
       aseq(
         this.anormalize(),
         this.agenItems(),
-        this.aminingResources()
+        this.aminingResources(),
+        this.aresourceInfo()
       )(function() {
       });
     },
@@ -115,6 +120,26 @@ CLASS({
             ret();
           }));
     },
+    function aresourceInfo(ret) {
+      return aif(
+        !this.resourceInfo,
+        function(ret) {
+          console.log("Skipping ResourceInfo.cs, resourceInfo parameter not set.");
+          ret();
+        },
+        this.aseq(
+          function(ret) {
+            this.oreDAO.orderBy(this.Ore.MIN_SKILL).select()(ret);
+          },
+          function(ret, ores) {
+            var output = this.resourceInfo;
+            this.ensurePath(output.substring(0, output.lastIndexOf(this.path.sep)));
+
+            console.log("Writing ", output);
+            this.fs.writeFileSync(output, this.ResourceInfo_CS(undefined, ores));
+            ret();
+          }));
+    },
     function anormalize(ret) {
       return this.aseq(
         function(ret) {
@@ -132,6 +157,7 @@ CLASS({
     }
   ],
   templates: [
-    { name: 'MiningResources_CS' }
+    { name: 'MiningResources_CS' },
+    { name: 'ResourceInfo_CS' }
   ],
 });

@@ -18,6 +18,19 @@ public class <%= this.className %>Ore : BaseOre
         {
         }
 
+        public override int LabelNumber
+        {
+                get
+                {
+                        return <%= this.labelNumber %>;
+                }
+        }
+
+        public override double SmeltDifficulty
+        {
+                get { return <%= this.smeltDifficulty.toFixed(2) %>;
+        }
+
         public override void Serialize( GenericWriter writer )
         {
                 base.Serialize( writer );

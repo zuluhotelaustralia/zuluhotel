@@ -19,6 +19,14 @@ public class <%= this.className %>Ingot : BaseIngot
         {
         }
 
+        public override int LabelNumber
+        {
+                get
+                {
+                        return <%= this.ingotLabelNumber %>;
+                }
+        }
+
         public override void Serialize( GenericWriter writer )
         {
                 base.Serialize( writer );

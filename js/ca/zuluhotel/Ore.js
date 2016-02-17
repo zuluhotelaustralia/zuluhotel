@@ -10,6 +10,25 @@ CLASS({
       defaultValueFn: function() { return this.name; }
     },
     {
+      name: 'hue',
+      type: 'Int'
+    },
+    {
+      name: 'labelNumber',
+      type: 'Int',
+      defaultValue: 1042853
+    },
+    {
+      name: 'ingotLabelNumber',
+      type: 'Int',
+      defaultValue: 1042692;
+    },
+    {
+      name: 'smeltDifficulty',
+      type: 'Float',
+      defaultValue: 50
+    },
+    {
       name: 'minSkill',
       type: 'Float'
     },
@@ -34,6 +53,12 @@ CLASS({
       name: 'fallbackChance',
       type: 'Float',
       defaultValue: 0.5
+    },
+    {
+      name: 'craftAttributeName',
+      defaultValueFn: function() {
+        return this.name == 'Iron' ? 'Blank' : this.name;
+      }
     }
   ],
   templates: [
