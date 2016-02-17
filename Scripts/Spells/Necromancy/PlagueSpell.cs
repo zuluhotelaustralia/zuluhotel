@@ -9,8 +9,11 @@ namespace Server.Spells.Necromancy
     public class PlagueSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Plague", "Fluctus Puter Se Aresceret"
-                );
+							"Plague", "Fluctus Puter Se Aresceret",
+							227, 9031,
+							Reagent.VolcanicAsh, Reagent.BatWing, Reagent.DaemonBone, Reagent.DragonsBlood,
+							Reagent.Bloodspawn, Reagent.Pumice, Reagent.SerpentsScales
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -51,6 +54,11 @@ namespace Server.Spells.Necromancy
             Caster.DoHarmful( m );
 
             // TODO: Spell action ( buff/debuff/damage/etc. )
+	    //see Server/Poison.cs and Scripts/Misc/Poison.cs
+	    // instantiate a new poisontimer
+	    // probably use level 4 (lethal) irrespective of range
+	    // "level 5" non existent will surely cause fucked-upness due to
+	    // shitbirds doing arithmetic with cliloc indices
 
             new InternalTimer( m, Caster ).Start();
 

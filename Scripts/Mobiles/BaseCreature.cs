@@ -14,8 +14,6 @@ using Server.Engines.MLQuests;
 using Server.Engines.PartySystem;
 using Server.Factions;
 using Server.SkillHandlers;
-using Server.Spells.Bushido;
-using Server.Spells.Spellweaving;
 using Server.Spells.Necromancy;
 
 namespace Server.Mobiles
@@ -734,35 +732,7 @@ namespace Server.Mobiles
 
 	public virtual void BreathDealDamage( Mobile target )
 	{
-	    if( !Evasion.CheckSpellEvasion( target ) )
-	    {
-		int physDamage = BreathPhysicalDamage;
-		int fireDamage = BreathFireDamage;
-		int coldDamage = BreathColdDamage;
-		int poisDamage = BreathPoisonDamage;
-		int nrgyDamage = BreathEnergyDamage;
-
-		if( BreathChaosDamage > 0 )
-		{
-		    switch( Utility.Random( 5 ))
-		    {
-			case 0: physDamage += BreathChaosDamage; break;
-			case 1: fireDamage += BreathChaosDamage; break;
-			case 2: coldDamage += BreathChaosDamage; break;
-			case 3: poisDamage += BreathChaosDamage; break;
-			case 4: nrgyDamage += BreathChaosDamage; break;
-		    }
-		}
-
-		if( physDamage == 0 && fireDamage == 0 && coldDamage == 0 && poisDamage == 0 && nrgyDamage == 0 )
-		{
-		    target.Damage( BreathComputeDamage(), this );// Unresistable damage even in AOS
-		}
-		else
-		{
-		    AOS.Damage( target, this, BreathComputeDamage(), physDamage, fireDamage, coldDamage, poisDamage, nrgyDamage );
-		}
-	    }
+	    // lol
 	}
 
 	public virtual int BreathComputeDamage()
@@ -985,9 +955,6 @@ namespace Server.Mobiles
 
 	    if ( !(m is BaseCreature) || m is Server.Engines.Quests.Haven.MilitiaFighter )
 		return true;
-
-	    if( TransformationSpellHelper.UnderTransformation( m, typeof( EtherealVoyageSpell ) ) )
-		return false;
 
 	    if ( m is PlayerMobile && ( (PlayerMobile)m ).HonorActive )
 		return false;
@@ -1444,9 +1411,6 @@ namespace Server.Mobiles
 		if( c != null )
 		    c.Slip();
 	    }
-
-	    if( Confidence.IsRegenerating( this ) )
-		Confidence.StopRegenerating( this );
 
 	    WeightOverloading.FatigueOnDamage( this, amount );
 
@@ -4480,7 +4444,7 @@ namespace Server.Mobiles
 		    list.Add( 1080078 ); // guarding
 	    }
 
-	    if ( Summoned && !IsAnimatedDead && !IsNecroFamiliar && !( this is Clone ) )
+	    if ( Summoned && !IsAnimatedDead && !IsNecroFamiliar )
 		list.Add( 1049646 ); // (summoned)
 	    else if ( Controlled && Commandable )
 	    {
@@ -4818,8 +4782,6 @@ namespace Server.Mobiles
 		{
 		    this.OwnerAbandonTime = DateTime.MinValue;
 		}
-
-		GiftOfLifeSpell.HandleDeath( this );
 
 		CheckStatTimers();
 	    }

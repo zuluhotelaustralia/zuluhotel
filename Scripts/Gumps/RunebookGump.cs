@@ -7,7 +7,6 @@ using Server.Network;
 using Server.Spells;
 using Server.Spells.Fourth;
 using Server.Spells.Seventh;
-using Server.Spells.Chivalry;
 using Server.Prompts;
 
 namespace Server.Gumps
@@ -409,7 +408,7 @@ namespace Server.Gumps
 
 							break;
 						}
-						case 5: // Sacred Journey
+						/*case 5: // Sacred Journey
 						{
 							if ( Core.AOS )
 							{
@@ -437,7 +436,7 @@ namespace Server.Gumps
 							m_Book.Openers.Remove( from );
 
 							break;
-						}
+						}*/
 					}
 				}
 				else

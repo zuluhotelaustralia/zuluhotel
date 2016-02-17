@@ -9,8 +9,11 @@ namespace Server.Spells.Necromancy
     public class DarknessSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Darkness", "In Caligne Abditus"
-                );
+							"Darkness", "In Caligne Abditus",
+							227, 9031,
+							Reagent.Pumice,
+							Reagent.PigIron
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -28,31 +31,33 @@ namespace Server.Spells.Necromancy
 
         public void Target( Mobile m )
         {
-            if ( ! Caster.CanSee( m ) )
-            {
+            if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
                 Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
                 goto Return;
             }
-
-            if ( ! CheckSequence() )
-            {
+	    
+            if ( ! CheckSequence() ) {
                 goto Return;
             }
-
+	    
+            SpellHelper.Turn( Caster, m );
+	    
             if ( ! m.BeginAction( typeof( DarknessSpell ) ) ) {
                 goto Return;
             }
-
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
-
+	    
+	    int level = LightCycle.DungeonLevel;
+	    m.LightLevel = level;
+	    
+	    // TODO: Spell graphical and sound effects.
+	    m.FixedParticles( 0x376A, 9, 32, 5007, EffectLayer.Waist );
+	    m.PlaySound( 0x1e4 );
             Caster.DoHarmful( m );
-
+	    
             // TODO: Spell action ( buff/debuff/damage/etc. )
 
-            new InternalTimer( m, Caster ).Start();
+            new DarknessTimer( m ).Start();
 
         Return:
             FinishSequence();
@@ -101,6 +106,24 @@ namespace Server.Spells.Necromancy
                 m_Owner.FinishSequence();
             }
         }
+
+	private class DarknessTimer : Timer
+	{
+	    private Mobile m_Owner;
+
+	    public DarknessTimer( Mobile owner ) : base( TimeSpan.FromMinutes( Utility.Random( 25, 35 ) ) )
+	    {
+		m_Owner = owner;
+		Priority = TimerPriority.OneMinute;
+	    }
+
+	    protected override void OnTick()
+	    {
+		m_Owner.EndAction( typeof( LightCycle ) );
+		m_Owner.LightLevel = 0;
+	    }
+	}
+
 
     }
 }

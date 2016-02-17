@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections;
 using Server.Network;
 using Server.Items;
@@ -9,8 +10,10 @@ namespace Server.Spells.Necromancy
     public class SpectresTouchSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Spectres Touch", "Enevare"
-                );
+							"Spectres Touch", "Enevare",
+							227, 9031,
+							Reagent.ExecutionersCap, Reagent.Brimstone, Reagent.DaemonBone
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -23,43 +26,41 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
-        {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
-            }
+            }   
+            List<Mobile> targets = new List<Mobile>();
+	    Map map = Caster.Map;
+	    if( map != null ){
+		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ) {
+		    if( Caster != m &&
+			SpellHelper.ValidIndirectTarget(Caster, m) &&
+			Caster.CanBeHarmful(m, false) &&
+			Caster.InLOS(m)
+			) {
+			targets.Add(m);
+		    }
+		}
+	    }
 
-            if ( ! m.BeginAction( typeof( SpectresTouchSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
-
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
-
-        Return:
+	    double dmg = Utility.Dice( 3,5, (int)(Caster.Skills[DamageSkill].Value / 4.0) ); //avg 41 or so
+	    
+	    Caster.PlaySound( 0x1F1 );
+	    for(int i=0; i<targets.Count; i++) {
+		Mobile m = targets[i];
+		Caster.DoHarmful( m );
+		m.Damage( (int)dmg, Caster, m_DamageType );
+		m.FixedParticles( 0x374A, 10, 15, 5013, EffectLayer.Waist );
+		m.PlaySound( 0x1f2 );
+	    }	
+          
+	Return:
             FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
+	}
+	    
+	private class InternalTimer : Timer
+	{
             private Mobile m_Target;
 
             public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
@@ -79,28 +80,5 @@ namespace Server.Spells.Necromancy
                 m_Target.EndAction( typeof( SpectresTouchSpell ) );
             }
         }
-
-        private class InternalTarget : Target
-        {
-            private SpectresTouchSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( SpectresTouchSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }

@@ -18,6 +18,7 @@ namespace Server.Spells.Seventh
 
 		public FlameStrikeSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
+		    m_DamageType = DamageType.Fire;
 		}
 
 		public override void OnCast()

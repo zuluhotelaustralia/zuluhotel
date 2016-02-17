@@ -5,7 +5,6 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 
 namespace Server
 {
@@ -88,8 +87,7 @@ namespace Server
 	    protected override void OnTick()
 	    {
 		if ( Core.AOS && m_Poison.Level < 4 ||
-		     (m_Poison.Level < 3 && OrangePetals.UnderEffect( m_Mobile )) ||
-		     AnimalForm.UnderTransformation( m_Mobile, typeof( Unicorn ) ) )
+		     (m_Poison.Level < 3 && OrangePetals.UnderEffect( m_Mobile ))  )
 		{
 		    if ( m_Mobile.CurePoison( m_Mobile ) )
 		    {

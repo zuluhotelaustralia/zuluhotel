@@ -9,7 +9,6 @@ using Server.Mobiles;
 using Server.Engines.PartySystem;
 using Server.Factions;
 using Server.Spells.Necromancy;
-using Server.Spells.Ninjitsu;
 using Server.Spells;
 
 namespace Server.Misc
@@ -409,7 +408,14 @@ namespace Server.Misc
 					return Notoriety.Enemy;
 			}
 
-			if ( target.Kills >= 5 || ( target.Body.IsMonster && IsSummoned( target as BaseCreature ) && !( target is BaseFamiliar ) && !( target is ArcaneFey ) && !( target is Golem ) ) || ( target is BaseCreature && ( ( (BaseCreature)target ).AlwaysMurderer || ( (BaseCreature)target ).IsAnimatedDead ) ) )
+			if ( target.Kills >= 5 ||
+			     ( target.Body.IsMonster &&
+			       IsSummoned( target as BaseCreature ) &&
+			       !( target is BaseFamiliar ) &&
+			       !( target is Golem ) )
+			     || ( target is BaseCreature &&
+				  ( ( (BaseCreature)target ).AlwaysMurderer ||
+				    ( (BaseCreature)target ).IsAnimatedDead ) ) )
 				return Notoriety.Murderer;
 
 			if( target.Criminal )

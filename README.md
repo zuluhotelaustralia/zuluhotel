@@ -1,11 +1,10 @@
-runuo
-=====
+# RunZH
 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/4tjo91e4qotjtsgq?svg=true)](https://ci.appveyor.com/project/ms/runuo) [![Travis Build Status](https://travis-ci.org/runuo/runuo.svg)](https://travis-ci.org/runuo/runuo)
+RunZH is an emulator for the popular Zulu Hotel series of Ultima Online shards.  RunZH is based on RunUO.
 
-[![Join the chat at https://gitter.im/runuo/runuo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/runuo/runuo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+IRC:  irc.quakenet.org #zuluhotel
 
-RunUO Git Repository
+## RunUO
 
 Typical Windows Build
 
@@ -15,7 +14,6 @@ PS C:\runuo> C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc /optimize /unsa
 Typical Linux Build (MONO)
 
 ~/runuo$ dmcs -optimize+ -unsafe -t:exe -out:RunUO.exe -win32icon:Server/runuo.ico -nowarn:219,414 -d:MONO -recurse:Server/*.cs
-
 
 zlib is required for certain functionality. Windows zlib builds are packaged with releases and can also be obtained separately here: https://github.com/msturgill/zlib/releases/latest
 

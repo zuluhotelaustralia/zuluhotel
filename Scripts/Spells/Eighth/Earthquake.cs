@@ -23,6 +23,7 @@ namespace Server.Spells.Eighth
 
 		public EarthquakeSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 		{
+		    m_DamageType = DamageType.Earth;
 		}
 
 		public override bool DelayedDamage{ get{ return !Core.AOS; } }

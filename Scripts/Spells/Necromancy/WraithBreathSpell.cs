@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
@@ -9,8 +10,11 @@ namespace Server.Spells.Necromancy
     public class WraithBreathSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Wraith Breath", "Manes Sollicti Mi Compellere"
-                );
+							"Wraith Breath", "Manes Sollicti Mi Compellere",
+							227, 9031,
+							Reagent.Pumice, Reagent.Obsidian, Reagent.Bone,
+							Reagent.Blackmoor
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -23,84 +27,45 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
-        {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( WraithBreathSpell ) ) ) {
-                goto Return;
-            }
+	    List<Mobile> targets = new List<Mobile>();
+	    Map map = Caster.Map;
+	    double duration = 10.0 + (Caster.Skills[DamageSkill].Value * 0.2);
+	
+	    if( map != null ){
+		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ){
+		    if( Caster != m &&
+			SpellHelper.ValidIndirectTarget(Caster, m) &&
+			Caster.CanBeHarmful(m, false)
+			&& Caster.InLOS(m) &&
+			!m.Paralyzed &&
+			!m.Frozen){
+				    
+			if ( ! m.BeginAction( typeof( WraithBreathSpell ) ) ) {
+			    break;
+			}
+			
+			Caster.DoHarmful(m);
+			
+			if ( CheckResisted(m) ){
+			    duration *= 0.5;
+			}
+			
+			m.FixedEffect( 0x376A, 6, 1 );
+			m.PlaySound(0x204);
+			m.Paralyze( TimeSpan.FromSeconds( duration ) );	
+		    }
+		}
+	    }
 
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
-
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
-
+	    Caster.PlaySound( 0x204 );
+	    
         Return:
             FinishSequence();
         }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( WraithBreathSpell ) );
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private WraithBreathSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( WraithBreathSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }
