@@ -3148,7 +3148,11 @@ namespace Server.Mobiles
 	    SendToStaffMessage( from, String.Format( format, args ) );
 	}
 
-	public override void Damage( int amount, Mobile from )
+	public override void Damage( int amount, Mobile from ) {
+	    Damage( amount, from, DamageType.Physical );
+	}
+	
+	public override void Damage( int amount, Mobile from, DamageType dmgtype )
 	{
 	    /* Per EA's UO Herald Pub48 (ML):
 	     * ((resist spellsx10)/20 + 10=percentage of damage resisted)
@@ -3167,7 +3171,7 @@ namespace Server.Mobiles
 		}
 	    }
 
-	    base.Damage( amount, from );
+	    base.Damage( amount, from, dmgtype );
 	}
 
 	#region Poison
