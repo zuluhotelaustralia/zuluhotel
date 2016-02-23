@@ -11,21 +11,10 @@ namespace Server.Spells.Necromancy
 	protected const int waterfallEW = 13591; //0x3517
 	protected const int waterfallNS = 13561; //0x34f9
 
-	//in hex:                              {17a6, 17a3, 179f, 17a8, 1797, 17a5, 17a1, 179d, 17a7}
-	protected const int[] pool = new int[] {6054, 6051, 6047, 6056, 6039, 6053, 6049, 6045, 6055};
-
-	//0,0 is the north-west corner, so:
-	/*
-	  {           x--y--, 
-	          x--y,     xy--,
-	    x--y++,     xy,     x++y--,
-                  xy++,     x++y, 
-                      x++y++            }
-	 */
-
+	protected int[] pool;
 	
 	private static SpellInfo m_Info = new SpellInfo(
-							"Sorceror's Bane", "Fluctus Perturbo Magus Navitas"
+							"Sorceror's Bane", "Fluctus Perturbo Magus Navitas",
 							227, 9031,
 							Reagent.VolcanicAsh, Reagent.WyrmsHeart, Reagent.DaemonBone,
 							Reagent.Pumice, Reagent.DragonsBlood, Reagent.DeadWood
@@ -38,6 +27,18 @@ namespace Server.Spells.Necromancy
 
         public SorcerorsBaneSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
+	    //in hex:        {17a6, 17a3, 179f, 17a8, 1797, 17a5, 17a1, 179d, 17a7}
+	    pool = new int[] {6054, 6051, 6047, 6056, 6039, 6053, 6049, 6045, 6055};
+
+	    //0,0 is the north-west corner, so:
+	    /*
+	      {           x--y--, 
+	              x--y,     xy--,
+	        x--y++,     xy,     x++y--,
+	              xy++,     x++y, 
+	                  x++y++            }
+	    */
+	    
         }
 
         public override void OnCast()
@@ -98,7 +99,7 @@ namespace Server.Spells.Necromancy
         {
             private Mobile m_Target;
 
-            public WaterfalllTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
+            public WaterfallTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
             {
                 m_Target = target;
 

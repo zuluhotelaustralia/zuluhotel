@@ -123,7 +123,7 @@ namespace Server.Misc
 		return false;
 
 	    bool success = ( chance >= Utility.RandomDouble() );
-	    double gc = -(Math.Log(skill/1400)*0.2); //TODO:  change 1400 and 0.2 based on playermobile's region
+	    double gc = -(Math.Log(skill.Base/1400.0)*0.2); //TODO:  change 1400 and 0.2 based on playermobile's region
 	    gc *= skill.Info.GainFactor;
 
 	    if ( gc < 0.01 )
