@@ -5,7 +5,7 @@ namespace Server.Spells
 {
     public class Reagent
     {
-	private static Type[] m_Types = new Type[27]
+	private static Type[] m_Types = new Type[28]
 	    {
 		typeof( BlackPearl ),
 		typeof( Bloodmoss ),
@@ -33,7 +33,8 @@ namespace Server.Spells
 		typeof( VolcanicAsh ),
 		typeof( WyrmsHeart ),
 		typeof( ExecutionersCap ),
-		typeof( Bone )
+		typeof( Bone ),
+		typeof( DeadWood )
 	    };
 
 	public Type[] Types
@@ -203,6 +204,11 @@ namespace Server.Spells
 	    set{ m_Types[26] = value; }
 	}
 
+	public static Type DeadWood
+	{
+	    get{ return m_Types[27]; }
+	    set{ m_Types[27] = value; }
+	}
     }
 }
 

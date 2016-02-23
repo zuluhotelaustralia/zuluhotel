@@ -93,7 +93,7 @@ namespace Server.Spells
 	    Register( 102, typeof( Necromancy.DecayingRaySpell ) );
 	    Register( 103, typeof( Necromancy.SpectresTouchSpell ) );
 	    Register( 104, typeof( Necromancy.AbyssalFlameSpell ) );
-	    Register( 105, typeof( Necromancy.ZuluAnimateDeadSpell ) );
+	    Register( 105, typeof( Necromancy.AnimateDeadSpell ) );
 	    Register( 106, typeof( Necromancy.SacrificeSpell ) );
 	    Register( 107, typeof( Necromancy.WraithBreathSpell ) );
 	    Register( 108, typeof( Necromancy.SorcerorsBaneSpell ) );
