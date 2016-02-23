@@ -5431,6 +5431,11 @@ namespace Server
 
 	    switch( version )
 	    {
+		case 33:
+		    {
+			m_StatCap = 390;
+			goto case 32;
+		    }
 		case 32:
 		    {
 			// Removed StuckMenu
@@ -5866,7 +5871,7 @@ namespace Server
 
 	public virtual void Serialize( GenericWriter writer )
 	{
-	    writer.Write( (int)32 ); // version
+	    writer.Write( (int)33 ); // version
 
 	    writer.WriteDeltaTime( m_LastStrGain );
 	    writer.WriteDeltaTime( m_LastIntGain );
@@ -9915,7 +9920,7 @@ namespace Server
 
 	public void DefaultMobileInit()
 	{
-	    m_StatCap = 225;
+	    m_StatCap = 390;
 	    m_FollowersMax = 5;
 	    m_Skills = new Skills( this );
 	    m_Items = new List<Item>();
