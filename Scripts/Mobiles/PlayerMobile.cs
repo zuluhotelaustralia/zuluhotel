@@ -3147,7 +3147,7 @@ namespace Server.Mobiles
 	{
 	    SendToStaffMessage( from, String.Format( format, args ) );
 	}
-
+	
 	public override void Damage( int amount, Mobile from ) {
 	    Damage( amount, from, DamageType.Physical );
 	}
@@ -3158,6 +3158,7 @@ namespace Server.Mobiles
 	     * ((resist spellsx10)/20 + 10=percentage of damage resisted)
 	     */
 
+	    
 	    if ( from != null && Talisman is BaseTalisman )
 	    {
 		BaseTalisman talisman = (BaseTalisman) Talisman;

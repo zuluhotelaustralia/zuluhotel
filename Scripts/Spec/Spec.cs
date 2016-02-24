@@ -17,13 +17,6 @@ namespace Server.Mobiles
 	Powerplayer
     }
 
-    public enum AttackType
-    {
-	Magic,
-	Melee,
-	Ranged
-    }
-
     [PropertyObject]
     public class Spec
     {
@@ -80,102 +73,6 @@ namespace Server.Mobiles
 	    m_ClassSkills = m.Skills;
 	    m_SpecName = SpecName.None;
 	    m_SpecLevel = 0;
-	}
-
-	public double ScaleDamageDealt( double basedamage, AttackType atktype )
-	{
-	    double result = basedamage;
-      
-	    //if magic
-	    if (atktype == AttackType.Magic )
-	    {
-		if (m_SpecName == SpecName.Mage)
-		{
-		    //mages get a magic bonus
-		    result = Math.Round( basedamage * Bonus );
-		}
-		if (m_SpecName == SpecName.Warrior)
-		{
-		    //warriors get a magic penality
-		    result = Math.Round(basedamage/Bonus);
-		}
-	    }
-
-	    //if melee
-	    if ( atktype == AttackType.Melee )
-	    {
-		if ( m_SpecName == SpecName.Warrior )
-		{
-		    //warriors get melee bonus
-		    result = Math.Round(basedamage*Bonus);
-		}
-		if (m_SpecName == SpecName.Mage)
-		{
-		    //warriors get magic penalty
-		    result = Math.Round(basedamage/Bonus);
-		}
-	    }
-
-	    //if ranged
-	    if ( atktype == AttackType.Ranged )
-	    {
-		if(m_SpecName == SpecName.Ranger)
-		{
-		    //rangers get randed bonus
-		    result = Math.Round(basedamage*Bonus);
-		}
-	  
-	    }
-
-	    return result;
-	}
-    
-	public double ScaleDamageRecvd( double basedamage, AttackType atktype )
-	{
-	    double result = basedamage;
-      
-	    //if magic
-	    if (atktype == AttackType.Magic )
-	    {
-		if (m_SpecName == SpecName.Mage)
-		{
-		    //mages take less magic dmg
-		    result = Math.Round( basedamage / Bonus );
-		}
-		if (m_SpecName == SpecName.Warrior)
-		{
-		    //warriors take more
-		    result = Math.Round(basedamage*Bonus);
-		}
-	    }
-
-	    //if melee
-	    if ( atktype == AttackType.Melee )
-	    {
-		if ( m_SpecName == SpecName.Warrior )
-		{
-		    //warriors get melee reduction
-		    result = Math.Round(basedamage/Bonus);
-		}
-		if (m_SpecName == SpecName.Mage)
-		{
-		    //mages take more
-		    result = Math.Round(basedamage*Bonus);
-		}
-	    }
-
-	    //if ranged
-	    if ( atktype == AttackType.Ranged )
-	    {
-		if(m_SpecName == SpecName.Ranger)
-		{
-		    //rangers get ranged protection
-		    result = Math.Round(basedamage/Bonus);
-		}
-	  
-	    }
-
-	    return result;
 	}
 
 	public void ComputeSpec()

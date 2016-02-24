@@ -789,6 +789,12 @@ namespace Server
 	private DateTime m_LastDexGain;
 	private Race m_Race;
 
+	private static DamageScalar m_DamageScalar = new DamageScalar();
+	public static DamageScalar DamageScalar {
+	    get { return m_DamageScalar; }
+	    set { m_DamageScalar = value; }
+	}
+
 	#endregion
 
 	private static readonly TimeSpan WarmodeSpamCatch = TimeSpan.FromSeconds( (Core.SE ? 1.0 : 0.5) );
@@ -5124,7 +5130,7 @@ namespace Server
 	{
 	}
 
-        public virtual int ScaleDamage( int amount, DamageType type, Mobile from )
+        public virtual int ScaleDamage( int amount, Mobile m, DamageType type )
         {
             return amount;
         }
@@ -5163,7 +5169,7 @@ namespace Server
 	    if( !this.Region.OnDamage( this, ref amount ) )
 		return;
 
-            amount = ScaleDamage(amount, type, from);
+            amount = m_DamageScalar.ScaleDamage(amount, this, type);
 
 	    if( amount > 0 )
 	    {
