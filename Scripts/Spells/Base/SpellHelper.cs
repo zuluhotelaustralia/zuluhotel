@@ -991,7 +991,7 @@ namespace Server.Spells
 		if( target is BaseCreature )
 		    ((BaseCreature)target).AlterSpellDamageFrom( from, ref iDamage );
 
-		target.Damage( iDamage, from );
+		target.Damage( iDamage, from, DamageType.Magical );
 	    }
 	    else
 	    {

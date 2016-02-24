@@ -41,6 +41,7 @@ namespace Server {
 	    }
 	    else {
 		return amount; //might as well save the cycles if there's no reason to go through this
+		//probably later we'll put elemental resists in this class
 	    }
 
 	    //take a deep breath
