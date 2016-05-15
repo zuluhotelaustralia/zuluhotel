@@ -1,21 +1,387 @@
 [
-   {
-      "model_": "ca.zuluhotel.Ore",
-      "name": "DullCopper",
-      "minSkill": 10,
-      "maxSkill": 100,
-      "reqSkill": 10,
-      "veinChance": 30.069930069930066,
-      "abundance": 43,
-      "fallbackChance": 0
-   },
-   {
-      "model_": "ca.zuluhotel.Ore",
-      "name": "Iron",
-      "maxSkill": 100,
-      "reqSkill": 0,
-      "veinChance": 69.93006993006993,
-      "abundance": 100,
-      "fallbackChance": 0
-   }
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Iron
+	"name": Iron
+	"maxSkill": 100
+	"minskill": 0
+	"reqskill": 0
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Gold
+	"name": Gold
+	"maxSkill": 101
+	"minskill": 1
+	"reqskill": 1
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Spike
+	"name": Spike
+	"maxSkill": 105
+	"minskill": 5
+	"reqskill": 5
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Fruity
+	"name": Fruity
+	"maxSkill": 110
+	"minskill": 10
+	"reqskill": 10
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Bronze
+	"name": Bronze
+	"maxSkill": 115
+	"minskill": 15
+	"reqskill": 15
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Ice Rock
+	"name": IceRock
+	"maxSkill": 120
+	"minskill": 20
+	"reqskill": 20
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Black Dwarf
+	"name": BlackDwarf
+	"maxSkill": 125
+	"minskill": 25
+	"reqskill": 25
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Dull Copper
+	"name": DullCopper
+	"maxSkill": 130
+	"minskill": 30
+	"reqskill": 30
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Platinum
+	"name": Platinum
+	"maxSkill": 135
+	"minskill": 35
+	"reqskill": 35
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Silver Rock
+	"name": SilverRock
+	"maxSkill": 140
+	"minskill": 40
+	"reqskill": 40
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Dark Pagan
+	"name": DarkPagan
+	"maxSkill": 145
+	"minskill": 45
+	"reqskill": 45
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Copper
+	"name": Copper
+	"maxSkill": 150
+	"minskill": 50
+	"reqskill": 50
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Mystic
+	"name": Mystic
+	"maxSkill": 150
+	"minskill": 55
+	"reqskill": 55
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Spectral
+	"name": Spectral
+	"maxSkill": 150
+	"minskill": 60
+	"reqskill": 60
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Old Britain
+	"name": OldBritain
+	"maxSkill": 150
+	"minskill": 65
+	"reqskill": 65
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Onyx
+	"name": Onyx
+	"maxSkill": 150
+	"minskill": 70
+	"reqskill": 70
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Red Elven
+	"name": RedElven
+	"maxSkill": 150
+	"minskill": 75
+	"reqskill": 75
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Undead
+	"name": Undead
+	"maxSkill": 150
+	"minskill": 80
+	"reqskill": 80
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Pyrite
+	"name": Pyrite
+	"maxSkill": 150
+	"minskill": 85
+	"reqskill": 85
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Virginity
+	"name": Virginity
+	"maxSkill": 150
+	"minskill": 90
+	"reqskill": 90
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Malachite
+	"name": Malachite
+	"maxSkill": 150
+	"minskill": 95
+	"reqskill": 95
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Lavarock
+	"name": Lavarock
+	"maxSkill": 150
+	"minskill": 97
+	"reqskill": 97
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Azurite
+	"name": Azurite
+	"maxSkill": 150
+	"minskill": 98
+	"reqskill": 98
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Dripstone
+	"name": Dripstone
+	"maxSkill": 150
+	"minskill": 100
+	"reqskill": 100
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Executor
+	"name": Executor
+	"maxSkill": 150
+	"minskill": 104
+	"reqskill": 104
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Peachblue
+	"name": Peachblue
+	"maxSkill": 150
+	"minskill": 108
+	"reqskill": 108
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Destruction
+	"name": Destruction
+	"maxSkill": 150
+	"minskill": 112
+	"reqskill": 112
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Anra
+	"name": Anra
+	"maxSkill": 150
+	"minskill": 116
+	"reqskill": 116
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Crystal
+	"name": Crystal
+	"maxSkill": 150
+	"minskill": 119
+	"reqskill": 119
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Doom
+	"name": Doom
+	"maxSkill": 150
+	"minskill": 122
+	"reqskill": 122
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Goddess
+	"name": Goddess
+	"maxSkill": 150
+	"minskill": 125
+	"reqskill": 125
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": New Zulu
+	"name": NewZulu
+	"maxSkill": 150
+	"minskill": 129
+	"reqskill": 129
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Ebon Twilight Sapphire
+	"name": EbonTwilightSapphire
+	"maxSkill": 150
+	"minskill": 130
+	"reqskill": 130
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Dark Sable Ruby
+	"name": DarkSableRuby
+	"maxSkill": 150
+	"minskill": 130
+	"reqskill": 130
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
+    {
+	"model_": "ca.zuluhotel.Ore",
+	"desc": Radiant Nimbus Diamond
+	"name": RadiantNimbusDiamond
+	"maxSkill": 150
+	"minskill": 140
+	"reqskill": 140
+	"veinChance": 0
+	"abundance": 50
+	"fallbackChance": 0
+    },
 ]
