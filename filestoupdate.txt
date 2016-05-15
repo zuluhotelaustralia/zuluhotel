@@ -1,10 +1,10 @@
 DONE + Engines/BulkOrders/SmallBOD.cs:
 DONE + Engines/Craft/DefBlacksmithy.cs:
 DONE + Engines/Craft/DefTinkering.cs:
- + Engines/Craft/Core/Resmelt.cs:
- + Items/Armor/BaseArmor.cs:
- + Items/Clothing/BaseClothing.cs:
- + Items/Containers/SalvageBag.cs:
+DONE + Engines/Craft/Core/Resmelt.cs:
+DONE + Items/Armor/BaseArmor.cs:
+DONE + Items/Clothing/BaseClothing.cs:
+DONE + Items/Containers/SalvageBag.cs:
  + Items/Misc/ClockworkAssembly.cs:
  + Items/Misc/PowerGenerator.cs:
  + Items/Resources/Blacksmithing/BaseIngot.cs:
