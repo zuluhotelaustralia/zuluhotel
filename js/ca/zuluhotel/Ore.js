@@ -41,6 +41,11 @@ CLASS({
       help: 'Minimum skill before its even possible to harvest this resource'
     },
     {
+      name: 'reqCraftSkill',
+      type: 'Float',
+      defaultValueFn: function() { return this.reqSkill; }
+    },
+    {
       name: 'veinChance',
       type: 'Float'
     },

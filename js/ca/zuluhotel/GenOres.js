@@ -14,6 +14,14 @@ CLASS({
       preSet: function(_, s) { return this.path.normalize(s); }
     },
     {
+      name: 'defBlacksmithy',
+      preSet: function(_, s) { return this.path.normalize(s); }
+    },
+    {
+      name: 'defTinkering',
+      preSet: function(_, s) { return this.path.normalize(s); }
+    },
+    {
       name: 'miningResources',
       preSet: function(_, s) { return this.path.normalize(s); }
     },
@@ -50,9 +58,11 @@ CLASS({
       aseq(
         this.anormalize(),
         this.agenItems(),
-        this.abaseOre(),
-        this.aminingResources(),
-        this.aresourceInfo()
+        this.agenFile('baseOre'),
+        this.agenFile('defBlacksmithy'),
+        this.agenFile('defTinkering'),
+        this.agenFile('miningResources'),
+        this.agenFile('resourceInfo')
       )(function() {
       });
     },
@@ -105,11 +115,12 @@ CLASS({
             });
           }));
     },
-      function abaseOre(ret) {
+      function agenFile(name) {
+        var template = name[0].toUpperCase() + name.substring(1) + '_CS';
         return aif(
-          !this.baseOre,
+          !this[name],
           function(ret) {
-            console.log("Skipping BaseOre.cs, baseOre parameter not set.");
+            console.log("Skipping ", file, name, " not set.");
             ret();
           },
           this.aseq(
@@ -117,53 +128,14 @@ CLASS({
               this.oreDAO.orderBy(this.Ore.MIN_SKILL).select()(ret);
             },
             function(ret, ores) {
-              var output = this.baseOre;
+              var output = this[name];
               this.ensurePath(output.substring(0, output.lastIndexOf(this.path.sep)));
               console.log("Writing ", output);
-              this.fs.writeFileSync(output, this.BaseOre_CS(undefined, ores));
+              this.fs.writeFileSync(output, this[template](undefined, ores));
               ret();
             }));
+
       },
-    function aminingResources(ret) {
-      return aif(
-        !this.miningResources,
-        function(ret) {
-          console.log("Skipping MiningResources.cs, miningResources parameter not set.");
-          ret();
-        },
-        this.aseq(
-          function(ret) {
-            this.oreDAO.orderBy(this.Ore.MIN_SKILL).select()(ret);
-          },
-          function(ret, ores) {
-            var output = this.miningResources;
-            this.ensurePath(output.substring(0, output.lastIndexOf(this.path.sep)));
-
-            console.log("Writing ", output);
-            this.fs.writeFileSync(output, this.MiningResources_CS(undefined, ores));
-            ret();
-          }));
-    },
-    function aresourceInfo(ret) {
-      return aif(
-        !this.resourceInfo,
-        function(ret) {
-          console.log("Skipping ResourceInfo.cs, resourceInfo parameter not set.");
-          ret();
-        },
-        this.aseq(
-          function(ret) {
-            this.oreDAO.orderBy(this.Ore.MIN_SKILL).select()(ret);
-          },
-          function(ret, ores) {
-            var output = this.resourceInfo;
-            this.ensurePath(output.substring(0, output.lastIndexOf(this.path.sep)));
-
-            console.log("Writing ", output);
-            this.fs.writeFileSync(output, this.ResourceInfo_CS(undefined, ores));
-            ret();
-          }));
-    },
     function anormalize(ret) {
       return this.aseq(
         function(ret) {
@@ -183,6 +155,8 @@ CLASS({
   templates: [
     { name: 'MiningResources_CS' },
     { name: 'ResourceInfo_CS' },
-    { name: 'BaseOre_CS' }
+    { name: 'BaseOre_CS' },
+    { name: 'DefBlacksmithy_CS' },
+    { name: 'DefTinkering_CS' }
   ],
 });
