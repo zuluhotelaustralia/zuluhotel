@@ -26,23 +26,18 @@ public class <%= this.className %>Ore : BaseOre
                 }
         }
 
-        public override double SmeltDifficulty
-        {
-                get { return <%= this.smeltDifficulty.toFixed(2) %>;
-        }
-
         public override void Serialize( GenericWriter writer )
         {
                 base.Serialize( writer );
                 writer.Write( (int) 0 ); // version
         }
-        
+
         public override void Deserialize( GenericReader reader )
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
         }
-        
+
         public override BaseIngot GetIngot()
         {
                 return new <%= this.className %>Ingot();

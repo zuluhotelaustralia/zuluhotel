@@ -21,7 +21,7 @@ CLASS({
     {
       name: 'ingotLabelNumber',
       type: 'Int',
-      defaultValue: 1042692;
+      defaultValue: 1042692
     },
     {
       name: 'smeltDifficulty',

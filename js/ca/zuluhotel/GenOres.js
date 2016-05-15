@@ -10,6 +10,10 @@ CLASS({
       preSet: function(_, s) { return this.path.normalize(s); }
     },
     {
+      name: 'baseOre',
+      preSet: function(_, s) { return this.path.normalize(s); }
+    },
+    {
       name: 'miningResources',
       preSet: function(_, s) { return this.path.normalize(s); }
     },
@@ -46,6 +50,7 @@ CLASS({
       aseq(
         this.anormalize(),
         this.agenItems(),
+        this.abaseOre(),
         this.aminingResources(),
         this.aresourceInfo()
       )(function() {
@@ -77,7 +82,7 @@ CLASS({
           console.log("Skipping itmes, itemsPath parameter not set");
           ret();
         },
-        this.aseq(              
+        this.aseq(
           function(ret) {
             console.log("Checking output directory.");
             this.ensurePath(this.itemsPath);
@@ -100,6 +105,25 @@ CLASS({
             });
           }));
     },
+      function abaseOre(ret) {
+        return aif(
+          !this.baseOre,
+          function(ret) {
+            console.log("Skipping BaseOre.cs, baseOre parameter not set.");
+            ret();
+          },
+          this.aseq(
+            function(ret) {
+              this.oreDAO.orderBy(this.Ore.MIN_SKILL).select()(ret);
+            },
+            function(ret, ores) {
+              var output = this.baseOre;
+              this.ensurePath(output.substring(0, output.lastIndexOf(this.path.sep)));
+              console.log("Writing ", output);
+              this.fs.writeFileSync(output, this.BaseOre_CS(undefined, ores));
+              ret();
+            }));
+      },
     function aminingResources(ret) {
       return aif(
         !this.miningResources,
@@ -158,6 +182,7 @@ CLASS({
   ],
   templates: [
     { name: 'MiningResources_CS' },
-    { name: 'ResourceInfo_CS' }
+    { name: 'ResourceInfo_CS' },
+    { name: 'BaseOre_CS' }
   ],
 });
