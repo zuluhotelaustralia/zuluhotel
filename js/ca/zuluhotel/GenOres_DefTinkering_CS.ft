@@ -372,7 +372,7 @@ namespace Server.Engines.Craft
                         // TODO(Daleron): Clilocs
 <% for ( var i = 0 ; i < ores.length ; i++ ) {
   var ore = ores[i]; %>
-			AddSubRes( typeof( <%= ore.className %>Ingot ),			1044022, <%= ore.tinkeringReqSkill %>, 1044036, 1044267 );
+			AddSubRes( typeof( <%= ore.className %>Ingot ),			1044022, <%= ore.reqTinkeringSkill %>, 1044036, 1044267 );
 <% } %>
 
 			MarkOption = true;

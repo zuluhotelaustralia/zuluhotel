@@ -22,6 +22,10 @@ CLASS({
       preSet: function(_, s) { return this.path.normalize(s); }
     },
     {
+      name: 'resmelt',
+      preSet: function(_, s) { return this.path.normalize(s); }
+    },
+    {
       name: 'miningResources',
       preSet: function(_, s) { return this.path.normalize(s); }
     },
@@ -61,6 +65,7 @@ CLASS({
         this.agenFile('baseOre'),
         this.agenFile('defBlacksmithy'),
         this.agenFile('defTinkering'),
+        this.agenFile('resmelt'),
         this.agenFile('miningResources'),
         this.agenFile('resourceInfo')
       )(function() {
@@ -157,6 +162,7 @@ CLASS({
     { name: 'ResourceInfo_CS' },
     { name: 'BaseOre_CS' },
     { name: 'DefBlacksmithy_CS' },
+    { name: 'Resmelt_CS' },
     { name: 'DefTinkering_CS' }
   ],
 });

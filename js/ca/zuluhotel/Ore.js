@@ -29,6 +29,11 @@ CLASS({
       defaultValue: 50
     },
     {
+      name: 'resmeltDifficulty',
+      type: 'Float',
+      defaultValueFn: function() { return this.smeltDifficulty + 10; }
+    },
+    {
       name: 'minSkill',
       type: 'Float'
     },
@@ -42,6 +47,11 @@ CLASS({
     },
     {
       name: 'reqCraftSkill',
+      type: 'Float',
+      defaultValueFn: function() { return this.reqSkill; }
+    },
+    {
+      name: 'reqTinkeringSkill',
       type: 'Float',
       defaultValueFn: function() { return this.reqSkill; }
     },
