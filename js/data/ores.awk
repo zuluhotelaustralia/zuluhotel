@@ -25,8 +25,8 @@ BEGIN {
     gsub (" ", "", $1);
     print "\"name\": \"" $1 "\",";
     print "\"maxSkill\": " getMaxSkill() ",";
-    print "\"minskill\": " $3 ",";
-    print "\"reqskill\": " $3 ",";
+    print "\"minSkill\": " $3 ",";
+    print "\"reqSkill\": " $3 ",";
     print "\"veinChance\": " 0 ",";
     print "\"abundance\": " 50 ",";
     print "\"fallbackChance\": " 0 ",";
