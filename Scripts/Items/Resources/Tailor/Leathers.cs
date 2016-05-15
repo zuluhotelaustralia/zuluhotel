@@ -14,7 +14,7 @@ namespace Server.Items
 			get{ return m_Resource; }
 			set{ m_Resource = value; InvalidateProperties(); }
 		}
-		
+
 		int ICommodity.DescriptionNumber { get { return LabelNumber; } }
 		bool ICommodity.IsDeedable { get { return true; } }
 
@@ -42,10 +42,7 @@ namespace Server.Items
 				}
 				case 0:
 				{
-					OreInfo info = new OreInfo( reader.ReadInt(), reader.ReadInt(), reader.ReadString() );
-
-					m_Resource = CraftResources.GetFromOreInfo( info );
-					break;
+                                    throw "Unsupported old item format.";
 				}
 			}
 		}
@@ -134,7 +131,7 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 
-		
+
 	}
 
 	[FlipableAttribute( 0x1081, 0x1082 )]
@@ -168,7 +165,7 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 
-		
+
 	}
 
 	[FlipableAttribute( 0x1081, 0x1082 )]
@@ -202,7 +199,7 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 
-		
+
 	}
 
 	[FlipableAttribute( 0x1081, 0x1082 )]
@@ -236,6 +233,6 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 
-		
+
 	}
 }

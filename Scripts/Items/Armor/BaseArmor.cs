@@ -33,7 +33,7 @@ namespace Server.Items
 
 
 		/* Armor internals work differently now (Jun 19 2003)
-		 * 
+		 *
 		 * The attributes defined below default to -1.
 		 * If the value is -1, the corresponding virtual 'Aos/Old' property is used.
 		 * If not, the attribute value itself is used. Here's the list:
@@ -129,8 +129,8 @@ namespace Server.Items
 					return m_ArmorBase;
 			}
 			set
-			{ 
-				m_ArmorBase = value; Invalidate(); 
+			{
+				m_ArmorBase = value; Invalidate();
 			}
 		}
 
@@ -289,11 +289,11 @@ namespace Server.Items
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int HitPoints
 		{
-			get 
+			get
 			{
 				return m_HitPoints;
 			}
-			set 
+			set
 			{
 				if ( value != m_HitPoints && MaxHitPoints > 0 )
 				{
@@ -317,7 +317,7 @@ namespace Server.Items
 			set{ m_Crafter = value; InvalidateProperties(); }
 		}
 
-		
+
 		[CommandProperty( AccessLevel.GameMaster )]
 		public ArmorQuality Quality
 		{
@@ -1032,23 +1032,7 @@ namespace Server.Items
 					}
 					else
 					{
-						OreInfo info;
-
-						switch ( reader.ReadInt() )
-						{
-							default:
-							case 0: info = OreInfo.Iron; break;
-							case 1: info = OreInfo.DullCopper; break;
-							case 2: info = OreInfo.ShadowIron; break;
-							case 3: info = OreInfo.Copper; break;
-							case 4: info = OreInfo.Bronze; break;
-							case 5: info = OreInfo.Gold; break;
-							case 6: info = OreInfo.Agapite; break;
-							case 7: info = OreInfo.Verite; break;
-							case 8: info = OreInfo.Valorite; break;
-						}
-
-						m_Resource = CraftResources.GetFromOreInfo( info, mat );
+                                            throw "Unsupported old item format.";
 					}
 
 					m_StrBonus = reader.ReadInt();
@@ -1292,7 +1276,7 @@ namespace Server.Items
 			int Absorbed = (int)(HalfAr + HalfAr*Utility.RandomDouble());
 
 			damageTaken -= Absorbed;
-			if ( damageTaken < 0 ) 
+			if ( damageTaken < 0 )
 				damageTaken = 0;
 
 			if ( Absorbed < 2 )

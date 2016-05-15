@@ -14,7 +14,7 @@ namespace Server.Items
 			get{ return m_Resource; }
 			set{ m_Resource = value; InvalidateProperties(); }
 		}
-		
+
 		int ICommodity.DescriptionNumber { get { return LabelNumber; } }
 		bool ICommodity.IsDeedable { get { return true; } }
 
@@ -42,10 +42,7 @@ namespace Server.Items
 				}
 				case 0:
 				{
-					OreInfo info = new OreInfo( reader.ReadInt(), reader.ReadInt(), reader.ReadString() );
-
-					m_Resource = CraftResources.GetFromOreInfo( info );
-					break;
+                                    throw "Unsuppored old item format.";
 				}
 			}
 		}
@@ -236,7 +233,7 @@ namespace Server.Items
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			
+
 			base.ScissorHelper( from, new HornedLeather(), 1 );
 
 			return true;
