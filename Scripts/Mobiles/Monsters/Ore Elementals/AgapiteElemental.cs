@@ -2,6 +2,10 @@ using System;
 using Server;
 using Server.Items;
 
+//TOGENERATE
+// wouldn't be too hard to do all this via the generator, there's basically one per ore type with various strengths but who gives a shit, just do them all the same and we can add air/fire/water/earth later
+// maybe make the gems extra strong and a different loot group or smth
+
 namespace Server.Mobiles
 {
 	[CorpseName( "an ore elemental corpse" )]

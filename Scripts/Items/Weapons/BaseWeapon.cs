@@ -2931,6 +2931,8 @@ namespace Server.Items
 
 	    switch ( m_Resource )
 	    {
+		//TOGENERATE
+		//apparently the ore names are in a cliloc... time to start editing those?
 		case CraftResource.DullCopper:		oreType = 1053108; break; // dull copper
 		case CraftResource.ShadowIron:		oreType = 1053107; break; // shadow iron
 		case CraftResource.Copper:			oreType = 1053106; break; // copper

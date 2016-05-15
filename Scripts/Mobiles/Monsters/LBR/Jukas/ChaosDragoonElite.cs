@@ -114,6 +114,7 @@ namespace Server.Mobiles
 			}
 			switch (Utility.Random(9))
 			{
+			    //TOGENERATE
 				case 0: res = CraftResource.DullCopper; break;
 				case 1: res = CraftResource.ShadowIron; break;
 				case 2: res = CraftResource.Copper; break;

@@ -13,8 +13,9 @@ namespace Server.Items
 
 		[Constructable] 
 		public BagOfingots( int amount ) 
-		{ 
-			DropItem( new DullCopperIngot   ( amount ) ); 
+		{
+		    //TOGENERATE
+			//DropItem( new DullCopperIngot   ( amount ) ); 
 			DropItem( new ShadowIronIngot   ( amount ) ); 
 			DropItem( new CopperIngot   ( amount ) ); 
 			DropItem( new BronzeIngot   ( amount ) ); 

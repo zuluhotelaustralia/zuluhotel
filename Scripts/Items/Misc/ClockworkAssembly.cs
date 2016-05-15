@@ -67,7 +67,7 @@ namespace Server.Items
 				{
 					typeof( PowerCrystal ),
 					typeof( IronIngot ),
-					typeof( BronzeIngot ),
+					typeof( IronIngot ),
 					typeof( Gears )
 				},
 				new int[]
