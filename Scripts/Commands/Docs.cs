@@ -427,7 +427,27 @@ namespace Server.Commands
 			html.WriteLine( "      <h2><a href=\"{0}\" title=\"{1}\">{2}</a></h2>", filePath, desc, label );
 		}
 
-		private static void GenerateStyles()
+            // TOGENERATE ?
+		private const int Iron = 0xCCCCDD;
+		private const int DullCopper = 0xAAAAAA;
+		private const int ShadowIron = 0x777799;
+		private const int Copper = 0xDDCC99;
+		private const int Bronze = 0xAA8866;
+		private const int Gold = 0xDDCC55;
+		private const int Agapite = 0xDDAAAA;
+		private const int Verite = 0x99CC77;
+		private const int Valorite = 0x88AABB;
+
+		private const int Cloth = 0xDDDDDD;
+		private const int Plain = 0xCCAA88;
+		private const int SpinedAOS = 0x99BBBB;
+		private const int HornedAOS = 0xCC8888;
+		private const int BarbedAOS = 0xAABBAA;
+		private const int SpinedLBR = 0xAA8833;
+		private const int HornedLBR = 0xBBBBAA;
+		private const int BarbedLBR = 0xCCAA88;
+
+            private static void GenerateStyles()
 		{
 			using( StreamWriter css = GetWriter( "docs/", "styles.css" ) )
 			{
@@ -441,15 +461,16 @@ namespace Server.Commands
 				css.WriteLine( "td { font-size: 11px; }" );
 				css.WriteLine( ".tbl-border { background-color: #46465A; }" );
 
-				css.WriteLine( "td.ir {{ background-color: #{0:X6}; }}", Iron );
-				css.WriteLine( "td.du {{ background-color: #{0:X6}; }}", DullCopper );
-				css.WriteLine( "td.sh {{ background-color: #{0:X6}; }}", ShadowIron );
-				css.WriteLine( "td.co {{ background-color: #{0:X6}; }}", Copper );
-				css.WriteLine( "td.br {{ background-color: #{0:X6}; }}", Bronze );
-				css.WriteLine( "td.go {{ background-color: #{0:X6}; }}", Gold );
-				css.WriteLine( "td.ag {{ background-color: #{0:X6}; }}", Agapite );
-				css.WriteLine( "td.ve {{ background-color: #{0:X6}; }}", Verite );
-				css.WriteLine( "td.va {{ background-color: #{0:X6}; }}", Valorite );
+                                // TOGENERATE ?
+				// css.WriteLine( "td.ir {{ background-color: #{0:X6}; }}", Iron );
+				// css.WriteLine( "td.du {{ background-color: #{0:X6}; }}", DullCopper );
+				// css.WriteLine( "td.sh {{ background-color: #{0:X6}; }}", ShadowIron );
+				// css.WriteLine( "td.co {{ background-color: #{0:X6}; }}", Copper );
+				// css.WriteLine( "td.br {{ background-color: #{0:X6}; }}", Bronze );
+				// css.WriteLine( "td.go {{ background-color: #{0:X6}; }}", Gold );
+				// css.WriteLine( "td.ag {{ background-color: #{0:X6}; }}", Agapite );
+				// css.WriteLine( "td.ve {{ background-color: #{0:X6}; }}", Verite );
+				// css.WriteLine( "td.va {{ background-color: #{0:X6}; }}", Valorite );
 
 				css.WriteLine( "td.cl {{ background-color: #{0:X6}; }}", Cloth );
 				css.WriteLine( "td.pl {{ background-color: #{0:X6};  }}", Plain );

@@ -1,4 +1,4 @@
- + Engines/BulkOrders/SmallBOD.cs:
+DONE: + Engines/BulkOrders/SmallBOD.cs:
  + Engines/Craft/DefBlacksmithy.cs:
  + Engines/Craft/DefTinkering.cs:
  + Engines/Craft/Core/Resmelt.cs:
