@@ -82,7 +82,7 @@ namespace Server.Engines.Harvest
 			oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
 
 			res = MiningResources.OreResources;
-			veins = MiningResources.OreVeings;
+			veins = MiningResources.OreVeins;
 
 			oreAndStone.Resources = res;
 			oreAndStone.Veins = veins;

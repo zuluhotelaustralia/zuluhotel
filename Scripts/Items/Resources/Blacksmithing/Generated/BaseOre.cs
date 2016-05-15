@@ -45,7 +45,7 @@ namespace Server.Items
 				}
 				case 0:
 				{
-                                        Console.WriteLine("Unsupported ore item, skipping.");
+                                        throw new System.Exception("Unsupported ore item, skipping.");
 					break;
 				}
 			}

@@ -42,7 +42,7 @@ namespace Server.Items
 				}
 				case 0:
 				{
-                                    throw "Unsupported old item format.";
+                                    throw new System.Exception("Unsupported old item format.");
 				}
 			}
 		}

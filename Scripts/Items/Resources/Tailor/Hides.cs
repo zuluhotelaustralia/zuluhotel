@@ -42,7 +42,7 @@ namespace Server.Items
 				}
 				case 0:
 				{
-                                    throw "Unsuppored old item format.";
+                                    throw new System.Exception("Unsuppored old item format.");
 				}
 			}
 		}
