@@ -8,7 +8,40 @@ namespace Server.Items
 		None = 0,
 
 		Iron,
+		Gold,
+		Spike,
+		Fruity,
+		Bronze,
+		IceRock,
+		BlackDwarf,
 		DullCopper,
+		Platinum,
+		SilverRock,
+		DarkPagan,
+		Copper,
+		Mystic,
+		Spectral,
+		OldBritain,
+		Onyx,
+		RedElven,
+		Undead,
+		Pyrite,
+		Virginity,
+		Malachite,
+		Lavarock,
+		Azurite,
+		Dripstone,
+		Executor,
+		Peachblue,
+		Destruction,
+		Anra,
+		Crystal,
+		Doom,
+		Goddess,
+		NewZulu,
+		DarkSableRuby,
+		EbonTwilightSapphire,
+		RadiantNimbusDiamond,
 
 		RegularLeather = 101,
 		SpinedLeather,
@@ -99,7 +132,7 @@ namespace Server.Items
 		}
 
 		public static readonly CraftAttributeInfo Blank;
-		public static readonly CraftAttributeInfo DullCopper;
+		public static readonly CraftAttributeInfo Gold, Spike, Fruity, Bronze, IceRock, BlackDwarf, DullCopper, Platinum, SilverRock, DarkPagan, Copper, Mystic, Spectral, OldBritain, Onyx, RedElven, Undead, Pyrite, Virginity, Malachite, Lavarock, Azurite, Dripstone, Executor, Peachblue, Destruction, Anra, Crystal, Doom, Goddess, NewZulu, DarkSableRuby, EbonTwilightSapphire, RadiantNimbusDiamond;
 
 		public static readonly CraftAttributeInfo Spined, Horned, Barbed;
 		public static readonly CraftAttributeInfo RedScales, YellowScales, BlackScales, GreenScales, WhiteScales, BlueScales;
@@ -111,7 +144,667 @@ namespace Server.Items
 
                         CraftAttributeInfo info;
 
+			info = Gold = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Spike = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Fruity = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Bronze = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = IceRock = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = BlackDwarf = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
 			info = DullCopper = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Platinum = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = SilverRock = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = DarkPagan = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Copper = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Mystic = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Spectral = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = OldBritain = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Onyx = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = RedElven = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Undead = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Pyrite = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Virginity = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Malachite = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Lavarock = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Azurite = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Dripstone = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Executor = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Peachblue = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Destruction = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Anra = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Crystal = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Doom = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = Goddess = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = NewZulu = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = DarkSableRuby = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = EbonTwilightSapphire = new CraftAttributeInfo();
+
+			info.ArmorPhysicalResist = 6;
+			info.ArmorDurability = 50;
+			info.ArmorLowerRequirements = 20;
+			info.WeaponDurability = 100;
+			info.WeaponLowerRequirements = 50;
+			info.RunicMinAttributes = 1;
+			info.RunicMaxAttributes = 2;
+			if ( Core.ML )
+			{
+				info.RunicMinIntensity = 40;
+				info.RunicMaxIntensity = 100;
+			}
+			else
+			{
+				info.RunicMinIntensity = 10;
+				info.RunicMaxIntensity = 35;
+			}
+
+			info = RadiantNimbusDiamond = new CraftAttributeInfo();
 
 			info.ArmorPhysicalResist = 6;
 			info.ArmorDurability = 50;
@@ -271,7 +964,73 @@ namespace Server.Items
 			{
 				new CraftResourceInfo( 0x0, 1053109, "Iron", CraftAttributeInfo.Blank, CraftResource.Iron, typeof( IronIngot ), typeof( IronOre ), typeof( Granite ) ),
 
+				new CraftResourceInfo( 0x0, 1053109, "Gold", CraftAttributeInfo.Gold, CraftResource.Gold, typeof( GoldIngot ), typeof( GoldOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Spike", CraftAttributeInfo.Spike, CraftResource.Spike, typeof( SpikeIngot ), typeof( SpikeOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Fruity", CraftAttributeInfo.Fruity, CraftResource.Fruity, typeof( FruityIngot ), typeof( FruityOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Bronze", CraftAttributeInfo.Bronze, CraftResource.Bronze, typeof( BronzeIngot ), typeof( BronzeOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "IceRock", CraftAttributeInfo.IceRock, CraftResource.IceRock, typeof( IceRockIngot ), typeof( IceRockOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "BlackDwarf", CraftAttributeInfo.BlackDwarf, CraftResource.BlackDwarf, typeof( BlackDwarfIngot ), typeof( BlackDwarfOre ), typeof( Granite ) ),
+
 				new CraftResourceInfo( 0x0, 1053109, "DullCopper", CraftAttributeInfo.DullCopper, CraftResource.DullCopper, typeof( DullCopperIngot ), typeof( DullCopperOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Platinum", CraftAttributeInfo.Platinum, CraftResource.Platinum, typeof( PlatinumIngot ), typeof( PlatinumOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "SilverRock", CraftAttributeInfo.SilverRock, CraftResource.SilverRock, typeof( SilverRockIngot ), typeof( SilverRockOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "DarkPagan", CraftAttributeInfo.DarkPagan, CraftResource.DarkPagan, typeof( DarkPaganIngot ), typeof( DarkPaganOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Copper", CraftAttributeInfo.Copper, CraftResource.Copper, typeof( CopperIngot ), typeof( CopperOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Mystic", CraftAttributeInfo.Mystic, CraftResource.Mystic, typeof( MysticIngot ), typeof( MysticOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Spectral", CraftAttributeInfo.Spectral, CraftResource.Spectral, typeof( SpectralIngot ), typeof( SpectralOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "OldBritain", CraftAttributeInfo.OldBritain, CraftResource.OldBritain, typeof( OldBritainIngot ), typeof( OldBritainOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Onyx", CraftAttributeInfo.Onyx, CraftResource.Onyx, typeof( OnyxIngot ), typeof( OnyxOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "RedElven", CraftAttributeInfo.RedElven, CraftResource.RedElven, typeof( RedElvenIngot ), typeof( RedElvenOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Undead", CraftAttributeInfo.Undead, CraftResource.Undead, typeof( UndeadIngot ), typeof( UndeadOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Pyrite", CraftAttributeInfo.Pyrite, CraftResource.Pyrite, typeof( PyriteIngot ), typeof( PyriteOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Virginity", CraftAttributeInfo.Virginity, CraftResource.Virginity, typeof( VirginityIngot ), typeof( VirginityOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Malachite", CraftAttributeInfo.Malachite, CraftResource.Malachite, typeof( MalachiteIngot ), typeof( MalachiteOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Lavarock", CraftAttributeInfo.Lavarock, CraftResource.Lavarock, typeof( LavarockIngot ), typeof( LavarockOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Azurite", CraftAttributeInfo.Azurite, CraftResource.Azurite, typeof( AzuriteIngot ), typeof( AzuriteOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Dripstone", CraftAttributeInfo.Dripstone, CraftResource.Dripstone, typeof( DripstoneIngot ), typeof( DripstoneOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Executor", CraftAttributeInfo.Executor, CraftResource.Executor, typeof( ExecutorIngot ), typeof( ExecutorOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Peachblue", CraftAttributeInfo.Peachblue, CraftResource.Peachblue, typeof( PeachblueIngot ), typeof( PeachblueOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Destruction", CraftAttributeInfo.Destruction, CraftResource.Destruction, typeof( DestructionIngot ), typeof( DestructionOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Anra", CraftAttributeInfo.Anra, CraftResource.Anra, typeof( AnraIngot ), typeof( AnraOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Crystal", CraftAttributeInfo.Crystal, CraftResource.Crystal, typeof( CrystalIngot ), typeof( CrystalOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Doom", CraftAttributeInfo.Doom, CraftResource.Doom, typeof( DoomIngot ), typeof( DoomOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "Goddess", CraftAttributeInfo.Goddess, CraftResource.Goddess, typeof( GoddessIngot ), typeof( GoddessOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "NewZulu", CraftAttributeInfo.NewZulu, CraftResource.NewZulu, typeof( NewZuluIngot ), typeof( NewZuluOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "DarkSableRuby", CraftAttributeInfo.DarkSableRuby, CraftResource.DarkSableRuby, typeof( DarkSableRubyIngot ), typeof( DarkSableRubyOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "EbonTwilightSapphire", CraftAttributeInfo.EbonTwilightSapphire, CraftResource.EbonTwilightSapphire, typeof( EbonTwilightSapphireIngot ), typeof( EbonTwilightSapphireOre ), typeof( Granite ) ),
+
+				new CraftResourceInfo( 0x0, 1053109, "RadiantNimbusDiamond", CraftAttributeInfo.RadiantNimbusDiamond, CraftResource.RadiantNimbusDiamond, typeof( RadiantNimbusDiamondIngot ), typeof( RadiantNimbusDiamondOre ), typeof( Granite ) ),
 
 			};
 
@@ -380,7 +1139,7 @@ namespace Server.Items
 		/// </summary>
 		public static CraftResourceType GetType( CraftResource resource )
 		{
-			if ( resource >= CraftResource.Iron && resource <= CraftResource.DullCopper )
+			if ( resource >= CraftResource.Iron && resource <= CraftResource.RadiantNimbusDiamond )
 				return CraftResourceType.Metal;
 
 			if ( resource >= CraftResource.RegularLeather && resource <= CraftResource.BarbedLeather )

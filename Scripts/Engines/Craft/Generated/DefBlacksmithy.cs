@@ -703,7 +703,73 @@ namespace Server.Engines.Craft
 
 			AddSubRes( typeof( IronIngot ),			1044022, 0, 1044036, 1044267 );
 
-			AddSubRes( typeof( DullCopperIngot ),			1044022, 10, 1044036, 1044267 );
+			AddSubRes( typeof( GoldIngot ),			1044022, 1, 1044036, 1044267 );
+
+			AddSubRes( typeof( SpikeIngot ),			1044022, 5, 1044036, 1044267 );
+
+			AddSubRes( typeof( FruityIngot ),			1044022, 10, 1044036, 1044267 );
+
+			AddSubRes( typeof( BronzeIngot ),			1044022, 15, 1044036, 1044267 );
+
+			AddSubRes( typeof( IceRockIngot ),			1044022, 20, 1044036, 1044267 );
+
+			AddSubRes( typeof( BlackDwarfIngot ),			1044022, 25, 1044036, 1044267 );
+
+			AddSubRes( typeof( DullCopperIngot ),			1044022, 30, 1044036, 1044267 );
+
+			AddSubRes( typeof( PlatinumIngot ),			1044022, 35, 1044036, 1044267 );
+
+			AddSubRes( typeof( SilverRockIngot ),			1044022, 40, 1044036, 1044267 );
+
+			AddSubRes( typeof( DarkPaganIngot ),			1044022, 45, 1044036, 1044267 );
+
+			AddSubRes( typeof( CopperIngot ),			1044022, 50, 1044036, 1044267 );
+
+			AddSubRes( typeof( MysticIngot ),			1044022, 55, 1044036, 1044267 );
+
+			AddSubRes( typeof( SpectralIngot ),			1044022, 60, 1044036, 1044267 );
+
+			AddSubRes( typeof( OldBritainIngot ),			1044022, 65, 1044036, 1044267 );
+
+			AddSubRes( typeof( OnyxIngot ),			1044022, 70, 1044036, 1044267 );
+
+			AddSubRes( typeof( RedElvenIngot ),			1044022, 75, 1044036, 1044267 );
+
+			AddSubRes( typeof( UndeadIngot ),			1044022, 80, 1044036, 1044267 );
+
+			AddSubRes( typeof( PyriteIngot ),			1044022, 85, 1044036, 1044267 );
+
+			AddSubRes( typeof( VirginityIngot ),			1044022, 90, 1044036, 1044267 );
+
+			AddSubRes( typeof( MalachiteIngot ),			1044022, 95, 1044036, 1044267 );
+
+			AddSubRes( typeof( LavarockIngot ),			1044022, 97, 1044036, 1044267 );
+
+			AddSubRes( typeof( AzuriteIngot ),			1044022, 98, 1044036, 1044267 );
+
+			AddSubRes( typeof( DripstoneIngot ),			1044022, 100, 1044036, 1044267 );
+
+			AddSubRes( typeof( ExecutorIngot ),			1044022, 104, 1044036, 1044267 );
+
+			AddSubRes( typeof( PeachblueIngot ),			1044022, 108, 1044036, 1044267 );
+
+			AddSubRes( typeof( DestructionIngot ),			1044022, 112, 1044036, 1044267 );
+
+			AddSubRes( typeof( AnraIngot ),			1044022, 116, 1044036, 1044267 );
+
+			AddSubRes( typeof( CrystalIngot ),			1044022, 119, 1044036, 1044267 );
+
+			AddSubRes( typeof( DoomIngot ),			1044022, 122, 1044036, 1044267 );
+
+			AddSubRes( typeof( GoddessIngot ),			1044022, 125, 1044036, 1044267 );
+
+			AddSubRes( typeof( NewZuluIngot ),			1044022, 129, 1044036, 1044267 );
+
+			AddSubRes( typeof( DarkSableRubyIngot ),			1044022, 130, 1044036, 1044267 );
+
+			AddSubRes( typeof( EbonTwilightSapphireIngot ),			1044022, 130, 1044036, 1044267 );
+
+			AddSubRes( typeof( RadiantNimbusDiamondIngot ),			1044022, 140, 1044036, 1044267 );
 
 			SetSubRes2( typeof( RedScales ), 1060875 );
 
