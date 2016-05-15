@@ -2957,8 +2957,6 @@ namespace Server.Mobiles
 	private DateTime m_SessionStart;
 	private DateTime m_LastEscortTime;
 	private DateTime m_LastPetBallTime;
-	private DateTime m_NextSmithBulkOrder;
-	private DateTime m_NextTailorBulkOrder;
 	private DateTime m_SavagePaintExpiration;
 	private SkillName m_Learning = (SkillName)(-1);
 
@@ -2987,44 +2985,6 @@ namespace Server.Mobiles
 	}
 
 	[CommandProperty( AccessLevel.GameMaster )]
-	public TimeSpan NextSmithBulkOrder
-	{
-	    get
-	    {
-		TimeSpan ts = m_NextSmithBulkOrder - DateTime.UtcNow;
-
-		if ( ts < TimeSpan.Zero )
-		    ts = TimeSpan.Zero;
-
-		return ts;
-	    }
-	    set
-	    {
-		try{ m_NextSmithBulkOrder = DateTime.UtcNow + value; }
-		catch{}
-	    }
-	}
-
-	[CommandProperty( AccessLevel.GameMaster )]
-	public TimeSpan NextTailorBulkOrder
-	{
-	    get
-	    {
-		TimeSpan ts = m_NextTailorBulkOrder - DateTime.UtcNow;
-
-		if ( ts < TimeSpan.Zero )
-		    ts = TimeSpan.Zero;
-
-		return ts;
-	    }
-	    set
-	    {
-		try{ m_NextTailorBulkOrder = DateTime.UtcNow + value; }
-		catch{}
-	    }
-	}
-
-	[CommandProperty( AccessLevel.GameMaster )]
 	public DateTime LastEscortTime
 	{
 	    get{ return m_LastEscortTime; }
@@ -3041,15 +3001,13 @@ namespace Server.Mobiles
 	public PlayerMobile()
 	{
 	    m_Spec = new Spec(this);
-	    
+
 	    m_AutoStabled = new List<Mobile>();
 
 	    m_VisList = new List<Mobile>();
 	    m_PermaFlags = new List<Mobile>();
 	    m_AntiMacroTable = new Hashtable();
 	    m_RecentlyReported = new List<Mobile>();
-
-	    m_BOBFilter = new Engines.BulkOrders.BOBFilter();
 
 	    m_GameTime = TimeSpan.Zero;
 	    m_ShortTermElapse = TimeSpan.FromHours( 8.0 );
@@ -3147,18 +3105,18 @@ namespace Server.Mobiles
 	{
 	    SendToStaffMessage( from, String.Format( format, args ) );
 	}
-	
+
 	public override void Damage( int amount, Mobile from ) {
 	    Damage( amount, from, DamageType.Physical );
 	}
-	
+
 	public override void Damage( int amount, Mobile from, DamageType dmgtype )
 	{
 	    /* Per EA's UO Herald Pub48 (ML):
 	     * ((resist spellsx10)/20 + 10=percentage of damage resisted)
 	     */
 
-	    
+
 	    if ( from != null && Talisman is BaseTalisman )
 	    {
 		BaseTalisman talisman = (BaseTalisman) Talisman;
@@ -3286,13 +3244,6 @@ namespace Server.Mobiles
 	private void RevertHair()
 	{
 	    SetHairMods( -1, -1 );
-	}
-
-	private Engines.BulkOrders.BOBFilter m_BOBFilter;
-
-	public Engines.BulkOrders.BOBFilter BOBFilter
-	{
-	    get{ return m_BOBFilter; }
 	}
 
 	public override void Deserialize( GenericReader reader )
@@ -3448,7 +3399,12 @@ namespace Server.Mobiles
 		case 13: // just removed m_PayedInsurance list
 		case 12:
 		    {
-			m_BOBFilter = new Engines.BulkOrders.BOBFilter( reader );
+                        // BOBFilter placeholder
+                        reader.ReadEncodedInt();
+                        reader.ReadEncodedInt();
+                        reader.ReadEncodedInt();
+                        reader.ReadEncodedInt();
+                        reader.ReadEncodedInt();
 			goto case 11;
 		    }
 		case 11:
@@ -3501,12 +3457,14 @@ namespace Server.Mobiles
 		    }
 		case 6:
 		    {
-			NextTailorBulkOrder = reader.ReadTimeSpan();
+                        // NextTailorBulkOrder
+			reader.ReadTimeSpan();
 			goto case 5;
 		    }
 		case 5:
 		    {
-			NextSmithBulkOrder = reader.ReadTimeSpan();
+                        // NextSmithBulkdOrder
+			reader.ReadTimeSpan();
 			goto case 4;
 		    }
 		case 4:
@@ -3554,9 +3512,6 @@ namespace Server.Mobiles
 
 	    if ( m_JusticeProtectors == null )
 		m_JusticeProtectors = new List<Mobile>();
-
-	    if ( m_BOBFilter == null )
-		m_BOBFilter = new Engines.BulkOrders.BOBFilter();
 
 	    if( m_GuildRank == null )
 		m_GuildRank = Guilds.RankDefinition.Member;	//Default to member if going from older version to new version (only time it should be null)
@@ -3692,7 +3647,13 @@ namespace Server.Mobiles
 	    if ( m_CompassionGains > 0 )
 		writer.WriteDeltaTime( m_NextCompassionDay );
 
-	    m_BOBFilter.Serialize( writer );
+
+            //BOBFilter placehodler
+            writer.WriteEncodedInt( 1 );
+            writer.WriteEncodedInt( 0 );
+            writer.WriteEncodedInt( 0 );
+            writer.WriteEncodedInt( 0 );
+            writer.WriteEncodedInt( 0 );
 
 	    bool useMods = ( m_HairModID != -1 || m_BeardModID != -1 );
 
@@ -3714,9 +3675,10 @@ namespace Server.Mobiles
 
 	    writer.Write( m_PermaFlags, true );
 
-	    writer.Write( NextTailorBulkOrder );
-
-	    writer.Write( NextSmithBulkOrder );
+            // Next tailor bulk order
+	    writer.Write( DateTime.UtcNow );
+            // Next smith bulk order
+	    writer.Write( DateTime.UtcNow );
 
 	    writer.WriteDeltaTime( m_LastJusticeLoss );
 	    writer.Write( m_JusticeProtectors, true );
