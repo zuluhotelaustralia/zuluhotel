@@ -21,9 +21,9 @@ BEGIN {
 {
     print "{";
     print "\"model_\": \"ca.zuluhotel.Ore\",";
-    print "\"desc\": " $1;
+    print "\"desc\": \"" $1 "\"";
     gsub (" ", "", $1);
-    print "\"name\": " $1;
+    print "\"name\": \"" $1 "\"";
     print "\"maxSkill\": " getMaxSkill();
     print "\"minskill\": " $3;
     print "\"reqskill\": " $3;
