@@ -50,6 +50,7 @@ namespace Server.Spells.Necromancy
 
             // TODO: Spell Effects.
 
+	    m.PlaySound(0x0fe);
             Caster.DoHarmful( m );
 
             // Feel free to fck with this formula, I just mostly copied it from POL 093.  I don't care so long as it's balanced --sith
