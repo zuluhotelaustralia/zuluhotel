@@ -522,10 +522,10 @@ namespace Server.Items
 
 			from.AddToBackpack( new Diamond( SideLength ) );
 
-			Item ore = new ShadowIronOre( 9 );
+			Item ore = new IronOre( 9 );
 			ore.MoveToWorld( new Point3D( X - 1, Y, Z + 2 ), Map );
 
-			ore = new ShadowIronOre( 14 );
+			ore = new IronOre( 14 );
 			ore.MoveToWorld( new Point3D( X - 2, Y - 1, Z + 2 ), Map );
 
 			Delete();

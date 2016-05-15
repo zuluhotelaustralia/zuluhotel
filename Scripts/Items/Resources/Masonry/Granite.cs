@@ -52,7 +52,7 @@ namespace Server.Items
 		public BaseGranite( CraftResource resource ) : base( 0x1779 )
 		{
 			Hue = CraftResources.GetHue( resource );
-			Stackable = Core.ML;
+			Stackable = true; //was Core.ML but we disabled expansion for $reasons --sith
 
 			m_Resource = resource;
 		}
@@ -78,7 +78,8 @@ namespace Server.Items
 			}
 		}
 	}
-
+    //TOGENERATE
+    // no idea wtf this is for
 	public class Granite : BaseGranite
 	{
 		[Constructable]

@@ -122,14 +122,14 @@ namespace Server.Misc
 			PlaceItemIn( cont, 60, 118, new FletcherTools( 1000 ) );
 			PlaceItemIn( cont, 90, 118, new SewingKit( 1000 ) );
 
-			PlaceItemIn( cont, 36, 51, new RunicHammer( CraftResource.DullCopper, 1000 ) );
+			/*PlaceItemIn( cont, 36, 51, new RunicHammer( CraftResource.DullCopper, 1000 ) );
 			PlaceItemIn( cont, 42, 51, new RunicHammer( CraftResource.ShadowIron, 1000 ) );
 			PlaceItemIn( cont, 48, 51, new RunicHammer( CraftResource.Copper, 1000 ) );
 			PlaceItemIn( cont, 54, 51, new RunicHammer( CraftResource.Bronze, 1000 ) );
 			PlaceItemIn( cont, 61, 51, new RunicHammer( CraftResource.Gold, 1000 ) );
 			PlaceItemIn( cont, 67, 51, new RunicHammer( CraftResource.Agapite, 1000 ) );
 			PlaceItemIn( cont, 73, 51, new RunicHammer( CraftResource.Verite, 1000 ) );
-			PlaceItemIn( cont, 79, 51, new RunicHammer( CraftResource.Valorite, 1000 ) );
+			PlaceItemIn( cont, 79, 51, new RunicHammer( CraftResource.Valorite, 1000 ) );*/
 
 			PlaceItemIn( cont, 36, 55, new RunicSewingKit( CraftResource.SpinedLeather, 1000 ) );
 			PlaceItemIn( cont, 42, 55, new RunicSewingKit( CraftResource.HornedLeather, 1000 ) );
@@ -189,7 +189,8 @@ namespace Server.Misc
 			PlaceItemIn( cont, 30,  84, new Board( 5000 ) );
 			PlaceItemIn( cont, 57,  80, new BlankScroll( 500 ) );
 
-			PlaceItemIn( cont, 30,  35, new DullCopperIngot( 5000 ) );
+			//we're not using testcenter so who gives a fuck
+			/*PlaceItemIn( cont, 30,  35, new DullCopperIngot( 5000 ) );
 			PlaceItemIn( cont, 37,  35, new ShadowIronIngot( 5000 ) );
 			PlaceItemIn( cont, 44,  35, new CopperIngot( 5000 ) );
 			PlaceItemIn( cont, 51,  35, new BronzeIngot( 5000 ) );
@@ -197,7 +198,7 @@ namespace Server.Misc
 			PlaceItemIn( cont, 65,  35, new AgapiteIngot( 5000 ) );
 			PlaceItemIn( cont, 72,  35, new VeriteIngot( 5000 ) );
 			PlaceItemIn( cont, 79,  35, new ValoriteIngot( 5000 ) );
-			PlaceItemIn( cont, 86,  35, new IronIngot( 5000 ) );
+			PlaceItemIn( cont, 86,  35, new IronIngot( 5000 ) );*/
 
 			PlaceItemIn( cont, 30,  59, new RedScales( 5000 ) );
 			PlaceItemIn( cont, 36,  59, new YellowScales( 5000 ) );
@@ -498,7 +499,7 @@ namespace Server.Misc
 			bank.DropItem( MakeNewbie( new Bottle( 1000 ) ) );
 			bank.DropItem( MakeNewbie( new Log( 1000 ) ) );
 
-			bank.DropItem( MakeNewbie( new IronIngot( 5000 ) ) );
+			/*bank.DropItem( MakeNewbie( new IronIngot( 5000 ) ) );
 			bank.DropItem( MakeNewbie( new DullCopperIngot( 5000 ) ) );
 			bank.DropItem( MakeNewbie( new ShadowIronIngot( 5000 ) ) );
 			bank.DropItem( MakeNewbie( new CopperIngot( 5000 ) ) );
@@ -506,7 +507,7 @@ namespace Server.Misc
 			bank.DropItem( MakeNewbie( new GoldIngot( 5000 ) ) );
 			bank.DropItem( MakeNewbie( new AgapiteIngot( 5000 ) ) );
 			bank.DropItem( MakeNewbie( new VeriteIngot( 5000 ) ) );
-			bank.DropItem( MakeNewbie( new ValoriteIngot( 5000 ) ) );
+			bank.DropItem( MakeNewbie( new ValoriteIngot( 5000 ) ) );*/
 
 			// Reagents
 			bank.DropItem( MakeNewbie( new BlackPearl( 1000 ) ) );
@@ -655,7 +656,7 @@ namespace Server.Misc
 				pm.Profession = args.Profession;
 
 				if ( pm.AccessLevel == AccessLevel.Player && ((Account)pm.Account).Young )
-					young = pm.Young = true;
+					young = pm.Young = false; //sith
 			}
 
 			SetName( newChar, args.Name );

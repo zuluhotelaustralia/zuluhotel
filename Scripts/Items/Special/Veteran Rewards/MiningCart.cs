@@ -176,6 +176,7 @@ namespace Server.Items
 
 							switch ( Utility.Random( 9 ) )
 							{
+							    //TOGENERATE
 								case 0: ingots = new IronIngot(); break;
 								case 1: ingots = new DullCopperIngot(); break;
 								case 2: ingots = new ShadowIronIngot(); break;
