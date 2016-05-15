@@ -371,9 +371,9 @@ namespace Server.Engines.Craft
 			// This will override the overridable material
                         // TODO(Daleron): Clilocs
 
-			AddSubRes( typeof( IronIngot ),			1044022, , 1044036, 1044267 );
+			AddSubRes( typeof( IronIngot ),			1044022, 0, 1044036, 1044267 );
 
-			AddSubRes( typeof( DullCopperIngot ),			1044022, , 1044036, 1044267 );
+			AddSubRes( typeof( DullCopperIngot ),			1044022, 10, 1044036, 1044267 );
 
 
 			MarkOption = true;

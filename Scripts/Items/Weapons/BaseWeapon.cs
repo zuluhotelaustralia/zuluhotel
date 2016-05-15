@@ -21,7 +21,7 @@ namespace Server.Items
     public abstract class BaseWeapon : Item, IWeapon, IFactionItem, ICraftable, ISlayer, IDurability
     {
 	private string m_EngravedText;
-		
+
 	[CommandProperty( AccessLevel.GameMaster )]
 	public string EngravedText
 	{
@@ -48,7 +48,7 @@ namespace Server.Items
 	#endregion
 
 	/* Weapon internals work differently now (Mar 13 2003)
-	 * 
+	 *
 	 * The attributes defined below default to -1.
 	 * If the value is -1, the corresponding virtual 'Aos/Old' property is used.
 	 * If not, the attribute value itself is used. Here's the list:
@@ -308,7 +308,7 @@ namespace Server.Items
 	[CommandProperty( AccessLevel.GameMaster )]
 	public WeaponAnimation Animation
 	{
-	    get{ return ( m_Animation == (WeaponAnimation)(-1) ? Core.AOS ? AosAnimation : OldAnimation : m_Animation ); } 
+	    get{ return ( m_Animation == (WeaponAnimation)(-1) ? Core.AOS ? AosAnimation : OldAnimation : m_Animation ); }
 	    set{ m_Animation = value; }
 	}
 
@@ -588,7 +588,7 @@ namespace Server.Items
 	    {
 		from.SendMessage( "You are not nimble enough to equip that." );
 		return false;
-	    } 
+	    }
 	    else if ( from.Str < AOS.Scale( StrRequirement, 100 - GetLowerStatReq() ) )
 	    {
 		from.SendLocalizedMessage( 500213 ); // You are not strong enough to equip that.
@@ -807,7 +807,7 @@ namespace Server.Items
 
 		if ( HitLower.IsUnderDefenseEffect( defender ) )
 		    bonus -= 25; // Under Hit Lower Defense effect -> 25% malus
-					
+
 		int blockBonus = 0;
 
 		if ( Block.GetBonus( defender, ref blockBonus ) )
@@ -884,7 +884,7 @@ namespace Server.Items
 
 		if ( bonus > 60 )
 		    bonus = 60;
-				
+
 		double ticks;
 
 		if ( Core.ML )
@@ -903,7 +903,7 @@ namespace Server.Items
 
 		    ticks = Math.Floor( ( 80000.0 / ( ( m.Stam + 100 ) * speed ) ) - 2 );
 		}
-				
+
 		// Swing speed currently capped at one swing every 1.25 seconds (5 ticks).
 		if ( ticks < 5 )
 		    ticks = 5;
@@ -929,7 +929,7 @@ namespace Server.Items
 
 		delayInSeconds = Math.Floor( 40000.0 / v ) * 0.5;
 
-		// Maximum swing rate capped at one swing per second 
+		// Maximum swing rate capped at one swing per second
 		// OSI dev said that it has and is supposed to be 1.25
 		if ( delayInSeconds < 1.25 )
 		    delayInSeconds = 1.25;
@@ -1074,7 +1074,7 @@ namespace Server.Items
 		double chance = (parry - bushidoNonRacial) / 400.0;	// As per OSI, no negitive effect from the Racial stuffs, ie, 120 parry and '0' bushido with humans
 
 		if ( chance < 0 ) // chance shouldn't go below 0
-		    chance = 0;				
+		    chance = 0;
 
 		// Parry/Bushido over 100 grants a 5% bonus.
 		if ( parry >= 100.0 || bushido >= 100.0)
@@ -1425,7 +1425,7 @@ namespace Server.Items
 		damage = 1;
 	    else if ( Core.AOS && damage == 0 ) // parried
 	    {
-		if ( a != null && a.Validate( attacker ) /*&& a.CheckMana( attacker, true )*/ ) // Parried special moves have no mana cost 
+		if ( a != null && a.Validate( attacker ) /*&& a.CheckMana( attacker, true )*/ ) // Parried special moves have no mana cost
 		{
 		    a = null;
 		    WeaponAbility.ClearCurrentAbility( attacker );
@@ -2933,14 +2933,14 @@ namespace Server.Items
 	    {
 		//TOGENERATE
 		//apparently the ore names are in a cliloc... time to start editing those?
-		case CraftResource.DullCopper:		oreType = 1053108; break; // dull copper
-		case CraftResource.ShadowIron:		oreType = 1053107; break; // shadow iron
-		case CraftResource.Copper:			oreType = 1053106; break; // copper
-		case CraftResource.Bronze:			oreType = 1053105; break; // bronze
-		case CraftResource.Gold:			oreType = 1053104; break; // golden
-		case CraftResource.Agapite:			oreType = 1053103; break; // agapite
-		case CraftResource.Verite:			oreType = 1053102; break; // verite
-		case CraftResource.Valorite:		oreType = 1053101; break; // valorite
+		// case CraftResource.DullCopper:		oreType = 1053108; break; // dull copper
+		// case CraftResource.ShadowIron:		oreType = 1053107; break; // shadow iron
+		// case CraftResource.Copper:			oreType = 1053106; break; // copper
+		// case CraftResource.Bronze:			oreType = 1053105; break; // bronze
+		// case CraftResource.Gold:			oreType = 1053104; break; // golden
+		// case CraftResource.Agapite:			oreType = 1053103; break; // agapite
+		// case CraftResource.Verite:			oreType = 1053102; break; // verite
+		// case CraftResource.Valorite:		oreType = 1053101; break; // valorite
 		case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
 		case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
 		case CraftResource.BarbedLeather:	oreType = 1061116; break; // barbed
@@ -2959,16 +2959,16 @@ namespace Server.Items
 		list.Add( LabelNumber );
 	    else
 		list.Add( Name );
-				
+
 	    /*
-	     * Want to move this to the engraving tool, let the non-harmful 
+	     * Want to move this to the engraving tool, let the non-harmful
 	     * formatting show, and remove CLILOCs embedded: more like OSI
 	     * did with the books that had markup, etc.
-	     * 
-	     * This will have a negative effect on a few event things imgame 
+	     *
+	     * This will have a negative effect on a few event things imgame
 	     * as is.
-	     * 
-	     * If we cant find a more OSI-ish way to clean it up, we can 
+	     *
+	     * If we cant find a more OSI-ish way to clean it up, we can
 	     * easily put this back, and use it in the deserialize
 	     * method and engraving tool, to make it perm cleaned up.
 	     */
@@ -3391,68 +3391,69 @@ namespace Server.Items
 
 		    switch ( thisResource )
 		    {
-			case CraftResource.DullCopper:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Durable;
-				AccuracyLevel = WeaponAccuracyLevel.Accurate;
-				break;
-			    }
-			case CraftResource.ShadowIron:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Durable;
-				DamageLevel = WeaponDamageLevel.Ruin;
-				break;
-			    }
-			case CraftResource.Copper:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Fortified;
-				DamageLevel = WeaponDamageLevel.Ruin;
-				AccuracyLevel = WeaponAccuracyLevel.Surpassingly;
-				break;
-			    }
-			case CraftResource.Bronze:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Fortified;
-				DamageLevel = WeaponDamageLevel.Might;
-				AccuracyLevel = WeaponAccuracyLevel.Surpassingly;
-				break;
-			    }
-			case CraftResource.Gold:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Indestructible;
-				DamageLevel = WeaponDamageLevel.Force;
-				AccuracyLevel = WeaponAccuracyLevel.Eminently;
-				break;
-			    }
-			case CraftResource.Agapite:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Indestructible;
-				DamageLevel = WeaponDamageLevel.Power;
-				AccuracyLevel = WeaponAccuracyLevel.Eminently;
-				break;
-			    }
-			case CraftResource.Verite:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Indestructible;
-				DamageLevel = WeaponDamageLevel.Power;
-				AccuracyLevel = WeaponAccuracyLevel.Exceedingly;
-				break;
-			    }
-			case CraftResource.Valorite:
-			    {
-				Identified = true;
-				DurabilityLevel = WeaponDurabilityLevel.Indestructible;
-				DamageLevel = WeaponDamageLevel.Vanq;
-				AccuracyLevel = WeaponAccuracyLevel.Supremely;
-				break;
-			    }
+                        // TOGENERATE
+			// case CraftResource.DullCopper:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Durable;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Accurate;
+			// 	break;
+			//     }
+			// case CraftResource.ShadowIron:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Durable;
+			// 	DamageLevel = WeaponDamageLevel.Ruin;
+			// 	break;
+			//     }
+			// case CraftResource.Copper:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Fortified;
+			// 	DamageLevel = WeaponDamageLevel.Ruin;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Surpassingly;
+			// 	break;
+			//     }
+			// case CraftResource.Bronze:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Fortified;
+			// 	DamageLevel = WeaponDamageLevel.Might;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Surpassingly;
+			// 	break;
+			//     }
+			// case CraftResource.Gold:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Indestructible;
+			// 	DamageLevel = WeaponDamageLevel.Force;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Eminently;
+			// 	break;
+			//     }
+			// case CraftResource.Agapite:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Indestructible;
+			// 	DamageLevel = WeaponDamageLevel.Power;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Eminently;
+			// 	break;
+			//     }
+			// case CraftResource.Verite:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Indestructible;
+			// 	DamageLevel = WeaponDamageLevel.Power;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Exceedingly;
+			// 	break;
+			//     }
+			// case CraftResource.Valorite:
+			//     {
+			// 	Identified = true;
+			// 	DurabilityLevel = WeaponDurabilityLevel.Indestructible;
+			// 	DamageLevel = WeaponDamageLevel.Vanq;
+			// 	AccuracyLevel = WeaponAccuracyLevel.Supremely;
+			// 	break;
+			//     }
 		    }
 		}
 	    }

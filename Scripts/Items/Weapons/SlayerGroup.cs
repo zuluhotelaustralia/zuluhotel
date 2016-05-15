@@ -85,11 +85,11 @@ namespace Server.Items
 
 			elemental.Opposition = new SlayerGroup[]{ abyss };
 			elemental.FoundOn = new Type[]{ typeof( Balron ), typeof( Daemon ) };
-			elemental.Super = new SlayerEntry( SlayerName.ElementalBan, typeof( AcidElemental ), typeof( AgapiteElemental ), typeof( AirElemental ), typeof( SummonedAirElemental ), typeof( BloodElemental ), typeof( BronzeElemental ), typeof( CopperElemental ), typeof( CrystalElemental ), typeof( DullCopperElemental ), typeof( EarthElemental ), typeof( SummonedEarthElemental ), typeof( Efreet ), typeof( FireElemental ), typeof( SummonedFireElemental ), typeof( GoldenElemental ), typeof( IceElemental ), typeof( KazeKemono ), typeof( PoisonElemental ), typeof( RaiJu ), typeof( SandVortex ), typeof( ShadowIronElemental ), typeof( SnowElemental ), typeof( ValoriteElemental ), typeof( VeriteElemental ), typeof( WaterElemental ), typeof( SummonedWaterElemental ) );
+			elemental.Super = new SlayerEntry( SlayerName.ElementalBan, typeof( AcidElemental ), typeof( AirElemental ), typeof( SummonedAirElemental ), typeof( BloodElemental ), typeof( CrystalElemental ), typeof( EarthElemental ), typeof( SummonedEarthElemental ), typeof( Efreet ), typeof( FireElemental ), typeof( SummonedFireElemental ), typeof( IceElemental ), typeof( KazeKemono ), typeof( PoisonElemental ), typeof( RaiJu ), typeof( SandVortex ), typeof( SnowElemental ), typeof( WaterElemental ), typeof( SummonedWaterElemental ) );
 			elemental.Entries = new SlayerEntry[]
 				{
 					new SlayerEntry( SlayerName.BloodDrinking, typeof( BloodElemental ) ),
-					new SlayerEntry( SlayerName.EarthShatter, typeof( AgapiteElemental ), typeof( BronzeElemental ), typeof( CopperElemental ), typeof( DullCopperElemental ), typeof( EarthElemental ), typeof( SummonedEarthElemental ), typeof( GoldenElemental ), typeof( ShadowIronElemental ), typeof( ValoriteElemental ), typeof( VeriteElemental ) ),
+					new SlayerEntry( SlayerName.EarthShatter, typeof( EarthElemental ), typeof( SummonedEarthElemental ) ),
 					new SlayerEntry( SlayerName.ElementalHealth, typeof( PoisonElemental ) ),
 					new SlayerEntry( SlayerName.FlameDousing, typeof( FireElemental ), typeof( SummonedFireElemental ) ),
 					new SlayerEntry( SlayerName.SummerWind, typeof( SnowElemental ), typeof( IceElemental ) ),
@@ -103,7 +103,7 @@ namespace Server.Items
 			if( Core.AOS )
 			{
 				abyss.Super = new SlayerEntry( SlayerName.Exorcism, typeof( AbysmalHorror ), typeof( ArcaneDaemon ), typeof( Balron ), typeof( BoneDemon ), typeof( ChaosDaemon ), typeof( Daemon ), typeof( SummonedDaemon ), typeof( DemonKnight ), typeof( Devourer ), typeof( EnslavedGargoyle ), typeof( FanDancer ), typeof( FireGargoyle ), typeof( Gargoyle ), typeof( GargoyleDestroyer ), typeof( GargoyleEnforcer ), typeof( Gibberling ), typeof( HordeMinion ), typeof( IceFiend ), typeof( Imp ), typeof( Impaler ), typeof( Moloch ), typeof( Oni ), typeof( Ravager ), typeof( Semidar ), typeof( StoneGargoyle ), typeof( Succubus ), typeof( TsukiWolf ) );
-	
+
 				abyss.Entries = new SlayerEntry[]
 					{
 						// Daemon Dismissal & Balron Damnation have been removed and moved up to super slayer on OSI.

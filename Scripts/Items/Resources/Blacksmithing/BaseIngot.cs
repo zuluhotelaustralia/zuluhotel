@@ -47,7 +47,7 @@ namespace Server.Items
 				}
 				case 0:
 				{
-                                    throw "Unsupported item version for ingot.";
+                                    throw new System.Exception("Unsupported item version for ingot.");
 				}
 			}
 		}
@@ -96,8 +96,9 @@ namespace Server.Items
 		{
 			get
 			{
-				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
-					return 1042684 + (int)(m_Resource - CraftResource.DullCopper);
+                            // TOGENERATE
+//				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
+//					return 1042684 + (int)(m_Resource - CraftResource.DullCopper);
 
 				return 1042692;
 			}

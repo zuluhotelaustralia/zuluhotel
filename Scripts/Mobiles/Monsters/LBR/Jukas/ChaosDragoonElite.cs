@@ -115,15 +115,16 @@ namespace Server.Mobiles
 			switch (Utility.Random(9))
 			{
 			    //TOGENERATE
-				case 0: res = CraftResource.DullCopper; break;
-				case 1: res = CraftResource.ShadowIron; break;
-				case 2: res = CraftResource.Copper; break;
-				case 3: res = CraftResource.Bronze; break;
-				case 4: res = CraftResource.Gold; break;
-				case 5: res = CraftResource.Agapite; break;
-				case 6: res = CraftResource.Verite; break;
-				case 7: res = CraftResource.Valorite; break;
-				case 8: res = CraftResource.Iron; break;
+                            case 0 : res = CraftResource.Iron; break;
+				// case 0: res = CraftResource.DullCopper; break;
+				// case 1: res = CraftResource.ShadowIron; break;
+				// case 2: res = CraftResource.Copper; break;
+				// case 3: res = CraftResource.Bronze; break;
+				// case 4: res = CraftResource.Gold; break;
+				// case 5: res = CraftResource.Agapite; break;
+				// case 6: res = CraftResource.Verite; break;
+				// case 7: res = CraftResource.Valorite; break;
+				// case 8: res = CraftResource.Iron; break;
 			}
 
 			SwampDragon mt = new SwampDragon();

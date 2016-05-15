@@ -106,12 +106,12 @@ namespace Server.Items
 		{
 			Item check = m.FindItemOnLayer( Layer.OneHanded );
 
-			if ( check is BaseTool && check != tool && !(check is AncientSmithyHammer) )
+			if ( check is BaseTool && check != tool /* && !(check is AncientSmithyHammer)*/ )
 				return false;
 
 			check = m.FindItemOnLayer( Layer.TwoHanded );
 
-			if ( check is BaseTool && check != tool && !(check is AncientSmithyHammer) )
+			if ( check is BaseTool && check != tool /*  && !(check is AncientSmithyHammer)*/ )
 				return false;
 
 			return true;

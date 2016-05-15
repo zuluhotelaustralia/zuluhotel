@@ -53,7 +53,7 @@ CLASS({
     {
       name: 'reqTinkeringSkill',
       type: 'Float',
-      defaultValueFn: function() { return this.reqSkill; }
+      defaultValueFn: function() { return this.reqCraftSkill; }
     },
     {
       name: 'veinChance',

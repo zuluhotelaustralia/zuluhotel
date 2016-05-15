@@ -109,8 +109,9 @@ namespace Server.Items
 		{
 			get
 			{
-				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
-					return 1042845 + (int)(m_Resource - CraftResource.DullCopper);
+                                // TOGENERATE
+//				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
+//					return 1042845 + (int)(m_Resource - CraftResource.DullCopper);
 
 				return 1042853; // iron ore;
 			}

@@ -41,9 +41,9 @@ namespace Server.Engines.Craft
 
 			if ( CraftResources.IsStandard( resource ) )
 				return EnhanceResult.BadResource;
-			
+
 			int num = craftSystem.CanCraft( from, tool, item.GetType() );
-			
+
 			if ( num > 0 )
 			{
 				resMessage = num;
@@ -76,13 +76,13 @@ namespace Server.Engines.Craft
 
 			if ( craftSystem is DefBlacksmithy )
 			{
-				AncientSmithyHammer hammer = from.FindItemOnLayer( Layer.OneHanded ) as AncientSmithyHammer;
-				if ( hammer != null )
-				{
-					hammer.UsesRemaining--;
-					if ( hammer.UsesRemaining < 1 )
-						hammer.Delete();
-				}
+				// AncientSmithyHammer hammer = from.FindItemOnLayer( Layer.OneHanded ) as AncientSmithyHammer;
+				// if ( hammer != null )
+				// {
+				// 	hammer.UsesRemaining--;
+				// 	if ( hammer.UsesRemaining < 1 )
+				// 		hammer.Delete();
+				// }
 			}
 
 			int phys = 0, fire = 0, cold = 0, pois = 0, nrgy = 0;

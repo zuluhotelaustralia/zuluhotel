@@ -64,7 +64,7 @@ namespace Server
 				LoadTable();
 
 			SpeedInfo sp = null;
-			
+
 			m_Table.TryGetValue(obj.GetType(), out sp);
 
 			if ( sp == null )
@@ -156,22 +156,22 @@ namespace Server
 					typeof( BlackBear ),		typeof( BlackSolenInfiltratorQueen ), typeof( BlackSolenInfiltratorWarrior ),
 					typeof( BlackSolenQueen ),	typeof( BlackSolenWarrior ), typeof( BlackSolenWorker ),
 					typeof( BloodElemental ),	typeof( Boar ),				typeof( Bogling ),
-					typeof( BoneMagi ),			typeof( Brigand ),			typeof( BronzeElemental ),
+					typeof( BoneMagi ),			typeof( Brigand ),
 					typeof( BrownBear ),		typeof( Bull ),				typeof( BullFrog ),
 					typeof( Cat ),				typeof( Centaur ),			typeof( ChaosDaemon ),
-					typeof( Chicken ),			typeof( GolemController ),	typeof( CopperElemental ),
-					typeof( CopperElemental ),	typeof( Cougar ),			typeof( Cow ),
+					typeof( Chicken ),			typeof( GolemController ),
+						typeof( Cougar ),			typeof( Cow ),
 					typeof( Cyclops ),			typeof( Daemon ),			typeof( DeepSeaSerpent ),
 					typeof( DesertOstard ),		typeof( DireWolf ),			typeof( Dog ),
 					typeof( Dolphin ),			typeof( Dragon ),			typeof( Drake ),
-					typeof( DullCopperElemental ), typeof( Eagle ),			typeof( ElderGazer ),
+					 typeof( Eagle ),			typeof( ElderGazer ),
 					typeof( EvilMage ),			typeof( EvilMageLord ),		typeof( Executioner ),
 					typeof( Savage ),			typeof( FireElemental ),	typeof( FireGargoyle ),
 					typeof( FireSteed ),		typeof( ForestOstard ),		typeof( FrenziedOstard ),
 					typeof( FrostSpider ),		typeof( Gargoyle ),			typeof( Gazer ),
 					typeof( IceSerpent ),		typeof( GiantRat ),			typeof( GiantSerpent ),
 					typeof( GiantSpider ),		typeof( GiantToad ),		typeof( Goat ),
-					typeof( GoldenElemental ),	typeof( Gorilla ),			typeof( GreatHart ),
+						typeof( Gorilla ),			typeof( GreatHart ),
 					typeof( GreyWolf ),			typeof( GrizzlyBear ),		typeof( Guardian ),
 					typeof( Harpy ),			typeof( Harrower ),			typeof( HellHound ),
 					typeof( Hind ),				typeof( HordeMinion ),		typeof( Horse ),
@@ -189,7 +189,7 @@ namespace Server
 					typeof( RedSolenInfiltratorQueen ), typeof( RedSolenInfiltratorWarrior ), typeof( RedSolenQueen ),
 					typeof( RedSolenWarrior ),	typeof( RedSolenWorker ),	typeof( RidableLlama ),
 					typeof( Ridgeback ),		typeof( Scorpion ),			typeof( SeaSerpent ),
-					typeof( SerpentineDragon ),	typeof( Shade ),			typeof( ShadowIronElemental ),
+					typeof( SerpentineDragon ),	typeof( Shade ),
 					typeof( ShadowWisp ),		typeof( ShadowWyrm ),		typeof( Sheep ),
 					typeof( SilverSteed ),		typeof( SkeletalDragon ),	typeof( SkeletalMage ),
 					typeof( SkeletalMount ),	typeof( HellCat ),			typeof( Snake ),
@@ -198,7 +198,7 @@ namespace Server
 					typeof( ScaledSwampDragon ), typeof( SwampTentacle ),	typeof( TerathanAvenger ),
 					typeof( TerathanDrone ),	typeof( TerathanMatriarch ), typeof( TerathanWarrior ),
 					typeof( TimberWolf ),		typeof( Titan ),			typeof( Troll ),
-					typeof( Unicorn ),			typeof( ValoriteElemental ), typeof( VeriteElemental ),
+					typeof( Unicorn ),
 					typeof( CoMWarHorse ),		typeof( MinaxWarHorse ),	typeof( SLWarHorse ),
 					typeof( TBWarHorse ),		typeof( WaterElemental ),	typeof( WhippingVine ),
 					typeof( WhiteWolf ),		typeof( Wraith ),			typeof( Wyvern ),

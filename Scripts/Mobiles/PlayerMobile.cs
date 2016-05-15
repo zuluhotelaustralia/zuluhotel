@@ -3400,11 +3400,12 @@ namespace Server.Mobiles
 		case 12:
 		    {
                         // BOBFilter placeholder
-                        reader.ReadEncodedInt();
-                        reader.ReadEncodedInt();
-                        reader.ReadEncodedInt();
-                        reader.ReadEncodedInt();
-                        reader.ReadEncodedInt();
+                        if ( reader.ReadEncodedInt() == 1) {
+                            reader.ReadEncodedInt();
+                            reader.ReadEncodedInt();
+                            reader.ReadEncodedInt();
+                            reader.ReadEncodedInt();
+                        }
 			goto case 11;
 		    }
 		case 11:
@@ -3676,9 +3677,9 @@ namespace Server.Mobiles
 	    writer.Write( m_PermaFlags, true );
 
             // Next tailor bulk order
-	    writer.Write( DateTime.UtcNow );
+	    writer.Write( TimeSpan.Zero );
             // Next smith bulk order
-	    writer.Write( DateTime.UtcNow );
+	    writer.Write( TimeSpan.Zero );
 
 	    writer.WriteDeltaTime( m_LastJusticeLoss );
 	    writer.Write( m_JusticeProtectors, true );
