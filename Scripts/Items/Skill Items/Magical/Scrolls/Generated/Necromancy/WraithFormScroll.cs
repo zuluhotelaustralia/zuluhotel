@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class WraithFormScrollScroll : SpellScroll
+	public class WraithFormScroll : SpellScroll
 	{
 		[Constructable]
 		public WraithFormScroll() : this( 1 )

@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class KillScrollScroll : SpellScroll
+	public class KillScroll : SpellScroll
 	{
 		[Constructable]
 		public KillScroll() : this( 1 )

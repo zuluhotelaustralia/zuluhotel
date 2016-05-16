@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class AnimateDeadScrollScroll : SpellScroll
+	public class AnimateDeadScroll : SpellScroll
 	{
 		[Constructable]
 		public AnimateDeadScroll() : this( 1 )

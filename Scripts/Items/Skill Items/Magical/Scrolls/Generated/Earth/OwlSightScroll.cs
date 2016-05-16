@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class OwlSightScrollScroll : SpellScroll
+	public class OwlSightScroll : SpellScroll
 	{
 		[Constructable]
 		public OwlSightScroll() : this( 1 )

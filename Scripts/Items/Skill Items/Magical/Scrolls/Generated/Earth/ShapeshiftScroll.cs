@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class ShapeshiftScrollScroll : SpellScroll
+	public class ShapeshiftScroll : SpellScroll
 	{
 		[Constructable]
 		public ShapeshiftScroll() : this( 1 )

@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class EarthPortalScrollScroll : SpellScroll
+	public class EarthPortalScroll : SpellScroll
 	{
 		[Constructable]
 		public EarthPortalScroll() : this( 1 )

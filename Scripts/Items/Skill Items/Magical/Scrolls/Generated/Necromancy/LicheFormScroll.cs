@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class LicheFormScrollScroll : SpellScroll
+	public class LicheFormScroll : SpellScroll
 	{
 		[Constructable]
 		public LicheFormScroll() : this( 1 )

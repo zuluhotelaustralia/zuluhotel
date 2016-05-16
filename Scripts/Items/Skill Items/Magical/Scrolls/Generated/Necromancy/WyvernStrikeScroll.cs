@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class WyvernStrikeScrollScroll : SpellScroll
+	public class WyvernStrikeScroll : SpellScroll
 	{
 		[Constructable]
 		public WyvernStrikeScroll() : this( 1 )

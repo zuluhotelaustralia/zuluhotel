@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class AbyssalFlameScrollScroll : SpellScroll
+	public class AbyssalFlameScroll : SpellScroll
 	{
 		[Constructable]
 		public AbyssalFlameScroll() : this( 1 )

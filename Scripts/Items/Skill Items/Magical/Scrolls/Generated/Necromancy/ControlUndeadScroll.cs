@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class ControlUndeadScrollScroll : SpellScroll
+	public class ControlUndeadScroll : SpellScroll
 	{
 		[Constructable]
 		public ControlUndeadScroll() : this( 1 )

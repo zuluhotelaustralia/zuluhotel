@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class CallLightningScrollScroll : SpellScroll
+	public class CallLightningScroll : SpellScroll
 	{
 		[Constructable]
 		public CallLightningScroll() : this( 1 )

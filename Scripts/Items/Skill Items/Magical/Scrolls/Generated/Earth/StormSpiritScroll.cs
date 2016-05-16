@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class StormSpiritScrollScroll : SpellScroll
+	public class StormSpiritScroll : SpellScroll
 	{
 		[Constructable]
 		public StormSpiritScroll() : this( 1 )

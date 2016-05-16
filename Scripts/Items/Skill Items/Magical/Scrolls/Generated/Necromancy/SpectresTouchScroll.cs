@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class SpectresTouchScrollScroll : SpellScroll
+	public class SpectresTouchScroll : SpellScroll
 	{
 		[Constructable]
 		public SpectresTouchScroll() : this( 1 )
