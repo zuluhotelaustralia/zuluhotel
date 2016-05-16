@@ -20,7 +20,7 @@ namespace Server.Mobiles
     [PropertyObject]
     public class Spec
     {
-	private PlayerMobile m; //store the parent obj
+	private PlayerMobile m_Parent; //store the parent obj
 	private Skills m_ClassSkills;
 
 	private int m_SpecLevel;
@@ -69,8 +69,8 @@ namespace Server.Mobiles
 	//constructor needs a reference to the parent playermobile obj.
 	public Spec(PlayerMobile parent)
 	{
-	    this.m = parent;
-	    m_ClassSkills = m.Skills;
+	    m_Parent = parent;
+	    m_ClassSkills = m_Parent.Skills;
 	    m_SpecName = SpecName.None;
 	    m_SpecLevel = 0;
 	}

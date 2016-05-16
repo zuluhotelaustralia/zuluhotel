@@ -3253,6 +3253,11 @@ namespace Server.Mobiles
 
 	    switch ( version )
 	    {
+		case 30:
+		    {
+			m_Spec = new Spec(this);
+			goto case 29;
+		    }
 		case 29:
 		    {
 			if (reader.ReadBool())
@@ -3567,7 +3572,7 @@ namespace Server.Mobiles
 
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 29 ); // version
+	    writer.Write( (int) 30 ); // version
 
 	    if (m_StuckMenuUses != null)
 	    {

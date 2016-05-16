@@ -19,11 +19,13 @@ namespace Server {
   
     public class ActualDamageScalar : DamageScalar {
 	
-	public ActualDamageScalar() {
+	public ActualDamageScalar() : base() {
 	}
 
 	public static void Initialize() {
+	    System.Console.WriteLine("Initializing new Damage Scalar object...");
 	    Mobile.DamageScalar = new ActualDamageScalar();
+	    System.Console.WriteLine("Done!");
 	}
 	
 	// we are scaling damage _received_ here, not dealt.

@@ -94,12 +94,12 @@ namespace Server.Spells.Necromancy
 	    for ( int z=10; z>=0; z-- )
 	    {
 		Point3D loc = new Point3D( m.X, m.Y, z);
-		bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 100, false );
+		bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 0, false );
 
 		m.PlaySound(0x11);
 
-		if ( !canFit )
-		    continue;
+		//if ( !canFit )
+		//    continue;
 
 		new InternalItem( loc, m.Map, Caster, waterfall[0], 5);
 		new InternalItem( loc, m.Map, Caster, waterfall[1], 5);
