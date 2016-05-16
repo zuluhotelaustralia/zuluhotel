@@ -94,7 +94,7 @@ namespace Server.Spells.Necromancy
 	    for ( int z=10; z>=0; z-- )
 	    {
 		Point3D loc = new Point3D( m.X, m.Y, z);
-		bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 1, false );
+		bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 100, false );
 
 		m.PlaySound(0x11);
 

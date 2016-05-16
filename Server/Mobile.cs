@@ -7629,7 +7629,7 @@ namespace Server
 	{
 	    get
 	    {
-		return 50 + (Str / 2);
+		return Str;
 	    }
 	}
 
