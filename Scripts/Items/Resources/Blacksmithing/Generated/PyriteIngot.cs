@@ -11,7 +11,7 @@ public class PyriteIngot : BaseIngot
         }
 
         [Constructable]
-        public PyriteIngot( int amount ) : base( CraftResource.Iron, amount )
+        public PyriteIngot( int amount ) : base( CraftResource.Pyrite, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class PyriteIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Pyrite ingot");
         }
 }
 

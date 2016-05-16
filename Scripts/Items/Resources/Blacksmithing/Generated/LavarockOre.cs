@@ -10,7 +10,7 @@ public class LavarockOre : BaseOre
         }
 
         [Constructable]
-        public LavarockOre( int amount ) : base( CraftResource.Iron, amount )
+        public LavarockOre( int amount ) : base( CraftResource.Lavarock, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class LavarockOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new LavarockIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Lavarock ore");
         }
 }
 

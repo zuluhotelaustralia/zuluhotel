@@ -10,7 +10,7 @@ public class SpectralOre : BaseOre
         }
 
         [Constructable]
-        public SpectralOre( int amount ) : base( CraftResource.Iron, amount )
+        public SpectralOre( int amount ) : base( CraftResource.Spectral, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class SpectralOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new SpectralIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Spectral ore");
         }
 }
 

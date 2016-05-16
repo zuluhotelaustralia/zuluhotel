@@ -10,7 +10,7 @@ public class DestructionOre : BaseOre
         }
 
         [Constructable]
-        public DestructionOre( int amount ) : base( CraftResource.Iron, amount )
+        public DestructionOre( int amount ) : base( CraftResource.Destruction, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class DestructionOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new DestructionIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Destruction ore");
         }
 }
 

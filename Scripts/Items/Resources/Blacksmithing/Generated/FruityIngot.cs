@@ -11,7 +11,7 @@ public class FruityIngot : BaseIngot
         }
 
         [Constructable]
-        public FruityIngot( int amount ) : base( CraftResource.Iron, amount )
+        public FruityIngot( int amount ) : base( CraftResource.Fruity, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class FruityIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Fruity ingot");
         }
 }
 

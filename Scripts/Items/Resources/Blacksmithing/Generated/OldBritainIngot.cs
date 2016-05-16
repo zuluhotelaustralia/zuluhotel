@@ -11,7 +11,7 @@ public class OldBritainIngot : BaseIngot
         }
 
         [Constructable]
-        public OldBritainIngot( int amount ) : base( CraftResource.Iron, amount )
+        public OldBritainIngot( int amount ) : base( CraftResource.OldBritain, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class OldBritainIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("OldBritain ingot");
         }
 }
 

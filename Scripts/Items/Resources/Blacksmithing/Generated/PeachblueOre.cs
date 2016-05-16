@@ -10,7 +10,7 @@ public class PeachblueOre : BaseOre
         }
 
         [Constructable]
-        public PeachblueOre( int amount ) : base( CraftResource.Iron, amount )
+        public PeachblueOre( int amount ) : base( CraftResource.Peachblue, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class PeachblueOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new PeachblueIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Peachblue ore");
         }
 }
 

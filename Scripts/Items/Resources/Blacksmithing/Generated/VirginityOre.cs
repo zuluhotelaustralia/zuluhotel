@@ -10,7 +10,7 @@ public class VirginityOre : BaseOre
         }
 
         [Constructable]
-        public VirginityOre( int amount ) : base( CraftResource.Iron, amount )
+        public VirginityOre( int amount ) : base( CraftResource.Virginity, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class VirginityOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new VirginityIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Virginity ore");
         }
 }
 

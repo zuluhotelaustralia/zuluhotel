@@ -10,7 +10,7 @@ public class MysticOre : BaseOre
         }
 
         [Constructable]
-        public MysticOre( int amount ) : base( CraftResource.Iron, amount )
+        public MysticOre( int amount ) : base( CraftResource.Mystic, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class MysticOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new MysticIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Mystic ore");
         }
 }
 

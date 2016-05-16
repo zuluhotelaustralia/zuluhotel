@@ -11,7 +11,7 @@ public class IceRockIngot : BaseIngot
         }
 
         [Constructable]
-        public IceRockIngot( int amount ) : base( CraftResource.Iron, amount )
+        public IceRockIngot( int amount ) : base( CraftResource.IceRock, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class IceRockIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("IceRock ingot");
         }
 }
 

@@ -10,7 +10,7 @@ public class AnraOre : BaseOre
         }
 
         [Constructable]
-        public AnraOre( int amount ) : base( CraftResource.Iron, amount )
+        public AnraOre( int amount ) : base( CraftResource.Anra, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class AnraOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new AnraIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Anra ore");
         }
 }
 

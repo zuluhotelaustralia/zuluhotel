@@ -11,7 +11,7 @@ public class MalachiteIngot : BaseIngot
         }
 
         [Constructable]
-        public MalachiteIngot( int amount ) : base( CraftResource.Iron, amount )
+        public MalachiteIngot( int amount ) : base( CraftResource.Malachite, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class MalachiteIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Malachite ingot");
         }
 }
 

@@ -10,7 +10,7 @@ public class CrystalOre : BaseOre
         }
 
         [Constructable]
-        public CrystalOre( int amount ) : base( CraftResource.Iron, amount )
+        public CrystalOre( int amount ) : base( CraftResource.Crystal, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class CrystalOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new CrystalIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Crystal ore");
         }
 }
 

@@ -10,7 +10,7 @@ public class <%= this.className %>Ore : BaseOre
         }
 
         [Constructable]
-        public <%= this.className %>Ore( int amount ) : base( CraftResource.Iron, amount )
+        public <%= this.className %>Ore( int amount ) : base( CraftResource.<%= this.name %>, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class <%= this.className %>Ore : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new <%= this.className %>Ingot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("<%= this.name %> ore");
         }
 }
 

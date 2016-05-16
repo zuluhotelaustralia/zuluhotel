@@ -10,7 +10,7 @@ public class DoomOre : BaseOre
         }
 
         [Constructable]
-        public DoomOre( int amount ) : base( CraftResource.Iron, amount )
+        public DoomOre( int amount ) : base( CraftResource.Doom, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class DoomOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new DoomIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Doom ore");
         }
 }
 

@@ -11,7 +11,7 @@ public class EbonTwilightSapphireIngot : BaseIngot
         }
 
         [Constructable]
-        public EbonTwilightSapphireIngot( int amount ) : base( CraftResource.Iron, amount )
+        public EbonTwilightSapphireIngot( int amount ) : base( CraftResource.EbonTwilightSapphire, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class EbonTwilightSapphireIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("EbonTwilightSapphire ingot");
         }
 }
 

@@ -11,7 +11,7 @@ public class MysticIngot : BaseIngot
         }
 
         [Constructable]
-        public MysticIngot( int amount ) : base( CraftResource.Iron, amount )
+        public MysticIngot( int amount ) : base( CraftResource.Mystic, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class MysticIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Mystic ingot");
         }
 }
 

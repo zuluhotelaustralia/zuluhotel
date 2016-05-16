@@ -11,7 +11,7 @@ public class CopperIngot : BaseIngot
         }
 
         [Constructable]
-        public CopperIngot( int amount ) : base( CraftResource.Iron, amount )
+        public CopperIngot( int amount ) : base( CraftResource.Copper, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class CopperIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Copper ingot");
         }
 }
 

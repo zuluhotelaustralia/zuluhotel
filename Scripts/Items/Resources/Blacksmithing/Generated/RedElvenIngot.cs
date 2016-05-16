@@ -11,7 +11,7 @@ public class RedElvenIngot : BaseIngot
         }
 
         [Constructable]
-        public RedElvenIngot( int amount ) : base( CraftResource.Iron, amount )
+        public RedElvenIngot( int amount ) : base( CraftResource.RedElven, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class RedElvenIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("RedElven ingot");
         }
 }
 

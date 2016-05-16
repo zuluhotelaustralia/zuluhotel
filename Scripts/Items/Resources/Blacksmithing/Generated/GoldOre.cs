@@ -10,7 +10,7 @@ public class GoldOre : BaseOre
         }
 
         [Constructable]
-        public GoldOre( int amount ) : base( CraftResource.Iron, amount )
+        public GoldOre( int amount ) : base( CraftResource.Gold, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class GoldOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new GoldIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Gold ore");
         }
 }
 

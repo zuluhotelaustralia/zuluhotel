@@ -10,7 +10,7 @@ public class NewZuluOre : BaseOre
         }
 
         [Constructable]
-        public NewZuluOre( int amount ) : base( CraftResource.Iron, amount )
+        public NewZuluOre( int amount ) : base( CraftResource.NewZulu, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class NewZuluOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new NewZuluIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("NewZulu ore");
         }
 }
 

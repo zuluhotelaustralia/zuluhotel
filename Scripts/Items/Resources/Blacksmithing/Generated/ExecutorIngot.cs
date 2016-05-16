@@ -11,7 +11,7 @@ public class ExecutorIngot : BaseIngot
         }
 
         [Constructable]
-        public ExecutorIngot( int amount ) : base( CraftResource.Iron, amount )
+        public ExecutorIngot( int amount ) : base( CraftResource.Executor, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class ExecutorIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Executor ingot");
         }
 }
 

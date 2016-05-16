@@ -10,7 +10,7 @@ public class OnyxOre : BaseOre
         }
 
         [Constructable]
-        public OnyxOre( int amount ) : base( CraftResource.Iron, amount )
+        public OnyxOre( int amount ) : base( CraftResource.Onyx, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class OnyxOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new OnyxIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Onyx ore");
         }
 }
 

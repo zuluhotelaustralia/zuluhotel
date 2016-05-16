@@ -11,7 +11,7 @@ public class SpectralIngot : BaseIngot
         }
 
         [Constructable]
-        public SpectralIngot( int amount ) : base( CraftResource.Iron, amount )
+        public SpectralIngot( int amount ) : base( CraftResource.Spectral, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class SpectralIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Spectral ingot");
         }
 }
 

@@ -11,7 +11,7 @@ public class OnyxIngot : BaseIngot
         }
 
         [Constructable]
-        public OnyxIngot( int amount ) : base( CraftResource.Iron, amount )
+        public OnyxIngot( int amount ) : base( CraftResource.Onyx, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class OnyxIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Onyx ingot");
         }
 }
 

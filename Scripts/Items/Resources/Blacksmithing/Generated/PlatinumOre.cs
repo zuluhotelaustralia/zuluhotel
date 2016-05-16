@@ -10,7 +10,7 @@ public class PlatinumOre : BaseOre
         }
 
         [Constructable]
-        public PlatinumOre( int amount ) : base( CraftResource.Iron, amount )
+        public PlatinumOre( int amount ) : base( CraftResource.Platinum, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class PlatinumOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new PlatinumIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Platinum ore");
         }
 }
 

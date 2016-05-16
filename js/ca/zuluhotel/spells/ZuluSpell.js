@@ -41,12 +41,21 @@ CLASS({
       defaultValueFn: function() { return this.name + 'Spell'; }
     },
     {
+      name: 'scrollName',
+      defaultValueFn: function() { return this.name + 'Scroll'; }
+    },
+    {
       name: 'harmful',
       type: 'Boolean',
       defaultValue: true
+    },
+    {
+      type: 'Int',
+      name: 'spellId'
     }
   ],
   templates: [
-    { name: 'toCS' }
+    { name: 'toCS' },
+    { name: 'toScroll' }
   ]
 });

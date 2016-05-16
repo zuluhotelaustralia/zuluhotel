@@ -37,17 +37,37 @@ CLASS({
     }
   ],
   methods: [
+    function ensurePath(p) {
+      var path = p.split(this.path.sep);
+      var s = path[0];
+      for ( var i = 1 ; i <= path.length ; s += this.path.sep + path[i++] ) {
+        console.log("Checking", s);
+        try {
+          var stat = this.fs.statSync(s);
+          if ( ! stat.isDirectory ) {
+            throw new Error(s, " is a file, cannot create subdirectory under a file");
+          }
+        } catch(e) {
+          if ( e.code && e.code == 'ENOENT' ) {
+            this.fs.mkdirSync(s);
+          } else {
+            throw e;
+          }
+        }
+      }
+    },
     function execute() {
-      console.log("Generation currently disabled.");
       this.dao.select({
         put: function(spell) {
-	  console.log("Found spell", spell.name, spell.wordsOfPower);
-	  return;
+//          var dest = this.outpath + this.path.sep + spell.type + this.path.sep + spell.className + '.cs';
 
-          var dest = this.outpath + this.path.sep + spell.type + this.path.sep + spell.className + '.cs';
+          //          this.fs.writeFileSync(dest, spell.toCS());
 
+          var base = this.outpath + this.path.sep + spell.type + this.path.sep;
+          var dest = base + spell.scrollName + '.cs';
+          this.ensurePath(base);
           console.log("Writing ", dest);
-          this.fs.writeFileSync(dest, spell.toCS());
+          this.fs.writeFileSync(dest, spell.toScroll());
         }.bind(this),
         eof: function() {
           process.exit(0);

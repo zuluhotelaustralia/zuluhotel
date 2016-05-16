@@ -11,7 +11,7 @@ public class DarkPaganIngot : BaseIngot
         }
 
         [Constructable]
-        public DarkPaganIngot( int amount ) : base( CraftResource.Iron, amount )
+        public DarkPaganIngot( int amount ) : base( CraftResource.DarkPagan, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class DarkPaganIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("DarkPagan ingot");
         }
 }
 

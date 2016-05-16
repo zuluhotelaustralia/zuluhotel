@@ -10,7 +10,7 @@ public class SpikeOre : BaseOre
         }
 
         [Constructable]
-        public SpikeOre( int amount ) : base( CraftResource.Iron, amount )
+        public SpikeOre( int amount ) : base( CraftResource.Spike, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class SpikeOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new SpikeIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Spike ore");
         }
 }
 

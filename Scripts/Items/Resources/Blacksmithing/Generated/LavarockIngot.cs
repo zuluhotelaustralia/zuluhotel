@@ -11,7 +11,7 @@ public class LavarockIngot : BaseIngot
         }
 
         [Constructable]
-        public LavarockIngot( int amount ) : base( CraftResource.Iron, amount )
+        public LavarockIngot( int amount ) : base( CraftResource.Lavarock, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class LavarockIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Lavarock ingot");
         }
 }
 

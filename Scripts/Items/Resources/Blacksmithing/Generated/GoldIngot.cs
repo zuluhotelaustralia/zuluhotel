@@ -11,7 +11,7 @@ public class GoldIngot : BaseIngot
         }
 
         [Constructable]
-        public GoldIngot( int amount ) : base( CraftResource.Iron, amount )
+        public GoldIngot( int amount ) : base( CraftResource.Gold, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class GoldIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Gold ingot");
         }
 }
 

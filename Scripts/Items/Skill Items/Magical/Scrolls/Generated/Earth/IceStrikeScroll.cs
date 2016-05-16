@@ -4,19 +4,19 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class SorcerorsBaneScroll : SpellScroll
+	public class IceStrikeScroll : SpellScroll
 	{
 		[Constructable]
-		public SorcerorsBaneScroll() : this( 1 )
+		public IceStrikeScroll() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public SorcerorsBaneScroll( int amount ) : base( 108, 0x2260, amount )
+		public IceStrikeScroll( int amount ) : base( 613, 0x2260, amount )
 		{
 		}
 
-		public SorcerorsBaneScroll( Serial serial ) : base( serial )
+		public IceStrikeScroll( Serial serial ) : base( serial )
 		{
 		}
 
@@ -34,6 +34,6 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 
-		
+
 	}
 }
