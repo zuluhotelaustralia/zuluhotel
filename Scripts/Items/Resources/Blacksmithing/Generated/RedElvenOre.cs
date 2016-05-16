@@ -10,7 +10,7 @@ public class RedElvenOre : BaseOre
         }
 
         [Constructable]
-        public RedElvenOre( int amount ) : base( CraftResource.Iron, amount )
+        public RedElvenOre( int amount ) : base( CraftResource.RedElven, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class RedElvenOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new RedElvenIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("RedElven ore");
         }
 }
 

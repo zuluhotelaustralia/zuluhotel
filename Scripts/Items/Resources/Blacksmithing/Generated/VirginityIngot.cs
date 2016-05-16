@@ -11,7 +11,7 @@ public class VirginityIngot : BaseIngot
         }
 
         [Constructable]
-        public VirginityIngot( int amount ) : base( CraftResource.Iron, amount )
+        public VirginityIngot( int amount ) : base( CraftResource.Virginity, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class VirginityIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Virginity ingot");
         }
 }
 

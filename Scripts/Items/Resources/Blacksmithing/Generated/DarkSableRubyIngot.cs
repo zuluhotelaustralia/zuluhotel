@@ -11,7 +11,7 @@ public class DarkSableRubyIngot : BaseIngot
         }
 
         [Constructable]
-        public DarkSableRubyIngot( int amount ) : base( CraftResource.Iron, amount )
+        public DarkSableRubyIngot( int amount ) : base( CraftResource.DarkSableRuby, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class DarkSableRubyIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("DarkSableRuby ingot");
         }
 }
 

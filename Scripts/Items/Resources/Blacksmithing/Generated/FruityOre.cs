@@ -10,7 +10,7 @@ public class FruityOre : BaseOre
         }
 
         [Constructable]
-        public FruityOre( int amount ) : base( CraftResource.Iron, amount )
+        public FruityOre( int amount ) : base( CraftResource.Fruity, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class FruityOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new FruityIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Fruity ore");
         }
 }
 

@@ -10,7 +10,7 @@ public class DullCopperOre : BaseOre
         }
 
         [Constructable]
-        public DullCopperOre( int amount ) : base( CraftResource.Iron, amount )
+        public DullCopperOre( int amount ) : base( CraftResource.DullCopper, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class DullCopperOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new DullCopperIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("DullCopper ore");
         }
 }
 

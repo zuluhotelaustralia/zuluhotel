@@ -10,7 +10,7 @@ public class OldBritainOre : BaseOre
         }
 
         [Constructable]
-        public OldBritainOre( int amount ) : base( CraftResource.Iron, amount )
+        public OldBritainOre( int amount ) : base( CraftResource.OldBritain, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class OldBritainOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new OldBritainIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("OldBritain ore");
         }
 }
 

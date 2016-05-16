@@ -10,7 +10,7 @@ public class CopperOre : BaseOre
         }
 
         [Constructable]
-        public CopperOre( int amount ) : base( CraftResource.Iron, amount )
+        public CopperOre( int amount ) : base( CraftResource.Copper, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class CopperOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new CopperIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Copper ore");
         }
 }
 

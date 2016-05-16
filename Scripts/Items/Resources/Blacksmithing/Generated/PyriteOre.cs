@@ -10,7 +10,7 @@ public class PyriteOre : BaseOre
         }
 
         [Constructable]
-        public PyriteOre( int amount ) : base( CraftResource.Iron, amount )
+        public PyriteOre( int amount ) : base( CraftResource.Pyrite, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class PyriteOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new PyriteIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Pyrite ore");
         }
 }
 

@@ -11,7 +11,7 @@ public class AnraIngot : BaseIngot
         }
 
         [Constructable]
-        public AnraIngot( int amount ) : base( CraftResource.Iron, amount )
+        public AnraIngot( int amount ) : base( CraftResource.Anra, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class AnraIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Anra ingot");
         }
 }
 

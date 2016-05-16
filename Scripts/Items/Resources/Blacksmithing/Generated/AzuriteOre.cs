@@ -10,7 +10,7 @@ public class AzuriteOre : BaseOre
         }
 
         [Constructable]
-        public AzuriteOre( int amount ) : base( CraftResource.Iron, amount )
+        public AzuriteOre( int amount ) : base( CraftResource.Azurite, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class AzuriteOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new AzuriteIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Azurite ore");
         }
 }
 

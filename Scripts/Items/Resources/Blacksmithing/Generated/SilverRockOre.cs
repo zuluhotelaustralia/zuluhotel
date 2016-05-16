@@ -10,7 +10,7 @@ public class SilverRockOre : BaseOre
         }
 
         [Constructable]
-        public SilverRockOre( int amount ) : base( CraftResource.Iron, amount )
+        public SilverRockOre( int amount ) : base( CraftResource.SilverRock, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class SilverRockOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new SilverRockIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("SilverRock ore");
         }
 }
 

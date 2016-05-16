@@ -10,7 +10,7 @@ public class DarkPaganOre : BaseOre
         }
 
         [Constructable]
-        public DarkPaganOre( int amount ) : base( CraftResource.Iron, amount )
+        public DarkPaganOre( int amount ) : base( CraftResource.DarkPagan, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class DarkPaganOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new DarkPaganIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("DarkPagan ore");
         }
 }
 

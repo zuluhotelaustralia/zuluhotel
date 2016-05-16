@@ -11,7 +11,7 @@ public class <%= this.className %>Ingot : BaseIngot
         }
 
         [Constructable]
-        public <%= this.className %>Ingot( int amount ) : base( CraftResource.Iron, amount )
+        public <%= this.className %>Ingot( int amount ) : base( CraftResource.<%= this.name %>, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class <%= this.className %>Ingot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("<%= this.name %> ingot");
         }
 }
 

@@ -11,7 +11,7 @@ public class PlatinumIngot : BaseIngot
         }
 
         [Constructable]
-        public PlatinumIngot( int amount ) : base( CraftResource.Iron, amount )
+        public PlatinumIngot( int amount ) : base( CraftResource.Platinum, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class PlatinumIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Platinum ingot");
         }
 }
 

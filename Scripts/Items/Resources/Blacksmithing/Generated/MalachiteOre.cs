@@ -10,7 +10,7 @@ public class MalachiteOre : BaseOre
         }
 
         [Constructable]
-        public MalachiteOre( int amount ) : base( CraftResource.Iron, amount )
+        public MalachiteOre( int amount ) : base( CraftResource.Malachite, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class MalachiteOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new MalachiteIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Malachite ore");
         }
 }
 

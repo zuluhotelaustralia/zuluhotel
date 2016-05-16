@@ -11,7 +11,7 @@ public class PeachblueIngot : BaseIngot
         }
 
         [Constructable]
-        public PeachblueIngot( int amount ) : base( CraftResource.Iron, amount )
+        public PeachblueIngot( int amount ) : base( CraftResource.Peachblue, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class PeachblueIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Peachblue ingot");
         }
 }
 

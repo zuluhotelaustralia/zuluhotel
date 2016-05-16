@@ -11,7 +11,7 @@ public class DripstoneIngot : BaseIngot
         }
 
         [Constructable]
-        public DripstoneIngot( int amount ) : base( CraftResource.Iron, amount )
+        public DripstoneIngot( int amount ) : base( CraftResource.Dripstone, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class DripstoneIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Dripstone ingot");
         }
 }
 

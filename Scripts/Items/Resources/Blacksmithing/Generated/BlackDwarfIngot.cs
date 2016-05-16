@@ -11,7 +11,7 @@ public class BlackDwarfIngot : BaseIngot
         }
 
         [Constructable]
-        public BlackDwarfIngot( int amount ) : base( CraftResource.Iron, amount )
+        public BlackDwarfIngot( int amount ) : base( CraftResource.BlackDwarf, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class BlackDwarfIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("BlackDwarf ingot");
         }
 }
 

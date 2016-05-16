@@ -11,7 +11,7 @@ public class CrystalIngot : BaseIngot
         }
 
         [Constructable]
-        public CrystalIngot( int amount ) : base( CraftResource.Iron, amount )
+        public CrystalIngot( int amount ) : base( CraftResource.Crystal, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class CrystalIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Crystal ingot");
         }
 }
 

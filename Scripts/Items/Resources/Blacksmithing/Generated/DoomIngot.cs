@@ -11,7 +11,7 @@ public class DoomIngot : BaseIngot
         }
 
         [Constructable]
-        public DoomIngot( int amount ) : base( CraftResource.Iron, amount )
+        public DoomIngot( int amount ) : base( CraftResource.Doom, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class DoomIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Doom ingot");
         }
 }
 

@@ -11,7 +11,7 @@ public class SilverRockIngot : BaseIngot
         }
 
         [Constructable]
-        public SilverRockIngot( int amount ) : base( CraftResource.Iron, amount )
+        public SilverRockIngot( int amount ) : base( CraftResource.SilverRock, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class SilverRockIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("SilverRock ingot");
         }
 }
 

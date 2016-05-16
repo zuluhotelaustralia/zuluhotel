@@ -11,7 +11,7 @@ public class DullCopperIngot : BaseIngot
         }
 
         [Constructable]
-        public DullCopperIngot( int amount ) : base( CraftResource.Iron, amount )
+        public DullCopperIngot( int amount ) : base( CraftResource.DullCopper, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class DullCopperIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("DullCopper ingot");
         }
 }
 

@@ -11,7 +11,7 @@ public class SpikeIngot : BaseIngot
         }
 
         [Constructable]
-        public SpikeIngot( int amount ) : base( CraftResource.Iron, amount )
+        public SpikeIngot( int amount ) : base( CraftResource.Spike, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class SpikeIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Spike ingot");
         }
 }
 

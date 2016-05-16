@@ -42,6 +42,11 @@ public class IronOre : BaseOre
         {
                 return new IronIngot();
         }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Iron ore");
+        }
 }
 
 }

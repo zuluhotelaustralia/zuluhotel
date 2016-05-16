@@ -10,7 +10,7 @@ public class DarkSableRubyOre : BaseOre
         }
 
         [Constructable]
-        public DarkSableRubyOre( int amount ) : base( CraftResource.Iron, amount )
+        public DarkSableRubyOre( int amount ) : base( CraftResource.DarkSableRuby, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class DarkSableRubyOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new DarkSableRubyIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("DarkSableRuby ore");
         }
 }
 

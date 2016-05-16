@@ -10,7 +10,7 @@ public class IceRockOre : BaseOre
         }
 
         [Constructable]
-        public IceRockOre( int amount ) : base( CraftResource.Iron, amount )
+        public IceRockOre( int amount ) : base( CraftResource.IceRock, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class IceRockOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new IceRockIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("IceRock ore");
         }
 }
 

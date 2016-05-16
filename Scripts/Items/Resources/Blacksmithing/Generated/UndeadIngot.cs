@@ -11,7 +11,7 @@ public class UndeadIngot : BaseIngot
         }
 
         [Constructable]
-        public UndeadIngot( int amount ) : base( CraftResource.Iron, amount )
+        public UndeadIngot( int amount ) : base( CraftResource.Undead, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class UndeadIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Undead ingot");
         }
 }
 

@@ -10,7 +10,7 @@ public class GoddessOre : BaseOre
         }
 
         [Constructable]
-        public GoddessOre( int amount ) : base( CraftResource.Iron, amount )
+        public GoddessOre( int amount ) : base( CraftResource.Goddess, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class GoddessOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new GoddessIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Goddess ore");
         }
 }
 

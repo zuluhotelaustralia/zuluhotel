@@ -10,7 +10,7 @@ public class EbonTwilightSapphireOre : BaseOre
         }
 
         [Constructable]
-        public EbonTwilightSapphireOre( int amount ) : base( CraftResource.Iron, amount )
+        public EbonTwilightSapphireOre( int amount ) : base( CraftResource.EbonTwilightSapphire, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class EbonTwilightSapphireOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new EbonTwilightSapphireIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("EbonTwilightSapphire ore");
         }
 }
 

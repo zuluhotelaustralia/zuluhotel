@@ -10,7 +10,7 @@ public class BlackDwarfOre : BaseOre
         }
 
         [Constructable]
-        public BlackDwarfOre( int amount ) : base( CraftResource.Iron, amount )
+        public BlackDwarfOre( int amount ) : base( CraftResource.BlackDwarf, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class BlackDwarfOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new BlackDwarfIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("BlackDwarf ore");
         }
 }
 

@@ -11,7 +11,7 @@ public class DestructionIngot : BaseIngot
         }
 
         [Constructable]
-        public DestructionIngot( int amount ) : base( CraftResource.Iron, amount )
+        public DestructionIngot( int amount ) : base( CraftResource.Destruction, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class DestructionIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Destruction ingot");
         }
 }
 

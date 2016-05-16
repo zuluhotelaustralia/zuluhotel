@@ -10,7 +10,7 @@ public class ExecutorOre : BaseOre
         }
 
         [Constructable]
-        public ExecutorOre( int amount ) : base( CraftResource.Iron, amount )
+        public ExecutorOre( int amount ) : base( CraftResource.Executor, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class ExecutorOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new ExecutorIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Executor ore");
         }
 }
 

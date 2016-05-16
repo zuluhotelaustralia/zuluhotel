@@ -10,7 +10,7 @@ public class UndeadOre : BaseOre
         }
 
         [Constructable]
-        public UndeadOre( int amount ) : base( CraftResource.Iron, amount )
+        public UndeadOre( int amount ) : base( CraftResource.Undead, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class UndeadOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new UndeadIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Undead ore");
         }
 }
 

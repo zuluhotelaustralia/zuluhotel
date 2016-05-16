@@ -10,7 +10,7 @@ public class DripstoneOre : BaseOre
         }
 
         [Constructable]
-        public DripstoneOre( int amount ) : base( CraftResource.Iron, amount )
+        public DripstoneOre( int amount ) : base( CraftResource.Dripstone, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class DripstoneOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new DripstoneIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("Dripstone ore");
         }
 }
 

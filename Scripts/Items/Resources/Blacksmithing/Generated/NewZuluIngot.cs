@@ -11,7 +11,7 @@ public class NewZuluIngot : BaseIngot
         }
 
         [Constructable]
-        public NewZuluIngot( int amount ) : base( CraftResource.Iron, amount )
+        public NewZuluIngot( int amount ) : base( CraftResource.NewZulu, amount )
         {
         }
 
@@ -37,6 +37,11 @@ public class NewZuluIngot : BaseIngot
         {
                 base.Deserialize( reader );
                 int version = reader.ReadInt();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("NewZulu ingot");
         }
 }
 

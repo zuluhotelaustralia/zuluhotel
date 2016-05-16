@@ -10,7 +10,7 @@ public class RadiantNimbusDiamondOre : BaseOre
         }
 
         [Constructable]
-        public RadiantNimbusDiamondOre( int amount ) : base( CraftResource.Iron, amount )
+        public RadiantNimbusDiamondOre( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount )
         {
         }
 
@@ -41,6 +41,11 @@ public class RadiantNimbusDiamondOre : BaseOre
         public override BaseIngot GetIngot()
         {
                 return new RadiantNimbusDiamondIngot();
+        }
+
+        public override void OnSingleClick( Mobile from )
+        {
+                from.SendMessage("RadiantNimbusDiamond ore");
         }
 }
 
