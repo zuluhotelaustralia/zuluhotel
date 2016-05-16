@@ -20,7 +20,7 @@ namespace Server.Spells.Necromancy
 							Reagent.Pumice, Reagent.DragonsBlood, Reagent.DeadWood
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }
 
         public override double RequiredSkill{ get{ return 0.0; } }
         public override int RequiredMana{ get{ return 0; } }
@@ -38,7 +38,9 @@ namespace Server.Spells.Necromancy
 	              xy++,     x++y, 
 	                  x++y++            }
 	    */
-	    
+
+	    //in hex:             { 3517, 34f9 } which are oriented: { \, /}
+	    waterfall = new int[] {13591, 13561};
         }
 
         public override void OnCast()
@@ -87,35 +89,130 @@ namespace Server.Spells.Necromancy
 
             Caster.DoHarmful( m );
 
-            new WaterfallTimer( m, Caster ).Start(); //this timer should wait half a second and then create the waterfall and the pool
-	    //it should then play the sound 0x11 on the caster
+	    //do the water column first
+	    for ( int z=10; z>=0; z-- )
+	    {
+		Point3D loc = new Point3D( m.X, m.Y, z);
+		bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 1, false );
+
+		m.PlaySound(0x11);
+
+		if ( !canFit )
+		    continue;
+
+		new InternalItem( loc, m.Map, Caster, waterfall[0], 5);
+		new InternalItem( loc, m.Map, Caster, waterfall[1], 5);
+
+		Effects.SendLocationParticles( item, 0x376A, 9, 10, 5025 );
+
+	    }
+	    //now the pool
+	    int poolnumber = 0;
+	    for (int y=-1; y>1; y++){
+		for (int x=-1; x>1; x++){
+		    Point3D loc = new Point3D(x, y, m.Z);
+		    new InternalItem( loc, m.Map, Caster, pool[poolnumber], 10); //yuck
+		}
+	    }
+		    
 	    //it should then start a second timer(s) to clean up the waterfall after 5 seconds and the pool at the base 5 seconds after that
 
         Return:
             FinishSequence();
         }
 
-        private class WaterfallTimer : Timer
-        {
-            private Mobile m_Target;
+	private class InternalItem : Item
+	{
+	    private Timer m_Timer;
+	    private DateTime m_End;
+	    private Mobile m_Caster;
+	    
+	    public override bool BlocksFit{ get{ return true; } }
 
-            public WaterfallTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
+	    public InternalItem( Point3D loc, Map map, Mobile caster, int id, int lifespan ) : base( id )
+	    {
+		Visible = true;
+		Movable = false;
 
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
+		MoveToWorld( loc, map );
 
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( SorcerorsBaneSpell ) );
-            }
-        }
+		m_Caster = caster;
+
+		m_Timer = new InternalTimer( this, TimeSpan.FromSeconds( lifespan ) );
+		m_Timer.Start();
+
+		m_End = DateTime.UtcNow + TimeSpan.FromSeconds( lifespan );
+	    }
+
+	    public InternalItem( Serial serial ) : base( serial )
+	    {
+	    }
+
+
+	    public override void OnAfterDelete()
+	    {
+		base.OnAfterDelete();
+
+		if ( m_Timer != null )
+		    m_Timer.Stop();
+	    }
+	    public override void Serialize( GenericWriter writer )
+	    {
+		base.Serialize( writer );
+
+		writer.Write( (int) 1 ); // version
+
+		writer.WriteDeltaTime( m_End );
+	    }
+
+	    public override void Deserialize( GenericReader reader )
+	    {
+		base.Deserialize( reader );
+
+		int version = reader.ReadInt();
+
+		switch ( version )
+		{
+		    case 1:
+			{
+			    m_End = reader.ReadDeltaTime();
+
+			    m_Timer = new InternalTimer( this, m_End - DateTime.UtcNow );
+			    m_Timer.Start();
+
+			    break;
+			}
+		    case 0:
+			{
+			    TimeSpan duration = TimeSpan.FromSeconds( 10.0 );
+
+			    m_Timer = new InternalTimer( this, duration );
+			    m_Timer.Start();
+
+			    m_End = DateTime.UtcNow + duration;
+
+			    break;
+			}
+		}
+	    }
+
+
+	    private class InternalTimer : Timer
+	    {
+		private InternalItem m_Item;
+
+		public InternalTimer( InternalItem item, TimeSpan duration ) : base( duration )
+		{
+		    Priority = TimerPriority.OneSecond;
+		    m_Item = item;
+		}
+
+		protected override void OnTick()
+		{
+		    m_Item.Delete();
+		}
+	    }
+	}
 
         private class InternalTarget : Target
         {
