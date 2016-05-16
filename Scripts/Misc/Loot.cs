@@ -248,15 +248,15 @@ namespace Server
 				typeof( SummonDaemonScroll ),	typeof( SummonEarthElementalScroll ),	typeof( SummonFireElementalScroll ),	typeof( SummonWaterElementalScroll )
 			};
 
-		// private static Type[] m_NecromancyScrollTypes = new Type[]
+	    private static Type[] m_NecromancyScrollTypes = new Type[0];
 		// 	{
 		// 		typeof( AnimateDeadScroll ),		typeof( BloodOathScroll ),		typeof( CorpseSkinScroll ),	typeof( CurseWeaponScroll ),
 		// 		typeof( EvilOmenScroll ),			typeof( HorrificBeastScroll ),	typeof( LichFormScroll ),	typeof( MindRotScroll ),
 		// 		typeof( PainSpikeScroll ),			typeof( PoisonStrikeScroll ),	typeof( StrangleScroll ),	typeof( SummonFamiliarScroll ),
 		// 		typeof( VampiricEmbraceScroll ),	typeof( VengefulSpiritScroll ),	typeof( WitherScroll ),		typeof( WraithFormScroll )
 		// 	};
-
-		// private static Type[] m_SENecromancyScrollTypes = new Type[]
+			
+	    private static Type[] m_SENecromancyScrollTypes = new Type[0];
 		// {
 		// 	typeof( AnimateDeadScroll ),		typeof( BloodOathScroll ),		typeof( CorpseSkinScroll ),	typeof( CurseWeaponScroll ),
 		// 	typeof( EvilOmenScroll ),			typeof( HorrificBeastScroll ),	typeof( LichFormScroll ),	typeof( MindRotScroll ),
