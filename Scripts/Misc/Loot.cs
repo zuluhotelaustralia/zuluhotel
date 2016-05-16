@@ -20,14 +20,14 @@ namespace Server
 			};
 
 		public static Type[] MLWeaponTypes{ get{ return m_MLWeaponTypes; } }
-		
+
 		private static Type[] m_MLRangedWeaponTypes = new Type[]
 			{
 				typeof( ElvenCompositeLongbow ),	typeof( MagicalShortbow )
 			};
 
 		public static Type[] MLRangedWeaponTypes{ get{ return m_MLRangedWeaponTypes; } }
-		
+
 		private static Type[] m_MLArmorTypes = new Type[]
 			{
 				typeof( Circlet ),				typeof( GemmedCirclet ),		typeof( LeafTonlet ),
@@ -255,7 +255,7 @@ namespace Server
 		// 		typeof( PainSpikeScroll ),			typeof( PoisonStrikeScroll ),	typeof( StrangleScroll ),	typeof( SummonFamiliarScroll ),
 		// 		typeof( VampiricEmbraceScroll ),	typeof( VengefulSpiritScroll ),	typeof( WitherScroll ),		typeof( WraithFormScroll )
 		// 	};
-			
+
 		// private static Type[] m_SENecromancyScrollTypes = new Type[]
 		// {
 		// 	typeof( AnimateDeadScroll ),		typeof( BloodOathScroll ),		typeof( CorpseSkinScroll ),	typeof( CurseWeaponScroll ),
@@ -268,13 +268,13 @@ namespace Server
 		private static Type[] m_PaladinScrollTypes = new Type[0];
 
 		#region Mondain's Legacy
-		private static Type[] m_ArcanistScrollTypes = new Type[]
-		{
-			typeof( ArcaneCircleScroll ),	typeof( GiftOfRenewalScroll ),	typeof( ImmolatingWeaponScroll ),	typeof( AttuneWeaponScroll ),
-			typeof( ThunderstormScroll ),	typeof( NatureFuryScroll ),		/*typeof( SummonFeyScroll ),			typeof( SummonFiendScroll ),*/
-			typeof( ReaperFormScroll ),		typeof( WildfireScroll ),		typeof( EssenceOfWindScroll ),		typeof( DryadAllureScroll ),
-			typeof( EtherealVoyageScroll ),	typeof( WordOfDeathScroll ),	typeof( GiftOfLifeScroll ),			typeof( ArcaneEmpowermentScroll )
-		};
+            private static Type[] m_ArcanistScrollTypes = new Type[0];
+		// {
+		// 	typeof( ArcaneCircleScroll ),	typeof( GiftOfRenewalScroll ),	typeof( ImmolatingWeaponScroll ),	typeof( AttuneWeaponScroll ),
+		// 	typeof( ThunderstormScroll ),	typeof( NatureFuryScroll ),		/*typeof( SummonFeyScroll ),			typeof( SummonFiendScroll ),*/
+		// 	typeof( ReaperFormScroll ),		typeof( WildfireScroll ),		typeof( EssenceOfWindScroll ),		typeof( DryadAllureScroll ),
+		// 	typeof( EtherealVoyageScroll ),	typeof( WordOfDeathScroll ),	typeof( GiftOfLifeScroll ),			typeof( ArcaneEmpowermentScroll )
+		// };
 		#endregion
 
 		public static Type[] RegularScrollTypes{ get{ return m_RegularScrollTypes; } }
@@ -327,7 +327,7 @@ namespace Server
 				typeof( ManaDrainWand ),	typeof( WeaknessWand )
 			};
 		public static Type[] WandTypes{ get{ return m_WandTypes; } }
-		
+
 		private static Type[] m_OldWandTypes = new Type[]
 			{
 				typeof( IDWand )
@@ -354,7 +354,7 @@ namespace Server
 
 		private static Type[] m_ClothingTypes = new Type[]
 			{
-				typeof( Cloak ),				
+				typeof( Cloak ),
 				typeof( Bonnet ),               typeof( Cap ),		            typeof( FeatheredHat ),
 				typeof( FloppyHat ),            typeof( JesterHat ),			typeof( Surcoat ),
 				typeof( SkullCap ),             typeof( StrawHat ),	            typeof( TallStrawHat ),
@@ -658,7 +658,7 @@ namespace Server
 
 			return Construct( m_WeaponTypes, m_RangedWeaponTypes, m_ArmorTypes, m_HatTypes, m_ShieldTypes, m_JewelryTypes );
 		}
-		
+
 		#region Chest of Heirlooms
 		public static Item ChestOfHeirloomsContains()
 		{
