@@ -12,6 +12,7 @@ namespace Server.Spells.Necromancy
 	protected const int waterfallNS = 13561; //0x34f9
 
 	protected int[] pool;
+	protected int[] waterfall;
 	
 	private static SpellInfo m_Info = new SpellInfo(
 							"Sorceror's Bane", "Fluctus Perturbo Magus Navitas",
@@ -102,9 +103,6 @@ namespace Server.Spells.Necromancy
 
 		new InternalItem( loc, m.Map, Caster, waterfall[0], 5);
 		new InternalItem( loc, m.Map, Caster, waterfall[1], 5);
-
-		Effects.SendLocationParticles( item, 0x376A, 9, 10, 5025 );
-
 	    }
 	    //now the pool
 	    int poolnumber = 0;
