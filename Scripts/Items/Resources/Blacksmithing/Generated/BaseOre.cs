@@ -269,7 +269,40 @@ namespace Server.Items
 					{
 						default: difficulty = 50.0; break;
 						case CraftResource.Iron: difficulty = 50; break;
+						case CraftResource.Gold: difficulty = 50; break;
+						case CraftResource.Spike: difficulty = 50; break;
+						case CraftResource.Fruity: difficulty = 50; break;
+						case CraftResource.Bronze: difficulty = 50; break;
+						case CraftResource.IceRock: difficulty = 50; break;
+						case CraftResource.BlackDwarf: difficulty = 50; break;
 						case CraftResource.DullCopper: difficulty = 50; break;
+						case CraftResource.Platinum: difficulty = 50; break;
+						case CraftResource.SilverRock: difficulty = 50; break;
+						case CraftResource.DarkPagan: difficulty = 50; break;
+						case CraftResource.Copper: difficulty = 50; break;
+						case CraftResource.Mystic: difficulty = 50; break;
+						case CraftResource.Spectral: difficulty = 50; break;
+						case CraftResource.OldBritain: difficulty = 50; break;
+						case CraftResource.Onyx: difficulty = 50; break;
+						case CraftResource.RedElven: difficulty = 50; break;
+						case CraftResource.Undead: difficulty = 50; break;
+						case CraftResource.Pyrite: difficulty = 50; break;
+						case CraftResource.Virginity: difficulty = 50; break;
+						case CraftResource.Malachite: difficulty = 50; break;
+						case CraftResource.Lavarock: difficulty = 50; break;
+						case CraftResource.Azurite: difficulty = 50; break;
+						case CraftResource.Dripstone: difficulty = 50; break;
+						case CraftResource.Executor: difficulty = 50; break;
+						case CraftResource.Peachblue: difficulty = 50; break;
+						case CraftResource.Destruction: difficulty = 50; break;
+						case CraftResource.Anra: difficulty = 50; break;
+						case CraftResource.Crystal: difficulty = 50; break;
+						case CraftResource.Doom: difficulty = 50; break;
+						case CraftResource.Goddess: difficulty = 50; break;
+						case CraftResource.NewZulu: difficulty = 50; break;
+						case CraftResource.DarkSableRuby: difficulty = 50; break;
+						case CraftResource.EbonTwilightSapphire: difficulty = 50; break;
+						case CraftResource.RadiantNimbusDiamond: difficulty = 50; break;
 					}
 
 					double minSkill = difficulty - 25.0;

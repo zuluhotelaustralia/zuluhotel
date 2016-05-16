@@ -76,7 +76,73 @@ namespace Server.Engines.Craft
 					{
                                                 case CraftResource.Iron: difficulty = 60; break;
 
+                                                case CraftResource.Gold: difficulty = 60; break;
+
+                                                case CraftResource.Spike: difficulty = 60; break;
+
+                                                case CraftResource.Fruity: difficulty = 60; break;
+
+                                                case CraftResource.Bronze: difficulty = 60; break;
+
+                                                case CraftResource.IceRock: difficulty = 60; break;
+
+                                                case CraftResource.BlackDwarf: difficulty = 60; break;
+
                                                 case CraftResource.DullCopper: difficulty = 60; break;
+
+                                                case CraftResource.Platinum: difficulty = 60; break;
+
+                                                case CraftResource.SilverRock: difficulty = 60; break;
+
+                                                case CraftResource.DarkPagan: difficulty = 60; break;
+
+                                                case CraftResource.Copper: difficulty = 60; break;
+
+                                                case CraftResource.Mystic: difficulty = 60; break;
+
+                                                case CraftResource.Spectral: difficulty = 60; break;
+
+                                                case CraftResource.OldBritain: difficulty = 60; break;
+
+                                                case CraftResource.Onyx: difficulty = 60; break;
+
+                                                case CraftResource.RedElven: difficulty = 60; break;
+
+                                                case CraftResource.Undead: difficulty = 60; break;
+
+                                                case CraftResource.Pyrite: difficulty = 60; break;
+
+                                                case CraftResource.Virginity: difficulty = 60; break;
+
+                                                case CraftResource.Malachite: difficulty = 60; break;
+
+                                                case CraftResource.Lavarock: difficulty = 60; break;
+
+                                                case CraftResource.Azurite: difficulty = 60; break;
+
+                                                case CraftResource.Dripstone: difficulty = 60; break;
+
+                                                case CraftResource.Executor: difficulty = 60; break;
+
+                                                case CraftResource.Peachblue: difficulty = 60; break;
+
+                                                case CraftResource.Destruction: difficulty = 60; break;
+
+                                                case CraftResource.Anra: difficulty = 60; break;
+
+                                                case CraftResource.Crystal: difficulty = 60; break;
+
+                                                case CraftResource.Doom: difficulty = 60; break;
+
+                                                case CraftResource.Goddess: difficulty = 60; break;
+
+                                                case CraftResource.NewZulu: difficulty = 60; break;
+
+                                                case CraftResource.DarkSableRuby: difficulty = 60; break;
+
+                                                case CraftResource.EbonTwilightSapphire: difficulty = 60; break;
+
+                                                case CraftResource.RadiantNimbusDiamond: difficulty = 60; break;
 
 					}
 
