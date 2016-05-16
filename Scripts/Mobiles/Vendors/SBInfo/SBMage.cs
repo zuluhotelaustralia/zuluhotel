@@ -24,7 +24,7 @@ namespace Server.Mobiles
 
 				if ( Core.AOS )
 					Add( new GenericBuyInfo( typeof( NecromancerSpellbook ), 115, 10, 0x2253, 0 ) );
-				
+
 				Add( new GenericBuyInfo( typeof( ScribesPen ), 8, 10, 0xFBF, 0 ) );
 
 				Add( new GenericBuyInfo( typeof( BlankScroll ), 5, 20, 0x0E34, 0 ) );
@@ -83,14 +83,14 @@ namespace Server.Mobiles
 			public InternalSellInfo()
 			{
 				Add( typeof( WizardsHat ), 15 );
-				Add( typeof( BlackPearl ), 3 ); 
-				Add( typeof( Bloodmoss ),4 ); 
-				Add( typeof( MandrakeRoot ), 2 ); 
-				Add( typeof( Garlic ), 2 ); 
-				Add( typeof( Ginseng ), 2 ); 
-				Add( typeof( Nightshade ), 2 ); 
-				Add( typeof( SpidersSilk ), 2 ); 
-				Add( typeof( SulfurousAsh ), 2 ); 
+				Add( typeof( BlackPearl ), 3 );
+				Add( typeof( Bloodmoss ),4 );
+				Add( typeof( MandrakeRoot ), 2 );
+				Add( typeof( Garlic ), 2 );
+				Add( typeof( Ginseng ), 2 );
+				Add( typeof( Nightshade ), 2 );
+				Add( typeof( SpidersSilk ), 2 );
+				Add( typeof( SulfurousAsh ), 2 );
 
 				if ( Core.AOS )
 				{
@@ -111,23 +111,23 @@ namespace Server.Mobiles
 
 				if ( Core.SE )
 				{
-					Add( typeof( ExorcismScroll ), 3 );
-					Add( typeof( AnimateDeadScroll ), 8 );
-					Add( typeof( BloodOathScroll ), 8 );
-					Add( typeof( CorpseSkinScroll ), 8 );
-					Add( typeof( CurseWeaponScroll ), 8 );
-					Add( typeof( EvilOmenScroll ), 8 );
-					Add( typeof( PainSpikeScroll ), 8 );
-					Add( typeof( SummonFamiliarScroll ), 8 );
-					Add( typeof( HorrificBeastScroll ), 8 );
-					Add( typeof( MindRotScroll ), 10 );
-					Add( typeof( PoisonStrikeScroll ), 10 );
-					Add( typeof( WraithFormScroll ), 15 );
-					Add( typeof( LichFormScroll ), 16 );
-					Add( typeof( StrangleScroll ), 16 );
-					Add( typeof( WitherScroll ), 16 );
-					Add( typeof( VampiricEmbraceScroll ), 20 );
-					Add( typeof( VengefulSpiritScroll ), 20 );
+					// Add( typeof( ExorcismScroll ), 3 );
+					// Add( typeof( AnimateDeadScroll ), 8 );
+					// Add( typeof( BloodOathScroll ), 8 );
+					// Add( typeof( CorpseSkinScroll ), 8 );
+					// Add( typeof( CurseWeaponScroll ), 8 );
+					// Add( typeof( EvilOmenScroll ), 8 );
+					// Add( typeof( PainSpikeScroll ), 8 );
+					// Add( typeof( SummonFamiliarScroll ), 8 );
+					// Add( typeof( HorrificBeastScroll ), 8 );
+					// Add( typeof( MindRotScroll ), 10 );
+					// Add( typeof( PoisonStrikeScroll ), 10 );
+					// Add( typeof( WraithFormScroll ), 15 );
+					// Add( typeof( LichFormScroll ), 16 );
+					// Add( typeof( StrangleScroll ), 16 );
+					// Add( typeof( WitherScroll ), 16 );
+					// Add( typeof( VampiricEmbraceScroll ), 20 );
+					// Add( typeof( VengefulSpiritScroll ), 20 );
 				}
 			}
 		}
