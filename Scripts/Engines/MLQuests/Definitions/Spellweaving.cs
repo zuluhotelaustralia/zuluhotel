@@ -150,9 +150,9 @@ namespace Server.Engines.MLQuests.Definitions
 			Objectives.Add( new KillObjective( 5, new Type[] { typeof( ExodusOverseer ) }, "Exodus Overseers" ) );
 			Objectives.Add( new KillObjective( 2, new Type[] { typeof( ExodusMinion ) }, "Exodus Minions" ) );
 
-			Rewards.Add( new ItemReward( 1031601, typeof( ArcaneCircleScroll ) ) ); // Arcane Circle
+//			Rewards.Add( new ItemReward( 1031601, typeof( ArcaneCircleScroll ) ) ); // Arcane Circle
 			Rewards.Add( new ItemReward( 1031600, typeof( SpellweavingBook ) ) ); // Spellweaving Spellbook
-			Rewards.Add( new ItemReward( 1031602, typeof( GiftOfRenewalScroll ) ) ); // Gift of Renewal
+//			Rewards.Add( new ItemReward( 1031602, typeof( GiftOfRenewalScroll ) ) ); // Gift of Renewal
 		}
 
 		public override void GetRewards( MLQuestInstance instance )
@@ -270,9 +270,9 @@ namespace Server.Engines.MLQuests.Definitions
 
 			Objectives.Add( new CollectObjective( 30, typeof( SeveredHumanEars ), 1032591 ) ); // severed human ears
 
-			Rewards.Add( new ItemReward( 1031601, typeof( ArcaneCircleScroll ) ) ); // Arcane Circle
+//			Rewards.Add( new ItemReward( 1031601, typeof( ArcaneCircleScroll ) ) ); // Arcane Circle
 			Rewards.Add( new ItemReward( 1031600, typeof( SpellweavingBook ) ) ); // Spellweaving Spellbook
-			Rewards.Add( new ItemReward( 1031602, typeof( GiftOfRenewalScroll ) ) ); // Gift of Renewal
+//			Rewards.Add( new ItemReward( 1031602, typeof( GiftOfRenewalScroll ) ) ); // Gift of Renewal
 		}
 
 		public override void GetRewards( MLQuestInstance instance )
@@ -349,7 +349,7 @@ namespace Server.Engines.MLQuests.Definitions
 
 			Objectives.Add( new KillObjective( 20, new Type[] { typeof( Reaper ) }, "reapers" ) );
 
-			Rewards.Add( new ItemReward( 1031607, typeof( SummonFeyScroll ) ) ); // Summon Fey
+//			Rewards.Add( new ItemReward( 1031607, typeof( SummonFeyScroll ) ) ); // Summon Fey
 		}
 
 		public override void GetRewards( MLQuestInstance instance )
@@ -429,7 +429,7 @@ namespace Server.Engines.MLQuests.Definitions
 
 			Objectives.Add( new KillObjective( 1, new Type[] { typeof( ArcaneDaemon ) }, 1029733 ) ); // arcane demon
 
-			Rewards.Add( new ItemReward( 1031608, typeof( SummonFiendScroll ) ) ); // Summon Fiend
+//			Rewards.Add( new ItemReward( 1031608, typeof( SummonFiendScroll ) ) ); // Summon Fiend
 		}
 
 		public override void GetRewards( MLQuestInstance instance )
