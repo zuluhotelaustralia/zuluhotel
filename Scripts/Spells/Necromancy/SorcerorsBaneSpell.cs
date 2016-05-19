@@ -127,13 +127,12 @@ namespace Server.Spells.Necromancy
 	    if ( CheckResisted( m ) )
 	    {
 		dmg *= 0.75;
-		
 		m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
-		m.Damage((int)dmg, m, DamageType.Water);
-
 		goto Return;
 	    }
-			
+
+	    m.Damage((int)dmg, m, DamageType.Water);
+
 	    int mana = (int)dmg;
 
 	    if( m.Mana >= mana ) {

@@ -3,6 +3,7 @@ using System.Collections;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
+using Server.Mobiles;
 
 namespace Server.Spells.Necromancy
 {
@@ -40,44 +41,56 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( WyvernStrikeSpell ) ) ) {
-                goto Return;
-            }
-
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+            m.FixedParticles( 0x3709, 10, 15, 5021, EffectLayer.Waist );
+	    m.PlaySound(0x1e2);
 
             Caster.DoHarmful( m );
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+	    int level = 0;
+	    double pStr = Caster.Skills[CastSkill].Value;
+	   
+	    if (pStr > 100){
+		level = 1;
+	    }
+	    else if (pStr > 110){
+		level = 2;
+	    }
+	    else if (pStr > 130){
+		level = 3;
+	    }
+	    else if (pStr > 140){
+		level = 4;
+	    }
+	    else {
+		level = 0;
+	    }
+			
+	    double ss = Caster.Skills[DamageSkill].Value;
+	    int bonus = (int)ss / 4;
+	    
+	    double dmg = (double)Utility.Dice(3, 5, bonus);
+	    dmg /= 2; //necessary?  
 
-            new InternalTimer( m, Caster ).Start();
+	    //we really should put this idiom into SpellHelper, I'm fucking tired of writing it --sith
+	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
+		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
+	    }
 
+	    //sith: change this, see issue tracker on gitlab
+	    if ( CheckResisted( m ) )
+	    {
+		dmg *= 0.75;
+		
+		m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
+	    }
+
+	    m.Damage((int)dmg, m, DamageType.Necro);
+	    m.ApplyPoison( Caster, Poison.GetPoison( level ) );
+            
         Return:
             FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( WyvernStrikeSpell ) );
-            }
         }
 
         private class InternalTarget : Target
