@@ -284,6 +284,7 @@ namespace Server.Spells
 	    return m.Skills[SkillName.MagicResist].Value;
 	}
 
+	//work this into our spec/elemental damage scalar --sith
 	public virtual double GetDamageScalar( Mobile target )
 	{
 	    double scalar = 1.0;
@@ -589,7 +590,7 @@ namespace Server.Spells
 	{
 	    double n = GetResistPercent( target );
 
-	    n /= 100.0; //TODO:  change this --sith
+	    n /= 100.0;
 
 	    if( n <= 0.0 )
 		return false;
@@ -597,6 +598,7 @@ namespace Server.Spells
 	    if( n >= 1.0 )
 		return true;
 
+	    //TODO: these are for adjusting resist gain from spell hits -- sith
 	    int maxSkill = (1 + (int)Circle) * 10;
 	    maxSkill += (1 + ((int)Circle / 6)) * 25;
 

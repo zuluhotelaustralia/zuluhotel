@@ -3,6 +3,7 @@ using System.Collections;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
+using Server.Mobiles;
 
 namespace Server.Spells.Necromancy
 {
@@ -28,8 +29,9 @@ namespace Server.Spells.Necromancy
 
         public SorcerorsBaneSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
-	    //in hex:        {17a6, 17a3, 179f, 17a8, 1797, 17a5, 17a1, 179d, 17a7}
-	    pool = new int[] {6054, 6051, 6047, 6056, 6039, 6053, 6049, 6045, 6055};
+	    // these indices in decimal
+	    //pool = new int[] {6054, 6051, 6047, 6056, 6039, 6053, 6049, 6045, 6055};
+	    pool = new int[] {6054, 6047, 6053, 6051, 6039, 6045, 6056, 6049, 6055};
 
 	    //0,0 is the north-west corner, so:
 	    /*
@@ -79,10 +81,6 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( SorcerorsBaneSpell ) ) ) {
-                goto Return;
-            }
-
             SpellHelper.Turn( Caster, m );
 
             m.PlaySound( 0x209 ); //sorc's bane sound
@@ -93,28 +91,60 @@ namespace Server.Spells.Necromancy
 	    //do the water column first
 	    for ( int z=10; z>=0; z-- )
 	    {
-		Point3D loc = new Point3D( m.X, m.Y, z);
-		bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 0, false );
+		Point3D loc = new Point3D( m.X, m.Y, m.Z+(z*10) );
+		//bool canFit = SpellHelper.AdjustField( ref loc, m.Map, 100, false );
 
 		m.PlaySound(0x11);
 
 		//if ( !canFit )
 		//    continue;
 
-		new InternalItem( loc, m.Map, Caster, waterfall[0], 5);
-		new InternalItem( loc, m.Map, Caster, waterfall[1], 5);
+		new InternalItem( loc, m.Map, Caster, waterfall[0], 1);
+		new InternalItem( loc, m.Map, Caster, waterfall[1], 1);
 	    }
 	    //now the pool
 	    int poolnumber = 0;
-	    for (int y=-1; y>1; y++){
-		for (int x=-1; x>1; x++){
-		    Point3D loc = new Point3D(x, y, m.Z);
+	    for (int y=-1; y<=1; y++){
+		for (int x=-1; x<=1; x++){
+		    Point3D loc = new Point3D(m.X+x, m.Y+y, m.Z);
 		    new InternalItem( loc, m.Map, Caster, pool[poolnumber], 10); //yuck
+		    poolnumber++;
 		}
 	    }
-		    
-	    //it should then start a second timer(s) to clean up the waterfall after 5 seconds and the pool at the base 5 seconds after that
 
+	    double ss = Caster.Skills[DamageSkill].Value;
+	    int bonus = (int)ss / 4;
+	    
+	    double dmg = (double)Utility.Dice(3, 5, bonus);
+	    dmg /= 2;
+
+	    //we really should put this idiom into SpellHelper, I'm fucking tired of writing it --sith
+	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
+		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
+	    }
+
+	    //sith: change this, see issue tracker on gitlab
+	    if ( CheckResisted( m ) )
+	    {
+		dmg *= 0.75;
+		
+		m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
+		m.Damage((int)dmg, m, DamageType.Water);
+
+		goto Return;
+	    }
+			
+	    int mana = (int)dmg;
+
+	    if( m.Mana >= mana ) {
+		Caster.Mana += mana;
+		m.Mana -= mana;
+	    }
+	    else {
+		Caster.Mana += m.Mana;
+		m.Mana = 0;
+	    }
+	    
         Return:
             FinishSequence();
         }
