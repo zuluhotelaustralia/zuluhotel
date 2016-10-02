@@ -8067,8 +8067,10 @@ namespace Server
 	{
 	    get
 	    {
-		if( m_NetState != null && m_NetState.Socket == null )
+				if (m_NetState != null && m_NetState.Socket == null && !m_NetState.IsDisposing)
+				{
 		    NetState = null;
+				}
 
 		return m_NetState;
 	    }
@@ -9689,43 +9691,64 @@ namespace Server
 	{
 	    return true;
 	}
+		public bool OpenTrade(Mobile from)
+		{
+			return OpenTrade(from, null);
+		}
 
-	/// <summary>
-	/// Overridable. Event invoked when a Mobile (<paramref name="from" />) drops an <see cref="Item"><paramref name="dropped" /></see> onto the Mobile.
-	/// </summary>
-	public virtual bool OnDragDrop( Mobile from, Item dropped )
+		public virtual bool OpenTrade(Mobile from, Item offer)
 	{
-	    if( from == this )
+			if (!from.Player || !Player || !from.Alive || !Alive)
 	    {
-		Container pack = this.Backpack;
-
-		if( pack != null )
-		    return dropped.DropToItem( from, pack, new Point3D( -1, -1, 0 ) );
-
 		return false;
 	    }
-	    else if( from.Player && this.Player && from.Alive && this.Alive && from.InRange( Location, 2 ) )
-	    {
+
 		NetState ourState = m_NetState;
 		NetState theirState = from.m_NetState;
 
-		if( ourState != null && theirState != null )
+			if (ourState == null || theirState == null)
 		{
+				return false;
+			}
+
 		    SecureTradeContainer cont = theirState.FindTradeContainer( this );
 
-		    if( !from.CheckTrade( this, dropped, cont, true, true, 0, 0 ) )
+			if (!from.CheckTrade(this, offer, cont, true, true, 0, 0))
+			{
 			return false;
+			}
 
 		    if( cont == null )
+			{
 			cont = theirState.AddTrade( ourState );
+			}
 
-		    cont.DropItem( dropped );
+			if (offer != null)
+			{
+				cont.DropItem(offer);
+			}
 
 		    return true;
 		}
 
+		/// <summary>
+		/// Overridable. Event invoked when a Mobile (<paramref name="from" />) drops an <see cref="Item"><paramref name="dropped" /></see> onto the Mobile.
+		/// </summary>
+		public virtual bool OnDragDrop( Mobile from, Item dropped )
+		{
+			if( from == this )
+			{
+				Container pack = this.Backpack;
+
+				if( pack != null )
+					return dropped.DropToItem( from, pack, new Point3D( -1, -1, 0 ) );
+
 		return false;
 	    }
+			else if( from.InRange( Location, 2 ) )
+			{
+				return OpenTrade( from, dropped );
+			}
 	    else
 	    {
 		return false;

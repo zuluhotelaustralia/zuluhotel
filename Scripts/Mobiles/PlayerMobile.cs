@@ -1667,8 +1667,13 @@ namespace Server.Mobiles
 			list.Add( new CallbackEntry( RefuseTrades ? 1154112 : 1154113, new ContextCallback( ToggleTrades ) ) ); // Allow Trades / Refuse Trades
 		}
 	    }
-	    if ( from != this )
+			else
+			{
+				if (Core.TOL && from.InRange(this, 2))
 	    {
+					list.Add(new CallbackEntry(1077728, () => OpenTrade(from))); // Trade
+				}
+
 		if ( Alive && Core.Expansion >= Expansion.AOS )
 		{
 		    Party theirParty = from.Party as Party;
@@ -2369,7 +2374,7 @@ namespace Server.Mobiles
 		    msgNum = 1154111; // ~1_NAME~ is refusing all trades.
 	    }
 
-	    if ( msgNum == 0 )
+			if ( msgNum == 0 && item != null )
 	    {
 		if ( cont != null )
 		{

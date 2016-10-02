@@ -1,4 +1,6 @@
 using System;
+
+using Server.Accounting;
 using Server.Network;
 
 namespace Server
@@ -10,6 +12,11 @@ namespace Server
 		public static void Configure()
 		{
 			Core.Expansion = Expansion;
+
+			AccountGold.Enabled = Core.TOL;
+			AccountGold.ConvertOnBank = true;
+			AccountGold.ConvertOnTrade = false;
+			VirtualCheck.UseEditGump = true;
 
 			bool Enabled = Core.AOS;
 
