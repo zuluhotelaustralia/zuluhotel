@@ -10,7 +10,7 @@ namespace Server.Spells.Necromancy
     public class WyvernStrikeSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-							"Wyvern Strike", "Ubrae Tenebrae Venarent"
+							"Wyvern Strike", "Ubrae Tenebrae Venarent",
 							227, 9031,
 							Reagent.DragonsBlood, Reagent.SerpentsScales,
 							Reagent.Blackmoor, Reagent.Bloodspawn, Reagent.VolcanicAsh);

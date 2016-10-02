@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
@@ -24,91 +25,57 @@ namespace Server.Spells.Necromancy
         {
         }
 
-        public override void OnCast()
+	public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
-        {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
             }
+	    
+	    List<Mobile> targets = new List<Mobile>();
+	    Map map = Caster.Map;
 
-            if ( ! m.BeginAction( typeof( PlagueSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
-
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-	    //see Server/Poison.cs and Scripts/Misc/Poison.cs
-	    // instantiate a new poisontimer
-	    // probably use level 4 (lethal) irrespective of range
-	    // "level 5" non existent will surely cause fucked-upness due to
-	    // shitbirds doing arithmetic with cliloc indices
-
-            new InternalTimer( m, Caster ).Start();
-
+	    int level = 0;
+	    double pStr = Caster.Skills[CastSkill].Value;
+	   
+	    if (pStr > 100){
+		level = 1;
+	    }
+	    else if (pStr > 110){
+		level = 2;
+	    }
+	    else if (pStr > 130){
+		level = 3;
+	    }
+	    else if (pStr > 140){
+		level = 4;
+	    }
+	    else {
+		level = 0;
+	    }
+	    
+	    if( map != null ){
+		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0)) ){
+		    if( Caster != m &&
+			SpellHelper.ValidIndirectTarget(Caster, m) &&
+			Caster.CanBeHarmful(m, false)
+			&& Caster.InLOS(m)){
+			
+			if ( ! m.BeginAction( typeof( PlagueSpell ) ) ) {
+			    break;
+			}
+			
+			Caster.DoHarmful(m);
+						
+			m.ApplyPoison( Caster, Poison.GetPoison( level ) );
+		    }
+		}
+	    }
+	
+	    Caster.PlaySound( 0x1e2 );
+	    
         Return:
             FinishSequence();
         }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( PlagueSpell ) );
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private PlagueSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( PlagueSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }
