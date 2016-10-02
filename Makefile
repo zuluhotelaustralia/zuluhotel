@@ -1,5 +1,5 @@
 CC=mcs
-LDFLAGS=
+LDFLAGS=-reference:System.Drawing
 OPTFLAGS=-optimize+
 CFLAGS=-d:MONO -unsafe -nowarn:219,414 -t:exe -out:RunUO.exe
 RECURSE=-recurse:'Server/*.cs'
@@ -21,10 +21,10 @@ configure:
 	@echo "Folder muls/ created, you should put a copy of the client files here."
 
 release:
-	$(CC) $(CFLAGS) $(OPTFLAGS) $(RECURSE)
+	$(CC) $(CFLAGS) $(OPTFLAGS) $(LDFLAGS) $(RECURSE)
 
 debug:
-	$(CC) $(CFLAGS) $(DFLAGS) $(RECURSE)
+	$(CC) $(CFLAGS) $(DFLAGS) $(LDFLAGS) $(RECURSE)
 
 clean:
 	rm RunUO.exe
