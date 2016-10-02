@@ -18,7 +18,7 @@ public class DarkPaganOre : BaseOre
         {
         }
 
-        public overring string Name
+        public override string Name
         {
                 get
                 {
