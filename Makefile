@@ -1,7 +1,7 @@
 CC=mcs
 LDFLAGS=-reference:System.Drawing
 OPTFLAGS=-optimize+
-CFLAGS=-d:MONO -unsafe -nowarn:219,414 -t:exe -out:RunUO.exe
+CFLAGS=-d:MONO -d:NEWPARENT -d:NEWTIMERS -unsafe -nowarn:219,414 -t:exe -out:RunUO.exe
 RECURSE=-recurse:'Server/*.cs'
 DFLAGS=-debug
 
