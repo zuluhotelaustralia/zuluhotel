@@ -19,11 +19,11 @@ public class EbonTwilightSapphireIngot : BaseIngot
         {
         }
 
-        public override int LabelNumber
+        public override string Name
         {
                 get
                 {
-                        return 1042692;
+                        return "Ebon Twilight Sapphire ingot";
                 }
         }
 

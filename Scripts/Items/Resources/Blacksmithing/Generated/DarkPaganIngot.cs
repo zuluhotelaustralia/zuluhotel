@@ -19,11 +19,11 @@ public class DarkPaganIngot : BaseIngot
         {
         }
 
-        public override int LabelNumber
+        public override string Name
         {
                 get
                 {
-                        return 1042692;
+                        return "Dark Pagan ingot";
                 }
         }
 

@@ -19,11 +19,11 @@ public class GoldIngot : BaseIngot
         {
         }
 
-        public override int LabelNumber
+        public override string Name
         {
                 get
                 {
-                        return 1042692;
+                        return "Gold ingot";
                 }
         }
 

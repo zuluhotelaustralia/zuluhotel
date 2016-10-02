@@ -18,11 +18,11 @@ public class GoldOre : BaseOre
         {
         }
 
-        public override int LabelNumber
+        public overring string Name
         {
                 get
                 {
-                        return 1042853;
+                        return "Gold ore";
                 }
         }
 

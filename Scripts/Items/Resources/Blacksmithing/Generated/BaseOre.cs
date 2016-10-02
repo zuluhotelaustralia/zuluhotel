@@ -82,14 +82,6 @@ namespace Server.Items
 		{
 		}
 
-		public override void AddNameProperty( ObjectPropertyList list )
-		{
-			if ( Amount > 1 )
-				list.Add( 1050039, "{0}	#{1}", Amount, 1026583 ); // ~1_NUMBER~ ~2_ITEMNAME~
-			else
-				list.Add( 1026583 ); // ore
-		}
-
 		public override void GetProperties( ObjectPropertyList list )
 		{
 			base.GetProperties( list );
@@ -109,10 +101,6 @@ namespace Server.Items
 		{
 			get
 			{
-                                // TOGENERATE
-//				if ( m_Resource >= CraftResource.DullCopper && m_Resource <= CraftResource.Valorite )
-//					return 1042845 + (int)(m_Resource - CraftResource.DullCopper);
-
 				return 1042853; // iron ore;
 			}
 		}
