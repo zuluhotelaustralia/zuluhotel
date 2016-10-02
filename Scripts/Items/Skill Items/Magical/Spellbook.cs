@@ -17,7 +17,7 @@ namespace Server.Items
 		Paladin,
 		Ninja,
 		Samurai,
-		Arcanist
+		Druid
 	}
 
 	public enum BookQuality
@@ -100,7 +100,7 @@ namespace Server.Items
 				case 3: type = SpellbookType.Paladin; break;
 				case 4: type = SpellbookType.Ninja; break;
 				case 5: type = SpellbookType.Samurai; break;
-				case 6:	type = SpellbookType.Arcanist; break;
+				case 6:	type = SpellbookType.Druid; break;
 			}
 
 			Spellbook book = Spellbook.Find( from, -1, type );
@@ -161,7 +161,7 @@ namespace Server.Items
 			else if( spellID >= 500 && spellID < 508 )
 				return SpellbookType.Ninja;
 			else if ( spellID >= 600 && spellID < 617 )
-				return SpellbookType.Arcanist;
+				return SpellbookType.Druid;
 
 			return SpellbookType.Invalid;
 		}
@@ -193,7 +193,7 @@ namespace Server.Items
 
 		public static Spellbook FindArcanist( Mobile from )
 		{
-			return Find( from, -1, SpellbookType.Arcanist );
+			return Find( from, -1, SpellbookType.Druid );
 		}
 
 		public static Spellbook Find( Mobile from, int spellID )

@@ -717,7 +717,7 @@ namespace Server
 				case SpellbookType.Regular: types = m_RegularScrollTypes; break;
 				case SpellbookType.Necromancer: types = (Core.SE ? m_SENecromancyScrollTypes : m_NecromancyScrollTypes ); break;
 				case SpellbookType.Paladin: types = m_PaladinScrollTypes; break;
-				case SpellbookType.Arcanist: types = m_ArcanistScrollTypes; break;
+				case SpellbookType.Druid: types = m_ArcanistScrollTypes; break;
 			}
 
 			return Construct( types, Utility.RandomMinMax( minIndex, maxIndex ) ) as SpellScroll;

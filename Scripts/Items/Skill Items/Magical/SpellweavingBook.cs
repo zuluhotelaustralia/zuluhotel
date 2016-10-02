@@ -6,7 +6,7 @@ namespace Server.Items
 {
 	public class SpellweavingBook : Spellbook
 	{
-		public override SpellbookType SpellbookType{ get{ return SpellbookType.Arcanist; } }
+		public override SpellbookType SpellbookType{ get{ return SpellbookType.Druid; } }
 		public override int BookOffset{ get{ return 600; } }
 		public override int BookCount{ get{ return 16; } }
 
