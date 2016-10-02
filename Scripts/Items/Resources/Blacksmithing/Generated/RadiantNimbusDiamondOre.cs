@@ -18,7 +18,7 @@ public class RadiantNimbusDiamondOre : BaseOre
         {
         }
 
-        public override string Name
+        public override string DefaultName
         {
                 get
                 {

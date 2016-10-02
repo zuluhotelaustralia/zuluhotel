@@ -18,7 +18,7 @@ public class <%= this.className %>Ore : BaseOre
         {
         }
 
-        public override string Name
+        public override string DefaultName
         {
                 get
                 {

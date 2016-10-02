@@ -18,7 +18,7 @@ public class AzuriteOre : BaseOre
         {
         }
 
-        public override string Name
+        public override string DefaultName
         {
                 get
                 {

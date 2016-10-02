@@ -18,7 +18,7 @@ public class EbonTwilightSapphireOre : BaseOre
         {
         }
 
-        public override string Name
+        public override string DefaultName
         {
                 get
                 {
