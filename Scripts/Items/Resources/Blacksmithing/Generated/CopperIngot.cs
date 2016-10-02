@@ -19,7 +19,7 @@ public class CopperIngot : BaseIngot
         {
         }
 
-        public override string Name
+        public override string DefaultName
         {
                 get
                 {

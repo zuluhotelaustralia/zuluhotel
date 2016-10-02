@@ -19,7 +19,7 @@ public class AzuriteIngot : BaseIngot
         {
         }
 
-        public override string Name
+        public override string DefaultName
         {
                 get
                 {
