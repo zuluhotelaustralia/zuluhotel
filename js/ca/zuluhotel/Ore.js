@@ -6,6 +6,13 @@ CLASS({
       name: 'name'
     },
     {
+      name: 'label',
+      type: 'String',
+      defaultValueFn: function() {
+        return labelize(this.name);
+      }
+    },
+    {
       name: 'className',
       defaultValueFn: function() { return this.name; }
     },

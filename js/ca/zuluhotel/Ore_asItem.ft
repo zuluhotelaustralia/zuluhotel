@@ -18,11 +18,11 @@ public class <%= this.className %>Ore : BaseOre
         {
         }
 
-        public override int LabelNumber
+        public overring string Name
         {
                 get
                 {
-                        return <%= this.labelNumber %>;
+                        return "<%= this.label %> ore";
                 }
         }
 
