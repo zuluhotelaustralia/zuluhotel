@@ -18,8 +18,8 @@ namespace Server.Spells.Necromancy
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 120.0; } }
+        public override int RequiredMana{ get{ return 100; } }
 
 	private int m_NewBody;
 	private int m_SkinHue;

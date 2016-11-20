@@ -18,8 +18,8 @@ namespace Server.Spells.Necromancy
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 140.0; } }
+        public override int RequiredMana{ get{ return 130; } }
 
         public PlagueSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {

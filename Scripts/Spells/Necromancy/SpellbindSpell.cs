@@ -4,7 +4,9 @@ using Server.Network;
 using Server.Items;
 using Server.Targeting;
 
-namespace Server.Spells.Necromancy
+
+// note that there is basically a blacklist of certain creatures that cannot be spellbound, no doubt giant monsters like balrogs or something
+    namespace Server.Spells.Necromancy
 {
     public class SpellbindSpell : NecromancerSpell
     {
@@ -48,6 +50,9 @@ namespace Server.Spells.Necromancy
 
             // TODO: Spell graphical and sound effects.
 
+	    // target's difficulty is the higher of their str/dex/int scores divided by 2, scaled by their magicresist skill in some way
+
+	    // caster's power is determined by Magery in zhf, should probably be spirit speak aka DamageSkill
             Caster.DoHarmful( m );
 
             // TODO: Spell action ( buff/debuff/damage/etc. )
