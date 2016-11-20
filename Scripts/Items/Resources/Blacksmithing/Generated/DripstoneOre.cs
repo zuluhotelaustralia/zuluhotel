@@ -18,11 +18,11 @@ public class DripstoneOre : BaseOre
         {
         }
 
-        public override int LabelNumber
+        public override string DefaultName
         {
                 get
                 {
-                        return 1042853;
+                        return "Dripstone ore";
                 }
         }
 

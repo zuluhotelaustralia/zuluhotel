@@ -19,11 +19,11 @@ public class <%= this.className %>Ingot : BaseIngot
         {
         }
 
-        public override int LabelNumber
+        public override string DefaultName
         {
                 get
                 {
-                        return <%= this.ingotLabelNumber %>;
+                        return "<%= this.label %> ingot";
                 }
         }
 

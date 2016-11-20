@@ -19,11 +19,11 @@ public class DestructionIngot : BaseIngot
         {
         }
 
-        public override int LabelNumber
+        public override string DefaultName
         {
                 get
                 {
-                        return 1042692;
+                        return "Destruction ingot";
                 }
         }
 

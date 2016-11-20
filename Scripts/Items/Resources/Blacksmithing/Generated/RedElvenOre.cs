@@ -18,11 +18,11 @@ public class RedElvenOre : BaseOre
         {
         }
 
-        public override int LabelNumber
+        public override string DefaultName
         {
                 get
                 {
-                        return 1042853;
+                        return "Red Elven ore";
                 }
         }
 

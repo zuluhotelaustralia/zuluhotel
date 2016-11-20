@@ -19,11 +19,11 @@ public class NewZuluIngot : BaseIngot
         {
         }
 
-        public override int LabelNumber
+        public override string DefaultName
         {
                 get
                 {
-                        return 1042692;
+                        return "New Zulu ingot";
                 }
         }
 

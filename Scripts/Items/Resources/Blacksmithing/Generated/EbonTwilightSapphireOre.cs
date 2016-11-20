@@ -18,11 +18,11 @@ public class EbonTwilightSapphireOre : BaseOre
         {
         }
 
-        public override int LabelNumber
+        public override string DefaultName
         {
                 get
                 {
-                        return 1042853;
+                        return "Ebon Twilight Sapphire ore";
                 }
         }
 
