@@ -15,12 +15,12 @@ namespace Server.Misc
 	     * 4) Changing or removing any predefined maps may cause server instability.
 	     */
 
-	    RegisterMap( 1, 1, 1, 7168, 4096, 4, "Felucca",		MapRules.FeluccaRules ); //was 0,0,0, this is for leaves in fel --sith
-	    RegisterMap( 1, 1, 1, 7168, 4096, 0, "Trammel",		MapRules.TrammelRules );
-	    RegisterMap( 2, 2, 2, 2304, 1600, 1, "Ilshenar",	MapRules.TrammelRules );
-	    RegisterMap( 3, 3, 3, 2560, 2048, 1, "Malas",		MapRules.TrammelRules );
-	    RegisterMap( 4, 4, 4, 1448, 1448, 1, "Tokuno",		MapRules.TrammelRules );
-	    RegisterMap( 5, 5, 5, 1280, 4096, 1, "TerMur",		MapRules.TrammelRules );
+	    RegisterMap( 0, 0, 0, 7168, 4096, 1, "Felucca", MapRules.FeluccaRules ); //was season = 4 --sith
+	    RegisterMap( 1, 1, 1, 7168, 4096, 0, "Trammel", MapRules.TrammelRules );
+	    RegisterMap( 2, 2, 2, 2304, 1600, 1, "Ilshenar", MapRules.TrammelRules );
+	    RegisterMap( 3, 3, 3, 2560, 2048, 1, "Malas", MapRules.TrammelRules );
+	    RegisterMap( 4, 4, 4, 1448, 1448, 1, "Tokuno", MapRules.TrammelRules );
+	    RegisterMap( 5, 5, 5, 1280, 4096, 1, "TerMur", MapRules.TrammelRules );
 
 	    RegisterMap( 0x7F, 0x7F, 0x7F, Map.SectorSize, Map.SectorSize, 1, "Internal", MapRules.Internal );
 
