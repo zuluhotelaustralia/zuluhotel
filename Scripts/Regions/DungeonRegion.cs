@@ -6,43 +6,44 @@ using Server.Gumps;
 
 namespace Server.Regions
 {
-	public class DungeonRegion : BaseRegion
+    public class DungeonRegion : BaseRegion
+    {
+	public override bool YoungProtected { get { return false; } }
+	public override double RegionalSkillGainFactor { get { return 4.0; } } //~120 mins to get to 130.0 @ 1 attempt per 10s
+
+	private Point3D m_EntranceLocation;
+	private Map m_EntranceMap;
+
+	public Point3D EntranceLocation{ get{ return m_EntranceLocation; } set{ m_EntranceLocation = value; } }
+	public Map EntranceMap{ get{ return m_EntranceMap; } set{ m_EntranceMap = value; } }
+
+	public DungeonRegion( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
 	{
-		public override bool YoungProtected { get { return false; } }
+	    XmlElement entrEl = xml["entrance"];
 
-		private Point3D m_EntranceLocation;
-		private Map m_EntranceMap;
+	    Map entrMap = map;
+	    ReadMap( entrEl, "map", ref entrMap, false );
 
-		public Point3D EntranceLocation{ get{ return m_EntranceLocation; } set{ m_EntranceLocation = value; } }
-		public Map EntranceMap{ get{ return m_EntranceMap; } set{ m_EntranceMap = value; } }
-
-		public DungeonRegion( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
-		{
-			XmlElement entrEl = xml["entrance"];
-
-			Map entrMap = map;
-			ReadMap( entrEl, "map", ref entrMap, false );
-
-			if ( ReadPoint3D( entrEl, entrMap, ref m_EntranceLocation, false ) )
-				m_EntranceMap = entrMap;
-		}
-
-		public override bool AllowHousing( Mobile from, Point3D p )
-		{
-			return false;
-		}
-
-		public override void AlterLightLevel( Mobile m, ref int global, ref int personal )
-		{
-			global = LightCycle.DungeonLevel;
-		}
-
-		public override bool CanUseStuckMenu( Mobile m )
-		{
-			if ( this.Map == Map.Felucca )
-				return false;
-
-			return base.CanUseStuckMenu( m );
-		}
+	    if ( ReadPoint3D( entrEl, entrMap, ref m_EntranceLocation, false ) )
+		m_EntranceMap = entrMap;
 	}
+
+	public override bool AllowHousing( Mobile from, Point3D p )
+	{
+	    return false;
+	}
+
+	public override void AlterLightLevel( Mobile m, ref int global, ref int personal )
+	{
+	    global = LightCycle.DungeonLevel;
+	}
+
+	public override bool CanUseStuckMenu( Mobile m )
+	{
+	    if ( this.Map == Map.Felucca )
+		return false;
+
+	    return base.CanUseStuckMenu( m );
+	}
+    }
 }
