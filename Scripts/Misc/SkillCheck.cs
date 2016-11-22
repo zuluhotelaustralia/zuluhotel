@@ -122,6 +122,12 @@ namespace Server.Misc
 	    if ( from.Skills.Cap == 0 )
 		return false;
 
+	    // common lisp code to evaluate how many attemps it'd take
+	    //(loop for x from 1 to 1300
+	    //   sum (/ 1 (* -1 (* 0.2 (log (/ x 1400.0))))) into total
+	    //   finally (return total))
+	    // using 1400 and 0.2, at 1 attempt every 10s, you're looking at 14k attempts, or about 2400 hours to GM.
+	    // change 0.2 to ~4 for about 120 mins to GM
 	    bool success = ( chance >= Utility.RandomDouble() );
 	    double gc = -(Math.Log(skill.Base/1400.0)*0.2); //TODO:  change 1400 and 0.2 based on playermobile's region
 	    gc *= skill.Info.GainFactor;
