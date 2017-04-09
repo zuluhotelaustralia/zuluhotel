@@ -90,7 +90,7 @@ namespace Server
 
 	    if( Core.Is64Bit )
 		AppendCompilerOption( ref sb, "/d:x64" );
-			
+
 	    #if NEWTIMERS
 	    AppendCompilerOption(ref sb, "/d:NEWTIMERS");
 	    #endif
@@ -282,97 +282,97 @@ namespace Server
 	    // }
 	}
 
-	public static void Display( CompilerResults results )
-	{
-	    if( results.Errors.Count > 0 )
-	    {
-		Dictionary<string, List<CompilerError>> errors = new Dictionary<string, List<CompilerError>>( results.Errors.Count, StringComparer.OrdinalIgnoreCase );
-		Dictionary<string, List<CompilerError>> warnings = new Dictionary<string, List<CompilerError>>( results.Errors.Count, StringComparer.OrdinalIgnoreCase );
+	// public static void Display( CompilerResults results )
+	// {
+	//     if( results.Errors.Count > 0 )
+	//     {
+	// 	Dictionary<string, List<CompilerError>> errors = new Dictionary<string, List<CompilerError>>( results.Errors.Count, StringComparer.OrdinalIgnoreCase );
+	// 	Dictionary<string, List<CompilerError>> warnings = new Dictionary<string, List<CompilerError>>( results.Errors.Count, StringComparer.OrdinalIgnoreCase );
 
-		foreach( CompilerError e in results.Errors )
-		{
-		    string file = e.FileName;
+	// 	foreach( CompilerError e in results.Errors )
+	// 	{
+	// 	    string file = e.FileName;
 
-		    // Ridiculous. FileName is null if the warning/error is internally generated in csc.
-		    if ( string.IsNullOrEmpty( file ) ) {
-			Console.WriteLine( "ScriptCompiler: {0}: {1}", e.ErrorNumber, e.ErrorText );
-			continue;
-		    }
+	// 	    // Ridiculous. FileName is null if the warning/error is internally generated in csc.
+	// 	    if ( string.IsNullOrEmpty( file ) ) {
+	// 		Console.WriteLine( "ScriptCompiler: {0}: {1}", e.ErrorNumber, e.ErrorText );
+	// 		continue;
+	// 	    }
 
-		    Dictionary<string, List<CompilerError>> table = (e.IsWarning ? warnings : errors);
+	// 	    Dictionary<string, List<CompilerError>> table = (e.IsWarning ? warnings : errors);
 
-		    List<CompilerError> list = null;
-		    table.TryGetValue( file, out list );
+	// 	    List<CompilerError> list = null;
+	// 	    table.TryGetValue( file, out list );
 
-		    if( list == null )
-			table[file] = list = new List<CompilerError>();
+	// 	    if( list == null )
+	// 		table[file] = list = new List<CompilerError>();
 
-		    list.Add( e );
-		}
+	// 	    list.Add( e );
+	// 	}
 
-		if( errors.Count > 0 )
-		    Console.WriteLine( "failed ({0} errors, {1} warnings)", errors.Count, warnings.Count );
-		else
-		    Console.WriteLine( "done ({0} errors, {1} warnings)", errors.Count, warnings.Count );
+	// 	if( errors.Count > 0 )
+	// 	    Console.WriteLine( "failed ({0} errors, {1} warnings)", errors.Count, warnings.Count );
+	// 	else
+	// 	    Console.WriteLine( "done ({0} errors, {1} warnings)", errors.Count, warnings.Count );
 
-		string scriptRoot = Path.GetFullPath( Path.Combine( Core.BaseDirectory, "Scripts" + Path.DirectorySeparatorChar ) );
-		Uri scriptRootUri = new Uri( scriptRoot );
+	// 	string scriptRoot = Path.GetFullPath( Path.Combine( Core.BaseDirectory, "Scripts" + Path.DirectorySeparatorChar ) );
+	// 	Uri scriptRootUri = new Uri( scriptRoot );
 
-		Utility.PushColor( ConsoleColor.Yellow );
+	// 	Utility.PushColor( ConsoleColor.Yellow );
 
-		if( warnings.Count > 0 )
-		    Console.WriteLine( "Warnings:" );
+	// 	if( warnings.Count > 0 )
+	// 	    Console.WriteLine( "Warnings:" );
 
-		foreach( KeyValuePair<string, List<CompilerError>> kvp in warnings )
-		{
-		    string fileName = kvp.Key;
-		    List<CompilerError> list = kvp.Value;
+	// 	foreach( KeyValuePair<string, List<CompilerError>> kvp in warnings )
+	// 	{
+	// 	    string fileName = kvp.Key;
+	// 	    List<CompilerError> list = kvp.Value;
 
-		    string fullPath = Path.GetFullPath( fileName );
-		    string usedPath = Uri.UnescapeDataString( scriptRootUri.MakeRelativeUri( new Uri( fullPath ) ).OriginalString );
+	// 	    string fullPath = Path.GetFullPath( fileName );
+	// 	    string usedPath = Uri.UnescapeDataString( scriptRootUri.MakeRelativeUri( new Uri( fullPath ) ).OriginalString );
 
-		    Console.WriteLine( " + {0}:", usedPath );
+	// 	    Console.WriteLine( " + {0}:", usedPath );
 
-		    Utility.PushColor( ConsoleColor.DarkYellow );
+	// 	    Utility.PushColor( ConsoleColor.DarkYellow );
 
-		    foreach( CompilerError e in list )
-			Console.WriteLine( "    {0}: Line {1}: {2}", e.ErrorNumber, e.Line, e.ErrorText );
+	// 	    foreach( CompilerError e in list )
+	// 		Console.WriteLine( "    {0}: Line {1}: {2}", e.ErrorNumber, e.Line, e.ErrorText );
 
-		    Utility.PopColor();
-		}
+	// 	    Utility.PopColor();
+	// 	}
 
-		Utility.PopColor();
+	// 	Utility.PopColor();
 
-		Utility.PushColor( ConsoleColor.Red );
+	// 	Utility.PushColor( ConsoleColor.Red );
 
-		if( errors.Count > 0 )
-		    Console.WriteLine( "Errors:" );
+	// 	if( errors.Count > 0 )
+	// 	    Console.WriteLine( "Errors:" );
 
-		foreach( KeyValuePair<string, List<CompilerError>> kvp in errors )
-		{
-		    string fileName = kvp.Key;
-		    List<CompilerError> list = kvp.Value;
+	// 	foreach( KeyValuePair<string, List<CompilerError>> kvp in errors )
+	// 	{
+	// 	    string fileName = kvp.Key;
+	// 	    List<CompilerError> list = kvp.Value;
 
-		    string fullPath = Path.GetFullPath( fileName );
-		    string usedPath = Uri.UnescapeDataString( scriptRootUri.MakeRelativeUri( new Uri( fullPath ) ).OriginalString );
+	// 	    string fullPath = Path.GetFullPath( fileName );
+	// 	    string usedPath = Uri.UnescapeDataString( scriptRootUri.MakeRelativeUri( new Uri( fullPath ) ).OriginalString );
 
-		    Console.WriteLine( " + {0}:", usedPath );
+	// 	    Console.WriteLine( " + {0}:", usedPath );
 
-		    Utility.PushColor( ConsoleColor.DarkRed );
+	// 	    Utility.PushColor( ConsoleColor.DarkRed );
 
-		    foreach( CompilerError e in list )
-			Console.WriteLine( "    {0}: Line {1}: {2}", e.ErrorNumber, e.Line, e.ErrorText );
+	// 	    foreach( CompilerError e in list )
+	// 		Console.WriteLine( "    {0}: Line {1}: {2}", e.ErrorNumber, e.Line, e.ErrorText );
 
-		    Utility.PopColor();
-		}
+	// 	    Utility.PopColor();
+	// 	}
 
-		Utility.PopColor();
-	    }
-	    else
-	    {
-		Console.WriteLine( "done (0 errors, 0 warnings)" );
-	    }
-	}
+	// 	Utility.PopColor();
+	//     }
+	//     else
+	//     {
+	// 	Console.WriteLine( "done (0 errors, 0 warnings)" );
+	//     }
+	// }
 
 	public static string GetUnusedPath( string name )
 	{
@@ -401,7 +401,7 @@ namespace Server
 	    }
 	}
 
-	private delegate CompilerResults Compiler( bool debug );
+//	private delegate CompilerResults Compiler( bool debug );
 
 	public static bool Compile()
 	{
@@ -447,9 +447,9 @@ namespace Server
 	    Console.Write( "Scripts: Verifying..." );
 
 	    Stopwatch watch = Stopwatch.StartNew();
-			
+
 	    Core.VerifySerialization();
-			
+
 	    watch.Stop();
 
 	    Console.WriteLine("done ({0} items, {1} mobiles) ({2:F2} seconds)", Core.ScriptItems, Core.ScriptMobiles, watch.Elapsed.TotalSeconds);
