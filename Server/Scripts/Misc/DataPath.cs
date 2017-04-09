@@ -16,7 +16,7 @@ namespace Server.Misc
 	 * --sith
 	 */
 
-	private static string CustomPath = "muls";
+	private static string CustomPath = "/home/nathan/documents/code/runzh/muls/";
 
 	/* The following is a list of files which a required for proper execution:
 	 *

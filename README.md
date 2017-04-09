@@ -7,4 +7,12 @@ $ dotnet restore
 $ dotnet run
 ```
 
+## Setup
+
+Using your text editor of choice, edit Server/Scripts/Misc/DataPath.cs and change the CustomPath variable to be the full, absolute path to the directory containing the .mul files, e.g.:
+
+```
+private static string CustomPath = "/home/runzh/server/muls/";
+```
+
 IRC:  irc.quakenet.org #zuluhotel
