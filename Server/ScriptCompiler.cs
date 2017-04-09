@@ -48,104 +48,6 @@ namespace Server
 	    }
 	}
 
-	private static List<string> m_AdditionalReferences = new List<string>();
-
-	public static string[] GetReferenceAssemblies()
-	{
-	    List<string> list = new List<string>();
-
-	    string path = Path.Combine( Core.BaseDirectory, "Data/Assemblies.cfg" );
-
-	    if( File.Exists( path ) )
-	    {
-		using( StreamReader ip = new StreamReader( path ) )
-		{
-		    string line;
-
-		    while( (line = ip.ReadLine()) != null )
-		    {
-			if( line.Length > 0 && !line.StartsWith( "#" ) )
-			    list.Add( line );
-		    }
-		}
-	    }
-
-	    list.Add( Core.ExePath );
-
-	    list.AddRange( m_AdditionalReferences );
-
-	    return list.ToArray();
-	}
-
-	public static string GetCompilerOptions( bool debug )
-	{
-	    StringBuilder sb = null;
-
-	    if( !debug )
-		AppendCompilerOption( ref sb, "/optimize" );
-
-	    #if MONO
-	    AppendCompilerOption( ref sb, "/d:MONO" );
-	    #endif
-
-	    if( Core.Is64Bit )
-		AppendCompilerOption( ref sb, "/d:x64" );
-
-	    AppendCompilerOption(ref sb, "/d:NEWPARENT");
-
-	    return (sb == null ? null : sb.ToString());
-	}
-
-	private static void AppendCompilerOption( ref StringBuilder sb, string define )
-	{
-	    if( sb == null )
-		sb = new StringBuilder();
-	    else
-		sb.Append( ' ' );
-
-	    sb.Append( define );
-	}
-
-	private static byte[] GetHashCode( string compiledFile, string[] scriptFiles, bool debug )
-	{
-	    using( MemoryStream ms = new MemoryStream() )
-	    {
-		using( BinaryWriter bin = new BinaryWriter( ms ) )
-		{
-		    FileInfo fileInfo = new FileInfo( compiledFile );
-
-		    bin.Write( fileInfo.LastWriteTimeUtc.Ticks );
-
-		    foreach( string scriptFile in scriptFiles )
-		    {
-			fileInfo = new FileInfo( scriptFile );
-
-			bin.Write( fileInfo.LastWriteTimeUtc.Ticks );
-		    }
-
-		    bin.Write( debug );
-		    bin.Write( Core.Version.ToString() );
-
-		    ms.Position = 0;
-
-		    using( SHA1 sha1 = SHA1.Create() )
-		    {
-			return sha1.ComputeHash( ms );
-		    }
-		}
-	    }
-	}
-
-	public static bool CompileCSScripts( out Assembly assembly )
-	{
-	    return CompileCSScripts( false, true, out assembly );
-	}
-
-	public static bool CompileCSScripts( bool debug, out Assembly assembly )
-	{
-	    return CompileCSScripts( debug, true, out assembly );
-	}
-
 	public static bool CompileCSScripts( bool debug, bool cache, out Assembly assembly )
 	{
 	    Console.Write( "Script compiler disabled..." );
@@ -413,34 +315,36 @@ namespace Server
 
 	public static bool Compile( bool debug, bool cache )
 	{
-	    EnsureDirectory( "Scripts/" );
-	    EnsureDirectory( "Scripts/Output/" );
+	    // EnsureDirectory( "Scripts/" );
+	    // EnsureDirectory( "Scripts/Output/" );
 
-	    if( m_AdditionalReferences.Count > 0 )
-		m_AdditionalReferences.Clear();
+	    // if( m_AdditionalReferences.Count > 0 )
+	    //     m_AdditionalReferences.Clear();
 
-	    List<Assembly> assemblies = new List<Assembly>();
+	    // List<Assembly> assemblies = new List<Assembly>();
 
-	    Assembly assembly;
+	    // Assembly assembly;
 
-	    if( CompileCSScripts( debug, cache, out assembly ) )
-	    {
-		if( assembly != null )
-		{
-		    assemblies.Add( assembly );
-		}
-	    }
-	    else
-	    {
-		return false;
-	    }
+	    // if( CompileCSScripts( debug, cache, out assembly ) )
+	    // {
+	    //     if( assembly != null )
+	    //     {
+	    //         assemblies.Add( assembly );
+	    //     }
+	    // }
+	    // else
+	    // {
+	    //     return false;
+	    // }
 
-	    if( assemblies.Count == 0 )
-	    {
-		return false;
-	    }
+	    // if( assemblies.Count == 0 )
+	    // {
+	    //     return false;
+	    // }
 
-	    m_Assemblies = assemblies.ToArray();
+	    // m_Assemblies = assemblies.ToArray();
+
+            m_Assemblies = new Assembly[] { Assembly.GetExecutingAssembly() };
 
 	    Console.Write( "Scripts: Verifying..." );
 
