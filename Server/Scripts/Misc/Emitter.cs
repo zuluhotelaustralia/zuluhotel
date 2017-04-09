@@ -11,7 +11,6 @@ namespace Server
 	{
 		private string m_AssemblyName;
 
-		private AppDomain m_AppDomain;
 		private AssemblyBuilder m_AssemblyBuilder;
 		private ModuleBuilder m_ModuleBuilder;
 
@@ -19,28 +18,30 @@ namespace Server
 		{
 			m_AssemblyName = assemblyName;
 
-			m_AppDomain = AppDomain.CurrentDomain;
-
-			m_AssemblyBuilder = m_AppDomain.DefineDynamicAssembly(
+			m_AssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
 				new AssemblyName( assemblyName ),
-				canSave ? AssemblyBuilderAccess.RunAndSave : AssemblyBuilderAccess.Run
+                                AssemblyBuilderAccess.Run
+                                // Saving is not supported in .netcore
+///				canSave ? AssemblyBuilderAccess.RunAndSave : AssemblyBuilderAccess.Run
 			);
 
-			if ( canSave )
-			{
-				m_ModuleBuilder = m_AssemblyBuilder.DefineDynamicModule(
-					assemblyName,
-					String.Format( "{0}.dll", assemblyName.ToLower() ),
-					false
-				);
-			}
-			else
-			{
-				m_ModuleBuilder = m_AssemblyBuilder.DefineDynamicModule(
-					assemblyName,
-					false
-				);
-			}
+                        m_ModuleBuilder = m_AssemblyBuilder.DefineDynamicModule( assemblyName );
+
+			// if ( canSave )
+			// {
+			// 	m_ModuleBuilder = m_AssemblyBuilder.DefineDynamicModule(
+			// 		assemblyName,
+			// 		String.Format( "{0}.dll", assemblyName.ToLower() ),
+			// 		false
+			// 	);
+			// }
+			// else
+			// {
+				// m_ModuleBuilder = m_AssemblyBuilder.DefineDynamicModule(
+				// 	assemblyName,
+				// 	false
+				// );
+			// }
 		}
 
 		public TypeBuilder DefineType( string typeName, TypeAttributes attrs, Type parentType )
@@ -50,9 +51,12 @@ namespace Server
 
 		public void Save()
 		{
-			m_AssemblyBuilder.Save(
-				String.Format( "{0}.dll", m_AssemblyName.ToLower() )
-			);
+                    Console.WriteLine("WARNING: Saving assemblies is not supported.");
+                    // TODO: WTF is this whole thing even for?
+
+			// m_AssemblyBuilder.Save(
+			// 	String.Format( "{0}.dll", m_AssemblyName.ToLower() )
+			// );
 		}
 	}
 
@@ -504,25 +508,25 @@ namespace Server
 			if ( compareTo == null )
 			{
 				/* This gets a little tricky...
-				 * 
+				 *
 				 * There's a scenario where we might be trying to use CompareTo on an interface
 				 * which, while it doesn't explicitly implement CompareTo itself, is said to
 				 * extend IComparable indirectly.  The implementation is implicitly passed off
 				 * to implementers...
-				 * 
+				 *
 				 * interface ISomeInterface : IComparable
 				 * {
 				 *    void SomeMethod();
 				 * }
-				 * 
+				 *
 				 * class SomeClass : ISomeInterface
 				 * {
 				 *    void SomeMethod() { ... }
 				 *    int CompareTo( object other ) { ... }
 				 * }
-				 * 
+				 *
 				 * In this case, calling ISomeInterface.GetMethod( "CompareTo" ) will return null.
-				 * 
+				 *
 				 * Bleh.
 				 */
 
@@ -555,11 +559,11 @@ namespace Server
 			if ( !active.IsValueType )
 			{
 				/* This object is a reference type, so we have to make it behave
-				 * 
+				 *
 				 * null.CompareTo( null ) =  0
 				 * real.CompareTo( null ) = -1
 				 * null.CompareTo( real ) = +1
-				 * 
+				 *
 				 */
 
 				LocalBuilder aValue = AcquireTemp( active );
