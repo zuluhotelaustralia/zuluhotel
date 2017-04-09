@@ -631,10 +631,10 @@ namespace Server
 
 		public void AddServer( string name, IPEndPoint address )
 		{
-			AddServer( name, 0, TimeZone.CurrentTimeZone, address );
+			AddServer( name, 0, TimeZoneInfo.Local.GetUtcOffset( DateTime.Now ).Hours, address );
 		}
 
-		public void AddServer( string name, int fullPercent, TimeZone tz, IPEndPoint address )
+		public void AddServer( string name, int fullPercent, int tz, IPEndPoint address )
 		{
 			m_Servers.Add( new ServerInfo( name, fullPercent, tz, address ) );
 		}
