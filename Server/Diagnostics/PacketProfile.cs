@@ -67,25 +67,25 @@ namespace Server.Diagnostics {
 	    }
 	}
 
-	private Object AcquireLock = new Object();
+	private static Object AcquireLock = new Object();
 	public static PacketSendProfile Acquire( Type type ) {
 	    lock (AcquireLock){
 		PacketSendProfile prof;
-		    
+
 		if ( !_profiles.TryGetValue( type, out prof ) ) {
 		    _profiles.Add( type, prof = new PacketSendProfile( type ) );
 		}
-		    
+
 		return prof;
 	    }
 	}
-	    
+
 	private long _created;
-	    
+
 	public void Increment() {
 	    Interlocked.Increment(ref _created);
 	}
-	    
+
 	public PacketSendProfile( Type type )
 	    : base( type.FullName ) {
 	}
@@ -106,15 +106,15 @@ namespace Server.Diagnostics {
 	    }
 	}
 
-	private Object AcquireLock = new Object();
+	private static Object AcquireLock = new Object();
 	public static PacketReceiveProfile Acquire( int packetId ) {
 	    lock (AcquireLock){
 		PacketReceiveProfile prof;
-		
+
 		if ( !_profiles.TryGetValue( packetId, out prof ) ) {
 		    _profiles.Add( packetId, prof = new PacketReceiveProfile( packetId ) );
 		}
-		
+
 		return prof;
 	    }
 	}

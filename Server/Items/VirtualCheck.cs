@@ -271,8 +271,7 @@ namespace Server
 				AddImage(360, 8, 113);
 
 				var title = String.Format(
-					"<BASEFONT COLOR=#{0:X}><CENTER>BANK OF {1}</CENTER>",
-					Color.DarkSlateGray.ToArgb(),
+					"<BASEFONT COLOR=#333333><CENTER>BANK OF {0}</CENTER>",
 					User.RawName.ToUpper());
 
 				AddHtml(40, 15, 320, 20, title, false, false);

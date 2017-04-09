@@ -154,67 +154,71 @@ namespace Server
 
 	public static bool CompileCSScripts( bool debug, bool cache, out Assembly assembly )
 	{
-	    Console.Write( "Scripts: Compiling C# scripts..." );
-	    string[] files = GetScripts( "*.cs" );
+	    Console.Write( "Script compiler disabled..." );
+            assembly = null;
+            return false;
 
-	    if( files.Length == 0 )
-	    {
-		Console.WriteLine( "no files found." );
-		assembly = null;
-		return true;
-	    }
+	    // string[] files = GetScripts( "*.cs" );
 
-	    if( File.Exists( "Scripts/Output/Scripts.CS.dll" ) )
-	    {
-		if( cache && File.Exists( "Scripts/Output/Scripts.CS.hash" ) )
-		{
-		    try
-		    {
-			byte[] hashCode = GetHashCode( "Scripts/Output/Scripts.CS.dll", files, debug );
+	    // if( files.Length == 0 )
+	    // {
+	    //     Console.WriteLine( "no files found." );
+	    //     assembly = null;
+	    //     return true;
+	    // }
 
-			using( FileStream fs = new FileStream( "Scripts/Output/Scripts.CS.hash", FileMode.Open, FileAccess.Read, FileShare.Read ) )
-			{
-			    using( BinaryReader bin = new BinaryReader( fs ) )
-			    {
-				byte[] bytes = bin.ReadBytes( hashCode.Length );
+	    // if( File.Exists( "Scripts/Output/Scripts.CS.dll" ) )
+	    // {
+	    //     if( cache && File.Exists( "Scripts/Output/Scripts.CS.hash" ) )
+	    //     {
+	    //         try
+	    //         {
+	    //     	byte[] hashCode = GetHashCode( "Scripts/Output/Scripts.CS.dll", files, debug );
 
-				if( bytes.Length == hashCode.Length )
-				{
-				    bool valid = true;
+	    //     	using( FileStream fs = new FileStream( "Scripts/Output/Scripts.CS.hash", FileMode.Open, FileAccess.Read, FileShare.Read ) )
+	    //     	{
+	    //     	    using( BinaryReader bin = new BinaryReader( fs ) )
+	    //     	    {
+	    //     		byte[] bytes = bin.ReadBytes( hashCode.Length );
 
-				    for( int i = 0; i < bytes.Length; ++i )
-				    {
-					if( bytes[i] != hashCode[i] )
-					{
-					    valid = false;
-					    break;
-					}
-				    }
+	    //     		if( bytes.Length == hashCode.Length )
+	    //     		{
+	    //     		    bool valid = true;
 
-				    if( valid )
-				    {
-					assembly = Assembly.LoadFrom( "Scripts/Output/Scripts.CS.dll" );
+	    //     		    for( int i = 0; i < bytes.Length; ++i )
+	    //     		    {
+	    //     			if( bytes[i] != hashCode[i] )
+	    //     			{
+	    //     			    valid = false;
+	    //     			    break;
+	    //     			}
+	    //     		    }
 
-					if( !m_AdditionalReferences.Contains( assembly.Location ) )
-					{
-					    m_AdditionalReferences.Add( assembly.Location );
-					}
+	    //     		    if( valid )
+	    //     		    {
+	    //     			assembly = Assembly.LoadFrom( "Scripts/Output/Scripts.CS.dll" );
 
-					Console.WriteLine( "done (cached)" );
+	    //     			if( !m_AdditionalReferences.Contains( assembly.Location ) )
+	    //     			{
+	    //     			    m_AdditionalReferences.Add( assembly.Location );
+	    //     			}
 
-					return true;
-				    }
-				}
-			    }
-			}
-		    }
-		    catch
-		    {
-		    }
-		}
-	    }
+	    //     			Console.WriteLine( "done (cached)" );
 
-	    DeleteFiles( "Scripts.CS*.dll" );
+	    //     			return true;
+	    //     		    }
+	    //     		}
+	    //     	    }
+	    //     	}
+	    //         }
+	    //         catch
+	    //         {
+	    //         }
+	    //     }
+	    // }
+
+	    // DeleteFiles( "Scripts.CS*.dll" );
+
 
 	    // using ( CSharpCodeProvider provider = new CSharpCodeProvider() )
 	    // {
