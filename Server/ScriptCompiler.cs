@@ -91,13 +91,7 @@ namespace Server
 	    if( Core.Is64Bit )
 		AppendCompilerOption( ref sb, "/d:x64" );
 
-	    #if NEWTIMERS
-	    AppendCompilerOption(ref sb, "/d:NEWTIMERS");
-	    #endif
-
-	    #if NEWPARENT
 	    AppendCompilerOption(ref sb, "/d:NEWPARENT");
-	    #endif
 
 	    return (sb == null ? null : sb.ToString());
 	}
