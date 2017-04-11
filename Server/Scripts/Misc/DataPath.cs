@@ -18,7 +18,7 @@ namespace Server.Misc
 
 	private static string CustomPath = "/home/nathan/documents/code/runzh/muls/";
 
-	/* The following is a list of files which a required for proper execution:
+	/* The following is a list of files which are required for proper execution:
 	 *
 	 * Multi.idx
 	 * Multi.mul
