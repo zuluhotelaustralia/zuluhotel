@@ -15,4 +15,4 @@ Using your text editor of choice, edit Server/Scripts/Misc/DataPath.cs and chang
 private static string CustomPath = "/home/runzh/server/muls/";
 ```
 
-IRC:  irc.quakenet.org #zuluhotel
+IRC:  irc.freenode.net #zuluhotel
