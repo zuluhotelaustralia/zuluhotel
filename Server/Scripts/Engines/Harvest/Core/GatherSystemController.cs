@@ -69,7 +69,7 @@ namespace Server.Items {
 	    Console.WriteLine("Done!  Initialized "+ i +" GatherNodes.");
 	}
 	
-	public void Serialize( GenericWriter writer ){
+	public override void Serialize( GenericWriter writer ){
 	    base.Serialize(writer);
 
 	    writer.Write( (int) 0 ); //version
@@ -84,7 +84,7 @@ namespace Server.Items {
 	    
 	}
 
-	public void Deserialize( GenericReader reader ) {
+	public override void Deserialize( GenericReader reader ) {
 	    int version = reader.ReadInt();
 
 	    int x;

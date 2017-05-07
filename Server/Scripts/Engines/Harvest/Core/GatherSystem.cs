@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Math;
 using Server;
+using Server.Mobiles;
 using Server.Items;
 using Server.Targeting;
 
@@ -27,7 +27,7 @@ namespace Server.Engines.Harvest {
 	}
 
 	//attenuate abundance by distance from node
-	public static double ScaleByDistance( GatherNode n, PlayerMobile m ){
+	public static double ScaleByDistance( GatherNode n, Mobile m ){
 	    int deltaX = Math.Abs( m.X - n.X );
 	    int deltaY = Math.Abs( m.Y - n.Y );
 
