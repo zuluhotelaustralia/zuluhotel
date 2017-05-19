@@ -78,6 +78,11 @@ namespace Server.Engines.Harvest {
 		// with mining skill of 90.0 against a reqskill of 30.0
 		// chance = 270% i.e. you'll hit it every time you try
 	    }
+
+	    //cap harvesting success rate at 98%
+	    if ( chance > 1.0 ) {
+		chance = 0.98;
+	    }
 		
 	    return m.CheckSkill( s, chance );
 	}
