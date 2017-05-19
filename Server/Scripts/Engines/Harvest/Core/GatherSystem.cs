@@ -36,8 +36,50 @@ namespace Server.Engines.Harvest {
 	    return a;
 	}
 	
-	// determine which ores are available skillwise
-	// that's your new list, normalize the abundances to 100%, order by maxskill
-	// diceroll -> get ore
+	// build a list of which nodes are available to the player, skillwise
+	public static List<GatherNode> BuildNodeList( Skill s ){
+	    List<GatherNode> nodes = new List<GatherNode>();
+
+	    foreach (GatherNode n in m_Nodes) {
+		if ( n.Resource.ReqSkill <= s.Value ) {
+		    nodes.Add(n);  //add the node from m_Nodes to the ephemeral list we're building
+		}
+	    }
+
+	    return nodes;
+	}
+
+	//roll a random number against the list from BuildNodeList to determine which node we try to strike
+	public static GatherNode Strike( List<GatherNode> nodes){
+	    int numNodes = nodes.Count();
+	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
+
+	    // list indices are zero-based
+	    return nodes.Item( nodeStruck - 1 );
+	}
+
+	//attempt to harvest from selected node
+	public static bool TryGather( PlayerMobile m, Skill s ){
+	    GatherNode n = Strike( BuildNodeList( s ) );
+
+	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
+	    double chance;
+
+	    if ( s.Value - n.Resource.ReqSkill < 0.0 ) {
+		chance = 0.0;
+	    }
+	    else {
+		chance = s.Value * n.Abundance / n.Resource.ReqSkill;
+		
+		// e.g. for a rare ore (executor, let's say) with a=0.1,
+		// with mining skill of 90.0 against a reqskill of 80.0
+		// chance = 11.1%
+		// whereas, for a common ore (e.g. iron) with a=0.9
+		// with mining skill of 90.0 against a reqskill of 30.0
+		// chance = 270% i.e. you'll hit it every time you try
+	    }
+		
+	    return m.CheckSkill( s, chance );
+	}
     }
 }

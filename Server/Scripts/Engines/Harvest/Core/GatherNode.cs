@@ -13,7 +13,10 @@ namespace Server.Engines.Harvest {
 	private int m_vY; //2D direction vector for shifting locations
 
 	private HarvestResource m_Res; //what resource are we spawning here? 
-	private double m_Abundance; //how plentiful?
+	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
+
+	private static GatherType m_GatherType;
+	public static GatherType GatherType { get { return m_GatherType; } set { m_GatherType = value; } }
 
 	//minskill and maxskill are handled by the resource
 	
