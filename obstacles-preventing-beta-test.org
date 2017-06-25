@@ -2,6 +2,14 @@ This is a list of all the things that need to be done before we can launch a bet
 
 * TODO finish off GatherSystem
 ** TODO new class GatherTarget, similar to HarvestTarget
+*** special checks for GatherTarget.OnTarget:
+**** TODO use mining on a grave to get bones, see HarvestTarget.cs for tile ids
+**** TODO check if using lumberjacking on an IChopable, call targeted.OnChop
+**** TODO check if using an axe (lumberjacking) on an IAxe, then call targeted.Axe 
+**** TODO check if using lumberjacking on an ICarvable, call targeted.carve
+**** TODO check if furnitureattribute.check(targeted as item), then DestroyFurniture()
+**** TODO check if using mining on a treasuremap, call (tmap)targeted.onbegindig
+**** otherwise it just calls StartHarvesting if none of those are true
 ** TODO derive new GatherSystem classes from GatherSystem
 *** TODO make gathersystem abstract
 *** TODO use FOAM or whatever to generate as much as possible -> tile lists etc.
@@ -31,3 +39,4 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO skillgain for class skills
 ** TODO skill success rates for class skills
 ** TODO ensure only spec crafters can work with and mine the jewels
+   
