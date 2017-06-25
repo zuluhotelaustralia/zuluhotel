@@ -26,6 +26,14 @@ namespace Server.Engines.Harvest {
 	    m_Nodes.Add(n);
 	}
 
+	//entry point
+	public static bool BeginGathering( Mobile from, Item tool ){
+	    //check if valid gathering location/tool uses remaining/tool broken/etc.
+	    
+	    from.Target = new GatherTarget( tool, this );
+	    return true;
+	}
+	
 	//attenuate abundance by distance from node
 	public static double ScaleByDistance( GatherNode n, Mobile m ){
 	    int deltaX = Math.Abs( m.X - n.X );
