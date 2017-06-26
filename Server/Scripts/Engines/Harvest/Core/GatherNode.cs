@@ -15,10 +15,8 @@ namespace Server.Engines.Harvest {
 	private HarvestResource m_Res; //what resource are we spawning here? 
 	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
 
-	private static GatherType m_GatherType;
-	public static GatherType GatherType { get { return m_GatherType; } set { m_GatherType = value; } }
-
 	//minskill and maxskill are handled by the resource
+	//skill is handled by the derived type
 	
 	public int X { get { return m_X; } set { m_X = value; } }
 	public int Y { get { return m_Y; } set { m_Y = value; } }

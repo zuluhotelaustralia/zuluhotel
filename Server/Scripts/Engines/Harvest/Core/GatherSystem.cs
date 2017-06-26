@@ -7,35 +7,36 @@ using Server.Items;
 using Server.Targeting;
 
 namespace Server.Engines.Harvest {
-    public static class GatherSystem {
+    public abstract class GatherSystem {
 	
-	private static List<GatherNode> m_Nodes;
-	public static List<GatherNode> Nodes { get { return m_Nodes; } }
+	private List<GatherNode> m_Nodes;
+	public List<GatherNode> Nodes { get { return m_Nodes; } }
 
-	public static void Setup() {
+	public void Setup() {
 	    //hopefully this solves the race condition??
 	    m_Nodes = new List<GatherNode>();
 	}
 	
 	//danger, will robinson
-	public static void ClearNodes() {
+	public void ClearNodes() {
 	    m_Nodes.Clear();
 	}
 	
-	public static void AddNode( GatherNode n ){
+	public void AddNode( GatherNode n ){
 	    m_Nodes.Add(n);
 	}
 
 	//entry point
-	public static bool BeginGathering( Mobile from, Item tool ){
+	public bool BeginGathering( Mobile from, Item tool ){
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
 	    
 	    from.Target = new GatherTarget( tool, this );
 	    return true;
 	}
+
 	
 	//attenuate abundance by distance from node
-	public static double ScaleByDistance( GatherNode n, Mobile m ){
+	public double ScaleByDistance( GatherNode n, Mobile m ){
 	    int deltaX = Math.Abs( m.X - n.X );
 	    int deltaY = Math.Abs( m.Y - n.Y );
 
@@ -45,7 +46,7 @@ namespace Server.Engines.Harvest {
 	}
 	
 	// build a list of which nodes are available to the player, skillwise
-	public static List<GatherNode> BuildNodeList( Skill s ){
+	public List<GatherNode> BuildNodeList( Skill s ){
 	    List<GatherNode> nodes = new List<GatherNode>();
 
 	    foreach (GatherNode n in m_Nodes) {
@@ -58,7 +59,7 @@ namespace Server.Engines.Harvest {
 	}
 
 	//roll a random number against the list from BuildNodeList to determine which node we try to strike
-	public static GatherNode Strike( List<GatherNode> nodes){
+	public GatherNode Strike( List<GatherNode> nodes){
 	    int numNodes = nodes.Count();
 	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
 
@@ -67,7 +68,7 @@ namespace Server.Engines.Harvest {
 	}
 
 	//attempt to harvest from selected node
-	public static bool TryGather( PlayerMobile m, Skill s ){
+	public bool TryGather( PlayerMobile m, Skill s ){
 	    GatherNode n = Strike( BuildNodeList( s ) );
 
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
