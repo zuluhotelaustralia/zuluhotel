@@ -34,6 +34,9 @@ namespace Server.Engines.Harvest {
 	    return true;
 	}
 
+	public void StartGathering( Mobile from, Item tool, object targeted ) {
+	    // wtf goes here?
+	}
 	
 	//attenuate abundance by distance from node
 	public double ScaleByDistance( GatherNode n, Mobile m ){
@@ -92,7 +95,9 @@ namespace Server.Engines.Harvest {
 	    if ( chance > 1.0 ) {
 		chance = 0.98;
 	    }
-		
+
+	    m_System.GiveResources();
+	    
 	    return m.CheckSkill( s, chance );
 	}
     }
