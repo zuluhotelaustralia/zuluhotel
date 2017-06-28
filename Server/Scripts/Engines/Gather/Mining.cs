@@ -128,7 +128,7 @@ namespace Server.Engines.Gather
 	{
             // TODO
 	    if( false /*they're mining sand?*/){
-		if ( m_RangedTiles )
+		if ( false /*m_RangedTiles*/ )
 		{
 		    bool contains = false;
 
@@ -149,7 +149,7 @@ namespace Server.Engines.Gather
 	    }//if they're mining sand
             // TODO
 	    else if( false /*they're mining ore*/ ){
-		if ( m_RangedTiles )
+		if ( false /*m_RangedTiles*/ )
 		{
 		    bool contains = false;
 
@@ -168,11 +168,12 @@ namespace Server.Engines.Gather
 		    return ( dist == 0 );
 		}
 	    }
+            return false;
 	}
 
 	public override bool BeginGathering( Mobile from, Item tool )
 	{
-	    if ( !base.BeginHarvesting( from, tool ) )
+	    if ( !base.BeginGathering( from, tool ) )
 		return false;
 
 	    from.SendLocalizedMessage( 503033 ); // Where do you wish to dig?
@@ -216,12 +217,12 @@ namespace Server.Engines.Gather
 	    // if ( !base.CheckHarvest( from, tool, toHarvest ) )
 	    //     return false;
 
-	    if ( def == m_Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 100.0 && ((PlayerMobile)from).SandMining) )
+            /*	    if ( def == m_Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 100.0 && ((PlayerMobile)from).SandMining) )
 	    {
 		OnBadGatherTarget( from, tool, toHarvest );
 		return false;
 	    }
-	    else if ( from.Mounted )
+	    else */if ( from.Mounted )
 	    {
 		from.SendLocalizedMessage( 501864 ); // You can't mine while riding.
 		return false;
