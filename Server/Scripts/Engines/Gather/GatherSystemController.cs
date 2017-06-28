@@ -7,6 +7,13 @@ using Server.Engines.Gather;
 namespace Server.Items {
     public class GatherSystemController : Item {
 
+	public enum ControlledSystem{
+	    None,
+	    Mining,
+	    Lumberjacking,
+	    Fishing
+	}
+	
 	private enum Ores{
 	    AnraOre,
 	    AzuriteOre,
@@ -45,6 +52,8 @@ namespace Server.Items {
 	    VirginityOre
 	}
 
+	private ControlledSystem m_ControlledSystem = ControlledSystem.None;
+	
 	private GatherSystem m_System;
 	public GatherSystem System {
 	    get {
@@ -62,31 +71,15 @@ namespace Server.Items {
 	
 	//worldsave only serializes items, so:
 	public static void Initialize() {
-	    Console.WriteLine("Initializing Gather System nodes...");
-	    
-	    int i = 0;
-
-	    if( m_System == null ) {
-		Console.WriteLine("Error:  Gather System Controller not configured!");
-	    }
-	    else {
-		if( m_System.Nodes == null ) {
-		    m_System.Setup();
-		}
-
-		// foreach( GatherNode n in m_Nodes ){
-		//     m_System.AddNode(n);
-		//     i++;
-		// }
-	    }
-	    
-	    Console.WriteLine("Done!  Initialized "+ i +" GatherNodes.");
+	    // coming soon
 	}
 
 	public override void Serialize( GenericWriter writer ){
 	    base.Serialize(writer);
 
 	    writer.Write( (int) 0 ); //version
+
+	    writer.Write( (int)m_ControlledSystem );
 
 	}
 
@@ -97,8 +90,31 @@ namespace Server.Items {
 	    {
 		case 0:
 		    {
+			m_ControlledSystem = (ControlledSystem)reader.ReadInt();
+			
 			// the engine has to know which stone it takes orders from
-			Server.Engines.Gather.Mining.Controller = this;
+			switch( m_ControlledSystem )
+			{
+			    case ControlledSystem.None:
+				{
+				    break;
+				}
+			    case ControlledSystem.Mining:
+				{
+				    Server.Engines.Gather.Mining.Setup(this);
+				    break;
+				}
+			    case ControlledSystem.Lumberjacking:
+				{
+				    Server.Engines.Gather.Lumberjacking.Setup(this);
+				    break;
+				}
+			    case ControlledSystem.Fishing:
+				{
+				    Server.Engines.Gather.Fishing.Setup(this);
+				    break;
+				}
+			}
 			break;
 		    }
 		default:

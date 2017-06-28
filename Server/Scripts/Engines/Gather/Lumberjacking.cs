@@ -1,5 +1,14 @@
+using Server.Items;
+
 namespace Server.Engines.Gather {
     public class Lumberjacking : Server.Engines.Gather.GatherSystem {
+
+	private static GatherSystemController m_Controller;
+	
+	public static void Setup( GatherSystemController stone ) {
+	    m_Controller = stone;
+	}
+	
         private static Lumberjacking m_System;
         public static Lumberjacking System {
             get {

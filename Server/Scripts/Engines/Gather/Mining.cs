@@ -112,18 +112,24 @@ namespace Server.Engines.Gather
 		0x4549, 0x454A, 0x454B, 0x454C, 0x454D, 0x454E,	0x454F
 	    };
 
+	private static GatherSystemController m_Controller;
+	
+	public static void Setup( GatherSystemController stone ) {
+	    m_Controller = stone;
+	}
+	
 	private static Mining m_System;
 	public static Mining System
-	{
-	    get
+	{    get
 	    {
-		if ( m_System == null )
+		if ( m_System == null ) {
 		    m_System = new Mining();
-
+		}
+		
 		return m_System;
 	    }
 	}
-
+    
 	public bool Validate( int tileID )
 	{
             // TODO

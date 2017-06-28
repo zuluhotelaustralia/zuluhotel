@@ -1,5 +1,14 @@
+using Server.Items;
+
 namespace Server.Engines.Gather {
     public class Fishing : Server.Engines.Gather.GatherSystem {
+
+	private static GatherSystemController m_Controller;
+	
+	public static void Setup( GatherSystemController stone ) {
+	    m_Controller = stone;
+	}
+	
         private static Fishing m_System;
         public static Fishing System {
             get {
