@@ -12,6 +12,9 @@ namespace Server.Engines.Gather {
 	private List<GatherNode> m_Nodes;
 	public List<GatherNode> Nodes { get { return m_Nodes; } }
 
+	private GatherSystemController m_Controller;
+	public GatherSystemController Controller { get { return m_Controller; } set { m_Controller = value; } }
+
 	public void Setup() {
 	    //hopefully this solves the race condition??
 	    m_Nodes = new List<GatherNode>();

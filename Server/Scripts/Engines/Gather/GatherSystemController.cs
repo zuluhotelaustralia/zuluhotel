@@ -45,9 +45,6 @@ namespace Server.Items {
 	    VirginityOre
 	}
 
-	private List<GatherNode> m_Nodes;
-	public List<GatherNode> Nodes { get { return m_Nodes; } }
-
 	private GatherSystem m_System;
 	public GatherSystem System {
 	    get {
@@ -64,12 +61,8 @@ namespace Server.Items {
 	}
 	
 	//worldsave only serializes items, so:
-	public void Initialize() {
+	public static void Initialize() {
 	    Console.WriteLine("Initializing Gather System nodes...");
-
-	    if( m_Nodes == null ) {
-		m_Nodes = new List<GatherNode>();
-	    }
 	    
 	    int i = 0;
 
@@ -77,8 +70,10 @@ namespace Server.Items {
 		Console.WriteLine("Error:  Gather System Controller not configured!");
 	    }
 	    else {
-		m_System.Setup();
-		// GatherSystem.ClearNodes(); // necessary?
+		if( m_System.Nodes == null ) {
+		    m_System.Setup();
+		}
+
 		foreach( GatherNode n in m_Nodes ){
 		    m_System.AddNode(n);
 		    i++;
@@ -93,41 +88,17 @@ namespace Server.Items {
 
 	    writer.Write( (int) 0 ); //version
 
-	    foreach(GatherNode n in m_Nodes){
-		writer.Write( n.X );
-		writer.Write( n.Y );
-		writer.Write( n.vX );
-		writer.Write( n.vY );
-		writer.Write( n.Abundance );
-	    }
-
 	}
 
 	public override void Deserialize( GenericReader reader ) {
 	    int version = reader.ReadInt();
 
-	    int x;
-	    int y;
-	    int vx;
-	    int vy;
-	    double a;
-
 	    switch( version )
 	    {
 		case 0:
 		    {
-			foreach( var t in Enum.GetValues(typeof(Ores)) ) {
-			    x = reader.ReadInt();
-			    y = reader.ReadInt();
-			    vx = reader.ReadInt();
-			    vy = reader.ReadInt();
-			    a = reader.ReadDouble();
-
-			    //make this more elegant
-			    GatherNode node = new GatherNode( x, y, vx, vy, a, new HarvestResource( 0.00, 0.00, 100.00, 1007072, Type.GetType( t.ToString() ) ) );
-			    m_Nodes.Add(node);
-			}
-
+			// the engine has to know which stone it takes orders from
+			Server.Engines.Gather.Mining.Controller = this;
 			break;
 		    }
 		default:
