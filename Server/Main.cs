@@ -469,10 +469,10 @@ namespace Server
 		Console.WriteLine( "Core: Optimizing for {0} {2}processor{1}", m_ProcessorCount, m_ProcessorCount == 1 ? "" : "s", Is64Bit ? "64-bit " : "" );
 
 	    int platform = (int)Environment.OSVersion.Platform;
-	    //if( platform == 4 || platform == 128 ) { // MS 4, MONO 128
-	    m_Unix = true;
-	    //	Console.WriteLine( "Core: Unix environment detected" );
-	    //}
+	    if( platform == 4 || platform == 128 ) { // MS 4, MONO 128
+		m_Unix = true;
+		Console.WriteLine( "Core: Unix environment detected" );
+	    }
 	    else {
 		m_ConsoleEventHandler = OnConsoleEvent;
 		UnsafeNativeMethods.SetConsoleCtrlHandler( m_ConsoleEventHandler, true );
