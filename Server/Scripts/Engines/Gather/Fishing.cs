@@ -1,4 +1,4 @@
-namespace Servers.Engines.Gather {
+namespace Server.Engines.Gather {
     public class Fishing : Server.Engines.Gather.GatherSystem {
         private static Fishing m_System;
         public static Fishing System {

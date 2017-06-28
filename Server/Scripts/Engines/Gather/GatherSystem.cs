@@ -63,11 +63,11 @@ namespace Server.Engines.Gather {
 
 	//roll a random number against the list from BuildNodeList to determine which node we try to strike
 	public GatherNode Strike( List<GatherNode> nodes){
-	    int numNodes = nodes.Count();
+	    int numNodes = nodes.Count;
 	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
 
 	    // list indices are zero-based
-	    return nodes.Item( nodeStruck - 1 );
+	    return nodes[ nodeStruck - 1 ];
 	}
 
 	//attempt to harvest from selected node
@@ -96,7 +96,8 @@ namespace Server.Engines.Gather {
 		chance = 0.98;
 	    }
 
-	    m_System.GiveResources();
+            // TODO: Award resources.
+//	    m_System.GiveResources();
 
 	    return m.CheckSkill( s, chance );
 	}
