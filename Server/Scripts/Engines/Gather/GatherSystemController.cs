@@ -45,28 +45,46 @@ namespace Server.Items {
 	    VirginityOre
 	}
 
-	private static List<GatherNode> m_Nodes;
-	public static List<GatherNode> Nodes { get { return m_Nodes; } }
+	private List<GatherNode> m_Nodes;
+	public List<GatherNode> Nodes { get { return m_Nodes; } }
+
+	private GatherSystem m_System;
+	public GatherSystem System {
+	    get {
+		return m_System;
+	    }
+	    set {
+		m_System = value;
+	    }
+	}
 
 	public GatherSystemController() : base ( 0xED4 ) {
 	}
 	public GatherSystemController( Serial serial ) : base( serial ){
 	}
-
+	
 	//worldsave only serializes items, so:
-	public static void Initialize() {
+	public void Initialize() {
 	    Console.WriteLine("Initializing Gather System nodes...");
 
-	    m_Nodes = new List<GatherNode>();
-
-	    int i = 0;
-	    GatherSystem.Setup();
-	    // GatherSystem.ClearNodes(); // necessary?
-	    foreach( GatherNode n in m_Nodes ){
-		GatherSystem.AddNode(n);
-		i++;
+	    if( m_Nodes == null ) {
+		m_Nodes = new List<GatherNode>();
 	    }
+	    
+	    int i = 0;
 
+	    if( m_System == null ) {
+		Console.WriteLine("Error:  Gather System Controller not configured!");
+	    }
+	    else {
+		m_System.Setup();
+		// GatherSystem.ClearNodes(); // necessary?
+		foreach( GatherNode n in m_Nodes ){
+		    m_System.AddNode(n);
+		    i++;
+		}
+	    }
+	    
 	    Console.WriteLine("Done!  Initialized "+ i +" GatherNodes.");
 	}
 
