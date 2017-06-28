@@ -60,6 +60,7 @@ namespace Server.Items
 				return;
 			}
 
+                        // TODO(adamvy): Update this to GatherSystem?
 			HarvestSystem system = Mining.System;
 
 			int tileID;

@@ -18,6 +18,7 @@ namespace Server.Items
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
 		public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
+		public virtual GatherSystem GatherSystem{ get{ return Server.Engines.Harvest.GatherSystem.Lumberjacking.System; } }
 
 		private int m_UsesRemaining;
 		private bool m_ShowUsesRemaining;
@@ -29,7 +30,20 @@ namespace Server.Items
 			set { m_UsesRemaining = value; InvalidateProperties(); }
 		}
 
-		[CommandProperty( AccessLevel.GameMaster )]
+            private boolean m_UseGatherSystem;
+            [CommandProperty( AccessLevel.GameMaster )]
+            public boolean UseGatherSystem
+            {
+                get { return m_UseGatherSystem; }
+                set {
+                    m_UseGatherSystem = value;
+                    this.Name = null;
+                    this.Name = this.Name + "[" + ( m_UseGatherSystem ? "RunZH Gathering" : "RunUO Harvesting" ) + "]";
+                    InvalidateProperties();
+                }
+            }
+
+            [CommandProperty( AccessLevel.GameMaster )]
 		public bool ShowUsesRemaining
 		{
 			get { return m_ShowUsesRemaining; }

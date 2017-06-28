@@ -9,6 +9,7 @@ namespace Server.Items
 	public class Pickaxe : BaseAxe, IUsesRemaining
 	{
 		public override HarvestSystem HarvestSystem{ get{ return Mining.System; } }
+		public override GatherSystem GatherSystem{ get{ return Server.Engines.Harvest.GatherSystem.Mining.System; } }
 
 		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.DoubleStrike; } }
 		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.Disarm; } }

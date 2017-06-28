@@ -32,7 +32,8 @@ namespace Server.Items
 		public override WeaponType DefType{ get{ return WeaponType.Bashing; } }
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Bash1H; } }
 
-		public override HarvestSystem HarvestSystem{ get{ return null; } }
+            public override HarvestSystem HarvestSystem{ get{ return null; } }
+            public override GatherSystem GatherSystem{ get { return null; } }
 
 		[Constructable]
 		public WarAxe() : base( 0x13B0 )

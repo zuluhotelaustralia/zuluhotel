@@ -7,6 +7,7 @@ namespace Server.Items
 	public class Shovel : BaseHarvestTool
 	{
 		public override HarvestSystem HarvestSystem{ get{ return Mining.System; } }
+            public override GatherSystem GatherSystem{ get{ return Server.Engines.Harvest.GatherSystem.Mining.System; } }
 
 		[Constructable]
 		public Shovel() : this( 50 )

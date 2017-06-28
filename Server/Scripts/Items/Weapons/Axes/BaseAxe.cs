@@ -23,10 +23,25 @@ namespace Server.Items
 		public override WeaponType DefType{ get{ return WeaponType.Axe; } }
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
-		public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
+            public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
+            public virtual GatherSystem GatherSystem{ get { return Server.Engines.Harvest.GatherSystem.Lumberjacking.System; } }
 
 		private int m_UsesRemaining;
 		private bool m_ShowUsesRemaining;
+
+            private boolean m_UseGatherSystem;
+            [CommandProperty( AccessLevel.GameMaster )]
+            public boolean UseGatherSystem
+            {
+                get { return m_UseGatherSystem; }
+                set {
+                    m_UseGatherSystem = value;
+                    this.Name = null;
+                    this.Name = this.Name + "[" + ( m_UseGatherSystem ? "RunZH Gathering" : "RunUO Harvesting" ) + "]";
+                    InvalidateProperties();
+                }
+            }
+
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int UsesRemaining
@@ -96,17 +111,20 @@ namespace Server.Items
 				this.PublicOverheadMessage( MessageType.Regular, 0x3E9, 1061637 ); // You are not allowed to access this.
 				return;
 			}
-			
+
+                        // adamvy: What?  Shouldn't this be done in the HarvestSystem.BeginHarvesting?
 			if ( !(this.HarvestSystem is Mining) )
 				from.SendLocalizedMessage( 1010018 ); // What do you want to use this item on?
 
-			HarvestSystem.BeginHarvesting( from, this );
+                        if ( this.UseGatherSystem ) GatherSystem.BeginGathering( from, this );
+                        else HarvestSystem.BeginHarvesting( from, this );
 		}
 
 		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
 		{
 			base.GetContextMenuEntries( from, list );
 
+                        // TODO(adamvy): Do we care about this?
 			if ( HarvestSystem != null )
 				BaseHarvestTool.AddContextMenuEntries( from, this, list, HarvestSystem );
 		}

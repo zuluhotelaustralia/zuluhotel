@@ -8,6 +8,7 @@ namespace Server.Items
 	{
 		public override int LabelNumber{ get{ return 1041281; } } // a gargoyle's pickaxe
 		public override HarvestSystem HarvestSystem{ get{ return Mining.System; } }
+            public override GatherSystem GatherSystem{ get { return Server.Engines.Harvest.GatherSystem.Mining.System; } }
 
 		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.DoubleStrike; } }
 		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.Disarm; } }
@@ -22,7 +23,7 @@ namespace Server.Items
 		public override int OldMinDamage{ get{ return 1; } }
 		public override int OldMaxDamage{ get{ return 15; } }
 		public override int OldSpeed{ get{ return 35; } }
-		
+
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 60; } }
 
@@ -57,7 +58,7 @@ namespace Server.Items
 			base.Deserialize( reader );
 
 			int version = reader.ReadInt();
-			
+
 			if ( Hue == 0x973 )
 				Hue = 0x0;
 		}

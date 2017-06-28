@@ -7,7 +7,8 @@ namespace Server.Items
 	public class SturdyPickaxe : BaseAxe, IUsesRemaining
 	{
 		public override int LabelNumber{ get{ return 1045126; } } // sturdy pickaxe
-		public override HarvestSystem HarvestSystem{ get{ return Mining.System; } }
+            public override HarvestSystem HarvestSystem{ get{ return Mining.System; } }
+            public override GatherSystem GatherSystem{ get { return Server.Engines.Harvest.GatherSystem.Mining.System; } }
 
 		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.DoubleStrike; } }
 		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.Disarm; } }

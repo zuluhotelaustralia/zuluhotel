@@ -41,6 +41,19 @@ namespace Server.Items
 			set { m_UsesRemaining = value; InvalidateProperties(); }
 		}
 
+            private boolean m_UseGatherSystem;
+            [CommandProperty( AccessLevel.GameMaster )]
+            public boolean UseGatherSystem
+            {
+                get { return m_UseGatherSystem; }
+                set {
+                    m_UseGatherSystem = value;
+                    this.Name = null;
+                    this.Name = this.Name + "[" + ( m_UseGatherSystem ? "RunZH Gathering" : "RunUO Harvesting" ) + "]";
+                    InvalidateProperties();
+                }
+            }
+
 		public void ScaleUses()
 		{
 			m_UsesRemaining = (m_UsesRemaining * GetUsesScalar()) / 100;
@@ -62,7 +75,8 @@ namespace Server.Items
 
 		public bool ShowUsesRemaining{ get{ return true; } set{} }
 
-		public abstract HarvestSystem HarvestSystem{ get; }
+            public abstract HarvestSystem HarvestSystem{ get; }
+            public abstract GatherSystem GatherSystem{ get; }
 
 		public BaseHarvestTool( int itemID ) : this( 50, itemID )
 		{
