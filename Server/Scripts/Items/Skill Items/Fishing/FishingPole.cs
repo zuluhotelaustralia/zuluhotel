@@ -18,14 +18,29 @@ namespace Server.Items
 			Weight = 8.0;
 		}
 
+            private boolean m_UseGatherSystem;
+            [CommandProperty( AccessLevel.GameMaster )]
+            public boolean UseGatherSystem
+            {
+                get { return m_UseGatherSystem; }
+                set {
+                    m_UseGatherSystem = value;
+                    this.Name = null;
+                    this.Name = this.Name + "[" + ( m_UseGatherSystem ? "RunZH Gathering" : "RunUO Harvesting" ) + "]";
+                    InvalidateProperties();
+                }
+            }
+
 		public override void OnDoubleClick( Mobile from )
 		{
 			Point3D loc = GetWorldLocation();
 
 			if ( !from.InLOS( loc ) || !from.InRange( loc, 2 ) )
 				from.LocalOverheadMessage( MessageType.Regular, 0x3E9, 1019045 ); // I can't reach that
-			else
-				Fishing.System.BeginHarvesting( from, this );
+			else {
+                            if ( this.UseGatherSystem ) Server.Engines.Harvest.GatherSystem.Fishing.System.BeginGathering( from, this );
+                            else Fishing.System.BeginHarvesting( from, this );
+                        }
 		}
 
 		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
