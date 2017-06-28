@@ -67,6 +67,7 @@ namespace Server.Items
 			if ( IsChildOf( from.Backpack ) || Parent == from ) {
                             if ( this.UseGatherSystem ) GatherSystem.BeginGathering( from, this );
                             else  HarvestSystem.BeginHarvesting( from, this );
+                        }
 			else
 				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
 		}
