@@ -74,10 +74,10 @@ namespace Server.Items {
 		    m_System.Setup();
 		}
 
-		foreach( GatherNode n in m_Nodes ){
-		    m_System.AddNode(n);
-		    i++;
-		}
+		// foreach( GatherNode n in m_Nodes ){
+		//     m_System.AddNode(n);
+		//     i++;
+		// }
 	    }
 	    
 	    Console.WriteLine("Done!  Initialized "+ i +" GatherNodes.");
