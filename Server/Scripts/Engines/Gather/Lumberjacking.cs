@@ -1,5 +1,5 @@
-namespace Servers.Engines.Harvest.GatherSystem {
-    public class Lumberjacking : Server.Engines.Harvest.GatherSystem {
+namespace Server.Engines.Gather {
+    public class Lumberjacking : Server.Engines.Gather.GatherSystem {
         private static Lumberjacking m_System;
         public static Lumberjacking System {
             get {

@@ -2,6 +2,7 @@ using System;
 using Server.Items;
 using Server.Network;
 using Server.Engines.Harvest;
+using Server.Engines.Gather;
 
 namespace Server.Items
 {

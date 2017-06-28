@@ -254,7 +254,7 @@ namespace Server.Items
 			foreach ( BaseHarvestTool tool in items )
 			{
                             // TODO(adamvy): Update this to GatherSystem?
-				if ( tool.HarvestSystem == Engines.Harvest.Mining.System )
+				if ( tool.HarvestSystem == Server.Engines.Harvest.Mining.System )
 					return true;
 			}
 

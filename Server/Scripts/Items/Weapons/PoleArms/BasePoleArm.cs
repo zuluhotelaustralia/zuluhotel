@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Server;
 using Server.Items;
 using Server.Engines.Harvest;
+using Server.Engines.Gather;
 using Server.ContextMenus;
 
 namespace Server.Items
@@ -17,8 +18,8 @@ namespace Server.Items
 		public override WeaponType DefType{ get{ return WeaponType.Polearm; } }
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
-		public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
-		public virtual GatherSystem GatherSystem{ get{ return Server.Engines.Harvest.GatherSystem.Lumberjacking.System; } }
+		public virtual HarvestSystem HarvestSystem{ get{ return Server.Engines.Harvest.Lumberjacking.System; } }
+		public virtual GatherSystem GatherSystem{ get{ return Server.Engines.Gather.Lumberjacking.System; } }
 
 		private int m_UsesRemaining;
 		private bool m_ShowUsesRemaining;
@@ -30,9 +31,9 @@ namespace Server.Items
 			set { m_UsesRemaining = value; InvalidateProperties(); }
 		}
 
-            private boolean m_UseGatherSystem;
+            private bool m_UseGatherSystem;
             [CommandProperty( AccessLevel.GameMaster )]
-            public boolean UseGatherSystem
+            public bool UseGatherSystem
             {
                 get { return m_UseGatherSystem; }
                 set {

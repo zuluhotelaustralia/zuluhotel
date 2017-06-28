@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Server.Engines.Harvest;
+using Server.Engines.Gather;
 
 namespace Server.Items {
     public class GatherSystemController : Item {
-	
+
 	private enum Ores{
 	    AnraOre,
 	    AzuriteOre,
@@ -57,7 +58,7 @@ namespace Server.Items {
 	    Console.WriteLine("Initializing Gather System nodes...");
 
 	    m_Nodes = new List<GatherNode>();
-	    
+
 	    int i = 0;
 	    GatherSystem.Setup();
 	    // GatherSystem.ClearNodes(); // necessary?
@@ -68,7 +69,7 @@ namespace Server.Items {
 
 	    Console.WriteLine("Done!  Initialized "+ i +" GatherNodes.");
 	}
-	
+
 	public override void Serialize( GenericWriter writer ){
 	    base.Serialize(writer);
 
@@ -81,7 +82,7 @@ namespace Server.Items {
 		writer.Write( n.vY );
 		writer.Write( n.Abundance );
 	    }
-	    
+
 	}
 
 	public override void Deserialize( GenericReader reader ) {
@@ -92,7 +93,7 @@ namespace Server.Items {
 	    int vx;
 	    int vy;
 	    double a;
-	    
+
 	    switch( version )
 	    {
 		case 0:
@@ -120,6 +121,6 @@ namespace Server.Items {
 	}
 
 
-	
+
     }
 }

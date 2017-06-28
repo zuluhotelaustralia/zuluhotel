@@ -1,14 +1,15 @@
 using System;
 using Server;
 using Server.Engines.Harvest;
+using Server.Engines.Gather;
 
 namespace Server.Items
 {
 	public class GargoylesPickaxe : BaseAxe, IUsesRemaining
 	{
 		public override int LabelNumber{ get{ return 1041281; } } // a gargoyle's pickaxe
-		public override HarvestSystem HarvestSystem{ get{ return Mining.System; } }
-            public override GatherSystem GatherSystem{ get { return Server.Engines.Harvest.GatherSystem.Mining.System; } }
+		public override HarvestSystem HarvestSystem{ get{ return Server.Engines.Harvest.Mining.System; } }
+            public override GatherSystem GatherSystem{ get { return Server.Engines.Gather.Mining.System; } }
 
 		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.DoubleStrike; } }
 		public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.Disarm; } }

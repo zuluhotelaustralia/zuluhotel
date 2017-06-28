@@ -7,7 +7,7 @@ using Server.Mobiles;
 using Server.Engines.Quests;
 using Server.Engines.Quests.Hag;
 
-namespace Server.Engines.Harvest
+namespace Server.Engines.Gather
 {
     public class GatherTarget : Target
     {
@@ -35,7 +35,7 @@ namespace Server.Engines.Harvest
 		 itemID == 0xEE8 )
 	    {
 		PlayerMobile player = from as PlayerMobile;
-		
+
 		if ( player != null )
 		{
 		    // QuestSystem qs = player.Quest;
@@ -57,7 +57,7 @@ namespace Server.Engines.Harvest
 		}
 	    }
 	}
-	
+
 	protected override void OnTarget( Mobile from, object targeted )
 	{
 	    if ( m_System is Mining && targeted is StaticTarget )
@@ -71,7 +71,7 @@ namespace Server.Engines.Harvest
 	    {
 		IAxe obj = (IAxe)targeted;
 		Item item = (Item)targeted;
-					
+
 		if ( !item.IsChildOf( from.Backpack ) )
 		    from.SendLocalizedMessage( 1062334 ); // This item must be in your backpack to be used.
 		else if ( obj.Axe( from, (BaseAxe)m_Tool ) )

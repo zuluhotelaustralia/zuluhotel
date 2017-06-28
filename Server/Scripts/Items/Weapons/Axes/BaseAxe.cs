@@ -6,6 +6,7 @@ using Server.Items;
 using Server.Engines.Harvest;
 using Server.ContextMenus;
 using Server.Network;
+using Server.Engines.Gather;
 
 namespace Server.Items
 {
@@ -23,15 +24,15 @@ namespace Server.Items
 		public override WeaponType DefType{ get{ return WeaponType.Axe; } }
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
-            public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
-            public virtual GatherSystem GatherSystem{ get { return Server.Engines.Harvest.GatherSystem.Lumberjacking.System; } }
+            public virtual HarvestSystem HarvestSystem{ get{ return Server.Engines.Harvest.Lumberjacking.System; } }
+            public virtual GatherSystem GatherSystem{ get { return Server.Engines.Gather.Lumberjacking.System; } }
 
 		private int m_UsesRemaining;
 		private bool m_ShowUsesRemaining;
 
-            private boolean m_UseGatherSystem;
+            private bool m_UseGatherSystem;
             [CommandProperty( AccessLevel.GameMaster )]
-            public boolean UseGatherSystem
+            public bool UseGatherSystem
             {
                 get { return m_UseGatherSystem; }
                 set {
@@ -113,7 +114,7 @@ namespace Server.Items
 			}
 
                         // adamvy: What?  Shouldn't this be done in the HarvestSystem.BeginHarvesting?
-			if ( !(this.HarvestSystem is Mining) )
+			if ( !(this.HarvestSystem is Server.Engines.Harvest.Mining) )
 				from.SendLocalizedMessage( 1010018 ); // What do you want to use this item on?
 
                         if ( this.UseGatherSystem ) GatherSystem.BeginGathering( from, this );

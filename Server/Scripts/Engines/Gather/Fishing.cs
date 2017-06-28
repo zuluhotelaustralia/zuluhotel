@@ -1,5 +1,5 @@
-namespace Servers.Engines.Harvest.GatherSystem {
-    public class Fishing : Server.Engines.Harvest.GatherSystem {
+namespace Servers.Engines.Gather {
+    public class Fishing : Server.Engines.Gather.GatherSystem {
         private static Fishing m_System;
         public static Fishing System {
             get {

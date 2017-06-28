@@ -3,21 +3,22 @@
 // --sith
 using System;
 using Server.Items;
+using Server.Engines.Harvest;
 
-namespace Server.Engines.Harvest {
+namespace Server.Engines.Gather {
     public class GatherNode {
-	private int m_X; 
+	private int m_X;
 	private int m_Y; //our coordinates on the map plane
 
 	private int m_vX;
 	private int m_vY; //2D direction vector for shifting locations
 
-	private HarvestResource m_Res; //what resource are we spawning here? 
+	private HarvestResource m_Res; //what resource are we spawning here?
 	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
 
 	//minskill and maxskill are handled by the resource
 	//skill is handled by the derived type
-	
+
 	public int X { get { return m_X; } set { m_X = value; } }
 	public int Y { get { return m_Y; } set { m_Y = value; } }
 	public int vX { get { return m_vX; } set { m_vX = value; } }
@@ -31,7 +32,7 @@ namespace Server.Engines.Harvest {
 	    m_vX = 0;
 	    m_vY = 0;
 	    m_Abundance = 0;
-	    
+
 	    //reqskill, minskill, maxskill, obj message, type
 	    m_Res = new HarvestResource( 0.00, 0.00, 100.00, 1007072, typeof( IronOre ) );
 	}
@@ -59,4 +60,3 @@ namespace Server.Engines.Harvest {
 	}
     }
 }
-

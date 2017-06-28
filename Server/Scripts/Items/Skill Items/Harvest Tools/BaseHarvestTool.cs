@@ -4,6 +4,7 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Craft;
 using Server.Engines.Harvest;
+using Server.Engines.Gather;
 using Server.ContextMenus;
 
 namespace Server.Items
@@ -41,9 +42,9 @@ namespace Server.Items
 			set { m_UsesRemaining = value; InvalidateProperties(); }
 		}
 
-            private boolean m_UseGatherSystem;
+            private bool m_UseGatherSystem;
             [CommandProperty( AccessLevel.GameMaster )]
-            public boolean UseGatherSystem
+            public bool UseGatherSystem
             {
                 get { return m_UseGatherSystem; }
                 set {
@@ -117,7 +118,7 @@ namespace Server.Items
 		public override void OnDoubleClick( Mobile from )
 		{
 			if ( IsChildOf( from.Backpack ) || Parent == from )
-				GatherSystem.BeginGathering( from, this );
+				this.GatherSystem.BeginGathering( from, this );
 			else
 				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
 		}
@@ -131,7 +132,7 @@ namespace Server.Items
 
 		public static void AddContextMenuEntries( Mobile from, Item item, List<ContextMenuEntry> list, HarvestSystem system )
 		{
-			if ( system != Mining.System )
+			if ( system != Server.Engines.Harvest.Mining.System )
 				return;
 
 			if ( !item.IsChildOf( from.Backpack ) && item.Parent != from )

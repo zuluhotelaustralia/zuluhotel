@@ -18,9 +18,9 @@ namespace Server.Items
 			Weight = 8.0;
 		}
 
-            private boolean m_UseGatherSystem;
+            private bool m_UseGatherSystem;
             [CommandProperty( AccessLevel.GameMaster )]
-            public boolean UseGatherSystem
+            public bool UseGatherSystem
             {
                 get { return m_UseGatherSystem; }
                 set {
@@ -38,7 +38,7 @@ namespace Server.Items
 			if ( !from.InLOS( loc ) || !from.InRange( loc, 2 ) )
 				from.LocalOverheadMessage( MessageType.Regular, 0x3E9, 1019045 ); // I can't reach that
 			else {
-                            if ( this.UseGatherSystem ) Server.Engines.Harvest.GatherSystem.Fishing.System.BeginGathering( from, this );
+                            if ( this.UseGatherSystem ) Server.Engines.Gather.Fishing.System.BeginGathering( from, this );
                             else Fishing.System.BeginHarvesting( from, this );
                         }
 		}
