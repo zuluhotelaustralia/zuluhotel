@@ -122,14 +122,22 @@ namespace Server.Misc
 	    if ( from.Skills.Cap == 0 )
 		return false;
 
-	    // common lisp code to evaluate how many attemps it'd take
-	    //(loop for x from 1 to 1300
-	    //   sum (/ 1 (* -1 (* 0.2 (log (/ x 1400.0))))) into total
-	    //   finally (return total))
-	    // using 1400 and 0.2, at 1 attempt every 10s, you're looking at 14k attempts, or about 2400 hours to GM.
-	    // change 0.2 to ~4 for about 120 mins to GM
+	    // using b=1400 and a=0.2, at 1 attempt every 10s, you're looking at 14k attempts, or about 40 hours to GM.
+
+	    double a = from.Region.RegionalSkillGainPrimaryFactor;
+	    double b = from.Region.RegionalSkillGainSecondaryFactor;
+	    double gc = 0.0;
+
+	    //chance should be computed in the caller, I guess --sith
 	    bool success = ( chance >= Utility.RandomDouble() );
-	    double gc = -(Math.Log(skill.Base/1400.0)*0.2); //TODO:  change 1400 and 0.2 based on playermobile's region
+	    
+	    if( skill.Base > 0.0 ) {
+		gc = -( Math.Log(skill.Base / b) * a );
+	    }
+	    else {
+		gc = 1.0; //avoid divide by 0
+	    }
+	    
 	    gc *= skill.Info.GainFactor;
 
 	    if ( gc < 0.01 )
@@ -138,6 +146,23 @@ namespace Server.Misc
 	    if ( from is BaseCreature && ((BaseCreature)from).Controlled )
 		gc *= 2;
 
+	    //probably insert a call here to PlayerMobile.Spec to see if they're training
+	    //on-spec skills, so that we can boost that gain rate
+
+	    if ( gc > 1.0 )
+		gc = 1.0;
+	    
+	    // this needs attention before we go live --sith (TODO):
+	    //note that with a=0.2 and b=1400,
+	    //gc spends a lot of time in the 1E-2 range when you get towards
+	    //130 skillpoints, so this could get really slow
+	    //
+	    //however, note also that the bottom end is truncated at 1% gain rate,
+	    //effectively putting a hard cap on time to get to 130.0 at 361.1111 hours,
+	    //or about 15 days of 24/7 macroing.
+	    //
+	    //I don't know enough about the randomImpl but I assume if you dip below
+	    // gc values of 0.01, then you are effectively at gc = 0
 	    if ( from.Alive && ( gc >= Utility.RandomDouble() || skill.Base < 10.0 ) )
 		Gain( from, skill );
 

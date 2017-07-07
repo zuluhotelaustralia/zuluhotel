@@ -25,10 +25,6 @@ namespace Server.Regions
 	public virtual bool ResurrectionAllowed { get { return true; } }
 	public virtual bool LogoutAllowed { get { return true; } }
 	
-	// ~2400 hours to GM @ 1 attempt per 10s.
-	// in order to discourage house macroing.  See Misc/SkillCheck.cs --sith
-	public virtual double RegionalSkillGainFactor { get { return 0.2; } } 
-
 	public static void Configure()
 	{
 	    Region.DefaultRegionType = typeof( BaseRegion );
