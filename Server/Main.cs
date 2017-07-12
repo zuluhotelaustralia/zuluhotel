@@ -452,8 +452,9 @@ namespace Server
 	    Version ver = m_Assembly.GetName().Version;
 
 	    // Added to help future code support on forums, as a 'check' people can ask for to it see if they recompiled core or not
-	    Console.WriteLine("RunZH - [http://zuluhotel.ca/] Make UO Great again" /*, ver.Major, ver.Minor, ver.Build, ver.Revision*/);
-	    //Console.WriteLine("Core: Running on .NET Framework Version {0}.{1}.{2}", Environment.Version.Major, Environment.Version.Minor, Environment.Version.Build);
+	    Console.WriteLine("RunZH v{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+	    Console.WriteLine("http://zuluhotel.ca/ - Make Ultima Online Great again.");
+	    //Console.WriteLine("Core: Running on {0}", Microsoft.Extensions.PlatformAbstractions.PlatformServices.D‌​efault.Application.R‌​untimeFramework.Vers‌​ion);
 
 	    string s = Arguments;
 

@@ -9,8 +9,10 @@ namespace Server.Regions
     public class DungeonRegion : BaseRegion
     {
 	public override bool YoungProtected { get { return false; } }
-	public override double RegionalSkillGainFactor { get { return 4.0; } } //~120 mins to get to 130.0 @ 1 attempt per 10s
-
+	
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.0002; } } 
+	public override double RegionalSkillGainSecondaryFactor { get { return 1400.0; } }
+	
 	private Point3D m_EntranceLocation;
 	private Map m_EntranceMap;
 

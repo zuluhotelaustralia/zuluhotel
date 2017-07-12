@@ -15,8 +15,9 @@ namespace Server.Regions
 	private Type m_GuardType;
 	private bool m_Disabled;
 
-	public override double RegionalSkillGainFactor { get { return 3.0; } } //see BaseRegion or Misc/SkillCheck.cs --sith
-	
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.0002; } } 
+	public override double RegionalSkillGainSecondaryFactor { get { return 1400.0; } }
+
 	public bool Disabled{ get{ return m_Disabled; } set{ m_Disabled = value; } }
 
 	public virtual bool IsDisabled()
