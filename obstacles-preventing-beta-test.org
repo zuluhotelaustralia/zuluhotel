@@ -22,9 +22,9 @@ This is a list of all the things that need to be done before we can launch a bet
 * TODO implement skillgain rate scaling based on player's region
 ** DONE define a new overlay region class (or perhaps edit baseregion) with configurable gain rates
 *** DONE make gains slow as fuck in houses
-*** TODO make gains very fast in dungeons
+*** DONE make gains very fast in dungeons
 *** TODO make ranger skills like taming/tracking gain very fast in wilderness areas 
-*** TODO ensure crafting gains are slow everywhere (but not as slow as in houses)
+*** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
 *** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 * TODO make sure Spec actually works
 ** TODO damage taken
@@ -37,7 +37,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** TODO physical damage dealt by mages
 *** TODO magic damage dealt by warriors
 *** TODO physical damage dealt by warriors
-** TODO skillgain for class skills
-** TODO skill success rates for class skills
+** DONE skillgain for class skills
+** DONE skill success rates for class skills
 ** TODO ensure only spec crafters can work with and mine the jewels
    

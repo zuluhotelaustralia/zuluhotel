@@ -181,10 +181,10 @@ namespace Server
 	public int ChildLevel{ get{ return m_ChildLevel; } }
 	public bool Registered{ get{ return m_Registered; } }
 
-	// ~170 days to 130.0 @ 1 attempt per second.
+	// ~45 days to 130.0 @ 1 attempt per second.
 	// in order to discourage house macroing.  See Misc/SkillCheck.cs --sith
-	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.0002; } } 
-	public virtual double RegionalSkillGainSecondaryFactor { get { return 1400.0; } }
+	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.0001; } } 
+	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 	
 
 	public Point3D GoLocation{ get{ return m_GoLocation; } set { m_GoLocation = value; } }

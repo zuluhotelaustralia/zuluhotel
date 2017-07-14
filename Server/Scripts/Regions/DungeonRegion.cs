@@ -10,8 +10,8 @@ namespace Server.Regions
     {
 	public override bool YoungProtected { get { return false; } }
 	
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.0002; } } 
-	public override double RegionalSkillGainSecondaryFactor { get { return 1400.0; } }
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.05; } } //21 hours to cap it at 1 attempt per 10 seconds
+	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 	
 	private Point3D m_EntranceLocation;
 	private Map m_EntranceMap;

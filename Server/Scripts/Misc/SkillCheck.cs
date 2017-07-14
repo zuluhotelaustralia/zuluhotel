@@ -122,14 +122,9 @@ namespace Server.Misc
 	    if ( from.Skills.Cap == 0 )
 		return false;
 
-	    // using b=1400 and a=0.2, at 1 attempt every 10s, you're looking at 14k attempts, or about 40 hours to GM.
-
-	    double a = from.Region.RegionalSkillGainPrimaryFactor;
-	    double b = from.Region.RegionalSkillGainSecondaryFactor;
+	    double a = from.Region.RegionalSkillGainPrimaryFactor; //difficulty
+	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity
 	    double gc = 0.0;
-
-	    //chance should be computed in the caller, I guess --sith
-	    bool success = ( chance >= Utility.RandomDouble() );
 	    
 	    if( skill.Base > 0.0 ) {
 		gc = -( Math.Log(skill.Base / b) * a );
@@ -139,31 +134,43 @@ namespace Server.Misc
 	    }
 	    
 	    gc *= skill.Info.GainFactor;
-
-	    if ( gc < 0.01 )
-		gc = 0.01;
-
+	    
+	    //if ( gc < 0.01 ) {
+	    //  gc = 0.01;
+	    //}
+	    // see comments below
+	    
 	    if ( from is BaseCreature && ((BaseCreature)from).Controlled )
 		gc *= 2;
 
-	    //probably insert a call here to PlayerMobile.Spec to see if they're training
-	    //on-spec skills, so that we can boost that gain rate
-
+	    if ( from is PlayerMobile ) {
+		if ( ((PlayerMobile)from).Spec.IsSkillOnSpec( skill.SkillName ) ) {
+		    gc *= ((PlayerMobile)from).Spec.Bonus;
+		    chance *= ((PlayerMobile)from).Spec.Bonus;
+		}
+	    }
+		 
 	    if ( gc > 1.0 )
 		gc = 1.0;
 	    
-	    // this needs attention before we go live --sith (TODO):
-	    //note that with a=0.2 and b=1400,
-	    //gc spends a lot of time in the 1E-2 range when you get towards
-	    //130 skillpoints, so this could get really slow
-	    //
-	    //however, note also that the bottom end is truncated at 1% gain rate,
-	    //effectively putting a hard cap on time to get to 130.0 at 361.1111 hours,
-	    //or about 15 days of 24/7 macroing.
-	    //
+	    //chance should be computed in the caller, I guess --sith
+	    bool success = ( chance >= Utility.RandomDouble() );
+	    
 	    //I don't know enough about the randomImpl but I assume if you dip below
 	    // gc values of 0.01, then you are effectively at gc = 0
-	    if ( from.Alive && ( gc >= Utility.RandomDouble() || skill.Base < 10.0 ) )
+	    //
+	    // UPDATE:  wrong!  several trials of 1000000000 (1x10^9) RandomDoubles resulted in
+	    // approximately 1% of results being strictly < 0.01 on my macbook (a kaby lake i5)
+	    //therefore I think the bottom-end truncation is unnecessary, as is the guarantee
+	    // of success at skill.Base < 10.0 (for different reasons)
+
+	    //SECOND UPDATE:  I was computing the constants incorrectly.  logarithm and multiplication are
+	    // not commutative.. it's almost like a guy who passed 3rd year calculus should know
+	    // this.
+	    // tl;dr looping 1 to 1300 by 1s vs looping 0.1 to 130.0 by 0.1s may be the same number of steps
+	    // but the absolute magnitudes are obviously different durrrrr
+	    
+	    if ( from.Alive && gc >= Utility.RandomDouble() )
 		Gain( from, skill );
 
 	    return success;
@@ -250,12 +257,12 @@ namespace Server.Misc
 		    }
 		}
 
-		#region Scroll of Alacrity
-		PlayerMobile pm = from as PlayerMobile;
+		// #region Scroll of Alacrity
+		// PlayerMobile pm = from as PlayerMobile;
 
-		if ( pm != null && skill.SkillName == pm.AcceleratedSkill && pm.AcceleratedStart > DateTime.UtcNow )
-		    toGain *= Utility.RandomMinMax(2, 5);
-		#endregion
+		// if ( pm != null && skill.SkillName == pm.AcceleratedSkill && pm.AcceleratedStart > DateTime.UtcNow )
+		//     toGain *= Utility.RandomMinMax(2, 5);
+		// #endregion
 
 		if ( !from.Player || (skills.Total + toGain) <= skills.Cap )
 		{
