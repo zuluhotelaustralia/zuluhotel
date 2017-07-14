@@ -140,14 +140,14 @@ namespace Server.Mobiles
 		    }
 		case SpecName.Crafter:
 		    {
-			if ( sn = SkillName.Tinkering ||
-			     sn = SkillName.ArmsLore ||
-			     sn = SkillName.Fletching ||
-			     sn = SkillName.Tailoring ||
-			     sn = SkillName.Mining ||
-			     sn = SkillName.Lumberjacking ||
-			     sn = SkillName.Carpentry ||
-			     sn = SkillName.Blacksmith ) {
+			if ( sn == SkillName.Tinkering ||
+			     sn == SkillName.ArmsLore ||
+			     sn == SkillName.Fletching ||
+			     sn == SkillName.Tailoring ||
+			     sn == SkillName.Mining ||
+			     sn == SkillName.Lumberjacking ||
+			     sn == SkillName.Carpentry ||
+			     sn == SkillName.Blacksmith ) {
 			    return true;
 			}
 			else {
@@ -157,14 +157,14 @@ namespace Server.Mobiles
 		    }
 		case SpecName.Thief:
 		    {
-			if ( sn = SkillName.Hiding ||
-			     sn = SkillName.Stealth ||
-			     sn = SkillName.Stealing ||
-			     sn = SkillName.DetectHidden ||
-			     sn = SkillName.RemoveTrap ||
-			     sn = SkillName.Poisoning ||
-			     sn = SkillName.Lockpicking ||
-			     sn = SkillName.Snooping ) {
+			if ( sn == SkillName.Hiding ||
+			     sn == SkillName.Stealth ||
+			     sn == SkillName.Stealing ||
+			     sn == SkillName.DetectHidden ||
+			     sn == SkillName.RemoveTrap ||
+			     sn == SkillName.Poisoning ||
+			     sn == SkillName.Lockpicking ||
+			     sn == SkillName.Snooping ) {
 			    return true;
 			}
 			else {
@@ -174,14 +174,14 @@ namespace Server.Mobiles
 		    }
 		case SpecName.Bard:
 		    {
-			if ( sn = SkillName.Provocation ||
-			     sn = SkillName.Musicianship ||
-			     sn = SkillName.Herding ||
-			     sn = SkillName.Discordance ||
-			     sn = SkillName.TasteID ||
-			     sn = SkillName.Peacemaking ||
-			     sn = SkillName.Cartography ||
-			     sn = SkillName.Begging ) {
+			if ( sn == SkillName.Provocation ||
+			     sn == SkillName.Musicianship ||
+			     sn == SkillName.Herding ||
+			     sn == SkillName.Discordance ||
+			     sn == SkillName.TasteID ||
+			     sn == SkillName.Peacemaking ||
+			     sn == SkillName.Cartography ||
+			     sn == SkillName.Begging ) {
 			    return true;
 			}
 			else {
