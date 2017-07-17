@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Server.Engines.Harvest;
 using Server.Engines.Gather;
+using Server.Commands;
+using Server.Targeting;
 
 namespace Server.Items {
     public class GatherSystemController : Item {
@@ -12,44 +14,6 @@ namespace Server.Items {
 	    Mining,
 	    Lumberjacking,
 	    Fishing
-	}
-	
-	private enum Ores{
-	    AnraOre,
-	    AzuriteOre,
-	    BlackDwarfOre,
-	    BronzeOre,
-	    CopperOre,
-	    CrystalOre,
-	    DarkPaganOre,
-	    DarkSableRubyOre,
-	    DestructionOre,
-	    DoomOre,
-	    DripstoneOre,
-	    DullCopperOre,
-	    EbonTwilightSapphireOre,
-	    ExecutorOre,
-	    FruityOre,
-	    GoddessOre,
-	    GoldOre,
-	    IceRockOre,
-	    IronOre,
-	    LavarockOre,
-	    MalachiteOre,
-	    MysticOre,
-	    NewZuluOre,
-	    OldBritainOre,
-	    OnyxOre,
-	    PeachblueOre,
-	    PlatinumOre,
-	    PyriteOre,
-	    RadiantNimbusDiamondOre,
-	    RedElvenOre,
-	    SilverRockOre,
-	    SpectralOre,
-	    SpikeOre,
-	    UndeadOre,
-	    VirginityOre
 	}
 
 	private ControlledSystem m_ControlledSystem = ControlledSystem.None;
@@ -69,11 +33,53 @@ namespace Server.Items {
 	public GatherSystemController( Serial serial ) : base( serial ){
 	}
 	
-	//worldsave only serializes items, so:
 	public static void Initialize() {
-	    // coming soon
+	    CommandSystem.Register( "SetGatherSystem", AccessLevel.Developer, new CommandEventHandler( SetGatherSystem_OnCommand ) );
 	}
 
+	[Usage( "SetGatherSystem <system>" )]
+	[Description( "Used to bind a GatherSystemController stone to a particular Gather System." )]
+	public static void SetGatherSystem_OnCommand( CommandEventArgs e ) {
+	    if ( e.Length != 1 ){
+		e.Mobile.SendMessage("Format: {0}SetGatherSystem <0-3>");
+		e.Mobile.SendMessage("   0 - None");
+		e.Mobile.SendMessage("   1 - Mining");
+		e.Mobile.SendMessage("   2 - Lumberjacking");
+		e.Mobile.SendMessage("   3 - Fishing");
+	    }
+	    else {
+		e.Mobile.Target = new SetGatherSystemTarget( e.GetInt32(0) );
+	    }
+	}
+
+	public void SetSystemReference( int cs ) {
+	    // the engine has to know which stone it takes orders from
+	    m_ControlledSystem = (ControlledSystem)cs;
+	    
+	    switch( m_ControlledSystem )
+	    {
+		case ControlledSystem.None:
+		    {
+			break;
+		    }
+		case ControlledSystem.Mining:
+		    {
+			Server.Engines.Gather.Mining.Setup(this);
+			break;
+		    }
+		case ControlledSystem.Lumberjacking:
+		    {
+			Server.Engines.Gather.Lumberjacking.Setup(this);
+			break;
+		    }
+		case ControlledSystem.Fishing:
+		    {
+			Server.Engines.Gather.Fishing.Setup(this);
+			break;
+		    }
+	    }
+	}
+	
 	public override void Serialize( GenericWriter writer ){
 	    base.Serialize(writer);
 
@@ -90,31 +96,9 @@ namespace Server.Items {
 	    {
 		case 0:
 		    {
-			m_ControlledSystem = (ControlledSystem)reader.ReadInt();
+			int cs = reader.ReadInt(); //ControlledSystem
+			SetSystemReference( cs );
 			
-			// the engine has to know which stone it takes orders from
-			switch( m_ControlledSystem )
-			{
-			    case ControlledSystem.None:
-				{
-				    break;
-				}
-			    case ControlledSystem.Mining:
-				{
-				    Server.Engines.Gather.Mining.Setup(this);
-				    break;
-				}
-			    case ControlledSystem.Lumberjacking:
-				{
-				    Server.Engines.Gather.Lumberjacking.Setup(this);
-				    break;
-				}
-			    case ControlledSystem.Fishing:
-				{
-				    Server.Engines.Gather.Fishing.Setup(this);
-				    break;
-				}
-			}
 			break;
 		    }
 		default:
@@ -124,8 +108,23 @@ namespace Server.Items {
 		    }
 	    }
 	}
+    }
 
+    class SetGatherSystemTarget : Target {
 
+	private int m_Type;
+	
+	public SetGatherSystemTarget( int type ) : base ( 15, true, TargetFlags.None ) {
+	    m_Type = type;
+	}
 
+	protected override void OnTarget( Mobile from, object targ ) {
+	    if( targ is GatherSystemController ) {
+		((GatherSystemController)targ).SetSystemReference( m_Type );
+	    }
+	    else {
+		from.SendMessage("You must target a GatherSystemController stone.");
+	    }
+	}
     }
 }

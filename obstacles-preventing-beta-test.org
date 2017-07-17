@@ -23,7 +23,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** DONE define a new overlay region class (or perhaps edit baseregion) with configurable gain rates
 *** DONE make gains slow as fuck in houses
 *** DONE make gains very fast in dungeons
-*** TODO make ranger skills like taming/tracking gain very fast in wilderness areas 
+*** TODO make ranger skills like taming/tracking gain very fast in wilderness areas (unless we want to radically change taming?)
 *** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
 *** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 * TODO make sure Spec actually works
