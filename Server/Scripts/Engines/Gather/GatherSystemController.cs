@@ -87,6 +87,7 @@ namespace Server.Items {
 
 	    writer.Write( (int)m_ControlledSystem );
 
+	    
 	}
 
 	public override void Deserialize( GenericReader reader ) {

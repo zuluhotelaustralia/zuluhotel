@@ -16,6 +16,8 @@ namespace Server.Engines.Gather {
 	private HarvestResource m_Res; //what resource are we spawning here?
 	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
 
+	private const double m_driftchance = 0.5;
+	
 	//minskill and maxskill are handled by the resource
 	//skill is handled by the derived type
 
@@ -50,13 +52,50 @@ namespace Server.Engines.Gather {
 	    m_Res = res;
 	}
 
-	public void Drift( ) {
-	    m_X += m_vX;
-	    m_Y += m_vY;
+	private void ApplyRotation( int x, int y ) {
+	    //normally on a 2D Euclidean plane, a 90 degree rotation is
+	    //  [ 0 -1 ]
+	    //  [ 1  0 ]
+	    //
+	    //  however on the UO map, y is in the downward/southward direction, so
+	    //  [  0 1 ]
+	    //  [ -1 0 ]
+	    //
+	    // therefore,
+	    
+	    m_vX = y;
+	    m_vY = -x;
+	}
 
-	    //should this function determine when to actually drift or is that the responsibility of the caller?
-	    // random() diceroll?
-	    // probably a bug here when drifting off the map, gonna have to add a bounds check
+	private bool WouldNextDriftBeIllegal () {
+	    int xprime;
+	    int yprime;
+
+	    xprime = m_X + m_vX;
+	    yprime = m_Y + m_vY;
+
+	    if ( xprime >= 895 ||
+		 xprime <= 0 ||
+		 yprime >= 512 ||
+		 yprime <= 0 ){
+		return true;
+	    }
+	    else {
+		return false;
+	    }
+	}
+	
+	public void Drift( ) {
+	    
+	    if ( m_driftchance >= Utility.RandomDouble() ) {
+
+		if ( WouldNextDriftBeIllegal ) {
+		    ApplyRotation( m_vX, m_vY );
+		}
+		
+		m_X += m_vX;
+		m_Y += m_vY;
+	    }
 	}
     }
 }

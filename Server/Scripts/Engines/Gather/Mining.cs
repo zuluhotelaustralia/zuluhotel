@@ -242,6 +242,14 @@ namespace Server.Engines.Gather
 
 	private Mining()
 	{
+	    m_Nodes = new List<GatherNode>;
+	    
+	    foreach( var t in Enum.GetValues(typeof(Ores)) ) {
+		//make this more elegant, because yuck
+		GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), new HarvestResource( 0.00, 0.00, 100.00, 1007072, Type.GetType( t.ToString() ) ) );
+		m_Nodes.Add(node);
+	    }
+
 	    // // The digging effect
 	    // oreAndStone.EffectActions = new int[]{ 11 };
 	    // oreAndStone.EffectSounds = new int[]{ 0x125, 0x126 };
