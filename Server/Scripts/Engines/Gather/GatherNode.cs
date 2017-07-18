@@ -89,7 +89,7 @@ namespace Server.Engines.Gather {
 	    
 	    if ( m_driftchance >= Utility.RandomDouble() ) {
 
-		if ( WouldNextDriftBeIllegal ) {
+		if ( WouldNextDriftBeIllegal() ) {
 		    ApplyRotation( m_vX, m_vY );
 		}
 		

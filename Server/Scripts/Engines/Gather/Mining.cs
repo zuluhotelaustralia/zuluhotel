@@ -3,6 +3,9 @@ using Server;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
+using Server.Engines.Harvest;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Server.Engines.Gather
 {
@@ -112,6 +115,9 @@ namespace Server.Engines.Gather
 
 	private static GatherSystemController m_Controller;
 	
+	private List<GatherNode> m_Nodes;
+	public List<GatherNode> Nodes { get { return m_Nodes; } }
+
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
 	}
@@ -242,7 +248,7 @@ namespace Server.Engines.Gather
 
 	private Mining()
 	{
-	    m_Nodes = new List<GatherNode>;
+	    m_Nodes = new List<GatherNode>();
 	    
 	    foreach( var t in Enum.GetValues(typeof(Ores)) ) {
 		//make this more elegant, because yuck
