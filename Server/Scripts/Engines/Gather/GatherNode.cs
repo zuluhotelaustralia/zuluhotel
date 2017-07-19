@@ -74,7 +74,7 @@ namespace Server.Engines.Gather {
 	    xprime = m_X + m_vX;
 	    yprime = m_Y + m_vY;
 
-	    if ( xprime >= 895 ||
+	    if ( xprime >= 896 ||
 		 xprime <= 0 ||
 		 yprime >= 512 ||
 		 yprime <= 0 ){
