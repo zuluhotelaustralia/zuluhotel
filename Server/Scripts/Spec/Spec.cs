@@ -80,12 +80,10 @@ namespace Server.Mobiles
 		case SpecName.None:
 		    {
 			return false;
-			break;
 		    }
 		case SpecName.Powerplayer:
 		    {
 			return false;
-			break;
 		    }
 		case SpecName.Warrior:
 		    {
@@ -102,7 +100,6 @@ namespace Server.Mobiles
 			else {
 			    return false;
 			}
-			break;
 		    }
 		case SpecName.Ranger:
 		    {
@@ -119,7 +116,6 @@ namespace Server.Mobiles
 			else {
 			    return false;
 			}
-			break;
 		    }
 		case SpecName.Mage:
 		    {
@@ -136,7 +132,6 @@ namespace Server.Mobiles
 			else {
 			    return false;
 			}
-			break;
 		    }
 		case SpecName.Crafter:
 		    {
@@ -153,7 +148,6 @@ namespace Server.Mobiles
 			else {
 			    return false;
 			}
-			break;
 		    }
 		case SpecName.Thief:
 		    {
@@ -170,7 +164,6 @@ namespace Server.Mobiles
 			else {
 			    return false;
 			}
-			break;
 		    }
 		case SpecName.Bard:
 		    {
@@ -187,12 +180,10 @@ namespace Server.Mobiles
 			else {
 			    return false;
 			}
-			break;
 		    }
 		default:
 		    {
 			return false;
-			break;
 		    }
 	    }
 	}
