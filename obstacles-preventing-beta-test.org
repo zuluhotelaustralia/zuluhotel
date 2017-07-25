@@ -1,9 +1,10 @@
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
 * TODO finish off GatherSystem
-** TODO new class GatherTarget, similar to HarvestTarget
+** DONE new class GatherTarget, similar to HarvestTarget
 *** special checks for GatherTarget.OnTarget:
-**** TODO use mining on a grave to get bones, see HarvestTarget.cs for tile ids
+**** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids
+***** NOTE: not going to implement the above any time soon.  We can spawn gravedust or whatever in loot on undeads
 **** DONE check if using lumberjacking on an IChopable, call targeted.OnChop
 **** DONE check if using an axe (lumberjacking) on an IAxe, then call targeted.Axe 
 **** DONE check if using lumberjacking on an ICarvable, call targeted.carve
@@ -11,10 +12,13 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE check if using mining on a treasuremap, call (tmap)targeted.onBeginDig
 **** otherwise it just calls StartHarvesting if none of those are true
 ** TODO derive new GatherSystem skill-specific classes from GatherSystem
-*** TODO make gathersystem abstract
-*** TODO edit gathersystemcontroller to reflect the above -> spawn multiple
-*** use FOAM or whatever to generate as much as possible -> tile lists etc.
-** TODO finish writing code to scale harvest rates based on proximity to node
+*** DONE make gathersystem abstract
+*** TODO antimacro code on gathertarget immediately before giving them the cursor
+*** TODO "Survey tool" lets you dig for samples to see what's there
+*** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
+*** DONE (de)serialize node positions when (de)serializing the controller stone
+*** use FOAM or whatever to generate as much as possible -> tile lists etc.?
+** DONE finish writing code to scale harvest rates based on proximity to node
 * TODO finish off Necro and Earth magic
 ** TODO summoning and "taming" spells
 ** TODO check sounds/vfx

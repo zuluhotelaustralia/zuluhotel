@@ -11,7 +11,7 @@ namespace Server.Engines.Gather
 {
     public class Mining : GatherSystem
     {
-	private enum Ores{
+	public enum Ores{
 	    AnraOre,
 	    AzuriteOre,
 	    BlackDwarfOre,
@@ -115,11 +115,10 @@ namespace Server.Engines.Gather
 
 	private static GatherSystemController m_Controller;
 	
-	private List<GatherNode> m_Nodes;
-	public List<GatherNode> Nodes { get { return m_Nodes; } }
-
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
+	    m_Controller.System = m_System;
+	    m_System.SkillName = SkillName.Mining;
 	}
 	
 	private static Mining m_System;
@@ -190,6 +189,12 @@ namespace Server.Engines.Gather
 	    return true;
 	}
 
+	public override void PlayGatherEffects(){
+	}
+
+	public override void GiveResources() {
+	}
+
 	public override void StartGathering( Mobile from, Item tool, object targeted) {
 	    int tileID;
 
@@ -213,6 +218,8 @@ namespace Server.Engines.Gather
 
 	    }
 	}
+
+	
 	public void OnBadGatherTarget( Mobile from, Item tool, object toHarvest )
 	{
 	    if ( toHarvest is LandTarget )
@@ -221,7 +228,7 @@ namespace Server.Engines.Gather
 		from.SendLocalizedMessage( 501863 ); // You can't mine that.
 	}
 
-	public  bool CheckHarvest( Mobile from, Item tool, object toHarvest )
+	public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
 	{
             // TODO: No base implementation yet, do we need one?
 	    // if ( !base.CheckHarvest( from, tool, toHarvest ) )
@@ -246,16 +253,16 @@ namespace Server.Engines.Gather
 	    return true;
 	}
 
+	private Mining( Serial serial ) : this() {
+	}
+	
 	private Mining()
 	{
 	    m_Nodes = new List<GatherNode>();
 	    
-	    foreach( var t in Enum.GetValues(typeof(Ores)) ) {
-		//make this more elegant, because yuck
-		GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), new HarvestResource( 0.00, 0.00, 100.00, 1007072, Type.GetType( t.ToString() ) ) );
-		m_Nodes.Add(node);
-	    }
-
+	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 0, 150.0, typeof(IronOre) );
+	    m_Nodes.Add(node);
+	    
 	    // // The digging effect
 	    // oreAndStone.EffectActions = new int[]{ 11 };
 	    // oreAndStone.EffectSounds = new int[]{ 0x125, 0x126 };

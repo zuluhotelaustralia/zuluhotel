@@ -13,19 +13,25 @@ namespace Server.Engines.Gather {
 	private int m_vX;
 	private int m_vY; //2D direction vector for shifting locations
 
-	private HarvestResource m_Res; //what resource are we spawning here?
+	private Type m_Res; //what resource are we spawning here?
 	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
 
-	private const double m_driftchance = 0.5;
+	private const double m_driftchance = 0.2;
+
+	//set iron to 250.0, set nimbus and other rare stuff to 10, set intermediate resources in the 100 range
+	private double m_Difficulty;
+	public double Difficulty { get { return m_Difficulty; } }
 	
-	//minskill and maxskill are handled by the resource
-	//skill is handled by the derived type
+	private double m_MinSkill;
+	private double m_MaxSkill;
 
 	public int X { get { return m_X; } set { m_X = value; } }
 	public int Y { get { return m_Y; } set { m_Y = value; } }
 	public int vX { get { return m_vX; } set { m_vX = value; } }
 	public int vY { get { return m_vY; } set { m_vY = value; } }
-	public HarvestResource Resource { get { return m_Res; } set { m_Res = value; } }
+	public double MinSkill { get { return m_MinSkill; } set { m_MinSkill = value; } }
+	public double MaxSkill { get { return m_MaxSkill; } set { m_MaxSkill = value; } }
+	public Type Resource { get { return m_Res; } set { m_Res = value; } }
 	public double Abundance { get { return m_Abundance; } set { m_Abundance = value; } }
 
 	public GatherNode() {
@@ -33,23 +39,28 @@ namespace Server.Engines.Gather {
 	    m_Y = 0;
 	    m_vX = 0;
 	    m_vY = 0;
+	    m_Difficulty = 100.0;
+	    m_MinSkill = 0.0;
+	    m_MaxSkill = 150.0;
 	    m_Abundance = 0;
 
-	    //reqskill, minskill, maxskill, obj message, type
-	    m_Res = new HarvestResource( 0.00, 0.00, 100.00, 1007072, typeof( IronOre ) );
+	    m_Res = typeof(IronOre);
 	}
 
-	public GatherNode( HarvestResource res ) : this() {
+	public GatherNode( Type res ) : this() {
 	    m_Res = res;
 	}
 
-	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, HarvestResource res ){
+	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, double d, double minskill, double maxskill, Type res ){
 	    m_X = initialX;
 	    m_Y = initialY;
 	    m_vX = dirX;
 	    m_vY = dirY;
 	    m_Abundance = a;
+	    m_Difficulty = d;
 	    m_Res = res;
+	    m_MinSkill = minskill;
+	    m_MaxSkill = maxskill;
 	}
 
 	private void ApplyRotation( int x, int y ) {
@@ -74,6 +85,7 @@ namespace Server.Engines.Gather {
 	    xprime = m_X + m_vX;
 	    yprime = m_Y + m_vY;
 
+	    // yeah this is happening
 	    if ( xprime >= 896 ||
 		 xprime <= 0 ||
 		 yprime >= 512 ||

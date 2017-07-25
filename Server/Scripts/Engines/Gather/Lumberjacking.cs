@@ -3,6 +3,33 @@ using Server.Items;
 namespace Server.Engines.Gather {
     public class Lumberjacking : Server.Engines.Gather.GatherSystem {
 
+	public enum Logs{
+	    Log,
+	    PinetreeLog,
+	    CherryLog,
+	    OakLog,
+	    PurplePassionLog,
+	    GoldenReflectionLog,
+	    HardrangerLog,
+	    JadewoodLog,
+	    DarkwoodLog,
+	    StonewoodLog,
+	    SunwoodLog,
+	    GauntletLog,
+	    SwampwoodLog,
+	    StardustLog,
+	    SilverleafLog,
+	    StormtealLog,
+	    EmeraldLog,
+	    BloodwoodLog,
+	    CrystalLog,
+	    BloodhorseLog,
+	    DoomwoodLog,
+	    ZuluLog,
+	    DarknessLog,
+	    ElvenLog
+	}
+
 	private static GatherSystemController m_Controller;
 	
 	public static void Setup( GatherSystemController stone ) {

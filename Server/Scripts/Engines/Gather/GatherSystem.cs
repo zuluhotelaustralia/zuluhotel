@@ -6,13 +6,31 @@ using Server.Mobiles;
 using Server.Items;
 using Server.Targeting;
 
+/* 
+
+   Zulu Hotel Gathering System
+   System logic:
+   1. Player uses their tool and arrives at BeginGather(), the entry point
+   1a.Do checks and stuff for double gather, tool, movement, antimacro, etc.
+   2. Assemble a list of which nodes are available to the player based on 
+   lower bound of difficulty curve (aka max gatherable radius)
+   3. Trim any nodes necessary based on min/max skill
+   4. Roll a die to select from that list which ore attempt to hit
+   5. Check if gather attempt actually succeeds, weighted by abundance
+   6. Award resources
+
+*/
+
 namespace Server.Engines.Gather {
     public abstract class GatherSystem {
 
-	private List<GatherNode> m_Nodes;
-	public List<GatherNode> Nodes { get { return m_Nodes; } }
+	protected List<GatherNode> m_Nodes;
+        public List<GatherNode> Nodes { get { return m_Nodes; } }
 
-	//danger, will robinson
+	protected SkillName m_SkillName;
+	public SkillName SkillName { get { return m_SkillName; } set { m_SkillName = value; } }
+	
+	//danger
 	public void ClearNodes() {
 	    m_Nodes.Clear();
 	}
@@ -24,60 +42,25 @@ namespace Server.Engines.Gather {
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
-
 	    from.Target = new GatherTarget( tool, this );
 	    return true;
 	}
 
+	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
-	    // wtf goes here?
-	}
-
-	//attenuate abundance by distance from node
-	public double ScaleByDistance( GatherNode n, Mobile m ){
-	    int deltaX = Math.Abs( m.X - n.X );
-	    int deltaY = Math.Abs( m.Y - n.Y );
-
-	    double a = ( (double)deltaX + (double)deltaY ) / 2.0;
-
-	    return a;
-	}
-
-	// build a list of which nodes are available to the player, skillwise
-	public List<GatherNode> BuildNodeList( Skill s ){
-	    List<GatherNode> nodes = new List<GatherNode>();
-
-	    foreach (GatherNode n in m_Nodes) {
-		if ( n.Resource.ReqSkill <= s.Value ) {
-		    nodes.Add(n);  //add the node from m_Nodes to the ephemeral list we're building
-		}
-	    }
-
-	    return nodes;
-	}
-
-	//roll a random number against the list from BuildNodeList to determine which node we try to strike
-	public GatherNode Strike( List<GatherNode> nodes){
-	    int numNodes = nodes.Count;
-	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
-
-	    // list indices are zero-based
-	    return nodes[ nodeStruck - 1 ];
-	}
-
-	//attempt to harvest from selected node
-	public bool TryGather( PlayerMobile m, Skill s ){
-	    GatherNode n = Strike( BuildNodeList( s ) );
-
+	    //select node
+	    Skill s = from.Skills[m_SkillName];
+	    GatherNode n = Strike( BuildNodeList( s, from ) );
+	    
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
 	    double chance;
-
-	    if ( s.Value - n.Resource.ReqSkill < 0.0 ) {
+	    
+	    if ( s.Value < n.MinSkill ) {
 		chance = 0.0;
 	    }
 	    else {
-		chance = s.Value * n.Abundance / n.Resource.ReqSkill;
-
+		chance = s.Value * n.Abundance / n.MinSkill;
+		
 		// e.g. for a rare ore (executor, let's say) with a=0.1,
 		// with mining skill of 90.0 against a reqskill of 80.0
 		// chance = 11.1%
@@ -87,14 +70,69 @@ namespace Server.Engines.Gather {
 	    }
 
 	    //cap harvesting success rate at 98%
-	    if ( chance > 1.0 ) {
+	    if ( chance > 0.98 ) {
 		chance = 0.98;
 	    }
 
-            // TODO: Award resources.
-//	    m_System.GiveResources();
+	    PlayGatherEffects();
+	    from.CheckSkill( s, chance );
+	    GiveResources();
+	}
 
-	    return m.CheckSkill( s, chance );
+	public virtual void PlayGatherEffects(){
+	}
+
+	public virtual void GiveResources(){
+	}
+
+	//attenuate abundance by distance from node
+	public bool IncludeByDistance( GatherNode n, Mobile m ){
+	    int deltaX = Math.Abs( m.X - n.X );
+	    int deltaY = Math.Abs( m.Y - n.Y );
+
+	    double dist = Math.Sqrt( (double)(deltaX^2) * (double)(deltaY^2) );
+
+	    double a = Math.Exp( -1 * dist / n.Difficulty ); // exponential decay
+
+	    if ( a > 1.0 ) {
+		return true;
+	    }
+	    else if ( a < 0.01 ) {
+		return false;
+	    }
+	    
+	    return ( a >= Utility.RandomDouble() );
+	}
+
+	// build a list of which nodes are available to the player, skillwise
+	public List<GatherNode> BuildNodeList( Skill s, Mobile m ){
+	    List<GatherNode> nodes = new List<GatherNode>();
+
+	    foreach (GatherNode n in m_Nodes) {
+		if ( n.MinSkill <= s.Value &&
+		     n.MaxSkill >= s.Value) {
+
+		    if ( IncludeByDistance(n, m) ){
+			//add the node from m_Nodes to the ephemeral list we're building
+			nodes.Add(n);
+		    }
+		}
+	    }
+
+	    return nodes;
+	}
+
+	//roll a random number against the list from BuildNodeList to determine which node we try to strike
+	public GatherNode Strike( List<GatherNode> nodes ){
+	    int numNodes = nodes.Count;
+	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
+
+	    // list indices are zero-based
+	    return nodes[ nodeStruck - 1 ];
+	}
+
+	public void GiveResources( Type res, PlayerMobile m ) {
+	    
 	}
     }
 }

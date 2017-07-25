@@ -87,19 +87,59 @@ namespace Server.Items {
 
 	    writer.Write( (int)m_ControlledSystem );
 
-	    
+	    foreach( GatherNode n in m_System.Nodes ) {
+		writer.Write( n.X );
+		writer.Write( n.Y );
+		writer.Write( n.vX );
+		writer.Write( n.vY );
+		writer.Write( n.Abundance );
+		writer.Write( n.Difficulty );
+		writer.Write( n.Resource.ToString() );
+		writer.Write( n.MinSkill );
+		writer.Write( n.MaxSkill );
+	    }
 	}
 
 	public override void Deserialize( GenericReader reader ) {
+	    base.Deserialize( reader );
+	    
 	    int version = reader.ReadInt();
 
+	    //do this first
+
+	    int cs = reader.ReadInt(); //ControlledSystem
+	    SetSystemReference( cs );
+	    int x, y, vx, vy;
+	    double a, d, min, max;
+	    Type res;
+
+	    Type systype = typeof(Server.Engines.Gather.Mining.Ores);
+	    if( m_ControlledSystem == ControlledSystem.Lumberjacking ) {
+		systype = typeof(Server.Engines.Gather.Lumberjacking.Logs);
+	    }
+	    if( m_ControlledSystem == ControlledSystem.Fishing ) {
+		systype = typeof(Server.Engines.Gather.Fishing.Fish);
+	    }
+	    	    
 	    switch( version )
 	    {
 		case 0:
 		    {
-			int cs = reader.ReadInt(); //ControlledSystem
-			SetSystemReference( cs );
-			
+			foreach( var v in Enum.GetValues( systype ) ) {
+			    //make this more elegant, because yuck
+			    x = reader.ReadInt();
+			    y = reader.ReadInt();
+			    vx = reader.ReadInt();
+			    vy = reader.ReadInt();
+			    a = reader.ReadDouble();
+			    d = reader.ReadDouble();
+			    res = (systype)Enum.Parse( systype, reader.ReadString() );
+			    min = reader.ReadDouble();
+			    max = reader.ReadDouble();
+			    
+			    //	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, double d, double minskill, double maxskill, Type res )
+			    m_System.Nodes.Add( new GatherNode( x, y, vx, vy, a, d, min, max, res ) );
+			}
 			break;
 		    }
 		default:

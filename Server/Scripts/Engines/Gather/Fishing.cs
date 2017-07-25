@@ -3,6 +3,11 @@ using Server.Items;
 namespace Server.Engines.Gather {
     public class Fishing : Server.Engines.Gather.GatherSystem {
 
+	public enum Fish {
+	    Fish,
+	    BigFish
+	}
+
 	private static GatherSystemController m_Controller;
 	
 	public static void Setup( GatherSystemController stone ) {
