@@ -3,21 +3,23 @@ This is a list of all the things that need to be done before we can launch a bet
 * TODO finish off GatherSystem
 ** DONE new class GatherTarget, similar to HarvestTarget
 *** special checks for GatherTarget.OnTarget:
-**** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids
-***** NOTE: not going to implement the above any time soon.  We can spawn gravedust or whatever in loot on undeads
+**** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids 
+NOTE: not going to implement the above any time soon.  We can spawn gravedust or whatever in loot on undeads
 **** DONE check if using lumberjacking on an IChopable, call targeted.OnChop
 **** DONE check if using an axe (lumberjacking) on an IAxe, then call targeted.Axe 
 **** DONE check if using lumberjacking on an ICarvable, call targeted.carve
 **** DONE check if furnitureattribute.check(targeted as item), then DestroyFurniture()
 **** DONE check if using mining on a treasuremap, call (tmap)targeted.onBeginDig
-**** otherwise it just calls StartHarvesting if none of those are true
+**** DONE otherwise it just calls StartHarvesting if none of those are true
 ** TODO derive new GatherSystem skill-specific classes from GatherSystem
 *** DONE make gathersystem abstract
 *** TODO antimacro code on gathertarget immediately before giving them the cursor
 *** TODO "Survey tool" lets you dig for samples to see what's there
+*** TODO actually give them resources
+*** TODO play the animations/soundfx
 *** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
 *** DONE (de)serialize node positions when (de)serializing the controller stone
-*** use FOAM or whatever to generate as much as possible -> tile lists etc.?
+use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE finish writing code to scale harvest rates based on proximity to node
 * TODO finish off Necro and Earth magic
 ** TODO summoning and "taming" spells
@@ -30,6 +32,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** TODO make ranger skills like taming/tracking gain very fast in wilderness areas (unless we want to radically change taming?)
 *** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
 *** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
+*** TODO flesh out derived regions with appropriate gain rates
 * TODO make sure Spec actually works
 ** TODO damage taken
 *** TODO magic damage taken by warriors

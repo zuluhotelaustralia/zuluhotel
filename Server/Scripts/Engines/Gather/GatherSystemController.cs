@@ -127,6 +127,7 @@ namespace Server.Items {
 				}
 			    case ControlledSystem.Mining:
 				{
+				    //we foreach it so that there are the correct number of read calls
 				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Mining.Ores) ) ) {
 					//make this more elegant, because yuck
 					x = reader.ReadInt();

@@ -16,8 +16,10 @@ namespace Server.Engines.Gather {
 	private Type m_Res; //what resource are we spawning here?
 	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
 
-	private const double m_driftchance = 0.2;
+	private const double m_driftchance = 0.1;
 
+	//difficulty represents the difficulty to actually find it
+	// graphically, this is the fall-off rate per unit distance (higher is slower fall-off)
 	//set iron to 250.0, set nimbus and other rare stuff to 10, set intermediate resources in the 100 range
 	private double m_Difficulty;
 	public double Difficulty { get { return m_Difficulty; } }

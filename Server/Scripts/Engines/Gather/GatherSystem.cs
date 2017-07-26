@@ -74,16 +74,62 @@ namespace Server.Engines.Gather {
 		chance = 0.98;
 	    }
 
-	    PlayGatherEffects();
-	    from.CheckSkill( s, chance );
-	    GiveResources();
+	    if ( from.CheckSkill( s, chance ) ){
+		GiveResources( n, from, true );
+	    }
 	}
 
 	public virtual void PlayGatherEffects(){
 	}
 
-	public virtual void GiveResources(){
+	public virtual void GiveResources( GatherNode n, Mobile m, bool placeAtFeet ){
+	    //public virtual bool Give( Mobile m, Item item, bool placeAtFeet )
+	    Item item = Construct ( n.Resource );
+
+	    if( item.Stackable ){
+		int amount = Utility.Dice(1, 5, 2); //1d5+2, change this to be skill based
+		if( m is PlayerMobile ){
+		    if( ((PlayerMobile)m).Spec.SpecName == SpecName.Crafter ) {
+			amount *= 2;
+		    }
+		}
+		item.Amount = amount;
+	    }
+	    
+	    if ( m.PlaceInBackpack( item ) )
+		return;
+
+	    if ( !placeAtFeet )
+		return;
+
+	    Map map = m.Map;
+
+	    if ( map == null )
+		return;
+
+	    List<Item> atFeet = new List<Item>();
+
+	    foreach ( Item obj in m.GetItemsInRange( 0 ) )
+		atFeet.Add( obj );
+
+	    for ( int i = 0; i < atFeet.Count; ++i )
+	    {
+		Item check = atFeet[i];
+
+		if ( check.StackWith( m, item, false ) )
+		    return;
+	    }
+
+	    item.MoveToWorld( m.Location, map );
+	    return;
 	}
+
+	public virtual Item Construct( Type type )
+	{
+	    try{ return Activator.CreateInstance( type ) as Item; }
+	    catch{ return null; }
+	}
+
 
 	//attenuate abundance by distance from node
 	public bool IncludeByDistance( GatherNode n, Mobile m ){
@@ -131,8 +177,5 @@ namespace Server.Engines.Gather {
 	    return nodes[ nodeStruck - 1 ];
 	}
 
-	public void GiveResources( Type res, PlayerMobile m ) {
-	    
-	}
     }
 }

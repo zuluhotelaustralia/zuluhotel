@@ -192,9 +192,6 @@ namespace Server.Engines.Gather
 	public override void PlayGatherEffects(){
 	}
 
-	public override void GiveResources() {
-	}
-
 	public override void StartGathering( Mobile from, Item tool, object targeted) {
 	    int tileID;
 
@@ -215,7 +212,8 @@ namespace Server.Engines.Gather
 	    }
 
 	    if( Validate( tileID ) ) {
-
+		PlayGatherEffects();
+		base.StartGathering( from, tool, targeted );
 	    }
 	}
 
