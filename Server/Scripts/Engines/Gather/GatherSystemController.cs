@@ -88,6 +88,8 @@ namespace Server.Items {
 	    writer.Write( (int)m_ControlledSystem );
 
 	    foreach( GatherNode n in m_System.Nodes ) {
+		n.Drift();
+		
 		writer.Write( n.X );
 		writer.Write( n.Y );
 		writer.Write( n.vX );
@@ -111,36 +113,82 @@ namespace Server.Items {
 	    SetSystemReference( cs );
 	    int x, y, vx, vy;
 	    double a, d, min, max;
-	    Type res;
+	    string res;
 
-	    Type systype = typeof(Server.Engines.Gather.Mining.Ores);
-	    if( m_ControlledSystem == ControlledSystem.Lumberjacking ) {
-		systype = typeof(Server.Engines.Gather.Lumberjacking.Logs);
-	    }
-	    if( m_ControlledSystem == ControlledSystem.Fishing ) {
-		systype = typeof(Server.Engines.Gather.Fishing.Fish);
-	    }
-	    	    
 	    switch( version )
 	    {
 		case 0:
 		    {
-			foreach( var v in Enum.GetValues( systype ) ) {
-			    //make this more elegant, because yuck
-			    x = reader.ReadInt();
-			    y = reader.ReadInt();
-			    vx = reader.ReadInt();
-			    vy = reader.ReadInt();
-			    a = reader.ReadDouble();
-			    d = reader.ReadDouble();
-			    res = (systype)Enum.Parse( systype, reader.ReadString() );
-			    min = reader.ReadDouble();
-			    max = reader.ReadDouble();
-			    
-			    //	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, double d, double minskill, double maxskill, Type res )
-			    m_System.Nodes.Add( new GatherNode( x, y, vx, vy, a, d, min, max, res ) );
+			switch( m_ControlledSystem )
+			{
+			    case ControlledSystem.None:
+				{
+				    break;
+				}
+			    case ControlledSystem.Mining:
+				{
+				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Mining.Ores) ) ) {
+					//make this more elegant, because yuck
+					x = reader.ReadInt();
+					y = reader.ReadInt();
+					vx = reader.ReadInt();
+					vy = reader.ReadInt();
+					a = reader.ReadDouble();
+					d = reader.ReadDouble();
+					res = reader.ReadString();
+					min = reader.ReadDouble();
+					max = reader.ReadDouble();
+					
+					//	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, double d, double minskill, double maxskill, Type res )
+					m_System.Nodes.Add( new GatherNode( x, y, vx, vy, a, d, min, max, Type.GetType(res) ) );
+				    }
+				    
+				    break;
+				}
+			    case ControlledSystem.Lumberjacking:
+				{
+				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Lumberjacking.Logs) ) ) {
+					//make this more elegant, because yuck
+					x = reader.ReadInt();
+					y = reader.ReadInt();
+					vx = reader.ReadInt();
+					vy = reader.ReadInt();
+					a = reader.ReadDouble();
+					d = reader.ReadDouble();
+					res = reader.ReadString();
+					min = reader.ReadDouble();
+					max = reader.ReadDouble();
+					
+					//	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, double d, double minskill, double maxskill, Type res )
+					m_System.Nodes.Add( new GatherNode( x, y, vx, vy, a, d, min, max, Type.GetType(res) ) );
+				    }
+
+				    break;
+				}
+			    case ControlledSystem.Fishing:
+				{
+				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Fishing.Fish) ) ) {
+					//make this more elegant, because yuck
+					x = reader.ReadInt();
+					y = reader.ReadInt();
+					vx = reader.ReadInt();
+					vy = reader.ReadInt();
+					a = reader.ReadDouble();
+					d = reader.ReadDouble();
+					res = reader.ReadString();
+					min = reader.ReadDouble();
+					max = reader.ReadDouble();
+					
+					//	public GatherNode( int initialX, int initialY, int dirX, int dirY, double a, double d, double minskill, double maxskill, Type res )
+					m_System.Nodes.Add( new GatherNode( x, y, vx, vy, a, d, min, max, Type.GetType(res) ) );
+				    }
+
+				    break;
+				}
 			}
-			break;
+			
+			
+			break; //break case0
 		    }
 		default:
 		    {
