@@ -65,25 +65,49 @@ namespace Server.Engines.Gather {
 	    m_MaxSkill = maxskill;
 	}
 
-	private void ApplyRotation( int x, int y ) {
-	    //normally on a 2D Euclidean plane, a 90 degree rotation is
-	    //  [ 0 -1 ]
-	    //  [ 1  0 ]
-	    //
-	    //  however on the UO map, y is in the downward/southward direction, so
-	    //  [  0 1 ]
-	    //  [ -1 0 ]
-	    //
-	    // therefore,
+	private void ApplyRotation( int vx, int vy ) {
+	    //we're simply applying a reflection about a given normal vector, defined as inward from the map boundary.
+	    // given some vector w = ax + by, we can get the reflection about n by:
+	    // r = w - 2(w . n)n, where n is normalized and w . n represents the inner product.
+	    // broken into components:
+	    //  r_vX = m_vX - 2 (inner product) nx;
+	    //  r_vY = m_vY - 2 (inner product) ny;
+
+	    int nx = 0;
+	    int ny = 0;
+	    int innerproduct;
+	    	    
+	    int xprime = m_X + m_vX;
+	    int yprime = m_y + m_vY;
+
+	    int innerproduct = (nx * m_vX) + (ny * m_vY);
 	    
-	    m_vX = y;
-	    m_vY = -x;
+	    if ( xprime >= 896 ) {
+		// n = ( -1, 0 )
+		nx = -1;
+	    }
+	    if ( xprime <= 0 ) {
+		// n = ( 1, 0 )
+		nx = 1;
+	    }
+	    if ( yprime >= 512 ) {
+		// n = ( 0, -1 )
+		ny = -1;
+	    }
+	    if ( yprime <= 0 ) {
+		// n = ( 0, 1 )
+		ny = 1;
+	    }
+
+	    m_vX = m_vX - (2 * innerproduct * nx);
+	    m_vY = m_vY - (2 * innerproduct * ny);
+	    
 	}
 
 	private bool WouldNextDriftBeIllegal () {
 	    int xprime;
 	    int yprime;
-
+	    
 	    xprime = m_X + m_vX;
 	    yprime = m_Y + m_vY;
 
