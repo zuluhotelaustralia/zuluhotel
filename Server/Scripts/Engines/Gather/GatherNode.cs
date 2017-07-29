@@ -75,10 +75,9 @@ namespace Server.Engines.Gather {
 
 	    int nx = 0;
 	    int ny = 0;
-	    int innerproduct;
-	    	    
+	 	    	    
 	    int xprime = m_X + m_vX;
-	    int yprime = m_y + m_vY;
+	    int yprime = m_Y + m_vY;
 
 	    int innerproduct = (nx * m_vX) + (ny * m_vY);
 	    
