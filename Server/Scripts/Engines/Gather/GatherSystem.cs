@@ -48,6 +48,8 @@ namespace Server.Engines.Gather {
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
+	    from.RevealingAction();
+	    
 	    //select node
 	    Skill s = from.Skills[m_SkillName];
 	    GatherNode n = Strike( BuildNodeList( s, from ) );

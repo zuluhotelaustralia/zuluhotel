@@ -1,6 +1,95 @@
+#+STARTUP: align
+
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
 * TODO finish off GatherSystem
+** Ores
+|               |       |            |         | <30>                           |
+| Ores          |   Hue | Difficulty | Quality | Special Properties             |
+| Iron          |   0x0 |          0 |    1.00 |                                |
+| Gold          | 0x885 |          1 |    1.00 |                                |
+| Spike         | 0x4c7 |          5 |    1.05 |                                |
+| Fruity        | 0x46e |         10 |    1.05 | Dex penalty -1                 |
+| Bronze        | 0x45e |         15 |    1.10 |                                |
+| Ice Rock      | 0x480 |         20 |    1.05 | 25% water prot                 |
+| Black Dwarf   | 0x451 |         25 |    1.10 |                                |
+| Dull Copper   | 0x3ea |         30 |    1.15 |                                |
+| Platinum      | 0x457 |         35 |    1.15 | Wearer takes less magic dmg    |
+| Silver Rock   | 0x3e9 |         40 |    1.10 | 25% Necro prot                 |
+| Dark Pagan    | 0x46b |         45 |    1.15 |                                |
+| Copper        | 0x602 |         50 |    1.20 |                                |
+| Mystic        | 0x17f |         55 |    1.05 | Wearer takes less magic dmg    |
+| Spectral      | 0x483 |         60 |    1.10 | Dex penalty -3                 |
+| Old Britain   | 0x852 |         65 |    1.25 |                                |
+| Onyx          | 0x455 |         70 |    1.25 | Dex penalty -1                 |
+| Red Elven     | 0x4b9 |         75 |    1.15 | Dex penalty -2, Wearer takes less magic dmg |
+| Undead        | 0x279 |         80 |    1.20 | 50% necro prot                 |
+| Pyrite        | 0x6b8 |         85 |    1.30 | Dex penalty -1                 |
+| Virginity     | 0x482 |         90 |    1.25 | Dex penalty -1, 50% necro prot |
+| Malachite     | 0x487 |         95 |    1.50 |                                |
+| Lavarock      | 0x486 |         97 |    1.35 | 50% fire prot                  |
+| Azurite       | 0x4df |         98 |    1.50 | Dex penalty -1, 50% air prot   |
+| Dripstone     | 0x49e |        100 |    1.60 | Wearer takes less magic dmg, 25% water prot |
+| Executor      | 0x499 |        104 |    1.60 | Wearer takes less magic dmg    |
+| Peachblue     | 0x49c |        108 |    1.70 | Dex penalty -2                 |
+| Destruction   | 0x500 |        112 |    1.70 | Dex penalty -1, 25% earth prot |
+| Anra          | 0x48b |        116 |    1.80 | Dex penalty -2                 |
+| Crystal       | 0x492 |        119 |    1.80 | Wearer takes less magic dmg, 25% earth prot |
+| Doom          | 0x49f |        122 |    1.90 |                                |
+| Goddess       | 0x501 |        125 |    1.90 | Wearer takes less magic dmg, 25% air prot |
+| New Zulu      | 0x488 |        129 |    2.00 | Dex penalty -2, "reduced spell effectiveness on wearer" whatever that means |
+| Ebon Twilight | 0x493 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% water prot |
+| Dark Sable    | 0x494 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% fire prot |
+| Nimbus        | 0x498 |        140 |    2.25 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |
+|               |       |            |         | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |
+
+** Logs
+|                   |      |            |         | <30>                           |
+| Logs              |  Hue | Difficulty | Quality | Special Properties             |
+| Normal            |    0 |          0 |    1.00 |                                |
+| Pinetree          | 1132 |         15 |    1.05 |                                |
+| Cherry            | 5716 |         28 |    1.10 |                                |
+| Oak               | 1045 |         39 |    1.15 |                                |
+| Purple Passion    |  515 |         50 |    1.20 |                                |
+| Golden Reflection |   48 |         59 |    1.25 |                                |
+| Hardranger        | 1285 |         65 |    1.25 |                                |
+| Jadewood          | 1162 |         68 |    1.30 |                                |
+| Darkwood          | 1109 |         77 |    1.35 |                                |
+| Stonewood         | 1154 |         84 |    1.40 |                                |
+| Sun               | 1176 |         91 |    1.45 |                                |
+| Gauntlet          | 1284 |         95 |    1.45 |                                |
+| Swamp             | 1177 |         98 |    1.50 |                                |
+| Stardust          | 1161 |        105 |    1.55 |                                |
+| Silver leaf       | 2301 |        110 |    1.60 |                                |
+| Stormteal         | 1346 |        114 |    1.65 |                                |
+| Emerald wood      | 1159 |        118 |    1.70 |                                |
+| Blood             | 1645 |        122 |    1.75 |                                |
+| Crystal           | 1170 |        125 |    1.80 |                                |
+| Bloodhorse        | 1287 |        127 |    1.85 |                                |
+| Doom              | 1183 |        128 |    1.90 |                                |
+| Zulu              | 1160 |        130 |    2.00 |                                |
+| Darkness          | 1258 |        140 |    2.05 |                                |
+| Elven             | 1165 |        145 |    2.10 |                                |
+** Hides
+|                     |       |            |         | <30>                           |
+| Hides               |   Hue | Difficulty | Quality | Special Properties             |
+| Normal Hides        |     0 |          0 |    1.00 | None                           |
+| Rat Hides           | 0x7e2 |         10 |    1.10 | None                           |
+| Wolf Hides          |  1102 |         20 |    1.20 | None                           |
+| Bear Hides          |    44 |         30 |    1.30 | None                           |
+| Serpent Hides       | 0x8fd |         40 |    1.40 | None                           |
+| Lizard Hides        | 0x852 |         50 |    1.50 | None                           |
+| Troll Hides         | 0x54a |         60 |    1.60 | None                           |
+| Ostard Hides        | 0x415 |         70 |    1.70 | None                           |
+| Necromancer Hides   |    84 |         80 |    1.80 | "Reduction of magic penalty, 25% Necro magic protection" |
+| Lava Hides          | 0x486 |         90 |    1.90 | 50% Fire magic protection      |
+| Liche Hides         | 0x496 |        100 |    2.00 | "Reduction of magic penalty, 25% Necro magic protection" |
+| Ice Crystal Hides   | 0x492 |        110 |    2.20 | 50% Water magic protection     |
+| Dragon Hides        | 0x494 |        115 |    2.35 | None                           |
+| Wyrm Hides          |  1159 |        120 |    2.50 | "Reduction of magic penalty, 50% Fire magic protection, 25% Earth magic protection" |
+| Balron Hides        |  1157 |        125 |    2.90 | "Reduction of magic penalty, 25% Necro magic protection, Immunity to level 1 spells" |
+| Golden Dragon Hides |    48 |        130 |    3.00 | "Reduction of magic penalty, 25% Earth magic protection, 25% Air magic protection, 75% Fire magic protection" |
+
 ** DONE new class GatherTarget, similar to HarvestTarget
 *** special checks for GatherTarget.OnTarget:
 **** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids 
@@ -13,17 +102,61 @@ NOTE: not going to implement the above any time soon.  We can spawn gravedust or
 **** DONE otherwise it just calls StartHarvesting if none of those are true
 ** TODO derive new GatherSystem skill-specific classes from GatherSystem
 *** DONE make gathersystem abstract
-*** TODO antimacro code on gathertarget immediately before giving them the cursor
-*** TODO "Survey tool" lets you dig for samples to see what's there
-*** TODO actually give them resources
-*** TODO play the animations/soundfx
-*** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
+** TODO antimacro code on gathertarget immediately before giving them the cursor
+** TODO "Survey tool" lets you dig for samples to see what's there
+** TODO actually give them resources
+** TODO play the animations/soundfx
+** TODO GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
+*** TODO every time they swing the tool it has to check range, tile, resources, etc. 
+** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
 *** DONE (de)serialize node positions when (de)serializing the controller stone
 use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE finish writing code to scale harvest rates based on proximity to node
 * TODO finish off Necro and Earth magic
 ** TODO summoning and "taming" spells
 ** TODO check sounds/vfx
+   | <15>            |       | <20>                 |      | <20>                 | <20>                 |                     |            |         |
+   | Necro           |       |                      |      |                      |                      |                     |            |         |
+   | Name            | Skill | Words of Power       | Mana | Reagents             | Desc.                | SFX number from mul | in decimal | "Done"? |
+   | Lesser          |       |                      |      |                      |                      |                     |            |         |
+   | Control Undead  |    80 | Nutu Magistri Supplicare |   40 | bloodspawn, bone, blackmoor | Gain control of alive undead creatures |                   0 |          0 | x       |
+   | Darkness        |    80 | In Caligne Abditus   |   40 | Pumice, Pig iron     | Makes target's screen very dark, lasts for fucking ever |              0x01e4 |        484 | x       |
+   | Decaying Ray    |    80 | Umbra Aufero Vita    |   40 | 2 Vial of Blood, Volcanic Ash, Demon Bone | Temporarily reduce target's armor |               0x0FE |        254 | x       |
+   | Spectre's Touch |    80 | Enervare             |   40 | Executioner's Cap, Brimstone, Demon Bone | AOE Necro damage, LOS |               0x1f2 |        498 | x       |
+   | Abyssal Flame   |   100 | Orinundus Barathrum Erado Hostes Hostium |   60 | Brimstone, Obsidian, Volcanic Ash, Demon Bone, Dragon's blood | AOE fire damage on all mobiles within LOS |               0x208 |        520 | x       |
+   | Animate Dead    |   100 | Corpus Sine Nomine Expergefaceret |   60 | Bone, Fertile Dirt, Vial of Blood, Obsidian | Reanimate corpse, move items from corpse to reanimated mob, give mob skills and stats as % of original, modulated by power of spell |               0x22b |        555 |         |
+   | Sacrifice       |   100 | Animus Ex Corporis Resolveretur |   60 | Executioners Cap, Bloodspawn, Wyrm's Heart, Blackmoor, Bone | Sacrifice pet, gain portion of its hp |               0x208 |        520 |         |
+   | Wraith Breath   |   100 | Manes Sollicti Mi Compellere |   60 | Obsidian, Pumice, Bone, Blackmoor | AOE paralyze         |               0x1fa |        506 | x       |
+   | Greater         |       |                      |      |                      |                      |                     |            |         |
+   | Sorceror's Bane |   120 | Fluctus Perturbo Magus Navitas |  100 | Volcanic Ash, Wyrms Heart, Demon Bone, Pumice, Dragon's Blood, dead wood | The waterfall spell, steals mana |               0x209 |        521 | x       |
+   | Summon Spirit   |   120 | Manes turbidi Sollictique resolverent |  100 | demon bone, brimstone, dragon's blood, bloodspawn | Summon powerful undead (up to blood liche) |               0x22b |        555 |         |
+   | Wraith Form     |   120 | Manes Sollicti Mihi Infundite |  100 | demon bone, brimstone, bloodspawn | Morph into Wraith, constantly deal AOE necro damage every 5 ticks (seconds?) in the amount of 2d(casterskill/15) |               0x1f2 |        498 | x       |
+   | Wyvern Strike   |   120 | Umbrae Tenebrae Venarent |  100 | dragon's blood, serpent scales, blackmoor, bloodspawn, volcanic ash | Poison and deal necro damage to a single target |               0x1e2 |        482 | x       |
+   | Kill            |   140 | Ulties Manum Necarent |  130 | Demon bone, executioner's cap, vial of blood, dragon's blood, worm's heart, volcanic ash, eye of newt | if target's hp < spellpower - (spellpower * prot * 0.25), instant kill, otherwise deal a shitload of damage |               0x202 |        514 | x       |
+   | Liche Form      |   140 | Umbrae Tenebrae Miserere Animi Non Digna Ferentis |  130 | Demon bone, brimstone, dragon's blood, blackmoor, vial of blood, volcanic ash | Polymorph into liche form, lose str and dex, gain lots of int |               0x202 |        514 |         |
+   | Plague          |   140 | Fluctus Puter Se Aresceret |  130 | volcanic ash, batwing, demon bone, dragon's blood, bloodspawn, pumice, serpent scales | AOE poison           |               0x1e2 |        482 | x       |
+   | Spellbind       |   140 | Nutu Magistri Se Compellere |  130 | eye of newt, vial of blood, fertile dirt, pig iron | Powerfully take control of creature for a long time |               0x20d |        525 |         |
+   |                 |       |                      |      |                      |                      |                     |            |         |
+   | Earth           |       |                      |      |                      |                      |                     |            |         |
+   | Name            | Skill | Words of Power       | Mana | Regs                 | Desc.                |                     |            |         |
+   | Circle 1        |       |                      |      |                      |                      |                     |            |         |
+   | Antidote        |    60 | Puissante Terre Traite Ce Patient |    5 | Deadwood, fertile dirt, executioner's cap | cure poisons no matter what; leave target with poison immunity for duration based on skill |               0x1e1 |        481 |         |
+   | Owl Sight       |    60 | Vista Da Noite       |    5 | Eye of newt          | longer-lasting night sight |               0x1e4 |        484 |         |
+   | Shifting Earth  |    60 | Esmagamento Con Pedra |    5 | Eye of newt          | earth damage on single target, dex debuff |               0x20e |        526 |         |
+   | Summon Mammals  |    60 | Chame O Mamifero Agora |    5 | serpent scale, pig iron, eye of newt | summons... mammals.  powerful ones |                   0 |          0 |         |
+   | Call Lightning  |    80 | Batida Do Deus       |   10 | wyrm's heart, pig iron, bone | air damage lightning strike |               0x207 |        519 |         |
+   | Earth's Blessing |    80 | Foria Da Terra       |   10 | pig iron, obsidian, volcanic ash | More powerful Bless  |               0x1eb |        491 |         |
+   | Earth Portal    |    80 | Destraves Limites Da Natureza |   10 | brimstone, executioner's cap, eye of newt | Basically a Gate spell.  Would be cool to make this able to go places where Gate cannot, and vice versa |               0x20f |        527 |         |
+   | Nature's Touch  |    80 | Guerissez Par Terre  |   10 | pumice, vial of blood, obsidian | Heals 6d8+30 pts of damage, scale that by magic bonus, and scale that by target's healing bonus if any |               0x203 |        515 |         |
+   | Circle 2        |       |                      |      |                      |                      |                     |            |         |
+   | Gust of Air     |   100 | Gusto Do Ar          |   15 | fertile dirt, brimstone, eye of newt | Air damage to single target, wind causes target to get pushed away in a semi-random direction |               0x109 |        265 |         |
+   | Rising Fire     |   100 | Batida Do Fogo       |   15 | batwing, brimstone, vial of blood | AOE fire damage that hits twice (3 flamestrike animations per hit) |               0x209 |        521 |         |
+   | Shapeshift      |   100 | Mude Minha Forma     |   15 | wyrm's heart, blackmoor, bat wing | polymorph into a variety of animals, one of which is the little bird |               0x20a |        522 |         |
+   | Ice Strike      |   120 | Geada Com Inverno    |   20 | bone, bat wing, brimstone | water damage to single target |               0x117 |        279 |         |
+   | Earth Spirit    |   120 | Chame A Terra Elemental |   20 | Dragon's blood, fertile dirt, volcanic ash | Earth elemental lord |               0x10d |        269 |         |
+   | Fire Spirit     |   120 | Chame O Fogo Elemental |   20 | eye of newt, blackmoor, obsidian | Fire Elemental Lord  |               0x113 |        275 |         |
+   | Storm Spirit    |   120 | Chame O Ar Elemental |   20 | fertile dirt, volcanic ash, bat wing | Air Elemental Lord   |               0x108 |        264 |         |
+   | Water Spirit    |   120 | Chame O Agua Elemental |   20 | wyrm's heart, serpent scales, eye of newt | Water Elemental Lord |               0x118 |        280 |         |
 ** TODO edit cliloc/gump to change spell names (necro/spellweaving for earth)
 * TODO implement skillgain rate scaling based on player's region
 ** DONE define a new overlay region class (or perhaps edit baseregion) with configurable gain rates
@@ -47,4 +180,3 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 ** TODO ensure only spec crafters can work with and mine the jewels
-   
