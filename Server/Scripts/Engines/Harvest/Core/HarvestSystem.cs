@@ -65,15 +65,15 @@ namespace Server.Engines.Harvest
 
 		public virtual object GetLock( Mobile from, Item tool, HarvestDefinition def, object toHarvest )
 		{
-			/* Here we prevent multiple harvesting.
-			 * 
-			 * Some options:
-			 *  - 'return tool;' : This will allow the player to harvest more than once concurrently, but only if they use multiple tools. This seems to be as OSI.
-			 *  - 'return GetType();' : This will disallow multiple harvesting of the same type. That is, we couldn't mine more than once concurrently, but we could be both mining and lumberjacking.
-			 *  - 'return typeof( HarvestSystem );' : This will completely restrict concurrent harvesting.
-			 */
-
-			return tool;
+		    /* Here we prevent multiple harvesting.
+		     * 
+		     * Some options:
+		     *  - 'return tool;' : This will allow the player to harvest more than once concurrently, but only if they use multiple tools. This seems to be as OSI.
+		     *  - 'return GetType();' : This will disallow multiple harvesting of the same type. That is, we couldn't mine more than once concurrently, but we could be both mining and lumberjacking.
+		     *  - 'return typeof( HarvestSystem );' : This will completely restrict concurrent harvesting.
+		     */
+		    
+		    return GetType();
 		}
 
 		public virtual void OnConcurrentHarvest( Mobile from, Item tool, HarvestDefinition def, object toHarvest )
