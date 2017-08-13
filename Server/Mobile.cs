@@ -789,6 +789,12 @@ namespace Server
 	private DateTime m_LastDexGain;
 	private Race m_Race;
 
+	private int m_AutoLoop;
+	public int AutoLoop {
+	    get { return m_AutoLoop; }
+	    set { m_AutoLoop = value; }
+	}
+
 	private static DamageScalar m_DamageScalar = new DamageScalar();
 	public static DamageScalar DamageScalar {
 	    get { return m_DamageScalar; }
@@ -5437,6 +5443,11 @@ namespace Server
 
 	    switch( version )
 	    {
+		case 34:
+		    {
+			m_AutoLoop = reader.ReadInt();
+			goto case 33;
+		    }
 		case 33:
 		    {
 			m_StatCap = 390;
@@ -5877,8 +5888,10 @@ namespace Server
 
 	public virtual void Serialize( GenericWriter writer )
 	{
-	    writer.Write( (int)33 ); // version
+	    writer.Write( (int)34 ); // version
 
+	    writer.Write( m_AutoLoop );
+	    
 	    writer.WriteDeltaTime( m_LastStrGain );
 	    writer.WriteDeltaTime( m_LastIntGain );
 	    writer.WriteDeltaTime( m_LastDexGain );
@@ -9945,6 +9958,8 @@ namespace Server
 		World.m_MobileTypes.Add( ourType );
 		m_TypeRef = World.m_MobileTypes.Count - 1;
 	    }
+
+	    m_AutoLoop = 1;
 	}
 
 	public void DefaultMobileInit()

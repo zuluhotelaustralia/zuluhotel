@@ -5,6 +5,7 @@ using Server;
 using Server.Mobiles;
 using Server.Items;
 using Server.Targeting;
+using Server.Commands;
 
 /* 
 
@@ -38,6 +39,29 @@ namespace Server.Engines.Gather {
 	public void AddNode( GatherNode n ){
 	    m_Nodes.Add(n);
 	}
+
+	public static void Initialize() {
+	    CommandSystem.Register( "AutoLoop", AccessLevel.Player, new CommandEventHandler( AutoLoop_OnCommand ) );
+	}
+
+	[Usage( "AutoLoop <number from 1 to 1000>" )]
+	[Description( "Sets the number of consecutive times you would like to attempt to gather resources." )]
+	public static void AutoLoop_OnCommand( CommandEventArgs e ) {
+	    if ( e.Length != 1 ){
+		e.Mobile.SendMessage("Format: {0}AutoLoop <1-1000>");
+	    }
+	    else {
+		int loops = e.GetInt32(0);
+		if( loops > 1000 || loops < 1 ){
+		    	e.Mobile.SendMessage("Format: {0}AutoLoop <1-1000>");
+		}
+		else{
+		    e.Mobile.AutoLoop = loops;
+		    e.Mobile.SendMessage("AutoLoop set to {0}", loops);
+		}
+	    }
+	}
+
 
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
