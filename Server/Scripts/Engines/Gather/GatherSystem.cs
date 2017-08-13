@@ -42,6 +42,25 @@ namespace Server.Engines.Gather {
 
 	public static void Initialize() {
 	    CommandSystem.Register( "AutoLoop", AccessLevel.Player, new CommandEventHandler( AutoLoop_OnCommand ) );
+	    CommandSystem.Register( "GatherSystemSetup", AccessLevel.Developer, new CommandEventHandler( GatherSystemSetup_OnCommand ) );
+	}
+
+	[Usage( "GatherSystemSetup" )]
+	[Description( "Performs initial setup of GatherNodes")]
+	public static void GatherSystemSetup_OnCommand( CommandEventArgs e ){
+	    e.Mobile.SendMessage("Select Mining Controller Stone to set up Mining.");
+	    e.Mobile.Target = new SetupGatherTarget();
+
+	    // ...
+
+	   e.Mobile.SendMessage("Select Fishing Controller Stone to set up Fishing.");
+	   e.Mobile.Target = new SetupGatherTarget();
+
+	   // ...
+
+	   e.Mobile.SendMessage("Select Lumberjacking Controller Stone to set up Lumberjacking.");
+	   e.Mobile.Target = new SetupGatherTarget();
+
 	}
 
 	[Usage( "AutoLoop <number from 1 to 1000>" )]

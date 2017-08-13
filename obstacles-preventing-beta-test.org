@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [18/23]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [18/24]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -19,9 +19,10 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE otherwise it just calls StartHarvesting if none of those are true
 ** DONE derive new GatherSystem skill-specific classes from GatherSystem
 *** TODO flesh them out 
-*** DONE make gathersystem abstract
+**** DONE make gathersystem abstract
 ** TODO antimacro code on gathertarget immediately before giving them the cursor
-** TODO "Survey tool" lets you dig for samples to see what's there
+** TODO initial setup command
+** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** DONE actually give them resources
 ** DONE autolooping
 *** DONE implement autoloop variable on mobile
