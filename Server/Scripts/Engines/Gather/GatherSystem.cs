@@ -62,6 +62,13 @@ namespace Server.Engines.Gather {
 	    }
 	}
 
+	public virtual object GetLock( Mobile from, Item tool, object targeted ){
+	    // return tool; to allow gathering from multiple tools
+	    // return GetType(); to allow gathering from multiple skills i.e. lumberjacking and mining
+	    // return typeof( GatherSystem ); IOT completely disable concurrent gathering
+
+	    return GetType();
+	}
 
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
@@ -72,11 +79,29 @@ namespace Server.Engines.Gather {
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
-	    from.RevealingAction();
-	    
+	    //check other things as per Harvest.CheckHarvest
+
 	    //select node
 	    Skill s = from.Skills[m_SkillName];
 	    GatherNode n = Strike( BuildNodeList( s, from ) );
+
+	    object toLock = GetLock( from, tool, targeted );
+
+	    if ( !from.BeginAction( toLock ) ){
+		OnConcurrentGather( from, tool, targeted );
+		return;
+	    }
+
+	    new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
+	    CheckWhileGathering( from, tool, targeted, toLock );
+	}
+
+	//play the animations/sfx, do some checks
+	// also make sure they haven't moved, aren't dead, etc.
+	public virtual void CheckWhileGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
+	    from.RevealingAction();
+
+	    Skill s = from.Skills[m_SkillName];
 	    
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
 	    double chance;

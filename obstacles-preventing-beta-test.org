@@ -3,7 +3,10 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [18/23]
+:PROPERTIES:
+:COOKIE_DATA: todo recursive
+:END:
 ** DONE new class GatherTarget, similar to HarvestTarget
 *** special checks for GatherTarget.OnTarget:
 **** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids 
@@ -14,23 +17,33 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE check if furnitureattribute.check(targeted as item), then DestroyFurniture()
 **** DONE check if using mining on a treasuremap, call (tmap)targeted.onBeginDig
 **** DONE otherwise it just calls StartHarvesting if none of those are true
-** TODO derive new GatherSystem skill-specific classes from GatherSystem
+** DONE derive new GatherSystem skill-specific classes from GatherSystem
+*** TODO flesh them out 
 *** DONE make gathersystem abstract
 ** TODO antimacro code on gathertarget immediately before giving them the cursor
 ** TODO "Survey tool" lets you dig for samples to see what's there
-** TODO actually give them resources
+** DONE actually give them resources
+** DONE autolooping
+*** DONE implement autoloop variable on mobile
+*** DONE add looping check in GatherTimer
 ** TODO play the animations/soundfx
-** TODO GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
+** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
 *** TODO every time they swing the tool it has to check range, tile, resources, etc. 
 ** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
 *** DONE (de)serialize node positions when (de)serializing the controller stone
 use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE finish writing code to scale harvest rates based on proximity to node
-* TODO finish off Necro and Earth magic
+* TODO finish off Necro and Earth magic [0/3]
+:PROPERTIES:
+:COOKIE_DATA: todo recursive
+:END:
 ** TODO summoning and "taming" spells
 ** TODO check sounds/vfx: [[spellstable]]
 ** TODO edit cliloc/gump to change spell names (necro/spellweaving for earth)
-* TODO implement skillgain rate scaling based on player's region
+* TODO implement skillgain rate scaling based on player's region [4/7]
+:PROPERTIES:
+:COOKIE_DATA: todo recursive
+:END:
 ** DONE define a new overlay region class (or perhaps edit baseregion) with configurable gain rates
 *** DONE make gains slow as fuck in houses
 *** DONE make gains very fast in dungeons
@@ -38,7 +51,10 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
 *** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 *** TODO flesh out derived regions with appropriate gain rates
-* TODO make sure Spec actually works
+* TODO make sure Spec actually works [2/13]
+:PROPERTIES:
+:COOKIE_DATA: todo recursive
+:END:
 ** TODO damage taken
 *** TODO magic damage taken by warriors
 *** TODO physical damage taken by warriors
