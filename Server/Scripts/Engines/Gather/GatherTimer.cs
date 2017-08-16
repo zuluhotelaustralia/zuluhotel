@@ -26,7 +26,7 @@ namespace Server.Engines.Gather
 	{
 	    m_Count--;
 	    
-	    if ( !m_System.CheckWhileGathering( m_From, m_Tool, m_ToHarvest, m_Locked, m_Node ) ){
+	    if ( !m_System.CheckWhileGathering( m_From, m_Tool, m_Targeted, m_Locked, m_Node ) ){
 		Stop();
 	    }
 	    if ( m_Count <= 0 ) {

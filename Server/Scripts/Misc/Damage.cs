@@ -38,7 +38,7 @@ namespace Server {
 
 	    //if they are spec, scale by their class bonus
 	    if( m is PlayerMobile && ((PlayerMobile)m).Spec.SpecName != SpecName.None ){
-		bonus *= ((PlayerMobile)m).Spec.Bonus;
+		bonus = ((PlayerMobile)m).Spec.Bonus;
 		s = ((PlayerMobile)m).Spec.SpecName;
 	    }
 	    else {

@@ -7,16 +7,22 @@ using Server.Commands;
 using Server.Targeting;
 
 namespace Server.Items {
+
+    public enum ControlledSystem{
+	None,
+	Mining,
+	Lumberjacking,
+	Fishing
+    }
+    
     public class GatherSystemController : Item {
 
-	public enum ControlledSystem{
-	    None,
-	    Mining,
-	    Lumberjacking,
-	    Fishing
+	private ControlledSystem m_SystemType = ControlledSystem.None;
+	public ControlledSystem SystemType {
+	    get{
+		return m_SystemType;
+	    }
 	}
-
-	private ControlledSystem m_ControlledSystem = ControlledSystem.None;
 	
 	private GatherSystem m_System;
 	public GatherSystem System {
@@ -54,9 +60,9 @@ namespace Server.Items {
 
 	public void SetSystemReference( int cs ) {
 	    // the engine has to know which stone it takes orders from
-	    m_ControlledSystem = (ControlledSystem)cs;
+	    m_SystemType = (ControlledSystem)cs;
 	    
-	    switch( m_ControlledSystem )
+	    switch( m_SystemType )
 	    {
 		case ControlledSystem.None:
 		    {
@@ -85,7 +91,7 @@ namespace Server.Items {
 
 	    writer.Write( (int) 0 ); //version
 
-	    writer.Write( (int)m_ControlledSystem );
+	    writer.Write( (int)m_SystemType );
 
 	    foreach( GatherNode n in m_System.Nodes ) {
 		n.Drift();
@@ -119,7 +125,7 @@ namespace Server.Items {
 	    {
 		case 0:
 		    {
-			switch( m_ControlledSystem )
+			switch( m_SystemType )
 			{
 			    case ControlledSystem.None:
 				{

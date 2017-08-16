@@ -46,21 +46,10 @@ namespace Server.Engines.Gather {
 	}
 
 	[Usage( "GatherSystemSetup" )]
-	[Description( "Performs initial setup of GatherNodes")]
+	[Description( "Performs initial setup of one type of GatherNode")]
 	public static void GatherSystemSetup_OnCommand( CommandEventArgs e ){
-	    e.Mobile.SendMessage("Select Mining Controller Stone to set up Mining.");
+	    e.Mobile.SendMessage("Select a control stone.");
 	    e.Mobile.Target = new SetupGatherTarget();
-
-	    // ...
-
-	   e.Mobile.SendMessage("Select Fishing Controller Stone to set up Fishing.");
-	   e.Mobile.Target = new SetupGatherTarget();
-
-	   // ...
-
-	   e.Mobile.SendMessage("Select Lumberjacking Controller Stone to set up Lumberjacking.");
-	   e.Mobile.Target = new SetupGatherTarget();
-
 	}
 
 	[Usage( "AutoLoop <number from 1 to 1000>" )]
@@ -112,12 +101,18 @@ namespace Server.Engines.Gather {
 	    }
 
 	    new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
-	    CheckWhileGathering( from, tool, targeted, toLock );
+	    CheckWhileGathering( from, tool, targeted, toLock, n );
+	}
+
+	public void OnConcurrentGather( Mobile from, Item tool, object targeted ) {
+	    // l33t code here
 	}
 
 	//play the animations/sfx, do some checks
 	// also make sure they haven't moved, aren't dead, etc.
-	public virtual void CheckWhileGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
+	public virtual bool CheckWhileGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
+	    //if the moved, etc. return false
+	    
 	    from.RevealingAction();
 
 	    Skill s = from.Skills[m_SkillName];
@@ -146,7 +141,10 @@ namespace Server.Engines.Gather {
 
 	    if ( from.CheckSkill( s, chance ) ){
 		GiveResources( n, from, true );
+		return true;
 	    }
+
+	    return false;
 	}
 
 	public virtual void PlayGatherEffects(){
