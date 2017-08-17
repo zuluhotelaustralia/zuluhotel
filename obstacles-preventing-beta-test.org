@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [18/24]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [26/60]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -21,14 +21,49 @@ This is a list of all the things that need to be done before we can launch a bet
 *** TODO flesh them out 
 **** DONE make gathersystem abstract
 ** TODO antimacro code on gathertarget immediately before giving them the cursor
-** TODO initial setup command
+** DONE initial setup command
 ** TODO turns out we gotta generate the logs:  make and awk here we go fuckers
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** DONE actually give them resources
+** TODO deal with [[file:filestoupdate.txt]]
+*** DONE Engines/BulkOrders/SmallBOD.cs
+*** DONE Engines/Craft/DefBlacksmithy.cs
+*** DONE Engines/Craft/DefTinkering.cs
+*** DONE Engines/Craft/Core/Resmelt.cs
+*** DONE Items/Armor/BaseArmor.cs
+*** DONE Items/Clothing/BaseClothing.cs
+*** DONE Items/Containers/SalvageBag.cs
+*** TODO Items/Misc/ClockworkAssembly.cs
+*** TODO Items/Misc/PowerGenerator.cs
+*** TODO Items/Resources/Blacksmithing/BaseIngot.cs
+*** TODO Items/Resources/Blacksmithing/Generated/BaseOre.cs
+*** TODO Items/Resources/Masonry/Granite.cs
+*** TODO Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
+*** TODO Items/Special/Bulk Order Rewards/Blacksmithy/GlovesOfMining.cs
+*** TODO Items/Special/Veteran Rewards/MiningCart.cs
+*** TODO Items/Weapons/BaseWeapon.cs
+*** TODO Misc/CharacterCreation.cs
+*** TODO Mobiles/Monsters/Ants/AntLion.cs
+*** TODO Mobiles/Monsters/Humanoid/Melee/OrcBrute.cs
+*** TODO Mobiles/Monsters/LBR/Jukas/ChaosDragoonElite.cs
+*** TODO Mobiles/Monsters/Ore Elementals/AgapiteElemental.cs
+*** TODO Mobiles/Monsters/Ore Elementals/BronzeElemental.cs
+*** TODO Mobiles/Monsters/Ore Elementals/CopperElemental.cs
+*** TODO Mobiles/Monsters/Ore Elementals/GoldenElemental.cs
+*** TODO Mobiles/Monsters/Ore Elementals/ShadowIronElemental.cs
+*** TODO Mobiles/Monsters/Ore Elementals/ValoriteElemental.cs
+*** TODO Mobiles/Monsters/Ore Elementals/VeriteElemental.cs
+*** TODO SpecialSystems/Items/SupplyBags/BagOfIngots.cs
+*** TODO SpecialSystems/Items/SupplyBags/SmithBag.cs
 ** DONE autolooping
 *** DONE implement autoloop variable on mobile
 *** DONE add looping check in GatherTimer
 ** TODO play the animations/soundfx
+** TODO make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
+*** TODO remove special log and board classes
+*** TODO mkdir Generated/
+*** TODO put new ones in, reference them via GatherSystem
+*** TODO use idea from parent item to move them all to a new file for HarvestSystem
 ** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
 *** TODO every time they swing the tool it has to check range, tile, resources, etc. 
 ** DONE edit gathersystemcontroller to reflect the above -> spawn multiple

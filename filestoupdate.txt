@@ -1,3 +1,5 @@
+//note:  this file moved to obstacles-whatever-it's-called.org in project root --sith
+
 DONE + Engines/BulkOrders/SmallBOD.cs:
 DONE + Engines/Craft/DefBlacksmithy.cs:
 DONE + Engines/Craft/DefTinkering.cs:
