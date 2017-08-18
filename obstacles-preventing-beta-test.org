@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [26/60]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [34/60]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -22,7 +22,7 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE make gathersystem abstract
 ** TODO antimacro code on gathertarget immediately before giving them the cursor
 ** DONE initial setup command
-** TODO turns out we gotta generate the logs:  make and awk here we go fuckers
+** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** DONE actually give them resources
 ** TODO deal with [[file:filestoupdate.txt]]
@@ -33,8 +33,8 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE Items/Armor/BaseArmor.cs
 *** DONE Items/Clothing/BaseClothing.cs
 *** DONE Items/Containers/SalvageBag.cs
-*** TODO Items/Misc/ClockworkAssembly.cs
-*** TODO Items/Misc/PowerGenerator.cs
+*** DONE Items/Misc/ClockworkAssembly.cs
+*** DONE Items/Misc/PowerGenerator.cs
 *** TODO Items/Resources/Blacksmithing/BaseIngot.cs
 *** TODO Items/Resources/Blacksmithing/Generated/BaseOre.cs
 *** TODO Items/Resources/Masonry/Granite.cs
@@ -59,11 +59,11 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE implement autoloop variable on mobile
 *** DONE add looping check in GatherTimer
 ** TODO play the animations/soundfx
-** TODO make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
-*** TODO remove special log and board classes
-*** TODO mkdir Generated/
-*** TODO put new ones in, reference them via GatherSystem
-*** TODO use idea from parent item to move them all to a new file for HarvestSystem
+** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
+*** DONE remove special log and board classes
+*** DONE mkdir Generated/
+*** DONE put new ones in, reference them via GatherSystem
+*** DONE use idea from parent item to move them all to a new file for HarvestSystem
 ** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
 *** TODO every time they swing the tool it has to check range, tile, resources, etc. 
 ** DONE edit gathersystemcontroller to reflect the above -> spawn multiple

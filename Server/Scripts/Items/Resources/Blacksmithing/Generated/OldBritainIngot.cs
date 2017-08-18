@@ -1,48 +1,30 @@
 // Generated File. DO NOT MODIFY BY HAND.
-namespace Server.Items
-{
+namespace Server.Items {
 
-[FlipableAttribute( 0x1BF2, 0x1BEF )]
-public class OldBritainIngot : BaseIngot
-{
-        [Constructable]
-        public OldBritainIngot() : this( 1 )
-        {
-        }
+	[FlipableAttribute( 0x1BF2, 0x1BEF )]
+	public class OldBritainIngot : BaseIngot {
+		[Constructable]
+		public OldBritainIngot() : this( 1 ) {}
 
-        [Constructable]
-        public OldBritainIngot( int amount ) : base( CraftResource.OldBritain, amount )
-        {
-        }
+		[Constructable]
+		public OldBritainIngot( int amount ) : base( CraftResource.OldBritain, amount ) {}
 
-        public OldBritainIngot( Serial serial ) : base( serial )
-        {
-        }
+		public OldBritainIngot( Serial serial ) : base( serial ) {}
 
-        public override string DefaultName
-        {
-                get
-                {
-                        return "Old Britain ingot";
-                }
-        }
+		public override string DefaultName { get { return "Old Britain Ingot"; } }
 
-        public override void Serialize( GenericWriter writer )
-        {
-                base.Serialize( writer );
-                writer.Write( (int) 0 ); // version
-        }
+		public override void Serialize( GenericWriter writer ) {
+			base.Serialize( writer );
+			writer.Write( (int) 0 ); // version
+		}
 
-        public override void Deserialize( GenericReader reader )
-        {
-                base.Deserialize( reader );
-                int version = reader.ReadInt();
-        }
+		public override void Deserialize( GenericReader reader ) {
+			base.Deserialize( reader );
+			int version = reader.ReadInt();
+		}
 
-        public override void OnSingleClick( Mobile from )
-        {
-                from.SendMessage("OldBritain ingot");
-        }
-}
-
+		public override void OnSingleClick( Mobile from ) {
+			from.SendMessage("Old Britain Ingot");
+		}
+	}	
 }

@@ -525,7 +525,7 @@ namespace Server.Items
 			Item ore = new IronOre( 9 );
 			ore.MoveToWorld( new Point3D( X - 1, Y, Z + 2 ), Map );
 
-			ore = new IronOre( 14 );
+			ore = new MysticOre( 14 );
 			ore.MoveToWorld( new Point3D( X - 2, Y - 1, Z + 2 ), Map );
 
 			Delete();

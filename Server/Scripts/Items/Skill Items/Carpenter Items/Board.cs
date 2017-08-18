@@ -18,15 +18,15 @@ namespace Server.Items
 		{ 
 			get
 			{
-				if ( m_Resource >= CraftResource.OakWood && m_Resource <= CraftResource.YewWood )
-					return 1075052 + ( (int)m_Resource - (int)CraftResource.OakWood );
+				// if ( m_Resource >= CraftResource.OakWood && m_Resource <= CraftResource.YewWood )
+				// 	return 1075052 + ( (int)m_Resource - (int)CraftResource.OakWood );
 
-				switch ( m_Resource )
-				{
-					case CraftResource.Bloodwood: return 1075055;
-					case CraftResource.Frostwood: return 1075056;
-					case CraftResource.Heartwood: return 1075062;	//WHY Osi.  Why?
-				}
+				// switch ( m_Resource )
+				// {
+				// 	case CraftResource.Bloodwood: return 1075055;
+				// 	case CraftResource.Frostwood: return 1075056;
+				// 	case CraftResource.Heartwood: return 1075062;	//WHY Osi.  Why?
+				// }
 
 				return LabelNumber;
 			} 
@@ -118,207 +118,207 @@ namespace Server.Items
 	}
 
 
-	public class HeartwoodBoard : Board
-	{
-		[Constructable]
-		public HeartwoodBoard()
-			: this( 1 )
-		{
-		}
+	// public class HeartwoodBoard : Board
+	// {
+	// 	[Constructable]
+	// 	public HeartwoodBoard()
+	// 		: this( 1 )
+	// 	{
+	// 	}
 
-		[Constructable]
-		public HeartwoodBoard( int amount )
-			: base( CraftResource.Heartwood, amount )
-		{
-		}
+	// 	[Constructable]
+	// 	public HeartwoodBoard( int amount )
+	// 		: base( CraftResource.Heartwood, amount )
+	// 	{
+	// 	}
 
-		public HeartwoodBoard( Serial serial )
-			: base( serial )
-		{
-		}
+	// 	public HeartwoodBoard( Serial serial )
+	// 		: base( serial )
+	// 	{
+	// 	}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+	// 	public override void Serialize( GenericWriter writer )
+	// 	{
+	// 		base.Serialize( writer );
 
-			writer.Write( (int)0 ); // version
-		}
+	// 		writer.Write( (int)0 ); // version
+	// 	}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+	// 	public override void Deserialize( GenericReader reader )
+	// 	{
+	// 		base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+	// 		int version = reader.ReadInt();
+	// 	}
+	// }
 
-	public class BloodwoodBoard : Board
-	{
-		[Constructable]
-		public BloodwoodBoard()
-			: this( 1 )
-		{
-		}
+	// public class BloodwoodBoard : Board
+	// {
+	// 	[Constructable]
+	// 	public BloodwoodBoard()
+	// 		: this( 1 )
+	// 	{
+	// 	}
 
-		[Constructable]
-		public BloodwoodBoard( int amount )
-			: base( CraftResource.Bloodwood, amount )
-		{
-		}
+	// 	[Constructable]
+	// 	public BloodwoodBoard( int amount )
+	// 		: base( CraftResource.Bloodwood, amount )
+	// 	{
+	// 	}
 
-		public BloodwoodBoard( Serial serial )
-			: base( serial )
-		{
-		}
+	// 	public BloodwoodBoard( Serial serial )
+	// 		: base( serial )
+	// 	{
+	// 	}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+	// 	public override void Serialize( GenericWriter writer )
+	// 	{
+	// 		base.Serialize( writer );
 
-			writer.Write( (int)0 ); // version
-		}
+	// 		writer.Write( (int)0 ); // version
+	// 	}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+	// 	public override void Deserialize( GenericReader reader )
+	// 	{
+	// 		base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+	// 		int version = reader.ReadInt();
+	// 	}
+	// }
 
-	public class FrostwoodBoard : Board
-	{
-		[Constructable]
-		public FrostwoodBoard()
-			: this( 1 )
-		{
-		}
+	// public class FrostwoodBoard : Board
+	// {
+	// 	[Constructable]
+	// 	public FrostwoodBoard()
+	// 		: this( 1 )
+	// 	{
+	// 	}
 
-		[Constructable]
-		public FrostwoodBoard( int amount )
-			: base( CraftResource.Frostwood, amount )
-		{
-		}
+	// 	[Constructable]
+	// 	public FrostwoodBoard( int amount )
+	// 		: base( CraftResource.Frostwood, amount )
+	// 	{
+	// 	}
 
-		public FrostwoodBoard( Serial serial )
-			: base( serial )
-		{
-		}
+	// 	public FrostwoodBoard( Serial serial )
+	// 		: base( serial )
+	// 	{
+	// 	}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+	// 	public override void Serialize( GenericWriter writer )
+	// 	{
+	// 		base.Serialize( writer );
 
-			writer.Write( (int)0 ); // version
-		}
+	// 		writer.Write( (int)0 ); // version
+	// 	}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+	// 	public override void Deserialize( GenericReader reader )
+	// 	{
+	// 		base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+	// 		int version = reader.ReadInt();
+	// 	}
+	// }
 
-	public class OakBoard : Board
-	{
-		[Constructable]
-		public OakBoard()
-			: this( 1 )
-		{
-		}
+	// public class OakBoard : Board
+	// {
+	// 	[Constructable]
+	// 	public OakBoard()
+	// 		: this( 1 )
+	// 	{
+	// 	}
 
-		[Constructable]
-		public OakBoard( int amount )
-			: base( CraftResource.OakWood, amount )
-		{
-		}
+	// 	[Constructable]
+	// 	public OakBoard( int amount )
+	// 		: base( CraftResource.OakWood, amount )
+	// 	{
+	// 	}
 
-		public OakBoard( Serial serial )
-			: base( serial )
-		{
-		}
+	// 	public OakBoard( Serial serial )
+	// 		: base( serial )
+	// 	{
+	// 	}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+	// 	public override void Serialize( GenericWriter writer )
+	// 	{
+	// 		base.Serialize( writer );
 
-			writer.Write( (int)0 ); // version
-		}
+	// 		writer.Write( (int)0 ); // version
+	// 	}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+	// 	public override void Deserialize( GenericReader reader )
+	// 	{
+	// 		base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+	// 		int version = reader.ReadInt();
+	// 	}
+	// }
 
-	public class AshBoard : Board
-	{
-		[Constructable]
-		public AshBoard()
-			: this( 1 )
-		{
-		}
+	// public class AshBoard : Board
+	// {
+	// 	[Constructable]
+	// 	public AshBoard()
+	// 		: this( 1 )
+	// 	{
+	// 	}
 
-		[Constructable]
-		public AshBoard( int amount )
-			: base( CraftResource.AshWood, amount )
-		{
-		}
+	// 	[Constructable]
+	// 	public AshBoard( int amount )
+	// 		: base( CraftResource.AshWood, amount )
+	// 	{
+	// 	}
 
-		public AshBoard( Serial serial )
-			: base( serial )
-		{
-		}
+	// 	public AshBoard( Serial serial )
+	// 		: base( serial )
+	// 	{
+	// 	}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+	// 	public override void Serialize( GenericWriter writer )
+	// 	{
+	// 		base.Serialize( writer );
 
-			writer.Write( (int)0 ); // version
-		}
+	// 		writer.Write( (int)0 ); // version
+	// 	}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+	// 	public override void Deserialize( GenericReader reader )
+	// 	{
+	// 		base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+	// 		int version = reader.ReadInt();
+	// 	}
+	// }
 
-	public class YewBoard : Board
-	{
-		[Constructable]
-		public YewBoard()
-			: this( 1 )
-		{
-		}
+	// public class YewBoard : Board
+	// {
+	// 	[Constructable]
+	// 	public YewBoard()
+	// 		: this( 1 )
+	// 	{
+	// 	}
 
-		[Constructable]
-		public YewBoard( int amount )
-			: base( CraftResource.YewWood, amount )
-		{
-		}
+	// 	[Constructable]
+	// 	public YewBoard( int amount )
+	// 		: base( CraftResource.YewWood, amount )
+	// 	{
+	// 	}
 
-		public YewBoard( Serial serial )
-			: base( serial )
-		{
-		}
+	// 	public YewBoard( Serial serial )
+	// 		: base( serial )
+	// 	{
+	// 	}
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+	// 	public override void Serialize( GenericWriter writer )
+	// 	{
+	// 		base.Serialize( writer );
 
-			writer.Write( (int)0 ); // version
-		}
+	// 		writer.Write( (int)0 ); // version
+	// 	}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+	// 	public override void Deserialize( GenericReader reader )
+	// 	{
+	// 		base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+	// 		int version = reader.ReadInt();
+	// 	}
+	// }
 }
