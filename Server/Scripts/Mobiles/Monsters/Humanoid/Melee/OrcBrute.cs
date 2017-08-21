@@ -43,9 +43,9 @@ namespace Server.Mobiles
 
 			VirtualArmor = 50;
 
-//			Item ore = new ShadowIronOre( 25 );
-//			ore.ItemID = 0x19B9;
-//			PackItem( ore );
+			Item ore = new OnyxOre( 25 );
+			ore.ItemID = 0x19B9;
+			PackItem( ore );
 			PackItem( new IronIngot( 10 ) );
 
 			if ( 0.05 > Utility.RandomDouble() )

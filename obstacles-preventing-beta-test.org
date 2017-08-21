@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [39/61]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [52/62]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -41,25 +41,26 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/GlovesOfMining.cs
 *** DONE Items/Special/Veteran Rewards/MiningCart.cs
-*** TODO Items/Weapons/BaseWeapon.cs
+*** TODO Items/Weapons/BaseWeapon.cs //cliloc
 *** DONE Misc/CharacterCreation.cs
-*** TODO Mobiles/Monsters/Ants/AntLion.cs
-*** TODO Mobiles/Monsters/Humanoid/Melee/OrcBrute.cs
-*** TODO Mobiles/Monsters/LBR/Jukas/ChaosDragoonElite.cs
-*** TODO Mobiles/Monsters/Ore Elementals/AgapiteElemental.cs
-*** TODO Mobiles/Monsters/Ore Elementals/BronzeElemental.cs
-*** TODO Mobiles/Monsters/Ore Elementals/CopperElemental.cs
-*** TODO Mobiles/Monsters/Ore Elementals/GoldenElemental.cs
-*** TODO Mobiles/Monsters/Ore Elementals/ShadowIronElemental.cs
-*** TODO Mobiles/Monsters/Ore Elementals/ValoriteElemental.cs
-*** TODO Mobiles/Monsters/Ore Elementals/VeriteElemental.cs
-*** TODO SpecialSystems/Items/SupplyBags/BagOfIngots.cs
-*** TODO SpecialSystems/Items/SupplyBags/SmithBag.cs
+*** DONE Mobiles/Monsters/Ants/AntLion.cs
+*** DONE Mobiles/Monsters/Humanoid/Melee/OrcBrute.cs
+*** DONE Mobiles/Monsters/LBR/Jukas/ChaosDragoonElite.cs
+*** DONE Mobiles/Monsters/Ore Elementals/AgapiteElemental.cs
+*** DONE Mobiles/Monsters/Ore Elementals/BronzeElemental.cs
+*** DONE Mobiles/Monsters/Ore Elementals/CopperElemental.cs
+*** DONE Mobiles/Monsters/Ore Elementals/GoldenElemental.cs
+*** DONE Mobiles/Monsters/Ore Elementals/ShadowIronElemental.cs
+*** DONE Mobiles/Monsters/Ore Elementals/ValoriteElemental.cs
+*** DONE Mobiles/Monsters/Ore Elementals/VeriteElemental.cs
+*** DONE SpecialSystems/Items/SupplyBags/BagOfIngots.cs
+*** DONE SpecialSystems/Items/SupplyBags/SmithBag.cs
 ** DONE autolooping
 *** DONE implement autoloop variable on mobile
 *** DONE add looping check in GatherTimer
 ** TODO play the animations/soundfx
-** TODO resource hues and properties
+** DONE resource hues
+** TODO resource properties
 ** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
 *** DONE remove special log and board classes
 *** DONE mkdir Generated/

@@ -6,6 +6,7 @@ FISHSRC=../genfish.awk
 ORENODES=../orelist.org
 LOGNODES=../loglist.org
 FISHNODES=../fishlist.org
+GRANITESRC=../gengranite.awk
 
 all:
 	help
@@ -13,6 +14,7 @@ all:
 help:
 	@echo "Valid targets:"
 	@echo "clean - Cleans up"
+	@echo "granite - Generates granite class files"
 	@echo "ores - Generates ore and ingot class files"
 	@echo "logs - Generates log and board class files"
 	@echo "fish - Not implemented yet"
@@ -28,6 +30,11 @@ logs:
 fish:
 	@echo "I know Help says this is a valid target but it's not done yet."
 
+granite:
+	mkdir -p granite
+	cd granite/; awk -f $(GRANITESRC) $(ORENODES)
+
 clean:
 	rm -rf lumberjacking/
 	rm -rf mining/
+	rm -rf granite/

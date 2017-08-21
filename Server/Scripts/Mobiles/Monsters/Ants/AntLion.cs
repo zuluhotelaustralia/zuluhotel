@@ -49,16 +49,16 @@ namespace Server.Mobiles
 
 			Item orepile = null; /* no trust, no love :( */
 
-			/*switch (Utility.Random(4))
+			switch (Utility.Random(4))
 			{
-				case 0: orepile = new DullCopperOre(); break;
-				case 1: orepile = new ShadowIronOre(); break;
-				case 2: orepile = new CopperOre(); break;
+				case 0: orepile = new DestructionOre(); break;
+				case 1: orepile = new BlackdwarfOre(); break;
+				case 2: orepile = new RedElvenOre(); break;
 				default: orepile = new BronzeOre(); break;
 			}
 			orepile.Amount = Utility.RandomMinMax(1, 10);
 			orepile.ItemID = 0x19B9;
-			PackItem(orepile);*/
+			PackItem(orepile);
 
 			// TODO: skeleton
 		}

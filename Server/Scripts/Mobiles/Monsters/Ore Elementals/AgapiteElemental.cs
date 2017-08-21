@@ -9,17 +9,17 @@ using Server.Items;
 namespace Server.Mobiles
 {
 	[CorpseName( "an ore elemental corpse" )]
-	public class AgapiteElemental : BaseCreature
+	public class IceRockElemental : BaseCreature
 	{
 		[Constructable]
-		public AgapiteElemental() : this( 2 )
+		public IceRockElemental() : this( 2 )
 		{
 		}
 
 		[Constructable]
-		public AgapiteElemental( int oreAmount ) : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
+		public IceRockElemental( int oreAmount ) : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 		{
-			Name = "an agapite elemental";
+			Name = "an ice rock elemental";
 			Body = 107;
 			BaseSoundID = 268;
 
@@ -47,10 +47,10 @@ namespace Server.Mobiles
 			Karma = -3500;
 
 			VirtualArmor = 32;
-
-//			Item ore = new AgapiteOre( oreAmount );
-//			ore.ItemID = 0x19B9;
-//			PackItem( ore );
+			
+			Item ore = new IceRockOre( oreAmount );
+			ore.ItemID = 0x19B9;
+			PackItem( ore );
 		}
 
 		public override void GenerateLoot()
@@ -63,7 +63,7 @@ namespace Server.Mobiles
 		public override bool AutoDispel{ get{ return true; } }
 		public override int TreasureMapLevel{ get{ return 1; } }
 
-		public AgapiteElemental( Serial serial ) : base( serial )
+		public IceRockElemental( Serial serial ) : base( serial )
 		{
 		}
 
