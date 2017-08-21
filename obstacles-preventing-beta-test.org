@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [34/60]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [39/61]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -36,13 +36,13 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE Items/Misc/ClockworkAssembly.cs
 *** DONE Items/Misc/PowerGenerator.cs
 *** TODO Items/Resources/Blacksmithing/BaseIngot.cs
-*** TODO Items/Resources/Blacksmithing/Generated/BaseOre.cs
+*** DONE Items/Resources/Blacksmithing/Generated/BaseOre.cs
 *** TODO Items/Resources/Masonry/Granite.cs
-*** TODO Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
-*** TODO Items/Special/Bulk Order Rewards/Blacksmithy/GlovesOfMining.cs
-*** TODO Items/Special/Veteran Rewards/MiningCart.cs
+*** DONE Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
+*** DONE Items/Special/Bulk Order Rewards/Blacksmithy/GlovesOfMining.cs
+*** DONE Items/Special/Veteran Rewards/MiningCart.cs
 *** TODO Items/Weapons/BaseWeapon.cs
-*** TODO Misc/CharacterCreation.cs
+*** DONE Misc/CharacterCreation.cs
 *** TODO Mobiles/Monsters/Ants/AntLion.cs
 *** TODO Mobiles/Monsters/Humanoid/Melee/OrcBrute.cs
 *** TODO Mobiles/Monsters/LBR/Jukas/ChaosDragoonElite.cs
@@ -59,6 +59,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE implement autoloop variable on mobile
 *** DONE add looping check in GatherTimer
 ** TODO play the animations/soundfx
+** TODO resource hues and properties
 ** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
 *** DONE remove special log and board classes
 *** DONE mkdir Generated/

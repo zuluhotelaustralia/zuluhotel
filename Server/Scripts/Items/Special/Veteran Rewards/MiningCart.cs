@@ -177,6 +177,7 @@ namespace Server.Items
 							switch ( Utility.Random( 9 ) )
 							{
 							    //TOGENERATE
+							    //sith doesn't give a flying fuck about this, let's just leave it
                                                             default: ingots = new IronIngot(); break;
 								// case 0: ingots = new IronIngot(); break;
 								// case 1: ingots = new DullCopperIngot(); break;

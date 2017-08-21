@@ -929,19 +929,30 @@ namespace Server.Items
 	    blue.ArmorPoisonResist = -3;
 	    blue.ArmorEnergyResist = 10;
 
-	    //public static readonly CraftAttributeInfo OakWood, AshWood, YewWood, Heartwood, Bloodwood, Frostwood;
+	    public static readonly CraftAttributeInfo Pinetree, Cherry, Oak, PurplePassion, GoldenReflection, Hardranger, Jadewood, Darkwood, Stonewood, Sunwood, Gauntlet, Swampwood, Stardust, Silverleaf, Stormteal, Emeraldwood, Bloodwood, Crystalwood, Bloodhorse, Doomwood, Zulu, Darkness, Elven;
 
-	    // CraftAttributeInfo oak = OakWood = new CraftAttributeInfo();
-
-	    // CraftAttributeInfo ash = AshWood = new CraftAttributeInfo();
-
-	    // CraftAttributeInfo yew = YewWood = new CraftAttributeInfo();
-
-	    // CraftAttributeInfo heart = Heartwood = new CraftAttributeInfo();
-
-	    // CraftAttributeInfo blood = Bloodwood = new CraftAttributeInfo();
-
-	    // CraftAttributeInfo frost = Frostwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Pinetree = Pinetree = new CraftAttributeInfo();
+	    CraftAttributeInfo Cherry = Cherry = new CraftAttributeInfo();
+	    CraftAttributeInfo Oak = Oak = new CraftAttributeInfo();
+	    CraftAttributeInfo PurplePassion = PurplePassion = new CraftAttributeInfo();
+	    CraftAttributeInfo GoldenReflection = GoldenReflection = new CraftAttributeInfo();
+	    CraftAttributeInfo Hardranger = Hardranger = new CraftAttributeInfo();
+	    CraftAttributeInfo Jadewood = Jadewood = new CraftAttributeInfo();
+	    CraftAttributeInfo Darkwood = Darkwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Stonewood = Stonewood = new CraftAttributeInfo();
+	    CraftAttributeInfo Sunwood = Sunwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Gauntlet = Gauntlet = new CraftAttributeInfo();
+	    CraftAttributeInfo Swampwood = Swampwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Stardust = Stardust = new CraftAttributeInfo();
+	    CraftAttributeInfo Silverleaf = Stormteal = new CraftAttributeInfo();
+	    CraftAttributeInfo Emeraldwood = Emeraldwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Bloodwood = Bloodwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Crystalwood = Crystalwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Bloodhorsewood = Bloodhorse = new CraftAttributeInfo();
+	    CraftAttributeInfo Doomwood = Doomwood = new CraftAttributeInfo();
+	    CraftAttributeInfo Zulu = Zulu = new CraftAttributeInfo();
+	    CraftAttributeInfo Darkness = Darkness = new CraftAttributeInfo();
+	    CraftAttributeInfo Elven = Elven = new CraftAttributeInfo();
 	}
     }
 
