@@ -8,7 +8,6 @@ using Server.Targeting;
 using Server.Commands;
 
 /* 
-
    Zulu Hotel Gathering System
    System logic:
    1. Player uses their tool and arrives at BeginGather(), the entry point

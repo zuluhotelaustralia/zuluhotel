@@ -3,7 +3,16 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [52/62]
+* TODO antimacro code [0/5]
+:PROPERTIES:
+:COOKIE_DATA: todo recursive
+:END:
+** TODO send gump right before they get the cursor in gathertarget
+** TODO gump can't be dismissable except by right click
+** TODO gump needs to give them 2 minutes or so
+** TODO decide on consequences
+** TODO pick the one that doesn't match, perhaps simple arithmetic
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [53/66]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -20,7 +29,6 @@ This is a list of all the things that need to be done before we can launch a bet
 ** DONE derive new GatherSystem skill-specific classes from GatherSystem
 *** TODO flesh them out 
 **** DONE make gathersystem abstract
-** TODO antimacro code on gathertarget immediately before giving them the cursor
 ** DONE initial setup command
 ** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
@@ -37,7 +45,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE Items/Misc/PowerGenerator.cs
 *** TODO Items/Resources/Blacksmithing/BaseIngot.cs
 *** DONE Items/Resources/Blacksmithing/Generated/BaseOre.cs
-*** TODO Items/Resources/Masonry/Granite.cs
+*** DONE Items/Resources/Masonry/Granite.cs
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/GlovesOfMining.cs
 *** DONE Items/Special/Veteran Rewards/MiningCart.cs
@@ -67,7 +75,12 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE put new ones in, reference them via GatherSystem
 *** DONE use idea from parent item to move them all to a new file for HarvestSystem
 ** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
-*** TODO every time they swing the tool it has to check range, tile, resources, etc. 
+*** TODO ensure proper checks
+**** TODO range
+**** TODO alive
+**** TODO tool not broken
+**** TODO tile
+**** TODO skill
 ** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
 *** DONE (de)serialize node positions when (de)serializing the controller stone
 use FOAM or whatever to generate as much as possible -> tile lists etc.?
