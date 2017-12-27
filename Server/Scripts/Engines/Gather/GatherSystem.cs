@@ -77,27 +77,29 @@ namespace Server.Engines.Gather {
 	    return GetType();
 	}
 
+	public virtual bool CheckTool( Mobile from, Item tool )
+	{
+	    bool wornOut = ( tool == null || tool.Deleted || (tool is IUsesRemaining && ((IUsesRemaining)tool).UsesRemaining <= 0) );
+	    
+	    if ( wornOut )
+		from.SendLocalizedMessage( 1044038 ); // You have worn out your tool!
+	    
+	    return !wornOut;
+	}
+
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
-	    from.Target = new GatherTarget( tool, this );
-	    return true;
+	    if(!CheckTool(from, tool)){
+		//can this be called if from is dead?
+		from.Target = new GatherTarget( tool, this );
+		return true;
+	    }
+	    return false; //should this function return false irrespective of checktool?
 	}
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
-
-	    object toLock = GetLock(from, tool, targeted);
-	    
-	    if ( !from.BeginAction( toLock ) )
-	    {
-		OnConcurrentHarvest( from, tool, def, toHarvest );
-		return;
-	    }
-	    
-	    //select node
-	    Skill s = from.Skills[m_SkillName];
-	    GatherNode n = Strike( BuildNodeList( s, from ) );
 
 	    object toLock = GetLock( from, tool, targeted );
 
@@ -105,6 +107,10 @@ namespace Server.Engines.Gather {
 		OnConcurrentGather( from, tool, targeted );
 		return;
 	    }
+	    
+	    //select node
+	    Skill s = from.Skills[m_SkillName];
+	    GatherNode n = Strike( BuildNodeList( s, from ) );
 
 	    new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
 	    CheckWhileGathering( from, tool, targeted, toLock, n );

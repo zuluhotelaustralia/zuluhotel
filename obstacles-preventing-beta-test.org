@@ -12,7 +12,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO gump needs to give them 2 minutes or so
 ** TODO decide on consequences
 ** TODO pick the one that doesn't match, perhaps simple arithmetic
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [53/66]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [56/66]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -77,10 +77,10 @@ This is a list of all the things that need to be done before we can launch a bet
 ** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
 *** TODO ensure proper checks
 **** TODO range
-**** TODO alive
-**** TODO tool not broken
+**** DONE alive
+**** DONE tool not broken
 **** TODO tile
-**** TODO skill
+**** DONE skill
 ** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
 *** DONE (de)serialize node positions when (de)serializing the controller stone
 use FOAM or whatever to generate as much as possible -> tile lists etc.?
