@@ -60,7 +60,6 @@ namespace Server.Engines.Gather
 
 	protected override void OnTarget( Mobile from, object targeted )
 	{
-	    //ensure that tool has charges/is not broken
 	    //ensure that tile is in range
 	    //ensure that they're gathering from a valid tile
 

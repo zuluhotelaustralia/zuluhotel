@@ -12,7 +12,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO gump needs to give them 2 minutes or so
 ** TODO decide on consequences
 ** TODO pick the one that doesn't match, perhaps simple arithmetic
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [56/66]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [57/66]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -27,7 +27,7 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE check if using mining on a treasuremap, call (tmap)targeted.onBeginDig
 **** DONE otherwise it just calls StartHarvesting if none of those are true
 ** DONE derive new GatherSystem skill-specific classes from GatherSystem
-*** TODO flesh them out 
+*** DONE flesh them out 
 **** DONE make gathersystem abstract
 ** DONE initial setup command
 ** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
