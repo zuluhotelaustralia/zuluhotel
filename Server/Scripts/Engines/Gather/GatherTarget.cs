@@ -60,6 +60,11 @@ namespace Server.Engines.Gather
 
 	protected override void OnTarget( Mobile from, object targeted )
 	{
+	    //ensure that tool has charges/is not broken
+	    //ensure that tile is in range
+	    //ensure that player can begin an action
+	    // ensure that they're gathering from a valid tile ? should this be in the targeter?
+
 	    if ( m_System is Mining && targeted is StaticTarget )
 	    {
 		MineGrave(from, targeted);

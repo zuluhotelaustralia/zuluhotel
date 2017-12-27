@@ -86,8 +86,15 @@ namespace Server.Engines.Gather {
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
-	    //check other things as per Harvest.CheckHarvest
 
+	    object toLock = GetLock(from, tool, targeted);
+	    
+	    if ( !from.BeginAction( toLock ) )
+	    {
+		OnConcurrentHarvest( from, tool, def, toHarvest );
+		return;
+	    }
+	    
 	    //select node
 	    Skill s = from.Skills[m_SkillName];
 	    GatherNode n = Strike( BuildNodeList( s, from ) );
