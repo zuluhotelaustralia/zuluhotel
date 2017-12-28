@@ -12,7 +12,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO gump needs to give them 2 minutes or so
 ** TODO decide on consequences
 ** TODO pick the one that doesn't match, perhaps simple arithmetic
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [58/66]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [61/66]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -43,7 +43,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE Items/Containers/SalvageBag.cs
 *** DONE Items/Misc/ClockworkAssembly.cs
 *** DONE Items/Misc/PowerGenerator.cs
-*** TODO Items/Resources/Blacksmithing/BaseIngot.cs
+*** DONE Items/Resources/Blacksmithing/BaseIngot.cs
 *** DONE Items/Resources/Blacksmithing/Generated/BaseOre.cs
 *** DONE Items/Resources/Masonry/Granite.cs
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
@@ -75,11 +75,11 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE put new ones in, reference them via GatherSystem
 *** DONE use idea from parent item to move them all to a new file for HarvestSystem
 ** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
-*** TODO ensure proper checks
+*** DONE ensure proper checks
 **** DONE range
 **** DONE alive
 **** DONE tool not broken
-**** TODO tile
+**** DONE tile
 **** DONE skill
 ** DONE edit gathersystemcontroller to reflect the above -> spawn multiple
 *** DONE (de)serialize node positions when (de)serializing the controller stone
