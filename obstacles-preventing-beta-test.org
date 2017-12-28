@@ -12,7 +12,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO gump needs to give them 2 minutes or so
 ** TODO decide on consequences
 ** TODO pick the one that doesn't match, perhaps simple arithmetic
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [57/66]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [58/66]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -76,7 +76,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE use idea from parent item to move them all to a new file for HarvestSystem
 ** DONE GatherTimer (?) akin to HarvestTimer to keep harvesting until they miss or something?
 *** TODO ensure proper checks
-**** TODO range
+**** DONE range
 **** DONE alive
 **** DONE tool not broken
 **** TODO tile
