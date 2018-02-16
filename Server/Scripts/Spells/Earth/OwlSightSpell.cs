@@ -9,13 +9,15 @@ namespace Server.Spells.Earth
     public class OwlSightSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Owl Sight", "Vista Da Noite"
+							"Owl Sight", "Vista Da Noite",
+							236, 9031,
+							Reagent.EyeOfNewt
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
         public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override int RequiredMana{ get{ return 5; } }
 
         public OwlSightSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -35,7 +37,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! CheckSequence() )
+            if ( ! CheckBSequence() )
             {
                 goto Return;
             }
@@ -46,38 +48,19 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+	    if ( m.BeginAction( typeof( LightCycle ) ) ) {
+		new LightCycle.OwlSightTimer( m ).Start();
+		int level = (int)LightCycle.DungeonLevel; //0
 
-            Caster.DoHarmful( m );
+		m.LightLevel = level;
+		m.FixedParticles( 0x376A, 9, 32, 5007, EffectLayer.Waist);
+		m.PlaySound(0x1E3);
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+		BuffInfo.AddBuff( m, new BuffInfo( BuffIcon.NightSight, 1075643 ) );	//Night Sight/You ignore lighting effects
+	    }
 
-            new InternalTimer( m, Caster ).Start();
-
-        Return:
+	Return:
             FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( OwlSightSpell ) );
-            }
         }
 
         private class InternalTarget : Target
@@ -85,7 +68,7 @@ namespace Server.Spells.Earth
             private OwlSightSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( OwlSightSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+            public InternalTarget( OwlSightSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Beneficial )
             {
                 m_Owner = owner;
             }
