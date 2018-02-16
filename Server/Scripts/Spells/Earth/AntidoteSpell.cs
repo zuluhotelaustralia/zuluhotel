@@ -8,14 +8,25 @@ namespace Server.Spells.Earth
 {
     public class AntidoteSpell : AbstractEarthSpell
     {
+        // Original zuluhotel functionality
+        // cure poisons no matter what
+        // leave target with poison immunity for duration based on skill
+
+        // Current functionality:
+        // Cures poison more or less 100% chance
+        // Planned to add poison resistance when we add a zulu based prots system
+
         private static SpellInfo m_Info = new SpellInfo(
                 "Antidote", "Puissante Terre Traite Ce Patient"
-                );
+                212, 9061,
+                typeof ( DeadWood ),
+                typeof ( FertileDirt ),
+                typeof ( ExecutionersCap ));
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 60.0; } }
+        public override int RequiredMana{ get{ return 5; } }
 
         public AntidoteSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -28,15 +39,13 @@ namespace Server.Spells.Earth
 
         public void Target( Mobile m )
         {
-            if ( ! Caster.CanSee( m ) )
-            {
+            if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
                 Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
                 goto Return;
             }
 
-            if ( ! CheckSequence() )
-            {
+            if ( ! CheckBSequence( m ) ) {
                 goto Return;
             }
 
@@ -46,61 +55,27 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+            Poison p = m.Poison;
 
-            Caster.DoHarmful( m );
+            if ( p != null )
+            {
+                if ( m.CurePoison( Caster ) )
+                {
+                    if ( Caster != m_Target )
+                        Caster.SendLocalizedMessage( 1010058 ); // You have cured the target of all poisons!
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+                    m.SendLocalizedMessage( 1010059 ); // You have been cured of all poisons.
+                }
+            }
 
-            new InternalTimer( m, Caster ).Start();
+            // TODO: Effects stolen from Cure spell, we may want
+            // different ones, or at least a different sound
+            // effect,
+            m.FixedParticles( 0x373A, 10, 15, 5012, EffectLayer.Waist );
+            m.PlaySound( 0x1E0 );
 
         Return:
             FinishSequence();
         }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( AntidoteSpell ) );
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private AntidoteSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( AntidoteSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }
