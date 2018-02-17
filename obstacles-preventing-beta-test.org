@@ -239,7 +239,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 | Owl Sight       |    60 | Vista Da Noite       |    5 | Eye of newt          | longer-lasting night sight |               0x1e4 |        484 | x       |
 | Shifting Earth  |    60 | Esmagamento Con Pedra |    5 | fertile dirt, deadwood, obsidian | earth damage on single target, dex debuff |               0x20e |        526 | x       |
 | Summon Mammals  |    60 | Chame O Mamifero Agora |    5 | serpent scale, pig iron, eye of newt | summons... mammals.  powerful ones |                   0 |          0 |         |
-| Call Lightning  |    80 | Batida Do Deus       |   10 | wyrm's heart, pig iron, bone | air damage lightning strike |               0x207 |        519 |         |
+| Call Lightning  |    80 | Batida Do Deus       |   10 | wyrm's heart, pig iron, bone | air damage lightning strike |               0x207 |        519 | x       |
 | Earth's Blessing |    80 | Foria Da Terra       |   10 | pig iron, obsidian, volcanic ash | More powerful Bless  |               0x1eb |        491 |         |
 | Earth Portal    |    80 | Destraves Limites Da Natureza |   10 | brimstone, executioner's cap, eye of newt | Basically a Gate spell.  Would be cool to make this able to go places where Gate cannot, and vice versa |               0x20f |        527 |         |
 | Nature's Touch  |    80 | Guerissez Par Terre  |   10 | pumice, vial of blood, obsidian | Heals 6d8+30 pts of damage, scale that by magic bonus, and scale that by target's healing bonus if any |               0x203 |        515 |         |

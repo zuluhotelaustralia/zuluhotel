@@ -66,7 +66,7 @@ namespace Server.Spells.Earth
 		m.SendLocalizedMessage( 501783 );
 	    }
 
-	    m.Damage((int)dmg, m, DamageType.Earth);
+	    m.Damage((int)dmg, Caster, DamageType.Earth);
 
 	    SpellHelper.AddStatCurse( Caster, m, StatType.Dex );
 	    int percentage = (int)(SpellHelper.GetOffsetScalar( Caster, m, true )*100);
