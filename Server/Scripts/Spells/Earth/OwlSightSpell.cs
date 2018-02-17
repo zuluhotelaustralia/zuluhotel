@@ -16,7 +16,7 @@ namespace Server.Spells.Earth
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
+        public override double RequiredSkill{ get{ return 60.0; } }
         public override int RequiredMana{ get{ return 5; } }
 
         public OwlSightSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )

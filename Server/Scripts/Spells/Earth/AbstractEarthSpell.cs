@@ -14,6 +14,7 @@ namespace Server.Spells.Earth
 
         public AbstractEarthSpell(Mobile caster, Item scroll, SpellInfo info ) : base( caster, scroll, info )
         {
+	    m_DamageType = DamageType.Earth;
         }
 
         public override int GetMana()

@@ -4,18 +4,21 @@ using Server.Network;
 using Server.Items;
 using Server.Targeting;
 
+//earth damage on single target, dex debuff
 namespace Server.Spells.Earth
 {
     public class ShiftingEarthSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Shifting Earth", "Esmagamento Con Pedra"
+		236, 9031,
+		Reagent.FertileDirt, Reagent.Obsidian, Reagent.Deadwood
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 60.0; } }
+        public override int RequiredMana{ get{ return 5; } }
 
         public ShiftingEarthSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -46,14 +49,31 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+	    m.FixedParticles( 0x3709, 10, 15, 5021, EffectLayer.Waist ); //probably wrong particles ID
+	    m.PlaySound(0x20e);
 
             Caster.DoHarmful( m );
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+	    double dmg = (double)Utility.Dice(Caster.Skills[DamageSkill].Value / 15.0, 5, 0); //caps around 20 damage at 130 skill
 
-            new InternalTimer( m, Caster ).Start();
+	    if (Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
+		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
+	    }
 
+	    if (CheckResisted(m)){
+		dmg *= 0.75;
+
+		m.SendLocalizedMessage( 501783 );
+	    }
+
+	    m.Damage((int)dmg, m, DamageType.Earth);
+
+	    SpellHelper.AddStatCurse( Caster, m, StatType.Dex );
+	    int percentage = (int)(SpellHelper.GetOffsetScalar( Caster, m, true )*100);
+	    TimeSpan length = SpellHelper.GetDuration( Caster, m );
+
+	    BuffInfo.AddBuff( m, new BuffInfo( BuffIcon.Clumsy, 1075831, length, m, percentage.ToString() ) );
+	    
         Return:
             FinishSequence();
         }

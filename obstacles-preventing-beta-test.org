@@ -236,8 +236,8 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 | Name            | Skill | Words of Power       | Mana | Regs                 | Desc.                |                     |            |         |
 | Circle 1        |       |                      |      |                      |                      |                     |            |         |
 | Antidote        |    60 | Puissante Terre Traite Ce Patient |    5 | Deadwood, fertile dirt, executioner's cap | cure poisons no matter what; leave target with poison immunity for duration based on skill |               0x1e1 |        481 |         |
-| Owl Sight       |    60 | Vista Da Noite       |    5 | Eye of newt          | longer-lasting night sight |               0x1e4 |        484 |         |
-| Shifting Earth  |    60 | Esmagamento Con Pedra |    5 | Eye of newt          | earth damage on single target, dex debuff |               0x20e |        526 |         |
+| Owl Sight       |    60 | Vista Da Noite       |    5 | Eye of newt          | longer-lasting night sight |               0x1e4 |        484 | x       |
+| Shifting Earth  |    60 | Esmagamento Con Pedra |    5 | fertile dirt, deadwood, obsidian | earth damage on single target, dex debuff |               0x20e |        526 | x       |
 | Summon Mammals  |    60 | Chame O Mamifero Agora |    5 | serpent scale, pig iron, eye of newt | summons... mammals.  powerful ones |                   0 |          0 |         |
 | Call Lightning  |    80 | Batida Do Deus       |   10 | wyrm's heart, pig iron, bone | air damage lightning strike |               0x207 |        519 |         |
 | Earth's Blessing |    80 | Foria Da Terra       |   10 | pig iron, obsidian, volcanic ash | More powerful Bless  |               0x1eb |        491 |         |
