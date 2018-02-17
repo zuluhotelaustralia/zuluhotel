@@ -69,16 +69,28 @@ namespace Server.Spells
 	    return (Core.AOS ? AosDamageDelay : OldDamageDelay);
 	}
 
+        public static double GetEffectiveness( Mobile caster ) {
+            // TODO: Think about what makes sense here.
+
+            doubleo skill = caster.Skills[SkillName.Magery].Value / 130.0;
+            double stat = caster.Int / 130.0;
+            double spec = caster.Spec.SpecName == SpecName.Mage ?
+                caster.Spec.Bonus / 4.0 : 0.0;
+
+            // 45% skill, 30% stat, 25% spec
+            return 0.45 * skill + 0.3 * stat + 0.25 * spec;
+        }
+
 	public static bool CheckMulti( Point3D p, Map map )
 	{
 	    return CheckMulti( p, map, true, 0);
 	}
-		
+
 	public static bool CheckMulti(Point3D p, Map map, bool houses)
 	{
 	    return CheckMulti(p, map, houses, 0);
 	}
-		
+
 	public static bool CheckMulti( Point3D p, Map map, bool houses, int housingrange )
 	{
 	    if( map == null || map == Map.Internal )
