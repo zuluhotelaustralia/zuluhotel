@@ -245,7 +245,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 | Nature's Touch  |    80 | Guerissez Par Terre  |   10 | pumice, vial of blood, obsidian | Heals 6d8+30 pts of damage, scale that by magic bonus, and scale that by target's healing bonus if any |               0x203 |        515 | x       |
 | Circle 2        |       |                      |      |                      |                      |                     |            |         |
 | Gust of Air     |   100 | Gusto Do Ar          |   15 | fertile dirt, brimstone, eye of newt | Air damage to single target, wind causes target to get pushed away in a semi-random direction |               0x109 |        265 |         |
-| Rising Fire     |   100 | Batida Do Fogo       |   15 | batwing, brimstone, vial of blood | AOE fire damage that hits twice (3 flamestrike animations per hit) |               0x209 |        521 |         |
+| Rising Fire     |   100 | Batida Do Fogo       |   15 | batwing, brimstone, vial of blood | AOE fire damage that hits twice (3 flamestrike animations per hit) |               0x209 |        521 | x       |
 | Shapeshift      |   100 | Mude Minha Forma     |   15 | wyrm's heart, blackmoor, bat wing | polymorph into a variety of animals, one of which is the little bird |               0x20a |        522 |         |
 | Ice Strike      |   120 | Geada Com Inverno    |   20 | bone, bat wing, brimstone | water damage to single target |               0x117 |        279 |         |
 | Earth Spirit    |   120 | Chame A Terra Elemental |   20 | Dragon's blood, fertile dirt, volcanic ash | Earth elemental lord |               0x10d |        269 |         |
