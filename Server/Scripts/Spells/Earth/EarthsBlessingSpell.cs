@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class EarthsBlessingSpell : AbstractEarthSpell
+    public class EarthsBlessingSpell : AbstractEarthSpell, IMobileTargeted
     {
         private static SpellInfo m_Info = new SpellInfo("Earths Blessing", "Foria Da Terra",
                 203,
@@ -26,10 +26,14 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
+            Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Beneficial );
         }
 
-        public void Target( Mobile m )
+        public override void OnTargetFinished( Mobile from ) {
+            FinishSequence();
+        }
+
+        public override void OnTarget( Mobile from, Mobile m )
         {
             if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
@@ -90,28 +94,5 @@ namespace Server.Spells.Earth
                 m_Target.EndAction( typeof( EarthsBlessingSpell ) );
             }
         }
-
-        private class InternalTarget : Target
-        {
-            private EarthsBlessingSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( EarthsBlessingSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }
