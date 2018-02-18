@@ -10,12 +10,14 @@ namespace Server.Spells.Earth
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Ice Strike", "Geada Com Inverno"
+		233, 9012,
+		Reagent.Bone, Reagent.BatWing, Reagent.Brimstone
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 120.0; } }
+        public override int RequiredMana{ get{ return 20; } }
 
         public IceStrikeSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -46,14 +48,15 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+	    double damage = Caster.Skills[DamageSkill].Value * 0.5;
+	    m.Damage( (int)damage, Caster, DamageType.Water );
+	    
+	    Caster.DoHarmful( m );
 
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
-
+	    m.PlaySound(0x0117);
+	    m.PlaySound(0x0118);
+	    m.FixedParticles( 0x3789, 10, 30, 5052, EffectLayer.Waist );
+            
         Return:
             FinishSequence();
         }
