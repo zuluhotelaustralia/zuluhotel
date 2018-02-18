@@ -9,13 +9,15 @@ namespace Server.Spells.Earth
     public class CallLightningSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Call Lightning", "Batida Do Deus"
-                );
+							"Call Lightning", "Batida Do Deus",
+							236, 9031,
+							Reagent.WyrmsHeart, Reagent.PigIron, Reagent.Bone
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 80.0; } }
+        public override int RequiredMana{ get{ return 10; } }
 
         public CallLightningSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -46,14 +48,12 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+	    m.BoltEffect(0); //argument is hue of the bolt
+	    m.BoltEffect(0);
 
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
-
+	    double dmg = (double)Utility.Dice(Caster.Skills[DamageSkill].Value / 15.0, 5, 0); //caps around 24 damage at 130 skill
+	    m.Damage((int)dmg, Caster, DamageType.Air);
+	    
         Return:
             FinishSequence();
         }

@@ -929,8 +929,6 @@ namespace Server.Items
 	    blue.ArmorPoisonResist = -3;
 	    blue.ArmorEnergyResist = 10;
 
-	    public static readonly CraftAttributeInfo Pinetree, Cherry, Oak, PurplePassion, GoldenReflection, Hardranger, Jadewood, Darkwood, Stonewood, Sunwood, Gauntlet, Swampwood, Stardust, Silverleaf, Stormteal, Emeraldwood, Bloodwood, Crystalwood, Bloodhorse, Doomwood, Zulu, Darkness, Elven;
-
 	    CraftAttributeInfo Pinetree = Pinetree = new CraftAttributeInfo();
 	    CraftAttributeInfo Cherry = Cherry = new CraftAttributeInfo();
 	    CraftAttributeInfo Oak = Oak = new CraftAttributeInfo();

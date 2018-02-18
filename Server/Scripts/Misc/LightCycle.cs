@@ -120,11 +120,30 @@ namespace Server
 	    }
 	}
 
+	public class OwlSightTimer : Timer
+	{
+	    private Mobile m_Owner;
+
+	    public OwlSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes(  Utility.Random( 30, 60 )))
+	    {
+		m_Owner = owner;
+		Priority = TimerPriority.OneMinute;
+	    }
+
+	    protected override void OnTick()
+	    {
+		m_Owner.EndAction( typeof( LightCycle ) );
+		m_Owner.LightLevel = 0;
+		BuffInfo.RemoveBuff( m_Owner, BuffIcon.NightSight );
+	    }
+	}
+	
 	public class NightSightTimer : Timer
 	{
 	    private Mobile m_Owner;
 
-	    public NightSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes( Utility.Random( 15, 25 ) ) )
+	    public NightSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes( Utility.Random( (int)owner.Skills[SkillName.Meditation].Value / 50,
+												 (int)owner.Skills[SkillName.Meditation].Value / 30)))
 	    {
 		m_Owner = owner;
 		Priority = TimerPriority.OneMinute;

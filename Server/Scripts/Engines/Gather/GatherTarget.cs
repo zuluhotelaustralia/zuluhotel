@@ -60,6 +60,9 @@ namespace Server.Engines.Gather
 
 	protected override void OnTarget( Mobile from, object targeted )
 	{
+	    //ensure that tile is in range
+	    //ensure that they're gathering from a valid tile
+
 	    if ( m_System is Mining && targeted is StaticTarget )
 	    {
 		MineGrave(from, targeted);

@@ -52,7 +52,7 @@ namespace Server.Mobiles
 			switch (Utility.Random(4))
 			{
 				case 0: orepile = new DestructionOre(); break;
-				case 1: orepile = new BlackdwarfOre(); break;
+				case 1: orepile = new BlackDwarfOre(); break;
 				case 2: orepile = new RedElvenOre(); break;
 				default: orepile = new BronzeOre(); break;
 			}

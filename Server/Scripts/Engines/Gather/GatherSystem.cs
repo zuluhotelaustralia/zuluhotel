@@ -60,7 +60,7 @@ namespace Server.Engines.Gather {
 	    else {
 		int loops = e.GetInt32(0);
 		if( loops > 1000 || loops < 1 ){
-		    	e.Mobile.SendMessage("Format: {0}AutoLoop <1-1000>");
+		    e.Mobile.SendMessage("Format: {0}AutoLoop <1-1000>");
 		}
 		else{
 		    e.Mobile.AutoLoop = loops;
@@ -77,27 +77,82 @@ namespace Server.Engines.Gather {
 	    return GetType();
 	}
 
+	public virtual bool CheckTool( Mobile from, Item tool )
+	{
+	    bool wornOut = ( tool == null || tool.Deleted || (tool is IUsesRemaining && ((IUsesRemaining)tool).UsesRemaining <= 0) );
+	    
+	    if ( wornOut )
+		from.SendLocalizedMessage( 1044038 ); // You have worn out your tool!
+	    
+	    return !wornOut;
+	}
+
+	//returns true if they're in acceptable range
+	public virtual bool CheckRange( Mobile from, Item tool, object targeted )
+	{
+	    Map map;
+	    Point3D loc;
+	    
+	    //check targeted type first
+	    if ( targeted is Static && !((Static)targeted).Movable )
+	    {
+		Static obj = (Static)targeted;
+
+		map = obj.Map;
+		loc = obj.GetWorldLocation();
+	    }
+	    else if ( targeted is StaticTarget )
+	    {
+		StaticTarget obj = (StaticTarget)targeted;
+
+		map = from.Map;
+		loc = obj.Location;
+	    }
+	    else if ( targeted is LandTarget )
+	    {
+		LandTarget obj = (LandTarget)targeted;
+
+		map = from.Map;
+		loc = obj.Location;
+	    }
+	    else
+	    {
+		map = null;
+		loc = Point3D.Zero;
+	    }
+	    
+	    bool inRange = ( from.Map == map && from.InRange( loc, 3 ) ); // is 3 ok?
+
+	    if ( !inRange )
+		from.SendLocalizedMessage( 500446 ); //that is too far away.
+
+	    return inRange;
+	}
+
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
-	    from.Target = new GatherTarget( tool, this );
-	    return true;
+	    if( !CheckTool(from, tool) ){
+		//can this be called if from is dead?
+		from.Target = new GatherTarget( tool, this );
+		return true;
+	    }
+	    return false; //should this function return false irrespective of checktool?
 	}
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
-	    //check other things as per Harvest.CheckHarvest
-
-	    //select node
-	    Skill s = from.Skills[m_SkillName];
-	    GatherNode n = Strike( BuildNodeList( s, from ) );
-
+	    
 	    object toLock = GetLock( from, tool, targeted );
 
 	    if ( !from.BeginAction( toLock ) ){
 		OnConcurrentGather( from, tool, targeted );
 		return;
 	    }
+	    
+	    //select node
+	    Skill s = from.Skills[m_SkillName];
+	    GatherNode n = Strike( BuildNodeList( s, from ) );
 
 	    new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
 	    CheckWhileGathering( from, tool, targeted, toLock, n );
@@ -110,7 +165,13 @@ namespace Server.Engines.Gather {
 	//play the animations/sfx, do some checks
 	// also make sure they haven't moved, aren't dead, etc.
 	public virtual bool CheckWhileGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
-	    //if the moved, etc. return false
+	    //if they moved, etc. return false
+	    if( !CheckRange(from, tool, targeted) ){
+		return false;
+	    }
+	    if( !from.Alive ){
+		return false;
+	    }
 	    
 	    from.RevealingAction();
 

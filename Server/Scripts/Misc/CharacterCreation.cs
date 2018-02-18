@@ -126,7 +126,7 @@ namespace Server.Misc
 	    PlaceItemIn( cont, 42, 51, new RunicHammer( CraftResource.Iron, 1000 ) );
 	    PlaceItemIn( cont, 48, 51, new RunicHammer( CraftResource.Platinum, 1000 ) );
 	    PlaceItemIn( cont, 54, 51, new RunicHammer( CraftResource.Bronze, 1000 ) );
-	    PlaceItemIn( cont, 61, 51, new RunicHammer( CraftResource.Icerock, 1000 ) );
+	    PlaceItemIn( cont, 61, 51, new RunicHammer( CraftResource.IceRock, 1000 ) );
 	    PlaceItemIn( cont, 67, 51, new RunicHammer( CraftResource.Spike, 1000 ) );
 	    PlaceItemIn( cont, 73, 51, new RunicHammer( CraftResource.Fruity, 1000 ) );
 	    PlaceItemIn( cont, 79, 51, new RunicHammer( CraftResource.BlackDwarf, 1000 ) );

@@ -9,13 +9,16 @@ namespace Server.Spells.Earth
     public class NaturesTouchSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Natures Touch", "Guerissez Par Terre"
-                );
+							"Natures Touch", "Guerissez Par Terre",
+							204,
+							9061,
+							Reagent.Pumice, Reagent.VialOfBlood, Reagent.Obsidian
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 80.0; } }
+        public override int RequiredMana{ get{ return 10; } }
 
         public NaturesTouchSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -35,6 +38,11 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
+	    if ( m is BaseCreature && ((BaseCreature)m).IsAnimatedDead ) {
+		Caster.SendLocalizedMessage( 1061654 ); // You cannot heal that which is not alive.
+		goto Return;
+	    }
+
             if ( ! CheckSequence() )
             {
                 goto Return;
@@ -46,13 +54,15 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+	    m.FixedParticles( 0x376A, 9, 32, 5030, EffectLayer.Waist );
+	    m.PlaySound( 0x202 );
 
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
+	    //original spell just healed 6d8+30 points of damage and scaled that by tgt's healing bonus if any
+	    // i think this is better --sith
+	    int amount = (int)(Caster.Skills[DamageSkill].Value * 0.6);
+	    amount += (int)(m.Skills[SkillName.Healing].Value * 0.4);
+	    
+	    SpellHelper.Heal( amount, m, Caster);
 
         Return:
             FinishSequence();
