@@ -8,14 +8,17 @@ namespace Server.Spells.Earth
 {
     public class EarthsBlessingSpell : AbstractEarthSpell
     {
-        private static SpellInfo m_Info = new SpellInfo(
-                "Earths Blessing", "Foria Da Terra"
-                );
+        private static SpellInfo m_Info = new SpellInfo("Earths Blessing", "Foria Da Terra",
+                203,
+                9061,
+                typeof( PigIron ),
+                typeof( Obsidian ),
+                typeof( VolcanicAsh ));
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 2 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 60.0; } }
+        public override int RequiredMana{ get{ return 10; } }
 
         public EarthsBlessingSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -28,15 +31,13 @@ namespace Server.Spells.Earth
 
         public void Target( Mobile m )
         {
-            if ( ! Caster.CanSee( m ) )
-            {
+            if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
                 Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
                 goto Return;
             }
 
-            if ( ! CheckSequence() )
-            {
+            if ( ! CheckBSequence( m ) ) {
                 goto Return;
             }
 
@@ -46,13 +47,23 @@ namespace Server.Spells.Earth
 
             SpellHelper.Turn( Caster, m );
 
-            // TODO: Spell graphical and sound effects.
+            double effectiveness = SpellHelper.GetEffectiveness( Caster );
 
-            Caster.DoHarmful( m );
+            TimeSpan duration = SpellHelper.GetDuration( Caster, null );
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+            double roll = 0.5 * effectiveness + 0.5 * Utility.RandomDouble();
 
-            new InternalTimer( m, Caster ).Start();
+            int str = 15 * roll;
+            int inte = 15 * roll;
+            int dex = 15 * roll;
+
+            SpellHelper.AddStatBonus( Caster, m, StatType.Str, str, duration);
+            SpellHelper.AddStatBonus( Caster, m, StatType.Int, int, duration);
+            SpellHelper.AddStatBonus( Caster, m, StatType.Dex, dex, duration);
+
+            // TODO: Find different sounds/effects?  These are copied from Bless
+            m.FixedParticles( 0x373A, 10, 15, 5018, EffectLayer.Waist );
+            m.PlaySound( 0x1EA );
 
         Return:
             FinishSequence();

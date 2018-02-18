@@ -240,6 +240,17 @@ namespace Server.Spells
 
 	    StatMod mod = target.GetStatMod( name );
 
+            // daleron: This looks fucked.  If I'm reading this right,
+            // if you're cursed, we will compute a new stat mod that
+            // combines the curse and the buff you're about to get and
+            // apply that instead.  But this new stat mod will take
+            // the duration of the buff.  So any curse you had
+            // previously will no longer wear off at its
+            // pre-determined time, but instead will live only for the
+            // duration of this buff.  A weak curse could be applied
+            // way longer if buffed by a strong mage, or a strong
+            // curse applied way shorter if buffed by a weak mage.  I
+            // don't think this is intended behaviour.
 	    if( mod != null && mod.Offset < 0 )
 	    {
 		target.AddStatMod( new StatMod( type, name, mod.Offset + offset, duration ) );
