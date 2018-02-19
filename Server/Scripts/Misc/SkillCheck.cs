@@ -117,28 +117,25 @@ namespace Server.Misc
 	    return CheckSkill( from, skill, loc, chance );
 	}
 
+	//where the sausage gets made
 	public static bool CheckSkill( Mobile from, Skill skill, object amObj, double chance )
 	{
 	    if ( from.Skills.Cap == 0 )
 		return false;
 
-	    double a = from.Region.RegionalSkillGainPrimaryFactor; //difficulty
-	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity
+	    double a = from.Region.GetSkillSpecificFactor(skill); //difficulty, returns PrimaryFactor by default
+	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently always returns 1600;
 	    double gc = 0.0;
 	    
-	    if( skill.Base > 0.0 ) {
-		gc = -( Math.Log(skill.Base / b) * a );
+	    if( skill.Fixed > 0 ) {
+		//skill must be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
+		gc = -( Math.Log(skill.Fixed / b) * a );
 	    }
 	    else {
 		gc = 1.0; //avoid divide by 0
 	    }
 	    
-	    gc *= skill.Info.GainFactor;
-	    
-	    //if ( gc < 0.01 ) {
-	    //  gc = 0.01;
-	    //}
-	    // see comments below
+	    //gc *= skill.Info.GainFactor;
 	    
 	    if ( from is BaseCreature && ((BaseCreature)from).Controlled )
 		gc *= 2;
@@ -149,7 +146,7 @@ namespace Server.Misc
 		    chance *= ((PlayerMobile)from).Spec.Bonus;
 		}
 	    }
-		 
+ 
 	    if ( gc > 1.0 )
 		gc = 1.0;
 	    
@@ -169,6 +166,7 @@ namespace Server.Misc
 	    // this.
 	    // tl;dr looping 1 to 1300 by 1s vs looping 0.1 to 130.0 by 0.1s may be the same number of steps
 	    // but the absolute magnitudes are obviously different durrrrr
+	    // try a = 0.005; b = 1600 for ~150 days at 1 attempt per 10 seconds, 24/7.
 	    
 	    if ( from.Alive && gc >= Utility.RandomDouble() )
 		Gain( from, skill );
