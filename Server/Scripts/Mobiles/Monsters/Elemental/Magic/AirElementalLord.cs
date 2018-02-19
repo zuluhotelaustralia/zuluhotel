@@ -5,7 +5,7 @@ using Server.Items;
 namespace Server.Mobiles
 {
     [CorpseName( "an air elemental corpse" )]
-    public class AirElemental : BaseCreature
+    public class AirElementalLord : BaseCreature
     {
 	public override double DispelDifficulty{ get{ return 130.0; } }
 	public override double DispelFocus{ get{ return 90.0; } }
@@ -56,7 +56,7 @@ namespace Server.Mobiles
 	public override bool BleedImmune{ get{ return true; } }
 	public override int TreasureMapLevel{ get{ return 4; } }
 
-	public AirElemental( Serial serial ) : base( serial )
+	public AirElementalLord( Serial serial ) : base( serial )
 	{
 	}
 
