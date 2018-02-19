@@ -18,7 +18,7 @@ namespace Server.Mobiles
 	// 		    double dPassiveSpeed)
 	    
 	[Constructable]
-	public AirElemental () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public AirElementalLord () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "an air elemental lord";
 	    Body = 13;

@@ -1,4 +1,4 @@
-using System;
+\using System;
 using System.Collections;
 using Server.Items;
 using Server.Targeting;
@@ -12,7 +12,7 @@ namespace Server.Mobiles
 		public override double DispelFocus{ get{ return 90.0; } }
 
 		[Constructable]
-		public EarthElemental() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
+		public EarthElementalLord() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 		{
 			Name = "an earth elemental lord";
 			Body = 14;
@@ -50,7 +50,7 @@ namespace Server.Mobiles
 		}
 
 		public override bool BleedImmune{ get{ return true; } }
-		public override int TreasureMapLevel{ get{ return 1; } }
+		public override int TreasureMapLevel{ get{ return 3; } }
 
 		public EarthElementalLord( Serial serial ) : base( serial )
 		{
