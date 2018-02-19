@@ -31,7 +31,7 @@ namespace Server.Spells.Earth
             Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Harmful );
         }
 
-        public void OnTargetFinished() {
+        public void OnTargetFinished( Mobile from ) {
             FinishSequence();
         }
 

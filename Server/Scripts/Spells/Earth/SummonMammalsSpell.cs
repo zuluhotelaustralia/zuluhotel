@@ -20,7 +20,7 @@ namespace Server.Spells.Earth
             typeof ( GreyWolf ),
             typeof ( TimberWolf ),
             typeof ( Horse ),
-            typeof ( Couger ),
+            typeof ( Cougar ),
             typeof ( Panther ),
             typeof ( BrownBear ),
             typeof ( GrizzlyBear ),
@@ -40,7 +40,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( SummonMammalsSpell ) ) ) {
+            if ( ! Caster.BeginAction( typeof( SummonMammalsSpell ) ) ) {
                 goto Return;
             }
 
@@ -48,15 +48,12 @@ namespace Server.Spells.Earth
 
             int count = (int)(3 * effectiveness);
 
-            if ( Caster.Spec.SpecName == SpecName.Mage ) {
-                count++;
-                bonus = 1;
-            }
+            // TODO: Weight higher up mammals more if skill/effectiveness is higher.
 
             for ( int i = 0 ; i < count ; i++ ) {
                 double roll = 0.8 * Utility.RandomDouble() + 0.2 * effectiveness;
-                int mammal = (int)Math.Max(m_Mammals.length - 1,
-                                           Math.Floor(m_Mammals.length * roll));
+                int mammal = (int)Math.Max(m_Mammals.Length - 1,
+                                           Math.Floor(m_Mammals.Length * roll));
 
                 BaseCreature creature = (BaseCreature)Activator.CreateInstance( m_Mammals[mammal] );
                 TimeSpan duration = TimeSpan.FromSeconds((int)(5 * 60 * effectiveness));
