@@ -31,6 +31,11 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
+	    if( Caster.Followers + 3 > Caster.FollowersMax ) {
+		Caster.SendLocalizedMessage( 1049611 ); // get i18n shredded fgt
+		goto Return;
+	    }
+	    
             TimeSpan duration = TimeSpan.FromSeconds( (2 * Caster.Skills[DamageSkill].Fixed) / 4 );
 
 	    SpellHelper.Summon( new WaterElementalLord(), Caster, 0x217, duration, false, false );
