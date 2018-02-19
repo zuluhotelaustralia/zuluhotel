@@ -9,10 +9,10 @@ namespace Server.Spells.Earth
     public class EarthSpiritSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Earth Spirit", "Chame O Terra Elemental"
-		269, 9010,
-		Reagent.DragonsBlood, Reagent.FertileDirt, Reagent.VolcanicAsh
-                );
+							"Earth Spirit", "Chame O Terra Elemental",
+							269, 9010,
+							Reagent.DragonsBlood, Reagent.FertileDirt, Reagent.VolcanicAsh
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 

@@ -9,10 +9,10 @@ namespace Server.Spells.Earth
     public class WaterSpiritSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Water Spirit", "Chame O Agua Elemental"
-		269, 9010,
-		Reagent.WyrmsHeart, Reagent.SerpentsScales, Reagent.EyeOfNewt
-                );
+							"Water Spirit", "Chame O Agua Elemental",
+							269, 9010,
+							Reagent.WyrmsHeart, Reagent.SerpentsScales, Reagent.EyeOfNewt
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 

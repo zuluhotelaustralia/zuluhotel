@@ -9,10 +9,10 @@ namespace Server.Spells.Earth
     public class IceStrikeSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Ice Strike", "Geada Com Inverno"
-		233, 9012,
-		Reagent.Bone, Reagent.BatWing, Reagent.Brimstone
-                );
+							"Ice Strike", "Geada Com Inverno",
+							233, 9012,
+							Reagent.Bone, Reagent.BatWing, Reagent.Brimstone
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 

@@ -9,10 +9,10 @@ namespace Server.Spells.Earth
     public class RisingFireSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Rising Fire", "Batida Do Fogo"
-		233, 9012,
-		Reagent.BatWing, Reagent.Brimstone, Reagent.VialOfBlood
-                );
+							"Rising Fire", "Batida Do Fogo",
+							233, 9012,
+							Reagent.BatWing, Reagent.Brimstone, Reagent.VialOfBlood
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 

@@ -9,10 +9,10 @@ namespace Server.Spells.Earth
     public class FireSpiritSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Fire Spirit", "Chame O Fogo Elemental"
-		269, 9010,
-		Reagent.EyeOfNewt, Reagent.Blackmoor, Reagent.Obsidian
-                );
+							"Fire Spirit", "Chame O Fogo Elemental",
+							269, 9010,
+							Reagent.EyeOfNewt, Reagent.Blackmoor, Reagent.Obsidian
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
