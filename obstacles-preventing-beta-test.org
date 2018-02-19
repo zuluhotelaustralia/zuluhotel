@@ -3,15 +3,6 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO antimacro code [0/5]
-:PROPERTIES:
-:COOKIE_DATA: todo recursive
-:END:
-** TODO send gump right before they get the cursor in gathertarget
-** TODO gump can't be dismissable except by right click
-** TODO gump needs to give them 2 minutes or so
-** TODO decide on consequences
-** TODO pick the one that doesn't match, perhaps simple arithmetic
 * TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [61/66]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
@@ -93,18 +84,17 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE check sounds/vfx: [[spellstable]]
 ** DONE implement Elemental Lords so that you can do Earth Magic properly
 ** TODO edit cliloc/gump to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
-* TODO implement skillgain rate scaling based on player's region [4/7]
+* DONE implement skillgain rate scaling based on player's region [6/6]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
 ** DONE define a new overlay region class (or perhaps edit baseregion) with configurable gain rates
 *** DONE make gains slow as fuck in houses
 *** DONE make gains very fast in dungeons
-*** TODO make ranger skills like taming/tracking gain very fast in wilderness areas (unless we want to radically change taming?)
+*** DONE make ranger skills like taming/tracking gain very fast in wilderness areas (unless we want to radically change taming?)
 *** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
-*** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
-*** TODO flesh out derived regions with appropriate gain rates
-* TODO make sure Spec actually works [12/13]
+*** DONE flesh out derived regions with appropriate gain rates
+* DONE make sure Spec actually works [12/12]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -120,7 +110,23 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
+
+* TODO Items to tackle after launching beta but before "1.0" [0/2]
+:properties:
+:cookie_data: todo recursive
+:end:
 ** TODO ensure only spec crafters can work with and mine the jewels
+** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
+** TODO antimacro code [0/5]
+:PROPERTIES:
+:COOKIE_DATA: todo recursive
+:END:
+*** TODO send gump right before they get the cursor in gathertarget
+*** TODO gump can't be dismissable except by right click
+*** TODO gump needs to give them 2 minutes or so
+*** TODO decide on consequences
+*** TODO pick the one that doesn't match, perhaps simple arithmetic
+
 
 #+NAME: oretable
 |               |       |            |         | <30>                           |    |   |
