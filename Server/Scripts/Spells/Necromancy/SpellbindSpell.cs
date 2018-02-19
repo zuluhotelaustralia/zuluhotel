@@ -3,21 +3,24 @@ using System.Collections;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
-
+using Server.Mobiles;
 
 // note that there is basically a blacklist of certain creatures that cannot be spellbound, no doubt giant monsters like balrogs or something
-    namespace Server.Spells.Necromancy
+namespace Server.Spells.Necromancy
 {
     public class SpellbindSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Spellbind", "Nutu Magistri Se Compellere"
-                );
+							"Spellbind", "Nutu Magistri Se Compellere"
+							221, 9002
+							Reagent.EyeOfNewt, Reagent.VialOfBlood,
+							Reagent.FertileDirt, Reagent.PigIron
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 140.0; } }
+        public override int RequiredMana{ get{ return 130; } }
 
         public SpellbindSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -36,28 +39,51 @@ using Server.Targeting;
                 Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
                 goto Return;
             }
-
             if ( ! CheckSequence() )
             {
                 goto Return;
             }
-
             if ( ! m.BeginAction( typeof( SpellbindSpell ) ) ) {
                 goto Return;
             }
-
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
+	    if ( !(m is BaseCreature) ){
+		Caster.SendLocalizedMessage( 502801 ); // u cannae tame tha', Harry.
+		goto Return;
+	    }
+	    if ( !m.Tamable ){
+		m.PrivateOverheadMessage( MessageType.Regular, 0x3B2, 1049655, Caster.NetState ); //that cannot be tamed
+	    if ( m.Controlled ){
+		m.PricateOverHeadMessage( MessageType.Regular, 0x3B2, 502804, Caster.NetState ); //that looks tame already
+		goto Returm;
+	    }
+	    if ( Caster.Follower + m.ControlSlots > Caster.FollowersMax ) {
+		Caster.SendLocalizedMessage( 1049611 ); //you have too many followers
+		goto Return;
+	    }
+	    
+	    SpellHelper.Turn( Caster, m );
 
 	    // target's difficulty is the higher of their str/dex/int scores divided by 2, scaled by their magicresist skill in some way
-
+	    double tdiff = (0.5 * Math.Max( m.Str, Math.Max( m.Dex, m.Int )) / 2.0) + (0.5 * m.Skills[SkillName.MagicResist].Value);
+	    
 	    // caster's power is determined by Magery in zhf, should probably be spirit speak aka DamageSkill
-            Caster.DoHarmful( m );
+	    // if any of you are medically-inclined, yes I called it cdiff on purpose... "shitty" pun ;)
+	    double cdiff = Caster.Skills[DamageSkill].Value;
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
+	    if( cdiff < tdiff ) {
+		DoFizzle();
+		goto Return;
+	    }
 
-            new InternalTimer( m, Caster ).Start();
+	    m.PlaySound(0x20d);
+	    m.FixedParticles(0x37b9, 10, 30, 5052, EffectLayer.Waist); //hopefully this works --sith
+
+	    m.Owners.Add(Caster);
+	    m.SetControlMaster(Caster);
+            
+            double duration = cdiff - (m.Skills[SkillName.MagicResist].Value * 0.5);
+
+	    new InternalTimer( m, (int)duration ).Start();
 
         Return:
             FinishSequence();
@@ -65,23 +91,19 @@ using Server.Targeting;
 
         private class InternalTimer : Timer
         {
-            private Mobile m_Target;
+            private Mobile m_Creature;
 
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
+            public InternalTimer( Mobile target, int duration ) : base( TimeSpan.FromSeconds( 0 ) )
             {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
+		Delay = TimeSpan.FromtSeconds( duration );
+		Priority = TimerPriority.OneSecond;
+		
+                m_Creature = target;
             }
 
             protected override void OnTick()
             {
-                m_Target.EndAction( typeof( SpellbindSpell ) );
+                m_Creature.SetControlMaster( null ); //see BaseCreature
             }
         }
 
