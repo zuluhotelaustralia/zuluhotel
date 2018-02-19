@@ -17,7 +17,7 @@ namespace Server.Spells.Earth
         // Planned to add poison resistance when we add a zulu based prots system
 
         private static SpellInfo m_Info = new SpellInfo(
-                "Antidote", "Puissante Terre Traite Ce Patient"
+                "Antidote", "Puissante Terre Traite Ce Patient",
                 212, 9061,
                 typeof ( DeadWood ),
                 typeof ( FertileDirt ),
@@ -41,8 +41,7 @@ namespace Server.Spells.Earth
             FinishSequence();
         }
 
-        public overrie void OnTarget( Mobile from, Mobile m )
-        {
+        public override void OnTarget( Mobile from, Mobile m ) {
             if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
                 Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.

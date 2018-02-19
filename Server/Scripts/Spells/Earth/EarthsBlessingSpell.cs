@@ -62,7 +62,7 @@ namespace Server.Spells.Earth
             int dex = 15 * roll;
 
             SpellHelper.AddStatBonus( Caster, m, StatType.Str, str, duration);
-            SpellHelper.AddStatBonus( Caster, m, StatType.Int, int, duration);
+            SpellHelper.AddStatBonus( Caster, m, StatType.Int, inte, duration);
             SpellHelper.AddStatBonus( Caster, m, StatType.Dex, dex, duration);
 
             // TODO: Find different sounds/effects?  These are copied from Bless

@@ -10,7 +10,7 @@ namespace Server.Spells.Earth
     public class ShiftingEarthSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Shifting Earth", "Esmagamento Con Pedra"
+                "Shifting Earth", "Esmagamento Con Pedra",
 		236, 9031,
 		Reagent.FertileDirt, Reagent.Obsidian, Reagent.Deadwood
                 );
@@ -73,7 +73,7 @@ namespace Server.Spells.Earth
 	    TimeSpan length = SpellHelper.GetDuration( Caster, m );
 
 	    BuffInfo.AddBuff( m, new BuffInfo( BuffIcon.Clumsy, 1075831, length, m, percentage.ToString() ) );
-	    
+
         Return:
             FinishSequence();
         }
