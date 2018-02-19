@@ -26,8 +26,8 @@ namespace Server.Regions
 	public virtual bool LogoutAllowed { get { return true; } }
 
 	//see Server/Region.cs
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.005; } } 
-	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.0005; } } 
+	public override double RegionalSkillGainSecondaryFactor { get { return 1400.0; } }
 	
 	public static void Configure()
 	{
