@@ -10,6 +10,8 @@ namespace Server.Spells.Earth
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Fire Spirit", "Chame O Fogo Elemental"
+		269, 9010,
+		Reagent.
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }

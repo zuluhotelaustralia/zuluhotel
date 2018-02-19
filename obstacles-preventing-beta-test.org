@@ -91,6 +91,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 :END:
 ** TODO summoning and "taming" spells
 ** TODO check sounds/vfx: [[spellstable]]
+** TODO implement Elemental Lords so that you can do Earth Magic properly
 ** TODO edit cliloc/gump to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
 * TODO implement skillgain rate scaling based on player's region [4/7]
 :PROPERTIES:
