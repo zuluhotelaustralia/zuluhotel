@@ -57,16 +57,14 @@ namespace Server.Spells.Earth
 
             // TODO: Push player in random direction
 
-            // works out to 50 dmg on average
-            double damage = Utility.Dice((int)(Caster.Skills[DamageSkill].Value / 10), 5, 0);
-            m.Damage((int)damage, Caster, DamageType.Air);
-
             // Do the effects
             Caster.MovingParticles( m, 0x379F, 7, 0, false, true, 3043, 4043, 0x211 );
             Caster.PlaySound( 0x20A );
 
-            // Deal the damage
-            SpellHelper.Damage( this, m, damage, 0, 0, 0, 0, 100 );
+            // 50 damage average at 130 skill
+            double avg = 5 * Caster.Skills[DamageSkill].Value / 13;
+            double damage = Utility.RandomGaussian(avg, avg/2);
+            m.Damage((int)damage, Caster, DamageType.Air);
 
         Return:
             FinishSequence();
