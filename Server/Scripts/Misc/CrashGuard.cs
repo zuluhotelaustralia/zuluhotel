@@ -14,7 +14,7 @@ namespace Server.Misc
 	{
 		private static bool Enabled = true;
 		private static bool SaveBackup = true;
-		private static bool RestartServer = true;
+		private static bool RestartServer = false;
 		private static bool GenerateReport = true;
 
 		public static void Initialize()
