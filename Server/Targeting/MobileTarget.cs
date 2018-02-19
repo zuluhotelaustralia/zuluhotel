@@ -16,7 +16,7 @@ namespace Server.Targeting {
             m_Receiver.OnTarget( from, (Mobile) o );
         }
 
-        protected override OnTargetFinished( Mobile from ) {
+        protected override void OnTargetFinished( Mobile from ) {
             m_Receiver.OnTargetFinished( from );
         }
     }
