@@ -3,6 +3,7 @@ using System.Collections;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
+using Server.Mobiles;
 
 namespace Server.Spells.Necromancy
 {
@@ -10,7 +11,8 @@ namespace Server.Spells.Necromancy
     {
         private static SpellInfo m_Info = new SpellInfo(
 							"Liche Form", "Umbrae Tenebrae Miserere",
-							Reagent.DemonBone, Reagent.Brimstone, Reagent.DragonsBlood,
+							236, 9031,
+							Reagent.DaemonBone, Reagent.Brimstone, Reagent.DragonsBlood,
 							Reagent.Blackmoor, Reagent.VialOfBlood, Reagent.VolcanicAsh
 							);
 
@@ -25,13 +27,6 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
 	    if( Factions.Sigil.ExistsOn( Caster ) ){
 		Caster.SendLocalizedMessage( 1010521 ); //fuck you, etc.
 		goto Return;
@@ -100,7 +95,7 @@ namespace Server.Spells.Necromancy
             {
                 m_Caster = caster;
 
-                double time = caster.Skills[DamageSkill].Value * 5;
+                double time = m_Caster.Skills[SkillName.SpiritSpeak].Value * 5;
 		Delay = TimeSpan.FromSeconds( time );
                 Priority = TimerPriority.OneSecond;
             }
@@ -115,28 +110,5 @@ namespace Server.Spells.Necromancy
 		BaseClothing.ValidateMobile(m_Caster);
             }
         }
-
-        private class InternalTarget : Target
-        {
-            private LicheFormSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( LicheFormSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
     }
 }

@@ -45,7 +45,7 @@ namespace Server.Mobiles
 			AddLoot( LootPack.Average );
 			AddLoot( LootPack.Rich );
 			AddLoot( LootPack.MedScrolls );
-			AddLood( LootPack.HighScrolls );
+			AddLoot( LootPack.HighScrolls );
 			AddLoot( LootPack.Gems );
 		}
 

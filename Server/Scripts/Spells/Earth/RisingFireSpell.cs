@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
+using Server.Mobiles;
 
 namespace Server.Spells.Earth
 {
@@ -47,9 +49,7 @@ namespace Server.Spells.Earth
             }
 
 	    double range = 3.0;
-	    if( Caster is PlayerMobile &&
-		((PlayerMobile)Caster).Spec.SpecName != SpecName.None &&
-		((PlayerMobile)Caster).Spec.SpecName != SpecName.PowerPlayer ){
+	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
 
 		range *= ((PlayerMobile)Caster).Spec.Bonus;
 	    }
@@ -60,7 +60,7 @@ namespace Server.Spells.Earth
 	    if( map != null){
 		foreach ( Mobile mob in Caster.GetMobilesInRange( (int)range )){
 		    if ( Caster != mob &&
-			 SpellHelerp.ValidIndirectTarget( Caster, mob ) &&
+			 SpellHelper.ValidIndirectTarget( Caster, mob ) &&
 			 Caster.CanBeHarmful( mob, false ) &&
 			 Caster.InLOS( mob )){
 

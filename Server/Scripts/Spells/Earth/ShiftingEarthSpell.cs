@@ -3,6 +3,7 @@ using System.Collections;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
+using Server.Mobiles;
 
 //earth damage on single target, dex debuff
 namespace Server.Spells.Earth
@@ -10,10 +11,10 @@ namespace Server.Spells.Earth
     public class ShiftingEarthSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Shifting Earth", "Esmagamento Con Pedra",
-		236, 9031,
-		Reagent.FertileDirt, Reagent.Obsidian, Reagent.Deadwood
-                );
+							"Shifting Earth", "Esmagamento Con Pedra",
+							236, 9031,
+							Reagent.FertileDirt, Reagent.Obsidian, Reagent.DeadWood
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
@@ -54,7 +55,8 @@ namespace Server.Spells.Earth
 
             Caster.DoHarmful( m );
 
-	    double dmg = (double)Utility.Dice(Caster.Skills[DamageSkill].Value / 15.0, 5, 0); //caps around 20 damage at 130 skill
+	    //yeah lots of casting is ugly but... fuck it :^)
+	    double dmg = (double)Utility.Dice( (int)(Caster.Skills[DamageSkill].Value / 15.0), 5, 0); //caps around 20 damage at 130 skill
 
 	    if (Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
 		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
