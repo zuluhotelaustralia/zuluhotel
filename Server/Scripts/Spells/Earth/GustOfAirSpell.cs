@@ -31,11 +31,11 @@ namespace Server.Spells.Earth
             Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Harmful );
         }
 
-        public override void OnTargetFinished() {
+        public void OnTargetFinished() {
             FinishSequence();
         }
 
-        public override void OnTarget( Mobile from, Mobile m )
+        public void OnTarget( Mobile from, Mobile m )
         {
             if ( ! Caster.CanSee( m ) )
             {

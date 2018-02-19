@@ -53,18 +53,18 @@ namespace Server.Spells.Earth
 
 		range *= ((PlayerMobile)Caster).Spec.Bonus;
 	    }
-	    
+
 	    List<Mobile> targets = new List<Mobile>();
 	    Map map = Caster.Map;
 
 	    if( map != null){
-		foreach ( Mobile m in Caster.GetMobilesInRange( (int)range )){
-		    if ( Caster != m &&
-			 SpellHelerp.ValidIndirectTarget( Caster, m ) &&
-			 Caster.CanBeHarmful( m, false ) &&
-			 Caster.InLOS( m )){
+		foreach ( Mobile mob in Caster.GetMobilesInRange( (int)range )){
+		    if ( Caster != mob &&
+			 SpellHelerp.ValidIndirectTarget( Caster, mob ) &&
+			 Caster.CanBeHarmful( mob, false ) &&
+			 Caster.InLOS( mob )){
 
-			targets.Add(m);
+			targets.Add(mob);
 		    }
 		}
 	    }
@@ -72,7 +72,7 @@ namespace Server.Spells.Earth
 	    Caster.PlaySound( 0x208 );
 
 	    for( int i=0; i< targets.Count; i++){
-		Mobile m = targets[i];
+		m = targets[i];
 
 		//original spell deals something like (24*3)d5+(caster's magery / 5)*0.5 to all targets
 		// for an average roll of 243 damage per anydice.com
@@ -81,7 +81,7 @@ namespace Server.Spells.Earth
 		m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot );
 		m.Damage((int)dmg, Caster, DamageType.Fire);
 	    }
-	    
+
         Return:
             FinishSequence();
         }

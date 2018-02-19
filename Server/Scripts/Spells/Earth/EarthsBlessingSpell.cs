@@ -29,11 +29,11 @@ namespace Server.Spells.Earth
             Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Beneficial );
         }
 
-        public override void OnTargetFinished( Mobile from ) {
+        public void OnTargetFinished( Mobile from ) {
             FinishSequence();
         }
 
-        public override void OnTarget( Mobile from, Mobile m )
+        public void OnTarget( Mobile from, Mobile m )
         {
             if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
