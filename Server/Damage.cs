@@ -20,7 +20,7 @@ namespace Server {
 	public DamageScalar(){
 	}
 	
-	public virtual int ScaleDamage( int amount, Mobile m, DamageType type ) {
+	public virtual int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
 	    return amount;
 	}
     }

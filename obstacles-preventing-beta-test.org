@@ -104,7 +104,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
 *** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 *** TODO flesh out derived regions with appropriate gain rates
-* TODO make sure Spec actually works [6/13]
+* TODO make sure Spec actually works [12/13]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -112,12 +112,12 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE magic damage taken by warriors
 *** DONE physical damage taken by warriors
 *** DONE physical damage taken by mages
-** TODO damage dealt
-*** TODO ranged damage dealt by rangers
-*** TODO magic damage dealt by mages
-*** TODO physical damage dealt by mages
-*** TODO magic damage dealt by warriors
-*** TODO physical damage dealt by warriors
+** DONE damage dealt
+*** DONE ranged damage dealt by rangers
+*** DONE magic damage dealt by mages
+*** DONE physical damage dealt by mages
+*** DONE magic damage dealt by warriors
+*** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 ** TODO ensure only spec crafters can work with and mine the jewels

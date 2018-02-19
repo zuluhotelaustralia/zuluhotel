@@ -5175,7 +5175,7 @@ namespace Server
 	    if( !this.Region.OnDamage( this, ref amount ) )
 		return;
 
-            amount = m_DamageScalar.ScaleDamage(amount, this, type);
+            amount = m_DamageScalar.ScaleDamage(amount, from, this, type);
 
 	    if( amount > 0 )
 	    {

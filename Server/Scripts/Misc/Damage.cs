@@ -27,60 +27,109 @@ namespace Server {
 	    Mobile.DamageScalar = new ActualDamageScalar();
 	    System.Console.WriteLine("Done!");
 	}
-	
-	// we are scaling damage _received_ here, not dealt.
-	// do we need "from"?  not really.
-	// ideally you can call this 2x:  once when you generate the damage in a script, i.e. "warriors deal more phys dmg"
-	// and a 2nd time when you call Mobile.Damage -> "mages receive more phys damage" (already in place)
-	public override int ScaleDamage( int amount, Mobile m, DamageType type ) {
+
+	private int ApplyElementalScaling(int amount, Mobile m, DamageType type){
+	    //todo:  attenuate or amplify damage based on target's elemental protection(s).
+	    // e.g. if you're wearing Lavarock platemail, fire doesn't hurt you as much but
+	    // if you're wearing icerock, fire rips you a new asshole.
+	    return amount;
+	}
+
+	//this function gets called in Mobile.Damage() and is intended to be the single point of all
+	// damage scaling caused by zulu-related systems.  Every time a mobile gets damaged, Mobile.Damage needs
+	// to be the instrument by which this is done.
+	public override int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
 
 	    double result = (double)amount;
-	    double bonus = 1.0;
-	    SpecName s = SpecName.None;
+	    double tgtbonus = 1.0;
+	    double frombonus = 1.0;
+	    SpecName tgtSpec = SpecName.None;
+	    SpecName fromSpec = SpecName.None;
 
 	    //if they are spec, scale by their class bonus
-	    if( m is PlayerMobile && ((PlayerMobile)m).Spec.SpecName != SpecName.None ){
-		bonus = ((PlayerMobile)m).Spec.Bonus;
-		s = ((PlayerMobile)m).Spec.SpecName;
-	    }
-	    else {
-		return amount; //might as well save the cycles if there's no reason to go through this
-		//probably later we'll put elemental resists in this class
+	    if( from is PlayerMobile &&
+		((PlayerMobile)from).Spec.SpecName != SpecName.None &&
+		((PlayerMobile)from).Spec.SpecName != SpecName.Powerplayer ){
+		frombonus = ((PlayerMobile)from).Spec.Bonus;
+		fromSpec = ((PlayerMobile)from).Spec.SpecName;
 	    }
 
-	    //take a deep breath
+	    if( m is PlayerMobile &&
+		((PlayerMobile)m).Spec.SpecName != SpecName.None &&
+		((PlayerMobile)m).Spec.SpecName != SpecName.Powerplayer ){
+		tgtbonus = ((PlayerMobile)m).Spec.Bonus;
+		tgtSpec = ((PlayerMobile)m).Spec.SpecName;
+	    }
+	    
+	    if( frombonus == 1.0 &&
+		tgtbonus == 1.0){
+
+		//apply the elemental scaling here if we're just going to return right away.
+		result = ApplyElementalScaling(amount, m, type);
+		return (int)result;
+		//might as well save the cycles if there's no reason to go through this
+	    }
+
+	    //note that this is not being double-applied.  First one only gets called if we return early.
+	    result = ApplyElementalScaling(amount, m, type);
+	    
+	    //take a deep breath, this gets ugly.
 	    switch( type ){
 		case DamageType.Magical:
-		    if (s == SpecName.Mage)
+		    //outgoing
+		    if (fromSpec == SpecName.Mage)
 		    {
-			//mages take less magic dmg
-			result /= bonus;
+			//mages deal more magic damage
+			result *= frombonus;
 		    }
-		    if (s == SpecName.Warrior)
+		    if (fromSpec == SpecName.Warrior)
 		    {
-			//warriors take more
-			result *= bonus;
+			//warriors deal less
+			result /= frombonus;
+		    }
+
+		    //incoming
+		    if (tgtSpec == SpecName.Mage){
+			//mages take less
+			result /= tgtbonus;
+		    }
+		    if (tgtSpec == SpecName.Warrior){
+			result *= tgtbonus;
 		    }
 		    break;
 		    
 		case DamageType.Physical:
-		    if ( s == SpecName.Warrior )
+		    //outgoing
+		    if(fromSpec == SpecName.Warrior){
+			result *= frombonus;
+		    }
+		    if(fromSpec == SpecName.Mage){
+			result /= frombonus;
+		    }
+
+		    //incoming
+		    if ( tgtSpec == SpecName.Warrior )
 		    {
 			//warriors get melee reduction
-			result /= bonus;
+			result /= tgtbonus;
 		    }
-		    if (s == SpecName.Mage)
+		    if (tgtSpec == SpecName.Mage)
 		    {
 			//mages take more
-			result *= bonus;
+			result *= tgtbonus;
 		    }
 		    break;
 
 		case DamageType.Ranged:
-		    if(s == SpecName.Ranger)
+		    //outgoing
+		    if(fromSpec == SpecName.Ranger){
+			result *= frombonus;
+		    }
+		    
+		    if(tgtSpec == SpecName.Ranger)
 		    {
 			//rangers get ranged protection
-			result /= bonus;
+			result /= tgtbonus;
 		    }
 		    break;
 		default:
@@ -89,6 +138,5 @@ namespace Server {
 
 	    return (int)result;
 	}
-
     }
 }
