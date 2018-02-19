@@ -31,6 +31,11 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
+	    if( Caster.Followers + 2 > Caster.FollowersMax ) {
+		Caster.SendLocalizedMessage( 1049611 ); // just stop bro u can't even
+		goto Return;
+	    }
+	    
             TimeSpan duration = TimeSpan.FromSeconds( (2 * Caster.Skills[DamageSkill].Fixed) / 4 );
 
 	    SpellHelper.Summon( new EarthElementalLord(), Caster, 0x217, duration, false, false );
