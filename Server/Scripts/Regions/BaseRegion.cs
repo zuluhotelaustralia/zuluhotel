@@ -71,6 +71,10 @@ namespace Server.Regions
 	    this.Spawns = null;
 	}
 
+	public double GetSkillSpecificFactor( Skill skill ){
+	    return RegionalSkillGainPrimaryFactor;
+	}
+
 	public static string GetRuneNameFor( Region region )
 	{
 	    while ( region != null )

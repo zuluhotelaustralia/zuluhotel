@@ -8,7 +8,21 @@ namespace Server.Regions {
     public class WildernessRegion : BaseRegion {
 	//this is intended to demarcate areas where ranger skills should train faster than normal
 
-	public TownRegion( XmlElement xml, Map map, Regtion parent ) : base(xml, map, parent)
+	public SkillSpecificPrimaryFactor { get { return 0.5; } } //see DungeonRegion
+
+	public override double GetSkillSpecificFactor(Skill skill){
+	    if( skill.SkillName == SkillName.Tracking ||
+		skill.SkillName == SkillName.AnimalTaming ||
+		skill.SkillName == SkillName.Camping ||
+		skill.SkillName == SkillName.Herding ) {
+		return SkillSpecificPrimaryFactor;
+	    }
+	    else {
+		return RegionalSkillGainPrimaryFactor;
+	    }
+	}
+	
+	public WildernessRegion( XmlElement xml, Map map, Regtion parent ) : base(xml, map, parent)
 	{
 	}
     }
