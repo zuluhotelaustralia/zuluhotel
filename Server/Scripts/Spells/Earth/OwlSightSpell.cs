@@ -37,7 +37,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! CheckBSequence() )
+            if ( ! CheckBSequence( m ) )
             {
                 goto Return;
             }

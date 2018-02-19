@@ -34,7 +34,7 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Beneficial );
+            Caster.Target = new MobileTarget( this, 10, TargetFlags.Beneficial );
         }
 
         public void OnTargetFinished( Mobile from ) {
@@ -64,7 +64,7 @@ namespace Server.Spells.Earth
             {
                 if ( m.CurePoison( Caster ) )
                 {
-                    if ( Caster != m_Target )
+                    if ( Caster != m )
                         Caster.SendLocalizedMessage( 1010058 ); // You have cured the target of all poisons!
 
                     m.SendLocalizedMessage( 1010059 ); // You have been cured of all poisons.

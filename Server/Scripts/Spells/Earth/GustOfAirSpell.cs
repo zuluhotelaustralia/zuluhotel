@@ -12,7 +12,7 @@ namespace Server.Spells.Earth
                 "Gust Of Air", "Gusto Do Ar",
                 230,
                 9022,
-                typeof( Batwing ),
+                typeof( BatWing ),
                 typeof( Brimstone ),
                 typeof( VialOfBlood ));
 
@@ -28,7 +28,7 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Harmful );
+            Caster.Target = new MobileTarget( this, 10, TargetFlags.Harmful );
         }
 
         public void OnTargetFinished( Mobile from ) {
@@ -58,16 +58,15 @@ namespace Server.Spells.Earth
             // TODO: Push player in random direction
 
             // works out to 50 dmg on average
-            double damage = Utility.Dice(Caster.Skills[DamageSkill].Value / 10, 5, 0);
+            double damage = Utility.Dice((int)(Caster.Skills[DamageSkill].Value / 10), 5, 0);
             m.Damage((int)damage, Caster, DamageType.Air);
 
             // Do the effects
-            source.MovingParticles( m, 0x379F, 7, 0, false, true, 3043, 4043, 0x211 );
-            source.PlaySound( 0x20A );
+            Caster.MovingParticles( m, 0x379F, 7, 0, false, true, 3043, 4043, 0x211 );
+            Caster.PlaySound( 0x20A );
 
             // Deal the damage
             SpellHelper.Damage( this, m, damage, 0, 0, 0, 0, 100 );
-
 
         Return:
             FinishSequence();

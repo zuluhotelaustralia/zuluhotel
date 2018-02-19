@@ -72,10 +72,10 @@ namespace Server.Spells
         public static double GetEffectiveness( Mobile caster ) {
             // TODO: Think about what makes sense here.
 
-            doubleo skill = caster.Skills[SkillName.Magery].Value / 130.0;
+            double skill = caster.Skills[SkillName.Magery].Value / 130.0;
             double stat = caster.Int / 130.0;
-            double spec = caster.Spec.SpecName == SpecName.Mage ?
-                caster.Spec.Bonus / 4.0 : 0.0;
+            double spec = (caster is PlayerMobile && ((PlayerMobile)caster).Spec.SpecName == SpecName.Mage ) ?
+                ((PlayerMobile)caster).Spec.Bonus / 4.0 : 0.0;
 
             // 45% skill, 30% stat, 25% spec
             return 0.45 * skill + 0.3 * stat + 0.25 * spec;
@@ -192,11 +192,11 @@ namespace Server.Spells
 	    if ( m is BaseCreature )
 	    {
 		BaseCreature c = (BaseCreature)m;
-						
+
 		if ( !c.Controlled )
 		    return true;
 	    }
-			
+
 	    return false;
 	}
 
@@ -1294,7 +1294,7 @@ namespace Server.Spells
 		caster.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
 		return false;
 	    }
-	    
+
 	    return true;
 	}
 

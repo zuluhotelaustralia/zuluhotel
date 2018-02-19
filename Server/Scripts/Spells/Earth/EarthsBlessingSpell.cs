@@ -26,7 +26,7 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Beneficial );
+            Caster.Target = new MobileTarget( this, 10, TargetFlags.Beneficial );
         }
 
         public void OnTargetFinished( Mobile from ) {
@@ -57,9 +57,9 @@ namespace Server.Spells.Earth
 
             double roll = 0.5 * effectiveness + 0.5 * Utility.RandomDouble();
 
-            int str = 15 * roll;
-            int inte = 15 * roll;
-            int dex = 15 * roll;
+            int str = (int)(15 * roll);
+            int inte = (int)(15 * roll);
+            int dex = (int)(15 * roll);
 
             SpellHelper.AddStatBonus( Caster, m, StatType.Str, str, duration);
             SpellHelper.AddStatBonus( Caster, m, StatType.Int, inte, duration);
