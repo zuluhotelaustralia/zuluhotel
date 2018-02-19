@@ -9,24 +9,21 @@ namespace Server.Spells.Necromancy
     public class LicheFormSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Liche Form", "Umbrae Tenebrae Miserere"
-                );
+							"Liche Form", "Umbrae Tenebrae Miserere",
+							Reagent.DemonBone, Reagent.Brimstone, Reagent.DragonsBlood,
+							Reagent.Blackmoor, Reagent.VialOfBlood, Reagent.VolcanicAsh
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 140.0; } }
+        public override int RequiredMana{ get{ return 130; } }
 
         public LicheFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
         }
 
         public override void OnCast()
-        {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
         {
             if ( ! Caster.CanSee( m ) )
             {
@@ -35,24 +32,61 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
+	    if( Factions.Sigil.ExistsOn( Caster ) ){
+		Caster.SendLocalizedMessage( 1010521 ); //fuck you, etc.
+		goto Return;
+	    }
+	    if( TransformationSpellHelper.UnderTransformation( Caster )){
+		Caster.SendLocalizedMessage( 1061633 ); // you cannot polymorph because fuck you etc.
+		goto Return;
+	    }
+	    if( DisguiseTimers.IsDisguised( Caster )){
+		Caster.SendLocalizedMessage( 502167 ); //fuck off, etc.
+		goto Return;
+	    }
+	    if( Caster.BodyMod == 183 || Caster.BodyMod == 184 ) {
+		Caster.SendLocalizedMessage( 1042512 ); //no
+		goto Return;
+	    }
+	    if( !Caster.CanBeginAction( typeof( LicheFormSpell ) ) ){
+		Caster.SendLocalizedMessage( 1005559 ); //no
+		goto Return;
+	    }
+		
             if ( ! CheckSequence() )
             {
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( LicheFormSpell ) ) ) {
-                goto Return;
-            }
+	    double dexmod = Caster.Dex / 2;
+	    double strmod = Caster.Str / 2;
+	    double intmod = Caster.Int * 2;
 
-            SpellHelper.Turn( Caster, m );
+	    if( Caster is PlayerMobile &&
+		((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage){
+		double bonus = ((PlayerMobile)Caster).Spec.Bonus;
+		dexmod /= bonus;
+		strmod /= bonus;
+		intmod *= bonus;
+	    }
 
-            // TODO: Spell graphical and sound effects.
+	    int newBody = 0x18;
+	    int newHue = 0;
 
-            Caster.DoHarmful( m );
+	    //hocus pocus... SpellHelper sets its own timers, we only need to clean up after the hue and body mods --sith
+	    Caster.BodyMod = newBody;
+	    Caster.HueMod = 0;
+	    SpellHelper.AddStatBonus(Caster, Caster, StatType.Int, (int)intmod, TimeSpan.FromSeconds( Caster.Skills[DamageSkill].Value * 5 ));
+	    SpellHelper.AddStatCurse(Caster, Caster, StatType.Dex, (int)dexmod, TimeSpan.FromSeconds( Caster.Skills[DamageSkill].Value * 5 ));
+	    SpellHelper.AddStatCurse(Caster, Caster, StatType.Str, (int)strmod, TimeSpan.FromSeconds( Caster.Skills[DamageSkill].Value * 5 ));
 
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
+	    Caster.PlaySound(0x202);
+	    
+	    //polymorph calls these... do we need to? --sith
+	    // BaseArmor.ValidateMobile( Caster );
+	    // BaseClothing.ValidateMobile( Caster );
+	    
+            new InternalTimer( Caster ).Start();
 
         Return:
             FinishSequence();
@@ -60,23 +94,25 @@ namespace Server.Spells.Necromancy
 
         private class InternalTimer : Timer
         {
-            private Mobile m_Target;
+            private Mobile m_Caster;
 
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
+            public InternalTimer( Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
             {
-                m_Target = target;
+                m_Caster = caster;
 
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
+                double time = caster.Skills[DamageSkill].Value * 5;
+		Delay = TimeSpan.FromSeconds( time );
                 Priority = TimerPriority.OneSecond;
             }
 
             protected override void OnTick()
             {
-                m_Target.EndAction( typeof( LicheFormSpell ) );
+                m_Caster.EndAction( typeof( LicheFormSpell ) );
+		m_Caster.BodyMod = 0;
+		m_Caster.HueMod = -1;
+
+		BaseArmor.ValidateMobile(m_Caster);
+		BaseClothing.ValidateMobile(m_Caster);
             }
         }
 
