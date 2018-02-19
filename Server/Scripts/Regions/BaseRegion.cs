@@ -25,8 +25,9 @@ namespace Server.Regions
 	public virtual bool ResurrectionAllowed { get { return true; } }
 	public virtual bool LogoutAllowed { get { return true; } }
 
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.0002; } } 
-	public override double RegionalSkillGainSecondaryFactor { get { return 1400.0; } }
+	//see Server/Region.cs
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.005; } } 
+	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 	
 	public static void Configure()
 	{
