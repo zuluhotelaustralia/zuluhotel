@@ -30,6 +30,8 @@ namespace Server {
 	
 	// we are scaling damage _received_ here, not dealt.
 	// do we need "from"?  not really.
+	// ideally you can call this 2x:  once when you generate the damage in a script, i.e. "warriors deal more phys dmg"
+	// and a 2nd time when you call Mobile.Damage -> "mages receive more phys damage" (already in place)
 	public override int ScaleDamage( int amount, Mobile m, DamageType type ) {
 
 	    double result = (double)amount;

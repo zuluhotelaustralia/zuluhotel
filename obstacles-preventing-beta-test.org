@@ -85,11 +85,11 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE (de)serialize node positions when (de)serializing the controller stone
 use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE finish writing code to scale harvest rates based on proximity to node
-* TODO finish off Necro and Earth magic [2/4]
+* TODO finish off Necro and Earth magic [3/4]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
-** TODO summoning and "taming" spells
+** DONE summoning and "taming" spells
 ** DONE check sounds/vfx: [[spellstable]]
 ** DONE implement Elemental Lords so that you can do Earth Magic properly
 ** TODO edit cliloc/gump to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
