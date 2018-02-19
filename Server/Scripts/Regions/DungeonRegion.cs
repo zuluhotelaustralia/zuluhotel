@@ -10,7 +10,7 @@ namespace Server.Regions
     {
 	public override bool YoungProtected { get { return false; } }
 	
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.05; } } //21 hours to cap it at 1 attempt per 10 seconds
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.5; } } //about 24 hours to cap it at 1 attempt per 10 seconds
 	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 	
 	private Point3D m_EntranceLocation;
