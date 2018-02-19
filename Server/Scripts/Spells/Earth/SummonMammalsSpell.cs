@@ -52,7 +52,7 @@ namespace Server.Spells.Earth
 
             for ( int i = 0 ; i < count ; i++ ) {
                 double roll = 0.8 * Utility.RandomDouble() + 0.2 * effectiveness;
-                int mammal = (int)Math.Max(m_Mammals.Length - 1,
+                int mammal = (int)Math.Min(m_Mammals.Length - 1,
                                            Math.Floor(m_Mammals.Length * roll));
 
                 BaseCreature creature = (BaseCreature)Activator.CreateInstance( m_Mammals[mammal] );
