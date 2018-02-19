@@ -18,16 +18,16 @@ This is a list of all the things that need to be done before we can launch a bet
 :END:
 ** DONE new class GatherTarget, similar to HarvestTarget
 *** special checks for GatherTarget.OnTarget:
-**** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids 
+**** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids
      NOTE: not going to implement the above any time soon.  We can spawn gravedust or whatever in loot on undeads
 **** DONE check if using lumberjacking on an IChopable, call targeted.OnChop
-**** DONE check if using an axe (lumberjacking) on an IAxe, then call targeted.Axe 
+**** DONE check if using an axe (lumberjacking) on an IAxe, then call targeted.Axe
 **** DONE check if using lumberjacking on an ICarvable, call targeted.carve
 **** DONE check if furnitureattribute.check(targeted as item), then DestroyFurniture()
 **** DONE check if using mining on a treasuremap, call (tmap)targeted.onBeginDig
 **** DONE otherwise it just calls StartHarvesting if none of those are true
 ** DONE derive new GatherSystem skill-specific classes from GatherSystem
-*** DONE flesh them out 
+*** DONE flesh them out
 **** DONE make gathersystem abstract
 ** DONE initial setup command
 ** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
@@ -236,21 +236,20 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 | Earth           |       |                      |      |                      |                      |                     |            |         |
 | Name            | Skill | Words of Power       | Mana | Regs                 | Desc.                |                     |            |         |
 | Circle 1        |       |                      |      |                      |                      |                     |            |         |
-| Antidote        |    60 | Puissante Terre Traite Ce Patient |    5 | Deadwood, fertile dirt, executioner's cap | cure poisons no matter what; leave target with poison immunity for duration based on skill |               0x1e1 |        481 |         |
+| Antidote        |    60 | Puissante Terre Traite Ce Patient |    5 | Deadwood, fertile dirt, executioner's cap | cure poisons no matter what; leave target with poison immunity for duration based on skill |               0x1e1 |        481 | x       |
 | Owl Sight       |    60 | Vista Da Noite       |    5 | Eye of newt          | longer-lasting night sight |               0x1e4 |        484 | x       |
 | Shifting Earth  |    60 | Esmagamento Con Pedra |    5 | fertile dirt, deadwood, obsidian | earth damage on single target, dex debuff |               0x20e |        526 | x       |
-| Summon Mammals  |    60 | Chame O Mamifero Agora |    5 | serpent scale, pig iron, eye of newt | summons... mammals.  powerful ones |                   0 |          0 |         |
+| Summon Mammals  |    60 | Chame O Mamifero Agora |    5 | serpent scale, pig iron, eye of newt | summons... mammals.  powerful ones |                   0 |          0 | x       |
 | Call Lightning  |    80 | Batida Do Deus       |   10 | wyrm's heart, pig iron, bone | air damage lightning strike |               0x207 |        519 | x       |
-| Earth's Blessing |    80 | Foria Da Terra       |   10 | pig iron, obsidian, volcanic ash | More powerful Bless  |               0x1eb |        491 |         |
+| Earth's Blessing |    80 | Foria Da Terra       |   10 | pig iron, obsidian, volcanic ash | More powerful Bless  |               0x1eb |        491 | x       |
 | Earth Portal    |    80 | Destraves Limites Da Natureza |   10 | brimstone, executioner's cap, eye of newt | Basically a Gate spell.  Would be cool to make this able to go places where Gate cannot, and vice versa |               0x20f |        527 |         |
 | Nature's Touch  |    80 | Guerissez Par Terre  |   10 | pumice, vial of blood, obsidian | Heals 6d8+30 pts of damage, scale that by magic bonus, and scale that by target's healing bonus if any |               0x203 |        515 | x       |
 | Circle 2        |       |                      |      |                      |                      |                     |            |         |
-| Gust of Air     |   100 | Gusto Do Ar          |   15 | fertile dirt, brimstone, eye of newt | Air damage to single target, wind causes target to get pushed away in a semi-random direction |               0x109 |        265 |         |
-| Rising Fire     |   100 | Batida Do Fogo       |   15 | batwing, brimstone, vial of blood | AOE fire damage that hits twice (3 flamestrike animations per hit) |               0x209 |        521 | x       |
-| Shapeshift      |   100 | Mude Minha Forma     |   15 | wyrm's heart, blackmoor, bat wing | polymorph into a variety of animals, one of which is the little bird |               0x20a |        522 |         |
-| Ice Strike      |   120 | Geada Com Inverno    |   20 | bone, bat wing, brimstone | water damage to single target |               0x117 |        279 | x       |
-| Earth Spirit    |   120 | Chame A Terra Elemental |   20 | Dragon's blood, fertile dirt, volcanic ash | Earth elemental lord |               0x10d |        269 |         |
-| Fire Spirit     |   120 | Chame O Fogo Elemental |   20 | eye of newt, blackmoor, obsidian | Fire Elemental Lord  |               0x113 |        275 |         |
-| Storm Spirit    |   120 | Chame O Ar Elemental |   20 | fertile dirt, volcanic ash, bat wing | Air Elemental Lord   |               0x108 |        264 |         |
-| Water Spirit    |   120 | Chame O Agua Elemental |   20 | wyrm's heart, serpent scales, eye of newt | Water Elemental Lord |               0x118 |        280 |         |
-
+| Gust of Air | 100 | Gusto Do Ar    | 15 | fertile dirt, brimstone, eye of newt | Air damage to single target, wind causes target to get pushed away in a semi-random direction | 0x109 | 265 | x |
+| Rising Fire | 100 | Batida Do Fogo | 15 | batwing, brimstone, vial of blood    | AOE fire damage that hits twice (3 flamestrike animations per hit)                            | 0x209 | 521 | x |
+| Shapeshift   | 100 | Mude Minha Forma        | 15 | wyrm's heart, blackmoor, bat wing          | polymorph into a variety of animals, one of which is the little bird | 0x20a | 522 |   |
+| Ice Strike   | 120 | Geada Com Inverno       | 20 | bone, bat wing, brimstone                  | water damage to single target                                        | 0x117 | 279 | x |
+| Earth Spirit | 120 | Chame A Terra Elemental | 20 | Dragon's blood, fertile dirt, volcanic ash | Earth elemental lord                                                 | 0x10d | 269 |   |
+| Fire Spirit  | 120 | Chame O Fogo Elemental  | 20 | eye of newt, blackmoor, obsidian           | Fire Elemental Lord                                                  | 0x113 | 275 |   |
+| Storm Spirit | 120 | Chame O Ar Elemental    | 20 | fertile dirt, volcanic ash, bat wing       | Air Elemental Lord                                                   | 0x108 | 264 |   |
+| Water Spirit | 120 | Chame O Agua Elemental  | 20 | wyrm's heart, serpent scales, eye of newt  | Water Elemental Lord                                                 | 0x118 | 280 |   |

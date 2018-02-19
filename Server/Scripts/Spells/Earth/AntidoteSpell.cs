@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Spells.Earth
 {
-    public class AntidoteSpell : AbstractEarthSpell
+    public class AntidoteSpell : AbstractEarthSpell, IMobileTargeted
     {
         // Original zuluhotel functionality
         // cure poisons no matter what
@@ -34,10 +34,14 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
+            Caster.Target = new MobileTarget( this, 10, Caster, TargetFlags.Beneficial );
         }
 
-        public void Target( Mobile m )
+        public override void OnTargetFinished( Mobile from ) {
+            FinishSequence();
+        }
+
+        public overrie void OnTarget( Mobile from, Mobile m )
         {
             if ( ! Caster.CanSee( m ) ) {
                 // Seems like this should be responsibility of the targetting system.  --daleron
@@ -67,6 +71,7 @@ namespace Server.Spells.Earth
                     m.SendLocalizedMessage( 1010059 ); // You have been cured of all poisons.
                 }
             }
+
 
             // TODO: Effects stolen from Cure spell, we may want
             // different ones, or at least a different sound
