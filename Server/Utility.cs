@@ -320,7 +320,7 @@ namespace Server
 			| ( ( source & 0x0000FF00 ) << 8 )
 			| ( ( source & 0x00FF0000 ) >> 8 )
 			| ( ( source & 0xFF000000 ) >> 0x18 ) ) );
-		} 
+		}
 
 		public static bool TryConvertIPv6toIPv4( ref IPAddress address )
 		{
@@ -849,6 +849,37 @@ namespace Server
 		{
 			return RandomImpl.NextDouble();
 		}
+
+            private class Gaussian {
+                private double z0;
+                private double z1;
+                private bool generate = false;
+
+                public double Next(double mu, double sigma) {
+                    // Box-Muller algorithm, supposedly.
+                    generate = ! generate;
+
+                    if ( ! generate ) {
+                        return z1 * sigma + mu;
+                    }
+
+                    double u0 = RandomDouble();
+                    double u1 = RandomDouble();
+
+                    z0 = Math.Sqrt(-2.0 * Math.Log(u0)) * Math.Cos(2.0 * Math.PI * u1);
+                    z1 = Math.Sqrt(-2.0 * Math.Log(u0)) * Math.Sin(2.0 * Math.PI * u1);
+
+                    return z0;
+                }
+            }
+
+            private static Gaussian m_Gaussian = new Gaussian();
+
+            public static double RandomGaussian(double mu, double sigma)
+            {
+                return m_Gaussian.Next(mu, sigma);
+            }
+
 		#endregion
 
 		#region Random Hues
