@@ -18,8 +18,8 @@ namespace Server.Spells.Necromancy
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 80.0; } }
-        public override int RequiredMana{ get{ return 40; } }
+        public override double RequiredSkill{ get{ return 100.0; } }
+        public override int RequiredMana{ get{ return 60; } }
 
         public AnimateDeadSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -54,11 +54,11 @@ namespace Server.Spells.Necromancy
 	    else
 	    {
 		Type type = null;
-		
+
 		if( c.Owner != null ){
 		    type = c.Owner.GetType();
 		}
-		
+
 		if( c.ItemID != 0x2006 ||
 		    c.Animated ||
 		    type == typeof( PlayerMobile ) ||
@@ -70,17 +70,17 @@ namespace Server.Spells.Necromancy
 		else{
 		    Point3D p = c.GetWorldLocation();
 		    Map map = c.Map;
-		    
+
 		    if( map != null ){
 			Effects.SendLocationParticles( EffectItem.Create( p, map, EffectItem.DefaultDuration ), 0x3789, 1, 40, 0x3F, 3, 9907, 0 );
-			
+
 			TimeSpan duration = TimeSpan.FromSeconds( (2 * (int)(Caster.Skills[DamageSkill].Value)) / 5 );
 
 			SpellHelper.Summon( new Zombie(), Caster, 0x1FB, duration, false, false );
 		    }
 		}
 	    }
-	    
+
         Return:
             FinishSequence();
         }
@@ -109,17 +109,17 @@ namespace Server.Spells.Necromancy
 	private class InternalTarget : Target
 	{
 	    private AnimateDeadSpell m_Owner;
-	    
+
 	    public InternalTarget( AnimateDeadSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.None )
 	    {
 		m_Owner = owner;
 	    }
-	    
+
 	    protected override void OnTarget( Mobile from, object o )
 	    {
 		m_Owner.Target( o );
 	    }
-	    
+
 	    protected override void OnTargetFinish( Mobile from )
 	    {
 		m_Owner.FinishSequence();
