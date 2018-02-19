@@ -11,13 +11,13 @@ namespace Server.Spells.Earth
         private static SpellInfo m_Info = new SpellInfo(
                 "Fire Spirit", "Chame O Fogo Elemental"
 		269, 9010,
-		Reagent.
+		Reagent.EyeOfNewt, Reagent.Blackmoor, Reagent.Obsidian
                 );
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 120.0; } }
+        public override int RequiredMana{ get{ return 20; } }
 
         public FireSpiritSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -25,83 +25,17 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
-        }
-
-        public void Target( Mobile m )
-        {
-            if ( ! Caster.CanSee( m ) )
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-                goto Return;
-            }
-
-            if ( ! CheckSequence() )
+	    if ( ! CheckSequence() )
             {
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( FireSpiritSpell ) ) ) {
-                goto Return;
-            }
+            TimeSpan duration = TimeSpan.FromSeconds( (2 * Caster.Skills[DamageSkill].Fixed) / 4 );
 
-            SpellHelper.Turn( Caster, m );
-
-            // TODO: Spell graphical and sound effects.
-
-            Caster.DoHarmful( m );
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer( m, Caster ).Start();
+	    SpellHelper.Summon( new FireElementalLord(), Caster, 0x217, duration, false, false );
 
         Return:
             FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( FireSpiritSpell ) );
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private FireSpiritSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( FireSpiritSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget( Mobile from, object o )
-            {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
-            }
-
-            protected override void OnTargetFinish( Mobile from )
-            {
-                m_Owner.FinishSequence();
-            }
         }
 
     }
