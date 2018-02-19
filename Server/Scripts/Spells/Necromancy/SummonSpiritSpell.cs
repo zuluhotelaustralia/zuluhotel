@@ -12,14 +12,14 @@ namespace Server.Spells.Necromancy
         private static SpellInfo m_Info = new SpellInfo(
 							"Summon Spirit", "Manes Turbidi Sollictique Resolverent",
 							221, 9002,
-							Reagent.DaemonBone, Reagent.Brimstone, Reagent.DragonsBlood, Reagent.BloodSpawn
+							Reagent.DaemonBone, Reagent.Brimstone, Reagent.DragonsBlood, Reagent.Bloodspawn
 							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 4 ); } }
 
         public override double RequiredSkill{ get{ return 120.0; } }
         public override int RequiredMana{ get{ return 100; } }
-	
+
         public SummonSpiritSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
         }
@@ -41,10 +41,10 @@ namespace Server.Spells.Necromancy
 		 ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
 		bonus = 1;
 	    }
-	    
+
 	    int amount = Utility.Dice( 2, 2, bonus);
 	    Type toSummon;
-	    
+
 	    while ( amount > 0 ){
 		int choice = Utility.Dice( 1, 8, bonus );
 
@@ -67,11 +67,10 @@ namespace Server.Spells.Necromancy
 
 		amount--;
 	    }
-		
+
 	Return:
 	    FinishSequence();
 	}
-    }	    
-    
+    }
+
 }
-    
