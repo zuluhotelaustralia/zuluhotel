@@ -40,7 +40,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/ColoredAnvil.cs
 *** DONE Items/Special/Bulk Order Rewards/Blacksmithy/GlovesOfMining.cs
 *** DONE Items/Special/Veteran Rewards/MiningCart.cs
-*** TODO Items/Weapons/BaseWeapon.cs //cliloc
+*** DONE Items/Weapons/BaseWeapon.cs //cliloc
 *** DONE Misc/CharacterCreation.cs
 *** DONE Mobiles/Monsters/Ants/AntLion.cs
 *** DONE Mobiles/Monsters/Humanoid/Melee/OrcBrute.cs
