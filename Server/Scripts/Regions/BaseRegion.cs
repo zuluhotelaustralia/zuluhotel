@@ -26,9 +26,9 @@ namespace Server.Regions
 	public virtual bool LogoutAllowed { get { return true; } }
 
 	//see Server/Region.cs
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.005; } } 
+	public override double RegionalSkillGainPrimaryFactor { get { return 0.005; } }
 	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
-	
+
 	public static void Configure()
 	{
 	    Region.DefaultRegionType = typeof( BaseRegion );
@@ -69,10 +69,6 @@ namespace Server.Regions
 	    base.OnUnregister();
 
 	    this.Spawns = null;
-	}
-
-	public double GetSkillSpecificFactor( Skill skill ){
-	    return RegionalSkillGainPrimaryFactor;
 	}
 
 	public static string GetRuneNameFor( Region region )
