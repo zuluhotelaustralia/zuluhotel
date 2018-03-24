@@ -9,7 +9,7 @@ namespace Server.Regions {
 	// this is intended to denote areas where crafting skills should gain faster than normal
 	// e.g. minoc mines, etc.
 
-	public SkillSpecificPrimaryFactor { get { return 0.5; } } //see DungeonRegion
+	public double SkillSpecificPrimaryFactor { get { return 0.5; } } //see DungeonRegion
 
 	public override double GetSkillSpecificFactor(Skill skill){
 	    if( skill.SkillName == SkillName.Alchemy ||
@@ -28,7 +28,7 @@ namespace Server.Regions {
 		return RegionalSkillGainPrimaryFactor;
 	    }
 	}
-	
+
 	public CraftingRegion( XmlElement xml, Map map, Region parent ) : base( xml, map, parent )
 	{}
     }

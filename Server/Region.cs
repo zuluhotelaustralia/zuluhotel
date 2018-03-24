@@ -156,6 +156,10 @@ namespace Server
 	}
 
 
+	public virtual double GetSkillSpecificFactor( Skill skill ){
+	    return RegionalSkillGainPrimaryFactor;
+	}
+
 	private string m_Name;
 	private Map m_Map;
 	private Region m_Parent;
@@ -183,9 +187,9 @@ namespace Server
 
 	// ~150 days to 130.0 @ 1 attempt per 10 seconds, running 24/7.
 	// in order to discourage house macroing.  See Misc/SkillCheck.cs --sith
-	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.005; } } 
+	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.005; } }
 	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
-	
+
 
 	public Point3D GoLocation{ get{ return m_GoLocation; } set { m_GoLocation = value; } }
 	public MusicName Music{ get{ return m_Music; } set{ m_Music = value; } }

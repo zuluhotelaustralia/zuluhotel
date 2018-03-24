@@ -1,13 +1,16 @@
 CC=mcs
-LDFLAGS=-reference:System.Drawing
 OPTFLAGS=-optimize+
-CFLAGS=-d:MONO -d:NEWPARENT -d:NEWTIMERS -unsafe -nowarn:219,414 -t:exe -out:RunUO.exe
+CFLAGS=-unsafe -nowarn:219,414 -out:Server.exe
 RECURSE=-recurse:'Server/*.cs'
 DFLAGS=-debug
 
+.DELETE_ON_ERROR:
+
 # mcs -optimize+ -unsafe -t:exe -out:RunUO.exe -win32icon:Server/runuo.ico -nowarn:219,414 -d:MONO -recurse:Server/*.cs
 
-all: release
+.PHONY: client release debug clean
+
+all: debug client
 
 help:
 	@echo "Targets:"
@@ -19,6 +22,11 @@ help:
 configure:
 	mkdir muls
 	@echo "Folder muls/ created, you should put a copy of the client files here."
+
+client: Client/Cliloc.enu
+
+Client/Cliloc.enu: Client/clilocs_enu.scm
+	guile -L uotools -c "(use-modules (uo cliloc)) (compile-clilocs (current-input-port) (current-output-port))" < $< > $@
 
 release:
 	$(CC) $(CFLAGS) $(OPTFLAGS) $(LDFLAGS) $(RECURSE)
