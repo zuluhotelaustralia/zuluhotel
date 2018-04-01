@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [61/66]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [63/65]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -22,9 +22,8 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE make gathersystem abstract
 ** DONE initial setup command
 ** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
-** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** DONE actually give them resources
-** TODO deal with [[file:filestoupdate.txt]]
+** DONE deal with [[file:filestoupdate.txt]]
 *** DONE Engines/BulkOrders/SmallBOD.cs
 *** DONE Engines/Craft/DefBlacksmithy.cs
 *** DONE Engines/Craft/DefTinkering.cs
@@ -83,7 +82,8 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE summoning and "taming" spells
 ** DONE check sounds/vfx: [[spellstable]]
 ** DONE implement Elemental Lords so that you can do Earth Magic properly
-** TODO edit cliloc/gump to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
+** TODO edit cliloc/gump/exe to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
+** TODO fix spell scroll item names (itemID parameter?)
 * DONE implement skillgain rate scaling based on player's region [6/6]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
@@ -111,12 +111,13 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 
-* TODO Items to tackle after launching beta but before "1.0" [0/2]
+* TODO Items to tackle after launching beta but before "1.0" [0/8]
 :properties:
 :cookie_data: todo recursive
 :end:
 ** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
+** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** TODO antimacro code [0/5]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive

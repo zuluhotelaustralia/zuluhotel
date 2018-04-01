@@ -4514,8 +4514,10 @@ namespace Server
 			if ( amount > (60000 / amountPerOldItem) ) // let's not go over 60000
 				amount = (60000 / amountPerOldItem);
 
-			Amount -= amount;
+			Amount -= amount;  //which one of you motherfuckers thought this was clear, maintainable code?  trying to trace this system and wtf is going on here? --sith
 
+			//use variable names with semantic meaning or comment your shit ffs
+			
 			int ourHue = Hue;
 			Map thisMap = this.Map;
 			IEntity thisParent = this.m_Parent;
