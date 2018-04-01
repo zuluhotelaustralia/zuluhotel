@@ -12,6 +12,9 @@ DFLAGS=-debug
 
 all: debug client
 
+run: debug
+	mono Server.exe
+
 help:
 	@echo "Targets:"
 	@echo "configure: creates client folder directory 'muls/' where the server expects to see client data."
@@ -35,4 +38,4 @@ debug:
 	$(CC) $(CFLAGS) $(DFLAGS) $(LDFLAGS) $(RECURSE)
 
 clean:
-	rm RunUO.exe
+	rm Server.exe
