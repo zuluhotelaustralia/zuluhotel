@@ -185,9 +185,10 @@ namespace Server
 	public int ChildLevel{ get{ return m_ChildLevel; } }
 	public bool Registered{ get{ return m_Registered; } }
 
-	// ~150 days to 130.0 @ 1 attempt per 10 seconds, running 24/7.
+	// ~120 days to 130.0 @ 1 attempt per 10 seconds, running 24/7.
+	// ~12 days to 130.0 @ 1 attempt per seconds, running 24/7 (e.g. sparring)
 	// in order to discourage house macroing.  See Misc/SkillCheck.cs --sith
-	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.005; } }
+	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.0005; } }
 	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 
 

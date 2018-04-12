@@ -124,12 +124,12 @@ namespace Server.Misc
 		return false;
 
 	    double a = from.Region.GetSkillSpecificFactor(skill); //difficulty, returns PrimaryFactor by default
-	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently always returns 1600;
+	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently a const;
 	    double gc = 0.0;
 	    
 	    if( skill.Fixed > 0 ) {
-		//skill must be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
-		gc = -( Math.Log(skill.Fixed / b) * a );
+		//skill must not be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
+		gc = -( Math.Log(skill.Base / b) * a );
 	    }
 	    else {
 		gc = 1.0; //avoid divide by 0
@@ -166,7 +166,11 @@ namespace Server.Misc
 	    // this.
 	    // tl;dr looping 1 to 1300 by 1s vs looping 0.1 to 130.0 by 0.1s may be the same number of steps
 	    // but the absolute magnitudes are obviously different durrrrr
-	    // try a = 0.005; b = 1600 for ~150 days at 1 attempt per 10 seconds, 24/7.
+	    // For given values of a and b, the time to hit 130.0 in a single skill would be:
+	    // a = 0.005, b = 1600:  at 1 attempt per second:  ~6 days
+	    //                       at 1 attempt per 10 sec:  ~70 days
+	    // a = 0.009, b = 1600:  at 1 attempt per second:  ~24 hours
+	    //                       at 1 attempt per 10 sec:  ~7 days
 	    
 	    if ( from.Alive && gc >= Utility.RandomDouble() )
 		Gain( from, skill );
