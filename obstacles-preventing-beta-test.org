@@ -112,7 +112,12 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 
-* TODO Items to tackle after launching beta but before "1.0" [0/8]
+* TODO Items to tackle after launching beta but before "1.0" [0/11]
+:properties:
+:cookie_data: todo recursive
+:end:
+** TODO make an ongoing minigame environment to encourage pvp during beta/debugging phase
+*** TODO make it tarkov or pubg or something
 :properties:
 :cookie_data: todo recursive
 :end:
