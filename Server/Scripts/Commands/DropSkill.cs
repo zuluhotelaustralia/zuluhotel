@@ -21,7 +21,7 @@ namespace Server.Commands
 		SkillName skill;
 		Skill s;
 		Mobile m = arg.Mobile;
-		if (Enum.TryParse( arg.GetSTring( 0 ), true, out skill ) ){
+		if (Enum.TryParse( arg.GetString( 0 ), true, out skill ) ){
 		    s = m.Skills[skill]; //too many "skill" ffs
 		    if (s == null) {
 			m.SendMessage("Null Skill error!  This is a bug.  Please contact the administrators.");
