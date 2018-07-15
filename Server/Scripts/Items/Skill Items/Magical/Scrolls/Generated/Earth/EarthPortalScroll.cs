@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public EarthPortalScroll() : this( 1 )
 		{
+		    this.Name = "Earth Portal";
 		}
 
 		[Constructable]

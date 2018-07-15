@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public WaterSpiritScroll() : this( 1 )
 		{
+		    this.Name = "Water Spirit";
 		}
 
 		[Constructable]

@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public AnimateDeadScroll() : this( 1 )
 		{
+		    this.Name = "Animate Dead";
 		}
 
 		[Constructable]

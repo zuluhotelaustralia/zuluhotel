@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public SorcerorsBaneScroll() : this( 1 )
 		{
+		    this.Name = "Sorceror's Bane";
 		}
 
 		[Constructable]

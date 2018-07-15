@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public ShiftingEarthScroll() : this( 1 )
 		{
+		    this.Name = "Shifting Earth";
 		}
 
 		[Constructable]

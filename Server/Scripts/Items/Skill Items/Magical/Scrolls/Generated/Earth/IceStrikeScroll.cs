@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public IceStrikeScroll() : this( 1 )
 		{
+		    this.Name = "Ice Strike";
 		}
 
 		[Constructable]

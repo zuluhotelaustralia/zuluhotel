@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public KillScroll() : this( 1 )
 		{
+		    this.Name = "Kill";
 		}
 
 		[Constructable]

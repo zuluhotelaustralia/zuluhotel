@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public OwlSightScroll() : this( 1 )
 		{
+		    this.Name = "Owl Sight";
 		}
 
 		[Constructable]

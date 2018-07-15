@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public SpellbindScroll() : this( 1 )
 		{
+		    this.Name = "Spellbind";
 		}
 
 		[Constructable]

@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public CallLightningScroll() : this( 1 )
 		{
+		    this.Name = "Call Lightning";
 		}
 
 		[Constructable]

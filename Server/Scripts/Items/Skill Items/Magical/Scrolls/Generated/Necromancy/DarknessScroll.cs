@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public DarknessScroll() : this( 1 )
 		{
+		    this.Name = "Darkness";
 		}
 
 		[Constructable]

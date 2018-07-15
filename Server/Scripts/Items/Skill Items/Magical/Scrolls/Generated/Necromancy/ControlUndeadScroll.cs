@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public ControlUndeadScroll() : this( 1 )
 		{
+		    this.Name = "Control Undead";
 		}
 
 		[Constructable]

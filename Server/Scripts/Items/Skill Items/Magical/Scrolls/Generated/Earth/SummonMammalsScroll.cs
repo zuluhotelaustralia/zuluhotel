@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public SummonMammalsScroll() : this( 1 )
 		{
+		    this.Name = "Summon Mammals";
 		}
 
 		[Constructable]

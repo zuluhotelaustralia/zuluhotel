@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public WraithFormScroll() : this( 1 )
 		{
+		    this.Name = "Wraith Form";
 		}
 
 		[Constructable]

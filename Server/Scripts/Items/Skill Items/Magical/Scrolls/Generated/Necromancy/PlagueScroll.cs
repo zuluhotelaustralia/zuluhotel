@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public PlagueScroll() : this( 1 )
 		{
+		    this.Name = "Plague";
 		}
 
 		[Constructable]

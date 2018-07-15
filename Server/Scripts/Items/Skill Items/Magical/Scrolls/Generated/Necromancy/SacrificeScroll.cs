@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public SacrificeScroll() : this( 1 )
 		{
+		    this.Name = "Sacrifice";
 		}
 
 		[Constructable]

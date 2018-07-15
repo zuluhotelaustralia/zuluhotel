@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public LicheFormScroll() : this( 1 )
 		{
+		    this.Name = "Liche Form";
 		}
 
 		[Constructable]

@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public WyvernStrikeScroll() : this( 1 )
 		{
+		    this.Name = "Wyvern Strike";
 		}
 
 		[Constructable]

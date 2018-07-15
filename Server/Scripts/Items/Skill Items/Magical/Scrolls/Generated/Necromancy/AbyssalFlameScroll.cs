@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public AbyssalFlameScroll() : this( 1 )
 		{
+		    this.Name = "Abyssal Flame";
 		}
 
 		[Constructable]

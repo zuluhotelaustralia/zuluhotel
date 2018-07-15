@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public WraithBreathScroll() : this( 1 )
 		{
+		    this.Name = "Wraith Breath";
 		}
 
 		[Constructable]

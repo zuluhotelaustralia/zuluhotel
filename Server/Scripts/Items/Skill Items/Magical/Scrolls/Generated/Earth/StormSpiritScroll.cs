@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public StormSpiritScroll() : this( 1 )
 		{
+		    this.Name = "Storm Spirit";
 		}
 
 		[Constructable]

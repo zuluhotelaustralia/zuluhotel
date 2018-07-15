@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public SpectresTouchScroll() : this( 1 )
 		{
+		    this.Name = "Spectre's Touch";
 		}
 
 		[Constructable]

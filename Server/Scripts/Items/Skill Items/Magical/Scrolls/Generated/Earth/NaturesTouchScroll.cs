@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public NaturesTouchScroll() : this( 1 )
 		{
+		    this.Name = "Nature's Touch";
 		}
 
 		[Constructable]

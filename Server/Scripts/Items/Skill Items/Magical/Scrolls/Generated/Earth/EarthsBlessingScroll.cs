@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public EarthsBlessingScroll() : this( 1 )
 		{
+		    this.Name = "Earth's Blessing";
 		}
 
 		[Constructable]

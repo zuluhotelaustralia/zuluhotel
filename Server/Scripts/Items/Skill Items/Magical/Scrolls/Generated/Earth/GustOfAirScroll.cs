@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public GustOfAirScroll() : this( 1 )
 		{
+		    this.Name = "Gust of Air";
 		}
 
 		[Constructable]

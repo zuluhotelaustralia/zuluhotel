@@ -9,6 +9,7 @@ namespace Server.Items
 		[Constructable]
 		public ShapeshiftScroll() : this( 1 )
 		{
+		    this.Name = "Shapeshift";
 		}
 
 		[Constructable]
