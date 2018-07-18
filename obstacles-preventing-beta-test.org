@@ -84,7 +84,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE implement Elemental Lords so that you can do Earth Magic properly
 ** TODO edit cliloc/gump/exe to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
 ** DONE fix spell scroll item names (itemID parameter)
-* DONE implement skillgain rate scaling based on player's region [6/7]
+* DONE implement skillgain rate scaling based on player's region [7/7]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -94,7 +94,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE make ranger skills like taming/tracking gain very fast in wilderness areas (unless we want to radically change taming?)
 *** DONE ensure crafting gains are slow everywhere (but not as slow as in houses)
 *** DONE flesh out derived regions with appropriate gain rates
-*** TODO check server/skills.cs for proper operation of Skill.Value because there are references to "100.0" in there
+*** DONE check server/skills.cs for proper operation of Skill.Value because there are references to "100.0" in there
 * DONE make sure Spec actually works [12/12]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
@@ -112,7 +112,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 
-* TODO Items to tackle after launching beta but before "1.0" [0/11]
+* TODO Items to tackle after launching beta but before "1.0" [0/12]
 :properties:
 :cookie_data: todo recursive
 :end:
@@ -133,6 +133,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** TODO gump needs to give them 2 minutes or so
 *** TODO decide on consequences
 *** TODO pick the one that doesn't match, perhaps simple arithmetic
+** TODO fix Server/Skills.cs because there are several references to 100.0 in there and we go to 130.0
 
 
 #+NAME: oretable
