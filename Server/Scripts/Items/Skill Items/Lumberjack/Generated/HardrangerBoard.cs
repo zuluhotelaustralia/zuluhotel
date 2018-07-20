@@ -6,7 +6,10 @@ namespace Server.Items {
 		public HardrangerBoard() : this( 1 ) {}
 
 		[Constructable]
-		public HardrangerBoard( int amount ) : base( CraftResource.Hardranger, amount ) {}
+		public HardrangerBoard( int amount ) : base( CraftResource.Hardranger, amount ) {
+			this.Name = "hardranger board";
+			this.Hue = 1285;
+		}
 
 		public HardrangerBoard( Serial serial ) : base( serial ) {}
 

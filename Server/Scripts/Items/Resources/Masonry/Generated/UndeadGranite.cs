@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class UndeadGranite : BaseGranite {
 		[Constructable]
-		public UndeadGranite() : base( CraftResource.Undead ) {}
+		public UndeadGranite() : base( CraftResource.Undead ) {
+			this.Name = "undead granite";
+			this.Hue = 0x279;
+		}
 
 		public UndeadGranite( Serial serial ) : base( serial ) {}
 

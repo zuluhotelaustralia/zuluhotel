@@ -19,6 +19,8 @@ function newOutfile() {
 function doGsubs(){
     resname = $2;
     trimmedres = $2;
+    hue = $3;
+    gsub(/ /, "", hue);
     gsub(/ /, "", resname);
     gsub(/^[ \t]+/, "", trimmedres);
     gsub(/[ \t]+$/, "", trimmedres);
@@ -36,7 +38,10 @@ function doGsubs(){
     print "\t\tpublic "resname restype"() : this( 1 ) {}" > outfile;
     print "" > outfile;
     print "\t\t[Constructable]" > outfile;
-    print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname", amount ) {}" > outfile;
+    print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname", amount ) {" > outfile;
+    print "\t\t\tthis.Name = \""tolower(trimmedres) " " tolower(restype)"\";" > outfile;
+    print "\t\t\tthis.Hue = " hue ";" > outfile;
+    print "\t\t}" > outfile;
     print "" > outfile;
     print "\t\tpublic "resname restype"( Serial serial ) : base( serial ) {}" > outfile;
     print "" > outfile;

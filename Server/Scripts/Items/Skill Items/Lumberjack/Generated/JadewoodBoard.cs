@@ -6,7 +6,10 @@ namespace Server.Items {
 		public JadewoodBoard() : this( 1 ) {}
 
 		[Constructable]
-		public JadewoodBoard( int amount ) : base( CraftResource.Jadewood, amount ) {}
+		public JadewoodBoard( int amount ) : base( CraftResource.Jadewood, amount ) {
+			this.Name = "jadewood board";
+			this.Hue = 1162;
+		}
 
 		public JadewoodBoard( Serial serial ) : base( serial ) {}
 

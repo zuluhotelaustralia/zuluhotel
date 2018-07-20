@@ -6,7 +6,10 @@ namespace Server.Items {
 		public PinetreeBoard() : this( 1 ) {}
 
 		[Constructable]
-		public PinetreeBoard( int amount ) : base( CraftResource.Pinetree, amount ) {}
+		public PinetreeBoard( int amount ) : base( CraftResource.Pinetree, amount ) {
+			this.Name = "pinetree board";
+			this.Hue = 1132;
+		}
 
 		public PinetreeBoard( Serial serial ) : base( serial ) {}
 

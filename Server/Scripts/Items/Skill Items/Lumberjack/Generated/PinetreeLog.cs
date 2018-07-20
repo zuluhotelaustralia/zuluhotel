@@ -6,7 +6,10 @@ namespace Server.Items {
 		public PinetreeLog() : this( 1 ) {}
 
 		[Constructable]
-		public PinetreeLog( int amount ) : base( CraftResource.Pinetree, amount ) {}
+		public PinetreeLog( int amount ) : base( CraftResource.Pinetree, amount ) {
+			this.Name = "pinetree log";
+			this.Hue = 1132;
+		}
 
 		public PinetreeLog( Serial serial ) : base( serial ) {}
 

@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class DoomGranite : BaseGranite {
 		[Constructable]
-		public DoomGranite() : base( CraftResource.Doom ) {}
+		public DoomGranite() : base( CraftResource.Doom ) {
+			this.Name = "doom granite";
+			this.Hue = 0x49f;
+		}
 
 		public DoomGranite( Serial serial ) : base( serial ) {}
 

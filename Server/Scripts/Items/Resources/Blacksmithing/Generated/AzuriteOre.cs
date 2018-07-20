@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new AzuriteIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Azurite Ore");
-		}
 	}	
 }

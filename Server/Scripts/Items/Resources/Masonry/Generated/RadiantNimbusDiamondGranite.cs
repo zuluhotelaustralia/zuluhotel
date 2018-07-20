@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class RadiantNimbusDiamondGranite : BaseGranite {
 		[Constructable]
-		public RadiantNimbusDiamondGranite() : base( CraftResource.RadiantNimbusDiamond ) {}
+		public RadiantNimbusDiamondGranite() : base( CraftResource.RadiantNimbusDiamond ) {
+			this.Name = "radiant nimbus diamond granite";
+			this.Hue = 0x498;
+		}
 
 		public RadiantNimbusDiamondGranite( Serial serial ) : base( serial ) {}
 

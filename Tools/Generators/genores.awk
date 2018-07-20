@@ -59,10 +59,6 @@ function doGsubs(){
     print "\t\tpublic override BaseIngot GetIngot() {" > outfile;
     print "\t\t\treturn new "resname"Ingot();" > outfile;
     print "\t\t}" > outfile;
-    print "" > outfile;
-    print "\t\tpublic override void OnSingleClick( Mobile from ) {" > outfile;
-    print "\t\t\tfrom.SendMessage(\""trimmedres" " restype"\");" > outfile;
-    print "\t\t}" > outfile;
     print "\t}	" > outfile;
     print "}" > outfile;
 

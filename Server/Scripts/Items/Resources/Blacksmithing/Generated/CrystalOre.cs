@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new CrystalIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Crystal Ore");
-		}
 	}	
 }

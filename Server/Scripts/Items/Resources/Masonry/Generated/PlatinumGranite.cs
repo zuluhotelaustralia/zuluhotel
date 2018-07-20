@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class PlatinumGranite : BaseGranite {
 		[Constructable]
-		public PlatinumGranite() : base( CraftResource.Platinum ) {}
+		public PlatinumGranite() : base( CraftResource.Platinum ) {
+			this.Name = "platinum granite";
+			this.Hue = 0x457;
+		}
 
 		public PlatinumGranite( Serial serial ) : base( serial ) {}
 

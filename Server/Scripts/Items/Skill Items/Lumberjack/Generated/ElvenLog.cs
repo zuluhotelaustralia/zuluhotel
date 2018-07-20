@@ -6,7 +6,10 @@ namespace Server.Items {
 		public ElvenLog() : this( 1 ) {}
 
 		[Constructable]
-		public ElvenLog( int amount ) : base( CraftResource.Elven, amount ) {}
+		public ElvenLog( int amount ) : base( CraftResource.Elven, amount ) {
+			this.Name = "elven log";
+			this.Hue = 1165;
+		}
 
 		public ElvenLog( Serial serial ) : base( serial ) {}
 

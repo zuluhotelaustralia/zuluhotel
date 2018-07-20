@@ -6,7 +6,10 @@ namespace Server.Items {
 		public DarknessLog() : this( 1 ) {}
 
 		[Constructable]
-		public DarknessLog( int amount ) : base( CraftResource.Darkness, amount ) {}
+		public DarknessLog( int amount ) : base( CraftResource.Darkness, amount ) {
+			this.Name = "darkness log";
+			this.Hue = 1258;
+		}
 
 		public DarknessLog( Serial serial ) : base( serial ) {}
 

@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new MysticIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Mystic Ore");
-		}
 	}	
 }

@@ -6,7 +6,10 @@ namespace Server.Items {
 		public PurplePassionBoard() : this( 1 ) {}
 
 		[Constructable]
-		public PurplePassionBoard( int amount ) : base( CraftResource.PurplePassion, amount ) {}
+		public PurplePassionBoard( int amount ) : base( CraftResource.PurplePassion, amount ) {
+			this.Name = "purple passion board";
+			this.Hue = 515;
+		}
 
 		public PurplePassionBoard( Serial serial ) : base( serial ) {}
 

@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new DarkSableRubyIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Dark Sable Ruby Ore");
-		}
 	}	
 }

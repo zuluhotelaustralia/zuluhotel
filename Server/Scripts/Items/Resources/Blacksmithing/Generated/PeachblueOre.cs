@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new PeachblueIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Peachblue Ore");
-		}
 	}	
 }

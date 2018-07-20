@@ -6,7 +6,10 @@ namespace Server.Items {
 		public EmeraldwoodLog() : this( 1 ) {}
 
 		[Constructable]
-		public EmeraldwoodLog( int amount ) : base( CraftResource.Emeraldwood, amount ) {}
+		public EmeraldwoodLog( int amount ) : base( CraftResource.Emeraldwood, amount ) {
+			this.Name = "emerald wood log";
+			this.Hue = 1159;
+		}
 
 		public EmeraldwoodLog( Serial serial ) : base( serial ) {}
 

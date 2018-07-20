@@ -6,7 +6,10 @@ namespace Server.Items {
 		public CherryBoard() : this( 1 ) {}
 
 		[Constructable]
-		public CherryBoard( int amount ) : base( CraftResource.Cherry, amount ) {}
+		public CherryBoard( int amount ) : base( CraftResource.Cherry, amount ) {
+			this.Name = "cherry board";
+			this.Hue = 5716;
+		}
 
 		public CherryBoard( Serial serial ) : base( serial ) {}
 

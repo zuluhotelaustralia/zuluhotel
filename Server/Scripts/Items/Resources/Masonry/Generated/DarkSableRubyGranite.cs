@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class DarkSableRubyGranite : BaseGranite {
 		[Constructable]
-		public DarkSableRubyGranite() : base( CraftResource.DarkSableRuby ) {}
+		public DarkSableRubyGranite() : base( CraftResource.DarkSableRuby ) {
+			this.Name = "dark sable ruby granite";
+			this.Hue = 0x494;
+		}
 
 		public DarkSableRubyGranite( Serial serial ) : base( serial ) {}
 

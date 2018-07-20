@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new BlackDwarfIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Black Dwarf Ore");
-		}
 	}	
 }

@@ -6,7 +6,10 @@ namespace Server.Items {
 		public GoldenReflectionLog() : this( 1 ) {}
 
 		[Constructable]
-		public GoldenReflectionLog( int amount ) : base( CraftResource.GoldenReflection, amount ) {}
+		public GoldenReflectionLog( int amount ) : base( CraftResource.GoldenReflection, amount ) {
+			this.Name = "golden reflection log";
+			this.Hue = 48;
+		}
 
 		public GoldenReflectionLog( Serial serial ) : base( serial ) {}
 

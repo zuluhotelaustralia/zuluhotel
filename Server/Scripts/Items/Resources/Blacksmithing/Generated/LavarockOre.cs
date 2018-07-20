@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new LavarockIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Lavarock Ore");
-		}
 	}	
 }

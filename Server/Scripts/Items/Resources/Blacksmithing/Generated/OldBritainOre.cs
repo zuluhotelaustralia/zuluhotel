@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new OldBritainIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Old Britain Ore");
-		}
 	}	
 }

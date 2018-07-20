@@ -6,7 +6,10 @@ namespace Server.Items {
 		public OakLog() : this( 1 ) {}
 
 		[Constructable]
-		public OakLog( int amount ) : base( CraftResource.Oak, amount ) {}
+		public OakLog( int amount ) : base( CraftResource.Oak, amount ) {
+			this.Name = "oak log";
+			this.Hue = 1045;
+		}
 
 		public OakLog( Serial serial ) : base( serial ) {}
 

@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new DarkPaganIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Dark Pagan Ore");
-		}
 	}	
 }

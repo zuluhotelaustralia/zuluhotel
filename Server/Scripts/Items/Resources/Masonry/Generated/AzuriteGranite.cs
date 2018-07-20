@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class AzuriteGranite : BaseGranite {
 		[Constructable]
-		public AzuriteGranite() : base( CraftResource.Azurite ) {}
+		public AzuriteGranite() : base( CraftResource.Azurite ) {
+			this.Name = "azurite granite";
+			this.Hue = 0x4df;
+		}
 
 		public AzuriteGranite( Serial serial ) : base( serial ) {}
 

@@ -28,9 +28,5 @@ namespace Server.Items {
 		public override BaseIngot GetIngot() {
 			return new AnraIngot();
 		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Anra Ore");
-		}
 	}	
 }

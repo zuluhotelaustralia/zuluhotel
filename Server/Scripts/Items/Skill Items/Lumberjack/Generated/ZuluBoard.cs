@@ -6,7 +6,10 @@ namespace Server.Items {
 		public ZuluBoard() : this( 1 ) {}
 
 		[Constructable]
-		public ZuluBoard( int amount ) : base( CraftResource.Zulu, amount ) {}
+		public ZuluBoard( int amount ) : base( CraftResource.Zulu, amount ) {
+			this.Name = "zulu board";
+			this.Hue = 1160;
+		}
 
 		public ZuluBoard( Serial serial ) : base( serial ) {}
 

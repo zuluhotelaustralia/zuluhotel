@@ -3,7 +3,10 @@ namespace Server.Items {
 
 	public class SpikeGranite : BaseGranite {
 		[Constructable]
-		public SpikeGranite() : base( CraftResource.Spike ) {}
+		public SpikeGranite() : base( CraftResource.Spike ) {
+			this.Name = "spike granite";
+			this.Hue = 0x4c7;
+		}
 
 		public SpikeGranite( Serial serial ) : base( serial ) {}
 
