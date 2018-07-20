@@ -7,11 +7,14 @@ namespace Server.Items {
 		public DestructionIngot() : this( 1 ) {}
 
 		[Constructable]
-		public DestructionIngot( int amount ) : base( CraftResource.Destruction, amount ) {}
+		public DestructionIngot( int amount ) : base( CraftResource.Destruction, amount ) {
+			this.Name = "destruction ingot";
+			this.Hue = 0x500;
+		}
 
 		public DestructionIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Destruction Ingot"; } }
+		public override string DefaultName { get { return "destruction ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Destruction Ingot");
 		}
 	}	
 }

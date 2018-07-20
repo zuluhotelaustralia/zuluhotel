@@ -7,11 +7,14 @@ namespace Server.Items {
 		public RadiantNimbusDiamondIngot() : this( 1 ) {}
 
 		[Constructable]
-		public RadiantNimbusDiamondIngot( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount ) {}
+		public RadiantNimbusDiamondIngot( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount ) {
+			this.Name = "radiant nimbus diamond ingot";
+			this.Hue = 0x498;
+		}
 
 		public RadiantNimbusDiamondIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Radiant Nimbus Diamond Ingot"; } }
+		public override string DefaultName { get { return "radiant nimbus diamond ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Radiant Nimbus Diamond Ingot");
 		}
 	}	
 }

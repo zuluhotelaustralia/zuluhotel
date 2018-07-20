@@ -7,11 +7,14 @@ namespace Server.Items {
 		public PyriteIngot() : this( 1 ) {}
 
 		[Constructable]
-		public PyriteIngot( int amount ) : base( CraftResource.Pyrite, amount ) {}
+		public PyriteIngot( int amount ) : base( CraftResource.Pyrite, amount ) {
+			this.Name = "pyrite ingot";
+			this.Hue = 0x6b8;
+		}
 
 		public PyriteIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Pyrite Ingot"; } }
+		public override string DefaultName { get { return "pyrite ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Pyrite Ingot");
 		}
 	}	
 }

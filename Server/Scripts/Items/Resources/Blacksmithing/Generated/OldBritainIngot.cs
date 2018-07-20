@@ -7,11 +7,14 @@ namespace Server.Items {
 		public OldBritainIngot() : this( 1 ) {}
 
 		[Constructable]
-		public OldBritainIngot( int amount ) : base( CraftResource.OldBritain, amount ) {}
+		public OldBritainIngot( int amount ) : base( CraftResource.OldBritain, amount ) {
+			this.Name = "old britain ingot";
+			this.Hue = 0x852;
+		}
 
 		public OldBritainIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Old Britain Ingot"; } }
+		public override string DefaultName { get { return "old britain ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Old Britain Ingot");
 		}
 	}	
 }

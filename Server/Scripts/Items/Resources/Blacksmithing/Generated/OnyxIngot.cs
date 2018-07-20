@@ -7,11 +7,14 @@ namespace Server.Items {
 		public OnyxIngot() : this( 1 ) {}
 
 		[Constructable]
-		public OnyxIngot( int amount ) : base( CraftResource.Onyx, amount ) {}
+		public OnyxIngot( int amount ) : base( CraftResource.Onyx, amount ) {
+			this.Name = "onyx ingot";
+			this.Hue = 0x455;
+		}
 
 		public OnyxIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Onyx Ingot"; } }
+		public override string DefaultName { get { return "onyx ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Onyx Ingot");
 		}
 	}	
 }

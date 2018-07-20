@@ -6,7 +6,10 @@ namespace Server.Items {
 		public EbonTwilightSapphireOre() : this( 1 ) {}
 
 		[Constructable]
-		public EbonTwilightSapphireOre( int amount ) : base( CraftResource.EbonTwilightSapphire, amount ) {}
+		public EbonTwilightSapphireOre( int amount ) : base( CraftResource.EbonTwilightSapphire, amount ) {
+			this.Name = "ebon twilight sapphire ore";
+			this.Hue = 0x493;
+		}
 
 		public EbonTwilightSapphireOre( Serial serial ) : base( serial ) {}
 

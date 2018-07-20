@@ -7,11 +7,14 @@ namespace Server.Items {
 		public BronzeIngot() : this( 1 ) {}
 
 		[Constructable]
-		public BronzeIngot( int amount ) : base( CraftResource.Bronze, amount ) {}
+		public BronzeIngot( int amount ) : base( CraftResource.Bronze, amount ) {
+			this.Name = "bronze ingot";
+			this.Hue = 0x45e;
+		}
 
 		public BronzeIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Bronze Ingot"; } }
+		public override string DefaultName { get { return "bronze ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Bronze Ingot");
 		}
 	}	
 }

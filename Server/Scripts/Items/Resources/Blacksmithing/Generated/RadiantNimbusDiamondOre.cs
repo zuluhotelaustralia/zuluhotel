@@ -6,7 +6,10 @@ namespace Server.Items {
 		public RadiantNimbusDiamondOre() : this( 1 ) {}
 
 		[Constructable]
-		public RadiantNimbusDiamondOre( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount ) {}
+		public RadiantNimbusDiamondOre( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount ) {
+			this.Name = "radiant nimbus diamond ore";
+			this.Hue = 0x498;
+		}
 
 		public RadiantNimbusDiamondOre( Serial serial ) : base( serial ) {}
 

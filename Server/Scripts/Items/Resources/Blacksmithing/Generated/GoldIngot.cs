@@ -7,11 +7,14 @@ namespace Server.Items {
 		public GoldIngot() : this( 1 ) {}
 
 		[Constructable]
-		public GoldIngot( int amount ) : base( CraftResource.Gold, amount ) {}
+		public GoldIngot( int amount ) : base( CraftResource.Gold, amount ) {
+			this.Name = "gold ingot";
+			this.Hue = 0x885;
+		}
 
 		public GoldIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Gold Ingot"; } }
+		public override string DefaultName { get { return "gold ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Gold Ingot");
 		}
 	}	
 }

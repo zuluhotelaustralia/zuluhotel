@@ -7,11 +7,14 @@ namespace Server.Items {
 		public SpectralIngot() : this( 1 ) {}
 
 		[Constructable]
-		public SpectralIngot( int amount ) : base( CraftResource.Spectral, amount ) {}
+		public SpectralIngot( int amount ) : base( CraftResource.Spectral, amount ) {
+			this.Name = "spectral ingot";
+			this.Hue = 0x483;
+		}
 
 		public SpectralIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Spectral Ingot"; } }
+		public override string DefaultName { get { return "spectral ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Spectral Ingot");
 		}
 	}	
 }

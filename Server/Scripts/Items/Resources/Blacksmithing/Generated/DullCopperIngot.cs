@@ -7,11 +7,14 @@ namespace Server.Items {
 		public DullCopperIngot() : this( 1 ) {}
 
 		[Constructable]
-		public DullCopperIngot( int amount ) : base( CraftResource.DullCopper, amount ) {}
+		public DullCopperIngot( int amount ) : base( CraftResource.DullCopper, amount ) {
+			this.Name = "dull copper ingot";
+			this.Hue = 0x3ea;
+		}
 
 		public DullCopperIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Dull Copper Ingot"; } }
+		public override string DefaultName { get { return "dull copper ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Dull Copper Ingot");
 		}
 	}	
 }

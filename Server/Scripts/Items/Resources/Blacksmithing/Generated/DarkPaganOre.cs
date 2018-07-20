@@ -6,7 +6,10 @@ namespace Server.Items {
 		public DarkPaganOre() : this( 1 ) {}
 
 		[Constructable]
-		public DarkPaganOre( int amount ) : base( CraftResource.DarkPagan, amount ) {}
+		public DarkPaganOre( int amount ) : base( CraftResource.DarkPagan, amount ) {
+			this.Name = "dark pagan ore";
+			this.Hue = 0x46b;
+		}
 
 		public DarkPaganOre( Serial serial ) : base( serial ) {}
 

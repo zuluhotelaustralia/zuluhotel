@@ -6,7 +6,10 @@ namespace Server.Items {
 		public MalachiteOre() : this( 1 ) {}
 
 		[Constructable]
-		public MalachiteOre( int amount ) : base( CraftResource.Malachite, amount ) {}
+		public MalachiteOre( int amount ) : base( CraftResource.Malachite, amount ) {
+			this.Name = "malachite ore";
+			this.Hue = 0x487;
+		}
 
 		public MalachiteOre( Serial serial ) : base( serial ) {}
 

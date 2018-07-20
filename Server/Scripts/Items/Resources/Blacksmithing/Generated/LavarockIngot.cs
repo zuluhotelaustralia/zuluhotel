@@ -7,11 +7,14 @@ namespace Server.Items {
 		public LavarockIngot() : this( 1 ) {}
 
 		[Constructable]
-		public LavarockIngot( int amount ) : base( CraftResource.Lavarock, amount ) {}
+		public LavarockIngot( int amount ) : base( CraftResource.Lavarock, amount ) {
+			this.Name = "lavarock ingot";
+			this.Hue = 0x486;
+		}
 
 		public LavarockIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Lavarock Ingot"; } }
+		public override string DefaultName { get { return "lavarock ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Lavarock Ingot");
 		}
 	}	
 }

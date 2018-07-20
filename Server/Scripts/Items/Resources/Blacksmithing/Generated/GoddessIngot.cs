@@ -7,11 +7,14 @@ namespace Server.Items {
 		public GoddessIngot() : this( 1 ) {}
 
 		[Constructable]
-		public GoddessIngot( int amount ) : base( CraftResource.Goddess, amount ) {}
+		public GoddessIngot( int amount ) : base( CraftResource.Goddess, amount ) {
+			this.Name = "goddess ingot";
+			this.Hue = 0x501;
+		}
 
 		public GoddessIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Goddess Ingot"; } }
+		public override string DefaultName { get { return "goddess ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Goddess Ingot");
 		}
 	}	
 }

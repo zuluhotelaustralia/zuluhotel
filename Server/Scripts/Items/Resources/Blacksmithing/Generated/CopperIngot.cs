@@ -7,11 +7,14 @@ namespace Server.Items {
 		public CopperIngot() : this( 1 ) {}
 
 		[Constructable]
-		public CopperIngot( int amount ) : base( CraftResource.Copper, amount ) {}
+		public CopperIngot( int amount ) : base( CraftResource.Copper, amount ) {
+			this.Name = "copper ingot";
+			this.Hue = 0x602;
+		}
 
 		public CopperIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Copper Ingot"; } }
+		public override string DefaultName { get { return "copper ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Copper Ingot");
 		}
 	}	
 }

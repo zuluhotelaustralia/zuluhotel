@@ -7,11 +7,14 @@ namespace Server.Items {
 		public SpikeIngot() : this( 1 ) {}
 
 		[Constructable]
-		public SpikeIngot( int amount ) : base( CraftResource.Spike, amount ) {}
+		public SpikeIngot( int amount ) : base( CraftResource.Spike, amount ) {
+			this.Name = "spike ingot";
+			this.Hue = 0x4c7;
+		}
 
 		public SpikeIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Spike Ingot"; } }
+		public override string DefaultName { get { return "spike ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Spike Ingot");
 		}
 	}	
 }

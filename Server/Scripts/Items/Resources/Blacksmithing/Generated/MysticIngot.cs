@@ -7,11 +7,14 @@ namespace Server.Items {
 		public MysticIngot() : this( 1 ) {}
 
 		[Constructable]
-		public MysticIngot( int amount ) : base( CraftResource.Mystic, amount ) {}
+		public MysticIngot( int amount ) : base( CraftResource.Mystic, amount ) {
+			this.Name = "mystic ingot";
+			this.Hue = 0x17f;
+		}
 
 		public MysticIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Mystic Ingot"; } }
+		public override string DefaultName { get { return "mystic ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Mystic Ingot");
 		}
 	}	
 }

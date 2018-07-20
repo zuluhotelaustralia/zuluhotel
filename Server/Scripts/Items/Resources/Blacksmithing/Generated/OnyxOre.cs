@@ -6,7 +6,10 @@ namespace Server.Items {
 		public OnyxOre() : this( 1 ) {}
 
 		[Constructable]
-		public OnyxOre( int amount ) : base( CraftResource.Onyx, amount ) {}
+		public OnyxOre( int amount ) : base( CraftResource.Onyx, amount ) {
+			this.Name = "onyx ore";
+			this.Hue = 0x455;
+		}
 
 		public OnyxOre( Serial serial ) : base( serial ) {}
 

@@ -6,7 +6,10 @@ namespace Server.Items {
 		public VirginityOre() : this( 1 ) {}
 
 		[Constructable]
-		public VirginityOre( int amount ) : base( CraftResource.Virginity, amount ) {}
+		public VirginityOre( int amount ) : base( CraftResource.Virginity, amount ) {
+			this.Name = "virginity ore";
+			this.Hue = 0x482;
+		}
 
 		public VirginityOre( Serial serial ) : base( serial ) {}
 

@@ -7,11 +7,14 @@ namespace Server.Items {
 		public DarkSableRubyIngot() : this( 1 ) {}
 
 		[Constructable]
-		public DarkSableRubyIngot( int amount ) : base( CraftResource.DarkSableRuby, amount ) {}
+		public DarkSableRubyIngot( int amount ) : base( CraftResource.DarkSableRuby, amount ) {
+			this.Name = "dark sable ruby ingot";
+			this.Hue = 0x494;
+		}
 
 		public DarkSableRubyIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Dark Sable Ruby Ingot"; } }
+		public override string DefaultName { get { return "dark sable ruby ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Dark Sable Ruby Ingot");
 		}
 	}	
 }

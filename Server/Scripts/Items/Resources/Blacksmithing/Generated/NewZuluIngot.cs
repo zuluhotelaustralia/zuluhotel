@@ -7,11 +7,14 @@ namespace Server.Items {
 		public NewZuluIngot() : this( 1 ) {}
 
 		[Constructable]
-		public NewZuluIngot( int amount ) : base( CraftResource.NewZulu, amount ) {}
+		public NewZuluIngot( int amount ) : base( CraftResource.NewZulu, amount ) {
+			this.Name = "new zulu ingot";
+			this.Hue = 0x488;
+		}
 
 		public NewZuluIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "New Zulu Ingot"; } }
+		public override string DefaultName { get { return "new zulu ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("New Zulu Ingot");
 		}
 	}	
 }

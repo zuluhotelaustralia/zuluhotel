@@ -7,11 +7,14 @@ namespace Server.Items {
 		public IceRockIngot() : this( 1 ) {}
 
 		[Constructable]
-		public IceRockIngot( int amount ) : base( CraftResource.IceRock, amount ) {}
+		public IceRockIngot( int amount ) : base( CraftResource.IceRock, amount ) {
+			this.Name = "ice rock ingot";
+			this.Hue = 0x480;
+		}
 
 		public IceRockIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Ice Rock Ingot"; } }
+		public override string DefaultName { get { return "ice rock ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Ice Rock Ingot");
 		}
 	}	
 }

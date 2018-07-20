@@ -7,11 +7,14 @@ namespace Server.Items {
 		public RedElvenIngot() : this( 1 ) {}
 
 		[Constructable]
-		public RedElvenIngot( int amount ) : base( CraftResource.RedElven, amount ) {}
+		public RedElvenIngot( int amount ) : base( CraftResource.RedElven, amount ) {
+			this.Name = "red elven ingot";
+			this.Hue = 0x4b9;
+		}
 
 		public RedElvenIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Red Elven Ingot"; } }
+		public override string DefaultName { get { return "red elven ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Red Elven Ingot");
 		}
 	}	
 }

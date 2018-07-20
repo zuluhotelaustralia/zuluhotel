@@ -7,11 +7,14 @@ namespace Server.Items {
 		public UndeadIngot() : this( 1 ) {}
 
 		[Constructable]
-		public UndeadIngot( int amount ) : base( CraftResource.Undead, amount ) {}
+		public UndeadIngot( int amount ) : base( CraftResource.Undead, amount ) {
+			this.Name = "undead ingot";
+			this.Hue = 0x279;
+		}
 
 		public UndeadIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Undead Ingot"; } }
+		public override string DefaultName { get { return "undead ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Undead Ingot");
 		}
 	}	
 }

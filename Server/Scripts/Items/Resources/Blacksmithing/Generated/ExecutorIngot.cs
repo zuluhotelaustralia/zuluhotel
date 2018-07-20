@@ -7,11 +7,14 @@ namespace Server.Items {
 		public ExecutorIngot() : this( 1 ) {}
 
 		[Constructable]
-		public ExecutorIngot( int amount ) : base( CraftResource.Executor, amount ) {}
+		public ExecutorIngot( int amount ) : base( CraftResource.Executor, amount ) {
+			this.Name = "executor ingot";
+			this.Hue = 0x499;
+		}
 
 		public ExecutorIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Executor Ingot"; } }
+		public override string DefaultName { get { return "executor ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Executor Ingot");
 		}
 	}	
 }

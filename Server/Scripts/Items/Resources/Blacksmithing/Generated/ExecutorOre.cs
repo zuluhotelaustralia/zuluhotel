@@ -6,7 +6,10 @@ namespace Server.Items {
 		public ExecutorOre() : this( 1 ) {}
 
 		[Constructable]
-		public ExecutorOre( int amount ) : base( CraftResource.Executor, amount ) {}
+		public ExecutorOre( int amount ) : base( CraftResource.Executor, amount ) {
+			this.Name = "executor ore";
+			this.Hue = 0x499;
+		}
 
 		public ExecutorOre( Serial serial ) : base( serial ) {}
 

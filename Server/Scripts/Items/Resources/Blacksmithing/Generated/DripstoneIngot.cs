@@ -7,11 +7,14 @@ namespace Server.Items {
 		public DripstoneIngot() : this( 1 ) {}
 
 		[Constructable]
-		public DripstoneIngot( int amount ) : base( CraftResource.Dripstone, amount ) {}
+		public DripstoneIngot( int amount ) : base( CraftResource.Dripstone, amount ) {
+			this.Name = "dripstone ingot";
+			this.Hue = 0x49e;
+		}
 
 		public DripstoneIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Dripstone Ingot"; } }
+		public override string DefaultName { get { return "dripstone ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Dripstone Ingot");
 		}
 	}	
 }

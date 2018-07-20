@@ -6,7 +6,10 @@ namespace Server.Items {
 		public PyriteOre() : this( 1 ) {}
 
 		[Constructable]
-		public PyriteOre( int amount ) : base( CraftResource.Pyrite, amount ) {}
+		public PyriteOre( int amount ) : base( CraftResource.Pyrite, amount ) {
+			this.Name = "pyrite ore";
+			this.Hue = 0x6b8;
+		}
 
 		public PyriteOre( Serial serial ) : base( serial ) {}
 

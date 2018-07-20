@@ -6,7 +6,10 @@ namespace Server.Items {
 		public SpikeOre() : this( 1 ) {}
 
 		[Constructable]
-		public SpikeOre( int amount ) : base( CraftResource.Spike, amount ) {}
+		public SpikeOre( int amount ) : base( CraftResource.Spike, amount ) {
+			this.Name = "spike ore";
+			this.Hue = 0x4c7;
+		}
 
 		public SpikeOre( Serial serial ) : base( serial ) {}
 

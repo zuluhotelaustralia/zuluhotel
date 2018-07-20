@@ -7,11 +7,14 @@ namespace Server.Items {
 		public AnraIngot() : this( 1 ) {}
 
 		[Constructable]
-		public AnraIngot( int amount ) : base( CraftResource.Anra, amount ) {}
+		public AnraIngot( int amount ) : base( CraftResource.Anra, amount ) {
+			this.Name = "anra ingot";
+			this.Hue = 0x48b;
+		}
 
 		public AnraIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Anra Ingot"; } }
+		public override string DefaultName { get { return "anra ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Anra Ingot");
 		}
 	}	
 }

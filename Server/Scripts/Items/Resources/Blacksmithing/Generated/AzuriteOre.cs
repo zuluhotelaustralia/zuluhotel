@@ -6,7 +6,10 @@ namespace Server.Items {
 		public AzuriteOre() : this( 1 ) {}
 
 		[Constructable]
-		public AzuriteOre( int amount ) : base( CraftResource.Azurite, amount ) {}
+		public AzuriteOre( int amount ) : base( CraftResource.Azurite, amount ) {
+			this.Name = "azurite ore";
+			this.Hue = 0x4df;
+		}
 
 		public AzuriteOre( Serial serial ) : base( serial ) {}
 

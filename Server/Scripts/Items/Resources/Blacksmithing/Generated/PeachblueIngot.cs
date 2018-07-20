@@ -7,11 +7,14 @@ namespace Server.Items {
 		public PeachblueIngot() : this( 1 ) {}
 
 		[Constructable]
-		public PeachblueIngot( int amount ) : base( CraftResource.Peachblue, amount ) {}
+		public PeachblueIngot( int amount ) : base( CraftResource.Peachblue, amount ) {
+			this.Name = "peachblue ingot";
+			this.Hue = 0x49c;
+		}
 
 		public PeachblueIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Peachblue Ingot"; } }
+		public override string DefaultName { get { return "peachblue ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Peachblue Ingot");
 		}
 	}	
 }

@@ -7,11 +7,14 @@ namespace Server.Items {
 		public VirginityIngot() : this( 1 ) {}
 
 		[Constructable]
-		public VirginityIngot( int amount ) : base( CraftResource.Virginity, amount ) {}
+		public VirginityIngot( int amount ) : base( CraftResource.Virginity, amount ) {
+			this.Name = "virginity ingot";
+			this.Hue = 0x482;
+		}
 
 		public VirginityIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Virginity Ingot"; } }
+		public override string DefaultName { get { return "virginity ingot"; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
@@ -21,10 +24,6 @@ namespace Server.Items {
 		public override void Deserialize( GenericReader reader ) {
 			base.Deserialize( reader );
 			int version = reader.ReadInt();
-		}
-
-		public override void OnSingleClick( Mobile from ) {
-			from.SendMessage("Virginity Ingot");
 		}
 	}	
 }

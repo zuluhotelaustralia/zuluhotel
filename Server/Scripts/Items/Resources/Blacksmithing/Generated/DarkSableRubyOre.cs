@@ -6,7 +6,10 @@ namespace Server.Items {
 		public DarkSableRubyOre() : this( 1 ) {}
 
 		[Constructable]
-		public DarkSableRubyOre( int amount ) : base( CraftResource.DarkSableRuby, amount ) {}
+		public DarkSableRubyOre( int amount ) : base( CraftResource.DarkSableRuby, amount ) {
+			this.Name = "dark sable ruby ore";
+			this.Hue = 0x494;
+		}
 
 		public DarkSableRubyOre( Serial serial ) : base( serial ) {}
 
