@@ -1617,6 +1617,8 @@ namespace Server.Items
 			if ( makersMark )
 				Crafter = from;
 
+			//resource type appears to set the hue
+			//make it also set a quality multiplier on AR and whatever else is req'd
 			Type resourceType = typeRes;
 
 			if ( resourceType == null )

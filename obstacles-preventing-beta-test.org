@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [63/65]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [63/67]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -58,7 +58,9 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE add looping check in GatherTimer
 ** TODO play the animations/soundfx
 ** DONE resource hues
-** TODO resource properties
+** TODO resource properties (quality multiplier for AR or damage)
+** TODO resource hues and properties propagate to crafted items
+*** TODO anything ICraftable should be able to accept a hue, would be easy to make it accept a quality multiplier also
 ** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
 *** DONE remove special log and board classes
 *** DONE mkdir Generated/

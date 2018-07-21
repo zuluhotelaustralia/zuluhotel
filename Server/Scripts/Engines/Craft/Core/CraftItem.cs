@@ -1188,6 +1188,14 @@ namespace Server.Engines.Craft
 
 		if ( item != null )
 		{
+		    //this would be where we correct the code to properly grab the resource hue and amend the name.
+		    //   (took me almost 3 hours to decipher this un-commented dumpster fire of spaghetti code)
+		    // we are going to need a property on every resource that's just the name, i.e. "anra", in lower case
+		    // so that we can prepend it to the item name, i.e. "anra plate helm".  I'd consider doing it with clilocs
+		    // but fuck it, bandwidth is cheap and we have beefy servers; we'd need every permutation in the clilocs or else
+		    // we'd have to create new cliloc entries with prefix names i.e. "anra" and "stormteal"
+		    // --sith
+		  
 		    if( item is ICraftable )
 			endquality = ((ICraftable)item).OnCraft( quality, makersMark, from, craftSystem, typeRes, tool, this, resHue );
 		    else if ( item.Hue == 0 )
