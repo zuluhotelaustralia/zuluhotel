@@ -4,91 +4,91 @@ using System.Collections.Generic;
 namespace Server.Items
 {
     public enum CraftResource
-    {
-	None = 0,
+	{
+	    None = 0,
 
-	Iron,
-	Gold,
-	Spike,
-	Fruity,
-	Bronze,
-	IceRock,
-	BlackDwarf,
-	DullCopper,
-	Platinum,
-	SilverRock,
-	DarkPagan,
-	Copper,
-	Mystic,
-	Spectral,
-	OldBritain,
-	Onyx,
-	RedElven,
-	Undead,
-	Pyrite,
-	Virginity,
-	Malachite,
-	Lavarock,
-	Azurite,
-	Dripstone,
-	Executor,
-	Peachblue,
-	Destruction,
-	Anra,
-	Crystal,
-	Doom,
-	Goddess,
-	NewZulu,
-	DarkSableRuby,
-	EbonTwilightSapphire,
-	RadiantNimbusDiamond,
+	    Iron,
+	    Gold,
+	    Spike,
+	    Fruity,
+	    Bronze,
+	    IceRock,
+	    BlackDwarf,
+	    DullCopper,
+	    Platinum,
+	    SilverRock,
+	    DarkPagan,
+	    Copper,
+	    Mystic,
+	    Spectral,
+	    OldBritain,
+	    Onyx,
+	    RedElven,
+	    Undead,
+	    Pyrite,
+	    Virginity,
+	    Malachite,
+	    Lavarock,
+	    Azurite,
+	    Dripstone,
+	    Executor,
+	    Peachblue,
+	    Destruction,
+	    Anra,
+	    Crystal,
+	    Doom,
+	    Goddess,
+	    NewZulu,
+	    DarkSableRuby,
+	    EbonTwilightSapphire,
+	    RadiantNimbusDiamond,
 
-	RegularLeather = 101,
-	SpinedLeather,
-	HornedLeather,
-	BarbedLeather,
+	    RegularLeather = 101,
+	    SpinedLeather,
+	    HornedLeather,
+	    BarbedLeather,
 
-	RedScales = 201,
-	YellowScales,
-	BlackScales,
-	GreenScales,
-	WhiteScales,
-	BlueScales,
+	    RedScales = 201,
+	    YellowScales,
+	    BlackScales,
+	    GreenScales,
+	    WhiteScales,
+	    BlueScales,
 
-	RegularWood = 301,
-	Pinetree,
-	Cherry,
-	Oak,
-	PurplePassion,
-	GoldenReflection,
-	Hardranger,
-	Jadewood,
-	Darkwood,
-	Stonewood,
-	Sunwood,
-	Gauntlet,
-	Swampwood,
-	Stardust,
-	Silverleaf,
-	Stormteal,
-	Emeraldwood,
-	Bloodwood,
-	Crystalwood,
-	Bloodhorse,
-	Doomwood,
-	Zulu,
-	Darkness,
-	Elven
-    }
+	    RegularWood = 301,
+	    Pinetree,
+	    Cherry,
+	    Oak,
+	    PurplePassion,
+	    GoldenReflection,
+	    Hardranger,
+	    Jadewood,
+	    Darkwood,
+	    Stonewood,
+	    Sunwood,
+	    Gauntlet,
+	    Swampwood,
+	    Stardust,
+	    Silverleaf,
+	    Stormteal,
+	    Emeraldwood,
+	    Bloodwood,
+	    Crystalwood,
+	    Bloodhorse,
+	    Doomwood,
+	    Zulu,
+	    Darkness,
+	    Elven
+	}
 
     public enum CraftResourceType
-    {
-	None,
-	Metal,
-	Leather,
-	Scales,
-	Wood
-    }
+	{
+	    None,
+	    Metal,
+	    Leather,
+	    Scales,
+	    Wood
+	}
 
     public class CraftAttributeInfo
     {
@@ -988,76 +988,41 @@ namespace Server.Items
     {
 	private static CraftResourceInfo[] m_MetalInfo = new CraftResourceInfo[]
 	    {
-		new CraftResourceInfo( 0x0, 1053109, "Iron", CraftAttributeInfo.Blank, CraftResource.Iron, typeof( IronIngot ), typeof( IronOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Gold", CraftAttributeInfo.Gold, CraftResource.Gold, typeof( GoldIngot ), typeof( GoldOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Spike", CraftAttributeInfo.Spike, CraftResource.Spike, typeof( SpikeIngot ), typeof( SpikeOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Fruity", CraftAttributeInfo.Fruity, CraftResource.Fruity, typeof( FruityIngot ), typeof( FruityOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Bronze", CraftAttributeInfo.Bronze, CraftResource.Bronze, typeof( BronzeIngot ), typeof( BronzeOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "IceRock", CraftAttributeInfo.IceRock, CraftResource.IceRock, typeof( IceRockIngot ), typeof( IceRockOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "BlackDwarf", CraftAttributeInfo.BlackDwarf, CraftResource.BlackDwarf, typeof( BlackDwarfIngot ), typeof( BlackDwarfOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "DullCopper", CraftAttributeInfo.DullCopper, CraftResource.DullCopper, typeof( DullCopperIngot ), typeof( DullCopperOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Platinum", CraftAttributeInfo.Platinum, CraftResource.Platinum, typeof( PlatinumIngot ), typeof( PlatinumOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "SilverRock", CraftAttributeInfo.SilverRock, CraftResource.SilverRock, typeof( SilverRockIngot ), typeof( SilverRockOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "DarkPagan", CraftAttributeInfo.DarkPagan, CraftResource.DarkPagan, typeof( DarkPaganIngot ), typeof( DarkPaganOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Copper", CraftAttributeInfo.Copper, CraftResource.Copper, typeof( CopperIngot ), typeof( CopperOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Mystic", CraftAttributeInfo.Mystic, CraftResource.Mystic, typeof( MysticIngot ), typeof( MysticOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Spectral", CraftAttributeInfo.Spectral, CraftResource.Spectral, typeof( SpectralIngot ), typeof( SpectralOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "OldBritain", CraftAttributeInfo.OldBritain, CraftResource.OldBritain, typeof( OldBritainIngot ), typeof( OldBritainOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Onyx", CraftAttributeInfo.Onyx, CraftResource.Onyx, typeof( OnyxIngot ), typeof( OnyxOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "RedElven", CraftAttributeInfo.RedElven, CraftResource.RedElven, typeof( RedElvenIngot ), typeof( RedElvenOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Undead", CraftAttributeInfo.Undead, CraftResource.Undead, typeof( UndeadIngot ), typeof( UndeadOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Pyrite", CraftAttributeInfo.Pyrite, CraftResource.Pyrite, typeof( PyriteIngot ), typeof( PyriteOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Virginity", CraftAttributeInfo.Virginity, CraftResource.Virginity, typeof( VirginityIngot ), typeof( VirginityOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Malachite", CraftAttributeInfo.Malachite, CraftResource.Malachite, typeof( MalachiteIngot ), typeof( MalachiteOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Lavarock", CraftAttributeInfo.Lavarock, CraftResource.Lavarock, typeof( LavarockIngot ), typeof( LavarockOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Azurite", CraftAttributeInfo.Azurite, CraftResource.Azurite, typeof( AzuriteIngot ), typeof( AzuriteOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Dripstone", CraftAttributeInfo.Dripstone, CraftResource.Dripstone, typeof( DripstoneIngot ), typeof( DripstoneOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Executor", CraftAttributeInfo.Executor, CraftResource.Executor, typeof( ExecutorIngot ), typeof( ExecutorOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Peachblue", CraftAttributeInfo.Peachblue, CraftResource.Peachblue, typeof( PeachblueIngot ), typeof( PeachblueOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Destruction", CraftAttributeInfo.Destruction, CraftResource.Destruction, typeof( DestructionIngot ), typeof( DestructionOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Anra", CraftAttributeInfo.Anra, CraftResource.Anra, typeof( AnraIngot ), typeof( AnraOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Crystal", CraftAttributeInfo.Crystal, CraftResource.Crystal, typeof( CrystalIngot ), typeof( CrystalOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Doom", CraftAttributeInfo.Doom, CraftResource.Doom, typeof( DoomIngot ), typeof( DoomOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "Goddess", CraftAttributeInfo.Goddess, CraftResource.Goddess, typeof( GoddessIngot ), typeof( GoddessOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "NewZulu", CraftAttributeInfo.NewZulu, CraftResource.NewZulu, typeof( NewZuluIngot ), typeof( NewZuluOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "DarkSableRuby", CraftAttributeInfo.DarkSableRuby, CraftResource.DarkSableRuby, typeof( DarkSableRubyIngot ), typeof( DarkSableRubyOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "EbonTwilightSapphire", CraftAttributeInfo.EbonTwilightSapphire, CraftResource.EbonTwilightSapphire, typeof( EbonTwilightSapphireIngot ), typeof( EbonTwilightSapphireOre ), typeof( Granite ) ),
-
-		new CraftResourceInfo( 0x0, 1053109, "RadiantNimbusDiamond", CraftAttributeInfo.RadiantNimbusDiamond, CraftResource.RadiantNimbusDiamond, typeof( RadiantNimbusDiamondIngot ), typeof( RadiantNimbusDiamondOre ), typeof( Granite ) ),
-
+		new CraftResourceInfo( 0x0, 10513109, "iron", CraftAttributeInfo.Iron, CraftResource.Iron, typeof( IronIngot ), typeof( IronOre), typeof( IronGranite ) ),
+		new CraftResourceInfo( 0x885, 10513109, "gold", CraftAttributeInfo.Gold, CraftResource.Gold, typeof( GoldIngot ), typeof( GoldOre), typeof( GoldGranite ) ),
+		new CraftResourceInfo( 0x4c7, 10513109, "spike", CraftAttributeInfo.Spike, CraftResource.Spike, typeof( SpikeIngot ), typeof( SpikeOre), typeof( SpikeGranite ) ),
+		new CraftResourceInfo( 0x46e, 10513109, "fruity", CraftAttributeInfo.Fruity, CraftResource.Fruity, typeof( FruityIngot ), typeof( FruityOre), typeof( FruityGranite ) ),
+		new CraftResourceInfo( 0x45e, 10513109, "bronze", CraftAttributeInfo.Bronze, CraftResource.Bronze, typeof( BronzeIngot ), typeof( BronzeOre), typeof( BronzeGranite ) ),
+		new CraftResourceInfo( 0x480, 10513109, "ice rock", CraftAttributeInfo.IceRock, CraftResource.IceRock, typeof( IceRockIngot ), typeof( IceRockOre), typeof( IceRockGranite ) ),
+		new CraftResourceInfo( 0x451, 10513109, "black dwarf", CraftAttributeInfo.BlackDwarf, CraftResource.BlackDwarf, typeof( BlackDwarfIngot ), typeof( BlackDwarfOre), typeof( BlackDwarfGranite ) ),
+		new CraftResourceInfo( 0x3ea, 10513109, "dull copper", CraftAttributeInfo.DullCopper, CraftResource.DullCopper, typeof( DullCopperIngot ), typeof( DullCopperOre), typeof( DullCopperGranite ) ),
+		new CraftResourceInfo( 0x457, 10513109, "platinum", CraftAttributeInfo.Platinum, CraftResource.Platinum, typeof( PlatinumIngot ), typeof( PlatinumOre), typeof( PlatinumGranite ) ),
+		new CraftResourceInfo( 0x3e9, 10513109, "silver rock", CraftAttributeInfo.SilverRock, CraftResource.SilverRock, typeof( SilverRockIngot ), typeof( SilverRockOre), typeof( SilverRockGranite ) ),
+		new CraftResourceInfo( 0x46b, 10513109, "dark pagan", CraftAttributeInfo.DarkPagan, CraftResource.DarkPagan, typeof( DarkPaganIngot ), typeof( DarkPaganOre), typeof( DarkPaganGranite ) ),
+		new CraftResourceInfo( 0x602, 10513109, "copper", CraftAttributeInfo.Copper, CraftResource.Copper, typeof( CopperIngot ), typeof( CopperOre), typeof( CopperGranite ) ),
+		new CraftResourceInfo( 0x17f, 10513109, "mystic", CraftAttributeInfo.Mystic, CraftResource.Mystic, typeof( MysticIngot ), typeof( MysticOre), typeof( MysticGranite ) ),
+		new CraftResourceInfo( 0x483, 10513109, "spectral", CraftAttributeInfo.Spectral, CraftResource.Spectral, typeof( SpectralIngot ), typeof( SpectralOre), typeof( SpectralGranite ) ),
+		new CraftResourceInfo( 0x852, 10513109, "old britain", CraftAttributeInfo.OldBritain, CraftResource.OldBritain, typeof( OldBritainIngot ), typeof( OldBritainOre), typeof( OldBritainGranite ) ),
+		new CraftResourceInfo( 0x455, 10513109, "onyx", CraftAttributeInfo.Onyx, CraftResource.Onyx, typeof( OnyxIngot ), typeof( OnyxOre), typeof( OnyxGranite ) ),
+		new CraftResourceInfo( 0x4b9, 10513109, "red elven", CraftAttributeInfo.RedElven, CraftResource.RedElven, typeof( RedElvenIngot ), typeof( RedElvenOre), typeof( RedElvenGranite ) ),
+		new CraftResourceInfo( 0x279, 10513109, "undead", CraftAttributeInfo.Undead, CraftResource.Undead, typeof( UndeadIngot ), typeof( UndeadOre), typeof( UndeadGranite ) ),
+		new CraftResourceInfo( 0x6b8, 10513109, "pyrite", CraftAttributeInfo.Pyrite, CraftResource.Pyrite, typeof( PyriteIngot ), typeof( PyriteOre), typeof( PyriteGranite ) ),
+		new CraftResourceInfo( 0x482, 10513109, "virginity", CraftAttributeInfo.Virginity, CraftResource.Virginity, typeof( VirginityIngot ), typeof( VirginityOre), typeof( VirginityGranite ) ),
+		new CraftResourceInfo( 0x487, 10513109, "malachite", CraftAttributeInfo.Malachite, CraftResource.Malachite, typeof( MalachiteIngot ), typeof( MalachiteOre), typeof( MalachiteGranite ) ),
+		new CraftResourceInfo( 0x486, 10513109, "lavarock", CraftAttributeInfo.Lavarock, CraftResource.Lavarock, typeof( LavarockIngot ), typeof( LavarockOre), typeof( LavarockGranite ) ),
+		new CraftResourceInfo( 0x4df, 10513109, "azurite", CraftAttributeInfo.Azurite, CraftResource.Azurite, typeof( AzuriteIngot ), typeof( AzuriteOre), typeof( AzuriteGranite ) ),
+		new CraftResourceInfo( 0x49e, 10513109, "dripstone", CraftAttributeInfo.Dripstone, CraftResource.Dripstone, typeof( DripstoneIngot ), typeof( DripstoneOre), typeof( DripstoneGranite ) ),
+		new CraftResourceInfo( 0x499, 10513109, "executor", CraftAttributeInfo.Executor, CraftResource.Executor, typeof( ExecutorIngot ), typeof( ExecutorOre), typeof( ExecutorGranite ) ),
+		new CraftResourceInfo( 0x49c, 10513109, "peachblue", CraftAttributeInfo.Peachblue, CraftResource.Peachblue, typeof( PeachblueIngot ), typeof( PeachblueOre), typeof( PeachblueGranite ) ),
+		new CraftResourceInfo( 0x500, 10513109, "destruction", CraftAttributeInfo.Destruction, CraftResource.Destruction, typeof( DestructionIngot ), typeof( DestructionOre), typeof( DestructionGranite ) ),
+		new CraftResourceInfo( 0x48b, 10513109, "anra", CraftAttributeInfo.Anra, CraftResource.Anra, typeof( AnraIngot ), typeof( AnraOre), typeof( AnraGranite ) ),
+		new CraftResourceInfo( 0x492, 10513109, "crystal", CraftAttributeInfo.Crystal, CraftResource.Crystal, typeof( CrystalIngot ), typeof( CrystalOre), typeof( CrystalGranite ) ),
+		new CraftResourceInfo( 0x49f, 10513109, "doom", CraftAttributeInfo.Doom, CraftResource.Doom, typeof( DoomIngot ), typeof( DoomOre), typeof( DoomGranite ) ),
+		new CraftResourceInfo( 0x501, 10513109, "goddess", CraftAttributeInfo.Goddess, CraftResource.Goddess, typeof( GoddessIngot ), typeof( GoddessOre), typeof( GoddessGranite ) ),
+		new CraftResourceInfo( 0x488, 10513109, "new zulu", CraftAttributeInfo.NewZulu, CraftResource.NewZulu, typeof( NewZuluIngot ), typeof( NewZuluOre), typeof( NewZuluGranite ) ),
+		new CraftResourceInfo( 0x493, 10513109, "ebon twilight sapphire", CraftAttributeInfo.EbonTwilightSapphire, CraftResource.EbonTwilightSapphire, typeof( EbonTwilightSapphireIngot ), typeof( EbonTwilightSapphireOre), typeof( EbonTwilightSapphireGranite ) ),
+		new CraftResourceInfo( 0x494, 10513109, "dark sable ruby", CraftAttributeInfo.DarkSableRuby, CraftResource.DarkSableRuby, typeof( DarkSableRubyIngot ), typeof( DarkSableRubyOre), typeof( DarkSableRubyGranite ) ),
+		new CraftResourceInfo( 0x498, 10513109, "radiant nimbus diamond", CraftAttributeInfo.RadiantNimbusDiamond, CraftResource.RadiantNimbusDiamond, typeof( RadiantNimbusDiamondIngot ), typeof( RadiantNimbusDiamondOre), typeof( RadiantNimbusDiamondGranite ) ),
 	    };
 
 	private static CraftResourceInfo[] m_ScaleInfo = new CraftResourceInfo[]

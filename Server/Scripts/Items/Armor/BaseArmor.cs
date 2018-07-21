@@ -255,7 +255,7 @@ namespace Server.Items
 					{
 						Hue = CraftResources.GetHue(m_Resource);
 					}
-
+					
 					Invalidate();
 					InvalidateProperties();
 
