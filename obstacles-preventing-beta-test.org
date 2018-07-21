@@ -59,8 +59,9 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO play the animations/soundfx
 ** DONE resource hues
 ** TODO resource properties (quality multiplier for AR or damage)
-** TODO resource hues and properties propagate to crafted items
-*** TODO anything ICraftable should be able to accept a hue, would be easy to make it accept a quality multiplier also
+** TODO resource hues, names, and properties propagate to crafted items
+*** TODO finish BaseArmor:  needs name prefix, and armor rating, and possibly durability
+*** TODO change all appropriate ICraftables to take hue (see BaseArmor.OnCraft for example)
 ** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
 *** DONE remove special log and board classes
 *** DONE mkdir Generated/
