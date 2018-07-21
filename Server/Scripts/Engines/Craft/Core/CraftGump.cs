@@ -132,11 +132,15 @@ namespace Server.Engines.Craft
 
                 if ( from.Backpack != null )
                 {
+		    //
                     Item[] items = from.Backpack.FindItemsByType( resourceType, true );
 
                     for ( int i = 0; i < items.Length; ++i )
                         resourceCount += items[i].Amount;
                 }
+
+		//this is the button that lets you pick resources, I think
+		//truthfully I don't really know how gumps work very well  --sith
 
 		AddButton( 15, 362, 4005, 4007, GetButtonID( 6, 0 ), GumpButtonType.Reply, 0 );
 
@@ -197,6 +201,7 @@ namespace Server.Engines.Craft
 
 	public void CreateResList( bool opt, Mobile from )
 	{
+	    //"Craft Subresource Collection"
 	    CraftSubResCol res = ( opt ? m_CraftSystem.CraftSubRes2 : m_CraftSystem.CraftSubRes );
 
 	    for ( int i = 0; i < res.Count; ++i )
