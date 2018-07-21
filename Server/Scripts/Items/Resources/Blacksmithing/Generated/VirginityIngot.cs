@@ -15,6 +15,8 @@ namespace Server.Items {
 		public VirginityIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "virginity ingot"; } }
+		public string ResourceName { get { return "virginity"; } }
+		public double ResourceQuality { get { return 1.25; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

@@ -15,6 +15,8 @@ namespace Server.Items {
 		public PyriteIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "pyrite ingot"; } }
+		public string ResourceName { get { return "pyrite"; } }
+		public double ResourceQuality { get { return 1.30; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

@@ -510,8 +510,8 @@ namespace Server.Engines.Craft
 
 	    // Add every material you want the player to be able to choose from
 	    // This will override the overridable material	TODO: Verify the required skill amount
-	    AddSubRes( typeof( Log ), 1072643, 00.0, 1044041, 1072652 );
-	    AddSubRes( typeof( PinetreeLog ), "Pinetree",   15 , 1072652 ); //Should these be e.g. "Pinetree Log" ?
+	   // AddSubRes( typeof( Log ), 1072643, 00.0, 1044041, 1072652 );
+	    AddSubRes( typeof( PinetreeLog ), "Pinetree",   15 , 1072652 );
 	    AddSubRes( typeof( CherryLog ), "Cherry",   28 , 1072652 );
 	    AddSubRes( typeof( OakLog ), "Oak",   39 , 1072652 );
 	    AddSubRes( typeof( PurplePassionLog ), "Purple Passion",   50 , 1072652 );

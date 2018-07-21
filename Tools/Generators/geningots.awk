@@ -21,6 +21,8 @@ function doGsubs(){
     resname = $2;
     trimmedres = $2;
     hue = $3;
+    quality = $5;
+    gsub(/ /, "", quality);
     gsub(/ /, "", hue);
     gsub(/ /, "", resname);
     gsub(/^[ \t]+/, "", trimmedres);
@@ -47,6 +49,8 @@ function doGsubs(){
     print "\t\tpublic "resname restype"( Serial serial ) : base( serial ) {}" > outfile;
     print "" > outfile;
     print "\t\tpublic override string DefaultName { get { return \""tolower(trimmedres) " " tolower(restype)"\"; } }" > outfile;
+    print "\t\tpublic string ResourceName { get { return \""tolower(trimmedres) "\"; } }" > outfile;
+    print "\t\tpublic double ResourceQuality { get { return "quality"; } }" > outfile;
     print "" > outfile;
     print "\t\tpublic override void Serialize( GenericWriter writer ) {" > outfile;
     print "\t\t\tbase.Serialize( writer );" > outfile;

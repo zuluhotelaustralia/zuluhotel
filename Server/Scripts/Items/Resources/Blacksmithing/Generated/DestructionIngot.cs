@@ -15,6 +15,8 @@ namespace Server.Items {
 		public DestructionIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "destruction ingot"; } }
+		public string ResourceName { get { return "destruction"; } }
+		public double ResourceQuality { get { return 1.70; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

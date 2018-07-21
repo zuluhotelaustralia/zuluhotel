@@ -15,6 +15,8 @@ namespace Server.Items {
 		public AnraIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "anra ingot"; } }
+		public string ResourceName { get { return "anra"; } }
+		public double ResourceQuality { get { return 1.80; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

@@ -15,6 +15,8 @@ namespace Server.Items {
 		public NewZuluIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "new zulu ingot"; } }
+		public string ResourceName { get { return "new zulu"; } }
+		public double ResourceQuality { get { return 2.00; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

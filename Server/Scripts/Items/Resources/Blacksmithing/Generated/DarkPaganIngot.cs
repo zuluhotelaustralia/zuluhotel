@@ -15,6 +15,8 @@ namespace Server.Items {
 		public DarkPaganIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "dark pagan ingot"; } }
+		public string ResourceName { get { return "dark pagan"; } }
+		public double ResourceQuality { get { return 1.15; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

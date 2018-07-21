@@ -15,6 +15,8 @@ namespace Server.Items {
 		public SpectralIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "spectral ingot"; } }
+		public string ResourceName { get { return "spectral"; } }
+		public double ResourceQuality { get { return 1.10; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

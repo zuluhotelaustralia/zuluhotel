@@ -15,6 +15,8 @@ namespace Server.Items {
 		public IceRockIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "ice rock ingot"; } }
+		public string ResourceName { get { return "ice rock"; } }
+		public double ResourceQuality { get { return 1.05; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );

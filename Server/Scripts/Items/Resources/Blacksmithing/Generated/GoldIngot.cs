@@ -15,6 +15,8 @@ namespace Server.Items {
 		public GoldIngot( Serial serial ) : base( serial ) {}
 
 		public override string DefaultName { get { return "gold ingot"; } }
+		public string ResourceName { get { return "gold"; } }
+		public double ResourceQuality { get { return 1.00; } }
 
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
