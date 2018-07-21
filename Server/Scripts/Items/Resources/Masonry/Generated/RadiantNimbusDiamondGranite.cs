@@ -10,6 +10,8 @@ namespace Server.Items {
 
 		public RadiantNimbusDiamondGranite( Serial serial ) : base( serial ) {}
 
+		public string ResourceName { get { return "radiant nimbus diamond"; } }
+
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

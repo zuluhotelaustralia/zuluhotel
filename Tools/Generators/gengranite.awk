@@ -42,6 +42,8 @@ function doGsubs(){
     print "" > outfile;
     print "\t\tpublic "resname"Granite( Serial serial ) : base( serial ) {}" > outfile;
     print "" > outfile;
+    print "\t\tpublic string ResourceName { get { return \""tolower(trimmedres)"\"; } }" > outfile;
+    print "" > outfile;
     print "\t\tpublic override void Serialize( GenericWriter writer ) {" > outfile;
     print "\t\t\tbase.Serialize( writer );" > outfile;
     print "\t\t\twriter.Write( (int) 0 ); // version" > outfile;

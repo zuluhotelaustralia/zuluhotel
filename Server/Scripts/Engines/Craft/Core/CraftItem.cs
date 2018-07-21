@@ -1188,12 +1188,20 @@ namespace Server.Engines.Craft
 
 		if ( item != null )
 		{
-		    //this would be where we correct the code to properly grab the resource hue and amend the name.
+		    //this could be where we correct the code to properly grab the resource hue and amend the name.
 		    //   (took me almost 3 hours to decipher this un-commented dumpster fire of spaghetti code)
+
+		    // perhaps would be better to edit every ICraftable, because BaseArmor has different requirements and "quality" logic than baseweapon
+		    // also consider changing "quality" to something else because we also call the "exceptional" mechanic "quality".
+		    // suggest "hardness" or something, but this can be for post-1.0 because I want to implement an SWG-style multi-dimensional resource
+		    // properties system with hardness, ductility, conductivity, etc.
+
 		    // we are going to need a property on every resource that's just the name, i.e. "anra", in lower case
 		    // so that we can prepend it to the item name, i.e. "anra plate helm".  I'd consider doing it with clilocs
 		    // but fuck it, bandwidth is cheap and we have beefy servers; we'd need every permutation in the clilocs or else
 		    // we'd have to create new cliloc entries with prefix names i.e. "anra" and "stormteal"
+
+		    // ( done on branch "crafting" @ 03cb34c3 for ingots ) 
 		    // --sith
 		  
 		    if( item is ICraftable )

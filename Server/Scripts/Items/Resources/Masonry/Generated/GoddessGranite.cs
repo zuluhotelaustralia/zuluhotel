@@ -10,6 +10,8 @@ namespace Server.Items {
 
 		public GoddessGranite( Serial serial ) : base( serial ) {}
 
+		public string ResourceName { get { return "goddess"; } }
+
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version
