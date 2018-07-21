@@ -11,6 +11,9 @@ namespace Server.Items {
 			this.Hue = 2301;
 		}
 
+		public string ResourceName { get { return "silver leaf"; } }
+		public double ResourceQuality { get { return 1.60; } }
+
 		public SilverleafBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

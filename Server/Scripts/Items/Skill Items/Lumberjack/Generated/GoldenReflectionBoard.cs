@@ -11,6 +11,9 @@ namespace Server.Items {
 			this.Hue = 48;
 		}
 
+		public string ResourceName { get { return "golden reflection"; } }
+		public double ResourceQuality { get { return 1.25; } }
+
 		public GoldenReflectionBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

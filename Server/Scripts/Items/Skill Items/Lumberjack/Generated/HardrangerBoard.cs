@@ -11,6 +11,9 @@ namespace Server.Items {
 			this.Hue = 1285;
 		}
 
+		public string ResourceName { get { return "hardranger"; } }
+		public double ResourceQuality { get { return 1.25; } }
+
 		public HardrangerBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

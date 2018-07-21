@@ -11,6 +11,9 @@ namespace Server.Items {
 			this.Hue = 1346;
 		}
 
+		public string ResourceName { get { return "stormteal"; } }
+		public double ResourceQuality { get { return 1.65; } }
+
 		public StormtealBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

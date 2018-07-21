@@ -11,6 +11,9 @@ namespace Server.Items {
 			this.Hue = 1183;
 		}
 
+		public string ResourceName { get { return "doom wood"; } }
+		public double ResourceQuality { get { return 1.90; } }
+
 		public DoomwoodBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {
