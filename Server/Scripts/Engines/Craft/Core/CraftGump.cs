@@ -430,7 +430,7 @@ namespace Server.Engines.Craft
 			if ( context == null )
 			    break;
 
-/			int groupIndex = context.LastGroupIndex;
+			int groupIndex = context.LastGroupIndex;
 
 			if ( groupIndex >= 0 && groupIndex < groups.Count )
 			{

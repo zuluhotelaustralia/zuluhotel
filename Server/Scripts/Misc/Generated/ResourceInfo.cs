@@ -988,7 +988,7 @@ namespace Server.Items
     {
 	private static CraftResourceInfo[] m_MetalInfo = new CraftResourceInfo[]
 	    {
-		new CraftResourceInfo( 0x0, 10513109, "iron", CraftAttributeInfo.Iron, CraftResource.Iron, typeof( IronIngot ), typeof( IronOre), typeof( IronGranite ) ),
+		new CraftResourceInfo( 0x0, 10513109, "iron", CraftAttributeInfo.Blank, CraftResource.Iron, typeof( IronIngot ), typeof( IronOre), typeof( Granite ) ),
 		new CraftResourceInfo( 0x885, 10513109, "gold", CraftAttributeInfo.Gold, CraftResource.Gold, typeof( GoldIngot ), typeof( GoldOre), typeof( GoldGranite ) ),
 		new CraftResourceInfo( 0x4c7, 10513109, "spike", CraftAttributeInfo.Spike, CraftResource.Spike, typeof( SpikeIngot ), typeof( SpikeOre), typeof( SpikeGranite ) ),
 		new CraftResourceInfo( 0x46e, 10513109, "fruity", CraftAttributeInfo.Fruity, CraftResource.Fruity, typeof( FruityIngot ), typeof( FruityOre), typeof( FruityGranite ) ),
