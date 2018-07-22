@@ -1199,7 +1199,7 @@ namespace Server.Engines.Craft
 		    // we are going to need a property on every resource that's just the name, i.e. "anra", in lower case
 		    // so that we can prepend it to the item name, i.e. "anra plate helm".  I'd consider doing it with clilocs
 		    // but fuck it, bandwidth is cheap and we have beefy servers; we'd need every permutation in the clilocs or else
-		    // we'd have to create new cliloc entries with prefix names i.e. "anra" and "stormteal"
+		    // we'd have to create new cliloc entries with prefix names i.e. "anra" and "stormteal" and then concatenate them
 
 		    // ( done on branch "crafting" @ 03cb34c3 for ingots ) 
 		    // --sith
