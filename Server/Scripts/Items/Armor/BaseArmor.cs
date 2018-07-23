@@ -1403,7 +1403,7 @@ namespace Server.Items
 		case CraftResource.Pyrite: oreType = 3020017; break;
 		case CraftResource.Virginity: oreType = 3020018; break;
 		case CraftResource.Malachite: oreType = 3020019; break;
-		case CraftResource.Lavarock: oreType = 30200200; break;
+		case CraftResource.Lavarock: oreType = 3020020; break;
 		case CraftResource.Azurite: oreType = 3020021; break;
 		case CraftResource.Dripstone: oreType = 3020022; break;
 		case CraftResource.Executor: oreType = 3020023; break;

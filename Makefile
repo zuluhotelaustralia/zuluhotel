@@ -12,7 +12,7 @@ run: release
 client: Client/Cliloc.enu
 
 Client/Cliloc.enu: Client/clilocs_enu.scm
-	guile -L uotools -c "(use-modules (uo cliloc)) (compile-clilocs (current-input-port) (current-output-port))" < $< > $@
+	guile -L Tools/uotools -c "(use-modules (uo cliloc)) (compile-clilocs (current-input-port) (current-output-port))" < $< > $@
 
 release:
 	$(RUNTIME) $(FRAMEWORK) $(CONFIGURATION) $(OUTPUTDIR)
