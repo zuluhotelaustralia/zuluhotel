@@ -78,12 +78,21 @@ namespace Server.Items
 	    }
 	}
 
-	public override void AddNameProperty( ObjectPropertyList list )
+	public override void AddNameProperty( ObjectPropertyList list ){
+	    int resourceCliloc = CraftResources.GetLocalizationNumber(m_Resource);
 	    
-	    
+	    if ( Amount > 1 ){
+		list.Add( 1160100, "{0}\t#{1}\t#{2}", Amount, resourceCliloc, 1160108 ); // 1160100 = ~1_amount~ ~2_resource~ ~3_name~, 1160104 = "granite"
+	    }
+	    else {
+		list.Add( 1160101, "#{0}\t#{1}", resourceCliloc, 1160108 ); // 1160101 = ~1_type~ ~2_name~
+	    }
+	}   
     }
+
     //TOGENERATE
     // no idea wtf this is for
+    // it's the Iron Ore of Granites
     public class Granite : BaseGranite
     {
 	[Constructable]
