@@ -76,7 +76,7 @@ namespace Server.Items
             if ( Amount > 1 )
                 list.Add( 1160100, "{0}\t#{1}\t#{2}", Amount, resourceCliloc, 1160103 );
             else
-                list.Add( 1160101, "#{0}\t#{1}", resourceCliloc 1160102 );
+                list.Add( 1160101, "#{0}\t#{1}", resourceCliloc, 1160102 );
 	}
 
 	public override void GetProperties( ObjectPropertyList list )
