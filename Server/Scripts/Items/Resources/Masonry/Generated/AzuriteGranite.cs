@@ -4,7 +4,6 @@ namespace Server.Items {
 	public class AzuriteGranite : BaseGranite {
 		[Constructable]
 		public AzuriteGranite() : base( CraftResource.Azurite ) {
-			this.Name = "azurite granite";
 			this.Hue = 0x4df;
 		}
 

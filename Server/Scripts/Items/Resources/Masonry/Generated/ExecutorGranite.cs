@@ -4,7 +4,6 @@ namespace Server.Items {
 	public class ExecutorGranite : BaseGranite {
 		[Constructable]
 		public ExecutorGranite() : base( CraftResource.Executor ) {
-			this.Name = "executor granite";
 			this.Hue = 0x499;
 		}
 

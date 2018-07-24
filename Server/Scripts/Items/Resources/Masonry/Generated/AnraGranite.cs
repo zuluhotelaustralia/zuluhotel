@@ -4,7 +4,6 @@ namespace Server.Items {
 	public class AnraGranite : BaseGranite {
 		[Constructable]
 		public AnraGranite() : base( CraftResource.Anra ) {
-			this.Name = "anra granite";
 			this.Hue = 0x48b;
 		}
 

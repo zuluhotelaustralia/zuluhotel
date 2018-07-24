@@ -4,7 +4,6 @@ namespace Server.Items {
 	public class MysticGranite : BaseGranite {
 		[Constructable]
 		public MysticGranite() : base( CraftResource.Mystic ) {
-			this.Name = "mystic granite";
 			this.Hue = 0x17f;
 		}
 
