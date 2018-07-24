@@ -18,7 +18,7 @@ namespace Server
 			AccountGold.ConvertOnTrade = false;
 			VirtualCheck.UseEditGump = true;
 
-			bool Enabled = Core.AOS;
+			bool Enabled = Core.T2A;
 
 			Mobile.InsuranceEnabled = Enabled;
 			ObjectPropertyList.Enabled = Enabled;
