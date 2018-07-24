@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public SilverleafBoard( int amount ) : base( CraftResource.Silverleaf, amount ) {
-			this.Name = "silver leaf board";
 			this.Hue = 2301;
 		}
 

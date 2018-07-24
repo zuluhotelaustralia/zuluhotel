@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public HardrangerBoard( int amount ) : base( CraftResource.Hardranger, amount ) {
-			this.Name = "hardranger board";
 			this.Hue = 1285;
 		}
 

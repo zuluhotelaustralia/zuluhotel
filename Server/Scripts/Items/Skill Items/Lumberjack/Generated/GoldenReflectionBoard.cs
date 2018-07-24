@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public GoldenReflectionBoard( int amount ) : base( CraftResource.GoldenReflection, amount ) {
-			this.Name = "golden reflection board";
 			this.Hue = 48;
 		}
 
