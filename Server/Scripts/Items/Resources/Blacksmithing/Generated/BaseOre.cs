@@ -82,6 +82,15 @@ namespace Server.Items
 	{
 	}
 
+	public override void AddNameProperty( ObjectPropertyList list ) {
+	    int resourceCliloc = CraftResources.GetLocalizationNumber(m_Resource);
+
+	    if ( Amount > 1 ){
+		list.Add( 1160100, "{0}\t#{1}\t#{2}", Amount, resourceCliloc, 1160104 ); // 1160100 = ~1_amount~ ~2_resource~ ~3_name~, 1160104 = "ore"
+	    }
+	    else {
+		list.Add( 1160101, "#{0}\t#{1}", resourceCliloc, 1160104 ); // 1160101 = ~1_type~ ~2_name~
+
 	public override void GetProperties( ObjectPropertyList list )
 	{
 	    base.GetProperties( list );
