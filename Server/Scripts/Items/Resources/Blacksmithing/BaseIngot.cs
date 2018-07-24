@@ -71,18 +71,12 @@ namespace Server.Items
 
 	public override void AddNameProperty( ObjectPropertyList list )
 	{
-	    if ( m_Resource != CraftResource.Iron ){
-		if ( Amount > 1 )
-		    list.Add( 1053099, "{0}\t#{1}", Amount, 1027154 ); // ~1_NUMBER~ ~2_ITEMNAME~
-		else
-		    list.Add( 1027154 ); // ingots
-	    }
-	    else{
-		if ( Amount > 1 )
-		    list.Add( 1050039, "{0}\t#{1}", Amount, 1027154 ); // ~1_NUMBER~ ~2_ITEMNAME~
-		else
-		    list.Add( 1027154 ); // ingots
-	    }
+            int resourceCliloc = CraftResources.GetLocalizationNumber(m_Resource);
+            
+            if ( Amount > 1 )
+                list.Add( 1160100, "{0}\t#{1}\t#{2}", Amount, resourceCliloc, 1160103 );
+            else
+                list.Add( 1160101, "#{0}\t#{1}", resourceCliloc 1160102 );
 	}
 
 	public override void GetProperties( ObjectPropertyList list )
