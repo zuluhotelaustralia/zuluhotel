@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [66/78]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [68/78]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -60,8 +60,9 @@ This is a list of all the things that need to be done before we can launch a bet
 ** DONE resource hues
 ** DONE resource properties (quality multiplier for AR or damage)
 ** TODO resource hues, names, and properties propagate to crafted items
-*** TODO finish BaseArmor:  needs name prefix, and armor rating, and possibly durability
-**** TODO name prefix (clilocs), see AddNameProperty and OnCraft.  When does AddNameProperty actually get called?
+** TODO remove this.Name hack from ingots
+*** DONE finish BaseArmor: needs name prefix, and armor rating, and possibly durability
+**** DONE name prefix (clilocs), see AddNameProperty and OnCraft.  When does AddNameProperty actually get called?
 **** DONE hue
 **** DONE armor rating
 *** TODO change all appropriate ICraftables to take hue, resource name prefix, and quality as required (see BaseArmor.OnCraft for example)

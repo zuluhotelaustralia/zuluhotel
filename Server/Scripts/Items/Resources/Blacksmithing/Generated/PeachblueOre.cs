@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public PeachblueOre( int amount ) : base( CraftResource.Peachblue, amount ) {
-			this.Name = "peachblue ore";
 			this.Hue = 0x49c;
 		}
 

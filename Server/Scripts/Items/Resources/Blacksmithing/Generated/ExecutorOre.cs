@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public ExecutorOre( int amount ) : base( CraftResource.Executor, amount ) {
-			this.Name = "executor ore";
 			this.Hue = 0x499;
 		}
 

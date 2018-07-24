@@ -8,7 +8,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public VirginityIngot( int amount ) : base( CraftResource.Virginity, amount ) {
-			this.Name = "virginity ingot";
 			this.Hue = 0x482;
 		}
 

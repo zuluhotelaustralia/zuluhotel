@@ -8,7 +8,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public ExecutorIngot( int amount ) : base( CraftResource.Executor, amount ) {
-			this.Name = "executor ingot";
 			this.Hue = 0x499;
 		}
 

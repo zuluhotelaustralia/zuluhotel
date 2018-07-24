@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public DarkSableRubyOre( int amount ) : base( CraftResource.DarkSableRuby, amount ) {
-			this.Name = "dark sable ruby ore";
 			this.Hue = 0x494;
 		}
 

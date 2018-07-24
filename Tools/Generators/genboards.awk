@@ -41,7 +41,6 @@ function doGsubs(){
     print "" > outfile;
     print "\t\t[Constructable]" > outfile;
     print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname", amount ) {" > outfile;
-    print "\t\t\tthis.Name = \""tolower(trimmedres) " " tolower(restype)"\";" > outfile;
     print "\t\t\tthis.Hue = " hue ";" > outfile;
     print "\t\t}" > outfile;
     print "" > outfile;

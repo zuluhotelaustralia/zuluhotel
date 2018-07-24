@@ -36,7 +36,6 @@ function doGsubs(){
     print "\tpublic class "resname"Granite : BaseGranite {" > outfile;
     print "\t\t[Constructable]" > outfile;
     print "\t\tpublic "resname"Granite() : base( CraftResource."resname" ) {" > outfile;
-    print "\t\t\tthis.Name = \""tolower(trimmedres) " " tolower(restype)"\";" > outfile;
     print "\t\t\tthis.Hue = " hue ";" > outfile;
     print "\t\t}" > outfile;
     print "" > outfile;
