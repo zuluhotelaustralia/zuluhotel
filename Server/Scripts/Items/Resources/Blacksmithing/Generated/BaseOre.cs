@@ -90,6 +90,8 @@ namespace Server.Items
 	    }
 	    else {
 		list.Add( 1160101, "#{0}\t#{1}", resourceCliloc, 1160104 ); // 1160101 = ~1_type~ ~2_name~
+	    }
+	}
 
 	public override void GetProperties( ObjectPropertyList list )
 	{
