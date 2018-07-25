@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [69/79]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [70/79]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -71,7 +71,7 @@ This is a list of all the things that need to be done before we can launch a bet
 **** TODO spellbook
 **** TODO runebook
 **** TODO baseinstrument
-**** TODO baseweapon
+**** DONE baseweapon
 **** TODO baselockablecontainer ?
 ** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
 *** DONE remove special log and board classes
@@ -136,6 +136,8 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 :cookie_data: todo recursive
 :end:
 ** TODO ensure only spec crafters can work with and mine the jewels
+** TODO fix baseweapon damage levels based on craftresource
+** TODO fix baseweapon/basearmor exceptional quality stuff (Core.AOS)
 ** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** TODO antimacro code [0/5]
