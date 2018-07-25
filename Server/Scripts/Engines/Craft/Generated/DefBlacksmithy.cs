@@ -705,41 +705,41 @@ namespace Server.Engines.Craft
 	    // TODO(Daleron): Clilocs
 
 	    //sith sez:  there's an overload in CraftSystem.cs - AddSubRes( Type type, string name, double reqSkill, object message )
-
-	    AddSubRes( typeof( GoldIngot ), "Gold", 1, 1044267 );
-	    AddSubRes( typeof( SpikeIngot ), "Spike", 5, 1044267 );
-	    AddSubRes( typeof( FruityIngot ), "Fruity", 10, 1044267 );
-	    AddSubRes( typeof( BronzeIngot ), "Bronze", 15, 1044267 );
-	    AddSubRes( typeof( IceRockIngot ), "Ice Rock", 20, 1044267 );
-	    AddSubRes( typeof( BlackDwarfIngot ), "Black Dwarf", 25, 1044267 );
-	    AddSubRes( typeof( DullCopperIngot ), "Dull Copper", 30, 1044267 );
-	    AddSubRes( typeof( PlatinumIngot ), "Platinum", 35, 1044267 );
-	    AddSubRes( typeof( SilverRockIngot ), "Silver Rock", 40, 1044267 );
-	    AddSubRes( typeof( DarkPaganIngot ), "Dark Pagan", 45, 1044267 );
-	    AddSubRes( typeof( CopperIngot ), "Copper", 50, 1044267 );
-	    AddSubRes( typeof( MysticIngot ), "Mystic", 55, 1044267 );
-	    AddSubRes( typeof( SpectralIngot ), "Spectral", 60, 1044267 );
-	    AddSubRes( typeof( OldBritainIngot ), "Old Britain", 65, 1044267 );
-	    AddSubRes( typeof( OnyxIngot ), "Onyx", 70, 1044267 );
-	    AddSubRes( typeof( RedElvenIngot ), "Red Elven", 75, 1044267 );
-	    AddSubRes( typeof( UndeadIngot ), "Undead", 80, 1044267 );
-	    AddSubRes( typeof( PyriteIngot ), "Pyrite", 85, 1044267 );
-	    AddSubRes( typeof( VirginityIngot ), "Virginity", 90, 1044267 );
-	    AddSubRes( typeof( MalachiteIngot ), "Malachite", 95, 1044267 );
-	    AddSubRes( typeof( LavarockIngot ), "Lavarock", 97, 1044267 );
-	    AddSubRes( typeof( AzuriteIngot ), "Azurite", 98, 1044267 );
-	    AddSubRes( typeof( DripstoneIngot ), "Dripstone", 100, 1044267 );
-	    AddSubRes( typeof( ExecutorIngot ), "Executor", 104, 1044267 );
-	    AddSubRes( typeof( PeachblueIngot ), "Peachblue", 108, 1044267 );
-	    AddSubRes( typeof( DestructionIngot ), "Destruction", 112, 1044267 );
-	    AddSubRes( typeof( AnraIngot ), "Anra", 116, 1044267 );
-	    AddSubRes( typeof( CrystalIngot ), "Crystal", 119, 1044267 );
-	    AddSubRes( typeof( DoomIngot ), "Doom", 122, 1044267 );
-	    AddSubRes( typeof( GoddessIngot ), "Goddess", 125, 1044267 );
-	    AddSubRes( typeof( NewZuluIngot ), "New Zulu", 129, 1044267 );
-	    AddSubRes( typeof( EbonTwilightSapphireIngot ), "Ebon Twilight Sapphire", 130, 1044267 );
-	    AddSubRes( typeof( DarkSableRubyIngot ), "Dark Sable Ruby", 130, 1044267 );
-	    AddSubRes( typeof( RadiantNimbusDiamondIngot ), "Radiant Nimbus Diamond", 140, 1044267 );
+	    AddSubRes( typeof( IronIngot), "Iron", 0, 1044268 );
+	    AddSubRes( typeof( GoldIngot ), "Gold", 1, 1044268 );
+	    AddSubRes( typeof( SpikeIngot ), "Spike", 5, 1044268 );
+	    AddSubRes( typeof( FruityIngot ), "Fruity", 10, 1044268 );
+	    AddSubRes( typeof( BronzeIngot ), "Bronze", 15, 1044268 );
+	    AddSubRes( typeof( IceRockIngot ), "Ice Rock", 20, 1044268 );
+	    AddSubRes( typeof( BlackDwarfIngot ), "Black Dwarf", 25, 1044268 );
+	    AddSubRes( typeof( DullCopperIngot ), "Dull Copper", 30, 1044268 );
+	    AddSubRes( typeof( PlatinumIngot ), "Platinum", 35, 1044268 );
+	    AddSubRes( typeof( SilverRockIngot ), "Silver Rock", 40, 1044268 );
+	    AddSubRes( typeof( DarkPaganIngot ), "Dark Pagan", 45, 1044268 );
+	    AddSubRes( typeof( CopperIngot ), "Copper", 50, 1044268 );
+	    AddSubRes( typeof( MysticIngot ), "Mystic", 55, 1044268 );
+	    AddSubRes( typeof( SpectralIngot ), "Spectral", 60, 1044268 );
+	    AddSubRes( typeof( OldBritainIngot ), "Old Britain", 65, 1044268 );
+	    AddSubRes( typeof( OnyxIngot ), "Onyx", 70, 1044268 );
+	    AddSubRes( typeof( RedElvenIngot ), "Red Elven", 75, 1044268 );
+	    AddSubRes( typeof( UndeadIngot ), "Undead", 80, 1044268 );
+	    AddSubRes( typeof( PyriteIngot ), "Pyrite", 85, 1044268 );
+	    AddSubRes( typeof( VirginityIngot ), "Virginity", 90, 1044268 );
+	    AddSubRes( typeof( MalachiteIngot ), "Malachite", 95, 1044268 );
+	    AddSubRes( typeof( LavarockIngot ), "Lavarock", 97, 1044268 );
+	    AddSubRes( typeof( AzuriteIngot ), "Azurite", 98, 1044268 );
+	    AddSubRes( typeof( DripstoneIngot ), "Dripstone", 100, 1044268 );
+	    AddSubRes( typeof( ExecutorIngot ), "Executor", 104, 1044268 );
+	    AddSubRes( typeof( PeachblueIngot ), "Peachblue", 108, 1044268 );
+	    AddSubRes( typeof( DestructionIngot ), "Destruction", 112, 1044268 );
+	    AddSubRes( typeof( AnraIngot ), "Anra", 116, 1044268 );
+	    AddSubRes( typeof( CrystalIngot ), "Crystal", 119, 1044268 );
+	    AddSubRes( typeof( DoomIngot ), "Doom", 122, 1044268 );
+	    AddSubRes( typeof( GoddessIngot ), "Goddess", 125, 1044268 );
+	    AddSubRes( typeof( NewZuluIngot ), "New Zulu", 129, 1044268 );
+	    AddSubRes( typeof( EbonTwilightSapphireIngot ), "Ebon Twilight Sapphire", 130, 1044268 );
+	    AddSubRes( typeof( DarkSableRubyIngot ), "Dark Sable Ruby", 130, 1044268 );
+	    AddSubRes( typeof( RadiantNimbusDiamondIngot ), "Radiant Nimbus Diamond", 140, 1044268 );
 
 	
 	    // SetSubRes2( typeof( RedScales ), 1060875 );
