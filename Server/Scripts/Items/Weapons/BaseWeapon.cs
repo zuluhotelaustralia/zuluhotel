@@ -2931,40 +2931,40 @@ namespace Server.Items
 
 	    switch ( m_Resource )
 	    {
-                case CraftResource.Gold: oreType = 3020000; break;
-                case CraftResource.Spike: oreType = 3020001; break;
-                case CraftResource.Fruity: oreType = 302002; break;
-                case CraftResource.Bronze: oreType = 3020003; break;
-                case CraftResource.IceRock: oreType = 3020004; break;
-                case CraftResource.BlackDwarf: oreType = 3020005; break;
-                case CraftResource.DullCopper: oreType = 3020006; break;
-                case CraftResource.Platinum: oreType = 3020007; break;
-                case CraftResource.SilverRock: oreType = 3020008; break;
-                case CraftResource.DarkPagan: oreType = 3020009; break;
-                case CraftResource.Copper: oreType = 3020010; break;
-                case CraftResource.Mystic: oreType = 3020011; break;
-                case CraftResource.Spectral: oreType = 3020012; break;
-                case CraftResource.OldBritain: oreType = 3020013; break;
-                case CraftResource.Onyx: oreType = 3020014; break;
-                case CraftResource.RedElven: oreType = 3020015; break;
-                case CraftResource.Undead: oreType = 3020016; break;
-                case CraftResource.Pyrite: oreType = 3020017; break;
-                case CraftResource.Virginity: oreType = 3020018; break;
-                case CraftResource.Malachite: oreType = 3020019; break;
-                case CraftResource.Lavarock: oreType = 30200200; break;
-                case CraftResource.Azurite: oreType = 3020021; break;
-                case CraftResource.Dripstone: oreType = 3020022; break;
-                case CraftResource.Executor: oreType = 3020023; break;
-                case CraftResource.Peachblue: oreType = 3020024; break;
-                case CraftResource.Destruction: oreType = 3020025; break;
-                case CraftResource.Anra: oreType = 3020026; break;
-                case CraftResource.Crystal: oreType = 3020027; break;
-                case CraftResource.Doom: oreType = 3020028; break;
-                case CraftResource.Goddess: oreType = 3020029; break;
-                case CraftResource.NewZulu: oreType = 3020030; break;
-                case CraftResource.DarkSableRuby: oreType = 3020031; break;
-                case CraftResource.EbonTwilightSapphire: oreType = 3020032; break;
-                case CraftResource.RadiantNimbusDiamond: oreType = 3020033; break;
+		case CraftResource.Gold: oreType = 1160000; break;
+		case CraftResource.Spike: oreType = 1160001; break;
+		case CraftResource.Fruity: oreType = 1160002; break;
+		case CraftResource.Bronze: oreType = 1160003; break;
+		case CraftResource.IceRock: oreType = 1160004; break;
+		case CraftResource.BlackDwarf: oreType = 1160005; break;
+		case CraftResource.DullCopper: oreType = 1160006; break;
+		case CraftResource.Platinum: oreType = 1160007; break;
+		case CraftResource.SilverRock: oreType = 1160008; break;
+		case CraftResource.DarkPagan: oreType = 1160009; break;
+		case CraftResource.Copper: oreType = 1160010; break;
+		case CraftResource.Mystic: oreType = 1160011; break;
+		case CraftResource.Spectral: oreType = 1160012; break;
+		case CraftResource.OldBritain: oreType = 1160013; break;
+		case CraftResource.Onyx: oreType = 1160014; break;
+		case CraftResource.RedElven: oreType = 1160015; break;
+		case CraftResource.Undead: oreType = 1160016; break;
+		case CraftResource.Pyrite: oreType = 1160017; break;
+		case CraftResource.Virginity: oreType = 1160018; break;
+		case CraftResource.Malachite: oreType = 1160019; break;
+		case CraftResource.Lavarock: oreType = 1160020; break;
+		case CraftResource.Azurite: oreType = 1160021; break;
+		case CraftResource.Dripstone: oreType = 1160022; break;
+		case CraftResource.Executor: oreType = 1160023; break;
+		case CraftResource.Peachblue: oreType = 1160024; break;
+		case CraftResource.Destruction: oreType = 1160025; break;
+		case CraftResource.Anra: oreType = 1160026; break;
+		case CraftResource.Crystal: oreType = 1160027; break;
+		case CraftResource.Doom: oreType = 1160028; break;
+		case CraftResource.Goddess: oreType = 1160029; break;
+		case CraftResource.NewZulu: oreType = 1160030; break;
+		case CraftResource.DarkSableRuby: oreType = 1160031; break;
+		case CraftResource.EbonTwilightSapphire: oreType = 1160032; break;
+		case CraftResource.RadiantNimbusDiamond: oreType = 1160033; break;
 		case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
 		case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
 		case CraftResource.BarbedLeather:	oreType = 1061116; break; // barbed
@@ -2977,12 +2977,30 @@ namespace Server.Items
 		default: oreType = 0; break;
 	    }
 
-	    if ( oreType != 0 )
-		list.Add( 1053099, "#{0}\t{1}", oreType, GetNameString() ); // ~1_oretype~ ~2_armortype~
-	    else if ( Name == null )
-		list.Add( LabelNumber );
+	    if ( m_Quality == WeaponQuality.Exceptional )
+	    {
+		if ( oreType != 0 )
+		    list.Add( 1053100, "#{0}\t{1}", oreType, GetNameString() ); // exceptional ~1_oretype~ ~2_armortype~
+		else
+		    list.Add( 1050040, GetNameString() ); // exceptional ~1_ITEMNAME~
+	    }
 	    else
-		list.Add( Name );
+	    {
+		if ( oreType != 0 )
+		    list.Add( 1053099, "#{0}\t{1}", oreType, GetNameString() ); // ~1_oretype~ ~2_armortype~
+		else if ( Name == null )
+		    list.Add( LabelNumber );
+		else
+		    list.Add( Name );
+	    }
+
+
+	    // if ( oreType != 0 )
+	    // 	list.Add( 1053099, "#{0}\t{1}", oreType, GetNameString() ); // ~1_oretype~ ~2_armortype~
+	    // else if ( Name == null )
+	    // 	list.Add( LabelNumber );
+	    // else
+	    // 	list.Add( Name );
 
 	    /*
 	     * Want to move this to the engraving tool, let the non-harmful
