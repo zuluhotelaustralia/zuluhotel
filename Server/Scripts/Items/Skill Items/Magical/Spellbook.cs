@@ -30,18 +30,18 @@ namespace Server.Items
     {
 	private string m_EngravedText;
 	private BookQuality m_Quality;
-	private CraftResource m_Resource;
+	// private CraftResource m_Resource;
 
-	[CommandProperty( AccessLevel.GameMaster )]
-	public CraftResource Resource {
-	    get { return m_Resource; }
-	    set {
-		if( m_Resource != value ){
-		    m_Resource = value;
-		    Hue = CraftResources.GetHue(m_Resource);
-		}
-	    }
-	}
+	// [CommandProperty( AccessLevel.GameMaster )]
+	// public CraftResource Resource {
+	//     get { return m_Resource; }
+	//     set {
+	// 	if( m_Resource != value ){
+	// 	    m_Resource = value;
+	// 	    Hue = CraftResources.GetHue(m_Resource);
+	// 	}
+	//     }
+	// }
 				
 	[CommandProperty( AccessLevel.GameMaster )]		
 	public string EngravedText
@@ -872,52 +872,52 @@ namespace Server.Items
 		1								// 1 property   : 1/4 : 25%
 	    };
 
-	public override void AddNameProperty( ObjectPropertyList list ){
-	    int woodType; //tinkering makes spellbooks and stuff from logs
+	// public override void AddNameProperty( ObjectPropertyList list ){
+	//     int woodType; //tinkering makes spellbooks and stuff from logs
 
-	    switch ( m_Resource ){
-		case CraftResource.Pinetree: woodType = 1160034; break;
-		case CraftResource.Cherry: woodType = 1160035; break;
-		case CraftResource.Oak: woodType = 1160036; break;
-		case CraftResource.PurplePassion: woodType = 1160037; break;
-		case CraftResource.GoldenReflection: woodType = 1160038; break;
-		case CraftResource.Hardranger: woodType = 1160039; break;
-		case CraftResource.Jadewood: woodType = 1160040; break;
-		case CraftResource.Darkwood: woodType = 1160041; break;
-		case CraftResource.Stonewood: woodType = 1160042; break;
-		case CraftResource.Sunwood: woodType = 1160043; break;
-		case CraftResource.Gauntlet: woodType = 1160044; break;
-		case CraftResource.Swampwood: woodType = 1160045; break;
-		case CraftResource.Stardust: woodType = 1160046; break;
-		case CraftResource.Stormteal: woodType = 1160047; break;
-		case CraftResource.Emeraldwood: woodType = 1160048; break;
-		case CraftResource.Bloodwood: woodType = 1160049; break;
-		case CraftResource.Crystal: woodType = 1160050; break;
-		case CraftResource.Bloodhorse: woodType = 1160051; break;
-		case CraftResource.Doomwood: woodType = 1160052; break;
-		case CraftResource.Zulu: woodType = 1160053; break;
-		case CraftResource.Darkness: woodType = 1160054; break;
-		case CraftResource.Elven: woodType = 1160055; break;
-		default: woodType = 0; break;
-	    }
+	//     switch ( m_Resource ){
+	// 	case CraftResource.Pinetree: woodType = 1160034; break;
+	// 	case CraftResource.Cherry: woodType = 1160035; break;
+	// 	case CraftResource.Oak: woodType = 1160036; break;
+	// 	case CraftResource.PurplePassion: woodType = 1160037; break;
+	// 	case CraftResource.GoldenReflection: woodType = 1160038; break;
+	// 	case CraftResource.Hardranger: woodType = 1160039; break;
+	// 	case CraftResource.Jadewood: woodType = 1160040; break;
+	// 	case CraftResource.Darkwood: woodType = 1160041; break;
+	// 	case CraftResource.Stonewood: woodType = 1160042; break;
+	// 	case CraftResource.Sunwood: woodType = 1160043; break;
+	// 	case CraftResource.Gauntlet: woodType = 1160044; break;
+	// 	case CraftResource.Swampwood: woodType = 1160045; break;
+	// 	case CraftResource.Stardust: woodType = 1160046; break;
+	// 	case CraftResource.Stormteal: woodType = 1160047; break;
+	// 	case CraftResource.Emeraldwood: woodType = 1160048; break;
+	// 	case CraftResource.Bloodwood: woodType = 1160049; break;
+	// 	case CraftResource.Crystal: woodType = 1160050; break;
+	// 	case CraftResource.Bloodhorse: woodType = 1160051; break;
+	// 	case CraftResource.Doomwood: woodType = 1160052; break;
+	// 	case CraftResource.Zulu: woodType = 1160053; break;
+	// 	case CraftResource.Darkness: woodType = 1160054; break;
+	// 	case CraftResource.Elven: woodType = 1160055; break;
+	// 	default: woodType = 0; break;
+	//     }
 
-	    if ( m_Quality == BookQuality.Exceptional )
-	    {
-		if ( woodType != 0 )
-		    list.Add( 1053100, "#{0}\t{1}", woodType, GetNameString() ); // exceptional ~1_oretype~ ~2_armortype~
-		else
-		    list.Add( 1050040, GetNameString() ); // exceptional ~1_ITEMNAME~
-	    }
-	    else
-	    {
-		if ( woodType != 0 )
-		    list.Add( 1053099, "#{0}\t{1}", woodType, GetNameString() ); // ~1_oretype~ ~2_armortype~
-		else if ( Name == null )
-		    list.Add( LabelNumber );
-		else
-		    list.Add( Name );
-	    }
-	}
+	//     if ( m_Quality == BookQuality.Exceptional )
+	//     {
+	// 	if ( woodType != 0 )
+	// 	    list.Add( 1053100, "#{0}\t{1}", woodType, GetNameString() ); // exceptional ~1_oretype~ ~2_armortype~
+	// 	else
+	// 	    list.Add( 1050040, GetNameString() ); // exceptional ~1_ITEMNAME~
+	//     }
+	//     else
+	//     {
+	// 	if ( woodType != 0 )
+	// 	    list.Add( 1053099, "#{0}\t{1}", woodType, GetNameString() ); // ~1_oretype~ ~2_armortype~
+	// 	else if ( Name == null )
+	// 	    list.Add( LabelNumber );
+	// 	else
+	// 	    list.Add( Name );
+	//     }
+	// }
 
 	private string GetNameString(){
 	    string name = this.Name;
@@ -974,13 +974,13 @@ namespace Server.Items
 
 	    m_Quality = (BookQuality) ( quality - 1 );
 
-	    Type resourceType = typeRes;
+	    // Type resourceType = typeRes;
 
-	    if( resourceType == null ){
-		resourceType = craftItem.Resources.GetAt(0).ItemType;
-	    }
+	    // if( resourceType == null ){
+	    // 	resourceType = craftItem.Resources.GetAt(0).ItemType;
+	    // }
 
-	    Resource = CraftResources.GetFromType( resourceType );
+	    // Resource = CraftResources.GetFromType( resourceType );
 
 	    return quality;
 	}
