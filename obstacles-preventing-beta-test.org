@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [74/80]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [75/80]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -69,7 +69,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** TODO change all appropriate ICraftables to take hue, resource name prefix, and quality as required (see BaseArmor.OnCraft for example)
 **** DONE baseharvesttool
 **** DONE basetool
-**** TODO spellbook
+**** DONE spellbook
 **** TODO runebook
 **** DONE baseinstrument
 **** DONE baseweapon
