@@ -29,7 +29,7 @@ namespace Server.Items
 	private int m_CurCharges, m_MaxCharges;
 	private int m_DefaultIndex;
 	private SecureLevel m_Level;
-	// private Mobile m_Crafter;
+        private Mobile m_Crafter;
 
 	// private CraftResource m_Resource;
 
