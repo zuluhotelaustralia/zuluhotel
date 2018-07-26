@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [76/80]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [78/80]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -66,14 +66,14 @@ This is a list of all the things that need to be done before we can launch a bet
 **** DONE name prefix (clilocs), see AddNameProperty and OnCraft.  When does AddNameProperty actually get called?
 **** DONE hue
 **** DONE armor rating
-*** TODO change all appropriate ICraftables to take hue, resource name prefix, and quality as required (see BaseArmor.OnCraft for example)
+*** DONE change all appropriate ICraftables to take hue, resource name prefix, and quality as required (see BaseArmor.OnCraft for example)
 **** DONE baseharvesttool
 **** DONE basetool
 **** DONE spellbook
 **** DONE runebook
 **** DONE baseinstrument
 **** DONE baseweapon
-**** TODO baselockablecontainer ?
+**** DONE baselockablecontainer ?
 ** DONE make an analogue to Scripts/Engines/Harvest/Generated/MiningResources.cs for lumberjacking
 *** DONE remove special log and board classes
 *** DONE mkdir Generated/
