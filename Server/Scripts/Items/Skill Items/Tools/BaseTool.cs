@@ -194,6 +194,66 @@ namespace Server.Items
 		    }
 	    }
 	}
+
+	public override void AddNameProperty( ObjectPropertyList list ){
+	    int oreType; //tinkering makes pickaxes and stuff from ingots
+
+	    switch ( m_Resource ){
+		case CraftResource.Gold: oreType = 1160000; break;
+		case CraftResource.Spike: oreType = 1160001; break;
+		case CraftResource.Fruity: oreType = 1160002; break;
+		case CraftResource.Bronze: oreType = 1160003; break;
+		case CraftResource.IceRock: oreType = 1160004; break;
+		case CraftResource.BlackDwarf: oreType = 1160005; break;
+		case CraftResource.DullCopper: oreType = 1160006; break;
+		case CraftResource.Platinum: oreType = 1160007; break;
+		case CraftResource.SilverRock: oreType = 1160008; break;
+		case CraftResource.DarkPagan: oreType = 1160009; break;
+		case CraftResource.Copper: oreType = 1160010; break;
+		case CraftResource.Mystic: oreType = 1160011; break;
+		case CraftResource.Spectral: oreType = 1160012; break;
+		case CraftResource.OldBritain: oreType = 1160013; break;
+		case CraftResource.Onyx: oreType = 1160014; break;
+		case CraftResource.RedElven: oreType = 1160015; break;
+		case CraftResource.Undead: oreType = 1160016; break;
+		case CraftResource.Pyrite: oreType = 1160017; break;
+		case CraftResource.Virginity: oreType = 1160018; break;
+		case CraftResource.Malachite: oreType = 1160019; break;
+		case CraftResource.Lavarock: oreType = 1160020; break;
+		case CraftResource.Azurite: oreType = 1160021; break;
+		case CraftResource.Dripstone: oreType = 1160022; break;
+		case CraftResource.Executor: oreType = 1160023; break;
+		case CraftResource.Peachblue: oreType = 1160024; break;
+		case CraftResource.Destruction: oreType = 1160025; break;
+		case CraftResource.Anra: oreType = 1160026; break;
+		case CraftResource.Crystal: oreType = 1160027; break;
+		case CraftResource.Doom: oreType = 1160028; break;
+		case CraftResource.Goddess: oreType = 1160029; break;
+		case CraftResource.NewZulu: oreType = 1160030; break;
+		case CraftResource.DarkSableRuby: oreType = 1160031; break;
+		case CraftResource.EbonTwilightSapphire: oreType = 1160032; break;
+		case CraftResource.RadiantNimbusDiamond: oreType = 1160033; break;
+		default: oreType = 0; break;
+	    }
+
+	    if ( m_Quality == ToolQuality.Exceptional )
+	    {
+		if ( oreType != 0 )
+		    list.Add( 1053100, "#{0}\t{1}", oreType, GetNameString() ); // exceptional ~1_oretype~ ~2_armortype~
+		else
+		    list.Add( 1050040, GetNameString() ); // exceptional ~1_ITEMNAME~
+	    }
+	    else
+	    {
+		if ( oreType != 0 )
+		    list.Add( 1053099, "#{0}\t{1}", oreType, GetNameString() ); // ~1_oretype~ ~2_armortype~
+		else if ( Name == null )
+		    list.Add( LabelNumber );
+		else
+		    list.Add( Name );
+	    }
+	}
+	
 	#region ICraftable Members
 
 	public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
