@@ -253,6 +253,16 @@ namespace Server.Items
 		    list.Add( Name );
 	    }
 	}
+
+	private string GetNameString(){
+	    string name = this.Name;
+
+	    if( name == null ){
+		name = String.Format("#{0}", LabelNumber);
+	    }
+
+	    return name;
+	}
 	
 	#region ICraftable Members
 
