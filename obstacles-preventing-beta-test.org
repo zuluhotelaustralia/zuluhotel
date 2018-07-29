@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [78/80]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [79/80]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -59,7 +59,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** TODO play the animations/soundfx
 ** DONE resource hues
 ** DONE resource properties (quality multiplier for AR or damage)
-** TODO resource hues, names, and properties propagate to crafted items
+** DONE resource hues, names, and properties propagate to crafted items
 ** DONE add logs and granite names to clilocs
 ** DONE remove this.Name hack from ingots
 *** DONE finish BaseArmor: needs name prefix, and armor rating, and possibly durability
