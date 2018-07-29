@@ -139,6 +139,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO fix baseweapon damage levels based on craftresource
 ** TODO fix baseweapon/basearmor exceptional quality stuff (Core.AOS)
+** TODO hides
 ** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** TODO antimacro code [0/5]
