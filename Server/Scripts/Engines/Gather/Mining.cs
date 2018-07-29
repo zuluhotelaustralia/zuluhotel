@@ -114,6 +114,9 @@ namespace Server.Engines.Gather
 	    };
 
 	private static GatherSystemController m_Controller;
+	public static GatherSystemController Controller {
+	    get { return m_Controller; }
+	}
 	
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
