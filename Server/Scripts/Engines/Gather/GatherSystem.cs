@@ -42,8 +42,20 @@ namespace Server.Engines.Gather {
 	public static void Initialize() {
 	    CommandSystem.Register( "AutoLoop", AccessLevel.Player, new CommandEventHandler( AutoLoop_OnCommand ) );
 	    CommandSystem.Register( "GatherSystemSetup", AccessLevel.Developer, new CommandEventHandler( GatherSystemSetup_OnCommand ) );
+	    CommandSystem.Register( "GetNodeInfo", AccessLevel.Developer, new CommandEventHandler( GetNodeInfo_OnCommand ) );
 	}
 
+	[Usage( "GetNodeInfo <integer>" )]
+	[Description( "Returns info about GatherNode <integer> on the targeted control stone" )]
+	public static void GetNodeInfo_OnCommand( CommandEventArgs e ){
+	    if( e.Length !=1 ){
+		e.Mobile.SendMessage("Usage: {0}GetNodeInfo <integer>");
+	    }
+	    else {
+		e.Mobile.Target = new NodeDebugTarget(e.GetInt32(0));
+	    }
+	}
+	
 	[Usage( "GatherSystemSetup" )]
 	[Description( "Performs initial setup of one type of GatherNode")]
 	public static void GatherSystemSetup_OnCommand( CommandEventArgs e ){
@@ -55,12 +67,12 @@ namespace Server.Engines.Gather {
 	[Description( "Sets the number of consecutive times you would like to attempt to gather resources." )]
 	public static void AutoLoop_OnCommand( CommandEventArgs e ) {
 	    if ( e.Length != 1 ){
-		e.Mobile.SendMessage("Format: {0}AutoLoop <1-1000>");
+		e.Mobile.SendMessage("Usage: {0}AutoLoop <1-1000>");
 	    }
 	    else {
 		int loops = e.GetInt32(0);
 		if( loops > 1000 || loops < 1 ){
-		    e.Mobile.SendMessage("Format: {0}AutoLoop <1-1000>");
+		    e.Mobile.SendMessage("Usage: {0}AutoLoop <1-1000>");
 		}
 		else{
 		    e.Mobile.AutoLoop = loops;
