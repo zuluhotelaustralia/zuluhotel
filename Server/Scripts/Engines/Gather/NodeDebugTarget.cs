@@ -23,7 +23,7 @@ namespace Server.Engines.Gather
 	{
 	    if( targeted is GatherSystemController ){
 		GatherSystemController targ = (GatherSystemController)targeted;
-		GatherNode n = targ.System.Nades[m_Index];
+		GatherNode n = targ.System.Nodes[m_Index];
 
 		from.SendMessage("GatherNode: {0} {1} {2}", n.Resource, n.X, n.Y);
 	    }
