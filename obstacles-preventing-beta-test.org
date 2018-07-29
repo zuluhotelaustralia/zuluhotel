@@ -127,7 +127,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 
-* TODO Items to tackle after launching beta but before "1.0" [0/18]
+* TODO Items to tackle after launching beta but before "1.0" [2/18]
 :properties:
 :cookie_data: todo recursive
 :end:
