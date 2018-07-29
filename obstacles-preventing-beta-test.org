@@ -151,9 +151,9 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** TODO decide on consequences
 *** TODO pick the one that doesn't match, perhaps simple arithmetic
 ** TODO fix Server/Skills.cs because there are several references to 100.0 in there and we go to 130.0
-** TODO anti corruption code [0/3]
-*** TODO log items created by staff
-*** TODO log edits done to characters by staff
+** TODO anti corruption code [2/3]
+*** DONE log items created by staff
+*** DONE log edits done to characters by staff
 *** TODO publish logs automagically
 
 
