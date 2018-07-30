@@ -21,6 +21,9 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE flesh them out
 **** DONE make gathersystem abstract
 ** DONE initial setup command
+** TODO verify lumberjacking is complete
+** TODO verify fishing is complete
+** TODO verify/fix cliloc strings in gathering engine
 ** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
 ** DONE actually give them resources
 ** DONE deal with [[file:filestoupdate.txt]]
