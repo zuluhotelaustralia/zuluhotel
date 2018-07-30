@@ -138,6 +138,7 @@ namespace Server.Engines.Gather
     
 	public bool Validate( int tileID )
 	{
+	    // is this fast enough?  Should it be in its own thread?
 	    int dist = -1;
 	    for ( int i = 0; dist < 0 && i < m_OreTiles.Length; ++i ){
 		dist = ( m_OreTiles[i] - tileID );
