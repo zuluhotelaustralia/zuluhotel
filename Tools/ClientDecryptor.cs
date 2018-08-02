@@ -14,14 +14,17 @@ public class ClientDecryptor
     private byte[] bytes;    // Byte array client's read into
     public long FileSize;    // Length of the client read into the byte array
 
-    public ClientDecryptor()
-    {
-    }
+    private string dest;
 
+    public ClientDecryptor(string destination)
+    {
+        dest = destination;
+    }
+    
     public static void Main(string[] args)
     {
         if ( args.Length < 1 ) {
-            Console.WriteLine("Usage: <path-to-client.exe>");
+            Console.WriteLine("Usage: <path-to-client.exe> [<output-path.exe>]");
             return;
         }
 
@@ -30,8 +33,14 @@ public class ClientDecryptor
             return;
         }
 
+        string dest = "Decrypted_client.exe";
+        
+        if ( args.Length == 2 ) {
+            dest = args[1];
+        }
+
         Console.WriteLine("Found...");
-        new ClientDecryptor().ReadClientFile(args[0]);
+        new ClientDecryptor(dest).ReadClientFile(args[0]);
     }
 
     // Read in the client file
@@ -63,7 +72,7 @@ public class ClientDecryptor
                 // Create the NEW decrypted client.exe file
                 Console.WriteLine("Writing new client file...");
 
-                FileStream foStream = File.Open("Decrypted_client.exe", FileMode.OpenOrCreate);
+                FileStream foStream = File.Open(dest, FileMode.OpenOrCreate);
                 foStream.Write(bytes, 0, bytes.Length);
                 foStream.Close();
 
