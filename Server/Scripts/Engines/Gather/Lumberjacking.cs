@@ -177,7 +177,7 @@ namespace Server.Engines.Gather {
 	private Lumberjacking() {
 	    m_Nodes = new List<GatherNode>();
 
-	    GatherNode node = new GatherNode(0, 0, Utility.RandomMinMax(0, 10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 150.0, typeof(Log));
+	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 0, 150.0, typeof(Log) );
 	    m_Nodes.Add(node);
 	}
     }
