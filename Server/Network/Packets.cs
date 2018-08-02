@@ -2500,15 +2500,21 @@ namespace Server.Network
 
 	private void WritePacked( PacketWriter src )
 	{
+#if MONO
+            byte[] buffer = src.UnderlyingStream.GetBuffer();
+#else
+            
 	    ArraySegment<byte> segment;
-	    
+            
 	    if( !src.UnderlyingStream.TryGetBuffer( out segment ) ){ //MemoryStream.GetBuffer no longer exists in .net core
 		throw new Exception("Failed to get underlying buffer!");
 	    }
 
 	    byte[] buffer = segment.Array;
+#endif
+            
 	    int length = (int) src.Length; // returns m_Stream.Length (of type long) which is the length in bytes
-
+            
 	    if ( length == 0 )
 	    {
 		m_Stream.Write( (int) 0 );
@@ -4184,6 +4190,9 @@ namespace Server.Network
 
 	    if ( disabled != 0 )
 	    {
+                #if MONO
+                byte[] hashbuffer = m_Stream.UnderlyingStream.GetBuffer();
+                #else
 		ArraySegment<byte> segment;
 		byte[] hashbuffer;
 
@@ -4191,7 +4200,8 @@ namespace Server.Network
 		    throw new Exception("Unable to get the underlying buffer!");
 		}
 		hashbuffer = segment.Array;
-		
+		#endif
+                
 		m_Stream.UnderlyingStream.Flush();
 
 		byte[] hashCode = System.Security.Cryptography.MD5.Create().ComputeHash( hashbuffer, 0, (int) m_Stream.UnderlyingStream.Length );
@@ -4284,6 +4294,9 @@ namespace Server.Network
 		//    m_MD5Provider = new System.Security.Cryptography.MD5CryptoServiceProvider();
 
 		byte[] hashbuffer;
+                #if MONO
+                hashbuffer = m_Stream.UnderlyingStream.GetBuffer();
+                #else
 		ArraySegment<byte> segment;
 		
 		if( !m_Stream.UnderlyingStream.TryGetBuffer(out segment) ){
@@ -4291,7 +4304,7 @@ namespace Server.Network
 		}
 		
 		hashbuffer = segment.Array; // fingers crossed --sith
-		
+		#endif
 		m_Stream.UnderlyingStream.Flush();
 
 		// trygetbuffer()
@@ -4750,12 +4763,16 @@ namespace Server.Network
 
 	    MemoryStream ms = m_Stream.UnderlyingStream;
 
+            #if MONO
+            m_CompiledBuffer = ms.GetBuffer();
+            #else
 	    ArraySegment<byte> segment;
 	    
 	    if( !ms.TryGetBuffer(out segment) ){
 		throw new Exception("Unable to get the underlying buffer!");
 	    }
 	    m_CompiledBuffer = segment.Array;
+            #endif
 	    
 	    int length = (int)ms.Length;
 
