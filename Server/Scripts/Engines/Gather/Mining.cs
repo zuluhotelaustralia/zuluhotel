@@ -114,6 +114,9 @@ namespace Server.Engines.Gather
 	    };
 
 	private static GatherSystemController m_Controller;
+	public static GatherSystemController Controller {
+	    get { return m_Controller; }
+	}
 	
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
@@ -135,48 +138,24 @@ namespace Server.Engines.Gather
     
 	public bool Validate( int tileID )
 	{
-            // TODO
-	    if( false /*they're mining sand?*/){
-		if ( false /*m_RangedTiles*/ )
-		{
-		    bool contains = false;
-
-		    for ( int i = 0; !contains && i < m_SandTiles.Length; i += 2 )
-			contains = ( tileID >= m_SandTiles[i] && tileID <= m_SandTiles[i + 1] );
-
-		    return contains;
-		}
-		else
-		{
-		    int dist = -1;
-
-		    for ( int i = 0; dist < 0 && i < m_SandTiles.Length; ++i )
-			dist = ( m_SandTiles[i] - tileID );
-
-		    return ( dist == 0 );
-		}
-	    }//if they're mining sand
-            // TODO
-	    else if( false /*they're mining ore*/ ){
-		if ( false /*m_RangedTiles*/ )
-		{
-		    bool contains = false;
-
-		    for ( int i = 0; !contains && i < m_OreTiles.Length; i += 2 )
-			contains = ( tileID >= m_OreTiles[i] && tileID <= m_OreTiles[i + 1] );
-
-		    return contains;
-		}
-		else
-		{
-		    int dist = -1;
-
-		    for ( int i = 0; dist < 0 && i < m_OreTiles.Length; ++i )
-			dist = ( m_OreTiles[i] - tileID );
-
-		    return ( dist == 0 );
+	    // is this fast enough?  Should it be in its own thread?
+	    int dist = -1;
+	    for ( int i = 0; dist < 0 && i < m_OreTiles.Length; ++i ){
+		dist = ( m_OreTiles[i] - tileID );
+		if( dist == 0){
+		    return true;
 		}
 	    }
+
+	    dist = -1;
+	    
+	    for ( int i = 0; dist < 0 && i < m_SandTiles.Length; ++i ){
+		dist = ( m_SandTiles[i] - tileID );
+		if( dist == 0 ) {
+		    return true;
+		}
+	    }
+
             return false;
 	}
 

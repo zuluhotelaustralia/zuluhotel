@@ -41,6 +41,17 @@ namespace Server.Items {
 	
 	public static void Initialize() {
 	    CommandSystem.Register( "SetGatherSystem", AccessLevel.Developer, new CommandEventHandler( SetGatherSystem_OnCommand ) );
+
+	    //specified with namespaces because of conflict with harvesting
+	    if( Server.Engines.Gather.Lumberjacking.Controller == null ) {
+		Console.WriteLine( "Warning: Lumberjacking Controller is not properly set!" );
+	    }
+	    if( Server.Engines.Gather.Mining.Controller == null ) {
+		Console.WriteLine( "Warning: Mining Controller is not properly set!" );
+	    }
+	    if( Server.Engines.Gather.Fishing.Controller == null ) {
+		Console.WriteLine( "Warning: Fishing Controller is not properly set!" );
+	    }
 	}
 
 	[Usage( "SetGatherSystem <system>" )]

@@ -23,7 +23,7 @@ namespace Server {
 	}
 
 	public static void Initialize() {
-	    System.Console.WriteLine("Initializing new Damage Scalar object...");
+	    System.Console.Write("Initializing new Damage Scalar object...");
 	    Mobile.DamageScalar = new ActualDamageScalar();
 	    System.Console.WriteLine("Done!");
 	}
