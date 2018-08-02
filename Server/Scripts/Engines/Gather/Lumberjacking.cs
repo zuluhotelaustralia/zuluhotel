@@ -86,23 +86,14 @@ namespace Server.Engines.Gather {
 	{
 	    // is this fast enough?  Should it be in its own thread?
 	    int dist = -1;
-	    for ( int i = 0; dist < 0 && i < m_OreTiles.Length; ++i ){
-		dist = ( m_OreTiles[i] - tileID );
+	    for ( int i = 0; dist < 0 && i < m_TreeTiles.Length; ++i ){
+		dist = ( m_TreeTiles[i] - tileID );
 		if( dist == 0){
 		    return true;
 		}
 	    }
 
-	    dist = -1;
-	    
-	    for ( int i = 0; dist < 0 && i < m_SandTiles.Length; ++i ){
-		dist = ( m_SandTiles[i] - tileID );
-		if( dist == 0 ) {
-		    return true;
-		}
-	    }
-
-            return false;
+	    return false;
 	}
 
 	public override bool BeginGathering( Mobile from, Item tool )
