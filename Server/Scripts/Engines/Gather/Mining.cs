@@ -237,7 +237,7 @@ namespace Server.Engines.Gather
 	{
 	    m_Nodes = new List<GatherNode>();
 	    
-	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 0, 150.0, typeof(IronOre) );
+	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof(IronOre) );
 	    m_Nodes.Add(node);
 	    
 	    // // The digging effect

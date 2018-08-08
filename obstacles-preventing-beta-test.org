@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [79/80]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [79/83]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -160,6 +160,14 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE log edits done to characters by staff
 *** TODO publish logs automagically
 
+* Bugs [0/4]
+:PROPERTIES:
+:cookie_data: todo recursive
+:end:
+** TODO items (weapons) not displaying name properly (looted magic weapons)
+** TODO weapons not taking material properly
+** TODO wraith form still ticks after you die
+** TODO wraith form takes forever to tick
 
 #+NAME: oretable
 |               |       |            |         | <30>                           |    |   |

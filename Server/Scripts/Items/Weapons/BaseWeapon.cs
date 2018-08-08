@@ -3388,10 +3388,10 @@ namespace Server.Items
 	    if ( resourceType == null )
 		resourceType = craftItem.Resources.GetAt( 0 ).ItemType;
 
+	    Resource = CraftResources.GetFromType( resourceType );
+	    
 	    if ( Core.AOS )
 	    {
-		Resource = CraftResources.GetFromType( resourceType );
-
 		CraftContext context = craftSystem.GetContext( from );
 
 		if ( context != null && context.DoNotColor )
