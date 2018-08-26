@@ -1,0 +1,53 @@
+THIS IS A LOG OF ME (necr0potenc3) TRYING TO LOG IN TO OSI (4.0.8a client period)
+USING AN IGR ACCOUNT. NOID = 0xEFFF
+DAMNED KOREAN AND THEIR INTERNET GAME ROOMS :P
+
+
+Initializing...
+
+Initializing the socket list
+Initializing the packet handler
+Initializing window hooks
+Initializing api hooks
+Initializing GUI
+Initializing Plugins
+:WORLDCALLBACK:ADDED: Callback: 14A1CD0 Slot: 0
+0: Plugin Info.dll loaded
+>> Socket 940 created. Type: 1
+>> Socket 1028 created. Type: 1
+>> Closed socket: 1028
+>> Socket 1024 created. Type: 1
+Clearing sockets
+New socket: 1024
+Client->IRW Seed 4 bytes
+0000: c0 a8 c8 01 -- -- -- -- -- -- -- -- -- -- -- -- : ....
+
+:CRYPT: IGR login packet detected
+:CRYPT: Calculated Seed: 0x01C8A8C0 Key1: 0x01454550 Key2: 0x31148831
+:CRYPT: IRW encryption set to: 4. Key1: 0x2FD3257D Key2: 0xA2FF527F
+Switching to login socket, seed 0x01C8A8C0
+Client->IRW IGR Account login request 78 bytes
+0000: cf 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : ................
+0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : ................
+0020: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 : ................
+0030: 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ef : ................
+0040: 00 54 45 4b 45 45 00 24 4c 01 4e 55 4d 42 -- -- : .TEKEE.$L.NUMB
+
+IRW->Server IGR Account login request 78 bytes
+0000: cf 41 64 6d 69 6e 00 00 00 00 00 00 00 00 00 00 : .Admin..........
+0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 61 : ...............a
+0020: 64 6d 69 6e 00 00 00 00 00 00 00 00 00 00 00 00 : dmin............
+0030: 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ef : ................
+0040: 00 54 45 4b 45 45 00 24 4c 01 4e 55 4d 42 -- -- : .TEKEE.$L.NUMB
+
+Server->IRW Account login failed 2 bytes
+0000: 82 00 -- -- -- -- -- -- -- -- -- -- -- -- -- -- : ..
+
+IRW->Client Account login failed 2 bytes
+0000: 82 00 -- -- -- -- -- -- -- -- -- -- -- -- -- -- : ..
+
+>> Closing current socket: 1024
+>> Closed socket: 1024
+>> Failed to close socket: 940. It should be the translation socket
+>> Closed 0 open sockets on exit
+n0p3 rlz :)

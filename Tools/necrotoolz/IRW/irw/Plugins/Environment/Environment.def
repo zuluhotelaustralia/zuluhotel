@@ -1,0 +1,6 @@
+LIBRARY	Environment
+
+EXPORTS
+	InitPlugin
+	UnloadPlugin
+	GetPluginInfo

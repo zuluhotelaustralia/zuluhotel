@@ -1,0 +1,7 @@
+LIBRARY	Info
+
+EXPORTS
+	InitPlugin
+	UnloadPlugin
+	GetPluginInfo
+	

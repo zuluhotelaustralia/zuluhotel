@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Smooth", "Smooth.vcproj", "{FA474C52-A3BA-4403-AB84-8C273D19C17F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{FA474C52-A3BA-4403-AB84-8C273D19C17F}.Debug.ActiveCfg = Debug|Win32
+		{FA474C52-A3BA-4403-AB84-8C273D19C17F}.Debug.Build.0 = Debug|Win32
+		{FA474C52-A3BA-4403-AB84-8C273D19C17F}.Release.ActiveCfg = Release|Win32
+		{FA474C52-A3BA-4403-AB84-8C273D19C17F}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,984 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List
+href="UOEncryption%20library%20api%20guide_files/filelist.xml">
+<title>UOEncryption library api guide</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Daniel Cavalcanti</o:Author>
+  <o:LastAuthor>Daniel Cavalcanti</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>142</o:TotalTime>
+  <o:Created>2005-02-22T20:44:00Z</o:Created>
+  <o:LastSaved>2005-02-22T20:44:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1855</o:Words>
+  <o:Characters>10574</o:Characters>
+  <o:Company>x90</o:Company>
+  <o:Lines>88</o:Lines>
+  <o:Paragraphs>24</o:Paragraphs>
+  <o:CharactersWithSpaces>12405</o:CharactersWithSpaces>
+  <o:Version>11.6360</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span lang=PT-BR style='font-size:16.0pt;mso-ansi-language:PT-BR'>UOEncryption
+library api guide<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'>Huffman
+code by:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal>Tables from Ultimate Melange</p>
+
+<p class=MsoNormal>Daniel ‘Necr0Potenc3’ Cavalcanti</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Login encryption code by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Sphere gray server source code + Injection’s source code
+(Beosil and Infidel I think)</p>
+
+<p class=MsoNormal>Daniel ‘Necr0Potenc3’ Cavalcanti (code cleanup and C++ -&gt;
+pure C conversion)</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Login encryption get keys code by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>RElf (unknown work… maybe crypto math?)</p>
+
+<p class=MsoNormal>Alexander ‘Mamaich’ (coding)</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Twofish and Blowfish code by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Bruno ‘Beosil’ Heidelberger (original code)</p>
+
+<p class=MsoNormal>Luke ‘Infidel’ Dunstan (maintainer)</p>
+
+<p class=MsoNormal>Roman ‘Fallout’ Ilichev (code cleanup of Twofish)</p>
+
+<p class=MsoNormal>Daniel ‘Necr0Potenc3’ Cavalcanti (code cleanup and C++ -&gt;
+pure C conversion)</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>MD5 code by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Aladdin Enterprises (base MD5 code)</p>
+
+<p class=MsoNormal>Daniel ‘Necr0Potenc3’ Cavalcanti (reverse engineering of the
+client and code enhancement)</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'>Description of Ultima Online’s
+encryption<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>The uo
+client connects to the login server which then redirects the client to a game
+server, thus we have a login socket and a game socket.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-indent:.5in'>Note: the login server and game server
+can be the same, such thing happens in free shards.</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>LOGIN:<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal style='text-indent:.5in'>The first encryption is given in
+the login socket. It’s client-&gt;server only. The server-&gt;client stream has
+no encryption or compression.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-indent:.5in'>The first login encryption code
+dates from the 1.25.35 and bellow clients. The second encryption code is used
+only in version 1.25.36 and uses a especial set of 6 keys. All other versions
+of Ultima Online clients, including the current ones, use the enhanced version
+of the first type of login encryption. Suffice to say it is simple and well
+coded.</p>
+
+<p class=MsoNormal style='text-indent:.5in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-indent:.5in'>The UOEncryption library supports
+all 3 types of login encryption but currently only the most common one, used in
+the current days, is exported for usage.</p>
+
+<p class=MsoNormal style='text-indent:.5in'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'>GAME:<o:p></o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'><span style='mso-tab-count:1'>            </span></b>The
+server-&gt;client stream is always compressed with Huffman. Huffman tables used
+by the UO client are static.</p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'><span style='mso-tab-count:1'>            </span></b>The UO client uses
+Blowfish, Blowfish + Twofish or Twofish + MD5.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='mso-tab-count:1'>            </span>On
+the first two cases (Blowfish, Blowfish + Twofish) the encryption is done only
+on the client-&gt;server stream. On the third case (Twofish + MD5), Twofish is
+applied to the client-&gt;server stream while MD5 is applied to the
+server-&gt;client stream.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='mso-tab-count:1'>            </span>Blowfish
+is used in 2.0.0 and bellow clients. Blowfish + Twofish is used in 2.0.0x to
+2.0.3 clients. Client 2.0.4 and above use Twofish + MD5.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='mso-tab-count:1'>            </span>The
+MD5 server-&gt;client encryption is new and until the release of UOEncryption,
+unknown. It was reversed engineered by Daniel ‘Necr0Potenc3’ Cavalcanti. It
+works by generating the digest (MD5’s 16 bytes table) using Twofish’s subData3
+array. The digest is then used to xor the server-&gt;client packets after the
+packets have been compressed with Huffman. Very simple and well thought.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><span style='mso-tab-count:1'>            </span>Note:
+Blowfish is the only part of UO’s encryption that does not depend on anything,
+even the game seed is useless for it.</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'>API Guide<o:p></o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Login crypt:<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='mso-tab-count:1'>            </span></b>Whenever the login socket is
+created, you have to reset the login crypt. It is done by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'>LoginCryptObj
+LCObj; /* a global var */<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span lang=PT-BR style='mso-ansi-language:PT-BR'>/* in the
+initialization routine */<o:p></o:p></span></p>
+
+<p class=MsoNormal>LCObj.pseed = seed; /* the seed is the first packet in the
+socket. Always 4 bytes long */</p>
+
+<p class=MsoNormal>LCObj.k1 = login key1; /* you have to find or set this */</p>
+
+<p class=MsoNormal>LCObj.k2 = login key2;</p>
+
+<p class=MsoNormal>LoginCryptInit(&amp;LCObj);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>The
+encryption and decryption is done by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>LoginCryptEncrypt(&amp;LCObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note: Inbuf
+and Outbuf can be the same. Len is the size of Inbuf. Outbuf should have the
+same size or greater. If you are using both encryption and decryption, remember
+to create a LoginCryptObj for each.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Game crypt (Huffman):<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='mso-tab-count:1'>            </span></b>Huffman does not need to be
+initialized unless you wish to use support for incomplete codewords. The
+incomplete codewords issue is something which I never saw happening but I
+included it in the library just to make it complete. You can call the Huffman
+apis by setting the HuffmanObj pointer to NULL if you do not wish to use it.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>If you do
+wish to use the incomplete codeword support, you have to declare the HuffmanObj
+and initialize it.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>HuffmanObj HuffObj; /* global var */</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/* in the initialization function */</p>
+
+<p class=MsoNormal>DecompressClean(&amp;HuffObj);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>To compress
+packets:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Compress(&amp;Outbuf, &amp;InBuf, &amp;OutbufSize,
+&amp;InbufSize);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note: Inbuf
+contains the data to be compressed, Outbuf will hold it. Outbufsize should
+contain Outbuf’s size in bytes. After Compress is called, Outbufsize will hold
+how many bytes were transferred to Outbuf. InbufSize should hold the size of
+Inbuf.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note2:
+Outbuf’s size should be the double of Inbuf’s size. For safety, since
+compression will not always compress.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>For
+decompression:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Decompress(&amp;Outbuf, &amp;Inbuf, &amp;OutbufSize,
+&amp;InbufSize, &amp;HuffObj);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note: Inbuf
+contains the data to be decompressed, Outbuf will hold it. Outbufsize should
+contain the size of Outbuf. Inbufsize should hold the size of Inbuf. Huffobj is
+the HuffmanObj to be used in case incomplete codewords support is to be used.
+It can be set to NULL so it won’t be used.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note2:
+Outbuf’s size should be ((Inbuf’s size * 4) + 4)</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Game crypt (Blowfish):<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='mso-tab-count:1'>            </span></b>Upon the creation of the game
+socket you have to reset the encryption:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>BlowfishObj BFObj; /* global var */</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/* in the initialization routine */</p>
+
+<p class=MsoNormal>BlowfishInit(&amp;BFObj);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Encryption/Decryption:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>BlowfishEncrypt(&amp;BFObj, &amp;Inbuf, &amp;OutBuf, len);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note: InBuf
+and Outbuf can be the same. Len is the size of Inbuf. Outbuf should have the
+same size or greater. If you are using both encryption and decryption, remember
+to create a BlowfishObj for each.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Game crypt (Blowfish
++ Twofish):<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>The
+initialization is done by:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/* globals */</p>
+
+<p class=MsoNormal>BlowfishObj BFObj;</p>
+
+<p class=MsoNormal>TwofishObj TFObj;</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/* in the init function */</p>
+
+<p class=MsoNormal>BlowfishInit(&amp;BFObj);</p>
+
+<p class=MsoNormal>TFObj.IP = seed; /* the seed of the game socket */</p>
+
+<p class=MsoNormal>TwofishInit(&amp;TFObj);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Encryption:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>BlowfishEncrypt(&amp;BFObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal>TwofishEncrypt(&amp;TFObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Decryption:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>TwofishEncrypt(&amp;BFObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal>BlowfishDecrypt(&amp;BFObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Note: Inbuf
+and Outbuf can be the same. Len is the size of Inbuf.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Game crypt (Twofish +
+MD5):<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='mso-tab-count:1'>            </span></b>Initialize twofish and md5 at
+the start of the socket.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/* globals */</p>
+
+<p class=MsoNormal>TwofishObj TFObj;</p>
+
+<p class=MsoNormal>MD5Obj MDObj;</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>/* at the initialize function */</p>
+
+<p class=MsoNormal>TFObj.IP = seed; /* 4 bytes please */</p>
+
+<p class=MsoNormal>TwofishInit(&amp;TFObj);</p>
+
+<p class=MsoNormal>MD5Init(&amp;MDObj, &amp;TFObj.subData3[0], 256);</p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'> </span></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Twofish
+encryption/decryption:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>TwofishEncrypt(&amp;TFObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>MD5
+encryption/decryption:</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>MD5Encrypt(&amp;MDObj, &amp;Inbuf, &amp;Outbuf, len);</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'>APIs<o:p></o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int
+CalculateKeys(unsigned char *Plaintext, unsigned char *Ciphertext, unsigned int
+*Seed, unsigned int *Key1, unsigned int *Key2)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *Plaintext
+– </b>Contains the non-encrypted look of the Ciphertext</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char <span
+style='mso-spacerun:yes'> </span>*Ciphertext – </b>Contains the encrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned int
+*LoginSeed –</b> Contains the seed</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned int
+*ClientLoginKey1 – </b>Receives the login key 1</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned int
+*ClientLogin Key2 – </b>Receives the login key 2</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Calculates
+the login keys using the Ciphertext buffer for the crypt math. Compare s the
+decrypted Ciphertext with the Plaintext and returns 1 on success, -1 on
+failure. Both Plaintext and Ciphertext must be *AT LEAST* 61 bytes long. The
+values are passed to ClientLoginKey1 and ClientLoginKey2 independent of the
+function succeeding or not.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+LoginCryptInit(LoginCryptObj *obj)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'>LoginCryptObj *Obj – </b>A pointer to a LoginCryptObj structure</p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Initializes
+the crypt info of the ‘obj’ structure. The pseed value of the structure must be
+declared. Has to be called before calling the LoginCryptEncrypt.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-align:justify'><b style='mso-bidi-font-weight:
+normal'>void LoginCryptEncrypt(LoginCryptObj *obj, unsigned char *in, unsigned
+char *out, int len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>LoginCryptObj *Obj – </b>A
+pointer to a LoginCryptObj structure</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *in – </b>A
+pointer to a buffer with the data to be encrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *out – </b>A
+pointer to a buffer to dump the encrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int len – </b>The
+amount of bytes in the ‘in’ buffer to be encrypted</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Encrypts
+and decrypts login packets. Uses the encryption method used in clients greater
+than 1.25.36. The ‘out’ buffer must be of the same size or greater than ‘len’</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void Compress(char
+*dest, const char *src, int *dest_size, int *src_size)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>char *dest – </b>A pointer
+to a buffer to dump the compressed data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>const char *src – </b>A
+pointer to a buffer with the data to be compressed</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int *dest_size – </b>A
+pointer to the integer with the size of ‘dest’ in bytes</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int *src_size – </b>A
+pointer to the integer with the amount of bytes to be compressed in ‘src’</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Compresses
+data using UO’s Huffman tables. When the compression is done ‘dest_size’ will
+hold the amount of bytes in ‘dest’.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+DecompressClean(HuffmanObj *obj)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>HuffmanObj *obj – </b>A
+pointer to a HuffmanObj structure</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Should only
+be used if the user intends to support incomplete codewords. Not really
+necessary. Has to be called before calling the Decompress function when passing
+a ‘obj’ parameter.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void Decompress(char
+*dest, const char *src, int *dest_size, int *src_size, HuffmanObj *obj)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>char *dest – </b>A
+pointer to a buffer to dump the decompressed data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>const char *src – </b>A
+pointer to a buffer with the data to be decompressed</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int *dest_size – </b>A
+pointer to the integer with the size of ‘dest’ in bytes</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int *src_size – </b>A
+pointer to the integer with the amount of bytes to be decompressed in ‘src’</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Decompresses
+data by using UO’s Huffman table. The ‘obj’ pointer can be set to NULL if the
+user does not intend to use the incomplete codeword support. But if he does,
+DecompressClean should be called in the start of the socket.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+BlowfishInit(BlowfishObj *Obj)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>BlowfishObj *Obj – </b>A
+pointer to a BlowfishObj structure</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>No values
+of the ‘Obj’ structure has to be declared. Has to be called before calling the
+other Blowfish functions.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+BlowfishEncrypt(BlowfishObj *Obj, unsigned char *in, unsigned char *out, int
+len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>BlowfishObj *Obj – </b>A
+pointer to a BlowfishObj structure</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *in – </b>A
+pointer to a buffer with the data to be encrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *out – </b>A
+pointer to a buffer to dump the encrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int len – </b>The
+amount of bytes in the ‘in’ buffer to be encrypted</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Encrypts
+data… like… what else did you expect? (ROFLMAO) Encrypts data in the game
+socket.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void BlowfishDecrypt(BlowfishObj
+*Obj, unsigned char *in, unsigned char *out, int len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>BlowfishObj *Obj – </b>A
+pointer to a BlowfishObj structure</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *in – </b>A
+pointer to a buffer with the data to be decrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *out – </b>A
+pointer to a buffer to dump the decrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int len – </b>The
+amount of bytes in the ‘in’ buffer to be decrypted</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Decrypts
+Blowfish-encrypted-data in the game socket.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+TwofishInit(TwofishObj *Obj)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>TwofishObj *Obj – </b>A
+pointer to a TwofishObj structure</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>No values
+of the ‘Obj’ structure has to be declared. Has to be called before calling the
+TwofishEncrypt function.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void TwofishEncrypt(BlowfishObj
+*Obj, unsigned char *in, unsigned char *out, int len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>TwofishObj *Obj – </b>A
+pointer to a TwofishObj structure</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *in – </b>A
+pointer to a buffer with the data to be encrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *out – </b>A
+pointer to a buffer to dump the encrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int len – </b>The
+amount of bytes in the ‘in’ buffer to be encrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void MD5Init(MD5Obj
+*Obj, unsigned char *Data, unsigned int Size)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>MD5Obj *Obj – </b>A
+pointer to a MD5Obj structure</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *Data –
+</b>A pointer to a buffer</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned int Size – </b>Amount
+of bytes in the buffer</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='text-indent:.5in'>If used in UO (duh…) the ‘Data’
+should be a subData3 table generated by TwofishInit. This will generate a MD5
+Digest (a 16 byte table) used by MD5Encrypt to xor the bytes to be encrypted.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+MD5Encrypt(MD5Obj *Obj, unsigned char *in, unsigned char *out, int len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>MD5Obj *Obj – </b>A
+pointer to a MD5Obj structure</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *in – </b>A
+pointer to a buffer with the data to be encrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *out – </b>A
+pointer to a buffer to dump the encrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int len – </b>The
+amount of bytes in the ‘in’ buffer to be encrypted</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>Used both
+for encryption and decryption.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+PWEncrypt(unsigned char *in, unsigned char *out, int len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>void
+PWDecrypt(unsigned char *in, unsigned char *out, int len)<o:p></o:p></b></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *in – </b>A
+pointer to a buffer with the data to be encrypted</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>unsigned char *out – </b>A
+pointer to a buffer to dump the encrypted data</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>int len – </b>The
+amount of bytes in the ‘in’ buffer to be encrypted</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>PWEncrypt
+will encrypt the data and PWDecrypt will decrypt… well that couldn’t be more
+obvious… heh</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'>GREET THOSE WHO DESERVE. SHARE WITH THOSE WHO SEEK.
+OPEN YOUR MIND AND WE’LL OPEN YOU A NOT A NEW WORLD… BUT A WORLD YOU DIDN’T
+KNOW IT WAS THERE.<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'>-gR<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><span style='mso-spacerun:yes'>      </span>alle x90<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt'>for we are not to be named…<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span></p>
+
+</div>
+
+</body>
+
+</html>

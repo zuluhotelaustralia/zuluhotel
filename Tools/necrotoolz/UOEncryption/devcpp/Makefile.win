@@ -1,0 +1,51 @@
+# Project: UOEncryption
+# Makefile created by Dev-C++ 4.9.9.1
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = ../FishCrypt.o ../Getkeys.o ../LoginCrypt.o ../Main.o ../MD5.o ../UOHuffman.o ../Password.o $(RES)
+LINKOBJ  = ../FishCrypt.o ../Getkeys.o ../LoginCrypt.o ../Main.o ../MD5.o ../UOHuffman.o ../Password.o $(RES)
+LIBS =  -L"C:/Program Files/Dev-Cpp/lib" --no-export-all-symbols --add-stdcall-alias  -lgmon --input-def "../UOEncryption.def"  -s 
+INCS =  -I"C:/Program Files/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/mingw32"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/backward"  -I"C:/Program Files/Dev-Cpp/lib/gcc-lib/mingw32/3.3.1/include"  -I"C:/Program Files/Dev-Cpp/include" 
+BIN  = UOEncryption.dll
+CXXFLAGS = $(CXXINCS) -DBUILDING_DLL=1   -ansi -pg
+CFLAGS = $(INCS) -DBUILDING_DLL=1   -ansi -pg
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before UOEncryption.dll all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libUOEncryption.def
+STATICLIB=libUOEncryption.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../FishCrypt.o: ../FishCrypt.c
+	$(CC) -c ../FishCrypt.c -o ../FishCrypt.o $(CFLAGS)
+
+../Getkeys.o: ../Getkeys.c
+	$(CC) -c ../Getkeys.c -o ../Getkeys.o $(CFLAGS)
+
+../LoginCrypt.o: ../LoginCrypt.c
+	$(CC) -c ../LoginCrypt.c -o ../LoginCrypt.o $(CFLAGS)
+
+../Main.o: ../Main.c
+	$(CC) -c ../Main.c -o ../Main.o $(CFLAGS)
+
+../MD5.o: ../MD5.c
+	$(CC) -c ../MD5.c -o ../MD5.o $(CFLAGS)
+
+../UOHuffman.o: ../UOHuffman.c
+	$(CC) -c ../UOHuffman.c -o ../UOHuffman.o $(CFLAGS)
+
+../Password.o: ../Password.c
+	$(CC) -c ../Password.c -o ../Password.o $(CFLAGS)

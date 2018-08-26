@@ -1,0 +1,6 @@
+LIBRARY LSU
+
+EXPORTS
+	InitPlugin
+	UnloadPlugin
+	GetPluginInfo

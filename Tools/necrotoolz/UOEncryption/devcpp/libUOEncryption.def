@@ -1,0 +1,2 @@
+; dlltool --base-file C:\DOCUME~1\n0p3\LOCALS~1\Temp/cca02320.base --output-exp UOEncryption.exp --dllname UOEncryption.dll --output-def libUOEncryption.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\n0p3\LOCALS~1\Temp/cca02320.def --output-lib libUOEncryption.a
+EXPORTS

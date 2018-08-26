@@ -1,0 +1,78 @@
+# Project: irw
+# Makefile created by Dev-C++ 4.9.9.1
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = ../BufferQueue.o ../GUI.o ../ImportHook.o ../INIProfile.o ../Logger.o ../Main.o ../Plugins.o ../Registry.o ../UOCrypt.o ../UONetwork.o ../UOPacketHandler.o ../UOProtocol.o ../UOWnd.o ../UOWorld.o ../UOTarget.o ../UOJournal.o $(RES)
+LINKOBJ  = ../BufferQueue.o ../GUI.o ../ImportHook.o ../INIProfile.o ../Logger.o ../Main.o ../Plugins.o ../Registry.o ../UOCrypt.o ../UONetwork.o ../UOPacketHandler.o ../UOProtocol.o ../UOWnd.o ../UOWorld.o ../UOTarget.o ../UOJournal.o $(RES)
+LIBS =  -L"C:/Program Files/Dev-Cpp/lib" --no-export-all-symbols --add-stdcall-alias  -lgmon --input-def "../irw.def" "../UOEncryption.lib" -lwsock32 -lcomctl32 -lgdi32  -s 
+INCS =  -I"C:/Program Files/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/mingw32"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/backward"  -I"C:/Program Files/Dev-Cpp/lib/gcc-lib/mingw32/3.3.1/include"  -I"C:/Program Files/Dev-Cpp/include" 
+BIN  = irw.dll
+CXXFLAGS = $(CXXINCS) -DBUILDING_DLL=1   -ansi -pg
+CFLAGS = $(INCS) -DBUILDING_DLL=1 -D_WIN32_IE=0x0300   -ansi -pg
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before irw.dll all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libirw.def
+STATICLIB=libirw.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../BufferQueue.o: ../BufferQueue.c
+	$(CC) -c ../BufferQueue.c -o ../BufferQueue.o $(CFLAGS)
+
+../GUI.o: ../GUI.c
+	$(CC) -c ../GUI.c -o ../GUI.o $(CFLAGS)
+
+../ImportHook.o: ../ImportHook.c
+	$(CC) -c ../ImportHook.c -o ../ImportHook.o $(CFLAGS)
+
+../INIProfile.o: ../INIProfile.c
+	$(CC) -c ../INIProfile.c -o ../INIProfile.o $(CFLAGS)
+
+../Logger.o: ../Logger.c
+	$(CC) -c ../Logger.c -o ../Logger.o $(CFLAGS)
+
+../Main.o: ../Main.c
+	$(CC) -c ../Main.c -o ../Main.o $(CFLAGS)
+
+../Plugins.o: ../Plugins.c
+	$(CC) -c ../Plugins.c -o ../Plugins.o $(CFLAGS)
+
+../Registry.o: ../Registry.c
+	$(CC) -c ../Registry.c -o ../Registry.o $(CFLAGS)
+
+../UOCrypt.o: ../UOCrypt.c
+	$(CC) -c ../UOCrypt.c -o ../UOCrypt.o $(CFLAGS)
+
+../UONetwork.o: ../UONetwork.c
+	$(CC) -c ../UONetwork.c -o ../UONetwork.o $(CFLAGS)
+
+../UOPacketHandler.o: ../UOPacketHandler.c
+	$(CC) -c ../UOPacketHandler.c -o ../UOPacketHandler.o $(CFLAGS)
+
+../UOProtocol.o: ../UOProtocol.c
+	$(CC) -c ../UOProtocol.c -o ../UOProtocol.o $(CFLAGS)
+
+../UOWnd.o: ../UOWnd.c
+	$(CC) -c ../UOWnd.c -o ../UOWnd.o $(CFLAGS)
+
+../UOWorld.o: ../UOWorld.c
+	$(CC) -c ../UOWorld.c -o ../UOWorld.o $(CFLAGS)
+
+../UOTarget.o: ../UOTarget.c
+	$(CC) -c ../UOTarget.c -o ../UOTarget.o $(CFLAGS)
+
+../UOJournal.o: ../UOJournal.c
+	$(CC) -c ../UOJournal.c -o ../UOJournal.o $(CFLAGS)

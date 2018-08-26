@@ -1,0 +1,184 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    DIALOG_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 159
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 195
+    END
+
+    DIALOG_PROFILE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 339
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 195
+    END
+
+    DIALOG_FOLDERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 262
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 34
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+DIALOG_MAIN DIALOGEX 0, 0, 166, 202
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "IRW Launcher"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    EDITTEXT        TEXT_INFO,6,132,156,48,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_VSCROLL
+    CONTROL         "",LIST_PROFILES,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,6,
+                    6,96,120
+    PUSHBUTTON      "Launch",BUTTON_LAUNCH,120,6,42,12
+    PUSHBUTTON      "New",BUTTON_NEW,120,24,42,12
+    PUSHBUTTON      "Edit",BUTTON_EDIT,120,42,42,12
+    PUSHBUTTON      "Delete",BUTTON_DELETE,120,60,42,12
+    PUSHBUTTON      "Paths",BUTTON_CHANGEPATHS,120,78,42,12
+    PUSHBUTTON      "Exit",BUTTON_EXIT,126,186,36,12
+    PUSHBUTTON      "Check for updates",BUTTON_UPDATE,6,186,84,12,
+                    WS_DISABLED
+END
+
+DIALOG_PROFILE DIALOGEX 0, 0, 346, 202
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Edit profile"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "Profile:",STATIC_PROFILENAME,7,16,26,8
+    LTEXT           "Client:",STATIC_CLIENT,7,31,22,8
+    LTEXT           "Shard addr:",STATIC_SHARDIP,14,111,39,8
+    LTEXT           "Port:",STATIC_SHARDPORT,14,126,18,8
+    LTEXT           "Username:",STATIC_USERNAME,15,142,36,8
+    LTEXT           "Password:",STATIC_PWD,15,156,36,8
+    LTEXT           "Encryption:",STATIC_CRYPT,15,55,36,8
+    GROUPBOX        "",STATIC_GROUP,6,46,195,132
+    GROUPBOX        "Plugins",GROUP_PLUGINS,204,6,132,192
+    EDITTEXT        EDIT_PLUGINDETAIL,210,132,120,60,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        EDIT_PROFILE,36,16,135,12,ES_AUTOHSCROLL
+    EDITTEXT        EDIT_CLIENT,36,31,135,12,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "...",BUTTON_CLIENT,174,36,18,6
+    CONTROL         "Use IRW",CHECK_USEIRW,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,67,44,10
+    CONTROL         "",LIST_CRYPT,"SysListView32",LVS_LIST | LVS_SINGLESEL | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,59,54,134,48
+    EDITTEXT        EDIT_SHARDADDRESS,58,109,135,12,ES_AUTOHSCROLL
+    EDITTEXT        EDIT_SHARDPORT,58,123,135,12,ES_AUTOHSCROLL
+    EDITTEXT        EDIT_USERNAME,59,142,135,12,ES_AUTOHSCROLL
+    EDITTEXT        EDIT_PWD,59,156,135,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Update profile",BUTTON_UPDATE,99,183,54,12
+    PUSHBUTTON      "Cancel",BUTTON_CANCEL,155,183,48,12
+    CONTROL         "",LIST_PLUGINS,"SysListView32",LVS_LIST | LVS_SINGLESEL | 
+                    LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,210,18,86,108
+    PUSHBUTTON      "Add",BUTTON_ADD,300,18,30,12
+    PUSHBUTTON      "Remove",BUTTON_REMOVE,300,36,30,12
+END
+
+DIALOG_FOLDERS DIALOGEX 0, 0, 269, 41
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "IRW Installation Directory"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    EDITTEXT        TEXT_IRWFOLDER,6,6,240,12,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "...",BUTTON_IRWFOLDER,252,12,12,6
+    PUSHBUTTON      "Update",BUTTON_OK,6,24,42,12
+    PUSHBUTTON      "Cancel",BUTTON_CANCEL,54,24,42,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IRW_ICON                ICON                    "IRW.ico"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

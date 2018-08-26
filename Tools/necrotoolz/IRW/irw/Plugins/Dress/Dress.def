@@ -1,0 +1,6 @@
+LIBRARY	Dress
+
+EXPORTS
+	InitPlugin
+	UnloadPlugin
+	GetPluginInfo

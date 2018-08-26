@@ -1,0 +1,170 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+DIALOG_LAYERINFO DIALOGEX 0, 0, 284, 206
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Player layers",STATIC_LAYERS,6,6,276,102
+    EDITTEXT        EDIT_LAYERINFO,6,114,276,90,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    CONTROL         "Head",CHECK_HEAD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    18,18,30,8
+    CONTROL         "Neck",CHECK_NECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    60,18,30,8
+    CONTROL         "Hair",CHECK_HAIR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    108,30,24,8
+    CONTROL         "Facial Hair",CHECK_FACIALHAIR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,60,30,48,8
+    CONTROL         "Earrings",CHECK_EARRINGS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,30,42,8
+    CONTROL         "Shirt",CHECK_SHIRT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,48,30,8
+    CONTROL         "Torso",CHECK_TORSO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,60,48,30,8
+    CONTROL         "Tunic",CHECK_TUNIC,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,60,30,8
+    CONTROL         "Cloak",CHECK_CLOAK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,60,60,30,8
+    CONTROL         "Waist",CHECK_WAIST,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,78,30,8
+    CONTROL         "Skirt",CHECK_SKIRT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,60,78,30,8
+    CONTROL         "Pants",CHECK_PANTS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,90,30,8
+    CONTROL         "Shoes",CHECK_SHOES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,60,90,36,8
+    CONTROL         "Right Hand",CHECK_RHAND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,60,48,8
+    CONTROL         "Left Hand",CHECK_LHAND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,72,48,8
+    CONTROL         "Ring",CHECK_RING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    210,60,30,8
+    CONTROL         "Bracelet",CHECK_BRACELET,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,210,72,42,8
+    CONTROL         "Gloves",CHECK_GLOVES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,48,36,8
+    CONTROL         "Arms",CHECK_ARMS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    210,48,30,8
+    CONTROL         "Backpack",CHECK_BACKPACK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,18,42,8
+    CONTROL         "Mount",CHECK_MOUNT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,210,18,36,8
+    CONTROL         "Bank",CHECK_BANK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    246,18,30,8
+    CONTROL         "Buy",CHECK_BUY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    210,30,24,8
+    CONTROL         "Restock",CHECK_RESTOCK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,30,42,8
+    CONTROL         "Sell",CHECK_SELL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    246,30,24,8
+    PUSHBUTTON      "Get layer info",BUTTON_GETINFO,234,90,48,12
+    EDITTEXT        EDIT_TARGET,174,90,54,12,ES_AUTOHSCROLL
+    LTEXT           "Target serial: (blank for self)",STATIC_TARGET,126,84,
+                    48,18
+END
+
+DIALOG_PLAYERINFO DIALOGEX 0, 0, 368, 140
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    CONTROL         "",LIST_PLAYERS,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SORTASCENDING | LVS_ALIGNLEFT | 
+                    WS_BORDER | WS_TABSTOP,6,6,354,102
+    CONTROL         "Display life changes",CHECK_PRINTLIFE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,6,114,78,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    DIALOG_LAYERINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 277
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 199
+    END
+
+    DIALOG_PLAYERINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 361
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

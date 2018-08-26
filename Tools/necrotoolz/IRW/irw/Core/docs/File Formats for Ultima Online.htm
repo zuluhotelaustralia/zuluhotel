@@ -1,0 +1,1296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0046)http://gonzo.kiev.ua/formats/file_formats.html -->
+<HTML><HEAD><TITLE>File Formats for Ultima Online</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252"><LINK 
+href="format.css" type=text/css rel=stylesheet>
+<META content="Alazane's Corner: File Formats for Ultima Online." 
+name=DESCRIPTION>
+<META content="MSHTML 6.00.2900.2523" name=GENERATOR></HEAD>
+<BODY class=bodytext vLink=#8e7b6a link=#67594e bgColor=#f2f0ee 
+background="File Formats for Ultima Online_files/Background.jpg"><A 
+href="http://gonzo.kiev.ua/formats/contact.html"><IMG alt="Contacting Alazane" 
+src="File Formats for Ultima Online_files/email.gif" align=right 
+border=0></A><BR>
+<CENTER>
+<P><IMG src="File Formats for Ultima Online_files/title_fformat.gif"></P>
+<P><IMG alt=Break src="File Formats for Ultima Online_files/break.gif"></P>
+<P>If you have any information that you feel should be added to this document, 
+please <A href="http://gonzo.kiev.ua/formats/contact.html">contact</A> me or one 
+of the fine people below.</P>
+<P><IMG alt=Break src="File Formats for Ultima Online_files/break.gif"></P>
+<H2>Credits</H2>
+<P><EM><STRONG>ANIM.MUL</STRONG></EM>, <EM><STRONG>ANIM.IDX</STRONG></EM>, 
+<EM><STRONG>ART.MUL</STRONG></EM>, <EM><STRONG>ARTIDX.MUL</STRONG></EM>, 
+<EM><STRONG>PALETTE.MUL</STRONG></EM>, <EM><STRONG>TEXMAPS.MUL</STRONG></EM>, 
+<EM><STRONG>TEXIDX.MUL</STRONG></EM>, <EM><STRONG>TILEDATA.MUL</STRONG></EM>, 
+<EM><STRONG>GUMPIDX.MUL</STRONG></EM>, <EM><STRONG>GUMPART.MUL</STRONG></EM>, 
+<EM><STRONG>HUES.MUL</STRONG></EM> and <EM><STRONG>FAQ</STRONG></EM> coalation 
+by Alazane</P>
+<P><EM><STRONG>MAP0</STRONG></EM>, <EM><STRONG>RADARCOL</STRONG></EM>, 
+<EM><STRONG>STAIDX0</STRONG></EM>, <EM><STRONG>STATICS0</STRONG></EM> and 
+<EM><STRONG>FAQ</STRONG></EM> touch-up by Tim Walters</P>
+<P><EM><STRONG>SKILLS.IDX</STRONG></EM>, <EM><STRONG>SKILLS.MUL</STRONG></EM> by 
+Sir Valgriz</P>
+<P><EM><STRONG>SOUNDIDX</STRONG></EM>, <EM><STRONG>SOUND</STRONG></EM> by Steve 
+Dang</P>
+<P><EM><STRONG>VERDATA</STRONG></EM> by Cironian</P></CENTER><!-- CONTENTS -->
+<H3><A name=Contents>Contents</A></H3>
+<DIV class=bodytext4><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#1.0">1.0 Miscellaneous 
+Information</A><BR>
+<DIV class=bodytext5><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#1.1">1.1 Types</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#1.2">1.2 
+Colors</A><BR></DIV><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#2.0">2.0 MUL 
+files</A><BR><A href="http://gonzo.kiev.ua/formats/file_formats.html#3.0">3.0 
+Definitions</A><BR>
+<DIV class=bodytext5><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.1">3.1 ANIM.IDX</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.2">3.2 ANIM.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.3">3.3 
+ARTIDX.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.4">3.4 ART.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.5">3.5 
+GUMPART.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.6">3.6 
+GUMPIDX.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.7">3.7 HUES.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.8">3.8 MAP0.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.9">3.9 
+MULTI.IDX</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.10">3.10 
+MULTI.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.11">3.11 
+PALETTE.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.12">3.12 
+RADARCOL.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.13">3.13 
+SKILLS.IDX</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.14">3.14 
+SKILLS.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.15">3.15 
+SOUND.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.16">3.16 
+SOUNDIDX.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.17">3.17 
+STAIDX0.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.18">3.18 
+STATICS0.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.19">3.19 
+TILEDATA.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.20">3.20 
+TEXIDX.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.21">3.21 
+TEXMAPS.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.22">3.22 
+VERDATA.MUL</A><BR><A 
+href="http://gonzo.kiev.ua/formats/file_formats.html#3.23">3.23 DIF 
+files</A><BR></DIV></DIV><BR><!-- Miscellaneous Information -->
+<H3><A name=1.0>1.0 Miscellaneous Information</A></H3>
+<H4><A name=1.1>1.1 Types</A></H4>
+<TABLE class=bodytext4 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>CHAR</TD>
+    <TD>8 bit</TD>
+    <TD>unsigned character (ex. 'A', 'a', etc.)</TD></TR>
+  <TR>
+    <TD>BYTE</TD>
+    <TD>8 bit</TD>
+    <TD>signed value (-128..127)</TD></TR>
+  <TR>
+    <TD>UBYTE</TD>
+    <TD>8 bit</TD>
+    <TD>unsigned value (0..255)</TD></TR>
+  <TR>
+    <TD>WORD</TD>
+    <TD>16 bit</TD>
+    <TD>signed value (-32768..32767)</TD></TR>
+  <TR>
+    <TD>UWORD</TD>
+    <TD>16 bit</TD>
+    <TD>unsigned value (0..65535)</TD></TR>
+  <TR>
+    <TD>DWORD</TD>
+    <TD>32 bit</TD>
+    <TD>signed value (-2147483648..2147483647)</TD></TR></TBODY></TABLE><!-- Colors -->
+<H4><A name=1.2>1.2 Colors</A></H4>
+<P class=bodytext4>Ultima is completely 16 bit based--meaning that each pixel is 
+UWORD value that can be broken down as follows:</P>
+<TABLE class=bodytext4 border=1>
+  <TBODY>
+  <TR>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>1</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>5</TD>
+    <TD>4</TD>
+    <TD>3</TD>
+    <TD>2</TD>
+    <TD>1</TD>
+    <TD>0</TD>
+    <TD>9</TD>
+    <TD>8</TD>
+    <TD>7</TD>
+    <TD>6</TD>
+    <TD>5</TD>
+    <TD>4</TD>
+    <TD>3</TD>
+    <TD>2</TD>
+    <TD>1</TD>
+    <TD>0</TD></TR>
+  <TR>
+    <TD>U</TD>
+    <TD bgColor=#ff0000><FONT color=white>R</FONT></TD>
+    <TD bgColor=#ff0000><FONT color=white>R</FONT></TD>
+    <TD bgColor=#ff0000><FONT color=white>R</FONT></TD>
+    <TD bgColor=#ff0000><FONT color=white>R</FONT></TD>
+    <TD bgColor=#ff0000><FONT color=white>R</FONT></TD>
+    <TD bgColor=#008000><FONT color=white>G</FONT></TD>
+    <TD bgColor=#008000><FONT color=white>G</FONT></TD>
+    <TD bgColor=#008000><FONT color=white>G</FONT></TD>
+    <TD bgColor=#008000><FONT color=white>G</FONT></TD>
+    <TD bgColor=#008000><FONT color=white>G</FONT></TD>
+    <TD bgColor=#0000ff><FONT color=white>B</FONT></TD>
+    <TD bgColor=#0000ff><FONT color=white>B</FONT></TD>
+    <TD bgColor=#0000ff><FONT color=white>B</FONT></TD>
+    <TD bgColor=#0000ff><FONT color=white>B</FONT></TD>
+    <TD bgColor=#0000ff><FONT color=white>B</FONT></TD></TR></TBODY></TABLE>
+<P class=bodytext4>Where U=Unused, R=Red, G=Green and B=Blue</P>
+<P class=bodytext4>So, to convert to 32 bit:</P>
+<P class=bodytext4>Color32 = ( (((Color16 &gt;&gt; 10) &amp; 0x1F) * 0xFF / 
+0x1F) |<BR>((((Color16 &gt;&gt; 5) &amp; 0x1F) * 0xFF / 0x1F) &lt;&lt; 8) 
+|<BR>((( Color16 &amp; 0x1F) * 0xFF / 0x1F) &lt;&lt; 16));</P><!-- MUL Files -->
+<H3><A name=2.0>2.0 MUL Files</A></H3>
+<TABLE class=bodytext4 border=0>
+  <TBODY>
+  <TR>
+    <TD width=79>ANIM</TD>
+    <TD width=389>Animations such as monsters, people, and armor.</TD></TR>
+  <TR>
+    <TD width=79>ANIMDATA</TD></TR>
+  <TR>
+    <TD width=79>ANIMINFO</TD></TR>
+  <TR>
+    <TD width=79>ART</TD>
+    <TD width=389>Artwork such as ground, objects, etc.</TD></TR>
+  <TR>
+    <TD width=79>ARTIDX</TD>
+    <TD width=389>Index to ART</TD></TR>
+  <TR>
+    <TD width=79>CHARDATA</TD></TR>
+  <TR>
+    <TD width=79>FONTS</TD>
+    <TD width=389>Fixed size bitmaps style fonts.</TD></TR>
+  <TR>
+    <TD width=79>GUMPART</TD>
+    <TD width=389>Gumps. Stationary controller bitmaps such as windows, 
+      buttons, paperdoll pieces, etc.</TD></TR>
+  <TR>
+    <TD width=79>GUMPIDX</TD>
+    <TD width=389>Index to GUMPART</TD></TR>
+  <TR>
+    <TD width=79>HUES</TD></TR>
+  <TR>
+    <TD width=79>LIGHT</TD></TR>
+  <TR>
+    <TD width=79>LIGHTIDX</TD></TR>
+  <TR>
+    <TD width=79>MAP0</TD>
+    <TD width=389>Terrain data</TD></TR>
+  <TR>
+    <TD width=79>MULTI</TD>
+    <TD width=389>Groups of art (houses, castles, etc)</TD></TR>
+  <TR>
+    <TD width=79>PALETTE</TD>
+    <TD width=389>Contains an 8 bit palette (use unknown)</TD></TR>
+  <TR>
+    <TD width=79>RADARCOL</TD>
+    <TD width=389>Colors for converting the terrain data to radar view</TD></TR>
+  <TR>
+    <TD width=79>REGIONS</TD></TR>
+  <TR>
+    <TD width=79>SKILLGRP</TD></TR>
+  <TR>
+    <TD width=79>SKILLS</TD></TR>
+  <TR>
+    <TD width=79>SOUND</TD>
+    <TD width=389>Sampled sounds </TD></TR>
+  <TR>
+    <TD width=79>SOUNDIDX</TD>
+    <TD width=389>Index into SOUND</TD></TR>
+  <TR>
+    <TD width=79>STAIDX0</TD>
+    <TD width=389>Index into STATICS0</TD></TR>
+  <TR>
+    <TD width=79>STATICS0</TD>
+    <TD width=389>Static objects on the map</TD></TR>
+  <TR>
+    <TD width=79>TEXIDX</TD>
+    <TD width=389>Index into TEXMAPS</TD></TR>
+  <TR>
+    <TD width=79>TEXMAPS</TD>
+    <TD width=389>Texture map data (the ground).</TD></TR>
+  <TR>
+    <TD width=79>TILEDATA</TD>
+    <TD width=389>Data about tiles in ART </TD></TR>
+  <TR>
+    <TD width=79>VERDATA</TD>
+    <TD width=389>Patched overrides of data in any of the above 
+  files.</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------>
+<H3><A name=3.0>3.0 Definitions</A></H3><!-- ANIM.IDX -->
+<H4><A name=3.1>3.1 ANIM.IDX</A></H4>
+<P class=bodytext4>This file contains an index into ANIM.MUL. To load a specific 
+group of frames from ANIM.MUL, simply seek BNum * 12, read in the index record 
+and use Lookup to find the group within ANIM.MUL.</P>
+<H5>ANIM.IDX</H5>
+<H6>Index Record (12 bytes)</H6>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD></TR>
+  <TR>
+    <TD colSpan=4>Lookup</TD>
+    <TD colSpan=4>Size</TD>
+    <TD colSpan=4>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD Lookup - Is either undefined ($FFFFFFFF -1) or the file 
+offset in ANIM.MUL<BR>DWORD Size - Size of the art tile<BR>DWORD Unknown - 
+Unknown </P><!-- ANIM.MUL -->
+<H4><A name=3.2>3.2 ANIM.MUL</A></H4>
+<P class=bodytext4>This file contains the raw animation data. It can be accessed 
+using ANIM.IDX.</P>
+<H5>ANIM.IDX</H5>
+<P class=bodytext5><B>AnimationGroup</B><BR>WORD[256] Palette<BR>DWORD 
+FrameCount<BR>DWORD[FrameCount] FrameOffset </P>
+<H5>Frame</H5>
+<P class=bodytext5>Seek from the end of Palette plus FrameOffset[FrameNum] bytes 
+to find the start of Frame<BR>WORD ImageCenterX<BR>WORD ImageCenterY<BR>WORD 
+Width<BR>WORD Height<BR>...Data Stream..<BR></P>
+<H5>Data Stream</H5><PRE>// Note: Set CenterY and CenterY to the vertical and horizontal position in
+//       the bitmap at which you want the anim to be drawn.
+		
+PrevLineNum = $FF
+Y = CenterY - ImageCenterY - Height
+while not EOF
+{
+  Read UWORD RowHeader
+  Read UWORD RowOfs
+  
+  if (RowHeader = 0x7FFF) or (RowOfs = 0x7FFF) then Exit
+  
+  RunLength = RowHeader and $FFF
+  LineNum = RowHeader shr 12
+  Unknown = RowOfs and $3F
+  RowOfs = RowOfs sar 6
+  X = CenterX + RowOfs
+  if (PrevLineNum &lt;&gt; $FF) and (LineNum &lt;&gt; PrevLineNum) then Y++
+  PrevLineNum = LineNum
+  if Y &gt;= 0 then
+  {
+    if Y &gt;= MaxHeight then Exit;
+  
+    For I := 0 to RunLength-1 do 
+    {
+      Read(B, 1)
+      Row[X+I,Y] = Palette[B]
+    }
+  }
+  Seek(RunLength, FromCurrent)
+}
+</PRE><!-- ARTIDX.MUL -->
+<H4><A name=3.2>3.2 ARTIDX.MUL</A></H4>
+<P class=bodytext4>This file contains an index into ART.MUL. To load a specific 
+tile number in ART.MUL, simply seek BNum * 12, read in the index tile data and 
+use Lookup to find the tile within ART.MUL.</P>
+<H5>ARTIDX.MUL</H5>
+<H6>Index Record (12 bytes)</H6>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD></TR>
+  <TR>
+    <TD colSpan=4>Lookup</TD>
+    <TD colSpan=4>Size</TD>
+    <TD colSpan=4>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD Lookup - Is either undefined ($FFFFFFFF -1) or the file 
+offset in ART.MUL<BR>DWORD Size - Size of the art tile<BR>DWORD Unknown - 
+Unknown </P><!-- ART.MUL -->
+<H4><A name=3.4>3.4 ART.MUL</A></H4>
+<P class=bodytext4>This file has no header and contains tiles that can only be 
+read via ARTIDX.MUL. There are two types of tiles, which I will call Raw and Run 
+tiles.</P>
+<H5>ART.MUL</H5>
+<P class=bodytext5>DWORD Flag<BR>..DATA..<BR><BR>if (Flag &gt; $FFFF or Flag == 
+0)<BR>... tile is Raw ...<BR>else<BR>... tile is Run ...<BR>end if </P>
+<H5>Raw Tile <IMG src="File Formats for Ultima Online_files/MMTexMaps.gif"></H5>
+<P class=bodytext5>Raw tiles are always 44x44 pixels square. However, the data 
+stored for a tile resembles a square block, rotated 45 degrees.&nbsp; Therefore, 
+the tile is loaded from the tip, down to the widest portion, then down to the 
+bottom tip as opposed to a straight matrix.</P>
+<P class=bodytext5>WORD Pixels, in the series:<BR>2, 4, 6, 8, 10 ... 40, 42, 44, 
+44, 42, 40 ... 10, 8, 6, 4, 2 (See 1.2 Colors for pixel info)</P>
+<P class=bodytext5>The resulting top 9 lines look like this:</P>
+<TABLE class=bodytext5 cellSpacing=1 border=0>
+  <TBODY>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR>
+  <TR>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#ffffff>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD>
+    <TD width=10 bgColor=#808080>&nbsp;</TD></TR></TBODY></TABLE>
+<H5>Run Tile <IMG 
+src="File Formats for Ultima Online_files/Book_of_Truth.gif"></H5>
+<P class=bodytext5>UWORD Width<BR>UWORD Height </P><PRE>Read : UWORD Width
+if (Width = 0 || Width &gt;= 1024) return
+Read : UWORD Height
+if (Height = 0 || Height &gt;= 1024) return
+Read : LStart = A table of Height number of UWORD values
+DStart = Stream position
+X = 0;
+Y = 0;
+Seek : DStart + LStart[Y] * 2
+while (Y &lt; Height)
+{
+&nbsp; Read : UWORD XOffs
+&nbsp; Read : UWORD Run
+&nbsp; if (XOffs + Run &gt;= 2048) 
+&nbsp;&nbsp;&nbsp; return
+&nbsp; else if (XOffs + Run &lt;&gt; 0)
+&nbsp; {
+&nbsp;&nbsp;&nbsp; X += XOffs;
+&nbsp;&nbsp;&nbsp; Load Run number of pixels at X (See 1.2 Colors for pixel info)
+&nbsp;&nbsp;&nbsp; X += Run;
+&nbsp; }
+&nbsp; else
+&nbsp; {
+&nbsp;&nbsp;&nbsp; X = 0;
+&nbsp;&nbsp;&nbsp; Y++;
+&nbsp;&nbsp;&nbsp; Seek : DStart + LStart[Y] * 2
+&nbsp; }
+}</PRE><!-- GUMPART -->
+<H4><A name=3.5>3.5 GUMPART.MUL</A></H4>
+<H5>Loading a Gump</H5>
+<P class=bodytext5>Gumps are stored in runs of pixels (badly inefficient, but is 
+better than no compression). An array of pairs of Value &amp; Word are loaded 
+for a particular row (shown below) and these can then be easily shoved into a 
+bitmap. For example, if the final bitmap was going to display one black pixel, 
+then three white pixels, the stream would contain 0000 0001 FFFF 0003. It is 
+imperative that GUMPIDX.MUL be loaded since it contains Width, Height and Size 
+which are needed to decode the Gump. </P><PRE>DataStart := CurrentPosition
+
+DWORD RowLookup[GumpIdx.Height]
+
+for Y = 0 to GumpIdx.Height-1 
+{
+&nbsp;&nbsp;cf Y &lt; Height-1 then
+&nbsp;&nbsp;&nbsp;&nbsp;RunBlockCount := RowLookup[Y+1]-RowLookup[Y]
+&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;RunBlockCount := GumpIdx.Size div 4 - RowLookup[Y];
+&nbsp;
+&nbsp;&nbsp;Seek : DataStart + RowLookup[Y] * 4
+&nbsp;&nbsp;(WORD Value, WORD Run)[RunBlockCount]
+}</PRE><!-- GUMPIDX -->
+<H4><A name=3.6>3.6 GUMPIDX</A></H4>
+<P class=bodytext4>This file contains an index into GUMPART.MUL.</P>
+<H5>GUMPIDX.MUL</H5>
+<H6>Index Record (12 bytes)</H6>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD></TR>
+  <TR>
+    <TD colSpan=4>Lookup</TD>
+    <TD colSpan=4>Size</TD>
+    <TD colSpan=2>Height</TD>
+    <TD colSpan=2>Width</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD Lookup - Is either undefined ($FFFFFFFF -1) or the file 
+offset in GUMPART.MUL<BR>DWORD Size - Size of the block<BR>UWORD Height - Height 
+(in pixels) of the block<BR>UWORD Width - Width (in pixels) of the block </P><!-- HUES -->
+<H4><A name=3.7>3.7 HUES.MUL</A></H4>
+<P class=bodytext4>Just read in HueGroups until you hit the end of the file. 
+Note that large chunks of this file consist of garbage--OSI admits to this 
+(something about a bug in their old code). </P>
+<P class=bodytext4>If you want to look at the hues, check out <A 
+href="http://alazane.surf-va.com/uohueeditor.html">this</A>.</P>
+<P class=bodytext4>Hues are applied to an image in one of two ways. Either all 
+gray pixels are mapped to the specified color range (resulting in a part of an 
+image changed to that color) or all pixels are first mapped to grayscale and 
+then the specified color range is mapped over the entire image.
+<P>
+<H5>HueEntry</H5>
+<P class=bodytext5>WORD ColorTable[32];<BR>WORD TableStart;<BR>WORD 
+TableEnd;<BR>CHAR Name[20]; </P>
+<H5>HueGroup</H5>
+<P class=bodytext5>DWORD Header;<BR>HueEntry Entries[8]; </P><!-- MAP0 -->
+<H4><A name=3.8>3.8 MAP0.MUL</A></H4>
+<P class=bodytext4>This file holds all the base-level terrain, and doesn't look 
+too pretty without the static data.</P>
+<P class=bodytext4>The map is stored as a 768x512 matrix of blocks. A block is 
+basically a 8x8 matrix of cells. Each individual cell contains data about the 
+tile for that cell, and the cell's altitude.&nbsp; Therefore, the entire map is 
+6144x4096 individual cells in size.</P>
+<P class=bodytext4>Blocks are loaded top-to-bottom then left-to-right. Cells are 
+loaded from blocks left-to-right then top-to-bottom.</P>
+<P class=bodytext4>The formula used to locate an individual CELL in the file is 
+a little complex, since you have to work out what block it is in...</P>
+<P class=bodytext4>If you refer to the map in blocks, then there's 512 blocks 
+down, by 768 blocks across.</P>
+<P class=bodytext4>XBlock = Int(XPos/8)<BR>YBlock = Int(YPos/8)<BR>Block Number 
+= (XBlock * 512) + YBlock </P>
+<H5>MAP0 (37,748,736 bytes)</H5>
+<P class=bodytext5>393,216 [Block]s sequentially, Block = 196 bytes<BR>DWORD 
+header, unknown content<BR>64 Cells<BR></P>
+<H5>Cell (3 bytes)</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD></TR>
+  <TR>
+    <TD colSpan=2>Color</TD>
+    <TD>Alt</TD></TR></TBODY></TABLE>
+<P class=bodytext5>UWORD cell graphic (which can be looked up in 
+RADARCOL).<BR>BYTE Altitude (-128..127 units above/below sea level).</P><!-- MULTI.IDX -->
+<H4><A name=3.9>3.9 MULTI.IDX</A></H4>
+<P class=bodytext4>This file contains an index into MULTI.MUL</P>
+<H5>MULTI.IDX</H5>
+<H6>Index Record (12 bytes)</H6>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD></TR>
+  <TR>
+    <TD colSpan=4>Start</TD>
+    <TD colSpan=4>Length</TD>
+    <TD colSpan=4>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD Lookup - Is either undefined ($FFFFFFFF -1) or the file 
+offset in MULTI.MUL<BR>DWORD Size - Size of the multi block<BR>DWORD Unknown - 
+Unknown </P><!-- MULTI.MUL -->
+<H4><A name=3.10>3.10 MULTI.MUL</A></H4>
+<H5>MULTI.MUL</H5>
+<P class=bodytext5>The Size should be loaded from MULTI.IDX and as many Multi 
+Blocks should be read as fit into this size. </P>
+<H5>Multi Block (12 bytes)</H5>
+<P class=bodytext5>WORD BlockNum<BR>WORD X<BR>WORD Y<BR>WORD Alt<BR>UDWORD Flags 
+</P>
+<P class=bodytext5>Once 16384+BlockNum has been looked up in ART, the block can 
+be drawn using the following positioning:<BR><BR>DrawX = LeftMostX + 
+(MultiBlock.X - MultiBlock.Y) * 22 - (Block.Width shr 1)<BR>DrawY = TopMostY + 
+(MultiBlock.X + MultiBlock.Y) * 22 - Block.Height - MultiBlock.Alt * 4 </P><!-- PALETTE -->
+<H4><A name=3.11>3.11 PALETTE.MUL</A></H4>
+<P class=bodytext4>Contains an 8 bit palette. Use Unknown.</P>
+<H5>PALETTE.MUL (768 bytes)</H5>
+<P class=bodytext5>256 [Palette Entries]<BR>
+<H5>Palette Entries (3 bytes)</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD></TR>
+  <TR>
+    <TD>R</TD>
+    <TD>G</TD>
+    <TD>B</TD></TR></TBODY></TABLE>
+<P class=bodytext5>UBYTE Red<BR>UBYTE Green<BR>UBYTE Blue </P><!-- RADARCOL.MUL -->
+<H4><A name=3.12>3.12 RADARCOL.MUL</A></H4>
+<P class=bodytext4>Use to lookup colors for tile numbers from MAP0 and 
+STAIDX0/STATICS0.</P>
+<H5>RADARCOL.MUL (131,072 bytes)</H5>
+<P class=bodytext5>65536 sequential UWORD color values (see 1.2 Colors for color 
+info)</P><!-- SKILLS.IDX -->
+<H4><A name=3.13>3.13 SKILLS.IDX</A></H4>
+<P class=bodytext4>Contains index entries into the SKILLS.MUL file.</P>
+<H5>SKILLS.IDX</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD>
+    <TD width=20 bgColor=#ffffff>C</TD>
+    <TD width=20 bgColor=#ffffff>D</TD>
+    <TD width=20 bgColor=#ffffff>E</TD>
+    <TD width=20 bgColor=#ffffff>F</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>00</TD>
+    <TD colSpan=4>Start</TD>
+    <TD colSpan=4>Length</TD>
+    <TD colSpan=4>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD is the Start position for this sound<BR>DWORD is the 
+Length of the entire associated data segment<BR>DWORD Unknown<BR></P><!-- SKILLS.MUL -->
+<H4><A name=3.14>3.14 SKILLS.MUL</A></H4>
+<P class=bodytext4>Contains skill names.</P>
+<P class=bodytext5>BYTE is 1 if there is a button next to the name, 0 if there 
+is not<BR>CHAR Name[] is the name of the skill </P><!-- SOUND.MUL -->
+<H4><A name=3.15>3.15 SOUND.MUL</A></H4>
+<P class=bodytext4>Contains sampled sounds from the game. All sounds are 16 bit 
+mono sampled at 22050khz.</P>
+<H5>SOUND.MUL</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD>
+    <TD width=20 bgColor=#ffffff>C</TD>
+    <TD width=20 bgColor=#ffffff>D</TD>
+    <TD width=20 bgColor=#ffffff>E</TD>
+    <TD width=20 bgColor=#ffffff>F</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>00</TD>
+    <TD colSpan=16>Original filename</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>10</TD>
+    <TD colSpan=4>Unknown</TD>
+    <TD colSpan=4>Unknown</TD>
+    <TD colSpan=4>Unknown</TD>
+    <TD colSpan=4>Unknown</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>20</TD>
+    <TD colSpan=16>Data...</TD></TR></TBODY></TABLE>
+<P class=bodytext5>CHAR[16] Original filename<BR>DWORD Unknown<BR>DWORD 
+Unknown<BR>DWORD Unknown<BR>DWORD Unknown<BR>DATA </P><!-- SOUNDIDX.MUL -->
+<H4><A name=3.16>3.16 SOUNDIDX.MUL</A></H4>
+<P class=bodytext4>Contains index entries into the SOUND.MUL file.</P>
+<H5>SOUNDIDX.MUL</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD>
+    <TD width=20 bgColor=#ffffff>C</TD>
+    <TD width=20 bgColor=#ffffff>D</TD>
+    <TD width=20 bgColor=#ffffff>E</TD>
+    <TD width=20 bgColor=#ffffff>F</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>00</TD>
+    <TD colSpan=4>Start</TD>
+    <TD colSpan=4>Length</TD>
+    <TD colSpan=2>Index</TD>
+    <TD colSpan=2>Reserved</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD is the Start position for this sound<BR>DWORD is the 
+Length of the entire associated data segment<BR>UWORD index<BR>UWORD reserved 
+</P><!-- STAIDX0.MUL -->
+<H4><A name=3.17>3.17 STAIDX0.MUL</A></H4>
+<P class=bodytext4>Contains index to entries into the STATICS0.MUL file. Special 
+thanks to Mental4 from ultima.scorched.com for the hint to cracking this one The 
+12 byte blocks in this file match up one to one with the blocks in the map file, 
+hence the file size of 768 * 512 * 12 = 4,718,592 bytes.&nbsp; Pretty simple, 
+easiest to read this at the same time as MAP0.MUL, if there's static objects, 
+read them per block, doing height comparisons to see which ones to draw for 
+radar type view.</P>
+<H5>STAIDX0.MUL (4,718,592 bytes)</H5>
+<P class=bodytext5>393,216 [Index Block]s sequentially<BR>
+<H6>Index Record (12 bytes)</H6>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD></TR>
+  <TR>
+    <TD colSpan=4>Start</TD>
+    <TD colSpan=4>Length</TD>
+    <TD colSpan=4>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD is the Start position (0xFFFFFFFF if no static objects 
+exist for this block)<BR>DWORD is the Length of the data segment<BR>DWORD is of 
+unknown use </P><!-- STATICS0.MUL -->
+<H4><A name=3.18>3.18 STATICS0.MUL</A></H4>
+<P class=bodytext4>Notes: This is where all the fun stuff is, as a side-note, I 
+tried playing with NO static objects for the purpose of item-recovery (stuff 
+lost behind walls), the Britain area is duplicated server-side (could explain 
+the extra lag there), same with Moonglow area, places like Buccaneer's Den, 
+Trinsic and other towns worked fine... no walls, no bridges, no shallow water 
+(note, server still stops you from walking through walls, even if you can't see 
+them).</P>
+<H5>STATICS0.MUL</H5>
+<P class=bodytext5>Static Data (7 bytes)</P>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD></TR>
+  <TR>
+    <TD colSpan=2>Color</TD>
+    <TD>X</TD>
+    <TD>Y</TD>
+    <TD>Alt</TD>
+    <TD colSpan=2>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>UWORD for the Color/Object ID (add 16384 to offset it for 
+RADARCOL.MUL)<BR>UBYTE X Offset in block (0..7)<BR>UBYTE Y Offset in block 
+(0..7)<BR>BYTE Altitude (-128..127 units above/below sea level, like 
+MAP0)<BR>UWORD Unknown </P><!-- TILEDATA.MUL -->
+<H4><A name=3.19>3.19 TILEDATA.MUL</A></H4>
+<P class=bodytext4>Contains data about tiles in ART.MUL.</P>
+<H5>TILEDATA.MUL</H5>
+<P class=bodytext5>512 Blocks of [Land Tile Groups]<BR>X Blocks of [Static Tile 
+Groups] </P>
+<H5>Land Tile Groups (836 bytes)</H5>
+<P class=bodytext5>DWORD Unknown<BR>32 Blocks of [Land Tile Data] </P>
+<H5>Land Tile Data (26 bytes)</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD>
+    <TD width=20 bgColor=#ffffff>C</TD>
+    <TD width=20 bgColor=#ffffff>D</TD>
+    <TD width=20 bgColor=#ffffff>E</TD>
+    <TD width=20 bgColor=#ffffff>F</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>00</TD>
+    <TD colSpan=4>Flags</TD>
+    <TD colSpan=2>Texture ID</TD>
+    <TD colSpan=10>Tile Name...</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>10</TD>
+    <TD colSpan=10>...</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD Flags (see below)<BR>UWORD Texture ID (If 0, the land 
+tile has not texture)<BR>CHAR[20] Tile Name </P>
+<H5>Static Tile Groups (1188 bytes)</H5>
+<P class=bodytext5>DWORD Unknown<BR>32 Blocks of [Static Tile Data]</P>
+<H5>Static Tile Data (37 bytes)</H5>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD>
+    <TD width=20 bgColor=#ffffff>C</TD>
+    <TD width=20 bgColor=#ffffff>D</TD>
+    <TD width=20 bgColor=#ffffff>E</TD>
+    <TD width=20 bgColor=#ffffff>F</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>00</TD>
+    <TD colSpan=4>Flags</TD>
+    <TD>Weight</TD>
+    <TD>Quality</TD>
+    <TD colSpan=3>Unknown</TD>
+    <TD>Quantity</TD>
+    <TD colSpan=2>Anim ID</TD>
+    <TD>Unknown1</TD>
+    <TD>Hue</TD>
+    <TD colSpan=2>Unknown2</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>10</TD>
+    <TD>Height</TD>
+    <TD colSpan=15>Tile Name...</TD></TR>
+  <TR>
+    <TD width=20 bgColor=#ffffff>20</TD>
+    <TD colSpan=5>...</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD Flags (see below)<BR>BYTE Weight (weight of the item, 
+255 means not movable)<BR>BYTE Quality (If Wearable, this is a Layer. If Light 
+Source, this is Light ID)<BR>UWORD Unknown<BR>BYTE Unknown1<BR>BYTE Quantity (if 
+Weapon, this is Weapon Class. If Armor, Armor Class)<BR>UWORD Anim ID (The Body 
+ID the animatation. Add 50,000 and 60,000 respectivefully to get the two gump 
+indicies assocaited with this tile)<BR>BYTE Unknown2<BR>BYTE Hue (perhaps 
+colored light?)<BR>UWORD Unknown3<BR>BYTE Height (If Conatainer, this is how 
+much the container can hold)<BR>CHAR[20] Tile Name<BR></P>
+<H5>Flags</H5>
+<P class=bodytext5>0x00000001 Background<BR>0x00000002 Weapon<BR>0x00000004 
+Transparent<BR>0x00000008 Translucent<BR>0x00000010 Wall<BR>0x00000020 
+Damaging<BR>0x00000040 Impassable<BR>0x00000080 Wet<BR>0x00000100 
+Unknown<BR>0x00000200 Surface<BR>0x00000400 Bridge<BR>0x00000800 
+Generic/Stackable<BR>0x00001000 Window<BR>0x00002000 No Shoot<BR>0x00004000 
+Prefix A<BR>0x00008000 Prefix An<BR>0x00010000 Internal (things like hair, 
+beards, etc)<BR>0x00020000 Foliage<BR>0x00040000 Partial Hue<BR>0x00080000 
+Unknown 1<BR>0x00100000 Map<BR>0x00200000 Container<BR>0x00400000 
+Wearable<BR>0x00800000 LightSource<BR>0x01000000 Animated<BR>0x02000000 No 
+Diagonal<BR>0x04000000 Unknown 2<BR>0x08000000 Armor<BR>0x10000000 
+Roof<BR>0x20000000 Door<BR>0x40000000 StairBack<BR>0x80000000 StairRight<BR></P><!-- TEXIDX.MUL -->
+<H4><A name=3.20>3.20 TEXIDX.MUL</A></H4>
+<H5>TEXIDX.MUL</H5>
+<H6>Index Record (12 bytes)</H6>
+<TABLE class=bodytext5 border=1>
+  <TBODY>
+  <TR>
+    <TD width=20 bgColor=#ffffff>0</TD>
+    <TD width=20 bgColor=#ffffff>1</TD>
+    <TD width=20 bgColor=#ffffff>2</TD>
+    <TD width=20 bgColor=#ffffff>3</TD>
+    <TD width=20 bgColor=#ffffff>4</TD>
+    <TD width=20 bgColor=#ffffff>5</TD>
+    <TD width=20 bgColor=#ffffff>6</TD>
+    <TD width=20 bgColor=#ffffff>7</TD>
+    <TD width=20 bgColor=#ffffff>8</TD>
+    <TD width=20 bgColor=#ffffff>9</TD>
+    <TD width=20 bgColor=#ffffff>A</TD>
+    <TD width=20 bgColor=#ffffff>B</TD></TR>
+  <TR>
+    <TD colSpan=4>Start</TD>
+    <TD colSpan=4>Length</TD>
+    <TD colSpan=4>Unknown</TD></TR></TBODY></TABLE>
+<P class=bodytext5>DWORD is the Start position<BR>DWORD is the Length of the 
+data segment<BR>DWORD is of unknown use </P><!-- TEXMAPS.MUL -->
+<H4><A name=3.21>3.21 TEXMAPS.MUL</A></H4>
+<P class=bodytext4>The texture maps in general were about an afternoon hack. 
+Since the index is the same as all the other indices and the data is quite 
+straightforward, it was almost an afterthought to include it.</P>
+<H5>TEXMAPS.MUL</H5>
+<P class=bodytext5>Raw 16-bit data, sized as follows:<BR>If Length = 0x2000 then 
+data = 64*64<BR>If Length = 0x8000 then data = 128*128 </P><!-- VERDATA.MUL -->
+<H4><A name=3.22>3.22 VERDATA.MUL</A></H4>
+<P class=bodytext4>VERDATA.MUL contains patch entries that override already 
+existing entries in the above data files. The use of VERDATA.MUL was a recent 
+addition to InsideUO, thanks almost completely to Cironian for dropping the 
+format for it on me out of the blue.</P>
+<H5>VERDATA.MUL</H5>
+<P class=bodytext5>First DWORD: Number of entries in index</P>
+<P class=bodytext5><B>Index entry:</B><BR>DWORD: File ID (see index 
+below)<BR>DWORD: Block (Item number, Gump number or whatever; like in the 
+file)<BR>DWORD: Position (Where to find this block in verdata.mul)<BR>DWORD: 
+Size (Size in Byte)<BR>DWORD: Various (depends on the file format) </P>
+<P class=bodytext5><B>File IDs:</B> (* means used in current verdata)<BR>00 - 
+map0.mul<BR>01 - staidx0.mul<BR>02 - statics0.mul<BR>03 - artidx.mul<BR>04 - 
+art.mul*<BR>05 - anim.idx<BR>06 - anim.mul<BR>07 - soundidx.mul<BR>08 - 
+sound.mul<BR>09 - texidx.mul<BR>0A - texmaps.mul<BR>0B - gumpidx.mul<BR>0C - 
+gumpart.mul* - Various is WORD Height + WORD Width<BR>0D - multi.idx<BR>0E - 
+multi.mul*<BR>0F - skills.idx<BR>10 - skills.mul<BR>1E - tiledata.mul*<BR>1F - 
+animdata.mul* </P>
+<P class=bodytext5>The block of data that is located and read in from 
+VERDATA.MUL is of exactly the same format as the data in the source file. </P>
+<H4><A name=3.23>3.23 DIFF files</A></H4>
+<P class=bodytext4>Stadifl#.mul,Stadifi#.mul,Stadif#.mul,Mapdifl#.mul, and 
+Mapdif#.mul contains patch entries that override already existing entries in the 
+above data files. The use of diff files is activiated by a packet sent to the 
+client from the server. The 3D client, starting with LBR , no longer uses 
+Verdata.mul. It is uknown how other data patches are done. .</P>
+<H5>Stadifl#.mul, Mapdifl#.mul </H5>
+<P class=bodytext5>Until end of file, DWORDs:Block Number</P>
+<H5>Stadifi#.mul</H5>
+<P class=bodytext5>The format of this file maps exactly to the format of 
+StaIDX#.mul. Each entry corresponds to the blockid in the Stadifl#.mul. The 
+offset and length of the entires are the offset into Stadif#.mul </P>
+<H5>Mapdif#.mul</H5>
+<P class=bodytext5>The format of this file maps exactly to Map#.mul. Each entry 
+corresponds to the block id in Mapdifl#.mul.</P>
+<H5>Stadifi#.mul</H5>
+<P class=bodytext5>The format of this file maps exactly to Statics#.mul. This 
+file is indexed by Stadifi#.mul</P>
+<CENTER>
+<P><IMG alt=Break src="File Formats for Ultima Online_files/break.gif"></P>
+<P>Last reviewed by <A 
+href="http://gonzo.kiev.ua/formats/contact.html">Alazane</A> 
+03/23/2002</P></CENTER></BODY></HTML>

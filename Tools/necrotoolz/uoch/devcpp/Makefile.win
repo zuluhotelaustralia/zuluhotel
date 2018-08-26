@@ -1,0 +1,38 @@
+# Project: uoch
+# Makefile created by Dev-C++ 4.9.9.1
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = uoch_private.res
+OBJ  = ../CrackTools.o ../Main.o ../Crc.o $(RES)
+LINKOBJ  = ../CrackTools.o ../Main.o ../Crc.o $(RES)
+LIBS =  -L"C:/Program Files/Dev-Cpp/lib" -mwindows -lcomdlg32  -s 
+INCS =  -I"C:/Program Files/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/mingw32"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/backward"  -I"C:/Program Files/Dev-Cpp/lib/gcc-lib/mingw32/3.3.1/include"  -I"C:/Program Files/Dev-Cpp/include" 
+BIN  = uoch.exe
+CXXFLAGS = $(CXXINCS)   -ansi
+CFLAGS = $(INCS)   -ansi
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before uoch.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "uoch.exe" $(LIBS)
+
+../CrackTools.o: ../CrackTools.c
+	$(CC) -c ../CrackTools.c -o ../CrackTools.o $(CFLAGS)
+
+../Main.o: ../Main.c
+	$(CC) -c ../Main.c -o ../Main.o $(CFLAGS)
+
+../Crc.o: ../Crc.c
+	$(CC) -c ../Crc.c -o ../Crc.o $(CFLAGS)
+
+uoch_private.res: uoch_private.rc ../uoch.rc 
+	$(WINDRES) -i uoch_private.rc --input-format=rc -o uoch_private.res -O coff 

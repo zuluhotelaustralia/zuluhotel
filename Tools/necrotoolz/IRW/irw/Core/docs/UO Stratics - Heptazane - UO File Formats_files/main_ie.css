@@ -1,0 +1,279 @@
+A:link {
+	COLOR: #330000
+}
+A:visited {
+	COLOR: #330000
+}
+A:active {
+	COLOR: #330000
+}
+A:hover {
+	COLOR: maroon
+}
+BODY {
+	SCROLLBAR-FACE-COLOR: #907440; BACKGROUND: #a89060; SCROLLBAR-HIGHLIGHT-COLOR: #e8d4b8; SCROLLBAR-SHADOW-COLOR: #483420; COLOR: #000000; SCROLLBAR-3DLIGHT-COLOR: #dec185; SCROLLBAR-ARROW-COLOR: #663300; SCROLLBAR-TRACK-COLOR: #a89060; SCROLLBAR-DARKSHADOW-COLOR: #503c28
+}
+BODY {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+P {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+BLOCKQUOTE {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+TABLE {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+TR {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+TD {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+TH {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+LI {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+XMP {
+	FONT-SIZE: x-small; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+H1 {
+	COLOR: #330000; FONT-FAMILY: "Georgia", "Times New Roman", Times, serif
+}
+H2 {
+	COLOR: #330000; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+H3 {
+	COLOR: #330000; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+H4 {
+	COLOR: #330000; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+H5 {
+	COLOR: #330000; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+H6 {
+	COLOR: #330000; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+H5 {
+	MARGIN-BOTTOM: 0px
+}
+TD {
+	VERTICAL-ALIGN: top; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+.bar {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BACKGROUND: url(http://uo.stratics.com/shared/darkbg.jpg) #330000; BORDER-LEFT: 0px; COLOR: #ffffcc; LINE-HEIGHT: 100%; BORDER-BOTTOM: 0px; TEXT-ALIGN: left
+}
+.bar A:active {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BACKGROUND: url(http://uo.stratics.com/shared/darkbg.jpg) #330000; BORDER-LEFT: 0px; COLOR: #ffffcc; LINE-HEIGHT: 100%; BORDER-BOTTOM: 0px; TEXT-ALIGN: left
+}
+.bar A:link {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BACKGROUND: url(http://uo.stratics.com/shared/darkbg.jpg) #330000; BORDER-LEFT: 0px; COLOR: #ffffcc; LINE-HEIGHT: 100%; BORDER-BOTTOM: 0px; TEXT-ALIGN: left
+}
+.bar A:visited {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BACKGROUND: url(http://uo.stratics.com/shared/darkbg.jpg) #330000; BORDER-LEFT: 0px; COLOR: #ffffcc; LINE-HEIGHT: 100%; BORDER-BOTTOM: 0px; TEXT-ALIGN: left
+}
+.bar A:hover {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BACKGROUND: url(http://uo.stratics.com/shared/darkbg.jpg) #330000; BORDER-LEFT: 0px; COLOR: #ffffcc; LINE-HEIGHT: 100%; BORDER-BOTTOM: 0px; TEXT-ALIGN: left
+}
+.comment {
+	FONT-SIZE: xx-small; BACKGROUND: #c0c0c0
+}
+.top {
+	FONT-WEIGHT: bold; BACKGROUND: url(http://uo.stratics.com/shared/darkbg.jpg) #330000; COLOR: #ffffcc; TEXT-ALIGN: center
+}
+.heading {
+	FONT-WEIGHT: bold; BACKGROUND: #ffffcc; COLOR: #000000; TEXT-ALIGN: center
+}
+.comment {
+	FONT-SIZE: xx-small; COLOR: #330000
+}
+.comment LI {
+	FONT-SIZE: xx-small; COLOR: #330000
+}
+.comment P {
+	FONT-SIZE: xx-small; COLOR: #330000
+}
+.menuSection {
+	BORDER-RIGHT: black 1px; BORDER-TOP: black 1px; FONT-WEIGHT: bold; BACKGROUND-IMAGE: url(http://uo.stratics.com/shared/darkbg.jpg); BORDER-LEFT: black 1px; COLOR: #efc229; BORDER-BOTTOM: black 1px; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.menuSubSection {
+	BORDER-RIGHT: black 1px; BORDER-TOP: black 1px; FONT-WEIGHT: bold; BACKGROUND-IMAGE: url(http://uo.stratics.com/shared/darkbg.jpg); BORDER-LEFT: black 1px; COLOR: #efc229; BORDER-BOTTOM: black 1px; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.menu {
+	BORDER-RIGHT: black 1px; BORDER-TOP: black 1px; BACKGROUND-IMAGE: url(http://uo.stratics.com/shared/darkbg.jpg); BORDER-LEFT: black 1px; COLOR: #efc229; BORDER-BOTTOM: black 1px; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif
+}
+.menu A:link {
+	FONT-SIZE: xx-small; COLOR: #ffffcc; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}
+.menu A:visited {
+	FONT-SIZE: xx-small; COLOR: #ffffcc; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}
+.menu A:active {
+	FONT-SIZE: xx-small; COLOR: #ffffcc; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}
+.menu A:hover {
+	COLOR: #330000; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; BACKGROUND-COLOR: #efc229
+}
+.menuhead {
+	FONT-WEIGHT: bold; COLOR: white
+}
+.menuline {
+	FONT-SIZE: smaller; MARGIN: 0px; FONT-FAMILY: "MS Sans Serif", Geneva, sans-serif; TEXT-ALIGN: center
+}
+.newsTitle {
+	FONT-SIZE: xx-small; COLOR: black; FONT-FAMILY: "Tahoma", "Comic Sans MS", Arial, sans-serif
+}
+.newsSubject {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; FONT-WEIGHT: bold; BACKGROUND-IMAGE: url(http://uo.stratics.com/shared/darkbg.jpg); VERTICAL-ALIGN: middle; BORDER-LEFT: 0px; COLOR: #ffffcc; LINE-HEIGHT: 100%; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #330000; TEXT-ALIGN: left
+}
+.newsName {
+	FONT-SIZE: xx-small; BACKGROUND-COLOR: #ffffcc
+}
+.newsCat {
+	FONT-SIZE: xx-small
+}
+.newsText {
+	
+}
+TD.newshot {
+	BACKGROUND-COLOR: red
+}
+TD.newswarm {
+	BACKGROUND-COLOR: teal
+}
+TD.newscold {
+	BACKGROUND-COLOR: black
+}
+.td1 {
+	FONT-WEIGHT: bold; BACKGROUND-IMAGE: url(http://uo.stratics.com/shared/darkbg.jpg); COLOR: #ffffcc; BACKGROUND-COLOR: #330000
+}
+.td2 {
+	FONT-WEIGHT: bold; BACKGROUND: #ffffcc; COLOR: #000066
+}
+.td3 {
+	FONT-WEIGHT: bold; COLOR: black; TEXT-ALIGN: right
+}
+.td4 {
+	COLOR: black; TEXT-ALIGN: left
+}
+.td5 {
+	BACKGROUND: url(commentback.jpg) #c0c0c0
+}
+.td6 {
+	BACKGROUND-COLOR: #330000
+}
+.high {
+	COLOR: #a52a2a
+}
+.osi {
+	COLOR: #000088
+}
+.dark {
+	COLOR: #330000
+}
+.smalltext {
+	FONT-SIZE: xx-small
+}
+.network {
+	FONT-SIZE: xx-small; COLOR: navy; BACKGROUND-COLOR: white
+}
+.navTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 9px; COLOR: #fefefe; TEXT-DECORATION: none
+}
+.navTitle:link {
+	COLOR: #fefefe
+}
+.navTitle:visited {
+	COLOR: #fefefe
+}
+.navTitle:active {
+	COLOR: #daa520
+}
+.navTitle:hover {
+	COLOR: #daa520
+}
+.navMenu {
+	FONT-SIZE: 10px; WIDTH: 115px; COLOR: #fefefe; BACKGROUND-COLOR: #000000; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.navSubmenu {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; FONT-SIZE: 10px; PADDING-BOTTOM: 1px; WIDTH: 115px; PADDING-TOP: 1px; POSITION: absolute; BACKGROUND-COLOR: #000000; TEXT-ALIGN: left
+}
+.navSubmenuLink {
+	WIDTH: 100%; COLOR: #fefefe; TEXT-DECORATION: none
+}
+.navSubmenuLink:link {
+	WIDTH: 100%; COLOR: #fefefe
+}
+.navSubmenuLink:visited {
+	WIDTH: 100%; COLOR: #fefefe
+}
+.navSubmenuLink:active {
+	BACKGROUND: #fefefe; WIDTH: 100%; COLOR: #000000
+}
+.navSubmenuLink:hover {
+	BACKGROUND: #fefefe; WIDTH: 100%; COLOR: #000000
+}
+.siteTitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 9px; COLOR: #fefefe; TEXT-DECORATION: none
+}
+.siteTitle:link {
+	COLOR: #fefefe
+}
+.siteTitle:active {
+	COLOR: #daa520
+}
+.siteTitle:hover {
+	COLOR: #daa520
+}
+.siteMenu {
+	FONT-WEIGHT: bold; FONT-SIZE: x-small; WIDTH: 115px; COLOR: #efc229; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.siteSubmenu {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; FONT-SIZE: 10px; PADDING-BOTTOM: 1px; WIDTH: 115px; PADDING-TOP: 1px; POSITION: absolute; BACKGROUND-COLOR: #000000; TEXT-ALIGN: left
+}
+.siteSubmenuLink {
+	WIDTH: 100%; COLOR: #fefefe; TEXT-DECORATION: none
+}
+.siteSubmenuLink:link {
+	WIDTH: 100%; COLOR: #fefefe
+}
+.siteSubmenuLink:visited {
+	WIDTH: 100%; COLOR: #fefefe
+}
+.siteSubmenuLink:active {
+	BACKGROUND: #fefefe; WIDTH: 100%; COLOR: #000000
+}
+.siteSubmenuLink:hover {
+	BACKGROUND: #fefefe; WIDTH: 100%; COLOR: #000000
+}
+.submitButton {
+	BORDER-RIGHT: #330000 1px solid; BORDER-TOP: #330000 1px solid; FONT-SIZE: xx-small; BORDER-LEFT: #330000 1px solid; COLOR: #000000; BORDER-BOTTOM: #330000 1px solid; BACKGROUND-COLOR: #ffffcc
+}
+.searchButton {
+	BORDER-RIGHT: #330000 1px solid; BORDER-TOP: #330000 1px solid; FONT-SIZE: xx-small; BORDER-LEFT: #330000 1px solid; COLOR: #000000; BORDER-BOTTOM: #330000 1px solid; BACKGROUND-COLOR: #ffffcc
+}
+.searchText {
+	FONT-SIZE: xx-small; COLOR: black
+}
+.centered {
+	TEXT-ALIGN: center
+}
+.huntName {
+	FONT-WEIGHT: bold; FONT-SIZE: large; VERTICAL-ALIGN: middle; TEXT-ALIGN: center
+}
+.textad {
+	FONT-SIZE: xx-small; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}
+.headline {
+	FONT-SIZE: xx-small; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}
+.text {
+	FONT-SIZE: xx-small; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}
+.link {
+	FONT-SIZE: xx-small; FONT-FAMILY: "MS Sans Serif", Arial, sans-serif; TEXT-DECORATION: none
+}

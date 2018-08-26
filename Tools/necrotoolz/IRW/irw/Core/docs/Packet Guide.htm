@@ -1,0 +1,5893 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0115)http://cvs.sourceforge.net/viewcvs.py/*checkout*/freeuoclients/Docs/all_packets.htm?rev=HEAD&content-type=text/html -->
+<!-- saved from url=(0036)http://24.201.125.107:81/Packets.htm --><HTML><HEAD><TITLE>Packet Guide</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY vLink=#998833 aLink=#000000 link=#665500 bgColor=#ffffff marginheight="0" 
+marginwidth="0">
+<TABLE cellSpacing=0 width=400 border=0>
+  <TBODY>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>00 - Login</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Create a new character 0x68 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (00)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0xedededed</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0xffffffff</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[60]</TD>
+    <TD bgColor=#ffffff>Character Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Gender</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Strength</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Dexterity</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Intelligence</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Skill 1</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Skill 1 Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Skill 2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Skill 2 Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Skill 3</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Skill 3 Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Skin Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Hair Style</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Hair Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Beard Style</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Beard Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Starting City</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Slot</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Client IP</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Shirt color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Pants Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>01 - Logout</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Character returns to main menu from 
+      character select menu.<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (01)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0xffffffff</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>02 - Req Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ask the server if we can walk.<BR>7 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (02)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Sequence Number</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Fastwalk Prevention Key</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>03 - Speech</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send speech to the server</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (03)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Size of Packet</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Mode (0=say,2=emote,8=whipser,9=yell)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Font</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>04 - God Mode Toggle</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Toggles god mode on/off<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (04)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>God mode on/off</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>05 - Attack</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send attack to server<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (05)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial of character to attack</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>06 - Req Obj Use</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ask the server if we can use an object 
+      (double click)<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (06)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial of item double clicked</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>07 - Req Get Obj</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ask the server for item<BR>7 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (07)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial of item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Amount of item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>08 - Req Drop Obj</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ask the server to drop an item<BR>0x0E 
+    bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (08)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial (-1 = ground)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>09 - Req Look</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ask the server to look at an item (single 
+      click)<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (09)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial of item single clicked</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>0A - Edit</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Edit dynamics and statics<BR>0x0B bytes 
+      <P>Types are:<BR>04 = Dynamic item<BR>07 = NPC<BR>0A = Static 
+    Item<BR></P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (0A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>0B - Edit Area</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Edit Area<BR>0x0A bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (0B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[9]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>0C - Tile Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Alter tiledata (send new tiledata to the 
+      server)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (0C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Tile ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[37]</TD>
+    <TD bgColor=#ffffff>New Tile data (see tiledata.mul)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>F777</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>0D - NPC Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new NPC data to the server<BR>3 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (0D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>0E - Template Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Edit template data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (0E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>0F - Paperdoll</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Paperdoll<BR>0x3D bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (0F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x3C]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>10 - Hue Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Modify Hue Data<BR>0xD7 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (10)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0xD6]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>11 - Mobile Stat</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>The status of a character</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (11)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Character Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Hit Points</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Max Hit Points</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Allow Name change (FFh = yes)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Valid stats (1 = yes)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Gender</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Strength</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Dexterity</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Intelligence</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Stamina</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Max Stamina</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Mana</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Max Mana</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Gold</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Armor Rating</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Weight</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>12 - God Command</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>External command, use skill, magic, etc <PRE>CommandTypes:
+0x24 = Use Skill
+0x56 = Macro Spell
+0x58 = Open Door
+0x6b = God Mode Command
+0xc7 = Action
+</PRE></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (12)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>CommandType</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Command</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>13 - Req Obj Equip</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Equip an item<BR>0x0A bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (13)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Layer</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>14 - Elev Change</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Change Z value of item<BR>6 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (14)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[5]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>15 - Follow</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Follow character<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (15)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>16 - Req Script Names</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get a list of script names<BR>1 byte</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (16)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>17 - Script Tree Cmd</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Script Modification commands</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (17)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>18 - Script Attach</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add new script to server</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (18)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>19 - NPC Convo Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Modify NPC Speech data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (19)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>1A - Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Move or place an item on the ground</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (1A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount (if Serial&amp;0x80000000)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Stack ID (if Item ID&amp;0x8000) add to Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction (if X&amp;0x8000)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Hue (if Y&amp;0x8000)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status if (y&amp;0x4000)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>1B - Login Confirm</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Player initialization<BR>0x25 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (1B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>7Fh</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>7</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Highlight Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>1C - Text</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Someone is speaking, or the server is 
+      sending us info</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (1C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Character ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Font</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>1D - Destroy Object</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Remove Item from scene<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (1D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>1E - Animate</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Control Animation<BR>4 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (1E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[3]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>1F - Explode</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Cause explosion<BR>8 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (1F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[7]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>20 - Z Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Character is being moved by the 
+      server<BR>0x13 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (20)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Skin Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>21 - Blocked Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Server rejected our walk request<BR>8 
+    bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (21)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Sequence Rejected</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X location to jump back to</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>22 - OK Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Server accepted our walk request<BR>3 
+    bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (22)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Sequence accepted</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>23 - Obj Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Drag Item<BR>0x1A bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (23)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Source Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Source X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Source Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Source Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Target Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Target X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Target Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Target Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>24 - Open Gump</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Open a gump<BR>7 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (24)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Gump</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Items</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Hue</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>25 - Obj to Obj</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add Object to an Object<BR>0x14 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (25)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>26 - Old Client</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Old Client, kick<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (26)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial of GM who kicked</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>27 - Get Obj Failed</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unable to pick up object<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (27)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Where</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>28 - Drop Obj Failed</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unable to drop object<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (28)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[4]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>29 - Drop Obj OK</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Object dropped ok<BR>1 byte</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (29)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>2A - Blood</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Blood mode<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (2A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[4]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>2B - God Mode</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>God Mode is on/off (server response to 
+      packet 04)<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (2B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>God mode on/off</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>2C - Death</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Choose resurrection<BR>2 bytes 
+      <P>Choice = 0=server ask, 1=resurrect, 2=ghost</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (2C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Choice</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>2D - Health</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Health<BR>0x11 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (2D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x10]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>2E - Equip Item</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Character is wearing an item<BR>0x0F 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (2E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Layer</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>2F - Swing</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Fight, swing<BR>0x0A bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (2F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Attacker Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Defender Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>30 - Attack OK</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Attack granted<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (30)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[4]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>31 - Attack End</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Attack ended<BR>1 byte</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (31)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>32 - Hack Mover</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>God mode admin command<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (32)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>33 - Group</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Group command<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (33)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Command</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>34 - Client Query</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get Status<BR>0x0A bytes<BR><PRE>Types:
+0x04=Basic Status (Packet 0x11)
+0x05=Request Skills (Packet 0x3A)
+</PRE></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (34)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0xedededed</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>35 - Resource Type</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get resource type<BR>0x8D bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (35)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x8C]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>36 - Resource Tile Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Resource tile data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (36)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>37 - Move Object</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Move an object<BR>8 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (37)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[7]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>38 - Follow Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Follow move<BR>7 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (38)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[6]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>39 - Groups</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Groups<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (39)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>3A - Skills</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update skills 
+      <P>Client version is only ID, Packet Size, Skill ID, and Lock 
+    Status.</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (3A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>List Type (ff=no loop, else loop till ID=0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Skill</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Skill ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Skill Value</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Base Value</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Lock Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Skill</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>3B - Offer Accept</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Accept Offer</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (3B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Vendor Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Num of Items (0=clear message)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Layer</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>3C - Multi Obj to Obj</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add objects to object</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (3C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Items</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>3D - Ship</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ship<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (3D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>3E - Versions</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Version retrieval<BR>0x25 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (3E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x24]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>3F - Upd Obj Chunk</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update object chunk</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (3F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>40 - Upd Terr Chunk</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update terrain chunk<BR>0xC9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (40)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0xC8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>41 - Update Tile Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send an updated tiledata.mul entry to the 
+      client.</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (41)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Tile ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[37]</TD>
+    <TD bgColor=#ffffff>Tile Data (see tiledata.mul)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>F777</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>42 - Update Art</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send updated art to client</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (42)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>43 - Update Anim</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new animation data to client<BR>0x29 
+      bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (43)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x28]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>44 - Update Hues</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new hue information to the 
+      client<BR>0xC9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (44)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0xC8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>45 - Ver Ok</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ver Ok<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (45)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[4]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>46 - New Art</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new artwork</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (46)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Tile ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Art Data (see art.mul)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>47 - New Terr</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new terrain to the server<BR>0x0B 
+    bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (47)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Art ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>48 - New Anim</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new animation data (static tile 
+      animation)<BR>0x49 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (48)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Tile ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[64]</TD>
+    <TD bgColor=#ffffff>Frames</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Numer of Frames Used</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Frame Interval</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Start Interval</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>49 - New Hues</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send new hues<BR>0x5D bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (49)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Hue ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word[32]</TD>
+    <TD bgColor=#ffffff>Hue Values</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Start</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>End</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[20]</TD>
+    <TD bgColor=#ffffff>Hue Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>4A - Destroy Art</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Destroy artwork<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (4A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Art ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>4B - Check Ver</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Check client version<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (4B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>4C - Script Names</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Modify script names</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (4C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>4D - Script File</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Edit script file</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (4D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>4E - Light Change</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set the personal light level<BR>6 
+bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (4E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Level</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>4F - Sunlight</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set light level.<BR>2 bytes <BR>0 = Bright, 
+      1F = Black</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (4F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Level</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>50 - Board Header</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Bulletin Board Header</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (50)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>51 - Board Msg</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Bulletin Board Message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (51)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>52 - Post Msg</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Post Bulletin Board Message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (52)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>53 - Login Reject</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Login Rejected<BR>2 bytes 
+      <P>(1=no character, 2=char exists, 3-4=Can't connect, 5=character already 
+      in world,6=login problem,7=idle, 8=can't connect)</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (53)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>54 - Sound</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Play a sound effect<BR>0x0C bytes <BR>Flags 
+      = 0 repeating, 1 = single play</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (54)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Flags</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Effect</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Volume</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>55 - Login Complete</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Begin Game<BR>1 byte</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (55)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>56 - Map Command</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Plot course for ships<BR>0x0B bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (56)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Action (1=add,5=delete,6=toggle edit)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Pin Number</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Pin X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Pin Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>57 - Upd Regions</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update regions<BR>0x6E bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (57)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x6D]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>58 - New Region</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Create a new region<BR>0x6A bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (58)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[40]</TD>
+    <TD bgColor=#ffffff>Area Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Width</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Height</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Z1</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Z2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[40]</TD>
+    <TD bgColor=#ffffff>Description</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Sound FX</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Music</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Night Sound FX</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Dungeon</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Light</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>59 - New Context FX</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Create a new effect</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (59)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>5A - Upd Context FX</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update effect</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (5A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>5B - Game Time</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set the time of day<BR>4 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (5B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Hours</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Minutes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Seconds</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>5C - Restart Ver</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Resart Ver<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (5C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>5D - Pre Login</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Select the character to play<BR>0x49 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (5D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0xEDEDEDED</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[32]</TD>
+    <TD bgColor=#ffffff>Character Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword[7]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Client IP</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>5E - Server List</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Server List</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (5E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>5F - Server Add</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add server<BR>0x31 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (5F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x30]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>60 - Server Remove</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Delete a server<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (60)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[4]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>61 - Destroy Static</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Delete a static<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (61)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>62 - Move Static</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Move a static<BR>0x0F bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (62)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x0E]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>63 - Area Load</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Load an area<BR>0x0D bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (63)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x0C]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>64 - Area Load Req</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Attempt to load area<BR>1 byte</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (64)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>65 - Weather Change</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set current weather<BR>4 bytes 
+      <P>Type: 0x00 = "It starts to rain" 0x01 = "A fierce storm approaches" 
+      0x02 = "It begins to snow" 0x03 = "A storm is brewing." 0xff = Stop all 
+      weather.</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (65)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Weather Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of weather effects</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Temperature</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>66 - Book Page</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show book<BR>As a client message, this 
+      writes to the book.</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (66)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Pages</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Page</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Page Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Lines</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Page</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>67 - Simped</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Simped<BR>0x15 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (67)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x14]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>68 - Script LS Attach</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add LS script</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (68)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>69 - Friends</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (69)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>6A - Friend Notify</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Notify Friend<BR>3 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (6A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>6B - Key Use</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Use Key<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (6B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>6C - Target</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Bring up targeting cursor<BR>0x13 
+bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (6C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Target Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Check Crime</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X (ffff=cancel)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y (ffff=cancel)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>6D - Music</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Play a midi music file<BR>3 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (6D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Midi Song</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>6E - Anim</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show an animation<BR>0x0E bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (6E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Action</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>5</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Repeat Times</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Forward (0=forward 1= backward)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Repeat Flag</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Delay (0=fast, 0xff=slow)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>6F - Trade</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Open trade window 
+      <P><PRE>Type:
+0 = Start Trading
+1 = Cancel Trade
+2 = Reset Checkmarks
+</PRE></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (6F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (0=start,1=cancel,2=change checkmarks)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item 1 Serial (type0 only)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item 2 Serial (type0 only)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Name Included (type 0 only)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name (type 0 only, only if Name Included)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>70 - Effect</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Play a special effect (like magic)<BR>0x1C 
+      bytes 
+      <P><PRE>Type:
+00 = Go from source to dest
+01 = Lightning strike
+02 = Stay at location
+03 = Stay with source
+</PRE></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (70)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Target Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Object ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Target X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Target Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Target Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Speed</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Explode</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71 - BBoard</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Display a message board<BR><PRE>Type:
+0=draw board,
+1=get posts,
+2-3=get body,
+4=ack dl,
+5=post,
+6=delete
+
+<PRE></PRE></PRE></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.0 - Draw Board</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Draw the Bulletin board</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[22]</TD>
+    <TD bgColor=#ffffff>Board Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.1 - Message List</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>List of bulletin board messages</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Message Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial (0 = top level)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Name Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Subject Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Subject</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Time Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Time</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.2 - Message</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>A single message on a bulletin board</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (2)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Message Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Name Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Subject Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Subject</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Time Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Time</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[29]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Num Lines</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Line Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Line Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.3 - Get Message</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ask the server for a message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (3)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Message Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.4 - Get Summary</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get a bulletin board's message summary</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (4)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Message Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.5 - Post Message</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Post a message to a bulletin board</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (5)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Reply Message Serial (0 if no reply)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Subject Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Subject</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Num Lines</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Line Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Line Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>71.6 - Delete Message</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Delete a posted message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (71)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Board Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Message Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>72 - Combat</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set war mode and stuff<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (72)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>War Mode</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>73 - Ping</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Ping and Pong<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (73)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Value</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>74 - Shop Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Purchase details</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (74)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Vendor Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of Items</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Price</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Name Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>75 - Rename MOB</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Rename character<BR>0x23 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (75)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>76 - Server Change</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Server change<BR>0x10 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (76)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x0F]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>77 - Naked MOB</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Another character or monster is walking (why 
+      is this called Naked MOB?)<BR>0x11 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (77)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Skin Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Notoriety (Murderer, Friend etc)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>78 - Equipped MOB</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add a character to the scene</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (78)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Amount/Corpse (if Serial&amp;0x80000000)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Direction</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Skin Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Notoriety</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item (while Serial!=0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Item Layer</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Color (if Item ID&amp;0x8000)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>79 - Resource Query</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get Resource<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (79)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>7A - Resource Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Resource Data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (7A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>7B - Sequence</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Sequence<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (7B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>7C - Obj Picker</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Display a Gump with options (like the Add 
+      menu)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (7C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Gump Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Gump ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Title Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Title</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of Lines</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Choice ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Checked</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Line Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>7D - Picked Obj</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Choose an option from 7C<BR>0x0D bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (7D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Gump Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Gump ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>7E - God View Query</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get god view data<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (7E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>God view stat id</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>7F - God View Data</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>God view data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (7F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>80 - Acct Login Req</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Login to the login server.<BR>0x3E 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (80)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Password</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>81 - Acct Login Ok</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Login ok</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (81)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>82 - Acct Login Fail</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>There was an error logging in<BR>2 bytes 
+      <P>0=No Account, 1=Account in Use, 2=Account Blocked, 3=No 
+  Password</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (82)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Error</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>83 - Acct Del Char</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Delete a player<BR>0x27 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (83)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[30]</TD>
+    <TD bgColor=#ffffff>Password</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Client IP</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>84 - Chg Char PW</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Change password<BR>0x45 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (84)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x44]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>85 - Chg Char Result</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Result of Change character request<BR>2 
+    bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (85)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>86 - All Characters</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Resend Characters after delete</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (86)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of Characters</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Character</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Password</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Character</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>87 - Send Resources</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send resources</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (87)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0x101</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>X2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Y2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Name Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>88 - Open Paper Doll</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Display paper doll<BR>0x42 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (88)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[60]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Status</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>89 - Corpse EQ</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Corpses backpack</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (89)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Container Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item (while Layer!=0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Layer</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>8A - Trigger Edit</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Edit Trigger</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (8A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>8B - Display Sign</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show Sign</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (8B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>8C - User Server</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Relay to the game server.<BR>0x0B 
+bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (8C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Server IP</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Server Port</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Auth ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>8D - Unused3</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unsued</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (8D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>8E - Move Character</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Move Character</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (8E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>8F - Unused4</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unused</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (8F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>90 - Open Course Gump</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show map, for plotting etc.<BR>0x13 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (90)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Corner Image</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X1</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y1</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Width</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Height</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>91 - Post Login</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Login to the game server<BR>0x41 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (91)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Auth ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Password</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>92 - Upd Multi</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update Multi</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (92)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>93 - Book Hdr</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Open a book<BR>0x63 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (93)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Editable</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>1</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Pages</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[60]</TD>
+    <TD bgColor=#ffffff>Title</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Author</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>94 - Upd Skill</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Alter skill</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (94)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>95 - Hue Picker</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Dye<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (95)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>96 - Game Cent Mon</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Monitor game, mostly through godview</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (96)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Command</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>97 - Player Move</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Player move<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (97)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>98 - MOB Name</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Alter name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (98)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>99 - Target Multi</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Targeting cursor for multis<BR>0x1A 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (99)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Allow Ground</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Deed Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Multi ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>9A - Text Entry</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Text Entry</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (9A)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>9B - Request Assist</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Page a GM<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (9B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>9C - Assist Request</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Assistance response<BR>0x35 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (9C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x34]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>9D - GM Single</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>GM Single<BR>0x33 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (9D)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x32]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>9E - Shop Sell</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Details for sales</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (9E)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Vendor Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Items</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Value</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Name Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>9F - Shop Offer</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Sell window</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (9F)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Vendor Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of Items</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Item Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Item Amount</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Item</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A0 - Britannia Select</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Select a shard to play on<BR>3 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Server Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A1 - HP Health</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Adjust strength and Hit Points<BR>9 
+  bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Strength</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Hit Points</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A2 - Mana Health</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update Intelligence and Mana<BR>9 
+bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A2)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Intelligence</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Mana</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A3 - Fat Health</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update Dexterity and Stamina<BR>9 
+bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A3)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Dexterity</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Stamina</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A4 - Hardware Info</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send system info to the server<BR>0x95 
+    bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A4)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x94]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A5 - Web Browse</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Launch a browser and to to URL</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A5)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>URL</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A6 - Message</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show a scroll on the screen</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Font</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Tip Number</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A7 - Req Tip</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Get a tooltip<BR>4 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A7)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Tip</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0 = tip, 1 = notice</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A8 - Britannia List</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>List the available shards</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A8)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>FFh</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Servers</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Server</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Server Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[32]</TD>
+    <TD bgColor=#ffffff>Server Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Percent Full</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Timezone</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Server IP</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Server</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>A9 - Cities and Chars</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>List of characters as well as starting 
+      cities 
+      <P>Flags:<BR>0x8 = enable popups<BR>0x4 = server limits number of 
+      characters per account, (flags&gt;&gt;4 = number of characters)</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (A9)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of Characters</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Character</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[60]</TD>
+    <TD bgColor=#ffffff>Character Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Character</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Number of Cities</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>City</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[31]</TD>
+    <TD bgColor=#ffffff>City Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[31]</TD>
+    <TD bgColor=#ffffff>Area of Town</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>City</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Flags (May not be present)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>AA - Current Target</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Current attack target<BR>5 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (AA)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial (0 = attack invalid)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>AB - String Query</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Text Entry</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (AB)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Parent ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Buttom ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Style (0=none, 1=normal, 2=numerical)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Max Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Label Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Label</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>AC - String Response</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Text Entry Response</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (AC)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Index</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Mode (0=cancel,1=ok)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>AD - Speech Unicode</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Speak in unicode <BR>If Mode&amp;0xc0 then 
+      there are keywords (from speech.mul) present. 
+      <P>Keywords:<BR>The first 12 bits = the number of keywords present. The 
+      keywords are included right after this, each one is 12 bits also. <BR>The 
+      keywords are padded to the closest byte. For example, if there are 2 
+      keywords, it will take up 5 bytes. 12bits for the number, and 12 bits for 
+      each keyword. 12+12+12=36. Which will be padded 4 bits to 40 bits or 5 
+      bytes.</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (AD)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Mode (0=say,2=emote,8=whisper,9=yell) *</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Font</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[4]</TD>
+    <TD bgColor=#ffffff>Language</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Keywords (Only present if mode&amp;0xc0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>AE - Text Unicode</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Someone is speaking in Unicode</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (AE)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Text Color</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Font</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[4]</TD>
+    <TD bgColor=#ffffff>Language</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[30]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>AF - Death Anim</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Death Anim<BR>0x0D bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (AF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Character Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Corpse Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B0 - Generic Gump</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show Gump</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Gump ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>6Eh</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>46h</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Layout Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Layout</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Number of Lines</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Line Length</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word[*]</TD>
+    <TD bgColor=#ffffff>Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop</TD>
+    <TD bgColor=#ffffff>Line</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B1 - Gen Gump Trig</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Generic Gump Choice</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Button Data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B2 - Chat Msg</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Chat Message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B2)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B3 - Chat Text</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Chat Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B3)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B4 - Target Obj List</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Target object list</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B4)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B5 - Chat Open</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Chat open<BR>0x40 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B5)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x39]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B6 - Help Request</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Show Popup Help<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Help Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Langauge Number</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[3]</TD>
+    <TD bgColor=#ffffff>Language</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B7 - Help Unicode Text</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Display Popup help</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B7)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Help Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word[*]</TD>
+    <TD bgColor=#ffffff>Unicode Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B8 - Char Profile</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Profile</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B8)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Mode</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>B9 - Features</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Feature Enable<BR>3 bytes 
+      <P>Bit 1 = Enable T2A Features (chat)<BR>Bit 2 = Enable LBR Features 
+      (animations) </P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (B9)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Enable</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BA - Pointer</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Display Quest Pointer<BR>6 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BA)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Active</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BB - Acct ID</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Account ID<BR>9 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BB)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[8]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BC - Game Season</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Season<BR>3 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BC)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Season</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Cursor</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BD - Client Version</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send client version to the server</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BD)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[*]</TD>
+    <TD bgColor=#ffffff>Version String</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BE - Assist Version</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Assist Version</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BE)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF - Generic Command</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Miscellaneous Commands</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.1 - Fast Walk</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Cycle's through the keys in the stack when 
+      walking.</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword[6]</TD>
+    <TD bgColor=#ffffff>Key Stack</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.13 - Unknown</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unknown packet<BR>The client sends this 
+      packet just after it sends packet 09, for the same serial.</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (13)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.18 - Enable Map Diffs</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>This packet is sent by the server to the 
+      client, telling the client to use the mapdif* and stadif* files to patch 
+      the map and statics. 
+      <P>Usually there are 3 maps in this packet, 0 = fellucca, 1 = trammel, and 
+      2 = ilshenar.</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Subcommand (18)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Number of Maps</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>loop[map]</TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Number of Map patches in this map</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Number of Static patches in this map</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>endloop[map]</TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.2 - Add Walk Key</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add a key to the top of the Walk Stack</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (2)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Key</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6 - Party</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Party system is BF Command 6</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.1 - Add Member</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Add a member to the party</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial (0 = target)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.2 - Remove Member</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Remove a member from your party</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (2)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial (0 = target)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.3 - Party Private Msg</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Tell a party member a message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (3)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word[*]</TD>
+    <TD bgColor=#ffffff>Unicode Message</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.4 - Party Chat</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Send a message to entire party. (Serial not 
+      present in Client Msg)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (4)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial of source</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word[*]</TD>
+    <TD bgColor=#ffffff>Unicode Text</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.6 - Party Loot</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Party can loot me</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Can Loot</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.8 - Accept</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Accept a join invitation</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (8)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Party Leader Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.6.9 - Decline</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Decline join invitation</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Party Command (9)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Party Leader Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.8 - Cursor Hue</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set cursor hue</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>BF</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (8)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Hue (0=felucca, 1= trammel, 2=ilshenar)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.B - Client Language</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Set client language</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (B)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[3]</TD>
+    <TD bgColor=#ffffff>Language</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>BF.C - Close Status</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Close status gump</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (BF)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Command (C)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C0 - Effect Hued FX</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Hued effect<BR>0x24 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0x23]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C1 - Text ID</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Display a cliloc message <PRE>Type:
+ 6 = lower left
+ 7 = on player
+</PRE></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Body</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Hue</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Font</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>7</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Message Number</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>char[32]</TD>
+    <TD bgColor=#ffffff>Name</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C2 - Text Entry Unicode</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Unicode text entry</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C2)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C3 - GQ Request</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>GQ Request</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C3)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[2]</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C4 - Semi Visible</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Semivisible<BR>6 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C4)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[5]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C5 - Invalid Map</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Invalid map<BR>0xCB bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C5)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[0xCA]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C6 - Invalid Map Enable</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Enable invalid map<BR>1 byte</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C6)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C7 - Particle Effect</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Particle Effect<BR>0x31 bytes Effect ID and 
+      Explode Effect ID correspond directly to the pbg files in the Particles 
+      directory.</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C7)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Type (00 = moving effect, 02 = item effect, 03 = 
+      static effect)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>Serial 2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Tile ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Z</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>X 2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Y 2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Z 2</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Unknown Effect data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Adjust</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Explode</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Effect ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Explode Effect ID</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Unknown Effect Data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>dword</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Layer (0-4, 0xff for moving)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Unknown Effect Data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>0</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C8 - Update Range Change</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Update range change<BR>2 bytes 
+      <P>This packet says how far away the client wants to see.. that allows 
+      slower modems to not get items and MOBs that are over a certain distance 
+      away.</P></TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C8)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>Distance</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>C9 - Trip Time</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Trip time<BR>6 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (C9)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[5]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>CA - UTrip time</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Utrip time<BR>6 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (CA)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[5]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>CB - GQ Count</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>GQ Count<BR>7 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (CB)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[6]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>CC - Text ID Plus String</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Text ID and String</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (CC)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>Packet Size</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[*]</TD>
+    <TD bgColor=#ffffff>Unknown</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>D1 - Logout Status</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Logout Status<BR>2 bytes</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (D1)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>1</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 colSpan=2>F0 - Custom Client Packet</TH></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>Custom Client Packet</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff colSpan=2>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>ID (F0)</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>word</TD>
+    <TD bgColor=#ffffff>len</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte</TD>
+    <TD bgColor=#ffffff>subcommand</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff>byte[len-4]</TD>
+    <TD bgColor=#ffffff>data</TD></TR>
+  <TR>
+    <TD bgColor=#ffffff></TD>
+    <TD bgColor=#ffffff></TD></TR>
+  <TR>
+    <TH align=right bgColor=#eecc77 
+colSpan=2>&nbsp;</TH></TR></TBODY></TABLE><BR></BODY></HTML>

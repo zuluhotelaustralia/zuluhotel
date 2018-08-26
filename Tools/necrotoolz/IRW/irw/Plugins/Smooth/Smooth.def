@@ -1,0 +1,6 @@
+LIBRARY	Smooth
+
+EXPORTS
+	InitPlugin
+	UnloadPlugin
+	GetPluginInfo

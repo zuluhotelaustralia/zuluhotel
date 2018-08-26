@@ -1,0 +1,442 @@
+===================================================================
+v 0.3.30.4
+
+- chiphead
+- added 3.0.6j encryption
+- updated ignition.cfg with latest clients
+- mamaich
+- fixed UOTD support
+
+===================================================================
+v 0.3.30.3
+
+- chiphead
+- client 3.0.6e sends a new extended command 0x0f(15), we just eat 
+  this command so the server dont complain.
+- added support for 3.0.6g patch 99 T2A client
+- Dasc:
+- added a pause after dress/undress command. New syntax is:
+  dress identifier [pause in milisecs]
+- mamaich:
+- UO.Say and UO.Press have been tested on Win95 with client 2.0.0b
+  and are working now.
+
+===================================================================
+v 0.3.30.2
+
+- chiphead
+- added patch info for 3D clients 75,77,81,82,83
+- added patch info for 3.0.4m, 3.0.4n, 3.0.4n T2A, 3.0.5d
+- added patch info for 3.0.6e p97 T2A
+- fixed the runebook code so it should workon more servers now.
+  see v 0.3.22 for details on the command use.
+
+===================================================================
+v 0.3.30.1
+
+- chiphead:
+- added pause to start of watchdog so it doesn't kick off while 
+  waiting to connect on slow connections
+
+- mamaich:
+- fixed bug where "from target" would sometimes return 0xffffffff
+
+===================================================================
+v 0.3.30
+
+- mamaich:
+- again, bugfixes in script.dll
+- fixed (?) a bug when too many injection windows popped up at start
+- added command ",usefromground type [color]". It will look for objects
+  in 3 squares near you and will attempt to double click them.
+  If it writes that no objects found - try to use ".resync" on sphere.
+- added ",waittargetground type [color]". The same idea.
+- added command UO.CountGround(type[,color]) to scripts to count items 
+  in 3 squares around you laying on ground. Use UO.Say(".resync") to
+  force sphere server to send information about items on ground.
+  The *ground commands were not tested on servers other than sphere.
+- now injection writes crash information to the log file and tries
+  to continue client execution. It also records client state on hang
+- fixed a bug introduced in previous version. Client crashed when
+  encryption was turned off.
+- fixed the main client crash reason introduced after adding script.dll
+- UO.Say(...) still don't work on 9x
+
+===================================================================
+v 0.3.29
+
+- mamaich:
+- added client 3.0.6a to injection.cfg
+- added 3.0.0 encryption
+- tiny bugfixes
+
+===================================================================
+v 0.3.28
+
+Enhancements:
+
+- chiphead changes
+- added generic gump control (unfinished)
+
+- mamaich changes
+- bugfixes
+- some minor changes in script.dll
+- all Injection commands can now be accessible thru UO.Command(args)
+  from scripts where Command is the Injection command. The old way 
+  (UO.Exec("command") also works)
+- Hot key support rewrite. modified hot key control to fix loosing 
+  the hook.  Should not to use the ,fixhotkeys command any more.
+- fixed vendor buy crash bug
+- fixed arrow direction in vendor buy/sell gui
+- misc small bug fixes
+- added hexadecimal constants to scripts. Constants can be used 
+  like in C: var a=0x123456
+- added UO.Count("type"[,"color"]) to scripts. It returns the count 
+  of objects of given type in your backpack. Or:
+   -1 if name given is not a valid object type name
+   -2 if 0x???? graphic index is invalid
+   -3 when not loged in
+   -4 if color 0x???? is invalid
+- UO.LClick, UO.Say & other "Client" commands are now working under 
+  Win9x
+
+Known Issues:
+
+- Still not encryption fix for TAR.  We are working on it.  
+  Please be patient.
+
+===================================================================
+v 0.3.27
+
+- ported to VC6.  See compile.txt for details.
+- mamaich submited these changes!  Thanks!
+- fixed a bug when Ilaunch sometimes waited indefinitely for 
+  client.exe to start
+- fixed display problem in client >3.0.4 (showing only "U" or 
+  garbage in caption). Added a checkbox "Fix UO caption displaying 
+  only first letter" to Display tab. It does nothing on clients 
+  <3.0.4p
+- fixed the targeting crash
+- fixed major memory leaks (BoundsChecker - rulez :)
+- fixed crash on exit when invalid password/encryption mode 
+  specified
+- fixed crash on exit and huge number of minor bugs
+- added a scripting support. It resides in script.dll
+- fixed "Already selling" message if trying to sell things the 
+  vendor is not interested in
+- removed "please cancel the current operation..." message. It 
+  prevents buy/sell from working when lags
+
+Known bugs:
+- script commands interacting with UO window (ex: UO.LClick) don't 
+  work on Win9x
+
+===================================================================
+v 0.3.26
+
+- changed poison command to use the object type "poison". Define a 
+  new object type in the object type tab names poison and set it to
+  you type of poison.  This should fix the problem of different
+  servers using different graphics for poisons.
+- added support for OSI clients 3.0.5d. Injection not works will 
+  All clients.  Note: Display is now broken in 3.0.4 and 3.0.5.  I 
+  will have to figure out why they are not displaying stats and 
+  resource counts. But at least injection is working for the most 
+  part.
+- Runebooks changed on TAR.  The runebooks commands no longer work
+  on TAR. Will fix later.
+- may have fixed the object from target crash bug.  Let me know if 
+  you still get a crash here.
+
+===================================================================
+v 0.3.25
+
+- adjusted hotkey gui
+- add filterweather command.  Toggles weather display. Saved per
+  server
+- modified waitmenu, can now take up to 3 prompt/choice pairs
+- fixed hotkey code so it doesnt pass extended keys to uo if it is 
+  defined as a hotkey.
+- fixed bug in dbl targeting system
+- add poison command to use poison skill on an object
+  syntax: poison (object)
+  poison potion (type 0xf0a) must be inpack
+- added command fixhotkeys
+  occasionally the hotkey driver get uninstalled.  Until I find the
+  cause, this command will reinitilize the hotkey driver.  If your
+  hotkeys stop responding, use this command. 
+  
+===================================================================
+v 0.3.24
+
+- fixed spelling error in display tab
+- added Hotkeys
+  There is a new hotkey tab.  Click the Hotkey text box and press 
+  the hot key you want to program.  Enter the command in the 
+  command text box.  Commands are entered WITHOUT the comma (,) in
+  front.  Click new.
+
+===================================================================
+v 0.3.23
+
+- made spell code more robust
+- fixed bug where last target would get set to 0 under lag.
+- added useskill command.  
+  Syntax: ,useskill 'skill name' [target] 
+  'skill name" needs to be the full skill name and is case 
+  sensitive.  Optionally you can pass and last, self, Object name 
+  or serial target.
+  
+===================================================================
+v 0.3.22
+
+- added runebook command setdefault
+  syntax: setdefault (runebook) (rune number)
+- added runebook command recall
+  syntax: recall (runebook) (rune number)
+- added runebook command gate
+  syntax: gate (runebook) (rune number)
+- fixed bug in waittargettype
+
+===================================================================
+v 0.3.21
+
+- modified the setcatchbag command to optionally take an object 
+  argument.  Example:
+  ,setcatchbag 0x400c00be
+  or
+  ,setcatchbag bluebag
+  where bluebag is a registered Object
+  if you do not pass an object to the command, it will give a 
+  targeting cursor.
+- modified the setreceivingcontainer command to optionally take an
+  object argument.  See above for details.
+- added addrecall and addgate commands to add charger to runebooks.
+  syntax: addrecall (runebook) 
+          addgate (runebook)
+          where runebook is the serial of the book of a name
+          registered in the Objects Tab.  The correct scrolls need
+          to be in your pack.
+  These may or may not work your shard. It depends on the runebook
+  scripts used.  It does work on TheAlterRealm where I play and 
+  that is mostly what counts  :)
+  
+===================================================================
+v 0.3.20
+
+- streamlined menu system.  
+  new syntax: waitmenu 'prompt' 'choice' ['prompt2' 'choice2']
+  removed command choosemenu
+  Example to make a Greater Heal potion (single menu):
+  ,waitmenu 'potion' 'Greater Heal'
+  dbl click mortar
+  dbl click ginseng
+  Example to make Beastform Boar potion (double menu):
+  ,waitmenu 'potion' 'BeastForm' 'Beastform' 'Beastform Boar'
+  dbl click mortar
+  dbl click ginseng
+- fixed bug so Fireball can be cast.
+- streamlined targeting system.
+  new syntax:
+  waittargetself
+  waittargetlast
+  waittargettype (object type) [color]
+  waittargetobject (object) [object]
+  waittargetobjecttype (object) (object type) [color]
+  removed all choosetarget commands:
+  Example targeting self:
+  ,waittargetself
+  ,use bandage      Not a good example cauue the ,bandageself
+                    but illistrates the use.
+  Example targeting an object type like filling a keg:
+  ,waittargettype poison
+  dbl click keg
+  Example poisoning a weapon:
+  ,waittargetobjecttype sword poison
+  use poison skill
+  
+===================================================================
+v 0.3.19
+
+- fixed bug #466618 & #464769
+- added server config attributes buy and sell.  These can be used 
+  to change the text sent to the server when using the buy and sell
+  commands.  This is useful on servers that have changed the vendor
+  commands to another language other than english. 
+- modified choosemenu command to take an optional 
+  'next menu prompt' parameter.  Now submenues can be handled.
+  Example:
+  ,waitmenu 'potion'
+  commands to make a beast form
+  ,choosemenu 'Beastform' 'potion'
+  ,choosemenu 'Rabbit'
+- modified targetobject command to take optional waittarget 
+  parameter.  Now subtargeting can be handled.
+  Example:
+  ,waittarget
+  use poison skill
+  ,targetobject sword waittarget
+  ,targettype poison
+- modified cast command to it now can take an object as well as key
+  words last and self.  Now recall can be cast on a rune with 
+  single command.
+  Syntax: cast (spellname) [last, self, or Object]
+- fixed "Invlaid Serial" bug when adding new Object to the Object
+  Pane  
+  
+===================================================================
+v 0.3.18
+
+- fixed bug in catchbag where an item that could not be placed in 
+  the bag would bounce around in the pack. 
+- added bandageself command
+
+===================================================================
+v 0.3.17
+
+- add catchbag
+  commands setcatchbag and unsetcatchbag will setup and clear a 
+  container that all items that are added to your backpack are 
+  placed in.  When you user the setcatchbag and target a container,
+  all crafted items or purchased items are placed in the bag. 
+  unsetcatchbag clears it and items endup in your pack as usual.
+  Note: When crafting, supplies should be placed in another bag.
+  Because the way items are consumed, if in backpack, they will
+  be moved to the catchbag.  Experiment and you will see what I 
+  mean.
+- modified disarm
+  if there is a Object defined in the Object Panel with the name
+  "disarmbag", when disarming, weapons will be placed in the 
+  defined bag. If no bag defined, they goto backpack as usual.
+- modified undress
+  if there is a Object defined in the Object Panel with the name
+  "undressbag", when undressing, cloths will be placed in the 
+  defined bag. If no bag defined, they goto backpack as usual.
+  
+===================================================================
+v 0.3.16
+
+- changes the commands use and target to usetype and targettype
+  this is to make it more clear their use.  no functional change
+- fixed arm set bug #465227
+- added commands removehat, removeearrings, removeneckless, 
+  removering
+- documentation is no longer included in the distribution. Please
+  see on-line documentation @ http://injection.sourceforge.net
+  
+===================================================================
+v 0.3.15
+
+- fixed typo in paralyze spell name
+- now cancel auto targeting when no spell in book or beyond ability
+- added multiple arm sets.  Works exactly as the dress sets work
+  added the command unsetarm to make it complete.
+- Documentation is now up to date
+- Updated the included the latest Ingnition.cfg
+
+===================================================================
+v 0.3.14
+
+- added targeting to teh cast command
+  new syntax is: cast 'spell name' target
+  where target is ether last or self
+  example: ,cast 'Magic Arrow' last
+  will cast Magic Arrow at last target
+
+===================================================================
+v 0.3.13
+
+- added targetlast and taregtself to the targeting system
+  use inplace to the target or targetobject command
+
+===================================================================
+v 0.3.12
+
+- fixed bug when deleteing object, nothing happened.
+- addes cast command.  Syntax: ,cast 'spell name'
+  'spell name" needs to be the full name from the spellbook and is
+  case sensitive
+  
+===================================================================
+v 0.3.11
+
+- added this log to track changes between documentation updates.
+- changed the use tab name to Object Type to better reflect the use
+  of the tab.  No functional change.
+- added Object Tab, used to register specific objects like the type
+  tab
+- added the useobject and targetobject commands.  Works like the 
+  use and target commands but uses specific items regestered in the
+  Object Tab.
+- changed the name of "2.0.0" encryption to 
+  "2.0.0 (OSI Client > 2.0.0" to better describe the encryption. 
+  No functional change.
+- changed the name of "1.26.4" encryption to 
+  "1.26.4 (OSI Client < 2.0.0" to better describe the encryption. 
+  No functional change.
+- added speed control to the emptyconainer command
+  new syntax is 'emptycontainer num' where num is the miliseconds
+  to pause between moves.  Note: the client does not update until
+  the emptycontainer command is complete.  However, the items are
+  being moved, you just dont see the results until the client 
+  updates its view.  I recomend a speed of 500-1000 on shards that 
+  frown on this feature.  This will make it look realistic enough
+  to do away with any concerns they may have.
+  
+===================================================================
+v 0.3.10
+
+- few bugs fixed
+- added targeting commands
+
+===================================================================
+v 0.3.9
+
+- enabled commandline sell
+- enhanced use command to take an optional hex color
+
+===================================================================
+v 0.3.8
+
+- added display tab to gui to manage the various displays
+
+===================================================================
+v 0.3.7a
+
+- fix bug #462153
+
+===================================================================
+v 0.3.7
+
+- added username and password fields to the server config
+
+===================================================================
+v 0.3.6
+
+- added grab command
+
+===================================================================
+v 0.3.5
+
+Wayne (Chiphead) Hogue becomes main developer and maintainer of 
+site.
+
+- fixed menu commands
+- added more resource counters
+- added real time display of hitpoints, mana, stamina, ar, weight 
+and gold.
+- added configuration for turning on/off the various displays
+- added container commands to move items from one container to 
+another
+
+===================================================================
+v 0.3.4
+
+This release is mainly just to fix a few bugs.
+
+===================================================================
+v 0.3.3
+
+Injection no longer requires Ignition! 
+Instead, it is packaged with Injection Launcher. 
+This version also has numeric hitpoints display and some bug fixes.

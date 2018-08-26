@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0043)http://users.aber.ac.uk/anw1/processes.html -->
+<HTML><HEAD><TITLE>Win2k Processes</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<STYLE type=text/css>A:link {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2523" name=GENERATOR></HEAD>
+<BODY text=#ffffff bgColor=#999999>
+<DIV align=center>
+<DIV align=left>
+<P><FONT face="Arial, Helvetica, sans-serif" color=#000000>Just thought I'd 
+share some of the info I have found about processes and mem usage over the 
+years. Before I go any further, I just want to give the usual: "I am not 
+responsible for any damage you do to your system by using the following 
+information. Do not email me for help as I wont respond."</FONT></P>
+<P><FONT face="Arial, Helvetica, sans-serif" color=#000000>Ok off we go.....You 
+can go straight to Other(ie non win2k base processes) by clicking <A 
+href="http://users.aber.ac.uk/anw1/processes.html#OTHER">HERE</A></FONT></P>
+<P><FONT face="Arial, Helvetica, sans-serif" color=#000000>First of all, almost 
+all of the processes listed here can be stopped by editing the Window's registry 
+key at "HKEY_LOCAL_MACHINE \ SOFTWARE \ Microsoft \ Windows \ CurrentVersion \ 
+Run". If you are comfortable editing the registry, then please go ahead and do. 
+For those that haven't done it before, all you need to do is go to 
+Start---&gt;Run and type "regedit" without quotes. Please be aware that you can 
+SERIOUSLY disrupt windows if you delete/edit the wrong keys, and can even stop 
+your system from loading windows at all.</FONT></P>
+<TABLE cellSpacing=0 cellPadding=0 width="99%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="24%">
+      <P><FONT face="Arial, Helvetica, sans-serif"><I>Win2k Default/Base 
+      Processes<BR>(DO NOT try to kill these!)</I></FONT></P></TD>
+    <TD width="19%">
+      <DIV align=center><I><FONT face="Arial, Helvetica, sans-serif">Name in 
+      Task Manager</FONT></I></DIV></TD>
+    <TD width="36%">
+      <DIV align=center><I><FONT 
+      face="Arial, Helvetica, sans-serif">Purpose</FONT></I></DIV></TD>
+    <TD width="21%">
+      <DIV align=center><I><FONT face="Arial, Helvetica, sans-serif">Can be 
+      killed?</FONT></I></DIV></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>System Idle Process</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>System Idle Process<BR></FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This process is a single thread running on each processor 
+      (if you have an SMP system).It's sole task is to account for processor 
+      idle time when the system isn't processing other threads. In Task Manager, 
+      this process to <I>should</I> account for the majority of processor 
+      time.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Nope</FONT></TD></TR>
+  <TR>
+    <TD width="24%" height=47><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>System</FONT></TD>
+    <TD width="19%" height=47><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>System</FONT></TD>
+    <TD width="36%" height=47><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Most system kernel-mode threads run as the System process, 
+      i.e its damn important.</FONT></TD>
+    <TD width="21%" height=47><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Nope</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Session Manager Subsystem </FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>SMSS.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Responsible for starting the user session. Initiated by the 
+      system thread and responsible for various activities, including launching 
+      the Winlogon and Win32 (Csrss.exe) processes and setting system variables. 
+      After it has launched these processes, it waits for either Winlogon or 
+      Csrss to end. If this happens "normally," the system shuts down; if it 
+      happens unexpectedly, Smss.exe causes the system to stop responding 
+      (hang). </FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yes, with great difficulty, but then your system hangs. So 
+      don't kill it.</FONT></TD></TR>
+  <TR>
+    <TD width="24%" height=144><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Client/Server Run Time Subsystem</FONT></TD>
+    <TD width="19%" height=144><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>CSRSS.exe</FONT></TD>
+    <TD width="36%" height=144><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This is the user-mode portion of the Win32 subsystem (with 
+      Win32.sys being the kernel-mode portion). Essential subsystem that must be 
+      running at all times. Csrss is responsible for console windows, creating 
+      and/or deleting threads, and some parts of the 16-bit virtual MS-DOS 
+      environment. <BR></FONT></TD>
+    <TD width="21%" height=144><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>I couldnt kill it. Best not to anyway :)</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Winlogon</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Winlogon.exe </FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This is the process responsible for managing user logon and 
+      logoff. </FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Never tried, best not to.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Services Control Manager </FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Services.exe </FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This is the Services Control Manager, which is responsible 
+      for starting, stopping, and interacting with system services.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Nope, ya need this. </FONT></TD></TR>
+  <TR>
+    <TD width="24%" height=135><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Local Security Authentication Server</FONT></TD>
+    <TD width="19%" height=135><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Lsass.exe </FONT></TD>
+    <TD width="36%" height=135><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Generates the process responsible for authenticating users 
+      for the Winlogon service. Performed by using authentication packages such 
+      as the default Msgina.dll. If authentication is successful, Lsass 
+      generates the user's access token, which is used to launch the initial 
+      shell. Other processes that the user initiates inherit this token. 
+      <BR></FONT></TD>
+    <TD width="21%" height=135><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Need this too.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Svchost.exe</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Svchost.exe </FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>A 
+      generic process, which acts as a host for other processes running from 
+      DLLs; therefore, don't be surprised to see more than one entry for this 
+      process. To see what processes are using Svchost.exe, use Tlist.exe from 
+      the Windows 2000 CD-ROM; the syntax is tlist -s at the command prompt. 
+      <BR></FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Not on your nelly. </FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Spooler Service</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Spoolsv.exe </FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Responsible for managing spooled print/fax jobs.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Nope.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Winmgmt</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Winmgmt.exe </FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Core component of client management in Windows 2000. 
+      Initializes when the first client application connects or continuously 
+      when management applications request its services</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>No 
+      way.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Explorer.exe </FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Explorer.exe </FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This is the user shell (the taskbar, desktop, and so on). 
+      This process isn't as vital to the running of Windows as you might expect, 
+      and can be stopped (and restarted) from Task Manager, usually with no 
+      negative side effects on the system. BUT there is no reason to do so and 
+      makes things unstable.<BR></FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>I 
+      wouldnt.</FONT></TD></TR>
+  <TR>
+    <TD align=middle width="24%">
+      <DIV align=left><FONT face="Arial, Helvetica, sans-serif"><I><A 
+      name=OTHER>Other Processes <BR>(kill most of 
+these)</A></I></FONT></DIV></TD>
+    <TD width="19%">
+      <DIV align=center><FONT face="Arial, Helvetica, sans-serif"><I>Name in 
+      Task Manager</I></FONT></DIV></TD>
+    <TD width="36%">
+      <DIV align=center><FONT 
+      face="Arial, Helvetica, sans-serif"><I>Purpose</I></FONT></DIV></TD>
+    <TD width="21%">
+      <DIV align=center><FONT face="Arial, Helvetica, sans-serif"><I>Can be 
+      killed?</I></FONT></DIV></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>qttask.exe</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>qttask.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>As 
+      IE5.5 SP2 and IE6 no longer support Netscape style plugins, Apple made a 
+      Quicktime Active X Control to ensure Quicktime movies still ran 
+      in-browser. These program basically lets the Control work with older 
+      browsers, and also re registers MIME types to Q.Time. </FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yep. Basically, if you have IE 5.5 or 6, and quicktime 5, 
+      disable it in the registry place listed above, and delete the damn 
+      thing.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Microsoft Query manager</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>loadqm.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Microsoft <I>says</I> that this is an autoupdate utility for 
+      MSN messenger and MSN explorer, therefore it is installed with either of 
+      those. However I have heard reports of MS Office and Outlook also 
+      installing it, and that it sends "anonymous" user statistics to MS. I 
+      checked with a firewall, and it seemed to be trying to access the net 
+      about 15 times a minute.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yes, disable in registry, then delete the damn 
+    thing.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Microsoft Task Scheduler</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>MSTask.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>The prog that looks like a little calendar in your task bar. 
+      It allows you to schedule things like defragging automtically. Personally, 
+      I disable it. </FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yes, but<I> dont </I>delete it or go to the registry. Simply 
+      go Control Panel---&gt; Admin tools----&gt;Services, then disable and stop 
+      the task scheduler service in there.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Cdilla Licence System</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>CDANTSRV.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Installed for high end apps like 3D Studio Max to protect 
+      against piracy. Basically, if this aint running when you try to launch 3DS 
+      max, it wont start.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yes, but dont delete. Go to Control Panel---&gt; Admin 
+      tools----&gt;Services and select <I>Manual</I> for Cdilla srv. That way 
+      you can start it manually when you run 3ds max or other similar 
+      apps.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Devldr16</FONT><BR></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Devldr16.exe<BR></FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Background task installed with the drivers for some Creative 
+      Labs sound cards. Provides SoundBlaster 16 emulation for DOS applications 
+      and games. Without it, your DOS games will not have any sound. Disabling 
+      this program, however, often gives problems with the general behaviour of 
+      sound and of the Creative sound utilities on your PC. For the technically 
+      minded all these problems are due to the fact that DEVLDR16 emulates old 
+      ISA sound cards which do not have the ability to share resources in the 
+      way that the newer PCI cards can. </FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>If 
+      you do not use DOS games, and you want to get rid of this task, the only 
+      way to safely disable this task is as follows: 1) Disable in Startup 
+      Manager. 2) Next, in Device Manager, in the Sound section or under 
+      "Creative Miscellaneous Devices", disable Creative SB16 
+    Emulation.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>devldr32</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>devldr32.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000><I>Probably </I>a newer version of the above, though I'm not 
+      sure. It seems to appear when using the newer Soundblaster cards such as 
+      SBLive etc. I haven't checked if DOS games run when you kill this, but 
+      they probably wont as I cant see any other way of SB16 emulation. After 
+      killing it I noticed that all EAX games still worked fine, and the DX 
+      Sound tests run through ok. However, after deleting it, Windows FIle 
+      Protection kicks in and replaces it, and also without it many creative 
+      apps wont work. I'd leave it running unless you are desperate to recover 
+      about 2mb.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>I 
+      cant find a way to get rid of it permanently as Windows keeps replacing. 
+      If I spent some time I could find the Reg Key in Win2k FileProtection and 
+      stop it, but I dont think its a good idea to disable it.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>wowexec.exe</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>wowexec.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This is as process that helps "translate" interrupts, etc 
+      for 16 bit applications. Usually should only be running when you are 
+      running 16bit apps/dos stuff.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" color=#000000>No 
+      point, it should dissapear when you close your 16bit app.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Nvidia Driver Helper Service</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>nvsvc32.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Cant remember what this does, and it uses sod all memory, 
+      but as far as im concerned there is no need for a GFX card to have a 
+      process running - as long as its got the right driver(s) in that's all it 
+      should need. </FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yeah, disable this in Control Panel---&gt; Admin 
+      tools----&gt; Services.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Norton Auto-Protect</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>navapw32.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Norton Anti-Virus's background scanning process. Can be 
+      inconvenient because it scans files when Run/Opened or Downloaded/Created. 
+      Personally I have it turned off and just right click files to scan 
+      them.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yeah, disable this in Control Panel---&gt; Admin 
+      tools----&gt; Services.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Norton eMail Protect</FONT></TD>
+    <TD width="19%"><FONT face="Times New Roman, Times, serif" 
+      color=#000000>POPROXY.EXE</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Proxy E-mail protection from Norton Anti-Virus (prior to 
+      2002). If you have it installed, leave it enabled to automatically check 
+      for suspect attachments in E-mails that may contain viruses. It downloads 
+      the E-mail into poproxy, which serves as a proxy server on the local 
+      machine, before scanning it. I have this turned off too.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>There is an option to disable it in NAV itself</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Acrobat Assitant</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>ACROTRAY.EXE</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This is part of the FULL version of Adobe Acrobat (ie the 
+      £150 jobby, NOT the FREE Acrobate Reader).If you want to create a PDF 
+      using Acrobat Distiller this needs to be running for you to do so. 
+      However, you can execute this program manually just before doing so. 
+      Unavailable via Start -&gt; Programs so create your own 
+shortcut.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yeah, its just in the startup folder on the Start menu, so 
+      just delete it from there.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Intellipoint Software </FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>point32.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Software to do "clever" things like let you use those thumb 
+      buttons on your 5 button mouse, or to use a "new" Optical MS mouse. 
+      However, ALL the newer OS's (XP, win2k with SP2 etc) have built in support 
+      for all this so there is NO reason to run this anymore. Simply plug in 
+      your mouse and it should autodetect it.</FONT></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Yeah, just dont install it in the first place.</FONT></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Language selection </FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>internat.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>This sometimes appears in the system tray as "EN", or 
+      sometimes just runs as a process. Basically its supposed to allow easy 
+      switching betweens multiple languages. If you are only going to be using 
+      one language, disable it.</FONT></TD>
+    <TD width="21%">
+      <P><FONT face="Arial, Helvetica, sans-serif" color=#000000>Yes, in the 
+      registry, BUT it isnt in local machine its in - :"HKEY_CURRENT_USER\ 
+      Software\Microsoft\Windows\ CurrentVersion\Run".</FONT></P></TD></TR>
+  <TR>
+    <TD width="24%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Rundll/Rundll32</FONT></TD>
+    <TD width="19%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Rundll.exe/Rundll32.exe</FONT></TD>
+    <TD width="36%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>Microsoft’s "Run a DLL as an App". A DLL is a Dynamic Link 
+      Library. The main advantage is that, using this technique, programmers can 
+      develop software which only uses enough memory for the core functions of 
+      the program, with specific features implemented in separate DLL files only 
+      loaded as and when the end-user decides to use them (ie. the Print DLL 
+      will only be loaded into memory when the end-user clicks on PRINT). 
+      Another advantage is that the software developers can also have common 
+      features which they have implemented across a range of their programs, 
+      implemented just the one time as a shared DLL which is used by all that 
+      developer’s programs. RUNDLL and RUNDLL32 are the Microsoft Windows 
+      programs that need to be used to load DLLs into memory so that they can be 
+      used by specific programs or by Windows. This should explain why a lot of 
+      "Rundll Errors" happen on Windows - Its not a single program, but the 
+      result of any one of a number of programs.</FONT><BR></TD>
+    <TD width="21%"><FONT face="Arial, Helvetica, sans-serif" 
+      color=#000000>RUNDLL and RUNDLL32 do not <I>normally</I> appear in the 
+      Task List in Windows. However, they do sometimes, and I think it's best to 
+      leave well alone unless you know for SURE which program has created that 
+      instance and that it can be killed safely.</FONT></TD></TR></TBODY></TABLE>
+<P>&nbsp;</P></DIV>
+<P> </P></DIV></BODY></HTML>

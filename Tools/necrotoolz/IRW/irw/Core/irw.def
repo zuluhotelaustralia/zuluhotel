@@ -1,0 +1,129 @@
+LIBRARY	irw
+
+EXPORTS
+	Install @1
+	
+	GetIRWInstance @51
+	GetIRWVersion @52
+	HookImportedFunction @53
+	ListPlugins @54
+
+	ClientPrint @100
+	ClientPrintWarning @101
+	ClientPrintColor @102
+	ClientPrintAbove @103
+	ClientPrintAboveColor @104
+	ClientPrintRaw @105
+
+	MBOut @150
+	LogBlock @151
+	LogUnblock @152
+	LogPrint @153
+	LogDump @154
+
+	GetDropBadPackets @200
+	SetDropBadPackets @201
+	
+	SendToClient @202
+	SendToServer @203
+
+	GetPacketLen @250
+	GetPacketID @251
+	GetPacketName @252
+
+	UnpackUInt32 @253
+	UnpackSInt32 @254
+	UnpackUInt16 @255
+	PackUInt32 @256
+	PackUInt16 @257
+	
+	SetLastTarget @300
+	SetLastTile @301
+	GetLastTarget @302
+	GetLastTileX @303
+	GetLastTileY @304
+	GetLastTileZ @305
+
+	RequestTarget @306
+	WaitTarget @307
+	ExpectTarget @308
+
+	TargetRequest @309
+	TargetReplyObj @310
+	TargetReplyTile @311
+	CancelTargetRequest @312
+	
+    GetPlayerIdx @432
+	GetPlayerSerial @400
+	GetPlayerBackpack @401
+	GetLastAttack @402
+	GetLastObject @403
+	GetLastContainer @434
+	GetCatchBag @404
+	SetLastAttack @405
+	SetLastObject @406
+	SetLastContainer @435
+	SetCatchBag @407
+	
+	AddObject @408
+	AddCharacter @409
+	RemoveObject @410
+	SetItemAsContainer @411
+	SetObjectInfo @412
+	GetObjectInfo @413
+	GetObjectIndex @414
+	GetObjectSerial @415
+	
+	ListObjectsAtLocation @416
+	ListItemsInContainer @417
+	FindObjectAtLocation @418
+	FindItemInContainer @419
+	GetItemInLayer @420
+	WorldCount @431
+	
+	PickupItem @421
+	DropItem @422
+	DropItemInContainer @423
+	DropItemAtLocation @424
+	MoveToContainer @425
+	MoveToLocation @426
+	EquipItem @427
+	UnequipItem @428
+	UseObject @429
+	ClickObject @430
+	GetDistance @433
+	
+	GetIRWWindow @450
+	GetUOWindow @451
+	GetUOScreenData @452
+	GetMainTabWindow @453
+	AddTab @454
+
+	AddWorldCallback @500
+	AddPacketHandler @501
+	AddPacketReader @502
+	HandleWorld @503
+	HandleCommand @504
+	AddCommand @505
+	ArgToInt @506
+	AddAlias @507
+	RemoveAlias @508
+	SetAlias @509
+	GetAlias @510
+	ListCommands @511
+	ListAliases @512
+	
+	GetIRWPath @550
+	GetCurrentProfile @551
+	SetRegistryString @552
+	GetRegistryString @553
+	SetRegistryDword @554
+	GetRegistryDword @555
+	
+	CleanIRWProfileSection @600
+	GetIRWProfileString @601
+	GetIRWProfileInt @602
+	SetIRWProfileString @603
+	SetIRWProfileInt @604
+	
+	

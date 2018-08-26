@@ -1,0 +1,680 @@
+=================================================================
+---------------=============TODO LIST=============---------------
+=================================================================
+
+
+- DL MEN OF VALOR, HEaRTS OF IRON - PLATINUM, MEDAL OF HONOR PACIFIC ASSAULT
+  yes this has nothing to do with IRW... but I had to write it somewhere!! :)
+- add support for custom encryption (why do I feel like peeps will use this in
+  m2a? :P)
+- GetPluginHelp function, returns info about a plugin (use and etc..)
+  ,help plugin
+
+
+Auto connect plugin:
+- make AcctPassword and AcctID entries in uo.cfg blank
+- as the client window starts, connect
+
+Plugin Info:
+- move dudes attacking the player to the top of the list and do... some flashy stuff :P
+- make a menu with:
+  questarrow indicating the last known position of a player
+  update a player
+  set a player as lasttarget
+  
+
+Plugin:
+- TextWindow mode for ClientPrint (echoes to a text window)
+- Quiet mode for ClientPrint for something like ,set quiet on/off/1/0/window
+  I'll have to add ExportsHook
+
+Macro plugin:
+- add hotkeys and stuff
+
+Screenshot plugin:
+- make avis
+- take screenshots
+- screenshot on death (player or someone else)
+
+
+todo:
+- tomorrow add Grab, UseType, DropContainer and LogHandler plugins to the core
+  Grab useType and DropCointainer will be a single plugin
+
+=================================================================
+---------------============= DEV LOG =============---------------
+=================================================================
+
+--/[10/03/2005]/--
+version 1.4 released
+
+observations:
+- released before plugin devs kill me :P
+- couldnt get the time to add the core plugins that plugin devs wrote... crap
+  those plugins rule
+
+updates:
+- added Ziemniaq's journal updates, new functions:
+  JournalGetLast JournalDump SetJournalLine
+- notoriety is now added to the flags (from packet 0x78)
+
+info plugin fixes:
+- fixed how it gets hidden and war status for the new flag system
+
+--/[10/03/2005]/--
+updates:
+
+- new flag: poisoned
+- war, hidden, poisoned and other flags are now accessed through the obj, not
+  the character. this way an obj or character can have up to 32 different flags
+  male and female will now be defined in the flags as well
+  new defines: GETOBJFLAG SETOBJFLAG CLEAROBJFLAG
+
+
+--/[9/03/2005]/--
+observations:
+- yeah uni is taking shit loads of my time, but its fun ;)
+
+fixes:
+- war and hidden status were being saved in memory with their flags 0x40 and
+  0x80 instead of setting them as bools (1 or 0). now they will be 1 or 0
+
+updates:
+- the logs will now be saved to IRWMAIN\Logs\...
+  ... being the log name
+
+
+--/[6/03/2005]/--
+fixes:
+- completly updated ArgToInt, UOWorld.c, UOTarget.c and UONetwork.c to use
+  the alias system
+- ,set now sets aliases and the prefix (a part of the alias system update)
+- ListPlugins (I cant believe I didnt add this to the devlog before) now
+  returns a plugin table in the same way that ListCommands and ListAliases do
+  it was returning a pointer to pointers with strings before
+- the Z value (used a lot in uotarget) is now completly treated as an int
+  but the world structure for items still treats it as a char (no need to change atm)
+
+updates:
+- added ,listplugins and ,listaliases
+  they show how to use the plugin and aliases list
+
+LSU plugin added: (by Lem)
+Lemrey's Suppah Utilies
+- ,playwav and ,memshrink... ,memshrink rules so bad :P
+
+--/[5/03/2005]/--
+fixes:
+- I completly rebuilt how commands work. now there is no limit of commands
+  the list is dynamic
+- journal code now adds a prefix (name or something like "You see") to messages
+- added a handler for 0xc1 packet (cliloc messages) for the journal system
+  todo: figure out an use for it :P
+
+updates:
+- added an alias system. so players can do stuff like ,setalias mymoney lasttarget
+  or ,setalias mymoneygraph 3414
+  functions: AddAlias, RemoveAlias, SetAlias and GetAlias
+  current aliases are: on off self backpack lasttarget lasttilex/y/z catchbag
+  lastcontainer dropbadpackets
+- added two functions that return DIRECT access to the command and alias list
+  ListCommands and ListAliases. be VERY careful when using them. they are read only!
+
+  tomorrow I'll update IRW so all the global vars (lasttarget, catchbag.. etc)
+  use the alias system instead of acting like vars
+  
+
+--/[4/03/2005]/--
+fixes:
+- changed the speech types of the journal code to match the ones of UO
+  removed SPEECH_IRW
+- since IRW steals the focus of the client's window when IRW's GUI is created
+  IRW will now set the focus on the client with SetForegroundWindow
+
+
+--/[2/03/2005]/--
+fixes:
+- IRW had a tendency of accumulating packets by priorizing recv's (the api) buffer
+  instead of IRW's buffer (RecvFull)
+  I kinda rebuild hook_select and how the 400c fix works
+  now there is no BOOL to indicate when to fake select. now select does so by
+  checking data in recvfull
+  now all data in recvfull will be sent to client before checking for data in recv
+  ps: this is the thing that caused the lag
+
+updates:
+- journal handling (by Ziemniaq)
+- added handling for 0x1c packet, for journal
+- UnloadPlugin function in plugins is now called before IRW's window is
+  destroyed
+
+Dress plugin:
+- added ,disarm ,undress ,mount ,unmount
+
+
+--/[1/03/2005]/--
+Observations:
+- why do I always forget that february skips a few days? :P
+- Xan confirmed me that recv() has a bug thats causing lag in irw
+  he's looking into it
+
+fixes:
+- OpenContainer now sets an object as a container (by Xan)
+- multi targetting wasnt being checked. packet 0x99 is now hooked (by Xan)
+- packet builder now checks if the partial buffer is empty
+- packet builder now terminates the client on unknown packets
+- removed "GOD:" from 0x12 packet name
+- changed all strings in apis to const char*
+  command strings (ArgToInt, HandleCommand and AddCommand) will still
+  be char* though
+
+
+updates:
+- catchbag is now correctly emulated as in Yoko's injection
+  added IRWClient_DropItem (by Xan)
+- OpenContainer now sets the container as LastOpenContainer (by ziemniaq)
+
+--/[27/02/2005]/--
+version 1.3 released
+
+updates:
+- if connect() fails it will print the error to the log
+- the GUI main window will from now on have the title "IRW" instead of "Injection"
+  all kids must breal free one day... heh
+- all plugins have been recompiled. this irw.h and irw.lib in their folders
+  are updated. I'll try to do this every IRW update
+- this time I changed the irw version string :P
+
+Macro plugin:
+- disarm on cast is now enabled. command ,disarmoncast
+- added a devcpp project
+
+Smoothwalk plugin (by illusion - nigga):
+- the very first IRW plugin was added, now that we have a movement handler
+- commands are: ,smoothwalk and ,resync
+
+
+--/[26/02/2005]/--
+fixes:
+- fixed assignment of Direction and Z in UpdateCreature. was off by one byte (by Xan)
+
+updates:
+- added player movement handling (by Xan)
+- added GetDistance to UOWorld.c. now the distance between two points can be calculated
+- added PlayerIdx. makes things faster, used it in Xan's player movement code
+- the "[IRW]" affix is now defined by ClientPrint, ClientPrintWarning and
+  ClientPrintColor.
+  ClientPrintRaw determines the affix by the Tag parameter. using up to a
+  maximum of 30 bytes. the Tag parameter is set by the caller and if NULL the
+  message will have no affix.
+- bad packet (size != pkt len) occurances will now be warned with ClientPrint
+
+Macro plugin:
+- simulates uo macros
+- commands: ,cast ,useskill ,opendoor and ,action
+  cast has a full spell list (up to paladins) thanks to Xan
+  useskill has a full skill list thanks to the RunUO core hehe
+  action can bow and salute
+  opendoor might not work on some emus, but its the way the uo client does it
+
+  spells and skills dont need to be full in order for the command to work.
+  so instead of ,cast 'Magic Arrow' the user can simply do ,cast ma
+  or ,useskill ItemId can be ,useskill it
+  theres no difference between lower and upper case too.
+
+
+--/[25/02/2005]/--
+fixes:
+- errr.. 1.2 was defined as 1.1 in irw.h lol
+  fixed that. from now on I'll try to constantly update it
+- FindItemInContainer could/would/shouldnt return an invalid serial even
+  though the object was found. now it returns the correct serial (by botserver)
+
+about plugin:
+- displays the version of irw that it was compiled with and the current core
+  also displays the count of total objects in the world, used ones and how
+  many are mobiles/characters.
+  the count will only be updated when the window is "switched to". avoids lag
+
+info plugin:
+- now displays life changes and ignores server update bursts
+- fixed several possible crashes where the character pointer would be freed if
+  the object was not found by GetObjectInfo
+
+--/[24/02/2005]/--
+version 1.2 released
+
+fixes:
+- the fix for POL's no floor problem when encryption is 2.0.0 was a problem itself
+  in runuo.. that fucking emu stalks me.
+  anyway, now the generalinfo handler checks if the lastbyte of the packet is 01
+  if it is, its changed to 0. this way the 02 flag (switch map) is safe
+- changed the "Could not detect the client's encryption. Check..." line to
+  "Could not detect the client's game encryption"
+- changed the spoiled "can't cancel a target reply if not waiting for one... can I!?"
+  reply in _canceltarget to "Not waiting for a target reply. Can't cancel."
+- when connect uses port 28888 its a connection to the tranlation server.
+  irw was redirecting that, causing transerv to wait for a connection on a loop
+  ,or so I guess...
+  anyway, that caused the transerv to lag the entire system. now when connect 
+  is on port 28888 it will simply be ignored, withouth being redirected
+
+updates:
+- hook_connect now displays where UO is connecting to. format: IP:port
+- irw now displays it the version when initializing the log
+
+launcher fixes (by illusion - nigga):
+- updates button is now disabled
+- fixed the taborder in dialogs
+
+--/[23/02/2005]/--
+version 1.1 released
+
+fixes:
+- in the "_Set" function, dropbadpackets is now listed
+- the gameseed is being written inverted in the login packet (lil -> big endian)
+  that was cause I was using PackUInt32 instead of memcpy to write it :P
+- connect redirection was being logged as signed
+  instead of "redirecting to IP: 195.36.6.33" people were getting -61.36.6.33 
+  defined the IP chars as unsigned char
+
+updates:
+- dropbadpackets is on by default
+- ClientPrintRaw is now exported
+
+
+--/[22/02/2005]/--
+uoencryption:
+- the UOEncryption is now a separate project from IRW, added UO's pwd
+  encryption to it
+
+launcher fixes:
+- fixed a nasty memory leak in the profile dialog related to the cryptlist
+
+irw updates:
+- added IP and port redirection, they work only for the loginserver, the
+  client will still be relayed by the loginserver to a gameserver, but that
+  can be changed in the future
+- gonna release IRW in a few minutes :)
+
+--/[21/02/2005]/--
+observations:
+- yet another dry period for IRW ;)
+- uni fucking rules
+- runuo and razor... oh well...
+
+fixeS:
+- fixed the nasty bug in the info plugin, IRW is soon to be released
+
+--/[12/02/2005]/--
+
+fixes:
+- fixed the memory leaks in the world handler, ALLOCCHAR all over the place
+  I forgot to remove them since I changed how GetObjectInfo works hehe
+
+
+--/[11/02/2005]/--
+Observations:
+- at every change of socket (game or login) the client initializes the crypt
+  stuff with the game seed
+- this issue happens only when there's more than one server in the server list:
+  if you try to connect with client 2.0.3 and at the servers screen you just
+  press enter instead of choosing which server you want, the client will not
+  initialize the twofish encryption. thus the tables created will be the ones
+  of LoginSeed instead of GameSeed. the client also wont send the gameseed,
+  just the login2 packet (0x91).
+
+  The client will still build the login2 packet with the gameseed provided by
+  the server in the relay packet (0x8c) but it will encrypt with the loginseed.
+
+  when you just press enter instead of choosing the server, the client chooses
+  the last server in the list
+
+  I wasnt going to fix this, but it happens in all clients that use 2Fish
+  so I tried and did the changes to fix it, small changes since IRW's code is
+  really maleable :)
+  turns out it works only in client 2.0.3
+  the clients are more fucked up than I thought. the client will encrypt 64 random
+  bytes before encrypting the 65 bytes of login2.
+  the encryption function does something like TFCrypt(Login2 - 0x40, 0x4E + 0x40)
+  sooooooo... this is one of osi's error that I cant fix. a good hack for this
+  is to just remove the encryption on the client's asm
+
+  after I set POL to one server instead of two, I was not able to reproduce
+  this bug... shice
+  and I tried a lot of stuff to reproduce it so... I think its gone for good
+  I bet it was the damaged user datafiles of uo
+
+
+updates:
+- the log will now be built in IRW's folder with the following name:
+  IRW(DD-MM-YYYY)(HH-MI-SS).txt
+  DD - day   MM - month   YYYY - year
+  HH - hour  MI - minute  SS - second
+- added checks to the api hooks. now if one of the apis is not hooked
+  a messagebox (mbout) is displayed and IRW ends UO's process
+- when UO's window is initialized, the focus will be set on it
+
+Launcher fixes:
+- now UO will be correctly started even though the executable is not at
+  UO's main folder. this was cause CreateProcess was using the commandline
+  instead of application name parameter. must be a weird windows bug
+
+
+--/[09/02/2005]/--
+fixes:
+- small changes to seed handling in HandleSocket
+  it will now display which seed is received. login or game
+  this allows the seed to be changed
+- Font = atoi(Arg[3]); instead of Color =... in ,say (Illusion)
+
+
+--/[08/02/2005]/--
+Observations:
+- carnival sux
+
+fixes:
+- GetObjectInfo now allocates the character structure. the caller is responsable for always calling FREECHAR after GetObjectInfo
+- optimized the checking of objidx in all the serial/idx related functions in UOWorld
+- RemoveObject double checked if .Character was null or not. now it checks only once (its builtin FREECHAR)
+- removed all cast warnings (which were in ImportHook :P) by using UINT_PTR stuff
+- read handlers had their pointer set as of (IRWPacketHandler), changed it to (IRWPacketReader)
+
+Launcher fixes:
+- removed all the C4267 warnings from vs.net by setting all strlen to something like (unsigned int)(strlen(...) & 0xFFFFFFFF)
+  shice 64bit support...
+- removed *all* cast warnings by using UINT_PTR stuff
+- the IRWPath\\Profiles directory will now be created if it does not exist
+  and you are creating a new profile
+- last time I changed the launcher I removed the CREATE_SUSPENDED flag from
+  CreateProcess and I added a Sleep(5000).
+  removed the sleep, added the flag
+
+--/[07/02/2005]/--
+Observations:
+- wow first update in 2 weeks more or less :o
+- when there is a "noid" item in UO's registry, the client starts to use the
+  IGR login system, 0xCF packet
+
+fixes:
+- the 0xCF packet is now named "IGR Account login request" instead of "Account Login"
+- the 0x91 packet is now named "Login to game server request"
+- changed the StartLoginCrypt function to check for the 0xCF packet.
+  it also builds a 0x80 or a 0xCF packet, following the UOEncryption library fix.
+  last bytes of both packets are ignored
+
+Launcher fixes:
+- after *MUCH* hardwork, the launcher can inject dlls that are located
+  anywhere in the system and it can inject multiple dlls. it can also call
+  multiple functions from DLLs. this avoids the need of having IRW's dlls
+  in the client's folder. now the client is launched with the base folder
+  being the client's base folder. RTD: should the base folder be set to UO's base folder?
+  I had to rewrite the entire LoadLibraryOnProcess function. it works like
+  a charm now.
+  *BUT* for some reason the function is miscompiled on both VS.net 2k3 and devcpp
+  I should send this code for analysis... this is fucking weird.
+  my bet is that the whole (char**) thing fucks up the compiling
+
+
+UOEncryption library fix:
+- the get keys module has been changed, now it uses only 61 bytes to find the keys
+  the caller only needs to build the following data:
+  BYTE[1] cmd, BYTE[30] login, BYTE[30] pwd
+  this way the last byte of the 0x80 packet (NextLoginKey value in uo.cfg) is
+  ignored.
+  the last bytes of the 0xCF packet are also ignored.
+  61 bytes is more than enough to find the login keys.
+
+UOKeys.cfg update:
+- added loginkeys of 408, 407 and 406 clients.
+  is there a 405? :P
+
+--/[23/01/2005]/--
+Observation:
+- not much to say today... Got in Computer Engineering in PUC-PR... my friends
+  shaved my head... I'm bald atm :P
+
+fixes:
+- since the world update handlers and the packet read handlers are added
+  on a "stream"-way, HandleWorld and HandlePacket will now break the loop
+  when the end of the list is found OR there's nothing left (pointer == 0)
+
+
+--/[19/01/2005]/--
+fixes:
+- the generalinfo hook had a wrong comment
+  changed the "bf 00 06 00 08 01" to "bf 06 00 00 08 01"
+- fixed the window handle check in the info plugin
+- AddWorldCallBack changed to AddWorldCallback (find the error lol)
+
+plugins
+Info Plugin:
+- player list now works, npcs such as animals and monsters go to it as well
+  maybe I should remove that...
+  anyway... yeah thats it... didn't get to code much today
+  went to sleep 4am, woke up at 6am for uni... signed up btw! I'm an official
+  Computer Engineer student now... take that... whoever you are! :P
+  so damn sleepy... lol
+  gotta hang on... one more hour and my day is over... one more hour...
+
+--/[18/01/2005]/--
+Observation:
+"The Village" just kicks ass... you gotta watch it man
+
+fixes:
+- changed the buffer sizes for MAX_COMMANDS, its now defined as 200
+
+updates:
+- added AddWorldCallback, HandleWorld functions
+  almost all world update hooks have a call to handleworld
+- added the LastAttack property to characters now. This is the serial of the last
+  character that the character attacked
+- added the DropItemAtLocation and the MoveToLocation functions
+
+plugins:
+Info Plugin:
+- added the OnPlayerUpdate function, its blank atm
+- added the target textbox to the layer info
+
+
+--/[17/01/2005]/--
+fixes:
+- IRw handlers (internalhandlers) are now processed before readonly handlers
+  for safety reasons and cause readonly handlers are used by plugins which
+  might expect IRW to already know the contents of that packet
+- set all the global (private... I dont like extern vars) to "static"
+  in the core and in the info plugin
+  TODO: do the same in all plugins
+
+updateS:
+- all the world functions that take Idx as input now have a invalid idx check
+  if the index doesn't exist then INVALID_IDX is returned
+- added the GetUOScreenData function
+
+plugins:
+Info Plugin:
+- added the list handling functions
+
+
+--/[14/01/2005]/--
+Observation:
+"The Grudge" sux bad, worst movie since Scream 3 ;)
+
+fixes:
+- fixed the format of the packetID defines in UOProtocol.h
+  from tabs (0x09) its now using spaces (0x20)
+  I made a small program (docs/Deformater.c) to do the job for me
+- added packet 0xDC to packet names, packet sizes and packet id defines
+- added a "small" comment with all 0xBF subcmds based on RunUO and Krrios
+
+
+
+--/[11/01/2005]/--
+launcher fixes:
+- Fixed a bug in CheckCurSel, added a "Item == -1" to the if
+
+launcher updates:
+- Added a GetCurrentInstance to Main.c (so the other modules could use it)
+- Added irw's icon to the launcher (main window, change path window and edit window)
+- Added an update and a cancel button to the change path window
+- Changed change path's window from an edit box to a text box (same thing actually
+  but now users can only read from it)
+- Changed the STATIC_INFO to TEXT_INFO, gotta fix the text len of it :)
+
+
+
+--/[08/01/2005]/--
+updates:
+- Added comments to the entire HandleCommand function
+
+plugins:
+- Info Plugin:
+  Changed the commands a bit. Now its as it should be.
+  Added the Players dialog.
+  Discarded the player picture idea for the layers.
+  Changed the 25 layer buttons to 25 layer checkboxes :P
+  more than one checkbox can be selected and the look is cleanear.
+  Started to write the players list. I expect to end it by tomorrow.
+  Have to add updating (easy) and menu (2x eep)
+  possible addons could be: moving attackers to the beginning of the list
+
+--/[04/01/2005]/--
+RESEARCH INFO:
+- ok, I made the client research to find out what goes on with targetting
+  type == TARGET_OBJECT == 0:
+  the client will only take as input an object or cancel. the return in the packet
+  will be the obj's serial and INVALID_XY in X, Y and Z
+
+  type == TARGET_TILE == 1:
+  the client will take as input both an object and a tile. if the input is an
+  object the client returns the obj's serial and INVALID_XY in X, Y and Z
+  if the input is a tile THE CLIENT WILL RETURN VALID COORDINATES AND INVALID_SERIAL!!!!
+  
+fixes:
+- EXPORTS (.def and irw.h) has the formatting fixed. moved targetting to it's
+  own section now
+  added Targetting to it's own "export section" same thing to world stuff
+  left a space at ordinal 350 for player stuff (like xyz)
+- changed FindItemsInContainer, FindObjectsAtLocation and GetItemInLayer
+  to return INVALID_SERIAL if no item was found
+- removed the ClientAttach function, no more attachments to the past :)
+- fixed the XYZ of the parameters of TargetReplyObj
+- WaitTarget now expects the parameter Type (as in, tiles are now supported)
+- changed function WaitTargetGround to WaitTargetTile (operational)
+  peeps who want to target stuff from ground will have to use FindObjectAtLocation
+  and then WaitTarget
+  waittargetgraphic uses the items in backpack
+- the entire wait target and targetting systems have been changed to use
+  the graphic as well (remember: the objective of IRw is to mimic the client as much as possible)
+  this allows waittargettile to target static items such as trees
+  almost all targetting have now a new parameter: Graphic
+
+
+updates:
+- HookImportedFunction now takes the ImageBase. Callers must declare
+  for the base image address I made a define to be used as the parameter:
+  BASE_IMGADDR
+- WaitReply now works for IRW as well (working on RequestTarget for IRW and
+  IRWServer_Target for Server)
+- added function: ExpectTarget
+  returns a boolean value if a target reply is expected
+  WaitTarget sets IRW to autoreply the next target request from both IRW and server
+
+
+--/[03/01/2005]/--
+Happy new year everyone!!
+parties are over, so I got back to irw heh. I used last saturday to write
+the new version of UOCH though... turned out to be great
+
+anyway, the updates!
+
+fixes:
+- packetreaders now return void
+- added decrypt from server (I forgot about it)
+
+updates:
+- FindItemAtLocation and FindItemInContainer altered for efficiency
+  now they return ONLY by graphic, by color or by graphic AND color
+  otherwise its OBJECT_NOTFOUND
+  no more "return by graphic if by color not found" bullshit
+- targetting now has it's own module, all targetting stuff was moved from
+  UOWorld.c and .h to UOTarget.c and .h
+  variables names are now especific (IRWRequestedTarget, ServerRequestedTarget ...)
+  removed ExpectTargetReply, IRWRequestedTarget or ServerRequestedTarget are used instead
+- WaitTarget is now added, added the functions:
+  waittarget, waittargetgraphic, waittargetground (gotta wait for player xyz)
+  cancelwaittarget
+- fixed the formatting of most modules to look more presentable
+- new control words: on, off
+- ,set dropbadpackets on/off/1/0
+  drop packets with size different from GetMessageLength
+- lasttarget and lasttilexyz now cannot be set as INVALID by the target handler
+- translated this todo/devlog list to complete english
+
+
+--/[17/12/2004]/--
+updates:
+- TargetRequest now imitates the client by sending X and Y == 0xFFFF when
+  cancelling
+- Added the functions:
+  PickupItem DropItem DropItemInContainer MoveToContainer EquipItem
+  UnequipItem UseObject ClickObject TargetRequest TargetReplyObj
+  TargetReplyTile CancelTargetRequest
+
+
+--/[15/12/2004]/--
+updates:
+- funcao ListItemsAtContainer modified, returns NULL if nothing was found
+- ArgToInt function modified to support control words
+- added the functions
+  GetObjectSerial (by index), ListItemsAtLocation, FindObjectAtLocation
+  IRWClient_Attack, IRWClient_DoubleClick
+  UseObject, SetLastTarget, Get/SetLastAttack, Get/SetLastObject
+  GetLastTileX/Y/Z, SetLastTile
+- RequestTarget modified to support tiles
+- control words created
+- removed the function IsWorldActive, GetPlayerSerial should be used to check
+  if the world is created or not
+- EXPORTS (.def) reformulated to give a 50 ordinals spacing between groups
+- control words can now be set with the ,set command
+- added the control words
+  self backpack lasttarget lastattack lastobject catchbag
+
+
+plugins:
+- Plugin enviroment: added 'prevent idle logout'
+
+
+--/[14/12/2004]/--
+fixes:
+- IRWServer_UpdatePlayer, Packet += 5; to Packet += 7; (fixed)
+
+updates:
+- added the functions
+  FindObjectInContainer, GetObjectInLayer CleanIRWProfileSection (was internal)
+
+plugins:
+- dress plugin: written
+
+
+--/[13/12/2004]/--
+fixes:
+- Added the ExpectSeed bool. the client was not identifying the game socket
+  when reusing the login socket for game
+- Target handler, out of sequence cursor issue
+
+updates:
+- added the following functions to the core
+  IsWorldActive, CountItemInContainer, FindObjectInContainer, ListItemsInContainer
+- illusion (nigga) changed some stuff on the launcher gui... its stylish now ;)
+
+plugins:
+- info under development
+
+--/[12/dez/04]/--
+fixes:
+- Plugin environment:
+  light not activating/deactivating
+  setweather as if it was setseason
+  buffersize of setseason was wrong == crash
+- BQAddTrail and BQRemoveTrail are now XXXTail hehe

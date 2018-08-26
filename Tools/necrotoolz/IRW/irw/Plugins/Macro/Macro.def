@@ -1,0 +1,6 @@
+LIBRARY	Macro
+
+EXPORTS
+	InitPlugin
+	UnloadPlugin
+	GetPluginInfo

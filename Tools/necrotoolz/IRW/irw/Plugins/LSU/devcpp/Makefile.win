@@ -1,0 +1,33 @@
+# Project: LSU
+# Makefile created by Dev-C++ 4.9.9.1
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = ../Main.o $(RES)
+LINKOBJ  = ../Main.o $(RES)
+LIBS =  -L"C:/Program Files/Dev-Cpp/lib" --no-export-all-symbols --add-stdcall-alias -lgmon --input-def "../LSU.def" "../irw.lib" -lwinmm  -s 
+INCS =  -I"C:/Program Files/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/mingw32"  -I"C:/Program Files/Dev-Cpp/include/c++/3.3.1/backward"  -I"C:/Program Files/Dev-Cpp/lib/gcc-lib/mingw32/3.3.1/include"  -I"C:/Program Files/Dev-Cpp/include" 
+BIN  = LSU.dll
+CXXFLAGS = $(CXXINCS) -DBUILDING_DLL=1   -ansi
+CFLAGS = $(INCS) -DBUILDING_DLL=1   -ansi
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before LSU.dll all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libLSU.def
+STATICLIB=libLSU.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../Main.o: ../Main.c
+	$(CC) -c ../Main.c -o ../Main.o $(CFLAGS)

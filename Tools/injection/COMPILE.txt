@@ -1,0 +1,36 @@
+-------------------
+Compiling Injection
+-------------------
+
+I use the Mingw32 development tools to compile Injection, which can be
+downloaded from: http://www.mingw.org/
+
+Compiling on Windows 9x using Mingw-1.0-20010608 also requires the W95Patch
+from: http://sourceforge.net/projects/mingw/. Also, the latest
+binutils-2.11.90-20010705 package from the Mingw site is needed to properly
+link the DLL.
+
+The resource editor from the lcc-win32 programming environment was used to
+create the resource script, and a bug in the current version of windres means
+that the lcc resource compiler is used to compile the resources. lcc-win32 is
+available from: http://www.cs.virginia.edu/~lcc-win32/
+
+The only third-party library that I used is 'expat', which is a lightweight
+XML parsing library. See http://expat.sourceforge.net/ for more information.
+If you are using Mingw to compile Injection, go to the Mingw Packages
+Repository for a development binary of expat:
+http://sourceforge.net/projects/mingwrep/
+
+---------------------------
+Using Visual C++ to compile
+---------------------------
+
+Injection was ported to VC 6.0. The older/newer versions were not tested.
+To compile Injection you'll need to get the latest version of STL. Download 
+it from http://www.sgi.com/tech/stl/stl.zip. And download VC version of expat 
+from http://expat.sourceforge.net/.
+Don't forget to add Injection, STL and Expat directories to Options->
+Directories->Include files in VC IDE. STL directory should be topmost in the 
+list (even before standart include dirs).
+Don't use VC resource editor on injection.rc or you'll get errors when
+you'll build it with MinGW.

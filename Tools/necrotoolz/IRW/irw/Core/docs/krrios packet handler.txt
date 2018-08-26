@@ -1,0 +1,989 @@
+// Decompiled by Salamander version 1.1 Beta
+// Copyright 2002 Remotesoft Inc. All rights reserved.
+// http://www.remotesoft.com/salamander
+
+using Client.Prompts;
+using Client.Targeting;
+using System;
+using System.Collections;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace Client
+{
+    public class PacketHandlers
+    {
+        private enum Condition
+        {
+            Ageless = 0,
+
+            LikeNew = 1,
+
+            Slightly = 2,
+
+            Somewhat = 3,
+
+            Fairly = 4,
+
+            Greatly = 5,
+
+            IDOC = 6,
+
+        }
+
+
+        private enum EffectType
+        {
+            Moving = 0,
+
+            Lightning = 1,
+
+            Location = 2,
+
+            Fixed = 3,
+
+        }
+
+
+        private enum EffectLayer
+        {
+            Head = 0,
+
+            RightHand = 1,
+
+            LeftHand = 2,
+
+            Waist = 3,
+
+            LeftFoot = 4,
+
+            RightFoot = 5,
+
+            CenterFeet = 7,
+
+        }
+
+
+        private const string DefaultLRReason = "The client could not attach to the game server.  It must have been taken down, please wait a few minutes and try again.";
+
+        private const string DefaultALFReason = "There is some problem communicating with Origin. Please restart Ultima Online and try again.";
+
+        public static PacketHandler[] m_Handlers;
+
+        private static int m_PathfindIndex = 20;
+
+        private static string[] m_LoginRejectReasons;
+
+        private static string[] m_Args;
+
+        private static Regex m_ArgReplace = new Regex("~(?<1>\\d+).*?~", RegexOptions.Singleline);
+
+        private static DateTime m_HealStart;
+
+        private static int m_xMapLeft;
+
+        private static int m_xMapRight;
+
+        private static int m_yMapTop;
+
+        private static int m_yMapBottom;
+
+        private static int m_xMapWidth;
+
+        private static int m_yMapHeight;
+
+        private static string[] m_BuyMenuNames;
+
+        private static int[] m_BuyMenuPrices;
+
+        private static int m_BuyMenuSerial;
+
+        public static DateTime m_GumpTime;
+
+        private static DateTime m_EffectTime;
+
+        private static string[] m_WorldNames;
+
+        private static int m_LastWorld = -1;
+
+        private static string[] m_IPFReason;
+
+        public static DateTime m_LastMultiMove;
+
+        public static DateTime m_StartMultiSequence;
+
+        public static int m_MultiSequenceCount = -20;
+
+        private static Queue m_Sequences = new Queue();
+
+        private static string m_LastSpell;
+
+        private static DateTime m_TimeLastSpell;
+
+        private static int m_RepeatCast;
+
+        private static DateTime m_TimeLastCast;
+
+        private static TimeSpan m_CastDelay;
+
+        private static int m_CastCount;
+
+        public static int m_LastMultiX;
+
+        public static int m_LastMultiY;
+
+        private static string[] m_ALFReasons;
+
+
+        private static PacketCallback Unhandled
+        {
+            get
+            {
+                // This online demo only decompiles 10 methods in each class
+            }
+        }
+
+        public static string[] IPFReason
+        {
+            get
+            {
+                // This online demo only decompiles 10 methods in each class
+            }
+        }
+
+        static PacketHandlers()
+        {
+            string[] strs = new string[]{"Incorrect password.", "This character does not exist anymore.  You will have to recreate it.", "This character already exists.", "The client could not attach to the game server.  It must have been taken down, please wait a few minutes and try again.", "The client could not attach to the game server.  It must have been taken down, please wait a few minutes and try again.", "Another character from this account is currently online in this world.  You must either log in with that character or wait for it to time out.", "An error has occurred in the synchronization between the login servers and this world.  Please close your client and try again."};
+            m_LoginRejectReasons = strs;
+            strs = new string[]{"Felucca", "Trammel", "Ilshenar", "Malas"};
+            m_WorldNames = strs;
+            strs = new string[]{"You can not pick that up.", "That is too far away.", "That is out of sight.", "That item dose not belong to you. You\'ll have to steal it.", "You are already holding an item."};
+            m_IPFReason = strs;
+            strs = new string[]{"Either the Account Name or Password you provided were incorrect. If this is a new account your account may not be active yet. Please try again shortly.", "Someone is already using this account.", "Your account has been blocked. Please visit http://ultima-registration.com for information on reactivating your account.", "Your account credentials are invalid. Check your user ID and password and try again.", "The IGR concurrency limit has been met.", "The IGR time limit has been met.", "A general IGR authentication failure has occured."};
+            m_ALFReasons = strs;
+            m_Handlers = new PacketHandler[256];
+            Register(130, "Account Login Failed", 2, new PacketCallback(null.AccountLoginFail));
+            Register(27, "Login Confirm", 37, new PacketCallback(null.LoginConfirm));
+            Register(85, "Login Completed", 1, new PacketCallback(null.LoginComplete));
+            Register(140, "Server Relay", 11, new PacketCallback(null.ServerRelay));
+            Register(168, "Server List", -1, new PacketCallback(null.ServerList));
+            Register(169, "Char/City List", -1, new PacketCallback(null.CharacterList));
+            Register(129, "Change Character", -1, new PacketCallback(null.ChangeCharacter));
+            Register(83, "Login Rejected", 2, new PacketCallback(null.LoginReject));
+            Register(50, "Unknown", 2, new PacketCallback(null.Trace));
+            Register(28, "ASCII Message", -1, new PacketCallback(null.Message_ASCII));
+            Register(174, "Unicode Message", -1, new PacketCallback(null.Message_Unicode));
+            Register(193, "Localized Message", -1, new PacketCallback(null.Message_Localized));
+            Register(204, "Localized Message Affix", -1, new PacketCallback(null.Message_Localized_Affix));
+            Register(194, "Unicode Prompt", -1, new PacketCallback(null.Prompt_Unicode));
+            Register(154, "ASCII Prompt", -1, new PacketCallback(null.Prompt_ASCII));
+            Register(214, "Property List Content", -1, new PacketCallback(null.PropertyListContent));
+            Register(17, "Mobile Status", -1, new PacketCallback(null.Mobile_Status));
+            Register(32, "Mobile Update", 19, new PacketCallback(null.Mobile_Update));
+            Register(119, "Mobile Moving", 17, new PacketCallback(null.Mobile_Moving));
+            Register(120, "Mobile Incoming", -1, new PacketCallback(null.Mobile_Incoming));
+            Register(161, "Mobile Hit Points", 9, new PacketCallback(null.Mobile_Attributes_HitPoints));
+            Register(162, "Mobile Mana", 9, new PacketCallback(null.Mobile_Attributes_Mana));
+            Register(163, "Mobile Stamina", 9, new PacketCallback(null.Mobile_Attributes_Stamina));
+            Register(45, "Mobile Attributes", 17, new PacketCallback(null.Mobile_Attributes));
+            Register(110, "Mobile Animation", 14, new PacketCallback(null.Mobile_Animation));
+            Register(175, "Mobile Death", 13, new PacketCallback(null.Mobile_Death));
+            Register(46, "Equip Item", 15, new PacketCallback(null.EquipItem));
+            Register(136, "Display Paperdoll", 66, new PacketCallback(null.DisplayPaperdoll));
+            Register(184, "Display Profile", -1, new PacketCallback(null.DisplayProfile));
+            Register(26, "World Item", -1, new PacketCallback(null.WorldItem));
+            Register(36, "Container Open", 7, new PacketCallback(null.Container_Open));
+            Register(37, "Container Item", 20, new PacketCallback(null.Container_Item));
+            Register(60, "Container Items", -1, new PacketCallback(null.Container_Items));
+            Register(41, "Drop Accept", 1, new PacketCallback(null.Drop_Accept));
+            Register(40, "Drop Reject", 5, new PacketCallback(null.Drop_Reject));
+            Register(29, "Delete Object", 5, new PacketCallback(null.DeleteObject));
+            Register(33, "Movement Reject", 8, new PacketCallback(null.Movement_Reject));
+            Register(34, "Movement Accept", 3, new PacketCallback(null.Movement_Accept));
+            Register(124, "Display Question Menu", -1, new PacketCallback(null.DisplayQuestionMenu));
+            Register(149, "Select Hue", 9, new PacketCallback(null.SelectHue));
+            Register(166, "Scroll Message", -1, new PacketCallback(null.ScrollMessage));
+            Register(171, "String Query", -1, new PacketCallback(null.StringQuery));
+            Register(176, "Display Gump", -1, new PacketCallback(null.DisplayGump));
+            Register(84, "Play Sound", 12, new PacketCallback(null.PlaySound));
+            Register(35, "Drag Item", 26, new PacketCallback(null.DragItem));
+            Register(112, "Standard Effect", 28, new PacketCallback(null.StandardEffect));
+            Register(192, "Hued Effect", 36, new PacketCallback(null.HuedEffect));
+            Register(199, "Particle Effect", 49, new PacketCallback(null.ParticleEffect));
+            Register(78, "Personal Light Level", 6, new PacketCallback(null.Light_Personal));
+            Register(79, "Global Light Level", 2, new PacketCallback(null.Light_Global));
+            Register(91, "Game Time", 4, new PacketCallback(null.GameTime));
+            Register(101, "Weather", 4, new PacketCallback(null.Weather));
+            Register(109, "Play Music", 3, new PacketCallback(null.PlayMusic));
+            Register(212, "Open Book", -1, new PacketCallback(null.Book_Open));
+            Register(102, "Book Page Info", -1, Unhandled);
+            Register(216, "Customized House Content", -1, new PacketCallback(null.CustomizedHouseContent));
+            Register(113, "Bulletin Board", -1, new PacketCallback(null.BulletinBoard));
+            Register(116, "Shop Content", -1, new PacketCallback(null.ShopContent));
+            Register(158, "Sell Content", -1, new PacketCallback(null.SellContent));
+            Register(59, "Close Shop Dialog", -1, new PacketCallback(null.CloseShopDialog));
+            Register(170, "Current Target", 5, new PacketCallback(null.CurrentTarget));
+            Register(114, "Warmode Status", 5, new PacketCallback(null.WarmodeStatus));
+            Register(240, "Custom", -1, new PacketCallback(null.Custom));
+            Register(108, "Target", 19, new PacketCallback(null.Target));
+            Register(39, "Item Pickup Failed", 2, new PacketCallback(null.ItemPickupFailed));
+            Register(191, "Extended Command", -1, new PacketCallback(null.Command));
+            Register(44, "Request Resurrection", 2, new PacketCallback(null.RequestResurrection));
+            Register(185, "Features", 3, new PacketCallback(null.Features));
+            Register(51, "Pause", 2, new PacketCallback(null.Pause));
+            Register(137, "Corspe Equip", -1, new PacketCallback(null.CorpseEquip));
+            Register(165, "Launch Browser", -1, new PacketCallback(null.LaunchBrowser));
+            Register(47, "Fight Occurring", 10, new PacketCallback(null.FightOccurring));
+            Register(58, "Skills", -1, new PacketCallback(null.Skills));
+            Register(115, "Ping Reply", 2, new PacketCallback(null.PingReply));
+            Register(153, "Multi Target", 26, new PacketCallback(null.MultiTarget));
+            Register(111, "Secure Trade", -1, new PacketCallback(null.SecureTrade));
+            Register(186, "Quest Arrow", 6, new PacketCallback(null.QuestArrow));
+            Register(118, "Server Change", 16, new PacketCallback(null.ServerChange));
+            Register(200, "Revise Update Range", 2, new PacketCallback(null.ReviseUpdateRange));
+            Register(203, "GQ Count", 7, new PacketCallback(null.GQCount));
+            Register(189, "Client Version Request", -1, new PacketCallback(null.VersionRequest_Client));
+            Register(190, "Assist Version Request", -1, new PacketCallback(null.VersionRequest_Assist));
+            Register(218, "MahJong", -1, new PacketCallback(null.Trace));
+            Register(188, "Season", 3, new PacketCallback(null.Season));
+            Register(105, "Friends (Party?)", -1, Unhandled);
+            Register(187, "Account ID", 9, Unhandled);
+            Register(215, "AOS Packet 0xD7", -1, new PacketCallback(null.Trace));
+            Register(86, "Map Command", 11, new PacketCallback(null.MapCommand));
+            Register(144, "Map Window", 19, new PacketCallback(null.MapWindow));
+            Register(123, "Sequence", 2, new PacketCallback(null.Sequence));
+            Register(62, "Versions", 37, new PacketCallback(null.Trace));
+            Register(63, "Update Object Chunk", -1, new PacketCallback(null.Trace));
+            Register(64, "Update Terrain Chunk", 201, new PacketCallback(null.Trace));
+            Register(65, "Update Tiledata", -1, new PacketCallback(null.Trace));
+            Register(66, "Update Art", -1, new PacketCallback(null.Trace));
+            Register(67, "Update Anim", 553, new PacketCallback(null.Trace));
+            Register(68, "Update Hues", 713, new PacketCallback(null.Trace));
+            Register(69, "Version Ok", 5, new PacketCallback(null.Trace));
+            Register(195, "GQ Response", -1, new PacketCallback(null.Trace));
+            Register(152, "Mobile Name", -1, new PacketCallback(null.Trace));
+            Register(56, "Pathfind", 7, new PacketCallback(null.Pathfind));
+            Register(209, "Logout Ok", 2, new PacketCallback(null.Trace));
+        }
+
+        private static string BulletinBoard_ReadString(PacketReader pvSrc)
+        {
+            int i = pvSrc.ReadByte();
+            byte[] bs = pvSrc.ReadBytes(i);
+            for (int j = 0; j < i; j++)
+            {
+                if (bs[j] == 0)
+                {
+                    i = j;
+                    break;
+                }
+            }
+            return Encoding.UTF8.GetString(bs, 0, i);
+        }
+
+        private static void BulletinBoard(PacketReader pvSrc)
+        {
+            switch (pvSrc.ReadByte())
+            {
+            case 0:
+                BulletinBoard_Display(pvSrc);
+                return;
+
+            case 1:
+                BulletinBoard_SetHeader(pvSrc);
+                return;
+
+            case 2:
+                BulletinBoard_SetBody(pvSrc);
+                return;
+
+            default:
+                pvSrc.Trace();
+                return;
+            }
+        }
+
+        private static void BulletinBoard_Display(PacketReader pvSrc)
+        {
+            if (World.FindItem(pvSrc.ReadInt32()) != null)
+            {
+            }
+        }
+
+        private static void BulletinBoard_SetHeader(PacketReader pvSrc)
+        {
+            Item item1 = World.FindItem(pvSrc.ReadInt32());
+            if (item1 == null)
+            {
+                return;
+            }
+            Item item2 = World.WantItem(pvSrc.ReadInt32());
+            if (item2 == null)
+            {
+                return;
+            }
+            int i = pvSrc.ReadInt32();
+            Item item3 = null;
+            if (i >= 1073741824)
+            {
+                item3 = World.WantItem(i);
+            }
+            string str1 = BulletinBoard_ReadString(pvSrc);
+            string str2 = BulletinBoard_ReadString(pvSrc);
+            string str3 = BulletinBoard_ReadString(pvSrc);
+            item2.BulletinHeader = new BBMessageHeader(item1, item3, str1, str2, str3);
+        }
+
+        private static void BulletinBoard_SetBody(PacketReader pvSrc)
+        {
+            Item item1 = World.FindItem(pvSrc.ReadInt32());
+            if (item1 == null)
+            {
+                return;
+            }
+            Item item2 = World.WantItem(pvSrc.ReadInt32());
+            if (item2 == null)
+            {
+                return;
+            }
+            int i1 = pvSrc.ReadInt32();
+            Item item3 = null;
+            if (i1 >= 1073741824)
+            {
+                item3 = World.WantItem(i1);
+            }
+            string str1 = BulletinBoard_ReadString(pvSrc);
+            string str2 = BulletinBoard_ReadString(pvSrc);
+            string str3 = BulletinBoard_ReadString(pvSrc);
+            item2.BulletinHeader = new BBMessageHeader(item1, item3, str1, str2, str3);
+            int j1 = pvSrc.ReadUInt16();
+            int k = pvSrc.ReadUInt16();
+            BBPAItem[] bBPAItems = new BBPAItem[pvSrc.ReadByte()];
+            for (int i2 = 0; i2 < (int)bBPAItems.Length; i2++)
+            {
+                bBPAItems[i2].ItemID = pvSrc.ReadUInt16();
+                bBPAItems[i2].Hue = pvSrc.ReadUInt16();
+            }
+            string[] strs = new string[pvSrc.ReadByte()];
+            for (int j2 = 0; j2 < (int)strs.Length; j2++)
+            {
+                strs[j2] = BulletinBoard_ReadString(pvSrc);
+            }
+            item2.BulletinBody = new BBMessageBody(new BBPosterAppearance(j1, k, bBPAItems), strs);
+        }
+
+        private static void VersionRequest_Client(PacketReader pvSrc)
+        {
+            Engine.AddTextMessage("Server is requesting the client version.", Engine.GetFont(3), Hues.Load(34));
+            Network.Send(new PClientVersion("4.0.0p"));
+        }
+
+        private static void VersionRequest_Assist(PacketReader pvSrc)
+        {
+            pvSrc.Trace();
+            Engine.AddTextMessage("Server is requesting the assist version.", Engine.GetFont(3), Hues.Load(34));
+            Network.Send(new PAssistVersion(pvSrc.ReadInt32(), "4.0.0p"));
+        }
+
+        private static void CustomizedHouseContent(PacketReader pvSrc)
+        {
+            int i1 = pvSrc.ReadByte();
+            pvSrc.ReadByte();
+            int j = pvSrc.ReadInt32();
+            int k = pvSrc.ReadInt32();
+            pvSrc.ReadUInt16();
+            int i2 = pvSrc.ReadUInt16();
+            byte[] bs = pvSrc.ReadBytes(i2);
+            Item item = World.FindItem(j);
+            if (item != null && item.Multi != null && item.IsMulti)
+            {
+                CustomMultiLoader.SetCustomMulti(j, k, item.Multi, i1, bs);
+            }
+        }
+
+        private static void PropertyListContent(PacketReader pvSrc)
+        {
+            int i1 = pvSrc.ReadUInt16();
+            int j1 = pvSrc.ReadInt32();
+            int k1 = pvSrc.ReadByte();
+            int i2 = pvSrc.ReadByte();
+            int j2 = pvSrc.ReadInt32();
+            if (i1 != 1 || k1 != 0 || i2 != 0)
+            {
+                pvSrc.Trace();
+            }
+            ArrayList arrayList = Engine.GetDataStore();
+            while (true)
+            {
+                int k2 = pvSrc.ReadInt32();
+                if (k2 == 0)
+                {
+                    new ObjectPropertyList(j1, j2, (ObjectProperty[])arrayList.ToArray(typeof(ObjectProperty)));
+                    Engine.ReleaseDataStore(arrayList);
+                    Item item = World.FindItem(j1);
+                    if (item != null)
+                    {
+                        item.PropertyID = j2;
+                    }
+                    Mobile mobile = World.FindMobile(j1);
+                    if (mobile != null)
+                    {
+                        mobile.PropertyID = j2;
+                    }
+                    return;
+                }
+                int i3 = pvSrc.ReadUInt16();
+                string str = Encoding.Unicode.GetString(pvSrc.ReadBytes(i3));
+                arrayList.Add(new ObjectProperty(k2, str));
+            }
+        }
+
+        private static void GQCount(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ChangeCharacter(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Pathfind(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void CloseShopDialog(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Trace(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ReviseUpdateRange(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void SellContent(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Season(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Light_Global(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Light_Personal(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void DragItem(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void DisplayProfile(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Book_Open(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ServerChange(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Attributes(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Message_Localized_Affix(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void QuestArrow(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Drop_Accept(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Drop_Reject(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Sequence(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void LoginReject(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static string ArgReplace_Eval(Match m)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Message_Localized(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void MapCommand(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void MapWindow(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Custom(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Custom_Accept(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void MultiTarget(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void SecureTrade(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void SecureTrade_Open(int serial, PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void SecureTrade_Close(int serial, PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void SecureTrade_Check(int serial, PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Skills_Absolute(PacketReader pvSrc, bool hasCapData)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Skills_Delta(PacketReader pvSrc, bool hasCapData)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Skills(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void FightOccurring(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void StringQuery(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Prompt_Unicode(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Prompt_ASCII(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Death(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void CorpseEquip(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void GameTime(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Pause(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Features(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Container_Open(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Container_Items(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Container_Item(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Animation(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static string EffLay(EffectLayer layer)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Effect(PacketReader pvSrc, bool hasHueData, bool hasParticleData)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void StandardEffect(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void HuedEffect(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ParticleEffect(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void P_Unhandled(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void PlayMusic(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void CurrentTarget(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void EquipItem(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void DisplayGump(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void PlaySound(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_Party(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        public static void Command_CustomHouse(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_Damage(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_SpellbookContent(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_CloseDialog(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_ExtendedStatus(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_OpenWisdomCodex(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_MapPatches(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_EquipInfo(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_Popup(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Command_SetWorld(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void RequestResurrection(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ItemPickupFailed(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ShopContent(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ScrollMessage(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void DisplayPaperdoll(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void SelectHue(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void LaunchBrowser(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void WarmodeStatus(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void DeleteObject(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void WorldItem(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Moving(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Movement_Accept(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void PingReply(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        public static void AddSequence(int seq, int x, int y, int z)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Movement_Reject(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Target(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Incoming(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Attributes_HitPoints(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Attributes_Stamina(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Attributes_Mana(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Status(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Mobile_Update(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void DisplayQuestionMenu(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void AddGuardline(int x, int y, bool val)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void AddMessage(int serial, IFont font, IHue hue, int type, string name, string text)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void AddMessage(int serial, IFont font, IHue hue, int type, string name, string text, int number)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Message_Unicode(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        public static void ClearWeather()
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Weather(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void LoginComplete(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Message_ASCII(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void LoginConfirm(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void CharacterList(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ServerRelay(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void AccountLoginFail(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void ServerList(PacketReader pvSrc)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        private static void Register(int packetID, string name, int length, PacketCallback callback)
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+
+        public PacketHandlers()
+        {
+            // This online demo only decompiles 10 methods in each class
+        }
+    }
+
+}

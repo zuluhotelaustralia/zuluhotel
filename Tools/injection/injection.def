@@ -1,0 +1,11 @@
+LIBRARY     INJECTION.DLL
+
+EXPORTS
+    GetErrorText                   @1   ; GetErrorText
+    GetInfoText                    @2   ; GetInfoText
+    Install                        @3   ; Install
+    patch_getmessage               @4   ; patch_getmessage
+    patch_setup                    @5   ; patch_setup
+
+SECTIONS
+    SHAREDAT READ WRITE SHARED

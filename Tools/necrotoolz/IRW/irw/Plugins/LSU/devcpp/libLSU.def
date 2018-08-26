@@ -1,0 +1,2 @@
+; dlltool --base-file C:\DOCUME~1\n0p3\LOCALS~1\Temp/cca03084.base --output-exp LSU.exp --dllname LSU.dll --output-def libLSU.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\n0p3\LOCALS~1\Temp/cca03084.def --output-lib libLSU.a
+EXPORTS

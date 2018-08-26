@@ -1,0 +1,2 @@
+; dlltool --base-file C:\DOCUME~1\n0p3\LOCALS~1\Temp/cca02288.base --output-exp irw.exp --dllname irw.dll --output-def libirw.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\n0p3\LOCALS~1\Temp/cca02288.def --output-lib libirw.a
+EXPORTS
