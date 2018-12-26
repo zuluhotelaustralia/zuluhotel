@@ -1,19 +1,17 @@
 RUNTIME=dotnet build
-FRAMEWORK=-f netcoreapp2.1
-CONFIGURATION=-c Release
-OUTPUTDIR=-o ../
+OUTPUTDIR=-o ./
 
 .DELETE_ON_ERROR:
 
 
 run: release
-	mono Server.exe
+	dotnet run Server.dll
 
 release:
-	$(RUNTIME) $(FRAMEWORK) $(CONFIGURATION) $(OUTPUTDIR)
+	$(RUNTIME) $(OUTPUTDIR)
 
 debug:
-	$(RUNTIME) $(FRAMEWORK) $(OUTPUTDIR)
+	$(RUNTIME) $(OUTPUTDIR)
 
 mono:
 	mcs -unsafe -t:exe -out:Server.exe -nowarn:219,414 -d:MONO -recurse:Server/*.cs

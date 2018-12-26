@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifiers>osx-x64</RuntimeIdentifiers>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <VersionPrefix>1.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +15,6 @@
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0"/>
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0"/>
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0"/>
+    <Compile Include="Server\**\*.cs"/>
   </ItemGroup>
-
 </Project>
