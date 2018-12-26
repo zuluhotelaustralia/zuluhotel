@@ -9,16 +9,14 @@ OUTPUTDIR=-o ../
 run: release
 	mono Server.exe
 
-client: Client/Cliloc.enu
-
-Client/Cliloc.enu: Client/clilocs_enu.scm
-	guile -L Tools/uotools -c "(use-modules (uo cliloc)) (compile-clilocs (current-input-port) (current-output-port))" < $< > $@
-
 release:
 	$(RUNTIME) $(FRAMEWORK) $(CONFIGURATION) $(OUTPUTDIR)
 
 debug:
 	$(RUNTIME) $(FRAMEWORK) $(OUTPUTDIR)
+
+mono:
+	mcs -unsafe -t:exe -out:Server.exe -nowarn:219,414 -d:MONO -recurse:Server/*.cs
 
 clean:
 	rm Server.dll
