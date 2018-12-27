@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet type="text/xsl" href="design.xsl" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="packets>.xsl" ?>
 
 <Packets lastupdate="28/05/2012">
     <Packet id="00" size="104" from="client" >
@@ -126,7 +126,7 @@
         <Data type="byte">0x00</Data>
         <Data type="byte">OnOff (0x00 = off, 0x01 = on)</Data>
         <Data type="byte" amount="7">Ox00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="0B" size="7" from="server">
         <Name>Damage Packet</Name>
         <Desc>Damage Packet.</Desc>
@@ -285,7 +285,7 @@
         <Data type="char" amount="*">Scroll Target Z</Data>
         <Data type="char">White space</Data>
         <Note>Self-dclick and target packet. If item has 0xEF3 itemid (scroll) and you will double click it, 2D client will create internal target and when you targeted something, server get this packet. Note: no dclick/target packets for server - just internal work.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="12.43" size="-1" from="client">
         <Name>Open Spellbook</Name>
         <Desc>Open Spellbook Packet.</Desc>
@@ -644,7 +644,7 @@
         <Name>Swing</Name>
         <Desc>Swing Packet.</Desc>
         <Data type="byte">ID (2F)</Data>
-        <Data type="byte">0x00</Data>  
+        <Data type="byte">0x00</Data>
         <Data type="dword">Attacker Serial</Data>
         <Data type="dword">Defender Serial</Data>
     </Packet>
@@ -696,7 +696,7 @@
         <Name>Resource Tile Data</Name>
         <Desc>Resource Tile Data Packet.</Desc>
         <Data type="byte">ID (36)</Data>
-        <Data type="word">Packet Size</Data>      
+        <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
     </Packet>
     <Packet id="37" size="8" from="godclient">
@@ -783,13 +783,13 @@
         <Data type="byte">ID (3D)</Data>
         <Data type="byte">Unknown Data</Data>
     </Packet>
-    <Packet id="3E" size="37" from="godclient"> 
-        <Name>Versions</Name> 
-        <Desc>Versions Packet.</Desc> 
-        <Data type="byte">ID (3E)</Data> 
-        <Data type="dword">Index Number</Data> 
-	<Data type="dword" amount="8">Versions</Data>
-	<Note>Client returns <a href="#godclient4B">0x4B - Check Version</a> with dword indexNumber + 7 and dword versionNumber for that index</Note>
+    <Packet id="3E" size="37" from="godclient">
+        <Name>Versions</Name>
+        <Desc>Versions Packet.</Desc>
+        <Data type="byte">ID (3E)</Data>
+        <Data type="dword">Index Number</Data>
+        <Data type="dword" amount="8">Versions</Data>
+        <Note>Client returns <a href="#godclient4B">0x4B - Check Version</a> with dword indexNumber + 7 and dword versionNumber for that index</Note>
         <Note>This packet requires an EditServer login to function properly.</Note>
     </Packet>
     <Packet id="3F" size="-1" from="godclient">
@@ -847,13 +847,13 @@
         <Data type="byte">ID (44)</Data>
         <Data type="byte" amount="712">Unknown Data</Data>
     </Packet>
-    <Packet id="45" size="5" from="godclient"> 
-        <Name>Version OK</Name> 
-        <Desc>Version OK Packet.</Desc> 
-        <Data type="byte">ID (45)</Data> 
+    <Packet id="45" size="5" from="godclient">
+        <Name>Version OK</Name>
+        <Desc>Version OK Packet.</Desc>
+        <Data type="byte">ID (45)</Data>
         <Data type="dword">Index</Data>
-	<Note>From Server to Godclient.</Note>
-	<Note>This packet requires an EditServer login to function properly.</Note>
+        <Note>From Server to Godclient.</Note>
+        <Note>This packet requires an EditServer login to function properly.</Note>
     </Packet>
     <Packet id="46" size="-1" from="godclient">
         <Name>New Art</Name>
@@ -883,49 +883,49 @@
         <Desc>New Hues Packet.</Desc>
         <Data type="byte">ID (49)</Data>
         <Data type="byte" amount="92">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="4A" size="5" from="godclient">
         <Name>Destroy Art</Name>
         <Desc>Destroy Art Packet.</Desc>
         <Data type="byte">ID (4A)</Data>
         <Data type="dword">Art ID</Data>
-    </Packet>  
-    <Packet id="4B" size="9" from="godclient"> 
-        <Name>Check Version</Name> 
-        <Desc>Destroy Art Packet.</Desc> 
+    </Packet>
+    <Packet id="4B" size="9" from="godclient">
+        <Name>Check Version</Name>
+        <Desc>Destroy Art Packet.</Desc>
         <Data type="byte">ID (4B)</Data>
-	<Data type="dword">Lookup Number</Data>
-	<Data type="dword">Version Number</Data>
-	<Note>Server should send <a href="#godclient45">0x45 - Version OK</a> with matching lookup. Client will send another 0x4B with lookup - 1, until 0x45 w/ 0 lookup is met.</Note>
-	<Note>This packet requires an EditServer login to function properly.</Note>
-    </Packet>  
+        <Data type="dword">Lookup Number</Data>
+        <Data type="dword">Version Number</Data>
+        <Note>Server should send <a href="#godclient45">0x45 - Version OK</a> with matching lookup. Client will send another 0x4B with lookup - 1, until 0x45 w/ 0 lookup is met.</Note>
+        <Note>This packet requires an EditServer login to function properly.</Note>
+    </Packet>
     <Packet id="4C" size="-1" from="godclient">
         <Name>Script Names</Name>
         <Desc>Destroy Art Packet.</Desc>
         <Data type="byte">ID (4C)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="4D" size="-1" from="godclient">
         <Name>Edit Script</Name>
         <Desc>Edit Script Packet.</Desc>
         <Data type="byte">ID (4D)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="4E" size="6" from="server">
         <Name>Infravision</Name>
         <Desc>Infravision Packet.</Desc>
         <Data type="byte">ID (4E)</Data>
         <Data type="dword">Serial</Data>
         <Data type="byte">Active</Data>
-    </Packet>  
+    </Packet>
     <Packet id="4F" size="2" from="server">
         <Name>Global Light</Name>
         <Desc>Global Light Packet.</Desc>
         <Data type="byte">ID (4F)</Data>
         <Data type="byte">Light Level (0x00 = Bright, 0x09 = Night, 0x1F = Black)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="50" size="-1" from="old">
         <Name>Board Header</Name>
         <Desc>Board Header Packet.</Desc>
@@ -1053,19 +1053,19 @@
         <Data type="byte">ID (5E)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="5F" size="49" from="godclient">
         <Name>Add Server</Name>
         <Desc>Add Server Packet.</Desc>
         <Data type="byte">ID (5F)</Data>
         <Data type="byte" amount="48">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="60" size="5" from="godclient">
         <Name>Remove Server</Name>
         <Desc>Remove Server Packet.</Desc>
         <Data type="byte">ID (60)</Data>
         <Data type="byte" amount="4">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="61" size="9" from="godclient">
         <Name>Destroy Static</Name>
         <Desc>Destroy Static Packet.</Desc>
@@ -1074,7 +1074,7 @@
         <Data type="word">Y</Data>
         <Data type="word">Z</Data>
         <Data type="word">ID</Data>
-    </Packet>  
+    </Packet>
     <Packet id="62" size="15" from="godclient">
         <Name>Move Static</Name>
         <Desc>Move Static Packet.</Desc>
@@ -1086,18 +1086,18 @@
         <Data type="word">X Offset</Data>
         <Data type="word">Y Offset</Data>
         <Data type="word">Z Offset</Data>
-    </Packet>  
+    </Packet>
     <Packet id="63" size="13" from="godclient">
         <Name>Area Load</Name>
         <Desc>Area Load Packet.</Desc>
         <Data type="byte">ID (63)</Data>
         <Data type="byte" amount="12">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="64" size="1" from="godclient">
         <Name>Area Load Request</Name>
         <Desc>Area Load Request Packet.</Desc>
         <Data type="byte">ID (64)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="65" size="4" from="server">
         <Name>Change Weather</Name>
         <Desc>Change Weather Packet.</Desc>
@@ -1105,7 +1105,7 @@
         <Data type="byte">Weather Type (0x00 = rain; 0x01 = fierce storm, 0x02 = snow; 0x03 = storm; 0xFE = set temperature; 0xFF = stop all weather)</Data>
         <Data type="byte">Density</Data>
         <Data type="byte">Temperature</Data>
-    </Packet>  
+    </Packet>
     <Packet id="66" size="-1" from="client">
         <Name>Book Page</Name>
         <Desc>Book page Packet.</Desc>
@@ -1120,39 +1120,39 @@
         <Data type="uchar" amount="*">Text</Data>
         <Data type="endloop">Lines</Data>
         <Data type="endloop">Pages</Data>
-    </Packet>  
+    </Packet>
     <Packet id="67" size="21" from="godclient">
         <Name>Simped</Name>
         <Desc>Simped Packet.</Desc>
         <Data type="byte">ID (67)</Data>
         <Data type="byte" amount="20">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="68" size="-1" from="godclient">
         <Name>Script Attach</Name>
         <Desc>Simped Attach Packet.</Desc>
         <Data type="byte">ID (68)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="69" size="-1" from="godclient">
         <Name>Friends</Name>
         <Desc>Friends Packet.</Desc>
         <Data type="byte">ID (69)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="6A" size="3" from="godclient">
         <Name>Notify Friend</Name>
         <Desc>Notify Friend Packet.</Desc>
         <Data type="byte">ID (6A)</Data>
         <Data type="byte" amount="2">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="6B" size="9" from="godclient">
         <Name>Key Use</Name>
         <Desc>Key Use Packet.</Desc>
         <Data type="byte">ID (6B)</Data>
         <Data type="byte" amount="8">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="6C" size="19" from="both">
         <Name>Target</Name>
         <Desc>Target Packet.</Desc>
@@ -1165,13 +1165,13 @@
         <Data type="word">Y (0xFFFF = cancel target)</Data>
         <Data type="word">Z</Data>
         <Data type="word">Graphic (0x00 = Land Target)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="6D" size="3" from="server">
         <Name>Play Music</Name>
         <Desc>Play Music Packet.</Desc>
         <Data type="byte">ID (6D)</Data>
         <Data type="word">Music ID</Data>
-    </Packet>  
+    </Packet>
     <Packet id="6E" size="14" from="old">
         <Name>Animation</Name>
         <Desc>Animation Packet.</Desc>
@@ -1184,7 +1184,7 @@
         <Data type="byte">Repeat (0x00 = no repeat, 0x01 = repeat)</Data>
         <Data type="byte">Delay (0x00 = fast, 0xFF = slow)</Data>
         <Note>No longer used since UO:SA launch</Note>
-    </Packet>  
+    </Packet>
     <Packet id="6F" size="-1" from="server">
         <Name>Secure Trade</Name>
         <Desc>Secure Trade Packet.</Desc>
@@ -1196,7 +1196,7 @@
         <Data type="dword">Second Container Serial (if Action == 0x00)</Data>
         <Data type="byte">Display Name (0x00 = No, 0x01 = Yes)</Data>
         <Data type="char" amount="30">Name (If Display Name == 0x01)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="70" size="28" from="server">
         <Name>Graphical Effect</Name>
         <Desc>Graphical Effect Packet.</Desc>
@@ -1216,15 +1216,15 @@
         <Data type="word">0x00</Data>
         <Data type="byte">Fixed Direction (0x00 = No, 0x01 = Yes)</Data>
         <Data type="byte">Explode (0x00 = No, 0x01 = Yes)</Data>
-	<Note>Since UO:SA this packet can be used for special effects.</Note>
-    </Packet>  
+        <Note>Since UO:SA this packet can be used for special effects.</Note>
+    </Packet>
     <Packet id="71" size="-1" from="both">
         <Name>Bulletin Board</Name>
         <Desc>Bulletin Board Packet.</Desc>
         <Data type="byte">ID (71)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte">Command</Data>
-    </Packet>  
+    </Packet>
     <Packet id="71.0" size="-1" from="server">
         <Name>Draw Bulletin Board</Name>
         <Desc>Draw Bulletin Board Packet.</Desc>
@@ -1235,7 +1235,7 @@
         <Data type="uchar" amount="15">Board Name</Data>
         <Data type="dword">ID</Data>
         <Data type="dword">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="71.1" size="-1" from="server">
         <Name>Message List Bulletin Board</Name>
         <Desc>Message List Bulletin Board Packet.</Desc>
@@ -1251,7 +1251,7 @@
         <Data type="uchar" amount="Subject Length">Subject</Data>
         <Data type="byte">Time Length</Data>
         <Data type="uchar" amount="Time Length">Time</Data>
-    </Packet>  
+    </Packet>
     <Packet id="71.2" size="-1" from="server">
         <Name>Message Bulletin Board</Name>
         <Desc>Message Bulletin Board Packet.</Desc>
@@ -1278,7 +1278,7 @@
         <Data type="byte">Line Length</Data>
         <Data type="uchar" amount="Line Length">Line Text</Data>
         <Data type="endloop">Line</Data>
-    </Packet>  
+    </Packet>
     <Packet id="71.3" size="-1" from="client">
         <Name>Get Message Bulletin Board</Name>
         <Desc>Get Message Bulletin Board Packet.</Desc>
@@ -1287,7 +1287,7 @@
         <Data type="byte">0x03</Data>
         <Data type="dword">Board Serial</Data>
         <Data type="dword">Message Serial</Data>
-    </Packet>  
+    </Packet>
     <Packet id="71.4" size="-1" from="client">
         <Name>Get Message Summary Bulletin Board</Name>
         <Desc>Get Message Summary Bulletin Board Packet.</Desc>
@@ -1296,7 +1296,7 @@
         <Data type="byte">0x04</Data>
         <Data type="dword">Board Serial</Data>
         <Data type="dword">Message Serial</Data>
-    </Packet>  
+    </Packet>
     <Packet id="71.5" size="-1" from="client">
         <Name>Post Message Bulletin Board</Name>
         <Desc>Post Message Bulletin Board Packet.</Desc>
@@ -1311,8 +1311,8 @@
         <Data type="loop">Line</Data>
         <Data type="byte">Line Length</Data>
         <Data type="uchar" amount="Line Length">Line Text</Data>
-        <Data type="endloop">Line</Data>      
-    </Packet>  
+        <Data type="endloop">Line</Data>
+    </Packet>
     <Packet id="71.6" size="-1" from="client">
         <Name>Delete Message Bulletin Board</Name>
         <Desc>Delete Message Bulletin Board Packet.</Desc>
@@ -1321,7 +1321,7 @@
         <Data type="byte">0x06</Data>
         <Data type="dword">Board Serial</Data>
         <Data type="dword">Message Serial</Data>
-    </Packet>  
+    </Packet>
     <Packet id="72" size="5" from="both">
         <Name>War Mode</Name>
         <Desc>War Mode Packet.</Desc>
@@ -1329,13 +1329,13 @@
         <Data type="byte">War Mode</Data>
         <Data type="byte">0x32</Data>
         <Data type="byte">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="73" size="2" from="both">
         <Name>Ping</Name>
         <Desc>Ping Packet.</Desc>
         <Data type="byte">ID (73)</Data>
         <Data type="byte">Value</Data>
-    </Packet>  
+    </Packet>
     <Packet id="74" size="-1" from="server">
         <Name>Shop List</Name>
         <Desc>Shop List Packet.</Desc>
@@ -1348,14 +1348,14 @@
         <Data type="byte">Name Length</Data>
         <Data type="char" amount="Name Length">Name</Data>
         <Data type="endloop">Items</Data>
-    </Packet>  
+    </Packet>
     <Packet id="75" size="35" from="client">
         <Name>Rename Request</Name>
         <Desc>Rename Request Packet.</Desc>
         <Data type="byte">ID (75)</Data>
         <Data type="dword">Serial</Data>
         <Data type="char" amount="30">Name</Data>
-    </Packet>  
+    </Packet>
     <Packet id="76" size="16" from="server">
         <Name>Server Change</Name>
         <Desc>Server Change Packet.</Desc>
@@ -1368,7 +1368,7 @@
         <Data type="word">Server Boundry Y</Data>
         <Data type="word">Server Boundry Width</Data>
         <Data type="word">Server Boundry Height</Data>
-    </Packet>  
+    </Packet>
     <Packet id="77" size="17" from="server">
         <Name>Mobile Moving</Name>
         <Desc>Mobile Moving Packet.</Desc>
@@ -1382,7 +1382,7 @@
         <Data type="word">Hue</Data>
         <Data type="byte">Flags (0x01 = Frozen, 0x02 = Female, 0x04 = Flying, 0x08 = Yellow HealthBar, 0x10 = Ignore Mobiles, 0x40 = War Mode, 0x80 = Hidden)</Data>
         <Data type="byte">Notoriety (0x01 = Innocent, 0x02 = Ally, 0x03 = Can be attacked, 0x04 = Criminal, 0x05 = Enemy, 0x06 = Murderer, 0x07 = Invulnerable)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="78" size="-1" from="server">
         <Name>Mobile Incoming</Name>
         <Desc>Mobile Incoming Packet.</Desc>
@@ -1404,26 +1404,26 @@
         <Data type="word">Item Hue</Data>
         <Data type="endloop">Items</Data>
         <Data type="dword">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="79" size="9" from="godclient">
         <Name>Resource Query</Name>
         <Desc>Resource Query Packet.</Desc>
         <Data type="byte">ID (79)</Data>
         <Data type="byte" amount="8">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="7A" size="-1" from="godclient">
         <Name>Resource Data</Name>
         <Desc>Resource Data Packet.</Desc>
         <Data type="byte">ID (7A)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="7B" size="2" from="server">
         <Name>Sequence</Name>
         <Desc>Sequence Packet.</Desc>
         <Data type="byte">ID (7B)</Data>
         <Data type="byte">Value</Data>
-    </Packet>  
+    </Packet>
     <Packet id="7C" size="-1" from="server">
         <Name>Display Item List Menu</Name>
         <Desc>Display Item List Menu Packet.</Desc>
@@ -1440,7 +1440,7 @@
         <Data type="byte">Line Length</Data>
         <Data type="char" amount="Line Length">Texte</Data>
         <Data type="endloop">Lines</Data>
-    </Packet>  
+    </Packet>
     <Packet id="7D" size="13" from="server">
         <Name>Item List Menu Response</Name>
         <Desc>Item List Menu Response Packet.</Desc>
@@ -1450,20 +1450,20 @@
         <Data type="word">Index</Data>
         <Data type="word">Item ID</Data>
         <Data type="word">Hue</Data>
-    </Packet>  
+    </Packet>
     <Packet id="7E" size="2" from="godclient">
         <Name>God View Query</Name>
         <Desc>God View Query Packet.</Desc>
         <Data type="byte">ID (7E)</Data>
         <Data type="byte">Toggle God View Query (0x00 = Off, 0x01 = On)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="7F" size="-1" from="godclient">
         <Name>God View Data</Name>
         <Desc>God View Data Packet.</Desc>
         <Data type="byte">ID (7F)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="80" size="62" from="client">
         <Name>Account Login Request</Name>
         <Desc>Account Login Request Packet.</Desc>
@@ -1471,7 +1471,7 @@
         <Data type="char" amount="30">Account Name</Data>
         <Data type="char" amount="30">Password</Data>
         <Data type="byte">Command</Data>
-    </Packet>  
+    </Packet>
     <Packet id="81" size="-1" from="server">
         <Name>Change Character</Name>
         <Desc>Change Character Packet.</Desc>
@@ -1483,13 +1483,13 @@
         <Data type="char" amount="30">Character Name</Data>
         <Data type="char" amount="30">Password</Data>
         <Data type="endloop">Characters</Data>
-    </Packet>  
+    </Packet>
     <Packet id="82" size="2" from="server">
         <Name>Account Login Rejection</Name>
         <Desc>Account Login Rejection Packet.</Desc>
         <Data type="byte">ID (82)</Data>
         <Data type="byte">Rejection Reason (0x00 = Invalid, 0x01 = Account In Use, 0x02 = Account Blocked, 0x03 = Wrong Password, 0x06 = IGR, 0x09 = Character Transfer, 0xFE = Time Out, 0xFF = Bad Communication)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="83" size="39" from="client">
         <Name>Delete Character</Name>
         <Desc>Delete Character Packet.</Desc>
@@ -1497,19 +1497,19 @@
         <Data type="char" amount="30">Password</Data>
         <Data type="dword">Character Index</Data>
         <Data type="dword">Client IP</Data>
-    </Packet>  
+    </Packet>
     <Packet id="84" size="69" from="old">
         <Name>Change Password</Name>
         <Desc>Change Password Packet.</Desc>
         <Data type="byte">ID (84)</Data>
         <Data type="byte" amount="68">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="85" size="2" from="server">
         <Name>Character Delete Result</Name>
         <Desc>Character Delete Result Packet.</Desc>
         <Data type="byte">ID (85)</Data>
         <Data type="byte">Delete Result (0x00 = Bad Password, 0x01 = Character Not Exists, 0x02 = Character In Game, 0x03 = Character Too Young, 0x04 = Character Queeed, 0x05 = Bad Request)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="86" size="-1" from="server">
         <Name>Character List Update</Name>
         <Desc>Character List Update Packet.</Desc>
@@ -1520,14 +1520,14 @@
         <Data type="char" amount="30">Character Name</Data>
         <Data type="char" amount="30">Password</Data>
         <Data type="endloop">Characters</Data>
-    </Packet>  
+    </Packet>
     <Packet id="87" size="-1" from="godclient">
         <Name>Send Resources</Name>
         <Desc>Send Resources Packet.</Desc>
         <Data type="byte">ID (87)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="88" size="66" from="server">
         <Name>Display Paperdoll</Name>
         <Desc>Display Paperdoll Packet.</Desc>
@@ -1535,7 +1535,7 @@
         <Data type="dword">Serial</Data>
         <Data type="char" amount="60">Text</Data>
         <Data type="byte">Flags (0x01 = War Mode, 0x02 = Can Lift)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="89" size="-1" from="server">
         <Name>Corpse Equip</Name>
         <Desc>Corpse Equip Packet.</Desc>
@@ -1547,14 +1547,14 @@
         <Data type="dword">Item Serial</Data>
         <Data type="endloop">Items</Data>
         <Data type="byte">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="8A" size="-1" from="godclient">
         <Name>Trigger Edit</Name>
         <Desc>Trigger Edit Packet.</Desc>
         <Data type="byte">ID (8A)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="8B" size="-1" from="server">
         <Name>Display Sign Gump</Name>
         <Desc>Display Sign Gump Packet.</Desc>
@@ -1566,7 +1566,7 @@
         <Data type="char" amount="Text Length">Text</Data>
         <Data type="word">Caption Length</Data>
         <Data type="char" amount="Caption Length">Caption</Data>
-    </Packet>  
+    </Packet>
     <Packet id="8C" size="11" from="server">
         <Name>Play Server Accept</Name>
         <Desc>Play Server Accept Packet.</Desc>
@@ -1574,7 +1574,7 @@
         <Data type="dword">Server IP</Data>
         <Data type="word">Server Port</Data>
         <Data type="dword">Auth ID</Data>
-    </Packet>  
+    </Packet>
     <Packet id="8D" size="-1" from="client">
         <Name>UO3D Create Character</Name>
         <Desc>Create New Character (3D clients).</Desc>
@@ -1605,7 +1605,7 @@
         <Data type="byte" amount="25">0x00</Data>
         <Data type="byte">0x0B</Data>
         <Data type="word">Hair Color</Data>
-        <Data type="word">Hair Style</Data>      
+        <Data type="word">Hair Style</Data>
         <Data type="byte">0x0C</Data>
         <Data type="dword">0x00</Data>
         <Data type="byte">0x0D</Data>
@@ -1616,22 +1616,22 @@
         <Data type="word">Face Item ID</Data>
         <Data type="byte">0x10</Data>
         <Data type="word">Beard Color</Data>
-        <Data type="word">Beard Style</Data>      
-    </Packet>  
+        <Data type="word">Beard Style</Data>
+    </Packet>
     <Packet id="8E" size="-1" from="godclient">
         <Name>Move Character</Name>
         <Desc>Move Character Packet.</Desc>
         <Data type="byte">ID (8E)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="8F" size="-1" from="unknown">
         <Name>Unused</Name>
         <Desc>Unused Packet.</Desc>
         <Data type="byte">ID (8F)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="90" size="19" from="server">
         <Name>Map Details</Name>
         <Desc>Map Details Packet.</Desc>
@@ -1644,7 +1644,7 @@
         <Data type="word">Y2</Data>
         <Data type="word">Width</Data>
         <Data type="word">Height</Data>
-    </Packet>  
+    </Packet>
     <Packet id="91" size="65" from="client">
         <Name>Game Server Login</Name>
         <Desc>Game Server Login Packet.</Desc>
@@ -1652,14 +1652,14 @@
         <Data type="dword">Auth ID</Data>
         <Data type="char" amount="30">Account Name</Data>
         <Data type="char" amount="30">Password</Data>
-    </Packet>  
+    </Packet>
     <Packet id="92" size="-1" from="godclient">
         <Name>Update MultiData</Name>
         <Desc>Update MultiData Packet.</Desc>
         <Data type="byte">ID (92)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="93" size="99" from="old">
         <Name>Book Change Header</Name>
         <Desc>Book Change Header Packet.</Desc>
@@ -1670,14 +1670,14 @@
         <Data type="word">Number Of Pages</Data>
         <Data type="char" amount="60">Title</Data>
         <Data type="char" amount="30">Author</Data>
-    </Packet>  
+    </Packet>
     <Packet id="94" size="-1" from="godclient">
         <Name>Update Skills</Name>
         <Desc>Update Skills Packet.</Desc>
         <Data type="byte">ID (94)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="95" size="9" from="both">
         <Name>Hue Picker</Name>
         <Desc>Hue Picker Packet.</Desc>
@@ -1685,7 +1685,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">Item ID</Data>
         <Data type="word">Hue</Data>
-    </Packet>  
+    </Packet>
       <Packet id="96" size="-1" from="godclient">
         <Name>Game Central Monitor</Name>
         <Desc>Game Central Monitor Packet.</Desc>
@@ -1698,7 +1698,7 @@
         <Desc>Player Move Packet.</Desc>
         <Data type="byte">ID (97)</Data>
         <Data type="byte">Direction (0x00 = North, 0x01 = Right, 0x02 = East, 0x03 = Down, 0x04 = South, 0x05 = Left, 0x06 = West, 0x07 = Up, 0x80 = Running)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="98" size="-1" from="both">
         <Name>Mobile Name</Name>
         <Desc>Mobile Name Packet.</Desc>
@@ -1706,7 +1706,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Mobile Serial</Data>
         <Data type="char" amount="30">Mobile Name</Data>
-    </Packet>  
+    </Packet>
     <Packet id="99" size="30" from="server">
         <Name>Multi Target</Name>
         <Desc>Multi Target Packet.</Desc>
@@ -1721,7 +1721,7 @@
         <Data type="word">Z</Data>
         <Data type="dword">Hue</Data>
         <Note>Hue was added in UO:HS clients</Note>
-    </Packet>  
+    </Packet>
     <Packet id="9A" size="-1" from="client">
         <Name>Ascii Prompt Response</Name>
         <Desc>Ascii Prompt Response Packet.</Desc>
@@ -1731,27 +1731,27 @@
         <Data type="dword">Prompt ID</Data>
         <Data type="dword">Type (0x00 = Cancel, 0x01 = Response)</Data>
         <Data type="char" amount="*">Text</Data>
-	<Note>Prompt ID is special type id. See link below for more information.</Note>
-	<Link title="Prompt Guide">http://ruosi.org/promptguide/index.xml</Link>
-    </Packet>  
+        <Note>Prompt ID is special type id. See link below for more information.</Note>
+        <Link title="Prompt Guide">http://ruosi.org/promptguide/index.xml</Link>
+    </Packet>
     <Packet id="9B" size="258" from="client">
         <Name>Help Gump Request</Name>
         <Desc>Help Gump Request Packet.</Desc>
         <Data type="byte">ID (9B)</Data>
         <Data type="byte" amount="257">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="9C" size="309" from="godclient">
         <Name>Assistance Request</Name>
         <Desc>Assistance Request Packet.</Desc>
         <Data type="byte">ID (9C)</Data>
         <Data type="byte" amount="308">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="9D" size="51" from="godclient">
         <Name>GM Single</Name>
         <Desc>GM Single Packet.</Desc>
         <Data type="byte">ID (9D)</Data>
         <Data type="byte" amount="50">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="9E" size="-1" from="server">
         <Name>Shop Sell</Name>
         <Desc>Shop Sell Packet.</Desc>
@@ -1768,7 +1768,7 @@
         <Data type="word">Name Length</Data>
         <Data type="char" amount="Name Length">Name</Data>
         <Data type="endloop">Items</Data>
-    </Packet>  
+    </Packet>
     <Packet id="9F" size="-1" from="client">
         <Name>Shop Offer</Name>
         <Desc>Shop Offer Packet.</Desc>
@@ -1780,13 +1780,13 @@
         <Data type="dword">Item Serial</Data>
         <Data type="word">Item Amount</Data>
         <Data type="endloop">Items</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A0" size="3" from="client">
         <Name>Play Server</Name>
         <Desc>Play Server Packet.</Desc>
         <Data type="byte">ID (A0)</Data>
         <Data type="word">Server Index</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A1" size="9" from="server">
         <Name>Mobile Hits</Name>
         <Desc>Mobile Hits Packet.</Desc>
@@ -1794,7 +1794,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">Hit Points Max</Data>
         <Data type="word">Hit Points</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A2" size="9" from="server">
         <Name>Mobile Mana</Name>
         <Desc>Mobile Mana Packet.</Desc>
@@ -1802,7 +1802,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">Mana Max</Data>
         <Data type="word">Mana</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A3" size="9" from="server">
         <Name>Mobile Stamina</Name>
         <Desc>Mobile Stamina Packet.</Desc>
@@ -1810,20 +1810,20 @@
         <Data type="dword">Serial</Data>
         <Data type="word">Stamina Max</Data>
         <Data type="word">Stamina</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A4" size="149" from="unknown">
         <Name>System Info</Name>
         <Desc>System Info Packet.</Desc>
         <Data type="byte">ID (A4)</Data>
         <Data type="byte" amount="148">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A5" size="-1" from="server">
         <Name>Launch Browser</Name>
         <Desc>Launch Browser Packet.</Desc>
         <Data type="byte">ID (A5)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="char" amount="*">URL</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A6" size="-1" from="server">
         <Name>Scroll Message</Name>
         <Desc>Scroll Message Packet.</Desc>
@@ -1833,14 +1833,14 @@
         <Data type="dword">Tip Number</Data>
         <Data type="word">Message Length</Data>
         <Data type="char" amount="Message Length">Message</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A7" size="4" from="client">
         <Name>Request Scroll Message</Name>
         <Desc>Request Scroll Message Packet.</Desc>
         <Data type="byte">ID (A7)</Data>
         <Data type="word">Last Tip Number</Data>
         <Data type="byte">Font Type</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A8" size="-1" from="server">
         <Name>Servers List</Name>
         <Desc>Servers List Packet.</Desc>
@@ -1855,7 +1855,7 @@
         <Data type="sbyte">Server Time Zone</Data>
         <Data type="dword">Server IP</Data>
         <Data type="endloop">Servers</Data>
-    </Packet>  
+    </Packet>
     <Packet id="A9" size="-1" from="server">
         <Name>Characters List</Name>
         <Desc>Characters List Packet.</Desc>
@@ -1881,14 +1881,14 @@
         <Data type="dword">Flags (0x01 = unknown flag1; 0x02 = overwrite configuration button; 0x04 = limit 1 character per account; 0x08 = enable context menus; 0x10 = limit character slots; 0x20 = paladin and necromancer classes, tooltips; 0x40 = 6th character slot; 0x80 = samurai and ninja classes; 0x100 = elven race; 0x200 = unknown flag2; 0x400 = send UO3D client type (client will send 0xE1 packet); 0x800 = unknown flag3; 0x1000 = 7th character slot; 0x2000 = unknown flag4; 0x4000 = new movement system; 0x8000 = unlock new felucca areas)</Data>
         <Data type="word">Last Character Slot</Data>
         <Note>Each flag is for each feature, if you need to combine features, you need to summ flags. Unknown Flag1 never was sent by OSI. Unknown Flag 2 was added with UO:KR launch. Unknown Flag 3 was added sometimes between UO:KR and UO:SA launch. Flag 4 was added with UO:SA launch. All 4 flags are useless: no client reaction. Last character slot for SA 3D clients: it will highlight last character used. 0x8000 flag is used for unlocking new Felucca factions areas, note that you have to use "_x" versions of map/statics if you want to move through new areas.</Note>
-	<Note>Since 7.0.13.0 and 4.0.13.0 City Name and Building Name have length of 32 chars, also added city x,y,z,map,cliloc description and dword 0 to city structure.</Note>
-    </Packet>  
+        <Note>Since 7.0.13.0 and 4.0.13.0 City Name and Building Name have length of 32 chars, also added city x,y,z,map,cliloc description and dword 0 to city structure.</Note>
+    </Packet>
     <Packet id="AA" size="5" from="server">
         <Name>Change Combatant</Name>
         <Desc>Change Combatant Packet.</Desc>
         <Data type="byte">ID (AA)</Data>
         <Data type="dword">Combatant Serial</Data>
-    </Packet>  
+    </Packet>
     <Packet id="AB" size="-1" from="client">
         <Name>String Query</Name>
         <Desc>String Query Packet.</Desc>
@@ -1903,7 +1903,7 @@
         <Data type="dword">Max Length</Data>
         <Data type="word">Label Length</Data>
         <Data type="char" amount="Label Length">Label</Data>
-    </Packet>  
+    </Packet>
     <Packet id="AC" size="-1" from="server">
         <Name>String Response</Name>
         <Desc>String Response Packet.</Desc>
@@ -1915,7 +1915,7 @@
         <Data type="byte">Mode (0x00 = cancel, 0x01 = ok)</Data>
         <Data type="word">Text Length</Data>
         <Data type="char" amount="Text Length">Text</Data>
-    </Packet>  
+    </Packet>
     <Packet id="AD" size="-1" from="client">
         <Name>Unicode Speech</Name>
         <Desc>Unicode Speech Packet.</Desc>
@@ -1928,7 +1928,7 @@
         <Data type="byte" amount="*">Keywords (only if Mode == 0xC0)</Data>
         <Data type="uchar" amount="*">Text</Data>
         <Note>If Mode = 0xC0 then there are keywords (from speech.mul) present. Keywords are using in UO since 2.0.7 client. Keywords: The first 12 bits = the number of keywords present. The keywords are included right after this, each one is 12 bits also. The keywords are padded to the closest byte. For example, if there are 2 keywords, it will take up 5 bytes. 12 bits for the number, and 12 bits for each keyword. 12+12+12=36. Which will be padded 4 bits to 40 bits or 5 bytes.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="AE" size="-1" from="server">
         <Name>Unicode Text</Name>
         <Desc>Unicode Text Packet.</Desc>
@@ -1942,7 +1942,7 @@
         <Data type="char" amount="4">Language</Data>
         <Data type="char" amount="30">Name</Data>
         <Data type="uchar" amount="*">Text</Data>
-    </Packet>  
+    </Packet>
     <Packet id="AF" size="13" from="server">
         <Name>Death Animation</Name>
         <Desc>Death Animation Packet.</Desc>
@@ -1950,7 +1950,7 @@
         <Data type="dword">Victim Serial</Data>
         <Data type="dword">Corpse Serial</Data>
         <Data type="dword">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B0" size="-1" from="server">
         <Name>Generic Gump</Name>
         <Desc>Generic Gump Packet.</Desc>
@@ -1967,9 +1967,9 @@
         <Data type="word">Line Length</Data>
         <Data type="char" amount="Line Length">Text</Data>
         <Data type="endloop">Lines</Data>
-	<Note>Gump ID is special type id. See link below for more information.</Note>
-	<Link title="Gump Guide">http://ruosi.org/gumpguide/index.xml</Link>
-    </Packet>  
+        <Note>Gump ID is special type id. See link below for more information.</Note>
+        <Link title="Gump Guide">http://ruosi.org/gumpguide/index.xml</Link>
+    </Packet>
     <Packet id="B1" size="-1" from="client">
         <Name>Gump Response</Name>
         <Desc>Gump Response Packet.</Desc>
@@ -1990,7 +1990,7 @@
         <Data type="endloop">Text Entries</Data>
         <Data type="dword">Switches Count (Only if Gump ID = 0x1CD)</Data>
         <Data type="dword">Text Entry ID (Only if Gump ID = 0x1CD and Button ID = 0x01 and Switches Count > 0x00)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B2" size="-1" from="server">
         <Name>Chat Message</Name>
         <Desc>Chat Message Packet.</Desc>
@@ -2000,30 +2000,30 @@
         <Data type="char" amount="4">Language</Data>
         <Data type="uchar" amount="*">Param 1</Data>
         <Data type="uchar" amount="*">Param 2</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B3" size="-1" from="client">
         <Name>Chat Action</Name>
         <Desc>Chat Action Packet.</Desc>
         <Data type="byte">ID (B3)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="char" amount="4">Language</Data>
-        <Data type="word">Action (0x41 = Change Channel Password, 0x42 = UO3D Kick, 0x43 = UO3D Leave Channel, 0x44 = UO3D Join Channel, 0x45 = UO3D Join New Channel, 0x46 = UO3D Add Friend, 0x47 = UO3D Remove Friend, 0x49 = UO3D List Channel Players, 0x58 = Leave Chat, 0x61 = Channel Message, 0x62 = Join Channel, 0x63 = Join New Channel, 0x64 = Rename Channel, 0x65 = Private Message, 0x66 = Add Ignore, 0x67 = Remove Ignore, 0x68 = Toggle Ignore, 0x69 = Add Voice, 0x6A = Remove Voice, 0x6B = Toggle Voice, 0x6C = Add Moderator, 0x6D = Remove Moderator, 0x6E = Toggle Moderator, 0x6F = Allow Private Messages, 0x70 = Disallow Private Messages, 0x71 = Toggle Private Messages, 0x72 = Show Character Name, 0x73 = Hide Character Name, 0x74 = Toggle Character Name, 0x75 = Query Whois, 0x76 = Kick, 0x77 = Enable Default Voice, 0x78 = Disable Default Voice, 0x79 = Toggle Default Voice, 0x7A = Emote Message)</Data>  
+        <Data type="word">Action (0x41 = Change Channel Password, 0x42 = UO3D Kick, 0x43 = UO3D Leave Channel, 0x44 = UO3D Join Channel, 0x45 = UO3D Join New Channel, 0x46 = UO3D Add Friend, 0x47 = UO3D Remove Friend, 0x49 = UO3D List Channel Players, 0x58 = Leave Chat, 0x61 = Channel Message, 0x62 = Join Channel, 0x63 = Join New Channel, 0x64 = Rename Channel, 0x65 = Private Message, 0x66 = Add Ignore, 0x67 = Remove Ignore, 0x68 = Toggle Ignore, 0x69 = Add Voice, 0x6A = Remove Voice, 0x6B = Toggle Voice, 0x6C = Add Moderator, 0x6D = Remove Moderator, 0x6E = Toggle Moderator, 0x6F = Allow Private Messages, 0x70 = Disallow Private Messages, 0x71 = Toggle Private Messages, 0x72 = Show Character Name, 0x73 = Hide Character Name, 0x74 = Toggle Character Name, 0x75 = Query Whois, 0x76 = Kick, 0x77 = Enable Default Voice, 0x78 = Disable Default Voice, 0x79 = Toggle Default Voice, 0x7A = Emote Message)</Data>
         <Data type="uchar" amount="*">Parameters</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B4" size="-1" from="godclient">
         <Name>Target Object List</Name>
         <Desc>Target Object List Packet.</Desc>
         <Data type="byte">ID (B4)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B5" size="64" from="client">
         <Name>Chat Open Request</Name>
         <Desc>Chat Open Request Packet.</Desc>
         <Data type="byte">ID (B5)</Data>
         <Data type="byte">0x00</Data>
         <Data type="uchar" amount="31">Chat Name</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B6" size="9" from="client">
         <Name>Object Help Request</Name>
         <Desc>Object Help Request Packet.</Desc>
@@ -2031,7 +2031,7 @@
         <Data type="dword">Help Object Serial</Data>
         <Data type="byte">Language Number</Data>
         <Data type="char" amount="3">Language</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B7" size="-1" from="server">
         <Name>Object Help Response</Name>
         <Desc>Object Help Response Packet.</Desc>
@@ -2039,7 +2039,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Help Object Serial</Data>
         <Data type="uchar" amount="*">Help Text</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B8" size="-1" from="client">
         <Name>Profile Request</Name>
         <Desc>Profile Request Packet.</Desc>
@@ -2050,7 +2050,7 @@
         <Data type="word">Unknown (if Mode = 0x01)</Data>
         <Data type="word">Text Length</Data>
         <Data type="uchar" amount="Text Length">Text</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B8" size="-1" from="server">
         <Name>Profile Response</Name>
         <Desc>Profile Response Packet.</Desc>
@@ -2060,14 +2060,14 @@
         <Data type="char" amount="*">Header</Data>
         <Data type="uchar" amount="*">Body</Data>
         <Data type="uchar" amount="*">Footer</Data>
-    </Packet>  
+    </Packet>
     <Packet id="B9" size="5" from="server">
         <Name>Supported Features</Name>
         <Desc>Supported Features Packet.</Desc>
         <Data type="byte">ID (B9)</Data>
         <Data type="dword">Flags (0x01 = enable T2A features: chat button, regions; 0x02 = enable renaissance features; 0x04 = enable third down features; 0x08 = enable LBR features: skills, map; 0x10 = enable AOS features: skills, spells, map, fightbook, housing tiles; 0x20 = enable 6th character slot; 0x40 = enable SE features: spells, skills, map, housing tiles; 0x80 = enable ML features: elven race, spells, skills, housing tiles; 0x100 = enable The Eight Age splash screen; 0x200 = enable The Ninth Age splash screen and crystal/shadow housing tiles; 0x400 = enable The Tenth Age; 0x800 = enable increased housing and bank storage; 0x1000 = enable 7th character slot; 0x2000 = enable roleplay faces; 0x4000 = trial account; 0x8000 = non-trial (live) account; 0x10000 = enable SA features: gargoyle race, spells, skills, housing tiles; 0x20000 - enable HS features; 0x40000 - enable Gothic housing tiles; 0x80000 - enable Rustic housing tiles)</Data>
         <Note>Each flag is for each feature, if you need to combine features, you need to summ flags. This packet is send immediately after login. on OSI  servers this controls features: OSI enables/disables it via “upgrade codes.” since UO:SA launch it’s 5 bytes packet, not 3 bytes.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="BA" size="10" from="server">
         <Name>Display Quest Pointer</Name>
         <Desc>Display Quest Pointer Packet.</Desc>
@@ -2077,21 +2077,21 @@
         <Data type="word">Y</Data>
         <Data type="dword">Target Serial</Data>
         <Note>Target Serial was added in UO:HS clients.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="BB" size="9" from="old">
         <Name>Messenger</Name>
         <Desc>Messenger Packet.</Desc>
         <Data type="byte">ID (BB)</Data>
         <Data type="dword">Source ID</Data>
         <Data type="dword">Destination ID</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BC" size="3" from="server">
         <Name>Season Change</Name>
         <Desc>Season Change Packet.</Desc>
         <Data type="byte">ID (BC)</Data>
         <Data type="byte">Season (0x00 = spring, 0x01 = summer, 0x02 = fall, 0x03 = winter, 0x04 = desolation)</Data>
         <Data type="byte">Play Music (0x00 = no, 0x01 = yes)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BD" size="-1" from="client">
         <Name>Client Version</Name>
         <Desc>Client Version Packet.</Desc>
@@ -2099,7 +2099,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="char" amount="*">Version</Data>
         <Note>Only in 2D/UOTD clients.</Note>
-    </Packet>  
+    </Packet>
       <Packet id="BE" size="-1" from="both">
         <Name>Assistance Version</Name>
         <Desc>Assistance Version Packet.</Desc>
@@ -2107,7 +2107,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Serial</Data>
         <Data type="char" amount="*">Version</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BF" size="-1" from="both">
         <Name>Extended Command</Name>
         <Desc>Extended Command Packet.</Desc>
@@ -2390,7 +2390,7 @@
         <Data type="word">Context Menu Entry Index</Data>
         <Data type="word">Context Menu Entry Number</Data>
         <Data type="word">Context Menu Entry Flags (0x00 = Enabled, 0x01 = Disabled, 0x04 = Highlighted, 0x20 = Colored)</Data>
-        <Data type="word">Context Menu Entry Hue (If Flags = 0x20, only in 2D client)</Data>  
+        <Data type="word">Context Menu Entry Hue (If Flags = 0x20, only in 2D client)</Data>
         <Data type="endloop">Context Menu Entries</Data>
         <Note>Discontinued in new 3D client, later in 2d client.</Note>
     </Packet>
@@ -2407,7 +2407,7 @@
         <Data type="dword">Context Menu Entry Number</Data>
         <Data type="word">Context Menu Entry Index</Data>
         <Data type="word">Context Menu Entry Flags (0x00 = Enabled, 0x01 = Disabled, 0x04 = Highlighted, 0x20 = Colored)</Data>
-        <Data type="word">Context Menu Entry Hue (If Flags = 0x20, only in 2D client)</Data>  
+        <Data type="word">Context Menu Entry Hue (If Flags = 0x20, only in 2D client)</Data>
         <Data type="endloop">Context Menu Entries</Data>
         <Note>Appearance: KR -> SA3D -> 2D post 7.0.0.0</Note>
     </Packet>
@@ -2428,7 +2428,7 @@
         <Data type="word">0x16</Data>
         <Data type="dword">Command (0x01 = Paperdoll Window, 0x02 = Status Window, 0x08 = Profile Window, 0x0C = Container Window)</Data>
         <Data type="dword">Object Serial (for 0x0C - container serial, for other types - mobile serial)</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BF.17" size="-1" from="server">
         <Name>Display Help Topic</Name>
         <Desc>Display Help Topic Packet.</Desc>
@@ -2445,7 +2445,7 @@
         <Data type="byte">ID (BF)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="word">0x18</Data>
-        <Data type="dword">Maps Count</Data>      
+        <Data type="dword">Maps Count</Data>
         <Data type="loop">Maps</Data>
         <Data type="dword">Number Of Map Patches</Data>
         <Data type="dword">Number Of Static Patches</Data>
@@ -2524,7 +2524,7 @@
         <Data type="word">0x00</Data>
         <Data type="word">0x00</Data>
         <Note>OSI uses this packet for sending pet's bonded status. It replaced the original 0xBF.0x19.0x00 bonded status packet.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="BF.1A" size="-1" from="client">
         <Name>Stat Lock Change</Name>
         <Desc>Stat Lock Change Packet.</Desc>
@@ -2595,7 +2595,7 @@
         <Data type="word">Tile X</Data>
         <Data type="word">Tile Y</Data>
         <Data type="byte">Tile Z</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BF.20.04" size="-1" from="server">
         <Name>Begin House Customization</Name>
         <Desc>Begin House Customization Packet.</Desc>
@@ -2670,7 +2670,7 @@
         <Data type="byte">ID (BF)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="word">0x27</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BF.2A" size="-1" from="client">
         <Name>Change Race Request</Name>
         <Desc>Change Race Request Packet.</Desc>
@@ -2761,7 +2761,7 @@
         <Data type="dword">Item ID</Data>
         <Data type="dword">Duration</Data>
         <Note>Start timer for hotbar slot with object having ItemID from packet. Timer will work for all slot with objects having ItemID from packet. 2.48.0.7 KR only bandages itemid works, ItemIDs are 0xE21 and 0xEE9.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="BF.32" size="-1" from="client">
         <Name>Toggle Gargoyle Flying</Name>
         <Desc>Toggle Gargoyle Flying Packet.</Desc>
@@ -2770,7 +2770,7 @@
         <Data type="word">0x32</Data>
         <Data type="word">0x01</Data>
         <Data type="dword">0x00</Data>
-    </Packet>  
+    </Packet>
     <Packet id="BF.33" size="-1" from="client">
         <Name>Wheel Boat Moving</Name>
         <Desc>Wheel Boat Moving Packet.</Desc>
@@ -2782,7 +2782,7 @@
         <Data type="byte">Moving Direction</Data>
         <Data type="byte">Boat Speed (0 = Stop Movement, 1 = One Tile Movement, 2 = Normal Movement)</Data>
         <Note>Was added in UO:HS clients. Moving Direction = Facing Direction + Command Direction. Normal Movement - fast for all ships except of rowboats.</Note>
-    </Packet>    
+    </Packet>
     <Packet id="C0" size="36" from="server">
         <Name>Hued Effect</Name>
         <Desc>Hued Effect Packet.</Desc>
@@ -2803,7 +2803,7 @@
         <Data type="byte">Fixed Direction (0x00 = No, 0x01 = Yes)</Data>
         <Data type="byte">Explode (0x00 = No, 0x01 = Yes)</Data>
         <Data type="dword">Hue</Data>
-    </Packet>  
+    </Packet>
     <Packet id="C1" size="-1" from="server">
         <Name>Localized Message</Name>
         <Desc>Localized Message Packet.</Desc>
@@ -2817,7 +2817,7 @@
         <Data type="dword">Message Number</Data>
         <Data type="char" amount="30">Name</Data>
         <Data type="uchar" amount="*">Arguments</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C2" size="-1" from="both">
         <Name>Unicode Prompt</Name>
         <Desc>Unicode Prompt Packet.</Desc>
@@ -2828,9 +2828,9 @@
         <Data type="dword">Type (0x00 = Cancel, 0x01 = Response)</Data>
         <Data type="char" amount="4">Language</Data>
         <Data type="uchar" amount="*">Text</Data>
-	<Note>Prompt ID is special type id. See link below for more information.</Note>
-	<Link title="Prompt Guide">http://ruosi.org/promptguide/index.xml</Link>
-    </Packet>    
+        <Note>Prompt ID is special type id. See link below for more information.</Note>
+        <Link title="Prompt Guide">http://ruosi.org/promptguide/index.xml</Link>
+    </Packet>
     <Packet id="C3" size="-1" from="server">
         <Name>GQ Request</Name>
         <Desc>GQ Request Packet.</Desc>
@@ -2856,25 +2856,25 @@
         <Data type="byte">0x01</Data>
         <Data type="char" amount="3">Language</Data>
         <Data type="uchar" amount="*">Text</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C4" size="6" from="server">
         <Name>Semi Visible</Name>
         <Desc>Semi Visible Packet.</Desc>
         <Data type="byte">ID (C4)</Data>
         <Data type="dword">Serial</Data>
         <Data type="byte">Enable (0x00 = no, 0x01 = yes)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C5" size="203" from="godclient">
         <Name>Invalid Map</Name>
         <Desc>Invalid Map Packet.</Desc>
         <Data type="byte">ID (C5)</Data>
         <Data type="byte" amount="202">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C6" size="1" from="server">
         <Name>Invalid Map Enable</Name>
         <Desc>Invalid Map Enable Packet.</Desc>
         <Data type="byte">ID (C6)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C7" size="49" from="server">
         <Name>Particle Effect Enable</Name>
         <Desc>Particle Effect Packet.</Desc>
@@ -2902,34 +2902,34 @@
         <Data type="dword">Serial</Data>
         <Data type="byte">Type (0xFF or 0x03)</Data>
         <Data type="word">0x00</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C8" size="2" from="both">
         <Name>Update Range Change</Name>
         <Desc>Update Range Change Packet.</Desc>
         <Data type="byte">ID (C8)</Data>
         <Data type="byte">Distance</Data>
-    </Packet>    
+    </Packet>
     <Packet id="C9" size="6" from="both">
         <Name>Trip Time</Name>
         <Desc>Trip Time Packet.</Desc>
         <Data type="byte">ID (C9)</Data>
         <Data type="byte">Value</Data>
         <Data type="dword">Ticks</Data>
-    </Packet>    
+    </Packet>
     <Packet id="CA" size="6" from="both">
         <Name>UTrip Time</Name>
         <Desc>UTrip Time Packet.</Desc>
         <Data type="byte">ID (CA)</Data>
         <Data type="byte">Value</Data>
         <Data type="dword">Ticks</Data>
-    </Packet>    
+    </Packet>
     <Packet id="CB" size="7" from="server">
         <Name>GQ Count</Name>
         <Desc>GQ Count Packet.</Desc>
         <Data type="byte">ID (CB)</Data>
         <Data type="word">Value</Data>
         <Data type="dword">Count</Data>
-    </Packet>    
+    </Packet>
     <Packet id="CC" size="-1" from="server">
         <Name>Message Localized Affix</Name>
         <Desc>Message Localized Affix Packet.</Desc>
@@ -2945,56 +2945,56 @@
         <Data type="char" amount="30">Name</Data>
         <Data type="char" amount="*">Affix</Data>
         <Data type="uchar" amount="*">Arguments</Data>
-    </Packet>    
+    </Packet>
     <Packet id="CD" size="1" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (CD)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="CE" size="-1" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (CE)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="CF" size="78" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (CF)</Data>
         <Data type="byte" amount="77">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D0" size="-1" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (D0)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D1" size="1" from="client">
         <Name>Logout Request</Name>
         <Desc>Logout Request Packet.</Desc>
         <Data type="byte">ID (D1)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D1" size="2" from="server">
         <Name>Logout Response</Name>
         <Desc>Logout Response Packet.</Desc>
         <Data type="byte">ID (D1)</Data>
         <Data type="byte">Log Out (0x01 = yes, 0x00 = no)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D2" size="25" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (D2)</Data>
         <Data type="byte" amount="24">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D3" size="-1" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (D3)</Data>
         <Data type="word">Packet Size</Data>
         <Data type="byte" amount="*">Unknown Data</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D4" size="-1" from="both">
         <Name>Book Header</Name>
         <Desc>Book Header Packet.</Desc>
@@ -3007,8 +3007,8 @@
         <Data type="word">Title Length</Data>
         <Data type="uchar" amount="Title Length">Title</Data>
         <Data type="word">Author Length</Data>
-        <Data type="uchar" amount="Author Length">Author</Data>      
-    </Packet>    
+        <Data type="uchar" amount="Author Length">Author</Data>
+    </Packet>
     <Packet id="D5" size="-1" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
@@ -3024,7 +3024,7 @@
         <Data type="loop">Items</Data>
         <Data type="dword">Item Serial</Data>
         <Data type="endloop">Items</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D6" size="-1" from="server">
         <Name>Batch Query Properties</Name>
         <Desc>Batch Query Properties Packet.</Desc>
@@ -3039,7 +3039,7 @@
         <Data type="word">Arguments Length</Data>
         <Data type="uchar" amount="Arguments Length">Arguments</Data>
         <Data type="endloop">Properties</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7" size="-1" from="client">
         <Name>Encoded Command</Name>
         <Desc>Encoded Command Packet.</Desc>
@@ -3047,7 +3047,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Serial</Data>
         <Data type="word">Command</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.02" size="-1" from="client">
         <Name>Designer Backup</Name>
         <Desc>Designer Backup Packet.</Desc>
@@ -3056,7 +3056,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x02</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.03" size="-1" from="client">
         <Name>Designer Restore</Name>
         <Desc>Designer Restore Packet.</Desc>
@@ -3065,7 +3065,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x03</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.04" size="-1" from="client">
         <Name>Designer Commit</Name>
         <Desc>Designer Commit Packet.</Desc>
@@ -3074,7 +3074,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x04</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.05" size="-1" from="client">
         <Name>Designer Delete</Name>
         <Desc>Designer Delete Packet.</Desc>
@@ -3089,9 +3089,9 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Y</Data>
         <Data type="byte">0x00</Data>
-        <Data type="dword">Z</Data>      
+        <Data type="dword">Z</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.06" size="-1" from="client">
         <Name>Designer Build</Name>
         <Desc>Designer Build Packet.</Desc>
@@ -3106,7 +3106,7 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Y</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.0C" size="-1" from="client">
         <Name>Designer Close</Name>
         <Desc>Designer Close Packet.</Desc>
@@ -3115,7 +3115,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x0C</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.0D" size="-1" from="client">
         <Name>Designer Stairs</Name>
         <Desc>Designer Stairs Packet.</Desc>
@@ -3128,9 +3128,9 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">X</Data>
         <Data type="byte">0x00</Data>
-        <Data type="dword">Y</Data>      
+        <Data type="dword">Y</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.0E" size="-1" from="client">
         <Name>Designer Synch</Name>
         <Desc>Designer Synch Packet.</Desc>
@@ -3139,7 +3139,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x0E</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.0F" size="-1" from="client">
         <Name>Designer Action 2D</Name>
         <Desc>Designer Action 2D Packet.</Desc>
@@ -3149,7 +3149,7 @@
         <Data type="word">0x0F</Data>
         <Data type="byte">0x0A</Data>
         <Note>Client sends this packet only if Enable Response is set to 0x01 in 0xD8 packet</Note>
-    </Packet>      
+    </Packet>
     <Packet id="D7.0F" size="-1" from="client">
         <Name>Designer Action 3D</Name>
         <Desc>Designer Action 3D Packet.</Desc>
@@ -3158,8 +3158,8 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x0F</Data>
         <Data type="qword">0xFF</Data>
-        <Note>Client sends this packet only if Enable Response is set to 0x01 in 0xD8 packet</Note>      
-    </Packet>        
+        <Note>Client sends this packet only if Enable Response is set to 0x01 in 0xD8 packet</Note>
+    </Packet>
     <Packet id="D7.10" size="-1" from="client">
         <Name>Designer Clear</Name>
         <Desc>Designer Clear Packet.</Desc>
@@ -3168,7 +3168,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x10</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.12" size="-1" from="client">
         <Name>Designer Level</Name>
         <Desc>Designer Level Packet.</Desc>
@@ -3179,7 +3179,7 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Level</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.13" size="-1" from="client">
         <Name>Designer Roof</Name>
         <Desc>Designer Roof Packet.</Desc>
@@ -3194,9 +3194,9 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Y</Data>
         <Data type="byte">0x00</Data>
-        <Data type="dword">Z</Data>      
+        <Data type="dword">Z</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.14" size="-1" from="client">
         <Name>Designer Roof Delete</Name>
         <Desc>Designer Roof Delete Packet.</Desc>
@@ -3211,9 +3211,9 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Y</Data>
         <Data type="byte">0x00</Data>
-        <Data type="dword">Z</Data>      
+        <Data type="dword">Z</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.19" size="-1" from="client">
         <Name>Set Weapon Ability</Name>
         <Desc>Set Weapon Ability Packet.</Desc>
@@ -3224,7 +3224,7 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Ability Index</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>      
+    </Packet>
     <Packet id="D7.1A" size="-1" from="client">
         <Name>Design Revert</Name>
         <Desc>Design Revert Packet.</Desc>
@@ -3233,7 +3233,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x1A</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.1E" size="-1" from="client">
         <Name>Equip Last Weapon</Name>
         <Desc>Equip Last Weapon Packet.</Desc>
@@ -3242,7 +3242,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x1E</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.28" size="-1" from="client">
         <Name>Guild Button Request</Name>
         <Desc>Guild Button Request Packet.</Desc>
@@ -3251,7 +3251,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x28</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D7.32" size="-1" from="client">
         <Name>Quests Button Request</Name>
         <Desc>Quests Button Request Packet.</Desc>
@@ -3260,7 +3260,7 @@
         <Data type="dword">Serial</Data>
         <Data type="word">0x32</Data>
         <Data type="byte">0x0A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="D8" size="-1" from="server">
         <Name>Design State Detailed</Name>
         <Desc>Design State Detailed Packet.</Desc>
@@ -3288,7 +3288,7 @@
         <Data type="byte" amount="*">Stair Buffer</Data>
         <Data type="endloop">Stairs</Data>
         <Note>Flags = (((Size right_shift 4) and 0xF0) | ((Length right_shift 8) and 0xF)) )</Note>
-    </Packet>    
+    </Packet>
     <Packet id="D9" size="268" from="client">
         <Name>Hardware Info</Name>
         <Desc>Hardware Info Packet.</Desc>
@@ -3319,7 +3319,7 @@
         <Data type="byte">Clients Partial Installed</Data>
         <Data type="uchar" amount="4">Language</Data>
         <Data type="uchar" amount="32">Unknown</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA" size="-1" from="both">
         <Name>Mahjong Game Command</Name>
         <Desc>Mahjong Game Command Packet.</Desc>
@@ -3327,7 +3327,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">Command</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.02" size="-1" from="server">
         <Name>Mahjong Players Info</Name>
         <Desc>Mahjong Players Info Packet.</Desc>
@@ -3345,7 +3345,7 @@
         <Data type="char" amount="30">Player Name</Data>
         <Data type="byte">Player In Game (0x01 = no, 0x00 = yes)</Data>
         <Data type="endloop">Player Seats</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.03" size="-1" from="server">
         <Name>Mahjong Game Tile Info</Name>
         <Desc>Mahjong Game Tile Info Packet.</Desc>
@@ -3360,7 +3360,7 @@
         <Data type="byte">Stack Level</Data>
         <Data type="byte">Direction (0x00 = Up, 0x01 = Down, 0x02 = Left, 0x03 = Right)</Data>
         <Data type="byte">Flipped (0x10 = yes, 0x00 = no)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.04" size="-1" from="server">
         <Name>Mahjong Game Tiles Info</Name>
         <Desc>Mahjong Game Tiles Info Packet.</Desc>
@@ -3378,7 +3378,7 @@
         <Data type="byte">Direction (0x00 = Up, 0x01 = Down, 0x02 = Left, 0x03 = Right)</Data>
         <Data type="byte">Flipped (0x10 = yes, 0x00 = no)</Data>
         <Data type="endloop">Tiles</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.05" size="-1" from="server">
         <Name>Mahjong Game General Info</Name>
         <Desc>Mahjong Game General Info Packet.</Desc>
@@ -3395,7 +3395,7 @@
         <Data type="byte">Dialer Indicator Direction (0x00 = Up, 0x01 = Down, 0x02 = Left, 0x03 = Right)</Data>
         <Data type="word">Wall Break Indicator Y</Data>
         <Data type="word">Wall Break Indicator X</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.06" size="-1" from="client">
         <Name>Mahjong Leave Game</Name>
         <Desc>Mahjong Leave Game Packet.</Desc>
@@ -3403,7 +3403,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x06</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.0A" size="-1" from="client">
         <Name>Mahjong Give Points</Name>
         <Desc>Mahjong Give Points Packet.</Desc>
@@ -3413,7 +3413,7 @@
         <Data type="word">0x0A</Data>
         <Data type="byte">Position</Data>
         <Data type="dword">Points</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.0B" size="-1" from="client">
         <Name>Mahjong Game Roll Dices</Name>
         <Desc>Mahjong Game Roll Dices Packet.</Desc>
@@ -3421,7 +3421,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x0B</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.0C" size="-1" from="client">
         <Name>Mahjong Game Build Walls</Name>
         <Desc>Mahjong Game Build Walls Packet.</Desc>
@@ -3429,7 +3429,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x0C</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.0D" size="-1" from="client">
         <Name>Mahjong Game Reset Scores</Name>
         <Desc>Mahjong Game Reset Scores Packet.</Desc>
@@ -3437,7 +3437,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x0D</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.0F" size="-1" from="client">
         <Name>Mahjong Assist Dealer</Name>
         <Desc>Mahjong Assist Dealer Packet.</Desc>
@@ -3446,7 +3446,7 @@
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x0F</Data>
         <Data type="byte">Position</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.10" size="-1" from="client">
         <Name>Mahjong Game Open Seat</Name>
         <Desc>Mahjong Game Open Seat Packet.</Desc>
@@ -3455,7 +3455,7 @@
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x10</Data>
         <Data type="byte">Seat Position</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.11" size="-1" from="client">
         <Name>Mahjong Game Change Options</Name>
         <Desc>Mahjong Game Change Options Packet.</Desc>
@@ -3464,7 +3464,7 @@
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x11</Data>
         <Data type="dword">Options (0x01 = Show Scores, 0x02 = Spectator Vision)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.15" size="-1" from="client">
         <Name>Mahjong Game Move Wall Break Indicator</Name>
         <Desc>Mahjong Game Move Wall Break Indicator Packet.</Desc>
@@ -3474,7 +3474,7 @@
         <Data type="word">0x15</Data>
         <Data type="word">Y</Data>
         <Data type="word">X</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.16" size="-1" from="client">
         <Name>Mahjong Game Toggle Public Hand</Name>
         <Desc>Mahjong Game Toggle Public Hand Packet.</Desc>
@@ -3483,7 +3483,7 @@
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x16</Data>
         <Data type="dword">Public Hand (0x01 = yes, 0x00 = no)</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.17" size="-1" from="client">
         <Name>Mahjong Game Move Tile</Name>
         <Desc>Mahjong Game Move Tile Packet.</Desc>
@@ -3501,7 +3501,7 @@
         <Data type="word">New Y</Data>
         <Data type="word">New X</Data>
         <Data type="byte">0x00</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.18" size="-1" from="client">
         <Name>Mahjong Game Move Dealer Indicator</Name>
         <Desc>Mahjong Game Move Dealer Indicator Packet.</Desc>
@@ -3513,7 +3513,7 @@
         <Data type="byte">Wind (0x00 = North, 0x01 = East, 0x02 = South, 0x03 = West)</Data>
         <Data type="word">Y</Data>
         <Data type="word">X</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.19" size="-1" from="server">
         <Name>Mahjong Join Game</Name>
         <Desc>Mahjong Join Game Packet.</Desc>
@@ -3521,7 +3521,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x19</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DA.1A" size="-1" from="server">
         <Name>Mahjong Game Relieve</Name>
         <Desc>Mahjong Game Relieve Packet.</Desc>
@@ -3529,7 +3529,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Game Serial</Data>
         <Data type="word">0x1A</Data>
-    </Packet>    
+    </Packet>
     <Packet id="DB" size="-1" from="server">
         <Name>Character Transfer Log</Name>
         <Desc>Character Transfer Log Packet.</Desc>
@@ -3549,12 +3549,12 @@
         <Data type="loop">Item Properties</Data>
         <Data type="dword">Cliloc Number</Data>
         <Data type="word">Length</Data>
-        <Data type="uchar" amount="Length">Arguments</Data>        
+        <Data type="uchar" amount="Length">Arguments</Data>
         <Data type="endloop">Item Properties</Data>
         <Data type="dword">0x00</Data>
         <Data type="endloop">Items</Data>
         <Note>After receiving this packet, client will generate translog.txt in it's directory.</Note>
-    </Packet>    
+    </Packet>
     <Packet id="DC" size="9" from="server">
         <Name>OPL Info</Name>
         <Desc>OPL Info Packet.</Desc>
@@ -3562,7 +3562,7 @@
         <Data type="dword">Serial</Data>
         <Data type="dword">Hash</Data>
         <Note>Since 4.0.5a client, replaced BF.10</Note>
-    </Packet>      
+    </Packet>
     <Packet id="DD" size="-1" from="server">
         <Name>Compressed Gump</Name>
         <Desc>Compressed Gump Packet.</Desc>
@@ -3580,9 +3580,9 @@
         <Data type="dword">Uncompressed Strings Length</Data>
         <Data type="byte" amount="*">Compressed Strings</Data>
         <Note>Since 5.0.0a client. Use ZLib compression with Z_BEST_SPEED compression level.</Note>
-	<Note>Gump ID is special type id. See link below for more information.</Note>
-	<Link title="Gump Guide">http://ruosi.org/gumpguide/index.xml</Link>
-    </Packet>      
+        <Note>Gump ID is special type id. See link below for more information.</Note>
+        <Link title="Gump Guide">http://ruosi.org/gumpguide/index.xml</Link>
+    </Packet>
     <Packet id="DE" size="-1" from="server">
         <Name>Update Character Combatants</Name>
         <Desc>Update Character Combatants Packet.</Desc>
@@ -3593,7 +3593,7 @@
         <Data type="loop">Character Combatants</Data>
         <Data type="dword">Character Combatant Serial</Data>
         <Data type="endloop">Character Combatants</Data>
-    </Packet>      
+    </Packet>
     <Packet id="DF" size="-1" from="server">
         <Name>Buffs And Attributes</Name>
         <Desc>Buffs And Attributes Packet.</Desc>
@@ -3620,7 +3620,7 @@
         <Data type="word">Third Cliloc Arguments Length (0 for attributes)</Data>
         <Data type="uchar" amount="*">Third Cliloc Arguments</Data>
         <Data type="endloop">Buffs</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E0" size="-1" from="client">
         <Name>Bug Report</Name>
         <Desc>Bug Report Packet.</Desc>
@@ -3629,7 +3629,7 @@
         <Data type="char" amount="4">Language</Data>
         <Data type="word">Bug Category (0x01 - World Environment; 0x02 – Wearables; 0x03 – Combat; 0x04 – UI; 0x05 – Crash; 0x06 – Stuck; 0x07 – Animations; 0x08 – Performance; 0x09 – NPCs; 0x0A – Creatures; 0x0B – Pets; 0x0C – Housing; 0x0D - Lost Item; 0x0E – Exploit; 0x0F – Other)</Data>
         <Data type="uchar" amount="*">Bug Description</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E1" size="-1" from="client">
         <Name>UO3D Client Type</Name>
         <Desc>UO3D Client Type Packet.</Desc>
@@ -3637,7 +3637,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="word">0x01</Data>
         <Data type="dword">Client Type (0x02 = KR, 0x03 = SA)</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E2" size="10" from="server">
         <Name>New Mobile Animation</Name>
         <Desc>New Mobile Animation Packet.</Desc>
@@ -3647,7 +3647,7 @@
         <Data type="word">Action</Data>
         <Data type="byte">Delay</Data>
         <Note>Replaces 0x6E packet. Since 7.0.0.0 in 2D, was in UO:KR clients, now in UO:SA clients. Action is optional parameter for some types: attack, emote, spell.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="E3" size="-1" from="server">
         <Name>KR Encryption Request</Name>
         <Desc>KR Encryption Request Packet.</Desc>
@@ -3662,7 +3662,7 @@
         <Data type="dword">0x20</Data>
         <Data type="dword">IV Length</Data>
         <Data type="byte" amount="IV Length">IV</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E4" size="-1" from="client">
         <Name>KR Encryption Response</Name>
         <Desc>KR Encryption Response Packet.</Desc>
@@ -3670,7 +3670,7 @@
         <Data type="word">Packet Size</Data>
         <Data type="dword">Public Key Length</Data>
         <Data type="byte" amount="Public Key Length">Public Key</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E5" size="-1" from="server">
         <Name>UO3D Display Waypoint</Name>
         <Desc>UO3D Display Waypoint Packet.</Desc>
@@ -3687,13 +3687,13 @@
         <Data type="uchar" amount="*">Object Cliloc Description Arguments</Data>
         <Data type="word">0x00</Data>
         <Note>If Ignore Object Serial is true, client will use coordinates from packet and will ignore serial object coordinates.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="E6" size="5" from="server">
         <Name>UO3D Hide Waypoint</Name>
         <Desc>UO3D Hide Waypoint Packet.</Desc>
         <Data type="byte">ID (E6)</Data>
         <Data type="dword">Object Serial</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E7" size="12" from="server">
         <Name>UO3D Continue Highlight UI-Element</Name>
         <Desc>UO3D Continue Highlight UI-Element Packet.</Desc>
@@ -3702,7 +3702,7 @@
         <Data type="word">UI Element ID</Data>
         <Data type="dword">Destination Object Serial</Data>
         <Data type="byte">0x01</Data>
-    </Packet>      
+    </Packet>
     <Packet id="E8" size="13" from="client">
         <Name>UO3D Remove Highlight UI-Element</Name>
         <Desc>UO3D Remove Highlight UI-Element Packet.</Desc>
@@ -3713,23 +3713,23 @@
         <Data type="byte">0x01</Data>
         <Data type="byte">0x01</Data>
         <Note>Response to E7 packet.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="E9" size="75" from="server">
         <Name>UO3D Toggle Highlight UI-Element</Name>
         <Desc>UO3D Toggle Highlight UI-Element Packet.</Desc>
         <Data type="byte">ID (E9)</Data>
         <Data type="word">UI Element ID</Data>
-        <Data type="dword">Mobile Serial</Data>      
+        <Data type="dword">Mobile Serial</Data>
         <Data type="char" amount="64">Description</Data>
         <Data type="dword">Command ID</Data>
         <Note>Description types: ”ToggleInventory”, ”TogglePaperdoll”, ”ToggleMap”, ””</Note>
-    </Packet>      
+    </Packet>
     <Packet id="EA" size="3" from="server">
         <Name>UO3D Enable Hotbar</Name>
         <Desc>UO3D Enable Hotbar Packet.</Desc>
         <Data type="byte">ID (EA)</Data>
         <Data type="word">Enable (0x01 = yes, 0x00 = no)</Data>
-    </Packet>      
+    </Packet>
     <Packet id="EB" size="-1" from="client">
         <Name>UO3D Use Hotbar Response</Name>
         <Desc>UO3D Use Hotbar Response Packet.</Desc>
@@ -3741,7 +3741,7 @@
         <Data type="byte">0x00</Data>
         <Data type="dword">Object ID/Serial (Reversed)</Data>
         <Note>Client sends this packet only if server sent EA packet before. Object ID: serial for item, id for other types. Always in reversed mode. Note: since KR 2.46.*.*  Object ID is serial for scroll too. Sometimes between 2.48.0.3 and 2.59.0.2 they changed it again: now type is always 0x06.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="EC" size="-1" from="client">
         <Name>UO3D Equip Items Macro</Name>
         <Desc>UO3D Equip Items Macro Packet.</Desc>
@@ -3751,7 +3751,7 @@
         <Data type="loop">Items</Data>
         <Data type="dword">Item Serial</Data>
         <Data type="endloop">Items</Data>
-    </Packet>      
+    </Packet>
     <Packet id="ED" size="-1" from="client">
         <Name>UO3D Unequip Items Macro</Name>
         <Desc>UO3D Unequip Items Macro Packet.</Desc>
@@ -3761,13 +3761,13 @@
         <Data type="loop">Items</Data>
         <Data type="word">Item Layer (0x00 = Invalid, 0x01 = One Handed, 0x02 = Tho Handed, 0x03 = Shoes, 0x04 = Pants; 0x05 = Shirt, 0x06 = Helm, 0x07 = Gloves, 0x08 = Ring, 0x09 = Talisman, 0x0A = Neck, 0x0B = Hair, 0x0C = Waist, 0x0D = Inner Torso, 0x0E = Bracelet, 0x0F = Face, 0x10 = Facial Hair, 0x11 = Middle Torso, 0x12 = Earrings, 0x13 = Arms, 0x14 = Cloak, 0x15 = Backpack, 0x16 = Outer Torso, 0x17 = Outer Legs, 0x18 = Inner Legs, 0x19 = Mount, 0x1A = Shop Buy, 0x1B = Shop Resale, 0x1C = Shop Sell, 0x1D = Bank, 0x1E = Shop Max)</Data>
         <Data type="endloop">Items</Data>
-    </Packet>      
+    </Packet>
     <Packet id="EE" size="10" from="unknown">
         <Name>Unknown</Name>
         <Desc>Unknown Packet.</Desc>
         <Data type="byte">ID (EE)</Data>
         <Data type="byte" amount="9">Unknown Data</Data>
-    </Packet>      
+    </Packet>
     <Packet id="EF" size="21" from="client">
         <Name>New Client Version</Name>
         <Desc>New Client Version Packet.</Desc>
@@ -3777,7 +3777,7 @@
         <Data type="dword">Version Minor</Data>
         <Data type="dword">Version Revision</Data>
         <Data type="dword">Version Build</Data>
-    </Packet>      
+    </Packet>
     <Packet id="F0" size="-1" from="client">
         <Name>New Movement Request</Name>
         <Desc>New Movement Request Packet.</Desc>
@@ -3795,14 +3795,14 @@
         <Data type="dword">Z</Data>
         <Data type="endloop">Movement requests</Data>
         <Note>DateTime1 and DateTime2 - ticks from Unix time divided by 10000. Client sends this packet on movement attempt. Can be enabled with 0x4000 flag in 0xA9 packet.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="F1" size="9" from="client">
         <Name>Client-Server Time Synchronization Request</Name>
         <Desc>Client-Server Time Synchronization Request Packet.</Desc>
         <Data type="byte">ID (F1)</Data>
         <Data type="qword">DateTime</Data>
         <Note>DateTime - ticks from Unix time divided by 10000. Client sends this packet each minute. Can be enabled with 0x4000 flag in 0xA9 packet.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="F2" size="25" from="server">
         <Name>Client-Server Time Synchronization Response</Name>
         <Desc>Client-Server Time Synchronization Response Packet.</Desc>
@@ -3811,7 +3811,7 @@
         <Data type="qword">DateTime2</Data>
         <Data type="qword">DateTime3</Data>
         <Note>DateTime1, DateTime2 and DateTime3 - ticks from Unix time divided by 10000. Server sends this packet after client's request (0xF1). Can be enabled with 0x4000 flag in 0xA9 packet.</Note>
-    </Packet>      
+    </Packet>
     <Packet id="F3" size="26" from="server">
         <Name>New World Object Packet</Name>
         <Desc>New World Object Packet.</Desc>
@@ -3831,7 +3831,7 @@
         <Data type="byte">Flag (0x20 = Show Properties; 0x80 = Hidden)</Data>
         <Data type="word">Access (for items only, 0x01 = Player Item, 0x00 = World Item)</Data>
         <Note>First appearance in UO:SA clients, replaces 0x1A packet.</Note>
-    </Packet>  
+    </Packet>
     <Packet id="F4" size="-1" from="client">
         <Name>Crash Report Packet</Name>
         <Desc>Crash Report Packet.</Desc>
@@ -3851,7 +3851,7 @@
         <Data type="dword">Unknown</Data>
         <Data type="dword">Exception Code</Data>
         <Data type="char" amount="100">Process Name</Data>
-        <Data type="char" amount="100">Crash Report</Data>        
+        <Data type="char" amount="100">Crash Report</Data>
         <Data type="byte">0x00</Data>
         <Data type="dword">Exception Offset</Data>
         <Data type="byte">Adresses Count</Data>
@@ -3859,7 +3859,7 @@
         <Data type="dword">Address Value</Data>
         <Data type="endloop">Addresses</Data>
         <Note>Was only for UO3D clients. Since 7.0.8.0 it's also for 2d clients with slightly changed format.</Note>
-    </Packet>    
+    </Packet>
     <Packet id="F5" size="21" from="server">
         <Name>New Map Details Packet</Name>
         <Desc>New Map Details Packet.</Desc>
@@ -3873,7 +3873,7 @@
         <Data type="word">Width</Data>
         <Data type="word">Height</Data>
         <Data type="word">Map</Data>
-    </Packet>      
+    </Packet>
     <Packet id="F6" size="-1" from="server">
         <Name>Boat Moving Packet</Name>
         <Desc>Boat Moving Packet.</Desc>
@@ -3894,7 +3894,7 @@
         <Data type="word">Boat Object Z</Data>
         <Data type="endloop">Boat Objects</Data>
         <Note>Was added in UO:HS clients. Moving Direction = Facing Direction + Command Direction.</Note>
-    </Packet>        
+    </Packet>
     <Packet id="F7" size="-1" from="server">
         <Name>Packet Container Packet</Name>
         <Desc>Packet Container Packet.</Desc>
@@ -3905,7 +3905,7 @@
         <Data type="byte" amount="*">Inner Packet structure</Data>
         <Data type="endloop">Inner Packets</Data>
         <Note>Was added in UO:HS clients. Currently uses for multis, contains F3 packets.</Note>
-    </Packet>          
+    </Packet>
     <Packet id="F8" size="106" from="client" >
         <Name>New Character Creation</Name>
         <Desc>Create a new character (2D clients since 7.0.16.0).</Desc>
