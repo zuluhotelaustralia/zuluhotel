@@ -145,15 +145,18 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO hides
 ** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
-** TODO antimacro code [0/5]
+** TODO antimacro code [3/8]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
 *** TODO send gump right before they get the cursor in gathertarget
-*** TODO gump can't be dismissable except by right click
-*** TODO gump needs to give them 2 minutes or so
+*** DONE gump can't be dismissable by right click
+*** DONE gump needs to give them 2 minutes or so
 *** TODO decide on consequences
-*** TODO pick the one that doesn't match, perhaps simple arithmetic
+*** DONE pick the one that doesn't match, perhaps simple arithmetic
+*** TODO create a meta object to hold all the timers and references and shit to avoid duplication of timers when gump is re-sent.
+*** TODO decide if you want to kick them or not upon jail, because there seems to be no way to dismiss the gump
+*** TODO see if we can just send an exit command to the gump by spoofing a reply or something.
 ** TODO fix Server/Skills.cs because there are several references to 100.0 in there and we go to 130.0
 ** TODO anti corruption code [2/3]
 *** DONE log items created by staff
