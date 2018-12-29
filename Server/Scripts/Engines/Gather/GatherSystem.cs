@@ -144,7 +144,7 @@ namespace Server.Engines.Gather {
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
-	    if( !CheckTool(from, tool) ){
+	    if( CheckTool(from, tool) ){
 		//can this be called if from is dead?
 		from.Target = new GatherTarget( tool, this );
 		return true;
