@@ -15,6 +15,8 @@ namespace Server.Engines.Gather {
 	
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
+	    m_Controller.System = System; //see Mining.cs
+	    m_System.SkillName = SkillName.Fishing;
 	}
 	
         private static Fishing m_System;

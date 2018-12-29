@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,9 +35,13 @@ namespace Server.Items {
 	    }
 	}
 
+	[Constructable]
 	public GatherSystemController() : base ( 0xED4 ) {
+	    this.Name = "Gather System Controller";
 	}
+
 	public GatherSystemController( Serial serial ) : base( serial ){
+	    this.Name = "Gather System Controller";
 	}
 	
 	public static void Initialize() {
@@ -104,18 +109,20 @@ namespace Server.Items {
 
 	    writer.Write( (int)m_SystemType );
 
-	    foreach( GatherNode n in m_System.Nodes ) {
-		n.Drift();
-		
-		writer.Write( n.X );
-		writer.Write( n.Y );
-		writer.Write( n.vX );
-		writer.Write( n.vY );
-		writer.Write( n.Abundance );
-		writer.Write( n.Difficulty );
-		writer.Write( n.Resource.ToString() );
-		writer.Write( n.MinSkill );
-		writer.Write( n.MaxSkill );
+	    if( m_SystemType != ControlledSystem.None ){
+		foreach( GatherNode n in m_System.Nodes ) {
+		    n.Drift();
+		    
+		    writer.Write( n.X );
+		    writer.Write( n.Y );
+		    writer.Write( n.vX );
+		    writer.Write( n.vY );
+		    writer.Write( n.Abundance );
+		    writer.Write( n.Difficulty );
+		    writer.Write( n.Resource.ToString() );
+		    writer.Write( n.MinSkill );
+		    writer.Write( n.MaxSkill );
+		}
 	    }
 	}
 

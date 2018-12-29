@@ -1,3 +1,4 @@
+
 using System;
 using Server;
 using Server.Items;
@@ -120,7 +121,7 @@ namespace Server.Engines.Gather
 	
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
-	    m_Controller.System = m_System;
+	    m_Controller.System = System; //if you use m_System here, it's not initialized and will fuck you up.
 	    m_System.SkillName = SkillName.Mining;
 	}
 	

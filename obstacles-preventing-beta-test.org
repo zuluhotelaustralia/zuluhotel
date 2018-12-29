@@ -1,3 +1,4 @@
+
 #+STARTUP: align
 #+STARTUP: showall
 
@@ -162,6 +163,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE log items created by staff
 *** DONE log edits done to characters by staff
 *** TODO publish logs automagically
+** TODO figure out how jail works in runuo - there seems to be no [jail command
 
 * Bugs [0/4]
 :PROPERTIES:
