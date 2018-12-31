@@ -106,7 +106,7 @@ namespace Server.Engines.Gather {
 	    if ( !base.BeginGathering( from, tool ) )
 		return false;
 
-	    from.SendLocalizedMessage( 503033 ); // Where do you wish to dig?
+	    // from.SendLocalizedMessage( 503033 ); // Where do you wish to dig?
 	    return true;
 	}
 
@@ -142,9 +142,9 @@ namespace Server.Engines.Gather {
 	public void OnBadGatherTarget( Mobile from, Item tool, object toHarvest )
 	{
 	    if ( toHarvest is LandTarget )
-		from.SendLocalizedMessage( 501862 ); // You can't mine there.
+		from.SendLocalizedMessage( 500488 ); // There's not enough wood here to harvest.
 	    else
-		from.SendLocalizedMessage( 501863 ); // You can't mine that.
+		from.SendLocalizedMessage( 500489 ); // You can't use an axe on that.
 	}
 
 	public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
