@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,9 +35,13 @@ namespace Server.Items {
 	    }
 	}
 
+	[Constructable]
 	public GatherSystemController() : base ( 0xED4 ) {
+	    this.Name = "Gather System Controller";
 	}
+
 	public GatherSystemController( Serial serial ) : base( serial ){
+	    this.Name = "Gather System Controller";
 	}
 	
 	public static void Initialize() {
@@ -104,18 +109,22 @@ namespace Server.Items {
 
 	    writer.Write( (int)m_SystemType );
 
-	    foreach( GatherNode n in m_System.Nodes ) {
-		n.Drift();
+	    if( m_SystemType != ControlledSystem.None ){
+		writer.Write( m_System.Nodes.Count );
 		
-		writer.Write( n.X );
-		writer.Write( n.Y );
-		writer.Write( n.vX );
-		writer.Write( n.vY );
-		writer.Write( n.Abundance );
-		writer.Write( n.Difficulty );
-		writer.Write( n.Resource.ToString() );
-		writer.Write( n.MinSkill );
-		writer.Write( n.MaxSkill );
+		foreach( GatherNode n in m_System.Nodes ) {
+		    n.Drift();
+		    
+		    writer.Write( n.X );
+		    writer.Write( n.Y );
+		    writer.Write( n.vX );
+		    writer.Write( n.vY );
+		    writer.Write( n.Abundance );
+		    writer.Write( n.Difficulty );
+		    writer.Write( n.Resource.ToString() );
+		    writer.Write( n.MinSkill );
+		    writer.Write( n.MaxSkill );
+		}
 	    }
 	}
 
@@ -132,6 +141,8 @@ namespace Server.Items {
 	    double a, d, min, max;
 	    string res;
 
+	    int length;
+	    
 	    switch( version )
 	    {
 		case 0:
@@ -145,7 +156,9 @@ namespace Server.Items {
 			    case ControlledSystem.Mining:
 				{
 				    //we foreach it so that there are the correct number of read calls
-				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Mining.Ores) ) ) {
+				    length = reader.ReadInt();
+				    
+				    for( int i=0; i<length; i++ ) {
 					//make this more elegant, because yuck
 					x = reader.ReadInt();
 					y = reader.ReadInt();
@@ -165,7 +178,9 @@ namespace Server.Items {
 				}
 			    case ControlledSystem.Lumberjacking:
 				{
-				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Lumberjacking.Logs) ) ) {
+				    length = reader.ReadInt();
+				    
+				    for( int i=0; i<length; i++ ) {
 					//make this more elegant, because yuck
 					x = reader.ReadInt();
 					y = reader.ReadInt();
@@ -185,7 +200,9 @@ namespace Server.Items {
 				}
 			    case ControlledSystem.Fishing:
 				{
-				    foreach( var v in Enum.GetValues( typeof(Server.Engines.Gather.Fishing.Fish) ) ) {
+				    length = reader.ReadInt();
+				    
+				    for( int i=0; i<length; i++ ) {
 					//make this more elegant, because yuck
 					x = reader.ReadInt();
 					y = reader.ReadInt();

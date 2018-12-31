@@ -144,7 +144,7 @@ namespace Server.Engines.Gather {
 	//entry point
 	public virtual bool BeginGathering( Mobile from, Item tool ){
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
-	    if( !CheckTool(from, tool) ){
+	    if( CheckTool(from, tool) ){
 		//can this be called if from is dead?
 		from.Target = new GatherTarget( tool, this );
 		return true;
@@ -227,7 +227,7 @@ namespace Server.Engines.Gather {
 	    Item item = Construct ( n.Resource );
 
 	    if( item.Stackable ){
-		int amount = Utility.Dice(1, 5, 2); //1d5+2, change this to be skill based
+		int amount = Utility.Dice(1, 5, 2); //1d5+2, TODO change this to be skill based
 		if( m is PlayerMobile ){
 		    if( ((PlayerMobile)m).Spec.SpecName == SpecName.Crafter ) {
 			amount *= 2;

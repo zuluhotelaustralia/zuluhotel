@@ -1,4 +1,8 @@
+using System;
+using Server;
 using Server.Items;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Server.Engines.Gather {
     public class Fishing : Server.Engines.Gather.GatherSystem {
@@ -8,6 +12,15 @@ namespace Server.Engines.Gather {
 	    BigFish
 	}
 
+	private Fishing( Serial serial ) : this() {
+	}
+
+	private Fishing() {
+	    m_Nodes = new List<GatherNode>();
+	    GatherNode node = new GatherNode (0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof( Fish ) );
+	    m_Nodes.Add(node);
+	}
+	
 	private static GatherSystemController m_Controller;
 	public static GatherSystemController Controller {
 	    get { return m_Controller; }
@@ -15,6 +28,8 @@ namespace Server.Engines.Gather {
 	
 	public static void Setup( GatherSystemController stone ) {
 	    m_Controller = stone;
+	    m_Controller.System = System; //see Mining.cs
+	    m_System.SkillName = SkillName.Fishing;
 	}
 	
         private static Fishing m_System;
