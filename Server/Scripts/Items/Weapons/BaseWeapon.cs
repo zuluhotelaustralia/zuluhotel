@@ -3310,7 +3310,7 @@ if ( chance > aosChance )
                 attrs.Add( new EquipInfoAttribute( 1041350 ) ); // faction item
             #endregion
 
-            if ( m_Quality == ArmorQuality.Exceptional )
+            if ( m_Quality == WeaponQuality.Exceptional )
                 attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );
 
             if ( m_Resource != CraftResource.Iron )
