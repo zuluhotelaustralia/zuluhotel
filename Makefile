@@ -3,11 +3,11 @@ OUTPUTDIR=-o ./
 
 .DELETE_ON_ERROR:
 
-run: release
-	dotnet ./RunZH.dll
-
 release:
 	$(RUNTIME) $(OUTPUTDIR)
+
+run: release
+	dotnet ./RunZH.dll
 
 debug:
 	$(RUNTIME) $(OUTPUTDIR)
