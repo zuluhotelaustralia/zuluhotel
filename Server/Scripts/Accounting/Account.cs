@@ -167,6 +167,23 @@ namespace Server.Accounting
 	private IPAddress[] m_LoginIPs;
 	private HardwareInfo m_HardwareInfo;
 
+	// begin macro stuff
+
+	//how much the anti-macro system trusts this account
+	private double m_TrustScore;
+	public double TrustScore {
+	    get { return m_TrustScore; }
+	    set { m_TrustScore = value; }
+	}
+
+	// when should we challenge them next
+	private DateTime m_NextTransaction;
+	public DateTime NextTransaction {
+	    get { return m_NextTransaction; }
+	    set { m_NextTransaction = value; }
+	}
+	// end macro stuff
+
 	/// <summary>
 	/// Deletes the account, all characters of the account, and all houses of those characters
 	/// </summary>
