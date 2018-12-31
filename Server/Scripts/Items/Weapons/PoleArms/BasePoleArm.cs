@@ -9,134 +9,131 @@ using Server.ContextMenus;
 
 namespace Server.Items
 {
-	public abstract class BasePoleArm : BaseMeleeWeapon, IUsesRemaining
-	{
-		public override int DefHitSound{ get{ return 0x237; } }
-		public override int DefMissSound{ get{ return 0x238; } }
+        public abstract class BasePoleArm : BaseMeleeWeapon, IUsesRemaining
+        {
+                public override int DefHitSound{ get{ return 0x237; } }
+                public override int DefMissSound{ get{ return 0x238; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Swords; } }
-		public override WeaponType DefType{ get{ return WeaponType.Polearm; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
+                public override SkillName DefSkill{ get{ return SkillName.Swords; } }
+                public override WeaponType DefType{ get{ return WeaponType.Polearm; } }
+                public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
-		public virtual HarvestSystem HarvestSystem{ get{ return Server.Engines.Harvest.Lumberjacking.System; } }
-		public virtual GatherSystem GatherSystem{ get{ return Server.Engines.Gather.Lumberjacking.System; } }
+                public virtual HarvestSystem HarvestSystem{ get{ return Server.Engines.Harvest.Lumberjacking.System; } }
+                public virtual GatherSystem GatherSystem{ get{ return Server.Engines.Gather.Lumberjacking.System; } }
 
-		private int m_UsesRemaining;
-		private bool m_ShowUsesRemaining;
+                private int m_UsesRemaining;
+                private bool m_ShowUsesRemaining;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int UsesRemaining
-		{
-			get { return m_UsesRemaining; }
-			set { m_UsesRemaining = value; InvalidateProperties(); }
-		}
+                [CommandProperty( AccessLevel.GameMaster )]
+                public int UsesRemaining
+                {
+                        get { return m_UsesRemaining; }
+                        set { m_UsesRemaining = value; InvalidateProperties(); }
+                }
 
-            private bool m_UseGatherSystem;
+            private bool m_UseGatherSystem = true;;
             [CommandProperty( AccessLevel.GameMaster )]
             public bool UseGatherSystem
             {
                 get { return m_UseGatherSystem; }
                 set {
                     m_UseGatherSystem = value;
-                    this.Name = null;
-                    this.Name = this.Name + "[" + ( m_UseGatherSystem ? "RunZH Gathering" : "RunUO Harvesting" ) + "]";
-                    InvalidateProperties();
                 }
             }
 
             [CommandProperty( AccessLevel.GameMaster )]
-		public bool ShowUsesRemaining
-		{
-			get { return m_ShowUsesRemaining; }
-			set { m_ShowUsesRemaining = value; InvalidateProperties(); }
-		}
+                public bool ShowUsesRemaining
+                {
+                        get { return m_ShowUsesRemaining; }
+                        set { m_ShowUsesRemaining = value; InvalidateProperties(); }
+                }
 
-		public BasePoleArm( int itemID ) : base( itemID )
-		{
-			m_UsesRemaining = 150;
-		}
+                public BasePoleArm( int itemID ) : base( itemID )
+                {
+                        m_UsesRemaining = 150;
+                }
 
-		public BasePoleArm( Serial serial ) : base( serial )
-		{
-		}
+                public BasePoleArm( Serial serial ) : base( serial )
+                {
+                }
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( HarvestSystem == null )
-				return;
+                public override void OnDoubleClick( Mobile from )
+                {
+                        if ( HarvestSystem == null )
+                                return;
 
-			if ( IsChildOf( from.Backpack ) || Parent == from ) {
+                        if ( IsChildOf( from.Backpack ) || Parent == from ) {
                             if ( this.UseGatherSystem ) GatherSystem.BeginGathering( from, this );
                             else  HarvestSystem.BeginHarvesting( from, this );
                         }
-			else
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-		}
+                        else
+                                from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
+                }
 
-		public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-		{
-			base.GetContextMenuEntries( from, list );
+                public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
+                {
+                        base.GetContextMenuEntries( from, list );
 
-			if ( HarvestSystem != null )
-				BaseHarvestTool.AddContextMenuEntries( from, this, list, HarvestSystem );
-		}
+                        if ( HarvestSystem != null )
+                                BaseHarvestTool.AddContextMenuEntries( from, this, list, HarvestSystem );
+                }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+                public override void Serialize( GenericWriter writer )
+                {
+                        base.Serialize( writer );
 
-			writer.Write( (int) 2 ); // version
+                        writer.Write( (int) 2 ); // version
 
-			writer.Write( (bool) m_ShowUsesRemaining );
+                        writer.Write( (bool) m_ShowUsesRemaining );
 
-			writer.Write( (int) m_UsesRemaining );
-		}
+                        writer.Write( (int) m_UsesRemaining );
+                }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+                public override void Deserialize( GenericReader reader )
+                {
+                        base.Deserialize( reader );
 
-			int version = reader.ReadInt();
+                        int version = reader.ReadInt();
 
-			switch ( version )
-			{
-				case 2:
-				{
-					m_ShowUsesRemaining = reader.ReadBool();
-					goto case 1;
-				}
-				case 1:
-				{
-					m_UsesRemaining = reader.ReadInt();
-					goto case 0;
-				}
-				case 0:
-				{
-					if ( m_UsesRemaining < 1 )
-						m_UsesRemaining = 150;
+                        switch ( version )
+                        {
+                                case 2:
+                                {
+                                        m_ShowUsesRemaining = reader.ReadBool();
+                                        goto case 1;
+                                }
+                                case 1:
+                                {
+                                        m_UsesRemaining = reader.ReadInt();
+                                        goto case 0;
+                                }
+                                case 0:
+                                {
+                                        if ( m_UsesRemaining < 1 )
+                                                m_UsesRemaining = 150;
 
-					break;
-				}
-			}
-		}
+                                        break;
+                                }
+                        }
+                }
 
-		public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
-		{
-			base.OnHit( attacker, defender, damageBonus );
+                public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
+                {
+                        base.OnHit( attacker, defender, damageBonus );
 
-			if (!Core.AOS && (attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value >= 80 && (attacker.Skills[SkillName.Anatomy].Value / 400.0) >= Utility.RandomDouble() && Engines.ConPVP.DuelContext.AllowSpecialAbility(attacker, "Concussion Blow", false))
-			{
-				StatMod mod = defender.GetStatMod( "Concussion" );
+                        if (!Core.AOS && (attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value >= 80 && (attacker.Skills[SkillName.Anatomy].Value / 400.0) >= Utility.RandomDouble() && Engines.ConPVP.DuelContext.AllowSpecialAbility(attacker, "Concussion Blow", false))
+                        {
+                                StatMod mod = defender.GetStatMod( "Concussion" );
 
-				if ( mod == null )
-				{
-					defender.SendMessage( "You receive a concussion blow!" );
-					defender.AddStatMod( new StatMod( StatType.Int, "Concussion", -(defender.RawInt / 2), TimeSpan.FromSeconds( 30.0 ) ) );
+                                if ( mod == null )
+                                {
+                                        defender.SendMessage( "You receive a concussion blow!" );
+                                        defender.AddStatMod( new StatMod( StatType.Int, "Concussion", -(defender.RawInt / 2), TimeSpan.FromSeconds( 30.0 ) ) );
 
-					attacker.SendMessage( "You deliver a concussion blow!" );
-					attacker.PlaySound( 0x11C );
-				}
-			}
-		}
-	}
+                                        attacker.SendMessage( "You deliver a concussion blow!" );
+                                        attacker.PlaySound( 0x11C );
+                                }
+                        }
+                }
+        }
 }
