@@ -31,7 +31,8 @@ namespace Server.Items
                         set { m_UsesRemaining = value; InvalidateProperties(); }
                 }
 
-            private bool m_UseGatherSystem = true;;
+            private bool m_UseGatherSystem = true;
+
             [CommandProperty( AccessLevel.GameMaster )]
             public bool UseGatherSystem
             {
