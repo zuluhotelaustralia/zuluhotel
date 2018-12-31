@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet type="text/xsl" href="packets>.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="packets.xsl" ?>
 
 <Packets lastupdate="28/05/2012">
     <Packet id="00" size="104" from="client" >
