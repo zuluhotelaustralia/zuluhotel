@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xhtml="http://www.w3.org/1999/xhtml" >
     <xsl:output method="xml" media-type="text/html"
@@ -7,7 +7,68 @@
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <title>UO Packet Guide</title>
+              <title>UO Packet Guide</title>
+              <style title="light">
+                .toc {
+                display:inline;float:right;border:solid 1px black;
+                }
+                .packet {
+                border: 2px solid #808080; width:600px; background-color:#FFF8DC; border-collapse:collapse;
+                }
+
+                .packet-header {
+                background-color: #FFD700; text-align: right;
+                }
+
+                .packet-desc {
+                display: inline; float: left;
+                }
+
+                .packet-from {
+                display: inline; float: right;
+                }
+
+                .packet-field-type {
+                border-style: solid none solid solid; border-width:1px; border-color:#808080; width:70px;
+                }
+
+                .packet-field-desc {
+                border-style: solid solid solid none; border-width: 1px; border-color: #808080; width:524px;
+                }
+              </style>
+              <style title="dark">
+                body {
+                background: black;
+                color: green;
+                }
+
+                .toc {
+                display:inline;float:right;border:solid 1px green;
+                }
+                .packet {
+                border: 2px solid #808080; width:600px; border-collapse:collapse;
+                }
+
+                .packet-header {
+                text-align: right;
+                }
+
+                .packet-desc {
+                display: inline; float: left;
+                }
+
+                .packet-from {
+                display: inline; float: right;
+                }
+
+                .packet-field-type {
+                border-style: solid none solid solid; border-width:1px; border-color:#808080; width:70px;
+                }
+
+                .packet-field-desc {
+                border-style: solid solid solid none; border-width: 1px; border-color: #808080; width:524px;
+                }
+              </style>
             </head>
             <body>
                 <span id="top"/>
@@ -15,7 +76,7 @@
                 <h2>WARNING: NOT FOR RUNUO.COM USERS</h2>
                 <h2>Last Update: <xsl:value-of select="Packets/@lastupdate"/></h2>
                 <h4>Notes: word = 2 bytes, dword = 4 bytes, qword = 8 bytes, char = 1 byte, uchar = 2 bytes, sbyte = signed byte, loop and endloop = cycle.</h4>
-                <table style="display:inline;float:right;border:solid 1px black;">
+                <table class="toc" style="">
                     <tr>
                         <th>Table of contents</th>
                     </tr>
@@ -121,15 +182,15 @@
                 </table>
                 <xsl:for-each select="Packets/Packet">
                     <span id="{concat(@from,@id)}"/>
-                    <table style="border: 2px solid #808080; width:600px; background-color:#FFF8DC; border-collapse:collapse;">
+                    <table class="packet" style="">
                         <tr>
-                            <td colspan="2" style="background-color: #FFD700; text-align: right;">
+                            <td colspan="2" class="packet-header" style="">
                                 <xsl:value-of select="concat(@id,' - ',Name)"/>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <div style="display: inline; float: left;">
+                                <div class="packet-desc" style="">
                                     <xsl:value-of select="Desc"/>
                                     <br />
                                     <xsl:if test="@size&gt;-1">
@@ -139,20 +200,20 @@
                                         </xsl:if>
                                     </xsl:if>
                                 </div>
-                                <div style="display: inline; float: right;">
+                                <div class="packet-from" style="">
                                     <xsl:value-of select="concat('from ',@from)"/>
                                 </div>
                             </td>
                         </tr>
                       <xsl:for-each select="Data">
                         <tr>
-                          <td style="border-style: solid none solid solid; border-width:1px; border-color:#808080; width:70px;">
+                          <td class="packet-field-type" style="">
                             <xsl:value-of select="@type"/>
                             <xsl:if test="@amount">
                               <xsl:value-of select="concat('[',@amount,']')"/>
                             </xsl:if>
                           </td>
-                          <td style="border-style: solid solid solid none; border-width: 1px; border-color: #808080; width:524px;">
+                          <td class="packet-field-desc" style="">
                             <xsl:value-of select="."/>
                           </td>
                         </tr>
@@ -161,7 +222,7 @@
                       <xsl:for-each select="Note">
                         <tr>
                           <td colspan="2">
-			    <xsl:copy-of select="."/> 
+                            <xsl:copy-of select="."/>
                           </td>
                         </tr>
                       </xsl:for-each>
