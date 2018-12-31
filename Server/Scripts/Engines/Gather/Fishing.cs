@@ -16,10 +16,19 @@ namespace Server.Engines.Gather {
 	}
 
 	private Fishing() {
+	    
+	    m_EffectsHolder.EffectActions = new int[]{ 12 };
+	    m_EffectsHolder.EffectSounds = new int[0];
+	    m_EffectsHolder.EffectCounts = new int[]{ 1 };
+	    m_EffectsHolder.EffectDelay = TimeSpan.Zero;
+	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds( 8.0 );
+	    
 	    m_Nodes = new List<GatherNode>();
 	    GatherNode node = new GatherNode (0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof( Fish ) );
 	    m_Nodes.Add(node);
 	}
+
+	private GatherFXHolder m_EffectsHolder;
 	
 	private static GatherSystemController m_Controller;
 	public static GatherSystemController Controller {

@@ -61,6 +61,8 @@ namespace Server.Engines.Gather {
 		0x52C6, 0x52C7
 	    };
 
+	private GatherFXHolder m_EffectsHolder;
+	
 	public static void Initialize() {
 	    Array.Sort( m_TreeTiles);
 	}
@@ -110,30 +112,32 @@ namespace Server.Engines.Gather {
 	    return true;
 	}
 
-	public override void PlayGatherEffects(){
-	}
-
 	public override void StartGathering( Mobile from, Item tool, object targeted) {
 	    int tileID;
-
+	    Point3D loc;
+	    
 	    if( targeted is Static && !((Static)targeted).Movable ){
 		Static obj = (Static)targeted;
+		loc = new Point3D(obj.Location);
 		tileID = (obj.ItemID & 0x3FFF) | 0x4000; //what the actual fuck does this do?
 	    }
 	    else if( targeted is StaticTarget ){
 		StaticTarget obj = (StaticTarget)targeted;
+		loc = new Point3D(obj.Location);
 		tileID = (obj.ItemID & 0x3FFF) | 0x4000;
 	    }
 	    else if( targeted is LandTarget ){
 		LandTarget obj = (LandTarget)targeted;
+		loc = new Point3D(obj.Location);
 		tileID = obj.TileID;
 	    }
 	    else {
+		loc = new Point3D(from.Location);
 		tileID = 0;
 	    }
 
 	    if( Validate( tileID ) ) {
-		PlayGatherEffects();
+		m_EffectsHolder.PlayEffects(from, loc);
 		base.StartGathering( from, tool, targeted );
 	    }
 
@@ -175,8 +179,16 @@ namespace Server.Engines.Gather {
 	private Lumberjacking( Serial serial) : this() {}
 
 	private Lumberjacking() {
-	    m_Nodes = new List<GatherNode>();
+	    m_EffectsHolder = new GatherFXHolder();
 
+	    //copied from Harvesting - don't blame me bro
+	    m_EffectsHolder.EffectActions = new int[]{ 13 };
+	    m_EffectsHolder.EffectSounds = new int[]{ 0x13E };
+	    m_EffectsHolder.EffectCounts = new int[]{ 1, 2, 2, 2, 3};
+	    m_EffectsHolder.EffectDelay = TimeSpan.FromSeconds(1.6);
+	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
+	    
+	    m_Nodes = new List<GatherNode>();
 	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof(Log) );
 	    m_Nodes.Add(node);
 	}

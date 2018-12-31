@@ -113,6 +113,8 @@ namespace Server.Engines.Gather
 		1638, 1639, 1640, 1641, 1642, 1647, 1648, 1649, 1650
 	    };
 
+	private GatherFXHolder m_EffectsHolder;
+	
 	private static GatherSystemController m_Controller;
 	public static GatherSystemController Controller {
 	    get { return m_Controller; }
@@ -168,30 +170,32 @@ namespace Server.Engines.Gather
 	    return true;
 	}
 
-	public override void PlayGatherEffects(){
-	}
-
 	public override void StartGathering( Mobile from, Item tool, object targeted) {
 	    int tileID;
+	    Point3D loc;
 
 	    if( targeted is Static && !((Static)targeted).Movable ){
 		Static obj = (Static)targeted;
+		loc = new Point3D(obj.Location);
 		tileID = (obj.ItemID & 0x3FFF) | 0x4000; //what the actual fuck does this do?
 	    }
 	    else if( targeted is StaticTarget ){
 		StaticTarget obj = (StaticTarget)targeted;
+		loc = new Point3D(obj.Location);
 		tileID = (obj.ItemID & 0x3FFF) | 0x4000;
 	    }
 	    else if( targeted is LandTarget ){
 		LandTarget obj = (LandTarget)targeted;
+		loc = new Point3D(obj.Location);
 		tileID = obj.TileID;
 	    }
 	    else {
+		loc = new Point3D(from.Location);
 		tileID = 0;
 	    }
 
 	    if( Validate( tileID ) ) {
-		PlayGatherEffects();
+		m_EffectsHolder.PlayEffects( from, loc );
 		base.StartGathering( from, tool, targeted );
 	    }
 	}
@@ -240,12 +244,11 @@ namespace Server.Engines.Gather
 	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof(IronOre) );
 	    m_Nodes.Add(node);
 	    
-	    // // The digging effect
-	    // oreAndStone.EffectActions = new int[]{ 11 };
-	    // oreAndStone.EffectSounds = new int[]{ 0x125, 0x126 };
-	    // oreAndStone.EffectCounts = new int[]{ 1 };
-	    // oreAndStone.EffectDelay = TimeSpan.FromSeconds( 1.6 );
-	    // oreAndStone.EffectSoundDelay = TimeSpan.FromSeconds( 0.9 );
+	    m_EffectsHolder.EffectActions = new int[]{ 11 };
+	    m_EffectsHolder.EffectSounds = new int[]{ 0x125, 0x126 };
+	    m_EffectsHolder.EffectCounts = new int[]{ 1 };
+	    m_EffectsHolder.EffectDelay = TimeSpan.FromSeconds( 1.6 );
+	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds( 0.9 );
 
 	    // oreAndStone.NoResourcesMessage = 503040; // There is no metal here to mine.
 	    // oreAndStone.DoubleHarvestMessage = 503042; // Someone has gotten to the metal before you.
@@ -254,22 +257,6 @@ namespace Server.Engines.Gather
 	    // oreAndStone.FailMessage = 503043; // You loosen some rocks but fail to find any useable ore.
 	    // oreAndStone.PackFullMessage = 1010481; // Your backpack is full, so the ore you mined is lost.
 	    // oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
-
-
-	    // if ( Core.ML )
-	    // {
-	    // 	// TODO, use these for nimbus, dark sable,  etc?
-	    // 	oreAndStone.BonusResources = new BonusHarvestResource[]
-	    // 	{
-	    // 	    new BonusHarvestResource( 0, 99.4, null, null ),	//Nothing
-	    // 	    new BonusHarvestResource( 100, .1, 1072562, typeof( BlueDiamond ) ),
-	    // 	    new BonusHarvestResource( 100, .1, 1072567, typeof( DarkSapphire ) ),
-	    // 	    new BonusHarvestResource( 100, .1, 1072570, typeof( EcruCitrine ) ),
-	    // 	    new BonusHarvestResource( 100, .1, 1072564, typeof( FireRuby ) ),
-	    // 	    new BonusHarvestResource( 100, .1, 1072566, typeof( PerfectEmerald ) ),
-	    // 	    new BonusHarvestResource( 100, .1, 1072568, typeof( Turquoise ) )
-	    // 	};
-	    // }
 
 	    // sand.NoResourcesMessage = 1044629; // There is no sand here to mine.
 	    // sand.DoubleHarvestMessage = 1044629; // There is no sand here to mine.

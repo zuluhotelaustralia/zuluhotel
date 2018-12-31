@@ -219,9 +219,6 @@ namespace Server.Engines.Gather {
 	    return false;
 	}
 
-	public virtual void PlayGatherEffects(){
-	}
-
 	public virtual void GiveResources( GatherNode n, Mobile m, bool placeAtFeet ){
 	    //public virtual bool Give( Mobile m, Item item, bool placeAtFeet )
 	    Item item = Construct ( n.Resource );
