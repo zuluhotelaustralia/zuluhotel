@@ -197,8 +197,8 @@ namespace Server.Engines.Gather {
 	    m_EffectsHolder.EffectActions = new int[]{ 13 };
 	    m_EffectsHolder.EffectSounds = new int[]{ 0x13E };
 	    m_EffectsHolder.EffectCounts = new int[]{ 1, 2, 2, 2, 3};
-	    m_EffectsHolder.EffectDelay = TimeSpan.FromSeconds(1.6);
-	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
+	    m_EffectsHolder.EffectDelay = TimeSpan.FromSeconds(0.9);
+	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds(1.6);
 	    
 	    m_Nodes = new List<GatherNode>();
 	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof(Log) );

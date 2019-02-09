@@ -43,7 +43,7 @@ namespace Server.Engines.Gather {
 	}
 
 	public static void Initialize() {
-	    CommandSystem.Register( "AutoLoop", AccessLevel.Player, new CommandEventHandler( AutoLoop_OnCommand ) );
+	    //CommandSystem.Register( "AutoLoop", AccessLevel.Player, new CommandEventHandler( AutoLoop_OnCommand ) );
 	    CommandSystem.Register( "GatherSystemSetup", AccessLevel.Developer, new CommandEventHandler( GatherSystemSetup_OnCommand ) );
 	    CommandSystem.Register( "GetNodeInfo", AccessLevel.Developer, new CommandEventHandler( GetNodeInfo_OnCommand ) );
 	}
@@ -188,7 +188,7 @@ namespace Server.Engines.Gather {
 	}
 
 	public void OnConcurrentGather( Mobile from, Item tool, object targeted ) {
-	    // l33t code here
+	    //l33t code goes here yo
 	}
 
 	//play the animations/sfx, do some checks
@@ -229,11 +229,14 @@ namespace Server.Engines.Gather {
 	    }
 
 	    if ( from.CheckSkill( s, chance ) ){
-
+		SendSuccessMessage(from);
 		GiveResources( n, from, true );
+		from.EndAction( locked );
 		return true;
 	    }
-	    
+
+	    SendFailMessage(from);
+	    from.EndAction( locked );
 	    return false;
 	}
 

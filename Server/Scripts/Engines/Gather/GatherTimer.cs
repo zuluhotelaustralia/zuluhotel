@@ -20,6 +20,8 @@ namespace Server.Engines.Gather
 	    m_Locked = locked;
 	    m_Count = from.AutoLoop;
 	    m_Node = node;
+
+	    Console.WriteLine("creating a gathertimer");
 	}
 
 	protected override void OnTick()
@@ -27,9 +29,11 @@ namespace Server.Engines.Gather
 	    m_Count--;
 	    
 	    if ( !m_System.CheckWhileGathering( m_From, m_Tool, m_Targeted, m_Locked, m_Node ) ){
+		Console.WriteLine("Stopping timer: !checkwhilegathering");
 		Stop();
 	    }
 	    if ( m_Count <= 0 ) {
+		Console.WriteLine("Stopping timer: count <= 0");
 		Stop();
 	    }
 	}
