@@ -14,6 +14,7 @@ using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
+using Server.Targeting;
 
 namespace Server.Accounting
 {
@@ -28,8 +29,33 @@ namespace Server.Accounting
 	public static void Configure()
 	{
 	    CommandSystem.Register("ConvertCurrency", AccessLevel.Owner, ConvertCurrency);
+	    CommandSystem.Register("AntiAFKStats", AccessLevel.Developer, AntiAFKStats);
+	   // CommandSystem.Register("SetTrust", AccessLevel.Developer, SetTrust);
+	    //CommandSystem.Register("MakeAppointment", AccessLevel.Developer, MakeAppointment);
 	}
 
+	private static void AntiAFKStats( CommandEventArgs e ){
+	    e.Mobile.Target = new AntiAFKTarget( );
+	}
+	public class AntiAFKTarget : Target {
+	    private Mobile m_Target;
+
+	    public AntiAFKTarget ( ) : base( -1, true, TargetFlags.None ){
+	    }
+
+	    protected override void OnTarget( Mobile from, object targeted ){
+		//case 0: get stats
+		//case 1: set date
+		//case 2: set trust
+		if (targeted is PlayerMobile){
+		    m_Target = (Mobile)targeted;
+		    Account acct = m_Target.Account as Account;
+
+		    from.SendMessage("Trust score is {0}, Next challenge datetime is {1}", acct.TrustScore, acct.NextTransaction );
+		}
+	    }
+	}
+		        
 	private static void ConvertCurrency(CommandEventArgs e)
 	{
 	    e.Mobile.SendMessage(

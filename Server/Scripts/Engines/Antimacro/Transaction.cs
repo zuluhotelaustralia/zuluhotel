@@ -27,8 +27,8 @@ namespace Server.Antimacro
 	    m_Subject = m;
 	    m_SubjectAccount = m_Subject.Account as Accounting.Account;
 	    m_AttemptsRemaining = 3;
-	    SendChallenge();
 	    m_Timer = new AntimacroTimer( m_Subject, this );
+	    SendChallenge();	    
 	}
 
 	private void Decide( ResponseType response ) {
