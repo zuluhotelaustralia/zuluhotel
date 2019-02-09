@@ -240,6 +240,7 @@ namespace Server.Engines.Gather
 	private Mining()
 	{
 	    m_Nodes = new List<GatherNode>();
+	    m_EffectsHolder = new GatherFXHolder();
 	    
 	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof(IronOre) );
 	    m_Nodes.Add(node);
