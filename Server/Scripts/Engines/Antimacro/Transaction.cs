@@ -35,21 +35,58 @@ namespace Server.Antimacro
 		case ResponseType.BadMath:
 		    m_Subject.SendMessage("You failed the test and will be disconnected.");
 		    m_Timer.Stop();
+		    MutateTrustScore( false );
 		    m_Subject.NetState.Dispose();
 		    break;
 		case ResponseType.TimeOut:
 		    m_Subject.SendMessage("You failed to respond to the Anti-AFK Gathering test in time and will be disconnected.");
+		    MutateTrustScore( false );
 		    m_Subject.NetState.Dispose(); //kick
 		    break;
 		case ResponseType.GoodMath:
 		    m_Subject.SendMessage( "Thank you.  Your presence at the keyboard has been recorded and we apologize for the inconvenience." );
-		    //adjust trust score here
+		    MutateTrustScore( true );
 		    m_Timer.Stop();
 		    break;
 		default:
 		    Console.WriteLine("WARNING:  THIS SHOULD NEVER HAPPEN (AntimacroTransaction)");
 		    break;
-	    }	    
+	    }
+
+	    SetNextDateTime();
+	}
+
+	public void SetNextDateTime() {
+	    double score = m_SubjectAccount.TrustScore;
+	    DateTime next = DateTime.UtcNow;
+	    
+	    if ( score > 0.85 ) {
+		next.Add(new TimeSpan(7, 0, 0, 0) ); //test em next week
+	    }
+
+	    if ( score <= 0.85 && score > 0.5 ) {
+		next.Add( new TimeSpan(1, 0, 0, 0) ); // test em tomorrow
+	    }
+
+	    if ( score <= 0.5 && score > 0.3 ) {
+		next.Add( new TimeSpan(8, 0, 0) ); // test em in 8hrs
+	    }
+
+	    if ( score <= 0.3 ) {
+		next.Add( new TimeSpan(1, 0, 0) ); // test em basically as soon as they reconnect and start gathering again.
+	    }
+
+	    m_SubjectAccount.TrustScore = next;
+	}
+	
+	public void MutateTrustScore( bool good ) {
+	    double current = m_SubjectAccount.TrustScore;
+	    if ( good ) {
+		m_SubjectAccount.TrustScore = (0.8 * current) + 0.1; //i dunno
+	    }
+	    else{
+		m_SubjectAccount.TrustScore = current * 0.5;
+	    }
 	}
 
 	public void OKResponseCallback() {
