@@ -14,7 +14,6 @@ namespace Server.Antimacro
     public class AntimacroTransaction {
 	private Mobile m_Subject;
 	private Account m_SubjectAccount;
-	private double m_SubjectTrustScore;
 	private int m_AttemptsRemaining;
 	private AntimacroTimer m_Timer;
 
@@ -27,7 +26,6 @@ namespace Server.Antimacro
 	public AntimacroTransaction( Mobile m ) {
 	    m_Subject = m;
 	    m_SubjectAccount = m_Subject.Account as Accounting.Account;
-	    m_SubjectTrustScore = m_SubjectAccount.TrustScore;
 	    m_AttemptsRemaining = 3;
 	    m_Timer = new AntimacroTimer( m_Subject, this );
 	}

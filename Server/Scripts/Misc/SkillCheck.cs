@@ -2,6 +2,7 @@ using System;
 using Server;
 using Server.Mobiles;
 using Server.Factions;
+using Server.Antimacro;
 
 namespace Server.Misc
 {

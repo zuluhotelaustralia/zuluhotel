@@ -175,7 +175,15 @@ namespace Server.Accounting
 	[CommandProperty(AccessLevel.Administrator)]
 	public double TrustScore {
 	    get { return m_TrustScore; }
-	    set { m_TrustScore = value; }
+	    set {
+		m_TrustScore = value;
+		if( m_TrustScore > 1.0 ){
+		    m_TrustScore = 1.0;
+		}
+		if( m_TrustScore < 0.0 ){
+		    m_TrustScore = 0.0;
+		}
+	    }
 	}
 
 	// when should we challenge them next
