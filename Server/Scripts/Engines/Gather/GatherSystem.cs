@@ -325,13 +325,13 @@ namespace Server.Engines.Gather {
 		// is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
 		// --sith
 
-		return GetDefaultNode();
+		nodes.Add(GetDefaultNode());
 	    }
 
 	    return nodes;
 	}
 
-	public virtual GatherNode GetDefaultNode() {}
+	public abstract GatherNode GetDefaultNode();
 
 	//roll a random number against the list from BuildNodeList to determine which node we try to strike
 	public GatherNode Strike( List<GatherNode> nodes ){
