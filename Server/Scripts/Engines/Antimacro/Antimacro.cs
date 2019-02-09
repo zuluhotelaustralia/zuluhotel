@@ -5,9 +5,14 @@ using Server.Network;
 using Server.Commands;
 using Server.Targeting;
 using Server.Mobiles;
+
 /*
 There are a Gump, a Timer, and a utility Target class here.  The idea is that a separate system, perhaps with a control stone for easy staff access, will control when to send
 macro test challenges to whom.  The actual call/query to the macrotest system should be made whenever someone swings an axe/fishing pole, etc.
+
+  CheckSkill() <--+---> Control Stone --->-------> system object (this class) ->-+
+                  |                                                              |
+                  +----------<--------------<---------<------------<--------<----+
  */
 
 namespace Server.Antimacro
@@ -25,8 +30,8 @@ namespace Server.Antimacro
 	protected override void OnTarget( Mobile from, object o )
 	{
 	    if ( o is PlayerMobile ) {
-		m_Suspect = (PlayerMobile)o;
-		m_Suspect.SendGump(new AntimacroGump(m_Suspect) );
+		m_Suspect = (Mobile)o;
+		new AntimacroTransaction( m_Suspect );
 	    }
 	    else {
 		m_From.SendMessage("Must target PlayerMobiles.");
@@ -37,21 +42,19 @@ namespace Server.Antimacro
     class AntimacroTimer : Timer
     {
 	private Mobile m_Suspect;
+	private AntimacroTransaction m_Transaction;
 
-	public AntimacroTimer( Mobile suspect ) : base( TimeSpan.FromMinutes( 1.0 ) )
+	public AntimacroTimer( Mobile suspect, AntimacroTransaction txn ) : base( TimeSpan.FromMinutes( 5.0 ) )
 	{
 	    m_Suspect = suspect;
+	    m_Transaction = txn;
 	    Priority = TimerPriority.OneMinute;
 	    Console.WriteLine("Antimacro timer created for character {0}", m_Suspect.Name);
 	}
 
 	protected override void OnTick()
 	{
-	    Console.WriteLine("Timer has ticked");
-	    m_Suspect.SendMessage("Time's up:  JAIL MOTHERFUCKER");
-	    //TODO: jail them
-	    // probably also record the jailing action in the logs
-	    // probably also have something on their account or character to note jail frequency and duration so we can escalate.
+	    m_Transaction.TimeOutCallback();
 	}
     }
     
@@ -78,21 +81,14 @@ namespace Server.Antimacro
 	private int num1;
 	private int num2;
 	private int m_AttemptsRemaining;
-	private AntimacroTimer m_JailTimer; //need to move this because a new one is created every time the gump gets dismissed
-	// create a meta object to store all these, like a "macrotest transaction" or something
 	private Mobile m_Suspect;
+	private AntimacroTransaction m_Transaction;
 	
-	public AntimacroGump( Mobile suspect, int chances = 3 ) : base( 100, 100 )
+	public AntimacroGump( Mobile suspect, int chances, AntimacroTransaction txn ) : base( 100, 100 )
 	{
 	    m_Suspect = suspect;
 	    m_AttemptsRemaining = chances;
-	    //start a timer
-	    m_JailTimer = new AntimacroTimer( m_Suspect );
-	    m_JailTimer.Start();
-	    
-	    // if they don't reply by the time it ticks, jail them and dismiss the gump
-	    // if they fuck up the math, they get 2 more chances.
-	    // if they reply correctly before the timer ticks, kill the timer without jailing them.
+	    m_Transaction = txn;
 	    
 	    Closable = false;
 	    Disposable = true;
@@ -140,23 +136,14 @@ namespace Server.Antimacro
 			
 			if( sum == response ) {
 			    //they got it right, we can assume they're legit
-			    from.SendMessage( "Thank you.  Your presence at the keyboard has been recorded and we apologize for the inconvenience." );
-			    m_JailTimer.Stop();
+			    m_Transaction.OKResponseCallback();
 			    break;
 			}
 
 			//if we make it this far then sum != message i.e. they got it wrong
 			
-			if( m_AttemptsRemaining > 1 ){
-			    from.SendMessage( "You replied: {0}, whereas the correct resposnse was: {1}", response, sum );
-			    from.SendGump( new AntimacroGump( from, m_AttemptsRemaining -= 1 ) );
-			}
-			else {
-			    from.SendMessage( "JAIL MOTHERFUCKER" );
-			    m_JailTimer.Stop(); //we're jailing them but for a different reason
-			    // disconnect them when you jail them so the gump goes away (and for performance)
-			    //todo
-			}
+			from.SendMessage( "You replied: {0}, whereas the correct response was: {1}", response, sum );
+			m_Transaction.BadResponseCallback();
 			break;
 		    }
 	    }
