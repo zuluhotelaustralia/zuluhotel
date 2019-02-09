@@ -857,7 +857,11 @@ namespace Server.Accounting
 	    m_Flags = Utility.GetXMLInt32( Utility.GetText( node["flags"], "0" ), 0 );
 	    m_Created = Utility.GetXMLDateTime( Utility.GetText( node["created"], null ), DateTime.UtcNow );
 	    m_LastLogin = Utility.GetXMLDateTime( Utility.GetText( node["lastLogin"], null ), DateTime.UtcNow );
-			
+
+	    //anti afk gathering
+	    m_TrustScore = Utility.GetXMLDouble( Utility.GetText( node["trustScore"], null), 0.0 );
+	    m_NextTransaction = Utility.GetXMLDateTime( Utility.GetText( node["nextTransaction"], null ), DateTime.UtcNow );
+	    
 	    TotalCurrency = Utility.GetXMLDouble( Utility.GetText(node["totalCurrency"], "0" ), 0 );
 
 	    m_Mobiles = LoadMobiles( node );
@@ -1215,6 +1219,15 @@ namespace Server.Accounting
 
 	    xml.WriteStartElement( "totalGameTime" );
 	    xml.WriteString( XmlConvert.ToString( TotalGameTime ) );
+	    xml.WriteEndElement();
+
+	    //for automated macro checks
+	    xml.WriteStartElement( "macroTrust" );
+	    xml.WriteString( XmlConvert.ToString( TrustScore ));
+	    xml.WriteEndElement();
+
+	    xml.WriteStartElement( "nextTransaction" );
+	    xml.WriteString( XmlConvert.ToString( NextTransaction ) );
 	    xml.WriteEndElement();
 
 	    xml.WriteStartElement( "chars" );
