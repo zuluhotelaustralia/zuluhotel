@@ -76,7 +76,7 @@ namespace Server.Antimacro
 		next.Add( new TimeSpan(1, 0, 0) ); // test em basically as soon as they reconnect and start gathering again.
 	    }
 
-	    m_SubjectAccount.TrustScore = next;
+	    m_SubjectAccount.NextTransaction = next;
 	}
 	
 	public void MutateTrustScore( bool good ) {
