@@ -108,7 +108,7 @@ namespace Server.Engines.Gather {
 	    if ( !base.BeginGathering( from, tool ) )
 		return false;
 
-	    // from.SendLocalizedMessage( 503033 ); // Where do you wish to dig?
+	    from.SendLocalizedMessage( 1151657 ); // Where do you wish to use this?
 	    return true;
 	}
 
@@ -174,6 +174,18 @@ namespace Server.Engines.Gather {
 	    }
 
 	    return true;
+	}
+
+	public override void SendFailMessage( Mobile m ) {
+	    m.SendLocalizedMessage( 500495 ); // You hack at the tree for a while but...
+	}
+
+	public override void SendNoResourcesMessage( Mobile m) {
+	    m.SendLocalizedMessage( 500493 ); //there's not enough wood here to harvest
+	}
+
+	public override void SendSuccessMessage( Mobile m ) {
+	    m.SendLocalizedMessage( 500498 ); //you put some logs into your backpack
 	}
 
 	private Lumberjacking( Serial serial) : this() {}

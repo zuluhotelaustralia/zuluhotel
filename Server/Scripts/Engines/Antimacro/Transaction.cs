@@ -27,6 +27,7 @@ namespace Server.Antimacro
 	    m_Subject = m;
 	    m_SubjectAccount = m_Subject.Account as Accounting.Account;
 	    m_AttemptsRemaining = 3;
+	    SendChallenge();
 	    m_Timer = new AntimacroTimer( m_Subject, this );
 	}
 
@@ -110,7 +111,8 @@ namespace Server.Antimacro
 	}
 	
 	public void SendChallenge() {
-	    //entrypoint
+	    //entrypoint, sorta
+	    Console.WriteLine("Sending anti-afk challenge...");
 	    m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
 	    m_Timer.Start();
 	}

@@ -229,13 +229,18 @@ namespace Server.Engines.Gather {
 	    }
 
 	    if ( from.CheckSkill( s, chance ) ){
+
 		GiveResources( n, from, true );
 		return true;
 	    }
-
+	    
 	    return false;
 	}
 
+	public abstract void SendFailMessage( Mobile m );
+	public abstract void SendNoResourcesMessage( Mobile m );
+	public abstract void SendSuccessMessage( Mobile m );
+	
 	public virtual void GiveResources( GatherNode n, Mobile m, bool placeAtFeet ){
 	    //public virtual bool Give( Mobile m, Item item, bool placeAtFeet )
 	    Item item = Construct ( n.Resource );

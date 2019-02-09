@@ -233,6 +233,18 @@ namespace Server.Engines.Gather
 
 	    return true;
 	}
+
+	public override void SendFailMessage( Mobile m ) {
+	    m.SendLocalizedMessage( 503043 ); // You loosen some rocks but...
+	}
+
+	public override void SendNoResourcesMessage( Mobile m) {
+	    m.SendLocalizedMessage( 503040 ); //there's no metal here to mine
+	}
+
+	public override void SendSuccessMessage( Mobile m ) {
+	    m.SendLocalizedMessage( 1044606 ); //you extract some bla bla bla
+	}
 	
 	private Mining( Serial serial ) : this() {
 	}

@@ -12,6 +12,18 @@ namespace Server.Engines.Gather {
 	    BigFish
 	}
 
+	public override void SendFailMessage( Mobile m ) {
+	    m.SendLocalizedMessage( 503171 ); // You fish for a while but...
+	}
+
+	public override void SendNoResourcesMessage( Mobile m) {
+	    m.SendLocalizedMessage( 5031 ); //the fish don't seem to be biting
+	}
+
+	public override void SendSuccessMessage( Mobile m ) {
+	    m.SendLocalizedMessage( 1042635 ); //you extract some bla bla bla
+	}
+
 	private Fishing( Serial serial ) : this() {
 	}
 
