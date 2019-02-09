@@ -62,19 +62,19 @@ namespace Server.Antimacro
 	    DateTime next = DateTime.UtcNow;
 	    
 	    if ( score > 0.85 ) {
-		next.Add(new TimeSpan(7, 0, 0, 0) ); //test em next week
+		next = next.Add(new TimeSpan(7, 0, 0, 0) ); //test em next week
 	    }
 
 	    if ( score <= 0.85 && score > 0.5 ) {
-		next.Add( new TimeSpan(1, 0, 0, 0) ); // test em tomorrow
+		next = next.Add( new TimeSpan(1, 0, 0, 0) ); // test em tomorrow
 	    }
 
 	    if ( score <= 0.5 && score > 0.3 ) {
-		next.Add( new TimeSpan(8, 0, 0) ); // test em in 8hrs
+		next = next.Add( new TimeSpan(8, 0, 0) ); // test em in 8hrs
 	    }
 
 	    if ( score <= 0.3 ) {
-		next.Add( new TimeSpan(1, 0, 0) ); // test em basically as soon as they reconnect and start gathering again.
+		next = next.Add( new TimeSpan(1, 0, 0) ); // test em basically as soon as they reconnect and start gathering again.
 	    }
 
 	    m_SubjectAccount.NextTransaction = next;
