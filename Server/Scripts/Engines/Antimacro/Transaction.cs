@@ -43,7 +43,7 @@ namespace Server.Antimacro
 		    break;
 		case ResponseType.GoodMath:
 		    m_Subject.SendMessage( "Thank you.  Your presence at the keyboard has been recorded and we apologize for the inconvenience." );
-		    m_SubjectAccount.TrustScore += 0.1;
+		    //adjust trust score here
 		    m_Timer.Stop();
 		    break;
 		default:

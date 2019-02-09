@@ -6,6 +6,8 @@ using Server.Mobiles;
 using Server.Items;
 using Server.Targeting;
 using Server.Commands;
+using Server.Accounting;
+using Server.Antimacro;
 
 /* 
    Zulu Hotel Gathering System
@@ -146,7 +148,18 @@ namespace Server.Engines.Gather {
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
 	    if( CheckTool(from, tool) ){
 
-		//check for unattended macroing here
+		Account acct = from.Account as Account;
+		//check for unattended/afk gathering here
+		//from msdn:  DateTime.Compare(t1, t2) returns positive integer if t1 is later than t2
+				
+		if ( DateTime.Compare(acct.NextTransaction, DateTime.UtcNow ) <= 0 ) {
+		    // give high-trust users a break... can tweak this later
+		    // e.g. if your trust score is 98% you'll only get a challenge 2% of the time your
+		    // challenge date comes up
+		    if ( Utility.RandomDouble() > acct.TrustScore ) {
+			new AntimacroTransaction(from);
+		    }
+		}		    
 		
 		//TODO:  can this be called if from is dead?
 		from.Target = new GatherTarget( tool, this );
