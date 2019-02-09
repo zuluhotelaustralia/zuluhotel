@@ -319,8 +319,19 @@ namespace Server.Engines.Gather {
 		}
 	    }
 
+	    if ( nodes.Count <= 0 ) {
+		//it's entirely possible to be in a dead spot where you're too far away from every node
+		// and can't hit anything.  this will cause a server crash in Strike(), and more importantly
+		// is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
+		// --sith
+
+		return GetDefaultNode();
+	    }
+
 	    return nodes;
 	}
+
+	public virtual GatherNode GetDefaultNode() {}
 
 	//roll a random number against the list from BuildNodeList to determine which node we try to strike
 	public GatherNode Strike( List<GatherNode> nodes ){

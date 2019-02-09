@@ -16,6 +16,7 @@ namespace Server.Engines.Gather {
 	}
 
 	private Fishing() {
+	    m_EffectsHolder = new GatherFXHolder();
 	    
 	    m_EffectsHolder.EffectActions = new int[]{ 12 };
 	    m_EffectsHolder.EffectSounds = new int[0];

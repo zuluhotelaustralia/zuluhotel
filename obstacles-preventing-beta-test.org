@@ -23,6 +23,7 @@ This is a list of all the things that need to be done before we can launch a bet
 ** DONE initial setup command
 ** TODO verify lumberjacking is complete
 *** TODO it's not:  It doesn't play animations or give you any resources
+*** TODO also there's an issue with l33t code missing in onconcurrentgather()
 *** DONE also it asks you where you want to mine
 ** TODO verify fishing is complete
 ** TODO verify/fix cliloc strings in gathering engine
