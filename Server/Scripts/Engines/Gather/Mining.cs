@@ -233,7 +233,7 @@ namespace Server.Engines.Gather
 
 	    return true;
 	}
-
+	
 	private Mining( Serial serial ) : this() {
 	}
 	
