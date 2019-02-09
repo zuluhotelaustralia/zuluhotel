@@ -20,6 +20,10 @@ namespace Server.Antimacro
 	    m_SubjectAccount = m_Subject.Account as Accounting.Account;
 	}
 
-	public void Decide
+	public void Decide() {
+	    
+	}
+
+	public void SendChallenge() {}
     }
 }
