@@ -184,8 +184,11 @@ namespace Server.Engines.Gather {
 	    GatherNode n = Strike( BuildNodeList( s, from ) );
 
 	    new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
-	    CheckWhileGathering( from, tool, targeted, toLock, n );
+	    StartGatherResultsTimer( from, tool, this, n, targeted, toLock );
+	    
 	}
+
+	public abstract void StartGatherResultsTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked );
 
 	public void OnConcurrentGather( Mobile from, Item tool, object targeted ) {
 	    //l33t code goes here yo
@@ -203,7 +206,10 @@ namespace Server.Engines.Gather {
 	    }
 	    
 	    from.RevealingAction();
+	    return true;
+	}
 
+	public virtual void FinishGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
 	    Skill s = from.Skills[m_SkillName];
 	    
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
@@ -232,12 +238,11 @@ namespace Server.Engines.Gather {
 		SendSuccessMessage(from);
 		GiveResources( n, from, true );
 		from.EndAction( locked );
-		return true;
+		return;
 	    }
 
 	    SendFailMessage(from);
 	    from.EndAction( locked );
-	    return false;
 	}
 
 	public abstract void SendFailMessage( Mobile m );

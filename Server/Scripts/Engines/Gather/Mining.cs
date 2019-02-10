@@ -234,6 +234,21 @@ namespace Server.Engines.Gather
 	    return true;
 	}
 
+	public override void StartGatherResultsTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
+	    TimeSpan delay = m_EffectsHolder.EffectDelay;
+	    int which = TimeSpan.Compare(m_EffectsHolder.EffectDelay, m_EffectsHolder.EffectSoundDelay);
+	    // if which == -1, argument 1 shorter than arg2
+	    // if which == 0, they're equal
+	    // if which == 1, arg1 longer than arg2
+	    // therefore
+	    
+	    if ( which < 1 ) {
+		delay = m_EffectsHolder.EffectSoundDelay;
+	    }
+	    
+	    new GatherResultsTimer( from, tool, system, node, targeted, locked, delay ).Start();
+	}
+	
 	public override void SendFailMessage( Mobile m ) {
 	    m.SendLocalizedMessage( 503043 ); // You loosen some rocks but...
 	}
