@@ -255,7 +255,7 @@ namespace Server.Engines.Gather {
 	public virtual void GiveResources( GatherNode n, Mobile m, bool placeAtFeet ){
 	    //public virtual bool Give( Mobile m, Item item, bool placeAtFeet )
 	    Item item = Construct ( n.Resource );
-
+	  
 	    if( item.Stackable ){
 		int amount = Utility.Dice(1, 5, 2); //1d5+2, TODO change this to be skill based
 		if( m is PlayerMobile ){
@@ -296,8 +296,8 @@ namespace Server.Engines.Gather {
 
 	public virtual Item Construct( Type type )
 	{
-	    try{ return Activator.CreateInstance( type ) as Item; }
-	    catch{ return null; }
+	    object o = Activator.CreateInstance( type );
+	    return (Item)o;
 	}
 
 

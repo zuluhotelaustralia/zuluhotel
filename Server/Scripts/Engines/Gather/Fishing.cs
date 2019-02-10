@@ -52,7 +52,7 @@ namespace Server.Engines.Gather {
 	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds( 8.0 );
 	    
 	    m_Nodes = new List<GatherNode>();
-	    GatherNode node = new GatherNode (0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof( Fish ) );
+	    GatherNode node = new GatherNode (0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof( Items.Fish ) );
 	    m_Nodes.Add(node);
 	}
 
