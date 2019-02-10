@@ -26,6 +26,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE also there's an issue with l33t code missing in onconcurrentgather()
 *** DONE also it asks you where you want to mine
 ** TODO verify fishing is complete
+** TODO verify mining is complete
 ** DONE verify/fix cliloc strings in gathering engine
 ** DONE turns out we gotta generate the logs:  make and awk here we go fuckers
 ** DONE actually give them resources
@@ -133,11 +134,12 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 
-* TODO Items to tackle after launching beta but before "1.0" [10/24]
+* TODO Items to tackle after launching beta but before "1.0" [11/25]
 :properties:
 :cookie_data: todo recursive
 :end:
-** TODO Fix gathersystem timing so it awards resources after the animation plays
+** DONE Fix gathersystem timing so it awards resources after the animation plays
+** TODO gathersystem asks "where do you wish to place this?" when lumberjacking
 ** TODO make an ongoing minigame environment to encourage pvp during beta/debugging phase
 *** TODO make it tarkov or pubg or something
 ** TODO ensure only spec crafters can work with and mine the jewels

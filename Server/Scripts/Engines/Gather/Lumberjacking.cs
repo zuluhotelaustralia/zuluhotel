@@ -108,7 +108,8 @@ namespace Server.Engines.Gather {
 	    if ( !base.BeginGathering( from, tool ) )
 		return false;
 
-	    from.SendLocalizedMessage( 1151657 ); // Where do you wish to use this?
+	    //from.SendLocalizedMessage( 1151657 ); // Where do you wish to use this?
+	    // baseaxe or something else already sends a cliloc, also 1151657 is actually "where do you wish to place this?" which looks retarded
 	    return true;
 	}
 
