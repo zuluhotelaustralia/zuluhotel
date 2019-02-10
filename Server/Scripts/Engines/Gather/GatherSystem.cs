@@ -171,6 +171,7 @@ namespace Server.Engines.Gather {
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
+	    from.RevealingAction();
 	    
 	    object toLock = GetLock( from, tool, targeted );
 
@@ -183,25 +184,27 @@ namespace Server.Engines.Gather {
 	    Skill s = from.Skills[m_SkillName];
 	    GatherNode n = Strike( BuildNodeList( s, from ) );
 
-	    new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
-	    StartGatherResultsTimer( from, tool, this, n, targeted, toLock );
-	    
+	    //new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
+	    StartGatherTimer( from, tool, this, n, targeted, toLock );
 	}
 
-	public abstract void StartGatherResultsTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked );
+	public abstract void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked );
 
 	public void OnConcurrentGather( Mobile from, Item tool, object targeted ) {
 	    //l33t code goes here yo
 	}
 
-	//play the animations/sfx, do some checks
 	// also make sure they haven't moved, aren't dead, etc.
 	public virtual bool CheckWhileGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
 	    //if they moved, etc. return false
 	    if( !CheckRange(from, tool, targeted) ){
+		from.SendLocalizedMessage( 1076766 ); //that is too far away
+		from.EndAction(locked);
 		return false;
 	    }
 	    if( !from.Alive ){
+		from.SendLocalizedMessage( 1060190 ); //can't do that while dead fucktard
+		from.EndAction(locked);
 		return false;
 	    }
 	    

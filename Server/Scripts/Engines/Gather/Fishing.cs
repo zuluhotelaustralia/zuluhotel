@@ -24,7 +24,7 @@ namespace Server.Engines.Gather {
 	    m.SendLocalizedMessage( 1042635 ); //you extract some bla bla bla
 	}
 
-	public override void StartGatherResultsTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
+	public override void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
 	    TimeSpan delay = m_EffectsHolder.EffectDelay;
 	    int which = TimeSpan.Compare(m_EffectsHolder.EffectDelay, m_EffectsHolder.EffectSoundDelay);
 	    // if which == -1, argument 1 shorter than arg2
@@ -36,7 +36,7 @@ namespace Server.Engines.Gather {
 		delay = m_EffectsHolder.EffectSoundDelay;
 	    }
 	    
-	    new GatherResultsTimer( from, tool, system, node, targeted, locked, delay ).Start();
+	    new GatherTimer( from, tool, system, node, targeted, locked, delay ).Start();
 	}
 
 	private Fishing( Serial serial ) : this() {
