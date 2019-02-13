@@ -141,7 +141,8 @@ namespace Server.Items {
 	    string res;
 
 	    int length;
-	    
+
+	    m_System.ClearNodes();
 	    switch( version )
 	    {
 		case 0:

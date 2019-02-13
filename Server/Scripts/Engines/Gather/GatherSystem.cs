@@ -218,7 +218,7 @@ namespace Server.Engines.Gather {
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
 	    double chance;
 	    
-	    if ( s.Value < n.MinSkill ) {
+	    if ( s.Value < n.Difficulty ) {
 		chance = 0.0;
 	    }
 	    else {
@@ -308,7 +308,7 @@ namespace Server.Engines.Gather {
 
 	    double dist = Math.Sqrt( (double)(deltaX^2) * (double)(deltaY^2) );
 
-	    double a = Math.Exp( -1 * dist / n.Difficulty ); // exponential decay
+	    double a = ( n.Abundance * n.Difficulty ) / dist; // exponential decay
 
 	    if ( a > 1.0 ) {
 		return true;
@@ -336,7 +336,7 @@ namespace Server.Engines.Gather {
 	    }
 
 	    if ( nodes.Count <= 0 ) {
-		//it's entirely possible to be in a dead spot where you're too far away from every node
+		//it's unlikely but entirely possible to be in a dead spot where you're too far away from every node
 		// and can't hit anything.  this will cause a server crash in Strike(), and more importantly
 		// is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
 		// --sith

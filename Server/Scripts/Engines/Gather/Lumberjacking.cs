@@ -76,6 +76,22 @@ namespace Server.Engines.Gather {
 	    m_Controller = stone;
 	    m_Controller.System = System; //see Mining.cs
 	    m_System.SkillName = SkillName.Lumberjacking;
+	    
+	    m_System.Nodes.Clear(); //the default constructor puts a placeholder node in
+
+	    int x = 0;
+	    int y = 0;
+	    
+	    foreach ( string s in Enum.GetNames( typeof( Logs ) ) ){
+		GatherNode node = new GatherNode( x + Utility.RandomMinMax(0, 100),
+						  y + Utility.RandomMinMax(0, 100),
+						  Utility.RandomMinMax(0,10),
+						  Utility.RandomMinMax(0,10),
+						  Utility.RandomDouble(),
+						  250.0, 100.0, 150.0, Type.GetType( "Server.Items." + s ) );
+		Console.WriteLine("GatherSystemController setup: Server.Items.{0}", s );
+		m_System.Nodes.Add(node);
+	    }
 	}
 	
         private static Lumberjacking m_System;

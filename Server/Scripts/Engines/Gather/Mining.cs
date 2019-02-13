@@ -124,6 +124,19 @@ namespace Server.Engines.Gather
 	    m_Controller = stone;
 	    m_Controller.System = System; //if you use m_System here, it's not initialized and will fuck you up.
 	    m_System.SkillName = SkillName.Mining;
+
+	    m_Nodes.Clear();
+
+	    foreach ( string s in Enum.GetNames( typeof( Ores) ) ){
+		GatherNode node = new GatherNode( x + Utility.RandomMinMax(0, 100),
+						  y + Utility.RandomMinMax(0, 100),
+						  Utility.RandomMinMax(0,10),
+						  Utility.RandomMinMax(0,10),
+						  Utility.RandomDouble(),
+						  250.0, 100.0, 150.0, Type.GetType( "Server.Items." + s ) );
+		Console.WriteLine("GatherSystemController setup: Server.Items.{0}", s );
+		m_Nodes.Add(node);
+	    }
 	}
 	
 	private static Mining m_System;
@@ -261,15 +274,14 @@ namespace Server.Engines.Gather
 	    m.SendLocalizedMessage( 1044606 ); //you extract some bla bla bla
 	}
 	
-	private Mining( Serial serial ) : this() {
-	}
-	
 	private Mining()
 	{
 	    m_Nodes = new List<GatherNode>();
 	    m_EffectsHolder = new GatherFXHolder();
-	    
-	    GatherNode node = new GatherNode( 0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof(IronOre) );
+	    int x = 0;
+	    int y = 0; //change these to be LB's Throne xy
+
+	    GatherNode node = new GatherNode( 0, 0, 10, 10, 250.0, 100.0, 150.0, typeof(IronOre));
 	    m_Nodes.Add(node);
 	    
 	    m_EffectsHolder.EffectActions = new int[]{ 11 };
