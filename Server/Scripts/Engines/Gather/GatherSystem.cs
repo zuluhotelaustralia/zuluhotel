@@ -308,7 +308,7 @@ namespace Server.Engines.Gather {
 
 	    double dist = Math.Sqrt( (double)(deltaX^2) * (double)(deltaY^2) );
 
-	    double a = ( n.Abundance * n.Difficulty ) / dist; // exponential decay
+	    double a = ( n.Abundance * n.Difficulty ) / dist; // kinda exponential decay
 
 	    if ( a > 1.0 ) {
 		return true;
