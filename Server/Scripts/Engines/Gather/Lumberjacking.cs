@@ -134,6 +134,8 @@ namespace Server.Engines.Gather {
 					       0.1, 10.0, 130.0, 150.0, typeof(Server.Items.DarknessLog) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),
 					       0.1, 10.0, 130.0, 150.0, typeof(Server.Items.ElvenLog) ));
+
+	    Console.WriteLine("Complete");
 	}
 	
         private static Lumberjacking m_System;
