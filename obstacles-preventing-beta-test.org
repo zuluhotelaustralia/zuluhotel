@@ -26,6 +26,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE also there's an issue with l33t code missing in onconcurrentgather()
 *** DONE also it asks you where you want to mine
 ** TODO verify fishing is complete
+*** TODO it's not:  there's no sound or animation
 ** TODO verify mining is complete
 ** DONE add the other nodes to each resource
 ** DONE verify/fix cliloc strings in gathering engine

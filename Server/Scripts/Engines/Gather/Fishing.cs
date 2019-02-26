@@ -70,8 +70,9 @@ namespace Server.Engines.Gather {
 
 	    m_System.m_Nodes.Clear();
 
-	    int x = 0;
-	    int y = 0;
+	    //LB's throne
+	    int x = 1323;
+	    int y = 1624;
 	    
 	    Console.WriteLine("Gather Engine: Setting up fishing nodes...");
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0, 10), Utility.RandomMinMax(0, 10),
