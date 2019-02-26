@@ -119,11 +119,11 @@ namespace Server.Engines.Gather {
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),
 					       0.5, 90.0, 70.0, 130.0, typeof(Server.Items.StormtealLog) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),
-					       0.5, 90.0, 80.0, 150.0, typeof(Server.Items.EmeraldLog) ));
+					       0.5, 90.0, 80.0, 150.0, typeof(Server.Items.EmeraldwoodLog) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),
 					       0.4, 80.0, 90.0, 150.0, typeof(Server.Items.BloodwoodLog) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),
-					       0.3, 80.0, 100.0, 150.0, typeof(Server.Items.CrystalLog) ));
+					       0.3, 80.0, 100.0, 150.0, typeof(Server.Items.CrystalwoodLog) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),
 					       0.3, 70.0, 100.0, 150.0, typeof(Server.Items.BloodhorseLog) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10),

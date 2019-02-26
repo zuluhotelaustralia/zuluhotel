@@ -68,16 +68,17 @@ namespace Server.Engines.Gather {
 	    m_Controller.System = System; //see Mining.cs
 	    m_System.SkillName = SkillName.Fishing;
 
-	    m_Nodes.Clear();
+	    m_System.m_Nodes.Clear();
 
 	    int x = 0;
 	    int y = 0;
 	    
-	    Console.WriteLine("Gather Engine: Setting up mining nodes...");
-	    m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0, 10), Utility.RandomMinMax(0, 10),
+	    Console.WriteLine("Gather Engine: Setting up fishing nodes...");
+	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0, 10), Utility.RandomMinMax(0, 10),
 				       0.9, 250.0, 0.0, 150.0, typeof(Server.Items.Fish)));
-	    m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0, 10), Utility.RandomMinMax(0, 10),
+	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0, 10), Utility.RandomMinMax(0, 10),
 				       0.9, 250.0, 50.0, 150.0, typeof(Server.Items.Fish)));
+	    Console.WriteLine("Complete.");
 	}
 	
         private static Fishing m_System;
