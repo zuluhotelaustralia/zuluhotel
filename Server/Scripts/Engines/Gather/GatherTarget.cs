@@ -68,6 +68,7 @@ namespace Server.Engines.Gather
 		MineGrave(from, targeted);
 	    }
 
+	    //note separate if starts
 	    if ( m_System is Lumberjacking && targeted is IChopable )
 		((IChopable)targeted).OnChop( from );
 	    else if ( m_System is Lumberjacking && targeted is IAxe && m_Tool is BaseAxe )
@@ -86,8 +87,9 @@ namespace Server.Engines.Gather
 		DestroyFurniture( from, (Item)targeted );
 	    else if ( m_System is Mining && targeted is TreasureMap )
 		((TreasureMap)targeted).OnBeginDig( from );
-	    else
+	    else{
 		m_System.StartGathering( from, m_Tool, targeted );
+	    }
 	}
 
 	private void DestroyFurniture( Mobile from, Item item )

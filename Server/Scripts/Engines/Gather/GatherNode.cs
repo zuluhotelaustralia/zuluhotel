@@ -36,6 +36,10 @@ namespace Server.Engines.Gather {
 	public Type Resource { get { return m_Res; } set { m_Res = value; } }
 	public double Abundance { get { return m_Abundance; } set { m_Abundance = value; } }
 
+	public override string ToString() {
+	    return "GatherNode: " + m_Res.ToString() + " " + X + " " + Y + " " + Abundance + " " + Difficulty;
+	}
+	
 	public GatherNode() {
 	    m_X = 0;
 	    m_Y = 0;

@@ -26,6 +26,7 @@ namespace Server.Engines.Gather
 		GatherNode n = targ.System.Nodes[m_Index];
 
 		from.SendMessage("GatherNode: {0} {1} {2}", n.Resource, n.X, n.Y);
+		from.SendMessage(n.ToString());
 	    }
 	    else{
 		from.SendMessage("Bad target type");

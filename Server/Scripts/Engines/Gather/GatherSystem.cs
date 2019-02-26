@@ -166,6 +166,7 @@ namespace Server.Engines.Gather {
 		from.Target = new GatherTarget( tool, this );
 		return true;
 	    }
+
 	    return false; //should this function return false irrespective of checktool?
 	}
 
@@ -191,6 +192,7 @@ namespace Server.Engines.Gather {
 	public abstract void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked );
 
 	public void OnConcurrentGather( Mobile from, Item tool, object targeted ) {
+	    Console.WriteLine("FIXME:  OnConcurrentGather");
 	    //l33t code goes here yo
 	}
 
@@ -217,26 +219,26 @@ namespace Server.Engines.Gather {
 	    
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
 	    double chance;
+
+	    //I know we called it "Difficulty" in the GatherNode definition but that was an older
+	    //"version" if you will, and really the variable Difficulty now describes the ease
+	    //of gathering a given resource, and is kinda-sorta-defined on a scale of 250 to 10,
+	    // with 250 being "easiest" and 10 being "very very hard".
+	    //
+	    // we'll use minskill as a proxy for this since it makes the math a bit easier:
 	    
-	    if ( s.Value < n.Difficulty ) {
-		chance = 0.0;
+	    if( n.MinSkill <= 0.0 ) {
+		chance = s.Value * n.Abundance;
 	    }
 	    else {
 		chance = s.Value * n.Abundance / n.MinSkill;
-		
-		// e.g. for a rare ore (executor, let's say) with a=0.1,
-		// with mining skill of 90.0 against a reqskill of 80.0
-		// chance = 11.1%
-		// whereas, for a common ore (e.g. iron) with a=0.9
-		// with mining skill of 90.0 against a reqskill of 30.0
-		// chance = 270% i.e. you'll hit it every time you try
 	    }
-
+	
 	    //cap harvesting success rate at 98%
 	    if ( chance > 0.98 ) {
 		chance = 0.98;
 	    }
-
+	    
 	    if ( from.CheckSkill( s, chance ) ){
 		SendSuccessMessage(from);
 		GiveResources( n, from, true );
@@ -316,7 +318,7 @@ namespace Server.Engines.Gather {
 	    else if ( a < 0.01 ) {
 		return false;
 	    }
-	    
+
 	    return ( a >= Utility.RandomDouble() );
 	}
 
