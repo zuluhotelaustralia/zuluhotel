@@ -127,6 +127,9 @@ namespace Server.Engines.Gather
 
 	    m_Nodes.Clear();
 
+	    int x = 0;
+	    int y = 0;
+	    
 	    Console.WriteLine("Gather Engine: Setting up mining nodes...");
 	    m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(0, 100), y + Utility.RandomMinMax(0, 100), Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), 0.9,
 					 250.0, 0.0, 70.0, typeof(Server.Items.IronOre)));
