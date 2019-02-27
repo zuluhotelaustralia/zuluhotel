@@ -3,6 +3,7 @@ using Server;
 using Server.Items;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Targeting;
 
 namespace Server.Engines.Gather {
     public class Fishing : Server.Engines.Gather.GatherSystem {
@@ -13,14 +14,14 @@ namespace Server.Engines.Gather {
 	}
 
 	private static readonly int[] m_WaterTiles = new int[]
-        {
-            0x00A8, 0x00AB,
-            0x0136, 0x0137,
-            0x5797, 0x579C,
-            0x746E, 0x7485,
-            0x7490, 0x74AB,
-            0x74B5, 0x75D5
-        };
+	    {
+		0x00A8, 0x00AB,
+		0x0136, 0x0137,
+		0x5797, 0x579C,
+		0x746E, 0x7485,
+		0x7490, 0x74AB,
+		0x74B5, 0x75D5
+	    };
 
 	public override void SendFailMessage( Mobile m ) {
 	    m.SendLocalizedMessage( 503171 ); // You fish for a while but...
@@ -60,31 +61,22 @@ namespace Server.Engines.Gather {
 
 	    if( Validate( tileID ) ) {
 		m_EffectsHolder.PlayEffects( from, loc );
-		Effects.SendLocationEffect(loc, map, 0x352D, 16, 4)
+		Effects.SendLocationEffect(loc, from.Map, 0x352D, 16, 4);
 		base.StartGathering( from, tool, targeted );
 	    }
 	}
 
-		public bool Validate( int tileID )
+	public bool Validate( int tileID )
 	{
 	    // is this fast enough?  Should it be in its own thread?
 	    int dist = -1;
-	    for ( int i = 0; dist < 0 && i < m_OreTiles.Length; ++i ){
-		dist = ( m_OreTiles[i] - tileID );
+	    for ( int i = 0; dist < 0 && i < m_WaterTiles.Length; ++i ){
+		dist = ( m_WaterTiles[i] - tileID );
 		if( dist == 0){
 		    return true;
 		}
 	    }
-
-	    dist = -1;
 	    
-	    for ( int i = 0; dist < 0 && i < m_SandTiles.Length; ++i ){
-		dist = ( m_SandTiles[i] - tileID );
-		if( dist == 0 ) {
-		    return true;
-		}
-	    }
-
             return false;
 	}
 
@@ -157,9 +149,9 @@ namespace Server.Engines.Gather {
 	    
 	    Console.WriteLine("Gather Engine: Setting up fishing nodes...");
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-				       0.9, 250.0, 0.0, 150.0, typeof(Server.Items.Fish)));
+						0.9, 250.0, 0.0, 150.0, typeof(Server.Items.Fish)));
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-				       0.9, 250.0, 50.0, 150.0, typeof(Server.Items.Fish)));
+						0.9, 250.0, 50.0, 150.0, typeof(Server.Items.Fish)));
 	    Console.WriteLine("Complete.");
 	}
 	

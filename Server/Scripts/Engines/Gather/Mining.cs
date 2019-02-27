@@ -313,31 +313,6 @@ namespace Server.Engines.Gather
 	    return true;
 	}
 
-		public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
-	{
-            // TODO: No base implementation yet, do we need one?
-	    // if ( !base.CheckHarvest( from, tool, toHarvest ) )
-	    //     return false;
-
-            /*	    if ( def == m_Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 100.0 && ((PlayerMobile)from).SandMining) )
-	    {
-		OnBadGatherTarget( from, tool, toHarvest );
-		return false;
-	    }
-	    else */if ( from.Mounted )
-	    {
-		from.SendLocalizedMessage( 501864 ); // You can't mine while riding.
-		return false;
-	    }
-	    else if ( from.IsBodyMod && !from.Body.IsHuman )
-	    {
-		from.SendLocalizedMessage( 501865 ); // You can't mine while polymorphed.
-		return false;
-	    }
-
-	    return true;
-	}
-
 	public override void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
 	    TimeSpan delay = m_EffectsHolder.EffectDelay;
 	    int which = TimeSpan.Compare(m_EffectsHolder.EffectDelay, m_EffectsHolder.EffectSoundDelay);
