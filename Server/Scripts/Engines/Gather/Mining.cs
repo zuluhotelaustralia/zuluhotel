@@ -124,6 +124,9 @@ namespace Server.Engines.Gather
 	    m_Controller = stone;
 	    m_Controller.System = System; //if you use m_System here, it's not initialized and will fuck you up.
 	    m_System.SkillName = SkillName.Mining;
+	    m_Controller.Name = "Mining System Control Stone";
+	    m_Controller.Hue = 0x279;
+	    m_Controller.Movable = false;
 
 	    m_System.m_Nodes.Clear();
 

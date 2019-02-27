@@ -17,18 +17,14 @@ private static string CustomPath = "/home/runzh/server/muls/";
 
 ### GatherSystem Setup
 
-Once your server is compiled and running, the Gathering system requires some one-time setup to be performed by a character with Developer-level access.  You will notice in the console spam of a first-time-running server some warnings about node controllers not being set.
+The Gather System controls the rate at which players may acquire raw resources (logs, ore, and fish) based on programmed difficulty settings and dynamic distance of the player from the spawn point or GatherNode of each resource.  Each Node can drift around the map.  The subsystems for each resource category are static C# objects and as such cannot be directly serialized.  To work around this the location of the GatherNodes are stored in list collections on three control stones which are serialized when the server saves.  This allows the locations of GatherNodes to persist across server restarts.
+
+As such, once your server is compiled and running, the Gathering system requires some one-time setup to be performed by a character with Developer-level access.  You will notice in the console spam of a first-time-running server some warnings about node controllers not being set.
 
 First, add three GatherSystemController objects:
 
 ```
 [add gathersystemcontroller
-```
-
-Then make them static:
-
-```
-[set movable false
 ```
 
 Next, set the system references by issuing the following command three times, with different numeric arguments:
@@ -37,11 +33,13 @@ Next, set the system references by issuing the following command three times, wi
 [setgathersystem <1, 2 or 3>
 ```
 
-At this point your Gathering engine is fully set up and you should issue a save command.
+This command should also dye the controller a corresponding colour for easy visual reference, set the item to be immovalble, and finally name the stone according to which system it controls.  At this point your Gathering engine is fully set up and you should issue a save command.
 
 ```
 [save
 ```
+
+Should you wish to re-set the location of Gather Nodes simply delete each control stone, save, and restart the server.  The nodes will then respawn at random locations within 10 tiles of Lord British's throne, at which point you should repeat the setup process.
 
 ## IRC
 

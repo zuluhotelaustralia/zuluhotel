@@ -134,6 +134,9 @@ namespace Server.Engines.Gather {
 	    m_Controller = stone;
 	    m_Controller.System = System; //see Mining.cs
 	    m_System.SkillName = SkillName.Fishing;
+	    m_Controller.Name = "Fishing System Control Stone";
+	    m_Controller.Hue = 0x493;
+	    m_Controller.Movable = false;
 
 	    m_System.m_Nodes.Clear();
 

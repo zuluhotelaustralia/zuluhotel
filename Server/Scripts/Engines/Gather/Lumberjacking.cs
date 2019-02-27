@@ -76,6 +76,9 @@ namespace Server.Engines.Gather {
 	    m_Controller = stone;
 	    m_Controller.System = System; //see Mining.cs
 	    m_System.SkillName = SkillName.Lumberjacking;
+	    m_Controller.Name = "Lumberjacking System Control Stone";
+	    m_Controller.Hue = 1045;
+	    m_Controller.Movable = false;
 	    
 	    m_System.Nodes.Clear(); //the default constructor puts a placeholder node in
 
