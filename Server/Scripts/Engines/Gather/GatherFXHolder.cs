@@ -44,7 +44,23 @@ namespace Server.Engines.Gather {
 	    }
 	}
     }
+    
+    public class FishingSplashFXTimer : Timer {
+	private Mobile m_From;
+	private GatherFXHolder m_Holder;
+	private Point3D m_Loc;
 
+	public FishingSplashFXTimer( Mobile from, GatherFXHolder holder, Point3D loc ) : base( holder.EffectSoundDelay ) {
+	    m_From = from;
+	    m_Holder = holder;
+	    m_Loc = loc;
+	}
+
+	protected override void OnTick(){
+	    Effects.SendLocationEffect(m_Loc, m_From.Map, 0x352D, 16, 4);
+	}
+    }
+    
     public class GatherSFXTimer : Timer {
 	private Mobile m_From;
 	private GatherFXHolder m_Holder;

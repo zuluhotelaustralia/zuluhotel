@@ -61,23 +61,20 @@ namespace Server.Engines.Gather {
 
 	    if( Validate( tileID ) ) {
 		m_EffectsHolder.PlayEffects( from, loc );
-		Effects.SendLocationEffect(loc, from.Map, 0x352D, 16, 4);
+		new FishingSplashFXTimer(from, m_EffectsHolder, loc).Start();
 		base.StartGathering( from, tool, targeted );
 	    }
 	}
 
 	public bool Validate( int tileID )
 	{
-	    // is this fast enough?  Should it be in its own thread?
-	    int dist = -1;
-	    for ( int i = 0; dist < 0 && i < m_WaterTiles.Length; ++i ){
-		dist = ( m_WaterTiles[i] - tileID );
-		if( dist == 0){
-		    return true;
-		}
+	    bool contains = false;
+
+	    for ( int i = 0; !contains && i < m_WaterTiles.Length; i += 2 ) {
+		contains = ( tileID >= m_WaterTiles[i] && tileID <= m_WaterTiles[i + 1] );
 	    }
-	    
-            return false;
+
+	    return contains;
 	}
 
 	public override void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
@@ -104,15 +101,12 @@ namespace Server.Engines.Gather {
 	    return true;
 	}
 
-	private Fishing( Serial serial ) : this() {
-	}
-
 	public void OnBadGatherTarget( Mobile from, Item tool, object toHarvest )
 	{
 	    if ( toHarvest is LandTarget )
-		from.SendLocalizedMessage( 500977 ); // You can't mine there.
+		from.SendLocalizedMessage( 500977 ); // You can't reach the water there.
 	    else
-		from.SendLocalizedMessage( 500978 ); // You can't mine that.
+		from.SendLocalizedMessage( 500978 ); // You need water to fish brah.
 	}
 
 	private Fishing() {
