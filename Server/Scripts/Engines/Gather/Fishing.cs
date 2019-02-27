@@ -12,6 +12,16 @@ namespace Server.Engines.Gather {
 	    BigFish
 	}
 
+	private static readonly int[] m_WaterTiles = new int[]
+        {
+            0x00A8, 0x00AB,
+            0x0136, 0x0137,
+            0x5797, 0x579C,
+            0x746E, 0x7485,
+            0x7490, 0x74AB,
+            0x74B5, 0x75D5
+        };
+
 	public override void SendFailMessage( Mobile m ) {
 	    m.SendLocalizedMessage( 503171 ); // You fish for a while but...
 	}
@@ -22,6 +32,60 @@ namespace Server.Engines.Gather {
 
 	public override void SendSuccessMessage( Mobile m ) {
 	    m.SendLocalizedMessage( 1042635 ); //you extract some bla bla bla
+	}
+
+	public override void StartGathering( Mobile from, Item tool, object targeted) {
+	    int tileID;
+	    Point3D loc;
+	    
+	    if( targeted is Static && !((Static)targeted).Movable ){
+		Static obj = (Static)targeted;
+		loc = new Point3D(obj.Location);
+		tileID = (obj.ItemID & 0x3FFF) | 0x4000; //what the actual fuck does this do?
+	    }
+	    else if( targeted is StaticTarget ){
+		StaticTarget obj = (StaticTarget)targeted;
+		loc = new Point3D(obj.Location);
+		tileID = (obj.ItemID & 0x3FFF) | 0x4000;
+	    }
+	    else if( targeted is LandTarget ){
+		LandTarget obj = (LandTarget)targeted;
+		loc = new Point3D(obj.Location);
+		tileID = obj.TileID;
+	    }
+	    else {
+		loc = new Point3D(from.Location);
+		tileID = 0;
+	    }
+
+	    if( Validate( tileID ) ) {
+		m_EffectsHolder.PlayEffects( from, loc );
+		Effects.SendLocationEffect(loc, map, 0x352D, 16, 4)
+		base.StartGathering( from, tool, targeted );
+	    }
+	}
+
+		public bool Validate( int tileID )
+	{
+	    // is this fast enough?  Should it be in its own thread?
+	    int dist = -1;
+	    for ( int i = 0; dist < 0 && i < m_OreTiles.Length; ++i ){
+		dist = ( m_OreTiles[i] - tileID );
+		if( dist == 0){
+		    return true;
+		}
+	    }
+
+	    dist = -1;
+	    
+	    for ( int i = 0; dist < 0 && i < m_SandTiles.Length; ++i ){
+		dist = ( m_SandTiles[i] - tileID );
+		if( dist == 0 ) {
+		    return true;
+		}
+	    }
+
+            return false;
 	}
 
 	public override void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
@@ -39,17 +103,34 @@ namespace Server.Engines.Gather {
 	    new GatherTimer( from, tool, system, node, targeted, locked, delay ).Start();
 	}
 
+	public override bool BeginGathering( Mobile from, Item tool )
+	{
+	    if ( !base.BeginGathering( from, tool ) )
+		return false;
+
+	    from.SendLocalizedMessage( 500974 ); // Where do you wish to fish?
+	    return true;
+	}
+
 	private Fishing( Serial serial ) : this() {
+	}
+
+	public void OnBadGatherTarget( Mobile from, Item tool, object toHarvest )
+	{
+	    if ( toHarvest is LandTarget )
+		from.SendLocalizedMessage( 500977 ); // You can't mine there.
+	    else
+		from.SendLocalizedMessage( 500978 ); // You can't mine that.
 	}
 
 	private Fishing() {
 	    m_EffectsHolder = new GatherFXHolder();
 	    
 	    m_EffectsHolder.EffectActions = new int[]{ 12 };
-	    m_EffectsHolder.EffectSounds = new int[0];
+	    m_EffectsHolder.EffectSounds = new int[] { 0x364 };
 	    m_EffectsHolder.EffectCounts = new int[]{ 1 };
 	    m_EffectsHolder.EffectDelay = TimeSpan.Zero;
-	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds( 8.0 );
+	    m_EffectsHolder.EffectSoundDelay = TimeSpan.FromSeconds( 1.5 );
 	    
 	    m_Nodes = new List<GatherNode>();
 	    GatherNode node = new GatherNode (0, 0, Utility.RandomMinMax(0,10), Utility.RandomMinMax(0,10), Utility.RandomDouble(), 250.0, 100.0, 150.0, typeof( Items.Fish ) );

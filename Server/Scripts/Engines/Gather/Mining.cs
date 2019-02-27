@@ -173,19 +173,19 @@ namespace Server.Engines.Gather
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.6,
 					 80.0, 50.0, 100.0, typeof(Server.Items.VirginityOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 70.0, 50.0, 100.0, typeof(Server.Items.MalachiteOre)));
+					 70.0, 50.0, 110.0, typeof(Server.Items.MalachiteOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 60.0, 60.0, 100.0, typeof(Server.Items.LavarockOre)));
+					 60.0, 60.0, 120.0, typeof(Server.Items.LavarockOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 50.0, 60.0, 110.0, typeof(Server.Items.AzuriteOre)));
+					 50.0, 60.0, 130.0, typeof(Server.Items.AzuriteOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 50.0, 70.0, 110.0, typeof(Server.Items.DripstoneOre)));
+					 50.0, 70.0, 150.0, typeof(Server.Items.DripstoneOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.4,
-					 50.0, 70.0, 120.0, typeof(Server.Items.ExecutorOre)));
+					 50.0, 70.0, 150.0, typeof(Server.Items.ExecutorOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.4,
-					 50.0, 80.0, 120.0, typeof(Server.Items.PeachblueOre)));
+					 50.0, 80.0, 150.0, typeof(Server.Items.PeachblueOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3,
-					 50.0, 80.0, 120.0, typeof(Server.Items.DestructionOre)));
+					 50.0, 80.0, 150.0, typeof(Server.Items.DestructionOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3,
 					 50.0, 90.0, 150.0, typeof(Server.Items.AnraOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.2,
@@ -289,6 +289,31 @@ namespace Server.Engines.Gather
 	}
 
 	public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
+	{
+            // TODO: No base implementation yet, do we need one?
+	    // if ( !base.CheckHarvest( from, tool, toHarvest ) )
+	    //     return false;
+
+            /*	    if ( def == m_Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 100.0 && ((PlayerMobile)from).SandMining) )
+	    {
+		OnBadGatherTarget( from, tool, toHarvest );
+		return false;
+	    }
+	    else */if ( from.Mounted )
+	    {
+		from.SendLocalizedMessage( 501864 ); // You can't mine while riding.
+		return false;
+	    }
+	    else if ( from.IsBodyMod && !from.Body.IsHuman )
+	    {
+		from.SendLocalizedMessage( 501865 ); // You can't mine while polymorphed.
+		return false;
+	    }
+
+	    return true;
+	}
+
+		public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
 	{
             // TODO: No base implementation yet, do we need one?
 	    // if ( !base.CheckHarvest( from, tool, toHarvest ) )
