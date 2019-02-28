@@ -3,11 +3,11 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [90/91]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [91/91]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
-** TODO distance calculations and/or maxskill ceilings need a sanity check
+** DONE distance calculations and/or maxskill ceilings need a sanity check
 ** DONE new class GatherTarget, similar to HarvestTarget
 *** special checks for GatherTarget.OnTarget:
 **** DONE use mining on a grave to get bones, see HarvestTarget.cs for tile ids
@@ -138,12 +138,13 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
 
-* TODO Items to tackle after launching beta but before "1.0" [12/27]
+* TODO Items to tackle after launching beta but before "1.0" [3/16]
 :properties:
 :cookie_data: todo recursive
 :end:
 ** DONE Fix gathersystem timing so it awards resources after the animation plays
 ** DONE gathersystem asks "where do you wish to place this?" when lumberjacking
+** TODO make sure pagans are spawning in loot
 ** TODO honestly gathersystem probably still has some fucked up cliloc calls... fix these/crowdsource them
 ** TODO make an ongoing minigame environment to encourage pvp during beta/debugging phase
 *** TODO make it tarkov or pubg or something
@@ -154,7 +155,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO hides
 ** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
-** TODO antimacro code [8/8]
+** DONE antimacro code [8/8]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
