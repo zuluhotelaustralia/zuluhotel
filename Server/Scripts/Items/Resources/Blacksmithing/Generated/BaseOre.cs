@@ -53,7 +53,7 @@ namespace Server.Items
 
 	private static int RandomSize()
 	{
-	    double rand = Utility.RandomDouble();
+	    /*  double rand = Utility.RandomDouble();
 
 	    if ( rand < 0.12 )
 		return 0x19B7;
@@ -61,7 +61,7 @@ namespace Server.Items
 		return 0x19B8;
 	    else if ( rand < 0.25 )
 		return 0x19BA;
-	    else
+	    else */
 		return 0x19B9;
 	}
 
