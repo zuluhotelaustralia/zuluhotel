@@ -942,11 +942,12 @@ namespace Server.Items
 	    CraftAttributeInfo Gauntlet = Gauntlet = new CraftAttributeInfo();
 	    CraftAttributeInfo Swampwood = Swampwood = new CraftAttributeInfo();
 	    CraftAttributeInfo Stardust = Stardust = new CraftAttributeInfo();
-	    CraftAttributeInfo Silverleaf = Stormteal = new CraftAttributeInfo();
+	    CraftAttributeInfo Silverleaf = Silverleaf = new CraftAttributeInfo();
+	    CraftAttributeInfo Stormteal = Stormteal = new CraftAttributeInfo();
 	    CraftAttributeInfo Emeraldwood = Emeraldwood = new CraftAttributeInfo();
 	    CraftAttributeInfo Bloodwood = Bloodwood = new CraftAttributeInfo();
 	    CraftAttributeInfo Crystalwood = Crystalwood = new CraftAttributeInfo();
-	    CraftAttributeInfo Bloodhorsewood = Bloodhorse = new CraftAttributeInfo();
+	    CraftAttributeInfo Bloodhorse = Bloodhorse = new CraftAttributeInfo();
 	    CraftAttributeInfo Doomwood = Doomwood = new CraftAttributeInfo();
 	    CraftAttributeInfo Zulu = Zulu = new CraftAttributeInfo();
 	    CraftAttributeInfo Darkness = Darkness = new CraftAttributeInfo();
@@ -1054,29 +1055,29 @@ namespace Server.Items
 	private static CraftResourceInfo[] m_WoodInfo = new CraftResourceInfo[]
 	    {
 		new CraftResourceInfo( 0x000, 1011542, "Normal",		CraftAttributeInfo.Blank,		CraftResource.RegularWood,	typeof( Log ),			typeof( Board ) ),
-		new CraftResourceInfo( 1132, 1011542, "Pinetree", CraftAttributeInfo.Pinetree, CraftResource.Pinetree, typeof( PinetreeLog ), typeof( PinetreeBoard) ),
-		new CraftResourceInfo( 5716, 1011542, "Cherry", CraftAttributeInfo.Cherry, CraftResource.Cherry, typeof( CherryLog ), typeof( CherryBoard) ),
-		new CraftResourceInfo( 1045, 1011542, "Oak", CraftAttributeInfo.Oak, CraftResource.Oak, typeof( OakLog ), typeof( OakBoard) ),
-		new CraftResourceInfo( 515, 1011542, "Purple Passion", CraftAttributeInfo.PurplePassion, CraftResource.PurplePassion, typeof( PurplePassionLog ), typeof( PurplePassionBoard) ),
-		new CraftResourceInfo( 48, 1011542, "Golden Reflection", CraftAttributeInfo.GoldenReflection, CraftResource.GoldenReflection, typeof( GoldenReflectionLog ), typeof( GoldenReflectionBoard) ),
-		new CraftResourceInfo( 1285, 1011542, "Hardranger", CraftAttributeInfo.Hardranger, CraftResource.Hardranger, typeof( HardrangerLog ), typeof( HardrangerBoard) ),
-		new CraftResourceInfo( 1162, 1011542, "Jadewood", CraftAttributeInfo.Jadewood, CraftResource.Jadewood, typeof( JadewoodLog ), typeof( JadewoodBoard) ),
-		new CraftResourceInfo( 1109, 1011542, "Darkwood", CraftAttributeInfo.Darkwood, CraftResource.Darkwood, typeof( DarkwoodLog ), typeof( DarkwoodBoard) ),
-		new CraftResourceInfo( 1154, 1011542, "Stonewood", CraftAttributeInfo.Stonewood, CraftResource.Stonewood, typeof( StonewoodLog ), typeof( StonewoodBoard) ),
-		new CraftResourceInfo( 1176, 1011542, "Sunwood", CraftAttributeInfo.Sunwood, CraftResource.Sunwood, typeof( SunwoodLog ), typeof( SunwoodBoard) ),
-		new CraftResourceInfo( 1284, 1011542, "Gauntlet", CraftAttributeInfo.Gauntlet, CraftResource.Gauntlet, typeof( GauntletLog ), typeof( GauntletBoard) ),
-		new CraftResourceInfo( 1177, 1011542, "Swampwood", CraftAttributeInfo.Swampwood, CraftResource.Swampwood, typeof( SwampwoodLog ), typeof( SwampwoodBoard) ),
-		new CraftResourceInfo( 1161, 1011542, "Stardust", CraftAttributeInfo.Stardust, CraftResource.Stardust, typeof( StardustLog ), typeof( StardustBoard) ),
-		new CraftResourceInfo( 2301, 1011542, "Silver leaf", CraftAttributeInfo.Silverleaf, CraftResource.Silverleaf, typeof( SilverleafLog ), typeof( SilverleafBoard) ),
-		new CraftResourceInfo( 1346, 1011542, "Stormteal", CraftAttributeInfo.Stormteal, CraftResource.Stormteal, typeof( StormtealLog ), typeof( StormtealBoard) ),
-		new CraftResourceInfo( 1159, 1011542, "Emerald wood", CraftAttributeInfo.Emeraldwood, CraftResource.Emeraldwood, typeof( EmeraldwoodLog ), typeof( EmeraldwoodBoard) ),
-		new CraftResourceInfo( 1645, 1011542, "Bloodwood", CraftAttributeInfo.Bloodwood, CraftResource.Bloodwood, typeof( BloodwoodLog ), typeof( BloodwoodBoard) ),
-		new CraftResourceInfo( 1170, 1011542, "Crystal wood", CraftAttributeInfo.Crystalwood, CraftResource.Crystalwood, typeof( CrystalwoodLog ), typeof( CrystalwoodBoard) ),
-		new CraftResourceInfo( 1287, 1011542, "Bloodhorse", CraftAttributeInfo.Bloodhorse, CraftResource.Bloodhorse, typeof( BloodhorseLog ), typeof( BloodhorseBoard) ),
-		new CraftResourceInfo( 1183, 1011542, "Doom wood", CraftAttributeInfo.Doomwood, CraftResource.Doomwood, typeof( DoomwoodLog ), typeof( DoomwoodBoard) ),
-		new CraftResourceInfo( 1160, 1011542, "Zulu", CraftAttributeInfo.Zulu, CraftResource.Zulu, typeof( ZuluLog ), typeof( ZuluBoard) ),
-		new CraftResourceInfo( 1258, 1011542, "Darkness", CraftAttributeInfo.Darkness, CraftResource.Darkness, typeof( DarknessLog ), typeof( DarknessBoard) ),
-		new CraftResourceInfo( 1165, 1011542, "Elven", CraftAttributeInfo.Elven, CraftResource.Elven, typeof( ElvenLog ), typeof( ElvenBoard) ),
+		new CraftResourceInfo( 1132, 1160034, "Pinetree", CraftAttributeInfo.Pinetree, CraftResource.Pinetree, typeof( PinetreeLog ), typeof( PinetreeBoard) ),
+		new CraftResourceInfo( 5716, 1160035, "Cherry", CraftAttributeInfo.Cherry, CraftResource.Cherry, typeof( CherryLog ), typeof( CherryBoard) ),
+		new CraftResourceInfo( 1045, 1160036, "Oak", CraftAttributeInfo.Oak, CraftResource.Oak, typeof( OakLog ), typeof( OakBoard) ),
+		new CraftResourceInfo( 515, 1160037, "Purple Passion", CraftAttributeInfo.PurplePassion, CraftResource.PurplePassion, typeof( PurplePassionLog ), typeof( PurplePassionBoard) ),
+		new CraftResourceInfo( 48, 1160038, "Golden Reflection", CraftAttributeInfo.GoldenReflection, CraftResource.GoldenReflection, typeof( GoldenReflectionLog ), typeof( GoldenReflectionBoard) ),
+		new CraftResourceInfo( 1285, 1160039, "Hardranger", CraftAttributeInfo.Hardranger, CraftResource.Hardranger, typeof( HardrangerLog ), typeof( HardrangerBoard) ),
+		new CraftResourceInfo( 1162, 1160040, "Jadewood", CraftAttributeInfo.Jadewood, CraftResource.Jadewood, typeof( JadewoodLog ), typeof( JadewoodBoard) ),
+		new CraftResourceInfo( 1109, 1160041, "Darkwood", CraftAttributeInfo.Darkwood, CraftResource.Darkwood, typeof( DarkwoodLog ), typeof( DarkwoodBoard) ),
+		new CraftResourceInfo( 1154, 1160042, "Stonewood", CraftAttributeInfo.Stonewood, CraftResource.Stonewood, typeof( StonewoodLog ), typeof( StonewoodBoard) ),
+		new CraftResourceInfo( 1176, 1160043, "Sunwood", CraftAttributeInfo.Sunwood, CraftResource.Sunwood, typeof( SunwoodLog ), typeof( SunwoodBoard) ),
+		new CraftResourceInfo( 1284, 1160044, "Gauntlet", CraftAttributeInfo.Gauntlet, CraftResource.Gauntlet, typeof( GauntletLog ), typeof( GauntletBoard) ),
+		new CraftResourceInfo( 1177, 1160045, "Swampwood", CraftAttributeInfo.Swampwood, CraftResource.Swampwood, typeof( SwampwoodLog ), typeof( SwampwoodBoard) ),
+		new CraftResourceInfo( 1161, 1160046, "Stardust", CraftAttributeInfo.Stardust, CraftResource.Stardust, typeof( StardustLog ), typeof( StardustBoard) ),
+		new CraftResourceInfo( 2301, 1160047, "Silver leaf", CraftAttributeInfo.Silverleaf, CraftResource.Silverleaf, typeof( SilverleafLog ), typeof( SilverleafBoard) ),
+		new CraftResourceInfo( 1346, 1160048, "Stormteal", CraftAttributeInfo.Stormteal, CraftResource.Stormteal, typeof( StormtealLog ), typeof( StormtealBoard) ),
+		new CraftResourceInfo( 1159, 1160049, "Emerald wood", CraftAttributeInfo.Emeraldwood, CraftResource.Emeraldwood, typeof( EmeraldwoodLog ), typeof( EmeraldwoodBoard) ),
+		new CraftResourceInfo( 1645, 1160050, "Bloodwood", CraftAttributeInfo.Bloodwood, CraftResource.Bloodwood, typeof( BloodwoodLog ), typeof( BloodwoodBoard) ),
+		new CraftResourceInfo( 1170, 1160051, "Crystal wood", CraftAttributeInfo.Crystalwood, CraftResource.Crystalwood, typeof( CrystalwoodLog ), typeof( CrystalwoodBoard) ),
+		new CraftResourceInfo( 1287, 1160052, "Bloodhorse", CraftAttributeInfo.Bloodhorse, CraftResource.Bloodhorse, typeof( BloodhorseLog ), typeof( BloodhorseBoard) ),
+		new CraftResourceInfo( 1183, 1160053, "Doom wood", CraftAttributeInfo.Doomwood, CraftResource.Doomwood, typeof( DoomwoodLog ), typeof( DoomwoodBoard) ),
+		new CraftResourceInfo( 1160, 1160054, "Zulu", CraftAttributeInfo.Zulu, CraftResource.Zulu, typeof( ZuluLog ), typeof( ZuluBoard) ),
+		new CraftResourceInfo( 1258, 1160055, "Darkness", CraftAttributeInfo.Darkness, CraftResource.Darkness, typeof( DarknessLog ), typeof( DarknessBoard) ),
+		new CraftResourceInfo( 1165, 1160056, "Elven", CraftAttributeInfo.Elven, CraftResource.Elven, typeof( ElvenLog ), typeof( ElvenBoard) ),
 	    };
 
 	/// <summary>
