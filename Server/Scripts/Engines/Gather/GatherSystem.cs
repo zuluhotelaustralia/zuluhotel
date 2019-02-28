@@ -43,26 +43,7 @@ namespace Server.Engines.Gather {
 
 	public static void Initialize() {
 	    //CommandSystem.Register( "AutoLoop", AccessLevel.Player, new CommandEventHandler( AutoLoop_OnCommand ) );
-	    CommandSystem.Register( "GatherSystemSetup", AccessLevel.Developer, new CommandEventHandler( GatherSystemSetup_OnCommand ) );
-	    CommandSystem.Register( "GetNodeInfo", AccessLevel.Developer, new CommandEventHandler( GetNodeInfo_OnCommand ) );
-	}
-
-	[Usage( "GetNodeInfo <integer>" )]
-	[Description( "Returns info about GatherNode <integer> on the targeted control stone" )]
-	public static void GetNodeInfo_OnCommand( CommandEventArgs e ){
-	    if( e.Length !=1 ){
-		e.Mobile.SendMessage("Usage: {0}GetNodeInfo <integer>");
-	    }
-	    else {
-		e.Mobile.Target = new NodeDebugTarget(e.GetInt32(0));
-	    }
-	}
-	
-	[Usage( "GatherSystemSetup" )]
-	[Description( "Performs initial setup of one type of GatherNode")]
-	public static void GatherSystemSetup_OnCommand( CommandEventArgs e ){
-	    e.Mobile.SendMessage("Select a control stone.");
-	    e.Mobile.Target = new SetupGatherTarget();
+	    //CommandSystem.Register( "GatherSystemSetup", AccessLevel.Developer, new CommandEventHandler( GatherSystemSetup_OnCommand ) );
 	}
 
 	[Usage( "AutoLoop <number from 1 to 1000>" )]

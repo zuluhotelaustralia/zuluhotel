@@ -45,7 +45,9 @@ namespace Server.Items {
 	
 	public static void Initialize() {
 	    CommandSystem.Register( "SetGatherSystem", AccessLevel.Developer, new CommandEventHandler( SetGatherSystem_OnCommand ) );
-
+	    CommandSystem.Register( "GetNodeInfo", AccessLevel.Developer, new CommandEventHandler( GetNodeInfo_OnCommand ) );
+	    CommandSystem.Register( "NumNodes", AccessLevel.Developer, new CommandEventHandler( NumNodes_OnCommand ));
+	    
 	    //specified with namespaces because of conflict with harvesting
 	    if( Server.Engines.Gather.Lumberjacking.Controller == null ) {
 		Console.WriteLine( "Warning: Lumberjacking Controller is not properly set!" );
@@ -56,6 +58,23 @@ namespace Server.Items {
 	    if( Server.Engines.Gather.Fishing.Controller == null ) {
 		Console.WriteLine( "Warning: Fishing Controller is not properly set!" );
 	    }
+	}
+
+	[Usage( "GetNodeInfo <integer>" )]
+	[Description( "Returns info about GatherNode <integer> on the targeted control stone" )]
+	public static void GetNodeInfo_OnCommand( CommandEventArgs e ){
+	    if( e.Length !=1 ){
+		e.Mobile.SendMessage("Usage: {0}GetNodeInfo <integer>");
+	    }
+	    else {
+		e.Mobile.Target = new NodeDebugTarget(e.GetInt32(0));
+	    }
+	}
+
+	[Usage( "NumNodes" )]
+	[Description( "Returns length of node list for a given control stone.")]
+	public static void NumNodes_OnCommand( CommandEventArgs e ) {
+	    e.Mobile.Target = new NumNodesTarget();
 	}
 
 	[Usage( "SetGatherSystem <system>" )]
@@ -234,6 +253,22 @@ namespace Server.Items {
 	}
     }
 
+    class NumNodesTarget : Target {
+
+	public NumNodesTarget() : base (15, true, TargetFlags.None ) {
+	}
+
+	protected override void OnTarget( Mobile from, object targ ) {
+	    if( targ is GatherSystemController ) {
+		int count = ((GatherSystemController)targ).System.Nodes.Count;
+		from.SendMessage("That Controller has {0} item(s).", count);
+	    }
+	    else{
+		from.SendMessage("You must target a GatherSystemController stone.");
+	    }
+	}
+    }
+    
     class SetGatherSystemTarget : Target {
 
 	private int m_Type;
@@ -252,3 +287,4 @@ namespace Server.Items {
 	}
     }
 }
+
