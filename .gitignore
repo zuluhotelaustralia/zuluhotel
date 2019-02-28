@@ -9,4 +9,5 @@ RunZH.dll
 RunZH.pdb
 RunZH.runtimeconfig.dev.json
 RunZH.runtimeconfig.json
+Server/Version.cs
 *~

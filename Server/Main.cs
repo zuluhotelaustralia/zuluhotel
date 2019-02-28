@@ -102,7 +102,7 @@ namespace Server
 	internal static bool VBdotNet { get { return m_VBdotNET; } }
 	public static List<string> DataDirectories { get { return m_DataDirectories; } }
 	public static Assembly Assembly { get { return m_Assembly; } set { m_Assembly = value; } }
-	public static Version Version { get { return m_Assembly.GetName().Version; } }
+	//public static Version Version { get { return m_Assembly.GetName().Version; } }
 	public static Process Process { get { return m_Process; } }
 	public static Thread Thread { get { return m_Thread; } }
 	public static MultiTextWriter MultiConsoleOut { get { return m_MultiConOut; } }
@@ -449,10 +449,10 @@ namespace Server
 		    Name = "Timer Thread"
 		};
 
-	    Version ver = m_Assembly.GetName().Version;
+	    Version ver = new Version(ServerVersion.Major, ServerVersion.Minor, ServerVersion.Rev);
 
 	    // Added to help future code support on forums, as a 'check' people can ask for to it see if they recompiled core or not
-	    Console.WriteLine("RunZH v{0}.{1}.{2}.{3}", ver.Major, ver.Minor, ver.Build, ver.Revision);
+	    Console.WriteLine("RunZH v{0}.{1}.{2}", ver.Major, ver.Minor, ver.Build);
 	    Console.WriteLine("http://zuluhotel.ca/ - Make Ultima Online Great again.");
 	    //Console.WriteLine("Core: Running on {0}", Microsoft.Extensions.PlatformAbstractions.PlatformServices.D‌​efault.Application.R‌​untimeFramework.Vers‌​ion);
 
