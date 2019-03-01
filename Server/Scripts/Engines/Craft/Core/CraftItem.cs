@@ -1201,6 +1201,8 @@ namespace Server.Engines.Craft
 		    // but fuck it, bandwidth is cheap and we have beefy servers; we'd need every permutation in the clilocs or else
 		    // we'd have to create new cliloc entries with prefix names i.e. "anra" and "stormteal" and then concatenate them
 
+		    // note Feb 2019:  We ended up doing just that, with the clilocs.
+		    
 		    // ( done on branch "crafting" @ 03cb34c3 for ingots ) 
 		    // --sith
 		  

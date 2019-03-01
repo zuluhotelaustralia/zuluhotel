@@ -66,7 +66,7 @@ namespace Server.Items
 	    Darkwood,
 	    Stonewood,
 	    Sunwood,
-	    Gauntlet,
+	    Gauntlet, //312
 	    Swampwood,
 	    Stardust,
 	    Silverleaf,

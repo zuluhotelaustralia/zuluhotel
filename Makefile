@@ -11,6 +11,7 @@ run: release
 	dotnet ./RunZH.dll
 
 debug:
+	date +%y.%m.%d.%H | awk -f Tools/version.awk
 	$(RUNTIME) $(OUTPUTDIR)
 
 clean:

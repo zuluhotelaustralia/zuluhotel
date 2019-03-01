@@ -1111,7 +1111,7 @@ namespace Server.Items
                 if( defender.Dex < 80 )
                     chance = chance * (20 + defender.Dex) / 100;
 
-if ( chance > aosChance )
+		if ( chance > aosChance )
                     return defender.CheckSkill( SkillName.Parry, chance );
                 else
                     return (aosChance > Utility.RandomDouble()); // Only skillcheck if wielding a shield & there's no effect from Bushido
@@ -2480,40 +2480,40 @@ if ( chance > aosChance )
 
         [Flags]
         private enum SaveFlag
-        {
-            None					= 0x00000000,
-            DamageLevel				= 0x00000001,
-            AccuracyLevel			= 0x00000002,
-            DurabilityLevel			= 0x00000004,
-            Quality					= 0x00000008,
-            Hits					= 0x00000010,
-            MaxHits					= 0x00000020,
-            Slayer					= 0x00000040,
-            Poison					= 0x00000080,
-            PoisonCharges			= 0x00000100,
-            Crafter					= 0x00000200,
-            Identified				= 0x00000400,
-            StrReq					= 0x00000800,
-            DexReq					= 0x00001000,
-            IntReq					= 0x00002000,
-            MinDamage				= 0x00004000,
-            MaxDamage				= 0x00008000,
-            HitSound				= 0x00010000,
-            MissSound				= 0x00020000,
-            Speed					= 0x00040000,
-            MaxRange				= 0x00080000,
-            Skill					= 0x00100000,
-            Type					= 0x00200000,
-            Animation				= 0x00400000,
-            Resource				= 0x00800000,
-            xAttributes				= 0x01000000,
-            xWeaponAttributes		= 0x02000000,
-            PlayerConstructed		= 0x04000000,
-            SkillBonuses			= 0x08000000,
-            Slayer2					= 0x10000000,
-            ElementalDamages		= 0x20000000,
-            EngravedText			= 0x40000000
-        }
+	    {
+		None					= 0x00000000,
+		DamageLevel				= 0x00000001,
+		AccuracyLevel			= 0x00000002,
+		DurabilityLevel			= 0x00000004,
+		Quality					= 0x00000008,
+		Hits					= 0x00000010,
+		MaxHits					= 0x00000020,
+		Slayer					= 0x00000040,
+		Poison					= 0x00000080,
+		PoisonCharges			= 0x00000100,
+		Crafter					= 0x00000200,
+		Identified				= 0x00000400,
+		StrReq					= 0x00000800,
+		DexReq					= 0x00001000,
+		IntReq					= 0x00002000,
+		MinDamage				= 0x00004000,
+		MaxDamage				= 0x00008000,
+		HitSound				= 0x00010000,
+		MissSound				= 0x00020000,
+		Speed					= 0x00040000,
+		MaxRange				= 0x00080000,
+		Skill					= 0x00100000,
+		Type					= 0x00200000,
+		Animation				= 0x00400000,
+		Resource				= 0x00800000,
+		xAttributes				= 0x01000000,
+		xWeaponAttributes		= 0x02000000,
+		PlayerConstructed		= 0x04000000,
+		SkillBonuses			= 0x08000000,
+		Slayer2					= 0x10000000,
+		ElementalDamages		= 0x20000000,
+		EngravedText			= 0x40000000
+	    }
 
         public override void Deserialize( GenericReader reader )
         {
@@ -2965,6 +2965,29 @@ if ( chance > aosChance )
                 case CraftResource.DarkSableRuby: oreType = 1160031; break;
                 case CraftResource.EbonTwilightSapphire: oreType = 1160032; break;
                 case CraftResource.RadiantNimbusDiamond: oreType = 1160033; break;
+		case CraftResource.Pinetree: oreType = 1160034; break;
+		case CraftResource.Cherry: oreType = 1160035; break;
+		case CraftResource.Oak: oreType = 1160036; break;
+		case CraftResource.PurplePassion: oreType = 1160037; break;
+		case CraftResource.GoldenReflection: oreType = 1160038; break;
+		case CraftResource.Hardranger: oreType = 1160039; break;
+		case CraftResource.Jadewood: oreType = 1160040; break;
+		case CraftResource.Darkwood: oreType = 1160041; break;
+		case CraftResource.Stonewood: oreType = 1160042; break;
+		case CraftResource.Sunwood: oreType = 1160043; break;
+		case CraftResource.Gauntlet: oreType = 1160044; break;
+		case CraftResource.Swampwood: oreType = 1160045; break;
+		case CraftResource.Stardust: oreType = 1160046; break;
+		case CraftResource.Silverleaf: oreType = 1160047; break;
+		case CraftResource.Stormteal: oreType = 1160048; break;
+		case CraftResource.Emeraldwood: oreType = 1160049; break;
+		case CraftResource.Bloodwood: oreType = 1160050; break;
+		case CraftResource.Crystalwood: oreType = 1160051; break;
+		case CraftResource.Bloodhorse: oreType = 1160052; break;
+		case CraftResource.Doomwood: oreType = 1160053; break;
+		case CraftResource.Zulu: oreType = 1160054; break;
+		case CraftResource.Darkness: oreType = 1160055; break;
+		case CraftResource.Elven: oreType = 1160056; break;
                 case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
                 case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
                 case CraftResource.BarbedLeather:	oreType = 1061116; break; // barbed
@@ -2979,6 +3002,7 @@ if ( chance > aosChance )
 
             if ( m_Quality == WeaponQuality.Exceptional )
             {
+		Console.WriteLine(GetNameString() );
                 if ( oreType != 0 )
                     list.Add( 1053100, "#{0}\t{1}", oreType, GetNameString() ); // exceptional ~1_oretype~ ~2_armortype~
                 else
@@ -3510,9 +3534,9 @@ if ( chance > aosChance )
     }
 
     public enum CheckSlayerResult
-    {
-        None,
-        Slayer,
-        Opposition
-    }
+	{
+	    None,
+	    Slayer,
+	    Opposition
+	}
 }
