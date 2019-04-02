@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [91/93]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [92/93]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -30,7 +30,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE it's not:  there's no sound or animation
 ** DONE verify mining is complete
 *** TODO There's no gathernode for Sand, and mining might let you mine ore on sand tiles
-*** TODO There's probably no CraftResource for Sand
+*** DONE There's probably no CraftResource for Sand
 ** DONE ores and logs don't stack with others of the same type
 ** DONE add the other nodes to each resource
 ** DONE verify/fix cliloc strings in gathering engine
