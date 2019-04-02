@@ -33,7 +33,7 @@ Next, set the system references by issuing the following command three times, wi
 [setgathersystem <1, 2 or 3>
 ```
 
-This command should also dye the controller a corresponding colour for easy visual reference, set the item to be immovalble, and finally name the stone according to which system it controls.  At this point your Gathering engine is fully set up and you should issue a save command.
+This command should also dye the controller a corresponding colour for easy visual reference, set the item to be immovable, and finally name the stone according to which system it controls.  At this point your Gathering engine is fully set up and you should issue a save command.
 
 ```
 [save
