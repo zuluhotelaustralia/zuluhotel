@@ -103,7 +103,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE (de)serialize node positions when (de)serializing the controller stone
 use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE finish writing code to scale harvest rates based on proximity to node
-* TODO finish off Necro and Earth magic [6/9]
+* TODO finish off Necro and Earth magic [7/9]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -113,7 +113,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO edit cliloc/gump/exe to change spell names in the actual spellbook gumps (necro/spellweaving for earth)
 *** OK So the actual spellbook names are in the client, whereas the hover-text is from the cliloc
 *** DONE Earth Clilocs
-*** TODO Earth spells in client
+*** DONE Earth spells in client
 *** DONE Necro clilocs
 *** TODO necro spells in client
 ** DONE fix spell scroll item names (itemID parameter)
