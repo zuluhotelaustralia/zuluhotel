@@ -134,7 +134,7 @@ namespace Server.Engines.Gather
 	    int x = 1323;
 	    int y = 1624;
 	    
-	    Console.WriteLine("Gather Engine: Setting up mining nodes...");
+	    Console.WriteLine("Gather Engine: Setting up mining nodes...");	    
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
 					 250.0, 0.0, 70.0, typeof(Server.Items.IronOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
@@ -219,8 +219,12 @@ namespace Server.Engines.Gather
 		return m_System;
 	    }
 	}
-    
-	public bool Validate( int tileID )
+
+	public bool Validate( int tileID ) {
+	    return ValidateRock( tileID );
+	}
+	
+	public bool ValidateRock( int tileID )
 	{
 	    // is this fast enough?  Should it be in its own thread?
 	    int dist = -1;
@@ -231,7 +235,12 @@ namespace Server.Engines.Gather
 		}
 	    }
 
-	    dist = -1;
+            return false;
+	}
+
+	public bool ValidateSand( int tileID )
+	{
+	    int dist = -1;
 	    
 	    for ( int i = 0; dist < 0 && i < m_SandTiles.Length; ++i ){
 		dist = ( m_SandTiles[i] - tileID );
@@ -240,7 +249,7 @@ namespace Server.Engines.Gather
 		}
 	    }
 
-            return false;
+	    return false;
 	}
 
 	public override bool BeginGathering( Mobile from, Item tool )
@@ -276,9 +285,13 @@ namespace Server.Engines.Gather
 		tileID = 0;
 	    }
 
-	    if( Validate( tileID ) ) {
+	    if( ValidateRock( tileID ) ) {
 		m_EffectsHolder.PlayEffects( from, loc );
 		base.StartGathering( from, tool, targeted );
+	    }
+	    if( ValidateSand( tileID ) ) {
+		m_EffectsHolder.PlayEffects( from, loc ); //TODO: change these to be appropriate SFX/VFX and cliloc msgs
+		base.StartGathering( from, tool, targeted, true );
 	    }
 	}
 
@@ -346,12 +359,16 @@ namespace Server.Engines.Gather
 	private Mining()
 	{
 	    m_Nodes = new List<GatherNode>();
+	    m_SandNodes = new List<GatherNode>();
 	    m_EffectsHolder = new GatherFXHolder();
-	    int x = 0;
-	    int y = 0; //change these to be LB's Throne xy
 
-	    GatherNode node = new GatherNode( 0, 0, 10, 10, 0.9, 250.0, 100.0, 150.0, typeof(IronOre));
+	    int x = 1323;
+	    int y = 1624;
+
+	    GatherNode node = new GatherNode( x, y, 10, 10, 0.9, 250.0, 100.0, 150.0, typeof(IronOre));
 	    m_Nodes.Add(node);
+
+	    m_SandNodes.Add( new GatherNode( x, y, 0, 0, 0.9, 250.0, 0.0, 150.0, typeof(Server.Items.Sand) ) );
 	    
 	    m_EffectsHolder.EffectActions = new int[]{ 11 };
 	    m_EffectsHolder.EffectSounds = new int[]{ 0x125, 0x126 };

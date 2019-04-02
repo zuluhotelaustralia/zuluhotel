@@ -29,6 +29,10 @@ namespace Server.Engines.Gather {
 	protected List<GatherNode> m_Nodes;
         public List<GatherNode> Nodes { get { return m_Nodes; } }
 
+	//for mining sand
+	protected List<GatherNode> m_SandNodes;
+	public List<GatherNode> SandNodes { get { return m_SandNodes; } }
+
 	protected SkillName m_SkillName;
 	public SkillName SkillName { get { return m_SkillName; } set { m_SkillName = value; } }
 	
@@ -152,6 +156,11 @@ namespace Server.Engines.Gather {
 
 	//target calls this
 	public virtual void StartGathering( Mobile from, Item tool, object targeted ) {
+	    StartGathering( from, tool, targeted, false );
+	}
+
+	//bool sand should always be false unless the user is actually mining sand
+	public virtual void StartGathering( Mobile from, Item tool, object targeted, bool sand ) {
 	    from.RevealingAction();
 	    
 	    object toLock = GetLock( from, tool, targeted );
@@ -161,10 +170,11 @@ namespace Server.Engines.Gather {
 		return;
 	    }
 	    
-	    //select node
 	    Skill s = from.Skills[m_SkillName];
-	    GatherNode n = Strike( BuildNodeList( s, from ) );
 
+	    //select node
+	    GatherNode n = Strike( BuildNodeList( s, from, sand ) );
+	    
 	    //new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
 	    StartGatherTimer( from, tool, this, n, targeted, toLock );
 	}
@@ -303,27 +313,34 @@ namespace Server.Engines.Gather {
 	}
 
 	// build a list of which nodes are available to the player, skillwise
-	public List<GatherNode> BuildNodeList( Skill s, Mobile m ){
+	public List<GatherNode> BuildNodeList( Skill s, Mobile m, bool sand ){
 	    List<GatherNode> nodes = new List<GatherNode>();
 
-	    foreach (GatherNode n in m_Nodes) {
-		if ( n.MinSkill <= s.Value &&
-		     n.MaxSkill >= s.Value) {
+	    //if they're mining on sand we don't want to spawn them icerock or something
+	    // although perhaps we might want to consider specifically lavarock?
+	    if( sand ){
+		nodes.Add(m_SandNodes[0]);
+	    }
+	    else {
+		foreach (GatherNode n in m_Nodes) {
+		    if ( n.MinSkill <= s.Value &&
+			 n.MaxSkill >= s.Value) {
 
-		    if ( IncludeByDistance(n, m) ){
-			//add the node from m_Nodes to the ephemeral list we're building
-			nodes.Add(n);
+			if ( IncludeByDistance(n, m) ){
+			    //add the node from m_Nodes to the ephemeral list we're building
+			    nodes.Add(n);
+			}
 		    }
 		}
-	    }
 
-	    if ( nodes.Count <= 0 ) {
-		//it's unlikely but entirely possible to be in a dead spot where you're too far away from every node
-		// and can't hit anything.  this will cause a server crash in Strike(), and more importantly
-		// is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
-		// --sith
+		if ( nodes.Count <= 0 ) {
+		    //it's unlikely but entirely possible to be in a dead spot where you're too far away from every node
+		    // and can't hit anything.  this will cause a server crash in Strike(), and more importantly
+		    // is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
+		    // --sith
 
-		nodes.Add( m_Nodes[0] ); //force-add the first node which should be Iron, normal wood, etc.
+		    nodes.Add( m_Nodes[0] ); //force-add the first node which should be Iron, normal wood, etc.
+		}
 	    }
 
 	    return nodes;
