@@ -205,6 +205,9 @@ namespace Server.Engines.Gather {
 	}
 
 	public virtual void FinishGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n ) {
+	    FinishGathering( from, tool, targeted, locked, n, false );
+	}
+	public virtual void FinishGathering( Mobile from, Item tool, object targeted, object locked, GatherNode n, bool sand ) {
 	    Skill s = from.Skills[m_SkillName];
 	    
 	    //this is our chance to succeed at harvesting, not the chance to actually hit the node
@@ -230,19 +233,34 @@ namespace Server.Engines.Gather {
 	    }
 	    
 	    if ( from.CheckSkill( s, chance ) ){
-		SendSuccessMessage(from);
+		if( sand ) {
+		    SendSandSuccessMessage(from);
+		}
+		else {
+		    SendSuccessMessage(from);
+		}
 		GiveResources( n, from, true );
 		from.EndAction( locked );
 		return;
 	    }
 
-	    SendFailMessage(from);
+	    if( sand ) {
+		SendSandFailMessage(from);
+	    }
+	    else {
+		SendFailMessage(from);
+	    }
 	    from.EndAction( locked );
 	}
 
 	public abstract void SendFailMessage( Mobile m );
 	public abstract void SendNoResourcesMessage( Mobile m );
 	public abstract void SendSuccessMessage( Mobile m );
+
+	// there's gotta be a more elegant way to do this, but fuck it, I want to get Beta out the door --sith
+	public virtual void SendSandFailMessage( Mobile m ) {}
+	public virtual void SendSandNoResourcesMessage( Mobile m ) {}
+	public virtual void SendSandSuccessMessage( Mobile m ) {}
 	
 	public virtual void GiveResources( GatherNode n, Mobile m, bool placeAtFeet ){
 	    //public virtual bool Give( Mobile m, Item item, bool placeAtFeet )

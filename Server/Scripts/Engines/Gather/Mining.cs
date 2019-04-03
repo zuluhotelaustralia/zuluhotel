@@ -343,6 +343,8 @@ namespace Server.Engines.Gather
 	    
 	    new GatherTimer( from, tool, system, node, targeted, locked, delay ).Start();
 	}
+
+	
 	
 	public override void SendFailMessage( Mobile m ) {
 	    m.SendLocalizedMessage( 503043 ); // You loosen some rocks but...
@@ -354,6 +356,16 @@ namespace Server.Engines.Gather
 
 	public override void SendSuccessMessage( Mobile m ) {
 	    m.SendLocalizedMessage( 1044606 ); //you extract some bla bla bla
+	}
+
+	public override void SendSandFailMessage( Mobile m ) {
+	    m.SendLocalizedMessage(1044630);
+	}
+	public override void SendSandNoResourcesMessage( Mobile m ) {
+	    m.SendLocalizedMessage(1044629);
+	}
+	public override void SendSandSuccessMessage( Mobile m ) {
+	    m.SendLocalizedMessage(1044631);
 	}
 	
 	private Mining()

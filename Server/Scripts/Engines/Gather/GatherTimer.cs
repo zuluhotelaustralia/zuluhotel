@@ -23,7 +23,13 @@ namespace Server.Engines.Gather
 		Stop();
 		return;
 	    }
-	    m_System.FinishGathering(m_From, m_Tool, m_Targeted, m_Locked, m_Node);
+	    if( m_Node.Resource == typeof(Server.Items.Sand) ) {
+		//if we're mining sand
+		m_System.FinishGathering(m_From, m_Tool, m_Targeted, m_Locked, m_Node, true );
+	    }
+	    else {
+		m_System.FinishGathering(m_From, m_Tool, m_Targeted, m_Locked, m_Node);
+	    }
 	}
     }
     
