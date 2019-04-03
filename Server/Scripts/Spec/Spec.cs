@@ -248,8 +248,8 @@ namespace Server.Mobiles
 		m_ClassSkills.Tactics.Value +
 		m_ClassSkills.Wrestling.Value;
 
-	    // tl;dr dean parker is a shitty fucking coder
-	    // extremely messy include/skills.inc contains horrifiying isfromthatclasse() function that can be significantly
+	    // tl;dr whoever wrote the original function did not consider performance
+	    // extremely messy include/skills.inc from POL contains horrifiying isfromthatclasse() function that can be significantly
 	    //reduced if you take the time to actually figure out wtf is going on
 
 	    // floor( (specskills - 480) / 120 ) gives level
