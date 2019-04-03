@@ -3,7 +3,7 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
-* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [93/95]
+* TODO finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [94/95]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -30,7 +30,7 @@ This is a list of all the things that need to be done before we can launch a bet
 *** DONE it's not:  there's no sound or animation
 ** DONE verify mining is complete
 *** DONE There's no gathernode for Sand, and mining might let you mine ore on sand tiles.. fix this
-**** TODO sand doesn't stack
+**** DONE sand doesn't stack
 **** TODO mining sand gives wrong cliloc messages
 *** DONE There's probably no CraftResource for Sand
 ** DONE ores and logs don't stack with others of the same type
@@ -146,6 +146,13 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
+* TODO final sanity-checks [0/3]
+:properties:
+:cookie_data: todo_recursive
+:end:
+** TODO playtest gathering to ensure it's actually within the realm of viable
+** TODO playtest taking e.g. a warrior from newbie to spec 1 without macroing
+*** TODO ensure timelines/gain rates for stats and skills are legit
 
 * TODO Items to tackle after launching beta but before "1.0" [3/16]
 :properties:
