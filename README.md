@@ -41,6 +41,20 @@ This command should also dye the controller a corresponding colour for easy visu
 
 Should you wish to re-set the location of Gather Nodes simply delete each control stone, save, and restart the server.  The nodes will then respawn at random locations within 10 tiles of Lord British's throne, at which point you should repeat the setup process.
 
+### World Setup
+
+Next it's required to generate doors, signs, and invisible teleporters (for cave entrances, dungeon stairs, etc.) by issuing the following commands:
+
+```
+[doorgen
+[telgen
+[signgen
+```
+
+### Next Steps
+
+At this point you have a more-or-less playable world, lacking only appropriate spawns.  You should investigate the XMLSpawner system or else look into how the default spawners work.
+
 ## IRC
 
 The official channel of RunZH is on irc.freenode.net in the #zuluhotel channel.
