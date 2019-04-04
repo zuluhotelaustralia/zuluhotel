@@ -23,14 +23,15 @@ namespace Server.Commands
 			m_Mobile = e.Mobile;
 			m_Count = 0;
 
-			m_Mobile.SendMessage( "Generating world decoration, please wait." );
+			m_Mobile.SendMessage( "Generating world decoration (FELUCCA ONLY), please wait." );
 
-			Generate( "Data/Decoration/Britannia", Map.Trammel, Map.Felucca );
-			Generate( "Data/Decoration/Trammel", Map.Trammel );
+			Generate( "Data/Decoration/Britannia", Map.Felucca );
+			//Generate( "Data/Decoration/Britannia", Map.Trammel, Map.Felucca );
+			//Generate( "Data/Decoration/Trammel", Map.Trammel );
 			Generate( "Data/Decoration/Felucca", Map.Felucca );
-			Generate( "Data/Decoration/Ilshenar", Map.Ilshenar );
-			Generate( "Data/Decoration/Malas", Map.Malas );
-			Generate( "Data/Decoration/Tokuno", Map.Tokuno );
+			//Generate( "Data/Decoration/Ilshenar", Map.Ilshenar );
+			//Generate( "Data/Decoration/Malas", Map.Malas );
+			//Generate( "Data/Decoration/Tokuno", Map.Tokuno );
 
 			m_Mobile.SendMessage( "World generating complete. {0} items were generated.", m_Count );
 		}
