@@ -28,76 +28,76 @@ using Server.Targeting;
 namespace Server
 {
     public enum MusicName
-    {
-	Invalid = -1,
-	OldUlt01 = 0,
-	Create1,
-	DragFlit,
-	OldUlt02,
-	OldUlt03,
-	OldUlt04,
-	OldUlt05,
-	OldUlt06,
-	Stones2,
-	Britain1,
-	Britain2,
-	Bucsden,
-	Jhelom,
-	LBCastle,
-	Linelle,
-	Magincia,
-	Minoc,
-	Ocllo,
-	Samlethe,
-	Serpents,
-	Skarabra,
-	Trinsic,
-	Vesper,
-	Wind,
-	Yew,
-	Cave01,
-	Dungeon9,
-	Forest_a,
-	InTown01,
-	Jungle_a,
-	Mountn_a,
-	Plains_a,
-	Sailing,
-	Swamp_a,
-	Tavern01,
-	Tavern02,
-	Tavern03,
-	Tavern04,
-	Combat1,
-	Combat2,
-	Combat3,
-	Approach,
-	Death,
-	Victory,
-	BTCastle,
-	Nujelm,
-	Dungeon2,
-	Cove,
-	Moonglow,
-	Zento,
-	TokunoDungeon,
-	Taiko,
-	DreadHornArea,
-	ElfCity,
-	GrizzleDungeon,
-	MelisandesLair,
-	ParoxysmusLair,
-	GwennoConversation,
-	GoodEndGame,
-	GoodVsEvil,
-	GreatEarthSerpents,
-	Humanoids_U9,
-	MinocNegative,
-	Paws,
-	SelimsBar,
-	SerpentIsleCombat_U7,
-	ValoriaShips
-    }
+	{
+	    Invalid = -1,
+	    OldUlt01 = 0,
+	    Create1,
+	    DragFlit,
+	    OldUlt02,
+	    OldUlt03,
+	    OldUlt04,
+	    OldUlt05,
+	    OldUlt06,
+	    Stones2,
+	    Britain1,
+	    Britain2,
+	    Bucsden,
+	    Jhelom,
+	    LBCastle,
+	    Linelle,
+	    Magincia,
+	    Minoc,
+	    Ocllo,
+	    Samlethe,
+	    Serpents,
+	    Skarabra,
+	    Trinsic,
+	    Vesper,
+	    Wind,
+	    Yew,
+	    Cave01,
+	    Dungeon9,
+	    Forest_a,
+	    InTown01,
+	    Jungle_a,
+	    Mountn_a,
+	    Plains_a,
+	    Sailing,
+	    Swamp_a,
+	    Tavern01,
+	    Tavern02,
+	    Tavern03,
+	    Tavern04,
+	    Combat1,
+	    Combat2,
+	    Combat3,
+	    Approach,
+	    Death,
+	    Victory,
+	    BTCastle,
+	    Nujelm,
+	    Dungeon2,
+	    Cove,
+	    Moonglow,
+	    Zento,
+	    TokunoDungeon,
+	    Taiko,
+	    DreadHornArea,
+	    ElfCity,
+	    GrizzleDungeon,
+	    MelisandesLair,
+	    ParoxysmusLair,
+	    GwennoConversation,
+	    GoodEndGame,
+	    GoodVsEvil,
+	    GreatEarthSerpents,
+	    Humanoids_U9,
+	    MinocNegative,
+	    Paws,
+	    SelimsBar,
+	    SerpentIsleCombat_U7,
+	    ValoriaShips
+	}
 
     public class Region : IComparable
     {
@@ -122,6 +122,57 @@ namespace Server
 	    }
 
 	    return map.DefaultRegion;
+	}
+
+	public static void Initialize() {
+	    ssf.Add(SkillName.Alchemy, 0.0);
+	    ssf.Add(SkillName.Anatomy, 0.0);
+	    ssf.Add(SkillName.AnimalLore, 0.0);
+	    ssf.Add(SkillName.ItemID, 0.0);
+	    ssf.Add(SkillName.ArmsLore, 0.0);
+	    ssf.Add(SkillName.Begging, 0.0);
+	    ssf.Add(SkillName.Blacksmith, 0.0);
+	    ssf.Add(SkillName.Fletching, 0.0);
+	    ssf.Add(SkillName.Peacemaking, 0.0);
+	    ssf.Add(SkillName.Camping, 0.0);
+	    ssf.Add(SkillName.Carpentry, 0.0);
+	    ssf.Add(SkillName.Cartography, 0.0);
+	    ssf.Add(SkillName.Cooking, 0.0);
+	    ssf.Add(SkillName.DetectHidden, 0.0);
+	    ssf.Add(SkillName.Discordance, 0.0);
+	    ssf.Add(SkillName.EvalInt, 0.0);
+	    ssf.Add(SkillName.Healing, 0.0);
+	    ssf.Add(SkillName.Fishing, 0.0);
+	    ssf.Add(SkillName.Forensics, 0.0);
+	    ssf.Add(SkillName.Herding, 0.0);
+	    ssf.Add(SkillName.Hiding, 0.0);
+	    ssf.Add(SkillName.Provocation, 0.0);
+	    ssf.Add(SkillName.Inscribe, 0.0);
+	    ssf.Add(SkillName.Lockpicking, 0.0);
+	    ssf.Add(SkillName.Magery, 0.0);
+	    ssf.Add(SkillName.MagicResist, 0.0);
+	    ssf.Add(SkillName.Tactics, 0.0);
+	    ssf.Add(SkillName.Snooping, 0.0);
+	    ssf.Add(SkillName.Musicianship, 0.0);
+	    ssf.Add(SkillName.Poisoning, 0.0);
+	    ssf.Add(SkillName.Archery, 0.0);
+	    ssf.Add(SkillName.SpiritSpeak, 0.0);
+	    ssf.Add(SkillName.Stealing, 0.0);
+	    ssf.Add(SkillName.Tailoring, 0.0);
+	    ssf.Add(SkillName.AnimalTaming, 0.0);
+	    ssf.Add(SkillName.TasteID, 0.0);
+	    ssf.Add(SkillName.Tinkering, 0.0);
+	    ssf.Add(SkillName.Tracking, 0.0);
+	    ssf.Add(SkillName.Veterinary, 0.0);
+	    ssf.Add(SkillName.Swords, 0.0);
+	    ssf.Add(SkillName.Fencing, 0.0);
+	    ssf.Add(SkillName.Macing, 0.0);
+	    ssf.Add(SkillName.Wrestling, 0.0);
+	    ssf.Add(SkillName.Lumberjacking, 0.0);
+	    ssf.Add(SkillName.Meditation, 0.0);
+	    ssf.Add(SkillName.Mining, 0.0);
+	    ssf.Add(SkillName.Stealth, 0.0);
+	    ssf.Add(SkillName.RemoveTrap, 0.0);
 	}
 
 	private static Type m_DefaultRegionType = typeof( Region );
@@ -155,7 +206,7 @@ namespace Server
 	    return ret;
 	}
 
-
+	//Can override this in a child class to return per-skill modifiers based on a dictionary.  See this.ssf and SkillCheck.cs for context
 	public virtual double GetSkillSpecificFactor( Skill skill ){
 	    return RegionalSkillGainPrimaryFactor;
 	}
@@ -185,13 +236,14 @@ namespace Server
 	public int ChildLevel{ get{ return m_ChildLevel; } }
 	public bool Registered{ get{ return m_Registered; } }
 
-	// ~120 days to 130.0 @ 1 attempt per 10 seconds, running 24/7.
-	// ~12 days to 130.0 @ 1 attempt per seconds, running 24/7 (e.g. sparring)
-	// in order to discourage house macroing.  See Misc/SkillCheck.cs --sith
+	//see Scripts/Misc/SkillCheck.cs -- sith
 	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.0005; } }
 	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 
-
+	//Skill-Specific gain Factors -> ssf.  I want to type less.
+	//See SkillCheck.cs
+	protected static Dictionary<SkillName,double> ssf = new Dictionary<SkillName, double>();
+	
 	public Point3D GoLocation{ get{ return m_GoLocation; } set { m_GoLocation = value; } }
 	public MusicName Music{ get{ return m_Music; } set{ m_Music = value; } }
 

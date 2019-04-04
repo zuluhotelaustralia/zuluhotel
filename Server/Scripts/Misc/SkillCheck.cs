@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Server;
 using Server.Mobiles;
 using Server.Factions;
@@ -13,6 +15,11 @@ namespace Server.Misc
 	public static TimeSpan AntiMacroExpire = TimeSpan.FromMinutes( 5.0 ); //How long do we remember targets/locations?
 	public const int Allowance = 3;	//How many times may we use the same location/target for gain
 	private const int LocationSize = 5; //The size of eeach location, make this smaller so players dont have to move as far
+
+	//global skill-specific factors.  This is intentionally duplicated from Region.cs, which is intended
+	// for region-specific skill gain changes.
+	private static Dictionary<SkillName,double> gssf = new Dictionary<SkillName, double>();
+	
 	private static bool[] UseAntiMacro = new bool[]
 	    {
 		// true if this skill uses the anti-macro code, false if it does not
@@ -80,6 +87,56 @@ namespace Server.Misc
 
 	    Mobile.SkillCheckTargetHandler = new SkillCheckTargetHandler( Mobile_SkillCheckTarget );
 	    Mobile.SkillCheckDirectTargetHandler = new SkillCheckDirectTargetHandler( Mobile_SkillCheckDirectTarget );
+
+	    gssf.Add(SkillName.Alchemy, 0.0);
+	    gssf.Add(SkillName.Anatomy, 0.0);
+	    gssf.Add(SkillName.AnimalLore, 0.0);
+	    gssf.Add(SkillName.ItemID, 0.0);
+	    gssf.Add(SkillName.ArmsLore, 0.0);
+	    gssf.Add(SkillName.Begging, 0.0);
+	    gssf.Add(SkillName.Blacksmith, 0.0);
+	    gssf.Add(SkillName.Fletching, 0.0);
+	    gssf.Add(SkillName.Peacemaking, 0.0);
+	    gssf.Add(SkillName.Camping, 0.0);
+	    gssf.Add(SkillName.Carpentry, 0.0);
+	    gssf.Add(SkillName.Cartography, 0.0);
+	    gssf.Add(SkillName.Cooking, 0.0);
+	    gssf.Add(SkillName.DetectHidden, 0.0);
+	    gssf.Add(SkillName.Discordance, 0.0);
+	    gssf.Add(SkillName.EvalInt, 0.0);
+	    gssf.Add(SkillName.Healing, 0.0);
+	    gssf.Add(SkillName.Fishing, 0.0);
+	    gssf.Add(SkillName.Forensics, 0.0);
+	    gssf.Add(SkillName.Herding, 0.0);
+	    gssf.Add(SkillName.Hiding, 0.0);
+	    gssf.Add(SkillName.Provocation, 0.0);
+	    gssf.Add(SkillName.Inscribe, 0.0);
+	    gssf.Add(SkillName.Lockpicking, 0.0);
+	    gssf.Add(SkillName.Magery, 0.0);
+	    gssf.Add(SkillName.MagicResist, 0.0);
+	    gssf.Add(SkillName.Tactics, 0.0);
+	    gssf.Add(SkillName.Snooping, 0.0);
+	    gssf.Add(SkillName.Musicianship, 0.0);
+	    gssf.Add(SkillName.Poisoning, 0.0);
+	    gssf.Add(SkillName.Archery, 0.0);
+	    gssf.Add(SkillName.SpiritSpeak, 0.0);
+	    gssf.Add(SkillName.Stealing, 0.0);
+	    gssf.Add(SkillName.Tailoring, 0.0);
+	    gssf.Add(SkillName.AnimalTaming, 0.0);
+	    gssf.Add(SkillName.TasteID, 0.0);
+	    gssf.Add(SkillName.Tinkering, 0.0);
+	    gssf.Add(SkillName.Tracking, 0.0);
+	    gssf.Add(SkillName.Veterinary, 0.0);
+	    gssf.Add(SkillName.Swords, 0.0);
+	    gssf.Add(SkillName.Fencing, 0.0);
+	    gssf.Add(SkillName.Macing, 0.0);
+	    gssf.Add(SkillName.Wrestling, 0.0);
+	    gssf.Add(SkillName.Lumberjacking, 0.0);
+	    gssf.Add(SkillName.Meditation, 0.0);
+	    gssf.Add(SkillName.Mining, 0.0);
+	    gssf.Add(SkillName.Stealth, 0.0);
+	    gssf.Add(SkillName.RemoveTrap, 0.0);
+
 	}
 
 	public static bool Mobile_SkillCheckLocation( Mobile from, SkillName skillName, double minSkill, double maxSkill )
@@ -127,6 +184,8 @@ namespace Server.Misc
 	    double a = from.Region.GetSkillSpecificFactor(skill); //difficulty, returns PrimaryFactor by default
 	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently a const;
 	    double gc = 0.0;
+
+	    a += gssf[skill.SkillName]; // add a global skill gain rate modifier, if it exists
 	    
 	    if( skill.Value > 0 ) {
 		//skill must not be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
@@ -172,6 +231,8 @@ namespace Server.Misc
 	    //                       at 1 attempt per 10 sec:  ~70 days
 	    // a = 0.009, b = 1600:  at 1 attempt per second:  ~24 hours
 	    //                       at 1 attempt per 10 sec:  ~7 days
+	    // a = 0.01,  b = 1600:  at 1 attempt per second:
+	    //                       at 1 attempt per 10 sec:  
 	    
 	    if ( from.Alive && gc >= Utility.RandomDouble() )
 		Gain( from, skill );
