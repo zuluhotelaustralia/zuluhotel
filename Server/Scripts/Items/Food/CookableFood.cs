@@ -155,7 +155,7 @@ namespace Server.Items
 						return;
 					}
 
-					if ( m_From.CheckSkill( SkillName.Cooking, m_CookableFood.CookingLevel, 100 ) )
+					if ( m_From.CheckSkill( SkillName.Cooking, m_CookableFood.CookingLevel, 130 ) )
 					{
 						Food cookedFood = m_CookableFood.Cook();
 
