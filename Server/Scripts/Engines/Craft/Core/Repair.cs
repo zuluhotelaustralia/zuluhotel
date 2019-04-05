@@ -255,7 +255,7 @@ namespace Server.Engines.Craft
 
 							damage += 30;
 
-							if ( !from.CheckSkill( SkillName.Tinkering, 0.0, 100.0 ) )
+							if ( !from.CheckSkill( SkillName.Tinkering, 0.0, 130.0 ) )
 								damage /= 2;
 
 							Container pack = from.Backpack;
