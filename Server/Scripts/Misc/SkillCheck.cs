@@ -3,12 +3,17 @@ using Server;
 using Server.Mobiles;
 using Server.Factions;
 using Server.Antimacro;
+using Server.Commands;
 
 namespace Server.Misc
 {
     public class SkillCheck
     {
 	private static readonly bool AntiMacroCode = false; //was !Core.ML	//Change this to false to disable anti-macro code
+
+        private static bool m_LogRolls = false;
+
+        
 
 	public static TimeSpan AntiMacroExpire = TimeSpan.FromMinutes( 5.0 ); //How long do we remember targets/locations?
 	public const int Allowance = 3;	//How many times may we use the same location/target for gain
@@ -75,12 +80,23 @@ namespace Server.Misc
 
 	public static void Initialize()
 	{
+            CommandSystem.Register("ToggleSkillCheckLogging", AccessLevel.Administrator, new CommandEventHandler( ToggleSkillCheckLogging_OnCommand ));
+            
 	    Mobile.SkillCheckLocationHandler = new SkillCheckLocationHandler( Mobile_SkillCheckLocation );
 	    Mobile.SkillCheckDirectLocationHandler = new SkillCheckDirectLocationHandler( Mobile_SkillCheckDirectLocation );
 
 	    Mobile.SkillCheckTargetHandler = new SkillCheckTargetHandler( Mobile_SkillCheckTarget );
 	    Mobile.SkillCheckDirectTargetHandler = new SkillCheckDirectTargetHandler( Mobile_SkillCheckDirectTarget );
 	}
+
+
+        [Usage( "ToggleSkillCheckLogging" )]
+        [Description( "Toggles logging to console of skill check rolls." )]
+        private static void ToggleSkillCheckLogging_OnCommand( CommandEventArgs e )
+        {
+            m_LogRolls = ! m_LogRolls;
+            e.Mobile.SendMessage(m_LogRolls ? "Skill check logging ENABLED." : "Skill check logging DISABLED.");
+        }
 
 	public static bool Mobile_SkillCheckLocation( Mobile from, SkillName skillName, double minSkill, double maxSkill )
 	{
@@ -172,8 +188,13 @@ namespace Server.Misc
 	    //                       at 1 attempt per 10 sec:  ~70 days
 	    // a = 0.009, b = 1600:  at 1 attempt per second:  ~24 hours
 	    //                       at 1 attempt per 10 sec:  ~7 days
+
+            double roll = Utility.RandomDouble();
+
+            if ( m_LogRolls )
+                Console.WriteLine("{3} a {4,5:G5} b {5,5:G5} gc {0,5:P} -> roll {1,5:P} -> {2}", gc, roll, gc >= roll, from.Name, a, b);
 	    
-	    if ( from.Alive && gc >= Utility.RandomDouble() )
+	    if ( from.Alive && gc >= roll )
 		Gain( from, skill );
 
 	    return success;
