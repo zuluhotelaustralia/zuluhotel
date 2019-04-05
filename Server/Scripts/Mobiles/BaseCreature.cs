@@ -5183,8 +5183,8 @@ namespace Server.Mobiles
 		    {
 			patient.SendLocalizedMessage( 1010059 ); // You have been cured of all poisons.
 
-			CheckSkill( SkillName.Healing, 0.0, 60.0 + poisonLevel * 10.0 ); // TODO: Verify formula
-			CheckSkill( SkillName.Anatomy, 0.0, 100.0 );
+			CheckSkill( SkillName.Healing, 0.0, 90.0 + poisonLevel * 10.0 ); // TODO: Verify formula
+			CheckSkill( SkillName.Anatomy, 0.0, 130.0 );
 		    }
 		}
 	    }
@@ -5215,8 +5215,8 @@ namespace Server.Mobiles
 
 		    patient.Heal( (int)toHeal );
 
-		    CheckSkill( SkillName.Healing, 0.0, 90.0 );
-		    CheckSkill( SkillName.Anatomy, 0.0, 100.0 );
+		    CheckSkill( SkillName.Healing, 0.0, 110.0 );
+		    CheckSkill( SkillName.Anatomy, 0.0, 130.0 );
 		}
 	    }
 
