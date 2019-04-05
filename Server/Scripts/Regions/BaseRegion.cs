@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Xml;
 using Server;
 using Server.Items;
+using Server.Commands;
 using Server.Mobiles;
 using Server.Gumps;
+using Server.Targeting;
 
 namespace Server.Regions
 {
@@ -16,6 +18,21 @@ namespace Server.Regions
 	Random
     }
 
+    //see BaseRegion.Initialize()
+    public class GRGFTarget : Target {
+	public GRGFTarget() : base( 15, true, TargetFlags.None ){}
+
+	protected override void OnTarget( Mobile from, object targ ) {
+	    if( targ is Mobile ) {
+		Region r = ((Mobile)targ).Region;
+		from.SendMessage("Region is {0}, factors are {1} and {2}.", r, r.RegionalSkillGainPrimaryFactor, r.RegionalSkillGainSecondaryFactor );
+	    }
+	    else {
+		from.SendMessage("bruh");
+	    }
+	}
+    }
+    
     public class BaseRegion : Region
     {
 	public virtual bool YoungProtected { get { return true; } }
@@ -26,9 +43,13 @@ namespace Server.Regions
 	public virtual bool LogoutAllowed { get { return true; } }
 
 	//see Server/Region.cs
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.005; } }
-	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
+	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } }
+	public override double RegionalSkillGainSecondaryFactor { get { return base.RegionalSkillGainSecondaryFactor; } }
 
+	public static void Initialize() {
+	    CommandSystem.Register( "GetRegionGainFactors", AccessLevel.Developer, new CommandEventHandler( GetRegionGainFactors_OnCommand ) );
+	}
+	
 	public static void Configure()
 	{
 	    Region.DefaultRegionType = typeof( BaseRegion );
@@ -64,6 +85,12 @@ namespace Server.Regions
 
 	public bool ExcludeFromParentSpawns{ get{ return m_ExcludeFromParentSpawns; } set{ m_ExcludeFromParentSpawns = value; } }
 
+	[Usage("GetRegionGainFactors")]
+	[Description("Gets both Regional SkillGain Factors for the targeted Mobile")]
+	public static void GetRegionGainFactors_OnCommand( CommandEventArgs e ){
+	    e.Mobile.Target = new GRGFTarget();
+	}
+	
 	public override void OnUnregister()
 	{
 	    base.OnUnregister();

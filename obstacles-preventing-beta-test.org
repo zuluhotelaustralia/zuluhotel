@@ -146,14 +146,16 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [1/5]
+* TODO final sanity-checks [1/6]
 :properties:
 :cookie_data: todo_recursive
 :end:
 ** TODO playtest gathering to ensure it's actually within the realm of viable
 ** TODO playtest taking e.g. a warrior from newbie to spec 1 without macroing
 ** TODO perform minimal spawning of Serpent's Hold and perhaps the Fire Dungeon
+** TODO a whole 2nd set of implicit skillcaps re: code passing minSkill and maxSkill to the handler functions
 *** TODO ensure timelines/gain rates for stats and skills are legit
+*** TODO stats too
 ** DONE figure out why teleporters (i.e. cave doors, stairs, moongates) don't work
 
 * TODO Items to tackle after launching beta but before "1.0" [3/16]
