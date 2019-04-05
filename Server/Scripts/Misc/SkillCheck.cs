@@ -477,7 +477,7 @@ namespace Server.Misc
 		    }
 	    }
 
-	    bool atrophy = ( (from.RawStatTotal / (double)from.StatCap) >= Utility.RandomDouble() );
+	    bool atrophy = false; //( (from.RawStatTotal / (double)from.StatCap) >= Utility.RandomDouble() );
 
 	    IncreaseStat( from, stat, atrophy );
 	}
