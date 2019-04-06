@@ -191,7 +191,7 @@ namespace Server.Mobiles
 	public void ComputeSpec()
 	{
 	    //keep in mind this has to run every time anyone swings a weapon or uses a skill so it needs to avoid looping if possible
-	    //also note that total is in "x10" notation, whereas skillname.value is in regular decimal form
+	    //also note that total is in fixed-point aka "x10" notation, whereas skillname.value is in regular decimal form
 
 	    double total = m_ClassSkills.Total / 10;
 
