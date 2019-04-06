@@ -81,7 +81,7 @@ namespace Server.SkillHandlers
 					}
 				}
 
-				ok = ( !badCombat && m.CheckSkill( SkillName.Hiding, 0.0 - bonus, 100.0 - bonus ) );
+				ok = ( !badCombat && m.CheckSkill( SkillName.Hiding, 0.0 - bonus, 130.0 - bonus ) );
 			}
 
 			if ( badCombat )
