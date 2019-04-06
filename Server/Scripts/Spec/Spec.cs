@@ -55,7 +55,7 @@ namespace Server.Mobiles
 		}
 		else
 		{
-		    return ( 1.0 + ((double)m_SpecLevel * 0.10) ); // +10% per level
+		    return ( 1.0 + ((double)m_SpecLevel * 0.05) ); // +5% per level
 		}
 	    }
 	}
