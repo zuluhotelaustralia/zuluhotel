@@ -644,7 +644,7 @@ namespace Server.Items
 				case 3: return 51.0;
 				case 4: return 61.0;
 				case 5: return 70.0;
-				case 6: return 70.0;
+				case 6: return 90.0;
 
 				default: return 0.0;
 			}
