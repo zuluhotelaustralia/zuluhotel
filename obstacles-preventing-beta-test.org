@@ -146,7 +146,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [1/7]
+* TODO final sanity-checks [2/9]
 :properties:
 :cookie_data: todo_recursive
 :end:
