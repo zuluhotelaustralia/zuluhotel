@@ -19,6 +19,8 @@ namespace Server.Regions
 		    return 0.15;
 		case SkillName.Meditation:
 		    return 0.1;
+		case SkillName.Healing:
+		    return 0.1;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
 	    }
