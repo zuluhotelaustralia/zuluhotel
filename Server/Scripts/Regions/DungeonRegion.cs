@@ -16,9 +16,9 @@ namespace Server.Regions
 	public override double GetSkillSpecificFactor( Skill skill ){
 	    switch( skill.SkillName ){
 		case SkillName.Magery:
-		    return 0.05;
+		    return 0.15;
 		case SkillName.Meditation:
-		    return 0.06;
+		    return 0.1;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
 	    }
