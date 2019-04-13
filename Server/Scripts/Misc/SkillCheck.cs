@@ -95,6 +95,7 @@ namespace Server.Misc
 	    Mobile.SkillCheckTargetHandler = new SkillCheckTargetHandler( Mobile_SkillCheckTarget );
 	    Mobile.SkillCheckDirectTargetHandler = new SkillCheckDirectTargetHandler( Mobile_SkillCheckDirectTarget );
 
+	    //change these to 1's, it's multiplicative now
 	    gssf.Add(SkillName.Alchemy, 0.0);
 	    gssf.Add(SkillName.Anatomy, 0.0);
 	    gssf.Add(SkillName.AnimalLore, 0.0);
@@ -201,7 +202,7 @@ namespace Server.Misc
 	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently a const;
 	    double gc = 0.0;
 
-	    a *= gssf[skill.SkillName]; // multiply by a global skill gain rate modifier, if it exists
+	    //a *= gssf[skill.SkillName]; // multiply by a global skill gain rate modifier, if it exists
 	    
 	    if( skill.Value > 0 ) {
 		//skill must not be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
