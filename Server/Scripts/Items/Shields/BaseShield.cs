@@ -120,7 +120,7 @@ namespace Server.Items
 					return damage;
 
 				double ar = this.ArmorRating;
-				double chance = (owner.Skills[SkillName.Parry].Value - (ar * 2.0)) / 100.0;
+				double chance = (owner.Skills[SkillName.Parry].Value - (ar * 2.0)) / 150.0;
 
 				if( chance < 0.01 )
 					chance = 0.01;
