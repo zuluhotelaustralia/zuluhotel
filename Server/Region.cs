@@ -124,57 +124,6 @@ namespace Server
 	    return map.DefaultRegion;
 	}
 
-	public static void Initialize() {
-	    ssf.Add(SkillName.Alchemy, 0.0);
-	    ssf.Add(SkillName.Anatomy, 0.0);
-	    ssf.Add(SkillName.AnimalLore, 0.0);
-	    ssf.Add(SkillName.ItemID, 0.0);
-	    ssf.Add(SkillName.ArmsLore, 0.0);
-	    ssf.Add(SkillName.Begging, 0.0);
-	    ssf.Add(SkillName.Blacksmith, 0.0);
-	    ssf.Add(SkillName.Fletching, 0.0);
-	    ssf.Add(SkillName.Peacemaking, 0.0);
-	    ssf.Add(SkillName.Camping, 0.0);
-	    ssf.Add(SkillName.Carpentry, 0.0);
-	    ssf.Add(SkillName.Cartography, 0.0);
-	    ssf.Add(SkillName.Cooking, 0.0);
-	    ssf.Add(SkillName.DetectHidden, 0.0);
-	    ssf.Add(SkillName.Discordance, 0.0);
-	    ssf.Add(SkillName.EvalInt, 0.0);
-	    ssf.Add(SkillName.Healing, 0.0);
-	    ssf.Add(SkillName.Fishing, 0.0);
-	    ssf.Add(SkillName.Forensics, 0.0);
-	    ssf.Add(SkillName.Herding, 0.0);
-	    ssf.Add(SkillName.Hiding, 0.0);
-	    ssf.Add(SkillName.Provocation, 0.0);
-	    ssf.Add(SkillName.Inscribe, 0.0);
-	    ssf.Add(SkillName.Lockpicking, 0.0);
-	    ssf.Add(SkillName.Magery, 0.0);
-	    ssf.Add(SkillName.MagicResist, 0.0);
-	    ssf.Add(SkillName.Tactics, 0.0);
-	    ssf.Add(SkillName.Snooping, 0.0);
-	    ssf.Add(SkillName.Musicianship, 0.0);
-	    ssf.Add(SkillName.Poisoning, 0.0);
-	    ssf.Add(SkillName.Archery, 0.0);
-	    ssf.Add(SkillName.SpiritSpeak, 0.0);
-	    ssf.Add(SkillName.Stealing, 0.0);
-	    ssf.Add(SkillName.Tailoring, 0.0);
-	    ssf.Add(SkillName.AnimalTaming, 0.0);
-	    ssf.Add(SkillName.TasteID, 0.0);
-	    ssf.Add(SkillName.Tinkering, 0.0);
-	    ssf.Add(SkillName.Tracking, 0.0);
-	    ssf.Add(SkillName.Veterinary, 0.0);
-	    ssf.Add(SkillName.Swords, 0.0);
-	    ssf.Add(SkillName.Fencing, 0.0);
-	    ssf.Add(SkillName.Macing, 0.0);
-	    ssf.Add(SkillName.Wrestling, 0.0);
-	    ssf.Add(SkillName.Lumberjacking, 0.0);
-	    ssf.Add(SkillName.Meditation, 0.0);
-	    ssf.Add(SkillName.Mining, 0.0);
-	    ssf.Add(SkillName.Stealth, 0.0);
-	    ssf.Add(SkillName.RemoveTrap, 0.0);
-	}
-
 	private static Type m_DefaultRegionType = typeof( Region );
 	public static Type DefaultRegionType{ get{ return m_DefaultRegionType; } set{ m_DefaultRegionType = value; } }
 
@@ -208,7 +157,11 @@ namespace Server
 
 	//Can override this in a child class to return per-skill modifiers based on a dictionary.  See this.ssf and SkillCheck.cs for context
 	public virtual double GetSkillSpecificFactor( Skill skill ){
-	    return RegionalSkillGainPrimaryFactor;
+	    switch( skill.SkillName ) {
+		case 
+		default:
+		    return RegionalSkillGainPrimaryFactor;
+	    }
 	}
 
 	private string m_Name;
@@ -237,7 +190,7 @@ namespace Server
 	public bool Registered{ get{ return m_Registered; } }
 
 	//see Scripts/Misc/SkillCheck.cs -- sith
-	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.0005; } }
+	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.01; } }
 	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 
 	//Skill-Specific gain Factors -> ssf.  I want to type less.
