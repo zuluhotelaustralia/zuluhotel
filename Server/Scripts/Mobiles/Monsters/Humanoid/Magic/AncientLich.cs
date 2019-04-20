@@ -83,6 +83,7 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.FilthyRich, 3 );
+			AddLoot( LootPack.GreaterNecroScrolls, 2);
 			AddLoot( LootPack.MedScrolls, 2 );
 		}
 

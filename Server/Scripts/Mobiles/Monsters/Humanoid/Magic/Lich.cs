@@ -54,6 +54,7 @@ namespace Server.Mobiles
 		{
 			AddLoot( LootPack.Rich );
 			AddLoot( LootPack.MedScrolls, 2 );
+			AddLoot( LootPack.LesserNecroScrolls, 2);
 		}
 
 		public override OppositionGroup OppositionGroup

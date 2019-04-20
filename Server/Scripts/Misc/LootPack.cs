@@ -104,7 +104,28 @@ namespace Server
 	    {
 		new LootPackItem( typeof( BaseInstrument ), 1 )
 	    };
-
+	public static readonly LootPackItem[] LesserNecroScrollsItems = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( ControlUndeadScroll ), 1),
+		new LootPackItem( typeof( DarknessScroll ), 1),
+		new LootPackItem( typeof( DecayingRayScroll ), 1),
+		new LootPackItem( typeof( SpectresTouchScroll ), 1),
+		new LootPackItem( typeof( AbyssalFlameScroll ), 1),
+		new LootPackItem( typeof( AnimateDeadScroll ), 1),
+		new LootPackItem( typeof( SacrificeScroll ), 1),
+		new LootPackItem( typeof( WraithBreathScroll ), 1)
+	    };
+	public static readonly LootPackItem[] GreaterNecroScrollsItems = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( SorcerorsBaneScroll ), 1),
+		new LootPackItem( typeof( SummonSpiritScroll ), 1),
+		new LootPackItem( typeof( WraithFormScroll ), 1),
+		new LootPackItem( typeof( WyvernStrikeScroll ), 1),
+		new LootPackItem( typeof( KillScroll ), 1),
+		new LootPackItem( typeof( LicheFormScroll ), 1),
+		new LootPackItem( typeof( PlagueScroll ), 1),
+		new LootPackItem( typeof( SpellbindScroll ), 1)
+	    };
 
 	public static readonly LootPackItem[] LowScrollItems = new LootPackItem[]
 	    {
@@ -465,6 +486,17 @@ namespace Server
 		    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 60, 100 ),
 		    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 70, 100 )
 		} );
+
+	public static readonly LootPack LesserNecroScrolls = new LootPack( new LootPackEntry[]
+		{
+		    new LootPackEntry(true, LesserNecroScrollsItems, 30.00, 1)
+		});
+
+	public static readonly LootPack GreaterNecroScrolls = new LootPack( new LootPackEntry[]
+		{
+		    new LootPackEntry( true, GreaterNecroScrollsItems, 30.00, 1)
+		});
+	
 	#endregion
 
 	#region Generic accessors
@@ -820,31 +852,6 @@ namespace Server
 	}
 
 	private static Type[]   m_BlankTypes = new Type[]{ typeof( BlankScroll ) };
-
-	private static Type[][] m_NecroTypes = new Type[][]
-	    {
-		new Type[] // lesser
-		{
-		    typeof( ControlUndeadScroll ),
-		    typeof( DarknessScroll ),
-		    typeof( DecayingRayScroll ),
-		    typeof( SpectresTouchScroll ),
-		    typeof( AbyssalFlameScroll ),
-		    typeof( AnimateDeadScroll ),
-		    typeof( SacrificeScroll ),
-		    typeof( WraithBreathScroll )
-		},
-		new Type[] // greater
-		{
-		    typeof( SorcerorsBaneScroll ),
-		    typeof( SummonSpiritScroll ),
-		    typeof( WraithFormScroll ),
-		    typeof( WyvernStrikeScroll ),
-		    typeof( KillScroll ),
-		    typeof( LicheFormScroll ),
-		    typeof( PlagueScroll ),
-		    typeof( SpellbindScroll )
-	        }};
 
 	public static Item RandomScroll( int index, int minCircle, int maxCircle )
 	{
