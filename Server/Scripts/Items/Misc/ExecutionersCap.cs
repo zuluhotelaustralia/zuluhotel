@@ -2,6 +2,7 @@ using System;
 
 namespace Server.Items
 {
+    //does this need to inherit from basereagent? --sith
 	public class ExecutionersCap : Item
 	{
 		[Constructable]
