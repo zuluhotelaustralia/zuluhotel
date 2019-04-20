@@ -146,10 +146,11 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [14/25]
+* TODO final sanity-checks [15/28]
 :properties:
 :cookie_data: todo_recursive
 :end:
+** TODO disable or silently convert characters to defaults if they try to generate a character with ninjitsu or something, same with elves
 ** TODO Criminal to loot spider?
    Maybe criminal to loot somebody elses kill
 ** TODO Cliloc errors on all armor
@@ -167,6 +168,9 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE bandies
 ** DONE Add a vendor who sells pagan regs
 ** DONE Disable concussion blow and other bullshit special moves
+** DONE make sure necro scrolls drop in loot
+** TODO and earth scrolls
+** TODO and the books for earth and necro
 ** TODO playtest gathering to ensure it's actually within the realm of viable
 ** TODO looks like there's a bug in the lumberjacking gump to do with categorizing your log types
 ** DONE implement [spec
