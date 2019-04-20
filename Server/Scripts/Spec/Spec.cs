@@ -1,6 +1,7 @@
 using System;
 using Server;
 using System.Text;
+using Server.Commands;
 using Server.Spells;
 
 namespace Server.Mobiles
@@ -20,6 +21,50 @@ namespace Server.Mobiles
     [PropertyObject]
     public class Spec
     {
+	public static void Initialize(){
+	    CommandSystem.Register( "spec", AccessLevel.Player, new CommandEventHandler( Spec_OnCommand ) );
+	    CommandSystem.Register( "showclasse", AccessLevel.Player, new CommandEventHandler( Spec_OnCommand ) );
+	}
+
+	public static void Spec_OnCommand( CommandEventArgs e ){
+	    PlayerMobile pm = e.Mobile as PlayerMobile;
+	    pm.Spec.ComputeSpec();
+
+	    if( pm.Spec.SpecName == SpecName.None ){
+		pm.SendMessage("You aren't a member of any particular Specialization."); //cliloc this
+	    }
+	    else{
+		//there's a more elegant way to do this with extension methods but I'm in a hurry --sith TODO
+		string name = "";
+		switch( pm.Spec.SpecName ){
+		    case SpecName.Bard:
+			name = "Bard";
+			break;
+		    case SpecName.Crafter:
+			name = "Crafter";
+			break;
+		    case SpecName.Mage:
+			name = "Mage";
+			break;
+		    case SpecName.Powerplayer:
+			name = "Power Player";
+			break;
+		    case SpecName.Ranger:
+			name = "Ranger";
+			break;
+		    case SpecName.Warrior:
+			name = "Warrior";
+			break;
+		    default:
+			pm.SendMessage("There appears to be an error in Spec.cs.  Please inform the server staff.");
+			Console.WriteLine("[Spec] This should never happen!!");
+			return;
+		}
+
+		pm.SendMessage("You are a qualified Spec {0} {1}.", pm.Spec.SpecLevel, name);
+	    }
+	}
+	
 	private PlayerMobile m_Parent; //store the parent obj
 	private Skills m_ClassSkills;
 

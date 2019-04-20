@@ -10,6 +10,7 @@ using Server.Mobiles;
 There are a Gump, a Timer, and a utility Target class here.  The idea is that a separate system, perhaps with a control stone for easy staff access, will control when to send
 macro test challenges to whom.  The actual call/query to the macrotest system should be made whenever someone swings an axe/fishing pole, etc.
 
+// not accurate as of version 19.4.79
   CheckSkill() <--+---> Control Stone --->-------> system object (this class) ->-+
                   |                                                              |
                   +----------<--------------<---------<------------<--------<----+
