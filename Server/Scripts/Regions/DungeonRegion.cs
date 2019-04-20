@@ -16,11 +16,37 @@ namespace Server.Regions
 	public override double GetSkillSpecificFactor( Skill skill ){
 	    switch( skill.SkillName ){
 		case SkillName.Magery:
-		    return 0.15;
+		    return 0.2;
 		case SkillName.Meditation:
 		    return 0.1;
 		case SkillName.Healing:
+		    return 0.3;
+		case SkillName.Veterinary:
+		    return 0.3;
+		case SkillName.AnimalTaming:
+		    return 0.2;
+		case SkillName.Archery:
 		    return 0.1;
+		case SkillName.Fencing:
+		    return 0.1;
+		case SkillName.Swords:
+		    return 0.1;
+		case SkillName.Parry:
+		    return 0.1;
+		case SkillName.Macing:
+		    return 0.1;
+		case SkillName.Tracking:
+		    return 0.1;
+		case SkillName.Wrestling:
+		    return 0.1;
+		case SkillName.Tactics:
+		    return 0.1;
+		case SkillName.RemoveTrap:
+		    return 0.9;
+		case SkillName.DetectHidden:
+		    return 0.1;
+		case SkillName.MagicResist:
+		    return 0.2;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
 	    }

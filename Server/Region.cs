@@ -156,8 +156,27 @@ namespace Server
 	}
 
 	//Can override this in a child class to return per-skill modifiers based on a dictionary.  See this.ssf and SkillCheck.cs for context
+	//intent here:  all "wilderness-appropriate" skills, and anything that's a pain in the ass to raise like taming because there are simply much fewer opportunities.
 	public virtual double GetSkillSpecificFactor( Skill skill ){
 	    switch( skill.SkillName ) {
+		case SkillName.AnimalTaming:
+		    return 0.1;
+		case SkillName.Healing:
+		    return 0.1;
+		case SkillName.Veterinary:
+		    return 0.1;
+		case SkillName.Tracking:
+		    return 0.1;
+		case SkillName.Mining:
+		    return 0.1;
+		case SkillName.Lumberjacking:
+		    return 0.1;
+		case SkillName.Fishing:
+		    return 0.1;
+		case SkillName.Forensics:
+		    return 0.8;
+		case SkillName.Camping:
+		    return 0.1;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
 	    }
@@ -189,7 +208,7 @@ namespace Server
 	public bool Registered{ get{ return m_Registered; } }
 
 	//see Scripts/Misc/SkillCheck.cs -- sith
-	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.01; } }
+	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.03; } }
 	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 
 	//Skill-Specific gain Factors -> ssf.  I want to type less.

@@ -30,6 +30,9 @@ namespace Server.Regions
 	}
 
 	public override double RegionalSkillGainPrimaryFactor { get { return 0.00005; } }
+	public override double GetSkillSpecificFactor(Skill skill){
+	    return RegionalSkillGainPrimaryFactor;
+	}
 
 	public HouseRegion( BaseHouse house ) : base( null, house.Map, HousePriority, GetArea( house ) )
 	{

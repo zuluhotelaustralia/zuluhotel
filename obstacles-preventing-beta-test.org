@@ -146,7 +146,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [15/28]
+* TODO final sanity-checks [12/22]
 :properties:
 :cookie_data: todo_recursive
 :end:
@@ -169,8 +169,8 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE Add a vendor who sells pagan regs
 ** DONE Disable concussion blow and other bullshit special moves
 ** DONE make sure necro scrolls drop in loot
-** TODO and earth scrolls
-** TODO and the books for earth and necro
+** DONE and earth scrolls
+** DONE and the books for earth and necro
 ** TODO playtest gathering to ensure it's actually within the realm of viable
 ** TODO looks like there's a bug in the lumberjacking gump to do with categorizing your log types
 ** DONE implement [spec
