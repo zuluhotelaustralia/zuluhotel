@@ -113,15 +113,33 @@ namespace Server.Items
 		[Constructable]
 		public DeathRobe()
 		{
-			LootType = LootType.Newbied;
+                    // Daleron: Why accumulate death robes?
+                    // LootType = LootType.Newbied;
 			Hue = 2301;
 			BeginDecay( m_DefaultDecayTime );
 		}
 
 		public new bool Scissor( Mobile from, Scissors scissors )
 		{
-			from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
-			return false;
+			if ( !IsChildOf( from.Backpack ) )
+			{
+				from.SendLocalizedMessage( 502437 ); // Items you wish to cut must be in your backpack.
+				return false;
+			}
+
+			if ( Ethics.Ethic.IsImbued( this ) )
+			{
+				from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
+				return false;
+			}
+
+                        // TODO(Daleron): Skill?
+                        Item bandage = new Bandage(30);
+                        from.PlaceInBackpack(bandage);
+                        Delete();
+                        
+                        from.SendLocalizedMessage( 3006058 ); // You cut the item into some bandages and place in your bag.
+			return true;
 		}
 
 		public void BeginDecay()
