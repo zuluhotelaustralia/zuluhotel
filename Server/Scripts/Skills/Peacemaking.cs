@@ -81,7 +81,7 @@ namespace Server.SkillHandlers
 							m_Instrument.PlayInstrumentBadly( from );
 							m_Instrument.ConsumeUse( from );
 						}
-						else if ( !from.CheckSkill( SkillName.Peacemaking, 0.0, 120.0 ) )
+						else if ( !from.CheckSkill( SkillName.Peacemaking, 0.0, 130.0 ) )
 						{
 							from.SendLocalizedMessage( 500613 ); // You attempt to calm everyone, but fail.
 							m_Instrument.PlayInstrumentBadly( from );

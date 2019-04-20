@@ -388,9 +388,9 @@ namespace Server.Misc
 
 	    switch ( stat )
 	    {
-		case Stat.Str: return ( from.StrLock == StatLockType.Up && from.RawStr < 131 ); //why the FUCK aren't these a named constant???
-		case Stat.Dex: return ( from.DexLock == StatLockType.Up && from.RawDex < 131 );
-		case Stat.Int: return ( from.IntLock == StatLockType.Up && from.RawInt < 131 );
+		case Stat.Str: return ( from.StrLock == StatLockType.Up && from.RawStr < 130 ); //why the FUCK aren't these a named constant???
+		case Stat.Dex: return ( from.DexLock == StatLockType.Up && from.RawDex < 130 );
+		case Stat.Int: return ( from.IntLock == StatLockType.Up && from.RawInt < 130 );
 	    }
 
 	    return false;

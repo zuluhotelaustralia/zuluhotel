@@ -171,7 +171,7 @@ namespace Server.SkillHandlers
 
 			TrackTypeDelegate check = m_Delegates[type];
 
-			from.CheckSkill( SkillName.Tracking, 21.1, 100.0 ); // Passive gain
+			from.CheckSkill( SkillName.Tracking, 21.1, 130.0 ); // Passive gain
 
 			int range = 10 + (int)(from.Skills[SkillName.Tracking].Value / 10);
 

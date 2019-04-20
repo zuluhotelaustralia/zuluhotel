@@ -133,7 +133,7 @@ namespace Server
 		case 0xFF:
 		    {
 			m_Base = 0;
-			m_Cap = 1000;
+			m_Cap = 1300;
 			m_Lock = SkillLock.Up;
 
 			break;
@@ -148,7 +148,7 @@ namespace Server
 			    if ( (version & 0x2) != 0 )
 				m_Cap = reader.ReadUShort();
 			    else
-				m_Cap = 1000;
+				m_Cap = 1300;
 
 			    if ( (version & 0x4) != 0 )
 				m_Lock = (SkillLock)reader.ReadByte();
@@ -184,7 +184,7 @@ namespace Server
 
 	public void Serialize( GenericWriter writer )
 	{
-	    if ( m_Base == 0 && m_Cap == 1000 && m_Lock == SkillLock.Up )
+	    if ( m_Base == 0 && m_Cap == 1300 && m_Lock == SkillLock.Up )
 	    {
 		writer.Write( (byte) 0xFF ); // default
 	    }
@@ -195,7 +195,7 @@ namespace Server
 		if ( m_Base != 0 )
 		    flags |= 0x1;
 
-		if ( m_Cap != 1000 )
+		if ( m_Cap != 1300 )
 		    flags |= 0x2;
 
 		if ( m_Lock != SkillLock.Up )
@@ -206,7 +206,7 @@ namespace Server
 		if ( m_Base != 0 )
 		    writer.Write( (short) m_Base );
 
-		if ( m_Cap != 1000 )
+		if ( m_Cap != 1300 )
 		    writer.Write( (short) m_Cap );
 
 		if ( m_Lock != SkillLock.Up )
@@ -379,11 +379,11 @@ namespace Server
 	    get
 	    {
 		double baseValue = Base;
-		double inv = 100.0 - baseValue;
+		double inv = 130.0 - baseValue;
 
 		if( inv < 0.0 ) inv = 0.0;
 
-		inv /= 100.0;
+		inv /= 130.0;
 
 		double statsOffset = ((m_UseStatMods ? m_Owner.Owner.Str : m_Owner.Owner.RawStr) * m_Info.StrScale) + ((m_UseStatMods ? m_Owner.Owner.Dex : m_Owner.Owner.RawDex) * m_Info.DexScale) + ((m_UseStatMods ? m_Owner.Owner.Int : m_Owner.Owner.RawInt) * m_Info.IntScale);
 		double statTotal = m_Info.StatTotal * inv;
@@ -914,7 +914,7 @@ namespace Server
 		Skill sk = m_Skills[skillID];
 
 		if ( sk == null )
-		    m_Skills[skillID] = sk = new Skill( this, SkillInfo.Table[skillID], 0, 1000, SkillLock.Up );
+		    m_Skills[skillID] = sk = new Skill( this, SkillInfo.Table[skillID], 0, 1300, SkillLock.Up );
 
 		return sk;
 	    }
@@ -1025,7 +1025,7 @@ namespace Server
 	public Skills( Mobile owner )
 	{
 	    m_Owner = owner;
-	    m_Cap = 7000;
+	    m_Cap = 65000;
 
 	    SkillInfo[] info = SkillInfo.Table;
 
@@ -1053,7 +1053,7 @@ namespace Server
 		case 1:
 		    {
 			if ( version < 2 )
-			    m_Cap = 7000;
+			    m_Cap = 65000;
 
 			if ( version < 3 )
 			    /*m_Total =*/ reader.ReadInt();
@@ -1070,7 +1070,7 @@ namespace Server
 			    {
 				Skill sk = new Skill( this, info[i], reader );
 
-				if ( sk.BaseFixedPoint != 0 || sk.CapFixedPoint != 1000 || sk.Lock != SkillLock.Up )
+				if ( sk.BaseFixedPoint != 0 || sk.CapFixedPoint != 1300 || sk.Lock != SkillLock.Up )
 				{
 				    m_Skills[i] = sk;
 				    m_Total += sk.BaseFixedPoint;
