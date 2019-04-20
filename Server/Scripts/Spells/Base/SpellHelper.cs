@@ -240,6 +240,7 @@ namespace Server.Spells
 
 	    StatMod mod = target.GetStatMod( name );
 
+	    // TODO
             // daleron: This looks fucked.  If I'm reading this right,
             // if you're cursed, we will compute a new stat mod that
             // combines the curse and the buff you're about to get and
@@ -291,6 +292,7 @@ namespace Server.Spells
 	    return false;
 	}
 
+	//sith TODO change this to take the spell's DamageSkill or CastSkill into consideration as appropriate
 	public static TimeSpan GetDuration( Mobile caster, Mobile target )
 	{
 	    if( Core.AOS )
@@ -310,7 +312,7 @@ namespace Server.Spells
 	public static double GetOffsetScalar( Mobile caster, Mobile target, bool curse )
 	{
 	    double percent;
-
+	    // sith TODO if stats go above 100 this doesn't do what they think it does, even on OSI
 	    if( curse )
 		percent = 8 + (caster.Skills.EvalInt.Fixed / 100) - (target.Skills.MagicResist.Fixed / 100);
 	    else
