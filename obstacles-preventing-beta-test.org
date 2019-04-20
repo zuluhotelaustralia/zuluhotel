@@ -208,133 +208,145 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO Example:  Shepherd's Crook [ Exceptional / Gauntlet ] shows incorrect cliloc string (1160518 instead of 1160044)
 
 #+NAME: oretable
-|               |       |            |         | <30>                                                                                                                         |    |   |
-| Ores          |   Hue | Difficulty | Quality | Special Properties                                                                                                           |    |   |
-| Iron          |   0x0 |          0 |    1.00 |                                                                                                                              |  4 | 9 |
-| Gold          | 0x885 |          1 |    1.00 |                                                                                                                              |  2 | 9 |
-| Spike         | 0x4c7 |          5 |    1.05 |                                                                                                                              |  8 | 4 |
-| Fruity        | 0x46e |         10 |    1.05 | Dex penalty -1                                                                                                               |  9 | 8 |
-| Bronze        | 0x45e |         15 |    1.10 |                                                                                                                              |  9 | 1 |
-| Ice Rock      | 0x480 |         20 |    1.05 | 25% water prot                                                                                                               |  7 | 1 |
-| Black Dwarf   | 0x451 |         25 |    1.10 |                                                                                                                              |  5 | 1 |
-| Dull Copper   | 0x3ea |         30 |    1.15 |                                                                                                                              |  7 | 9 |
-| Platinum      | 0x457 |         35 |    1.15 | Wearer takes less magic dmg                                                                                                  |  5 | 3 |
-| Silver Rock   | 0x3e9 |         40 |    1.10 | 25% Necro prot                                                                                                               |  8 | 4 |
-| Dark Pagan    | 0x46b |         45 |    1.15 |                                                                                                                              |  6 | 8 |
-| Copper        | 0x602 |         50 |    1.20 |                                                                                                                              |  2 | 7 |
-| Mystic        | 0x17f |         55 |    1.05 | Wearer takes less magic dmg                                                                                                  |  9 | 1 |
-| Spectral      | 0x483 |         60 |    1.10 | Dex penalty -3                                                                                                               |  1 | 1 |
-| Old Britain   | 0x852 |         65 |    1.25 |                                                                                                                              |  4 | 1 |
-| Onyx          | 0x455 |         70 |    1.25 | Dex penalty -1                                                                                                               |  8 | 3 |
-| Red Elven     | 0x4b9 |         75 |    1.15 | Dex penalty -2, Wearer takes less magic dmg                                                                                |  1 | 4 |
-| Undead        | 0x279 |         80 |    1.20 | 50% necro prot                                                                                                               | 10 | 7 |
-| Pyrite        | 0x6b8 |         85 |    1.30 | Dex penalty -1                                                                                                               |  8 | 7 |
-| Virginity     | 0x482 |         90 |    1.25 | Dex penalty -1, 50% necro prot                                                                                             |  5 | 4 |
-| Malachite     | 0x487 |         95 |    1.50 |                                                                                                                              |  4 | 8 |
-| Lavarock      | 0x486 |         97 |    1.35 | 50% fire prot                                                                                                                |  6 | 2 |
-| Azurite       | 0x4df |         98 |    1.50 | Dex penalty -1, 50% air prot                                                                                                 |  7 | 2 |
-| Dripstone     | 0x49e |        100 |    1.60 | Wearer takes less magic dmg, 25% water prot                                                                                |  6 | 4 |
-| Executor      | 0x499 |        104 |    1.60 | Wearer takes less magic dmg                                                                                                  |  7 | 1 |
-| Peachblue     | 0x49c |        108 |    1.70 | Dex penalty -2                                                                                                               |  3 | 2 |
-| Destruction   | 0x500 |        112 |    1.70 | Dex penalty -1, 25% earth prot                                                                                             |  5 | 4 |
-| Anra          | 0x48b |        116 |    1.80 | Dex penalty -2                                                                                                               | 10 | 4 |
-| Crystal       | 0x492 |        119 |    1.80 | Wearer takes less magic dmg, 25% earth prot                                                                                |  3 | 9 |
-| Doom          | 0x49f |        122 |    1.90 |                                                                                                                              |  2 | 1 |
-| Goddess       | 0x501 |        125 |    1.90 | Wearer takes less magic dmg, 25% air prot                                                                                  |  7 | 2 |
-| New Zulu      | 0x488 |        129 |    2.00 | Dex penalty -2, "reduced spell effectiveness on wearer" whatever that means                                                |  1 | 7 |
-| Ebon Twilight | 0x493 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% water prot                                     |  6 | 1 |
-| Dark Sable    | 0x494 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% fire prot                                      |  4 | 7 |
+|               |       |            |         | <30>                           |    |   |
+| Ores          |   Hue | Difficulty | Quality | Special Properties             |    |   |
+| Iron          |   0x0 |          0 |    1.00 |                                |  4 | 9 |
+| Gold          | 0x885 |          1 |    1.00 |                                |  2 | 9 |
+| Spike         | 0x4c7 |          5 |    1.05 |                                |  8 | 4 |
+| Fruity        | 0x46e |         10 |    1.05 | Dex penalty -1                 |  9 | 8 |
+| Bronze        | 0x45e |         15 |    1.10 |                                |  9 | 1 |
+| Ice Rock      | 0x480 |         20 |    1.05 | 25% water prot                 |  7 | 1 |
+| Black Dwarf   | 0x451 |         25 |    1.10 |                                |  5 | 1 |
+| Dull Copper   | 0x3ea |         30 |    1.15 |                                |  7 | 9 |
+| Platinum      | 0x457 |         35 |    1.15 | Wearer takes less magic dmg    |  5 | 3 |
+| Silver Rock   | 0x3e9 |         40 |    1.10 | 25% Necro prot                 |  8 | 4 |
+| Dark Pagan    | 0x46b |         45 |    1.15 |                                |  6 | 8 |
+| Copper        | 0x602 |         50 |    1.20 |                                |  2 | 7 |
+| Mystic        | 0x17f |         55 |    1.05 | Wearer takes less magic dmg    |  9 | 1 |
+| Spectral      | 0x483 |         60 |    1.10 | Dex penalty -3                 |  1 | 1 |
+| Old Britain   | 0x852 |         65 |    1.25 |                                |  4 | 1 |
+| Onyx          | 0x455 |         70 |    1.25 | Dex penalty -1                 |  8 | 3 |
+| Red Elven     | 0x4b9 |         75 |    1.15 | Dex penalty -2, Wearer takes less magic dmg |  1 | 4 |
+| Undead        | 0x279 |         80 |    1.20 | 50% necro prot                 | 10 | 7 |
+| Pyrite        | 0x6b8 |         85 |    1.30 | Dex penalty -1                 |  8 | 7 |
+| Virginity     | 0x482 |         90 |    1.25 | Dex penalty -1, 50% necro prot |  5 | 4 |
+| Malachite     | 0x487 |         95 |    1.50 |                                |  4 | 8 |
+| Lavarock      | 0x486 |         97 |    1.35 | 50% fire prot                  |  6 | 2 |
+| Azurite       | 0x4df |         98 |    1.50 | Dex penalty -1, 50% air prot   |  7 | 2 |
+| Dripstone     | 0x49e |        100 |    1.60 | Wearer takes less magic dmg, 25% water prot |  6 | 4 |
+| Executor      | 0x499 |        104 |    1.60 | Wearer takes less magic dmg    |  7 | 1 |
+| Peachblue     | 0x49c |        108 |    1.70 | Dex penalty -2                 |  3 | 2 |
+| Destruction   | 0x500 |        112 |    1.70 | Dex penalty -1, 25% earth prot |  5 | 4 |
+| Anra          | 0x48b |        116 |    1.80 | Dex penalty -2                 | 10 | 4 |
+| Crystal       | 0x492 |        119 |    1.80 | Wearer takes less magic dmg, 25% earth prot |  3 | 9 |
+| Doom          | 0x49f |        122 |    1.90 |                                |  2 | 1 |
+| Goddess       | 0x501 |        125 |    1.90 | Wearer takes less magic dmg, 25% air prot |  7 | 2 |
+| New Zulu      | 0x488 |        129 |    2.00 | Dex penalty -2, "reduced spell effectiveness on wearer" whatever that means |  1 | 7 |
+| Ebon Twilight | 0x493 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% water prot |  6 | 1 |
+| Dark Sable    | 0x494 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% fire prot |  4 | 7 |
 | Nimbus        | 0x498 |        140 |    2.25 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |  8 | 9 |
 |               |       |            |         | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |  3 | 2 |
 
 #+NAME: logtable
-|                   |      |            |         | <30>               |    |    |
-| Logs              |  Hue | Difficulty | Quality | Special Properties |    |    |
-| Normal            |    0 |          0 |    1.00 |                    |  3 |  7 |
-| Pinetree          | 1132 |         15 |    1.05 |                    |  7 |  5 |
-| Cherry            | 5716 |         28 |    1.10 |                    |  6 | 10 |
-| Oak               | 1045 |         39 |    1.15 |                    |  9 |  5 |
-| Purple Passion    |  515 |         50 |    1.20 |                    |  6 |  4 |
-| Golden Reflection |   48 |         59 |    1.25 |                    |  6 | 10 |
-| Hardranger        | 1285 |         65 |    1.25 |                    |  8 |  5 |
-| Jadewood          | 1162 |         68 |    1.30 |                    |  7 |  8 |
-| Darkwood          | 1109 |         77 |    1.35 |                    |  3 |  5 |
-| Stonewood         | 1154 |         84 |    1.40 |                    |  9 |  2 |
-| Sun               | 1176 |         91 |    1.45 |                    |  3 |  7 |
-| Gauntlet          | 1284 |         95 |    1.45 |                    |  6 |  1 |
-| Swamp             | 1177 |         98 |    1.50 |                    |  7 | 10 |
-| Stardust          | 1161 |        105 |    1.55 |                    |  2 |  9 |
-| Silver leaf       | 2301 |        110 |    1.60 |                    |  7 |  3 |
-| Stormteal         | 1346 |        114 |    1.65 |                    |  1 |  2 |
-| Emerald wood      | 1159 |        118 |    1.70 |                    |  7 |  6 |
-| Blood             | 1645 |        122 |    1.75 |                    |  4 |  1 |
-| Crystal           | 1170 |        125 |    1.80 |                    |  2 |  5 |
-| Bloodhorse        | 1287 |        127 |    1.85 |                    | 10 |  7 |
-| Doom              | 1183 |        128 |    1.90 |                    |  5 |  9 |
-| Zulu              | 1160 |        130 |    2.00 |                    |  5 |  7 |
-| Darkness          | 1258 |        140 |    2.05 |                    |  5 |  8 |
-| Elven             | 1165 |        145 |    2.10 |                    | 10 |  5 |
+|                   |      |            |         | <30>                           |    |    |
+| Logs              |  Hue | Difficulty | Quality | Special Properties             |    |    |
+| Normal            |    0 |          0 |    1.00 |                                |  3 |  7 |
+| Pinetree          | 1132 |         15 |    1.05 |                                |  7 |  5 |
+| Cherry            | 5716 |         28 |    1.10 |                                |  6 | 10 |
+| Oak               | 1045 |         39 |    1.15 |                                |  9 |  5 |
+| Purple Passion    |  515 |         50 |    1.20 |                                |  6 |  4 |
+| Golden Reflection |   48 |         59 |    1.25 |                                |  6 | 10 |
+| Hardranger        | 1285 |         65 |    1.25 |                                |  8 |  5 |
+| Jadewood          | 1162 |         68 |    1.30 |                                |  7 |  8 |
+| Darkwood          | 1109 |         77 |    1.35 |                                |  3 |  5 |
+| Stonewood         | 1154 |         84 |    1.40 |                                |  9 |  2 |
+| Sun               | 1176 |         91 |    1.45 |                                |  3 |  7 |
+| Gauntlet          | 1284 |         95 |    1.45 |                                |  6 |  1 |
+| Swamp             | 1177 |         98 |    1.50 |                                |  7 | 10 |
+| Stardust          | 1161 |        105 |    1.55 |                                |  2 |  9 |
+| Silver leaf       | 2301 |        110 |    1.60 |                                |  7 |  3 |
+| Stormteal         | 1346 |        114 |    1.65 |                                |  1 |  2 |
+| Emerald wood      | 1159 |        118 |    1.70 |                                |  7 |  6 |
+| Blood             | 1645 |        122 |    1.75 |                                |  4 |  1 |
+| Crystal           | 1170 |        125 |    1.80 |                                |  2 |  5 |
+| Bloodhorse        | 1287 |        127 |    1.85 |                                | 10 |  7 |
+| Doom              | 1183 |        128 |    1.90 |                                |  5 |  9 |
+| Zulu              | 1160 |        130 |    2.00 |                                |  5 |  7 |
+| Darkness          | 1258 |        140 |    2.05 |                                |  5 |  8 |
+| Elven             | 1165 |        145 |    2.10 |                                | 10 |  5 |
 
 #+NAME: hidetable
-|                     |       |            |         | <30>                                                                                                          |   |   |
-| Hides               |   Hue | Difficulty | Quality | Special Properties                                                                                            |   |   |
-| Normal Hides        |     0 |          0 |    1.00 | None                                                                                                          | 1 | 6 |
-| Rat Hides           | 0x7e2 |         10 |    1.10 | None                                                                                                          | 9 | 6 |
-| Wolf Hides          |  1102 |         20 |    1.20 | None                                                                                                          | 6 | 2 |
-| Bear Hides          |    44 |         30 |    1.30 | None                                                                                                          | 4 | 2 |
-| Serpent Hides       | 0x8fd |         40 |    1.40 | None                                                                                                          | 7 | 8 |
-| Lizard Hides        | 0x852 |         50 |    1.50 | None                                                                                                          | 2 | 4 |
-| Troll Hides         | 0x54a |         60 |    1.60 | None                                                                                                          | 6 | 2 |
-| Ostard Hides        | 0x415 |         70 |    1.70 | None                                                                                                          | 4 | 6 |
-| Necromancer Hides   |    84 |         80 |    1.80 | "Reduction of magic penalty, 25% Necro magic protection"                                                      | 3 | 2 |
-| Lava Hides          | 0x486 |         90 |    1.90 | 50% Fire magic protection                                                                                     | 4 | 9 |
-| Liche Hides         | 0x496 |        100 |    2.00 | "Reduction of magic penalty, 25% Necro magic protection"                                                      | 2 | 3 |
-| Ice Crystal Hides   | 0x492 |        110 |    2.20 | 50% Water magic protection                                                                                    | 1 | 2 |
-| Dragon Hides        | 0x494 |        115 |    2.35 | None                                                                                                          | 4 | 3 |
-| Wyrm Hides          |  1159 |        120 |    2.50 | "Reduction of magic penalty, 50% Fire magic protection, 25% Earth magic protection"                           | 9 | 3 |
-| Balron Hides        |  1157 |        125 |    2.90 | "Reduction of magic penalty, 25% Necro magic protection, Immunity to level 1 spells"                          | 3 | 1 |
+|                     |       |            |         | <30>                           |   |   |
+| Hides               |   Hue | Difficulty | Quality | Special Properties             |   |   |
+| Normal Hides        |     0 |          0 |    1.00 | None                           | 1 | 6 |
+| Rat Hides           | 0x7e2 |         10 |    1.10 | None                           | 9 | 6 |
+| Wolf Hides          |  1102 |         20 |    1.20 | None                           | 6 | 2 |
+| Bear Hides          |    44 |         30 |    1.30 | None                           | 4 | 2 |
+| Serpent Hides       | 0x8fd |         40 |    1.40 | None                           | 7 | 8 |
+| Lizard Hides        | 0x852 |         50 |    1.50 | None                           | 2 | 4 |
+| Troll Hides         | 0x54a |         60 |    1.60 | None                           | 6 | 2 |
+| Ostard Hides        | 0x415 |         70 |    1.70 | None                           | 4 | 6 |
+| Necromancer Hides   |    84 |         80 |    1.80 | "Reduction of magic penalty, 25% Necro magic protection" | 3 | 2 |
+| Lava Hides          | 0x486 |         90 |    1.90 | 50% Fire magic protection      | 4 | 9 |
+| Liche Hides         | 0x496 |        100 |    2.00 | "Reduction of magic penalty, 25% Necro magic protection" | 2 | 3 |
+| Ice Crystal Hides   | 0x492 |        110 |    2.20 | 50% Water magic protection     | 1 | 2 |
+| Dragon Hides        | 0x494 |        115 |    2.35 | None                           | 4 | 3 |
+| Wyrm Hides          |  1159 |        120 |    2.50 | "Reduction of magic penalty, 50% Fire magic protection, 25% Earth magic protection" | 9 | 3 |
+| Balron Hides        |  1157 |        125 |    2.90 | "Reduction of magic penalty, 25% Necro magic protection, Immunity to level 1 spells" | 3 | 1 |
 | Golden Dragon Hides |    48 |        130 |    3.00 | "Reduction of magic penalty, 25% Earth magic protection, 25% Air magic protection, 75% Fire magic protection" | 1 | 2 |
 
 #+NAME: spellstable
-| <15>             |       | <20>                                              |      | <20>                                                                                                  | <20>                                                                                                                                                                                                         |                     |            |         |
-| Necro            |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Name             | Skill | Words of Power                                    | Mana | Reagents                                                                                              | Desc.                                                                                                                                                                                                        | SFX number from mul | in decimal | "Done"? |
-| Lesser           |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Control Undead   |    80 | Nutu Magistri Supplicare                          |   40 | bloodspawn, bone, blackmoor                                                                           | Gain control of alive undead creatures                                                                                                                                                                       |                   0 |          0 | x       |
-| Darkness         |    80 | In Caligne Abditus                                |   40 | Pumice, Pig iron                                                                                      | Makes target's screen very dark, lasts for fucking ever                                                                                                                                                      |              0x01e4 |        484 | x       |
-| Decaying Ray     |    80 | Umbra Aufero Vita                                 |   40 | 2 Vial of Blood, Volcanic Ash, Demon Bone                                                             | Temporarily reduce target's armor                                                                                                                                                                            |               0x0FE |        254 | x       |
-| Spectre's Touch  |    80 | Enervare                                          |   40 | Executioner's Cap, Brimstone, Demon Bone                                                              | AOE Necro damage, LOS                                                                                                                                                                                        |               0x1f2 |        498 | x       |
-| Abyssal Flame    |   100 | Orinundus Barathrum Erado Hostes Hostium          |   60 | Brimstone, Obsidian, Volcanic Ash, Demon Bone, Dragon's blood                                         | AOE fire damage on all mobiles within LOS                                                                                                                                                                    |               0x208 |        520 | x       |
-| Animate Dead     |   100 | Corpus Sine Nomine Expergefaceret                 |   60 | Bone, Fertile Dirt, Vial of Blood, Obsidian                                                           | Reanimate corpse, move items from corpse to reanimated mob, give mob skills and stats as % of original, modulated by power of spell                                                                          |               0x22b |        555 | x       |
-| Sacrifice        |   100 | Animus Ex Corporis Resolveretur                   |   60 | Executioners Cap, Bloodspawn, Wyrm's Heart, Blackmoor, Bone                                           | Sacrifice pet, gain portion of its hp                                                                                                                                                                        |               0x208 |        520 | x       |
-| Wraith Breath    |   100 | Manes Sollicti Mi Compellere                      |   60 | Obsidian, Pumice, Bone, Blackmoor                                                                     | AOE paralyze                                                                                                                                                                                                 |               0x1fa |        506 | x       |
-| Greater          |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Sorceror's Bane  |   120 | Fluctus Perturbo Magus Navitas                    |  100 | Volcanic Ash, Wyrms Heart, Demon Bone, Pumice, Dragon's Blood, dead wood                              | The waterfall spell, steals mana                                                                                                                                                                             |               0x209 |        521 | x       |
-| Summon Spirit    |   120 | Manes turbidi Sollictique resolverent             |  100 | demon bone, brimstone, dragon's blood, bloodspawn                                                     | Summon powerful undead (up to blood liche)                                                                                                                                                                   |               0x22b |        555 | x       |
-| Wraith Form      |   120 | Manes Sollicti Mihi Infundite                     |  100 | demon bone, brimstone, bloodspawn                                                                     | Morph into Wraith, constantly deal AOE necro damage every 5 ticks (seconds?) in the amount of 2d(casterskill/15)                                                                                             |               0x1f2 |        498 | x       |
-| Wyvern Strike    |   120 | Umbrae Tenebrae Venarent                          |  100 | dragon's blood, serpent scales, blackmoor, bloodspawn, volcanic ash                                   | Poison and deal necro damage to a single target                                                                                                                                                              |               0x1e2 |        482 | x       |
-| Kill             |   140 | Ulties Manum Necarent                             |  130 | Demon bone, executioner's cap, vial of blood, dragon's blood, worm's heart, volcanic ash, eye of newt | if target's hp < spellpower - (spellpower * prot * 0.25), instant kill, otherwise deal a shitload of damage                                                                                                  |               0x202 |        514 | x       |
-| Liche Form       |   140 | Umbrae Tenebrae Miserere Animi Non Digna Ferentis |  130 | Demon bone, brimstone, dragon's blood, blackmoor, vial of blood, volcanic ash                         | Polymorph into liche form, lose str and dex, gain lots of int.  Specifically, lose half your str and dex, divided by class bonus, and gain double your int multiplied by class bonus, if you're a spec mage. |               0x202 |        514 | x       |
-| Plague           |   140 | Fluctus Puter Se Aresceret                        |  130 | volcanic ash, batwing, demon bone, dragon's blood, bloodspawn, pumice, serpent scales                 | AOE poison                                                                                                                                                                                                   |               0x1e2 |        482 | x       |
-| Spellbind        |   140 | Nutu Magistri Se Compellere                       |  130 | eye of newt, vial of blood, fertile dirt, pig iron                                                    | Powerfully take control of creature for a long time                                                                                                                                                          |               0x20d |        525 | x       |
-|                  |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Earth            |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Name             | Skill | Words of Power                                    | Mana | Regs                                                                                                  | Desc.                                                                                                                                                                                                        |                     |            |         |
-| Circle 1         |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Antidote         |    60 | Puissante Terre Traite Ce Patient                 |    5 | Deadwood, fertile dirt, executioner's cap                                                             | cure poisons no matter what; leave target with poison immunity for duration based on skill                                                                                                                   |               0x1e1 |        481 | x       |
-| Owl Sight        |    60 | Vista Da Noite                                    |    5 | Eye of newt                                                                                           | longer-lasting night sight                                                                                                                                                                                   |               0x1e4 |        484 | x       |
-| Shifting Earth   |    60 | Esmagamento Con Pedra                             |    5 | fertile dirt, deadwood, obsidian                                                                      | earth damage on single target, dex debuff                                                                                                                                                                    |               0x20e |        526 | x       |
-| Summon Mammals   |    60 | Chame O Mamifero Agora                            |    5 | serpent scale, pig iron, eye of newt                                                                  | summons... mammals.  powerful ones                                                                                                                                                                           |                   0 |          0 | x       |
-| Call Lightning   |    80 | Batida Do Deus                                    |   10 | wyrm's heart, pig iron, bone                                                                          | air damage lightning strike                                                                                                                                                                                  |               0x207 |        519 | x       |
-| Earth's Blessing |    80 | Foria Da Terra                                    |   10 | pig iron, obsidian, volcanic ash                                                                      | More powerful Bless                                                                                                                                                                                          |               0x1eb |        491 | x       |
-| Earth Portal     |    80 | Destraves Limites Da Natureza                     |   10 | brimstone, executioner's cap, eye of newt                                                             | Basically a Gate spell.  Would be cool to make this able to go places where Gate cannot, and vice versa                                                                                                      |               0x20f |        527 | ?       |
-| Nature's Touch   |    80 | Guerissez Par Terre                               |   10 | pumice, vial of blood, obsidian                                                                       | Heals 6d8+30 pts of damage, scale that by magic bonus, and scale that by target's healing bonus if any                                                                                                       |               0x203 |        515 | x       |
-| Circle 2         |       |                                                   |      |                                                                                                       |                                                                                                                                                                                                              |                     |            |         |
-| Gust of Air      |   100 | Gusto Do Ar                                       |   15 | fertile dirt, brimstone, eye of newt                                                                  | Air damage to single target, wind causes target to get pushed away in a semi-random direction                                                                                                                |               0x109 |        265 | x       |
-| Rising Fire      |   100 | Batida Do Fogo                                    |   15 | batwing, brimstone, vial of blood                                                                     | AOE fire damage that hits twice (3 flamestrike animations per hit)                                                                                                                                           |               0x209 |        521 | x       |
-| Shapeshift       |   100 | Mude Minha Forma                                  |   15 | wyrm's heart, blackmoor, bat wing                                                                     | polymorph into a variety of animals, one of which is the little bird                                                                                                                                         |               0x20a |        522 | x       |
-| Ice Strike       |   120 | Geada Com Inverno                                 |   20 | bone, bat wing, brimstone                                                                             | water damage to single target                                                                                                                                                                                |               0x117 |        279 | x       |
-| Earth Spirit     |   120 | Chame A Terra Elemental                           |   20 | Dragon's blood, fertile dirt, volcanic ash                                                            | Earth elemental lord                                                                                                                                                                                         |               0x10d |        269 | x       |
-| Fire Spirit      |   120 | Chame O Fogo Elemental                            |   20 | eye of newt, blackmoor, obsidian                                                                      | Fire Elemental Lord                                                                                                                                                                                          |               0x113 |        275 | x       |
-| Storm Spirit     |   120 | Chame O Ar Elemental                              |   20 | fertile dirt, volcanic ash, bat wing                                                                  | Air Elemental Lord                                                                                                                                                                                           |               0x108 |        264 | x       |
-| Water Spirit     |   120 | Chame O Agua Elemental                            |   20 | wyrm's heart, serpent scales, eye of newt                                                             | Water Elemental Lord                                                                                                                                                                                         |               0x118 |        280 | x       |
+| <15>            |       | <20>                 |      | <20>                 | <20>                 |                     |            |         |
+| Necro           |       |                      |      |                      |                      |                     |            |         |
+| Name            | Skill | Words of Power       | Mana | Reagents             | Desc.                | SFX number from mul | in decimal | "Done"? |
+| Lesser          |       |                      |      |                      |                      |                     |            |         |
+| Control Undead  |    80 | Nutu Magistri Supplicare |   40 | bloodspawn, bone, blackmoor | Gain control of alive undead creatures |                   0 |          0 | x       |
+| Darkness        |    80 | In Caligne Abditus   |   40 | Pumice, Pig iron     | Makes target's screen very dark, lasts for fucking ever |              0x01e4 |        484 | x       |
+| Decaying Ray    |    80 | Umbra Aufero Vita    |   40 | 2 Vial of Blood, Volcanic Ash, Demon Bone | Temporarily reduce target's armor |               0x0FE |        254 | x       |
+| Spectre's Touch |    80 | Enervare             |   40 | Executioner's Cap, Brimstone, Demon Bone | AOE Necro damage, LOS |               0x1f2 |        498 | x       |
+| Abyssal Flame   |   100 | Orinundus Barathrum Erado Hostes Hostium |   60 | Brimstone, Obsidian, Volcanic Ash, Demon Bone, Dragon's blood | AOE fire damage on all mobiles within LOS |               0x208 |        520 | x       |
+| Animate Dead    |   100 | Corpus Sine Nomine Expergefaceret |   60 | Bone, Fertile Dirt, Vial of Blood, Obsidian | Reanimate corpse, move items from corpse to reanimated mob, give mob skills and stats as % of original, modulated by power of spell |               0x22b |        555 | x       |
+| Sacrifice       |   100 | Animus Ex Corporis Resolveretur |   60 | Executioners Cap, Bloodspawn, Wyrm's Heart, Blackmoor, Bone | Sacrifice pet, gain portion of its hp |               0x208 |        520 | x       |
+| Wraith Breath   |   100 | Manes Sollicti Mi Compellere |   60 | Obsidian, Pumice, Bone, Blackmoor | AOE paralyze         |               0x1fa |        506 | x       |
+| Greater         |       |                      |      |                      |                      |                     |            |         |
+| Sorceror's Bane |   120 | Fluctus Perturbo Magus Navitas |  100 | Volcanic Ash, Wyrms Heart, Demon Bone, Pumice, Dragon's Blood, dead wood | The waterfall spell, steals mana |               0x209 |        521 | x       |
+| Summon Spirit   |   120 | Manes turbidi Sollictique resolverent |  100 | demon bone, brimstone, dragon's blood, bloodspawn | Summon powerful undead (up to blood liche) |               0x22b |        555 | x       |
+| Wraith Form     |   120 | Manes Sollicti Mihi Infundite |  100 | demon bone, brimstone, bloodspawn | Morph into Wraith, constantly deal AOE necro damage every 5 ticks (seconds?) in the amount of 2d(casterskill/15) |               0x1f2 |        498 | x       |
+| Wyvern Strike   |   120 | Umbrae Tenebrae Venarent |  100 | dragon's blood, serpent scales, blackmoor, bloodspawn, volcanic ash | Poison and deal necro damage to a single target |               0x1e2 |        482 | x       |
+| Kill            |   140 | Ulties Manum Necarent |  130 | Demon bone, executioner's cap, vial of blood, dragon's blood, worm's heart, volcanic ash, eye of newt | if target's hp < spellpower - (spellpower * prot * 0.25), instant kill, otherwise deal a shitload of damage |               0x202 |        514 | x       |
+| Liche Form      |   140 | Umbrae Tenebrae Miserere Animi Non Digna Ferentis |  130 | Demon bone, brimstone, dragon's blood, blackmoor, vial of blood, volcanic ash | Polymorph into liche form, lose str and dex, gain lots of int.  Specifically, lose half your str and dex, divided by class bonus, and gain double your int multiplied by class bonus, if you're a spec mage. |               0x202 |        514 | x       |
+| Plague          |   140 | Fluctus Puter Se Aresceret |  130 | volcanic ash, batwing, demon bone, dragon's blood, bloodspawn, pumice, serpent scales | AOE poison           |               0x1e2 |        482 | x       |
+| Spellbind       |   140 | Nutu Magistri Se Compellere |  130 | eye of newt, vial of blood, fertile dirt, pig iron | Powerfully take control of creature for a long time |               0x20d |        525 | x       |
+|                 |       |                      |      |                      |                      |                     |            |         |
+| Earth           |       |                      |      |                      |                      |                     |            |         |
+| Name            | Skill | Words of Power       | Mana | Regs                 | Desc.                |                     |            |         |
+| Circle 1        |       |                      |      |                      |                      |                     |            |         |
+| Antidote        |    60 | Puissante Terre Traite Ce Patient |    5 | Deadwood, fertile dirt, executioner's cap | cure poisons no matter what; leave target with poison immunity for duration based on skill |               0x1e1 |        481 | x       |
+| Owl Sight       |    60 | Vista Da Noite       |    5 | Eye of newt          | longer-lasting night sight |               0x1e4 |        484 | x       |
+| Shifting Earth  |    60 | Esmagamento Con Pedra |    5 | fertile dirt, deadwood, obsidian | earth damage on single target, dex debuff |               0x20e |        526 | x       |
+| Summon Mammals  |    60 | Chame O Mamifero Agora |    5 | serpent scale, pig iron, eye of newt | summons... mammals.  powerful ones |                   0 |          0 | x       |
+| Call Lightning  |    80 | Batida Do Deus       |   10 | wyrm's heart, pig iron, bone | air damage lightning strike |               0x207 |        519 | x       |
+| Earth's Blessing |    80 | Foria Da Terra       |   10 | pig iron, obsidian, volcanic ash | More powerful Bless  |               0x1eb |        491 | x       |
+| Earth Portal    |    80 | Destraves Limites Da Natureza |   10 | brimstone, executioner's cap, eye of newt | Basically a Gate spell.  Would be cool to make this able to go places where Gate cannot, and vice versa |               0x20f |        527 | ?       |
+| Nature's Touch  |    80 | Guerissez Par Terre  |   10 | pumice, vial of blood, obsidian | Heals 6d8+30 pts of damage, scale that by magic bonus, and scale that by target's healing bonus if any |               0x203 |        515 | x       |
+| Circle 2        |       |                      |      |                      |                      |                     |            |         |
+| Gust of Air     |   100 | Gusto Do Ar          |   15 | fertile dirt, brimstone, eye of newt | Air damage to single target, wind causes target to get pushed away in a semi-random direction |               0x109 |        265 | x       |
+| Rising Fire     |   100 | Batida Do Fogo       |   15 | batwing, brimstone, vial of blood | AOE fire damage that hits twice (3 flamestrike animations per hit) |               0x209 |        521 | x       |
+| Shapeshift      |   100 | Mude Minha Forma     |   15 | wyrm's heart, blackmoor, bat wing | polymorph into a variety of animals, one of which is the little bird |               0x20a |        522 | x       |
+| Ice Strike      |   120 | Geada Com Inverno    |   20 | bone, bat wing, brimstone | water damage to single target |               0x117 |        279 | x       |
+| Earth Spirit    |   120 | Chame A Terra Elemental |   20 | Dragon's blood, fertile dirt, volcanic ash | Earth elemental lord |               0x10d |        269 | x       |
+| Fire Spirit     |   120 | Chame O Fogo Elemental |   20 | eye of newt, blackmoor, obsidian | Fire Elemental Lord  |               0x113 |        275 | x       |
+| Storm Spirit    |   120 | Chame O Ar Elemental |   20 | fertile dirt, volcanic ash, bat wing | Air Elemental Lord   |               0x108 |        264 | x       |
+| Water Spirit    |   120 | Chame O Agua Elemental |   20 | wyrm's heart, serpent scales, eye of newt | Water Elemental Lord |               0x118 |        280 | x       |
+
+
+** TODO Criminal to loot spider?
+   Maybe criminal to loot somebody elses kill
+** TODO Cliloc errors on all armor
+   Leahter, bone, etc.
+   Weird shit really.
+** TODO add vendor who sells bandages
+** TODO Chests by first skeletal mage spawns regs in fire dungeon
+** TODO cut robes for bandages                                         :code:
+** TODO dispel curses
+
