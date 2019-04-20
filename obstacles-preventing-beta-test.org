@@ -203,7 +203,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** TODO publish logs automagically
 ** TODO figure out how jail works in runuo - there seems to be no [jail command
 
-* Bugs [0/5]
+* Bugs [1/14]
 :PROPERTIES:
 :cookie_data: todo recursive
 :end:
@@ -346,13 +346,18 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 | Water Spirit    |   120 | Chame O Agua Elemental |   20 | wyrm's heart, serpent scales, eye of newt | Water Elemental Lord |               0x118 |        280 | x       |
 
 
+* Bugs Discovered in Alpha
 ** TODO Criminal to loot spider?
    Maybe criminal to loot somebody elses kill
 ** TODO Cliloc errors on all armor
    Leahter, bone, etc.
    Weird shit really.
-** TODO add vendor who sells bandages
+** DONE add vendor who sells bandages
 ** TODO Chests by first skeletal mage spawns regs in fire dungeon
-** TODO cut robes for bandages                                         :code:
+** TODO cut robes for bandages
 ** TODO dispel curses
-
+** TODO Remove Bola Balls
+** TODO Add alchemist who sells useful potions for warriors?
+** TODO Bump up quantity of items in vendors, particularly regs/bandies
+** TODO Add a vendor who sells pagan regs
+** TODO Disable concussion blow
