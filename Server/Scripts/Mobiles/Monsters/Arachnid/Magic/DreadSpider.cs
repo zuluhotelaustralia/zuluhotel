@@ -49,6 +49,7 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
 		{
 			AddLoot( LootPack.FilthyRich );
+			AddLoot( LootPack.HighEarthScrolls );
 		}
 
 		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }

@@ -50,6 +50,7 @@ namespace Server.Mobiles
 			AddLoot( LootPack.FilthyRich );
 			AddLoot( LootPack.Average );
 			AddLoot( LootPack.MedScrolls );
+			AddLoot( LootPack.HighEarthScrolls );
 		}
 
 		public override int Meat{ get{ return 4; } }

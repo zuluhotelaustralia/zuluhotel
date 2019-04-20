@@ -127,6 +127,30 @@ namespace Server
 		new LootPackItem( typeof( SpellbindScroll ), 1)
 	    };
 
+	public static readonly LootPackItem[] LowEarthScrollItems = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( AntidoteScroll ), 1),
+		new LootPackItem( typeof( OwlSightScroll ), 1),
+		new LootPackItem( typeof( ShiftingEarthScroll ), 1),
+		new LootPackItem( typeof( SummonMammalsScroll ), 1),
+		new LootPackItem( typeof( CallLightningScroll ), 1),
+		new LootPackItem( typeof( EarthsBlessingScroll ), 1),
+		new LootPackItem( typeof( EarthPortalScroll ), 1),
+		new LootPackItem( typeof( NaturesTouchScroll ), 1)
+	    };
+
+	public static readonly LootPackItem[] HighEarthScrollItems = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( GustOfAirScroll ), 1),
+		new LootPackItem( typeof( RisingFireScroll ), 1),
+		new LootPackItem( typeof( ShapeshiftScroll ), 1),
+		new LootPackItem( typeof( IceStrikeScroll ), 1),
+		new LootPackItem( typeof( EarthSpiritScroll ), 1),
+		new LootPackItem( typeof( FireSpiritScroll ), 1),
+		new LootPackItem( typeof( StormSpiritScroll ), 1),
+		new LootPackItem( typeof( WaterSpiritScroll ), 1)
+	    };
+	
 	public static readonly LootPackItem[] LowScrollItems = new LootPackItem[]
 	    {
 		new LootPackItem( typeof( ClumsyScroll ), 1 )
@@ -495,6 +519,16 @@ namespace Server
 	public static readonly LootPack GreaterNecroScrolls = new LootPack( new LootPackEntry[]
 		{
 		    new LootPackEntry( true, GreaterNecroScrollsItems, 30.00, 1)
+		});
+
+	public static readonly LootPack LowEarthScrolls = new LootPack( new LootPackEntry[]
+		{
+		    new LootPackEntry( true, LowEarthScrollItems, 30.00, 1)
+		});
+
+	public static readonly LootPack HighEarthScrolls = new LootPack( new LootPackEntry[]
+		{
+		    new LootPackEntry( true, HighEarthScrollItems, 30.00, 1)
 		});
 	
 	#endregion

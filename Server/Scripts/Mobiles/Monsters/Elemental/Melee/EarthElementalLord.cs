@@ -47,6 +47,7 @@ namespace Server.Mobiles
 			AddLoot( LootPack.Average );
 			AddLoot( LootPack.Rich );
 			AddLoot( LootPack.Gems );
+			AddLoot( LootPack.LowEarthScrolls );
 		}
 
 		public override bool BleedImmune{ get{ return true; } }
