@@ -158,7 +158,6 @@ namespace Server
 	//Can override this in a child class to return per-skill modifiers based on a dictionary.  See this.ssf and SkillCheck.cs for context
 	public virtual double GetSkillSpecificFactor( Skill skill ){
 	    switch( skill.SkillName ) {
-		case 
 		default:
 		    return RegionalSkillGainPrimaryFactor;
 	    }

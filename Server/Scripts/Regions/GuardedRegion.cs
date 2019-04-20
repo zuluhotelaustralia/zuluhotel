@@ -27,6 +27,8 @@ namespace Server.Regions
 		default:
 		    return base.GetSkillSpecificFactor(skill);
 	    }
+	}
+	
 	public virtual bool IsDisabled()
 	{
 	    return m_Disabled;
