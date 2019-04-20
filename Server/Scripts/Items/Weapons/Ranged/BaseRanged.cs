@@ -109,7 +109,8 @@ namespace Server.Items
 			if ( attacker.Player && !defender.Player && (defender.Body.IsAnimal || defender.Body.IsMonster) && 0.4 >= Utility.RandomDouble() )
 				defender.AddToBackpack( Ammo );
 
-			if ( Core.ML && m_Velocity > 0 )
+			// no AOS special moves please --sith
+			/*if ( Core.ML && m_Velocity > 0 )
 			{
 				int bonus = (int) attacker.GetDistanceToSqrt( defender );
 
@@ -123,7 +124,7 @@ namespace Server.Items
 					if ( defender.Player )
 						defender.SendLocalizedMessage( 1072795 ); // You have been hit by an arrow with velocity!
 				}
-			}
+			}*/
 
 			base.OnHit( attacker, defender, damageBonus );
 		}

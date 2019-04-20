@@ -171,11 +171,17 @@ namespace Server.Items
 	    }
 	}
 
-	public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
+	// random special moves is less rewarding of skill imho --sith
+	/*public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
 	{
 	    base.OnHit( attacker, defender, damageBonus );
 
-	    if (!Core.AOS && (attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value >= 80 && (attacker.Skills[SkillName.Anatomy].Value / 400.0) >= Utility.RandomDouble() && Engines.ConPVP.DuelContext.AllowSpecialAbility(attacker, "Concussion Blow", false))
+	    if (!Core.AOS &&
+		(attacker.Player || attacker.Body.IsHuman) &&
+		Layer == Layer.TwoHanded &&
+		attacker.Skills[SkillName.Anatomy].Value >= 80 &&
+		(attacker.Skills[SkillName.Anatomy].Value / 520.0) >= Utility.RandomDouble() &&
+		Engines.ConPVP.DuelContext.AllowSpecialAbility(attacker, "Concussion Blow", false))
 	    {
 		StatMod mod = defender.GetStatMod( "Concussion" );
 
@@ -188,6 +194,6 @@ namespace Server.Items
 		    attacker.PlaySound( 0x308 );
 		}
 	    }
-	}
+	}*/
     }
 }
