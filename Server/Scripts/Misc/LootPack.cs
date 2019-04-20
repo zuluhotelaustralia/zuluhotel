@@ -104,6 +104,17 @@ namespace Server
 	    {
 		new LootPackItem( typeof( BaseInstrument ), 1 )
 	    };
+
+	public static readonly LootPackItem[] NecroBook = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( NecromancerSpellbook ), 1)
+	    };
+
+	public static readonly LootPackItem[] EarthBook = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( SpellweavingBook ), 1)
+	    };
+	
 	public static readonly LootPackItem[] LesserNecroScrollsItems = new LootPackItem[]
 	    {
 		new LootPackItem( typeof( ControlUndeadScroll ), 1),
@@ -529,6 +540,16 @@ namespace Server
 	public static readonly LootPack HighEarthScrolls = new LootPack( new LootPackEntry[]
 		{
 		    new LootPackEntry( true, HighEarthScrollItems, 30.00, 1)
+		});
+
+	public static readonly LootPack EarthBookPack = new LootPack( new LootPackEntry[]
+		{
+		    new LootPackEntry( false, EarthBook, 10.00, 1)
+		});
+
+	public static readonly LootPack NecroBookPack = new LootPack( new LootPackEntry[]
+		{
+		    new LootPackEntry( false, NecroBook, 10.00, 1)
 		});
 	
 	#endregion
