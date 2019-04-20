@@ -45,7 +45,7 @@ namespace Server.Regions
 	//see Server/Region.cs
 	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } }
 	public override double RegionalSkillGainSecondaryFactor { get { return base.RegionalSkillGainSecondaryFactor; } }
-
+	
 	public static void Initialize() {
 	    CommandSystem.Register( "GetRegionGainFactors", AccessLevel.Developer, new CommandEventHandler( GetRegionGainFactors_OnCommand ) );
 	}

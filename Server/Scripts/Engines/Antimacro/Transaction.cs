@@ -16,7 +16,8 @@ namespace Server.Antimacro
 	private Account m_SubjectAccount;
 	private int m_AttemptsRemaining;
 	private AntimacroTimer m_Timer;
-
+	private bool m_SystemEnabled;
+	
 	public enum ResponseType {
 	    BadMath,
 	    TimeOut,
@@ -112,7 +113,10 @@ namespace Server.Antimacro
 	
 	public void SendChallenge() {
 	    //entrypoint, sorta
-	    Console.WriteLine("Sending anti-afk challenge...");
+	    if( m_SystemEnabled == true ){
+		return;
+	    }
+	    //Console.WriteLine("Sending anti-afk challenge...");
 	    m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
 	    m_Timer.Start();
 	}

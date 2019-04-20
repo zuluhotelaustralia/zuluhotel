@@ -49,7 +49,7 @@ namespace Server.SkillHandlers
 
 				return TimeSpan.FromSeconds( Core.AOS ? 10.0 : 5.0 );
 			}
-			else if ( Core.AOS && Server.Misc.RegenRates.GetArmorOffset( m ) > 0 )
+			else if ( Core.AOS && Server.Misc.RegenRates.GetArmorOffset( m ) > 0 ) //TODO
 			{
 				m.SendLocalizedMessage( 500135 ); // Regenative forces cannot penetrate your armor!
 
@@ -80,7 +80,7 @@ namespace Server.SkillHandlers
 
 				if ( chance > Utility.RandomDouble() )
 				{
-					m.CheckSkill( SkillName.Meditation, 0.0, 100.0 );
+					m.CheckSkill( SkillName.Meditation, 0.0, 130.0 );
 
 					m.SendLocalizedMessage( 501851 ); // You enter a meditative trance.
 					m.Meditating = true;
