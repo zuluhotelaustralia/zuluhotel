@@ -19,7 +19,7 @@ namespace Server.Spells.Fourth
 							Reagent.SulfurousAsh
 							);
 
-	public override SpellCircle Circle { get { return SpellCircle.Fourth; } }
+	public overrideSpellCircle Circle { get { return SpellCircle.Fourth; } }
 
 	public ArchProtectionSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 	{
@@ -71,7 +71,7 @@ namespace Server.Spells.Fourth
 		    {
 			Mobile m = targets[i];
 
-			if ( m.BeginAction( typeof( ArchProtectionSpell ) ) )
+			if ( m.BeginAction( typeof( ProtectionSpell ) ) )
 			{
 			    Caster.DoBeneficial( m );
 			    m.VirtualArmorMod += val;
@@ -102,7 +102,7 @@ namespace Server.Spells.Fourth
 	    if ( _Table.ContainsKey( m ) ) {
 		int v = _Table[m];
 		_Table.Remove( m );
-		m.EndAction( typeof( ArchProtectionSpell ) );
+		m.EndAction( typeof( ProtectionSpell ) );
 		m.VirtualArmorMod -= v;
 		if ( m.VirtualArmorMod < 0 )
 		    m.VirtualArmorMod = 0;
