@@ -944,31 +944,24 @@ namespace Server.Spells
 	{
 	    if( target.MagicDamageAbsorb > 0 )
 	    {
-		++circle;
-
-		target.MagicDamageAbsorb -= circle;
-
-		// This order isn't very intuitive, but you have to nullify reflect before target gets switched
-
-		bool reflect = (target.MagicDamageAbsorb >= 0);
+		bool reflect = true; //we know they've casted it because they have Magic Damage Absorb > 0
 
 		if( target is BaseCreature )
 		    ((BaseCreature)target).CheckReflect( caster, ref reflect );
 
-		if( target.MagicDamageAbsorb <= 0 )
-		{
-		    target.MagicDamageAbsorb = 0;
-		    DefensiveSpell.Nullify( target );
-		}
+		target.FixedEffect( 0x37B9, 10, 5 );
+		
+		target.MagicDamageAbsorb = 0;
+		DefensiveSpell.Nullify( target );
 
-		if( reflect )
-		{
-		    target.FixedEffect( 0x37B9, 10, 5 );
+		Mobile temp = caster;
+		caster = target;
+		target = temp;
 
-		    Mobile temp = caster;
-		    caster = target;
-		    target = temp;
-		}
+		Fifth.MagicReflectSpell.EndReflect(caster); //TODO is this necessary?
+		caster.EndAction( typeof( DefensiveSpell ) );
+
+		
 	    }
 	    else if( target is BaseCreature )
 	    {
