@@ -81,7 +81,7 @@ namespace Server.Spells.Sixth
 			    
 			    if( m.StatMods != null ){
 				List<StatMod> sms = m.StatMods;
-				foreach( StatMod mod in sms ){
+				foreach( StatMod mod in m.StatMods.ToArray() ){
 				    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) ) {
 					// get yeeted on
 					m.RemoveStatMod( mod.Name );
