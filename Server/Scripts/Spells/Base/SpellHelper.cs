@@ -17,7 +17,11 @@ namespace Server
 {
     public class DefensiveSpell
     {
-	public static void Nullify( Mobile from )
+	public static void Nullify( Mobile from ){
+	    Nullify( from, typeof( DefensiveSpell ) );
+	}
+	
+	public static void Nullify( Mobile from, Type spelltype )
 	{
 	    if( !from.CanBeginAction( typeof( DefensiveSpell ) ) )
 		new InternalTimer( from ).Start();
@@ -26,18 +30,20 @@ namespace Server
 	private class InternalTimer : Timer
 	{
 	    private Mobile m_Mobile;
+	    private Type m_SpellType;
 
-	    public InternalTimer( Mobile m )
+	    public InternalTimer( Mobile m, Type spelltype )
 		: base( TimeSpan.FromMinutes( 1.0 ) )
 	    {
 		m_Mobile = m;
+		m_SpellType = spelltype;
 
 		Priority = TimerPriority.OneSecond;
 	    }
 
 	    protected override void OnTick()
 	    {
-		m_Mobile.EndAction( typeof( DefensiveSpell ) );
+		m_Mobile.EndAction( typeof( m_SpellType ) );
 	    }
 	}
     }
@@ -959,7 +965,7 @@ namespace Server.Spells
 		target = temp;
 
 		Fifth.MagicReflectSpell.EndReflect(caster); //TODO is this necessary?
-		caster.EndAction( typeof( DefensiveSpell ) );
+		caster.EndAction( typeof( MagicReflectSpell ) );
 
 		
 	    }

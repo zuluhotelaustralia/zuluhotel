@@ -35,7 +35,7 @@ namespace Server.Spells.Second
 		Caster.SendLocalizedMessage( 1005559 ); // This spell is already in effect.
 		return false;
 	    }
-	    else if ( !Caster.CanBeginAction( typeof( DefensiveSpell ) ) )
+	    else if ( !Caster.CanBeginAction( typeof( ProtectionSpell ) ) )
 	    {
 		Caster.SendLocalizedMessage( 1005385 ); // The spell will not adhere to you at this time.
 		return false;
@@ -51,13 +51,13 @@ namespace Server.Spells.Second
 	    {
 		Caster.SendLocalizedMessage( 1005559 ); // This spell is already in effect.
 	    }
-	    else if ( !Caster.CanBeginAction( typeof( DefensiveSpell ) ) )
+	    else if ( !Caster.CanBeginAction( typeof( ProtectionSpell ) ) )
 	    {
 		Caster.SendLocalizedMessage( 1005385 ); // The spell will not adhere to you at this time.
 	    }
 	    else if ( CheckSequence() )
 	    {
-		if ( Caster.BeginAction( typeof( DefensiveSpell ) ) )
+		if ( Caster.BeginAction( typeof( ProtectionSpell ) ) )
 		{
 		    int value = (int)(Caster.Skills[SkillName.EvalInt].Value +
 					 Caster.Skills[SkillName.Meditation].Value +
