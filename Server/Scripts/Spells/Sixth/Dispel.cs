@@ -76,8 +76,7 @@ namespace Server.Spells.Sixth
 			// so we can hopefully safely assume this is a magic buff and not e.g. a ring of +25 dex
 					    
 			foreach( StatMod mod in m.StatMods ){
-			    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) )
-			    {
+			    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) ) {
 				// get yeeted on
 				m.RemoveStatMod( mod.Name );
 			    }

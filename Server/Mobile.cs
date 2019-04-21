@@ -789,6 +789,8 @@ namespace Server
 	private DateTime m_LastDexGain;
 	private Race m_Race;
 
+	public List<object> UnderscoreActions { get { return _actions; } }
+
 	private int m_AutoLoop;
 	public int AutoLoop {
 	    get { return m_AutoLoop; }
