@@ -80,7 +80,6 @@ namespace Server.Spells.Sixth
 			    // so we can hopefully safely assume this is a magic buff and not e.g. a ring of +25 dex
 			    
 			    if( m.StatMods != null ){
-				List<StatMod> sms = m.StatMods;
 				foreach( StatMod mod in m.StatMods.ToArray() ){
 				    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) ) {
 					// get yeeted on
