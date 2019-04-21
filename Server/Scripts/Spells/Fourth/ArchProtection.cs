@@ -63,7 +63,19 @@ namespace Server.Spells.Fourth
 	       
 		Effects.PlaySound( p, Caster.Map, 0x299 );
 
-		int val = (int)(Caster.Skills[SkillName.Magery].Value/10.0 + 1);
+		//int val = (int)(Caster.Skills[SkillName.Magery].Value/10.0 + 1);
+		int val = (int)(Caster.Skills[SkillName.EvalInt].Value +
+					 Caster.Skills[SkillName.Meditation].Value +
+					 Caster.Skills[SkillName.Inscribe].Value);
+
+		val /= 4;
+
+		if( val < 15 ){
+		    val = 15;
+		}
+		else if( val > 75 ) {
+		    val = 75;
+		}
 
 		if ( targets.Count > 0 )
 		{
