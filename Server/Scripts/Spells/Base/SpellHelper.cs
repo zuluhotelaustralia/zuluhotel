@@ -23,8 +23,8 @@ namespace Server
 	
 	public static void Nullify( Mobile from, Type spelltype )
 	{
-	    if( !from.CanBeginAction( typeof( spelltype ) ) )
-		new InternalTimer( from ).Start();
+	    if( !from.CanBeginAction( spelltype ) )
+		new InternalTimer( from, spelltype ).Start();
 	}
 
 	private class InternalTimer : Timer
@@ -43,7 +43,7 @@ namespace Server
 
 	    protected override void OnTick()
 	    {
-		m_Mobile.EndAction( typeof( m_SpellType ) );
+		m_Mobile.EndAction( m_SpellType );
 	    }
 	}
     }

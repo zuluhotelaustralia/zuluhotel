@@ -4,6 +4,7 @@ using Server.Network;
 using Server.Items;
 using Server.Targeting;
 using Server.Engines.PartySystem;
+using Server.Spells.Second;
 
 namespace Server.Spells.Fourth
 {
@@ -19,7 +20,7 @@ namespace Server.Spells.Fourth
 							Reagent.SulfurousAsh
 							);
 
-	public overrideSpellCircle Circle { get { return SpellCircle.Fourth; } }
+	public override SpellCircle Circle { get { return SpellCircle.Fourth; } }
 
 	public ArchProtectionSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
 	{
