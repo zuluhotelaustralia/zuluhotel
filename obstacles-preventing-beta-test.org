@@ -146,7 +146,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [15/24]
+* TODO final sanity-checks [16/24]
 :properties:
 :cookie_data: todo_recursive
 :end:
@@ -177,7 +177,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE playtest taking e.g. a warrior from newbie to spec 1 without macroing
 *** honestly I'm pretty confident you can bootstrap a warrior and thus any other class
 ** DONE perform minimal spawning of Serpent's Hold and perhaps the Fire Dungeon
-** TODO make magic reflect work like t2a (reflects one hostile spell instead of several circles' worth)
+** DONE make magic reflect work like t2a (reflects one hostile spell instead of several circles' worth)
 ** TODO make reactive armor work like t2a too
 ** DONE does dispel not kill buffs/debuffs?
 ** TODO a whole 2nd set of implicit skillcaps re: code passing minSkill and maxSkill to the handler functions
