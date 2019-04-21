@@ -67,26 +67,36 @@ namespace Server.Spells.Sixth
 			    m.FixedEffect( 0x3779, 10, 20 );
 			    from.SendLocalizedMessage( 1010084 ); // The creature resisted the attempt to dispel it!
 			}
+			return; //trust me
 		    }
-		    else if( m_Owner.CheckHSequence( m ) && m_Owner.CheckResisted( m )){
+		    else if( m_Owner.CheckHSequence( m ) ){
 			SpellHelper.Turn( from, m );
 			SpellHelper.CheckReflect( (int)m_Owner.Circle, from, ref m );
 
-			//if the buff is applied by SpellHelper it prepends "[Magic]" to the statmod's name
-			// so we can hopefully safely assume this is a magic buff and not e.g. a ring of +25 dex
-					    
-			foreach( StatMod mod in m.StatMods ){
-			    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) ) {
-				// get yeeted on
-				m.RemoveStatMod( mod.Name );
-			    }
+			if( !m_Owner.CheckResisted(m) ) {
+			    //if the buff is applied by SpellHelper it prepends "[Magic]" to the statmod's name
+			    // so we can hopefully safely assume this is a magic buff and not e.g. a ring of +25 dex
+			    
+			    if( m.StatMods != null ){
+				List<StatMod> sms = m.StatMods;
+				foreach( StatMod mod in sms ){
+				    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) ) {
+					// get yeeted on
+					m.RemoveStatMod( mod.Name );
+				    }
+				}
+			    }// foreach
+			}//if not resisted
+			else {
+			    //they must therefore have resisted
+			    m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy
 			}
-					    
-			Effects.SendLocationParticles( EffectItem.Create( m.Location, m.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
-			Effects.PlaySound( m, m.Map, 0x201 );
 		    }
-
+		    // for casting it on a player I want it to proc the v/sfx irrespective of whether or not the target was wiped
+		    Effects.SendLocationParticles( EffectItem.Create( m.Location, m.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
+		    Effects.PlaySound( m, m.Map, 0x201 );
 		}
+		
 	    }
 
 	    protected override void OnTargetFinish( Mobile from )
