@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Server.Misc;
 using Server.Items;
 using Server.Targeting;
