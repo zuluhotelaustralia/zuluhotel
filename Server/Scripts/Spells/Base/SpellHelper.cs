@@ -23,7 +23,7 @@ namespace Server
 	
 	public static void Nullify( Mobile from, Type spelltype )
 	{
-	    if( !from.CanBeginAction( typeof( DefensiveSpell ) ) )
+	    if( !from.CanBeginAction( typeof( spelltype ) ) )
 		new InternalTimer( from ).Start();
 	}
 
