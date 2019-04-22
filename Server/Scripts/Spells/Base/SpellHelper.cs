@@ -966,8 +966,6 @@ namespace Server.Spells
 
 		Fifth.MagicReflectSpell.EndReflect(caster); //TODO is this necessary?
 		caster.EndAction( typeof( MagicReflectSpell ) );
-
-		
 	    }
 	    else if( target is BaseCreature )
 	    {
