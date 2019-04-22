@@ -14,34 +14,27 @@ namespace Server.Regions
 	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 
 	public override double GetSkillSpecificFactor( Skill skill ){
+	    // note to self: fallthrough is legal in c# iff you don't do any processing in the case
 	    switch( skill.SkillName ){
 		case SkillName.Magery:
 		    return 0.2;
-		case SkillName.Meditation:
-		    return 0.1;
 		case SkillName.Healing:
-		    return 0.3;
 		case SkillName.Veterinary:
 		    return 0.3;
 		case SkillName.AnimalTaming:
 		    return 0.2;
-		case SkillName.Archery:
-		    return 0.1;
+		case SkillName.Meditation:
+    		case SkillName.Archery:
 		case SkillName.Fencing:
-		    return 0.1;
 		case SkillName.Swords:
-		    return 0.1;
 		case SkillName.Parry:
-		    return 0.1;
 		case SkillName.Macing:
-		    return 0.1;
 		case SkillName.Tracking:
-		    return 0.1;
 		case SkillName.Wrestling:
-		    return 0.1;
 		case SkillName.Tactics:
 		    return 0.1;
 		case SkillName.RemoveTrap:
+		case SkillName.Musicianship:
 		    return 0.9;
 		case SkillName.DetectHidden:
 		    return 0.1;

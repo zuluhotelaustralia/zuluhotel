@@ -177,6 +177,8 @@ namespace Server
 		    return 0.8;
 		case SkillName.Camping:
 		    return 0.1;
+		case SkillName.Musicianship:
+		    return 0.8;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
 	    }

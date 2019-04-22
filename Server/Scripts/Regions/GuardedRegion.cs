@@ -22,9 +22,7 @@ namespace Server.Regions
 	    switch( skill.SkillName ){
 		
 		case SkillName.Healing:
-		    return 0.1;
 		case SkillName.Meditation:
-		    return 0.1;
 		case SkillName.Veterinary:
 		    return 0.1;
 		default:
