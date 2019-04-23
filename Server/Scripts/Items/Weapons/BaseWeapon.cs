@@ -1172,9 +1172,11 @@ namespace Server.Items
 
         public virtual int AbsorbDamage( Mobile attacker, Mobile defender, int damage )
         {
-            if ( Core.AOS )
+            /*if ( Core.AOS ) // it's never AOS so who cares
                 return AbsorbDamageAOS( attacker, defender, damage );
+	    */
 
+	    //Console.WriteLine("BaseWeapon damage is {0}", damage);
             BaseShield shield = defender.FindItemOnLayer( Layer.TwoHanded ) as BaseShield;
             if ( shield != null )
                 damage = shield.OnHit( this, damage );

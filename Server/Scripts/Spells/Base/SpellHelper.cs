@@ -23,8 +23,9 @@ namespace Server
 	
 	public static void Nullify( Mobile from, Type spelltype )
 	{
-	    if( !from.CanBeginAction( spelltype ) )
+	    if( !from.CanBeginAction( spelltype ) ){
 		new InternalTimer( from, spelltype ).Start();
+	    }
 	}
 
 	private class InternalTimer : Timer
