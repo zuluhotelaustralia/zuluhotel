@@ -511,29 +511,29 @@ namespace Server.Engines.Craft
 	    // Add every material you want the player to be able to choose from
 	    // This will override the overridable material	TODO: Verify the required skill amount
 	    AddSubRes( typeof( Log ), 1072643, 00.0, 1044041, 1072652 );
-	    AddSubRes( typeof( PinetreeLog ), "Pinetree",   15 , 1072652 );
-	    AddSubRes( typeof( CherryLog ), "Cherry",   28 , 1072652 );
-	    AddSubRes( typeof( OakLog ), "Oak",   39 , 1072652 );
-	    AddSubRes( typeof( PurplePassionLog ), "Purple Passion",   50 , 1072652 );
-	    AddSubRes( typeof( GoldenReflectionLog ), "Golden Reflection",   59 , 1072652 );
-	    AddSubRes( typeof( HardrangerLog ), "Hardranger",   65 , 1072652 );
-	    AddSubRes( typeof( JadewoodLog ), "Jadewood",   68 , 1072652 );
-	    AddSubRes( typeof( DarkwoodLog ), "Darkwood",   77 , 1072652 );
-	    AddSubRes( typeof( StonewoodLog ), "Stonewood",   84 , 1072652 );
-	    AddSubRes( typeof( SunwoodLog ), "Sunwood",   91 , 1072652 );
-	    AddSubRes( typeof( GauntletLog ), "Gauntlet",   95 , 1072652 );
-	    AddSubRes( typeof( SwampwoodLog ), "Swampwood",   98 , 1072652 );
-	    AddSubRes( typeof( StardustLog ), "Stardust",  105 , 1072652 );
-	    AddSubRes( typeof( SilverleafLog ), "Silver leaf",  110 , 1072652 );
-	    AddSubRes( typeof( StormtealLog ), "Stormteal",  114 , 1072652 );
-	    AddSubRes( typeof( EmeraldwoodLog ), "Emerald wood",  118 , 1072652 );
-	    AddSubRes( typeof( BloodwoodLog ), "Bloodwood",  122 , 1072652 );
-	    AddSubRes( typeof( CrystalwoodLog ), "Crystal wood",  125 , 1072652 );
-	    AddSubRes( typeof( BloodhorseLog ), "Bloodhorse",  127 , 1072652 );
-	    AddSubRes( typeof( DoomwoodLog ), "Doom wood",  128 , 1072652 );
-	    AddSubRes( typeof( ZuluLog ), "Zulu",  130 , 1072652 );
-	    AddSubRes( typeof( DarknessLog ), "Darkness",  140 , 1072652 );
-	    AddSubRes( typeof( ElvenLog ), "Elven",  145 , 1072652 );
+	    AddSubRes( typeof( PinetreeLog ), 1160234,   15 , 1072652 );
+	    AddSubRes( typeof( CherryLog ), 1160235,   28 , 1072652 );
+	    AddSubRes( typeof( OakLog ), 1160236,   39 , 1072652 );
+	    AddSubRes( typeof( PurplePassionLog ), 1160237,   50 , 1072652 );
+	    AddSubRes( typeof( GoldenReflectionLog ), 1160238,   59 , 1072652 );
+	    AddSubRes( typeof( HardrangerLog ), 1160239,   65 , 1072652 );
+	    AddSubRes( typeof( JadewoodLog ), 1160240,   68 , 1072652 );
+	    AddSubRes( typeof( DarkwoodLog ), 1160241,   77 , 1072652 );
+	    AddSubRes( typeof( StonewoodLog ), 1160242,   84 , 1072652 );
+	    AddSubRes( typeof( SunwoodLog ), 1160243,   91 , 1072652 );
+	    AddSubRes( typeof( GauntletLog ), 1160244,   95 , 1072652 );
+	    AddSubRes( typeof( SwampwoodLog ), 1160245,   98 , 1072652 );
+	    AddSubRes( typeof( StardustLog ), 1160246,  105 , 1072652 );
+	    AddSubRes( typeof( SilverleafLog ), 1160247,  110 , 1072652 );
+	    AddSubRes( typeof( StormtealLog ), 1160248,  114 , 1072652 );
+	    AddSubRes( typeof( EmeraldwoodLog ), 1160249,  118 , 1072652 );
+	    AddSubRes( typeof( BloodwoodLog ), 1160250,  122 , 1072652 );
+	    AddSubRes( typeof( CrystalwoodLog ), 1160251,  125 , 1072652 );
+	    AddSubRes( typeof( BloodhorseLog ), 1160252,  127 , 1072652 );
+	    AddSubRes( typeof( DoomwoodLog ), 1160253,  128 , 1072652 );
+	    AddSubRes( typeof( ZuluLog ), 1160254,  130 , 1072652 );
+	    AddSubRes( typeof( DarknessLog ), 1160255,  140 , 1072652 );
+	    AddSubRes( typeof( ElvenLog ), 1160256,  145 , 1072652 );
 	}
     }
 }
