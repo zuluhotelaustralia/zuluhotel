@@ -146,19 +146,20 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [25/31]
+* TODO final sanity-checks [27/31]
 :properties:
 :cookie_data: todo_recursive
 :end:
 ** DONE disable or silently convert characters to defaults if they try to generate a character with ninjitsu or something, same with elves
-** TODO Criminal to loot spider?
+** DONE Criminal to loot spider?
    Maybe criminal to loot somebody elses kill
+   Yes, was an anti-griefing tactic implemented in ~2007 to prevent blue players with Stealth skills from stealing loot from monsters without consequence.  Imagine being a newbie and some thief just stands there invisible, taking the gold from every kill, and you can't attack him without flagging because he's blue.
 ** TODO Cliloc errors on all armor
    Leahter, bone, etc.
    Weird shit really.
 ** DONE add vendor who sells bandages
 ** TODO Chests by first skeletal mage spawns circle 1-6 scrolls in fire dungeon
-** TODO cut robes for bandages
+** DONE cut robes for bandages
 ** DONE Decide if we want to remove Bolas
 *** on second thought the ability to dismount your opponent might make for interesting pvp dynamics and reduce offscreening
 ** DONE Add alchemist who sells useful potions for warriors?

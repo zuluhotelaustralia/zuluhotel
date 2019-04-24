@@ -2596,7 +2596,7 @@ namespace Server.Mobiles
 
 	    if ( this.Alive && !wasAlive )
 	    {
-		Item deathRobe = new DeathRobe();
+		Item deathRobe = new Robe();
 
 		if ( !EquipItem( deathRobe ) )
 		    deathRobe.Delete();
