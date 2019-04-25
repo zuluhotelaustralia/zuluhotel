@@ -3339,9 +3339,25 @@ namespace Server.Items
             if ( m_Quality == WeaponQuality.Exceptional )
                 attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );
 
-            if ( m_Resource != CraftResource.Iron )
-                attrs.Add( new EquipInfoAttribute( 1160200 + (int)m_Resource - 2 ) );
+            //if ( m_Resource != CraftResource.Iron )
+            //    attrs.Add( new EquipInfoAttribute( 1160200 + (int)m_Resource - 2 ) );
 
+	    int res = (int)m_Resource;
+	    if( m_Resource != CraftResource.Iron &&
+		m_Resource != CraftResource.RegularLeather &&
+		m_Resource != CraftResource.RegularWood &&
+		m_Resource != CraftResource.None) {
+
+		if( res < 100 ) {
+		    //ore, see ResourceInfo.cs
+		    attrs.Add( new EquipInfoAttribute( 1160200 + res - 2) );
+		}
+		else if( 301 < res ) {
+		    //wood
+		    attrs.Add( new EquipInfoAttribute( 1160233 + res - 301) ); //yuck
+		}
+	    }
+	    
             if ( m_Identified || from.AccessLevel >= AccessLevel.GameMaster )
             {
                 if( m_Slayer != SlayerName.None )
