@@ -372,7 +372,7 @@ namespace Server.Mobiles
 			return s.Split( null, 2 )[0];
 		}
 
-		public void Defrag()
+		public virtual void Defrag()
 		{
 			bool removed = false;
 
@@ -612,7 +612,7 @@ namespace Server.Mobiles
 			return ( m_Spawned.Count >= m_Count );
 		}
 
-		public void Spawn( int index )
+		public virtual void Spawn( int index )
 		{
 			Map map = Map;
 
