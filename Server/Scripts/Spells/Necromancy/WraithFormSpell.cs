@@ -21,8 +21,7 @@ namespace Server.Spells.Necromancy
         public override double RequiredSkill{ get{ return 120.0; } }
         public override int RequiredMana{ get{ return 100; } }
 
-	private int m_NewBody;
-	private int m_SkinHue;
+	private static Hashtable m_Timers = new Hashtable();
 
         public WraithFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -59,40 +58,38 @@ namespace Server.Spells.Necromancy
 		Caster.SendLocalizedMessage( 1005559 ); //this spell already in effect
                 goto Return;
             }
-	    Caster.HueMod = 0x482;
-	    Caster.BodyMod = 0x1a;
+
+	    if( Caster is PlayerMobile ){
+		Caster.HueMod = 0x482;
+		Caster.BodyMod = 0x1a;
+	    }
 	    Caster.PlaySound(0x210);
 
-	    int interval = (int)(Caster.Skills[CastSkill].Value);
-	    int duration = (int)(Caster.Skills[DamageSkill].Value);
-					      
-	    List<Mobile> targets = new List<Mobile>();
-	    Map map = Caster.Map;
-	    if( map != null){
-		foreach( Mobile m in Caster.GetMobilesInRange( 1 + (int)(Caster.Skills[CastSkill].Value / 15.0 )) ){
-		    if ( Caster != m &&
-			 SpellHelper.ValidIndirectTarget(Caster, m) &&
-			 Caster.CanBeHarmful(m, false) &&
-			 Caster.InLOS(m)
-			 ){			
-			targets.Add(m);		
-		    }
-		}
+	    int interval = 0;
+	    double intermediate = 150.0 / Caster.Skills[CastSkill].Value;
+	    if( intermediate < 2 ){
+		interval = 4;
 	    }
-
-	    double dmg = Utility.Dice(2, (int)(Caster.Skills[DamageSkill].Value / 15.0), 0 ); //roughly 9 at 130.0
-	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
-		dmg *= ((PlayerMobile)Caster).Spec.Bonus;  //1.4 at spec 4
+	    else {
+		interval = (int)intermediate;
 	    }
 	    
+	    int duration = (int)Caster.Skills[DamageSkill].Value;
 
-	    new WraithFormTimer(Caster, targets, TimeSpan.FromSeconds(interval), duration, dmg ).Start();
+	    double dmg = Utility.Dice(2, (int)(Caster.Skills[DamageSkill].Value / 20.0), 0 ); 
+	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
+		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
+	    }
+	    
+	    Timer t = new WraithFormTimer(Caster, TimeSpan.FromSeconds(interval), duration, (int)dmg );
+	    m_Timers[Caster] = t;
+	    t.Start();
 
 	Return:
 	    FinishSequence();
 	}
 
-	private static void EndWraithForm( Mobile m )
+	public static void EndWraithForm( Mobile m )
 	{
 	    if( !m.CanBeginAction( typeof( WraithFormSpell ) ) )
 	    {
@@ -103,42 +100,103 @@ namespace Server.Spells.Necromancy
 		BaseArmor.ValidateMobile( m );
 		BaseClothing.ValidateMobile( m );
 	    }
+
+	    StopTimers( m );
+	}
+
+	public static bool StopTimers( Mobile m ){
+	    WraithFormTimer t = m_Timers[m] as WraithFormTimer;
+
+	    if( t != null ){
+		t.StopSubtimer();
+		t.Stop();
+		m_Timers.Remove( m );
+	    }
+	    return ( t != null );
 	}
 
 	private class WraithFormTimer : Timer
 	{
 	    private Mobile m_Owner;
-	    private List<Mobile> m_Targets;
-	    private double m_Damage;
-
-	    public WraithFormTimer( Mobile owner, List<Mobile> targets, TimeSpan interval, int duration, double damage ) :
-		base( TimeSpan.FromSeconds( 1 ), interval, duration )
+	    private int m_Damage;
+	    private TimeSpan m_SubtimerDuration;
+	    private Subtimer m_Subtimer;
+	 
+	    public WraithFormTimer( Mobile owner, TimeSpan interval, int duration, int damage ) :
+		base( TimeSpan.FromSeconds( duration ) )
 	    {
 		m_Owner = owner;
-		m_Targets = targets;
 		Priority = TimerPriority.OneSecond;
+		m_Damage = damage;
+		m_SubtimerDuration = interval;
+		m_Subtimer = new Subtimer(interval, this, owner, damage);
+		m_Subtimer.Start();
 	    }
 
 	    protected override void OnTick()
 	    {
-		for(int i=0; i<m_Targets.Count; i++) {
-		    Mobile m = m_Targets[i];
+		m_Subtimer.Stop();
+		EndWraithForm( m_Owner );
+	    }
 
-		    m_Owner.DoHarmful( m );
+	    public void StopSubtimer(){
+		m_Subtimer.Stop();
+	    }
+
+	    public void SubtimerCallback(){
+		m_Subtimer.Stop();
+		m_Subtimer = new Subtimer( m_SubtimerDuration, this, m_Owner, m_Damage );
+		m_Subtimer.Start();
+	    }
+	}
+
+	private class Subtimer : Timer {
+	    private WraithFormTimer m_ParentTimer;
+	    private Mobile m_Caster;
+	    private int m_Damage;
+	    
+	    public Subtimer( TimeSpan duration, WraithFormTimer parent, Mobile caster, int dmg ) : base( duration ){
+		m_ParentTimer = parent;
+		m_Caster = caster;
+		m_Damage = dmg;
+	    }
+
+	    protected override void OnTick(){
+		
+		List<Mobile> targets = new List<Mobile>();
+		Map map = m_Caster.Map;
+
+		//build a target list
+		if( map != null){
+		    foreach( Mobile m in m_Caster.GetMobilesInRange( 1 + (int)(m_Caster.Skills.SpiritSpeak.Value / 15.0 )) ){
+			if ( m_Caster != m &&
+			     SpellHelper.ValidIndirectTarget(m_Caster, m) &&
+			     m_Caster.CanBeHarmful(m, false) &&
+			     m_Caster.InLOS(m)
+			     ){			
+			    targets.Add(m);		
+			}
+		    }
+		}
+		
+		// yeet on em
+		foreach( Mobile m in targets) {
+		    m_Caster.DoHarmful( m );
 
 		    m.FixedParticles( 0x374a, 10, 30, 5052, EffectLayer.LeftFoot );
 		    m.PlaySound(0x1fa);
-		    m.Damage( (int)m_Damage, m_Owner, DamageType.Necro );  //about 12 at spec 4
+		    m.Damage( m_Damage, m_Caster, DamageType.Necro );  //about 12 at spec 4
 		    
-		    m_Owner.Mana += (int)m_Damage;
-		    if( m_Owner.Mana > m_Owner.Int ){
-			m_Owner.Mana = m_Owner.Int;
+		    if( (m_Caster.Mana += m_Damage) > m_Caster.Int ){
+			m_Caster.Mana = m_Caster.Int;
+		    }
+		    else {
+			m_Caster.Mana += m_Damage;
 		    }
 		}
-		if (!Running) {
-		    EndWraithForm( m_Owner );
-		}
+
+		m_ParentTimer.SubtimerCallback();
 	    }
-	}
-    }   
+	}   
+    }
 }

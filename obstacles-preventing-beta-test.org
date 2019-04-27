@@ -146,7 +146,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [21/24]
+* TODO final sanity-checks [29/31]
 :properties:
 :cookie_data: todo_recursive
 :end:
@@ -158,7 +158,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
    Leahter, bone, etc.
    Weird shit really.
 ** DONE add vendor who sells bandages
-** TODO Chests by first skeletal mage spawns circle 1-6 scrolls in fire dungeon ( [add leetspawner )
+** DONE Chests by first skeletal mage spawns circle 1-6 scrolls in fire dungeon ( [add leetspawner )
 ** DONE cut robes for bandages
 ** DONE Decide if we want to remove Bolas
 *** on second thought the ability to dismount your opponent might make for interesting pvp dynamics and reduce offscreening

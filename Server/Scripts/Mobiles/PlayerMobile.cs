@@ -2797,7 +2797,9 @@ namespace Server.Mobiles
 	    PolymorphSpell.StopTimer( this );
 	    IncognitoSpell.StopTimer( this );
 	    DisguiseTimers.RemoveTimer( this );
+	    WraithFormSpell.StopTimers( this );
 
+	    EndAction( typeof( WraithFormSpell ) );
 	    EndAction( typeof( PolymorphSpell ) );
 	    EndAction( typeof( IncognitoSpell ) );
 
