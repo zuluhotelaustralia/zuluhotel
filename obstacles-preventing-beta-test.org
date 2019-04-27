@@ -197,6 +197,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE Fix gathersystem timing so it awards resources after the animation plays
 ** TODO make sure warriors deal more stamina damage with spec
 ** TODO make sure elemental shit works
+** TODO "instahit"
 ** DONE gathersystem asks "where do you wish to place this?" when lumberjacking
 ** TODO make it so skills/stats go to 130 but with mods you can get to 150
 ** TODO make sure pagans are spawning in loot
@@ -236,6 +237,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 :PROPERTIES:
 :cookie_data: todo recursive
 :end:
+** TODO gather nodes won't drift into the dungeon regions but they should
 ** TODO items (weapons) not displaying name properly (looted magic weapons)
 ** DONE weapons not taking material properly
 ** DONE wraith form still ticks after you die
