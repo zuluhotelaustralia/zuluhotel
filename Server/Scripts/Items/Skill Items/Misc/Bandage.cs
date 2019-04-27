@@ -392,7 +392,7 @@ namespace Server.Items
 
 				double healing = m_Healer.Skills[primarySkill].Value;
 				double anatomy = m_Healer.Skills[secondarySkill].Value;
-				double chance = ((healing + 10.0) / 100.0) - (m_Slips * 0.02);
+				double chance = ((healing + 13.0) / 130.0) - (m_Slips * 0.02);
 
 				if ( chance > Utility.RandomDouble() )
 				{
