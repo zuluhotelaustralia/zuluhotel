@@ -85,7 +85,7 @@ namespace Server.Engines.Gather {
 
 	    int innerproduct = (nx * m_vX) + (ny * m_vY);
 	    
-	    if ( xprime >= 896 ) {
+	    if ( xprime >= 7196 ) {
 		// n = ( -1, 0 )
 		nx = -1;
 	    }
@@ -93,7 +93,7 @@ namespace Server.Engines.Gather {
 		// n = ( 1, 0 )
 		nx = 1;
 	    }
-	    if ( yprime >= 512 ) {
+	    if ( yprime >= 4096 ) {
 		// n = ( 0, -1 )
 		ny = -1;
 	    }
