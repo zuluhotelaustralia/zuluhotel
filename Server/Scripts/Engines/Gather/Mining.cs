@@ -136,75 +136,75 @@ namespace Server.Engines.Gather
 	    
 	    Console.WriteLine("Gather Engine: Setting up mining nodes...");	    
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 250.0, 0.0, 70.0, typeof(Server.Items.IronOre)));
+					 2500.0, 0.0, 70.0, typeof(Server.Items.IronOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 250.0, 10.0, 80.0, typeof(Server.Items.GoldOre)));
+					 2500.0, 10.0, 80.0, typeof(Server.Items.GoldOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 240.0, 10.0, 80.0, typeof(Server.Items.SpikeOre)));
+					 2400.0, 10.0, 80.0, typeof(Server.Items.SpikeOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 230.0, 10.0, 80.0, typeof(Server.Items.FruityOre)));
+					 2300.0, 10.0, 80.0, typeof(Server.Items.FruityOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 220.0, 10.0, 80.0, typeof(Server.Items.BronzeOre)));
+					 2200.0, 10.0, 80.0, typeof(Server.Items.BronzeOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 210.0, 20.0, 90.0, typeof(Server.Items.IceRockOre)));
+					 2100.0, 20.0, 90.0, typeof(Server.Items.IceRockOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 200.0, 20.0, 90.0, typeof(Server.Items.BlackDwarfOre)));
+					 2000.0, 20.0, 90.0, typeof(Server.Items.BlackDwarfOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 200.0, 20.0, 90.0, typeof(Server.Items.DullCopperOre)));
+					 2000.0, 20.0, 90.0, typeof(Server.Items.DullCopperOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
-					 190.0, 20.0, 90.0, typeof(Server.Items.PlatinumOre)));
+					 1900.0, 20.0, 90.0, typeof(Server.Items.PlatinumOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8,
-					 180.0, 30.0, 100.0, typeof(Server.Items.SilverRockOre)));
+					 1800.0, 30.0, 100.0, typeof(Server.Items.SilverRockOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8,
-					 170.0, 30.0, 100.0, typeof(Server.Items.DarkPaganOre)));
+					 1700.0, 30.0, 100.0, typeof(Server.Items.DarkPaganOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8,
-					 160.0, 30.0, 100.0, typeof(Server.Items.CopperOre)));
+					 1600.0, 30.0, 100.0, typeof(Server.Items.CopperOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8,
-					 150.0, 30.0, 100.0, typeof(Server.Items.MysticOre)));
+					 1500.0, 30.0, 100.0, typeof(Server.Items.MysticOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8,
-					 140.0, 30.0, 100.0, typeof(Server.Items.SpectralOre)));
+					 1400.0, 30.0, 100.0, typeof(Server.Items.SpectralOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.7,
-					 130.0, 30.0, 100.0, typeof(Server.Items.OldBritainOre)));
+					 1300.0, 30.0, 100.0, typeof(Server.Items.OldBritainOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.7,
-					 120.0, 40.0, 100.0, typeof(Server.Items.OnyxOre)));
+					 1200.0, 40.0, 100.0, typeof(Server.Items.OnyxOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.7,
-					 110.0, 40.0, 100.0, typeof(Server.Items.RedElvenOre)));
+					 1100.0, 40.0, 100.0, typeof(Server.Items.RedElvenOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.6,
-					 100.0, 50.0, 100.0, typeof(Server.Items.UndeadOre)));
+					 1000.0, 50.0, 100.0, typeof(Server.Items.UndeadOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.6,
-					 90.0, 50.0, 100.0, typeof(Server.Items.PyriteOre)));
+					 900.0, 50.0, 100.0, typeof(Server.Items.PyriteOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.6,
-					 80.0, 50.0, 100.0, typeof(Server.Items.VirginityOre)));
+					 800.0, 50.0, 100.0, typeof(Server.Items.VirginityOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 70.0, 50.0, 110.0, typeof(Server.Items.MalachiteOre)));
+					 700.0, 50.0, 110.0, typeof(Server.Items.MalachiteOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 60.0, 60.0, 120.0, typeof(Server.Items.LavarockOre)));
+					 600.0, 60.0, 120.0, typeof(Server.Items.LavarockOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 50.0, 60.0, 130.0, typeof(Server.Items.AzuriteOre)));
+					 500.0, 60.0, 130.0, typeof(Server.Items.AzuriteOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5,
-					 50.0, 70.0, 150.0, typeof(Server.Items.DripstoneOre)));
+					 500.0, 70.0, 150.0, typeof(Server.Items.DripstoneOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.4,
-					 50.0, 70.0, 150.0, typeof(Server.Items.ExecutorOre)));
+					 500.0, 70.0, 150.0, typeof(Server.Items.ExecutorOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.4,
-					 50.0, 80.0, 150.0, typeof(Server.Items.PeachblueOre)));
+					 500.0, 80.0, 150.0, typeof(Server.Items.PeachblueOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3,
-					 50.0, 80.0, 150.0, typeof(Server.Items.DestructionOre)));
+					 500.0, 80.0, 150.0, typeof(Server.Items.DestructionOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3,
-					 50.0, 90.0, 150.0, typeof(Server.Items.AnraOre)));
+					 500.0, 90.0, 150.0, typeof(Server.Items.AnraOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.2,
-					 40.0, 90.0, 150.0, typeof(Server.Items.CrystalOre)));
+					 400.0, 90.0, 150.0, typeof(Server.Items.CrystalOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.2,
-					 30.0, 100.0, 150.0, typeof(Server.Items.DoomOre)));
+					 300.0, 100.0, 150.0, typeof(Server.Items.DoomOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.2,
-					 20.0, 100.0, 150.0, typeof(Server.Items.GoddessOre)));
+					 200.0, 100.0, 150.0, typeof(Server.Items.GoddessOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1,
-					 20.0, 100.0, 150.0, typeof(Server.Items.NewZuluOre)));
+					 200.0, 100.0, 150.0, typeof(Server.Items.NewZuluOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1,
-					 10.0, 130.0, 150.0, typeof(Server.Items.EbonTwilightSapphireOre)));
+					 100.0, 130.0, 150.0, typeof(Server.Items.EbonTwilightSapphireOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1,
-					 10.0, 140.0, 150.0, typeof(Server.Items.DarkSableRubyOre)));
+					 100.0, 140.0, 150.0, typeof(Server.Items.DarkSableRubyOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1,
-					 10.0, 145.0, 150.0, typeof(Server.Items.RadiantNimbusDiamondOre)));
+					 100.0, 145.0, 150.0, typeof(Server.Items.RadiantNimbusDiamondOre)));
 	    Console.WriteLine("Complete.");
 	}
 	

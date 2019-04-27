@@ -20,7 +20,7 @@ namespace Server.Engines.Gather {
 
 	//difficulty represents the difficulty to actually find it
 	// graphically, this is the fall-off rate per unit distance (higher is slower fall-off)
-	//set iron to 250.0, set nimbus and other rare stuff to 10, set intermediate resources in the 100 range
+	//set iron to 2500.0, set nimbus and other rare stuff to 10, set intermediate resources in the 100 range
 	private double m_Difficulty;
 	public double Difficulty { get { return m_Difficulty; } }
 	
@@ -85,7 +85,7 @@ namespace Server.Engines.Gather {
 
 	    int innerproduct = (nx * m_vX) + (ny * m_vY);
 	    
-	    if ( xprime >= 7196 ) {
+	    if ( xprime >= 7168 ) {
 		// n = ( -1, 0 )
 		nx = -1;
 	    }
