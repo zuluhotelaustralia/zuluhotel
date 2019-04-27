@@ -140,9 +140,9 @@ namespace Server.Engines.Gather {
 
 	    m_System.m_Nodes.Clear();
 
-	    //LB's throne
-	    int x = 1323;
-	    int y = 1624;
+	    //see mining.cs
+	    int x = 3033;
+	    int y = 3406;
 	    
 	    Console.WriteLine("Gather Engine: Setting up fishing nodes...");
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
