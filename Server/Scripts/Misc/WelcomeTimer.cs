@@ -27,8 +27,8 @@ namespace Server.Misc
 				} :
 			new string[]
 				{	//Yes, this message is a pathetic message, It's suggested that you change it.
-					"Welcome to this shard.",
-					"Please enjoy your stay."
+					"Welcome to Zulu Hotel.",
+					"We are in Beta Testing, please see http://zuluhotel.ca for current testing status and information."
 				} );
 
 		public WelcomeTimer( Mobile m ) : this( m, m_Messages.Length )

@@ -232,15 +232,15 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** TODO publish logs automagically
 ** TODO figure out how jail works in runuo - there seems to be no [jail command
 
-* Bugs [0/5]
+* Bugs [4/5]
 :PROPERTIES:
 :cookie_data: todo recursive
 :end:
 ** TODO items (weapons) not displaying name properly (looted magic weapons)
-** TODO weapons not taking material properly
-** TODO wraith form still ticks after you die
-** TODO wraith form takes forever to tick
-** TODO Example:  Shepherd's Crook [ Exceptional / Bloodhorse ] shows incorrect cliloc string (1160518 instead of ???)
+** DONE weapons not taking material properly
+** DONE wraith form still ticks after you die
+** DONE wraith form takes forever to tick
+** DONE Example:  Shepherd's Crook [ Exceptional / Bloodhorse ] shows incorrect cliloc string (1160518 instead of ???)
 
 #+NAME: oretable
 |               |       |            |         | <30>                                                                                                                         |    |   |
