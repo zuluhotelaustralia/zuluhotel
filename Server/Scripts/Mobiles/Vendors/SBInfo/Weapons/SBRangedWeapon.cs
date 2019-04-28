@@ -27,11 +27,11 @@ namespace Server.Mobiles
 					Add( new GenericBuyInfo( typeof( RepeatingCrossbow ), 46, 20, 0x26C3, 0 ) );
 					Add( new GenericBuyInfo( typeof( CompositeBow ), 45, 20, 0x26C2, 0 ) );
 				}
-				Add( new GenericBuyInfo( typeof( Bolt ), 2, Utility.Random( 30, 60 ), 0x1BFB, 0 ) );
+				Add( new GenericBuyInfo( typeof( Bolt ), 2, 99999, 0x1BFB, 0 ) );
 				Add( new GenericBuyInfo( typeof( Bow ), 40, 20, 0x13B2, 0 ) );
-				Add( new GenericBuyInfo( typeof( Arrow ), 2, Utility.Random( 30, 60 ), 0xF3F, 0 ) );
-				Add( new GenericBuyInfo( typeof( Feather ), 2, Utility.Random( 30, 60 ), 0x1BD1, 0 ) );
-				Add( new GenericBuyInfo( typeof( Shaft ), 3, Utility.Random( 30, 60 ), 0x1BD4, 0 ) );
+				Add( new GenericBuyInfo( typeof( Arrow ), 2, 99999, 0xF3F, 0 ) );
+				Add( new GenericBuyInfo( typeof( Feather ), 2, 99999, 0x1BD1, 0 ) );
+				Add( new GenericBuyInfo( typeof( Shaft ), 3, 99999, 0x1BD4, 0 ) );
 			}
 		}
 
