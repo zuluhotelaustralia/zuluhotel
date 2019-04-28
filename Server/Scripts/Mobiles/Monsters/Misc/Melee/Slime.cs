@@ -30,7 +30,7 @@ namespace Server.Mobiles
 			SetResistance( ResistanceType.Physical, 5, 10 );
 			SetResistance( ResistanceType.Poison, 10, 20 );
 
-			SetSkill( SkillName.Poisoning, 30.1, 50.0 );
+			//SetSkill( SkillName.Poisoning, 30.1, 50.0 );
 			SetSkill( SkillName.MagicResist, 15.1, 20.0 );
 			SetSkill( SkillName.Tactics, 19.3, 34.0 );
 			SetSkill( SkillName.Wrestling, 19.3, 34.0 );
@@ -52,7 +52,7 @@ namespace Server.Mobiles
 		}
 
 		public override Poison PoisonImmune{ get{ return Poison.Lesser; } }
-		public override Poison HitPoison{ get{ return Poison.Lesser; } }
+		//public override Poison HitPoison{ get{ return Poison.Lesser; } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat | FoodType.Fish | FoodType.FruitsAndVegies | FoodType.GrainsAndHay | FoodType.Eggs; } }
 
 		public Slime( Serial serial ) : base( serial )

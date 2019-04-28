@@ -421,6 +421,13 @@ namespace Server.Items
 					else
 						toHeal -= m_Slips * 4;
 
+					if( m_Healer is PlayerMobile ){
+					    PlayerMobile pm = m_Healer as PlayerMobile;
+					    if( pm.Spec.SpecName == SpecName.Warrior ){
+						toHeal *= pm.Spec.Bonus;
+					    }
+					}
+
 					if ( toHeal < 1 )
 					{
 						toHeal = 1;
