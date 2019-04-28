@@ -366,6 +366,10 @@
 			<go x="3010" y="3371" z="15" />
 			<music name="Serpents" />
 			<zrange min="0" />
+			<!-- ZH Crafting Zone -->
+			<region type="CraftingRegion" priority="50">
+			  <rect x="3000" y="3400" width="14" height="14" />
+			</region>
 			<region>
 				<rect x="2960" y="3400" width="16" height="16" />
 				<rect x="2968" y="3416" width="8" height="16" />

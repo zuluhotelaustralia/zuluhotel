@@ -24,6 +24,8 @@ namespace Server.Regions
 		case SkillName.Healing:
 		case SkillName.Meditation:
 		case SkillName.Veterinary:
+		case SkillName.Mining:
+		case SkillName.Lumberjacking:
 		    return 0.1;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
