@@ -2194,15 +2194,15 @@ namespace Server.Items
              * : 1% bonus for every 5 points of lumberjacking
              * : +10% bonus at Grandmaster or higher
              */
-            if ( Type == WeaponType.Axe )
-            {
-                double lumberValue = attacker.Skills[SkillName.Lumberjacking].Value;
+            // if ( Type == WeaponType.Axe )
+            // {
+            //     double lumberValue = attacker.Skills[SkillName.Lumberjacking].Value;
 
-                modifiers += ( ( lumberValue / 5.0 ) / 100.0 );
+            //     modifiers += ( ( lumberValue / 5.0 ) / 100.0 );
 
-                if ( lumberValue >= 100.0 )
-                    modifiers += 0.1;
-            }
+            //     if ( lumberValue >= 100.0 )
+            //         modifiers += 0.1;
+            // }
 
             // New quality bonus:
             if ( m_Quality != WeaponQuality.Regular )
