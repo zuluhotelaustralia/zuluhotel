@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public RadiantNimbusDiamondOre( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount ) {
-			this.Hue = 0x498;
+			this.Hue = 2765;
 		}
 
 		public RadiantNimbusDiamondOre( Serial serial ) : base( serial ) {}

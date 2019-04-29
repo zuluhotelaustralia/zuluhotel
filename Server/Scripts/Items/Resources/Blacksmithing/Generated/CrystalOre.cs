@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public CrystalOre( int amount ) : base( CraftResource.Crystal, amount ) {
-			this.Hue = 0x492;
+			this.Hue = 2759;
 		}
 
 		public CrystalOre( Serial serial ) : base( serial ) {}

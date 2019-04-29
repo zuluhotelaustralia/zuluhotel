@@ -7,8 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public GauntletLog( int amount ) : base( CraftResource.Gauntlet, amount ) {
-			this.Name = "gauntlet log";
-			this.Hue = 1284;
+			this.Hue = 2777;
 		}
 
 		public GauntletLog( Serial serial ) : base( serial ) {}

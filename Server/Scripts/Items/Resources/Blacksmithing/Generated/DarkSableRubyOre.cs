@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public DarkSableRubyOre( int amount ) : base( CraftResource.DarkSableRuby, amount ) {
-			this.Hue = 0x494;
+			this.Hue = 2761;
 		}
 
 		public DarkSableRubyOre( Serial serial ) : base( serial ) {}

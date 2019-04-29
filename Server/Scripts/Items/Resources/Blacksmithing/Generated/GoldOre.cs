@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public GoldOre( int amount ) : base( CraftResource.Gold, amount ) {
-			this.Hue = 0x885;
+			this.Hue = 2793;
 		}
 
 		public GoldOre( Serial serial ) : base( serial ) {}

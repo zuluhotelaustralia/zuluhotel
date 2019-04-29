@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public PeachblueOre( int amount ) : base( CraftResource.Peachblue, amount ) {
-			this.Hue = 0x49c;
+			this.Hue = 2769;
 		}
 
 		public PeachblueOre( Serial serial ) : base( serial ) {}

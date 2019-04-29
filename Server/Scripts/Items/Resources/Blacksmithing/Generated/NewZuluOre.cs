@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public NewZuluOre( int amount ) : base( CraftResource.NewZulu, amount ) {
-			this.Hue = 0x488;
+			this.Hue = 2749;
 		}
 
 		public NewZuluOre( Serial serial ) : base( serial ) {}

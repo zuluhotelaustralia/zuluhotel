@@ -8,7 +8,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public LavarockIngot( int amount ) : base( CraftResource.Lavarock, amount ) {
-			this.Hue = 0x486;
+			this.Hue = 2747;
 		}
 
 		public LavarockIngot( Serial serial ) : base( serial ) {}

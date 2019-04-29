@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public SwampwoodBoard( int amount ) : base( CraftResource.Swampwood, amount ) {
-			this.Hue = 1177;
+			this.Hue = 2767;
 		}
 
 		public string ResourceName { get { return "swampwood"; } }

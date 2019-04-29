@@ -8,7 +8,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public CrystalIngot( int amount ) : base( CraftResource.Crystal, amount ) {
-			this.Hue = 0x492;
+			this.Hue = 2759;
 		}
 
 		public CrystalIngot( Serial serial ) : base( serial ) {}

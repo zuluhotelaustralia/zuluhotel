@@ -8,7 +8,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public EbonTwilightSapphireIngot( int amount ) : base( CraftResource.EbonTwilightSapphire, amount ) {
-			this.Hue = 0x493;
+			this.Hue = 2760;
 		}
 
 		public EbonTwilightSapphireIngot( Serial serial ) : base( serial ) {}

@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public PurplePassionLog( int amount ) : base( CraftResource.PurplePassion, amount ) {
-			this.Name = "purple passion log";
 			this.Hue = 515;
 		}
 

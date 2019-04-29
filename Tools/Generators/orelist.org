@@ -1,5 +1,5 @@
 | Iron                   |   0x0 |   0 | 1.00 |  4 | 9 |
-| Gold                   | 0x885 |   1 | 1.00 |  2 | 9 |
+| Gold                   |  2793 |   1 | 1.00 |  2 | 9 |
 | Spike                  | 0x4c7 |   5 | 1.05 |  8 | 4 |
 | Fruity                 | 0x46e |  10 | 1.05 |  9 | 8 |
 | Bronze                 | 0x45e |  15 | 1.10 |  9 | 1 |
@@ -11,25 +11,25 @@
 | Dark Pagan             | 0x46b |  45 | 1.15 |  6 | 8 |
 | Copper                 | 0x602 |  50 | 1.20 |  2 | 7 |
 | Mystic                 | 0x17f |  55 | 1.05 |  9 | 1 |
-| Spectral               | 0x483 |  60 | 1.10 |  1 | 1 |
+| Spectral               | 2744  |  60 | 1.10 |  1 | 1 |
 | Old Britain            | 0x852 |  65 | 1.25 |  4 | 1 |
 | Onyx                   | 0x455 |  70 | 1.25 |  8 | 3 |
 | Red Elven              | 0x4b9 |  75 | 1.15 |  1 | 4 |
 | Undead                 | 0x279 |  80 | 1.20 | 10 | 7 |
 | Pyrite                 | 0x6b8 |  85 | 1.30 |  8 | 7 |
 | Virginity              | 0x482 |  90 | 1.25 |  5 | 4 |
-| Malachite              | 0x487 |  95 | 1.50 |  4 | 8 |
-| Lavarock               | 0x486 |  97 | 1.35 |  6 | 2 |
+| Malachite              | 2748  |  95 | 1.50 |  4 | 8 |
+| Lavarock               | 2747  |  97 | 1.35 |  6 | 2 |
 | Azurite                | 0x4df |  98 | 1.50 |  7 | 2 |
-| Dripstone              | 0x49e | 100 | 1.60 |  6 | 4 |
-| Executor               | 0x499 | 104 | 1.60 |  7 | 1 |
-| Peachblue              | 0x49c | 108 | 1.70 |  3 | 2 |
-| Destruction            | 0x500 | 112 | 1.70 |  5 | 4 |
+| Dripstone              | 2771  | 100 | 1.60 |  6 | 4 |
+| Executor               | 2766  | 104 | 1.60 |  7 | 1 |
+| Peachblue              | 2769  | 108 | 1.70 |  3 | 2 |
+| Destruction            | 2773  | 112 | 1.70 |  5 | 4 |
 | Anra                   | 0x48b | 116 | 1.80 | 10 | 4 |
-| Crystal                | 0x492 | 119 | 1.80 |  3 | 9 |
-| Doom                   | 0x49f | 122 | 1.90 |  2 | 1 |
-| Goddess                | 0x501 | 125 | 1.90 |  7 | 2 |
-| New Zulu               | 0x488 | 129 | 2.00 |  1 | 7 |
-| Ebon Twilight Sapphire | 0x493 | 130 | 2.20 |  6 | 1 |
-| Dark Sable Ruby        | 0x494 | 130 | 2.20 |  4 | 7 |
-| Radiant Nimbus Diamond | 0x498 | 140 | 2.25 |  8 | 9 |
+| Crystal                | 2759  | 119 | 1.80 |  3 | 9 |
+| Doom                   | 2772  | 122 | 1.90 |  2 | 1 |
+| Goddess                | 2774  | 125 | 1.90 |  7 | 2 |
+| New Zulu               | 2749  | 129 | 2.00 |  1 | 7 |
+| Ebon Twilight Sapphire | 2760  | 130 | 2.20 |  6 | 1 |
+| Dark Sable Ruby        | 2761  | 130 | 2.20 |  4 | 7 |
+| Radiant Nimbus Diamond | 2765  | 140 | 2.25 |  8 | 9 |

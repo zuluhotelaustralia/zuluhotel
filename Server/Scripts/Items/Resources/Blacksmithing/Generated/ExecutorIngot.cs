@@ -8,7 +8,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public ExecutorIngot( int amount ) : base( CraftResource.Executor, amount ) {
-			this.Hue = 0x499;
+			this.Hue = 2766;
 		}
 
 		public ExecutorIngot( Serial serial ) : base( serial ) {}

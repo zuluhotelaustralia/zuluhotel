@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public DoomOre( int amount ) : base( CraftResource.Doom, amount ) {
-			this.Hue = 0x49f;
+			this.Hue = 2772;
 		}
 
 		public DoomOre( Serial serial ) : base( serial ) {}

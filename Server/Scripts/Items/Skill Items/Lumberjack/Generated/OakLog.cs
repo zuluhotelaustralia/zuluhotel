@@ -7,7 +7,6 @@ namespace Server.Items {
 
 		[Constructable]
 		public OakLog( int amount ) : base( CraftResource.Oak, amount ) {
-			this.Name = "oak log";
 			this.Hue = 1045;
 		}
 

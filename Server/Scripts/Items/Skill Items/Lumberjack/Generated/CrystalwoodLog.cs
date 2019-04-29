@@ -7,8 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public CrystalwoodLog( int amount ) : base( CraftResource.Crystalwood, amount ) {
-			this.Name = "crystal wood log";
-			this.Hue = 1170;
+			this.Hue = 2759;
 		}
 
 		public CrystalwoodLog( Serial serial ) : base( serial ) {}

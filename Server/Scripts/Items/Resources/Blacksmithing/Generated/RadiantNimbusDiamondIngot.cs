@@ -8,7 +8,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public RadiantNimbusDiamondIngot( int amount ) : base( CraftResource.RadiantNimbusDiamond, amount ) {
-			this.Hue = 0x498;
+			this.Hue = 2765;
 		}
 
 		public RadiantNimbusDiamondIngot( Serial serial ) : base( serial ) {}

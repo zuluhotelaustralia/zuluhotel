@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public ExecutorOre( int amount ) : base( CraftResource.Executor, amount ) {
-			this.Hue = 0x499;
+			this.Hue = 2766;
 		}
 
 		public ExecutorOre( Serial serial ) : base( serial ) {}
