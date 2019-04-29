@@ -3,6 +3,8 @@
 
 This is a list of all the things that need to be done before we can launch a beta server, broken down as much as possible
 
+Bugs go here:  [[file:bug-tracker.org][le tracker de bugs]]
+
 * DONE finish off GatherSystem: [[oretable]] [[logtable]] [[hidetable]] [95/95]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive

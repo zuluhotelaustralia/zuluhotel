@@ -2,7 +2,7 @@
 #+STARTUP: showall
 
 This is a list of bugs.
-* TODO "You need ~MANA REQUIREMENT~ mana to cast this spell"
+* DONE "You need ~MANA REQUIREMENT~ mana to cast this spell"
 ** I.e. the fucking cliloc message is displayed without substitution
 
 * DONE gather nodes won't drift into the dungeon regions but they should
