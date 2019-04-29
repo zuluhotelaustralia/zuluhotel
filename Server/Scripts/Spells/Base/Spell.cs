@@ -569,7 +569,7 @@ namespace Server.Spells
 	    }
 	    else
 	    {
-		m_Caster.LocalOverheadMessage( MessageType.Regular, 0x22, 502625 ); // Insufficient mana
+		m_Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, ScaleMana(GetMana()).ToString() ); //insufficient mana.  you must have bla bla bla
 	    }
 
 	    return false;
