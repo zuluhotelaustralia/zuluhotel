@@ -1,0 +1,39 @@
+#+STARTUP: align
+#+STARTUP: showall
+
+This is a list of bugs.
+* TODO "You need ~MANA REQUIREMENT~ mana to cast this spell"
+** I.e. the fucking cliloc message is displayed without substitution
+
+* DONE gather nodes won't drift into the dungeon regions but they should
+
+* TODO items (weapons) not displaying name properly (looted magic weapons)
+
+* DONE weapons not taking material properly
+
+* DONE wraith form still ticks after you die
+
+* DONE wraith form takes forever to tick
+
+* DONE Example:  Shepherd's Crook [ Exceptional / Bloodhorse ] shows incorrect cliloc string (1160518 instead of ???)
+
+
+* TODO Unequipping certain items crashes server:
+#+begin_quote
+  Error:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Server.Items.BaseArmor.get_PhysicalResistance() in /home/runzh/zuluhotel/Server/Scripts/Items/Armor/BaseArmor.cs:line 457
+   at Server.Mobile.RemoveItem(Item item) in /home/runzh/zuluhotel/Server/Mobile.cs:line 6268
+   at Server.Item.MoveToWorld(Point3D location, Map map) in /home/runzh/zuluhotel/Server/Item.cs:line 1344
+   at Server.Item.Internalize() in /home/runzh/zuluhotel/Server/Item.cs:line 1898
+   at Server.Mobile.Lift(Item item, Int32 amount, Boolean& rejected, LRReason& reject) in /home/runzh/zuluhotel/Server/Mobile.cs:line 4386
+   at Server.Network.PacketHandlers.LiftReq(NetState state, PacketReader pvSrc) in /home/runzh/zuluhotel/Server/Network/PacketHandlers.cs:line 1007
+   at Server.Network.MessagePump.HandleReceive(NetState ns) in /home/runzh/zuluhotel/Server/Network/MessagePump.cs:line 260
+   at Server.Network.MessagePump.Slice() in /home/runzh/zuluhotel/Server/Network/MessagePump.cs:line 127
+   at Server.Core.Main(String[] args) in /home/runzh/zuluhotel/Server/Main.cs:line 539
+Crash: Generating report...done
+Crash: Backing up...done
+This exception is fatal, press return to exit
+#+end_quote
+
+So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
