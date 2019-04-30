@@ -930,28 +930,51 @@ namespace Server.Items
 	    blue.ArmorEnergyResist = 10;
 
 	    CraftAttributeInfo Pinetree = Pinetree = new CraftAttributeInfo();
+	    Pinetree.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Cherry = Cherry = new CraftAttributeInfo();
+	    Cherry.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Oak = Oak = new CraftAttributeInfo();
+	    Oak.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo PurplePassion = PurplePassion = new CraftAttributeInfo();
+	    PurplePassion.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo GoldenReflection = GoldenReflection = new CraftAttributeInfo();
+	    GoldenReflection.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Hardranger = Hardranger = new CraftAttributeInfo();
+	    Hardranger.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Jadewood = Jadewood = new CraftAttributeInfo();
+	    Jadewood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Darkwood = Darkwood = new CraftAttributeInfo();
+	    Darkwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Stonewood = Stonewood = new CraftAttributeInfo();
+	    Stonewood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Sunwood = Sunwood = new CraftAttributeInfo();
+	    Sunwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Gauntlet = Gauntlet = new CraftAttributeInfo();
+	    Gauntlet.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Swampwood = Swampwood = new CraftAttributeInfo();
+	    Swampwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Stardust = Stardust = new CraftAttributeInfo();
+	    Stardust.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Silverleaf = Silverleaf = new CraftAttributeInfo();
+	    Silverleaf.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Stormteal = Stormteal = new CraftAttributeInfo();
+	    Stormteal.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Emeraldwood = Emeraldwood = new CraftAttributeInfo();
+	    Emeraldwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Bloodwood = Bloodwood = new CraftAttributeInfo();
+	    Bloodwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Crystalwood = Crystalwood = new CraftAttributeInfo();
+	    Crystalwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Bloodhorse = Bloodhorse = new CraftAttributeInfo();
+	    Bloodhorse.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Doomwood = Doomwood = new CraftAttributeInfo();
+	    Doomwood.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Zulu = Zulu = new CraftAttributeInfo();
+	    Zulu.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Darkness = Darkness = new CraftAttributeInfo();
+	    Darkness.ArmorPhysicalResist = 6;
 	    CraftAttributeInfo Elven = Elven = new CraftAttributeInfo();
+	    Elven.ArmorPhysicalResist = 6;
 	}
     }
 
