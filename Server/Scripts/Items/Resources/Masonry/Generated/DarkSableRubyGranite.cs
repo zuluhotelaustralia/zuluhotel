@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class DarkSableRubyGranite : BaseGranite {
 		[Constructable]
 		public DarkSableRubyGranite() : base( CraftResource.DarkSableRuby ) {
-			this.Hue = 0x494;
+			this.Hue = 2761;
 		}
 
 		public DarkSableRubyGranite( Serial serial ) : base( serial ) {}

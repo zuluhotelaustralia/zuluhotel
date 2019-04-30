@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class ExecutorGranite : BaseGranite {
 		[Constructable]
 		public ExecutorGranite() : base( CraftResource.Executor ) {
-			this.Hue = 0x499;
+			this.Hue = 2766;
 		}
 
 		public ExecutorGranite( Serial serial ) : base( serial ) {}

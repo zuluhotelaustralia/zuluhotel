@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class EbonTwilightSapphireGranite : BaseGranite {
 		[Constructable]
 		public EbonTwilightSapphireGranite() : base( CraftResource.EbonTwilightSapphire ) {
-			this.Hue = 0x493;
+			this.Hue = 2760;
 		}
 
 		public EbonTwilightSapphireGranite( Serial serial ) : base( serial ) {}

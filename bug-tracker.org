@@ -35,5 +35,6 @@ Crash: Generating report...done
 Crash: Backing up...done
 This exception is fatal, press return to exit
 #+end_quote
-
-So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
+** So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
+   get_PhysicalResistance calls GetProtOffset(), GetResourceAttrs().ArmorPhysicalResist
+   GetResourceAttrs calls into CraftResources.GetInfo, looks like this is it

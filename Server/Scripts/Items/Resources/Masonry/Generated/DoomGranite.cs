@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class DoomGranite : BaseGranite {
 		[Constructable]
 		public DoomGranite() : base( CraftResource.Doom ) {
-			this.Hue = 0x49f;
+			this.Hue = 2772;
 		}
 
 		public DoomGranite( Serial serial ) : base( serial ) {}

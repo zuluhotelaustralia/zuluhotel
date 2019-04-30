@@ -193,6 +193,30 @@ namespace Server.Items
                     case CraftResource.SpinedLeather:	ar += 10; break;
                     case CraftResource.HornedLeather:	ar += 13; break;
                     case CraftResource.BarbedLeather:	ar += 16; break;
+
+		    case CraftResource.Pinetree: ar = (int)( (double)ar * 1.05); break;
+		    case CraftResource.Cherry: ar = (int)( (double)ar * 1.10); break;
+		    case CraftResource.Oak: ar = (int)( (double)ar * 1.15); break;
+		    case CraftResource.PurplePassion: ar = (int)( (double)ar * 1.20); break;
+		    case CraftResource.GoldenReflection: ar = (int)( (double)ar * 1.25); break;
+		    case CraftResource.Hardranger: ar = (int)( (double)ar * 1.25); break;
+		    case CraftResource.Jadewood: ar = (int)( (double)ar * 1.30); break;
+		    case CraftResource.Darkwood: ar = (int)( (double)ar * 1.35); break;
+		    case CraftResource.Stonewood: ar = (int)( (double)ar * 1.40); break;
+		    case CraftResource.Sunwood: ar = (int)( (double)ar * 1.45); break;
+		    case CraftResource.Gauntlet: ar = (int)( (double)ar * 1.45); break;
+		    case CraftResource.Swampwood: ar = (int)( (double)ar * 1.50); break;
+		    case CraftResource.Stardust: ar = (int)( (double)ar * 1.55); break;
+		    case CraftResource.Silverleaf: ar = (int)( (double)ar * 1.60); break;
+		    case CraftResource.Stormteal: ar = (int)( (double)ar * 1.65); break;
+		    case CraftResource.Emeraldwood: ar = (int)( (double)ar * 1.70); break;
+		    case CraftResource.Bloodwood: ar = (int)( (double)ar * 1.75); break;
+		    case CraftResource.Crystalwood: ar = (int)( (double)ar * 1.80); break;
+		    case CraftResource.Bloodhorse: ar = (int)( (double)ar * 1.85); break;
+		    case CraftResource.Doomwood: ar = (int)( (double)ar * 1.90); break;
+		    case CraftResource.Zulu: ar = (int)( (double)ar * 2.00); break;
+		    case CraftResource.Darkness: ar = (int)( (double)ar * 2.05); break;
+		    case CraftResource.Elven: ar = (int)( (double)ar * 2.10); break;
                 }
 
                 ar += -8 + (8 * (int)m_Quality);

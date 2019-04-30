@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class DripstoneGranite : BaseGranite {
 		[Constructable]
 		public DripstoneGranite() : base( CraftResource.Dripstone ) {
-			this.Hue = 0x49e;
+			this.Hue = 2771;
 		}
 
 		public DripstoneGranite( Serial serial ) : base( serial ) {}

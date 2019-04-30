@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class LavarockGranite : BaseGranite {
 		[Constructable]
 		public LavarockGranite() : base( CraftResource.Lavarock ) {
-			this.Hue = 0x486;
+			this.Hue = 2747;
 		}
 
 		public LavarockGranite( Serial serial ) : base( serial ) {}

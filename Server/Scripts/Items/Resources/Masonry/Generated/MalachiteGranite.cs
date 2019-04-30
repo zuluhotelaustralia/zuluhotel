@@ -4,7 +4,7 @@ namespace Server.Items {
 	public class MalachiteGranite : BaseGranite {
 		[Constructable]
 		public MalachiteGranite() : base( CraftResource.Malachite ) {
-			this.Hue = 0x487;
+			this.Hue = 2748;
 		}
 
 		public MalachiteGranite( Serial serial ) : base( serial ) {}
