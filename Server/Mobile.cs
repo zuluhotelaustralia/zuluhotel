@@ -9227,11 +9227,13 @@ namespace Server
 				    m.m_NetState.Send(MobileIncoming.Create(m.m_NetState, m, this));
 
 				    if ( m.m_NetState.StygianAbyss ) {
-					if ( m_Poison != null )
-					    m.m_NetState.Send( new HealthbarPoison( this ) );
+					// see github.com/runuo/runuo commit e62fc4964afe66b9595e42ca1fa711d2dc0cb2de
+					// flags in the packets handle these conditionals
+					//if ( m_Poison != null )
+					m.m_NetState.Send( new HealthbarPoison( this ) );
 
-					if ( m_Blessed || m_YellowHealthbar )
-					    m.m_NetState.Send( new HealthbarYellow( this ) );
+					    //if ( m_Blessed || m_YellowHealthbar )
+					m.m_NetState.Send( new HealthbarYellow( this ) );
 				    }
 
 				    if( IsDeadBondedPet )
@@ -9251,11 +9253,11 @@ namespace Server
 				    ourState.Send(MobileIncoming.Create(ourState, this, m));
 
 				    if ( ourState.StygianAbyss ) {
-					if ( m.Poisoned )
-					    ourState.Send( new HealthbarPoison( m ) );
+					//if ( m.Poisoned )
+					ourState.Send( new HealthbarPoison( m ) );
 
-					if ( m.Blessed || m.YellowHealthbar )
-					    ourState.Send( new HealthbarYellow( m ) );
+					//if ( m.Blessed || m.YellowHealthbar )
+					ourState.Send( new HealthbarYellow( m ) );
 				    }
 
 				    if( m.IsDeadBondedPet )
@@ -9285,11 +9287,11 @@ namespace Server
 				ns.Send(MobileIncoming.Create(ns, ns.Mobile, this));
 
 				if ( ns.StygianAbyss ) {
-				    if ( m_Poison != null )
-					ns.Send( new HealthbarPoison( this ) );
+				    //if ( m_Poison != null )
+				    ns.Send( new HealthbarPoison( this ) );
 
-				    if ( m_Blessed || m_YellowHealthbar )
-					ns.Send( new HealthbarYellow( this ) );
+				    //if ( m_Blessed || m_YellowHealthbar )
+				    ns.Send( new HealthbarYellow( this ) );
 				}
 
 				if( IsDeadBondedPet )
