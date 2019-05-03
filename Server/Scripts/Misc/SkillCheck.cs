@@ -202,8 +202,6 @@ namespace Server.Misc
 	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently a const;
 	    double gc = 0.0;
 
-	    //a *= gssf[skill.SkillName]; // multiply by a global skill gain rate modifier, if it exists
-	    
 	    if( skill.Value > 0 ) {
 		//skill must not be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
 		gc = -( Math.Log(skill.Value / b) * a );
@@ -211,8 +209,6 @@ namespace Server.Misc
 	    else {
 		gc = 1.0; //avoid divide by 0
 	    }
-	    
-	    //gc *= skill.Info.GainFactor;
 	    
 	    if ( from is BaseCreature && ((BaseCreature)from).Controlled )
 		gc *= 2;

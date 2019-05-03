@@ -2160,35 +2160,37 @@ namespace Server.Items
         {
             if ( checkSkills )
             {
-                attacker.CheckSkill( SkillName.Tactics, 0.0, attacker.Skills[SkillName.Tactics].Cap ); // Passively check tactics for gain
-                attacker.CheckSkill( SkillName.Anatomy, 0.0, attacker.Skills[SkillName.Anatomy].Cap ); // Passively check Anatomy for gain
+		if( Type != WeaponType.Ranged ){
+		    attacker.CheckSkill( SkillName.Anatomy, 0.0, attacker.Skills[SkillName.Anatomy].Cap ); // Passively check Anatomy for gain
+		    attacker.CheckSkill( SkillName.Tactics, 0.0, attacker.Skills[SkillName.Tactics].Cap ); // Passively check tactics for gain
+		}
 
-                if ( Type == WeaponType.Axe )
+                if ( Type == WeaponType.Axe ) {
                     attacker.CheckSkill( SkillName.Lumberjacking, 0.0, 130.0 ); // Passively check Lumberjacking for gain
+		}
             }
 
-            /* Compute tactics modifier
-             * :   0.0 = 50% loss
-             * :  50.0 = unchanged
-             * : 100.0 = 50% bonus
-             */
-            damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 50.0 ) / 100.0 ) );
+	    if( Type != WeaponType.Ranged ){
+		damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 65.0 ) / 130.0 ) );
+	    }
 
 
             /* Compute strength modifier
              * : 1% bonus for every 5 strength
              */
-            double modifiers = ( attacker.Str / 5.0 ) / 100.0;
+            double modifiers = ( attacker.Str / 5.0 ) / 130.0;
 
-            /* Compute anatomy modifier
-             * : 1% bonus for every 5 points of anatomy
-             * : +10% bonus at Grandmaster or higher
-             */
-            double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
-            modifiers += ( ( anatomyValue / 5.0 ) / 100.0 );
-
-            if ( anatomyValue >= 100.0 )
-                modifiers += 0.1;
+	    if( Type != WeaponType.Ranged ){
+		double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
+		modifiers += ( ( anatomyValue / 5.0 ) / 130.0 );
+		
+		if ( anatomyValue >= 130.0 ) {
+		    modifiers += 0.1;
+		}
+	    }
+	    else {
+		modifiers += ( (attacker.Int / 10.0) / 130.0 );
+	    }
 
             /* Compute lumberjacking bonus
              * : 1% bonus for every 5 points of lumberjacking

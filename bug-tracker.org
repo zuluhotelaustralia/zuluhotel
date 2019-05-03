@@ -17,8 +17,7 @@ This is a list of bugs.
 
 * DONE Example:  Shepherd's Crook [ Exceptional / Bloodhorse ] shows incorrect cliloc string (1160518 instead of ???)
 
-
-* TODO Unequipping certain items crashes server:
+* DONE Unequipping certain items crashes server:
 #+begin_quote
   Error:
 System.NullReferenceException: Object reference not set to an instance of an object.
