@@ -942,6 +942,10 @@ namespace Server.Items
                     v = 1;
 
                 delayInSeconds = 15000.0 / v;
+
+		if( delayInSeconds <= 1.0 ){
+		    delayInSeconds = 1.0;
+		}
             }
 
             return TimeSpan.FromSeconds( delayInSeconds );
