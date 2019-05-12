@@ -50,7 +50,6 @@ namespace Server.Antimacro
 	    m_Suspect = suspect;
 	    m_Transaction = txn;
 	    Priority = TimerPriority.OneMinute;
-	    Console.WriteLine("Antimacro timer created for character {0}", m_Suspect.Name);
 	}
 
 	protected override void OnTick()

@@ -1,6 +1,7 @@
 using System;
 using Server;
 using Server.Accounting;
+using Server.Commands;
 using Server.Mobiles;
 
 /* 
@@ -16,12 +17,34 @@ namespace Server.Antimacro
 	private Account m_SubjectAccount;
 	private int m_AttemptsRemaining;
 	private AntimacroTimer m_Timer;
-	private bool m_SystemEnabled;
+	private static bool m_SystemEnabled = false;
+
+	public static bool Enabled {
+	    get { return m_SystemEnabled; }
+	}
 	
 	public enum ResponseType {
 	    BadMath,
 	    TimeOut,
 	    GoodMath
+	}
+
+	public static void Initialize()
+	{
+	    CommandSystem.Register( "ToggleAntiMacroSystem", AccessLevel.Counselor, new CommandEventHandler( ToggleAntiMacroSystem_OnCommand ) );
+	}
+
+	[Usage( "ToggleAntiMacroSystem" )]
+	public static void ToggleAntiMacroSystem_OnCommand( CommandEventArgs e )
+	{
+	    if( m_SystemEnabled ) {
+		m_SystemEnabled = false;
+		e.Mobile.SendMessage("Anti-macro System has been DISABLED.");
+	    }
+	    else {
+		m_SystemEnabled = true;
+		e.Mobile.SendMessage("Anti-macro System has been ENABLED.");
+	    }
 	}
 
 	public AntimacroTransaction( Mobile m ) {

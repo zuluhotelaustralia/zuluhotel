@@ -507,7 +507,10 @@ namespace Server
 
 	    ScriptCompiler.Invoke( "Initialize" );
 	    Console.WriteLine("Initialization Complete.");
-	    
+
+	    if( Server.Antimacro.AntimacroTransaction.Enabled == false ){
+		Console.WriteLine("WARNING:  Anti-AFK Gathering system has been DISABLED!");
+	    }
 	    MessagePump messagePump = m_MessagePump = new MessagePump();
 
 	    timerThread.Start();
