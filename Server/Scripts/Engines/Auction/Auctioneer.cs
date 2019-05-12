@@ -11,6 +11,11 @@ namespace Server.Mobiles{
 	
 	private static List<Auctioneer> m_Instances = new List<Auctioneer>();
 	private static DateTime m_NextShout;
+	private static AuctionController m_Stone;
+
+	public static void SetStone( AuctionController stone ){
+	    m_Stone = stone;
+	}
     
 	public static List<Auctioneer> Instances
 	{
@@ -28,7 +33,7 @@ namespace Server.Mobiles{
 	}
 	
 	public override void OnDoubleClick( Mobile from ){
-	    from.SendGump( new AuctionGump(from) );
+	    from.SendGump( new AuctionGump(from, m_Stone) );
 	}
 	
 	[Constructable]

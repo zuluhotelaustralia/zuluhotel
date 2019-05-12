@@ -37,32 +37,33 @@ namespace Server.Auction {
 	    set { m_SellByDate = value; }
 	}
 	
-	private DateTime m_LastBid;
-	public DateTime LastBid {
-	    get { return m_LastBid; }
-	    set { m_LastBid = value; }
+	private DateTime m_LastBidDate;
+	public DateTime LastBidDate {
+	    get { return m_LastBidDate; }
+	    set { m_LastBidDate = value; }
 	}
-	
-	private Dictionary<PlayerMobile, int> m_Bids;
-	public Dictionary<PlayerMobile, int> Bids {
-	    get { return m_Bids; }
-	    set { m_Bids = value; }
-	}
-	
-	public AuctionItem() : this( null, 0, null ){}
 
-	public AuctionItem( Item saleItem, int listPrice, PlayerMobile seller ) :
-	    this( saleItem, listPrice, seller, DateTime.Today, DateTime.Today, DateTime.Today.AddHours(48), new Dictionary<PlayerMobile, int>() ){}
+	private int m_LeadingBid;
+	public int LeadingBid {
+	    get { return m_LeadingBid; }
+	    set { m_LeadingBid = value; }
+	}
 	
-	public AuctionItem( Item saleItem, int listPrice, PlayerMobile seller, DateTime listdate, DateTime sellbydate, DateTime lastbid, Dictionary<PlayerMobile, int> bids ){
-	    m_Item = saleItem;
-	    m_ListPrice = listPrice;
+        private PlayerMobile m_LeadingBidder;
+	public PlayerMobile LeadingBidder {
+	    get { return m_LeadingBidder; }
+	    set { m_LeadingBidder = value; }
+	}
+	
+	public AuctionItem( Item saleitem, int listprice, PlayerMobile seller, PlayerMobile bidder, int leadingbid, DateTime listdate, DateTime biddate  ){
+	    m_Item = saleitem;
+	    m_ListPrice = listprice;
 	    m_Seller = seller;
+	    m_LeadingBidder = bidder;
+	    m_LeadingBid = leadingbid;
 	    m_ListDate = listdate;
-	    m_SellByDate = sellbydate;
-	    m_LastBid = lastbid;
-
-	    m_Bids = bids;
+	    m_SellByDate = m_ListDate.AddHours( 72.0 );
+	    m_LastBidDate = biddate;
 	}
 	
     }

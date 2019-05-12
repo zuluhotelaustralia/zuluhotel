@@ -32,10 +32,8 @@ namespace Server.Items {
 	    
 	private AuctionBox m_Box;
 
-	[CommandProperty(AccessLevel.Developer)]
-	public AuctionBox Box {
-	    get { return m_Box; }
-	    set { m_Box = value; }
+	public void SetBox( AuctionBox target ){
+	    m_Box = target;
 	}
 	
 	private List<AuctionItem> m_SaleItems;
@@ -47,15 +45,117 @@ namespace Server.Items {
 	public AuctionController() : base ( 0xED4 ){
 	    this.Name = "Auction Controller Stone";
 	    this.Hue = 2765;
+
+	    if( m_SaleItems == null ){
+		m_SaleItems = new List<AuctionItem>();
+	    }
 	}
 
 	public AuctionController( Serial serial ) : base( serial ){
 	    this.Name = "Auction Controller Stone";
 	    this.Hue = 2765;
+
+	    if( m_SaleItems == null ){
+		m_SaleItems = new List<AuctionItem>();
+	    }
+	}
+
+	public void RegisterBid( Mobile from, int amt, int index ){
+	    AuctionItem item = m_SaleItems[index];
+	    
+	    if( ValidateBid( from, amt, item ) ) {
+		
+		//if we're here then from has placed a potential winning bid
+		//check if we need to refund someone first
+		if( item.LeadingBidder != null ){
+		    PlayerMobile oldbidder = item.LeadingBidder;
+		    RefundBid( oldbidder, item.LeadingBid );
+		}
+		
+		//now place new bid
+		from.BankBox.ConsumeTotal( typeof(Gold), amt, true );
+		item.LeadingBid = amt;
+		item.LeadingBidder = from as PlayerMobile;
+		item.LastBidDate = DateTime.Now;
+	    }    
+	}
+
+	public bool CheckStorage( Item item ) {
+	    if( m_Box.MaxItems > ( m_Box.TotalItems + item.TotalItems ) ){
+		if( m_Box.MaxWeight > ( m_Box.TotalWeight + item.TotalWeight ) ){
+		    return true;
+		}
+	    }
+
+	    return false;
+	}
+
+	public void AcceptSaleItem( Mobile from, Item item, int askprice ){
+	    //take item, create an AuctionItem, move real item to box
+	    if( item.Parent == from.Backpack ){
+		if( CheckStorage( item ) ){
+		    m_Box.DropItem( item );
+		    m_SaleItems.Add(new AuctionItem(item,
+						    askprice,
+						    from as PlayerMobile,
+						    null,
+						    0,
+						    DateTime.Now,
+						    DateTime.Now) );
+		}
+		else {
+		    from.SendMessage("The Auction storage is full. This should never happen: please contact server staff.");
+		}
+	    }
+	    else {
+		from.SendMessage("The item must be in your backpack.");
+	    }
+	}
+
+	public void DispenseSaleItem( Mobile to, AuctionItem ai ){
+	    //give item to To, in their bank box, then delete auctionitem from list.
+	    if( to.BankBox.TryDropItem(to, ai.SaleItem, true) ){
+		to.SendMessage("An item you bid on at the auction has been placed in your bankbox!");
+		
+	    }
+	    else {
+		to.SendMessage("Your bankbox is full and you were unable to receive an auction item!  Please contact shard staff.");
+		//what do we do now
+	    }
+	    
+	}
+
+	public void RefundBid( Mobile bidder, int amt ){
+	    // give them their amount back
+	    //TODO what do if their bank is full??
+	    bidder.BankBox.TryDropItem(bidder, new Server.Items.Gold( amt ), true);
+	    bidder.SendMessage("You were outbid on an auction item and your bid has been refunded to your bank account." );
+	    
+	}
+
+	public bool ValidateBid( Mobile bidder, int amount, AuctionItem item ){
+	    //make sure they have gold in their bank to cover it
+	    //make sure they aren't already the leading bidders
+	    if( amount <= item.LeadingBid ) {
+		bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.LeadingBid );
+		return false;
+	    }
+
+	    if( bidder == item.LeadingBidder ) {
+		bidder.SendMessage("You are already the leading bidder on that item.");
+		return false;
+	    }
+
+	    if( bidder.BankBox.GetAmount( typeof(Gold), true) <= amount ){
+		bidder.SendMessage("You have insufficient gold in your bank box to place this bid.");
+		return false;
+	    }
+
+	    return true;
 	}
 
 	public override void OnDoubleClick(Mobile from){
-	    from.SendGump( new AuctionGump( from ) );
+	    from.SendGump( new AuctionGump( from, this ) );
 	}
 
 	public override void Serialize( GenericWriter writer ) {
@@ -65,19 +165,13 @@ namespace Server.Items {
 	    writer.Write( m_SaleItems.Count );
 	    if( m_SaleItems.Count != 0 ){
 		foreach( AuctionItem ai in m_SaleItems ){
-
-		    writer.Write( ai.Bids.Count );
-		    foreach( KeyValuePair<PlayerMobile, int> entry in ai.Bids ){
-			writer.Write( entry.Key );
-			writer.Write( entry.Value );
-		    }
-
 		    writer.Write( ai.SaleItem );
 		    writer.Write( ai.ListPrice );
 		    writer.Write( ai.Seller );
+		    writer.Write( ai.LeadingBidder );
+		    writer.Write( ai.LeadingBid );
 		    writer.Write( ai.ListDate );
-		    writer.Write( ai.SellByDate );
-		    writer.Write( ai.LastBid );
+		    writer.Write( ai.LastBidDate );
 		}
 	    }
 	}
@@ -85,6 +179,11 @@ namespace Server.Items {
 	public override void Deserialize( GenericReader reader ){
 	    base.Deserialize( reader );
 	    int version = reader.ReadInt();
+
+	    int listprice, leadingbid;
+	    PlayerMobile seller, bidder;
+	    DateTime listdate, biddate;
+	    Item saleitem;
 
 	    switch( version ){
 		case 0:
@@ -95,18 +194,16 @@ namespace Server.Items {
 		    }
 		    else {
 			for( int i=0; i<saleItemsCount; i++ ){
-			    int bidscount = reader.ReadInt();
-			    Dictionary<PlayerMobile, int> bidslist = new Dictionary<PlayerMobile, int>();
-			    for( int j=0; j<bidscount; j++ ){
-				bidslist.Add(reader.ReadMobile() as PlayerMobile, reader.ReadInt() );
-			    }
-			    m_SaleItems.Add(new AuctionItem(reader.ReadItem(),
-							    reader.ReadInt(),
-							    reader.ReadMobile() as PlayerMobile,
-							    reader.ReadDateTime(),
-							    reader.ReadDateTime(),
-							    reader.ReadDateTime(),
-							    bidslist));
+			    
+			    saleitem = reader.ReadItem() as Item;
+			    listprice = reader.ReadInt();
+			    seller = reader.ReadMobile() as PlayerMobile;
+			    bidder = reader.ReadMobile() as PlayerMobile;
+			    leadingbid = reader.ReadInt();
+			    listdate = reader.ReadDateTime();
+			    biddate = reader.ReadDateTime();
+			    
+			    m_SaleItems.Add( new AuctionItem(saleitem, listprice, seller, bidder, leadingbid, listdate, biddate) );
 			}
 		    }
 		    break;
@@ -139,7 +236,8 @@ namespace Server.Items {
 
 	    protected override void OnTarget( Mobile from, object targeted ) {
 		if( targeted is AuctionBox ){
-		    m_Stone.Box = (AuctionBox)targeted;
+		    m_Stone.SetBox( (AuctionBox)targeted );
+		    Auctioneer.SetStone( m_Stone ); //yeahhh i know
 		}
 		else{
 		    from.SendMessage("bruh");
