@@ -69,7 +69,7 @@ namespace Server.Auction{
 
 	    //so for 12 items on sale, numpages() will return 2 and totalItems is 12,
 	    // therefore the first page needs to have 8 items and the 2nd page just 4
-	    for( i=1; i<(pages + 1); i++ ){
+	    for( int i=1; i<(pages + 1); i++ ){
 		AddPage(i);
 
 		if( m_Stone.SaleItems.Count >= (i * m_ItemsPerPage) ){
@@ -93,7 +93,7 @@ namespace Server.Auction{
 		}
 		else{
 		    int itemsthispage = m_Stone.SaleItems.Count - ( (i-1) * m_ItemsPerPage );
-		    for( j=1; j<itemsthispage; j++){
+		    for( int j=1; j<itemsthispage; j++){
 			AddBackground( _col1X + (170 * j), _row1Y + (170 * (j/4)), _boxsize, _boxsize, 9300 );
 			AddRadio( _col1X + (170 * j), _row1Y + (170 * (j/4)), 208, 209, false, j );
 		    }
@@ -152,7 +152,7 @@ namespace Server.Auction{
 	private int _windowX = 320;
 	private int _windowY = 240;
 
-	public AuctionGump( Mobile from, AuctionController stone ) : base( 100, 100 )
+	public AuctionSellGump( Mobile from, AuctionController stone ) : base( 100, 100 )
 	{
 	    m_Viewer = from;
 	    m_Stone = stone;
@@ -162,7 +162,7 @@ namespace Server.Auction{
 	    Dragable = true;
 	    Resizable = false;
 
-	    int pages = NumPages();
+	    //int pages = NumPages();
 
 	    //public void AddImageTiled( int x, int y, int width, int height, int gumpID )
 	    //AddButton( X, Y, UnCheckedGumpID, CheckedGumpID, StartChecked?, SwitchID ); 
