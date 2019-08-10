@@ -114,7 +114,7 @@ namespace Server.BattleRoyale{
 
 	    foreach( PlayerMobile pm in _Players ){
 		pm.Kill();
-		pm.MoveToWorld(_StartLoc, Map.Felucca)
+		pm.MoveToWorld(_StartLoc, Map.Felucca);
 		pm.SendMessage("You will be automatically resurrected in 45 seconds, at which point the battle royale will begin!"); //TODO cliloc this
 	    }
 	    
