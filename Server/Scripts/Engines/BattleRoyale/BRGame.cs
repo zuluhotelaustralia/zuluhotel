@@ -6,8 +6,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BattleRoyale{
-    public class BattleRoyaleController : Item {
+namespace Server.BattleRoyale{
+    public class GameController : Item {
 
 	public enum BattleState {
 	    Idle, //game not running, nobody able to join
@@ -42,8 +42,8 @@ namespace BattleRoyale{
 	    }
 	    else {
 		e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
-		e.Mobile.MoveToWorld(BattleRoyaleController.EscapeLoc, Map.Felucca);
-		BattleRoyaleController.TryUnregisterPlayer( e.Mobile as PlayerMobile );
+		e.Mobile.MoveToWorld(GameController.EscapeLoc, Map.Felucca);
+		GameController.TryUnregisterPlayer( e.Mobile as PlayerMobile );
 		return;
 	    }
 	}
@@ -56,12 +56,12 @@ namespace BattleRoyale{
 	}
 		
 	[Constructable]
-	public BattleRoyaleController() : base( 0xED4 ){
+	public GameController() : base( 0xED4 ){
 	    this.Name = "Battle Royale Control Stone";
 	    this.Hue = 2771; //dripstone
 	}
 
-	public BattleRoyaleController( Serial serial ) : base( serial ){
+	public GameController( Serial serial ) : base( serial ){
 	    // if the server goes down the game just ends and everyone can just deal with it
 	    // not going to try to wrestle the complexity of having a minigame traverse server
 	    // restarts
@@ -86,6 +86,29 @@ namespace BattleRoyale{
 		from.SendMessage("Staff may not join Battle Royale.");
 		return;
 	    }
+	}
+
+	public static void Announce( String s ){
+	    World.Broadcast( 0x35, true, s );
+	}
+	
+	public static void BeginJoining() {
+	    if( _state != BattleState.Joining ){
+		_state = BattleState.Joining;
+		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
+		JoinTimer jt = new JoinTimer( new TimeSpan(0, 10, 0) );  //h:m:s
+		jt.Start();
+	    }
+	}
+
+	public static void EndJoining(){
+	    _state = BattleState.Parachuting;
+	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
+
+	    
+	    Announce("BattleRoyale has started!");
+	    ResTimer rt = new ResTimer( new TimeSpan(0, 1, 0) );
+	    rt.Start();
 	}
     }
 }
