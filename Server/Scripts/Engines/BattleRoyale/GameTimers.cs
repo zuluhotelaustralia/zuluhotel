@@ -12,9 +12,10 @@ namespace Server.BattleRoyale
     }
 
     public class ResTimer : Timer {
-	public ResTimer( TimeSpan.delay ) : base ( delay ){}
+	public ResTimer( TimeSpan delay ) : base ( delay ){}
 
 	protected override void OnTick() {
 	    GameController.BeginPlay();
 	}
+    }
 }

@@ -17,11 +17,17 @@ namespace Server.BattleRoyale{
 	    Shrinking //same as playing only the zone is contracting
 	}
 
-	private BattleState _state = BattleState.Idle;
+	private static BattleState _state = BattleState.Idle;
 	
 	private static Point3D _EscapeLoc = new Point3D(3033, 3406, 20); //serps, see AccountHandler
 	public static Point3D EscapeLoc{
 	    get { return _EscapeLoc; }
+	}
+
+	//TODO randomize this start loc by +/-5 in each x and y directions
+	private static Point3D _StartLoc = new Point3D(4420, 1155, 0); //Moonglow, near the maze
+	public static Point3D StartLoc{
+	    get { return _StartLoc; }
 	}
 	
 	private static List<PlayerMobile> _Players;
@@ -90,6 +96,7 @@ namespace Server.BattleRoyale{
 
 	public static void Announce( String s ){
 	    World.Broadcast( 0x35, true, s );
+	    // later, change this to broadcast via the Town Criers TODO
 	}
 	
 	public static void BeginJoining() {
@@ -105,10 +112,24 @@ namespace Server.BattleRoyale{
 	    _state = BattleState.Parachuting;
 	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
 
+	    foreach( PlayerMobile pm in _Players ){
+		pm.Kill();
+		pm.MoveToWorld(_StartLoc, Map.Felucca)
+		pm.SendMessage("You will be automatically resurrected in 45 seconds, at which point the battle royale will begin!"); //TODO cliloc this
+	    }
 	    
 	    Announce("BattleRoyale has started!");
 	    ResTimer rt = new ResTimer( new TimeSpan(0, 1, 0) );
 	    rt.Start();
+	}
+
+	public static void BeginPlay(){
+	    foreach( PlayerMobile pm in _Players ){
+		pm.Resurrect();
+		pm.SendMessage("Last one standing in Moonglow wins!");
+	    }
+
+	    _state = BattleState.Playing;
 	}
     }
 }
