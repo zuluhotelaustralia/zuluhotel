@@ -36,16 +36,16 @@ namespace Server.BattleRoyale{
 	    get { return _StartLoc; }
 	}
 	
-	private static List<PlayerMobile> _Players;
-	private static List<PlayerMobile> _AlivePlayers;
+	private static List<Mobile> _Players;
+	private static List<Mobile> _AlivePlayers;
 
 	public static void Initialize() {
 	    //all commands go here, no more splitting it up between several files.
 	    // I'm looking at *you*, sith.
 	    // --sith
 
-	    _Players = new List<PlayerMobile>();
-	    _AlivePlayers = new List<PlayerMobile>();
+	    _Players = new List<Mobile>();
+	    _AlivePlayers = new List<Mobile>();
 
 	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
             CommandSystem.Register("StartBRGame", AccessLevel.Developer, new CommandEventHandler(StartBRGame_OnCommand));
@@ -72,14 +72,14 @@ namespace Server.BattleRoyale{
 	}
 
 	// it's possible they're abandoned on the island due to a bug or server restart but not registered as a player any more.
-	public static void TryUnregisterPlayer( PlayerMobile pm ) {
+	public static void TryUnregisterPlayer( Mobile pm ) {
 	    if( _Players.Contains( pm ) ){
 		_Players.Remove( pm );
 		pm.SendMessage("You have been removed from the list of Battle Royale players.");
 	    }
 	}
 
-	public static bool TryRegisterPlayer( PlayerMobile pm ){
+	public static bool TryRegisterPlayer( Mobile pm ){
 	    if( _Players.Count < PlayerCap ){
 		pm.SendMessage("You have registered for Battle Royale.  Safely unequip and store your items before the game begins!"); //TODO cliloc this
 		pm.SendMessage("To unregister, double-click the stone again.");
@@ -115,7 +115,7 @@ namespace Server.BattleRoyale{
 	}
 
 	public override void OnDoubleClick( Mobile mob ){
-	    PlayerMobile from = mob as PlayerMobile;
+	    Mobile from = mob as Mobile;
 
 	    if( from.AccessLevel == AccessLevel.Player ){
 		if( _state == BattleState.Joining ){
@@ -158,7 +158,7 @@ namespace Server.BattleRoyale{
 	    _state = BattleState.Parachuting;
 	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
 
-	    foreach( PlayerMobile pm in _Players ){
+	    foreach( Mobile pm in _Players ){
 		pm.Kill();
 		pm.MoveToWorld(_StartLoc, _Map);
 		pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
@@ -170,20 +170,20 @@ namespace Server.BattleRoyale{
 	}
 	
 	private static void OnPlayerDeath( Mobile.OnDeathEventArgs a) {
-	    PlayerMobile pm = a.Mobile as PlayerMobile;
+	    Mobile pm = a.Mobile as Mobile;
 	    pm.OnDeathEvent -= OnPlayerDeath;
 	    _AlivePlayers.Remove(pm);
 	    _Players.Remove(pm);
 	    pm.SendMessage("You have died during Battle Royale.  You can continue to observe as a ghost.  Use the Escape command to leave the arena.");
 
-	    foreach( PlayerMobile player in _AlivePlayers ){
+	    foreach( Mobile player in _AlivePlayers ){
 		player.SendMessage("{0} was killed by {1}.  {2} players remaining.", pm, pm.LastKiller, _AlivePlayers.Count );
 	    }
 
 	    if( CheckVictory() ){
 		Announce("Winner winner, chicken dinner!");
 		_state = BattleState.Idle;
-		PlayerMobile victor = _AlivePlayers[0];
+		Mobile victor = _AlivePlayers[0];
 		victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
 		GameTimer repatriator = new GameTimer( TimeSpan.FromSeconds(15), EndGame );
 		repatriator.Start();
@@ -191,7 +191,7 @@ namespace Server.BattleRoyale{
 	}
 
 	public static void EndGame() {
-	    PlayerMobile victor = _AlivePlayers[0];
+	    Mobile victor = _AlivePlayers[0];
 
 	    _Players.Clear();
 	    _AlivePlayers.Clear();
@@ -218,8 +218,8 @@ namespace Server.BattleRoyale{
 	    return false;
 	}
 
-	private static void Slap( PlayerMobile pm ) {
-	    pm.Damage( _CurrentStage * ZoneDamageMultiplier );
+	private static void Slap( Mobile pm ) {
+	    pm.Damage( _CurrentStage.DamageLevel * ZoneDamageMultiplier );
 	}
 
 	// should we proc the zone damage?
@@ -232,7 +232,7 @@ namespace Server.BattleRoyale{
 	    
 	//check if every alive player is in the zone and if not, damage them
 	private static void ProcZoneDamage(){
-	    foreach( PlayerMobile pm in _AlivePlayers ){
+	    foreach( Mobile pm in _AlivePlayers ){
 		if( !_CurrentZone.Contains( pm.Location )) {
 		    //if they're not in the zone
 		    Slap(pm);
@@ -244,15 +244,18 @@ namespace Server.BattleRoyale{
         public class ZoneStage {
             private int _size;
             private TimeSpan _duration;
+            private int _damageLevel;
 
-            public ZoneStage(int size, TimeSpan duration)
+            public ZoneStage(int size, int damageLevel, TimeSpan duration)
             {
                 _size = size;
                 _duration = duration;
+                _damageLevel = damageLevel;
             }
 
             public TimeSpan Duration{ get{ return _duration; } }
             public int Size{ get{ return _size; } }
+            public int DamageLevel{ get{ return _damageLevel; } }
 
             public Rectangle2D ToRect(Map map, Point2D center)
             {
@@ -276,13 +279,14 @@ namespace Server.BattleRoyale{
         private static Rectangle2D _CurrentZone;
         private static Rectangle2D _NextZone;
 
-        private static ZoneStage[] _ZoneStages = {
-            new ZoneStage( 500, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 250, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 125, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 60, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 30, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 10, new TimeSpan(0, 0, 30) )
+        private static List<ZoneStage> _ZoneStages = new List<ZoneStage> {
+            new ZoneStage( 500, 1, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 250, 2, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 125, 2, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 60, 3, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 30, 3, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 10, 4, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 3, 5, new TimeSpan(0, 0, 30) )
         };
 
 	private static Point2D[] _FinalZoneCenters = {
@@ -333,63 +337,77 @@ namespace Server.BattleRoyale{
 	    new Point2D( 4315, 918 )
 	};
 
-        // ItemIds to draw the "current zone" outside of which you
-        // will be taking damage. First is the horizontal item
-        // (East-West) second is the vertical item (North to South)
+        // ItemIds to draw the "next zone," what will become the
+        // "current zone" when the timer goes.  First is the
+        // horizontal item (East-West) second is the vertical item
+        // (North to South). Be careful to set these to an itemId that
+        // the client believes it can walk through, otherwise people
+        // will be unable to enter/exit the zone.
+
         private static int[] _NextZoneItemIds = { 0x3967, 0x3979 };
 
         // ItemIds to draw the "current zone" outside of which you
         // will be taking damage. First is the horizontal item
-        // (East-West) second is the vertical item (North to South)
-        private static int[] _CurrentZoneItemIds = { 0x3946, 0x3956 };
+        // (East-West) second is the vertical item (North to
+        // South). Be careful to set these to an itemId that the
+        // client believes it can walk through, otherwise people will
+        // be unable to enter/exit the zone.
+        private static int[] _CurrentZoneItemIds = { 0x3915, 0x3922 };
 
-        private static int _CurrentStage = 0;
-
-        public static void AdjustZone() {
-            ZoneStage stage = _ZoneStages[_CurrentStage];
-
-            _CurrentZone = stage.ToRect(_Map, _ZoneCenter);
-
-            ClearZone();
-            DrawZone(_CurrentZone, _CurrentZoneItemIds);
-
-            if ( _CurrentStage < _ZoneStages.Length - 1 ) {
-                _NextZone = _ZoneStages[_CurrentStage + 1].ToRect(_Map, _ZoneCenter);
-                DrawZone(_NextZone, _NextZoneItemIds);
-            }
-
-            Announce("Zone has collapsed, the zone will shrink again in " + stage.Duration.TotalSeconds + " seconds.");
-
-            new GameTimer(stage.Duration, ShrinkZone).Start();
-        }
+        private static IEnumerator<ZoneStage> _CurrentStageEnumerator;
+        private static IEnumerator<ZoneStage> _NextStageEnumerator;
+        private static ZoneStage _CurrentStage;
+        private static ZoneStage _NextStage;
 
         public static void BeginPlay() {
-	    foreach( PlayerMobile pm in _Players ){
+	    foreach( Mobile pm in _Players ){
 		pm.Resurrect();
 		_AlivePlayers.Add(pm);
 		pm.OnDeathEvent += OnPlayerDeath;
 		pm.SendMessage("Last one standing in Moonglow wins!");
 	    }
 
-	    _state = BattleState.Playing;
-            _CurrentStage = 0;
+            _state = BattleState.Playing;
 
             _ZoneCenter = _FinalZoneCenters[ Utility.RandomMinMax(0, _FinalZoneCenters.Length - 1) ];
 
-            AdjustZone();
+            _CurrentStageEnumerator = _ZoneStages.GetEnumerator();
+            _NextStageEnumerator = _ZoneStages.GetEnumerator();
+
+            _NextStageEnumerator.MoveNext();
+
+            ZoneTick();
 	    HandleZoneDamageTimer();
-	    
         }
 
-        public static void ShrinkZone() {
-            if ( _CurrentStage < _ZoneStages.Length - 1) {
-                _CurrentStage++; 
-                AdjustZone();
+        public static void ZoneTick() {
+            ClearZone();
+
+            if ( _CurrentStageEnumerator.MoveNext() ) {
+                _CurrentStage = _CurrentStageEnumerator.Current;
+                _CurrentZone = _CurrentStage.ToRect(_Map, _ZoneCenter);
+
+                Announce("Current zone is " + _CurrentStage.Size);
+                
+                DrawZone(_CurrentZone, _CurrentZoneItemIds);
+                
+                new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
+            }
+            
+            if ( _NextStageEnumerator.MoveNext() ) {
+                _NextStage = _NextStageEnumerator.Current;
+                _NextZone = _NextStage.ToRect(_Map, _ZoneCenter);
+
+                Announce("Next zone is " + _NextStage.Size);
+                
+                DrawZone(_NextZone, _NextZoneItemIds);
+                
+                Announce("Zone will collapse in " + _CurrentStage.Duration.TotalSeconds + " seconds");
             } else {
-                Announce("This is the final zone, last man standing wins.");
+                Announce("Final zone.");
             }
         }
-
+        
         public static void ClearZone() {
             List<Item> oldZone = _ZoneList;
             _ZoneList = new List<Item>();
