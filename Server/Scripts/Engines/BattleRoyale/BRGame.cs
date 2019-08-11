@@ -13,8 +13,7 @@ namespace Server.BattleRoyale{
 	    Idle, //game not running, nobody able to join
 	    Joining, //players able to join
 	    Parachuting, //if it was pubg you'd be in the herc or parachuting
-	    Playing, // game actually started
-	    Shrinking //same as playing only the zone is contracting
+	    Playing, // game in progress
 	}
 
 	private static BattleState _state = BattleState.Idle;
@@ -22,6 +21,8 @@ namespace Server.BattleRoyale{
 	public const int PlayerCap = 30;
 	public const double HoursTilNextGame = 2;
 	
+        private static Map _Map = Map.Felucca;
+        
 	private static Point3D _EscapeLoc = new Point3D(3033, 3406, 20); //serps, see AccountHandler
 	public static Point3D EscapeLoc{
 	    get { return _EscapeLoc; }
@@ -42,7 +43,12 @@ namespace Server.BattleRoyale{
 	    // --sith
 
 	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
+            CommandSystem.Register("StartBRGame", AccessLevel.GameMaster, new CommandEventHandler(StartBRGame_OnCommand));
 	}
+
+        public static void StartBRGame_OnCommand() {
+            BeginJoining();
+        }
 
 	public static void Escape_OnCommand( CommandEventArgs e){
 	    if( e.Mobile.Alive ) {
@@ -51,7 +57,7 @@ namespace Server.BattleRoyale{
 	    }
 	    else {
 		e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
-		e.Mobile.MoveToWorld(GameController.EscapeLoc, Map.Felucca);
+		e.Mobile.MoveToWorld(GameController.EscapeLoc, _Map);
 		return;
 	    }
 	}
@@ -142,7 +148,7 @@ namespace Server.BattleRoyale{
 
 	    foreach( PlayerMobile pm in _Players ){
 		pm.Kill();
-		pm.MoveToWorld(_StartLoc, Map.Felucca);
+		pm.MoveToWorld(_StartLoc, _Map);
 		pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
 	    }
 	    
@@ -167,9 +173,6 @@ namespace Server.BattleRoyale{
 		_state = BattleState.Idle;
 		_Players.Clear();
 		_AlivePlayers.Clear();
-		
-		//set a timer for next game opening
-		GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
 	    }
 	}
 
@@ -188,7 +191,65 @@ namespace Server.BattleRoyale{
 	    return false;
 	}
 	
-	public static void BeginPlay(){
+        private static Point2D _ZoneCenter;
+
+        private static int _ZoneLeft;
+        private static int _ZoneRight;
+        private static int _ZoneTop;
+        private static int _ZoneBottom;
+
+        public class ZoneStage {
+            private int _size;
+            private TimeSpan _duration;
+
+            public ZoneStage(int size, TimeSpan duration)
+            {
+                _size = size;
+                _duration = duration;
+            }
+
+            public TimeSpan Duration{ get{ return _duration; } }
+            public int Size{ get{ return _size; } }
+        }
+
+        /**
+         * Moonglow outer dimensions
+         *
+         *  Top: 797
+         *  Bottom: 1521
+         *  Left 4249
+         *  Right: 4734
+         */
+
+        private static ZoneStage[] _ZoneStages = {
+            new ZoneStage( 500, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 250, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 125, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 60, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 30, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 10, new TimeSpan(0, 0, 30) )
+        };
+
+
+        private static int _CurrentStage = 0;
+
+        public static void AdjustZone() {
+            ZoneStage stage = _ZoneStages[_CurrentStage];
+            
+            _ZoneLeft = Math.Max(0, _ZoneCenter.X - stage.Size);
+            _ZoneRight = Math.Min(_Map.Width, _ZoneCenter.X + stage.Size);
+            _ZoneBottom = Math.Max(0, _ZoneCenter.Y - stage.Size);
+            _ZoneTop = Math.Min(_Map.Height, _ZoneCenter.Y + stage.Size);
+
+            // TODO: Remove old zone.
+            DrawZone();
+
+            Announce("Zone will collapse in " + stage.Duration.TotalSeconds + " seconds.");
+
+            new GameTimer(stage.Duration, ShrinkZone).Start();
+        }
+
+        public static void BeginPlay() {
 	    foreach( PlayerMobile pm in _Players ){
 		pm.Resurrect();
 		_AlivePlayers.Add(pm);
@@ -197,6 +258,76 @@ namespace Server.BattleRoyale{
 	    }
 
 	    _state = BattleState.Playing;
-	}
+
+            // TODO: This is same as the "start location" should be
+            // randomly selected from the available play area.
+            _ZoneCenter = new Point2D(4420, 1155);
+
+            AdjustZone();
+        }
+
+        public static void ShrinkZone() {
+            if ( _CurrentStage < _ZoneStage.Length ) {
+                _CurrentStage++;
+                AdjustZone();
+            } else {
+                Announce("This is the final zone, last man standing wins.");
+            }
+        }
+
+        public static void DrawZone() {
+            int x, y, z;
+            Item item;
+
+            for ( x = _ZoneLeft ; x < _ZoneRight ; x++ ) {
+                y = _ZoneTop;
+                z = _Map.GetAverageZ(x, y);
+
+                item = new HorizontalZoneWall(new Point3D(x, y, z), _Map);
+
+                y = _ZoneBottom;
+                z = _Map.GetAverageZ(x, y);
+
+                item = new HorizontalZoneWall(new Point3D(x, y, z), _Map);
+            }
+
+            for ( y = _ZoneBottom ; y < _ZoneTop ; y++ ) {
+                x = _ZoneLeft;
+                z = _Map.GetAverageZ(x, y);
+
+                item = new VerticalZoneWall(new Point3D(x, y, z), _Map);
+
+                x = _ZoneRight;
+                z = _Map.GetAverageZ(x, y);
+
+                item = new VerticalZoneWall(new Point3D(x, y, z), _Map);
+            }
+        }
+
+        public class HorizontalZoneWall : Item
+        {
+            public HorizontalZoneWall( Point3D loc, Map map ) : base( 0x3967 )
+            {
+                Movable = false;
+                Visible = true;
+                MoveToWorld( loc, map );
+            }
+
+            public override bool Decays { get{ return true; } }
+            public override TimeSpan DecayTime{ get { return new TimeSpan(0, 1, 0); } }
+        }
+
+        public class VerticalZoneWall : Item
+        {
+            public VerticalZoneWall( Point3D loc, Map map ) : base( 0x3979 )
+            {
+                MoveToWorld( loc, map );
+                Movable = false;
+                Visible = true;
+            }
+
+            public override bool Decays { get{ return true; } }
+            public override TimeSpan DecayTime{ get { return new TimeSpan(0, 1, 0); } }
+        }
     }
 }
