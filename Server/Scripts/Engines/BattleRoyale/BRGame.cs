@@ -18,8 +18,10 @@ namespace Server.BattleRoyale{
 
 	private static BattleState _state = BattleState.Idle;
 
-	public const int PlayerCap = 30;
+       	public const int PlayerCap = 30;
 	public const double HoursTilNextGame = 2;
+	public const int ZoneDamageMultiplier = 10;
+	public const int ZoneDamageInterval = 5;
 	
         private static Map _Map = Map.Felucca;
         
@@ -215,7 +217,30 @@ namespace Server.BattleRoyale{
 
 	    return false;
 	}
-	
+
+	private static void Slap( PlayerMobile pm ) {
+	    pm.Damage( _CurrentStage * ZoneDamageMultiplier );
+	}
+
+	// should we proc the zone damage?
+	private static void HandleZoneDamageTimer(){
+	    if( _state == BattleState.Playing ){
+		ProcZoneDamage();
+		new GameTimer( TimeSpan.FromSeconds( ZoneDamageInterval ), HandleZoneDamageTimer ).Start();
+	    }
+	}
+	    
+	//check if every alive player is in the zone and if not, damage them
+	private static void ProcZoneDamage(){
+	    foreach( PlayerMobile pm in _AlivePlayers ){
+		if( !_CurrentZone.Contains( pm.Location )) {
+		    //if they're not in the zone
+		    Slap(pm);
+		    pm.SendMessage("The acid rain outside the magic safe zone damages you!"); //TODO cliloc this
+		}
+	    }
+	}
+
         public class ZoneStage {
             private int _size;
             private TimeSpan _duration;
@@ -306,6 +331,8 @@ namespace Server.BattleRoyale{
             _ZoneCenter = new Point2D(4420, 1155);
 
             AdjustZone();
+	    HandleZoneDamageTimer();
+	    
         }
 
         public static void ShrinkZone() {
