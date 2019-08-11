@@ -505,6 +505,24 @@ namespace Server
 			}
 		}
 
+            public int Left
+            {
+                get{ return m_Start.X; }
+            }
+            public int Right
+            {
+                get{ return m_End.X; }
+            }
+            public int Bottom
+            {
+                get{ return m_Start.Y; }
+            }
+            public int Top
+            {
+                get{ return m_End.Y; }
+            }
+                    
+
 		public void MakeHold( Rectangle2D r )
 		{
 			if ( r.m_Start.m_X < m_Start.m_X )
