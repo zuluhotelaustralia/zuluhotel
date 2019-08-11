@@ -1,16 +1,17 @@
 #+startup: align showall
 
-* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [0/9]
+* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [4/10]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
 ** TODO game logic
 *** game context, isRunning predicate, list of players, list of alve players, round timer, state variables (shrinking, waiting, joining, etc.)
 ** TODO start game when enough people are queued
-** TODO kill all participants, transport them to island, res them when game starts
-** TODO people who die stay as ghosts, they can issue a [command to quit the game and get a respawn
+** DONE kill all participants, transport them to island, res them when game starts
+** DONE people who die stay as ghosts, they can issue a [command to quit the game and get a respawn
 ** TODO spawn loot in boxes everywhere
 ** TODO logic to reduce boundaries on a schedule and actually spawn e.g. paralyze fields to denote blue circle
-** TODO logic to end game when one is alive, either kill winner or let them leave with their gear
+** DONE logic to end game when one is alive, either kill winner or let them leave with their gear
 ** TODO people outside the zone suffer DOT
-** TODO playerdeath event that you can subscribe to
+** DONE playerdeath event that you can subscribe to
+** TODO a red moongate that only ghosts can go through to start the game, instead of just pulling them in.
