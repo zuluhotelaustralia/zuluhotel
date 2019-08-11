@@ -18,9 +18,10 @@ namespace Server.BattleRoyale{
 
 	private static BattleState _state = BattleState.Idle;
 
-	public const int PlayerCap = 30;
+       	public const int PlayerCap = 30;
 	public const double HoursTilNextGame = 2;
 	public const int ZoneDamageMultiplier = 10;
+	public const int ZoneDamageInterval = 5;
 	
         private static Map _Map = Map.Felucca;
         
@@ -225,7 +226,7 @@ namespace Server.BattleRoyale{
 	private static void HandleZoneDamageTimer(){
 	    if( _state == BattleState.Playing ){
 		ProcZoneDamage();
-		new GameTimer( TimeSpan.FromSeconds(5), HandleZoneDamageTimer ).Start();
+		new GameTimer( TimeSpan.FromSeconds( ZoneDamageInterval ), HandleZoneDamageTimer ).Start();
 	    }
 	}
 	    
@@ -332,7 +333,7 @@ namespace Server.BattleRoyale{
             List<Item> oldZone = _ZoneList;
             _ZoneList = new List<Item>();
 
-            for ( Item i in oldZone ) {
+            foreach ( Item i in oldZone ) {
                 i.Delete();
             }
         }
