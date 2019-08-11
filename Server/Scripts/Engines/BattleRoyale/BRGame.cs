@@ -42,8 +42,11 @@ namespace Server.BattleRoyale{
 	    // I'm looking at *you*, sith.
 	    // --sith
 
+	    _Players = new List<PlayerMobile>();
+	    _AlivePlayers = new List<PlayerMobile>();
+
 	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
-            CommandSystem.Register("StartBRGame", AccessLevel.GameMaster, new CommandEventHandler(StartBRGame_OnCommand));
+            CommandSystem.Register("StartBRGame", AccessLevel.Developer, new CommandEventHandler(StartBRGame_OnCommand));
 	}
 
         public static void StartBRGame_OnCommand( CommandEventArgs e ) {
@@ -254,7 +257,7 @@ namespace Server.BattleRoyale{
         public static void AdjustZone() {
             ZoneStage stage = _ZoneStages[_CurrentStage];
             
-[            _ZoneLeft = Math.Max(0, _ZoneCenter.X - stage.Size);
+            _ZoneLeft = Math.Max(0, _ZoneCenter.X - stage.Size);
             _ZoneRight = Math.Min(_Map.Width, _ZoneCenter.X + stage.Size);
             _ZoneBottom = Math.Max(0, _ZoneCenter.Y - stage.Size);
             _ZoneTop = Math.Min(_Map.Height, _ZoneCenter.Y + stage.Size);
