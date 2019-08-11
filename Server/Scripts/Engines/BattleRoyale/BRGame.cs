@@ -216,13 +216,6 @@ namespace Server.BattleRoyale{
 	    return false;
 	}
 	
-        private static Point2D _ZoneCenter;
-
-        private static int _ZoneLeft;
-        private static int _ZoneRight;
-        private static int _ZoneTop;
-        private static int _ZoneBottom;
-
         public class ZoneStage {
             private int _size;
             private TimeSpan _duration;
@@ -235,6 +228,14 @@ namespace Server.BattleRoyale{
 
             public TimeSpan Duration{ get{ return _duration; } }
             public int Size{ get{ return _size; } }
+
+            public Rectangle2D ToRect(Map map, Point2D center)
+            {
+                return new Rectangle2D(new Point2D(Math.Max(0, center.X - Size),
+                                                   Math.Max(0, center.Y - Size)),
+                                       new Point2D(Math.Min(map.Width, center.X + Size),
+                                                   Math.Min(map.Height, center.Y + Size)));
+            }
         }
 
         /**
@@ -245,6 +246,10 @@ namespace Server.BattleRoyale{
          *  Left 4249
          *  Right: 4734
          */
+        private static Point2D _ZoneCenter;
+
+        private static Rectangle2D _CurrentZone;
+        private static Rectangle2D _NextZone;
 
         private static ZoneStage[] _ZoneStages = {
             new ZoneStage( 500, new TimeSpan(0, 0, 30) ),
@@ -255,21 +260,32 @@ namespace Server.BattleRoyale{
             new ZoneStage( 10, new TimeSpan(0, 0, 30) )
         };
 
+        // ItemIds to draw the "current zone" outside of which you
+        // will be taking damage. First is the horizontal item
+        // (East-West) second is the vertical item (North to South)
+        private static int[] _NextZoneItemIds = { 0x3967, 0x3979 };
+
+        // ItemIds to draw the "current zone" outside of which you
+        // will be taking damage. First is the horizontal item
+        // (East-West) second is the vertical item (North to South)
+        private static int[] _CurrentZoneItemIds = { 0x3946, 0x3956 };
 
         private static int _CurrentStage = 0;
 
         public static void AdjustZone() {
             ZoneStage stage = _ZoneStages[_CurrentStage];
-            
-            _ZoneLeft = Math.Max(0, _ZoneCenter.X - stage.Size);
-            _ZoneRight = Math.Min(_Map.Width, _ZoneCenter.X + stage.Size);
-            _ZoneBottom = Math.Max(0, _ZoneCenter.Y - stage.Size);
-            _ZoneTop = Math.Min(_Map.Height, _ZoneCenter.Y + stage.Size);
 
-            // TODO: Remove old zone.
-            DrawZone();
+            _CurrentZone = stage.ToRect(_Map, _ZoneCenter);
 
-            Announce("Zone will collapse in " + stage.Duration.TotalSeconds + " seconds.");
+            ClearZone();
+            DrawZone(_CurrentZone, _CurrentZoneItemIds);
+
+            if ( _CurrentStage < _ZoneStages.Length - 1 ) {
+                _NextZone = _ZoneStages[_CurrentStage + 1].ToRect(_Map, _ZoneCenter);
+                DrawZone(_NextZone, _NextZoneItemIds);
+            }
+
+            Announce("Zone has collapsed, the zone will shrink again in " + stage.Duration.TotalSeconds + " seconds.");
 
             new GameTimer(stage.Duration, ShrinkZone).Start();
         }
@@ -283,6 +299,7 @@ namespace Server.BattleRoyale{
 	    }
 
 	    _state = BattleState.Playing;
+            _CurrentStage = 0;
 
             // TODO: This is same as the "start location" should be
             // randomly selected from the available play area.
@@ -304,49 +321,47 @@ namespace Server.BattleRoyale{
             List<Item> oldZone = _ZoneList;
             _ZoneList = new List<Item>();
 
-            for ( Item i in oldZone ) {
+            foreach ( Item i in oldZone ) {
                 i.Delete();
             }
         }
 
-        public static void DrawZone() {
-            ClearZone();
-            
+        public static void DrawZone(Rectangle2D zone, int[] itemIds) {
             int x, y, z;
             Item item;
 
-            for ( x = _ZoneLeft ; x < _ZoneRight ; x++ ) {
-                y = _ZoneTop;
+            for ( x = zone.Left ; x < zone.Right ; x++ ) {
+                y = zone.Top;
                 z = _Map.GetAverageZ(x, y);
 
-                item = new HorizontalZoneWall(new Point3D(x, y, z), _Map);
+                item = new ZoneWall(new Point3D(x, y, z), _Map, itemIds[0]);
                 _ZoneList.Add(item);
 
-                y = _ZoneBottom;
+                y = zone.Bottom;
                 z = _Map.GetAverageZ(x, y);
 
-                item = new HorizontalZoneWall(new Point3D(x, y, z), _Map);
+                item = new ZoneWall(new Point3D(x, y, z), _Map, itemIds[0]);
                 _ZoneList.Add(item);
             }
 
-            for ( y = _ZoneBottom ; y < _ZoneTop ; y++ ) {
-                x = _ZoneLeft;
+            for ( y = zone.Bottom ; y < zone.Top ; y++ ) {
+                x = zone.Left;
                 z = _Map.GetAverageZ(x, y);
 
-                item = new VerticalZoneWall(new Point3D(x, y, z), _Map);
+                item = new ZoneWall(new Point3D(x, y, z), _Map, itemIds[1]);
                 _ZoneList.Add(item);
 
-                x = _ZoneRight;
+                x = zone.Right;
                 z = _Map.GetAverageZ(x, y);
 
-                item = new VerticalZoneWall(new Point3D(x, y, z), _Map);
+                item = new ZoneWall(new Point3D(x, y, z), _Map, itemIds[1]);
                 _ZoneList.Add(item);
             }
         }
 
         private static List<Item> _ZoneList = new List<Item>();
 
-        public abstract class ZoneWall : Item
+        public class ZoneWall : Item
         {
             public ZoneWall(Point3D loc, Map map, int itemId) : base ( itemId ) {
                 Movable = false;
@@ -360,26 +375,9 @@ namespace Server.BattleRoyale{
 
             public override void Deserialize( GenericReader reader )
             {
-                super.Deserialize(reader);
-                BRGame._ZoneList.Add(this);
+                base.Deserialize(reader);
+                GameController._ZoneList.Add(this);
             }
-
-            public override void Serialize( GenericWriter writer )
-            {
-                super.Serialize(reader);
-            }
-        }
-
-        public class HorizontalZoneWall : ZoneWall
-        {
-            public HorizontalZoneWall( Point3D loc, Map map ) : base( loc, map, 0x3967 ) {}
-            public HorizontalZoneWall( Serial serial ) : base( serial ) {}
-        }
-
-        public class VerticalZoneWall : Item
-        {
-            public VerticalZoneWall( Point3D loc, Map map ) : base( loc, map, 0x3979 ) {}
-            public VerticalZoneWall( Serial serial ) : base( serial ) {}
         }
     }
 }
