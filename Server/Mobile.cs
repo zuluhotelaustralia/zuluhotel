@@ -4016,7 +4016,7 @@ namespace Server
         {
             private Mobile m_Mobile;
 
-            public MobileDeathEventArgs ( Mobile mobile )
+            public OnDeathEventArgs ( Mobile mobile )
             {
                 m_Mobile = mobile;
             }
@@ -4025,7 +4025,7 @@ namespace Server
         }
 
         public delegate void OnDeathEventHandler( OnDeathEventArgs e );
-        public event OnDetahEventHandler OnDeathEvent;
+        public event OnDeathEventHandler OnDeathEvent;
 
 	private Container m_Corpse;
 
