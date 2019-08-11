@@ -131,7 +131,7 @@ namespace Server.BattleRoyale{
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
 		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
-		GameTimer jt = new GameTimer( TimeSpan.FromMinutes(10), EndJoining );  //h:m:s
+		GameTimer jt = new GameTimer( TimeSpan.FromMinutes(10), EndJoining );
 		jt.Start();
 	    }
 	}
@@ -165,12 +165,22 @@ namespace Server.BattleRoyale{
 	    if( CheckVictory() ){
 		Announce("Winner winner, chicken dinner!");
 		_state = BattleState.Idle;
-		_Players.Clear();
-		_AlivePlayers.Clear();
-		
-		//set a timer for next game opening
-		GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
+		PlayerMobile victor = _AlivePlayers[0];
+		victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
+		GameTimer repatriator = new GameTimer( TimeSpan.FromSeconds(15), EndGame );
 	    }
+	}
+
+	public static void EndGame() {
+	    PlayerMobile victor = _AlivePlayers[0];
+
+	    _Players.Clear();
+	    _AlivePlayers.Clear();
+
+	    victor.MoveToWorld(EscapeLoc, Map.Felucca);
+
+	    //set a timer for next game opening
+	    GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
 	}
 
 	public static bool CheckVictory() {
