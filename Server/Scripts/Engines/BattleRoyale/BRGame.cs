@@ -42,8 +42,11 @@ namespace Server.BattleRoyale{
 	    // I'm looking at *you*, sith.
 	    // --sith
 
+	    _Players = new List<PlayerMobile>();
+	    _AlivePlayers = new List<PlayerMobile>();
+
 	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
-            CommandSystem.Register("StartBRGame", AccessLevel.GameMaster, new CommandEventHandler(StartBRGame_OnCommand));
+            CommandSystem.Register("StartBRGame", AccessLevel.Developer, new CommandEventHandler(StartBRGame_OnCommand));
 
 
             // Delete any zone walls that were persisted in the world save
