@@ -4012,6 +4012,21 @@ namespace Server
 	    OnDeath( c );
 	}
 
+        public class OnDeathEventArgs : EventArgs
+        {
+            private Mobile m_Mobile;
+
+            public MobileDeathEventArgs ( Mobile mobile )
+            {
+                m_Mobile = mobile;
+            }
+
+            public Mobile Mobile{ get{ return m_Mobile; } }
+        }
+
+        public delegate void OnDeathEventHandler( OnDeathEventArgs e );
+        public event OnDetahEventHandler OnDeathEvent;
+
 	private Container m_Corpse;
 
 	[CommandProperty( AccessLevel.GameMaster )]
@@ -4089,6 +4104,8 @@ namespace Server
 
 		CheckStatTimers();
 	    }
+
+            OnDeathEvent(new OnDeathEventArgs( this ));
 	}
 
 	#region Get*Sound
