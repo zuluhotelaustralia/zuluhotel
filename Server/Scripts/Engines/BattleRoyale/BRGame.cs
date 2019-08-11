@@ -48,6 +48,10 @@ namespace Server.BattleRoyale{
 
 	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
             CommandSystem.Register("StartBRGame", AccessLevel.Developer, new CommandEventHandler(StartBRGame_OnCommand));
+
+
+            // Delete any zone walls that were persisted in the world save
+            ClearZone();
 	}
 
         public static void StartBRGame_OnCommand( CommandEventArgs e ) {
@@ -324,7 +328,18 @@ namespace Server.BattleRoyale{
             }
         }
 
+        public static void ClearZone() {
+            List<Item> oldZone = _ZoneList;
+            _ZoneList = new List<Item>();
+
+            for ( Item i in oldZone ) {
+                i.Delete();
+            }
+        }
+
         public static void DrawZone() {
+            ClearZone();
+            
             int x, y, z;
             Item item;
 
@@ -333,11 +348,13 @@ namespace Server.BattleRoyale{
                 z = _Map.GetAverageZ(x, y);
 
                 item = new HorizontalZoneWall(new Point3D(x, y, z), _Map);
+                _ZoneList.Add(item);
 
                 y = _ZoneBottom;
                 z = _Map.GetAverageZ(x, y);
 
                 item = new HorizontalZoneWall(new Point3D(x, y, z), _Map);
+                _ZoneList.Add(item);
             }
 
             for ( y = _ZoneBottom ; y < _ZoneTop ; y++ ) {
@@ -345,38 +362,52 @@ namespace Server.BattleRoyale{
                 z = _Map.GetAverageZ(x, y);
 
                 item = new VerticalZoneWall(new Point3D(x, y, z), _Map);
+                _ZoneList.Add(item);
 
                 x = _ZoneRight;
                 z = _Map.GetAverageZ(x, y);
 
                 item = new VerticalZoneWall(new Point3D(x, y, z), _Map);
+                _ZoneList.Add(item);
             }
         }
 
-        public class HorizontalZoneWall : Item
+        private static List<Item> _ZoneList = new List<Item>();
+
+        public abstract class ZoneWall : Item
         {
-            public HorizontalZoneWall( Point3D loc, Map map ) : base( 0x3967 )
-            {
+            public ZoneWall(Point3D loc, Map map, int itemId) : base ( itemId ) {
                 Movable = false;
                 Visible = true;
                 MoveToWorld( loc, map );
             }
 
-            public override bool Decays { get{ return true; } }
-            public override TimeSpan DecayTime{ get { return new TimeSpan(0, 1, 0); } }
+            public ZoneWall( Serial serial ) : base( serial ) {}
+
+            public override bool Decays { get{ return false; } }
+
+            public override void Deserialize( GenericReader reader )
+            {
+                super.Deserialize(reader);
+                BRGame._ZoneList.Add(this);
+            }
+
+            public override void Serialize( GenericWriter writer )
+            {
+                super.Serialize(reader);
+            }
+        }
+
+        public class HorizontalZoneWall : ZoneWall
+        {
+            public HorizontalZoneWall( Point3D loc, Map map ) : base( loc, map, 0x3967 ) {}
+            public HorizontalZoneWall( Serial serial ) : base( serial ) {}
         }
 
         public class VerticalZoneWall : Item
         {
-            public VerticalZoneWall( Point3D loc, Map map ) : base( 0x3979 )
-            {
-                MoveToWorld( loc, map );
-                Movable = false;
-                Visible = true;
-            }
-
-            public override bool Decays { get{ return true; } }
-            public override TimeSpan DecayTime{ get { return new TimeSpan(0, 1, 0); } }
+            public VerticalZoneWall( Point3D loc, Map map ) : base( loc, map, 0x3979 ) {}
+            public VerticalZoneWall( Serial serial ) : base( serial ) {}
         }
     }
 }
