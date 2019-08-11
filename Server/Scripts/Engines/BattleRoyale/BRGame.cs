@@ -130,7 +130,7 @@ namespace Server.BattleRoyale{
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
 		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
-		JoinTimer jt = new JoinTimer( new TimeSpan(0, 10, 0) );  //h:m:s
+		GameTimer jt = new GameTimer( new TimeSpan(0, 10, 0), EndJoining );  //h:m:s
 		jt.Start();
 	    }
 	}
@@ -146,7 +146,7 @@ namespace Server.BattleRoyale{
 	    }
 	    
 	    Announce("BattleRoyale has started!");
-	    ResTimer rt = new ResTimer( new TimeSpan(0, 1, 0) );
+	    GameTimer rt = new GameTimer( new TimeSpan(0, 1, 0), BeginPlay);
 	    rt.Start();
 	}
 	
@@ -160,6 +160,30 @@ namespace Server.BattleRoyale{
 	    foreach( PlayerMobile player in _AlivePlayers ){
 		player.SendMessage("{0} was killed by {1}.  {2} players remaining.", pm, pm.LastKiller, _AlivePlayers.Count );
 	    }
+
+	    if( CheckVictory() ){
+		Announce("Winner winner, chicken dinner!");
+		_state = BattleState.Idle;
+		_Players.Clear();
+		_AlivePlayers.Clear();
+		
+		//set a timer for next game opening
+	    }
+	}
+
+	public static bool CheckVictory() {
+	    //returns true if someone has won the game
+	    if( _state == BattleState.Playing || _state == BattleState.Shrinking ){
+		if( _AlivePlayers.Count <= 1 ){
+		    return true;
+		}
+		else {
+		    // is it possible to be in this block and still be a win?
+		    return false;
+		}
+	    }
+
+	    return false;
 	}
 	
 	public static void BeginPlay(){
