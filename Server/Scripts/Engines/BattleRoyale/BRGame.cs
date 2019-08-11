@@ -46,7 +46,7 @@ namespace Server.BattleRoyale{
             CommandSystem.Register("StartBRGame", AccessLevel.GameMaster, new CommandEventHandler(StartBRGame_OnCommand));
 	}
 
-        public static void StartBRGame_OnCommand() {
+        public static void StartBRGame_OnCommand( CommandEventArgs e ) {
             BeginJoining();
         }
 
@@ -191,7 +191,7 @@ namespace Server.BattleRoyale{
 
 	public static bool CheckVictory() {
 	    //returns true if someone has won the game
-	    if( _state == BattleState.Playing || _state == BattleState.Shrinking ){
+	    if( _state == BattleState.Playing ){
 		if( _AlivePlayers.Count <= 1 ){
 		    return true;
 		}
@@ -280,7 +280,7 @@ namespace Server.BattleRoyale{
         }
 
         public static void ShrinkZone() {
-            if ( _CurrentStage < _ZoneStage.Length ) {
+            if ( _CurrentStage < _ZoneStages.Length ) {
                 _CurrentStage++;
                 AdjustZone();
             } else {
