@@ -143,6 +143,8 @@ namespace Server.BattleRoyale{
 	}
 
 	public static void EndJoining(){
+            Announce("End Joining");
+            
 	    _state = BattleState.Parachuting;
 	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
 
