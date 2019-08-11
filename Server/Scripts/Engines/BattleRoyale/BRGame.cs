@@ -18,6 +18,8 @@ namespace Server.BattleRoyale{
 	}
 
 	private static BattleState _state = BattleState.Idle;
+
+	public const int PlayerCap = 30;
 	
 	private static Point3D _EscapeLoc = new Point3D(3033, 3406, 20); //serps, see AccountHandler
 	public static Point3D EscapeLoc{
@@ -49,7 +51,6 @@ namespace Server.BattleRoyale{
 	    else {
 		e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
 		e.Mobile.MoveToWorld(GameController.EscapeLoc, Map.Felucca);
-		GameController.TryUnregisterPlayer( e.Mobile as PlayerMobile );
 		return;
 	    }
 	}
@@ -58,6 +59,20 @@ namespace Server.BattleRoyale{
 	public static void TryUnregisterPlayer( PlayerMobile pm ) {
 	    if( _Players.Contains( pm ) ){
 		_Players.Remove( pm );
+		pm.SendMessage("You have been removed from the list of Battle Royale players.");
+	    }
+	}
+
+	public static bool TryRegisterPlayer( PlayerMobile pm ){
+	    if( _Players.Count < PlayerCap ){
+		pm.SendMessage("You have registered for Battle Royale.  Safely unequip and store your items before the game begins!"); //TODO cliloc this
+		pm.SendMessage("To unregister, double-click the stone again.");
+		_Players.Add(pm);
+		return true;
+	    }
+	    else{
+		pm.SendMessage("You may not join at this time.  The game queue is full.");
+		return false;
 	    }
 	}
 		
@@ -71,9 +86,16 @@ namespace Server.BattleRoyale{
 	    // if the server goes down the game just ends and everyone can just deal with it
 	    // not going to try to wrestle the complexity of having a minigame traverse server
 	    // restarts
-	    
-	    this.Name = "Battle Royale Control Stone";
-	    this.Hue = 2771; //dripstone
+	}
+
+	public override void Serialize( GenericWriter writer ){
+	    base.Serialize(writer);
+	    writer.Write( (int) 0 ); //version
+	}
+
+	public override void Deserialize(GenericReader reader ){
+	    base.Deserialize( reader );
+	    int version = reader.ReadInt();
 	}
 
 	public override void OnDoubleClick( Mobile mob ){
@@ -81,7 +103,12 @@ namespace Server.BattleRoyale{
 
 	    if( from.AccessLevel == AccessLevel.Player ){
 		if( _state == BattleState.Joining ){
-		    //sign 'em up
+		    if( _Players.Contains(from) ){
+			TryUnregisterPlayer(from);
+		    }
+		    else {
+			TryRegisterPlayer( from );
+		    }
 		}
 		else {
 		    from.SendMessage("The game queue is not currently accepting new players; please try again later." );
@@ -122,10 +149,24 @@ namespace Server.BattleRoyale{
 	    ResTimer rt = new ResTimer( new TimeSpan(0, 1, 0) );
 	    rt.Start();
 	}
+	
+	private static void OnPlayerDeath( Mobile.OnDeathEventArgs a) {
+	    PlayerMobile pm = a.Mobile as PlayerMobile;
+	    pm.OnDeathEvent -= OnPlayerDeath;
+	    _AlivePlayers.Remove(pm);
+	    _Players.Remove(pm);
+	    pm.SendMessage("You have died during Battle Royale.  You can continue to observe as a ghost.  Use the Escape command to leave the arena.");
 
+	    foreach( PlayerMobile player in _AlivePlayers ){
+		player.SendMessage("{0} was killed by {1}.  {2} players remaining.", pm, pm.LastKiller, _AlivePlayers.Count );
+	    }
+	}
+	
 	public static void BeginPlay(){
 	    foreach( PlayerMobile pm in _Players ){
 		pm.Resurrect();
+		_AlivePlayers.Add(pm);
+		pm.OnDeathEvent += OnPlayerDeath;
 		pm.SendMessage("Last one standing in Moonglow wins!");
 	    }
 
