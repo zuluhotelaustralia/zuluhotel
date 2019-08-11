@@ -285,6 +285,54 @@ namespace Server.BattleRoyale{
             new ZoneStage( 10, new TimeSpan(0, 0, 30) )
         };
 
+	private static Point2D[] _FinalZoneCenters = {
+	    new Point2D( 4548, 806 ),
+	    new Point2D( 4545, 867 ),
+	    new Point2D( 4543, 898 ),
+	    new Point2D( 4542, 941 ),
+	    new Point2D( 4567, 947 ),
+	    new Point2D( 4527, 997 ),
+	    new Point2D( 4513, 1042 ),
+	    new Point2D( 4491, 1057 ),
+	    new Point2D( 4453, 1102 ),
+	    new Point2D( 4477, 1170 ),
+	    new Point2D( 4551, 1145 ),
+	    new Point2D( 4576, 1179 ),
+	    new Point2D( 4633, 1202 ),
+	    new Point2D( 4711, 1123 ),
+	    new Point2D( 4645, 1184 ),
+	    new Point2D( 4417, 1227 ),
+	    new Point2D( 4387, 1260 ),
+	    new Point2D( 4454, 1255 ),
+	    new Point2D( 4496, 1218 ),
+	    new Point2D( 4528, 1283 ),
+	    new Point2D( 4536, 1314 ),
+	    new Point2D( 4550, 1332 ),
+	    new Point2D( 4546, 1353 ),
+	    new Point2D( 4525, 1378 ),
+	    new Point2D( 4522, 1407 ),
+	    new Point2D( 4516, 1438 ),
+	    new Point2D( 4490, 1470 ),
+	    new Point2D( 4468, 1553 ),
+	    new Point2D( 4415, 1492 ),
+	    new Point2D( 4416, 1447 ),
+	    new Point2D( 4587, 1457 ),
+	    new Point2D( 4577, 1483 ),
+	    new Point2D( 4653, 1424 ),
+	    new Point2D( 4665, 1382 ),
+	    new Point2D( 4624, 1297 ),
+	    new Point2D( 4399, 1052 ),
+	    new Point2D( 4419, 1111 ),
+	    new Point2D( 4408, 1148 ),
+	    new Point2D( 4378, 1180 ),
+	    new Point2D( 4296, 1070 ),
+	    new Point2D( 4326, 1002 ),
+	    new Point2D( 4312, 974 ),
+	    new Point2D( 4317, 954 ),
+	    new Point2D( 4296, 962 ),
+	    new Point2D( 4315, 918 )
+	};
+
         // ItemIds to draw the "current zone" outside of which you
         // will be taking damage. First is the horizontal item
         // (East-West) second is the vertical item (North to South)
@@ -326,9 +374,7 @@ namespace Server.BattleRoyale{
 	    _state = BattleState.Playing;
             _CurrentStage = 0;
 
-            // TODO: This is same as the "start location" should be
-            // randomly selected from the available play area.
-            _ZoneCenter = new Point2D(4420, 1155);
+            _ZoneCenter = _FinalZoneCenters[ Utility.RandomMinMax(0, _FinalZoneCenters.Length - 1) ];
 
             AdjustZone();
 	    HandleZoneDamageTimer();

@@ -15,3 +15,5 @@
 ** TODO people outside the zone suffer DOT
 ** DONE playerdeath event that you can subscribe to
 ** TODO a red moongate that only ghosts can go through to start the game, instead of just pulling them in.
+** TODO disable guards
+
