@@ -20,6 +20,7 @@ namespace Server.BattleRoyale{
 	private static BattleState _state = BattleState.Idle;
 
 	public const int PlayerCap = 30;
+	public const double HoursTilNextGame = 2;
 	
 	private static Point3D _EscapeLoc = new Point3D(3033, 3406, 20); //serps, see AccountHandler
 	public static Point3D EscapeLoc{
@@ -130,7 +131,7 @@ namespace Server.BattleRoyale{
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
 		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
-		GameTimer jt = new GameTimer( new TimeSpan(0, 10, 0), EndJoining );  //h:m:s
+		GameTimer jt = new GameTimer( TimeSpan.FromMinutes(10), EndJoining );  //h:m:s
 		jt.Start();
 	    }
 	}
@@ -142,11 +143,11 @@ namespace Server.BattleRoyale{
 	    foreach( PlayerMobile pm in _Players ){
 		pm.Kill();
 		pm.MoveToWorld(_StartLoc, Map.Felucca);
-		pm.SendMessage("You will be automatically resurrected in 45 seconds, at which point the battle royale will begin!"); //TODO cliloc this
+		pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
 	    }
 	    
 	    Announce("BattleRoyale has started!");
-	    GameTimer rt = new GameTimer( new TimeSpan(0, 1, 0), BeginPlay);
+	    GameTimer rt = new GameTimer( TimeSpan.FromMinutes(1) , BeginPlay);
 	    rt.Start();
 	}
 	
@@ -168,6 +169,7 @@ namespace Server.BattleRoyale{
 		_AlivePlayers.Clear();
 		
 		//set a timer for next game opening
+		GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
 	    }
 	}
 
