@@ -285,8 +285,8 @@ namespace Server.BattleRoyale{
         }
 
         public static void ShrinkZone() {
-            if ( _CurrentStage < _ZoneStages.Length ) {
-                _CurrentStage++;
+            if ( _CurrentStage < _ZoneStages.Length - 1) {
+                _CurrentStage++; 
                 AdjustZone();
             } else {
                 Announce("This is the final zone, last man standing wins.");
