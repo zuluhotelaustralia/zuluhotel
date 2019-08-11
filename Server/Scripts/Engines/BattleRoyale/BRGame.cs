@@ -137,7 +137,8 @@ namespace Server.BattleRoyale{
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
 		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
-		GameTimer jt = new GameTimer( TimeSpan.FromMinutes(10), EndJoining );
+		//GameTimer jt = new GameTimer( TimeSpan.FromMinutes(10), EndJoining );
+		GameTimer jt = new GameTimer( TimeSpan.FromSeconds(10), EndJoining );
 		jt.Start();
 	    }
 	}
@@ -174,6 +175,7 @@ namespace Server.BattleRoyale{
 		PlayerMobile victor = _AlivePlayers[0];
 		victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
 		GameTimer repatriator = new GameTimer( TimeSpan.FromSeconds(15), EndGame );
+		repatriator.Start();
 	    }
 	}
 
@@ -187,6 +189,7 @@ namespace Server.BattleRoyale{
 
 	    //set a timer for next game opening
 	    GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
+	    nextgame.Start();
 	}
 
 	public static bool CheckVictory() {
@@ -249,7 +252,7 @@ namespace Server.BattleRoyale{
         public static void AdjustZone() {
             ZoneStage stage = _ZoneStages[_CurrentStage];
             
-            _ZoneLeft = Math.Max(0, _ZoneCenter.X - stage.Size);
+[            _ZoneLeft = Math.Max(0, _ZoneCenter.X - stage.Size);
             _ZoneRight = Math.Min(_Map.Width, _ZoneCenter.X + stage.Size);
             _ZoneBottom = Math.Max(0, _ZoneCenter.Y - stage.Size);
             _ZoneTop = Math.Min(_Map.Height, _ZoneCenter.Y + stage.Size);
