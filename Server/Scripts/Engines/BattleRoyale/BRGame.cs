@@ -280,13 +280,13 @@ namespace Server.BattleRoyale{
         private static Rectangle2D _NextZone;
 
         private static List<ZoneStage> _ZoneStages = new List<ZoneStage> {
-            new ZoneStage( 500, 1, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 250, 2, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 250, 1, new TimeSpan(0, 0, 30) ),
             new ZoneStage( 125, 2, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 60, 3, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 60, 2, new TimeSpan(0, 0, 30) ),
             new ZoneStage( 30, 3, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 10, 4, new TimeSpan(0, 0, 30) ),
-            new ZoneStage( 3, 5, new TimeSpan(0, 0, 30) )
+            new ZoneStage( 15, 3, new TimeSpan(0, 0, 30) ),
+            new ZoneStage( 5, 4, new TimeSpan(0, 0, 300) ),
+            new ZoneStage( 1, 5, new TimeSpan(0, 0, 300) )
         };
 
 	private static Point2D[] _FinalZoneCenters = {
