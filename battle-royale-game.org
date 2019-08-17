@@ -1,12 +1,12 @@
 #+startup: align showall
 
-* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [8/11]
+* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [9/11]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
 ** DONE game logic
 *** game context, isRunning predicate, list of players, list of alve players, round timer, state variables (shrinking, waiting, joining, etc.)
-** TODO start game when enough people are queued
+** DONE start game when enough people are queued
 ** DONE kill all participants, transport them to island, res them when game starts
 ** DONE people who die stay as ghosts, they can issue a [command to quit the game and get a respawn
 ** TODO spawn loot in boxes everywhere

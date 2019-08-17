@@ -84,10 +84,21 @@ namespace Server.BattleRoyale{
 		pm.SendMessage("You have registered for Battle Royale.  Safely unequip and store your items before the game begins!"); //TODO cliloc this
 		pm.SendMessage("To unregister, double-click the stone again.");
 		_Players.Add(pm);
+
+		if( _Players.Count == PlayerCap && _state = BattleState.Joining ){
+		    //might as well start game early if it fills up.
+		    foreach( PlayerMobile p in _Players ){
+			p.SendMessage("Game queue is full, starting play in 30 seconds!");
+		    }
+
+		    new GameTimer(TimeSpan.FromSeconds(30), EndJoining ).Start();
+		}
+		
 		return true;
 	    }
 	    else{
 		pm.SendMessage("You may not join at this time.  The game queue is full.");
+		
 		return false;
 	    }
 	}
@@ -154,7 +165,17 @@ namespace Server.BattleRoyale{
 
 	public static void EndJoining(){
             Announce("End Joining");
-            
+
+	    if( _Players.Count < 2 ) {
+		Announce("Not enough players have joined the game.  Queue will open again in 1 hour.");
+		_state = BattleState.Idle;
+		_Players.Clear();
+		GameTimer nextgame = new GameTimer( TimeSpan.FromHours(1), BeginJoining );
+		nextgame.Start();
+		
+		return;
+	    }
+	    
 	    _state = BattleState.Parachuting;
 	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
 
