@@ -50,7 +50,6 @@ namespace Server.BattleRoyale{
 	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
             CommandSystem.Register("StartBRGame", AccessLevel.Developer, new CommandEventHandler(StartBRGame_OnCommand));
 
-
             // Delete any zone walls that were persisted in the world save
             ClearZone();
 	}
@@ -85,7 +84,7 @@ namespace Server.BattleRoyale{
 		pm.SendMessage("To unregister, double-click the stone again.");
 		_Players.Add(pm);
 
-		if( _Players.Count == PlayerCap && _state = BattleState.Joining ){
+		if( _Players.Count == PlayerCap && _state == BattleState.Joining ){
 		    //might as well start game early if it fills up.
 		    foreach( PlayerMobile p in _Players ){
 			p.SendMessage("Game queue is full, starting play in 30 seconds!");
@@ -185,7 +184,7 @@ namespace Server.BattleRoyale{
 		pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
 	    }
 	    
-	    Announce("BattleRoyale has started!");
+	    Announce("Battle Royale has started!");
 	    GameTimer rt = new GameTimer( TimeSpan.FromMinutes(1) , BeginPlay);
 	    rt.Start();
 	}
@@ -310,6 +309,7 @@ namespace Server.BattleRoyale{
             new ZoneStage( 1, 5, new TimeSpan(0, 0, 300) )
         };
 
+	// yes, these are hand picked.  Don't judge me.
 	private static Point2D[] _FinalZoneCenters = {
 	    new Point2D( 4548, 806 ),
 	    new Point2D( 4545, 867 ),

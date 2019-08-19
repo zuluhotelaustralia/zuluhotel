@@ -1,6 +1,6 @@
 #+startup: align showall
 
-* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [9/11]
+* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [9/10]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -14,6 +14,5 @@
 ** DONE logic to end game when one is alive, either kill winner or let them leave with their gear
 ** DONE people outside the zone suffer DOT
 ** DONE playerdeath event that you can subscribe to
-** TODO a red moongate that only ghosts can go through to start the game, instead of just pulling them in.
 ** DONE disable guards
 

@@ -58,6 +58,11 @@ namespace Server
 	private static DateTime m_ProfileStart;
 	private static TimeSpan m_ProfileTime;
 
+	private static bool m_BetaTest;
+	public static bool BetaTest {
+	    get { return m_BetaTest; }
+	}
+
 	private static MessagePump m_MessagePump;
 
 	public static MessagePump MessagePump
