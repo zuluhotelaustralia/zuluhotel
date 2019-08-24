@@ -438,6 +438,8 @@ namespace Server
 	    {
 	    }
 
+	    m_BetaTest = true;
+	    
 	    m_Thread = Thread.CurrentThread;
 	    m_Process = Process.GetCurrentProcess();
 	    m_Assembly = Assembly.GetEntryAssembly();

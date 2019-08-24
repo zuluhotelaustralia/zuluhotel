@@ -142,7 +142,7 @@ namespace Server.Items {
 	    AddPage(0);
 	    AddBackground( 0, 0, 480, 320, 9300 );
 	    AddHtml( 10, 10, 460, 100, "<h2>Beta Invite Code Entry</h2>", false, false );
-	    AddHtml( 10, 50, 460, 140, "If you have a Beta Invite Code, you can try to enter it here:", false, false );
+	    AddHtml( 10, 50, 460, 140, "If you have a Beta Invite Code, you can try to enter it here (Case Sensitive):", false, false );
 
 	    AddImageTiled( 10, 100, 460, 22, 0 );
 	    AddTextEntry( 20, 100, 460, 50, 49, 0, "");
@@ -167,6 +167,7 @@ namespace Server.Items {
 			    if( stone.CheckKeyValidity( text ) ){
 				from.SendMessage("You entered a valid invite code and have been granted access to the Beta!");
 				from.MoveToWorld( new Point3D(3033, 3406, 20), Map.Felucca ); //serpent's hold
+				stone.ConsumeKey( text );
 			    }
 			    else{
 				from.SendMessage("They key you entered is valid but has already been used.");

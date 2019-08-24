@@ -4900,8 +4900,14 @@ namespace Server.Mobiles
 
 		base.OnDeath( c );
 
-		if ( DeleteCorpseOnDeath )
+		if ( DeleteCorpseOnDeath ){
 		    c.Delete();
+		}
+		else {
+		    if( Core.BetaTest == true && Utility.RandomDouble() >= 0.9 ) {
+			c.AddItem( new InviteStone() );
+		    }
+		}
 	    }
 	}
 
