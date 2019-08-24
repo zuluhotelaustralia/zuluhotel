@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Server.Beta {
+namespace Server.Items {
     public class BetaStone : Item {
 	// I guess this is UO's version of the Phonetic Alphabet? lol
 	private static String[] _alphabet = {
@@ -159,7 +159,7 @@ namespace Server.Beta {
 		case (int)Buttons.SubmitButton:
 		    {
 			string text = info.GetTextEntry(0).Text;
-			BetaStone stone = Server.Beta.BetaStone.Stone;
+			BetaStone stone = BetaStone.Stone;
 
 			// see if the key is actually in the hash table
 			if( stone.CheckKeyExists( text ) ){
