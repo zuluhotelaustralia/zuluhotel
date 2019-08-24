@@ -37,7 +37,7 @@ namespace Server.Misc
 
 	private static CityInfo[] StartingCities = new CityInfo[]
 	    {
-		new CityInfo( "Serpent's Hold", "Downtown", 1071565, 3033, 3406, 20, Map.Felucca )
+		new CityInfo( "Beta Test", "The Beta Testing Lobby", 1071565, 2174, 1988, 0, Map.Felucca )
 		/*new CityInfo( "New Haven",	"New Haven Bank",	1150168, 3667,	2625,	0  ),
 		new CityInfo( "Yew",		"The Empath Abbey",	1075072, 633,	858,	0  ),
 		new CityInfo( "Minoc",		"The Barnacle",		1075073, 2476,	413,	15 ),
