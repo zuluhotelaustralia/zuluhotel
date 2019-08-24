@@ -108,7 +108,7 @@ namespace Server.Antimacro
 	    AddHtml( 120, 200, 50, 50, "<b>+</b>", false, false );
 	    AddHtml( 180, 200, 50, 50, "<b>" + num2 + "</b>", false, false );
 	    AddHtml( 240, 200, 50, 50, "<b>=</b>", false, false );
-	    AddImageTiled( 280, 200, 50, 22, 0 );
+	    AddImageTiled( 280, 200, 50, 22, 0xBBC );
 	    AddTextEntry( 290, 200, 50, 50, 49, 0, "" );
 	    
 	    AddButton(10, 280, 247, 248, (int)Buttons.ReplyButton, GumpButtonType.Reply, 2);

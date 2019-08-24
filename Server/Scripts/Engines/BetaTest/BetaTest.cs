@@ -144,7 +144,7 @@ namespace Server.Items {
 	    AddHtml( 10, 10, 460, 100, "<h2>Beta Invite Code Entry</h2>", false, false );
 	    AddHtml( 10, 50, 460, 140, "If you have a Beta Invite Code, you can try to enter it here (Case Sensitive):", false, false );
 
-	    AddImageTiled( 10, 100, 460, 22, 0 );
+	    AddImageTiled( 10, 100, 460, 22, 0xBBC );
 	    AddTextEntry( 20, 100, 460, 50, 49, 0, "");
 
 	    AddButton( 10, 280, 247, 248, (int)Buttons.SubmitButton, GumpButtonType.Reply, 2);
