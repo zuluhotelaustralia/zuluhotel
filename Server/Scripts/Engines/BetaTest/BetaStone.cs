@@ -30,7 +30,8 @@ namespace Server.Items {
 		}
 		else {
 		    String s = BetaStone.Stone.RequestNewKey( from );
-		    from.SendMessage("You hear spirits whisper words that will grant a friend access to the Beta Realm: " + s );
+		    from.SendMessage("The stone disintegrates as you hear spirits whisper words that will grant a friend access to the Beta Realm: " + s );
+		    this.Delete();
 		}
 	    }
 	}
