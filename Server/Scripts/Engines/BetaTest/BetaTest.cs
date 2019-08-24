@@ -41,7 +41,7 @@ namespace Server.Items {
 	    String s = "";
 	    
 	    for( int i=0; i < numTerms; i++ ){
-		s += _alphabet[ Utility.RandomMinMax( 0, _alphabet.Length ) ];
+		s += _alphabet[ Utility.RandomMinMax( 0, (_alphabet.Length - 1) ) ];
 
 		// don't put a trailing space
 		if( i < (numTerms-1) ){
