@@ -13,10 +13,15 @@ namespace Server.Mobiles{
 
 	public static void Initialize() {
 	    CommandSystem.Register("Respawn", AccessLevel.Developer, new CommandEventHandler( Respawn_OnCommand ) );
+	    CommandSystem.Register("DumpSpawnNames", AccessLevel.Developer, new CommandEventHandler( DumpSpawnNames_OnCommand ) );
 	}
 
 	public static void Respawn_OnCommand( CommandEventArgs e ){
 	    e.Mobile.Target = new RespawnSpawnerTarget();
+	}
+
+	public static void DumpSpawnNames_OnCommand( CommandEventArgs e ) {
+	    e.Mobile.Target = new BRDebugTarget();
 	}
 	    
 	[Constructable]
@@ -27,10 +32,13 @@ namespace Server.Mobiles{
 	    get { return "Battle Royale Spawner"; }
 	}
 
-	private override void InitSpawner( ){
+	protected override void InitSpawner( int amount, TimeSpan minDelay, TimeSpan maxDelay, int team, int homeRange, List<string> spawnNames ){
 
-	    SpawnNames.Add(""); //add a uge list of everything to be spawned
-	    base.InitSpawner( 1, 5, 10, 0, 4, spawnNames );
+	    spawnNames.Clear();
+	    spawnNames.Add("katana set damagelevel vanq"); //add a uge list of everything to be spawned
+	    spawnNames.Add("chainlegs");
+	    
+	    base.InitSpawner( amount, minDelay, maxDelay, team, homeRange, spawnNames );
 	}
 	    
 
@@ -46,3 +54,5 @@ namespace Server.Mobiles{
 	    //intentional - don't send the gump for this spawner
 	    return;
 	}
+    }
+}
