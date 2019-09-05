@@ -15,4 +15,5 @@
 ** DONE people outside the zone suffer DOT
 ** DONE playerdeath event that you can subscribe to
 ** DONE disable guards
+** TODO make a better spawner that will spawn all loot uniformly at first, then later revise to have loot levels to encourage hotspots
 

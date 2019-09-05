@@ -40,6 +40,7 @@ namespace Server.BattleRoyale{
 	private static List<Mobile> _AlivePlayers;
 
 	public static void Initialize() {
+
 	    //all commands go here, no more splitting it up between several files.
 	    // I'm looking at *you*, sith.
 	    // --sith
