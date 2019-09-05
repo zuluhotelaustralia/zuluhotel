@@ -46,7 +46,7 @@ namespace Server.Mobiles{
 	    spawnNames.Add("kryss set damagelevel force");
 	    spawnNames.Add("kryss set damagelevel power");
 	    spawnNames.Add("kryss set damagelevel vanq");
-	    spawnNames.Add("bagofreagents 20");
+	    spawnNames.Add("bagofallreagents 20");
 	    spawnNames.Add("bandage 20");
 	    spawnNames.Add("chainchest");
 	    spawnNames.Add("chainlegs");
@@ -89,6 +89,10 @@ namespace Server.Mobiles{
 	    spawnNames.Add("bonechest");
 	    spawnNames.Add("bonegloves");
 	    spawnNames.Add("bonelegs");
+	    spawnNames.Add("blackstaff");
+	    spawnNames.Add("blackstaff set damagelevel force");
+	    spawnNames.Add("blackstaff set damagelevel power");
+	    spawnNames.Add("blackstaff set damagelevel vanq");
 	    
 	    base.InitSpawner( amount, minDelay, maxDelay, team, homeRange, spawnNames );
 	}
