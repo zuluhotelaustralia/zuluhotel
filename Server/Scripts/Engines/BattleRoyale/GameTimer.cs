@@ -10,7 +10,7 @@ namespace Server.BattleRoyale
 	}
 	
 	protected override void OnTick() {
-            Server.World.Broadcast( 0x35, true, "GameTimer Tick");
+            //Server.World.Broadcast( 0x35, true, "GameTimer Tick");
 	    m_Callback();
 	}
     }

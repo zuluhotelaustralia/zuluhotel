@@ -16,6 +16,14 @@ namespace Server.BattleRoyale{
 	    Playing, // game in progress
 	}
 
+	private bool _debug;
+	
+	[CommandProperty(AccessLevel.Developer)]
+	public bool Debug {
+	    get { return _debug; }
+	    set { _debug = value; }
+	}
+       
 	private static BattleState _state = BattleState.Idle;
 
        	public const int PlayerCap = 30;
@@ -107,6 +115,7 @@ namespace Server.BattleRoyale{
 	public GameController() : base( 0xED4 ){
 	    this.Name = "Battle Royale Control Stone";
 	    this.Hue = 2771; //dripstone
+	    _debug = false;
 	}
 
 	public GameController( Serial serial ) : base( serial ){
@@ -118,11 +127,15 @@ namespace Server.BattleRoyale{
 	public override void Serialize( GenericWriter writer ){
 	    base.Serialize(writer);
 	    writer.Write( (int) 0 ); //version
+
+	    writer.Write(_debug);
 	}
 
 	public override void Deserialize(GenericReader reader ){
 	    base.Deserialize( reader );
 	    int version = reader.ReadInt();
+
+	    _debug = reader.ReadBool();
 	}
 
 	public override void OnDoubleClick( Mobile mob ){
@@ -149,22 +162,38 @@ namespace Server.BattleRoyale{
 	}
 
 	public static void Announce( String s ){
-	    World.Broadcast( 0x35, true, s );
-	    // later, change this to broadcast via the Town Criers TODO
+	    foreach( PlayerMobile p in _AlivePlayers ){
+		p.SendMessage( s );
+		// later, change this to broadcast via the Town Criers TODO
+
+		if( _debug ){
+		    Console.WriteLine(s);
+		}
+	    }
 	}
 	
 	public static void BeginJoining() {
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
 		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
-		//GameTimer jt = new GameTimer( TimeSpan.FromMinutes(10), EndJoining );
-		GameTimer jt = new GameTimer( TimeSpan.FromSeconds(10), EndJoining );
-		jt.Start();
+
+		TimeSpan ts;
+		
+		if( _debug ) {
+		    ts = TimeSpan.FromSeconds(10);
+		}
+		else {
+		    ts = TimeSpan.FromMinutes(10);
+		}
+		
+		GameTimer jt = new GameTimer( ts, EndJoining ).Start();
 	    }
 	}
 
 	public static void EndJoining(){
-            Announce("End Joining");
+            if( _debug ){
+		Announce("End Joining");
+	    }
 
 	    if( _Players.Count < 2 ) {
 		Announce("Not enough players have joined the game.  Queue will open again in 1 hour.");
@@ -202,9 +231,9 @@ namespace Server.BattleRoyale{
 	    }
 
 	    if( CheckVictory() ){
-		Announce("Winner winner, chicken dinner!");
-		_state = BattleState.Idle;
 		Mobile victor = _AlivePlayers[0];
+		Announce("Winner winner, chicken dinner! {0} has won Battle Royale!", victor);
+		_state = BattleState.Idle;
 		victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
 		GameTimer repatriator = new GameTimer( TimeSpan.FromSeconds(15), EndGame );
 		repatriator.Start();
@@ -410,7 +439,9 @@ namespace Server.BattleRoyale{
                 _CurrentStage = _CurrentStageEnumerator.Current;
                 _CurrentZone = _CurrentStage.ToRect(_Map, _ZoneCenter);
 
-                Announce("Current zone is " + _CurrentStage.Size);
+                if( _debug ){
+		    Announce("Current zone is " + _CurrentStage.Size);
+		}
                 
                 DrawZone(_CurrentZone, _CurrentZoneItemIds);
                 
@@ -421,13 +452,15 @@ namespace Server.BattleRoyale{
                 _NextStage = _NextStageEnumerator.Current;
                 _NextZone = _NextStage.ToRect(_Map, _ZoneCenter);
 
-                Announce("Next zone is " + _NextStage.Size);
-                
+		if( _debug ){
+		    Announce("Next zone is " + _NextStage.Size);
+                }
+		
                 DrawZone(_NextZone, _NextZoneItemIds);
                 
                 Announce("Zone will collapse in " + _CurrentStage.Duration.TotalSeconds + " seconds");
             } else {
-                Announce("Final zone.");
+                Announce("This is the final zone.");
             }
         }
         
