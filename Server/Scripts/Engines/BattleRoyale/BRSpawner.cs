@@ -93,7 +93,13 @@ namespace Server.Mobiles{
 	    spawnNames.Add("blackstaff set damagelevel force");
 	    spawnNames.Add("blackstaff set damagelevel power");
 	    spawnNames.Add("blackstaff set damagelevel vanq");
-	    
+	    spawnNames.Add("greateragilitypotion");
+	    spawnNames.Add("greaterhealpotion");
+	    spawnNames.Add("greaterstrengthpotion");
+	    spawnNames.Add("totalrefreshpotion");
+	    spawnNames.Add("greaterexplosionpotion");
+	    spawnNames.Add("greatercurepotion");
+		
 	    base.InitSpawner( amount, minDelay, maxDelay, team, homeRange, spawnNames );
 	}
 	    
