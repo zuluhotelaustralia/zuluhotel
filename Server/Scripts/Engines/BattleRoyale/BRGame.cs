@@ -241,6 +241,7 @@ namespace Server.BattleRoyale{
 
 	private static void Slap( Mobile pm ) {
 	    pm.Damage( _CurrentStage.DamageLevel * ZoneDamageMultiplier );
+	    pm.RevealingAction();
 	}
 
 	// should we proc the zone damage?
