@@ -12,7 +12,7 @@ namespace Server.Mobiles{
     public class BRSpawner : Spawner {
 
 	public static void Initialize() {
-	    CommandSystem.Register("Respawn", AccessLevel.Developer, new CommandEventHandler( Respawn_OnCommand ) );
+	    CommandSystem.Register("Respawn", AccessLevel.GameMaster, new CommandEventHandler( Respawn_OnCommand ) );
 	    CommandSystem.Register("DumpSpawnNames", AccessLevel.Developer, new CommandEventHandler( DumpSpawnNames_OnCommand ) );
 	}
 
