@@ -34,6 +34,9 @@ namespace Server.Items {
 		    this.Delete();
 		}
 	    }
+	    else {
+		from.SendMessage("Whatever magics this stone once held have faded, and it does not respond to you.");
+	    }
 	}
     }
 }
