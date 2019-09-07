@@ -16,7 +16,7 @@ namespace Server.BattleRoyale{
 	    Playing, // game in progress
 	}
 
-	private bool _debug;
+	private static bool _debug;
 	
 	[CommandProperty(AccessLevel.Developer)]
 	public bool Debug {
@@ -186,7 +186,8 @@ namespace Server.BattleRoyale{
 		    ts = TimeSpan.FromMinutes(10);
 		}
 		
-		GameTimer jt = new GameTimer( ts, EndJoining ).Start();
+		GameTimer jt = new GameTimer( ts, EndJoining );
+		jt.Start();
 	    }
 	}
 
@@ -232,7 +233,7 @@ namespace Server.BattleRoyale{
 
 	    if( CheckVictory() ){
 		Mobile victor = _AlivePlayers[0];
-		Announce("Winner winner, chicken dinner! {0} has won Battle Royale!", victor);
+		Announce("Winner winner, chicken dinner!  Battle Royale has ended!");
 		_state = BattleState.Idle;
 		victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
 		GameTimer repatriator = new GameTimer( TimeSpan.FromSeconds(15), EndGame );
