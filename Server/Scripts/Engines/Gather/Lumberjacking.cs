@@ -154,7 +154,7 @@ namespace Server.Engines.Gather {
 
 	public bool Validate( int tileID )
 	{
-	    // is this fast enough?  Should it be in its own thread?
+	    // is this fast enough?  Should it be in its own thread? TODO 
 	    int dist = -1;
 	    for ( int i = 0; dist < 0 && i < m_TreeTiles.Length; ++i ){
 		dist = ( m_TreeTiles[i] - tileID );
@@ -176,28 +176,37 @@ namespace Server.Engines.Gather {
 	    return true;
 	}
 
-	public override void StartGathering( Mobile from, Item tool, object targeted) {
+	public int GetTileID( object targ ){
 	    int tileID;
-	    Point3D loc;
 	    
-	    if( targeted is Static && !((Static)targeted).Movable ){
-		Static obj = (Static)targeted;
-		loc = new Point3D(obj.Location);
+	    if( targ is Static && !((Static)targ).Movable ){
+		Static obj = (Static)targ;
 		tileID = (obj.ItemID & 0x3FFF) | 0x4000; //what the actual fuck does this do?
 	    }
-	    else if( targeted is StaticTarget ){
-		StaticTarget obj = (StaticTarget)targeted;
-		loc = new Point3D(obj.Location);
+	    else if( targ is StaticTarget ){
+		StaticTarget obj = (StaticTarget)targ;
 		tileID = (obj.ItemID & 0x3FFF) | 0x4000;
 	    }
-	    else if( targeted is LandTarget ){
-		LandTarget obj = (LandTarget)targeted;
-		loc = new Point3D(obj.Location);
+	    else if( targ is LandTarget ){
+		LandTarget obj = (LandTarget)targ;
 		tileID = obj.TileID;
 	    }
 	    else {
-		loc = new Point3D(from.Location);
 		tileID = 0;
+	    }
+
+	    return tileID;
+	}
+	
+	public override void StartGathering( Mobile from, Item tool, object targeted ) {
+	    int tileID = GetTileID( targeted );
+	    Point3D loc;
+	    
+	    if( tileID == 0 ){
+		loc = new Point3D( from.Location );
+	    }
+	    else {
+		loc = new Point3D( ((LandTarget)targeted).Location );
 	    }
 
 	    if( Validate( tileID ) ) {

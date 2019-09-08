@@ -14,7 +14,7 @@ namespace Server.Engines.Gather
 	private Item m_Tool;
 	private GatherSystem m_System;
 
-	public GatherTarget( Item tool, GatherSystem system ) : base( -1, true, TargetFlags.None )
+	public GatherTarget( Item tool, GatherSystem system ) : base( 2, true, TargetFlags.None )
 	{
 	    m_Tool = tool;
 	    m_System = system;
