@@ -11,6 +11,8 @@ namespace Server.Items
     public class SurveyTool : Item
     {
 	private List<GatherNode> m_ReportList;
+
+	private DateTime _nextUse;
 	
 	public enum SurveyType {
 	    Tree,
@@ -21,28 +23,40 @@ namespace Server.Items
 	public SurveyTool( ) : base( 0xF39 )
 	{
 	    m_ReportList = new List<GatherNode>();
+	    _nextUse = DateTime.Now;
 	}
 
 	public SurveyTool( Serial serial ) : base( serial )
 	{
+	    m_ReportList = new List<GatherNode>();
+	    _nextUse = DateTime.Now;
 	}
 
 	public override void OnDoubleClick( Mobile from ){
+	    if( DateTime.Compare( DateTime.Now, _nextUse ) >= 0 ){
+		from.Target = new InternalTarget( this );
+	    }
 	}
 
 	public void MunchMunch( Mobile from ){
 	    from.PlaySound( Utility.Random( 0x3A, 3 ) );
-	    
+	    from.Emote("Munch munch munch");
+
 	    if ( from.Body.IsHuman && !from.Mounted ){
 		from.Animate( 34, 5, 1, true, false, 0 );
 	    }
 	}
 
+	//generate the actual report here
+	public void WriteReport(){}
+	    
 	//actually take the sample of what's there
-	public void Sample( Point3D loc, SurveyType t ){
+	public void Sample( Point3D loc, SurveyType t, Mobile from ){
 	    // determine what was clciked (tree or terrain)
 	    // shit out list of all nodes above 10% chance
 	    m_ReportList.Clear();
+
+	    MunchMunch( from );
 	    
 	    GatherSystem sys;
 	    if( t == SurveyType.Tree ){
@@ -80,10 +94,6 @@ namespace Server.Items
 	    base.Deserialize( reader );
 
 	    int version = reader.ReadInt();
-
-	    if( m_ReportList == null ){
-		m_ReportList = new List<GatherNode>();
-	    }
 	}
 
 	public class InternalTarget : Target {
@@ -101,10 +111,10 @@ namespace Server.Items
 		int tileID = m_LumberjackingSystem.GetTileID( targeted );
 
 		if( m_LumberjackingSystem.Validate( tileID ) ){
-		    m_Tool.Sample( from.Location, SurveyType.Tree );
+		    m_Tool.Sample( from.Location, SurveyType.Tree, from );
 		}
 		else if( m_MiningSystem.ValidateRock( tileID ) ){
-		    m_Tool.Sample( from.Location, SurveyType.Terrain );
+		    m_Tool.Sample( from.Location, SurveyType.Terrain, from );
 		}
 		else {
 		    from.SendMessage("You must target terrain (not sand), or trees.");
