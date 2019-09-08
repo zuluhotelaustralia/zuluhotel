@@ -316,7 +316,10 @@ namespace Server.Engines.Gather {
 	    int deltaX = Math.Abs( m.X - n.X );
 	    int deltaY = Math.Abs( m.Y - n.Y );
 
-	    double dist = Math.Sqrt( (double)(deltaX^2) * (double)(deltaY^2) );
+	    double dxsquared = Math.Pow( (double)deltaX, 2.0);
+	    double dysquared = Math.Pow( (double)deltaY, 2.0);
+	    
+	    double dist = Math.Sqrt( dxsquared + dysquared );
 
 	    double a = ( n.Abundance * n.Difficulty ) / dist; // kinda exponential decay
 
