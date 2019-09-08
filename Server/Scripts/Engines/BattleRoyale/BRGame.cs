@@ -210,9 +210,14 @@ namespace Server.BattleRoyale{
 	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
 
 	    foreach( Mobile pm in _Players ){
-		pm.Kill();
-		pm.MoveToWorld(_StartLoc, _Map);
-		pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
+		if( pm.NetState != null ){
+		    pm.Kill();
+		    pm.MoveToWorld(_StartLoc, _Map);
+		    pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
+		}
+		else{
+		    TryUnregisterPlayer( pm );
+		}
 	    }
 	    
 	    Announce("Battle Royale has started!");
@@ -445,8 +450,10 @@ namespace Server.BattleRoyale{
 		}
                 
                 DrawZone(_CurrentZone, _CurrentZoneItemIds);
-                
-                new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
+
+		if( _state == BattleState.Playing ){
+		    new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
+		}
             }
             
             if ( _NextStageEnumerator.MoveNext() ) {
