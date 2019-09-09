@@ -210,14 +210,9 @@ namespace Server.BattleRoyale{
 	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
 
 	    foreach( Mobile pm in _Players ){
-		if( pm.NetState != null ){
-		    pm.Kill();
-		    pm.MoveToWorld(_StartLoc, _Map);
-		    pm.SendMessage("You will be automatically resurrected in 90 seconds, at which point the battle royale will begin!"); //TODO cliloc this
-		}
-		else{
-		    TryUnregisterPlayer( pm );
-		}
+                pm.Kill();
+                pm.MoveToWorld(_StartLoc, _Map);
+                pm.SendMessage("You will be automatically resurrected in 90 seconds, at which point the battle royale will begin!"); //TODO cliloc this
 	    }
 	    
 	    Announce("Battle Royale has started!");
@@ -289,12 +284,17 @@ namespace Server.BattleRoyale{
 	    
 	//check if every alive player is in the zone and if not, damage them
 	private static void ProcZoneDamage(){
+            List<Mobile> toSlap = new List<Mobile>();
+            
 	    foreach( Mobile pm in _AlivePlayers ){
 		if( !_CurrentZone.Contains( pm.Location )) {
-		    //if they're not in the zone
-		    Slap(pm);
-		    pm.SendMessage("The acid rain outside the magic safe zone damages you!"); //TODO cliloc this
-		}
+                    toSlap.Add(pm);
+                }
+            }
+
+            foreach( Mobile pm in toSlap ) {
+                Slap(pm);
+                pm.SendMessage("The acid rain outside the magic safe zone damages you!"); //TODO cliloc this
 	    }
 	}
 
@@ -415,7 +415,8 @@ namespace Server.BattleRoyale{
         // be unable to enter/exit the zone.
         private static int[] _CurrentZoneItemIds = { 0x3915, 0x3922 };
 
-        private static int _ZoneStage;
+        private static IEnumerator<ZoneStage> _CurrentStageEnumerator;
+        private static IEnumerator<ZoneStage> _NextStageEnumerator;
         private static ZoneStage _CurrentStage;
         private static ZoneStage _NextStage;
 
@@ -439,7 +440,10 @@ namespace Server.BattleRoyale{
 
             _ZoneCenter = _FinalZoneCenters[ Utility.RandomMinMax(0, _FinalZoneCenters.Length - 1) ];
 
-            _ZoneStage = -1;
+            _CurrentStageEnumerator = _ZoneStages.GetEnumerator();
+            _NextStageEnumerator = _ZoneStages.GetEnumerator();
+
+            _NextStageEnumerator.MoveNext();
 
             ZoneTick();
 	    HandleZoneDamageTimer();
@@ -448,26 +452,23 @@ namespace Server.BattleRoyale{
         public static void ZoneTick() {
             ClearZone();
 
-            ZoneStage current = CurrentStage();
-            ZoneStage next = NextStage();
-
-            
-
-            if ( current ) {
-                _CurrentZone = current.ToRect(_Map, _ZoneCenter);
+            if ( _CurrentStageEnumerator.MoveNext() ) {
+                _CurrentStage = _CurrentStageEnumerator.Current;
+                _CurrentZone = _CurrentStage.ToRect(_Map, _ZoneCenter);
 
                 if( _debug ){
-		    Announce("Current zone is " + current.Size);
+		    Announce("Current zone is " + _CurrentStage.Size);
 		}
                 
                 DrawZone(_CurrentZone, _CurrentZoneItemIds);
 
 		if( _state == BattleState.Playing ){
-		    new GameTimer(current.Duration, ZoneTick).Start();
+		    new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
 		}
             }
             
-            if ( next ) {
+            if ( _NextStageEnumerator.MoveNext() ) {
+                _NextStage = _NextStageEnumerator.Current;
                 _NextZone = _NextStage.ToRect(_Map, _ZoneCenter);
 
 		if( _debug ){
@@ -476,7 +477,7 @@ namespace Server.BattleRoyale{
 		
                 DrawZone(_NextZone, _NextZoneItemIds);
                 
-                Announce("Zone will collapse in " + current.Duration.TotalSeconds + " seconds");
+                Announce("Zone will collapse in " + _CurrentStage.Duration.TotalSeconds + " seconds");
             } else {
                 Announce("This is the final zone.");
             }
