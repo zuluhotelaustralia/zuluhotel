@@ -336,7 +336,10 @@ namespace Server.BattleRoyale{
         private static Rectangle2D _CurrentZone;
         private static Rectangle2D _NextZone;
 
+        private static TimeSpan _InitialZone = new TimeSpan(0, 0, 30);
+
         private static List<ZoneStage> _ZoneStages = new List<ZoneStage> {
+            new ZoneStage( 700, 1, new TimeSpan(0, 0, 30) ),
             new ZoneStage( 250, 1, new TimeSpan(0, 0, 30) ),
             new ZoneStage( 125, 2, new TimeSpan(0, 0, 30) ),
             new ZoneStage( 60, 2, new TimeSpan(0, 0, 30) ),
@@ -412,8 +415,7 @@ namespace Server.BattleRoyale{
         // be unable to enter/exit the zone.
         private static int[] _CurrentZoneItemIds = { 0x3915, 0x3922 };
 
-        private static IEnumerator<ZoneStage> _CurrentStageEnumerator;
-        private static IEnumerator<ZoneStage> _NextStageEnumerator;
+        private static int _ZoneStage;
         private static ZoneStage _CurrentStage;
         private static ZoneStage _NextStage;
 
@@ -432,10 +434,7 @@ namespace Server.BattleRoyale{
 
             _ZoneCenter = _FinalZoneCenters[ Utility.RandomMinMax(0, _FinalZoneCenters.Length - 1) ];
 
-            _CurrentStageEnumerator = _ZoneStages.GetEnumerator();
-            _NextStageEnumerator = _ZoneStages.GetEnumerator();
-
-            _NextStageEnumerator.MoveNext();
+            _ZoneStage = -1;
 
             ZoneTick();
 	    HandleZoneDamageTimer();
@@ -444,23 +443,26 @@ namespace Server.BattleRoyale{
         public static void ZoneTick() {
             ClearZone();
 
-            if ( _CurrentStageEnumerator.MoveNext() ) {
-                _CurrentStage = _CurrentStageEnumerator.Current;
-                _CurrentZone = _CurrentStage.ToRect(_Map, _ZoneCenter);
+            ZoneStage current = CurrentStage();
+            ZoneStage next = NextStage();
+
+            
+
+            if ( current ) {
+                _CurrentZone = current.ToRect(_Map, _ZoneCenter);
 
                 if( _debug ){
-		    Announce("Current zone is " + _CurrentStage.Size);
+		    Announce("Current zone is " + current.Size);
 		}
                 
                 DrawZone(_CurrentZone, _CurrentZoneItemIds);
 
 		if( _state == BattleState.Playing ){
-		    new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
+		    new GameTimer(current.Duration, ZoneTick).Start();
 		}
             }
             
-            if ( _NextStageEnumerator.MoveNext() ) {
-                _NextStage = _NextStageEnumerator.Current;
+            if ( next ) {
                 _NextZone = _NextStage.ToRect(_Map, _ZoneCenter);
 
 		if( _debug ){
@@ -469,7 +471,7 @@ namespace Server.BattleRoyale{
 		
                 DrawZone(_NextZone, _NextZoneItemIds);
                 
-                Announce("Zone will collapse in " + _CurrentStage.Duration.TotalSeconds + " seconds");
+                Announce("Zone will collapse in " + current.Duration.TotalSeconds + " seconds");
             } else {
                 Announce("This is the final zone.");
             }
