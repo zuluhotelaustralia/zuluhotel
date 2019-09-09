@@ -213,7 +213,7 @@ namespace Server.BattleRoyale{
 		if( pm.NetState != null ){
 		    pm.Kill();
 		    pm.MoveToWorld(_StartLoc, _Map);
-		    pm.SendMessage("You will be automatically resurrected in 60 seconds, at which point the battle royale will begin!"); //TODO cliloc this
+		    pm.SendMessage("You will be automatically resurrected in 90 seconds, at which point the battle royale will begin!"); //TODO cliloc this
 		}
 		else{
 		    TryUnregisterPlayer( pm );
@@ -221,7 +221,7 @@ namespace Server.BattleRoyale{
 	    }
 	    
 	    Announce("Battle Royale has started!");
-	    GameTimer rt = new GameTimer( TimeSpan.FromMinutes(1) , BeginPlay);
+	    GameTimer rt = new GameTimer( TimeSpan.FromSeconds(90) , BeginPlay);
 	    rt.Start();
 	}
 	
@@ -421,6 +421,11 @@ namespace Server.BattleRoyale{
 	    foreach( Mobile pm in _Players ){
 		if( pm.NetState != null ){
 		    pm.Resurrect();
+
+		    pm.Hits = pm.Str;
+		    pm.Stam = pm.Dex;
+		    pm.Mana = pm.Int;
+
 		    _AlivePlayers.Add(pm);
 		    pm.OnDeathEvent += OnPlayerDeath;
 		    pm.SendMessage("Last one standing in Moonglow wins!");
