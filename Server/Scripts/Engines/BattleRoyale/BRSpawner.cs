@@ -46,7 +46,6 @@ namespace Server.Mobiles{
 	    spawnNames.Add("kryss set damagelevel force");
 	    spawnNames.Add("kryss set damagelevel power");
 	    spawnNames.Add("kryss set damagelevel vanq");
-	    spawnNames.Add("bagofallreagents 20");
 	    spawnNames.Add("bandage 20");
 	    spawnNames.Add("chainchest");
 	    spawnNames.Add("chainlegs");
@@ -54,11 +53,6 @@ namespace Server.Mobiles{
 	    spawnNames.Add("metalshield");
 	    spawnNames.Add("bronzeshield");
 	    spawnNames.Add("metalkiteshield");
-	    spawnNames.Add("bow");
-	    spawnNames.Add("bow set damagelevel force");
-	    spawnNames.Add("bow set damagelevel power");
-	    spawnNames.Add("bow set damagelevel vanq");
-	    spawnNames.Add("arrow 50");
 	    spawnNames.Add("ringmailchest");
 	    spawnNames.Add("ringmaillegs");
 	    spawnNames.Add("ringmailgloves");
@@ -93,12 +87,26 @@ namespace Server.Mobiles{
 	    spawnNames.Add("blackstaff set damagelevel force");
 	    spawnNames.Add("blackstaff set damagelevel power");
 	    spawnNames.Add("blackstaff set damagelevel vanq");
-	    spawnNames.Add("greateragilitypotion");
-	    spawnNames.Add("greaterhealpotion");
-	    spawnNames.Add("greaterstrengthpotion");
-	    spawnNames.Add("totalrefreshpotion");
-	    spawnNames.Add("greaterexplosionpotion");
-	    spawnNames.Add("greatercurepotion");
+	    for( i=0; i<30; i++ ){
+		spawnNames.Add("greateragilitypotion");
+		spawnNames.Add("greaterhealpotion");
+		spawnNames.Add("greaterstrengthpotion");
+		spawnNames.Add("totalrefreshpotion");
+		spawnNames.Add("greaterexplosionpotion");
+		spawnNames.Add("greatercurepotion");
+	    }
+
+	    for( i=0; i<30; i++ ){
+		spawnNames.Add("bagofallreagents 20");
+	    }
+
+	    for( i=0; i<30; i++ ){
+		spawnNames.Add("bow");
+		spawnNames.Add("bow set damagelevel force");
+		spawnNames.Add("bow set damagelevel power");
+		spawnNames.Add("bow set damagelevel vanq");
+		spawnNames.Add("arrow 50");
+	    }
 		
 	    base.InitSpawner( amount, minDelay, maxDelay, team, homeRange, spawnNames );
 	}

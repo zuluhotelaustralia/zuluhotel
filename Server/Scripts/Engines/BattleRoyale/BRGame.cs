@@ -545,12 +545,16 @@ namespace Server.BattleRoyale{
 
 	    public override void Serialize( GenericWriter writer ) {
 		base.Serialize( writer );
+
+		writer.Write( _debug );
 	    }
 
             public override void Deserialize( GenericReader reader )
             {
                 base.Deserialize(reader);
                 GameController._ZoneList.Add(this);
+
+		_debug = reader.ReadBool();
             }
         }
     }
