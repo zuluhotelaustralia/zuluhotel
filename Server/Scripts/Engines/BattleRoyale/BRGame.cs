@@ -448,8 +448,8 @@ namespace Server.BattleRoyale{
         public static void ZoneTick() {
             ClearZone();
 
-            ZoneStage current = CurrentStage();
-            ZoneStage next = NextStage();
+            ZoneStage current = _CurrentStage();
+            ZoneStage next = _NextStage();
 
             
 
