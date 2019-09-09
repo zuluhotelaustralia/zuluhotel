@@ -87,7 +87,8 @@ namespace Server.Mobiles{
 	    spawnNames.Add("blackstaff set damagelevel force");
 	    spawnNames.Add("blackstaff set damagelevel power");
 	    spawnNames.Add("blackstaff set damagelevel vanq");
-	    for( i=0; i<30; i++ ){
+
+	    for( int i=0; i<30; i++ ){
 		spawnNames.Add("greateragilitypotion");
 		spawnNames.Add("greaterhealpotion");
 		spawnNames.Add("greaterstrengthpotion");
@@ -96,11 +97,11 @@ namespace Server.Mobiles{
 		spawnNames.Add("greatercurepotion");
 	    }
 
-	    for( i=0; i<30; i++ ){
+	    for( int i=0; i<30; i++ ){
 		spawnNames.Add("bagofallreagents 20");
 	    }
 
-	    for( i=0; i<30; i++ ){
+	    for( int i=0; i<30; i++ ){
 		spawnNames.Add("bow");
 		spawnNames.Add("bow set damagelevel force");
 		spawnNames.Add("bow set damagelevel power");
