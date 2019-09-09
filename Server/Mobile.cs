@@ -4103,9 +4103,11 @@ namespace Server
 		Send( DeathStatus.Instantiate( false ) );
 
 		CheckStatTimers();
-
-		OnDeathEvent(new OnDeathEventArgs( this ));
 	    }
+            
+            OnDeathEventHandler onDeath = OnDeathEvent;
+            if ( onDeath != null )
+                OnDeathEvent(new OnDeathEventArgs( this ));
 	}
 
 	#region Get*Sound
