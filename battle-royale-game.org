@@ -16,7 +16,8 @@
 ** TODO move stuff to the stone so you can inspect it with [props
 ** TODO make escape command only work if you're in _PLayers
 ** TODO balance the loot for other classes
-** TODO make "bag of potions" item
+** TODO make "bag of potions" item -> spawn it
+** TODO ELO ratings -> clickable leaderboard
 ** DONE logic to reduce boundaries on a schedule and actually spawn e.g. paralyze fields to denote blue circle
 ** DONE logic to end game when one is alive, either kill winner or let them leave with their gear
 ** DONE people outside the zone suffer DOT
