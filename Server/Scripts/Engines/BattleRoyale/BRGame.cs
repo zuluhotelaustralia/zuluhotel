@@ -244,6 +244,10 @@ namespace Server.BattleRoyale{
 	public static void EndGame() {
 	    Mobile victor = _AlivePlayers[0];
 
+            foreach ( Mobile m in _Players ) {
+                m.OnDeathEvent -= OnPlayerDeath;
+            }
+            
 	    _Players.Clear();
 	    _AlivePlayers.Clear();
 
