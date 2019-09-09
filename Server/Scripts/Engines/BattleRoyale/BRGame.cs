@@ -162,7 +162,7 @@ namespace Server.BattleRoyale{
 	}
 
 	public static void Announce( String s ){
-	    foreach( PlayerMobile p in _AlivePlayers ){
+	    foreach( PlayerMobile p in _Players ){
 		p.SendMessage( s );
 		// later, change this to broadcast via the Town Criers TODO
 
