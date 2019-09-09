@@ -180,7 +180,7 @@ namespace Server.BattleRoyale{
 		TimeSpan ts;
 		
 		if( _debug ) {
-		    ts = TimeSpan.FromSeconds(10);
+		    ts = TimeSpan.FromSeconds(60);
 		}
 		else {
 		    ts = TimeSpan.FromMinutes(10);
@@ -419,10 +419,13 @@ namespace Server.BattleRoyale{
 
         public static void BeginPlay() {
 	    foreach( Mobile pm in _Players ){
-		pm.Resurrect();
-		_AlivePlayers.Add(pm);
-		pm.OnDeathEvent += OnPlayerDeath;
-		pm.SendMessage("Last one standing in Moonglow wins!");
+		if( pm.NetState != null ){
+		    pm.Resurrect();
+		    _AlivePlayers.Add(pm);
+		    pm.OnDeathEvent += OnPlayerDeath;
+		    pm.SendMessage("Last one standing in Moonglow wins!");
+		}
+		
 	    }
 
             _state = BattleState.Playing;
