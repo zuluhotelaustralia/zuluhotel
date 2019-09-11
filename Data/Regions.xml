@@ -414,7 +414,8 @@
 	<logoutDelay active="false" />
       </region>
     </region>
-    <region type="TownRegion" priority="50" name="Moonglow">
+    <region type="BattleRoyaleRegion" priority="50" name="Moonglow">
+      <!--<region type="TownRegion" priority="50" name="Moonglow">-->
       <guards disabled="true" />
       <rect x="4535" y="844" width="20" height="3" />
       <rect x="4530" y="847" width="31" height="61" />
