@@ -26,6 +26,8 @@ namespace Server.BattleRoyale{
        
 	private static BattleState _state = BattleState.Idle;
 
+	public static TimeSpan LogoutDelay = TimeSpan.FromMinutes( 30 );
+
        	public const int PlayerCap = 30;
 	public const double HoursTilNextGame = 2;
 	public const int ZoneDamageMultiplier = 10;
@@ -48,7 +50,7 @@ namespace Server.BattleRoyale{
 	private static List<Mobile> _AlivePlayers;
 
 	public static List<Mobile> PlayerList {
-	    get { return _Players; };
+	    get { return _Players; }
 	}
 	
 	public static void Initialize() {

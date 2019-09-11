@@ -13,7 +13,7 @@ namespace Server.Regions {
 	    List<Mobile> players = Server.BattleRoyale.GameController.PlayerList;
 
 	    if( players.Contains( m ) ){
-		return TimeSpan.FromMinutes( 30 );
+		return Server.BattleRoyale.GameController.LogoutDelay;
 	    }
 
 	    return base.GetLogoutDelay( m );
