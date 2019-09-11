@@ -79,8 +79,13 @@ namespace Server.BattleRoyale{
 		return;
 	    }
 	    else {
-		e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
-		e.Mobile.MoveToWorld(GameController.EscapeLoc, _Map);
+		if( _Players.Contains( e.Mobile ) ){
+		    e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
+		    e.Mobile.MoveToWorld(GameController.EscapeLoc, _Map);
+		}
+		else{
+		    e.Mobile.SendMessage("Only dead Battle Royale players may use this command.  If your character is physically stuck, page the server staff.");
+		}
 		return;
 	    }
 	}
