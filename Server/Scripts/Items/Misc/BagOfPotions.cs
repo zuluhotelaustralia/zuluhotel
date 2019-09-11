@@ -13,7 +13,7 @@ namespace Server.Items
 	    DropItem( new GreaterHealPotion() );
 	    DropItem( new GreaterHealPotion() );
 	    DropItem( new GreaterCurePotion() );
-	    DropItem( new GreaterStrenghPotion() );
+	    DropItem( new GreaterStrengthPotion() );
 	    DropItem( new GreaterAgilityPotion() );
 	    DropItem( new GreaterExplosionPotion() );
 	    DropItem( new TotalRefreshPotion() );
