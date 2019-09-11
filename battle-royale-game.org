@@ -1,6 +1,6 @@
 #+startup: align showall
 
-* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [11/13]
+* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [13/19]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -12,9 +12,9 @@
 ** DONE spawn loot in boxes everywhere
 ** TODO clean up console/debug spam
 ** TODO rationalize announcements
-** TODO adjust idletimer when you log out so that if you're anywhere in moonglow you'll stay for like half an hour.
+** DONE adjust idletimer when you log out so that if you're anywhere in moonglow you'll stay for like half an hour.
 ** TODO move stuff to the stone so you can inspect it with [props
-** TODO make escape command only work if you're in _PLayers
+** DONE make escape command only work if you're in _PLayers
 ** TODO balance the loot for other classes
 ** TODO make "bag of potions" item -> spawn it
 ** TODO ELO ratings -> clickable leaderboard
