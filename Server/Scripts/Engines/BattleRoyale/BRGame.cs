@@ -47,6 +47,10 @@ namespace Server.BattleRoyale{
 	private static List<Mobile> _Players;
 	private static List<Mobile> _AlivePlayers;
 
+	public static List<Mobile> PlayerList {
+	    get { return _Players; };
+	}
+	
 	public static void Initialize() {
 
 	    //all commands go here, no more splitting it up between several files.
