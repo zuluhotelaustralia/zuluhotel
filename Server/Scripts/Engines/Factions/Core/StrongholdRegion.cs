@@ -28,9 +28,16 @@ namespace Server.Factions
 			if ( !base.OnMoveInto( m, d, newLocation, oldLocation ) )
 				return false;
 
-			if ( m.AccessLevel >= AccessLevel.Counselor || Contains( oldLocation ) )
+                        //TODO(Daleron): This prevents people from
+                        //entering the council of mages during
+                        //BattleRoyale.  So we will just short circuit
+                        //this logic and return true.
+                        return true;
+
+                        if ( m.AccessLevel >= AccessLevel.Counselor || Contains( oldLocation ) )
 				return true;
-			
+
+
 			if ( m is PlayerMobile ) {
 				PlayerMobile pm = (PlayerMobile)m;
 
