@@ -119,7 +119,14 @@ namespace Server.Mobiles{
 	public override void Deserialize( GenericReader reader ) {
 	    base.Deserialize( reader );
 
-	    int version = reader.ReadInt();
+	    int version;
+	    
+	    try{
+		version = reader.ReadInt();
+	    }
+	    catch{
+		version = 1;
+	    }
 
 	    switch( version ){
 		case 0:
