@@ -121,16 +121,9 @@ namespace Server.Mobiles{
 
 	    int version;
 	    
-	    try{
-		version = reader.ReadInt();
-	    }
-	    catch{
-		version = 1;
-	    }
+            version = reader.ReadInt();
 
 	    switch( version ){
-		case 0:
-		    break;
 		case 1:
 		    HomeRange = 1;
 		    break;
