@@ -110,10 +110,28 @@ namespace Server.Mobiles{
 
 	public override void Serialize( GenericWriter writer ) {
 	    base.Serialize( writer );
+
+	    int version = 1;
+	    
+	    writer.Write( version );
 	}
 
 	public override void Deserialize( GenericReader reader ) {
 	    base.Deserialize( reader );
+
+	    int version = reader.ReadInt();
+
+	    switch( version ){
+		case 0:
+		    break;
+		case 1:
+		    HomeRange = 1;
+		    break;
+		default:
+		    HomeRange = 1;
+		    break;
+	    }
+	       
 	}
 
 	public override void OnDoubleClick( Mobile from ){
