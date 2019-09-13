@@ -235,7 +235,6 @@ namespace Server.BattleRoyale{
 	    Mobile pm = a.Mobile as Mobile;
 	    pm.OnDeathEvent -= OnPlayerDeath;
 	    _AlivePlayers.Remove(pm);
-	    _Players.Remove(pm);
 	    pm.SendMessage("You have died during Battle Royale.  You can continue to observe as a ghost.  Use the Escape command to leave the arena.");
 
 	    foreach( Mobile player in _AlivePlayers ){
@@ -257,12 +256,12 @@ namespace Server.BattleRoyale{
 
             foreach ( Mobile m in _Players ) {
                 m.OnDeathEvent -= OnPlayerDeath;
+		m.MoveToWorld(EscapeLoc, Map.Felucca)
             }
             
 	    _Players.Clear();
 	    _AlivePlayers.Clear();
-
-	    victor.MoveToWorld(EscapeLoc, Map.Felucca);
+	    ClearZone();
 
 	    //set a timer for next game opening
 	    GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
