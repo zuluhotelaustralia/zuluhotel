@@ -34,6 +34,17 @@ Crash: Generating report...done
 Crash: Backing up...done
 This exception is fatal, press return to exit
 #+end_quote
-** So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
+** DONE So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
    get_PhysicalResistance calls GetProtOffset(), GetResourceAttrs().ArmorPhysicalResist
    GetResourceAttrs calls into CraftResources.GetInfo, looks like this is it
+
+** DONE dont allow mark/recall/gate in moonglow/council of mages
+
+** DONE allow casing in council of mages
+   UNABLE TO DUPLICATE
+
+** DONE clean up zone after endgame
+
+** TODO daleron don't let zone markers get worldsaved
+
+** TODO can't [escape properly
