@@ -256,7 +256,7 @@ namespace Server.BattleRoyale{
 
             foreach ( Mobile m in _Players ) {
                 m.OnDeathEvent -= OnPlayerDeath;
-		m.MoveToWorld(EscapeLoc, Map.Felucca)
+		m.MoveToWorld(EscapeLoc, Map.Felucca);
             }
             
 	    _Players.Clear();

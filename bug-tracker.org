@@ -47,4 +47,4 @@ This exception is fatal, press return to exit
 
 ** TODO daleron don't let zone markers get worldsaved
 
-** TODO can't [escape properly
+** DONE can't [escape properly
