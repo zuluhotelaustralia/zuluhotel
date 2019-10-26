@@ -1,6 +1,6 @@
 #+startup: align showall
 
-* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [14/19]
+* TODO make a battle-royale minigame a la pubg for beta players to have fun pvping [15/19]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive
 :END:
@@ -16,7 +16,7 @@
 ** TODO move stuff to the stone so you can inspect it with [props
 ** DONE make escape command only work if you're in _PLayers
 ** DONE balance the loot for other classes
-** TODO make "bag of potions" item -> spawn it
+** DONE make "bag of potions" item -> spawn it
 ** TODO ELO ratings -> clickable leaderboard
 ** DONE logic to reduce boundaries on a schedule and actually spawn e.g. paralyze fields to denote blue circle
 ** DONE logic to end game when one is alive, either kill winner or let them leave with their gear

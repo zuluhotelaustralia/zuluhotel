@@ -149,6 +149,11 @@ namespace Server.BattleRoyale{
 	    _debug = reader.ReadBool();
 	}
 
+	public int ComputeEloRating( PlayerMoble pm ){
+	    int currentRating = pm.BattleRoyaleRating;
+	    
+	}
+	
 	public override void OnDoubleClick( Mobile mob ){
 	    Mobile from = mob as Mobile;
 
