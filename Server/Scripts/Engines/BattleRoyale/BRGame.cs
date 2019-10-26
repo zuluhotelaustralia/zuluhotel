@@ -186,7 +186,7 @@ namespace Server.BattleRoyale{
 	public static void BeginJoining() {
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
-		Announce("Battle Royale is now open for joining!  Game starts in 10 minutes!");
+		World.Broadcast(0x59, true, "Battle Royale is now open for joining!  Game starts in 10 minutes!");
 
 		TimeSpan ts;
 		
