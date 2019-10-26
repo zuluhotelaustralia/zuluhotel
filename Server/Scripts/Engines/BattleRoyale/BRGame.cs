@@ -29,6 +29,7 @@ namespace Server.BattleRoyale{
 	public static TimeSpan LogoutDelay = TimeSpan.FromMinutes( 30 );
 
        	public const int PlayerCap = 30;
+	public const int MinPlayers = 4;
 	public const double HoursTilNextGame = 2;
 	public const int ZoneDamageMultiplier = 10;
 	public const int ZoneDamageInterval = 5;
@@ -173,6 +174,8 @@ namespace Server.BattleRoyale{
 	}
 
 	public static void Announce( String s ){
+
+	    
 	    foreach( PlayerMobile p in _Players ){
 		p.SendMessage( s );
 		// later, change this to broadcast via the Town Criers TODO
@@ -207,7 +210,7 @@ namespace Server.BattleRoyale{
 		Announce("End Joining");
 	    }
 
-	    if( _Players.Count < 2 ) {
+	    if( _Players.Count < MinPlayers ) {
 		Announce("Not enough players have joined the game.  Queue will open again in 1 hour.");
 		_state = BattleState.Idle;
 		_Players.Clear();
