@@ -29,7 +29,7 @@ namespace Server.BattleRoyale{
 	public static TimeSpan LogoutDelay = TimeSpan.FromMinutes( 30 );
 
        	public const int PlayerCap = 30;
-	public const int MinPlayers = 4;
+	public const int MinPlayers = 2;
 	public const double HoursTilNextGame = 2;
 	public const int ZoneDamageMultiplier = 10;
 	public const int ZoneDamageInterval = 5;
