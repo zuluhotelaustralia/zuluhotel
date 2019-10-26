@@ -217,6 +217,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO hides
 ** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
+** TODO check SpellHelper.CheckTravel for beta remnants
 ** DONE antimacro code [8/8]
 :PROPERTIES:
 :COOKIE_DATA: todo recursive

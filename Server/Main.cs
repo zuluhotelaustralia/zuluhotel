@@ -462,6 +462,7 @@ namespace Server
 	    Console.WriteLine("RunZH v{0}.{1}.{2}", ver.Major, ver.Minor, ver.Build);
 	    Console.WriteLine("http://zuluhotel.ca/ - Make Ultima Online Great again.");
 	    //Console.WriteLine("Core: Running on {0}", Microsoft.Extensions.PlatformAbstractions.PlatformServices.D‌​efault.Application.R‌​untimeFramework.Vers‌​ion);
+	    Console.WriteLine("Core: Running on environment v.{0}", Environment.Version );
 
 	    string s = Arguments;
 
