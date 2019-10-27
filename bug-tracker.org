@@ -48,3 +48,21 @@ This exception is fatal, press return to exit
 ** TODO daleron don't let zone markers get worldsaved
 
 ** DONE can't [escape properly
+
+** DONE Crafting skill gains
+   Verify the boost in smithy shop
+
+** TODO Can only sell iron ore to vendor
+   Do we care?  You can sell colours items, but they sell for the same
+   price as iron
+
+** DONE Mining action timer
+
+** TODO coloured ore AR rating
+   Verify this scales how we want it
+
+** TODO Material Special Property (ex silver vs undead).
+   Should silver weapons do bonus against undead?  I think we're
+   missing special properties of all ores.
+
+** DONE Crafting region near newbie dungeon
