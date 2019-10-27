@@ -9,7 +9,7 @@ namespace Server
     {
 	public const int DayLevel = 0;
 	public const int NightLevel = 12;
-	public const int DungeonLevel = 26;
+	public const int DungeonLevel = 18;
 	public const int JailLevel = 9;
 
 	private static int m_LevelOverride = int.MinValue;
