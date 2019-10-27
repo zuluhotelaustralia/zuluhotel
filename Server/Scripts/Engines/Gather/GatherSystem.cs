@@ -182,8 +182,7 @@ namespace Server.Engines.Gather {
 	public abstract void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked );
 
 	public void OnConcurrentGather( Mobile from, Item tool, object targeted ) {
-	    Console.WriteLine("FIXME:  OnConcurrentGather");
-	    //l33t code goes here yo
+	    from.SendLocalizedMessage( 500119 ); //you must wait to perform another action
 	}
 
 	// also make sure they haven't moved, aren't dead, etc.
