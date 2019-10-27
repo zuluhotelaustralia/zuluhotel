@@ -78,16 +78,19 @@ namespace Server.Engines.Gather {
 	}
 
 	public override void StartGatherTimer( Mobile from, Item tool, GatherSystem system, GatherNode node, object targeted, object locked ) {
-	    TimeSpan delay = m_EffectsHolder.EffectDelay;
-	    int which = TimeSpan.Compare(m_EffectsHolder.EffectDelay, m_EffectsHolder.EffectSoundDelay);
-	    // if which == -1, argument 1 shorter than arg2
-	    // if which == 0, they're equal
-	    // if which == 1, arg1 longer than arg2
-	    // therefore
+	    //TimeSpan delay = m_EffectsHolder.EffectDelay;
+
+	    TimeSpan delay = TimeSpan.FromSeconds( 4.0 );
+
+	    // int which = TimeSpan.Compare(m_EffectsHolder.EffectDelay, m_EffectsHolder.EffectSoundDelay);
+	    // // if which == -1, argument 1 shorter than arg2
+	    // // if which == 0, they're equal
+	    // // if which == 1, arg1 longer than arg2
+	    // // therefore
 	    
-	    if ( which < 1 ) {
-		delay = m_EffectsHolder.EffectSoundDelay;
-	    }
+	    // if ( which < 1 ) {
+	    // 	delay = m_EffectsHolder.EffectSoundDelay;
+	    // }
 	    
 	    new GatherTimer( from, tool, system, node, targeted, locked, delay ).Start();
 	}
