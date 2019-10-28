@@ -55,6 +55,7 @@ This exception is fatal, press return to exit
 ** TODO Can only sell iron ore to vendor
    Do we care?  You can sell colours items, but they sell for the same
    price as iron
+   I don't care about price deltas but they should accept coloured ore
 
 ** DONE Mining action timer
 
@@ -67,4 +68,4 @@ This exception is fatal, press return to exit
 
 ** DONE Crafting region near newbie dungeon
 
-** TODO console spam from crafting
+** DONE console spam from crafting
