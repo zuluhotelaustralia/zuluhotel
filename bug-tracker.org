@@ -52,7 +52,7 @@ This exception is fatal, press return to exit
 ** DONE Crafting skill gains
    Verify the boost in smithy shop
 
-** TODO Can only sell iron ore to vendor
+** DONE Can only sell iron ore to vendor
    Do we care?  You can sell colours items, but they sell for the same
    price as iron
    I don't care about price deltas but they should accept coloured ore
@@ -69,3 +69,5 @@ This exception is fatal, press return to exit
 ** DONE Crafting region near newbie dungeon
 
 ** DONE console spam from crafting
+
+** TODO make a command list, unless perhaps [help works 
