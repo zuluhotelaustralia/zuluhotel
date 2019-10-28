@@ -21,40 +21,6 @@ namespace Server.Mobiles
 			public InternalBuyInfo() 
 			{ 	
 				Add( new GenericBuyInfo( typeof( IronIngot ), 5, 16, 0x1BF2, 0 ) );
-				Add( new GenericBuyInfo( typeof( GoldIngot ), 5, 20, 0x1BF2, 2793 ) );
-				Add( new GenericBuyInfo( typeof( SpikeIngot ), 5, 20, 0x1BF2, 0x4c7 ) );
-				Add( new GenericBuyInfo( typeof( FruityIngot ), 5, 20, 0x1BF2, 0x46e ) );
-				Add( new GenericBuyInfo( typeof( BronzeIngot ), 5, 20, 0x1BF2, 0x45e ) );
-				Add( new GenericBuyInfo( typeof( IceRockIngot ), 5, 20, 0x1BF2, 0x480 ) );
-				Add( new GenericBuyInfo( typeof( BlackDwarfIngot ), 5, 20, 0x1BF2, 0x451 ) );
-				Add( new GenericBuyInfo( typeof( DullCopperIngot ), 5, 20, 0x1BF2, 0x3ea ) );
-				Add( new GenericBuyInfo( typeof( PlatinumIngot ), 5, 20, 0x1BF2, 0x457 ) );
-				Add( new GenericBuyInfo( typeof( SilverRockIngot ), 5, 20, 0x1BF2, 0x3e9 ) );
-				Add( new GenericBuyInfo( typeof( DarkPaganIngot ), 5, 20, 0x1BF2, 0x46b ) );
-				Add( new GenericBuyInfo( typeof( CopperIngot ), 5, 20, 0x1BF2, 0x602 ) );
-				Add( new GenericBuyInfo( typeof( MysticIngot ), 5, 20, 0x1BF2, 0x17f ) );
-				Add( new GenericBuyInfo( typeof( SpectralIngot ), 5, 20, 0x1BF2, 2744 ) );
-				Add( new GenericBuyInfo( typeof( OldBritainIngot ), 5, 20, 0x1BF2, 0x852 ) );
-				Add( new GenericBuyInfo( typeof( OnyxIngot ), 5, 20, 0x1BF2, 0x455 ) );
-				Add( new GenericBuyInfo( typeof( RedElvenIngot ), 5, 20, 0x1BF2, 0x4b9 ) );
-				Add( new GenericBuyInfo( typeof( UndeadIngot ), 5, 20, 0x1BF2, 0x279 ) );
-				Add( new GenericBuyInfo( typeof( PyriteIngot ), 5, 20, 0x1BF2, 0x6b8 ) );
-				Add( new GenericBuyInfo( typeof( VirginityIngot ), 5, 20, 0x1BF2, 0x482 ) );
-				Add( new GenericBuyInfo( typeof( MalachiteIngot ), 5, 20, 0x1BF2, 2748 ) );
-				Add( new GenericBuyInfo( typeof( LavarockIngot ), 5, 20, 0x1BF2, 2747 ) );
-				Add( new GenericBuyInfo( typeof( AzuriteIngot ), 5, 20, 0x1BF2, 0x4df ) );
-				Add( new GenericBuyInfo( typeof( DripstoneIngot ), 5, 20, 0x1BF2, 2771 ) );
-				Add( new GenericBuyInfo( typeof( ExecutorIngot ), 5, 20, 0x1BF2, 2766 ) );
-				Add( new GenericBuyInfo( typeof( PeachblueIngot ), 5, 20, 0x1BF2, 2769 ) );
-				Add( new GenericBuyInfo( typeof( DestructionIngot ), 5, 20, 0x1BF2, 2773 ) );
-				Add( new GenericBuyInfo( typeof( AnraIngot ), 5, 20, 0x1BF2, 0x48b ) );
-				Add( new GenericBuyInfo( typeof( CrystalIngot ), 5, 20, 0x1BF2, 2759 ) );
-				Add( new GenericBuyInfo( typeof( DoomIngot ), 5, 20, 0x1BF2, 2772 ) );
-				Add( new GenericBuyInfo( typeof( GoddessIngot ), 5, 20, 0x1BF2, 2774 ) );
-				Add( new GenericBuyInfo( typeof( NewZuluIngot ), 5, 20, 0x1BF2, 2749 ) );
-				Add( new GenericBuyInfo( typeof( DarkSableRubyIngot ), 5, 20, 0x1BF2, 2760 ) );
-				Add( new GenericBuyInfo( typeof( EbonTwilightSapphireIngot ), 5, 20, 0x1BF2, 2761 ) );
-				Add( new GenericBuyInfo( typeof( RadiantNimbusDiamondIngot ), 5, 20, 0x1BF2, 2765 ) );
 				
 				Add( new GenericBuyInfo( typeof( Tongs ), 13, 14, 0xFBB, 0 ) ); 
  
@@ -158,8 +124,43 @@ namespace Server.Mobiles
 			public InternalSellInfo() 
 			{ 
 				Add( typeof( Tongs ), 7 ); 
-				Add( typeof( IronIngot ), 4 ); 
+				Add( typeof( IronIngot ), 4 );
+				Add( typeof( GoldIngot ), 4 );
+				Add( typeof( SpikeIngot ), 4 );
+				Add( typeof( FruityIngot ), 4 );
+				Add( typeof( BronzeIngot ), 4 );
+				Add( typeof( IceRockIngot ), 4 );
+				Add( typeof( BlackDwarfIngot ), 4 );
+				Add( typeof( DullCopperIngot ), 4 );
+				Add( typeof( PlatinumIngot ), 4 );
+				Add( typeof( SilverRockIngot ), 4 );
+				Add( typeof( DarkPaganIngot ), 4 );
+				Add( typeof( CopperIngot ), 4 );
+				Add( typeof( MysticIngot ), 4 );
+				Add( typeof( SpectralIngot ), 4 );
+				Add( typeof( OldBritainIngot ), 4 );
+				Add( typeof( OnyxIngot ), 4 );
+				Add( typeof( RedElvenIngot ), 4 );
+				Add( typeof( UndeadIngot ), 4 );
+				Add( typeof( PyriteIngot ), 4 );
+				Add( typeof( VirginityIngot ), 4 );
+				Add( typeof( MalachiteIngot ), 4 );
+				Add( typeof( LavarockIngot ), 4 );
+				Add( typeof( AzuriteIngot ), 4 );
+				Add( typeof( DripstoneIngot ), 4 );
+				Add( typeof( ExecutorIngot ), 4 );
+				Add( typeof( PeachblueIngot ), 4 );
+				Add( typeof( DestructionIngot ), 4 );
+				Add( typeof( AnraIngot ), 4 );
+				Add( typeof( CrystalIngot ), 4 );
+				Add( typeof( DoomIngot ), 4 );
+				Add( typeof( GoddessIngot ), 4 );
+				Add( typeof( NewZuluIngot ), 4 );
+				Add( typeof( DarkSableRubyIngot ), 4 );
+				Add( typeof( EbonTwilightSapphireIngot ), 4 );
+				Add( typeof( RadiantNimbusDiamondIngot ), 4 );
 
+				
 				Add( typeof( Buckler ), 25 );
 				Add( typeof( BronzeShield ), 33 );
 				Add( typeof( MetalShield ), 60 );
