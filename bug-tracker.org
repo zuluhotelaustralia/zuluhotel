@@ -66,3 +66,5 @@ This exception is fatal, press return to exit
    missing special properties of all ores.
 
 ** DONE Crafting region near newbie dungeon
+
+** TODO console spam from crafting
