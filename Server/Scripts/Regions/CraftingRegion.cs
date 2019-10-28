@@ -20,6 +20,7 @@ namespace Server.Regions {
 		//skill.SkillName == SkillName.Lumberjacking ||
 		skill.SkillName == SkillName.ArmsLore ||
 		skill.SkillName == SkillName.ItemID ||
+		skill.SkillName == SkillName.Inscribe ||
 		skill.SkillName == SkillName.Cooking) {
 		return 0.1;
 	    }
