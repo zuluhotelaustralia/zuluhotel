@@ -68,6 +68,9 @@ namespace Server.BattleRoyale{
 
             // Delete any zone walls that were persisted in the world save
             ClearZone();
+
+	    GameTimer gt = new GameTimer( TimeSpan.FromHours(1.0), BeginJoining );
+	    gt.Start();
 	}
 
         public static void StartBRGame_OnCommand( CommandEventArgs e ) {

@@ -66,3 +66,15 @@ This exception is fatal, press return to exit
    missing special properties of all ores.
 
 ** DONE Crafting region near newbie dungeon
+
+** TODO battle royale should report when it will start next
+
+** assess weight of smith hammer
+
+** should bards have pvp damage ability
+
+** console spam in crafting
+
+** increase range on spears/polearms
+
+** increase restock of vendors
