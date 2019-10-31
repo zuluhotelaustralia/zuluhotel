@@ -3439,7 +3439,6 @@ namespace Server.Items
             if ( resourceType == null )
                 resourceType = craftItem.Resources.GetAt( 0 ).ItemType;
 
-	    Console.WriteLine("Calling BaseWeapon.OnCraft() with argument {0}", resourceType.ToString() );
             Resource = CraftResources.GetFromType( resourceType );
 
             if ( Core.AOS )

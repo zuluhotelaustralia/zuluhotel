@@ -23,6 +23,7 @@ namespace Server.Mobiles
 				Add( new GenericBuyInfo( typeof( Nails ), 3, 20, 0x102E, 0 ) );
 				Add( new GenericBuyInfo( typeof( Axle ), 2, 20, 0x105B, 0 ) );
 				Add( new GenericBuyInfo( typeof( Board ), 3, 20, 0x1BD7, 0 ) );
+								
 				Add( new GenericBuyInfo( typeof( DrawKnife ), 10, 20, 0x10E4, 0 ) );
 				Add( new GenericBuyInfo( typeof( Froe ), 10, 20, 0x10E5, 0 ) );
 				Add( new GenericBuyInfo( typeof( Scorp ), 10, 20, 0x10E7, 0 ) );
@@ -76,6 +77,30 @@ namespace Server.Mobiles
 				Add( typeof( MouldingPlane ), 6 );
 				Add( typeof( DovetailSaw ), 7 );
 				Add( typeof( Board ), 2 );
+				Add( typeof( PinetreeBoard ), 3 );
+				Add( typeof( CherryBoard ), 3 );
+				Add( typeof( OakBoard ), 3 );
+				Add( typeof( PurplePassionBoard ), 3 );
+				Add( typeof( GoldenReflectionBoard ), 3 );
+				Add( typeof( HardrangerBoard ), 3 );
+				Add( typeof( JadewoodBoard ), 3 );
+				Add( typeof( DarkwoodBoard ), 3 );
+				Add( typeof( StonewoodBoard ), 3 );
+				Add( typeof( SunwoodBoard ), 3 );
+				Add( typeof( GauntletBoard ), 3 );
+				Add( typeof( SwampwoodBoard ), 3 );
+				Add( typeof( StardustBoard ), 3 );
+				Add( typeof( SilverleafBoard ), 3 );
+				Add( typeof( StormtealBoard ), 3 );
+				Add( typeof( EmeraldwoodBoard ), 3 );
+				Add( typeof( BloodwoodBoard ), 3 );
+				Add( typeof( CrystalwoodBoard ), 3 );
+				Add( typeof( BloodhorseBoard ), 3 );
+				Add( typeof( DoomwoodBoard ), 3 );
+				Add( typeof( ZuluBoard ), 3 );
+				Add( typeof( DarknessBoard ), 3 );
+				Add( typeof( ElvenBoard ), 3 );
+				
 				Add( typeof( Axle ), 1 );
 
 				Add( typeof( Club ), 13 );
@@ -86,6 +111,7 @@ namespace Server.Mobiles
 				Add( typeof( Drums ), 10 );
 
 				Add( typeof( Log ), 1 );
+				
 			}
 		}
 	}
