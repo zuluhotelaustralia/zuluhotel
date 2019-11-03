@@ -82,3 +82,12 @@ This exception is fatal, press return to exit
 
 ** TODO make a command list, unless perhaps [help works 
 
+** TODO add spam to see where you should go in BR
+
+** TODO add a sellall command
+
+** TODO battle royale timers and chat spam need sanity checks
+
+** TODO make skillgain high in moonglow
+
+** TODO make items spawn identified in battleroyale
