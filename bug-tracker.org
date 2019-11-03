@@ -68,15 +68,15 @@ This exception is fatal, press return to exit
 
 ** DONE Crafting region near newbie dungeon
 
-** TODO battle royale should report when it will start next
+** DONE battle royale should report when it will start next
 
-** assess weight of smith hammer
+** DONE assess weight of smith hammer
 
-** should bards have pvp damage ability
+** TODO should bards have pvp damage ability
 
-** increase range on spears/polearms
+** TODO increase range on spears/polearms
 
-** increase restock of vendors
+** TODO increase restock of vendors
 
 ** DONE console spam from crafting
 
@@ -94,4 +94,4 @@ This exception is fatal, press return to exit
 
 ** TODO lumberjacking
 
-** TODO arms lore only goes to 100
+** DONE arms lore only goes to 100
