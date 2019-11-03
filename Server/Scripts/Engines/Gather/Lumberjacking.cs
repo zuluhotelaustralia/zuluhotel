@@ -228,17 +228,20 @@ namespace Server.Engines.Gather {
 		m_EffectsHolder.PlayEffects(from, loc);
 		base.StartGathering( from, tool, targeted );
 	    }
-	    OnBadGatherTarget(from, tool, targeted);
+	    else {
+		OnBadGatherTarget(from, tool, targeted);
+	    }
 	}
 
 	public void OnBadGatherTarget( Mobile from, Item tool, object toHarvest )
 	{
-	    if ( toHarvest is LandTarget )
+	    if ( toHarvest is LandTarget ){
 		from.SendLocalizedMessage( 500488 ); // There's not enough wood here to harvest.
-	    else
+	    }
+	    else {
 		from.SendLocalizedMessage( 500489 ); // You can't use an axe on that.
+	    }
 
-	    //THe ELSE triggers on trees, gotta fix this
 	}
 
 	public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
