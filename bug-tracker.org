@@ -82,7 +82,7 @@ This exception is fatal, press return to exit
 
 ** TODO make a command list, unless perhaps [help works 
 
-** TODO add spam to see where you should go in BR
+** DONE add spam to see where you should go in BR
 
 ** TODO add a sellall command
 
@@ -91,3 +91,7 @@ This exception is fatal, press return to exit
 ** TODO make skillgain high in moonglow
 
 ** TODO make items spawn identified in battleroyale
+
+** TODO lumberjacking
+
+** TODO arms lore only goes to 100

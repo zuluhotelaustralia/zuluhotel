@@ -25,12 +25,12 @@ namespace Server.BattleRoyale{
 	}
        
 	private static BattleState _state = BattleState.Idle;
+	private static DateTime _NextGameStarts;
 
 	public static TimeSpan LogoutDelay = TimeSpan.FromMinutes( 30 );
 
        	public const int PlayerCap = 30;
 	public const int MinPlayers = 2;
-	public const double HoursTilNextGame = 2;
 	public const int ZoneDamageMultiplier = 10;
 	public const int ZoneDamageInterval = 5;
 	
@@ -69,8 +69,7 @@ namespace Server.BattleRoyale{
             // Delete any zone walls that were persisted in the world save
             ClearZone();
 
-//	    GameTimer gt = new GameTimer( TimeSpan.FromHours(1.0), BeginJoining );
-//	    gt.Start();
+	    _NextGameStarts = DateTime.Now + TimeSpan.FromMinutes(15.0);
 	}
 
         public static void StartBRGame_OnCommand( CommandEventArgs e ) {
@@ -166,7 +165,7 @@ namespace Server.BattleRoyale{
 		    }
 		}
 		else {
-		    from.SendMessage("The game queue is not currently accepting new players; please try again later." );
+		    from.SendMessage("The game queue is not currently accepting new players; please try again at {0}.", _NextGameStarts );
 		    return;
 		}
 	    }
@@ -188,7 +187,19 @@ namespace Server.BattleRoyale{
 		}
 	    }
 	}
-	
+
+	public static void DecideToStart() {
+	    if( DateTime.Compare( _NextGameStarts, DateTime.Now ) <= 0 ){
+		//nextgame starts is in the past
+		BeginJoining();
+	    }
+	    else{
+		GameTimer nextgame = new GameTimer( TimeSpan.FromMinutes(5), BeginJoining );
+		nextgame.Start();
+		Announce("Next Battle Royale starts accepting registrations in 5 minutes!");
+	    }
+	}
+       	
 	public static void BeginJoining() {
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
@@ -217,9 +228,8 @@ namespace Server.BattleRoyale{
 		Announce("Not enough players have joined the game.  Queue will open again later.");
 		_state = BattleState.Idle;
 		_Players.Clear();
-		GameTimer nextgame = new GameTimer( TimeSpan.FromMinutes(5), BeginJoining );
-		nextgame.Start();
-		
+		//make it datetime based so that we can have the stone report when the next game will start
+		DecideToStart();
 		return;
 	    }
 	    
@@ -304,7 +314,7 @@ namespace Server.BattleRoyale{
 	    
 	//check if every alive player is in the zone and if not, damage them
 	private static void ProcZoneDamage(){
-            List<Mobile> toSlap = new List<Mobile>();
+	    List<Mobile> toSlap = new List<Mobile>();
             
 	    foreach( Mobile pm in _AlivePlayers ){
 		if( !_CurrentZone.Contains( pm.Location )) {
@@ -314,7 +324,8 @@ namespace Server.BattleRoyale{
 
             foreach( Mobile pm in toSlap ) {
                 Slap(pm);
-                pm.SendMessage("The acid rain outside the magic safe zone damages you!"); //TODO cliloc this
+		Point2D loc2d = new Point2D( pm.X, pm.Y );
+                pm.SendMessage("The acid rain outside the magic safe zone damages you, and you feel the urge to go {0}!", Utility.GetDirection( loc2d, _ZoneCenter ).ToString() ); //TODO cliloc this
 	    }
 	}
 
