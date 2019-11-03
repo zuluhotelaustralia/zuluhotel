@@ -140,10 +140,7 @@ namespace Server.Antimacro
 	
 	public void SendChallenge() {
 	    //entrypoint, sorta
-	    if( m_SystemEnabled == true ){
-		return;
-	    }
-	    //Console.WriteLine("Sending anti-afk challenge...");
+
 	    m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
 	    m_Timer.Start();
 	}
