@@ -88,9 +88,9 @@ This exception is fatal, press return to exit
 
 ** TODO battle royale timers and chat spam need sanity checks
 
-** TODO make skillgain high in moonglow
+** DONE make skillgain high in moonglow
 
-** TODO make items spawn identified in battleroyale
+** DONE make items spawn identified in battleroyale
 
 ** TODO lumberjacking
 
