@@ -4,19 +4,12 @@
 This is a list of bugs.
 * DONE "You need ~MANA REQUIREMENT~ mana to cast this spell"
 ** I.e. the fucking cliloc message is displayed without substitution
-
 * DONE gather nodes won't drift into the dungeon regions but they should
-
 * TODO items (weapons) not displaying name properly (looted magic weapons)
-
 * DONE weapons not taking material properly
-
 * DONE wraith form still ticks after you die
-
 * DONE wraith form takes forever to tick
-
 * DONE Example:  Shepherd's Crook [ Exceptional / Bloodhorse ] shows incorrect cliloc string (1160518 instead of ???)
-
 * DONE Unequipping certain items crashes server:
 #+begin_quote
   Error:
@@ -34,64 +27,40 @@ Crash: Generating report...done
 Crash: Backing up...done
 This exception is fatal, press return to exit
 #+end_quote
-** DONE So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
+* DONE So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
    get_PhysicalResistance calls GetProtOffset(), GetResourceAttrs().ArmorPhysicalResist
    GetResourceAttrs calls into CraftResources.GetInfo, looks like this is it
-
-** DONE dont allow mark/recall/gate in moonglow/council of mages
-
-** DONE allow casing in council of mages
+* DONE dont allow mark/recall/gate in moonglow/council of mages
+* DONE allow casing in council of mages
    UNABLE TO DUPLICATE
-
-** DONE clean up zone after endgame
-
-** TODO daleron don't let zone markers get worldsaved
-
-** DONE can't [escape properly
-
-** DONE Crafting skill gains
+* DONE clean up zone after endgame
+* TODO daleron don't let zone markers get worldsaved
+* DONE can't [escape properly
+* DONE Crafting skill gains
    Verify the boost in smithy shop
-
-** DONE Can only sell iron ore to vendor
+* DONE Can only sell iron ore to vendor
    Do we care?  You can sell colours items, but they sell for the same
    price as iron
    I don't care about price deltas but they should accept coloured ore
-
-** DONE Mining action timer
-
-** TODO coloured ore AR rating
+* DONE Mining action timer
+* TODO coloured ore AR rating
    Verify this scales how we want it
-
-** TODO Material Special Property (ex silver vs undead).
+* TODO Material Special Property (ex silver vs undead).
    Should silver weapons do bonus against undead?  I think we're
    missing special properties of all ores.
-
-** DONE Crafting region near newbie dungeon
-
-** DONE battle royale should report when it will start next
-
-** DONE assess weight of smith hammer
-
-** TODO should bards have pvp damage ability
-
-** TODO increase range on spears/polearms
-
-** TODO increase restock of vendors
-
-** DONE console spam from crafting
-
-** TODO make a command list, unless perhaps [help works 
-
-** DONE add spam to see where you should go in BR
-
-** TODO add a sellall command
-
-** TODO battle royale timers and chat spam need sanity checks
-
-** DONE make skillgain high in moonglow
-
-** DONE make items spawn identified in battleroyale
-
-** TODO lumberjacking
-
-** DONE arms lore only goes to 100
+* DONE Crafting region near newbie dungeon
+* DONE battle royale should report when it will start next
+* DONE assess weight of smith hammer
+* TODO should bards have pvp damage ability
+* TODO increase range on spears/polearms
+* TODO increase restock of vendors
+* DONE console spam from crafting
+* TODO make a command list, unless perhaps [help works 
+* DONE add spam to see where you should go in BR
+* TODO add a sellall command
+* TODO battle royale timers and chat spam need sanity checks
+* DONE make skillgain high in moonglow
+* DONE make items spawn identified in battleroyale
+* TODO lumberjacking
+* DONE arms lore only goes to 100
+* TODO upstream has some code that needs tracking manually, some of it can be ignored
