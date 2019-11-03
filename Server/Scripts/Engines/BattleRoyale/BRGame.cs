@@ -69,8 +69,8 @@ namespace Server.BattleRoyale{
             // Delete any zone walls that were persisted in the world save
             ClearZone();
 
-	    GameTimer gt = new GameTimer( TimeSpan.FromHours(1.0), BeginJoining );
-	    gt.Start();
+//	    GameTimer gt = new GameTimer( TimeSpan.FromHours(1.0), BeginJoining );
+//	    gt.Start();
 	}
 
         public static void StartBRGame_OnCommand( CommandEventArgs e ) {
@@ -192,7 +192,7 @@ namespace Server.BattleRoyale{
 	public static void BeginJoining() {
 	    if( _state != BattleState.Joining ){
 		_state = BattleState.Joining;
-		World.Broadcast(0x59, true, "Battle Royale is now open for joining!  Game starts in 10 minutes!");
+		World.Broadcast(0x59, true, "Battle Royale is now open for joining!  Game starts in 5 minutes, be sure to store all your valuables in the bank!");
 
 		TimeSpan ts;
 		
@@ -200,7 +200,7 @@ namespace Server.BattleRoyale{
 		    ts = TimeSpan.FromSeconds(60);
 		}
 		else {
-		    ts = TimeSpan.FromMinutes(10);
+		    ts = TimeSpan.FromMinutes(5);
 		}
 		
 		GameTimer jt = new GameTimer( ts, EndJoining );
@@ -214,10 +214,10 @@ namespace Server.BattleRoyale{
 	    }
 
 	    if( _Players.Count < MinPlayers ) {
-		Announce("Not enough players have joined the game.  Queue will open again in 1 hour.");
+		Announce("Not enough players have joined the game.  Queue will open again later.");
 		_state = BattleState.Idle;
 		_Players.Clear();
-		GameTimer nextgame = new GameTimer( TimeSpan.FromHours(1), BeginJoining );
+		GameTimer nextgame = new GameTimer( TimeSpan.FromMinutes(5), BeginJoining );
 		nextgame.Start();
 		
 		return;
@@ -270,7 +270,7 @@ namespace Server.BattleRoyale{
 	    ClearZone();
 
 	    //set a timer for next game opening
-	    GameTimer nextgame = new GameTimer( TimeSpan.FromHours(HoursTilNextGame), BeginJoining );
+	    GameTimer nextgame = new GameTimer( TimeSpan.FromMinutes(5.0), BeginJoining );
 	    nextgame.Start();
 	}
 
