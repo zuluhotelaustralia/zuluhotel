@@ -199,6 +199,7 @@ namespace Server.Engines.Gather {
 	}
 	
 	public override void StartGathering( Mobile from, Item tool, object targeted ) {
+	    
 	    int tileID = GetTileID( targeted );
 	    Point3D loc;
 	    
@@ -206,14 +207,28 @@ namespace Server.Engines.Gather {
 		loc = new Point3D( from.Location );
 	    }
 	    else {
-		loc = new Point3D( ((LandTarget)targeted).Location );
+		if( targeted is StaticTarget ){
+		    loc = new Point3D( ((StaticTarget)targeted).Location );
+		}
+		else if( targeted is LandTarget ){
+		    loc = new Point3D( ((LandTarget)targeted).Location );
+		}
+		else if( targeted is Static ){
+		    loc = new Point3D( ((Static)targeted).Location );
+		}
+		else {
+		    //this is so fucking dumb, gotta rework this whole thing in the future --sith
+		    loc = new Point3D( from.Location );
+		}
+		      
 	    }
+	    
 
 	    if( Validate( tileID ) ) {
 		m_EffectsHolder.PlayEffects(from, loc);
 		base.StartGathering( from, tool, targeted );
 	    }
-
+	    OnBadGatherTarget(from, tool, targeted);
 	}
 
 	public void OnBadGatherTarget( Mobile from, Item tool, object toHarvest )
@@ -222,6 +237,8 @@ namespace Server.Engines.Gather {
 		from.SendLocalizedMessage( 500488 ); // There's not enough wood here to harvest.
 	    else
 		from.SendLocalizedMessage( 500489 ); // You can't use an axe on that.
+
+	    //THe ELSE triggers on trees, gotta fix this
 	}
 
 	public bool CheckHarvest( Mobile from, Item tool, object toHarvest )
