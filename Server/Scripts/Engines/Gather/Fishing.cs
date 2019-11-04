@@ -60,9 +60,9 @@ namespace Server.Engines.Gather {
 	    }
 
 	    if( Validate( tileID ) ) {
+		base.StartGathering( from, tool, targeted );
 		m_EffectsHolder.PlayEffects( from, loc );
 		new FishingSplashFXTimer(from, m_EffectsHolder, loc).Start();
-		base.StartGathering( from, tool, targeted );
 	    }
 	}
 
