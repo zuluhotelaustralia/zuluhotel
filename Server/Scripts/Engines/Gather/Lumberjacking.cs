@@ -225,8 +225,8 @@ namespace Server.Engines.Gather {
 	    
 
 	    if( Validate( tileID ) ) {
-		m_EffectsHolder.PlayEffects(from, loc);
 		base.StartGathering( from, tool, targeted );
+		m_EffectsHolder.PlayEffects(from, loc);
 	    }
 	    else {
 		OnBadGatherTarget(from, tool, targeted);
