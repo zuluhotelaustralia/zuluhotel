@@ -515,7 +515,7 @@ namespace Server.Engines.Craft
 	    AddSubRes( typeof( CherryLog ), 1160336,   28 , 1072652 );
 	    AddSubRes( typeof( OakLog ), 1160337,   39 , 1072652 );
 	    AddSubRes( typeof( PurplePassionLog ), 1160338,   50 , 1072652 );
-	    AddSubRes( typeof( GoldenReflectionLog ), 1160339,   59 , 1072652 );
+	    AddSubRes( typeof( GoldenReflectionLog ), 1160339,   59 , 1072652 );0
 	    AddSubRes( typeof( HardrangerLog ), 1160340,   65 , 1072652 );
 	    AddSubRes( typeof( JadewoodLog ), 1160341,   68 , 1072652 );
 	    AddSubRes( typeof( DarkwoodLog ), 1160342,   77 , 1072652 );

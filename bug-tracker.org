@@ -62,6 +62,7 @@ This exception is fatal, press return to exit
 * DONE make skillgain high in moonglow
 * DONE make items spawn identified in battleroyale
 * TODO lumberjacking
+  sith sez:  what's the actual bug here?  is it referring to this commit: c47e03384386ecd65c0b2ebf0f7916a741836517 ?
 * DONE arms lore only goes to 100
 * TODO upstream has some code that needs tracking manually, some of it can be ignored
 * TODO up the quantity of reagents/potions on the mage vendor.
