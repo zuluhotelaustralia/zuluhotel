@@ -70,4 +70,5 @@ This exception is fatal, press return to exit
 * TODO monsters return to spawn
   sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
 * TODO Monsters take your shit?
+  sith sez:  see Rummage setting in BaseCreature
 * TODO boats are buggy as fuck (and also are in -> take em out)
