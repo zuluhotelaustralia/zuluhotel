@@ -286,12 +286,15 @@ namespace Server.Engines.Gather
 	    }
 
 	    if( ValidateRock( tileID ) ) {
-		m_EffectsHolder.PlayEffects( from, loc );
 		base.StartGathering( from, tool, targeted );
+		m_EffectsHolder.PlayEffects( from, loc );
 	    }
-	    if( ValidateSand( tileID ) ) {
-		m_EffectsHolder.PlayEffects( from, loc ); //TODO: change these to be appropriate SFX/VFX and cliloc msgs
+	    else if( ValidateSand( tileID ) ) {
 		base.StartGathering( from, tool, targeted, true );
+		m_EffectsHolder.PlayEffects( from, loc ); //TODO: change these to be appropriate SFX/VFX and cliloc msgs
+	    }
+	    else {
+		OnBadGatherTarget( from, tool, targeted );
 	    }
 	}
 

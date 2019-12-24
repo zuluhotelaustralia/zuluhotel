@@ -142,7 +142,9 @@ namespace Server.Engines.Gather {
 		    // e.g. if your trust score is 98% you'll only get a challenge 2% of the time your
 		    // challenge date comes up
 		    if ( Utility.RandomDouble() > acct.TrustScore ) {
-			new AntimacroTransaction(from);
+			if( Server.Antimacro.AntimacroTransaction.Enabled ){
+			    new AntimacroTransaction(from);
+			}
 		    }
 		}		    
 		

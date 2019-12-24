@@ -36,16 +36,16 @@ namespace Server.Mobiles{
 
 	    spawnNames.Clear();
 	    spawnNames.Add("katana");
-	    spawnNames.Add("katana set damagelevel power");
-	    spawnNames.Add("katana set damagelevel force");
+	    spawnNames.Add("katana set damagelevel power set identified true");
+	    spawnNames.Add("katana set damagelevel force set identified true");
 	    spawnNames.Add("warmace");
-	    spawnNames.Add("warmace set damagelevel power");
-	    spawnNames.Add("warmace set damagelevel force");
-	    spawnNames.Add("warmace set damagelevel vanq");
+	    spawnNames.Add("warmace set damagelevel power set identified true");
+	    spawnNames.Add("warmace set damagelevel force set identified true");
+	    spawnNames.Add("warmace set damagelevel vanq set identified true");
 	    spawnNames.Add("kryss");
-	    spawnNames.Add("kryss set damagelevel force");
-	    spawnNames.Add("kryss set damagelevel power");
-	    spawnNames.Add("kryss set damagelevel vanq");
+	    spawnNames.Add("kryss set damagelevel force set identified true");
+	    spawnNames.Add("kryss set damagelevel power set identified true");
+	    spawnNames.Add("kryss set damagelevel vanq set identified true");
 	    spawnNames.Add("bandage 20");
 	    spawnNames.Add("chainchest");
 	    spawnNames.Add("chainlegs");
@@ -69,13 +69,13 @@ namespace Server.Mobiles{
 	    spawnNames.Add("plategorget");
 	    spawnNames.Add("plategloves");
 	    spawnNames.Add("halberd");
-	    spawnNames.Add("halberd set damagelevel force");
-	    spawnNames.Add("halberd set damagelevel power");
-	    spawnNames.Add("halberd set damagelevel vanq");
+	    spawnNames.Add("halberd set damagelevel force set identified true");
+	    spawnNames.Add("halberd set damagelevel power set identified true");
+	    spawnNames.Add("halberd set damagelevel vanq set identified true");
 	    spawnNames.Add("spear");
-	    spawnNames.Add("spear set damagelevel force");
-	    spawnNames.Add("spear set damagelevel power");
-	    spawnNames.Add("spear set damagelevel vanq");
+	    spawnNames.Add("spear set damagelevel force set identified true");
+	    spawnNames.Add("spear set damagelevel power set identified true");
+	    spawnNames.Add("spear set damagelevel vanq set identified true");
 	    spawnNames.Add("closehelm");
 	    spawnNames.Add("bascinet");
 	    spawnNames.Add("bonehelm");
@@ -84,9 +84,9 @@ namespace Server.Mobiles{
 	    spawnNames.Add("bonegloves");
 	    spawnNames.Add("bonelegs");
 	    spawnNames.Add("blackstaff");
-	    spawnNames.Add("blackstaff set damagelevel force");
-	    spawnNames.Add("blackstaff set damagelevel power");
-	    spawnNames.Add("blackstaff set damagelevel vanq");
+	    spawnNames.Add("blackstaff set damagelevel force set identified true");
+	    spawnNames.Add("blackstaff set damagelevel power set identified true");
+	    spawnNames.Add("blackstaff set damagelevel vanq set identified true");
 
 	    for( int i=0; i<30; i++ ){
 		spawnNames.Add("bagofpotions");
@@ -98,9 +98,9 @@ namespace Server.Mobiles{
 
 	    for( int i=0; i<30; i++ ){
 		spawnNames.Add("bow");
-		spawnNames.Add("bow set damagelevel force");
-		spawnNames.Add("bow set damagelevel power");
-		spawnNames.Add("bow set damagelevel vanq");
+		spawnNames.Add("bow set damagelevel force set identified true");
+		spawnNames.Add("bow set damagelevel power set identified true");
+		spawnNames.Add("bow set damagelevel vanq set identified true");
 		spawnNames.Add("arrow 60");
 	    }
 		

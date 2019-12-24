@@ -61,12 +61,16 @@ namespace Server.Antimacro
 		    m_Subject.SendMessage("You failed the test and will be disconnected.");
 		    m_Timer.Stop();
 		    MutateTrustScore( false );
-		    m_Subject.NetState.Dispose();
+		    if( m_Subject.NetState != null ){
+			m_Subject.NetState.Dispose();
+		    }
 		    break;
 		case ResponseType.TimeOut:
 		    m_Subject.SendMessage("You failed to respond to the Anti-AFK Gathering test in time and will be disconnected.");
 		    MutateTrustScore( false );
-		    m_Subject.NetState.Dispose(); //kick
+		    if( m_Subject.NetState != null ){
+			m_Subject.NetState.Dispose(); //kick
+		    }
 		    break;
 		case ResponseType.GoodMath:
 		    m_Subject.SendMessage( "Thank you.  Your presence at the keyboard has been recorded and we apologize for the inconvenience." );
@@ -136,10 +140,7 @@ namespace Server.Antimacro
 	
 	public void SendChallenge() {
 	    //entrypoint, sorta
-	    if( m_SystemEnabled == true ){
-		return;
-	    }
-	    //Console.WriteLine("Sending anti-afk challenge...");
+
 	    m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
 	    m_Timer.Start();
 	}
