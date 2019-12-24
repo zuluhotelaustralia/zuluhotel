@@ -68,3 +68,4 @@ This exception is fatal, press return to exit
 * TODO Range of spear/polearms
 * TODO monsters return to spawn
 * TODO Monsters take your shit?
+* TODO boats are buggy as fuck (and also are in -> take em out)
