@@ -148,7 +148,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [24/26]
+* TODO final sanity-checks [25/26]
 :properties:
 :cookie_data: todo_recursive
 :end:
@@ -176,7 +176,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE and the books for earth and necro
 ** TODO playtest gathering to ensure it's actually within the realm of viable
 ** DONE check Beta Invite System start locations, etc.  Make a "lobby" start loc
-** TODO playtest Battle Royalebat
+** DONE playtest Battle Royalebat
 ** DONE looks like there's a bug in the lumberjacking gump to do with categorizing your log types
 ** DONE implement [spec
 ** DONE playtest taking e.g. a warrior from newbie to spec 1 without macroing
@@ -194,7 +194,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE stats too
 ** DONE figure out why teleporters (i.e. cave doors, stairs, moongates) don't work
 
-* TODO Items to tackle after launching beta but before "1.0" [4/22]
+* TODO Items to tackle after launching beta but before "1.0" [17/35]
 :properties:
 :cookie_data: todo recursive
 :end:
@@ -207,7 +207,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE gathersystem asks "where do you wish to place this?" when lumberjacking
 ** TODO make it so skills/stats go to 130 but with mods you can get to 150
 ** TODO make sure pagans are spawning in loot
-** TODO honestly gathersystem probably still has some fucked up cliloc calls... fix these/crowdsource them
+** DONE honestly gathersystem probably still has some fucked up cliloc calls... fix these/crowdsource them
 ** DONE make an ongoing minigame environment to encourage pvp during beta/debugging phase
 *** DONE make it tarkov or pubg or something
 ** TODO ensure only spec crafters can work with and mine the jewels
@@ -215,7 +215,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO fix baseweapon/basearmor exceptional quality stuff (Core.AOS)
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
 ** TODO hides
-** TODO make little "crafting zones" in towns where crafting skills are slightly accelerated
+** DONE make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** TODO check SpellHelper.CheckTravel for beta remnants
 ** DONE antimacro code [8/8]

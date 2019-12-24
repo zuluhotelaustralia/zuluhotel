@@ -67,5 +67,6 @@ This exception is fatal, press return to exit
 * TODO up the quantity of reagents/potions on the mage vendor.
 * TODO Range of spear/polearms
 * TODO monsters return to spawn
+  sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
 * TODO Monsters take your shit?
 * TODO boats are buggy as fuck (and also are in -> take em out)
