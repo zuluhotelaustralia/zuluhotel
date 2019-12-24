@@ -66,3 +66,11 @@ This exception is fatal, press return to exit
    missing special properties of all ores.
 
 ** DONE Crafting region near newbie dungeon
+
+** TODO up the quantity of reagents/potions on the mage vendor.
+
+** TODO Range of spear/polearms
+
+** TODO monsters return to spawn
+
+** TODO Monsters take your shit?
