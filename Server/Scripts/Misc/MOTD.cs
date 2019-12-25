@@ -35,9 +35,9 @@ namespace Server.Gumps {
 
 	    AddPage(0);
 	    AddBackground( 0, 0, 480, 320, 9300 );
-	    AddHtml( 10, 10, 460, 100, "<h2>Beta Testing Priorities</h2>", false, false );
-	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is currently in Beta Testing, and so may have bugs.  We ask that you please be patient with us.  Current testing priority is:  PVP, classes, balance, and ability to bootstrap a character from nothing.  We are explicity not testing resource gathering, crafting, or skillgain rates and there are known issues with these systems that will be resolved and/or fine-tuned in the future.", false, false );
-
+	    AddHtml( 10, 10, 460, 100, "<h2>Christmas 2019 Update!</h2>", false, false );
+	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is currently in Beta Testing, and so may have bugs.  We ask that you please be patient with us.  Current testing priority is crafting:  Please try to craft everything you can, and report bug that you find!  Note that we have updated new clilocs for the client, however Daleron's updater is not currently ready for production, so we have put the cliloc file up on https://zuluhotel.ca for download.", false, false );
+	    
 	    AddButton( 10, 280, 247, 248, (int)Buttons.OKButton, GumpButtonType.Reply, 2);
 	    AddImageTiled( 10, 280, 68, 22, 2624);
 	    AddLabel( 20, 282, 49, @"Okay");

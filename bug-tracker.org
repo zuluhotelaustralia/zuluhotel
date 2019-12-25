@@ -73,3 +73,4 @@ This exception is fatal, press return to exit
   sith sez:  see [[file:Server/Scripts/Mobiles/BaseCreature.cs::5103][EnableRummaging setting in BaseCreature] 
 * TODO boats are buggy as fuck (and also are in -> take em out)
 * DONE crafting is too slow for beta
+* DONE update MOTD to reflect new clilocs for crafting
