@@ -159,6 +159,21 @@ namespace Server
 	//intent here:  all "wilderness-appropriate" skills, and anything that's a pain in the ass to raise like taming because there are simply much fewer opportunities.
 	public virtual double GetSkillSpecificFactor( Skill skill ){
 	    switch( skill.SkillName ) {
+		// TODO BETA:  I accelerated these for testing purposes --sith
+		case SkillName.ArmsLore:
+		    return 0.1;
+		case SkillName.Fletching:
+		    return 0.1;
+		case SkillName.Blacksmith:
+		    return 0.1;
+		case SkillName.Carpentry:
+		    return 0.1;
+		case SkillName.Tailoring:
+		    return 0.1;
+		case SkillName.Tinkering:
+		    return 0.1;
+		    
+		    // END TODO BETA
 		case SkillName.AnimalTaming:
 		    return 0.1;
 		case SkillName.Healing:
