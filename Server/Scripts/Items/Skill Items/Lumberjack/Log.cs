@@ -4,7 +4,7 @@ using Server.Items;
 namespace Server.Items
 {
     [FlipableAttribute( 0x1bdd, 0x1be0 )]
-    public class Log : Item, ICommodity, IAxe
+    public class BaseLog : Item, ICommodity, IAxe
     {
 	private CraftResource m_Resource;
 
@@ -29,23 +29,18 @@ namespace Server.Items
 	    }
 	}
 
-	[Constructable]
-	public Log() : this( 1 )
+	public BaseLog() : this( 1 ) {}
+
+	public BaseLog( int amount ) : this( CraftResource.RegularWood, amount )
 	{
 	}
 
-	[Constructable]
-	public Log( int amount ) : this( CraftResource.RegularWood, amount )
-	{
-	}
-
-	[Constructable]
-	public Log( CraftResource resource )
+	public BaseLog( CraftResource resource )
 	    : this( resource, 1 )
 	{
 	}
-	[Constructable]
-	public Log( CraftResource resource, int amount )
+
+	public BaseLog( CraftResource resource, int amount )
 	    : base( 0x1BDD )
 	{
 	    Stackable = true;
@@ -82,7 +77,7 @@ namespace Server.Items
 	    }
 	}
 	
-	public Log( Serial serial ) : base( serial )
+	public BaseLog( Serial serial ) : base( serial )
 	{
 	}
 
@@ -378,4 +373,40 @@ namespace Server.Items
     // 		return true;
     // 	}
     // }
+
+    public class Log : BaseLog {
+	[Constructable]
+	public Log() : this( 1 ) {}
+
+	[Constructable]
+	public Log( int amount ) : this( CraftResource.RegularWood, amount )
+	{
+	}
+
+	[Constructable]
+	public Log( CraftResource resource )
+	    : this( resource, 1 )
+	{
+	}
+	[Constructable]
+	public Log( CraftResource resource, int amount )
+	    : base(resource, amount )
+        {
+	}
+        
+	public Log( Serial serial ) : base( serial )
+	{
+	}
+
+        public override void Serialize( GenericWriter writer )
+        {
+            base.Serialize( writer );
+        }
+
+        public override void Deserialize( GenericReader reader )
+        {
+            base.Deserialize( reader );
+        }
+    }
 }
+

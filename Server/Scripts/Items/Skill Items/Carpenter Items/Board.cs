@@ -3,7 +3,7 @@ using System;
 namespace Server.Items
 {
 	[FlipableAttribute( 0x1BD7, 0x1BDA )]
-	public class Board : Item, ICommodity
+	public class BaseBoard : Item, ICommodity
 	{
 		private CraftResource m_Resource;
 
@@ -45,30 +45,26 @@ namespace Server.Items
 
 		bool ICommodity.IsDeedable { get { return true; } }
 
-		[Constructable]
-		public Board()
+		public BaseBoard()
 			: this( 1 )
 		{
 		}
 
-		[Constructable]
-		public Board( int amount )
+		public BaseBoard( int amount )
 			: this( CraftResource.RegularWood, amount )
 		{
 		}
 
-		public Board( Serial serial )
+		public BaseBoard( Serial serial )
 			: base( serial )
 		{
 		}
 
-		[Constructable]
-		public Board( CraftResource resource ) : this( resource, 1 )
+		public BaseBoard( CraftResource resource ) : this( resource, 1 )
 		{
 		}
 
-		[Constructable]
-		public Board( CraftResource resource, int amount )
+            public BaseBoard( CraftResource resource, int amount )
 			: base( 0x1BD7 )
 		{
 			Stackable = true;
@@ -332,4 +328,46 @@ namespace Server.Items
 	// 		int version = reader.ReadInt();
 	// 	}
 	// }
+
+    public class Board : BaseBoard
+    {
+		[Constructable]
+		public Board()
+			: this( 1 )
+		{
+		}
+
+		[Constructable]
+		public Board( int amount )
+			: this( CraftResource.RegularWood, amount )
+		{
+		}
+
+		public Board( Serial serial )
+			: base( serial )
+		{
+		}
+
+		[Constructable]
+		public Board( CraftResource resource ) : this( resource, 1 )
+		{
+		}
+
+		[Constructable]
+		public Board( CraftResource resource, int amount )
+                    : base( resource, amount )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+		}
+        
+    }
 }

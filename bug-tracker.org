@@ -74,8 +74,8 @@ This exception is fatal, press return to exit
 * TODO boats are buggy as fuck (and also are in -> take em out)
 * DONE crafting is too slow for beta
 * DONE update MOTD to reflect new clilocs for crafting
-* TODO coloured logs are just called "log"
-* TODO craft gump tallies all logs instead of just normal logs in the first slot
+* DONE coloured logs are just called "log"
+* DONE craft gump tallies all logs instead of just normal logs in the first slot
 * DONE gathernodes are escaping the boundaries of the map
 * TODO can you buy/find fry pans?
 * TODO assess whether weight limits are fucked
