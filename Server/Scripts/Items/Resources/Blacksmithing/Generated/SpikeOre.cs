@@ -12,8 +12,6 @@ namespace Server.Items {
 
 		public SpikeOre( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Spike Ore"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

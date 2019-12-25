@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public MysticIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "mystic ingot"; } }
-		public string ResourceName { get { return "mystic"; } }
-		public double ResourceQuality { get { return 1.05; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

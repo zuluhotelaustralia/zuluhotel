@@ -9,8 +9,6 @@ namespace Server.Items {
 
 		public DarkPaganGranite( Serial serial ) : base( serial ) {}
 
-		public string ResourceName { get { return "dark pagan"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

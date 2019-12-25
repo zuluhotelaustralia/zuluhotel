@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public BlackDwarfIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "black dwarf ingot"; } }
-		public string ResourceName { get { return "black dwarf"; } }
-		public double ResourceQuality { get { return 1.10; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

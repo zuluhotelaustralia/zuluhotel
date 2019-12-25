@@ -9,8 +9,6 @@ namespace Server.Items {
 
 		public EbonTwilightSapphireGranite( Serial serial ) : base( serial ) {}
 
-		public string ResourceName { get { return "ebon twilight sapphire"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

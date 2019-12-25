@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public ExecutorIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "executor ingot"; } }
-		public string ResourceName { get { return "executor"; } }
-		public double ResourceQuality { get { return 1.60; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

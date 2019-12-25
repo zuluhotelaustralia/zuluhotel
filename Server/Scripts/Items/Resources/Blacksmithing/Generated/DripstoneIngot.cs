@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public DripstoneIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "dripstone ingot"; } }
-		public string ResourceName { get { return "dripstone"; } }
-		public double ResourceQuality { get { return 1.60; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

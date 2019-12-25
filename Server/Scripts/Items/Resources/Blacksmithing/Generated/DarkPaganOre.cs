@@ -12,8 +12,6 @@ namespace Server.Items {
 
 		public DarkPaganOre( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Dark Pagan Ore"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

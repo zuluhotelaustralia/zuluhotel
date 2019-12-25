@@ -12,8 +12,6 @@ namespace Server.Items {
 
 		public MalachiteOre( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Malachite Ore"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

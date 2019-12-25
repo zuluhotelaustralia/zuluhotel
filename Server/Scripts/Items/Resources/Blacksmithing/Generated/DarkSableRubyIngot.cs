@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public DarkSableRubyIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "dark sable ruby ingot"; } }
-		public string ResourceName { get { return "dark sable ruby"; } }
-		public double ResourceQuality { get { return 2.20; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public UndeadIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "undead ingot"; } }
-		public string ResourceName { get { return "undead"; } }
-		public double ResourceQuality { get { return 1.20; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

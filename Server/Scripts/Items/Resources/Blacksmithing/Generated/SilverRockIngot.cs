@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public SilverRockIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "silver rock ingot"; } }
-		public string ResourceName { get { return "silver rock"; } }
-		public double ResourceQuality { get { return 1.10; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

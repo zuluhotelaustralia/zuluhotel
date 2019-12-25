@@ -75,4 +75,5 @@ This exception is fatal, press return to exit
 * DONE crafting is too slow for beta
 * DONE update MOTD to reflect new clilocs for crafting
 * TODO coloured logs are just called "log"
-* TODO gathernodes are escaping the boundaries of the map
+* TODO craft gump tallies all logs instead of just normal logs in the first slot
+* DONE gathernodes are escaping the boundaries of the map

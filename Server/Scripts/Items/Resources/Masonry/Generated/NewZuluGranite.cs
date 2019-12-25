@@ -9,8 +9,6 @@ namespace Server.Items {
 
 		public NewZuluGranite( Serial serial ) : base( serial ) {}
 
-		public string ResourceName { get { return "new zulu"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

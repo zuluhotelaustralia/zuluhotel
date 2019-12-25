@@ -12,8 +12,6 @@ namespace Server.Items {
 
 		public DarkSableRubyOre( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Dark Sable Ruby Ore"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

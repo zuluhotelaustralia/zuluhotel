@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public AzuriteIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "azurite ingot"; } }
-		public string ResourceName { get { return "azurite"; } }
-		public double ResourceQuality { get { return 1.50; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

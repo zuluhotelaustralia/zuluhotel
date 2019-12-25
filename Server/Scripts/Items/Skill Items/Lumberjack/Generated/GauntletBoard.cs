@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 2777;
 		}
 
-		public string ResourceName { get { return "gauntlet"; } }
-		public double ResourceQuality { get { return 1.45; } }
-
 		public GauntletBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

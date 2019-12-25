@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public OldBritainIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "old britain ingot"; } }
-		public string ResourceName { get { return "old britain"; } }
-		public double ResourceQuality { get { return 1.25; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

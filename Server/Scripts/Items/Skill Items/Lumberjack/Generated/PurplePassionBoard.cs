@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 515;
 		}
 
-		public string ResourceName { get { return "purple passion"; } }
-		public double ResourceQuality { get { return 1.20; } }
-
 		public PurplePassionBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

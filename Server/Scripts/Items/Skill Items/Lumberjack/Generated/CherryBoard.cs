@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 716;
 		}
 
-		public string ResourceName { get { return "cherry"; } }
-		public double ResourceQuality { get { return 1.10; } }
-
 		public CherryBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {
