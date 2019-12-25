@@ -69,8 +69,10 @@ This exception is fatal, press return to exit
 * TODO Range of spear/polearms
 * TODO monsters return to spawn
   sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
-* TODO Monsters take your shit?
+* DONE Monsters take your shit?
   sith sez:  see [[file:Server/Scripts/Mobiles/BaseCreature.cs::5103][EnableRummaging setting in BaseCreature] 
 * TODO boats are buggy as fuck (and also are in -> take em out)
 * DONE crafting is too slow for beta
 * DONE update MOTD to reflect new clilocs for crafting
+* TODO coloured logs are just called "log"
+* TODO gathernodes are escaping the boundaries of the map
