@@ -112,6 +112,9 @@ namespace Server.Items
 	{
 	    get
 	    {
+		if ( m_Resource >= CraftResource.Gold && m_Resource <= CraftResource.RadiantNimbusDiamond )
+		    return 1161000 + (int)(m_Resource - CraftResource.Gold);
+
 		return 1042853; // iron ore;
 	    }
 	}

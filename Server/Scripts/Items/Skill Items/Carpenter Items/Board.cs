@@ -13,7 +13,18 @@ namespace Server.Items
 			get { return m_Resource; }
 			set { m_Resource = value; InvalidateProperties(); }
 		}
+            
+	public override int LabelNumber
+	{
+	    get
+	    {
+		if ( m_Resource >= CraftResource.Pinetree && m_Resource <= CraftResource.Elven )
+		    return 1161091 + (int)(m_Resource - CraftResource.Pinetree);
 
+                return Amount > 1 ? 1027131 : 1027130;
+	    }
+	}
+            
 		int ICommodity.DescriptionNumber 
 		{ 
 			get

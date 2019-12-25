@@ -15,8 +15,19 @@ namespace Server.Items
 	    set { m_Resource = value; InvalidateProperties(); }
 	}
 
-	int ICommodity.DescriptionNumber { get { return CraftResources.IsStandard( m_Resource ) ? LabelNumber : 1075062 + ( (int)m_Resource - (int)CraftResource.RegularWood ); } }
+	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
 	bool ICommodity.IsDeedable { get { return true; } }
+
+	public override int LabelNumber
+	{
+	    get
+	    {
+		if ( m_Resource >= CraftResource.Pinetree && m_Resource <= CraftResource.Elven )
+		    return 1161068 + (int)(m_Resource - CraftResource.Pinetree);
+
+		return Amount > 1 ? 1027134 : 1027133;
+	    }
+	}
 
 	[Constructable]
 	public Log() : this( 1 )

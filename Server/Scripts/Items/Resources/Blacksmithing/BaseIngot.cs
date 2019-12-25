@@ -99,7 +99,7 @@ namespace Server.Items
 	    get
 	    {
 		if ( m_Resource >= CraftResource.Gold && m_Resource <= CraftResource.RadiantNimbusDiamond )
-		    return 1042684 + (int)(m_Resource - CraftResource.Gold);
+		    return 1161034 + (int)(m_Resource - CraftResource.Gold);
 
 		return 1042692;
 	    }
