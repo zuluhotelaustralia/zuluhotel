@@ -17,6 +17,10 @@ namespace Server.Engines.Gather {
 	private double m_Abundance; //how plentiful is this resource?  a value on the range [0,1]
 
 	private const double m_driftchance = 0.5;
+	private const double m_mutatechance = 0.1;
+
+	private const int m_xbound = 7168;
+	private const int m_ybound = 4096;
 
 	//difficulty represents the difficulty to actually find it
 	// graphically, this is the fall-off rate per unit distance (higher is slower fall-off)
@@ -69,73 +73,29 @@ namespace Server.Engines.Gather {
 	    m_MaxSkill = maxskill;
 	}
 
-	private void ApplyRotation( int vx, int vy ) {
-	    //we're simply applying a reflection about a given normal vector, defined as inward from the map boundary.
-	    // given some vector w = ax + by, we can get the reflection about n by:
-	    // r = w - 2(w . n)n, where n is normalized and w . n represents the inner product.
-	    // broken into components:
-	    //  r_vX = m_vX - 2 (inner product) nx;
-	    //  r_vY = m_vY - 2 (inner product) ny;
-
-	    int nx = 0;
-	    int ny = 0;
-	 	    	    
-	    int xprime = m_X + m_vX;
-	    int yprime = m_Y + m_vY;
-
-	    int innerproduct = (nx * m_vX) + (ny * m_vY);
-	    
-	    if ( xprime >= 7168 ) {
-		// n = ( -1, 0 )
-		nx = -1;
-	    }
-	    if ( xprime <= 0 ) {
-		// n = ( 1, 0 )
-		nx = 1;
-	    }
-	    if ( yprime >= 4096 ) {
-		// n = ( 0, -1 )
-		ny = -1;
-	    }
-	    if ( yprime <= 0 ) {
-		// n = ( 0, 1 )
-		ny = 1;
-	    }
-
-	    m_vX = m_vX - (2 * innerproduct * nx);
-	    m_vY = m_vY - (2 * innerproduct * ny);
-	    
-	}
-
-	private bool WouldNextDriftBeIllegal () {
-	    int xprime;
-	    int yprime;
-	    
-	    xprime = m_X + m_vX;
-	    yprime = m_Y + m_vY;
-
-	    // yeah this is happening
-	    if ( xprime >= 896 ||
-		 xprime <= 0 ||
-		 yprime >= 512 ||
-		 yprime <= 0 ){
-		return true;
-	    }
-	    else {
-		return false;
+	public void Mutate() {
+	    if( m_mutatechance <= Utility.RandomDouble() ) {
+		m_vX = Utility.RandomMinMax(-10, 10);
+		m_vY = Utility.RandomMinMax(-10, 10);
 	    }
 	}
-	
-	public void Drift( ) {
+
+	public void Drift() {
 	    
 	    if ( m_driftchance >= Utility.RandomDouble() ) {
 
-		if ( WouldNextDriftBeIllegal() ) {
-		    ApplyRotation( m_vX, m_vY );
+		//don't ask just let it happen
+		if( m_X < 0 ){
+		    m_X *= -1;
+		}
+		if( m_Y < 0 ){
+		    m_Y *= -1;
 		}
 		
-		m_X += m_vX;
-		m_Y += m_vY;
+		m_X = ( m_X + m_vX ) % m_xbound;
+		m_Y = ( m_Y + m_vY ) % m_ybound;
+		
+		Mutate(); //keep it gangsta
 	    }
 	}
     }
