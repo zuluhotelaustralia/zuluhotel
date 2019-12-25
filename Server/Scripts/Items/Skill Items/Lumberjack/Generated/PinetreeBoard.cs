@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 1132;
 		}
 
-		public string ResourceName { get { return "pinetree"; } }
-		public double ResourceQuality { get { return 1.05; } }
-
 		public PinetreeBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

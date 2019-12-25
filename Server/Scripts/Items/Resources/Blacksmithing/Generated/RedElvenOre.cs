@@ -12,8 +12,6 @@ namespace Server.Items {
 
 		public RedElvenOre( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Red Elven Ore"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

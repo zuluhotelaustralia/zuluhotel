@@ -63,7 +63,7 @@ function doGsubs(){
     print "\t}	" > outfile;
     print "}" > outfile;
 
-    close outfile;
+    close(outfile);
     counter++;
 }
 

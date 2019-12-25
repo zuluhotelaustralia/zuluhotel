@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 2780;
 		}
 
-		public string ResourceName { get { return "bloodhorse"; } }
-		public double ResourceQuality { get { return 1.85; } }
-
 		public BloodhorseBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

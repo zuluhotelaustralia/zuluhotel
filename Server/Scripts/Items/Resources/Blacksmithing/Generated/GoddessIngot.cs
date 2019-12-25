@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public GoddessIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "goddess ingot"; } }
-		public string ResourceName { get { return "goddess"; } }
-		public double ResourceQuality { get { return 1.90; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

@@ -43,8 +43,6 @@ function doGsubs(){
     print "" > outfile;
     print "\t\tpublic "resname restype"( Serial serial ) : base( serial ) {}" > outfile;
     print "" > outfile;
-    print "\t\tpublic override string DefaultName { get { return \""trimmedres " " restype"\"; } }" > outfile;
-    print "" > outfile;
     print "\t\tpublic override void Serialize( GenericWriter writer ) {" > outfile;
     print "\t\t\tbase.Serialize( writer );" > outfile;
     print "\t\t\twriter.Write( (int) 0 ); // version" > outfile;
@@ -61,7 +59,7 @@ function doGsubs(){
     print "\t}	" > outfile;
     print "}" > outfile;
 
-    close outfile;
+    close(outfile);
     counter++;
 }
 

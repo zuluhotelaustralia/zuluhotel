@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 1154;
 		}
 
-		public string ResourceName { get { return "stonewood"; } }
-		public double ResourceQuality { get { return 1.40; } }
-
 		public StonewoodBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {

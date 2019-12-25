@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public RadiantNimbusDiamondIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "radiant nimbus diamond ingot"; } }
-		public string ResourceName { get { return "radiant nimbus diamond"; } }
-		public double ResourceQuality { get { return 2.25; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

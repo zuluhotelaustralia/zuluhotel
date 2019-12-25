@@ -12,8 +12,6 @@ namespace Server.Items {
 
 		public RadiantNimbusDiamondOre( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "Radiant Nimbus Diamond Ore"; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

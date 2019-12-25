@@ -13,10 +13,6 @@ namespace Server.Items {
 
 		public BronzeIngot( Serial serial ) : base( serial ) {}
 
-		public override string DefaultName { get { return "bronze ingot"; } }
-		public string ResourceName { get { return "bronze"; } }
-		public double ResourceQuality { get { return 1.10; } }
-
 		public override void Serialize( GenericWriter writer ) {
 			base.Serialize( writer );
 			writer.Write( (int) 0 ); // version

@@ -10,9 +10,6 @@ namespace Server.Items {
 			this.Hue = 2749;
 		}
 
-		public string ResourceName { get { return "zulu"; } }
-		public double ResourceQuality { get { return 2.00; } }
-
 		public ZuluBoard( Serial serial ) : base( serial ) {}
 
 		public override void Serialize( GenericWriter writer ) {
