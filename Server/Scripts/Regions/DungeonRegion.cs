@@ -10,8 +10,8 @@ namespace Server.Regions
     {
 	public override bool YoungProtected { get { return false; } }
 	
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.03; } } //about 6 hours to cap it at 1 attempt per second
-	public override double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
+	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } } //about 6 hours to cap it at 1 attempt per second
+	public override double RegionalSkillGainSecondaryFactor { get { return base.RegionalSkillGainSecondaryFactor; } }
 
 	public override double GetSkillSpecificFactor( Skill skill ){
 	    // note to self: fallthrough is legal in c# iff you don't do any processing in the case

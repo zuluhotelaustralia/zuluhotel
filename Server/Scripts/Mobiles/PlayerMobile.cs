@@ -819,7 +819,7 @@ namespace Server.Mobiles
 	    UpdateResistances();
 	}
 
-	public override int MaxWeight { get { return (((Core.ML && this.Race == Race.Human) ? 100 : 40) + (int)(3.5 * this.Str)); } }
+	public override int MaxWeight { get { return 40 + (int)(3.5 * this.Str); } }
 
 	private int m_LastGlobalLight = -1, m_LastPersonalLight = -1;
 

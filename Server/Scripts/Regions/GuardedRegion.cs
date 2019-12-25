@@ -17,7 +17,7 @@ namespace Server.Regions
 
 	public bool Disabled{ get{ return m_Disabled; } set{ m_Disabled = value; } }
 
-	public override double RegionalSkillGainPrimaryFactor { get { return 0.01; } }
+	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } }
 	public override double GetSkillSpecificFactor(Skill skill){
 	    switch( skill.SkillName ){
 		
