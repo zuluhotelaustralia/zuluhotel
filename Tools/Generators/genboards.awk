@@ -35,7 +35,7 @@ function doGsubs(){
     print "// Generated File. DO NOT MODIFY BY HAND." > outfile;
     print "namespace Server.Items {" > outfile;
     print "" > outfile;
-    print "\tpublic class "resname restype" : Board {" > outfile;
+    print "\tpublic class "resname restype" : BaseBoard {" > outfile;
     print "\t\t[Constructable]" > outfile;
     print "\t\tpublic "resname restype"() : this( 1 ) {}" > outfile;
     print "" > outfile;

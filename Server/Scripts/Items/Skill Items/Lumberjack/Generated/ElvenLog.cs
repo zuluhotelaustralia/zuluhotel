@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class ElvenLog : Log {
+	public class ElvenLog : BaseLog {
 		[Constructable]
 		public ElvenLog() : this( 1 ) {}
 

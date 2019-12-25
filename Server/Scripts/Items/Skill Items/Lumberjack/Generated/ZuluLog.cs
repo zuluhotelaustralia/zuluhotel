@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class ZuluLog : Log {
+	public class ZuluLog : BaseLog {
 		[Constructable]
 		public ZuluLog() : this( 1 ) {}
 

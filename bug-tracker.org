@@ -77,3 +77,5 @@ This exception is fatal, press return to exit
 * TODO coloured logs are just called "log"
 * TODO craft gump tallies all logs instead of just normal logs in the first slot
 * DONE gathernodes are escaping the boundaries of the map
+* TODO can you buy/find fry pans?
+* TODO assess whether weight limits are fucked

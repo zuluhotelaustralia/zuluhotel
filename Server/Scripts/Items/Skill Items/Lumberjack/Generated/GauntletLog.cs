@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class GauntletLog : Log {
+	public class GauntletLog : BaseLog {
 		[Constructable]
 		public GauntletLog() : this( 1 ) {}
 

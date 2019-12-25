@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class BloodhorseBoard : Board {
+	public class BloodhorseBoard : BaseBoard {
 		[Constructable]
 		public BloodhorseBoard() : this( 1 ) {}
 

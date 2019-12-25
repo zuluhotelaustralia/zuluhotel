@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class BloodhorseLog : Log {
+	public class BloodhorseLog : BaseLog {
 		[Constructable]
 		public BloodhorseLog() : this( 1 ) {}
 

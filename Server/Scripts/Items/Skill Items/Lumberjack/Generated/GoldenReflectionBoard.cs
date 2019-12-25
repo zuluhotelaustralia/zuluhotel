@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class GoldenReflectionBoard : Board {
+	public class GoldenReflectionBoard : BaseBoard {
 		[Constructable]
 		public GoldenReflectionBoard() : this( 1 ) {}
 

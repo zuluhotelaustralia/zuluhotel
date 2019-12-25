@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class PurplePassionLog : Log {
+	public class PurplePassionLog : BaseLog {
 		[Constructable]
 		public PurplePassionLog() : this( 1 ) {}
 

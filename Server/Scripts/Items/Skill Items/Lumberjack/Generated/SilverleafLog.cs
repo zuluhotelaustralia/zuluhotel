@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class SilverleafLog : Log {
+	public class SilverleafLog : BaseLog {
 		[Constructable]
 		public SilverleafLog() : this( 1 ) {}
 

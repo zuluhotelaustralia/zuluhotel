@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class StormtealLog : Log {
+	public class StormtealLog : BaseLog {
 		[Constructable]
 		public StormtealLog() : this( 1 ) {}
 

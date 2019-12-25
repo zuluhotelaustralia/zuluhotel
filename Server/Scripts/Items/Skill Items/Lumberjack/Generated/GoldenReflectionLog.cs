@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class GoldenReflectionLog : Log {
+	public class GoldenReflectionLog : BaseLog {
 		[Constructable]
 		public GoldenReflectionLog() : this( 1 ) {}
 

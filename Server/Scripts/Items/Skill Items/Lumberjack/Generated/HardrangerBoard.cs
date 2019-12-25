@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class HardrangerBoard : Board {
+	public class HardrangerBoard : BaseBoard {
 		[Constructable]
 		public HardrangerBoard() : this( 1 ) {}
 

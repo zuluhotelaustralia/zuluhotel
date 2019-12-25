@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class OakLog : Log {
+	public class OakLog : BaseLog {
 		[Constructable]
 		public OakLog() : this( 1 ) {}
 

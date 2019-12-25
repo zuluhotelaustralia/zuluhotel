@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class PinetreeLog : Log {
+	public class PinetreeLog : BaseLog {
 		[Constructable]
 		public PinetreeLog() : this( 1 ) {}
 

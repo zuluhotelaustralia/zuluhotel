@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class StardustLog : Log {
+	public class StardustLog : BaseLog {
 		[Constructable]
 		public StardustLog() : this( 1 ) {}
 

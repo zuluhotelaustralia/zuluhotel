@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class HardrangerLog : Log {
+	public class HardrangerLog : BaseLog {
 		[Constructable]
 		public HardrangerLog() : this( 1 ) {}
 

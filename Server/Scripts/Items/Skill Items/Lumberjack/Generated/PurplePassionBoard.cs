@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class PurplePassionBoard : Board {
+	public class PurplePassionBoard : BaseBoard {
 		[Constructable]
 		public PurplePassionBoard() : this( 1 ) {}
 

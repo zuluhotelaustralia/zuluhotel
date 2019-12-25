@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class CherryLog : Log {
+	public class CherryLog : BaseLog {
 		[Constructable]
 		public CherryLog() : this( 1 ) {}
 

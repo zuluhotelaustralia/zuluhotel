@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class DarkwoodLog : Log {
+	public class DarkwoodLog : BaseLog {
 		[Constructable]
 		public DarkwoodLog() : this( 1 ) {}
 

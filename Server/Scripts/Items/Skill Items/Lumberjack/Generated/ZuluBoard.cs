@@ -1,7 +1,7 @@
 // Generated File. DO NOT MODIFY BY HAND.
 namespace Server.Items {
 
-	public class ZuluBoard : Board {
+	public class ZuluBoard : BaseBoard {
 		[Constructable]
 		public ZuluBoard() : this( 1 ) {}
 
