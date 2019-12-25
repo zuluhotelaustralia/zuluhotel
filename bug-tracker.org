@@ -43,7 +43,7 @@ This exception is fatal, press return to exit
    price as iron
    I don't care about price deltas but they should accept coloured ore
 * DONE Mining action timer
-* TODO coloured ore AR rating
+* DONE coloured ore AR rating
    Verify this scales how we want it
 * TODO Material Special Property (ex silver vs undead).
    Should silver weapons do bonus against undead?  I think we're
@@ -70,5 +70,6 @@ This exception is fatal, press return to exit
 * TODO monsters return to spawn
   sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
 * TODO Monsters take your shit?
-  sith sez:  see Rummage setting in BaseCreature
+  sith sez:  see [[file:Server/Scripts/Mobiles/BaseCreature.cs::5103][EnableRummaging setting in BaseCreature] 
 * TODO boats are buggy as fuck (and also are in -> take em out)
+* TODO crafting is too slow for beta
