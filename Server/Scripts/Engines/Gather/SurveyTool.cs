@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Server;
+using Server.Mobiles;
 using Server.Targeting;
 using Server.Engines.Gather;
 
@@ -11,7 +12,9 @@ namespace Server.Items
     public class SurveyTool : Item
     {
 	private List<GatherNode> m_ReportList;
-
+	private bool _Residuals;
+	private bool _Unknowns;
+	
 	private DateTime _nextUse;
 	
 	public enum SurveyType {
@@ -24,12 +27,14 @@ namespace Server.Items
 	{
 	    m_ReportList = new List<GatherNode>();
 	    _nextUse = DateTime.Now;
+	    Name = "a surveyor's tool";
 	}
 
 	public SurveyTool( Serial serial ) : base( serial )
 	{
 	    m_ReportList = new List<GatherNode>();
 	    _nextUse = DateTime.Now;
+	    Name = "a surveyor's tool";
 	}
 
 	public override void OnDoubleClick( Mobile from ){
@@ -40,8 +45,8 @@ namespace Server.Items
 
 	public void MunchMunch( Mobile from ){
 	    from.PlaySound( Utility.Random( 0x3A, 3 ) );
-	    from.Emote("Munch munch munch");
-
+	    from.Emote("*Munch munch munch*");
+	    
 	    if ( from.Body.IsHuman && !from.Mounted ){
 		from.Animate( 34, 5, 1, true, false, 0 );
 	    }
@@ -53,8 +58,9 @@ namespace Server.Items
 	//actually take the sample of what's there
 	public void Sample( Point3D loc, SurveyType t, Mobile from ){
 	    // determine what was clciked (tree or terrain)
-	    // shit out list of all nodes above 10% chance
 	    m_ReportList.Clear();
+	    _Residuals = false;
+	    _Unknowns = false;
 
 	    MunchMunch( from );
 	    
@@ -69,15 +75,27 @@ namespace Server.Items
 	    foreach( GatherNode node in sys.Nodes ){
 		int dx = Math.Abs( loc.X - node.X );
 		int dy = Math.Abs( loc.Y - node.Y );
-
+		
 		double dxsq = Math.Pow( (double)dx, 2.0 );
 		double dysq = Math.Pow( (double)dy, 2.0 );
 		
 		double dist = Math.Sqrt( dxsq + dysq );
 		double a = ( node.Abundance * node.Difficulty ) / dist;
 
-		if( a >= 0.1 ){
-		    m_ReportList.Add( node );
+		double userskill = from.Skills.TasteID.Value;
+
+		if( node.MinSkill >=  userskill ){
+		    if( a >= 0.01 ){
+			m_ReportList.Add( node );
+		    }
+		    else {
+			//"other trace elements"
+			_Residuals = true;
+		    }
+		}
+		else{
+		    //other types you can't identify
+		    _Unknowns = true;
 		}
 	    }
 	}
@@ -85,7 +103,7 @@ namespace Server.Items
 	public override void Serialize( GenericWriter writer )
 	{
 	    base.Serialize( writer );
-
+	    
 	    writer.Write( (int) 0 ); // version
 	}
 
@@ -117,7 +135,7 @@ namespace Server.Items
 		    m_Tool.Sample( from.Location, SurveyType.Terrain, from );
 		}
 		else {
-		    from.SendMessage("You must target terrain (not sand), or trees.");
+		    from.SendMessage("You must target rock or trees suitable for gathering resources."); //TODO cliloc this
 		}
 	    }
 	}
