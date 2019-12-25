@@ -72,4 +72,4 @@ This exception is fatal, press return to exit
 * TODO Monsters take your shit?
   sith sez:  see [[file:Server/Scripts/Mobiles/BaseCreature.cs::5103][EnableRummaging setting in BaseCreature] 
 * TODO boats are buggy as fuck (and also are in -> take em out)
-* TODO crafting is too slow for beta
+* DONE crafting is too slow for beta
