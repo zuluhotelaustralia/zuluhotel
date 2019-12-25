@@ -77,5 +77,6 @@ This exception is fatal, press return to exit
 * DONE coloured logs are just called "log"
 * DONE craft gump tallies all logs instead of just normal logs in the first slot
 * DONE gathernodes are escaping the boundaries of the map
-* TODO can you buy/find fry pans?
-* TODO assess whether weight limits are fucked
+* DONE can you buy/find fry pans?
+  yes, the cook sells them
+* DONE assess whether weight limits are fucked
