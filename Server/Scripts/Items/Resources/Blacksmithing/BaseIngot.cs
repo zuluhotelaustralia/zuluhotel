@@ -101,7 +101,7 @@ namespace Server.Items
 		if ( m_Resource >= CraftResource.Gold && m_Resource <= CraftResource.RadiantNimbusDiamond )
 		    return 1161034 + (int)(m_Resource - CraftResource.Gold);
 
-		return 1042692;
+		return Amount > 1 ? 1160103 : 1160102;
 	    }
 	}
     }
