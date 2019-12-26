@@ -9,9 +9,23 @@ using Server.Engines.Gather;
 
 namespace Server.Items
 {
+
+    internal class SurveyReport {
+	private string _res;
+	private double _amount;
+
+	public string Resource { get { return _res; } }
+	public double Amount { get { return _amount; } }
+
+	public SurveyReport( double a, string r ){
+	    _res = r;
+	    _amount = a;
+	}
+    }
+    
     public class SurveyTool : Item
     {
-	private List<GatherNode> m_ReportList;
+	private List<SurveyReport> m_ReportList;
 	private bool _Residuals;
 	private bool _Unknowns;
 	
@@ -25,14 +39,14 @@ namespace Server.Items
 	[Constructable]
 	public SurveyTool( ) : base( 0xF39 )
 	{
-	    m_ReportList = new List<GatherNode>();
+	    m_ReportList = new List<SurveyReport>();
 	    _nextUse = DateTime.Now;
 	    Name = "a surveyor's tool";
 	}
 
 	public SurveyTool( Serial serial ) : base( serial )
 	{
-	    m_ReportList = new List<GatherNode>();
+	    m_ReportList = new List<SurveyReport>();
 	    _nextUse = DateTime.Now;
 	    Name = "a surveyor's tool";
 	}
@@ -53,7 +67,13 @@ namespace Server.Items
 	}
 
 	//generate the actual report here
-	public void WriteReport(){}
+	public void WriteReport(){
+	    // foreach report in m_Reportlist
+	    // pretty-print report.Resource and report.Amount
+	    // Amount represents the adjusted abundance of the node based on
+	    //   distance and skill
+	    // they can always choose to mark a rune later, fuck the x/y coords
+	}
 	    
 	//actually take the sample of what's there
 	public void Sample( Point3D loc, SurveyType t, Mobile from ){
@@ -63,6 +83,7 @@ namespace Server.Items
 	    _Unknowns = false;
 
 	    MunchMunch( from );
+	    from.SendMessage( "You take a sample...");
 	    
 	    GatherSystem sys;
 	    if( t == SurveyType.Tree ){
@@ -82,20 +103,32 @@ namespace Server.Items
 		double dist = Math.Sqrt( dxsq + dysq );
 		double a = ( node.Abundance * node.Difficulty ) / dist;
 
-		double userskill = from.Skills.TasteID.Value;
+		Skill userskill = from.Skills.TasteID;
+		double chance = (130.0 - userskill.Value)/userskill.Value;
 
-		if( node.MinSkill >=  userskill ){
-		    if( a >= 0.01 ){
-			m_ReportList.Add( node );
-		    }
-		    else {
-			//"other trace elements"
-			_Residuals = true;
-		    }
+		if( chance < 0.01 ) {
+		    chance = 0.01;
 		}
-		else{
-		    //other types you can't identify
-		    _Unknowns = true;
+		if( chance >= 1.0 ){
+		    chance = 0.98;
+		}
+		
+		if( Server.Misc.SkillCheck.CheckSkill(from, userskill, null, chance) ){
+		    if( node.MinSkill >=  userskill.Value ){
+			if( a >= 0.01 ){
+			    CraftResource cr = CraftResources.GetFromType( node.Resource );
+			    CraftResourceInfo cri = CraftResources.GetInfo( cr );
+			    m_ReportList.Add( new SurveyReport( a, cri.Name ) );
+			}
+			else {
+			    //"other trace elements"
+			    _Residuals = true;
+			}
+		    }
+		    else{
+			//other types you can't identify
+			_Unknowns = true;
+		    }
 		}
 	    }
 	}
