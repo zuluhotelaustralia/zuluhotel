@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Server;
+using Server.Items;
 using Server.Mobiles;
+using Server.Network;
+using Server.Targets;
 using Server.Targeting;
 using Server.Engines.Gather;
 
@@ -67,12 +70,94 @@ namespace Server.Items
 	}
 
 	//generate the actual report here
-	public void WriteReport(){
+	public void WriteReport( Mobile from ){
 	    // foreach report in m_Reportlist
 	    // pretty-print report.Resource and report.Amount
 	    // Amount represents the adjusted abundance of the node based on
 	    //   distance and skill
 	    // they can always choose to mark a rune later, fuck the x/y coords
+
+	    Item pen = from.Backpack.FindItemByType( typeof( PenAndInk ), true );
+
+	    if( pen == null ){
+		from.SendMessage("Without a pen-and-ink you cannot write your field report!");
+		return;
+	    }
+
+	    from.SendMessage("Select an empty book for your field report.");
+
+	    from.Target = new SimpleTarget( 4, false, TargetFlags.None, (Mobile from, object target) => {
+		    if( !(target is BaseBook) ){
+			from.SendMessage("You must select a book!");
+			return;
+		    }
+
+		    BaseBook book = (BaseBook)target;
+
+		    if( !book.Writable ){
+			from.SendMessage("You cannot write in that book.");
+			return;
+		    }
+
+		    from.PlaySound(0x249);
+
+		    new SimpleTimeout( new TimeSpan( 0, 0, 5), () => {
+			    if( !pen.IsAccessibleTo(from) ){
+				from.SendMessage("You require a pen.");
+				return;
+			    }
+
+			    if( !book.IsAccessibleTo(from) ) {
+				from.SendMessage("You require a book.");
+				return;
+			    }
+
+			    book.Author = from.Name;
+			    book.Title = "Field Report";
+
+			    int i = 0;
+
+			    foreach( SurveyReport rpt in m_ReportList ){
+				int percentage = (int)(rpt.Amount * 100);
+				book.Pages[i].Lines = new string[]{
+				    "-" + rpt.Resource + "-",
+				    "Surveyed rate: " + percentage + "%"
+				};
+
+				i++;
+
+				if( i >= book.PagesCount ){
+				    from.SendMessage("You've run out of pages in your book!");
+				    break;
+				}
+			    }
+
+			    if(_Residuals && (i < book.PagesCount) ){
+				book.Pages[i].Lines = new string[] {
+				    "-Others-",
+				    "There are various other",
+				    "materials present in",
+				    "trace amounts."
+				};
+
+				i++;
+			    }
+			    
+			    if(_Unknowns && (i < book.PagesCount) ){
+				book.Pages[i].Lines = new string[] {
+				    "-Unknown-",
+				    "I detect some other",
+				    "materials that I cannot",
+				    "quite identify."
+				};
+
+				i++;
+			    }
+
+			    from.SendMessage("You finish compiling your field report.");
+			}).Start();
+		});
+       				
 	}
 	    
 	//actually take the sample of what's there
@@ -131,6 +216,8 @@ namespace Server.Items
 		    }
 		}
 	    }
+
+	    WriteReport( from );
 	}
 
 	public override void Serialize( GenericWriter writer )
