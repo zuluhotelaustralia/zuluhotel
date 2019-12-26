@@ -31,6 +31,9 @@ namespace Server.Items
 	private List<SurveyReport> m_ReportList;
 	private bool _Residuals;
 	private bool _Unknowns;
+
+	private int _hitpoints;
+	public int HitPoints { get { return _hitpoints; } }
 	
 	private DateTime _nextUse;
 	
@@ -45,18 +48,25 @@ namespace Server.Items
 	    m_ReportList = new List<SurveyReport>();
 	    _nextUse = DateTime.Now;
 	    Name = "a surveyor's tool";
+	    _hitpoints = 50;
+	    Hue = 0x17f; //mystic
 	}
 
 	public SurveyTool( Serial serial ) : base( serial )
 	{
 	    m_ReportList = new List<SurveyReport>();
 	    _nextUse = DateTime.Now;
-	    Name = "a surveyor's tool";
 	}
 
 	public override void OnDoubleClick( Mobile from ){
 	    if( DateTime.Compare( DateTime.Now, _nextUse ) >= 0 ){
 		from.Target = new InternalTarget( this );
+	    }
+
+	    _hitpoints--;
+	    if( _hitpoints <= 0 ){
+		this.Delete();
+		from.SendMessage("Your survey tool has broken!");
 	    }
 	}
 
@@ -224,7 +234,8 @@ namespace Server.Items
 	{
 	    base.Serialize( writer );
 	    
-	    writer.Write( (int) 0 ); // version
+	    writer.Write( (int) 1 ); // version
+	    writer.Write( _hitpoints );
 	}
 
 	public override void Deserialize( GenericReader reader )
@@ -232,6 +243,20 @@ namespace Server.Items
 	    base.Deserialize( reader );
 
 	    int version = reader.ReadInt();
+
+	    switch( version )
+	    {
+		case 1:
+		    {
+			_hitpoints = reader.ReadInt();
+			break;
+		    }
+		case 0:
+		    {
+			_hitpoints = 25;
+			break;
+		    }
+	    }
 	}
 
 	public class InternalTarget : Target {
