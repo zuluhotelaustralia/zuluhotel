@@ -80,3 +80,9 @@ This exception is fatal, press return to exit
 * DONE can you buy/find fry pans?
   yes, the cook sells them
 * DONE assess whether weight limits are fucked
+* DONE can't gain eval int past 120
+* TODO do passive stat bonuses to skills affect spec?
+* TODO can't sell fish?
+* TODO cooking consumes whole stack
+* TODO anatomy bonus to healing?
+* TODO can't carry enough gold to buy house
