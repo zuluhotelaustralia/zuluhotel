@@ -194,7 +194,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE stats too
 ** DONE figure out why teleporters (i.e. cave doors, stairs, moongates) don't work
 
-* TODO Items to tackle after launching beta but before "1.0" [17/35]
+* TODO Items to tackle after launching beta but before "1.0" [7/23]
 :properties:
 :cookie_data: todo recursive
 :end:
@@ -216,7 +216,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
 ** TODO hides
 ** DONE make little "crafting zones" in towns where crafting skills are slightly accelerated
-** TODO "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
+** DONE "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** TODO check SpellHelper.CheckTravel for beta remnants
 ** DONE antimacro code [8/8]
 :PROPERTIES:
