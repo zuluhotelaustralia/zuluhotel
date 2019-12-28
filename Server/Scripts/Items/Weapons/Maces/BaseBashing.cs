@@ -1,6 +1,8 @@
 using System;
 using Server;
 using Server.Items;
+using Server.Mobiles;
+using Server.Spec;
 
 namespace Server.Items
 {
@@ -39,7 +41,16 @@ namespace Server.Items
 		{
 			base.OnHit( attacker, defender, damageBonus );
 
-			defender.Stam -= Utility.Random( 3, 3 ); // 3-5 points of stamina loss
+			int stamloss = Utility.Random( 3, 3 ); //3-5 points
+
+			if( attacker is PlayerMobile ){
+			    PlayerMobile pm = attacker as PlayerMobile;
+			    if( pm.Spec.SpecName == SpecName.Warrior ){
+				stamloss *= 2;
+			    }
+			}
+			
+			defender.Stam -= stamloss;
 		}
 
 		public override double GetBaseDamage( Mobile attacker )

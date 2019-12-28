@@ -71,7 +71,7 @@ This exception is fatal, press return to exit
   sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
 * DONE Monsters take your shit?
   sith sez:  see [[file:Server/Scripts/Mobiles/BaseCreature.cs::5103][EnableRummaging setting in BaseCreature] 
-* TODO boats are buggy as fuck (and also are in -> take em out)
+* DONE boats are buggy as fuck (and also are in -> take em out)
 * DONE crafting is too slow for beta
 * DONE update MOTD to reflect new clilocs for crafting
 * DONE coloured logs are just called "log"
@@ -84,7 +84,8 @@ This exception is fatal, press return to exit
 * TODO do passive stat bonuses to skills affect spec?
 * TODO can't sell fish?
 * TODO cooking consumes whole stack
-* TODO anatomy bonus to healing?
-* TODO can't carry enough gold to buy house
+* DONE anatomy bonus to healing?
+* TODO can't carry enough gold to buy house (weight limit on backpack item?)
 * TODO can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
 * TODO dex seems to gain quite slowly?
+* TODO bowcraftt cant choose bows
