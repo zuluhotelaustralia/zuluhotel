@@ -85,7 +85,7 @@ This exception is fatal, press return to exit
 * TODO can't sell fish?
 * TODO cooking consumes whole stack
 * DONE anatomy bonus to healing?
-* TODO can't carry enough gold to buy house (weight limit on backpack item?)
-* TODO can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
+* DONE can't carry enough gold to buy house (weight limit on backpack item?)
+* DONE can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
 * TODO dex seems to gain quite slowly?
 * TODO bowcraftt cant choose bows
