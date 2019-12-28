@@ -33,12 +33,12 @@ namespace Server.Misc
 			{
 				case DFAlgorithm.Standard:
 				{
-					fatigue = (damage * (100.0 / m.Hits) * ((double)m.Stam / 100)) - 5.0;
+					fatigue = (damage * (130.0 / m.Hits) * ((double)m.Stam / 130)) - 5.0;
 					break;
 				}
 				case DFAlgorithm.PainSpike:
 				{
-					fatigue = (damage * ((100.0 / m.Hits) + ((50.0 + m.Stam) / 100) - 1.0)) - 5.0;
+					fatigue = (damage * ((130.0 / m.Hits) + ((50.0 + m.Stam) / 130) - 1.0)) - 5.0;
 					break;
 				}
 			}
@@ -47,7 +47,7 @@ namespace Server.Misc
 				m.Stam -= (int)fatigue;
 		}
 
-		public const int OverloadAllowance = 4; // We can be four stones overweight without getting fatigued
+		public const int OverloadAllowance = 5; // We can be four stones overweight without getting fatigued
 
 		public static int GetMaxWeight( Mobile m )
 		{
@@ -79,7 +79,7 @@ namespace Server.Misc
 				}
 			}
 
-			if ( ((from.Stam * 100) / Math.Max( from.StamMax, 1 )) < 10 )
+			if ( ((from.Stam * 130) / Math.Max( from.StamMax, 1 )) < 10 )
 				--from.Stam;
 
 			if ( from.Stam == 0 )

@@ -819,7 +819,7 @@ namespace Server.Mobiles
 	    UpdateResistances();
 	}
 
-	public override int MaxWeight { get { return 40 + (int)(3.5 * this.Str); } }
+	public override int MaxWeight { get { return 40 + (int)(3.5 * this.Str); } } //495 at 130 str
 
 	private int m_LastGlobalLight = -1, m_LastPersonalLight = -1;
 
