@@ -242,7 +242,8 @@ namespace Server.Engines.Craft
 
 			index = AddCraft( typeof( FishSteak ), 1044498, 1022427, 0.0, 100.0, typeof( RawFishSteak ), 1044476, 1, 1044253 );
 			SetNeedHeat( index, true );
-			SetUseAllRes( index, true );
+			SetUseAllRes( index, false );
+			//SetUseAllRes( index, true);
 
 			index = AddCraft( typeof( FriedEggs ), 1044498, 1022486, 0.0, 100.0, typeof( Eggs ), 1044477, 1, 1044253 );
 			SetNeedHeat( index, true );
