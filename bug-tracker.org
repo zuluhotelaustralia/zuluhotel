@@ -67,7 +67,7 @@ This exception is fatal, press return to exit
   sith sez:  what's the actual bug here?  is it referring to this commit: c47e03384386ecd65c0b2ebf0f7916a741836517 ?
 * DONE arms lore only goes to 100
 * TODO upstream has some code that needs tracking manually, some of it can be ignored
-* TODO up the quantity of reagents/potions on the mage vendor.
+* DONE up the quantity of reagents/potions on the mage vendor.
 * DONE Range of spear/polearms
 * DONE monsters return to spawn
   sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
@@ -94,3 +94,4 @@ This exception is fatal, press return to exit
 * TODO test bowcraft with resoruces, test cooking fish steaks 1 at a time
 * TODO player reports blacksmithy stuck at 125
 * TODO player reports can't repair tools
+* TODO player reports tracking "is fucked"
