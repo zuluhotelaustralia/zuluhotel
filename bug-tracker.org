@@ -6,6 +6,7 @@ This is a list of bugs.
 ** I.e. the fucking cliloc message is displayed without substitution
 * DONE gather nodes won't drift into the dungeon regions but they should
 * TODO items (weapons) not displaying name properly (looted magic weapons)
+  IS THIS STILL A BUG AS OF VERSION 19.12?
 * DONE weapons not taking material properly
 * DONE wraith form still ticks after you die
 * DONE wraith form takes forever to tick
@@ -52,12 +53,13 @@ This exception is fatal, press return to exit
 * DONE battle royale should report when it will start next
 * DONE assess weight of smith hammer
 * TODO should bards have pvp damage ability
-* TODO increase range on spears/polearms
+* DONE increase range on spears/polearms
+  NO
 * TODO increase restock of vendors
 * DONE console spam from crafting
 * TODO make a command list, unless perhaps [help works 
 * DONE add spam to see where you should go in BR
-* TODO add a sellall command
+* DONE add a sellall command
 * TODO battle royale timers and chat spam need sanity checks
 * DONE make skillgain high in moonglow
 * DONE make items spawn identified in battleroyale
@@ -66,8 +68,8 @@ This exception is fatal, press return to exit
 * DONE arms lore only goes to 100
 * TODO upstream has some code that needs tracking manually, some of it can be ignored
 * TODO up the quantity of reagents/potions on the mage vendor.
-* TODO Range of spear/polearms
-* TODO monsters return to spawn
+* DONE Range of spear/polearms
+* DONE monsters return to spawn
   sith sez: does this mean they don't and should?  Current behaviour is per OSI spec
 * DONE Monsters take your shit?
   sith sez:  see [[file:Server/Scripts/Mobiles/BaseCreature.cs::5103][EnableRummaging setting in BaseCreature] 
@@ -81,11 +83,14 @@ This exception is fatal, press return to exit
   yes, the cook sells them
 * DONE assess whether weight limits are fucked
 * DONE can't gain eval int past 120
-* TODO do passive stat bonuses to skills affect spec?
+* DONE do passive stat bonuses to skills affect spec? (yes but you can still get spec 4)
 * TODO can't sell fish?
-* TODO cooking consumes whole stack
+* DONE cooking consumes whole stack
 * DONE anatomy bonus to healing?
 * DONE can't carry enough gold to buy house (weight limit on backpack item?)
 * DONE can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
-* TODO dex seems to gain quite slowly?
-* TODO bowcraftt cant choose bows
+* TODO player reports dex seems to gain quite slowly?
+* DONE bowcraftt cant choose resources
+* TODO test bowcraft with resoruces, test cooking fish steaks 1 at a time
+* TODO player reports blacksmithy stuck at 125
+* TODO player reports can't repair tools
