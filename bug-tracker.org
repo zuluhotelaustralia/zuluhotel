@@ -98,3 +98,4 @@ This exception is fatal, press return to exit
 * TODO vendors aren't restocking to 999
 * TODO arrows and blank scrolls and empty bottles need to be at 999 on vendors
 * TODO exceptional rate is too high?  130 vs 100 thing?
+* TODO can you exploit melee AI by locking them in place with e.g. crates?
