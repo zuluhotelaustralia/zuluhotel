@@ -55,7 +55,7 @@ This exception is fatal, press return to exit
 * TODO should bards have pvp damage ability
 * DONE increase range on spears/polearms
   NO
-* TODO increase restock of vendors
+* DONE increase restock of vendors
 * DONE console spam from crafting
 * TODO make a command list, unless perhaps [help works 
 * DONE add spam to see where you should go in BR
@@ -90,12 +90,14 @@ This exception is fatal, press return to exit
 * DONE can't carry enough gold to buy house (weight limit on backpack item?)
 * DONE can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
 * DONE player reports dex seems to gain quite slowly?
-* TODO bowcraftt cant choose resources/never have enough?
+* TODO bowcraftt cant choose resources/never have enough? -> test changes that were committed before going live
 * DONE test bowcraft with resoruces, test cooking fish steaks 1 at a time
 * DONE player reports blacksmithy stuck at 124.6 -> changed maxskill of breastplate to 130.0
 * DONE player reports can't repair tools -> can't in OSI
 * DONE player reports tracking "is fucked" -> doesn't gain past 38? -> can't gain on NPC vendors
-* TODO vendors aren't restocking to 999
-* TODO arrows and blank scrolls and empty bottles need to be at 999 on vendors
+* DONE vendors aren't restocking to 999
+* DONE arrows and blank scrolls and empty bottles need to be at 999 on vendors
 * TODO exceptional rate is too high?  130 vs 100 thing?
 * TODO can you exploit melee AI by locking them in place with e.g. crates?
+* TODO test local changes to vendors before pushing live
+* TODO eliminate need for stupid ass glassblowing book
