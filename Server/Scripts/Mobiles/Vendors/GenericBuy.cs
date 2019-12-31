@@ -6,340 +6,342 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-	public class GenericBuyInfo : IBuyItemInfo
+    public class GenericBuyInfo : IBuyItemInfo
+    {
+	private class DisplayCache : Container
 	{
-		private class DisplayCache : Container
-		{
-			private static DisplayCache m_Cache;
+	    private static DisplayCache m_Cache;
 
-			public static DisplayCache Cache {
-				get {
-					if ( m_Cache == null || m_Cache.Deleted )
-						m_Cache = new DisplayCache();
+	    public static DisplayCache Cache {
+		get {
+		    if ( m_Cache == null || m_Cache.Deleted )
+			m_Cache = new DisplayCache();
 
-					return m_Cache;
-				}
-			}
-
-			private Dictionary<Type, IEntity> m_Table;
-			private List<Mobile> m_Mobiles;
-
-			public DisplayCache() : base( 0 )
-			{
-				m_Table = new Dictionary<Type, IEntity>();
-				m_Mobiles = new List<Mobile>();
-			}
-
-			public IEntity Lookup( Type key )
-			{
-				IEntity e = null;
-				m_Table.TryGetValue( key, out e );
-				return e;
-			}
-
-			public void Store( Type key, IEntity obj, bool cache )
-			{
-				if ( cache )
-					m_Table[key] = obj;
-
-				if ( obj is Item )
-					AddItem( (Item)obj );
-				else if ( obj is Mobile )
-					m_Mobiles.Add( (Mobile)obj );
-			}
-
-			public DisplayCache( Serial serial ) : base( serial )
-			{
-			}
-
-			public override void OnAfterDelete()
-			{
-				base.OnAfterDelete();
-
-				for ( int i = 0; i < m_Mobiles.Count; ++i )
-					m_Mobiles[i].Delete();
-
-				m_Mobiles.Clear();
-
-				for ( int i = Items.Count - 1; i >= 0; --i )
-					if ( i < Items.Count )
-						Items[i].Delete();
-
-				if ( m_Cache == this )
-					m_Cache = null;
-			}
-
-			public override void Serialize( GenericWriter writer )
-			{
-				base.Serialize( writer );
-
-				writer.Write( (int) 0 ); // version
-
-				writer.Write( m_Mobiles );
-			}
-
-			public override void Deserialize( GenericReader reader )
-			{
-				base.Deserialize( reader );
-
-				int version = reader.ReadInt();
-
-				m_Mobiles = reader.ReadStrongMobileList();
-
-				for ( int i = 0; i < m_Mobiles.Count; ++i )
-					m_Mobiles[i].Delete();
-
-				m_Mobiles.Clear();
-
-				for ( int i = Items.Count - 1; i >= 0; --i )
-					if ( i < Items.Count )
-						Items[i].Delete();
-
-				if ( m_Cache == null )
-					m_Cache = this;
-				else
-					Delete();
-
-				m_Table = new Dictionary<Type, IEntity>();
-			}
+		    return m_Cache;
 		}
+	    }
 
-		private Type m_Type;
-		private string m_Name;
-		private int m_Price;
-		private int m_MaxAmount, m_Amount;
-		private int m_ItemID;
-		private int m_Hue;
-		private object[] m_Args;
-		private IEntity m_DisplayEntity;
+	    private Dictionary<Type, IEntity> m_Table;
+	    private List<Mobile> m_Mobiles;
 
-		public virtual int ControlSlots{ get{ return 0; } }
+	    public DisplayCache() : base( 0 )
+	    {
+		m_Table = new Dictionary<Type, IEntity>();
+		m_Mobiles = new List<Mobile>();
+	    }
 
-		public virtual bool CanCacheDisplay{ get{ return false; } } //return ( m_Args == null || m_Args.Length == 0 ); } 
+	    public IEntity Lookup( Type key )
+	    {
+		IEntity e = null;
+		m_Table.TryGetValue( key, out e );
+		return e;
+	    }
 
-		private bool IsDeleted( IEntity obj )
-		{
-			return obj.Deleted;
-		}
+	    public void Store( Type key, IEntity obj, bool cache )
+	    {
+		if ( cache )
+		    m_Table[key] = obj;
 
-		public void DeleteDisplayEntity()
-		{
-			if ( m_DisplayEntity == null )
-				return;
+		if ( obj is Item )
+		    AddItem( (Item)obj );
+		else if ( obj is Mobile )
+		    m_Mobiles.Add( (Mobile)obj );
+	    }
 
-			m_DisplayEntity.Delete();
-			m_DisplayEntity = null;
-		}
+	    public DisplayCache( Serial serial ) : base( serial )
+	    {
+	    }
 
-		public IEntity GetDisplayEntity()
-		{
-			if ( m_DisplayEntity != null && !IsDeleted( m_DisplayEntity ) )
-				return m_DisplayEntity;
+	    public override void OnAfterDelete()
+	    {
+		base.OnAfterDelete();
 
-			bool canCache = this.CanCacheDisplay;
+		for ( int i = 0; i < m_Mobiles.Count; ++i )
+		    m_Mobiles[i].Delete();
 
-			if ( canCache )
-				m_DisplayEntity = DisplayCache.Cache.Lookup( m_Type );
+		m_Mobiles.Clear();
 
-			if ( m_DisplayEntity == null || IsDeleted( m_DisplayEntity ) )
-				m_DisplayEntity = GetEntity();
+		for ( int i = Items.Count - 1; i >= 0; --i )
+		    if ( i < Items.Count )
+			Items[i].Delete();
 
-			DisplayCache.Cache.Store( m_Type, m_DisplayEntity, canCache );
+		if ( m_Cache == this )
+		    m_Cache = null;
+	    }
 
-			return m_DisplayEntity;
-		}
+	    public override void Serialize( GenericWriter writer )
+	    {
+		base.Serialize( writer );
 
-		public Type Type
-		{
-			get{ return m_Type; }
-			set{ m_Type = value; }
-		}
+		writer.Write( (int) 0 ); // version
 
-		public string Name
-		{
-			get{ return m_Name; }
-			set{ m_Name = value; }
-		}
+		writer.Write( m_Mobiles );
+	    }
 
-		public int DefaultPrice{ get{ return m_PriceScalar; } }
+	    public override void Deserialize( GenericReader reader )
+	    {
+		base.Deserialize( reader );
 
-		private int m_PriceScalar;
+		int version = reader.ReadInt();
 
-		public int PriceScalar
-		{
-			get{ return m_PriceScalar; }
-			set{ m_PriceScalar = value; }
-		}
+		m_Mobiles = reader.ReadStrongMobileList();
 
-		public int Price
-		{
-			get
-			{
-				if ( m_PriceScalar != 0 )
-				{
-					if ( m_Price > 5000000 )
-					{
-						long price = m_Price;
+		for ( int i = 0; i < m_Mobiles.Count; ++i )
+		    m_Mobiles[i].Delete();
 
-						price *= m_PriceScalar;
-						price += 50;
-						price /= 100;
+		m_Mobiles.Clear();
 
-						if ( price > int.MaxValue )
-							price = int.MaxValue;
+		for ( int i = Items.Count - 1; i >= 0; --i )
+		    if ( i < Items.Count )
+			Items[i].Delete();
 
-						return (int)price;
-					}
+		if ( m_Cache == null )
+		    m_Cache = this;
+		else
+		    Delete();
 
-					return ( ((m_Price * m_PriceScalar) + 50) / 100 );
-				}
-
-				return m_Price;
-			}
-			set{ m_Price = value; }
-		}
-
-		public int ItemID
-		{
-			get{ return m_ItemID; }
-			set{ m_ItemID = value; }
-		}
-
-		public int Hue
-		{
-			get{ return m_Hue; }
-			set{ m_Hue = value; }
-		}
-
-		public int Amount
-		{
-			get{ return m_Amount; }
-			set{ if ( value < 0 ) value = 0; m_Amount = value; }
-		}
-
-		public int MaxAmount
-		{
-			get{ return m_MaxAmount; }
-			set{ m_MaxAmount = value; }
-		}
-
-		public object[] Args
-		{
-			get{ return m_Args; }
-			set{ m_Args = value; }
-		}
-
-		public GenericBuyInfo( Type type, int price, int amount, int itemID, int hue ) : this( null, type, price, amount, itemID, hue, null )
-		{
-		}
-
-		public GenericBuyInfo( string name, Type type, int price, int amount, int itemID, int hue ) : this( name, type, price, amount, itemID, hue, null )
-		{
-		}
-
-		public GenericBuyInfo( Type type, int price, int amount, int itemID, int hue, object[] args ) : this( null, type, price, amount, itemID, hue, args )
-		{
-		}
-
-		public GenericBuyInfo( string name, Type type, int price, int amount, int itemID, int hue, object[] args )
-		{
-			m_Type = type;
-			m_Price = price;
-			m_MaxAmount = m_Amount = amount;
-			m_ItemID = itemID;
-			m_Hue = hue;
-			m_Args = args;
-
-			if ( name == null )
-				m_Name = itemID < 0x4000 ? (1020000 + itemID).ToString() : (1078872 + itemID).ToString();
-			else
-				m_Name = name;
-		}
-
-		//get a new instance of an object (we just bought it)
-		public virtual IEntity GetEntity()
-		{
-			if ( m_Args == null || m_Args.Length == 0 )
-				return (IEntity)Activator.CreateInstance( m_Type );
-
-			return (IEntity)Activator.CreateInstance( m_Type, m_Args );
-			//return (Item)Activator.CreateInstance( m_Type );
-		}
-
-		//Attempt to restock with item, (return true if restock sucessful)
-		public bool Restock( Item item, int amount )
-		{
-			return false;
-			/*if ( item.GetType() == m_Type )
-			{
-				if ( item is BaseWeapon )
-				{
-					BaseWeapon weapon = (BaseWeapon)item;
-
-					if ( weapon.Quality == WeaponQuality.Low || weapon.Quality == WeaponQuality.Exceptional || (int)weapon.DurabilityLevel > 0 || (int)weapon.DamageLevel > 0 || (int)weapon.AccuracyLevel > 0 )
-						return false;
-				}
-
-				if ( item is BaseArmor )
-				{
-					BaseArmor armor = (BaseArmor)item;
-
-					if ( armor.Quality == ArmorQuality.Low || armor.Quality == ArmorQuality.Exceptional || (int)armor.Durability > 0 || (int)armor.ProtectionLevel > 0 )
-						return false;
-				}
-
-				m_Amount += amount;
-
-				return true;
-			}
-			else
-			{
-				return false;
-			}*/
-		}
-
-		public void OnRestock()
-		{
-			if ( m_Amount <= 0 )
-			{
-				/*
-					Core.ML using this vendor system is undefined behavior, so being
-					as it lends itself to an abusable exploit to cause ingame havok
-					and the stackable items are not found to be over 20 items, this is
-					changed until there is a better solution.
-				*/
-
-				object Obj_Disp = GetDisplayEntity();
-
-				if( Core.ML && Obj_Disp is Item && !( Obj_Disp as Item ).Stackable )
-				{
-					m_MaxAmount = Math.Min( 20, m_MaxAmount );
-				}
-				else
-				{
-					m_MaxAmount = Math.Min( 999, m_MaxAmount * 2 );
-				}
-			}
-			else
-			{
-				/* NOTE: According to UO.com, the quantity is halved if the item does not reach 0
-				 * Here we implement differently: the quantity is halved only if less than half
-				 * of the maximum quantity was bought. That is, if more than half is sold, then
-				 * there's clearly a demand and we should not cut down on the stock.
-				 */
-
-				int halfQuantity = m_MaxAmount;
-
-				if ( halfQuantity >= 999 )
-					halfQuantity = 640;
-				else if ( halfQuantity > 20 )
-					halfQuantity /= 2;
-
-				if ( m_Amount >= halfQuantity )
-					m_MaxAmount = halfQuantity;
-			}
-
-			m_Amount = m_MaxAmount;
-		}
+		m_Table = new Dictionary<Type, IEntity>();
+	    }
 	}
+
+	private Type m_Type;
+	private string m_Name;
+	private int m_Price;
+	private int m_MaxAmount, m_Amount;
+	private int m_ItemID;
+	private int m_Hue;
+	private object[] m_Args;
+	private IEntity m_DisplayEntity;
+
+	public virtual int ControlSlots{ get{ return 0; } }
+
+	public virtual bool CanCacheDisplay{ get{ return false; } } //return ( m_Args == null || m_Args.Length == 0 ); } 
+
+	private bool IsDeleted( IEntity obj )
+	{
+	    return obj.Deleted;
+	}
+
+	public void DeleteDisplayEntity()
+	{
+	    if ( m_DisplayEntity == null )
+		return;
+
+	    m_DisplayEntity.Delete();
+	    m_DisplayEntity = null;
+	}
+
+	public IEntity GetDisplayEntity()
+	{
+	    if ( m_DisplayEntity != null && !IsDeleted( m_DisplayEntity ) )
+		return m_DisplayEntity;
+
+	    bool canCache = this.CanCacheDisplay;
+
+	    if ( canCache )
+		m_DisplayEntity = DisplayCache.Cache.Lookup( m_Type );
+
+	    if ( m_DisplayEntity == null || IsDeleted( m_DisplayEntity ) )
+		m_DisplayEntity = GetEntity();
+
+	    DisplayCache.Cache.Store( m_Type, m_DisplayEntity, canCache );
+
+	    return m_DisplayEntity;
+	}
+
+	public Type Type
+	{
+	    get{ return m_Type; }
+	    set{ m_Type = value; }
+	}
+
+	public string Name
+	{
+	    get{ return m_Name; }
+	    set{ m_Name = value; }
+	}
+
+	public int DefaultPrice{ get{ return m_PriceScalar; } }
+
+	private int m_PriceScalar;
+
+	public int PriceScalar
+	{
+	    get{ return m_PriceScalar; }
+	    set{ m_PriceScalar = value; }
+	}
+
+	public int Price
+	{
+	    get
+	    {
+		if ( m_PriceScalar != 0 )
+		{
+		    if ( m_Price > 5000000 )
+		    {
+			long price = m_Price;
+
+			price *= m_PriceScalar;
+			price += 50;
+			price /= 100;
+
+			if ( price > int.MaxValue )
+			    price = int.MaxValue;
+
+			return (int)price;
+		    }
+
+		    return ( ((m_Price * m_PriceScalar) + 50) / 100 );
+		}
+
+		return m_Price;
+	    }
+	    set{ m_Price = value; }
+	}
+
+	public int ItemID
+	{
+	    get{ return m_ItemID; }
+	    set{ m_ItemID = value; }
+	}
+
+	public int Hue
+	{
+	    get{ return m_Hue; }
+	    set{ m_Hue = value; }
+	}
+
+	public int Amount
+	{
+	    get{ return m_Amount; }
+	    set{ if ( value < 0 ) value = 0; m_Amount = value; }
+	}
+
+	public int MaxAmount
+	{
+	    get{ return m_MaxAmount; }
+	    set{ m_MaxAmount = value; }
+	}
+
+	public object[] Args
+	{
+	    get{ return m_Args; }
+	    set{ m_Args = value; }
+	}
+
+	public GenericBuyInfo( Type type, int price, int amount, int itemID, int hue ) : this( null, type, price, amount, itemID, hue, null )
+	{
+	}
+
+	public GenericBuyInfo( string name, Type type, int price, int amount, int itemID, int hue ) : this( name, type, price, amount, itemID, hue, null )
+	{
+	}
+
+	public GenericBuyInfo( Type type, int price, int amount, int itemID, int hue, object[] args ) : this( null, type, price, amount, itemID, hue, args )
+	{
+	}
+
+	public GenericBuyInfo( string name, Type type, int price, int amount, int itemID, int hue, object[] args )
+	{
+	    m_Type = type;
+	    m_Price = price;
+	    m_MaxAmount = m_Amount = amount;
+	    m_ItemID = itemID;
+	    m_Hue = hue;
+	    m_Args = args;
+
+	    if ( name == null )
+		m_Name = itemID < 0x4000 ? (1020000 + itemID).ToString() : (1078872 + itemID).ToString();
+	    else
+		m_Name = name;
+	}
+
+	//get a new instance of an object (we just bought it)
+	public virtual IEntity GetEntity()
+	{
+	    if ( m_Args == null || m_Args.Length == 0 )
+		return (IEntity)Activator.CreateInstance( m_Type );
+
+	    return (IEntity)Activator.CreateInstance( m_Type, m_Args );
+	    //return (Item)Activator.CreateInstance( m_Type );
+	}
+
+	//Attempt to restock with item, (return true if restock sucessful)
+	public bool Restock( Item item, int amount )
+	{
+	    return false;
+	    /*if ( item.GetType() == m_Type )
+	      {
+	      if ( item is BaseWeapon )
+	      {
+	      BaseWeapon weapon = (BaseWeapon)item;
+
+	      if ( weapon.Quality == WeaponQuality.Low || weapon.Quality == WeaponQuality.Exceptional || (int)weapon.DurabilityLevel > 0 || (int)weapon.DamageLevel > 0 || (int)weapon.AccuracyLevel > 0 )
+	      return false;
+	      }
+
+	      if ( item is BaseArmor )
+	      {
+	      BaseArmor armor = (BaseArmor)item;
+
+	      if ( armor.Quality == ArmorQuality.Low || armor.Quality == ArmorQuality.Exceptional || (int)armor.Durability > 0 || (int)armor.ProtectionLevel > 0 )
+	      return false;
+	      }
+
+	      m_Amount += amount;
+
+	      return true;
+	      }
+	      else
+	      {
+	      return false;
+	      }*/
+	}
+
+	public void OnRestock()
+	{
+	    // WHY?  IS THERE A GOOD REASON FOR THIS COMPLEXITY?  CONVINCE ME.  SITH.
+
+	    /*
+	    if ( m_Amount <= 0 )
+	    {
+		
+		//  Core.ML using this vendor system is undefined behavior, so being
+		//  as it lends itself to an abusable exploit to cause ingame havok
+		//  and the stackable items are not found to be over 20 items, this is
+		//  changed until there is a better solution.
+		
+		object Obj_Disp = GetDisplayEntity();
+
+		if( Core.ML && Obj_Disp is Item && !( Obj_Disp as Item ).Stackable )
+		{
+		    m_MaxAmount = Math.Min( 20, m_MaxAmount );
+		}
+		else
+		{
+		    m_MaxAmount = Math.Min( 999, m_MaxAmount * 2 );
+		}
+	    }
+	    else
+	    {
+		// NOTE: According to UO.com, the quantity is halved if the item does not reach 0
+		// Here we implement differently: the quantity is halved only if less than half
+		// of the maximum quantity was bought. That is, if more than half is sold, then
+		// there's clearly a demand and we should not cut down on the stock.
+		
+		int halfQuantity = m_MaxAmount;
+
+		if ( halfQuantity >= 999 )
+		    halfQuantity = 640;
+		else if ( halfQuantity > 20 )
+		    halfQuantity /= 2;
+
+		if ( m_Amount >= halfQuantity )
+		m_MaxAmount = halfQuantity;
+		}
+		
+	    */
+	    m_Amount = m_MaxAmount;
+	}
+    }
 }
