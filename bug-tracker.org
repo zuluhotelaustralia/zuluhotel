@@ -90,10 +90,10 @@ This exception is fatal, press return to exit
 * DONE can't carry enough gold to buy house (weight limit on backpack item?)
 * DONE can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
 * DONE player reports dex seems to gain quite slowly?
-* DONE bowcraftt cant choose resources
+* TODO bowcraftt cant choose resources/never have enough?
 * DONE test bowcraft with resoruces, test cooking fish steaks 1 at a time
-* TODO player reports blacksmithy stuck at 124.6
+* DONE player reports blacksmithy stuck at 124.6 -> changed maxskill of breastplate to 130.0
 * DONE player reports can't repair tools -> can't in OSI
-* TODO player reports tracking "is fucked" -> doesn't gain past 38?
+* DONE player reports tracking "is fucked" -> doesn't gain past 38? -> can't gain on NPC vendors
 * TODO vendors aren't restocking to 999
 * TODO arrows and blank scrolls and empty bottles need to be at 999 on vendors
