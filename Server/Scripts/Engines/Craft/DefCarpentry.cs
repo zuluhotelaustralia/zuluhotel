@@ -288,6 +288,7 @@ namespace Server.Engines.Craft
 	    // Staves and Shields
 	    AddCraft( typeof( ShepherdsCrook ), Core.ML ? 1044566 : 1044295, 1023713, 78.9, 103.9, typeof( Board ), 1044041, 7, 1044351 );
 	    AddCraft( typeof( QuarterStaff ), Core.ML ? 1044566 : 1044295, 1023721, 73.6, 98.6, typeof( Board ), 1044041, 6, 1044351 );
+	    AddCraft( typeof( BlackStaff ), Core.ML ? 1044566 : 1044295, 1023568, 81.9, 130.0, typeof( Board ), 1044041, 9, 1044351 );
 	    AddCraft( typeof( GnarledStaff ), Core.ML ? 1044566 : 1044295, 1025112, 78.9, 103.9, typeof( Board ), 1044041, 7, 1044351 );
 	    AddCraft( typeof( WoodenShield ), Core.ML ? 1062760 : 1044295, 1027034, 52.6, 77.6, typeof( Board ), 1044041, 9, 1044351 );
 

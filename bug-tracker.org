@@ -97,3 +97,4 @@ This exception is fatal, press return to exit
 * DONE player reports tracking "is fucked" -> doesn't gain past 38? -> can't gain on NPC vendors
 * TODO vendors aren't restocking to 999
 * TODO arrows and blank scrolls and empty bottles need to be at 999 on vendors
+* TODO exceptional rate is too high?  130 vs 100 thing?
