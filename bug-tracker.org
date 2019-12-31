@@ -89,9 +89,9 @@ This exception is fatal, press return to exit
 * DONE anatomy bonus to healing?
 * DONE can't carry enough gold to buy house (weight limit on backpack item?)
 * DONE can carry 498 stones (e.g.) but player reports that at 428 weight it drops single logs to floor... item limit in container?
-* TODO player reports dex seems to gain quite slowly?
+* DONE player reports dex seems to gain quite slowly?
 * DONE bowcraftt cant choose resources
-* TODO test bowcraft with resoruces, test cooking fish steaks 1 at a time
+* DONE test bowcraft with resoruces, test cooking fish steaks 1 at a time
 * TODO player reports blacksmithy stuck at 124.6
 * DONE player reports can't repair tools -> can't in OSI
 * TODO player reports tracking "is fucked" -> doesn't gain past 38?
