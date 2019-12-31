@@ -92,6 +92,8 @@ This exception is fatal, press return to exit
 * TODO player reports dex seems to gain quite slowly?
 * DONE bowcraftt cant choose resources
 * TODO test bowcraft with resoruces, test cooking fish steaks 1 at a time
-* TODO player reports blacksmithy stuck at 125
-* TODO player reports can't repair tools
-* TODO player reports tracking "is fucked"
+* TODO player reports blacksmithy stuck at 124.6
+* DONE player reports can't repair tools -> can't in OSI
+* TODO player reports tracking "is fucked" -> doesn't gain past 38?
+* TODO vendors aren't restocking to 999
+* TODO arrows and blank scrolls and empty bottles need to be at 999 on vendors

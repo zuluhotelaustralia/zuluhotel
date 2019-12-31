@@ -660,7 +660,7 @@ namespace Server
 		new SkillInfo( 39, "Veterinary",		8.0,	4.0,	8.0,	"Veterinarian",	null,	0.8,	0.4,	0.8,	1.0 ),
 		new SkillInfo( 40, "Swordsmanship",		7.5,	2.5,	0.0,	"Swordsman",	null,	0.75,	0.25,	0.0,	1.0 ),
 		new SkillInfo( 41, "Mace Fighting",		9.0,	1.0,	0.0,	"Armsman",	null,	0.9,	0.1,	0.0,	1.0 ),
-		new SkillInfo( 42, "Fencing",			4.5,	5.5,	0.0,	"Fencer",	null,	0.45,	0.55,	0.0,	1.0 ),
+		new SkillInfo( 42, "Fencing",			4.5,	20.0,	0.0,	"Fencer",	null,	0.45,	0.55,	0.0,	1.0 ),
 		new SkillInfo( 43, "Wrestling",			9.0,	1.0,	0.0,	"Wrestler",	null,	0.9,	0.1,	0.0,	1.0 ),
 		new SkillInfo( 44, "Lumberjacking",		20.0,	0.0,	0.0,	"Lumberjack",	null,	2.0,	0.0,	0.0,	1.0 ),
 		new SkillInfo( 45, "Mining",			20.0,	0.0,	0.0,	"Miner",	null,	2.0,	0.0,	0.0,	1.0 ),
