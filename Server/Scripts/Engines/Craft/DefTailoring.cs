@@ -338,7 +338,7 @@ namespace Server.Engines.Craft
 			AddCraft( typeof( StuddedGloves ), 1015300, 1025077, 82.9, 107.9, typeof( Leather ), 1044462, 8, 1044463 );
 			AddCraft( typeof( StuddedArms ), 1015300, 1025076, 87.1, 112.1, typeof( Leather ), 1044462, 10, 1044463 );
 			AddCraft( typeof( StuddedLegs ), 1015300, 1025082, 91.2, 116.2, typeof( Leather ), 1044462, 12, 1044463 );
-			AddCraft( typeof( StuddedChest ), 1015300, 1025083, 94.0, 119.0, typeof( Leather ), 1044462, 14, 1044463 );
+			AddCraft( typeof( StuddedChest ), 1015300, 1025083, 94.0, 130.0, typeof( Leather ), 1044462, 14, 1044463 );
 
 			if( Core.SE )
 			{

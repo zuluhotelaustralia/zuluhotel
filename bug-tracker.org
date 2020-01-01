@@ -52,7 +52,7 @@ This exception is fatal, press return to exit
 * DONE Crafting region near newbie dungeon
 * DONE battle royale should report when it will start next
 * DONE assess weight of smith hammer
-* TODO should bards have pvp damage ability
+* DONE should bards have pvp damage ability -> not on launch
 * DONE increase range on spears/polearms
   NO
 * DONE increase restock of vendors
@@ -100,4 +100,5 @@ This exception is fatal, press return to exit
 * TODO exceptional rate is too high?  130 vs 100 thing?
 * TODO can you exploit melee AI by locking them in place with e.g. crates?
 * TODO test local changes to vendors before pushing live
-* TODO eliminate need for stupid ass glassblowing book
+* DONE eliminate need for stupid ass glassblowing book -> eh, maybe not
+* TODO player reports tailoring stuck @ 94.7
