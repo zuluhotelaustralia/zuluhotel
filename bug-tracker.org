@@ -84,7 +84,7 @@ This exception is fatal, press return to exit
 * DONE assess whether weight limits are fucked
 * DONE can't gain eval int past 120
 * DONE do passive stat bonuses to skills affect spec? (yes but you can still get spec 4)
-* TODO can't sell fish?
+* DONE can't sell fish?
 * DONE cooking consumes whole stack
 * DONE anatomy bonus to healing?
 * DONE can't carry enough gold to buy house (weight limit on backpack item?)
@@ -102,5 +102,5 @@ This exception is fatal, press return to exit
 * DONE test local changes to vendors before pushing live
 * DONE eliminate need for stupid ass glassblowing book -> eh, maybe not
 * DONE player reports tailoring stuck @ 94.7
-* TODO put glassblowing book into loot tables somewhere
-* TODO up amounts of bandages, hides, bolts of cloth
+* TODO put glassblowing book into loot tables somewhere or add a GlassBlower npc vendor
+* DONE up amounts of bandages, hides, bolts of cloth
