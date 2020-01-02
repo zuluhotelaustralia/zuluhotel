@@ -7,18 +7,7 @@ using Server.Mobiles;
 using Server.Targeting;
 
 namespace Server {
-    private class InternalTarget : Target{
-	public InternalTarget( ) : base( 12, false, TargetFlags.None ){
-	}
-
-	protected override void OnTarget( Mobile from, object o ){
-	    if( o is Mobile){
-		
-	}
-    }
-    
     public class Prots {
-
 	public static void Initialize(){
 	    CommandSystem.Register("GetProts", AccessLevel.GameMaster, new CommandEventHandler( GetProts_OnCommand ) );
 	}
@@ -62,30 +51,136 @@ namespace Server {
 	}
 
        	public void UpdateProts(){
-	    
+	    _air = PiecewiseScale(DamageType.Air);
+	    _earth = PiecewiseScale(DamageType.Earth);
+	    _fire = PiecewiseScale(DamageType.Fire);
+	    _necro = PiecewiseScale(DamageType.Necro);
+	    _water = PiecewiseScale(DamageType.Water);
 	}
 
-	private int Assess(Item theitem){
+	private int PiecewiseScale( DamageType dt ){
+	    int tally = 0;
+
+	    //didn't pull these ot of my ass, see baseweapon.cs
+	    tally += 7 * NeckProt(dt) / ( 100 * 100 );
+	    tally += 7 * HandsProt(dt) / ( 100 * 100 );
+	    tally += 14 * ArmsProt(dt) / ( 100 * 100 );
+	    tally += 15 * HeadProt(dt) / ( 100 * 100 );
+	    tally += 22 * LegsProt(dt) / ( 100 * 100 );
+	    tally += 35 * ChestProt(dt) / ( 100 * 100 );
+
+	    return tally;
+	}
+	
+	private int Assess(Item theitem, DamageType dmgtype){
 	    if( !(theitem is BaseArmor) ){
 		return 0;
 	    }
-	    Item ar = theitem as BaseArmor;
+	    
+	    BaseArmor ar = theitem as BaseArmor;
 	    CraftResource cr = ar.Resource;
-	    switch(cr){
-		case CraftResource.Lavarock:
-		    return 50;
+	    switch(dmgtype){
+		case DamageType.Air:
+		    if( cr == CraftResource.Azurite ){
+			return 50;
+		    }
+		    if( cr == CraftResource.Goddess ){
+			return 25;
+		    }
+		    if( cr == CraftResource.RadiantNimbusDiamond ) {
+			return 75;
+		    }
+		   
 		    break;
-		case CraftResource.SilverRock:
-		    
-	private int NeckProt(){
+		case DamageType.Earth:
+		    if( cr == CraftResource.Destruction ){
+			return 25;
+		    }
+		    if( cr == CraftResource.Crystal ){
+			return 25;
+		    }
+		    if( cr == CraftResource.RadiantNimbusDiamond ){
+			return 75;
+		    }
+		    break;
+		case DamageType.Fire:
+		    if( cr == CraftResource.Lavarock ){
+			return 50;
+		    }
+		    if( cr == CraftResource.DarkSableRuby ){
+			return 75;
+		    }
+		    break;
+		case DamageType.Necro:
+		    if( cr == CraftResource.SilverRock ){
+			return 25;
+		    }
+		    if( cr == CraftResource.Undead ){
+			return 50;
+		    }
+		    if( cr == CraftResource.Virginity ){
+			return 50;
+		    }
+		    if( cr == CraftResource.RadiantNimbusDiamond ){
+			return 75;
+		    }
+		    break;
+		case DamageType.Water:
+		    if( cr == CraftResource.IceRock ){
+			return 25;
+		    }
+		    if( cr == CraftResource.Dripstone ){
+			return 25;
+		    }
+		    if( cr == CraftResource.EbonTwilightSapphire ){
+			return 75;
+		    }
+		    break;
+		default:
+		    return 0;
+	    }
+	    return 0;
 	}
-
-	private int HandsProt(){}
-
-	private int ArmsProt(){}
-	private int HeadProt(){}
-	private int LegsProt(){}
-	private int ChestProt(){}
 	
+	private int NeckProt( DamageType dt ){
+	    Item armor = _parent.NeckArmor;
+	    return Assess(armor, dt);
+	}
+	private int HandsProt( DamageType dt){
+	    Item armor = _parent.HandArmor;
+	    return Assess(armor, dt);
+	}
+	private int ArmsProt( DamageType dt){
+	    Item armor = _parent.ArmsArmor;
+	    return Assess(armor, dt);
+	}
+	private int HeadProt( DamageType dt){
+	    Item armor = _parent.HeadArmor;
+	    return Assess(armor, dt);
+	}
+	private int LegsProt( DamageType dt){
+	    Item armor = _parent.LegsArmor;
+	    return Assess(armor, dt);
+	}
+	private int ChestProt( DamageType dt){
+	    Item armor = _parent.ChestArmor;
+	    return Assess(armor, dt);
+	}
+	
+
+	private class InternalTarget : Target{
+	    public InternalTarget( ) : base( 12, false, TargetFlags.None ){
+	    }
+
+	    protected override void OnTarget( Mobile from, object o ){
+		if( o is Mobile){
+		    Mobile m = o as Mobile;
+		    from.SendMessage("Air: {0}, Earth: {1}, Fire: {2}, Necro: {3}, Water: {4}", m.Prots.Air, m.Prots.Earth, m.Prots.Fire, m.Prots.Necro, m.Prots.Water );
+		}
+		else {
+		    from.SendMessage("Can only target Mobiles");
+		}
+	    }
+	}
     }
 }
