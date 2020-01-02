@@ -11,7 +11,6 @@ namespace Server {
 	Fire,
 	Water,
 	Necro,
-	Holy,
 	Poison
     }
 
