@@ -797,6 +797,11 @@ namespace Server
 	    set { m_AutoLoop = value; }
 	}
 
+	private Prots m_Prots;
+	public Prots Prots {
+	    get { return m_Prots; }
+	}
+	
 	private static DamageScalar m_DamageScalar = new DamageScalar();
 	public static DamageScalar DamageScalar {
 	    get { return m_DamageScalar; }
@@ -5195,9 +5200,11 @@ namespace Server
 
 	    if( !this.Region.OnDamage( this, ref amount ) )
 		return;
-
-            amount = m_DamageScalar.ScaleDamage(amount, from, this, type);
-
+	    // this should be done in BaseWeapon and perhaps also somewhere in spellhelper
+	    //rather than here, because we want to apply the spec-based damage before parrying
+	    //and other stuff
+            //amount = m_DamageScalar.ScaleDamage(amount, from, this, type);
+	    
 	    if( amount > 0 )
 	    {
 		int oldHits = Hits;
@@ -5464,8 +5471,18 @@ namespace Server
 
 	    switch( version )
 	    {
+		case 35:
+		    {
+			m_Prots.UpdateProts();
+			goto case 34;
+		    }
 		case 34:
 		    {
+			if( m_Prots == null ){
+			    m_Prots = new Prots( this );
+			    m_Prots.UpdateProts();
+			}
+			
 			m_AutoLoop = reader.ReadInt();
 			goto case 33;
 		    }
@@ -5909,8 +5926,8 @@ namespace Server
 
 	public virtual void Serialize( GenericWriter writer )
 	{
-	    writer.Write( (int)34 ); // version
-
+	    writer.Write( (int)35 ); // version
+	    
 	    writer.Write( m_AutoLoop );
 	    
 	    writer.WriteDeltaTime( m_LastStrGain );
@@ -9983,6 +10000,7 @@ namespace Server
 	    }
 
 	    m_AutoLoop = 1;
+	    m_Prots = new Prots( this );
 	}
 
 	public void DefaultMobileInit()
