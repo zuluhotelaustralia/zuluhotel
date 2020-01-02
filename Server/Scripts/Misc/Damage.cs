@@ -38,8 +38,12 @@ namespace Server {
 	//this function gets called in Mobile.Damage() and is intended to be the single point of all
 	// damage scaling caused by zulu-related systems.  Every time a mobile gets damaged, Mobile.Damage needs
 	// to be the instrument by which this is done.
-	public override int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
 
+	//public int ScaleDamage( int amount, Mobile from, Mobile m ){
+	//    return ScaleDamage(amount, from, m, DamageType.Physical);
+	//}
+	
+	public override int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
 	    double result = (double)amount;
 	    double tgtbonus = 1.0;
 	    double frombonus = 1.0;

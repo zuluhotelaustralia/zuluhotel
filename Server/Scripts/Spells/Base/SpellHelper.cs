@@ -1014,7 +1014,8 @@ namespace Server.Spells
 
 	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage )
 	{
-	    int iDamage = (int)damage;
+	    //int iDamage = (int)damage;
+	    int iDamage = Mobile.DamageScalar.ScaleDamage((int)damage, from, target, DamageType.Magical);
 
 	    if( delay == TimeSpan.Zero )
 	    {
@@ -1146,7 +1147,8 @@ namespace Server.Spells
 	    {
 		m_Target = target;
 		m_From = from;
-		m_Damage = damage;
+		m_Damage = Mobile.DamageScalar.ScaleDamage(damage, from, target, DamageType.Magical);
+		//m_Damage = damage;
 		m_Spell = s;
 
 		if( m_Spell != null && m_Spell.DelayedDamage && !m_Spell.DelayedDamageStacking )

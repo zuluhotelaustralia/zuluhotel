@@ -1230,6 +1230,8 @@ namespace Server.Items
                 damage -= Utility.Random( from, (to - from) + 1 );
             }
 
+	    //attenuate damage from prots here
+	    
             return damage;
         }
 
@@ -2236,11 +2238,12 @@ namespace Server.Items
 
         public virtual int ComputeDamage( Mobile attacker, Mobile defender )
         {
-            if ( Core.AOS )
-                return ComputeDamageAOS( attacker, defender );
+            //if ( Core.AOS )
+            //    return ComputeDamageAOS( attacker, defender );
 
             int damage = (int)ScaleDamageOld( attacker, GetBaseDamage( attacker ), true );
-
+	    damage = Mobile.DamageScalar.ScaleDamage(damage, attacker, defender, DamageType.Physical); //scripts/misc/damage.cs
+	    
             // pre-AOS, halve damage if the defender is a player or the attacker is not a player
             if ( defender is PlayerMobile || !( attacker is PlayerMobile ) )
                 damage = (int)(damage / 2.0);
