@@ -1,3 +1,4 @@
+using System;
 using Server;
 using Server.Mobiles;
 
@@ -103,6 +104,7 @@ namespace Server {
 		    break;
 		    
 		case DamageType.Physical:
+		    
 		    //outgoing
 		    if(fromSpec == SpecName.Warrior){
 			result *= frombonus;

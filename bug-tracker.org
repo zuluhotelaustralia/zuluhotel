@@ -105,5 +105,5 @@ This exception is fatal, press return to exit
 * TODO put glassblowing book into loot tables somewhere or add a GlassBlower npc vendor
 * DONE up amounts of bandages, hides, bolts of cloth
 * TODO re-check all skillgain rates, esp inscription 
-* TODO spec-based damage isn't applying?
+* DONE spec-based damage isn't applying?
 * TODO implement skillmod clothing
