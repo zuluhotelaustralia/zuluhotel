@@ -5473,16 +5473,16 @@ namespace Server
 	    {
 		case 35:
 		    {
-			m_Prots.UpdateProts();
+			// see further down where m_Items is set
+			// if you try to load m_Prots here it will cause
+			// a null reference exception and fuck your shit up
+			// for hours while you try to figure it out
+			//
+			// ask me how I know this --sith
 			goto case 34;
 		    }
 		case 34:
 		    {
-			if( m_Prots == null ){
-			    m_Prots = new Prots( this );
-			    m_Prots.UpdateProts();
-			}
-			
 			m_AutoLoop = reader.ReadInt();
 			goto case 33;
 		    }
@@ -5735,6 +5735,12 @@ namespace Server
 
 			m_Items = reader.ReadStrongItemList();
 
+			// see case 35
+			if( m_Prots == null ){
+			    m_Prots = new Prots( this );
+			}
+			m_Prots.UpdateProts();
+			
 			m_Player = reader.ReadBool();
 			m_Title = reader.ReadString();
 			m_Profile = reader.ReadString();

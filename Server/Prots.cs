@@ -27,6 +27,11 @@ namespace Server {
 	
 	public Prots( Mobile parent ){
 	    _parent = parent;
+	    _air = 0;
+	    _fire = 0;
+	    _earth = 0;
+	    _water = 0;
+	    _necro = 0;
 	}
 
 	public int Fire {
@@ -143,30 +148,60 @@ namespace Server {
 	}
 	
 	private int NeckProt( DamageType dt ){
-	    Item armor = _parent.NeckArmor;
-	    return Assess(armor, dt);
+	    if( _parent.NeckArmor != null ){
+		Item armor = _parent.NeckArmor;
+		return Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
 	}
 	private int HandsProt( DamageType dt){
-	    Item armor = _parent.HandArmor;
-	    return Assess(armor, dt);
+	    if( _parent.HandArmor != null ){
+		Item armor = _parent.HandArmor;
+		return Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
 	}
+       
 	private int ArmsProt( DamageType dt){
-	    Item armor = _parent.ArmsArmor;
-	    return Assess(armor, dt);
+	    if( _parent.ArmsArmor != null ){
+		Item armor = _parent.ArmsArmor;
+		return Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
 	}
 	private int HeadProt( DamageType dt){
-	    Item armor = _parent.HeadArmor;
-	    return Assess(armor, dt);
+	    if( _parent.HeadArmor != null ){
+		Item armor = _parent.HeadArmor;
+		return Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
 	}
 	private int LegsProt( DamageType dt){
-	    Item armor = _parent.LegsArmor;
-	    return Assess(armor, dt);
+	    if( _parent.LegsArmor != null ){
+		Item armor = _parent.LegsArmor;
+		return Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
 	}
 	private int ChestProt( DamageType dt){
-	    Item armor = _parent.ChestArmor;
-	    return Assess(armor, dt);
-	}
-	
+	    if( _parent.ChestArmor != null ){
+		Item armor = _parent.ChestArmor;
+		return Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
+	}	
 
 	private class InternalTarget : Target{
 	    public InternalTarget( ) : base( 12, false, TargetFlags.None ){
