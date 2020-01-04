@@ -12,6 +12,8 @@ namespace Server.Mobiles {
 	    this.CantWalk = true;
 	    this.Str = 250;
 	    this.Hits = 250;
+	    this.Name = "Bloggins the Damage Tester";
+	    
 	    Container pack = new Backpack();
 	    pack.Movable = false;
 	    AddItem( pack );
