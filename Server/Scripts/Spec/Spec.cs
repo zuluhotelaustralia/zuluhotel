@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 using Server;
@@ -37,6 +39,7 @@ namespace Server.Mobiles
 	    protected override void OnTarget( Mobile from, object targ ){
 		if( targ is PlayerMobile ){
 		    PlayerMobile pm = targ as PlayerMobile;
+		    pm.Spec.ComputeSpec();
 		    from.SendMessage("{0}: {1}, level {2}", pm.Name, pm.Spec.SpecName, pm.Spec.SpecLevel);
 		}
 		else {
@@ -173,9 +176,6 @@ namespace Server.Mobiles
 	    }
 
 	    int maxlevel = GetMaxLevel( total );
-	    if( maxlevel < 0 ){
-		return;
-	    }
 	    if ( maxlevel > 5 ){
 		maxlevel = 5;
 	    }
@@ -188,7 +188,12 @@ namespace Server.Mobiles
 		m_ClassSkills.RemoveTrap.Value +
 		m_ClassSkills.Lockpicking.Value +
 		m_ClassSkills.Poisoning.Value;
-
+	    int thieflevel = GetSpecLevel(thiefSkills);
+	    if( thieflevel > 0 ){
+		m_SpecName = SpecName.Thief;
+		m_SpecLevel = thieflevel;
+	    }
+            
 	    double bardSkills = m_ClassSkills.Begging.Value + 
 		m_ClassSkills.Cartography.Value +
 		m_ClassSkills.Discordance.Value +
@@ -197,7 +202,12 @@ namespace Server.Mobiles
 		m_ClassSkills.Peacemaking.Value + 
 		m_ClassSkills.Provocation.Value +
 		m_ClassSkills.TasteID.Value;
-
+	    int bardlevel = GetSpecLevel(bardSkills);
+	    if( bardlevel > 0 ){
+		m_SpecName = SpecName.Bard;
+		m_SpecLevel = bardlevel;
+	    }
+	    
 	    double crafterSkills = m_ClassSkills.ArmsLore.Value + 
 		m_ClassSkills.Blacksmith.Value +
 		m_ClassSkills.Fletching.Value +
@@ -206,7 +216,12 @@ namespace Server.Mobiles
 		m_ClassSkills.Mining.Value +
 		m_ClassSkills.Tailoring.Value +
 		m_ClassSkills.Tinkering.Value;
-
+	    int crafterlevel = GetSpecLevel(crafterSkills);
+	    if( crafterlevel > 0 ){
+		m_SpecName = SpecName.Crafter;
+		m_SpecLevel = crafterlevel;
+	    }
+	    
 	    double mageSkills = m_ClassSkills.Alchemy.Value +
 		m_ClassSkills.EvalInt.Value +
 		m_ClassSkills.Inscribe.Value +
@@ -215,7 +230,12 @@ namespace Server.Mobiles
 		m_ClassSkills.Meditation.Value +
 		m_ClassSkills.MagicResist.Value +
 		m_ClassSkills.SpiritSpeak.Value;
-
+	    int magelevel = GetSpecLevel(mageSkills);
+	    if( magelevel > 0 ){
+		m_SpecName = SpecName.Mage;
+		m_SpecLevel = magelevel;
+	    }
+	    
 	    double rangerSkills = m_ClassSkills.AnimalLore.Value +
 		m_ClassSkills.AnimalTaming.Value +
 		m_ClassSkills.Camping.Value +
@@ -224,7 +244,12 @@ namespace Server.Mobiles
 		m_ClassSkills.Tracking.Value +
 		m_ClassSkills.Archery.Value +
 		m_ClassSkills.Veterinary.Value;
-
+	    int rangerlevel = GetSpecLevel(rangerSkills);
+	    if( rangerlevel > 0 ){
+		m_SpecName = SpecName.Ranger;
+		m_SpecLevel = rangerlevel;
+	    }
+	
 	    double warriorSkills = m_ClassSkills.Anatomy.Value +
 		m_ClassSkills.Fencing.Value +
 		m_ClassSkills.Healing.Value +
@@ -233,23 +258,65 @@ namespace Server.Mobiles
 		m_ClassSkills.Swords.Value +
 		m_ClassSkills.Tactics.Value +
 		m_ClassSkills.Wrestling.Value;   
-
-	    if( bardSkills >= m_MinSkills[maxlevel] ){
-		m_SpecLevel = maxlevel;
-		m_SpecName = SpecName.Bard;
+	    int warriorlevel = GetSpecLevel(warriorSkills);
+	    if( warriorlevel > 0 ){
+		m_SpecName = SpecName.Warrior;
+		m_SpecLevel = warriorlevel;
 	    }
-	    else if ( bardSkills >= m_MinSkills[maxlevel - 1] ){
-	}
+	
+	    Console.WriteLine("warlvl {0}", warriorlevel);
 
-	private int GetMaxLevel( double total ){
-	    int i = 0;
-	    foreach( double d in m_MaxSkills ){
-		if( d >= total ){
-		    i++;
+	    for( int i=maxlevel; i>=0; i-- ){
+		if( total > m_MaxSkills[i] ){
+		    maxlevel--;
+		}
+		else {
+		    break;
 		}
 	    }
 
-	    return i;
+	    if( m_SpecLevel > maxlevel ) {
+		m_SpecLevel = maxlevel;
+	    }
+	    if( m_SpecLevel <= 0 ){
+		m_SpecLevel = 0;
+		m_SpecName = SpecName.None;
+	    }
+	    
+	}
+
+	private int GetSpecLevel( double onspec ){
+	    Console.WriteLine("onspec {0}", onspec);
+	    if( onspec >= m_MinSkills[5] ){
+		return 5;
+	    }
+	    if( onspec >= m_MinSkills[4] ){
+		return 4;
+	    }
+	    if( onspec >= m_MinSkills[3] ){
+		return 3;
+	    }
+	    if( onspec >= m_MinSkills[2] ){
+		return 2;
+	    }
+	    if( onspec >= m_MinSkills[1] ){
+		return 1;
+	    }
+
+	    return 0;
+	}
+	
+	private int GetMaxLevel( double total ){
+	    int num = m_MaxSkills.Length;
+	    num--;
+	    
+	    for( int i=num; i>=0; i-- ){
+		if( m_MaxSkills[i] >= total ){
+		    return i;
+		}
+	    }
+
+	    return 0;
 	}
 	
 	private static void SetMaximums() {
