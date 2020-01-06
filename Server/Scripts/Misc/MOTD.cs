@@ -35,8 +35,8 @@ namespace Server.Gumps {
 
 	    AddPage(0);
 	    AddBackground( 0, 0, 480, 320, 9300 );
-	    AddHtml( 10, 10, 460, 100, "<h2>Christmas 2019 Update!</h2>", false, false );
-	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is currently in Beta Testing, and so may have bugs.  We ask that you please be patient with us.  Current testing priority is crafting:  Please try to craft everything you can, and report bug that you find!  Note that we have updated new clilocs for the client, however Daleron's updater is not currently ready for production, so we have put the cliloc file up on https://zuluhotel.ca for download.", false, false );
+	    AddHtml( 10, 10, 460, 100, "<h2>January 2020 Update</h2>", false, false );
+	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is currently in Beta Testing, and so may have bugs.  We ask that you please be patient with us.  Current testing priority is crafting:  Please try to craft everything you can, and report bugs that you find!  Note that we have updated new clilocs for the client, however Daleron's updater is not currently ready for production, so we have put the cliloc file up on https://zuluhotel.ca for download.  Please see the recent (5 Jan) devblog post regarding changes to the Archery spec.", false, false );
 	    
 	    AddButton( 10, 280, 247, 248, (int)Buttons.OKButton, GumpButtonType.Reply, 2);
 	    AddImageTiled( 10, 280, 68, 22, 2624);
