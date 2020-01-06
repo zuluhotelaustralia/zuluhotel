@@ -2179,7 +2179,9 @@ namespace Server.Items
 	    if( Type != WeaponType.Ranged ){
 		damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 65.0 ) / 130.0 ) );
 	    }
-
+	    else {
+		damage += ( damage * ( ( attacker.Skills[SkillName.Archery].Value - 65.0 ) / 130.0 ) );
+	    }
 
             /* Compute strength modifier
              * : 1% bonus for every 5 strength
