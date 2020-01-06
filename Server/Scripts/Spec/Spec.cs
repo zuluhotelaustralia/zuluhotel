@@ -188,7 +188,7 @@ namespace Server.Mobiles
 		m_ClassSkills.RemoveTrap.Value +
 		m_ClassSkills.Lockpicking.Value +
 		m_ClassSkills.Poisoning.Value;
-	    int thieflevel = GetSpecLevel(thiefSkills);
+	    int thieflevel = GetSpecLevel(thiefSkills, SpecName.Thief);
 	    if( thieflevel > 0 ){
 		m_SpecName = SpecName.Thief;
 		m_SpecLevel = thieflevel;
@@ -202,7 +202,7 @@ namespace Server.Mobiles
 		m_ClassSkills.Peacemaking.Value + 
 		m_ClassSkills.Provocation.Value +
 		m_ClassSkills.TasteID.Value;
-	    int bardlevel = GetSpecLevel(bardSkills);
+	    int bardlevel = GetSpecLevel(bardSkills, SpecName.Bard);
 	    if( bardlevel > 0 ){
 		m_SpecName = SpecName.Bard;
 		m_SpecLevel = bardlevel;
@@ -216,7 +216,7 @@ namespace Server.Mobiles
 		m_ClassSkills.Mining.Value +
 		m_ClassSkills.Tailoring.Value +
 		m_ClassSkills.Tinkering.Value;
-	    int crafterlevel = GetSpecLevel(crafterSkills);
+	    int crafterlevel = GetSpecLevel(crafterSkills, SpecName.Crafter);
 	    if( crafterlevel > 0 ){
 		m_SpecName = SpecName.Crafter;
 		m_SpecLevel = crafterlevel;
@@ -230,7 +230,7 @@ namespace Server.Mobiles
 		m_ClassSkills.Meditation.Value +
 		m_ClassSkills.MagicResist.Value +
 		m_ClassSkills.SpiritSpeak.Value;
-	    int magelevel = GetSpecLevel(mageSkills);
+	    int magelevel = GetSpecLevel(mageSkills, SpecName.Mage);
 	    if( magelevel > 0 ){
 		m_SpecName = SpecName.Mage;
 		m_SpecLevel = magelevel;
@@ -243,8 +243,9 @@ namespace Server.Mobiles
 		m_ClassSkills.Fishing.Value +
 		m_ClassSkills.Tracking.Value +
 		m_ClassSkills.Archery.Value +
-		m_ClassSkills.Veterinary.Value;
-	    int rangerlevel = GetSpecLevel(rangerSkills);
+		m_ClassSkills.Veterinary.Value +
+		m_ClassSkills.Tactics.Value;
+	    int rangerlevel = GetSpecLevel(rangerSkills, SpecName.Ranger);
 	    if( rangerlevel > 0 ){
 		m_SpecName = SpecName.Ranger;
 		m_SpecLevel = rangerlevel;
@@ -258,14 +259,12 @@ namespace Server.Mobiles
 		m_ClassSkills.Swords.Value +
 		m_ClassSkills.Tactics.Value +
 		m_ClassSkills.Wrestling.Value;   
-	    int warriorlevel = GetSpecLevel(warriorSkills);
+	    int warriorlevel = GetSpecLevel(warriorSkills, SpecName.Warrior);
 	    if( warriorlevel > 0 ){
 		m_SpecName = SpecName.Warrior;
 		m_SpecLevel = warriorlevel;
 	    }
 	
-	    Console.WriteLine("warlvl {0}", warriorlevel);
-
 	    for( int i=maxlevel; i>=0; i-- ){
 		if( total > m_MaxSkills[i] ){
 		    maxlevel--;
@@ -285,8 +284,17 @@ namespace Server.Mobiles
 	    
 	}
 
-	private int GetSpecLevel( double onspec ){
-	    Console.WriteLine("onspec {0}", onspec);
+	private int AvgSkill( double onspec, SpecName sn ){
+	    if( sn == SpecName.Ranger ){
+		return (int)(onspec * 8 / 9);
+	    }
+	    else {
+		return (int)onspec;
+	    }
+	}
+	    
+	private int GetSpecLevel( double onspec, SpecName sn ){
+	    int averaged = AvgSkill( onspec, sn );
 	    if( onspec >= m_MinSkills[5] ){
 		return 5;
 	    }
@@ -382,7 +390,8 @@ namespace Server.Mobiles
 			     sn == SkillName.AnimalTaming ||
 			     sn == SkillName.Fishing ||
 			     sn == SkillName.Camping ||
-			     sn == SkillName.Cooking ) {
+			     sn == SkillName.Cooking ||
+			     sn == SkillName.Tactics ) {
 			    return true;
 			}
 			else {
