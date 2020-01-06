@@ -2168,21 +2168,16 @@ namespace Server.Items
             {
 		if( Type != WeaponType.Ranged ){
 		    attacker.CheckSkill( SkillName.Anatomy, 0.0, attacker.Skills[SkillName.Anatomy].Cap ); // Passively check Anatomy for gain
-		    attacker.CheckSkill( SkillName.Tactics, 0.0, attacker.Skills[SkillName.Tactics].Cap ); // Passively check tactics for gain
 		}
-
+		attacker.CheckSkill( SkillName.Tactics, 0.0, attacker.Skills[SkillName.Tactics].Cap ); // Passively check tactics for gain
+		
                 if ( Type == WeaponType.Axe ) {
                     attacker.CheckSkill( SkillName.Lumberjacking, 0.0, 130.0 ); // Passively check Lumberjacking for gain
 		}
             }
 
-	    if( Type != WeaponType.Ranged ){
-		damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 65.0 ) / 130.0 ) );
-	    }
-	    else {
-		damage += ( damage * ( ( attacker.Skills[SkillName.Archery].Value - 65.0 ) / 130.0 ) );
-	    }
-
+	    damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 65.0 ) / 130.0 ) );
+	    
             /* Compute strength modifier
              * : 1% bonus for every 5 strength
              */
