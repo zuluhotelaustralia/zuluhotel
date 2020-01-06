@@ -2183,18 +2183,15 @@ namespace Server.Items
              */
             double modifiers = ( attacker.Str / 5.0 ) / 130.0;
 
-	    if( Type != WeaponType.Ranged ){
-		double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
-		modifiers += ( ( anatomyValue / 5.0 ) / 130.0 );
-		
-		if ( anatomyValue >= 130.0 ) {
-		    modifiers += 0.1;
-		}
-	    }
-	    else {
-		modifiers += ( (attacker.Int / 10.0) / 130.0 );
-	    }
-
+	    /*double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
+	     *modifiers += ( ( anatomyValue / 5.0 ) / 130.0 );
+	     *
+	     *if ( anatomyValue >= 130.0 ) {
+	     *modifiers += 0.1;
+	     *}
+	     *}
+	     */
+	    
             /* Compute lumberjacking bonus
              * : 1% bonus for every 5 points of lumberjacking
              * : +10% bonus at Grandmaster or higher
