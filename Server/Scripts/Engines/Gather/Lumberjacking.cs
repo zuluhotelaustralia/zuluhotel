@@ -88,7 +88,6 @@ namespace Server.Engines.Gather {
 
 	    // ok fuck it I can't think of a more elegant way to do this without a massive refactor for which I have no motivation
 	    // gathernode (x, y, vx, vy, abundance, difficulty, minskill, maxskill, type)
-	    Console.WriteLine("Gather Engine:  Setting up Lumberjacking nodes...");
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
 					       0.9, 2500.0, 0.0, 80.0, typeof(Server.Items.Log) ));
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
@@ -138,7 +137,6 @@ namespace Server.Engines.Gather {
 	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
 					       0.1, 100.0, 130.0, 150.0, typeof(Server.Items.ElvenLog) ));
 
-	    Console.WriteLine("Complete");
 	}
 	
         private static Lumberjacking m_System;
