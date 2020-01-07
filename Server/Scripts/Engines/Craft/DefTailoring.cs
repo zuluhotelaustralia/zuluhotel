@@ -394,7 +394,22 @@ namespace Server.Engines.Craft
 			AddSubRes( typeof( SpinedLeather ),	1049151, 65.0, 1044462, 1049311 );
 			AddSubRes( typeof( HornedLeather ),	1049152, 80.0, 1044462, 1049311 );
 			AddSubRes( typeof( BarbedLeather ),	1049153, 99.0, 1044462, 1049311 );
-
+			AddSubRes( typeof( RatLeather ), 1160430, 10.0, 1044462, 1049311 );
+			AddSubRes( typeof( WolfLeather ), 1160431, 20.0, 1044462, 1049311 );
+			AddSubRes( typeof( BearLeather ), 1160432, 30.0, 1044462, 1049311 );
+			AddSubRes( typeof( SerpentLeather ), 1160433, 40.0, 1044462, 1049311 );
+			AddSubRes( typeof( LizardLeather ), 1160434, 50.0, 1044462, 1049311 );
+			AddSubRes( typeof( TrollLeather ), 1160435, 60.0, 1044462, 1049311 );
+			AddSubRes( typeof( OstardLeather ), 1160436, 60.0, 1044462, 1049311 );
+			AddSubRes( typeof( NecromancerLeather ), 1160437, 80.0, 1044462, 1049311 );
+			AddSubRes( typeof( LavaLeather ), 1160438, 90.0, 1044462, 1049311 );
+			AddSubRes( typeof( LicheLeather ), 1160439, 100.0, 1044462, 1049311 );
+			AddSubRes( typeof( IceCrystalLeather ), 1160440, 110.0, 1044462, 1049311 );
+			AddSubRes( typeof( DragonLeather ), 1160441, 115.0, 1044462, 1049311 );
+			AddSubRes( typeof( WyrmLeather ), 1160442, 120.0, 1044462, 1049311 );
+			AddSubRes( typeof( BalronLeather ), 1160443, 125.0, 1044462, 1049311 );
+			AddSubRes( typeof( GoldenDragonLeather ), 1160444, 130.0, 1044462, 1049311 );
+			
 			MarkOption = true;
 			Repair = Core.AOS;
 			CanEnhance = Core.AOS;
