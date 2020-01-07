@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class WyrmHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public WyrmHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public WyrmHide( int amount ) : base( CraftResource.Wyrm, amount )
+		public WyrmHide( int amount ) : base( CraftResource.WyrmLeather, amount )
 		{
 			this.Hue = 1159;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new WyrmLeather(), 1 );
 
 			return true;
 		}

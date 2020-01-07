@@ -1,4 +1,3 @@
-| Normal         |     0 |          0 |    1.00 | 
 | Rat            | 0x7e2 |         10 |    1.10 | 
 | Wolf           |  1102 |         20 |    1.20 | 
 | Bear           |    44 |         30 |    1.30 | 
@@ -9,8 +8,8 @@
 | Necromancer    |    84 |         80 |    1.80 |
 | Lava           | 0x486 |         90 |    1.90 | 
 | Liche          | 0x496 |        100 |    2.00 |
-| Ice Crystal    | 0x492 |        110 |    2.20 |
+| IceCrystal     | 0x492 |        110 |    2.20 |
 | Dragon         | 0x494 |        115 |    2.35 | 
 | Wyrm           |  1159 |        120 |    2.50 |
 | Balron         |  1157 |        125 |    2.90 |
-| Golden Dragon  |    48 |        130 |    3.00 |
+| GoldenDragon   |    48 |        130 |    3.00 |

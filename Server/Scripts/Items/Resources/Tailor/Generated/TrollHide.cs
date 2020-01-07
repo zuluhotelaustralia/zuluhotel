@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class TrollHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public TrollHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public TrollHide( int amount ) : base( CraftResource.Troll, amount )
+		public TrollHide( int amount ) : base( CraftResource.TrollLeather, amount )
 		{
 			this.Hue = 0x54a;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new TrollLeather(), 1 );
 
 			return true;
 		}

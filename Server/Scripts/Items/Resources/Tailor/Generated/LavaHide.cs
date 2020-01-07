@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class LavaHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public LavaHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public LavaHide( int amount ) : base( CraftResource.Lava, amount )
+		public LavaHide( int amount ) : base( CraftResource.LavaLeather, amount )
 		{
 			this.Hue = 0x486;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new LavaLeather(), 1 );
 
 			return true;
 		}

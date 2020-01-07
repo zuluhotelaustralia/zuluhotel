@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class LicheHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public LicheHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public LicheHide( int amount ) : base( CraftResource.Liche, amount )
+		public LicheHide( int amount ) : base( CraftResource.LicheLeather, amount )
 		{
 			this.Hue = 0x496;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new LicheLeather(), 1 );
 
 			return true;
 		}

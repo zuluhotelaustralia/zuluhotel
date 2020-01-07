@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class BalronHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public BalronHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public BalronHide( int amount ) : base( CraftResource.Balron, amount )
+		public BalronHide( int amount ) : base( CraftResource.BalronLeather, amount )
 		{
 			this.Hue = 1157;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new BalronLeather(), 1 );
 
 			return true;
 		}

@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class IceCrystalHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public IceCrystalHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public IceCrystalHide( int amount ) : base( CraftResource.IceCrystal, amount )
+		public IceCrystalHide( int amount ) : base( CraftResource.IceCrystalLeather, amount )
 		{
 			this.Hue = 0x492;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new IceCrystalLeather(), 1 );
 
 			return true;
 		}

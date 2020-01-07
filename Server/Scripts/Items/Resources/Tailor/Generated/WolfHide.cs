@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class WolfHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public WolfHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public WolfHide( int amount ) : base( CraftResource.Wolf, amount )
+		public WolfHide( int amount ) : base( CraftResource.WolfLeather, amount )
 		{
 			this.Hue = 1102;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new WolfLeather(), 1 );
 
 			return true;
 		}

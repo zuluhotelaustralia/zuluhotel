@@ -38,12 +38,12 @@ function doGsubs(){
     print "\tpublic class " resname restype" : BaseHides, IScissorable" > outfile;
     print "\t{" > outfile;
     print "\t\t[Constructable]" > outfile;
-    print "\t\tpublic Hides() : this( 1 )" > outfile;
+    print "\t\tpublic "resname restype"() : this( 1 )" > outfile;
     print "\t\t{" > outfile;
     print "\t\t}" > outfile;
     print "" > outfile;
     print "\t\t[Constructable]" > outfile;
-    print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname", amount )" > outfile;
+    print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname"Leather, amount )" > outfile;
     print "\t\t{" > outfile;
     print "\t\t\tthis.Hue = " hue ";" > outfile;
     print "\t\t}" > outfile;

@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class NecromancerHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public NecromancerHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public NecromancerHide( int amount ) : base( CraftResource.Necromancer, amount )
+		public NecromancerHide( int amount ) : base( CraftResource.NecromancerLeather, amount )
 		{
 			this.Hue = 84;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new NecromancerLeather(), 1 );
 
 			return true;
 		}

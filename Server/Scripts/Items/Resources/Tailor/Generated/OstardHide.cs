@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class OstardHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public OstardHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public OstardHide( int amount ) : base( CraftResource.Ostard, amount )
+		public OstardHide( int amount ) : base( CraftResource.OstardLeather, amount )
 		{
 			this.Hue = 0x415;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new OstardLeather(), 1 );
 
 			return true;
 		}

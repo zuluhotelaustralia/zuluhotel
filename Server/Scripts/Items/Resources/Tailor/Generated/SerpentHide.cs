@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class SerpentHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public SerpentHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public SerpentHide( int amount ) : base( CraftResource.Serpent, amount )
+		public SerpentHide( int amount ) : base( CraftResource.SerpentLeather, amount )
 		{
 			this.Hue = 0x8fd;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new SerpentLeather(), 1 );
 
 			return true;
 		}

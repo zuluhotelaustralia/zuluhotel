@@ -4,12 +4,12 @@ namespace Server.Items{
 	public class RatHide : BaseHides, IScissorable
 	{
 		[Constructable]
-		public Hides() : this( 1 )
+		public RatHide() : this( 1 )
 		{
 		}
 
 		[Constructable]
-		public RatHide( int amount ) : base( CraftResource.Rat, amount )
+		public RatHide( int amount ) : base( CraftResource.RatLeather, amount )
 		{
 			this.Hue = 0x7e2;
 		}
@@ -41,7 +41,7 @@ namespace Server.Items{
 				from.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack
 				return false;
 			}
-			base.ScissorHelper( from, new Leather(), 1 );
+			base.ScissorHelper( from, new RatLeather(), 1 );
 
 			return true;
 		}
