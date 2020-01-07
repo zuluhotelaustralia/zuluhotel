@@ -108,6 +108,6 @@ This exception is fatal, press return to exit
 * DONE spec-based damage isn't applying?
 * TODO implement skillmod clothing
 * TODO can't repair tools?
-* TODO buddy has like 2500 skill points and still gets spec 4 warrior
+* DONE buddy has like 2500 skill points and still gets spec 4 warrior
 * TODO weapon durability falls off awfully fast
-* TODO archery damage tactics/anatomy
+* DONE archery damage tactics/anatomy
