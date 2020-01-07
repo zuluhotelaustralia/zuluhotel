@@ -7,9 +7,9 @@ BEGIN {
     counter = 0;
     outfile = "";
     resname="";
-    restype="Hide";
+    restype="Leather";
     trimmedres="";
-    print "Generating Hide classes...";
+    print "Generating Leather classes...";
 }
 
 function newOutfile() {
@@ -32,18 +32,17 @@ function doGsubs(){
     doGsubs();
     newOutfile();
 
-    print "//Generated file.  Do not modify by hand." > outfile;
     print "namespace Server.Items{" > outfile;
-    print "\t[FlipableAttribute( 0x1079, 0x1078 )]" > outfile;
-    print "\tpublic class " resname restype" : BaseHides, IScissorable" > outfile;
+    print "\t[FlipableAttribute( 0x1081, 0x1082 )]" > outfile;
+    print "\tpublic class "resname restype" : BaseLeather" > outfile;
     print "\t{" > outfile;
     print "\t\t[Constructable]" > outfile;
-    print "\t\tpublic Hides() : this( 1 )" > outfile;
+    print "\t\tpublic "resname restype"() : this( 1 )" > outfile;
     print "\t\t{" > outfile;
     print "\t\t}" > outfile;
     print "" > outfile;
     print "\t\t[Constructable]" > outfile;
-    print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname", amount )" > outfile;
+    print "\t\tpublic "resname restype"( int amount ) : base( CraftResource."resname"Leather, amount )" > outfile;
     print "\t\t{" > outfile;
     print "\t\t\tthis.Hue = " hue ";" > outfile;
     print "\t\t}" > outfile;
@@ -65,23 +64,9 @@ function doGsubs(){
     print "" > outfile;
     print "\t\t\tint version = reader.ReadInt();" > outfile;
     print "\t\t}" > outfile;
-    print "" > outfile;
-    print "\t\tpublic bool Scissor( Mobile from, Scissors scissors )" > outfile;
-    print "\t\t{" > outfile;
-    print "\t\t\tif ( Deleted || !from.CanSee( this ) ) return false;" > outfile;
-    print "" > outfile;
-    print "\t\t\tif ( Core.AOS && !IsChildOf ( from.Backpack ) )" > outfile;
-    print "\t\t\t{" > outfile;
-    print "\t\t\t\tfrom.SendLocalizedMessage ( 502437 ); // Items you wish to cut must be in your backpack" > outfile;
-    print "\t\t\t\treturn false;" > outfile;
-    print "\t\t\t}" > outfile;
-    print "\t\t\tbase.ScissorHelper( from, new "resname"Leather(), 1 );" > outfile;
-    print "" > outfile;
-    print "\t\t\treturn true;" > outfile;
-    print "\t\t}" > outfile;
     print "\t}" > outfile;
     print "}" > outfile;
-    
+
     close(outfile);
     counter++;
 }
