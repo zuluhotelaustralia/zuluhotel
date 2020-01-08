@@ -102,7 +102,22 @@ namespace Server.Mobiles
 	Regular,
 	Spined,
 	Horned,
-	Barbed
+	Barbed,
+	Rat,
+	Wolf,
+	Bear,
+	Serpent,
+	Lizard,
+	Troll,
+	Ostard,
+	Necromancer,
+	Lava,
+	Liche,
+	IceCrystal,
+	Dragon,
+	Wyrm,
+	Balron,
+	GoldenDragon
     }
 
     #endregion
@@ -1571,15 +1586,65 @@ namespace Server.Mobiles
 		    }
 		    else
 		    {
-			if ( HideType == HideType.Regular )
-			    corpse.DropItem( new Hides( hides ) );
-			else if ( HideType == HideType.Spined )
-			    corpse.DropItem( new SpinedHides( hides ) );
-			else if ( HideType == HideType.Horned )
-			    corpse.DropItem( new HornedHides( hides ) );
-			else if ( HideType == HideType.Barbed )
-			    corpse.DropItem( new BarbedHides( hides ) );
-
+			switch( HideType ){
+			    case HideType.Regular:
+				corpse.DropItem( new Hides( hides ) );
+				break;
+			    case HideType.Spined:
+				corpse.DropItem( new SpinedHides( hides ) );
+				break;
+			    case HideType.Horned:
+				corpse.DropItem( new HornedHides( hides ));
+				break;
+			    case HideType.Barbed:
+				corpse.DropItem( new BarbedHides( hides ));
+				break;
+			    case HideType.Rat:
+				corpse.DropItem( new RatHide( hides ) );
+				break;
+			    case HideType.Wolf:
+				corpse.DropItem( new WolfHide( hides ) );
+				break;
+			    case HideType.Bear:
+				corpse.DropItem( new BearHide( hides ) );
+				break;
+			    case HideType.Serpent:
+				corpse.DropItem( new SerpentHide( hides ) );
+				break;
+			    case HideType.Lizard:
+				corpse.DropItem( new LizardHide( hides ) );
+				break;
+			    case HideType.Troll:
+				corpse.DropItem( new TrollHide( hides ) );
+				break;
+			    case HideType.Ostard:
+				corpse.DropItem( new OstardHide( hides ) );
+				break;
+			    case HideType.Necromancer:
+				corpse.DropItem( new NecromancerHide( hides ) );
+				break;
+			    case HideType.Lava:
+				corpse.DropItem( new LavaHide( hides ) );
+				break;
+			    case HideType.Liche:
+				corpse.DropItem( new LicheHide( hides ) );
+				break;
+			    case HideType.IceCrystal:
+				corpse.DropItem( new IceCrystalHide( hides ) );
+				break;
+			    case HideType.Dragon:
+				corpse.DropItem( new DragonHide( hides ) );
+				break;
+			    case HideType.Wyrm:
+				corpse.DropItem( new WyrmHide( hides ) );
+				break;
+			    case HideType.Balron:
+				corpse.DropItem( new BalronHide( hides ) );
+				break;
+			    case HideType.GoldenDragon:
+				corpse.DropItem( new GoldenDragonHide( hides ) );
+				break;
+			}			
 			from.SendLocalizedMessage( 500471 ); // You skin it, and the hides are now in the corpse.
 		    }
 		}
