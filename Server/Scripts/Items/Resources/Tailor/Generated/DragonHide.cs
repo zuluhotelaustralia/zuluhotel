@@ -11,7 +11,7 @@ namespace Server.Items{
 		[Constructable]
 		public DragonHide( int amount ) : base( CraftResource.DragonLeather, amount )
 		{
-			this.Hue = 0x494;
+			this.Hue = 2761;
 		}
 
 		public DragonHide( Serial serial ) : base( serial )

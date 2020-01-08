@@ -115,3 +115,10 @@ This exception is fatal, press return to exit
 * DONE crafted leather doesn't retain proper resource name (e.g. tunic )
 * DONE cut strips of leather don't retain proper resource name
 * TODO [DALERON] cliloc in BaseIngot.LabelNumber_get does not exist (1161034) ???
+* TODO hides should say e.g. "rat hide: 20" instead of "rat: 20"
+* TODO liche hides have wrong hue
+* TODO lava hides have wrong hue
+* TODO icecrystal hides have wrong hue
+* TODO wyrm hides have wrong hue
+* TODO balron hides have wrong hue
+

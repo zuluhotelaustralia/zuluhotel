@@ -11,7 +11,7 @@ namespace Server.Items{
 		[Constructable]
 		public BalronHide( int amount ) : base( CraftResource.BalronLeather, amount )
 		{
-			this.Hue = 1157;
+			this.Hue = 1175;
 		}
 
 		public BalronHide( Serial serial ) : base( serial )

@@ -11,7 +11,7 @@ namespace Server.Items{
 		[Constructable]
 		public WyrmHide( int amount ) : base( CraftResource.WyrmLeather, amount )
 		{
-			this.Hue = 1159;
+			this.Hue = 2747;
 		}
 
 		public WyrmHide( Serial serial ) : base( serial )

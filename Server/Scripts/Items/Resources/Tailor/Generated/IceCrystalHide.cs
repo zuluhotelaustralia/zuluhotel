@@ -11,7 +11,7 @@ namespace Server.Items{
 		[Constructable]
 		public IceCrystalHide( int amount ) : base( CraftResource.IceCrystalLeather, amount )
 		{
-			this.Hue = 0x492;
+			this.Hue = 2759;
 		}
 
 		public IceCrystalHide( Serial serial ) : base( serial )

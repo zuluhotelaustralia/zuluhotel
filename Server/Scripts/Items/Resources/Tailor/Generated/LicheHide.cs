@@ -11,7 +11,7 @@ namespace Server.Items{
 		[Constructable]
 		public LicheHide( int amount ) : base( CraftResource.LicheLeather, amount )
 		{
-			this.Hue = 0x496;
+			this.Hue = 2763;
 		}
 
 		public LicheHide( Serial serial ) : base( serial )

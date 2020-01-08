@@ -10,7 +10,7 @@ namespace Server.Items{
 		[Constructable]
 		public LavaLeather( int amount ) : base( CraftResource.LavaLeather, amount )
 		{
-			this.Hue = 0x486;
+			this.Hue = 2747;
 		}
 
 		public LavaLeather( Serial serial ) : base( serial )
