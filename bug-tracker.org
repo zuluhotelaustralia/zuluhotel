@@ -111,7 +111,7 @@ This exception is fatal, press return to exit
 * DONE buddy has like 2500 skill points and still gets spec 4 warrior
 * TODO weapon durability falls off awfully fast
 * DONE archery damage tactics/anatomy
-* TODO crafted leather doesn't retain proper hue (e.g. tunic )
-* TODO crafted leather doesn't retain proper resource name (e.g. tunic )
+* DONE crafted leather doesn't retain proper hue (e.g. tunic )
+* DONE crafted leather doesn't retain proper resource name (e.g. tunic )
 * DONE cut strips of leather don't retain proper resource name
 * TODO [DALERON] cliloc in BaseIngot.LabelNumber_get does not exist (1161034) ???
