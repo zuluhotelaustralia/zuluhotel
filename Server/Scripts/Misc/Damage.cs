@@ -33,7 +33,37 @@ namespace Server {
 	    //todo:  attenuate or amplify damage based on target's elemental protection(s).
 	    // e.g. if you're wearing Lavarock platemail, fire doesn't hurt you as much but
 	    // if you're wearing icerock, fire rips you a new asshole.
-	    return amount;
+
+	    int protamount = 0;
+
+	    switch( type ){
+		case DamageType.Air:
+		    protamount = m.Prots.Air;
+		    break;
+		case DamageType.Earth:
+		    protamount = m.Prots.Earth;
+		    break;
+		case DamageType.Fire:
+		    protamount = m.Prots.Fire;
+		    break;
+		case DamageType.Necro:
+		    protamount = m.Prots.Necro;
+		    break;
+		case DamageType.Water:
+		    protamount = m.Prots.Water;
+		    break;
+		default:
+		    break;
+	    }
+
+	    if( protamount == 0 ){
+		return amount;
+	    }
+	    
+	    double scale = (double)protamount * 0.25;
+	    double adjusted = (double)amount * scale;
+		    
+	    return (int)adjusted;
 	}
 
 	//this function gets called in Mobile.Damage() and is intended to be the single point of all

@@ -5204,6 +5204,8 @@ namespace Server
 	    //rather than here, because we want to apply the spec-based damage before parrying
 	    //and other stuff
             //amount = m_DamageScalar.ScaleDamage(amount, from, this, type);
+
+	    //m_Prots.UpdateProts();
 	    
 	    if( amount > 0 )
 	    {
@@ -5739,8 +5741,7 @@ namespace Server
 			if( m_Prots == null ){
 			    m_Prots = new Prots( this );
 			}
-			m_Prots.UpdateProts();
-			
+					
 			m_Player = reader.ReadBool();
 			m_Title = reader.ReadString();
 			m_Profile = reader.ReadString();
@@ -5808,6 +5809,8 @@ namespace Server
 
 			UpdateResistances();
 
+			m_Prots.UpdateProts();
+				
 			break;
 		    }
 	    }
@@ -6193,6 +6196,7 @@ namespace Server
 	/// </summary>
 	public virtual void OnItemAdded( Item item )
 	{
+	    m_Prots.UpdateProts();
 	}
 
 	/// <summary>
@@ -6202,6 +6206,7 @@ namespace Server
 	/// </summary>
 	public virtual void OnItemRemoved( Item item )
 	{
+	    m_Prots.UpdateProts();
 	}
 
 	/// <summary>
