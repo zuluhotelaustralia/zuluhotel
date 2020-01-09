@@ -95,13 +95,21 @@ namespace Server {
 		    if( cr == CraftResource.RadiantNimbusDiamond ) {
 			return 75;
 		    }
-		   
+		    if( cr == CraftResource.GoldenDragonLeather ){
+			return 25;
+		    }
 		    break;
 		case DamageType.Earth:
 		    if( cr == CraftResource.Destruction ){
 			return 25;
 		    }
 		    if( cr == CraftResource.Crystal ){
+			return 25;
+		    }
+		    if( cr == CraftResource.WyrmLeather ){
+			return 25;
+		    }
+		    if( cr == CraftResource.GoldenDragonLeather ){
 			return 25;
 		    }
 		    if( cr == CraftResource.RadiantNimbusDiamond ){
@@ -112,12 +120,30 @@ namespace Server {
 		    if( cr == CraftResource.Lavarock ){
 			return 50;
 		    }
+		    if( cr == CraftResource.LavaLeather ){
+			return 50;
+		    }
+		    if( cr == CraftResource.WyrmLeather ){
+			return 50;
+		    }
+		    if( cr == CraftResource.GoldenDragonLeather ){
+			return 75;
+		    }
 		    if( cr == CraftResource.DarkSableRuby ){
 			return 75;
 		    }
 		    break;
 		case DamageType.Necro:
 		    if( cr == CraftResource.SilverRock ){
+			return 25;
+		    }
+		    if( cr == CraftResource.LicheLeather ) {
+			return 25;
+		    }
+		    if( cr == CraftResource.NecromancerLeather ){
+			return 25;
+		    }
+		    if( cr == CraftResource.BalronLeather ) {
 			return 25;
 		    }
 		    if( cr == CraftResource.Undead ){
@@ -136,6 +162,9 @@ namespace Server {
 		    }
 		    if( cr == CraftResource.Dripstone ){
 			return 25;
+		    }
+		    if( cr == CraftResource.IceCrystalLeather ){
+			return 50;
 		    }
 		    if( cr == CraftResource.EbonTwilightSapphire ){
 			return 75;
