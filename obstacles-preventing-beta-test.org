@@ -215,11 +215,11 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO fix baseweapon/basearmor exceptional quality stuff (Core.AOS)
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
 ** DONE hides
-** TODO missing monsters [/]
-*** TODO Golden Dragon
-*** TODO ostards
-*** TODO balron
-*** TODO ratmen?
+** TODO missing monsters [3/4]
+*** DONE Golden Dragon
+*** DONE ostards
+*** TODO balron (make them stronger or else make an elder balron)
+*** DONE ratmen?
 ** DONE make little "crafting zones" in towns where crafting skills are slightly accelerated
 ** DONE "Survey tool" lets you dig for samples to see what's there, using tasteID and a spoon.  Your guy just tastes the dirt.
 ** TODO check SpellHelper.CheckTravel for beta remnants
