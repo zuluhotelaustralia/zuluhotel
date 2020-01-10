@@ -264,26 +264,26 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 | Spectral      | 0x483 |         60 |    1.10 | Dex penalty -3                                                                                                               |  1 | 1 |
 | Old Britain   | 0x852 |         65 |    1.25 |                                                                                                                              |  4 | 1 |
 | Onyx          | 0x455 |         70 |    1.25 | Dex penalty -1                                                                                                               |  8 | 3 |
-| Red Elven     | 0x4b9 |         75 |    1.15 | Dex penalty -2, Wearer takes less magic dmg                                                                                |  1 | 4 |
+| Red Elven     | 0x4b9 |         75 |    1.15 | Dex penalty -2, Wearer takes less magic dmg                                                                                |  1 | 4 |
 | Undead        | 0x279 |         80 |    1.20 | 50% necro prot                                                                                                               | 10 | 7 |
 | Pyrite        | 0x6b8 |         85 |    1.30 | Dex penalty -1                                                                                                               |  8 | 7 |
-| Virginity     | 0x482 |         90 |    1.25 | Dex penalty -1, 50% necro prot                                                                                             |  5 | 4 |
+| Virginity     | 0x482 |         90 |    1.25 | Dex penalty -1, 50% necro prot                                                                                             |  5 | 4 |
 | Malachite     | 0x487 |         95 |    1.50 |                                                                                                                              |  4 | 8 |
 | Lavarock      | 0x486 |         97 |    1.35 | 50% fire prot                                                                                                                |  6 | 2 |
 | Azurite       | 0x4df |         98 |    1.50 | Dex penalty -1, 50% air prot                                                                                                 |  7 | 2 |
-| Dripstone     | 0x49e |        100 |    1.60 | Wearer takes less magic dmg, 25% water prot                                                                                |  6 | 4 |
+| Dripstone     | 0x49e |        100 |    1.60 | Wearer takes less magic dmg, 25% water prot                                                                                |  6 | 4 |
 | Executor      | 0x499 |        104 |    1.60 | Wearer takes less magic dmg                                                                                                  |  7 | 1 |
 | Peachblue     | 0x49c |        108 |    1.70 | Dex penalty -2                                                                                                               |  3 | 2 |
-| Destruction   | 0x500 |        112 |    1.70 | Dex penalty -1, 25% earth prot                                                                                             |  5 | 4 |
+| Destruction   | 0x500 |        112 |    1.70 | Dex penalty -1, 25% earth prot                                                                                             |  5 | 4 |
 | Anra          | 0x48b |        116 |    1.80 | Dex penalty -2                                                                                                               | 10 | 4 |
-| Crystal       | 0x492 |        119 |    1.80 | Wearer takes less magic dmg, 25% earth prot                                                                                |  3 | 9 |
+| Crystal       | 0x492 |        119 |    1.80 | Wearer takes less magic dmg, 25% earth prot                                                                                |  3 | 9 |
 | Doom          | 0x49f |        122 |    1.90 |                                                                                                                              |  2 | 1 |
-| Goddess       | 0x501 |        125 |    1.90 | Wearer takes less magic dmg, 25% air prot                                                                                  |  7 | 2 |
-| New Zulu      | 0x488 |        129 |    2.00 | Dex penalty -2, "reduced spell effectiveness on wearer" whatever that means                                                |  1 | 7 |
-| Ebon Twilight | 0x493 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% water prot                                     |  6 | 1 |
-| Dark Sable    | 0x494 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% fire prot                                      |  4 | 7 |
-| Nimbus        | 0x498 |        140 |    2.25 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |  8 | 9 |
-|               |       |            |         | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |  3 | 2 |
+| Goddess       | 0x501 |        125 |    1.90 | Wearer takes less magic dmg, 25% air prot                                                                                  |  7 | 2 |
+| New Zulu      | 0x488 |        129 |    2.00 | Dex penalty -2, "reduced spell effectiveness on wearer" whatever that means                                                |  1 | 7 |
+| Ebon Twilight | 0x493 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% water prot                                     |  6 | 1 |
+| Dark Sable    | 0x494 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% fire prot                                      |  4 | 7 |
+| Nimbus        | 0x498 |        140 |    2.25 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |  8 | 9 |
+|               |       |            |         | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1, 2, 3 and 4, 75% air prot, 75% earth prot, 75% necro prot |  3 | 2 |
 
 #+NAME: logtable
 |                   |      |            |         | <30>               |    |    |

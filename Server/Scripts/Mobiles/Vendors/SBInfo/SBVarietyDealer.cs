@@ -67,7 +67,7 @@ namespace Server.Mobiles
 				if ( Core.AOS )
 				{
 					Add( new GenericBuyInfo( typeof( BatWing ), 3, 999, 0xF78, 0 ) );
-					Add( new GenericBuyInfo( typeof( GraveDust ), 3, 999, 0xF8F, 0 ) );
+					//Add( new GenericBuyInfo( typeof( GraveDust ), 3, 999, 0xF8F, 0 ) );
 					Add( new GenericBuyInfo( typeof( DaemonBlood ), 6, 999, 0xF7D, 0 ) );
 					Add( new GenericBuyInfo( typeof( NoxCrystal ), 6, 999, 0xF8E, 0 ) );
 					Add( new GenericBuyInfo( typeof( PigIron ), 5, 999, 0xF8A, 0 ) );
@@ -120,7 +120,7 @@ namespace Server.Mobiles
 				if ( Core.AOS )
 				{
 					Add( typeof( BatWing ), 2 );
-					Add( typeof( GraveDust ), 2 );
+					//Add( typeof( GraveDust ), 2 );
 					Add( typeof( DaemonBlood ), 3 );
 					Add( typeof( NoxCrystal ), 3 );
 					Add( typeof( PigIron ), 3 );

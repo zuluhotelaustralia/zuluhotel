@@ -161,10 +161,10 @@ namespace Server.Engines.Craft
 				SetNeededExpansion( index, Expansion.SE );
 
 				// Conflagration Potions
-				index = AddCraft( typeof(ConflagrationPotion), 1044109, 1072096, 55.0, 105.0, typeof(GraveDust), 1023983, 5, 1044253 );
+				index = AddCraft( typeof(ConflagrationPotion), 1044109, 1072096, 55.0, 105.0, typeof( Pumice ), 1023983, 5, 1044253 );
 				AddRes( index, typeof(Bottle), 1044529, 1, 500315 );
 				SetNeededExpansion(index, Expansion.SE);
-				index = AddCraft( typeof(GreaterConflagrationPotion), 1044109, 1072099, 65.0, 115.0, typeof(GraveDust), 1023983, 10, 1044253 );
+				index = AddCraft( typeof(GreaterConflagrationPotion), 1044109, 1072099, 65.0, 115.0, typeof( Pumice ), 1023983, 10, 1044253 );
 				AddRes( index, typeof(Bottle), 1044529, 1, 500315 );
 				SetNeededExpansion(index, Expansion.SE);
 				// Confusion Blast Potions
