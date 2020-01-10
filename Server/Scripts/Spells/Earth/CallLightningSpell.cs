@@ -51,8 +51,9 @@ namespace Server.Spells.Earth
 	    m.BoltEffect(0); //argument is hue of the bolt
 	    m.BoltEffect(0);
 
-	    int dmg = Utility.Dice( (int)(Caster.Skills[DamageSkill].Value / 15.0), 5, 0); //caps around 24 damage at 130 skill
-	    m.Damage((int)dmg, Caster, DamageType.Air);
+	    double dmg = (double)Utility.Dice( (int)(Caster.Skills[DamageSkill].Value / 15.0), 5, 0); //caps around 24 damage at 130 skill
+	    //m.Damage((int)dmg, Caster, DamageType.Air);
+	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Air);
 	    
         Return:
             FinishSequence();

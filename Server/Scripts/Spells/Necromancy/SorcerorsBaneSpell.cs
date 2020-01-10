@@ -118,28 +118,26 @@ namespace Server.Spells.Necromancy
 	    double dmg = (double)Utility.Dice(3, 5, bonus);
 	    dmg /= 2;
 
-	    //we really should put this idiom into SpellHelper, I'm fucking tired of writing it --sith
-	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
-		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
-	    }
-
 	    //sith: change this, see issue tracker on gitlab
 	    if ( CheckResisted( m ) )
 	    {
 		dmg *= 0.75;
 		m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
-		goto Return;
 	    }
 
-	    m.Damage((int)dmg, m, DamageType.Water);
+	    //m.Damage((int)dmg, m, DamageType.Water);
+	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Water);
 
-	    int mana = (int)dmg;
+	    int manastolen = (int)dmg;
 
-	    if( m.Mana >= mana ) {
-		Caster.Mana += mana;
-		m.Mana -= mana;
+	    //if their mana is greater than what the spell will steal
+	    if( m.Mana >= manastolen ) {
+		//just steal that amount
+		Caster.Mana += manastolen;
+		m.Mana -= manastolen;
 	    }
 	    else {
+		//otherwise take all their beans
 		Caster.Mana += m.Mana;
 		m.Mana = 0;
 	    }

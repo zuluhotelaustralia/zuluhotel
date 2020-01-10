@@ -79,7 +79,8 @@ namespace Server.Spells.Earth
 		double dmg = Caster.Skills[DamageSkill].Value / 6.0;
 		Caster.DoHarmful(m);
 		m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot );
-		m.Damage((int)dmg, Caster, DamageType.Fire);
+		//m.Damage((int)dmg, Caster, DamageType.Fire);
+		SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Fire);
 	    }
 
         Return:

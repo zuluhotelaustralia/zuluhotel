@@ -103,7 +103,8 @@ namespace Server.Spells.Seventh
 						}
 					toDeal *= GetDamageScalar( m );
 					Caster.DoHarmful( m );
-					SpellHelper.Damage( this, m, toDeal, 0, 0, 0, 0, 100 );
+					//SpellHelper.Damage( this, m, toDeal, 0, 0, 0, 0, 100 );
+					SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, toDeal, DamageType.Air);
 
 					m.BoltEffect( 0 );
 					}

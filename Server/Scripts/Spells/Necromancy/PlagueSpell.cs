@@ -36,7 +36,7 @@ namespace Server.Spells.Necromancy
 	    Map map = Caster.Map;
 
 	    int level = 0;
-	    double pStr = Caster.Skills[CastSkill].Value;
+	    double pStr = Caster.Skills[DamageSkill].Value;
 	   
 	    if (pStr > 100){
 		level = 1;

@@ -50,7 +50,8 @@ namespace Server.Spells.Necromancy
 	    for(int i=0; i<targets.Count; i++) {
 		Mobile m = targets[i];
 		Caster.DoHarmful( m );
-		m.Damage( (int)dmg, Caster, m_DamageType );
+		//m.Damage( (int)dmg, Caster, m_DamageType );
+		SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Necro);
 		m.FixedParticles( 0x374A, 10, 15, 5013, EffectLayer.Waist );
 		m.PlaySound( 0x1f2 );
 	    }	

@@ -58,17 +58,14 @@ namespace Server.Spells.Earth
 	    //yeah lots of casting is ugly but... fuck it :^)
 	    double dmg = (double)Utility.Dice( (int)(Caster.Skills[DamageSkill].Value / 15.0), 5, 0); //caps around 20 damage at 130 skill
 
-	    if (Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
-		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
-	    }
-
 	    if (CheckResisted(m)){
 		dmg *= 0.75;
 
 		m.SendLocalizedMessage( 501783 );
 	    }
 
-	    m.Damage((int)dmg, Caster, DamageType.Earth);
+	    //m.Damage((int)dmg, Caster, DamageType.Earth);
+	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Earth);
 
 	    SpellHelper.AddStatCurse( Caster, m, StatType.Dex );
 	    int percentage = (int)(SpellHelper.GetOffsetScalar( Caster, m, true )*100);
