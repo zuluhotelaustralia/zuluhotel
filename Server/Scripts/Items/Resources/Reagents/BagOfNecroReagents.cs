@@ -15,7 +15,7 @@ namespace Server.Items
 		public BagOfNecroReagents( int amount )
 		{
 			DropItem( new BatWing    ( amount ) );
-			DropItem( new GraveDust  ( amount ) );
+			//DropItem( new GraveDust  ( amount ) );
 			DropItem( new DaemonBlood( amount ) );
 			DropItem( new NoxCrystal ( amount ) );
 			DropItem( new PigIron    ( amount ) );

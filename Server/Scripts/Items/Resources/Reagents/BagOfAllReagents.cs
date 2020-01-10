@@ -23,7 +23,7 @@ namespace Server.Items
 			DropItem( new SulfurousAsh ( amount ) );
 			DropItem( new SpidersSilk  ( amount ) );
 			DropItem( new BatWing      ( amount ) );
-			DropItem( new GraveDust    ( amount ) );
+			//DropItem( new GraveDust    ( amount ) );
 			DropItem( new DaemonBlood  ( amount ) );
 			DropItem( new NoxCrystal   ( amount ) );
 			DropItem( new PigIron      ( amount ) );

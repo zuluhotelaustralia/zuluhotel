@@ -121,4 +121,6 @@ This exception is fatal, press return to exit
 * DONE icecrystal hides have wrong hue
 * DONE wyrm hides have wrong hue
 * DONE balron hides have wrong hue
-
+* TODO volcanicash appears as "grave dust" due to clilocs probably
+* TODO sorceror's bane is weak as fuck
+* DONE setting all skills to 150 gives spec 0
