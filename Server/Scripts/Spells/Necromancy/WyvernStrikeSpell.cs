@@ -75,11 +75,6 @@ namespace Server.Spells.Necromancy
 	    double dmg = (double)Utility.Dice(3, 5, bonus);
 	    dmg /= 2; //necessary?  
 
-	    //we really should put this idiom into SpellHelper, I'm fucking tired of writing it --sith
-	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
-		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
-	    }
-
 	    //sith: change this, see issue tracker on gitlab
 	    if ( CheckResisted( m ) )
 	    {
@@ -88,7 +83,8 @@ namespace Server.Spells.Necromancy
 		m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
 	    }
 
-	    m.Damage((int)dmg, m, DamageType.Necro);
+	    //m.Damage((int)dmg, m, DamageType.Necro);
+	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Necro);
 	    m.ApplyPoison( Caster, Poison.GetPoison( level ) );
             
         Return:

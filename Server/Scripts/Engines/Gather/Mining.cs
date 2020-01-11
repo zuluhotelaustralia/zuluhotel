@@ -134,7 +134,6 @@ namespace Server.Engines.Gather
 	    int x = 3033;
 	    int y = 3406;
 	    
-	    Console.WriteLine("Gather Engine: Setting up mining nodes...");	    
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
 					 2500.0, 0.0, 70.0, typeof(Server.Items.IronOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
@@ -205,7 +204,6 @@ namespace Server.Engines.Gather
 					 100.0, 140.0, 150.0, typeof(Server.Items.DarkSableRubyOre)));
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1,
 					 100.0, 145.0, 150.0, typeof(Server.Items.RadiantNimbusDiamondOre)));
-	    Console.WriteLine("Complete.");
 	}
 	
 	private static Mining m_System;

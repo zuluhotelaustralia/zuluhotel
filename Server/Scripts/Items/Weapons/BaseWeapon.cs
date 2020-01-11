@@ -81,6 +81,8 @@ namespace Server.Items
         private SkillMod m_SkillMod, m_MageMod;
         private CraftResource m_Resource;
         private bool m_PlayerConstructed;
+	private DamageType m_DamageType;
+	public DamageType DamageType{ get{ return m_DamageType; } }
 
         private bool m_Cursed; // Is this weapon cursed via Curse Weapon necromancer spell? Temporary; not serialized.
         private bool m_Consecrated; // Is this weapon blessed via Consecrate Weapon paladin ability? Temporary; not serialized.
@@ -2168,38 +2170,30 @@ namespace Server.Items
             {
 		if( Type != WeaponType.Ranged ){
 		    attacker.CheckSkill( SkillName.Anatomy, 0.0, attacker.Skills[SkillName.Anatomy].Cap ); // Passively check Anatomy for gain
-		    attacker.CheckSkill( SkillName.Tactics, 0.0, attacker.Skills[SkillName.Tactics].Cap ); // Passively check tactics for gain
 		}
-
+		attacker.CheckSkill( SkillName.Tactics, 0.0, attacker.Skills[SkillName.Tactics].Cap ); // Passively check tactics for gain
+		
                 if ( Type == WeaponType.Axe ) {
                     attacker.CheckSkill( SkillName.Lumberjacking, 0.0, 130.0 ); // Passively check Lumberjacking for gain
 		}
             }
 
-	    if( Type != WeaponType.Ranged ){
-		damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 65.0 ) / 130.0 ) );
-	    }
-	    else {
-		damage += ( damage * ( ( attacker.Skills[SkillName.Archery].Value - 65.0 ) / 130.0 ) );
-	    }
-
+	    damage += ( damage * ( ( attacker.Skills[SkillName.Tactics].Value - 65.0 ) / 130.0 ) );
+	    
             /* Compute strength modifier
              * : 1% bonus for every 5 strength
              */
             double modifiers = ( attacker.Str / 5.0 ) / 130.0;
 
-	    if( Type != WeaponType.Ranged ){
-		double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
-		modifiers += ( ( anatomyValue / 5.0 ) / 130.0 );
-		
-		if ( anatomyValue >= 130.0 ) {
-		    modifiers += 0.1;
-		}
-	    }
-	    else {
-		modifiers += ( (attacker.Int / 10.0) / 130.0 );
-	    }
-
+	    /*double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
+	     *modifiers += ( ( anatomyValue / 5.0 ) / 130.0 );
+	     *
+	     *if ( anatomyValue >= 130.0 ) {
+	     *modifiers += 0.1;
+	     *}
+	     *}
+	     */
+	    
             /* Compute lumberjacking bonus
              * : 1% bonus for every 5 points of lumberjacking
              * : +10% bonus at Grandmaster or higher
@@ -2242,9 +2236,17 @@ namespace Server.Items
         {
             //if ( Core.AOS )
             //    return ComputeDamageAOS( attacker, defender );
-
+	    
             int damage = (int)ScaleDamageOld( attacker, GetBaseDamage( attacker ), true );
-	    damage = Mobile.DamageScalar.ScaleDamage(damage, attacker, defender, DamageType.Physical); //scripts/misc/damage.cs
+
+	    DamageType dmgtype = m_DamageType;
+	    
+	    if( this is BaseRanged ){
+		damage = Mobile.DamageScalar.ScaleDamage(damage, attacker, defender, dmgtype, AttackType.Ranged);
+	    }
+	    else {
+		damage = Mobile.DamageScalar.ScaleDamage(damage, attacker, defender, dmgtype, AttackType.Physical); //scripts/misc/damage.cs
+	    }
 	    
             // pre-AOS, halve damage if the defender is a player or the attacker is not a player
             if ( defender is PlayerMobile || !( attacker is PlayerMobile ) )
@@ -2874,6 +2876,7 @@ namespace Server.Items
             m_Hits = m_MaxHits = Utility.RandomMinMax( InitMinHits, InitMaxHits );
 
             m_Resource = CraftResource.Iron;
+	    m_DamageType = DamageType.None;
 
             m_AosAttributes = new AosAttributes( this );
             m_AosWeaponAttributes = new AosWeaponAttributes( this );

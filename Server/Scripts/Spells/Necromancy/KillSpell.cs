@@ -68,12 +68,13 @@ namespace Server.Spells.Necromancy
 		double damage = 0.9 * m.Hits;
 		
 		if( CheckResisted(m) ){
-		    damage *= 0.5;
+		    damage = 0.6 * m.Hits;
 		    
 		    m.SendLocalizedMessage( 501783 ); //you resist the blah blah blah
 		}
 
-		m.Damage((int)damage, Caster, m_DamageType);
+		//m.Damage((int)damage, Caster, m_DamageType);
+		SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, damage, DamageType.Necro);
 	    }	
 	    
         Return:

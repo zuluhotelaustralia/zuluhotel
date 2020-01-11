@@ -7,6 +7,9 @@ ORENODES=../orelist.org
 LOGNODES=../loglist.org
 FISHNODES=../fishlist.org
 GRANITESRC=../gengranite.awk
+HIDESRC=../genhides.awk
+HIDENODES=../hidelist.org
+LEATHERSRC=../genleather.awk
 
 all:
 	help
@@ -34,7 +37,13 @@ granite:
 	mkdir -p granite
 	cd granite/; awk -f $(GRANITESRC) $(ORENODES)
 
+hides:
+	mkdir -p hides
+	cd hides/; awk -f $(HIDESRC) $(HIDENODES); awk -f $(LEATHERSRC) $(HIDENODES)
+
 clean:
 	rm -rf lumberjacking/
 	rm -rf mining/
 	rm -rf granite/
+	rm -rf hides/
+	rm -rf leather/

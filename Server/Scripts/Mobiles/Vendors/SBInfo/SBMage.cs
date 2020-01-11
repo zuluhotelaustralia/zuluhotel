@@ -107,7 +107,7 @@ namespace Server.Mobiles
 		    Add( typeof( DaemonBlood ), 3 );
 		    Add( typeof( PigIron ), 2 );
 		    Add( typeof( NoxCrystal ), 3 );
-		    Add( typeof( GraveDust ), 1 );
+		    //Add( typeof( GraveDust ), 1 );
 		}
 
 		Add( typeof( RecallRune ), 13 );

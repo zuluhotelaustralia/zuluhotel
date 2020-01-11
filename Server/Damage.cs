@@ -1,11 +1,10 @@
 using Server;
 
 namespace Server {
+
+//DAMAGETYPE is the elemental damage type (we're bypassing AOS's bullshit)
     public enum DamageType {
-	Raw,
-	Physical,
-	Ranged,
-	Magical,
+	None,
 	Air,
 	Earth,
 	Fire,
@@ -14,12 +13,24 @@ namespace Server {
 	Poison
     }
 
+    //ATTACKTYPE is the actual type of attack e.g. shooting a guy with a bow vs casting a spell
+    //Differentiating these things in this manner allows for e.g. elemental fire bows doing
+    // ranged fire damage, or magical attacks (spells) that do different elemental damages
+    // but still lets us handle spec-based bonuses in an elegant way
+    
+    public enum AttackType {
+	Raw,
+	Physical,
+	Ranged,
+	Magical
+    }
+	
     public class DamageScalar {
 
 	public DamageScalar(){
 	}
 	
-	public virtual int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
+	public virtual int ScaleDamage( int amount, Mobile from, Mobile m, DamageType dmgtype, AttackType atktype) {
 	    return amount;
 	}
     }

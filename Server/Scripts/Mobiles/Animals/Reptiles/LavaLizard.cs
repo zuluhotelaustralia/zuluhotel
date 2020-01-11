@@ -55,7 +55,7 @@ namespace Server.Mobiles
 
 		public override bool HasBreath{ get{ return true; } } // fire breath enabled
 		public override int Hides{ get{ return 12; } }
-		public override HideType HideType{ get{ return HideType.Spined; } }
+		public override HideType HideType{ get{ return HideType.Lava; } }
 
 		public LavaLizard(Serial serial) : base(serial)
 		{

@@ -4,235 +4,240 @@ using Server.Network;
 
 namespace Server.Items
 {
-	public abstract class BaseLeather : Item, ICommodity
+    public abstract class BaseLeather : Item, ICommodity
+    {
+	private CraftResource m_Resource;
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public CraftResource Resource
 	{
-		private CraftResource m_Resource;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public CraftResource Resource
-		{
-			get{ return m_Resource; }
-			set{ m_Resource = value; InvalidateProperties(); }
-		}
-
-		int ICommodity.DescriptionNumber { get { return LabelNumber; } }
-		bool ICommodity.IsDeedable { get { return true; } }
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 1 ); // version
-
-			writer.Write( (int) m_Resource );
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-
-			switch ( version )
-			{
-				case 1:
-				{
-					m_Resource = (CraftResource)reader.ReadInt();
-					break;
-				}
-				case 0:
-				{
-                                    throw new System.Exception("Unsupported old item format.");
-				}
-			}
-		}
-
-		public BaseLeather( CraftResource resource ) : this( resource, 1 )
-		{
-		}
-
-		public BaseLeather( CraftResource resource, int amount ) : base( 0x1081 )
-		{
-			Stackable = true;
-			Weight = 1.0;
-			Amount = amount;
-			Hue = CraftResources.GetHue( resource );
-
-			m_Resource = resource;
-		}
-
-		public BaseLeather( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void AddNameProperty( ObjectPropertyList list )
-		{
-			if ( Amount > 1 )
-				list.Add( 1050039, "{0}\t#{1}", Amount, 1024199 ); // ~1_NUMBER~ ~2_ITEMNAME~
-			else
-				list.Add( 1024199 ); // cut leather
-		}
-
-		public override void GetProperties( ObjectPropertyList list )
-		{
-			base.GetProperties( list );
-
-			if ( !CraftResources.IsStandard( m_Resource ) )
-			{
-				int num = CraftResources.GetLocalizationNumber( m_Resource );
-
-				if ( num > 0 )
-					list.Add( num );
-				else
-					list.Add( CraftResources.GetName( m_Resource ) );
-			}
-		}
-
-		public override int LabelNumber
-		{
-			get
-			{
-				if ( m_Resource >= CraftResource.SpinedLeather && m_Resource <= CraftResource.BarbedLeather )
-					return 1049684 + (int)(m_Resource - CraftResource.SpinedLeather);
-
-				return 1047022;
-			}
-		}
+	    get{ return m_Resource; }
+	    set{ m_Resource = value; InvalidateProperties(); }
 	}
 
-	[FlipableAttribute( 0x1081, 0x1082 )]
-	public class Leather : BaseLeather
+	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+	bool ICommodity.IsDeedable { get { return true; } }
+
+	public override void Serialize( GenericWriter writer )
 	{
-		[Constructable]
-		public Leather() : this( 1 )
-		{
-		}
+	    base.Serialize( writer );
 
-		[Constructable]
-		public Leather( int amount ) : base( CraftResource.RegularLeather, amount )
-		{
-		}
+	    writer.Write( (int) 1 ); // version
 
-		public Leather( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-
-
+	    writer.Write( (int) m_Resource );
 	}
 
-	[FlipableAttribute( 0x1081, 0x1082 )]
-	public class SpinedLeather : BaseLeather
+	public override void Deserialize( GenericReader reader )
 	{
-		[Constructable]
-		public SpinedLeather() : this( 1 )
-		{
-		}
+	    base.Deserialize( reader );
 
-		[Constructable]
-		public SpinedLeather( int amount ) : base( CraftResource.SpinedLeather, amount )
-		{
-		}
+	    int version = reader.ReadInt();
 
-		public SpinedLeather( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-
-
+	    switch ( version )
+	    {
+		case 1:
+		    {
+			m_Resource = (CraftResource)reader.ReadInt();
+			break;
+		    }
+		case 0:
+		    {
+			throw new System.Exception("Unsupported old item format.");
+		    }
+	    }
 	}
 
-	[FlipableAttribute( 0x1081, 0x1082 )]
-	public class HornedLeather : BaseLeather
+	public BaseLeather( CraftResource resource ) : this( resource, 1 )
 	{
-		[Constructable]
-		public HornedLeather() : this( 1 )
-		{
-		}
-
-		[Constructable]
-		public HornedLeather( int amount ) : base( CraftResource.HornedLeather, amount )
-		{
-		}
-
-		public HornedLeather( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-
-
 	}
 
-	[FlipableAttribute( 0x1081, 0x1082 )]
-	public class BarbedLeather : BaseLeather
+	public BaseLeather( CraftResource resource, int amount ) : base( 0x1081 )
 	{
-		[Constructable]
-		public BarbedLeather() : this( 1 )
-		{
-		}
+	    Stackable = true;
+	    Weight = 1.0;
+	    Amount = amount;
+	    Hue = CraftResources.GetHue( resource );
 
-		[Constructable]
-		public BarbedLeather( int amount ) : base( CraftResource.BarbedLeather, amount )
-		{
-		}
-
-		public BarbedLeather( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-
-
+	    m_Resource = resource;
 	}
+
+	public BaseLeather( Serial serial ) : base( serial )
+	{
+	}
+
+	public override void AddNameProperty( ObjectPropertyList list )
+	{
+	    int cliloc = CraftResources.GetLocalizationNumber( m_Resource );
+	    if ( Amount > 1 )
+		list.Add( 1060100, "{0}\t#{1}\t#{2}", Amount, cliloc, 1160111 );
+	    else
+		list.Add( 1060101, "#{0}\t#{1}", cliloc, 1160111 );
+	}
+
+	public override void GetProperties( ObjectPropertyList list )
+	{
+	    base.GetProperties( list );
+
+	    if ( !CraftResources.IsStandard( m_Resource ) )
+	    {
+		int num = CraftResources.GetLocalizationNumber( m_Resource );
+
+		if ( num > 0 )
+		    list.Add( num );
+		else
+		    list.Add( CraftResources.GetName( m_Resource ) );
+	    }
+	}
+
+	public override int LabelNumber
+	{
+	    get
+	    {
+		if ( m_Resource >= CraftResource.SpinedLeather && m_Resource <= CraftResource.BarbedLeather ){
+		    return 1049684 + (int)(m_Resource - CraftResource.SpinedLeather);
+		}
+		else if ( m_Resource >= CraftResource.RatLeather && m_Resource <= CraftResource.GoldenDragonLeather ){
+		    return 1160400 + (int)(m_Resource - CraftResource.RatLeather);
+		}
+
+		return 1047022;
+	    }
+	}
+    }
+
+    [FlipableAttribute( 0x1081, 0x1082 )]
+    public class Leather : BaseLeather
+    {
+	[Constructable]
+	public Leather() : this( 1 )
+	{
+	}
+
+	[Constructable]
+	public Leather( int amount ) : base( CraftResource.RegularLeather, amount )
+	{
+	}
+
+	public Leather( Serial serial ) : base( serial )
+	{
+	}
+
+	public override void Serialize( GenericWriter writer )
+	{
+	    base.Serialize( writer );
+
+	    writer.Write( (int) 0 ); // version
+	}
+
+	public override void Deserialize( GenericReader reader )
+	{
+	    base.Deserialize( reader );
+
+	    int version = reader.ReadInt();
+	}
+
+
+    }
+
+    [FlipableAttribute( 0x1081, 0x1082 )]
+    public class SpinedLeather : BaseLeather
+    {
+	[Constructable]
+	public SpinedLeather() : this( 1 )
+	{
+	}
+
+	[Constructable]
+	public SpinedLeather( int amount ) : base( CraftResource.SpinedLeather, amount )
+	{
+	}
+
+	public SpinedLeather( Serial serial ) : base( serial )
+	{
+	}
+
+	public override void Serialize( GenericWriter writer )
+	{
+	    base.Serialize( writer );
+
+	    writer.Write( (int) 0 ); // version
+	}
+
+	public override void Deserialize( GenericReader reader )
+	{
+	    base.Deserialize( reader );
+
+	    int version = reader.ReadInt();
+	}
+
+
+    }
+
+    [FlipableAttribute( 0x1081, 0x1082 )]
+    public class HornedLeather : BaseLeather
+    {
+	[Constructable]
+	public HornedLeather() : this( 1 )
+	{
+	}
+
+	[Constructable]
+	public HornedLeather( int amount ) : base( CraftResource.HornedLeather, amount )
+	{
+	}
+
+	public HornedLeather( Serial serial ) : base( serial )
+	{
+	}
+
+	public override void Serialize( GenericWriter writer )
+	{
+	    base.Serialize( writer );
+
+	    writer.Write( (int) 0 ); // version
+	}
+
+	public override void Deserialize( GenericReader reader )
+	{
+	    base.Deserialize( reader );
+
+	    int version = reader.ReadInt();
+	}
+
+
+    }
+
+    [FlipableAttribute( 0x1081, 0x1082 )]
+    public class BarbedLeather : BaseLeather
+    {
+	[Constructable]
+	public BarbedLeather() : this( 1 )
+	{
+	}
+
+	[Constructable]
+	public BarbedLeather( int amount ) : base( CraftResource.BarbedLeather, amount )
+	{
+	}
+
+	public BarbedLeather( Serial serial ) : base( serial )
+	{
+	}
+
+	public override void Serialize( GenericWriter writer )
+	{
+	    base.Serialize( writer );
+
+	    writer.Write( (int) 0 ); // version
+	}
+
+	public override void Deserialize( GenericReader reader )
+	{
+	    base.Deserialize( reader );
+
+	    int version = reader.ReadInt();
+	}
+
+
+    }
 }

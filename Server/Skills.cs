@@ -883,6 +883,7 @@ namespace Server
 	    set{ m_Cap = value; }
 	}
 
+	[CommandProperty( AccessLevel.Developer )]
 	public int Total
 	{
 	    get{ return m_Total; }

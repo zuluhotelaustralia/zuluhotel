@@ -47,6 +47,21 @@ namespace Server.Items
 	SpinedLeather,
 	HornedLeather,
 	BarbedLeather,
+	RatLeather,
+	WolfLeather,
+	BearLeather,
+	SerpentLeather,
+	LizardLeather,
+	TrollLeather,
+	OstardLeather,
+	NecromancerLeather,
+	LavaLeather,
+	LicheLeather,
+	IceCrystalLeather,
+	DragonLeather,
+	WyrmLeather,
+	BalronLeather,
+	GoldenDragonLeather,
 
 	RedScales = 201,
 	YellowScales,
@@ -151,7 +166,7 @@ namespace Server.Items
 	public static readonly CraftAttributeInfo Blank;
 	public static readonly CraftAttributeInfo Gold, Spike, Fruity, Bronze, IceRock, BlackDwarf, DullCopper, Platinum, SilverRock, DarkPagan, Copper, Mystic, Spectral, OldBritain, Onyx, RedElven, Undead, Pyrite, Virginity, Malachite, Lavarock, Azurite, Dripstone, Executor, Peachblue, Destruction, Anra, Crystal, Doom, Goddess, NewZulu, DarkSableRuby, EbonTwilightSapphire, RadiantNimbusDiamond;
 
-	public static readonly CraftAttributeInfo Spined, Horned, Barbed;
+	public static readonly CraftAttributeInfo Spined, Horned, Barbed, Rat, Wolf, Bear, Serpent, Lizard, Troll, Ostard, Necromancer, Lava, Liche, IceCrystal, Dragon, Wyrm, Balron, GoldenDragon;
 	public static readonly CraftAttributeInfo RedScales, YellowScales, BlackScales, GreenScales, WhiteScales, BlueScales;
 	public static readonly CraftAttributeInfo Pinetree, Cherry, Oak, PurplePassion, GoldenReflection, Hardranger, Jadewood, Darkwood, Stonewood, Sunwood, Gauntlet, Swampwood, Stardust, Silverleaf, Stormteal, Emeraldwood, Bloodwood, Crystalwood, Bloodhorse, Doomwood, Zulu, Darkness, Elven;
 
@@ -899,6 +914,166 @@ namespace Server.Items
 		barbed.RunicMaxIntensity = 100;
 	    }
 
+	    CraftAttributeInfo rat = Rat = new CraftAttributeInfo();
+
+	    rat.ArmorPhysicalResist = 2;
+	    rat.ArmorFireResist = 1;
+	    rat.ArmorColdResist = 2;
+	    rat.ArmorPoisonResist = 3;
+	    rat.ArmorEnergyResist = 4;
+	    rat.RunicMinAttributes = 4;
+	    rat.RunicMaxAttributes = 5;
+	    if ( Core.ML )
+	    {
+		rat.RunicMinIntensity = 50;
+		rat.RunicMaxIntensity = 100;
+	    }
+	    else
+	    {
+		rat.RunicMinIntensity = 40;
+		rat.RunicMaxIntensity = 100;
+	    }
+
+	    CraftAttributeInfo wolf = Wolf = new CraftAttributeInfo();
+
+	    wolf.ArmorPhysicalResist = 2;
+	    wolf.ArmorFireResist = 1;
+	    wolf.ArmorColdResist = 2;
+	    wolf.ArmorPoisonResist = 3;
+	    wolf.ArmorEnergyResist = 4;
+	    wolf.RunicMinAttributes = 4;
+	    wolf.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo bear = Bear = new CraftAttributeInfo();
+
+	    bear.ArmorPhysicalResist = 2;
+	    bear.ArmorFireResist = 1;
+	    bear.ArmorColdResist = 2;
+	    bear.ArmorPoisonResist = 3;
+	    bear.ArmorEnergyResist = 4;
+	    bear.RunicMinAttributes = 4;
+	    bear.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo serpent = Serpent = new CraftAttributeInfo();
+
+	    serpent.ArmorPhysicalResist = 2;
+	    serpent.ArmorFireResist = 1;
+	    serpent.ArmorColdResist = 2;
+	    serpent.ArmorPoisonResist = 3;
+	    serpent.ArmorEnergyResist = 4;
+	    serpent.RunicMinAttributes = 4;
+	    serpent.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo lizard = Lizard = new CraftAttributeInfo();
+
+	    lizard.ArmorPhysicalResist = 2;
+	    lizard.ArmorFireResist = 1;
+	    lizard.ArmorColdResist = 2;
+	    lizard.ArmorPoisonResist = 3;
+	    lizard.ArmorEnergyResist = 4;
+	    lizard.RunicMinAttributes = 4;
+	    lizard.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo troll = Troll = new CraftAttributeInfo();
+
+	    troll.ArmorPhysicalResist = 2;
+	    troll.ArmorFireResist = 1;
+	    troll.ArmorColdResist = 2;
+	    troll.ArmorPoisonResist = 3;
+	    troll.ArmorEnergyResist = 4;
+	    troll.RunicMinAttributes = 4;
+	    troll.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo ostard = Ostard = new CraftAttributeInfo();
+
+	    ostard.ArmorPhysicalResist = 2;
+	    ostard.ArmorFireResist = 1;
+	    ostard.ArmorColdResist = 2;
+	    ostard.ArmorPoisonResist = 3;
+	    ostard.ArmorEnergyResist = 4;
+	    ostard.RunicMinAttributes = 4;
+	    ostard.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo necromancer = Necromancer = new CraftAttributeInfo();
+
+	    necromancer.ArmorPhysicalResist = 2;
+	    necromancer.ArmorFireResist = 1;
+	    necromancer.ArmorColdResist = 2;
+	    necromancer.ArmorPoisonResist = 3;
+	    necromancer.ArmorEnergyResist = 4;
+	    necromancer.RunicMinAttributes = 4;
+	    necromancer.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo lava = Lava = new CraftAttributeInfo();
+
+	    lava.ArmorPhysicalResist = 2;
+	    lava.ArmorFireResist = 1;
+	    lava.ArmorColdResist = 2;
+	    lava.ArmorPoisonResist = 3;
+	    lava.ArmorEnergyResist = 4;
+	    lava.RunicMinAttributes = 4;
+	    lava.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo liche = Liche = new CraftAttributeInfo();
+
+	    liche.ArmorPhysicalResist = 2;
+	    liche.ArmorFireResist = 1;
+	    liche.ArmorColdResist = 2;
+	    liche.ArmorPoisonResist = 3;
+	    liche.ArmorEnergyResist = 4;
+	    liche.RunicMinAttributes = 4;
+	    liche.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo icecrystal = IceCrystal = new CraftAttributeInfo();
+
+	    icecrystal.ArmorPhysicalResist = 2;
+	    icecrystal.ArmorFireResist = 1;
+	    icecrystal.ArmorColdResist = 2;
+	    icecrystal.ArmorPoisonResist = 3;
+	    icecrystal.ArmorEnergyResist = 4;
+	    icecrystal.RunicMinAttributes = 4;
+	    icecrystal.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo dragon = Dragon = new CraftAttributeInfo();
+
+	    dragon.ArmorPhysicalResist = 2;
+	    dragon.ArmorFireResist = 1;
+	    dragon.ArmorColdResist = 2;
+	    dragon.ArmorPoisonResist = 3;
+	    dragon.ArmorEnergyResist = 4;
+	    dragon.RunicMinAttributes = 4;
+	    dragon.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo wyrm = Wyrm = new CraftAttributeInfo();
+
+	    wyrm.ArmorPhysicalResist = 2;
+	    wyrm.ArmorFireResist = 1;
+	    wyrm.ArmorColdResist = 2;
+	    wyrm.ArmorPoisonResist = 3;
+	    wyrm.ArmorEnergyResist = 4;
+	    wyrm.RunicMinAttributes = 4;
+	    wyrm.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo balron = Balron = new CraftAttributeInfo();
+
+	    balron.ArmorPhysicalResist = 2;
+	    balron.ArmorFireResist = 1;
+	    balron.ArmorColdResist = 2;
+	    balron.ArmorPoisonResist = 3;
+	    balron.ArmorEnergyResist = 4;
+	    balron.RunicMinAttributes = 4;
+	    balron.RunicMaxAttributes = 5;
+	    
+	    CraftAttributeInfo goldendragon = GoldenDragon = new CraftAttributeInfo();
+
+	    goldendragon.ArmorPhysicalResist = 2;
+	    goldendragon.ArmorFireResist = 1;
+	    goldendragon.ArmorColdResist = 2;
+	    goldendragon.ArmorPoisonResist = 3;
+	    goldendragon.ArmorEnergyResist = 4;
+	    goldendragon.RunicMinAttributes = 4;
+	    goldendragon.RunicMaxAttributes = 5;
+
 	    CraftAttributeInfo red = RedScales = new CraftAttributeInfo();
 
 	    red.ArmorFireResist = 10;
@@ -1061,10 +1236,25 @@ namespace Server.Items
 
 	private static CraftResourceInfo[] m_LeatherInfo = new CraftResourceInfo[]
 	    {
-		new CraftResourceInfo( 0x000, 1049353, "Normal",		CraftAttributeInfo.Blank,		CraftResource.RegularLeather,	typeof( Leather ),			typeof( Hides ) ),
-		new CraftResourceInfo( 0x283, 1049354, "Spined",		CraftAttributeInfo.Spined,		CraftResource.SpinedLeather,	typeof( SpinedLeather ),	typeof( SpinedHides ) ),
-		new CraftResourceInfo( 0x227, 1049355, "Horned",		CraftAttributeInfo.Horned,		CraftResource.HornedLeather,	typeof( HornedLeather ),	typeof( HornedHides ) ),
-		new CraftResourceInfo( 0x1C1, 1049356, "Barbed",		CraftAttributeInfo.Barbed,		CraftResource.BarbedLeather,	typeof( BarbedLeather ),	typeof( BarbedHides ) )
+		new CraftResourceInfo( 0x000, 1049353, "Normal", CraftAttributeInfo.Blank, CraftResource.RegularLeather, typeof( Leather ), typeof( Hides ) ),
+		new CraftResourceInfo( 0x283, 1049354, "Spined", CraftAttributeInfo.Spined, CraftResource.SpinedLeather, typeof( SpinedLeather ), typeof( SpinedHides ) ),
+		new CraftResourceInfo( 0x227, 1049355, "Horned", CraftAttributeInfo.Horned, CraftResource.HornedLeather, typeof( HornedLeather ), typeof( HornedHides ) ),
+		new CraftResourceInfo( 0x1C1, 1049356, "Barbed", CraftAttributeInfo.Barbed, CraftResource.BarbedLeather, typeof( BarbedLeather ), typeof( BarbedHides ) ),
+		new CraftResourceInfo( 0x7e2, 1160415, "Rat", CraftAttributeInfo.Rat, CraftResource.RatLeather, typeof( RatLeather ), typeof( RatHide ) ), //yes no plural on "hide", can change later --sith TODO
+		new CraftResourceInfo( 1102, 1160416, "Wolf", CraftAttributeInfo.Wolf, CraftResource.WolfLeather, typeof( WolfLeather ), typeof( WolfHide ) ),
+		new CraftResourceInfo( 44, 1160417, "Bear", CraftAttributeInfo.Bear, CraftResource.BearLeather, typeof( BearLeather ), typeof( BearHide ) ),
+		new CraftResourceInfo( 0x8fd, 1160418, "Serpent", CraftAttributeInfo.Serpent, CraftResource.SerpentLeather, typeof( SerpentLeather ), typeof( SerpentHide ) ),
+		new CraftResourceInfo( 0x852, 1160419, "Lizard", CraftAttributeInfo.Lizard, CraftResource.LizardLeather, typeof( LizardLeather ), typeof( LizardHide ) ),
+		new CraftResourceInfo( 0x54a, 1160420, "Troll", CraftAttributeInfo.Troll, CraftResource.TrollLeather, typeof( TrollLeather ), typeof( TrollHide ) ),
+		new CraftResourceInfo( 0x415, 1160421, "Ostard", CraftAttributeInfo.Ostard, CraftResource.OstardLeather, typeof( OstardLeather ), typeof( OstardHide ) ),
+		new CraftResourceInfo( 84, 1160422, "Necromancer", CraftAttributeInfo.Necromancer, CraftResource.NecromancerLeather, typeof( NecromancerLeather ), typeof( NecromancerHide ) ),
+		new CraftResourceInfo( 0x486, 1160423, "Lava", CraftAttributeInfo.Lava, CraftResource.LavaLeather, typeof( LavaLeather ), typeof( LavaHide ) ),
+		new CraftResourceInfo( 0x496, 1160424, "Liche", CraftAttributeInfo.Liche, CraftResource.LicheLeather, typeof( LicheLeather ), typeof( LicheHide ) ),
+		new CraftResourceInfo( 0x492, 1160425, "Ice Crystal", CraftAttributeInfo.IceCrystal, CraftResource.IceCrystalLeather, typeof( IceCrystalLeather ), typeof( IceCrystalHide ) ),
+		new CraftResourceInfo( 0x494, 1160426, "Dragon", CraftAttributeInfo.Dragon, CraftResource.DragonLeather, typeof( DragonLeather ), typeof( DragonHide ) ),
+		new CraftResourceInfo( 1159, 1160427, "Wyrm", CraftAttributeInfo.Wyrm, CraftResource.WyrmLeather, typeof( WyrmLeather ), typeof( WyrmHide ) ),
+		new CraftResourceInfo( 1157, 1160428, "Balron", CraftAttributeInfo.Balron, CraftResource.BalronLeather, typeof( BalronLeather ), typeof( BalronHide ) ),
+		new CraftResourceInfo( 48, 1160429, "Golden Dragon", CraftAttributeInfo.GoldenDragon, CraftResource.GoldenDragonLeather, typeof( GoldenDragonLeather ), typeof( GoldenDragonHide ) )
 	    };
 
 	private static CraftResourceInfo[] m_AOSLeatherInfo = new CraftResourceInfo[]
@@ -1150,7 +1340,7 @@ namespace Server.Items
 	    switch ( GetType( resource ) )
 	    {
 		case CraftResourceType.Metal: list = m_MetalInfo; break;
-		case CraftResourceType.Leather: list = Core.AOS ? m_AOSLeatherInfo : m_LeatherInfo; break;
+		case CraftResourceType.Leather: list = m_LeatherInfo; break;
 		case CraftResourceType.Scales: list = m_ScaleInfo; break;
 		case CraftResourceType.Wood: list = m_WoodInfo; break;
 	    }
@@ -1174,7 +1364,7 @@ namespace Server.Items
 	    if ( resource >= CraftResource.Iron && resource <= CraftResource.RadiantNimbusDiamond )
 		return CraftResourceType.Metal;
 
-	    if ( resource >= CraftResource.RegularLeather && resource <= CraftResource.BarbedLeather )
+	    if ( resource >= CraftResource.RegularLeather && resource <= CraftResource.GoldenDragonLeather )
 		return CraftResourceType.Leather;
 
 	    if ( resource >= CraftResource.RedScales && resource <= CraftResource.BlueScales )

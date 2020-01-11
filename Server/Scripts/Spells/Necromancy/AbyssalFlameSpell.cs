@@ -41,7 +41,8 @@ namespace Server.Spells.Necromancy
 			
 			Caster.DoHarmful( m );
 			
-			m.Damage( dmg, Caster, m_DamageType ); //resist?  reflect?
+			//m.Damage( dmg, Caster, m_DamageType ); //resist?  reflect?
+			SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Fire);
 			m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot ); //flamestrike effect
 			
 			new AbyssalFlameTimer(Caster, m).Start();

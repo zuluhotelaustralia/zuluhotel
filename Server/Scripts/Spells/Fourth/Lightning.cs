@@ -61,7 +61,8 @@ namespace Server.Spells.Fourth
 
 				m.BoltEffect( 0 );
 
-				SpellHelper.Damage( this, m, damage, 0, 0, 0, 0, 100 );
+				//SpellHelper.Damage( this, m, damage, 0, 0, 0, 0, 100 );
+				SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, damage, DamageType.Air);
 			}
 
 			FinishSequence();

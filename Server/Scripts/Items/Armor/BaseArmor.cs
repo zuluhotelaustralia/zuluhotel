@@ -1444,7 +1444,22 @@ namespace Server.Items
                 case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
                 case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
                 case CraftResource.BarbedLeather:	oreType = 1061116; break; // barbed
-                case CraftResource.RedScales:		oreType = 1060814; break; // red
+		case CraftResource.RatLeather: oreType = 1160400; break; //Rat
+		case CraftResource.WolfLeather: oreType = 1160401; break; //Wolf
+		case CraftResource.BearLeather: oreType = 1160402; break; //Bear
+		case CraftResource.SerpentLeather: oreType = 1160403; break; //Serpent
+		case CraftResource.LizardLeather: oreType = 1160404; break; //Lizard
+		case CraftResource.TrollLeather: oreType = 1160405; break; //Troll
+		case CraftResource.OstardLeather: oreType = 1160406; break; //Ostard
+		case CraftResource.NecromancerLeather: oreType = 1160407; break; //Necromancer
+		case CraftResource.LavaLeather: oreType = 1160408; break; //Lava
+		case CraftResource.LicheLeather: oreType = 1160409; break; //Liche
+		case CraftResource.IceCrystalLeather: oreType = 1160410; break; //IceCrystal
+		case CraftResource.DragonLeather: oreType = 1160411; break; //Dragon
+		case CraftResource.WyrmLeather: oreType = 1160412; break; //Wyrm
+		case CraftResource.BalronLeather: oreType = 1160413; break; //Balron
+		case CraftResource.GoldenDragonLeather: oreType = 1160414; break; //GoldenDragon
+		case CraftResource.RedScales:		oreType = 1060814; break; // red
                 case CraftResource.YellowScales:	oreType = 1060818; break; // yellow
                 case CraftResource.BlackScales:		oreType = 1060820; break; // black
                 case CraftResource.GreenScales:		oreType = 1060819; break; // green
@@ -1642,6 +1657,14 @@ namespace Server.Items
 		    //ore, see ResourceInfo.cs
 		    attrs.Add( new EquipInfoAttribute( 1160200 + res - 2) );
 		}
+		else if( 100 < res && res <= 104 ){
+		    //leather, OSI
+		    attrs.Add( new EquipInfoAttribute( 1061116 + res - 102 ) );
+		}
+		else if( 104 < res && res <= 200){
+		    //leather, zulu
+		    attrs.Add( new EquipInfoAttribute( 1160400 + res - 105 ) );
+		}
 		else if( 301 < res ) {
 		    //wood
 		    attrs.Add( new EquipInfoAttribute( 1160233 + res - 300) ); //yuck
@@ -1701,8 +1724,9 @@ namespace Server.Items
 
             CraftContext context = craftSystem.GetContext( from );
 
-            if ( context != null && context.DoNotColor )
+            if ( context != null && context.DoNotColor ){
                 Hue = 0;
+	    }
 
             if( Quality == ArmorQuality.Exceptional )
             {
@@ -1725,7 +1749,7 @@ namespace Server.Items
                         }
                     }
 
-                    from.CheckSkill( SkillName.ArmsLore, 0, 100 );
+                    from.CheckSkill( SkillName.ArmsLore, 0, 130 );
                 }
             }
 

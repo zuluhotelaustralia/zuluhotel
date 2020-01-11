@@ -33,7 +33,46 @@ namespace Server {
 	    //todo:  attenuate or amplify damage based on target's elemental protection(s).
 	    // e.g. if you're wearing Lavarock platemail, fire doesn't hurt you as much but
 	    // if you're wearing icerock, fire rips you a new asshole.
-	    return amount;
+
+	    int protamount = 0;
+
+	    switch( type ){
+		case DamageType.Air:
+		    protamount = m.Prots.Air;
+		    break;
+		case DamageType.Earth:
+		    protamount = m.Prots.Earth;
+		    break;
+		case DamageType.Fire:
+		    protamount = m.Prots.Fire;
+		    break;
+		case DamageType.Necro:
+		    protamount = m.Prots.Necro;
+		    break;
+		case DamageType.Water:
+		    protamount = m.Prots.Water;
+		    break;
+		default:
+		    break;
+	    }
+
+	    if( protamount == 0 ){
+		return amount;
+	    }
+
+	    if ( protamount > 4 ){
+		protamount = 4;
+	    }
+	    	    
+	    double scale = (double)protamount * 0.25;
+	    double adjusted = (double)amount * scale;
+	    double ret = (double)amount - adjusted;
+	    
+	    if( ret < 0.0 ){
+		ret = 0.0;
+	    }
+	    
+	    return (int)ret;
 	}
 
 	//this function gets called in Mobile.Damage() and is intended to be the single point of all
@@ -43,8 +82,12 @@ namespace Server {
 	//public int ScaleDamage( int amount, Mobile from, Mobile m ){
 	//    return ScaleDamage(amount, from, m, DamageType.Physical);
 	//}
+
+	public int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
+	    return ScaleDamage( amount, from, m, type, AttackType.Physical );
+	}
 	
-	public override int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
+	public override int ScaleDamage( int amount, Mobile from, Mobile m, DamageType dmgtype, AttackType atktype ) {
 	    double result = (double)amount;
 	    double tgtbonus = 1.0;
 	    double frombonus = 1.0;
@@ -70,17 +113,17 @@ namespace Server {
 		tgtbonus == 1.0){
 
 		//apply the elemental scaling here if we're just going to return right away.
-		result = ApplyElementalScaling(amount, m, type);
+		result = ApplyElementalScaling(amount, m, dmgtype);
 		return (int)result;
 		//might as well save the cycles if there's no reason to go through this
 	    }
 
 	    //note that this is not being double-applied.  First one only gets called if we return early.
-	    result = ApplyElementalScaling(amount, m, type);
+	    result = ApplyElementalScaling(amount, m, dmgtype);
 	    
 	    //take a deep breath, this gets ugly.
-	    switch( type ){
-		case DamageType.Magical:
+	    switch( atktype ){
+		case AttackType.Magical:
 		    //outgoing
 		    if (fromSpec == SpecName.Mage)
 		    {
@@ -103,7 +146,7 @@ namespace Server {
 		    }
 		    break;
 		    
-		case DamageType.Physical:
+		case AttackType.Physical:
 		    
 		    //outgoing
 		    if(fromSpec == SpecName.Warrior){
@@ -126,7 +169,7 @@ namespace Server {
 		    }
 		    break;
 
-		case DamageType.Ranged:
+		case AttackType.Ranged:
 		    //outgoing
 		    if(fromSpec == SpecName.Ranger){
 			result *= frombonus;

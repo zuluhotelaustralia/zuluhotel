@@ -64,7 +64,7 @@ namespace Server.Mobiles
 		public override bool BleedImmune{ get{ return true; } }
 		public override int Meat{ get{ return 19; } } // where's it hiding these? :)
 		public override int Hides{ get{ return 20; } }
-		public override HideType HideType{ get{ return HideType.Barbed; } }
+		public override HideType HideType{ get{ return HideType.Dragon; } }
 
 		public SkeletalDragon( Serial serial ) : base( serial )
 		{

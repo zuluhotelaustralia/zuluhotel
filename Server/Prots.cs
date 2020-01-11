@@ -10,8 +10,15 @@ namespace Server {
     public class Prots {
 	public static void Initialize(){
 	    CommandSystem.Register("GetProts", AccessLevel.GameMaster, new CommandEventHandler( GetProts_OnCommand ) );
+	    CommandSystem.Register("Prots", AccessLevel.Player, new CommandEventHandler( Prots_OnCommand ) );
 	}
 
+	public static void Prots_OnCommand( CommandEventArgs e ){
+	    PlayerMobile pm = e.Mobile as PlayerMobile;
+	    pm.Prots.UpdateProts();
+	    pm.SendMessage("Air: {0}, Earth: {1}, Fire: {2}, Necro: {3}, Water: {4}", pm.Prots.Air, pm.Prots.Earth, pm.Prots.Fire, pm.Prots.Necro, pm.Prots.Water );
+	}
+	    
 	public static void GetProts_OnCommand( CommandEventArgs e ){
 	    PlayerMobile pm = e.Mobile as PlayerMobile;
 
@@ -64,17 +71,18 @@ namespace Server {
 	}
 
 	private int PiecewiseScale( DamageType dt ){
-	    int tally = 0;
+	    double tally = 0;
 
-	    //didn't pull these ot of my ass, see baseweapon.cs
-	    tally += 7 * NeckProt(dt) / ( 100 * 100 );
-	    tally += 7 * HandsProt(dt) / ( 100 * 100 );
-	    tally += 14 * ArmsProt(dt) / ( 100 * 100 );
-	    tally += 15 * HeadProt(dt) / ( 100 * 100 );
-	    tally += 22 * LegsProt(dt) / ( 100 * 100 );
-	    tally += 35 * ChestProt(dt) / ( 100 * 100 );
+	    // THEY ADD UP TO A HUNDY P
+	    tally += 2 * NeckProt(dt) / 100;
+	    tally += 3 * HandsProt(dt) / 100;
+	    tally += 10 * ArmsProt(dt) / 100;
+	    tally += 10 * HeadProt(dt) / 100;
+	    tally += 20 * LegsProt(dt) / 100;
+	    tally += 20 * ChestProt(dt) / 100;
+	    tally += 35 * ShieldProt(dt) / 100;
 
-	    return tally;
+	    return (int)(tally / 25);
 	}
 	
 	private int Assess(Item theitem, DamageType dmgtype){
@@ -95,13 +103,21 @@ namespace Server {
 		    if( cr == CraftResource.RadiantNimbusDiamond ) {
 			return 75;
 		    }
-		   
+		    if( cr == CraftResource.GoldenDragonLeather ){
+			return 25;
+		    }
 		    break;
 		case DamageType.Earth:
 		    if( cr == CraftResource.Destruction ){
 			return 25;
 		    }
 		    if( cr == CraftResource.Crystal ){
+			return 25;
+		    }
+		    if( cr == CraftResource.WyrmLeather ){
+			return 25;
+		    }
+		    if( cr == CraftResource.GoldenDragonLeather ){
 			return 25;
 		    }
 		    if( cr == CraftResource.RadiantNimbusDiamond ){
@@ -112,12 +128,30 @@ namespace Server {
 		    if( cr == CraftResource.Lavarock ){
 			return 50;
 		    }
+		    if( cr == CraftResource.LavaLeather ){
+			return 50;
+		    }
+		    if( cr == CraftResource.WyrmLeather ){
+			return 50;
+		    }
+		    if( cr == CraftResource.GoldenDragonLeather ){
+			return 75;
+		    }
 		    if( cr == CraftResource.DarkSableRuby ){
 			return 75;
 		    }
 		    break;
 		case DamageType.Necro:
 		    if( cr == CraftResource.SilverRock ){
+			return 25;
+		    }
+		    if( cr == CraftResource.LicheLeather ) {
+			return 25;
+		    }
+		    if( cr == CraftResource.NecromancerLeather ){
+			return 25;
+		    }
+		    if( cr == CraftResource.BalronLeather ) {
 			return 25;
 		    }
 		    if( cr == CraftResource.Undead ){
@@ -137,6 +171,9 @@ namespace Server {
 		    if( cr == CraftResource.Dripstone ){
 			return 25;
 		    }
+		    if( cr == CraftResource.IceCrystalLeather ){
+			return 50;
+		    }
 		    if( cr == CraftResource.EbonTwilightSapphire ){
 			return 75;
 		    }
@@ -147,62 +184,71 @@ namespace Server {
 	    return 0;
 	}
 	
-	private int NeckProt( DamageType dt ){
+	private double NeckProt( DamageType dt ){
 	    if( _parent.NeckArmor != null ){
 		Item armor = _parent.NeckArmor;
-		return Assess(armor, dt);
+		return (double)Assess(armor, dt);
 	    }
 	    else {
 		return 0;
 	    }
 	}
-	private int HandsProt( DamageType dt){
+	private double HandsProt( DamageType dt){
 	    if( _parent.HandArmor != null ){
 		Item armor = _parent.HandArmor;
-		return Assess(armor, dt);
+		return (double)Assess(armor, dt);
 	    }
 	    else {
 		return 0;
 	    }
 	}
        
-	private int ArmsProt( DamageType dt){
+	private double ArmsProt( DamageType dt){
 	    if( _parent.ArmsArmor != null ){
 		Item armor = _parent.ArmsArmor;
-		return Assess(armor, dt);
+		return (double)Assess(armor, dt);
 	    }
 	    else {
 		return 0;
 	    }
 	}
-	private int HeadProt( DamageType dt){
+	private double HeadProt( DamageType dt){
 	    if( _parent.HeadArmor != null ){
 		Item armor = _parent.HeadArmor;
-		return Assess(armor, dt);
+		return (double)Assess(armor, dt);
 	    }
 	    else {
 		return 0;
 	    }
 	}
-	private int LegsProt( DamageType dt){
+	private double LegsProt( DamageType dt){
 	    if( _parent.LegsArmor != null ){
 		Item armor = _parent.LegsArmor;
-		return Assess(armor, dt);
+		return (double)Assess(armor, dt);
 	    }
 	    else {
 		return 0;
 	    }
 	}
-	private int ChestProt( DamageType dt){
+	private double ChestProt( DamageType dt){
 	    if( _parent.ChestArmor != null ){
 		Item armor = _parent.ChestArmor;
-		return Assess(armor, dt);
+		return (double)Assess(armor, dt);
 	    }
 	    else {
 		return 0;
 	    }
 	}	
-
+	private double ShieldProt( DamageType dt){
+	    if( _parent.ShieldArmor != null ){
+		Item armor = _parent.ShieldArmor;
+		return (double)Assess(armor, dt);
+	    }
+	    else {
+		return 0;
+	    }
+	}	
+	
 	private class InternalTarget : Target{
 	    public InternalTarget( ) : base( 12, false, TargetFlags.None ){
 	    }

@@ -64,7 +64,8 @@ namespace Server.Spells.Earth
             // 50 damage average at 130 skill
             double avg = 5 * Caster.Skills[DamageSkill].Value / 13;
             double damage = Utility.RandomGaussian(avg, avg/2);
-            m.Damage((int)damage, Caster, DamageType.Air);
+            //m.Damage((int)damage, Caster, DamageType.Air);
+	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, damage, DamageType.Air);
 
         Return:
             FinishSequence();

@@ -104,7 +104,8 @@ namespace Server.Spells.Seventh
 						}
 						toDeal *= GetDamageScalar( m );
 						Caster.DoHarmful( m );
-						SpellHelper.Damage( this, m, toDeal, 0, 100, 0, 0, 0 );
+						//SpellHelper.Damage( this, m, toDeal, 0, 100, 0, 0, 0 );
+						SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, toDeal, DamageType.Earth);
 
 						Caster.MovingParticles( m, 0x36D4, 7, 0, false, true, 9501, 1, 0, 0x100 );
 					}

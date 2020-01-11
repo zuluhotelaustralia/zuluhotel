@@ -69,7 +69,8 @@ namespace Server.Spells.Eighth
 					}
 
 					Caster.DoHarmful( m );
-					SpellHelper.Damage( TimeSpan.Zero, m, Caster, damage, 100, 0, 0, 0, 0 );
+					//SpellHelper.Damage( TimeSpan.Zero, m, Caster, damage, 100, 0, 0, 0, 0 );
+					SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, damage, DamageType.Earth);
 				}
 			}
 

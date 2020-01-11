@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 | Rat Hides           | 0x7e2 |         10 |    1.10 | 
 | Wolf Hides          |  1102 |         20 |    1.20 | 
 | Bear Hides          |    44 |         30 |    1.30 | 
@@ -13,3 +14,20 @@
 | Wyrm Hides          |  1159 |        120 |    2.50 |
 | Balron Hides        |  1157 |        125 |    2.90 | 
 | Golden Dragon Hides |    48 |        130 |    3.00 |
+=======
+| Rat          | 0x7e2 |  10 | 1.10 |
+| Wolf         |  1102 |  20 | 1.20 |
+| Bear         |    44 |  30 | 1.30 |
+| Serpent      | 0x8fd |  40 | 1.40 |
+| Lizard       | 0x852 |  50 | 1.50 |
+| Troll        | 0x54a |  60 | 1.60 |
+| Ostard       | 0x415 |  70 | 1.70 |
+| Necromancer  |    84 |  80 | 1.80 |
+| Lava         |  2747 |  90 | 1.90 |
+| Liche        |  2763 | 100 | 2.00 |
+| IceCrystal   |  2759 | 110 | 2.20 |
+| Dragon       |  2761 | 115 | 2.35 |
+| Wyrm         |  2747 | 120 | 2.50 |
+| Balron       |  1175 | 125 | 2.90 |
+| GoldenDragon |    48 | 130 | 3.00 |
+>>>>>>> 24cbb869eb1a96ce226e4854e42d8868affbc5bf

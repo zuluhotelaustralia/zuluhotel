@@ -22,6 +22,7 @@ namespace Server.Spells.Necromancy
         public override int RequiredMana{ get{ return 100; } }
 
 	private static Hashtable m_Timers = new Hashtable();
+	public static Hashtable Timers{ get { return m_Timers; } }
 
         public WraithFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -71,15 +72,14 @@ namespace Server.Spells.Necromancy
 		interval = 4;
 	    }
 	    else {
+		// should proc damage no faster than every 4 seconds
 		interval = (int)intermediate;
 	    }
-	    
+
+	    //e.g. 130 seconds or whatever
 	    int duration = (int)Caster.Skills[DamageSkill].Value;
 
 	    double dmg = Utility.Dice(2, (int)(Caster.Skills[DamageSkill].Value / 20.0), 0 ); 
-	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
-		dmg *= ((PlayerMobile)Caster).Spec.Bonus;
-	    }
 	    
 	    Timer t = new WraithFormTimer(Caster, TimeSpan.FromSeconds(interval), duration, (int)dmg );
 	    m_Timers[Caster] = t;
@@ -115,6 +115,7 @@ namespace Server.Spells.Necromancy
 	    return ( t != null );
 	}
 
+	// this one lasts for the duration of the transformation, i.e. this is your polymorph
 	private class WraithFormTimer : Timer
 	{
 	    private Mobile m_Owner;
@@ -150,6 +151,7 @@ namespace Server.Spells.Necromancy
 	    }
 	}
 
+	// and this one actually procs your AOE necro damage
 	private class Subtimer : Timer {
 	    private WraithFormTimer m_ParentTimer;
 	    private Mobile m_Caster;
@@ -185,9 +187,10 @@ namespace Server.Spells.Necromancy
 
 		    m.FixedParticles( 0x374a, 10, 30, 5052, EffectLayer.LeftFoot );
 		    m.PlaySound(0x1fa);
-		    m.Damage( m_Damage, m_Caster, DamageType.Necro );  //about 12 at spec 4
+		    //m.Damage( m_Damage, m_Caster, DamageType.Necro );  //about 12 at spec 4
+		    SpellHelper.Damage(null, TimeSpan.Zero, m, m_Caster, m_Damage, DamageType.Necro);
 		    
-		    if( (m_Caster.Mana += m_Damage) > m_Caster.Int ){
+		    if( (m_Caster.Mana + m_Damage) > m_Caster.Int ){
 			m_Caster.Mana = m_Caster.Int;
 		    }
 		    else {

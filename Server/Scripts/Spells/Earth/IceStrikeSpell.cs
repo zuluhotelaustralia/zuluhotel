@@ -49,7 +49,8 @@ namespace Server.Spells.Earth
             SpellHelper.Turn( Caster, m );
 
 	    double damage = Caster.Skills[DamageSkill].Value * 0.5;
-	    m.Damage( (int)damage, Caster, DamageType.Water );
+	    //m.Damage( (int)damage, Caster, DamageType.Water );
+	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, damage, DamageType.Water);
 	    
 	    Caster.DoHarmful( m );
 

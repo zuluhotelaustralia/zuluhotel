@@ -108,6 +108,20 @@ This exception is fatal, press return to exit
 * DONE spec-based damage isn't applying?
 * TODO implement skillmod clothing
 * TODO can't repair tools?
-* TODO buddy has like 2500 skill points and still gets spec 4 warrior
+* DONE buddy has like 2500 skill points and still gets spec 4 warrior
 * TODO weapon durability falls off awfully fast
-* TODO archery damage tactics/anatomy
+* DONE archery damage tactics/anatomy
+* DONE crafted leather doesn't retain proper hue (e.g. tunic )
+* DONE crafted leather doesn't retain proper resource name (e.g. tunic )
+* DONE cut strips of leather don't retain proper resource name
+* TODO [DALERON] cliloc in BaseIngot.LabelNumber_get does not exist (1161034) ???
+* TODO hides should say e.g. "rat hide: 20" instead of "rat: 20"
+* DONE liche hides have wrong hue
+* DONE lava hides have wrong hue
+* DONE icecrystal hides have wrong hue
+* DONE wyrm hides have wrong hue
+* DONE balron hides have wrong hue
+* TODO volcanicash appears as "grave dust" due to clilocs probably
+* DONE sorceror's bane is weak as fuck.. is SpellDamage calling into Spec properly?
+* DONE setting all skills to 150 gives spec 0
+* DONE elemental prots are scaling damage the wrong way (e.g. level 1 gives 75% prot)

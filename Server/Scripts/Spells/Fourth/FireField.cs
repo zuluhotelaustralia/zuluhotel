@@ -201,7 +201,9 @@ namespace Server.Spells.Fourth
 						m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
 					}
 
-					AOS.Damage( m, m_Caster, damage, 0, 100, 0, 0, 0 );
+					//AOS.Damage( m, m_Caster, damage, 0, 100, 0, 0, 0 );
+					damage = Mobile.DamageScalar.ScaleDamage(damage, m_Caster, m, DamageType.Fire, AttackType.Magical);
+					m.Damage(damage, m_Caster, DamageType.Fire);
 					m.PlaySound( 0x208 );
 
 					if ( m is BaseCreature )

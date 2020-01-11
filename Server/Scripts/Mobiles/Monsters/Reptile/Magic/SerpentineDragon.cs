@@ -83,7 +83,7 @@ namespace Server.Mobiles
 		public override double BonusPetDamageScalar{ get{ return (Core.SE) ? 3.0 : 1.0; } }
 
 		public override bool AutoDispel{ get{ return true; } }
-		public override HideType HideType{ get{ return HideType.Barbed; } }
+		public override HideType HideType{ get{ return HideType.Dragon; } }
 		public override int Hides{ get{ return 20; } }
 		public override int Meat{ get{ return 19; } }
 		public override int Scales{ get{ return 6; } }

@@ -1012,10 +1012,14 @@ namespace Server.Spells
 	    Damage( null, delay, target, from, damage );
 	}
 
-	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage )
+	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage ){
+	    Damage( spell, delay, target, from, damage, DamageType.None);
+	}
+	
+	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage, DamageType dmgtype )
 	{
 	    //int iDamage = (int)damage;
-	    int iDamage = Mobile.DamageScalar.ScaleDamage((int)damage, from, target, DamageType.Magical);
+	    int iDamage = Mobile.DamageScalar.ScaleDamage((int)damage, from, target, dmgtype, AttackType.Magical);
 
 	    if( delay == TimeSpan.Zero )
 	    {
@@ -1025,7 +1029,7 @@ namespace Server.Spells
 		if( target is BaseCreature )
 		    ((BaseCreature)target).AlterSpellDamageFrom( from, ref iDamage );
 
-		target.Damage( iDamage, from, DamageType.Magical );
+		target.Damage( iDamage, from, dmgtype );
 	    }
 	    else
 	    {
@@ -1147,7 +1151,7 @@ namespace Server.Spells
 	    {
 		m_Target = target;
 		m_From = from;
-		m_Damage = Mobile.DamageScalar.ScaleDamage(damage, from, target, DamageType.Magical);
+		m_Damage = Mobile.DamageScalar.ScaleDamage(damage, from, target, DamageType.None, AttackType.Magical);
 		//m_Damage = damage;
 		m_Spell = s;
 
