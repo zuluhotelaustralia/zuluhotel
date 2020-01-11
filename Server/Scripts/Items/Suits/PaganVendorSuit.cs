@@ -6,7 +6,7 @@ namespace Server.Items
     public class PaganVendorSuit : BaseSuit
     {
 	[Constructable]
-	public PaganVendorSuit() : base( AccessLevel.GameMaster, 2749, 0x204E )
+	public PaganVendorSuit() : base( AccessLevel.Player, 2749, 0x204E )
 	{
 	    this.Name = "a tattered robe";
 	}

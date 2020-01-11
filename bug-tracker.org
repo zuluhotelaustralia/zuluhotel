@@ -35,7 +35,7 @@ This exception is fatal, press return to exit
 * DONE allow casing in council of mages
    UNABLE TO DUPLICATE
 * DONE clean up zone after endgame
-* TODO daleron don't let zone markers get worldsaved
+* TODO [DALERON] don't let zone markers get worldsaved
 * DONE can't [escape properly
 * DONE Crafting skill gains
    Verify the boost in smithy shop
@@ -104,7 +104,7 @@ This exception is fatal, press return to exit
 * DONE player reports tailoring stuck @ 94.7
 * TODO put glassblowing book into loot tables somewhere or add a GlassBlower npc vendor
 * DONE up amounts of bandages, hides, bolts of cloth
-* TODO re-check all skillgain rates, esp inscription 
+* TODO re-check all skillgain rates, esp inscription, tracking, fishing
 * DONE spec-based damage isn't applying?
 * TODO implement skillmod clothing
 * TODO can't repair tools?
@@ -114,14 +114,16 @@ This exception is fatal, press return to exit
 * DONE crafted leather doesn't retain proper hue (e.g. tunic )
 * DONE crafted leather doesn't retain proper resource name (e.g. tunic )
 * DONE cut strips of leather don't retain proper resource name
-* TODO [DALERON] cliloc in BaseIngot.LabelNumber_get does not exist (1161034) ???
+* DONE [DALERON] cliloc in BaseIngot.LabelNumber_get does not exist (1161034) ???
 * TODO hides should say e.g. "rat hide: 20" instead of "rat: 20"
 * DONE liche hides have wrong hue
 * DONE lava hides have wrong hue
 * DONE icecrystal hides have wrong hue
 * DONE wyrm hides have wrong hue
 * DONE balron hides have wrong hue
-* TODO volcanicash appears as "grave dust" due to clilocs probably
+* DONE volcanicash appears as "grave dust" due to clilocs probably
 * DONE sorceror's bane is weak as fuck.. is SpellDamage calling into Spec properly?
 * DONE setting all skills to 150 gives spec 0
 * DONE elemental prots are scaling damage the wrong way (e.g. level 1 gives 75% prot)
+* TODO a suit of leather probably doesn't give full prots because you don't have arms for the female leather, skirts, etc.
+* TODO the prots should probably also take jewellery and clothing into account
