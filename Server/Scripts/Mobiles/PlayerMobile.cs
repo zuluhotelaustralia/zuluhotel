@@ -896,6 +896,7 @@ namespace Server.Mobiles
 	    Mobile from = e.Mobile;
 
 	    CheckAtrophies( from );
+	    from.Prots.UpdateProts();
 
 	    if ( AccountHandler.LockdownLevel > AccessLevel.Player )
 	    {

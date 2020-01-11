@@ -5745,11 +5745,6 @@ namespace Server
 
 			m_Items = reader.ReadStrongItemList();
 
-			// see case 35
-			if( m_Prots == null ){
-			    m_Prots = new Prots( this );
-			}
-					
 			m_Player = reader.ReadBool();
 			m_Title = reader.ReadString();
 			m_Profile = reader.ReadString();
@@ -5818,7 +5813,7 @@ namespace Server
 			UpdateResistances();
 
 			m_Prots.UpdateProts();
-				
+
 			break;
 		    }
 	    }
@@ -9997,6 +9992,11 @@ namespace Server
 	    {
 		World.m_MobileTypes.Add( ourType );
 		m_TypeRef = World.m_MobileTypes.Count - 1;
+	    }
+
+	    //this gets called before Deserialize()
+	    if( m_Prots == null ){
+		m_Prots = new Prots( this );
 	    }
 	}
 
