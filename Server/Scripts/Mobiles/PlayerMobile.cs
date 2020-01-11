@@ -3114,10 +3114,10 @@ namespace Server.Mobiles
 	}
 
 	public override void Damage( int amount, Mobile from ) {
-	    Damage( amount, from, DamageType.Physical );
+	    Damage( amount, from, DamageType.None, AttackType.Physical );
 	}
 
-	public override void Damage( int amount, Mobile from, DamageType dmgtype )
+	public override void Damage( int amount, Mobile from, DamageType dmgtype, AttackType atktype )
 	{
 	    /* Per EA's UO Herald Pub48 (ML):
 	     * ((resist spellsx10)/20 + 10=percentage of damage resisted)

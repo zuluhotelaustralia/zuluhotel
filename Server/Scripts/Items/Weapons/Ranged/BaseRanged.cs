@@ -24,6 +24,8 @@ namespace Server.Items
 	private Timer m_RecoveryTimer; // so we don't start too many timers
 	private bool m_Balanced;
 	private int m_Velocity;
+
+	private AttackType m_AttackType;
 		
 	[CommandProperty( AccessLevel.GameMaster )]
 	public bool Balanced
@@ -41,10 +43,12 @@ namespace Server.Items
 
 	public BaseRanged( int itemID ) : base( itemID )
 	{
+	    m_AttackType = AttackType.Ranged;
 	}
 
 	public BaseRanged( Serial serial ) : base( serial )
 	{
+	    m_AttackType = AttackType.Ranged;
 	}
 
 	public override int AbsorbDamage( Mobile attacker, Mobile defender, int damage ){

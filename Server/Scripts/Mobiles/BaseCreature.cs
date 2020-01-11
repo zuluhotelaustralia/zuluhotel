@@ -748,7 +748,7 @@ namespace Server.Mobiles
 	public virtual void BreathDealDamage( Mobile target )
 	{
 	    int damage = BreathComputeDamage();
-	    damage = DamageScalar.ScaleDamage( damage, this, target, DamageType.Fire);
+	    damage = DamageScalar.ScaleDamage( damage, this, target, DamageType.Fire, AttackType.Raw);
 	    
 	    target.Damage(damage, this, DamageType.Fire);
 	}

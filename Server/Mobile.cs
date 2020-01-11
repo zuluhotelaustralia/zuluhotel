@@ -5170,7 +5170,7 @@ namespace Server
 
 	public virtual void Damage( int amount )
 	{
-	    Damage( amount, null, DamageType.Raw );
+	    Damage( amount, null, DamageType.None );
 	}
 
 	public virtual bool CanBeDamaged()
@@ -5180,7 +5180,7 @@ namespace Server
 
 	public virtual void Damage( int amount, Mobile from )
 	{
-	    Damage( amount, from, DamageType.Raw );
+	    Damage( amount, from, DamageType.None );
 	}
 
         public virtual void Damage( int amount, Mobile from, DamageType type )
@@ -5188,12 +5188,20 @@ namespace Server
             Damage( amount, from, true, type );
         }
 
+	public virtual void Damage( int amount, Mobile from, DamageType dmgtype, AttackType atktype ){
+	    Damage( amount, from, true, dmgtype, atktype );
+	}
+
         public virtual void Damage( int amount, Mobile from, bool informMount )
         {
-            Damage( amount, from, informMount, DamageType.Raw );
+            Damage( amount, from, informMount, DamageType.None );
         }
 
-	public virtual void Damage( int amount, Mobile from, bool informMount, DamageType type )
+	public virtual void Damage( int amount, Mobile from, bool informMount, DamageType dmgtype){
+	    Damage( amount, from, informMount, DamageType.None, AttackType.Raw );
+	}
+
+	public virtual void Damage( int amount, Mobile from, bool informMount, DamageType dmgtype, AttackType atktype )
 	{
 	    if( !CanBeDamaged() || m_Deleted )
 		return;
@@ -5244,7 +5252,7 @@ namespace Server
 			}
 		}
 
-		OnDamage( amount, type, from, newHits < 0 );
+		OnDamage( amount, dmgtype, from, newHits < 0 );
 
 		IMount m = this.Mount;
 		if( m != null && informMount )
