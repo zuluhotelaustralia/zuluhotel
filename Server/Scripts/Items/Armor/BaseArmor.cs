@@ -12,7 +12,7 @@ namespace Server.Items
 {
     public abstract class BaseArmor : Item, IScissorable, IFactionItem, ICraftable, IWearableDurability
     {
-        #region Factions
+#region Factions
         private FactionItem m_FactionState;
 
         public FactionItem FactionItemState
@@ -28,7 +28,7 @@ namespace Server.Items
                 LootType = ( m_FactionState == null ? LootType.Regular : LootType.Blessed );
             }
         }
-        #endregion
+#endregion
 
 
 
@@ -190,10 +190,25 @@ namespace Server.Items
                     case CraftResource.DarkSableRuby: ar = (int)( (double)ar * 2.20); break;
                     case CraftResource.RadiantNimbusDiamond: ar = (int)( (double)ar * 2.25); break;
 
-                    case CraftResource.SpinedLeather:	ar += 10; break;
-                    case CraftResource.HornedLeather:	ar += 13; break;
-                    case CraftResource.BarbedLeather:	ar += 16; break;
-
+                    case CraftResource.SpinedLeather:	ar = (int)( (double)ar * 1.0); break;
+                    case CraftResource.HornedLeather:	ar = (int)( (double)ar * 1.05); break;
+                    case CraftResource.BarbedLeather:	ar = (int)( (double)ar * 1.10); break;
+		    case CraftResource.RatLeather: ar = (int)( (double)ar * 1.15); break;
+		    case CraftResource.WolfLeather: ar = (int)( (double)ar * 1.20); break;
+		    case CraftResource.BearLeather: ar = (int)( (double)ar * 1.25); break;
+		    case CraftResource.SerpentLeather: ar = (int)( (double)ar * 1.30); break;
+		    case CraftResource.LizardLeather: ar = (int)( (double)ar * 1.35); break;
+		    case CraftResource.TrollLeather: ar = (int)( (double)ar * 1.40); break;
+		    case CraftResource.OstardLeather: ar = (int)( (double)ar * 1.45); break;
+		    case CraftResource.NecromancerLeather: ar = (int)( (double)ar * 1.50); break;
+		    case CraftResource.LavaLeather: ar = (int)( (double)ar * 1.55); break;
+		    case CraftResource.LicheLeather: ar = (int)( (double)ar * 1.60); break;
+		    case CraftResource.IceCrystalLeather: ar = (int)( (double)ar * 1.65); break;
+		    case CraftResource.DragonLeather: ar = (int)( (double)ar * 1.70); break;
+		    case CraftResource.WyrmLeather: ar = (int)( (double)ar * 1.80); break;
+		    case CraftResource.BalronLeather: ar = (int)( (double)ar * 1.90); break;
+		    case CraftResource.GoldenDragonLeather: ar = (int)( (double)ar * 2.0); break;
+			
 		    case CraftResource.Pinetree: ar = (int)( (double)ar * 1.05); break;
 		    case CraftResource.Cherry: ar = (int)( (double)ar * 1.10); break;
 		    case CraftResource.Oak: ar = (int)( (double)ar * 1.15); break;
@@ -766,34 +781,34 @@ namespace Server.Items
 
         [Flags]
         private enum SaveFlag
-            {
-                None				= 0x00000000,
-                Attributes			= 0x00000001,
-                ArmorAttributes		= 0x00000002,
-                PhysicalBonus		= 0x00000004,
-                FireBonus			= 0x00000008,
-                ColdBonus			= 0x00000010,
-                PoisonBonus			= 0x00000020,
-                EnergyBonus			= 0x00000040,
-                Identified			= 0x00000080,
-                MaxHitPoints		= 0x00000100,
-                HitPoints			= 0x00000200,
-                Crafter				= 0x00000400,
-                Quality				= 0x00000800,
-                Durability			= 0x00001000,
-                Protection			= 0x00002000,
-                Resource			= 0x00004000,
-                BaseArmor			= 0x00008000,
-                StrBonus			= 0x00010000,
-                DexBonus			= 0x00020000,
-                IntBonus			= 0x00040000,
-                StrReq				= 0x00080000,
-                DexReq				= 0x00100000,
-                IntReq				= 0x00200000,
-                MedAllowance		= 0x00400000,
-                SkillBonuses		= 0x00800000,
-                PlayerConstructed	= 0x01000000
-            }
+	{
+	    None				= 0x00000000,
+	    Attributes			= 0x00000001,
+	    ArmorAttributes		= 0x00000002,
+	    PhysicalBonus		= 0x00000004,
+	    FireBonus			= 0x00000008,
+	    ColdBonus			= 0x00000010,
+	    PoisonBonus			= 0x00000020,
+	    EnergyBonus			= 0x00000040,
+	    Identified			= 0x00000080,
+	    MaxHitPoints		= 0x00000100,
+	    HitPoints			= 0x00000200,
+	    Crafter				= 0x00000400,
+	    Quality				= 0x00000800,
+	    Durability			= 0x00001000,
+	    Protection			= 0x00002000,
+	    Resource			= 0x00004000,
+	    BaseArmor			= 0x00008000,
+	    StrBonus			= 0x00010000,
+	    DexBonus			= 0x00020000,
+	    IntBonus			= 0x00040000,
+	    StrReq				= 0x00080000,
+	    DexReq				= 0x00100000,
+	    IntReq				= 0x00200000,
+	    MedAllowance		= 0x00400000,
+	    SkillBonuses		= 0x00800000,
+	    PlayerConstructed	= 0x01000000
+	}
 
         public override void Serialize( GenericWriter writer )
         {
@@ -1516,10 +1531,10 @@ namespace Server.Items
             if ( m_Crafter != null )
                 list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
 
-            #region Factions
+#region Factions
             if ( m_FactionState != null )
                 list.Add( 1041350 ); // faction item
-            #endregion
+#endregion
 
             if( RequiredRace == Race.Elf )
                 list.Add( 1075086 ); // Elves Only
@@ -1636,10 +1651,10 @@ namespace Server.Items
                     attrs.Add( new EquipInfoAttribute( 1049643 ) ); // cursed
             }
 
-            #region Factions
+#region Factions
             if ( m_FactionState != null )
                 attrs.Add( new EquipInfoAttribute( 1041350 ) ); // faction item
-            #endregion
+#endregion
 
             if ( m_Quality == ArmorQuality.Exceptional )
                 attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );
@@ -1703,7 +1718,7 @@ namespace Server.Items
             from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
         }
 
-        #region ICraftable Members
+#region ICraftable Members
 
         public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
         {
@@ -1759,6 +1774,6 @@ namespace Server.Items
             return quality;
         }
 
-        #endregion
+#endregion
     }
 }

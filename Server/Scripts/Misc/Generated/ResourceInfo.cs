@@ -1248,12 +1248,12 @@ namespace Server.Items
 		new CraftResourceInfo( 0x54a, 1160420, "Troll", CraftAttributeInfo.Troll, CraftResource.TrollLeather, typeof( TrollLeather ), typeof( TrollHide ) ),
 		new CraftResourceInfo( 0x415, 1160421, "Ostard", CraftAttributeInfo.Ostard, CraftResource.OstardLeather, typeof( OstardLeather ), typeof( OstardHide ) ),
 		new CraftResourceInfo( 84, 1160422, "Necromancer", CraftAttributeInfo.Necromancer, CraftResource.NecromancerLeather, typeof( NecromancerLeather ), typeof( NecromancerHide ) ),
-		new CraftResourceInfo( 0x486, 1160423, "Lava", CraftAttributeInfo.Lava, CraftResource.LavaLeather, typeof( LavaLeather ), typeof( LavaHide ) ),
-		new CraftResourceInfo( 0x496, 1160424, "Liche", CraftAttributeInfo.Liche, CraftResource.LicheLeather, typeof( LicheLeather ), typeof( LicheHide ) ),
-		new CraftResourceInfo( 0x492, 1160425, "Ice Crystal", CraftAttributeInfo.IceCrystal, CraftResource.IceCrystalLeather, typeof( IceCrystalLeather ), typeof( IceCrystalHide ) ),
-		new CraftResourceInfo( 0x494, 1160426, "Dragon", CraftAttributeInfo.Dragon, CraftResource.DragonLeather, typeof( DragonLeather ), typeof( DragonHide ) ),
-		new CraftResourceInfo( 1159, 1160427, "Wyrm", CraftAttributeInfo.Wyrm, CraftResource.WyrmLeather, typeof( WyrmLeather ), typeof( WyrmHide ) ),
-		new CraftResourceInfo( 1157, 1160428, "Balron", CraftAttributeInfo.Balron, CraftResource.BalronLeather, typeof( BalronLeather ), typeof( BalronHide ) ),
+		new CraftResourceInfo( 2747, 1160423, "Lava", CraftAttributeInfo.Lava, CraftResource.LavaLeather, typeof( LavaLeather ), typeof( LavaHide ) ),
+		new CraftResourceInfo( 2763, 1160424, "Liche", CraftAttributeInfo.Liche, CraftResource.LicheLeather, typeof( LicheLeather ), typeof( LicheHide ) ),
+		new CraftResourceInfo( 2759, 1160425, "Ice Crystal", CraftAttributeInfo.IceCrystal, CraftResource.IceCrystalLeather, typeof( IceCrystalLeather ), typeof( IceCrystalHide ) ),
+		new CraftResourceInfo( 2761, 1160426, "Dragon", CraftAttributeInfo.Dragon, CraftResource.DragonLeather, typeof( DragonLeather ), typeof( DragonHide ) ),
+		new CraftResourceInfo( 2747, 1160427, "Wyrm", CraftAttributeInfo.Wyrm, CraftResource.WyrmLeather, typeof( WyrmLeather ), typeof( WyrmHide ) ),
+		new CraftResourceInfo( 1175, 1160428, "Balron", CraftAttributeInfo.Balron, CraftResource.BalronLeather, typeof( BalronLeather ), typeof( BalronHide ) ),
 		new CraftResourceInfo( 48, 1160429, "Golden Dragon", CraftAttributeInfo.GoldenDragon, CraftResource.GoldenDragonLeather, typeof( GoldenDragonLeather ), typeof( GoldenDragonHide ) )
 	    };
 

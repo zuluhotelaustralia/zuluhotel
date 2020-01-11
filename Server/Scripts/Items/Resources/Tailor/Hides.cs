@@ -98,7 +98,7 @@ namespace Server.Items
 		    return 1049687 + (int)(m_Resource - CraftResource.SpinedLeather);
 		}
 		else if( m_Resource >= CraftResource.RatLeather && m_Resource <= CraftResource.GoldenDragonLeather ){
-		    return 1160400 + (int)(m_Resource - CraftResource.RatLeather);
+		    return 1161114 + (int)(m_Resource - CraftResource.RatLeather);
 		}
 
 		return 1047023;
