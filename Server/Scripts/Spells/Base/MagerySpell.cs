@@ -10,7 +10,8 @@ namespace Server.Spells
 	public MagerySpell( Mobile caster, Item scroll, SpellInfo info )
 	    : base( caster, scroll, info )
 	{
-	    m_DamageType = DamageType.Magical;
+	    m_AttackType = AttackType.Magical;
+	    m_DamageType = DamageType.None;
 	}
 
 	public override bool ConsumeReagents()

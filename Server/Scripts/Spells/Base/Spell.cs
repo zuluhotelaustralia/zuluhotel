@@ -19,9 +19,11 @@ namespace Server.Spells
 	private long m_StartCastTime;
 
 	protected DamageType m_DamageType;
-
-	public abstract SpellCircle Circle { get; }
+	protected AttackType m_AttackType;
 	
+	public abstract SpellCircle Circle { get; }
+
+	public AttackType AttackType{ get { return m_AttackType; } set { m_AttackType = value; } }
 	public DamageType DamageType{ get{ return m_DamageType; } set{ m_DamageType = value; } }
 	public SpellState State{ get{ return m_State; } set{ m_State = value; } }
 	public Mobile Caster{ get{ return m_Caster; } }

@@ -116,7 +116,7 @@ namespace Server.Spells.Necromancy
 	    int bonus = (int)ss / 4;
 	    
 	    double dmg = (double)Utility.Dice(3, 5, bonus);
-	    dmg /= 2;
+	    //dmg /= 2;
 
 	    //sith: change this, see issue tracker on gitlab
 	    if ( CheckResisted( m ) )

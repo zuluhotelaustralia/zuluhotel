@@ -122,5 +122,6 @@ This exception is fatal, press return to exit
 * DONE wyrm hides have wrong hue
 * DONE balron hides have wrong hue
 * TODO volcanicash appears as "grave dust" due to clilocs probably
-* TODO sorceror's bane is weak as fuck
+* DONE sorceror's bane is weak as fuck.. is SpellDamage calling into Spec properly?
 * DONE setting all skills to 150 gives spec 0
+* DONE elemental prots are scaling damage the wrong way (e.g. level 1 gives 75% prot)

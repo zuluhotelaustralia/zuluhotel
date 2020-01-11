@@ -202,7 +202,7 @@ namespace Server.Spells.Fourth
 					}
 
 					//AOS.Damage( m, m_Caster, damage, 0, 100, 0, 0, 0 );
-					damage = Mobile.DamageScalar.ScaleDamage(damage, m_Caster, m, DamageType.Fire);
+					damage = Mobile.DamageScalar.ScaleDamage(damage, m_Caster, m, DamageType.Fire, AttackType.Magical);
 					m.Damage(damage, m_Caster, DamageType.Fire);
 					m.PlaySound( 0x208 );
 
