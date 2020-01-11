@@ -72,7 +72,8 @@ namespace Server.Mobiles
 				Add( new GenericBuyInfo( typeof( Garlic ), 3, 20, 0xF84, 0 ) );
 				Add( new GenericBuyInfo( typeof( Ginseng ), 3, 20, 0xF85, 0 ) );
 
-				Add( new GenericBuyInfo( typeof( Bottle ), 5, 20, 0xF0E, 0 ) );
+				Add( new GenericBuyInfo( typeof( Bottle ), 5, 99999, 0xF0E, 0 ) );
+				Add( new GenericBuyInfo( typeof( GlassblowingBook ), 100, 20, 0xFF4, 0 ) );
 
 				Add( new GenericBuyInfo( typeof( RedBook ), 15, 20, 0xFF1, 0 ) );
 				Add( new GenericBuyInfo( typeof( BlueBook ), 15, 20, 0xFF2, 0 ) );
