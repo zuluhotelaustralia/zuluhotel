@@ -2,10 +2,7 @@ using Server;
 
 namespace Server {
     public enum DamageType {
-	Raw,
-	Physical,
-	Ranged,
-	Magical,
+	None,
 	Air,
 	Earth,
 	Fire,
@@ -14,12 +11,19 @@ namespace Server {
 	Poison
     }
 
+    public enum AttackType {
+	Raw,
+	Physical,
+	Ranged,
+	Magical
+    }
+	
     public class DamageScalar {
 
 	public DamageScalar(){
 	}
 	
-	public virtual int ScaleDamage( int amount, Mobile from, Mobile m, DamageType type ) {
+	public virtual int ScaleDamage( int amount, Mobile from, Mobile m, DamageType dmgtype, AttackType atktype) {
 	    return amount;
 	}
     }
