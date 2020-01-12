@@ -5609,11 +5609,8 @@ namespace Server.Mobiles
 
 		    if ( pet.Controlled && pet.ControlMaster == master )
 		    {
-			if ( !onlyBonded || pet.IsBonded )
-			{
-			    if ( pet.ControlOrder == OrderType.Guard || pet.ControlOrder == OrderType.Follow || pet.ControlOrder == OrderType.Come )
-				move.Add( pet );
-			}
+			if ( pet.ControlOrder == OrderType.Guard || pet.ControlOrder == OrderType.Follow || pet.ControlOrder == OrderType.Come )
+			    move.Add( pet );
 		    }
 		}
 	    }
