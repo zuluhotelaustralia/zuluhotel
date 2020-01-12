@@ -553,45 +553,36 @@ namespace Server.Items
 	{
 	    int oreType;
 
-	    if( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ){
+            switch ( m_Resource )
+            {
+                // TOGENERATE ? WTF is this?
+                // case CraftResource.DullCopper:		oreType = 1053108; break; // dull copper
+                // case CraftResource.ShadowIron:		oreType = 1053107; break; // shadow iron
+                // case CraftResource.Copper:			oreType = 1053106; break; // copper
+                // case CraftResource.Bronze:			oreType = 1053105; break; // bronze
+                // case CraftResource.Gold:			oreType = 1053104; break; // golden
+                // case CraftResource.Agapite:			oreType = 1053103; break; // agapite
+                // case CraftResource.Verite:			oreType = 1053102; break; // verite
+                // case CraftResource.Valorite:		oreType = 1053101; break; // valorite
+                case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
+                case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
+                case CraftResource.BarbedLeather:	oreType = 1061116; break; // barbed
+                case CraftResource.RedScales:		oreType = 1060814; break; // red
+                case CraftResource.YellowScales:	oreType = 1060818; break; // yellow
+                case CraftResource.BlackScales:		oreType = 1060820; break; // black
+                case CraftResource.GreenScales:		oreType = 1060819; break; // green
+                case CraftResource.WhiteScales:		oreType = 1060821; break; // white
+                case CraftResource.BlueScales:		oreType = 1060815; break; // blue
+                default: oreType = 0; break;
+            }
 
-		int index = (int)m_ZuluSkillMods.Mod.Skill;
-		string title = SkillInfo.Table[index].Title;
-		
-		list.Add(1053099, "#{0}\t{1}", title, GetNameString() );
-	    }
-	    else {
-		switch ( m_Resource )
-		{
-		    // TOGENERATE ? WTF is this?
-		    // case CraftResource.DullCopper:		oreType = 1053108; break; // dull copper
-		    // case CraftResource.ShadowIron:		oreType = 1053107; break; // shadow iron
-		    // case CraftResource.Copper:			oreType = 1053106; break; // copper
-		    // case CraftResource.Bronze:			oreType = 1053105; break; // bronze
-		    // case CraftResource.Gold:			oreType = 1053104; break; // golden
-		    // case CraftResource.Agapite:			oreType = 1053103; break; // agapite
-		    // case CraftResource.Verite:			oreType = 1053102; break; // verite
-		    // case CraftResource.Valorite:		oreType = 1053101; break; // valorite
-		    case CraftResource.SpinedLeather:	oreType = 1061118; break; // spined
-		    case CraftResource.HornedLeather:	oreType = 1061117; break; // horned
-		    case CraftResource.BarbedLeather:	oreType = 1061116; break; // barbed
-		    case CraftResource.RedScales:		oreType = 1060814; break; // red
-		    case CraftResource.YellowScales:	oreType = 1060818; break; // yellow
-		    case CraftResource.BlackScales:		oreType = 1060820; break; // black
-		    case CraftResource.GreenScales:		oreType = 1060819; break; // green
-		    case CraftResource.WhiteScales:		oreType = 1060821; break; // white
-		    case CraftResource.BlueScales:		oreType = 1060815; break; // blue
-		    default: oreType = 0; break;
-		}
+            if ( oreType != 0 )
+                list.Add( 1053099, "#{0}\t{1}", oreType, GetNameString() ); // ~1_oretype~ ~2_armortype~
+            else if ( Name == null )
+                list.Add( LabelNumber );
+            else
+                list.Add( Name );
 
-		if ( oreType != 0 )
-		    list.Add( 1053099, "#{0}\t{1}", oreType, GetNameString() ); // ~1_oretype~ ~2_armortype~
-		else if ( Name == null )
-		    list.Add( LabelNumber );
-		else
-		    list.Add( Name );
-
-	    }
 	}
 
 	public override void GetProperties( ObjectPropertyList list )
@@ -756,6 +747,11 @@ namespace Server.Items
 
 	    if ( m_Quality == ClothingQuality.Exceptional )
 		attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );
+
+	    if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
+		int index = (int)m_ZuluSkillMods.Mod.Skill;
+                attrs.Add(new EquipInfoAttribute(1044060 + index));
+            }
 	}
 
 #region Serialization
