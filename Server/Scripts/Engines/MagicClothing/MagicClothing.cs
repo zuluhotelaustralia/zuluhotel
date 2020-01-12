@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Server;
+using Server.Commands;
 using Server.Mobiles;
 using Server.Items;
 
@@ -12,7 +13,27 @@ using Server.Items;
 namespace Server{
     public class MagicClothing{
 
+	[Usage("SetSkillMod <skillID> <amount>")]
+	[Description("Set item skill mods")]
+	public static void SetSkillMod_OnCommand( CommandEventArgs e ){
+	    if( e.Length != 2 ){
+		e.Mobile.SendMessage("Example:  SetSkillMod 2 15.0");
+	    }
+	    else{
+		int skillID = e.GetInt32( 0 );
+		double amount = e.GetDouble( 1 );
+		
+	    }
+	}
+
+	public static void GetSkillMod_OnCommand( CommandEventArgs e ){
+	    e.Mobile.Target = new GetSkillmodTarget();
+	}
+		
 	public static void Initialize() {
+	    CommandSystem.Register( "GetSkillMod", AccessLevel.GameMaster, new CommandEventHandler( GetSkillMod_OnCommand ) );
+	    CommandSystem.Register( "SetSKillMod", AccessLevel.Administrator, new CommandEventHandler( SetSkillMod_OnCommand ) );
+	    
 	    m_CraftingSkills = new List<SkillName>();
 
 	    m_CraftingSkills.Add(SkillName.Alchemy);

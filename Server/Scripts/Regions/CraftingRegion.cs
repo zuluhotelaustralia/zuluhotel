@@ -10,6 +10,7 @@ namespace Server.Regions {
 	// e.g. minoc mines, etc.
 
 	public override double GetSkillSpecificFactor(Skill skill){
+	    base.GetSkillSpecificFactor( skill );
 	    if( skill.SkillName == SkillName.Alchemy ||
 		skill.SkillName == SkillName.Blacksmith ||
 		skill.SkillName == SkillName.Fletching ||
@@ -22,7 +23,7 @@ namespace Server.Regions {
 		skill.SkillName == SkillName.ItemID ||
 		skill.SkillName == SkillName.Inscribe ||
 		skill.SkillName == SkillName.Cooking) {
-		return 0.1;
+		return 0.3;
 	    }
 	    else {
 		return RegionalSkillGainPrimaryFactor;

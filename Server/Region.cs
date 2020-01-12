@@ -181,7 +181,7 @@ namespace Server
 		case SkillName.Veterinary:
 		    return 0.1;
 		case SkillName.Tracking:
-		    return 0.1;
+		    return 0.5;
 		case SkillName.Mining:
 		    return 0.1;
 		case SkillName.Lumberjacking:
@@ -225,7 +225,7 @@ namespace Server
 	public bool Registered{ get{ return m_Registered; } }
 
 	//see Scripts/Misc/SkillCheck.cs -- sith
-	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.01; } }
+	public virtual double RegionalSkillGainPrimaryFactor { get { return 0.1; } } //beta
 	public virtual double RegionalSkillGainSecondaryFactor { get { return 1600.0; } }
 
 	//Skill-Specific gain Factors -> ssf.  I want to type less.

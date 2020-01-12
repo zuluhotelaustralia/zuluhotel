@@ -399,7 +399,7 @@ namespace Server.Mobiles
 	public const bool BondingEnabled = true;
 
 	public virtual bool IsBondable{ get{ return ( BondingEnabled && !Summoned ); } }
-	public virtual TimeSpan BondingDelay{ get{ return TimeSpan.FromDays( 7.0 ); } }
+	public virtual TimeSpan BondingDelay{ get{ return TimeSpan.FromDays( 1.0 ); } }
 	public virtual TimeSpan BondingAbandonDelay{ get{ return TimeSpan.FromDays( 1.0 ); } }
 
 	public override bool CanRegenHits{ get{ return !m_IsDeadPet && base.CanRegenHits; } }
@@ -636,7 +636,7 @@ namespace Server.Mobiles
 	public virtual bool HasBreath{ get{ return false; } }
 
 	// Base damage given is: CurrentHitPoints * BreathDamageScalar
-	public virtual double BreathDamageScalar{ get{ return 0.16; } }
+	public virtual double BreathDamageScalar{ get{ return 0.05; } }
 
 	// Min/max seconds until next breath
 	public virtual double BreathMinDelay{ get{ return 30.0; } }
@@ -748,7 +748,7 @@ namespace Server.Mobiles
 	public virtual void BreathDealDamage( Mobile target )
 	{
 	    int damage = BreathComputeDamage();
-	    damage = DamageScalar.ScaleDamage( damage, this, target, DamageType.Fire, AttackType.Raw);
+	    damage = DamageScalar.ScaleDamage( damage, this, target, DamageType.Fire, AttackType.Magical);
 	    
 	    target.Damage(damage, this, DamageType.Fire);
 	}
@@ -5609,11 +5609,8 @@ namespace Server.Mobiles
 
 		    if ( pet.Controlled && pet.ControlMaster == master )
 		    {
-			if ( !onlyBonded || pet.IsBonded )
-			{
-			    if ( pet.ControlOrder == OrderType.Guard || pet.ControlOrder == OrderType.Follow || pet.ControlOrder == OrderType.Come )
-				move.Add( pet );
-			}
+			if ( pet.ControlOrder == OrderType.Guard || pet.ControlOrder == OrderType.Follow || pet.ControlOrder == OrderType.Come )
+			    move.Add( pet );
 		    }
 		}
 	    }
