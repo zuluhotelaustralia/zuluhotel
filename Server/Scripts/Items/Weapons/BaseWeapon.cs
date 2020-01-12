@@ -92,6 +92,8 @@ namespace Server.Items
         private AosSkillBonuses m_AosSkillBonuses;
         private AosElementAttributes m_AosElementDamages;
 
+	private ZuluSkillMods m_ZuluSkillMods;
+	
         // Overridable values. These values are provided to override the defaults which get defined in the individual weapon scripts.
         private int m_StrReq, m_DexReq, m_IntReq;
         private int m_MinDamage, m_MaxDamage;
@@ -176,6 +178,11 @@ namespace Server.Items
             get{ return m_AosSkillBonuses; }
             set{}
         }
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public ZuluSkillMods ZuluSkillMods {
+	    get { return m_ZuluSkillMods;}
+	}
 
         [CommandProperty( AccessLevel.GameMaster )]
         public AosElementAttributes AosElementDamages
@@ -446,6 +453,7 @@ namespace Server.Items
             weap.m_AosElementDamages = new AosElementAttributes( newItem, m_AosElementDamages );
             weap.m_AosSkillBonuses = new AosSkillBonuses( newItem, m_AosSkillBonuses );
             weap.m_AosWeaponAttributes = new AosWeaponAttributes( newItem, m_AosWeaponAttributes );
+	    weap.m_ZuluSkillMods = new ZuluSkillMods( newItem, m_ZuluSkillMods );
         }
 
         public virtual void UnscaleDurability()
@@ -666,8 +674,10 @@ namespace Server.Items
             {
                 Mobile from = (Mobile)parent;
 
-                if ( Core.AOS )
-                    m_AosSkillBonuses.AddTo( from );
+                //if ( Core.AOS )
+                //    m_AosSkillBonuses.AddTo( from );
+
+		m_ZuluSkillMods.AddTo( from );
 
                 from.CheckStatTimers();
                 from.Delta( MobileDelta.WeaponDamage );
@@ -702,8 +712,10 @@ namespace Server.Items
                     m_MageMod = null;
                 }
 
-                if ( Core.AOS )
-                    m_AosSkillBonuses.Remove();
+                //if ( Core.AOS )
+                //    m_AosSkillBonuses.Remove();
+
+		m_ZuluSkillMods.Remove( m );
 
                 m.CheckStatTimers();
 
@@ -2367,7 +2379,9 @@ namespace Server.Items
         {
             base.Serialize( writer );
 
-            writer.Write( (int) 9 ); // version
+            writer.Write( (int) 10 ); // version
+
+	    m_ZuluSkillMods.Serialize( writer );
 
             SaveFlag flags = SaveFlag.None;
 
@@ -2491,6 +2505,7 @@ namespace Server.Items
 
             if( GetSaveFlag( flags, SaveFlag.EngravedText ) )
                 writer.Write( (string) m_EngravedText );
+
         }
 
         [Flags]
@@ -2538,12 +2553,26 @@ namespace Server.Items
 
             switch ( version )
             {
+		case 10:
+		    {
+			if( m_ZuluSkillMods == null ){
+			    m_ZuluSkillMods = new ZuluSkillMods( this );
+			}
+
+			m_ZuluSkillMods.Deserialize( reader );
+
+			goto case 9;
+		    }
                 case 9:
                 case 8:
                 case 7:
                 case 6:
                 case 5:
                     {
+			if( m_ZuluSkillMods == null ){
+			    m_ZuluSkillMods = new ZuluSkillMods( this );
+			}
+			
                         SaveFlag flags = (SaveFlag)reader.ReadInt();
 
                         if ( GetSaveFlag( flags, SaveFlag.DamageLevel ) )
@@ -2817,10 +2846,14 @@ namespace Server.Items
 
                         break;
                     }
-            }
+	    }
 
-            if ( Core.AOS && Parent is Mobile )
-                m_AosSkillBonuses.AddTo( (Mobile)Parent );
+	    if( Parent is Mobile ){
+		m_ZuluSkillMods.AddTo( (Mobile)Parent );
+	    }
+
+            //if ( Core.AOS && Parent is Mobile )
+            //    m_AosSkillBonuses.AddTo( (Mobile)Parent );
 
             int strBonus = m_AosAttributes.BonusStr;
             int dexBonus = m_AosAttributes.BonusDex;
@@ -2881,6 +2914,7 @@ namespace Server.Items
             m_AosAttributes = new AosAttributes( this );
             m_AosWeaponAttributes = new AosWeaponAttributes( this );
             m_AosSkillBonuses = new AosSkillBonuses( this );
+	    m_ZuluSkillMods = new ZuluSkillMods( this );
             m_AosElementDamages = new AosElementAttributes( this );
         }
 

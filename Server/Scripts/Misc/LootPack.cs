@@ -95,6 +95,21 @@ namespace Server
 	    }
 	}
 
+	public static readonly LootPackItem[] LowSkillMods = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( MagicClothingDummyType ), 1, 5 )
+	    };
+
+	public static readonly LootPackItem[] MedSkillMods = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( MagicClothingDummyType ), 1, 10 )
+	    };
+	
+	public static readonly LootPackItem[] HighSkillMods = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( MagicClothingDummyType ), 1, 20 )
+	    };
+	
 	public static readonly LootPackItem[] SurveyTool = new LootPackItem[]
 	    {
 		new LootPackItem( typeof( SurveyTool ), 1 )
@@ -203,7 +218,8 @@ namespace Server
 		new LootPackItem( typeof( BaseArmor ), 4 ),
 		new LootPackItem( typeof( BaseWeapon ), 3 ),
 		new LootPackItem( typeof( BaseRanged ), 1 ),
-		new LootPackItem( typeof( BaseShield ), 1 )
+		new LootPackItem( typeof( BaseShield ), 1 ),
+		new LootPackItem( typeof( MagicClothingDummyType ), 1 )
 	    };
 #endregion
 
@@ -901,7 +917,8 @@ namespace Server
     {
 	private Type m_Type;
 	private int m_Chance;
-
+	private int m_MaxLevel;
+	    
 	public Type Type
 	{
 	    get{ return m_Type; }
@@ -970,6 +987,8 @@ namespace Server
 		    item = RandomScroll( 1, 4, 7 );
 		else if ( m_Type == typeof( SummonAirElementalScroll ) ) // high scroll
 		    item = RandomScroll( 2, 8, 8 );
+		else if ( m_Type == typeof( MagicClothingDummyType ) )
+		    item = MagicClothing.Generate( m_MaxLevel );
 		else
 		    item = Activator.CreateInstance( m_Type ) as Item;
 
@@ -978,14 +997,16 @@ namespace Server
 	    catch
 	    {
 	    }
-
+	    
 	    return null;
 	}
 
-	public LootPackItem( Type type, int chance )
+	public LootPackItem( Type type, int chance ) : this (type, chance, 20 ){}
+	public LootPackItem( Type type, int chance, int maxlevel )
 	{
 	    m_Type = type;
 	    m_Chance = chance;
+	    m_MaxLevel = maxlevel;
 	}
     }
 

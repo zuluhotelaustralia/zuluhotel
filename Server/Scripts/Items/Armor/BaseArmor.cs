@@ -62,6 +62,8 @@ namespace Server.Items
         private AosArmorAttributes m_AosArmorAttributes;
         private AosSkillBonuses m_AosSkillBonuses;
 
+	private ZuluSkillMods m_ZuluSkillMods;
+	
         // Overridable values. These values are provided to override the defaults which get defined in the individual armor scripts.
         private int m_ArmorBase = -1;
         private int m_StrBonus = -1, m_DexBonus = -1, m_IntBonus = -1;
@@ -109,6 +111,7 @@ namespace Server.Items
             armor.m_AosAttributes = new AosAttributes( newItem, m_AosAttributes );
             armor.m_AosArmorAttributes = new AosArmorAttributes( newItem, m_AosArmorAttributes );
             armor.m_AosSkillBonuses = new AosSkillBonuses( newItem, m_AosSkillBonuses );
+	    armor.m_ZuluSkillMods = new ZuluSkillMods( newItem, m_ZuluSkillMods );
         }
 
         [CommandProperty( AccessLevel.GameMaster )]
@@ -441,6 +444,11 @@ namespace Server.Items
             set{}
         }
 
+	[CommandProperty( AccessLevel.GameMaster )]
+	public ZuluSkillMods ZuluSkillMods {
+	    get { return m_ZuluSkillMods; }
+	}
+	
         [CommandProperty( AccessLevel.GameMaster )]
         public AosSkillBonuses SkillBonuses
         {
@@ -741,9 +749,11 @@ namespace Server.Items
             {
                 Mobile from = (Mobile)parent;
 
-                if ( Core.AOS )
-                    m_AosSkillBonuses.AddTo( from );
+                //if ( Core.AOS )
+                //    m_AosSkillBonuses.AddTo( from );
 
+		m_ZuluSkillMods.AddTo( from );
+		
                 from.Delta( MobileDelta.Armor ); // Tell them armor rating has changed
             }
         }
@@ -814,8 +824,10 @@ namespace Server.Items
         {
             base.Serialize( writer );
 
-            writer.Write( (int) 7 ); // version
+            writer.Write( (int) 8 ); // version
 
+	    m_ZuluSkillMods.Serialize(writer);
+	    
             SaveFlag flags = SaveFlag.None;
 
             SetSaveFlag( ref flags, SaveFlag.Attributes,		!m_AosAttributes.IsEmpty );
@@ -924,10 +936,23 @@ namespace Server.Items
 
             switch ( version )
             {
+		case 8:
+		    {
+			if( m_ZuluSkillMods == null ){
+			    m_ZuluSkillMods = new ZuluSkillMods( this );
+			}
+
+			m_ZuluSkillMods.Deserialize( reader );
+			goto case 7;
+		    }
                 case 7:
                 case 6:
                 case 5:
                     {
+			if( m_ZuluSkillMods == null ){
+			    m_ZuluSkillMods = new ZuluSkillMods( this );
+			}
+			
                         SaveFlag flags = (SaveFlag)reader.ReadEncodedInt();
 
                         if ( GetSaveFlag( flags, SaveFlag.Attributes ) )
@@ -1157,8 +1182,12 @@ namespace Server.Items
             if ( m_AosSkillBonuses == null )
                 m_AosSkillBonuses = new AosSkillBonuses( this );
 
-            if ( Core.AOS && Parent is Mobile )
-                m_AosSkillBonuses.AddTo( (Mobile)Parent );
+            //if ( Core.AOS && Parent is Mobile )
+            //    m_AosSkillBonuses.AddTo( (Mobile)Parent );
+
+	    if( Parent is Mobile ){
+		m_ZuluSkillMods.AddTo( (Mobile)Parent );
+	    }
 
             int strBonus = ComputeStatBonus( StatType.Str );
             int dexBonus = ComputeStatBonus( StatType.Dex );
@@ -1205,6 +1234,7 @@ namespace Server.Items
             m_AosAttributes = new AosAttributes( this );
             m_AosArmorAttributes = new AosArmorAttributes( this );
             m_AosSkillBonuses = new AosSkillBonuses( this );
+	    m_ZuluSkillMods = new ZuluSkillMods( this );
         }
 
         public override bool AllowSecureTrade( Mobile from, Mobile to, Mobile newOwner, bool accepted )

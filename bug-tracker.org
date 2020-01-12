@@ -128,3 +128,4 @@ This exception is fatal, press return to exit
 * TODO a suit of leather probably doesn't give full prots because you don't have arms for the female leather, skirts, etc.
 * TODO the prots should probably also take jewellery and clothing into account
 * DONE liche leather is bright orange??
+* TODO weight limit
