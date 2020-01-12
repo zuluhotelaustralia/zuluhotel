@@ -81,6 +81,10 @@ namespace Server.Regions
 	    }
 	}
 
+	public override double GetSkillSpecificFactor( Skill skill ){
+	    return base.GetSkillSpecificFactor( skill );
+	}
+
 	public SpawnZLevel SpawnZLevel{ get{ return m_SpawnZLevel; } set{ m_SpawnZLevel = value; } }
 
 	public bool ExcludeFromParentSpawns{ get{ return m_ExcludeFromParentSpawns; } set{ m_ExcludeFromParentSpawns = value; } }

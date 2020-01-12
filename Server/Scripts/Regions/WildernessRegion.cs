@@ -9,12 +9,17 @@ namespace Server.Regions {
 	//this is intended to demarcate areas where ranger skills should train faster than normal
 
 	public override double GetSkillSpecificFactor(Skill skill){
+	    base.GetSkillSpecificFactor( skill );
+	    
 	    switch( skill.SkillName ){
 		
 		case SkillName.Tracking:
 		case SkillName.AnimalTaming:
 		case SkillName.Camping:
 		case SkillName.Herding:
+		case SkillName.Fishing:
+		case SkillName.Lumberjacking:
+		case SkillName.Mining:
 		    return 0.5;
 		default:
 		    return RegionalSkillGainPrimaryFactor;

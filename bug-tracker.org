@@ -1,4 +1,4 @@
-#+STARTUP: align
+\#+STARTUP: align
 #+STARTUP: showall
 
 This is a list of bugs.
@@ -102,9 +102,9 @@ This exception is fatal, press return to exit
 * DONE test local changes to vendors before pushing live
 * DONE eliminate need for stupid ass glassblowing book -> eh, maybe not
 * DONE player reports tailoring stuck @ 94.7
-* TODO put glassblowing book into loot tables somewhere or add a GlassBlower npc vendor
+* DONE put glassblowing book into loot tables somewhere or add a GlassBlower npc vendor
 * DONE up amounts of bandages, hides, bolts of cloth
-* TODO re-check all skillgain rates, esp inscription, tracking, fishing
+* DONE re-check all skillgain rates, esp inscription, tracking, fishing
 * DONE spec-based damage isn't applying?
 * DONE implement skillmod clothing
 * TODO can't repair tools?
@@ -129,5 +129,5 @@ This exception is fatal, press return to exit
 * TODO the prots should probably also take jewellery and clothing into account
 * DONE liche leather is bright orange??
 * DONE weight limit
-* TODO reset skillgain across the board/fuck with regions
+* DONE reset skillgain across the board/fuck with regions
 * TODO re-do onsingleclick for most items to be oldschool
