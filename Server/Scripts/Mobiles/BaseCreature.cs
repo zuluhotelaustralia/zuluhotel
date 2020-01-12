@@ -636,7 +636,7 @@ namespace Server.Mobiles
 	public virtual bool HasBreath{ get{ return false; } }
 
 	// Base damage given is: CurrentHitPoints * BreathDamageScalar
-	public virtual double BreathDamageScalar{ get{ return 0.16; } }
+	public virtual double BreathDamageScalar{ get{ return 0.05; } }
 
 	// Min/max seconds until next breath
 	public virtual double BreathMinDelay{ get{ return 30.0; } }
@@ -748,7 +748,7 @@ namespace Server.Mobiles
 	public virtual void BreathDealDamage( Mobile target )
 	{
 	    int damage = BreathComputeDamage();
-	    damage = DamageScalar.ScaleDamage( damage, this, target, DamageType.Fire, AttackType.Raw);
+	    damage = DamageScalar.ScaleDamage( damage, this, target, DamageType.Fire, AttackType.Magical);
 	    
 	    target.Damage(damage, this, DamageType.Fire);
 	}
