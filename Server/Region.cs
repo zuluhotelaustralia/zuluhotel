@@ -181,7 +181,7 @@ namespace Server
 		case SkillName.Veterinary:
 		    return 0.1;
 		case SkillName.Tracking:
-		    return 0.1;
+		    return 0.5;
 		case SkillName.Mining:
 		    return 0.1;
 		case SkillName.Lumberjacking:

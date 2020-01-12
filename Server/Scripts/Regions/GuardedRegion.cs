@@ -19,17 +19,7 @@ namespace Server.Regions
 
 	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } }
 	public override double GetSkillSpecificFactor(Skill skill){
-	    switch( skill.SkillName ){
-		
-		case SkillName.Healing:
-		case SkillName.Meditation:
-		case SkillName.Veterinary:
-		case SkillName.Mining:
-		case SkillName.Lumberjacking:
-		    return 0.1;
-		default:
-		    return RegionalSkillGainPrimaryFactor;
-	    }
+	    return base.GetSkillSpecificFactor( skill );
 	}
 	
 	public virtual bool IsDisabled()
