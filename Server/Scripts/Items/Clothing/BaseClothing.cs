@@ -706,6 +706,28 @@ namespace Server.Items
 
 	public override void OnSingleClick( Mobile from )
 	{
+            if ( this.Name == null )
+            {
+                String prefix = "";
+                if ( m_Quality == ClothingQuality.Exceptional ) {
+                    prefix += "Exceptional ";
+                }
+
+                if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
+                    // TODO: Calculate the "Level" of the skillmod
+                    prefix += "Journeyman ";
+                    
+                    prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
+                }
+                
+                LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
+            }
+            else
+            {
+                base.OnSingleClick(from);
+            }
+                                                  
+            /*            
 	    List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
 	    AddEquipInfoAttributes( from, attrs );
@@ -727,7 +749,7 @@ namespace Server.Items
 
 	    EquipmentInfo eqInfo = new EquipmentInfo( number, m_Crafter, false, attrs.ToArray() );
 
-	    from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
+	    from.Send( new DisplayEquipmentInfo( this, eqInfo ) );*/
 	}
 
 	public virtual void AddEquipInfoAttributes( Mobile from, List<EquipInfoAttribute> attrs )
