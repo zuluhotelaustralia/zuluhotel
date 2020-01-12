@@ -216,6 +216,44 @@ namespace Server.Items
 	    }
 	}
 
+	public override void OnSingleClick(Mobile from){
+	    if( this.Name == null ){
+		String prefix = "";
+		    
+                if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
+                    // TODO: Calculate the "Level" of the skillmod
+		    SkillMod sk = m_ZuluSkillMods.Mod;
+
+		    if( sk.Value == 6 ){
+			prefix += "Grandmaster ";
+		    }
+		    if( sk.Value == 5 ){
+			prefix += "Master ";
+		    }
+		    if( sk.Value == 4 ){
+			prefix += "Adept ";
+		    }
+		    if( sk.Value == 3 ){
+			prefix += "Expert ";
+		    }
+		    if( sk.Value == 2 ){
+			prefix += "Journeyman ";
+		    }
+		    if( sk.Value == 1 ){
+			prefix += "Apprentice ";
+		    }
+		    
+		    prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
+                }
+                
+                LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
+            }
+            else
+            {
+                base.OnSingleClick(from);
+            }
+	}
+
 	public BaseJewel( Serial serial ) : base( serial )
 	{
 	}

@@ -197,17 +197,17 @@ namespace Server{
 	private static int DecideAmount( int max ) {
 	    double r = Utility.RandomDouble();
 	    
-	    if( 0.98 <= r && max >= 20){
-		return 20;
+	    if( 0.98 <= r && max >= 6){
+		return 6;
 	    }
-	    else if( 0.90 <= r && r < 0.98 && max >= 15 ){
-		return 15;
-	    }
-	    else if( 0.80 <= r && r < 0.90 && max >= 10 ){
-		return 10;
-	    }
-	    else if( 0.70 <= r && r < 0.80 && max >= 5 ){
+	    else if( 0.90 <= r && r < 0.98 && max >= 5 ){
 		return 5;
+	    }
+	    else if( 0.80 <= r && r < 0.90 && max >= 4 ){
+		return 4;
+	    }
+	    else if( 0.70 <= r && r < 0.80 && max >= 3 ){
+		return 3;
 	    }
 	    else if( 0.55 <= r && r < 0.70 && max >= 2 ){
 		return 2;
