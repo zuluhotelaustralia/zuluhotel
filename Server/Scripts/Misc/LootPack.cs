@@ -975,8 +975,6 @@ namespace Server
 		    item = Loot.RandomArmorOrHat( inTokuno, isMondain );
 		else if ( m_Type == typeof( BaseShield ) )
 		    item = Loot.RandomShield();
-		else if ( m_Type == typeof( BaseJewel ) )
-		    item = Core.AOS ? Loot.RandomJewelry() : Loot.RandomArmorOrShieldOrWeapon();
 		else if ( m_Type == typeof( BaseInstrument ) )
 		    item = Loot.RandomInstrument();
 		else if ( m_Type == typeof( Amber ) ) // gem
@@ -1001,7 +999,7 @@ namespace Server
 	    return null;
 	}
 
-	public LootPackItem( Type type, int chance ) : this (type, chance, 20 ){}
+	public LootPackItem( Type type, int chance ) : this (type, chance, 6 ){}
 	public LootPackItem( Type type, int chance, int maxlevel )
 	{
 	    m_Type = type;
