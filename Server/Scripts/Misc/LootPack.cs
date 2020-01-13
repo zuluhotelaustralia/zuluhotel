@@ -975,6 +975,8 @@ namespace Server
 		    item = Loot.RandomArmorOrHat( inTokuno, isMondain );
 		else if ( m_Type == typeof( BaseShield ) )
 		    item = Loot.RandomShield();
+		else if ( m_Type == typeof( BaseJewel ) )
+		    item = Core.AOS ? Loot.RandomJewelry() : Loot.RandomArmorOrShieldOrWeapon();
 		else if ( m_Type == typeof( BaseInstrument ) )
 		    item = Loot.RandomInstrument();
 		else if ( m_Type == typeof( Amber ) ) // gem
