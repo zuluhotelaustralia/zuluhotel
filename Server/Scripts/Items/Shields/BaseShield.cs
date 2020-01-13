@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Server;
+using Server.Mobiles;
 using Server.Network;
 
 namespace Server.Items
@@ -131,6 +132,18 @@ namespace Server.Items
 
 				FORMULA: Melee Damage Absorbed = (AR of Shield) / 2 | Archery Damage Absorbed = AR of Shield 
 				*/
+
+				if( owner is PlayerMobile ){
+				    PlayerMobile pm = owner as PlayerMobile;
+				    if( pm.Spec.SpecName == SpecName.Warrior ){
+					chance *= pm.Spec.Bonus;
+
+					if( chance > 0.98 ){
+					    chance = 0.98;
+					}
+				    }
+				}
+				
 				if( owner.CheckSkill( SkillName.Parry, chance ) )
 				{
 					if( weapon.Skill == SkillName.Archery )
