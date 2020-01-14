@@ -1,4 +1,4 @@
-\#+STARTUP: align
+#+STARTUP: align
 #+STARTUP: showall
 
 This is a list of bugs.
@@ -131,3 +131,9 @@ This exception is fatal, press return to exit
 * DONE weight limit
 * DONE reset skillgain across the board/fuck with regions
 * TODO re-do onsingleclick for most items to be oldschool
+* DONE tasteid stops @ 100
+* TODO magery spell damage doesn't scale w spec?
+* TODO alchemy potions should scale with spec
+* TODO mana cost doesn't drop w spec
+* TODO vendors need kindling
+* TODO cooking stops @ 100?
