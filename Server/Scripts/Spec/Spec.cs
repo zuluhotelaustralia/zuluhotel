@@ -33,6 +33,8 @@ namespace Server.Mobiles
 	    SetMaximums();
 	}
 
+	private const double _perLevel = 0.1; //10% per level
+
 	private class InternalTarget : Target {
 	    public InternalTarget() : base( 12, false, TargetFlags.None ){}
 
@@ -129,7 +131,7 @@ namespace Server.Mobiles
 		}
 		else
 		{
-		    return ( 1.0 + ((double)m_SpecLevel * 0.05) ); // +5% per level
+		    return ( 1.0 + ((double)m_SpecLevel * _perLevel) ); // +5% per level
 		}
 	    }
 	}
