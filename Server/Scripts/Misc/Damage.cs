@@ -94,8 +94,6 @@ namespace Server {
 	    SpecName tgtSpec = SpecName.None;
 	    SpecName fromSpec = SpecName.None;
 
-	    Console.WriteLine("Prescaling {0}'s damage: {1} {2} {3}", from.Name, result, dmgtype, atktype);
-	    
 	    //if they are spec, scale by their class bonus
 	    if( from is PlayerMobile &&
 		((PlayerMobile)from).Spec.SpecName != SpecName.None &&
@@ -116,7 +114,7 @@ namespace Server {
 
 		//apply the elemental scaling here if we're just going to return right away.
 		result = ApplyElementalScaling(amount, m, dmgtype);
-		Console.WriteLine("Early return {0}'s damage: {1} {2} {3}", from.Name, result, dmgtype, atktype);
+		
 		return (int)result;
 		//might as well save the cycles if there's no reason to go through this
 	    }
@@ -188,8 +186,6 @@ namespace Server {
 		    break;
 	    }
 
-	    Console.WriteLine("Post-scaling {0}'s damage: {1} {2} {3}", from.Name, result, dmgtype, atktype);
-	    
 	    return (int)result;
 	}
     }

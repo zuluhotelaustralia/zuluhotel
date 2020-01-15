@@ -332,8 +332,6 @@ namespace Server.Spells
 		percent = 1 + (caster.Skills.EvalInt.Fixed / 100);
 	    }
 
-	    Console.WriteLine(" percent is {0}", percent);
-	    
 	    if( caster is PlayerMobile ){
 		PlayerMobile pm = caster as PlayerMobile;
 
@@ -342,7 +340,6 @@ namespace Server.Spells
 		}
 	    }
 
-	    Console.WriteLine(" percent is now {0}", percent);
 	    percent *= 0.01;
 
 	    if( percent < 0 ){
@@ -1096,8 +1093,6 @@ namespace Server.Spells
 	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage, int phys, int fire, int cold, int pois, int nrgy, DFAlgorithm dfa )
 	{
 	    int iDamage = (int)damage;
-
-	    Console.WriteLine("The other fucked up function is being called");
 
 	    if( delay == TimeSpan.Zero )
 	    {
