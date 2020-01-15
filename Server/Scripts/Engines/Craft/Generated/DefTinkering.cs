@@ -200,7 +200,7 @@ namespace Server.Engines.Craft
 	    AddCraft( typeof( SextantParts ), 1044047, 1024185, 30.0, 80.0, typeof( IronIngot ), 1044036, 4, 1044037 );
 	    AddCraft( typeof( BarrelHoops ), 1044047, 1024321, -15.0, 35.0, typeof( IronIngot ), 1044036, 5, 1044037 );
 	    AddCraft( typeof( Hinge ), 1044047, 1024181, 5.0, 55.0, typeof( IronIngot ), 1044036, 2, 1044037 );
-	    AddCraft( typeof( BolaBall ), 1044047, 1023699, 45.0, 95.0, typeof( IronIngot ), 1044036, 10, 1044037 );
+	    AddCraft( typeof( BolaBall ), 1044047, 1023699, 45.0, 130.0, typeof( IronIngot ), 1044036, 10, 1044037 );
 
 	    if ( Core.ML )
 	    {
@@ -212,18 +212,18 @@ namespace Server.Engines.Craft
 #endregion
 
 #region Utensils
-	    AddCraft( typeof( ButcherKnife ), 1044048, 1025110, 25.0, 75.0, typeof( IronIngot ), 1044036, 2, 1044037 );
+	    AddCraft( typeof( ButcherKnife ), 1044048, 1025110, 25.0, 130.0, typeof( IronIngot ), 1044036, 2, 1044037 );
 	    AddCraft( typeof( SpoonLeft ), 1044048, 1044158, 0.0, 50.0, typeof( IronIngot ), 1044036, 1, 1044037 );
 	    AddCraft( typeof( SpoonRight ), 1044048, 1044159, 0.0, 50.0, typeof( IronIngot ), 1044036, 1, 1044037 );
 	    AddCraft( typeof( Plate ), 1044048, 1022519, 0.0, 50.0, typeof( IronIngot ), 1044036, 2, 1044037 );
 	    AddCraft( typeof( ForkLeft ), 1044048, 1044160, 0.0, 50.0, typeof( IronIngot ), 1044036, 1, 1044037 );
 	    AddCraft( typeof( ForkRight ), 1044048, 1044161, 0.0, 50.0, typeof( IronIngot ), 1044036, 1, 1044037 );
-	    AddCraft( typeof( Cleaver ), 1044048, 1023778, 20.0, 70.0, typeof( IronIngot ), 1044036, 3, 1044037 );
+	    AddCraft( typeof( Cleaver ), 1044048, 1023778, 20.0, 130.0, typeof( IronIngot ), 1044036, 3, 1044037 );
 	    AddCraft( typeof( KnifeLeft ), 1044048, 1044162, 0.0, 50.0, typeof( IronIngot ), 1044036, 1, 1044037 );
 	    AddCraft( typeof( KnifeRight ), 1044048, 1044163, 0.0, 50.0, typeof( IronIngot ), 1044036, 1, 1044037 );
 	    AddCraft( typeof( Goblet ), 1044048, 1022458, 10.0, 60.0, typeof( IronIngot ), 1044036, 2, 1044037 );
 	    AddCraft( typeof( PewterMug ), 1044048, 1024097, 10.0, 60.0, typeof( IronIngot ), 1044036, 2, 1044037 );
-	    AddCraft( typeof( SkinningKnife ), 1044048, 1023781, 25.0, 75.0, typeof( IronIngot ), 1044036, 2, 1044037 );
+	    AddCraft( typeof( SkinningKnife ), 1044048, 1023781, 25.0, 130.0, typeof( IronIngot ), 1044036, 2, 1044037 );
 #endregion
 
 #region Misc
@@ -234,7 +234,7 @@ namespace Server.Engines.Craft
 	    AddCraft( typeof( Globe ), 1044050, 1024167, 55.0, 105.0, typeof( IronIngot ), 1044036, 4, 1044037 );
 	    AddCraft( typeof( Spyglass ), 1044050, 1025365, 60.0, 110.0, typeof( IronIngot ), 1044036, 4, 1044037 );
 	    AddCraft( typeof( Lantern ), 1044050, 1022597, 30.0, 80.0, typeof( IronIngot ), 1044036, 2, 1044037 );
-	    AddCraft( typeof( HeatingStand ), 1044050, 1026217, 60.0, 110.0, typeof( IronIngot ), 1044036, 4, 1044037 );
+	    AddCraft( typeof( HeatingStand ), 1044050, 1026217, 60.0, 130.0, typeof( IronIngot ), 1044036, 4, 1044037 );
 
 	    if ( Core.SE )
 	    {

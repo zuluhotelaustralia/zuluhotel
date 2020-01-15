@@ -57,7 +57,7 @@ This exception is fatal, press return to exit
   NO
 * DONE increase restock of vendors
 * DONE console spam from crafting
-* TODO make a command list, unless perhaps [help works 
+* DONE make a command list, unless perhaps [help works 
 * DONE add spam to see where you should go in BR
 * DONE add a sellall command
 * TODO battle royale timers and chat spam need sanity checks
@@ -135,5 +135,7 @@ This exception is fatal, press return to exit
 * TODO magery spell damage doesn't scale w spec?
 * TODO alchemy potions should scale with spec
 * TODO mana cost doesn't drop w spec
-* TODO vendors need kindling
-* TODO cooking stops @ 100?
+* DONE vendors need kindling
+* DONE cooking stops @ 100?
+* TODO tinkering won't go past 110
+* TODO AR not scaling with spec

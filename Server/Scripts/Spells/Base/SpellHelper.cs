@@ -299,13 +299,18 @@ namespace Server.Spells
 	    return false;
 	}
 
-	//sith TODO change this to take the spell's DamageSkill or CastSkill into consideration as appropriate
 	public static TimeSpan GetDuration( Mobile caster, Mobile target )
 	{
-	    if( Core.AOS )
-		return TimeSpan.FromSeconds( ((6 * caster.Skills.EvalInt.Fixed) / 50) + 1 );
+	    double duration = caster.Skills[SkillName.Magery].Value * 1.2;
+	    if( caster is PlayerMobile ){
+		PlayerMobile pm = caster as PlayerMobile;
 
-	    return TimeSpan.FromSeconds( caster.Skills[SkillName.Magery].Value * 1.2 );
+		if( pm.Spec.SpecName == SpecName.Mage ){
+		    duration *= pm.Spec.Bonus;
+		}
+	    }
+	    
+	    return TimeSpan.FromSeconds( duration );
 	}
 
 	private static bool m_DisableSkillCheck;
@@ -319,17 +324,31 @@ namespace Server.Spells
 	public static double GetOffsetScalar( Mobile caster, Mobile target, bool curse )
 	{
 	    double percent;
-	    // sith TODO if stats go above 100 this doesn't do what they think it does, even on OSI
-	    if( curse )
+	    
+	    if( curse ){
 		percent = 8 + (caster.Skills.EvalInt.Fixed / 100) - (target.Skills.MagicResist.Fixed / 100);
-	    else
+	    }
+	    else{
 		percent = 1 + (caster.Skills.EvalInt.Fixed / 100);
+	    }
 
+	    Console.WriteLine(" percent is {0}", percent);
+	    
+	    if( caster is PlayerMobile ){
+		PlayerMobile pm = caster as PlayerMobile;
+
+		if( pm.Spec.SpecName == SpecName.Mage ){
+		    percent *= pm.Spec.Bonus;
+		}
+	    }
+
+	    Console.WriteLine(" percent is now {0}", percent);
 	    percent *= 0.01;
 
-	    if( percent < 0 )
+	    if( percent < 0 ){
 		percent = 0;
-
+	    }
+	    
 	    return percent;
 	}
 
@@ -1019,7 +1038,7 @@ namespace Server.Spells
 	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage, DamageType dmgtype )
 	{
 	    //int iDamage = (int)damage;
-	    int iDamage = Mobile.DamageScalar.ScaleDamage((int)damage, from, target, dmgtype, AttackType.Magical);
+	    int iDamage = Mobile.DamageScalar.ScaleDamage(damage, from, target, dmgtype, AttackType.Magical);
 
 	    if( delay == TimeSpan.Zero )
 	    {
@@ -1077,6 +1096,8 @@ namespace Server.Spells
 	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage, int phys, int fire, int cold, int pois, int nrgy, DFAlgorithm dfa )
 	{
 	    int iDamage = (int)damage;
+
+	    Console.WriteLine("The other fucked up function is being called");
 
 	    if( delay == TimeSpan.Zero )
 	    {

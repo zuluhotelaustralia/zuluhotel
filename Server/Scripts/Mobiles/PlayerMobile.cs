@@ -898,6 +898,11 @@ namespace Server.Mobiles
 	    CheckAtrophies( from );
 	    from.Prots.UpdateProts();
 
+	    if( from is PlayerMobile ){
+		PlayerMobile pm = from as PlayerMobile;
+		pm.Spec.ComputeSpec();
+	    }
+
 	    if ( AccountHandler.LockdownLevel > AccessLevel.Player )
 	    {
 		string notice;
