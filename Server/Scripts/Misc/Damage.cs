@@ -29,7 +29,7 @@ namespace Server {
 	    System.Console.WriteLine("Done!");
 	}
 
-	private int ApplyElementalScaling(int amount, Mobile m, DamageType type){
+	private double ApplyElementalScaling(double amount, Mobile m, DamageType type){
 	    //todo:  attenuate or amplify damage based on target's elemental protection(s).
 	    // e.g. if you're wearing Lavarock platemail, fire doesn't hurt you as much but
 	    // if you're wearing icerock, fire rips you a new asshole.
@@ -72,7 +72,7 @@ namespace Server {
 		ret = 0.0;
 	    }
 	    
-	    return (int)ret;
+	    return ret;
 	}
 
 	//this function gets called in Mobile.Damage() and is intended to be the single point of all
@@ -87,13 +87,15 @@ namespace Server {
 	    return ScaleDamage( amount, from, m, type, AttackType.Physical );
 	}
 	
-	public override int ScaleDamage( int amount, Mobile from, Mobile m, DamageType dmgtype, AttackType atktype ) {
-	    double result = (double)amount;
+	public override int ScaleDamage( double amount, Mobile from, Mobile m, DamageType dmgtype, AttackType atktype ) {
+	    double result = amount;
 	    double tgtbonus = 1.0;
 	    double frombonus = 1.0;
 	    SpecName tgtSpec = SpecName.None;
 	    SpecName fromSpec = SpecName.None;
 
+	    Console.WriteLine("Prescaling {0}'s damage: {1} {2} {3}", from.Name, result, dmgtype, atktype);
+	    
 	    //if they are spec, scale by their class bonus
 	    if( from is PlayerMobile &&
 		((PlayerMobile)from).Spec.SpecName != SpecName.None &&
@@ -114,6 +116,7 @@ namespace Server {
 
 		//apply the elemental scaling here if we're just going to return right away.
 		result = ApplyElementalScaling(amount, m, dmgtype);
+		Console.WriteLine("Early return {0}'s damage: {1} {2} {3}", from.Name, result, dmgtype, atktype);
 		return (int)result;
 		//might as well save the cycles if there's no reason to go through this
 	    }
@@ -185,6 +188,8 @@ namespace Server {
 		    break;
 	    }
 
+	    Console.WriteLine("Post-scaling {0}'s damage: {1} {2} {3}", from.Name, result, dmgtype, atktype);
+	    
 	    return (int)result;
 	}
     }
