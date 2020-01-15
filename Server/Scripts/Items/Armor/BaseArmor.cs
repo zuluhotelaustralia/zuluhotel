@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Craft;
 using Server.Factions;
@@ -149,96 +150,104 @@ namespace Server.Items
         {
             get
             {
-                int ar = BaseArmorRating;
+		double ar = BaseArmorRating;
 
                 if ( m_Protection != ArmorProtectionLevel.Regular )
-                    ar += 10 + (5 * (int)m_Protection);
+                    ar += 10 + (double)(5 * (int)m_Protection);
 
                 // TOGENERATE
                 switch ( m_Resource )
                 {
-                    case CraftResource.Iron: ar = (int)( (double)ar * 1.00); break;
-                    case CraftResource.Gold: ar = (int)( (double)ar * 1.00); break;
-                    case CraftResource.Spike: ar = (int)( (double)ar * 1.05); break;
-                    case CraftResource.Fruity: ar = (int)( (double)ar * 1.05); break;
-                    case CraftResource.Bronze: ar = (int)( (double)ar * 1.10); break;
-                    case CraftResource.IceRock: ar = (int)( (double)ar * 1.05); break;
-                    case CraftResource.BlackDwarf: ar = (int)( (double)ar * 1.10); break;
-                    case CraftResource.DullCopper: ar = (int)( (double)ar * 1.15); break;
-                    case CraftResource.Platinum: ar = (int)( (double)ar * 1.15); break;
-                    case CraftResource.SilverRock: ar = (int)( (double)ar * 1.10); break;
-                    case CraftResource.DarkPagan: ar = (int)( (double)ar * 1.15); break;
-                    case CraftResource.Copper: ar = (int)( (double)ar * 1.20); break;
-                    case CraftResource.Mystic: ar = (int)( (double)ar * 1.05); break;
-                    case CraftResource.Spectral: ar = (int)( (double)ar * 1.10); break;
-                    case CraftResource.OldBritain: ar = (int)( (double)ar * 1.25); break;
-                    case CraftResource.Onyx: ar = (int)( (double)ar * 1.25); break;
-                    case CraftResource.RedElven: ar = (int)( (double)ar * 1.15); break;
-                    case CraftResource.Undead: ar = (int)( (double)ar * 1.20); break;
-                    case CraftResource.Pyrite: ar = (int)( (double)ar * 1.30); break;
-                    case CraftResource.Virginity: ar = (int)( (double)ar * 1.25); break;
-                    case CraftResource.Malachite: ar = (int)( (double)ar * 1.50); break;
-                    case CraftResource.Lavarock: ar = (int)( (double)ar * 1.35); break;
-                    case CraftResource.Azurite: ar = (int)( (double)ar * 1.50); break;
-                    case CraftResource.Dripstone: ar = (int)( (double)ar * 1.60); break;
-                    case CraftResource.Executor: ar = (int)( (double)ar * 1.60); break;
-                    case CraftResource.Peachblue: ar = (int)( (double)ar * 1.70); break;
-                    case CraftResource.Destruction: ar = (int)( (double)ar * 1.70); break;
-                    case CraftResource.Anra: ar = (int)( (double)ar * 1.80); break;
-                    case CraftResource.Crystal: ar = (int)( (double)ar * 1.80); break;
-                    case CraftResource.Doom: ar = (int)( (double)ar * 1.90); break;
-                    case CraftResource.Goddess: ar = (int)( (double)ar * 1.90); break;
-                    case CraftResource.NewZulu: ar = (int)( (double)ar * 2.00); break;
-                    case CraftResource.EbonTwilightSapphire: ar = (int)( (double)ar * 2.20); break;
-                    case CraftResource.DarkSableRuby: ar = (int)( (double)ar * 2.20); break;
-                    case CraftResource.RadiantNimbusDiamond: ar = (int)( (double)ar * 2.25); break;
-
-                    case CraftResource.SpinedLeather:	ar = (int)( (double)ar * 1.0); break;
-                    case CraftResource.HornedLeather:	ar = (int)( (double)ar * 1.05); break;
-                    case CraftResource.BarbedLeather:	ar = (int)( (double)ar * 1.10); break;
-		    case CraftResource.RatLeather: ar = (int)( (double)ar * 1.15); break;
-		    case CraftResource.WolfLeather: ar = (int)( (double)ar * 1.20); break;
-		    case CraftResource.BearLeather: ar = (int)( (double)ar * 1.25); break;
-		    case CraftResource.SerpentLeather: ar = (int)( (double)ar * 1.30); break;
-		    case CraftResource.LizardLeather: ar = (int)( (double)ar * 1.35); break;
-		    case CraftResource.TrollLeather: ar = (int)( (double)ar * 1.40); break;
-		    case CraftResource.OstardLeather: ar = (int)( (double)ar * 1.45); break;
-		    case CraftResource.NecromancerLeather: ar = (int)( (double)ar * 1.50); break;
-		    case CraftResource.LavaLeather: ar = (int)( (double)ar * 1.55); break;
-		    case CraftResource.LicheLeather: ar = (int)( (double)ar * 1.60); break;
-		    case CraftResource.IceCrystalLeather: ar = (int)( (double)ar * 1.65); break;
-		    case CraftResource.DragonLeather: ar = (int)( (double)ar * 1.70); break;
-		    case CraftResource.WyrmLeather: ar = (int)( (double)ar * 1.80); break;
-		    case CraftResource.BalronLeather: ar = (int)( (double)ar * 1.90); break;
-		    case CraftResource.GoldenDragonLeather: ar = (int)( (double)ar * 2.0); break;
+                    case CraftResource.Iron: ar *= 1.00; break;
+                    case CraftResource.Gold: ar *=  1.00; break;
+                    case CraftResource.Spike: ar *=  1.05; break;
+                    case CraftResource.Fruity: ar *=  1.05; break;
+                    case CraftResource.Bronze: ar *=  1.10; break;
+                    case CraftResource.IceRock: ar *=  1.05; break;
+                    case CraftResource.BlackDwarf: ar *=  1.10; break;
+                    case CraftResource.DullCopper: ar *=  1.15; break;
+                    case CraftResource.Platinum: ar *=  1.15; break;
+                    case CraftResource.SilverRock: ar *=  1.10; break;
+                    case CraftResource.DarkPagan: ar *=  1.15; break;
+                    case CraftResource.Copper: ar *=  1.20; break;
+                    case CraftResource.Mystic: ar *=  1.05; break;
+                    case CraftResource.Spectral: ar *=  1.10; break;
+                    case CraftResource.OldBritain: ar *=  1.25; break;
+                    case CraftResource.Onyx: ar *=  1.25; break;
+                    case CraftResource.RedElven: ar *=  1.15; break;
+                    case CraftResource.Undead: ar *=  1.20; break;
+                    case CraftResource.Pyrite: ar *=  1.30; break;
+                    case CraftResource.Virginity: ar *=  1.25; break;
+                    case CraftResource.Malachite: ar *=  1.50; break;
+                    case CraftResource.Lavarock: ar *=  1.35; break;
+                    case CraftResource.Azurite: ar *=  1.50; break;
+                    case CraftResource.Dripstone: ar *=  1.60; break;
+                    case CraftResource.Executor: ar *=  1.60; break;
+                    case CraftResource.Peachblue: ar *=  1.70; break;
+                    case CraftResource.Destruction: ar *=  1.70; break;
+                    case CraftResource.Anra: ar *=  1.80; break;
+                    case CraftResource.Crystal: ar *=  1.80; break;
+                    case CraftResource.Doom: ar *=  1.90; break;
+                    case CraftResource.Goddess: ar *=  1.90; break;
+                    case CraftResource.NewZulu: ar *=  2.00; break;
+                    case CraftResource.EbonTwilightSapphire: ar *=  2.20; break;
+                    case CraftResource.DarkSableRuby: ar *=  2.20; break;
+                    case CraftResource.RadiantNimbusDiamond: ar *=  2.25; break;
 			
-		    case CraftResource.Pinetree: ar = (int)( (double)ar * 1.05); break;
-		    case CraftResource.Cherry: ar = (int)( (double)ar * 1.10); break;
-		    case CraftResource.Oak: ar = (int)( (double)ar * 1.15); break;
-		    case CraftResource.PurplePassion: ar = (int)( (double)ar * 1.20); break;
-		    case CraftResource.GoldenReflection: ar = (int)( (double)ar * 1.25); break;
-		    case CraftResource.Hardranger: ar = (int)( (double)ar * 1.25); break;
-		    case CraftResource.Jadewood: ar = (int)( (double)ar * 1.30); break;
-		    case CraftResource.Darkwood: ar = (int)( (double)ar * 1.35); break;
-		    case CraftResource.Stonewood: ar = (int)( (double)ar * 1.40); break;
-		    case CraftResource.Sunwood: ar = (int)( (double)ar * 1.45); break;
-		    case CraftResource.Gauntlet: ar = (int)( (double)ar * 1.45); break;
-		    case CraftResource.Swampwood: ar = (int)( (double)ar * 1.50); break;
-		    case CraftResource.Stardust: ar = (int)( (double)ar * 1.55); break;
-		    case CraftResource.Silverleaf: ar = (int)( (double)ar * 1.60); break;
-		    case CraftResource.Stormteal: ar = (int)( (double)ar * 1.65); break;
-		    case CraftResource.Emeraldwood: ar = (int)( (double)ar * 1.70); break;
-		    case CraftResource.Bloodwood: ar = (int)( (double)ar * 1.75); break;
-		    case CraftResource.Crystalwood: ar = (int)( (double)ar * 1.80); break;
-		    case CraftResource.Bloodhorse: ar = (int)( (double)ar * 1.85); break;
-		    case CraftResource.Doomwood: ar = (int)( (double)ar * 1.90); break;
-		    case CraftResource.Zulu: ar = (int)( (double)ar * 2.00); break;
-		    case CraftResource.Darkness: ar = (int)( (double)ar * 2.05); break;
-		    case CraftResource.Elven: ar = (int)( (double)ar * 2.10); break;
+                    case CraftResource.SpinedLeather:	ar *=  1.0; break;
+                    case CraftResource.HornedLeather:	ar *=  1.05; break;
+                    case CraftResource.BarbedLeather:	ar *=  1.10; break;
+		    case CraftResource.RatLeather: ar *=  1.15; break;
+		    case CraftResource.WolfLeather: ar *=  1.20; break;
+		    case CraftResource.BearLeather: ar *=  1.25; break;
+		    case CraftResource.SerpentLeather: ar *=  1.30; break;
+		    case CraftResource.LizardLeather: ar *=  1.35; break;
+		    case CraftResource.TrollLeather: ar *=  1.40; break;
+		    case CraftResource.OstardLeather: ar *=  1.45; break;
+		    case CraftResource.NecromancerLeather: ar *=  1.50; break;
+		    case CraftResource.LavaLeather: ar *=  1.55; break;
+		    case CraftResource.LicheLeather: ar *=  1.60; break;
+		    case CraftResource.IceCrystalLeather: ar *=  1.65; break;
+		    case CraftResource.DragonLeather: ar *=  1.70; break;
+		    case CraftResource.WyrmLeather: ar *=  1.80; break;
+		    case CraftResource.BalronLeather: ar *=  1.90; break;
+		    case CraftResource.GoldenDragonLeather: ar *=  2.0; break;
+			
+		    case CraftResource.Pinetree: ar *=  1.05; break;
+		    case CraftResource.Cherry: ar *=  1.10; break;
+		    case CraftResource.Oak: ar *=  1.15; break;
+		    case CraftResource.PurplePassion: ar *=  1.20; break;
+		    case CraftResource.GoldenReflection: ar *=  1.25; break;
+		    case CraftResource.Hardranger: ar *=  1.25; break;
+		    case CraftResource.Jadewood: ar *=  1.30; break;
+		    case CraftResource.Darkwood: ar *=  1.35; break;
+		    case CraftResource.Stonewood: ar *=  1.40; break;
+		    case CraftResource.Sunwood: ar *=  1.45; break;
+		    case CraftResource.Gauntlet: ar *=  1.45; break;
+		    case CraftResource.Swampwood: ar *=  1.50; break;
+		    case CraftResource.Stardust: ar *=  1.55; break;
+		    case CraftResource.Silverleaf: ar *=  1.60; break;
+		    case CraftResource.Stormteal: ar *=  1.65; break;
+		    case CraftResource.Emeraldwood: ar *=  1.70; break;
+		    case CraftResource.Bloodwood: ar *=  1.75; break;
+		    case CraftResource.Crystalwood: ar *=  1.80; break;
+		    case CraftResource.Bloodhorse: ar *=  1.85; break;
+		    case CraftResource.Doomwood: ar *=  1.90; break;
+		    case CraftResource.Zulu: ar *=  2.00; break;
+		    case CraftResource.Darkness: ar *=  2.05; break;
+		    case CraftResource.Elven: ar *=  2.10; break;
                 }
 
-                ar += -8 + (8 * (int)m_Quality);
-                return ScaleArmorByDurability( ar );
+		ar += -8 + (double)(8 * (int)m_Quality);
+
+		if( Parent is PlayerMobile ){
+		    PlayerMobile pm = Parent as PlayerMobile;
+		    if( pm.Spec.SpecName == SpecName.Warrior ){
+			ar *= pm.Spec.Bonus;
+		    }
+		}
+		
+                return ScaleArmorByDurability( (int)ar );
             }
         }
 
