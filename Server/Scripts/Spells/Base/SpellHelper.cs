@@ -329,13 +329,14 @@ namespace Server.Spells
 		percent = 10 + (caster.Skills.EvalInt.Fixed / 100) - (target.Skills.MagicResist.Fixed / 100);
 	    }
 	    else{
-		percent = 8 + (caster.Skills.EvalInt.Fixed / 100);
+		percent = 1 + (caster.Skills.EvalInt.Fixed / 100);
 	    }
 
 	    if( caster is PlayerMobile ){
 		PlayerMobile pm = caster as PlayerMobile;
 
 		if( pm.Spec.SpecName == SpecName.Mage ){
+		    percent = 8 + (caster.Skills.EvalInt.Fixed / 100);
 		    percent *= pm.Spec.Bonus;
 		}
 	    }
