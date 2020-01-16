@@ -51,7 +51,7 @@ namespace Server.Items
 	protected CraftResource m_Resource;
 	private int m_StrReq = -1;
 	private int m_StrBonus = 0, m_DexBonus = 0, m_IntBonus = 0;
-
+	private bool m_Identified = false;
 	private AosAttributes m_AosAttributes;
 	private AosArmorAttributes m_AosClothingAttributes;
 	private AosSkillBonuses m_AosSkillBonuses;
@@ -59,6 +59,12 @@ namespace Server.Items
 
 	private ZuluSkillMods m_ZuluSkillMods;
 
+	[CommandProperty( AccessLevel.GameMaster )]
+	public bool Identified {
+	    get { return m_Identified; }
+	    set { m_Identified = value; }
+	}
+	
 	[CommandProperty( AccessLevel.GameMaster )]
 	public int StrBonus {
 	    get { return m_StrBonus; }
@@ -708,38 +714,44 @@ namespace Server.Items
 	{
             if ( this.Name == null )
             {
-                String prefix = "";
-                if ( m_Quality == ClothingQuality.Exceptional ) {
-                    prefix += "Exceptional ";
-                }
+		String prefix = "";
 
-                if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
-                    // TODO: Calculate the "Level" of the skillmod
-		    SkillMod sk = m_ZuluSkillMods.Mod;
-
-		    if( sk.Value == 6 ){
-			prefix += "Grandmaster ";
-		    }
-		    if( sk.Value == 5 ){
-			prefix += "Master ";
-		    }
-		    if( sk.Value == 4 ){
-			prefix += "Adept ";
-		    }
-		    if( sk.Value == 3 ){
-			prefix += "Expert ";
-		    }
-		    if( sk.Value == 2 ){
-			prefix += "Journeyman ";
-		    }
-		    if( sk.Value == 1 ){
-			prefix += "Apprentice ";
+		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
+		    if ( m_Quality == ClothingQuality.Exceptional ) {
+			prefix += "Exceptional ";
 		    }
 		    
-		    prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
-                }
-                
-                LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
+		    if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
+			// TODO: Calculate the "Level" of the skillmod
+			SkillMod sk = m_ZuluSkillMods.Mod;
+			
+			if( sk.Value == 6 ){
+			    prefix += "Grandmaster ";
+			}
+			if( sk.Value == 5 ){
+			    prefix += "Master ";
+			}
+			if( sk.Value == 4 ){
+			    prefix += "Adept ";
+			}
+			if( sk.Value == 3 ){
+			    prefix += "Expert ";
+			}
+			if( sk.Value == 2 ){
+			    prefix += "Journeyman ";
+			}
+			if( sk.Value == 1 ){
+			    prefix += "Apprentice ";
+			}
+			
+			prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
+		    }
+		}
+		else {
+		    //not identified or not staff
+		    prefix = "unidentified ";
+		}
+		LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
             }
             else
             {
@@ -828,8 +840,10 @@ namespace Server.Items
 	{
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 6 ); // version
+	    writer.Write( (int) 7 ); // version
 
+	    writer.Write( m_Identified );
+	    
 	    m_ZuluSkillMods.Serialize(writer);
 
 	    writer.Write( m_StrBonus );
@@ -891,8 +905,15 @@ namespace Server.Items
 
 	    switch ( version )
 	    {
+		case 7:
+		    {
+			m_Identified = reader.ReadBool();
+			goto case 6;
+		    }
 		case 6:
 		    {
+			m_Identified = false;
+			
 			if( m_ZuluSkillMods == null ){
 			    m_ZuluSkillMods = new ZuluSkillMods( this );
 			}
