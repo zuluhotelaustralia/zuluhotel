@@ -137,5 +137,5 @@ This exception is fatal, press return to exit
 * TODO mana cost doesn't drop w spec
 * DONE vendors need kindling
 * DONE cooking stops @ 100?
-* TODO tinkering won't go past 110
-* TODO AR not scaling with spec
+* DONE tinkering won't go past 110
+* DONE AR not scaling with spec

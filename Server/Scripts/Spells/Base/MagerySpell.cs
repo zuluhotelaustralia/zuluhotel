@@ -1,6 +1,7 @@
 using System;
 using Server;
 using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Spells
 {
@@ -44,10 +45,19 @@ namespace Server.Spells
 
 	public override int GetMana()
 	{
-	    if( Scroll is BaseWand )
+	    if( Scroll is BaseWand ){
 		return 0;
+	    }
 
-	    return m_ManaTable[(int)Circle];
+	    double mana = (double)m_ManaTable[(int)Circle];
+	    if( Caster is PlayerMobile ){
+		PlayerMobile pm = Caster as PlayerMobile;
+		if( pm.Spec.SpecName == SpecName.Mage ){
+		    mana /= pm.Spec.Bonus;
+		}
+	    }
+		
+	    return (int)mana;
 	}
 
 	public override double GetResistSkill( Mobile m )
