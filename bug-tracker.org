@@ -132,9 +132,9 @@ This exception is fatal, press return to exit
 * DONE reset skillgain across the board/fuck with regions
 * TODO re-do onsingleclick for most items to be oldschool
 * DONE tasteid stops @ 100
-* TODO magery spell damage doesn't scale w spec?
+* DONE magery spell damage doesn't scale w spec?
 * TODO alchemy potions should scale with spec
-* TODO mana cost doesn't drop w spec
+* DONE mana cost doesn't drop w spec
 * DONE vendors need kindling
 * DONE cooking stops @ 100?
 * DONE tinkering won't go past 110

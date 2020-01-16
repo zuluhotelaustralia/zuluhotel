@@ -75,7 +75,7 @@ namespace Server.Spells.Sixth
 			SpellHelper.Turn( from, m );
 			SpellHelper.CheckReflect( (int)m_Owner.Circle, from, ref m );
 
-			if( !m_Owner.CheckResisted(m) ) {
+			if( !m_Owner.CheckResisted(m) || from == m ) {
 			    //if the buff is applied by SpellHelper it prepends "[Magic]" to the statmod's name
 			    // so we can hopefully safely assume this is a magic buff and not e.g. a ring of +25 dex
 			    
