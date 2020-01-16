@@ -242,6 +242,8 @@ namespace Server{
 
 	    if( theitem is BaseClothing ) {
 		BaseClothing clothes = theitem as BaseClothing;
+		clothes.Identified = false;
+		
 		if( statskill == ModType.Stat ){
 		    switch( thestat ){
 			case StatType.Str:
@@ -262,6 +264,7 @@ namespace Server{
 	    }
 	    else if( theitem is BaseJewel ){
 		BaseJewel jewel = theitem as BaseJewel;
+		jewel.Identified = false;
 		if( statskill == ModType.Stat ){
 		    switch( thestat ){
 			case StatType.Str:
