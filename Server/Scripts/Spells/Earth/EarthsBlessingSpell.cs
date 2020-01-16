@@ -63,15 +63,17 @@ namespace Server.Spells.Earth
 		}
 	    }
 
+	    TimeSpan durr = TimeSpan.FromSeconds( duration );
+
             double roll = 0.8 * effectiveness + 0.2 * Utility.RandomDouble();
 
             int str = (int)(15 * roll);
             int inte = (int)(15 * roll);
             int dex = (int)(15 * roll);
 
-            SpellHelper.AddStatBonus( Caster, m, StatType.Str, str, duration);
-            SpellHelper.AddStatBonus( Caster, m, StatType.Int, inte, duration);
-            SpellHelper.AddStatBonus( Caster, m, StatType.Dex, dex, duration);
+            SpellHelper.AddStatBonus( Caster, m, StatType.Str, str, durr);
+            SpellHelper.AddStatBonus( Caster, m, StatType.Int, inte, durr);
+            SpellHelper.AddStatBonus( Caster, m, StatType.Dex, dex, durr);
 
             // TODO: Find different sounds/effects?  These are copied from Bless
             m.FixedParticles( 0x373A, 10, 15, 5018, EffectLayer.Waist );

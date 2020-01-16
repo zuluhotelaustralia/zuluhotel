@@ -1680,8 +1680,94 @@ namespace Server.Items
 
         public override void OnSingleClick( Mobile from )
         {
-            List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
+            if( this.Name == null ){
+		String prefix = "";
+		String suffix  = "";
+		
+		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
+		    if( m_Quality == ArmorQuality.Exceptional ){
+			prefix += "Exceptional ";
+		    }
 
+		    if( m_Resource != CraftResource.Iron &&
+			m_Resource != CraftResource.RegularLeather &&
+			m_Resource != CraftResource.RegularWood &&
+			m_Resource != CraftResource.None) {
+
+			prefix += CraftResources.GetName( m_Resource ) + " ";
+		    }
+
+		    switch( m_Durability ){
+			case ArmorDurabilityLevel.Durable:
+			    {
+				prefix += "Durable ";
+				break;
+			    }
+			case ArmorDurabilityLevel.Substantial:
+			    {
+				prefix += "Substantial ";
+				break;
+			    }
+			case ArmorDurabilityLevel.Massive:
+			    {
+				prefix += "Massive ";
+				break;
+			    }
+			case ArmorDurabilityLevel.Fortified:
+			    {
+				prefix += "Fortified ";
+				break;
+			    }
+			case ArmorDurabilityLevel.Indestructible:
+			    {
+				prefix += "Indestructible ";
+				break;
+			    }
+			default:
+			    break;
+		    }
+
+		    switch( m_Protection ){
+			case ArmorProtectionLevel.Defense:
+			    {
+				suffix += " of Defense";
+				break;
+			    }
+			case ArmorProtectionLevel.Guarding:
+			    {
+				suffix += "of Guarding";
+				break;
+			    }
+			case ArmorProtectionLevel.Hardening:
+			    {
+				suffix += "of Hardening";
+				break;
+			    }
+			case ArmorProtectionLevel.Fortification:
+			    {
+				suffix += "of Fortification";
+				break;
+			    }
+			case ArmorProtectionLevel.Invulnerability:
+			    {
+				suffix += "of Invulnerability";
+				break;
+			    }
+			default:
+			    break;
+		    }
+		}
+		else {
+		    //not identified or not staff
+		    prefix = "unidentified ";
+		}
+
+		LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
+	    }
+	    else {
+		base.OnSingleClick( from );
+	    }
+		/*
             if ( DisplayLootType )
             {
                 if ( LootType == LootType.Blessed )
@@ -1701,12 +1787,7 @@ namespace Server.Items
             //if ( m_Resource != CraftResource.Iron )
             //    attrs.Add( new EquipInfoAttribute( 1160200 + (int)m_Resource - 2 ) );  //source of our bug?
 
-	    int res = (int)m_Resource;
-	    if( m_Resource != CraftResource.Iron &&
-		m_Resource != CraftResource.RegularLeather &&
-		m_Resource != CraftResource.RegularWood &&
-		m_Resource != CraftResource.None) {
-
+	    
 		if( res < 100 ) {
 		    //ore, see ResourceInfo.cs
 		    attrs.Add( new EquipInfoAttribute( 1160200 + res - 2) );
@@ -1755,6 +1836,7 @@ namespace Server.Items
             EquipmentInfo eqInfo = new EquipmentInfo( number, m_Crafter, false, attrs.ToArray() );
 
             from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
+		*/
         }
 
 #region ICraftable Members
