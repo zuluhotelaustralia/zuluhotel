@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Server.Network;
 using Server.Items;
+using Server.Mobiles;
 using Server.Targeting;
 
 namespace Server.Spells.Earth
@@ -53,9 +54,16 @@ namespace Server.Spells.Earth
 
             double effectiveness = SpellHelper.GetEffectiveness( Caster );
 
-            TimeSpan duration = SpellHelper.GetDuration( Caster, null );
+            double duration = Caster.Skills[SkillName.Meditation].Value * 3;
+	    if( Caster is PlayerMobile ){
+		PlayerMobile pm = Caster as PlayerMobile;
+		if( pm.Spec.SpecName == SpecName.Mage ){
+		    duration *= 2;
+		    duration *= pm.Spec.Bonus;
+		}
+	    }
 
-            double roll = 0.5 * effectiveness + 0.5 * Utility.RandomDouble();
+            double roll = 0.8 * effectiveness + 0.2 * Utility.RandomDouble();
 
             int str = (int)(15 * roll);
             int inte = (int)(15 * roll);
