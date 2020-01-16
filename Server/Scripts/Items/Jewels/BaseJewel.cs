@@ -31,6 +31,13 @@ namespace Server.Items
 	private CraftResource m_Resource;
 	private GemType m_GemType;
 	private int m_StrBonus = 0, m_DexBonus = 0, m_IntBonus = 0;
+	private bool m_Identified = false;
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public bool Identified {
+	    get { return m_Identified; }
+	    set { m_Identified = value; }
+	}
 
 	[CommandProperty( AccessLevel.GameMaster )]
 	public int StrBonus {
@@ -221,32 +228,37 @@ namespace Server.Items
 	public override void OnSingleClick(Mobile from){
 	    if( this.Name == null ){
 		String prefix = "";
-		    
-                if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
-                    // TODO: Calculate the "Level" of the skillmod
-		    SkillMod sk = m_ZuluSkillMods.Mod;
-
-		    if( sk.Value == 6 ){
-			prefix += "Grandmaster ";
-		    }
-		    if( sk.Value == 5 ){
-			prefix += "Master ";
-		    }
-		    if( sk.Value == 4 ){
-			prefix += "Adept ";
-		    }
-		    if( sk.Value == 3 ){
-			prefix += "Expert ";
-		    }
-		    if( sk.Value == 2 ){
+		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
+		    if ( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ) {
+			// TODO: Calculate the "Level" of the skillmod
+			SkillMod sk = m_ZuluSkillMods.Mod;
+			
+			if( sk.Value == 6 ){
+			    prefix += "Grandmaster ";
+			}
+			if( sk.Value == 5 ){
+			    prefix += "Master ";
+			}
+			if( sk.Value == 4 ){
+			    prefix += "Adept ";
+			}
+			if( sk.Value == 3 ){
+			    prefix += "Expert ";
+			}
+			if( sk.Value == 2 ){
 			prefix += "Journeyman ";
-		    }
-		    if( sk.Value == 1 ){
-			prefix += "Apprentice ";
-		    }
+			}
+			if( sk.Value == 1 ){
+			    prefix += "Apprentice ";
+			}
 		    
-		    prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
-                }
+			prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
+		    }
+		}
+		else {
+		    //not identified or not staff
+		    prefix = "unidentified ";
+		}
                 
                 LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
             }
