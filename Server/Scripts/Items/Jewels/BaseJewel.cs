@@ -259,8 +259,10 @@ namespace Server.Items
 		    //not identified or not staff
 		    prefix = "unidentified ";
 		}
-                
-                LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
+                String text = prefix + Core.StringList.Table[this.LabelNumber];
+
+		LabelTo( from, text );
+                //LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
             }
             else
             {
