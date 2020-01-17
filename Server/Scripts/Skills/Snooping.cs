@@ -59,7 +59,7 @@ namespace Server.SkillHandlers
 					return;
 				}
 
-				if ( root != null && from.AccessLevel == AccessLevel.Player && from.Skills[SkillName.Snooping].Value < Utility.Random( 100 ) )
+				if ( root != null && from.AccessLevel == AccessLevel.Player && from.Skills[SkillName.Snooping].Value < Utility.Random( 150 ) )
 				{
 					Map map = from.Map;
 
@@ -82,7 +82,7 @@ namespace Server.SkillHandlers
 				if ( from.AccessLevel == AccessLevel.Player )
 					Titles.AwardKarma( from, -4, true );
 
-				if ( from.AccessLevel > AccessLevel.Player || from.CheckTargetSkill( SkillName.Snooping, cont, 0.0, 100.0 ) )
+				if ( from.AccessLevel > AccessLevel.Player || from.CheckTargetSkill( SkillName.Snooping, cont, 0.0, 130.0 ) )
 				{
 					if ( cont is TrapableContainer && ((TrapableContainer)cont).ExecuteTrap( from ) )
 						return;
@@ -93,7 +93,7 @@ namespace Server.SkillHandlers
 				{
 					from.SendLocalizedMessage( 500210 ); // You failed to peek into the container.
 					
-					if ( from.Skills[SkillName.Hiding].Value / 2 < Utility.Random( 100 ) )
+					if ( from.Skills[SkillName.Hiding].Value / 2 < Utility.Random( 130 ) )
 						from.RevealingAction();
 				}
 			}
