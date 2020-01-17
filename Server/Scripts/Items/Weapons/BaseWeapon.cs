@@ -3369,6 +3369,165 @@ namespace Server.Items
 
         public override void OnSingleClick( Mobile from )
         {
+	    if( this.Name == null ){
+		String prefix = "";
+		String suffix = "";
+		
+		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
+		    if( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ){
+
+			SkillMod sk = m_ZuluSkillMods.Mod;
+			if( sk.Value == 6 ){
+			    prefix += "Grandmaster ";
+			}
+			if( sk.Value == 5 ){
+			    prefix += "Master ";
+			}
+			if( sk.Value == 4 ){
+			    prefix += "Adept ";
+			}
+			if( sk.Value == 3 ){
+			    prefix += "Expert ";
+			}
+			if( sk.Value == 2 ){
+			prefix += "Journeyman ";
+			}
+			if( sk.Value == 1 ){
+			    prefix += "Apprentice ";
+			}
+			prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
+		    }
+
+		    if( m_Quality == WeaponQuality.Exceptional ){
+			prefix += "exceptional ";
+		    }
+
+		    switch( m_DurabilityLevel ){
+			case WeaponDurabilityLevel.Durable:
+			    {
+				prefix += "durable ";
+				break;
+			    }
+			    case WeaponDurabilityLevel.Substantial:
+			    {
+				prefix += "substantial ";
+				break;
+			    }
+			    case WeaponDurabilityLevel.Massive:
+			    {
+				prefix += "massive ";
+				break;
+			    }
+			    case WeaponDurabilityLevel.Fortified:
+			    {
+				prefix += "fortified ";
+				break;
+			    }
+			    case WeaponDurabilityLevel.Indestructible:
+			    {
+				prefix += "indestructable ";
+				break;
+			    }
+			default:
+			    break;
+		    }
+			    
+		    switch( m_AccuracyLevel ){
+			case WeaponAccuracyLevel.Accurate:
+			    {
+				prefix += "dccurate ";
+				break;
+			    }
+			case WeaponAccuracyLevel.Surpassingly:
+			    {
+				prefix += "surpassingly accurate ";
+				break;
+			    }
+			case WeaponAccuracyLevel.Eminently:
+			    {
+				prefix += "eminently accurate ";
+				break;
+			    }
+			case WeaponAccuracyLevel.Exceedingly:
+			    {
+				prefix += "exceedingly accurate ";
+				break;
+			    }
+			case WeaponAccuracyLevel.Supremely:
+			    {
+				prefix += "supremely accurate ";
+				break;
+			    }
+			default:
+			    break;
+		    }
+		    
+		    if( m_Resource != CraftResource.Iron &&
+			m_Resource != CraftResource.RegularLeather &&
+			m_Resource != CraftResource.RegularWood &&
+			m_Resource != CraftResource.None) {
+			
+			prefix += CraftResources.GetName( m_Resource ) + " ";
+		    }
+		    
+		    switch( m_DamageLevel ){
+			case WeaponDamageLevel.Ruin:
+			    {
+				suffix += " of ruin";
+				break;
+			    }
+			case WeaponDamageLevel.Might:
+			    {
+				suffix += " of might";
+				break;
+			    }
+			case WeaponDamageLevel.Force:
+			    {
+				suffix += " of force";
+				break;
+			    }
+			case WeaponDamageLevel.Power:
+			    {
+				suffix += " of power";
+				break;
+			    }
+			case WeaponDamageLevel.Vanq:
+			    {
+				suffix += " of vanquishing";
+				break;
+			    }
+			default:
+			    break;
+		    }
+
+		    if( m_Slayer != SlayerName.None ){
+
+			if( m_DamageLevel == WeaponDamageLevel.Regular ){
+			    suffix += " and";
+			}		
+
+			int suffixno = SlayerGroup.GetEntryByName(this.Slayer).Title;
+			suffix += " of " + Core.StringList.Table[suffixno];
+
+			if( m_Slayer2 != SlayerName.None ){
+			    int otherno = SlayerGroup.GetEntryByName(this.Slayer2).Title;
+			    suffix += " and of " + Core.StringList.Table[otherno];
+			}
+		    }
+		}
+		else {
+		    //not identified or staff
+		    prefix = "unidentified ";
+		}
+
+		String text = prefix + Core.StringList.Table[this.LabelNumber] + suffix;
+
+		LabelTo( from, text );
+	    }
+	    else {
+		base.OnSingleClick( from );
+	    }
+	    /*
             List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
             if ( DisplayLootType )
@@ -3455,6 +3614,7 @@ namespace Server.Items
             EquipmentInfo eqInfo = new EquipmentInfo( number, m_Crafter, false, attrs.ToArray() );
 
             from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
+	    */
         }
 
         private static BaseWeapon m_Fists; // This value holds the default--fist--weapon
