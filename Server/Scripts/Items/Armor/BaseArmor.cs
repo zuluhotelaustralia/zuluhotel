@@ -1686,7 +1686,7 @@ namespace Server.Items
 		
 		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
 		    if( m_Quality == ArmorQuality.Exceptional ){
-			prefix += "Exceptional ";
+			prefix += "exceptional ";
 		    }
 
 		    if( m_Resource != CraftResource.Iron &&
@@ -1700,27 +1700,27 @@ namespace Server.Items
 		    switch( m_Durability ){
 			case ArmorDurabilityLevel.Durable:
 			    {
-				prefix += "Durable ";
+				prefix += "durable ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Substantial:
 			    {
-				prefix += "Substantial ";
+				prefix += "substantial ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Massive:
 			    {
-				prefix += "Massive ";
+				prefix += "massive ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Fortified:
 			    {
-				prefix += "Fortified ";
+				prefix += "fortified ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Indestructible:
 			    {
-				prefix += "Indestructible ";
+				prefix += "indestructible ";
 				break;
 			    }
 			default:
@@ -1761,8 +1761,10 @@ namespace Server.Items
 		    //not identified or not staff
 		    prefix = "unidentified ";
 		}
+		String text = prefix + Core.StringList.Table[this.LabelNumber] + suffix;
 
-		LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
+		LabelTo( from, text );
+		//LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
 	    }
 	    else {
 		base.OnSingleClick( from );
