@@ -41,7 +41,8 @@ namespace Server
 	private static Thread timerThread;
 	private static string m_BaseDirectory;
 	private static string m_ExePath;
-
+	private static StringList m_StringList = new StringList("enu");
+	
 	private static readonly List<string> m_DataDirectories = new List<string>();
 
 	private static Assembly m_Assembly;
@@ -58,6 +59,10 @@ namespace Server
 	private static DateTime m_ProfileStart;
 	private static TimeSpan m_ProfileTime;
 
+	public static StringList StringList{
+	    get { return m_StringList; }
+	}
+	
 	private static bool m_BetaTest;
 	public static bool BetaTest {
 	    get { return m_BetaTest; }
