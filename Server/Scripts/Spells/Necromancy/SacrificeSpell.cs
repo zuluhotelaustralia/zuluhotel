@@ -7,7 +7,7 @@ using Server.Mobiles;
 
 namespace Server.Spells.Necromancy
 {
-    public class SacrificeSpell : NecromancerSpell, IMobileTargeted
+    public class SacrificeSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
                 "Sacrifice", "Animus Ex Corporis Resolveretur"
@@ -24,14 +24,14 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-            Caster.Target = new MobileTarget( this, 10, TargetFlags.Harmful );
+            Caster.Target = new InternalTarget( this );
         }
 
         public void OnTargetFinished( Mobile m ) {
             FinishSequence();
         }
 
-        public void OnTarget( Mobile from, Mobile m )
+        public void Target( Mobile from, Mobile m )
         {
             if ( ! Caster.CanSee( m ) )
             {
@@ -80,6 +80,28 @@ namespace Server.Spells.Necromancy
 
         Return:
             FinishSequence();
+        }
+
+	private class InternalTarget : Target
+        {
+            private SacrificeSpell m_Owner;
+
+            // TODO: What is thie Core.ML stuff, is it needed?
+            public InternalTarget( SacrificeSpell owner ) : base( 10, false, TargetFlags.Harmful )
+            {
+                m_Owner = owner;
+            }
+
+            protected override void OnTarget( Mobile from, object o )
+            {
+                if ( o is Mobile )
+                    m_Owner.Target( from, (Mobile) o );
+            }
+
+            protected override void OnTargetFinish( Mobile from )
+            {
+                m_Owner.FinishSequence();
+            }
         }
     }
 }
