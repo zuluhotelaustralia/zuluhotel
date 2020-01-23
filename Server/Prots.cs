@@ -73,109 +73,124 @@ namespace Server {
 	private int PiecewiseScale( DamageType dt ){
 	    double tally = 0;
 
-	    // THEY ADD UP TO A HUNDY P
-	    tally += 2 * NeckProt(dt) / 100;
-	    tally += 3 * HandsProt(dt) / 100;
-	    tally += 10 * ArmsProt(dt) / 100;
-	    tally += 10 * HeadProt(dt) / 100;
-	    tally += 20 * LegsProt(dt) / 100;
-	    tally += 20 * ChestProt(dt) / 100;
-	    tally += 35 * ShieldProt(dt) / 100;
+	    tally += 0.25 * WristProt(dt);
+	    tally += 0.25 * RingProt(dt);
+	    tally += 0.25 * NeckProt(dt);
+	    tally += 0.25 * HandsProt(dt);
+	    tally += 0.33 * ArmsProt(dt);
+	    tally += 0.33 * HeadProt(dt);
+	    tally += 0.33 * LegsProt(dt);
+	    tally += 0.5 * ChestProt(dt);
+	    tally += 0.5 * ShieldProt(dt);
 
-	    return (int)(tally / 25);
-	}
-	
-	private int Assess(Item theitem, DamageType dmgtype){
-	    if( !(theitem is BaseArmor) ){
-		return 0;
+	    if( tally > 3 ){
+		tally = 3; //hard cap at 75% prot
 	    }
 	    
-	    BaseArmor ar = theitem as BaseArmor;
-	    CraftResource cr = ar.Resource;
+	    return (int)tally;
+	}
+
+	private int Assess(Item theitem, DamageType dmgtype){
+	    CraftResource cr;
+	    
+	    if( theitem is BaseArmor ){
+		cr = ((BaseArmor)theitem).Resource;
+	    }
+	    else if( theitem is BaseJewel ){
+		cr = ((BaseJewel)theitem).Resource;
+	    }
+	    else {
+		return 0;
+	    }
+
+	    return GetResist( cr, dmgtype );
+	}
+
+	private int GetResist( CraftResource cr, DamageType dmgtype ){
 	    switch(dmgtype){
 		case DamageType.Air:
 		    if( cr == CraftResource.Azurite ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.Goddess ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.RadiantNimbusDiamond ) {
-			return 75;
+			return 3;
 		    }
 		    if( cr == CraftResource.GoldenDragonLeather ){
-			return 25;
+			return 1;
 		    }
 		    break;
 		case DamageType.Earth:
 		    if( cr == CraftResource.Destruction ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.Crystal ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.WyrmLeather ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.GoldenDragonLeather ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.RadiantNimbusDiamond ){
-			return 75;
+			return 3;
 		    }
 		    break;
 		case DamageType.Fire:
 		    if( cr == CraftResource.Lavarock ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.LavaLeather ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.WyrmLeather ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.GoldenDragonLeather ){
-			return 75;
+			return 3;
 		    }
 		    if( cr == CraftResource.DarkSableRuby ){
-			return 75;
+			return 3;
 		    }
 		    break;
 		case DamageType.Necro:
 		    if( cr == CraftResource.SilverRock ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.LicheLeather ) {
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.NecromancerLeather ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.BalronLeather ) {
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.Undead ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.Virginity ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.RadiantNimbusDiamond ){
-			return 75;
+			return 3;
 		    }
 		    break;
 		case DamageType.Water:
 		    if( cr == CraftResource.IceRock ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.Dripstone ){
-			return 25;
+			return 1;
 		    }
 		    if( cr == CraftResource.IceCrystalLeather ){
-			return 50;
+			return 2;
 		    }
 		    if( cr == CraftResource.EbonTwilightSapphire ){
-			return 75;
+			return 3;
 		    }
 		    break;
 		default:
@@ -247,7 +262,26 @@ namespace Server {
 	    else {
 		return 0;
 	    }
-	}	
+	}
+	private double RingProt( DamageType dt ){
+	    Item ring = _parent.FindItemOnLayer( Layer.Ring ) as Item;
+	    if( ring != null ){
+		return (double)Assess(ring, dt);
+	    }
+	    else{
+		return 0;
+	    }
+	}
+
+	private double WristProt( DamageType dt ){
+	    Item bracelet = _parent.FindItemOnLayer( Layer.Bracelet ) as Item;
+	    if( bracelet != null ){
+		return (double)Assess(bracelet, dt);
+	    }
+	    else{
+		return 0;
+	    }
+	}
 	
 	private class InternalTarget : Target{
 	    public InternalTarget( ) : base( 12, false, TargetFlags.None ){

@@ -130,11 +130,11 @@ This exception is fatal, press return to exit
 * DONE liche leather is bright orange??
 * DONE weight limit
 * DONE reset skillgain across the board/fuck with regions
-* TODO re-do onsingleclick for most items to be oldschool
-** TODO weapons
-** TODO jewellery
-** TODO clothing
-** TODO armor
+* DONE re-do onsingleclick for most items to be oldschool
+** DONE weapons
+** DONE jewellery
+** DONE clothing
+** DONE armor
 * DONE tasteid stops @ 100
 * DONE magery spell damage doesn't scale w spec?
 * DONE alchemy potions should scale with spec
