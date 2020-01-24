@@ -79,6 +79,7 @@ namespace Server {
 	    tally += 0.25 * HandsProt(dt);
 	    tally += 0.33 * ArmsProt(dt);
 	    tally += 0.33 * HeadProt(dt);
+	    tally += 0.33 * EarringsProt(dt);
 	    tally += 0.33 * LegsProt(dt);
 	    tally += 0.5 * ChestProt(dt);
 	    tally += 0.5 * ShieldProt(dt);
@@ -277,6 +278,16 @@ namespace Server {
 	    Item bracelet = _parent.FindItemOnLayer( Layer.Bracelet ) as Item;
 	    if( bracelet != null ){
 		return (double)Assess(bracelet, dt);
+	    }
+	    else{
+		return 0;
+	    }
+	}
+
+	private double EarringsProt( DamageType dt ){
+	    Item earrings = _parent.FindItemOnLayer( Layer.Earrings ) as Item;
+	    if( earrings != null ){
+		return (double)Assess(earrings, dt);
 	    }
 	    else{
 		return 0;
