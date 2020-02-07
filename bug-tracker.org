@@ -125,16 +125,16 @@ This exception is fatal, press return to exit
 * DONE sorceror's bane is weak as fuck.. is SpellDamage calling into Spec properly?
 * DONE setting all skills to 150 gives spec 0
 * DONE elemental prots are scaling damage the wrong way (e.g. level 1 gives 75% prot)
-* TODO a suit of leather probably doesn't give full prots because you don't have arms for the female leather, skirts, etc.
-* TODO the prots should probably also take jewellery and clothing into account
+* DONE a suit of leather probably doesn't give full prots because you don't have arms for the female leather, skirts, etc.
+* DONE the prots should probably also take jewellery and clothing into account
 * DONE liche leather is bright orange??
 * DONE weight limit
 * DONE reset skillgain across the board/fuck with regions
-* TODO re-do onsingleclick for most items to be oldschool
-** TODO weapons
-** TODO jewellery
-** TODO clothing
-** TODO armor
+* DONE re-do onsingleclick for most items to be oldschool
+** DONE weapons
+** DONE jewellery
+** DONE clothing
+** DONE armor
 * DONE tasteid stops @ 100
 * DONE magery spell damage doesn't scale w spec?
 * DONE alchemy potions should scale with spec
@@ -143,3 +143,9 @@ This exception is fatal, press return to exit
 * DONE cooking stops @ 100?
 * DONE tinkering won't go past 110
 * DONE AR not scaling with spec
+* DONE change map to Atria
+* TODO fix start location minimap
+* TODO weird ass tiles all over the place
+* TODO doorgen doesn't work
+* TODO missing regions when loading regions.xml (dummy classes)
+* TODO rename e.g. Pedran to "New Britain" and other shit.
