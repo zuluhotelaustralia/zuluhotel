@@ -1735,22 +1735,22 @@ namespace Server.Items
 			    }
 			case ArmorProtectionLevel.Guarding:
 			    {
-				suffix += "of Guarding";
+				suffix += " of Guarding";
 				break;
 			    }
 			case ArmorProtectionLevel.Hardening:
 			    {
-				suffix += "of Hardening";
+				suffix += " of Hardening";
 				break;
 			    }
 			case ArmorProtectionLevel.Fortification:
 			    {
-				suffix += "of Fortification";
+				suffix += " of Fortification";
 				break;
 			    }
 			case ArmorProtectionLevel.Invulnerability:
 			    {
-				suffix += "of Invulnerability";
+				suffix += " of Invulnerability";
 				break;
 			    }
 			default:
