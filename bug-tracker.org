@@ -5,7 +5,7 @@ This is a list of bugs.
 * DONE "You need ~MANA REQUIREMENT~ mana to cast this spell"
 ** I.e. the fucking cliloc message is displayed without substitution
 * DONE gather nodes won't drift into the dungeon regions but they should
-* TODO items (weapons) not displaying name properly (looted magic weapons)
+* DONE items (weapons) not displaying name properly (looted magic weapons)
   IS THIS STILL A BUG AS OF VERSION 19.12?
 * DONE weapons not taking material properly
 * DONE wraith form still ticks after you die
@@ -149,3 +149,4 @@ This exception is fatal, press return to exit
 * TODO doorgen doesn't work
 * TODO missing regions when loading regions.xml (dummy classes)
 * TODO rename e.g. Pedran to "New Britain" and other shit.
+* TODO steal relpor houses/multis
