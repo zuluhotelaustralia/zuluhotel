@@ -127,6 +127,8 @@ This exception is fatal, press return to exit
 * DONE elemental prots are scaling damage the wrong way (e.g. level 1 gives 75% prot)
 * TODO a suit of leather probably doesn't give full prots because you don't have arms for the female leather, skirts, etc.
 * TODO the prots should probably also take jewellery and clothing into account
+** DONE jewellery
+** TODO clothing ?  aprons?
 * DONE liche leather is bright orange??
 * DONE weight limit
 * DONE reset skillgain across the board/fuck with regions

@@ -194,18 +194,18 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE stats too
 ** DONE figure out why teleporters (i.e. cave doors, stairs, moongates) don't work
 
-* TODO Items to tackle after launching beta but before "1.0" [9/23]
+* TODO Items to tackle after launching beta but before "1.0" [12/24]
 :properties:
 :cookie_data: todo recursive
 :end:
 ** DONE Fix gathersystem timing so it awards resources after the animation plays
 ** DONE make sure warriors deal more stamina damage with spec
-** TODO make sure elemental shit works
+** DONE make sure elemental shit works
 ** TODO make sure you can dispel any Earth/Necro transformations
 ** TODO "instahit"
 ** TODO auction house that takes a 10% cut (ish)
 ** DONE gathersystem asks "where do you wish to place this?" when lumberjacking
-** TODO make it so skills/stats go to 130 but with mods you can get to 150
+** DONE make it so skills/stats go to 130 but with mods you can get to 150
 ** TODO make sure pagans are spawning in loot
 ** DONE honestly gathersystem probably still has some fucked up cliloc calls... fix these/crowdsource them
 ** DONE make an ongoing minigame environment to encourage pvp during beta/debugging phase
@@ -235,7 +235,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE create a meta object to hold all the timers and references and shit to avoid duplication of timers when gump is re-sent.
 *** DONE decide if you want to kick them or not upon jail, because there seems to be no way to dismiss the gump
 *** DONE see if we can just send an exit command to the gump by spoofing a reply or something.
-** TODO fix Server/Skills.cs because there are several references to 100.0 in there and we go to 130.0
+** DONE fix Server/Skills.cs because there are several references to 100.0 in there and we go to 130.0
 ** TODO anti corruption code [2/3]
 :properties:
 :cookie_data: todo recursive
@@ -246,38 +246,38 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO figure out how jail works in runuo - there seems to be no [jail command
 
 #+NAME: oretable
-|               |       |            |         | <30>                                                                                                                         |    |   |
-| Ores          |   Hue | Difficulty | Quality | Special Properties                                                                                                           |    |   |
-| Iron          |   0x0 |          0 |    1.00 |                                                                                                                              |  4 | 9 |
-| Gold          | 0x885 |          1 |    1.00 |                                                                                                                              |  2 | 9 |
-| Spike         | 0x4c7 |          5 |    1.05 |                                                                                                                              |  8 | 4 |
-| Fruity        | 0x46e |         10 |    1.05 | Dex penalty -1                                                                                                               |  9 | 8 |
-| Bronze        | 0x45e |         15 |    1.10 |                                                                                                                              |  9 | 1 |
-| Ice Rock      | 0x480 |         20 |    1.05 | 25% water prot                                                                                                               |  7 | 1 |
-| Black Dwarf   | 0x451 |         25 |    1.10 |                                                                                                                              |  5 | 1 |
-| Dull Copper   | 0x3ea |         30 |    1.15 |                                                                                                                              |  7 | 9 |
-| Platinum      | 0x457 |         35 |    1.15 | Wearer takes less magic dmg                                                                                                  |  5 | 3 |
-| Silver Rock   | 0x3e9 |         40 |    1.10 | 25% Necro prot                                                                                                               |  8 | 4 |
-| Dark Pagan    | 0x46b |         45 |    1.15 |                                                                                                                              |  6 | 8 |
-| Copper        | 0x602 |         50 |    1.20 |                                                                                                                              |  2 | 7 |
-| Mystic        | 0x17f |         55 |    1.05 | Wearer takes less magic dmg                                                                                                  |  9 | 1 |
-| Spectral      | 0x483 |         60 |    1.10 | Dex penalty -3                                                                                                               |  1 | 1 |
-| Old Britain   | 0x852 |         65 |    1.25 |                                                                                                                              |  4 | 1 |
-| Onyx          | 0x455 |         70 |    1.25 | Dex penalty -1                                                                                                               |  8 | 3 |
+|               |       |            |         | <30>                                                                                                                       |    |   |
+| Ores          |   Hue | Difficulty | Quality | Special Properties                                                                                                         |    |   |
+| Iron          |   0x0 |          0 |    1.00 |                                                                                                                            |  4 | 9 |
+| Gold          | 0x885 |          1 |    1.00 |                                                                                                                            |  2 | 9 |
+| Spike         | 0x4c7 |          5 |    1.05 |                                                                                                                            |  8 | 4 |
+| Fruity        | 0x46e |         10 |    1.05 | Dex penalty -1                                                                                                             |  9 | 8 |
+| Bronze        | 0x45e |         15 |    1.10 |                                                                                                                            |  9 | 1 |
+| Ice Rock      | 0x480 |         20 |    1.05 | 25% water prot                                                                                                             |  7 | 1 |
+| Black Dwarf   | 0x451 |         25 |    1.10 |                                                                                                                            |  5 | 1 |
+| Dull Copper   | 0x3ea |         30 |    1.15 |                                                                                                                            |  7 | 9 |
+| Platinum      | 0x457 |         35 |    1.15 | Wearer takes less magic dmg                                                                                                |  5 | 3 |
+| Silver Rock   | 0x3e9 |         40 |    1.10 | 25% Necro prot                                                                                                             |  8 | 4 |
+| Dark Pagan    | 0x46b |         45 |    1.15 |                                                                                                                            |  6 | 8 |
+| Copper        | 0x602 |         50 |    1.20 |                                                                                                                            |  2 | 7 |
+| Mystic        | 0x17f |         55 |    1.05 | Wearer takes less magic dmg                                                                                                |  9 | 1 |
+| Spectral      | 0x483 |         60 |    1.10 | Dex penalty -3                                                                                                             |  1 | 1 |
+| Old Britain   | 0x852 |         65 |    1.25 |                                                                                                                            |  4 | 1 |
+| Onyx          | 0x455 |         70 |    1.25 | Dex penalty -1                                                                                                             |  8 | 3 |
 | Red Elven     | 0x4b9 |         75 |    1.15 | Dex penalty -2, Wearer takes less magic dmg                                                                                |  1 | 4 |
-| Undead        | 0x279 |         80 |    1.20 | 50% necro prot                                                                                                               | 10 | 7 |
-| Pyrite        | 0x6b8 |         85 |    1.30 | Dex penalty -1                                                                                                               |  8 | 7 |
+| Undead        | 0x279 |         80 |    1.20 | 50% necro prot                                                                                                             | 10 | 7 |
+| Pyrite        | 0x6b8 |         85 |    1.30 | Dex penalty -1                                                                                                             |  8 | 7 |
 | Virginity     | 0x482 |         90 |    1.25 | Dex penalty -1, 50% necro prot                                                                                             |  5 | 4 |
-| Malachite     | 0x487 |         95 |    1.50 |                                                                                                                              |  4 | 8 |
-| Lavarock      | 0x486 |         97 |    1.35 | 50% fire prot                                                                                                                |  6 | 2 |
-| Azurite       | 0x4df |         98 |    1.50 | Dex penalty -1, 50% air prot                                                                                                 |  7 | 2 |
+| Malachite     | 0x487 |         95 |    1.50 |                                                                                                                            |  4 | 8 |
+| Lavarock      | 0x486 |         97 |    1.35 | 50% fire prot                                                                                                              |  6 | 2 |
+| Azurite       | 0x4df |         98 |    1.50 | Dex penalty -1, 50% air prot                                                                                               |  7 | 2 |
 | Dripstone     | 0x49e |        100 |    1.60 | Wearer takes less magic dmg, 25% water prot                                                                                |  6 | 4 |
-| Executor      | 0x499 |        104 |    1.60 | Wearer takes less magic dmg                                                                                                  |  7 | 1 |
-| Peachblue     | 0x49c |        108 |    1.70 | Dex penalty -2                                                                                                               |  3 | 2 |
+| Executor      | 0x499 |        104 |    1.60 | Wearer takes less magic dmg                                                                                                |  7 | 1 |
+| Peachblue     | 0x49c |        108 |    1.70 | Dex penalty -2                                                                                                             |  3 | 2 |
 | Destruction   | 0x500 |        112 |    1.70 | Dex penalty -1, 25% earth prot                                                                                             |  5 | 4 |
-| Anra          | 0x48b |        116 |    1.80 | Dex penalty -2                                                                                                               | 10 | 4 |
+| Anra          | 0x48b |        116 |    1.80 | Dex penalty -2                                                                                                             | 10 | 4 |
 | Crystal       | 0x492 |        119 |    1.80 | Wearer takes less magic dmg, 25% earth prot                                                                                |  3 | 9 |
-| Doom          | 0x49f |        122 |    1.90 |                                                                                                                              |  2 | 1 |
+| Doom          | 0x49f |        122 |    1.90 |                                                                                                                            |  2 | 1 |
 | Goddess       | 0x501 |        125 |    1.90 | Wearer takes less magic dmg, 25% air prot                                                                                  |  7 | 2 |
 | New Zulu      | 0x488 |        129 |    2.00 | Dex penalty -2, "reduced spell effectiveness on wearer" whatever that means                                                |  1 | 7 |
 | Ebon Twilight | 0x493 |        130 |    2.20 | Dex penalty -3, wearer takes less magic dmg, Immune to circles 1 and 2, 75% water prot                                     |  6 | 1 |
