@@ -21,12 +21,16 @@ namespace Server.Commands
 		public static void GenTeleporter_OnCommand( CommandEventArgs e )
 		{
 			e.Mobile.SendMessage( "Generating teleporters, please wait." );
-
+			/*
 			int count = new TeleportersCreator().CreateTeleporters();
 
 			count += new SHTeleporter.SHTeleporterCreator().CreateSHTeleporters();
 
 			e.Mobile.SendMessage( "Teleporter generating complete. {0} teleporters were generated.", count );
+			*/
+
+			//USE A CONFIG FILE BREH, DON'T HARD CODE SHIT
+			Decorate.Generate("Data/Teleporters", Map.Felucca);
 		}
 
 		public class TeleportersCreator

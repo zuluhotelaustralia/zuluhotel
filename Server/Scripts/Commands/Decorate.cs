@@ -25,7 +25,7 @@ namespace Server.Commands
 
 			m_Mobile.SendMessage( "Generating world decoration (FELUCCA ONLY), please wait." );
 
-			Generate( "Data/Decoration/Britannia", Map.Felucca );
+//			Generate( "Data/Decoration/Britannia", Map.Felucca );
 			//Generate( "Data/Decoration/Britannia", Map.Trammel, Map.Felucca );
 			//Generate( "Data/Decoration/Trammel", Map.Trammel );
 			Generate( "Data/Decoration/Felucca", Map.Felucca );
