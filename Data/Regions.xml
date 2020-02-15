@@ -4,63 +4,63 @@
     
     <!-- Start Commonwealth Regions and Sub-Regions -->
     
-    <region type="CommonwealthRegion" name="Calor">
-      <rune name="Calor" />
+    <region type="CommonwealthRegion" name="Nikeah">
+      <rune name="Nikeah" />
       <rect x="930" y="1877" width="116" height="106" />
-      <townshipinfo name="Calor" />
-      <region name="Calor Inn">
+      <townshipinfo name="Nikeah" />
+      <region name="Nikeah Inn">
         <rect x="932" y="1905" width="10" height="14" />
         <logoutDelay active="false" />
       </region>
      </region>
     
-    <region type="CommonwealthRegion" name="Lillano">
-      <rune name="Lillano" />
+    <region type="CommonwealthRegion" name="Maranda">
+      <rune name="Maranda" />
       <rect x="517" y="1299" width="135" height="161" />      
       <rect x="652" y="1371" width="63" height="68" />
-      <townshipinfo name="Lillano" />
-      <region name="Lillano Inn">
+      <townshipinfo name="Maranda" />
+      <region name="Maranda Inn">
       <rect x="597" y="1356" width="10" height="10" />
       <logoutDelay active="false" />
       </region>
     </region>
    
-    <region type="CommonwealthRegion" name="Pedran">
-      <rune name="Pedran" />
+    <region type="CommonwealthRegion" name="Narshe">
+      <rune name="Narshe" />
       <rect x="751" y="793" width="199" height="134" />
-      <townshipinfo name="Pedran" />
-      <region name="Pedran Tavern">
+      <townshipinfo name="Narshe" />
+      <region name="Narshe Tavern">
         <rect x="883" y="834" width="10" height="12" />
         <logoutDelay active="false" />
       </region>
     </region>
-    <region type="NoHousingRegion" name="NorthPedran">
+    <region type="NoHousingRegion" name="NorthNarshe">
       <rect x="819" y="771" width="53" height="42" />
     </region>
-    <region type="NoHousingRegion" name="NorthPedranCave">
+    <region type="NoHousingRegion" name="NorthNarsheCave">
       <rect x="806" y="739" width="17" height="12" />
     </region>
     
-    <region type="CommonwealthRegion" name="Arbor">
-      <rune name="Arbor" />
+    <region type="CommonwealthRegion" name="Thamasa">
+      <rune name="Thamasa" />
       <rect x="1731" y="971" width="100" height="152" />
-      <townshipinfo name="Arbor" />
-      <region name="Arbor Inn">
+      <townshipinfo name="Thamasa" />
+      <region name="Thamasa Inn">
         <rect x="1771" y="974" width="10" height="12" />
         <logoutDelay active="false" />
       </region>
     </region>
    
-    <region type="CommonwealthRegion" name="Vermell">
-      <rune name="Vermell" />
+    <region type="CommonwealthRegion" name="Albrook">
+      <rune name="Albrook" />
       <rect x="1606" y="1649" width="165" height="62" />
       <rect x="1657" y="1594" width="114" height="55" />
-      <townshipinfo name="Vermell" />
-      <region name="Vermell Tavern">
+      <townshipinfo name="Albrook" />
+      <region name="Albrook Tavern">
         <rect x="1727" y="1655" width="8" height="12" />
         <logoutDelay active="false" />
       </region>
-      <region name="Vermell Inn">
+      <region name="Albrook Inn">
         <rect x="1705" y="1642" width="11" height="10" />
         <logoutDelay active="false" />
       </region>
@@ -69,38 +69,38 @@
     <!-- End Commonwealth Regions and Sub-Regions -->
     <!-- Start Neutral Town Regions -->
     
-    <region type="GuardedRegion" name="Galven">
-      <rune name="Galven" />
+    <region type="GuardedRegion" name="New Britain">
+      <rune name="New Britain" />
       <rect x="1145" y="1273" width="80" height="101" />
       <rect x="1225" y="1273" width="102" height="101" />
       <rect x="1205" y="1374" width="122" height="66" />
       <rect x="1327" y="1318" width="94" height="82" />
       <go x="1317" y="1380" z="0" />
       <music name="Britain1" />
-      <region name="Galven Tavern">
+      <region name="New Britain Tavern">
         <rect x="1343" y="1358" width="13" height="8" />
         <rect x="1348" y="1354" width="8" height="4" />
         <logoutDelay active="false" />
       </region>
-      <region name="Galven Inn">
+      <region name="New Britain Inn">
         <rect x="1299" y="1375" width="8" height="12" />
         <logoutDelay active="false" />
       </region>
     </region>
    
-    <region type="GuardedRegion" name="Albus">
-      <rune name="Albus" />
+    <region type="GuardedRegion" name="Tzen">
+      <rune name="Tzen" />
       <rect x="1164" y="827" width="76" height="76" />
       <go x="1197" y="883" z="0" />
       <music name="Skarabra" />
-      <region name="Albus Camp">
+      <region name="Tzen Camp">
         <rect x="1221" y="844" width="6" height="4" />
         <logoutDelay active="false" />
       </region>
     </region>
   
-    <region type="GuardedRegion" name="Bowan">
-      <rune name="Bowan" />
+    <region type="GuardedRegion" name="Jidor">
+      <rune name="Jidor" />
       <rect x="800" y="1693" width="76" height="125" />
 	  <rect x="875" y="1718" width="16" height="64" />
 	  <rect x="874" y="1782" width="9" height="17" />
@@ -108,7 +108,7 @@
 	  <rect x="828" y="1802" width="25" height="25" />
       <go x="856" y="1749" z="0" />
       <music name="Skarabra" />
-      <region name="Bowan Camp">
+      <region name="Jidor Camp">
         <rect x="819" y="1761" width="6" height="6" />
         <logoutDelay active="false" />
       </region>
@@ -117,87 +117,87 @@
     <!-- End Neutral Town Regions -->
     <!-- Start Dungeon Regions and Sub-Regions -->
    
-    <region type="DungeonRegion" name="Edgewich">
-      <rune name="Edgewich" />
+    <region type="DungeonRegion" name="Chicane">
+      <rune name="Chicane" />
       <rect x="5138" y="60" width="350" height="170" />
       <go x="5212" y="215" z="0" />
       <music name="Dungeon2" />
     </region>
-    <region type="NoHousingRegion" name="Outer Edgewich">
+    <region type="NoHousingRegion" name="Outer Chicane">
       <rect x="783" y="1024" width="30" height="16" />
     </region>
         
-    <region type="DungeonRegion" name="Khalmer">
-      <rune name="Khalmer" />
+    <region type="DungeonRegion" name="Baruche">
+      <rune name="Baruche" />
       <rect x="5500" y="50" width="228" height="166" />
       <go x="5660" y="106" z="0" />
       <music name="Dungeon2" />
     </region>
-    <region type="NoHousingRegion" name="OuterKhalmer">
+    <region type="NoHousingRegion" name="OuterBaruche">
       <rect x="985" y="1760" width="31" height="21" />
     </region>
    
-    <region type="DungeonRegion" name="Endium">
-      <rune name="Endium" />
+    <region type="DungeonRegion" name="Sinapsis">
+      <rune name="Sinapsis" />
       <rect x="5729" y="80" width="223" height="216" />
       <go x="5812" y="259" z="0" />
       <music name="Dungeon2" />
     </region>
-    <region type="NoHousingRegion" name="OuterEndium">
+    <region type="NoHousingRegion" name="OuterSinapsis">
       <rect x="1673" y="1469" width="15" height="19" />
     </region>
     
-    <region type="DungeonRegion" name="Demergo">
-      <rune name="Demergo" />
+    <region type="DungeonRegion" name="Kero Kero">
+      <rune name="Kero Kero" />
       <rect x="5640" y="296" width="224" height="240" />
       <go x="5712" y="503" z="21" />
       <music name="Dungeon2" />
     </region>
    
-    <region type="DungeonRegion" name="Castra">
-      <rune name="Castra" />
+    <region type="DungeonRegion" name="Avarice">
+      <rune name="Avarice" />
       <rect x="5426" y="587" width="184" height="281" />
       <go x="5510" y="855" z="0" />
       <music name="Dungeon2" />
     </region>
-    <region type="NoHousingRegion" name="OuterCastra">
+    <region type="NoHousingRegion" name="OuterAvarice">
       <rect x="1446" y="1259" width="19" height="43" />
     </region>
    
-    <region type="DungeonRegion" name="Pulma">
-      <rune name="Pulma" />
+    <region type="DungeonRegion" name="Revile">
+      <rune name="Revile" />
       <rect x="5696" y="552" width="245" height="368" />
       <go x="5748" y="870" z="39" />
       <music name="Dungeon2" />
     </region>
-    <region type="NoHousingRegion" name="OuterPulma">
+    <region type="NoHousingRegion" name="OuterRevile">
       <rect x="1100" y="1481" width="18" height="54" />
     </region>
    
-    <region type="DungeonRegion" name="Lockmoor">
-      <rune name="Lockmoor" />
+    <region type="DungeonRegion" name="Perfidy">
+      <rune name="Perfidy" />
       <rect x="5216" y="858" width="328" height="324" />
       <go x="5278" y="1076" z="0" />
       <music name="Dungeon2" />
     </region>
    
-    <region type="DungeonRegion" name="Serosan">
-      <rune name="Serosan" />
+    <region type="DungeonRegion" name="Doom">
+      <rune name="Doom" />
       <rect x="5584" y="936" width="256" height="288" />
       <go x="5765" y="1170" z="0" />
       <music name="Dungeon2" />
     </region>
 
-    <region type="DungeonRegion" name="Inner Lapisan Ruins">
+    <region type="DungeonRegion" name="Inner Pagan Ruins">
       <rect x="5205" y="361" width="226" height="146" />
       <music name="Dungeon2" />
     </region>
-    <region type="OutdoorDungeonRegion" name="Lapisan Ruins">
+    <region type="OutdoorDungeonRegion" name="Pagan Ruins">
       <rect x="5205" y="507" width="226" height="110" />
       <go x="5389" y="603" z="0" />
       <music name="Dungeon2" />
     </region>
-    <region type="NoHousingRegion" name="OuterLapisan">
+    <region type="NoHousingRegion" name="OuterPagan">
       <rect x="1015" y="1325" width="14" height="13" />
     </region>
     
@@ -215,7 +215,7 @@
       <music name="Dungeon2" />
     </region>
    
-    <region type="OutdoorDungeonRegion" name="ArborGraveyard">
+    <region type="OutdoorDungeonRegion" name="ThamasaGraveyard">
       <rect x="1703" y="1209" width="46" height="28" />
     </region>
    
@@ -223,59 +223,59 @@
       <rect x="760" y="1111" width="55" height="35" />
     </region>
    
-    <region type="DungeonRegion" name="Virindi">
+    <region type="DungeonRegion" name="Profane">
       <rect x="5170" y="630" width="155" height="160" />
     </region>
 
     <!-- End Dungeon Regions and Sub-Regions -->
     <!-- Start Militia Stronghold Regions -->
     
-    <region type="MilitiaStronghold" name="LillanoStronghold">
+    <region type="MilitiaStronghold" name="MarandaStronghold">
       <rect x="5387" y="3879" width="59" height="66" />
       <go x="5416" y="3900" z="0" />
-      <townshipinfo name="Lillano" />
+      <townshipinfo name="Maranda" />
       <heroinfo id="0" />
-      <region type="MilitiaNoTrapRegion" name="LillanoMilitiaNoTrapRegion">
+      <region type="MilitiaNoTrapRegion" name="MarandaMilitiaNoTrapRegion">
         <rect x="5403" y="3928" width="5" height="5" />
       </region>
     </region>
    
-    <region type="MilitiaStronghold" name="PedranStronghold">
+    <region type="MilitiaStronghold" name="NarsheStronghold">
       <rect x="5522" y="3880" width="53" height="60" />
       <go x="5545" y="3900" z="0" />
-      <townshipinfo name="Pedran" />
+      <townshipinfo name="Narshe" />
       <heroinfo id="1" />
-      <region type="MilitiaNoTrapRegion" name="PedranMilitiaNoTrapRegion">
+      <region type="MilitiaNoTrapRegion" name="NarsheMilitiaNoTrapRegion">
         <rect x="5533" y="3928" width="5" height="5" />
       </region>
     </region>
   
-    <region type="MilitiaStronghold" name="ArborStronghold">
+    <region type="MilitiaStronghold" name="ThamasaStronghold">
       <rect x="5637" y="3878" width="54" height="63" />
       <go x="5666" y="3900" z="0" />
-      <townshipinfo name="Arbor" />
+      <townshipinfo name="Thamasa" />
       <heroinfo id="2" />
-      <region type="MilitiaNoTrapRegion" name="ArborMilitiaNoTrapRegion">
+      <region type="MilitiaNoTrapRegion" name="ThamasaMilitiaNoTrapRegion">
         <rect x="5653" y="3928" width="5" height="5" />
       </region>
     </region>
    
-    <region type="MilitiaStronghold" name="CalorStronghold">
+    <region type="MilitiaStronghold" name="NikeahStronghold">
       <rect x="5838" y="3879" width="54" height="66" />
       <go x="5866" y="3900" z="0" />
-      <townshipinfo name="Calor" />
+      <townshipinfo name="Nikeah" />
       <heroinfo id="3" />
-      <region type="MilitiaNoTrapRegion" name="CalorMilitiaNoTrapRegion">
+      <region type="MilitiaNoTrapRegion" name="NikeahMilitiaNoTrapRegion">
         <rect x="5853" y="3928" width="5" height="5" />
       </region>
     </region>
     
-    <region type="MilitiaStronghold" name="VermellStronghold">
+    <region type="MilitiaStronghold" name="AlbrookStronghold">
       <rect x="5986" y="3877" width="56" height="65" />
       <go x="6016" y="3900" z="0" />
-      <townshipinfo name="Vermell" />
+      <townshipinfo name="Albrook" />
       <heroinfo id="4" />
-      <region type="MilitiaNoTrapRegion" name="VermellMilitiaNoTrapRegion">
+      <region type="MilitiaNoTrapRegion" name="AlbrookMilitiaNoTrapRegion">
         <rect x="6003" y="3928" width="5" height="5" />
       </region>
     </region>
@@ -355,21 +355,21 @@
 	  
     </region>
 
-    <region type="RoacheRegion">
-      <rune name="Roache" />
+    <region type="FigaroRegion">
+      <rune name="Figaro" />
 	  <rect x="1335" y="1901" width="117" height="90" />
-      <region name="Roache Tavern">
+      <region name="Figaro Tavern">
         <rect x="1377" y="1948" width="9" height="11" />
         <logoutDelay active="false" />
       </region>
-	       <region name="Roache Inn">
+	       <region name="Figaro Inn">
         <rect x="1361" y="1941" width="7" height="12" />
         <logoutDelay active="false" />
       </region>
     </region>
 	
-	<region type="RoacheIslandRegion" name="Roache">
-      <rune name="Roache" />
+	<region type="FigaroIslandRegion" name="Figaro">
+      <rune name="Figaro" />
 	  <rect x="1323" y="1714" width="341" height="286" />
 	  <rect x="1244" y="1784" width="81" height="145" />
 	  <rect x="1294" y="1760" width="92" height="59" />
