@@ -31,6 +31,7 @@ namespace Server.Commands
 
 			//USE A CONFIG FILE BREH, DON'T HARD CODE SHIT
 			Decorate.Generate("Data/Teleporters", Map.Felucca);
+			e.Mobile.SendMessage("TelGen Complete!");
 		}
 
 		public class TeleportersCreator

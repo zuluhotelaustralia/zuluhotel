@@ -35,9 +35,9 @@ namespace Server.Gumps {
 
 	    AddPage(0);
 	    AddBackground( 0, 0, 480, 480, 9300 );
-	    AddHtml( 10, 10, 460, 100, "<h2>Update: 15 January 2020</h2>", false, false );
-	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is currently in Beta Testing, and so may have bugs.  We ask that you please be patient with us.  Current testing priority is crafting:  Please try to craft everything you can, and report bugs that you find!  Note that we have updated new clilocs for the client, however Daleron's updater is not currently ready for production, so we have put the cliloc file up on zuluhotel.ca for download.", false, false );
-	    AddHtml( 10, 200, 460, 140, "Latest feature changes:  Spec modifier is now 10% per level.  Alchemists now receive spec bonuses.  Warriors now receive spec bonus to AR.  Known issue(s):  Crafters are not getting spec bonuses right now.  A fix is in the works but that system is very complex so there's lots to test.", false, false );
+	    AddHtml( 10, 10, 460, 100, "<h2>Update: 16 Feburary 2020</h2>", false, false );
+	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is currently in Beta Testing, and so may have bugs.  We ask that you please be patient with us.  Current testing priority is the new map:  Please report any broken area transitions or other bugs as you find them!", false, false );
+	    AddHtml( 10, 200, 460, 140, "Latest feature change(s):  New map!  Known issue(s):  Crafters are not getting spec bonuses right now.  A fix is in the works but that system is very complex so there's lots to test.", false, false );
 	    
 	    AddButton( 10, 440, 247, 248, (int)Buttons.OKButton, GumpButtonType.Reply, 2);
 	    AddImageTiled( 10, 440, 68, 22, 2624);
@@ -50,7 +50,7 @@ namespace Server.Gumps {
 	    switch( info.ButtonID ){
 		case (int) Buttons.OKButton:
 		    {
-			from.SendMessage("Thanks for reading the MOTD.  To call this window up again, just use the MOTD command.");
+			from.SendMessage("Thanks for reading the MOTD.  To call this window up again, just use the MOTD text command by typing '[MOTD'.");
 			break;
 		    }
 	    }
