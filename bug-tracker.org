@@ -144,10 +144,10 @@ This exception is fatal, press return to exit
 * DONE tinkering won't go past 110
 * DONE AR not scaling with spec
 * DONE change map to Atria
-* TODO fix start location minimap
+* DONE fix start location minimap
 * DONE weird ass tiles all over the place
   This is a client-side issue.  Use the Orion Client or else use the proper client files and make sure if applicable to your client that they are being packed into .UOP files properly.  Ensure you include art.mul and its relatives.
-* TODO doorgen doesn't work
+* DONE doorgen doesn't work
 * DONE missing regions when loading regions.xml (dummy classes)
 * DONE rename e.g. Pedran to "New Britain" and other shit.
 * TODO steal relpor houses/multis
