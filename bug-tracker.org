@@ -151,3 +151,5 @@ This exception is fatal, press return to exit
 * DONE missing regions when loading regions.xml (dummy classes)
 * DONE rename e.g. Pedran to "New Britain" and other shit.
 * TODO steal relpor houses/multis
+* TODO change in map means drifting gathernodes logic is no longer valid (bounds 2500,2500 ?)
+* TODO can't use ankhs because no context menu
