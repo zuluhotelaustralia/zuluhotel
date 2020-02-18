@@ -214,6 +214,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** TODO fix baseweapon damage levels based on craftresource
 ** TODO fix baseweapon/basearmor exceptional quality stuff (Core.AOS)
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
+** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** DONE hides
 ** TODO missing monsters [3/4]
 *** DONE Golden Dragon

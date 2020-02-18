@@ -38,6 +38,7 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
 using Server.Targeting;
+using Server.Engines.Gather;
 
 namespace Server
 {
@@ -797,6 +798,12 @@ namespace Server
 	    set { m_AutoLoop = value; }
 	}
 
+	private GatherContext m_GatherContext;
+	public GatherContext GatherContext{
+	    get { return m_GatherContext; }
+	    set { m_GatherContext = value; }
+	}	    
+		
 	private Prots m_Prots;
 	public Prots Prots {
 	    get { return m_Prots; }

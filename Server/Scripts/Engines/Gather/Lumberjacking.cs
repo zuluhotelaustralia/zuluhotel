@@ -83,8 +83,8 @@ namespace Server.Engines.Gather {
 	    m_System.Nodes.Clear(); //the default constructor puts a placeholder node in
 
 	    // see mining.cs
-	    int x = 3033;
-	    int y = 3406;
+	    int x = 1300;
+	    int y = 1300;
 
 	    // ok fuck it I can't think of a more elegant way to do this without a massive refactor for which I have no motivation
 	    // gathernode (x, y, vx, vy, abundance, difficulty, minskill, maxskill, type)

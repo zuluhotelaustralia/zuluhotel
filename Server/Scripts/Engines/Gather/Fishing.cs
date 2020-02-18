@@ -144,8 +144,8 @@ namespace Server.Engines.Gather {
 	    m_System.m_Nodes.Clear();
 
 	    //see mining.cs
-	    int x = 3033;
-	    int y = 3406;
+	    int x = 1300;
+	    int y = 1300;
 	    
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
 						0.9, 2500.0, 0.0, 150.0, typeof(Server.Items.Fish)));
