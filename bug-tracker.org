@@ -153,3 +153,4 @@ This exception is fatal, press return to exit
 * TODO steal relpor houses/multis
 * DONE change in map means drifting gathernodes logic is no longer valid (bounds 2500,2500 ?)
 * TODO can't use ankhs because no context menu
+* TODO Hood item from RP isn't showing properly on paperdoll (gumpart.mul?)

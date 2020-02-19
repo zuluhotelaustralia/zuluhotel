@@ -415,6 +415,20 @@ namespace Server
 	    };
 
 	public static Type[] LibraryBookTypes{ get{ return m_LibraryBookTypes; } }
+	
+	private static Type[] m_BodyPartTypes = new Type[]
+        {
+            typeof(LeftLeg), typeof(RightLeg), typeof(LeftArm), 
+            typeof(RightArm), typeof(Head), typeof(Bone), typeof(RibCage),
+            typeof(BonePile)
+        };
+        
+        public static Type[] BodyPartTypes { get { return m_BodyPartTypes; } }
+
+	public static Item RandomBodyPart()
+        {
+            return Construct( m_BodyPartTypes, Utility.RandomMinMax( 0, m_BodyPartTypes.Length ) );
+        }
 
 #endregion
 
