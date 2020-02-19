@@ -682,6 +682,9 @@ namespace Server
 	{
 	    return Construct( m_RegTypes );
 	}
+	public static Item RandomPaganReagent() {
+	    return Construct( m_PaganTypes );
+	}
 
 	public static Item RandomNecromancyReagent()
 	{
