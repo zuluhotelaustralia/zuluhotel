@@ -32,7 +32,7 @@ namespace Server.Mobiles
 			SetSkill( SkillName.SpiritSpeak, 80.0, 100.0 );
 		}
 
-		public override bool ClickTitle{ get{ return false; } } // Do not display title in OnSingleClick
+		public override bool ClickTitle{ get{ return true; } } // Do not display title in OnSingleClick
 
 		public override bool CheckResurrect( Mobile m )
 		{
