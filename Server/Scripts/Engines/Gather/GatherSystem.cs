@@ -173,10 +173,25 @@ namespace Server.Engines.Gather {
 	    }
 	    
 	    Skill s = from.Skills[m_SkillName];
+	    
+	    //validate gathercontext and select node
+	    
+	    GatherContext context;
+	    GatherNode n;
 
-	    //validate gathercontext
-	    //select node
-	    GatherNode n = Strike( BuildNodeList( s, from, sand ) );
+	    //if they have no context object (could be brand new mobile, etc.)
+	    if( from.GatherContext == null ){
+		n = Strike( BuildNodeList(s, from, sand) );
+		from.GatherContext = new GatherContext( from.X, from.Y, from, n );
+	    }
+	    else if( from.GatherContext.Validate() ){
+		//else, if their context is valid i.e. they haven't moved or failed a skill check:
+		n = from.GatherContext.Node;
+	    }
+	    else{
+		//else, they must have moved or failed a skillcheck because their context is invalid
+		n = Strike( BuildNodeList( s, from, sand ) );
+	    }
 	    
 	    //new GatherTimer( from, tool, this, n, targeted, toLock ).Start();
 	    StartGatherTimer( from, tool, this, n, targeted, toLock );
@@ -194,11 +209,13 @@ namespace Server.Engines.Gather {
 	    if( !CheckRange(from, tool, targeted) ){
 		from.SendLocalizedMessage( 1076766 ); //that is too far away
 		from.EndAction(locked);
+		from.GatherContext.Validity = false;
 		return false;
 	    }
 	    if( !from.Alive ){
 		from.SendLocalizedMessage( 1060190 ); //can't do that while dead fucktard
 		from.EndAction(locked);
+		from.GatherContext.Validity = false;
 		return false;
 	    }
 	    
@@ -248,9 +265,11 @@ namespace Server.Engines.Gather {
 
 	    if( sand ) {
 		SendSandFailMessage(from);
+		from.GatherContext.Validity = false;
 	    }
 	    else {
 		SendFailMessage(from);
+		from.GatherContext.Validity = false;
 	    }
 	    from.EndAction( locked );
 	}
