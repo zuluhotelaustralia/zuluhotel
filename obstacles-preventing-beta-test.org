@@ -148,7 +148,7 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 *** DONE physical damage dealt by warriors
 ** DONE skillgain for class skills
 ** DONE skill success rates for class skills
-* TODO final sanity-checks [26/26]
+* DONE final sanity-checks [26/26]
 :properties:
 :cookie_data: todo_recursive
 :end:
@@ -202,7 +202,6 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE make sure warriors deal more stamina damage with spec
 ** DONE make sure elemental shit works
 ** TODO make sure you can dispel any Earth/Necro transformations
-** TODO "instahit"
 ** TODO auction house that takes a 10% cut (ish)
 ** DONE gathersystem asks "where do you wish to place this?" when lumberjacking
 ** DONE make it so skills/stats go to 130 but with mods you can get to 150
@@ -210,21 +209,18 @@ use FOAM or whatever to generate as much as possible -> tile lists etc.?
 ** DONE honestly gathersystem probably still has some fucked up cliloc calls... fix these/crowdsource them
 ** DONE make an ongoing minigame environment to encourage pvp during beta/debugging phase
 *** DONE make it tarkov or pubg or something
-** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO fix baseweapon damage levels based on craftresource
 ** TODO fix baseweapon/basearmor exceptional quality stuff (Core.AOS)
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
-** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO figure out how jail works in runuo - there seems to be no [jail command
 ** TODO make an object that drops only in chicane that summons a red moongate on the pentagram that leads to the boss room.  make that item only drop once every 8 hours on the miniboss.
-** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
 *** TODO and so that once you hit a vein you stay on it until you fail, let's say. (m_Veins list on controller perhaps)
 ** DONE hides
-** TODO missing monsters [6/8]
+** TODO missing monsters [7/9]
 *** DONE make unique mobs for that fucked up blood dungeon
 *** DONE make unique mobs for chicane
 *** DONE make goblins for the mine dungeon
-*** TODO make crazy miner per daleron's idea
+*** DONE make crazy miner per daleron's idea
 *** TODO bosses for dungeons that aren't necessarily champions
 *** DONE Golden Dragon
 *** DONE ostards

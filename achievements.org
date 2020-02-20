@@ -1,3 +1,6 @@
+#+startup: align
+#+startup: showall
+
 * A list of Achievements
 Basically take each playermobile and add an achievements hashtable or whatever, which stores the name of the achievement, a description, and a bool for whether or not you've achieved it.  The [achievements command will show you a gump with what you've achieved but not what you haven't achieved.  The description of achievements you've earned will perhaps say "deal x damage to players" but
 

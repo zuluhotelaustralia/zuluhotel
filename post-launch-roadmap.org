@@ -1,0 +1,29 @@
+#+STARTUP: align
+#+STARTUP: showall
+
+Bug tracker: [[file:bug-tracker.org][click here]]
+Pre-launch roadmap (has useful info): [[file:obstacles-preventing-beta-test.org][click here]]
+Ideas for achievements: [[file:achievements.org][click here]]
+
+* TODO Items to tackle immediately after a "1.0" launch [0/4]
+:properties:
+:cookie_data: todo_recursive
+:end:
+** TODO "instahit"
+** TODO ensure only spec crafters can work with and mine the jewels
+** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
+** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
+
+* TODO Items to work on after the initial dust settles [0/8]
+:properties:
+:cookie_data: todo_recursive
+:end:
+** TODO custom houses from AOS (and new multis)
+** TODO smooth boat movement from high seas
+** TODO better bosses
+** TODO events, instanced dungeons for them, etc.
+** TODO achievements
+** TODO new weapons from later expansions
+** TODO equippable instruments
+** TODO client support for ClassicUO or perhaps OrionUO (or even Enhanced Client)
+** TODO fix thief and bard so they're actually useful
