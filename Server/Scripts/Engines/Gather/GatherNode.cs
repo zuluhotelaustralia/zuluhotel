@@ -19,8 +19,8 @@ namespace Server.Engines.Gather {
 	private const double m_driftchance = 0.5;
 	private const double m_mutatechance = 0.1;
 
-	private const int m_xbound = 7168;
-	private const int m_ybound = 4096;
+	private const int m_xbound = 2500; //2500x2500 covers all of the atria map landmass
+	private const int m_ybound = 2500; //need a separate solution for dungeons because they're so far away from the landmass (see mapWhatever.uop)
 
 	//difficulty represents the difficulty to actually find it
 	// graphically, this is the fall-off rate per unit distance (higher is slower fall-off)

@@ -174,6 +174,7 @@ namespace Server.Engines.Gather {
 	    
 	    Skill s = from.Skills[m_SkillName];
 
+	    //validate gathercontext
 	    //select node
 	    GatherNode n = Strike( BuildNodeList( s, from, sand ) );
 	    

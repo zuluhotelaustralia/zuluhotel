@@ -134,6 +134,35 @@ namespace Server
 		new LootPackItem( typeof( SpellweavingBook ), 1)
 	    };
 	
+	public static readonly LootPackItem[] Ammunition = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( Arrow ), 1),
+		new LootPackItem( typeof( Bolt ), 1)
+	    };
+	    
+	public static readonly LootPackItem[] PaganReagents = new LootPackItem[]
+	    {
+		new LootPackItem( typeof( Brimstone ), 1),
+		new LootPackItem( typeof( Bone ), 1),
+		new LootPackItem( typeof( DaemonBone ), 1),
+		new LootPackItem( typeof( Brimstone ), 1),
+		new LootPackItem( typeof( DragonsBlood ), 1),
+		new LootPackItem( typeof( VolcanicAsh ), 1),
+		new LootPackItem( typeof( Obsidian ), 1),
+		new LootPackItem( typeof( FertileDirt ), 1),
+		new LootPackItem( typeof( ExecutionersCap ), 1),
+		new LootPackItem( typeof( Bloodspawn ), 1),
+		new LootPackItem( typeof( Blackmoor ), 1),
+		new LootPackItem( typeof( WyrmsHeart ), 1),
+		new LootPackItem( typeof( Pumice ), 1),
+		new LootPackItem( typeof( VialOfBlood ), 1),
+		new LootPackItem( typeof( BatWing ), 1),
+		new LootPackItem( typeof( SerpentsScales ), 1),
+		new LootPackItem( typeof( EyeOfNewt ), 1),
+		new LootPackItem( typeof( PigIron ), 1),
+		new LootPackItem( typeof( DeadWood ), 1)
+	    };
+	
 	public static readonly LootPackItem[] LesserNecroScrollsItems = new LootPackItem[]
 	    {
 		new LootPackItem( typeof( ControlUndeadScroll ), 1),
@@ -574,6 +603,16 @@ namespace Server
 	public static readonly LootPack NecroBookPack = new LootPack( new LootPackEntry[]
 	{
 	    new LootPackEntry( false, NecroBook, 10.00, 1)
+	});
+
+	public static readonly LootPack PaganReagentsPack = new LootPack( new LootPackEntry[]
+	{
+	    new LootPackEntry( false, PaganReagents, 25.0, 1)
+	});
+
+	public static readonly LootPack AmmunitionPack = new LootPack( new LootPackEntry[]
+	{
+	    new LootPackEntry( false, Ammunition, 50.0, 1)
 	});
 	
 #endregion

@@ -130,9 +130,9 @@ namespace Server.Engines.Gather
 
 	    m_System.m_Nodes.Clear();
 
-	    // Downtown Serpent's Hold, for Beta purposes.  Afterwards change this back to LB's throne, which is at (1323, 1624)
-	    int x = 3033;
-	    int y = 3406;
+	    //somewhere near the middle of the new landmass
+	    int x = 1300;
+	    int y = 1300;
 	    
 	    m_System.m_Nodes.Add( new GatherNode( x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9,
 					 2500.0, 0.0, 70.0, typeof(Server.Items.IronOre)));

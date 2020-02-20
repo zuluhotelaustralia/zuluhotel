@@ -3,8 +3,8 @@
 RunZH is an emulator for the popular Zulu Hotel series of Ultima Online shards.  RunZH is based on RunUO (github.com/runuo/runuo), many thanks to Mark Sturgill.  RunZH targets Microsoft's new .NET Core platform, and Mono- or Windows-specific builds are deprecated.  Assuming your dotnet core runtime is set up properly, building RunZH should be as simple as:
 
 ```
-$ make release
-$ dotnet Server.dll
+$ make
+$ ./RunZH
 ```
 
 ## Setup
@@ -47,9 +47,11 @@ Next it's required to generate doors, signs, and invisible teleporters (for cave
 
 ```
 [doorgen
+[decorate
 [telgen
-[signgen
 ```
+
+Note that the `doorgen` command uses very rudimentary heuristics to try to find door frames and then add the appropriate doors automagically.  In the developers' experience it is finicky, especially if using a custom map, as the frames may or may not exist.  It would be wise to manually inspect all the doors in the world and add them as necessary with the `adddoor` utility command.
 
 ### Next Steps
 

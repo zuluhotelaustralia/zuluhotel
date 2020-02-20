@@ -1,0 +1,20 @@
+#+startup: align
+#+startup: showall
+
+* A list of Achievements
+Basically take each playermobile and add an achievements hashtable or whatever, which stores the name of the achievement, a description, and a bool for whether or not you've achieved it.  The [achievements command will show you a gump with what you've achieved but not what you haven't achieved.  The description of achievements you've earned will perhaps say "deal x damage to players" but
+
+Some ideas:
+- Adventurer - Find Sophie and Grenouille
+- God of War - Deal 65536 damage to players
+- Slayer - Deal 65536 damage to monsters
+- Lord of Pain - Receive 65536 damage
+- Light fingers - Steal X number of items
+- Maestro - Play music for x number of mins
+- Columbus - visit lots of the world
+- Balance - visit all the shrines
+- Scoundrel - Become red
+- Redemption - Become blue after becoming red
+- Baller - have 100k gold in your bank
+- Make it rain - have 1 million gold in your bank
+- Dunked on - Get killed by the same player twice in a row
