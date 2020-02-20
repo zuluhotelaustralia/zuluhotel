@@ -23,7 +23,7 @@ namespace Server.Items
 
 				#region Demons
 				typeof( Balron ), 			typeof( Daemon ),				typeof( Imp ),					typeof( GreaterMongbat ),
-				typeof( Mongbat ), 			typeof( IceFiend ), 			typeof( Gargoyle ), 			typeof( StoneGargoyle ),
+				typeof( Mongbat ), 			typeof( IceFiend ), 			typeof( VanillaGargoyle ), 			typeof( StoneGargoyle ),
 				typeof( FireGargoyle ), 	typeof( HordeMinion ),
 				#endregion
 

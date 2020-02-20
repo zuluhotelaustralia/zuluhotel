@@ -154,3 +154,4 @@ This exception is fatal, press return to exit
 * DONE change in map means drifting gathernodes logic is no longer valid (bounds 2500,2500 ?)
 * TODO can't use ankhs because no context menu
 * TODO Hood item from RP isn't showing properly on paperdoll (gumpart.mul?)
+* TODO unconfirmed but probably tmaps won't work.  Gotta copy those over in gumpart.mul or whatever.  

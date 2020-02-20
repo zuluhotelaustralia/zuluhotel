@@ -604,7 +604,7 @@ namespace Server.Engines.MLQuests.Definitions
 			RefusalMessage = 1072594; // Don't tell me you're a gargoyle sympathizer? *spits*
 			InProgressMessage = 1072595; // Those blasted gargoyles hang around the old tower.  That's the best place to hunt them down.
 
-			Objectives.Add( new KillObjective( 12, new Type[] { typeof( Gargoyle ) }, "gargoyles", new QuestArea( 1074807, "Sanctuary" ) ) ); // Sanctuary
+			Objectives.Add( new KillObjective( 12, new Type[] { typeof( VanillaGargoyle ) }, "gargoyles", new QuestArea( 1074807, "Sanctuary" ) ) ); // Sanctuary
 
 			Rewards.Add( ItemReward.BagOfTrinkets );
 		}
@@ -839,7 +839,7 @@ namespace Server.Engines.MLQuests.Definitions
 		{
 			MLQuestSystem.Tell( this, pm, Utility.RandomList(
 				1074214, // Knave! Come here right now!
-				1074218  // Hey!  I want to talk to you, now.
+				1074218  // Hey! I want to talk to you, now.
 			) );
 		}
 
@@ -1190,8 +1190,8 @@ namespace Server.Engines.MLQuests.Definitions
 		public override void Shout( PlayerMobile pm )
 		{
 			MLQuestSystem.Tell( this, pm, Utility.RandomList(
-				1074217, // I want to make you an offer you’d be a fool to  refuse.
-				1074218  // Hey!  I want to talk to you, now.
+				1074217, // I want to make you an offer you’d be a fool to refuse.
+				1074218  // Hey! I want to talk to you, now.
 			) );
 		}
 

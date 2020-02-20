@@ -168,7 +168,7 @@ namespace Server
 					typeof( EvilMage ),			typeof( EvilMageLord ),		typeof( Executioner ),
 					typeof( Savage ),			typeof( FireElemental ),	typeof( FireGargoyle ),
 					typeof( FireSteed ),		typeof( ForestOstard ),		typeof( FrenziedOstard ),
-					typeof( FrostSpider ),		typeof( Gargoyle ),			typeof( Gazer ),
+					typeof( FrostSpider ),		typeof( VanillaGargoyle ),			typeof( Gazer ),
 					typeof( IceSerpent ),		typeof( GiantRat ),			typeof( GiantSerpent ),
 					typeof( GiantSpider ),		typeof( GiantToad ),		typeof( Goat ),
 						typeof( Gorilla ),			typeof( GreatHart ),
