@@ -10,7 +10,7 @@ using Server.Misc;
 using Server.Commands;
 
 // this ain't your daddy's town crier.  It has a simple API that any other module can
-//call into.  Just call TownCrier.Announce and the criers will shout your shit anywhere
+//call into.  Just call TownCrier.AddAnnouncement and the criers will shout your shit anywhere
 //
 // to prevent spam there's a timer with a queue that limits speech to once per minute
 
@@ -18,8 +18,19 @@ namespace Server.Mobiles
 {
     public class TownCrier : Mobile
     {
-	private Timer m_TalkTimer;
+	private class InternalTimer : Timer
+	{
+	    public InternalTimer() : base( TimeSpan.FromMinutes( 1.0) )
+	    {}
 
+	    protected override void OnTick()
+	    {
+		Announce();
+	    }
+	}
+	
+	private static InternalTimer m_TalkTimer;
+	private static Queue<string> _talkqueue;
 	private static List<TownCrier> _Criers = new List<TownCrier>();
 
 	public static List<TownCrier> Criers
@@ -27,7 +38,45 @@ namespace Server.Mobiles
 	    get{ return _Criers; }
 	}
 
-	public static void Announce(){
+	public static void Initialize(){
+	    CommandSystem.Register("towncriermsg", AccessLevel.GameMaster, new CommandEventHandler( TownCrierMsg_OnCommand ) );
+	    //TODO:  add a way to bypass the queue for urgent in-character messages that you wouldn't use [broadcast for
+	}
+
+	[Usage( "TownCrierMsg <message>" )]
+	[Description( "Manually adds a string of text as an item to the Town Crier queue." )]
+	public static void TownCrierMsg_OnCommand( CommandEventArgs e )
+	{
+	    if( e.Arguments.Length != 1 ){
+		AddAnnouncement( e.Arguments[1] );
+	    }
+	    else {
+		e.Mobile.SendMessage("Usage:  [towncriermsg <message to send>" );
+	    }
+	}
+
+
+	public static void AddAnnouncement( string toAnnounce ){
+	    _talkqueue.Enqueue( toAnnounce );
+	    if( m_TalkTimer == null || !m_TalkTimer.Running ){
+		m_TalkTimer = new InternalTimer();
+		m_TalkTimer.Start();
+	    }
+	}
+
+	private static void Announce() {
+	    if( _talkqueue.Count > 0 ){
+		foreach( TownCrier tc in _Criers ){
+		    tc.Say( _talkqueue.Dequeue() );
+		}
+	    }
+
+	    //check again because we just dequeued
+	    if( _talkqueue.Count > 0 ){
+		m_TalkTimer = new InternalTimer();
+		m_TalkTimer.Start();
+	    }
+	}
 	    
 
 	[Constructable]
