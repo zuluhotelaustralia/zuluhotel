@@ -67,6 +67,7 @@ namespace Server.Mobiles
 	private static void Announce() {
 	    if( _talkqueue.Count > 0 ){
 		foreach( TownCrier tc in _Criers ){
+		    tc.Say( "Hear ye, hear ye!" );
 		    tc.Say( _talkqueue.Dequeue() );
 		}
 	    }
