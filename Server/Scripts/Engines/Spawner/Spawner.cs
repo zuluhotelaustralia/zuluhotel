@@ -246,7 +246,7 @@ namespace Server.Mobiles
 
 	[Constructable]
 	public Spawner( string spawnName )
-	    : this( 1, 5, 10, 0, 4, spawnName)
+	    : this( 1, 10, 15, 0, 4, spawnName)
 	{
 	}
 
