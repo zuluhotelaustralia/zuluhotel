@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Server;
 using Server.Commands;
+using Server.Items;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Auction;
@@ -31,10 +32,17 @@ namespace Server.Items {
 	}
 	    
 	private AuctionBox m_Box;
+	private const double m_Take = 0.1; //10% fee
+
+	private TimeSpan[] _BidExtensions = { TimeSpan.FromHours(12.0),
+	    TimeSpan.FromHours(8.0), TimeSpan.FromHours(4.0), TimeSpan.FromHours(1.0),
+	    TimeSpan.FromMinutes(30.0), TimeSpan.FromMinutes(10.0), TimeSpan.FromMinutes(1.0)};
 
 	public void SetBox( AuctionBox target ){
 	    m_Box = target;
 	}
+
+	private AuctionTimer _Timer;
 	
 	private List<AuctionItem> m_SaleItems;
 	public List<AuctionItem> SaleItems{
@@ -60,6 +68,32 @@ namespace Server.Items {
 	    }
 	}
 
+	// the auction timer calls this every minute
+	public void FinalizeSales() {
+	    //if $rightnow is after the sellbydate, then pay the seller, give item to the bidder,
+	    // and delete the auctionitem from the list.
+	    for( int i = m_SaleItems.Count - 1; i >= 0; i-- ){
+		if( DateTime.Compare( m_SaleItems[i].SellByDate, DateTime.Now ) <= 0 ){
+		    if( m_SaleItems[i].LeadingBidder == null ){
+			m_SaleItems[i].Seller.BankBox.DropItem( m_SaleItems[i].SaleItem );
+		    }
+		    double amount = (double) m_SaleItems[i].LeadingBid;
+		    amount *= (1.0 - m_Take);
+		    
+		    m_SaleItems[i].Seller.BankBox.DropItem( new Gold( (int)amount ) );
+		    m_SaleItems[i].LeadingBidder.BankBox.DropItem( m_SaleItems[i].SaleItem );
+		    m_SaleItems.RemoveAt(i);
+		}
+		
+	    }
+
+	    if( m_SaleItems.Count > 0 ){
+		_Timer = new AuctionTimer( this );
+		_Timer.Start();
+	    }
+	}
+
+
 	public void RegisterBid( Mobile from, int amt, int index ){
 	    AuctionItem item = m_SaleItems[index];
 	    
@@ -77,41 +111,32 @@ namespace Server.Items {
 		item.LeadingBid = amt;
 		item.LeadingBidder = from as PlayerMobile;
 		item.LastBidDate = DateTime.Now;
-	    }    
-	}
+		item.Bids++;
 
-	public bool CheckStorage( Item item ) {
-	    if( m_Box.MaxItems > ( m_Box.TotalItems + item.TotalItems ) ){
-		if( m_Box.MaxWeight > ( m_Box.TotalWeight + item.TotalWeight ) ){
-		    return true;
+		if(item.Bids <= _BidExtensions.Length){
+		    item.SellByDate = item.SellByDate.Add( _BidExtensions[item.Bids - 1] );
 		}
-	    }
-
-	    return false;
+		else {
+		    item.SellByDate = item.SellByDate.Add( TimeSpan.FromMinutes( 1.0 ) );
+		}
+	    }    
 	}
 
 	public void AcceptSaleItem( Mobile from, Item item, int askprice ){
 	    //take item, create an AuctionItem, move real item to box
 	    if( item.Parent == from.Backpack ){
-		if( CheckStorage( item ) ){
-		    m_Box.DropItem( item );
-		    m_SaleItems.Add(new AuctionItem(item,
-						    askprice,
-						    from as PlayerMobile,
-						    null,
-						    0,
-						    DateTime.Now,
-						    DateTime.Now) );
-		}
-		else {
-		    from.SendMessage("The Auction storage is full. This should never happen: please contact server staff.");
+		m_Box.DropItem( item );
+		m_SaleItems.Add(new AuctionItem(item, askprice, from as PlayerMobile, null, 0, DateTime.Now, DateTime.Now) );
+		if( _Timer == null || _Timer.Running == false ){
+		    _Timer = new AuctionTimer( this );
+		    _Timer.Start();
 		}
 	    }
 	    else {
 		from.SendMessage("The item must be in your backpack.");
 	    }
 	}
-
+	
 	public void DispenseSaleItem( Mobile to, AuctionItem ai ){
 	    //give item to To, in their bank box, then delete auctionitem from list.
 	    if( to.BankBox.TryDropItem(to, ai.SaleItem, true) ){
@@ -210,6 +235,19 @@ namespace Server.Items {
 	    }
 	}
 
+	private class AuctionTimer : Timer{
+	    private AuctionController m_Stone;
+	    public AuctionTimer( AuctionController s ) : base( TimeSpan.FromMinutes( 1.0 ) )
+	    {
+		m_Stone = s;
+	    }
+	    
+	    protected override void OnTick()
+	    {
+		m_Stone.FinalizeSales();
+	    }
+	}
+	
 	private class FirstInternalTarget : Target {
 	    private AuctionController m_Stone;
 	    
@@ -258,37 +296,36 @@ namespace Server.Items {
 		}
 	    }
 	}
+    }
+    public class AuctionBox : BaseContainer {
 
-	public class AuctionBox : BaseContainer {
+	[Constructable]
+	public AuctionBox() : base( 0xE41 ){
+	    this.Name = "Auction Escrow Box";
+	}
 
-	    [Constructable]
-	    public AuctionBox() : base( 0xE41 ){
-		this.Name = "Auction Escrow Box";
+	public AuctionBox( Serial serial ) : base( serial ){
+	    this.Name = "Auction Escrow Box";
+	}
+
+	public override bool IsAccessibleTo( Mobile m ) {
+	    if( m.AccessLevel >= AccessLevel.Developer ) {
+		return true;
 	    }
 
-	    public AuctionBox( Serial serial ) : base( serial ){
-		this.Name = "Auction Escrow Box";
-	    }
+	    return false;
+	}
 
-	    public override bool IsAccessibleTo( Mobile m ) {
-		if( m.AccessLevel >= AccessLevel.Developer ) {
-		    return true;
-		}
-
-		return false;
-	    }
-
-	    public override void Serialize( GenericWriter writer ){
-		base.Serialize( writer );
+	public override void Serialize( GenericWriter writer ){
+	    base.Serialize( writer );
 	    
-		writer.Write( (int) 1 ); // version
-	    }
+	    writer.Write( (int) 1 ); // version
+	}
 
-	    public override void Deserialize( GenericReader reader ){
-		base.Deserialize( reader );
+	public override void Deserialize( GenericReader reader ){
+	    base.Deserialize( reader );
 
-		int version = reader.ReadInt();
-	    }
+	    int version = reader.ReadInt();
 	}
     }
 }

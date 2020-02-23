@@ -54,16 +54,23 @@ namespace Server.Auction {
 	    get { return m_LeadingBidder; }
 	    set { m_LeadingBidder = value; }
 	}
+
+	private int _bids;
+	public int Bids{
+	    get { return _bids; }
+	    set { _bids = value; }
+	}
 	
-	public AuctionItem( Item saleitem, int listprice, PlayerMobile seller, PlayerMobile bidder, int leadingbid, DateTime listdate, DateTime biddate  ){
+	public AuctionItem( Item saleitem, int listprice, PlayerMobile seller, PlayerMobile bidder, int leadingbid, DateTime listdate, DateTime biddate ){
 	    m_Item = saleitem;
 	    m_ListPrice = listprice;
 	    m_Seller = seller;
 	    m_LeadingBidder = bidder;
 	    m_LeadingBid = leadingbid;
 	    m_ListDate = listdate;
-	    m_SellByDate = m_ListDate.AddHours( 72.0 );
+	    m_SellByDate = m_ListDate.AddHours( 24.0 );
 	    m_LastBidDate = biddate;
+	    _bids = 0;
 	}
 	
     }

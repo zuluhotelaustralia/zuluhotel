@@ -334,8 +334,10 @@ namespace Server.Engines.Gather {
 
 	//attenuate abundance by distance from node
 	public bool IncludeByDistance( GatherNode n, Mobile m ){
-	    int deltaX = Math.Abs( m.X - n.X );
-	    int deltaY = Math.Abs( m.Y - n.Y );
+	    int xcoord = m.X % GatherNode.XBound;
+	    int ycoord = m.Y % GatherNode.YBound;
+	    int deltaX = Math.Abs( xcoord - n.X );
+	    int deltaY = Math.Abs( ycoord - n.Y );
 
 	    double dxsquared = Math.Pow( (double)deltaX, 2.0);
 	    double dysquared = Math.Pow( (double)deltaY, 2.0);
