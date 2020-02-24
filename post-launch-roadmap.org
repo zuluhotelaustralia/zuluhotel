@@ -5,7 +5,7 @@ Bug tracker: [[file:bug-tracker.org][click here]]
 Pre-launch roadmap (has useful info): [[file:obstacles-preventing-beta-test.org][click here]]
 Ideas for achievements: [[file:achievements.org][click here]]
 
-* TODO Items to tackle immediately after a "1.0" launch [0/4]
+* TODO Items to tackle immediately after a "1.0" launch [0/6]
 :properties:
 :cookie_data: todo_recursive
 :end:
@@ -13,8 +13,10 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
+** TODO balron (make them stronger or else make an elder balron)
 
-* TODO Items to work on after the initial dust settles [0/8]
+** TODO bosses for dungeons that aren't necessarily champions
+* TODO Items to work on after the initial dust settles [0/9]
 :properties:
 :cookie_data: todo_recursive
 :end:
