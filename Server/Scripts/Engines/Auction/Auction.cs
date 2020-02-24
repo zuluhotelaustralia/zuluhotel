@@ -5,6 +5,7 @@ using Server;
 using Server.Commands;
 using Server.Items;
 using Server.Targeting;
+using Server.Targets;
 using Server.Mobiles;
 using Server.Auction;
 
@@ -19,6 +20,43 @@ namespace Server.Items {
 	public static void Initialize() {
 	    CommandSystem.Register( "SetAuctionBox", AccessLevel.Developer, new CommandEventHandler( SetAuctionBox_OnCommand ) );
 	    CommandSystem.Register( "ListAuctionItems", AccessLevel.Developer, new CommandEventHandler( ListAuctionItems_OnCommand ) );
+	    CommandSystem.Register( "SellAuctionItem", AccessLevel.Player, new CommandEventHandler( SellAuctionItem_OnCommand ) );
+
+	    Auctioneer.SetStone( AuctionStone );
+	}
+
+	public static void SellAuctionItem_OnCommand( CommandEventArgs e ){
+	    bool ok = false;
+
+	    if( e.Length != 1 ){
+		e.Mobile.SendMessage("Usage: SellAuctionItem <sell price>");
+		return;
+	    }
+	    
+	    foreach( Mobile m in e.Mobile.GetMobilesInRange( 5 ) ){
+		if( m is Auctioneer ){
+		    ok = true;
+		    break;		       
+		}
+	    }
+
+	    int askprice = e.GetInt32(0);
+
+	    if( ok ){
+		e.Mobile.SendMessage("Select the item you wish to sell for {0} gold pieces.", askprice );
+		e.Mobile.Target = new SimpleTarget( 4, false, TargetFlags.None,  (Mobile who, object target) => {
+			AuctionStone.AcceptSaleItem(e.Mobile, target as Item, askprice);
+		    });
+	    }
+	    else{
+		e.Mobile.SendMessage("You must be within 5 tiles of the Auctioneer to sell items on the Auction.");
+	    }
+	}
+
+	private static AuctionController _auctionstone;
+	public static AuctionController AuctionStone {
+	    get { return _auctionstone; }
+	    set { _auctionstone = value; }
 	}
 	
 	public static void SetAuctionBox_OnCommand( CommandEventArgs e ){
@@ -66,6 +104,8 @@ namespace Server.Items {
 	    if( m_SaleItems == null ){
 		m_SaleItems = new List<AuctionItem>();
 	    }
+
+	    _auctionstone = this;
 	}
 
 	// the auction timer calls this every minute
@@ -75,7 +115,7 @@ namespace Server.Items {
 	    for( int i = m_SaleItems.Count - 1; i >= 0; i-- ){
 		if( DateTime.Compare( m_SaleItems[i].SellByDate, DateTime.Now ) <= 0 ){
 		    if( m_SaleItems[i].LeadingBidder == null ){
-			m_SaleItems[i].Seller.BankBox.DropItem( m_SaleItems[i].SaleItem );
+			m_SaleItems[i].Seller.BankBox.DropItem( m_SaleItems[i].SaleItem ); //return to seller
 		    }
 		    double amount = (double) m_SaleItems[i].LeadingBid;
 		    amount *= (1.0 - m_Take);
@@ -126,7 +166,7 @@ namespace Server.Items {
 	    //take item, create an AuctionItem, move real item to box
 	    if( item.Parent == from.Backpack ){
 		m_Box.DropItem( item );
-		m_SaleItems.Add(new AuctionItem(item, askprice, from as PlayerMobile, null, 0, DateTime.Now, DateTime.Now) );
+		m_SaleItems.Add(new AuctionItem(item, askprice, from as PlayerMobile, null, 0, DateTime.Now, DateTime.Now, 0, item.Amount) );
 		if( _Timer == null || _Timer.Running == false ){
 		    _Timer = new AuctionTimer( this );
 		    _Timer.Start();
@@ -139,15 +179,8 @@ namespace Server.Items {
 	
 	public void DispenseSaleItem( Mobile to, AuctionItem ai ){
 	    //give item to To, in their bank box, then delete auctionitem from list.
-	    if( to.BankBox.TryDropItem(to, ai.SaleItem, true) ){
-		to.SendMessage("An item you bid on at the auction has been placed in your bankbox!");
-		
-	    }
-	    else {
-		to.SendMessage("Your bankbox is full and you were unable to receive an auction item!  Please contact shard staff.");
-		//what do we do now
-	    }
-	    
+	    to.BankBox.DropItem( ai.SaleItem );
+	    to.SendMessage("An item you bid on at the auction has been placed in your bankbox!");
 	}
 
 	public void RefundBid( Mobile bidder, int amt ){
@@ -161,9 +194,15 @@ namespace Server.Items {
 	public bool ValidateBid( Mobile bidder, int amount, AuctionItem item ){
 	    //make sure they have gold in their bank to cover it
 	    //make sure they aren't already the leading bidders
-	    if( amount <= item.LeadingBid ) {
-		bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.LeadingBid );
-		return false;
+	    if( item.LeadingBid > item.ListPrice ){
+		if( amount <= item.LeadingBid ) {
+		    bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.LeadingBid );
+		    return false;
+		}
+		else {
+		    bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.ListPrice );
+		    return false;
+		}
 	    }
 
 	    if( bidder == item.LeadingBidder ) {
@@ -185,7 +224,7 @@ namespace Server.Items {
 
 	public override void Serialize( GenericWriter writer ) {
 	    base.Serialize( writer );
-	    writer.Write( (int) 0 ); //version
+	    writer.Write( (int) 1 ); //version
 
 	    writer.Write( m_SaleItems.Count );
 	    if( m_SaleItems.Count != 0 ){
@@ -197,6 +236,8 @@ namespace Server.Items {
 		    writer.Write( ai.LeadingBid );
 		    writer.Write( ai.ListDate );
 		    writer.Write( ai.LastBidDate );
+		    writer.Write( ai.Bids );
+		    writer.Write( ai.Amount );
 		}
 	    }
 	}
@@ -205,14 +246,16 @@ namespace Server.Items {
 	    base.Deserialize( reader );
 	    int version = reader.ReadInt();
 
-	    int listprice, leadingbid;
+	    int listprice, leadingbid, bids, amount;
 	    PlayerMobile seller, bidder;
 	    DateTime listdate, biddate;
 	    Item saleitem;
 
+	    int saleItemsCount = reader.ReadInt();
+	    
 	    switch( version ){
-		case 0:
-		    int saleItemsCount = reader.ReadInt();
+		case 1:
+
 		    m_SaleItems = new List<AuctionItem>();
 		    if( saleItemsCount == 0 ){
 			return;
@@ -227,12 +270,37 @@ namespace Server.Items {
 			    leadingbid = reader.ReadInt();
 			    listdate = reader.ReadDateTime();
 			    biddate = reader.ReadDateTime();
+			    bids = reader.ReadInt();
+			    amount = reader.ReadInt();
 			    
-			    m_SaleItems.Add( new AuctionItem(saleitem, listprice, seller, bidder, leadingbid, listdate, biddate) );
+			    m_SaleItems.Add( new AuctionItem(saleitem, listprice, seller, bidder, leadingbid, listdate, biddate, bids, amount) );
 			}
 		    }
 		    break;
-	    }
+		case 0:
+	
+		    m_SaleItems = new List<AuctionItem>();
+		    if( saleItemsCount == 0 ){
+			return;
+		    }
+		    else {
+			for( int i=0; i<saleItemsCount; i++ ){
+			    
+			    saleitem = reader.ReadItem() as Item;
+			    listprice = reader.ReadInt();
+			    seller = reader.ReadMobile() as PlayerMobile;
+			    bidder = reader.ReadMobile() as PlayerMobile;
+			    leadingbid = reader.ReadInt();
+			    listdate = reader.ReadDateTime();
+			    biddate = reader.ReadDateTime();
+			    bids = reader.ReadInt();
+			    amount = 1;
+			    
+			    m_SaleItems.Add( new AuctionItem(saleitem, listprice, seller, bidder, leadingbid, listdate, biddate, bids, amount) );
+			}
+		    }
+		    break;
+	    } //switch
 	}
 
 	private class AuctionTimer : Timer{
@@ -256,6 +324,7 @@ namespace Server.Items {
 	    protected override void OnTarget( Mobile from, object targeted ) {
 		if( targeted is AuctionController ){
 		    m_Stone = (AuctionController)targeted;
+		    AuctionController.AuctionStone = m_Stone;
 		    from.SendMessage("Now target the Box");
 		    from.Target = new SecondInternalTarget( m_Stone );
 		}
@@ -299,6 +368,12 @@ namespace Server.Items {
     }
     public class AuctionBox : BaseContainer {
 
+	private static AuctionBox _box;
+	
+	public static void Initialize(){
+	    AuctionController.AuctionStone.SetBox( _box );
+	}
+	
 	[Constructable]
 	public AuctionBox() : base( 0xE41 ){
 	    this.Name = "Auction Escrow Box";
@@ -325,6 +400,7 @@ namespace Server.Items {
 	public override void Deserialize( GenericReader reader ){
 	    base.Deserialize( reader );
 
+	    _box = this;
 	    int version = reader.ReadInt();
 	}
     }

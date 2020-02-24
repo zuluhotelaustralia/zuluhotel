@@ -11,13 +11,13 @@ namespace Server.Auction{
     public class AuctionGump : Gump
     {	
 	public enum Buttons
-	    {
-		Exit,
-		NextPageButton,
-		PrevPageButton,
-		BidButton,
-		ReplyButton
-	    }
+	{
+	    Exit,
+	    NextPageButton,
+	    PrevPageButton,
+	    BidButton,
+	    ReplyButton
+	}
 
 	private Mobile m_Viewer;
 	private AuctionController m_Stone;
@@ -62,47 +62,64 @@ namespace Server.Auction{
 	    AddButton( _col2X, _footerY, 247, 248, (int)Buttons.ReplyButton, GumpButtonType.Reply, 2);
 	    AddImageTiled( _col2X, _footerY, 68, 22, 2624); // Submit Button BG
 	    AddLabel( _col2X + 10, _footerY + 2, 49, @"Bid");
-	    // add a "sell an item" button here
 
-
-
-
-	    //so for 12 items on sale, numpages() will return 2 and totalItems is 12,
+	    //so for e.g. 12 items on sale, numpages() will return 2 and totalItems is 12,
 	    // therefore the first page needs to have 8 items and the 2nd page just 4
 	    for( int i=1; i<(pages + 1); i++ ){
 		AddPage(i);
-
+	
 		if( m_Stone.SaleItems.Count >= (i * m_ItemsPerPage) ){
-		    AddBackground( _col1X, _row1Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col1X, _row1Y, 208, 209, false, 1 );
-		    AddBackground( _col2X, _row1Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col2X, _row1Y, 208, 209, false, 2 );
-		    AddBackground( _col3X, _row1Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col3X, _row1Y, 208, 209, false, 3 );
-		    AddBackground( _col4X, _row1Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col4X, _row1Y, 208, 209, false, 4 );
-		    
-		    AddBackground( _col1X, _row2Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col1X, _row2Y, 208, 209, false, 5 );
-		    AddBackground( _col2X, _row2Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col2X, _row2Y, 208, 209, false, 6 );
-		    AddBackground( _col3X, _row2Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col3X, _row2Y, 208, 209, false, 7 );
-		    AddBackground( _col4X, _row2Y, _boxsize, _boxsize, 9300 );
-		    AddRadio( _col4X, _row2Y, 208, 209, false, 8 );
+
+		    for( int k=0; i<9; i++ ){
+
+			int listindex = (i * m_ItemsPerPage) + k;
+			AuctionItem ai = m_Stone.SaleItems[ listindex ];
+			
+			MakeBox( _col1X + (170 * k), _row1Y + (170 * (k/4)), listindex, ai );
+		    }
+
+		    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.NextPageButton, GumpButtonType.Reply, 2);
+		    AddImageTiled( _col3X, _footerY, 68, 22, 2624 ); //paging button BG
+		    AddLabel( _col3X + 20, _footerY + 2, 49, @"Next");
+
+		    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Reply, 2);
+		    AddImageTiled( _col4X, _footerY, 68, 22, 2624 ); //paging button BG
+		    AddLabel( _col4X + 10, _footerY + 2, 49, @"Prev");
+		}
+		else if( m_Stone.SaleItems.Count == 0 ){
+		    AddHtml(_col1X, _row1Y, 460, 100, "Nothing for sale at this time.", false, false);
 		}
 		else{
 		    int itemsthispage = m_Stone.SaleItems.Count - ( (i-1) * m_ItemsPerPage );
-		    for( int j=1; j<itemsthispage; j++){
-			AddBackground( _col1X + (170 * j), _row1Y + (170 * (j/4)), _boxsize, _boxsize, 9300 );
-			AddRadio( _col1X + (170 * j), _row1Y + (170 * (j/4)), 208, 209, false, j );
+	
+		    for( int j=1; j < (itemsthispage + 1); j++){
+
+			int listindex = ( (i-1) * m_ItemsPerPage ) + (j-1);
+			AuctionItem ai = m_Stone.SaleItems[ listindex ];
+			
+			MakeBox( _col1X + (170 * (j-1) ), _row1Y + (170 * (j/4)), listindex, ai );
+
+			if( i > 1 ){
+			    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Reply, 2);
+			    AddImageTiled( _col4X, _footerY, 68, 22, 2624 ); //paging button BG
+			    AddLabel( _col4X + 10, _footerY + 2, 49, @"Prev");
+			}
 		    }
 		}
-
-		//add paging controls here
 	    }
 	}
 
+	private void MakeBox( int x, int y, int idx, AuctionItem ai ){
+	    AddBackground( x, y, _boxsize, _boxsize, 9300 );
+	    AddRadio( x, y, 208, 209, false, idx );
+	    AddItem( x + 20, y, ai.SaleItem.ItemID, ai.SaleItem.Hue );
+	    AddHtml( x, y + 20, _boxsize, 20, ai.SaleItem.Name == null ? ai.SaleItem.GetType().Name : ai.SaleItem.Name, false, false);
+	    AddHtml( x, y + 40, _boxsize, 20, "Amount: " + ai.SaleItem.Amount, false, false);
+	    AddHtml( x, y + 60, _boxsize, 20, "Bid: " + (ai.LeadingBid == 0 ? ai.ListPrice.ToString() : ai.LeadingBid.ToString()), false, false);
+	    AddHtml( x, y + 80, _boxsize, 20, "Close: " + ai.SellByDate.ToString() , false, false);
+	    AddHtml( x, y + 100, _boxsize, 20, "Time: " + ai.SellByDate.Hour.ToString() + ":" + ai.SellByDate.Minute.ToString(), false, false);
+	}
+	
 	public int NumPages() {
 	    if( m_Stone.SaleItems == null ) {
 		return 0;
@@ -126,25 +143,45 @@ namespace Server.Auction{
 	{
 	    Mobile from = state.Mobile;
 
+	    for( int i = 0; i < info.Switches.Length; i++ ) {
+		if( info.IsSwitched( i ) ){
+		    // i *should* be the index in the master saleitem list of the item we bid on
+		    //get text entry amt
+		    //register new bid
+		}
+	    }	    
+
 	    switch( info.ButtonID )
 	    {
 		case (int)Buttons.ReplyButton:
 		    {
+			Console.WriteLine(" reply button {0} (should be bid)", info.ButtonID );
 			break;
 		    }
+		case (int)Buttons.NextPageButton:
+		    {
+			Console.WriteLine(" nextpage (id {0})", info.ButtonID );
+			break;
+		    }
+		case (int)Buttons.PrevPageButton:
+		    {
+			Console.WriteLine(" prevpage (id {0})", info.ButtonID );
+			break;
+		    } 
+
 	    }
 	}
     }
 
     public class AuctionSellGump : Gump {
 	public enum Buttons
-	    {
-		Exit,
-		NextPageButton,
-		PrevPageButton,
-		BidButton,
-		ReplyButton
-	    }
+	{
+	    Exit,
+	    NextPageButton,
+	    PrevPageButton,
+	    BidButton,
+	    ReplyButton
+	}
 
 	private Mobile m_Viewer;
 	private AuctionController m_Stone;
