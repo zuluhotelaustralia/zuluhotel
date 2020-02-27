@@ -41,6 +41,9 @@ namespace Server.Mobiles
 	public static void Initialize(){
 	    CommandSystem.Register("towncriermsg", AccessLevel.GameMaster, new CommandEventHandler( TownCrierMsg_OnCommand ) );
 	    //TODO:  add a way to bypass the queue for urgent in-character messages that you wouldn't use [broadcast for
+	    if( _talkqueue == null ){
+		_talkqueue = new Queue<string>();
+	    }
 	}
 
 	[Usage( "TownCrierMsg <message>" )]
