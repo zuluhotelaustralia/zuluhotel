@@ -16,7 +16,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO balron (make them stronger or else make an elder balron)
 
 ** TODO bosses for dungeons that aren't necessarily champions
-* TODO Items to work on after the initial dust settles [0/9]
+* TODO Items to work on after the initial dust settles [0/10]
 :properties:
 :cookie_data: todo_recursive
 :end:
