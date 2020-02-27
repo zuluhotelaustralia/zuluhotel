@@ -59,10 +59,15 @@ namespace Server.Auction{
 	    AddImageTiled( _col1X, _footerY, 150, 22, 0 );
 	    AddTextEntry( _col1X + 10, _footerY, 140, 50, 49, 0, "" );
 	    
-	    AddButton( _col2X, _footerY, 247, 248, (int)Buttons.ReplyButton, GumpButtonType.Reply, 2);
+	    AddButton( _col2X, _footerY, 247, 248, (int)Buttons.BidButton, GumpButtonType.Reply, 2);
 	    AddImageTiled( _col2X, _footerY, 68, 22, 2624); // Submit Button BG
 	    AddLabel( _col2X + 10, _footerY + 2, 49, @"Bid");
 
+	    
+	    if( m_Stone.SaleItems.Count == 0 ){
+		AddHtml(_col1X, _row1Y, 460, 100, "Nothing for sale at this time.", false, false);
+	    }
+	    
 	    //so for e.g. 12 items on sale, numpages() will return 2 and totalItems is 12,
 	    // therefore the first page needs to have 8 items and the 2nd page just 4
 	    for( int i=1; i<(pages + 1); i++ ){
@@ -78,16 +83,13 @@ namespace Server.Auction{
 			MakeBox( _col1X + (170 * k), _row1Y + (170 * (k/4)), listindex, ai );
 		    }
 
-		    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.NextPageButton, GumpButtonType.Reply, 2);
-		    AddImageTiled( _col3X, _footerY, 68, 22, 2624 ); //paging button BG
-		    AddLabel( _col3X + 20, _footerY + 2, 49, @"Next");
-
-		    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Reply, 2);
+		    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.NextPageButton, GumpButtonType.Page, i+1);
 		    AddImageTiled( _col4X, _footerY, 68, 22, 2624 ); //paging button BG
-		    AddLabel( _col4X + 10, _footerY + 2, 49, @"Prev");
-		}
-		else if( m_Stone.SaleItems.Count == 0 ){
-		    AddHtml(_col1X, _row1Y, 460, 100, "Nothing for sale at this time.", false, false);
+		    AddLabel( _col4X + 20, _footerY + 2, 49, @"Next");
+
+		    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Page, i-1);
+		    AddImageTiled( _col3X, _footerY, 68, 22, 2624 ); //paging button BG
+		    AddLabel( _col3X + 10, _footerY + 2, 49, @"Prev");
 		}
 		else{
 		    int itemsthispage = m_Stone.SaleItems.Count - ( (i-1) * m_ItemsPerPage );
@@ -100,9 +102,9 @@ namespace Server.Auction{
 			MakeBox( _col1X + (170 * (j-1) ), _row1Y + (170 * (j/4)), listindex, ai );
 
 			if( i > 1 ){
-			    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Reply, 2);
-			    AddImageTiled( _col4X, _footerY, 68, 22, 2624 ); //paging button BG
-			    AddLabel( _col4X + 10, _footerY + 2, 49, @"Prev");
+			    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Page, i-1);
+			    AddImageTiled( _col3X, _footerY, 68, 22, 2624 ); //paging button BG
+			    AddLabel( _col3X + 10, _footerY + 2, 49, @"Prev");
 			}
 		    }
 		}
@@ -135,21 +137,10 @@ namespace Server.Auction{
 	    
 	    return pages;
 	}
-
-	
-	
 	    
 	public override void OnResponse( NetState state, RelayInfo info )
 	{
 	    Mobile from = state.Mobile;
-
-	    for( int i = 0; i < info.Switches.Length; i++ ) {
-		if( info.IsSwitched( i ) ){
-		    // i *should* be the index in the master saleitem list of the item we bid on
-		    //get text entry amt
-		    //register new bid
-		}
-	    }	    
 
 	    switch( info.ButtonID )
 	    {
@@ -158,17 +149,31 @@ namespace Server.Auction{
 			Console.WriteLine(" reply button {0} (should be bid)", info.ButtonID );
 			break;
 		    }
-		case (int)Buttons.NextPageButton:
+		case (int)Buttons.BidButton:
 		    {
-			Console.WriteLine(" nextpage (id {0})", info.ButtonID );
+			int whichradio = -1; //which radio button did they tick?
+			
+			for( int i = 0; i < info.Switches.Length; i++ ) {
+			    if( info.IsSwitched( i ) ){
+				whichradio = i;
+			    }
+			}
+
+			if( whichradio == -1 ){
+			    from.SendMessage("You must select an item to bid on!");
+			    return;
+			}
+
+			int response;
+			string text = info.GetTextEntry(0).Text;
+			bool success = Int32.TryParse(text, out response);
+			if (!success) {
+			    response = 0;
+			}
+
+			AuctionController.AuctionStone.RegisterBid(from, response, whichradio);
 			break;
 		    }
-		case (int)Buttons.PrevPageButton:
-		    {
-			Console.WriteLine(" prevpage (id {0})", info.ButtonID );
-			break;
-		    } 
-
 	    }
 	}
     }

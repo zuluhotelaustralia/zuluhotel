@@ -116,6 +116,8 @@ namespace Server.Items {
 		if( DateTime.Compare( m_SaleItems[i].SellByDate, DateTime.Now ) <= 0 ){
 		    if( m_SaleItems[i].LeadingBidder == null ){
 			m_SaleItems[i].Seller.BankBox.DropItem( m_SaleItems[i].SaleItem ); //return to seller
+			m_SaleItems.RemoveAt( i );
+			return;
 		    }
 		    double amount = (double) m_SaleItems[i].LeadingBid;
 		    amount *= (1.0 - m_Take);
@@ -194,27 +196,48 @@ namespace Server.Items {
 	public bool ValidateBid( Mobile bidder, int amount, AuctionItem item ){
 	    //make sure they have gold in their bank to cover it
 	    //make sure they aren't already the leading bidders
-	    if( item.LeadingBid > item.ListPrice ){
-		if( amount <= item.LeadingBid ) {
-		    bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.LeadingBid );
-		    return false;
-		}
-		else {
-		    bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.ListPrice );
-		    return false;
-		}
+
+	    if( !bidder.Alive ){
+		bidder.SendMessage("You cannot do that while dead.");
 	    }
 
 	    if( bidder == item.LeadingBidder ) {
 		bidder.SendMessage("You are already the leading bidder on that item.");
 		return false;
 	    }
-
+	    
+	    if( item.LeadingBid > item.ListPrice ){
+		if( amount <= item.LeadingBid ) {
+		    //the bid is above the listprice but they didn't outbid the leader so show them the leading bid
+		    bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.LeadingBid );
+		    return false;
+		}
+	    }
+	    else if( amount <= item.ListPrice ) {
+		// at this point there are theoretically no bids because leadingbid <= listprice
+		// they haven't beat the listprice so show them that as the target
+		bidder.SendMessage("Your bid must be greater than {0} gold piece(s).", item.ListPrice );
+		return false;
+	    }
+	    
 	    if( bidder.BankBox.GetAmount( typeof(Gold), true) <= amount ){
 		bidder.SendMessage("You have insufficient gold in your bank box to place this bid.");
 		return false;
 	    }
 
+	    bool ok = false;
+	    foreach( Mobile m in bidder.GetMobilesInRange( 5 ) ){
+		if( m is Auctioneer ){
+		    ok = true;
+		    break;		       
+		}
+	    }
+	    if( !ok ){
+		bidder.SendMessage("You are too far away from the Auctioneer!");
+		return false;
+	    }
+	    
+	    bidder.SendMessage("Your bid of {0} gold pieces is accepted!", amount );
 	    return true;
 	}
 
