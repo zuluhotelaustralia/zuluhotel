@@ -29,3 +29,4 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO equippable instruments
 ** TODO client support for ClassicUO or perhaps OrionUO (or even Enhanced Client)
 ** TODO fix thief and bard so they're actually useful
+** TODO steal relpor houses/multis

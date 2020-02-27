@@ -737,8 +737,8 @@ namespace Server.Engines.Craft
 	    AddSubRes( typeof( DoomIngot ), 1160329, 122, 1044268 );
 	    AddSubRes( typeof( GoddessIngot ), 1160330, 125, 1044268 );
 	    AddSubRes( typeof( NewZuluIngot ), 1160331, 129, 1044268 );
-	    AddSubRes( typeof( EbonTwilightSapphireIngot ), 1160332, 130, 1044268 );
-	    AddSubRes( typeof( DarkSableRubyIngot ), 1160333, 130, 1044268 );
+	    AddSubRes( typeof( DarkSableRubyIngot ), 1160332, 130, 1044268 );
+	    AddSubRes( typeof( EbonTwilightSapphireIngot ), 1160333, 130, 1044268 );
 	    AddSubRes( typeof( RadiantNimbusDiamondIngot ), 1160334, 140, 1044268 );
 
 	

@@ -1219,8 +1219,8 @@ namespace Server.Items
 		new CraftResourceInfo( 2772, 1160028, "Doom", CraftAttributeInfo.Doom, CraftResource.Doom, typeof( DoomIngot ), typeof( DoomOre), typeof( DoomGranite ) ),
 		new CraftResourceInfo( 2774, 1160029, "Goddess", CraftAttributeInfo.Goddess, CraftResource.Goddess, typeof( GoddessIngot ), typeof( GoddessOre), typeof( GoddessGranite ) ),
 		new CraftResourceInfo( 2749, 1160030, "New zulu", CraftAttributeInfo.NewZulu, CraftResource.NewZulu, typeof( NewZuluIngot ), typeof( NewZuluOre), typeof( NewZuluGranite ) ),
-		new CraftResourceInfo( 2760, 1160031, "Dark sable ruby", CraftAttributeInfo.DarkSableRuby, CraftResource.DarkSableRuby, typeof( DarkSableRubyIngot ), typeof( DarkSableRubyOre), typeof( DarkSableRubyGranite ) ),
-		new CraftResourceInfo( 2761, 1160032, "Ebon twilight sapphire", CraftAttributeInfo.EbonTwilightSapphire, CraftResource.EbonTwilightSapphire, typeof( EbonTwilightSapphireIngot ), typeof( EbonTwilightSapphireOre), typeof( EbonTwilightSapphireGranite ) ),
+		new CraftResourceInfo( 2761, 1160032, "Dark sable ruby", CraftAttributeInfo.DarkSableRuby, CraftResource.DarkSableRuby, typeof( DarkSableRubyIngot ), typeof( DarkSableRubyOre), typeof( DarkSableRubyGranite ) ),
+		new CraftResourceInfo( 2760, 1160031, "Ebon twilight sapphire", CraftAttributeInfo.EbonTwilightSapphire, CraftResource.EbonTwilightSapphire, typeof( EbonTwilightSapphireIngot ), typeof( EbonTwilightSapphireOre), typeof( EbonTwilightSapphireGranite ) ),
 		new CraftResourceInfo( 2765, 1160033, "Radiant nimbus diamond", CraftAttributeInfo.RadiantNimbusDiamond, CraftResource.RadiantNimbusDiamond, typeof( RadiantNimbusDiamondIngot ), typeof( RadiantNimbusDiamondOre), typeof( RadiantNimbusDiamondGranite ) ),
 	    };
 
