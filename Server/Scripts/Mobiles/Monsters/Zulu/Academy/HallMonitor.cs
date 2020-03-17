@@ -63,15 +63,10 @@ namespace Server.Mobiles
             Sandals.Hue = 1775;
             AddItem(Sandals);
 
-            Item Robe = new Robe();
+	    Item Robe = new HallMonitorSuit();
             Robe.Movable = false;
-            Robe.Hue = 1246;
-            AddItem(Robe);
-
-            Item Hood = new Hood();
-            Hood.Movable = false;
-            Hood.Hue = 1246;
-            AddItem(Hood);
+            Robe.Hue = 1255;
+            AddItem( Robe );
 
             Utility.AssignRandomHair(this);
 	}	 
