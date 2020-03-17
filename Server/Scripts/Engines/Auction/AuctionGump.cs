@@ -53,10 +53,10 @@ namespace Server.Auction{
 	    //AddButton( X, Y, UnCheckedGumpID, CheckedGumpID, StartChecked?, SwitchID ); 
 	
 	    AddPage(0);
-	    AddBackground( 0, 0, _windowX, _windowY, 9300 );
-	    AddHtml( 20, 10, 460, 100, "<h2>Auction Items for Sale</h2>", false, false );
+	    AddBackground( 0, 0, _windowX, _windowY, 9270 );//9300 );
+	    AddHtml( 20, 10, 460, 100, "<h2><basefont color='#FFFFFF'>Auction Items for Sale</basefont></h2>", false, false );
 
-	    AddImageTiled( _col1X, _footerY, 150, 22, 0 );
+	    AddImageTiled( _col1X, _footerY, 150, 22, 9354 );
 	    AddTextEntry( _col1X + 10, _footerY, 140, 50, 49, 0, "" );
 	    
 	    AddButton( _col2X, _footerY, 247, 248, (int)Buttons.BidButton, GumpButtonType.Reply, 2);
@@ -65,7 +65,7 @@ namespace Server.Auction{
 
 	    
 	    if( m_Stone.SaleItems.Count == 0 ){
-		AddHtml(_col1X, _row1Y, 460, 100, "Nothing for sale at this time.", false, false);
+		AddHtml(_col1X, _row1Y, 460, 100, "<font color='#FFFFFF'>Nothing for sale at this time.</font>", false, false);
 	    }
 	    
 	    //so for e.g. 12 items on sale, numpages() will return 2 and totalItems is 12,
@@ -112,14 +112,14 @@ namespace Server.Auction{
 	}
 
 	private void MakeBox( int x, int y, int idx, AuctionItem ai ){
-	    AddBackground( x, y, _boxsize, _boxsize, 9300 );
+	    AddBackground( x, y, _boxsize, _boxsize, 9350 );
 	    AddRadio( x, y, 208, 209, false, idx );
 	    AddItem( x + 20, y, ai.SaleItem.ItemID, ai.SaleItem.Hue );
-	    AddHtml( x, y + 20, _boxsize, 20, ai.SaleItem.Name == null ? ai.SaleItem.GetType().Name : ai.SaleItem.Name, false, false);
-	    AddHtml( x, y + 40, _boxsize, 20, "Amount: " + ai.SaleItem.Amount, false, false);
-	    AddHtml( x, y + 60, _boxsize, 20, "Bid: " + (ai.LeadingBid == 0 ? ai.ListPrice.ToString() : ai.LeadingBid.ToString()), false, false);
-	    AddHtml( x, y + 80, _boxsize, 20, "Close: " + ai.SellByDate.ToString() , false, false);
-	    AddHtml( x, y + 100, _boxsize, 20, "Time: " + ai.SellByDate.Hour.ToString() + ":" + ai.SellByDate.Minute.ToString(), false, false);
+	    AddHtml( x + 5, y + 20, _boxsize, 20, ai.SaleItem.Name == null ? ai.SaleItem.GetType().Name : ai.SaleItem.Name, false, false);
+	    AddHtml( x + 5, y + 40, _boxsize, 20, "Amount: " + ai.SaleItem.Amount, false, false);
+	    AddHtml( x + 5, y + 60, _boxsize, 20, "Bid: " + (ai.LeadingBid == 0 ? ai.ListPrice.ToString() : ai.LeadingBid.ToString()), false, false);
+	    AddHtml( x + 5, y + 80, _boxsize, 20, "Close: " + ai.SellByDate.ToString() , false, false);
+	    AddHtml( x + 5, y + 100, _boxsize, 20, "Time: " + ai.SellByDate.Hour.ToString() + ":" + ai.SellByDate.Minute.ToString(), false, false);
 	}
 	
 	public int NumPages() {
