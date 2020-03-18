@@ -12,7 +12,7 @@ namespace Server.Spells.Earth
         private static SpellInfo m_Info = new SpellInfo(
                                                         "Summon Mammals", "Chame O Mamifero Agora",
                                                         16, false,
-                                                        typeof( SerpentsScales ),
+                                                        typeof( NoxCrystal ),
                                                         typeof( PigIron ),
                                                         typeof( EyeOfNewt ));
 

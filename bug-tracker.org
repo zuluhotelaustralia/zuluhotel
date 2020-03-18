@@ -158,3 +158,10 @@ This exception is fatal, press return to exit
 * TODO some of the dungeons and stuff are missing regions
 * DONE colors or names or something are wrong for ebon twilight
 * DONE treasure hunting requires a baseharvesttool that uses the Harvest engine not Gather
+* TODO executioners caps don't stack
+* DONE "Nox Crystal" on Pagan vendor
+* DONE Earth book and codex damnorum on pagan vendor
+* DONE water bros are all black
+* TODO Dispel removes statmods but not bodymods/transformations (and probably won't end the wraith form spell)
+* DONE chargen map is all fuxored
+* TODO chargen description is blank

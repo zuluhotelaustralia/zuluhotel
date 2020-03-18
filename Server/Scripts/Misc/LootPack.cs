@@ -157,7 +157,7 @@ namespace Server
 		new LootPackItem( typeof( Pumice ), 1),
 		new LootPackItem( typeof( VialOfBlood ), 1),
 		new LootPackItem( typeof( BatWing ), 1),
-		new LootPackItem( typeof( SerpentsScales ), 1),
+		new LootPackItem( typeof( NoxCrystal ), 1),
 		new LootPackItem( typeof( EyeOfNewt ), 1),
 		new LootPackItem( typeof( PigIron ), 1),
 		new LootPackItem( typeof( DeadWood ), 1)

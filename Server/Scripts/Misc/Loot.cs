@@ -199,7 +199,7 @@ namespace Server
 		typeof( Brimstone ), typeof( Bone ), typeof( DaemonBone ), typeof( Brimstone ), typeof( DragonsBlood ),
 		typeof( VolcanicAsh ), typeof( Obsidian ), typeof( FertileDirt ), typeof( ExecutionersCap ), typeof( Bloodspawn ),
 		typeof( Blackmoor ), typeof( WyrmsHeart ), typeof( Pumice ), typeof( VialOfBlood ), typeof( BatWing ),
-		typeof( SerpentsScales ), typeof( EyeOfNewt ), typeof( PigIron ), typeof( DeadWood )
+		typeof( NoxCrystal ), typeof( EyeOfNewt ), typeof( PigIron ), typeof( DeadWood )
 	    };
 	public static Type[] PaganTypes{ get { return m_PaganTypes; } }
 	
