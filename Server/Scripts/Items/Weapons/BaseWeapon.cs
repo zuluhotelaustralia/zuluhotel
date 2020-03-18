@@ -3660,16 +3660,13 @@ namespace Server.Items
                     else
                         Attributes.WeaponDamage = 15;
 
-                    if( Core.ML )
-                    {
-                        Attributes.WeaponDamage += (int)(from.Skills.ArmsLore.Value / 20);
+		    Attributes.WeaponDamage += (int)(from.Skills.ArmsLore.Value / 20);
 
-                        if ( Attributes.WeaponDamage > 50 )
-                            Attributes.WeaponDamage = 50;
-
-                        from.CheckSkill( SkillName.ArmsLore, 0, 130 );
-                    }
-                }
+		    if ( Attributes.WeaponDamage > 50 )
+			Attributes.WeaponDamage = 50;
+		    
+		    from.CheckSkill( SkillName.ArmsLore, 0, 130 );
+		}
             }
             else if ( tool is BaseRunicTool )
             {
