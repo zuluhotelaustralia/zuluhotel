@@ -20,8 +20,9 @@ namespace Server.Mobiles
 	{
 	    public InternalBuyInfo()
 	    {
+		Add( new GenericBuyInfo( typeof( Spellbook ), 18, 10, 0xEFA, 0 ) );
+
 		if( Core.BetaTest ){
-		    Add( new GenericBuyInfo( typeof( Spellbook ), 18, 10, 0xEFA, 0 ) );
 		    Add( new GenericBuyInfo( typeof( NecromancerSpellbook ), 115, 10, 0x2253, 0 ) );
 		    Add( new GenericBuyInfo( typeof( SpellweavingBook ), 120, 10, 0x2D50, 0 ) );
 		}
@@ -44,7 +45,7 @@ namespace Server.Mobiles
 		Add( new GenericBuyInfo( typeof( EyeOfNewt ), 5, 99999, 0xF87, 0 ) );
 		Add( new GenericBuyInfo( typeof( Obsidian ), 5, 99999, 0xF89, 0 ) );
 		Add( new GenericBuyInfo( typeof( Pumice ), 5, 99999, 0xF8B, 0 ) );
-		Add( new GenericBuyInfo( typeof( SerpentsScales ), 5, 99999, 0xF8E, 0 ));
+		Add( new GenericBuyInfo( typeof( NoxCrystal ), 5, 99999, 0xF8E, 0 ));
 		Add( new GenericBuyInfo( typeof( VialOfBlood ), 5, 99999, 0xF7D, 0 ));
 		Add( new GenericBuyInfo( typeof( VolcanicAsh ), 5, 99999, 0xF8F, 0 ));
 		Add( new GenericBuyInfo( typeof( WyrmsHeart ), 5, 99999, 0xF91, 0));

@@ -22,9 +22,6 @@ namespace Server.Mobiles
 	    {
 		Add( new GenericBuyInfo( typeof( Spellbook ), 18, 10, 0xEFA, 0 ) );
 
-		if ( Core.AOS )
-		    Add( new GenericBuyInfo( typeof( NecromancerSpellbook ), 115, 10, 0x2253, 0 ) );
-
 		Add( new GenericBuyInfo( typeof( ScribesPen ), 8, 100, 0xFBF, 0 ) );
 
 		Add( new GenericBuyInfo( typeof( BlankScroll ), 5, 99999, 0x0E34, 0 ) );
@@ -50,24 +47,27 @@ namespace Server.Mobiles
 		Add( new GenericBuyInfo( typeof( Nightshade ), 3, 99999, 0xF88, 0 ) );
 		Add( new GenericBuyInfo( typeof( SpidersSilk ), 3, 99999, 0xF8D, 0 ) );
 		Add( new GenericBuyInfo( typeof( SulfurousAsh ), 3, 99999, 0xF8C, 0 ) );
-		Add( new GenericBuyInfo( typeof( BatWing ), 3, 99999, 0xF78, 0 ) );
-		Add( new GenericBuyInfo( typeof( PigIron ), 5, 99999, 0xF8A, 0 ) );
-		Add( new GenericBuyInfo( typeof( Blackmoor ), 5, 99999, 0xF79, 0 ) );
-		Add( new GenericBuyInfo( typeof( Bloodspawn ), 5, 99999, 0xF7C, 0 ) );
-		Add( new GenericBuyInfo( typeof( Brimstone ), 5, 99999, 0xF7F, 0 ) );
-		Add( new GenericBuyInfo( typeof( DaemonBone ), 5, 99999, 0xF80, 0 ) );
-		Add( new GenericBuyInfo( typeof( DragonsBlood ), 5, 99999, 0xF82, 0 ) );
-		Add( new GenericBuyInfo( typeof( EyeOfNewt ), 5, 99999, 0xF87, 0 ) );
-		Add( new GenericBuyInfo( typeof( Obsidian ), 5, 99999, 0xF89, 0 ) );
-		Add( new GenericBuyInfo( typeof( Pumice ), 5, 99999, 0xF8B, 0 ) );
-		Add( new GenericBuyInfo( typeof( SerpentsScales ), 5, 99999, 0xF8E, 0 ));
-		Add( new GenericBuyInfo( typeof( VialOfBlood ), 5, 99999, 0xF7D, 0 ));
-		Add( new GenericBuyInfo( typeof( VolcanicAsh ), 5, 99999, 0xF8F, 0 ));
-		Add( new GenericBuyInfo( typeof( WyrmsHeart ), 5, 99999, 0xF91, 0));
-		Add( new GenericBuyInfo( typeof( ExecutionersCap ), 5, 99999, 0xF83, 0 ));
-		Add( new GenericBuyInfo( typeof( Bone ), 5, 99999, 0xF7E, 0));
-		Add( new GenericBuyInfo( typeof( DeadWood ), 5, 99999, 0xF90, 0 ));
-		Add( new GenericBuyInfo( typeof( FertileDirt ), 5, 99999, 0xF81, 0 ));
+
+		if( Core.BetaTest ){
+		    Add( new GenericBuyInfo( typeof( BatWing ), 3, 99999, 0xF78, 0 ) );
+		    Add( new GenericBuyInfo( typeof( PigIron ), 5, 99999, 0xF8A, 0 ) );
+		    Add( new GenericBuyInfo( typeof( Blackmoor ), 5, 99999, 0xF79, 0 ) );
+		    Add( new GenericBuyInfo( typeof( Bloodspawn ), 5, 99999, 0xF7C, 0 ) );
+		    Add( new GenericBuyInfo( typeof( Brimstone ), 5, 99999, 0xF7F, 0 ) );
+		    Add( new GenericBuyInfo( typeof( DaemonBone ), 5, 99999, 0xF80, 0 ) );
+		    Add( new GenericBuyInfo( typeof( DragonsBlood ), 5, 99999, 0xF82, 0 ) );
+		    Add( new GenericBuyInfo( typeof( EyeOfNewt ), 5, 99999, 0xF87, 0 ) );
+		    Add( new GenericBuyInfo( typeof( Obsidian ), 5, 99999, 0xF89, 0 ) );
+		    Add( new GenericBuyInfo( typeof( Pumice ), 5, 99999, 0xF8B, 0 ) );
+		    Add( new GenericBuyInfo( typeof( NoxCrystal ), 5, 99999, 0xF8E, 0 ));
+		    Add( new GenericBuyInfo( typeof( VialOfBlood ), 5, 99999, 0xF7D, 0 ));
+		    Add( new GenericBuyInfo( typeof( VolcanicAsh ), 5, 99999, 0xF8F, 0 ));
+		    Add( new GenericBuyInfo( typeof( WyrmsHeart ), 5, 99999, 0xF91, 0));
+		    Add( new GenericBuyInfo( typeof( ExecutionersCap ), 5, 99999, 0xF83, 0 ));
+		    Add( new GenericBuyInfo( typeof( Bone ), 5, 99999, 0xF7E, 0));
+		    Add( new GenericBuyInfo( typeof( DeadWood ), 5, 99999, 0xF90, 0 ));
+		    Add( new GenericBuyInfo( typeof( FertileDirt ), 5, 99999, 0xF81, 0 ));
+		}
 
 		Type[] types = Loot.RegularScrollTypes;
 
