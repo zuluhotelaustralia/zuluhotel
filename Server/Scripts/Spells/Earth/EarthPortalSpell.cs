@@ -10,8 +10,12 @@ namespace Server.Spells.Earth
     public class EarthPortalSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Earth Portal", "Destraves Limites Da Natureza"
-                );
+							"Earth Portal", "Destraves Limites Da Natureza",
+							263, 9032,
+							Reagent.Brimstone,
+							Reagent.ExecutionersCap,
+							Reagent.EyeOfNewt
+							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
