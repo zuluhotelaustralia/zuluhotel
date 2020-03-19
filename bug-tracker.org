@@ -166,3 +166,9 @@ This exception is fatal, press return to exit
 * DONE chargen map is all fuxored
 * TODO chargen description is blank
 * DONE necro spells should not fizzle at 150 fucking magery
+* TODO earth portal does nothing?
+* DONE rising fire disabled? shapeshift casts rising fire?  are they switched in the gump?
+* TODO rising fire (casted via shapeshift) does nothing
+* DONE ice strike disabled?
+* DONE earthspirit casts polymorph (which probably is supposed to be shapeshift)
+* TODO the gump from ^ is straight fucked

@@ -115,13 +115,13 @@ namespace Server.Spells
 	    Register( 606, typeof( Earth.EarthPortalSpell ) );
 	    Register( 607, typeof( Earth.NaturesTouchSpell ) );
 	    Register( 608, typeof( Earth.GustOfAirSpell ) );
-	    Register( 610, typeof( Earth.RisingFireSpell ) );
-	    Register( 612, typeof( Earth.ShapeshiftSpell ) );
-	    Register( 613, typeof( Earth.IceStrikeSpell ) );
-	    Register( 614, typeof( Earth.EarthSpiritSpell ) );
-	    Register( 615, typeof( Earth.FireSpiritSpell ) );
-	    Register( 616, typeof( Earth.StormSpiritSpell ) );
-	    Register( 617, typeof( Earth.WaterSpiritSpell ) );
+	    Register( 609, typeof( Earth.RisingFireSpell ) );
+	    Register( 610, typeof( Earth.ShapeshiftSpell ) );
+	    Register( 611, typeof( Earth.IceStrikeSpell ) );
+	    Register( 612, typeof( Earth.EarthSpiritSpell ) );
+	    Register( 613, typeof( Earth.FireSpiritSpell ) );
+	    Register( 614, typeof( Earth.StormSpiritSpell ) );
+	    Register( 615, typeof( Earth.WaterSpiritSpell ) );
 
 	}
 
