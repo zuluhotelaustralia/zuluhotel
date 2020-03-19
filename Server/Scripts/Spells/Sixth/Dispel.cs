@@ -78,7 +78,19 @@ namespace Server.Spells.Sixth
 			if( !m_Owner.CheckResisted(m) || from == m ) {
 			    //if the buff is applied by SpellHelper it prepends "[Magic]" to the statmod's name
 			    // so we can hopefully safely assume this is a magic buff and not e.g. a ring of +25 dex
-			    
+
+			    if( m.IsBodyMod || m.HueMod != -1 || !(m.NameMod == null) ){
+				m.BodyMod = 0;
+				m.HueMod = -1;
+				m.NameMod = null;
+
+				m.EndAction( typeof( Spells.Necromancy.WraithFormSpell ) );
+				m.EndAction( typeof( Spells.Necromancy.LicheFormSpell ) );
+				m.EndAction( typeof( Spells.Seventh.PolymorphSpell ) );
+				m.EndAction( typeof( Spells.Earth.ShapeshiftSpell ) );
+				m.EndAction( typeof( Spells.Fifth.IncognitoSpell ) );
+			    }				
+				
 			    if( m.StatMods != null ){
 				foreach( StatMod mod in m.StatMods.ToArray() ){
 				    if( mod.Name.Contains("magic", StringComparison.OrdinalIgnoreCase ) ) {
