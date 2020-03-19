@@ -42,6 +42,10 @@ namespace Server.Spells.Necromancy
 	{
 	    min = RequiredSkill;
 	    max = Scroll != null ? min : RequiredSkill + 40.0;
+
+	    if( max > 150 ){
+		max = 150;
+	    }
 	}
 
 	public override bool ConsumeReagents()

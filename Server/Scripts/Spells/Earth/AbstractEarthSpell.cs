@@ -25,7 +25,11 @@ namespace Server.Spells.Earth
         public override void GetCastSkills( out double min, out double max ) {
             // TODO: Pick a good max skill value
             min = RequiredSkill;
-            max = RequiredSkill + 30;
+            max = RequiredSkill + 40;
+
+	    if( max > 150 ){
+		max = 150;
+	    }
         }
     }
 }

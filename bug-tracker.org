@@ -170,5 +170,6 @@ This exception is fatal, press return to exit
 * DONE rising fire disabled? shapeshift casts rising fire?  are they switched in the gump?
 * TODO rising fire (casted via shapeshift) does nothing
 * DONE ice strike disabled?
-* DONE earthspirit casts polymorph (which probably is supposed to be shapeshift)
-* TODO the gump from ^ is straight fucked
+* DONE earthspirit casts shapeshift (which probably is supposed to be shapeshift)
+* TODO the gump from shapeshift is straight fucked and the spell doesn't actually polymorph you
+* TODO earth portal does nothing (longer-duration green gate?)
