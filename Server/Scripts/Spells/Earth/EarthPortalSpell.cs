@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Mobiles;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
@@ -14,8 +15,8 @@ namespace Server.Spells.Earth
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 0.0; } }
-        public override int RequiredMana{ get{ return 0; } }
+        public override double RequiredSkill{ get{ return 80.0; } }
+        public override int RequiredMana{ get{ return 10; } }
 
         public EarthPortalSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
         {
@@ -23,7 +24,42 @@ namespace Server.Spells.Earth
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
+	    // don't bother with the rest of this shit if the seq is bad
+            if( CheckSequence() ){
+		if( Caster is PlayerMobile ){
+		    Point3D origin = new Point3D( 0, 0, 0 );
+		    PlayerMobile pmCaster = Caster as PlayerMobile;
+
+		    // they don't have a stored recall location, so set one.
+		    if( pmCaster.EarthPortalLocation == origin ){
+			if( SpellHelper.CheckTravel( pmCaster, TravelCheckType.Mark ) ){
+			    pmCaster.EarthPortalLocation = new Point3D( pmCaster.X, pmCaster.Y, pmCaster.Z );
+			    Caster.PlaySound( 0x1FA );
+			    Effects.SendLocationEffect( Caster, Caster.Map, 14201, 16 );
+			    Caster.SendMessage("The spirits of the land agree to assist you, and you feel their minds touch your own.");
+			}
+			else{
+			    Caster.SendMessage("The spirits of the land do not answer your call.");
+			}
+		    }
+		    else{
+			//if we're here then Mobile.EarthPortalLocation must be non-null, so
+			if( SpellHelper.CheckTravel( pmCaster, TravelCheckType.RecallFrom ) && Caster.Map == Map.Felucca ){
+			    BaseCreature.TeleportPets( Caster, pmCaster.EarthPortalLocation, Caster.Map, true );
+			    Caster.PlaySound( 0x1FC );
+			    Caster.MoveToWorld( pmCaster.EarthPortalLocation, Caster.Map );
+			    Caster.PlaySound( 0x1FC );
+			    Caster.SendMessage("You thank the spirits of the land for their assistance, and you no longer feel their touch on your mind.");
+			    pmCaster.EarthPortalLocation = origin;
+			}
+			else{
+			    Caster.SendMessage("The spirits of the land do not answer your call.");
+			}
+		    }
+		}
+	    }
+	    
+	    FinishSequence();
         }
 
         public void Target( Mobile m )

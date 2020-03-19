@@ -768,7 +768,7 @@ namespace Server.Spells
 	    }
 	    else if ( m_Caster.Mana < mana )
 	    {
-		m_Caster.LocalOverheadMessage( MessageType.Regular, 0x22, 502625 ); // Insufficient mana for this spell.
+		m_Caster.LocalOverheadMessage( MessageType.Regular, 0x22, 502625, mana.ToString() ); // Insufficient mana for this spell.
 	    }
 	    else if ( Core.AOS && (m_Caster.Frozen || m_Caster.Paralyzed) )
 	    {
