@@ -632,9 +632,10 @@ namespace Server.Spells
 
 	    GetCastSkills( out minSkill, out maxSkill );
 
-	    if ( DamageSkill != CastSkill )
+	    if ( DamageSkill != CastSkill ) {
 		Caster.CheckSkill( DamageSkill, 0.0, Caster.Skills[ DamageSkill ].Cap );
-
+	    }
+	     
 	    return Caster.CheckSkill( CastSkill, minSkill, maxSkill );
 	}
 

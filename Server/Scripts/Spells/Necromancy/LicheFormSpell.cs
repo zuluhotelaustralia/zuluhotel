@@ -18,7 +18,7 @@ namespace Server.Spells.Necromancy
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
 
-        public override double RequiredSkill{ get{ return 140.0; } }
+        public override double RequiredSkill{ get{ return 120.0; } }
         public override int RequiredMana{ get{ return 130; } }
 
         public LicheFormSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
@@ -78,8 +78,8 @@ namespace Server.Spells.Necromancy
 	    Caster.PlaySound(0x202);
 	    
 	    //polymorph calls these... do we need to? --sith
-	    // BaseArmor.ValidateMobile( Caster );
-	    // BaseClothing.ValidateMobile( Caster );
+	    BaseArmor.ValidateMobile( Caster );
+	    BaseClothing.ValidateMobile( Caster );
 	    
             new InternalTimer( Caster ).Start();
 

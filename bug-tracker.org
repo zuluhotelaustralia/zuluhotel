@@ -165,3 +165,4 @@ This exception is fatal, press return to exit
 * TODO Dispel removes statmods but not bodymods/transformations (and probably won't end the wraith form spell)
 * DONE chargen map is all fuxored
 * TODO chargen description is blank
+* DONE necro spells should not fizzle at 150 fucking magery
