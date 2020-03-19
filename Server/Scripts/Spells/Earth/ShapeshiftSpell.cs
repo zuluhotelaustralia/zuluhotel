@@ -85,6 +85,11 @@ namespace Server.Spells.Earth
 		Caster.SendLocalizedMessage( 1061633 ); // You cannot polymorph while in that form.
 		return false;
 	    }
+	    else if ( !Caster.CanBeginAction( typeof( ShapeshiftSpell ) ) )
+	    {
+		Caster.SendLocalizedMessage( 1005559 ); // This spell is already in effect.
+		return false;
+	    }
 	    else if ( DisguiseTimers.IsDisguised( Caster ) )
 	    {
 		Caster.SendLocalizedMessage( 502167 ); // You cannot polymorph while disguised.
@@ -115,7 +120,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-	    if ( Caster.CanBeginAction( typeof( ShapeshiftSpell ) ) )
+	    if ( Caster.BeginAction( typeof( ShapeshiftSpell ) ) )
 	    {
 		if ( m_NewBody != null )
 		{
