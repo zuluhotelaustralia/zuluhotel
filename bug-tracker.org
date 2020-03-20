@@ -172,3 +172,4 @@ This exception is fatal, press return to exit
 * DONE earthspirit casts shapeshift (which probably is supposed to be shapeshift)
 * DONE the gump from shapeshift is straight fucked and the spell doesn't actually polymorph you
 * DONE earth portal does nothing (longer-duration green gate?)
+* TODO some caves near the grave yard/thamasa that aren't hooked up

@@ -18,6 +18,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO baseweapon should scale durability based on craftresource
 ** TODO bosses for dungeons that aren't necessarily champions
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
+** TODO write a command to save out all the fucking spawners
 * TODO Items to work on after the initial dust settles [2/14]
   :properties:
   :cookie_data: todo_recursive
