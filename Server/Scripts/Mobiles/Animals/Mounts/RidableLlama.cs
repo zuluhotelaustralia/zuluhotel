@@ -7,7 +7,7 @@ namespace Server.Mobiles
 	public class RidableLlama : BaseMount
 	{
 		[Constructable]
-		public RidableLlama() : this( "a ridable llama" )
+		public RidableLlama() : this( "a llama" )
 		{
 		}
 
