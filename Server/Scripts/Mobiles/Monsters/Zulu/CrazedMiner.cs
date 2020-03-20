@@ -47,7 +47,7 @@ namespace Server.Mobiles
         {
             SpeechHue = Utility.RandomDyedHue();
             Name = "a crazed miner";
-            Hue = 2155;
+            Hue = Utility.RandomSkinHue();
 
             if (this.Female = Utility.RandomBool())
             {
@@ -58,29 +58,30 @@ namespace Server.Mobiles
                 this.Body = 0x190;
             }
 
+	    int clothinghue = Utility.RandomDyedHue();
+	    
             Item shirt = new Shirt();
             shirt.Movable = false;
-            shirt.Hue = 2155;
+            shirt.Hue = clothinghue;
             AddItem(shirt);
 
             Item shortpants = new ShortPants();
             shortpants.Movable = false;
-            shortpants.Hue = 2155;
+            shortpants.Hue = clothinghue;
             AddItem(shortpants);
 
             Item pickaxe = new Pickaxe();
             pickaxe.Movable = false;
-            pickaxe.Hue = 2155;
-            AddItem(pickaxe);
+	    AddItem(pickaxe);
 
             Item leathergloves = new LeatherGloves();
             leathergloves.Movable = false;
-            leathergloves.Hue = 2155;
+            leathergloves.Hue = clothinghue;
             AddItem(leathergloves);
 
             Item halfapron = new HalfApron();
             halfapron.Movable = false;
-            halfapron.Hue = 2155;
+            halfapron.Hue = clothinghue;
             AddItem(halfapron);
 
             Utility.AssignRandomHair(this, 2155);

@@ -10,7 +10,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
   :cookie_data: todo_recursive
   :end:
 ** TODO "instahit"
-** TODO make an object that drops only in chicane that summons a red moongate on the pentagram that leads to the boss room.  make that item only drop once every 8 hours on the miniboss.
+** TODO make an object that drops only in chicane that summons a red moongate on the pentagram that leads to the boss room.  make that item only drop once every 8 hours on the miniboss.  Do same for Doom.  Golden dragon spawns there with backup.
 ** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.

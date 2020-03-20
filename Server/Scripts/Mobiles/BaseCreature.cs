@@ -4972,7 +4972,7 @@ namespace Server.Mobiles
 		    c.Delete();
 		}
 		else {
-		    if( Core.BetaTest == true && Utility.RandomDouble() >= 0.9) {
+		    if( Utility.RandomDouble() >= 0.9) {
 			
 			c.AddItem( new InviteStone() );
 		    }
