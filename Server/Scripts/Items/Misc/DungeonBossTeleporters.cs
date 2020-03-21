@@ -50,6 +50,12 @@ namespace Server.Items {
 	    this.Delete();
 	    Moongate gate = new Moongate();
 	    gate.TargetMap = Map.Felucca;
+	    gate.Target = _tgt;
+	    gate.Hue = 2748;
+	    gate.Name = "a dark moongate";
+	    gate.MoveToWorld( _loc, Map.Felucca);
+
+	    new BossStoneTimer( gate ).Start();
 	    
 	    //send message to everyone in the dungeon here about a dragon roaring or smth
 	}
@@ -58,7 +64,7 @@ namespace Server.Items {
     public class BossStoneTimer : Timer {
 	private Moongate _gate;
 
-	public InternalTimer( Moongate gate ) : base( TimeSpan.FromMinutes( 5 ) )
+	public BossStoneTimer( Moongate gate ) : base( TimeSpan.FromMinutes( 5 ) )
 	{
 	    _gate = gate;
 	}
