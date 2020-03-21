@@ -14,7 +14,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
 ** TODO balron (make them stronger or else make an elder balron)
-
+** TODO tmaps
 ** TODO bosses for dungeons that aren't necessarily champions
 * TODO Items to work on after the initial dust settles [0/9]
 :properties:
