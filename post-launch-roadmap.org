@@ -5,7 +5,7 @@ Bug tracker: [[file:bug-tracker.org][click here]]
 Pre-launch roadmap (has useful info): [[file:obstacles-preventing-beta-test.org][click here]]
 Ideas for achievements: [[file:achievements.org][click here]]
 
-* TODO Items to tackle immediately after a "1.0" launch [0/9]
+* TODO Items to tackle immediately after a "1.0" launch [1/11]
   :properties:
   :cookie_data: todo_recursive
   :end:
@@ -15,6 +15,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
 ** TODO balron (make them stronger or else make an elder balron)
+** DONE tmaps
 ** TODO baseweapon should scale durability based on craftresource
 ** TODO bosses for dungeons that aren't necessarily champions
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
