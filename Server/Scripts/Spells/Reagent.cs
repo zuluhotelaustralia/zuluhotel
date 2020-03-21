@@ -27,7 +27,7 @@ namespace Server.Spells
 		typeof( EyeOfNewt ),
 		typeof( Obsidian ),
 		typeof( Pumice ),
-		typeof( SerpentsScales ),
+		typeof( NoxCrystal ),
 		typeof( VialOfBlood ),
 		typeof( VolcanicAsh ),
 		typeof( WyrmsHeart ),

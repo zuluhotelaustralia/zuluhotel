@@ -3,10 +3,10 @@
 
 This is a list of bugs.
 * DONE "You need ~MANA REQUIREMENT~ mana to cast this spell"
-** I.e. the fucking cliloc message is displayed without substitution
+  I.e. the fucking cliloc message is displayed without substitution
 * DONE gather nodes won't drift into the dungeon regions but they should
 * DONE items (weapons) not displaying name properly (looted magic weapons)
-  IS THIS STILL A BUG AS OF VERSION 19.12?
+  IS THIS STILL A BUG AS OF VERSION 19.12? (no)
 * DONE weapons not taking material properly
 * DONE wraith form still ticks after you die
 * DONE wraith form takes forever to tick
@@ -149,9 +149,26 @@ This exception is fatal, press return to exit
 * DONE missing regions when loading regions.xml (dummy classes)
 * DONE rename e.g. Pedran to "New Britain" and other shit.
 * DONE change in map means drifting gathernodes logic is no longer valid (bounds 2500,2500 ?)
-* TODO can't use ankhs because no context menu
-* TODO Hood item from RP isn't showing properly on paperdoll (gumpart.mul?)
-* TODO unconfirmed but probably tmaps won't work.  Gotta copy those over in gumpart.mul or whatever.  
+* DONE can't use ankhs because no context menu
+  FUCK IT I PUT IN RES GATES I HATE STATICS-RELATED ISSUES FUCKING SHIT
+* DONE Hood item from RP isn't showing properly on paperdoll (gumpart.mul?)
+* DONE unconfirmed but probably tmaps won't work.  Gotta copy those over in gumpart.mul or whatever.  
 * TODO some of the dungeons and stuff are missing regions
 * DONE colors or names or something are wrong for ebon twilight
 * TODO increase range on spears/polearms
+* DONE treasure hunting requires a baseharvesttool that uses the Harvest engine not Gather
+* DONE executioners caps don't stack
+* DONE "Nox Crystal" on Pagan vendor
+* DONE Earth book and codex damnorum on pagan vendor
+* DONE water bros are all black
+* DONE Dispel removes statmods but not bodymods/transformations (and probably won't end the wraith form spell)
+* DONE chargen map is all fuxored
+* DONE chargen description is blank
+* DONE necro spells should not fizzle at 150 fucking magery
+* DONE rising fire disabled? shapeshift casts rising fire?  are they switched in the gump?
+* DONE rising fire (casted via shapeshift) does nothing
+* DONE ice strike disabled?
+* DONE earthspirit casts shapeshift (which probably is supposed to be shapeshift)
+* DONE the gump from shapeshift is straight fucked and the spell doesn't actually polymorph you
+* DONE earth portal does nothing (longer-duration green gate?)
+* TODO some caves near the grave yard/thamasa that aren't hooked up

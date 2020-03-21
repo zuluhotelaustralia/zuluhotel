@@ -124,7 +124,7 @@ namespace Server
 	{
 	    private Mobile m_Owner;
 
-	    public OwlSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes(  Utility.Random( 30, 60 )))
+	    public OwlSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes(  Utility.Random( 60, 90 )))
 	    {
 		m_Owner = owner;
 		Priority = TimerPriority.OneMinute;

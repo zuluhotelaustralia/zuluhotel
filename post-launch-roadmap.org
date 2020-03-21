@@ -5,21 +5,25 @@ Bug tracker: [[file:bug-tracker.org][click here]]
 Pre-launch roadmap (has useful info): [[file:obstacles-preventing-beta-test.org][click here]]
 Ideas for achievements: [[file:achievements.org][click here]]
 
-* TODO Items to tackle immediately after a "1.0" launch [0/6]
-:properties:
-:cookie_data: todo_recursive
-:end:
+* TODO Items to tackle immediately after a "1.0" launch [1/11]
+  :properties:
+  :cookie_data: todo_recursive
+  :end:
 ** TODO "instahit"
+** TODO make an object that drops only in chicane that summons a red moongate on the pentagram that leads to the boss room.  make that item only drop once every 8 hours on the miniboss.
 ** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
 ** TODO balron (make them stronger or else make an elder balron)
-** TODO tmaps
+** DONE tmaps
+** TODO baseweapon should scale durability based on craftresource
 ** TODO bosses for dungeons that aren't necessarily champions
-* TODO Items to work on after the initial dust settles [0/9]
-:properties:
-:cookie_data: todo_recursive
-:end:
+** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
+** TODO write a command to save out all the fucking spawners
+* TODO Items to work on after the initial dust settles [2/14]
+  :properties:
+  :cookie_data: todo_recursive
+  :end:
 ** TODO custom houses from AOS (and new multis)
 ** TODO smooth boat movement from high seas
 ** TODO better bosses
@@ -30,3 +34,10 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO client support for ClassicUO or perhaps OrionUO (or even Enhanced Client)
 ** TODO fix thief and bard so they're actually useful
 ** TODO steal relpor houses/multis
+** TODO anti corruption code [2/3]
+   :properties:
+   :cookie_data: todo recursive
+   :end:
+*** DONE log items created by staff
+*** DONE log edits done to characters by staff
+*** TODO publish logs automagically

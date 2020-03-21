@@ -78,8 +78,8 @@ namespace Server.Spells.Necromancy
 	    Caster.PlaySound(0x202);
 	    
 	    //polymorph calls these... do we need to? --sith
-	    // BaseArmor.ValidateMobile( Caster );
-	    // BaseClothing.ValidateMobile( Caster );
+	    BaseArmor.ValidateMobile( Caster );
+	    BaseClothing.ValidateMobile( Caster );
 	    
             new InternalTimer( Caster ).Start();
 

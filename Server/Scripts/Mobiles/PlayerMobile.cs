@@ -160,7 +160,13 @@ namespace Server.Mobiles
 	private DesignContext m_DesignContext;
 
 	private Spec m_Spec;
+	private Point3D m_EarthPortalLocation;
 
+	public Point3D EarthPortalLocation{
+	    get { return m_EarthPortalLocation; }
+	    set { m_EarthPortalLocation = value; }
+	}
+	
 	private NpcGuild m_NpcGuild;
 	private DateTime m_NpcGuildJoinTime;
 	private DateTime m_NextBODTurnInTime;
@@ -3014,7 +3020,7 @@ namespace Server.Mobiles
 	public PlayerMobile()
 	{
 	    m_Spec = new Spec(this);
-
+	    m_EarthPortalLocation = new Point3D(0, 0, 0);
 	    m_AutoStabled = new List<Mobile>();
 
 	    m_VisList = new List<Mobile>();
@@ -3266,6 +3272,11 @@ namespace Server.Mobiles
 
 	    switch ( version )
 	    {
+		case 31:
+		    {
+			m_EarthPortalLocation = reader.ReadPoint3D();
+			goto case 30;
+		    }
 		case 30:
 		    {
 			m_Spec = new Spec(this);
@@ -3585,8 +3596,10 @@ namespace Server.Mobiles
 
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 30 ); // version
+	    writer.Write( (int) 31 ); // version
 
+	    writer.Write( m_EarthPortalLocation );
+		
 	    if (m_StuckMenuUses != null)
 	    {
 		writer.Write(true);

@@ -12,7 +12,7 @@ namespace Server.Spells.Earth
         private static SpellInfo m_Info = new SpellInfo(
 							"Water Spirit", "Chame O Agua Elemental",
 							269, 9010,
-							Reagent.WyrmsHeart, Reagent.SerpentsScales, Reagent.EyeOfNewt
+							Reagent.WyrmsHeart, Reagent.NoxCrystal, Reagent.EyeOfNewt
 							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }

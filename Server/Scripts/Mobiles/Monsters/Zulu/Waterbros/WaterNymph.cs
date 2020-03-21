@@ -21,7 +21,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a water nymph";
-            Hue = 2147;
+            Hue = 2759;
 
             this.Female = true;
 

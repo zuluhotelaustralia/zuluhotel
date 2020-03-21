@@ -680,16 +680,6 @@ namespace Server.Spells
 		return false;
 	    }
 
-	    //TODO remove this at end of beta
-	    if( Core.BetaTest ){
-		if( type == TravelCheckType.Mark || type == TravelCheckType.GateFrom || type == TravelCheckType.RecallFrom ){
-		    if( caster.Region.IsPartOf( typeof( Regions.BattleRoyaleRegion ) ) || caster.Region.IsPartOf( typeof( Factions.StrongholdRegion ) ) ){
-			SendInvalidMessage(caster, type);
-			return false;
-		    }
-		}
-	    }
-
 	    if( caster != null && caster.AccessLevel == AccessLevel.Player && caster.Region.IsPartOf( typeof( Regions.Jail ) ) )
 	    {
 		caster.SendLocalizedMessage( 1114345 ); // You'll need a better jailbreak plan than that!
