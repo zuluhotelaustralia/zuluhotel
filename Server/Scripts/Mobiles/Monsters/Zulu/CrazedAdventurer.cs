@@ -94,6 +94,7 @@ namespace Server.Mobiles
                     {
                         AddItem(new Crossbow());
                         PackItem(new CrossbowBolts(50));
+			this.AI = AIType.AI_Archer;
                     }
 		    break;
 
