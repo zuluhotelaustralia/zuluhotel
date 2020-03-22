@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
+using Server.Items;
+
 namespace Server.Mobiles
 {
     public class Librarian : BaseCreature
     {
 	[Constructable]
-	public Librarian() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public Librarian() : base( AIType.AI_Mage, FightMode.Weakest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a librarian";
             Hue = 0x5E1;
@@ -54,6 +56,10 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.LesserNecroScrolls, 2 );
 	    AddLoot( LootPack.GreaterNecroScrolls, 4 );
 	    AddLoot( LootPack.NecroBookPack );
+
+	    if( Utility.RandomDouble() >= 0.9 ){
+		PackItem( new ChicaneBossStone() );
+	    }
         } 
 
 	public override bool CanRummageCorpses{ get{ return true; } }

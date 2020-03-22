@@ -5,19 +5,18 @@ Bug tracker: [[file:bug-tracker.org][click here]]
 Pre-launch roadmap (has useful info): [[file:obstacles-preventing-beta-test.org][click here]]
 Ideas for achievements: [[file:achievements.org][click here]]
 
-* TODO Items to tackle immediately after a "1.0" launch [1/11]
+* TODO Items to tackle immediately after a "1.0" launch [3/10]
   :properties:
   :cookie_data: todo_recursive
   :end:
 ** TODO "instahit"
-** TODO make an object that drops only in chicane that summons a red moongate on the pentagram that leads to the boss room.  make that item only drop once every 8 hours on the miniboss.  Do same for Doom.  Golden dragon spawns there with backup.
+** DONE make an object that drops only in chicane that summons a red moongate on the pentagram that leads to the boss room.  make that item only drop once every 8 hours on the miniboss.  Do same for Doom.  Golden dragon spawns there with backup.
 ** TODO ensure only spec crafters can work with and mine the jewels
 ** TODO looted slayers can have their essences extracted by e.g. scribes who then take the essence to a crafter who can put it into a weapon
 ** TODO change it so that you can choose to search for a particular ore, and not just strike a list randomly.
-** TODO balron (make them stronger or else make an elder balron)
 ** DONE tmaps
 ** TODO baseweapon should scale durability based on craftresource
-** TODO bosses for dungeons that aren't necessarily champions
+** DONE bosses for dungeons that aren't necessarily champions
 ** TODO set e.g. gauntlet or something as easy to gather but hard to work with and produce good results for bows or whatever
 ** TODO write a command to save out all the fucking spawners
 * TODO Items to work on after the initial dust settles [2/14]
@@ -33,7 +32,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
 ** TODO equippable instruments
 ** TODO client support for ClassicUO or perhaps OrionUO (or even Enhanced Client)
 ** TODO fix thief and bard so they're actually useful
-** TODO steal relpor houses/multis
+** TODO new houses/multis
 ** TODO anti corruption code [2/3]
    :properties:
    :cookie_data: todo recursive

@@ -97,17 +97,17 @@ namespace Server
 
 	public static readonly LootPackItem[] LowSkillMods = new LootPackItem[]
 	    {
-		new LootPackItem( typeof( MagicClothingDummyType ), 1, 5 )
+		new LootPackItem( typeof( MagicClothingDummyType ), 1, 1 )
 	    };
 
 	public static readonly LootPackItem[] MedSkillMods = new LootPackItem[]
 	    {
-		new LootPackItem( typeof( MagicClothingDummyType ), 1, 10 )
+		new LootPackItem( typeof( MagicClothingDummyType ), 1, 4 )
 	    };
 	
 	public static readonly LootPackItem[] HighSkillMods = new LootPackItem[]
 	    {
-		new LootPackItem( typeof( MagicClothingDummyType ), 1, 20 )
+		new LootPackItem( typeof( MagicClothingDummyType ), 1, 6 )
 	    };
 	
 	public static readonly LootPackItem[] SurveyTool = new LootPackItem[]
