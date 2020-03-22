@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class Puddle : BaseCreature
     {
 	[Constructable]
-	public Puddle() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public Puddle() : base( AIType.AI_Berserk, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a water puddle";
 	    Body = 51;

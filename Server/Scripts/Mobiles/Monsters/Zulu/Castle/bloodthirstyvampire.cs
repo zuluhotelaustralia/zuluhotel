@@ -9,7 +9,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public BloodthirstyVampire()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Berserk, FightMode.Closest, 10, 1, 0.1, 0.4)
         {
             Name = "a bloodthirsty vampire";
             Body = Utility.RandomBool() ? 0x190 : 0x191;

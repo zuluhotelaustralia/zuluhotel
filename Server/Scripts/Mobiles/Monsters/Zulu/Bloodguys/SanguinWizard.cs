@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class SanguinWizard : BaseCreature 
     { 
 	[Constructable] 
-	public SanguinWizard() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
+	public SanguinWizard() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
 	{ 
 	    Name = "Sanguin Wizard";
 	    Body = 0x190;

@@ -21,7 +21,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public CrazedAdventurer()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             SpeechHue = Utility.RandomDyedHue();
             Name = "a crazed adventurer";

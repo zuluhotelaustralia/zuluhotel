@@ -9,7 +9,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public CastleButcher()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Berserk, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             int random = Utility.Random(2);
 

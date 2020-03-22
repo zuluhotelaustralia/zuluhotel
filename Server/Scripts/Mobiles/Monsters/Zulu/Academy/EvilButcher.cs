@@ -8,7 +8,7 @@ namespace Server.Mobiles
     public class EvilButcher : BaseCreature
     {
         [Constructable] 
-	public EvilButcher() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
+	public EvilButcher() : base( AIType.AI_Berserk, FightMode.Closest, 10, 1, 0.1, 0.4 ) 
 	{
             int random = Utility.Random(2);
 

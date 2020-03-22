@@ -8,7 +8,7 @@ namespace Server.Mobiles
     public class GargoyleElder : BaseCreature
     {
 	[Constructable]
-	public GargoyleElder () : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public GargoyleElder () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.3, 0.6 )
 	{
 	    Name = "an elder gargoyle";
 	    Body = 40;

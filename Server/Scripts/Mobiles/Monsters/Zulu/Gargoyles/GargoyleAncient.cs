@@ -9,7 +9,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public GargoyleAncient()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Weakest, 10, 1, 0.2, 0.4)
         {
             Name = "an ancient gargoyle";
             Body = 722;

@@ -8,7 +8,7 @@ namespace Server.Mobiles
     public class OphidianQueen : BaseCreature
     {
 	[Constructable]
-	public OphidianQueen() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public OphidianQueen() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "an ophidian matriarch";
 	    Body = 87;

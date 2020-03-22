@@ -8,7 +8,7 @@ namespace Server.Mobiles
     public class WaterWyrm : BaseCreature
     {
 	[Constructable]
-	public WaterWyrm () : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public WaterWyrm () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Body = (Utility.Random(1,2)==1) ? 180 :  49;
 	    Name = "a water wyrm";

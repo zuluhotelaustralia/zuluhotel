@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class SanguinHealer : BaseCreature 
     { 
 	[Constructable] 
-	public SanguinHealer() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
+	public SanguinHealer() : base( AIType.AI_Healer, FightMode.Weakest, 10, 1, 0.1, 0.4 ) 
 	{ 
 	    Name = "Sanguin Healer";
 	    Body = 0x190;

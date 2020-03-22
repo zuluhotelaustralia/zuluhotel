@@ -12,7 +12,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public SanguinScout()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Archer, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             SpeechHue = Utility.RandomDyedHue();
             Name = "Sanguin Scout";

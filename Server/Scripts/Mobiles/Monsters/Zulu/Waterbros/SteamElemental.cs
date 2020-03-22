@@ -11,7 +11,7 @@ namespace Server.Mobiles
 	public override double DispelFocus{ get{ return 45.0; } }
 
 	[Constructable]
-	public SteamElemental () : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public SteamElemental () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.1, 0.4 )
 	{
 	    Name = "a steam elemental";
 	    Body = 13;

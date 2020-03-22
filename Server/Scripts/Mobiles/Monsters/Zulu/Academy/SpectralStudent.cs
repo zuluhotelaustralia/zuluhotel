@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class SpectralStudent : BaseCreature
     {
         [Constructable]
-	public SpectralStudent() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public SpectralStudent() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = Utility.Random(2) == 0 ? "a spectral apprentice" : "a spectral student";
 	    Body = 26;

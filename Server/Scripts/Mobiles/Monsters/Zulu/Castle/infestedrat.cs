@@ -8,7 +8,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public InfestedRat()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Animal, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "an infested rat";
             Body = 0xD7;
@@ -41,7 +41,7 @@ namespace Server.Mobiles
         }
 
         public override Poison PoisonImmune { get { return Poison.Regular; } }
-        public override Poison HitPoison { get { return Poison.Lesser; } }
+        public override Poison HitPoison { get { return Poison.Regular; } }
 
         public override void GenerateLoot()
         {

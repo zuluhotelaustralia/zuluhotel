@@ -10,7 +10,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public BridgeMage()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "Bridge Mage";
             Body = 0x190;

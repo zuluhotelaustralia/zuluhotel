@@ -12,7 +12,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public SanguinAssassin()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Weakest, 10, 1, 0.1, 0.4)
         {
             SpeechHue = Utility.RandomDyedHue();
             Name = "Sanguin Assassin";
@@ -107,6 +107,8 @@ namespace Server.Mobiles
 	}
 
         public override bool AlwaysMurderer { get { return true; } }
+	public override Poison PoisonImmune{ get{ return Poison.Deadly; } }
+	public override Poison HitPoison{ get{ return Poison.Deadly; } }
 
         public SanguinAssassin(Serial serial)
             : base(serial)

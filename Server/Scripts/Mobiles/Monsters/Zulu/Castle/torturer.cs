@@ -14,7 +14,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public Torturer()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Berserk, FightMode.Weakest, 10, 1, 0.1, 0.4)
         {
             Body = 0x190;
             Name = "Castle Torturer";

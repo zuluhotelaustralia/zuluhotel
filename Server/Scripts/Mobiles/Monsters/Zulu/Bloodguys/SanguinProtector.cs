@@ -13,7 +13,7 @@ namespace Server.Mobiles
 	public override bool ShowFameTitle{ get{ return false; } }
 
 	[Constructable]
-	public SanguinProtector(): base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public SanguinProtector(): base( AIType.AI_Berserk, FightMode.Weakest, 10, 1, 0.1, 0.3 )
 	{
 	    Body = 0x190;
 	    Name = "Protector of Sanguin";

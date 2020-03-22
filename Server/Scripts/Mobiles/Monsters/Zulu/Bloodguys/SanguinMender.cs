@@ -10,7 +10,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public SanguinMender()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Healer, FightMode.Weakest, 10, 1, 0.2, 0.4)
         {
             Name = "Sanguin Mender";
             Body = 0x190;

@@ -16,7 +16,7 @@ namespace Server.Mobiles
 	    };
 
 	[Constructable]
-	public OphidianDestroyer() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public OphidianDestroyer() : base( AIType.AI_Berserk, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = m_Names[Utility.Random( m_Names.Length )];
 	    Body = 86;

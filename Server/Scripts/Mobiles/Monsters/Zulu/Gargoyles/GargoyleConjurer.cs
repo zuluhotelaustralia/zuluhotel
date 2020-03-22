@@ -7,7 +7,7 @@ namespace Server.Mobiles
     public class GargoyleConjurer : BaseCreature
     {
 	[Constructable]
-	public GargoyleConjurer() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public GargoyleConjurer() : base( AIType.AI_Mage, FightMode.Strongest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a gargoyle conjurer";
 	    Body = 0x2F3;

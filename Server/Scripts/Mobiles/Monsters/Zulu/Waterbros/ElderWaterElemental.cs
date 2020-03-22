@@ -11,7 +11,7 @@ namespace Server.Mobiles
 	public override double DispelFocus{ get{ return 45.0; } }
 
 	[Constructable]
-	public ElderWaterElemental () : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public ElderWaterElemental () : base( AIType.AI_Mage FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "an elder water elemental";
 	    Body = 16;

@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class EvilMageRobed : BaseCreature 
     { 
 	[Constructable] 
-	public EvilMageRobed() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
+	public EvilMageRobed() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
 	{ 
 	    Name = NameList.RandomName( "evil mage" );
 	    Title = "the evil mage";

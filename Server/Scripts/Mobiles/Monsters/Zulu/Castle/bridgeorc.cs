@@ -14,7 +14,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public BridgeOrcCaptain()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
 
 

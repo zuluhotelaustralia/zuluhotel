@@ -18,7 +18,7 @@ namespace Server.Mobiles
         }
 
         [Constructable]
-	public HallMonitor() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public HallMonitor() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a hall monitor";
             Title = string.Empty;

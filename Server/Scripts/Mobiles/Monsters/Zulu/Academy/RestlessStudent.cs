@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class RestlessStudent : BaseCreature
     {
         [Constructable]
-	public RestlessStudent() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public RestlessStudent() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = Utility.Random(2) == 0 ? "a restless student" : "a restless apprentice";
 	    Body = 148;

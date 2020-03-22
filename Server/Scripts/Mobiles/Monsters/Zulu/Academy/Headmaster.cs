@@ -227,7 +227,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public Headmaster3()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             SpeechHue = Utility.RandomDyedHue();
             Name = "The Headmaster";

@@ -15,7 +15,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public PeculiarOrc()
-            : base(AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Thief, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a peculiar orc";
             Body = 17;

@@ -8,7 +8,7 @@ namespace Server.Mobiles
     public class FrozenElemental : BaseCreature
     {
 	[Constructable]
-	public FrozenElemental () : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public FrozenElemental () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a frozen elemental";
 	    Body = 161;

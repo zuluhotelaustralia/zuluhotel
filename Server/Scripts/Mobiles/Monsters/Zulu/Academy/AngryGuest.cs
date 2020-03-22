@@ -14,7 +14,7 @@ namespace Server.Mobiles
 	}
 	
         [Constructable] 
-	public AngryGuest() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
+	public AngryGuest() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
 	{
 	    m_DinnerGuest = Utility.RandomBool();
             Body = Utility.RandomList(0x190, 0x191);

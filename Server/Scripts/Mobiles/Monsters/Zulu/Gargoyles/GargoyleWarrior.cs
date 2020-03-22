@@ -8,7 +8,7 @@ namespace Server.Mobiles
     public class GargoyleWarrior : BaseCreature
     {
 	[Constructable]
-	public GargoyleWarrior() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public GargoyleWarrior() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a gargoyle warrior";
 	    Body = 4;
@@ -21,7 +21,7 @@ namespace Server.Mobiles
 
             SetHits(175, 200);
             SetMana(400, 500);
-
+	    
             SetDamage( 14, 20);            
 
             VirtualArmor = 25;  

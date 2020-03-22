@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class FailedExperiment : BaseCreature
     {
         [Constructable]
-	public FailedExperiment() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public FailedExperiment() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
 	    Name = "a failed experiment";
 	    Body = 3;

@@ -13,7 +13,7 @@ namespace Server.Mobiles
 	public override InhumanSpeech SpeechType{ get{ return InhumanSpeech.Orc; } }
 
 	[Constructable]
-	public OrcArcher() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 )
+	public OrcArcher() : base( AIType.AI_Archer, FightMode.Closest, 10, 1, 0.2, 0.4 )
 	{
             Name = "an orc archer";
             Body = 17;

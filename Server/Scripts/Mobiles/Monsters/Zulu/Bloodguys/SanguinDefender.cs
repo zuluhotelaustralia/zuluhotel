@@ -11,7 +11,7 @@ namespace Server.Mobiles
     public class SanguinDefender : BaseCreature 
     { 
 	[Constructable] 
-	public SanguinDefender() : base( AIType.AI_Generic, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
+	public SanguinDefender() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
 	{ 
 	    SpeechHue = Utility.RandomDyedHue(); 
 	    Name = "Sanguin Defender"; 
