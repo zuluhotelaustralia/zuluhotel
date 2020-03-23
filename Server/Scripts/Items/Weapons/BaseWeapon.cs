@@ -3435,7 +3435,7 @@ namespace Server.Items
 		    switch( m_AccuracyLevel ){
 			case WeaponAccuracyLevel.Accurate:
 			    {
-				prefix += "dccurate ";
+				prefix += "accurate ";
 				break;
 			    }
 			case WeaponAccuracyLevel.Surpassingly:
@@ -3502,7 +3502,7 @@ namespace Server.Items
 
 		    if( m_Slayer != SlayerName.None ){
 
-			if( m_DamageLevel == WeaponDamageLevel.Regular ){
+			if( m_DamageLevel >= WeaponDamageLevel.Regular ){
 			    suffix += " and";
 			}		
 

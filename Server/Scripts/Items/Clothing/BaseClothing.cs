@@ -56,9 +56,9 @@ namespace Server.Items
 	private AosArmorAttributes m_AosClothingAttributes;
 	private AosSkillBonuses m_AosSkillBonuses;
 	private AosElementAttributes m_AosResistances;
-
+	private Prot m_Prot;
 	private ZuluSkillMods m_ZuluSkillMods;
-
+       
 	[CommandProperty( AccessLevel.GameMaster )]
 	public bool Identified {
 	    get { return m_Identified; }
@@ -164,6 +164,17 @@ namespace Server.Items
 	    set{}
 	}
 
+	[CommandProperty( AccessLevel.GameMaster )]
+	public Prot Prot{
+	    get {
+		if( m_Prot == null ){
+		    m_Prot = new Prot();
+		}
+		return m_Prot;
+	    }
+	    set { m_Prot = value; }
+	}
+	
 	[CommandProperty( AccessLevel.GameMaster )]
 	public ZuluSkillMods ZuluSkillMods{
 	    get { return m_ZuluSkillMods; }
@@ -715,6 +726,7 @@ namespace Server.Items
             if ( this.Name == null )
             {
 		String prefix = "";
+		String suffix = "";
 
 		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
 		    if ( m_Quality == ClothingQuality.Exceptional ) {
@@ -748,65 +760,88 @@ namespace Server.Items
 		    }
 
 		    if( this.DexBonus > 0 ){
-			if( this.StrBonus >=30 ){
+			if( this.StrBonus == 6 ){
 			    prefix += " Escape Artist's ";
 			}
-			else if( this.StrBonus >=25 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Acrobat's ";
 			}
-			else if( this.StrBonus >=20 ){
+			else if( this.StrBonus  == 4 ){
 			    prefix += " Tumbler's ";
 			}
-			else if( this.StrBonus >=15 ){
+			else if( this.StrBonus == 3 ){
 			    prefix += " Catburglar's ";
 			}
-			else if( this.StrBonus >=10 ){
+			else if( this.StrBonus == 2 ){
 			    prefix += " Thief's ";
 			}
-			else if( this.StrBonus >=5 ){
+			else if( this.StrBonus == 1 ){
 			    prefix += " Cutpurse's ";
 			}
 		    }
 
-		    if( this.DexBonus > 0 ){
-			if( this.StrBonus >=30 ){
+		    if( this.IntBonus > 0 ){
+			if( this.StrBonus == 6 ){
 			    prefix += " Oracle's ";
 			}
-			else if( this.StrBonus >=25 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Archmage's ";
 			}
-			else if( this.StrBonus >=20 ){
+			else if( this.StrBonus == 4 ){
 			    prefix += " Magister's ";
 			}
-			else if( this.StrBonus >=15 ){
+			else if( this.StrBonus == 3 ){
 			    prefix += " Wizard's ";
 			}
-			else if( this.StrBonus >=10 ){
+			else if( this.StrBonus == 2 ){
 			    prefix += " Adept's ";
 			}
-			else if( this.StrBonus >=5 ){
+			else if( this.StrBonus == 1){
 			    prefix += " Apprentice's ";
 			}
 		    }
 
 		    if( this.StrBonus > 0 ){
-			if( this.StrBonus >=30 ){
+			if( this.StrBonus == 6 ){
 			    prefix += " King's ";
 			}
-			else if( this.StrBonus >=25 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Warlord's ";
 			}
-			else if( this.StrBonus >=20 ){
+			else if( this.StrBonus == 4 ){
 			    prefix += " Hero's ";
 			}
-			else if( this.StrBonus >=15 ){
+			else if( this.StrBonus == 3 ){
 			    prefix += " Champion's ";
 			}
-			else if( this.StrBonus >=10 ){
+			else if( this.StrBonus == 2 ){
 			    prefix += " Veteran's ";
 			}
-			else if( this.StrBonus >=5 ){
+			else if( this.StrBonus == 1 ){
 			    prefix += " Warrior's ";
+			}
+		    }
+
+		    if( this.Prot.Level > 0 ){
+			suffix += " of Elemental " + this.Prot.Element.ToString();
+
+			if( this.Prot.Level == 6 ){
+			    suffix += " Absorbsion";
+			}
+			else if( this.Prot.Level == 5){
+			    suffix += " Attunement";
+			}
+			else if( this.Prot.Level == 4 ){
+			    suffix += " Innoculation";
+			}
+			else if( this.Prot.Level == 3 ){
+			    suffix += " Protection";
+			}
+			else if( this.Prot.Level == 2 ){
+			    suffix += " Warding";
+			}
+			else if( this.Prot.Level == 1 ){
+			    suffix += " Bane";
 			}
 		    }
 		}
@@ -815,7 +850,7 @@ namespace Server.Items
 		    prefix = "unidentified ";
 		}
 
-		String text = prefix + Core.StringList.Table[this.LabelNumber];
+		String text = prefix + Core.StringList.Table[this.LabelNumber] + suffix;
 		
 		LabelTo( from, text );
 		//LabelToAffix(from, LabelNumber, AffixType.Prepend, prefix);
@@ -907,8 +942,13 @@ namespace Server.Items
 	{
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 7 ); // version
+	    writer.Write( (int) 8 ); // version
 
+	    if( m_Prot == null ){
+		m_Prot = new Prot();
+	    }
+	    m_Prot.Serialize( writer );
+	    
 	    writer.Write( m_Identified );
 	    
 	    m_ZuluSkillMods.Serialize(writer);
@@ -972,6 +1012,12 @@ namespace Server.Items
 
 	    switch ( version )
 	    {
+		case 8:
+		    {
+			m_Prot = new Prot();
+			m_Prot.Deserialize( reader );
+			goto case 7;
+		    }
 		case 7:
 		    {
 			m_Identified = reader.ReadBool();

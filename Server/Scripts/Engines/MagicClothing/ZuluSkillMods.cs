@@ -13,7 +13,7 @@ namespace Server {
 	public SkillMod Mod {
 	    get { return m_Mod; }
 	}
-
+	
 	public ZuluSkillMods( Item parent ){
 	    _parent = parent;
 	}

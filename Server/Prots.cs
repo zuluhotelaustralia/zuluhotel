@@ -7,6 +7,9 @@ using Server.Mobiles;
 using Server.Targeting;
 
 namespace Server {
+
+    // this is the object that goes onto Mobile to track prots.
+    // the Prot class (no 's') is what we attach to items to give them a single prot.
     public class Prots {
 	public static void Initialize(){
 	    CommandSystem.Register("GetProts", AccessLevel.GameMaster, new CommandEventHandler( GetProts_OnCommand ) );
@@ -70,19 +73,39 @@ namespace Server {
 	    _water = PiecewiseScale(DamageType.Water);
 	}
 
+	//index of the matrix corresponds to a server.layer
+       	public static readonly double[] Scalars = {
+	    0.00, 0.1, 0.5, 0.05, 0.3, 0.4, 0.2, 0.1,
+	    0.3, 0.3, 0.3, 0.0, 0.4, 0.4, 0.3, 0.0,
+	    0.0, 0.4, 0.3, 0.2, 0.4, 0.0, 0.4, 0.3,
+	    0.3 };
+
 	private int PiecewiseScale( DamageType dt ){
 	    double tally = 0;
 
-	    tally += 0.25 * WristProt(dt);
-	    tally += 0.25 * RingProt(dt);
-	    tally += 0.25 * NeckProt(dt);
-	    tally += 0.25 * HandsProt(dt);
-	    tally += 0.33 * ArmsProt(dt);
-	    tally += 0.33 * HeadProt(dt);
-	    tally += 0.33 * EarringsProt(dt);
-	    tally += 0.33 * LegsProt(dt);
-	    tally += 0.5 * ChestProt(dt);
-	    tally += 0.5 * ShieldProt(dt);
+	    foreach( Layer l in Enum.GetValues( typeof(Server.Layer) ) ){
+		if( l < Layer.FirstValid ){
+		    continue;
+		}
+		if( l > Layer.LastUserValid ){
+		    break;
+		}
+
+		int prot = 0;
+		Item theitem = _parent.FindItemOnLayer( l );
+
+		if( theitem != null ){
+		    if( theitem is BaseArmor || theitem is BaseJewel ){
+			tally += ( Scalars[ (int)l ] * Assess( theitem, dt ) );
+		    }
+		    else if( theitem is BaseClothing ){
+			BaseClothing c = theitem as BaseClothing;
+			if( c.Prot.Element == dt ){
+			    tally += ( Scalars[ (int)l ] * c.Prot.Level );
+			}
+		    }
+		}
+	    }
 
 	    if( tally > 3 ){
 		tally = 3; //hard cap at 75% prot
@@ -307,6 +330,43 @@ namespace Server {
 		    from.SendMessage("Can only target Mobiles");
 		}
 	    }
+	}
+    }
+
+    public class Prot {
+	private int _level;
+	private DamageType _element;
+
+	public Prot() : this( DamageType.None, 0 ){}
+	public Prot( DamageType element, int level ){
+	    _level = level;
+	    _element = element;
+	}
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public int Level {
+	    get{ return _level; }
+	    set{ _level = value; }
+	}
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public DamageType Element{
+	    get{ return _element; }
+	    set{ _element = value; }
+	}
+
+	public void Serialize( GenericWriter w ){
+	    w.Write( (int)0 ); //version
+
+	    w.Write( _level );
+	    w.Write( (int)_element );
+	}
+
+	public void Deserialize( GenericReader r ){
+	    int version = r.ReadInt();
+
+	    _level = r.ReadInt();
+	    _element = (DamageType)r.ReadInt();
 	}
     }
 }

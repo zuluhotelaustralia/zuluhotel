@@ -68,6 +68,7 @@ namespace Server{
 	    m_OtherSkills.Add(SkillName.Begging);
 	    m_OtherSkills.Add(SkillName.ItemID);
 	    m_OtherSkills.Add(SkillName.Peacemaking);
+
 	    m_OtherSkills.Add(SkillName.Camping);
 	    m_OtherSkills.Add(SkillName.Cartography);
 	    m_OtherSkills.Add(SkillName.DetectHidden);
@@ -93,7 +94,9 @@ namespace Server{
 	    m_OtherSkills.Add(SkillName.RemoveTrap);
 	}
 
-	private const double _statmodchance = 0.15; //chance to get a stat mod
+	private const double _statmodchance = 0.25; //chance to get a stat mod
+	private const double _skillmodchance = 0.5;
+	private const double _protchance = 0.25;
 	private const double _cursedchance = 0.33; //chance that the loot is cursed
 	private const double _combatweight = 0.33;
 	private const double _craftingweight = 0.1;
@@ -102,7 +105,8 @@ namespace Server{
 
 	public enum ModType{
 	    Stat,
-	    Skill
+	    Skill,
+	    Prot
 	}
 
 	private static List<SkillName> m_CraftingSkills;
@@ -133,18 +137,24 @@ namespace Server{
 
 	public static Type[] AllowedTypes{ get{ return m_AllowedTypes; } }
 
-	private static ModType DecideStatSkill(){
+	private static ModType DecideStatSkillProt(){
 	    double r = Utility.RandomDouble();
-	    if( r > _statmodchance ){
-		return ModType.Skill;
+	    if( r < _statmodchance ){
+		return ModType.Stat;
+	    }
+	    else if ( r < _protchance + _statmodchance ){
+		return ModType.Prot;
 	    }
 	    else {
-		return ModType.Stat;
+		return ModType.Skill;
 	    }
 	}
 
 	//return true if item should be cursed
 	private static bool DecideCursed() {
+	    return false; // I don't have the OnSingleClick shit done TODO sith
+
+	    /*
 	    double r = Utility.RandomDouble();
 	    if( r > _cursedchance ){
 		return false;
@@ -152,6 +162,7 @@ namespace Server{
 	    else {
 		return true;
 	    }
+	    */
 	}
 
 	private static StatType DecideStat() {
@@ -197,27 +208,24 @@ namespace Server{
 
 	private static int DecideAmount( int max ) {
 	    double r = Utility.RandomDouble();
-	    
-	    if( 0.98 <= r && max >= 6){
+
+	    if( 0.90 <= r && max >= 6){
 		return 6;
 	    }
-	    else if( 0.90 <= r && r < 0.98 && max >= 5 ){
+	    else if( 0.80 <= r && r < 0.90 && max >= 5 ){
 		return 5;
 	    }
-	    else if( 0.80 <= r && r < 0.90 && max >= 4 ){
+	    else if( 0.65 <= r && r < 0.80 && max >= 4 ){
 		return 4;
 	    }
-	    else if( 0.70 <= r && r < 0.80 && max >= 3 ){
+	    else if( 0.45 <= r && r < 0.65 && max >= 3 ){
 		return 3;
 	    }
-	    else if( 0.55 <= r && r < 0.70 && max >= 2 ){
+	    else if( 0.20 <= r && r < 0.45 && max >= 2 ){
 		return 2;
 	    }
-	    else if( 0.30 <= r && r < 0.55 && max >= 1 ){
-		return 1;
-	    }
 	    else {
-		return 0; //30% of the time
+		return 1;
 	    }
 	}
 
@@ -227,7 +235,7 @@ namespace Server{
 
 	public static Item Generate( int maxbonus ){
 	    Type itemtype = DecideType();
-	    ModType statskill = DecideStatSkill();
+	    ModType statskill = DecideStatSkillProt();
 	    int modamount = DecideAmount( maxbonus );
 	    StatType thestat = DecideStat();
 	    SkillName sn = DecideSkill();
@@ -237,9 +245,19 @@ namespace Server{
 		theitem = (Item)Activator.CreateInstance( itemtype );
 	    }
 	    catch {
+		Console.WriteLine("FIXME: MagicClothing Engine");
 		return null;
 	    }
 
+	    //Console.WriteLine(" MagicClothing engine: {0} {1} {2} {3} {4} {5}", itemtype.ToString(), statskill.ToString(), modamount, thestat.ToString(), sn, theitem.GetType() );
+
+	    if( statskill == ModType.Prot ){
+		//temporarily (TODO SITH)
+		// doing this because BaseJewel doesn't take a Prot object
+		// since you could just make prot earrings from gathered restources
+		itemtype = typeof( Robe );
+	    }
+	    
 	    if( theitem is BaseClothing ) {
 		BaseClothing clothes = theitem as BaseClothing;
 		clothes.Identified = false;
@@ -256,6 +274,10 @@ namespace Server{
 			    clothes.StrBonus = modamount;
 			    break;
 		    }
+		}
+		else if( statskill == ModType.Prot ){
+		    DamageType dt = (DamageType) Utility.RandomMinMax( (int)DamageType.None, (int)DamageType.Poison);
+		    clothes.Prot = new Prot( dt, modamount );
 		}
 		else {
 		    //statskill == modtype.skill

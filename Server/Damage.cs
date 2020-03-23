@@ -4,7 +4,7 @@ namespace Server {
 
 //DAMAGETYPE is the elemental damage type (we're bypassing AOS's bullshit)
     public enum DamageType {
-	None,
+	None = 0,
 	Air,
 	Earth,
 	Fire,

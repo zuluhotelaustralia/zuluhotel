@@ -73,7 +73,7 @@ namespace Server
 		LootPackEntry entry = m_Entries[i];
 
 		bool shouldAdd = ( entry.Chance > Utility.Random( 10000 ) );
-
+		
 		if ( !shouldAdd && checkLuck )
 		{
 		    checkLuck = false;
@@ -248,7 +248,6 @@ namespace Server
 		new LootPackItem( typeof( BaseWeapon ), 3 ),
 		new LootPackItem( typeof( BaseRanged ), 1 ),
 		new LootPackItem( typeof( BaseShield ), 1 ),
-		new LootPackItem( typeof( MagicClothingDummyType ), 1 )
 	    };
 #endregion
 
@@ -513,8 +512,8 @@ namespace Server
 	    new LootPackEntry(  true, Gold,			100.00, "5d10+25" ),
 	    new LootPackEntry( false, Instruments,	  0.10, 1 ),
 	    new LootPackEntry( false, OldMagicItems,  1.00, 1, 1, 0, 60 ),
-	    new LootPackEntry( false, OldMagicItems,  0.20, 1, 1, 10, 70 ),
-	    new LootPackEntry( false, SurveyTool, 0.10, 1)
+	    new LootPackEntry( false, OldMagicItems,  0.20, 1, 1, 40, 70 ),
+	    new LootPackEntry( false, SurveyTool, 10.0, 1)
 	} );
 	
 	public static readonly LootPack OldAverage = new LootPack( new LootPackEntry[]
@@ -522,9 +521,9 @@ namespace Server
 	    new LootPackEntry(  true, Gold,			100.00, "10d10+50" ),
 	    new LootPackEntry( false, Instruments,	  0.40, 1 ),
 	    new LootPackEntry( false, OldMagicItems,  5.00, 1, 1, 20, 80 ),
-	    new LootPackEntry( false, OldMagicItems,  2.00, 1, 1, 30, 90 ),
-	    new LootPackEntry( false, OldMagicItems,  0.50, 1, 1, 40, 100 ),
-	    new LootPackEntry( false, SurveyTool, 0.10, 1)
+	    new LootPackEntry( false, OldMagicItems,  2.00, 1, 1, 40, 90 ),
+	    new LootPackEntry( false, OldMagicItems,  0.50, 1, 1, 70, 100 ),
+	    new LootPackEntry( false, SurveyTool, 10.0, 1)
 	} );
 
 	public static readonly LootPack OldRich = new LootPack( new LootPackEntry[]
@@ -534,45 +533,61 @@ namespace Server
 	    new LootPackEntry( false, OldMagicItems, 20.00, 1, 1, 60, 100 ),
 	    new LootPackEntry( false, OldMagicItems, 10.00, 1, 1, 65, 100 ),
 	    new LootPackEntry( false, OldMagicItems,  1.00, 1, 1, 70, 100 ),
-	    new LootPackEntry( false, SurveyTool, 0.10, 1)
+	    new LootPackEntry( false, LowSkillMods, 5.00, 1),
+	    new LootPackEntry( false, MedSkillMods, 1.00, 1),
+	    new LootPackEntry( false, SurveyTool, 10.0, 1)
 	} );
 
 	public static readonly LootPack OldFilthyRich = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry(  true, Gold,			100.00, "2d125+400" ),
+	    new LootPackEntry(  true, Gold,			100.00, "2d400+400" ),
 	    new LootPackEntry( false, Instruments,	  2.00, 1 ),
 	    new LootPackEntry( false, OldMagicItems, 33.00, 1, 1, 50, 100 ),
 	    new LootPackEntry( false, OldMagicItems, 33.00, 1, 1, 60, 100 ),
 	    new LootPackEntry( false, OldMagicItems, 20.00, 1, 1, 70, 100 ),
-	    new LootPackEntry( false, OldMagicItems,  5.00, 1, 1, 80, 100 )
+	    new LootPackEntry( false, OldMagicItems,  5.00, 1, 1, 80, 100 ),
+	    new LootPackEntry( false, MedSkillMods, 5.00, 1 ),
+	    new LootPackEntry( false, MedSkillMods, 5.00, 1 ),
+	    new LootPackEntry( false, MedSkillMods, 5.00, 1 ),
+	    new LootPackEntry( false, HighSkillMods, 1.00, 1)
 	} );
 
 	public static readonly LootPack OldUltraRich = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry(  true, Gold,			100.00, "5d100+500" ),
+	    new LootPackEntry(  true, Gold,			100.00, "5d1000+500" ),
 	    new LootPackEntry( false, Instruments,	  2.00, 1 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 40, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 40, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 50, 100 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 50, 100 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 60, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 60, 100 )
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 70, 100 ),
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 80, 100 ),
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 90, 100 ),
+	    new LootPackEntry( false, MedSkillMods, 50, 1 ),
+	    new LootPackEntry( false, MedSkillMods, 50, 1 ),
+	    new LootPackEntry( false, HighSkillMods, 20, 1),
+	    new LootPackEntry( false, HighSkillMods, 20, 1)
 	} );
 
 	public static readonly LootPack OldSuperBoss = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry(  true, Gold,			100.00, "5d100+500" ),
+	    new LootPackEntry(  true, Gold,			100.00, "5d1000+5000" ),
 	    new LootPackEntry( false, Instruments,	  2.00, 1 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 40, 100 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 40, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 40, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 50, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 50, 100 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 50, 100 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 60, 100 ),
 	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 60, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 60, 100 ),
-	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 70, 100 )
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 70, 100 ),
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 70, 100 ),
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 80, 100 ),
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 80, 100 ),
+	    new LootPackEntry( false, OldMagicItems,	100.00, 1, 1, 90, 100 ),
+	    new LootPackEntry( false, HighSkillMods, 100, 1 ),
+	    new LootPackEntry( false, HighSkillMods, 100, 1 ),
+	    new LootPackEntry( false, HighSkillMods, 100, 1 ),
+	    new LootPackEntry( false, HighSkillMods, 100, 1 ),
+	    new LootPackEntry( false, HighSkillMods, 100, 1 )
+	    
 	} );
 
 	public static readonly LootPack LesserNecroScrolls = new LootPack( new LootPackEntry[]
@@ -607,7 +622,7 @@ namespace Server
 
 	public static readonly LootPack PaganReagentsPack = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry( false, PaganReagents, 25.0, 1)
+	    new LootPackEntry( false, PaganReagents, 25.0, 10)
 	});
 
 	public static readonly LootPack AmmunitionPack = new LootPack( new LootPackEntry[]
@@ -761,7 +776,7 @@ namespace Server
 	private int GetRandomOldBonus()
 	{
 	    int rnd = Utility.RandomMinMax( m_MinIntensity, m_MaxIntensity );
-
+	    
 	    if ( 50 > rnd )
 		return 1;
 	    else
@@ -829,10 +844,10 @@ namespace Server
 			    if ( 80 > Utility.Random( 100 ) )
 				weapon.AccuracyLevel = (WeaponAccuracyLevel)GetRandomOldBonus();
 
-			    if ( 60 > Utility.Random( 100 ) )
+			    if ( 40 > Utility.Random( 100 ) )
 				weapon.DamageLevel = (WeaponDamageLevel)GetRandomOldBonus();
 
-			    if ( 40 > Utility.Random( 100 ) )
+			    if ( 60 > Utility.Random( 100 ) )
 				weapon.DurabilityLevel = (WeaponDurabilityLevel)GetRandomOldBonus();
 
 			    if ( 5 > Utility.Random( 100 ) )
@@ -1026,8 +1041,10 @@ namespace Server
 		    item = RandomScroll( 1, 4, 7 );
 		else if ( m_Type == typeof( SummonAirElementalScroll ) ) // high scroll
 		    item = RandomScroll( 2, 8, 8 );
-		else if ( m_Type == typeof( MagicClothingDummyType ) )
+		else if ( m_Type == typeof( MagicClothingDummyType ) ){
+		    //Console.WriteLine("hit a dummy type: {0}", m_MaxLevel );
 		    item = MagicClothing.Generate( m_MaxLevel );
+		}
 		else
 		    item = Activator.CreateInstance( m_Type ) as Item;
 

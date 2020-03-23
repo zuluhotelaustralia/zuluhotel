@@ -1730,27 +1730,27 @@ namespace Server.Items
 		    switch( m_Protection ){
 			case ArmorProtectionLevel.Defense:
 			    {
-				suffix += " of Defense";
+				suffix += " of defense";
 				break;
 			    }
 			case ArmorProtectionLevel.Guarding:
 			    {
-				suffix += " of Guarding";
+				suffix += " of guarding";
 				break;
 			    }
 			case ArmorProtectionLevel.Hardening:
 			    {
-				suffix += " of Hardening";
+				suffix += " of hardening";
 				break;
 			    }
 			case ArmorProtectionLevel.Fortification:
 			    {
-				suffix += " of Fortification";
+				suffix += " of fortification";
 				break;
 			    }
 			case ArmorProtectionLevel.Invulnerability:
 			    {
-				suffix += " of Invulnerability";
+				suffix += " of invulnerability";
 				break;
 			    }
 			default:
