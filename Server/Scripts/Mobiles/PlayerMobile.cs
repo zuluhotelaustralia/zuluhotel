@@ -4126,6 +4126,8 @@ namespace Server.Mobiles
 		    acc.RemoveYoungStatus( 1019036 ); // You have successfully obtained a respectable skill level, and have outgrown your status as a young player!
 	    }
 
+	    this.Spec.ComputeSpec();
+	    
 	    if ( MLQuestSystem.Enabled )
 		MLQuestSystem.HandleSkillGain( this, skill );
 
