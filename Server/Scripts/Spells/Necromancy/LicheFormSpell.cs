@@ -66,7 +66,6 @@ namespace Server.Spells.Necromancy
 	    }
 
 	    int newBody = 0x18;
-	    int newHue = 0;
 
 	    //hocus pocus... SpellHelper sets its own timers, we only need to clean up after the hue and body mods --sith
 	    Caster.BodyMod = newBody;
