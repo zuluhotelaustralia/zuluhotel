@@ -5,6 +5,7 @@ using Server;
 using Server.Commands;
 using Server.Mobiles;
 using Server.Items;
+using Server.Targeting;
 
 /* this system is for the Zulu Hotel "magic clothing" feature and implements 
  * an easy way to spawn clothes with skill or stat mods in loot
@@ -17,12 +18,14 @@ namespace Server{
 	[Description("Set item skill mods")]
 	public static void SetSkillMod_OnCommand( CommandEventArgs e ){
 	    if( e.Length != 2 ){
-		e.Mobile.SendMessage("Example:  SetSkillMod 2 15.0");
+		e.Mobile.SendMessage("Example:  SetSkillMod EvalInt 15.0");
 	    }
 	    else{
-		int skillID = e.GetInt32( 0 );
-		double amount = e.GetDouble( 1 );
-		
+		SkillName sn;
+		if( Enum.TryParse( e.GetString( 0 ), true, out sn ) ){
+		    double amount = e.GetDouble( 1 );
+		    e.Mobile.Target = new SetSkillmodTarget( sn, amount );
+		}
 	    }
 	}
 
@@ -167,10 +170,10 @@ namespace Server{
 
 	private static StatType DecideStat() {
 	    double r = Utility.RandomDouble();
-	    if( r > 0.66 ){
+	    if( r > 0.80 ){
 		return StatType.Dex;
 	    }
-	    if( r <= 0.33 ){
+	    if( r <= 0.30 ){
 		return StatType.Str;
 	    }
 
@@ -265,13 +268,13 @@ namespace Server{
 		if( statskill == ModType.Stat ){
 		    switch( thestat ){
 			case StatType.Str:
-			    clothes.StrBonus = modamount;
+			    clothes.StrBonus = modamount * 5;
 			    break;
 			case StatType.Dex:
-			    clothes.StrBonus = modamount;
+			    clothes.StrBonus = modamount * 5;
 			    break;
 			case StatType.Int:
-			    clothes.StrBonus = modamount;
+			    clothes.StrBonus = modamount * 5;
 			    break;
 		    }
 		}
@@ -290,13 +293,13 @@ namespace Server{
 		if( statskill == ModType.Stat ){
 		    switch( thestat ){
 			case StatType.Str:
-			    jewel.StrBonus = modamount;
+			    jewel.StrBonus = modamount * 5;
 			    break;
 			case StatType.Dex:
-			    jewel.StrBonus = modamount;
+			    jewel.StrBonus = modamount * 5;
 			    break;
 			case StatType.Int:
-			    jewel.StrBonus = modamount;
+			    jewel.StrBonus = modamount * 5;
 			    break;
 		    }
 		}

@@ -760,64 +760,64 @@ namespace Server.Items
 		    }
 
 		    if( this.DexBonus > 0 ){
-			if( this.StrBonus == 6 ){
+			if( this.StrBonus == 30 ){
 			    prefix += " Escape Artist's ";
 			}
-			else if( this.StrBonus == 5 ){
+			else if( this.StrBonus == 25 ){
 			    prefix += " Acrobat's ";
 			}
-			else if( this.StrBonus  == 4 ){
+			else if( this.StrBonus  == 20 ){
 			    prefix += " Tumbler's ";
 			}
-			else if( this.StrBonus == 3 ){
+			else if( this.StrBonus == 15 ){
 			    prefix += " Catburglar's ";
 			}
-			else if( this.StrBonus == 2 ){
+			else if( this.StrBonus == 10 ){
 			    prefix += " Thief's ";
 			}
-			else if( this.StrBonus == 1 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Cutpurse's ";
 			}
 		    }
 
 		    if( this.IntBonus > 0 ){
-			if( this.StrBonus == 6 ){
+			if( this.StrBonus == 30 ){
 			    prefix += " Oracle's ";
 			}
-			else if( this.StrBonus == 5 ){
+			else if( this.StrBonus == 25 ){
 			    prefix += " Archmage's ";
 			}
-			else if( this.StrBonus == 4 ){
+			else if( this.StrBonus == 20 ){
 			    prefix += " Magister's ";
 			}
-			else if( this.StrBonus == 3 ){
+			else if( this.StrBonus == 15 ){
 			    prefix += " Wizard's ";
 			}
-			else if( this.StrBonus == 2 ){
+			else if( this.StrBonus == 10 ){
 			    prefix += " Adept's ";
 			}
-			else if( this.StrBonus == 1){
+			else if( this.StrBonus == 5){
 			    prefix += " Apprentice's ";
 			}
 		    }
 
 		    if( this.StrBonus > 0 ){
-			if( this.StrBonus == 6 ){
+			if( this.StrBonus == 30 ){
 			    prefix += " King's ";
 			}
-			else if( this.StrBonus == 5 ){
+			else if( this.StrBonus == 25 ){
 			    prefix += " Warlord's ";
 			}
-			else if( this.StrBonus == 4 ){
+			else if( this.StrBonus == 20 ){
 			    prefix += " Hero's ";
 			}
-			else if( this.StrBonus == 3 ){
+			else if( this.StrBonus == 15 ){
 			    prefix += " Champion's ";
 			}
-			else if( this.StrBonus == 2 ){
+			else if( this.StrBonus == 10 ){
 			    prefix += " Veteran's ";
 			}
-			else if( this.StrBonus == 1 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Warrior's ";
 			}
 		    }

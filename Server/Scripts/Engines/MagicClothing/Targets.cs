@@ -12,9 +12,9 @@ namespace Server{
 	private SkillName _sn;
 	private double _amt;
 	
-	public SetSkillmodTarget( int sn, double amount ) : base( -1, false, TargetFlags.None )
+	public SetSkillmodTarget( SkillName sn, double amount ) : base( -1, false, TargetFlags.None )
 	{
-	    _sn = (SkillName)sn;
+	    _sn = sn;
 	    _amt = amount;
 	}
 

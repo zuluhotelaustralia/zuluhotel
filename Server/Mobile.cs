@@ -1302,6 +1302,8 @@ namespace Server
 
 	    if( !m_SkillMods.Contains( mod ) )
 	    {
+		double newtotal = m_Skills[mod.Skill].Value + mod.Value;
+
 		m_SkillMods.Add( mod );
 		mod.Owner = this;
 
