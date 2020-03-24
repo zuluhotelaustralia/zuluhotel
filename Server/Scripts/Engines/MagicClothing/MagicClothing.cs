@@ -279,7 +279,7 @@ namespace Server{
 		    }
 		}
 		else if( statskill == ModType.Prot ){
-		    DamageType dt = (DamageType) Utility.RandomMinMax( (int)DamageType.None, (int)DamageType.Poison);
+		    DamageType dt = (DamageType) Utility.RandomMinMax( (int)DamageType.Air, (int)DamageType.Poison);
 		    clothes.Prot = new Prot( dt, modamount );
 		}
 		else {
