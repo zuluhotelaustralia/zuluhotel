@@ -110,6 +110,9 @@ namespace Server {
 	    if( tally > 3 ){
 		tally = 3; //hard cap at 75% prot
 	    }
+	    if( tally > 0 && tally < 1.0 ){
+		tally = 1.0;
+	    }
 	    
 	    return (int)tally;
 	}
