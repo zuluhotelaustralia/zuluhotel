@@ -13,7 +13,8 @@ namespace Server.Items
     {
 	public override int DefHitSound{ get{ return 0x237; } }
 	public override int DefMissSound{ get{ return 0x238; } }
-
+	public override int DefMaxRange{ get { return 2; } }
+	    
 	public override SkillName DefSkill{ get{ return SkillName.Swords; } }
 	public override WeaponType DefType{ get{ return WeaponType.Polearm; } }
 	public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
