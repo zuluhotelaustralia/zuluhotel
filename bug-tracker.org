@@ -107,7 +107,7 @@ This exception is fatal, press return to exit
 * DONE implement skillmod clothing
 * TODO can't repair tools?
 * DONE buddy has like 2500 skill points and still gets spec 4 warrior
-* TODO weapon durability falls off awfully fast
+* DONE weapon durability falls off awfully fast
 * DONE archery damage tactics/anatomy
 * DONE crafted leather doesn't retain proper hue (e.g. tunic )
 * DONE crafted leather doesn't retain proper resource name (e.g. tunic )
@@ -176,4 +176,6 @@ This exception is fatal, press return to exit
 * DONE all GenericAI creatures don't actually do anything
 * DONE assess current status of statloss
 * DONE assess current status of item insurance
-* TODO need a "I must consider my sins" command or a method to unlock/lock karma
+* DONE need a "I must consider my sins" command or a method to unlock/lock karma
+* DONE bowcraft looks for boards and shows 0
+* TODO cherry wood looks grey but should be a deep red
