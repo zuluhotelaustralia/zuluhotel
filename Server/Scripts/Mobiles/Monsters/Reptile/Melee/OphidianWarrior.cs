@@ -52,7 +52,7 @@ namespace Server.Mobiles
 		{
 			AddLoot( LootPack.Meager );
 			AddLoot( LootPack.Average );
-			AddLoot( LootPack.Gems );
+			AddLoot( LootPack.Gems, 4 );
 		}
 
 		public override int Meat{ get{ return 1; } }

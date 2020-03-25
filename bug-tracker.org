@@ -174,5 +174,6 @@ This exception is fatal, press return to exit
 * DONE some caves near the grave yard/thamasa that aren't hooked up
 * DONE take hue 2155 from the other hues.mul and transplant it
 * DONE all GenericAI creatures don't actually do anything
-* TODO assess current status of statloss
+* DONE assess current status of statloss
 * DONE assess current status of item insurance
+* TODO need a "I must consider my sins" command or a method to unlock/lock karma

@@ -98,7 +98,7 @@ namespace Server.Antimacro
 	    AddPage(0);
 	    AddBackground( 0, 0, 480, 320, 9300 );
 	    AddHtml( 10, 10, 460, 100, "<h2>Unattended Resource Gathering Suspected</h2>", false, false );
-	    AddHtml( 10, 50, 460, 140, "You appear to be gathering resources unattended.  This has harmful effects on the server's economy and so we ask that you please refrain from doing this.  You can confirm you are actually at the keyboard by performing the following simple arithmetic.  You have 5 minutes to reply.", false, false );
+	    AddHtml( 10, 50, 460, 140, "Gathering resources while unattended has harmful effects on the server's economy and so we ask that you please refrain from doing this.  You can confirm you are actually at the keyboard by performing the following simple arithmetic.  You have 5 minutes to reply.", false, false );
 	    AddHtml( 10, 160, 460, 140, "You have " + m_AttemptsRemaining + " attempt(s) remaining.", false, false );
 
 	    num1 = Utility.Dice(1, 10, 0);

@@ -17,7 +17,7 @@ namespace Server.Antimacro
 	private Account m_SubjectAccount;
 	private int m_AttemptsRemaining;
 	private AntimacroTimer m_Timer;
-	private static bool m_SystemEnabled = false;
+	private static bool m_SystemEnabled = true;
 
 	public static bool Enabled {
 	    get { return m_SystemEnabled; }

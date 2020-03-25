@@ -179,18 +179,18 @@ namespace Server.Engines.Gather {
 	    GatherContext context;
 	    GatherNode n;
 
+	    if( from.GatherContext != null ){
+		from.GatherContext.Validate();
+	    }
+	    
 	    //if they have no context object (could be brand new mobile, etc.)
-	    if( from.GatherContext == null ){
+	    // or if their context failed to validate, i.e. could have moved or failed a skill check
+	    if( from.GatherContext == null || !from.GatherContext.Validity ){
 		n = Strike( BuildNodeList(s, from, sand) );
 		from.GatherContext = new GatherContext( from.X, from.Y, from, n );
 	    }
-	    else if( from.GatherContext.Validate() ){
-		//else, if their context is valid i.e. they haven't moved or failed a skill check:
-		n = from.GatherContext.Node;
-	    }
 	    else{
-		//else, they must have moved or failed a skillcheck because their context is invalid
-		n = Strike( BuildNodeList( s, from, sand ) );
+		n = from.GatherContext.Node;
 	    }
 	    
 	    //new GatherTimer( from, tool, this, n, targeted, toLock ).Start();

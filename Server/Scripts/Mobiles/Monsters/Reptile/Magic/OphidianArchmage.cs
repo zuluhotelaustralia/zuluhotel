@@ -55,8 +55,8 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Rich );
-			AddLoot( LootPack.MedScrolls, 2 );
+		    AddLoot( LootPack.FilthyRich, 2 );
+		    AddLoot( LootPack.MedScrolls, 2 );
 		}
 
 		public override int Meat{ get{ return 1; } }
