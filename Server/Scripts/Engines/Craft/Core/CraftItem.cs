@@ -300,7 +300,7 @@ namespace Server.Engines.Craft
 	    return true;
 	}
 
-	#region Tables
+#region Tables
 	private static int[] m_HeatSources = new int[]
 	    {
 		0x461, 0x48E, // Sandstone oven/fireplace
@@ -399,7 +399,7 @@ namespace Server.Engines.Craft
 	    {
 		typeof( OrcHelm )
 	    };
-	#endregion
+#endregion
 
 	public bool IsMarkable( Type type )
 	{
@@ -952,12 +952,21 @@ namespace Server.Engines.Craft
 		    valMainSkill = valSkill;
 		}
 
-		if ( gainSkills ) // This is a passive check. Success chance is entirely dependant on the main skill
+		// This is a passive check. Success chance is entirely dependant on the main skill
+		if ( gainSkills ) {
 		    from.CheckSkill( craftSkill.SkillToMake, minSkill, maxSkill );
+		    if( from is PlayerMobile ){
+			PlayerMobile pm = from as PlayerMobile;
+			if( pm.Spec.SpecName == SpecName.Crafter ){
+			    //gain faster when crafting;
+			    from.CheckSkill( craftSkill.SkillToMake, minSkill, maxSkill );
+			}
+		    }
+		}
 	    }
 
 	    double chance;
-
+	    
 	    if ( allRequiredSkills )
 		chance = craftSystem.GetChanceAtMin( this ) + ((valMainSkill - minMainSkill) / (maxMainSkill - minMainSkill) * (1.0 - craftSystem.GetChanceAtMin( this )));
 	    else
@@ -971,6 +980,13 @@ namespace Server.Engines.Craft
 		    chance += talisman.SuccessBonus / 100.0;
 	    }
 
+	    if( from is PlayerMobile ){
+		PlayerMobile pm = from as PlayerMobile;
+		if( pm.Spec.SpecName == SpecName.Crafter ){
+		    chance *= pm.Spec.Bonus;
+		}
+	    }
+	    
 	    if ( allRequiredSkills && valMainSkill >= maxMainSkill )
 		chance = 1.0;
 

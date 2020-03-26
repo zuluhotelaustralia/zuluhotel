@@ -14,11 +14,9 @@ namespace Server.Regions {
 	    if( skill.SkillName == SkillName.Alchemy ||
 		skill.SkillName == SkillName.Blacksmith ||
 		skill.SkillName == SkillName.Fletching ||
-		//skill.SkillName == SkillName.Mining ||
 		skill.SkillName == SkillName.Carpentry ||
 		skill.SkillName == SkillName.Tailoring ||
 		skill.SkillName == SkillName.Tinkering ||
-		//skill.SkillName == SkillName.Lumberjacking ||
 		skill.SkillName == SkillName.ArmsLore ||
 		skill.SkillName == SkillName.ItemID ||
 		skill.SkillName == SkillName.Inscribe ||

@@ -32,6 +32,10 @@ namespace Server.Regions
 		case SkillName.Tracking:
 		case SkillName.Wrestling:
 		case SkillName.Tactics:
+		case SkillName.Hiding:
+		case SkillName.Stealth:
+		case SkillName.Snooping:
+		case SkillName.Stealing:
 		    return 0.1;
 		case SkillName.RemoveTrap:
 		case SkillName.Musicianship:
@@ -41,7 +45,7 @@ namespace Server.Regions
 		case SkillName.MagicResist:
 		    return 0.2;
 		default:
-		    return RegionalSkillGainPrimaryFactor;
+		    return base.GetSkillSpecificFactor(skill);
 	    }
 	}
 	
