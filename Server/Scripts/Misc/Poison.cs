@@ -23,11 +23,12 @@ namespace Server
 	    }
 	    else
 	    {
-		Register( new PoisonImpl( "Lesser",		0, 4, 26,  2.500, 3.5, 3.0, 10, 2 ) );
-		Register( new PoisonImpl( "Regular",	1, 5, 26,  3.125, 3.5, 3.0, 10, 2 ) );
-		Register( new PoisonImpl( "Greater",	2, 6, 26,  6.250, 3.5, 3.0, 10, 2 ) );
-		Register( new PoisonImpl( "Deadly",		3, 7, 26, 12.500, 3.5, 4.0, 10, 2 ) );
-		Register( new PoisonImpl( "Lethal",		4, 9, 26, 25.000, 3.5, 5.0, 10, 2 ) );
+		Register( new PoisonImpl( "Lesser", 0, 4, 26,  2.500, 3.5, 3.0, 10, 2 ) );
+		Register( new PoisonImpl( "Regular", 1, 5, 26,  3.125, 3.5, 3.0, 10, 2 ) );
+		Register( new PoisonImpl( "Greater", 2, 6, 26,  6.250, 3.5, 3.0, 10, 2 ) );
+		Register( new PoisonImpl( "Deadly", 3, 7, 26, 12.500, 3.5, 4.0, 10, 2 ) );
+		Register( new PoisonImpl( "Lethal", 4, 9, 26, 25.000, 3.5, 5.0, 10, 2 ) );
+		Register( new PoisonImpl("Mortal", 5, 11, 26, 30, 3.5, 5.0, 12, 2) );
 	    }
 	}
 
@@ -86,22 +87,6 @@ namespace Server
 
 	    protected override void OnTick()
 	    {
-		if ( Core.AOS && m_Poison.Level < 4 ||
-		     (m_Poison.Level < 3 && OrangePetals.UnderEffect( m_Mobile ))  )
-		{
-		    if ( m_Mobile.CurePoison( m_Mobile ) )
-		    {
-			m_Mobile.LocalOverheadMessage( MessageType.Emote, 0x3F, true,
-						       "* You feel yourself resisting the effects of the poison *" );
-
-			m_Mobile.NonlocalOverheadMessage( MessageType.Emote, 0x3F, true,
-							  String.Format( "* {0} seems resistant to the poison *", m_Mobile.Name ) );
-
-			Stop();
-			return;
-		    }
-		}
-
 		if ( m_Index++ == m_Poison.m_Count )
 		{
 		    m_Mobile.SendLocalizedMessage( 502136 ); // The poison seems to have worn off.

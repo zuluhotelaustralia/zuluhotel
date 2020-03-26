@@ -62,6 +62,7 @@ namespace Server
         public static Poison Greater { get { return GetPoison( "Greater" ); } }
         public static Poison Deadly { get { return GetPoison( "Deadly" ); } }
         public static Poison Lethal { get { return GetPoison( "Lethal" ); } }
+	public static Poison Mortal { get { return GetPoison( "Mortal" ); } }
 
         public static List<Poison> Poisons
         {
