@@ -7,7 +7,7 @@ namespace Server.Items {
 
 		[Constructable]
 		public CherryBoard( int amount ) : base( CraftResource.Cherry, amount ) {
-			this.Hue = 716;
+			this.Hue = 2206;
 		}
 
 		public CherryBoard( Serial serial ) : base( serial ) {}

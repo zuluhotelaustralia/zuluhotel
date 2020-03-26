@@ -178,4 +178,7 @@ This exception is fatal, press return to exit
 * DONE assess current status of item insurance
 * DONE need a "I must consider my sins" command or a method to unlock/lock karma
 * DONE bowcraft looks for boards and shows 0
-* TODO cherry wood looks grey but should be a deep red
+* DONE cherry wood looks grey but should be a deep red
+* DONE disable looters rights on monsters
+  just changed it to 10 seconds instead of 2 mins
+* DONE do crafters get spec?

@@ -1269,7 +1269,7 @@ namespace Server.Items
 	    {
 		new CraftResourceInfo( 0x000, 1011542, "Normal",		CraftAttributeInfo.Blank,		CraftResource.RegularWood,	typeof( Log ),			typeof( Board ) ),
 		new CraftResourceInfo( 1132, 1160034, "Pinetree", CraftAttributeInfo.Pinetree, CraftResource.Pinetree, typeof( PinetreeLog ), typeof( PinetreeBoard) ),
-		new CraftResourceInfo( 716, 1160035, "Cherry", CraftAttributeInfo.Cherry, CraftResource.Cherry, typeof( CherryLog ), typeof( CherryBoard) ),
+		new CraftResourceInfo( 2206, 1160035, "Cherry", CraftAttributeInfo.Cherry, CraftResource.Cherry, typeof( CherryLog ), typeof( CherryBoard) ),
 		new CraftResourceInfo( 1045, 1160036, "Oak", CraftAttributeInfo.Oak, CraftResource.Oak, typeof( OakLog ), typeof( OakBoard) ),
 		new CraftResourceInfo( 515, 1160037, "Purple Passion", CraftAttributeInfo.PurplePassion, CraftResource.PurplePassion, typeof( PurplePassionLog ), typeof( PurplePassionBoard) ),
 		new CraftResourceInfo( 48, 1160038, "Golden Reflection", CraftAttributeInfo.GoldenReflection, CraftResource.GoldenReflection, typeof( GoldenReflectionLog ), typeof( GoldenReflectionBoard) ),
