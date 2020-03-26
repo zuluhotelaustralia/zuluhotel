@@ -295,20 +295,7 @@ namespace Server.Misc
 				if( target.Kills >= 5 || (body.IsMonster && IsSummoned( target.Owner as BaseCreature )) || (target.Owner is BaseCreature && (((BaseCreature)target.Owner).AlwaysMurderer || ((BaseCreature)target.Owner).IsAnimatedDead)) )
 					actual = Notoriety.Murderer;
 
-				if( DateTime.UtcNow >= (target.TimeOfDeath + Corpse.MonsterLootRightSacrifice) )
-					return actual;
-
-				Party sourceParty = Party.Get( source );
-
-				List<Mobile> list = target.Aggressors;
-
-				for( int i = 0; i < list.Count; ++i )
-				{
-					if( list[i] == source || (sourceParty != null && Party.Get( list[i] ) == sourceParty) )
-						return actual;
-				}
-
-				return Notoriety.Innocent;
+				return actual;
 			}
 			else
 			{
