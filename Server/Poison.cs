@@ -30,7 +30,7 @@ namespace Server
         /*public abstract TimeSpan Interval{ get; }
         public abstract TimeSpan Duration{ get; }*/
         public abstract string Name { get; }
-        public abstract int Level { get; }
+        public abstract int Level { get; set;}
         public abstract Timer ConstructTimer( Mobile m );
         /*public abstract void OnDamage( Mobile m, ref object state );*/
 

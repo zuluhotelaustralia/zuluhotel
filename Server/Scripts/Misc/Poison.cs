@@ -66,7 +66,7 @@ namespace Server
 	}
 
 	public override string Name{ get{ return m_Name; } }
-	public override int Level{ get{ return m_Level; } }
+	public override int Level{ get{ return m_Level; } set { m_Level = value; } }
 
 	public class PoisonTimer : Timer
 	{

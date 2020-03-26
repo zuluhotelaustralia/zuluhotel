@@ -135,8 +135,10 @@ namespace Server.Engines.Craft
 			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
 			index = AddCraft( typeof( GreaterPoisonPotion ), 1044535, 1044550, 55.0, 105.0, typeof( Nightshade ), 1044358, 4, 1044366 );
 			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( DeadlyPoisonPotion ), 1044535, 1044551, 90.0, 140.0, typeof( Nightshade ), 1044358, 8, 1044366 );
+			index = AddCraft( typeof( DeadlyPoisonPotion ), 1044535, 1044551, 90.0, 110.0, typeof( Nightshade ), 1044358, 8, 1044366 );
 			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+			index = AddCraft( typeof( LethalPoisonPotion ), 1044535, 1044551, 105.0, 140.0, typeof( Nightshade ), 1044358, 12, 1044366 );
+			AddRes( index, typeof( Bottle ), 1044529, 1, 500315 );
 
 			// Cure Potion
 			index = AddCraft( typeof( LesserCurePotion ), 1044536, 1044552, -10.0, 40.0, typeof( Garlic ), 1044355, 1, 1044363 );

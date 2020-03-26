@@ -1,6 +1,7 @@
 using System;
 using Server.Targeting;
 using Server.Items;
+using Server.Mobiles;
 using Server.Network;
 
 namespace Server.SkillHandlers
@@ -111,6 +112,13 @@ namespace Server.SkillHandlers
 			m_MinSkill = potion.MinPoisoningSkill;
 			m_MaxSkill = potion.MaxPoisoningSkill;
 			Priority = TimerPriority.TwoFiftyMS;
+
+			if( from is PlayerMobile ){
+			    PlayerMobile pm = from as PlayerMobile;
+			    if( pm.Spec.SpecName == SpecName.Thief && m_Poison.Level > Poison.Mortal.Level ){
+				m_Poison.Level++;
+			    }
+			}
 		    }
 
 		    protected override void OnTick()
