@@ -2236,12 +2236,15 @@ namespace Server.Items
 
         public virtual int ScaleDamageByDurability( int damage )
         {
-            int scale = 100;
+	    return damage;
+            /*
+	      int scale = 100;
 
-            if ( m_MaxHits > 0 && m_Hits < m_MaxHits )
-                scale = 50 + ((50 * m_Hits) / m_MaxHits);
-
-            return AOS.Scale( damage, scale );
+	      if ( m_MaxHits > 0 && m_Hits < m_MaxHits )
+	      scale = 50 + ((50 * m_Hits) / m_MaxHits);
+	      
+	      return AOS.Scale( damage, scale );
+	    */
         }
 
         public virtual int ComputeDamage( Mobile attacker, Mobile defender )

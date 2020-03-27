@@ -769,12 +769,15 @@ namespace Server.Items
 
         public virtual double ScaleArmorByDurability( double armor )
         {
+	    return armor;
+	    /*
             int scale = 100;
 
             if ( m_MaxHitPoints > 0 && m_HitPoints < m_MaxHitPoints )
                 scale = 50 + ((50 * m_HitPoints) / m_MaxHitPoints);
 
             return ( armor * scale ) / 100;
+	    */
         }
 
         protected void Invalidate()

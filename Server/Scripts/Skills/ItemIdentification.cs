@@ -34,17 +34,33 @@ namespace Server.Items
 		{
 		    if ( from.CheckTargetSkill( SkillName.ItemID, o, 0, 130 ) )
 		    {
-			if ( o is BaseWeapon )
+			if ( o is BaseWeapon ) {
 			    ((BaseWeapon)o).Identified = true;
-			else if ( o is BaseJewel )
-			    ((BaseJewel)o).Identified = true;
-			else if ( o is BaseClothing )
-			    ((BaseClothing)o).Identified = true;
-			else if ( o is BaseArmor )
+			}
+			else if ( o is BaseJewel ) {
+			    BaseJewel j = o as BaseJewel;
+			    j.Identified = true;
+			    if( j.VirtualArmorMod > 0 ){
+				j.Hue = 2406;
+			    }
+			}
+			else if ( o is BaseClothing ) {
+			    BaseClothing c = o as BaseClothing;
+			    c.Identified = true;
+			    if( c.VirtualArmorMod > 0 ){
+				c.Hue = 2406;
+			    }
+			    else if( c.Prot.Level > 0 ){
+				c.Hue = MagicClothing.DecideHue( c.Prot.Element );
+			    }
+			}
+			else if ( o is BaseArmor ) {
 			    ((BaseArmor)o).Identified = true;
+			}
 			
-			if ( !Core.AOS )
+			if ( !Core.AOS ) {
 			    ((Item)o).OnSingleClick( from );
+			}
 		    }
 		    else
 		    {

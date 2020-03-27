@@ -98,8 +98,9 @@ namespace Server{
 	}
 
 	private const double _statmodchance = 0.25; //chance to get a stat mod
-	private const double _skillmodchance = 0.5;
+	private const double _skillmodchance = 0.25;
 	private const double _protchance = 0.25;
+	private const double _armorchance = 0.25;
 	private const double _cursedchance = 0.33; //chance that the loot is cursed
 	private const double _combatweight = 0.33;
 	private const double _craftingweight = 0.1;
@@ -109,7 +110,8 @@ namespace Server{
 	public enum ModType{
 	    Stat,
 	    Skill,
-	    Prot
+	    Prot,
+	    Armor
 	}
 
 	private static List<SkillName> m_CraftingSkills;
@@ -134,19 +136,22 @@ namespace Server{
 		typeof( BodySash ), typeof( Doublet ), typeof( Boots ), typeof( FullApron ), typeof( JesterSuit ), typeof( Sandals ), typeof( Tunic ),
 		typeof( Shoes ), typeof( Shirt ), typeof( Kilt ), typeof( Skirt ), typeof( FancyShirt ), typeof( FancyDress ), typeof( ThighBoots ),
 		typeof( LongPants ), typeof( PlainDress ), typeof( Robe ), typeof( ShortPants ), typeof( HalfApron ), typeof( GoldRing ),
-		typeof( GoldBracelet ), typeof( SilverRing ), typeof( SilverBracelet ), typeof( Necklace ),
+		typeof( GoldBracelet ), typeof( SilverRing ), typeof( SilverBracelet ), typeof( Necklace ), 
 		typeof( GoldNecklace ), typeof( GoldBeadNecklace ), typeof( SilverNecklace ), typeof( SilverBeadNecklace )
 	    };
 
 	public static Type[] AllowedTypes{ get{ return m_AllowedTypes; } }
 
-	private static ModType DecideStatSkillProt(){
+	private static ModType DecideEnchantment(){
 	    double r = Utility.RandomDouble();
 	    if( r < _statmodchance ){
 		return ModType.Stat;
 	    }
 	    else if ( r < _protchance + _statmodchance ){
 		return ModType.Prot;
+	    }
+	    else if( r < _armorchance + _protchance + _statmodchance ){
+		return ModType.Armor;
 	    }
 	    else {
 		return ModType.Skill;
@@ -180,6 +185,25 @@ namespace Server{
 	    return StatType.Int;
 	}
 
+	public static int DecideHue( DamageType dt ) {
+	    switch( dt ){
+		case DamageType.Air:
+		    return 1361;
+		case DamageType.Earth:
+		    return 2749;
+		case DamageType.Fire:
+		    return 1360;
+		case DamageType.Water:
+		    return 2756;
+		case DamageType.Necro:
+		    return 1373;
+		case DamageType.Poison:
+		    return 1372;
+		default:
+		    return 0;
+	    }
+	}	    
+	
 	private static Type DecideType() {
 	    int numtypes = m_AllowedTypes.Length;
 	    int index = Utility.Random(numtypes);
@@ -238,7 +262,7 @@ namespace Server{
 
 	public static Item Generate( int maxbonus ){
 	    Type itemtype = DecideType();
-	    ModType statskill = DecideStatSkillProt();
+	    ModType statskill = DecideEnchantment();
 	    int modamount = DecideAmount( maxbonus );
 	    StatType thestat = DecideStat();
 	    SkillName sn = DecideSkill();
@@ -268,19 +292,24 @@ namespace Server{
 		if( statskill == ModType.Stat ){
 		    switch( thestat ){
 			case StatType.Str:
-			    clothes.StrBonus = modamount * 5;
+			    clothes.StrBonus = modamount;
 			    break;
 			case StatType.Dex:
-			    clothes.StrBonus = modamount * 5;
+			    clothes.StrBonus = modamount;
 			    break;
 			case StatType.Int:
-			    clothes.StrBonus = modamount * 5;
+			    clothes.StrBonus = modamount;
 			    break;
 		    }
 		}
 		else if( statskill == ModType.Prot ){
 		    DamageType dt = (DamageType) Utility.RandomMinMax( (int)DamageType.Air, (int)DamageType.Poison);
 		    clothes.Prot = new Prot( dt, modamount );
+		    //clothes.Hue = DecideHue( dt );
+		}
+		else if( statskill == ModType.Armor ){
+		    //clothes.Hue = 2406;
+		    clothes.VirtualArmorMod = modamount;
 		}
 		else {
 		    //statskill == modtype.skill
@@ -293,15 +322,19 @@ namespace Server{
 		if( statskill == ModType.Stat ){
 		    switch( thestat ){
 			case StatType.Str:
-			    jewel.StrBonus = modamount * 5;
+			    jewel.StrBonus = modamount;
 			    break;
 			case StatType.Dex:
-			    jewel.StrBonus = modamount * 5;
+			    jewel.StrBonus = modamount;
 			    break;
 			case StatType.Int:
-			    jewel.StrBonus = modamount * 5;
+			    jewel.StrBonus = modamount;
 			    break;
 		    }
+		}
+		else if( statskill == ModType.Armor ){
+		    //jewel.Hue = 2406;
+		    jewel.VirtualArmorMod = modamount;
 		}
 		else {
 		    //statskill == modtype.skill

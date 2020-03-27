@@ -58,6 +58,13 @@ namespace Server.Items
 	private AosElementAttributes m_AosResistances;
 	private Prot m_Prot;
 	private ZuluSkillMods m_ZuluSkillMods;
+	private int m_VirtualArmorMod;
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public int VirtualArmorMod {
+	    get { return m_VirtualArmorMod; }
+	    set { m_VirtualArmorMod = value; }
+	}
        
 	[CommandProperty( AccessLevel.GameMaster )]
 	public bool Identified {
@@ -380,39 +387,44 @@ namespace Server.Items
 
 	public override void OnAdded(IEntity parent)
 	{
-	    Mobile mob = parent as Mobile;
+	    if( parent is Mobile ){
+		Mobile mob = parent as Mobile;
 
-	    if ( mob != null )
-	    {
-		//if ( Core.AOS )
-		//    m_AosSkillBonuses.AddTo( mob );
-
-		m_ZuluSkillMods.AddTo( mob );
-		AddStatBonuses( mob );
-		mob.CheckStatTimers();
+		if ( mob != null )
+		{
+		    //if ( Core.AOS )
+		    //    m_AosSkillBonuses.AddTo( mob );
+		    
+		    m_ZuluSkillMods.AddTo( mob );
+		    AddStatBonuses( mob );
+		    mob.CheckStatTimers();
+		    mob.VirtualArmorMod += m_VirtualArmorMod;
+		}
 	    }
-
+	    
 	    base.OnAdded( parent );
 	}
 
 	public override void OnRemoved(IEntity parent)
 	{
-	    Mobile mob = parent as Mobile;
-
-	    if ( mob != null )
-	    {
-		//if ( Core.AOS )
-		//    m_AosSkillBonuses.Remove();
-
-		m_ZuluSkillMods.Remove( mob );
+	    if( parent is Mobile ){
+		Mobile mob = parent as Mobile;
 		
-		string modName = this.Serial.ToString();
-
-		mob.RemoveStatMod( modName + "Str" );
-		mob.RemoveStatMod( modName + "Dex" );
-		mob.RemoveStatMod( modName + "Int" );
-
-		mob.CheckStatTimers();
+		if ( mob != null )
+		{
+		    //if ( Core.AOS )
+		    //    m_AosSkillBonuses.Remove();
+		    
+		    m_ZuluSkillMods.Remove( mob );
+		    mob.VirtualArmorMod -= m_VirtualArmorMod;
+		    string modName = this.Serial.ToString();
+		    
+		    mob.RemoveStatMod( modName + "Str" );
+		    mob.RemoveStatMod( modName + "Dex" );
+		    mob.RemoveStatMod( modName + "Int" );
+		    
+		    mob.CheckStatTimers();
+		}
 	    }
 
 	    base.OnRemoved( parent );
@@ -495,6 +507,7 @@ namespace Server.Items
 	    m_AosSkillBonuses = new AosSkillBonuses( this );
 	    m_ZuluSkillMods = new ZuluSkillMods( this );
 	    m_AosResistances = new AosElementAttributes( this );
+	    m_VirtualArmorMod = 0;
 	}
 
 	public override void OnAfterDuped( Item newItem )
@@ -822,6 +835,27 @@ namespace Server.Items
 			}
 		    }
 
+		    if( this.VirtualArmorMod > 0 ){
+			if( this.VirtualArmorMod == 6 ){
+			    prefix += "Meteoric Steel ";
+			}
+			if( this.VirtualArmorMod == 5 ){
+			    prefix += "Adamantium ";
+			}
+			if( this.VirtualArmorMod == 4 ){
+			    prefix += "Onyx ";
+			}
+			if( this.VirtualArmorMod == 3 ){
+			    prefix += "Obsidian ";
+			}
+			if( this.VirtualArmorMod == 2 ){
+			    prefix += "Steel ";
+			}
+			if( this.VirtualArmorMod == 1 ){
+			    prefix += "Iron ";
+			}
+		    }
+
 		    if( this.Prot.Level > 0 ){
 			suffix += " of Elemental " + this.Prot.Element.ToString();
 
@@ -942,8 +976,10 @@ namespace Server.Items
 	{
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 8 ); // version
+	    writer.Write( (int) 9 ); // version
 
+	    writer.Write( m_VirtualArmorMod );
+	    
 	    if( m_Prot == null ){
 		m_Prot = new Prot();
 	    }
@@ -1012,8 +1048,21 @@ namespace Server.Items
 
 	    switch ( version )
 	    {
+		case 9:
+		    {
+			m_VirtualArmorMod = reader.ReadInt();
+			if( Parent is Mobile ){
+			    ((Mobile)Parent).VirtualArmorMod += m_VirtualArmorMod;
+			}
+			
+			goto case 8;
+		    }
 		case 8:
 		    {
+			if( version == 8 ){
+			    m_VirtualArmorMod = 0;
+			}
+			
 			m_Prot = new Prot();
 			m_Prot.Deserialize( reader );
 			goto case 7;

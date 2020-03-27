@@ -28,10 +28,17 @@ namespace Server.Items
 	private AosElementAttributes m_AosResistances;
 	private AosSkillBonuses m_AosSkillBonuses;
 	private ZuluSkillMods m_ZuluSkillMods;
+	private int m_VirtualArmorMod;
 	private CraftResource m_Resource;
 	private GemType m_GemType;
 	private int m_StrBonus = 0, m_DexBonus = 0, m_IntBonus = 0;
 	private bool m_Identified = false;
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public int VirtualArmorMod {
+	    get { return m_VirtualArmorMod; }
+	    set { m_VirtualArmorMod = value; }
+	}
 
 	[CommandProperty( AccessLevel.GameMaster )]
 	public bool Identified {
@@ -170,7 +177,7 @@ namespace Server.Items
 	    m_ZuluSkillMods = new ZuluSkillMods( this );
 	    m_Resource = CraftResource.Iron;
 	    m_GemType = GemType.None;
-
+	    m_VirtualArmorMod = 0;
 	    Layer = layer;
 
 	    m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax( InitMinHits, InitMaxHits );
@@ -181,10 +188,10 @@ namespace Server.Items
 	    if ( parent is Mobile )
 	    {
 		Mobile from = (Mobile)parent;
-
+		
 		//m_AosSkillBonuses.AddTo( from );
 		m_ZuluSkillMods.AddTo( from );
-
+		from.VirtualArmorMod += m_VirtualArmorMod;
 		int strBonus = m_StrBonus;
 		int dexBonus = m_DexBonus;
 		int intBonus = m_IntBonus;
@@ -215,6 +222,7 @@ namespace Server.Items
 
 		//m_AosSkillBonuses.Remove();
 		m_ZuluSkillMods.Remove( (Mobile)parent );
+		from.VirtualArmorMod -= m_VirtualArmorMod;
 		string modName = this.Serial.ToString();
 
 		from.RemoveStatMod( modName + "Str" );
@@ -256,65 +264,86 @@ namespace Server.Items
 		    }
 
 		    if( this.DexBonus > 0 ){
-			if( this.StrBonus == 30 ){
+			if( this.StrBonus == 6 ){
 			    prefix += " Escape Artist's ";
 			}
-			else if( this.StrBonus == 25 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Acrobat's ";
 			}
-			else if( this.StrBonus == 20 ){
+			else if( this.StrBonus == 4 ){
 			    prefix += " Tumbler's ";
 			}
-			else if( this.StrBonus == 15 ){
+			else if( this.StrBonus == 3 ){
 			    prefix += " Catburglar's ";
 			}
-			else if( this.StrBonus == 10 ){
+			else if( this.StrBonus == 2 ){
 			    prefix += " Thief's ";
 			}
-			else if( this.StrBonus == 5 ){
+			else if( this.StrBonus == 1 ){
 			    prefix += " Cutpurse's ";
 			}
 		    }
 
 		    if( this.DexBonus > 0 ){
-			if( this.StrBonus == 30 ){
+			if( this.StrBonus == 6 ){
 			    prefix += " Oracle's ";
 			}
-			else if( this.StrBonus == 25 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Archmage's ";
 			}
-			else if( this.StrBonus == 20 ){
+			else if( this.StrBonus == 4 ){
 			    prefix += " Magister's ";
 			}
-			else if( this.StrBonus == 15 ){
+			else if( this.StrBonus == 3 ){
 			    prefix += " Wizard's ";
 			}
-			else if( this.StrBonus == 10 ){
+			else if( this.StrBonus == 2 ){
 			    prefix += " Adept's ";
 			}
-			else if( this.StrBonus == 5 ){
+			else if( this.StrBonus == 1 ){
 			    prefix += " Apprentice's ";
 			}
 		    }
 
 		    if( this.StrBonus > 0 ){
-			if( this.StrBonus == 30 ){
+			if( this.StrBonus == 6 ){
 			    prefix += " King's ";
 			}
-			else if( this.StrBonus == 25 ){
+			else if( this.StrBonus == 5 ){
 			    prefix += " Warlord's ";
 			}
-			else if( this.StrBonus == 20 ){
+			else if( this.StrBonus == 4 ){
 			    prefix += " Hero's ";
 			}
-			else if( this.StrBonus == 15 ){
+			else if( this.StrBonus == 3 ){
 			    prefix += " Champion's ";
 			}
-			else if( this.StrBonus == 10 ){
+			else if( this.StrBonus == 2 ){
 			    prefix += " Veteran's ";
 			}
-			else if( this.StrBonus == 5 ){
+			else if( this.StrBonus == 1 ){
 			    prefix += " Warrior's ";
+			}
+		    }
+
+		    if( this.VirtualArmorMod > 0 ){
+			if( this.VirtualArmorMod == 6 ){
+			    prefix += "Meteoric Steel ";
+			}
+			if( this.VirtualArmorMod == 5 ){
+			    prefix += "Adamantium ";
+			}
+			if( this.VirtualArmorMod == 4 ){
+			    prefix += "Onyx ";
+			}
+			if( this.VirtualArmorMod == 3 ){
+			    prefix += "Obsidian ";
+			}
+			if( this.VirtualArmorMod == 2 ){
+			    prefix += "Steel ";
+			}
+			if( this.VirtualArmorMod == 1 ){
+			    prefix += "Iron ";
 			}
 		    }
 		}
@@ -430,8 +459,9 @@ namespace Server.Items
 	{
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 4 ); // version
+	    writer.Write( (int) 5 ); // version
 
+	    writer.Write( m_VirtualArmorMod );
 	    m_ZuluSkillMods.Serialize( writer );
 	    writer.Write( m_StrBonus );
 	    writer.Write( m_DexBonus );
@@ -456,8 +486,20 @@ namespace Server.Items
 
 	    switch ( version )
 	    {
+		case 5:
+		    {
+			m_VirtualArmorMod = reader.ReadInt();
+			if( Parent is Mobile ){
+			    ((Mobile)Parent).VirtualArmorMod += m_VirtualArmorMod;
+			}
+			goto case 4;
+		    }
 		case 4:
 		    {
+			if( version == 4 ){
+			    m_VirtualArmorMod = 0;
+			}
+			
 			if( m_ZuluSkillMods == null ){
 			    m_ZuluSkillMods = new ZuluSkillMods( this );
 			}
