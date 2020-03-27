@@ -181,7 +181,8 @@ This is a list of bugs.
   just changed it to 10 seconds instead of 2 mins
 * DONE do crafters get spec?
 * DONE there's no Poison damage type nor prot items
-* TODO no armor clothing
+* DONE no armor clothing
 * TODO slayers only dropping Silver?
 * TODO remove all superslayers, only go with double damage
 * DONE looks like with current math you can never fail gathering
+* TODO spawn the bone collector boss in Mt Koltz
