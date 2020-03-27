@@ -67,7 +67,7 @@ namespace Server.Mobiles
 	{
 	    AddLoot( LootPack.SuperBoss, 2 );
 	    AddLoot( LootPack.UltraRich );
-	    AddLoot( LootPack.HighScrolls, Utility.RandomMinMax( 6, 60 ) );
+	    AddLoot( LootPack.HighScrolls, Utility.RandomMinMax( 2, 20 ) );
 	    AddLoot( LootPack.NecroBookPack );
 	    AddLoot( LootPack.GreaterNecroScrolls, 8 );
 	}
@@ -84,7 +84,7 @@ namespace Server.Mobiles
 	    if ( from != null && from != this && !m_InHere )
 	    {
 		m_InHere = true;
-		from.Damage( Utility.RandomMinMax(10, 30), this, DamageType.None, AttackType.Ranged );
+		from.Damage( Utility.RandomMinMax(5, 30), this, DamageType.Air, AttackType.Magical );
 
 		MovingEffect( from, 0xECA, 10, 0, false, false, 0, 0 );
 		PlaySound( 0x491 );
