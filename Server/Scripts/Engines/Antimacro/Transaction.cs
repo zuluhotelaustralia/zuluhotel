@@ -94,7 +94,7 @@ namespace Server.Antimacro
 	    }
 
 	    if ( score <= 0.85 && score > 0.5 ) {
-		next = next.Add( new TimeSpan(1, 0, 0, 0) ); // test em tomorrow
+		next = next.Add( new TimeSpan(2, 0, 0, 0) ); // test em in a few days
 	    }
 
 	    if ( score <= 0.5 && score > 0.3 ) {
@@ -111,10 +111,14 @@ namespace Server.Antimacro
 	public void MutateTrustScore( bool good ) {
 	    double current = m_SubjectAccount.TrustScore;
 	    if ( good ) {
-		m_SubjectAccount.TrustScore = (0.8 * current) + 0.1; //i dunno
+		if( m_SubjectAccount.TrustScore <= 0.9 ){
+		    m_SubjectAccount.TrustScore += 0.05; //i dunno
+		}
 	    }
 	    else{
-		m_SubjectAccount.TrustScore = current * 0.5;
+		if( m_SubjectAccount.TrustScore >= 0.01 ){
+		    m_SubjectAccount.TrustScore = current * 0.5;
+		}
 	    }
 	}
 
