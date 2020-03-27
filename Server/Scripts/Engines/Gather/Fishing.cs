@@ -148,9 +148,9 @@ namespace Server.Engines.Gather {
 	    int y = 1300;
 	    
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-						0.9, 2500.0, 0.0, 150.0, typeof(Server.Items.Fish)));
+						0.9, 250.0, 0.0, 150.0, typeof(Server.Items.Fish)));
 	    m_System.m_Nodes.Add(new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-						0.9, 2500.0, 50.0, 150.0, typeof(Server.Items.Fish)));
+						0.9, 250.0, 50.0, 150.0, typeof(Server.Items.Fish)));
 	}
 	
         private static Fishing m_System;

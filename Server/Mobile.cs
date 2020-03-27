@@ -800,7 +800,12 @@ namespace Server
 
 	private GatherContext m_GatherContext;
 	public GatherContext GatherContext{
-	    get { return m_GatherContext; }
+	    get {
+		if( m_GatherContext == null ){
+		    m_GatherContext = new GatherContext( this );
+		}
+		return m_GatherContext;
+	    }
 	    set { m_GatherContext = value; }
 	}	    
 		

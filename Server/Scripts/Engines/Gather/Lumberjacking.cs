@@ -88,55 +88,31 @@ namespace Server.Engines.Gather {
 
 	    // ok fuck it I can't think of a more elegant way to do this without a massive refactor for which I have no motivation
 	    // gathernode (x, y, vx, vy, abundance, difficulty, minskill, maxskill, type)
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.9, 2500.0, 0.0, 80.0, typeof(Server.Items.Log) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.9, 2500.0, 10.0, 80.0, typeof(Server.Items.PinetreeLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.9, 2500.0, 10.0, 80.0, typeof(Server.Items.CherryLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.9, 2000.0, 20.0, 90.0, typeof(Server.Items.OakLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.9, 1000.0, 20.0, 90.0, typeof(Server.Items.PurplePassionLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.8, 2000.0, 20.0, 900.0, typeof(Server.Items.GoldenReflectionLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.8, 1800.0, 30.0, 100.0, typeof(Server.Items.HardrangerLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.8, 1800.0, 30.0, 100.0, typeof(Server.Items.JadewoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.8, 500.0, 40.0, 150.0, typeof(Server.Items.DarkwoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.7, 1500.0, 40.0, 100.0, typeof(Server.Items.StonewoodLog) )); // make good sparring gear?
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.7, 1250.0, 40.0, 110.0, typeof(Server.Items.SunwoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.5, 2000.0, 40.0, 90.0, typeof(Server.Items.GauntletLog) )); // make good bows? arrows?
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.7, 1100.0, 50.0, 120.0, typeof(Server.Items.SwampwoodLog) )); // make good sparring arrows due to softness?
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.6, 1000.0, 60.0, 130.0, typeof(Server.Items.StardustLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.6, 900.0, 70.0, 130.0, typeof(Server.Items.SilverleafLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.5, 900.0, 70.0, 130.0, typeof(Server.Items.StormtealLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.5, 900.0, 80.0, 150.0, typeof(Server.Items.EmeraldwoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.4, 800.0, 90.0, 150.0, typeof(Server.Items.BloodwoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.3, 800.0, 100.0, 150.0, typeof(Server.Items.CrystalwoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.3, 700.0, 100.0, 150.0, typeof(Server.Items.BloodhorseLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.2, 500.0, 100.0, 150.0, typeof(Server.Items.DoomwoodLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.1, 300.0, 130.0, 150.0, typeof(Server.Items.ZuluLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.1, 100.0, 130.0, 150.0, typeof(Server.Items.DarknessLog) ));
-	    m_System.Nodes.Add( new GatherNode(x + Utility.RandomMinMax(-100, 100), y + Utility.RandomMinMax(-100, 100), Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10),
-					       0.1, 100.0, 130.0, 150.0, typeof(Server.Items.ElvenLog) ));
-
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 250.0, 0.0, 80.0, typeof(Server.Items.Log) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 250.0, 10.0, 80.0, typeof(Server.Items.PinetreeLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 250.0, 10.0, 80.0, typeof(Server.Items.CherryLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 200.0, 20.0, 90.0, typeof(Server.Items.OakLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 100.0, 20.0, 90.0, typeof(Server.Items.PurplePassionLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 200.0, 20.0, 900.0, typeof(Server.Items.GoldenReflectionLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 180.0, 30.0, 100.0, typeof(Server.Items.HardrangerLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 180.0, 30.0, 100.0, typeof(Server.Items.JadewoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 50.0, 40.0, 150.0, typeof(Server.Items.DarkwoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.7, 150.0, 40.0, 100.0, typeof(Server.Items.StonewoodLog) )); // make good sparring gear?
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.7, 125.0, 40.0, 110.0, typeof(Server.Items.SunwoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5, 200.0, 40.0, 90.0, typeof(Server.Items.GauntletLog) )); // make good bows? arrows?
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.7, 110.0, 50.0, 120.0, typeof(Server.Items.SwampwoodLog) )); // make good sparring arrows due to softness?
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.6, 100.0, 60.0, 130.0, typeof(Server.Items.StardustLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.6, 90.0, 70.0, 130.0, typeof(Server.Items.SilverleafLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5, 90.0, 70.0, 130.0, typeof(Server.Items.StormtealLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.5, 90.0, 80.0, 150.0, typeof(Server.Items.EmeraldwoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.4, 80.0, 90.0, 150.0, typeof(Server.Items.BloodwoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3, 80.0, 100.0, 150.0, typeof(Server.Items.CrystalwoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3, 70.0, 100.0, 150.0, typeof(Server.Items.BloodhorseLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.2, 50.0, 100.0, 150.0, typeof(Server.Items.DoomwoodLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 30.0, 130.0, 150.0, typeof(Server.Items.ZuluLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 10.0, 130.0, 150.0, typeof(Server.Items.DarknessLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 10.0, 130.0, 150.0, typeof(Server.Items.ElvenLog) ));
+	    
 	}
 	
         private static Lumberjacking m_System;

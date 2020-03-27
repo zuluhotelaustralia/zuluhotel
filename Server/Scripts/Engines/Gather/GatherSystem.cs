@@ -133,21 +133,6 @@ namespace Server.Engines.Gather {
 	    //check if valid gathering location/tool uses remaining/tool broken/etc.
 	    if( CheckTool(from, tool) ){
 
-		Account acct = from.Account as Account;
-		//check for unattended/afk gathering here
-		//from msdn:  DateTime.Compare(t1, t2) returns positive integer if t1 is later than t2
-				
-		if ( DateTime.Compare(acct.NextTransaction, DateTime.UtcNow ) <= 0 ) {
-		    // give high-trust users a break... can tweak this later
-		    // e.g. if your trust score is 98% you'll only get a challenge 2% of the time your
-		    // challenge date comes up
-		    if ( Utility.RandomDouble() > acct.TrustScore ) {
-			if( Server.Antimacro.AntimacroTransaction.Enabled ){
-			    new AntimacroTransaction(from);
-			}
-		    }
-		}		    
-		
 		//TODO:  can this be called if from is dead?
 		from.Target = new GatherTarget( tool, this );
 		return true;
@@ -179,13 +164,8 @@ namespace Server.Engines.Gather {
 	    GatherContext context;
 	    GatherNode n;
 
-	    if( from.GatherContext != null ){
-		from.GatherContext.Validate();
-	    }
-	    
-	    //if they have no context object (could be brand new mobile, etc.)
-	    // or if their context failed to validate, i.e. could have moved or failed a skill check
-	    if( from.GatherContext == null || !from.GatherContext.Validity ){
+	    // if their context failed to validate, i.e. could have moved or failed a skill check or be new
+	    if( !from.GatherContext.Validate() ){
 		n = Strike( BuildNodeList(s, from, sand) );
 		from.GatherContext = new GatherContext( from.X, from.Y, from, n );
 	    }
@@ -239,17 +219,14 @@ namespace Server.Engines.Gather {
 	    //
 	    // we'll use minskill as a proxy for this since it makes the math a bit easier:
 	    
-	    if( n.MinSkill <= 0.0 ) {
-		chance = s.Value * n.Abundance;
-	    }
-	    else {
-		chance = s.Value * n.Abundance / n.MinSkill;
-	    }
-	
-	    //cap harvesting success rate at 98%
-	    if ( chance > 0.98 ) {
+	    chance = s.Value / n.MaxSkill;
+	    
+	    //cap harvesting success rate at 98%, auto-succeed if newb
+	    if ( chance > 0.98 || s.Value <= 0.0 ) {
 		chance = 0.98;
 	    }
+
+	    Console.WriteLine( "Chance is {0}", chance );
 	    
 	    if ( from.CheckSkill( s, chance ) ){
 		if( sand ) {
@@ -346,20 +323,13 @@ namespace Server.Engines.Gather {
 
 	    double a = ( n.Abundance * n.Difficulty ) / dist; // kinda exponential decay
 
-	    if ( a > 1.0 ) {
-		return true;
-	    }
-	    else if ( a < 0.01 ) {
-		return false;
-	    }
-
-	    return ( a >= Utility.RandomDouble() );
+	    return ( a >= 0.01);
 	}
 
 	// build a list of which nodes are available to the player, skillwise
 	public List<GatherNode> BuildNodeList( Skill s, Mobile m, bool sand ){
 	    List<GatherNode> nodes = new List<GatherNode>();
-
+	    PlayerMobile pm = m as PlayerMobile;
 	    //if they're mining on sand we don't want to spawn them icerock or something
 	    // although perhaps we might want to consider specifically lavarock?
 	    if( sand ){
@@ -372,7 +342,17 @@ namespace Server.Engines.Gather {
 
 			if ( IncludeByDistance(n, m) ){
 			    //add the node from m_Nodes to the ephemeral list we're building
-			    nodes.Add(n);
+			    if( this is Mining &&
+				pm.Spec.SpecName != SpecName.Crafter &&
+				(n.Resource == typeof( EbonTwilightSapphireOre ) ||
+				 n.Resource == typeof( DarkSableRubyOre ) ||
+				 n.Resource == typeof( RadiantNimbusDiamondOre ) ) ){
+				continue;
+			    }
+			    else {
+				Console.WriteLine("including {0}, a={1} d={2} min={3}", n.Resource.ToString(), n.Abundance, n.Difficulty, n.MinSkill);
+				nodes.Add(n);
+			    }
 			}
 		    }
 		}
@@ -382,7 +362,7 @@ namespace Server.Engines.Gather {
 		    // and can't hit anything.  this will cause a server crash in Strike(), and more importantly
 		    // is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
 		    // --sith
-
+		    Console.WriteLine("default add");
 		    nodes.Add( m_Nodes[0] ); //force-add the first node which should be Iron, normal wood, etc.
 		}
 	    }
@@ -394,7 +374,7 @@ namespace Server.Engines.Gather {
 	public GatherNode Strike( List<GatherNode> nodes ){
 	    int numNodes = nodes.Count;
 	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
-
+	    Console.WriteLine( "struck {0}", nodes[nodeStruck -1].Resource.ToString() );
 	    // list indices are zero-based
 	    return nodes[ nodeStruck - 1 ];
 	}

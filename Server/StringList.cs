@@ -38,7 +38,7 @@ namespace Server
 	    m_Language = language;
 	    m_Table = new Hashtable();
 
-	    string path = "/home/nathan/Games/ZuluHotel/Cliloc.enu";
+	    string path = "/Users/nathan/Games/uoclient/ZuluHotel/Cliloc.enu";
 
 	    if ( path == null )
 	    {

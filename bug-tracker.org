@@ -12,43 +12,42 @@ This is a list of bugs.
 * DONE wraith form takes forever to tick
 * DONE Example:  Shepherd's Crook [ Exceptional / Bloodhorse ] shows incorrect cliloc string (1160518 instead of ???)
 * DONE Unequipping certain items crashes server:
-#+begin_quote
+  #+begin_quote
   Error:
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at Server.Items.BaseArmor.get_PhysicalResistance() in /home/runzh/zuluhotel/Server/Scripts/Items/Armor/BaseArmor.cs:line 457
-   at Server.Mobile.RemoveItem(Item item) in /home/runzh/zuluhotel/Server/Mobile.cs:line 6268
-   at Server.Item.MoveToWorld(Point3D location, Map map) in /home/runzh/zuluhotel/Server/Item.cs:line 1344
-   at Server.Item.Internalize() in /home/runzh/zuluhotel/Server/Item.cs:line 1898
-   at Server.Mobile.Lift(Item item, Int32 amount, Boolean& rejected, LRReason& reject) in /home/runzh/zuluhotel/Server/Mobile.cs:line 4386
-   at Server.Network.PacketHandlers.LiftReq(NetState state, PacketReader pvSrc) in /home/runzh/zuluhotel/Server/Network/PacketHandlers.cs:line 1007
-   at Server.Network.MessagePump.HandleReceive(NetState ns) in /home/runzh/zuluhotel/Server/Network/MessagePump.cs:line 260
-   at Server.Network.MessagePump.Slice() in /home/runzh/zuluhotel/Server/Network/MessagePump.cs:line 127
-   at Server.Core.Main(String[] args) in /home/runzh/zuluhotel/Server/Main.cs:line 539
-Crash: Generating report...done
-Crash: Backing up...done
-This exception is fatal, press return to exit
-#+end_quote
+  System.NullReferenceException: Object reference not set to an instance of an object.
+  at Server.Items.BaseArmor.get_PhysicalResistance() in /home/runzh/zuluhotel/Server/Scripts/Items/Armor/BaseArmor.cs:line 457
+  at Server.Mobile.RemoveItem(Item item) in /home/runzh/zuluhotel/Server/Mobile.cs:line 6268
+  at Server.Item.MoveToWorld(Point3D location, Map map) in /home/runzh/zuluhotel/Server/Item.cs:line 1344
+  at Server.Item.Internalize() in /home/runzh/zuluhotel/Server/Item.cs:line 1898
+  at Server.Mobile.Lift(Item item, Int32 amount, Boolean& rejected, LRReason& reject) in /home/runzh/zuluhotel/Server/Mobile.cs:line 4386
+  at Server.Network.PacketHandlers.LiftReq(NetState state, PacketReader pvSrc) in /home/runzh/zuluhotel/Server/Network/PacketHandlers.cs:line 1007
+  at Server.Network.MessagePump.HandleReceive(NetState ns) in /home/runzh/zuluhotel/Server/Network/MessagePump.cs:line 260
+  at Server.Network.MessagePump.Slice() in /home/runzh/zuluhotel/Server/Network/MessagePump.cs:line 127
+  at Server.Core.Main(String[] args) in /home/runzh/zuluhotel/Server/Main.cs:line 539
+  Crash: Generating report...done
+  Crash: Backing up...done
+  This exception is fatal, press return to exit
+  #+end_quote
 * DONE So yeah, this occurs with a wooden shield with m_Resource set to any wooden resource other than RegularWood.  If you set it to an ore or to RegularWood this does not crash.
-   get_PhysicalResistance calls GetProtOffset(), GetResourceAttrs().ArmorPhysicalResist
-   GetResourceAttrs calls into CraftResources.GetInfo, looks like this is it
+  get_PhysicalResistance calls GetProtOffset(), GetResourceAttrs().ArmorPhysicalResist
+  GetResourceAttrs calls into CraftResources.GetInfo, looks like this is it
 * DONE dont allow mark/recall/gate in moonglow/council of mages
 * DONE allow casing in council of mages
-   UNABLE TO DUPLICATE
+  UNABLE TO DUPLICATE
 * DONE clean up zone after endgame
-* TODO [DALERON] don't let zone markers get worldsaved
 * DONE can't [escape properly
 * DONE Crafting skill gains
-   Verify the boost in smithy shop
+  Verify the boost in smithy shop
 * DONE Can only sell iron ore to vendor
-   Do we care?  You can sell colours items, but they sell for the same
-   price as iron
-   I don't care about price deltas but they should accept coloured ore
+  Do we care?  You can sell colours items, but they sell for the same
+  price as iron
+  I don't care about price deltas but they should accept coloured ore
 * DONE Mining action timer
 * DONE coloured ore AR rating
-   Verify this scales how we want it
+  Verify this scales how we want it
 * TODO Material Special Property (ex silver vs undead).
-   Should silver weapons do bonus against undead?  I think we're
-   missing special properties of all ores.
+  Should silver weapons do bonus against undead?  I think we're
+  missing special properties of all ores.
 * DONE Crafting region near newbie dungeon
 * DONE battle royale should report when it will start next
 * DONE assess weight of smith hammer
@@ -58,7 +57,6 @@ This exception is fatal, press return to exit
 * DONE make a command list, unless perhaps [help works 
 * DONE add spam to see where you should go in BR
 * DONE add a sellall command
-* TODO battle royale timers and chat spam need sanity checks
 * DONE make skillgain high in moonglow
 * DONE make items spawn identified in battleroyale
 * DONE lumberjacking
@@ -182,3 +180,8 @@ This exception is fatal, press return to exit
 * DONE disable looters rights on monsters
   just changed it to 10 seconds instead of 2 mins
 * DONE do crafters get spec?
+* DONE there's no Poison damage type nor prot items
+* TODO no armor clothing
+* TODO slayers only dropping Silver?
+* TODO remove all superslayers, only go with double damage
+* DONE looks like with current math you can never fail gathering

@@ -19,7 +19,7 @@ namespace Server {
 	public static void Prots_OnCommand( CommandEventArgs e ){
 	    PlayerMobile pm = e.Mobile as PlayerMobile;
 	    pm.Prots.UpdateProts();
-	    pm.SendMessage("Air: {0}, Earth: {1}, Fire: {2}, Necro: {3}, Water: {4}", pm.Prots.Air, pm.Prots.Earth, pm.Prots.Fire, pm.Prots.Necro, pm.Prots.Water );
+	    pm.SendMessage("Air: {0}, Earth: {1}, Fire: {2}, Necro: {3}, Water: {4}, Poison: {5}", pm.Prots.Air, pm.Prots.Earth, pm.Prots.Fire, pm.Prots.Necro, pm.Prots.Water, pm.Prots.Poison );
 	}
 	    
 	public static void GetProts_OnCommand( CommandEventArgs e ){
@@ -34,6 +34,7 @@ namespace Server {
 	private int _air;
 	private int _earth;
 	private int _necro;
+	private int _poison;
 	
 	public Prots( Mobile parent ){
 	    _parent = parent;
@@ -42,6 +43,7 @@ namespace Server {
 	    _earth = 0;
 	    _water = 0;
 	    _necro = 0;
+	    _poison = 0;
 	}
 
 	public int Fire {
@@ -64,6 +66,10 @@ namespace Server {
 	    get { return _necro; }
 	    set { _necro = value; }
 	}
+	public int Poison {
+	    get { return _poison; }
+	    set { _poison = value; }
+	}
 
        	public void UpdateProts(){
 	    _air = PiecewiseScale(DamageType.Air);
@@ -71,6 +77,7 @@ namespace Server {
 	    _fire = PiecewiseScale(DamageType.Fire);
 	    _necro = PiecewiseScale(DamageType.Necro);
 	    _water = PiecewiseScale(DamageType.Water);
+	    _poison = PiecewiseScale(DamageType.Poison);
 	}
 
 	//index of the matrix corresponds to a server.layer
@@ -110,9 +117,9 @@ namespace Server {
 	    if( tally > 3 ){
 		tally = 3; //hard cap at 75% prot
 	    }
-	    if( tally > 0 && tally < 1.0 ){
+	    /*if( tally > 0 && tally < 1.0 ){
 		tally = 1.0;
-	    }
+	    }*/
 	    
 	    return (int)tally;
 	}
@@ -225,101 +232,7 @@ namespace Server {
 	    }
 	    return 0;
 	}
-	
-	private double NeckProt( DamageType dt ){
-	    if( _parent.NeckArmor != null ){
-		Item armor = _parent.NeckArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}
-	private double HandsProt( DamageType dt){
-	    if( _parent.HandArmor != null ){
-		Item armor = _parent.HandArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}
-       
-	private double ArmsProt( DamageType dt){
-	    if( _parent.ArmsArmor != null ){
-		Item armor = _parent.ArmsArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}
-	private double HeadProt( DamageType dt){
-	    if( _parent.HeadArmor != null ){
-		Item armor = _parent.HeadArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}
-	private double LegsProt( DamageType dt){
-	    if( _parent.LegsArmor != null ){
-		Item armor = _parent.LegsArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}
-	private double ChestProt( DamageType dt){
-	    if( _parent.ChestArmor != null ){
-		Item armor = _parent.ChestArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}	
-	private double ShieldProt( DamageType dt){
-	    if( _parent.ShieldArmor != null ){
-		Item armor = _parent.ShieldArmor;
-		return (double)Assess(armor, dt);
-	    }
-	    else {
-		return 0;
-	    }
-	}
-	private double RingProt( DamageType dt ){
-	    Item ring = _parent.FindItemOnLayer( Layer.Ring ) as Item;
-	    if( ring != null ){
-		return (double)Assess(ring, dt);
-	    }
-	    else{
-		return 0;
-	    }
-	}
-
-	private double WristProt( DamageType dt ){
-	    Item bracelet = _parent.FindItemOnLayer( Layer.Bracelet ) as Item;
-	    if( bracelet != null ){
-		return (double)Assess(bracelet, dt);
-	    }
-	    else{
-		return 0;
-	    }
-	}
-
-	private double EarringsProt( DamageType dt ){
-	    Item earrings = _parent.FindItemOnLayer( Layer.Earrings ) as Item;
-	    if( earrings != null ){
-		return (double)Assess(earrings, dt);
-	    }
-	    else{
-		return 0;
-	    }
-	}
-	
+		
 	private class InternalTarget : Target{
 	    public InternalTarget( ) : base( 12, false, TargetFlags.None ){
 	    }

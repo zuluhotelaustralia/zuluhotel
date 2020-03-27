@@ -1,5 +1,7 @@
 using System;
 using Server;
+using Server.Accounting;
+using Server.Antimacro;
 using Server.Items;
 using Server.Targeting;
 using Server.Multis;
@@ -62,7 +64,9 @@ namespace Server.Engines.Gather
 	{
 	    //ensure that tile is in range
 	    //ensure that they're gathering from a valid tile
-
+	    //check for unattended/afk gathering here
+	    //from msdn:  DateTime.Compare(t1, t2) returns positive integer if t1 is later than t2
+				
 	    if ( m_System is Mining && targeted is StaticTarget )
 	    {
 		MineGrave(from, targeted);
@@ -88,6 +92,17 @@ namespace Server.Engines.Gather
 	    else if ( m_System is Mining && targeted is TreasureMap )
 		((TreasureMap)targeted).OnBeginDig( from );
 	    else{
+		Account acct = from.Account as Account;
+		if ( DateTime.Compare(acct.NextTransaction, DateTime.UtcNow ) <= 0 ) {
+		    // give high-trust users a break... can tweak this later
+		    // e.g. if your trust score is 98% you'll only get a challenge 2% of the time your
+		    // challenge date comes up
+		    if ( Utility.RandomDouble() > acct.TrustScore ) {
+			if( Server.Antimacro.AntimacroTransaction.Enabled ){
+			    new AntimacroTransaction(from);
+			}
+		    }
+		}		    
 		m_System.StartGathering( from, m_Tool, targeted );
 	    }
 	}
