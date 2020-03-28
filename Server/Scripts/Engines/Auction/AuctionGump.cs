@@ -36,7 +36,9 @@ namespace Server.Auction{
 
 	private const int _windowX = 700;
 	private const int _windowY = 500;
-		
+
+	private Dictionary<int, AuctionItem> _dict;
+	    
 	public AuctionGump( Mobile from, AuctionController stone ) : base( 100, 100 )
 	{
 	    m_Viewer = from;
@@ -46,6 +48,8 @@ namespace Server.Auction{
 	    Disposable = true;
 	    Dragable = true;
 	    Resizable = false;
+
+	    _dict = new Dictionary<int, AuctionItem>();
 
 	    int pages = NumPages();
 
@@ -65,61 +69,64 @@ namespace Server.Auction{
 
 	    
 	    if( m_Stone.SaleItems.Count == 0 ){
-		AddHtml(_col1X, _row1Y, 460, 100, "<font color='#FFFFFF'>Nothing for sale at this time.</font>", false, false);
+		AddHtml(_col1X, _row1Y, 460, 100, "<basefont color='#FFFFFF'>Nothing for sale at this time.</basefont>", false, false);
+		return;
 	    }
-	    
-	    //so for e.g. 12 items on sale, numpages() will return 2 and totalItems is 12,
-	    // therefore the first page needs to have 8 items and the 2nd page just 4
-	    for( int i=1; i<(pages + 1); i++ ){
-		AddPage(i);
-	
-		if( m_Stone.SaleItems.Count >= (i * m_ItemsPerPage) ){
 
-		    for( int k=0; i<9; i++ ){
+	    int idx = 0; // this is just the position on the page!
+	    int dictindex = 0;
+	    int currentpage = 1;
+	    AddPage( currentpage );
+	    foreach( AuctionItem item in m_Stone.SaleItems ){
+		_dict.Add(dictindex, item);
+		//MakeBox( _col1X + (170 * idx), _row1Y + (170 * (idx/4)), dictindex, item );
+		MakeBox( idx, dictindex, item );
+		idx++;
+		dictindex++;
 
-			int listindex = (i * m_ItemsPerPage) + k;
-			AuctionItem ai = m_Stone.SaleItems[ listindex ];
-			
-			MakeBox( _col1X + (170 * k), _row1Y + (170 * (k/4)), listindex, ai );
-		    }
-
-		    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.NextPageButton, GumpButtonType.Page, i+1);
-		    AddImageTiled( _col4X, _footerY, 68, 22, 2624 ); //paging button BG
-		    AddLabel( _col4X + 20, _footerY + 2, 49, @"Next");
-
-		    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Page, i-1);
+		if( currentpage > 1 ){
+		    // add "prev page" button"
+		    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Page, currentpage - 1);
 		    AddImageTiled( _col3X, _footerY, 68, 22, 2624 ); //paging button BG
 		    AddLabel( _col3X + 10, _footerY + 2, 49, @"Prev");
 		}
-		else{
-		    int itemsthispage = m_Stone.SaleItems.Count - ( (i-1) * m_ItemsPerPage );
-	
-		    for( int j=1; j < (itemsthispage + 1); j++){
+		
+		if( idx > 7 ){
 
-			int listindex = ( (i-1) * m_ItemsPerPage ) + (j-1);
-			AuctionItem ai = m_Stone.SaleItems[ listindex ];
-			
-			MakeBox( _col1X + (170 * (j-1) ), _row1Y + (170 * (j/4)), listindex, ai );
+		    // and we're about to move to the next page so add "next page" button
+		    AddButton( _col4X, _footerY, 247, 248, (int)Buttons.NextPageButton, GumpButtonType.Page, currentpage + 1);
+		    AddImageTiled( _col4X, _footerY, 68, 22, 2624 ); //paging button BG
+		    AddLabel( _col4X + 20, _footerY + 2, 49, @"Next");
 
-			if( i > 1 ){
-			    AddButton( _col3X, _footerY, 247, 248, (int)Buttons.PrevPageButton, GumpButtonType.Page, i-1);
-			    AddImageTiled( _col3X, _footerY, 68, 22, 2624 ); //paging button BG
-			    AddLabel( _col3X + 10, _footerY + 2, 49, @"Prev");
-			}
-		    }
-		}
+		    idx = 0;
+		    currentpage++;
+		    AddPage( currentpage );
+		}		   
 	    }
 	}
 
-	private void MakeBox( int x, int y, int idx, AuctionItem ai ){
+	private void MakeBox( int idx, int dictindex, AuctionItem ai ){
+	    int x = _col1X;
+	    int y = _row1Y;
+
+	    //row1 0, 1, 2, 3
+	    if( idx < 4 ){
+		x += (170 * idx);
+	    }
+	    else {
+		// 4, 5, 6, 7
+		x += (170 * (idx - 4));
+		y += 170;
+	    }
+	    
 	    AddBackground( x, y, _boxsize, _boxsize, 9350 );
-	    AddRadio( x, y, 208, 209, false, idx );
+	    AddRadio( x, y, 208, 209, false, dictindex );
 	    AddItem( x + 20, y, ai.SaleItem.ItemID, ai.SaleItem.Hue );
 	    AddHtml( x + 5, y + 20, _boxsize, 20, ai.SaleItem.Name == null ? ai.SaleItem.GetType().Name : ai.SaleItem.Name, false, false);
 	    AddHtml( x + 5, y + 40, _boxsize, 20, "Amount: " + ai.SaleItem.Amount, false, false);
 	    AddHtml( x + 5, y + 60, _boxsize, 20, "Bid: " + (ai.LeadingBid == 0 ? ai.ListPrice.ToString() : ai.LeadingBid.ToString()), false, false);
-	    AddHtml( x + 5, y + 80, _boxsize, 20, "Close: " + ai.SellByDate.ToString() , false, false);
-	    AddHtml( x + 5, y + 100, _boxsize, 20, "Time: " + ai.SellByDate.Hour.ToString() + ":" + ai.SellByDate.Minute.ToString(), false, false);
+	    AddHtml( x + 5, y + 80, _boxsize, 20, "Closes: " + ai.SellByDate.ToString() , false, false);
+	    AddHtml( x + 5, y + 100, _boxsize, 20, "Closing Time: " + ai.SellByDate.Hour.ToString() + ":" + ai.SellByDate.Minute.ToString(), false, false);
 	}
 	
 	public int NumPages() {
@@ -153,12 +160,10 @@ namespace Server.Auction{
 		    {
 			int whichradio = -1; //which radio button did they tick?
 			
-			for( int i = 0; i < info.Switches.Length; i++ ) {
-			    if( info.IsSwitched( i ) ){
-				whichradio = i;
-			    }
+			if( info.Switches.Length > 0 ){
+			    whichradio = info.Switches[0]; // there should only be one because they're radios.... right?
 			}
-
+			
 			if( whichradio == -1 ){
 			    from.SendMessage("You must select an item to bid on!");
 			    return;
@@ -171,7 +176,8 @@ namespace Server.Auction{
 			    response = 0;
 			}
 
-			AuctionController.AuctionStone.RegisterBid(from, response, whichradio);
+			
+			AuctionController.AuctionStone.RegisterBid( from, response, _dict[whichradio] );
 			break;
 		    }
 	    }

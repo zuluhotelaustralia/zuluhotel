@@ -44,9 +44,7 @@ namespace Server.Items {
 
 	    if( ok ){
 		e.Mobile.SendMessage("Select the item you wish to sell for {0} gold pieces.", askprice );
-		e.Mobile.Target = new SimpleTarget( 4, false, TargetFlags.None,  (Mobile who, object target) => {
-			AuctionStone.AcceptSaleItem(e.Mobile, target as Item, askprice);
-		    });
+		e.Mobile.Target = new AuctionSellTarget( askprice );
 	    }
 	    else{
 		e.Mobile.SendMessage("You must be within 8 tiles of the Auctioneer to sell items on the Auction.");
@@ -154,15 +152,12 @@ namespace Server.Items {
 		item.LastBidDate = DateTime.Now;
 		item.Bids++;
 
-		item.SellByDate = item.SellByDate.Add( TimeSpan.FromMinutes( 3.0 ) );
-		/*
 		if(item.Bids <= _BidExtensions.Length){
 		    item.SellByDate = item.SellByDate.Add( _BidExtensions[item.Bids - 1] );
 		}
 		else {
 		    item.SellByDate = item.SellByDate.Add( TimeSpan.FromMinutes( 1.0 ) );
 		}
-		*/
 	    }    
 	}
 
@@ -185,6 +180,7 @@ namespace Server.Items {
 	    //give item to To, in their bank box, then delete auctionitem from list.
 	    to.BankBox.DropItem( ai.SaleItem );
 	    to.SendMessage("An item you bid on at the auction has been placed in your bankbox!");
+	    TownCrier.AddAnnouncement( "New Britain's Auction House has closed a sale to " + to.Name + "!");
 	}
 
 	public void RefundBid( Mobile bidder, int amt ){
@@ -241,6 +237,11 @@ namespace Server.Items {
 
 	    if( !m_SaleItems.Contains( item ) ){
 		bidder.SendMessage("Invalid bid, perhaps the sale has ended already?");
+		return false;
+	    }
+
+	    if( bidder == item.Seller ){
+		bidder.SendMessage("You cannot bid on your own items.");
 		return false;
 	    }
 	    
@@ -345,11 +346,29 @@ namespace Server.Items {
 		m_Stone.FinalizeSales();
 	    }
 	}
+
+	private class AuctionSellTarget : Target {
+	    private int _price;
+	    public AuctionSellTarget( int price ) : base( -1, false, TargetFlags.None ) {
+		_price = price;
+	    }
+
+	    protected override void OnTarget( Mobile from, object targeted ) {
+		if( targeted is Item ){
+		    Item item = targeted as Item;
+
+		    AuctionStone.AcceptSaleItem( from, item, _price );
+		}
+		else{
+		    from.SendMessage("You can only target items.");
+		}
+	    }
+	}
 	
 	private class FirstInternalTarget : Target {
 	    private AuctionController m_Stone;
 	    
-	    public FirstInternalTarget( ) : base( -1, true, TargetFlags.None ) {}
+	    public FirstInternalTarget( ) : base( -1, false, TargetFlags.None ) {}
 
 	    protected override void OnTarget( Mobile from, object targeted ) {
 		if( targeted is AuctionController ){
@@ -367,7 +386,7 @@ namespace Server.Items {
 	private class SecondInternalTarget : Target {
 	    private AuctionController m_Stone;
 	    
-	    public SecondInternalTarget( AuctionController stone ) : base( -1, true, TargetFlags.None ) {
+	    public SecondInternalTarget( AuctionController stone ) : base( -1, false, TargetFlags.None ) {
 		m_Stone = stone;
 	    }
 

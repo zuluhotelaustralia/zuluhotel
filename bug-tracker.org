@@ -183,6 +183,5 @@ This is a list of bugs.
 * DONE there's no Poison damage type nor prot items
 * DONE no armor clothing
 * DONE slayers only dropping Silver?
-* TODO remove all superslayers, only go with double damage
 * DONE looks like with current math you can never fail gathering
 * DONE spawn the bone collector boss in Mt Koltz
