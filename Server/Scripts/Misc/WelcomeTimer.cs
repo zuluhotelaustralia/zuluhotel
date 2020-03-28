@@ -26,9 +26,8 @@ namespace Server.Misc
 					"A bag of PowerScrolls has been placed in your bank box."
 				} :
 			new string[]
-				{	//Yes, this message is a pathetic message, It's suggested that you change it.
-					"Welcome to Zulu Hotel.  This server was designed with a particular philosophy in mind.  See http://zuluhotel.ca/design to address some questions or concerns you may have.",
-					"We are in Beta Testing, please see http://zuluhotel.ca and the MOTD command for current testing status and information."
+				{	
+					"Welcome to Zulu Hotel.  This server was designed with a particular philosophy in mind.  See http://zuluhotel.ca/design to address some questions or concerns you may have."
 				} );
 
 		public WelcomeTimer( Mobile m ) : this( m, m_Messages.Length )

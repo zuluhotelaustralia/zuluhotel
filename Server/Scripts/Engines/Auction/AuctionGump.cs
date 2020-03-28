@@ -36,7 +36,7 @@ namespace Server.Auction{
 
 	private const int _windowX = 700;
 	private const int _windowY = 500;
-	
+		
 	public AuctionGump( Mobile from, AuctionController stone ) : base( 100, 100 )
 	{
 	    m_Viewer = from;

@@ -33,7 +33,7 @@ namespace Server.Items {
 		return;
 	    }
 	    
-	    foreach( Mobile m in e.Mobile.GetMobilesInRange( 5 ) ){
+	    foreach( Mobile m in e.Mobile.GetMobilesInRange( 8 ) ){
 		if( m is Auctioneer ){
 		    ok = true;
 		    break;		       
@@ -49,7 +49,7 @@ namespace Server.Items {
 		    });
 	    }
 	    else{
-		e.Mobile.SendMessage("You must be within 5 tiles of the Auctioneer to sell items on the Auction.");
+		e.Mobile.SendMessage("You must be within 8 tiles of the Auctioneer to sell items on the Auction.");
 	    }
 	}
 
@@ -117,13 +117,13 @@ namespace Server.Items {
 		    if( m_SaleItems[i].LeadingBidder == null ){
 			m_SaleItems[i].Seller.BankBox.DropItem( m_SaleItems[i].SaleItem ); //return to seller
 			m_SaleItems.RemoveAt( i );
-			return;
+			continue;
 		    }
 		    double amount = (double) m_SaleItems[i].LeadingBid;
 		    amount *= (1.0 - m_Take);
 		    
 		    m_SaleItems[i].Seller.BankBox.DropItem( new Gold( (int)amount ) );
-		    m_SaleItems[i].LeadingBidder.BankBox.DropItem( m_SaleItems[i].SaleItem );
+		    DispenseSaleItem( m_SaleItems[i].LeadingBidder, m_SaleItems[i] );
 		    m_SaleItems.RemoveAt(i);
 		}
 		
@@ -136,10 +136,9 @@ namespace Server.Items {
 	}
 
 
-	public void RegisterBid( Mobile from, int amt, int index ){
-	    AuctionItem item = m_SaleItems[index];
-	    
-	    if( ValidateBid( from, amt, item ) ) {
+	public void RegisterBid( Mobile from, int amt, AuctionItem item ){
+	    	    
+	    if( ValidateBid( from, amt, item )  ) {
 		
 		//if we're here then from has placed a potential winning bid
 		//check if we need to refund someone first
@@ -155,12 +154,15 @@ namespace Server.Items {
 		item.LastBidDate = DateTime.Now;
 		item.Bids++;
 
+		item.SellByDate = item.SellByDate.Add( TimeSpan.FromMinutes( 3.0 ) );
+		/*
 		if(item.Bids <= _BidExtensions.Length){
 		    item.SellByDate = item.SellByDate.Add( _BidExtensions[item.Bids - 1] );
 		}
 		else {
 		    item.SellByDate = item.SellByDate.Add( TimeSpan.FromMinutes( 1.0 ) );
 		}
+		*/
 	    }    
 	}
 
@@ -226,7 +228,7 @@ namespace Server.Items {
 	    }
 
 	    bool ok = false;
-	    foreach( Mobile m in bidder.GetMobilesInRange( 5 ) ){
+	    foreach( Mobile m in bidder.GetMobilesInRange( 8 ) ){
 		if( m is Auctioneer ){
 		    ok = true;
 		    break;		       
@@ -234,6 +236,11 @@ namespace Server.Items {
 	    }
 	    if( !ok ){
 		bidder.SendMessage("You are too far away from the Auctioneer!");
+		return false;
+	    }
+
+	    if( !m_SaleItems.Contains( item ) ){
+		bidder.SendMessage("Invalid bid, perhaps the sale has ended already?");
 		return false;
 	    }
 	    
