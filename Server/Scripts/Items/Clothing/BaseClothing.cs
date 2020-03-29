@@ -497,6 +497,7 @@ namespace Server.Items
 	    Layer = layer;
 	    Hue = hue;
 
+	    m_Identified = true;
 	    m_Resource = DefaultResource;
 	    m_Quality = ClothingQuality.Regular;
 

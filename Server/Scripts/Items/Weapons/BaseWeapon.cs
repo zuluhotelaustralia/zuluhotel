@@ -2908,6 +2908,7 @@ namespace Server.Items
             m_Skill = (SkillName)(-1);
             m_Type = (WeaponType)(-1);
             m_Animation = (WeaponAnimation)(-1);
+	    m_Identified = true;
 
             m_Hits = m_MaxHits = Utility.RandomMinMax( InitMinHits, InitMaxHits );
 

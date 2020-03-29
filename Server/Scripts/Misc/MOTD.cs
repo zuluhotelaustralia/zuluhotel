@@ -35,9 +35,9 @@ namespace Server.Gumps {
 
 	    AddPage(0);
 	    AddBackground( 0, 0, 480, 480, 9300 );
-	    AddHtml( 10, 10, 460, 100, "<h2>Shard Launched: 25 March 2020</h2>", false, false );
+	    AddHtml( 10, 10, 460, 100, "<h2>Shard Launched: 28 March 2020</h2>", false, false );
 	    AddHtml( 10, 50, 460, 140, "Welcome to Zulu Hotel Canada, brought to you by Sith and Daleron.  This shard is new, and so may have bugs.  We ask that you please be patient with us, as this is a labour of love by two UO fans in their spare time.  Invite your friends and enemies, get them on discord and in-game!", false, false );
-	    AddHtml( 10, 200, 460, 140, "Known issues:  Necro and Earth books do not show the proper reagents.  This requires hex-editing the client to fix (which we'll do, but it's not something to be done lightly).", false, false );
+	    AddHtml( 10, 200, 460, 140, "Recent changes: Beta stones no longer crash the server when double-clicked.  They also no longer drop in loot.  If you kept one, it's rare!  Hold onto it!  Items should only be 'unidentified' if they are actually magic.", false, false );
 	    
 	    AddButton( 10, 440, 247, 248, (int)Buttons.OKButton, GumpButtonType.Reply, 2);
 	    AddImageTiled( 10, 440, 68, 22, 2624);

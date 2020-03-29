@@ -840,7 +840,7 @@ namespace Server
 			if ( item is BaseWeapon )
 			{
 			    BaseWeapon weapon = (BaseWeapon)item;
-
+			    
 			    if ( 80 > Utility.Random( 100 ) )
 				weapon.AccuracyLevel = (WeaponAccuracyLevel)GetRandomOldBonus();
 
@@ -855,6 +855,8 @@ namespace Server
 
 			    if ( from != null && weapon.AccuracyLevel == 0 && weapon.DamageLevel == 0 && weapon.DurabilityLevel == 0 && weapon.Slayer == SlayerName.None && 5 > Utility.Random( 100 ) )
 				weapon.Slayer = SlayerGroup.GetLootSlayerType( from.GetType() );
+
+			    weapon.Identified = false;
 			}
 			else if ( item is BaseArmor )
 			{
@@ -865,6 +867,8 @@ namespace Server
 
 			    if ( 40 > Utility.Random( 100 ) )
 				armor.Durability = (ArmorDurabilityLevel)GetRandomOldBonus();
+
+			    armor.Identified = false;
 			}
 		    }
 		}
@@ -887,6 +891,7 @@ namespace Server
 
 		    instr.Quality = InstrumentQuality.Regular;
 		    instr.Slayer = slayer;
+
 		}
 
 		if ( item.Stackable )

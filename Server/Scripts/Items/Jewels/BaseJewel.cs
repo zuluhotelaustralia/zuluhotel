@@ -171,6 +171,7 @@ namespace Server.Items
 
 	public BaseJewel( int itemID, Layer layer ) : base( itemID )
 	{
+	    m_Identified = true;
 	    m_AosAttributes = new AosAttributes( this );
 	    m_AosResistances = new AosElementAttributes( this );
 	    m_AosSkillBonuses = new AosSkillBonuses( this );

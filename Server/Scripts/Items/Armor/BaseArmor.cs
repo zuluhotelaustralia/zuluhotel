@@ -1236,6 +1236,8 @@ namespace Server.Items
             m_Durability = ArmorDurabilityLevel.Regular;
             m_Crafter = null;
 
+	    m_Identified = true;
+	    
             m_Resource = DefaultResource;
             Hue = CraftResources.GetHue( m_Resource );
 

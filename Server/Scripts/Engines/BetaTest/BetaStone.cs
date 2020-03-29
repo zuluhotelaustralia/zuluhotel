@@ -24,19 +24,7 @@ namespace Server.Items {
 	}
 
 	public override void OnDoubleClick( Mobile from ){
-	    if( Core.BetaTest ){
-		if( !IsChildOf( from.Backpack ) ){
-		    from.SendLocalizedMessage( 1042001 ); //that must be in your pack
-		}
-		else {
-		    String s = BetaStone.Stone.RequestNewKey( from );
-		    from.SendMessage("The stone disintegrates as you hear spirits whisper words that will grant a friend access to the Beta Realm: " + s );
-		    this.Delete();
-		}
-	    }
-	    else {
-		from.SendMessage("Whatever magics this stone once held have faded, and it does not respond to you.");
-	    }
+	    from.SendMessage("Whatever magic this stone once held has faded, and it does not respond to you.");
 	}
     }
 }

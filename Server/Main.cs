@@ -443,7 +443,7 @@ namespace Server
 	    {
 	    }
 
-	    m_BetaTest = true;
+	    m_BetaTest = false;
 	    
 	    m_Thread = Thread.CurrentThread;
 	    m_Process = Process.GetCurrentProcess();

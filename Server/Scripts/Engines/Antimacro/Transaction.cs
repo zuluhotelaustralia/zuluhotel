@@ -145,8 +145,10 @@ namespace Server.Antimacro
 	public void SendChallenge() {
 	    //entrypoint, sorta
 
-	    m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
-	    m_Timer.Start();
+	    if( m_Subject is PlayerMobile ){
+		m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
+		m_Timer.Start();
+	    }
 	}
     }
 }
