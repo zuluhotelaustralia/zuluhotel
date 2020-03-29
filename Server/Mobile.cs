@@ -808,7 +808,13 @@ namespace Server
 	    }
 	    set { m_GatherContext = value; }
 	}	    
-		
+
+	private bool _beingmacrotested;
+	public bool BeingMacroTested{
+	    get { return _beingmacrotested; }
+	    set { _beingmacrotested = value; }
+	}
+	
 	private Prots m_Prots;
 	public Prots Prots {
 	    get { return m_Prots; }
@@ -10012,6 +10018,8 @@ namespace Server
 	    if( m_Prots == null ){
 		m_Prots = new Prots( this );
 	    }
+
+	    _beingmacrotested = false;
 	}
 
 	public Mobile()
@@ -10034,6 +10042,7 @@ namespace Server
 
 	    m_AutoLoop = 1;
 	    m_Prots = new Prots( this );
+	    _beingmacrotested = false;
 	}
 
 	public void DefaultMobileInit()
@@ -10054,6 +10063,7 @@ namespace Server
 
 	    m_NextSkillTime = Core.TickCount;
 	    m_CreationTime = DateTime.UtcNow;
+	    _beingmacrotested = false;
 	}
 
 	private static Queue<Mobile> m_DeltaQueue = new Queue<Mobile>();

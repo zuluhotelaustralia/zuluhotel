@@ -110,8 +110,8 @@ namespace Server.Engines.Gather {
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.3, 70.0, 100.0, 150.0, typeof(Server.Items.BloodhorseLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.2, 50.0, 100.0, 150.0, typeof(Server.Items.DoomwoodLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 30.0, 130.0, 150.0, typeof(Server.Items.ZuluLog) ));
-	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 10.0, 130.0, 150.0, typeof(Server.Items.DarknessLog) ));
-	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 10.0, 130.0, 150.0, typeof(Server.Items.ElvenLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 10.0, 140.0, 150.0, typeof(Server.Items.DarknessLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.1, 10.0, 145.0, 150.0, typeof(Server.Items.ElvenLog) ));
 	    
 	}
 	

@@ -106,6 +106,7 @@ namespace Server.Antimacro
 	    }
 
 	    m_SubjectAccount.NextTransaction = next;
+	    m_Subject.BeingMacroTested = false;
 	}
 	
 	public void MutateTrustScore( bool good ) {
@@ -123,6 +124,7 @@ namespace Server.Antimacro
 	}
 
 	public void OKResponseCallback() {
+	    m_Subject.BeingMacroTested = false;
 	    Decide( ResponseType.GoodMath );
 	}
 
@@ -133,20 +135,23 @@ namespace Server.Antimacro
 		SendChallenge();
 	    }
 	    else {
+		m_Subject.BeingMacroTested = false;
 		//they've had 3 strikes and are now out
 		Decide( ResponseType.BadMath );
 	    }
 	}
 
 	public void TimeOutCallback() {
+	    m_Subject.BeingMacroTested = false;
 	    Decide( ResponseType.TimeOut );
 	}
 	
 	public void SendChallenge() {
 	    //entrypoint, sorta
 
-	    if( m_Subject is PlayerMobile ){
+	    if( m_Subject is PlayerMobile && !m_Subject.BeingMacroTested ){
 		m_Subject.SendGump( new AntimacroGump( m_Subject, m_AttemptsRemaining, this));
+		m_Subject.BeingMacroTested = true;
 		m_Timer.Start();
 	    }
 	}
