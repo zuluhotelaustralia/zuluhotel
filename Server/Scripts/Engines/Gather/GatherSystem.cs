@@ -335,8 +335,7 @@ namespace Server.Engines.Gather {
 	    }
 	    else {
 		foreach (GatherNode n in m_Nodes) {
-		    if ( n.MinSkill <= s.Value &&
-			 n.MaxSkill >= s.Value) {
+		    if ( s.Value < n.MaxSkill ) {
 
 			if ( IncludeByDistance(n, m) ){
 			    //add the node from m_Nodes to the ephemeral list we're building

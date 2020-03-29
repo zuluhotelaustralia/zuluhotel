@@ -9,8 +9,8 @@ namespace Server.Commands
     {
         public static void Initialize()
         {
-            CommandSystem.Register( "RollSkill", AccessLevel.Player, new CommandEventHandler( RollSkill_OnCommand ) );
-            CommandSystem.Register( "TrainSkill", AccessLevel.Player, new CommandEventHandler( TrainSkill_OnCommand ) );
+            CommandSystem.Register( "RollSkill", AccessLevel.Developer, new CommandEventHandler( RollSkill_OnCommand ) );
+            CommandSystem.Register( "TrainSkill", AccessLevel.Developer, new CommandEventHandler( TrainSkill_OnCommand ) );
         }
 
         [Usage( "RollSkill [skill] [attempts]" )]

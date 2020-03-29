@@ -39,6 +39,7 @@ namespace Server.Regions
 		    return 0.1;
 		case SkillName.RemoveTrap:
 		case SkillName.Musicianship:
+		case SkillName.ItemID:
 		    return 0.9;
 		case SkillName.DetectHidden:
 		    return 0.1;
