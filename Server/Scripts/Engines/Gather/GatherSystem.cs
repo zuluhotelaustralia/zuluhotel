@@ -335,7 +335,7 @@ namespace Server.Engines.Gather {
 	    }
 	    else {
 		foreach (GatherNode n in m_Nodes) {
-		    if ( s.Value < n.MaxSkill ) {
+		    if ( s.Value > n.MinSkill ) {
 
 			if ( IncludeByDistance(n, m) ){
 			    //add the node from m_Nodes to the ephemeral list we're building
@@ -343,7 +343,13 @@ namespace Server.Engines.Gather {
 				pm.Spec.SpecName != SpecName.Crafter &&
 				(n.Resource == typeof( EbonTwilightSapphireOre ) ||
 				 n.Resource == typeof( DarkSableRubyOre ) ||
-				 n.Resource == typeof( RadiantNimbusDiamondOre ) ) ){
+				 n.Resource == typeof( RadiantNimbusDiamondOre ) ) ) {
+				continue;
+			    }
+			    else if( this is Lumberjacking &&
+				     pm.Spec.SpecName != SpecName.Crafter &&
+				     (n.Resource == typeof( ElvenLog ) ||
+				      n.Resource == typeof( DarknessLog ) ) ) {
 				continue;
 			    }
 			    else {

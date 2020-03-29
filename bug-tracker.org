@@ -186,8 +186,8 @@ This is a list of bugs.
 * DONE slayers only dropping Silver?
 * DONE looks like with current math you can never fail gathering
 * DONE spawn the bone collector boss in Mt Koltz
-* TODO bad tiles
-* TODO macro check spams if dialog is open
+* DONE bad tiles
+* DONE macro check spams if dialog is open
 * DONE beta stones crash server
 * DONE onsingle click shows everything as unidentified
-* TODO can't buy from bowyers?
+* DONE can't buy from bowyers?
