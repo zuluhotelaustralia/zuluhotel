@@ -226,8 +226,6 @@ namespace Server.Engines.Gather {
 		chance = 0.98;
 	    }
 
-	    Console.WriteLine( "Chance is {0}", chance );
-	    
 	    if ( from.CheckSkill( s, chance ) ){
 		if( sand ) {
 		    SendSandSuccessMessage(from);
@@ -350,7 +348,7 @@ namespace Server.Engines.Gather {
 				continue;
 			    }
 			    else {
-				Console.WriteLine("including {0}, a={1} d={2} min={3}", n.Resource.ToString(), n.Abundance, n.Difficulty, n.MinSkill);
+				//Console.WriteLine("including {0}, a={1} d={2} min={3}", n.Resource.ToString(), n.Abundance, n.Difficulty, n.MinSkill);
 				nodes.Add(n);
 			    }
 			}
@@ -362,7 +360,6 @@ namespace Server.Engines.Gather {
 		    // and can't hit anything.  this will cause a server crash in Strike(), and more importantly
 		    // is shitty game design:  there's a tree sprite right there, why can't the player get wood off it?  etc.
 		    // --sith
-		    Console.WriteLine("default add");
 		    nodes.Add( m_Nodes[0] ); //force-add the first node which should be Iron, normal wood, etc.
 		}
 	    }
@@ -374,7 +371,6 @@ namespace Server.Engines.Gather {
 	public GatherNode Strike( List<GatherNode> nodes ){
 	    int numNodes = nodes.Count;
 	    int nodeStruck = Utility.Dice( 1, numNodes, 0 );
-	    Console.WriteLine( "struck {0}", nodes[nodeStruck -1].Resource.ToString() );
 	    // list indices are zero-based
 	    return nodes[ nodeStruck - 1 ];
 	}
