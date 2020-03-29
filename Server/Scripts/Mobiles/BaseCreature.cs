@@ -4971,12 +4971,12 @@ namespace Server.Mobiles
 		if ( DeleteCorpseOnDeath ){
 		    c.Delete();
 		}
-		else {
-		    if( Utility.RandomDouble() >= 0.9) {
-			
-			c.AddItem( new InviteStone() );
-		    }
-		}
+		//else {
+		//    if( Utility.RandomDouble() >= 0.9) {
+		//	
+		//	c.AddItem( new InviteStone() );
+		//    }
+		//}
 	    }
 	}
 
