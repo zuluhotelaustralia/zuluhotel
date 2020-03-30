@@ -51,7 +51,7 @@ namespace Server.Mobiles
 	public override bool HasBreath{ get{ return true; } } // fire breath enabled
 	public override int Meat{ get{ return 10; } }
 	public override int Hides{ get{ return 20; } }
-	public override HideType HideType{ get{ return HideType.Horned; } }
+	public override HideType HideType{ get{ return HideType.Wyrm; } }
 	public override FoodType FavoriteFood{ get{ return FoodType.Meat | FoodType.Fish; } }
 
 	public BabyWaterWyrm( Serial serial ) : base( serial )
