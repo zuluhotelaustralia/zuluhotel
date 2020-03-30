@@ -27,11 +27,11 @@ namespace Server.Menus.Questions
 		// Britain
 		new StuckMenuEntry( 1011348, new Point3D[]
 		{
-		    new Point3D( 3026, 3417, 15 ),
-		    new Point3D( 3039, 3410, 15 ),
-		    new Point3D( 3040, 3391, 15 ),
-		    new Point3D( 3019, 3391, 15 ),
-		    new Point3D( 3044, 3424, 15 )
+		    new Point3D( 1314, 1379, 0 ),
+		    new Point3D( 1313, 1379, 0 ),
+		    new Point3D( 1315, 1379, 0 ),
+		    new Point3D( 1314, 1380, 0 ),
+		    new Point3D( 1314, 1378, 0 )
 		} )/*,
 
 		   // Trinsic
