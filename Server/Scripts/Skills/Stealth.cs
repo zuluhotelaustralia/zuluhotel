@@ -77,7 +77,7 @@ namespace Server.SkillHandlers
 	    {
 		int armorRating = GetArmorRating( m );
 
-		if( armorRating >= (Core.AOS ? 42 : 26) ) //I have a hunch '42' was chosen cause someone's a fan of DNA
+		if( armorRating >= (Core.AOS ? 42 : 26) ) //I have a hunch '42' was chosen cause someone's a fan of DNA  //yeah it's totally not a HHGTTG reference. fuckwit.
 		{
 		    m.SendLocalizedMessage( 502727 ); // You could not hope to move quietly wearing this much armor.
 		    m.RevealingAction();
@@ -93,11 +93,15 @@ namespace Server.SkillHandlers
 
 		    PlayerMobile pm = m as PlayerMobile; // IsStealthing should be moved to Server.Mobiles
 
+		    if( pm.Spec.SpecName == SpecName.Thief ){
+			steps = (int)( (double)steps * pm.Spec.Bonus ); // should get 15 steps at spec 5, etc.
+		    }
+		    
 		    if( pm != null )
 			pm.IsStealthing = true;
-
+		    
 		    m.SendLocalizedMessage( 502730 ); // You begin to move quietly.
-
+		    
 		    return TimeSpan.FromSeconds( 10.0 );
 		}
 		else
@@ -106,7 +110,15 @@ namespace Server.SkillHandlers
 		    m.RevealingAction();
 		}
 	    }
-
+	    
+	    if( m is PlayerMobile ){
+		PlayerMobile pm = m as PlayerMobile;
+		if( pm.Spec.SpecName == SpecName.Thief ){
+		    double delay = 10.0 / pm.Spec.Bonus;
+		    return TimeSpan.FromSeconds( delay );
+		}
+	    }
+	    
 	    return TimeSpan.FromSeconds( 10.0 );
 	}
     }
