@@ -11,7 +11,14 @@ namespace Server.Spells.Necromancy
 	    
 	public override SpellCircle Circle { get { return SpellCircle.Necro; } }
 	
+	public override TimeSpan GetCastDelay(){
+	    return TimeSpan.FromSeconds( 2.0 );
+	}
 
+	public override TimeSpan CastDelayBase {
+	    get { return TimeSpan.FromSeconds( 5 ); }
+	}	       
+	
 	public override SkillName CastSkill{ get{ return SkillName.Magery; } }
 	public override SkillName DamageSkill{ get{ return SkillName.SpiritSpeak; } }
 

@@ -93,7 +93,7 @@ namespace Server.Engines.Gather {
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 250.0, 10.0, 80.0, typeof(Server.Items.CherryLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 200.0, 20.0, 90.0, typeof(Server.Items.OakLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.9, 100.0, 20.0, 90.0, typeof(Server.Items.PurplePassionLog) ));
-	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 200.0, 20.0, 900.0, typeof(Server.Items.GoldenReflectionLog) ));
+	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 200.0, 20.0, 90.0, typeof(Server.Items.GoldenReflectionLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 180.0, 30.0, 100.0, typeof(Server.Items.HardrangerLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 180.0, 30.0, 100.0, typeof(Server.Items.JadewoodLog) ));
 	    m_System.Nodes.Add( new GatherNode(x, y, Utility.RandomMinMax(-10, 10), Utility.RandomMinMax(-10, 10), 0.8, 50.0, 40.0, 150.0, typeof(Server.Items.DarkwoodLog) ));

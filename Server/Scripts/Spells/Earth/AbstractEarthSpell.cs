@@ -12,6 +12,14 @@ namespace Server.Spells.Earth
 	public override SkillName CastSkill { get { return SkillName.Magery; } }
 	public override SkillName DamageSkill { get { return SkillName.Meditation; } }
 
+	public override TimeSpan GetCastDelay() {
+	    return TimeSpan.FromSeconds( 2.0 );
+	}
+
+	public override TimeSpan CastDelayBase {
+	    get { return TimeSpan.FromSeconds( 5 ); }
+	}
+
         public AbstractEarthSpell(Mobile caster, Item scroll, SpellInfo info ) : base( caster, scroll, info )
         {
 	    m_DamageType = DamageType.Earth;
