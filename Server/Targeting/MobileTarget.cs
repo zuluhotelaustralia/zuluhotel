@@ -12,7 +12,7 @@ namespace Server.Targeting {
         protected override void OnTarget( Mobile from, object o ) {
             if ( ! ( o is Mobile ) ) {
                 Console.Error.WriteLine("MobileTarget received non-mobile as a target.  Sounds like a bug or buggy client.");
-	        return
+	        return;
             }
 
             m_Receiver.OnTarget( from, (Mobile) o );
