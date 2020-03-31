@@ -313,6 +313,13 @@ namespace Server.Spells
 
 		if( !target.Player && !target.Body.IsHuman /*&& !Core.AOS*/ )
 		    scalar *= 2.0; // Double magery damage to monsters/animals if not AOS
+
+		if( m_Caster is PlayerMobile ){
+		    PlayerMobile pm = m_Caster as PlayerMobile;
+		    if( pm.Spec.SpecName == SpecName.Mage ){
+			scalar *= pm.Spec.Bonus;
+		    }
+		}
 	    }
 
 	    if ( target is BaseCreature )

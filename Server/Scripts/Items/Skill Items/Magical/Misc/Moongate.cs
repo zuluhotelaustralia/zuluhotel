@@ -103,12 +103,7 @@ namespace Server.Items
 
 		public virtual void CheckGate( Mobile m, int range )
 		{
-			#region Mondain's Legacy
-			if ( m.Hidden && m.AccessLevel == AccessLevel.Player && Core.ML )
-				m.RevealingAction();
-			#endregion
-
-			new DelayTimer( m, this, range ).Start();
+		    new DelayTimer( m, this, range ).Start();
 		}
 
 		public virtual void OnGateUsed( Mobile m )
@@ -196,17 +191,10 @@ namespace Server.Items
 
 		public virtual void BeginConfirmation( Mobile from )
 		{
-			if ( IsInTown( from.Location, from.Map ) && !IsInTown( m_Target, m_TargetMap ) || (from.Map != Map.Felucca && TargetMap == Map.Felucca && ShowFeluccaWarning) )
-			{
-				if ( from.AccessLevel == AccessLevel.Player || !from.Hidden )
-					from.Send( new PlaySound( 0x20E, from.Location ) );
-				from.CloseGump( typeof( MoongateConfirmGump ) );
-				from.SendGump( new MoongateConfirmGump( from, this ) );
-			}
-			else
-			{
-				EndConfirmation( from );
-			}
+		    if ( from.AccessLevel == AccessLevel.Player || !from.Hidden ){
+			from.Send( new PlaySound( 0x20E, from.Location ) );
+		    }
+		    EndConfirmation( from );
 		}
 
 		public virtual void EndConfirmation( Mobile from )

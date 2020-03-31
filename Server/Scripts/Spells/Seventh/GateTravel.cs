@@ -145,7 +145,7 @@ namespace Server.Spells.Seventh
 		[DispellableField]
 		private class InternalItem : Moongate
 		{
-			public override bool ShowFeluccaWarning{ get{ return Core.AOS; } }
+			public override bool ShowFeluccaWarning{ get{ return false; } }
 
 			public InternalItem( Point3D target, Map map ) : base( target, map )
 			{
