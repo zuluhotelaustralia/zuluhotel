@@ -21,8 +21,6 @@ namespace Server.Regions
 		case SkillName.Healing:
 		case SkillName.Veterinary:
 		    return 0.3;
-		case SkillName.AnimalTaming:
-		    return 0.2;
 		case SkillName.Meditation:
     		case SkillName.Archery:
 		case SkillName.Fencing:
@@ -36,7 +34,7 @@ namespace Server.Regions
 		case SkillName.Stealth:
 		case SkillName.Snooping:
 		case SkillName.Stealing:
-		    return 0.1;
+		    return 0.5;
 		case SkillName.RemoveTrap:
 		case SkillName.Musicianship:
 		case SkillName.ItemID:
