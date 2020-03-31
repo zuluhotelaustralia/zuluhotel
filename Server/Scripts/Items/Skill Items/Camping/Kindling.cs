@@ -58,7 +58,7 @@ namespace Server.Items
 			{
 				from.SendLocalizedMessage( 501695 ); // There is not a spot nearby to place your campfire.
 			}
-			else if ( !from.CheckSkill( SkillName.Camping, 0.0, 100.0 ) )
+			else if ( !from.CheckSkill( SkillName.Camping, 0.0, 130.0 ) )
 			{
 				from.SendLocalizedMessage( 501696 ); // You fail to ignite the campfire.
 			}
