@@ -142,8 +142,8 @@ namespace Server
 	{
 	    private Mobile m_Owner;
 
-	    public NightSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes( Utility.Random( (int)owner.Skills[SkillName.Meditation].Value / 50,
-												 (int)owner.Skills[SkillName.Meditation].Value / 30)))
+	    public NightSightTimer( Mobile owner ) : base( TimeSpan.FromMinutes( Utility.Random( (int)owner.Skills[SkillName.Meditation].Value / 5,
+												 (int)owner.Skills[SkillName.Meditation].Value / 3)))
 	    {
 		m_Owner = owner;
 		Priority = TimerPriority.OneMinute;
