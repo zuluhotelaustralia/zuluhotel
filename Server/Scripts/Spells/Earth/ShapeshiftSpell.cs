@@ -75,12 +75,7 @@ namespace Server.Spells.Earth
 
         public override bool CheckCast() {
 
-	    if ( Factions.Sigil.ExistsOn( Caster ) )
-	    {
-		Caster.SendLocalizedMessage( 1010521 ); // You cannot polymorph while you have a Town Sigil
-		return false;
-	    }
-	    else if( TransformationSpellHelper.UnderTransformation( Caster ) )
+	    if( TransformationSpellHelper.UnderTransformation( Caster ) )
 	    {
 		Caster.SendLocalizedMessage( 1061633 ); // You cannot polymorph while in that form.
 		return false;

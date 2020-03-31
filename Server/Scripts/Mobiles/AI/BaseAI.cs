@@ -279,12 +279,6 @@ namespace Server.Mobiles
 					from.SendAsciiMessage("You can not force your pet to attack a creature you are protected from.");
 					return;
 				}
-
-				if (target is Factions.BaseFactionGuard)
-				{
-					m_Mobile.SayTo(from, "Your pet refuses to attack the guard.");
-					return;
-				}
 			}
 
 			if (m_Mobile.CheckControlChance(from))
@@ -2466,7 +2460,7 @@ namespace Server.Mobiles
 				return false;
 			}
 
-			if (acqType == FightMode.Aggressor && m_Mobile.Aggressors.Count == 0 && m_Mobile.Aggressed.Count == 0 && m_Mobile.FactionAllegiance == null && m_Mobile.EthicAllegiance == null)
+			if (acqType == FightMode.Aggressor && m_Mobile.Aggressors.Count == 0 && m_Mobile.Aggressed.Count == 0 && m_Mobile.EthicAllegiance == null)
 			{
 				m_Mobile.FocusMob = null;
 				return false;
@@ -2548,7 +2542,7 @@ namespace Server.Mobiles
 						bool bValid = IsHostile(m);
 
 						if (!bValid)
-							bValid = (m_Mobile.GetFactionAllegiance(m) == BaseCreature.Allegiance.Enemy || m_Mobile.GetEthicAllegiance(m) == BaseCreature.Allegiance.Enemy);
+							bValid = (m_Mobile.GetEthicAllegiance(m) == BaseCreature.Allegiance.Enemy);
 
 						if (acqType == FightMode.Evil && !bValid)
 						{

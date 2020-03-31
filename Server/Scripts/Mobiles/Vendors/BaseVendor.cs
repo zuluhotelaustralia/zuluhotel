@@ -7,7 +7,6 @@ using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Misc;
 using Server.Regions;
-using Server.Factions;
 
 namespace Server.Mobiles
 {
@@ -54,11 +53,6 @@ namespace Server.Mobiles
 #region Faction
 	public virtual int GetPriceScalar()
 	{
-	    Town town = Town.FromRegion( this.Region );
-
-	    if ( town != null )
-		return ( 100 + town.Tax );
-
 	    return 100;
 	}
 

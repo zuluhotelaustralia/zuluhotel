@@ -9,7 +9,6 @@ using Server.ContextMenus;
 using Server.Mobiles;
 using Server.Targeting;
 using System.Collections.Generic;
-using Server.Factions;
 using Server.Ethics;
 using Server.Ethics.Evil;
 using Server.Ethics.Hero;
@@ -82,11 +81,6 @@ namespace Server.Engines.ConPVP
 
 					if ( entry != null && Ladder.GetLevel( entry.Experience ) < tourny.LevelRequirement )
 						return;
-				}
-
-				if ( tourny.IsFactionRestricted && Faction.Find( m ) == null )
-				{
-					return;
 				}
 
 				if ( tourny.HasParticipant( m ) )
@@ -218,17 +212,6 @@ namespace Server.Engines.ConPVP
 
 									break;
 								}
-							}
-
-							if ( tourny.IsFactionRestricted && Faction.Find( from ) == null )
-							{
-								if ( m_Registrar != null )
-								{
-									m_Registrar.PrivateOverheadMessage( MessageType.Regular,
-										0x35, false, "Only those who have declared their faction allegiance may participate.", from.NetState );
-								}
-
-								break;
 							}
 
 							if ( from.HasGump( typeof( AcceptTeamGump ) ) )
@@ -420,11 +403,6 @@ namespace Server.Engines.ConPVP
 			{
 				sb.Append( tourny.ParticipantsPerMatch );
 				sb.Append( "-Team" );
-			}
-			else if ( tourny.TournyType == TournyType.Faction )
-			{
-				sb.Append( tourny.ParticipantsPerMatch );
-				sb.Append( "-Team Faction" );
 			}
 			else if ( tourny.TournyType == TournyType.RedVsBlue )
 			{
@@ -658,17 +636,6 @@ namespace Server.Engines.ConPVP
 										m_Registrar.PrivateOverheadMessage( MessageType.Regular,
 											0x35, false, String.Format( "{0} has not yet proven themselves a worthy dueler.", mob.Name ), from.NetState );
 									}
-								}
-
-								m_From.SendGump( new ConfirmSignupGump( m_From, m_Registrar, m_Tournament, m_Players ) );
-								return;
-							}
-							else if ( tourny.IsFactionRestricted && Faction.Find( mob ) == null )
-							{
-								if ( m_Registrar != null )
-								{
-									m_Registrar.PrivateOverheadMessage( MessageType.Regular,
-										0x35, false, "Only those who have declared their faction allegiance may participate.", from.NetState );
 								}
 
 								m_From.SendGump( new ConfirmSignupGump( m_From, m_Registrar, m_Tournament, m_Players ) );
@@ -969,11 +936,6 @@ namespace Server.Engines.ConPVP
 			{
 				sb.Append( tourny.ParticipantsPerMatch );
 				sb.Append( "-Team" );
-			}
-			else if ( tourny.TournyType == TournyType.Faction )
-			{
-				sb.Append( tourny.ParticipantsPerMatch );
-				sb.Append( "-Team Faction" );
 			}
 			else if ( tourny.TournyType == TournyType.RedVsBlue )
 			{
@@ -1531,12 +1493,6 @@ namespace Server.Engines.ConPVP
 			set{ m_Undefeated = value; }
 		}
 
-		public bool IsFactionRestricted {
-			get {
-				return ( m_FactionRestricted || m_TournyType == TournyType.Faction );
-			}
-		}
-
 		public bool HasParticipant( Mobile mob )
 		{
 			for ( int i = 0; i < m_Participants.Count; ++i )
@@ -1952,11 +1908,6 @@ namespace Server.Engines.ConPVP
 				sb.Append( m_ParticipantsPerMatch );
 				sb.Append( "-Team" );
 			}
-			else if ( m_TournyType == TournyType.Faction )
-			{
-				sb.Append( m_ParticipantsPerMatch );
-				sb.Append( "-Team Faction" );
-			}
 			else if ( m_TournyType == TournyType.RedVsBlue )
 			{
 				sb.Append( "Red v Blue" );
@@ -2024,7 +1975,7 @@ namespace Server.Engines.ConPVP
 						{
 							Mobile check = (Mobile) part.Players[j];
 
-							if ( check.Deleted || check.Map == null || check.Map == Map.Internal || !check.Alive || Factions.Sigil.ExistsOn( check ) || check.Region.IsPartOf( typeof( Regions.Jail ) ) )
+							if ( check.Deleted || check.Map == null || check.Map == Map.Internal || !check.Alive || check.Region.IsPartOf( typeof( Regions.Jail ) ) )
 							{
 								bad = true;
 								break;
@@ -2183,7 +2134,7 @@ namespace Server.Engines.ConPVP
 							{
 								Mobile check = (Mobile) part.Players[j];
 
-								if ( check.Deleted || check.Map == null || check.Map == Map.Internal || !check.Alive || Factions.Sigil.ExistsOn( check ) || check.Region.IsPartOf( typeof( Regions.Jail ) ) )
+								if ( check.Deleted || check.Map == null || check.Map == Map.Internal || !check.Alive || check.Region.IsPartOf( typeof( Regions.Jail ) ) )
 								{
 									bad = true;
 									break;
@@ -2360,16 +2311,7 @@ namespace Server.Engines.ConPVP
 
 							int index = -1;
 
-							if ( partsPerMatch == 4 )
-							{
-								Faction fac = Faction.Find( mob );
-
-								if ( fac != null )
-								{
-									index = fac.Definition.Sort;
-								}
-							}
-							else if ( partsPerMatch == 2 )
+							if ( partsPerMatch == 2 )
 							{
 								if ( Ethic.Evil.IsEligible( mob ) )
 								{

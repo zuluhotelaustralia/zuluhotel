@@ -3,7 +3,6 @@ using System.Collections;
 using Server;
 using Server.Network;
 using Server.Targeting;
-using Server.Factions;
 using Server.Commands;
 using System.Collections.Generic;
 
@@ -195,13 +194,7 @@ namespace Server.Engines.PartySystem
 
 		public void OnAccept( Mobile from, bool force )
 		{
-			Faction ourFaction = Faction.Find( m_Leader );
-			Faction theirFaction = Faction.Find( from );
-
-			if ( !force && ourFaction != null && theirFaction != null && ourFaction != theirFaction )
-				return;
-
-			//  : joined the party.
+		    //  : joined the party.
 			SendToAll( new MessageLocalizedAffix( Serial.MinusOne, -1, MessageType.Label, 0x3B2, 3, 1008094, "", AffixType.Prepend | AffixType.System, from.Name, "" ) );
 
 			from.SendLocalizedMessage( 1005445 ); // You have been added to the party.
@@ -286,16 +279,6 @@ namespace Server.Engines.PartySystem
 
 		public static void Invite( Mobile from, Mobile target )
 		{
-			Faction ourFaction = Faction.Find( from );
-			Faction theirFaction = Faction.Find( target );
-
-			if ( ourFaction != null && theirFaction != null && ourFaction != theirFaction )
-			{
-				from.SendLocalizedMessage( 1008088 ); // You cannot have players from opposing factions in the same party!
-				target.SendLocalizedMessage( 1008093 ); // The party cannot have members from opposing factions.
-				return;
-			}
-
 			Party p = Party.Get( from );
 
 			if ( p == null )

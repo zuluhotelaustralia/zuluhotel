@@ -626,7 +626,6 @@ namespace Server.Spells
 		new TravelValidator( IsDoomGauntlet ),
 		new TravelValidator( IsDoomFerry ),
 		new TravelValidator( IsSafeZone ),
-		new TravelValidator( IsFactionStronghold ),
 		new TravelValidator( IsChampionSpawn ),
 		new TravelValidator( IsTokunoDungeon ),
 		new TravelValidator( IsLampRoom ),
@@ -805,18 +804,6 @@ namespace Server.Spells
 	    #endregion
 
 	    return false;
-	}
-
-	public static bool IsFactionStronghold( Map map, Point3D loc )
-	{
-	    /*// Teleporting is allowed, but only for faction members
-	      if ( !Core.AOS && m_TravelCaster != null && (m_TravelType == TravelCheckType.TeleportTo || m_TravelType == TravelCheckType.TeleportFrom) )
-	      {
-	      if ( Factions.Faction.Find( m_TravelCaster, true, true ) != null )
-	      return false;
-	      }*/
-
-	    return (Region.Find( loc, map ).IsPartOf( typeof( Factions.StrongholdRegion ) ));
 	}
 
 	public static bool IsChampionSpawn( Map map, Point3D loc )
@@ -1307,12 +1294,7 @@ namespace Server.Spells
 
 	public static bool CheckCast( Mobile caster, Spell spell )
 	{
-	    if( Factions.Sigil.ExistsOn( caster ) )
-	    {
-		caster.SendLocalizedMessage( 1061632 ); // You can't do that while carrying the sigil.
-		return false;
-	    }
-	    else if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
+	    if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
 	    {
 		caster.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
 		return false;
@@ -1328,11 +1310,7 @@ namespace Server.Spells
 	    if( transformSpell == null )
 		return false;
 
-	    if( Factions.Sigil.ExistsOn( caster ) )
-	    {
-		caster.SendLocalizedMessage( 1061632 ); // You can't do that while carrying the sigil.
-	    }
-	    else if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
+	    if( !caster.CanBeginAction( typeof( PolymorphSpell ) ) )
 	    {
 		caster.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
 	    }

@@ -4,34 +4,14 @@ using System.Collections.Generic;
 using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Craft;
-using Server.Factions;
 using AMA = Server.Items.ArmorMeditationAllowance;
 using AMT = Server.Items.ArmorMaterialType;
 using ABT = Server.Items.ArmorBodyType;
 
 namespace Server.Items
 {
-    public abstract class BaseArmor : Item, IScissorable, IFactionItem, ICraftable, IWearableDurability
+    public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability
     {
-#region Factions
-        private FactionItem m_FactionState;
-
-        public FactionItem FactionItemState
-        {
-            get{ return m_FactionState; }
-            set
-            {
-                m_FactionState = value;
-
-                if ( m_FactionState == null )
-                    Hue = CraftResources.GetHue( Resource );
-
-                LootType = ( m_FactionState == null ? LootType.Regular : LootType.Blessed );
-            }
-        }
-#endregion
-
-
 
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -1574,11 +1554,6 @@ namespace Server.Items
 
             if ( m_Crafter != null )
                 list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
-
-#region Factions
-            if ( m_FactionState != null )
-                list.Add( 1041350 ); // faction item
-#endregion
 
             if( RequiredRace == Race.Elf )
                 list.Add( 1075086 ); // Elves Only

@@ -64,10 +64,6 @@ namespace Server.Items
 				// You cannot disguise yourself while incognitoed.
 				from.SendLocalizedMessage( 501704 );
 			}
-			else if ( Factions.Sigil.ExistsOn( from ) )
-			{
-				from.SendLocalizedMessage( 1010465 ); // You cannot disguise yourself while holding a sigil
-			}
 			else if ( TransformationSpellHelper.UnderTransformation( from ) )
 			{
 				// You cannot disguise yourself while in that form.

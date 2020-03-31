@@ -6,7 +6,6 @@ using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Spells.Necromancy;
-using Server.Factions;
 using Server.Engines.Craft;
 using System.Collections.Generic;
 
@@ -18,7 +17,7 @@ namespace Server.Items
         SlayerName Slayer2 { get; set; }
     }
 
-    public abstract class BaseWeapon : Item, IWeapon, IFactionItem, ICraftable, ISlayer, IDurability
+    public abstract class BaseWeapon : Item, IWeapon, ICraftable, ISlayer, IDurability
     {
         private string m_EngravedText;
 
@@ -28,24 +27,6 @@ namespace Server.Items
             get{ return m_EngravedText; }
             set{ m_EngravedText = value; InvalidateProperties(); }
         }
-
-        #region Factions
-        private FactionItem m_FactionState;
-
-        public FactionItem FactionItemState
-        {
-            get{ return m_FactionState; }
-            set
-            {
-                m_FactionState = value;
-
-                if ( m_FactionState == null )
-                    Hue = CraftResources.GetHue( Resource );
-
-                LootType = ( m_FactionState == null ? LootType.Regular : LootType.Blessed );
-            }
-        }
-        #endregion
 
         /* Weapon internals work differently now (Mar 13 2003)
          *
@@ -3134,11 +3115,6 @@ namespace Server.Items
             if ( m_Crafter != null )
                 list.Add( 1050043, m_Crafter.Name ); // crafted by ~1_NAME~
 
-            #region Factions
-            if ( m_FactionState != null )
-                list.Add( 1041350 ); // faction item
-            #endregion
-
             if ( m_AosSkillBonuses != null )
                 m_AosSkillBonuses.GetProperties( list );
 
@@ -3403,33 +3379,33 @@ namespace Server.Items
 		    }
 
 		    if( m_Quality == WeaponQuality.Exceptional ){
-			prefix += "exceptional ";
+			prefix += "Exceptional ";
 		    }
 
 		    switch( m_DurabilityLevel ){
 			case WeaponDurabilityLevel.Durable:
 			    {
-				prefix += "durable ";
+				prefix += "Durable ";
 				break;
 			    }
 			    case WeaponDurabilityLevel.Substantial:
 			    {
-				prefix += "substantial ";
+				prefix += "Substantial ";
 				break;
 			    }
 			    case WeaponDurabilityLevel.Massive:
 			    {
-				prefix += "massive ";
+				prefix += "Massive ";
 				break;
 			    }
 			    case WeaponDurabilityLevel.Fortified:
 			    {
-				prefix += "fortified ";
+				prefix += "Fortified ";
 				break;
 			    }
 			    case WeaponDurabilityLevel.Indestructible:
 			    {
-				prefix += "indestructable ";
+				prefix += "Indestructable ";
 				break;
 			    }
 			default:
@@ -3439,27 +3415,27 @@ namespace Server.Items
 		    switch( m_AccuracyLevel ){
 			case WeaponAccuracyLevel.Accurate:
 			    {
-				prefix += "accurate ";
+				prefix += "Accurate ";
 				break;
 			    }
 			case WeaponAccuracyLevel.Surpassingly:
 			    {
-				prefix += "surpassingly accurate ";
+				prefix += "Surpassingly Accurate ";
 				break;
 			    }
 			case WeaponAccuracyLevel.Eminently:
 			    {
-				prefix += "eminently accurate ";
+				prefix += "Eminently Accurate ";
 				break;
 			    }
 			case WeaponAccuracyLevel.Exceedingly:
 			    {
-				prefix += "exceedingly accurate ";
+				prefix += "Exceedingly Accurate ";
 				break;
 			    }
 			case WeaponAccuracyLevel.Supremely:
 			    {
-				prefix += "supremely accurate ";
+				prefix += "Supremely Accurate ";
 				break;
 			    }
 			default:

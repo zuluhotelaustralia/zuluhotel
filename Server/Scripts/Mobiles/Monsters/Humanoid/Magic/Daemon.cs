@@ -1,7 +1,6 @@
 using System;
 using Server;
 using Server.Items;
-using Server.Factions;
 
 namespace Server.Mobiles
 {
@@ -11,7 +10,6 @@ namespace Server.Mobiles
 	public override double DispelDifficulty{ get{ return 125.0; } }
 	public override double DispelFocus{ get{ return 45.0; } }
 
-	public override Faction FactionAllegiance { get { return Shadowlords.Instance; } }
 	public override Ethics.Ethic EthicAllegiance { get { return Ethics.Ethic.Evil; } }
 
 	[Constructable]

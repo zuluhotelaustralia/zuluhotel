@@ -52,7 +52,7 @@ namespace Server.Mobiles
 	public override int Meat{ get{ return 2; } }
 	public override int TreasureMapLevel{ get{ return 1; } }
 	public override int Hides{ get { return 2; } }
-	public override HideType HideType{ get { return HideType.Troll; } }
+	public override HideType HideType{ get { return HideType.IceCrystal; } }
 
 	public FrostTroll( Serial serial ) : base( serial )
 	{

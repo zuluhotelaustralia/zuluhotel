@@ -27,10 +27,6 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-	    if( Factions.Sigil.ExistsOn( Caster ) ){
-		Caster.SendLocalizedMessage( 1010521 ); //fuck you, etc.
-		goto Return;
-	    }
 	    if( TransformationSpellHelper.UnderTransformation( Caster )){
 		Caster.SendLocalizedMessage( 1061633 ); // you cannot polymorph because fuck you etc.
 		goto Return;

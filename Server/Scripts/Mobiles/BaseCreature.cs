@@ -12,7 +12,6 @@ using Server.ContextMenus;
 using Server.Engines.Quests;
 using Server.Engines.MLQuests;
 using Server.Engines.PartySystem;
-using Server.Factions;
 using Server.SkillHandlers;
 using Server.Spells.Necromancy;
 
@@ -324,10 +323,7 @@ namespace Server.Mobiles
 	    set { m_SummonEnd = value; }
 	}
 
-	public virtual Faction FactionAllegiance{ get{ return null; } }
-	public virtual int FactionSilverWorth{ get{ return 30; } }
-
-	#region ML Quest System
+#region ML Quest System
 
 	private List<MLQuest> m_MLQuests;
 
@@ -924,22 +920,9 @@ namespace Server.Mobiles
 	    Enemy
 	}
 
-	public virtual Allegiance GetFactionAllegiance( Mobile mob )
-	{
-	    if ( mob == null || mob.Map != Faction.Facet || FactionAllegiance == null )
-		return Allegiance.None;
-
-	    Faction fac = Faction.Find( mob, true );
-
-	    if ( fac == null )
-		return Allegiance.None;
-
-	    return ( fac == FactionAllegiance ? Allegiance.Ally : Allegiance.Enemy );
-	}
-
 	public virtual Allegiance GetEthicAllegiance( Mobile mob )
 	{
-	    if ( mob == null || mob.Map != Faction.Facet || EthicAllegiance == null )
+	    if ( mob == null || EthicAllegiance == null )
 		return Allegiance.None;
 
 	    Ethics.Ethic ethic = Ethics.Ethic.Find( mob, true );
@@ -960,9 +943,6 @@ namespace Server.Mobiles
 		return true;
 
 	    if ( m is BaseGuard )
-		return false;
-
-	    if ( GetFactionAllegiance( m ) == Allegiance.Ally )
 		return false;
 
 	    Ethics.Ethic ourEthic = EthicAllegiance;
@@ -4923,7 +4903,6 @@ namespace Server.Mobiles
 			if ( !givenFactionKill )
 			{
 			    givenFactionKill = true;
-			    Faction.HandleDeath( this, ds.m_Mobile );
 			}
 
 			Region region = ds.m_Mobile.Region;
@@ -5015,9 +4994,6 @@ namespace Server.Mobiles
 
 	public override bool CanBeHarmful( Mobile target, bool message, bool ignoreOurBlessedness )
 	{
-	    if ( target is BaseFactionGuard )
-		return false;
-
 	    if ( ( target is BaseCreature && ( (BaseCreature)target ).IsInvulnerable ) || target is PlayerVendor || target is TownCrier )
 	    {
 		if ( message )

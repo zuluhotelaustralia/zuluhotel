@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Server;
 using Server.Mobiles;
-using Server.Factions;
 
 namespace Server
 {
@@ -142,11 +141,8 @@ namespace Server
 					typeof( Rikktor ),			typeof( Semidar ),			typeof( EnergyVortex ),
 					typeof( EliteNinja ),			typeof( Pixie ),			typeof( SilverSerpent ),
 					typeof( VorpalBunny ),		typeof( FleshRenderer ),	typeof( KhaldunRevenant ),
-					typeof( FactionDragoon ),	typeof( FactionKnight ),	typeof( FactionPaladin ),
-					typeof( FactionHenchman ),	typeof( FactionMercenary ),	typeof( FactionNecromancer ),
-					typeof( FactionSorceress ),	typeof( FactionWizard ),	typeof( FactionBerserker ),
-					typeof( FactionPaladin ),	typeof( Leviathan ),		typeof( FireBeetle ),
-					typeof( FanDancer ),		typeof( FactionDeathKnight )
+					typeof( Leviathan ),		typeof( FireBeetle ),
+					typeof( FanDancer )
 				} ),
 				/* Medium */
 				new SpeedInfo( 0.25, 0.5, new Type[]

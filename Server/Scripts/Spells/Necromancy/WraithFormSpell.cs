@@ -30,11 +30,7 @@ namespace Server.Spells.Necromancy
 
         public override void OnCast()
         {
-	    if (Factions.Sigil.ExistsOn( Caster ) ) {
-		Caster.SendLocalizedMessage( 1010521 ); //can't do that while you have a sigil
-		return;
-	    }
-	    else if( TransformationSpellHelper.UnderTransformation( Caster ) )
+	    if( TransformationSpellHelper.UnderTransformation( Caster ) )
 	    {
 		Caster.SendLocalizedMessage( 1061633 ); // You cannot polymorph while in that form.
 		return;

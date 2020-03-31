@@ -1,6 +1,5 @@
 using System;
 using Server.Items;
-using Server.Factions;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Targeting;
@@ -80,31 +79,6 @@ namespace Server.SkillHandlers
 					}
 
 					inRange.Free();
-
-					if ( Faction.Find( src ) != null )
-					{
-						IPooledEnumerable itemsInRange = src.Map.GetItemsInRange( p, range );
-
-						foreach ( Item item in itemsInRange )
-						{
-							if ( item is BaseFactionTrap )
-							{
-								BaseFactionTrap trap = (BaseFactionTrap) item;
-
-								if ( src.CheckTargetSkill( SkillName.DetectHidden, trap, 80.0, 100.0 ) )
-								{
-									src.SendLocalizedMessage( 1042712, true, " " + (trap.Faction == null ? "" : trap.Faction.Definition.FriendlyName) ); // You reveal a trap placed by a faction:
-
-									trap.Visible = true;
-									trap.BeginConceal();
-
-									foundAnyone = true;
-								}
-							}
-						}
-
-						itemsInRange.Free();
-					}
 				}
 
 				if ( !foundAnyone )

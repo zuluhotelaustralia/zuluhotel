@@ -2,87 +2,85 @@ using System;
 using Server;
 using Server.Misc;
 using Server.Items;
-using Server.Factions;
 
 namespace Server.Mobiles
 {
-	[CorpseName( "a wisp corpse" )]
-	public class Wisp : BaseCreature
+    [CorpseName( "a wisp corpse" )]
+    public class Wisp : BaseCreature
+    {
+	public override InhumanSpeech SpeechType{ get{ return InhumanSpeech.Wisp; } }
+
+	public override Ethics.Ethic EthicAllegiance { get { return Ethics.Ethic.Hero; } }
+
+	public override TimeSpan ReacquireDelay { get { return TimeSpan.FromSeconds( 1.0 ); } }
+
+	[Constructable]
+	public Wisp() : base( AIType.AI_Mage, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
 	{
-		public override InhumanSpeech SpeechType{ get{ return InhumanSpeech.Wisp; } }
+	    Name = "a wisp";
+	    Body = 58;
+	    BaseSoundID = 466;
 
-		public override Faction FactionAllegiance{ get{ return CouncilOfMages.Instance; } }
-		public override Ethics.Ethic EthicAllegiance { get { return Ethics.Ethic.Hero; } }
+	    SetStr( 196, 225 );
+	    SetDex( 196, 225 );
+	    SetInt( 196, 225 );
 
-		public override TimeSpan ReacquireDelay { get { return TimeSpan.FromSeconds( 1.0 ); } }
+	    SetHits( 118, 135 );
 
-		[Constructable]
-		public Wisp() : base( AIType.AI_Mage, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
-		{
-			Name = "a wisp";
-			Body = 58;
-			BaseSoundID = 466;
+	    SetDamage( 17, 18 );
 
-			SetStr( 196, 225 );
-			SetDex( 196, 225 );
-			SetInt( 196, 225 );
+	    SetDamageType( ResistanceType.Physical, 50 );
+	    SetDamageType( ResistanceType.Energy, 50 );
 
-			SetHits( 118, 135 );
+	    SetResistance( ResistanceType.Physical, 35, 45 );
+	    SetResistance( ResistanceType.Fire, 20, 40 );
+	    SetResistance( ResistanceType.Cold, 10, 30 );
+	    SetResistance( ResistanceType.Poison, 5, 10 );
+	    SetResistance( ResistanceType.Energy, 50, 70 );
 
-			SetDamage( 17, 18 );
+	    SetSkill( SkillName.EvalInt, 80.0 );
+	    SetSkill( SkillName.Magery, 80.0 );
+	    SetSkill( SkillName.MagicResist, 80.0 );
+	    SetSkill( SkillName.Tactics, 80.0 );
+	    SetSkill( SkillName.Wrestling, 80.0 );
 
-			SetDamageType( ResistanceType.Physical, 50 );
-			SetDamageType( ResistanceType.Energy, 50 );
+	    Fame = 4000;
+	    Karma = 0;
 
-			SetResistance( ResistanceType.Physical, 35, 45 );
-			SetResistance( ResistanceType.Fire, 20, 40 );
-			SetResistance( ResistanceType.Cold, 10, 30 );
-			SetResistance( ResistanceType.Poison, 5, 10 );
-			SetResistance( ResistanceType.Energy, 50, 70 );
+	    VirtualArmor = 40;
 
-			SetSkill( SkillName.EvalInt, 80.0 );
-			SetSkill( SkillName.Magery, 80.0 );
-			SetSkill( SkillName.MagicResist, 80.0 );
-			SetSkill( SkillName.Tactics, 80.0 );
-			SetSkill( SkillName.Wrestling, 80.0 );
+	    if ( Core.ML && Utility.RandomDouble() < .33 )
+		PackItem( Engines.Plants.Seed.RandomPeculiarSeed(3) );
 
-			Fame = 4000;
-			Karma = 0;
-
-			VirtualArmor = 40;
-
-			if ( Core.ML && Utility.RandomDouble() < .33 )
-				PackItem( Engines.Plants.Seed.RandomPeculiarSeed(3) );
-
-			AddItem( new LightSource() );
-		}
-
-		public override void GenerateLoot()
-		{
-			AddLoot( LootPack.Rich );
-			AddLoot( LootPack.Average );
-			AddLoot( LootPack.LowEarthScrolls );
-		}
-
-		public override OppositionGroup OppositionGroup
-		{
-			get{ return OppositionGroup.FeyAndUndead; }
-		}
-
-		public Wisp( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-			writer.Write( (int) 0 );
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-			int version = reader.ReadInt();
-		}
+	    AddItem( new LightSource() );
 	}
+
+	public override void GenerateLoot()
+	{
+	    AddLoot( LootPack.Rich );
+	    AddLoot( LootPack.Average );
+	    AddLoot( LootPack.LowEarthScrolls );
+	}
+
+	public override OppositionGroup OppositionGroup
+	{
+	    get{ return OppositionGroup.FeyAndUndead; }
+	}
+
+	public Wisp( Serial serial ) : base( serial )
+	{
+	}
+
+	public override void Serialize( GenericWriter writer )
+	{
+	    base.Serialize( writer );
+	    writer.Write( (int) 0 );
+	}
+
+	public override void Deserialize( GenericReader reader )
+	{
+	    base.Deserialize( reader );
+	    int version = reader.ReadInt();
+	}
+    }
 }
