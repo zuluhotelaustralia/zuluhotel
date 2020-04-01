@@ -86,6 +86,9 @@ namespace Server.Mobiles
 		    case SpecName.Warrior:
 			name = "Warrior";
 			break;
+		    case SpecName.Thief:
+			name = "Thief";
+			break;
 		    default:
 			pm.SendMessage("There appears to be an error in Spec.cs.  Please inform the server staff.");
 			Console.WriteLine("[Spec] This should never happen!!");
