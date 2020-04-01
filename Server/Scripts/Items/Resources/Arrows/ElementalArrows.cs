@@ -35,6 +35,15 @@ namespace Server.Items
 
 	}
 
+        public override void OnAfterDuped( Item newItem )
+        {
+            if ( ! ( newItem is PoisonedBolt ) )
+                return;
+
+            PoisonedBolt o = newItem as PoisonedBolt;
+            m_Poison = o.m_Poison;
+        }
+        
 	public override void OnHit( Mobile from, Mobile targ ){
 	    targ.ApplyPoison( from, m_Poison );
 	}		    
@@ -102,6 +111,15 @@ namespace Server.Items
             Name = "poisoned arrow";
 	}
 
+        public override void OnAfterDuped( Item newItem )
+        {
+            if ( ! ( newItem is PoisonedArrow ) )
+                return;
+
+            PoisonedArrow o = newItem as PoisonedArrow;
+            m_Poison = o.m_Poison;
+        }
+        
 	public override void OnHit( Mobile from, Mobile targ ){
 	    targ.ApplyPoison( from, m_Poison );
 	}
