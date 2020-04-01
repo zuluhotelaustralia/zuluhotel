@@ -121,8 +121,10 @@ namespace Server.SkillHandlers
 
 			if( from is PlayerMobile ) {
 			    PlayerMobile pm = from as PlayerMobile;
-                            m_Poison = PoisonImpl.IncreaseLevel( m_Poison );
-			}
+                            if( pm.Spec.SpecName == SpecName.Thief && m_Poison != Poison.Mortal ){
+                                m_Poison = PoisonImpl.IncreaseLevel( m_Poison );
+                            }
+                        }
 		    }
 
 		    protected override void OnTick()
