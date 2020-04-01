@@ -155,7 +155,7 @@ namespace Server.Items
 
 	    int version = reader.ReadInt();
 
-	    Poison.Deserialize( reader );
+	    m_Poison = Poison.Deserialize( reader );
 	}
     }
     
