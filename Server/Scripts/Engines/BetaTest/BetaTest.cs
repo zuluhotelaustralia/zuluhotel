@@ -117,7 +117,7 @@ namespace Server.Items {
 
     public class BetaInviteGump : Gump {
 	public static void Initialize() {
-	    CommandSystem.Register("Beta", AccessLevel.Player, new CommandEventHandler(Beta_OnCommand) );
+	    //CommandSystem.Register("Beta", AccessLevel.Player, new CommandEventHandler(Beta_OnCommand) );
 	}
 	
 	public static void Beta_OnCommand( CommandEventArgs e ) {

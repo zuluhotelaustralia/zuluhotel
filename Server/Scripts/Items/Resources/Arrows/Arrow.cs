@@ -31,7 +31,6 @@ namespace Server.Items
 	}
 	
 	public virtual void OnHit( Mobile from, Mobile targ ){
-	    Console.WriteLine("parent");
 	}	
 
 	public override void Serialize( GenericWriter writer )
