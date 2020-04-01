@@ -97,7 +97,6 @@ namespace Server.Mobiles
 	}
 	
 	private PlayerMobile m_Parent; //store the parent obj
-	private Skills m_MySkills;
 
 	private int m_SpecLevel;
 	[CommandProperty(AccessLevel.Counselor)]
@@ -155,7 +154,8 @@ namespace Server.Mobiles
 	    // if you fail the maxskill check then you are still eligible for the next spec down.
 	    // average on-class skill must be satisfied for spec.
 
-	    double total = (double)m_MySkills.Total;
+            Skills skills = m_Parent.Skills.Total;
+	    double total = (double)skills.Total;
 	    total *= 0.1;
 
 	    if( total < 600.0 ){
@@ -182,85 +182,85 @@ namespace Server.Mobiles
 		maxlevel = 6;
 	    }
 
-	    double thiefSkills = m_MySkills.Hiding.Value +
-		m_MySkills.Snooping.Value +
-		m_MySkills.Stealing.Value +
-		m_MySkills.Stealth.Value +
-		m_MySkills.DetectHidden.Value +
-		m_MySkills.RemoveTrap.Value +
-		m_MySkills.Lockpicking.Value +
-		m_MySkills.Poisoning.Value;
+	    double thiefSkills = skills.Hiding.Value +
+		skills.Snooping.Value +
+		skills.Stealing.Value +
+		skills.Stealth.Value +
+		skills.DetectHidden.Value +
+		skills.RemoveTrap.Value +
+		skills.Lockpicking.Value +
+		skills.Poisoning.Value;
 	    int thieflevel = GetSpecLevel(thiefSkills, SpecName.Thief);
 	    if( thieflevel > 0 ){
 		m_SpecName = SpecName.Thief;
 		m_SpecLevel = thieflevel;
 	    }
             
-	    double bardSkills = m_MySkills.Begging.Value + 
-		m_MySkills.Cartography.Value +
-		m_MySkills.Discordance.Value +
-		m_MySkills.Herding.Value + 
-		m_MySkills.Musicianship.Value + 
-		m_MySkills.Peacemaking.Value + 
-		m_MySkills.Provocation.Value +
-		m_MySkills.TasteID.Value;
+	    double bardSkills = skills.Begging.Value + 
+		skills.Cartography.Value +
+		skills.Discordance.Value +
+		skills.Herding.Value + 
+		skills.Musicianship.Value + 
+		skills.Peacemaking.Value + 
+		skills.Provocation.Value +
+		skills.TasteID.Value;
 	    int bardlevel = GetSpecLevel(bardSkills, SpecName.Bard);
 	    if( bardlevel > 0 ){
 		m_SpecName = SpecName.Bard;
 		m_SpecLevel = bardlevel;
 	    }
 	    
-	    double crafterSkills = m_MySkills.ArmsLore.Value + 
-		m_MySkills.Blacksmith.Value +
-		m_MySkills.Fletching.Value +
-		m_MySkills.Carpentry.Value +
-		m_MySkills.Lumberjacking.Value +
-		m_MySkills.Mining.Value +
-		m_MySkills.Tailoring.Value +
-		m_MySkills.Tinkering.Value;
+	    double crafterSkills = skills.ArmsLore.Value + 
+		skills.Blacksmith.Value +
+		skills.Fletching.Value +
+		skills.Carpentry.Value +
+		skills.Lumberjacking.Value +
+		skills.Mining.Value +
+		skills.Tailoring.Value +
+		skills.Tinkering.Value;
 	    int crafterlevel = GetSpecLevel(crafterSkills, SpecName.Crafter);
 	    if( crafterlevel > 0 ){
 		m_SpecName = SpecName.Crafter;
 		m_SpecLevel = crafterlevel;
 	    }
 	    
-	    double mageSkills = m_MySkills.Alchemy.Value +
-		m_MySkills.EvalInt.Value +
-		m_MySkills.Inscribe.Value +
-		m_MySkills.ItemID.Value +
-		m_MySkills.Magery.Value +
-		m_MySkills.Meditation.Value +
-		m_MySkills.MagicResist.Value +
-		m_MySkills.SpiritSpeak.Value;
+	    double mageSkills = skills.Alchemy.Value +
+		skills.EvalInt.Value +
+		skills.Inscribe.Value +
+		skills.ItemID.Value +
+		skills.Magery.Value +
+		skills.Meditation.Value +
+		skills.MagicResist.Value +
+		skills.SpiritSpeak.Value;
 	    int magelevel = GetSpecLevel(mageSkills, SpecName.Mage);
 	    if( magelevel > 0 ){
 		m_SpecName = SpecName.Mage;
 		m_SpecLevel = magelevel;
 	    }
 	    
-	    double rangerSkills = m_MySkills.AnimalLore.Value +
-		m_MySkills.AnimalTaming.Value +
-		m_MySkills.Camping.Value +
-		m_MySkills.Cooking.Value +
-		m_MySkills.Fishing.Value +
-		m_MySkills.Tracking.Value +
-		m_MySkills.Archery.Value +
-		m_MySkills.Veterinary.Value +
-		m_MySkills.Tactics.Value;
+	    double rangerSkills = skills.AnimalLore.Value +
+		skills.AnimalTaming.Value +
+		skills.Camping.Value +
+		skills.Cooking.Value +
+		skills.Fishing.Value +
+		skills.Tracking.Value +
+		skills.Archery.Value +
+		skills.Veterinary.Value +
+		skills.Tactics.Value;
 	    int rangerlevel = GetSpecLevel(rangerSkills, SpecName.Ranger);
 	    if( rangerlevel > 0 ){
 		m_SpecName = SpecName.Ranger;
 		m_SpecLevel = rangerlevel;
 	    }
 	
-	    double warriorSkills = m_MySkills.Anatomy.Value +
-		m_MySkills.Fencing.Value +
-		m_MySkills.Healing.Value +
-		m_MySkills.Macing.Value +
-		m_MySkills.Parry.Value +
-		m_MySkills.Swords.Value +
-		m_MySkills.Tactics.Value +
-		m_MySkills.Wrestling.Value;   
+	    double warriorSkills = skills.Anatomy.Value +
+		skills.Fencing.Value +
+		skills.Healing.Value +
+		skills.Macing.Value +
+		skills.Parry.Value +
+		skills.Swords.Value +
+		skills.Tactics.Value +
+		skills.Wrestling.Value;   
 	    int warriorlevel = GetSpecLevel(warriorSkills, SpecName.Warrior);
 	    if( warriorlevel > 0 ){
 		m_SpecName = SpecName.Warrior;
@@ -358,7 +358,6 @@ namespace Server.Mobiles
 	public Spec(PlayerMobile parent)
 	{
 	    m_Parent = parent;
-	    m_MySkills = m_Parent.Skills;
 	    m_SpecName = SpecName.None;
 	    m_SpecLevel = 0;
 	}
