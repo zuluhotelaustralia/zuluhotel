@@ -119,6 +119,13 @@ namespace Server.Items
 	    if ( attacker.Player && !defender.Player && (defender.Body.IsAnimal || defender.Body.IsMonster) && 0.4 >= Utility.RandomDouble() )
 		defender.AddToBackpack( Ammo );
 
+	    if( Ammo is Arrow ){
+		((Arrow)Ammo).OnHit( attacker, defender );
+	    }
+	    else if( Ammo is Bolt ){
+		((Bolt)Ammo).OnHit( attacker, defender );
+	    }
+	    
 	    // no AOS special moves please --sith
 	    /*if ( Core.ML && m_Velocity > 0 )
 	      {

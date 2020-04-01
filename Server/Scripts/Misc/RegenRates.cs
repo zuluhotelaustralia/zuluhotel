@@ -150,6 +150,14 @@ namespace Server.Misc
 			{
 				double medPoints = (from.Int + from.Skills[SkillName.Meditation].Value) * 0.5;
 
+				if( from is PlayerMobile ){
+				    PlayerMobile pm = from as PlayerMobile;
+
+				    if( pm.Spec.SpecName == SpecName.Mage ){
+					medPoints *= pm.Spec.Bonus;
+				    }
+				}
+
 				if ( medPoints <= 0 )
 					rate = 7.0;
 				else if ( medPoints <= 100 )

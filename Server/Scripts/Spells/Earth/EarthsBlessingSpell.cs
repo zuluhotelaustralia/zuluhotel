@@ -54,7 +54,7 @@ namespace Server.Spells.Earth
 
             double effectiveness = SpellHelper.GetEffectiveness( Caster );
 
-            double duration = Caster.Skills[SkillName.Meditation].Value * 3;
+            double duration = Caster.Skills[SkillName.Meditation].Value * 8;
 	    if( Caster is PlayerMobile ){
 		PlayerMobile pm = Caster as PlayerMobile;
 		if( pm.Spec.SpecName == SpecName.Mage ){
@@ -67,9 +67,9 @@ namespace Server.Spells.Earth
 
             double roll = 0.8 * effectiveness + 0.2 * Utility.RandomDouble();
 
-            int str = (int)(15 * roll);
-            int inte = (int)(15 * roll);
-            int dex = (int)(15 * roll);
+            int str = (int)(25 * roll);
+            int inte = (int)(25 * roll);
+            int dex = (int)(25 * roll);
 
             SpellHelper.AddStatBonus( Caster, m, StatType.Str, str, durr);
             SpellHelper.AddStatBonus( Caster, m, StatType.Int, inte, durr);
@@ -81,28 +81,6 @@ namespace Server.Spells.Earth
 
         Return:
             FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
-                    time = 144;
-                Delay = TimeSpan.FromSeconds( time );
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction( typeof( EarthsBlessingSpell ) );
-            }
         }
     }
 }

@@ -82,9 +82,9 @@ namespace Server.Spells
             double skill = caster.Skills[SkillName.Magery].Value / 130.0;
             double stat = caster.Int / 130.0;
             double spec = (caster is PlayerMobile && ((PlayerMobile)caster).Spec.SpecName == SpecName.Mage ) ?
-                ((PlayerMobile)caster).Spec.Bonus : 0.0;
+                ((PlayerMobile)caster).Spec.Bonus : 1.0;
 
-            return 1.5 + (0.4 * skill) + (0.3 * stat) + (0.3 * spec);
+            return 2 + (0.4 * skill) + (0.3 * stat) + (0.3 * spec);
         }
 
 	public static bool CheckMulti( Point3D p, Map map )
@@ -300,7 +300,7 @@ namespace Server.Spells
 
 	public static TimeSpan GetDuration( Mobile caster, Mobile target )
 	{
-	    double duration = caster.Skills[SkillName.Magery].Value * 2;
+	    double duration = caster.Skills[SkillName.Magery].Value * 6;
 	    if( caster is PlayerMobile ){
 		PlayerMobile pm = caster as PlayerMobile;
 

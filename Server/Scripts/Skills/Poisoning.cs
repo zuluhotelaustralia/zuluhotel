@@ -75,7 +75,73 @@ namespace Server.SkillHandlers
 			    startTimer = ( weapon.Type == WeaponType.Slashing || weapon.Type == WeaponType.Piercing );
 			}
 		    }
+		    else if( targeted is Arrow && !(targeted is PoisonedArrow) ) {
+			
+			Arrow ar = targeted as Arrow;
+			if( !ar.IsChildOf( from.Backpack ) ){
+			    from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
+			}
+			else {
+			    //replace the arrows with poisoned ones
+			    startTimer = true;
+			    int amount = ar.Amount;
 
+			    PoisonedArrow p = Activator.CreateInstance( typeof( PoisonedArrow ) ) as PoisonedArrow;
+			    p.Amount = amount;
+
+			    if( from is PlayerMobile ){
+				PlayerMobile pm = from as PlayerMobile;
+
+				if( pm.Spec.SpecName == SpecName.Thief && m_Potion.Poison != Poison.Mortal ){
+				    // thieves get better poison
+				    p.Poison = PoisonImpl.IncreaseLevel( m_Potion.Poison );
+				}
+			    }
+			    else{
+				p.Poison = m_Potion.Poison;
+			    }
+			    
+			    if( !from.PlaceInBackpack( p ) ){
+				p.MoveToWorld( from.Location, from.Map );
+			    }
+
+			    ar.Delete();
+			}
+		    }
+		    else if( targeted is Bolt && !(targeted is PoisonedBolt) ) {
+			
+			Bolt b = targeted as Bolt;
+			if( !b.IsChildOf( from.Backpack ) ){
+			    from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
+			}
+			else {
+			    //replace the arrows with poisoned ones
+			    startTimer = true;
+			    int amount = b.Amount;
+
+			    PoisonedBolt p = Activator.CreateInstance( typeof( PoisonedBolt ) ) as PoisonedBolt;
+			    p.Amount = amount;
+
+			    if( from is PlayerMobile ){
+				PlayerMobile pm = from as PlayerMobile;
+
+				if( pm.Spec.SpecName == SpecName.Thief && m_Potion.Poison != Poison.Mortal ){
+				    // thieves get better poison
+				    p.Poison = PoisonImpl.IncreaseLevel( m_Potion.Poison );
+				}
+			    }
+			    else{
+				p.Poison = m_Potion.Poison;
+			    }
+			    
+			    if( !from.PlaceInBackpack( p ) ){
+				p.MoveToWorld( from.Location, from.Map );
+			    }
+
+			    b.Delete();
+			}
+		    }
+		    
 		    if ( startTimer )
 		    {
 			new InternalTimer( from, (Item)targeted, m_Potion ).Start();

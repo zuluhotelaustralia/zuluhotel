@@ -13,7 +13,7 @@ namespace Server.Items
 {
     public class Runebook : Item, ISecurable, ICraftable
     {
-	public static readonly TimeSpan UseDelay = TimeSpan.FromSeconds( 7.0 );
+	public static readonly TimeSpan UseDelay = TimeSpan.FromSeconds( 5.0 );
 
 	private BookQuality m_Quality;
 		

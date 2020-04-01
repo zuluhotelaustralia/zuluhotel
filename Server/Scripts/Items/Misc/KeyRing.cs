@@ -19,6 +19,7 @@ namespace Server.Items
 		{
 			Weight = 1.0; // They seem to have no weight on OSI ?!
 
+			LootType = LootType.Blessed; //key rings should not drop on corpse
 			m_Keys = new List<Key>();
 		}
 
