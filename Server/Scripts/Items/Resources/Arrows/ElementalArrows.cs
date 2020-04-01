@@ -31,12 +31,7 @@ namespace Server.Items
 
 	    Hue = 1372;
 	    
-	    if( amount > 1 ){
-		Name = amount + " poisoned bolts";
-	    }
-	    else{
-		Name = "poisoned bolt";
-	    }
+            Name = "poisoned bolt";
 	}
 
 	public override void OnHit( Mobile from, Mobile targ ){
@@ -102,13 +97,7 @@ namespace Server.Items
 	    Hue = 1372;
 
 	    m_Poison = psn;
-	    
-	    if( amount > 1 ){
-		Name = amount + " poisoned arrows";
-	    }
-	    else{
-		Name = "poisoned arrow";
-	    }
+            Name = "poisoned arrow";
 	}
 
 	public override void OnHit( Mobile from, Mobile targ ){
