@@ -131,11 +131,9 @@ namespace Server.SkillHandlers
 			m_MaxSkill = potion.MaxPoisoningSkill;
 			Priority = TimerPriority.TwoFiftyMS;
 
-			if( from is PlayerMobile ){
+			if( from is PlayerMobile ) {
 			    PlayerMobile pm = from as PlayerMobile;
-			    if( pm.Spec.SpecName == SpecName.Thief && m_Poison.Level > Poison.Mortal.Level ){
-				m_Poison.Level++;
-			    }
+                            m_Poison = PoisonImpl.IncreaseLevel( m_Poison );
 			}
 		    }
 
@@ -153,19 +151,8 @@ namespace Server.SkillHandlers
 				
 				PoisonedArrow p = Activator.CreateInstance( typeof( PoisonedArrow ) ) as PoisonedArrow;
 				p.Amount = amount;
-				
-				if( m_From is PlayerMobile ){
-				    PlayerMobile pm = m_From as PlayerMobile;
-				    
-				    if( pm.Spec.SpecName == SpecName.Thief && m_Potion.Poison != Poison.Mortal ){
-					// thieves get better poison
-					p.Poison = PoisonImpl.IncreaseLevel( m_Potion.Poison );
-				    }
-				}
-				else{
-				    p.Poison = m_Potion.Poison;
-				}
-				
+                                p.Poison = m_Poison;
+                                
 				if( !m_From.PlaceInBackpack( p ) ){
 				    p.MoveToWorld( m_From.Location, m_From.Map );
 				}
@@ -178,18 +165,7 @@ namespace Server.SkillHandlers
 				
 				PoisonedBolt p = Activator.CreateInstance( typeof( PoisonedBolt ) ) as PoisonedBolt;
 				p.Amount = amount;
-				
-				if( m_From is PlayerMobile ){
-				    PlayerMobile pm = m_From as PlayerMobile;
-				    
-				    if( pm.Spec.SpecName == SpecName.Thief && m_Potion.Poison != Poison.Mortal ){
-					// thieves get better poison
-					p.Poison = PoisonImpl.IncreaseLevel( m_Potion.Poison );
-				    }
-				}
-				else{
-				    p.Poison = m_Potion.Poison;
-				}
+                                p.Poison = m_Poison;
 				
 				if( !m_From.PlaceInBackpack( p ) ){
 				    p.MoveToWorld( m_From.Location, m_From.Map );

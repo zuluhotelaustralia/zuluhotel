@@ -103,15 +103,6 @@ namespace Server.Items
 	}
 
 	public override void OnHit( Mobile from, Mobile targ ){
-	    if( from is PlayerMobile ){
-		PlayerMobile pm = from as PlayerMobile;
-
-		if( pm.Spec.SpecName == SpecName.Thief && m_Poison != Poison.Mortal ){
-		    // thieves get better poison
-		    m_Poison = PoisonImpl.IncreaseLevel( m_Poison );
-		}
-	    }
-
 	    targ.ApplyPoison( from, m_Poison );
 	}
 	
