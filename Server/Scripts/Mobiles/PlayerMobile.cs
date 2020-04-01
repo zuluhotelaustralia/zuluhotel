@@ -3120,6 +3120,7 @@ namespace Server.Mobiles
 
 	public PlayerMobile( Serial s ) : base( s )
 	{
+            m_Spec = new Spec(this);
 	    m_VisList = new List<Mobile>();
 	    m_AntiMacroTable = new Hashtable();
 	    InvalidateMyRunUO();
@@ -3212,7 +3213,6 @@ namespace Server.Mobiles
 		    }
 		case 30:
 		    {
-			m_Spec = new Spec(this);
 			goto case 29;
 		    }
 		case 29:
