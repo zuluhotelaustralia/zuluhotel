@@ -75,24 +75,12 @@ namespace Server.SkillHandlers
 			    startTimer = ( weapon.Type == WeaponType.Slashing || weapon.Type == WeaponType.Piercing );
 			}
 		    }
-		    else if( targeted is Arrow && !(targeted is PoisonedArrow) ) {
-			if( !targeted.IsChildOf( from.Backpack ) ){
-			    from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-			}
-			else {
+		    else if( ( targeted is Arrow || targeted is Bolt )
+                             && !(targeted is PoisonedArrow)
+                             && !(targeted is PoisonedBolt) ) {
 			    //replace the arrows with poisoned ones
 			    startTimer = true;
-			}
-		    }
-		    else if( targeted is Bolt && !(targeted is PoisonedBolt) ) {
-			if( !b.IsChildOf( from.Backpack ) ){
-			    from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-			}
-			else {
-			    //replace the arrows with poisoned ones
-			    startTimer = true;
-			}
-		    }
+                    }
 		    
 		    if ( startTimer )
 		    {
@@ -152,12 +140,7 @@ namespace Server.SkillHandlers
 				PoisonedArrow p = Activator.CreateInstance( typeof( PoisonedArrow ) ) as PoisonedArrow;
 				p.Amount = amount;
                                 p.Poison = m_Poison;
-                                
-				if( !m_From.PlaceInBackpack( p ) ){
-				    p.MoveToWorld( m_From.Location, m_From.Map );
-				}
-				
-				ar.Delete();
+                                ar.ReplaceWith(p);
 			    }
 			    else if( m_Target is Bolt && !(m_Target is PoisonedBolt) ){
 				Bolt b = m_Target as Bolt;
@@ -166,12 +149,7 @@ namespace Server.SkillHandlers
 				PoisonedBolt p = Activator.CreateInstance( typeof( PoisonedBolt ) ) as PoisonedBolt;
 				p.Amount = amount;
                                 p.Poison = m_Poison;
-				
-				if( !m_From.PlaceInBackpack( p ) ){
-				    p.MoveToWorld( m_From.Location, m_From.Map );
-				}
-				
-				b.Delete();
+                                b.ReplaceWith(p);
 			    }
 			    else if ( m_Target is BaseWeapon )
 			    {
@@ -203,14 +181,9 @@ namespace Server.SkillHandlers
 			    }
 			    else
 			    {
-				if ( m_Target is BaseWeapon )
+				if ( m_Target is BaseWeapon && (m_Target as BaseWeapon).Type == WeaponType.Slashing )
 				{
-				    BaseWeapon weapon = (BaseWeapon)m_Target;
-
-				    if ( weapon.Type == WeaponType.Slashing )
-					m_From.SendLocalizedMessage( 1010516 ); // You fail to apply a sufficient dose of poison on the blade
-				    else
-					m_From.SendLocalizedMessage( 1010518 ); // You fail to apply a sufficient dose of poison
+                                    m_From.SendLocalizedMessage( 1010516 ); // You fail to apply a sufficient dose of poison on the blade
 				}
 				else
 				{
