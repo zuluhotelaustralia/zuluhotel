@@ -26,6 +26,8 @@ namespace Server.Commands
 	{
 	    CommandSystem.Prefix = "[";
 
+	    Register( "fixweight", AccessLevel.Developer, new CommandEventHandler( FixWeight_OnCommand ) );
+
 	    Register( "Consider", AccessLevel.Player, new CommandEventHandler( Consider_OnCommand ) );
 	    
 	    Register( "Go", AccessLevel.Counselor, new CommandEventHandler( Go_OnCommand ) );
@@ -84,6 +86,12 @@ namespace Server.Commands
 	public static void Register( string command, AccessLevel access, CommandEventHandler handler )
 	{
 	    CommandSystem.Register( command, access, handler );
+	}
+
+	private static void FixWeight_OnCommand( CommandEventArgs e ){
+	    Mobile from = e.Mobile;
+
+	    from.Target = new FixWeightTarget();
 	}
 	
 	[Usage( "SpeedBoost [true|false]" )]
@@ -1007,6 +1015,19 @@ namespace Server.Commands
 	    }
 	}
 
+	private class FixWeightTarget : Target {
+	    public FixWeightTarget() : base( -1, false, TargetFlags.None ){}
+
+	    protected override void OnTarget( Mobile from, object targeted ){
+		if( targeted is Mobile ){
+		    ((Mobile)targeted).UpdateTotals();
+		}
+		else {
+		    from.SendMessage("bruh");
+		}
+	    }
+	}
+		
 	private class StuckMenuTarget : Target
 	{
 	    public StuckMenuTarget() : base( -1, false, TargetFlags.None )

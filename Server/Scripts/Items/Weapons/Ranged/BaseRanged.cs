@@ -214,8 +214,10 @@ namespace Server.Items
                         return false;
                     }
                     Server.Commands.Dupe.CopyProperties(dupe, ammo);
-                    dupe.OnAfterDuped(ammo);
-                    m_LastAmmo = dupe;
+		    dupe.Amount = 1;
+		    dupe.OnAfterDuped(ammo);
+		    m_LastAmmo = dupe;
+		    dupe.Delete();
                     ammo.Consume( 1 );
 		}
 		else if ( quiver.FindItemByType( AmmoType ) == null && ( pack == null || pack.FindItemByType( AmmoType ) == null ) )
