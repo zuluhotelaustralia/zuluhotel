@@ -154,7 +154,7 @@ namespace Server.Mobiles
 	    // if you fail the maxskill check then you are still eligible for the next spec down.
 	    // average on-class skill must be satisfied for spec.
 
-            Skills skills = m_Parent.Skills.Total;
+            Skills skills = m_Parent.Skills;
 	    double total = (double)skills.Total;
 	    total *= 0.1;
 
