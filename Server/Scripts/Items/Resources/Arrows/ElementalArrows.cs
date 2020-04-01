@@ -72,7 +72,7 @@ namespace Server.Items
 
 	    int version = reader.ReadInt();
 
-	    Poison.Deserialize( reader );
+	    m_Poison = Poison.Deserialize( reader );
 	}
     }
     
@@ -111,6 +111,8 @@ namespace Server.Items
 	}
 
 	public override void OnHit( Mobile from, Mobile targ ){
+	    Console.WriteLine( "child ");
+
 	    if( from is PlayerMobile ){
 		PlayerMobile pm = from as PlayerMobile;
 
@@ -152,7 +154,7 @@ namespace Server.Items
 
 	    int version = reader.ReadInt();
 
-	    Poison.Deserialize( reader );
+	    m_Poison = Poison.Deserialize( reader );
 	}
     }
     

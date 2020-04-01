@@ -592,22 +592,22 @@ namespace Server
 
 	public static readonly LootPack LesserNecroScrolls = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry(true, LesserNecroScrollsItems, 50.00, 1)
+	    new LootPackEntry(true, LesserNecroScrollsItems, 10.00, 1)
 	});
 
 	public static readonly LootPack GreaterNecroScrolls = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry( true, GreaterNecroScrollsItems, 50.00, 1)
+	    new LootPackEntry( true, GreaterNecroScrollsItems, 10.00, 1)
 	});
 
 	public static readonly LootPack LowEarthScrolls = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry( true, LowEarthScrollItems, 30.00, 1)
+	    new LootPackEntry( true, LowEarthScrollItems, 10.00, 1)
 	});
 
 	public static readonly LootPack HighEarthScrolls = new LootPack( new LootPackEntry[]
 	{
-	    new LootPackEntry( true, HighEarthScrollItems, 30.00, 1)
+	    new LootPackEntry( true, HighEarthScrollItems, 10.00, 1)
 	});
 
 	public static readonly LootPack EarthBookPack = new LootPack( new LootPackEntry[]
