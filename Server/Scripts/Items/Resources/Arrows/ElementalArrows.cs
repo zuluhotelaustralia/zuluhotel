@@ -55,6 +55,7 @@ namespace Server.Items
 	
 	public PoisonedBolt( Serial serial ) : base( serial )
 	{
+            
 	}
 
 	public override void Serialize( GenericWriter writer )
@@ -71,8 +72,8 @@ namespace Server.Items
 	    base.Deserialize( reader );
 
 	    int version = reader.ReadInt();
-
-	    Poison.Deserialize( reader );
+            
+            m_Poison = Poison.Deserialize( reader );
 	}
     }
     
@@ -111,6 +112,8 @@ namespace Server.Items
 	}
 
 	public override void OnHit( Mobile from, Mobile targ ){
+            Console.WriteLine("Poinsoned ARrow.onHit");
+            
 	    if( from is PlayerMobile ){
 		PlayerMobile pm = from as PlayerMobile;
 

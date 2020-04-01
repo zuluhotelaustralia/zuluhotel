@@ -24,6 +24,12 @@ namespace Server.Items
 	private Timer m_RecoveryTimer; // so we don't start too many timers
 	private bool m_Balanced;
 	private int m_Velocity;
+        private Item m_LastAmmo;
+
+	[CommandProperty( AccessLevel.GameMaster )]
+        public Item LastAmmo {
+            get { return m_LastAmmo; }
+        }
 
 	private AttackType m_AttackType;
 		
@@ -119,11 +125,11 @@ namespace Server.Items
 	    if ( attacker.Player && !defender.Player && (defender.Body.IsAnimal || defender.Body.IsMonster) && 0.4 >= Utility.RandomDouble() )
 		defender.AddToBackpack( Ammo );
 
-	    if( Ammo is Arrow ){
-		((Arrow)Ammo).OnHit( attacker, defender );
+	    if( LastAmmo is Arrow ){
+		((Arrow)LastAmmo).OnHit( attacker, defender );
 	    }
-	    else if( Ammo is Bolt ){
-		((Bolt)Ammo).OnHit( attacker, defender );
+	    else if( LastAmmo is Bolt ){
+		((Bolt)LastAmmo).OnHit( attacker, defender );
 	    }
 	    
 	    // no AOS special moves please --sith
@@ -180,7 +186,7 @@ namespace Server.Items
 	    base.OnMiss( attacker, defender );
 	}
 
-	public virtual bool OnFired( Mobile attacker, Mobile defender )
+	public virtual bool OnFired( Mobile attacker, Mobile defender  )
 	{
 	    if ( attacker.Player )
 	    {
@@ -189,11 +195,28 @@ namespace Server.Items
 
 		if ( quiver == null || Utility.Random( 100 ) >= quiver.LowerAmmoCost )
 		{
-		    // consume ammo
-		    if ( quiver != null && quiver.ConsumeTotal( AmmoType, 1 ) )
-			quiver.InvalidateWeight();
-		    else if ( pack == null || !pack.ConsumeTotal( AmmoType, 1 ) )
-			return false;
+                    Item ammo = quiver != null ? quiver.FindItemByType( AmmoType ) : null;
+                    if ( ammo == null ) {
+                        ammo = pack != null ? pack.FindItemByType( AmmoType ) : null ;
+                    }
+                    if ( ammo == null ) {
+                        return false;
+                    }
+
+                    Item dupe;
+                    try
+                    {
+                        dupe = (Item)Activator.CreateInstance( ammo.GetType() );
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Warning failed to CreateInstance ammo of type {0}", ammo.GetType());
+                        return false;
+                    }
+                    Server.Commands.Dupe.CopyProperties(dupe, ammo);
+                    dupe.OnAfterDuped(ammo);
+                    m_LastAmmo = dupe;
+                    ammo.Consume( 1 );
 		}
 		else if ( quiver.FindItemByType( AmmoType ) == null && ( pack == null || pack.FindItemByType( AmmoType ) == null ) )
 		{
