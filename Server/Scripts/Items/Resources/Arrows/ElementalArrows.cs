@@ -32,7 +32,7 @@ namespace Server.Items
 	    Hue = 1372;
 	    
 	    if( amount > 1 ){
-		Name = amount + " poisoned bolts";
+		Name = "poisoned bolts";
 	    }
 	    else{
 		Name = "poisoned bolt";
@@ -55,6 +55,7 @@ namespace Server.Items
 	
 	public PoisonedBolt( Serial serial ) : base( serial )
 	{
+            
 	}
 
 	public override void Serialize( GenericWriter writer )
@@ -72,7 +73,7 @@ namespace Server.Items
 
 	    int version = reader.ReadInt();
 
-	    m_Poison = Poison.Deserialize( reader );
+            m_Poison = Poison.Deserialize( reader );
 	}
     }
     
@@ -103,7 +104,7 @@ namespace Server.Items
 	    m_Poison = psn;
 	    
 	    if( amount > 1 ){
-		Name = amount + " poisoned arrows";
+		Name = "poisoned arrows";
 	    }
 	    else{
 		Name = "poisoned arrow";
@@ -111,8 +112,6 @@ namespace Server.Items
 	}
 
 	public override void OnHit( Mobile from, Mobile targ ){
-	    Console.WriteLine( "child ");
-
 	    if( from is PlayerMobile ){
 		PlayerMobile pm = from as PlayerMobile;
 
