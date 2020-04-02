@@ -87,7 +87,7 @@ namespace Server.Items
 	    //   distance and skill
 	    // they can always choose to mark a rune later, fuck the x/y coords
 
-	    Item pen = from.Backpack.FindItemByType( typeof( PenAndInk ), true );
+	    Item pen = from.Backpack.FindItemByType( typeof( ScribesPen ), true );
 
 	    if( pen == null ){
 		from.SendMessage("Without a pen-and-ink you cannot write your field report!");
