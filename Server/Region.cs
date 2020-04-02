@@ -179,9 +179,11 @@ namespace Server
 		case SkillName.Camping:
 		    return 0.1;
 		case SkillName.Musicianship:
+		case SkillName.Herding:
+		    return 0.1;
 		case SkillName.Discordance:
 		case SkillName.Provocation:
-		case SkillName.Herding:
+		case SkillName.Peacemaking:
 		    return 0.8;
 		default:
 		    return RegionalSkillGainPrimaryFactor;
