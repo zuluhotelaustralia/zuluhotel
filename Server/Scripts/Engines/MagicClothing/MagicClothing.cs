@@ -136,7 +136,7 @@ namespace Server{
 		typeof( BodySash ), typeof( Doublet ), typeof( Boots ), typeof( FullApron ), typeof( JesterSuit ), typeof( Sandals ), typeof( Tunic ),
 		typeof( Shoes ), typeof( Shirt ), typeof( Kilt ), typeof( Skirt ), typeof( FancyShirt ), typeof( FancyDress ), typeof( ThighBoots ),
 		typeof( LongPants ), typeof( PlainDress ), typeof( Robe ), typeof( ShortPants ), typeof( HalfApron ), typeof( GoldRing ),
-		typeof( GoldBracelet ), typeof( SilverRing ), typeof( SilverBracelet ), typeof( Necklace ), 
+		typeof( GoldBracelet ), typeof( SilverRing ), typeof( SilverBracelet ), typeof( Necklace ), typeof( GoldEarrings ), typeof( SilverEarrings ),
 		typeof( GoldNecklace ), typeof( GoldBeadNecklace ), typeof( SilverNecklace ), typeof( SilverBeadNecklace )
 	    };
 
