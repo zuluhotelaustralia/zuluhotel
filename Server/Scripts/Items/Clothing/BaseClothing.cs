@@ -1046,8 +1046,6 @@ namespace Server.Items
 		    }
 		case 6:
 		    {
-			m_Identified = false;
-			
 			if( m_ZuluSkillMods == null ){
 			    m_ZuluSkillMods = new ZuluSkillMods( this );
 			}
