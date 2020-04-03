@@ -178,18 +178,22 @@ namespace Server.Mobiles
 
 	    EarthElementalLord ell = new EarthElementalLord();
 	    ell.Team = this.Team;
+	    ell.Name = "The Top Geology Student";
 	    ell.MoveToWorld( new Point3D( 5160, 56, 20 ), Map.Felucca );
 
 	    FireElementalLord fll = new FireElementalLord();
 	    fll.Team = this.Team;
+	    fll.Name = "The Top Chemistry Student";
 	    fll.MoveToWorld( new Point3D( 5160, 39, 20 ), Map.Felucca );
 
 	    WaterElementalLord wll = new WaterElementalLord();
 	    wll.Team = this.Team;
+	    wll.Name = "The Top Environmental Sciences Student";
 	    wll.MoveToWorld( new Point3D( 5177, 56, 20 ), Map.Felucca );
 
 	    AirElementalLord all = new AirElementalLord();
 	    all.Team = this.Team;
+	    all.Name = "The Top Philosophy Student";
 	    all.MoveToWorld( new Point3D( 5177, 39, 20 ), Map.Felucca );
 	    
             return false;
