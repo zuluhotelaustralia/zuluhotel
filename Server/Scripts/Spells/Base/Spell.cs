@@ -611,8 +611,8 @@ namespace Server.Spells
 	    int maxSkill = (1 + (int)Circle) * 10;
 	    maxSkill += (1 + ((int)Circle / 6)) * 25;
 
-	    if( target.Skills[SkillName.MagicResist].Value < maxSkill )
-		target.CheckSkill( SkillName.MagicResist, 0.0, target.Skills[SkillName.MagicResist].Cap );
+	    //if( target.Skills[SkillName.MagicResist].Value < maxSkill )
+	    target.CheckSkill( SkillName.MagicResist, 0.0, target.Skills[SkillName.MagicResist].Cap );
 
 	    return (n >= Utility.RandomDouble());
 	}
