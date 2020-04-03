@@ -17,10 +17,32 @@ namespace Server.Regions
 
 	public bool Disabled{ get{ return m_Disabled; } set{ m_Disabled = value; } }
 
-	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } }
 	public override double GetSkillSpecificFactor(Skill skill){
-	    return base.GetSkillSpecificFactor( skill );
+	    base.GetSkillSpecificFactor( skill );
+	    if( skill.SkillName == SkillName.Alchemy ||
+		skill.SkillName == SkillName.Blacksmith ||
+		skill.SkillName == SkillName.Fletching ||
+		skill.SkillName == SkillName.Carpentry ||
+		skill.SkillName == SkillName.Tailoring ||
+		skill.SkillName == SkillName.Tinkering ||
+		skill.SkillName == SkillName.ArmsLore ||
+		skill.SkillName == SkillName.ItemID ||
+		skill.SkillName == SkillName.Inscribe ||
+		skill.SkillName == SkillName.Cooking ||
+		skill.SkillName == SkillName.Cartography ||
+		skill.SkillName == SkillName.Poisoning ||
+		skill.SkillName == SkillName.Fishing ||
+		skill.SkillName == SkillName.Tracking ||
+		skill.SkillName == SkillName.Mining ||
+		skill.SkillName == SkillName.Lumberjacking ){
+		return 0.3;
+	    }
+	    else {
+		return RegionalSkillGainPrimaryFactor;
+	    }
 	}
+	
+	public override double RegionalSkillGainPrimaryFactor { get { return base.RegionalSkillGainPrimaryFactor; } }
 	
 	public virtual bool IsDisabled()
 	{

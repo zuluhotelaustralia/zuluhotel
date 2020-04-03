@@ -161,7 +161,7 @@ namespace Server
 	    // these should gain fast everywhere
 	    switch( skill.SkillName ) {
 		case SkillName.AnimalTaming:
-		    return 0.8;
+		    return 0.95;
 		case SkillName.Healing:
 		    return 0.1;
 		case SkillName.Veterinary:

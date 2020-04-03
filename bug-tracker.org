@@ -194,3 +194,5 @@ This is a list of bugs.
 * TODO exceptional stuff doesn't bear maker's mark
 * TODO weapons and armor should also be able to have skill mods
 * TODO pets are slow when told to follow
+* TODO taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
+* TODO retaming

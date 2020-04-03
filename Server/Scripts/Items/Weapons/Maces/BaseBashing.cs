@@ -40,7 +40,7 @@ namespace Server.Items
 		{
 			base.OnHit( attacker, defender, damageBonus );
 
-			int stamloss = Utility.Random( 3, 3 ); //3-5 points
+			int stamloss = Utility.Random( 1, 3 );
 
 			if( attacker is PlayerMobile ){
 			    PlayerMobile pm = attacker as PlayerMobile;
