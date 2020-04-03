@@ -106,7 +106,7 @@ namespace Server.SkillHandlers
 	{
 	    private bool m_SetSkillTime = true;
 
-	    public InternalTarget() : base ( Core.AOS ? 3 : 2, false, TargetFlags.None )
+	    public InternalTarget() : base ( 4, false, TargetFlags.None )
 	    {
 	    }
 
@@ -172,7 +172,7 @@ namespace Server.SkillHandlers
 			    {
 				creature.PrivateOverheadMessage( MessageType.Regular, 0x3B2, 502802, from.NetState ); // Someone else is already taming this.
 			    }
-			    else if ( creature.CanAngerOnTame && 0.95 >= Utility.RandomDouble() )
+			    else if ( creature.CanAngerOnTame && 0.99 >= Utility.RandomDouble() )
 			    {
 				creature.PrivateOverheadMessage( MessageType.Regular, 0x3B2, 502805, from.NetState ); // You seem to anger the beast!
 				creature.PlaySound( creature.GetAngerSound() );
@@ -318,7 +318,7 @@ namespace Server.SkillHandlers
 			}
 
 			if ( !alreadyOwned ) // Passively check animal lore for gain
-			    m_Tamer.CheckTargetSkill( SkillName.AnimalLore, m_Creature, 0.0, 120.0 );
+			    m_Tamer.CheckTargetSkill( SkillName.AnimalLore, m_Creature, 0.0, 130.0 );
 
 			if ( m_Creature.Paralyzed )
 			    m_Paralyzed = true;
@@ -333,9 +333,9 @@ namespace Server.SkillHandlers
 			    m_Paralyzed = true;
 
 			if ( !alreadyOwned ) // Passively check animal lore for gain
-			    m_Tamer.CheckTargetSkill( SkillName.AnimalLore, m_Creature, 0.0, 120.0 );
+			    m_Tamer.CheckTargetSkill( SkillName.AnimalLore, m_Creature, 0.0, 130.0 );
 
-			double minSkill = m_Creature.MinTameSkill + (m_Creature.Owners.Count * 6.0);
+			double minSkill = m_Creature.MinTameSkill; // + (m_Creature.Owners.Count * 6.0);
 
 			if ( minSkill > -24.9 && CheckMastery( m_Tamer, m_Creature ) )
 			    minSkill = -24.9; // 50% at 0.0?
