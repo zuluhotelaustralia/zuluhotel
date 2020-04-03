@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public WraithBreathScroll() : this( 1 )
 		{
-		    this.Name = "Wraith Breath";
+		    Name = "Wraith Breath";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public WraithBreathScroll( int amount ) : base( 107, 0x2260, amount )
 		{
+		    Name = "Wraith Breath";
+		    Hue = 0x66D;
 		}
 
 		public WraithBreathScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Wraith Breath";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

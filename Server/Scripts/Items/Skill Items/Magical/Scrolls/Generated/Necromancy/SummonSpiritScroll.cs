@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public SummonSpiritScroll() : this( 1 )
 		{
-		    this.Name = "Summon Spirit";
+		    Name = "Summon Spirit";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public SummonSpiritScroll( int amount ) : base( 109, 0x2260, amount )
 		{
+		    Name = "Summon Spirit";
+		    Hue = 0x66D;
 		}
 
 		public SummonSpiritScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Summon Spirit";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

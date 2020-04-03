@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public WyvernStrikeScroll() : this( 1 )
 		{
-		    this.Name = "Wyvern Strike";
+		    Name = "Wyvern Strike";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public WyvernStrikeScroll( int amount ) : base( 111, 0x2260, amount )
 		{
+		    Name = "Wyvern Strike";
+		    Hue = 0x66D;
 		}
 
 		public WyvernStrikeScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Wyvern Strike";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

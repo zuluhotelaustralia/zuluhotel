@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public ControlUndeadScroll() : this( 1 )
 		{
-		    this.Name = "Control Undead";
+		    Name = "Control Undead";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public ControlUndeadScroll( int amount ) : base( 100, 0x2260, amount )
 		{
+		    Name = "Control Undead";
+		    Hue = 0x66D;
 		}
 
 		public ControlUndeadScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Control Undead";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public PlagueScroll() : this( 1 )
 		{
-		    this.Name = "Plague";
+		    Name = "Plague";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public PlagueScroll( int amount ) : base( 114, 0x2260, amount )
 		{
+		    Name = "Plague";
+		    Hue = 0x66D;
 		}
 
 		public PlagueScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Plague";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

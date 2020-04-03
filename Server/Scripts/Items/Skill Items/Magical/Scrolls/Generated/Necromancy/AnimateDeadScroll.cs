@@ -9,16 +9,22 @@ namespace Server.Items
 		[Constructable]
 		public AnimateDeadScroll() : this( 1 )
 		{
-		    this.Name = "Animate Dead";
+		    Name = "Animate Dead";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public AnimateDeadScroll( int amount ) : base( 105, 0x2260, amount )
 		{
+		    Name = "Animate Dead";
+		    Hue = 0x66D;
+
 		}
 
 		public AnimateDeadScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Animate Dead";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public SacrificeScroll() : this( 1 )
 		{
-		    this.Name = "Sacrifice";
+		    Name = "Sacrifice";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public SacrificeScroll( int amount ) : base( 106, 0x2260, amount )
 		{
+		    Name = "Sacrifice";
+		    Hue = 0x66D;
 		}
 
 		public SacrificeScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Sacrifice";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

@@ -9,16 +9,21 @@ namespace Server.Items
 		[Constructable]
 		public LicheFormScroll() : this( 1 )
 		{
-		    this.Name = "Liche Form";
+		    Name = "Liche Form";
+		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public LicheFormScroll( int amount ) : base( 113, 0x2260, amount )
 		{
+		    Name = "Liche Form";
+		    Hue = 0x66D;
 		}
 
 		public LicheFormScroll( Serial serial ) : base( serial )
 		{
+		    Name = "Liche Form";
+		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )
