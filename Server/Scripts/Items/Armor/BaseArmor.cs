@@ -1374,7 +1374,7 @@ namespace Server.Items
             if ( Absorbed < 2 )
                 Absorbed = 2;
 
-            if ( 25 > Utility.Random( 100 ) ) // 25% chance to lower durability
+            if ( 20 > Utility.Random( 100 ) ) 
             {
                 if ( Core.AOS && m_AosArmorAttributes.SelfRepair > Utility.Random( 10 ) )
                 {
