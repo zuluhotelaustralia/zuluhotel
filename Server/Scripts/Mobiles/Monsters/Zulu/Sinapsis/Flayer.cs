@@ -47,6 +47,7 @@ namespace Server.Mobiles
 
 	public override bool BleedImmune{ get{ return true; } }
 	public override bool AlwaysMurderer{ get{ return true; } }
+	public override bool BardImmune { get { return true; } }
 	
 	public ClackinFlayer( Serial serial ) : base( serial )
 	{
