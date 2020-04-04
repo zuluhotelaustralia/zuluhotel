@@ -144,7 +144,7 @@ namespace Server.Engines.Craft
 		case 4: minSkill = 32.1; maxSkill = 82.1; break;
 		case 5: minSkill = 46.4; maxSkill = 96.4; break;
 		case 6: minSkill = 60.7; maxSkill = 110.7; break;
-		case 7: minSkill = 75.0; maxSkill = 125.0; break;
+		case 7: minSkill = 75.0; maxSkill = 130.0; break;
 	    }
 
 	    int index = AddCraft(type, 1044369 + m_Circle, 1044381 + m_Index++, minSkill, maxSkill, m_RegTypes[(int)regs[0]], 1044353 + (int)regs[0], 1, 1044361 + (int)regs[0]);
@@ -155,6 +155,35 @@ namespace Server.Engines.Craft
 	    AddRes(index, typeof(BlankScroll), 1044377, 1, 1044378);
 
 	    SetManaReq(index, m_Mana);
+	}
+
+	// holy fuck I hate whoever wrote the Craft engine... omg
+	private void AddZuluNecroSpell(int spell, int mana, double minSkill, Type type, params Type[] regs){
+	    int id = CraftItem.ItemIDOf(regs[0]);
+
+	    int index = AddCraft( type, "Necromantic Chants", 1060509 + spell, minSkill, 130.0, regs[0], id < 0x4000 ? 1020000 + id : 1078872 + id, 1, 501627);
+
+	    for( int i=1; i< regs.Length; ++i ){
+		id = CraftItem.ItemIDOf(regs[i]);
+		AddRes( index, regs[i], id < 0x4000 ? 1020000 + id : 1078872 + id, 1, 501627);
+	    }
+
+	    AddRes( index, typeof(BlankScroll), 1044377, 1, 1044378);
+	    SetManaReq( index, mana );
+	}
+
+	private void AddZuluEarthSpell(int spell, int mana, double minSkill, Type type, params Type[] regs){
+	    int id = CraftItem.ItemIDOf(regs[0]);
+
+	    int index = AddCraft( type, "Druidic Magic", 1071026 + spell, minSkill, 130.0, regs[0], id < 0x4000 ? 1020000 + id : 1078872 + id, 1, 501627);
+
+	    for( int i=1; i< regs.Length; ++i ){
+		id = CraftItem.ItemIDOf(regs[i]);
+		AddRes( index, regs[i], id < 0x4000 ? 1020000 + id : 1078872 + id, 1, 501627);
+	    }
+
+	    AddRes( index, typeof(BlankScroll), 1044377, 1, 1044378);
+	    SetManaReq( index, mana );
 	}
 
 	private void AddNecroSpell(int spell, int mana, double minSkill, Type type, params Type[] regs)
@@ -272,52 +301,47 @@ namespace Server.Engines.Craft
 	    AddSpell(typeof(SummonFireElementalScroll), Reg.Bloodmoss, Reg.MandrakeRoot, Reg.SpidersSilk, Reg.SulfurousAsh);
 	    AddSpell(typeof(SummonWaterElementalScroll), Reg.Bloodmoss, Reg.MandrakeRoot, Reg.SpidersSilk);
 
-	    // TOGENERATE
-	    if (Core.SE)
-	    {
-		// AddNecroSpell(0, 23, 39.6, typeof(AnimateDeadScroll), Reagent.GraveDust, Reagent.DaemonBlood);
-		// AddNecroSpell(1, 13, 19.6, typeof(BloodOathScroll), Reagent.DaemonBlood);
-		// AddNecroSpell(2, 11, 19.6, typeof(CorpseSkinScroll), Reagent.BatWing, Reagent.GraveDust);
-		// AddNecroSpell(3, 7, 19.6, typeof(CurseWeaponScroll), Reagent.PigIron);
-		// AddNecroSpell(4, 11, 19.6, typeof(EvilOmenScroll), Reagent.BatWing, Reagent.NoxCrystal);
-		// AddNecroSpell(5, 11, 39.6, typeof(HorrificBeastScroll), Reagent.BatWing, Reagent.DaemonBlood);
-		// AddNecroSpell(6, 23, 69.6, typeof(LichFormScroll), Reagent.GraveDust, Reagent.DaemonBlood, Reagent.NoxCrystal);
-		// AddNecroSpell(7, 17, 29.6, typeof(MindRotScroll), Reagent.BatWing, Reagent.DaemonBlood, Reagent.PigIron);
-		// AddNecroSpell(8, 5, 19.6, typeof(PainSpikeScroll), Reagent.GraveDust, Reagent.PigIron);
-		// AddNecroSpell(9, 17, 49.6, typeof(PoisonStrikeScroll), Reagent.NoxCrystal);
-		// AddNecroSpell(10, 29, 64.6, typeof(StrangleScroll), Reagent.DaemonBlood, Reagent.NoxCrystal);
-		// AddNecroSpell(11, 17, 29.6, typeof(SummonFamiliarScroll), Reagent.BatWing, Reagent.GraveDust, Reagent.DaemonBlood);
-		// AddNecroSpell(12, 23, 98.6, typeof(VampiricEmbraceScroll), Reagent.BatWing, Reagent.NoxCrystal, Reagent.PigIron);
-		// AddNecroSpell(13, 41, 79.6, typeof(VengefulSpiritScroll), Reagent.BatWing, Reagent.GraveDust, Reagent.PigIron);
-		// AddNecroSpell(14, 23, 59.6, typeof(WitherScroll), Reagent.GraveDust, Reagent.NoxCrystal, Reagent.PigIron);
-		// AddNecroSpell(15, 17, 79.6, typeof(WraithFormScroll), Reagent.NoxCrystal, Reagent.PigIron);
-		// AddNecroSpell(16, 40, 79.6, typeof(ExorcismScroll), Reagent.NoxCrystal, Reagent.GraveDust);
-	    }
+	    //necro
+	    AddZuluNecroSpell( 0,  40, 100.0, typeof( ControlUndeadScroll ), Reagent.Bloodspawn, Reagent.Bone, Reagent.Blackmoor );
+	    AddZuluNecroSpell( 1,  40, 100.0, typeof( DarknessScroll ), Reagent.Pumice, Reagent.PigIron );
+	    AddZuluNecroSpell( 2,  40, 100.0, typeof( DecayingRayScroll ), Reagent.VialOfBlood, Reagent.VolcanicAsh, Reagent.DaemonBone );
+	    AddZuluNecroSpell( 3,  40, 100.0, typeof( SpectresTouchScroll ), Reagent.ExecutionersCap, Reagent.Brimstone, Reagent.DaemonBone );
+	    AddZuluNecroSpell( 4,  60, 100.0, typeof( AbyssalFlameScroll ), Reagent.Brimstone, Reagent.Obsidian, Reagent.VolcanicAsh, Reagent.DaemonBone );
+	    AddZuluNecroSpell( 5,  60, 100.0, typeof( AnimateDeadScroll ),  Reagent.Bone, Reagent.FertileDirt, Reagent.VialOfBlood, Reagent.Obsidian );
+	    AddZuluNecroSpell( 6,  60, 100.0, typeof( SacrificeScroll ), Reagent.ExecutionersCap, Reagent.Bloodspawn, Reagent.WyrmsHeart, Reagent.Bone );
+	    AddZuluNecroSpell( 7,  60, 100.0, typeof( WraithBreathScroll ),  Reagent.Obsidian, Reagent.Pumice, Reagent.Bone, Reagent.Blackmoor );
+	    AddZuluNecroSpell( 8, 100, 100.0, typeof( SorcerorsBaneScroll ),  Reagent.VolcanicAsh, Reagent.Pumice, Reagent.DragonsBlood, Reagent.DeadWood );
+	    AddZuluNecroSpell( 9, 100, 100.0, typeof( SummonSpiritScroll ),  Reagent.DaemonBone, Reagent.Brimstone, Reagent.DragonsBlood, Reagent.Bloodspawn );
+	    AddZuluNecroSpell( 10, 100, 100.0, typeof( WraithFormScroll ),  Reagent.DaemonBone, Reagent.Brimstone, Reagent.Bloodspawn );
+	    AddZuluNecroSpell( 11, 100, 100.0, typeof( WyvernStrikeScroll ),  Reagent.DragonsBlood, Reagent.NoxCrystal, Reagent.Blackmoor, Reagent.Bloodspawn );
+	    AddZuluNecroSpell( 12, 130, 100.0, typeof( KillScroll ),  Reagent.DaemonBone, Reagent.ExecutionersCap, Reagent.VialOfBlood, Reagent.WyrmsHeart );
+	    AddZuluNecroSpell( 13, 130, 100.0, typeof( LicheFormScroll ),  Reagent.DaemonBone, Reagent.Brimstone, Reagent.DragonsBlood, Reagent.VolcanicAsh );
+	    AddZuluNecroSpell( 14, 130, 100.0, typeof( PlagueScroll ),  Reagent.VolcanicAsh, Reagent.BatWing, Reagent.Pumice, Reagent.NoxCrystal );
+	    AddZuluNecroSpell( 15, 130, 100.0, typeof( SpellbindScroll ),  Reagent.EyeOfNewt, Reagent.VialOfBlood, Reagent.FertileDirt, Reagent.PigIron );
 
-	    int index;
-
-	    if ( Core.ML )
-	    {
-		index = AddCraft( typeof( EnchantedSwitch ), 1044294, 1072893, 45.0, 95.0, typeof( BlankScroll ), 1044377, 1, 1044378 );
-		AddRes( index, typeof( SpidersSilk ), 1044360, 1, 1044253 );
-		AddRes( index, typeof( BlackPearl ), 1044353, 1, 1044253 );
-		AddRes( index, typeof( SwitchItem ), 1073464, 1, 1044253 );
-		ForceNonExceptional( index );
-		SetNeededExpansion( index, Expansion.ML );
-
-		index = AddCraft( typeof( RunedPrism ), 1044294, 1073465, 45.0, 95.0, typeof( BlankScroll ), 1044377, 1, 1044378 );
-		AddRes( index, typeof( SpidersSilk ), 1044360, 1, 1044253 );
-		AddRes( index, typeof( BlackPearl ), 1044353, 1, 1044253 );
-		AddRes( index, typeof( HollowPrism ), 1072895, 1, 1044253 );
-		ForceNonExceptional( index );
-		SetNeededExpansion( index, Expansion.ML );
-	    }
-
+	    //earth
+	    AddZuluEarthSpell( 0,   5, 100.0, typeof( AntidoteScroll ),  Reagent.DeadWood, Reagent.FertileDirt, Reagent.ExecutionersCap );
+	    AddZuluEarthSpell( 1,   5, 100.0, typeof( OwlSightScroll ),  Reagent.EyeOfNewt );
+	    AddZuluEarthSpell( 2,   5, 100.0, typeof( ShiftingEarthScroll ),  Reagent.FertileDirt, Reagent.DeadWood, Reagent.Obsidian );
+	    AddZuluEarthSpell( 3,   5, 100.0, typeof( SummonMammalsScroll ),  Reagent.NoxCrystal, Reagent.PigIron, Reagent.EyeOfNewt );
+	    AddZuluEarthSpell( 4,  10, 100.0, typeof( CallLightningScroll ),  Reagent.WyrmsHeart, Reagent.PigIron, Reagent.Bone );
+	    AddZuluEarthSpell( 5,  10, 100.0, typeof( EarthsBlessingScroll ),  Reagent.PigIron, Reagent.Obsidian, Reagent.VolcanicAsh );
+	    AddZuluEarthSpell( 6,  10, 100.0, typeof( EarthPortalScroll ),  Reagent.Brimstone, Reagent.ExecutionersCap, Reagent.EyeOfNewt );
+	    AddZuluEarthSpell( 7,  10, 100.0, typeof( NaturesTouchScroll ),  Reagent.Pumice, Reagent.VialOfBlood, Reagent.Obsidian );
+	    AddZuluEarthSpell( 8,  15, 100.0, typeof( GustOfAirScroll ),  Reagent.FertileDirt, Reagent.Brimstone, Reagent.EyeOfNewt );
+	    AddZuluEarthSpell( 9,  15, 100.0, typeof( RisingFireScroll ),  Reagent.BatWing, Reagent.Brimstone, Reagent.VialOfBlood );
+	    AddZuluEarthSpell( 10,  15, 100.0, typeof( ShapeshiftScroll ),  Reagent.WyrmsHeart, Reagent.Blackmoor, Reagent.BatWing );
+	    AddZuluEarthSpell( 11,  20, 100.0, typeof( IceStrikeScroll ),  Reagent.Bone, Reagent.BatWing, Reagent.Brimstone );
+	    AddZuluEarthSpell( 12,  20, 100.0, typeof( EarthSpiritScroll ),  Reagent.DragonsBlood, Reagent.FertileDirt, Reagent.VolcanicAsh );
+	    AddZuluEarthSpell( 13,  20, 100.0, typeof( FireSpiritScroll ),  Reagent.EyeOfNewt, Reagent.Blackmoor, Reagent.Obsidian );
+	    AddZuluEarthSpell( 14,  20, 100.0, typeof( StormSpiritScroll ),  Reagent.FertileDirt, Reagent.VolcanicAsh, Reagent.BatWing );
+	    AddZuluEarthSpell( 15,  20, 100.0, typeof( WaterSpiritScroll ),  Reagent.WyrmsHeart, Reagent.NoxCrystal, Reagent.EyeOfNewt );
+	    
 	    // Runebook
-	    index = AddCraft( typeof( Runebook ), 1044294, 1041267, 45.0, 95.0, typeof( BlankScroll ), 1044377, 8, 1044378 );
+	    int index = AddCraft( typeof( Runebook ), 1044294, 1041267, 45.0, 95.0, typeof( BlankScroll ), 1044377, 8, 1044378 );
 	    AddRes( index, typeof( RecallScroll ), 1044445, 1, 1044253 );
 	    AddRes( index, typeof( GateTravelScroll ), 1044446, 1, 1044253 );
-
+	    
 	    if (Core.AOS)
 	    {
 		//				AddCraft(typeof(Engines.BulkOrders.BulkOrderBook), 1044294, 1028793, 65.0, 115.0, typeof(BlankScroll), 1044377, 10, 1044378);

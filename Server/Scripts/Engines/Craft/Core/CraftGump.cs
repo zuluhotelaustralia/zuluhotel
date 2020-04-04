@@ -20,11 +20,11 @@ namespace Server.Engines.Craft
 	private const int FontColor = 0xFFFFFF;
 
 	private enum CraftPage
-	    {
-		None,
-		PickResource,
-		PickResource2
-	    }
+	{
+	    None,
+	    PickResource,
+	    PickResource2
+	}
 
 	/*public CraftGump( Mobile from, CraftSystem craftSystem, BaseTool tool ): this( from, craftSystem, -1, -1, tool, null )
 	  {
@@ -48,35 +48,71 @@ namespace Server.Engines.Craft
 
 	    AddPage( 0 );
 
-	    AddBackground( 0, 0, 530, 437, 5054 );
-	    AddImageTiled( 10, 10, 510, 22, 2624 );
-	    AddImageTiled( 10, 292, 150, 45, 2624 );
-	    AddImageTiled( 165, 292, 355, 45, 2624 );
-	    AddImageTiled( 10, 342, 510, 85, 2624 );
-	    AddImageTiled( 10, 37, 200, 250, 2624 );
-	    AddImageTiled( 215, 37, 305, 250, 2624 );
-	    AddAlphaRegion( 10, 10, 510, 417 );
+	    if( m_CraftSystem is DefInscription ){
+		// we added more categories and the damn window doesn't fit
+		AddBackground( 0, 0, 530, 467, 5054 ); //whole window
+		AddImageTiled( 10, 10, 510, 22, 2624 );
+		AddImageTiled( 10, 322, 180, 45, 2624 );
+		AddImageTiled( 165, 322, 355, 45, 2624 );
+		AddImageTiled( 10, 372, 510, 85, 2624 );
+		AddImageTiled( 10, 37, 200, 280, 2624 );
+		AddImageTiled( 215, 37, 305, 280, 2624 );
+		AddAlphaRegion( 10, 10, 510, 447 );
+		
+		
+		if ( craftSystem.GumpTitleNumber > 0 )
+		    AddHtmlLocalized( 10, 12, 510, 20, craftSystem.GumpTitleNumber, LabelColor, false, false );
+		else
+		    AddHtml( 10, 12, 510, 20, craftSystem.GumpTitleString, false, false );
 
-	    if ( craftSystem.GumpTitleNumber > 0 )
-		AddHtmlLocalized( 10, 12, 510, 20, craftSystem.GumpTitleNumber, LabelColor, false, false );
-	    else
-		AddHtml( 10, 12, 510, 20, craftSystem.GumpTitleString, false, false );
+		AddHtmlLocalized( 10, 37, 200, 22, 1044010, LabelColor, false, false ); // <CENTER>CATEGORIES</CENTER>
+		AddHtmlLocalized( 215, 37, 305, 22, 1044011, LabelColor, false, false ); // <CENTER>SELECTIONS</CENTER>
+		AddHtmlLocalized( 10, 332, 150, 25, 1044012, LabelColor, false, false ); // <CENTER>NOTICES</CENTER>
 
-	    AddHtmlLocalized( 10, 37, 200, 22, 1044010, LabelColor, false, false ); // <CENTER>CATEGORIES</CENTER>
-	    AddHtmlLocalized( 215, 37, 305, 22, 1044011, LabelColor, false, false ); // <CENTER>SELECTIONS</CENTER>
-	    AddHtmlLocalized( 10, 302, 150, 25, 1044012, LabelColor, false, false ); // <CENTER>NOTICES</CENTER>
+		AddButton( 15, 432, 4017, 4019, 0, GumpButtonType.Reply, 0 );
+		AddHtmlLocalized( 50, 435, 150, 18, 1011441, LabelColor, false, false ); // EXIT
 
-	    AddButton( 15, 402, 4017, 4019, 0, GumpButtonType.Reply, 0 );
-	    AddHtmlLocalized( 50, 405, 150, 18, 1011441, LabelColor, false, false ); // EXIT
+		AddButton( 270, 432, 4005, 4007, GetButtonID( 6, 2 ), GumpButtonType.Reply, 0 );
+		AddHtmlLocalized( 305, 435, 150, 18, 1044013, LabelColor, false, false ); // MAKE LAST
 
-	    AddButton( 270, 402, 4005, 4007, GetButtonID( 6, 2 ), GumpButtonType.Reply, 0 );
-	    AddHtmlLocalized( 305, 405, 150, 18, 1044013, LabelColor, false, false ); // MAKE LAST
+	    }
+	    else {
+		AddBackground( 0, 0, 530, 437, 5054 );
+		AddImageTiled( 10, 10, 510, 22, 2624 );
+		AddImageTiled( 10, 292, 150, 45, 2624 );
+		AddImageTiled( 165, 292, 355, 45, 2624 );
+		AddImageTiled( 10, 342, 510, 85, 2624 );
+		AddImageTiled( 10, 37, 200, 250, 2624 );
+		AddImageTiled( 215, 37, 305, 250, 2624 );
+		AddAlphaRegion( 10, 10, 510, 417 );
+
+		if ( craftSystem.GumpTitleNumber > 0 )
+		    AddHtmlLocalized( 10, 12, 510, 20, craftSystem.GumpTitleNumber, LabelColor, false, false );
+		else
+		    AddHtml( 10, 12, 510, 20, craftSystem.GumpTitleString, false, false );
+
+		AddHtmlLocalized( 10, 37, 200, 22, 1044010, LabelColor, false, false ); // <CENTER>CATEGORIES</CENTER>
+		AddHtmlLocalized( 215, 37, 305, 22, 1044011, LabelColor, false, false ); // <CENTER>SELECTIONS</CENTER>
+		AddHtmlLocalized( 10, 302, 150, 25, 1044012, LabelColor, false, false ); // <CENTER>NOTICES</CENTER>
+
+		AddButton( 15, 402, 4017, 4019, 0, GumpButtonType.Reply, 0 );
+		AddHtmlLocalized( 50, 405, 150, 18, 1011441, LabelColor, false, false ); // EXIT
+
+		AddButton( 270, 402, 4005, 4007, GetButtonID( 6, 2 ), GumpButtonType.Reply, 0 );
+		AddHtmlLocalized( 305, 405, 150, 18, 1044013, LabelColor, false, false ); // MAKE LAST
+	    }
 
 	    // Mark option
 	    if ( craftSystem.MarkOption )
 	    {
-		AddButton( 270, 362, 4005, 4007, GetButtonID( 6, 6 ), GumpButtonType.Reply, 0 );
-		AddHtmlLocalized( 305, 365, 150, 18, 1044017 + (context == null ? 0 : (int)context.MarkOption), LabelColor, false, false ); // MARK ITEM
+		if( m_CraftSystem is DefInscription ){
+		    AddButton( 270, 392, 4005, 4007, GetButtonID( 6, 6 ), GumpButtonType.Reply, 0 );
+		    AddHtmlLocalized( 305, 395, 150, 18, 1044017 + (context == null ? 0 : (int)context.MarkOption), LabelColor, false, false ); // MARK ITEM
+		}
+		else {
+		    AddButton( 270, 362, 4005, 4007, GetButtonID( 6, 6 ), GumpButtonType.Reply, 0 );
+		    AddHtmlLocalized( 305, 365, 150, 18, 1044017 + (context == null ? 0 : (int)context.MarkOption), LabelColor, false, false ); // MARK ITEM
+		}
 	    }
 	    // ****************************************
 
@@ -266,16 +302,28 @@ namespace Server.Engines.Craft
 		    {
 			if ( i > 0 )
 			{
-			    AddButton( 370, 260, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1 );
-			    AddHtmlLocalized( 405, 263, 100, 18, 1044045, LabelColor, false, false ); // NEXT PAGE
+			    if( m_CraftSystem is DefInscription ){
+				AddButton( 370, 290, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1 );
+				AddHtmlLocalized( 405, 293, 100, 18, 1044045, LabelColor, false, false ); // NEXT PAGE
+			    }
+			    else {
+				AddButton( 370, 260, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1 );
+				AddHtmlLocalized( 405, 263, 100, 18, 1044045, LabelColor, false, false ); // NEXT PAGE
+			    }
 			}
 
 			AddPage( (i / 10) + 1 );
 
 			if ( i > 0 )
 			{
-			    AddButton( 220, 260, 4014, 4015, 0, GumpButtonType.Page, i / 10 );
-			    AddHtmlLocalized( 255, 263, 100, 18, 1044044, LabelColor, false, false ); // PREV PAGE
+			    if( m_CraftSystem is DefInscription ){
+				AddButton( 220, 290, 4014, 4015, 0, GumpButtonType.Page, i / 10 );
+				AddHtmlLocalized( 255, 293, 100, 18, 1044044, LabelColor, false, false ); // PREV PAGE
+			    }
+			    else{
+				AddButton( 220, 260, 4014, 4015, 0, GumpButtonType.Page, i / 10 );
+				AddHtmlLocalized( 255, 263, 100, 18, 1044044, LabelColor, false, false ); // PREV PAGE
+			    }
 			}
 		    }
 
