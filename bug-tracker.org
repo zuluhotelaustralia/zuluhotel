@@ -195,4 +195,9 @@ This is a list of bugs.
 * TODO weapons and armor should also be able to have skill mods
 * TODO pets are slow when told to follow
 * TODO taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
-* TODO retaming
+* DONE retaming
+* TODO should not be able to provoke flayer/flenser
+* DONE earth/necro books not dropping
+* TODO magic clothing engine not producing items properly (rewrite)
+* TODO shit is still unided after a reset
+* DONE inscription menu is fucked
