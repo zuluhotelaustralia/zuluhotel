@@ -107,7 +107,7 @@ namespace Server.Spells.Fourth
 
 		public override double GetResistPercent( Mobile target )
 		{
-			return 99.0;
+			return 80.0;
 		}
 
 		private class InternalTarget : Target
