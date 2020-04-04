@@ -50,11 +50,15 @@ namespace Server.Mobiles
 
 	public override void GenerateLoot()
 	{
-	    AddLoot( LootPack.FilthyRich, 2 );
+	    AddLoot( LootPack.UltraRich );
+	    AddLoot( LootPack.FilthyRich );
 	    AddLoot( LootPack.Rich );
 	    AddLoot( LootPack.MedScrolls, 2 );
 	    AddLoot( LootPack.GreaterNecroScrolls, 2);
-	    AddLoot( LootPack.NecroBookPack, 2 );
+
+	    if( Utility.RandomDouble() >= 0.99 ) {
+		PackItem( new NecromancerSpellbook() );
+	    }
 	}
 
 	public override bool CanRummageCorpses{ get{ return true; } }

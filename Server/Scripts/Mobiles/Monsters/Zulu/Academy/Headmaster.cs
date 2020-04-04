@@ -165,10 +165,12 @@ namespace Server.Mobiles
             hm3.NoKillAwards = true;
 	    hm3.AddLoot( LootPack.SuperBoss );
 	    hm3.AddLoot( LootPack.UltraRich, 2 );
-	    hm3.AddLoot( LootPack.NecroBookPack, 2 );
 	    hm3.AddLoot( LootPack.GreaterNecroScrolls );
 	    hm3.AddLoot( LootPack.LesserNecroScrolls );
 	    hm3.AddLoot( LootPack.Gems, 10 );
+	    if( Utility.RandomDouble() >= 0.98 ) {
+		hm3.PackItem( new NecromancerSpellbook() );
+	    }
 
 	    Effects.PlaySound(this, Map, GetDeathSound());
             Effects.SendLocationEffect(Location, Map, 0x3709, 30, 10, 2759, 0);
@@ -264,7 +266,6 @@ namespace Server.Mobiles
         {
 	    AddLoot( LootPack.UltraRich, 2 );
 	    AddLoot( LootPack.FilthyRich );
-	    AddLoot( LootPack.NecroBookPack );
 	    AddLoot( LootPack.GreaterNecroScrolls );
 	    AddLoot( LootPack.LesserNecroScrolls );
 	    AddLoot( LootPack.Gems, 2 );

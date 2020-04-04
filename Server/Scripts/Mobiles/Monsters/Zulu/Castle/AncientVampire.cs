@@ -59,7 +59,6 @@ namespace Server.Mobiles
         {
 	    AddLoot( LootPack.FilthyRich, 2 );
 	    AddLoot( LootPack.Rich );
-	    AddLoot( LootPack.NecroBookPack );
 	    AddLoot( LootPack.GreaterNecroScrolls );
 	    AddLoot( LootPack.LesserNecroScrolls );
 	    AddLoot( LootPack.Gems, 2 );
@@ -69,7 +68,7 @@ namespace Server.Mobiles
             if (0.99 > Utility.RandomDouble())
                 PackItem(new Bone());
 
-            if (0.03 > Utility.RandomDouble())
+            if (0.3 > Utility.RandomDouble())
                 PackItem(new CandleSkull());
         }
 

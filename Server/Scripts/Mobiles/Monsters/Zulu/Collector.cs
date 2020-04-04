@@ -68,8 +68,10 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.SuperBoss, 2 );
 	    AddLoot( LootPack.UltraRich );
 	    AddLoot( LootPack.HighScrolls, Utility.RandomMinMax( 2, 20 ) );
-	    AddLoot( LootPack.NecroBookPack );
 	    AddLoot( LootPack.GreaterNecroScrolls, 8 );
+	    if( Utility.RandomDouble() >= 0.95 ){
+		PackItem( new NecromancerSpellbook() );
+	    }
 	}
 
 	public override Poison PoisonImmune{ get{ return Poison.Lethal; } }

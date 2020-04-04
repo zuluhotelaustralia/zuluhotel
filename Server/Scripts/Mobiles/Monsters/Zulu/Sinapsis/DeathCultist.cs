@@ -57,9 +57,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
 	    AddLoot( LootPack.FilthyRich, 2 );
-	    AddLoot( LootPack.NecroBookPack );
 	    AddLoot( LootPack.LesserNecroScrolls, 3 );
 	    AddLoot( LootPack.GreaterNecroScrolls, 2 );
+	    if( Utility.RandomDouble() >= 0.99 ){
+		PackItem( new NecromancerSpellbook() );
+	    }
         }
 
 	public override bool AlwaysMurderer{ get{ return true; } }

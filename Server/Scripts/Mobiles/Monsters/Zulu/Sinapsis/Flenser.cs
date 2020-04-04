@@ -19,7 +19,7 @@ namespace Server.Mobiles
             SetDex(160, 165);
             SetInt(535, 540);
 
-            SetHits(1225, 1250);
+            SetHits(5225, 7250);
 
             SetDamage(35, 60);
 
@@ -41,12 +41,13 @@ namespace Server.Mobiles
 
 	public override void GenerateLoot()
 	{
-	    AddLoot( LootPack.SuperBoss );
+	    AddLoot( LootPack.FilthyRich );
 	    AddLoot( LootPack.UltraRich );
 	}
 
 	public override bool BleedImmune{ get{ return true; } }
 	public override bool AlwaysMurderer{ get{ return true; } }
+	public override bool BardImmune { get { return true; } }
 	
 	public ClackinFlenser( Serial serial ) : base( serial )
 	{

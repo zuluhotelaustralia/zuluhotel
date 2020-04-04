@@ -56,7 +56,6 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.HighEarthScrolls, 2 );
 	    AddLoot( LootPack.LowEarthScrolls, 2 );
 	    AddLoot( LootPack.HighScrolls, 2 );
-	    AddLoot( LootPack.EarthBookPack );
 	}
 
 	public override bool CanRummageCorpses{ get{ return true; } }

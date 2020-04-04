@@ -49,7 +49,6 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.PaganReagentsPack, 10 );
 	    AddLoot( LootPack.Gems, 4 );
 	    AddLoot( LootPack.HighScrolls );
-	    AddLoot( LootPack.NecroBookPack );
 	    AddLoot( LootPack.AmmunitionPack, 20 );
 	    AddLoot( LootPack.Potions );
             PackItem(new WoodenChest());

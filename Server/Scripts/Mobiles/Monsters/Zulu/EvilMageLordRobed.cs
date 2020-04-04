@@ -54,8 +54,13 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
 	    AddLoot( LootPack.FilthyRich );
-	    AddLoot( LootPack.NecroBookPack );
-	    AddLoot( LootPack.EarthBookPack );
+
+	    if( Utility.RandomDouble() >= 0.99 ){
+		PackItem( new NecromancerSpellbook() );
+	    }
+	    if( Utility.RandomDouble() >= 0.99 ){
+		PackItem( new SpellweavingBook() );
+	    } 
         }
 
 	public override bool CanRummageCorpses{ get{ return true; } }

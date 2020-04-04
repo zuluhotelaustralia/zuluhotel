@@ -104,7 +104,9 @@ namespace Server.Mobiles
 	    rm.AddLoot( LootPack.Rich );
 	    rm.AddLoot( LootPack.MedScrolls, 2 );
 	    rm.AddLoot( LootPack.GreaterNecroScrolls, 2);
-	    rm.AddLoot( LootPack.NecroBookPack, 2 );
+	    if( Utility.RandomDouble() >= 0.98 ){
+		rm.PackItem( new NecromancerSpellbook() );
+	    }
 
 	    
             Effects.PlaySound(this, Map, GetDeathSound());

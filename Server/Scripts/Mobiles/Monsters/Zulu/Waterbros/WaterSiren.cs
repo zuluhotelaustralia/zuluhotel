@@ -83,7 +83,10 @@ namespace Server.Mobiles
         {
 	    AddLoot( LootPack.FilthyRich );
 	    AddLoot( LootPack.PaganReagentsPack, 20 );
-        }
+	    if( Utility.RandomDouble() >= 0.99 ){
+		PackItem( new SpellweavingBook() );
+	    }
+	}
 
         public override bool CanRummageCorpses { get { return true; } }
         public override bool AlwaysMurderer { get { return true; } }
