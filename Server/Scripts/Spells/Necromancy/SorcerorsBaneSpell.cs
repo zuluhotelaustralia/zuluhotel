@@ -18,8 +18,7 @@ namespace Server.Spells.Necromancy
 	private static SpellInfo m_Info = new SpellInfo(
 							"Sorceror's Bane", "Fluctus Perturbo Magus Navitas",
 							227, 9031,
-							Reagent.VolcanicAsh, Reagent.WyrmsHeart, Reagent.DaemonBone,
-							Reagent.Pumice, Reagent.DragonsBlood, Reagent.DeadWood
+							Reagent.VolcanicAsh, Reagent.Pumice, Reagent.DragonsBlood, Reagent.DeadWood
 							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }

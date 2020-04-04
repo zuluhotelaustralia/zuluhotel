@@ -17,7 +17,7 @@ namespace Server.Spells.Necromancy
 							Reagent.FertileDirt, Reagent.PigIron
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 3 ); } }
 
         public override double RequiredSkill{ get{ return 140.0; } }
         public override int RequiredMana{ get{ return 130; } }

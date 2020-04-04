@@ -13,7 +13,7 @@ namespace Server.Spells.Necromancy
 							"Plague", "Fluctus Puter Se Aresceret",
 							227, 9031,
 							Reagent.VolcanicAsh, Reagent.BatWing, Reagent.DaemonBone, Reagent.DragonsBlood,
-							Reagent.Bloodspawn, Reagent.Pumice, Reagent.SerpentsScales
+							Reagent.Bloodspawn, Reagent.Pumice, Reagent.NoxCrystal
 							);
 
         public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }

@@ -10,10 +10,12 @@ namespace Server.Spells.Necromancy
     public class SacrificeSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-                "Sacrifice", "Animus Ex Corporis Resolveretur"
-                );
+							"Sacrifice", "Animus Ex Corporis Resolveretur",
+							Reagent.ExecutionersCap, Reagent.Bloodspawn,
+							Reagent.WyrmsHeart, Reagent.Bone
+							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }
 
         public override double RequiredSkill{ get{ return 100.0; } }
         public override int RequiredMana{ get{ return 60; } }

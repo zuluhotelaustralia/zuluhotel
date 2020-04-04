@@ -13,10 +13,10 @@ namespace Server.Spells.Necromancy
 							"Abyssal Flame", "Orinundus Barathrum Erado Hostes Hostium",
 							227, 9031,
 							Reagent.Brimstone, Reagent.Obsidian, Reagent.VolcanicAsh,
-							Reagent.DaemonBone, Reagent.DragonsBlood
+							Reagent.DaemonBone
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 2 ); } }
 
         public override double RequiredSkill{ get{ return 100.0; } }
         public override int RequiredMana{ get{ return 60; } }

@@ -16,7 +16,7 @@ namespace Server.Spells.Necromancy
 							Reagent.Blackmoor
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }
 
         public override double RequiredSkill{ get{ return 100.0; } }
         public override int RequiredMana{ get{ return 60; } }

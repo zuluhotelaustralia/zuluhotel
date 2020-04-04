@@ -13,10 +13,10 @@ namespace Server.Spells.Necromancy
 							"Liche Form", "Umbrae Tenebrae Miserere",
 							236, 9031,
 							Reagent.DaemonBone, Reagent.Brimstone, Reagent.DragonsBlood,
-							Reagent.Blackmoor, Reagent.VialOfBlood, Reagent.VolcanicAsh
+							Reagent.VolcanicAsh
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }
 
         public override double RequiredSkill{ get{ return 140.0; } }
         public override int RequiredMana{ get{ return 130; } }

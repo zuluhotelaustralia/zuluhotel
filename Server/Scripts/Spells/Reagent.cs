@@ -5,7 +5,7 @@ namespace Server.Spells
 {
     public class Reagent
     {
-	private static Type[] m_Types = new Type[28]
+	private static Type[] m_Types = new Type[27]
 	    {
 		typeof( BlackPearl ),
 		typeof( Bloodmoss ),
@@ -27,7 +27,6 @@ namespace Server.Spells
 		typeof( EyeOfNewt ),
 		typeof( Obsidian ),
 		typeof( Pumice ),
-		typeof( NoxCrystal ),
 		typeof( VialOfBlood ),
 		typeof( VolcanicAsh ),
 		typeof( WyrmsHeart ),
@@ -162,51 +161,45 @@ namespace Server.Spells
 	    set{ m_Types[19] = value; }
 	}
 
-	public static Type SerpentsScales
-	{
-	    get{ return m_Types[20]; }
-	    set{ m_Types[20] = value; }
-	}
-	
 	public static Type VialOfBlood
 	{
-	    get{ return m_Types[21]; }
+	    get{ return m_Types[20]; }
 	    set{ m_Types[21] = value; }
 	}
 
 	public static Type VolcanicAsh
 	{
-	    get{ return m_Types[22]; }
+	    get{ return m_Types[21]; }
 	    set{ m_Types[22] = value; }
 	}
 
 	public static Type WyrmsHeart
 	{
-	    get{ return m_Types[23]; }
+	    get{ return m_Types[22]; }
 	    set{ m_Types[23] = value; }
 	}
 
 	public static Type ExecutionersCap
 	{
-	    get{ return m_Types[24]; }
+	    get{ return m_Types[23]; }
 	    set{ m_Types[24] = value; }
 	}
 
 	public static Type Bone
 	{
-	    get{ return m_Types[25]; }
+	    get{ return m_Types[24]; }
 	    set{ m_Types[25] = value; }
 	}
 
 	public static Type DeadWood
 	{
-	    get{ return m_Types[26]; }
+	    get{ return m_Types[25]; }
 	    set{ m_Types[26] = value; }
 	}
 
 	public static Type FertileDirt
 	{
-	    get{ return m_Types[27]; }
+	    get{ return m_Types[26]; }
 	    set{ m_Types[27] = value; }
 	}
     }

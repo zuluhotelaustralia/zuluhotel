@@ -13,11 +13,10 @@ namespace Server.Spells.Necromancy
 							"Kill", "Ulties Manum Necarent",
 							227, 9031,
 							Reagent.DaemonBone, Reagent.ExecutionersCap, Reagent.VialOfBlood,
-							Reagent.DragonsBlood, Reagent.WyrmsHeart, Reagent.VolcanicAsh,
-							Reagent.EyeOfNewt
+						        Reagent.WyrmsHeart
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 1 ); } }
 
         public override double RequiredSkill{ get{ return 140.0; } }
         public override int RequiredMana{ get{ return 130; } }

@@ -16,7 +16,7 @@ namespace Server.Spells.Necromancy
 							Reagent.DaemonBone, Reagent.Brimstone, Reagent.Bloodspawn
 							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 2 ); } }
 
         public override double RequiredSkill{ get{ return 120.0; } }
         public override int RequiredMana{ get{ return 100; } }

@@ -12,10 +12,11 @@ namespace Server.Spells.Necromancy
         private static SpellInfo m_Info = new SpellInfo(
 							"Wyvern Strike", "Ubrae Tenebrae Venarent",
 							227, 9031,
-							Reagent.DragonsBlood, Reagent.SerpentsScales,
-							Reagent.Blackmoor, Reagent.Bloodspawn, Reagent.VolcanicAsh);
+							Reagent.DragonsBlood, Reagent.NoxCrystal,
+							Reagent.Blackmoor, Reagent.Bloodspawn
+							);
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 2 ); } }
 
         public override double RequiredSkill{ get{ return 120.0; } }
         public override int RequiredMana{ get{ return 100; } }
