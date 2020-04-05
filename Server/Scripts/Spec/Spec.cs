@@ -133,7 +133,7 @@ namespace Server.Mobiles
 		}
 		else
 		{
-		    return ( 1.0 + ((double)m_SpecLevel * _perLevel) ); // +5% per level
+		    return ( 1.0 + ((double)m_SpecLevel * _perLevel) ); 
 		}
 	    }
 	}

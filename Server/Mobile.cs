@@ -1978,12 +1978,34 @@ namespace Server
 		m_Owner = m;
 	    }
 
+
+	    // on zulu hotel you gain ( int/35 + skill/25 ) every 5 seconds, or (numerator)/5 per second.
+	    // Both the numerator and the time scale can change.
 	    protected override void OnTick()
 	    {
-		if( m_Owner.CanRegenMana )// m_Owner.Alive )
-		    m_Owner.Mana++;
-
 		Delay = Interval = Mobile.GetManaRegenRate( m_Owner );
+		
+		if( m_Owner.CanRegenMana ){
+		    if( m_Owner.Meditating ){
+			double intel = (double) m_Owner.Int;
+			double skill = m_Owner.Skills.Meditation.Value;
+			double timescale = (double)Delay.TotalSeconds;
+			
+			double amount = ( ( intel / 40 ) + ( skill / 30 ) ) / timescale;
+			if( m_Owner is PlayerMobile && ((PlayerMobile)m_Owner).Spec.SpecName == SpecName.Mage ){
+			    amount *= ((PlayerMobile)m_Owner).Spec.Bonus;
+			}
+			
+			if( amount < 1.0 ){
+			    amount = 1.0;
+			}
+		    
+			m_Owner.Mana += (int)amount;
+		    }
+		    else{
+			m_Owner.Mana++;
+		    }
+		}
 	    }
 	}
 
