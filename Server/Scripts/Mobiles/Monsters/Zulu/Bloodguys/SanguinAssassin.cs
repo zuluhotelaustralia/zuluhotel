@@ -101,7 +101,12 @@ namespace Server.Mobiles
         }        
 
         public override void GenerateLoot()
-        {            
+        {
+	    if( Utility.RandomDouble() >= 0.80 ){
+		Item Hood = new Hood();
+		Hood.Hue = 1776;
+		PackItem( Hood );
+	    }
 	    AddLoot( LootPack.Rich );
 	    AddLoot( LootPack.HighEarthScrolls );
 	}

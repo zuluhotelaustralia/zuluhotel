@@ -56,7 +56,7 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.MedScrolls, 2 );
 	    AddLoot( LootPack.GreaterNecroScrolls, 2);
 
-	    if( Utility.RandomDouble() >= 0.99 ) {
+	    if( Utility.RandomDouble() >= 0.95 ) {
 		PackItem( new NecromancerSpellbook() );
 	    }
 	}

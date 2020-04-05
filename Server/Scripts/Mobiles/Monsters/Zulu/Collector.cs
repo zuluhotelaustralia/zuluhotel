@@ -69,7 +69,7 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.UltraRich );
 	    AddLoot( LootPack.HighScrolls, Utility.RandomMinMax( 2, 20 ) );
 	    AddLoot( LootPack.GreaterNecroScrolls, 8 );
-	    if( Utility.RandomDouble() >= 0.95 ){
+	    if( Utility.RandomDouble() >= 0.90 ){
 		PackItem( new NecromancerSpellbook() );
 	    }
 	}

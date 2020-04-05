@@ -51,6 +51,9 @@ namespace Server.Mobiles
 	    AddLoot( LootPack.FilthyRich, 2 );
 	    AddLoot( LootPack.Rich );
 	    AddLoot( LootPack.HighEarthScrolls );
+	    if( Utility.RandomDouble() >= 0.95 ){
+		PackItem( new SpellweavingBook() );
+	    }
         }
 		
 	public override bool BleedImmune{ get{ return true; } }
