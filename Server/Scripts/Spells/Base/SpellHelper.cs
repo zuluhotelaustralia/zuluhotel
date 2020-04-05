@@ -300,8 +300,9 @@ namespace Server.Spells
 
 	public static TimeSpan GetDuration( Mobile caster, Mobile target )
 	{
-	    double duration = caster.Skills[SkillName.Magery].Value * 6;
+	    double duration = caster.Skills[SkillName.Magery].Value * 2;
 	    if( caster is PlayerMobile ){
+		duration *= 3;
 		PlayerMobile pm = caster as PlayerMobile;
 
 		if( pm.Spec.SpecName == SpecName.Mage ){
@@ -334,9 +335,8 @@ namespace Server.Spells
 
 	    if( caster is PlayerMobile ){
 		PlayerMobile pm = caster as PlayerMobile;
-
+		percent = 8 + (caster.Skills.EvalInt.Fixed / 100);
 		if( pm.Spec.SpecName == SpecName.Mage ){
-		    percent = 8 + (caster.Skills.EvalInt.Fixed / 100);
 		    percent *= pm.Spec.Bonus;
 		}
 	    }
@@ -352,30 +352,24 @@ namespace Server.Spells
 
 	public static int GetOffset( Mobile caster, Mobile target, StatType type, bool curse )
 	{
-	    if( Core.AOS )
-	    {
-		if( !m_DisableSkillCheck )
-		{
-		    caster.CheckSkill( SkillName.EvalInt, 0.0, 130.0 );
-
-		    if( curse )
-			target.CheckSkill( SkillName.MagicResist, 0.0, 130.0 );
-		}
-
-		double percent = GetOffsetScalar( caster, target, curse );
-
-		switch( type )
-		{
-		    case StatType.Str:
-			return (int)(target.RawStr * percent);
-		    case StatType.Dex:
-			return (int)(target.RawDex * percent);
-		    case StatType.Int:
-			return (int)(target.RawInt * percent);
-		}
+	    caster.CheckSkill( SkillName.EvalInt, 0.0, 130.0 );
+	    if( curse ){
+		target.CheckSkill( SkillName.MagicResist, 0.0, 130.0 );
 	    }
 
-	    return 1 + (int)(caster.Skills[SkillName.Magery].Value * 0.1);
+	    double percent = GetOffsetScalar( caster, target, curse );
+	    
+	    switch( type )
+	    {
+		case StatType.Str:
+		    return (int)(target.RawStr * percent);
+		case StatType.Dex:
+		    return (int)(target.RawDex * percent);
+		case StatType.Int:
+		    return (int)(target.RawInt * percent);
+	    }
+
+	    return 1 + (int)(caster.Skills.EvalInt.Value * 0.1);
 	}
 
 	public static Guild GetGuildFor( Mobile m )

@@ -1991,7 +1991,7 @@ namespace Server
 			double skill = m_Owner.Skills.Meditation.Value;
 			double timescale = (double)Delay.TotalSeconds;
 			
-			double amount = ( ( intel / 40 ) + ( skill / 30 ) ) / timescale;
+			double amount = ( ( intel / 80 ) + ( skill / 60 ) ) / timescale;
 			if( m_Owner is PlayerMobile && ((PlayerMobile)m_Owner).Spec.SpecName == SpecName.Mage ){
 			    amount *= ((PlayerMobile)m_Owner).Spec.Bonus;
 			}
