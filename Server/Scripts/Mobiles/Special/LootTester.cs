@@ -22,7 +22,11 @@ namespace Server.Mobiles {
 
 	public override void GenerateLoot()
 	{
-	    AddLoot( LootPack.OldSuperBoss, 1 );
+	    AddLoot( LootPack.SuperBoss );
+	    if( Utility.RandomDouble() >= 0.80 ){
+		PackItem( new SpellweavingBook() );
+		PackItem( new NecromancerSpellbook() );
+	    }
 	}
 
 	public LootTester( Serial serial ) : base( serial ){}

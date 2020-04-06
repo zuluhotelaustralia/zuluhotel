@@ -830,10 +830,10 @@ namespace Server
 			    if ( 60 > Utility.Random( 100 ) )
 				weapon.DurabilityLevel = (WeaponDurabilityLevel)GetRandomOldBonus();
 
-			    if ( 5 > Utility.Random( 100 ) )
-				weapon.Slayer = SlayerName.Silver;
+			    //if ( 5 > Utility.Random( 100 ) )
+			    //   weapon.Slayer = SlayerName.Silver;
 
-			    if ( from != null && weapon.AccuracyLevel == 0 && weapon.DamageLevel == 0 && weapon.DurabilityLevel == 0 && weapon.Slayer == SlayerName.None && 5 > Utility.Random( 100 ) )
+			    if ( from != null && weapon.DamageLevel == WeaponDamageLevel.Regular && 10 > Utility.Random( 100 ) )
 				weapon.Slayer = SlayerGroup.GetLootSlayerType( from.GetType() );
 
 			    weapon.Identified = false;

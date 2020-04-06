@@ -5,7 +5,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an siren corpse")]
+    [CorpseName("a siren corpse")]
     public class WaterSiren : BaseCreature
     {
         public override bool ShowFameTitle
