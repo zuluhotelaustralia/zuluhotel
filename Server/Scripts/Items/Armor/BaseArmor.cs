@@ -47,7 +47,7 @@ namespace Server.Items
 	
         // Overridable values. These values are provided to override the defaults which get defined in the individual armor scripts.
         private int m_ArmorBase = -1;
-        private int m_StrBonus = -1, m_DexBonus = -1, m_IntBonus = -1;
+        private int m_StrBonus = 0, m_DexBonus = 0, m_IntBonus = 0;
         private int m_StrReq = -1, m_DexReq = -1, m_IntReq = -1;
         private AMA m_Meditate = (AMA)(-1);
 
@@ -242,21 +242,21 @@ namespace Server.Items
         [CommandProperty( AccessLevel.GameMaster )]
         public int StrBonus
         {
-            get{ return ( m_StrBonus == -1 ? Core.AOS ? AosStrBonus : OldStrBonus : m_StrBonus ); }
+            get{ return m_StrBonus; }
             set{ m_StrBonus = value; InvalidateProperties(); }
         }
 
         [CommandProperty( AccessLevel.GameMaster )]
         public int DexBonus
         {
-            get{ return ( m_DexBonus == -1 ? Core.AOS ? AosDexBonus : OldDexBonus : m_DexBonus ); }
+            get{ return m_DexBonus; }
             set{ m_DexBonus = value; InvalidateProperties(); }
         }
 
         [CommandProperty( AccessLevel.GameMaster )]
         public int IntBonus
         {
-            get{ return ( m_IntBonus == -1 ? Core.AOS ? AosIntBonus : OldIntBonus : m_IntBonus ); }
+            get{ return m_IntBonus; }
             set{ m_IntBonus = value; InvalidateProperties(); }
         }
 
@@ -751,12 +751,12 @@ namespace Server.Items
         {
 	    return armor;
 	    /*
-            int scale = 100;
+	      int scale = 100;
 
-            if ( m_MaxHitPoints > 0 && m_HitPoints < m_MaxHitPoints )
-                scale = 50 + ((50 * m_HitPoints) / m_MaxHitPoints);
+	      if ( m_MaxHitPoints > 0 && m_HitPoints < m_MaxHitPoints )
+	      scale = 50 + ((50 * m_HitPoints) / m_MaxHitPoints);
 
-            return ( armor * scale ) / 100;
+	      return ( armor * scale ) / 100;
 	    */
         }
 
@@ -1665,8 +1665,95 @@ namespace Server.Items
 		String suffix  = "";
 		
 		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
+		    if( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ){
+
+			SkillMod sk = m_ZuluSkillMods.Mod;
+			if( sk.Value == 6 ){
+			    prefix += "Grandmaster ";
+			}
+			if( sk.Value == 5 ){
+			    prefix += "Master ";
+			}
+			if( sk.Value == 4 ){
+			    prefix += "Adept ";
+			}
+			if( sk.Value == 3 ){
+			    prefix += "Expert ";
+			}
+			if( sk.Value == 2 ){
+			    prefix += "Journeyman ";
+			}
+			if( sk.Value == 1 ){
+			    prefix += "Apprentice ";
+			}
+			prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
+		    }
+
+		    if( this.DexBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += " Escape Artist's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += " Acrobat's ";
+			}
+			else if( this.StrBonus  == 4 ){
+			    prefix += " Tumbler's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += " Catburglar's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += " Thief's ";
+			}
+			else if( this.StrBonus == 1 ){
+			    prefix += " Cutpurse's ";
+			}
+		    }
+
+		    if( this.IntBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += " Oracle's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += " Archmage's ";
+			}
+			else if( this.StrBonus == 4 ){
+			    prefix += " Magister's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += " Wizard's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += " Adept's ";
+			}
+			else if( this.StrBonus == 1){
+			    prefix += " Apprentice's ";
+			}
+		    }
+
+		    if( this.StrBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += " King's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += " Warlord's ";
+			}
+			else if( this.StrBonus == 4 ){
+			    prefix += " Hero's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += " Champion's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += " Veteran's ";
+			}
+			else if( this.StrBonus == 1 ){
+			    prefix += " Warrior's ";
+			}
+		    } 
+		     
 		    if( m_Quality == ArmorQuality.Exceptional ){
-			prefix += "exceptional ";
+			prefix += "Exceptional ";
 		    }
 
 		    if( m_Resource != CraftResource.Iron &&
@@ -1680,27 +1767,27 @@ namespace Server.Items
 		    switch( m_Durability ){
 			case ArmorDurabilityLevel.Durable:
 			    {
-				prefix += "durable ";
+				prefix += "Durable ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Substantial:
 			    {
-				prefix += "substantial ";
+				prefix += "Substantial ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Massive:
 			    {
-				prefix += "massive ";
+				prefix += "Massive ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Fortified:
 			    {
-				prefix += "fortified ";
+				prefix += "Fortified ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Indestructible:
 			    {
-				prefix += "indestructible ";
+				prefix += "Indestructible ";
 				break;
 			    }
 			default:
@@ -1710,27 +1797,27 @@ namespace Server.Items
 		    switch( m_Protection ){
 			case ArmorProtectionLevel.Defense:
 			    {
-				suffix += " of defense";
+				suffix += " of Defense";
 				break;
 			    }
 			case ArmorProtectionLevel.Guarding:
 			    {
-				suffix += " of guarding";
+				suffix += " of Guarding";
 				break;
 			    }
 			case ArmorProtectionLevel.Hardening:
 			    {
-				suffix += " of hardening";
+				suffix += " of Hardening";
 				break;
 			    }
 			case ArmorProtectionLevel.Fortification:
 			    {
-				suffix += " of fortification";
+				suffix += " of Fortification";
 				break;
 			    }
 			case ArmorProtectionLevel.Invulnerability:
 			    {
-				suffix += " of invulnerability";
+				suffix += " of Invulnerability";
 				break;
 			    }
 			default:
@@ -1749,76 +1836,76 @@ namespace Server.Items
 	    else {
 		base.OnSingleClick( from );
 	    }
-		/*
-            if ( DisplayLootType )
-            {
-                if ( LootType == LootType.Blessed )
-                    attrs.Add( new EquipInfoAttribute( 1038021 ) ); // blessed
-                else if ( LootType == LootType.Cursed )
-                    attrs.Add( new EquipInfoAttribute( 1049643 ) ); // cursed
-            }
+	    /*
+	      if ( DisplayLootType )
+	      {
+	      if ( LootType == LootType.Blessed )
+	      attrs.Add( new EquipInfoAttribute( 1038021 ) ); // blessed
+	      else if ( LootType == LootType.Cursed )
+	      attrs.Add( new EquipInfoAttribute( 1049643 ) ); // cursed
+	      }
 
-#region Factions
-            if ( m_FactionState != null )
-                attrs.Add( new EquipInfoAttribute( 1041350 ) ); // faction item
-#endregion
+	      #region Factions
+	      if ( m_FactionState != null )
+	      attrs.Add( new EquipInfoAttribute( 1041350 ) ); // faction item
+	      #endregion
 
-            if ( m_Quality == ArmorQuality.Exceptional )
-                attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );
+	      if ( m_Quality == ArmorQuality.Exceptional )
+	      attrs.Add( new EquipInfoAttribute( 1018305 - (int)m_Quality ) );
 
-            //if ( m_Resource != CraftResource.Iron )
-            //    attrs.Add( new EquipInfoAttribute( 1160200 + (int)m_Resource - 2 ) );  //source of our bug?
+	      //if ( m_Resource != CraftResource.Iron )
+	      //    attrs.Add( new EquipInfoAttribute( 1160200 + (int)m_Resource - 2 ) );  //source of our bug?
 
 	    
-		if( res < 100 ) {
-		    //ore, see ResourceInfo.cs
-		    attrs.Add( new EquipInfoAttribute( 1160200 + res - 2) );
-		}
-		else if( 100 < res && res <= 104 ){
-		    //leather, OSI
-		    attrs.Add( new EquipInfoAttribute( 1061116 + res - 102 ) );
-		}
-		else if( 104 < res && res <= 200){
-		    //leather, zulu
-		    attrs.Add( new EquipInfoAttribute( 1160400 + res - 105 ) );
-		}
-		else if( 301 < res ) {
-		    //wood
-		    attrs.Add( new EquipInfoAttribute( 1160233 + res - 300) ); //yuck
-		}
-	    }	    
+	      if( res < 100 ) {
+	      //ore, see ResourceInfo.cs
+	      attrs.Add( new EquipInfoAttribute( 1160200 + res - 2) );
+	      }
+	      else if( 100 < res && res <= 104 ){
+	      //leather, OSI
+	      attrs.Add( new EquipInfoAttribute( 1061116 + res - 102 ) );
+	      }
+	      else if( 104 < res && res <= 200){
+	      //leather, zulu
+	      attrs.Add( new EquipInfoAttribute( 1160400 + res - 105 ) );
+	      }
+	      else if( 301 < res ) {
+	      //wood
+	      attrs.Add( new EquipInfoAttribute( 1160233 + res - 300) ); //yuck
+	      }
+	      }	    
 
-            if ( m_Identified || from.AccessLevel >= AccessLevel.GameMaster)
-            {
-                if ( m_Durability != ArmorDurabilityLevel.Regular )
-                    attrs.Add( new EquipInfoAttribute( 1038000 + (int)m_Durability ) );
+	      if ( m_Identified || from.AccessLevel >= AccessLevel.GameMaster)
+	      {
+	      if ( m_Durability != ArmorDurabilityLevel.Regular )
+	      attrs.Add( new EquipInfoAttribute( 1038000 + (int)m_Durability ) );
 
-                if ( m_Protection > ArmorProtectionLevel.Regular && m_Protection <= ArmorProtectionLevel.Invulnerability )
-                    attrs.Add( new EquipInfoAttribute( 1038005 + (int)m_Protection ) );
-            }
-            else if ( m_Durability != ArmorDurabilityLevel.Regular || (m_Protection > ArmorProtectionLevel.Regular && m_Protection <= ArmorProtectionLevel.Invulnerability) )
-                attrs.Add( new EquipInfoAttribute( 1038000 ) ); // Unidentified
+	      if ( m_Protection > ArmorProtectionLevel.Regular && m_Protection <= ArmorProtectionLevel.Invulnerability )
+	      attrs.Add( new EquipInfoAttribute( 1038005 + (int)m_Protection ) );
+	      }
+	      else if ( m_Durability != ArmorDurabilityLevel.Regular || (m_Protection > ArmorProtectionLevel.Regular && m_Protection <= ArmorProtectionLevel.Invulnerability) )
+	      attrs.Add( new EquipInfoAttribute( 1038000 ) ); // Unidentified
 
 
-            int number;
+	      int number;
 
-            if ( Name == null )
-            {
-                number = LabelNumber;
-            }
-            else
-            {
-                this.LabelTo( from, Name );
-                number = 1041000;
-            }
+	      if ( Name == null )
+	      {
+	      number = LabelNumber;
+	      }
+	      else
+	      {
+	      this.LabelTo( from, Name );
+	      number = 1041000;
+	      }
 
-            if ( attrs.Count == 0 && Crafter == null && Name != null )
-                return;
+	      if ( attrs.Count == 0 && Crafter == null && Name != null )
+	      return;
 
-            EquipmentInfo eqInfo = new EquipmentInfo( number, m_Crafter, false, attrs.ToArray() );
+	      EquipmentInfo eqInfo = new EquipmentInfo( number, m_Crafter, false, attrs.ToArray() );
 
-            from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
-		*/
+	      from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
+	    */
         }
 
 #region ICraftable Members

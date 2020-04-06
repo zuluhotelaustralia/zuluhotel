@@ -23,6 +23,7 @@ Ideas for achievements: [[file:achievements.org][click here]]
   :properties:
   :cookie_data: todo_recursive
   :end:
+** TODO make a superboss that you have to summon by collecting rare drops from other bosses
 ** TODO custom houses from AOS (and new multis)
 ** TODO smooth boat movement from high seas
 ** TODO better bosses

@@ -266,64 +266,64 @@ namespace Server.Items
 
 		    if( this.DexBonus > 0 ){
 			if( this.StrBonus == 6 ){
-			    prefix += " Escape Artist's ";
+			    prefix += "Escape Artist's ";
 			}
 			else if( this.StrBonus == 5 ){
-			    prefix += " Acrobat's ";
+			    prefix += "Acrobat's ";
 			}
 			else if( this.StrBonus == 4 ){
-			    prefix += " Tumbler's ";
+			    prefix += "Tumbler's ";
 			}
 			else if( this.StrBonus == 3 ){
-			    prefix += " Catburglar's ";
+			    prefix += "Catburglar's ";
 			}
 			else if( this.StrBonus == 2 ){
-			    prefix += " Thief's ";
+			    prefix += "Thief's ";
 			}
 			else if( this.StrBonus == 1 ){
-			    prefix += " Cutpurse's ";
+			    prefix += "Cutpurse's ";
 			}
 		    }
 
 		    if( this.DexBonus > 0 ){
 			if( this.StrBonus == 6 ){
-			    prefix += " Oracle's ";
+			    prefix += "Oracle's ";
 			}
 			else if( this.StrBonus == 5 ){
-			    prefix += " Archmage's ";
+			    prefix += "Archmage's ";
 			}
 			else if( this.StrBonus == 4 ){
-			    prefix += " Magister's ";
+			    prefix += "Magister's ";
 			}
 			else if( this.StrBonus == 3 ){
-			    prefix += " Wizard's ";
+			    prefix += "Wizard's ";
 			}
 			else if( this.StrBonus == 2 ){
-			    prefix += " Adept's ";
+			    prefix += "Adept's ";
 			}
 			else if( this.StrBonus == 1 ){
-			    prefix += " Apprentice's ";
+			    prefix += "Apprentice's ";
 			}
 		    }
 
 		    if( this.StrBonus > 0 ){
 			if( this.StrBonus == 6 ){
-			    prefix += " King's ";
+			    prefix += "King's ";
 			}
 			else if( this.StrBonus == 5 ){
-			    prefix += " Warlord's ";
+			    prefix += "Warlord's ";
 			}
 			else if( this.StrBonus == 4 ){
-			    prefix += " Hero's ";
+			    prefix += "Hero's ";
 			}
 			else if( this.StrBonus == 3 ){
-			    prefix += " Champion's ";
+			    prefix += "Champion's ";
 			}
 			else if( this.StrBonus == 2 ){
-			    prefix += " Veteran's ";
+			    prefix += "Veteran's ";
 			}
 			else if( this.StrBonus == 1 ){
-			    prefix += " Warrior's ";
+			    prefix += "Warrior's ";
 			}
 		    }
 
@@ -460,8 +460,9 @@ namespace Server.Items
 	{
 	    base.Serialize( writer );
 
-	    writer.Write( (int) 5 ); // version
+	    writer.Write( (int) 6 ); // version
 
+	    writer.Write( m_Identified );
 	    writer.Write( m_VirtualArmorMod );
 	    m_ZuluSkillMods.Serialize( writer );
 	    writer.Write( m_StrBonus );
@@ -487,8 +488,17 @@ namespace Server.Items
 
 	    switch ( version )
 	    {
+		case 6:
+		    {
+			m_Identified = reader.ReadBool();
+			goto case 5;
+		    }
 		case 5:
 		    {
+			if( version <= 5 ){
+			    m_Identified = true;
+			}
+			
 			m_VirtualArmorMod = reader.ReadInt();
 			if( Parent is Mobile ){
 			    ((Mobile)Parent).VirtualArmorMod += m_VirtualArmorMod;

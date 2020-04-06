@@ -108,7 +108,7 @@ namespace Server{
 	private const SkillName _maxskillID = SkillName.RemoveTrap;// 48
 
 	public enum ModType{
-	    Stat,
+	    Stat = 0,
 	    Skill,
 	    Prot,
 	    Armor
@@ -129,33 +129,9 @@ namespace Server{
 	    get { return m_OtherSkills; }
 	}
 
-	private static Type[] m_AllowedTypes = new Type[]
-	    {
-		typeof( Cloak ), typeof( Bonnet ), typeof( Cap ), typeof( FeatheredHat ), typeof( FloppyHat ), typeof( JesterHat ), typeof( Surcoat ),
-		typeof( SkullCap ), typeof( StrawHat ),	typeof( TallStrawHat ), typeof( TricorneHat ), typeof( WideBrimHat ), typeof( WizardsHat ),
-		typeof( BodySash ), typeof( Doublet ), typeof( Boots ), typeof( FullApron ), typeof( JesterSuit ), typeof( Sandals ), typeof( Tunic ),
-		typeof( Shoes ), typeof( Shirt ), typeof( Kilt ), typeof( Skirt ), typeof( FancyShirt ), typeof( FancyDress ), typeof( ThighBoots ),
-		typeof( LongPants ), typeof( PlainDress ), typeof( Robe ), typeof( ShortPants ), typeof( HalfApron ), typeof( GoldRing ),
-		typeof( GoldBracelet ), typeof( SilverRing ), typeof( SilverBracelet ), typeof( Necklace ), typeof( GoldEarrings ), typeof( SilverEarrings ),
-		typeof( GoldNecklace ), typeof( GoldBeadNecklace ), typeof( SilverNecklace ), typeof( SilverBeadNecklace )
-	    };
-
-	public static Type[] AllowedTypes{ get{ return m_AllowedTypes; } }
-
-	private static ModType DecideEnchantment(){
-	    double r = Utility.RandomDouble();
-	    if( r < _statmodchance ){
-		return ModType.Stat;
-	    }
-	    else if ( r < _protchance + _statmodchance ){
-		return ModType.Prot;
-	    }
-	    else if( r < _armorchance + _protchance + _statmodchance ){
-		return ModType.Armor;
-	    }
-	    else {
-		return ModType.Skill;
-	    }
+	private static ModType DecideEnchantment( List<ModType> modtypes ){
+	    int mod = Utility.Random( 0, modtypes.Count ); //returns [0,count) i.e. exclusive of 2nd argument
+	    return modtypes[mod];
 	}
 
 	//return true if item should be cursed
@@ -163,26 +139,27 @@ namespace Server{
 	    return false; // I don't have the OnSingleClick shit done TODO sith
 
 	    /*
-	    double r = Utility.RandomDouble();
-	    if( r > _cursedchance ){
-		return false;
-	    }
-	    else {
-		return true;
-	    }
+	      double r = Utility.RandomDouble();
+	      if( r > _cursedchance ){
+	      return false;
+	      }
+	      else {
+	      return true;
+	      }
 	    */
 	}
 
 	private static StatType DecideStat() {
 	    double r = Utility.RandomDouble();
-	    if( r > 0.80 ){
+	    if( r < 0.20 ){
 		return StatType.Dex;
 	    }
-	    if( r <= 0.30 ){
+	    else if( r < 0.50 ){
 		return StatType.Str;
 	    }
-
-	    return StatType.Int;
+	    else {
+		return StatType.Int;
+	    }
 	}
 
 	public static int DecideHue( DamageType dt ) {
@@ -200,16 +177,52 @@ namespace Server{
 		case DamageType.Poison:
 		    return 1372;
 		default:
-		    return 0;
+		    return 0; //return random hue here instead 
 	    }
 	}	    
-	
-	private static Type DecideType() {
-	    int numtypes = m_AllowedTypes.Length;
-	    int index = Utility.Random(numtypes);
-	    index --;
-	    
-	    return m_AllowedTypes[index];
+
+	// so clothing could have up to 3 types:  skill or stat, prot, and armor
+	// weapons and actual armor can have just skill or stat 
+	// jewels can have prot, skill or stat, and armor
+	// so if decidenumber returns less than 3, need to exclude basearmor/baseweapon
+	private static Type DecideType( int num ) {
+	    // we can have the following types:  rangedweapon, weapon, armor, shield, jewelry, clothing
+	    // ranged weapons and shields constitute a small fraction of weapons and shields, respectively
+	    double roll = Utility.RandomDouble();
+	    switch( num ){
+		case 3:
+		    if( roll < 0.5 ){
+			return Loot.ClothingTypes[ Utility.Random( 0, Loot.ClothingTypes.Length - 1 )];
+		    }
+		    else {
+			return Loot.JewelryTypes[ Utility.Random( 0, Loot.JewelryTypes.Length - 1 )];
+		    }
+		case 2:
+		case 1:
+		default:
+		    if( roll < 0.25 ){
+			if( Utility.RandomDouble() <= 0.20 ){
+			    return Loot.ShieldTypes[ Utility.Random( 0, Loot.ShieldTypes.Length - 1 )];
+			}
+			else{
+			    return Loot.ArmorTypes[ Utility.Random( 0, Loot.ArmorTypes.Length - 1 )];
+			}
+		    }
+		    else if( roll < 0.5 ){
+			if( Utility.RandomDouble() <= 0.20 ){
+			    return Loot.RangedWeaponTypes[ Utility.Random( 0, Loot.RangedWeaponTypes.Length - 1 )];
+			}
+			else{
+			    return Loot.WeaponTypes[ Utility.Random( 0, Loot.WeaponTypes.Length - 1 )];
+			}
+		    }
+		    else if( roll < 0.75 ){
+			return Loot.ClothingTypes[ Utility.Random( 0, Loot.ClothingTypes.Length - 1 )];
+		    }
+		    else {
+			return Loot.JewelryTypes[ Utility.Random( 0, Loot.JewelryTypes.Length - 1 )];
+		    }
+	    }
 	}
 	
 	private static SkillName DecideSkill() {
@@ -256,18 +269,25 @@ namespace Server{
 	    }
 	}
 
-	public static void getNamePrefix( ref Item item ){
-	    
+	public static int DecideNumber() {
+	    double roll = Utility.RandomDouble();
+	    if( roll < 0.6 ){
+		return 1;
+	    }
+	    else if( roll < 0.9 ){
+		return 2;
+	    }
+	    else{
+		return 3;
+	    }
 	}
-
+	
 	public static Item Generate( int maxbonus ){
-	    Type itemtype = DecideType();
-	    ModType statskill = DecideEnchantment();
-	    int modamount = DecideAmount( maxbonus );
-	    StatType thestat = DecideStat();
-	    SkillName sn = DecideSkill();
-	    Item theitem;
+	    int numberofenchants = DecideNumber();
+	    Type itemtype = DecideType( numberofenchants );
 
+	    Item theitem;
+	    
 	    try {
 		theitem = (Item)Activator.CreateInstance( itemtype );
 	    }
@@ -275,77 +295,127 @@ namespace Server{
 		Console.WriteLine("FIXME: MagicClothing Engine");
 		return null;
 	    }
+	    
+	    List<ModType> usedmods = new List<ModType>{ ModType.Armor, ModType.Stat, ModType.Skill, ModType.Prot };
+	    if( theitem is BaseWeapon || theitem is BaseArmor ){
+		if( numberofenchants > 2 ){
+		    Console.WriteLine( "Houston, we have a problem");
+		}
 
-	    //Console.WriteLine(" MagicClothing engine: {0} {1} {2} {3} {4} {5}", itemtype.ToString(), statskill.ToString(), modamount, thestat.ToString(), sn, theitem.GetType() );
-
-	    if( statskill == ModType.Prot ){
-		//temporarily (TODO SITH)
-		// doing this because BaseJewel doesn't take a Prot object
-		// since you could just make prot earrings from gathered restources
-		itemtype = typeof( Robe );
+		usedmods.Remove(ModType.Armor);
+		usedmods.Remove(ModType.Prot); // no prots on armor because we're gonna make elemental suits later
 	    }
 	    
-	    if( theitem is BaseClothing ) {
-		BaseClothing clothes = theitem as BaseClothing;
-		clothes.Identified = false;
-		
-		if( statskill == ModType.Stat ){
-		    switch( thestat ){
-			case StatType.Str:
-			    clothes.StrBonus = modamount;
-			    break;
-			case StatType.Dex:
-			    clothes.StrBonus = modamount;
-			    break;
-			case StatType.Int:
-			    clothes.StrBonus = modamount;
-			    break;
-		    }
-		}
-		else if( statskill == ModType.Prot ){
-		    DamageType dt = (DamageType) Utility.RandomMinMax( (int)DamageType.Air, (int)DamageType.Poison);
-		    clothes.Prot = new Prot( dt, modamount );
-		    //clothes.Hue = DecideHue( dt );
-		}
-		else if( statskill == ModType.Armor ){
-		    //clothes.Hue = 2406;
-		    clothes.VirtualArmorMod = modamount;
-		}
-		else {
-		    //statskill == modtype.skill
-		    clothes.ZuluSkillMods.SetMod( sn, (double)modamount );
-		}
-	    }
-	    else if( theitem is BaseJewel ){
-		BaseJewel jewel = theitem as BaseJewel;
-		jewel.Identified = false;
-		if( statskill == ModType.Stat ){
-		    switch( thestat ){
-			case StatType.Str:
-			    jewel.StrBonus = modamount;
-			    break;
-			case StatType.Dex:
-			    jewel.StrBonus = modamount;
-			    break;
-			case StatType.Int:
-			    jewel.StrBonus = modamount;
-			    break;
-		    }
-		}
-		else if( statskill == ModType.Armor ){
-		    //jewel.Hue = 2406;
-		    jewel.VirtualArmorMod = modamount;
-		}
-		else {
-		    //statskill == modtype.skill
-		    jewel.ZuluSkillMods.SetMod( sn, (double)modamount );
-		}
-	    }
+	    for( int i=0; i< numberofenchants; i++ ){
+		ModType themod = DecideEnchantment( usedmods );
+		usedmods.Remove( themod );
 
+		int modamount = DecideAmount( maxbonus );
+		StatType thestat = DecideStat();
+		SkillName sn = DecideSkill();
+	    
+		if( theitem is BaseClothing ) {
+		    BaseClothing clothes = theitem as BaseClothing;
+		    clothes.Identified = false;
+		
+		    if( themod == ModType.Stat ){
+			switch( thestat ){
+			    case StatType.Str:
+				clothes.StrBonus = modamount;
+				break;
+			    case StatType.Dex:
+				clothes.StrBonus = modamount;
+				break;
+			    case StatType.Int:
+				clothes.StrBonus = modamount;
+				break;
+			}
+		    }
+		    else if( themod == ModType.Prot ){
+			DamageType dt = (DamageType) Utility.RandomMinMax( (int)DamageType.Air, (int)DamageType.Poison);
+			clothes.Prot = new Prot( dt, modamount );
+			//clothes.Hue = DecideHue( dt );
+		    }
+		    else if( themod == ModType.Armor ){
+			//clothes.Hue = 2406;
+			clothes.VirtualArmorMod = modamount;
+		    }
+		    else {
+			//themod == modtype.skill
+			clothes.ZuluSkillMods.SetMod( sn, (double)modamount );
+		    }
+		}
+		else if( theitem is BaseWeapon ){
+		    BaseWeapon weap = theitem as BaseWeapon;
+		    weap.Identified = false;
+		    if( themod == ModType.Stat ){
+			switch( thestat ){
+			    case StatType.Str:
+				weap.StrBonus = modamount;
+				break;
+			    case StatType.Dex:
+				weap.StrBonus = modamount;
+				break;
+			    case StatType.Int:
+				weap.StrBonus = modamount;
+				break;
+			}
+		    }
+		    else {
+			weap.ZuluSkillMods.SetMod( sn, (double) modamount );
+		    }
+		}
+		else if( theitem is BaseArmor ){
+		    BaseArmor armr = theitem as BaseArmor;
+		    armr.Identified = false;
+		    if( themod == ModType.Stat ){
+			switch( thestat ){
+			    case StatType.Str:
+				armr.StrBonus = modamount;
+				break;
+			    case StatType.Dex:
+				armr.StrBonus = modamount;
+				break;
+			    case StatType.Int:
+				armr.StrBonus = modamount;
+				break;
+			}
+		    }
+		    else {
+			armr.ZuluSkillMods.SetMod( sn, (double) modamount );
+		    }
+		}	
+		else if( theitem is BaseJewel ){
+		    BaseJewel jewel = theitem as BaseJewel;
+		    jewel.Identified = false;
+		    if( themod == ModType.Stat ){
+			switch( thestat ){
+			    case StatType.Str:
+				jewel.StrBonus = modamount;
+				break;
+			    case StatType.Dex:
+				jewel.StrBonus = modamount;
+				break;
+			    case StatType.Int:
+				jewel.StrBonus = modamount;
+				break;
+			}
+		    }
+		    else if( themod == ModType.Armor ){
+			//jewel.Hue = 2406;
+			jewel.VirtualArmorMod = modamount;
+		    }
+		    else {
+			//themod == modtype.skill
+			jewel.ZuluSkillMods.SetMod( sn, (double)modamount );
+		    }
+		}
+	    }
+	    
 	    return theitem;
 	}
     }
-
+    
     public class MagicClothingDummyType{
 	public MagicClothingDummyType () {}
     }

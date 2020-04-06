@@ -138,6 +138,27 @@ namespace Server.Items
         public virtual SkillName AccuracySkill { get { return SkillName.Tactics; } }
         #endregion
 
+	private int m_StrBonus = 0;
+	private int m_DexBonus = 0;
+	private int m_IntBonus = 0;
+
+	[CommandProperty( AccessLevel.GameMaster )]
+	public int StrBonus{
+	    get { return m_StrBonus; }
+	    set { m_StrBonus = value; }
+	}
+	[CommandProperty( AccessLevel.GameMaster )]
+	public int DexBonus{
+	    get { return m_DexBonus; }
+	    set { m_DexBonus = value; }
+	}
+	[CommandProperty( AccessLevel.GameMaster )]
+	public int IntBonus{
+	    get { return m_IntBonus; }
+	    set { m_IntBonus = value; }
+	}
+	
+
         #region Getters & Setters
         [CommandProperty( AccessLevel.GameMaster )]
         public AosAttributes Attributes
@@ -2363,8 +2384,12 @@ namespace Server.Items
         {
             base.Serialize( writer );
 
-            writer.Write( (int) 10 ); // version
+            writer.Write( (int) 11 ); // version
 
+	    writer.Write( m_StrBonus );
+	    writer.Write( m_DexBonus );
+	    writer.Write( m_IntBonus );
+	    
 	    m_ZuluSkillMods.Serialize( writer );
 
             SaveFlag flags = SaveFlag.None;
@@ -2537,8 +2562,21 @@ namespace Server.Items
 
             switch ( version )
             {
+		case 11:
+		    {
+			m_StrBonus = reader.ReadInt();
+			m_DexBonus = reader.ReadInt();
+			m_IntBonus = reader.ReadInt();
+			goto case 10;
+		    }		
 		case 10:
 		    {
+			if( version <= 10 ){
+			    m_StrBonus = 0;
+			    m_DexBonus = 0;
+			    m_IntBonus = 0;
+			}
+			
 			if( m_ZuluSkillMods == null ){
 			    m_ZuluSkillMods = new ZuluSkillMods( this );
 			}
@@ -3354,6 +3392,8 @@ namespace Server.Items
 		String suffix = "";
 		
 		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
+		    
+		    
 		    if( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ){
 
 			SkillMod sk = m_ZuluSkillMods.Mod;
@@ -3453,27 +3493,27 @@ namespace Server.Items
 		    switch( m_DamageLevel ){
 			case WeaponDamageLevel.Ruin:
 			    {
-				suffix += " of ruin";
+				suffix += " of Ruin";
 				break;
 			    }
 			case WeaponDamageLevel.Might:
 			    {
-				suffix += " of might";
+				suffix += " of Might";
 				break;
 			    }
 			case WeaponDamageLevel.Force:
 			    {
-				suffix += " of force";
+				suffix += " of Force";
 				break;
 			    }
 			case WeaponDamageLevel.Power:
 			    {
-				suffix += " of power";
+				suffix += " of Power";
 				break;
 			    }
 			case WeaponDamageLevel.Vanq:
 			    {
-				suffix += " of vanquishing";
+				suffix += " of Vanquishing";
 				break;
 			    }
 			default:
@@ -3482,7 +3522,7 @@ namespace Server.Items
 
 		    if( m_Slayer != SlayerName.None ){
 
-			if( m_DamageLevel >= WeaponDamageLevel.Regular ){
+			if( m_DamageLevel > WeaponDamageLevel.Regular ){
 			    suffix += " and";
 			}		
 
