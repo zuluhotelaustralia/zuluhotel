@@ -5488,6 +5488,13 @@ namespace Server
 	    if( !Region.OnHeal( this, ref amount ) )
 		return;
 
+	    if( from is PlayerMobile ){
+		PlayerMobile pm = from as PlayerMobile;
+		if( pm.Spec.SpecName == SpecName.Mage ){
+		    amount *= 2;
+		}
+	    }
+	    
 	    OnHeal( ref amount, from );
 
 	    if( (Hits + amount) > HitsMax )
