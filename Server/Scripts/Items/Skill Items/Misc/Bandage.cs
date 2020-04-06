@@ -88,10 +88,11 @@ namespace Server.Items
 
 	    Mobile from = e.Mobile;
 
+
 	    if (from.InRange(b.GetWorldLocation(), Range))
 	    {
                 if ( from.Target != null ) {
-                    from.Target.Cancel( from, TargetCancelType.Canceled );
+                    Target.Cancel(from);
                     from.Target = null;
                 }
 
