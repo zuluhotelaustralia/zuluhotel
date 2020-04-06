@@ -90,13 +90,10 @@ namespace Server.Items
 
 	    if (from.InRange(b.GetWorldLocation(), Range))
 	    {
-		Target t = from.Target;
-
-		if (t != null)
-		{
-		    Target.Cancel(from);
-		    from.Target = null;
-		}
+                if ( from.Target != null ) {
+                    from.Target.Cancel( from, TargetCancelType.Canceled );
+                    from.Target = null;
+                }
 
 		from.RevealingAction();
 

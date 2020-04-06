@@ -2215,7 +2215,7 @@ namespace Server
 
 	private long m_NextCombatTime;
 
-	[CommandProperty( AccessLevel.Developer )]
+	[CommandProperty( AccessLevel.GameMaster )]
 	public long NextSkillTime
 	{
 	    get
