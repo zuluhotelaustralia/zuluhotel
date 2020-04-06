@@ -127,10 +127,18 @@ namespace Server.Antimacro
 			int number; //temp
 			int response; // their response to the gump
 			int sum = num1 + num2; // the actual answer
-	    
-			string text = info.GetTextEntry(0).Text;
-			bool success = Int32.TryParse(text, out response);
-			if (!success) {
+
+			string text;
+			bool success = false;
+			try{
+			    text = info.GetTextEntry(0).Text;
+			    success = Int32.TryParse(text, out response);
+			    if (!success) {
+				response = -1;
+			    }
+			}
+			catch{
+			    text = "";
 			    response = -1;
 			}
 			
