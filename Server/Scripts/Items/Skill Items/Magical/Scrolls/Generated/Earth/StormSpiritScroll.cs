@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public StormSpiritScroll( int amount ) : base( 616, 0x2260, amount )
+		public StormSpiritScroll( int amount ) : base( 614, 0x2260, amount )
 		{
 		}
 

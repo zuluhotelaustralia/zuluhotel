@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public FireSpiritScroll( int amount ) : base( 615, 0x2260, amount )
+		public FireSpiritScroll( int amount ) : base( 613, 0x2260, amount )
 		{
 		}
 

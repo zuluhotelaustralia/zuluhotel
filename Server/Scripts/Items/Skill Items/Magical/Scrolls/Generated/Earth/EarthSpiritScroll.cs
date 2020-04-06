@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public EarthSpiritScroll( int amount ) : base( 614, 0x2260, amount )
+		public EarthSpiritScroll( int amount ) : base( 612, 0x2260, amount )
 		{
 		}
 

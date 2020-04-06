@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public WaterSpiritScroll( int amount ) : base( 617, 0x2260, amount )
+		public WaterSpiritScroll( int amount ) : base( 615, 0x2260, amount )
 		{
 		}
 

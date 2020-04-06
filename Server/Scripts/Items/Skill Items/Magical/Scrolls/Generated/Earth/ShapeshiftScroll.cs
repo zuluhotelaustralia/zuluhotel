@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public ShapeshiftScroll( int amount ) : base( 612, 0x2260, amount )
+		public ShapeshiftScroll( int amount ) : base( 610, 0x2260, amount )
 		{
 		}
 

@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public IceStrikeScroll( int amount ) : base( 613, 0x2260, amount )
+		public IceStrikeScroll( int amount ) : base( 611, 0x2260, amount )
 		{
 		}
 
