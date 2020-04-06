@@ -50,7 +50,7 @@ namespace Server.Mobiles
 			AddLoot( LootPack.LowEarthScrolls );
 			AddLoot( LootPack.HighEarthScrolls );
 
-			if( Utility.RandomDouble() >= 0.99 ) {
+			if( Utility.RandomDouble() > 0.99 ) {
 			    PackItem( new SpellweavingBook() );
 			}
 			

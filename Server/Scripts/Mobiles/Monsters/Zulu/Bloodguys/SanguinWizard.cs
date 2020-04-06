@@ -63,7 +63,7 @@ namespace Server.Mobiles
 		Hood.Hue = 1776;
 		PackItem( Hood );
 	    }
-	    if( Utility.RandomDouble() >= 0.95 ){
+	    if( Utility.RandomDouble() > 0.99 ){
 		PackItem( new SpellweavingBook() );
 	    }
         }

@@ -97,11 +97,7 @@ namespace Server.Mobiles
 	    rm.AddLoot( LootPack.LesserNecroScrolls );
 	    rm.AddLoot( LootPack.Gems, 2 );
 
-	    if( Utility.RandomDouble() >= 0.99 ){
-		rm.PackItem( new NecromancerSpellbook() );
-	    }           
-
-            Effects.PlaySound(this, Map, GetDeathSound());
+	    Effects.PlaySound(this, Map, GetDeathSound());
             Effects.SendLocationEffect(Location, Map, 0x3709, 30, 10, 1775, 0);
             rm.MoveToWorld(Location, Map);
 

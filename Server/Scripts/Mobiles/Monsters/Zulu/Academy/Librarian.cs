@@ -59,7 +59,7 @@ namespace Server.Mobiles
 	    if( Utility.RandomDouble() >= 0.9 ){
 		PackItem( new ChicaneBossStone() );
 	    }
-	    if( Utility.RandomDouble() >= 0.99 ){
+	    if( Utility.RandomDouble() > 0.99 ){
 		PackItem( new NecromancerSpellbook() );
 	    }
         } 
