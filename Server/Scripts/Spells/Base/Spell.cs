@@ -311,7 +311,7 @@ namespace Server.Spells
 		// magery damage bonus, -25% at 0 skill, +0% at 100 skill, +5% at 120 skill
 		scalar += (m_Caster.Skills[CastSkill].Value - 100.0) / 400.0;
 
-		if( !target.Player && !target.Body.IsHuman /*&& !Core.AOS*/ )
+		if( !target.Player )
 		    scalar *= 2.0; // Double magery damage to monsters/animals if not AOS
 
 		if( m_Caster is PlayerMobile ){
