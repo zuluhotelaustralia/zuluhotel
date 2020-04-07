@@ -117,9 +117,6 @@ namespace Server.Mobiles
 				Add( typeof( Lockpick ), 6 );
 				Add( typeof( TinkerTools ), 3 );
 
-				Add( typeof( Board ), 1 );
-				Add( typeof( Log ), 1 );
-
 				Add( typeof( Pickaxe ), 16 );
 				Add( typeof( Hammer ), 3 );
 				Add( typeof( SmithHammer ), 11 );

@@ -20,6 +20,10 @@ namespace Server.Items
             : base(serial)
         {
         }
+	public override double DefaultWeight
+	{
+	    get { return 0.1; }
+	}
 
         int ICommodity.DescriptionNumber
         {

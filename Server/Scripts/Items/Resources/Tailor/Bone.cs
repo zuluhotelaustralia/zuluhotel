@@ -18,7 +18,7 @@ namespace Server.Items
 		{
 			Stackable = true;
 			Amount = amount;
-			Weight = 1.0;
+			Weight = 0.1;
 		}
 
 		public Bone( Serial serial ) : base( serial )

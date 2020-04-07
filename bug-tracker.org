@@ -212,3 +212,9 @@ This is a list of bugs.
 * TODO client hex edits didn't take
 * TODO beneficial magic such as cure and heal and res should hurt necro/undead types (see spellhelper.heal)
 * TODO weapons and armor should degrade over time, have maximum repairs
+* TODO "warning skillmod overwritten" in console
+* TODO give Snow something for helping us find that taming bug
+* DONE Clothing and shit has durability
+  Crafters can make repair deeds
+* TODO fix music
+* TODO pagans are heavy

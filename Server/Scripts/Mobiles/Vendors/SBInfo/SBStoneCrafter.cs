@@ -89,7 +89,6 @@ namespace Server.Mobiles
 				Add( typeof( ShepherdsCrook ), 12 );
 				Add( typeof( Club ), 13 );
 
-				Add( typeof( Log ), 1 );
 			}
 		}
 	}
