@@ -198,6 +198,20 @@ namespace Server{
 			return Loot.JewelryTypes[ Utility.Random( 0, Loot.JewelryTypes.Length - 1 )];
 		    }
 		case 2:
+		    if( roll < 0.33 ){
+			if( Utility.RandomDouble() <= 0.20 ){
+			    return Loot.RangedWeaponTypes[ Utility.Random( 0, Loot.RangedWeaponTypes.Length - 1 )];
+			}
+			else{
+			    return Loot.WeaponTypes[ Utility.Random( 0, Loot.WeaponTypes.Length - 1 )];
+			}
+		    }
+		    else if( roll < 0.66 ){
+			return Loot.ClothingTypes[ Utility.Random( 0, Loot.ClothingTypes.Length - 1 )];
+		    }
+		    else {
+			return Loot.JewelryTypes[ Utility.Random( 0, Loot.JewelryTypes.Length - 1 )];
+		    }
 		case 1:
 		default:
 		    if( roll < 0.25 ){

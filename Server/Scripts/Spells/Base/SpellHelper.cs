@@ -1064,7 +1064,7 @@ namespace Server.Spells
 
 	public static void Damage( Spell spell, TimeSpan delay, Mobile target, Mobile from, double damage, int phys, int fire, int cold, int pois, int nrgy, DFAlgorithm dfa )
 	{
-	    int iDamage = (int)damage;
+	    int iDamage = Mobile.DamageScalar.ScaleDamage(damage, from, target, DamageType.None, AttackType.Magical);
 
 	    if( delay == TimeSpan.Zero )
 	    {

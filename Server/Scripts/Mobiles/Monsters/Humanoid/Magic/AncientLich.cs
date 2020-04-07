@@ -82,9 +82,6 @@ namespace Server.Mobiles
 
 	public override void GenerateLoot()
 	{
-	    if( Utility.RandomDouble() >= 0.95 ){
-		PackItem( new NecromancerSpellbook() );
-	    }
 	    AddLoot( LootPack.FilthyRich, 3 );
 	    AddLoot( LootPack.GreaterNecroScrolls, 2);
 	    AddLoot( LootPack.MedScrolls, 2 );

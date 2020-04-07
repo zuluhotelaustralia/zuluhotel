@@ -196,15 +196,19 @@ This is a list of bugs.
 * TODO pets are slow when told to follow
 * TODO taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
 * DONE retaming
-* TODO should not be able to provoke flayer/flenser
+* DONE should not be able to provoke flayer/flenser
 * DONE earth/necro books not dropping
-* TODO magic clothing engine not producing items properly (rewrite)
-* TODO shit is still unided after a reset -> check serialize
+* DONE magic clothing engine not producing items properly (rewrite)
+* DONE shit is still unided after a reset -> check serialize
 * DONE inscription menu is fucked
 * TODO missing mana pots
 * TODO health pots scale with skill/spec
-* TODO heal spells scale with spec
-* TODO rangers too slow fire rate/after moving
-* TODO bandageself client macro sets next skill time super far in future
-* TODO necro/earth books not dropping
+* DONE heal spells scale with spec
+* DONE rangers too slow fire rate/after moving
+* DONE bandageself client macro sets next skill time super far in future
+* DONE necro/earth books not dropping
 * TODO dungeon teleporters won't take you when overweight
+* DONE earth scrolls cast wrong spells
+* TODO client hex edits didn't take
+* TODO beneficial magic such as cure and heal and res should hurt necro/undead types (see spellhelper.heal)
+* TODO weapons and armor should degrade over time, have maximum repairs

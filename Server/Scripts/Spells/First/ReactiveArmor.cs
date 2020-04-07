@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Server.Mobiles;
 using Server.Targeting;
 using Server.Network;
 
@@ -115,15 +116,17 @@ namespace Server.Spells.First
 		{
 		    if ( Caster.BeginAction( typeof( ReactiveArmorSpell ) ) )
 		    {
-			int value = (int)(Caster.Skills[SkillName.Magery].Value + Caster.Skills[SkillName.Meditation].Value + Caster.Skills[SkillName.Inscribe].Value);
+			double value = Caster.Skills[SkillName.Magery].Value + Caster.Skills[SkillName.Meditation].Value + Caster.Skills[SkillName.Inscribe].Value;
 			value /= 3;
 
 			if ( value < 0 )
-			    value = 1;
-			else if ( value > 90 )
-			    value = 90;
+			    value = 1.0;
 
-			Caster.MeleeDamageAbsorb = value;
+			if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
+			    value *= ((PlayerMobile)Caster).Spec.Bonus;
+			}
+			
+			Caster.MeleeDamageAbsorb = (int)value;
 
 			Caster.FixedParticles( 0x376A, 9, 32, 5008, EffectLayer.Waist );
 			Caster.PlaySound( 0x1F2 );

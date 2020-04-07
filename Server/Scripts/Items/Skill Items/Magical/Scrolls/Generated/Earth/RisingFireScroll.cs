@@ -13,7 +13,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public RisingFireScroll( int amount ) : base( 610, 0x2260, amount )
+		public RisingFireScroll( int amount ) : base( 609, 0x2260, amount )
 		{
 		}
 

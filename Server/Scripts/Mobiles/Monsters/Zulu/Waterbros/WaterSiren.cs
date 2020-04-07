@@ -83,7 +83,7 @@ namespace Server.Mobiles
         {
 	    AddLoot( LootPack.FilthyRich );
 	    AddLoot( LootPack.PaganReagentsPack, 20 );
-	    if( Utility.RandomDouble() >= 0.99 ){
+	    if( Utility.RandomDouble() > 0.995 ){
 		PackItem( new SpellweavingBook() );
 	    }
 	}

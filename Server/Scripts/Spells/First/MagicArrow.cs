@@ -51,7 +51,7 @@ namespace Server.Spells.First
 				else
 				{
 					damage = Utility.Random( 4, 4 );
-
+					
 					if ( CheckResisted( m ) )
 					{
 						damage *= 0.75;

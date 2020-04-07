@@ -168,7 +168,7 @@ namespace Server.Mobiles
 	    hm3.AddLoot( LootPack.GreaterNecroScrolls );
 	    hm3.AddLoot( LootPack.LesserNecroScrolls );
 	    hm3.AddLoot( LootPack.Gems, 10 );
-	    if( Utility.RandomDouble() >= 0.98 ) {
+	    if( Utility.RandomDouble() > 0.98 ) {
 		hm3.PackItem( new NecromancerSpellbook() );
 	    }
 
