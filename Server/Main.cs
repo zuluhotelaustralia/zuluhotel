@@ -49,7 +49,7 @@ namespace Server
 	private static Process m_Process;
 	private static Thread m_Thread;
 	private static bool m_Service;
-	private static bool m_Debug;
+	private const bool m_Debug = true;
 	private static bool m_Cache = true;
 	private static bool m_HaltOnWarning;
 	private static bool m_VBdotNET;
@@ -156,7 +156,7 @@ namespace Server
 
 	private static bool m_MultiProcessor;
 	private static int m_ProcessorCount;
-
+	
 	public static bool MultiProcessor { get { return m_MultiProcessor; } }
 	public static int ProcessorCount { get { return m_ProcessorCount; } }
 
@@ -409,9 +409,9 @@ namespace Server
 
 	    foreach (string a in args)
 	    {
-		if ( Insensitive.Equals( a, "-debug" ) )
-		    m_Debug = true;
-		else if ( Insensitive.Equals( a, "-service" ) )
+		//if ( Insensitive.Equals( a, "-debug" ) )
+		//    m_Debug = true;
+		if ( Insensitive.Equals( a, "-service" ) )
 		    m_Service = true;
 		else if ( Insensitive.Equals( a, "-profile" ) )
 		    Profiling = true;
