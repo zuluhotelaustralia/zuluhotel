@@ -415,8 +415,8 @@ namespace Server.Engines.Craft
 	    AddSubRes( typeof( GoldenDragonLeather ), 1160444, 130.0, 1044462, 1049311 );
 			
 	    MarkOption = true;
-	    Repair = Core.AOS;
-	    CanEnhance = Core.AOS;
+	    Repair = true;
+	    CanEnhance = false;
 	}
     }
 }
