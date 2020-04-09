@@ -1047,7 +1047,7 @@ namespace Server.Mobiles
 //					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
                                         m_Mobile.CurrentSpeed = m_FollowSpeed;
 					m_Mobile.PlaySound(m_Mobile.GetIdleSound());
-w					m_Mobile.Warmode = false;
+					m_Mobile.Warmode = false;
 					m_Mobile.Combatant = null;
 					break;
 
