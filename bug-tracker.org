@@ -104,7 +104,7 @@ This is a list of bugs.
 * DONE re-check all skillgain rates, esp inscription, tracking, fishing
 * DONE spec-based damage isn't applying?
 * DONE implement skillmod clothing
-* TODO can't repair tools?
+* DONE can't repair tools?
 * DONE buddy has like 2500 skill points and still gets spec 4 warrior
 * DONE weapon durability falls off awfully fast
 * DONE archery damage tactics/anatomy
@@ -192,29 +192,41 @@ This is a list of bugs.
 * DONE onsingle click shows everything as unidentified
 * DONE can't buy from bowyers?
 * TODO exceptional stuff doesn't bear maker's mark
-* TODO weapons and armor should also be able to have skill mods
+* DONE weapons and armor should also be able to have skill mods
 * TODO pets are slow when told to follow
-* TODO taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
+  Could this fix from ServUO be related? https://github.com/ServUO/ServUO/commit/e335a56d28790b54abe158a70fca59ab23441173 
+* DONE taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
+** TODO just need more spawns, I think it's good now
 * DONE retaming
 * DONE should not be able to provoke flayer/flenser
 * DONE earth/necro books not dropping
 * DONE magic clothing engine not producing items properly (rewrite)
 * DONE shit is still unided after a reset -> check serialize
 * DONE inscription menu is fucked
-* TODO missing mana pots
-* TODO health pots scale with skill/spec
+* TODO missing mana potions -> i.e. make pots that are craftable via alchemy that restore mana
+* TODO all potion effects scale with skill/spec (be careful about poison being too OP)
 * DONE heal spells scale with spec
 * DONE rangers too slow fire rate/after moving
 * DONE bandageself client macro sets next skill time super far in future
 * DONE necro/earth books not dropping
 * TODO dungeon teleporters won't take you when overweight
 * DONE earth scrolls cast wrong spells
-* TODO client hex edits didn't take
+* DONE client hex edits didn't take
 * TODO beneficial magic such as cure and heal and res should hurt necro/undead types (see spellhelper.heal)
-* TODO weapons and armor should degrade over time, have maximum repairs
-* TODO "warning skillmod overwritten" in console
-* TODO give Snow something for helping us find that taming bug
-* DONE Clothing and shit has durability
+* DONE weapons and armor should degrade over time, have maximum repairs
+* TODO "warning skillmod overwritten" in console coming from MagicClothing engine
+* TODO give Snow something for helping us find that taming/begging skill lock bug
+* DONE Clothing and shit has durability -> tailors can't make deeds
   Crafters can make repair deeds
-* TODO fix music
-* TODO pagans are heavy
+* TODO fix music in client
+* DONE pagans are heavy
+* TODO dragon leather no prots?  check all leather
+* TODO ebless and other spells not working??
+* TODO warriors seem not to be able to damage each other
+* TODO buffs seem to stack in a strange way, see comment:  file:Server/Scripts/Spells/Base/SpellHelper.cs::250 
+* TODO tinkering menu mixes up ebon/dark sable
+* TODO carpentry items don't take hue/name from resource
+* TODO make it so spec crafter is required to have a chance at exceptional for anything above dripstone
+* TODO seems that people can cast spells holding shields and weapons
+  should only be castable for chaos/order shields, spellbooks, wands, staves, and that's it.  Everything else should block casting
+* DONE only str mods drop, no dex or int
