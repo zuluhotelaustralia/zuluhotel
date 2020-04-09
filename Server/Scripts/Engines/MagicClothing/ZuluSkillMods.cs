@@ -57,7 +57,7 @@ namespace Server {
 
 	public void SetMod( SkillName sn, double bonus ){
 	    if( m_Mod != null ){
-		Console.WriteLine("WARNING:  Skillmod overwritten!");
+		Console.WriteLine("WARNING:  Skillmod overwritten! {0}", _parent.ToString() );
 	    }
 	    m_Mod = new DefaultSkillMod( sn, true, bonus );
 	    m_Mod.ObeyCap = false;

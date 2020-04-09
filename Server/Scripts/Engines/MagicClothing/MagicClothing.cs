@@ -36,6 +36,8 @@ namespace Server{
 	public static void Initialize() {
 	    CommandSystem.Register( "GetSkillMod", AccessLevel.GameMaster, new CommandEventHandler( GetSkillMod_OnCommand ) );
 	    CommandSystem.Register( "SetSKillMod", AccessLevel.Administrator, new CommandEventHandler( SetSkillMod_OnCommand ) );
+
+	    FancyHues = new List<int> { 0x480, 0x17f, 2744, 2748, 2747, 2771, 2769, 2773, 2759, 2772, 2774, 2749, 2761, 2760, 2765, 2766, 2778, 2777 };
 	    
 	    m_CraftingSkills = new List<SkillName>();
 
@@ -162,6 +164,8 @@ namespace Server{
 	    }
 	}
 
+	public static List<int> FancyHues; 
+	    
 	public static int DecideHue( DamageType dt ) {
 	    switch( dt ){
 		case DamageType.Air:
@@ -177,7 +181,12 @@ namespace Server{
 		case DamageType.Poison:
 		    return 1372;
 		default:
-		    return 0; //return random hue here instead 
+		    {
+			if( Utility.RandomDouble() > 0.98 ){
+			    return FancyHues[ Utility.Random( FancyHues.Count ) ];
+			}
+			return Utility.RandomDyedHue();
+		    }
 	    }
 	}	    
 
@@ -338,10 +347,10 @@ namespace Server{
 				clothes.StrBonus = modamount;
 				break;
 			    case StatType.Dex:
-				clothes.StrBonus = modamount;
+				clothes.DexBonus = modamount;
 				break;
 			    case StatType.Int:
-				clothes.StrBonus = modamount;
+				clothes.IntBonus = modamount;
 				break;
 			}
 		    }
