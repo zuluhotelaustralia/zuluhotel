@@ -87,6 +87,8 @@ namespace Server.Mobiles
 			}
 		}
 
+            private const double m_FollowSpeed = 0.1;
+
 		public virtual bool WasNamed(string speech)
 		{
 			string name = m_Mobile.Name;
@@ -1042,9 +1044,10 @@ namespace Server.Mobiles
 
 				case OrderType.Come:
 					m_Mobile.ControlMaster.RevealingAction();
-					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
+//					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
+                                        m_Mobile.CurrentSpeed = m_FollowSpeed;
 					m_Mobile.PlaySound(m_Mobile.GetIdleSound());
-					m_Mobile.Warmode = false;
+w					m_Mobile.Warmode = false;
 					m_Mobile.Combatant = null;
 					break;
 
@@ -1063,7 +1066,8 @@ namespace Server.Mobiles
 
 				case OrderType.Guard:
 					m_Mobile.ControlMaster.RevealingAction();
-					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
+//					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
+                                        m_Mobile.CurrentSpeed = m_FollowSpeed;
 					m_Mobile.PlaySound(m_Mobile.GetIdleSound());
 					m_Mobile.Warmode = true;
 					m_Mobile.Combatant = null;
@@ -1115,7 +1119,8 @@ namespace Server.Mobiles
 
 				case OrderType.Follow:
 					m_Mobile.ControlMaster.RevealingAction();
-					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
+//					m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
+                                        m_Mobile.CurrentSpeed = m_FollowSpeed;
 					m_Mobile.PlaySound(m_Mobile.GetIdleSound());
 
 					m_Mobile.Warmode = false;
