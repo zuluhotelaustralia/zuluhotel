@@ -909,12 +909,43 @@ namespace Server.Engines.Craft
 	public bool CheckSkills( Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, bool gainSkills )
 	{
 	    double chance = GetSuccessChance( from, typeRes, craftSystem, gainSkills, ref allRequiredSkills );
-
-	    if ( GetExceptionalChance( craftSystem, chance, from ) > Utility.RandomDouble() )
+	    if( craftSystem is DefBlacksmithy && CheckSpecRequirement( from, typeRes ) ){
+		quality = 1;
+	    }
+	    else if ( GetExceptionalChance( craftSystem, chance, from ) > Utility.RandomDouble() ) {
 		quality = 2;
+	    }
 
 	    return ( chance > Utility.RandomDouble() );
 	}
+
+	// returns true if everything is ok
+	public bool CheckSpecRequirement( Mobile from, Type typeRes ){
+	    if( from is PlayerMobile ){
+		PlayerMobile pm = from as PlayerMobile;
+		if( pm.Spec.SpecName != SpecName.Crafter ){
+		    if( typeRes == typeof( DripstoneIngot ) ||
+			typeRes == typeof( ExecutorIngot ) ||
+			typeRes == typeof( PeachblueIngot ) ||
+			typeRes == typeof( DestructionIngot ) ||
+			typeRes == typeof( AnraIngot ) ||
+			typeRes == typeof( CrystalIngot ) ||
+			typeRes == typeof( DoomIngot ) ||
+			typeRes == typeof( GoddessIngot ) ||
+			typeRes == typeof( NewZuluIngot ) ||
+			typeRes == typeof( EbonTwilightSapphireIngot ) ||
+			typeRes == typeof( DarkSableRubyIngot ) ||
+			typeRes == typeof( RadiantNimbusDiamondIngot ) ) {
+
+			// if they are not spec and they're trying to make this difficult shit
+			return false;
+		    }
+		}
+	    }
+
+	    return true;
+	}
+
 
 	public double GetSuccessChance( Mobile from, Type typeRes, CraftSystem craftSystem, bool gainSkills, ref bool allRequiredSkills )
 	{
