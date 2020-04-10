@@ -200,22 +200,8 @@ namespace Server{
 	    double roll = Utility.RandomDouble();
 	    switch( num ){
 		case 3:
-		    if( roll < 0.5 ){
-			return Loot.ClothingTypes[ Utility.Random( 0, Loot.ClothingTypes.Length - 1 )];
-		    }
-		    else {
-			return Loot.JewelryTypes[ Utility.Random( 0, Loot.JewelryTypes.Length - 1 )];
-		    }
 		case 2:
-		    if( roll < 0.33 ){
-			if( Utility.RandomDouble() <= 0.20 ){
-			    return Loot.RangedWeaponTypes[ Utility.Random( 0, Loot.RangedWeaponTypes.Length - 1 )];
-			}
-			else{
-			    return Loot.WeaponTypes[ Utility.Random( 0, Loot.WeaponTypes.Length - 1 )];
-			}
-		    }
-		    else if( roll < 0.66 ){
+		    if( roll < 0.5 ){
 			return Loot.ClothingTypes[ Utility.Random( 0, Loot.ClothingTypes.Length - 1 )];
 		    }
 		    else {
@@ -321,7 +307,7 @@ namespace Server{
 	    
 	    List<ModType> usedmods = new List<ModType>{ ModType.Armor, ModType.Stat, ModType.Skill, ModType.Prot };
 	    if( theitem is BaseWeapon || theitem is BaseArmor ){
-		if( numberofenchants > 2 ){
+		if( numberofenchants > 1 ){
 		    Console.WriteLine( "Houston, we have a problem");
 		}
 
