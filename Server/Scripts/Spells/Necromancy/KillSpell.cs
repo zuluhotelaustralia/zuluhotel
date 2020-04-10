@@ -54,7 +54,7 @@ namespace Server.Spells.Necromancy
 	    // they take 90% of the instakill threshhold as damage
 	    double power = Caster.Skills[DamageSkill].Value / 3;
 	    if(Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage && ((PlayerMobile)Caster).Spec.SpecLevel != 0){
-		power *= 2.0 * ((PlayerMobile)Caster).Spec.Bonus;
+		power *= ((PlayerMobile)Caster).Spec.Bonus;
 	    }
 	    
 	    double safetymargin = power * 0.25;
@@ -64,10 +64,10 @@ namespace Server.Spells.Necromancy
 		m.Kill();
 	    }
 	    else {
-		double damage = 0.9 * m.Hits;
+		double damage = 0.5 * Caster.Hits;
 		
 		if( CheckResisted(m) ){
-		    damage = 0.6 * m.Hits;
+		    damage *= 0.5;
 		    
 		    m.SendLocalizedMessage( 501783 ); //you resist the blah blah blah
 		}
