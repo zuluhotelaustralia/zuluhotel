@@ -6,10 +6,11 @@ namespace Server.Items
 {
 	public class ShapeshiftScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031611; } }
+            
 		[Constructable]
 		public ShapeshiftScroll() : this( 1 )
 		{
-		    this.Name = "Shapeshift";
 		}
 
 		[Constructable]

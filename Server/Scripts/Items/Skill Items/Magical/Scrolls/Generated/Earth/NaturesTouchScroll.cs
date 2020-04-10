@@ -6,10 +6,12 @@ namespace Server.Items
 {
 	public class NaturesTouchScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031608; } }
+            
+            
 		[Constructable]
 		public NaturesTouchScroll() : this( 1 )
 		{
-		    this.Name = "Nature's Touch";
 		}
 
 		[Constructable]

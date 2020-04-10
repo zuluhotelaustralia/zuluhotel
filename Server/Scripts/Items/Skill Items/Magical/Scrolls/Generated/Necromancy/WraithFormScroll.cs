@@ -6,24 +6,21 @@ namespace Server.Items
 {
     public class WraithFormScroll : SpellScroll
     {
+        public override int LabelNumber { get { return 1060519; } }
+        
 	[Constructable]
 	public WraithFormScroll() : this( 1 )
 	{
-	    Name = "Wraith Form";
-	    Hue = 0x66D;
 	}
 
 	[Constructable]
 	public WraithFormScroll( int amount ) : base( 110, 0x2260, amount )
 	{
-	    Name = "Wraith Form";
 	    Hue = 0x66D;
 	}
 
 	public WraithFormScroll( Serial serial ) : base( serial )
 	{
-	    Name = "Wraith Form";
-	    Hue = 0x66D;
 	}
 
 	public override void Serialize( GenericWriter writer )

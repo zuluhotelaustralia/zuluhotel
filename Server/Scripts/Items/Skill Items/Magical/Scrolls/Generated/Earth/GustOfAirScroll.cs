@@ -6,10 +6,11 @@ namespace Server.Items
 {
 	public class GustOfAirScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031609; } }
+            
 		[Constructable]
 		public GustOfAirScroll() : this( 1 )
 		{
-		    this.Name = "Gust of Air";
 		}
 
 		[Constructable]

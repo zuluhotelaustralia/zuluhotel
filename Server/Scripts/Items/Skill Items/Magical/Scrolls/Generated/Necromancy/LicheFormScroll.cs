@@ -6,24 +6,21 @@ namespace Server.Items
 {
 	public class LicheFormScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1060522; } }
+            
 		[Constructable]
 		public LicheFormScroll() : this( 1 )
 		{
-		    Name = "Liche Form";
-		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public LicheFormScroll( int amount ) : base( 113, 0x2260, amount )
 		{
-		    Name = "Liche Form";
 		    Hue = 0x66D;
 		}
 
 		public LicheFormScroll( Serial serial ) : base( serial )
 		{
-		    Name = "Liche Form";
-		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

@@ -6,7 +6,9 @@ namespace Server.Items
 {
 	public class EarthPortalScroll : SpellScroll
 	{
-		[Constructable]
+            public override int LabelNumber { get { return 1031607; } }
+            
+
 		public EarthPortalScroll() : this( 1 )
 		{
 		    this.Name = "Earth Portal";

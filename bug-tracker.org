@@ -1,7 +1,10 @@
 #+STARTUP: align
 #+STARTUP: showall
+#+TODO: TODO IN_PROGRESS VERIFY | DONE FIXED
 
 This is a list of bugs.
+
+
 * DONE "You need ~MANA REQUIREMENT~ mana to cast this spell"
   I.e. the fucking cliloc message is displayed without substitution
 * DONE gather nodes won't drift into the dungeon regions but they should
@@ -194,6 +197,8 @@ This is a list of bugs.
 * TODO exceptional stuff doesn't bear maker's mark
 * DONE weapons and armor should also be able to have skill mods
 * TODO pets are slow when told to follow
+  In progress.  Upped follow speed to 0.1, but consider adding warping if its still annyoing.
+
   Could this fix from ServUO be related? https://github.com/ServUO/ServUO/commit/e335a56d28790b54abe158a70fca59ab23441173 
 * DONE taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
 ** TODO just need more spawns, I think it's good now
@@ -230,3 +235,5 @@ This is a list of bugs.
 * TODO seems that people can cast spells holding shields and weapons
   should only be castable for chaos/order shields, spellbooks, wands, staves, and that's it.  Everything else should block casting
 * DONE only str mods drop, no dex or int
+* VERIFY Earth/Necro scrolls are right colour
+* VERIFY Casting with weapons or not.

@@ -7,6 +7,7 @@ using Server.Mobiles;
 using Server.Spells.Second;
 using Server.Spells.Necromancy;
 using System.Collections.Generic;
+using Server.SkillHandlers;
 
 namespace Server.Spells
 {
@@ -760,8 +761,13 @@ namespace Server.Spells
 	public virtual bool CheckSequence()
 	{
 	    int mana = ScaleMana( GetMana() );
+            
 
-	    if ( m_Caster.Deleted || !m_Caster.Alive || m_Caster.Spell != this || m_State != SpellState.Sequencing )
+            if ( ! Meditation.CheckHands( m_Caster ) )
+            {
+                m_Caster.SendLocalizedMessage( 502626 ); // Your hands must be free to cast spells or meditate.
+            } 
+	    else if ( m_Caster.Deleted || !m_Caster.Alive || m_Caster.Spell != this || m_State != SpellState.Sequencing )
 	    {
 		DoFizzle();
 	    }

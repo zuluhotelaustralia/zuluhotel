@@ -6,24 +6,21 @@ namespace Server.Items
 {
 	public class DarknessScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1060510; } }
+            
 		[Constructable]
 		public DarknessScroll() : this( 1 )
 		{
-		    Name = "Darkness";
-		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public DarknessScroll( int amount ) : base( 101, 0x2260, amount )
 		{
-		    Name = "Darkness";
 		    Hue = 0x66D;
 		}
 
 		public DarknessScroll( Serial serial ) : base( serial )
 		{
-		    Name = "Darkness";
-		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )
