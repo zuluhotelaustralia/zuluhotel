@@ -230,3 +230,6 @@ This is a list of bugs.
 * TODO seems that people can cast spells holding shields and weapons
   should only be castable for chaos/order shields, spellbooks, wands, staves, and that's it.  Everything else should block casting
 * DONE only str mods drop, no dex or int
+* TODO rangers get fucked on maxskills for spec because tactics
+* TODO kill spell is OP
+* TODO armor/weapons are not displaying mod titles properly (onsingleclick)

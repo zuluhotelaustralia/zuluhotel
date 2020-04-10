@@ -270,18 +270,6 @@ namespace Server.Mobiles
 		m_SpecLevel = warriorlevel;
 	    }
 
-	    //idx:    0    1     2     3     4     5      6
-	    //Min: [ 480, 600,  720,  840,  960,  1080, 1200 ]
-	    //Max: [ 923, 1000, 1058, 1105, 1142, 1173, 1200 ]
-	    for( int i=maxlevel; i>=0; i-- ){
-		if( total > m_MaxSkills[i] ){
-		    maxlevel--;
-		}
-		else {
-		    break;
-		}
-	    }
-
 	    if( m_SpecLevel > maxlevel ) {
 		m_SpecLevel = maxlevel;
 	    }
@@ -307,22 +295,22 @@ namespace Server.Mobiles
 	private int GetSpecLevel( double onspec, SpecName sn ){
 	    double averaged = AvgSkill( onspec, sn );
 
-	    if( averaged >= m_MinSkills[6] ){
+	    if( averaged >= m_MinSkills[6] && averaged <= m_MaxSkills[6] ){
 		return 6;
 	    }
-	    if( averaged >= m_MinSkills[5] ){
+	    if( averaged >= m_MinSkills[5] && averaged <= m_MaxSkills[5] ){
 		return 5;
 	    }
-	    if( averaged >= m_MinSkills[4] ){
+	    if( averaged >= m_MinSkills[4] && averaged <= m_MaxSkills[4] ){
 		return 4;
 	    }
-	    if( averaged >= m_MinSkills[3] ){
+	    if( averaged >= m_MinSkills[3] && averaged <= m_MaxSkills[3] ){
 		return 3;
 	    }
-	    if( averaged >= m_MinSkills[2] ){
+	    if( averaged >= m_MinSkills[2] && averaged <= m_MaxSkills[2] ){
 		return 2;
 	    }
-	    if( averaged >= m_MinSkills[1] ){
+	    if( averaged >= m_MinSkills[1] && averaged <= m_MaxSkills[1] ){
 		return 1;
 	    }
 

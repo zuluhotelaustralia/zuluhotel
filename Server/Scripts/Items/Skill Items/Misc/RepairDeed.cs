@@ -207,7 +207,7 @@ namespace Server.Items
 		{
 			//TODO: When the entire region system data is in, convert to that instead of a proximity thing.
 
-			if( !m.Region.IsPartOf( typeof( TownRegion ) ) )
+			if( !m.Region.IsPartOf( typeof( GuardedRegion ) ) )
 				return false;
 
 			return true; //Server.Factions.Faction.IsNearType( m, RepairSkillInfo.GetInfo( m_Skill ).NearbyTypes, 6 );
