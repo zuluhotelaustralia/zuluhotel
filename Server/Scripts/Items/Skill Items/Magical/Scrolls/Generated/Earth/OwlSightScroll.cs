@@ -6,10 +6,12 @@ namespace Server.Items
 {
 	public class OwlSightScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031602; } }
+            
+            
 		[Constructable]
 		public OwlSightScroll() : this( 1 )
 		{
-		    this.Name = "Owl Sight";
 		}
 
 		[Constructable]

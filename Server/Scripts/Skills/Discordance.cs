@@ -222,8 +222,11 @@ namespace Server.SkillHandlers
 							}
 							else
 							{
-								effect = (int)( from.Skills[SkillName.Discordance].Value / -5.0 );
-								scalar = effect * 0.01;
+                                                            double eff = from.Skills[SkillName.Discordance].Value /
+                                                                -5.0 *
+                                                                Spec.GetBonusFor(from, SpecName.Bard);
+                                                            scalar = eff * 0.01;
+                                                            effect = (int)eff;
 
 								mods.Add( new StatMod( StatType.Str, "DiscordanceStr", (int)(targ.RawStr * scalar), TimeSpan.Zero ) );
 								mods.Add( new StatMod( StatType.Int, "DiscordanceInt", (int)(targ.RawInt * scalar), TimeSpan.Zero ) );

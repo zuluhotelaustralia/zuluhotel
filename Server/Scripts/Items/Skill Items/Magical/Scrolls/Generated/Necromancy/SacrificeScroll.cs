@@ -6,24 +6,21 @@ namespace Server.Items
 {
 	public class SacrificeScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1060515; } }
+            
 		[Constructable]
 		public SacrificeScroll() : this( 1 )
 		{
-		    Name = "Sacrifice";
-		    Hue = 0x66D;
 		}
 
 		[Constructable]
 		public SacrificeScroll( int amount ) : base( 106, 0x2260, amount )
 		{
-		    Name = "Sacrifice";
 		    Hue = 0x66D;
 		}
 
 		public SacrificeScroll( Serial serial ) : base( serial )
 		{
-		    Name = "Sacrifice";
-		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

@@ -10,6 +10,27 @@ namespace Server.SkillHandlers
 			SkillInfo.Table[46].Callback = new SkillUseCallback( OnUse );
 		}
 
+            public static bool CheckHands( Mobile m )
+            {
+                Item oneHanded = m.FindItemOnLayer( Layer.OneHanded );
+                Item twoHanded = m.FindItemOnLayer( Layer.TwoHanded );
+
+                if ( Core.AOS && m.Player )
+                {
+                    if ( !CheckOkayHolding( oneHanded ) )
+                        m.AddToBackpack( oneHanded );
+
+                    if ( !CheckOkayHolding( twoHanded ) )
+                        m.AddToBackpack( twoHanded );
+                }
+                else if ( !CheckOkayHolding( oneHanded ) || !CheckOkayHolding( twoHanded ) )
+                {
+                    return false;
+                }
+
+                return true;
+            }                
+
 		public static bool CheckOkayHolding( Item item )
 		{
 			if ( item == null )
@@ -55,26 +76,13 @@ namespace Server.SkillHandlers
 
 				return TimeSpan.FromSeconds( 10.0 );
 			}
-			else 
-			{
-				Item oneHanded = m.FindItemOnLayer( Layer.OneHanded );
-				Item twoHanded = m.FindItemOnLayer( Layer.TwoHanded );
-
-				if ( Core.AOS && m.Player )
-				{
-					if ( !CheckOkayHolding( oneHanded ) )
-						m.AddToBackpack( oneHanded );
-
-					if ( !CheckOkayHolding( twoHanded ) )
-						m.AddToBackpack( twoHanded );
-				}
-				else if ( !CheckOkayHolding( oneHanded ) || !CheckOkayHolding( twoHanded ) )
-				{
-					m.SendLocalizedMessage( 502626 ); // Your hands must be free to cast spells or meditate.
-
-					return TimeSpan.FromSeconds( 2.5 );
-				}
-
+			else if ( ! CheckHands( m ) )
+                        {
+                            m.SendLocalizedMessage( 502626 ); // Your hands must be free to cast spells or meditate.
+                            return TimeSpan.FromSeconds( 2.5 );
+                        }
+                        else
+                        {
 				double skillVal = m.Skills[SkillName.Meditation].Value;
 				double chance = skillVal / 130.0;
 				//double chance = (50.0 + (( skillVal - ( m.ManaMax - m.Mana ) ) * 2)) / 100;

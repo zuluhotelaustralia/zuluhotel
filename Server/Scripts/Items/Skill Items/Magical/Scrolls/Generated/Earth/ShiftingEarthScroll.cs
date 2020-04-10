@@ -6,10 +6,12 @@ namespace Server.Items
 {
 	public class ShiftingEarthScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031603; } }
+            
+            
 		[Constructable]
 		public ShiftingEarthScroll() : this( 1 )
 		{
-		    this.Name = "Shifting Earth";
 		}
 
 		[Constructable]

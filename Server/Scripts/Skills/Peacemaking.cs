@@ -97,7 +97,7 @@ namespace Server.SkillHandlers
 
 							if ( map != null )
 							{
-								int range = BaseInstrument.GetBardRange( from, SkillName.Peacemaking );
+                                                            int range = (int)(BaseInstrument.GetBardRange( from, SkillName.Peacemaking ) * Spec.GetBonusFor( from, SpecName.Bard ));
 
 								bool calmed = false;
 
@@ -186,6 +186,8 @@ namespace Server.SkillHandlers
 										seconds = 120;
 									else if ( seconds < 10 )
 										seconds = 10;
+
+                                                                        seconds *= Spec.GetBonusFor( from, SpecName.Bard );
 
 									bc.Pacify( from, DateTime.UtcNow + TimeSpan.FromSeconds( seconds ) );
 								}

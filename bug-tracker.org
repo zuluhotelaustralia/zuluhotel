@@ -1,7 +1,10 @@
 #+STARTUP: align
 #+STARTUP: showall
+#+TODO: TODO IN_PROGRESS VERIFY | DONE FIXED
 
 This is a list of bugs.
+
+
 * DONE "You need ~MANA REQUIREMENT~ mana to cast this spell"
   I.e. the fucking cliloc message is displayed without substitution
 * DONE gather nodes won't drift into the dungeon regions but they should
@@ -94,8 +97,8 @@ This is a list of bugs.
 * DONE player reports tracking "is fucked" -> doesn't gain past 38? -> can't gain on NPC vendors
 * DONE vendors aren't restocking to 999
 * DONE arrows and blank scrolls and empty bottles need to be at 999 on vendors
-* TODO exceptional rate is too high?  130 vs 100 thing?
-* TODO can you exploit melee AI by locking them in place with e.g. crates?
+* DONE exceptional rate is too high?  130 vs 100 thing?
+* VERIFY can you exploit melee AI by locking them in place with e.g. crates?
 * DONE test local changes to vendors before pushing live
 * DONE eliminate need for stupid ass glassblowing book -> eh, maybe not
 * DONE player reports tailoring stuck @ 94.7
@@ -193,7 +196,9 @@ This is a list of bugs.
 * DONE can't buy from bowyers?
 * TODO exceptional stuff doesn't bear maker's mark
 * DONE weapons and armor should also be able to have skill mods
-* TODO pets are slow when told to follow
+* IN_PROGRESS pets are slow when told to follow
+  In progress.  Upped follow speed to 0.1, but consider adding warping if its still annyoing.
+
   Could this fix from ServUO be related? https://github.com/ServUO/ServUO/commit/e335a56d28790b54abe158a70fca59ab23441173 
 * DONE taming, needs 4-6 tile range, world poorly spawned for taming, gains too slow
 ** TODO just need more spawns, I think it's good now
@@ -214,22 +219,24 @@ This is a list of bugs.
 * DONE client hex edits didn't take
 * TODO beneficial magic such as cure and heal and res should hurt necro/undead types (see spellhelper.heal)
 * DONE weapons and armor should degrade over time, have maximum repairs
-* TODO "warning skillmod overwritten" in console coming from MagicClothing engine
+* VERIFY "warning skillmod overwritten" in console coming from MagicClothing engine
 * TODO give Snow something for helping us find that taming/begging skill lock bug
 * DONE Clothing and shit has durability -> tailors can't make deeds
   Crafters can make repair deeds
 * TODO fix music in client
 * DONE pagans are heavy
-* TODO dragon leather no prots?  check all leather
-* TODO ebless and other spells not working??
-* TODO warriors seem not to be able to damage each other
+* VERIFY dragon leather no prots?  check all leather
+* VERIFY ebless and other spells not working??
+* VERIFY warriors seem not to be able to damage each other
 * TODO buffs seem to stack in a strange way, see comment:  file:Server/Scripts/Spells/Base/SpellHelper.cs::250 
 * TODO tinkering menu mixes up ebon/dark sable
 * TODO carpentry items don't take hue/name from resource
-* TODO make it so spec crafter is required to have a chance at exceptional for anything above dripstone
-* TODO seems that people can cast spells holding shields and weapons
+* VERIFY make it so spec crafter is required to have a chance at exceptional for anything above dripstone
+* IN_PROGRESS seems that people can cast spells holding shields and weapons
   should only be castable for chaos/order shields, spellbooks, wands, staves, and that's it.  Everything else should block casting
 * DONE only str mods drop, no dex or int
-* TODO rangers get fucked on maxskills for spec because tactics
-* TODO kill spell is OP
+* VERIFY rangers get fucked on maxskills for spec because tactics
+* VERIFY kill spell is OP
 * TODO armor/weapons are not displaying mod titles properly (onsingleclick)
+* VERIFY Earth/Necro scrolls are right colour
+* VERIFY Casting with weapons or not.

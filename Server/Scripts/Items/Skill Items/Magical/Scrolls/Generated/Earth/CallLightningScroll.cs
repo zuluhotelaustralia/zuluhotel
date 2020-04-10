@@ -6,10 +6,12 @@ namespace Server.Items
 {
 	public class CallLightningScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031605; } }
+            
+            
 		[Constructable]
 		public CallLightningScroll() : this( 1 )
 		{
-		    this.Name = "Call Lightning";
 		}
 
 		[Constructable]

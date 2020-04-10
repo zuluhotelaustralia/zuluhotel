@@ -6,10 +6,12 @@ namespace Server.Items
 {
 	public class SummonMammalsScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1031604; } }
+            
+            
 		[Constructable]
 		public SummonMammalsScroll() : this( 1 )
 		{
-		    this.Name = "Summon Mammals";
 		}
 
 		[Constructable]

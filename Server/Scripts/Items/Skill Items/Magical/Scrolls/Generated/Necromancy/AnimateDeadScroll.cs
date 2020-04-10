@@ -6,25 +6,21 @@ namespace Server.Items
 {
 	public class AnimateDeadScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1060514; } }
+            
 		[Constructable]
 		public AnimateDeadScroll() : this( 1 )
-		{
-		    Name = "Animate Dead";
-		    Hue = 0x66D;
+            {
 		}
 
 		[Constructable]
 		public AnimateDeadScroll( int amount ) : base( 105, 0x2260, amount )
 		{
-		    Name = "Animate Dead";
 		    Hue = 0x66D;
-
 		}
 
 		public AnimateDeadScroll( Serial serial ) : base( serial )
 		{
-		    Name = "Animate Dead";
-		    Hue = 0x66D;
 		}
 
 		public override void Serialize( GenericWriter writer )

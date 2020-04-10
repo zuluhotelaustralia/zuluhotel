@@ -6,15 +6,17 @@ namespace Server.Items
 {
 	public class AbyssalFlameScroll : SpellScroll
 	{
+            public override int LabelNumber { get { return 1060513; } }
+            
 		[Constructable]
 		public AbyssalFlameScroll() : this( 1 )
 		{
-		    this.Name = "Abyssal Flame";
 		}
 
 		[Constructable]
 		public AbyssalFlameScroll( int amount ) : base( 104, 0x2260, amount )
 		{
+		    Hue = 0x66D;
 		}
 
 		public AbyssalFlameScroll( Serial serial ) : base( serial )
