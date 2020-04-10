@@ -42,10 +42,6 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( IceStrikeSpell ) ) ) {
-                goto Return;
-            }
-
             SpellHelper.Turn( Caster, m );
 
 	    double damage = Caster.Skills[DamageSkill].Value * 0.5;

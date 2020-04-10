@@ -44,11 +44,7 @@ namespace Server.Spells.Necromancy
 			&& Caster.InLOS(m) &&
 			!m.Paralyzed &&
 			!m.Frozen){
-				    
-			if ( ! m.BeginAction( typeof( WraithBreathSpell ) ) ) {
-			    break;
-			}
-			
+		       			
 			Caster.DoHarmful(m);
 			
 			if ( CheckResisted(m) ){

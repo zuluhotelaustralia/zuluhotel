@@ -31,10 +31,6 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            if ( ! Caster.BeginAction( typeof( SummonSpiritSpell ) ) ) {
-                goto Return;
-            }
-
 	    int bonus = 0;
 
 	    if ( Caster is PlayerMobile &&

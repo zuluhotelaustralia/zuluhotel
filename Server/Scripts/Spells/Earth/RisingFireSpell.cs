@@ -43,46 +43,31 @@ namespace Server.Spells.Earth
             {
                 goto Return;
             }
-
-            if ( ! m.BeginAction( typeof( RisingFireSpell ) ) ) {
-                goto Return;
-            }
-
+	    
 	    double range = 3.0;
 	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
 
 		range *= ((PlayerMobile)Caster).Spec.Bonus;
 	    }
 
-	    List<Mobile> targets = new List<Mobile>();
+	    double dmg = Caster.Skills[DamageSkill].Value / 6.0;
 	    Map map = Caster.Map;
-
 	    if( map != null){
-		foreach ( Mobile mob in Caster.GetMobilesInRange( (int)range )){
+		foreach ( Mobile mob in m.GetMobilesInRange( (int)range )){
 		    if ( Caster != mob &&
 			 SpellHelper.ValidIndirectTarget( Caster, mob ) &&
 			 Caster.CanBeHarmful( mob, false ) &&
-			 Caster.InLOS( mob )){
+			 m.InLOS( mob )){
 
-			targets.Add(mob);
+			Caster.DoHarmful( mob );
+			mob.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot );
+			SpellHelper.Damage(this, TimeSpan.Zero, mob, Caster, dmg, DamageType.Fire);
 		    }
 		}
 	    }
 
 	    Caster.PlaySound( 0x208 );
-
-	    for( int i=0; i< targets.Count; i++){
-		m = targets[i];
-
-		//original spell deals something like (24*3)d5+(caster's magery / 5)*0.5 to all targets
-		// for an average roll of 243 damage per anydice.com
-		double dmg = Caster.Skills[DamageSkill].Value / 6.0;
-		Caster.DoHarmful(m);
-		m.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot );
-		//m.Damage((int)dmg, Caster, DamageType.Fire);
-		SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Fire);
-	    }
-
+	    
         Return:
             FinishSequence();
         }

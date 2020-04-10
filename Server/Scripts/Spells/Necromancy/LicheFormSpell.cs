@@ -49,9 +49,9 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-	    double dexmod = Caster.Dex / 2;
-	    double strmod = Caster.Str / 2;
-	    double intmod = Caster.Int * 2;
+	    double dexmod = Caster.RawDex / 2;
+	    double strmod = Caster.RawStr / 2;
+	    double intmod = Caster.RawInt * 2;
 
 	    if( Caster is PlayerMobile &&
 		((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage){

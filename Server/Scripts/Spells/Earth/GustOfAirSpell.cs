@@ -49,11 +49,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( GustOfAirSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
+	    SpellHelper.Turn( Caster, m );
 
             // TODO: Push player in random direction
 

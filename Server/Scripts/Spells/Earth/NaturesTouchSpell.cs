@@ -49,11 +49,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( NaturesTouchSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
+	    SpellHelper.Turn( Caster, m );
 
 	    m.FixedParticles( 0x376A, 9, 32, 5030, EffectLayer.Waist );
 	    m.PlaySound( 0x202 );

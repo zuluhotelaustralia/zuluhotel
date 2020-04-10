@@ -50,7 +50,7 @@ namespace Server.Mobiles
 	    EasterBunnyFriend friend = new EasterBunnyFriend();
             friend.Team = this.Team;
             friend.Combatant = this.Combatant;
-            friend.NoKillAwards = true;
+            this.NoKillAwards = true;
 	    
 	    Effects.PlaySound(this, Map, GetDeathSound());
             Effects.SendLocationEffect(Location, Map, 0x3709, 30, 10, Hue = 3 + (Utility.Random( 20 ) * 5), 0);

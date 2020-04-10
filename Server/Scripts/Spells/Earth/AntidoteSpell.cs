@@ -52,11 +52,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( AntidoteSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
+	    SpellHelper.Turn( Caster, m );
 
             Poison p = m.Poison;
 

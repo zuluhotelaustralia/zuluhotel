@@ -54,7 +54,7 @@ namespace Server.Spells.Necromancy
             Caster.DoHarmful( m );
 
             // Feel free to fck with this formula, I just mostly copied it from POL 093.  I don't care so long as it's balanced --sith
-            int val = (int)(Caster.Skills[SkillName.SpiritSpeak].Value);
+            double val = Caster.Skills[SkillName.SpiritSpeak].Value;
 	    val /= 10;
 	    val += 5;
 	    val *= 2;
@@ -64,9 +64,9 @@ namespace Server.Spells.Necromancy
 	    else if ( val > 75 )
 		val = 75;
 
-            m.VirtualArmorMod -= val;
+            m.VirtualArmorMod -= (int)val;
 
-            new InternalTimer( m, Caster, val ).Start();
+            new InternalTimer( m, Caster, (int)val ).Start();
 
         Return:
             FinishSequence();

@@ -119,6 +119,7 @@ namespace Server.Spells.Necromancy
 
 	    protected override void OnTick()
 	    {
+		m_Owner.EndAction( typeof( DarknessSpell ) );
 		m_Owner.EndAction( typeof( LightCycle ) );
 		m_Owner.LightLevel = 0;
 	    }

@@ -44,11 +44,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( ShiftingEarthSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
+	    SpellHelper.Turn( Caster, m );
 
 	    m.FixedParticles( 0x3709, 10, 15, 5021, EffectLayer.Waist ); //probably wrong particles ID
 	    m.PlaySound(0x20e);

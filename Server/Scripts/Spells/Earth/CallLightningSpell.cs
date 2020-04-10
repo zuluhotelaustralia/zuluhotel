@@ -42,10 +42,6 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( CallLightningSpell ) ) ) {
-                goto Return;
-            }
-
             SpellHelper.Turn( Caster, m );
 
 	    m.BoltEffect(0); //argument is hue of the bolt

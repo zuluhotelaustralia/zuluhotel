@@ -46,10 +46,6 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( EarthsBlessingSpell ) ) ) {
-                goto Return;
-            }
-
             SpellHelper.Turn( Caster, m );
 
             double effectiveness = SpellHelper.GetEffectiveness( Caster );

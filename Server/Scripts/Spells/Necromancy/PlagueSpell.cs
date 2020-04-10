@@ -61,10 +61,6 @@ namespace Server.Spells.Necromancy
 			Caster.CanBeHarmful(m, false)
 			&& Caster.InLOS(m)){
 			
-			if ( ! m.BeginAction( typeof( PlagueSpell ) ) ) {
-			    break;
-			}
-			
 			Caster.DoHarmful(m);
 						
 			m.ApplyPoison( Caster, Poison.GetPoison( level ) );

@@ -47,10 +47,6 @@ namespace Server.Spells.Necromancy
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( SacrificeSpell ) ) ) {
-                goto Return;
-            }
-
             BaseCreature c = m as BaseCreature;
 
             if ( c == null ) {

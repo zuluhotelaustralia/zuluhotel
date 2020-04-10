@@ -80,11 +80,7 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! m.BeginAction( typeof( EarthPortalSpell ) ) ) {
-                goto Return;
-            }
-
-            SpellHelper.Turn( Caster, m );
+	    SpellHelper.Turn( Caster, m );
 
             // TODO: Spell graphical and sound effects.
 

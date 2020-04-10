@@ -40,10 +40,6 @@ namespace Server.Spells.Earth
                 goto Return;
             }
 
-            if ( ! Caster.BeginAction( typeof( SummonMammalsSpell ) ) ) {
-                goto Return;
-            }
-
             double effectiveness = SpellHelper.GetEffectiveness( Caster );
 
             int count = (int)(3 * effectiveness);
