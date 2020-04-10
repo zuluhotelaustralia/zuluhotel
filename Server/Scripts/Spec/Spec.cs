@@ -137,6 +137,16 @@ namespace Server.Mobiles
 		}
 	    }
 	}
+
+        public static double GetBonusFor(Mobile m, SpecName name) {
+            return m is PlayerMobile ?
+                (m as PlayerMobile).Spec.GetBonusFor(name) :
+                1.0;
+        }
+        
+        public double GetBonusFor(SpecName name) {
+            return SpecName == name ? Bonus : 1.0;
+        }
     
 	//reference original ZH Canada (ZH3) release
 	private const double m_ClassPointsPerLevel = 120;
