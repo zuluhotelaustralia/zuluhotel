@@ -8,7 +8,7 @@ namespace Server.Gumps {
     public class MOTDGump : Gump {
 	public static void Initialize() {
 	    CommandSystem.Register("MOTD", AccessLevel.Player, new CommandEventHandler( MOTD_OnCommand ) );
-	    EventSink.Login += new LoginEventHandler( EventSink_Login );
+	    //EventSink.Login += new LoginEventHandler( EventSink_Login );
 	}
 
 	public static void MOTD_OnCommand( CommandEventArgs e ){
