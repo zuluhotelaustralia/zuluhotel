@@ -94,6 +94,10 @@ namespace Server {
 	    SpecName tgtSpec = SpecName.None;
 	    SpecName fromSpec = SpecName.None;
 
+	    if( Core.Debug ){
+		Console.WriteLine( "WE SCALEING NAO");
+	    }
+
 	    //if they are spec, scale by their class bonus
 	    if( from is PlayerMobile &&
 		((PlayerMobile)from).Spec.SpecName != SpecName.None &&

@@ -57,9 +57,14 @@ namespace Server.Spells.Earth
             Caster.MovingParticles( m, 0x379F, 7, 0, false, true, 3043, 4043, 0x211 );
             Caster.PlaySound( 0x20A );
 
-            // 50 damage average at 130 skill
-            double avg = 5 * Caster.Skills[DamageSkill].Value / 13;
-            double damage = Utility.RandomGaussian(avg, avg/2);
+            // 40 damage average at 130 skill
+            double avg = 4 * Caster.Skills[DamageSkill].Value / 13;
+            double damage = Utility.Dice(3, 6, (int)avg); //i.e. 3d6 + 30, clusters about 40, ranges 33 to 48
+
+	    if( Core.Debug ){
+		Console.WriteLine( "randomgaussian: {0} ", damage );
+	    }
+	    
             //m.Damage((int)damage, Caster, DamageType.Air);
 	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, damage, DamageType.Air);
 

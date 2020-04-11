@@ -909,7 +909,7 @@ namespace Server.Engines.Craft
 	public bool CheckSkills( Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, bool gainSkills )
 	{
 	    double chance = GetSuccessChance( from, typeRes, craftSystem, gainSkills, ref allRequiredSkills );
-	    if( craftSystem is DefBlacksmithy && CheckSpecRequirement( from, typeRes ) ){
+	    if( craftSystem is DefBlacksmithy && !CheckSpecRequirement( from, typeRes ) ){
 		quality = 1;
 	    }
 	    else if ( GetExceptionalChance( craftSystem, chance, from ) > Utility.RandomDouble() ) {
