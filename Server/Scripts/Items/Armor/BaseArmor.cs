@@ -1342,7 +1342,7 @@ namespace Server.Items
 	    if ( Absorbed < 2 )
 		Absorbed = 2;
 
-	    if ( 20 > Utility.Random( 100 ) ) 
+	    if ( 25 > Utility.Random( 100 ) ) 
 	    {
 		if ( Core.AOS && m_AosArmorAttributes.SelfRepair > Utility.Random( 10 ) )
 		{
@@ -1634,7 +1634,31 @@ namespace Server.Items
 		
 		if( m_Identified || from.AccessLevel >= AccessLevel.GameMaster ){
 		    if( m_Quality == ArmorQuality.Exceptional ){
-			prefix += "exceptional ";
+			prefix += "Exceptional ";
+		    }
+
+		    if( m_ZuluSkillMods.Mod != null && m_ZuluSkillMods.Mod.Value > 0 ){
+
+			SkillMod sk = m_ZuluSkillMods.Mod;
+			if( sk.Value == 6 ){
+			    prefix += "Grandmaster ";
+			}
+			if( sk.Value == 5 ){
+			    prefix += "Master ";
+			}
+			if( sk.Value == 4 ){
+			    prefix += "Adept ";
+			}
+			if( sk.Value == 3 ){
+			    prefix += "Expert ";
+			}
+			if( sk.Value == 2 ){
+			prefix += "Journeyman ";
+			}
+			if( sk.Value == 1 ){
+			    prefix += "Apprentice ";
+			}
+			prefix += SkillInfo.Table[(int)m_ZuluSkillMods.Mod.Skill].Title + "'s ";
 		    }
 
 		    if( m_Resource != CraftResource.Iron &&
@@ -1648,27 +1672,27 @@ namespace Server.Items
 		    switch( m_Durability ){
 			case ArmorDurabilityLevel.Durable:
 			    {
-				prefix += "durable ";
+				prefix += "Durable ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Substantial:
 			    {
-				prefix += "substantial ";
+				prefix += "Substantial ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Massive:
 			    {
-				prefix += "massive ";
+				prefix += "Massive ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Fortified:
 			    {
-				prefix += "fortified ";
+				prefix += "Fortified ";
 				break;
 			    }
 			case ArmorDurabilityLevel.Indestructible:
 			    {
-				prefix += "indestructible ";
+				prefix += "Indestructible ";
 				break;
 			    }
 			default:
@@ -1678,27 +1702,27 @@ namespace Server.Items
 		    switch( m_Protection ){
 			case ArmorProtectionLevel.Defense:
 			    {
-				suffix += " of defense";
+				suffix += " of Defense";
 				break;
 			    }
 			case ArmorProtectionLevel.Guarding:
 			    {
-				suffix += " of guarding";
+				suffix += " of Guarding";
 				break;
 			    }
 			case ArmorProtectionLevel.Hardening:
 			    {
-				suffix += " of hardening";
+				suffix += " of Hardening";
 				break;
 			    }
 			case ArmorProtectionLevel.Fortification:
 			    {
-				suffix += " of fortification";
+				suffix += " of Fortification";
 				break;
 			    }
 			case ArmorProtectionLevel.Invulnerability:
 			    {
-				suffix += " of invulnerability";
+				suffix += " of Invulnerability";
 				break;
 			    }
 			default:

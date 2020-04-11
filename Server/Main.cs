@@ -49,7 +49,7 @@ namespace Server
 	private static Process m_Process;
 	private static Thread m_Thread;
 	private static bool m_Service;
-	private const bool m_Debug = true;
+	private const bool m_Debug = false;
 	private static bool m_Cache = true;
 	private static bool m_HaltOnWarning;
 	private static bool m_VBdotNET;
