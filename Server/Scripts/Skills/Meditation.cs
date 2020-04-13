@@ -15,28 +15,15 @@ namespace Server.SkillHandlers
                 Item oneHanded = m.FindItemOnLayer( Layer.OneHanded );
                 Item twoHanded = m.FindItemOnLayer( Layer.TwoHanded );
 
-                if ( Core.AOS && m.Player )
-                {
-                    if ( !CheckOkayHolding( oneHanded ) )
-                        m.AddToBackpack( oneHanded );
-
-                    if ( !CheckOkayHolding( twoHanded ) )
-                        m.AddToBackpack( twoHanded );
-                }
-                else if ( !CheckOkayHolding( oneHanded ) || !CheckOkayHolding( twoHanded ) )
-                {
-                    return false;
-                }
-
-                return true;
+                return CheckOkayHolding( m, oneHanded ) && CheckOkayHolding( m, twoHanded );
             }                
 
-		public static bool CheckOkayHolding( Item item )
+            public static bool CheckOkayHolding( Mobile m, Item item )
 		{
 			if ( item == null )
 				return true;
 
-			if ( item is Spellbook || item is Runebook )
+			if ( item.AllowEquipedCast( m ) )
 				return true;
 
 			if ( Core.AOS && item is BaseWeapon && ((BaseWeapon)item).Attributes.SpellChanneling != 0 )

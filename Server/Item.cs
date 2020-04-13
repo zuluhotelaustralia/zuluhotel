@@ -1203,9 +1203,18 @@ namespace Server
 	/// 
 	/// When placed in an Item script, the item may be cast when equiped if the <paramref name="from" /> has 100 or more intelligence. Otherwise, it will drop to their backpack.
 	/// </example>
+
+        private bool m_EquippedCasting = false;
+        
+	[CommandProperty( AccessLevel.GameMaster )]
+        public virtual bool EquippedCasting {
+            get { return m_EquippedCasting; }
+            set { m_EquippedCasting = value; }
+        }
+        
 	public virtual bool AllowEquipedCast( Mobile from )
 	{
-	    return false;
+	    return EquippedCasting;
 	}
 
 	public virtual bool CheckConflictingLayer( Mobile m, Item item, Layer layer )

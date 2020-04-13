@@ -13,6 +13,9 @@ namespace Server.Items
 		public override WeaponType DefType{ get{ return WeaponType.Staff; } }
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Bash2H; } }
 
+
+            public override bool EquippedCasting { get { return true; } }
+            
 		public BaseStaff( int itemID ) : base( itemID )
 		{
 		}
