@@ -231,13 +231,13 @@ This is a list of bugs.
 * TODO buffs seem to stack in a strange way, see comment:  file:Server/Scripts/Spells/Base/SpellHelper.cs::250 
 * TODO tinkering menu mixes up ebon/dark sable
 * TODO carpentry items don't take hue/name from resource
-* VERIFY make it so spec crafter is required to have a chance at exceptional for anything above dripstone
-* VERIFY seems that people can cast spells holding shields and weapons
+* DONE make it so spec crafter is required to have a chance at exceptional for anything above dripstone
+* DONE seems that people can cast spells holding shields and weapons
   should only be castable for chaos/order shields, spellbooks, wands, staves, and that's it.  Everything else should block casting
-* TODO Add EquippedCasting true for chaos/order.
+* VERIFY Add EquippedCasting true for chaos/order.
 * DONE only str mods drop, no dex or int
 * VERIFY rangers get fucked on maxskills for spec because tactics
-* VERIFY kill spell is OP
-* TODO armor/weapons are not displaying mod titles properly (onsingleclick)
-* VERIFY Earth/Necro scrolls are right colour
+* DONE kill spell is OP
+* VERIFY armor/weapons are not displaying mod titles properly (onsingleclick)
+* DONE Earth/Necro scrolls are right colour
 * VERIFY Casting with weapons or not.
