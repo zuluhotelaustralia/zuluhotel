@@ -66,7 +66,7 @@ namespace Server.Misc
 	   }
 	*/
 
-	private static bool PasswordCommandEnabled = false;
+	private static bool PasswordCommandEnabled = true;
 
 	public static void Initialize()
 	{
