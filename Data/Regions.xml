@@ -217,11 +217,11 @@
     </region>
    
     <region type="OutdoorDungeonRegion" name="ThamasaGraveyard">
-      <rect x="1703" y="1209" width="46" height="28" />
+      <rect x="1693" y="1199" width="66" height="48" />
     </region>
    
     <region type="OutdoorDungeonRegion" name="MarbleGraveyard">
-      <rect x="760" y="1111" width="55" height="35" />
+      <rect x="750" y="1101" width="75" height="55" />
     </region>
    
     <region type="DungeonRegion" name="Profane Labrynth">
