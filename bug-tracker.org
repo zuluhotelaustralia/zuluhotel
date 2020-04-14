@@ -155,7 +155,7 @@ This is a list of bugs.
   FUCK IT I PUT IN RES GATES I HATE STATICS-RELATED ISSUES FUCKING SHIT
 * DONE Hood item from RP isn't showing properly on paperdoll (gumpart.mul?)
 * DONE unconfirmed but probably tmaps won't work.  Gotta copy those over in gumpart.mul or whatever.  
-* TODO some of the dungeons and stuff are missing regions
+* DONE some of the dungeons and stuff are missing regions
 * DONE colors or names or something are wrong for ebon twilight
 * DONE increase range on spears/polearms
 * DONE treasure hunting requires a baseharvesttool that uses the Harvest engine not Gather
@@ -196,7 +196,7 @@ This is a list of bugs.
 * DONE can't buy from bowyers?
 * TODO exceptional stuff doesn't bear maker's mark
 * DONE weapons and armor should also be able to have skill mods
-* IN_PROGRESS pets are slow when told to follow
+* DONE pets are slow when told to follow
   In progress.  Upped follow speed to 0.1, but consider adding warping if its still annyoing.
 
   Could this fix from ServUO be related? https://github.com/ServUO/ServUO/commit/e335a56d28790b54abe158a70fca59ab23441173 
@@ -226,8 +226,8 @@ This is a list of bugs.
 * TODO fix music in client
 * DONE pagans are heavy
 * VERIFY dragon leather no prots?  check all leather
-* VERIFY ebless and other spells not working??
-* VERIFY warriors seem not to be able to damage each other
+* DONE ebless and other spells not working??
+* DONE warriors seem not to be able to damage each other
 * TODO buffs seem to stack in a strange way, see comment:  file:Server/Scripts/Spells/Base/SpellHelper.cs::250 
 * TODO tinkering menu mixes up ebon/dark sable
 * TODO carpentry items don't take hue/name from resource
@@ -241,3 +241,6 @@ This is a list of bugs.
 * VERIFY armor/weapons are not displaying mod titles properly (onsingleclick)
 * DONE Earth/Necro scrolls are right colour
 * VERIFY Casting with weapons or not.
+* TODO comb through "artifacts" (see treasure chest system) and see which ones are appropriate to drop in high level chests
+  i.e. Arctic Death Dealer does water damage or something... does BaseWeapon.Damage or OnHit support this?
+* VERIFY tmaps not dropping skill mods, etc.

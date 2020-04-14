@@ -1316,6 +1316,7 @@ namespace Server.Items
 		Mobile m = (Mobile)parent;
 		string modName = this.Serial.ToString();
 
+		m_ZuluSkillMods.Remove( m );
 		m.RemoveStatMod( modName + "Str" );
 		m.RemoveStatMod( modName + "Dex" );
 		m.RemoveStatMod( modName + "Int" );
