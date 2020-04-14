@@ -244,3 +244,5 @@ This is a list of bugs.
 * TODO comb through "artifacts" (see treasure chest system) and see which ones are appropriate to drop in high level chests
   i.e. Arctic Death Dealer does water damage or something... does BaseWeapon.Damage or OnHit support this?
 * VERIFY tmaps not dropping skill mods, etc.
+* VERIFY easter egg chest (make sure to check reload from save)
+* TODO guys are reporting can't gain taming off same animal more than once?

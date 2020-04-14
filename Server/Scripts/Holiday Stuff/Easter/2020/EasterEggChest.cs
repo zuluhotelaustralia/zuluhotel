@@ -8,7 +8,7 @@ namespace Server.Items{
 
     [DynamicFliping]
     [Flipable( 0x9AB, 0xE7C )]
-    public class EasterEggChest : MetalChest
+    public class EasterEggChest : LockableContainer
     {
 	public Dictionary<Serial, int> Leaderboard;
 	    
@@ -24,6 +24,27 @@ namespace Server.Items{
 	{
 	}
 
+	public override bool OnDragDrop( Mobile from, Item dropped ){
+	    if( dropped is EasterEggs ){
+		EasterEggs eggs = dropped as EasterEggs;
+		Serial them = from.Serial;
+		
+		if( Leaderboard.ContainsKey( from.Serial ) ){
+		    Leaderboard[them] += eggs.Amount;
+		}
+		else{
+		    Leaderboard[them] = eggs.Amount;
+		}
+
+		from.SendMessage("The box seems almost happy to accept your tasty eggs.");
+		TownCrier.AddAnnouncement( from.Name + "'s Easter Egg total is " + Leaderboard[them] + "!");
+		return true;
+	    }
+	    else {
+		return base.OnDragDrop(from, dropped);
+	    }
+	}
+	
 	public override bool OnDragDropInto(Mobile from, Item item, Point3D p){
 	    if( item is EasterEggs ){
 		EasterEggs eggs = item as EasterEggs;
