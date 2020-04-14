@@ -234,15 +234,15 @@ This is a list of bugs.
 * DONE make it so spec crafter is required to have a chance at exceptional for anything above dripstone
 * DONE seems that people can cast spells holding shields and weapons
   should only be castable for chaos/order shields, spellbooks, wands, staves, and that's it.  Everything else should block casting
-* VERIFY Add EquippedCasting true for chaos/order.
+* DONE Add EquippedCasting true for chaos/order.
 * DONE only str mods drop, no dex or int
 * VERIFY rangers get fucked on maxskills for spec because tactics
 * DONE kill spell is OP
 * VERIFY armor/weapons are not displaying mod titles properly (onsingleclick)
 * DONE Earth/Necro scrolls are right colour
-* VERIFY Casting with weapons or not.
+* DONE Casting with weapons or not.
 * TODO comb through "artifacts" (see treasure chest system) and see which ones are appropriate to drop in high level chests
   i.e. Arctic Death Dealer does water damage or something... does BaseWeapon.Damage or OnHit support this?
-* VERIFY tmaps not dropping skill mods, etc.
-* VERIFY easter egg chest (make sure to check reload from save)
+* DONE tmaps not dropping skill mods, etc.
+* DONE easter egg chest (make sure to check reload from save)
 * TODO guys are reporting can't gain taming off same animal more than once?
