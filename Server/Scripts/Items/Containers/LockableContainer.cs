@@ -451,7 +451,7 @@ namespace Server.Items
 		DropItem( key );
 
 		double tinkering = from.Skills[SkillName.Tinkering].Value;
-		int level = (int)(tinkering * 0.8);
+		int level = (int)(tinkering);
 
 		RequiredSkill = level - 4;
 		LockLevel = level - 14;
@@ -462,11 +462,11 @@ namespace Server.Items
 		else if ( LockLevel > 95 )
 		    LockLevel = 95;
 
-		if ( RequiredSkill > 95 )
-		    RequiredSkill = 95;
+		if ( RequiredSkill > 130 )
+		    RequiredSkill = 130;
 
-		if ( MaxLockLevel > 95 )
-		    MaxLockLevel = 95;
+		if ( MaxLockLevel > 130 )
+		    MaxLockLevel = 130;
 	    }
 	    else
 	    {
