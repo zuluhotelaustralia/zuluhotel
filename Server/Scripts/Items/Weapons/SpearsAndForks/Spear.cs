@@ -1,6 +1,7 @@
 using System;
 using Server.Network;
 using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -26,6 +27,20 @@ namespace Server.Items
 	public override int InitMinHits{ get{ return 31; } }
 	public override int InitMaxHits{ get{ return 80; } }
 
+	public override double GetBaseDamage( Mobile attacker ){
+	    if( attacker is BaseCreature ){
+		return base.GetBaseDamage( attacker );
+	    }
+	    
+	    int damage = Utility.Dice( 2, 18, 0 );
+
+	    if ( DamageLevel != WeaponDamageLevel.Regular ){
+                damage += (2 * (int)DamageLevel) - 1;
+	    }
+
+	    return damage;
+	}
+	
 	[Constructable]
 	public Spear() : base( 0xF62 )
 	{

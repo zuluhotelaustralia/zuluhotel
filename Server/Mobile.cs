@@ -5989,7 +5989,7 @@ namespace Server
 	public virtual void Serialize( GenericWriter writer )
 	{
 	    writer.Write( (int)35 ); // version
-	    
+
 	    writer.Write( m_AutoLoop );
 	    
 	    writer.WriteDeltaTime( m_LastStrGain );
@@ -10611,7 +10611,7 @@ namespace Server
 	public virtual void OnKillsChange( int oldValue )
 	{
 	}
-
+	
 	[CommandProperty( AccessLevel.GameMaster )]
 	public int ShortTermMurders
 	{
