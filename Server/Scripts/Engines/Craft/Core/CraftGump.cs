@@ -539,7 +539,7 @@ namespace Server.Engines.Craft
 
 			    CraftSubRes res = system.CraftSubRes.GetAt( index );
 
-			    if ( m_From.Skills[system.MainSkill].Base < res.RequiredSkill )
+			    if ( m_From.Skills[system.MainSkill].Value < res.RequiredSkill )
 			    {
 				m_From.SendGump( new CraftGump( m_From, system, m_Tool, res.Message ) );
 			    }
@@ -557,7 +557,7 @@ namespace Server.Engines.Craft
 
 			    CraftSubRes res = system.CraftSubRes2.GetAt( index );
 
-			    if ( m_From.Skills[system.MainSkill].Base < res.RequiredSkill )
+			    if ( m_From.Skills[system.MainSkill].Value < res.RequiredSkill )
 			    {
 				m_From.SendGump( new CraftGump( m_From, system, m_Tool, res.Message ) );
 			    }

@@ -298,7 +298,7 @@ namespace Server.Engines.Craft
 					}
 					else if ( skill != SkillName.Tailoring )
 					{
-						double skillLevel = (usingDeed)? m_Deed.SkillLevel : from.Skills[skill].Base;
+						double skillLevel = (usingDeed)? m_Deed.SkillLevel : from.Skills[skill].Value;
 
 						if ( skillLevel >= 90.0 )
 							toWeaken = 1;
@@ -363,7 +363,7 @@ namespace Server.Engines.Craft
 					}
 					else if ( skill != SkillName.Tailoring )
 					{
-						double skillLevel = (usingDeed)? m_Deed.SkillLevel : from.Skills[skill].Base;
+						double skillLevel = (usingDeed)? m_Deed.SkillLevel : from.Skills[skill].Value;
 
 						if ( skillLevel >= 90.0 )
 							toWeaken = 1;
@@ -424,7 +424,7 @@ namespace Server.Engines.Craft
 					}
 					else if ( skill != SkillName.Tailoring )
 					{
-						double skillLevel = (usingDeed) ? m_Deed.SkillLevel : from.Skills[skill].Base;
+						double skillLevel = (usingDeed) ? m_Deed.SkillLevel : from.Skills[skill].Value;
 
 						if ( skillLevel >= 90.0 )
 							toWeaken = 1;
