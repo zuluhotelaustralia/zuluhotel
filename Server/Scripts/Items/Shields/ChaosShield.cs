@@ -21,8 +21,6 @@ namespace Server.Items
 
 	public override int ArmorBase{ get{ return 32; } }
 
-        public override bool EquippedCasting { get { return true; } }
-            
 	[Constructable]
 	public ChaosShield() : base( 0x1BC3 )
 	{
