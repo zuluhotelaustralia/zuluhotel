@@ -1,6 +1,7 @@
 using System;
 using Server.Network;
 using Server.Items;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -25,6 +26,20 @@ namespace Server.Items
 
 	public override int InitMinHits{ get{ return 31; } }
 	public override int InitMaxHits{ get{ return 60; } }
+
+	public override double GetBaseDamage( Mobile attacker ){
+	    if( attacker is BaseCreature ){
+		return base.GetBaseDamage( attacker );
+	    }
+	    
+	    int damage = Utility.Dice( 4, 4, 0 );
+
+	    if ( DamageLevel != WeaponDamageLevel.Regular ){
+                damage += (2 * (int)DamageLevel) - 1;
+	    }
+
+	    return damage;
+	}
 
 	[Constructable]
 	public Pitchfork() : base( 0xE87 )

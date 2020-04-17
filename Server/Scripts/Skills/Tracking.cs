@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Server;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Network;
 using Server.Spells.Necromancy;
 using Server.Spells;
@@ -173,7 +174,11 @@ namespace Server.SkillHandlers
 
 			from.CheckSkill( SkillName.Tracking, 21.1, 130.0 ); // Passive gain
 
-			int range = 10 + (int)(from.Skills[SkillName.Tracking].Value / 10);
+			int range = 15 + (int)(from.Skills[SkillName.Tracking].Value / 10);
+
+			if( from is PlayerMobile && ((PlayerMobile)from).Spec.SpecName == SpecName.Ranger ){
+			    range += 5;
+			}
 
 			List<Mobile> list = new List<Mobile>();
 

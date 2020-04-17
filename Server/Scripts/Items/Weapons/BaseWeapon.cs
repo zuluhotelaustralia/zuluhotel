@@ -3382,6 +3382,69 @@ namespace Server.Items
 			prefix += "Exceptional ";
 		    }
 
+		    if( this.DexBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += "Escape Artist's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += "Acrobat's ";
+			}
+			else if( this.StrBonus  == 4 ){
+			    prefix += "Tumbler's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += "Catburglar's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += "Thief's ";
+			}
+			else if( this.StrBonus == 1 ){
+			    prefix += "Cutpurse's ";
+			}
+		    }
+
+		    if( this.IntBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += "Oracle's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += "Archmage's ";
+			}
+			else if( this.StrBonus == 4 ){
+			    prefix += "Magister's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += "Wizard's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += "Adept's ";
+			}
+			else if( this.StrBonus == 1){
+			    prefix += "Apprentice's ";
+			}
+		    }
+
+		    if( this.StrBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += "King's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += "Warlord's ";
+			}
+			else if( this.StrBonus == 4 ){
+			    prefix += "Hero's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += "Champion's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += "Veteran's ";
+			}
+			else if( this.StrBonus == 1 ){
+			    prefix += "Warrior's ";
+			}
+		    }
+		    
 		    switch( m_DurabilityLevel ){
 			case WeaponDurabilityLevel.Durable:
 			    {

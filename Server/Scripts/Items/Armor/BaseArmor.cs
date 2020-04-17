@@ -1316,6 +1316,7 @@ namespace Server.Items
 		Mobile m = (Mobile)parent;
 		string modName = this.Serial.ToString();
 
+		m_ZuluSkillMods.Remove( m );
 		m.RemoveStatMod( modName + "Str" );
 		m.RemoveStatMod( modName + "Dex" );
 		m.RemoveStatMod( modName + "Int" );
@@ -1669,6 +1670,69 @@ namespace Server.Items
 			prefix += CraftResources.GetName( m_Resource ) + " ";
 		    }
 
+		    if( this.DexBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += "Escape Artist's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += "Acrobat's ";
+			}
+			else if( this.StrBonus  == 4 ){
+			    prefix += "Tumbler's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += "Catburglar's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += "Thief's ";
+			}
+			else if( this.StrBonus == 1 ){
+			    prefix += "Cutpurse's ";
+			}
+		    }
+
+		    if( this.IntBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += "Oracle's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += "Archmage's ";
+			}
+			else if( this.StrBonus == 4 ){
+			    prefix += "Magister's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += "Wizard's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += "Adept's ";
+			}
+			else if( this.StrBonus == 1){
+			    prefix += "Apprentice's ";
+			}
+		    }
+
+		    if( this.StrBonus > 0 ){
+			if( this.StrBonus == 6 ){
+			    prefix += "King's ";
+			}
+			else if( this.StrBonus == 5 ){
+			    prefix += "Warlord's ";
+			}
+			else if( this.StrBonus == 4 ){
+			    prefix += "Hero's ";
+			}
+			else if( this.StrBonus == 3 ){
+			    prefix += "Champion's ";
+			}
+			else if( this.StrBonus == 2 ){
+			    prefix += "Veteran's ";
+			}
+			else if( this.StrBonus == 1 ){
+			    prefix += "Warrior's ";
+			}
+		    }
+		    
 		    switch( m_Durability ){
 			case ArmorDurabilityLevel.Durable:
 			    {
