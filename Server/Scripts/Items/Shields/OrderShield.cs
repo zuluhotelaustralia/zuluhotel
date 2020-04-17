@@ -19,6 +19,8 @@ namespace Server.Items
 
 		public override int ArmorBase{ get{ return 30; } }
 
+            public override bool EquippedCasting { get { return true; } }
+            
 		[Constructable]
 		public OrderShield() : base( 0x1BC4 )
 		{
