@@ -77,8 +77,5 @@ namespace Server.Items
 
 	    return true;
 	}
-<<<<<<< HEAD
-=======
     }
->>>>>>> 3425f84bce4da7fbe4010f37cfe786838dcf57f2
 }
