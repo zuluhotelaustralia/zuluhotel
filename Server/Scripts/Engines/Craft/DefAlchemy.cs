@@ -156,6 +156,13 @@ namespace Server.Engines.Craft
 			index = AddCraft( typeof( GreaterExplosionPotion ), 1044537, 1044557, 65.0, 115.0, typeof( SulfurousAsh ), 1044359, 10, 1044367 );
 			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
 
+                        // TODO
+                        // Mana Potion
+			index = AddCraft( typeof( ManaPotion ), 1049580, "mana", 35.0, 85.0, typeof( Ginseng ), 1044356, 10, 1044364 );
+			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+			index = AddCraft( typeof( ManaPotion ), 1049580, "Mage's Brew", 35.0, 85.0, typeof( Ginseng ), 1044356, 15, 1044364 );
+			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+
 			if( Core.SE )
 			{
 				index = AddCraft( typeof( SmokeBomb ), 1044537, 1030248, 90.0, 120.0, typeof( Eggs ), 1044477, 1, 1044253 );
