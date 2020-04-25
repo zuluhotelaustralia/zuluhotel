@@ -151,9 +151,9 @@ namespace Server.Items
 	public readonly static PotionEffect MaskOfDeathGreater = new PotionEffect(23, 1041337, 1072661);
 	public readonly static PotionEffect ConfusionBlast = new PotionEffect(24, 1072105, 1072662);
 	public readonly static PotionEffect ConfusionBlastGreater = new PotionEffect(25, 1072108, 1072663);
-	public readonly static PotionEffect Invisibility = new PotionEffect(26, 1072941, 1072664);
-	public readonly static PotionEffect Parasitic = new PotionEffect(27, 1072848, 1072665);
-	public readonly static PotionEffect Darkglow = new PotionEffect(28, 1072849, 1072666);
+	public readonly static PotionEffect Invisibility = new PotionEffect(26, 1072941, 1080071);
+	public readonly static PotionEffect Parasitic = new PotionEffect(27, 1072848, 1080069);
+	public readonly static PotionEffect Darkglow = new PotionEffect(28, 1072849, 1080070);
 	public readonly static PotionEffect PoisonLethal = new PotionEffect(29, "Lethal Poison potion", "A keg of Lethal Poison potions");
         public readonly static PotionEffect Mana = new PotionEffect(30, "Mana potion", "A keg of Mana potions");
 	public readonly static PotionEffect ManaTotal = new PotionEffect(31, "Mage's Brew", "A keg of Mage's Brew");
