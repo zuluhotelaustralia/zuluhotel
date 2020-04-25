@@ -208,7 +208,8 @@ This is a list of bugs.
 * DONE magic clothing engine not producing items properly (rewrite)
 * DONE shit is still unided after a reset -> check serialize
 * DONE inscription menu is fucked
-* TODO missing mana potions -> i.e. make pots that are craftable via alchemy that restore mana
+* VERIFY missing mana potions -> i.e. make pots that are craftable via alchemy that restore mana
+  Need to test crafting and double check naming
 * TODO all potion effects scale with skill/spec (be careful about poison being too OP)
 * DONE heal spells scale with spec
 * DONE rangers too slow fire rate/after moving
