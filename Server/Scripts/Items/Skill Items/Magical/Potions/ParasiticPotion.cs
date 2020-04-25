@@ -10,8 +10,6 @@ namespace Server.Items
 		public override double MinPoisoningSkill{ get{ return 95.0; } }
 		public override double MaxPoisoningSkill{ get{ return 100.0; } }
 		
-		public override int LabelNumber{ get{ return 1072848; } } // Parasitic Poison
-
 		[Constructable]
 		public ParasiticPotion() : base( PotionEffect.Parasitic )
 		{

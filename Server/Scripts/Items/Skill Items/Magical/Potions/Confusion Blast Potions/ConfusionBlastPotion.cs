@@ -7,8 +7,6 @@ namespace Server.Items
 	{
 		public override int Radius{ get{ return 5; } }
 
-		public override int LabelNumber{ get{ return 1072105; } } // a Confusion Blast potion
-
 		[Constructable]
 		public ConfusionBlastPotion() : base( PotionEffect.ConfusionBlast )
 		{

@@ -3,17 +3,17 @@ using Server;
 
 namespace Server.Items
 {
-	public class GreaterConflagrationPotion : BaseConflagrationPotion
+	public class ManaPotion : BaseManaPotion
 	{
-		public override int MinDamage{ get{ return 4; } }
-		public override int MaxDamage{ get{ return 8; } }
+		public override double Mana{ get{ return 0.25; } }
 
 		[Constructable]
-		public GreaterConflagrationPotion() : base( PotionEffect.ConflagrationGreater )
+		public ManaPotion() : base( PotionEffect.Mana )
 		{
+                    Name = "Mana potion";
 		}
 
-		public GreaterConflagrationPotion( Serial serial ) : base( serial )
+		public ManaPotion( Serial serial ) : base( serial )
 		{
 		}
 

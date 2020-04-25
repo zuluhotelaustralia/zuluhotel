@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Server;
 using Server.Engines.Craft;
 using Server.Mobiles;
 
+
 namespace Server.Items
 {
-    public enum PotionEffect
+    public enum OldPotionEffect
     {
 	Nightsight,
 	CureLesser,
@@ -39,7 +41,8 @@ namespace Server.Items
 	Parasitic,
 	Darkglow,
 	PoisonLethal,
-
+        Mana,
+        ManaTotal
     }
 
     public abstract class BasePotion : Item, ICraftable, ICommodity
@@ -66,7 +69,10 @@ namespace Server.Items
 	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
 	bool ICommodity.IsDeedable { get { return (Core.ML); } }
 
-	public override int LabelNumber{ get{ return 1041314 + (int)m_PotionEffect; } }
+	public override int LabelNumber{ get{ return m_PotionEffect.BottleLabel; } }
+        public override string DefaultName {
+            get { return m_PotionEffect.BottleName; }
+        }
 
 	public BasePotion( int itemID, PotionEffect effect ) : base( itemID )
 	{
@@ -151,7 +157,7 @@ namespace Server.Items
 	    writer.Write( (int) 2 ); // version
 
 	    writer.Write( m_CrafterSpecBonus );
-	    writer.Write( (int) m_PotionEffect );
+            m_PotionEffect.Serialize(writer);
 	}
 
 	public override void Deserialize( GenericReader reader )
@@ -174,7 +180,7 @@ namespace Server.Items
 		    }
 		case 0:
 		    {
-			m_PotionEffect = (PotionEffect)reader.ReadInt();
+			m_PotionEffect = PotionEffect.Deserialize(reader);
 			break;
 		    }
 	    }
@@ -254,9 +260,6 @@ namespace Server.Items
 
 		if ( pack != null )
 		{
-		    if ( (int) PotionEffect >= (int) PotionEffect.Invisibility )
-			return 1;
-
 		    List<PotionKeg> kegs = pack.FindItemsByType<PotionKeg>();
 
 		    for ( int i = 0; i < kegs.Count; ++i )

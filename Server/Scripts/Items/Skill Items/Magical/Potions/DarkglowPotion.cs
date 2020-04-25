@@ -10,8 +10,6 @@ namespace Server.Items
 		public override double MinPoisoningSkill{ get{ return 95.0; } }
 		public override double MaxPoisoningSkill{ get{ return 100.0; } }
 		
-		public override int LabelNumber{ get{ return 1072849; } } // Darkglow Poison
-
 		[Constructable]
 		public DarkglowPotion() : base( PotionEffect.Darkglow )
 		{

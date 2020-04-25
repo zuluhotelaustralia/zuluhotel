@@ -64,7 +64,7 @@ namespace Server.Items
 
 			writer.Write( (int) 1 ); // version
 
-			writer.Write( (int) m_Type );
+                        m_Type.Serialize(writer);
 			writer.Write( (int) m_Held );
 		}
 
@@ -79,7 +79,7 @@ namespace Server.Items
 				case 1:
 				case 0:
 				{
-					m_Type = (PotionEffect)reader.ReadInt();
+                                    m_Type = PotionEffect.Deserialize(reader);
 					m_Held = reader.ReadInt();
 
 					break;
@@ -90,16 +90,15 @@ namespace Server.Items
 				Timer.DelayCall( TimeSpan.Zero, new TimerCallback( UpdateWeight ) );
 		}
 
+            public override string DefaultName {
+                get { return m_Type.KegName; }
+            }
+
 		public override int LabelNumber
 		{ 
 			get
 			{
-				if( m_Held > 0 && ( int )m_Type >= ( int )PotionEffect.Conflagration )
-				{
-					return 1072658 + ( int )m_Type - ( int )PotionEffect.Conflagration;
-				}
-
-				return (m_Held > 0 ? 1041620 + (int)m_Type : 1041641); 
+                            return m_Held == 0 ? 1041641 : m_Type.KegLabel;
 			} 
 		}
 
@@ -229,14 +228,6 @@ namespace Server.Items
 				}
 				else if ( m_Held == 0 )
 				{
-					#region Mondain's Legacy
-					if ( (int) pot.PotionEffect >= (int) PotionEffect.Invisibility )
-					{
-						from.SendLocalizedMessage( 502232 ); // The keg is not designed to hold that type of object.
-						return false;
-					}
-					#endregion
-
 					if ( GiveBottle( from, toHold ) )
 					{
 						m_Type = pot.PotionEffect;
@@ -312,43 +303,7 @@ namespace Server.Items
 
 		public BasePotion FillBottle()
 		{
-			switch ( m_Type )
-			{
-				default:
-				case PotionEffect.Nightsight:			return new NightSightPotion();
-
-				case PotionEffect.CureLesser:			return new LesserCurePotion();
-				case PotionEffect.Cure:				return new CurePotion();
-				case PotionEffect.CureGreater:			return new GreaterCurePotion();
-
-				case PotionEffect.Agility:			return new AgilityPotion();
-				case PotionEffect.AgilityGreater:		return new GreaterAgilityPotion();
-
-				case PotionEffect.Strength:			return new StrengthPotion();
-				case PotionEffect.StrengthGreater:		return new GreaterStrengthPotion();
-
-				case PotionEffect.PoisonLesser:			return new LesserPoisonPotion();
-				case PotionEffect.Poison:			return new PoisonPotion();
-				case PotionEffect.PoisonGreater:		return new GreaterPoisonPotion();
-				case PotionEffect.PoisonDeadly:			return new DeadlyPoisonPotion();
-
-				case PotionEffect.Refresh:			return new RefreshPotion();
-				case PotionEffect.RefreshTotal:			return new TotalRefreshPotion();
-
-				case PotionEffect.HealLesser:			return new LesserHealPotion();
-				case PotionEffect.Heal:				return new HealPotion();
-				case PotionEffect.HealGreater:			return new GreaterHealPotion();
-
-				case PotionEffect.ExplosionLesser:		return new LesserExplosionPotion();
-				case PotionEffect.Explosion:			return new ExplosionPotion();
-				case PotionEffect.ExplosionGreater:		return new GreaterExplosionPotion();
-				
-				case PotionEffect.Conflagration:		return new ConflagrationPotion();
-				case PotionEffect.ConflagrationGreater:		return new GreaterConflagrationPotion();
-
-				case PotionEffect.ConfusionBlast:		return new ConfusionBlastPotion();
-				case PotionEffect.ConfusionBlastGreater:	return new GreaterConfusionBlastPotion();
-			}
+                    return m_Type.CreatePotion();
 		}
 
 		public static void Initialize()

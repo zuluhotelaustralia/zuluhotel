@@ -8,8 +8,6 @@ namespace Server.Items
 		public override int MinDamage{ get{ return 2; } }
 		public override int MaxDamage{ get{ return 4; } }
 
-		public override int LabelNumber{ get{ return 1072095; } } // a Conflagration potion
-
 		[Constructable]
 		public ConflagrationPotion() : base( PotionEffect.Conflagration )
 		{
