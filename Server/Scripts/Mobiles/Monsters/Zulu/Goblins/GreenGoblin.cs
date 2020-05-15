@@ -42,7 +42,7 @@ namespace Server.Mobiles
 
             VirtualArmor = 28;
 
-            switch ( Utility.Random(20) )
+            switch (Utility.Random(20))
             {
                 case 0:
                     PackItem(new Scimitar());
@@ -66,7 +66,7 @@ namespace Server.Mobiles
 
             PackItem(new ThighBoots());
 
-            switch ( Utility.Random(3) )
+            switch (Utility.Random(3))
             {
                 case 0:
                     PackItem(new Ribs());

@@ -4,311 +4,312 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class PotionKeg : Item
-	{
-		private PotionEffect m_Type;
-		private int m_Held;
+    public class PotionKeg : Item
+    {
+        private PotionEffect m_Type;
+        private int m_Held;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int Held
-		{
-			get
-			{
-				return m_Held;
-			}
-			set
-			{
-				if ( m_Held != value )
-				{
-					m_Held = value;
-					UpdateWeight();
-					InvalidateProperties();
-				}
-			}
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int Held
+        {
+            get
+            {
+                return m_Held;
+            }
+            set
+            {
+                if (m_Held != value)
+                {
+                    m_Held = value;
+                    UpdateWeight();
+                    InvalidateProperties();
+                }
+            }
+        }
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public PotionEffect Type
-		{
-			get
-			{
-				return m_Type;
-			}
-			set
-			{
-				m_Type = value;
-				InvalidateProperties();
-			}
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public PotionEffect Type
+        {
+            get
+            {
+                return m_Type;
+            }
+            set
+            {
+                m_Type = value;
+                InvalidateProperties();
+            }
+        }
 
-		[Constructable]
-		public PotionKeg() : base( 0x1940 )
-		{
-			UpdateWeight();
-		}
+        [Constructable]
+        public PotionKeg() : base(0x1940)
+        {
+            UpdateWeight();
+        }
 
-		public virtual void UpdateWeight()
-		{
-			int held = Math.Max( 0, Math.Min( m_Held, 100 ) );
+        public virtual void UpdateWeight()
+        {
+            int held = Math.Max(0, Math.Min(m_Held, 100));
 
-			this.Weight = 20 + ((held * 80) / 100);
-		}
+            this.Weight = 20 + ((held * 80) / 100);
+        }
 
-		public PotionKeg( Serial serial ) : base( serial )
-		{
-		}
+        public PotionKeg(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 1 ); // version
+            writer.Write((int)1); // version
 
-                        m_Type.Serialize(writer);
-			writer.Write( (int) m_Held );
-		}
+            m_Type.Serialize(writer);
+            writer.Write((int)m_Held);
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
+            int version = reader.ReadInt();
 
-			switch ( version )
-			{
-				case 1:
-				case 0:
-				{
-                                    m_Type = PotionEffect.Deserialize(reader);
-					m_Held = reader.ReadInt();
+            switch (version)
+            {
+                case 1:
+                case 0:
+                    {
+                        m_Type = PotionEffect.Deserialize(reader);
+                        m_Held = reader.ReadInt();
 
-					break;
-				}
-			}
-
-			if ( version < 1 )
-				Timer.DelayCall( TimeSpan.Zero, new TimerCallback( UpdateWeight ) );
-		}
-
-            public override string DefaultName {
-                get { return m_Type.KegName; }
+                        break;
+                    }
             }
 
-		public override int LabelNumber
-		{ 
-			get
-			{
-                            return m_Held == 0 ? 1041641 : m_Type.KegLabel;
-			} 
-		}
+            if (version < 1)
+                Timer.DelayCall(TimeSpan.Zero, new TimerCallback(UpdateWeight));
+        }
 
-		public override void GetProperties( ObjectPropertyList list )
-		{
-			base.GetProperties( list );
+        public override string DefaultName
+        {
+            get { return m_Type.KegName; }
+        }
 
-			int number;
+        public override int LabelNumber
+        {
+            get
+            {
+                return m_Held == 0 ? 1041641 : m_Type.KegLabel;
+            }
+        }
 
-			if ( m_Held <= 0 )
-				number = 502246; // The keg is empty.
-			else if ( m_Held < 5 )
-				number = 502248; // The keg is nearly empty.
-			else if ( m_Held < 20 )
-				number = 502249; // The keg is not very full.
-			else if ( m_Held < 30 )
-				number = 502250; // The keg is about one quarter full.
-			else if ( m_Held < 40 )
-				number = 502251; // The keg is about one third full.
-			else if ( m_Held < 47 )
-				number = 502252; // The keg is almost half full.
-			else if ( m_Held < 54 )
-				number = 502254; // The keg is approximately half full.
-			else if ( m_Held < 70 )
-				number = 502253; // The keg is more than half full.
-			else if ( m_Held < 80 )
-				number = 502255; // The keg is about three quarters full.
-			else if ( m_Held < 96 )
-				number = 502256; // The keg is very full.
-			else if ( m_Held < 100 )
-				number = 502257; // The liquid is almost to the top of the keg.
-			else
-				number = 502258; // The keg is completely full.
+        public override void GetProperties(ObjectPropertyList list)
+        {
+            base.GetProperties(list);
 
-			list.Add( number );
-		}
+            int number;
 
-		public override void OnSingleClick( Mobile from )
-		{
-			base.OnSingleClick( from );
+            if (m_Held <= 0)
+                number = 502246; // The keg is empty.
+            else if (m_Held < 5)
+                number = 502248; // The keg is nearly empty.
+            else if (m_Held < 20)
+                number = 502249; // The keg is not very full.
+            else if (m_Held < 30)
+                number = 502250; // The keg is about one quarter full.
+            else if (m_Held < 40)
+                number = 502251; // The keg is about one third full.
+            else if (m_Held < 47)
+                number = 502252; // The keg is almost half full.
+            else if (m_Held < 54)
+                number = 502254; // The keg is approximately half full.
+            else if (m_Held < 70)
+                number = 502253; // The keg is more than half full.
+            else if (m_Held < 80)
+                number = 502255; // The keg is about three quarters full.
+            else if (m_Held < 96)
+                number = 502256; // The keg is very full.
+            else if (m_Held < 100)
+                number = 502257; // The liquid is almost to the top of the keg.
+            else
+                number = 502258; // The keg is completely full.
 
-			int number;
+            list.Add(number);
+        }
 
-			if ( m_Held <= 0 )
-				number = 502246; // The keg is empty.
-			else if ( m_Held < 5 )
-				number = 502248; // The keg is nearly empty.
-			else if ( m_Held < 20 )
-				number = 502249; // The keg is not very full.
-			else if ( m_Held < 30 )
-				number = 502250; // The keg is about one quarter full.
-			else if ( m_Held < 40 )
-				number = 502251; // The keg is about one third full.
-			else if ( m_Held < 47 )
-				number = 502252; // The keg is almost half full.
-			else if ( m_Held < 54 )
-				number = 502254; // The keg is approximately half full.
-			else if ( m_Held < 70 )
-				number = 502253; // The keg is more than half full.
-			else if ( m_Held < 80 )
-				number = 502255; // The keg is about three quarters full.
-			else if ( m_Held < 96 )
-				number = 502256; // The keg is very full.
-			else if ( m_Held < 100 )
-				number = 502257; // The liquid is almost to the top of the keg.
-			else
-				number = 502258; // The keg is completely full.
+        public override void OnSingleClick(Mobile from)
+        {
+            base.OnSingleClick(from);
 
-			this.LabelTo( from, number );
-		}
+            int number;
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( from.InRange( GetWorldLocation(), 2 ) )
-			{
-				if ( m_Held > 0 )
-				{
-					Container pack = from.Backpack;
+            if (m_Held <= 0)
+                number = 502246; // The keg is empty.
+            else if (m_Held < 5)
+                number = 502248; // The keg is nearly empty.
+            else if (m_Held < 20)
+                number = 502249; // The keg is not very full.
+            else if (m_Held < 30)
+                number = 502250; // The keg is about one quarter full.
+            else if (m_Held < 40)
+                number = 502251; // The keg is about one third full.
+            else if (m_Held < 47)
+                number = 502252; // The keg is almost half full.
+            else if (m_Held < 54)
+                number = 502254; // The keg is approximately half full.
+            else if (m_Held < 70)
+                number = 502253; // The keg is more than half full.
+            else if (m_Held < 80)
+                number = 502255; // The keg is about three quarters full.
+            else if (m_Held < 96)
+                number = 502256; // The keg is very full.
+            else if (m_Held < 100)
+                number = 502257; // The liquid is almost to the top of the keg.
+            else
+                number = 502258; // The keg is completely full.
 
-					if ( pack != null && pack.ConsumeTotal( typeof( Bottle ), 1 ) )
-					{
-						from.SendLocalizedMessage( 502242 ); // You pour some of the keg's contents into an empty bottle...
+            this.LabelTo(from, number);
+        }
 
-						BasePotion pot = FillBottle();
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (from.InRange(GetWorldLocation(), 2))
+            {
+                if (m_Held > 0)
+                {
+                    Container pack = from.Backpack;
 
-						if ( pack.TryDropItem( from, pot, false ) )
-						{
-							from.SendLocalizedMessage( 502243 ); // ...and place it into your backpack.
-							from.PlaySound( 0x240 );
+                    if (pack != null && pack.ConsumeTotal(typeof(Bottle), 1))
+                    {
+                        from.SendLocalizedMessage(502242); // You pour some of the keg's contents into an empty bottle...
 
-							if ( --Held == 0 )
-								from.SendLocalizedMessage( 502245 ); // The keg is now empty.
-						}
-						else
-						{
-							from.SendLocalizedMessage( 502244 ); // ...but there is no room for the bottle in your backpack.
-							pot.Delete();
-						}
-					}
-					else
-					{
-						// TODO: Target a bottle
-					}
-				}
-				else
-				{
-					from.SendLocalizedMessage( 502246 ); // The keg is empty.
-				}
-			}
-			else
-			{
-				from.LocalOverheadMessage( Network.MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
-			}
-		}
+                        BasePotion pot = FillBottle();
 
-		public override bool OnDragDrop( Mobile from, Item item )
-		{
-			if ( item is BasePotion )
-			{
-				BasePotion pot = (BasePotion)item;
-                int toHold = Math.Min( 100 - m_Held, pot.Amount );
+                        if (pack.TryDropItem(from, pot, false))
+                        {
+                            from.SendLocalizedMessage(502243); // ...and place it into your backpack.
+                            from.PlaySound(0x240);
 
-				if ( toHold <= 0 )
-				{
-					from.SendLocalizedMessage( 502233 ); // The keg will not hold any more!
-					return false;
-				}
-				else if ( m_Held == 0 )
-				{
-					if ( GiveBottle( from, toHold ) )
-					{
-						m_Type = pot.PotionEffect;
-						Held = toHold;
+                            if (--Held == 0)
+                                from.SendLocalizedMessage(502245); // The keg is now empty.
+                        }
+                        else
+                        {
+                            from.SendLocalizedMessage(502244); // ...but there is no room for the bottle in your backpack.
+                            pot.Delete();
+                        }
+                    }
+                    else
+                    {
+                        // TODO: Target a bottle
+                    }
+                }
+                else
+                {
+                    from.SendLocalizedMessage(502246); // The keg is empty.
+                }
+            }
+            else
+            {
+                from.LocalOverheadMessage(Network.MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+            }
+        }
 
-						from.PlaySound( 0x240 );
+        public override bool OnDragDrop(Mobile from, Item item)
+        {
+            if (item is BasePotion)
+            {
+                BasePotion pot = (BasePotion)item;
+                int toHold = Math.Min(100 - m_Held, pot.Amount);
 
-						from.SendLocalizedMessage( 502237 ); // You place the empty bottle in your backpack.
+                if (toHold <= 0)
+                {
+                    from.SendLocalizedMessage(502233); // The keg will not hold any more!
+                    return false;
+                }
+                else if (m_Held == 0)
+                {
+                    if (GiveBottle(from, toHold))
+                    {
+                        m_Type = pot.PotionEffect;
+                        Held = toHold;
 
-                        item.Consume( toHold );
+                        from.PlaySound(0x240);
 
-						if( !item.Deleted )
-							item.Bounce( from );
+                        from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
 
-						return true;
-					}
-					else
-					{
-						from.SendLocalizedMessage( 502238 ); // You don't have room for the empty bottle in your backpack.
-						return false;
-					}
-				}
-				else if ( pot.PotionEffect != m_Type )
-				{
-					from.SendLocalizedMessage( 502236 ); // You decide that it would be a bad idea to mix different types of potions.
-					return false;
-				}
-				else
-				{
-					if ( GiveBottle( from, toHold ) )
-					{
-						Held += toHold;
+                        item.Consume(toHold);
 
-						from.PlaySound( 0x240 );
+                        if (!item.Deleted)
+                            item.Bounce(from);
 
-						from.SendLocalizedMessage( 502237 ); // You place the empty bottle in your backpack.
+                        return true;
+                    }
+                    else
+                    {
+                        from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
+                        return false;
+                    }
+                }
+                else if (pot.PotionEffect != m_Type)
+                {
+                    from.SendLocalizedMessage(502236); // You decide that it would be a bad idea to mix different types of potions.
+                    return false;
+                }
+                else
+                {
+                    if (GiveBottle(from, toHold))
+                    {
+                        Held += toHold;
 
-						item.Consume( toHold );
+                        from.PlaySound(0x240);
 
-						if( !item.Deleted )
-							item.Bounce( from );
+                        from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
 
-						return true;
-					}
-					else
-					{
-						from.SendLocalizedMessage( 502238 ); // You don't have room for the empty bottle in your backpack.
-						return false;
-					}
-				}
-			}
-			else
-			{
-				from.SendLocalizedMessage( 502232 ); // The keg is not designed to hold that type of object.
-				return false;
-			}
-		}
+                        item.Consume(toHold);
 
-		public bool GiveBottle( Mobile m, int amount )
-		{
-			Container pack = m.Backpack;
+                        if (!item.Deleted)
+                            item.Bounce(from);
 
-			Bottle bottle = new Bottle( amount );
+                        return true;
+                    }
+                    else
+                    {
+                        from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                from.SendLocalizedMessage(502232); // The keg is not designed to hold that type of object.
+                return false;
+            }
+        }
 
-			if ( pack == null || !pack.TryDropItem( m, bottle, false ) )
-			{
-				bottle.Delete();
-				return false;
-			}
+        public bool GiveBottle(Mobile m, int amount)
+        {
+            Container pack = m.Backpack;
 
-			return true;
-		}
+            Bottle bottle = new Bottle(amount);
 
-		public BasePotion FillBottle()
-		{
-                    return m_Type.CreatePotion();
-		}
+            if (pack == null || !pack.TryDropItem(m, bottle, false))
+            {
+                bottle.Delete();
+                return false;
+            }
 
-		public static void Initialize()
-		{
-			TileData.ItemTable[0x1940].Height = 4;
-		}
-	}
+            return true;
+        }
+
+        public BasePotion FillBottle()
+        {
+            return m_Type.CreatePotion();
+        }
+
+        public static void Initialize()
+        {
+            TileData.ItemTable[0x1940].Height = 4;
+        }
+    }
 }

@@ -3,134 +3,137 @@ using Server.Items;
 
 namespace Server.Items
 {
-    [FlipableAttribute( 0x1bdd, 0x1be0 )]
+    [FlipableAttribute(0x1bdd, 0x1be0)]
     public class BaseLog : Item, ICommodity, IAxe
     {
-	private CraftResource m_Resource;
+        private CraftResource m_Resource;
 
-	[CommandProperty( AccessLevel.GameMaster )]
-	public CraftResource Resource
-	{
-	    get { return m_Resource; }
-	    set { m_Resource = value; InvalidateProperties(); }
-	}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set { m_Resource = value; InvalidateProperties(); }
+        }
 
-	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
-	bool ICommodity.IsDeedable { get { return true; } }
+        int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
-	public override int LabelNumber
-	{
-	    get
-	    {
-		if ( m_Resource >= CraftResource.Pinetree && m_Resource <= CraftResource.Elven )
-		    return 1161068 + (int)(m_Resource - CraftResource.Pinetree);
+        public override int LabelNumber
+        {
+            get
+            {
+                if (m_Resource >= CraftResource.Pinetree && m_Resource <= CraftResource.Elven)
+                    return 1161068 + (int)(m_Resource - CraftResource.Pinetree);
 
-		return Amount > 1 ? 1027134 : 1027133;
-	    }
-	}
+                return Amount > 1 ? 1027134 : 1027133;
+            }
+        }
 
-	public BaseLog() : this( 1 ) {}
+        public BaseLog() : this(1) { }
 
-	public BaseLog( int amount ) : this( CraftResource.RegularWood, amount )
-	{
-	}
+        public BaseLog(int amount) : this(CraftResource.RegularWood, amount)
+        {
+        }
 
-	public BaseLog( CraftResource resource )
-	    : this( resource, 1 )
-	{
-	}
+        public BaseLog(CraftResource resource)
+            : this(resource, 1)
+        {
+        }
 
-	public BaseLog( CraftResource resource, int amount )
-	    : base( 0x1BDD )
-	{
-	    Stackable = true;
-	    Weight = 2.0;
-	    Amount = amount;
+        public BaseLog(CraftResource resource, int amount)
+            : base(0x1BDD)
+        {
+            Stackable = true;
+            Weight = 2.0;
+            Amount = amount;
 
-	    m_Resource = resource;
-	    Hue = CraftResources.GetHue( resource );
-	}
+            m_Resource = resource;
+            Hue = CraftResources.GetHue(resource);
+        }
 
-	public override void GetProperties( ObjectPropertyList list )
-	{
-	    base.GetProperties( list );
+        public override void GetProperties(ObjectPropertyList list)
+        {
+            base.GetProperties(list);
 
-	    if ( !CraftResources.IsStandard( m_Resource ) )
-	    {
-		int num = CraftResources.GetLocalizationNumber( m_Resource );
+            if (!CraftResources.IsStandard(m_Resource))
+            {
+                int num = CraftResources.GetLocalizationNumber(m_Resource);
 
-		if ( num > 0 )
-		    list.Add( num );
-		else
-		    list.Add( CraftResources.GetName( m_Resource ) );
-	    }
-	}
+                if (num > 0)
+                    list.Add(num);
+                else
+                    list.Add(CraftResources.GetName(m_Resource));
+            }
+        }
 
-	public override void AddNameProperty( ObjectPropertyList list ) {
-	    int resourceCliloc = CraftResources.GetLocalizationNumber(m_Resource);
+        public override void AddNameProperty(ObjectPropertyList list)
+        {
+            int resourceCliloc = CraftResources.GetLocalizationNumber(m_Resource);
 
-	    if ( Amount > 1 ){
-		list.Add( 1160100, "{0}\t#{1}\t#{2}", Amount, resourceCliloc, 1160107 ); // 1160100 = ~1_amount~ ~2_resource~ ~3_name~, 1160107 = "logs"
-	    }
-	    else {
-		list.Add( 1160101, "#{0}\t#{1}", resourceCliloc, 1160106 ); // 1160101 = ~1_type~ ~2_name~, 1160106 = "log"
-	    }
-	}
-	
-	public BaseLog( Serial serial ) : base( serial )
-	{
-	}
+            if (Amount > 1)
+            {
+                list.Add(1160100, "{0}\t#{1}\t#{2}", Amount, resourceCliloc, 1160107); // 1160100 = ~1_amount~ ~2_resource~ ~3_name~, 1160107 = "logs"
+            }
+            else
+            {
+                list.Add(1160101, "#{0}\t#{1}", resourceCliloc, 1160106); // 1160101 = ~1_type~ ~2_name~, 1160106 = "log"
+            }
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public BaseLog(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 1 ); // version
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	    writer.Write( (int)m_Resource );
-	}
+            writer.Write((int)1); // version
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)m_Resource);
+        }
 
-	    int version = reader.ReadInt();
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	    switch ( version )
-	    {
-		case 1:
-		    {
-			m_Resource = (CraftResource)reader.ReadInt();
-			break;
-		    }
-	    }
+            int version = reader.ReadInt();
 
-	    if ( version == 0 )
-		m_Resource = CraftResource.RegularWood;
-	}
+            switch (version)
+            {
+                case 1:
+                    {
+                        m_Resource = (CraftResource)reader.ReadInt();
+                        break;
+                    }
+            }
 
-	public virtual bool TryCreateBoards( Mobile from, double skill, Item item )
-	{
-	    if ( Deleted || !from.CanSee( this ) ) 
-		return false;
-	    else if ( from.Skills.Carpentry.Value < skill &&
-		      from.Skills.Lumberjacking.Value < skill )
-	    {
-		item.Delete();
-		from.SendLocalizedMessage( 1072652 ); // You cannot work this strange and unusual wood.
-		return false;
-	    }
-	    base.ScissorHelper( from, item, 1, false );
-	    return true;
-	}
+            if (version == 0)
+                m_Resource = CraftResource.RegularWood;
+        }
 
-	public virtual bool Axe( Mobile from, BaseAxe axe )
-	{
-	    if ( !TryCreateBoards( from , 0, new Board() ) )
-		return false;
-			
-	    return true;
-	}
+        public virtual bool TryCreateBoards(Mobile from, double skill, Item item)
+        {
+            if (Deleted || !from.CanSee(this))
+                return false;
+            else if (from.Skills.Carpentry.Value < skill &&
+                  from.Skills.Lumberjacking.Value < skill)
+            {
+                item.Delete();
+                from.SendLocalizedMessage(1072652); // You cannot work this strange and unusual wood.
+                return false;
+            }
+            base.ScissorHelper(from, item, 1, false);
+            return true;
+        }
+
+        public virtual bool Axe(Mobile from, BaseAxe axe)
+        {
+            if (!TryCreateBoards(from, 0, new Board()))
+                return false;
+
+            return true;
+        }
     }
     // public class HeartwoodLog : Log
     // {
@@ -374,38 +377,39 @@ namespace Server.Items
     // 	}
     // }
 
-    public class Log : BaseLog {
-	[Constructable]
-	public Log() : this( 1 ) {}
+    public class Log : BaseLog
+    {
+        [Constructable]
+        public Log() : this(1) { }
 
-	[Constructable]
-	public Log( int amount ) : this( CraftResource.RegularWood, amount )
-	{
-	}
-
-	[Constructable]
-	public Log( CraftResource resource )
-	    : this( resource, 1 )
-	{
-	}
-	[Constructable]
-	public Log( CraftResource resource, int amount )
-	    : base(resource, amount )
+        [Constructable]
+        public Log(int amount) : this(CraftResource.RegularWood, amount)
         {
-	}
-        
-	public Log( Serial serial ) : base( serial )
-	{
-	}
-
-        public override void Serialize( GenericWriter writer )
-        {
-            base.Serialize( writer );
         }
 
-        public override void Deserialize( GenericReader reader )
+        [Constructable]
+        public Log(CraftResource resource)
+            : this(resource, 1)
         {
-            base.Deserialize( reader );
+        }
+        [Constructable]
+        public Log(CraftResource resource, int amount)
+            : base(resource, amount)
+        {
+        }
+
+        public Log(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
         }
     }
 }

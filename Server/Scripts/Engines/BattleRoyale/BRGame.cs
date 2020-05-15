@@ -6,330 +6,393 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Server.BattleRoyale{
-    public class GameController : Item {
+namespace Server.BattleRoyale
+{
+    public class GameController : Item
+    {
 
-	public enum BattleState {
-	    Idle, //game not running, nobody able to join
-	    Joining, //players able to join
-	    Parachuting, //if it was pubg you'd be in the herc or parachuting
-	    Playing, // game in progress
-	}
+        public enum BattleState
+        {
+            Idle, //game not running, nobody able to join
+            Joining, //players able to join
+            Parachuting, //if it was pubg you'd be in the herc or parachuting
+            Playing, // game in progress
+        }
 
-	private static bool _debug;
-	
-	[CommandProperty(AccessLevel.Developer)]
-	public bool Debug {
-	    get { return _debug; }
-	    set { _debug = value; }
-	}
-       
-	private static BattleState _state = BattleState.Idle;
-	private static DateTime _NextGameStarts;
+        private static bool _debug;
 
-	public static TimeSpan LogoutDelay = TimeSpan.FromMinutes( 30 );
+        [CommandProperty(AccessLevel.Developer)]
+        public bool Debug
+        {
+            get { return _debug; }
+            set { _debug = value; }
+        }
 
-       	public const int PlayerCap = 30;
-	public const int MinPlayers = 2;
-	public const int ZoneDamageMultiplier = 10;
-	public const int ZoneDamageInterval = 5;
-	
+        private static BattleState _state = BattleState.Idle;
+        private static DateTime _NextGameStarts;
+
+        public static TimeSpan LogoutDelay = TimeSpan.FromMinutes(30);
+
+        public const int PlayerCap = 30;
+        public const int MinPlayers = 2;
+        public const int ZoneDamageMultiplier = 10;
+        public const int ZoneDamageInterval = 5;
+
         private static Map _Map = Map.Felucca;
-        
-	private static Point3D _EscapeLoc = new Point3D(3033, 3406, 20); //serps, see AccountHandler
-	public static Point3D EscapeLoc{
-	    get { return _EscapeLoc; }
-	}
 
-	//TODO randomize this start loc by +/-5 in each x and y directions
-	private static Point3D _StartLoc = new Point3D(4420, 1155, 0); //Moonglow, near the maze
-	public static Point3D StartLoc{
-	    get { return _StartLoc; }
-	}
-	
-	private static List<Mobile> _Players;
-	private static List<Mobile> _AlivePlayers;
+        private static Point3D _EscapeLoc = new Point3D(3033, 3406, 20); //serps, see AccountHandler
+        public static Point3D EscapeLoc
+        {
+            get { return _EscapeLoc; }
+        }
 
-	public static List<Mobile> PlayerList {
-	    get { return _Players; }
-	}
-	
-	public static void Initialize() {
+        //TODO randomize this start loc by +/-5 in each x and y directions
+        private static Point3D _StartLoc = new Point3D(4420, 1155, 0); //Moonglow, near the maze
+        public static Point3D StartLoc
+        {
+            get { return _StartLoc; }
+        }
 
-	    //all commands go here, no more splitting it up between several files.
-	    // I'm looking at *you*, sith.
-	    // --sith
+        private static List<Mobile> _Players;
+        private static List<Mobile> _AlivePlayers;
 
-	    _Players = new List<Mobile>();
-	    _AlivePlayers = new List<Mobile>();
+        public static List<Mobile> PlayerList
+        {
+            get { return _Players; }
+        }
 
-	    CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand) );
+        public static void Initialize()
+        {
+
+            //all commands go here, no more splitting it up between several files.
+            // I'm looking at *you*, sith.
+            // --sith
+
+            _Players = new List<Mobile>();
+            _AlivePlayers = new List<Mobile>();
+
+            CommandSystem.Register("Escape", AccessLevel.Player, new CommandEventHandler(Escape_OnCommand));
             CommandSystem.Register("StartBRGame", AccessLevel.Developer, new CommandEventHandler(StartBRGame_OnCommand));
 
             // Delete any zone walls that were persisted in the world save
             ClearZone();
 
-	    _NextGameStarts = DateTime.Now + TimeSpan.FromMinutes(15.0);
-	}
+            _NextGameStarts = DateTime.Now + TimeSpan.FromMinutes(15.0);
+        }
 
-        public static void StartBRGame_OnCommand( CommandEventArgs e ) {
+        public static void StartBRGame_OnCommand(CommandEventArgs e)
+        {
             BeginJoining();
         }
 
-	public static void Escape_OnCommand( CommandEventArgs e){
-	    if( e.Mobile.Alive ) {
-		e.Mobile.SendMessage("You cannot do this unless dead.");
-		return;
-	    }
-	    else {
-		if( _Players.Contains( e.Mobile ) ){
-		    e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
-		    e.Mobile.MoveToWorld(GameController.EscapeLoc, _Map);
-		}
-		else{
-		    e.Mobile.SendMessage("Only dead Battle Royale players may use this command.  If your character is physically stuck, page the server staff.");
-		}
-		return;
-	    }
-	}
+        public static void Escape_OnCommand(CommandEventArgs e)
+        {
+            if (e.Mobile.Alive)
+            {
+                e.Mobile.SendMessage("You cannot do this unless dead.");
+                return;
+            }
+            else
+            {
+                if (_Players.Contains(e.Mobile))
+                {
+                    e.Mobile.SendMessage("You will now be moved from the battle royale arena as an observer and removed from the minigame.");
+                    e.Mobile.MoveToWorld(GameController.EscapeLoc, _Map);
+                }
+                else
+                {
+                    e.Mobile.SendMessage("Only dead Battle Royale players may use this command.  If your character is physically stuck, page the server staff.");
+                }
+                return;
+            }
+        }
 
-	// it's possible they're abandoned on the island due to a bug or server restart but not registered as a player any more.
-	public static void TryUnregisterPlayer( Mobile pm ) {
-	    if( _Players.Contains( pm ) ){
-		_Players.Remove( pm );
-		pm.SendMessage("You have been removed from the list of Battle Royale players.");
-	    }
-	}
+        // it's possible they're abandoned on the island due to a bug or server restart but not registered as a player any more.
+        public static void TryUnregisterPlayer(Mobile pm)
+        {
+            if (_Players.Contains(pm))
+            {
+                _Players.Remove(pm);
+                pm.SendMessage("You have been removed from the list of Battle Royale players.");
+            }
+        }
 
-	public static bool TryRegisterPlayer( Mobile pm ){
-	    if( _Players.Count < PlayerCap ){
-		pm.SendMessage("You have registered for Battle Royale.  Safely unequip and store your items before the game begins!"); //TODO cliloc this
-		pm.SendMessage("To unregister, double-click the stone again.");
-		_Players.Add(pm);
+        public static bool TryRegisterPlayer(Mobile pm)
+        {
+            if (_Players.Count < PlayerCap)
+            {
+                pm.SendMessage("You have registered for Battle Royale.  Safely unequip and store your items before the game begins!"); //TODO cliloc this
+                pm.SendMessage("To unregister, double-click the stone again.");
+                _Players.Add(pm);
 
-		if( _Players.Count == PlayerCap && _state == BattleState.Joining ){
-		    //might as well start game early if it fills up.
-		    foreach( PlayerMobile p in _Players ){
-			p.SendMessage("Game queue is full, starting play in 30 seconds!");
-		    }
+                if (_Players.Count == PlayerCap && _state == BattleState.Joining)
+                {
+                    //might as well start game early if it fills up.
+                    foreach (PlayerMobile p in _Players)
+                    {
+                        p.SendMessage("Game queue is full, starting play in 30 seconds!");
+                    }
 
-		    new GameTimer(TimeSpan.FromSeconds(30), EndJoining ).Start();
-		}
-		
-		return true;
-	    }
-	    else{
-		pm.SendMessage("You may not join at this time.  The game queue is full.");
-		
-		return false;
-	    }
-	}
-		
-	[Constructable]
-	public GameController() : base( 0xED4 ){
-	    this.Name = "Battle Royale Control Stone";
-	    this.Hue = 2771; //dripstone
-	    _debug = false;
-	}
+                    new GameTimer(TimeSpan.FromSeconds(30), EndJoining).Start();
+                }
 
-	public GameController( Serial serial ) : base( serial ){
-	    // if the server goes down the game just ends and everyone can just deal with it
-	    // not going to try to wrestle the complexity of having a minigame traverse server
-	    // restarts
-	}
+                return true;
+            }
+            else
+            {
+                pm.SendMessage("You may not join at this time.  The game queue is full.");
 
-	public override void Serialize( GenericWriter writer ){
-	    base.Serialize(writer);
-	    writer.Write( (int) 0 ); //version
+                return false;
+            }
+        }
 
-	    writer.Write(_debug);
-	}
+        [Constructable]
+        public GameController() : base(0xED4)
+        {
+            this.Name = "Battle Royale Control Stone";
+            this.Hue = 2771; //dripstone
+            _debug = false;
+        }
 
-	public override void Deserialize(GenericReader reader ){
-	    base.Deserialize( reader );
-	    int version = reader.ReadInt();
+        public GameController(Serial serial) : base(serial)
+        {
+            // if the server goes down the game just ends and everyone can just deal with it
+            // not going to try to wrestle the complexity of having a minigame traverse server
+            // restarts
+        }
 
-	    _debug = reader.ReadBool();
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); //version
 
-	public override void OnDoubleClick( Mobile mob ){
-	    Mobile from = mob as Mobile;
+            writer.Write(_debug);
+        }
 
-	    if( from.AccessLevel == AccessLevel.Player ){
-		if( _state == BattleState.Joining ){
-		    if( _Players.Contains(from) ){
-			TryUnregisterPlayer(from);
-		    }
-		    else {
-			TryRegisterPlayer( from );
-		    }
-		}
-		else {
-		    from.SendMessage("The game queue is not currently accepting new players; please try again at {0}.", _NextGameStarts );
-		    return;
-		}
-	    }
-	    else {
-		from.SendMessage("Staff may not join Battle Royale.");
-		return;
-	    }
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
 
-	public static void Announce( String s ){
+            _debug = reader.ReadBool();
+        }
 
-	    
-	    foreach( PlayerMobile p in _Players ){
-		p.SendMessage( s );
-		// later, change this to broadcast via the Town Criers TODO
+        public override void OnDoubleClick(Mobile mob)
+        {
+            Mobile from = mob as Mobile;
 
-		if( _debug ){
-		    Console.WriteLine(s);
-		}
-	    }
-	}
+            if (from.AccessLevel == AccessLevel.Player)
+            {
+                if (_state == BattleState.Joining)
+                {
+                    if (_Players.Contains(from))
+                    {
+                        TryUnregisterPlayer(from);
+                    }
+                    else
+                    {
+                        TryRegisterPlayer(from);
+                    }
+                }
+                else
+                {
+                    from.SendMessage("The game queue is not currently accepting new players; please try again at {0}.", _NextGameStarts);
+                    return;
+                }
+            }
+            else
+            {
+                from.SendMessage("Staff may not join Battle Royale.");
+                return;
+            }
+        }
 
-	public static void DecideToStart() {
-	    if( DateTime.Compare( _NextGameStarts, DateTime.Now ) <= 0 ){
-		//nextgame starts is in the past
-		BeginJoining();
-	    }
-	    else{
-		GameTimer nextgame = new GameTimer( TimeSpan.FromMinutes(5), BeginJoining );
-		nextgame.Start();
-		Announce("Next Battle Royale starts accepting registrations in 5 minutes!");
-	    }
-	}
-       	
-	public static void BeginJoining() {
-	    if( _state != BattleState.Joining ){
-		_state = BattleState.Joining;
-		World.Broadcast(0x59, true, "Battle Royale is now open for joining!  Game starts in 5 minutes, be sure to store all your valuables in the bank!");
+        public static void Announce(String s)
+        {
 
-		TimeSpan ts;
-		
-		if( _debug ) {
-		    ts = TimeSpan.FromSeconds(60);
-		}
-		else {
-		    ts = TimeSpan.FromMinutes(5);
-		}
-		
-		GameTimer jt = new GameTimer( ts, EndJoining );
-		jt.Start();
-	    }
-	}
 
-	public static void EndJoining(){
-            if( _debug ){
-		Announce("End Joining");
-	    }
+            foreach (PlayerMobile p in _Players)
+            {
+                p.SendMessage(s);
+                // later, change this to broadcast via the Town Criers TODO
 
-	    if( _Players.Count < MinPlayers ) {
-		Announce("Not enough players have joined the game.  Queue will open again later.");
-		_state = BattleState.Idle;
-		_Players.Clear();
-		//make it datetime based so that we can have the stone report when the next game will start
-		DecideToStart();
-		return;
-	    }
-	    
-	    _state = BattleState.Parachuting;
-	    // kill everyone, move em to arena, set a res timer that calls BeginPlay()
+                if (_debug)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+        }
 
-	    foreach( Mobile pm in _Players ){
+        public static void DecideToStart()
+        {
+            if (DateTime.Compare(_NextGameStarts, DateTime.Now) <= 0)
+            {
+                //nextgame starts is in the past
+                BeginJoining();
+            }
+            else
+            {
+                GameTimer nextgame = new GameTimer(TimeSpan.FromMinutes(5), BeginJoining);
+                nextgame.Start();
+                Announce("Next Battle Royale starts accepting registrations in 5 minutes!");
+            }
+        }
+
+        public static void BeginJoining()
+        {
+            if (_state != BattleState.Joining)
+            {
+                _state = BattleState.Joining;
+                World.Broadcast(0x59, true, "Battle Royale is now open for joining!  Game starts in 5 minutes, be sure to store all your valuables in the bank!");
+
+                TimeSpan ts;
+
+                if (_debug)
+                {
+                    ts = TimeSpan.FromSeconds(60);
+                }
+                else
+                {
+                    ts = TimeSpan.FromMinutes(5);
+                }
+
+                GameTimer jt = new GameTimer(ts, EndJoining);
+                jt.Start();
+            }
+        }
+
+        public static void EndJoining()
+        {
+            if (_debug)
+            {
+                Announce("End Joining");
+            }
+
+            if (_Players.Count < MinPlayers)
+            {
+                Announce("Not enough players have joined the game.  Queue will open again later.");
+                _state = BattleState.Idle;
+                _Players.Clear();
+                //make it datetime based so that we can have the stone report when the next game will start
+                DecideToStart();
+                return;
+            }
+
+            _state = BattleState.Parachuting;
+            // kill everyone, move em to arena, set a res timer that calls BeginPlay()
+
+            foreach (Mobile pm in _Players)
+            {
                 pm.Kill();
                 pm.MoveToWorld(_StartLoc, _Map);
                 pm.SendMessage("You will be automatically resurrected in 90 seconds, at which point the battle royale will begin!"); //TODO cliloc this
-	    }
-	    
-	    Announce("Battle Royale has started!");
-	    GameTimer rt = new GameTimer( TimeSpan.FromSeconds(90) , BeginPlay);
-	    rt.Start();
-	}
-	
-	private static void OnPlayerDeath( Mobile.OnDeathEventArgs a) {
-	    Mobile pm = a.Mobile as Mobile;
-	    pm.OnDeathEvent -= OnPlayerDeath;
-	    _AlivePlayers.Remove(pm);
-	    pm.SendMessage("You have died during Battle Royale.  You can continue to observe as a ghost.  Use the Escape command to leave the arena.");
-
-	    foreach( Mobile player in _AlivePlayers ){
-		player.SendMessage("{0} was killed by {1}.  {2} players remaining.", pm, pm.LastKiller, _AlivePlayers.Count );
-	    }
-
-	    if( CheckVictory() ){
-		Mobile victor = _AlivePlayers[0];
-		Announce("Winner winner, chicken dinner!  Battle Royale has ended!");
-		_state = BattleState.Idle;
-		victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
-		GameTimer repatriator = new GameTimer( TimeSpan.FromSeconds(15), EndGame );
-		repatriator.Start();
-	    }
-	}
-
-	public static void EndGame() {
-	    Mobile victor = _AlivePlayers[0];
-
-            foreach ( Mobile m in _Players ) {
-                m.OnDeathEvent -= OnPlayerDeath;
-		m.MoveToWorld(EscapeLoc, Map.Felucca);
             }
-            
-	    _Players.Clear();
-	    _AlivePlayers.Clear();
-	    ClearZone();
 
-	    //set a timer for next game opening
-	    GameTimer nextgame = new GameTimer( TimeSpan.FromMinutes(5.0), BeginJoining );
-	    nextgame.Start();
-	}
+            Announce("Battle Royale has started!");
+            GameTimer rt = new GameTimer(TimeSpan.FromSeconds(90), BeginPlay);
+            rt.Start();
+        }
 
-	public static bool CheckVictory() {
-	    //returns true if someone has won the game
-	    if( _state == BattleState.Playing ){
-		if( _AlivePlayers.Count <= 1 ){
-		    return true;
-		}
-		else {
-		    // is it possible to be in this block and still be a win?
-		    return false;
-		}
-	    }
+        private static void OnPlayerDeath(Mobile.OnDeathEventArgs a)
+        {
+            Mobile pm = a.Mobile as Mobile;
+            pm.OnDeathEvent -= OnPlayerDeath;
+            _AlivePlayers.Remove(pm);
+            pm.SendMessage("You have died during Battle Royale.  You can continue to observe as a ghost.  Use the Escape command to leave the arena.");
 
-	    return false;
-	}
+            foreach (Mobile player in _AlivePlayers)
+            {
+                player.SendMessage("{0} was killed by {1}.  {2} players remaining.", pm, pm.LastKiller, _AlivePlayers.Count);
+            }
 
-	private static void Slap( Mobile pm ) {
-	    pm.Damage( _CurrentStage.DamageLevel * ZoneDamageMultiplier );
-	    pm.RevealingAction();
-	}
+            if (CheckVictory())
+            {
+                Mobile victor = _AlivePlayers[0];
+                Announce("Winner winner, chicken dinner!  Battle Royale has ended!");
+                _state = BattleState.Idle;
+                victor.SendMessage("Congratulations!  You will be teleported out of the arena in 15 seconds.");
+                GameTimer repatriator = new GameTimer(TimeSpan.FromSeconds(15), EndGame);
+                repatriator.Start();
+            }
+        }
 
-	// should we proc the zone damage?
-	private static void HandleZoneDamageTimer(){
-	    if( _state == BattleState.Playing ){
-		ProcZoneDamage();
-		new GameTimer( TimeSpan.FromSeconds( ZoneDamageInterval ), HandleZoneDamageTimer ).Start();
-	    }
-	}
-	    
-	//check if every alive player is in the zone and if not, damage them
-	private static void ProcZoneDamage(){
-	    List<Mobile> toSlap = new List<Mobile>();
-            
-	    foreach( Mobile pm in _AlivePlayers ){
-		if( !_CurrentZone.Contains( pm.Location )) {
+        public static void EndGame()
+        {
+            Mobile victor = _AlivePlayers[0];
+
+            foreach (Mobile m in _Players)
+            {
+                m.OnDeathEvent -= OnPlayerDeath;
+                m.MoveToWorld(EscapeLoc, Map.Felucca);
+            }
+
+            _Players.Clear();
+            _AlivePlayers.Clear();
+            ClearZone();
+
+            //set a timer for next game opening
+            GameTimer nextgame = new GameTimer(TimeSpan.FromMinutes(5.0), BeginJoining);
+            nextgame.Start();
+        }
+
+        public static bool CheckVictory()
+        {
+            //returns true if someone has won the game
+            if (_state == BattleState.Playing)
+            {
+                if (_AlivePlayers.Count <= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    // is it possible to be in this block and still be a win?
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        private static void Slap(Mobile pm)
+        {
+            pm.Damage(_CurrentStage.DamageLevel * ZoneDamageMultiplier);
+            pm.RevealingAction();
+        }
+
+        // should we proc the zone damage?
+        private static void HandleZoneDamageTimer()
+        {
+            if (_state == BattleState.Playing)
+            {
+                ProcZoneDamage();
+                new GameTimer(TimeSpan.FromSeconds(ZoneDamageInterval), HandleZoneDamageTimer).Start();
+            }
+        }
+
+        //check if every alive player is in the zone and if not, damage them
+        private static void ProcZoneDamage()
+        {
+            List<Mobile> toSlap = new List<Mobile>();
+
+            foreach (Mobile pm in _AlivePlayers)
+            {
+                if (!_CurrentZone.Contains(pm.Location))
+                {
                     toSlap.Add(pm);
                 }
             }
 
-            foreach( Mobile pm in toSlap ) {
+            foreach (Mobile pm in toSlap)
+            {
                 Slap(pm);
-		Point2D loc2d = new Point2D( pm.X, pm.Y );
-                pm.SendMessage("The acid rain outside the magic safe zone damages you, and you feel the urge to go {0}!", Utility.GetDirection( loc2d, _ZoneCenter ).ToString() ); //TODO cliloc this
-	    }
-	}
+                Point2D loc2d = new Point2D(pm.X, pm.Y);
+                pm.SendMessage("The acid rain outside the magic safe zone damages you, and you feel the urge to go {0}!", Utility.GetDirection(loc2d, _ZoneCenter).ToString()); //TODO cliloc this
+            }
+        }
 
-        public class ZoneStage {
+        public class ZoneStage
+        {
             private int _size;
             private TimeSpan _duration;
             private int _damageLevel;
@@ -341,9 +404,9 @@ namespace Server.BattleRoyale{
                 _damageLevel = damageLevel;
             }
 
-            public TimeSpan Duration{ get{ return _duration; } }
-            public int Size{ get{ return _size; } }
-            public int DamageLevel{ get{ return _damageLevel; } }
+            public TimeSpan Duration { get { return _duration; } }
+            public int Size { get { return _size; } }
+            public int DamageLevel { get { return _damageLevel; } }
 
             public Rectangle2D ToRect(Map map, Point2D center)
             {
@@ -380,54 +443,54 @@ namespace Server.BattleRoyale{
             new ZoneStage( 1, 5, new TimeSpan(0, 0, 300) )
         };
 
-	// yes, these are hand picked.  Don't judge me.
-	private static Point2D[] _FinalZoneCenters = {
-	    new Point2D( 4548, 806 ),
-	    new Point2D( 4545, 867 ),
-	    new Point2D( 4543, 898 ),
-	    new Point2D( 4542, 941 ),
-	    new Point2D( 4567, 947 ),
-	    new Point2D( 4527, 997 ),
-	    new Point2D( 4513, 1042 ),
-	    new Point2D( 4491, 1057 ),
-	    new Point2D( 4453, 1102 ),
-	    new Point2D( 4477, 1170 ),
-	    new Point2D( 4551, 1145 ),
-	    new Point2D( 4576, 1179 ),
-	    new Point2D( 4633, 1202 ),
-	    new Point2D( 4711, 1123 ),
-	    new Point2D( 4645, 1184 ),
-	    new Point2D( 4417, 1227 ),
-	    new Point2D( 4387, 1260 ),
-	    new Point2D( 4454, 1255 ),
-	    new Point2D( 4496, 1218 ),
-	    new Point2D( 4528, 1283 ),
-	    new Point2D( 4536, 1314 ),
-	    new Point2D( 4550, 1332 ),
-	    new Point2D( 4546, 1353 ),
-	    new Point2D( 4525, 1378 ),
-	    new Point2D( 4522, 1407 ),
-	    new Point2D( 4516, 1438 ),
-	    new Point2D( 4490, 1470 ),
-	    new Point2D( 4468, 1553 ),
-	    new Point2D( 4415, 1492 ),
-	    new Point2D( 4416, 1447 ),
-	    new Point2D( 4587, 1457 ),
-	    new Point2D( 4577, 1483 ),
-	    new Point2D( 4653, 1424 ),
-	    new Point2D( 4665, 1382 ),
-	    new Point2D( 4624, 1297 ),
-	    new Point2D( 4399, 1052 ),
-	    new Point2D( 4419, 1111 ),
-	    new Point2D( 4408, 1148 ),
-	    new Point2D( 4378, 1180 ),
-	    new Point2D( 4296, 1070 ),
-	    new Point2D( 4326, 1002 ),
-	    new Point2D( 4312, 974 ),
-	    new Point2D( 4317, 954 ),
-	    new Point2D( 4296, 962 ),
-	    new Point2D( 4315, 918 )
-	};
+        // yes, these are hand picked.  Don't judge me.
+        private static Point2D[] _FinalZoneCenters = {
+        new Point2D( 4548, 806 ),
+        new Point2D( 4545, 867 ),
+        new Point2D( 4543, 898 ),
+        new Point2D( 4542, 941 ),
+        new Point2D( 4567, 947 ),
+        new Point2D( 4527, 997 ),
+        new Point2D( 4513, 1042 ),
+        new Point2D( 4491, 1057 ),
+        new Point2D( 4453, 1102 ),
+        new Point2D( 4477, 1170 ),
+        new Point2D( 4551, 1145 ),
+        new Point2D( 4576, 1179 ),
+        new Point2D( 4633, 1202 ),
+        new Point2D( 4711, 1123 ),
+        new Point2D( 4645, 1184 ),
+        new Point2D( 4417, 1227 ),
+        new Point2D( 4387, 1260 ),
+        new Point2D( 4454, 1255 ),
+        new Point2D( 4496, 1218 ),
+        new Point2D( 4528, 1283 ),
+        new Point2D( 4536, 1314 ),
+        new Point2D( 4550, 1332 ),
+        new Point2D( 4546, 1353 ),
+        new Point2D( 4525, 1378 ),
+        new Point2D( 4522, 1407 ),
+        new Point2D( 4516, 1438 ),
+        new Point2D( 4490, 1470 ),
+        new Point2D( 4468, 1553 ),
+        new Point2D( 4415, 1492 ),
+        new Point2D( 4416, 1447 ),
+        new Point2D( 4587, 1457 ),
+        new Point2D( 4577, 1483 ),
+        new Point2D( 4653, 1424 ),
+        new Point2D( 4665, 1382 ),
+        new Point2D( 4624, 1297 ),
+        new Point2D( 4399, 1052 ),
+        new Point2D( 4419, 1111 ),
+        new Point2D( 4408, 1148 ),
+        new Point2D( 4378, 1180 ),
+        new Point2D( 4296, 1070 ),
+        new Point2D( 4326, 1002 ),
+        new Point2D( 4312, 974 ),
+        new Point2D( 4317, 954 ),
+        new Point2D( 4296, 962 ),
+        new Point2D( 4315, 918 )
+    };
 
         // ItemIds to draw the "next zone," what will become the
         // "current zone" when the timer goes.  First is the
@@ -451,25 +514,28 @@ namespace Server.BattleRoyale{
         private static ZoneStage _CurrentStage;
         private static ZoneStage _NextStage;
 
-        public static void BeginPlay() {
-	    foreach( Mobile pm in _Players ){
-		if( pm.NetState != null ){
-		    pm.Resurrect();
+        public static void BeginPlay()
+        {
+            foreach (Mobile pm in _Players)
+            {
+                if (pm.NetState != null)
+                {
+                    pm.Resurrect();
 
-		    pm.Hits = pm.Str;
-		    pm.Stam = pm.Dex;
-		    pm.Mana = pm.Int;
+                    pm.Hits = pm.Str;
+                    pm.Stam = pm.Dex;
+                    pm.Mana = pm.Int;
 
-		    _AlivePlayers.Add(pm);
-		    pm.OnDeathEvent += OnPlayerDeath;
-		    pm.SendMessage("Last one standing in Moonglow wins!");
-		}
-		
-	    }
+                    _AlivePlayers.Add(pm);
+                    pm.OnDeathEvent += OnPlayerDeath;
+                    pm.SendMessage("Last one standing in Moonglow wins!");
+                }
+
+            }
 
             _state = BattleState.Playing;
 
-            _ZoneCenter = _FinalZoneCenters[ Utility.RandomMinMax(0, _FinalZoneCenters.Length - 1) ];
+            _ZoneCenter = _FinalZoneCenters[Utility.RandomMinMax(0, _FinalZoneCenters.Length - 1)];
 
             _CurrentStageEnumerator = _ZoneStages.GetEnumerator();
             _NextStageEnumerator = _ZoneStages.GetEnumerator();
@@ -477,57 +543,69 @@ namespace Server.BattleRoyale{
             _NextStageEnumerator.MoveNext();
 
             ZoneTick();
-	    HandleZoneDamageTimer();
+            HandleZoneDamageTimer();
         }
 
-        public static void ZoneTick() {
+        public static void ZoneTick()
+        {
             ClearZone();
 
-            if ( _CurrentStageEnumerator.MoveNext() ) {
+            if (_CurrentStageEnumerator.MoveNext())
+            {
                 _CurrentStage = _CurrentStageEnumerator.Current;
                 _CurrentZone = _CurrentStage.ToRect(_Map, _ZoneCenter);
 
-                if( _debug ){
-		    Announce("Current zone is " + _CurrentStage.Size);
-		}
-                
+                if (_debug)
+                {
+                    Announce("Current zone is " + _CurrentStage.Size);
+                }
+
                 DrawZone(_CurrentZone, _CurrentZoneItemIds);
 
-		if( _state == BattleState.Playing ){
-		    new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
-		}
+                if (_state == BattleState.Playing)
+                {
+                    new GameTimer(_CurrentStageEnumerator.Current.Duration, ZoneTick).Start();
+                }
             }
-            
-            if ( _NextStageEnumerator.MoveNext() ) {
+
+            if (_NextStageEnumerator.MoveNext())
+            {
                 _NextStage = _NextStageEnumerator.Current;
                 _NextZone = _NextStage.ToRect(_Map, _ZoneCenter);
 
-		if( _debug ){
-		    Announce("Next zone is " + _NextStage.Size);
+                if (_debug)
+                {
+                    Announce("Next zone is " + _NextStage.Size);
                 }
-		
+
                 DrawZone(_NextZone, _NextZoneItemIds);
-                
+
                 Announce("Zone will collapse in " + _CurrentStage.Duration.TotalSeconds + " seconds");
-            } else {
+            }
+            else
+            {
                 Announce("This is the final zone.");
             }
         }
-        
-        public static void ClearZone() {
+
+        public static void ClearZone()
+        {
             List<Item> oldZone = _ZoneList;
             _ZoneList = new List<Item>();
 
-            foreach ( Item i in oldZone ) {
+            foreach (Item i in oldZone)
+            {
                 i.Delete();
             }
         }
 
-        public static void DrawZone(Rectangle2D zone, int[] itemIds) {
+        public static void DrawZone(Rectangle2D zone, int[] itemIds)
+        {
             int x, y, z;
             Item item;
 
-            for ( x = zone.Left ; x < zone.Right ; x++ ) {
+            for (x = zone.Left; x < zone.Right; x++)
+            {
                 y = zone.Top;
                 z = _Map.GetAverageZ(x, y);
 
@@ -541,7 +619,8 @@ namespace Server.BattleRoyale{
                 _ZoneList.Add(item);
             }
 
-            for ( y = zone.Bottom ; y < zone.Top ; y++ ) {
+            for (y = zone.Bottom; y < zone.Top; y++)
+            {
                 x = zone.Left;
                 z = _Map.GetAverageZ(x, y);
 
@@ -560,28 +639,30 @@ namespace Server.BattleRoyale{
 
         public class ZoneWall : Item
         {
-            public ZoneWall(Point3D loc, Map map, int itemId) : base ( itemId ) {
+            public ZoneWall(Point3D loc, Map map, int itemId) : base(itemId)
+            {
                 Movable = false;
                 Visible = true;
-                MoveToWorld( loc, map );
+                MoveToWorld(loc, map);
             }
 
-            public ZoneWall( Serial serial ) : base( serial ) {}
+            public ZoneWall(Serial serial) : base(serial) { }
 
-            public override bool Decays { get{ return false; } }
+            public override bool Decays { get { return false; } }
 
-	    public override void Serialize( GenericWriter writer ) {
-		base.Serialize( writer );
+            public override void Serialize(GenericWriter writer)
+            {
+                base.Serialize(writer);
 
-		writer.Write( _debug );
-	    }
+                writer.Write(_debug);
+            }
 
-            public override void Deserialize( GenericReader reader )
+            public override void Deserialize(GenericReader reader)
             {
                 base.Deserialize(reader);
                 GameController._ZoneList.Add(this);
 
-		_debug = reader.ReadBool();
+                _debug = reader.ReadBool();
             }
         }
     }

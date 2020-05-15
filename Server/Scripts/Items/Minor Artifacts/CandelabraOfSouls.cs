@@ -3,31 +3,31 @@ using Server;
 
 namespace Server.Items
 {
-	public class CandelabraOfSouls : Item
-	{
-		public override int LabelNumber{ get{ return 1063478; } }
-		
-		[Constructable]
-		public CandelabraOfSouls() : base( 0xB26 )
-		{
-		}
+    public class CandelabraOfSouls : Item
+    {
+        public override int LabelNumber { get { return 1063478; } }
 
-		public CandelabraOfSouls( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public CandelabraOfSouls() : base(0xB26)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public CandelabraOfSouls(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 );
-		}
-		
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

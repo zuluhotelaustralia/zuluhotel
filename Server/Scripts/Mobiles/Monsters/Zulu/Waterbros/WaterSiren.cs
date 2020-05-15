@@ -49,8 +49,8 @@ namespace Server.Mobiles
 
             Item lantern = new Lantern();
             lantern.Movable = false;
-            lantern.Hue = 2219;            
-            AddItem(lantern);           
+            lantern.Hue = 2219;
+            AddItem(lantern);
 
             Utility.AssignRandomHair(this, 1410);
 
@@ -77,16 +77,17 @@ namespace Server.Mobiles
 
             Fame = 10500;
             Karma = -10500;
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich );
-	    AddLoot( LootPack.PaganReagentsPack, 20 );
-	    if( Utility.RandomDouble() > 0.995 ){
-		PackItem( new SpellweavingBook() );
-	    }
-	}
+            AddLoot(LootPack.FilthyRich);
+            AddLoot(LootPack.PaganReagentsPack, 20);
+            if (Utility.RandomDouble() > 0.995)
+            {
+                PackItem(new SpellweavingBook());
+            }
+        }
 
         public override bool CanRummageCorpses { get { return true; } }
         public override bool AlwaysMurderer { get { return true; } }

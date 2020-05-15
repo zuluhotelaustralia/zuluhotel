@@ -5,72 +5,75 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-    [FlipableAttribute( 0x1401, 0x1400 )]
+    [FlipableAttribute(0x1401, 0x1400)]
     public class Kryss : BaseSword
     {
-	public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.ArmorIgnore; } }
-	public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.InfectiousStrike; } }
+        public override WeaponAbility PrimaryAbility { get { return WeaponAbility.ArmorIgnore; } }
+        public override WeaponAbility SecondaryAbility { get { return WeaponAbility.InfectiousStrike; } }
 
-	public override int AosStrengthReq{ get{ return 10; } }
-	public override int AosMinDamage{ get{ return 10; } }
-	public override int AosMaxDamage{ get{ return 12; } }
-	public override int AosSpeed{ get{ return 53; } }
-	public override float MlSpeed{ get{ return 2.00f; } }
+        public override int AosStrengthReq { get { return 10; } }
+        public override int AosMinDamage { get { return 10; } }
+        public override int AosMaxDamage { get { return 12; } }
+        public override int AosSpeed { get { return 53; } }
+        public override float MlSpeed { get { return 2.00f; } }
 
-	public override int OldStrengthReq{ get{ return 10; } }
-	public override int OldMinDamage{ get{ return 3; } }
-	public override int OldMaxDamage{ get{ return 28; } }
-	public override int OldSpeed{ get{ return 53; } }
+        public override int OldStrengthReq { get { return 10; } }
+        public override int OldMinDamage { get { return 3; } }
+        public override int OldMaxDamage { get { return 28; } }
+        public override int OldSpeed { get { return 53; } }
 
-	public override int DefHitSound{ get{ return 0x23C; } }
-	public override int DefMissSound{ get{ return 0x238; } }
+        public override int DefHitSound { get { return 0x23C; } }
+        public override int DefMissSound { get { return 0x238; } }
 
-	public override int InitMinHits{ get{ return 31; } }
-	public override int InitMaxHits{ get{ return 90; } }
+        public override int InitMinHits { get { return 31; } }
+        public override int InitMaxHits { get { return 90; } }
 
-	public override SkillName DefSkill{ get{ return SkillName.Fencing; } }
-	public override WeaponType DefType{ get{ return WeaponType.Piercing; } }
-	public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Pierce1H; } }
+        public override SkillName DefSkill { get { return SkillName.Fencing; } }
+        public override WeaponType DefType { get { return WeaponType.Piercing; } }
+        public override WeaponAnimation DefAnimation { get { return WeaponAnimation.Pierce1H; } }
 
-	public override double GetBaseDamage( Mobile attacker ){
-	    if( attacker is BaseCreature ){
-		return base.GetBaseDamage( attacker );
-	    }
-	    
-	    int damage = Utility.Dice( 1, 26, 2 );
+        public override double GetBaseDamage(Mobile attacker)
+        {
+            if (attacker is BaseCreature)
+            {
+                return base.GetBaseDamage(attacker);
+            }
 
-	    if ( DamageLevel != WeaponDamageLevel.Regular ){
+            int damage = Utility.Dice(1, 26, 2);
+
+            if (DamageLevel != WeaponDamageLevel.Regular)
+            {
                 damage += (2 * (int)DamageLevel) - 1;
-	    }
+            }
 
-	    return damage;
-	}
-	
-	[Constructable]
-	public Kryss() : base( 0x1401 )
-	{
-	    Weight = 2.0;
-	}
+            return damage;
+        }
 
-	public Kryss( Serial serial ) : base( serial )
-	{
-	}
+        [Constructable]
+        public Kryss() : base(0x1401)
+        {
+            Weight = 2.0;
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public Kryss(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-	    int version = reader.ReadInt();
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	    if ( Weight == 1.0 )
-		Weight = 2.0;
-	}
+            int version = reader.ReadInt();
+
+            if (Weight == 1.0)
+                Weight = 2.0;
+        }
     }
 }

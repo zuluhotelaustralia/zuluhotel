@@ -6,101 +6,101 @@ using System.Xml;
 
 namespace Server.Accounting
 {
-	public class Accounts
-	{
-		private static Dictionary<string, IAccount> m_Accounts = new Dictionary<string, IAccount>();
+    public class Accounts
+    {
+        private static Dictionary<string, IAccount> m_Accounts = new Dictionary<string, IAccount>();
 
-		public static void Configure()
-		{
-			EventSink.WorldLoad += new WorldLoadEventHandler( Load );
-			EventSink.WorldSave += new WorldSaveEventHandler( Save );
-		}
+        public static void Configure()
+        {
+            EventSink.WorldLoad += new WorldLoadEventHandler(Load);
+            EventSink.WorldSave += new WorldSaveEventHandler(Save);
+        }
 
-		static Accounts()
-		{
-		}
+        static Accounts()
+        {
+        }
 
-		public static int Count { get { return m_Accounts.Count; } }
+        public static int Count { get { return m_Accounts.Count; } }
 
-		public static ICollection<IAccount> GetAccounts()
-		{
-			return m_Accounts.Values;
-		}
+        public static ICollection<IAccount> GetAccounts()
+        {
+            return m_Accounts.Values;
+        }
 
-		public static IAccount GetAccount( string username )
-		{
-			IAccount a;
+        public static IAccount GetAccount(string username)
+        {
+            IAccount a;
 
-			m_Accounts.TryGetValue( username, out a );
+            m_Accounts.TryGetValue(username, out a);
 
-			return a;
-		}
+            return a;
+        }
 
-		public static void Add( IAccount a )
-		{
-			m_Accounts[a.Username] = a;
-		}
-		
-		public static void Remove( string username )
-		{
-			m_Accounts.Remove( username );
-		}
+        public static void Add(IAccount a)
+        {
+            m_Accounts[a.Username] = a;
+        }
 
-		public static void Load()
-		{
-			m_Accounts = new Dictionary<string, IAccount>( 32, StringComparer.OrdinalIgnoreCase );
+        public static void Remove(string username)
+        {
+            m_Accounts.Remove(username);
+        }
 
-			string filePath = Path.Combine( "Saves/Accounts", "accounts.xml" );
+        public static void Load()
+        {
+            m_Accounts = new Dictionary<string, IAccount>(32, StringComparer.OrdinalIgnoreCase);
 
-			if ( !File.Exists( filePath ) )
-				return;
+            string filePath = Path.Combine("Saves/Accounts", "accounts.xml");
 
-			XmlDocument doc = new XmlDocument();
-			doc.Load( filePath );
+            if (!File.Exists(filePath))
+                return;
 
-			XmlElement root = doc["accounts"];
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
 
-			foreach ( XmlElement account in root.GetElementsByTagName( "account" ) )
-			{
-				try
-				{
-					Account acct = new Account( account );
-				}
-				catch
-				{
-					Console.WriteLine( "Warning: Account instance load failed" );
-				}
-			}
-		}
+            XmlElement root = doc["accounts"];
 
-		public static void Save( WorldSaveEventArgs e )
-		{
-			if ( !Directory.Exists( "Saves/Accounts" ) )
-				Directory.CreateDirectory( "Saves/Accounts" );
+            foreach (XmlElement account in root.GetElementsByTagName("account"))
+            {
+                try
+                {
+                    Account acct = new Account(account);
+                }
+                catch
+                {
+                    Console.WriteLine("Warning: Account instance load failed");
+                }
+            }
+        }
 
-			string filePath = Path.Combine( "Saves/Accounts", "accounts.xml" );
+        public static void Save(WorldSaveEventArgs e)
+        {
+            if (!Directory.Exists("Saves/Accounts"))
+                Directory.CreateDirectory("Saves/Accounts");
 
-			using ( StreamWriter op = new StreamWriter( filePath ) )
-			{
-				XmlTextWriter xml = new XmlTextWriter( op );
+            string filePath = Path.Combine("Saves/Accounts", "accounts.xml");
 
-				xml.Formatting = Formatting.Indented;
-				xml.IndentChar = '\t';
-				xml.Indentation = 1;
+            using (StreamWriter op = new StreamWriter(filePath))
+            {
+                XmlTextWriter xml = new XmlTextWriter(op);
 
-				xml.WriteStartDocument( true );
+                xml.Formatting = Formatting.Indented;
+                xml.IndentChar = '\t';
+                xml.Indentation = 1;
 
-				xml.WriteStartElement( "accounts" );
+                xml.WriteStartDocument(true);
 
-				xml.WriteAttributeString( "count", m_Accounts.Count.ToString() );
+                xml.WriteStartElement("accounts");
 
-				foreach ( Account a in GetAccounts() )
-					a.Save( xml );
+                xml.WriteAttributeString("count", m_Accounts.Count.ToString());
 
-				xml.WriteEndElement();
+                foreach (Account a in GetAccounts())
+                    a.Save(xml);
 
-				xml.Close();
-			}
-		}
-	}
+                xml.WriteEndElement();
+
+                xml.Close();
+            }
+        }
+    }
 }

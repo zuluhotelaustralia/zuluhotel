@@ -27,9 +27,9 @@ namespace Server.Mobiles
                 this.Body = 0x190;
             }
 
-            SetStr( 96, 120 );
-            SetDex( 50, 55 );
-            SetInt( 36, 60 );
+            SetStr(96, 120);
+            SetDex(50, 55);
+            SetInt(36, 60);
 
             SetHits(125, 150);
 
@@ -54,7 +54,7 @@ namespace Server.Mobiles
             Sandals.Movable = false;
             Sandals.Hue = 1775;
             AddItem(Sandals);
-            
+
             Item StuddedArms = new StuddedArms();
             StuddedArms.Movable = false;
             AddItem(StuddedArms);
@@ -93,7 +93,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich );
+            AddLoot(LootPack.FilthyRich);
         }
 
         public override bool AlwaysMurderer { get { return true; } }

@@ -7,35 +7,35 @@ namespace Server.Items
     public class DecayingRayScroll : SpellScroll
     {
         public override int LabelNumber { get { return 1060511; } }
-        
-	[Constructable]
-	public DecayingRayScroll() : this( 1 )
-	{
-	}
 
-	[Constructable]
-	public DecayingRayScroll( int amount ) : base( 102, 0x2260, amount )
-	{
-	    Hue = 0x66D;
-	}
+        [Constructable]
+        public DecayingRayScroll() : this(1)
+        {
+        }
 
-	public DecayingRayScroll( Serial serial ) : base( serial )
-	{
-	}
+        [Constructable]
+        public DecayingRayScroll(int amount) : base(102, 0x2260, amount)
+        {
+            Hue = 0x66D;
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public DecayingRayScroll(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-	    int version = reader.ReadInt();
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
 
 
     }

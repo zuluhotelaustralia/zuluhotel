@@ -9,77 +9,79 @@ using Server.Network;
 
 namespace Server.Items
 {
-        public class FishingPole : Item
+    public class FishingPole : Item
+    {
+        [Constructable]
+        public FishingPole() : base(0x0DC0)
         {
-                [Constructable]
-                public FishingPole() : base( 0x0DC0 )
-                {
-                        Layer = Layer.TwoHanded;
-                        Weight = 8.0;
-                }
+            Layer = Layer.TwoHanded;
+            Weight = 8.0;
+        }
 
-            private bool m_UseGatherSystem = true;
-            [CommandProperty( AccessLevel.GameMaster )]
-            public bool UseGatherSystem
+        private bool m_UseGatherSystem = true;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool UseGatherSystem
+        {
+            get { return m_UseGatherSystem; }
+            set
             {
-                get { return m_UseGatherSystem; }
-                set {
-                    m_UseGatherSystem = value;
-                }
+                m_UseGatherSystem = value;
+            }
+        }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            Point3D loc = GetWorldLocation();
+
+            if (!from.InLOS(loc) || !from.InRange(loc, 2))
+                from.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1019045); // I can't reach that
+            else
+            {
+                if (this.UseGatherSystem) Server.Engines.Gather.Fishing.System.BeginGathering(from, this);
+                else Fishing.System.BeginHarvesting(from, this);
+            }
+        }
+
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
+
+            BaseHarvestTool.AddContextMenuEntries(from, this, list, Fishing.System);
+        }
+
+        public override bool CheckConflictingLayer(Mobile m, Item item, Layer layer)
+        {
+            if (base.CheckConflictingLayer(m, item, layer))
+                return true;
+
+            if (layer == Layer.OneHanded)
+            {
+                m.SendLocalizedMessage(500214); // You already have something in both hands.
+                return true;
             }
 
-                public override void OnDoubleClick( Mobile from )
-                {
-                        Point3D loc = GetWorldLocation();
-
-                        if ( !from.InLOS( loc ) || !from.InRange( loc, 2 ) )
-                                from.LocalOverheadMessage( MessageType.Regular, 0x3E9, 1019045 ); // I can't reach that
-                        else {
-                            if ( this.UseGatherSystem ) Server.Engines.Gather.Fishing.System.BeginGathering( from, this );
-                            else Fishing.System.BeginHarvesting( from, this );
-                        }
-                }
-
-                public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
-                {
-                        base.GetContextMenuEntries( from, list );
-
-                        BaseHarvestTool.AddContextMenuEntries( from, this, list, Fishing.System );
-                }
-
-                public override bool CheckConflictingLayer( Mobile m, Item item, Layer layer )
-                {
-                        if ( base.CheckConflictingLayer( m, item, layer ) )
-                                return true;
-
-                        if ( layer == Layer.OneHanded )
-                        {
-                                m.SendLocalizedMessage( 500214 ); // You already have something in both hands.
-                                return true;
-                        }
-
-                        return false;
-                }
-
-                public FishingPole( Serial serial ) : base( serial )
-                {
-                }
-
-                public override void Serialize( GenericWriter writer )
-                {
-                        base.Serialize( writer );
-
-                        writer.Write( (int) 1 ); // version
-                }
-
-                public override void Deserialize( GenericReader reader )
-                {
-                        base.Deserialize( reader );
-
-                        int version = reader.ReadInt();
-
-                        if ( version < 1 && Layer == Layer.OneHanded )
-                                Layer = Layer.TwoHanded;
-                }
+            return false;
         }
+
+        public FishingPole(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)1); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+
+            if (version < 1 && Layer == Layer.OneHanded)
+                Layer = Layer.TwoHanded;
+        }
+    }
 }

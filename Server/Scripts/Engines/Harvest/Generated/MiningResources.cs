@@ -3,10 +3,10 @@ using Server.Mobiles;
 
 namespace Server.Engines.Harvest
 {
-        public class MiningResources
+    public class MiningResources
+    {
+        public static HarvestResource[] OreResources = new HarvestResource[]
         {
-                public static HarvestResource[] OreResources = new HarvestResource[]
-                {
                         new HarvestResource( 0.00, 0.00, 100.00, 1007072, typeof( IronOre ), typeof( Granite ) ),
                         new HarvestResource( 1.00, 1.00, 101.00, 1007072, typeof( GoldOre ), typeof( Granite ) ),
                         new HarvestResource( 5.00, 5.00, 105.00, 1007072, typeof( SpikeOre ), typeof( Granite ) ),
@@ -42,45 +42,45 @@ namespace Server.Engines.Harvest
                         new HarvestResource( 130.00, 130.00, 150.00, 1007072, typeof( DarkSableRubyOre ), typeof( Granite ) ),
                         new HarvestResource( 130.00, 130.00, 150.00, 1007072, typeof( EbonTwilightSapphireOre ), typeof( Granite ) ),
                         new HarvestResource( 140.00, 140.00, 150.00, 1007072, typeof( RadiantNimbusDiamondOre ), typeof( Granite ) ),
-                };
+        };
 
-                public static HarvestVein[] OreVeins = new HarvestVein[]
-                {                
-                        new HarvestVein( 2.86, 0.00, OreResources[0], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[1], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[2], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[3], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[4], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[5], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[6], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[7], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[8], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[9], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[10], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[11], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[12], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[13], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[14], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[15], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[16], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[17], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[18], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[19], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[20], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[21], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[22], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[23], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[24], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[25], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[26], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[27], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[28], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[29], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[30], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[31], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[32], OreResources[0] ),                
-                        new HarvestVein( 2.86, 0.00, OreResources[33], OreResources[0] ),                
+        public static HarvestVein[] OreVeins = new HarvestVein[]
+        {
+                        new HarvestVein( 2.86, 0.00, OreResources[0], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[1], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[2], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[3], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[4], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[5], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[6], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[7], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[8], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[9], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[10], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[11], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[12], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[13], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[14], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[15], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[16], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[17], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[18], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[19], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[20], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[21], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[22], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[23], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[24], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[25], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[26], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[27], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[28], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[29], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[30], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[31], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[32], OreResources[0] ),
+                        new HarvestVein( 2.86, 0.00, OreResources[33], OreResources[0] ),
                         new HarvestVein( 2.86, 0.00, OreResources[34], OreResources[0] ),
-                };
-        }
+        };
+    }
 };

@@ -4,32 +4,32 @@ using Server;
 
 namespace Server.Mobiles
 {
-	public class TailorGuildmaster : BaseGuildmaster
-	{
-		public override NpcGuild NpcGuild{ get{ return NpcGuild.TailorsGuild; } }
+    public class TailorGuildmaster : BaseGuildmaster
+    {
+        public override NpcGuild NpcGuild { get { return NpcGuild.TailorsGuild; } }
 
-		[Constructable]
-		public TailorGuildmaster() : base( "tailor" )
-		{
-			SetSkill( SkillName.Tailoring, 90.0, 100.0 );
-		}
+        [Constructable]
+        public TailorGuildmaster() : base("tailor")
+        {
+            SetSkill(SkillName.Tailoring, 90.0, 100.0);
+        }
 
-		public TailorGuildmaster( Serial serial ) : base( serial )
-		{
-		}
+        public TailorGuildmaster(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write((int)0); // version
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

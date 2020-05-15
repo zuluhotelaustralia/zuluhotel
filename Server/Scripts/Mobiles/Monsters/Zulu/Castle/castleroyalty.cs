@@ -21,12 +21,12 @@ namespace Server.Mobiles
             if (this.Female = Utility.RandomBool())
             {
                 this.Body = 0x191; // female
-            
+
             }
             else
             {
                 this.Body = 0x190; // male
- 
+
             }
 
             SetStr(150, 155);
@@ -53,7 +53,7 @@ namespace Server.Mobiles
 
             Utility.AssignRandomHair(this);
 
-            
+
 
             Item Bandana = new Bandana();
             Bandana.Movable = false;
@@ -91,13 +91,13 @@ namespace Server.Mobiles
             rm.Team = this.Team;
             rm.Combatant = this.Combatant;
             rm.NoKillAwards = true;
-	    rm.AddLoot( LootPack.FilthyRich, 2 );
-	    rm.AddLoot( LootPack.Rich );
-	    rm.AddLoot( LootPack.GreaterNecroScrolls );
-	    rm.AddLoot( LootPack.LesserNecroScrolls );
-	    rm.AddLoot( LootPack.Gems, 2 );
+            rm.AddLoot(LootPack.FilthyRich, 2);
+            rm.AddLoot(LootPack.Rich);
+            rm.AddLoot(LootPack.GreaterNecroScrolls);
+            rm.AddLoot(LootPack.LesserNecroScrolls);
+            rm.AddLoot(LootPack.Gems, 2);
 
-	    Effects.PlaySound(this, Map, GetDeathSound());
+            Effects.PlaySound(this, Map, GetDeathSound());
             Effects.SendLocationEffect(Location, Map, 0x3709, 30, 10, 1775, 0);
             rm.MoveToWorld(Location, Map);
 

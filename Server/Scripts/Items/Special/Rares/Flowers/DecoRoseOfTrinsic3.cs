@@ -2,32 +2,32 @@ using System;
 
 namespace Server.Items
 {
-	public class DecoRoseOfTrinsic3 : Item
-	{
+    public class DecoRoseOfTrinsic3 : Item
+    {
 
-		[Constructable]
-		public DecoRoseOfTrinsic3() : base( 0x234B )
-		{
-			Movable = true;
-			Stackable = false;
-		}
+        [Constructable]
+        public DecoRoseOfTrinsic3() : base(0x234B)
+        {
+            Movable = true;
+            Stackable = false;
+        }
 
-		public DecoRoseOfTrinsic3( Serial serial ) : base( serial )
-		{
-		}
+        public DecoRoseOfTrinsic3(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 );
-		}
+            writer.Write((int)0);
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

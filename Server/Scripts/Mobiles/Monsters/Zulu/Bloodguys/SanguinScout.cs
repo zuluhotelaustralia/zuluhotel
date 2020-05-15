@@ -88,7 +88,7 @@ namespace Server.Mobiles
             Item Hood = new Hood();
             Hood.Movable = false;
             Hood.Hue = 1775;
-            AddItem(Hood);            
+            AddItem(Hood);
 
             switch (Utility.Random(2))
             {
@@ -97,12 +97,12 @@ namespace Server.Mobiles
             }
 
             Utility.AssignRandomHair(this);
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Average );
-	    AddLoot( LootPack.Rich );
+            AddLoot(LootPack.Average);
+            AddLoot(LootPack.Rich);
         }
 
         public override bool AlwaysMurderer { get { return true; } }

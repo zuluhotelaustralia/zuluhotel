@@ -5,15 +5,15 @@ using Server.Targeting;
 
 namespace Server.Mobiles
 {
-    [CorpseName( "a skeletal corpse" )]
+    [CorpseName("a skeletal corpse")]
     public class ClackinFlayer : BaseCreature
     {
-	[Constructable]
-	public ClackinFlayer() : base( AIType.AI_Melee, FightMode.Weakest, 10, 1, 0.2, 0.4 )
-	{
-	    Name = "Clackin' Jack the Flayer";
-	    Body = 57;
-	    BaseSoundID = 451;
+        [Constructable]
+        public ClackinFlayer() : base(AIType.AI_Melee, FightMode.Weakest, 10, 1, 0.2, 0.4)
+        {
+            Name = "Clackin' Jack the Flayer";
+            Body = 57;
+            BaseSoundID = 451;
 
             SetStr(250, 255);
             SetDex(160, 165);
@@ -34,35 +34,35 @@ namespace Server.Mobiles
 
             Fame = 5000;
             Karma = -5000;
-	    
-	    VirtualArmor = 90;
 
-	}
+            VirtualArmor = 90;
 
-	public override void GenerateLoot()
-	{
-	    AddLoot( LootPack.UltraRich );
-	    AddLoot( LootPack.FilthyRich );
-	}
+        }
 
-	public override bool BleedImmune{ get{ return true; } }
-	public override bool AlwaysMurderer{ get{ return true; } }
-	public override bool BardImmune { get { return true; } }
-	
-	public ClackinFlayer( Serial serial ) : base( serial )
-	{
-	}
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.UltraRich);
+            AddLoot(LootPack.FilthyRich);
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
-	    writer.Write( (int) 0 );
-	}
+        public override bool BleedImmune { get { return true; } }
+        public override bool AlwaysMurderer { get { return true; } }
+        public override bool BardImmune { get { return true; } }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
-	    int version = reader.ReadInt();
-	}
+        public ClackinFlayer(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
     }
 }

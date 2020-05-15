@@ -18,26 +18,26 @@ namespace Server.Mobiles
             }
         }
 
-        private static string[] RandomSpeech = new string[] 
-	    {
-		"With the right varnish this wood will shine like diamonds.",
-		"You'd think this would be a better weapon",
-		"I wonder where they lost their eyes...",
-		"Wood wood wood wood wood.",
-		"There are whispers of automated lumberjacks from beyond the stars!!",
-		"They say beyond these mountains there is only darkness!",
-		"Look at the pretty trees!"
-	    };
+        private static string[] RandomSpeech = new string[]
+        {
+        "With the right varnish this wood will shine like diamonds.",
+        "You'd think this would be a better weapon",
+        "I wonder where they lost their eyes...",
+        "Wood wood wood wood wood.",
+        "There are whispers of automated lumberjacks from beyond the stars!!",
+        "They say beyond these mountains there is only darkness!",
+        "Look at the pretty trees!"
+        };
 
         private static string[] RandomEmotes = new string[]
-	    {
-		"*laughs maniacally*",
-		"*shouts at a nearby tree*",
-		"*mutters something about wood*",
-		"*winks at a nearby tree*",
-		"*giggles hysterically*"
+        {
+        "*laughs maniacally*",
+        "*shouts at a nearby tree*",
+        "*mutters something about wood*",
+        "*winks at a nearby tree*",
+        "*giggles hysterically*"
 
-	    };
+        };
 
         private TalkTimer mTalkTimer;
 
@@ -71,13 +71,13 @@ namespace Server.Mobiles
             Item boots = new Boots();
             boots.Movable = false;
             boots.Hue = 2155;
-            AddItem(boots);            
+            AddItem(boots);
 
             Item leathergloves = new LeatherGloves();
             leathergloves.Movable = false;
             leathergloves.Hue = 2155;
             AddItem(leathergloves);
-            
+
             Utility.AssignRandomHair(this, 2155);
 
             SetStr(125, 130);
@@ -92,9 +92,9 @@ namespace Server.Mobiles
 
             SetSkill(SkillName.Tactics, 100.0, 100.0); //Uses Weapon
 
-            SetSkill(SkillName.MagicResist, 30.0, 35.0); 
+            SetSkill(SkillName.MagicResist, 30.0, 35.0);
 
-            SetSkill(SkillName.Swords, 70.0, 75); 
+            SetSkill(SkillName.Swords, 70.0, 75);
 
             Fame = 3000;
             Karma = -3000;
@@ -108,11 +108,11 @@ namespace Server.Mobiles
 
             mTalkTimer = new TalkTimer(this, TimeSpan.FromMinutes(1.0), TimeSpan.FromMinutes(1.0));
             mTalkTimer.Start();
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Average );
+            AddLoot(LootPack.Average);
             PackItem(new Log());
             PackItem(new Saw());
         }

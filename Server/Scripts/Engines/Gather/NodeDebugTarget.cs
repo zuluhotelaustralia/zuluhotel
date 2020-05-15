@@ -11,26 +11,28 @@ namespace Server.Engines.Gather
 {
     public class NodeDebugTarget : Target
     {
-	private int m_Index;
+        private int m_Index;
 
-	public NodeDebugTarget( int index ) : base( -1, true, TargetFlags.None )
-	{
-	    m_Index = index;
-	}
+        public NodeDebugTarget(int index) : base(-1, true, TargetFlags.None)
+        {
+            m_Index = index;
+        }
 
 
-	protected override void OnTarget( Mobile from, object targeted )
-	{
-	    if( targeted is GatherSystemController ){
-		GatherSystemController targ = (GatherSystemController)targeted;
-		GatherNode n = targ.System.Nodes[m_Index];
+        protected override void OnTarget(Mobile from, object targeted)
+        {
+            if (targeted is GatherSystemController)
+            {
+                GatherSystemController targ = (GatherSystemController)targeted;
+                GatherNode n = targ.System.Nodes[m_Index];
 
-		from.SendMessage("GatherNode: {0} {1} {2}", n.Resource, n.X, n.Y);
-		from.SendMessage(n.ToString());
-	    }
-	    else{
-		from.SendMessage("Bad target type");
-	    }
-	}
+                from.SendMessage("GatherNode: {0} {1} {2}", n.Resource, n.X, n.Y);
+                from.SendMessage(n.ToString());
+            }
+            else
+            {
+                from.SendMessage("Bad target type");
+            }
+        }
     }
 }

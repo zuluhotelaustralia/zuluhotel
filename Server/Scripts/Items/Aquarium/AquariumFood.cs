@@ -4,32 +4,32 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-	public class AquariumFood : Item
-	{		
-		public override int LabelNumber{ get{ return 1074819; } } // Aquarium food
-		
-		[Constructable]
-		public AquariumFood() : base( 0xEFC )
-		{
-		}
+    public class AquariumFood : Item
+    {
+        public override int LabelNumber { get { return 1074819; } } // Aquarium food
 
-		public AquariumFood( Serial serial ) : base( serial )
-		{
-		
-		}
+        [Constructable]
+        public AquariumFood() : base(0xEFC)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public AquariumFood(Serial serial) : base(serial)
+        {
 
-			writer.Write( (int) 0 ); // version
-		}
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

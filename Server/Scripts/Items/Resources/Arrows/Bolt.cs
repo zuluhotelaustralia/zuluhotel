@@ -4,44 +4,44 @@ namespace Server.Items
 {
     public class Bolt : Item, ICommodity
     {
-	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
-	bool ICommodity.IsDeedable { get { return true; } }
+        int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
-	public override double DefaultWeight
-	{
-	    get { return 0.1; }
-	}
+        public override double DefaultWeight
+        {
+            get { return 0.1; }
+        }
 
-	[Constructable]
-	public Bolt() : this( 1 )
-	{
-	}
+        [Constructable]
+        public Bolt() : this(1)
+        {
+        }
 
-	[Constructable]
-	public Bolt( int amount ) : base( 0x1BFB )
-	{
-	    Stackable = true;
-	    Amount = amount;
-	}
+        [Constructable]
+        public Bolt(int amount) : base(0x1BFB)
+        {
+            Stackable = true;
+            Amount = amount;
+        }
 
-	public Bolt( Serial serial ) : base( serial )
-	{
-	}
+        public Bolt(Serial serial) : base(serial)
+        {
+        }
 
-	public virtual void OnHit( Mobile from, Mobile targ ){}		
+        public virtual void OnHit(Mobile from, Mobile targ) { }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	    writer.Write( (int) 0 ); // version
-	}
+            writer.Write((int)0); // version
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	    int version = reader.ReadInt();
-	}
+            int version = reader.ReadInt();
+        }
     }
 }

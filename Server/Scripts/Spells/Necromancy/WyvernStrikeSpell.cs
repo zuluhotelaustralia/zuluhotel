@@ -10,84 +10,89 @@ namespace Server.Spells.Necromancy
     public class WyvernStrikeSpell : NecromancerSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-							"Wyvern Strike", "Ubrae Tenebrae Venarent",
-							227, 9031,
-							Reagent.DragonsBlood, Reagent.NoxCrystal,
-							Reagent.Blackmoor, Reagent.Bloodspawn
-							);
+                            "Wyvern Strike", "Ubrae Tenebrae Venarent",
+                            227, 9031,
+                            Reagent.DragonsBlood, Reagent.NoxCrystal,
+                            Reagent.Blackmoor, Reagent.Bloodspawn
+                            );
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 2 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds(2); } }
 
-        public override double RequiredSkill{ get{ return 120.0; } }
-        public override int RequiredMana{ get{ return 100; } }
+        public override double RequiredSkill { get { return 120.0; } }
+        public override int RequiredMana { get { return 100; } }
 
-        public WyvernStrikeSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
+        public WyvernStrikeSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
         {
         }
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
+            Caster.Target = new InternalTarget(this);
         }
 
-        public void Target( Mobile m )
+        public void Target(Mobile m)
         {
-            if ( ! Caster.CanSee( m ) )
+            if (!Caster.CanSee(m))
             {
                 // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
                 goto Return;
             }
 
-            if ( ! CheckSequence() )
+            if (!CheckSequence())
             {
                 goto Return;
             }
 
-            SpellHelper.Turn( Caster, m );
+            SpellHelper.Turn(Caster, m);
 
-            m.FixedParticles( 0x3709, 10, 15, 5021, EffectLayer.Waist );
-	    m.PlaySound(0x1e2);
+            m.FixedParticles(0x3709, 10, 15, 5021, EffectLayer.Waist);
+            m.PlaySound(0x1e2);
 
-            Caster.DoHarmful( m );
+            Caster.DoHarmful(m);
 
-	    int level = 0;
-	    double pStr = Caster.Skills[CastSkill].Value;
-	   
-	    if (pStr > 100){
-		level = 1;
-	    }
-	    else if (pStr > 110){
-		level = 2;
-	    }
-	    else if (pStr > 130){
-		level = 3;
-	    }
-	    else if (pStr > 140){
-		level = 4;
-	    }
-	    else {
-		level = 0;
-	    }
-			
-	    double ss = Caster.Skills[DamageSkill].Value;
-	    int bonus = (int)ss / 4;
-	    
-	    double dmg = (double)Utility.Dice(3, 5, bonus);
-	    dmg /= 2; //necessary?  
+            int level = 0;
+            double pStr = Caster.Skills[CastSkill].Value;
 
-	    //sith: change this, see issue tracker on gitlab
-	    if ( CheckResisted( m ) )
-	    {
-		dmg *= 0.75;
-		
-		m.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
-	    }
+            if (pStr > 100)
+            {
+                level = 1;
+            }
+            else if (pStr > 110)
+            {
+                level = 2;
+            }
+            else if (pStr > 130)
+            {
+                level = 3;
+            }
+            else if (pStr > 140)
+            {
+                level = 4;
+            }
+            else
+            {
+                level = 0;
+            }
 
-	    //m.Damage((int)dmg, m, DamageType.Necro);
-	    SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Necro);
-	    m.ApplyPoison( Caster, Poison.GetPoison( level ) );
-            
+            double ss = Caster.Skills[DamageSkill].Value;
+            int bonus = (int)ss / 4;
+
+            double dmg = (double)Utility.Dice(3, 5, bonus);
+            dmg /= 2; //necessary?  
+
+            //sith: change this, see issue tracker on gitlab
+            if (CheckResisted(m))
+            {
+                dmg *= 0.75;
+
+                m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
+            }
+
+            //m.Damage((int)dmg, m, DamageType.Necro);
+            SpellHelper.Damage(this, TimeSpan.Zero, m, Caster, dmg, DamageType.Necro);
+            m.ApplyPoison(Caster, Poison.GetPoison(level));
+
         Return:
             FinishSequence();
         }
@@ -97,18 +102,18 @@ namespace Server.Spells.Necromancy
             private WyvernStrikeSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( WyvernStrikeSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+            public InternalTarget(WyvernStrikeSpell owner) : base(Core.ML ? 10 : 12, false, TargetFlags.Harmful)
             {
                 m_Owner = owner;
             }
 
-            protected override void OnTarget( Mobile from, object o )
+            protected override void OnTarget(Mobile from, object o)
             {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
+                if (o is Mobile)
+                    m_Owner.Target((Mobile)o);
             }
 
-            protected override void OnTargetFinish( Mobile from )
+            protected override void OnTargetFinish(Mobile from)
             {
                 m_Owner.FinishSequence();
             }

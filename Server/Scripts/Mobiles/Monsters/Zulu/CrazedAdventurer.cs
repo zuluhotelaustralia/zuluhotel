@@ -57,7 +57,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Macing, 75.0, 80.0);
             SetSkill(SkillName.Fencing, 75.0, 80.0);
             SetSkill(SkillName.Archery, 75.0, 80.0);
-            SetSkill(SkillName.Wrestling, 75.0, 80.0);            
+            SetSkill(SkillName.Wrestling, 75.0, 80.0);
 
             Fame = 1500;
             Karma = -1500;
@@ -94,38 +94,38 @@ namespace Server.Mobiles
                     {
                         AddItem(new Crossbow());
                         PackItem(new CrossbowBolts(50));
-			this.AI = AIType.AI_Archer;
+                        this.AI = AIType.AI_Archer;
                     }
-		    break;
+                    break;
 
                 case 1:
                     {
                         AddItem(new Broadsword());
                         AddItem(new WoodenShield());
                     }
-		    break;
+                    break;
 
                 case 2:
                     {
                         AddItem(new Mace());
                         AddItem(new WoodenShield());
                     }
-		    break;
+                    break;
 
                 case 3:
                     {
                         AddItem(new ShortSpear());
                     }
-		    break;
+                    break;
             }
 
             Utility.AssignRandomHair(this, 2155);
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich, 2 );
-	    
+            AddLoot(LootPack.Rich, 2);
+
             PackItem(new Bedroll());
             PackItem(new CookedBird());
             PackItem(new Torch());

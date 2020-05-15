@@ -45,15 +45,15 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Meager );
-	}
+            AddLoot(LootPack.Meager);
+        }
 
         public override int Meat { get { return 1; } }
         public override int Hides { get { return 6; } }
         public override FoodType FavoriteFood { get { return FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies | FoodType.Eggs; } }
 
-       public InfestedRat(Serial serial)
-            : base(serial)
+        public InfestedRat(Serial serial)
+             : base(serial)
         {
         }
 

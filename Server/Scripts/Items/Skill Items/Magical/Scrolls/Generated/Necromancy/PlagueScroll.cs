@@ -4,39 +4,39 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class PlagueScroll : SpellScroll
-	{
-            public override int LabelNumber { get { return 1060523; } }
-            
-		[Constructable]
-		public PlagueScroll() : this( 1 )
-		{
-		}
+    public class PlagueScroll : SpellScroll
+    {
+        public override int LabelNumber { get { return 1060523; } }
 
-		[Constructable]
-		public PlagueScroll( int amount ) : base( 114, 0x2260, amount )
-		{
-		    Hue = 0x66D;
-		}
+        [Constructable]
+        public PlagueScroll() : this(1)
+        {
+        }
 
-		public PlagueScroll( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public PlagueScroll(int amount) : base(114, 0x2260, amount)
+        {
+            Hue = 0x66D;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public PlagueScroll(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
 
 
-	}
+    }
 }

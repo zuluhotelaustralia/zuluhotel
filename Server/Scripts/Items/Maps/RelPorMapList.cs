@@ -8,15 +8,15 @@ namespace Server
     {
         public static readonly Point2D mOffset = new Point2D(400, 500);
         private static MapCutout[] mMapCutouts;
-        public static MapCutout[] MapCutouts 
-        { 
-            get 
-            { 
-                if (mMapCutouts == null) 
+        public static MapCutout[] MapCutouts
+        {
+            get
+            {
+                if (mMapCutouts == null)
                     Init();
 
                 return mMapCutouts;
-            } 
+            }
 
         }
 
@@ -34,7 +34,9 @@ namespace Server
         }
 
         private static MapCutout mWorldMapCutout;
-        public static MapCutout WorldMapCutout { get { return mWorldMapCutout; }
+        public static MapCutout WorldMapCutout
+        {
+            get { return mWorldMapCutout; }
         }
         public static void Init()
         {
@@ -51,7 +53,7 @@ namespace Server
             }
 
             mCityMapCutouts = new MapCutout[9];
-            
+
             mCityMapCutouts[0] = new MapCutout(4672, 0, new Rectangle2D(761, 772, 200, 200)); //pedran
             mCityMapCutouts[1] = new MapCutout(4673, 1, new Rectangle2D(516, 1263, 200, 200)); //lillano
             mCityMapCutouts[2] = new MapCutout(4674, 2, new Rectangle2D(700, 1700, 200, 200)); //bowan
@@ -71,8 +73,8 @@ namespace Server
         private int mGumpID;
         private Rectangle2D mRect;
 
-        public int GumpID { get { return mGumpID;} set { mGumpID = value; } }
-        public Rectangle2D Rect { get { return mRect;} set { mRect = value;} }
+        public int GumpID { get { return mGumpID; } set { mGumpID = value; } }
+        public Rectangle2D Rect { get { return mRect; } set { mRect = value; } }
         public int Index { get { return mIndex; } set { mIndex = value; } }
 
         public MapCutout(int gumpID, int index, Rectangle2D rect)

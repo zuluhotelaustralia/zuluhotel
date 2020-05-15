@@ -45,10 +45,10 @@ namespace Server.Mobiles
         {
             PackItem(new Longsword());
 
-	    AddLoot( LootPack.FilthyRich, 2 );
-	    AddLoot( LootPack.Rich );
-	    
-	    switch (Utility.Random(7))
+            AddLoot(LootPack.FilthyRich, 2);
+            AddLoot(LootPack.Rich);
+
+            switch (Utility.Random(7))
             {
                 case 0: AddItem(new RedCarpetSideOne()); break;
                 case 1: AddItem(new RedCarpetSideOne()); break;
@@ -57,7 +57,7 @@ namespace Server.Mobiles
                 case 4: AddItem(new RedCarpetCornerOne()); break;
                 case 5: AddItem(new RedCarpetCornerTwo()); break;
                 case 6: AddItem(new RedCarpetCenterThree()); break;
-     
+
             }
 
 

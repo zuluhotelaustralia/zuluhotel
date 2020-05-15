@@ -7,17 +7,17 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-    [CorpseName( "an orcish corpse" )]
+    [CorpseName("an orcish corpse")]
     public class OrcArcher : BaseCreature
     {
-	public override InhumanSpeech SpeechType{ get{ return InhumanSpeech.Orc; } }
+        public override InhumanSpeech SpeechType { get { return InhumanSpeech.Orc; } }
 
-	[Constructable]
-	public OrcArcher() : base( AIType.AI_Archer, FightMode.Closest, 10, 1, 0.2, 0.4 )
-	{
+        [Constructable]
+        public OrcArcher() : base(AIType.AI_Archer, FightMode.Closest, 10, 1, 0.2, 0.4)
+        {
             Name = "an orc archer";
             Body = 17;
-	    BaseSoundID = 0x45A;
+            BaseSoundID = 0x45A;
 
             SetStr(95, 100);
             SetDex(70, 80);
@@ -55,7 +55,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Average );
+            AddLoot(LootPack.Average);
         }
 
         public override bool CanRummageCorpses { get { return true; } }

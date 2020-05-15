@@ -3,18 +3,18 @@ using Server;
 
 namespace Server.Items
 {
-	public class RandomWand
-	{
-		public static BaseWand CreateWand()
-		{
-			return CreateRandomWand();
-		}
+    public class RandomWand
+    {
+        public static BaseWand CreateWand()
+        {
+            return CreateRandomWand();
+        }
 
-		public static BaseWand CreateRandomWand()
-		{
-			return Loot.RandomWand();
+        public static BaseWand CreateRandomWand()
+        {
+            return Loot.RandomWand();
 
-			/*
+            /*
 			switch ( Utility.Random( 11 ) )
 			{
 				default:
@@ -31,6 +31,6 @@ namespace Server.Items
 				case 10: return new WeaknessWand();
 			}
 			*/
-		}
-	}
+        }
+    }
 }

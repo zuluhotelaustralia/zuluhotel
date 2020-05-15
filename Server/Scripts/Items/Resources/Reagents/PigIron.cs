@@ -6,40 +6,40 @@ namespace Server.Items
 {
     public class PigIron : BaseReagent, ICommodity
     {
-	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
-	bool ICommodity.IsDeedable { get { return true; } }
+        int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
-	[Constructable]
-	public PigIron() : this( 1 )
-	{
-	}
+        [Constructable]
+        public PigIron() : this(1)
+        {
+        }
 
-	[Constructable]
-	public PigIron( int amount ) : base( 0xF8A, amount )
-	{
-	}
+        [Constructable]
+        public PigIron(int amount) : base(0xF8A, amount)
+        {
+        }
 
-	public PigIron( Serial serial ) : base( serial )
-	{
-	}
+        public PigIron(Serial serial) : base(serial)
+        {
+        }
 
-	public override double DefaultWeight
-	{
-	    get { return 0.1; }
-	}
+        public override double DefaultWeight
+        {
+            get { return 0.1; }
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	    writer.Write( (int) 0 ); // version
-	}
+            writer.Write((int)0); // version
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	    int version = reader.ReadInt();
-	}
+            int version = reader.ReadInt();
+        }
     }
 }

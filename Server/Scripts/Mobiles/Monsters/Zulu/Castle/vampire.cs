@@ -12,7 +12,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a vampire";
-            
+
             Body = Utility.RandomBool() ? 0x190 : 0x191;
             BaseSoundID = 412;
             Hue = 1882;
@@ -54,7 +54,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich );
+            AddLoot(LootPack.FilthyRich);
 
             PackItem(new Bone());
 

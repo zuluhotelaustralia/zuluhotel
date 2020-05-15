@@ -9,65 +9,65 @@ namespace Server.Mobiles
     public class FailedExperiment : BaseCreature
     {
         [Constructable]
-	public FailedExperiment() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
-	{
-	    Name = "a failed experiment";
-	    Body = 3;
+        public FailedExperiment() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+        {
+            Name = "a failed experiment";
+            Body = 3;
             Hue = 0x1CE;
-	    BaseSoundID = 471;
+            BaseSoundID = 471;
 
-	    SetStr( 46, 70 );
-	    SetDex( 31, 50 );
-	    SetInt( 26, 40 );
+            SetStr(46, 70);
+            SetDex(31, 50);
+            SetInt(26, 40);
 
-	    SetHits( 175, 200 );
+            SetHits(175, 200);
 
-	    SetDamage( 4, 8 );
+            SetDamage(4, 8);
 
             VirtualArmor = 5;
 
-            SetSkill( SkillName.Tactics, 100.0, 100.0);
+            SetSkill(SkillName.Tactics, 100.0, 100.0);
 
-	    SetSkill( SkillName.MagicResist, 15.0, 20.0 );	
-		
-	    SetSkill( SkillName.Wrestling, 35.0, 40.0 );
+            SetSkill(SkillName.MagicResist, 15.0, 20.0);
 
-	    Fame = 600;
-	    Karma = -600;			
-	}
+            SetSkill(SkillName.Wrestling, 35.0, 40.0);
 
-	public override void GenerateLoot()
-	{
-	    AddLoot( LootPack.Rich );
-	    
+            Fame = 600;
+            Karma = -600;
+        }
+
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.Rich);
+
             PackItem(Loot.RandomBodyPart());
             PackItem(Loot.RandomBodyPart());
             PackItem(Loot.RandomBodyPart());
             PackItem(Loot.RandomBodyPart());
-	}
+        }
 
-	public override bool BleedImmune{ get{ return true; } }
-	public override Poison PoisonImmune{ get{ return Poison.Regular; } }
+        public override bool BleedImmune { get { return true; } }
+        public override Poison PoisonImmune { get { return Poison.Regular; } }
 
-	public FailedExperiment( Serial serial ) : base( serial )
-	{
-	}
+        public FailedExperiment(Serial serial) : base(serial)
+        {
+        }
 
-	public override OppositionGroup OppositionGroup
-	{
-	    get{ return OppositionGroup.FeyAndUndead; }
-	}
+        public override OppositionGroup OppositionGroup
+        {
+            get { return OppositionGroup.FeyAndUndead; }
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
-	    writer.Write( (int) 0 );
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
-	    int version = reader.ReadInt();
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
     }
 }

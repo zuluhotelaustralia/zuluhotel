@@ -4,45 +4,45 @@ using Server;
 
 namespace Server.Mobiles
 {
-	public class Tailor : BaseVendor
-	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
+    public class Tailor : BaseVendor
+    {
+        private List<SBInfo> m_SBInfos = new List<SBInfo>();
+        protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
 
-		public override NpcGuild NpcGuild{ get{ return NpcGuild.TailorsGuild; } }
+        public override NpcGuild NpcGuild { get { return NpcGuild.TailorsGuild; } }
 
-		[Constructable]
-		public Tailor() : base( "the tailor" )
-		{
-			SetSkill( SkillName.Tailoring, 64.0, 100.0 );
-		}
+        [Constructable]
+        public Tailor() : base("the tailor")
+        {
+            SetSkill(SkillName.Tailoring, 64.0, 100.0);
+        }
 
-		public override void InitSBInfo()
-		{
-			m_SBInfos.Add( new SBTailor() );
-		}
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBTailor());
+        }
 
-		public override VendorShoeType ShoeType
-		{
-			get{ return Utility.RandomBool() ? VendorShoeType.Sandals : VendorShoeType.Shoes; }
-		}
+        public override VendorShoeType ShoeType
+        {
+            get { return Utility.RandomBool() ? VendorShoeType.Sandals : VendorShoeType.Shoes; }
+        }
 
-		public Tailor( Serial serial ) : base( serial )
-		{
-		}
+        public Tailor(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write((int)0); // version
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

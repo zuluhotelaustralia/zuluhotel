@@ -44,7 +44,7 @@ namespace Server.Mobiles
             AddItem(new Sandals(Utility.RandomNeutralHue()));
 
             AddItem(new BlackStaff());
-            
+
             Item Hood = new Hood();
             Hood.Movable = false;
             Hood.Hue = 1775;
@@ -54,14 +54,14 @@ namespace Server.Mobiles
             Robe.Movable = false;
             Robe.Hue = 1777;
             AddItem(Robe);
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich, 2 );
-	    AddLoot( LootPack.HighEarthScrolls );
-	    AddLoot( LootPack.LowEarthScrolls );
-	}
+            AddLoot(LootPack.Rich, 2);
+            AddLoot(LootPack.HighEarthScrolls);
+            AddLoot(LootPack.LowEarthScrolls);
+        }
 
         public override bool CanRummageCorpses { get { return true; } }
         public override bool AlwaysMurderer { get { return true; } }

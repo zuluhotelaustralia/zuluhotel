@@ -18,7 +18,7 @@ namespace Server.Mobiles
             }
         }
 
-        private static string[] RandomSpeech = new string[] 
+        private static string[] RandomSpeech = new string[]
         {
             "Oooh shiny",
             "That rock has been eyeing me all day",
@@ -58,8 +58,8 @@ namespace Server.Mobiles
                 this.Body = 0x190;
             }
 
-	    int clothinghue = Utility.RandomDyedHue();
-	    
+            int clothinghue = Utility.RandomDyedHue();
+
             Item shirt = new Shirt();
             shirt.Movable = false;
             shirt.Hue = clothinghue;
@@ -72,7 +72,7 @@ namespace Server.Mobiles
 
             Item pickaxe = new Pickaxe();
             pickaxe.Movable = false;
-	    AddItem(pickaxe);
+            AddItem(pickaxe);
 
             Item leathergloves = new LeatherGloves();
             leathergloves.Movable = false;
@@ -97,23 +97,23 @@ namespace Server.Mobiles
             VirtualArmor = 0;
 
             SetSkill(SkillName.Tactics, 100.0, 100.0); //Uses Weapon
-            
+
             SetSkill(SkillName.MagicResist, 30.0, 35.0);
 
             SetSkill(SkillName.Macing, 70.0, 75);
-            SetSkill(SkillName.Swords, 70.0, 75); 
+            SetSkill(SkillName.Swords, 70.0, 75);
 
             Fame = 3000;
             Karma = -3000;
 
             mTalkTimer = new TalkTimer(this, TimeSpan.FromMinutes(1.0), TimeSpan.FromMinutes(1.0));
             mTalkTimer.Start();
-        }       
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Average, 2 );
-	    
+            AddLoot(LootPack.Average, 2);
+
             PackItem(new IronOre());
             PackItem(new Shovel());
         }
@@ -147,11 +147,11 @@ namespace Server.Mobiles
             bool emote = Utility.RandomBool();
 
             int i = 0;
-            if(emote)
+            if (emote)
                 i = Utility.Random(RandomEmotes.Length);
             else
                 i = Utility.Random(RandomSpeech.Length);
-            if(emote && i < RandomEmotes.Length)
+            if (emote && i < RandomEmotes.Length)
             {
                 Emote(RandomEmotes[i]);
             }

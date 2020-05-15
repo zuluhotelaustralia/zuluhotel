@@ -31,7 +31,7 @@ namespace Server.Items
             int i = 0;
             foreach (MapCutout cutout in RelPorMapList.MapCutouts)
             {
-                if(cutout.Rect.Contains(new Point2D(x, y)))
+                if (cutout.Rect.Contains(new Point2D(x, y)))
                 {
                     break;
                 }
@@ -60,7 +60,7 @@ namespace Server.Items
                 mMapCutout = RelPorMapList.MapCutouts[i];
                 Bounds = mMapCutout.Rect;
             }
-            
+
         }
         public override void DisplayTo(Mobile from)
         {
@@ -69,23 +69,23 @@ namespace Server.Items
 
         public override void OnAddPin(Mobile from, int x, int y)
         {
-           
+
         }
         public override void OnRemovePin(Mobile from, int number)
         {
-            
+
         }
         public override void OnChangePin(Mobile from, int number, int x, int y)
         {
-            
+
         }
         public override void OnClearPins(Mobile from)
         {
-            
+
         }
         public override void OnToggleEditable(Mobile from)
         {
-            
+
         }
 
         public override void Serialize(GenericWriter writer)

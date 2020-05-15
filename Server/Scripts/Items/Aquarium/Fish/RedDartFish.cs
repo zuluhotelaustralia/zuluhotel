@@ -3,31 +3,31 @@ using Server;
 
 namespace Server.Items
 {
-	public class RedDartFish : BaseFish
-	{		
-		public override int LabelNumber{ get{ return 1073834; } } // A Red Dart Fish 
-		
-		[Constructable]
-		public RedDartFish() : base( 0x3B00 )
-		{
-		}
+    public class RedDartFish : BaseFish
+    {
+        public override int LabelNumber { get { return 1073834; } } // A Red Dart Fish 
 
-		public RedDartFish( Serial serial ) : base( serial )
-		{		
-		}
+        [Constructable]
+        public RedDartFish() : base(0x3B00)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public RedDartFish(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

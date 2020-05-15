@@ -1,48 +1,48 @@
-using System; 
-using System.Collections.Generic; 
-using Server; 
+using System;
+using System.Collections.Generic;
+using Server;
 
-namespace Server.Mobiles 
-{ 
-	public class InnKeeper : BaseVendor 
-	{ 
-		private List<SBInfo> m_SBInfos = new List<SBInfo>(); 
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } } 
+namespace Server.Mobiles
+{
+    public class InnKeeper : BaseVendor
+    {
+        private List<SBInfo> m_SBInfos = new List<SBInfo>();
+        protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
 
-		[Constructable]
-		public InnKeeper() : base( "the innkeeper" ) 
-		{ 
-		} 
+        [Constructable]
+        public InnKeeper() : base("the innkeeper")
+        {
+        }
 
-		public override void InitSBInfo() 
-		{ 
-			m_SBInfos.Add( new SBInnKeeper() ); 
-			
-			if ( IsTokunoVendor )
-				m_SBInfos.Add( new SBSEFood() );
-		} 
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBInnKeeper());
 
-		public override VendorShoeType ShoeType
-		{
-			get{ return Utility.RandomBool() ? VendorShoeType.Sandals : VendorShoeType.Shoes; }
-		}
+            if (IsTokunoVendor)
+                m_SBInfos.Add(new SBSEFood());
+        }
 
-		public InnKeeper( Serial serial ) : base( serial ) 
-		{ 
-		} 
+        public override VendorShoeType ShoeType
+        {
+            get { return Utility.RandomBool() ? VendorShoeType.Sandals : VendorShoeType.Shoes; }
+        }
 
-		public override void Serialize( GenericWriter writer ) 
-		{ 
-			base.Serialize( writer ); 
+        public InnKeeper(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version 
-		} 
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader ) 
-		{ 
-			base.Deserialize( reader ); 
+            writer.Write((int)0); // version 
+        }
 
-			int version = reader.ReadInt(); 
-		} 
-	} 
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

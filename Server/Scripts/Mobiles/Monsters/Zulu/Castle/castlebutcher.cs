@@ -71,7 +71,7 @@ namespace Server.Mobiles
             ShortPants.Hue = 2306;
             AddItem(ShortPants);
 
-            
+
 
             switch (Utility.Random(4))
             {
@@ -86,8 +86,8 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich );
-	    
+            AddLoot(LootPack.FilthyRich);
+
             PackItem(new RawRibs(5));
 
             PackItem(Loot.RandomBodyPart());

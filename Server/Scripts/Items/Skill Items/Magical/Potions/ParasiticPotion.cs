@@ -3,35 +3,35 @@ using Server;
 
 namespace Server.Items
 {
-	public class ParasiticPotion : BasePoisonPotion
-	{
-		public override Poison Poison{ get{ return Poison.Greater; } } 		/* public override Poison Poison{ get{ return Poison.Darkglow; } }  MUST be restored when prerequisites are done */
+    public class ParasiticPotion : BasePoisonPotion
+    {
+        public override Poison Poison { get { return Poison.Greater; } }        /* public override Poison Poison{ get{ return Poison.Darkglow; } }  MUST be restored when prerequisites are done */
 
-		public override double MinPoisoningSkill{ get{ return 95.0; } }
-		public override double MaxPoisoningSkill{ get{ return 100.0; } }
-		
-		[Constructable]
-		public ParasiticPotion() : base( PotionEffect.Parasitic )
-		{
-			Hue = 0x17C;
-		}
+        public override double MinPoisoningSkill { get { return 95.0; } }
+        public override double MaxPoisoningSkill { get { return 100.0; } }
 
-		public ParasiticPotion( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public ParasiticPotion() : base(PotionEffect.Parasitic)
+        {
+            Hue = 0x17C;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public ParasiticPotion(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

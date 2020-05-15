@@ -4,39 +4,39 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class AbyssalFlameScroll : SpellScroll
-	{
-            public override int LabelNumber { get { return 1060513; } }
-            
-		[Constructable]
-		public AbyssalFlameScroll() : this( 1 )
-		{
-		}
+    public class AbyssalFlameScroll : SpellScroll
+    {
+        public override int LabelNumber { get { return 1060513; } }
 
-		[Constructable]
-		public AbyssalFlameScroll( int amount ) : base( 104, 0x2260, amount )
-		{
-		    Hue = 0x66D;
-		}
+        [Constructable]
+        public AbyssalFlameScroll() : this(1)
+        {
+        }
 
-		public AbyssalFlameScroll( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public AbyssalFlameScroll(int amount) : base(104, 0x2260, amount)
+        {
+            Hue = 0x66D;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public AbyssalFlameScroll(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
 
 
-	}
+    }
 }

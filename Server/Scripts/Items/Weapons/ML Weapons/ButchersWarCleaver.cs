@@ -3,38 +3,38 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class ButchersWarCleaver : WarCleaver
-	{
-		public override int LabelNumber{ get{ return 1073526; } } // butcher's war cleaver
+    public class ButchersWarCleaver : WarCleaver
+    {
+        public override int LabelNumber { get { return 1073526; } } // butcher's war cleaver
 
-		[Constructable]
-		public ButchersWarCleaver() : base()
-		{
-		}
+        [Constructable]
+        public ButchersWarCleaver() : base()
+        {
+        }
 
-		public ButchersWarCleaver( Serial serial ) : base( serial )
-		{
-		}
-		
-		public override void AppendChildNameProperties( ObjectPropertyList list )
-		{
-			base.AppendChildNameProperties( list );
-			
-			list.Add( 1072512 ); // Bovine Slayer
-		}
+        public ButchersWarCleaver(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void AppendChildNameProperties(ObjectPropertyList list)
+        {
+            base.AppendChildNameProperties(list);
 
-			writer.WriteEncodedInt( 0 ); // version
-		}
+            list.Add(1072512); // Bovine Slayer
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadEncodedInt();
-		}
-	}
+            writer.WriteEncodedInt(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadEncodedInt();
+        }
+    }
 }

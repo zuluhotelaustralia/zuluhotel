@@ -30,13 +30,15 @@ namespace Server.Spells.Earth
             new Entry("a wisp", 0x3a, 0x2100, 120)
         };
 
-        public class Entry {
+        public class Entry
+        {
             public int BodyID;
             public int ArtID;
             public double Difficulty;
             public string Description;
 
-            public Entry( string desc, int artid, int bodyid, double difficulty ) {
+            public Entry(string desc, int artid, int bodyid, double difficulty)
+            {
                 BodyID = bodyid;
                 ArtID = artid;
                 Description = desc;
@@ -45,149 +47,156 @@ namespace Server.Spells.Earth
         }
 
         private static SpellInfo m_Info = new SpellInfo(
-							"Shapeshift", "Mude Minha Forma",
-							221,
-							9002,
-							typeof( WyrmsHeart ),
-							typeof( Blackmoor ),
-							typeof( BatWing ));
+                            "Shapeshift", "Mude Minha Forma",
+                            221,
+                            9002,
+                            typeof(WyrmsHeart),
+                            typeof(Blackmoor),
+                            typeof(BatWing));
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 3 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds(3); } }
 
-        public override double RequiredSkill {
-            get {
-                if ( m_NewBody == null ) return m_Entries[0].Difficulty;
+        public override double RequiredSkill
+        {
+            get
+            {
+                if (m_NewBody == null) return m_Entries[0].Difficulty;
                 return m_NewBody.Difficulty;
             }
         }
 
-        public override int RequiredMana{ get{ return 15; } }
+        public override int RequiredMana { get { return 15; } }
 
         private Entry m_NewBody = null;
 
-        public ShapeshiftSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
+        public ShapeshiftSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
         {
         }
 
-        public ShapeshiftSpell( Mobile caster, Item scroll, Entry entry ) : base ( caster, scroll, m_Info ) {
+        public ShapeshiftSpell(Mobile caster, Item scroll, Entry entry) : base(caster, scroll, m_Info)
+        {
             m_NewBody = entry;
         }
 
-        public override bool CheckCast() {
+        public override bool CheckCast()
+        {
 
-	    if( TransformationSpellHelper.UnderTransformation( Caster ) )
-	    {
-		Caster.SendLocalizedMessage( 1061633 ); // You cannot polymorph while in that form.
-		return false;
-	    }
-	    else if ( !Caster.CanBeginAction( typeof( ShapeshiftSpell ) ) )
-	    {
-		Caster.SendLocalizedMessage( 1005559 ); // This spell is already in effect.
-		return false;
-	    }
-	    else if ( DisguiseTimers.IsDisguised( Caster ) )
-	    {
-		Caster.SendLocalizedMessage( 502167 ); // You cannot polymorph while disguised.
-		return false;
-	    }
-	    else if ( Caster.BodyMod == 183 || Caster.BodyMod == 184 )
-	    {
-		Caster.SendLocalizedMessage( 1042512 ); // You cannot polymorph while wearing body paint
-		return false;
-	    }
-            else if ( m_NewBody == null ) {
-                Caster.SendGump( new ShapeshiftGump( Caster, Scroll, m_Entries ) );
+            if (TransformationSpellHelper.UnderTransformation(Caster))
+            {
+                Caster.SendLocalizedMessage(1061633); // You cannot polymorph while in that form.
+                return false;
+            }
+            else if (!Caster.CanBeginAction(typeof(ShapeshiftSpell)))
+            {
+                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
+                return false;
+            }
+            else if (DisguiseTimers.IsDisguised(Caster))
+            {
+                Caster.SendLocalizedMessage(502167); // You cannot polymorph while disguised.
+                return false;
+            }
+            else if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
+            {
+                Caster.SendLocalizedMessage(1042512); // You cannot polymorph while wearing body paint
+                return false;
+            }
+            else if (m_NewBody == null)
+            {
+                Caster.SendGump(new ShapeshiftGump(Caster, Scroll, m_Entries));
                 return false;
             }
             return true;
-	    
+
         }
 
         public override void OnCast()
         {
-            if ( ! CheckSequence() )
+            if (!CheckSequence())
             {
                 goto Return;
             }
 
-            if ( m_NewBody == null ) {
+            if (m_NewBody == null)
+            {
                 // This shouldn't happen.
                 goto Return;
             }
 
-	    if ( Caster.BeginAction( typeof( ShapeshiftSpell ) ) )
-	    {
-		if ( m_NewBody != null )
-		{
-		    // body and art IDs appear to be swapped in the struct
-		    if ( !((Body)m_NewBody.ArtID).IsHuman )
-		    {
-			Mobiles.IMount mt = Caster.Mount;
-			
-			if ( mt != null )
-			    mt.Rider = null;
-		    }
-		    
-		    Caster.BodyMod = m_NewBody.ArtID;
-		    
-		    if ( m_NewBody.ArtID == 400 || m_NewBody.ArtID == 401 )
-			Caster.HueMod = Utility.RandomSkinHue();
-		    else
-			Caster.HueMod = 0;
-		    
-		    BaseArmor.ValidateMobile( Caster );
-		    BaseClothing.ValidateMobile( Caster );
-		    			
-		    Timer t = new InternalTimer( Caster );
-		    t.Start();
-		}
-	    }
-	    else {
-		Caster.SendLocalizedMessage( 1005559 ); // This spell is already in effect.
-		goto Return;
-	    }
-	
-	Return:
+            if (Caster.BeginAction(typeof(ShapeshiftSpell)))
+            {
+                if (m_NewBody != null)
+                {
+                    // body and art IDs appear to be swapped in the struct
+                    if (!((Body)m_NewBody.ArtID).IsHuman)
+                    {
+                        Mobiles.IMount mt = Caster.Mount;
+
+                        if (mt != null)
+                            mt.Rider = null;
+                    }
+
+                    Caster.BodyMod = m_NewBody.ArtID;
+
+                    if (m_NewBody.ArtID == 400 || m_NewBody.ArtID == 401)
+                        Caster.HueMod = Utility.RandomSkinHue();
+                    else
+                        Caster.HueMod = 0;
+
+                    BaseArmor.ValidateMobile(Caster);
+                    BaseClothing.ValidateMobile(Caster);
+
+                    Timer t = new InternalTimer(Caster);
+                    t.Start();
+                }
+            }
+            else
+            {
+                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
+                goto Return;
+            }
+
+        Return:
             FinishSequence();
         }
 
-	private static void EndShapeshift( Mobile m )
-	{
-	    if( !m.CanBeginAction( typeof( ShapeshiftSpell ) ) )
-	    {
-		m.BodyMod = 0;
-		m.HueMod = -1;
-		m.EndAction( typeof( ShapeshiftSpell ) );
+        private static void EndShapeshift(Mobile m)
+        {
+            if (!m.CanBeginAction(typeof(ShapeshiftSpell)))
+            {
+                m.BodyMod = 0;
+                m.HueMod = -1;
+                m.EndAction(typeof(ShapeshiftSpell));
 
-		BaseArmor.ValidateMobile( m );
-		BaseClothing.ValidateMobile( m );
-	    }
-	}
+                BaseArmor.ValidateMobile(m);
+                BaseClothing.ValidateMobile(m);
+            }
+        }
 
-	private class InternalTimer : Timer
-	{
-	    private Mobile m_Owner;
+        private class InternalTimer : Timer
+        {
+            private Mobile m_Owner;
 
-	    public InternalTimer( Mobile owner ) : base( TimeSpan.FromSeconds( 0 ) )
-	    {
-		m_Owner = owner;
+            public InternalTimer(Mobile owner) : base(TimeSpan.FromSeconds(0))
+            {
+                m_Owner = owner;
 
-		int val = (int)owner.Skills[SkillName.Meditation].Value;
+                int val = (int)owner.Skills[SkillName.Meditation].Value;
 
-		val *= 5;
-		
-		if ( val > 300 )
-		    val = 300;
+                val *= 5;
 
-		Delay = TimeSpan.FromSeconds( val );
-		Priority = TimerPriority.OneSecond;
-	    }
+                if (val > 300)
+                    val = 300;
 
-	    protected override void OnTick()
-	    {
-		EndShapeshift( m_Owner );
-	    }
-	}
+                Delay = TimeSpan.FromSeconds(val);
+                Priority = TimerPriority.OneSecond;
+            }
+
+            protected override void OnTick()
+            {
+                EndShapeshift(m_Owner);
+            }
+        }
 
         public class ShapeshiftGump : Gump
         {
@@ -195,51 +204,58 @@ namespace Server.Spells.Earth
             Item m_Scroll;
             Entry[] m_Entries;
 
-            public ShapeshiftGump( Mobile caster, Item scroll, Entry[] entries ) : base( 50, 50 )
+            public ShapeshiftGump(Mobile caster, Item scroll, Entry[] entries) : base(50, 50)
             {
                 m_Caster = caster;
                 m_Scroll = scroll;
                 m_Entries = entries;
 
-                int x,y;
-                AddPage( 0 );
-                AddBackground( 0, 0, 400, 550, 5054 );
+                int x, y;
+                AddPage(0);
+                AddBackground(0, 0, 400, 550, 5054);
                 //AddBackground( 195, 36, 387, 275, 3000 );
-                AddHtmlLocalized( 0, 0, 400, 18, 1015234, false, false ); // <center>Polymorph Selection Menu</center>
-                AddHtmlLocalized( 60, 485, 150, 18, 1011036, false, false ); // OKAY
-                AddButton( 25, 485, 4005, 4007, 1, GumpButtonType.Reply, 1 );
-                AddHtmlLocalized( 235, 485, 150, 18, 1011012, false, false ); // CANCEL
-                AddButton( 200, 485, 4005, 4007, 0, GumpButtonType.Reply, 2 );
+                AddHtmlLocalized(0, 0, 400, 18, 1015234, false, false); // <center>Polymorph Selection Menu</center>
+                AddHtmlLocalized(60, 485, 150, 18, 1011036, false, false); // OKAY
+                AddButton(25, 485, 4005, 4007, 1, GumpButtonType.Reply, 1);
+                AddHtmlLocalized(235, 485, 150, 18, 1011012, false, false); // CANCEL
+                AddButton(200, 485, 4005, 4007, 0, GumpButtonType.Reply, 2);
 
                 y = 35;
                 // TODO: This gump is probably trash, test it.
-		// yeah it's trash let's fix that
-                for ( int i = 0 ; i < entries.Length ; i++ ) {
+                // yeah it's trash let's fix that
+                for (int i = 0; i < entries.Length; i++)
+                {
                     Entry entry = entries[i];
 
-		    if( i > 7 ){
-			x = 200;
-		    }
-		    else{
-			x = 25;
-		    }
-		    if( i == 8 ){
-			y = 35;
-		    }
-        
-                    AddHtml(  x,      y, 120, 18, entry.Description, false, false );
-                    AddItem(  x + 80, y, entry.BodyID );
-                    AddRadio( x,      y + 20, 210, 211, false, i );
+                    if (i > 7)
+                    {
+                        x = 200;
+                    }
+                    else
+                    {
+                        x = 25;
+                    }
+                    if (i == 8)
+                    {
+                        y = 35;
+                    }
 
-		    y += 50;
-	        }
+                    AddHtml(x, y, 120, 18, entry.Description, false, false);
+                    AddItem(x + 80, y, entry.BodyID);
+                    AddRadio(x, y + 20, 210, 211, false, i);
+
+                    y += 50;
+                }
             }
 
-            public override void OnResponse( NetState state, RelayInfo info ) {
-                if ( info.ButtonID == 1 && info.Switches.Length > 0 ) {
+            public override void OnResponse(NetState state, RelayInfo info)
+            {
+                if (info.ButtonID == 1 && info.Switches.Length > 0)
+                {
                     int ent = info.Switches[0];
-                    if ( ent >= 0 && ent < m_Entries.Length ) {
-                        new ShapeshiftSpell( m_Caster, m_Scroll, m_Entries[ent] ).Cast();
+                    if (ent >= 0 && ent < m_Entries.Length)
+                    {
+                        new ShapeshiftSpell(m_Caster, m_Scroll, m_Entries[ent]).Cast();
                     }
                 }
             }

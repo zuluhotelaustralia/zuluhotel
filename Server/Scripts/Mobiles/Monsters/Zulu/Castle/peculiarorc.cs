@@ -39,7 +39,7 @@ namespace Server.Mobiles
             Fame = 1500;
             Karma = -1500;
 
-            Item blackcloth = new OrcishKinMask ();
+            Item blackcloth = new OrcishKinMask();
             blackcloth.Movable = true;
             blackcloth.Hue = 0;
             AddItem(blackcloth);
@@ -47,7 +47,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Meager );
+            AddLoot(LootPack.Meager);
         }
 
         public override bool CanRummageCorpses { get { return true; } }

@@ -86,7 +86,7 @@ namespace Server.Mobiles
             LeatherGorget.Hue = 1755;
             AddItem(LeatherGorget);
 
-            Item WideBrimHat = new WideBrimHat ();
+            Item WideBrimHat = new WideBrimHat();
             WideBrimHat.Movable = false;
             WideBrimHat.Hue = 1755;
             AddItem(WideBrimHat);
@@ -102,8 +102,8 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich );
-	}
+            AddLoot(LootPack.Rich);
+        }
 
         public override bool AlwaysMurderer { get { return true; } }
 

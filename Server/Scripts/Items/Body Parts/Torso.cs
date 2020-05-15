@@ -3,30 +3,30 @@ using Server;
 
 namespace Server.Items
 {
-	public class Torso : Item
-	{
-		[Constructable]
-		public Torso() : base( 0x1D9F )
-		{
-			Weight = 2.0;
-		}
+    public class Torso : Item
+    {
+        [Constructable]
+        public Torso() : base(0x1D9F)
+        {
+            Weight = 2.0;
+        }
 
-		public Torso( Serial serial ) : base( serial )
-		{
-		}
+        public Torso(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write((int)0); // version
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

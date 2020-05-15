@@ -2,9 +2,9 @@ using System;
 
 namespace Server.Items
 {
-	public abstract class Beard : Item
-	{
-		/*public static Beard CreateByID( int id, int hue )
+    public abstract class Beard : Item
+    {
+        /*public static Beard CreateByID( int id, int hue )
 		{
 			switch ( id )
 			{
@@ -19,312 +19,312 @@ namespace Server.Items
 			}
 		}*/
 
-		protected Beard( int itemID ) : this( itemID, 0 )
-		{
-		}
-
-		protected Beard( int itemID, int hue ) : base( itemID )
-		{
-			LootType = LootType.Blessed;
-			Layer = Layer.FacialHair;
-			Hue = hue;
-		}
-
-		public Beard( Serial serial ) : base( serial )
-		{
-		}
-
-		public override bool DisplayLootType{ get{ return false; } }
-
-		public override bool VerifyMove( Mobile from )
-		{
-			return ( from.AccessLevel >= AccessLevel.GameMaster );
-		}
-
-		public override DeathMoveResult OnParentDeath( Mobile parent )
-		{
-			//Dupe( Amount );
-
-			parent.FacialHairItemID = this.ItemID;
-			parent.FacialHairHue = this.Hue;
-
-			return DeathMoveResult.MoveToCorpse;
-		}
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
-			LootType = LootType.Blessed;
-
-			int version = reader.ReadInt();
-		}
-	}
+        protected Beard(int itemID) : this(itemID, 0)
+        {
+        }
 
-	public class GenericBeard : Beard
-	{
-		
-		private GenericBeard( int itemID ) : this( itemID, 0 )
-		{
-		}
+        protected Beard(int itemID, int hue) : base(itemID)
+        {
+            LootType = LootType.Blessed;
+            Layer = Layer.FacialHair;
+            Hue = hue;
+        }
 
-		
-		private GenericBeard( int itemID, int hue ) : base( itemID, hue )
-		{
-		}
+        public Beard(Serial serial) : base(serial)
+        {
+        }
 
-		public GenericBeard( Serial serial ) : base( serial )
-		{
-		}
+        public override bool DisplayLootType { get { return false; } }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override bool VerifyMove(Mobile from)
+        {
+            return (from.AccessLevel >= AccessLevel.GameMaster);
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override DeathMoveResult OnParentDeath(Mobile parent)
+        {
+            //Dupe( Amount );
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            parent.FacialHairItemID = this.ItemID;
+            parent.FacialHairHue = this.Hue;
 
-			int version = reader.ReadInt();
-		}
-	}
+            return DeathMoveResult.MoveToCorpse;
+        }
 
-	public class LongBeard : Beard
-	{
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		private LongBeard()
-			: this( 0 )
-		{
-		}
+            writer.Write((int)0); // version
+        }
 
-		private LongBeard( int hue )
-			: base( 0x203E, hue )
-		{
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            LootType = LootType.Blessed;
 
-		public LongBeard( Serial serial ) : base( serial )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+    public class GenericBeard : Beard
+    {
 
-			writer.Write( (int) 0 ); // version
-		}
+        private GenericBeard(int itemID) : this(itemID, 0)
+        {
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
 
-			int version = reader.ReadInt();
-		}
-	}
+        private GenericBeard(int itemID, int hue) : base(itemID, hue)
+        {
+        }
 
-	public class ShortBeard : Beard
-	{
+        public GenericBeard(Serial serial) : base(serial)
+        {
+        }
 
-		private ShortBeard()
-			: this( 0 )
-		{
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
+            writer.Write((int)0); // version
+        }
 
-		private ShortBeard( int hue )
-			: base( 0x203f, hue )
-		{
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public ShortBeard( Serial serial ) : base( serial )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+    public class LongBeard : Beard
+    {
 
-			writer.Write( (int) 0 ); // version
-		}
+        private LongBeard()
+            : this(0)
+        {
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        private LongBeard(int hue)
+            : base(0x203E, hue)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public LongBeard(Serial serial) : base(serial)
+        {
+        }
 
-	public class Goatee : Beard
-	{
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		private Goatee()
-			: this( 0 )
-		{
-		}
+            writer.Write((int)0); // version
+        }
 
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		private Goatee( int hue )
-			: base( 0x2040, hue )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public Goatee( Serial serial ) : base( serial )
-		{
-		}
+    public class ShortBeard : Beard
+    {
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        private ShortBeard()
+            : this(0)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        private ShortBeard(int hue)
+            : base(0x203f, hue)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public ShortBeard(Serial serial) : base(serial)
+        {
+        }
 
-	public class Mustache : Beard
-	{
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		private Mustache()
-			: this( 0 )
-		{
-		}
+            writer.Write((int)0); // version
+        }
 
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		private Mustache( int hue )
-			: base( 0x2041, hue )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public Mustache( Serial serial ) : base( serial )
-		{
-		}
+    public class Goatee : Beard
+    {
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        private Goatee()
+            : this(0)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        private Goatee(int hue)
+            : base(0x2040, hue)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public Goatee(Serial serial) : base(serial)
+        {
+        }
 
-	public class MediumShortBeard : Beard
-	{
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		private MediumShortBeard()
-			: this( 0 )
-		{
-		}
+            writer.Write((int)0); // version
+        }
 
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		private MediumShortBeard( int hue )
-			: base( 0x204B, hue )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public MediumShortBeard( Serial serial ) : base( serial )
-		{
-		}
+    public class Mustache : Beard
+    {
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        private Mustache()
+            : this(0)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        private Mustache(int hue)
+            : base(0x2041, hue)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public Mustache(Serial serial) : base(serial)
+        {
+        }
 
-	public class MediumLongBeard : Beard
-	{
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		private MediumLongBeard()
-			: this( 0 )
-		{
-		}
+            writer.Write((int)0); // version
+        }
 
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		private MediumLongBeard( int hue )
-			: base( 0x204C, hue )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public MediumLongBeard( Serial serial ) : base( serial )
-		{
-		}
+    public class MediumShortBeard : Beard
+    {
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        private MediumShortBeard()
+            : this(0)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        private MediumShortBeard(int hue)
+            : base(0x204B, hue)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public MediumShortBeard(Serial serial) : base(serial)
+        {
+        }
 
-	public class Vandyke : Beard
-	{
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		private Vandyke()
-			: this( 0 )
-		{
-		}
+            writer.Write((int)0); // version
+        }
 
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		private Vandyke( int hue )
-			: base( 0x204D, hue )
-		{
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public Vandyke( Serial serial ) : base( serial )
-		{
-		}
+    public class MediumLongBeard : Beard
+    {
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        private MediumLongBeard()
+            : this(0)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        private MediumLongBeard(int hue)
+            : base(0x204C, hue)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public MediumLongBeard(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class Vandyke : Beard
+    {
+
+        private Vandyke()
+            : this(0)
+        {
+        }
+
+
+        private Vandyke(int hue)
+            : base(0x204D, hue)
+        {
+        }
+
+        public Vandyke(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

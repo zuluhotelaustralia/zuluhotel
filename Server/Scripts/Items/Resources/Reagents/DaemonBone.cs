@@ -7,37 +7,37 @@ namespace Server.Items
     // TODO: Commodity?
     public class DaemonBone : BaseReagent
     {
-	[Constructable]
-	public DaemonBone() : this( 1 )
-	{
-	}
+        [Constructable]
+        public DaemonBone() : this(1)
+        {
+        }
 
-	[Constructable]
-	public DaemonBone( int amount ) : base( 0xF80, amount )
-	{
-	}
+        [Constructable]
+        public DaemonBone(int amount) : base(0xF80, amount)
+        {
+        }
 
-	public DaemonBone( Serial serial ) : base( serial )
-	{
-	}
+        public DaemonBone(Serial serial) : base(serial)
+        {
+        }
 
-	public override double DefaultWeight
-	{
-	    get { return 0.1; }
-	}
+        public override double DefaultWeight
+        {
+            get { return 0.1; }
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	    writer.Write( (int) 0 ); // version
-	}
+            writer.Write((int)0); // version
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	    int version = reader.ReadInt();
-	}
+            int version = reader.ReadInt();
+        }
     }
 }

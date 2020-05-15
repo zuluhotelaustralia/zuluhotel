@@ -41,7 +41,7 @@ namespace Server.Mobiles
             Karma = -2500;
 
             AddItem(new Sandals(Utility.RandomNeutralHue()));
-            
+
             Item Robe = new Robe();
             Robe.Movable = false;
             Robe.Hue = 2306;
@@ -55,9 +55,9 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich );
-	    AddLoot( LootPack.HighScrolls );
-            PackItem(new BlankScroll ());
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.HighScrolls);
+            PackItem(new BlankScroll());
         }
 
         public override bool CanRummageCorpses { get { return true; } }

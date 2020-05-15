@@ -6,169 +6,169 @@ using Server.Spells.Necromancy;
 
 namespace Server.Spells
 {
-	public class SpellRegistry
-	{
-		private static Type[] m_Types = new Type[700];
-		private static int m_Count;
+    public class SpellRegistry
+    {
+        private static Type[] m_Types = new Type[700];
+        private static int m_Count;
 
-		public static Type[] Types
-		{
-			get
-			{
-				m_Count = -1;
-				return m_Types;
-			}
-		}
-		
-		//What IS this used for anyways.
-		public static int Count
-		{
-			get
-			{
-				if ( m_Count == -1 )
-				{
-					m_Count = 0;
+        public static Type[] Types
+        {
+            get
+            {
+                m_Count = -1;
+                return m_Types;
+            }
+        }
 
-					for ( int i = 0; i < m_Types.Length; ++i )
-						if ( m_Types[i] != null )
-							++m_Count;
-				}
+        //What IS this used for anyways.
+        public static int Count
+        {
+            get
+            {
+                if (m_Count == -1)
+                {
+                    m_Count = 0;
 
-				return m_Count;
-			}
-		}
+                    for (int i = 0; i < m_Types.Length; ++i)
+                        if (m_Types[i] != null)
+                            ++m_Count;
+                }
 
-		private static Dictionary<Type, Int32> m_IDsFromTypes = new Dictionary<Type, Int32>( m_Types.Length );
-		
-		private static Dictionary<Int32, SpecialMove> m_SpecialMoves = new Dictionary<Int32, SpecialMove>();
-		public static Dictionary<Int32, SpecialMove> SpecialMoves { get { return m_SpecialMoves; } }
+                return m_Count;
+            }
+        }
 
-		public static int GetRegistryNumber( ISpell s )
-		{
-			return GetRegistryNumber( s.GetType() );
-		}
+        private static Dictionary<Type, Int32> m_IDsFromTypes = new Dictionary<Type, Int32>(m_Types.Length);
 
-		public static int GetRegistryNumber( SpecialMove s )
-		{
-			return GetRegistryNumber( s.GetType() );
-		}
+        private static Dictionary<Int32, SpecialMove> m_SpecialMoves = new Dictionary<Int32, SpecialMove>();
+        public static Dictionary<Int32, SpecialMove> SpecialMoves { get { return m_SpecialMoves; } }
 
-		public static int GetRegistryNumber( Type type )
-		{
-			if( m_IDsFromTypes.ContainsKey( type ) )
-				return m_IDsFromTypes[type];
+        public static int GetRegistryNumber(ISpell s)
+        {
+            return GetRegistryNumber(s.GetType());
+        }
 
-			return -1;
-		}
+        public static int GetRegistryNumber(SpecialMove s)
+        {
+            return GetRegistryNumber(s.GetType());
+        }
 
-		public static void Register( int spellID, Type type )
-		{
-			if ( spellID < 0 || spellID >= m_Types.Length )
-				return;
+        public static int GetRegistryNumber(Type type)
+        {
+            if (m_IDsFromTypes.ContainsKey(type))
+                return m_IDsFromTypes[type];
 
-			if ( m_Types[spellID] == null )
-				++m_Count;
+            return -1;
+        }
 
-			m_Types[spellID] = type;
+        public static void Register(int spellID, Type type)
+        {
+            if (spellID < 0 || spellID >= m_Types.Length)
+                return;
 
-			if( !m_IDsFromTypes.ContainsKey( type ) )
-				m_IDsFromTypes.Add( type, spellID );
+            if (m_Types[spellID] == null)
+                ++m_Count;
 
-			if( type.IsSubclassOf( typeof( SpecialMove ) ) )
-			{
-				SpecialMove spm = null;
+            m_Types[spellID] = type;
 
-				try
-				{
-					spm = Activator.CreateInstance( type ) as SpecialMove;
-				}
-				catch
-				{
-				}
+            if (!m_IDsFromTypes.ContainsKey(type))
+                m_IDsFromTypes.Add(type, spellID);
 
-				if( spm != null )
-					m_SpecialMoves.Add( spellID, spm );
-			}
-		}
+            if (type.IsSubclassOf(typeof(SpecialMove)))
+            {
+                SpecialMove spm = null;
 
-		public static SpecialMove GetSpecialMove( int spellID )
-		{
-			if ( spellID < 0 || spellID >= m_Types.Length )
-				return null;
+                try
+                {
+                    spm = Activator.CreateInstance(type) as SpecialMove;
+                }
+                catch
+                {
+                }
 
-			Type t = m_Types[spellID];
+                if (spm != null)
+                    m_SpecialMoves.Add(spellID, spm);
+            }
+        }
 
-			if ( t == null || !t.IsSubclassOf( typeof( SpecialMove ) ) || !m_SpecialMoves.ContainsKey( spellID ) )
-				return null;
+        public static SpecialMove GetSpecialMove(int spellID)
+        {
+            if (spellID < 0 || spellID >= m_Types.Length)
+                return null;
 
-			return m_SpecialMoves[spellID];
-		}
+            Type t = m_Types[spellID];
 
-		private static object[] m_Params = new object[2];
+            if (t == null || !t.IsSubclassOf(typeof(SpecialMove)) || !m_SpecialMoves.ContainsKey(spellID))
+                return null;
 
-		public static Spell NewSpell( int spellID, Mobile caster, Item scroll )
-		{
-			if ( spellID < 0 || spellID >= m_Types.Length )
-				return null;
+            return m_SpecialMoves[spellID];
+        }
 
-			Type t = m_Types[spellID];
+        private static object[] m_Params = new object[2];
 
-			if( t != null && !t.IsSubclassOf( typeof( SpecialMove ) ) )
-			{
-				m_Params[0] = caster;
-				m_Params[1] = scroll;
+        public static Spell NewSpell(int spellID, Mobile caster, Item scroll)
+        {
+            if (spellID < 0 || spellID >= m_Types.Length)
+                return null;
 
-				try
-				{
-					return (Spell)Activator.CreateInstance( t, m_Params );
-				}
-				catch
-				{
-				}
-			}
+            Type t = m_Types[spellID];
 
-			return null;
-		}
+            if (t != null && !t.IsSubclassOf(typeof(SpecialMove)))
+            {
+                m_Params[0] = caster;
+                m_Params[1] = scroll;
 
-		private static string[] m_CircleNames = new string[]
-			{
-				"First",
-				"Second",
-				"Third",
-				"Fourth",
-				"Fifth",
-				"Sixth",
-				"Seventh",
-				"Eighth",
-				"Necromancy",
-				"Chivalry",
-				"Bushido",
-				"Ninjitsu",
-				"Earth"
-			};
+                try
+                {
+                    return (Spell)Activator.CreateInstance(t, m_Params);
+                }
+                catch
+                {
+                }
+            }
 
-		public static Spell NewSpell( string name, Mobile caster, Item scroll )
-		{
-			for ( int i = 0; i < m_CircleNames.Length; ++i )
-			{
-				Type t = ScriptCompiler.FindTypeByFullName( String.Format( "Server.Spells.{0}.{1}", m_CircleNames[i], name ) );
+            return null;
+        }
 
-				if ( t != null && !t.IsSubclassOf( typeof( SpecialMove ) ) )
-				{
-					m_Params[0] = caster;
-					m_Params[1] = scroll;
+        private static string[] m_CircleNames = new string[]
+            {
+                "First",
+                "Second",
+                "Third",
+                "Fourth",
+                "Fifth",
+                "Sixth",
+                "Seventh",
+                "Eighth",
+                "Necromancy",
+                "Chivalry",
+                "Bushido",
+                "Ninjitsu",
+                "Earth"
+            };
 
-					try
-					{
-						return (Spell)Activator.CreateInstance( t, m_Params );
-					}
-					catch
-					{
-					}
-				}
-			}
+        public static Spell NewSpell(string name, Mobile caster, Item scroll)
+        {
+            for (int i = 0; i < m_CircleNames.Length; ++i)
+            {
+                Type t = ScriptCompiler.FindTypeByFullName(String.Format("Server.Spells.{0}.{1}", m_CircleNames[i], name));
 
-			return null;
-		}
-	}
+                if (t != null && !t.IsSubclassOf(typeof(SpecialMove)))
+                {
+                    m_Params[0] = caster;
+                    m_Params[1] = scroll;
+
+                    try
+                    {
+                        return (Spell)Activator.CreateInstance(t, m_Params);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+
+            return null;
+        }
+    }
 }

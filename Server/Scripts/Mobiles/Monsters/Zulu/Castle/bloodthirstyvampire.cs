@@ -22,17 +22,17 @@ namespace Server.Mobiles
             switch (Utility.Random(2))
             {
                 case 0:
-                    sounds = 0x286; 
+                    sounds = 0x286;
                     break;
 
                 case 1:
-                    sounds = 0x288; 
+                    sounds = 0x288;
                     break;
             }
 
             BaseSoundID = sounds;
 
-            
+
             SetStr(500, 550);
             SetDex(110, 115);
             SetInt(1800, 2000);
@@ -70,7 +70,7 @@ namespace Server.Mobiles
             {
                 case 0:
                     {
-                        AddItem(new Dagger ());
+                        AddItem(new Dagger());
                     }
                     break;
 
@@ -87,7 +87,7 @@ namespace Server.Mobiles
                     break;
 
 
-            } 
+            }
         }
 
         public override bool AlwaysMurderer { get { return true; } }
@@ -96,12 +96,12 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich );
-	    
+            AddLoot(LootPack.FilthyRich);
+
             PackItem(new BonePile());
 
             if (0.01 > Utility.RandomDouble())
-		PackItem(new EmptyVialsWRack ());
+                PackItem(new EmptyVialsWRack());
         }
 
         public override bool CanRummageCorpses { get { return true; } }

@@ -3,18 +3,18 @@ using Server;
 using Server.Misc;
 using Server.Items;
 
-namespace Server.Mobiles 
-{ 
-    [CorpseName( "an evil mage corpse" )] 
-    public class EvilMageRobed : BaseCreature 
-    { 
-	[Constructable] 
-	public EvilMageRobed() : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4 ) 
-	{ 
-	    Name = NameList.RandomName( "evil mage" );
-	    Title = "the evil mage";
-	    Body = 0x190;
-	    Hue = Utility.RandomSkinHue();
+namespace Server.Mobiles
+{
+    [CorpseName("an evil mage corpse")]
+    public class EvilMageRobed : BaseCreature
+    {
+        [Constructable]
+        public EvilMageRobed() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
+        {
+            Name = NameList.RandomName("evil mage");
+            Title = "the evil mage";
+            Body = 0x190;
+            Hue = Utility.RandomSkinHue();
 
             SetStr(95, 100);
             SetDex(40, 45);
@@ -35,46 +35,46 @@ namespace Server.Mobiles
 
             SetSkill(SkillName.Wrestling, 60.0, 65.0);
 
-	    Fame = 2500;
-	    Karma = -2500;
-			
-	    AddItem( new Sandals( Utility.RandomNeutralHue() ) );
+            Fame = 2500;
+            Karma = -2500;
 
-	    Item WizardsHat = new WizardsHat();
-	    WizardsHat.Movable = false;
-	    WizardsHat.Hue = Utility.RandomBlueHue();
-	    AddItem( WizardsHat );
+            AddItem(new Sandals(Utility.RandomNeutralHue()));
 
-	    Item Robe = new Robe();
-	    Robe.Movable = false;
-	    Robe.Hue = Utility.RandomBlueHue();
-	    AddItem( Robe );
-	}		 
+            Item WizardsHat = new WizardsHat();
+            WizardsHat.Movable = false;
+            WizardsHat.Hue = Utility.RandomBlueHue();
+            AddItem(WizardsHat);
 
-	public override void GenerateLoot()
-	{
-	    AddLoot( LootPack.Rich );
-	    AddLoot( LootPack.HighScrolls, 3 );
-	}
+            Item Robe = new Robe();
+            Robe.Movable = false;
+            Robe.Hue = Utility.RandomBlueHue();
+            AddItem(Robe);
+        }
 
-	public override bool CanRummageCorpses{ get{ return true; } }
-	public override bool AlwaysMurderer{ get{ return true; } }
-	public override int Meat{ get{ return 1; } }
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.HighScrolls, 3);
+        }
 
-	public EvilMageRobed( Serial serial ) : base( serial )
-	{
-	}
+        public override bool CanRummageCorpses { get { return true; } }
+        public override bool AlwaysMurderer { get { return true; } }
+        public override int Meat { get { return 1; } }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
-	    writer.Write( (int) 0 );
-	}
+        public EvilMageRobed(Serial serial) : base(serial)
+        {
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
-	    int version = reader.ReadInt();
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
     }
 }

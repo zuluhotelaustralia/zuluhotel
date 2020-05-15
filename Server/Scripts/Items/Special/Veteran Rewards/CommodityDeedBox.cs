@@ -3,67 +3,67 @@ using Server;
 using Server.Engines.VeteranRewards;
 
 namespace Server.Items
-{	
-	[Furniture]
-	public class CommodityDeedBox : BaseContainer, IRewardItem
-	{
-		public override int LabelNumber{ get { return 1080523; } } // Commodity Deed Box
-		public override int DefaultGumpID{ get{ return 0x43; } }
+{
+    [Furniture]
+    public class CommodityDeedBox : BaseContainer, IRewardItem
+    {
+        public override int LabelNumber { get { return 1080523; } } // Commodity Deed Box
+        public override int DefaultGumpID { get { return 0x43; } }
 
-		private bool m_IsRewardItem;
+        private bool m_IsRewardItem;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public bool IsRewardItem
-		{
-			get{ return m_IsRewardItem; }
-			set{ m_IsRewardItem = value; InvalidateProperties(); }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool IsRewardItem
+        {
+            get { return m_IsRewardItem; }
+            set { m_IsRewardItem = value; InvalidateProperties(); }
+        }
 
-		[Constructable]
-		public CommodityDeedBox() : base( 0x9AA )
-		{
-			Hue = 0x47;
-			Weight = 4.0;
-		}
+        [Constructable]
+        public CommodityDeedBox() : base(0x9AA)
+        {
+            Hue = 0x47;
+            Weight = 4.0;
+        }
 
-		public CommodityDeedBox( Serial serial ) : base( serial )
-		{
-		}
-		
-		public override void GetProperties( ObjectPropertyList list )
-		{
-			base.GetProperties( list );
-			
-			if ( m_IsRewardItem )
-				list.Add( 1076217 ); // 1st Year Veteran Reward		
-		}
+        public CommodityDeedBox(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void GetProperties(ObjectPropertyList list)
+        {
+            base.GetProperties(list);
 
-			writer.WriteEncodedInt( 0 ); // version
+            if (m_IsRewardItem)
+                list.Add(1076217); // 1st Year Veteran Reward		
+        }
 
-			writer.Write( (bool) m_IsRewardItem );
-		}
-			
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadEncodedInt();
+            writer.WriteEncodedInt(0); // version
 
-			m_IsRewardItem = reader.ReadBool();
-		}
+            writer.Write((bool)m_IsRewardItem);
+        }
 
-		public static CommodityDeedBox Find( Item deed )
-		{
-			Item parent = deed;
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			while ( parent != null && !( parent is CommodityDeedBox ) )
-				parent = parent.Parent as Item;
+            int version = reader.ReadEncodedInt();
 
-			return parent as CommodityDeedBox;
-		}
-	}	
+            m_IsRewardItem = reader.ReadBool();
+        }
+
+        public static CommodityDeedBox Find(Item deed)
+        {
+            Item parent = deed;
+
+            while (parent != null && !(parent is CommodityDeedBox))
+                parent = parent.Parent as Item;
+
+            return parent as CommodityDeedBox;
+        }
+    }
 }

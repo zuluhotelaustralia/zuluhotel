@@ -4,39 +4,39 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class SummonSpiritScroll : SpellScroll
-	{
-            public override int LabelNumber { get { return 1060518; } }
-            
-		[Constructable]
-		public SummonSpiritScroll() : this( 1 )
-		{
-		}
+    public class SummonSpiritScroll : SpellScroll
+    {
+        public override int LabelNumber { get { return 1060518; } }
 
-		[Constructable]
-		public SummonSpiritScroll( int amount ) : base( 109, 0x2260, amount )
-		{
-		    Hue = 0x66D;
-		}
+        [Constructable]
+        public SummonSpiritScroll() : this(1)
+        {
+        }
 
-		public SummonSpiritScroll( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public SummonSpiritScroll(int amount) : base(109, 0x2260, amount)
+        {
+            Hue = 0x66D;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public SummonSpiritScroll(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
 
 
-	}
+    }
 }

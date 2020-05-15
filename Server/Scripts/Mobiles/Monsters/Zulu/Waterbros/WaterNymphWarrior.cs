@@ -41,7 +41,7 @@ namespace Server.Mobiles
             sandals.Movable = false;
             sandals.Hue = 1410;
             AddItem(sandals);
-            
+
             Item qstaff = new QuarterStaff();
             qstaff.Movable = false;
             qstaff.Hue = 1410;
@@ -59,20 +59,20 @@ namespace Server.Mobiles
 
             VirtualArmor = 0;
 
-            SetSkill(SkillName.Tactics, 100.0, 100.0); 
-            
+            SetSkill(SkillName.Tactics, 100.0, 100.0);
+
             SetSkill(SkillName.MagicResist, 195.0, 200.0);
 
             SetSkill(SkillName.Macing, 70.0, 75.0);
 
             Fame = 2500;
             Karma = -2500;
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich, 2 );
-	    AddLoot( LootPack.LowEarthScrolls );
+            AddLoot(LootPack.Rich, 2);
+            AddLoot(LootPack.LowEarthScrolls);
         }
 
         public override bool CanRummageCorpses { get { return true; } }

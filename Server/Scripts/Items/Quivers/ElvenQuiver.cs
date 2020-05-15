@@ -3,33 +3,33 @@ using Server;
 
 namespace Server.Items
 {
-	[FlipableAttribute( 0x2FB7, 0x3171 )]
-	public class ElvenQuiver : BaseQuiver
-	{
-		public override int LabelNumber{ get{ return 1032657; } } // elven quiver
-		
-		[Constructable]
-		public ElvenQuiver() : base()
-		{
-			WeightReduction = 30;
-		}
+    [FlipableAttribute(0x2FB7, 0x3171)]
+    public class ElvenQuiver : BaseQuiver
+    {
+        public override int LabelNumber { get { return 1032657; } } // elven quiver
 
-		public ElvenQuiver( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public ElvenQuiver() : base()
+        {
+            WeightReduction = 30;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public ElvenQuiver(Serial serial) : base(serial)
+        {
+        }
 
-			writer.WriteEncodedInt( 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.WriteEncodedInt(0); // version
+        }
 
-			int version = reader.ReadEncodedInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadEncodedInt();
+        }
+    }
 }

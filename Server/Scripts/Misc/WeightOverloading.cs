@@ -4,120 +4,120 @@ using Server.Mobiles;
 
 namespace Server.Misc
 {
-	public enum DFAlgorithm
-	{
-		Standard,
-		PainSpike
-	}
+    public enum DFAlgorithm
+    {
+        Standard,
+        PainSpike
+    }
 
-	public class WeightOverloading
-	{
-		public static void Initialize()
-		{
-			EventSink.Movement += new MovementEventHandler( EventSink_Movement );
-		}
+    public class WeightOverloading
+    {
+        public static void Initialize()
+        {
+            EventSink.Movement += new MovementEventHandler(EventSink_Movement);
+        }
 
-		private static DFAlgorithm m_DFA;
+        private static DFAlgorithm m_DFA;
 
-		public static DFAlgorithm DFA
-		{
-			get{ return m_DFA; }
-			set{ m_DFA = value; }
-		}
+        public static DFAlgorithm DFA
+        {
+            get { return m_DFA; }
+            set { m_DFA = value; }
+        }
 
-		public static void FatigueOnDamage( Mobile m, int damage )
-		{
-			double fatigue = 0.0;
+        public static void FatigueOnDamage(Mobile m, int damage)
+        {
+            double fatigue = 0.0;
 
-			switch ( m_DFA )
-			{
-				case DFAlgorithm.Standard:
-				{
-					fatigue = (damage * (130.0 / m.Hits) * ((double)m.Stam / 130)) - 5.0;
-					break;
-				}
-				case DFAlgorithm.PainSpike:
-				{
-					fatigue = (damage * ((130.0 / m.Hits) + ((50.0 + m.Stam) / 130) - 1.0)) - 5.0;
-					break;
-				}
-			}
+            switch (m_DFA)
+            {
+                case DFAlgorithm.Standard:
+                    {
+                        fatigue = (damage * (130.0 / m.Hits) * ((double)m.Stam / 130)) - 5.0;
+                        break;
+                    }
+                case DFAlgorithm.PainSpike:
+                    {
+                        fatigue = (damage * ((130.0 / m.Hits) + ((50.0 + m.Stam) / 130) - 1.0)) - 5.0;
+                        break;
+                    }
+            }
 
-			if ( fatigue > 0 )
-				m.Stam -= (int)fatigue;
-		}
+            if (fatigue > 0)
+                m.Stam -= (int)fatigue;
+        }
 
-		public const int OverloadAllowance = 5; // We can be four stones overweight without getting fatigued
+        public const int OverloadAllowance = 5; // We can be four stones overweight without getting fatigued
 
-		public static int GetMaxWeight( Mobile m )
-		{
-			//return ((( Core.ML && m.Race == Race.Human) ? 100 : 40 ) + (int)(3.5 * m.Str));
-			//Moved to core virtual method for use there
+        public static int GetMaxWeight(Mobile m)
+        {
+            //return ((( Core.ML && m.Race == Race.Human) ? 100 : 40 ) + (int)(3.5 * m.Str));
+            //Moved to core virtual method for use there
 
-			return m.MaxWeight;
-		}
+            return m.MaxWeight;
+        }
 
-		public static void EventSink_Movement( MovementEventArgs e )
-		{
-			Mobile from = e.Mobile;
+        public static void EventSink_Movement(MovementEventArgs e)
+        {
+            Mobile from = e.Mobile;
 
-			if ( !from.Alive || from.AccessLevel > AccessLevel.Player )
-				return;
+            if (!from.Alive || from.AccessLevel > AccessLevel.Player)
+                return;
 
-			int maxWeight = GetMaxWeight( from ) + OverloadAllowance;
-			int overWeight = (Mobile.BodyWeight + from.TotalWeight) - maxWeight;
+            int maxWeight = GetMaxWeight(from) + OverloadAllowance;
+            int overWeight = (Mobile.BodyWeight + from.TotalWeight) - maxWeight;
 
-			if ( overWeight > 0 )
-			{
-				from.Stam -= GetStamLoss( from, overWeight, (e.Direction & Direction.Running) != 0 );
+            if (overWeight > 0)
+            {
+                from.Stam -= GetStamLoss(from, overWeight, (e.Direction & Direction.Running) != 0);
 
-				if ( from.Stam == 0 )
-				{
-					from.SendLocalizedMessage( 500109 ); // You are too fatigued to move, because you are carrying too much weight!
-					e.Blocked = true;
-					return;
-				}
-			}
+                if (from.Stam == 0)
+                {
+                    from.SendLocalizedMessage(500109); // You are too fatigued to move, because you are carrying too much weight!
+                    e.Blocked = true;
+                    return;
+                }
+            }
 
-			if ( ((from.Stam * 130) / Math.Max( from.StamMax, 1 )) < 10 )
-				--from.Stam;
+            if (((from.Stam * 130) / Math.Max(from.StamMax, 1)) < 10)
+                --from.Stam;
 
-			if ( from.Stam == 0 )
-			{
-				from.SendLocalizedMessage( 500110 ); // You are too fatigued to move.
-				e.Blocked = true;
-				return;
-			}
+            if (from.Stam == 0)
+            {
+                from.SendLocalizedMessage(500110); // You are too fatigued to move.
+                e.Blocked = true;
+                return;
+            }
 
-			if ( from is PlayerMobile )
-			{
-				int amt = ( from.Mounted ? 48 : 16 );
-				PlayerMobile pm = (PlayerMobile)from;
+            if (from is PlayerMobile)
+            {
+                int amt = (from.Mounted ? 48 : 16);
+                PlayerMobile pm = (PlayerMobile)from;
 
-				if ( (++pm.StepsTaken % amt) == 0 )
-					--from.Stam;
-			}
-		}
+                if ((++pm.StepsTaken % amt) == 0)
+                    --from.Stam;
+            }
+        }
 
-		public static int GetStamLoss( Mobile from, int overWeight, bool running )
-		{
-			int loss = 5 + (overWeight / 25);
+        public static int GetStamLoss(Mobile from, int overWeight, bool running)
+        {
+            int loss = 5 + (overWeight / 25);
 
-			if ( from.Mounted )
-				loss /= 3;
+            if (from.Mounted)
+                loss /= 3;
 
-			if ( running )
-				loss *= 2;
+            if (running)
+                loss *= 2;
 
-			return loss;
-		}
+            return loss;
+        }
 
-		public static bool IsOverloaded( Mobile m )
-		{
-			if ( !m.Player || !m.Alive || m.AccessLevel > AccessLevel.Player )
-				return false;
+        public static bool IsOverloaded(Mobile m)
+        {
+            if (!m.Player || !m.Alive || m.AccessLevel > AccessLevel.Player)
+                return false;
 
-			return ( (Mobile.BodyWeight + m.TotalWeight) > (GetMaxWeight( m ) + OverloadAllowance) );
-		}
-	}
+            return ((Mobile.BodyWeight + m.TotalWeight) > (GetMaxWeight(m) + OverloadAllowance));
+        }
+    }
 }

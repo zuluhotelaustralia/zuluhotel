@@ -6,66 +6,69 @@ using Server.Items;
 
 namespace Server.Items
 {
-    [FlipableAttribute( 0xF52, 0xF51 )]
+    [FlipableAttribute(0xF52, 0xF51)]
     public class Dagger : BaseKnife
     {
-	public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.InfectiousStrike; } }
-	public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.ShadowStrike; } }
+        public override WeaponAbility PrimaryAbility { get { return WeaponAbility.InfectiousStrike; } }
+        public override WeaponAbility SecondaryAbility { get { return WeaponAbility.ShadowStrike; } }
 
-	public override int AosStrengthReq{ get{ return 10; } }
-	public override int AosMinDamage{ get{ return 10; } }
-	public override int AosMaxDamage{ get{ return 11; } }
-	public override int AosSpeed{ get{ return 56; } }
-	public override float MlSpeed{ get{ return 2.00f; } }
+        public override int AosStrengthReq { get { return 10; } }
+        public override int AosMinDamage { get { return 10; } }
+        public override int AosMaxDamage { get { return 11; } }
+        public override int AosSpeed { get { return 56; } }
+        public override float MlSpeed { get { return 2.00f; } }
 
-	public override int OldStrengthReq{ get{ return 1; } }
-	public override int OldMinDamage{ get{ return 3; } }
-	public override int OldMaxDamage{ get{ return 15; } }
-	public override int OldSpeed{ get{ return 55; } }
+        public override int OldStrengthReq { get { return 1; } }
+        public override int OldMinDamage { get { return 3; } }
+        public override int OldMaxDamage { get { return 15; } }
+        public override int OldSpeed { get { return 55; } }
 
-	public override int InitMinHits{ get{ return 31; } }
-	public override int InitMaxHits{ get{ return 40; } }
+        public override int InitMinHits { get { return 31; } }
+        public override int InitMaxHits { get { return 40; } }
 
-	public override SkillName DefSkill{ get{ return SkillName.Fencing; } }
-	public override WeaponType DefType{ get{ return WeaponType.Piercing; } }
-	public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Pierce1H; } }
+        public override SkillName DefSkill { get { return SkillName.Fencing; } }
+        public override WeaponType DefType { get { return WeaponType.Piercing; } }
+        public override WeaponAnimation DefAnimation { get { return WeaponAnimation.Pierce1H; } }
 
-	public override double GetBaseDamage( Mobile attacker ){
-	    if( attacker is BaseCreature ){
-		return base.GetBaseDamage( attacker );
-	    }
-	    
-	    int damage = Utility.Dice( 3, 5, 0 );
+        public override double GetBaseDamage(Mobile attacker)
+        {
+            if (attacker is BaseCreature)
+            {
+                return base.GetBaseDamage(attacker);
+            }
 
-	    if ( DamageLevel != WeaponDamageLevel.Regular ){
+            int damage = Utility.Dice(3, 5, 0);
+
+            if (DamageLevel != WeaponDamageLevel.Regular)
+            {
                 damage += (2 * (int)DamageLevel) - 1;
-	    }
+            }
 
-	    return damage;
-	}
-	    
-	[Constructable]
-	public Dagger() : base( 0xF52 )
-	{
-	    Weight = 1.0;
-	}
+            return damage;
+        }
 
-	public Dagger( Serial serial ) : base( serial )
-	{
-	}
+        [Constructable]
+        public Dagger() : base(0xF52)
+        {
+            Weight = 1.0;
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public Dagger(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-	    int version = reader.ReadInt();
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
     }
 }

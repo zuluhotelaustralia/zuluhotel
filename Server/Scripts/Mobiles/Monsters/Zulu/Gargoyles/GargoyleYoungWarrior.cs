@@ -39,7 +39,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Average );
+            AddLoot(LootPack.Average);
         }
 
         public override int Meat { get { return 1; } }

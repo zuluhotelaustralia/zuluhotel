@@ -5,64 +5,67 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-    [FlipableAttribute( 0xF62, 0xF63 )]
+    [FlipableAttribute(0xF62, 0xF63)]
     public class Spear : BaseSpear
     {
-	public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.ArmorIgnore; } }
-	public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.ParalyzingBlow; } }
+        public override WeaponAbility PrimaryAbility { get { return WeaponAbility.ArmorIgnore; } }
+        public override WeaponAbility SecondaryAbility { get { return WeaponAbility.ParalyzingBlow; } }
 
-	public override int AosStrengthReq{ get{ return 50; } }
-	public override int AosMinDamage{ get{ return 13; } }
-	public override int AosMaxDamage{ get{ return 15; } }
-	public override int AosSpeed{ get{ return 42; } }
-	public override float MlSpeed{ get{ return 2.75f; } }
+        public override int AosStrengthReq { get { return 50; } }
+        public override int AosMinDamage { get { return 13; } }
+        public override int AosMaxDamage { get { return 15; } }
+        public override int AosSpeed { get { return 42; } }
+        public override float MlSpeed { get { return 2.75f; } }
 
-	public override int DefMaxRange{ get { return 2; } }
-	    
-	public override int OldStrengthReq{ get{ return 30; } }
-	public override int OldMinDamage{ get{ return 2; } }
-	public override int OldMaxDamage{ get{ return 36; } }
-	public override int OldSpeed{ get{ return 46; } }
+        public override int DefMaxRange { get { return 2; } }
 
-	public override int InitMinHits{ get{ return 31; } }
-	public override int InitMaxHits{ get{ return 80; } }
+        public override int OldStrengthReq { get { return 30; } }
+        public override int OldMinDamage { get { return 2; } }
+        public override int OldMaxDamage { get { return 36; } }
+        public override int OldSpeed { get { return 46; } }
 
-	public override double GetBaseDamage( Mobile attacker ){
-	    if( attacker is BaseCreature ){
-		return base.GetBaseDamage( attacker );
-	    }
-	    
-	    int damage = Utility.Dice( 2, 18, 0 );
+        public override int InitMinHits { get { return 31; } }
+        public override int InitMaxHits { get { return 80; } }
 
-	    if ( DamageLevel != WeaponDamageLevel.Regular ){
+        public override double GetBaseDamage(Mobile attacker)
+        {
+            if (attacker is BaseCreature)
+            {
+                return base.GetBaseDamage(attacker);
+            }
+
+            int damage = Utility.Dice(2, 18, 0);
+
+            if (DamageLevel != WeaponDamageLevel.Regular)
+            {
                 damage += (2 * (int)DamageLevel) - 1;
-	    }
+            }
 
-	    return damage;
-	}
-	
-	[Constructable]
-	public Spear() : base( 0xF62 )
-	{
-	    Weight = 7.0;
-	}
+            return damage;
+        }
 
-	public Spear( Serial serial ) : base( serial )
-	{
-	}
+        [Constructable]
+        public Spear() : base(0xF62)
+        {
+            Weight = 7.0;
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public Spear(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-	    int version = reader.ReadInt();
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
     }
 }

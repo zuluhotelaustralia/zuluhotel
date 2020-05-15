@@ -4,36 +4,36 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class ParalyzeScroll : SpellScroll
-	{
-		[Constructable]
-		public ParalyzeScroll() : this( 1 )
-		{
-		}
+    public class ParalyzeScroll : SpellScroll
+    {
+        [Constructable]
+        public ParalyzeScroll() : this(1)
+        {
+        }
 
-		[Constructable]
-		public ParalyzeScroll( int amount ) : base( 37, 0x1F52, amount )
-		{
-		}
-		
-		public ParalyzeScroll( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public ParalyzeScroll(int amount) : base(37, 0x1F52, amount)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public ParalyzeScroll(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		
-	}
+            int version = reader.ReadInt();
+        }
+
+
+    }
 }

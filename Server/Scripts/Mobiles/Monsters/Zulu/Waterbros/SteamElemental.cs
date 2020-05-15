@@ -4,26 +4,26 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName( "a steam elemental corpse" )]
+    [CorpseName("a steam elemental corpse")]
     public class SteamElemental : BaseCreature
     {
-	public override double DispelDifficulty{ get{ return 117.5; } }
-	public override double DispelFocus{ get{ return 45.0; } }
+        public override double DispelDifficulty { get { return 117.5; } }
+        public override double DispelFocus { get { return 45.0; } }
 
-	[Constructable]
-	public SteamElemental () : base( AIType.AI_Mage, FightMode.Closest, 10, 1, 0.1, 0.4 )
-	{
-	    Name = "a steam elemental";
-	    Body = 13;
-	    Hue = 2101;
-	    BaseSoundID = 655;
+        [Constructable]
+        public SteamElemental() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.1, 0.4)
+        {
+            Name = "a steam elemental";
+            Body = 13;
+            Hue = 2101;
+            BaseSoundID = 655;
 
-	    SetStr( 200, 205 );
-	    SetDex( 75, 75 );
-	    SetInt( 500, 600 );
+            SetStr(200, 205);
+            SetDex(75, 75);
+            SetInt(500, 600);
 
-            SetHits( 175, 200);
-            SetMana( 500, 600);
+            SetHits(175, 200);
+            SetMana(500, 600);
 
             SetDamage(7, 14);
 
@@ -39,38 +39,38 @@ namespace Server.Mobiles
 
             SetSkill(SkillName.Wrestling, 80.0, 85.0);
 
-	    Fame = 4500;
-	    Karma = -4500;			
+            Fame = 4500;
+            Karma = -4500;
 
-	    ControlSlots = 2;
-	}
+            ControlSlots = 2;
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich, 2 );
-	    AddLoot( LootPack.LowEarthScrolls );
+            AddLoot(LootPack.Rich, 2);
+            AddLoot(LootPack.LowEarthScrolls);
         }
 
-	public override bool BleedImmune{ get{ return true; } }
-		
+        public override bool BleedImmune { get { return true; } }
 
-	public SteamElemental( Serial serial ) : base( serial )
-	{
-	}
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
-	    writer.Write( (int) 0 );
-	}
+        public SteamElemental(Serial serial) : base(serial)
+        {
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
-	    int version = reader.ReadInt();
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0);
+        }
 
-	    if ( BaseSoundID == 263 )
-		BaseSoundID = 655;
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+
+            if (BaseSoundID == 263)
+                BaseSoundID = 655;
+        }
     }
 }

@@ -51,7 +51,7 @@ namespace Server.Mobiles
 
             Utility.AssignRandomHair(this);
 
-            
+
 
             Item ThighBoots = new ThighBoots();
             ThighBoots.Movable = false;
@@ -77,9 +77,9 @@ namespace Server.Mobiles
             rm.Team = this.Team;
             rm.Combatant = this.Combatant;
             rm.NoKillAwards = true;
-	    rm.AddLoot( LootPack.FilthyRich );
-           
-            
+            rm.AddLoot(LootPack.FilthyRich);
+
+
 
 
             Effects.PlaySound(this, Map, GetDeathSound());
@@ -93,7 +93,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-       
+
         }
 
         public override bool AlwaysMurderer { get { return true; } }

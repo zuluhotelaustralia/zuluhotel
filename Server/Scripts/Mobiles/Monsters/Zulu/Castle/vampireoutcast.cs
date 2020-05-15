@@ -63,7 +63,7 @@ namespace Server.Mobiles
             Robe.Movable = false;
             Robe.Hue = 2019;
             AddItem(Robe);
- 
+
         }
 
         public VampireOutcast(Serial serial)
@@ -73,8 +73,8 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich, 2 );
-	    
+            AddLoot(LootPack.FilthyRich, 2);
+
             PackItem(new Bone());
 
         }

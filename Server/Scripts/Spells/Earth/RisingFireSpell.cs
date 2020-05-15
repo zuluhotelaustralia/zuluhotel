@@ -11,63 +11,67 @@ namespace Server.Spells.Earth
     public class RisingFireSpell : AbstractEarthSpell
     {
         private static SpellInfo m_Info = new SpellInfo(
-							"Rising Fire", "Batida Do Fogo",
-							233, 9012,
-							Reagent.BatWing, Reagent.Brimstone, Reagent.VialOfBlood
-							);
+                            "Rising Fire", "Batida Do Fogo",
+                            233, 9012,
+                            Reagent.BatWing, Reagent.Brimstone, Reagent.VialOfBlood
+                            );
 
-        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds( 0 ); } }
+        public override TimeSpan CastDelayBase { get { return TimeSpan.FromSeconds(0); } }
 
-        public override double RequiredSkill{ get{ return 100.0; } }
-        public override int RequiredMana{ get{ return 15; } }
+        public override double RequiredSkill { get { return 100.0; } }
+        public override int RequiredMana { get { return 15; } }
 
-        public RisingFireSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
+        public RisingFireSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
         {
         }
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget( this );
+            Caster.Target = new InternalTarget(this);
         }
 
-        public void Target( Mobile m )
+        public void Target(Mobile m)
         {
-            if ( ! Caster.CanSee( m ) )
+            if (!Caster.CanSee(m))
             {
                 // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
                 goto Return;
             }
 
-            if ( ! CheckSequence() )
+            if (!CheckSequence())
             {
                 goto Return;
             }
-	    
-	    double range = 3.0;
-	    if( Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage ){
 
-		range *= ((PlayerMobile)Caster).Spec.Bonus;
-	    }
+            double range = 3.0;
+            if (Caster is PlayerMobile && ((PlayerMobile)Caster).Spec.SpecName == SpecName.Mage)
+            {
 
-	    double dmg = Caster.Skills[DamageSkill].Value / 6.0;
-	    Map map = Caster.Map;
-	    if( map != null){
-		foreach ( Mobile mob in m.GetMobilesInRange( (int)range )){
-		    if ( Caster != mob &&
-			 SpellHelper.ValidIndirectTarget( Caster, mob ) &&
-			 Caster.CanBeHarmful( mob, false ) &&
-			 m.InLOS( mob )){
+                range *= ((PlayerMobile)Caster).Spec.Bonus;
+            }
 
-			Caster.DoHarmful( mob );
-			mob.FixedParticles( 0x3709, 10, 30, 5052, EffectLayer.LeftFoot );
-			SpellHelper.Damage(this, TimeSpan.Zero, mob, Caster, dmg, DamageType.Fire);
-		    }
-		}
-	    }
+            double dmg = Caster.Skills[DamageSkill].Value / 6.0;
+            Map map = Caster.Map;
+            if (map != null)
+            {
+                foreach (Mobile mob in m.GetMobilesInRange((int)range))
+                {
+                    if (Caster != mob &&
+                     SpellHelper.ValidIndirectTarget(Caster, mob) &&
+                     Caster.CanBeHarmful(mob, false) &&
+                     m.InLOS(mob))
+                    {
 
-	    Caster.PlaySound( 0x208 );
-	    
+                        Caster.DoHarmful(mob);
+                        mob.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
+                        SpellHelper.Damage(this, TimeSpan.Zero, mob, Caster, dmg, DamageType.Fire);
+                    }
+                }
+            }
+
+            Caster.PlaySound(0x208);
+
         Return:
             FinishSequence();
         }
@@ -76,21 +80,21 @@ namespace Server.Spells.Earth
         {
             private Mobile m_Target;
 
-            public InternalTimer( Mobile target, Mobile caster ) : base( TimeSpan.FromSeconds( 0 ) )
+            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
             {
                 m_Target = target;
 
                 // TODO: Compute a reasonable duration, this is stolen from ArchProtection
                 double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if ( time > 144 )
+                if (time > 144)
                     time = 144;
-                Delay = TimeSpan.FromSeconds( time );
+                Delay = TimeSpan.FromSeconds(time);
                 Priority = TimerPriority.OneSecond;
             }
 
             protected override void OnTick()
             {
-                m_Target.EndAction( typeof( RisingFireSpell ) );
+                m_Target.EndAction(typeof(RisingFireSpell));
             }
         }
 
@@ -99,18 +103,18 @@ namespace Server.Spells.Earth
             private RisingFireSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget( RisingFireSpell owner ) : base( Core.ML ? 10 : 12, false, TargetFlags.Harmful )
+            public InternalTarget(RisingFireSpell owner) : base(Core.ML ? 10 : 12, false, TargetFlags.Harmful)
             {
                 m_Owner = owner;
             }
 
-            protected override void OnTarget( Mobile from, object o )
+            protected override void OnTarget(Mobile from, object o)
             {
-                if ( o is Mobile )
-                    m_Owner.Target( (Mobile) o );
+                if (o is Mobile)
+                    m_Owner.Target((Mobile)o);
             }
 
-            protected override void OnTargetFinish( Mobile from )
+            protected override void OnTargetFinish(Mobile from)
             {
                 m_Owner.FinishSequence();
             }

@@ -7,201 +7,201 @@ using System.Collections.Generic;
 
 namespace Server.Multis
 {
-	public abstract class BaseCamp : BaseMulti
-	{
-		private List<Item> m_Items;
-		private List<Mobile> m_Mobiles;
-		private DateTime m_DecayTime;
-		private Timer m_DecayTimer;
-		private TimeSpan m_DecayDelay;
+    public abstract class BaseCamp : BaseMulti
+    {
+        private List<Item> m_Items;
+        private List<Mobile> m_Mobiles;
+        private DateTime m_DecayTime;
+        private Timer m_DecayTimer;
+        private TimeSpan m_DecayDelay;
 
-		public virtual int EventRange{ get{ return 10; } }
+        public virtual int EventRange { get { return 10; } }
 
-		public virtual TimeSpan DecayDelay
-		{
-			get
-			{
-				return m_DecayDelay;
-			} 
-			set
-			{
-				m_DecayDelay = value;
-				RefreshDecay( true );
-			} 
-		}
+        public virtual TimeSpan DecayDelay
+        {
+            get
+            {
+                return m_DecayDelay;
+            }
+            set
+            {
+                m_DecayDelay = value;
+                RefreshDecay(true);
+            }
+        }
 
-		public BaseCamp( int multiID ) : base( multiID )
-		{
-			m_Items = new List<Item>();
-			m_Mobiles = new List<Mobile>();
-			m_DecayDelay = TimeSpan.FromMinutes( 30.0 );
-			RefreshDecay( true );
+        public BaseCamp(int multiID) : base(multiID)
+        {
+            m_Items = new List<Item>();
+            m_Mobiles = new List<Mobile>();
+            m_DecayDelay = TimeSpan.FromMinutes(30.0);
+            RefreshDecay(true);
 
-			Timer.DelayCall( TimeSpan.Zero, new TimerCallback( CheckAddComponents ) );
-		}
+            Timer.DelayCall(TimeSpan.Zero, new TimerCallback(CheckAddComponents));
+        }
 
-		public void CheckAddComponents()
-		{
-			if ( Deleted )
-				return;
-			
-			AddComponents();
-		}
+        public void CheckAddComponents()
+        {
+            if (Deleted)
+                return;
 
-		public virtual void AddComponents()
-		{
-		}
+            AddComponents();
+        }
 
-		public virtual void RefreshDecay( bool setDecayTime )
-		{
-			if ( Deleted )
-				return;
+        public virtual void AddComponents()
+        {
+        }
 
-			if ( m_DecayTimer != null )
-				m_DecayTimer.Stop();
+        public virtual void RefreshDecay(bool setDecayTime)
+        {
+            if (Deleted)
+                return;
 
-			if ( setDecayTime )
-				m_DecayTime = DateTime.UtcNow + DecayDelay;
+            if (m_DecayTimer != null)
+                m_DecayTimer.Stop();
 
-			m_DecayTimer = Timer.DelayCall( DecayDelay, new TimerCallback( Delete ) );
-		}
+            if (setDecayTime)
+                m_DecayTime = DateTime.UtcNow + DecayDelay;
 
-		public virtual void AddItem( Item item, int xOffset, int yOffset, int zOffset )
-		{
-			m_Items.Add( item );
+            m_DecayTimer = Timer.DelayCall(DecayDelay, new TimerCallback(Delete));
+        }
 
-			int zavg = Map.GetAverageZ(X + xOffset, Y + yOffset);
-			item.MoveToWorld( new Point3D( X + xOffset, Y + yOffset, zavg + zOffset ), Map );
-		}
+        public virtual void AddItem(Item item, int xOffset, int yOffset, int zOffset)
+        {
+            m_Items.Add(item);
 
-		public virtual void AddMobile( Mobile m, int wanderRange, int xOffset, int yOffset, int zOffset )
-		{
-			m_Mobiles.Add(m);
+            int zavg = Map.GetAverageZ(X + xOffset, Y + yOffset);
+            item.MoveToWorld(new Point3D(X + xOffset, Y + yOffset, zavg + zOffset), Map);
+        }
 
-			int zavg = Map.GetAverageZ(X + xOffset, Y + yOffset);
-			Point3D loc = new Point3D(X + xOffset, Y + yOffset, zavg + zOffset);
-			BaseCreature bc = m as BaseCreature;
+        public virtual void AddMobile(Mobile m, int wanderRange, int xOffset, int yOffset, int zOffset)
+        {
+            m_Mobiles.Add(m);
 
-			if ( bc != null )
-			{
-				bc.RangeHome = wanderRange; 
-				bc.Home = loc; 
-			}
+            int zavg = Map.GetAverageZ(X + xOffset, Y + yOffset);
+            Point3D loc = new Point3D(X + xOffset, Y + yOffset, zavg + zOffset);
+            BaseCreature bc = m as BaseCreature;
 
-			if ( m is BaseVendor || m is Banker )
-				m.Direction = Direction.South;
+            if (bc != null)
+            {
+                bc.RangeHome = wanderRange;
+                bc.Home = loc;
+            }
 
-			m.MoveToWorld( loc, this.Map );
-		}
+            if (m is BaseVendor || m is Banker)
+                m.Direction = Direction.South;
 
-		public virtual void OnEnter( Mobile m )
-		{
-			RefreshDecay( true );
-		}
+            m.MoveToWorld(loc, this.Map);
+        }
 
-		public virtual void OnExit( Mobile m )
-		{
-			RefreshDecay( true );
-		}
+        public virtual void OnEnter(Mobile m)
+        {
+            RefreshDecay(true);
+        }
 
-		public override bool HandlesOnMovement{ get{ return true; } }
+        public virtual void OnExit(Mobile m)
+        {
+            RefreshDecay(true);
+        }
 
-		public override void OnMovement( Mobile m, Point3D oldLocation )
-		{
-			bool inOldRange = Utility.InRange( oldLocation, Location, EventRange );
-			bool inNewRange = Utility.InRange( m.Location, Location, EventRange );
+        public override bool HandlesOnMovement { get { return true; } }
 
-			if ( inNewRange && !inOldRange )
-				OnEnter( m );
-			else if ( inOldRange && !inNewRange )
-				OnExit( m );
-		}
+        public override void OnMovement(Mobile m, Point3D oldLocation)
+        {
+            bool inOldRange = Utility.InRange(oldLocation, Location, EventRange);
+            bool inNewRange = Utility.InRange(m.Location, Location, EventRange);
 
-		public override void OnAfterDelete()
-		{
-			base.OnAfterDelete();
+            if (inNewRange && !inOldRange)
+                OnEnter(m);
+            else if (inOldRange && !inNewRange)
+                OnExit(m);
+        }
 
-			for ( int i = 0; i < m_Items.Count; ++i )
-				m_Items[i].Delete();
+        public override void OnAfterDelete()
+        {
+            base.OnAfterDelete();
 
-			for ( int i = 0; i < m_Mobiles.Count; ++i )
-			{
-				BaseCreature bc = (BaseCreature)m_Mobiles[i];
+            for (int i = 0; i < m_Items.Count; ++i)
+                m_Items[i].Delete();
 
-				if ( bc.IsPrisoner == false )
-					m_Mobiles[i].Delete();
-				else if ( m_Mobiles[i].CantWalk == true )
-					m_Mobiles[i].Delete();
-			}
+            for (int i = 0; i < m_Mobiles.Count; ++i)
+            {
+                BaseCreature bc = (BaseCreature)m_Mobiles[i];
 
-			m_Items.Clear();
-			m_Mobiles.Clear();
-		}
+                if (bc.IsPrisoner == false)
+                    m_Mobiles[i].Delete();
+                else if (m_Mobiles[i].CantWalk == true)
+                    m_Mobiles[i].Delete();
+            }
 
-		public BaseCamp( Serial serial ) : base( serial )
-		{
-		}
+            m_Items.Clear();
+            m_Mobiles.Clear();
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public BaseCamp(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( m_Items, true );
-			writer.Write( m_Mobiles, true );
-			writer.WriteDeltaTime( m_DecayTime );
-		}
+            writer.Write((int)0); // version
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write(m_Items, true);
+            writer.Write(m_Mobiles, true);
+            writer.WriteDeltaTime(m_DecayTime);
+        }
 
-			int version = reader.ReadInt();
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			switch ( version )
-			{
-				case 0:
-				{
-					m_Items = reader.ReadStrongItemList();
-					m_Mobiles = reader.ReadStrongMobileList();
-					m_DecayTime = reader.ReadDeltaTime();
+            int version = reader.ReadInt();
 
-					RefreshDecay( false );
+            switch (version)
+            {
+                case 0:
+                    {
+                        m_Items = reader.ReadStrongItemList();
+                        m_Mobiles = reader.ReadStrongMobileList();
+                        m_DecayTime = reader.ReadDeltaTime();
 
-					break;
-				}
-			}
-		}
-	}
+                        RefreshDecay(false);
 
-	public class LockableBarrel : LockableContainer
-	{
-		[Constructable]
-		public LockableBarrel() : base(0xE77)
-		{
-			Weight = 1.0;
-		}
+                        break;
+                    }
+            }
+        }
+    }
 
-		public LockableBarrel(Serial serial) : base(serial)
-		{
-		}
+    public class LockableBarrel : LockableContainer
+    {
+        [Constructable]
+        public LockableBarrel() : base(0xE77)
+        {
+            Weight = 1.0;
+        }
 
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
+        public LockableBarrel(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write((int)0); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			if (Weight == 8.0)
-				Weight = 1.0;
-		}
-	}
+            int version = reader.ReadInt();
+
+            if (Weight == 8.0)
+                Weight = 1.0;
+        }
+    }
 }

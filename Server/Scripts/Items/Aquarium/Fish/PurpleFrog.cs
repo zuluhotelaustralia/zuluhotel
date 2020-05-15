@@ -3,32 +3,32 @@ using Server;
 
 namespace Server.Items
 {
-	public class PurpleFrog : BaseFish
-	{		
-		public override int LabelNumber{ get{ return 1073823; } } // A Purple Frog
-		
-		[Constructable]
-		public PurpleFrog() : base( 0x3B0D )
-		{
-			Hue = 0x4FA;
-		}
+    public class PurpleFrog : BaseFish
+    {
+        public override int LabelNumber { get { return 1073823; } } // A Purple Frog
 
-		public PurpleFrog( Serial serial ) : base( serial )
-		{		
-		}
+        [Constructable]
+        public PurpleFrog() : base(0x3B0D)
+        {
+            Hue = 0x4FA;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public PurpleFrog(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

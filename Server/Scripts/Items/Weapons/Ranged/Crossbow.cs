@@ -5,69 +5,72 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-    [FlipableAttribute( 0xF50, 0xF4F )]
+    [FlipableAttribute(0xF50, 0xF4F)]
     public class Crossbow : BaseRanged
     {
-	public override int EffectID{ get{ return 0x1BFE; } }
-	public override Type AmmoType{ get{ return typeof( Bolt ); } }
-	public override Item Ammo{ get{ return new Bolt(); } }
+        public override int EffectID { get { return 0x1BFE; } }
+        public override Type AmmoType { get { return typeof(Bolt); } }
+        public override Item Ammo { get { return new Bolt(); } }
 
-	public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.ConcussionBlow; } }
-	public override WeaponAbility SecondaryAbility{ get{ return WeaponAbility.MortalStrike; } }
+        public override WeaponAbility PrimaryAbility { get { return WeaponAbility.ConcussionBlow; } }
+        public override WeaponAbility SecondaryAbility { get { return WeaponAbility.MortalStrike; } }
 
-	public override int AosStrengthReq{ get{ return 35; } }
-	public override int AosMinDamage{ get{ return 18; } }
-	public override int AosMaxDamage{ get{ return Core.ML ? 22 : 20; } }
-	public override int AosSpeed{ get{ return 24; } }
-	public override float MlSpeed{ get{ return 4.50f; } }
+        public override int AosStrengthReq { get { return 35; } }
+        public override int AosMinDamage { get { return 18; } }
+        public override int AosMaxDamage { get { return Core.ML ? 22 : 20; } }
+        public override int AosSpeed { get { return 24; } }
+        public override float MlSpeed { get { return 4.50f; } }
 
-	public override int OldStrengthReq{ get{ return 30; } }
-	public override int OldMinDamage{ get{ return 8; } }
-	public override int OldMaxDamage{ get{ return 43; } }
-	public override int OldSpeed{ get{ return 30; } }
+        public override int OldStrengthReq { get { return 30; } }
+        public override int OldMinDamage { get { return 8; } }
+        public override int OldMaxDamage { get { return 43; } }
+        public override int OldSpeed { get { return 30; } }
 
-	public override int DefMaxRange{ get{ return 8; } }
+        public override int DefMaxRange { get { return 8; } }
 
-	public override int InitMinHits{ get{ return 31; } }
-	public override int InitMaxHits{ get{ return 80; } }
+        public override int InitMinHits { get { return 31; } }
+        public override int InitMaxHits { get { return 80; } }
 
-	public override double GetBaseDamage( Mobile attacker ){
-	    if( attacker is BaseCreature ){
-		return base.GetBaseDamage( attacker );
-	    }
-	    
-	    int damage = Utility.Dice( 5, 8, 3 );
+        public override double GetBaseDamage(Mobile attacker)
+        {
+            if (attacker is BaseCreature)
+            {
+                return base.GetBaseDamage(attacker);
+            }
 
-	    if ( DamageLevel != WeaponDamageLevel.Regular ){
+            int damage = Utility.Dice(5, 8, 3);
+
+            if (DamageLevel != WeaponDamageLevel.Regular)
+            {
                 damage += (2 * (int)DamageLevel) - 1;
-	    }
+            }
 
-	    return damage;
-	}
-	    
-	[Constructable]
-	public Crossbow() : base( 0xF50 )
-	{
-	    Weight = 7.0;
-	    Layer = Layer.TwoHanded;
-	}
+            return damage;
+        }
 
-	public Crossbow( Serial serial ) : base( serial )
-	{
-	}
+        [Constructable]
+        public Crossbow() : base(0xF50)
+        {
+            Weight = 7.0;
+            Layer = Layer.TwoHanded;
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public Crossbow(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-	    int version = reader.ReadInt();
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
     }
 }

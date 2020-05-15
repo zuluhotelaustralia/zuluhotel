@@ -4,47 +4,48 @@ namespace Server.Items
 {
     public class Arrow : Item, ICommodity
     {
-	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
-	bool ICommodity.IsDeedable { get { return true; } }
+        int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
-	public override double DefaultWeight
-	{
-	    get { return 0.1; }
-	}
+        public override double DefaultWeight
+        {
+            get { return 0.1; }
+        }
 
-	[Constructable]
-	public Arrow() : this( 1 )
-	{
-	}
+        [Constructable]
+        public Arrow() : this(1)
+        {
+        }
 
-	[Constructable]
-	public Arrow( int amount ) : base( 0xF3F )
-	{
-	    Stackable = true;
-	    Amount = amount;
-	}
+        [Constructable]
+        public Arrow(int amount) : base(0xF3F)
+        {
+            Stackable = true;
+            Amount = amount;
+        }
 
-	    
 
-	public Arrow( Serial serial ) : base( serial )
-	{
-	}
-	
-	public virtual void OnHit( Mobile from, Mobile targ ){
-	}	
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+        public Arrow(Serial serial) : base(serial)
+        {
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public virtual void OnHit(Mobile from, Mobile targ)
+        {
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	    int version = reader.ReadInt();
-	}
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
     }
 }

@@ -2,32 +2,32 @@ using System;
 
 namespace Server.Items
 {
-	public class Chessmen2 : Item
-	{
+    public class Chessmen2 : Item
+    {
 
-		[Constructable]
-		public Chessmen2() : base( 0xE12 )
-		{
-			Movable = true;
-			Stackable = false;
-		}
+        [Constructable]
+        public Chessmen2() : base(0xE12)
+        {
+            Movable = true;
+            Stackable = false;
+        }
 
-		public Chessmen2( Serial serial ) : base( serial )
-		{
-		}
+        public Chessmen2(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 );
-		}
+            writer.Write((int)0);
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

@@ -48,7 +48,7 @@ namespace Server.Mobiles
             AddItem(spellbook);
 
             Utility.AssignRandomHair(this, 2219);
-           
+
             SetStr(100, 105);
             SetDex(80, 85);
             SetInt(500, 600);
@@ -72,12 +72,12 @@ namespace Server.Mobiles
 
             Fame = 2500;
             Karma = -2500;
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich );
-	    AddLoot( LootPack.PaganReagentsPack, 10 );
+            AddLoot(LootPack.FilthyRich);
+            AddLoot(LootPack.PaganReagentsPack, 10);
         }
 
         public override bool CanRummageCorpses { get { return true; } }

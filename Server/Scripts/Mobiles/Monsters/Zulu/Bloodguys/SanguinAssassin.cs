@@ -25,7 +25,7 @@ namespace Server.Mobiles
             else
             {
                 this.Body = 0x190;
-            }            
+            }
 
             SetStr(96, 120);
             SetDex(80, 90);
@@ -98,22 +98,23 @@ namespace Server.Mobiles
             }
 
             Utility.AssignRandomHair(this);
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    if( Utility.RandomDouble() >= 0.80 ){
-		Item Hood = new Hood();
-		Hood.Hue = 1776;
-		PackItem( Hood );
-	    }
-	    AddLoot( LootPack.Rich );
-	    AddLoot( LootPack.HighEarthScrolls );
-	}
+            if (Utility.RandomDouble() >= 0.80)
+            {
+                Item Hood = new Hood();
+                Hood.Hue = 1776;
+                PackItem(Hood);
+            }
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.HighEarthScrolls);
+        }
 
         public override bool AlwaysMurderer { get { return true; } }
-	public override Poison PoisonImmune{ get{ return Poison.Deadly; } }
-	public override Poison HitPoison{ get{ return Poison.Deadly; } }
+        public override Poison PoisonImmune { get { return Poison.Deadly; } }
+        public override Poison HitPoison { get { return Poison.Deadly; } }
 
         public SanguinAssassin(Serial serial)
             : base(serial)

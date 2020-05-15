@@ -66,7 +66,7 @@ namespace Server.Mobiles
             StuddedGloves.Hue = 2019;
             AddItem(StuddedGloves);
 
-            
+
 
             Utility.AssignRandomHair(this);
 
@@ -91,8 +91,8 @@ namespace Server.Mobiles
             rm.Team = this.Team;
             rm.Combatant = this.Combatant;
             rm.NoKillAwards = true;
-	    rm.AddLoot( LootPack.FilthyRich, 2 );
-	    
+            rm.AddLoot(LootPack.FilthyRich, 2);
+
 
             Effects.PlaySound(this, Map, GetDeathSound());
             Effects.SendLocationEffect(Location, Map, 0x3709, 30, 10, 1775, 0);
@@ -103,7 +103,7 @@ namespace Server.Mobiles
             return false;
         }
 
-        
+
 
         public override void Serialize(GenericWriter writer)
         {

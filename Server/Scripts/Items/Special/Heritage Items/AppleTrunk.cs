@@ -2,62 +2,62 @@ using System;
 
 namespace Server.Items
 {
-	public class AppleTrunkAddon : BaseAddon
-	{
-		public override BaseAddonDeed Deed { get { return new AppleTrunkDeed(); } }
-		
-		[Constructable]
-		public AppleTrunkAddon() : base()
-		{
-			AddComponent( new LocalizedAddonComponent( 0xD98, 1076785 ), 0, 0, 0 );
-		}
+    public class AppleTrunkAddon : BaseAddon
+    {
+        public override BaseAddonDeed Deed { get { return new AppleTrunkDeed(); } }
 
-		public AppleTrunkAddon( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public AppleTrunkAddon() : base()
+        {
+            AddComponent(new LocalizedAddonComponent(0xD98, 1076785), 0, 0, 0);
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public AppleTrunkAddon(Serial serial) : base(serial)
+        {
+        }
 
-			writer.WriteEncodedInt( 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.WriteEncodedInt(0); // version
+        }
 
-			int version = reader.ReadEncodedInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	public class AppleTrunkDeed : BaseAddonDeed
-	{
-		public override BaseAddon Addon { get { return new AppleTrunkAddon(); } }
-		public override int LabelNumber { get { return 1076785; } } // Apple Trunk
+            int version = reader.ReadEncodedInt();
+        }
+    }
 
-		[Constructable]
-		public AppleTrunkDeed() : base()
-		{
-			LootType = LootType.Blessed;
-		}
+    public class AppleTrunkDeed : BaseAddonDeed
+    {
+        public override BaseAddon Addon { get { return new AppleTrunkAddon(); } }
+        public override int LabelNumber { get { return 1076785; } } // Apple Trunk
 
-		public AppleTrunkDeed( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public AppleTrunkDeed() : base()
+        {
+            LootType = LootType.Blessed;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public AppleTrunkDeed(Serial serial) : base(serial)
+        {
+        }
 
-			writer.WriteEncodedInt( 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.WriteEncodedInt(0); // version
+        }
 
-			int version = reader.ReadEncodedInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadEncodedInt();
+        }
+    }
 }

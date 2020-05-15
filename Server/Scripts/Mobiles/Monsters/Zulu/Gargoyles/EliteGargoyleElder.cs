@@ -45,8 +45,8 @@ namespace Server.Mobiles
         {
             PackItem(new Longsword());
 
-	    AddLoot( LootPack.UltraRich );
-	    
+            AddLoot(LootPack.UltraRich);
+
             switch (Utility.Random(7))
             {
                 case 0: AddItem(new RedCarpetSideOne()); break;

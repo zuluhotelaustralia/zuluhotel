@@ -68,18 +68,18 @@ namespace Server.Mobiles
 
             SetSkill(SkillName.MagicResist, 195.0, 200.0);
 
-            SetSkill(SkillName.Parry, 45.0, 50.0); 
+            SetSkill(SkillName.Parry, 45.0, 50.0);
 
             SetSkill(SkillName.Fencing, 80.0, 85.0);
-            SetSkill(SkillName.Wrestling, 80.0, 85.0); 
+            SetSkill(SkillName.Wrestling, 80.0, 85.0);
 
             Fame = 10500;
             Karma = -10500;
-        }        
+        }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich, 2 );
+            AddLoot(LootPack.Rich, 2);
         }
 
         public override bool CanRummageCorpses { get { return true; } }

@@ -102,8 +102,8 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot( LootPack.Rich );
-	}
+            AddLoot(LootPack.Rich);
+        }
 
         public override OppositionGroup OppositionGroup
         {

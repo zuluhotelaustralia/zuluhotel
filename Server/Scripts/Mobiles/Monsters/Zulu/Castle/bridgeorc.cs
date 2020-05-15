@@ -46,7 +46,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich );
+            AddLoot(LootPack.Rich);
         }
 
         public override bool CanRummageCorpses { get { return true; } }
@@ -73,7 +73,7 @@ namespace Server.Mobiles
 
             if (aggressor.HueMod == 1451)
             {
-                aggressor.Damage( 50, this, DamageType.Fire, AttackType.Physical );
+                aggressor.Damage(50, this, DamageType.Fire, AttackType.Physical);
                 aggressor.BodyMod = 0;
                 aggressor.HueMod = -1;
                 aggressor.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);

@@ -16,7 +16,7 @@ namespace Server.Mobiles
             Body = Utility.RandomBool() ? 0x190 : 0x191;
             BaseSoundID = 412;
             Hue = 1882;
-            
+
 
             SetStr(400, 405);
             SetDex(95, 100);
@@ -42,7 +42,7 @@ namespace Server.Mobiles
             Fame = 500;
             Karma = -500;
 
-            
+
 
             Item Skirt = new Skirt();
             Skirt.Movable = false;
@@ -57,12 +57,12 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.FilthyRich, 2 );
-	    AddLoot( LootPack.Rich );
-	    AddLoot( LootPack.GreaterNecroScrolls );
-	    AddLoot( LootPack.LesserNecroScrolls );
-	    AddLoot( LootPack.Gems, 2 );
-	    
+            AddLoot(LootPack.FilthyRich, 2);
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.GreaterNecroScrolls);
+            AddLoot(LootPack.LesserNecroScrolls);
+            AddLoot(LootPack.Gems, 2);
+
             PackItem(new BonePile());
 
             if (0.99 > Utility.RandomDouble())

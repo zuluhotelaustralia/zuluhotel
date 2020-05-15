@@ -51,14 +51,14 @@ namespace Server.Mobiles
             Robe.Hue = 2306;
             AddItem(Robe);
 
-            
+
         }
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich );
-	    AddLoot( LootPack.Potions );
-	}
+            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.Potions);
+        }
 
         public override bool CanRummageCorpses { get { return true; } }
         public override bool AlwaysMurderer { get { return true; } }

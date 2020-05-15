@@ -6,120 +6,127 @@ using Server.Items;
 using Server.Auction;
 using Server.Gumps;
 
-namespace Server.Mobiles{
-    public class Auctioneer : Mobile {
-	
-	private static List<Auctioneer> m_Instances = new List<Auctioneer>();
-	private static DateTime m_NextShout;
-	private static AuctionController m_Stone;
+namespace Server.Mobiles
+{
+    public class Auctioneer : Mobile
+    {
 
-	public static void SetStone( AuctionController stone ){
-	    m_Stone = stone;
-	}
-    
-	public static List<Auctioneer> Instances
-	{
-	    get{ return m_Instances; }
-	}
+        private static List<Auctioneer> m_Instances = new List<Auctioneer>();
+        private static DateTime m_NextShout;
+        private static AuctionController m_Stone;
 
-	public static void Announce( string what ){
-	    if( DateTime.Compare(m_NextShout, DateTime.Now) <= 0 ){
-		foreach( Auctioneer a in m_Instances ){
-		    a.Say( what );
-		}
+        public static void SetStone(AuctionController stone)
+        {
+            m_Stone = stone;
+        }
 
-		m_NextShout = DateTime.Now.AddMinutes(5.0);
-	    }
-	}
-	
-	public override void OnDoubleClick( Mobile from ){
-	    from.SendGump( new AuctionGump(from, m_Stone) );
-	}
-	
-	[Constructable]
-	public Auctioneer()
-	{
-	    m_Instances.Add( this );
+        public static List<Auctioneer> Instances
+        {
+            get { return m_Instances; }
+        }
 
-	    InitStats( 100, 100, 25 );
+        public static void Announce(string what)
+        {
+            if (DateTime.Compare(m_NextShout, DateTime.Now) <= 0)
+            {
+                foreach (Auctioneer a in m_Instances)
+                {
+                    a.Say(what);
+                }
 
-	    Title = "the auctioneer";
-	    Hue = Utility.RandomSkinHue();
+                m_NextShout = DateTime.Now.AddMinutes(5.0);
+            }
+        }
 
-	    if ( !Core.AOS )
-		NameHue = 0x35;
+        public override void OnDoubleClick(Mobile from)
+        {
+            from.SendGump(new AuctionGump(from, m_Stone));
+        }
 
-	    if ( this.Female = Utility.RandomBool() )
-	    {
-		this.Body = 0x191;
-		this.Name = NameList.RandomName( "female" );
-	    }
-	    else
-	    {
-		this.Body = 0x190;
-		this.Name = NameList.RandomName( "male" );
-	    }
+        [Constructable]
+        public Auctioneer()
+        {
+            m_Instances.Add(this);
 
-	    AddItem( new FancyShirt( Utility.RandomBrightHue() ) );
+            InitStats(100, 100, 25);
 
-	    Item skirt;
+            Title = "the auctioneer";
+            Hue = Utility.RandomSkinHue();
 
-	    switch ( Utility.Random( 2 ) )
-	    {
-		case 0: skirt = new Skirt(); break;
-		default: case 1: skirt = new Kilt(); break;
-	    }
+            if (!Core.AOS)
+                NameHue = 0x35;
 
-	    skirt.Hue = Utility.RandomGreenHue();
+            if (this.Female = Utility.RandomBool())
+            {
+                this.Body = 0x191;
+                this.Name = NameList.RandomName("female");
+            }
+            else
+            {
+                this.Body = 0x190;
+                this.Name = NameList.RandomName("male");
+            }
 
-	    AddItem( skirt );
+            AddItem(new FancyShirt(Utility.RandomBrightHue()));
 
-	    AddItem( new FeatheredHat( Utility.RandomBlueHue() ) );
+            Item skirt;
 
-	    Item boots;
+            switch (Utility.Random(2))
+            {
+                case 0: skirt = new Skirt(); break;
+                default: case 1: skirt = new Kilt(); break;
+            }
 
-	    switch ( Utility.Random( 2 ) )
-	    {
-		case 0: boots = new Boots(); break;
-		default: case 1: boots = new ThighBoots(); break;
-	    }
+            skirt.Hue = Utility.RandomGreenHue();
 
-	    AddItem( boots );
+            AddItem(skirt);
 
-	    Utility.AssignRandomHair( this );
-	}
+            AddItem(new FeatheredHat(Utility.RandomBlueHue()));
 
-	public override bool CanBeDamaged()
-	{
-	    return false;
-	}
+            Item boots;
 
-	public override void OnDelete()
-	{
-	    m_Instances.Remove( this );
-	    base.OnDelete();
-	}
+            switch (Utility.Random(2))
+            {
+                case 0: boots = new Boots(); break;
+                default: case 1: boots = new ThighBoots(); break;
+            }
 
-	public Auctioneer( Serial serial ) : base( serial )
-	{
-	    m_Instances.Add( this );
-	}
+            AddItem(boots);
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
+            Utility.AssignRandomHair(this);
+        }
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override bool CanBeDamaged()
+        {
+            return false;
+        }
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+        public override void OnDelete()
+        {
+            m_Instances.Remove(this);
+            base.OnDelete();
+        }
 
-	    int version = reader.ReadInt();
+        public Auctioneer(Serial serial) : base(serial)
+        {
+            m_Instances.Add(this);
+        }
 
-	    if ( Core.AOS && NameHue == 0x35 )
-		NameHue = -1;
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+
+            if (Core.AOS && NameHue == 0x35)
+                NameHue = -1;
+        }
     }
 }

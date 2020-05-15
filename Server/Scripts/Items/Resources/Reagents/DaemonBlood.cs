@@ -6,41 +6,41 @@ namespace Server.Items
 {
     public class DaemonBlood : BaseReagent, ICommodity
     {
-	int ICommodity.DescriptionNumber { get { return LabelNumber; } }
-	bool ICommodity.IsDeedable { get { return true; } }
+        int ICommodity.DescriptionNumber { get { return LabelNumber; } }
+        bool ICommodity.IsDeedable { get { return true; } }
 
-	[Constructable]
-	public DaemonBlood() : this( 1 )
-	{
-	}
+        [Constructable]
+        public DaemonBlood() : this(1)
+        {
+        }
 
-	[Constructable]
-	public DaemonBlood( int amount ) : base( 0xF7D, amount )
-	{
-	}
+        [Constructable]
+        public DaemonBlood(int amount) : base(0xF7D, amount)
+        {
+        }
 
-	public DaemonBlood( Serial serial ) : base( serial )
-	{
-	}
+        public DaemonBlood(Serial serial) : base(serial)
+        {
+        }
 
-	public override double DefaultWeight
-	{
-	    get { return 0.1; }
-	}
-		
+        public override double DefaultWeight
+        {
+            get { return 0.1; }
+        }
 
-	public override void Serialize( GenericWriter writer )
-	{
-	    base.Serialize( writer );
 
-	    writer.Write( (int) 0 ); // version
-	}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-	public override void Deserialize( GenericReader reader )
-	{
-	    base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-	    int version = reader.ReadInt();
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
     }
 }

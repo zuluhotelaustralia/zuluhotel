@@ -1,29 +1,35 @@
 // Generated File. DO NOT MODIFY BY HAND.
-namespace Server.Items {
+namespace Server.Items
+{
 
-	public class AzuriteOre : BaseOre {
-		[Constructable]
-		public AzuriteOre() : this( 1 ) {}
+    public class AzuriteOre : BaseOre
+    {
+        [Constructable]
+        public AzuriteOre() : this(1) { }
 
-		[Constructable]
-		public AzuriteOre( int amount ) : base( CraftResource.Azurite, amount ) {
-			this.Hue = 0x4df;
-		}
+        [Constructable]
+        public AzuriteOre(int amount) : base(CraftResource.Azurite, amount)
+        {
+            this.Hue = 0x4df;
+        }
 
-		public AzuriteOre( Serial serial ) : base( serial ) {}
+        public AzuriteOre(Serial serial) : base(serial) { }
 
-		public override void Serialize( GenericWriter writer ) {
-			base.Serialize( writer );
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int)0); // version
+        }
 
-		public override void Deserialize( GenericReader reader ) {
-			base.Deserialize( reader );
-			int version = reader.ReadInt();
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
 
-		public override BaseIngot GetIngot() {
-			return new AzuriteIngot();
-		}
-	}	
+        public override BaseIngot GetIngot()
+        {
+            return new AzuriteIngot();
+        }
+    }
 }

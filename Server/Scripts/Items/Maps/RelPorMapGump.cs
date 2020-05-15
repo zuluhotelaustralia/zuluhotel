@@ -24,10 +24,10 @@ namespace Server.Gumps
                 from.CloseGump(typeof(RelPorMapGump));
 
             foreach (Point2D pin in pinLocations)
-	        {
-		        AddImage(pin.X + 25, pin.Y + 13, 0x2331);
-	        }
-            
+            {
+                AddImage(pin.X + 25, pin.Y + 13, 0x2331);
+            }
+
         }
 
         public RelPorMapGump()

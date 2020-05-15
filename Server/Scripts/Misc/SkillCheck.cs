@@ -10,18 +10,18 @@ namespace Server.Misc
 {
     public class SkillCheck
     {
-	private static readonly bool AntiMacroCode = false; //was !Core.ML	//Change this to false to disable anti-macro code
+        private static readonly bool AntiMacroCode = false; //was !Core.ML	//Change this to false to disable anti-macro code
 
         private static bool m_LogRolls = false;
 
-        
 
-	public static TimeSpan AntiMacroExpire = TimeSpan.FromMinutes( 5.0 ); //How long do we remember targets/locations?
-	public const int Allowance = 3;	//How many times may we use the same location/target for gain
-	private const int LocationSize = 5; //The size of eeach location, make this smaller so players dont have to move as far
-	
-	private static bool[] UseAntiMacro = new bool[]
-	    {
+
+        public static TimeSpan AntiMacroExpire = TimeSpan.FromMinutes(5.0); //How long do we remember targets/locations?
+        public const int Allowance = 3; //How many times may we use the same location/target for gain
+        private const int LocationSize = 5; //The size of eeach location, make this smaller so players dont have to move as far
+
+        private static bool[] UseAntiMacro = new bool[]
+            {
 		// true if this skill uses the anti-macro code, false if it does not
 		false,// Alchemy = 0,
 		true,// Anatomy = 1,
@@ -78,366 +78,373 @@ namespace Server.Misc
 		true,// Bushido = 52
 		true,//Ninjitsu = 53
 		true // Spellweaving
-	    };
+            };
 
-	public static void Initialize()
-	{
-            CommandSystem.Register("ToggleSkillCheckLogging", AccessLevel.Administrator, new CommandEventHandler( ToggleSkillCheckLogging_OnCommand ));
-            
-	    Mobile.SkillCheckLocationHandler = new SkillCheckLocationHandler( Mobile_SkillCheckLocation );
-	    Mobile.SkillCheckDirectLocationHandler = new SkillCheckDirectLocationHandler( Mobile_SkillCheckDirectLocation );
-
-	    Mobile.SkillCheckTargetHandler = new SkillCheckTargetHandler( Mobile_SkillCheckTarget );
-	    Mobile.SkillCheckDirectTargetHandler = new SkillCheckDirectTargetHandler( Mobile_SkillCheckDirectTarget );
-
-	}
-
-
-        [Usage( "ToggleSkillCheckLogging" )]
-        [Description( "Toggles logging to console of skill check rolls." )]
-        private static void ToggleSkillCheckLogging_OnCommand( CommandEventArgs e )
+        public static void Initialize()
         {
-            m_LogRolls = ! m_LogRolls;
+            CommandSystem.Register("ToggleSkillCheckLogging", AccessLevel.Administrator, new CommandEventHandler(ToggleSkillCheckLogging_OnCommand));
+
+            Mobile.SkillCheckLocationHandler = new SkillCheckLocationHandler(Mobile_SkillCheckLocation);
+            Mobile.SkillCheckDirectLocationHandler = new SkillCheckDirectLocationHandler(Mobile_SkillCheckDirectLocation);
+
+            Mobile.SkillCheckTargetHandler = new SkillCheckTargetHandler(Mobile_SkillCheckTarget);
+            Mobile.SkillCheckDirectTargetHandler = new SkillCheckDirectTargetHandler(Mobile_SkillCheckDirectTarget);
+
+        }
+
+
+        [Usage("ToggleSkillCheckLogging")]
+        [Description("Toggles logging to console of skill check rolls.")]
+        private static void ToggleSkillCheckLogging_OnCommand(CommandEventArgs e)
+        {
+            m_LogRolls = !m_LogRolls;
             e.Mobile.SendMessage(m_LogRolls ? "Skill check logging ENABLED." : "Skill check logging DISABLED.");
         }
 
-	public static bool Mobile_SkillCheckLocation( Mobile from, SkillName skillName, double minSkill, double maxSkill )
-	{
-	    Skill skill = from.Skills[skillName];
+        public static bool Mobile_SkillCheckLocation(Mobile from, SkillName skillName, double minSkill, double maxSkill)
+        {
+            Skill skill = from.Skills[skillName];
 
-	    if ( skill == null )
-		return false;
+            if (skill == null)
+                return false;
 
-	    double value = skill.Value;
+            double value = skill.Value;
 
-	    if ( value < minSkill )
-		return false; // Too difficult
-	    else if ( value >= maxSkill )
-		return true; // No challenge
+            if (value < minSkill)
+                return false; // Too difficult
+            else if (value >= maxSkill)
+                return true; // No challenge
 
-	    double chance = (value - minSkill) / (maxSkill - minSkill);
+            double chance = (value - minSkill) / (maxSkill - minSkill);
 
-	    Point2D loc = new Point2D( from.Location.X / LocationSize, from.Location.Y / LocationSize );
-	    return CheckSkill( from, skill, loc, chance );
-	}
+            Point2D loc = new Point2D(from.Location.X / LocationSize, from.Location.Y / LocationSize);
+            return CheckSkill(from, skill, loc, chance);
+        }
 
-	public static bool Mobile_SkillCheckDirectLocation( Mobile from, SkillName skillName, double chance )
-	{
-	    Skill skill = from.Skills[skillName];
+        public static bool Mobile_SkillCheckDirectLocation(Mobile from, SkillName skillName, double chance)
+        {
+            Skill skill = from.Skills[skillName];
 
-	    if ( skill == null )
-		return false;
+            if (skill == null)
+                return false;
 
-	    if ( chance < 0.0 )
-		return false; // Too difficult
-	    else if ( chance >= 1.0 )
-		return true; // No challenge
+            if (chance < 0.0)
+                return false; // Too difficult
+            else if (chance >= 1.0)
+                return true; // No challenge
 
-	    Point2D loc = new Point2D( from.Location.X / LocationSize, from.Location.Y / LocationSize );
-	    return CheckSkill( from, skill, loc, chance );
-	}
+            Point2D loc = new Point2D(from.Location.X / LocationSize, from.Location.Y / LocationSize);
+            return CheckSkill(from, skill, loc, chance);
+        }
 
-	//where the sausage gets made
-	public static bool CheckSkill( Mobile from, Skill skill, object amObj, double chance )
-	{
-	    if ( from.Skills.Cap == 0 )
-		return false;
+        //where the sausage gets made
+        public static bool CheckSkill(Mobile from, Skill skill, object amObj, double chance)
+        {
+            if (from.Skills.Cap == 0)
+                return false;
 
-	    double a = from.Region.GetSkillSpecificFactor(skill); //difficulty, returns PrimaryFactor by default
-	    double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently a const;
-	    double gc = 0.0;
+            double a = from.Region.GetSkillSpecificFactor(skill); //difficulty, returns PrimaryFactor by default
+            double b = from.Region.RegionalSkillGainSecondaryFactor; //linearity, currently a const;
+            double gc = 0.0;
 
-	    if( skill.Value > 0 ) {
-		//skill must not be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
-		gc = -( Math.Log(skill.Value / b) * a );
-	    }
-	    else {
-		gc = 1.0; //avoid divide by 0
-	    }
-	    
-	    if ( from is BaseCreature && ((BaseCreature)from).Controlled )
-		gc *= 2;
+            if (skill.Value > 0)
+            {
+                //skill must not be in fixed-point form otherwise the math gets all fucked up, see below comments --sith
+                gc = -(Math.Log(skill.Value / b) * a);
+            }
+            else
+            {
+                gc = 1.0; //avoid divide by 0
+            }
 
-	    if ( from is PlayerMobile ) {
-		if ( ((PlayerMobile)from).Spec.IsSkillOnSpec( skill.SkillName ) ) {
-		    gc *= ((PlayerMobile)from).Spec.Bonus;
-		    chance *= ((PlayerMobile)from).Spec.Bonus;
-		}
-	    }
- 
-	    if ( gc > 1.0 )
-		gc = 1.0;
-	    
-	    //chance should be computed in the caller, I guess --sith
-	    bool success = ( chance >= Utility.RandomDouble() );
-	    
-	    //I don't know enough about the randomImpl but I assume if you dip below
-	    // gc values of 0.01, then you are effectively at gc = 0
-	    //
-	    // UPDATE:  wrong!  several trials of 1000000000 (1x10^9) RandomDoubles resulted in
-	    // approximately 1% of results being strictly < 0.01 on my macbook (a kaby lake i5)
-	    //therefore I think the bottom-end truncation is unnecessary, as is the guarantee
-	    // of success at skill.Base < 10.0 (for different reasons)
+            if (from is BaseCreature && ((BaseCreature)from).Controlled)
+                gc *= 2;
 
-	    //SECOND UPDATE:  I was computing the constants incorrectly.  logarithm and multiplication are
-	    // not commutative.. it's almost like a guy who passed 3rd year calculus should know
-	    // this.
-	    // tl;dr looping 1 to 1300 by 1s vs looping 0.1 to 130.0 by 0.1s may be the same number of steps
-	    // but the absolute magnitudes are obviously different durrrrr
-	    // For given values of a and b, the time to hit 130.0 in a single skill would be:
-	    // a = 0.005, b = 1600:  at 1 attempt per second:  ~6 days
-	    //                       at 1 attempt per 10 sec:  ~70 days
-	    // a = 0.01,  b = 1600:  at 1 attempt per second:
-	    //                       at 1 attempt per 10 sec:  
+            if (from is PlayerMobile)
+            {
+                if (((PlayerMobile)from).Spec.IsSkillOnSpec(skill.SkillName))
+                {
+                    gc *= ((PlayerMobile)from).Spec.Bonus;
+                    chance *= ((PlayerMobile)from).Spec.Bonus;
+                }
+            }
+
+            if (gc > 1.0)
+                gc = 1.0;
+
+            //chance should be computed in the caller, I guess --sith
+            bool success = (chance >= Utility.RandomDouble());
+
+            //I don't know enough about the randomImpl but I assume if you dip below
+            // gc values of 0.01, then you are effectively at gc = 0
+            //
+            // UPDATE:  wrong!  several trials of 1000000000 (1x10^9) RandomDoubles resulted in
+            // approximately 1% of results being strictly < 0.01 on my macbook (a kaby lake i5)
+            //therefore I think the bottom-end truncation is unnecessary, as is the guarantee
+            // of success at skill.Base < 10.0 (for different reasons)
+
+            //SECOND UPDATE:  I was computing the constants incorrectly.  logarithm and multiplication are
+            // not commutative.. it's almost like a guy who passed 3rd year calculus should know
+            // this.
+            // tl;dr looping 1 to 1300 by 1s vs looping 0.1 to 130.0 by 0.1s may be the same number of steps
+            // but the absolute magnitudes are obviously different durrrrr
+            // For given values of a and b, the time to hit 130.0 in a single skill would be:
+            // a = 0.005, b = 1600:  at 1 attempt per second:  ~6 days
+            //                       at 1 attempt per 10 sec:  ~70 days
+            // a = 0.01,  b = 1600:  at 1 attempt per second:
+            //                       at 1 attempt per 10 sec:  
 
             double roll = Utility.RandomDouble();
 
-            if ( m_LogRolls )
+            if (m_LogRolls)
                 Console.WriteLine("{3} a {4,5:G5} b {5,5:G5} gc {0,5:P} -> roll {1,5:P} -> {2}", gc, roll, gc >= roll, from.Name, a, b);
-	    
-	    if ( from.Alive && gc >= roll )
-		Gain( from, skill );
 
-	    return success;
-	}
+            if (from.Alive && gc >= roll)
+                Gain(from, skill);
 
-	public static bool Mobile_SkillCheckTarget( Mobile from, SkillName skillName, object target, double minSkill, double maxSkill )
-	{
-	    Skill skill = from.Skills[skillName];
+            return success;
+        }
 
-	    if ( skill == null )
-		return false;
+        public static bool Mobile_SkillCheckTarget(Mobile from, SkillName skillName, object target, double minSkill, double maxSkill)
+        {
+            Skill skill = from.Skills[skillName];
 
-	    double value = skill.Value;
+            if (skill == null)
+                return false;
 
-	    if ( value < minSkill )
-		return false; // Too difficult
-	    else if ( value >= maxSkill )
-		return true; // No challenge
+            double value = skill.Value;
 
-	    double chance = (value - minSkill) / (maxSkill - minSkill);
+            if (value < minSkill)
+                return false; // Too difficult
+            else if (value >= maxSkill)
+                return true; // No challenge
 
-	    return CheckSkill( from, skill, target, chance );
-	}
+            double chance = (value - minSkill) / (maxSkill - minSkill);
 
-	public static bool Mobile_SkillCheckDirectTarget( Mobile from, SkillName skillName, object target, double chance )
-	{
-	    Skill skill = from.Skills[skillName];
+            return CheckSkill(from, skill, target, chance);
+        }
 
-	    if ( skill == null )
-		return false;
+        public static bool Mobile_SkillCheckDirectTarget(Mobile from, SkillName skillName, object target, double chance)
+        {
+            Skill skill = from.Skills[skillName];
 
-	    if ( chance < 0.0 )
-		return false; // Too difficult
-	    else if ( chance >= 1.0 )
-		return true; // No challenge
+            if (skill == null)
+                return false;
 
-	    return CheckSkill( from, skill, target, chance );
-	}
+            if (chance < 0.0)
+                return false; // Too difficult
+            else if (chance >= 1.0)
+                return true; // No challenge
 
-	private static bool AllowGain( Mobile from, Skill skill, object obj )
-	{
-	    if ( AntiMacroCode && from is PlayerMobile && UseAntiMacro[skill.Info.SkillID] )
-		return ((PlayerMobile)from).AntiMacroCheck( skill, obj );
-	    else
-		return true;
-	}
+            return CheckSkill(from, skill, target, chance);
+        }
 
-	public enum Stat { Str, Dex, Int }
+        private static bool AllowGain(Mobile from, Skill skill, object obj)
+        {
+            if (AntiMacroCode && from is PlayerMobile && UseAntiMacro[skill.Info.SkillID])
+                return ((PlayerMobile)from).AntiMacroCheck(skill, obj);
+            else
+                return true;
+        }
 
-	public static void Gain( Mobile from, Skill skill )
-	{
-	    if ( from.Region.IsPartOf( typeof( Regions.Jail ) ) )
-		return;
+        public enum Stat { Str, Dex, Int }
 
-	    if ( from is BaseCreature && ((BaseCreature)from).IsDeadPet )
-		return;
+        public static void Gain(Mobile from, Skill skill)
+        {
+            if (from.Region.IsPartOf(typeof(Regions.Jail)))
+                return;
 
-	    if ( skill.SkillName == SkillName.Focus && from is BaseCreature )
-		return;
+            if (from is BaseCreature && ((BaseCreature)from).IsDeadPet)
+                return;
 
-	    if ( skill.Base < skill.Cap && skill.Lock == SkillLock.Up )
-	    {
-		int toGain = 1;
+            if (skill.SkillName == SkillName.Focus && from is BaseCreature)
+                return;
 
-		if ( skill.Base <= 40.0 )
-		    toGain = Utility.Random( 4 ) + 1;
+            if (skill.Base < skill.Cap && skill.Lock == SkillLock.Up)
+            {
+                int toGain = 1;
 
-		Skills skills = from.Skills;
+                if (skill.Base <= 40.0)
+                    toGain = Utility.Random(4) + 1;
 
-		if ( from.Player && ( skills.Total / skills.Cap ) >= Utility.RandomDouble() )//( skills.Total >= skills.Cap )
-		{
-		    for ( int i = 0; i < skills.Length; ++i )
-		    {
-			Skill toLower = skills[i];
+                Skills skills = from.Skills;
 
-			if ( toLower != skill && toLower.Lock == SkillLock.Down && toLower.BaseFixedPoint >= toGain )
-			{
-			    toLower.BaseFixedPoint -= toGain;
-			    break;
-			}
-		    }
-		}
+                if (from.Player && (skills.Total / skills.Cap) >= Utility.RandomDouble())//( skills.Total >= skills.Cap )
+                {
+                    for (int i = 0; i < skills.Length; ++i)
+                    {
+                        Skill toLower = skills[i];
 
-		// #region Scroll of Alacrity
-		// PlayerMobile pm = from as PlayerMobile;
+                        if (toLower != skill && toLower.Lock == SkillLock.Down && toLower.BaseFixedPoint >= toGain)
+                        {
+                            toLower.BaseFixedPoint -= toGain;
+                            break;
+                        }
+                    }
+                }
 
-		// if ( pm != null && skill.SkillName == pm.AcceleratedSkill && pm.AcceleratedStart > DateTime.UtcNow )
-		//     toGain *= Utility.RandomMinMax(2, 5);
-		// #endregion
+                // #region Scroll of Alacrity
+                // PlayerMobile pm = from as PlayerMobile;
 
-		if ( !from.Player || (skills.Total + toGain) <= skills.Cap )
-		{
-		    skill.BaseFixedPoint += toGain;
-		}
-	    }
+                // if ( pm != null && skill.SkillName == pm.AcceleratedSkill && pm.AcceleratedStart > DateTime.UtcNow )
+                //     toGain *= Utility.RandomMinMax(2, 5);
+                // #endregion
 
-	    if ( skill.Lock == SkillLock.Up )
-	    {
-		SkillInfo info = skill.Info;
+                if (!from.Player || (skills.Total + toGain) <= skills.Cap)
+                {
+                    skill.BaseFixedPoint += toGain;
+                }
+            }
 
-		if ( from.StrLock == StatLockType.Up && (info.StrGain / 33.3) > Utility.RandomDouble() )
-		    GainStat( from, Stat.Str );
-		else if ( from.DexLock == StatLockType.Up && (info.DexGain / 33.3) > Utility.RandomDouble() )
-		    GainStat( from, Stat.Dex );
-		else if ( from.IntLock == StatLockType.Up && (info.IntGain / 33.3) > Utility.RandomDouble() )
-		    GainStat( from, Stat.Int );
-	    }
-	}
+            if (skill.Lock == SkillLock.Up)
+            {
+                SkillInfo info = skill.Info;
 
-	public static bool CanLower( Mobile from, Stat stat )
-	{
-	    switch ( stat )
-	    {
-		case Stat.Str: return ( from.StrLock == StatLockType.Down && from.RawStr > 10 );
-		case Stat.Dex: return ( from.DexLock == StatLockType.Down && from.RawDex > 10 );
-		case Stat.Int: return ( from.IntLock == StatLockType.Down && from.RawInt > 10 );
-	    }
+                if (from.StrLock == StatLockType.Up && (info.StrGain / 33.3) > Utility.RandomDouble())
+                    GainStat(from, Stat.Str);
+                else if (from.DexLock == StatLockType.Up && (info.DexGain / 33.3) > Utility.RandomDouble())
+                    GainStat(from, Stat.Dex);
+                else if (from.IntLock == StatLockType.Up && (info.IntGain / 33.3) > Utility.RandomDouble())
+                    GainStat(from, Stat.Int);
+            }
+        }
 
-	    return false;
-	}
+        public static bool CanLower(Mobile from, Stat stat)
+        {
+            switch (stat)
+            {
+                case Stat.Str: return (from.StrLock == StatLockType.Down && from.RawStr > 10);
+                case Stat.Dex: return (from.DexLock == StatLockType.Down && from.RawDex > 10);
+                case Stat.Int: return (from.IntLock == StatLockType.Down && from.RawInt > 10);
+            }
 
-	public static bool CanRaise( Mobile from, Stat stat )
-	{
-	    if ( !(from is BaseCreature && ((BaseCreature)from).Controlled) )
-	    {
-		if ( from.RawStatTotal >= from.StatCap )
-		    return false;
-	    }
+            return false;
+        }
 
-	    switch ( stat )
-	    {
-		case Stat.Str: return ( from.StrLock == StatLockType.Up && from.RawStr < 130 ); //why the FUCK aren't these a named constant???
-		case Stat.Dex: return ( from.DexLock == StatLockType.Up && from.RawDex < 130 );
-		case Stat.Int: return ( from.IntLock == StatLockType.Up && from.RawInt < 130 );
-	    }
+        public static bool CanRaise(Mobile from, Stat stat)
+        {
+            if (!(from is BaseCreature && ((BaseCreature)from).Controlled))
+            {
+                if (from.RawStatTotal >= from.StatCap)
+                    return false;
+            }
 
-	    return false;
-	}
+            switch (stat)
+            {
+                case Stat.Str: return (from.StrLock == StatLockType.Up && from.RawStr < 130); //why the FUCK aren't these a named constant???
+                case Stat.Dex: return (from.DexLock == StatLockType.Up && from.RawDex < 130);
+                case Stat.Int: return (from.IntLock == StatLockType.Up && from.RawInt < 130);
+            }
 
-	public static void IncreaseStat( Mobile from, Stat stat, bool atrophy )
-	{
-	    atrophy = false; //atrophy || (from.RawStatTotal >= from.StatCap); //fuck this --sith
+            return false;
+        }
 
-	    switch ( stat )
-	    {
-		case Stat.Str:
-		    {
-			if ( atrophy )
-			{
-			    if ( CanLower( from, Stat.Dex ) && (from.RawDex < from.RawInt || !CanLower( from, Stat.Int )) )
-				--from.RawDex;
-			    else if ( CanLower( from, Stat.Int ) )
-				--from.RawInt;
-			}
+        public static void IncreaseStat(Mobile from, Stat stat, bool atrophy)
+        {
+            atrophy = false; //atrophy || (from.RawStatTotal >= from.StatCap); //fuck this --sith
 
-			if ( CanRaise( from, Stat.Str ) )
-			    ++from.RawStr;
+            switch (stat)
+            {
+                case Stat.Str:
+                    {
+                        if (atrophy)
+                        {
+                            if (CanLower(from, Stat.Dex) && (from.RawDex < from.RawInt || !CanLower(from, Stat.Int)))
+                                --from.RawDex;
+                            else if (CanLower(from, Stat.Int))
+                                --from.RawInt;
+                        }
 
-			break;
-		    }
-		case Stat.Dex:
-		    {
-			if ( atrophy )
-			{
-			    if ( CanLower( from, Stat.Str ) && (from.RawStr < from.RawInt || !CanLower( from, Stat.Int )) )
-				--from.RawStr;
-			    else if ( CanLower( from, Stat.Int ) )
-				--from.RawInt;
-			}
+                        if (CanRaise(from, Stat.Str))
+                            ++from.RawStr;
 
-			if ( CanRaise( from, Stat.Dex ) )
-			    ++from.RawDex;
+                        break;
+                    }
+                case Stat.Dex:
+                    {
+                        if (atrophy)
+                        {
+                            if (CanLower(from, Stat.Str) && (from.RawStr < from.RawInt || !CanLower(from, Stat.Int)))
+                                --from.RawStr;
+                            else if (CanLower(from, Stat.Int))
+                                --from.RawInt;
+                        }
 
-			break;
-		    }
-		case Stat.Int:
-		    {
-			if ( atrophy )
-			{
-			    if ( CanLower( from, Stat.Str ) && (from.RawStr < from.RawDex || !CanLower( from, Stat.Dex )) )
-				--from.RawStr;
-			    else if ( CanLower( from, Stat.Dex ) )
-				--from.RawDex;
-			}
+                        if (CanRaise(from, Stat.Dex))
+                            ++from.RawDex;
 
-			if ( CanRaise( from, Stat.Int ) )
-			    ++from.RawInt;
+                        break;
+                    }
+                case Stat.Int:
+                    {
+                        if (atrophy)
+                        {
+                            if (CanLower(from, Stat.Str) && (from.RawStr < from.RawDex || !CanLower(from, Stat.Dex)))
+                                --from.RawStr;
+                            else if (CanLower(from, Stat.Dex))
+                                --from.RawDex;
+                        }
 
-			break;
-		    }
-	    }
-	}
+                        if (CanRaise(from, Stat.Int))
+                            ++from.RawInt;
 
-	private static TimeSpan m_StatGainDelay = TimeSpan.Zero;  // TimeSpan.FromMinutes( ( Core.ML ) ? 0.05 : 15 );
-	private static TimeSpan m_PetStatGainDelay = TimeSpan.FromMinutes( 5.0 );
+                        break;
+                    }
+            }
+        }
 
-	public static void GainStat( Mobile from, Stat stat )
-	{
-	    switch( stat )
-	    {
-		case Stat.Str:
-		    {
-			if ( from is BaseCreature && ((BaseCreature)from).Controlled ) {
-			    if ( (from.LastStrGain + m_PetStatGainDelay) >= DateTime.UtcNow )
-				return;
-			}
-			else if( (from.LastStrGain + m_StatGainDelay) >= DateTime.UtcNow )
-			    return;
+        private static TimeSpan m_StatGainDelay = TimeSpan.Zero;  // TimeSpan.FromMinutes( ( Core.ML ) ? 0.05 : 15 );
+        private static TimeSpan m_PetStatGainDelay = TimeSpan.FromMinutes(5.0);
 
-			from.LastStrGain = DateTime.UtcNow;
-			break;
-		    }
-		case Stat.Dex:
-		    {
-			if ( from is BaseCreature && ((BaseCreature)from).Controlled ) {
-			    if ( (from.LastDexGain + m_PetStatGainDelay) >= DateTime.UtcNow )
-				return;
-			}
-			else if( (from.LastDexGain + m_StatGainDelay) >= DateTime.UtcNow )
-			    return;
+        public static void GainStat(Mobile from, Stat stat)
+        {
+            switch (stat)
+            {
+                case Stat.Str:
+                    {
+                        if (from is BaseCreature && ((BaseCreature)from).Controlled)
+                        {
+                            if ((from.LastStrGain + m_PetStatGainDelay) >= DateTime.UtcNow)
+                                return;
+                        }
+                        else if ((from.LastStrGain + m_StatGainDelay) >= DateTime.UtcNow)
+                            return;
 
-			from.LastDexGain = DateTime.UtcNow;
-			break;
-		    }
-		case Stat.Int:
-		    {
-			if ( from is BaseCreature && ((BaseCreature)from).Controlled ) {
-			    if ( (from.LastIntGain + m_PetStatGainDelay) >= DateTime.UtcNow )
-				return;
-			}
+                        from.LastStrGain = DateTime.UtcNow;
+                        break;
+                    }
+                case Stat.Dex:
+                    {
+                        if (from is BaseCreature && ((BaseCreature)from).Controlled)
+                        {
+                            if ((from.LastDexGain + m_PetStatGainDelay) >= DateTime.UtcNow)
+                                return;
+                        }
+                        else if ((from.LastDexGain + m_StatGainDelay) >= DateTime.UtcNow)
+                            return;
 
-			else if( (from.LastIntGain + m_StatGainDelay) >= DateTime.UtcNow )
-			    return;
+                        from.LastDexGain = DateTime.UtcNow;
+                        break;
+                    }
+                case Stat.Int:
+                    {
+                        if (from is BaseCreature && ((BaseCreature)from).Controlled)
+                        {
+                            if ((from.LastIntGain + m_PetStatGainDelay) >= DateTime.UtcNow)
+                                return;
+                        }
 
-			from.LastIntGain = DateTime.UtcNow;
-			break;
-		    }
-	    }
+                        else if ((from.LastIntGain + m_StatGainDelay) >= DateTime.UtcNow)
+                            return;
 
-	    bool atrophy = false; //( (from.RawStatTotal / (double)from.StatCap) >= Utility.RandomDouble() );
+                        from.LastIntGain = DateTime.UtcNow;
+                        break;
+                    }
+            }
 
-	    IncreaseStat( from, stat, atrophy );
-	}
+            bool atrophy = false; //( (from.RawStatTotal / (double)from.StatCap) >= Utility.RandomDouble() );
+
+            IncreaseStat(from, stat, atrophy);
+        }
     }
 }

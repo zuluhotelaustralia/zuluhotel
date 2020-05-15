@@ -52,7 +52,7 @@ namespace Server.Mobiles
 
             Int32 guardColor = 1755;
 
-            
+
             Utility.AssignRandomHair(this, 2155);
 
             SetStr(100, 100);
@@ -97,11 +97,11 @@ namespace Server.Mobiles
             PlateGorget.Movable = false;
             AddItem(PlateGorget);
 
-            
+
 
             switch (Utility.Random(2))
             {
-                
+
 
                 case 0:
                     {
@@ -111,12 +111,12 @@ namespace Server.Mobiles
 
                 case 1:
                     {
-                        AddItem(new Halberd ());
+                        AddItem(new Halberd());
                     }
                     break;
 
-                
-            }  
+
+            }
 
 
         }
@@ -126,7 +126,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-	    AddLoot( LootPack.Rich );
+            AddLoot(LootPack.Rich);
         }
 
         public override bool AlwaysMurderer { get { return true; } }

@@ -124,7 +124,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot( LootPack.Rich );
+            AddLoot(LootPack.Rich);
         }
 
         public override bool AlwaysMurderer { get { return true; } }

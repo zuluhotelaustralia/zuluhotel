@@ -45,8 +45,8 @@ namespace Server.Mobiles
         {
             PackItem(new Longsword());
 
-	    AddLoot( LootPack.FilthyRich, 2 );
-	    AddLoot( LootPack.Rich );
+            AddLoot(LootPack.FilthyRich, 2);
+            AddLoot(LootPack.Rich);
         }
 
         public override bool CanRummageCorpses { get { return true; } }

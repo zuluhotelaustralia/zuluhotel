@@ -4,38 +4,38 @@ using Server.Items;
 
 namespace Server.Items
 {
-	public class ShapeshiftScroll : SpellScroll
-	{
-            public override int LabelNumber { get { return 1031611; } }
-            
-		[Constructable]
-		public ShapeshiftScroll() : this( 1 )
-		{
-		}
+    public class ShapeshiftScroll : SpellScroll
+    {
+        public override int LabelNumber { get { return 1031611; } }
 
-		[Constructable]
-		public ShapeshiftScroll( int amount ) : base( 610, 0x2260, amount )
-		{
-		}
+        [Constructable]
+        public ShapeshiftScroll() : this(1)
+        {
+        }
 
-		public ShapeshiftScroll( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public ShapeshiftScroll(int amount) : base(610, 0x2260, amount)
+        {
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public ShapeshiftScroll(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int)0); // version
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
 
 
-	}
+    }
 }

@@ -2,70 +2,70 @@ using System;
 
 namespace Server.Items
 {
-	public class BlueDecorativeRugAddon : BaseAddon
-	{
-		public override BaseAddonDeed Deed { get { return new BlueDecorativeRugDeed(); } }
-		
-		[Constructable]
-		public BlueDecorativeRugAddon() : base()
-		{
-			AddComponent( new LocalizedAddonComponent( 0xAD2, 1076589 ), 1, 1, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD3, 1076589 ), -1, -1, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD4, 1076589 ), -1, 1, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD5, 1076589 ), 1, -1, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD6, 1076589 ), -1, 0, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD7, 1076589 ), 0, -1, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD8, 1076589 ), 1, 0, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD9, 1076589 ), 0, 1, 0 );
-			AddComponent( new LocalizedAddonComponent( 0xAD1, 1076589 ), 0, 0, 0 );
-		}
+    public class BlueDecorativeRugAddon : BaseAddon
+    {
+        public override BaseAddonDeed Deed { get { return new BlueDecorativeRugDeed(); } }
 
-		public BlueDecorativeRugAddon( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public BlueDecorativeRugAddon() : base()
+        {
+            AddComponent(new LocalizedAddonComponent(0xAD2, 1076589), 1, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD3, 1076589), -1, -1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD4, 1076589), -1, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD5, 1076589), 1, -1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD6, 1076589), -1, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD7, 1076589), 0, -1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD8, 1076589), 1, 0, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD9, 1076589), 0, 1, 0);
+            AddComponent(new LocalizedAddonComponent(0xAD1, 1076589), 0, 0, 0);
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public BlueDecorativeRugAddon(Serial serial) : base(serial)
+        {
+        }
 
-			writer.WriteEncodedInt( 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.WriteEncodedInt(0); // version
+        }
 
-			int version = reader.ReadEncodedInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
 
-	public class BlueDecorativeRugDeed : BaseAddonDeed
-	{
-		public override BaseAddon Addon { get { return new BlueDecorativeRugAddon(); } }
-		public override int LabelNumber { get { return 1076589; } } // Blue decorative rug
+            int version = reader.ReadEncodedInt();
+        }
+    }
 
-		[Constructable]
-		public BlueDecorativeRugDeed() : base()
-		{
-			LootType = LootType.Blessed;
-		}
+    public class BlueDecorativeRugDeed : BaseAddonDeed
+    {
+        public override BaseAddon Addon { get { return new BlueDecorativeRugAddon(); } }
+        public override int LabelNumber { get { return 1076589; } } // Blue decorative rug
 
-		public BlueDecorativeRugDeed( Serial serial ) : base( serial )
-		{
-		}
+        [Constructable]
+        public BlueDecorativeRugDeed() : base()
+        {
+            LootType = LootType.Blessed;
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public BlueDecorativeRugDeed(Serial serial) : base(serial)
+        {
+        }
 
-			writer.WriteEncodedInt( 0 ); // version
-		}
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.WriteEncodedInt(0); // version
+        }
 
-			int version = reader.ReadEncodedInt();
-		}
-	}
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadEncodedInt();
+        }
+    }
 }

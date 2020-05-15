@@ -6,29 +6,29 @@ namespace Server.Ethics.Evil
 {
     public sealed class EvilEthic : Ethic
     {
-	public EvilEthic()
-	{
-	    m_Definition = new EthicDefinition(
-					       0x455,
-					       "Evil", "(Evil)",
-					       "I am evil incarnate",
-					       new Power[]
-					       {
-						   new UnholySense(),
-						   new UnholyItem(),
-						   new SummonFamiliar(),
-						   new VileBlade(),
-						   new Blight(),
-						   new UnholyShield(),
-						   new UnholySteed(),
-						   new UnholyWord()
-					       }
-					       );
-	}
+        public EvilEthic()
+        {
+            m_Definition = new EthicDefinition(
+                               0x455,
+                               "Evil", "(Evil)",
+                               "I am evil incarnate",
+                               new Power[]
+                               {
+                           new UnholySense(),
+                           new UnholyItem(),
+                           new SummonFamiliar(),
+                           new VileBlade(),
+                           new Blight(),
+                           new UnholyShield(),
+                           new UnholySteed(),
+                           new UnholyWord()
+                               }
+                               );
+        }
 
-	public override bool IsEligible( Mobile mob )
-	{
-	    return false;
-	}
+        public override bool IsEligible(Mobile mob)
+        {
+            return false;
+        }
     }
 }
