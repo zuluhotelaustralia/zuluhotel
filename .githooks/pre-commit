@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+set -o pipefail
+
+# keep track of the last executed command
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+# echo an error message before exiting
+trap 'echo "\"${last_command}\" command filed with exit code $?."' ERR
+
+echo "Running pre-commit hook"
+
+# --diff-filter=d only filters files that are not deleted, which means we won't have trouble adding them afterwards
+STAGED_FILES=`git diff --name-only --cached --diff-filter=d`
+
+# If the include string is empty, we're done. This happens e.g. if the commit only consists of deleted files.
+if [[ -z "$STAGED_FILES" ]]
+then
+    echo "No files to change"
+    exit 0
+fi
+
+# Run tool restore in case we don't have them installed locally already, or we've upgraded the version
+dotnet tool restore
+
+# Format only staged files, implode list to ; delimited includes
+dotnet format --include="`echo $STAGED_FILES | sed ':a;N;$!ba;s/\n/;/g'`"
+
+# Restage files
+echo "Restaging files"
+echo "${STAGED_FILES}" | xargs -l -I {} git add "{}"
+
+echo "Finished pre-commit hook"

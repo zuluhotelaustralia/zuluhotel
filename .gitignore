@@ -11,3 +11,4 @@ RunZH.runtimeconfig.dev.json
 RunZH.runtimeconfig.json
 Server/Version.cs
 *~
+/.idea

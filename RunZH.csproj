@@ -9,6 +9,10 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
+  <Target Name="Install Githooks" BeforeTargets="BeforeBuild">
+    <Copy SourceFiles="$(ProjectDir).githooks\pre-commit" DestinationFolder="$(ProjectDir).git\hooks" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0"/>
     <PackageReference Include="System.Threading.Thread" Version="4.3.0"/>
