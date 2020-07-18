@@ -40,7 +40,7 @@ namespace Server.Misc
 		public static readonly string Address = null;
 		public static readonly string ServerName = "UOT2A r" + System.Reflection.Assembly.GetEntryAssembly().GetName().Version.MinorRevision;
 
-		public static readonly bool AutoDetect = true;
+		public static readonly bool AutoDetect = false;
 
 		public static void Initialize()
 		{

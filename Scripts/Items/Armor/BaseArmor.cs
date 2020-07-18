@@ -97,22 +97,63 @@ namespace Server.Items
 		{
 			get
 			{
-				int ar = BaseArmorRating;
+				double ar = BaseArmorRating;
 
 				if ( m_Protection != ArmorProtectionLevel.Regular )
 					ar += 10 + 5 * (int)m_Protection;
 
-				switch ( m_Resource )
-				{
-					case CraftResource.DullCopper:		ar += 2; break;
-					case CraftResource.ShadowIron:		ar += 4; break;
-					case CraftResource.Copper:			ar += 6; break;
-					case CraftResource.Bronze:			ar += 8; break;
-					case CraftResource.Gold:			ar += 10; break;
-					case CraftResource.Agapite:			ar += 12; break;
-					case CraftResource.Verite:			ar += 14; break;
-					case CraftResource.Valorite:		ar += 16; break;
-				}
+                switch (m_Resource)
+                {
+                    case CraftResource.Spike: ar += 5; break;
+                    case CraftResource.Fruity: ar += 5; break;
+                    case CraftResource.Bronze: ar += 5; break;
+                    case CraftResource.IceRock: ar += 10; break;
+                    case CraftResource.BlackDwarf: ar += 10; break;
+                    case CraftResource.DullCopper: ar += 10; break;
+                    case CraftResource.Platinum: ar += 10; break;
+                    case CraftResource.SilverRock: ar += 11; break;
+                    case CraftResource.DarkPagan: ar += 12; break;
+                    case CraftResource.Copper: ar += 13; break;
+                    case CraftResource.Mystic: ar += 14; break;
+                    case CraftResource.Spectral: ar += 15; break;
+                    case CraftResource.OldBritain: ar += 16; break;
+                    case CraftResource.Onyx: ar += 17; break;
+                    case CraftResource.RedElven: ar += 18; break;
+                    case CraftResource.Undead: ar += 19; break;
+                    case CraftResource.Pyrite: ar += 20; break;
+                    case CraftResource.Virginity: ar += 20; break;
+                    case CraftResource.Malachite: ar += 20; break;
+                    case CraftResource.Lavarock: ar += 20; break;
+                    case CraftResource.Azurite: ar += 21; break;
+                    case CraftResource.Dripstone: ar += 22; break;
+                    case CraftResource.Executor: ar += 23; break;
+                    case CraftResource.Peachblue: ar += 24; break;
+                    case CraftResource.Destruction: ar += 25; break;
+                    case CraftResource.Anra: ar += 26; break;
+                    case CraftResource.Crystal: ar += 27; break;
+                    case CraftResource.Doom: ar += 28; break;
+                    case CraftResource.Goddess: ar += 29; break;
+                    case CraftResource.NewZulu: ar += 30; break;
+                    case CraftResource.EbonTwilightSapphire: ar += 25; break;
+                    case CraftResource.DarkSableRuby: ar += 25; break;
+                    case CraftResource.RadiantNimbusDiamond: ar += 25; break;
+                    
+                    case CraftResource.RatLeather: ar *= 1.15; break;
+                    case CraftResource.WolfLeather: ar *= 1.20; break;
+                    case CraftResource.BearLeather: ar *= 1.25; break;
+                    case CraftResource.SerpentLeather: ar *= 1.30; break;
+                    case CraftResource.LizardLeather: ar *= 1.35; break;
+                    case CraftResource.TrollLeather: ar *= 1.40; break;
+                    case CraftResource.OstardLeather: ar *= 1.45; break;
+                    case CraftResource.NecromancerLeather: ar *= 1.50; break;
+                    case CraftResource.LavaLeather: ar *= 1.55; break;
+                    case CraftResource.LicheLeather: ar *= 1.60; break;
+                    case CraftResource.IceCrystalLeather: ar *= 1.65; break;
+                    case CraftResource.DragonLeather: ar *= 1.70; break;
+                    case CraftResource.WyrmLeather: ar *= 1.80; break;
+                    case CraftResource.BalronLeather: ar *= 1.90; break;
+                    case CraftResource.GoldenDragonLeather: ar *= 2.0; break;
+                }
 
 				ar += -8 + 8 * (int)m_Quality;
 				return ScaleArmorByDurability( ar );

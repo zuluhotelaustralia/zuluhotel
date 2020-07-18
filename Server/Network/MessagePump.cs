@@ -24,6 +24,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Server.Diagnostics;
+using RunZH.Scripts.Zulu.Packets;
 
 namespace Server.Network
 {
@@ -89,7 +90,7 @@ namespace Server.Network
 
 				for ( int i = 0; i < accepted.Length; ++i )
 				{
-					NetState ns = new NetState( accepted[i], this );
+					NetState ns = new PolAsciiNetState( accepted[i], this );
 					ns.Start();
 
 					if ( ns.Running )

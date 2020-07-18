@@ -8,6 +8,7 @@ using Server.Mobiles;
 using Server.Targeting;
 using Server.Engines.PartySystem;
 using Server.Misc;
+using RunZH.Scripts.Zulu.Engines.Classes;
 
 namespace Server
 {

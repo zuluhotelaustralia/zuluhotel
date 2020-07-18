@@ -4074,7 +4074,7 @@ namespace Server.Network
 			}
 		}
 
-		public ServerInfo( string name, int fullPercent, TimeZone tz, IPEndPoint address )
+		public ServerInfo( string name, int fullPercent, TimeZoneInfo tz, IPEndPoint address )
 		{
 			m_Name = name;
 			m_FullPercent = fullPercent;

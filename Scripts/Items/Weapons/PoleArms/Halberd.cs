@@ -1,38 +1,60 @@
 namespace Server.Items
 {
-    [FlipableAttribute( 0x143E, 0x143F )]
-	public class Halberd : BasePoleArm
-	{
-		public override int DefaultStrengthReq{ get{ return 45; } }
-		public override int DefaultMinDamage{ get{ return 5; } }
-		public override int DefaultMaxDamage{ get{ return 49; } }
-		public override int DefaultSpeed{ get{ return 25; } }
+    [FlipableAttribute(0x143E, 0x143F)]
+    public class Halberd : BasePoleArm
+    {
+        public override int DefaultStrengthReq
+        {
+            get { return 45; }
+        }
 
-		public override int InitMinHits{ get{ return 31; } }
-		public override int InitMaxHits{ get{ return 80; } }
+        public override int DefaultMinDamage
+        {
+            get { return 5; }
+        }
 
-		[Constructable]
-		public Halberd() : base( 0x143E )
-		{
-			Weight = 16.0;
-		}
+        public override int DefaultMaxDamage
+        {
+            get { return 49; }
+        }
 
-		public Halberd( Serial serial ) : base( serial )
-		{
-		}
+        public override int DefaultSpeed
+        {
+            get { return 25; }
+        }
 
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override int InitMinHits
+        {
+            get { return 31; }
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override int InitMaxHits
+        {
+            get { return 80; }
+        }
 
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+        [Constructable]
+        public Halberd() : base(0x143E)
+        {
+            Weight = 16.0;
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public Halberd(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

@@ -53,8 +53,9 @@ namespace Server.Misc
             bank.DropItem(book);
 
             // Bag containing 50 of each reagent
-            bank.DropItem(new BagOfReagents(50));
-
+            for (int i = 0; i < 5; ++i)
+                bank.DropItem(new BagOfReagents(50));
+            
             // Craft tools
             bank.DropItem(MakeNewbie(new Scissors()));
             bank.DropItem(MakeNewbie(new SewingKit(1000)));
@@ -91,24 +92,41 @@ namespace Server.Misc
             bank.DropItem(MakeNewbie(new Log(1000)));
 
             bank.DropItem(MakeNewbie(new IronIngot(5000)));
-            bank.DropItem(MakeNewbie(new DullCopperIngot(5000)));
-            bank.DropItem(MakeNewbie(new ShadowIronIngot(5000)));
-            bank.DropItem(MakeNewbie(new CopperIngot(5000)));
-            bank.DropItem(MakeNewbie(new BronzeIngot(5000)));
             bank.DropItem(MakeNewbie(new GoldIngot(5000)));
-            bank.DropItem(MakeNewbie(new AgapiteIngot(5000)));
-            bank.DropItem(MakeNewbie(new VeriteIngot(5000)));
-            bank.DropItem(MakeNewbie(new ValoriteIngot(5000)));
-
-            // Reagents
-            bank.DropItem(MakeNewbie(new BlackPearl(1000)));
-            bank.DropItem(MakeNewbie(new Bloodmoss(1000)));
-            bank.DropItem(MakeNewbie(new Garlic(1000)));
-            bank.DropItem(MakeNewbie(new Ginseng(1000)));
-            bank.DropItem(MakeNewbie(new MandrakeRoot(1000)));
-            bank.DropItem(MakeNewbie(new Nightshade(1000)));
-            bank.DropItem(MakeNewbie(new SulfurousAsh(1000)));
-            bank.DropItem(MakeNewbie(new SpidersSilk(1000)));
+            bank.DropItem(MakeNewbie(new SpikeIngot(5000)));
+            bank.DropItem(MakeNewbie(new FruityIngot(5000)));
+            bank.DropItem(MakeNewbie(new BronzeIngot(5000)));
+            bank.DropItem(MakeNewbie(new IceRockIngot(5000)));
+            bank.DropItem(MakeNewbie(new BlackDwarfIngot(5000)));
+            bank.DropItem(MakeNewbie(new DullCopperIngot(5000)));
+            bank.DropItem(MakeNewbie(new PlatinumIngot(5000)));
+            bank.DropItem(MakeNewbie(new SilverRockIngot(5000)));
+            bank.DropItem(MakeNewbie(new DarkPaganIngot(5000)));
+            bank.DropItem(MakeNewbie(new CopperIngot(5000)));
+            bank.DropItem(MakeNewbie(new MysticIngot(5000)));
+            bank.DropItem(MakeNewbie(new SpectralIngot(5000)));
+            bank.DropItem(MakeNewbie(new OldBritainIngot(5000)));
+            bank.DropItem(MakeNewbie(new OnyxIngot(5000)));
+            bank.DropItem(MakeNewbie(new RedElvenIngot(5000)));
+            bank.DropItem(MakeNewbie(new UndeadIngot(5000)));
+            bank.DropItem(MakeNewbie(new PyriteIngot(5000)));
+            bank.DropItem(MakeNewbie(new VirginityIngot(5000)));
+            bank.DropItem(MakeNewbie(new MalachiteIngot(5000)));
+            bank.DropItem(MakeNewbie(new LavarockIngot(5000)));
+            bank.DropItem(MakeNewbie(new AzuriteIngot(5000)));
+            bank.DropItem(MakeNewbie(new DripstoneIngot(5000)));
+            bank.DropItem(MakeNewbie(new ExecutorIngot(5000)));
+            bank.DropItem(MakeNewbie(new PeachblueIngot(5000)));
+            bank.DropItem(MakeNewbie(new DestructionIngot(5000)));
+            bank.DropItem(MakeNewbie(new AnraIngot(5000)));
+            bank.DropItem(MakeNewbie(new CrystalIngot(5000)));
+            bank.DropItem(MakeNewbie(new DoomIngot(5000)));
+            bank.DropItem(MakeNewbie(new GoddessIngot(5000)));
+            bank.DropItem(MakeNewbie(new NewZuluIngot(5000)));
+            bank.DropItem(MakeNewbie(new DarkSableRubyIngot(5000)));
+            bank.DropItem(MakeNewbie(new EbonTwilightSapphireIngot(5000)));
+            bank.DropItem(MakeNewbie(new RadiantNimbusDiamondIngot(5000)));
+            
 
             // Some extra starting gold
             bank.DropItem(MakeNewbie(new Gold(9000)));

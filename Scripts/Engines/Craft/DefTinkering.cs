@@ -289,15 +289,41 @@ namespace Server.Engines.Craft
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
-            AddSubRes(typeof(IronIngot), 1044022, 00.0, 1044036, 1044267);
-            AddSubRes(typeof(DullCopperIngot), 1044023, 65.0, 1044036, 1044268);
-            AddSubRes(typeof(ShadowIronIngot), 1044024, 70.0, 1044036, 1044268);
-            AddSubRes(typeof(CopperIngot), 1044025, 75.0, 1044036, 1044268);
-            AddSubRes(typeof(BronzeIngot), 1044026, 80.0, 1044036, 1044268);
-            AddSubRes(typeof(GoldIngot), 1044027, 85.0, 1044036, 1044268);
-            AddSubRes(typeof(AgapiteIngot), 1044028, 90.0, 1044036, 1044268);
-            AddSubRes(typeof(VeriteIngot), 1044029, 95.0, 1044036, 1044268);
-            AddSubRes(typeof(ValoriteIngot), 1044030, 99.0, 1044036, 1044268);
+            AddSubRes(typeof(IronIngot), 1160300, 0, 1044268);
+            AddSubRes(typeof(GoldIngot), 1160301, 1, 1044268);
+            AddSubRes(typeof(SpikeIngot), 1160302, 5, 1044268);
+            AddSubRes(typeof(FruityIngot), 1160303, 10, 1044268);
+            AddSubRes(typeof(BronzeIngot), 1160304, 15, 1044268);
+            AddSubRes(typeof(IceRockIngot), 1160305, 20, 1044268);
+            AddSubRes(typeof(BlackDwarfIngot), 1160306, 25, 1044268);
+            AddSubRes(typeof(DullCopperIngot), 1160307, 30, 1044268);
+            AddSubRes(typeof(PlatinumIngot), 1160308, 35, 1044268);
+            AddSubRes(typeof(SilverRockIngot), 1160309, 40, 1044268);
+            AddSubRes(typeof(DarkPaganIngot), 1160310, 45, 1044268);
+            AddSubRes(typeof(CopperIngot), 1160311, 50, 1044268);
+            AddSubRes(typeof(MysticIngot), 1160312, 55, 1044268);
+            AddSubRes(typeof(SpectralIngot), 1160313, 60, 1044268);
+            AddSubRes(typeof(OldBritainIngot), 1160314, 65, 1044268);
+            AddSubRes(typeof(OnyxIngot), 1160315, 70, 1044268);
+            AddSubRes(typeof(RedElvenIngot), 1160316, 75, 1044268);
+            AddSubRes(typeof(UndeadIngot), 1160317, 80, 1044268);
+            AddSubRes(typeof(PyriteIngot), 1160318, 85, 1044268);
+            AddSubRes(typeof(VirginityIngot), 1160319, 90, 1044268);
+            AddSubRes(typeof(MalachiteIngot), 1160320, 95, 1044268);
+            AddSubRes(typeof(LavarockIngot), 1160321, 97, 1044268);
+            AddSubRes(typeof(AzuriteIngot), 1160322, 98, 1044268);
+            AddSubRes(typeof(DripstoneIngot), 1160323, 100, 1044268);
+            AddSubRes(typeof(ExecutorIngot), 1160324, 104, 1044268);
+            AddSubRes(typeof(PeachblueIngot), 1160325, 108, 1044268);
+            AddSubRes(typeof(DestructionIngot), 1160326, 112, 1044268);
+            AddSubRes(typeof(AnraIngot), 1160327, 116, 1044268);
+            AddSubRes(typeof(CrystalIngot), 1160328, 119, 1044268);
+            AddSubRes(typeof(DoomIngot), 1160329, 122, 1044268);
+            AddSubRes(typeof(GoddessIngot), 1160330, 125, 1044268);
+            AddSubRes(typeof(NewZuluIngot), 1160331, 129, 1044268);
+            AddSubRes(typeof(EbonTwilightSapphireIngot), 1160332, 130, 1044268);
+            AddSubRes(typeof(DarkSableRubyIngot), 1160333, 130, 1044268);
+            AddSubRes(typeof(RadiantNimbusDiamondIngot), 1160334, 140, 1044268);
 
             MarkOption = true;
             Repair = true;

@@ -1,6 +1,7 @@
 using System;
 using Server;
 using Server.Items;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -14,14 +15,15 @@ namespace Server.Items
         [Constructable]
         public BagOfReagents(int amount)
         {
-            DropItem(new BlackPearl(amount));
-            DropItem(new Bloodmoss(amount));
-            DropItem(new Garlic(amount));
-            DropItem(new Ginseng(amount));
-            DropItem(new MandrakeRoot(amount));
-            DropItem(new Nightshade(amount));
-            DropItem(new SulfurousAsh(amount));
-            DropItem(new SpidersSilk(amount));
+            foreach(var t in Reagent.Types)
+            {
+                var reg = (BaseReagent) Activator.CreateInstance(t);
+                if (reg != null)
+                {
+                    reg.Amount = amount;
+                    DropItem(reg);
+                }
+            }
         }
 
         public BagOfReagents(Serial serial) : base(serial)

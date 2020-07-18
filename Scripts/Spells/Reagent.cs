@@ -36,7 +36,7 @@ namespace Server.Spells
             typeof(FertileDirt)
         };
 
-        public Type[] Types
+        public static Type[] Types
         {
             get { return m_Types; }
         }

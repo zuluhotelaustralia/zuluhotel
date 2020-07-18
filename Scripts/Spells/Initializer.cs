@@ -1,4 +1,6 @@
 using System;
+using Earth = RunZH.Scripts.Zulu.Spells.Earth;
+using Necromancy = RunZH.Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Spells
 {

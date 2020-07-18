@@ -31,6 +31,7 @@ using Server.HuePickers;
 using Server.Items;
 using Server.Menus;
 using Server.Mobiles;
+using RunZH.Scripts.Zulu.Engines.Classes;
 using Server.Network;
 using Server.Prompts;
 using Server.Targeting;
@@ -9958,7 +9959,7 @@ namespace Server
 
         private QuestArrow m_QuestArrow;
         private Spec m_Spec;
-        public Spec Spec
+        public virtual Spec Spec
         {
             get
             {

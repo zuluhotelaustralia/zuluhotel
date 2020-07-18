@@ -10,6 +10,10 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
   <Target Name="Install Githooks" BeforeTargets="BeforeBuild">
     <Copy SourceFiles="$(ProjectDir).githooks\pre-commit" DestinationFolder="$(ProjectDir).git\hooks" />
   </Target>
@@ -22,6 +26,11 @@
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
     <Compile Include="Server\**\*.cs" />
     <Compile Include="Scripts\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\Zulu\Engines" />
+    <Folder Include="Scripts\Zulu\Spells" />
   </ItemGroup>
 
 </Project>

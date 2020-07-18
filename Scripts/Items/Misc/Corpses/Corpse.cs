@@ -86,7 +86,7 @@ namespace Server.Items
 		// For Forensics Evaluation
 		public string				m_Forensicist;			// Name of the first PlayerMobile who used Forensic Evaluation on the corpse
 
-		public static readonly TimeSpan MonsterLootRightSacrifice = TimeSpan.FromMinutes( 2.0 );
+        public static readonly TimeSpan MonsterLootRightSacrifice = TimeSpan.Zero;
 
 		public static readonly TimeSpan InstancedCorpseTime = TimeSpan.FromMinutes( 3.0 );
 
