@@ -16,7 +16,10 @@ Custom functionality includes:
  
 ## Setup
 
-TODO
+You'll need to init the ModernUO git submodule when you first pull the project:
+```bash
+git submodule update --init --recursive
+```
 
 ### GatherSystem Setup
 
