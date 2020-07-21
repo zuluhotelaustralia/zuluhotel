@@ -873,15 +873,14 @@ namespace Server.Items
             m_Resource = resource;
             m_ResourceTypes = resourceTypes;
 
-            for (int i = 0; i < resourceTypes.Length; ++i)
-                CraftResources.RegisterType(resourceTypes[i], resource);
+            foreach (var t in resourceTypes)
+                CraftResources.RegisterType(t, resource);
         }
     }
 
     public class CraftResources
     {
-        private static CraftResourceInfo[] m_MetalInfo = new[]
-        {
+        public static readonly CraftResourceInfo[] MetalInfo = {
             new CraftResourceInfo(0x0, 1053109, "Iron", CraftAttributeInfo.Blank, CraftResource.Iron, typeof(IronIngot),
                 typeof(IronOre)),
             new CraftResourceInfo(2793, 1160000, "Gold", CraftAttributeInfo.Gold, CraftResource.Gold, typeof(GoldIngot),
@@ -957,8 +956,7 @@ namespace Server.Items
             ),
         };
 
-        private static CraftResourceInfo[] m_LeatherInfo = new[]
-        {
+        public static readonly CraftResourceInfo[] LeatherInfo = {
             new CraftResourceInfo(0x000, 1049353, "Normal", CraftAttributeInfo.Blank, CraftResource.RegularLeather,
                 typeof(Leather), typeof(Hides)),
             new CraftResourceInfo(0x7e2, 1160415, "Rat", CraftAttributeInfo.Rat, CraftResource.RatLeather,
@@ -993,8 +991,7 @@ namespace Server.Items
                 CraftResource.GoldenDragonLeather, typeof(GoldenDragonLeather), typeof(GoldenDragonHides))
         };
 
-        private static CraftResourceInfo[] m_WoodInfo = new[]
-        {
+        public static readonly CraftResourceInfo[] WoodInfo = {
             new CraftResourceInfo(0x000, 1011542, "Normal", CraftAttributeInfo.Blank, CraftResource.RegularWood,
                 typeof(Log), typeof(Board)),
             new CraftResourceInfo(1132, 1160034, "Pinetree", CraftAttributeInfo.Pinetree, CraftResource.Pinetree,
@@ -1061,8 +1058,7 @@ namespace Server.Items
         /// </summary>
         public static void RegisterType(Type resourceType, CraftResource resource)
         {
-            if (m_TypeTable == null)
-                m_TypeTable = new Hashtable();
+            m_TypeTable ??= new Hashtable();
 
             m_TypeTable[resourceType] = resource;
         }
@@ -1088,20 +1084,13 @@ namespace Server.Items
         /// </summary>
         public static CraftResourceInfo GetInfo(CraftResource resource)
         {
-            CraftResourceInfo[] list = null;
-
-            switch (GetType(resource))
+            CraftResourceInfo[] list = GetType(resource) switch
             {
-                case CraftResourceType.Metal:
-                    list = m_MetalInfo;
-                    break;
-                case CraftResourceType.Leather:
-                    list = m_LeatherInfo;
-                    break;
-                case CraftResourceType.Wood:
-                    list = m_WoodInfo;
-                    break;
-            }
+                CraftResourceType.Metal => MetalInfo,
+                CraftResourceType.Leather => LeatherInfo,
+                CraftResourceType.Wood => WoodInfo,
+                _ => null
+            };
 
             if (list != null)
             {
