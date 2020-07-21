@@ -28,12 +28,6 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
-  
-  <ItemGroup>
-    <Content Include="$(SolutionDir)\Distribution\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
     <DistributionFiles Include="$(SolutionDir)\Distribution\**\*.*" />
