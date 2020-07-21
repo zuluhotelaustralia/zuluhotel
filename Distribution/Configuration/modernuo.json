@@ -1,0 +1,28 @@
+{
+  "dataDirectories": [
+    "/home/jabin/games/ZuluHotelAustralia"
+  ],
+  "listeners": [
+    "0.0.0.0:2593"
+  ],
+  "settings": {
+    "currentExpansion": "T2A",
+    "accountAttackLimiter.enable": "True",
+    "ipLimiter.enable": "True",
+    "ipLimiter.blockAtConnection": "True",
+    "ipLimiter.maxConnectionsPerIP": "10",
+    "accountHandler.maxAccountsPerIP": "1",
+    "accountHandler.enableAutoAccountCreation": "True",
+    "accountHandler.enablePlayerPasswordCommand": "False",
+    "accountSecurity.encryptionAlgorithm": "Argon2",
+    "clientVerification.enable": "True",
+    "clientVerification.oldClientResponse": "Kick",
+    "clientVerification.ageLeniency": "10.00:00:00",
+    "clientVerification.gameTimeLeniency": "1.01:00:00",
+    "clientVerification.kickDelay": "00:00:20",
+    "serverListing.address": "(-null-)",
+    "serverListing.autoDetect": "True",
+    "serverListing.serverName": "ModernUO",
+    "pathfinding.enable": "True"
+  }
+}

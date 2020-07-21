@@ -2,12 +2,7 @@
 /Backups
 /Saves
 /muls
-/obj
-/bin
-RunZH.deps.json
-RunZH.dll
-RunZH.pdb
-RunZH.runtimeconfig.dev.json
-RunZH.runtimeconfig.json
+/ZuluContent/obj
+/ZuluContent/bin
 *~
 /.idea
