@@ -35,7 +35,7 @@
 
   <!-- Copies the subfolders in the Distribution dir into the build output dir -->
   <Target Name="DistributionContentTarget" BeforeTargets="BeforeBuild">
-    <Message Text="FileWrites: @(DistributionFiles)" Importance="high"/>
+    <Message Text="FileWrites: @(DistributionFiles)" Importance="high" />
     <ItemGroup>
       <None Include="@(DistributionFiles)" Link="..\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
