@@ -1,0 +1,3 @@
+[submodule "ModernUO"]
+	path = ModernUO
+	url = git@github.com:modernuo/ModernUO.git

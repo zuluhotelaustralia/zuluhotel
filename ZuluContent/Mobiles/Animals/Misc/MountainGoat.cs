@@ -1,0 +1,60 @@
+namespace Server.Mobiles
+{
+    [CorpseName( "a mountain goat corpse" )]
+	public class MountainGoat : BaseCreature
+	{
+
+		[Constructible]
+public MountainGoat() : base( AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
+		{
+			Name = "a mountain goat";
+			Body = 88;
+			BaseSoundID = 0x99;
+
+			SetStr( 22, 64 );
+			SetDex( 56, 75 );
+			SetInt( 16, 30 );
+
+			SetHits( 20, 33 );
+			SetMana( 0 );
+
+			SetDamage( 3, 7 );
+
+			SetSkill( SkillName.MagicResist, 25.1, 30.0 );
+			SetSkill( SkillName.Tactics, 29.3, 44.0 );
+			SetSkill( SkillName.Wrestling, 29.3, 44.0 );
+
+			Fame = 300;
+			Karma = 0;
+
+			VirtualArmor = 10;
+
+			Tamable = true;
+			ControlSlots = 1;
+			MinTameSkill = -0.9;
+		}
+
+		public override int Meat{ get{ return 2; } }
+		public override int Hides{ get{ return 12; } }
+		public override FoodType FavoriteFood{ get{ return FoodType.GrainsAndHay | FoodType.FruitsAndVegies; } }
+
+		[Constructible]
+public MountainGoat(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(IGenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int) 0);
+		}
+
+		public override void Deserialize(IGenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+}

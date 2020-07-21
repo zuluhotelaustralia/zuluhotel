@@ -1,0 +1,58 @@
+namespace Server.Items
+{
+    public class SmallEmptyPot : Item
+	{
+
+		[Constructible]
+public SmallEmptyPot() : base(0x11C6)
+		{
+			Weight = 100;
+		}
+
+		[Constructible]
+public SmallEmptyPot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(IGenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int) 0);
+		}
+
+		public override void Deserialize(IGenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class LargeEmptyPot : Item
+	{
+
+		public LargeEmptyPot() : base(0x11C7)
+		{
+			Weight = 6;
+		}
+
+		public LargeEmptyPot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(IGenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int) 0);
+		}
+
+		public override void Deserialize(IGenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+}

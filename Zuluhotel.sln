@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuluContent", "ZuluContent\ZuluContent.csproj", "{46C4A5C1-3655-4CCB-8546-CF2E5B320182}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "ModernUO\Projects\Server\Server.csproj", "{9637ACEC-800E-4712-BE05-0AD045440641}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModernUO", "ModernUO", "{70A70554-D1A3-4700-ABA1-FDEE7118280F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Tests", "ModernUO\Projects\Server.Tests\Server.Tests.csproj", "{43D26E73-3732-481A-9C24-AC00B8ED2C76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Release|x64.ActiveCfg = Release|x64
+		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Release|x64.Build.0 = Release|x64
+		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Debug|x64.ActiveCfg = Release|x64
+		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Debug|x64.Build.0 = Release|x64
+		{9637ACEC-800E-4712-BE05-0AD045440641}.Debug|x64.ActiveCfg = Debug|x64
+		{9637ACEC-800E-4712-BE05-0AD045440641}.Debug|x64.Build.0 = Debug|x64
+		{9637ACEC-800E-4712-BE05-0AD045440641}.Release|x64.ActiveCfg = Release|x64
+		{9637ACEC-800E-4712-BE05-0AD045440641}.Release|x64.Build.0 = Release|x64
+		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Debug|x64.ActiveCfg = Debug|x64
+		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Debug|x64.Build.0 = Debug|x64
+		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.ActiveCfg = Release|x64
+		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9637ACEC-800E-4712-BE05-0AD045440641} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}
+		{43D26E73-3732-481A-9C24-AC00B8ED2C76} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}
+	EndGlobalSection
+EndGlobal

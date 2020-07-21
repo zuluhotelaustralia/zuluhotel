@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>netcoreapp3.1</TargetFramework>
+      <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+      <UseNETCoreGenerator>true</UseNETCoreGenerator>
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+      <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+      <OutDir>$(SolutionDir)\ModernUO\Projects\Server\bin\$(Platform)\$(Configuration)\$(TargetFramework)\Assemblies</OutDir>
+      <RootNamespace>UOContent.Zulu</RootNamespace>
+      <Configurations>Release;Debug</Configurations>
+      <Platforms>x64</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MailKit" Version="2.7.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
+      <PackageReference Include="Argon2.Bindings" Version="1.5.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="3.1.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ModernUO\Projects\Server\Server.csproj" />
+    </ItemGroup>
+
+</Project>

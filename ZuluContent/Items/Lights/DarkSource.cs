@@ -1,0 +1,30 @@
+namespace Server.Items
+{
+    public class DarkSource : Item
+	{
+
+		[Constructible]
+public DarkSource() : base( 0x1646 )
+		{
+			Layer = Layer.TwoHanded;
+			Movable = false;
+		}
+
+		[Constructible]
+public DarkSource( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( IGenericWriter writer )
+		{
+			base.Serialize( writer );
+			writer.Write( (int) 0 );
+		}
+
+		public override void Deserialize( IGenericReader reader )
+		{
+			base.Deserialize( reader );
+			int version = reader.ReadInt();
+		}
+	}
+}
