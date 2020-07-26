@@ -23,6 +23,9 @@
     "serverListing.address": "(-null-)",
     "serverListing.autoDetect": "True",
     "serverListing.serverName": "ModernUO",
-    "pathfinding.enable": "True"
+    "pathfinding.enable": "True",
+    "visibleDamage": "True",
+    "singleClickProps": "False"
+    
   }
 }

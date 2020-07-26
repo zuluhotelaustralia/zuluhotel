@@ -1042,6 +1042,8 @@ namespace Server.Mobiles
 
             return true;
         }
+        
+        public override bool CheckContextMenuDisplay(IEntity target) => false;
 
         private static int CheckContentForTrade(Item item)
         {

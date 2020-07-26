@@ -1,114 +1,57 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
+using System.Text.Json.Serialization;
+using Server.Json;
 
 namespace Server
 {
-  public class NameList
-  {
-    private string m_Type;
-    private string[] m_List;
-
-    public string Type
+    public class NameList
     {
-      get { return m_Type; }
-    }
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
 
-    public string[] List
-    {
-      get { return m_List; }
-    }
+        [JsonPropertyName("names")]
+        public string[] List { get; set; }
 
-    public bool ContainsName(string name)
-    {
-      for (int i = 0; i < m_List.Length; i++)
-        if (name == m_List[i])
-          return true;
-
-      return false;
-    }
-
-    public NameList(string type, XmlElement xml)
-    {
-      m_Type = type;
-      m_List = xml.InnerText.Split(',');
-
-      for (int i = 0; i < m_List.Length; ++i)
-        m_List[i] = Utility.Intern(m_List[i].Trim());
-    }
-
-    public string GetRandomName()
-    {
-      if (m_List.Length > 0)
-        return m_List[Utility.Random(m_List.Length)];
-
-      return "";
-    }
-
-    public static NameList GetNameList(string type)
-    {
-      NameList n = null;
-      m_Table.TryGetValue(type, out n);
-      return n;
-    }
-
-    public static string RandomName(string type)
-    {
-      NameList list = GetNameList(type);
-
-      if (list != null)
-        return list.GetRandomName();
-
-      return "";
-    }
-
-    private static Dictionary<string, NameList> m_Table;
-
-    static NameList()
-    {
-      m_Table = new Dictionary<string, NameList>(StringComparer.OrdinalIgnoreCase);
-
-      string filePath = Path.Combine(Core.BaseDirectory, "Data/names.xml");
-
-      if (!File.Exists(filePath))
-        return;
-
-      try
-      {
-        Load(filePath);
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine("Warning: Exception caught loading name lists:");
-        Console.WriteLine(e);
-      }
-    }
-
-    private static void Load(string filePath)
-    {
-      XmlDocument doc = new XmlDocument();
-      doc.Load(filePath);
-
-      XmlElement root = doc["names"];
-
-      foreach (XmlElement element in root.GetElementsByTagName("namelist"))
-      {
-        string type = element.GetAttribute("type");
-
-        if (String.IsNullOrEmpty(type))
-          continue;
-
-        try
+        public bool ContainsName(string name)
         {
-          NameList list = new NameList(type, element);
+            for (int i = 0; i < List.Length; i++)
+                if (name == List[i])
+                    return true;
 
-          m_Table[type] = list;
+            return false;
         }
-        catch
+
+        public string GetRandomName() => List.Length > 0 ? List[Utility.Random(List.Length)] : "";
+
+        public static NameList GetNameList(string type)
         {
+            m_Table.TryGetValue(type, out NameList n);
+            return n;
         }
-      }
+
+        public static string RandomName(string type) => GetNameList(type)?.GetRandomName() ?? "";
+
+        private static readonly Dictionary<string, NameList> m_Table = new Dictionary<string, NameList>(StringComparer.OrdinalIgnoreCase);
+
+        public static void Configure()
+        {
+            // TODO: Turn this into a command so it can be updated in-game
+            string filePath = Path.Combine(Core.BaseDirectory, "Data/names.json");
+
+            List<NameList> nameLists = JsonConfig.Deserialize<List<NameList>>(filePath);
+            foreach (var nameList in nameLists)
+            {
+                nameList.FixNames();
+                m_Table.Add(nameList.Type, nameList);
+            }
+        }
+
+        private void FixNames()
+        {
+            for (int i = 0; i < List.Length; i++)
+                List[i] = Utility.Intern(List[i].Trim());
+        }
     }
-  }
 }

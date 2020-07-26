@@ -35,7 +35,7 @@ At this point you have a more-or-less playable world, lacking only appropriate s
 
 ### Credits
 
-1. [Zulu Hotel Canada](https://zuluhotel.ca/) (Daleron & Sith) for the initial Open-source release that this shard has been inspired and continued.
+1. [Zulu Hotel Canada](https://zuluhotel.ca/) (Daleron & Sith) for the initial open source release that this shard has used as a starting point and now continues.
 2. [RunUO.T2A](https://github.com/Grimoric/RunUO.T2A) for the initial T2A base that was used for layering on the Zuluhotel features.
-3. [ModernUO](https://github.com/modernuo/ModernUO/) for the core emulator
+3. [ModernUO](https://github.com/modernuo/ModernUO/) for being our core emulator
 4. [ClassicUO](https://github.com/andreakarasho/ClassicUO) for being our target client

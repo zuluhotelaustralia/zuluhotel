@@ -106,7 +106,7 @@ namespace Server.Engines.Harvest
 			}
 			else
 			{
-				Random random = new Random( x * 17 + y * 11 + map.MapID * 3 );
+				System.Random random = new System.Random( x * 17 + y * 11 + map.MapID * 3 );
 				randomValue = random.NextDouble();
 			}
 

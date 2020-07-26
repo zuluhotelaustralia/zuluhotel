@@ -21,7 +21,8 @@ namespace Server
       Mobile.VisibleDamageType = visibleDamage ? VisibleDamageType.Related : VisibleDamageType.None;
       Mobile.GuildClickMessage = ServerConfiguration.GetSetting("guildClickMessage", !Core.AOS);
       Mobile.AsciiClickMessage = ServerConfiguration.GetSetting("asciiClickMessage", !Core.AOS);
-
+      PacketHandlers.SingleClickProps = ServerConfiguration.GetSetting("singleClickProps", false);
+      
       Mobile.ActionDelay = ServerConfiguration.GetSetting("actionDelay", Core.AOS ? 1000 : 500);
 
     }
