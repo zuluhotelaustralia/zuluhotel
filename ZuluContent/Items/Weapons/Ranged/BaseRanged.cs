@@ -9,27 +9,27 @@ namespace Server.Items
         public abstract Type AmmoType { get; }
         public abstract Item Ammo { get; }
 
-        public override int DefHitSound
+        public override int DefaultHitSound
         {
             get { return 0x234; }
         }
 
-        public override int DefMissSound
+        public override int DefaultMissSound
         {
             get { return 0x238; }
         }
 
-        public override SkillName DefSkill
+        public override SkillName DefaultSkill
         {
             get { return SkillName.Archery; }
         }
 
-        public override WeaponType DefType
+        public override WeaponType DefaultWeaponType
         {
             get { return WeaponType.Ranged; }
         }
 
-        public override WeaponAnimation DefAnimation
+        public override WeaponAnimation DefaultAnimation
         {
             get { return WeaponAnimation.ShootXBow; }
         }

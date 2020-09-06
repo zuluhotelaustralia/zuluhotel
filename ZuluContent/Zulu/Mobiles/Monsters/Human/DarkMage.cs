@@ -10,6 +10,8 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -80,23 +82,23 @@ namespace Server.Mobiles
             PreferredSpells = new List<Type>
             {
                 typeof(Spells.Seventh.FlameStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
                 typeof(Spells.Sixth.EnergyBoltSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(PlagueSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
                 typeof(Spells.Fifth.DispelFieldSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
-                typeof(Scripts.Zulu.Spells.Earth.GustOfAirSpell),
-                typeof(Scripts.Zulu.Spells.Earth.RisingFireSpell),
+                typeof(SpectresTouchSpell),
+                typeof(DarknessSpell),
+                typeof(GustOfAirSpell),
+                typeof(RisingFireSpell),
                 typeof(Spells.Fifth.MindBlastSpell),
                 typeof(Spells.Fourth.FireFieldSpell),
-                typeof(Scripts.Zulu.Spells.Earth.IceStrikeSpell),
+                typeof(IceStrikeSpell),
                 typeof(Spells.Seventh.MeteorSwarmSpell),
-                typeof(Scripts.Zulu.Spells.Earth.ShiftingEarthSpell),
-                typeof(Scripts.Zulu.Spells.Earth.CallLightningSpell),
+                typeof(ShiftingEarthSpell),
+                typeof(CallLightningSpell),
             },
             ProvokeSkillOverride = 120,
             SaySpellMantra = true,

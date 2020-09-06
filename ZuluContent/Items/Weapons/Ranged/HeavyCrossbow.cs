@@ -14,21 +14,21 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 56; } }
 		public override int DefaultSpeed{ get{ return 10; } }
 
-		public override int DefMaxRange{ get{ return 8; } }
+		public override int DefaultMaxRange{ get{ return 8; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 100; } }
 
 
 		[Constructible]
-public HeavyCrossbow() : base( 0x13FD )
+        public HeavyCrossbow() : base( 0x13FD )
 		{
 			Weight = 9.0;
 			Layer = Layer.TwoHanded;
 		}
 
 		[Constructible]
-public HeavyCrossbow( Serial serial ) : base( serial )
+        public HeavyCrossbow( Serial serial ) : base( serial )
 		{
 		}
 

@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -66,9 +68,9 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Earth.ShiftingEarthSpell),
-                typeof(Scripts.Zulu.Spells.Earth.GustOfAirSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
+                typeof(ShiftingEarthSpell),
+                typeof(GustOfAirSpell),
+                typeof(WraithBreathSpell),
                 typeof(Spells.Seventh.MassDispelSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>

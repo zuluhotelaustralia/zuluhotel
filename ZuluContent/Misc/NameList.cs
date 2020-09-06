@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json.Serialization;
 using Server.Json;
+using Server.Mobiles;
 
 namespace Server
 {
     public class NameList
     {
+        public const string RandomNamePlaceholder = "<random>";
+
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
@@ -46,6 +50,31 @@ namespace Server
                 nameList.FixNames();
                 m_Table.Add(nameList.Type, nameList);
             }
+        }
+        
+        public static void SubstituteCreatureName(BaseCreature c)
+        {
+            if (!c.Name.Contains(RandomNamePlaceholder) || !c.CorpseNameOverride.Contains(RandomNamePlaceholder))
+                return;
+
+            string value;
+            try
+            {
+                var pair = m_Table.First(
+                    kv => c.Name.Contains(kv.Key, StringComparison.InvariantCultureIgnoreCase) ||
+                          c.GetType().Name.Contains(kv.Key, StringComparison.InvariantCultureIgnoreCase)
+                );
+                value = pair.Value.GetRandomName();
+            }
+            catch (InvalidOperationException)
+            {
+                value = RandomName("male");
+            }
+
+            c.Name = c.Name.Replace(RandomNamePlaceholder, value, StringComparison.InvariantCultureIgnoreCase);
+
+            c.CorpseNameOverride = c.CorpseNameOverride.Replace(RandomNamePlaceholder, value,
+                StringComparison.InvariantCultureIgnoreCase);
         }
 
         private void FixNames()

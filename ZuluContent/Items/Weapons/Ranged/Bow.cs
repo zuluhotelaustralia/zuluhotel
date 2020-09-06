@@ -37,7 +37,7 @@ namespace Server.Items
             get { return 20; }
         }
 
-        public override int DefMaxRange
+        public override int DefaultMaxRange
         {
             get { return 10; }
         }
@@ -52,7 +52,7 @@ namespace Server.Items
             get { return 60; }
         }
 
-        public override WeaponAnimation DefAnimation
+        public override WeaponAnimation DefaultAnimation
         {
             get { return WeaponAnimation.ShootBow; }
         }

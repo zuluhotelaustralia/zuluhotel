@@ -1990,6 +1990,11 @@ namespace Server.Mobiles
 
       base.OnAfterDelete();
     }
+    
+    public override void OnAfterNameChange(string oldName, string newName)
+    {
+        NameList.SubstituteCreatureName(this);
+    }
 
     public void DebugSay(string text)
     {

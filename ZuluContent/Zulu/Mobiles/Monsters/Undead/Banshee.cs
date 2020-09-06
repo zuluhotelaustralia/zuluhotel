@@ -11,6 +11,7 @@ using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Server.Engines.Magic.HitScripts;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -62,8 +63,8 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(WyvernStrikeSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {

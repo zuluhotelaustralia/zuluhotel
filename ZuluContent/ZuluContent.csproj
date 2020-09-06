@@ -29,17 +29,17 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <DistributionFiles Include="$(SolutionDir)\Distribution\**\*.*" />
-  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent Condition="'$(OS)' != 'UNIX'">
+      xcopy "$(SolutionDir)Distribution\*"    "$(OutDir)\..\"   /Y
+    </PostBuildEvent>
+  </PropertyGroup>
 
-  <!-- Copies the subfolders in the Distribution dir into the build output dir -->
-  <Target Name="DistributionContentTarget" BeforeTargets="BeforeBuild">
-    <Message Text="FileWrites: @(DistributionFiles)" Importance="high" />
-    <ItemGroup>
-      <None Include="@(DistributionFiles)" Link="..\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent Condition="'$(OS)' == 'UNIX'">
+      cp -Rf $(SolutionDir)Distribution/*  $(OutDir)/../
+    </PostBuildEvent>
 
-  </Target>
+  </PropertyGroup>
 
 </Project>

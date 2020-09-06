@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -72,13 +73,13 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
+                typeof(DarknessSpell),
+                typeof(DecayingRaySpell),
+                typeof(SpectresTouchSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(PlagueSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {

@@ -12,7 +12,7 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 15; } }
 		public override int DefaultSpeed{ get{ return 35; } }
 
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash1H; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Slash1H; } }
 
 
 		[Constructible]

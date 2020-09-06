@@ -26,7 +26,8 @@ namespace Server.Items
 		Might,
 		Force,
 		Power,
-		Vanq
+		Vanquishing,
+        Devastation
 	}
 
 	public enum WeaponAccuracyLevel

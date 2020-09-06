@@ -10,6 +10,7 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -69,8 +70,8 @@ namespace Server.Mobiles
                 typeof(Spells.Sixth.EnergyBoltSpell),
                 typeof(Spells.Sixth.ExplosionSpell),
                 typeof(Spells.Fifth.MindBlastSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(DecayingRaySpell),
+                typeof(WyvernStrikeSpell),
             },
             SaySpellMantra = true,
             Skills = new Dictionary<SkillName, CreatureProp>

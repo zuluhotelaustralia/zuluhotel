@@ -12,12 +12,12 @@ namespace Server.Items
 
 	public abstract class BaseAxe : BaseMeleeWeapon
 	{
-		public override int DefHitSound{ get{ return 0x232; } }
-		public override int DefMissSound{ get{ return 0x23A; } }
+		public override int DefaultHitSound{ get{ return 0x232; } }
+		public override int DefaultMissSound{ get{ return 0x23A; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Swords; } }
-		public override WeaponType DefType{ get{ return WeaponType.Axe; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
+		public override SkillName DefaultSkill{ get{ return SkillName.Swords; } }
+		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Axe; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
 		public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
 

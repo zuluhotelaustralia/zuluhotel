@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -75,12 +76,12 @@ namespace Server.Mobiles
                 typeof(Spells.Fourth.LightningSpell),
                 typeof(Spells.Sixth.ExplosionSpell),
                 typeof(Spells.Sixth.MassCurseSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
+                typeof(AbyssalFlameSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(SpectresTouchSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WraithBreathSpell),
+                typeof(DecayingRaySpell),
             },
             ProvokeSkillOverride = 120,
             Skills = new Dictionary<SkillName, CreatureProp>

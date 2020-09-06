@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -73,9 +74,9 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
+                typeof(PlagueSpell),
                 typeof(Spells.Fifth.DispelFieldSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
+                typeof(SpectresTouchSpell),
                 typeof(Spells.Fifth.MindBlastSpell),
                 typeof(Spells.Fourth.CurseSpell),
             },

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
 using Server;
 
 using Server.Misc;
@@ -98,7 +99,7 @@ namespace Server.Mobiles
             Str = 600,
             Tamable = true,
             VirtualArmor = 30,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Earth.GustOfAirSpell>(),
+            WeaponAbility = new SpellStrike<GustOfAirSpell>(),
             WeaponAbilityChance = 0.65,
 
         });

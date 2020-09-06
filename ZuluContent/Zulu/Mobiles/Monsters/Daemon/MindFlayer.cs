@@ -11,6 +11,7 @@ using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Server.Engines.Magic.HitScripts;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -76,7 +77,7 @@ namespace Server.Mobiles
             Tamable = false,
             TargetAcquireExhaustion = true,
             VirtualArmor = 60,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Necromancy.ControlUndeadSpell>(),
+            WeaponAbility = new SpellStrike<ControlUndeadSpell>(),
             WeaponAbilityChance = 1,
 
         });

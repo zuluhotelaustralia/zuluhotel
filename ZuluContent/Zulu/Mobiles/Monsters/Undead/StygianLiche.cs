@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -78,14 +80,14 @@ namespace Server.Mobiles
                 typeof(Spells.Sixth.EnergyBoltSpell),
                 typeof(Spells.Fourth.LightningSpell),
                 typeof(Spells.Sixth.ExplosionSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
-                typeof(Scripts.Zulu.Spells.Earth.IceStrikeSpell),
+                typeof(WraithBreathSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(PlagueSpell),
+                typeof(DecayingRaySpell),
+                typeof(DarknessSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
+                typeof(IceStrikeSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {

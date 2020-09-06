@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -71,13 +72,13 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
                 typeof(Spells.Sixth.EnergyBoltSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(DecayingRaySpell),
+                typeof(DarknessSpell),
                 typeof(Spells.Fifth.DispelFieldSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
@@ -95,7 +96,7 @@ namespace Server.Mobiles
             StamMaxSeed = 80,
             Str = 300,
             Tamable = false,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Necromancy.DarknessSpell>(),
+            WeaponAbility = new SpellStrike<DarknessSpell>(),
             WeaponAbilityChance = 1.0,
 
         });

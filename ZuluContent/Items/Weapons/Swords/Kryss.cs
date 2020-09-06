@@ -8,15 +8,15 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 28; } }
 		public override int DefaultSpeed{ get{ return 53; } }
 
-		public override int DefHitSound{ get{ return 0x23C; } }
-		public override int DefMissSound{ get{ return 0x238; } }
+		public override int DefaultHitSound{ get{ return 0x23C; } }
+		public override int DefaultMissSound{ get{ return 0x238; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 90; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Fencing; } }
-		public override WeaponType DefType{ get{ return WeaponType.Piercing; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Pierce1H; } }
+		public override SkillName DefaultSkill{ get{ return SkillName.Fencing; } }
+		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Piercing; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Pierce1H; } }
 
 
 		[Constructible]

@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -61,8 +63,8 @@ namespace Server.Mobiles
             PreferredSpells = new List<Type>
             {
                 typeof(Spells.Third.FireballSpell),
-                typeof(Scripts.Zulu.Spells.Earth.RisingFireSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
+                typeof(RisingFireSpell),
+                typeof(AbyssalFlameSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {

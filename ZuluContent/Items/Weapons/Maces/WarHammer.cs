@@ -11,7 +11,7 @@ namespace Server.Items
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 110; } }
 
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Bash2H; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Bash2H; } }
 
 
 		[Constructible]

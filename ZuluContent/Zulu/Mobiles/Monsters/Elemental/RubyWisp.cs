@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -67,13 +69,13 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Earth.RisingFireSpell),
+                typeof(RisingFireSpell),
                 typeof(Spells.Sixth.ExplosionSpell),
                 typeof(Spells.Sixth.MassCurseSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
+                typeof(AbyssalFlameSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(WraithBreathSpell),
+                typeof(DecayingRaySpell),
             },
             ProvokeSkillOverride = 120,
             Resistances = new Dictionary<ElementalType, CreatureProp>

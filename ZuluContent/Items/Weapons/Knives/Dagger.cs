@@ -11,9 +11,9 @@ namespace Server.Items
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 40; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Fencing; } }
-		public override WeaponType DefType{ get{ return WeaponType.Piercing; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Pierce1H; } }
+		public override SkillName DefaultSkill{ get{ return SkillName.Fencing; } }
+		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Piercing; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Pierce1H; } }
 
 
 		[Constructible]

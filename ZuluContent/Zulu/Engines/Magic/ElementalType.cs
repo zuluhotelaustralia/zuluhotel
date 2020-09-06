@@ -2,7 +2,7 @@ namespace Server.Engines.Magic
 {
   public enum ElementalType
   {
-    Water,
+    Water = 0,
     Air,
     Physical,
     Fire,

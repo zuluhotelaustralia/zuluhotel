@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
 using Server;
 
 using Server.Misc;
@@ -75,7 +76,7 @@ namespace Server.Mobiles
             Str = 400,
             Tamable = true,
             VirtualArmor = 20,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Earth.CallLightningSpell>(),
+            WeaponAbility = new SpellStrike<CallLightningSpell>(),
             WeaponAbilityChance = 0.5,
 
         });

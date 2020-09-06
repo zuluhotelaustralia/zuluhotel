@@ -35,7 +35,7 @@ namespace Server.Items
 
 
         [Constructible]
-public Halberd() : base(0x143E)
+        public Halberd() : base(0x143E)
         {
             Weight = 16.0;
         }

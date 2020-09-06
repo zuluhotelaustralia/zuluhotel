@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -73,7 +74,7 @@ namespace Server.Mobiles
             Str = 3000,
             Tamable = false,
             VirtualArmor = 20,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Necromancy.DecayingRaySpell>(),
+            WeaponAbility = new SpellStrike<DecayingRaySpell>(),
             WeaponAbilityChance = 1,
 
         });

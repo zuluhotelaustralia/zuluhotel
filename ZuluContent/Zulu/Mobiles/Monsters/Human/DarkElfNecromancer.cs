@@ -10,6 +10,7 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -66,9 +67,9 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Necromancy.DecayingRaySpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(DecayingRaySpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
             },
             ProvokeSkillOverride = 120,
             SaySpellMantra = true,

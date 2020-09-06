@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -71,11 +73,11 @@ namespace Server.Mobiles
                 typeof(Spells.Sixth.EnergyBoltSpell),
                 typeof(Spells.Fourth.LightningSpell),
                 typeof(Spells.Sixth.MassCurseSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Earth.IceStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Earth.GustOfAirSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(SpectresTouchSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(IceStrikeSpell),
+                typeof(GustOfAirSpell),
             },
             ProvokeSkillOverride = 120,
             Resistances = new Dictionary<ElementalType, CreatureProp>

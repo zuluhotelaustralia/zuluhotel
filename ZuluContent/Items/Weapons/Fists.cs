@@ -17,12 +17,12 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 8; } }
 		public override int DefaultSpeed{ get{ return 30; } }
 
-		public override int DefHitSound{ get{ return -1; } }
-		public override int DefMissSound{ get{ return -1; } }
+		public override int DefaultHitSound{ get{ return -1; } }
+		public override int DefaultMissSound{ get{ return -1; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Wrestling; } }
-		public override WeaponType DefType{ get{ return WeaponType.Fists; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Wrestle; } }
+		public override SkillName DefaultSkill{ get{ return SkillName.Wrestling; } }
+		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Fists; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Wrestle; } }
 
 		public Fists() : base( 0 )
 		{

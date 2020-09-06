@@ -10,15 +10,15 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 27; } }
 		public override int DefaultSpeed{ get{ return 40; } }
 
-		public override int DefHitSound{ get{ return 0x233; } }
-		public override int DefMissSound{ get{ return 0x239; } }
+		public override int DefaultHitSound{ get{ return 0x233; } }
+		public override int DefaultMissSound{ get{ return 0x239; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 80; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Macing; } }
-		public override WeaponType DefType{ get{ return WeaponType.Bashing; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Bash1H; } }
+		public override SkillName DefaultSkill{ get{ return SkillName.Macing; } }
+		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Bashing; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Bash1H; } }
 
 		public override HarvestSystem HarvestSystem{ get{ return null; } }
 

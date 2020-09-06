@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
@@ -10,6 +8,7 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -82,18 +81,18 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
                 typeof(Spells.Sixth.EnergyBoltSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(PlagueSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
                 typeof(Spells.Eighth.EarthquakeSpell),
                 typeof(Spells.Fifth.DispelFieldSpell),
                 typeof(Spells.Seventh.MassDispelSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
+                typeof(SpectresTouchSpell),
+                typeof(WraithBreathSpell),
+                typeof(DarknessSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {

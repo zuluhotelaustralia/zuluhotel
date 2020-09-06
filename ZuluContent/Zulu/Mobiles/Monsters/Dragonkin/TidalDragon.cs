@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -99,7 +100,7 @@ namespace Server.Mobiles
             Str = 500,
             Tamable = true,
             VirtualArmor = 40,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell>(),
+            WeaponAbility = new SpellStrike<SorcerorsBaneSpell>(),
             WeaponAbilityChance = 0.8,
 
         });

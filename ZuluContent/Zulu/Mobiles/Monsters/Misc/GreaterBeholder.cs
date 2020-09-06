@@ -10,6 +10,7 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -69,7 +70,7 @@ namespace Server.Mobiles
                 typeof(Spells.Third.FireballSpell),
                 typeof(Spells.Fourth.LightningSpell),
                 typeof(Spells.Fourth.CurseSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(WyvernStrikeSpell),
                 typeof(Spells.Third.PoisonSpell),
                 typeof(Spells.Fifth.MindBlastSpell),
             },

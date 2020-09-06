@@ -10,6 +10,8 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -80,21 +82,21 @@ namespace Server.Mobiles
             {
                 typeof(Spells.Sixth.ExplosionSpell),
                 typeof(Spells.Fourth.GreaterHealSpell),
-                typeof(Scripts.Zulu.Spells.Earth.CallLightningSpell),
-                typeof(Scripts.Zulu.Spells.Earth.GustOfAirSpell),
-                typeof(Scripts.Zulu.Spells.Earth.IceStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Earth.ShiftingEarthSpell),
-                typeof(Scripts.Zulu.Spells.Earth.RisingFireSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(CallLightningSpell),
+                typeof(GustOfAirSpell),
+                typeof(IceStrikeSpell),
+                typeof(ShiftingEarthSpell),
+                typeof(RisingFireSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
+                typeof(PlagueSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
                 typeof(Spells.Eighth.EarthquakeSpell),
                 typeof(Spells.Fifth.DispelFieldSpell),
                 typeof(Spells.Seventh.MassDispelSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
+                typeof(WraithBreathSpell),
+                typeof(DarknessSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {

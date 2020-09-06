@@ -11,6 +11,7 @@ using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -70,14 +71,14 @@ namespace Server.Mobiles
             PreferredSpells = new List<Type>
             {
                 typeof(Spells.Fifth.MindBlastSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
                 typeof(IceStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
+                typeof(PlagueSpell),
+                typeof(SorcerorsBaneSpell),
                 typeof(Spells.Eighth.EarthquakeSpell),
                 typeof(Spells.Seventh.MassDispelSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
+                typeof(DarknessSpell),
             },
             ProvokeSkillOverride = 170,
             Resistances = new Dictionary<ElementalType, CreatureProp>

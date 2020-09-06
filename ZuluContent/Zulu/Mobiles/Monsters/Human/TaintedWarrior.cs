@@ -11,6 +11,7 @@ using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Server.Engines.Magic.HitScripts;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Necromancy;
 
 namespace Server.Mobiles
 {
@@ -66,7 +67,7 @@ namespace Server.Mobiles
             StamMaxSeed = 50,
             Str = 400,
             VirtualArmor = 50,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Necromancy.DarknessSpell>(),
+            WeaponAbility = new SpellStrike<DarknessSpell>(),
             WeaponAbilityChance = 1.0,
 
         });

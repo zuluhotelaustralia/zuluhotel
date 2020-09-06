@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -65,7 +66,7 @@ namespace Server.Mobiles
             StamMaxSeed = 30,
             Str = 135,
             VirtualArmor = 20,
-            WeaponAbility = new SpellStrike<Scripts.Zulu.Spells.Necromancy.DarknessSpell>(),
+            WeaponAbility = new SpellStrike<DarknessSpell>(),
             WeaponAbilityChance = 1.0,
 
         });

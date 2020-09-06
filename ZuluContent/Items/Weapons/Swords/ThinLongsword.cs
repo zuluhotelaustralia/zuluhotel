@@ -8,8 +8,8 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 33; } }
 		public override int DefaultSpeed{ get{ return 35; } }
 
-		public override int DefHitSound{ get{ return 0x237; } }
-		public override int DefMissSound{ get{ return 0x23A; } }
+		public override int DefaultHitSound{ get{ return 0x237; } }
+		public override int DefaultMissSound{ get{ return 0x23A; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 110; } }

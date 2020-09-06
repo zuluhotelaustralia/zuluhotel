@@ -411,35 +411,34 @@ namespace Server.Spells
             if (!CheckDisturb(type, firstCircle, resistable))
                 return;
 
-            if (m_State == SpellState.Casting)
+            switch (m_State)
             {
-                if (!firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First)
+                case SpellState.Casting when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
                     return;
+                case SpellState.Casting:
+                {
+                    m_State = SpellState.None;
+                    m_Caster.Spell = null;
 
-                m_State = SpellState.None;
-                m_Caster.Spell = null;
+                    OnDisturb(type, true);
 
-                OnDisturb(type, true);
+                    m_CastTimer?.Stop();
 
-                if (m_CastTimer != null)
-                    m_CastTimer.Stop();
+                    m_AnimTimer?.Stop();
 
-                if (m_AnimTimer != null)
-                    m_AnimTimer.Stop();
-
-                m_Caster.NextSpellTime = Core.TickCount + (int)GetDisturbRecovery().TotalMilliseconds;
-            }
-            else if (m_State == SpellState.Sequencing)
-            {
-                if (!firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First)
+                    m_Caster.NextSpellTime = Core.TickCount + (int)GetDisturbRecovery().TotalMilliseconds;
+                    break;
+                }
+                case SpellState.Sequencing when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
                     return;
+                case SpellState.Sequencing:
+                    m_State = SpellState.None;
+                    m_Caster.Spell = null;
 
-                m_State = SpellState.None;
-                m_Caster.Spell = null;
+                    OnDisturb(type, false);
 
-                OnDisturb(type, false);
-
-                Target.Cancel(m_Caster);
+                    Target.Cancel(m_Caster);
+                    break;
             }
         }
 

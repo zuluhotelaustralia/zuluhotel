@@ -10,6 +10,7 @@ using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Spells.Earth;
 
 namespace Server.Mobiles
 {
@@ -69,10 +70,10 @@ namespace Server.Mobiles
             PerceptionRange = 10,
             PreferredSpells = new List<Type>
             {
-                typeof(Scripts.Zulu.Spells.Earth.CallLightningSpell),
-                typeof(Scripts.Zulu.Spells.Earth.GustOfAirSpell),
-                typeof(Scripts.Zulu.Spells.Earth.IceStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Earth.ShiftingEarthSpell),
+                typeof(CallLightningSpell),
+                typeof(GustOfAirSpell),
+                typeof(IceStrikeSpell),
+                typeof(ShiftingEarthSpell),
             },
             ProvokeSkillOverride = 160,
             Resistances = new Dictionary<ElementalType, CreatureProp>

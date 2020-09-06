@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Scripts.Zulu.Spells.Earth;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 using Server.Misc;
 using Server.Items;
@@ -84,14 +85,14 @@ namespace Server.Mobiles
             PreferredSpells = new List<Type>
             {
                 typeof(Spells.Seventh.FlameStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(WyvernStrikeSpell),
                 typeof(Spells.Sixth.EnergyBoltSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SorcerorsBaneSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
+                typeof(PlagueSpell),
+                typeof(SorcerorsBaneSpell),
+                typeof(WyvernStrikeSpell),
                 typeof(Spells.Fifth.DispelFieldSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
+                typeof(SpectresTouchSpell),
+                typeof(DarknessSpell),
                 typeof(GustOfAirSpell),
                 typeof(Spells.Fifth.MindBlastSpell),
                 typeof(Spells.Fourth.FireFieldSpell),

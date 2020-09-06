@@ -8,13 +8,13 @@ namespace Server.Items
 		public override int DefaultMaxDamage{ get{ return 32; } }
 		public override int DefaultSpeed{ get{ return 45; } }
 
-		public override int DefHitSound{ get{ return 0x236; } }
-		public override int DefMissSound{ get{ return 0x238; } }
+		public override int DefaultHitSound{ get{ return 0x236; } }
+		public override int DefaultMissSound{ get{ return 0x238; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 110; } }
 
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Pierce1H; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Pierce1H; } }
 
 
 		[Constructible]

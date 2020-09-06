@@ -6,12 +6,12 @@ namespace Server.Items
 {
     public abstract class BasePoleArm : BaseMeleeWeapon, IUsesRemaining
 	{
-		public override int DefHitSound{ get{ return 0x237; } }
-		public override int DefMissSound{ get{ return 0x238; } }
+		public override int DefaultHitSound{ get{ return 0x237; } }
+		public override int DefaultMissSound{ get{ return 0x238; } }
 
-		public override SkillName DefSkill{ get{ return SkillName.Swords; } }
-		public override WeaponType DefType{ get{ return WeaponType.Polearm; } }
-		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Slash2H; } }
+		public override SkillName DefaultSkill{ get{ return SkillName.Swords; } }
+		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Polearm; } }
+		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Slash2H; } }
 
 		public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
 

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.Necromancy;
 using Server;
 
 using Server.Misc;
@@ -70,11 +71,11 @@ namespace Server.Mobiles
             {
                 typeof(Spells.Sixth.EnergyBoltSpell),
                 typeof(Spells.Sixth.ExplosionSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WraithBreathSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.PlagueSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.DarknessSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell),
-                typeof(Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell),
+                typeof(WraithBreathSpell),
+                typeof(PlagueSpell),
+                typeof(DarknessSpell),
+                typeof(WyvernStrikeSpell),
+                typeof(AbyssalFlameSpell),
             },
             Resistances = new Dictionary<ElementalType, CreatureProp>
             {
