@@ -52,15 +52,15 @@ namespace Server.Items
         private SkillName m_Skill;
         private WeaponType m_Type;
         private WeaponAnimation m_Animation;
-        private MagicalProperties m_MagicProps;
 
         #endregion
 
         #region Magical Properties
+        private MagicalProperties m_MagicProps;
 
         public MagicalProperties MagicProps
         {
-            get => m_MagicProps ??= new MagicalProperties();
+            get => m_MagicProps ??= new MagicalProperties(this);
         }
 
         #endregion
@@ -606,9 +606,7 @@ namespace Server.Items
             else
                 armorItem = defender.ChestArmor;
 
-            IWearableDurability armor = armorItem as IWearableDurability;
-
-            if (armor != null)
+            if (armorItem is IWearableDurability armor)
                 damage = armor.OnHit(this, damage);
 
             int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
@@ -686,11 +684,11 @@ namespace Server.Items
                 }
             }
 
-            if (attacker is BaseCreature)
-                ((BaseCreature) attacker).OnGaveMeleeAttack(defender);
+            if (attacker is BaseCreature attackingCreature)
+                attackingCreature.OnGaveMeleeAttack(defender);
 
-            if (defender is BaseCreature)
-                ((BaseCreature) defender).OnGotMeleeAttack(attacker);
+            if (defender is BaseCreature defendingCreature)
+                defendingCreature.OnGotMeleeAttack(attacker);
         }
 
         public virtual CheckSlayerResult CheckSlayers(Mobile attacker, Mobile defender)
@@ -1043,13 +1041,19 @@ namespace Server.Items
             writer.Write((int) 10); // version
 
             SaveFlag flags = SaveFlag.None;
+            
+            SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
 
-            SetSaveFlag(ref flags, SaveFlag.DamageLevel, false);
-            SetSaveFlag(ref flags, SaveFlag.AccuracyLevel, false);
-            SetSaveFlag(ref flags, SaveFlag.DurabilityLevel, false);
-            SetSaveFlag(ref flags, SaveFlag.Quality, false);
-            SetSaveFlag(ref flags, SaveFlag.Identified, false);
-            SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, false);
+            // Legacy property saving
+            if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
+            {
+                SetSaveFlag(ref flags, SaveFlag.DamageLevel, DamageLevel != WeaponDamageLevel.Regular);
+                SetSaveFlag(ref flags, SaveFlag.AccuracyLevel, AccuracyLevel != WeaponAccuracyLevel.Regular);
+                SetSaveFlag(ref flags, SaveFlag.DurabilityLevel, DurabilityLevel != WeaponDurabilityLevel.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Quality, Quality != WeaponQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Identified, Identified);
+                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
+            }
 
             SetSaveFlag(ref flags, SaveFlag.Hits, m_Hits != 0);
             SetSaveFlag(ref flags, SaveFlag.MaxHits, MaxHitPoints != 0);
@@ -1071,9 +1075,11 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.Animation, m_Animation != (WeaponAnimation) (-1));
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != CraftResource.Iron);
             SetSaveFlag(ref flags, SaveFlag.Slayer2, Slayer2 != SlayerName.None);
-            SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, !MagicalProperties.IsNullOrEmpty(m_MagicProps));
             
             writer.Write((int) flags);
+            
+            if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
+                MagicProps.Serialize(writer);
 
             if (GetSaveFlag(flags, SaveFlag.DamageLevel))
                 writer.Write((int)DamageLevel);
@@ -1152,10 +1158,6 @@ namespace Server.Items
 
             if (GetSaveFlag(flags, SaveFlag.Slayer2))
                 writer.Write((int) Slayer2);
-
-            if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                m_MagicProps.Serialize(writer);
-            
         }
 
         [Flags]
@@ -1200,21 +1202,21 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+            
+            SaveFlag flags = (SaveFlag) reader.ReadInt();
 
             switch (version)
             {
                 case 10:
+                    if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
+                        m_MagicProps = MagicalProperties.Deserialize(reader, this);
+                    goto case 9;
                 case 9:
                 case 8:
                 case 7:
                 case 6:
                 case 5:
                 {
-                    SaveFlag flags = (SaveFlag) reader.ReadInt();
-
-                    if (flags == SaveFlag.None)
-                        flags = SaveFlag.Hits | SaveFlag.MaxHits;
-
                     if (GetSaveFlag(flags, SaveFlag.DamageLevel))
                     {
                         DamageLevel = (WeaponDamageLevel) reader.ReadInt();
@@ -1340,11 +1342,6 @@ namespace Server.Items
 
                     if (GetSaveFlag(flags, SaveFlag.Slayer2))
                         Slayer2 = (SlayerName) reader.ReadInt();
-
-                    if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                    {
-                        m_MagicProps = MagicalProperties.Deserialize(reader);
-                    }
 
                     break;
                 }

@@ -34,8 +34,8 @@ namespace Scripts.Engines.Magic
             }
         }
 
-        public MagicStatMod(StatType type, int offset) :
-            base(type, $"{nameof(MagicStatMod)}:{type}", offset, TimeSpan.Zero)
+        public MagicStatMod(StatType type, int offset, IEntity entity = null) :
+            base(type, $"{nameof(MagicStatMod)}:{type}:{entity?.Serial.ToString() ?? "generic"}", offset, TimeSpan.Zero)
         {
         }
 

@@ -28,14 +28,14 @@ namespace Scripts.Engines.Magic
 
         public void Serialize(IGenericWriter stream);
 
-        public static IMagicValue Deserialize(IGenericReader reader)
+        public static IMagicValue Deserialize(IGenericReader reader, IEntity parentEntity)
         {
             var prop = (MagicProp) reader.ReadInt();
 
             return prop switch
             {
                 MagicProp.Skill => new MagicSkillMod((SkillName) reader.ReadInt(), reader.ReadDouble()),
-                MagicProp.Stat => new MagicStatMod((StatType) reader.ReadInt(), reader.ReadInt()),
+                MagicProp.Stat => new MagicStatMod((StatType) reader.ReadInt(), reader.ReadInt(), parentEntity),
                 // MagicProp.ElementalResist => new MagicStatMod((StatType) reader.ReadInt(), reader.ReadInt()),
 
                 _ => (TypeCode)reader.ReadInt() switch

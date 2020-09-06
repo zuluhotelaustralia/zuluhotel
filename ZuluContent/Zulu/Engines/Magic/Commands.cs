@@ -18,21 +18,20 @@ namespace Scripts.Zulu.Engines.Magic
 
         public static void TestMagicMod_OnCommand(CommandEventArgs e)
         {
-            var item = new Halberd();
+            var item = new Robe();
 
             item.MagicProps.AddMod(new MagicStatMod(StatType.Str, 15));
             item.MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> strMod);
 
             var x = new MagicAttribute<int>(MagicProp.Damage, 6);
 
-            item.MagicProps.SetAttr(WeaponDurabilityLevel.Indestructible);
+            item.MagicProps.SetAttr(ArmorDurabilityLevel.Indestructible);
             item.MagicProps.SetAttr(MagicProp.Accuracy, 25);
 
-            var durability = item.MagicProps.GetAttr<WeaponDurabilityLevel>();
-            var accuracy = item.MagicProps.GetAttr<WeaponAccuracyLevel, int>();
+            var durability = item.MagicProps.GetAttr<ArmorDurabilityLevel>();
             item.MagicProps.GetAttr<int>(MagicProp.Accuracy);
             item.MagicProps[MagicProp.Damage]?.ToString();
-            item.MagicProps.SetAttr<WeaponDurabilityLevel, int>(10);
+            item.MagicProps.SetAttr<ArmorDurabilityLevel, int>(10);
 
 
             foreach (SkillName en in Enum.GetValues(typeof(SkillName)))
@@ -42,37 +41,8 @@ namespace Scripts.Zulu.Engines.Magic
 
             item.MagicProps.TryGetMod(SkillName.Anatomy, out IMagicMod<SkillName> anatMod);
             var names = anatMod.CursedNames;
-
-            var file = new FileInfo("magicprops.bin");
-            using var fsWrite = file.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            var writer = new BinaryFileWriter(fsWrite, true);
             
-            try
-            {
-                item.MagicProps.Serialize(writer);
-            }
-            finally
-            {
-                writer.Flush();
-                writer.Close();
-            }
-
-            using var fsRead = file.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            var reader = new BinaryFileReader(new BinaryReader(fsRead));
-            try
-            {
-                var magicalProperties = MagicalProperties.Deserialize(reader);
-
-                magicalProperties.ToString();
-            }
-            finally
-            {
-                reader.Close();
-            }
-
-
-            item.Map = e.Mobile.Map;
-            item.MoveToWorld(e.Mobile.Location);
+            item.MoveToWorld(e.Mobile.Location, e.Mobile.Map);
         }
 
         public static void TestAttributeMod_OnCommand(CommandEventArgs e)

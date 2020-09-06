@@ -1,5 +1,6 @@
 using System;
 using Server.Engines.Craft;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
@@ -24,6 +25,16 @@ namespace Server.Items
 
 		private CraftResource m_Resource;
 		private GemType m_GemType;
+        
+        #region Magical Properties
+        private MagicalProperties m_MagicProps;
+
+        public MagicalProperties MagicProps
+        {
+            get => m_MagicProps ??= new MagicalProperties(this);
+        }
+
+        #endregion
 
 		[CommandProperty( AccessLevel.GameMaster )]
 		public int MaxHitPoints
@@ -82,9 +93,7 @@ namespace Server.Items
 				return BaseGemTypeNumber + (int)m_GemType - 1;
 			}
 		}
-
-		public virtual int ArtifactRarity{ get{ return 0; } }
-
+        
 		public BaseJewel( int itemID, Layer layer ) : base( itemID )
 		{
 			m_Resource = CraftResource.Iron;
@@ -98,18 +107,43 @@ namespace Server.Items
 		public BaseJewel( Serial serial ) : base( serial )
 		{
 		}
+        
+        public override void OnAdded(IEntity parent)
+        {
+            if (parent is Mobile m)
+            {
+                MagicProps.OnMobileEquip(m);
+                m.CheckStatTimers();
+            }
+
+            base.OnAdded(parent);
+        }
+
+        public override void OnRemoved(IEntity parent)
+        {
+            if (parent is Mobile m)
+            {
+                MagicProps.OnMobileRemoved(m);
+                m.CheckStatTimers();
+            }
+
+            base.OnRemoved(parent);
+        }
 
 		public override void Serialize( IGenericWriter writer )
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 3 ); // version
+			writer.Write( (int) 4 ); // version
+            
+            MagicProps.Serialize(writer);
 
-			writer.WriteEncodedInt( (int) m_MaxHitPoints );
+            writer.WriteEncodedInt( (int) m_MaxHitPoints );
 			writer.WriteEncodedInt( (int) m_HitPoints );
 
 			writer.WriteEncodedInt( (int) m_Resource );
 			writer.WriteEncodedInt( (int) m_GemType );
+            
 		}
 
 		public override void Deserialize( IGenericReader reader )
@@ -120,6 +154,9 @@ namespace Server.Items
 
 			switch ( version )
 			{
+                case 4:
+                    m_MagicProps = MagicalProperties.Deserialize(reader, this);
+                    goto case 3;
 				case 3:
 				{
 					m_MaxHitPoints = reader.ReadEncodedInt();
