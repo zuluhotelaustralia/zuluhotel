@@ -1,8 +1,8 @@
 <p align="center">
-    <img src="https://i.imgur.com/KNDuNQs.png" width="200" height="200" >
+    <img src="https://i.imgur.com/KNDuNQs.png" width="200" height="200"  alt="Ultima Online ZHA Logo">
 </p>
 
-An open source custom shard for Ultima Online, running ontop of the [ModernUO](https://github.com/modernuo/ModernUO/) emulator.
+An open source custom shard for Ultima Online, running on-top of the [ModernUO](https://github.com/modernuo/ModernUO/) emulator.
 
 # Introduction
 
@@ -21,17 +21,20 @@ You'll need to init the ModernUO git submodule when you first pull the project:
 git submodule update --init --recursive
 ```
 
-### GatherSystem Setup
-
-TODO
-
 ### World Setup
 
-TODO
+Run these commands as an administrator after first login:
+
+```bash
+[decorate
+[doorgen
+[signgen
+[generatespawners felucca.json
+```
 
 ### Next Steps
 
-At this point you have a more-or-less playable world, lacking only appropriate spawns.  You should investigate the XMLSpawner system or else look into how the default spawners work.
+At this point you will have a fully spawned world with NPCs. You may want to run the `[save` command to persist the world to disk. 
 
 ### Credits
 
