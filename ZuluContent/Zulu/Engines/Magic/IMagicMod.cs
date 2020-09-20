@@ -36,7 +36,7 @@ namespace Scripts.Engines.Magic
             {
                 MagicProp.Skill => new MagicSkillMod((SkillName) reader.ReadInt(), reader.ReadDouble()),
                 MagicProp.Stat => new MagicStatMod((StatType) reader.ReadInt(), reader.ReadInt(), parentEntity),
-                // MagicProp.ElementalResist => new MagicStatMod((StatType) reader.ReadInt(), reader.ReadInt()),
+                MagicProp.ElementalResist => new MagicResistMod((ElementalType) reader.ReadInt(), reader.ReadInt()),
 
                 _ => (TypeCode)reader.ReadInt() switch
                 {

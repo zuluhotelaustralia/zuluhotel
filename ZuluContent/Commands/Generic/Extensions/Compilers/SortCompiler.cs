@@ -143,7 +143,7 @@ namespace Server.Commands.Generic
       }
 
       Type comparerType = typeBuilder.CreateType();
-      return (IComparer<T>)ActivatorUtil.CreateInstance(comparerType);
+      return comparerType.CreateInstance<IComparer<T>>();
     }
   }
 }

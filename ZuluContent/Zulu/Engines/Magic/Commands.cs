@@ -18,31 +18,36 @@ namespace Scripts.Zulu.Engines.Magic
 
         public static void TestMagicMod_OnCommand(CommandEventArgs e)
         {
-            var item = new Robe();
-
-            item.MagicProps.AddMod(new MagicStatMod(StatType.Str, 15));
-            item.MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> strMod);
-
-            var x = new MagicAttribute<int>(MagicProp.Damage, 6);
-
-            item.MagicProps.SetAttr(ArmorDurabilityLevel.Indestructible);
-            item.MagicProps.SetAttr(MagicProp.Accuracy, 25);
-
-            var durability = item.MagicProps.GetAttr<ArmorDurabilityLevel>();
-            item.MagicProps.GetAttr<int>(MagicProp.Accuracy);
-            item.MagicProps[MagicProp.Damage]?.ToString();
-            item.MagicProps.SetAttr<ArmorDurabilityLevel, int>(10);
-
-
-            foreach (SkillName en in Enum.GetValues(typeof(SkillName)))
-            {
-                item.MagicProps.AddMod(new MagicSkillMod(en, (int)en));
-            }
-
-            item.MagicProps.TryGetMod(SkillName.Anatomy, out IMagicMod<SkillName> anatMod);
-            var names = anatMod.CursedNames;
             
-            item.MoveToWorld(e.Mobile.Location, e.Mobile.Map);
+            
+            for (int i = 0; i < 10_000; i++)
+            {
+                var item = new Robe();
+
+                item.MagicProps.AddMod(new MagicStatMod(StatType.Str, 15));
+                item.MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> strMod);
+
+                var x = new MagicAttribute<int>(MagicProp.Damage, 6);
+
+                item.MagicProps.SetAttr(ArmorDurabilityLevel.Indestructible);
+                item.MagicProps.SetAttr(MagicProp.Accuracy, 25);
+
+                var durability = item.MagicProps.GetAttr<ArmorDurabilityLevel>();
+                item.MagicProps.GetAttr<int>(MagicProp.Accuracy);
+                item.MagicProps[MagicProp.Damage]?.ToString();
+                item.MagicProps.SetAttr<ArmorDurabilityLevel, int>(10);
+
+
+                foreach (SkillName en in Enum.GetValues(typeof(SkillName)))
+                {
+                    item.MagicProps.AddMod(new MagicSkillMod(en, (int)en));
+                }
+
+                item.MagicProps.TryGetMod(SkillName.Anatomy, out IMagicMod<SkillName> anatMod);
+                var names = anatMod.CursedNames;
+            
+                item.MoveToWorld(e.Mobile.Location, Map.Internal);
+            }
         }
 
         public static void TestAttributeMod_OnCommand(CommandEventArgs e)

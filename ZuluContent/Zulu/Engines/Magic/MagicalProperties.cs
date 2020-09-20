@@ -40,21 +40,21 @@ namespace ZuluContent.Zulu.Engines.Magic
         PlayerConstructed,
         StrBonus,
         DexBonus,
-        IntBonus
+        IntBonus,
     }
 
 
     public class MagicalProperties : MagicalPropertyDictionary
     {
+        
         public MagicalProperties(Item parent) : base(parent)
         {
         }
-        
+
         public static MagicalProperties Deserialize(IGenericReader reader, Item item)
         {
-            var mp = new MagicalProperties(item);
-            Deserialize(reader, mp);
-            
+            var mp = Deserialize(reader, new MagicalProperties(item));
+
             if(item.Parent is Mobile heldBy)
                 mp.OnMobileEquip(heldBy);
 

@@ -1,37 +1,41 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Scripts.Engines.Magic;
+using Scripts.Zulu.Utilities;
 using Server;
 using Server.Engines.Magic;
 using Server.Items;
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
-
     /**
      * Upcasting magical property dictionary 
      */
     public abstract class MagicalPropertyDictionary
     {
         public Item Parent { get; }
-        
+        protected bool IsDirty = true; // Starts off dirty for the first save
+        protected BufferedFileWriter SaveBuffer { get; }
+
         private static int GetEnumLength<T>() where T : Enum => Enum.GetValues(typeof(T)).Cast<int>().Last() + 1;
         private static readonly int AttributesLength = GetEnumLength<MagicProp>();
         private static readonly int SkillModsLength = GetEnumLength<SkillName>();
         private static readonly int StatModsLength = GetEnumLength<StatType>();
         private static readonly int ResistModsLength = GetEnumLength<ElementalType>();
 
-        private readonly IMagicValue[] m_Attributes =
+        protected readonly IMagicValue[] Attributes =
             new IMagicValue[AttributesLength];
 
-        private readonly IMagicMod<SkillName>[] m_SkillMods =
+        protected readonly IMagicMod<SkillName>[] SkillMods =
             new IMagicMod<SkillName>[SkillModsLength];
 
-        private readonly IMagicMod<StatType>[] m_StatMods =
+        protected readonly IMagicMod<StatType>[] StatMods =
             new IMagicMod<StatType>[StatModsLength];
 
-        private readonly IMagicMod<ElementalType>[] m_ResistMods =
+        protected readonly IMagicMod<ElementalType>[] ResistMods =
             new IMagicMod<ElementalType>[ResistModsLength];
 
         public static readonly IReadOnlyDictionary<Enum, MagicProp> EnumToMagicMappings =
@@ -53,12 +57,17 @@ namespace ZuluContent.Zulu.Engines.Magic
         protected MagicalPropertyDictionary(Item parent)
         {
             Parent = parent;
+            SaveBuffer = new BufferedFileWriter(true);
         }
 
         public IMagicValue this[MagicProp prop]
         {
-            get => m_Attributes[(int) prop];
-            set => m_Attributes[(int) prop] = value;
+            get => Attributes[(int) prop];
+            set
+            {
+                IsDirty = true;
+                Attributes[(int) prop] = value;
+            }
         }
 
         private MagicProp ToPropType<T>() where T : unmanaged, Enum
@@ -68,16 +77,19 @@ namespace ZuluContent.Zulu.Engines.Magic
 
             throw new ArgumentOutOfRangeException($"Enum value type of {typeof(T)} has no valid mapping entry.");
         }
-        
+
         public bool HasAttr(MagicProp magicProp) => this[magicProp] != null;
 
         public bool HasAttr<TKey>() where TKey : unmanaged, Enum => HasAttr(ToPropType<TKey>());
 
-        public TOutput GetAttr<TOutput>(MagicProp propertyType, TOutput defaultValue = default) where TOutput : unmanaged =>
+        public TOutput GetAttr<TOutput>(MagicProp propertyType, TOutput defaultValue = default)
+            where TOutput : unmanaged =>
             this[propertyType] is MagicAttribute<TOutput> instanceMod ? instanceMod.Target : defaultValue;
 
         public void SetAttr<TValue>(MagicProp magicalProp, TValue value) where TValue : unmanaged
         {
+            IsDirty = true;
+
             if (this[magicalProp] is MagicAttribute<TValue> attr)
                 attr.Target = value;
             else
@@ -90,7 +102,8 @@ namespace ZuluContent.Zulu.Engines.Magic
         public void SetAttr<T>(T value) where T : unmanaged, Enum =>
             SetAttr(ToPropType<T>(), value);
 
-        public TValue GetAttr<TKey, TValue>(TValue defaultValue = default) where TKey : unmanaged, Enum where TValue : unmanaged =>
+        public TValue GetAttr<TKey, TValue>(TValue defaultValue = default)
+            where TKey : unmanaged, Enum where TValue : unmanaged =>
             GetAttr(ToPropType<TKey>(), defaultValue);
 
         public void SetAttr<TKey, TValue>(TValue value) where TKey : unmanaged, Enum where TValue : unmanaged =>
@@ -103,9 +116,9 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
             var storage = default(T) switch
             {
-                SkillName _ => m_SkillMods as IMagicMod<T>[],
-                StatType _ => m_StatMods as IMagicMod<T>[],
-                ElementalType _ => m_ResistMods as IMagicMod<T>[],
+                SkillName _ => SkillMods as IMagicMod<T>[],
+                StatType _ => StatMods as IMagicMod<T>[],
+                ElementalType _ => ResistMods as IMagicMod<T>[],
                 _ => null
             };
 
@@ -115,9 +128,25 @@ namespace ZuluContent.Zulu.Engines.Magic
             return storage;
         }
 
+        public int GetResist(ElementalType type)
+        {
+            return ResistMods[(int) type] is MagicResistMod mod ? mod.Value : 0;
+        }
+        
+        public void SetResist(ElementalType type, int value)
+        {
+            IsDirty = true;
+            
+            if (ResistMods[(int) type] is MagicResistMod mod)
+                mod.Value = value;
+            else
+                ResistMods[(int) type] = new MagicResistMod(type, value);
+        }
 
         public void AddMod<T>(IMagicMod<T> mod) where T : unmanaged, Enum
         {
+            IsDirty = true;
+            
             if (TryGetMod(mod.Target, out IMagicMod<T> existing))
                 RemoveMod(existing);
 
@@ -163,9 +192,10 @@ namespace ZuluContent.Zulu.Engines.Magic
             // ReSharper disable CoVariantArrayConversion
             return ((IEnumerable<IMagicValue>[]) new[]
                 {
-                    m_Attributes,
-                    m_SkillMods,
-                    m_StatMods
+                    Attributes,
+                    SkillMods,
+                    StatMods,
+                    ResistMods
                 })
                 .Aggregate((acc, list) => acc.Concat(list))
                 .Where(m => m != null)
@@ -180,17 +210,25 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public void Serialize(IGenericWriter writer)
         {
-            var values = GetAllValues();
+            if (IsDirty)
+            {
+                SaveBuffer.Flush();
+                var values = GetAllValues();
 
-            const byte version = 1;
-            writer.Write(version);
-            writer.Write(values.Count);
+                const byte version = 1;
+                SaveBuffer.Write(version);
+                SaveBuffer.Write(values.Count);
 
-            foreach (var value in values)
-                value.Serialize(writer);
+                foreach (var value in values)
+                    value.Serialize(SaveBuffer);
+
+                IsDirty = false;
+            }
+            
+            SaveBuffer.WriteTo(writer);
         }
 
-        protected static MagicalPropertyDictionary Deserialize(IGenericReader reader, MagicalPropertyDictionary mp)
+        protected static T Deserialize<T>(IGenericReader reader, T mp) where T : MagicalPropertyDictionary
         {
             var version = reader.ReadByte();
             var length = reader.ReadInt();
@@ -201,13 +239,16 @@ namespace ZuluContent.Zulu.Engines.Magic
                 switch (value)
                 {
                     case IMagicMod<SkillName> skillMod:
-                        mp.m_SkillMods[(int) (object) skillMod.Target] = skillMod;
+                        mp.SkillMods[(int) (object) skillMod.Target] = skillMod;
                         break;
                     case IMagicMod<StatType> statMod:
-                        mp.m_StatMods[(int) (object) statMod.Target] = statMod;
+                        mp.StatMods[(int) (object) statMod.Target] = statMod;
+                        break;
+                    case IMagicMod<ElementalType> resistMod:
+                        mp.ResistMods[(int) (object) resistMod.Target] = resistMod;
                         break;
                     default:
-                        mp.m_Attributes[(int) value.Prop] = value;
+                        mp.Attributes[(int) value.Prop] = value;
                         break;
                 }
             }

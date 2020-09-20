@@ -91,7 +91,8 @@ namespace Server.Commands
           pack = from.Backpack;
         }
 
-        ConstructorInfo c = ActivatorUtil.GetConstructor(copy.GetType());
+        
+        ConstructorInfo c = copy.GetType().GetConstructor();
         if (c != null)
         {
           var paramList = c.GetParameters();

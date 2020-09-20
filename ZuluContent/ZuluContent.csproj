@@ -7,7 +7,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <OutDir>$(SolutionDir)\ModernUO\Projects\Server\bin\$(Platform)\$(Configuration)\$(TargetFramework)\Assemblies</OutDir>
+    <OutDir>$(SolutionDir)\ModernUO\Distribution\Assemblies</OutDir>
     <RootNamespace>ZuluContent</RootNamespace>
     <Configurations>Release;Debug</Configurations>
     <Platforms>x64</Platforms>

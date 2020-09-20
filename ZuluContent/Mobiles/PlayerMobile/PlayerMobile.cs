@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Scripts.Engines.Magic;
 using Server.Misc;
 using Server.Items;
 using Server.Gumps;
@@ -14,6 +16,8 @@ using Server.Regions;
 using Server.Accounting;
 using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
+using Server.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Mobiles
 {
@@ -827,11 +831,19 @@ namespace Server.Mobiles
 
         private void AddArmorRating(ref double rating, Item armor)
         {
-            BaseArmor ar = armor as BaseArmor;
-
-            if (ar != null)
+            if (armor is BaseArmor ar)
                 rating += ar.ArmorRatingScaled;
         }
+        
+        #region [Zulu] Resistances
+
+        public int GetResistance(ElementalType type)
+        {
+            return Items.OfType<IMagicEquipItem>().Sum(i => i.MagicProps.GetResist(type));
+        }
+
+        #endregion
+        
 
         #region [Stats]Max
 

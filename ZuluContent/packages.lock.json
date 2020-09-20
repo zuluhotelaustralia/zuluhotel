@@ -781,8 +781,8 @@
       },
       "Zlib.Bindings": {
         "type": "Transitive",
-        "resolved": "1.2.0",
-        "contentHash": "z1/D7sNbpq3E6B+YLvV99vx9fa6cnOtxVLKMBVFJ8i/dGZG/y8bE+7lyOwLaDmQlTendwidPvjKfUKhLYgBryg=="
+        "resolved": "1.3.0",
+        "contentHash": "Zb42zB4dP5W62xDWeT0rMNHI9zpsdaGt6yJqfgszwQxPpizQLXHbj44L+Ddcq2X/88mqlPhv03bjTTYZMS/Zig=="
       },
       "ModernUO": {
         "type": "Project",
@@ -791,7 +791,7 @@
           "Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv": "3.1.5",
           "Microsoft.Extensions.Hosting.Abstractions": "3.1.5",
           "System.IO.Pipelines": "4.7.2",
-          "Zlib.Bindings": "1.2.0"
+          "Zlib.Bindings": "1.3.0"
         }
       }
     }
