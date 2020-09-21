@@ -152,6 +152,8 @@ namespace ZuluContent.Zulu.Engines.Magic
 
             var storage = GetModStorage<T>();
             storage[(int) (object) mod.Target] = mod;
+
+            OnMobileEquip();
         }
 
         public void RemoveMod<T>(IMagicMod<T> mod) where T : unmanaged, Enum
@@ -161,14 +163,16 @@ namespace ZuluContent.Zulu.Engines.Magic
             storage[(int) (object) mod.Target] = null;
         }
 
-        public void OnMobileEquip(Mobile parent)
+        public void OnMobileEquip()
         {
-            foreach (var value in GetAllValues())
-                value.AddTo(parent);
+            if (Parent?.Parent is Mobile m) 
+                foreach (var value in GetAllValues())
+                    value.AddTo(m);
         }
 
-        public void OnMobileRemoved(Mobile parent)
+        public void OnMobileRemoved()
         {
+            
             foreach (var value in GetAllValues())
                 value.Remove();
         }

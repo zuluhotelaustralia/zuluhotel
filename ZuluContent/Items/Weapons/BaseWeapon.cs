@@ -35,9 +35,6 @@ namespace Server.Items
         #region Var declarations
 
         // Instance values. These values are unique to each weapon.
-        // private WeaponAccuracyLevel m_AccuracyLevel;
-        // private WeaponDurabilityLevel m_DurabilityLevel;
-        // private WeaponQuality m_Quality;
         private int m_Hits;
 
         // private SkillMod m_SkillMod, m_MageMod;
@@ -426,7 +423,7 @@ namespace Server.Items
 
             if (parent is Mobile from)
             {
-                MagicProps.OnMobileEquip(from);
+                MagicProps.OnMobileEquip();
                 from.CheckStatTimers();
                 from.Delta(MobileDelta.WeaponDamage);
             }
@@ -439,7 +436,7 @@ namespace Server.Items
                 if (m.Weapon is BaseWeapon weapon)
                     m.NextCombatTime = Core.TickCount + (int) weapon.GetDelay(m).TotalMilliseconds;
                 
-                MagicProps.OnMobileRemoved(m);
+                MagicProps.OnMobileRemoved();
                 m.CheckStatTimers();
                 m.Delta(MobileDelta.WeaponDamage);
             }

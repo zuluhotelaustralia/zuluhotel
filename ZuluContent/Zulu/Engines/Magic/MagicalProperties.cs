@@ -54,10 +54,9 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static MagicalProperties Deserialize(IGenericReader reader, Item item)
         {
             var mp = Deserialize(reader, new MagicalProperties(item));
-
-            if(item.Parent is Mobile heldBy)
-                mp.OnMobileEquip(heldBy);
-
+            
+            mp.OnMobileEquip();
+            
             return mp;
         }
 

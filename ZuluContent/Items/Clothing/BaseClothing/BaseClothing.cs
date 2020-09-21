@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Engines.Magic;
 using Server.Engines.Craft;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
@@ -107,27 +108,43 @@ namespace Server.Items
                 Hue = CraftResources.GetHue(m_Resource);
             }
         }
-
-        public virtual int ArtifactRarity
+        
+        public virtual int DefaultStrBonus
         {
-            get { return 0; }
+            get => 0;
         }
 
-        public virtual int BaseStrBonus
+        public virtual int DefaultDexBonus
         {
-            get { return 0; }
+            get => 0;
         }
 
-        public virtual int BaseDexBonus
+        public virtual int DefaultIntBonus
         {
-            get { return 0; }
+            get => 0;
         }
 
-        public virtual int BaseIntBonus
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int StrBonus
         {
-            get { return 0; }
+            get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
+            set => MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int DexBonus
+        {
+            get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
+            set => MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int IntBonus
+        {
+            get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
+            set => MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
+        }
+        
         public virtual Race RequiredRace
         {
             get { return null; }
@@ -135,54 +152,48 @@ namespace Server.Items
 
         public override bool CanEquip(Mobile from)
         {
-            if (from.AccessLevel < AccessLevel.GameMaster)
+
+            if (RequiredRace != null && from.Race != RequiredRace)
             {
-                if (RequiredRace != null && from.Race != RequiredRace)
-                {
-                    if (RequiredRace == Race.Elf)
-                        from.SendLocalizedMessage(1072203); // Only Elves may use this.
-                    else
-                        from.SendMessage("Only {0} may use this.", RequiredRace.PluralName);
-
-                    return false;
-                }
-                else if (!AllowMaleWearer && !from.Female)
-                {
-                    if (AllowFemaleWearer)
-                        from.SendLocalizedMessage(1010388); // Only females can wear this.
-                    else
-                        from.SendMessage("You may not wear this.");
-
-                    return false;
-                }
-                else if (!AllowFemaleWearer && from.Female)
-                {
-                    if (AllowMaleWearer)
-                        from.SendLocalizedMessage(1063343); // Only males can wear this.
-                    else
-                        from.SendMessage("You may not wear this.");
-
-                    return false;
-                }
+                if (RequiredRace == Race.Elf)
+                    from.SendLocalizedMessage(1072203); // Only Elves may use this.
                 else
-                {
-                    int strBonus = ComputeStatBonus(StatType.Str);
-                    int strReq = ComputeStatReq(StatType.Str);
+                    from.SendMessage("Only {0} may use this.", RequiredRace.PluralName);
 
-                    if (from.Str < strReq || @from.Str + strBonus < 1)
-                    {
-                        from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
-                        return false;
-                    }
+                return false;
+            }
+            else if (!AllowMaleWearer && !from.Female)
+            {
+                if (AllowFemaleWearer)
+                    from.SendLocalizedMessage(1010388); // Only females can wear this.
+                else
+                    from.SendMessage("You may not wear this.");
+
+                return false;
+            }
+            else if (!AllowFemaleWearer && from.Female)
+            {
+                if (AllowMaleWearer)
+                    from.SendLocalizedMessage(1063343); // Only males can wear this.
+                else
+                    from.SendMessage("You may not wear this.");
+
+                return false;
+            }
+            else
+            {
+                int strBonus = ComputeStatBonus(StatType.Str);
+                int strReq = ComputeStatReq(StatType.Str);
+
+                if (from.Str < strReq || @from.Str + strBonus < 1)
+                {
+                    from.SendLocalizedMessage(500213); // You are not strong enough to equip that.
+                    return false;
                 }
             }
 
-            return base.CanEquip(from);
-        }
 
-        public virtual int AosStrReq
-        {
-            get { return 10; }
+            return base.CanEquip(from);
         }
 
         public virtual int DefaultStrReq
@@ -224,38 +235,15 @@ namespace Server.Items
 
         public int ComputeStatBonus(StatType type)
         {
-            if (type == StatType.Str)
-                return BaseStrBonus;
-            else if (type == StatType.Dex)
-                return BaseDexBonus;
-            else
-                return BaseIntBonus;
+            return type switch
+            {
+                StatType.Str => StrBonus,
+                StatType.Dex => DexBonus,
+                StatType.Int => IntBonus,
+                _ => 0
+            };
         }
-
-        public virtual void AddStatBonuses(Mobile parent)
-        {
-            if (parent == null)
-                return;
-
-            int strBonus = ComputeStatBonus(StatType.Str);
-            int dexBonus = ComputeStatBonus(StatType.Dex);
-            int intBonus = ComputeStatBonus(StatType.Int);
-
-            if (strBonus == 0 && dexBonus == 0 && intBonus == 0)
-                return;
-
-            string modName = Serial.ToString();
-
-            if (strBonus != 0)
-                parent.AddStatMod(new StatMod(StatType.Str, modName + "Str", strBonus, TimeSpan.Zero));
-
-            if (dexBonus != 0)
-                parent.AddStatMod(new StatMod(StatType.Dex, modName + "Dex", dexBonus, TimeSpan.Zero));
-
-            if (intBonus != 0)
-                parent.AddStatMod(new StatMod(StatType.Int, modName + "Int", intBonus, TimeSpan.Zero));
-        }
-
+        
         public static void ValidateMobile(Mobile m)
         {
             for (int i = m.Items.Count - 1; i >= 0; --i)
@@ -265,10 +253,8 @@ namespace Server.Items
 
                 Item item = m.Items[i];
 
-                if (item is BaseClothing)
+                if (item is BaseClothing clothing)
                 {
-                    BaseClothing clothing = (BaseClothing) item;
-
                     if (clothing.RequiredRace != null && m.Race != clothing.RequiredRace)
                     {
                         if (clothing.RequiredRace == Race.Elf)
@@ -304,7 +290,7 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileEquip(m);
+                MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
             }
 
@@ -315,7 +301,7 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileRemoved(m);
+                MagicProps.OnMobileRemoved();
                 m.CheckStatTimers();
             }
 
@@ -374,12 +360,12 @@ namespace Server.Items
             return damageTaken;
         }
 
-        public BaseClothing(int itemID, Layer layer) : this(itemID, layer, 0)
-        {
-        }
-
         public BaseClothing(int itemID, Layer layer, int hue) : base(itemID)
         {
+            StrBonus = DefaultStrBonus;
+            DexBonus = DefaultDexBonus;
+            IntBonus = DefaultIntBonus;
+            
             Layer = layer;
             Hue = hue;
 
@@ -613,11 +599,7 @@ namespace Server.Items
 
             Mobile parent = Parent as Mobile;
 
-            if (parent != null)
-            {
-                AddStatBonuses(parent);
-                parent.CheckStatTimers();
-            }
+            parent?.CheckStatTimers();
         }
 
         #endregion

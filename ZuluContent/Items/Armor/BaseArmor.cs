@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Engines.Magic;
 using Server.Network;
 using Server.Engines.Craft;
 using ZuluContent.Zulu.Engines.Magic;
@@ -29,9 +30,6 @@ namespace Server.Items
         private int m_MaxHitPoints;
         private int m_HitPoints;
         private Mobile m_Crafter;
-        private ArmorQuality m_Quality;
-        private ArmorDurabilityLevel m_Durability;
-        private ArmorProtectionLevel m_Protection;
         private CraftResource m_Resource;
 
         // Overridable values. These values are provided to override the defaults which get defined in the individual armor scripts.
@@ -149,8 +147,8 @@ namespace Server.Items
             {
                 double ar = BaseArmorRating;
 
-                if (m_Protection != ArmorProtectionLevel.Regular)
-                    ar += 10 + 5 * (int) m_Protection;
+                if (ProtectionLevel != ArmorProtectionLevel.Regular)
+                    ar += 10 + 5 * (int) ProtectionLevel;
 
                 switch (m_Resource)
                 {
@@ -301,7 +299,7 @@ namespace Server.Items
                         break;
                 }
 
-                ar += -8 + 8 * (int) m_Quality;
+                ar += -8 + 8 * (int) Quality;
                 return ScaleArmorByDurability(ar);
             }
         }
@@ -314,22 +312,22 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrBonus
         {
-            get => MagicProps.GetAttr(MagicProp.StrBonus, DefaultStrBonus);
-            set => MagicProps.SetAttr(MagicProp.StrBonus, value);
+            get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
+            set => MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int DexBonus
         {
-            get => MagicProps.GetAttr(MagicProp.DexBonus, DefaultDexBonus);
-            set => MagicProps.SetAttr(MagicProp.DexBonus, value);
+            get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
+            set => MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int IntBonus
         {
-            get => MagicProps.GetAttr(MagicProp.IntBonus, DefaultIntBonus);
-            set => MagicProps.SetAttr(MagicProp.IntBonus, value);
+            get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
+            set => MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -469,11 +467,8 @@ namespace Server.Items
             get => MagicProps.GetAttr(MagicProp.ArmorProtection, ArmorProtectionLevel.Regular);
             set
             {
-                if (m_Protection != value)
-                {
-                    MagicProps.SetAttr(MagicProp.ArmorProtection, value);
-                    Invalidate();
-                }
+                MagicProps.SetAttr(MagicProp.ArmorProtection, value);
+                Invalidate();
             }
         }
 
@@ -548,7 +543,7 @@ namespace Server.Items
 
         public int GetDurabilityBonus()
         {
-            int bonus = m_Durability switch
+            int bonus = Durability switch
             {
                 ArmorDurabilityLevel.Durable => 20,
                 ArmorDurabilityLevel.Substantial => 50,
@@ -558,7 +553,7 @@ namespace Server.Items
                 _ => 0
             };
 
-            if (m_Quality == ArmorQuality.Exceptional)
+            if (Quality == ArmorQuality.Exceptional)
                 bonus += 20;
 
             return bonus;
@@ -716,9 +711,9 @@ namespace Server.Items
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
             {
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified != false);
-                SetSaveFlag(ref flags, SaveFlag.Quality, m_Quality != ArmorQuality.Regular);
-                SetSaveFlag(ref flags, SaveFlag.Durability, m_Durability != ArmorDurabilityLevel.Regular);
-                SetSaveFlag(ref flags, SaveFlag.Protection, m_Protection != ArmorProtectionLevel.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Quality, Quality != ArmorQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Durability, Durability != ArmorDurabilityLevel.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Protection, ProtectionLevel != ArmorProtectionLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.MedAllowance, m_Meditate != (AMA) (-1));
                 SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed != false);
                 
@@ -751,13 +746,13 @@ namespace Server.Items
                 writer.Write((Mobile) m_Crafter);
 
             if (GetSaveFlag(flags, SaveFlag.Quality))
-                writer.WriteEncodedInt((int) m_Quality);
+                writer.WriteEncodedInt((int) Quality);
 
             if (GetSaveFlag(flags, SaveFlag.Durability))
-                writer.WriteEncodedInt((int) m_Durability);
+                writer.WriteEncodedInt((int) Durability);
 
             if (GetSaveFlag(flags, SaveFlag.Protection))
-                writer.WriteEncodedInt((int) m_Protection);
+                writer.WriteEncodedInt((int) ProtectionLevel);
 
             if (GetSaveFlag(flags, SaveFlag.Resource))
                 writer.WriteEncodedInt((int) m_Resource);
@@ -817,27 +812,27 @@ namespace Server.Items
                         m_Crafter = reader.ReadMobile();
 
                     if (GetSaveFlag(flags, SaveFlag.Quality))
-                        m_Quality = (ArmorQuality) reader.ReadEncodedInt();
+                        Quality = (ArmorQuality) reader.ReadEncodedInt();
                     else
-                        m_Quality = ArmorQuality.Regular;
+                        Quality = ArmorQuality.Regular;
 
-                    if (version == 5 && m_Quality == ArmorQuality.Low)
-                        m_Quality = ArmorQuality.Regular;
+                    if (version == 5 && Quality == ArmorQuality.Low)
+                        Quality = ArmorQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.Durability))
                     {
-                        m_Durability = (ArmorDurabilityLevel) reader.ReadEncodedInt();
+                        Durability = (ArmorDurabilityLevel) reader.ReadEncodedInt();
 
-                        if (m_Durability > ArmorDurabilityLevel.Indestructible)
-                            m_Durability = ArmorDurabilityLevel.Durable;
+                        if (Durability > ArmorDurabilityLevel.Indestructible)
+                            Durability = ArmorDurabilityLevel.Durable;
                     }
 
                     if (GetSaveFlag(flags, SaveFlag.Protection))
                     {
-                        m_Protection = (ArmorProtectionLevel) reader.ReadEncodedInt();
+                        ProtectionLevel = (ArmorProtectionLevel) reader.ReadEncodedInt();
 
-                        if (m_Protection > ArmorProtectionLevel.Invulnerability)
-                            m_Protection = ArmorProtectionLevel.Defense;
+                        if (ProtectionLevel > ArmorProtectionLevel.Invulnerability)
+                            ProtectionLevel = ArmorProtectionLevel.Defense;
                     }
 
                     if (GetSaveFlag(flags, SaveFlag.Resource))
@@ -906,9 +901,9 @@ namespace Server.Items
                     m_MaxHitPoints = reader.ReadInt();
                     m_HitPoints = reader.ReadInt();
                     m_Crafter = reader.ReadMobile();
-                    m_Quality = (ArmorQuality) reader.ReadInt();
-                    m_Durability = (ArmorDurabilityLevel) reader.ReadInt();
-                    m_Protection = (ArmorProtectionLevel) reader.ReadInt();
+                    Quality = (ArmorQuality) reader.ReadInt();
+                    Durability = (ArmorDurabilityLevel) reader.ReadInt();
+                    ProtectionLevel = (ArmorProtectionLevel) reader.ReadInt();
 
                     AMT mat = (AMT) reader.ReadInt();
 
@@ -1017,8 +1012,12 @@ namespace Server.Items
 
         public BaseArmor(int itemID) : base(itemID)
         {
-            m_Quality = ArmorQuality.Regular;
-            m_Durability = ArmorDurabilityLevel.Regular;
+            StrBonus = DefaultStrBonus;
+            DexBonus = DefaultDexBonus;
+            IntBonus = DefaultIntBonus;
+            
+            Quality = ArmorQuality.Regular;
+            Durability = ArmorDurabilityLevel.Regular;
             m_Crafter = null;
 
             m_Resource = DefaultResource;
@@ -1112,7 +1111,7 @@ namespace Server.Items
 
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileEquip(m);
+                MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
                 m.Delta(MobileDelta.WeaponDamage);
                 m.Delta(MobileDelta.Armor); 
@@ -1123,7 +1122,7 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileRemoved(m);
+                MagicProps.OnMobileRemoved();
                 m.Delta(MobileDelta.Armor); // Tell them armor rating has changed
                 m.CheckStatTimers();
             }
@@ -1223,19 +1222,19 @@ namespace Server.Items
                     attrs.Add(new EquipInfoAttribute(1049643)); // cursed
             }
 
-            if (m_Quality == ArmorQuality.Exceptional)
-                attrs.Add(new EquipInfoAttribute(1018305 - (int) m_Quality));
+            if (Quality == ArmorQuality.Exceptional)
+                attrs.Add(new EquipInfoAttribute(1018305 - (int) Quality));
 
             if (Identified || from.AccessLevel >= AccessLevel.GameMaster)
             {
-                if (m_Durability != ArmorDurabilityLevel.Regular)
-                    attrs.Add(new EquipInfoAttribute(1038000 + (int) m_Durability));
+                if (Durability != ArmorDurabilityLevel.Regular)
+                    attrs.Add(new EquipInfoAttribute(1038000 + (int) Durability));
 
-                if (m_Protection > ArmorProtectionLevel.Regular && m_Protection <= ArmorProtectionLevel.Invulnerability)
-                    attrs.Add(new EquipInfoAttribute(1038005 + (int) m_Protection));
+                if (ProtectionLevel > ArmorProtectionLevel.Regular && ProtectionLevel <= ArmorProtectionLevel.Invulnerability)
+                    attrs.Add(new EquipInfoAttribute(1038005 + (int) ProtectionLevel));
             }
-            else if (m_Durability != ArmorDurabilityLevel.Regular || m_Protection > ArmorProtectionLevel.Regular &&
-                m_Protection <= ArmorProtectionLevel.Invulnerability)
+            else if (Durability != ArmorDurabilityLevel.Regular || ProtectionLevel > ArmorProtectionLevel.Regular &&
+                ProtectionLevel <= ArmorProtectionLevel.Invulnerability)
                 attrs.Add(new EquipInfoAttribute(1038000)); // Unidentified
 
             int number;

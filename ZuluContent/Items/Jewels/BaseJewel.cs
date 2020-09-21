@@ -112,7 +112,7 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileEquip(m);
+                MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
             }
 
@@ -123,7 +123,7 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileRemoved(m);
+                MagicProps.OnMobileRemoved();
                 m.CheckStatTimers();
             }
 

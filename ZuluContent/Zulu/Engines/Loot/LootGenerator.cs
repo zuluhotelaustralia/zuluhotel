@@ -7,6 +7,7 @@ using Server.Engines.Magic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
+using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
 using static Server.Utility;
 
@@ -54,7 +55,7 @@ namespace Server.Scripts.Engines.Loot
             Item item = null;
             try
             {
-                item = (Item) Activator.CreateInstance(Type, null);
+                item = Type.CreateInstance<Item>();
             }
             catch (Exception e)
             {
