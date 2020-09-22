@@ -38,20 +38,21 @@ namespace ZuluContent.Zulu.Engines.Magic
         protected readonly IMagicMod<ElementalType>[] ResistMods =
             new IMagicMod<ElementalType>[ResistModsLength];
 
-        public static readonly IReadOnlyDictionary<Enum, MagicProp> EnumToMagicMappings =
-            new Dictionary<Enum, MagicProp>
+        public static readonly IReadOnlyDictionary<Type, MagicProp> EnumToMagicMappings =
+            new Dictionary<Type, MagicProp>
             {
-                [default(WeaponDurabilityLevel)] = MagicProp.Durability,
-                [default(WeaponAccuracyLevel)] = MagicProp.Accuracy,
-                [default(WeaponDamageLevel)] = MagicProp.Damage,
-                [default(WeaponQuality)] = MagicProp.Quality,
-                [default(SlayerName)] = MagicProp.Slayer,
-                [default(ClothingQuality)] = MagicProp.Quality,
-                [default(CraftResource)] = MagicProp.CraftResource,
-                [default(ArmorQuality)] = MagicProp.Quality,
-                [default(ArmorDurabilityLevel)] = MagicProp.Durability,
-                [default(ArmorProtectionLevel)] = MagicProp.ArmorProtection,
-                [default(ArmorMeditationAllowance)] = MagicProp.MeditationAllowance
+                [typeof(WeaponDurabilityLevel)] = MagicProp.Durability,
+                [typeof(WeaponAccuracyLevel)] = MagicProp.Accuracy,
+                [typeof(WeaponDamageLevel)] = MagicProp.Damage,
+                [typeof(WeaponQuality)] = MagicProp.Quality,
+                [typeof(SlayerName)] = MagicProp.Slayer,
+                [typeof(ClothingQuality)] = MagicProp.Quality,
+                [typeof(CraftResource)] = MagicProp.CraftResource,
+                [typeof(ArmorQuality)] = MagicProp.Quality,
+                [typeof(ArmorDurabilityLevel)] = MagicProp.Durability,
+                [typeof(ArmorProtectionLevel)] = MagicProp.ArmorProtection,
+                [typeof(ArmorMeditationAllowance)] = MagicProp.MeditationAllowance,
+                [typeof(ArmorBonus)] = MagicProp.ArmorBonus,
             };
 
         protected MagicalPropertyDictionary(Item parent)
@@ -70,9 +71,9 @@ namespace ZuluContent.Zulu.Engines.Magic
             }
         }
 
-        private MagicProp ToPropType<T>() where T : unmanaged, Enum
+        private MagicProp ToPropType<T>() where T : unmanaged
         {
-            if (EnumToMagicMappings.TryGetValue(default(T), out var prop))
+            if (EnumToMagicMappings.TryGetValue(typeof(T), out var prop))
                 return prop;
 
             throw new ArgumentOutOfRangeException($"Enum value type of {typeof(T)} has no valid mapping entry.");
@@ -83,8 +84,17 @@ namespace ZuluContent.Zulu.Engines.Magic
         public bool HasAttr<TKey>() where TKey : unmanaged, Enum => HasAttr(ToPropType<TKey>());
 
         public TOutput GetAttr<TOutput>(MagicProp propertyType, TOutput defaultValue = default)
-            where TOutput : unmanaged =>
-            this[propertyType] is MagicAttribute<TOutput> instanceMod ? instanceMod.Target : defaultValue;
+            where TOutput : unmanaged
+        {
+            // Converts deserialized <int> attributes into their enum representations on first access
+            if (this[propertyType] is MagicAttribute<int> intMod && ToPropType<TOutput>() == propertyType)
+                Attributes[(int) propertyType] = intMod.IntToEnumAttr<TOutput>();
+
+            if(this[propertyType] is MagicAttribute<TOutput> instanceMod)
+                return instanceMod.Target;
+
+            return defaultValue;
+        }
 
         public void SetAttr<TValue>(MagicProp magicalProp, TValue value) where TValue : unmanaged
         {
@@ -172,9 +182,14 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public void OnMobileRemoved()
         {
-            
             foreach (var value in GetAllValues())
                 value.Remove();
+        }
+
+        public bool HasMod<T>(T target) where T : unmanaged, Enum
+        {
+            var storage = GetModStorage<T>();
+            return storage[(int) (object) target] != null;
         }
 
         public bool TryGetMod<TInput, TOutput>(TInput target, out TOutput mod)

@@ -17,7 +17,9 @@ using Server.Accounting;
 using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Magic;
+using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 
 namespace Server.Mobiles
 {
@@ -814,27 +816,11 @@ namespace Server.Mobiles
         {
             get
             {
-                //BaseArmor ar;
-                double rating = 0.0;
-
-                AddArmorRating(ref rating, NeckArmor);
-                AddArmorRating(ref rating, HandArmor);
-                AddArmorRating(ref rating, HeadArmor);
-                AddArmorRating(ref rating, ArmsArmor);
-                AddArmorRating(ref rating, LegsArmor);
-                AddArmorRating(ref rating, ChestArmor);
-                AddArmorRating(ref rating, ShieldArmor);
-
+                var rating = Items.OfType<IArmorRating>().Sum(i => i.ArmorRatingScaled);
                 return VirtualArmor + VirtualArmorMod + rating;
             }
         }
 
-        private void AddArmorRating(ref double rating, Item armor)
-        {
-            if (armor is BaseArmor ar)
-                rating += ar.ArmorRatingScaled;
-        }
-        
         #region [Zulu] Resistances
 
         public int GetResistance(ElementalType type)

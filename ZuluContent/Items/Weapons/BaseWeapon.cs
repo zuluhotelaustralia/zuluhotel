@@ -123,7 +123,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponQuality Quality
         {
-            get => MagicProps.GetAttr<WeaponQuality>();
+            get => MagicProps.GetAttr(WeaponQuality.Regular);
             set
             {
                 UnscaleDurability();

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Scripts.Engines.Magic;
 using Server.Network;
 using Server.Engines.Craft;
+using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 using AMA = Server.Items.ArmorMeditationAllowance;
 using AMT = Server.Items.ArmorMaterialType;
 
 namespace Server.Items
 {
-    public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability
+    public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability, IArmorRating
     {
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -313,21 +315,39 @@ namespace Server.Items
         public int StrBonus
         {
             get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
-            set => MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
+            set
+            {
+                if (value == 0 && !MagicProps.HasMod(StatType.Str))
+                    return;
+
+                MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int DexBonus
         {
             get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
-            set => MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
+            set
+            {
+                if (value == 0 && !MagicProps.HasMod(StatType.Dex))
+                    return;
+                
+                MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int IntBonus
         {
             get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
-            set => MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
+            set
+            {
+                if (value == 0 && !MagicProps.HasMod(StatType.Int))
+                    return;
+
+                MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -439,7 +459,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorQuality Quality
         {
-            get => MagicProps.GetAttr(MagicProp.Quality, ArmorQuality.Regular);
+            get => MagicProps.GetAttr(defaultValue: ArmorQuality.Regular);
             set
             {
                 UnscaleDurability();
@@ -452,7 +472,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorDurabilityLevel Durability
         {
-            get => MagicProps.GetAttr(MagicProp.Durability, ArmorDurabilityLevel.Regular);
+            get => MagicProps.GetAttr(defaultValue: ArmorDurabilityLevel.Regular);
             set
             {
                 UnscaleDurability();
@@ -464,7 +484,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorProtectionLevel ProtectionLevel
         {
-            get => MagicProps.GetAttr(MagicProp.ArmorProtection, ArmorProtectionLevel.Regular);
+            get => MagicProps.GetAttr(defaultValue: ArmorProtectionLevel.Regular);
             set
             {
                 MagicProps.SetAttr(MagicProp.ArmorProtection, value);
@@ -1132,22 +1152,22 @@ namespace Server.Items
 
         public virtual int OnHit(BaseWeapon weapon, int damageTaken)
         {
-            double HalfAr = ArmorRating / 2.0;
-            int Absorbed = (int) (HalfAr + HalfAr * Utility.RandomDouble());
+            double halfAr = ArmorRating / 2.0;
+            int absorbed = (int) (halfAr + halfAr * Utility.RandomDouble());
 
-            damageTaken -= Absorbed;
+            damageTaken -= absorbed;
             if (damageTaken < 0)
                 damageTaken = 0;
 
-            if (Absorbed < 2)
-                Absorbed = 2;
+            if (absorbed < 2)
+                absorbed = 2;
 
             if (25 > Utility.Random(100)) // 25% chance to lower durability
             {
                 int wear;
 
                 if (weapon.Type == WeaponType.Bashing)
-                    wear = Absorbed / 2;
+                    wear = absorbed / 2;
                 else
                     wear = Utility.Random(2);
 
@@ -1170,9 +1190,8 @@ namespace Server.Items
                         {
                             MaxHitPoints -= wear;
 
-                            if (Parent is Mobile)
-                                ((Mobile) Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                                    1061121); // Your equipment is severely damaged.
+                            if (Parent is Mobile mobile)  // Your equipment is severely damaged.
+                                mobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121);
                         }
                         else
                         {

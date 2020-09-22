@@ -42,6 +42,14 @@ namespace Scripts.Engines.Magic
             // Owner = mobile;
             // mobile.AddStatMod(this);
         }
+
+        public MagicAttribute<TAttr> IntToEnumAttr<TAttr>() where TAttr : unmanaged
+        {
+            if(Target is int i && typeof(TAttr).IsSubclassOf(typeof(Enum)))
+                return new MagicAttribute<TAttr>(Prop, (TAttr)Enum.ToObject(typeof(TAttr), i));
+
+            return null;
+        }
         
         public static explicit operator T(MagicAttribute<T> attr) => attr.Target;
         

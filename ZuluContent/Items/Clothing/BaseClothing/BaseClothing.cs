@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Scripts.Engines.Magic;
 using Server.Engines.Craft;
 using Server.Network;
+using ZuluContent.Zulu;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
-    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability
+    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating
     {
         public virtual bool CanFortify
         {
@@ -29,6 +32,32 @@ namespace Server.Items
         }
 
         #endregion
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public ArmorBonus ArmorBonus
+        {
+            get => MagicProps.GetAttr<ArmorBonus>();
+            set
+            {
+                if (value > ArmorBonus.Adamantium)
+                    return;
+                
+                MagicProps.SetAttr(value);
+                Hue = value.GetHue();
+                Invalidate();
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int BaseArmorRating
+        {
+            get => (int) ArmorBonus;
+            set => ArmorBonus = (ArmorBonus)value;
+        }
+
+        public double BaseArmorRatingScaled => BaseArmorRating;
+        public double ArmorRating => BaseArmorRating;
+        public double ArmorRatingScaled => BaseArmorRating;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int MaxHitPoints
@@ -128,21 +157,39 @@ namespace Server.Items
         public int StrBonus
         {
             get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
-            set => MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
+            set
+            {
+                if (value == 0 && !MagicProps.HasMod(StatType.Str))
+                    return;
+
+                MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int DexBonus
         {
             get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
-            set => MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
+            set
+            {
+                if (value == 0 && !MagicProps.HasMod(StatType.Dex))
+                    return;
+                
+                MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int IntBonus
         {
             get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
-            set => MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
+            set
+            {
+                if (value == 0 && !MagicProps.HasMod(StatType.Int))
+                    return;
+
+                MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
+            }
         }
         
         public virtual Race RequiredRace
@@ -284,6 +331,12 @@ namespace Server.Items
                     }
                 }
             }
+        }
+        
+        protected void Invalidate()
+        {
+            if (Parent is Mobile mp)
+                mp.Delta(MobileDelta.Armor); // Tell them armor rating has changed
         }
 
         public override void OnAdded(IEntity parent)
@@ -549,7 +602,7 @@ namespace Server.Items
 
                     if (GetSaveFlag(flags, SaveFlag.Quality))
                         Quality = (ClothingQuality) reader.ReadEncodedInt();
-                    else
+                    else if(!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                         Quality = ClothingQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.StrReq))

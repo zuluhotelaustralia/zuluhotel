@@ -1,32 +1,32 @@
 using System;
 using Server.Engines.Craft;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-	public enum GemType
-	{
-		None,
-		StarSapphire,
-		Emerald,
-		Sapphire,
-		Ruby,
-		Citrine,
-		Amethyst,
-		Tourmaline,
-		Amber,
-		Diamond
-	}
+    public enum GemType
+    {
+        None,
+        StarSapphire,
+        Emerald,
+        Sapphire,
+        Ruby,
+        Citrine,
+        Amethyst,
+        Tourmaline,
+        Amber,
+        Diamond
+    }
 
-	public abstract class BaseJewel : Item, ICraftable
-	{
-		private int m_MaxHitPoints;
-		private int m_HitPoints;
+    public abstract class BaseJewel : Item, ICraftable, IArmorRating
+    {
+        private int m_HitPoints;
 
-		private CraftResource m_Resource;
-		private GemType m_GemType;
-        
+        private CraftResource m_Resource;
+
         #region Magical Properties
+
         private MagicalProperties m_MagicProps;
 
         public MagicalProperties MagicProps
@@ -36,78 +36,104 @@ namespace Server.Items
 
         #endregion
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int MaxHitPoints
-		{
-			get{ return m_MaxHitPoints; }
-			set{ m_MaxHitPoints = value; }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public ArmorBonus ArmorBonus
+        {
+            get => MagicProps.GetAttr(MagicProp.ArmorBonus, ArmorBonus.None);
+            set
+            {
+                if (value > ArmorBonus.Adamantium)
+                    return;
+                
+                MagicProps.SetAttr(value);
+                Hue = value.GetHue();
+                Invalidate();
+            }
+        }
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int HitPoints
-		{
-			get
-			{
-				return m_HitPoints;
-			}
-			set
-			{
-				if ( value != m_HitPoints && MaxHitPoints > 0 )
-				{
-					m_HitPoints = value;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int BaseArmorRating
+        {
+            get => (int) ArmorBonus;
+            set => ArmorBonus = (ArmorBonus)value;
+        }
 
-					if ( m_HitPoints < 0 )
-						Delete();
-					else if ( m_HitPoints > MaxHitPoints )
-						m_HitPoints = MaxHitPoints;
-				}
-			}
-		}
+        public double BaseArmorRatingScaled => BaseArmorRating;
+        public double ArmorRating => BaseArmorRating;
+        public double ArmorRatingScaled => BaseArmorRating;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public CraftResource Resource
-		{
-			get{ return m_Resource; }
-			set{ m_Resource = value; Hue = CraftResources.GetHue( m_Resource ); }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int MaxHitPoints { get; set; }
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public GemType GemType
-		{
-			get{ return m_GemType; }
-			set{ m_GemType = value; }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int HitPoints
+        {
+            get { return m_HitPoints; }
+            set
+            {
+                if (value != m_HitPoints && MaxHitPoints > 0)
+                {
+                    m_HitPoints = value;
 
-		public virtual int BaseGemTypeNumber{ get{ return 0; } }
+                    if (m_HitPoints < 0)
+                        Delete();
+                    else if (m_HitPoints > MaxHitPoints)
+                        m_HitPoints = MaxHitPoints;
+                }
+            }
+        }
 
-		public virtual int InitMinHits{ get{ return 0; } }
-		public virtual int InitMaxHits{ get{ return 0; } }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                m_Resource = value;
+                Hue = CraftResources.GetHue(m_Resource);
+            }
+        }
 
-		public override int LabelNumber
-		{
-			get
-			{
-				if ( m_GemType == GemType.None )
-					return base.LabelNumber;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public GemType GemType { get; set; }
 
-				return BaseGemTypeNumber + (int)m_GemType - 1;
-			}
-		}
+        public virtual int BaseGemTypeNumber => 0;
+
+        public virtual int InitMinHits => 0;
+
+        public virtual int InitMaxHits => 0;
+
+        public override int LabelNumber
+        {
+            get
+            {
+                if (GemType == GemType.None)
+                    return base.LabelNumber;
+
+                return BaseGemTypeNumber + (int) GemType - 1;
+            }
+        }
+
+        public BaseJewel(int itemID, Layer layer) : base(itemID)
+        {
+            m_Resource = CraftResource.Iron;
+            GemType = GemType.None;
+
+            Layer = layer;
+
+            m_HitPoints = MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
+        }
+
+        public BaseJewel(Serial serial) : base(serial)
+        {
+        }
         
-		public BaseJewel( int itemID, Layer layer ) : base( itemID )
-		{
-			m_Resource = CraftResource.Iron;
-			m_GemType = GemType.None;
+        protected void Invalidate()
+        {
+            if (Parent is Mobile mp)
+                mp.Delta(MobileDelta.Armor); // Tell them armor rating has changed
+        }
 
-			Layer = layer;
-
-			m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax( InitMinHits, InitMaxHits );
-		}
-
-		public BaseJewel( Serial serial ) : base( serial )
-		{
-		}
-        
         public override void OnAdded(IEntity parent)
         {
             if (parent is Mobile m)
@@ -130,109 +156,110 @@ namespace Server.Items
             base.OnRemoved(parent);
         }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 4 ); // version
-            
+            writer.Write((int) 4); // version
+
             MagicProps.Serialize(writer);
 
-            writer.WriteEncodedInt( (int) m_MaxHitPoints );
-			writer.WriteEncodedInt( (int) m_HitPoints );
+            writer.WriteEncodedInt((int) MaxHitPoints);
+            writer.WriteEncodedInt((int) m_HitPoints);
 
-			writer.WriteEncodedInt( (int) m_Resource );
-			writer.WriteEncodedInt( (int) m_GemType );
-            
-		}
+            writer.WriteEncodedInt((int) m_Resource);
+            writer.WriteEncodedInt((int) GemType);
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
+            int version = reader.ReadInt();
 
-			switch ( version )
-			{
+            switch (version)
+            {
                 case 4:
                     m_MagicProps = MagicalProperties.Deserialize(reader, this);
                     goto case 3;
-				case 3:
-				{
-					m_MaxHitPoints = reader.ReadEncodedInt();
-					m_HitPoints = reader.ReadEncodedInt();
+                case 3:
+                {
+                    MaxHitPoints = reader.ReadEncodedInt();
+                    m_HitPoints = reader.ReadEncodedInt();
 
-					goto case 2;
-				}
-				case 2:
-				{
-					m_Resource = (CraftResource)reader.ReadEncodedInt();
-					m_GemType = (GemType)reader.ReadEncodedInt();
+                    goto case 2;
+                }
+                case 2:
+                {
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
+                    GemType = (GemType) reader.ReadEncodedInt();
 
-					goto case 1;
-				}
-				case 1:
-				{
-					if ( Parent is Mobile )
-						((Mobile)Parent).CheckStatTimers();
+                    goto case 1;
+                }
+                case 1:
+                {
+                    if (Parent is Mobile)
+                        ((Mobile) Parent).CheckStatTimers();
 
-					break;
-				}
-				case 0:
-				{
-					break;
-				}
-			}
+                    break;
+                }
+                case 0:
+                {
+                    break;
+                }
+            }
 
-			if ( version < 2 )
-			{
-				m_Resource = CraftResource.Iron;
-				m_GemType = GemType.None;
-			}
-		}
-		#region ICraftable Members
+            if (version < 2)
+            {
+                m_Resource = CraftResource.Iron;
+                GemType = GemType.None;
+            }
+        }
 
-		public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
-		{
-			Type resourceType = typeRes;
+        #region ICraftable Members
 
-			if ( resourceType == null )
-				resourceType = craftItem.Resources.GetAt( 0 ).ItemType;
+        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+            BaseTool tool, CraftItem craftItem, int resHue)
+        {
+            Type resourceType = typeRes;
 
-			Resource = CraftResources.GetFromType( resourceType );
+            if (resourceType == null)
+                resourceType = craftItem.Resources.GetAt(0).ItemType;
 
-			CraftContext context = craftSystem.GetContext( from );
+            Resource = CraftResources.GetFromType(resourceType);
 
-			if ( context != null && context.DoNotColor )
-				Hue = 0;
+            CraftContext context = craftSystem.GetContext(from);
 
-			if ( 1 < craftItem.Resources.Count )
-			{
-				resourceType = craftItem.Resources.GetAt( 1 ).ItemType;
+            if (context != null && context.DoNotColor)
+                Hue = 0;
 
-				if ( resourceType == typeof( StarSapphire ) )
-					GemType = GemType.StarSapphire;
-				else if ( resourceType == typeof( Emerald ) )
-					GemType = GemType.Emerald;
-				else if ( resourceType == typeof( Sapphire ) )
-					GemType = GemType.Sapphire;
-				else if ( resourceType == typeof( Ruby ) )
-					GemType = GemType.Ruby;
-				else if ( resourceType == typeof( Citrine ) )
-					GemType = GemType.Citrine;
-				else if ( resourceType == typeof( Amethyst ) )
-					GemType = GemType.Amethyst;
-				else if ( resourceType == typeof( Tourmaline ) )
-					GemType = GemType.Tourmaline;
-				else if ( resourceType == typeof( Amber ) )
-					GemType = GemType.Amber;
-				else if ( resourceType == typeof( Diamond ) )
-					GemType = GemType.Diamond;
-			}
+            if (1 < craftItem.Resources.Count)
+            {
+                resourceType = craftItem.Resources.GetAt(1).ItemType;
 
-			return 1;
-		}
+                if (resourceType == typeof(StarSapphire))
+                    GemType = GemType.StarSapphire;
+                else if (resourceType == typeof(Emerald))
+                    GemType = GemType.Emerald;
+                else if (resourceType == typeof(Sapphire))
+                    GemType = GemType.Sapphire;
+                else if (resourceType == typeof(Ruby))
+                    GemType = GemType.Ruby;
+                else if (resourceType == typeof(Citrine))
+                    GemType = GemType.Citrine;
+                else if (resourceType == typeof(Amethyst))
+                    GemType = GemType.Amethyst;
+                else if (resourceType == typeof(Tourmaline))
+                    GemType = GemType.Tourmaline;
+                else if (resourceType == typeof(Amber))
+                    GemType = GemType.Amber;
+                else if (resourceType == typeof(Diamond))
+                    GemType = GemType.Diamond;
+            }
 
-		#endregion
-	}
+            return 1;
+        }
+
+        #endregion
+    }
 }
