@@ -9,7 +9,9 @@ using Server.Mobiles;
 using Server.Targeting;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 using static Server.Utility;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace Server.Scripts.Engines.Loot
 {
@@ -22,15 +24,16 @@ namespace Server.Scripts.Engines.Loot
         public int Quantity = 1;
 
         public int DurabilityLevel = 0;
-        public int AccuracyLevel = 0;
-        public int DamageLevel = 0;
-        public int ArmorMod = 0;
-        public int Color = 0;
+        public WeaponAccuracyLevel AccuracyLevel = 0;
+        public WeaponDamageLevel DamageLevel = 0;
+        public ArmorProtectionLevel ArmorProtectionLevel = 0;
+        public ArmorBonus ArmorMod = 0;
+        public int Hue = 0;
 
         //TODO: Temp attributes
 
         public ElementalType ProtectionType;
-        public int ProtectionLevel;
+        public ElementalProtectionLevel ProtectionLevel;
 
         public string Hitscript;
         public SlayerName SlayerName;
@@ -68,44 +71,38 @@ namespace Server.Scripts.Engines.Loot
             if (item.Stackable)
                 item.Amount = Quantity;
 
-            item.Hue = Color;
-
 
             if (item is IMagicEquipItem magicItem)
             {
-                magicItem.DexBonus = BonusDex;
-                magicItem.StrBonus = BonusStr;
-                magicItem.IntBonus = BonusInt;
+                item.Hue = Hue;
 
                 if (SkillBonusValue > 0)
                     magicItem.MagicProps.AddMod(new MagicSkillMod(SkillBonusName, SkillBonusValue));
-            }
 
-            switch (item)
-            {
-                case BaseWeapon weapon:
-                    weapon.DurabilityLevel = (WeaponDurabilityLevel) DurabilityLevel;
-                    weapon.AccuracyLevel = (WeaponAccuracyLevel) AccuracyLevel;
-                    weapon.DamageLevel = (WeaponDamageLevel) DamageLevel;
-                    weapon.Slayer = SlayerName;
-                    
+                switch (magicItem)
+                {
+                    case BaseWeapon weapon:
+                        weapon.DurabilityLevel = (WeaponDurabilityLevel) DurabilityLevel;
+                        weapon.AccuracyLevel = AccuracyLevel;
+                        weapon.DamageLevel = DamageLevel;
+                        weapon.Slayer = SlayerName;
+                        break;
+                    case BaseArmor armor:
+                        armor.DexBonus = BonusDex;
+                        armor.StrBonus = BonusStr;
+                        armor.IntBonus = BonusInt;
 
-                    break;
-                case BaseArmor armor:
-
-                    armor.Durability = (ArmorDurabilityLevel) DurabilityLevel;
-                    break;
-                case BaseClothing clothing:
-                    
-                    // clothing.VirtualArmorMod = ArmorMod;
-                    // clothing.Prot = new Prot(ProtectionType, ProtectionLevel);
-
-                    break;
-                case BaseJewel jewelry:
-
-                    // jewelry.VirtualArmorMod = ArmorMod;
-                    // jewelry.Prot = new Prot(ProtectionType, ProtectionLevel);
-                    break;
+                        armor.ProtectionLevel = ArmorProtectionLevel;
+                        armor.Durability = (ArmorDurabilityLevel) DurabilityLevel;
+                        break;
+                    case BaseClothing clothing:
+                        clothing.ArmorBonus = ArmorMod;
+                        break;
+                    case BaseJewel jewelry:
+                        jewelry.ArmorBonus = ArmorMod;
+                        jewelry.MagicProps.SetResist(ProtectionType, GetResistForProtectionLevel(ProtectionLevel));
+                        break;
+                }
             }
 
             c.AddItem(item);
@@ -136,7 +133,7 @@ namespace Server.Scripts.Engines.Loot
 
             protected override void OnTarget(Mobile from, object targeted)
             {
-                if (targeted is Container container) 
+                if (targeted is Container container)
                     MakeLoot(container, LootTable.Table1);
             }
         }
@@ -172,7 +169,7 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (isMagic)
-                item.EnchantLevel = (Math.Clamp(RandomDouble(),0, 0.75) + 0.26) * (item.ItemLevel / 2 + 1);
+                item.EnchantLevel = (Math.Clamp(RandomDouble(), 0, 0.75) + 0.26) * (item.ItemLevel / 2 + 1);
 
             if (item.ItemLevel == 5)
                 item.EnchantLevel += 0.51;
@@ -288,7 +285,7 @@ namespace Server.Scripts.Engines.Loot
 
             item.SkillBonusName = skill;
             item.SkillBonusValue = value;
-            item.Color = 1109;
+            item.Hue = 1109;
         }
 
         private static void ApplyOnHitScript(LootItem item)
@@ -430,7 +427,7 @@ namespace Server.Scripts.Engines.Loot
 
             if (level < 200)
             {
-                //ApplyProtection();
+                // ApplyProtection();
             }
             else if (level < 500)
                 ApplyElementalImmunity(item);
@@ -455,7 +452,7 @@ namespace Server.Scripts.Engines.Loot
         private static void ApplyElementalImmunity(LootItem item)
         {
             var level = Utility.Random(1, 100) * item.ItemLevel;
-            int value = 0;
+            ElementalProtectionLevel value = 0;
 
             switch (item.ItemLevel / 3)
             {
@@ -476,17 +473,17 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (level < 150)
-                value = 1;
+                value = ElementalProtectionLevel.Bane;
             else if (level < 300)
-                value = 2;
+                value = ElementalProtectionLevel.Warding;
             else if (level < 450)
-                value = 3;
+                value = ElementalProtectionLevel.Protection;
             else if (level < 550)
-                value = 4;
+                value = ElementalProtectionLevel.Immunity;
             else if (level < 600)
-                value = 5;
+                value = ElementalProtectionLevel.Attunement;
             else
-                value = 6;
+                value = ElementalProtectionLevel.Absorbsion;
 
             var element = Utility.Random(1, 7) switch
             {
@@ -508,14 +505,14 @@ namespace Server.Scripts.Engines.Loot
         {
             do
             {
-                item.Color = Utility.Random(1, 1184);
-            } while (item.Color > 999 && item.Color < 1152);
+                item.Hue = Utility.Random(1, 1184);
+            } while (item.Hue > 999 && item.Hue < 1152);
         }
 
         private static void ApplyDamageMod(LootItem item)
         {
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
-            int value = 0;
+            WeaponDamageLevel value = 0;
 
             switch (item.ItemLevel / 3)
             {
@@ -536,17 +533,17 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (level < 150)
-                value = 1;
+                value = WeaponDamageLevel.Ruin;
             else if (level < 300)
-                value = 2;
+                value = WeaponDamageLevel.Might;
             else if (level < 400)
-                value = 3;
+                value = WeaponDamageLevel.Force;
             else if (level < 500)
-                value = 4;
+                value = WeaponDamageLevel.Power;
             else if (level < 600)
-                value = 5;
+                value = WeaponDamageLevel.Vanquishing;
             else
-                value = 6;
+                value = WeaponDamageLevel.Devastation;
 
             if (Utility.Random(1, 100) <= 10 * item.ItemLevel)
             {
@@ -561,7 +558,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyMiscArmorMod(LootItem item)
         {
-            int value;
+            ArmorBonus value;
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
@@ -583,17 +580,17 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (level < 200)
-                value = 1;
+                value = ArmorBonus.Iron;
             else if (level < 350)
-                value = 2;
+                value = ArmorBonus.Steel;
             else if (level < 450)
-                value = 3;
+                value = ArmorBonus.MeteoricSteel;
             else if (level < 550)
-                value = 4;
+                value = ArmorBonus.Obsidian;
             else if (level < 600)
-                value = 5;
+                value = ArmorBonus.Onyx;
             else
-                value = 6;
+                value = ArmorBonus.Adamantium;
 
             item.ArmorMod = value;
 
@@ -611,7 +608,7 @@ namespace Server.Scripts.Engines.Loot
                 return;
             }
 
-            int value;
+            WeaponAccuracyLevel value;
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
@@ -633,17 +630,17 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (level < 100)
-                value = 1;
+                value = WeaponAccuracyLevel.Regular;
             else if (level < 200)
-                value = 2;
+                value = WeaponAccuracyLevel.Accurate;
             else if (level < 350)
-                value = 3;
+                value = WeaponAccuracyLevel.Surpassingly;
             else if (level < 450)
-                value = 4;
+                value = WeaponAccuracyLevel.Eminently;
             else if (level < 550)
-                value = 5;
+                value = WeaponAccuracyLevel.Exceedingly;
             else
-                value = 6;
+                value = WeaponAccuracyLevel.Supremely;
 
             // TODO: convert into weapon BaseWeapon.DefSkill on random bool
             item.AccuracyLevel = value;
@@ -705,7 +702,7 @@ namespace Server.Scripts.Engines.Loot
         private static void ApplyArmorMod(LootItem item)
         {
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
-            int value = 0;
+            var value = ArmorProtectionLevel.Regular;
 
             switch (item.ItemLevel / 3)
             {
@@ -726,17 +723,17 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (level < 150)
-                value = 8;
+                value = ArmorProtectionLevel.Defense;
             else if (level < 300)
-                value = 16;
+                value = ArmorProtectionLevel.Guarding;
             else if (level < 400)
-                value = 24;
+                value = ArmorProtectionLevel.Hardening;
             else if (level < 500)
-                value = 32;
+                value = ArmorProtectionLevel.Fortification;
             else if (level < 600)
-                value = 40;
+                value = ArmorProtectionLevel.Invulnerability;
             else
-                value = 48;
+                value = ArmorProtectionLevel.Invincibility;
 
             if (Utility.Random(1, 100) <= 10 * item.ItemLevel)
             {
@@ -746,7 +743,7 @@ namespace Server.Scripts.Engines.Loot
                     ApplyArmorSkillMod(item);
             }
 
-            item.ArmorMod = value;
+            item.ArmorProtectionLevel = value;
         }
 
         private static void ApplyDurabilityMod(LootItem item)

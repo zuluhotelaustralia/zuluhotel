@@ -1,5 +1,13 @@
 namespace Server.Items
 {
+    public enum MagicalWeaponType
+    {
+        None,
+        Swift,
+        Stygian,
+        Mystical
+    }
+    
     public enum WeaponQuality
 	{
 		Low,

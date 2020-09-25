@@ -14,7 +14,8 @@ namespace Server.Items
 		Substantial,
 		Massive,
 		Fortified,
-		Indestructible
+		Tempered,
+        Indestructible
 	}
 
 	public enum ArmorProtectionLevel
@@ -25,6 +26,7 @@ namespace Server.Items
 		Hardening,
 		Fortification,
 		Invulnerability,
+        Invincibility
 	}
 
 	public enum ArmorBodyType

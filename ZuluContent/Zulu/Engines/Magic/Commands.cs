@@ -29,7 +29,7 @@ namespace Scripts.Zulu.Engines.Magic
 
                 var x = new MagicAttribute<int>(MagicProp.Damage, 6);
 
-                item.MagicProps.SetAttr(ArmorDurabilityLevel.Indestructible);
+                item.MagicProps.SetAttr(ArmorDurabilityLevel.Tempered);
                 item.MagicProps.SetAttr(MagicProp.Accuracy, 25);
 
                 var durability = item.MagicProps.GetAttr<ArmorDurabilityLevel>();

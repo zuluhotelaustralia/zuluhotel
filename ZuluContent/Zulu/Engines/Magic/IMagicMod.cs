@@ -37,8 +37,7 @@ namespace Scripts.Engines.Magic
                 MagicProp.Skill => new MagicSkillMod((SkillName) reader.ReadInt(), reader.ReadDouble()),
                 MagicProp.Stat => new MagicStatMod((StatType) reader.ReadInt(), reader.ReadInt(), parentEntity),
                 MagicProp.ElementalResist => new MagicResistMod((ElementalType) reader.ReadInt(), reader.ReadInt()),
-
-                _ => (TypeCode)reader.ReadInt() switch
+                _ => (TypeCode) reader.ReadInt() switch
                 {
                     TypeCode.SByte => new MagicAttribute<sbyte>(prop, reader.ReadSByte()),
                     TypeCode.Byte => new MagicAttribute<byte>(prop, reader.ReadByte()),
@@ -82,6 +81,10 @@ namespace Scripts.Engines.Magic
                 case MagicStatMod statMod:
                     writer.Write((int)statMod.Target);
                     value = statMod.Offset;
+                    break;
+                case MagicResistMod resistMod:
+                    writer.Write((int)resistMod.Target);
+                    value = resistMod.Value;
                     break;
             }
             

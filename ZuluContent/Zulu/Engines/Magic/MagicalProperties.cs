@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Scripts.Engines.Magic;
 using Server;
-using Server.Engines.Magic;
-using Server.Items;
-
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
@@ -25,9 +15,9 @@ namespace ZuluContent.Zulu.Engines.Magic
         HealthRegen,
         ManaRegen,
         StamRegen,
-        Swift,
-        Mystical,
-        Stygian,
+        MagicalWeaponType,
+        Unused1, // was Mystical 
+        Unused2, // was Stygian
         Durability,
         Accuracy,
         Quality,
@@ -37,16 +27,11 @@ namespace ZuluContent.Zulu.Engines.Magic
         PoisonCharges,
         MeditationAllowance,
         Identified,
-        PlayerConstructed,
-        StrBonus,
-        DexBonus,
-        IntBonus,
+        PlayerConstructed
     }
-
 
     public class MagicalProperties : MagicalPropertyDictionary
     {
-        
         public MagicalProperties(Item parent) : base(parent)
         {
         }
@@ -54,13 +39,8 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static MagicalProperties Deserialize(IGenericReader reader, Item item)
         {
             var mp = Deserialize(reader, new MagicalProperties(item));
-            
             mp.OnMobileEquip();
-            
             return mp;
         }
-
-
     }
-
 }

@@ -3,35 +3,12 @@ namespace Server.Items
     [FlipableAttribute(0x143E, 0x143F)]
     public class Halberd : BasePoleArm
     {
-        public override int DefaultStrengthReq
-        {
-            get { return 45; }
-        }
-
-        public override int DefaultMinDamage
-        {
-            get { return 5; }
-        }
-
-        public override int DefaultMaxDamage
-        {
-            get { return 49; }
-        }
-
-        public override int DefaultSpeed
-        {
-            get { return 25; }
-        }
-
-        public override int InitMinHits
-        {
-            get { return 31; }
-        }
-
-        public override int InitMaxHits
-        {
-            get { return 80; }
-        }
+        public override int DefaultStrengthReq => 45;
+        public override int DefaultMinDamage => 5;
+        public override int DefaultMaxDamage => 49;
+        public override int DefaultSpeed => 25;
+        public override int InitMinHits => 31;
+        public override int InitMaxHits => 80;
 
 
         [Constructible]
@@ -41,7 +18,7 @@ namespace Server.Items
         }
 
         [Constructible]
-public Halberd(Serial serial) : base(serial)
+        public Halberd(Serial serial) : base(serial)
         {
         }
 

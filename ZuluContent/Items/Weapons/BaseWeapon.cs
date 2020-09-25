@@ -87,6 +87,23 @@ namespace Server.Items
         #endregion
 
         #region Getters & Setters
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MagicalWeaponType MagicalWeaponType
+        {
+            get => MagicProps.GetAttr<MagicalWeaponType>();
+            set
+            {
+                MagicProps.SetAttr(value);
+                Hue = value switch
+                {
+                    MagicalWeaponType.Swift => 621,
+                    MagicalWeaponType.Stygian => 1174,
+                    MagicalWeaponType.Mystical => 6,
+                    _ => 0
+                };
+            }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Identified
@@ -501,9 +518,19 @@ namespace Server.Items
             if (speed <= 0)
                 return TimeSpan.FromSeconds(10);
 
+            var minDelay = MagicalWeaponType switch
+            {
+                MagicalWeaponType.Swift => 1.00,
+                MagicalWeaponType.Stygian => 1.1,
+                _ => 1.25
+            };
+
             var stamina = Math.Clamp(m.Stam, 0, m.Dex);
-            double delayInSeconds = 15000.0 / ((stamina + 100) * speed);
-            delayInSeconds = Math.Clamp(delayInSeconds, 1.25, 7.0);
+            var delayInSeconds = 15000.0 / ((stamina + 100) * speed);
+            delayInSeconds = Math.Clamp(delayInSeconds, minDelay, 7.0);
+            
+            if(m is PlayerMobile mp)
+                mp.SendMessage($"Speed {speed}, delay is {delayInSeconds}");
 
             return TimeSpan.FromSeconds(delayInSeconds);
         }

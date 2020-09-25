@@ -1,5 +1,6 @@
 using System;
 using Server.Engines.Craft;
+using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
 
@@ -19,7 +20,7 @@ namespace Server.Items
         Diamond
     }
 
-    public abstract class BaseJewel : Item, ICraftable, IArmorRating
+    public abstract class BaseJewel : Item, ICraftable, IArmorRating, IMagicEquipItem, IElementalResistible
     {
         private int m_HitPoints;
 
@@ -35,6 +36,61 @@ namespace Server.Items
         }
 
         #endregion
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalWaterResist
+        {
+            get => MagicProps.GetResist(ElementalType.Water);
+            set => MagicProps.SetResist(ElementalType.Water, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalAirResist
+        {
+            get => MagicProps.GetResist(ElementalType.Air);
+            set => MagicProps.SetResist(ElementalType.Air, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalPhysicalResist
+        {
+            get => MagicProps.GetResist(ElementalType.Physical);
+            set => MagicProps.SetResist(ElementalType.Physical, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalFireResist
+        {
+            get => MagicProps.GetResist(ElementalType.Fire);
+            set => MagicProps.SetResist(ElementalType.Fire, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalColdResist
+        {
+            get => MagicProps.GetResist(ElementalType.Cold);
+            set => MagicProps.SetResist(ElementalType.Cold, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalPoisonResist
+        {
+            get => MagicProps.GetResist(ElementalType.Poison);
+            set => MagicProps.SetResist(ElementalType.Poison, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalEnergyResist
+        {
+            get => MagicProps.GetResist(ElementalType.Energy);
+            set => MagicProps.SetResist(ElementalType.Energy, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalEarthResist
+        {
+            get => MagicProps.GetResist(ElementalType.Earth);
+            set => MagicProps.SetResist(ElementalType.Earth, value);
+        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalNecroResist
+        {
+            get => MagicProps.GetResist(ElementalType.Necro);
+            set => MagicProps.SetResist(ElementalType.Necro, value);
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorBonus ArmorBonus
@@ -159,7 +215,7 @@ namespace Server.Items
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-
+            
             writer.Write((int) 4); // version
 
             MagicProps.Serialize(writer);
@@ -174,7 +230,7 @@ namespace Server.Items
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-
+            
             int version = reader.ReadInt();
 
             switch (version)
@@ -198,8 +254,8 @@ namespace Server.Items
                 }
                 case 1:
                 {
-                    if (Parent is Mobile)
-                        ((Mobile) Parent).CheckStatTimers();
+                    if (Parent is Mobile mobile)
+                        mobile.CheckStatTimers();
 
                     break;
                 }

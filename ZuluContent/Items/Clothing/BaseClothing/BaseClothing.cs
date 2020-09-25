@@ -10,7 +10,7 @@ using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
-    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating
+    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating, IMagicEquipItem
     {
         public virtual bool CanFortify
         {
@@ -109,10 +109,7 @@ namespace Server.Items
         public ClothingQuality Quality
         {
             get => MagicProps.GetAttr<ClothingQuality>();
-            set
-            {
-                MagicProps.SetAttr(value);
-            }
+            set => MagicProps.SetAttr(value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

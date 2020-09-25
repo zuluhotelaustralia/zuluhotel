@@ -12,90 +12,43 @@ namespace Server.Spells
     public abstract class Spell : ISpell
     {
         private Mobile m_Caster;
-        private Item m_Scroll;
         private SpellInfo m_Info;
-        private SpellState m_State;
         private long m_StartCastTime;
         private bool m_SpellStrike;
-
         protected ElementalType m_DamageType;
 
         public abstract SpellCircle Circle { get; }
         public abstract SpellInfo GetSpellInfo();
+        public SpellState State { get; set; }
 
-        public SpellState State
-        {
-            get { return m_State; }
-            set { m_State = value; }
-        }
+        public Mobile Caster => m_Caster;
 
-        public Mobile Caster
-        {
-            get { return m_Caster; }
-        }
+        public SpellInfo Info => m_Info;
 
-        public SpellInfo Info
-        {
-            get { return m_Info; }
-        }
+        public string Name => m_Info.Name;
 
-        public string Name
-        {
-            get { return m_Info.Name; }
-        }
+        public string Mantra => m_Info.Mantra;
 
-        public string Mantra
-        {
-            get { return m_Info.Mantra; }
-        }
+        public Type[] Reagents => m_Info.Reagents;
 
-        public Type[] Reagents
-        {
-            get { return m_Info.Reagents; }
-        }
+        public Item Scroll { get; private set; }
 
-        public Item Scroll
-        {
-            get { return m_Scroll; }
-        }
+        private static readonly TimeSpan NextSpellDelay = TimeSpan.FromSeconds(0.75);
+        private static readonly TimeSpan AnimateDelay = TimeSpan.FromSeconds(1.5);
 
-        private static TimeSpan NextSpellDelay = TimeSpan.FromSeconds(0.75);
-        private static TimeSpan AnimateDelay = TimeSpan.FromSeconds(1.5);
+        public virtual SkillName CastSkill => SkillName.Magery;
 
-        public virtual SkillName CastSkill
-        {
-            get { return SkillName.Magery; }
-        }
+        public virtual SkillName DamageSkill => SkillName.EvalInt;
 
-        public virtual SkillName DamageSkill
-        {
-            get { return SkillName.EvalInt; }
-        }
+        public virtual bool RevealOnCast => true;
 
-        public virtual bool RevealOnCast
-        {
-            get { return true; }
-        }
+        public virtual bool ClearHandsOnCast => true;
 
-        public virtual bool ClearHandsOnCast
-        {
-            get { return true; }
-        }
+        public virtual bool ShowHandMovement => true;
 
-        public virtual bool ShowHandMovement
-        {
-            get { return true; }
-        }
+        public virtual bool DelayedDamage => false;
 
-        public virtual bool DelayedDamage
-        {
-            get { return false; }
-        }
-
-        public virtual bool DelayedDamageStacking
-        {
-            get { return true; }
-        }
+        public virtual bool DelayedDamageStacking => true;
         //In reality, it's ANY delayed Damage spell Post-AoS that can't stack, but, only
         //Expo & Magic Arrow have enough delay and a short enough cast time to bring up
         //the possibility of stacking 'em.  Note that a MA & an Explosion will stack, but
@@ -109,7 +62,7 @@ namespace Server.Spells
             var spell = SpellRegistry.NewSpell<T>(caster, scroll);
 
             spell.m_Caster = caster;
-            spell.m_Scroll = scroll;
+            spell.Scroll = scroll;
             spell.m_SpellStrike = spellStrike;
             spell.m_Info = spell.GetSpellInfo();
 
@@ -118,12 +71,11 @@ namespace Server.Spells
 
         private class DelayedDamageContextWrapper
         {
-            private Dictionary<Mobile, Timer> m_Contexts = new Dictionary<Mobile, Timer>();
+            private readonly Dictionary<Mobile, Timer> m_Contexts = new Dictionary<Mobile, Timer>();
 
             public void Add(Mobile m, Timer t)
             {
-                Timer oldTimer;
-                if (m_Contexts.TryGetValue(m, out oldTimer))
+                if (m_Contexts.TryGetValue(m, out var oldTimer))
                 {
                     oldTimer.Stop();
                     m_Contexts.Remove(m);
@@ -143,9 +95,7 @@ namespace Server.Spells
             if (DelayedDamageStacking)
                 return; //Sanity
 
-            DelayedDamageContextWrapper contexts;
-
-            if (!m_ContextTable.TryGetValue(GetType(), out contexts))
+            if (!m_ContextTable.TryGetValue(GetType(), out var contexts))
             {
                 contexts = new DelayedDamageContextWrapper();
                 m_ContextTable.Add(GetType(), contexts);
@@ -156,9 +106,7 @@ namespace Server.Spells
 
         public void RemoveDelayedDamageContext(Mobile m)
         {
-            DelayedDamageContextWrapper contexts;
-
-            if (!m_ContextTable.TryGetValue(GetType(), out contexts))
+            if (!m_ContextTable.TryGetValue(GetType(), out var contexts))
                 return;
 
             contexts.Remove(m);
@@ -166,20 +114,20 @@ namespace Server.Spells
 
         public void HarmfulSpell(Mobile m)
         {
-            if (m is BaseCreature)
-                ((BaseCreature) m).OnHarmfulSpell(m_Caster);
+            if (m is BaseCreature creature)
+                creature.OnHarmfulSpell(m_Caster);
         }
 
         public Spell(Mobile caster, Item scroll, SpellInfo info)
         {
             m_Caster = caster;
-            m_Scroll = scroll;
+            Scroll = scroll;
             m_Info = info;
         }
 
         public virtual bool IsCasting
         {
-            get { return m_State == SpellState.Casting; }
+            get { return State == SpellState.Casting; }
         }
 
         public virtual void OnCasterHurt()
@@ -193,9 +141,9 @@ namespace Server.Spells
                 object o = ProtectionSpell.Registry[m_Caster];
                 bool disturb = true;
 
-                if (o != null && o is double)
+                if (o != null && o is double d)
                 {
-                    if ((double) o > Utility.RandomDouble() * 100.0)
+                    if (d > Utility.RandomDouble() * 100.0)
                         disturb = false;
                 }
 
@@ -245,7 +193,7 @@ namespace Server.Spells
 
         public virtual bool OnCasterUsingObject(object o)
         {
-            if (m_State == SpellState.Sequencing)
+            if (State == SpellState.Sequencing)
                 Disturb(DisturbType.UseRequest);
 
             return true;
@@ -258,7 +206,7 @@ namespace Server.Spells
 
         public virtual bool ConsumeReagents()
         {
-            if (m_Scroll != null || !m_Caster.Player)
+            if (Scroll != null || !m_Caster.Player)
                 return true;
 
             Container pack = m_Caster.Backpack;
@@ -411,13 +359,13 @@ namespace Server.Spells
             if (!CheckDisturb(type, firstCircle, resistable))
                 return;
 
-            switch (m_State)
+            switch (State)
             {
                 case SpellState.Casting when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
                     return;
                 case SpellState.Casting:
                 {
-                    m_State = SpellState.None;
+                    State = SpellState.None;
                     m_Caster.Spell = null;
 
                     OnDisturb(type, true);
@@ -432,7 +380,7 @@ namespace Server.Spells
                 case SpellState.Sequencing when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
                     return;
                 case SpellState.Sequencing:
-                    m_State = SpellState.None;
+                    State = SpellState.None;
                     m_Caster.Spell = null;
 
                     OnDisturb(type, false);
@@ -461,7 +409,7 @@ namespace Server.Spells
 
         public virtual bool IsWand()
         {
-            return m_Scroll is BaseWand;
+            return Scroll is BaseWand;
         }
 
         public virtual void SayMantra()
@@ -519,7 +467,7 @@ namespace Server.Spells
                 if (m_Caster.Spell == null && m_Caster.CheckSpellCast(this) && CheckCast() &&
                     m_Caster.Region.OnBeginSpellCast(m_Caster, this))
                 {
-                    m_State = SpellState.Casting;
+                    State = SpellState.Casting;
                     m_Caster.Spell = this;
 
                     if (!(IsWand()) && RevealOnCast)
@@ -659,7 +607,7 @@ namespace Server.Spells
 
         public virtual void FinishSequence()
         {
-            m_State = SpellState.None;
+            State = SpellState.None;
 
             if (m_Caster.Spell == this)
                 m_Caster.Spell = null;
@@ -677,13 +625,13 @@ namespace Server.Spells
 
             int mana = GetMana();
 
-            if (m_Caster.Deleted || !m_Caster.Alive || m_Caster.Spell != this || m_State != SpellState.Sequencing)
+            if (m_Caster.Deleted || !m_Caster.Alive || m_Caster.Spell != this || State != SpellState.Sequencing)
             {
                 DoFizzle();
             }
-            else if (m_Scroll != null && !(m_Scroll is Runebook) &&
-                     (m_Scroll.Amount <= 0 || m_Scroll.Deleted || m_Scroll.RootParent != m_Caster ||
-                      IsWand() && (((BaseWand) m_Scroll).Charges <= 0 || m_Scroll.Parent != m_Caster)))
+            else if (Scroll != null && !(Scroll is Runebook) &&
+                     (Scroll.Amount <= 0 || Scroll.Deleted || Scroll.RootParent != m_Caster ||
+                      IsWand() && (((BaseWand) Scroll).Charges <= 0 || Scroll.Parent != m_Caster)))
             {
                 DoFizzle();
             }
@@ -705,24 +653,24 @@ namespace Server.Spells
             {
                 m_Caster.Mana -= mana;
 
-                if (m_Scroll is SpellScroll)
-                    m_Scroll.Consume();
+                if (Scroll is SpellScroll)
+                    Scroll.Consume();
                 else if (IsWand())
                 {
-                    ((BaseWand) m_Scroll).ConsumeCharge(m_Caster);
+                    ((BaseWand) Scroll).ConsumeCharge(m_Caster);
                     m_Caster.RevealingAction();
                 }
 
                 if (IsWand())
                 {
-                    bool m = m_Scroll.Movable;
+                    bool m = Scroll.Movable;
 
-                    m_Scroll.Movable = false;
+                    Scroll.Movable = false;
 
                     if (ClearHandsOnCast)
                         m_Caster.ClearHands();
 
-                    m_Scroll.Movable = m;
+                    Scroll.Movable = m;
                 }
                 else
                 {
@@ -835,9 +783,9 @@ namespace Server.Spells
                 {
                     return;
                 }
-                else if (m_Spell.m_State == SpellState.Casting && m_Spell.m_Caster.Spell == m_Spell)
+                else if (m_Spell.State == SpellState.Casting && m_Spell.m_Caster.Spell == m_Spell)
                 {
-                    m_Spell.m_State = SpellState.Sequencing;
+                    m_Spell.State = SpellState.Sequencing;
                     m_Spell.m_CastTimer = null;
                     m_Spell.m_Caster.OnSpellCast(m_Spell);
                     if (m_Spell.m_Caster.Region != null)

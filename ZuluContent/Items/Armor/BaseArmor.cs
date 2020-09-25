@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.Engines.Magic;
 using Server.Network;
 using Server.Engines.Craft;
+using Server.Engines.Magic;
 using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
@@ -11,7 +12,8 @@ using AMT = Server.Items.ArmorMaterialType;
 
 namespace Server.Items
 {
-    public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability, IArmorRating
+    public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability, IArmorRating,
+        IMagicEquipItem, IElementalResistible
     {
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -51,6 +53,69 @@ namespace Server.Items
 
         #endregion
 
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalWaterResist
+        {
+            get => MagicProps.GetResist(ElementalType.Water);
+            set => MagicProps.SetResist(ElementalType.Water, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalAirResist
+        {
+            get => MagicProps.GetResist(ElementalType.Air);
+            set => MagicProps.SetResist(ElementalType.Air, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalPhysicalResist
+        {
+            get => MagicProps.GetResist(ElementalType.Physical);
+            set => MagicProps.SetResist(ElementalType.Physical, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalFireResist
+        {
+            get => MagicProps.GetResist(ElementalType.Fire);
+            set => MagicProps.SetResist(ElementalType.Fire, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalColdResist
+        {
+            get => MagicProps.GetResist(ElementalType.Cold);
+            set => MagicProps.SetResist(ElementalType.Cold, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalPoisonResist
+        {
+            get => MagicProps.GetResist(ElementalType.Poison);
+            set => MagicProps.SetResist(ElementalType.Poison, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalEnergyResist
+        {
+            get => MagicProps.GetResist(ElementalType.Energy);
+            set => MagicProps.SetResist(ElementalType.Energy, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalEarthResist
+        {
+            get => MagicProps.GetResist(ElementalType.Earth);
+            set => MagicProps.SetResist(ElementalType.Earth, value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalNecroResist
+        {
+            get => MagicProps.GetResist(ElementalType.Necro);
+            set => MagicProps.SetResist(ElementalType.Necro, value);
+        }
 
         public virtual bool AllowMaleWearer
         {
@@ -332,7 +397,7 @@ namespace Server.Items
             {
                 if (value == 0 && !MagicProps.HasMod(StatType.Dex))
                     return;
-                
+
                 MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
             }
         }
@@ -569,7 +634,7 @@ namespace Server.Items
                 ArmorDurabilityLevel.Substantial => 50,
                 ArmorDurabilityLevel.Massive => 70,
                 ArmorDurabilityLevel.Fortified => 100,
-                ArmorDurabilityLevel.Indestructible => 120,
+                ArmorDurabilityLevel.Tempered => 120,
                 _ => 0
             };
 
@@ -736,7 +801,7 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.Protection, ProtectionLevel != ArmorProtectionLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.MedAllowance, m_Meditate != (AMA) (-1));
                 SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed != false);
-                
+
                 SetSaveFlag(ref flags, SaveFlag.StrBonus, m_StrBonus != -1);
                 SetSaveFlag(ref flags, SaveFlag.DexBonus, m_DexBonus != -1);
                 SetSaveFlag(ref flags, SaveFlag.IntBonus, m_IntBonus != -1);
@@ -752,7 +817,7 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.IntReq, m_IntReq != -1);
 
             writer.WriteEncodedInt((int) flags);
-            
+
             if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                 MagicProps.Serialize(writer);
 
@@ -843,7 +908,7 @@ namespace Server.Items
                     {
                         Durability = (ArmorDurabilityLevel) reader.ReadEncodedInt();
 
-                        if (Durability > ArmorDurabilityLevel.Indestructible)
+                        if (Durability > ArmorDurabilityLevel.Tempered)
                             Durability = ArmorDurabilityLevel.Durable;
                     }
 
@@ -1035,7 +1100,7 @@ namespace Server.Items
             StrBonus = DefaultStrBonus;
             DexBonus = DefaultDexBonus;
             IntBonus = DefaultIntBonus;
-            
+
             Quality = ArmorQuality.Regular;
             Durability = ArmorDurabilityLevel.Regular;
             m_Crafter = null;
@@ -1124,7 +1189,7 @@ namespace Server.Items
 
             return false;
         }
-        
+
         public override void OnAdded(IEntity parent)
         {
             base.OnAdded(parent);
@@ -1134,7 +1199,7 @@ namespace Server.Items
                 MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
                 m.Delta(MobileDelta.WeaponDamage);
-                m.Delta(MobileDelta.Armor); 
+                m.Delta(MobileDelta.Armor);
             }
         }
 
@@ -1190,7 +1255,7 @@ namespace Server.Items
                         {
                             MaxHitPoints -= wear;
 
-                            if (Parent is Mobile mobile)  // Your equipment is severely damaged.
+                            if (Parent is Mobile mobile) // Your equipment is severely damaged.
                                 mobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121);
                         }
                         else
@@ -1249,7 +1314,8 @@ namespace Server.Items
                 if (Durability != ArmorDurabilityLevel.Regular)
                     attrs.Add(new EquipInfoAttribute(1038000 + (int) Durability));
 
-                if (ProtectionLevel > ArmorProtectionLevel.Regular && ProtectionLevel <= ArmorProtectionLevel.Invulnerability)
+                if (ProtectionLevel > ArmorProtectionLevel.Regular &&
+                    ProtectionLevel <= ArmorProtectionLevel.Invulnerability)
                     attrs.Add(new EquipInfoAttribute(1038005 + (int) ProtectionLevel));
             }
             else if (Durability != ArmorDurabilityLevel.Regular || ProtectionLevel > ArmorProtectionLevel.Regular &&

@@ -53,6 +53,7 @@ namespace ZuluContent.Zulu.Engines.Magic
                 [typeof(ArmorProtectionLevel)] = MagicProp.ArmorProtection,
                 [typeof(ArmorMeditationAllowance)] = MagicProp.MeditationAllowance,
                 [typeof(ArmorBonus)] = MagicProp.ArmorBonus,
+                [typeof(MagicalWeaponType)] = MagicProp.MagicalWeaponType,
             };
 
         protected MagicalPropertyDictionary(Item parent)
@@ -146,11 +147,18 @@ namespace ZuluContent.Zulu.Engines.Magic
         public void SetResist(ElementalType type, int value)
         {
             IsDirty = true;
-            
+
             if (ResistMods[(int) type] is MagicResistMod mod)
-                mod.Value = value;
-            else
+            {
+                if (value == 0)
+                    RemoveMod(mod);
+                else
+                    mod.Value = value;
+            }
+            else if (value > 0)
+            {
                 ResistMods[(int) type] = new MagicResistMod(type, value);
+            }
         }
 
         public void AddMod<T>(IMagicMod<T> mod) where T : unmanaged, Enum
