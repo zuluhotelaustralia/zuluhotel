@@ -1,8 +1,6 @@
-/Logs/
-/Backups
-/Saves
-/muls
-/ZuluContent/obj
-/ZuluContent/bin
 *~
 /.idea
+/ClassicUO
+/Distribution/Data/Cliloc.enu
+/ZuluContent/obj
+/ZuluContent/bin

@@ -382,9 +382,14 @@ namespace Server.Items
             get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
             set
             {
-                if (value == 0 && !MagicProps.HasMod(StatType.Str))
-                    return;
-
+                if (value == 0)
+                {
+                    if(MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> mod))
+                        MagicProps.RemoveMod(mod);
+                    else
+                        return;
+                }
+                
                 MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
             }
         }
@@ -395,9 +400,14 @@ namespace Server.Items
             get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
             set
             {
-                if (value == 0 && !MagicProps.HasMod(StatType.Dex))
-                    return;
-
+                if (value == 0)
+                {
+                    if(MagicProps.TryGetMod(StatType.Dex, out IMagicMod<StatType> mod))
+                        MagicProps.RemoveMod(mod);
+                    else
+                        return;
+                }
+                
                 MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
             }
         }
@@ -408,9 +418,13 @@ namespace Server.Items
             get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
             set
             {
-                if (value == 0 && !MagicProps.HasMod(StatType.Int))
-                    return;
-
+                if (value == 0)
+                {
+                    if(MagicProps.TryGetMod(StatType.Int, out IMagicMod<StatType> mod))
+                        MagicProps.RemoveMod(mod);
+                    else
+                        return;
+                }
                 MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
             }
         }

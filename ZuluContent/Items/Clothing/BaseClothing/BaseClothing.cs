@@ -7,6 +7,7 @@ using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items.SingleClick;
 
 namespace Server.Items
 {
@@ -108,7 +109,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ClothingQuality Quality
         {
-            get => MagicProps.GetAttr<ClothingQuality>();
+            get => MagicProps.GetAttr(defaultValue: ClothingQuality.Regular);
             set => MagicProps.SetAttr(value);
         }
 
@@ -156,9 +157,14 @@ namespace Server.Items
             get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
             set
             {
-                if (value == 0 && !MagicProps.HasMod(StatType.Str))
-                    return;
-
+                if (value == 0)
+                {
+                    if(MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> mod))
+                        MagicProps.RemoveMod(mod);
+                    else
+                        return;
+                }
+                
                 MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
             }
         }
@@ -169,8 +175,13 @@ namespace Server.Items
             get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
             set
             {
-                if (value == 0 && !MagicProps.HasMod(StatType.Dex))
-                    return;
+                if (value == 0)
+                {
+                    if(MagicProps.TryGetMod(StatType.Dex, out IMagicMod<StatType> mod))
+                        MagicProps.RemoveMod(mod);
+                    else
+                        return;
+                }
                 
                 MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
             }
@@ -182,9 +193,13 @@ namespace Server.Items
             get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
             set
             {
-                if (value == 0 && !MagicProps.HasMod(StatType.Int))
-                    return;
-
+                if (value == 0)
+                {
+                    if(MagicProps.TryGetMod(StatType.Int, out IMagicMod<StatType> mod))
+                        MagicProps.RemoveMod(mod);
+                    else
+                        return;
+                }
                 MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
             }
         }
@@ -453,28 +468,30 @@ namespace Server.Items
 
         public override void OnSingleClick(Mobile from)
         {
-            List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
-
-            AddEquipInfoAttributes(from, attrs);
-
-            int number;
-
-            if (Name == null)
-            {
-                number = LabelNumber;
-            }
-            else
-            {
-                LabelTo(from, Name);
-                number = 1041000;
-            }
-
-            if (attrs.Count == 0 && Crafter == null && Name != null)
-                return;
-
-            EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false, attrs.ToArray());
-
-            from.Send(new DisplayEquipmentInfo(this, eqInfo));
+            // List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
+            //
+            // AddEquipInfoAttributes(from, attrs);
+            //
+            // int number;
+            //
+            // if (Name == null)
+            // {
+            //     number = LabelNumber;
+            // }
+            // else
+            // {
+            //     LabelTo(from, Name);
+            //     number = 1041000;
+            // }
+            //
+            // if (attrs.Count == 0 && Crafter == null && Name != null)
+            //     return;
+            //
+            // EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false, attrs.ToArray());
+            //
+            // from.Send(new DisplayEquipmentInfo(this, eqInfo));
+            
+            ClothingSingleClickHandler.HandleSingleClick(this, from);
         }
 
         public virtual void AddEquipInfoAttributes(Mobile from, List<EquipInfoAttribute> attrs)

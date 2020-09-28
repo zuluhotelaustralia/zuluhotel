@@ -24,6 +24,7 @@ namespace Server.Scripts.Engines.Loot
         public int Quantity = 1;
 
         public int DurabilityLevel = 0;
+        public MagicalWeaponType MagicalWeaponType = MagicalWeaponType.None;
         public WeaponAccuracyLevel AccuracyLevel = 0;
         public WeaponDamageLevel DamageLevel = 0;
         public ArmorProtectionLevel ArmorProtectionLevel = 0;
@@ -49,6 +50,7 @@ namespace Server.Scripts.Engines.Loot
         {
             Type = t;
         }
+
 
         public bool Is<T>() => Type.IsSubclassOf(typeof(T));
 
@@ -86,6 +88,7 @@ namespace Server.Scripts.Engines.Loot
                         weapon.AccuracyLevel = AccuracyLevel;
                         weapon.DamageLevel = DamageLevel;
                         weapon.Slayer = SlayerName;
+                        weapon.MagicalWeaponType = MagicalWeaponType;
                         break;
                     case BaseArmor armor:
                         armor.DexBonus = BonusDex;
@@ -178,6 +181,14 @@ namespace Server.Scripts.Engines.Loot
             switch (item.Type)
             {
                 case {} when item.Is<BaseWeapon>():
+                    if (RandomDouble() < 0.2)
+                        if (RandomBool())
+                            item.MagicalWeaponType = MagicalWeaponType.Mystical;
+                        else if (RandomBool())
+                            item.MagicalWeaponType = MagicalWeaponType.Stygian;
+                        else if (RandomBool())
+                            item.MagicalWeaponType = MagicalWeaponType.Swift;
+
                     if (item.EnchantLevel < 0.75)
                         ApplyDurabilityMod(item);
                     else if (item.EnchantLevel < 1.5)

@@ -44,7 +44,6 @@ namespace Scripts.Zulu.Engines.Magic
                 }
 
                 item.MagicProps.TryGetMod(SkillName.Anatomy, out IMagicMod<SkillName> anatMod);
-                var names = anatMod.CursedNames;
             
                 item.MoveToWorld(e.Mobile.Location, Map.Internal);
             }

@@ -8,13 +8,11 @@ namespace ZuluContent.Zulu.Engines.Magic
     {
         public ElementalType Target { get; }
         public int Value { get; set; } = 0;
-        public MagicProp Prop { get; } = MagicProp.ElementalResist;
-        public EnchantNameType Place { get; } = EnchantNameType.Prefix;
-        public string[] NormalNames { get; }
-        public string[] CursedNames { get; }
-        public int Color { get; }
-        public int CursedColor { get; }
-        public bool Cursed { get; }
+        public MagicProp Prop => MagicProp.ElementalResist;
+        public MagicInfo Info => MagicInfo.MagicInfoMap[Target];
+        public bool Cursed { get; set; }
+        
+        public string EnchantName => Info.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
 
 
         public MagicResistMod(ElementalType type, int value)

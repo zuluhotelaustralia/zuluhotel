@@ -265,13 +265,13 @@ namespace ZuluContent.Zulu.Engines.Magic
 
                 switch (value)
                 {
-                    case IMagicMod<SkillName> skillMod:
+                    case MagicSkillMod skillMod when skillMod.Value != 0:
                         mp.SkillMods[(int) (object) skillMod.Target] = skillMod;
                         break;
-                    case IMagicMod<StatType> statMod:
+                    case MagicStatMod statMod when statMod.Offset != 0:
                         mp.StatMods[(int) (object) statMod.Target] = statMod;
                         break;
-                    case IMagicMod<ElementalType> resistMod:
+                    case MagicResistMod resistMod when resistMod.Value != 0:
                         mp.ResistMods[(int) (object) resistMod.Target] = resistMod;
                         break;
                     default:

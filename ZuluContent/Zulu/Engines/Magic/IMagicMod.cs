@@ -17,12 +17,9 @@ namespace Scripts.Engines.Magic
     public interface IMagicValue
     {
         public MagicProp Prop { get; }
-        public EnchantNameType Place { get; }
-        public string[] NormalNames { get; } 
-        public string[] CursedNames { get; }
-        public int Color { get; }
-        public int CursedColor { get; }
-        public bool Cursed { get; }
+        public MagicInfo Info { get; }
+        public string EnchantName { get; }
+        public bool Cursed { get; set; }
         public void Remove();
         public void AddTo(Mobile mobile);
 
