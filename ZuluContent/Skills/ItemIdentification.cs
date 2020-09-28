@@ -1,59 +1,55 @@
 using System;
 using Server.Targeting;
 using Server.Mobiles;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
     public class ItemIdentification
-	{
-		public static void Initialize()
-		{
-			SkillInfo.Table[(int)SkillName.ItemID].Callback = OnUse;
-		}
+    {
+        public static void Initialize()
+        {
+            SkillInfo.Table[(int) SkillName.ItemID].Callback = OnUse;
+        }
 
-		public static TimeSpan OnUse( Mobile from )
-		{
-			from.SendLocalizedMessage( 500343 ); // What do you wish to appraise and identify?
-			from.Target = new InternalTarget();
+        public static TimeSpan OnUse(Mobile from)
+        {
+            from.SendLocalizedMessage(500343); // What do you wish to appraise and identify?
+            from.Target = new InternalTarget();
 
-			return TimeSpan.FromSeconds( 1.0 );
-		}
+            return TimeSpan.FromSeconds(1.0);
+        }
 
-		[PlayerVendorTarget]
-		private class InternalTarget : Target
-		{
-			public InternalTarget() :  base ( 8, false, TargetFlags.None )
-			{
-				AllowNonlocal = true;
-			}
+        [PlayerVendorTarget]
+        private class InternalTarget : Target
+        {
+            public InternalTarget() : base(8, false, TargetFlags.None)
+            {
+                AllowNonlocal = true;
+            }
 
-			protected override void OnTarget( Mobile from, object o )
-			{
-				if ( o is Item )
-				{
-					if ( from.CheckTargetSkill( SkillName.ItemID, o, 0, 100 ) )
-					{
-						if ( o is BaseWeapon )
-							((BaseWeapon)o).Identified = true;
-						else if ( o is BaseArmor )
-							((BaseArmor)o).Identified = true;
-
-						((Item)o).OnSingleClick( from );
-					}
-					else
-					{
-						from.SendLocalizedMessage( 500353 ); // You are not certain...
-					}
-				}
-				else if ( o is Mobile )
-				{
-					((Mobile)o).OnSingleClick( from );
-				}
-				else
-				{
-					from.SendLocalizedMessage( 500353 ); // You are not certain...
-				}
-			}
-		}
-	}
+            protected override void OnTarget(Mobile from, object o)
+            {
+                switch (o)
+                {
+                    case IMagicItem item when from.CheckTargetSkill(SkillName.ItemID, item, 0, 100):
+                    {
+                        if(!item.Identified)
+                            item.Identified = true;
+                        item.OnSingleClick(from);
+                        break;
+                    }
+                    case Item item:
+                        from.SendLocalizedMessage(500353); // You are not certain...
+                        break;
+                    case Mobile mobile:
+                        mobile.OnSingleClick(from);
+                        break;
+                    default:
+                        from.SendLocalizedMessage(500353); // You are not certain...
+                        break;
+                }
+            }
+        }
+    }
 }

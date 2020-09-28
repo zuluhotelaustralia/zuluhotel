@@ -5,6 +5,7 @@ using Server.Engines.Craft;
 using System.Collections.Generic;
 using Scripts.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
@@ -14,7 +15,7 @@ namespace Server.Items
         SlayerName Slayer2 { get; set; }
     }
 
-    public abstract class BaseWeapon : Item, IWeapon, ICraftable, ISlayer, IDurability, IMagicEquipItem
+    public abstract class BaseWeapon : Item, IWeapon, ICraftable, ISlayer, IDurability, IMagicItem
     {
         /* Weapon internals work differently now (Mar 13 2003)
          *
@@ -108,8 +109,13 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Identified
         {
-            get => MagicProps.GetAttr<bool>(MagicProp.Identified);
-            set => MagicProps.SetAttr(MagicProp.Identified, value);
+            get => MagicProps.GetAttr<bool>(MagicProp.Identified, true);
+            set
+            {
+                MagicProps.SetAttr(MagicProp.Identified, value);
+                if(value)
+                    IMagicItem.OnIdentified(this);
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -193,8 +199,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed
         {
-            get => MagicProps.GetAttr<bool>(MagicProp.PlayerConstructed);
-            set => MagicProps.SetAttr(MagicProp.PlayerConstructed, value);
+            get;
+            set;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -1062,11 +1068,18 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 10); // version
+            writer.Write((int) 11); // version
 
             SaveFlag flags = SaveFlag.None;
             
+            SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
+
+            if (!GetSaveFlag(flags, SaveFlag.ICraftable))
+            {
+                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
+                SetSaveFlag(ref flags, SaveFlag.Crafter, Crafter != null);
+            }
 
             // Legacy property saving
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
@@ -1076,7 +1089,6 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.DurabilityLevel, DurabilityLevel != WeaponDurabilityLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Quality, Quality != WeaponQuality.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified);
-                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
             }
 
             SetSaveFlag(ref flags, SaveFlag.Hits, m_Hits != 0);
@@ -1084,7 +1096,6 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.Slayer, Slayer != SlayerName.None);
             SetSaveFlag(ref flags, SaveFlag.Poison, Poison != null);
             SetSaveFlag(ref flags, SaveFlag.PoisonCharges, PoisonCharges != 0);
-            SetSaveFlag(ref flags, SaveFlag.Crafter, Crafter != null);
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
             SetSaveFlag(ref flags, SaveFlag.DexReq, m_DexReq != -1);
             SetSaveFlag(ref flags, SaveFlag.IntReq, m_IntReq != -1);
@@ -1101,7 +1112,10 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.Slayer2, Slayer2 != SlayerName.None);
             
             writer.Write((int) flags);
-            
+
+            if (GetSaveFlag(flags, SaveFlag.ICraftable))
+                ICraftable.Serialize(writer, this);
+
             if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                 MagicProps.Serialize(writer);
 
@@ -1212,13 +1226,14 @@ namespace Server.Items
             Type = 0x00200000,
             Animation = 0x00400000,
             Resource = 0x00800000,
-            xAttributes = 0x01000000,
+            ICraftable = 0x01000000,
             xWeaponAttributes = 0x02000000,
             PlayerConstructed = 0x04000000,
             SkillBonuses = 0x08000000,
             Slayer2 = 0x10000000,
             ElementalDamages = 0x20000000,
-            NewMagicalProperties = 0x40000000
+            NewMagicalProperties = 0x40000000,
+
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -1231,6 +1246,10 @@ namespace Server.Items
 
             switch (version)
             {
+                case 11:
+                    if (GetSaveFlag(flags, SaveFlag.ICraftable))
+                        ICraftable.Deserialize(reader, this);
+                    goto case 10;
                 case 10:
                     if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                         m_MagicProps = MagicalProperties.Deserialize(reader, this);
@@ -1531,6 +1550,9 @@ namespace Server.Items
 
         public override void OnSingleClick(Mobile from)
         {
+            HandleSingleClick(this, from);
+            return;
+            
             List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
             if (DisplayLootType)

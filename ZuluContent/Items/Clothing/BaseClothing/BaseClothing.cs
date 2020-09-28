@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using Scripts.Engines.Magic;
 using Server.Engines.Craft;
 using Server.Network;
-using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
-using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Items.SingleClick;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating, IMagicEquipItem
+    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating, IMagicItem
     {
         public virtual bool CanFortify
         {
@@ -20,7 +18,6 @@ namespace Server.Items
 
         private int m_MaxHitPoints;
         private int m_HitPoints;
-        private Mobile m_Crafter;
         protected CraftResource m_Resource;
         private int m_StrReq = -1;
         
@@ -44,7 +41,6 @@ namespace Server.Items
                     return;
                 
                 MagicProps.SetAttr(value);
-                Hue = value.GetHue();
                 Invalidate();
             }
         }
@@ -86,11 +82,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter
-        {
-            get { return m_Crafter; }
-            set { m_Crafter = value; }
-        }
+        public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrRequirement
@@ -102,10 +94,15 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Identified
         {
-            get => MagicProps.GetAttr<bool>(MagicProp.Identified);
-            set => MagicProps.SetAttr(MagicProp.Identified, value);
+            get => MagicProps.GetAttr<bool>(MagicProp.Identified, true);
+            set
+            {
+                MagicProps.SetAttr(MagicProp.Identified, value);
+                if(value)
+                    IMagicItem.OnIdentified(this);
+            }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public ClothingQuality Quality
         {
@@ -116,8 +113,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed
         {
-            get => MagicProps.GetAttr<bool>(MagicProp.PlayerConstructed);
-            set => MagicProps.SetAttr(MagicProp.PlayerConstructed, value);
+            get;
+            set;
         }
 
         public virtual CraftResource DefaultResource
@@ -491,7 +488,7 @@ namespace Server.Items
             //
             // from.Send(new DisplayEquipmentInfo(this, eqInfo));
             
-            ClothingSingleClickHandler.HandleSingleClick(this, from);
+            HandleSingleClick(this, from);
         }
 
         public virtual void AddEquipInfoAttributes(Mobile from, List<EquipInfoAttribute> attrs)
@@ -537,32 +534,41 @@ namespace Server.Items
             Quality = 0x00000200,
             StrReq = 0x00000400,
             NewMagicalProperties = 0x00080000,
+            ICraftable = 0x00100000
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 6); // version
+            writer.Write((int) 7); // version
 
             SaveFlag flags = SaveFlag.None;
-
+            
+            SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
+            
+            if (!GetSaveFlag(flags, SaveFlag.ICraftable))
+            {
+                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
+                SetSaveFlag(ref flags, SaveFlag.Crafter, Crafter != null);
+            }
 
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
             {
-                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed != false);
                 SetSaveFlag(ref flags, SaveFlag.Quality, Quality != ClothingQuality.Regular);
             }
 
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != DefaultResource);
             SetSaveFlag(ref flags, SaveFlag.MaxHitPoints, m_MaxHitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.HitPoints, m_HitPoints != 0);
-            SetSaveFlag(ref flags, SaveFlag.Crafter, m_Crafter != null);
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
 
             writer.WriteEncodedInt((int) flags);
             
+            if (GetSaveFlag(flags, SaveFlag.ICraftable))
+                ICraftable.Serialize(writer, this);
+
             if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                 m_MagicProps.Serialize(writer);
 
@@ -576,7 +582,7 @@ namespace Server.Items
                 writer.WriteEncodedInt((int) m_HitPoints);
 
             if (GetSaveFlag(flags, SaveFlag.Crafter))
-                writer.Write((Mobile) m_Crafter);
+                writer.Write((Mobile) Crafter);
 
             if (GetSaveFlag(flags, SaveFlag.Quality))
                 writer.WriteEncodedInt((int) Quality);
@@ -594,6 +600,10 @@ namespace Server.Items
 
             switch (version)
             {
+                case 7:
+                    if (GetSaveFlag(flags, SaveFlag.ICraftable))
+                        ICraftable.Deserialize(reader, this);
+                    goto case 6;
                 case 6:
                     if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                         m_MagicProps = MagicalProperties.Deserialize(reader, this);
@@ -612,7 +622,7 @@ namespace Server.Items
                         m_HitPoints = reader.ReadEncodedInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Crafter))
-                        m_Crafter = reader.ReadMobile();
+                        Crafter = reader.ReadMobile();
 
                     if (GetSaveFlag(flags, SaveFlag.Quality))
                         Quality = (ClothingQuality) reader.ReadEncodedInt();
@@ -643,13 +653,13 @@ namespace Server.Items
                 }
                 case 1:
                 {
-                    m_Crafter = reader.ReadMobile();
+                    Crafter = reader.ReadMobile();
                     Quality = (ClothingQuality) reader.ReadInt();
                     break;
                 }
                 case 0:
                 {
-                    m_Crafter = null;
+                    Crafter = null;
                     Quality = ClothingQuality.Regular;
                     break;
                 }

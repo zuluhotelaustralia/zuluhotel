@@ -546,6 +546,8 @@ public Spellbook(Serial serial) : base(serial)
             1 // 1 property   : 1/4 : 25%
         };
 
+        public bool PlayerConstructed { get; set; }
+
         public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
@@ -553,7 +555,7 @@ public Spellbook(Serial serial) : base(serial)
                 Crafter = from;
 
             m_Quality = (BookQuality) (quality - 1);
-
+            
             return quality;
         }
     }

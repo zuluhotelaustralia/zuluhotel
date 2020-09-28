@@ -3,6 +3,7 @@ using Server.Engines.Craft;
 using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
@@ -20,7 +21,7 @@ namespace Server.Items
         Diamond
     }
 
-    public abstract class BaseJewel : Item, ICraftable, IArmorRating, IMagicEquipItem, IElementalResistible
+    public abstract class BaseJewel : Item, ICraftable, IArmorRating, IMagicItem, IElementalResistible
     {
         private int m_HitPoints;
 
@@ -34,9 +35,32 @@ namespace Server.Items
         {
             get => m_MagicProps ??= new MagicalProperties(this);
         }
+        
 
         #endregion
-        
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed
+        {
+            get;
+            set;
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool Identified
+        {
+            get => MagicProps.GetAttr<bool>(MagicProp.Identified, true);
+            set
+            {
+                MagicProps.SetAttr(MagicProp.Identified, value);
+                if(value)
+                    IMagicItem.OnIdentified(this);
+            }
+        }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalWaterResist
         {
@@ -102,7 +126,6 @@ namespace Server.Items
                     return;
                 
                 MagicProps.SetAttr(value);
-                Hue = value.GetHue();
                 Invalidate();
             }
         }
@@ -183,7 +206,12 @@ namespace Server.Items
         public BaseJewel(Serial serial) : base(serial)
         {
         }
-        
+
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
+        }
+
         protected void Invalidate()
         {
             if (Parent is Mobile mp)
@@ -216,7 +244,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
             
-            writer.Write((int) 4); // version
+            writer.Write((int) 5); // version
+            
+            ICraftable.Serialize(writer, this);
 
             MagicProps.Serialize(writer);
 
@@ -235,6 +265,9 @@ namespace Server.Items
 
             switch (version)
             {
+                case 5:
+                    ICraftable.Deserialize(reader, this);
+                    goto case 4;
                 case 4:
                     m_MagicProps = MagicalProperties.Deserialize(reader, this);
                     goto case 3;
@@ -273,6 +306,7 @@ namespace Server.Items
         }
 
         #region ICraftable Members
+
 
         public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)

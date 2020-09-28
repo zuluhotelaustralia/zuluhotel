@@ -9,11 +9,13 @@ using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
 using AMA = Server.Items.ArmorMeditationAllowance;
 using AMT = Server.Items.ArmorMaterialType;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
+
 
 namespace Server.Items
 {
     public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability, IArmorRating,
-        IMagicEquipItem, IElementalResistible
+        IMagicItem, IElementalResistible
     {
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -453,15 +455,20 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Identified
         {
-            get => MagicProps.GetAttr(MagicProp.Identified, false);
-            set => MagicProps.SetAttr(MagicProp.Identified, value);
+            get => MagicProps.GetAttr(MagicProp.Identified, true);
+            set
+            {
+                MagicProps.SetAttr(MagicProp.Identified, value);
+                if(value)
+                    IMagicItem.OnIdentified(this);
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed
         {
-            get => MagicProps.GetAttr(MagicProp.PlayerConstructed, false);
-            set => MagicProps.SetAttr(MagicProp.PlayerConstructed, value);
+            get;
+            set;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -793,18 +800,26 @@ namespace Server.Items
             IntReq = 0x00200000,
             MedAllowance = 0x00400000,
             NewMagicalProperties = 0x00800000,
-            PlayerConstructed = 0x01000000
+            PlayerConstructed = 0x01000000,
+            ICraftable = 0x02000000
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 8); // version
+            writer.Write((int) 9); // version
 
             SaveFlag flags = SaveFlag.None;
 
+            SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
+            
+            if (!GetSaveFlag(flags, SaveFlag.ICraftable))
+            {
+                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
+                SetSaveFlag(ref flags, SaveFlag.Crafter, Crafter != null);
+            }
 
             // Legacy property saving
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
@@ -814,7 +829,6 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.Durability, Durability != ArmorDurabilityLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Protection, ProtectionLevel != ArmorProtectionLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.MedAllowance, m_Meditate != (AMA) (-1));
-                SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed != false);
 
                 SetSaveFlag(ref flags, SaveFlag.StrBonus, m_StrBonus != -1);
                 SetSaveFlag(ref flags, SaveFlag.DexBonus, m_DexBonus != -1);
@@ -823,7 +837,6 @@ namespace Server.Items
 
             SetSaveFlag(ref flags, SaveFlag.MaxHitPoints, m_MaxHitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.HitPoints, m_HitPoints != 0);
-            SetSaveFlag(ref flags, SaveFlag.Crafter, m_Crafter != null);
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != DefaultResource);
             SetSaveFlag(ref flags, SaveFlag.BaseArmor, m_ArmorBase != -1);
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
@@ -831,6 +844,9 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.IntReq, m_IntReq != -1);
 
             writer.WriteEncodedInt((int) flags);
+            
+            if (GetSaveFlag(flags, SaveFlag.ICraftable))
+               ICraftable.Serialize(writer, this);
 
             if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                 MagicProps.Serialize(writer);
@@ -890,6 +906,10 @@ namespace Server.Items
 
             switch (version)
             {
+                case 9:
+                    if (GetSaveFlag(flags, SaveFlag.ICraftable))
+                        ICraftable.Deserialize(reader, this);
+                    goto case 8;
                 case 8:
                     if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
                         m_MagicProps = MagicalProperties.Deserialize(reader, this);
@@ -1310,6 +1330,9 @@ namespace Server.Items
 
         public override void OnSingleClick(Mobile from)
         {
+            HandleSingleClick(this, from);
+            return;
+            
             List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
             if (DisplayLootType)

@@ -118,9 +118,11 @@ namespace Server.Items
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 6 ); // version
+			writer.Write( (int) 7 ); // version
+            
+            ICraftable.Serialize(writer, this);
 
-			writer.Write( m_IsShipwreckedItem );
+            writer.Write( IsShipwreckedItem );
 
 			writer.Write( (bool) m_TrapOnLockpick );
 
@@ -141,9 +143,12 @@ namespace Server.Items
 
 			switch ( version )
 			{
+                case 7:
+                    ICraftable.Deserialize(reader, this);
+                    goto case 6;
 				case 6:
 				{
-					m_IsShipwreckedItem = reader.ReadBool();
+					IsShipwreckedItem = reader.ReadBool();
 
 					goto case 5;
 				}
@@ -341,13 +346,16 @@ namespace Server.Items
 		{
 			base.OnSingleClick( from );
 
-			if ( m_IsShipwreckedItem )
+			if ( IsShipwreckedItem )
 				LabelTo( from, 1041645 );	//recovered from a shipwreck
 		}
 
 		#region ICraftable Members
 
-		public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
+        public Mobile Crafter { get; set; }
+        public bool PlayerConstructed { get; set; }
+
+        public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
 		{
 			if ( from.CheckSkill( SkillName.Tinkering, -5.0, 15.0 ) )
 			{
@@ -375,7 +383,8 @@ namespace Server.Items
 
 				if ( MaxLockLevel > 95 )
 					MaxLockLevel = 95;
-			}
+                
+            }
 			else
 			{
 				from.SendLocalizedMessage( 500637 ); // Your tinker skill was insufficient to make the item lockable.
@@ -388,15 +397,10 @@ namespace Server.Items
 
 		#region IShipwreckedItem Members
 
-		private bool m_IsShipwreckedItem;
+        [CommandProperty( AccessLevel.GameMaster )]
+		public bool IsShipwreckedItem { get; set; }
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public bool IsShipwreckedItem
-		{
-			get { return m_IsShipwreckedItem; }
-			set { m_IsShipwreckedItem = value; }
-		}
-		#endregion
+        #endregion
 
 	}
 }

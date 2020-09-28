@@ -25,7 +25,6 @@ namespace ZuluContent.Zulu.Engines.Magic
         PoisonCharges,
         MeditationAllowance,
         Identified,
-        PlayerConstructed,
         ParalysisProtection
     }
 }

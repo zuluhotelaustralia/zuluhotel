@@ -70,7 +70,11 @@ namespace Server.Items
 		}
 
 		#region ICraftable
-		public virtual int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
+
+        public Mobile Crafter { get; set; }
+        public bool PlayerConstructed { get; set; }
+
+        public virtual int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
 		{
 			Type resourceType = typeRes;
 
@@ -83,7 +87,7 @@ namespace Server.Items
 
 			if ( context != null && context.DoNotColor )
 				Hue = 0;
-
+            
 			return quality;
 		}
 		#endregion

@@ -3,6 +3,7 @@ using System.Linq;
 using Scripts.Engines.Magic;
 using Scripts.Zulu.Engines.Classes;
 using Server.Commands;
+using Server.Engines.Craft;
 using Server.Engines.Magic;
 using Server.Items;
 using Server.Mobiles;
@@ -73,10 +74,9 @@ namespace Server.Scripts.Engines.Loot
             if (item.Stackable)
                 item.Amount = Quantity;
 
-
-            if (item is IMagicEquipItem magicItem)
+            if (item is IMagicItem magicItem)
             {
-                item.Hue = Hue;
+                magicItem.Identified = false;
 
                 if (SkillBonusValue > 0)
                     magicItem.MagicProps.AddMod(new MagicSkillMod(SkillBonusName, SkillBonusValue));
@@ -99,6 +99,7 @@ namespace Server.Scripts.Engines.Loot
                         armor.Durability = (ArmorDurabilityLevel) DurabilityLevel;
                         break;
                     case BaseClothing clothing:
+                        item.Hue = Hue;
                         clothing.ArmorBonus = ArmorMod;
                         break;
                     case BaseJewel jewelry:

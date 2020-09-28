@@ -825,7 +825,7 @@ namespace Server.Mobiles
 
         public int GetResistance(ElementalType type)
         {
-            return Items.OfType<IMagicEquipItem>().Sum(i => i.MagicProps.GetResist(type));
+            return Items.OfType<IMagicItem>().Sum(i => i.MagicProps.GetResist(type));
         }
 
         #endregion

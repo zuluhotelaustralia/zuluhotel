@@ -204,7 +204,10 @@ namespace Server.Items
 
 		#region ICraftable Members
 
-		public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
+        public Mobile Crafter { get; set; }
+        public bool PlayerConstructed { get; set; }
+
+        public int OnCraft( int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, CraftItem craftItem, int resHue )
 		{
 			if ( craftSystem is DefAlchemy )
 			{
@@ -217,26 +220,24 @@ namespace Server.Items
 
 					List<PotionKeg> kegs = pack.FindItemsByType<PotionKeg>();
 
-					for ( int i = 0; i < kegs.Count; ++i )
-					{
-						PotionKeg keg = kegs[i];
+					foreach (var keg in kegs)
+                    {
+                        if ( keg == null )
+                            continue;
 
-						if ( keg == null )
-							continue;
+                        if ( keg.Held <= 0 || keg.Held >= 100 )
+                            continue;
 
-						if ( keg.Held <= 0 || keg.Held >= 100 )
-							continue;
+                        if ( keg.Type != PotionEffect )
+                            continue;
 
-						if ( keg.Type != PotionEffect )
-							continue;
+                        ++keg.Held;
 
-						++keg.Held;
+                        Consume();
+                        @from.AddToBackpack( new Bottle() );
 
-						Consume();
-						from.AddToBackpack( new Bottle() );
-
-						return -1; // signal placed in keg
-					}
+                        return -1; // signal placed in keg
+                    }
 				}
 			}
 

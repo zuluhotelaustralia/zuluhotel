@@ -260,7 +260,7 @@ namespace ZuluContent.Zulu.Engines.Magic
                 }),
             [MagicProp.Damage] = new MagicInfo(
                 "Weapon Damage Increase",
-                EnchantNameType.Prefix,
+                EnchantNameType.Suffix,
                 new[,]
                 {
                     {string.Empty, string.Empty},
@@ -331,8 +331,7 @@ namespace ZuluContent.Zulu.Engines.Magic
                     {"Makeshift", "Makeshift"},
                     {string.Empty, string.Empty}, // Regular
                     {"Exceptional", "Exceptional"}
-                },
-                590
+                }
             ),
             [MagicProp.ParalysisProtection] = new MagicInfo(
                 "Paralysis Protection",
@@ -427,6 +426,17 @@ namespace ZuluContent.Zulu.Engines.Magic
                     {"Adamantium", "Tarnished"}
                 },
                 1109
+            ),
+            [MagicProp.MagicalWeaponType] = new MagicInfo(
+                "Magical Weapon Type",
+                EnchantNameType.Prefix,
+                new[,]
+                {
+                    {string.Empty, string.Empty}, // None
+                    {"Swift", "Swift"},
+                    {"Stygian", "Stygian"},
+                    {"Mystical", "Mystical"},
+                }
             )
         };
     }
