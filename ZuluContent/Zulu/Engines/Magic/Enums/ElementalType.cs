@@ -13,12 +13,9 @@ namespace Server.Engines.Magic
         public int ElementalPhysicalResist { get; set; }
 
         public int ElementalFireResist { get; set; }
-
-        public int ElementalColdResist { get; set; }
-
+        
         public int ElementalPoisonResist { get; set; }
 
-        public int ElementalEnergyResist { get; set; }
 
         public int ElementalEarthResist { get; set; }
 

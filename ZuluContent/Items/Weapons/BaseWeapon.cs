@@ -3,8 +3,9 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Engines.Craft;
 using System.Collections.Generic;
-using Scripts.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using ZuluContent.Zulu.Items;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
@@ -15,7 +16,7 @@ namespace Server.Items
         SlayerName Slayer2 { get; set; }
     }
 
-    public abstract class BaseWeapon : Item, IWeapon, ICraftable, ISlayer, IDurability, IMagicItem
+    public abstract class BaseWeapon : BaseEquippableItem, IWeapon, ICraftable, ISlayer, IDurability, IMagicItem
     {
         /* Weapon internals work differently now (Mar 13 2003)
          *
@@ -52,17 +53,7 @@ namespace Server.Items
         private WeaponAnimation m_Animation;
 
         #endregion
-
-        #region Magical Properties
-        private MagicalProperties m_MagicProps;
-
-        public MagicalProperties MagicProps
-        {
-            get => m_MagicProps ??= new MagicalProperties(this);
-        }
-
-        #endregion
-
+        
         #region Virtual Properties
 
         public virtual int DefaultHitSound => 0;
@@ -92,30 +83,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public MagicalWeaponType MagicalWeaponType
         {
-            get => MagicProps.GetAttr<MagicalWeaponType>();
-            set
-            {
-                MagicProps.SetAttr(value);
-                Hue = value switch
-                {
-                    MagicalWeaponType.Swift => 621,
-                    MagicalWeaponType.Stygian => 1174,
-                    MagicalWeaponType.Mystical => 6,
-                    _ => 0
-                };
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool Identified
-        {
-            get => MagicProps.GetAttr<bool>(MagicProp.Identified, true);
-            set
-            {
-                MagicProps.SetAttr(MagicProp.Identified, value);
-                if(value)
-                    IMagicItem.OnIdentified(this);
-            }
+            get => Enchantments.Get((MagicalWeapon e) => e.Value);
+            set => Enchantments.Set((MagicalWeapon e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -146,11 +115,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponQuality Quality
         {
-            get => MagicProps.GetAttr(WeaponQuality.Regular);
+            get => Enchantments.Get((ItemQuality e) => (WeaponQuality)e.Value);
             set
             {
                 UnscaleDurability();
-                MagicProps.SetAttr(value);
+                Enchantments.Set((ItemQuality e) => e.Value = (int)value);
                 ScaleDurability();
             }
         }
@@ -180,18 +149,18 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponDamageLevel DamageLevel
         {
-            get => MagicProps.GetAttr<WeaponDamageLevel>();
-            set => MagicProps.SetAttr(value);
+            get => Enchantments.Get((WeaponDamageBonus e) => e.Value);
+            set => Enchantments.Set((WeaponDamageBonus e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponDurabilityLevel DurabilityLevel
         {
-            get => MagicProps.GetAttr<WeaponDurabilityLevel>();
+            get => Enchantments.Get((DurabilityBonus e) => (WeaponDurabilityLevel)e.Value);
             set
             {
                 UnscaleDurability();
-                MagicProps.SetAttr(value);
+                Enchantments.Set((DurabilityBonus e) => e.Value = (int)value);
                 ScaleDurability();
             }
         }
@@ -301,19 +270,20 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponAccuracyLevel AccuracyLevel
         {
-            get => MagicProps.GetAttr<WeaponAccuracyLevel>();
+            get => Enchantments.Get((WeaponAccuracyBonus e) => e.Value);
             set
             {
                 if (AccuracyLevel != value)
                 {
-                    MagicProps.SetAttr(value);
+                    Enchantments.Set((WeaponAccuracyBonus e) => e.Value = value);
 
                     if (UseSkillMod)
                     {
-                        if (AccuracyLevel == default && MagicProps.TryGetMod(Skill, out MagicSkillMod mod))
-                            MagicProps.RemoveMod(mod);
-                        else
-                            MagicProps.AddMod(new MagicSkillMod(Skill, (int) value * 5));
+                        Enchantments.Set((SecondSkillBonus e) =>
+                        {
+                            e.Skill = Skill;
+                            e.Value = (int) value * 5;
+                        });
                     }
                 }
             }
@@ -428,15 +398,7 @@ namespace Server.Items
         public override bool OnEquip(Mobile from)
         {
             from.NextCombatTime = Core.TickCount + (int) GetDelay(from).TotalMilliseconds;
-
-            if (AccuracyLevel != WeaponAccuracyLevel.Regular)
-            {
-                MagicProps.AddMod(new MagicSkillMod(AccuracySkill, (int) AccuracyLevel * 5)
-                {
-                    Owner = from
-                });
-            }
-
+            
             return true;
         }
 
@@ -446,7 +408,6 @@ namespace Server.Items
 
             if (parent is Mobile from)
             {
-                MagicProps.OnMobileEquip();
                 from.CheckStatTimers();
                 from.Delta(MobileDelta.WeaponDamage);
             }
@@ -459,10 +420,11 @@ namespace Server.Items
                 if (m.Weapon is BaseWeapon weapon)
                     m.NextCombatTime = Core.TickCount + (int) weapon.GetDelay(m).TotalMilliseconds;
                 
-                MagicProps.OnMobileRemoved();
                 m.CheckStatTimers();
                 m.Delta(MobileDelta.WeaponDamage);
             }
+            
+            base.OnRemoved(parent);
         }
 
         public virtual SkillName GetUsedSkill(Mobile m, bool checkSkillAttrs)
@@ -1116,9 +1078,6 @@ namespace Server.Items
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
                 ICraftable.Serialize(writer, this);
 
-            if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                MagicProps.Serialize(writer);
-
             if (GetSaveFlag(flags, SaveFlag.DamageLevel))
                 writer.Write((int)DamageLevel);
 
@@ -1251,9 +1210,6 @@ namespace Server.Items
                         ICraftable.Deserialize(reader, this);
                     goto case 10;
                 case 10:
-                    if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                        m_MagicProps = MagicalProperties.Deserialize(reader, this);
-                    goto case 9;
                 case 9:
                 case 8:
                 case 7:

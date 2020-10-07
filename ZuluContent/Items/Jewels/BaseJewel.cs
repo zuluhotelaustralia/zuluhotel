@@ -1,7 +1,8 @@
 using System;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
@@ -21,23 +22,11 @@ namespace Server.Items
         Diamond
     }
 
-    public abstract class BaseJewel : Item, ICraftable, IArmorRating, IMagicItem, IElementalResistible
+    public abstract class BaseJewel : BaseEquippableItem, ICraftable, IArmorRating, IMagicItem, IElementalResistible
     {
         private int m_HitPoints;
 
         private CraftResource m_Resource;
-
-        #region Magical Properties
-
-        private MagicalProperties m_MagicProps;
-
-        public MagicalProperties MagicProps
-        {
-            get => m_MagicProps ??= new MagicalProperties(this);
-        }
-        
-
-        #endregion
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }
@@ -48,84 +37,17 @@ namespace Server.Items
             get;
             set;
         }
-
+        
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Identified
+        public ArmorBonusType ArmorBonusType
         {
-            get => MagicProps.GetAttr<bool>(MagicProp.Identified, true);
+            get => Enchantments.Get((ArmorBonus e) => e.Value);
             set
             {
-                MagicProps.SetAttr(MagicProp.Identified, value);
-                if(value)
-                    IMagicItem.OnIdentified(this);
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalWaterResist
-        {
-            get => MagicProps.GetResist(ElementalType.Water);
-            set => MagicProps.SetResist(ElementalType.Water, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalAirResist
-        {
-            get => MagicProps.GetResist(ElementalType.Air);
-            set => MagicProps.SetResist(ElementalType.Air, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPhysicalResist
-        {
-            get => MagicProps.GetResist(ElementalType.Physical);
-            set => MagicProps.SetResist(ElementalType.Physical, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalFireResist
-        {
-            get => MagicProps.GetResist(ElementalType.Fire);
-            set => MagicProps.SetResist(ElementalType.Fire, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalColdResist
-        {
-            get => MagicProps.GetResist(ElementalType.Cold);
-            set => MagicProps.SetResist(ElementalType.Cold, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPoisonResist
-        {
-            get => MagicProps.GetResist(ElementalType.Poison);
-            set => MagicProps.SetResist(ElementalType.Poison, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalEnergyResist
-        {
-            get => MagicProps.GetResist(ElementalType.Energy);
-            set => MagicProps.SetResist(ElementalType.Energy, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalEarthResist
-        {
-            get => MagicProps.GetResist(ElementalType.Earth);
-            set => MagicProps.SetResist(ElementalType.Earth, value);
-        }
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalNecroResist
-        {
-            get => MagicProps.GetResist(ElementalType.Necro);
-            set => MagicProps.SetResist(ElementalType.Necro, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public ArmorBonus ArmorBonus
-        {
-            get => MagicProps.GetAttr(MagicProp.ArmorBonus, ArmorBonus.None);
-            set
-            {
-                if (value > ArmorBonus.Adamantium)
+                if (value > ArmorBonusType.Adamantium)
                     return;
                 
-                MagicProps.SetAttr(value);
+                Enchantments.Set((ArmorBonus e) => e.Value = value);
                 Invalidate();
             }
         }
@@ -133,8 +55,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int BaseArmorRating
         {
-            get => (int) ArmorBonus;
-            set => ArmorBonus = (ArmorBonus)value;
+            get => (int) ArmorBonusType;
+            set => ArmorBonusType = (ArmorBonusType)value;
         }
 
         public double BaseArmorRatingScaled => BaseArmorRating;
@@ -222,7 +144,6 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
             }
 
@@ -233,7 +154,6 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileRemoved();
                 m.CheckStatTimers();
             }
 
@@ -247,8 +167,6 @@ namespace Server.Items
             writer.Write((int) 5); // version
             
             ICraftable.Serialize(writer, this);
-
-            MagicProps.Serialize(writer);
 
             writer.WriteEncodedInt((int) MaxHitPoints);
             writer.WriteEncodedInt((int) m_HitPoints);
@@ -269,8 +187,6 @@ namespace Server.Items
                     ICraftable.Deserialize(reader, this);
                     goto case 4;
                 case 4:
-                    m_MagicProps = MagicalProperties.Deserialize(reader, this);
-                    goto case 3;
                 case 3:
                 {
                     MaxHitPoints = reader.ReadEncodedInt();

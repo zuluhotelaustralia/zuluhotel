@@ -1,0 +1,46 @@
+using System;
+using MessagePack;
+using Server.Items;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+
+namespace ZuluContent.Zulu.Engines.Magic.Enchantments
+{
+    [MessagePackObject]
+    public class MagicalWeapon : Enchantment<MagicalWeaponInfo>
+    {
+        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        [IgnoreMember] public override EnchantmentInfo Info => MagicalWeaponInfo.GetVariant(Value);
+        [Key(1)] public MagicalWeaponType Value { get; set; } = MagicalWeaponType.None;
+    }
+
+    public class MagicalWeaponInfo : EnchantmentInfo
+    {
+        private static MagicalWeaponInfo SwiftInfo = new MagicalWeaponInfo { Hue = 621 };
+        private static MagicalWeaponInfo StygianInfo = new MagicalWeaponInfo { Hue = 621 };
+        private static MagicalWeaponInfo MysticalInfo = new MagicalWeaponInfo { Hue = 621 };
+
+        public override string Description { get; protected set; } = "Magical Weapon Type";
+        public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;
+        public override int Hue { get; protected set; } = 0;
+        public override int CursedHue { get; protected set; } = 0;
+
+        public override string[,] Names { get; protected set; } =
+        {
+            {string.Empty, string.Empty}, // None
+            {"Swift", "Swift"},
+            {"Stygian", "Stygian"},
+            {"Mystical", "Mystical"},
+        };
+
+        public static MagicalWeaponInfo GetVariant(MagicalWeaponType value)
+        {
+            return value switch
+            {
+                MagicalWeaponType.Swift => SwiftInfo,
+                MagicalWeaponType.Stygian => StygianInfo,
+                MagicalWeaponType.Mystical => MysticalInfo,
+                _ => MysticalInfo
+            };
+        }
+    }
+}

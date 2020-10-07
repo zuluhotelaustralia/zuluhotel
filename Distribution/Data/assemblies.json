@@ -13,5 +13,8 @@
   "MimeKit.dll",
   "System.IO.Pipelines.dll",
   "Zlib.Bindings.dll",
+  "Microsoft.Bcl.AsyncInterfaces.dll",
+  "MessagePack.Annotations.dll",
+  "MessagePack.dll",
   "ZuluContent.dll"
 ]

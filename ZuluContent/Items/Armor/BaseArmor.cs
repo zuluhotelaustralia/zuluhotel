@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Engines.Magic;
 using Server.Network;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
 using ZuluContent.Zulu;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using AMA = Server.Items.ArmorMeditationAllowance;
 using AMT = Server.Items.ArmorMaterialType;
@@ -14,8 +14,7 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseArmor : Item, IScissorable, ICraftable, IWearableDurability, IArmorRating,
-        IMagicItem, IElementalResistible
+    public abstract class BaseArmor : BaseEquippableItem, IScissorable, ICraftable, IWearableDurability, IArmorRating
     {
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -33,7 +32,6 @@ namespace Server.Items
          */
 
         // Instance values. These values must are unique to each armor piece.
-        private int m_MaxHitPoints;
         private int m_HitPoints;
         private Mobile m_Crafter;
         private CraftResource m_Resource;
@@ -43,81 +41,6 @@ namespace Server.Items
         private int m_StrBonus = -1, m_DexBonus = -1, m_IntBonus = -1;
         private int m_StrReq = -1, m_DexReq = -1, m_IntReq = -1;
         private AMA m_Meditate = (AMA) (-1);
-
-        #region Magical Properties
-
-        private MagicalProperties m_MagicProps;
-
-        public MagicalProperties MagicProps
-        {
-            get => m_MagicProps ??= new MagicalProperties(this);
-        }
-
-        #endregion
-
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalWaterResist
-        {
-            get => MagicProps.GetResist(ElementalType.Water);
-            set => MagicProps.SetResist(ElementalType.Water, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalAirResist
-        {
-            get => MagicProps.GetResist(ElementalType.Air);
-            set => MagicProps.SetResist(ElementalType.Air, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPhysicalResist
-        {
-            get => MagicProps.GetResist(ElementalType.Physical);
-            set => MagicProps.SetResist(ElementalType.Physical, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalFireResist
-        {
-            get => MagicProps.GetResist(ElementalType.Fire);
-            set => MagicProps.SetResist(ElementalType.Fire, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalColdResist
-        {
-            get => MagicProps.GetResist(ElementalType.Cold);
-            set => MagicProps.SetResist(ElementalType.Cold, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPoisonResist
-        {
-            get => MagicProps.GetResist(ElementalType.Poison);
-            set => MagicProps.SetResist(ElementalType.Poison, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalEnergyResist
-        {
-            get => MagicProps.GetResist(ElementalType.Energy);
-            set => MagicProps.SetResist(ElementalType.Energy, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalEarthResist
-        {
-            get => MagicProps.GetResist(ElementalType.Earth);
-            set => MagicProps.SetResist(ElementalType.Earth, value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalNecroResist
-        {
-            get => MagicProps.GetResist(ElementalType.Necro);
-            set => MagicProps.SetResist(ElementalType.Necro, value);
-        }
 
         public virtual bool AllowMaleWearer
         {
@@ -190,8 +113,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public AMA MeditationAllowance
         {
-            get => MagicProps.GetAttr(DefaultMedAllowance);
-            set => MagicProps.SetAttr(value);
+            get => Enchantments.Get((MeditationAllowance e) => e.Value);
+            set => Enchantments.Set((MeditationAllowance e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -377,59 +300,7 @@ namespace Server.Items
         {
             get { return ArmorRating * ArmorScalar; }
         }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int StrBonus
-        {
-            get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
-            set
-            {
-                if (value == 0)
-                {
-                    if(MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> mod))
-                        MagicProps.RemoveMod(mod);
-                    else
-                        return;
-                }
-                
-                MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int DexBonus
-        {
-            get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
-            set
-            {
-                if (value == 0)
-                {
-                    if(MagicProps.TryGetMod(StatType.Dex, out IMagicMod<StatType> mod))
-                        MagicProps.RemoveMod(mod);
-                    else
-                        return;
-                }
-                
-                MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int IntBonus
-        {
-            get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
-            set
-            {
-                if (value == 0)
-                {
-                    if(MagicProps.TryGetMod(StatType.Int, out IMagicMod<StatType> mod))
-                        MagicProps.RemoveMod(mod);
-                    else
-                        return;
-                }
-                MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
-            }
-        }
+        
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrRequirement
@@ -451,19 +322,7 @@ namespace Server.Items
             get { return m_IntReq == -1 ? DefaultIntReq : m_IntReq; }
             set { m_IntReq = value; }
         }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool Identified
-        {
-            get => MagicProps.GetAttr(MagicProp.Identified, true);
-            set
-            {
-                MagicProps.SetAttr(MagicProp.Identified, value);
-                if(value)
-                    IMagicItem.OnIdentified(this);
-            }
-        }
-
+        
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed
         {
@@ -509,11 +368,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int MaxHitPoints
-        {
-            get { return m_MaxHitPoints; }
-            set { m_MaxHitPoints = value; }
-        }
+        public int MaxHitPoints { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int HitPoints
@@ -545,11 +400,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorQuality Quality
         {
-            get => MagicProps.GetAttr(defaultValue: ArmorQuality.Regular);
+            get => Enchantments.Get((ItemQuality e) => (ArmorQuality) e.Value);
             set
             {
                 UnscaleDurability();
-                MagicProps.SetAttr(MagicProp.Quality, value);
+                Enchantments.Set((ItemQuality e) => e.Value = (int)value);
                 Invalidate();
                 ScaleDurability();
             }
@@ -558,11 +413,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorDurabilityLevel Durability
         {
-            get => MagicProps.GetAttr(defaultValue: ArmorDurabilityLevel.Regular);
+            get => Enchantments.Get((DurabilityBonus e) => (ArmorDurabilityLevel) e.Value);
             set
             {
                 UnscaleDurability();
-                MagicProps.SetAttr(MagicProp.Durability, value);
+                Enchantments.Set((DurabilityBonus e) => e.Value = (int)value);
                 ScaleDurability();
             }
         }
@@ -570,10 +425,10 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorProtectionLevel ProtectionLevel
         {
-            get => MagicProps.GetAttr(defaultValue: ArmorProtectionLevel.Regular);
+            get => Enchantments.Get((ArmorProtection e) => e.Value);
             set
             {
-                MagicProps.SetAttr(MagicProp.ArmorProtection, value);
+                Enchantments.Set((ArmorProtection e) => e.Value = value);
                 Invalidate();
             }
         }
@@ -636,7 +491,7 @@ namespace Server.Items
             int scale = 100 + GetDurabilityBonus();
 
             m_HitPoints = (m_HitPoints * 100 + (scale - 1)) / scale;
-            m_MaxHitPoints = (m_MaxHitPoints * 100 + (scale - 1)) / scale;
+            MaxHitPoints = (MaxHitPoints * 100 + (scale - 1)) / scale;
         }
 
         public void ScaleDurability()
@@ -644,7 +499,7 @@ namespace Server.Items
             int scale = 100 + GetDurabilityBonus();
 
             m_HitPoints = (m_HitPoints * scale + 99) / 100;
-            m_MaxHitPoints = (m_MaxHitPoints * scale + 99) / 100;
+            MaxHitPoints = (MaxHitPoints * scale + 99) / 100;
         }
 
         public int GetDurabilityBonus()
@@ -745,8 +600,8 @@ namespace Server.Items
         {
             int scale = 100;
 
-            if (m_MaxHitPoints > 0 && m_HitPoints < m_MaxHitPoints)
-                scale = 50 + 50 * m_HitPoints / m_MaxHitPoints;
+            if (MaxHitPoints > 0 && m_HitPoints < MaxHitPoints)
+                scale = 50 + 50 * m_HitPoints / MaxHitPoints;
 
             return armor * scale / 100;
         }
@@ -835,7 +690,7 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.IntBonus, m_IntBonus != -1);
             }
 
-            SetSaveFlag(ref flags, SaveFlag.MaxHitPoints, m_MaxHitPoints != 0);
+            SetSaveFlag(ref flags, SaveFlag.MaxHitPoints, MaxHitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.HitPoints, m_HitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != DefaultResource);
             SetSaveFlag(ref flags, SaveFlag.BaseArmor, m_ArmorBase != -1);
@@ -848,11 +703,8 @@ namespace Server.Items
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
                ICraftable.Serialize(writer, this);
 
-            if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                MagicProps.Serialize(writer);
-
             if (GetSaveFlag(flags, SaveFlag.MaxHitPoints))
-                writer.WriteEncodedInt((int) m_MaxHitPoints);
+                writer.WriteEncodedInt((int) MaxHitPoints);
 
             if (GetSaveFlag(flags, SaveFlag.HitPoints))
                 writer.WriteEncodedInt((int) m_HitPoints);
@@ -911,9 +763,6 @@ namespace Server.Items
                         ICraftable.Deserialize(reader, this);
                     goto case 8;
                 case 8:
-                    if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                        m_MagicProps = MagicalProperties.Deserialize(reader, this);
-                    goto case 7;
                 case 7:
                 case 6:
                 case 5:
@@ -922,7 +771,7 @@ namespace Server.Items
                         Identified = version >= 7 || reader.ReadBool();
 
                     if (GetSaveFlag(flags, SaveFlag.MaxHitPoints))
-                        m_MaxHitPoints = reader.ReadEncodedInt();
+                        MaxHitPoints = reader.ReadEncodedInt();
 
                     if (GetSaveFlag(flags, SaveFlag.HitPoints))
                         m_HitPoints = reader.ReadEncodedInt();
@@ -1017,7 +866,7 @@ namespace Server.Items
                 case 0:
                 {
                     m_ArmorBase = reader.ReadInt();
-                    m_MaxHitPoints = reader.ReadInt();
+                    MaxHitPoints = reader.ReadInt();
                     m_HitPoints = reader.ReadInt();
                     m_Crafter = reader.ReadMobile();
                     Quality = (ArmorQuality) reader.ReadInt();
@@ -1110,8 +959,8 @@ namespace Server.Items
                             m_Resource = CraftResource.Iron;
                     }
 
-                    if (m_MaxHitPoints == 0 && m_HitPoints == 0)
-                        m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
+                    if (MaxHitPoints == 0 && m_HitPoints == 0)
+                        m_HitPoints = MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
 
                     break;
                 }
@@ -1142,7 +991,7 @@ namespace Server.Items
             m_Resource = DefaultResource;
             Hue = CraftResources.GetHue(m_Resource);
 
-            m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
+            m_HitPoints = MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
 
             Layer = (Layer) ItemData.Quality;
         }
@@ -1230,7 +1079,6 @@ namespace Server.Items
 
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
                 m.Delta(MobileDelta.WeaponDamage);
                 m.Delta(MobileDelta.Armor);
@@ -1241,7 +1089,6 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileRemoved();
                 m.Delta(MobileDelta.Armor); // Tell them armor rating has changed
                 m.CheckStatTimers();
             }
@@ -1270,7 +1117,7 @@ namespace Server.Items
                 else
                     wear = Utility.Random(2);
 
-                if (wear > 0 && m_MaxHitPoints > 0)
+                if (wear > 0 && MaxHitPoints > 0)
                 {
                     if (m_HitPoints >= wear)
                     {
@@ -1285,7 +1132,7 @@ namespace Server.Items
 
                     if (wear > 0)
                     {
-                        if (m_MaxHitPoints > wear)
+                        if (MaxHitPoints > wear)
                         {
                             MaxHitPoints -= wear;
 

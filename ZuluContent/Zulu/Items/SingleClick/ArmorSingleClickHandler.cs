@@ -1,8 +1,7 @@
 using System.Linq;
-using Scripts.Engines.Magic;
 using Server;
 using Server.Items;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Items.SingleClick
 {
@@ -10,7 +9,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
     {
         public static void HandleSingleClick(BaseArmor item, Mobile m)
         {
-            HandleSingleClick((IMagicItem)item, m);
+            DefaultHandleSingleClick(item, m);
         }
     }
 }

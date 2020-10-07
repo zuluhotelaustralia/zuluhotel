@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Engines.Magic;
 using Scripts.Zulu.Packets;
 using Server;
 using Server.Engines.Craft;
 using Server.Network;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Items.SingleClick
 {
@@ -18,30 +17,25 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
         {
-            var values = item.MagicProps.GetAllValues()
-                .Where(v => v.Info != null && !string.IsNullOrEmpty(v.EnchantName));
+            var values = item.Enchantments.Values.Values;
 
             var prefixes = values
                 .Where(v => v.Info.Place == EnchantNameType.Prefix)
-                .Select(v => v.EnchantName);
+                .Select(v => v.AffixName);
 
             var suffixes = values
                 .Where(v => v.Info.Place == EnchantNameType.Suffix)
-                .Select(v => v.EnchantName);
+                .Select(v => v.AffixName);
 
             return (prefixes, suffixes);
         }
 
-        private static void HandleSingleClick(IMagicItem magicItem, Mobile m)
+        private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
         {
-            if (!(magicItem is Item item))
-                return;
-
             if (!Validate(m, item))
                 return;
-
-
-            var (prefixes, suffixes) = GetAffixes(magicItem);
+            
+            var (prefixes, suffixes) = GetAffixes(item);
 
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(" ", suffixes)}" : string.Empty;

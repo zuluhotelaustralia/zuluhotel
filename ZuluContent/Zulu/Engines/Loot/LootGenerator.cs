@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Scripts.Engines.Magic;
 using Scripts.Zulu.Engines.Classes;
 using Server.Commands;
 using Server.Engines.Craft;
@@ -9,7 +8,8 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
 using Server.Utilities;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using static Server.Utility;
 using static Server.Engines.Magic.IElementalResistible;
@@ -29,7 +29,7 @@ namespace Server.Scripts.Engines.Loot
         public WeaponAccuracyLevel AccuracyLevel = 0;
         public WeaponDamageLevel DamageLevel = 0;
         public ArmorProtectionLevel ArmorProtectionLevel = 0;
-        public ArmorBonus ArmorMod = 0;
+        public ArmorBonusType ArmorMod = 0;
         public int Hue = 0;
 
         //TODO: Temp attributes
@@ -79,7 +79,13 @@ namespace Server.Scripts.Engines.Loot
                 magicItem.Identified = false;
 
                 if (SkillBonusValue > 0)
-                    magicItem.MagicProps.AddMod(new MagicSkillMod(SkillBonusName, SkillBonusValue));
+                {
+                    magicItem.Enchantments.Set((FirstSkillBonus e) =>
+                    {
+                        e.Skill = SkillBonusName;
+                        e.Value = SkillBonusValue;
+                    });
+                }
 
                 switch (magicItem)
                 {
@@ -100,11 +106,11 @@ namespace Server.Scripts.Engines.Loot
                         break;
                     case BaseClothing clothing:
                         item.Hue = Hue;
-                        clothing.ArmorBonus = ArmorMod;
+                        clothing.ArmorBonusType = ArmorMod;
                         break;
                     case BaseJewel jewelry:
-                        jewelry.ArmorBonus = ArmorMod;
-                        jewelry.MagicProps.SetResist(ProtectionType, GetResistForProtectionLevel(ProtectionLevel));
+                        jewelry.ArmorBonusType = ArmorMod;
+                        jewelry.Enchantments.SetResist(ProtectionType, GetResistForProtectionLevel(ProtectionLevel));
                         break;
                 }
             }
@@ -570,7 +576,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyMiscArmorMod(LootItem item)
         {
-            ArmorBonus value;
+            ArmorBonusType value;
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
@@ -592,17 +598,17 @@ namespace Server.Scripts.Engines.Loot
             }
 
             if (level < 200)
-                value = ArmorBonus.Iron;
+                value = ArmorBonusType.Iron;
             else if (level < 350)
-                value = ArmorBonus.Steel;
+                value = ArmorBonusType.Steel;
             else if (level < 450)
-                value = ArmorBonus.MeteoricSteel;
+                value = ArmorBonusType.MeteoricSteel;
             else if (level < 550)
-                value = ArmorBonus.Obsidian;
+                value = ArmorBonusType.Obsidian;
             else if (level < 600)
-                value = ArmorBonus.Onyx;
+                value = ArmorBonusType.Onyx;
             else
-                value = ArmorBonus.Adamantium;
+                value = ArmorBonusType.Adamantium;
 
             item.ArmorMod = value;
 

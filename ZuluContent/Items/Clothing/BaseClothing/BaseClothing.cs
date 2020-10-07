@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Engines.Magic;
 using Server.Engines.Craft;
 using Server.Network;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseClothing : Item, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating, IMagicItem
+    public abstract class BaseClothing : BaseEquippableItem, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating, IMagicItem
     {
         public virtual bool CanFortify
         {
@@ -20,27 +20,17 @@ namespace Server.Items
         private int m_HitPoints;
         protected CraftResource m_Resource;
         private int m_StrReq = -1;
-        
-        #region Magical Properties
-        private MagicalProperties m_MagicProps;
-
-        public MagicalProperties MagicProps
-        {
-            get => m_MagicProps ??= new MagicalProperties(this);
-        }
-
-        #endregion
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ArmorBonus ArmorBonus
+        public ArmorBonusType ArmorBonusType
         {
-            get => MagicProps.GetAttr<ArmorBonus>();
+            get => Enchantments.Get((ArmorBonus e) => e.Value);
             set
             {
-                if (value > ArmorBonus.Adamantium)
+                if (value > ArmorBonusType.Adamantium)
                     return;
                 
-                MagicProps.SetAttr(value);
+                Enchantments.Set((ArmorBonus e) => e.Value = value);
                 Invalidate();
             }
         }
@@ -48,8 +38,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int BaseArmorRating
         {
-            get => (int) ArmorBonus;
-            set => ArmorBonus = (ArmorBonus)value;
+            get => (int) ArmorBonusType;
+            set => ArmorBonusType = (ArmorBonusType)value;
         }
 
         public double BaseArmorRatingScaled => BaseArmorRating;
@@ -91,23 +81,12 @@ namespace Server.Items
             set { m_StrReq = value; }
         }
         
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool Identified
-        {
-            get => MagicProps.GetAttr<bool>(MagicProp.Identified, true);
-            set
-            {
-                MagicProps.SetAttr(MagicProp.Identified, value);
-                if(value)
-                    IMagicItem.OnIdentified(this);
-            }
-        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public ClothingQuality Quality
         {
-            get => MagicProps.GetAttr(defaultValue: ClothingQuality.Regular);
-            set => MagicProps.SetAttr(value);
+            get => Enchantments.Get((ItemQuality e) => (ClothingQuality)e.Value);
+            set => Enchantments.Set((ItemQuality e) => e.Value = (int)value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -146,59 +125,6 @@ namespace Server.Items
         public virtual int DefaultIntBonus
         {
             get => 0;
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int StrBonus
-        {
-            get => MagicProps.TryGetMod(StatType.Str, out MagicStatMod mod) ? mod.Offset : 0;
-            set
-            {
-                if (value == 0)
-                {
-                    if(MagicProps.TryGetMod(StatType.Str, out IMagicMod<StatType> mod))
-                        MagicProps.RemoveMod(mod);
-                    else
-                        return;
-                }
-                
-                MagicProps.AddMod(new MagicStatMod(StatType.Str, value, Parent));
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int DexBonus
-        {
-            get => MagicProps.TryGetMod(StatType.Dex, out MagicStatMod mod) ? mod.Offset : 0;
-            set
-            {
-                if (value == 0)
-                {
-                    if(MagicProps.TryGetMod(StatType.Dex, out IMagicMod<StatType> mod))
-                        MagicProps.RemoveMod(mod);
-                    else
-                        return;
-                }
-                
-                MagicProps.AddMod(new MagicStatMod(StatType.Dex, value, Parent));
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int IntBonus
-        {
-            get => MagicProps.TryGetMod(StatType.Int, out MagicStatMod mod) ? mod.Offset : 0;
-            set
-            {
-                if (value == 0)
-                {
-                    if(MagicProps.TryGetMod(StatType.Int, out IMagicMod<StatType> mod))
-                        MagicProps.RemoveMod(mod);
-                    else
-                        return;
-                }
-                MagicProps.AddMod(new MagicStatMod(StatType.Int, value, Parent));
-            }
         }
         
         public virtual Race RequiredRace
@@ -352,7 +278,6 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileEquip();
                 m.CheckStatTimers();
             }
 
@@ -363,7 +288,6 @@ namespace Server.Items
         {
             if (parent is Mobile m)
             {
-                MagicProps.OnMobileRemoved();
                 m.CheckStatTimers();
             }
 
@@ -462,7 +386,7 @@ namespace Server.Items
 
             return false;
         }
-
+        
         public override void OnSingleClick(Mobile from)
         {
             // List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
@@ -569,9 +493,6 @@ namespace Server.Items
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
                 ICraftable.Serialize(writer, this);
 
-            if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                m_MagicProps.Serialize(writer);
-
             if (GetSaveFlag(flags, SaveFlag.Resource))
                 writer.WriteEncodedInt((int) m_Resource);
 
@@ -605,9 +526,6 @@ namespace Server.Items
                         ICraftable.Deserialize(reader, this);
                     goto case 6;
                 case 6:
-                    if (GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                        m_MagicProps = MagicalProperties.Deserialize(reader, this);
-                    goto case 5;
                 case 5:
                 {
                     if (GetSaveFlag(flags, SaveFlag.Resource))

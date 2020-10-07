@@ -1,11 +1,11 @@
-namespace ZuluContent.Zulu.Engines.Magic
+namespace ZuluContent.Zulu.Engines.Magic.Enums
 {
     public enum MagicProp
     {
         Skill = 0,
         Stat,
         ElementalResist,
-        Damage,
+        WeaponDamage,
         ArmorProtection, // Fortified, Massive etc
         ArmorBonus, // Obsidian, Meteoric Steel
         MagicReflect,
@@ -25,6 +25,18 @@ namespace ZuluContent.Zulu.Engines.Magic
         PoisonCharges,
         MeditationAllowance,
         Identified,
-        ParalysisProtection
+        ParalysisProtection,
+        StrBonus,
+        DexBonus,
+        IntBonus,
+        AirProtection,
+        EarthProtection,
+        FireProtection,
+        WaterProtection,
+        NecroProtection,
+        PhysicalProtection,
+        PoisonProtection,
+        FirstSkill,
+        SecondSkill
     }
 }

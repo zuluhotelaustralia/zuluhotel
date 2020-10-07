@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Engines.Magic;
 using Server.Misc;
 using Server.Items;
 using Server.Gumps;
@@ -18,7 +17,7 @@ using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Magic;
 using ZuluContent.Zulu;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Mobiles
@@ -494,7 +493,6 @@ namespace Server.Mobiles
 
         private static void OnLogin(Mobile from)
         {
-
             if (AccountHandler.LockdownLevel <= AccessLevel.Player)
                 return;
 
@@ -503,9 +501,9 @@ namespace Server.Mobiles
 
             if (acct == null || !acct.HasAccess(from.NetState))
             {
-                notice = from.AccessLevel == AccessLevel.Player ?
-                    "The server is currently under lockdown. No players are allowed to log in at this time." :
-                    "The server is currently under lockdown. You do not have sufficient access level to connect.";
+                notice = from.AccessLevel == AccessLevel.Player
+                    ? "The server is currently under lockdown. No players are allowed to log in at this time."
+                    : "The server is currently under lockdown. You do not have sufficient access level to connect.";
 
                 Timer.DelayCall(TimeSpan.FromSeconds(1.0), Disconnect, from);
             }
@@ -727,7 +725,6 @@ namespace Server.Mobiles
 
         private static void EventSink_Disconnected(Mobile from)
         {
-
             if (from is PlayerMobile pm)
             {
                 pm.m_GameTime += DateTime.Now - pm.m_SessionStart;
@@ -825,11 +822,11 @@ namespace Server.Mobiles
 
         public int GetResistance(ElementalType type)
         {
-            return Items.OfType<IMagicItem>().Sum(i => i.MagicProps.GetResist(type));
+            return Items.OfType<BaseEquippableItem>().Sum(i => i.Enchantments.GetResist(type));
         }
 
         #endregion
-        
+
 
         #region [Stats]Max
 
@@ -882,7 +879,8 @@ namespace Server.Mobiles
                 {
                     if (Alive)
                     {
-                        CloseGump<ResurrectGump>();;
+                        CloseGump<ResurrectGump>();
+                        ;
                     }
                     else
                     {
@@ -1040,7 +1038,7 @@ namespace Server.Mobiles
 
             return true;
         }
-        
+
         public override bool CheckContextMenuDisplay(IEntity target) => false;
 
         private static int CheckContentForTrade(Item item)
@@ -1256,7 +1254,7 @@ namespace Server.Mobiles
             ApplyPoisonResult result = base.ApplyPoison(from, poison);
 
             if (from != null && result == ApplyPoisonResult.Poisoned && PoisonTimer is PoisonImpl.PoisonTimer timer)
-               timer.From = from;
+                timer.From = from;
 
             return result;
         }
@@ -1738,27 +1736,27 @@ namespace Server.Mobiles
 
         public static TimeSpan MovementThrottle_Callback(NetState ns)
         {
-          if (!(ns.Mobile is PlayerMobile pm) || !pm.UsesFastwalkPrevention)
-            return TimeSpan.Zero;
+            if (!(ns.Mobile is PlayerMobile pm) || !pm.UsesFastwalkPrevention)
+                return TimeSpan.Zero;
 
-          if (!pm.m_HasMoved)
-          {
-            // has not yet moved
-            pm.m_NextMovementTime = Core.TickCount;
-            pm.m_HasMoved = true;
-            return TimeSpan.Zero;
-          }
+            if (!pm.m_HasMoved)
+            {
+                // has not yet moved
+                pm.m_NextMovementTime = Core.TickCount;
+                pm.m_HasMoved = true;
+                return TimeSpan.Zero;
+            }
 
-          long ts = pm.m_NextMovementTime - Core.TickCount;
+            long ts = pm.m_NextMovementTime - Core.TickCount;
 
-          if (ts < 0)
-          {
-            // been a while since we've last moved
-            pm.m_NextMovementTime = Core.TickCount;
-            return TimeSpan.Zero;
-          }
+            if (ts < 0)
+            {
+                // been a while since we've last moved
+                pm.m_NextMovementTime = Core.TickCount;
+                return TimeSpan.Zero;
+            }
 
-          return ts < FastwalkThreshold ? TimeSpan.Zero : TimeSpan.FromTicks(ts);
+            return ts < FastwalkThreshold ? TimeSpan.Zero : TimeSpan.FromTicks(ts);
         }
 
         #endregion

@@ -1,7 +1,7 @@
 using System;
 using Server.Targeting;
 using Server.Mobiles;
-using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Items
 {
