@@ -1,4 +1,5 @@
 using MessagePack;
+using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -6,8 +7,16 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class HealingBonus : Enchantment<HealingBonusInfo>
     {
-        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value);
-        [Key(1)] public int Value { get; set; } = 0;
+        [IgnoreMember] 
+        public override string AffixName => EnchantmentInfo.GetName(Value);
+        [Key(1)] 
+        public int Value { get; set; } = 0;
+
+        [CallPriority(1)]
+        public override void OnIdentified(Item item)
+        {
+            base.OnIdentified(item);
+        }
     }
     public class HealingBonusInfo : EnchantmentInfo
     {

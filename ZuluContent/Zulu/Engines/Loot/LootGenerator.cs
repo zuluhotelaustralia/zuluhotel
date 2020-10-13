@@ -83,7 +83,7 @@ namespace Server.Scripts.Engines.Loot
                     magicItem.Enchantments.Set((FirstSkillBonus e) =>
                     {
                         e.Skill = SkillBonusName;
-                        e.Value = SkillBonusValue;
+                        return e.Value = SkillBonusValue;
                     });
                 }
 

@@ -17,15 +17,17 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
         {
-            var values = item.Enchantments.Values.Values;
+            var values = item.Enchantments.Values.Values.Where(v => !string.IsNullOrEmpty(v.AffixName));
 
             var prefixes = values
                 .Where(v => v.Info.Place == EnchantNameType.Prefix)
-                .Select(v => v.AffixName);
+                .Select(v => v.AffixName)
+                .ToList();
 
             var suffixes = values
                 .Where(v => v.Info.Place == EnchantNameType.Suffix)
-                .Select(v => v.AffixName);
+                .Select(v => v.AffixName)
+                .ToList();
 
             return (prefixes, suffixes);
         }
@@ -38,13 +40,9 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var (prefixes, suffixes) = GetAffixes(item);
 
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
-            var suffix = suffixes.Any() ? $" of {string.Join(" ", suffixes)}" : string.Empty;
-
-            var desc = string.IsNullOrEmpty(prefix) && string.IsNullOrEmpty(suffix)
-                ? $"a {GetItemDesc(item)}"
-                : GetItemDesc(item);
-
-            var text = $"{prefix}{desc}{suffix}{GetCraftedBy(item)}";
+            var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
+            
+            var text = $"{prefix}{GetItemDesc(item)}{suffix}{GetCraftedBy(item)}";
 
             SendResponse(m, item, text);
         }
@@ -72,7 +70,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static void SendResponse(Mobile m, Item item, string text)
         {
-            m.Send(new AsciiMessage(item.Serial, item.ItemID, MessageType.Label, 0x3B2, 3, string.Empty, text));
+            m.Send(new AsciiMessage(item.Serial, item.ItemID, MessageType.Label, 0x3B2, 3, string.Empty, text.Trim()));
         }
     }
 }

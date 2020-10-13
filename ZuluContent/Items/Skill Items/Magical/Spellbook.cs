@@ -94,7 +94,7 @@ namespace Server.Items
 
             if (book != null && book.HasSpell(spellID))
             {
-                Spell spell = SpellRegistry.NewSpell(spellID, from, null);
+                Spell spell = SpellRegistry.Create(spellID, from, null);
 
                 if (spell != null)
                     spell.Cast();
@@ -256,20 +256,20 @@ namespace Server.Items
             {
                 SpellScroll scroll = (SpellScroll) dropped;
 
-                SpellbookType type = GetTypeForSpell(scroll.SpellID);
+                SpellbookType type = GetTypeForSpell(scroll.SpellId);
 
                 if (type != SpellbookType)
                 {
                     return false;
                 }
-                else if (HasSpell(scroll.SpellID))
+                else if (HasSpell(scroll.SpellId))
                 {
                     from.SendLocalizedMessage(500179); // That spell is already present in that spellbook.
                     return false;
                 }
                 else
                 {
-                    int val = scroll.SpellID - BookOffset;
+                    int val = scroll.SpellId - BookOffset;
 
                     if (val >= 0 && val < BookCount)
                     {

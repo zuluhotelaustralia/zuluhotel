@@ -7,10 +7,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class PoisonProtection : Enchantment<PoisonProtectionInfo>
     {
-        [IgnoreMember]public override string AffixName =>
+        [IgnoreMember]
+        public override string AffixName =>
             EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
 
-        [Key(1)] public int Value { get; set; } = 0;
+        [Key(1)]
+        public int Value { get; set; } = 0;
     }
     
     public class PoisonProtectionInfo : EnchantmentInfo
@@ -28,7 +30,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             {"Poison Absorbsion", "Dread Spider's Venom"},
         };
 
-        public override int Hue { get; protected set; } = 1160;
-        public override int CursedHue { get; protected set; } = 1160;
+        public override int Hue { get; protected set; } = 783;
+        public override int CursedHue { get; protected set; } = 783;
     }
 }

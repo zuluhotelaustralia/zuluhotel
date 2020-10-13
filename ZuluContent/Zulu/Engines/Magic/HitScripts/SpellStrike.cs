@@ -1,6 +1,4 @@
 using System;
-using Server;
-using Server.Mobiles;
 using Server.Spells;
 
 
@@ -22,7 +20,7 @@ namespace Server.Engines.Magic.HitScripts
       catch (Exception e)
       {
         Console.WriteLine(
-          $"Failed to invoke {GetType().Name}<{typeof(T).Name}> for Creature: {attacker.GetType().Name}, Serial: {attacker.Serial}");
+          $"Failed to invoke {GetType().Name}<{typeof(T).Name}> for Mobile: {attacker.GetType().Name}, Serial: {attacker.Serial}");
       }
     }
 

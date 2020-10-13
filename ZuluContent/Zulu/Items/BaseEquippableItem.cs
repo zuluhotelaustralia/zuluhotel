@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Server;
 using Server.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -19,7 +20,13 @@ namespace ZuluContent.Zulu.Items
         public bool Identified
         {
             get => Enchantments.Identified;
-            set => Enchantments.Identified = value;
+            set
+            {
+                if (!Enchantments.Identified && value) 
+                    Enchantments.OnIdentified(this);
+                
+                Enchantments.Identified = value;
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -92,6 +99,34 @@ namespace ZuluContent.Zulu.Items
             set => Enchantments.Set((IntBonus e) => e.Value = value);
         }
         
+        [CommandProperty(AccessLevel.GameMaster)]
+        public SkillName FirstSkillBonusName
+        {
+            get => Enchantments.Get((FirstSkillBonus e) => e.Skill);
+            set => Enchantments.Set((FirstSkillBonus e) => e.Skill = value);
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double FirstSkillBonusValue
+        {
+            get => Enchantments.Get((FirstSkillBonus e) => e.Value);
+            set => Enchantments.Set((FirstSkillBonus e) => e.Value = value);
+        }
+
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public SkillName SecondSkillBonusName
+        {
+            get => Enchantments.Get((SecondSkillBonus e) => e.Skill);
+            set => Enchantments.Set((SecondSkillBonus e) => e.Skill = value);
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double SecondSkillBonusValue
+        {
+            get => Enchantments.Get((SecondSkillBonus e) => e.Value);
+            set => Enchantments.Set((SecondSkillBonus e) => e.Value = value);
+        }
 
         public BaseEquippableItem(Serial serial): base(serial)
         {
@@ -105,13 +140,13 @@ namespace ZuluContent.Zulu.Items
         {
             base.OnAdded(parent);
             if (parent is Mobile m) 
-                Enchantments.OnEquip(this, m);
+                Enchantments.FireHook(e => e.OnAdded(this, m));
         }
 
         public override void OnRemoved(IEntity parent)
         {
             if (parent is Mobile m) 
-                Enchantments.OnRemoved(this, m);
+                Enchantments.FireHook(e => e.OnRemoved(this, m));
             
             base.OnRemoved(parent);
         }
@@ -127,7 +162,7 @@ namespace ZuluContent.Zulu.Items
             base.Deserialize(reader);
             m_Enchantments = EnchantmentDictionary.Deserialize(reader);
             if(Parent is Mobile m)
-                m_Enchantments.OnEquip(this, m);
+                m_Enchantments.FireHook(e => e.OnAdded(this, m));
         }
     }
 }

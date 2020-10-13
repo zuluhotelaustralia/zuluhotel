@@ -6,9 +6,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class PermMagicImmunity : Enchantment<PermMagicImmunityInfo>
     {
-        [IgnoreMember]public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
-        [Key(1)] public int Value { get; set; } = 0;
+        [Key(1)] 
+        public int Value { get; set; } = 0;
     }
     
     public class PermMagicImmunityInfo : EnchantmentInfo

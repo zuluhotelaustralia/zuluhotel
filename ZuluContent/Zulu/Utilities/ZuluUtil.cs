@@ -12,10 +12,33 @@ namespace Scripts.Zulu.Utilities
     public static class ZuluUtil
     {
         private static Gaussian m_Gaussian = new Gaussian();
-        
+
+        public static IEnumerable<InterfaceMapping> GetAllInterfaceMaps(this Type t) =>
+            t.GetTypeInfo()
+                .ImplementedInterfaces
+                .Select(t.GetInterfaceMap);
+
+        public static ILookup<MethodInfo, Type> GetMethodsForInterfaces(this Type aType) =>
+            aType.GetAllInterfaceMaps()
+                .SelectMany(im => im.TargetMethods.Select(tm => new {im.TargetType, im.InterfaceType, tm}))
+                .ToLookup(imtm => imtm.tm, imtm => imtm.InterfaceType);
+
+
+        public static Type[] GetInterfacesForMethod(this MethodInfo mi) =>
+            mi.ReflectedType
+                .GetAllInterfaceMaps()
+                .Where(im => im.TargetMethods.Any(tm => tm == mi))
+                .Select(im => im.InterfaceType)
+                .ToArray();
+
+        public static bool IsOverride(this MethodInfo m)
+        {
+            return m.GetBaseDefinition().DeclaringType != m.DeclaringType;
+        }
+
         private static readonly Func<BinaryFileReader, BinaryReader> GetBinaryReader =
             GetFieldAccessor<BinaryFileReader, BinaryReader>("m_File");
-        
+
         public static Stream GetBinaryFileReaderBaseStream(IGenericReader reader)
         {
             if (reader is BinaryFileReader binaryFileReader)
@@ -25,7 +48,7 @@ namespace Scripts.Zulu.Utilities
 
             return null;
         }
-        
+
         public static void Write<T>(this IGenericWriter stream, T value) where T : struct
         {
             var tSpan = MemoryMarshal.CreateSpan(ref value, 1);

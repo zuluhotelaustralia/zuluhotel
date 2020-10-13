@@ -3,6 +3,7 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Engines.Craft;
 using System.Collections.Generic;
+using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -282,7 +283,7 @@ namespace Server.Items
                         Enchantments.Set((SecondSkillBonus e) =>
                         {
                             e.Skill = Skill;
-                            e.Value = (int) value * 5;
+                            return e.Value = (int) value * 5;
                         });
                     }
                 }
@@ -486,21 +487,17 @@ namespace Server.Items
             if (speed <= 0)
                 return TimeSpan.FromSeconds(10);
 
-            var minDelay = MagicalWeaponType switch
-            {
-                MagicalWeaponType.Swift => 1.00,
-                MagicalWeaponType.Stygian => 1.1,
-                _ => 1.25
-            };
-
+            const double minDelay = 1.25;
+            
             var stamina = Math.Clamp(m.Stam, 0, m.Dex);
             var delayInSeconds = 15000.0 / ((stamina + 100) * speed);
             delayInSeconds = Math.Clamp(delayInSeconds, minDelay, 7.0);
             
-            if(m is PlayerMobile mp)
-                mp.SendMessage($"Speed {speed}, delay is {delayInSeconds}");
+            var result = TimeSpan.FromSeconds(delayInSeconds);
+            
+            m.FireHook(h => h.OnGetDelay(ref result, m));
 
-            return TimeSpan.FromSeconds(delayInSeconds);
+            return result;
         }
 
         public virtual void OnBeforeSwing(Mobile attacker, Mobile defender)

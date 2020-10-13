@@ -4,71 +4,56 @@ using Server.Items;
 namespace Server.Spells
 {
     public abstract class MagerySpell : Spell
-	{
-		public MagerySpell( Mobile caster, Item scroll, SpellInfo info )
-			: base( caster, scroll, info )
-		{
-		}
+    {
+        private const double ChanceOffset = 20.0, ChanceLength = 100.0 / 7.0;
 
+        public MagerySpell(Mobile caster, Item scroll, SpellInfo info) : base(caster, scroll, info)
+        {
+        }
+        
 
-		public override bool ConsumeReagents()
-		{
-			if( base.ConsumeReagents() )
-				return true;
+        public override void GetCastSkills(out double min, out double max)
+        {
+            int circle = (int) Circle;
 
-			return false;
-		}
+            if (Scroll != null)
+                circle -= 2;
 
-		private const double ChanceOffset = 20.0, ChanceLength = 100.0 / 7.0;
+            double avg = ChanceLength * circle;
 
-		public override void GetCastSkills( out double min, out double max )
-		{
-			int circle = (int)Circle;
+            min = avg - ChanceOffset;
+            max = avg + ChanceOffset;
+        }
 
-			if( Scroll != null )
-				circle -= 2;
+        private static readonly int[] ManaTable = {4, 6, 9, 11, 14, 20, 40, 50};
 
-			double avg = ChanceLength * circle;
+        public override int GetMana()
+        {
+            return Scroll is BaseWand ? 0 : ManaTable[(int) Circle];
+        }
 
-			min = avg - ChanceOffset;
-			max = avg + ChanceOffset;
-		}
+        public override double GetResistSkill(Mobile m)
+        {
+            int maxSkill = (1 + (int) Circle) * 10;
+            maxSkill += (1 + (int) Circle / 6) * 25;
 
-		private static int[] m_ManaTable = new[] { 4, 6, 9, 11, 14, 20, 40, 50 };
+            if (m.Skills[SkillName.MagicResist].Value < maxSkill)
+                m.CheckSkill(SkillName.MagicResist, 0.0, m.Skills[SkillName.MagicResist].Cap);
 
-		public override int GetMana()
-		{
-			if( Scroll is BaseWand )
-				return 0;
+            return m.Skills[SkillName.MagicResist].Value;
+        }
 
-			return m_ManaTable[(int)Circle];
-		}
+        public override TimeSpan GetCastDelay()
+        {
+            if (Scroll is BaseWand)
+                return TimeSpan.Zero;
 
-		public override double GetResistSkill( Mobile m )
-		{
-			int maxSkill = (1 + (int)Circle) * 10;
-			maxSkill += (1 + (int)Circle / 6) * 25;
+            return TimeSpan.FromSeconds(0.5 + 0.25 * (int) Circle);
+        }
 
-			if( m.Skills[SkillName.MagicResist].Value < maxSkill )
-				m.CheckSkill( SkillName.MagicResist, 0.0, m.Skills[SkillName.MagicResist].Cap );
-
-			return m.Skills[SkillName.MagicResist].Value;
-		}
-
-		public override TimeSpan GetCastDelay()
-		{
-			if( Scroll is BaseWand )
-				return TimeSpan.Zero;
-
-			return TimeSpan.FromSeconds( 0.5 + 0.25 * (int)Circle );
-		}
-
-		public override TimeSpan CastDelayBase
-		{
-			get
-			{
-				return TimeSpan.FromSeconds( (3 + (int)Circle) * CastDelaySecondsPerTick );
-			}
-		}
-	}
+        public override TimeSpan CastDelayBase
+        {
+            get { return TimeSpan.FromSeconds((3 + (int) Circle) * CastDelaySecondsPerTick); }
+        }
+    }
 }

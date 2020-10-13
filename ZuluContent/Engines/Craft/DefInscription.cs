@@ -52,9 +52,9 @@ namespace Server.Engines.Craft
 				if (o is SpellScroll)
 				{
 					SpellScroll scroll = (SpellScroll)o;
-					Spellbook book = Spellbook.Find(from, scroll.SpellID);
+					Spellbook book = Spellbook.Find(from, scroll.SpellId);
 
-					bool hasSpell = book != null && book.HasSpell(scroll.SpellID);
+					bool hasSpell = book != null && book.HasSpell(scroll.SpellId);
 
 					scroll.Delete();
 

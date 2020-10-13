@@ -710,7 +710,7 @@ namespace Server.Commands
       if (e.Length == 1)
       {
 
-        Spell spell = SpellRegistry.NewSpell(e.GetString(0), e.Mobile, null);
+        Spell spell = SpellRegistry.Create(e.GetString(0), e.Mobile, null);
 
         if (spell != null)
           spell.Cast();

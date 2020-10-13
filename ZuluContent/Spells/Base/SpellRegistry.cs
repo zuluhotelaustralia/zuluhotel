@@ -4,72 +4,38 @@ using System.Linq;
 
 namespace Server.Spells
 {
-    public class SpellRegistry
+    public static class SpellRegistry
     {
-        private static int m_Count;
+        private static readonly Dictionary<Type, Func<Mobile, Item, Spell>> SpellCreators = 
+            new Dictionary<Type, Func<Mobile, Item, Spell>>();
 
-        private static Dictionary<Type, Int32> m_IDsFromTypes = new Dictionary<Type, Int32>(700);
+        public static readonly Dictionary<SpellType, Type> SpellTypes = 
+            new Dictionary<SpellType, Type>();
         
-        public static Type[] Types { get; } = new Type[700];
-
-        public static int Count
+        public static void Register<TSpell>(SpellType spellType, Func<Mobile, Item, TSpell> creator)
+            where TSpell : Spell
         {
-            get
-            {
-                if (m_Count == -1)
-                {
-                    m_Count = 0;
-
-                    foreach (var t in Types)
-                        if (t != null)
-                            ++m_Count;
-                }
-
-                return m_Count;
-            }
+            SpellCreators.TryAdd(typeof(TSpell), creator);
+            SpellTypes.TryAdd(spellType, typeof(TSpell));
         }
 
-        public static void Register(int spellId, Type type)
+        public static Spell Create(int spellId, Mobile caster, Item scroll)
         {
-            if (spellId < 0 || spellId >= Types.Length)
-                return;
 
-            if (Types[spellId] == null)
-                ++m_Count;
-
-            Types[spellId] = type;
-
-            if (!m_IDsFromTypes.ContainsKey(type))
-                m_IDsFromTypes.Add(type, spellId);
-        }
-
-        private static object[] m_Params = new object[2];
-
-        public static Spell NewSpell(int spellID, Mobile caster, Item scroll)
-        {
-            if (spellID < 0 || spellID >= Types.Length)
+            if (!SpellTypes.TryGetValue((SpellType)spellId, out var t))
                 return null;
 
-            Type t = Types[spellID];
-
-            if (t != null)
+            try
             {
-                m_Params[0] = caster;
-                m_Params[1] = scroll;
-
-                try
-                {
-                    return (Spell) Activator.CreateInstance(t, m_Params);
-                }
-                catch
-                {
-                }
+                return (Spell) Activator.CreateInstance(t, caster, scroll);
             }
-
-            return null;
+            catch
+            {
+                return null;
+            }
         }
 
-        private static string[] m_CircleNames = new[]
+        private static readonly string[] CircleNames =
         {
             "First",
             "Second",
@@ -81,55 +47,27 @@ namespace Server.Spells
             "Eighth"
         };
 
-        public static Spell NewSpell(string name, Mobile caster, Item scroll)
+        public static Spell Create(string name, Mobile caster, Item scroll)
         {
-            for (int i = 0; i < m_CircleNames.Length; ++i)
+            if (Enum.TryParse(typeof(SpellType), name, true, out var result)
+                && result is SpellType spellType
+                && SpellTypes.TryGetValue(spellType, out var type)
+                && SpellCreators.TryGetValue(type, out var creator))
             {
-                Type t = AssemblyHandler.FindFirstTypeForName($"Server.Spells.{m_CircleNames[i]}.{name}");
-
-                if (t != null)
-                {
-                    m_Params[0] = caster;
-                    m_Params[1] = scroll;
-
-                    try
-                    {
-                        return (Spell) Activator.CreateInstance(t, m_Params);
-                    }
-                    catch
-                    {
-                    }
-                }
+                return creator(caster, scroll);
             }
 
             return null;
         }
 
-        public static Spell NewSpell(Type t, Mobile caster, Item scroll)
+        public static Spell Create(Type t, Mobile caster, Item scroll)
         {
-            if (!Types.Contains(t))
-                return null;
-
-            if (t != null)
-            {
-                m_Params[0] = caster;
-                m_Params[1] = scroll;
-
-                try
-                {
-                    return (Spell) Activator.CreateInstance(t, m_Params);
-                }
-                catch
-                {
-                }
-            }
-
-            return null;
+            return SpellCreators.TryGetValue(t, out var creator) ? creator(caster, scroll) : null;
         }
 
-        public static T NewSpell<T>(Mobile caster, Item scroll) where T : Spell
+        public static T Create<T>(Mobile caster, Item scroll) where T : Spell
         {
-            return (T) NewSpell(typeof(T), caster, scroll);
+            return (T) Create(typeof(T), caster, scroll);
         }
     }
 }

@@ -4,79 +4,83 @@ using Server.Targeting;
 namespace Server.Spells.First
 {
     public class ClumsySpell : MagerySpell
-	{
-		public override SpellInfo GetSpellInfo() => m_Info;
-		private static SpellInfo m_Info = new SpellInfo(
-				"Clumsy", "Uus Jux",
-				212,
-				9031,
-				Reagent.Bloodmoss,
-				Reagent.Nightshade
-			);
+    {
+        public override SpellInfo GetSpellInfo() => m_Info;
 
-		public override SpellCircle Circle { get { return SpellCircle.First; } }
+        private static readonly SpellInfo m_Info = new SpellInfo(
+            "Clumsy", "Uus Jux",
+            212,
+            9031,
+            Reagent.Bloodmoss,
+            Reagent.Nightshade
+        );
 
-		public ClumsySpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
-		{
-		}
+        public override SpellCircle Circle
+        {
+            get { return SpellCircle.First; }
+        }
 
-		public override void OnCast()
-		{
-			Caster.Target = new InternalTarget( this );
-		}
+        public ClumsySpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
+        {
+        }
 
-		public void Target( Mobile m )
-		{
-			if ( !Caster.CanSee( m ) )
-			{
-				Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-			}
-			else if ( CheckHSequence( m ) )
-			{
-				SpellHelper.Turn( Caster, m );
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
+        }
 
-				SpellHelper.CheckReflect( (int)Circle, Caster, ref m );
+        public void Target(Mobile m)
+        {
+            if (!Caster.CanSee(m))
+            {
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+            }
+            else if (CheckHSequence(m))
+            {
+                SpellHelper.Turn(Caster, m);
 
-				SpellHelper.AddStatCurse( Caster, m, StatType.Dex );
+                SpellHelper.CheckReflect((int) Circle, Caster, ref m);
 
-				if ( m.Spell != null )
-					m.Spell.OnCasterHurt();
+                SpellHelper.AddStatCurse(Caster, m, StatType.Dex);
 
-				m.Paralyzed = false;
+                if (m.Spell != null)
+                    m.Spell.OnCasterHurt();
 
-				m.FixedParticles( 0x3779, 10, 15, 5002, EffectLayer.Head );
-				m.PlaySound( 0x1DF );
+                m.Paralyzed = false;
 
-				int percentage = (int)(SpellHelper.GetOffsetScalar( Caster, m, true )*100);
-				TimeSpan length = SpellHelper.GetDuration( Caster, m );
+                m.FixedParticles(0x3779, 10, 15, 5002, EffectLayer.Head);
+                m.PlaySound(0x1DF);
 
-				HarmfulSpell( m );
-			}
+                int percentage = (int) (SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
+                TimeSpan length = SpellHelper.GetDuration(Caster, m);
 
-			FinishSequence();
-		}
+                HarmfulSpell(m);
+            }
 
-		private class InternalTarget : Target
-		{
-			private ClumsySpell m_Owner;
+            FinishSequence();
+        }
 
-			public InternalTarget( ClumsySpell owner ) : base( 12, false, TargetFlags.Harmful )
-			{
-				m_Owner = owner;
-			}
+        private class InternalTarget : Target
+        {
+            private ClumsySpell m_Owner;
 
-			protected override void OnTarget( Mobile from, object o )
-			{
-				if ( o is Mobile )
-				{
-					m_Owner.Target( (Mobile)o );
-				}
-			}
+            public InternalTarget(ClumsySpell owner) : base(12, false, TargetFlags.Harmful)
+            {
+                m_Owner = owner;
+            }
 
-			protected override void OnTargetFinish( Mobile from )
-			{
-				m_Owner.FinishSequence();
-			}
-		}
-	}
+            protected override void OnTarget(Mobile from, object o)
+            {
+                if (o is Mobile)
+                {
+                    m_Owner.Target((Mobile) o);
+                }
+            }
+
+            protected override void OnTargetFinish(Mobile from)
+            {
+                m_Owner.FinishSequence();
+            }
+        }
+    }
 }

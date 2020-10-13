@@ -7,9 +7,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class ArmorProtection : Enchantment<ArmorProtectionInfo>
     {
-        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value);
+        [IgnoreMember] 
+        public override string AffixName => EnchantmentInfo.GetName(Value);
 
-        [Key(1)] public ArmorProtectionLevel Value { get; set; } = ArmorProtectionLevel.Regular;
+        [Key(1)] 
+        public ArmorProtectionLevel Value { get; set; } = ArmorProtectionLevel.Regular;
     }
     
     public class ArmorProtectionInfo : EnchantmentInfo

@@ -1,5 +1,6 @@
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Hooks;
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
@@ -25,10 +26,14 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(19, typeof(WaterProtection))]
     [Union(20, typeof(WeaponAccuracyBonus))]
     [Union(21, typeof(WeaponDamageBonus))]
-    public interface IEnchantmentValue
+    [Union(22, typeof(FirstSkillBonus))]
+    [Union(23, typeof(SecondSkillBonus))]
+
+    public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }
         public string AffixName { get; }
         public bool Cursed { get; set; }
+        bool GetShouldDye();
     }
 }

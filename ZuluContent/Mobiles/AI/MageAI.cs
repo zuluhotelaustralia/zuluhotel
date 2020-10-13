@@ -220,7 +220,7 @@ namespace Server.Mobiles
             if (m_Mobile.PreferredSpells != null && m_Mobile.PreferredSpells.Count > 0 && Utility.RandomDouble() < 0.75)
             {
                 var spellType = m_Mobile.PreferredSpells[Utility.Random(m_Mobile.PreferredSpells.Count)];
-                var spell = SpellRegistry.NewSpell(spellType, m_Mobile, null);
+                var spell = SpellRegistry.Create(spellType, m_Mobile, null);
                 return spell;
             }
 

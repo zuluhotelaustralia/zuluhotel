@@ -11,7 +11,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName =>
             EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value));
 
-        [Key(1)] public int Value { get; set; } = 0;
+        [Key(1)] 
+        public int Value { get; set; } = 0;
     }
 
     public class FireProtectionInfo : EnchantmentInfo

@@ -7,10 +7,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class WaterProtection : Enchantment<WaterProtectionInfo>
     {
-        [IgnoreMember]public override string AffixName =>
+        [IgnoreMember]
+        public override string AffixName =>
             EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
 
-        [Key(1)] public int Value { get; set; } = 0;
+        [Key(1)]
+        public int Value { get; set; } = 0;
     }
     
     public class WaterProtectionInfo : EnchantmentInfo

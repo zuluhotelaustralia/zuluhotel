@@ -7,9 +7,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class EarthProtection : Enchantment<EarthProtectionInfo>
     {
-        [IgnoreMember]public override string AffixName => EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value));
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value));
 
-        [Key(1)] public int Value { get; set; } = 0;
+        [Key(1)] 
+        public int Value { get; set; } = 0;
     }
     
     public class EarthProtectionInfo : EnchantmentInfo

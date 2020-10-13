@@ -59,7 +59,7 @@ namespace Server.Spells
 
         public static T Create<T>(Mobile caster, Item scroll = null, bool spellStrike = false) where T : Spell
         {
-            var spell = SpellRegistry.NewSpell<T>(caster, scroll);
+            var spell = SpellRegistry.Create<T>(caster, scroll);
 
             spell.m_Caster = caster;
             spell.Scroll = scroll;

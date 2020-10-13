@@ -37,7 +37,10 @@ namespace Server.Engines.Magic
             ProtectionToResist[level];
 
         public static ElementalProtectionLevel GetProtectionLevelForResist(int resist) =>
-            ProtectionToResist.FirstOrDefault(kv => kv.Value <= resist).Key;
+            ProtectionToResist.
+                Where(kv => kv.Value <= resist).
+                OrderByDescending(kv => kv.Value).
+                FirstOrDefault().Key;
     }
 
     public enum ElementalProtectionLevel

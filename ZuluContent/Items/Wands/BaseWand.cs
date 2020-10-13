@@ -7,215 +7,209 @@ using Server.Spells;
 namespace Server.Items
 {
     public enum WandEffect
-	{
-		Clumsiness,
-		Identification,
-		Healing,
-		Feeblemindedness,
-		Weakness,
-		MagicArrow,
-		Harming,
-		Fireball,
-		GreaterHealing,
-		Lightning,
-		ManaDraining
-	}
+    {
+        Clumsiness,
+        Identification,
+        Healing,
+        Feeblemindedness,
+        Weakness,
+        MagicArrow,
+        Harming,
+        Fireball,
+        GreaterHealing,
+        Lightning,
+        ManaDraining
+    }
 
-	public abstract class BaseWand : BaseBashing
-	{
-		public override int DefaultStrengthReq { get { return 0; } }
-		public override int DefaultMinDamage { get { return 2; } }
-		public override int DefaultMaxDamage { get { return 6; } }
-		public override int DefaultSpeed { get { return 35; } }
+    public abstract class BaseWand : BaseBashing
+    {
+        public override int DefaultStrengthReq => 0;
 
-		public override int InitMinHits { get { return 31; } }
-		public override int InitMaxHits { get { return 110; } }
+        public override int DefaultMinDamage => 2;
 
-		private WandEffect m_WandEffect;
-		private int m_Charges;
+        public override int DefaultMaxDamage => 6;
 
-		public virtual TimeSpan GetUseDelay{ get{ return TimeSpan.FromSeconds( 4.0 ); } }
+        public override int DefaultSpeed => 35;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public WandEffect Effect
-		{
-			get{ return m_WandEffect; }
-			set{ m_WandEffect = value; }
-		}
+        public override int InitMinHits => 31;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int Charges
-		{
-			get{ return m_Charges; }
-			set{ m_Charges = value; }
-		}
+        public override int InitMaxHits => 110;
 
-		public BaseWand( WandEffect effect, int minCharges, int maxCharges ) : base( Utility.RandomList( 0xDF2, 0xDF3, 0xDF4, 0xDF5 ) )
-		{
-			Weight = 1.0;
-			Effect = effect;
-			Charges = Utility.RandomMinMax( minCharges, maxCharges );
-		}
+        public virtual TimeSpan GetUseDelay => TimeSpan.FromSeconds(4.0);
 
-		public void ConsumeCharge( Mobile from )
-		{
-			--Charges;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public WandEffect Effect { get; set; }
 
-			if ( Charges == 0 )
-				from.SendLocalizedMessage( 1019073 ); // This item is out of charges.
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int Charges { get; set; }
 
-			ApplyDelayTo( from );
-		}
+        public BaseWand(WandEffect effect, int minCharges, int maxCharges) : base(
+            Utility.RandomList(0xDF2, 0xDF3, 0xDF4, 0xDF5))
+        {
+            Weight = 1.0;
+            Effect = effect;
+            Charges = Utility.RandomMinMax(minCharges, maxCharges);
+        }
 
-		public BaseWand( Serial serial ) : base( serial )
-		{
-		}
+        public void ConsumeCharge(Mobile from)
+        {
+            --Charges;
 
-		public virtual void ApplyDelayTo( Mobile from )
-		{
-			from.BeginAction( typeof( BaseWand ) );
-			Timer.DelayCall( GetUseDelay, ReleaseWandLock_Callback, from );
-		}
+            if (Charges == 0)
+                from.SendLocalizedMessage(1019073); // This item is out of charges.
 
-		public virtual void ReleaseWandLock_Callback( object state )
-		{
-			((Mobile)state).EndAction( typeof( BaseWand ) );
-		}
+            ApplyDelayTo(from);
+        }
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !from.CanBeginAction( typeof( BaseWand ) ) )
-			{
-				from.SendLocalizedMessage( 1070860 ); // You must wait a moment for the wand to recharge.
-				return;
-			}
+        public BaseWand(Serial serial) : base(serial)
+        {
+        }
 
-			if ( Parent == from )
-			{
-				if ( Charges > 0 )
-					OnWandUse( from );
-				else
-					from.SendLocalizedMessage( 1019073 ); // This item is out of charges.
-			}
-			else
-			{
-				from.SendLocalizedMessage( 502641 ); // You must equip this item to use it.
-			}
-		}
+        public virtual void ApplyDelayTo(Mobile from)
+        {
+            from.BeginAction(typeof(BaseWand));
+            Timer.DelayCall(GetUseDelay, ReleaseWandLock_Callback, from);
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public virtual void ReleaseWandLock_Callback(object state)
+        {
+            ((Mobile) state).EndAction(typeof(BaseWand));
+        }
 
-			writer.Write( (int) 0 ); // version
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (!from.CanBeginAction(typeof(BaseWand)))
+            {
+                from.SendLocalizedMessage(1070860); // You must wait a moment for the wand to recharge.
+                return;
+            }
 
-			writer.Write( (int) m_WandEffect );
-			writer.Write( (int) m_Charges );
-		}
+            if (Parent == from)
+            {
+                if (Charges > 0)
+                    OnWandUse(from);
+                else
+                    from.SendLocalizedMessage(1019073); // This item is out of charges.
+            }
+            else
+            {
+                from.SendLocalizedMessage(502641); // You must equip this item to use it.
+            }
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
+            writer.Write((int) 0); // version
 
-			switch ( version )
-			{
-				case 0:
-				{
-					m_WandEffect = (WandEffect)reader.ReadInt();
-					m_Charges = (int)reader.ReadInt();
+            writer.Write((int) Effect);
+            writer.Write((int) Charges);
+        }
 
-					break;
-				}
-			}
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void OnSingleClick( Mobile from )
-		{
-			ArrayList attrs = new ArrayList();
+            int version = reader.ReadInt();
 
-			if ( DisplayLootType )
-			{
-				if ( LootType == LootType.Blessed )
-					attrs.Add( new EquipInfoAttribute( 1038021 ) ); // blessed
-				else if ( LootType == LootType.Cursed )
-					attrs.Add( new EquipInfoAttribute( 1049643 ) ); // cursed
-			}
+            switch (version)
+            {
+                case 0:
+                {
+                    Effect = (WandEffect) reader.ReadInt();
+                    Charges = (int) reader.ReadInt();
 
-			if ( !Identified )
-			{
-				attrs.Add( new EquipInfoAttribute( 1038000 ) ); // Unidentified
-			}
-			else
-			{
-				int num = 0;
+                    break;
+                }
+            }
+        }
 
-				switch ( m_WandEffect )
-				{
-					case WandEffect.Clumsiness:			num = 3002011; break;
-					case WandEffect.Identification:		num = 1044063; break;
-					case WandEffect.Healing:			num = 3002014; break;
-					case WandEffect.Feeblemindedness:	num = 3002013; break;
-					case WandEffect.Weakness:			num = 3002018; break;
-					case WandEffect.MagicArrow:			num = 3002015; break;
-					case WandEffect.Harming:			num = 3002022; break;
-					case WandEffect.Fireball:			num = 3002028; break;
-					case WandEffect.GreaterHealing:		num = 3002039; break;
-					case WandEffect.Lightning:			num = 3002040; break;
-					case WandEffect.ManaDraining:		num = 3002041; break;
-				}
+        public override void OnSingleClick(Mobile from)
+        {
+            ArrayList attrs = new ArrayList();
 
-				if ( num > 0 )
-					attrs.Add( new EquipInfoAttribute( num, m_Charges ) );
-			}
+            if (DisplayLootType)
+            {
+                if (LootType == LootType.Blessed)
+                    attrs.Add(new EquipInfoAttribute(1038021)); // blessed
+                else if (LootType == LootType.Cursed)
+                    attrs.Add(new EquipInfoAttribute(1049643)); // cursed
+            }
 
-			int number;
+            if (!Identified)
+            {
+                attrs.Add(new EquipInfoAttribute(1038000)); // Unidentified
+            }
+            else
+            {
+                int num = Effect switch
+                {
+                    WandEffect.Clumsiness => 3002011,
+                    WandEffect.Identification => 1044063,
+                    WandEffect.Healing => 3002014,
+                    WandEffect.Feeblemindedness => 3002013,
+                    WandEffect.Weakness => 3002018,
+                    WandEffect.MagicArrow => 3002015,
+                    WandEffect.Harming => 3002022,
+                    WandEffect.Fireball => 3002028,
+                    WandEffect.GreaterHealing => 3002039,
+                    WandEffect.Lightning => 3002040,
+                    WandEffect.ManaDraining => 3002041,
+                    _ => 0
+                };
 
-			if ( Name == null )
-			{
-				number = 1017085;
-			}
-			else
-			{
-				LabelTo( from, Name );
-				number = 1041000;
-			}
+                if (num > 0)
+                    attrs.Add(new EquipInfoAttribute(num, Charges));
+            }
 
-			if ( attrs.Count == 0 && Crafter == null && Name != null )
-				return;
+            int number;
 
-			EquipmentInfo eqInfo = new EquipmentInfo( number, Crafter, false, (EquipInfoAttribute[])attrs.ToArray( typeof( EquipInfoAttribute ) ) );
+            if (Name == null)
+            {
+                number = 1017085;
+            }
+            else
+            {
+                LabelTo(from, Name);
+                number = 1041000;
+            }
 
-			from.Send( new DisplayEquipmentInfo( this, eqInfo ) );
-		}
+            if (attrs.Count == 0 && Crafter == null && Name != null)
+                return;
 
-		public void Cast( Spell spell )
-		{
-			bool m = Movable;
+            var eqInfo = new EquipmentInfo(number, Crafter, false,
+                (EquipInfoAttribute[]) attrs.ToArray(typeof(EquipInfoAttribute)));
 
-			Movable = false;
-			spell.Cast();
-			Movable = m;
-		}
+            from.Send(new DisplayEquipmentInfo(this, eqInfo));
+        }
 
-		public virtual void OnWandUse( Mobile from )
-		{
-			from.Target = new WandTarget( this );
-		}
+        public void Cast(Spell spell)
+        {
+            bool m = Movable;
 
-		public virtual void DoWandTarget( Mobile from, object o )
-		{
-			if ( Deleted || Charges <= 0 || Parent != from || o is StaticTarget || o is LandTarget )
-				return;
+            Movable = false;
+            spell.Cast();
+            Movable = m;
+        }
 
-			if ( OnWandTarget( from, o ) )
-				ConsumeCharge( from );
-		}
+        public virtual void OnWandUse(Mobile from)
+        {
+            from.Target = new WandTarget(this);
+        }
 
-		public virtual bool OnWandTarget( Mobile from, object o )
-		{
-			return true;
-		}
-	}
+        public virtual void DoWandTarget(Mobile from, object o)
+        {
+            if (Deleted || Charges <= 0 || Parent != from || o is StaticTarget || o is LandTarget)
+                return;
+
+            if (OnWandTarget(from, o))
+                ConsumeCharge(from);
+        }
+
+        public virtual bool OnWandTarget(Mobile from, object o)
+        {
+            return true;
+        }
+    }
 }

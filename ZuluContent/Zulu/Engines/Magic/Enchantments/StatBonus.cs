@@ -9,7 +9,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class IntBonus : BaseStatBonus<IntBonusInfo>
     {
-        [IgnoreMember]public override string AffixName => EnchantmentInfo.GetName(Value);
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value);
         public IntBonus() : base(StatType.Int) { }
     }
     
@@ -36,7 +37,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class DexBonus : BaseStatBonus<DexBonusInfo>
     {
-        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
         public DexBonus() : base(StatType.Dex) { }
     }
 
@@ -62,7 +64,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class StrBonus : BaseStatBonus<StrBonusInfo>
     {
-        [IgnoreMember]public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
         public StrBonus() : base(StatType.Str) { }
     }
     
@@ -86,7 +89,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         };
     }
 
-    public abstract class BaseStatBonus<T> : Enchantment<T>, IOnEquip where T : EnchantmentInfo, new()
+    public abstract class BaseStatBonus<T> : Enchantment<T> where T : EnchantmentInfo, new()
     {
         protected StatType StatType;
         protected StatMod Mod;
@@ -128,14 +131,14 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             mobile.AddStatMod(Mod);
         }
 
-        public virtual void OnEquip(Item item, Mobile mobile)
+        public override void OnAdded(Item item, Mobile mobile)
         {
             Item = item;
             Mobile = mobile;
             AddStatMod(item, mobile);
         }
 
-        public virtual void OnRemoved(Item item, Mobile mobile)
+        public override void OnRemoved(Item item, Mobile mobile)
         {
             Item = null;
             Mobile = null;

@@ -6,8 +6,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class ItemQuality : Enchantment<ItemQualityInfo>
     {
-        [IgnoreMember]public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
-        [Key(1)] public int Value { get; set; } = 0;
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        [Key(1)] 
+        public int Value { get; set; } = 0;
     }
     
     public class ItemQualityInfo : EnchantmentInfo
