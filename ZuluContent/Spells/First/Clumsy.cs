@@ -1,28 +1,13 @@
-using System;
 using Server.Targeting;
 
 namespace Server.Spells.First
 {
     public class ClumsySpell : MagerySpell
     {
-        public override SpellInfo GetSpellInfo() => m_Info;
-
-        private static readonly SpellInfo m_Info = new SpellInfo(
-            "Clumsy", "Uus Jux",
-            212,
-            9031,
-            Reagent.Bloodmoss,
-            Reagent.Nightshade
-        );
-
-        public override SpellCircle Circle
-        {
-            get { return SpellCircle.First; }
-        }
-
-        public ClumsySpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
+        public ClumsySpell(Mobile caster, Item scroll) : base(caster, scroll)
         {
         }
+
 
         public override void OnCast()
         {
@@ -51,8 +36,8 @@ namespace Server.Spells.First
                 m.FixedParticles(0x3779, 10, 15, 5002, EffectLayer.Head);
                 m.PlaySound(0x1DF);
 
-                int percentage = (int) (SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
-                TimeSpan length = SpellHelper.GetDuration(Caster, m);
+                var percentage = (int) (SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
+                var length = SpellHelper.GetDuration(Caster, m);
 
                 HarmfulSpell(m);
             }
@@ -62,7 +47,7 @@ namespace Server.Spells.First
 
         private class InternalTarget : Target
         {
-            private ClumsySpell m_Owner;
+            private readonly ClumsySpell m_Owner;
 
             public InternalTarget(ClumsySpell owner) : base(12, false, TargetFlags.Harmful)
             {
@@ -71,10 +56,7 @@ namespace Server.Spells.First
 
             protected override void OnTarget(Mobile from, object o)
             {
-                if (o is Mobile)
-                {
-                    m_Owner.Target((Mobile) o);
-                }
+                if (o is Mobile) m_Owner.Target((Mobile) o);
             }
 
             protected override void OnTargetFinish(Mobile from)

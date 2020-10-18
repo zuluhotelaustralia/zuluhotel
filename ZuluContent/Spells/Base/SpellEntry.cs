@@ -1,9 +1,6 @@
-using System;
-using System.Linq.Expressions;
-
 namespace Server.Spells
 {
-    public enum SpellType
+    public enum SpellEntry
     {
         None = -1,
         Clumsy = 00,
@@ -101,6 +98,10 @@ namespace Server.Spells
         LicheForm = 113,
         Plague = 114,
         Spellbind = 115,
+        
+        // System
+        EtherealMount = 230,
+        SpiritSpeak = 269,
 
         Antidote = 600,
         OwlSight = 601,
@@ -117,6 +118,6 @@ namespace Server.Spells
         EarthSpirit = 612,
         FireSpirit = 613,
         StormSpirit = 614,
-        WaterSpirit = 615,
+        WaterSpirit = 615
     }
 }

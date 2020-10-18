@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v3.1": {
+    ".NETCoreApp,Version=v5.0": {
       "Argon2.Bindings": {
         "type": "Direct",
         "requested": "[1.5.1, )",

@@ -1,28 +1,26 @@
-using System;
-
 namespace Server.Items
 {
     public class EyeOfNewt : BaseReagent
     {
-
         [Constructible]
-public EyeOfNewt()
+        public EyeOfNewt()
             : this(1)
         {
         }
 
 
         [Constructible]
-public EyeOfNewt(int amount)
+        public EyeOfNewt(int amount)
             : base(0xF87, amount)
         {
         }
 
         [Constructible]
-public EyeOfNewt(Serial serial)
+        public EyeOfNewt(Serial serial)
             : base(serial)
         {
         }
+
         public override double DefaultWeight
         {
             get { return 0.1; }
@@ -32,14 +30,14 @@ public EyeOfNewt(Serial serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

@@ -5,24 +5,7 @@ namespace Server.Spells.Eighth
 {
     public class EarthquakeSpell : MagerySpell
     {
-        public override SpellInfo GetSpellInfo() => m_Info;
-		private static SpellInfo m_Info = new SpellInfo(
-            "Earthquake", "In Vas Por",
-            233,
-            9012,
-            false,
-            Reagent.Bloodmoss,
-            Reagent.Ginseng,
-            Reagent.MandrakeRoot,
-            Reagent.SulfurousAsh
-        );
-
-        public override SpellCircle Circle
-        {
-            get { return SpellCircle.Eighth; }
-        }
-
-        public EarthquakeSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
+        public EarthquakeSpell(Mobile caster, Item scroll) : base(caster, scroll)
         {
         }
 
@@ -31,27 +14,26 @@ namespace Server.Spells.Eighth
             get { return true; }
         }
 
+
         public override void OnCast()
         {
             if (SpellHelper.CheckTown(Caster, Caster) && CheckSequence())
             {
-                List<Mobile> targets = new List<Mobile>();
+                var targets = new List<Mobile>();
 
-                Map map = Caster.Map;
+                var map = Caster.Map;
 
                 if (map != null)
-                    foreach (Mobile m in Caster.GetMobilesInRange(
+                    foreach (var m in Caster.GetMobilesInRange(
                         1 + (int) (Caster.Skills[SkillName.Magery].Value / 15.0)))
                         if (Caster != m && SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false))
                             targets.Add(m);
 
                 Caster.PlaySound(0x220);
 
-                for (int i = 0; i < targets.Count; ++i)
+                foreach (var m in targets)
                 {
-                    Mobile m = targets[i];
-
-                    int damage = m.Hits * 6 / 10;
+                    var damage = m.Hits * 6 / 10;
 
                     if (!m.Player && damage < 10)
                         damage = 10;
@@ -59,7 +41,7 @@ namespace Server.Spells.Eighth
                         damage = 75;
 
                     Caster.DoHarmful(m);
-                    SpellHelper.Damage(TimeSpan.Zero, m, Caster, damage, 100, 0, 0, 0, 0);
+                    SpellHelper.Damage(damage, m, Caster, this, TimeSpan.Zero);
                 }
             }
 

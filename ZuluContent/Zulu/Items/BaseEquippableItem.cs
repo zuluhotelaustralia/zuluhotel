@@ -53,8 +53,8 @@ namespace ZuluContent.Zulu.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalFireResist
         {
-            get => Enchantments.Get((PhysicalProtection e) => e.Value);
-            set => Enchantments.Set((PhysicalProtection e) => e.Value = value);
+            get => Enchantments.Get((FireProtection e) => e.Value);
+            set => Enchantments.Set((FireProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -139,15 +139,12 @@ namespace ZuluContent.Zulu.Items
         public override void OnAdded(IEntity parent)
         {
             base.OnAdded(parent);
-            if (parent is Mobile m) 
-                Enchantments.FireHook(e => e.OnAdded(this, m));
+            Enchantments.FireHook(e => e.OnAdded(this));
         }
 
         public override void OnRemoved(IEntity parent)
         {
-            if (parent is Mobile m) 
-                Enchantments.FireHook(e => e.OnRemoved(this, m));
-            
+            Enchantments.FireHook(e => e.OnRemoved(this));
             base.OnRemoved(parent);
         }
 
@@ -162,7 +159,7 @@ namespace ZuluContent.Zulu.Items
             base.Deserialize(reader);
             m_Enchantments = EnchantmentDictionary.Deserialize(reader);
             if(Parent is Mobile m)
-                m_Enchantments.FireHook(e => e.OnAdded(this, m));
+                m_Enchantments.FireHook(e => e.OnAdded(this));
         }
     }
 }

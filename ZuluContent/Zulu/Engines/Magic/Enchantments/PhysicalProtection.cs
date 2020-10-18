@@ -1,4 +1,5 @@
 using MessagePack;
+using Server;
 using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -14,7 +15,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public int Value { get; set; } = 0;
         
-        
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, ElementalType damageType, ref int damage)
+        {
+            if (damageType == ElementalType.Physical) 
+                damage -= (int) (damage * ((double) Value / 100));
+        }
     }
     
     public class PhysicalProtectionInfo : EnchantmentInfo

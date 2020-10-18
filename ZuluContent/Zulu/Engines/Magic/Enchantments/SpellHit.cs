@@ -14,10 +14,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [IgnoreMember] public override string AffixName => string.Empty;
         
         [Key(1)]
-        public SpellType SpellType { get; set; } = SpellType.None;
+        public SpellEntry SpellEntry { get; set; } = SpellEntry.None;
 
         [Key(2)]
         public double Chance { get; set; } = 0.0;
+        
+        
     }
 
     public class SpellHitInfo : EnchantmentInfo

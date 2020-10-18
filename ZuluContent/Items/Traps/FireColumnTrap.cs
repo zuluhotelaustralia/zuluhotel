@@ -1,113 +1,129 @@
 using System;
+using Server.Spells;
 
 namespace Server.Items
 {
-	public class FireColumnTrap : BaseTrap
-	{
+    public class FireColumnTrap : BaseTrap
+    {
+        [Constructible]
+        public FireColumnTrap() : base(0x1B71)
+        {
+            m_MinDamage = 10;
+            m_MaxDamage = 40;
 
-		[Constructible]
-public FireColumnTrap() : base( 0x1B71 )
-		{
-			m_MinDamage = 10;
-			m_MaxDamage = 40;
+            m_WarningFlame = true;
+        }
 
-			m_WarningFlame = true;
-		}
+        public override bool PassivelyTriggered
+        {
+            get { return true; }
+        }
 
-		public override bool PassivelyTriggered{ get{ return true; } }
-		public override TimeSpan PassiveTriggerDelay{ get{ return TimeSpan.FromSeconds( 2.0 ); } }
-		public override int PassiveTriggerRange{ get{ return 3; } }
-		public override TimeSpan ResetDelay{ get{ return TimeSpan.FromSeconds( 0.5 ); } }
+        public override TimeSpan PassiveTriggerDelay
+        {
+            get { return TimeSpan.FromSeconds(2.0); }
+        }
 
-		private int m_MinDamage;
+        public override int PassiveTriggerRange
+        {
+            get { return 3; }
+        }
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public virtual int MinDamage
-		{
-			get { return m_MinDamage; }
-			set { m_MinDamage = value; }
-		}
+        public override TimeSpan ResetDelay
+        {
+            get { return TimeSpan.FromSeconds(0.5); }
+        }
 
-		private int m_MaxDamage;
+        private int m_MinDamage;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public virtual int MaxDamage
-		{
-			get { return m_MaxDamage; }
-			set { m_MaxDamage = value; }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual int MinDamage
+        {
+            get { return m_MinDamage; }
+            set { m_MinDamage = value; }
+        }
 
-		private bool m_WarningFlame;
+        private int m_MaxDamage;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public virtual bool WarningFlame
-		{
-			get { return m_WarningFlame; }
-			set { m_WarningFlame = value; }
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual int MaxDamage
+        {
+            get { return m_MaxDamage; }
+            set { m_MaxDamage = value; }
+        }
 
-		public override void OnTrigger( Mobile from )
-		{
-			if ( from.AccessLevel > AccessLevel.Player )
-				return;
+        private bool m_WarningFlame;
 
-			if ( WarningFlame )
-				DoEffect();
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool WarningFlame
+        {
+            get { return m_WarningFlame; }
+            set { m_WarningFlame = value; }
+        }
 
-			if ( from.Alive && CheckRange( from.Location, 0 ) )
-			{
-				Spells.SpellHelper.Damage( TimeSpan.FromSeconds( 0.5 ), from, from, Utility.RandomMinMax( MinDamage, MaxDamage ), 0, 100, 0, 0, 0 );
+        public override void OnTrigger(Mobile from)
+        {
+            if (from.AccessLevel > AccessLevel.Player)
+                return;
 
-				if ( !WarningFlame )
-					DoEffect();
-			}
-		}
+            if (WarningFlame)
+                DoEffect();
 
-		private void DoEffect()
-		{
-			Effects.SendLocationParticles( EffectItem.Create( Location, Map, EffectItem.DefaultDuration ), 0x3709, 10, 30, 5052 );
-			Effects.PlaySound( Location, Map, 0x225 );
-		}
+            if (from.Alive && CheckRange(from.Location, 0))
+            {
+                SpellHelper.Damage(Utility.RandomMinMax(MinDamage, MaxDamage), from, from, null, TimeSpan.FromSeconds(0.5));
 
-		[Constructible]
-public FireColumnTrap( Serial serial ) : base( serial )
-		{
-		}
+                if (!WarningFlame)
+                    DoEffect();
+            }
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        private void DoEffect()
+        {
+            Effects.SendLocationParticles(EffectItem.Create(Location, Map, EffectItem.DefaultDuration), 0x3709, 10, 30,
+                5052);
+            Effects.PlaySound(Location, Map, 0x225);
+        }
 
-			writer.Write( (int) 1 ); // version
+        [Constructible]
+        public FireColumnTrap(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( m_WarningFlame );
-			writer.Write( m_MinDamage );
-			writer.Write( m_MaxDamage );
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int) 1); // version
 
-			int version = reader.ReadInt();
+            writer.Write(m_WarningFlame);
+            writer.Write(m_MinDamage);
+            writer.Write(m_MaxDamage);
+        }
 
-			switch ( version )
-			{
-				case 1:
-				{
-					m_WarningFlame = reader.ReadBool();
-					m_MinDamage = reader.ReadInt();
-					m_MaxDamage = reader.ReadInt();
-					break;
-				}
-			}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			if ( version == 0 )
-			{
-				m_WarningFlame = true;
-				m_MinDamage = 10;
-				m_MaxDamage = 40;
-			}
-		}
-	}
+            int version = reader.ReadInt();
+
+            switch (version)
+            {
+                case 1:
+                {
+                    m_WarningFlame = reader.ReadBool();
+                    m_MinDamage = reader.ReadInt();
+                    m_MaxDamage = reader.ReadInt();
+                    break;
+                }
+            }
+
+            if (version == 0)
+            {
+                m_WarningFlame = true;
+                m_MinDamage = 10;
+                m_MaxDamage = 40;
+            }
+        }
+    }
 }

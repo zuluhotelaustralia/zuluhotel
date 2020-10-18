@@ -8,6 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModernUO", "ModernUO", "{70
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Tests", "ModernUO\Projects\Server.Tests\Server.Tests.csproj", "{43D26E73-3732-481A-9C24-AC00B8ED2C76}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Run Configurations", "Run Configurations", "{FE8CDD99-547C-4D0A-A44F-5027D45C0DE1}"
+ProjectSection(SolutionItems) = preProject
+	.run\Server.run.xml = .run\Server.run.xml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

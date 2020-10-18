@@ -1,25 +1,22 @@
-using System;
-
 namespace Server.Items
 {
     public class Obsidian : BaseReagent
     {
-
         [Constructible]
-public Obsidian()
+        public Obsidian()
             : this(1)
         {
         }
 
 
         [Constructible]
-public Obsidian(int amount)
+        public Obsidian(int amount)
             : base(0xF89, amount)
         {
         }
 
         [Constructible]
-public Obsidian(Serial serial)
+        public Obsidian(Serial serial)
             : base(serial)
         {
         }
@@ -33,14 +30,14 @@ public Obsidian(Serial serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

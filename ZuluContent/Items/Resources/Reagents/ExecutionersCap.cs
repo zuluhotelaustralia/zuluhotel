@@ -1,24 +1,20 @@
-using System;
-
 namespace Server.Items
 {
-    //does this need to inherit from basereagent? --sith
     public class ExecutionersCap : BaseReagent
     {
-
         [Constructible]
-public ExecutionersCap() : this(1)
+        public ExecutionersCap() : this(1)
         {
         }
 
 
         [Constructible]
-public ExecutionersCap(int amount) : base(0xF83, amount)
+        public ExecutionersCap(int amount) : base(0xF83, amount)
         {
         }
 
         [Constructible]
-public ExecutionersCap(Serial serial) : base(serial)
+        public ExecutionersCap(Serial serial) : base(serial)
         {
         }
 
@@ -31,14 +27,14 @@ public ExecutionersCap(Serial serial) : base(serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0);
+            writer.Write(0);
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

@@ -1,25 +1,20 @@
-using System;
-using Server;
-using Server.Items;
-
 namespace Server.Items
 {
     public class NoxCrystal : BaseReagent
     {
-
         [Constructible]
-public NoxCrystal() : this(1)
+        public NoxCrystal() : this(1)
         {
         }
 
 
         [Constructible]
-public NoxCrystal(int amount) : base(0xF8E, amount)
+        public NoxCrystal(int amount) : base(0xF8E, amount)
         {
         }
 
         [Constructible]
-public NoxCrystal(Serial serial) : base(serial)
+        public NoxCrystal(Serial serial) : base(serial)
         {
         }
 
@@ -32,14 +27,14 @@ public NoxCrystal(Serial serial) : base(serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

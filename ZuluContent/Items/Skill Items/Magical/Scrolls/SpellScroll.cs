@@ -1,12 +1,9 @@
-using System.Collections.Generic;
 using Server.Spells;
 
 namespace Server.Items
 {
     public class SpellScroll : Item
     {
-        public int SpellId { get; private set; }
-
         [Constructible]
         public SpellScroll(Serial serial) : base(serial)
         {
@@ -14,41 +11,43 @@ namespace Server.Items
 
 
         [Constructible]
-        public SpellScroll(int spellId, int itemId) : this(spellId, itemId, 1)
+        public SpellScroll(SpellEntry spellEntry, int itemId) : this(spellEntry, itemId, 1)
         {
         }
 
 
         [Constructible]
-        public SpellScroll(int spellId, int itemId, int amount) : base(itemId)
+        public SpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(itemId)
         {
             Stackable = true;
             Weight = 1.0;
             Amount = amount;
 
-            SpellId = spellId;
+            SpellEntry = spellEntry;
         }
+
+        public SpellEntry SpellEntry { get; private set; }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
 
-            writer.Write((int) SpellId);
+            writer.Write((int) SpellEntry);
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             switch (version)
             {
                 case 0:
                 {
-                    SpellId = reader.ReadInt();
+                    SpellEntry = (SpellEntry) reader.ReadInt();
 
                     break;
                 }
@@ -63,7 +62,7 @@ namespace Server.Items
                 return;
             }
 
-            var spell = SpellRegistry.Create(SpellId, from, this);
+            var spell = SpellRegistry.Create(SpellEntry, from, this);
 
             if (spell != null)
                 spell.Cast();

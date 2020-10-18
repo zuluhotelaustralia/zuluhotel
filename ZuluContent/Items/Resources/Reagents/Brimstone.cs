@@ -1,28 +1,26 @@
-using System;
-
 namespace Server.Items
 {
     public class Brimstone : BaseReagent
     {
-
         [Constructible]
-public Brimstone()
+        public Brimstone()
             : this(1)
         {
         }
 
 
         [Constructible]
-public Brimstone(int amount)
+        public Brimstone(int amount)
             : base(0xF7F, amount)
         {
         }
 
         [Constructible]
-public Brimstone(Serial serial)
+        public Brimstone(Serial serial)
             : base(serial)
         {
         }
+
         public override double DefaultWeight
         {
             get { return 0.1; }
@@ -32,14 +30,14 @@ public Brimstone(Serial serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

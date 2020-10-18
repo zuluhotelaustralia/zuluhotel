@@ -7,25 +7,30 @@ namespace Server.Spells
     {
         private const double ChanceOffset = 20.0, ChanceLength = 100.0 / 7.0;
 
-        public MagerySpell(Mobile caster, Item scroll, SpellInfo info) : base(caster, scroll, info)
+        private static readonly int[] ManaTable = {4, 6, 9, 11, 14, 20, 40, 50};
+
+        public MagerySpell(Mobile caster, Item scroll) : base(caster, scroll)
         {
         }
-        
+
+        public override TimeSpan CastDelayBase
+        {
+            get { return TimeSpan.FromSeconds((3 + (int) Circle) * CastDelaySecondsPerTick); }
+        }
+
 
         public override void GetCastSkills(out double min, out double max)
         {
-            int circle = (int) Circle;
+            var circle = (int) Circle;
 
             if (Scroll != null)
                 circle -= 2;
 
-            double avg = ChanceLength * circle;
+            var avg = ChanceLength * circle;
 
             min = avg - ChanceOffset;
             max = avg + ChanceOffset;
         }
-
-        private static readonly int[] ManaTable = {4, 6, 9, 11, 14, 20, 40, 50};
 
         public override int GetMana()
         {
@@ -34,7 +39,7 @@ namespace Server.Spells
 
         public override double GetResistSkill(Mobile m)
         {
-            int maxSkill = (1 + (int) Circle) * 10;
+            var maxSkill = (1 + (int) Circle) * 10;
             maxSkill += (1 + (int) Circle / 6) * 25;
 
             if (m.Skills[SkillName.MagicResist].Value < maxSkill)
@@ -49,11 +54,6 @@ namespace Server.Spells
                 return TimeSpan.Zero;
 
             return TimeSpan.FromSeconds(0.5 + 0.25 * (int) Circle);
-        }
-
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds((3 + (int) Circle) * CastDelaySecondsPerTick); }
         }
     }
 }

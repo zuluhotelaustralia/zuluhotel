@@ -3,6 +3,7 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Engines.Craft;
 using System.Collections.Generic;
+using System.Linq;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -54,7 +55,7 @@ namespace Server.Items
         private WeaponAnimation m_Animation;
 
         #endregion
-        
+
         #region Virtual Properties
 
         public virtual int DefaultHitSound => 0;
@@ -80,7 +81,7 @@ namespace Server.Items
         #endregion
 
         #region Getters & Setters
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public MagicalWeaponType MagicalWeaponType
         {
@@ -116,11 +117,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponQuality Quality
         {
-            get => Enchantments.Get((ItemQuality e) => (WeaponQuality)e.Value);
+            get => Enchantments.Get((ItemQuality e) => (WeaponQuality) e.Value);
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((ItemQuality e) => e.Value = (int)value);
+                Enchantments.Set((ItemQuality e) => e.Value = (int) value);
                 ScaleDurability();
             }
         }
@@ -157,21 +158,17 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponDurabilityLevel DurabilityLevel
         {
-            get => Enchantments.Get((DurabilityBonus e) => (WeaponDurabilityLevel)e.Value);
+            get => Enchantments.Get((DurabilityBonus e) => (WeaponDurabilityLevel) e.Value);
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((DurabilityBonus e) => e.Value = (int)value);
+                Enchantments.Set((DurabilityBonus e) => e.Value = (int) value);
                 ScaleDurability();
             }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool PlayerConstructed
-        {
-            get;
-            set;
-        }
+        public bool PlayerConstructed { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int MaxRange
@@ -399,7 +396,7 @@ namespace Server.Items
         public override bool OnEquip(Mobile from)
         {
             from.NextCombatTime = Core.TickCount + (int) GetDelay(from).TotalMilliseconds;
-            
+
             return true;
         }
 
@@ -420,11 +417,11 @@ namespace Server.Items
             {
                 if (m.Weapon is BaseWeapon weapon)
                     m.NextCombatTime = Core.TickCount + (int) weapon.GetDelay(m).TotalMilliseconds;
-                
+
                 m.CheckStatTimers();
                 m.Delta(MobileDelta.WeaponDamage);
             }
-            
+
             base.OnRemoved(parent);
         }
 
@@ -488,15 +485,14 @@ namespace Server.Items
                 return TimeSpan.FromSeconds(10);
 
             const double minDelay = 1.25;
-            
+
             var stamina = Math.Clamp(m.Stam, 0, m.Dex);
             var delayInSeconds = 15000.0 / ((stamina + 100) * speed);
             delayInSeconds = Math.Clamp(delayInSeconds, minDelay, 7.0);
-            
+
+            m.FireHook(h => h.OnGetSwingDelay(ref delayInSeconds, m));
             var result = TimeSpan.FromSeconds(delayInSeconds);
             
-            m.FireHook(h => h.OnGetDelay(ref result, m));
-
             return result;
         }
 
@@ -576,7 +572,12 @@ namespace Server.Items
         public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage)
         {
             if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
+            {
                 damage = shield.OnHit(this, damage);
+
+                // ReSharper disable once AccessToModifiedClosure
+                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
+            }
 
             double chance = Utility.RandomDouble();
 
@@ -595,8 +596,13 @@ namespace Server.Items
             else
                 armorItem = defender.ChestArmor;
 
-            if (armorItem is IWearableDurability armor)
+            if (armorItem is BaseArmor armor)
+            {
                 damage = armor.OnHit(this, damage);
+
+                // ReSharper disable once AccessToModifiedClosure
+                defender.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
+            }
 
             int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
 
@@ -621,6 +627,9 @@ namespace Server.Items
                 damage -= Utility.Random(from, to - from + 1);
             }
 
+            // ReSharper disable once AccessToModifiedClosure
+            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
+
             return damage;
         }
 
@@ -641,6 +650,9 @@ namespace Server.Items
 
             damage = AbsorbDamage(attacker, defender, damage);
 
+            // ReSharper disable once AccessToModifiedClosure
+            defender.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
+
             if (damage < 1)
                 damage = 1;
 
@@ -648,8 +660,8 @@ namespace Server.Items
 
             defender.Damage(damage, attacker);
 
-            if (MaxHitPoints > 0 && (MaxRange <= 1 && defender is Slime || Utility.Random(25) == 0)
-            ) // Stratics says 50% chance, seems more like 4%..
+            // Stratics says 50% chance, seems more like 4%..
+            if (MaxHitPoints > 0 && (MaxRange <= 1 && defender is Slime || Utility.Random(25) == 0))
             {
                 if (MaxRange <= 1 && defender is Slime)
                     attacker.LocalOverheadMessage(MessageType.Regular, 0x3B2,
@@ -663,9 +675,11 @@ namespace Server.Items
                 {
                     --MaxHitPoints;
 
-                    if (Parent is Mobile)
-                        ((Mobile) Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                            1061121); // Your equipment is severely damaged.
+                    if (Parent is Mobile parentMobile)
+                    {
+                        // Your equipment is severely damaged.
+                        parentMobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); 
+                    }
                 }
                 else
                 {
@@ -689,10 +703,7 @@ namespace Server.Items
             if (atkSlayer != null && atkSlayer.Slays(defender) || atkSlayer2 != null && atkSlayer2.Slays(defender))
                 return CheckSlayerResult.Slayer;
 
-            ISlayer defISlayer = Spellbook.FindEquippedSpellbook(defender);
-
-            if (defISlayer == null)
-                defISlayer = defender.Weapon as ISlayer;
+            ISlayer defISlayer = Spellbook.FindEquippedSpellbook(defender) ?? defender.Weapon as ISlayer;
 
             if (defISlayer != null)
             {
@@ -1030,7 +1041,7 @@ namespace Server.Items
             writer.Write((int) 11); // version
 
             SaveFlag flags = SaveFlag.None;
-            
+
             SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
 
@@ -1069,23 +1080,23 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.Animation, m_Animation != (WeaponAnimation) (-1));
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != CraftResource.Iron);
             SetSaveFlag(ref flags, SaveFlag.Slayer2, Slayer2 != SlayerName.None);
-            
+
             writer.Write((int) flags);
 
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
                 ICraftable.Serialize(writer, this);
 
             if (GetSaveFlag(flags, SaveFlag.DamageLevel))
-                writer.Write((int)DamageLevel);
+                writer.Write((int) DamageLevel);
 
             if (GetSaveFlag(flags, SaveFlag.AccuracyLevel))
-                writer.Write((int)AccuracyLevel);
+                writer.Write((int) AccuracyLevel);
 
             if (GetSaveFlag(flags, SaveFlag.DurabilityLevel))
-                writer.Write((int)DurabilityLevel);
+                writer.Write((int) DurabilityLevel);
 
             if (GetSaveFlag(flags, SaveFlag.Quality))
-                writer.Write((int)Quality);
+                writer.Write((int) Quality);
 
             if (GetSaveFlag(flags, SaveFlag.Hits))
                 writer.Write((int) m_Hits);
@@ -1104,9 +1115,9 @@ namespace Server.Items
 
             if (GetSaveFlag(flags, SaveFlag.Crafter))
                 writer.Write((Mobile) Crafter);
-            
+
             if (GetSaveFlag(flags, SaveFlag.Identified))
-                writer.Write((bool)Identified);
+                writer.Write((bool) Identified);
 
             if (GetSaveFlag(flags, SaveFlag.StrReq))
                 writer.Write((int) m_StrReq);
@@ -1146,9 +1157,9 @@ namespace Server.Items
 
             if (GetSaveFlag(flags, SaveFlag.Resource))
                 writer.Write((int) m_Resource);
-            
+
             if (GetSaveFlag(flags, SaveFlag.PlayerConstructed))
-                writer.Write((bool)PlayerConstructed);
+                writer.Write((bool) PlayerConstructed);
 
             if (GetSaveFlag(flags, SaveFlag.Slayer2))
                 writer.Write((int) Slayer2);
@@ -1189,7 +1200,6 @@ namespace Server.Items
             Slayer2 = 0x10000000,
             ElementalDamages = 0x20000000,
             NewMagicalProperties = 0x40000000,
-
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -1197,7 +1207,7 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
-            
+
             SaveFlag flags = (SaveFlag) reader.ReadInt();
 
             switch (version)
@@ -1332,7 +1342,7 @@ namespace Server.Items
                         m_Resource = (CraftResource) reader.ReadInt();
                     else
                         m_Resource = CraftResource.Iron;
-                    
+
                     if (GetSaveFlag(flags, SaveFlag.PlayerConstructed))
                         PlayerConstructed = true;
 
@@ -1505,7 +1515,7 @@ namespace Server.Items
         {
             HandleSingleClick(this, from);
             return;
-            
+
             List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
             if (DisplayLootType)

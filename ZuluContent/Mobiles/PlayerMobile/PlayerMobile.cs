@@ -1108,8 +1108,7 @@ namespace Server.Mobiles
         {
             if (amount > 0)
             {
-                BandageContext c = BandageContext.GetContext(this);
-
+                var c = BandageContext.GetContext(this);
                 c?.Slip();
             }
 

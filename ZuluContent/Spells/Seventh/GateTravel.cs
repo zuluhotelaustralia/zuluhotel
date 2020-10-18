@@ -1,239 +1,234 @@
 using System;
-using Server.Network;
 using Server.Items;
-using Server.Targeting;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
+using Server.Network;
+using Server.Targeting;
 
 namespace Server.Spells.Seventh
 {
     public class GateTravelSpell : MagerySpell
-	{
-		public override SpellInfo GetSpellInfo() => m_Info;
-		private static SpellInfo m_Info = new SpellInfo(
-				"Gate Travel", "Vas Rel Por",
-				263,
-				9032,
-				Reagent.BlackPearl,
-				Reagent.MandrakeRoot,
-				Reagent.SulfurousAsh
-			);
+    {
+        private readonly RunebookEntry m_Entry;
 
-		public override SpellCircle Circle { get { return SpellCircle.Seventh; } }
+        public GateTravelSpell(Mobile caster, Item scroll) : this(caster, scroll, null)
+        {
+        }
 
-		private RunebookEntry m_Entry;
+        public GateTravelSpell(Mobile caster, Item scroll, RunebookEntry entry) : base(caster, scroll)
+        {
+            m_Entry = entry;
+        }
 
-		public GateTravelSpell( Mobile caster, Item scroll ) : this( caster, scroll, null )
-		{
-		}
 
-		public GateTravelSpell( Mobile caster, Item scroll, RunebookEntry entry ) : base( caster, scroll, m_Info )
-		{
-			m_Entry = entry;
-		}
+        public override void OnCast()
+        {
+            if (m_Entry == null)
+                Caster.Target = new InternalTarget(this);
+            else
+                Effect(m_Entry.Location, m_Entry.Map, true);
+        }
 
-		public override void OnCast()
-		{
-			if ( m_Entry == null )
-				Caster.Target = new InternalTarget( this );
-			else
-				Effect( m_Entry.Location, m_Entry.Map, true );
-		}
+        public override bool CheckCast()
+        {
+            if (Caster.Criminal)
+            {
+                Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
+                return false;
+            }
 
-		public override bool CheckCast()
-		{
-			if ( Caster.Criminal )
-			{
-				Caster.SendLocalizedMessage( 1005561, "", 0x22 ); // Thou'rt a criminal and cannot escape so easily.
-				return false;
-			}
-			else if ( SpellHelper.CheckCombat( Caster ) )
-			{
-				Caster.SendLocalizedMessage( 1005564, "", 0x22 ); // Wouldst thou flee during the heat of battle??
-				return false;
-			}
+            if (SpellHelper.CheckCombat(Caster))
+            {
+                Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+                return false;
+            }
 
-			return SpellHelper.CheckTravel( Caster, TravelCheckType.GateFrom );
-		}
+            return SpellHelper.CheckTravel(Caster, TravelCheckType.GateFrom);
+        }
 
-		private bool GateExistsAt(Map map, Point3D loc )
-		{
-			bool _gateFound = false;
+        private bool GateExistsAt(Map map, Point3D loc)
+        {
+            var _gateFound = false;
 
-			IPooledEnumerable eable = map.GetItemsInRange( loc, 0 );
-			foreach ( Item item in eable )
-			{
-				if ( item is Moongate || item is PublicMoongate )
-				{
-					_gateFound = true;
-					break;
-				}
-			}
-			eable.Free();
+            IPooledEnumerable eable = map.GetItemsInRange(loc, 0);
+            foreach (Item item in eable)
+                if (item is Moongate || item is PublicMoongate)
+                {
+                    _gateFound = true;
+                    break;
+                }
 
-			return _gateFound;
-		}
+            eable.Free();
 
-		public void Effect( Point3D loc, Map map, bool checkMulti )
-		{
-			if ( map == null || Caster.Map != map )
-			{
-				Caster.SendLocalizedMessage( 1005570 ); // You can not gate to another facet.
-			}
-			else if ( !SpellHelper.CheckTravel( Caster, TravelCheckType.GateFrom ) )
-			{
-			}
-			else if ( !SpellHelper.CheckTravel( Caster,  map, loc, TravelCheckType.GateTo ) )
-			{
-			}
-			else if ( map == Map.Felucca && Caster is PlayerMobile && ((PlayerMobile)Caster).Young )
-			{
-				Caster.SendLocalizedMessage( 1049543 ); // You decide against traveling to Felucca while you are still young.
-			}
-			else if ( Caster.Kills >= 5 && map != Map.Felucca )
-			{
-				Caster.SendLocalizedMessage( 1019004 ); // You are not allowed to travel there.
-			}
-			else if ( Caster.Criminal )
-			{
-				Caster.SendLocalizedMessage( 1005561, "", 0x22 ); // Thou'rt a criminal and cannot escape so easily.
-			}
-			else if ( SpellHelper.CheckCombat( Caster ) )
-			{
-				Caster.SendLocalizedMessage( 1005564, "", 0x22 ); // Wouldst thou flee during the heat of battle??
-			}
-			else if ( !map.CanSpawnMobile( loc.X, loc.Y, loc.Z ) )
-			{
-				Caster.SendLocalizedMessage( 501942 ); // That location is blocked.
-			}
-			else if ( checkMulti && SpellHelper.CheckMulti( loc, map ) )
-			{
-				Caster.SendLocalizedMessage( 501942 ); // That location is blocked.
-			}
-			else if ( CheckSequence() )
-			{
-				Caster.SendLocalizedMessage( 501024 ); // You open a magical gate to another location
+            return _gateFound;
+        }
 
-				Effects.PlaySound( Caster.Location, Caster.Map, 0x20E );
+        public void Effect(Point3D loc, Map map, bool checkMulti)
+        {
+            if (map == null || Caster.Map != map)
+            {
+                Caster.SendLocalizedMessage(1005570); // You can not gate to another facet.
+            }
+            else if (!SpellHelper.CheckTravel(Caster, TravelCheckType.GateFrom))
+            {
+            }
+            else if (!SpellHelper.CheckTravel(Caster, map, loc, TravelCheckType.GateTo))
+            {
+            }
+            else if (map == Map.Felucca && Caster is PlayerMobile && ((PlayerMobile) Caster).Young)
+            {
+                Caster.SendLocalizedMessage(
+                    1049543); // You decide against traveling to Felucca while you are still young.
+            }
+            else if (Caster.Kills >= 5 && map != Map.Felucca)
+            {
+                Caster.SendLocalizedMessage(1019004); // You are not allowed to travel there.
+            }
+            else if (Caster.Criminal)
+            {
+                Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
+            }
+            else if (SpellHelper.CheckCombat(Caster))
+            {
+                Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
+            }
+            else if (!map.CanSpawnMobile(loc.X, loc.Y, loc.Z))
+            {
+                Caster.SendLocalizedMessage(501942); // That location is blocked.
+            }
+            else if (checkMulti && SpellHelper.CheckMulti(loc, map))
+            {
+                Caster.SendLocalizedMessage(501942); // That location is blocked.
+            }
+            else if (CheckSequence())
+            {
+                Caster.SendLocalizedMessage(501024); // You open a magical gate to another location
 
-				InternalItem firstGate = new InternalItem( loc, map );
-				firstGate.MoveToWorld( Caster.Location, Caster.Map );
+                Effects.PlaySound(Caster.Location, Caster.Map, 0x20E);
 
-				Effects.PlaySound( loc, map, 0x20E );
+                var firstGate = new InternalItem(loc, map);
+                firstGate.MoveToWorld(Caster.Location, Caster.Map);
 
-				InternalItem secondGate = new InternalItem( Caster.Location, Caster.Map );
-				secondGate.MoveToWorld( loc, map );
-			}
+                Effects.PlaySound(loc, map, 0x20E);
 
-			FinishSequence();
-		}
+                var secondGate = new InternalItem(Caster.Location, Caster.Map);
+                secondGate.MoveToWorld(loc, map);
+            }
 
-		[DispellableField]
-		private class InternalItem : Moongate
-		{
-			public override bool ShowFeluccaWarning{ get{ return false; } }
+            FinishSequence();
+        }
 
-			public InternalItem( Point3D target, Map map ) : base( target, map )
-			{
-				Map = map;
+        [DispellableField]
+        private class InternalItem : Moongate
+        {
+            public InternalItem(Point3D target, Map map) : base(target, map)
+            {
+                Map = map;
 
-				if ( ShowFeluccaWarning && map == Map.Felucca )
-					ItemID = 0xDDA;
+                if (ShowFeluccaWarning && map == Map.Felucca)
+                    ItemID = 0xDDA;
 
-				Dispellable = true;
+                Dispellable = true;
 
-				InternalTimer t = new InternalTimer( this );
-				t.Start();
-			}
+                var t = new InternalTimer(this);
+                t.Start();
+            }
 
-			public InternalItem( Serial serial ) : base( serial )
-			{
-			}
+            public InternalItem(Serial serial) : base(serial)
+            {
+            }
 
-			public override void Serialize( IGenericWriter writer )
-			{
-				base.Serialize( writer );
-			}
+            public override bool ShowFeluccaWarning
+            {
+                get { return false; }
+            }
 
-			public override void Deserialize( IGenericReader reader )
-			{
-				base.Deserialize( reader );
+            public override void Serialize(IGenericWriter writer)
+            {
+                base.Serialize(writer);
+            }
 
-				Delete();
-			}
+            public override void Deserialize(IGenericReader reader)
+            {
+                base.Deserialize(reader);
 
-			private class InternalTimer : Timer
-			{
-				private Item m_Item;
+                Delete();
+            }
 
-				public InternalTimer( Item item ) : base( TimeSpan.FromSeconds( 30.0 ) )
-				{
-					Priority = TimerPriority.OneSecond;
-					m_Item = item;
-				}
+            private class InternalTimer : Timer
+            {
+                private readonly Item m_Item;
 
-				protected override void OnTick()
-				{
-					m_Item.Delete();
-				}
-			}
-		}
+                public InternalTimer(Item item) : base(TimeSpan.FromSeconds(30.0))
+                {
+                    Priority = TimerPriority.OneSecond;
+                    m_Item = item;
+                }
 
-		private class InternalTarget : Target
-		{
-			private GateTravelSpell m_Owner;
+                protected override void OnTick()
+                {
+                    m_Item.Delete();
+                }
+            }
+        }
 
-			public InternalTarget( GateTravelSpell owner ) : base( 12, false, TargetFlags.None )
-			{
-				m_Owner = owner;
+        private class InternalTarget : Target
+        {
+            private readonly GateTravelSpell m_Owner;
 
-				owner.Caster.LocalOverheadMessage( MessageType.Regular, 0x3B2, 501029 ); // Select Marked item.
-			}
+            public InternalTarget(GateTravelSpell owner) : base(12, false, TargetFlags.None)
+            {
+                m_Owner = owner;
 
-			protected override void OnTarget( Mobile from, object o )
-			{
-				if ( o is RecallRune )
-				{
-					RecallRune rune = (RecallRune)o;
+                owner.Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 501029); // Select Marked item.
+            }
 
-					if ( rune.Marked )
-						m_Owner.Effect( rune.Target, rune.TargetMap, true );
-					else
-						from.SendLocalizedMessage( 501803 ); // That rune is not yet marked.
-				}
-				else if ( o is Runebook )
-				{
-					RunebookEntry e = ((Runebook)o).Default;
+            protected override void OnTarget(Mobile from, object o)
+            {
+                if (o is RecallRune)
+                {
+                    var rune = (RecallRune) o;
 
-					if ( e != null )
-						m_Owner.Effect( e.Location, e.Map, true );
-					else
-						from.SendLocalizedMessage( 502354 ); // Target is not marked.
-				}
-				else if ( o is Key && ((Key)o).KeyValue != 0 && ((Key)o).Link is BaseBoat )
-				{
-					BaseBoat boat = ((Key)o).Link as BaseBoat;
+                    if (rune.Marked)
+                        m_Owner.Effect(rune.Target, rune.TargetMap, true);
+                    else
+                        from.SendLocalizedMessage(501803); // That rune is not yet marked.
+                }
+                else if (o is Runebook)
+                {
+                    var e = ((Runebook) o).Default;
 
-					if ( !boat.Deleted && boat.CheckKey( ((Key)o).KeyValue ) )
-						m_Owner.Effect( boat.GetMarkedLocation(), boat.Map, false );
-					else
-						from.Send( new MessageLocalized( from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030, from.Name, "" ) ); // I can not gate travel from that object.
-				}
-				else
-				{
-					from.Send( new MessageLocalized( from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030, from.Name, "" ) ); // I can not gate travel from that object.
-				}
-			}
+                    if (e != null)
+                        m_Owner.Effect(e.Location, e.Map, true);
+                    else
+                        from.SendLocalizedMessage(502354); // Target is not marked.
+                }
+                else if (o is Key && ((Key) o).KeyValue != 0 && ((Key) o).Link is BaseBoat)
+                {
+                    var boat = ((Key) o).Link as BaseBoat;
 
-			protected override void OnNonlocalTarget( Mobile from, object o )
-			{
-			}
+                    if (!boat.Deleted && boat.CheckKey(((Key) o).KeyValue))
+                        m_Owner.Effect(boat.GetMarkedLocation(), boat.Map, false);
+                    else
+                        from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030,
+                            from.Name, "")); // I can not gate travel from that object.
+                }
+                else
+                {
+                    from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030,
+                        from.Name, "")); // I can not gate travel from that object.
+                }
+            }
 
-			protected override void OnTargetFinish( Mobile from )
-			{
-				m_Owner.FinishSequence();
-			}
-		}
-	}
+            protected override void OnNonlocalTarget(Mobile from, object o)
+            {
+            }
+
+            protected override void OnTargetFinish(Mobile from)
+            {
+                m_Owner.FinishSequence();
+            }
+        }
+    }
 }

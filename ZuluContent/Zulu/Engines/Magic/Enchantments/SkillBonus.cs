@@ -3,44 +3,45 @@ using System.Collections.Generic;
 using MessagePack;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
     public class FirstSkillBonus : SkillBonus
     {
-        
     }
-    
+
     [MessagePackObject]
     public class SecondSkillBonus : SkillBonus
     {
         // Only first skill has an affix
-        [IgnoreMember] 
-        public override string AffixName => string.Empty;
+        [IgnoreMember] public override string AffixName => string.Empty;
     }
-    
-    
+
+
     public abstract class SkillBonus : Enchantment<SkillBonusInfo>
     {
-        [IgnoreMember]
-        public override string AffixName => SkillBonusInfo.GetName(Skill, Value, Cursed);
-        [Key(1)]
-        public SkillName Skill { get; set; } = SkillName.Alchemy;
-        [Key(2)]
-        public double Value { get; set; } = 0;
-        
+        [IgnoreMember] public override string AffixName => SkillBonusInfo.GetName(Skill, Value, Cursed);
+        [Key(1)] public SkillName Skill { get; set; } = SkillName.Alchemy;
+        [Key(2)] public double Value { get; set; } = 0;
+
         private SkillMod m_Mod;
 
-        public override void OnAdded(Item item, Mobile mobile)
+        public override void OnAdded(IEntity entity)
         {
-            m_Mod = new DefaultSkillMod(Skill, true, Value);
-            
-            mobile.AddSkillMod(m_Mod);
+            if (entity is Item item && item.Parent is Mobile mobile)
+            {
+                m_Mod = new DefaultSkillMod(Skill, true, Value);
+                mobile.AddSkillMod(m_Mod);
+            }
         }
 
-        public override void OnRemoved(Item item, Mobile mobile)
+        public override void OnRemoved(IEntity entity)
         {
-            mobile.RemoveSkillMod(m_Mod);
+            if (entity is Item item && item.Parent is Mobile mobile)
+            {
+                mobile.RemoveSkillMod(m_Mod);
+            }
         }
     }
 
@@ -51,7 +52,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
         public override string[,] Names { get; protected set; } = DefaultSkillNames;
-        
+
         public static string GetName(SkillName name, double value, bool cursed)
         {
             var n = value > 6 ? (int) value / 5 : (int) value;

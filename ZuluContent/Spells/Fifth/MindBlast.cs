@@ -3,130 +3,105 @@ using Server.Targeting;
 namespace Server.Spells.Fifth
 {
     public class MindBlastSpell : MagerySpell
-	{
-		private static SpellInfo m_Info = new SpellInfo(
-				"Mind Blast", "Por Corp Wis",
-				218,
-				9032,
-				Reagent.BlackPearl,
-				Reagent.MandrakeRoot,
-				Reagent.Nightshade,
-				Reagent.SulfurousAsh
-			);
+    {
+        public MindBlastSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        {
+        }
 
-		public override SpellCircle Circle { get { return SpellCircle.Eighth; } }
-		public override SpellInfo GetSpellInfo() => m_Info;
 
-		public MindBlastSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
-		{
-		}
+        public override bool DelayedDamage
+        {
+            get { return true; }
+        }
 
-		public override void OnCast()
-		{
-			Caster.Target = new InternalTarget( this );
-		}
 
-		private void AosDelay_Callback( object state )
-		{
-			object[] states = (object[])state;
-			Mobile caster = (Mobile)states[0];
-			Mobile target = (Mobile)states[1];
-			Mobile defender = (Mobile)states[2];
-			int damage = (int)states[3];
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
+        }
 
-			if ( caster.HarmfulCheck( defender ) )
-			{
-				SpellHelper.Damage( this, target, Utility.RandomMinMax( damage, damage + 4 ), 0, 0, 100, 0, 0 );
+        public void Target(Mobile m)
+        {
+            if (!Caster.CanSee(m))
+            {
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+            }
+            else if (CheckHSequence(m))
+            {
+                Mobile from = Caster, target = m;
 
-				target.FixedParticles( 0x374A, 10, 15, 5038, 1181, 2, EffectLayer.Head );
-				target.PlaySound( 0x213 );
-			}
-		}
+                SpellHelper.Turn(from, target);
 
-		public override bool DelayedDamage{ get{ return true; } }
+                SpellHelper.CheckReflect((int) Circle, ref from, ref target);
 
-		public void Target( Mobile m )
-		{
-			if ( !Caster.CanSee( m ) )
-			{
-				Caster.SendLocalizedMessage( 500237 ); // Target can not be seen.
-			}
-			else if ( CheckHSequence( m ) )
-			{
-				Mobile from = Caster, target = m;
+                // Algorithm: (highestStat - lowestStat) / 2 [- 50% if resisted]
 
-				SpellHelper.Turn( from, target );
+                int highestStat = target.Str, lowestStat = target.Str;
 
-				SpellHelper.CheckReflect( (int)Circle, ref from, ref target );
+                if (target.Dex > highestStat)
+                    highestStat = target.Dex;
 
-				// Algorithm: (highestStat - lowestStat) / 2 [- 50% if resisted]
+                if (target.Dex < lowestStat)
+                    lowestStat = target.Dex;
 
-				int highestStat = target.Str, lowestStat = target.Str;
+                if (target.Int > highestStat)
+                    highestStat = target.Int;
 
-				if ( target.Dex > highestStat )
-					highestStat = target.Dex;
+                if (target.Int < lowestStat)
+                    lowestStat = target.Int;
 
-				if ( target.Dex < lowestStat )
-					lowestStat = target.Dex;
+                if (highestStat > 150)
+                    highestStat = 150;
 
-				if ( target.Int > highestStat )
-					highestStat = target.Int;
+                if (lowestStat > 150)
+                    lowestStat = 150;
 
-				if ( target.Int < lowestStat )
-					lowestStat = target.Int;
+                var damage = GetDamageScalar(m) * (highestStat - lowestStat) / 4; //less damage
 
-				if ( highestStat > 150 )
-					highestStat = 150;
+                if (damage > 45)
+                    damage = 45;
 
-				if ( lowestStat > 150 ) 
-					lowestStat = 150;
+                if (CheckResisted(target))
+                {
+                    damage /= 2;
+                    target.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
+                }
 
-				double damage = GetDamageScalar(m)*(highestStat - lowestStat) / 4;//less damage
-				
-				if ( damage > 45 )
-					damage = 45;
+                from.FixedParticles(0x374A, 10, 15, 2038, EffectLayer.Head);
 
-				if ( CheckResisted( target ) )
-				{
-					damage /= 2;
-					target.SendLocalizedMessage( 501783 ); // You feel yourself resisting magical energy.
-				}
+                target.FixedParticles(0x374A, 10, 15, 5038, EffectLayer.Head);
+                target.PlaySound(0x213);
 
-				from.FixedParticles( 0x374A, 10, 15, 2038, EffectLayer.Head );
+                SpellHelper.Damage(damage, target, Caster, this);
+            }
 
-				target.FixedParticles( 0x374A, 10, 15, 5038, EffectLayer.Head );
-				target.PlaySound( 0x213 );
+            FinishSequence();
+        }
 
-				SpellHelper.Damage( this, target, damage, 0, 0, 100, 0, 0 );
-			}
+        public override double GetSlayerDamageScalar(Mobile target)
+        {
+            return 1.0; //This spell isn't affected by slayer spellbooks
+        }
 
-			FinishSequence();
-		}
+        private class InternalTarget : Target
+        {
+            private readonly MindBlastSpell m_Owner;
 
-		public override double GetSlayerDamageScalar( Mobile target )
-		{
-			return 1.0; //This spell isn't affected by slayer spellbooks
-		}
+            public InternalTarget(MindBlastSpell owner) : base(12, false, TargetFlags.Harmful)
+            {
+                m_Owner = owner;
+            }
 
-		private class InternalTarget : Target
-		{
-			private MindBlastSpell m_Owner;
+            protected override void OnTarget(Mobile from, object o)
+            {
+                if (o is Mobile)
+                    m_Owner.Target((Mobile) o);
+            }
 
-			public InternalTarget( MindBlastSpell owner ) : base( 12, false, TargetFlags.Harmful )
-			{
-				m_Owner = owner;
-			}
-
-			protected override void OnTarget( Mobile from, object o )
-			{
-				if ( o is Mobile )
-					m_Owner.Target( (Mobile)o );
-			}
-
-			protected override void OnTargetFinish( Mobile from )
-			{
-				m_Owner.FinishSequence();
-			}
-		}
-	}
+            protected override void OnTargetFinish(Mobile from)
+            {
+                m_Owner.FinishSequence();
+            }
+        }
+    }
 }

@@ -16,7 +16,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)] 
         public MagicalWeaponType Value { get; set; } = MagicalWeaponType.None;
 
-        public override void OnGetDelay(ref TimeSpan delay, Mobile m)
+        public override void OnGetSwingDelay(ref double delay, Mobile m)
         {
             var percentage = Value switch
             {
@@ -25,11 +25,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 _ => 0.0
             };
 
-            var reduction = delay.TotalMilliseconds * percentage;
             
-            m.SendMessage($"Decreasing Swing delay by {reduction} ms");
+            m.SendMessage($"Decreasing Swing delay by {delay * percentage} ms");
+            delay *= percentage;
 
-            delay = delay.Subtract(TimeSpan.FromMilliseconds(reduction));
         }
     }
 

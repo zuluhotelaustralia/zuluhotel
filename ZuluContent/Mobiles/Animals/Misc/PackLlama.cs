@@ -94,7 +94,7 @@ public PackLlama( Serial serial ) : base( serial )
 			return base.OnDragDrop( from, item );
 		}
 
-		public override bool CheckNonlocalDrop( Mobile from, Item item, Item target )
+        public override bool CheckNonlocalDrop( Mobile from, Item item, Item target )
 		{
 			return PackAnimal.CheckAccess( this, from );
 		}

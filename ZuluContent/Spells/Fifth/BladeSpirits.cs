@@ -5,96 +5,84 @@ using Server.Targeting;
 namespace Server.Spells.Fifth
 {
     public class BladeSpiritsSpell : MagerySpell
-	{
-		private static SpellInfo m_Info = new SpellInfo(
-				"Blade Spirits", "In Jux Hur Ylem", 
-				266,
-				9040,
-				false,
-				Reagent.BlackPearl,
-				Reagent.MandrakeRoot,
-				Reagent.Nightshade
-			);
+    {
+        public BladeSpiritsSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        {
+        }
 
-		public override SpellCircle Circle { get { return SpellCircle.Eighth; } }
-		public override SpellInfo GetSpellInfo() => m_Info;
 
-		public BladeSpiritsSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
-		{
-		}
+        public override TimeSpan GetCastDelay()
+        {
+            return base.GetCastDelay() + TimeSpan.FromSeconds(6.0);
+        }
 
-		public override TimeSpan GetCastDelay()
-		{
-			return base.GetCastDelay() + TimeSpan.FromSeconds( 6.0 );
-		}
+        public override bool CheckCast()
+        {
+            if (!base.CheckCast())
+                return false;
 
-		public override bool CheckCast()
-		{
-			if ( !base.CheckCast() )
-				return false;
+            if (Caster.Followers + 1 > Caster.FollowersMax)
+            {
+                Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
+                return false;
+            }
 
-			if( Caster.Followers + 1 > Caster.FollowersMax )
-			{
-				Caster.SendLocalizedMessage( 1049645 ); // You have too many followers to summon that creature.
-				return false;
-			}
+            return true;
+        }
 
-			return true;
-		}
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
+        }
 
-		public override void OnCast()
-		{
-			Caster.Target = new InternalTarget( this );
-		}
+        public void Target(IPoint3D p)
+        {
+            var map = Caster.Map;
 
-		public void Target( IPoint3D p )
-		{
-			Map map = Caster.Map;
+            SpellHelper.GetSurfaceTop(ref p);
 
-			SpellHelper.GetSurfaceTop( ref p );
+            if (map == null || !map.CanSpawnMobile(p.X, p.Y, p.Z))
+            {
+                Caster.SendLocalizedMessage(501942); // That location is blocked.
+            }
+            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
+            {
+                var duration = TimeSpan.FromSeconds(Utility.Random(80, 40));
 
-			if ( map == null || !map.CanSpawnMobile( p.X, p.Y, p.Z ) )
-			{
-				Caster.SendLocalizedMessage( 501942 ); // That location is blocked.
-			}
-			else if ( SpellHelper.CheckTown( p, Caster ) && CheckSequence() )
-			{
-				TimeSpan duration = TimeSpan.FromSeconds( Utility.Random( 80, 40 ) );
+                BaseCreature.Summon(new BladeSpirit(), false, Caster, new Point3D(p), 0x212, duration);
+            }
 
-				BaseCreature.Summon( new BladeSpirit(), false, Caster, new Point3D( p ), 0x212, duration );
-			}
+            FinishSequence();
+        }
 
-			FinishSequence();
-		}
+        private class InternalTarget : Target
+        {
+            private BladeSpiritsSpell m_Owner;
 
-		private class InternalTarget : Target
-		{
-			private BladeSpiritsSpell m_Owner;
+            public InternalTarget(BladeSpiritsSpell owner) : base(12, true, TargetFlags.None)
+            {
+                m_Owner = owner;
+            }
 
-			public InternalTarget( BladeSpiritsSpell owner ) : base( 12, true, TargetFlags.None )
-			{
-				m_Owner = owner;
-			}
+            protected override void OnTarget(Mobile from, object o)
+            {
+                if (o is IPoint3D)
+                    m_Owner.Target((IPoint3D) o);
+            }
 
-			protected override void OnTarget( Mobile from, object o )
-			{
-				if ( o is IPoint3D )
-					m_Owner.Target( (IPoint3D)o );
-			}
+            protected override void OnTargetOutOfLOS(Mobile from, object o)
+            {
+                from.SendLocalizedMessage(501943); // Target cannot be seen. Try again.
+                from.Target = new InternalTarget(m_Owner);
+                from.Target.BeginTimeout(from, TimeoutTime - DateTime.Now);
+                m_Owner = null;
+            }
 
-			protected override void OnTargetOutOfLOS( Mobile from, object o )
-			{
-				from.SendLocalizedMessage( 501943 ); // Target cannot be seen. Try again.
-				from.Target = new InternalTarget( m_Owner );
-				from.Target.BeginTimeout( from, TimeoutTime - DateTime.Now );
-				m_Owner = null;
-			}
-
-			protected override void OnTargetFinish( Mobile from )
-			{
-				if ( m_Owner != null )
-					m_Owner.FinishSequence();
-			}
-		}
-	}
+            protected override void OnTargetFinish(Mobile from)
+            {
+                if (m_Owner != null)
+                    m_Owner.FinishSequence();
+            }
+        }
+    }
 }

@@ -1,4 +1,6 @@
+using System.Linq;
 using Server.Network;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
@@ -44,8 +46,7 @@ namespace Server.Items
 
 		public override int OnHit( BaseWeapon weapon, int damage )
 		{
-			Mobile owner = Parent as Mobile;
-			if( owner == null )
+            if( !(Parent is Mobile owner) )
 				return damage;
 
 			double ar = ArmorRating;
@@ -107,7 +108,7 @@ namespace Server.Items
 				}
 			}
 
-			return damage;
+            return damage;
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Server.Items
 
 
         [Constructible]
-        public FlamestrikeScroll(int amount) : base(50, 0x1F5F, amount)
+        public FlamestrikeScroll(int amount) : base(Spells.SpellEntry.FlameStrike, 0x1F5F, amount)
         {
         }
 
@@ -22,14 +22,14 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

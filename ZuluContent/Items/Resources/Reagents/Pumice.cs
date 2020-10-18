@@ -1,25 +1,22 @@
-using System;
-
 namespace Server.Items
 {
     public class Pumice : BaseReagent
     {
-
         [Constructible]
-public Pumice()
+        public Pumice()
             : this(1)
         {
         }
 
 
         [Constructible]
-public Pumice(int amount)
+        public Pumice(int amount)
             : base(0xF8B, amount)
         {
         }
 
         [Constructible]
-public Pumice(Serial serial)
+        public Pumice(Serial serial)
             : base(serial)
         {
         }
@@ -28,18 +25,19 @@ public Pumice(Serial serial)
         {
             get { return 0.1; }
         }
+
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

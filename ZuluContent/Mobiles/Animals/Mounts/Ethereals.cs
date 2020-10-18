@@ -17,7 +17,7 @@ namespace Server.Mobiles
 
 
         [Constructible]
-public EtherealMount(int itemID, int mountID)
+        public EtherealMount(int itemID, int mountID)
             : base(itemID)
         {
             m_MountedID = mountID;
@@ -62,7 +62,7 @@ public EtherealMount(int itemID, int mountID)
         }
 
         [Constructible]
-public EtherealMount(Serial serial)
+        public EtherealMount(Serial serial)
             : base(serial)
         {
         }
@@ -273,15 +273,13 @@ public EtherealMount(Serial serial)
         {
         }
 
-        private class EtherealSpell : Spell
+        public class EtherealSpell : Spell
         {
-            private static SpellInfo m_Info = new SpellInfo("Ethereal Mount", "", 230);
-
             private EtherealMount m_Mount;
             private Mobile m_Rider;
 
             public EtherealSpell(EtherealMount mount, Mobile rider)
-                : base(rider, null, m_Info)
+                : base(rider, null)
             {
                 m_Rider = rider;
                 m_Mount = mount;
@@ -291,9 +289,6 @@ public EtherealMount(Serial serial)
             {
                 get { return false; }
             }
-
-            public override SpellCircle Circle { get; } = SpellCircle.System;
-            public override SpellInfo GetSpellInfo() => m_Info;
 
             public override bool RevealOnCast
             {

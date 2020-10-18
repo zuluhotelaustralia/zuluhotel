@@ -1,23 +1,20 @@
 using System;
-using Server;
-using Server.Items;
 using Server.Spells;
 
 namespace Server.Items
 {
     public class BagOfReagents : Bag
     {
-
         [Constructible]
-public BagOfReagents() : this(50)
+        public BagOfReagents() : this(50)
         {
         }
 
 
         [Constructible]
-public BagOfReagents(int amount)
+        public BagOfReagents(int amount)
         {
-            foreach(var t in Reagent.Types)
+            foreach (var t in Reagent.Types)
             {
                 var reg = (BaseReagent) Activator.CreateInstance(t);
                 if (reg != null)
@@ -29,7 +26,7 @@ public BagOfReagents(int amount)
         }
 
         [Constructible]
-public BagOfReagents(Serial serial) : base(serial)
+        public BagOfReagents(Serial serial) : base(serial)
         {
         }
 
@@ -37,14 +34,14 @@ public BagOfReagents(Serial serial) : base(serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

@@ -11,12 +11,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName => EnchantmentInfo.GetName(Value);
         [Key(1)] 
         public int Value { get; set; } = 0;
-
-        [CallPriority(1)]
-        public override void OnIdentified(Item item)
-        {
-            base.OnIdentified(item);
-        }
+        
     }
     public class HealingBonusInfo : EnchantmentInfo
     {

@@ -4,49 +4,36 @@ using Server.Mobiles;
 namespace Server.Spells.Eighth
 {
     public class SummonDaemonSpell : MagerySpell
-	{
-		public override SpellInfo GetSpellInfo() => m_Info;
-		private static SpellInfo m_Info = new SpellInfo(
-				"Summon Daemon", "Kal Vas Xen Corp",
-				269,
-				9050,
-				false,
-				Reagent.Bloodmoss,
-				Reagent.MandrakeRoot,
-				Reagent.SpidersSilk,
-				Reagent.SulfurousAsh
-			);
+    {
+        public SummonDaemonSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        {
+        }
 
-		public override SpellCircle Circle { get { return SpellCircle.Eighth; } }
 
-		public SummonDaemonSpell( Mobile caster, Item scroll ) : base( caster, scroll, m_Info )
-		{
-		}
+        public override bool CheckCast()
+        {
+            if (!base.CheckCast())
+                return false;
 
-		public override bool CheckCast()
-		{
-			if ( !base.CheckCast() )
-				return false;
+            if (Caster.Followers + 5 > Caster.FollowersMax)
+            {
+                Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
+                return false;
+            }
 
-			if ( Caster.Followers + 5 > Caster.FollowersMax )
-			{
-				Caster.SendLocalizedMessage( 1049645 ); // You have too many followers to summon that creature.
-				return false;
-			}
+            return true;
+        }
 
-			return true;
-		}
+        public override void OnCast()
+        {
+            if (CheckSequence())
+            {
+                var duration = TimeSpan.FromSeconds(2 * Caster.Skills.Magery.Fixed / 5);
 
-		public override void OnCast()
-		{
-			if ( CheckSequence() )
-			{	
-				TimeSpan duration = TimeSpan.FromSeconds( 2 * Caster.Skills.Magery.Fixed / 5 );
+                SpellHelper.Summon(new Daemon(), Caster, 0x216, duration, false, false);
+            }
 
-				SpellHelper.Summon( new Daemon(), Caster, 0x216, duration, false, false );
-			}
-
-			FinishSequence();
-		}
-	}
+            FinishSequence();
+        }
+    }
 }

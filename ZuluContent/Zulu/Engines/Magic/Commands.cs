@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Server;
 using Server.Items;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Scripts.Zulu.Engines.Magic
@@ -12,7 +13,7 @@ namespace Scripts.Zulu.Engines.Magic
         public static void Initialize()
         {
             CommandSystem.Register("TestMagicMod", AccessLevel.Developer, TestMagicMod_OnCommand);
-            CommandSystem.Register("TestAttributeMod", AccessLevel.Developer, TestAttributeMod_OnCommand);
+            CommandSystem.Register("TestConvertSpells", AccessLevel.Developer, TestConvertSpells_OnCommand);
         }
 
         public static void TestMagicMod_OnCommand(CommandEventArgs e)
@@ -46,13 +47,9 @@ namespace Scripts.Zulu.Engines.Magic
             }
         }
 
-        public static void TestAttributeMod_OnCommand(CommandEventArgs e)
+        public static void TestConvertSpells_OnCommand(CommandEventArgs e)
         {
-            var item = new Halberd();
             
-
-
-
         }
     }
 }

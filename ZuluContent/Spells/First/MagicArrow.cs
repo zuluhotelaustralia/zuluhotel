@@ -4,37 +4,25 @@ namespace Server.Spells.First
 {
     public class MagicArrowSpell : MagerySpell
     {
-        public override SpellInfo GetSpellInfo() => m_Info;
-
-        private static SpellInfo m_Info = new SpellInfo(
-            "Magic Arrow", "In Por Ylem",
-            212,
-            9041,
-            Reagent.SulfurousAsh
-        );
-
-        public override SpellCircle Circle
-        {
-            get { return SpellCircle.First; }
-        }
-
-        public MagicArrowSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
+        public MagicArrowSpell(Mobile caster, Item scroll) : base(caster, scroll)
         {
         }
+
 
         public override bool DelayedDamageStacking
         {
             get { return true; }
         }
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
         public override bool DelayedDamage
         {
             get { return true; }
+        }
+
+
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
         }
 
         public void Target(Mobile m)
@@ -45,7 +33,7 @@ namespace Server.Spells.First
             }
             else if (CheckHSequence(m))
             {
-                Mobile source = Caster;
+                var source = Caster;
 
                 SpellHelper.Turn(source, m);
 
@@ -65,7 +53,7 @@ namespace Server.Spells.First
                 source.MovingParticles(m, 0x36E4, 5, 0, false, false, 3006, 0, 0);
                 source.PlaySound(0x1E5);
 
-                SpellHelper.Damage(this, m, damage, 0, 100, 0, 0, 0);
+                SpellHelper.Damage(damage, m, Caster, this);
             }
 
             FinishSequence();
@@ -73,7 +61,7 @@ namespace Server.Spells.First
 
         private class InternalTarget : Target
         {
-            private MagicArrowSpell m_Owner;
+            private readonly MagicArrowSpell m_Owner;
 
             public InternalTarget(MagicArrowSpell owner) : base(12, false, TargetFlags.Harmful)
             {
@@ -82,10 +70,7 @@ namespace Server.Spells.First
 
             protected override void OnTarget(Mobile from, object o)
             {
-                if (o is Mobile)
-                {
-                    m_Owner.Target((Mobile) o);
-                }
+                if (o is Mobile) m_Owner.Target((Mobile) o);
             }
 
             protected override void OnTargetFinish(Mobile from)

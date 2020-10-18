@@ -1,25 +1,22 @@
-using System;
-
 namespace Server.Items
 {
     public class VialOfBlood : BaseReagent
     {
-
         [Constructible]
-public VialOfBlood()
+        public VialOfBlood()
             : this(1)
         {
         }
 
 
         [Constructible]
-public VialOfBlood(int amount)
+        public VialOfBlood(int amount)
             : base(0xF7D, amount)
         {
         }
 
         [Constructible]
-public VialOfBlood(Serial serial)
+        public VialOfBlood(Serial serial)
             : base(serial)
         {
         }
@@ -33,14 +30,14 @@ public VialOfBlood(Serial serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

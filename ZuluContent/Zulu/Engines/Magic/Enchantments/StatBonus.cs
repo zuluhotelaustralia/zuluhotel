@@ -22,7 +22,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
 
-        public override string[,] Names { get; protected set; } = new[,]
+        public override string[,] Names { get; protected set; } =
         {
             {string.Empty, string.Empty},
             {"Apprentice's", "Fool's"},
@@ -49,7 +49,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
 
-        public override string[,] Names { get; protected set; } = new[,]
+        public override string[,] Names { get; protected set; } =
         {
             {string.Empty, string.Empty},
             {"Cutpurse's", "Heavy"},
@@ -77,7 +77,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
 
-        public override string[,] Names { get; protected set; } = new[,]
+        public override string[,] Names { get; protected set; } =
         {
             {string.Empty, string.Empty},
             {"Warrior's", "Weakling's"},
@@ -131,20 +131,26 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             mobile.AddStatMod(Mod);
         }
 
-        public override void OnAdded(Item item, Mobile mobile)
+        public override void OnAdded(IEntity entity)
         {
-            Item = item;
-            Mobile = mobile;
-            AddStatMod(item, mobile);
+            if (entity is Item item && item.Parent is Mobile mobile)
+            {
+                Item = item;
+                Mobile = mobile;
+                AddStatMod(item, mobile);
+            }
         }
 
-        public override void OnRemoved(Item item, Mobile mobile)
+        public override void OnRemoved(IEntity entity)
         {
-            Item = null;
-            Mobile = null;
-            
-            if(Mod != null)
-                mobile.RemoveStatMod(Mod.Name);
+            if (entity is Item item && item.Parent is Mobile mobile)
+            {
+                Item = null;
+                Mobile = null;
+
+                if (Mod != null)
+                    mobile.RemoveStatMod(Mod.Name);
+            }
         }
     }
 }

@@ -22,22 +22,11 @@ namespace Server.Items
 
     public class Spellbook : Item, ICraftable, ISlayer
     {
-        private string m_EngravedText;
-        private BookQuality m_Quality;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public string EngravedText { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public string EngravedText
-        {
-            get { return m_EngravedText; }
-            set { m_EngravedText = value; }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public BookQuality Quality
-        {
-            get { return m_Quality; }
-            set { m_Quality = value; }
-        }
+        public BookQuality Quality { get; set; }
 
         public static void Initialize()
         {
@@ -57,10 +46,8 @@ namespace Server.Items
 
         private static void AllSpells_OnTarget(Mobile from, object obj)
         {
-            if (obj is Spellbook)
+            if (obj is Spellbook book)
             {
-                Spellbook book = (Spellbook) obj;
-
                 if (book.BookCount == 64)
                     book.Content = ulong.MaxValue;
                 else
@@ -80,21 +67,19 @@ namespace Server.Items
 
         private static void EventSink_OpenSpellbookRequest(Mobile from, int i)
         {
-
-            Find(from, -1, SpellbookType.Regular).DisplayTo(from);
+            Find(from, SpellEntry.None, SpellbookType.Regular).DisplayTo(from);
         }
 
-        private static void EventSink_CastSpellRequest(Mobile from, int spellID, Item item)
+        private static void EventSink_CastSpellRequest(Mobile from, int id, Item item)
         {
+            var spellId = (SpellEntry) id;
 
-            Spellbook book = item as Spellbook;
+            if (!(item is Spellbook book) || !book.HasSpell(spellId))
+                book = Find(from, spellId);
 
-            if (book == null || !book.HasSpell(spellID))
-                book = Find(from, spellID);
-
-            if (book != null && book.HasSpell(spellID))
+            if (book != null && book.HasSpell(spellId))
             {
-                Spell spell = SpellRegistry.Create(spellID, from, null);
+                var spell = SpellRegistry.Create(spellId, from, null);
 
                 if (spell != null)
                     spell.Cast();
@@ -107,56 +92,56 @@ namespace Server.Items
             }
         }
 
-        private static Dictionary<Mobile, List<Spellbook>> m_Table = new Dictionary<Mobile, List<Spellbook>>();
+        private static readonly Dictionary<Mobile, List<Spellbook>> Table = new Dictionary<Mobile, List<Spellbook>>();
 
-        public static SpellbookType GetTypeForSpell(int spellID)
+        public static SpellbookType GetTypeForSpell(SpellEntry spellId)
         {
-            if (spellID >= 0 && spellID < 64)
+            if ((int)spellId >= 0 && (int)spellId < 64)
                 return SpellbookType.Regular;
 
             return SpellbookType.Invalid;
         }
 
-        public static Spellbook Find(Mobile from, int spellID)
+        public static Spellbook Find(Mobile from, SpellEntry spellId)
         {
-            return Find(from, spellID, GetTypeForSpell(spellID));
+            return Find(from, spellId, GetTypeForSpell(spellId));
         }
 
-        public static Spellbook Find(Mobile from, int spellID, SpellbookType type)
+        public static Spellbook Find(Mobile from, SpellEntry spellId, SpellbookType type)
         {
             if (from == null)
                 return null;
 
             if (from.Deleted)
             {
-                m_Table.Remove(from);
+                Table.Remove(from);
                 return null;
             }
 
             List<Spellbook> list = null;
 
-            m_Table.TryGetValue(from, out list);
+            Table.TryGetValue(from, out list);
 
             bool searchAgain = false;
 
             if (list == null)
-                m_Table[from] = list = FindAllSpellbooks(from);
+                Table[from] = list = FindAllSpellbooks(from);
             else
                 searchAgain = true;
 
-            Spellbook book = FindSpellbookInList(list, from, spellID, type);
+            Spellbook book = FindSpellbookInList(list, from, spellId, type);
 
             if (book == null && searchAgain)
             {
-                m_Table[from] = list = FindAllSpellbooks(from);
+                Table[from] = list = FindAllSpellbooks(from);
 
-                book = FindSpellbookInList(list, from, spellID, type);
+                book = FindSpellbookInList(list, from, spellId, type);
             }
 
             return book;
         }
 
-        public static Spellbook FindSpellbookInList(List<Spellbook> list, Mobile from, int spellID, SpellbookType type)
+        public static Spellbook FindSpellbookInList(List<Spellbook> list, Mobile from, SpellEntry spellId, SpellbookType type)
         {
             Container pack = from.Backpack;
 
@@ -168,7 +153,7 @@ namespace Server.Items
                 Spellbook book = list[i];
 
                 if (!book.Deleted && (book.Parent == from || pack != null && book.Parent == pack) &&
-                    ValidateSpellbook(book, spellID, type))
+                    ValidateSpellbook(book, spellId, type))
                     return book;
 
                 list.RemoveAt(i);
@@ -207,9 +192,9 @@ namespace Server.Items
             return @from.FindItemOnLayer(Layer.OneHanded) as Spellbook;
         }
 
-        public static bool ValidateSpellbook(Spellbook book, int spellID, SpellbookType type)
+        public static bool ValidateSpellbook(Spellbook book, SpellEntry spellId, SpellbookType type)
         {
-            return book.SpellbookType == type && (spellID == -1 || book.HasSpell(spellID));
+            return book.SpellbookType == type && (spellId == SpellEntry.None || book.HasSpell(spellId));
         }
 
         public override bool DisplayWeight
@@ -233,7 +218,6 @@ namespace Server.Items
         }
 
         private ulong m_Content;
-        private int m_Count;
 
         public override bool CanEquip(Mobile from)
         {
@@ -252,29 +236,27 @@ namespace Server.Items
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (dropped is SpellScroll && dropped.Amount == 1)
+            if (dropped is SpellScroll scroll && scroll.Amount == 1)
             {
-                SpellScroll scroll = (SpellScroll) dropped;
-
-                SpellbookType type = GetTypeForSpell(scroll.SpellId);
+                SpellbookType type = GetTypeForSpell(scroll.SpellEntry);
 
                 if (type != SpellbookType)
                 {
                     return false;
                 }
-                else if (HasSpell(scroll.SpellId))
+                else if (HasSpell(scroll.SpellEntry))
                 {
                     from.SendLocalizedMessage(500179); // That spell is already present in that spellbook.
                     return false;
                 }
                 else
                 {
-                    int val = scroll.SpellId - BookOffset;
+                    int val = (int)scroll.SpellEntry - BookOffset;
 
                     if (val >= 0 && val < BookCount)
                     {
                         m_Content |= (ulong) 1 << val;
-                        ++m_Count;
+                        ++SpellCount;
 
                         scroll.Delete();
 
@@ -301,11 +283,11 @@ namespace Server.Items
                 {
                     m_Content = value;
 
-                    m_Count = 0;
+                    SpellCount = 0;
 
                     while (value > 0)
                     {
-                        m_Count += (int) (value & 0x1);
+                        SpellCount += (int) (value & 0x1);
                         value >>= 1;
                     }
                 }
@@ -313,25 +295,22 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int SpellCount
-        {
-            get { return m_Count; }
-        }
+        public int SpellCount { get; private set; }
 
 
         [Constructible]
-public Spellbook() : this((ulong) 0)
+        public Spellbook() : this((ulong) 0)
         {
         }
 
 
         [Constructible]
-public Spellbook(ulong content) : this(content, 0xEFA)
+        public Spellbook(ulong content) : this(content, 0xEFA)
         {
         }
 
         [Constructible]
-public Spellbook(ulong content, int itemID) : base(itemID)
+        public Spellbook(ulong content, int itemId) : base(itemId)
         {
             Weight = 3.0;
             Layer = Layer.OneHanded;
@@ -340,15 +319,15 @@ public Spellbook(ulong content, int itemID) : base(itemID)
             Content = content;
         }
 
-        public bool HasSpell(int spellID)
+        public bool HasSpell(SpellEntry spellId)
         {
-            spellID -= BookOffset;
+            spellId -= BookOffset;
 
-            return spellID >= 0 && spellID < BookCount && (m_Content & ((ulong) 1 << spellID)) != 0;
+            return spellId >= 0 && (int)spellId < BookCount && (m_Content & ((ulong) 1 << (int)spellId)) != 0;
         }
 
         [Constructible]
-public Spellbook(Serial serial) : base(serial)
+        public Spellbook(Serial serial) : base(serial)
         {
         }
 
@@ -385,9 +364,9 @@ public Spellbook(Serial serial) : base(serial)
                 to.Send(new DisplaySpellbook(Serial));
 
             if (ns.ContainerGridLines)
-              to.Send(new SpellbookContent6017(Serial, BookOffset + 1, m_Content));
+                to.Send(new SpellbookContent6017(Serial, BookOffset + 1, m_Content));
             else
-              to.Send(new SpellbookContent(Serial, BookOffset + 1, m_Content));
+                to.Send(new SpellbookContent(Serial, BookOffset + 1, m_Content));
         }
 
         private Mobile m_Crafter;
@@ -411,7 +390,7 @@ public Spellbook(Serial serial) : base(serial)
             if (m_Crafter != null)
                 LabelTo(from, 1050043, m_Crafter.Name); // crafted by ~1_NAME~
 
-            LabelTo(from, 1042886, m_Count.ToString());
+            LabelTo(from, 1042886, SpellCount.ToString());
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -426,24 +405,13 @@ public Spellbook(Serial serial) : base(serial)
         }
 
 
-        private SlayerName m_Slayer;
-
-        private SlayerName m_Slayer2;
         //Currently though there are no dual slayer spellbooks, OSI has a habit of putting dual slayer stuff in later
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer
-        {
-            get { return m_Slayer; }
-            set { m_Slayer = value; }
-        }
+        public SlayerName Slayer { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer2
-        {
-            get { return m_Slayer2; }
-            set { m_Slayer2 = value; }
-        }
+        public SlayerName Slayer2 { get; set; }
 
         public override void Serialize(IGenericWriter writer)
         {
@@ -451,17 +419,17 @@ public Spellbook(Serial serial) : base(serial)
 
             writer.Write((int) 5); // version
 
-            writer.Write((byte) m_Quality);
+            writer.Write((byte) Quality);
 
-            writer.Write((string) m_EngravedText);
+            writer.Write((string) EngravedText);
 
             writer.Write(m_Crafter);
 
-            writer.Write((int) m_Slayer);
-            writer.Write((int) m_Slayer2);
+            writer.Write((int) Slayer);
+            writer.Write((int) Slayer2);
 
             writer.Write(m_Content);
-            writer.Write(m_Count);
+            writer.Write(SpellCount);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -474,13 +442,13 @@ public Spellbook(Serial serial) : base(serial)
             {
                 case 5:
                 {
-                    m_Quality = (BookQuality) reader.ReadByte();
+                    Quality = (BookQuality) reader.ReadByte();
 
                     goto case 4;
                 }
                 case 4:
                 {
-                    m_EngravedText = reader.ReadString();
+                    EngravedText = reader.ReadString();
 
                     goto case 3;
                 }
@@ -491,15 +459,15 @@ public Spellbook(Serial serial) : base(serial)
                 }
                 case 2:
                 {
-                    m_Slayer = (SlayerName) reader.ReadInt();
-                    m_Slayer2 = (SlayerName) reader.ReadInt();
+                    Slayer = (SlayerName) reader.ReadInt();
+                    Slayer2 = (SlayerName) reader.ReadInt();
                     goto case 1;
                 }
                 case 1:
                 case 0:
                 {
                     m_Content = reader.ReadULong();
-                    m_Count = reader.ReadInt();
+                    SpellCount = reader.ReadInt();
 
                     break;
                 }
@@ -509,43 +477,6 @@ public Spellbook(Serial serial) : base(serial)
                 ((Mobile) Parent).CheckStatTimers();
         }
 
-        private static int[] m_LegendPropertyCounts = new[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 properties : 21/52 : 40%
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 1 property   : 15/52 : 29%
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, // 2 properties : 10/52 : 19%
-            3, 3, 3, 3, 3, 3 // 3 properties :  6/52 : 12%
-        };
-
-        private static int[] m_ElderPropertyCounts = new[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 properties : 15/34 : 44%
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, // 1 property   : 10/34 : 29%
-            2, 2, 2, 2, 2, 2, // 2 properties :  6/34 : 18%
-            3, 3, 3 // 3 properties :  3/34 :  9%
-        };
-
-        private static int[] m_GrandPropertyCounts = new[]
-        {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 0 properties : 10/20 : 50%
-            1, 1, 1, 1, 1, 1, // 1 property   :  6/20 : 30%
-            2, 2, 2, // 2 properties :  3/20 : 15%
-            3 // 3 properties :  1/20 :  5%
-        };
-
-        private static int[] m_MasterPropertyCounts = new[]
-        {
-            0, 0, 0, 0, 0, 0, // 0 properties : 6/10 : 60%
-            1, 1, 1, // 1 property   : 3/10 : 30%
-            2 // 2 properties : 1/10 : 10%
-        };
-
-        private static int[] m_AdeptPropertyCounts = new[]
-        {
-            0, 0, 0, // 0 properties : 3/4 : 75%
-            1 // 1 property   : 1/4 : 25%
-        };
-
         public bool PlayerConstructed { get; set; }
 
         public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
@@ -554,8 +485,8 @@ public Spellbook(Serial serial) : base(serial)
             if (makersMark)
                 Crafter = from;
 
-            m_Quality = (BookQuality) (quality - 1);
-            
+            Quality = (BookQuality) (quality - 1);
+
             return quality;
         }
     }

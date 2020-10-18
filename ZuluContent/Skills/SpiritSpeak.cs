@@ -60,18 +60,9 @@ namespace Server.SkillHandlers
             }
         }
 
-        private class SpiritSpeakSpell : Spell
+        public class SpiritSpeakSpell : Spell
         {
-            private static SpellInfo m_Info = new SpellInfo("Spirit Speak", "", 269);
-
-            public override SpellCircle Circle
-            {
-                get { return SpellCircle.System; }
-            }
-
-            public override SpellInfo GetSpellInfo() => m_Info;
-
-            public SpiritSpeakSpell(Mobile caster) : base(caster, null, m_Info)
+            public SpiritSpeakSpell(Mobile caster) : base(caster, null)
             {
             }
 

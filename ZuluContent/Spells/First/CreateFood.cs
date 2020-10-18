@@ -5,24 +5,6 @@ namespace Server.Spells.First
 {
     public class CreateFoodSpell : MagerySpell
     {
-        public override SpellInfo GetSpellInfo() => m_Info;
-
-        private static SpellInfo m_Info = new SpellInfo(
-            "Create Food", 
-            "In Mani Ylem",
-            224,
-            9011,
-            Reagent.Garlic,
-            Reagent.Ginseng,
-            Reagent.MandrakeRoot
-        );
-
-        public override SpellCircle Circle => SpellCircle.First;
-
-        public CreateFoodSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
-        {
-        }
-
         private static readonly FoodInfo[] Food =
         {
             new FoodInfo(typeof(Grapes), "a grape bunch"),
@@ -36,6 +18,11 @@ namespace Server.Spells.First
             new FoodInfo(typeof(Apple), "an apple"),
             new FoodInfo(typeof(Peach), "a peach")
         };
+
+        public CreateFoodSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        {
+        }
+
 
         public override void OnCast()
         {
@@ -62,15 +49,15 @@ namespace Server.Spells.First
 
     public class FoodInfo
     {
-        public Type Type { get; set; }
-
-        public string Name { get; set; }
-
         public FoodInfo(Type type, string name)
         {
             Type = type;
             Name = name;
         }
+
+        public Type Type { get; set; }
+
+        public string Name { get; set; }
 
         public Item Create()
         {

@@ -1,20 +1,15 @@
-using System;
-using Server;
-using Server.Items;
-
 namespace Server.Items
 {
     public class BagOfNecroReagents : Bag
     {
-
         [Constructible]
-public BagOfNecroReagents() : this(50)
+        public BagOfNecroReagents() : this(50)
         {
         }
 
 
         [Constructible]
-public BagOfNecroReagents(int amount)
+        public BagOfNecroReagents(int amount)
         {
             DropItem(new BatWing(amount));
             //DropItem( new GraveDust  ( amount ) );
@@ -24,7 +19,7 @@ public BagOfNecroReagents(int amount)
         }
 
         [Constructible]
-public BagOfNecroReagents(Serial serial) : base(serial)
+        public BagOfNecroReagents(Serial serial) : base(serial)
         {
         }
 
@@ -32,14 +27,14 @@ public BagOfNecroReagents(Serial serial) : base(serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

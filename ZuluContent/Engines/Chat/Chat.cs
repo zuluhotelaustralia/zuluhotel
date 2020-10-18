@@ -7,15 +7,9 @@ namespace Server.Engines.Chat
 {
     public class ChatSystem
 	{
-		private static bool m_Enabled = true;
+        public static bool Enabled { get; set; } = false;
 
-		public static bool Enabled
-		{
-			get{ return m_Enabled; }
-			set{ m_Enabled = value; }
-		}
-
-		public static void Initialize()
+        public static void Initialize()
 		{
 			PacketHandlers.Register( 0xB5, 0x40, true, OpenChatWindowRequest );
 			PacketHandlers.Register( 0xB3, 0, true, ChatAction );
@@ -41,7 +35,7 @@ namespace Server.Engines.Chat
 		{
 			Mobile from = state.Mobile;
 
-			if ( !m_Enabled )
+			if ( !Enabled )
 			{
 				from.SendMessage( "The chat system has been disabled." );
 				return;
@@ -123,7 +117,7 @@ namespace Server.Engines.Chat
 
 		public static void ChatAction( NetState state, PacketReader pvSrc )
 		{
-			if ( !m_Enabled )
+			if ( !Enabled )
 				return;
 
 			try

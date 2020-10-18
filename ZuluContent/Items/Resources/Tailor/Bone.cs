@@ -1,41 +1,39 @@
 namespace Server.Items
 {
-    public class Bone : Item
-	{
-
-		[Constructible]
-public Bone() : this( 1 )
-		{
-		}
-
-
-		[Constructible]
-public Bone( int amount ) : base( 0xf7e )
-		{
-			Stackable = true;
-			Amount = amount;
-			Weight = 1.0;
-		}
-
-		[Constructible]
-public Bone( Serial serial ) : base( serial )
-		{
-		}
+    public class Bone : BaseReagent
+    {
+        [Constructible]
+        public Bone() : this(1)
+        {
+        }
 
 
+        [Constructible]
+        public Bone(int amount) : base(0xf7e)
+        {
+            Stackable = true;
+            Amount = amount;
+            Weight = 1.0;
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        [Constructible]
+        public Bone(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }
