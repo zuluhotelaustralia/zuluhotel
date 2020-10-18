@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -14,64 +11,66 @@ namespace Server.Mobiles
 {
     public class PoisonElemental : BaseCreature
     {
-        static PoisonElemental() => CreatureProperties.Register<PoisonElemental>(new CreatureProperties
+        static PoisonElemental()
         {
-            // DataElementId = poisonelemental,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = poisonelemental,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // Hitscript = :combat:poisonhit /* Weapon */,
-            // HitSound = 0x1D5 /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 46,
-            // MagicItemChance = 50,
-            // MagicItemLevel = 4,
-            // MissSound = 0x239 /* Weapon */,
-            // script = killpcs,
-            // speech = 7,
-            // Speed = 35 /* Weapon */,
-            // TrueColor = 0x07d6,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Melee /* killpcs */,
-            AlwaysMurderer = true,
-            Body = 0x0d,
-            CorpseNameOverride = "corpse of a poison elemental",
-            CreatureType = CreatureType.Elemental,
-            DamageMax = 50,
-            DamageMin = 25,
-            Dex = 160,
-            Female = false,
-            FightMode = FightMode.Aggressor,
-            FightRange = 1,
-            HitPoison = Poison.Deadly,
-            HitsMax = 350,
-            Hue = 0x07d6,
-            Int = 350,
-            ManaMaxSeed = 200,
-            Name = "a poison elemental",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            ProvokeSkillOverride = 120,
-            Resistances = new Dictionary<ElementalType, CreatureProp>
+            CreatureProperties.Register<PoisonElemental>(new CreatureProperties
             {
-                { ElementalType.Poison, 10 },
-            },
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.Tactics, 100 },
-                { SkillName.Macing, 200 },
-                { SkillName.MagicResist, 70 },
-            },
-            StamMaxSeed = 50,
-            Str = 350,
-            VirtualArmor = 40,
-
-        });
+                // DataElementId = poisonelemental,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = poisonelemental,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // Hitscript = :combat:poisonhit /* Weapon */,
+                // HitSound = 0x1D5 /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 46,
+                // MagicItemChance = 50,
+                // MagicItemLevel = 4,
+                // MissSound = 0x239 /* Weapon */,
+                // script = killpcs,
+                // speech = 7,
+                // Speed = 35 /* Weapon */,
+                // TrueColor = 0x07d6,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Melee /* killpcs */,
+                AlwaysMurderer = true,
+                Body = 0x0d,
+                CorpseNameOverride = "corpse of a poison elemental",
+                CreatureType = CreatureType.Elemental,
+                DamageMax = 50,
+                DamageMin = 25,
+                Dex = 160,
+                Female = false,
+                FightMode = FightMode.Aggressor,
+                FightRange = 1,
+                HitPoison = Poison.Deadly,
+                HitsMax = 350,
+                Hue = 0x07d6,
+                Int = 350,
+                ManaMaxSeed = 200,
+                Name = "a poison elemental",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                ProvokeSkillOverride = 120,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Poison, 10}
+                },
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Tactics, 100},
+                    {SkillName.Macing, 200},
+                    {SkillName.MagicResist, 70}
+                },
+                StamMaxSeed = 50,
+                Str = 350,
+                VirtualArmor = 40
+            });
+        }
 
 
         [Constructible]
-public PoisonElemental() : base(CreatureProperties.Get<PoisonElemental>())
+        public PoisonElemental() : base(CreatureProperties.Get<PoisonElemental>())
         {
             // Add customization here
 
@@ -83,15 +82,14 @@ public PoisonElemental() : base(CreatureProperties.Get<PoisonElemental>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x1D5,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public PoisonElemental(Serial serial) : base(serial) {}
-
+        public PoisonElemental(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -103,7 +101,7 @@ public PoisonElemental(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

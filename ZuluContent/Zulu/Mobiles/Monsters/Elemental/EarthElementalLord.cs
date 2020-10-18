@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -14,56 +11,58 @@ namespace Server.Mobiles
 {
     public class EarthElementalLord : BaseCreature
     {
-        static EarthElementalLord() => CreatureProperties.Register<EarthElementalLord>(new CreatureProperties
+        static EarthElementalLord()
         {
-            // CProp_EarthProtection = i8,
-            // DataElementId = earthelementallord,
-            // DataElementType = NpcTemplate,
-            // Equip = earthelementallord,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // HitSound = 0x10F /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 74,
-            // MagicItemChance = 60,
-            // MagicItemLevel = 4,
-            // MissSound = 0x239 /* Weapon */,
-            // script = killpcs,
-            // Speed = 35 /* Weapon */,
-            // TrueColor = 1538,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Melee /* killpcs */,
-            AlwaysMurderer = true,
-            Body = 0x0e,
-            CorpseNameOverride = "corpse of an earth elemental lord",
-            CreatureType = CreatureType.Elemental,
-            DamageMax = 45,
-            DamageMin = 21,
-            Dex = 150,
-            Female = false,
-            FightMode = FightMode.Aggressor,
-            FightRange = 1,
-            HitsMax = 450,
-            Hue = 1538,
-            Int = 55,
-            ManaMaxSeed = 0,
-            Name = "an earth elemental lord",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            Skills = new Dictionary<SkillName, CreatureProp>
+            CreatureProperties.Register<EarthElementalLord>(new CreatureProperties
             {
-                { SkillName.Tactics, 150 },
-                { SkillName.Macing, 175 },
-                { SkillName.MagicResist, 65 },
-            },
-            StamMaxSeed = 200,
-            Str = 450,
-            VirtualArmor = 50,
-
-        });
+                // CProp_EarthProtection = i8,
+                // DataElementId = earthelementallord,
+                // DataElementType = NpcTemplate,
+                // Equip = earthelementallord,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // HitSound = 0x10F /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 74,
+                // MagicItemChance = 60,
+                // MagicItemLevel = 4,
+                // MissSound = 0x239 /* Weapon */,
+                // script = killpcs,
+                // Speed = 35 /* Weapon */,
+                // TrueColor = 1538,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Melee /* killpcs */,
+                AlwaysMurderer = true,
+                Body = 0x0e,
+                CorpseNameOverride = "corpse of an earth elemental lord",
+                CreatureType = CreatureType.Elemental,
+                DamageMax = 45,
+                DamageMin = 21,
+                Dex = 150,
+                Female = false,
+                FightMode = FightMode.Aggressor,
+                FightRange = 1,
+                HitsMax = 450,
+                Hue = 1538,
+                Int = 55,
+                ManaMaxSeed = 0,
+                Name = "an earth elemental lord",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Tactics, 150},
+                    {SkillName.Macing, 175},
+                    {SkillName.MagicResist, 65}
+                },
+                StamMaxSeed = 200,
+                Str = 450,
+                VirtualArmor = 50
+            });
+        }
 
 
         [Constructible]
-public EarthElementalLord() : base(CreatureProperties.Get<EarthElementalLord>())
+        public EarthElementalLord() : base(CreatureProperties.Get<EarthElementalLord>())
         {
             // Add customization here
 
@@ -75,15 +74,14 @@ public EarthElementalLord() : base(CreatureProperties.Get<EarthElementalLord>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x10F,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public EarthElementalLord(Serial serial) : base(serial) {}
-
+        public EarthElementalLord(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -95,7 +93,7 @@ public EarthElementalLord(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -16,93 +13,95 @@ namespace Server.Mobiles
 {
     public class ElfLord : BaseCreature
     {
-        static ElfLord() => CreatureProperties.Register<ElfLord>(new CreatureProperties
+        static ElfLord()
         {
-            // cast_pct = 50,
-            // count_casts = 0,
-            // CProp_Elf = i1,
-            // CProp_leavecorpse = i1,
-            // CProp_looter = s1,
-            // CProp_NecroProtection = i4,
-            // CProp_noanimate = i1,
-            // CProp_NoReactiveArmour = i1,
-            // CProp_PermMagicImmunity = i6,
-            // DataElementId = elflord,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = elflord,
-            // Graphic = 0x13F9 /* Weapon */,
-            // Hitscript = :combat:customanim /* Weapon */,
-            // HitSound = 0x27 /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 136,
-            // MagicItemChance = 60,
-            // MagicItemLevel = 5,
-            // MissSound = 0x26 /* Weapon */,
-            // mount = 0x3e9f 1176,
-            // num_casts = 5,
-            // script = elfspellkillpcs,
-            // Speed = 30 /* Weapon */,
-            // spell = shiftingearth,
-            // spell_0 = gustofair,
-            // spell_1 = calllightning,
-            // spell_2 = flamestrike,
-            // spell_3 = summonelf,
-            // spell_4 = icestrike,
-            // Swordsmanship = 110,
-            // TrueColor = 0x0302,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Mage /* elfspellkillpcs */,
-            Body = 0x190,
-            ClassLevel = 2,
-            ClassSpec = SpecName.Mage,
-            CorpseNameOverride = "corpse of an Elf Lord",
-            CreatureType = CreatureType.Human,
-            DamageMax = 61,
-            DamageMin = 31,
-            Dex = 195,
-            Female = true,
-            FightMode = FightMode.Closest,
-            FightRange = 12,
-            HitsMax = 1500,
-            Hue = 0x0302,
-            InitialInnocent = true,
-            Int = 1500,
-            ManaMaxSeed = 1500,
-            Name = "an Elf Lord",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            PreferredSpells = new List<Type>
+            CreatureProperties.Register<ElfLord>(new CreatureProperties
             {
-                typeof(ShiftingEarthSpell),
-                typeof(GustOfAirSpell),
-                typeof(CallLightningSpell),
-                typeof(IceStrikeSpell),
-            },
-            ProvokeSkillOverride = 140,
-            Resistances = new Dictionary<ElementalType, CreatureProp>
-            {
-                { ElementalType.Energy, 50 },
-                { ElementalType.Cold, 50 },
-                { ElementalType.Poison, 100 },
-            },
-            SaySpellMantra = true,
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.Macing, 150 },
-                { SkillName.Tactics, 75 },
-                { SkillName.MagicResist, 150 },
-                { SkillName.Magery, 200 },
-                { SkillName.DetectHidden, 100 },
-            },
-            StamMaxSeed = 195,
-            Str = 700,
-
-        });
+                // cast_pct = 50,
+                // count_casts = 0,
+                // CProp_Elf = i1,
+                // CProp_leavecorpse = i1,
+                // CProp_looter = s1,
+                // CProp_NecroProtection = i4,
+                // CProp_noanimate = i1,
+                // CProp_NoReactiveArmour = i1,
+                // CProp_PermMagicImmunity = i6,
+                // DataElementId = elflord,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = elflord,
+                // Graphic = 0x13F9 /* Weapon */,
+                // Hitscript = :combat:customanim /* Weapon */,
+                // HitSound = 0x27 /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 136,
+                // MagicItemChance = 60,
+                // MagicItemLevel = 5,
+                // MissSound = 0x26 /* Weapon */,
+                // mount = 0x3e9f 1176,
+                // num_casts = 5,
+                // script = elfspellkillpcs,
+                // Speed = 30 /* Weapon */,
+                // spell = shiftingearth,
+                // spell_0 = gustofair,
+                // spell_1 = calllightning,
+                // spell_2 = flamestrike,
+                // spell_3 = summonelf,
+                // spell_4 = icestrike,
+                // Swordsmanship = 110,
+                // TrueColor = 0x0302,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Mage /* elfspellkillpcs */,
+                Body = 0x190,
+                ClassLevel = 2,
+                ClassSpec = SpecName.Mage,
+                CorpseNameOverride = "corpse of an Elf Lord",
+                CreatureType = CreatureType.Human,
+                DamageMax = 61,
+                DamageMin = 31,
+                Dex = 195,
+                Female = true,
+                FightMode = FightMode.Closest,
+                FightRange = 12,
+                HitsMax = 1500,
+                Hue = 0x0302,
+                InitialInnocent = true,
+                Int = 1500,
+                ManaMaxSeed = 1500,
+                Name = "an Elf Lord",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                PreferredSpells = new List<Type>
+                {
+                    typeof(ShiftingEarthSpell),
+                    typeof(GustOfAirSpell),
+                    typeof(CallLightningSpell),
+                    typeof(IceStrikeSpell)
+                },
+                ProvokeSkillOverride = 140,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Air, 50},
+                    {ElementalType.Water, 50},
+                    {ElementalType.Poison, 100}
+                },
+                SaySpellMantra = true,
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Macing, 150},
+                    {SkillName.Tactics, 75},
+                    {SkillName.MagicResist, 150},
+                    {SkillName.Magery, 200},
+                    {SkillName.DetectHidden, 100}
+                },
+                StamMaxSeed = 195,
+                Str = 700
+            });
+        }
 
 
         [Constructible]
-public ElfLord() : base(CreatureProperties.Get<ElfLord>())
+        public ElfLord() : base(CreatureProperties.Get<ElfLord>())
         {
             // Add customization here
 
@@ -117,7 +116,7 @@ public ElfLord() : base(CreatureProperties.Get<ElfLord>())
                 HitSound = 0x27,
                 MissSound = 0x26,
                 MaxRange = 12,
-                Animation = (WeaponAnimation)0xC,
+                Animation = (WeaponAnimation) 0xC
             });
 
             AddItem(new PlateChest
@@ -127,7 +126,7 @@ public ElfLord() : base(CreatureProperties.Get<ElfLord>())
                 Name = "Elven Breastplate",
                 BaseArmorRating = 80,
                 MaxHitPoints = 110,
-                HitPoints = 110,
+                HitPoints = 110
             });
 
             AddItem(new PlateLegs
@@ -137,15 +136,14 @@ public ElfLord() : base(CreatureProperties.Get<ElfLord>())
                 Name = "Long pants",
                 BaseArmorRating = 70,
                 MaxHitPoints = 110,
-                HitPoints = 110,
+                HitPoints = 110
             });
-
-
         }
 
         [Constructible]
-public ElfLord(Serial serial) : base(serial) {}
-
+        public ElfLord(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -157,7 +155,7 @@ public ElfLord(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

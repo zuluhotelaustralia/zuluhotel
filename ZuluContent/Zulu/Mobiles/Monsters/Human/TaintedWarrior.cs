@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -17,64 +14,66 @@ namespace Server.Mobiles
 {
     public class TaintedWarrior : BaseCreature
     {
-        static TaintedWarrior() => CreatureProperties.Register<TaintedWarrior>(new CreatureProperties
+        static TaintedWarrior()
         {
-            // CProp_FinalDeath = i1,
-            // DataElementId = taintedwarrior1,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = taintedwarrior1,
-            // Graphic = 0x143E /* Weapon */,
-            // Hitscript = :combat:blindingscript /* Weapon */,
-            // HitSound = 0x238 /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 131,
-            // MagicItemChance = 50,
-            // Magicitemlevel = 4,
-            // MissSound = 0x233 /* Weapon */,
-            // script = killpcs,
-            // Speed = 40 /* Weapon */,
-            // Swordsmanship = 140,
-            // TrueColor = 1302,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Melee /* killpcs */,
-            AlwaysMurderer = true,
-            Body = 0x22A,
-            ClassLevel = 3,
-            ClassSpec = SpecName.Warrior,
-            CorpseNameOverride = "corpse of <random> the Tainted Warrior",
-            CreatureType = CreatureType.Human,
-            DamageMax = 65,
-            DamageMin = 33,
-            Dex = 250,
-            Female = false,
-            FightMode = FightMode.Aggressor,
-            FightRange = 1,
-            HitsMax = 400,
-            Hue = 1302,
-            Int = 200,
-            ManaMaxSeed = 100,
-            Name = "<random> the Tainted Warrior",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            RiseCreatureDelay = TimeSpan.FromSeconds(2),
-            RiseCreatureType = typeof(EvisceratedCarcass),
-            Skills = new Dictionary<SkillName, CreatureProp>
+            CreatureProperties.Register<TaintedWarrior>(new CreatureProperties
             {
-                { SkillName.Tactics, 120 },
-                { SkillName.MagicResist, 100 },
-            },
-            StamMaxSeed = 50,
-            Str = 400,
-            VirtualArmor = 50,
-            WeaponAbility = new SpellStrike<DarknessSpell>(),
-            WeaponAbilityChance = 1.0,
-
-        });
+                // CProp_FinalDeath = i1,
+                // DataElementId = taintedwarrior1,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = taintedwarrior1,
+                // Graphic = 0x143E /* Weapon */,
+                // Hitscript = :combat:blindingscript /* Weapon */,
+                // HitSound = 0x238 /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 131,
+                // MagicItemChance = 50,
+                // Magicitemlevel = 4,
+                // MissSound = 0x233 /* Weapon */,
+                // script = killpcs,
+                // Speed = 40 /* Weapon */,
+                // Swordsmanship = 140,
+                // TrueColor = 1302,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Melee /* killpcs */,
+                AlwaysMurderer = true,
+                Body = 0x22A,
+                ClassLevel = 3,
+                ClassSpec = SpecName.Warrior,
+                CorpseNameOverride = "corpse of <random> the Tainted Warrior",
+                CreatureType = CreatureType.Human,
+                DamageMax = 65,
+                DamageMin = 33,
+                Dex = 250,
+                Female = false,
+                FightMode = FightMode.Aggressor,
+                FightRange = 1,
+                HitsMax = 400,
+                Hue = 1302,
+                Int = 200,
+                ManaMaxSeed = 100,
+                Name = "<random> the Tainted Warrior",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                RiseCreatureDelay = TimeSpan.FromSeconds(2),
+                RiseCreatureType = typeof(EvisceratedCarcass),
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Tactics, 120},
+                    {SkillName.MagicResist, 100}
+                },
+                StamMaxSeed = 50,
+                Str = 400,
+                VirtualArmor = 50,
+                WeaponAbility = new SpellStrike<DarknessSpell>(),
+                WeaponAbilityChance = 1.0
+            });
+        }
 
 
         [Constructible]
-public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
+        public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
         {
             // Add customization here
 
@@ -87,9 +86,9 @@ public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
                 Skill = SkillName.Swords,
                 MaxHitPoints = 250,
                 HitPoints = 250,
-                Animation = (WeaponAnimation)0xC,
+                Animation = (WeaponAnimation) 0xC,
                 HitSound = 0x238,
-                MissSound = 0x233,
+                MissSound = 0x233
             });
 
             AddItem(new BoneHelm
@@ -99,7 +98,7 @@ public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
                 Hue = 1302,
                 BaseArmorRating = 1,
                 MaxHitPoints = 500,
-                HitPoints = 500,
+                HitPoints = 500
             });
 
             AddItem(new BoneGloves
@@ -109,7 +108,7 @@ public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
                 Hue = 1302,
                 BaseArmorRating = 1,
                 MaxHitPoints = 500,
-                HitPoints = 500,
+                HitPoints = 500
             });
 
             AddItem(new BoneLegs
@@ -119,7 +118,7 @@ public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
                 Hue = 1302,
                 BaseArmorRating = 1,
                 MaxHitPoints = 500,
-                HitPoints = 500,
+                HitPoints = 500
             });
 
             AddItem(new BoneChest
@@ -129,15 +128,14 @@ public TaintedWarrior() : base(CreatureProperties.Get<TaintedWarrior>())
                 Hue = 1302,
                 BaseArmorRating = 1,
                 MaxHitPoints = 300,
-                HitPoints = 300,
+                HitPoints = 300
             });
-
-
         }
 
         [Constructible]
-public TaintedWarrior(Serial serial) : base(serial) {}
-
+        public TaintedWarrior(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -149,7 +147,7 @@ public TaintedWarrior(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

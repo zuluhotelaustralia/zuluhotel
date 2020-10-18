@@ -488,12 +488,10 @@ namespace Server.Items
 
             var stamina = Math.Clamp(m.Stam, 0, m.Dex);
             var delayInSeconds = 15000.0 / ((stamina + 100) * speed);
-            delayInSeconds = Math.Clamp(delayInSeconds, minDelay, 7.0);
-
-            m.FireHook(h => h.OnGetSwingDelay(ref delayInSeconds, m));
-            var result = TimeSpan.FromSeconds(delayInSeconds);
             
-            return result;
+            m.FireHook(h => h.OnGetSwingDelay(ref delayInSeconds, m));
+            
+            return TimeSpan.FromSeconds(Math.Clamp(delayInSeconds, minDelay, 7.0));
         }
 
         public virtual void OnBeforeSwing(Mobile attacker, Mobile defender)
@@ -600,7 +598,6 @@ namespace Server.Items
             {
                 damage = armor.OnHit(this, damage);
 
-                // ReSharper disable once AccessToModifiedClosure
                 defender.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
             }
 
@@ -627,7 +624,6 @@ namespace Server.Items
                 damage -= Utility.Random(from, to - from + 1);
             }
 
-            // ReSharper disable once AccessToModifiedClosure
             defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
 
             return damage;

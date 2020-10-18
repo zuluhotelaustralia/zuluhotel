@@ -8,9 +8,8 @@ namespace Server.Mobiles
     [TypeAlias("Server.Mobiles.Seaserpant")]
     public class SeaSerpent : BaseCreature
     {
-
         [Constructible]
-public SeaSerpent() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
+        public SeaSerpent() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "a sea serpent";
             Body = 150;
@@ -52,27 +51,41 @@ public SeaSerpent() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
             AddLoot(LootPack.Meager);
         }
 
-        public override bool HasBreath { get { return true; } }
-        public override int TreasureMapLevel { get { return 2; } }
+        public override bool HasBreath
+        {
+            get { return true; }
+        }
 
-        public override int Hides { get { return 10; } }
-        public override HideType HideType { get { return HideType.Serpent; } }
+        public override int TreasureMapLevel
+        {
+            get { return 2; }
+        }
+
+        public override int Hides
+        {
+            get { return 10; }
+        }
+
+        public override HideType HideType
+        {
+            get { return HideType.Serpent; }
+        }
 
         [Constructible]
-public SeaSerpent(Serial serial) : base(serial)
+        public SeaSerpent(Serial serial) : base(serial)
         {
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int)0);
+            writer.Write((int) 0);
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

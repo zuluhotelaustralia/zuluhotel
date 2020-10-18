@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -14,63 +11,65 @@ namespace Server.Mobiles
 {
     public class OrcishLord : BaseCreature
     {
-        static OrcishLord() => CreatureProperties.Register<OrcishLord>(new CreatureProperties
+        static OrcishLord()
         {
-            // CProp_EarthProtection = i3,
-            // DataElementId = orc_lord,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = orc_lord,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // HitSound = 0x23D /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 42,
-            // MagicItemChance = 6,
-            // Magicitemlevel = 3,
-            // MissSound = 0x239 /* Weapon */,
-            // script = killpcs,
-            // speech = 6,
-            // Speed = 55 /* Weapon */,
-            // Swordsmanship = 120,
-            // TrueColor = 33784,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Melee /* killpcs */,
-            AlwaysMurderer = true,
-            Body = 0X07,
-            CorpseNameOverride = "corpse of <random> the Orcish Lord",
-            CreatureType = CreatureType.Orc,
-            DamageMax = 64,
-            DamageMin = 8,
-            Dex = 90,
-            Female = false,
-            FightMode = FightMode.Aggressor,
-            FightRange = 1,
-            HitsMax = 205,
-            Hue = 33784,
-            Int = 30,
-            ManaMaxSeed = 0,
-            Name = "<random> the Orcish Lord",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            ProvokeSkillOverride = 90,
-            Resistances = new Dictionary<ElementalType, CreatureProp>
+            CreatureProperties.Register<OrcishLord>(new CreatureProperties
             {
-                { ElementalType.Fire, 75 },
-            },
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.Tactics, 100 },
-                { SkillName.MagicResist, 80 },
-            },
-            StamMaxSeed = 80,
-            Str = 205,
-            VirtualArmor = 25,
-
-        });
+                // CProp_EarthProtection = i3,
+                // DataElementId = orc_lord,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = orc_lord,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // HitSound = 0x23D /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 42,
+                // MagicItemChance = 6,
+                // Magicitemlevel = 3,
+                // MissSound = 0x239 /* Weapon */,
+                // script = killpcs,
+                // speech = 6,
+                // Speed = 55 /* Weapon */,
+                // Swordsmanship = 120,
+                // TrueColor = 33784,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Melee /* killpcs */,
+                AlwaysMurderer = true,
+                Body = 0X07,
+                CorpseNameOverride = "corpse of <random> the Orcish Lord",
+                CreatureType = CreatureType.Orc,
+                DamageMax = 64,
+                DamageMin = 8,
+                Dex = 90,
+                Female = false,
+                FightMode = FightMode.Aggressor,
+                FightRange = 1,
+                HitsMax = 205,
+                Hue = 33784,
+                Int = 30,
+                ManaMaxSeed = 0,
+                Name = "<random> the Orcish Lord",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                ProvokeSkillOverride = 90,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Fire, 75}
+                },
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Tactics, 100},
+                    {SkillName.MagicResist, 80}
+                },
+                StamMaxSeed = 80,
+                Str = 205,
+                VirtualArmor = 25
+            });
+        }
 
 
         [Constructible]
-public OrcishLord() : base(CreatureProperties.Get<OrcishLord>())
+        public OrcishLord() : base(CreatureProperties.Get<OrcishLord>())
         {
             // Add customization here
 
@@ -83,15 +82,14 @@ public OrcishLord() : base(CreatureProperties.Get<OrcishLord>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x23D,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public OrcishLord(Serial serial) : base(serial) {}
-
+        public OrcishLord(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -103,7 +101,7 @@ public OrcishLord(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

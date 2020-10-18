@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -17,74 +14,76 @@ namespace Server.Mobiles
 {
     public class MindFlayer : BaseCreature
     {
-        static MindFlayer() => CreatureProperties.Register<MindFlayer>(new CreatureProperties
+        static MindFlayer()
         {
-            // CProp_NecroProtection = i8,
-            // CProp_PermMagicImmunity = i8,
-            // DataElementId = mindflayer,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = mindflayer,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // HitScript = :combat:spellstrikescript /* Weapon */,
-            // HitSound = 0x0214 /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 35,
-            // MagicItemChance = 90,
-            // MagicItemChance_0 = 65,
-            // Magicitemlevel = 6,
-            // MagicItemLevel_0 = 6,
-            // MissSound = 0x239 /* Weapon */,
-            // script = killpcsTeleporter,
-            // speech = 35,
-            // Speed = 60 /* Weapon */,
-            // TrueColor = 2222,
-            // virtue = 4,
-            AiType = AIType.AI_Melee /* killpcsTeleporter */,
-            AlwaysMurderer = true,
-            BardImmune = true,
-            Body = 0x18,
-            ClassLevel = 6,
-            ClassSpec = SpecName.Warrior,
-            CorpseNameOverride = "corpse of a Mind Flayer",
-            CreatureType = CreatureType.Daemon,
-            DamageMax = 50,
-            DamageMin = 14,
-            Dex = 310,
-            Female = false,
-            FightMode = FightMode.Aggressor,
-            FightRange = 6,
-            HitsMax = 1200,
-            Hue = 2222,
-            Int = 2750,
-            ManaMaxSeed = 2750,
-            Name = "a Mind Flayer",
-            PerceptionRange = 10,
-            Resistances = new Dictionary<ElementalType, CreatureProp>
+            CreatureProperties.Register<MindFlayer>(new CreatureProperties
             {
-                { ElementalType.Poison, 100 },
-            },
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.Magery, 375 },
-                { SkillName.MagicResist, 150 },
-                { SkillName.Tactics, 150 },
-                { SkillName.Macing, 150 },
-                { SkillName.DetectHidden, 200 },
-            },
-            StamMaxSeed = 50,
-            Str = 1200,
-            Tamable = false,
-            TargetAcquireExhaustion = true,
-            VirtualArmor = 60,
-            WeaponAbility = new SpellStrike<ControlUndeadSpell>(),
-            WeaponAbilityChance = 1,
-
-        });
+                // CProp_NecroProtection = i8,
+                // CProp_PermMagicImmunity = i8,
+                // DataElementId = mindflayer,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = mindflayer,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // HitScript = :combat:spellstrikescript /* Weapon */,
+                // HitSound = 0x0214 /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 35,
+                // MagicItemChance = 90,
+                // MagicItemChance_0 = 65,
+                // Magicitemlevel = 6,
+                // MagicItemLevel_0 = 6,
+                // MissSound = 0x239 /* Weapon */,
+                // script = killpcsTeleporter,
+                // speech = 35,
+                // Speed = 60 /* Weapon */,
+                // TrueColor = 2222,
+                // virtue = 4,
+                AiType = AIType.AI_Melee /* killpcsTeleporter */,
+                AlwaysMurderer = true,
+                BardImmune = true,
+                Body = 0x18,
+                ClassLevel = 6,
+                ClassSpec = SpecName.Warrior,
+                CorpseNameOverride = "corpse of a Mind Flayer",
+                CreatureType = CreatureType.Daemon,
+                DamageMax = 50,
+                DamageMin = 14,
+                Dex = 310,
+                Female = false,
+                FightMode = FightMode.Aggressor,
+                FightRange = 6,
+                HitsMax = 1200,
+                Hue = 2222,
+                Int = 2750,
+                ManaMaxSeed = 2750,
+                Name = "a Mind Flayer",
+                PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Poison, 100}
+                },
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Magery, 375},
+                    {SkillName.MagicResist, 150},
+                    {SkillName.Tactics, 150},
+                    {SkillName.Macing, 150},
+                    {SkillName.DetectHidden, 200}
+                },
+                StamMaxSeed = 50,
+                Str = 1200,
+                Tamable = false,
+                TargetAcquireExhaustion = true,
+                VirtualArmor = 60,
+                WeaponAbility = new SpellStrike<ControlUndeadSpell>(),
+                WeaponAbilityChance = 1
+            });
+        }
 
 
         [Constructible]
-public MindFlayer() : base(CreatureProperties.Get<MindFlayer>())
+        public MindFlayer() : base(CreatureProperties.Get<MindFlayer>())
         {
             // Add customization here
 
@@ -96,15 +95,14 @@ public MindFlayer() : base(CreatureProperties.Get<MindFlayer>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x0214,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public MindFlayer(Serial serial) : base(serial) {}
-
+        public MindFlayer(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -116,7 +114,7 @@ public MindFlayer(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

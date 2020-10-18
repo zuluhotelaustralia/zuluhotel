@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -14,81 +11,83 @@ namespace Server.Mobiles
 {
     public class WaterElemental : BaseCreature
     {
-        static WaterElemental() => CreatureProperties.Register<WaterElemental>(new CreatureProperties
+        static WaterElemental()
         {
-            // cast_pct = 30,
-            // CProp_nocorpse = i1,
-            // DataElementId = waterelemental,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = waterelemental,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // HitSound = 0x119 /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 20,
-            // MagicItemChance = 25,
-            // MagicItemLevel = 3,
-            // MissSound = 0x239 /* Weapon */,
-            // num_casts = 10,
-            // script = spellkillpcs,
-            // Speed = 40 /* Weapon */,
-            // spell = ebolt,
-            // spell_0 = lightning,
-            // spell_1 = harm,
-            // spell_2 = mindblast,
-            // spell_3 = magicarrow,
-            // spell_4 = chainlightning,
-            // Swordsmanship = 120,
-            // TrueColor = 33784,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Mage /* spellkillpcs */,
-            AlwaysMurderer = true,
-            Body = 0x10,
-            CanSwim = true,
-            CorpseNameOverride = "corpse of a water elemental",
-            CreatureType = CreatureType.Elemental,
-            DamageMax = 45,
-            DamageMin = 21,
-            Dex = 80,
-            Female = false,
-            FightMode = FightMode.Closest,
-            FightRange = 1,
-            HitsMax = 210,
-            Hue = 33784,
-            Int = 250,
-            ManaMaxSeed = 200,
-            Name = "a water elemental",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            PreferredSpells = new List<Type>
+            CreatureProperties.Register<WaterElemental>(new CreatureProperties
             {
-                typeof(Spells.Sixth.EnergyBoltSpell),
-                typeof(Spells.Fourth.LightningSpell),
-                typeof(Spells.Second.HarmSpell),
-                typeof(Spells.Fifth.MindBlastSpell),
-                typeof(Spells.First.MagicArrowSpell),
-            },
-            Resistances = new Dictionary<ElementalType, CreatureProp>
-            {
-                { ElementalType.Cold, 100 },
-            },
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.Parry, 55 },
-                { SkillName.MagicResist, 30 },
-                { SkillName.Tactics, 100 },
-                { SkillName.Magery, 90 },
-                { SkillName.EvalInt, 65 },
-            },
-            StamMaxSeed = 70,
-            Str = 210,
-            VirtualArmor = 25,
-
-        });
+                // cast_pct = 30,
+                // CProp_nocorpse = i1,
+                // DataElementId = waterelemental,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = waterelemental,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // HitSound = 0x119 /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 20,
+                // MagicItemChance = 25,
+                // MagicItemLevel = 3,
+                // MissSound = 0x239 /* Weapon */,
+                // num_casts = 10,
+                // script = spellkillpcs,
+                // Speed = 40 /* Weapon */,
+                // spell = ebolt,
+                // spell_0 = lightning,
+                // spell_1 = harm,
+                // spell_2 = mindblast,
+                // spell_3 = magicarrow,
+                // spell_4 = chainlightning,
+                // Swordsmanship = 120,
+                // TrueColor = 33784,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Mage /* spellkillpcs */,
+                AlwaysMurderer = true,
+                Body = 0x10,
+                CanSwim = true,
+                CorpseNameOverride = "corpse of a water elemental",
+                CreatureType = CreatureType.Elemental,
+                DamageMax = 45,
+                DamageMin = 21,
+                Dex = 80,
+                Female = false,
+                FightMode = FightMode.Closest,
+                FightRange = 1,
+                HitsMax = 210,
+                Hue = 33784,
+                Int = 250,
+                ManaMaxSeed = 200,
+                Name = "a water elemental",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                PreferredSpells = new List<Type>
+                {
+                    typeof(Spells.Sixth.EnergyBoltSpell),
+                    typeof(Spells.Fourth.LightningSpell),
+                    typeof(Spells.Second.HarmSpell),
+                    typeof(Spells.Fifth.MindBlastSpell),
+                    typeof(Spells.First.MagicArrowSpell)
+                },
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Water, 100}
+                },
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Parry, 55},
+                    {SkillName.MagicResist, 30},
+                    {SkillName.Tactics, 100},
+                    {SkillName.Magery, 90},
+                    {SkillName.EvalInt, 65}
+                },
+                StamMaxSeed = 70,
+                Str = 210,
+                VirtualArmor = 25
+            });
+        }
 
 
         [Constructible]
-public WaterElemental() : base(CreatureProperties.Get<WaterElemental>())
+        public WaterElemental() : base(CreatureProperties.Get<WaterElemental>())
         {
             // Add customization here
 
@@ -101,15 +100,14 @@ public WaterElemental() : base(CreatureProperties.Get<WaterElemental>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x119,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public WaterElemental(Serial serial) : base(serial) {}
-
+        public WaterElemental(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -121,7 +119,7 @@ public WaterElemental(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

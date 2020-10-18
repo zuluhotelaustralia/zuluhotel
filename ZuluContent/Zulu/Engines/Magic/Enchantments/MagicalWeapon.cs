@@ -26,8 +26,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             };
 
             
-            m.SendMessage($"Decreasing Swing delay by {delay * percentage} ms");
-            delay *= percentage;
+            m.SendMessage($"Decreasing Swing delay by {delay * percentage} seconds");
+            delay -= delay * percentage;
 
         }
     }

@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -16,83 +13,85 @@ namespace Server.Mobiles
 {
     public class GreaterBeholder : BaseCreature
     {
-        static GreaterBeholder() => CreatureProperties.Register<GreaterBeholder>(new CreatureProperties
+        static GreaterBeholder()
         {
-            // cast_pct = 50,
-            // count_casts = 0,
-            // CProp_massCastRange = i12,
-            // DataElementId = GreaterBeholder,
-            // DataElementType = NpcTemplate,
-            // Detect = Hidden 200,
-            // dstart = 10,
-            // Equip = beholder,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // HitSound = 0x17C /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 57,
-            // MagicItemChance = 75,
-            // MagicItemLevel = 4,
-            // MissSound = 0x239 /* Weapon */,
-            // num_casts = 40,
-            // script = spellkillpcsTeleporter,
-            // Speed = 33 /* Weapon */,
-            // spell = MassCast	paralyze,
-            // spell_0 = MassCast	fireball,
-            // spell_1 = MassCast	lightning,
-            // spell_2 = MassCast	Curse,
-            // spell_3 = MassCast	flamestrike,
-            // spell_4 = MassCast	kill,
-            // spell_5 = MassCast	poison,
-            // spell_6 = MassCast	mindblast,
-            // TrueColor = 1173,
-            AiType = AIType.AI_Mage /* spellkillpcsTeleporter */,
-            AlwaysMurderer = true,
-            BardImmune = true,
-            Body = 0x16,
-            ClassLevel = 6,
-            ClassSpec = SpecName.Mage,
-            CorpseNameOverride = "corpse of Greater Beholder",
-            DamageMax = 34,
-            DamageMin = 14,
-            Dex = 500,
-            Female = false,
-            FightMode = FightMode.Closest,
-            FightRange = 1,
-            HitsMax = 1500,
-            Hue = 1173,
-            Int = 1600,
-            ManaMaxSeed = 1500,
-            Name = "Greater Beholder",
-            PerceptionRange = 10,
-            PreferredSpells = new List<Type>
+            CreatureProperties.Register<GreaterBeholder>(new CreatureProperties
             {
-                typeof(Spells.Fifth.ParalyzeSpell),
-                typeof(Spells.Third.FireballSpell),
-                typeof(Spells.Fourth.LightningSpell),
-                typeof(Spells.Fourth.CurseSpell),
-                typeof(WyvernStrikeSpell),
-                typeof(Spells.Third.PoisonSpell),
-                typeof(Spells.Fifth.MindBlastSpell),
-            },
-            SaySpellMantra = true,
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.MagicResist, 200 },
-                { SkillName.Tactics, 200 },
-                { SkillName.Macing, 200 },
-                { SkillName.Magery, 300 },
-            },
-            StamMaxSeed = 500,
-            Str = 1500,
-            Tamable = false,
-            TargetAcquireExhaustion = true,
-            VirtualArmor = 20,
-
-        });
+                // cast_pct = 50,
+                // count_casts = 0,
+                // CProp_massCastRange = i12,
+                // DataElementId = GreaterBeholder,
+                // DataElementType = NpcTemplate,
+                // Detect = Hidden 200,
+                // dstart = 10,
+                // Equip = beholder,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // HitSound = 0x17C /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 57,
+                // MagicItemChance = 75,
+                // MagicItemLevel = 4,
+                // MissSound = 0x239 /* Weapon */,
+                // num_casts = 40,
+                // script = spellkillpcsTeleporter,
+                // Speed = 33 /* Weapon */,
+                // spell = MassCast	paralyze,
+                // spell_0 = MassCast	fireball,
+                // spell_1 = MassCast	lightning,
+                // spell_2 = MassCast	Curse,
+                // spell_3 = MassCast	flamestrike,
+                // spell_4 = MassCast	kill,
+                // spell_5 = MassCast	poison,
+                // spell_6 = MassCast	mindblast,
+                // TrueColor = 1173,
+                AiType = AIType.AI_Mage /* spellkillpcsTeleporter */,
+                AlwaysMurderer = true,
+                BardImmune = true,
+                Body = 0x16,
+                ClassLevel = 6,
+                ClassSpec = SpecName.Mage,
+                CorpseNameOverride = "corpse of Greater Beholder",
+                DamageMax = 34,
+                DamageMin = 14,
+                Dex = 500,
+                Female = false,
+                FightMode = FightMode.Closest,
+                FightRange = 1,
+                HitsMax = 1500,
+                Hue = 1173,
+                Int = 1600,
+                ManaMaxSeed = 1500,
+                Name = "Greater Beholder",
+                PerceptionRange = 10,
+                PreferredSpells = new List<Type>
+                {
+                    typeof(Spells.Fifth.ParalyzeSpell),
+                    typeof(Spells.Third.FireballSpell),
+                    typeof(Spells.Fourth.LightningSpell),
+                    typeof(Spells.Fourth.CurseSpell),
+                    typeof(WyvernStrikeSpell),
+                    typeof(Spells.Third.PoisonSpell),
+                    typeof(Spells.Fifth.MindBlastSpell)
+                },
+                SaySpellMantra = true,
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.MagicResist, 200},
+                    {SkillName.Tactics, 200},
+                    {SkillName.Macing, 200},
+                    {SkillName.Magery, 300}
+                },
+                StamMaxSeed = 500,
+                Str = 1500,
+                Tamable = false,
+                TargetAcquireExhaustion = true,
+                VirtualArmor = 20
+            });
+        }
 
 
         [Constructible]
-public GreaterBeholder() : base(CreatureProperties.Get<GreaterBeholder>())
+        public GreaterBeholder() : base(CreatureProperties.Get<GreaterBeholder>())
         {
             // Add customization here
 
@@ -104,15 +103,14 @@ public GreaterBeholder() : base(CreatureProperties.Get<GreaterBeholder>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x17C,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public GreaterBeholder(Serial serial) : base(serial) {}
-
+        public GreaterBeholder(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -124,7 +122,7 @@ public GreaterBeholder(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

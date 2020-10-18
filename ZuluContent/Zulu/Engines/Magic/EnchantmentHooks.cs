@@ -88,12 +88,15 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public static void FireHook(this Mobile m, Expression<Action<IEnchantmentHook>> action)
         {
-            Fire(
-                m.Items
-                    .OfType<BaseEquippableItem>()
-                    .SelectMany(e => e.Enchantments.Values.Values),
-                action
-            );
+            var values = m.Items
+                .OfType<BaseEquippableItem>()
+                .SelectMany(e => e.Enchantments.Values.Values)
+                .ToList();
+
+            if (m is IEnchanted enchanted) 
+                values.AddRange(enchanted.Enchantments.Values.Values);
+
+            Fire(values, action);
         }
 
         public static void FireHook(this EnchantmentDictionary dictionary, Expression<Action<IEnchantmentHook>> action)

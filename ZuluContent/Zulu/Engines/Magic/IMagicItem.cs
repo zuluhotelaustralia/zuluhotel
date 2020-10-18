@@ -7,15 +7,12 @@ using Server.Items;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enums
 {
-    public partial interface IMagicItem
+    public partial interface IMagicItem : IEnchanted
     {
         public IEntity Parent { get; set; }
         
-        public EnchantmentDictionary Enchantments { get; }
-        
         public void OnSingleClick(Mobile m);
-        
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Identified
         {

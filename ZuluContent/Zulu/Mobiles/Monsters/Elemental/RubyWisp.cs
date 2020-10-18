@@ -1,11 +1,8 @@
-
-
 using System;
 using System.Collections.Generic;
 using Scripts.Zulu.Spells.Earth;
 using Scripts.Zulu.Spells.Necromancy;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -16,89 +13,91 @@ namespace Server.Mobiles
 {
     public class RubyWisp : BaseCreature
     {
-        static RubyWisp() => CreatureProperties.Register<RubyWisp>(new CreatureProperties
+        static RubyWisp()
         {
-            // cast_pct = 40,
-            // CProp_EarthProtection = i4,
-            // CProp_NecroProtection = i2,
-            // CProp_PermMagicImmunity = i6,
-            // DataElementId = rubywisp,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = blackwisp,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // Hitscript = :combat:banishscript /* Weapon */,
-            // HitSound = 0x1D5 /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 204,
-            // MagicItemChance = 75,
-            // MagicItemLevel = 5,
-            // MissSound = 0x239 /* Weapon */,
-            // num_casts = 8,
-            // script = spellkillpcs,
-            // speech = 7,
-            // Speed = 35 /* Weapon */,
-            // spell = risingfire,
-            // spell_0 = flamestrike,
-            // spell_1 = explosion,
-            // spell_2 = masscurse,
-            // spell_3 = abyssalflame,
-            // spell_4 = wyvernstrike,
-            // spell_5 = wraithbreath,
-            // spell_6 = decayingray,
-            // TrueColor = 1172,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Mage /* spellkillpcs */,
-            AlwaysMurderer = true,
-            AutoDispel = true,
-            Body = 0x3a,
-            CorpseNameOverride = "corpse of a ruby wisp",
-            CreatureType = CreatureType.Elemental,
-            DamageMax = 64,
-            DamageMin = 8,
-            Dex = 575,
-            Female = false,
-            FightMode = FightMode.Closest,
-            FightRange = 1,
-            HitsMax = 700,
-            Hue = 1172,
-            Int = 1100,
-            ManaMaxSeed = 1100,
-            Name = "a ruby wisp",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            PreferredSpells = new List<Type>
+            CreatureProperties.Register<RubyWisp>(new CreatureProperties
             {
-                typeof(RisingFireSpell),
-                typeof(Spells.Sixth.ExplosionSpell),
-                typeof(Spells.Sixth.MassCurseSpell),
-                typeof(AbyssalFlameSpell),
-                typeof(WyvernStrikeSpell),
-                typeof(WraithBreathSpell),
-                typeof(DecayingRaySpell),
-            },
-            ProvokeSkillOverride = 120,
-            Resistances = new Dictionary<ElementalType, CreatureProp>
-            {
-                { ElementalType.Fire, 100 },
-            },
-            Skills = new Dictionary<SkillName, CreatureProp>
-            {
-                { SkillName.Tactics, 100 },
-                { SkillName.Macing, 100 },
-                { SkillName.MagicResist, 200 },
-                { SkillName.Magery, 200 },
-                { SkillName.EvalInt, 200 },
-            },
-            StamMaxSeed = 175,
-            Str = 700,
-            VirtualArmor = 30,
-
-        });
+                // cast_pct = 40,
+                // CProp_EarthProtection = i4,
+                // CProp_NecroProtection = i2,
+                // CProp_PermMagicImmunity = i6,
+                // DataElementId = rubywisp,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = blackwisp,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // Hitscript = :combat:banishscript /* Weapon */,
+                // HitSound = 0x1D5 /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 204,
+                // MagicItemChance = 75,
+                // MagicItemLevel = 5,
+                // MissSound = 0x239 /* Weapon */,
+                // num_casts = 8,
+                // script = spellkillpcs,
+                // speech = 7,
+                // Speed = 35 /* Weapon */,
+                // spell = risingfire,
+                // spell_0 = flamestrike,
+                // spell_1 = explosion,
+                // spell_2 = masscurse,
+                // spell_3 = abyssalflame,
+                // spell_4 = wyvernstrike,
+                // spell_5 = wraithbreath,
+                // spell_6 = decayingray,
+                // TrueColor = 1172,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Mage /* spellkillpcs */,
+                AlwaysMurderer = true,
+                AutoDispel = true,
+                Body = 0x3a,
+                CorpseNameOverride = "corpse of a ruby wisp",
+                CreatureType = CreatureType.Elemental,
+                DamageMax = 64,
+                DamageMin = 8,
+                Dex = 575,
+                Female = false,
+                FightMode = FightMode.Closest,
+                FightRange = 1,
+                HitsMax = 700,
+                Hue = 1172,
+                Int = 1100,
+                ManaMaxSeed = 1100,
+                Name = "a ruby wisp",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                PreferredSpells = new List<Type>
+                {
+                    typeof(RisingFireSpell),
+                    typeof(Spells.Sixth.ExplosionSpell),
+                    typeof(Spells.Sixth.MassCurseSpell),
+                    typeof(AbyssalFlameSpell),
+                    typeof(WyvernStrikeSpell),
+                    typeof(WraithBreathSpell),
+                    typeof(DecayingRaySpell)
+                },
+                ProvokeSkillOverride = 120,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Fire, 100}
+                },
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Tactics, 100},
+                    {SkillName.Macing, 100},
+                    {SkillName.MagicResist, 200},
+                    {SkillName.Magery, 200},
+                    {SkillName.EvalInt, 200}
+                },
+                StamMaxSeed = 175,
+                Str = 700,
+                VirtualArmor = 30
+            });
+        }
 
 
         [Constructible]
-public RubyWisp() : base(CreatureProperties.Get<RubyWisp>())
+        public RubyWisp() : base(CreatureProperties.Get<RubyWisp>())
         {
             // Add customization here
 
@@ -110,15 +109,14 @@ public RubyWisp() : base(CreatureProperties.Get<RubyWisp>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x1D5,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public RubyWisp(Serial serial) : base(serial) {}
-
+        public RubyWisp(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -130,7 +128,7 @@ public RubyWisp(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

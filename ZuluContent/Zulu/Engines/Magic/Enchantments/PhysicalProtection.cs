@@ -1,6 +1,8 @@
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
+using Server.Items;
+using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -19,6 +21,16 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         {
             if (damageType == ElementalType.Physical) 
                 damage -= (int) (damage * ((double) Value / 100));
+        }
+
+        public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        {
+            var reduction = (int) (damage * ((double) Value / 100));
+
+            if (attacker is PlayerMobile) 
+                reduction /= 2;
+
+            damage -= reduction;
         }
     }
     

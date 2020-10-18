@@ -1,9 +1,6 @@
-
-
 using System;
 using System.Collections.Generic;
 using Server;
-
 using Server.Misc;
 using Server.Items;
 using static Server.Mobiles.CreatureProp;
@@ -14,56 +11,58 @@ namespace Server.Mobiles
 {
     public class EliteOrcWarrior : BaseCreature
     {
-        static EliteOrcWarrior() => CreatureProperties.Register<EliteOrcWarrior>(new CreatureProperties
+        static EliteOrcWarrior()
         {
-            // DataElementId = orcelite,
-            // DataElementType = NpcTemplate,
-            // dstart = 10,
-            // Equip = orcelite,
-            // Graphic = 0x0ec4 /* Weapon */,
-            // HitSound = 0x13C /* Weapon */,
-            // hostile = 1,
-            // lootgroup = 43,
-            // MissSound = 0x239 /* Weapon */,
-            // script = killpcs,
-            // speech = 6,
-            // Speed = 45 /* Weapon */,
-            // TrueColor = 0,
-            ActiveSpeed = 0.2,
-            AiType = AIType.AI_Melee /* killpcs */,
-            AlwaysMurderer = true,
-            Body = 0x29,
-            CorpseNameOverride = "corpse of an elite orc warrior",
-            CreatureType = CreatureType.Orc,
-            DamageMax = 43,
-            DamageMin = 8,
-            Dex = 195,
-            Female = false,
-            FightMode = FightMode.Aggressor,
-            FightRange = 1,
-            HitsMax = 215,
-            Hue = 0,
-            Int = 35,
-            ManaMaxSeed = 0,
-            Name = "an elite orc warrior",
-            PassiveSpeed = 0.4,
-            PerceptionRange = 10,
-            ProvokeSkillOverride = 70,
-            Skills = new Dictionary<SkillName, CreatureProp>
+            CreatureProperties.Register<EliteOrcWarrior>(new CreatureProperties
             {
-                { SkillName.Macing, 100 },
-                { SkillName.Tactics, 75 },
-                { SkillName.MagicResist, 60 },
-            },
-            StamMaxSeed = 70,
-            Str = 215,
-            VirtualArmor = 25,
-
-        });
+                // DataElementId = orcelite,
+                // DataElementType = NpcTemplate,
+                // dstart = 10,
+                // Equip = orcelite,
+                // Graphic = 0x0ec4 /* Weapon */,
+                // HitSound = 0x13C /* Weapon */,
+                // hostile = 1,
+                // lootgroup = 43,
+                // MissSound = 0x239 /* Weapon */,
+                // script = killpcs,
+                // speech = 6,
+                // Speed = 45 /* Weapon */,
+                // TrueColor = 0,
+                ActiveSpeed = 0.2,
+                AiType = AIType.AI_Melee /* killpcs */,
+                AlwaysMurderer = true,
+                Body = 0x29,
+                CorpseNameOverride = "corpse of an elite orc warrior",
+                CreatureType = CreatureType.Orc,
+                DamageMax = 43,
+                DamageMin = 8,
+                Dex = 195,
+                Female = false,
+                FightMode = FightMode.Aggressor,
+                FightRange = 1,
+                HitsMax = 215,
+                Hue = 0,
+                Int = 35,
+                ManaMaxSeed = 0,
+                Name = "an elite orc warrior",
+                PassiveSpeed = 0.4,
+                PerceptionRange = 10,
+                ProvokeSkillOverride = 70,
+                Skills = new Dictionary<SkillName, CreatureProp>
+                {
+                    {SkillName.Macing, 100},
+                    {SkillName.Tactics, 75},
+                    {SkillName.MagicResist, 60}
+                },
+                StamMaxSeed = 70,
+                Str = 215,
+                VirtualArmor = 25
+            });
+        }
 
 
         [Constructible]
-public EliteOrcWarrior() : base(CreatureProperties.Get<EliteOrcWarrior>())
+        public EliteOrcWarrior() : base(CreatureProperties.Get<EliteOrcWarrior>())
         {
             // Add customization here
 
@@ -75,15 +74,14 @@ public EliteOrcWarrior() : base(CreatureProperties.Get<EliteOrcWarrior>())
                 MaxHitPoints = 250,
                 HitPoints = 250,
                 HitSound = 0x13C,
-                MissSound = 0x239,
+                MissSound = 0x239
             });
-
-
         }
 
         [Constructible]
-public EliteOrcWarrior(Serial serial) : base(serial) {}
-
+        public EliteOrcWarrior(Serial serial) : base(serial)
+        {
+        }
 
 
         public override void Serialize(IGenericWriter writer)
@@ -95,7 +93,7 @@ public EliteOrcWarrior(Serial serial) : base(serial) {}
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

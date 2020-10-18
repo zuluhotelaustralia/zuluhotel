@@ -5,16 +5,70 @@ using Server.Items;
 using Server.Misc;
 using Scripts.Zulu.Engines.Classes;
 using Server.Network;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Mobiles
 {
-    public partial class BaseCreature : Mobile
+    public partial class BaseCreature : Mobile, IEnchanted
     {
+        public EnchantmentDictionary Enchantments { get; set; } = new EnchantmentDictionary();
+
         private Spec m_Spec;
 
         public virtual CreatureProperties InitProperties
         {
             get { return CreatureProperties.Get(GetType()); }
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalWaterResist
+        {
+            get => Enchantments.Get((WaterProtection e) => e.Value);
+            set => Enchantments.Set((WaterProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalAirResist
+        {
+            get => Enchantments.Get((AirProtection e) => e.Value);
+            set => Enchantments.Set((AirProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalPhysicalResist 
+        {
+            get => Enchantments.Get((PhysicalProtection e) => e.Value);
+            set => Enchantments.Set((PhysicalProtection e) => e.Value = value);
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalFireResist
+        {
+            get => Enchantments.Get((FireProtection e) => e.Value);
+            set => Enchantments.Set((FireProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalPoisonResist
+        {
+            get => Enchantments.Get((PoisonProtection e) => e.Value);
+            set => Enchantments.Set((PoisonProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalEarthResist
+        {
+            get => Enchantments.Get((EarthProtection e) => e.Value);
+            set => Enchantments.Set((EarthProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ElementalNecroResist
+        {
+            get => Enchantments.Get((NecroProtection e) => e.Value);
+            set => Enchantments.Set((NecroProtection e) => e.Value = value);
         }
 
         public virtual bool InitialInnocent
@@ -56,7 +110,11 @@ namespace Server.Mobiles
         {
             get { return InitProperties?.WeaponAbilityChance ?? 0.4; }
         }
-        public virtual WeaponAbility GetWeaponAbility() => InitProperties?.WeaponAbility;
+
+        public virtual WeaponAbility GetWeaponAbility()
+        {
+            return InitProperties?.WeaponAbility;
+        }
 
         public virtual bool HasBreath { get; set; } = false;
 
@@ -147,5 +205,6 @@ namespace Server.Mobiles
 
             Timer.DelayCall(RiseCreatureDelay, Rise);
         }
+
     }
 }
