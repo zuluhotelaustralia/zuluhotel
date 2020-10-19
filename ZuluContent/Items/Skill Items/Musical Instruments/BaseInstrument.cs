@@ -39,14 +39,14 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer
+        public SlayerName OldSlayer
         {
             get { return m_Slayer; }
             set { m_Slayer = value; }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer2
+        public SlayerName OldSlayer2
         {
             get { return m_Slayer2; }
             set { m_Slayer2 = value; }

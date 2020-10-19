@@ -106,6 +106,9 @@ namespace Server.Mobiles
             get { return InitProperties?.PreferredSpells; }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual CreatureType CreatureType => InitProperties?.CreatureType ?? CreatureType.None;
+
         public virtual double WeaponAbilityChance
         {
             get { return InitProperties?.WeaponAbilityChance ?? 0.4; }

@@ -31,10 +31,11 @@ namespace Server.Spells
         private bool m_SpellStrike;
         private long m_StartCastTime;
 
-        public Spell(Mobile caster, Item scroll)
+        public Spell(Mobile caster, Item scroll, bool spellStrike = false)
         {
             Caster = caster;
             Scroll = scroll;
+            m_SpellStrike = false;
         }
 
         public SpellCircle Circle => Info.Circle;
@@ -155,6 +156,18 @@ namespace Server.Spells
 
             return spell;
         }
+        
+        public static Spell Create(SpellEntry entry, Mobile caster, Item scroll = null, bool spellStrike = false)
+        {
+            var spell = SpellRegistry.Create(entry, caster, scroll);
+
+            spell.Caster = caster;
+            spell.Scroll = scroll;
+            spell.m_SpellStrike = spellStrike;
+
+            return spell;
+        }
+
 
         public void StartDelayedDamageContext(Mobile m, Timer t)
         {
@@ -290,8 +303,8 @@ namespace Server.Spells
             var scalar = 1.0;
             if (atkBook != null)
             {
-                var atkSlayer = SlayerGroup.GetEntryByName(atkBook.Slayer);
-                var atkSlayer2 = SlayerGroup.GetEntryByName(atkBook.Slayer2);
+                var atkSlayer = SlayerGroup.GetEntryByName(atkBook.OldSlayer);
+                var atkSlayer2 = SlayerGroup.GetEntryByName(atkBook.OldSlayer2);
 
                 if (atkSlayer != null && atkSlayer.Slays(defender) || atkSlayer2 != null && atkSlayer2.Slays(defender))
                 {
@@ -311,8 +324,8 @@ namespace Server.Spells
 
             if (defISlayer != null)
             {
-                var defSlayer = SlayerGroup.GetEntryByName(defISlayer.Slayer);
-                var defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.Slayer2);
+                var defSlayer = SlayerGroup.GetEntryByName(defISlayer.OldSlayer);
+                var defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.OldSlayer2);
 
                 if (defSlayer != null && defSlayer.Group.OppositionSuperSlays(Caster) ||
                     defSlayer2 != null && defSlayer2.Group.OppositionSuperSlays(Caster))

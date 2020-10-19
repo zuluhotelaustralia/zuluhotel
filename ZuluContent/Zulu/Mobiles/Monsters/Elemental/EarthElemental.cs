@@ -49,6 +49,12 @@ namespace Server.Mobiles
                 Name = "an earth elemental",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Air, -50}
+
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 75},

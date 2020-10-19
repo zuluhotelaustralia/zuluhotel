@@ -1,100 +1,78 @@
 namespace Server.Items
 {
-    public class CureLevelInfo
-	{
-		private Poison m_Poison;
-		private double m_Chance;
+    public record CureLevelInfo(Poison Poison, double Chance);
 
-		public Poison Poison
-		{
-			get{ return m_Poison; }
-		}
+    public abstract class BaseCurePotion : BasePotion
+    {
+        public abstract CureLevelInfo[] LevelInfo { get; }
 
-		public double Chance
-		{
-			get{ return m_Chance; }
-		}
+        public BaseCurePotion(PotionEffect effect) : base(0xF07, effect)
+        {
+        }
 
-		public CureLevelInfo( Poison poison, double chance )
-		{
-			m_Poison = poison;
-			m_Chance = chance;
-		}
-	}
+        public BaseCurePotion(Serial serial) : base(serial)
+        {
+        }
 
-	public abstract class BaseCurePotion : BasePotion
-	{
-		public abstract CureLevelInfo[] LevelInfo{ get; }
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public BaseCurePotion( PotionEffect effect ) : base( 0xF07, effect )
-		{
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public BaseCurePotion( Serial serial ) : base( serial )
-		{
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+            int version = reader.ReadInt();
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public void DoCure(Mobile from)
+        {
+            bool cure = false;
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            CureLevelInfo[] info = LevelInfo;
 
-			int version = reader.ReadInt();
-		}
+            foreach (var li in info)
+            {
+                if (li.Poison == @from.Poison && Scale(@from, li.Chance) > Utility.RandomDouble())
+                {
+                    cure = true;
+                    break;
+                }
+            }
 
-		public void DoCure( Mobile from )
-		{
-			bool cure = false;
+            if (cure && from.CurePoison(from))
+            {
+                from.SendLocalizedMessage(500231); // You feel cured of poison!
 
-			CureLevelInfo[] info = LevelInfo;
+                from.FixedEffect(0x373A, 10, 15);
+                from.PlaySound(0x1E0);
+            }
+            else if (!cure)
+            {
+                from.SendLocalizedMessage(500232); // That potion was not strong enough to cure your ailment!
+            }
+        }
 
-			for ( int i = 0; i < info.Length; ++i )
-			{
-				CureLevelInfo li = info[i];
+        public override void Drink(Mobile from)
+        {
+            if (from.Poisoned)
+            {
+                DoCure(from);
 
-				if ( li.Poison == from.Poison && Scale( from, li.Chance ) > Utility.RandomDouble() )
-				{
-					cure = true;
-					break;
-				}
-			}
+                PlayDrinkEffect(from);
 
-			if ( cure && from.CurePoison( from ) )
-			{
-				from.SendLocalizedMessage( 500231 ); // You feel cured of poison!
+                from.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
+                from.PlaySound(0x1E0);
 
-				from.FixedEffect( 0x373A, 10, 15 );
-				from.PlaySound( 0x1E0 );
-			}
-			else if ( !cure )
-			{
-				from.SendLocalizedMessage( 500232 ); // That potion was not strong enough to cure your ailment!
-			}
-		}
-
-		public override void Drink( Mobile from )
-		{
-			if ( from.Poisoned )
-			{
-				DoCure( from );
-
-				PlayDrinkEffect( from );
-
-				from.FixedParticles( 0x373A, 10, 15, 5012, EffectLayer.Waist );
-				from.PlaySound( 0x1E0 );
-
-				Consume();
-			}
-			else
-			{
-				from.SendLocalizedMessage( 1042000 ); // You are not poisoned.
-			}
-		}
-	}
+                Consume();
+            }
+            else
+            {
+                from.SendLocalizedMessage(1042000); // You are not poisoned.
+            }
+        }
+    }
 }

@@ -2291,5 +2291,10 @@ namespace Server.Spells
                 }
             );
         }
+
+        public static SpellInfo GetInfo(SpellEntry spellEntry)
+        {
+            return SpellInfos[SpellTypes[spellEntry]];
+        }
     }
 }

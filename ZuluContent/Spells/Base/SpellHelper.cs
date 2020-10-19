@@ -683,12 +683,13 @@ namespace Server.Spells
             {
                 delay ??= GetDamageDelayForSpell(spell);
 
-                if (damageType == ElementalType.None)
+                if (damageType == ElementalType.None &&
+                    SpellRegistry.SpellInfos.TryGetValue(spell.GetType(), out var info))
                 {
-                    damageType = SpellRegistry.SpellInfos[spell.GetType()].DamageType;
+                    damageType = info.DamageType;
                 }
             }
-            
+
             delay ??= TimeSpan.Zero;
 
             var iDamage = (int) damage;
@@ -709,7 +710,6 @@ namespace Server.Spells
             DFAlgorithm dfa
         )
         {
-
             defender.FireHook(h => h.OnSpellDamage(attacker, defender, damageType, ref damage));
 
             WeightOverloading.DFA = dfa;
@@ -752,10 +752,10 @@ namespace Server.Spells
             private readonly Mobile m_From;
 
             public SpellDamageTimer(
-                Spell s, 
-                Mobile target, 
-                Mobile from, 
-                int damage, 
+                Spell s,
+                Mobile target,
+                Mobile from,
+                int damage,
                 TimeSpan delay,
                 ElementalType damageType,
                 DFAlgorithm dfa = DFAlgorithm.Standard

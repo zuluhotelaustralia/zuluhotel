@@ -3032,7 +3032,7 @@ namespace Server.Mobiles
 
                 if (instrument != null)
                 {
-                    instrument.Slayer = SlayerGroup.GetLootSlayerType(GetType());
+                    instrument.OldSlayer = SlayerGroup.GetLootSlayerType(GetType());
                     PackItem(instrument);
                 }
             }
@@ -3042,7 +3042,7 @@ namespace Server.Mobiles
 
                 if (weapon != null)
                 {
-                    weapon.Slayer = SlayerGroup.GetLootSlayerType(GetType());
+                    weapon.OldSlayer = SlayerGroup.GetLootSlayerType(GetType());
                     PackItem(weapon);
                 }
             }
@@ -3069,7 +3069,7 @@ namespace Server.Mobiles
                 return false;
 
             if (0.05 > Utility.RandomDouble())
-                weapon.Slayer = SlayerName.Silver;
+                weapon.OldSlayer = SlayerName.Silver;
 
             weapon.DamageLevel = (WeaponDamageLevel) RandomMinMaxScaled(minLevel, maxLevel);
             weapon.AccuracyLevel = (WeaponAccuracyLevel) RandomMinMaxScaled(minLevel, maxLevel);

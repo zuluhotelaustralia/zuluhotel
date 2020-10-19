@@ -6,6 +6,7 @@ using Server.Engines.Craft;
 using Server.Engines.Magic;
 using Server.Items;
 using Server.Mobiles;
+using Server.Spells;
 using Server.Targeting;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -38,21 +39,22 @@ namespace Server.Scripts.Engines.Loot
         public ElementalProtectionLevel ProtectionLevel;
 
         public string Hitscript;
-        public SlayerName SlayerName;
+        public CreatureType SlayerType;
 
         public int BonusStr;
         public int BonusInt;
         public int BonusDex;
         public SkillName SkillBonusName;
         public int SkillBonusValue;
-
+        public SpellEntry SpellHitEffect { get; set; } = SpellEntry.None;
+        public double SpellHitChance { get; set; }
+        public CreatureType CreatureProtection { get; set; }
 
         public LootItem(Type t)
         {
             Type = t;
         }
-
-
+        
         public bool Is<T>() => Type.IsSubclassOf(typeof(T));
 
 
@@ -93,7 +95,14 @@ namespace Server.Scripts.Engines.Loot
                         weapon.DurabilityLevel = (WeaponDurabilityLevel) DurabilityLevel;
                         weapon.AccuracyLevel = AccuracyLevel;
                         weapon.DamageLevel = DamageLevel;
-                        weapon.Slayer = SlayerName;
+                        weapon.Slayer = SlayerType;
+
+                        if (SpellHitChance > 0)
+                        {
+                            weapon.SpellHitEffect = SpellHitEffect;
+                            weapon.SpellHitChance = SpellHitChance;
+                        }
+                        
                         weapon.MagicalWeaponType = MagicalWeaponType;
                         break;
                     case BaseArmor armor:
@@ -101,6 +110,7 @@ namespace Server.Scripts.Engines.Loot
                         armor.StrBonus = BonusStr;
                         armor.IntBonus = BonusInt;
 
+                        armor.CreatureProtection = CreatureProtection;
                         armor.ProtectionLevel = ArmorProtectionLevel;
                         armor.Durability = (ArmorDurabilityLevel) DurabilityLevel;
                         break;
@@ -283,18 +293,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 200)
-                value = 1;
-            else if (level < 300)
-                value = 2;
-            else if (level < 400)
-                value = 3;
-            else if (level < 500)
-                value = 4;
-            else if (level < 600)
-                value = 5;
-            else
-                value = 6;
+            value = level switch
+            {
+                < 200 => 1,
+                < 300 => 2,
+                < 400 => 3,
+                < 500 => 4,
+                < 600 => 5,
+                _ => 6
+            };
 
             var skill = RandomSkill();
 
@@ -308,7 +315,12 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyOnHitScript(LootItem item)
         {
-            item.Hitscript = "ArmorOnHitScript";
+            var creature = Enum.GetValues(typeof(CreatureType))
+                .OfType<CreatureType>()
+                .ToList()
+                .RandomElement();
+            
+            item.CreatureProtection = creature;
         }
 
 
@@ -349,78 +361,82 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplySlayerHitscript(LootItem item)
         {
-            var slayers = Enum.GetValues(typeof(SlayerName)).OfType<SlayerName>().ToList();
+            var slayers = Enum.GetValues(typeof(CreatureType)).OfType<CreatureType>().ToList();
 
             var slayer = slayers[Utility.Random(slayers.Count)];
 
-            item.SlayerName = slayer;
+            item.SlayerType = slayer;
         }
 
         private static void ApplySpellHitscript(LootItem item)
         {
-            var multiplier = 10;
-            var spellId = Utility.Random(1, 64);
+            var spellId = Utility.Random(0, SpellHit.Spells.Count);
 
-            var asCircle = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
+            var roll = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
 
-            if (asCircle < 50)
-                asCircle = 1;
-            else if (asCircle < 100)
-                asCircle = 2;
-            else if (asCircle < 150)
-                asCircle = 3;
-            else if (asCircle < 200)
-                asCircle = 4;
-            else if (asCircle < 250)
-                asCircle = 5;
-            else if (asCircle < 300)
-                asCircle = 6;
-            else
-                asCircle = 7;
+            SpellCircle circle = roll switch
+            {
+                < 50 => SpellCircle.First,
+                < 100 => SpellCircle.Second,
+                < 150 => SpellCircle.Third,
+                < 200 => SpellCircle.Fourth,
+                < 250 => SpellCircle.Fifth,
+                < 300 => SpellCircle.Sixth,
+                _ => SpellCircle.Seventh
+            };
 
-            /*
-	            var ascirclemod := hitscriptcfg[n].AsCircleMod;
-	            if (ascirclemod)
-		            ascircle := ascircle + ascirclemod;
-	            endif
+            var spellEntry = SpellHit.Spells.Keys
+                .Where(k => SpellRegistry.GetInfo(k)?.Circle == circle)
+                .ToList()
+                .RandomElement();
+            
 
-	            if (ascircle <= 0)
-		            ascircle := 1;
-	            endif
-             */
-
-            var effectChance = Utility.Random(1, 10) * item.ItemLevel;
+            var effectChance = Utility.Random(1, 10) * item.ItemLevel / (double)100;
             // var effectChancemod = hitscriptcfg[n].ChanceOfEffectMod;
 
-            var effectChanceMod = 0;
-            if (effectChanceMod > 0)
-                effectChance = +effectChanceMod;
-
+            var effectChanceMod = 0.0;
+            switch (circle)
+            {
+                case SpellCircle.First:
+                case SpellCircle.Second:
+                    effectChanceMod = 0.15;
+                    break;
+                case SpellCircle.Third:
+                    effectChanceMod = 0.05;
+                    break;
+                case SpellCircle.Fourth:
+                case SpellCircle.Fifth:
+                    effectChanceMod = -0.05;
+                    break;
+                case SpellCircle.Sixth:
+                    effectChanceMod = -0.10;
+                    break;
+                case SpellCircle.Seventh:
+                    effectChanceMod = -0.15;
+                    break;
+            }
 
             if (effectChance <= 0)
-                effectChance = 4;
+                effectChance = 0.04;
 
-            item.Hitscript = $"HitWithSpell,{spellId},{asCircle},{effectChance}";
+            item.SpellHitEffect = spellEntry;
+            item.SpellHitChance = effectChance + effectChanceMod;
         }
 
 
         private static void ApplyStatMod(LootItem item)
         {
             var level = Utility.Random(1, 100) * item.ItemLevel;
-            int amount;
 
-            if (level < 200)
-                amount = 5;
-            else if (level < 300)
-                amount = 10;
-            else if (level < 400)
-                amount = 15;
-            else if (level < 500)
-                amount = 20;
-            else if (level < 600)
-                amount = 25;
-            else
-                amount = 30;
+            int amount = level switch
+            {
+                < 200 => 5,
+                < 300 => 10,
+                < 400 => 15,
+                < 500 => 20,
+                < 600 => 25,
+                _ => 30
+            };
 
             switch (Utility.Random(1, 3))
             {
@@ -490,18 +506,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 150)
-                value = ElementalProtectionLevel.Bane;
-            else if (level < 300)
-                value = ElementalProtectionLevel.Warding;
-            else if (level < 450)
-                value = ElementalProtectionLevel.Protection;
-            else if (level < 550)
-                value = ElementalProtectionLevel.Immunity;
-            else if (level < 600)
-                value = ElementalProtectionLevel.Attunement;
-            else
-                value = ElementalProtectionLevel.Absorbsion;
+            value = level switch
+            {
+                < 150 => ElementalProtectionLevel.Bane,
+                < 300 => ElementalProtectionLevel.Warding,
+                < 450 => ElementalProtectionLevel.Protection,
+                < 550 => ElementalProtectionLevel.Immunity,
+                < 600 => ElementalProtectionLevel.Attunement,
+                _ => ElementalProtectionLevel.Absorbsion
+            };
 
             var element = Utility.Random(1, 7) switch
             {
@@ -550,18 +563,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 150)
-                value = WeaponDamageLevel.Ruin;
-            else if (level < 300)
-                value = WeaponDamageLevel.Might;
-            else if (level < 400)
-                value = WeaponDamageLevel.Force;
-            else if (level < 500)
-                value = WeaponDamageLevel.Power;
-            else if (level < 600)
-                value = WeaponDamageLevel.Vanquishing;
-            else
-                value = WeaponDamageLevel.Devastation;
+            value = level switch
+            {
+                < 150 => WeaponDamageLevel.Ruin,
+                < 300 => WeaponDamageLevel.Might,
+                < 400 => WeaponDamageLevel.Force,
+                < 500 => WeaponDamageLevel.Power,
+                < 600 => WeaponDamageLevel.Vanquishing,
+                _ => WeaponDamageLevel.Devastation
+            };
 
             if (Utility.Random(1, 100) <= 10 * item.ItemLevel)
             {
@@ -576,7 +586,6 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyMiscArmorMod(LootItem item)
         {
-            ArmorBonusType value;
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
@@ -597,18 +606,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 200)
-                value = ArmorBonusType.Iron;
-            else if (level < 350)
-                value = ArmorBonusType.Steel;
-            else if (level < 450)
-                value = ArmorBonusType.MeteoricSteel;
-            else if (level < 550)
-                value = ArmorBonusType.Obsidian;
-            else if (level < 600)
-                value = ArmorBonusType.Onyx;
-            else
-                value = ArmorBonusType.Adamantium;
+            var value = level switch
+            {
+                < 200 => ArmorBonusType.Iron,
+                < 350 => ArmorBonusType.Steel,
+                < 450 => ArmorBonusType.MeteoricSteel,
+                < 550 => ArmorBonusType.Obsidian,
+                < 600 => ArmorBonusType.Onyx,
+                _ => ArmorBonusType.Adamantium
+            };
 
             item.ArmorMod = value;
 
@@ -626,7 +632,6 @@ namespace Server.Scripts.Engines.Loot
                 return;
             }
 
-            WeaponAccuracyLevel value;
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
@@ -647,18 +652,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 100)
-                value = WeaponAccuracyLevel.Regular;
-            else if (level < 200)
-                value = WeaponAccuracyLevel.Accurate;
-            else if (level < 350)
-                value = WeaponAccuracyLevel.Surpassingly;
-            else if (level < 450)
-                value = WeaponAccuracyLevel.Eminently;
-            else if (level < 550)
-                value = WeaponAccuracyLevel.Exceedingly;
-            else
-                value = WeaponAccuracyLevel.Supremely;
+            var value = level switch
+            {
+                < 100 => WeaponAccuracyLevel.Regular,
+                < 200 => WeaponAccuracyLevel.Accurate,
+                < 350 => WeaponAccuracyLevel.Surpassingly,
+                < 450 => WeaponAccuracyLevel.Eminently,
+                < 550 => WeaponAccuracyLevel.Exceedingly,
+                _ => WeaponAccuracyLevel.Supremely
+            };
 
             // TODO: convert into weapon BaseWeapon.DefSkill on random bool
             item.AccuracyLevel = value;
@@ -676,7 +678,6 @@ namespace Server.Scripts.Engines.Loot
                 return;
             }
 
-            int value;
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
@@ -697,18 +698,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 200)
-                value = 1;
-            else if (level < 300)
-                value = 2;
-            else if (level < 400)
-                value = 3;
-            else if (level < 500)
-                value = 4;
-            else if (level < 600)
-                value = 5;
-            else
-                value = 6;
+            var value = level switch
+            {
+                < 200 => 1,
+                < 300 => 2,
+                < 400 => 3,
+                < 500 => 4,
+                < 600 => 5,
+                _ => 6
+            };
 
             item.SkillBonusName = RandomBool() ? SkillName.MagicResist : SkillName.Hiding;
             item.SkillBonusValue = value;
@@ -740,18 +738,15 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (level < 150)
-                value = ArmorProtectionLevel.Defense;
-            else if (level < 300)
-                value = ArmorProtectionLevel.Guarding;
-            else if (level < 400)
-                value = ArmorProtectionLevel.Hardening;
-            else if (level < 500)
-                value = ArmorProtectionLevel.Fortification;
-            else if (level < 600)
-                value = ArmorProtectionLevel.Invulnerability;
-            else
-                value = ArmorProtectionLevel.Invincibility;
+            value = level switch
+            {
+                < 150 => ArmorProtectionLevel.Defense,
+                < 300 => ArmorProtectionLevel.Guarding,
+                < 400 => ArmorProtectionLevel.Hardening,
+                < 500 => ArmorProtectionLevel.Fortification,
+                < 600 => ArmorProtectionLevel.Invulnerability,
+                _ => ArmorProtectionLevel.Invincibility
+            };
 
             if (Utility.Random(1, 100) <= 10 * item.ItemLevel)
             {

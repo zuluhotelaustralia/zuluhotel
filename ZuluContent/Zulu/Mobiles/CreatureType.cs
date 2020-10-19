@@ -5,7 +5,8 @@ namespace Server.Mobiles
     [Flags]
     public enum CreatureType
     {
-        Human = 1,
+        None = 0,
+        Human,
         Undead,
         Elemental,
         Dragonkin,

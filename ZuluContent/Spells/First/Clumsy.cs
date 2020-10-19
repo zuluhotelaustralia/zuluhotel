@@ -56,7 +56,7 @@ namespace Server.Spells.First
 
             protected override void OnTarget(Mobile from, object o)
             {
-                if (o is Mobile) m_Owner.Target((Mobile) o);
+                if (o is Mobile mobile) m_Owner.Target(mobile);
             }
 
             protected override void OnTargetFinish(Mobile from)

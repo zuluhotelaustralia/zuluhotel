@@ -5,16 +5,12 @@ namespace Server.Spells.Eighth
 {
     public class EarthquakeSpell : MagerySpell
     {
+        public override bool DelayedDamage { get; } = true;
+
         public EarthquakeSpell(Mobile caster, Item scroll) : base(caster, scroll)
         {
         }
-
-        public override bool DelayedDamage
-        {
-            get { return true; }
-        }
-
-
+        
         public override void OnCast()
         {
             if (SpellHelper.CheckTown(Caster, Caster) && CheckSequence())

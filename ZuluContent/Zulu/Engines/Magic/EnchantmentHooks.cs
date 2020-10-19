@@ -98,6 +98,11 @@ namespace ZuluContent.Zulu.Engines.Magic
 
             Fire(values, action);
         }
+        
+        public static void FireHook(this IEnchanted enchanted, Expression<Action<IEnchantmentHook>> action)
+        {
+            Fire(enchanted.Enchantments.Values.Values, action);
+        }
 
         public static void FireHook(this EnchantmentDictionary dictionary, Expression<Action<IEnchantmentHook>> action)
         {

@@ -659,11 +659,11 @@ namespace Server
               weapon.DurabilityLevel = (WeaponDurabilityLevel) GetRandomDefaultBonus();
 
             if (5 > Utility.Random(100))
-              weapon.Slayer = SlayerName.Silver;
+              weapon.OldSlayer = SlayerName.Silver;
 
             if (from != null && weapon.AccuracyLevel == 0 && weapon.DamageLevel == 0 && weapon.DurabilityLevel == 0 &&
-                weapon.Slayer == SlayerName.None && 5 > Utility.Random(100))
-              weapon.Slayer = SlayerGroup.GetLootSlayerType(from.GetType());
+                weapon.OldSlayer == SlayerName.None && 5 > Utility.Random(100))
+              weapon.OldSlayer = SlayerGroup.GetLootSlayerType(from.GetType());
           }
           else if (item is BaseArmor)
           {
@@ -689,7 +689,7 @@ namespace Server
           BaseInstrument instr = (BaseInstrument) item;
 
           instr.Quality = InstrumentQuality.Regular;
-          instr.Slayer = slayer;
+          instr.OldSlayer = slayer;
         }
 
         if (item.Stackable)

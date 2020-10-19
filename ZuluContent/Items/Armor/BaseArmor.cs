@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Server.Network;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
+using Server.Mobiles;
 using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -108,6 +109,13 @@ namespace Server.Items
         public virtual bool CanFortify
         {
             get { return true; }
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CreatureType CreatureProtection
+        {
+            get => Enchantments.Get((SlayerHit e) => e.Type);
+            set => Enchantments.Set((SlayerHit e) => e.Type = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

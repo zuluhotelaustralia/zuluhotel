@@ -4,6 +4,7 @@ using Server.Mobiles;
 using Server.Engines.Craft;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -14,8 +15,8 @@ namespace Server.Items
 {
     public interface ISlayer
     {
-        SlayerName Slayer { get; set; }
-        SlayerName Slayer2 { get; set; }
+        SlayerName OldSlayer { get; set; }
+        SlayerName OldSlayer2 { get; set; }
     }
 
     public abstract class BaseWeapon : BaseEquippableItem, IWeapon, ICraftable, ISlayer, IDurability, IMagicItem
@@ -88,6 +89,27 @@ namespace Server.Items
             get => Enchantments.Get((MagicalWeapon e) => e.Value);
             set => Enchantments.Set((MagicalWeapon e) => e.Value = value);
         }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CreatureType Slayer
+        {
+            get => Enchantments.Get((SlayerHit e) => e.Type);
+            set => Enchantments.Set((SlayerHit e) => e.Type = value);
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public SpellEntry SpellHitEffect
+        {
+            get => Enchantments.Get((SpellHit e) => e.SpellEntry);
+            set => Enchantments.Set((SpellHit e) => e.SpellEntry = value);
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double SpellHitChance
+        {
+            get => Enchantments.Get((SpellHit e) => e.Chance);
+            set => Enchantments.Set((SpellHit e) => e.Chance = value);
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int HitPoints
@@ -129,11 +151,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer { get; set; }
+        // [CommandProperty(AccessLevel.GameMaster)]
+        public SlayerName OldSlayer { get; set; }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer2 { get; set; }
+        // [CommandProperty(AccessLevel.GameMaster)]
+        public SlayerName OldSlayer2 { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
@@ -598,7 +620,7 @@ namespace Server.Items
             {
                 damage = armor.OnHit(this, damage);
 
-                defender.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
+                armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
             }
 
             int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
@@ -648,6 +670,7 @@ namespace Server.Items
 
             // ReSharper disable once AccessToModifiedClosure
             defender.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
+            attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
 
             if (damage < 1)
                 damage = 1;
@@ -693,8 +716,8 @@ namespace Server.Items
         public virtual CheckSlayerResult CheckSlayers(Mobile attacker, Mobile defender)
         {
             BaseWeapon atkWeapon = attacker.Weapon as BaseWeapon;
-            SlayerEntry atkSlayer = SlayerGroup.GetEntryByName(atkWeapon.Slayer);
-            SlayerEntry atkSlayer2 = SlayerGroup.GetEntryByName(atkWeapon.Slayer2);
+            SlayerEntry atkSlayer = SlayerGroup.GetEntryByName(atkWeapon.OldSlayer);
+            SlayerEntry atkSlayer2 = SlayerGroup.GetEntryByName(atkWeapon.OldSlayer2);
 
             if (atkSlayer != null && atkSlayer.Slays(defender) || atkSlayer2 != null && atkSlayer2.Slays(defender))
                 return CheckSlayerResult.Slayer;
@@ -703,8 +726,8 @@ namespace Server.Items
 
             if (defISlayer != null)
             {
-                SlayerEntry defSlayer = SlayerGroup.GetEntryByName(defISlayer.Slayer);
-                SlayerEntry defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.Slayer2);
+                SlayerEntry defSlayer = SlayerGroup.GetEntryByName(defISlayer.OldSlayer);
+                SlayerEntry defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.OldSlayer2);
 
                 if (defSlayer != null && defSlayer.Group.OppositionSuperSlays(attacker) ||
                     defSlayer2 != null && defSlayer2.Group.OppositionSuperSlays(attacker))
@@ -1059,7 +1082,7 @@ namespace Server.Items
 
             SetSaveFlag(ref flags, SaveFlag.Hits, m_Hits != 0);
             SetSaveFlag(ref flags, SaveFlag.MaxHits, MaxHitPoints != 0);
-            SetSaveFlag(ref flags, SaveFlag.Slayer, Slayer != SlayerName.None);
+            SetSaveFlag(ref flags, SaveFlag.Slayer, OldSlayer != SlayerName.None);
             SetSaveFlag(ref flags, SaveFlag.Poison, Poison != null);
             SetSaveFlag(ref flags, SaveFlag.PoisonCharges, PoisonCharges != 0);
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
@@ -1075,7 +1098,7 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.Type, m_Type != (WeaponType) (-1));
             SetSaveFlag(ref flags, SaveFlag.Animation, m_Animation != (WeaponAnimation) (-1));
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != CraftResource.Iron);
-            SetSaveFlag(ref flags, SaveFlag.Slayer2, Slayer2 != SlayerName.None);
+            SetSaveFlag(ref flags, SaveFlag.Slayer2, OldSlayer2 != SlayerName.None);
 
             writer.Write((int) flags);
 
@@ -1101,7 +1124,7 @@ namespace Server.Items
                 writer.Write((int) MaxHitPoints);
 
             if (GetSaveFlag(flags, SaveFlag.Slayer))
-                writer.Write((int) Slayer);
+                writer.Write((int) OldSlayer);
 
             if (GetSaveFlag(flags, SaveFlag.Poison))
                 Poison.Serialize(Poison, writer);
@@ -1158,7 +1181,7 @@ namespace Server.Items
                 writer.Write((bool) PlayerConstructed);
 
             if (GetSaveFlag(flags, SaveFlag.Slayer2))
-                writer.Write((int) Slayer2);
+                writer.Write((int) OldSlayer2);
         }
 
         [Flags]
@@ -1255,7 +1278,7 @@ namespace Server.Items
                         MaxHitPoints = reader.ReadInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Slayer))
-                        Slayer = (SlayerName) reader.ReadInt();
+                        OldSlayer = (SlayerName) reader.ReadInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Poison))
                         Poison = Poison.Deserialize(reader);
@@ -1343,13 +1366,13 @@ namespace Server.Items
                         PlayerConstructed = true;
 
                     if (GetSaveFlag(flags, SaveFlag.Slayer2))
-                        Slayer2 = (SlayerName) reader.ReadInt();
+                        OldSlayer2 = (SlayerName) reader.ReadInt();
 
                     break;
                 }
                 case 4:
                 {
-                    Slayer = (SlayerName) reader.ReadInt();
+                    OldSlayer = (SlayerName) reader.ReadInt();
 
                     goto case 3;
                 }
@@ -1527,16 +1550,16 @@ namespace Server.Items
 
             if (Identified || from.AccessLevel >= AccessLevel.GameMaster)
             {
-                if (Slayer != SlayerName.None)
+                if (OldSlayer != SlayerName.None)
                 {
-                    SlayerEntry entry = SlayerGroup.GetEntryByName(Slayer);
+                    SlayerEntry entry = SlayerGroup.GetEntryByName(OldSlayer);
                     if (entry != null)
                         attrs.Add(new EquipInfoAttribute(entry.Title));
                 }
 
-                if (Slayer2 != SlayerName.None)
+                if (OldSlayer2 != SlayerName.None)
                 {
-                    SlayerEntry entry = SlayerGroup.GetEntryByName(Slayer2);
+                    SlayerEntry entry = SlayerGroup.GetEntryByName(OldSlayer2);
                     if (entry != null)
                         attrs.Add(new EquipInfoAttribute(entry.Title));
                 }
@@ -1550,7 +1573,7 @@ namespace Server.Items
                 if (AccuracyLevel != WeaponAccuracyLevel.Regular)
                     attrs.Add(new EquipInfoAttribute(1038010 + (int) AccuracyLevel));
             }
-            else if (Slayer != SlayerName.None || Slayer2 != SlayerName.None ||
+            else if (OldSlayer != SlayerName.None || OldSlayer2 != SlayerName.None ||
                      DurabilityLevel != WeaponDurabilityLevel.Regular || DamageLevel != WeaponDamageLevel.Regular ||
                      AccuracyLevel != WeaponAccuracyLevel.Regular)
                 attrs.Add(new EquipInfoAttribute(1038000)); // Unidentified

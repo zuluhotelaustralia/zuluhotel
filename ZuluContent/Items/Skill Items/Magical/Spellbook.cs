@@ -408,10 +408,10 @@ namespace Server.Items
         //Currently though there are no dual slayer spellbooks, OSI has a habit of putting dual slayer stuff in later
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer { get; set; }
+        public SlayerName OldSlayer { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SlayerName Slayer2 { get; set; }
+        public SlayerName OldSlayer2 { get; set; }
 
         public override void Serialize(IGenericWriter writer)
         {
@@ -425,8 +425,8 @@ namespace Server.Items
 
             writer.Write(m_Crafter);
 
-            writer.Write((int) Slayer);
-            writer.Write((int) Slayer2);
+            writer.Write((int) OldSlayer);
+            writer.Write((int) OldSlayer2);
 
             writer.Write(m_Content);
             writer.Write(SpellCount);
@@ -459,8 +459,8 @@ namespace Server.Items
                 }
                 case 2:
                 {
-                    Slayer = (SlayerName) reader.ReadInt();
-                    Slayer2 = (SlayerName) reader.ReadInt();
+                    OldSlayer = (SlayerName) reader.ReadInt();
+                    OldSlayer2 = (SlayerName) reader.ReadInt();
                     goto case 1;
                 }
                 case 1:
