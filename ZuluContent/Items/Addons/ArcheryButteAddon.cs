@@ -195,7 +195,7 @@ public ArcheryButte( Serial serial ) : base( serial )
 
 			from.Direction = from.GetDirectionTo( GetWorldLocation() );
 			bow.PlaySwingAnimation( from );
-			from.MovingEffect( this, bow.EffectID, 18, 1, false, false );
+			from.MovingEffect( this, bow.EffectId, 18, 1, false, false );
 
 			ScoreEntry se = GetEntryFor( from );
 

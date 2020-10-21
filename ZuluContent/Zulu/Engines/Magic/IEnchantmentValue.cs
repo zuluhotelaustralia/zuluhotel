@@ -30,6 +30,8 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(23, typeof(SecondSkillBonus))]
     [Union(24, typeof(SpellHit))]
     [Union(25, typeof(SlayerHit))]
+    [Union(26, typeof(EffectHit))]
+    [Union(27, typeof(PoisonHit))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }

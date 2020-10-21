@@ -39,25 +39,13 @@ namespace Server.Items
 
 	public abstract class BasePotion : Item, ICraftable
 	{
-		private PotionEffect m_PotionEffect;
+        public PotionEffect PotionEffect { get; set; }
 
-		public PotionEffect PotionEffect
-		{
-			get
-			{
-				return m_PotionEffect;
-			}
-			set
-			{
-				m_PotionEffect = value;
-			}
-		}
-
-		public override int LabelNumber{ get{ return 1041314 + (int)m_PotionEffect; } }
+        public override int LabelNumber{ get{ return 1041314 + (int)PotionEffect; } }
 
 		public BasePotion( int itemID, PotionEffect effect ) : base( itemID )
 		{
-			m_PotionEffect = effect;
+			PotionEffect = effect;
 
 			Stackable = false;
 			Weight = 1.0;
@@ -137,7 +125,7 @@ namespace Server.Items
 
 			writer.Write( (int) 1 ); // version
 
-			writer.Write( (int) m_PotionEffect );
+			writer.Write( (int) PotionEffect );
 		}
 
 		public override void Deserialize( IGenericReader reader )
@@ -151,7 +139,7 @@ namespace Server.Items
 				case 1:
 				case 0:
 				{
-					m_PotionEffect = (PotionEffect)reader.ReadInt();
+					PotionEffect = (PotionEffect)reader.ReadInt();
 					break;
 				}
 			}
@@ -196,7 +184,7 @@ namespace Server.Items
 
 		public override bool StackWith( Mobile from, Item dropped, bool playSound )
 		{
-			if( dropped is BasePotion && ((BasePotion)dropped).m_PotionEffect == m_PotionEffect )
+			if( dropped is BasePotion && ((BasePotion)dropped).PotionEffect == PotionEffect )
 				return base.StackWith( from, dropped, playSound );
 
 			return false;

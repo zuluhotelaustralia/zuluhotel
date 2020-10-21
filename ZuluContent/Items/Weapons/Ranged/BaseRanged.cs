@@ -5,58 +5,29 @@ namespace Server.Items
 {
     public abstract class BaseRanged : BaseMeleeWeapon
     {
-        public virtual int EffectID { get; set;  }
+        public virtual int EffectId { get; set;  }
         public abstract Type AmmoType { get; }
         public abstract Item Ammo { get; }
 
-        public override int DefaultHitSound
-        {
-            get { return 0x234; }
-        }
+        public override int DefaultHitSound { get; } = 0x234;
 
-        public override int DefaultMissSound
-        {
-            get { return 0x238; }
-        }
+        public override int DefaultMissSound { get; } = 0x238;
 
-        public override SkillName DefaultSkill
-        {
-            get { return SkillName.Archery; }
-        }
+        public override SkillName DefaultSkill { get; } = SkillName.Archery;
 
-        public override WeaponType DefaultWeaponType
-        {
-            get { return WeaponType.Ranged; }
-        }
+        public override WeaponType DefaultWeaponType { get; } = WeaponType.Ranged;
 
-        public override WeaponAnimation DefaultAnimation
-        {
-            get { return WeaponAnimation.ShootXBow; }
-        }
+        public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.ShootXBow;
 
-        public override SkillName AccuracySkill
-        {
-            get { return SkillName.Archery; }
-        }
-
-        private bool m_Balanced;
-        private int m_Velocity;
+        public override SkillName AccuracySkill { get; } = SkillName.Archery;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Balanced
-        {
-            get { return m_Balanced; }
-            set { m_Balanced = value; }
-        }
+        public bool Balanced { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int Velocity
-        {
-            get { return m_Velocity; }
-            set { m_Velocity = value; }
-        }
+        public int Velocity { get; set; }
 
-        public BaseRanged(int itemID) : base(itemID)
+        public BaseRanged(int itemId) : base(itemId)
         {
         }
 
@@ -125,7 +96,7 @@ namespace Server.Items
                     return false;
             }
 
-            attacker.MovingEffect(defender, EffectID, 18, 1, false, false);
+            attacker.MovingEffect(defender, EffectId, 18, 1, false, false);
 
             return true;
         }
@@ -136,8 +107,8 @@ namespace Server.Items
 
             writer.Write((int) 3); // version
 
-            writer.Write((bool) m_Balanced);
-            writer.Write((int) m_Velocity);
+            writer.Write((bool) Balanced);
+            writer.Write((int) Velocity);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -150,8 +121,8 @@ namespace Server.Items
             {
                 case 3:
                 {
-                    m_Balanced = reader.ReadBool();
-                    m_Velocity = reader.ReadInt();
+                    Balanced = reader.ReadBool();
+                    Velocity = reader.ReadInt();
 
                     goto case 2;
                 }

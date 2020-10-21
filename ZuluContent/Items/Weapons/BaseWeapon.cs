@@ -89,26 +89,41 @@ namespace Server.Items
             get => Enchantments.Get((MagicalWeapon e) => e.Value);
             set => Enchantments.Set((MagicalWeapon e) => e.Value = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public CreatureType Slayer
         {
             get => Enchantments.Get((SlayerHit e) => e.Type);
             set => Enchantments.Set((SlayerHit e) => e.Type = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellEntry SpellHitEffect
+        public SpellEntry SpellHitEntry
         {
             get => Enchantments.Get((SpellHit e) => e.SpellEntry);
             set => Enchantments.Set((SpellHit e) => e.SpellEntry = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public double SpellHitChance
         {
             get => Enchantments.Get((SpellHit e) => e.Chance);
             set => Enchantments.Set((SpellHit e) => e.Chance = value);
+        }
+        
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public EffectHitType EffectHitType
+        {
+            get => Enchantments.Get((EffectHit e) => e.EffectHitType);
+            set => Enchantments.Set((EffectHit e) => e.EffectHitType = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double EffectHitTypeChance
+        {
+            get => Enchantments.Get((EffectHit e) => e.Chance);
+            set => Enchantments.Set((EffectHit e) => e.Chance = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -131,10 +146,25 @@ namespace Server.Items
         public int MaxHitPoints { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int PoisonCharges { get; set; }
+        public int PoisonCharges
+        {
+            get => Enchantments.Get((PoisonHit e) => e.Charges); 
+            set => Enchantments.Set((PoisonHit e) => e.Charges = value); 
+        }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double PoisonChance
+        {
+            get => Enchantments.Get((PoisonHit e) => e.Chance); 
+            set => Enchantments.Set((PoisonHit e) => e.Chance = value); 
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Poison Poison { get; set; }
+        public Poison Poison 
+        {
+            get => Enchantments.Get((PoisonHit e) => e.Poison); 
+            set => Enchantments.Set((PoisonHit e) => e.Level = value.Level); 
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponQuality Quality
@@ -510,9 +540,9 @@ namespace Server.Items
 
             var stamina = Math.Clamp(m.Stam, 0, m.Dex);
             var delayInSeconds = 15000.0 / ((stamina + 100) * speed);
-            
+
             m.FireHook(h => h.OnGetSwingDelay(ref delayInSeconds, m));
-            
+
             return TimeSpan.FromSeconds(Math.Clamp(delayInSeconds, minDelay, 7.0));
         }
 
@@ -537,15 +567,6 @@ namespace Server.Items
 
                 if (CheckHit(attacker, defender))
                 {
-                    if (attacker is BaseCreature bc)
-                    {
-                        var ab = bc.GetWeaponAbility();
-
-                        if (ab != null)
-                            if (bc.WeaponAbilityChance >= Utility.RandomDouble())
-                                ab.OnHit(attacker, defender, damageBonus);
-                    }
-
                     OnHit(attacker, defender, damageBonus);
                 }
                 else
@@ -589,38 +610,34 @@ namespace Server.Items
 
         #endregion
 
-        public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage)
+        public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage, bool skipHooks = false)
         {
             if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
             {
                 damage = shield.OnHit(this, damage);
 
                 // ReSharper disable once AccessToModifiedClosure
-                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
+                if (!skipHooks)
+                    defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
             }
 
             double chance = Utility.RandomDouble();
 
-            Item armorItem;
-
-            if (chance < 0.07)
-                armorItem = defender.NeckArmor;
-            else if (chance < 0.14)
-                armorItem = defender.HandArmor;
-            else if (chance < 0.28)
-                armorItem = defender.ArmsArmor;
-            else if (chance < 0.43)
-                armorItem = defender.HeadArmor;
-            else if (chance < 0.65)
-                armorItem = defender.LegsArmor;
-            else
-                armorItem = defender.ChestArmor;
+            Item armorItem = chance switch
+            {
+                < 0.07 => defender.NeckArmor,
+                < 0.14 => defender.HandArmor,
+                < 0.28 => defender.ArmsArmor,
+                < 0.43 => defender.HeadArmor,
+                < 0.65 => defender.LegsArmor,
+                _ => defender.ChestArmor
+            };
 
             if (armorItem is BaseArmor armor)
             {
                 damage = armor.OnHit(this, damage);
-
-                armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
+                if (!skipHooks)
+                    armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
             }
 
             int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
@@ -646,7 +663,8 @@ namespace Server.Items
                 damage -= Utility.Random(from, to - from + 1);
             }
 
-            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
+            if (!skipHooks)
+                defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
 
             return damage;
         }
@@ -664,13 +682,20 @@ namespace Server.Items
             attacker.PlaySound(GetHitAttackSound(attacker, defender));
             defender.PlaySound(GetHitDefendSound(attacker, defender));
 
+
             int damage = ComputeDamage(attacker, defender);
 
-            damage = AbsorbDamage(attacker, defender, damage);
-
             // ReSharper disable once AccessToModifiedClosure
-            defender.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
             attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
+            defender.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
+
+            if (attacker is BaseCreature bc && bc.GetWeaponAbility() is {} ab &&
+                bc.WeaponAbilityChance >= Utility.RandomDouble())
+            {
+                ab.OnHit(attacker, defender, ref damage);
+            }
+
+            damage = AbsorbDamage(attacker, defender, damage);
 
             if (damage < 1)
                 damage = 1;
@@ -697,7 +722,7 @@ namespace Server.Items
                     if (Parent is Mobile parentMobile)
                     {
                         // Your equipment is severely damaged.
-                        parentMobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); 
+                        parentMobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121);
                     }
                 }
                 else
@@ -1078,13 +1103,13 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.DurabilityLevel, DurabilityLevel != WeaponDurabilityLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Quality, Quality != WeaponQuality.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified);
+                SetSaveFlag(ref flags, SaveFlag.Poison, Poison != null);
+                SetSaveFlag(ref flags, SaveFlag.PoisonCharges, PoisonCharges != 0);
             }
 
             SetSaveFlag(ref flags, SaveFlag.Hits, m_Hits != 0);
             SetSaveFlag(ref flags, SaveFlag.MaxHits, MaxHitPoints != 0);
             SetSaveFlag(ref flags, SaveFlag.Slayer, OldSlayer != SlayerName.None);
-            SetSaveFlag(ref flags, SaveFlag.Poison, Poison != null);
-            SetSaveFlag(ref flags, SaveFlag.PoisonCharges, PoisonCharges != 0);
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
             SetSaveFlag(ref flags, SaveFlag.DexReq, m_DexReq != -1);
             SetSaveFlag(ref flags, SaveFlag.IntReq, m_IntReq != -1);
@@ -1510,12 +1535,7 @@ namespace Server.Items
 
         private string GetNameString()
         {
-            string name = Name;
-
-            if (name == null)
-                name = $"#{LabelNumber}";
-
-            return name;
+            return Name ?? $"#{LabelNumber}";;
         }
 
         [Hue, CommandProperty(AccessLevel.GameMaster)]
@@ -1533,8 +1553,16 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);
-            return;
+            
+            var attrs = new List<EquipInfoAttribute>();
+            var eqInfo = new EquipmentInfo(1041000, Crafter, false, attrs.ToArray());
+            
+            if (Poison != null && PoisonCharges > 0)
+                attrs.Add(new EquipInfoAttribute(1017383, PoisonCharges));
 
+            from.Send(new DisplayEquipmentInfo(this, eqInfo));
+
+            /*
             List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
             if (DisplayLootType)
@@ -1599,6 +1627,7 @@ namespace Server.Items
             EquipmentInfo eqInfo = new EquipmentInfo(number, Crafter, false, attrs.ToArray());
 
             from.Send(new DisplayEquipmentInfo(this, eqInfo));
+            */
         }
 
         public static BaseWeapon Fists { get; set; }

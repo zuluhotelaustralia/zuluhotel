@@ -46,9 +46,11 @@ namespace Server.Scripts.Engines.Loot
         public int BonusDex;
         public SkillName SkillBonusName;
         public int SkillBonusValue;
-        public SpellEntry SpellHitEffect { get; set; } = SpellEntry.None;
+        public SpellEntry SpellHitEntry { get; set; } = SpellEntry.None;
         public double SpellHitChance { get; set; }
         public CreatureType CreatureProtection { get; set; }
+        public EffectHitType EffectHitType { get; set; }
+        public double EffectHitTypeChance { get; set; }
 
         public LootItem(Type t)
         {
@@ -99,8 +101,14 @@ namespace Server.Scripts.Engines.Loot
 
                         if (SpellHitChance > 0)
                         {
-                            weapon.SpellHitEffect = SpellHitEffect;
+                            weapon.SpellHitEntry = SpellHitEntry;
                             weapon.SpellHitChance = SpellHitChance;
+                        }
+
+                        if (EffectHitTypeChance > 0)
+                        {
+                            weapon.EffectHitType = EffectHitType;
+                            weapon.EffectHitTypeChance = EffectHitTypeChance;
                         }
                         
                         weapon.MagicalWeaponType = MagicalWeaponType;
@@ -197,7 +205,8 @@ namespace Server.Scripts.Engines.Loot
 
             switch (item.Type)
             {
-                case {} when item.Is<BaseWeapon>():
+                case not null when item.Is<BaseWeapon>():
+                {
                     if (RandomDouble() < 0.2)
                         if (RandomBool())
                             item.MagicalWeaponType = MagicalWeaponType.Mystical;
@@ -206,56 +215,93 @@ namespace Server.Scripts.Engines.Loot
                         else if (RandomBool())
                             item.MagicalWeaponType = MagicalWeaponType.Swift;
 
-                    if (item.EnchantLevel < 0.75)
-                        ApplyDurabilityMod(item);
-                    else if (item.EnchantLevel < 1.5)
-                        ApplyWeaponSkillMod(item);
-                    else if (item.EnchantLevel < 3.5)
-                        ApplyDamageMod(item);
-                    else
-                        ApplyWeaponHitScript(item);
+                    switch (item.EnchantLevel)
+                    {
+                        case < 0.75:
+                            ApplyDurabilityMod(item);
+                            break;
+                        case < 1.5:
+                            ApplyWeaponSkillMod(item);
+                            break;
+                        case < 3.5:
+                            ApplyDamageMod(item);
+                            break;
+                        default:
+                            ApplyWeaponHitScript(item);
+                            break;
+                    }
                     break;
+                }
 
-                case {} when item.Is<BaseShield>():
-                    if (item.EnchantLevel < 1.0)
-                        ApplyDurabilityMod(item);
-                    else if (item.EnchantLevel < 2.0)
-                        ApplyArmorSkillMod(item);
-                    else
-                        ApplyArmorMod(item);
+                case not null when item.Is<BaseShield>():
+                {
+                    switch (item.EnchantLevel)
+                    {
+                        case < 1.0:
+                            ApplyDurabilityMod(item);
+                            break;
+                        case < 2.0:
+                            ApplyArmorSkillMod(item);
+                            break;
+                        default:
+                            ApplyArmorMod(item);
+                            break;
+                    }
                     break;
+                }
 
-                case {} when item.Is<BaseClothing>():
+                case not null when item.Is<BaseClothing>():
+                {
                     if (item.EnchantLevel < 2.5)
                         ApplyMiscSkillMod(item);
                     else
                         ApplyMiscArmorMod(item);
                     AddRandomColor(item);
                     break;
+                }
 
-                case {} when item.Is<BaseJewel>():
-                    if (item.EnchantLevel < 2.5)
-                        ApplyMiscSkillMod(item);
-                    else if (item.EnchantLevel < 3.0)
-                        ApplyEnchant(item);
-                    else
-                        ApplyMiscArmorMod(item);
+                case not null when item.Is<BaseJewel>():
+                {
+                    switch (item.EnchantLevel)
+                    {
+                        case < 2.5:
+                            ApplyMiscSkillMod(item);
+                            break;
+                        case < 3.0:
+                            ApplyEnchant(item);
+                            break;
+                        default:
+                            ApplyMiscArmorMod(item);
+                            break;
+                    }
                     break;
+                }
 
-                case {} when item.Is<BaseTool>() || item.Type == typeof(Pickaxe):
+                case not null when item.Is<BaseTool>() || item.Type == typeof(Pickaxe):
+                {
                     ApplyMiscSkillMod(item);
                     break;
+                }
 
-                case {} when item.Is<BaseArmor>():
-                    if (item.EnchantLevel < 0.75)
-                        ApplyDurabilityMod(item);
-                    else if (item.EnchantLevel < 1.5)
-                        ApplyArmorSkillMod(item);
-                    else if (item.EnchantLevel < 3.5)
-                        ApplyArmorMod(item);
-                    else
-                        ApplyOnHitScript(item);
+                case not null when item.Is<BaseArmor>():
+                {
+                    switch (item.EnchantLevel)
+                    {
+                        case < 0.75:
+                            ApplyDurabilityMod(item);
+                            break;
+                        case < 1.5:
+                            ApplyArmorSkillMod(item);
+                            break;
+                        case < 3.5:
+                            ApplyArmorMod(item);
+                            break;
+                        default:
+                            ApplyOnHitScript(item);
+                            break;
+                    }
                     break;
+                }
             }
 
             return isMagic;
@@ -351,12 +397,14 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyGreaterHitscript(LootItem item)
         {
-            item.Hitscript = "GreaterHitscript";
+            item.EffectHitType = (EffectHitType)RandomMinMax(1, 6);
+            item.EffectHitTypeChance = 1.0;
         }
 
         private static void ApplyEffectHitscript(LootItem item)
         {
-            item.Hitscript = "EffectHitScript";
+            item.EffectHitType = (EffectHitType)RandomMinMax(7, 9);
+            item.EffectHitTypeChance = 1.0;
         }
 
         private static void ApplySlayerHitscript(LootItem item)
@@ -370,7 +418,6 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplySpellHitscript(LootItem item)
         {
-            var spellId = Utility.Random(0, SpellHit.Spells.Count);
 
             var roll = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
 
@@ -419,7 +466,7 @@ namespace Server.Scripts.Engines.Loot
             if (effectChance <= 0)
                 effectChance = 0.04;
 
-            item.SpellHitEffect = spellEntry;
+            item.SpellHitEntry = spellEntry;
             item.SpellHitChance = effectChance + effectChanceMod;
         }
 
@@ -438,7 +485,7 @@ namespace Server.Scripts.Engines.Loot
                 _ => 30
             };
 
-            switch (Utility.Random(1, 3))
+            switch (Utility.Random(3) + 1)
             {
                 case 1:
                     item.BonusStr = amount;
@@ -471,7 +518,7 @@ namespace Server.Scripts.Engines.Loot
             }
 
 
-            if (Utility.Random(1, 100) <= (5 * item.ItemLevel))
+            if (Utility.Random(1, 100) <= 5 * item.ItemLevel)
             {
                 level = Utility.Random(1, 100);
 

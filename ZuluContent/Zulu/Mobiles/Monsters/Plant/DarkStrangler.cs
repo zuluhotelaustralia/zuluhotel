@@ -82,7 +82,7 @@ namespace Server.Mobiles
                 Hue = 0x0493,
                 Speed = 20,
                 Skill = SkillName.Archery,
-                EffectID = 0x113A,
+                EffectId = 0x113A,
                 MissSound = 0x1CA,
                 HitSound = 0x1CB,
                 MaxHitPoints = 300,

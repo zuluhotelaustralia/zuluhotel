@@ -3,56 +3,51 @@ using System;
 namespace Server.Items
 {
     public abstract class BaseSpear : BaseMeleeWeapon
-	{
-		public override int DefaultHitSound{ get{ return 0x23C; } }
-		public override int DefaultMissSound{ get{ return 0x238; } }
+    {
+        public override int DefaultHitSound { get; } = 0x23C;
 
-		public override SkillName DefaultSkill{ get{ return SkillName.Fencing; } }
-		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Piercing; } }
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Pierce2H; } }
+        public override int DefaultMissSound { get; } = 0x238;
 
-		public BaseSpear( int itemID ) : base( itemID )
-		{
-		}
+        public override SkillName DefaultSkill { get; } = SkillName.Fencing;
 
-		public BaseSpear( Serial serial ) : base( serial )
-		{
-		}
+        public override WeaponType DefaultWeaponType { get; } = WeaponType.Piercing;
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.Pierce2H;
 
-			writer.Write( (int) 0 ); // version
-		}
+        public BaseSpear(int itemId) : base(itemId)
+        {
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public BaseSpear(Serial serial) : base(serial)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
-		{
-			base.OnHit( attacker, defender, damageBonus );
+            writer.Write((int) 0); // version
+        }
 
-			if (  Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble() )
-			{
-				defender.SendMessage( "You receive a paralyzing blow!" ); // Is this not localized?
-				defender.Freeze( TimeSpan.FromSeconds( 2.0 ) );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-				attacker.SendMessage( "You deliver a paralyzing blow!" ); // Is this not localized?
-				attacker.PlaySound( 0x11C );
-			}
+            int version = reader.ReadInt();
+        }
 
-			if (  Poison != null && PoisonCharges > 0 )
-			{
-				--PoisonCharges;
+        public override void OnHit(Mobile attacker, Mobile defender, double damageBonus)
+        {
+            base.OnHit(attacker, defender, damageBonus);
 
-				if ( Utility.RandomDouble() >= 0.5 ) // 50% chance to poison
-					defender.ApplyPoison( attacker, Poison );
-			}
-		}
-	}
+            if (Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble())
+            {
+                defender.SendMessage("You receive a paralyzing blow!"); // Is this not localized?
+                defender.Freeze(TimeSpan.FromSeconds(2.0));
+
+                attacker.SendMessage("You deliver a paralyzing blow!"); // Is this not localized?
+                attacker.PlaySound(0x11C);
+            }
+        }
+    }
 }

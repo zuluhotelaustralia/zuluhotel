@@ -31,7 +31,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)] public CreatureType Type { get; set; } = CreatureType.None;
 
-        [Key(2)] public double Chance { get; set; } = 1.0;
+        [Key(2)] public double Chance { get; set; } = 0.0;
 
         public override void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
         {
@@ -58,6 +58,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     {
         public override string Description { get; protected set; } = "Creature Slayer";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
+        
+        public override int Hue { get; protected set; } = 0;
+        public override int CursedHue { get; protected set; } = 0;
 
         public static readonly IReadOnlyDictionary<CreatureType, SlayerEntry> SlayerEntries =
             new Dictionary<CreatureType, SlayerEntry>
@@ -195,8 +198,5 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 index++;
                 return acc;
             }).array;
-
-        public override int Hue { get; protected set; } = 0;
-        public override int CursedHue { get; protected set; } = 0;
     }
 }

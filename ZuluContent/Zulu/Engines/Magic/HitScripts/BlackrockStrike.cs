@@ -4,28 +4,26 @@ using Server.Spells.Sixth;
 
 namespace Server.Engines.Magic.HitScripts
 {
-  public class BlackrockStrike : WeaponAbility
-  {
-    public override void OnHit(Mobile attacker, Mobile defender, double damage)
+    public class BlackrockStrike : WeaponAbility
     {
-      if (!Validate(attacker))
-        return;
+        public override void OnHit(Mobile attacker, Mobile defender, ref int damage)
+        {
+            if (!Validate(attacker))
+                return;
 
-      try
-      {
-        var spell = Spell.Create<DispelSpell>(attacker, null, true);
-
-        var casted = spell.Cast();
-        attacker.Target?.Invoke(attacker, defender);
-
-        if (casted && spell.CheckResisted(defender))
-          defender.Mana = 0;
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine(
-          $"Failed to invoke {GetType().Name} for Creature: {attacker.GetType().Name}, Serial: {attacker.Serial}");
-      }
+            try
+            {
+                var spell = Spell.Create<DispelSpell>(attacker, null, true);
+                spell.Target(attacker, defender);
+                
+                if (spell.CheckResisted(defender))
+                    defender.Mana = 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    $"Failed to invoke {GetType().Name} for Mobile: {attacker.GetType().Name}, Serial: {attacker.Serial}");
+            }
+        }
     }
-  }
 }

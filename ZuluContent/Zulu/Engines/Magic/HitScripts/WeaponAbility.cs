@@ -2,18 +2,17 @@ using Server.Network;
 
 namespace Server.Engines.Magic.HitScripts
 {
-  public abstract class WeaponAbility
-  {
-    public abstract void OnHit(Mobile attacker, Mobile defender, double damage);
-
-    public virtual bool Validate(Mobile from)
+    public abstract class WeaponAbility
     {
-      if (!from.Player)
-        return true;
+        public abstract void OnHit(Mobile attacker, Mobile defender, ref int damage);
 
-      NetState state = from.NetState;
+        public virtual bool Validate(Mobile from)
+        {
 
-      return state != null;
+
+            NetState state = from.NetState;
+
+            return state != null;
+        }
     }
-  }
 }

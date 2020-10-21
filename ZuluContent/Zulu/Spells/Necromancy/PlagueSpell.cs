@@ -34,7 +34,6 @@ namespace Scripts.Zulu.Spells.Necromancy
         {
             if (!CheckSequence()) goto Return;
 
-            var targets = new List<Mobile>();
             var map = Caster.Map;
 
             var level = 0;
@@ -52,7 +51,9 @@ namespace Scripts.Zulu.Spells.Necromancy
                 level = 0;
 
             if (map != null)
+            {
                 foreach (var m in Caster.GetMobilesInRange(1 + (int) (Caster.Skills[CastSkill].Value / 15.0)))
+                {
                     if (Caster != m &&
                         SpellHelper.ValidIndirectTarget(Caster, m) &&
                         Caster.CanBeHarmful(m, false)
@@ -62,6 +63,8 @@ namespace Scripts.Zulu.Spells.Necromancy
 
                         m.ApplyPoison(Caster, Poison.GetPoison(level));
                     }
+                }
+            }
 
             Caster.PlaySound(0x1e2);
 
