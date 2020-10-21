@@ -6,7 +6,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
         None = 0,
         Piercing,
         Banish,
-        Poison,
         LifeDrain,
         ManaDrain,
         StamDrain,

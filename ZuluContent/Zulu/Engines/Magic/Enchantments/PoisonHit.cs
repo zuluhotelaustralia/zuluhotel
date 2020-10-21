@@ -36,8 +36,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string Description { get; protected set; } = "Poison on hit";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;
         
-        public override int Hue { get; protected set; } = 1109;
-        public override int CursedHue { get; protected set; } = 0;
+        public override int Hue { get; protected set; } = 1169;
+        public override int CursedHue { get; protected set; } = 1169;
         
         public override string[,] Names { get; protected set; } = {
             {string.Empty, string.Empty}, // None

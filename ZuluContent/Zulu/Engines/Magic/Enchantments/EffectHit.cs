@@ -18,7 +18,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [EffectHitType.None] = null,
                 [EffectHitType.Piercing] = new PiercingStrike(),
                 [EffectHitType.Banish] = new BanishStrike(),
-                [EffectHitType.Poison] = null,
                 [EffectHitType.LifeDrain] = new LifeDrainStrike(),
                 [EffectHitType.ManaDrain] = new ManaDrainStrike(),
                 [EffectHitType.StamDrain] = new StamDrainStrike(),
@@ -27,7 +26,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [EffectHitType.TriElemental] = new TriElementalStrike(),
             };
 
-        [IgnoreMember] public override string AffixName => EffectHitInfo.SpellSuffixes[EffectHitType][Cursed ? 1 : 0];
+        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName((int) EffectHitType, Cursed);
 
         [IgnoreMember] public override EnchantmentInfo Info => EffectHitInfo.Variants[EffectHitType];
 
@@ -44,6 +43,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public class EffectHitInfo : EnchantmentInfo
     {
+        private static EffectHitInfo DefaultVariant = new EffectHitInfo();
+        
         public override string Description { get; protected set; } = "Effect On Hit";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
 
@@ -53,25 +54,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public static readonly IReadOnlyDictionary<EffectHitType, EffectHitInfo> Variants =
             new Dictionary<EffectHitType, EffectHitInfo>
             {
-                [EffectHitType.None] = new EffectHitInfo
-                {
-                    Hue = 0, 
-                    CursedHue = 0
-                },
+                [EffectHitType.None] = DefaultVariant,
+                [EffectHitType.Banish] = DefaultVariant,
+                [EffectHitType.TriElemental] = DefaultVariant,
                 [EffectHitType.Piercing] = new EffectHitInfo
                 {
                     Hue = 1141, 
                     CursedHue = 1645
-                },
-                [EffectHitType.Banish] = new EffectHitInfo
-                {
-                    Hue = 0, 
-                    CursedHue = 0
-                },
-                [EffectHitType.Poison] = new EffectHitInfo
-                {
-                    Hue = 0, 
-                    CursedHue = 0
                 },
                 [EffectHitType.LifeDrain] = new EffectHitInfo
                 {
@@ -101,39 +90,20 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                     Hue = 1175,
                     CursedHue = 1174
                 },
-                [EffectHitType.TriElemental] = new EffectHitInfo
-                {
-                    Hue = 0, 
-                    CursedHue = 0
-                },
             };
 
-        public static readonly IReadOnlyDictionary<EffectHitType, string[]> SpellSuffixes =
-            new Dictionary<EffectHitType, string[]>
-            {
-                [EffectHitType.None] = new[] {string.Empty, string.Empty},
-                [EffectHitType.Piercing] = new[] {"of Piercing", "of Bleeding"},
-                [EffectHitType.Banish] = new[] {"Banishing", "Summoning"},
-                [EffectHitType.Poison] = new[] {"Poisoned", "Envenomed"},
-                [EffectHitType.LifeDrain] = new[] {"Bloody", "Lifegiver's"},
-                [EffectHitType.ManaDrain] = new[] {"Magehunting", "Mind Twisting"},
-                [EffectHitType.StamDrain] = new[] {"Leeching", "Parasitic"},
-                [EffectHitType.Blackrock] = new[] {"Blackrock", "Poor Quality Blackrock"},
-                [EffectHitType.Void] = new[] {"the Void", "the Void's Touch"},
-                [EffectHitType.TriElemental] = new[] {"Elemental Fury", "Elemental Vengeance"},
-            };
-
-        // When LINQ goes wrong...
-        public override string[,] Names { get; protected set; } = SpellSuffixes.Values.Aggregate(
-            (array: new string[SpellSuffixes.Count, 2], index: 0),
-            (acc, cur) =>
-            {
-                var (array, index) = acc;
-                array[index, 0] = cur[0];
-                array[index, 1] = cur[1];
-
-                index++;
-                return acc;
-            }).array;
+        public override string[,] Names { get; protected set; } =
+        {
+            // These are in order of (int)EffectHitType
+            {string.Empty, string.Empty},
+            {"of Piercing", "of Bleeding"},
+            {"Banishing", "Summoning"},
+            {"Bloody", "Lifegiver's"},
+            {"Magehunting", "Mind Twisting"},
+            {"Leeching", "Parasitic"},
+            {"Blackrock", "Poor Quality Blackrock"},
+            {"the Void", "the Void's Touch"},
+            {"Elemental Fury", "Elemental Vengeance"},
+        };
     }
 }

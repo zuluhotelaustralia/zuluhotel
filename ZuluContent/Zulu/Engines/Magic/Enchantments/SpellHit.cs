@@ -47,14 +47,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [SpellEntry.Earthquake] = (a, _) => Spell.Create<EarthquakeSpell>(a, null, true).OnCast(),
             };
 
+        private static readonly List<SpellEntry> Entries = Spells.Keys.ToList();
+
         private SpellEntry m_SpellEntry = SpellEntry.None;
 
-        [IgnoreMember] public override string AffixName => SpellHitInfo.SpellSuffixes[SpellEntry][Cursed ? 1 : 0];
+        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Entries.IndexOf(SpellEntry), Cursed);
 
         [Key(1)]
         public SpellEntry SpellEntry
         {
             get => m_SpellEntry;
+            // Not all spells are allowed, so if someone sets an unsupported spell we make it None instead.
             set => m_SpellEntry = Spells.ContainsKey(value) ? value : SpellEntry.None;
         }
 
@@ -74,42 +77,29 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
-
-        public static readonly IReadOnlyDictionary<SpellEntry, string[]> SpellSuffixes =
-            new Dictionary<SpellEntry, string[]>
-            {
-                [SpellEntry.None]  = new[] { string.Empty, string.Empty },
-                [SpellEntry.Clumsy] = new[] { "Bungling", "Clumsiness" },
-                [SpellEntry.Feeblemind] = new[] { "Senility", "Foolishness" },
-                [SpellEntry.MagicArrow] = new[] { "Burning", "Pain" },
-                [SpellEntry.Weaken] = new[] { "Weakening", "Weakness" },
-                [SpellEntry.Harm] = new[] { "Wounding", "Anguish" },
-                [SpellEntry.Fireball] = new[] { "Daemon's Breath", "Daemonic Torment" },
-                [SpellEntry.Curse] = new[] { "Evil", "Punishment" },
-                [SpellEntry.Lightning] = new[] { "Thunder", "Storm Seeking" },
-                [SpellEntry.ManaDrain] = new[] { "Mage's Bane", "Magical Disruption" },
-                [SpellEntry.MindBlast] = new[] { "Mental Strike", "Mental Futility" },
-                [SpellEntry.Paralyze] = new[] { "Entrapment", "Entangling" },
-                [SpellEntry.EnergyBolt] = new[] { "Disruption", "Static Discharge" },
-                [SpellEntry.Explosion] = new[] { "Conflagration", "Flaming Death" },
-                [SpellEntry.MassCurse] = new[] { "Corruption", "Daemonic Influence" },
-                [SpellEntry.ChainLightning] = new[] { "Heaven's Wrath", "Heaven's Vengance" },
-                [SpellEntry.FlameStrike] = new[] { "Hellfire", "Hell's Torment" },
-                [SpellEntry.MeteorSwarm] = new[] { "Celestial Fury", "Celestial Folly" },
-                [SpellEntry.Earthquake] = new[] { "Gaia's Wrath", "Gaia's Vengeance" },
-            };
-
-        // When LINQ goes wrong...
-        public override string[,] Names { get; protected set; } = SpellSuffixes.Values.Aggregate(
-            (array: new string[SpellSuffixes.Count, 2], index: 0),
-            (acc, cur) =>
-            {
-                var (array, index) = acc;
-                array[index, 0] = cur[0];
-                array[index, 1] = cur[1];
-
-                index++;
-                return acc;
-            }).array;
+        
+        public override string[,] Names { get; protected set; } =
+        {
+            // These are in order of SpellHit.Entries.IndexOf()
+            { string.Empty, string.Empty },
+            { "Bungling", "Clumsiness" },
+            { "Senility", "Foolishness" },
+            { "Burning", "Pain" },
+            { "Weakening", "Weakness" },
+            { "Wounding", "Anguish" },
+            { "Daemon's Breath", "Daemonic Torment" },
+            { "Evil", "Punishment" },
+            { "Thunder", "Storm Seeking" },
+            { "Mage's Bane", "Magical Disruption" },
+            { "Mental Strike", "Mental Futility" },
+            { "Entrapment", "Entangling" },
+            { "Disruption", "Static Discharge" },
+            { "Conflagration", "Flaming Death" },
+            { "Corruption", "Daemonic Influence" },
+            { "Heaven's Wrath", "Heaven's Vengance" },
+            { "Hellfire", "Hell's Torment" },
+            { "Celestial Fury", "Celestial Folly" },
+            { "Gaia's Wrath", "Gaia's Vengeance" },
+        };
     }
 }
