@@ -244,7 +244,7 @@ namespace Server.Multis
 			{
 				case 3:
 				{
-					m_MapItem = (MapItem) reader.ReadItem();
+					m_MapItem = reader.ReadEntity<MapItem>();
 					m_NextNavPoint = reader.ReadInt();
 
 					goto case 2;
@@ -278,11 +278,11 @@ namespace Server.Multis
 							m_Facing = Direction.West;
 					}
 
-					m_Owner = reader.ReadMobile();
-					m_PPlank = reader.ReadItem() as Plank;
-					m_SPlank = reader.ReadItem() as Plank;
-					m_TillerMan = reader.ReadItem() as TillerMan;
-					m_Hold = reader.ReadItem() as Hold;
+					m_Owner = reader.ReadEntity<Mobile>();
+					m_PPlank = reader.ReadEntity<Plank>();
+					m_SPlank = reader.ReadEntity<Plank>();
+					m_TillerMan = reader.ReadEntity<TillerMan>();
+					m_Hold = reader.ReadEntity<Hold>();
 					m_Anchored = reader.ReadBool();
 					m_ShipName = reader.ReadString();
 
@@ -1711,7 +1711,7 @@ namespace Server.Multis
 			EventSink.WorldSave += EventSink_WorldSave;
 		}
 
-		private static void EventSink_WorldSave( bool b )
+		private static void EventSink_WorldSave()
 		{
 			new UpdateAllTimer().Start();
 		}
@@ -1854,7 +1854,7 @@ namespace Server.Multis
 
 						Stream.Write( (byte) m.Direction );
 						Stream.Write( (short) m.Hue );
-						Stream.Write( (byte) m.GetPacketFlags() );
+						Stream.Write( (byte) m.GetPacketFlags(true) );
 					}
 					else if ( ent is Item )
 					{

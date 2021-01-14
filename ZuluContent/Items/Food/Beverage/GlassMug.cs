@@ -98,7 +98,7 @@ public GlassMug( Serial serial )
                     }
                     else
                     {
-                        throw new Exception( World.LoadingType );
+                        throw new Exception( GetType().FullName );
                     }
 
                     break;

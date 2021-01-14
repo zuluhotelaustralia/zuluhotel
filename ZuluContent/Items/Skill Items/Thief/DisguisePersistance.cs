@@ -63,7 +63,7 @@ namespace Server.Items
 
 					for ( int i = 0; i < count; ++i )
 					{
-						Mobile m = reader.ReadMobile();
+						Mobile m = reader.ReadEntity<Mobile>();
 						DisguiseTimers.CreateTimer( m, reader.ReadTimeSpan() );
 						m.NameMod = reader.ReadString();
 					}

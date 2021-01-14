@@ -191,7 +191,7 @@ public KeyRing( Serial serial ) : base( serial )
 
 			writer.WriteEncodedInt( 0 ); // version
 
-			writer.WriteItemList<Key>( m_Keys );
+			writer.Write( m_Keys );
 		}
 
 		public override void Deserialize( IGenericReader reader )
@@ -200,7 +200,7 @@ public KeyRing( Serial serial ) : base( serial )
 
 			int version = reader.ReadEncodedInt();
 
-			m_Keys = reader.ReadStrongItemList<Key>();
+			m_Keys = reader.ReadEntityList<Key>();
 		}
 	}
 }

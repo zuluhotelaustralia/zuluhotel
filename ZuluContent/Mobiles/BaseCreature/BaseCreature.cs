@@ -1085,7 +1085,7 @@ namespace Server.Mobiles
             writer.Write((int) m_DamageMax);
 
             // Version 8
-            writer.Write(m_Owners, true);
+            writer.Write(m_Owners);
 
             // Version 11
             writer.Write((bool) m_HasGeneratedLoot);
@@ -1094,7 +1094,7 @@ namespace Server.Mobiles
             writer.Write((bool) (m_Friends != null && m_Friends.Count > 0));
 
             if (m_Friends != null && m_Friends.Count > 0)
-                writer.Write(m_Friends, true);
+                writer.Write(m_Friends);
 
             // Version 14
             writer.Write((bool) m_RemoveIfUntamed);
@@ -1185,8 +1185,8 @@ namespace Server.Mobiles
                 m_FightMode = (FightMode) reader.ReadInt();
 
                 m_bControlled = reader.ReadBool();
-                m_ControlMaster = reader.ReadMobile();
-                m_ControlTarget = reader.ReadMobile();
+                m_ControlMaster = reader.ReadEntity<Mobile>();
+                m_ControlTarget = reader.ReadEntity<Mobile>();
                 m_ControlDest = reader.ReadPoint3D();
                 m_ControlOrder = (OrderType) reader.ReadInt();
 
@@ -1222,10 +1222,10 @@ namespace Server.Mobiles
                 m_Loyalty = MaxLoyalty; // Wonderfully Happy
 
             if (version >= 4)
-                m_CurrentWayPoint = reader.ReadItem() as WayPoint;
+                m_CurrentWayPoint = reader.ReadEntity<WayPoint>();
 
             if (version >= 5)
-                m_SummonMaster = reader.ReadMobile();
+                m_SummonMaster = reader.ReadEntity<Mobile>();
 
             if (version >= 6)
             {
@@ -1237,7 +1237,7 @@ namespace Server.Mobiles
             }
 
             if (version >= 8)
-                m_Owners = reader.ReadStrongMobileList();
+                m_Owners = reader.ReadEntityList<Mobile>();
             else
                 m_Owners = new List<Mobile>();
 
@@ -1247,7 +1247,7 @@ namespace Server.Mobiles
                 m_HasGeneratedLoot = true;
 
             if (version >= 13 && reader.ReadBool())
-                m_Friends = reader.ReadStrongMobileList();
+                m_Friends = reader.ReadEntityList<Mobile>();
             else if (version < 13 && m_ControlOrder >= OrderType.Unfriend)
                 ++m_ControlOrder;
 
@@ -1943,7 +1943,7 @@ namespace Server.Mobiles
         {
             Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 8,
                 20, 5042);
-            Effects.PlaySound(m, m.Map, 0x201);
+            Effects.PlaySound(m, 0x201);
 
             m.Delete();
         }
@@ -4206,10 +4206,10 @@ namespace Server.Mobiles
                 {
                     string word = wordsString[i];
 
-                    if (Insensitive.Equals(word, wordName))
+                    if (InsensitiveStringHelpers.Equals(word, wordName))
                         bFound = true;
 
-                    if (bWithAll && Insensitive.Equals(word, "all"))
+                    if (bWithAll && InsensitiveStringHelpers.Equals(word, "all"))
                         return true;
                 }
 

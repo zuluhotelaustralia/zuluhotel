@@ -89,7 +89,7 @@ public WayPoint( Serial serial ) : base( serial )
 			{
 				case 0:
 				{
-					m_Next = reader.ReadItem() as WayPoint;
+					m_Next = reader.ReadEntity<WayPoint>();
 					break;
 				}
 			}

@@ -186,7 +186,7 @@ public LizardmenCamp( Serial serial ) : base( serial )
 			{
 				case 0:
 				{
-					m_Prisoner = reader.ReadMobile();
+					m_Prisoner = reader.ReadEntity<Mobile>();
 					break;
 				}
 			}

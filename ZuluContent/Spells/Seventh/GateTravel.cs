@@ -211,13 +211,13 @@ namespace Server.Spells.Seventh
                     if (!boat.Deleted && boat.CheckKey(((Key) o).KeyValue))
                         m_Owner.Effect(boat.GetMarkedLocation(), boat.Map, false);
                     else
-                        from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030,
-                            from.Name, "")); // I can not gate travel from that object.
+                        from.NetState.SendMessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030,
+                            from.Name, ""); // I can not gate travel from that object.
                 }
                 else
                 {
-                    from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030,
-                        from.Name, "")); // I can not gate travel from that object.
+                    from.NetState.SendMessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 501030,
+                        from.Name, ""); // I can not gate travel from that object.
                 }
             }
 

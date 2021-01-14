@@ -33,7 +33,7 @@ namespace Server.Engines.Spawners
       for (int i = 0; i < count; ++i)
         // IEntity e = World.FindEntity( reader.ReadInt() );
 
-        if (reader.ReadEntity() is ISpawnable e)
+        if (reader.ReadEntity<Mobile>() is ISpawnable e)
         {
           e.Spawner = parent;
 

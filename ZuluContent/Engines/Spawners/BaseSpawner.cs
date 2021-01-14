@@ -446,7 +446,7 @@ namespace Server.Engines.Spawners
                     string propName = props[i, 0];
 
                     for (int j = 0; thisProp == null && j < allProps.Length; ++j)
-                        if (Insensitive.Equals(propName, allProps[j].Name))
+                        if (InsensitiveStringHelpers.Equals(propName, allProps[j].Name))
                             thisProp = allProps[j];
 
                     if (thisProp == null)
@@ -842,7 +842,7 @@ namespace Server.Engines.Spawners
                 case 3:
                 case 2:
                 {
-                    WayPoint = reader.ReadItem() as WayPoint;
+                    WayPoint = reader.ReadEntity<WayPoint>();
 
                     goto case 1;
                 }
@@ -894,7 +894,7 @@ namespace Server.Engines.Spawners
                         int count = reader.ReadInt();
 
                         for (int i = 0; i < count; ++i)
-                            if (reader.ReadEntity() is ISpawnable e)
+                            if (reader.ReadEntity<Mobile>() is ISpawnable e)
                             {
                                 if (e is BaseCreature creature)
                                     creature.RemoveIfUntamed = true;

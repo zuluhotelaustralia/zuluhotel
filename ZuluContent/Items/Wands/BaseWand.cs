@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Targeting;
 using Server.Spells;
@@ -127,7 +128,7 @@ namespace Server.Items
 
         public override void OnSingleClick(Mobile from)
         {
-            ArrayList attrs = new ArrayList();
+            var attrs = new List<EquipInfoAttribute>();
 
             if (DisplayLootType)
             {
@@ -178,10 +179,8 @@ namespace Server.Items
             if (attrs.Count == 0 && Crafter == null && Name != null)
                 return;
 
-            var eqInfo = new EquipmentInfo(number, Crafter, false,
-                (EquipInfoAttribute[]) attrs.ToArray(typeof(EquipInfoAttribute)));
+            from.NetState.SendDisplayEquipmentInfo(Serial, number, Crafter?.RawName, false, attrs);
 
-            from.Send(new DisplayEquipmentInfo(this, eqInfo));
         }
 
         public void Cast(Spell spell)

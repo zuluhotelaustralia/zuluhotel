@@ -47,7 +47,7 @@ namespace Server.Spells.Fourth
                 else
                     eastToWest = false;
 
-                Effects.PlaySound(p, Caster.Map, 0x20C);
+                Effects.PlaySound((Point3D)p, Caster.Map, 0x20C);
 
                 var itemID = eastToWest ? 0x398C : 0x3996;
 
@@ -142,7 +142,7 @@ namespace Server.Spells.Fourth
                     }
                     case 1:
                     {
-                        m_Caster = reader.ReadMobile();
+                        m_Caster = reader.ReadEntity<Mobile>();
 
                         goto case 0;
                     }

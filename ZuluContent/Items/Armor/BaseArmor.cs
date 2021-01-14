@@ -785,7 +785,7 @@ namespace Server.Items
                         m_HitPoints = reader.ReadEncodedInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Crafter))
-                        m_Crafter = reader.ReadMobile();
+                        m_Crafter = reader.ReadEntity<Mobile>();
 
                     if (GetSaveFlag(flags, SaveFlag.Quality))
                         Quality = (ArmorQuality) reader.ReadEncodedInt();
@@ -876,7 +876,7 @@ namespace Server.Items
                     m_ArmorBase = reader.ReadInt();
                     MaxHitPoints = reader.ReadInt();
                     m_HitPoints = reader.ReadInt();
-                    m_Crafter = reader.ReadMobile();
+                    m_Crafter = reader.ReadEntity<Mobile>();
                     Quality = (ArmorQuality) reader.ReadInt();
                     Durability = (ArmorDurabilityLevel) reader.ReadInt();
                     ProtectionLevel = (ArmorProtectionLevel) reader.ReadInt();
@@ -1186,52 +1186,6 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);
-            return;
-            
-            List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
-
-            if (DisplayLootType)
-            {
-                if (LootType == LootType.Blessed)
-                    attrs.Add(new EquipInfoAttribute(1038021)); // blessed
-                else if (LootType == LootType.Cursed)
-                    attrs.Add(new EquipInfoAttribute(1049643)); // cursed
-            }
-
-            if (Quality == ArmorQuality.Exceptional)
-                attrs.Add(new EquipInfoAttribute(1018305 - (int) Quality));
-
-            if (Identified || from.AccessLevel >= AccessLevel.GameMaster)
-            {
-                if (Durability != ArmorDurabilityLevel.Regular)
-                    attrs.Add(new EquipInfoAttribute(1038000 + (int) Durability));
-
-                if (ProtectionLevel > ArmorProtectionLevel.Regular &&
-                    ProtectionLevel <= ArmorProtectionLevel.Invulnerability)
-                    attrs.Add(new EquipInfoAttribute(1038005 + (int) ProtectionLevel));
-            }
-            else if (Durability != ArmorDurabilityLevel.Regular || ProtectionLevel > ArmorProtectionLevel.Regular &&
-                ProtectionLevel <= ArmorProtectionLevel.Invulnerability)
-                attrs.Add(new EquipInfoAttribute(1038000)); // Unidentified
-
-            int number;
-
-            if (Name == null)
-            {
-                number = LabelNumber;
-            }
-            else
-            {
-                LabelTo(from, Name);
-                number = 1041000;
-            }
-
-            if (attrs.Count == 0 && Crafter == null && Name != null)
-                return;
-
-            EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false, attrs.ToArray());
-
-            from.Send(new DisplayEquipmentInfo(this, eqInfo));
         }
 
         #region ICraftable Members

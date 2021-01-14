@@ -239,7 +239,7 @@ public EffectController( Serial serial ) : base( serial )
 
 					m_Source = ReadEntity( reader );
 					m_Target = ReadEntity( reader );
-					m_Trigger = reader.ReadItem() as EffectController;
+					m_Trigger = reader.ReadEntity<EffectController>();
 
 					m_FixedDirection = reader.ReadBool();
 					m_Explodes = reader.ReadBool();

@@ -40,7 +40,7 @@ namespace Server.Spells.Third
                     Effects.SendLocationParticles(
                         EffectItem.Create(new Point3D(loc), from.Map, EffectItem.DefaultDuration), 0x376A, 9, 32, 5024);
 
-                    Effects.PlaySound(loc, from.Map, 0x1FF);
+                    Effects.PlaySound((Point3D)loc, from.Map, 0x1FF);
 
                     if (o is Mobile)
                     {

@@ -1,167 +1,112 @@
 using System;
-using Server.Misc;
 using Server.Network;
-using Server.Accounting;
 
 namespace Server.Engines.Chat
 {
-    public class ChatSystem
-	{
-        public static bool Enabled { get; set; } = false;
+    public static class ChatSystem
+    {
+        public static bool Enabled { get; set; }
+
+        public static void Configure()
+        {
+            Enabled = ServerConfiguration.GetOrUpdateSetting("chat.enabled", false);
+        }
 
         public static void Initialize()
-		{
-			PacketHandlers.Register( 0xB5, 0x40, true, OpenChatWindowRequest );
-			PacketHandlers.Register( 0xB3, 0, true, ChatAction );
-		}
+        {
+            IncomingPackets.Register(0xB5, 0x40, true, OpenChatWindowRequest);
+            IncomingPackets.Register(0xB3, 0, true, ChatAction);
+        }
 
-		public static void SendCommandTo( Mobile to, ChatCommand type )
-		{
-			SendCommandTo( to, type, null, null );
-		}
+        public static void SendCommandTo(Mobile to, ChatCommand type, string param1 = null, string param2 = null)
+        {
+            to?.Send(new ChatMessagePacket(null, (int)type + 20, param1, param2));
+        }
 
-		public static void SendCommandTo( Mobile to, ChatCommand type, string param1 )
-		{
-			SendCommandTo( to, type, param1, null );
-		}
+        public static void OpenChatWindowRequest(NetState state, CircularBufferReader reader)
+        {
+            var from = state.Mobile;
 
-		public static void SendCommandTo( Mobile to, ChatCommand type, string param1, string param2 )
-		{
-			if ( to != null )
-				to.Send( new ChatMessagePacket( null, (int)type + 20, param1, param2 ) );
-		}
+            if (!Enabled)
+            {
+                from.SendMessage("The chat system has been disabled.");
+                return;
+            }
 
-		public static void OpenChatWindowRequest( NetState state, PacketReader pvSrc )
-		{
-			Mobile from = state.Mobile;
+            // Newer clients don't send chat username anymore so we are ignoring the rest of this packet.
 
-			if ( !Enabled )
-			{
-				from.SendMessage( "The chat system has been disabled." );
-				return;
-			}
+            // TODO: How does OSI handle incognito/disguise kits?
+            // TODO: Does OSI still allow duplicate names?
+            // For now we assume they should use their raw name.
+            var chatName = from.RawName ?? $"Unknown User {Utility.RandomMinMax(1000000, 9999999)}";
 
-			pvSrc.Seek( 2, System.IO.SeekOrigin.Begin );
-			string chatName = pvSrc.ReadUnicodeStringSafe( ( 0x40 - 2 ) >> 1 ).Trim();
+            SendCommandTo(from, ChatCommand.OpenChatWindow, chatName);
+            ChatUser.AddChatUser(from, chatName);
+        }
 
-			Account acct = state.Account as Account;
+        public static ChatUser SearchForUser(ChatUser from, string name)
+        {
+            var user = ChatUser.GetChatUser(name);
 
-			string accountChatName = null;
+            if (user == null)
+            {
+                from.SendMessage(32, name); // There is no player named '%1'.
+            }
 
-			if ( acct != null )
-				accountChatName = acct.GetTag( "ChatName" );
+            return user;
+        }
 
-			if ( accountChatName != null )
-				accountChatName = accountChatName.Trim();
+        public static void ChatAction(NetState state, CircularBufferReader reader)
+        {
+            if (!Enabled)
+            {
+                return;
+            }
 
-			if ( accountChatName != null && accountChatName.Length > 0 )
-			{
-				if ( chatName.Length > 0 && chatName != accountChatName )
-					from.SendMessage( "You cannot change chat nickname once it has been set." );
-			}
-			else
-			{
-				if ( chatName == null || chatName.Length == 0 )
-				{
-					SendCommandTo( from, ChatCommand.AskNewNickname );
-					return;
-				}
+            try
+            {
+                var from = state.Mobile;
+                var user = ChatUser.GetChatUser(from);
 
-				if ( NameVerification.Validate( chatName, 2, 31, true, true, true, 0, NameVerification.SpaceDashPeriodQuote ) && chatName.ToLower().IndexOf( "system" ) == -1 )
-				{
-					// TODO: Optimize this search
+                if (user == null)
+                {
+                    return;
+                }
 
-					foreach ( Account checkAccount in Accounts.GetAccounts() )
-					{
-						string existingName = checkAccount.GetTag( "ChatName" );
+                var lang = reader.ReadAsciiSafe(4);
+                int actionID = reader.ReadInt16();
+                var param = reader.ReadBigUniSafe();
 
-						if ( existingName != null )
-						{
-							existingName = existingName.Trim();
+                var handler = ChatActionHandlers.GetHandler(actionID);
 
-							if ( Insensitive.Equals( existingName, chatName ) )
-							{
-								from.SendMessage( "Nickname already in use." );
-								SendCommandTo( from, ChatCommand.AskNewNickname );
-								return;
-							}
-						}
-					}
+                if (handler == null)
+                {
+                    state.WriteConsole("Unknown chat action 0x{0:X}: {1}", actionID, param);
+                    return;
+                }
 
-					accountChatName = chatName;
+                var channel = user.CurrentChannel;
 
-					if ( acct != null )
-						acct.AddTag( "ChatName", chatName );
-				}
-				else
-				{
-					from.SendLocalizedMessage( 501173 ); // That name is disallowed.
-					SendCommandTo( from, ChatCommand.AskNewNickname );
-					return;
-				}
-			}
+                if (handler.RequireConference && channel == null)
+                {
+                    // You must be in a conference to do this.
+                    // To join a conference, select one from the Conference menu.
+                    user.SendMessage(31);
+                    return;
+                }
 
-			SendCommandTo( from, ChatCommand.OpenChatWindow, accountChatName );
-			ChatUser.AddChatUser( from );
-		} 
+                if (handler.RequireModerator && !user.IsModerator)
+                {
+                    user.SendMessage(29); // You must have operator status to do this.
+                    return;
+                }
 
-		public static ChatUser SearchForUser( ChatUser from, string name )
-		{
-			ChatUser user = ChatUser.GetChatUser( name );
-
-			if ( user == null )
-				from.SendMessage( 32, name ); // There is no player named '%1'.
-
-			return user;
-		}
-
-		public static void ChatAction( NetState state, PacketReader pvSrc )
-		{
-			if ( !Enabled )
-				return;
-
-			try
-			{
-				Mobile from = state.Mobile;
-				ChatUser user = ChatUser.GetChatUser( from );
-
-				if ( user == null )
-					return;
-
-				string lang = pvSrc.ReadStringSafe( 4 );
-				int actionID = pvSrc.ReadInt16();
-				string param = pvSrc.ReadUnicodeString();
-
-				ChatActionHandler handler = ChatActionHandlers.GetHandler( actionID );
-
-				if ( handler != null )
-				{
-					Channel channel = user.CurrentChannel;
-
-					if ( handler.RequireConference && channel == null )
-					{
-						user.SendMessage( 31 ); /* You must be in a conference to do this.
-												 * To join a conference, select one from the Conference menu.
-												 */
-					}
-					else if ( handler.RequireModerator && !user.IsModerator )
-					{
-						user.SendMessage( 29 ); // You must have operator status to do this.
-					}
-					else
-					{
-						handler.Callback( user, channel, param );
-					}
-				}
-				else
-				{
-					Console.WriteLine( "Client: {0}: Unknown chat action 0x{1:X}: {2}", state, actionID, param );
-				}
-			}
-			catch ( Exception e )
-			{
-				Console.WriteLine( e );
-			}
-		}
-	}
+                handler.Callback(user, channel, param);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+    }
 }

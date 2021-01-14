@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using Server.Items;
 using Server.Mobiles;
 using Server.Commands;
@@ -36,9 +35,9 @@ namespace Server.Engines.Craft
         {
             var version = reader.ReadInt();
             item.PlayerConstructed = reader.ReadBool();
-            
+
             if (reader.ReadBool())
-                item.Crafter = reader.ReadMobile();
+                item.Crafter = reader.ReadEntity<Mobile>();
         }
 
         int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool,

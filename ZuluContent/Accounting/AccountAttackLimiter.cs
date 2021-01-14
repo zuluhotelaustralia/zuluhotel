@@ -14,16 +14,16 @@ namespace Server.Accounting
       Enabled = ServerConfiguration.GetOrUpdateSetting("accountAttackLimiter.enable", true);
     }
 
-    private static readonly List<InvalidAccountAccessLog> m_List = new List<InvalidAccountAccessLog>();
+    private static readonly List<InvalidAccountAccessLog> List = new();
 
     public static void Initialize()
     {
       if (!Enabled)
         return;
 
-      PacketHandlers.RegisterThrottler(0x80, Throttle_Callback);
-      PacketHandlers.RegisterThrottler(0x91, Throttle_Callback);
-      PacketHandlers.RegisterThrottler(0xCF, Throttle_Callback);
+      IncomingPackets.RegisterThrottler(0x80, Throttle_Callback);
+      IncomingPackets.RegisterThrottler(0x91, Throttle_Callback);
+      IncomingPackets.RegisterThrottler(0xCF, Throttle_Callback);
     }
 
     public static TimeSpan Throttle_Callback(NetState ns)
@@ -45,12 +45,12 @@ namespace Server.Accounting
 
       IPAddress ipAddress = ns.Address;
 
-      for (int i = 0; i < m_List.Count; ++i)
+      for (int i = 0; i < List.Count; ++i)
       {
-        InvalidAccountAccessLog accessLog = m_List[i];
+        InvalidAccountAccessLog accessLog = List[i];
 
         if (accessLog.HasExpired)
-          m_List.RemoveAt(i--);
+          List.RemoveAt(i--);
         else if (accessLog.Address.Equals(ipAddress))
           return accessLog;
       }
@@ -66,7 +66,7 @@ namespace Server.Accounting
       InvalidAccountAccessLog accessLog = FindAccessLog(ns);
 
       if (accessLog == null)
-        m_List.Add(accessLog = new InvalidAccountAccessLog(ns.Address));
+        List.Add(accessLog = new InvalidAccountAccessLog(ns.Address));
 
       accessLog.Counts += 1;
       accessLog.RefreshAccessTime();

@@ -70,7 +70,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static void SendResponse(Mobile m, Item item, string text)
         {
-            m.Send(new AsciiMessage(item.Serial, item.ItemID, MessageType.Label, 0x3B2, 3, string.Empty, text.Trim()));
+            item.LabelTo(m, text.Trim());
         }
     }
 }

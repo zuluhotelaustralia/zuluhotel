@@ -41,15 +41,16 @@ namespace Server.Mobiles
 		}
 
 		public virtual void SayPriceTo( Mobile m )
-		{
-			m.Send( new MessageLocalizedAffix( Serial, Body, MessageType.Regular, SpeechHue, 3, 1008052, Name, AffixType.Append, JoinCost.ToString(), "" ) );
-		}
+        {
+            m.NetState.SendMessageLocalizedAffix(Serial, Body, MessageType.Regular, SpeechHue, 3, 1008052, Name,
+                AffixType.Append, JoinCost.ToString(), "");
+        }
 
 		public virtual bool WasNamed( string speech )
 		{
 			string name = this.Name;
 
-			return name != null && Insensitive.StartsWith( speech, name );
+			return name != null && InsensitiveStringHelpers.InsensitiveStartsWith( speech, name );
 		}
 
 		public override bool HandlesOnSpeech( Mobile from )

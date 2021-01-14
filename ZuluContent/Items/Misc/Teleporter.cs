@@ -330,9 +330,9 @@ public Teleporter(Serial serial)
 				if (m.BeginAction(this))
 				{
 					if (m_MessageString != null)
-						m.Send(new UnicodeMessage(Serial, ItemID, MessageType.Regular, 0x3B2, 3, "ENU", null, m_MessageString));
+						m.NetState.SendMessage(Serial, ItemID, MessageType.Regular, 0x3B2, 3, false, "ENU", null, m_MessageString);
 					else if (m_MessageNumber != 0)
-						m.Send(new MessageLocalized(Serial, ItemID, MessageType.Regular, 0x3B2, 3, m_MessageNumber, null, ""));
+						m.NetState.SendMessageLocalized(Serial, ItemID, MessageType.Regular, 0x3B2, 3, m_MessageNumber, null);
 
 					Timer.DelayCall(TimeSpan.FromSeconds(5.0), EndMessageLock, m);
 				}
@@ -790,7 +790,7 @@ public Teleporter(Serial serial)
 
 			for (int i = 0; i < count; ++i)
 			{
-				Mobile m = reader.ReadMobile();
+				Mobile m = reader.ReadEntity<Mobile>();
 				DateTime end = reader.ReadDateTime();
 
 				StartTimer(m, end - DateTime.Now);
@@ -843,7 +843,7 @@ public Teleporter(Serial serial)
 
 			writer.Write((int)0); // version
 
-			writer.WriteItem<TimeoutTeleporter>(m_Teleporter);
+			writer.Write(m_Teleporter);
 		}
 
 		public override void Deserialize(IGenericReader reader)
@@ -852,7 +852,7 @@ public Teleporter(Serial serial)
 
 			int version = reader.ReadInt();
 
-			m_Teleporter = reader.ReadItem<TimeoutTeleporter>();
+			m_Teleporter = reader.ReadEntity<TimeoutTeleporter>();
 		}
 	}
 

@@ -129,7 +129,7 @@ namespace Server.Items
       int version = reader.ReadInt();
 
       m_Active = reader.ReadBool();
-      m_TeleDest = reader.ReadItem() as SHTeleComponent;
+      m_TeleDest = reader.ReadEntity<SHTeleComponent>();
       m_TeleOffset = reader.ReadPoint3D();
     }
   }
@@ -445,10 +445,10 @@ namespace Server.Items
 
       m_External = reader.ReadBool();
 
-      m_UpTele = (SHTeleComponent) reader.ReadItem();
-      m_RightTele = (SHTeleComponent) reader.ReadItem();
-      m_DownTele = (SHTeleComponent) reader.ReadItem();
-      m_LeftTele = (SHTeleComponent) reader.ReadItem();
+      m_UpTele = reader.ReadEntity<SHTeleComponent>();
+      m_RightTele = reader.ReadEntity<SHTeleComponent>();
+      m_DownTele = reader.ReadEntity<SHTeleComponent>();
+      m_LeftTele = reader.ReadEntity<SHTeleComponent>();
     }
   }
 }

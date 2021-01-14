@@ -41,7 +41,7 @@ namespace Server.Commands.Generic
       if (size < 1)
         throw new Exception("Invalid ordering syntax.");
 
-      if (Insensitive.Equals(arguments[offset], "by"))
+      if (InsensitiveStringHelpers.Equals(arguments[offset], "by"))
       {
         ++offset;
         --size;

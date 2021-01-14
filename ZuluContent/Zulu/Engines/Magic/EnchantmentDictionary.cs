@@ -1,8 +1,12 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using MessagePack;
+using Microsoft.Toolkit.HighPerformance.Extensions;
 using Scripts.Zulu.Utilities;
 using Server;
 using Server.Engines.Magic;
@@ -152,12 +156,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
         
         public static EnchantmentDictionary Deserialize(IGenericReader reader)
         {
-            return MessagePackSerializer.Deserialize<EnchantmentDictionary>(reader.GetBaseStream());
+            var bytes = new byte[reader.ReadInt()];
+            reader.Read(bytes);
+            
+            return MessagePackSerializer.Deserialize<EnchantmentDictionary>((ReadOnlyMemory<byte>)bytes);
         }
 
         public void Serialize(IGenericWriter writer)
         {
-            writer.Write(MessagePackSerializer.Serialize(this));
+            var bytes = MessagePackSerializer.Serialize(this);
+            writer.Write(bytes.Length);
+            writer.Write(bytes);
         }
     }
 }

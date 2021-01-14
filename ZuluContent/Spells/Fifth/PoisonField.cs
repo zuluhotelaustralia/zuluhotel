@@ -47,7 +47,7 @@ namespace Server.Spells.Fifth
                 else
                     eastToWest = false;
 
-                Effects.PlaySound(p, Caster.Map, 0x20B);
+                Effects.PlaySound((Point3D)p, Caster.Map, 0x20B);
 
                 var itemID = eastToWest ? 0x3915 : 0x3922;
 
@@ -128,7 +128,7 @@ namespace Server.Spells.Fifth
                 {
                     case 1:
                     {
-                        m_Caster = reader.ReadMobile();
+                        m_Caster = reader.ReadEntity<Mobile>();
 
                         goto case 0;
                     }
@@ -260,8 +260,8 @@ namespace Server.Spells.Fifth
 
             protected override void OnTarget(Mobile from, object o)
             {
-                if (o is IPoint3D)
-                    m_Owner.Target((IPoint3D) o);
+                if (o is Point3D point3D)
+                    m_Owner.Target(point3D);
             }
 
             protected override void OnTargetFinish(Mobile from)

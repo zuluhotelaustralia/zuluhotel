@@ -185,7 +185,7 @@ public WarriorGuard( Serial serial ) : base( serial )
 			{
 				case 0:
 				{
-					m_Focus = reader.ReadMobile();
+					m_Focus = reader.ReadEntity<Mobile>();
 
 					if ( m_Focus != null )
 					{

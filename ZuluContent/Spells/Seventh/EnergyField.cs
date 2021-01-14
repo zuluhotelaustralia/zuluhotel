@@ -46,7 +46,7 @@ namespace Server.Spells.Seventh
                 else
                     eastToWest = false;
 
-                Effects.PlaySound(p, Caster.Map, 0x20B);
+                Effects.PlaySound((Point3D)p, Caster.Map, 0x20B);
 
                 var duration =
                     TimeSpan.FromSeconds(Caster.Skills[SkillName.Magery].Value * 0.28 +

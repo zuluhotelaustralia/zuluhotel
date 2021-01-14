@@ -260,7 +260,7 @@ namespace Server.Items
 
                         scroll.Delete();
 
-                        from.Send(new PlaySound(0x249, GetWorldLocation()));
+                        from.SendSound(0x249, GetWorldLocation());
                         return true;
                     }
 
@@ -334,39 +334,28 @@ namespace Server.Items
         public void DisplayTo(Mobile to)
         {
             // The client must know about the spellbook or it will crash!
-
-            NetState ns = to.NetState;
+            var ns = to.NetState;
 
             if (ns == null)
+            {
                 return;
+            }
 
             if (Parent == null)
             {
-                to.Send(WorldPacket);
+                SendWorldPacketTo(to.NetState);
             }
             else if (Parent is Item)
             {
-                // What will happen if the client doesn't know about our parent?
-                if (ns.ContainerGridLines)
-                    to.Send(new ContainerContentUpdate6017(this));
-                else
-                    to.Send(new ContainerContentUpdate(this));
+                to.NetState.SendContainerContentUpdate(this);
             }
             else if (Parent is Mobile)
             {
-                // What will happen if the client doesn't know about our parent?
-                to.Send(new EquipUpdate(this));
+                to.NetState.SendEquipUpdate(this);
             }
 
-            if (ns.HighSeas)
-                to.Send(new DisplaySpellbookHS(Serial));
-            else
-                to.Send(new DisplaySpellbook(Serial));
-
-            if (ns.ContainerGridLines)
-                to.Send(new SpellbookContent6017(Serial, BookOffset + 1, m_Content));
-            else
-                to.Send(new SpellbookContent(Serial, BookOffset + 1, m_Content));
+            to.NetState.SendDisplaySpellbook(Serial);
+            to.NetState.SendSpellbookContent(Serial, ItemID, BookOffset + 1, m_Content);
         }
 
         private Mobile m_Crafter;
@@ -454,7 +443,7 @@ namespace Server.Items
                 }
                 case 3:
                 {
-                    m_Crafter = reader.ReadMobile();
+                    m_Crafter = reader.ReadEntity<Mobile>();
                     goto case 2;
                 }
                 case 2:

@@ -53,7 +53,7 @@ namespace Server.Spells.Seventh
 
                 if (targets.Count > 0)
                 {
-                    Effects.PlaySound(p, Caster.Map, 0x160);
+                    Effects.PlaySound((Point3D)p, Caster.Map, 0x160);
 
                     damage /= targets.Count;
 

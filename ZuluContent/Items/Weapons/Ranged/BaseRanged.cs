@@ -42,7 +42,7 @@ namespace Server.Items
                 if (attacker.HarmfulCheck(defender))
                 {
                     attacker.DisruptiveAction();
-                    attacker.Send(new Swing(attacker.Serial, defender.Serial));
+                    attacker.NetState?.SendSwing(attacker.Serial, defender.Serial);
 
                     if (OnFired(attacker, defender))
                     {

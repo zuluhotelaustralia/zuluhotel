@@ -36,11 +36,10 @@ namespace Server.Commands.Generic
         List<object> list = new List<object>();
         List<IPAddress> addresses = new List<IPAddress>();
 
-        List<NetState> states = TcpServer.Instances;
+        HashSet<NetState> states = TcpServer.Instances;
 
-        for (int i = 0; i < states.Count; ++i)
+        foreach(var ns in states)
         {
-          NetState ns = states[i];
           Mobile mob = ns.Mobile;
 
           if (mob != null && !addresses.Contains(ns.Address) && ext.IsValid(mob))

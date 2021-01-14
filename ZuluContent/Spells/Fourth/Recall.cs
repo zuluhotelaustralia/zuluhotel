@@ -153,13 +153,13 @@ namespace Server.Spells.Fourth
                     if (!boat.Deleted && boat.CheckKey(((Key) o).KeyValue))
                         m_Owner.Effect(boat.GetMarkedLocation(), boat.Map, false);
                     else
-                        from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 502357,
-                            from.Name, "")); // I can not recall from that object.
+                        from.NetState.SendMessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 502357,
+                            from.Name, ""); // I can not recall from that object.
                 }
                 else
                 {
-                    from.Send(new MessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 502357,
-                        from.Name, "")); // I can not recall from that object.
+                    from.NetState.SendMessageLocalized(from.Serial, from.Body, MessageType.Regular, 0x3B2, 3, 502357,
+                        from.Name, ""); // I can not recall from that object.
                 }
             }
 

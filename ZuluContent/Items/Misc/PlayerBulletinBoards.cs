@@ -361,7 +361,7 @@ public PlayerBBSouth( Serial serial ) : base( serial )
 				case 0:
 				{
 					m_Time = reader.ReadDateTime();
-					m_Poster = reader.ReadMobile();
+					m_Poster = reader.ReadEntity<Mobile>();
 					m_Message = reader.ReadString();
 					break;
 				}

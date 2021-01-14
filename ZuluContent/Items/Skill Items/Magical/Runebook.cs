@@ -207,7 +207,7 @@ public Runebook( Serial serial ) : base( serial )
 				}
 				case 2:
 				{
-					m_Crafter = reader.ReadMobile();
+					m_Crafter = reader.ReadEntity<Mobile>();
 					goto case 1;
 				}
 				case 1:
@@ -380,7 +380,7 @@ public Runebook( Serial serial ) : base( serial )
 
 						dropped.Delete();
 
-						from.Send( new PlaySound( 0x42, GetWorldLocation() ) );
+						from.SendSound(0x42, GetWorldLocation() );
 
 						string desc = rune.Description;
 
@@ -405,7 +405,7 @@ public Runebook( Serial serial ) : base( serial )
 			{
 				if ( m_CurCharges < m_MaxCharges )
 				{
-					from.Send( new PlaySound( 0x249, GetWorldLocation() ) );
+					from.SendSound(0x249, GetWorldLocation() );
 
 					int amount = dropped.Amount;
 
@@ -497,7 +497,7 @@ public Runebook( Serial serial ) : base( serial )
 			{
 				case 1:
 				{
-					m_House = reader.ReadItem() as BaseHouse;
+					m_House = reader.ReadEntity<BaseHouse>();
 					goto case 0;
 				}
 				case 0:

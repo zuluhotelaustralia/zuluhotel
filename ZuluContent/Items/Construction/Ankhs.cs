@@ -106,7 +106,7 @@ public AnkhWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 
 		private class InternalItem : Item
@@ -179,7 +179,7 @@ public AnkhWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as AnkhWest;
+				m_Item = reader.ReadEntity<AnkhWest>();
 			}
 		}
 	}
@@ -262,7 +262,7 @@ public AnkhWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 
 		[TypeAlias( "Server.Items.AnkhEast+InternalItem" )]
@@ -337,7 +337,7 @@ public AnkhWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as AnkhNorth;
+				m_Item = reader.ReadEntity<AnkhNorth>();
 			}
 		}
 	}

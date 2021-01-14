@@ -65,7 +65,7 @@ namespace Server.Accounting
         }
     }
 
-    public static void Save(bool message)
+    public static void Save()
     {
       if (!Directory.Exists("Saves/Accounts"))
         Directory.CreateDirectory("Saves/Accounts");
@@ -81,8 +81,11 @@ namespace Server.Accounting
 
       xml.WriteAttributeString("count", m_Accounts.Count.ToString());
 
-      foreach (Account a in GetAccounts())
-        a.Save(xml);
+      foreach (var account in GetAccounts())
+      {
+          var a = (Account) account;
+          a.Save(xml);
+      }
 
       xml.WriteEndElement();
 

@@ -215,19 +215,14 @@ namespace Server.Misc
 
                     try
                     {
-                        List<NetState> states = TcpServer.Instances;
 
-                        op.WriteLine("- Count: {0}", states.Count);
+                        op.WriteLine("- Count: {0}", TcpServer.Instances.Count);
 
-                        for (int i = 0; i < states.Count; ++i)
+                        foreach (var state in TcpServer.Instances)
                         {
-                            NetState state = states[i];
-
                             op.Write("+ {0}:", state);
 
-                            Account a = state.Account as Account;
-
-                            if (a != null)
+                            if (state.Account is Account a)
                                 op.Write(" (account = {0})", a.Username);
 
                             Mobile m = state.Mobile;

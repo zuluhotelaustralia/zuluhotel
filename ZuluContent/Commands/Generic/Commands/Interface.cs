@@ -29,7 +29,7 @@ namespace Server.Commands.Generic
         {
           int offset = 0;
 
-          if (Insensitive.Equals(e.GetString(0), "view"))
+          if (InsensitiveStringHelpers.Equals(e.GetString(0), "view"))
             ++offset;
 
           while (offset < e.Length)

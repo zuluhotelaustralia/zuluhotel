@@ -35,7 +35,7 @@ namespace Server.Spells.Sixth
                 {
                     Effects.SendLocationParticles(
                         EffectItem.Create(defender.Location, defender.Map, EffectItem.DefaultDuration), 0x3728, 8, 20, 5042);
-                    Effects.PlaySound(defender, defender.Map, 0x201);
+                    Effects.PlaySound(defender, 0x201);
 
                     defender.Delete();
                 }

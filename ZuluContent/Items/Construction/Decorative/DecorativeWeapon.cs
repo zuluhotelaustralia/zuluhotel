@@ -165,7 +165,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -217,7 +217,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as DecorativeSwordNorth;
+				m_Item = reader.ReadEntity<DecorativeSwordNorth>();
 			}
 		}
 	}
@@ -272,7 +272,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -324,7 +324,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as DecorativeSwordWest;
+				m_Item = reader.ReadEntity<DecorativeSwordWest>();
 			}
 		}
 	}
@@ -379,7 +379,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -431,7 +431,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as DecorativeDAxeNorth;
+				m_Item = reader.ReadEntity<DecorativeDAxeNorth>();
 			}
 		}
 	}
@@ -486,7 +486,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -538,7 +538,7 @@ public DecorativeBowWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as DecorativeDAxeWest;
+				m_Item = reader.ReadEntity<DecorativeDAxeWest>();
 			}
 		}
 	}

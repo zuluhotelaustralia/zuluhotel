@@ -53,7 +53,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -105,7 +105,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry1N;
+				m_Item = reader.ReadEntity<Tapestry1N>();
 			}
 		}
 	}
@@ -161,7 +161,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -213,7 +213,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry2N;
+				m_Item = reader.ReadEntity<Tapestry2N>();
 			}
 		}
 	}
@@ -268,7 +268,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -320,7 +320,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry2W;
+				m_Item = reader.ReadEntity<Tapestry2W>();
 			}
 		}
 	}
@@ -376,7 +376,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -428,7 +428,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry3N;
+				m_Item = reader.ReadEntity<Tapestry3N>();
 			}
 		}
 	}
@@ -484,7 +484,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -536,7 +536,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry3W;
+				m_Item = reader.ReadEntity<Tapestry3W>();
 			}
 		}
 	}
@@ -592,7 +592,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -644,7 +644,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry4N;
+				m_Item = reader.ReadEntity<Tapestry4N>();
 			}
 		}
 	}
@@ -699,7 +699,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 
 		private class InternalItem : Item
@@ -752,7 +752,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry4W;
+				m_Item = reader.ReadEntity<Tapestry4W>();
 			}
 		}
 	}
@@ -808,7 +808,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -860,7 +860,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry5N;
+				m_Item = reader.ReadEntity<Tapestry5N>();
 			}
 		}
 	}
@@ -915,7 +915,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 
 		private class InternalItem : Item
@@ -968,7 +968,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry5W;
+				m_Item = reader.ReadEntity<Tapestry5W>();
 			}
 		}
 	}
@@ -1024,7 +1024,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 		private class InternalItem : Item
 		{
@@ -1076,7 +1076,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry6N;
+				m_Item = reader.ReadEntity<Tapestry6N>();
 			}
 		}
 	}
@@ -1131,7 +1131,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
+			m_Item = reader.ReadEntity<InternalItem>();
 		}
 
 		private class InternalItem : Item
@@ -1184,7 +1184,7 @@ public Tapestry1N( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as Tapestry6W;
+				m_Item = reader.ReadEntity<Tapestry6W>();
 			}
 		}
 	}

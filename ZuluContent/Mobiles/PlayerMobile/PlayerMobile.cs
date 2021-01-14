@@ -19,6 +19,7 @@ using Server.Engines.Magic;
 using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
+using CalcMoves = Server.Movement.Movement;
 
 namespace Server.Mobiles
 {
@@ -358,19 +359,9 @@ namespace Server.Mobiles
             return true;
         }
 
-        public override int GetPacketFlags()
+        public override int GetPacketFlags(bool stygianAbyss)
         {
-            int flags = base.GetPacketFlags();
-
-            if (m_IgnoreMobiles)
-                flags |= 0x10;
-
-            return flags;
-        }
-
-        public override int GetOldPacketFlags()
-        {
-            int flags = base.GetOldPacketFlags();
+            int flags = base.GetPacketFlags(stygianAbyss);
 
             if (m_IgnoreMobiles)
                 flags |= 0x10;
@@ -394,7 +385,7 @@ namespace Server.Mobiles
         public static void Initialize()
         {
             if (FastwalkPrevention)
-                PacketHandlers.RegisterThrottler(0x02, MovementThrottle_Callback);
+                IncomingPackets.RegisterThrottler(0x02, MovementThrottle_Callback);
 
             EventSink.Login += OnLogin;
             EventSink.Logout += OnLogout;
@@ -487,8 +478,8 @@ namespace Server.Mobiles
             m_LastGlobalLight = global;
             m_LastPersonalLight = personal;
 
-            ns.Send(GlobalLightLevel.Instantiate(global));
-            ns.Send(new PersonalLightLevel(Serial, personal));
+            ns.SendGlobalLightLevel(global);
+            ns.SendPersonalLightLevel(Serial, personal);
         }
 
         private static void OnLogin(Mobile from)
@@ -1423,7 +1414,7 @@ namespace Server.Mobiles
                 }
                 case 7:
                 {
-                    m_PermaFlags = reader.ReadStrongMobileList();
+                    m_PermaFlags = reader.ReadEntityList<Mobile>();;
                     goto case 6;
                 }
                 case 6:
@@ -1532,7 +1523,7 @@ namespace Server.Mobiles
             writer.Write((DateTime) m_NpcGuildJoinTime);
             writer.Write((TimeSpan) m_NpcGuildGameTime);
 
-            writer.Write(m_PermaFlags, true);
+            writer.Write(m_PermaFlags);
 
             writer.Write((int) m_Flags);
 
@@ -1718,19 +1709,19 @@ namespace Server.Mobiles
             get { return AccessLevel < AccessLevel.Counselor; }
         }
 
-        public override int ComputeMovementSpeed(Direction dir, bool checkTurning)
+        public override int ComputeMovementSpeed(Direction dir, bool checkTurning = true)
         {
             if (checkTurning && (dir & Direction.Mask) != (Direction & Direction.Mask))
-                return RunMount; // We are NOT actually moving (just a direction change)
+                return CalcMoves.RunMountDelay; // We are NOT actually moving (just a direction change)
 
             bool running = (dir & Direction.Running) != 0;
 
             bool onHorse = Mount != null;
 
             if (onHorse)
-                return running ? RunMount : WalkMount;
+                return running ? CalcMoves.RunMountDelay : CalcMoves.WalkMountDelay;
 
-            return running ? RunFoot : WalkFoot;
+            return running ? CalcMoves.RunFootDelay : CalcMoves.WalkFootDelay;
         }
 
         public static TimeSpan MovementThrottle_Callback(NetState ns)

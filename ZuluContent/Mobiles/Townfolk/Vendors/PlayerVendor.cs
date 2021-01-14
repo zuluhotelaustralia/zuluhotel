@@ -247,13 +247,13 @@ namespace Server.Mobiles
                 case 1:
                     {
                         m_NextPayTime = reader.ReadDeltaTime();
-                        House = (BaseHouse)reader.ReadItem();
+                        House = reader.ReadEntity<BaseHouse>();
 
                         goto case 0;
                     }
                 case 0:
                     {
-                        m_Owner = reader.ReadMobile();
+                        m_Owner = reader.ReadEntity<Mobile>();
                         m_BankAccount = reader.ReadInt();
                         m_HoldGold = reader.ReadInt();
 
@@ -262,7 +262,7 @@ namespace Server.Mobiles
                         int count = reader.ReadInt();
                         for (int i = 0; i < count; i++)
                         {
-                            Item item = reader.ReadItem();
+                            Item item = reader.ReadEntity<Item>();
 
                             int price = reader.ReadInt();
                             if (price > 100000000)
@@ -858,7 +858,7 @@ namespace Server.Mobiles
 
         public bool WasNamed(string speech)
         {
-            return this.Name != null && Insensitive.StartsWith(speech, this.Name);
+            return this.Name != null && InsensitiveStringHelpers.InsensitiveStartsWith(speech, this.Name);
         }
 
         public override void OnSpeech(SpeechEventArgs e)

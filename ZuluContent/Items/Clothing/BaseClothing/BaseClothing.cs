@@ -540,7 +540,7 @@ namespace Server.Items
                         m_HitPoints = reader.ReadEncodedInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Crafter))
-                        Crafter = reader.ReadMobile();
+                        Crafter = reader.ReadEntity<Mobile>();
 
                     if (GetSaveFlag(flags, SaveFlag.Quality))
                         Quality = (ClothingQuality) reader.ReadEncodedInt();
@@ -571,7 +571,7 @@ namespace Server.Items
                 }
                 case 1:
                 {
-                    Crafter = reader.ReadMobile();
+                    Crafter = reader.ReadEntity<Mobile>();
                     Quality = (ClothingQuality) reader.ReadInt();
                     break;
                 }

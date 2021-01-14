@@ -1676,17 +1676,17 @@ namespace Server.Multis
 
       writer.Write((int) m_Price);
 
-      writer.WriteMobileList(m_Access);
+      writer.Write(m_Access);
 
       writer.Write(m_BuiltOn);
       writer.Write(m_LastTraded);
 
-      writer.WriteItemList(m_Addons, true);
+      writer.Write(m_Addons);
 
       writer.Write(m_Secures.Count);
 
-      for (int i = 0; i < m_Secures.Count; ++i)
-        ((SecureInfo) m_Secures[i]).Serialize(writer);
+      foreach (var t in m_Secures)
+          ((SecureInfo) t).Serialize(writer);
 
       writer.Write(m_Public);
 
@@ -1701,16 +1701,16 @@ namespace Server.Multis
         writer.Write( rect );
       }*/
 
-      writer.WriteMobileList(m_CoOwners, true);
-      writer.WriteMobileList(m_Friends, true);
-      writer.WriteMobileList(m_Bans, true);
+      writer.Write(m_CoOwners);
+      writer.Write(m_Friends);
+      writer.Write(m_Bans);
 
       writer.Write(m_Sign);
       writer.Write(m_Trash);
 
-      writer.WriteItemList(m_Doors, true);
-      writer.WriteItemList(m_LockDowns, true);
-      //writer.WriteItemList( m_Secures, true );
+      writer.Write(m_Doors);
+      writer.Write(m_LockDowns);
+      //writer.Write( m_Secures);
 
       writer.Write((int) m_MaxLockDowns);
       writer.Write((int) m_MaxSecures);
@@ -1773,7 +1773,7 @@ namespace Server.Multis
         }
         case 7:
         {
-          m_Access = reader.ReadStrongMobileList();
+          m_Access = reader.ReadEntityList<Mobile>();;
           goto case 6;
         }
         case 6:
@@ -1785,7 +1785,7 @@ namespace Server.Multis
         case 5: // just removed fields
         case 4:
         {
-          m_Addons = reader.ReadStrongItemList();
+          m_Addons = reader.ReadEntityList<Item>();
           goto case 3;
         }
         case 3:
@@ -1831,7 +1831,7 @@ namespace Server.Multis
           if (version < 8)
             m_Price = DefaultPrice;
 
-          m_Owner = reader.ReadMobile();
+          m_Owner = reader.ReadEntity<Mobile>();
 
           if (version < 5)
           {
@@ -1843,22 +1843,22 @@ namespace Server.Multis
 
           UpdateRegion();
 
-          m_CoOwners = reader.ReadStrongMobileList();
-          m_Friends = reader.ReadStrongMobileList();
-          m_Bans = reader.ReadStrongMobileList();
+          m_CoOwners = reader.ReadEntityList<Mobile>();;
+          m_Friends = reader.ReadEntityList<Mobile>();;
+          m_Bans = reader.ReadEntityList<Mobile>();;
 
-          m_Sign = reader.ReadItem() as HouseSign;
-          m_Trash = reader.ReadItem() as TrashBarrel;
+          m_Sign = reader.ReadEntity<HouseSign>();
+          m_Trash = reader.ReadEntity<TrashBarrel>();
 
-          m_Doors = reader.ReadStrongItemList<BaseDoor>();
-          m_LockDowns = reader.ReadStrongItemList();
+          m_Doors = reader.ReadEntityList<BaseDoor>();
+          m_LockDowns = reader.ReadEntityList<Item>();
 
           for (int i = 0; i < m_LockDowns.Count; ++i)
             m_LockDowns[i].IsLockedDown = true;
 
           if (version < 3)
           {
-            List<Item> items = reader.ReadStrongItemList();
+            List<Item> items = reader.ReadEntityList<Item>();
             m_Secures = new List<SecureInfo>(items.Count);
 
             for (int i = 0; i < items.Count; ++i)
@@ -2727,7 +2727,7 @@ namespace Server.Multis
 
     public SecureInfo(IGenericReader reader)
     {
-      m_Item = reader.ReadItem() as Container;
+      m_Item = reader.ReadEntity<Container>();
       m_Level = (SecureLevel) reader.ReadByte();
     }
 

@@ -27,17 +27,16 @@ namespace Server.Misc
         }
 
 
-        private static CityInfo[] StartingCities = new CityInfo[]
-        {
-            new CityInfo("New Haven", "New Haven Bank", 1150168, 3667, 2625, 0, Map.Felucca),
-            new CityInfo("Yew", "The Empath Abbey", 1075072, 633, 858, 0, Map.Felucca),
-            new CityInfo("Minoc", "The Barnacle", 1075073, 2476, 413, 15, Map.Felucca),
-            new CityInfo("Britain", "The Wayfarer's Inn", 1075074, 1602, 1591, 20, Map.Felucca),
-            new CityInfo("Moonglow", "The Scholars Inn", 1075075, 4408, 1168, 0, Map.Felucca),
-            new CityInfo("Trinsic", "The Traveler's Inn", 1075076, 1845, 2745, 0, Map.Felucca),
-            new CityInfo("Jhelom", "The Mercenary Inn", 1075078, 1374, 3826, 0, Map.Felucca),
-            new CityInfo("Skara Brae", "The Falconer's Inn", 1075079, 618, 2234, 0, Map.Felucca),
-            new CityInfo("Vesper", "The Ironwood Inn", 1075080, 2771, 976, 0, Map.Felucca)
+        private static CityInfo[] StartingCities = {
+            new("New Haven", "New Haven Bank", 1150168, 3667, 2625, 0, Map.Felucca),
+            new("Yew", "The Empath Abbey", 1075072, 633, 858, 0, Map.Felucca),
+            new("Minoc", "The Barnacle", 1075073, 2476, 413, 15, Map.Felucca),
+            new("Britain", "The Wayfarer's Inn", 1075074, 1602, 1591, 20, Map.Felucca),
+            new("Moonglow", "The Scholars Inn", 1075075, 4408, 1168, 0, Map.Felucca),
+            new("Trinsic", "The Traveler's Inn", 1075076, 1845, 2745, 0, Map.Felucca),
+            new("Jhelom", "The Mercenary Inn", 1075078, 1374, 3826, 0, Map.Felucca),
+            new("Skara Brae", "The Falconer's Inn", 1075079, 618, 2234, 0, Map.Felucca),
+            new("Vesper", "The Ironwood Inn", 1075080, 2771, 976, 0, Map.Felucca)
         };
         
         private static Dictionary<IPAddress, int> m_IPTable;
@@ -183,8 +182,8 @@ namespace Server.Misc
             }
             else if (index < 0 || index >= acct.Length)
             {
-                state.Send(new DeleteResult(DeleteResultType.BadRequest));
-                state.Send(new CharacterListUpdate(acct));
+                state.SendCharacterDeleteResult(DeleteResultType.BadRequest);
+                state.SendCharacterListUpdate(acct);
             }
             else
             {
@@ -192,25 +191,25 @@ namespace Server.Misc
 
                 if (m == null)
                 {
-                    state.Send(new DeleteResult(DeleteResultType.CharNotExist));
-                    state.Send(new CharacterListUpdate(acct));
+                    state.SendCharacterDeleteResult(DeleteResultType.CharNotExist);
+                    state.SendCharacterListUpdate(acct);
                 }
                 else if (m.NetState != null)
                 {
-                    state.Send(new DeleteResult(DeleteResultType.CharBeingPlayed));
-                    state.Send(new CharacterListUpdate(acct));
+                    state.SendCharacterDeleteResult(DeleteResultType.CharBeingPlayed);
+                    state.SendCharacterListUpdate(acct);
                 }
                 else if (RestrictDeletion && DateTime.UtcNow < m.CreationTime + DeleteDelay)
                 {
-                    state.Send(new DeleteResult(DeleteResultType.CharTooYoung));
-                    state.Send(new CharacterListUpdate(acct));
+                    state.SendCharacterDeleteResult(DeleteResultType.CharTooYoung);
+                    state.SendCharacterListUpdate(acct);
                 }
                 else if (m.AccessLevel == AccessLevel.Player &&
                          Region.Find(m.LogoutLocation, m.LogoutMap).IsPartOf<JailRegion>()
                 ) // Don't need to check current location, if netstate is null, they're logged out
                 {
-                    state.Send(new DeleteResult(DeleteResultType.BadRequest));
-                    state.Send(new CharacterListUpdate(acct));
+                    state.SendCharacterDeleteResult(DeleteResultType.BadRequest);
+                    state.SendCharacterListUpdate(acct);
                 }
                 else
                 {
@@ -219,7 +218,7 @@ namespace Server.Misc
                     acct.Comments.Add(new AccountComment("System", $"Character #{index + 1} {m} deleted by {state}"));
 
                     m.Delete();
-                    state.Send(new CharacterListUpdate(acct));
+                    state.SendCharacterListUpdate(acct);
                 }
             }
         }

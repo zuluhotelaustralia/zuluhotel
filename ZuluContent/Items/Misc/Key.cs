@@ -178,7 +178,7 @@ namespace Server.Items
 				}
 				case 1:
 				{
-					m_Link = reader.ReadItem();
+					m_Link = reader.ReadEntity<Item>();
 
 					goto case 0;
 				}
@@ -274,7 +274,7 @@ public Key( Serial serial ) : base( serial )
 				desc = "";
 
 			if ( desc.Length > 0 )
-				from.Send( new UnicodeMessage( Serial, ItemID, MessageType.Regular, 0x3B2, 3, "ENU", "", desc ) );
+				from.NetState.SendMessage(Serial, ItemID, MessageType.Regular, 0x3B2, 3, false, "ENU", "", desc);
 		}
 
 		public bool UseOn( Mobile from, ILockable o )

@@ -52,7 +52,7 @@ public BigFish( Serial serial ) : base( serial )
 			{
 				case 1:
 				{
-					m_Fisher = reader.ReadMobile();
+					m_Fisher = reader.ReadEntity<Mobile>();
 					break;
 				}
 				case 0:

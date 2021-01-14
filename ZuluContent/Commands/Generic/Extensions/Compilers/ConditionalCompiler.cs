@@ -125,7 +125,7 @@ namespace Server.Commands.Generic
                 {
                     NumberStyles style = NumberStyles.Integer;
 
-                    if (Insensitive.StartsWith(toParse, "0x"))
+                    if (InsensitiveStringHelpers.InsensitiveStartsWith(toParse, "0x"))
                     {
                         style = NumberStyles.HexNumber;
                         toParse = toParse.Substring(2);
@@ -263,7 +263,7 @@ namespace Server.Commands.Generic
 
             if (m_IgnoreCase || methodName == "Equals")
             {
-                Type type = m_IgnoreCase ? typeof(Insensitive) : typeof(string);
+                Type type = m_IgnoreCase ? typeof(InsensitiveStringHelpers) : typeof(string);
 
                 emitter.BeginCall(
                     type.GetMethod(

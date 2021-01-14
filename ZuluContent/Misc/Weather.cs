@@ -353,33 +353,26 @@ namespace Server.Misc
         else
           type = 2;
 
-        List<NetState> states = TcpServer.Instances;
 
-        Packet weatherPacket = null;
 
-        for (int i = 0; i < states.Count; ++i)
+        foreach (var ns in TcpServer.Instances)
         {
-          NetState ns = states[i];
-          Mobile mob = ns.Mobile;
+            Mobile mob = ns.Mobile;
 
-          if (mob == null || mob.Map != m_Facet)
-            continue;
+            if (mob == null || mob.Map != m_Facet)
+                continue;
 
-          bool contains = m_Area.Length == 0;
+            bool contains = m_Area.Length == 0;
 
-          for (int j = 0; !contains && j < m_Area.Length; ++j)
-            contains = m_Area[j].Contains(mob.Location);
+            for (int j = 0; !contains && j < m_Area.Length; ++j)
+                contains = m_Area[j].Contains(mob.Location);
 
-          if (!contains)
-            continue;
+            if (!contains)
+                continue;
+            
+            ns.SendWeather((byte)type, (byte)density, (byte)temperature);
 
-          if (weatherPacket == null)
-            weatherPacket = Packet.Acquire(new Server.Network.Weather(type, density, temperature));
-
-          ns.Send(weatherPacket);
         }
-
-        Packet.Release(weatherPacket);
       }
 
       m_Stage++;

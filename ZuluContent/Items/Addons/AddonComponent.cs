@@ -221,13 +221,12 @@ public AnvilComponent( Serial serial ) : base( serial )
 				case 1:
 				case 0:
 				{
-					m_Addon = reader.ReadItem() as BaseAddon;
+					m_Addon = reader.ReadEntity<BaseAddon>();
 					m_Offset = reader.ReadPoint3D();
 
-					if ( m_Addon != null )
-						m_Addon.OnComponentLoaded( this );
+                    m_Addon?.OnComponentLoaded( this );
 
-					ApplyLightTo( this );
+                    ApplyLightTo( this );
 
 					break;
 				}

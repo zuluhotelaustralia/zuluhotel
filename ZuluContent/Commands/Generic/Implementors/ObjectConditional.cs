@@ -62,7 +62,7 @@ namespace Server.Commands.Generic
       string[] conditionArgs = null;
 
       for (int i = 0; i < args.Length; ++i)
-        if (Insensitive.Equals(args[i], "where"))
+        if (InsensitiveStringHelpers.Equals(args[i], "where"))
         {
           string[] origArgs = args;
 
@@ -107,7 +107,7 @@ namespace Server.Commands.Generic
 
         bool inverse = false;
 
-        if (Insensitive.Equals(cur, "not") || cur == "!")
+        if (InsensitiveStringHelpers.Equals(cur, "not") || cur == "!")
         {
           inverse = true;
           ++index;
@@ -115,7 +115,7 @@ namespace Server.Commands.Generic
           if (index >= size)
             throw new Exception("Improperly formatted object conditional.");
         }
-        else if (Insensitive.Equals(cur, "or") || cur == "||")
+        else if (InsensitiveStringHelpers.Equals(cur, "or") || cur == "||")
         {
           if (current.Count > 1)
           {

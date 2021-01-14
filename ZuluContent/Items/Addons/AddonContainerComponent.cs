@@ -101,7 +101,7 @@ public AddonContainerComponent( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Addon = reader.ReadItem() as BaseAddonContainer;
+            m_Addon = reader.ReadEntity<BaseAddonContainer>();
 			m_Offset = reader.ReadPoint3D();
 
 			if ( m_Addon != null )

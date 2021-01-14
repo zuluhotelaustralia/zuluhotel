@@ -597,7 +597,7 @@ public TreasureMap(Serial serial) : base(serial)
                         m_Chest.Z++;
                     }
 
-                    Effects.PlaySound(m_Chest, m_Map, 0x33B);
+                    Effects.PlaySound(m_Chest, 0x33B);
                 }
 
                 if (m_Chest != null && m_Chest.Location.Z >= m_Location.Z)
@@ -797,9 +797,9 @@ public TreasureMap(Serial serial) : base(serial)
         {
             if (m_Completed)
             {
-                from.Send(new MessageLocalizedAffix(Serial, ItemID, MessageType.Label, 0x3B2, 3, 1048030, "",
+                from.NetState.SendMessageLocalizedAffix(Serial, ItemID, MessageType.Label, 0x3B2, 3, 1048030, "",
                     AffixType.Append,
-                    $" completed by {(m_CompletedBy == null ? "someone" : m_CompletedBy.Name)}", ""));
+                    $" completed by {(m_CompletedBy == null ? "someone" : m_CompletedBy.Name)}");
             }
             else if (m_Decoder != null)
             {
@@ -842,7 +842,7 @@ public TreasureMap(Serial serial) : base(serial)
             {
                 case 1:
                 {
-                    m_CompletedBy = reader.ReadMobile();
+                    m_CompletedBy = reader.ReadEntity<Mobile>();
 
                     goto case 0;
                 }
@@ -850,7 +850,7 @@ public TreasureMap(Serial serial) : base(serial)
                 {
                     m_Level = (int) reader.ReadInt();
                     m_Completed = reader.ReadBool();
-                    m_Decoder = reader.ReadMobile();
+                    m_Decoder = reader.ReadEntity<Mobile>();
                     m_Map = reader.ReadMap();
                     m_Location = reader.ReadPoint2D();
 

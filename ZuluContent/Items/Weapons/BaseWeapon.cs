@@ -561,9 +561,7 @@ namespace Server.Items
             {
                 attacker.DisruptiveAction();
 
-                if (attacker.NetState != null)
-                    attacker.Send(new Swing(attacker.Serial, defender.Serial));
-
+                attacker.NetState?.SendSwing(attacker.Serial, defender.Serial);
 
                 if (CheckHit(attacker, defender))
                 {
@@ -1312,7 +1310,7 @@ namespace Server.Items
                         PoisonCharges = reader.ReadInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Crafter))
-                        Crafter = reader.ReadMobile();
+                        Crafter = reader.ReadEntity<Mobile>();
 
                     if (GetSaveFlag(flags, SaveFlag.Identified))
                         Identified = version >= 6 || reader.ReadBool();
@@ -1447,7 +1445,7 @@ namespace Server.Items
                     DurabilityLevel = (WeaponDurabilityLevel) reader.ReadInt();
                     Quality = (WeaponQuality) reader.ReadInt();
 
-                    Crafter = reader.ReadMobile();
+                    Crafter = reader.ReadEntity<Mobile>();
 
                     Poison = Poison.Deserialize(reader);
                     PoisonCharges = reader.ReadInt();
@@ -1554,7 +1552,8 @@ namespace Server.Items
         {
             HandleSingleClick(this, from);
             
-            var attrs = new List<EquipInfoAttribute>();
+            
+            /*var attrs = new List<EquipInfoAttribute>();
             var eqInfo = new EquipmentInfo(1041000, Crafter, false, attrs.ToArray());
             
             if (Poison != null && PoisonCharges > 0)
@@ -1562,7 +1561,6 @@ namespace Server.Items
 
             from.Send(new DisplayEquipmentInfo(this, eqInfo));
 
-            /*
             List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
 
             if (DisplayLootType)

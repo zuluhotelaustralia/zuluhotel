@@ -29,25 +29,10 @@ namespace Server.Misc
     {
       if (!Enabled || IsExempt(ourAddress))
         return true;
-
-      List<NetState> netStates = TcpServer.Instances;
-
-      int count = 0;
-
-      for (int i = 0; i < netStates.Count; ++i)
-      {
-        NetState compState = netStates[i];
-
-        if (ourAddress.Equals(compState.Address))
-        {
-          ++count;
-
-          if (count >= MaxAddresses)
-            return false;
-        }
-      }
-
-      return true;
+      
+      var count = TcpServer.Instances.Count(ns => ourAddress.Equals(ns.Address));
+      
+      return count < MaxAddresses;
     }
   }
 }

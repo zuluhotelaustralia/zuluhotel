@@ -47,7 +47,7 @@ namespace Server.Spells.Sixth
                 rune.Mark(Caster);
 
                 Caster.PlaySound(0x1FA);
-                Effects.SendLocationEffect(Caster, Caster.Map, 14201, 16);
+                Effects.SendLocationEffect(Caster, 14201, 16);
             }
 
             FinishSequence();
@@ -67,8 +67,8 @@ namespace Server.Spells.Sixth
                 if (o is RecallRune)
                     m_Owner.Target((RecallRune) o);
                 else
-                    @from.Send(new MessageLocalized(@from.Serial, @from.Body, MessageType.Regular, 0x3B2, 3, 501797,
-                        @from.Name, "")); // I cannot mark that object.
+                    @from.NetState.SendMessageLocalized(@from.Serial, @from.Body, MessageType.Regular, 0x3B2, 3, 501797,
+                        @from.Name, ""); // I cannot mark that object.
             }
 
             protected override void OnTargetFinish(Mobile from)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Network;
 
 namespace Server.SkillHandlers
@@ -273,7 +274,7 @@ namespace Server.SkillHandlers
 			{
 				Mobile m = m_List[index];
 
-				m_From.QuestArrow = new TrackArrow( m_From, m, m_Range * 2 );
+				// m_From.QuestArrow = new TrackArrow( m_From, m, m_Range * 2 );
 			}
 		}
 	}
@@ -283,7 +284,7 @@ namespace Server.SkillHandlers
 		private Mobile m_From;
 		private Timer m_Timer;
 
-		public TrackArrow( Mobile from, Mobile target, int range ) : base( from, target )
+		public TrackArrow( PlayerMobile from, Mobile target, int range ) : base( from, target )
 		{
 			m_From = from;
 			m_Timer = new TrackTimer( from, target, range, this );

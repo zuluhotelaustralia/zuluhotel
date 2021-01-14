@@ -305,7 +305,7 @@ public AnimalTrainer() : base( "the animal trainer" )
 
 				++stabled;
 
-				if ( claimByName && !Insensitive.Equals( pet.Name, petName ) )
+				if ( claimByName && !InsensitiveStringHelpers.Equals( pet.Name, petName ) )
 					continue;
 
 				if ( CanClaim( from, pet ) )

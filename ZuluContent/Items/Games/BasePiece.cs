@@ -39,7 +39,7 @@ namespace Server.Items
 			{
 				case 0:
 				{
-					m_Board = (BaseBoard)reader.ReadItem();
+					m_Board = reader.ReadEntity<BaseBoard>();
 
 					if ( m_Board == null || Parent == null )
 						Delete();

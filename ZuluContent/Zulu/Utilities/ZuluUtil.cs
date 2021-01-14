@@ -36,34 +36,34 @@ namespace Scripts.Zulu.Utilities
             return m.GetBaseDefinition().DeclaringType != m.DeclaringType;
         }
 
-        private static readonly Func<BinaryFileReader, BinaryReader> GetBinaryReader =
-            GetFieldAccessor<BinaryFileReader, BinaryReader>("m_File");
+        // private static readonly Func<BinaryFileReader, BinaryReader> GetBinaryReader =
+        //     GetFieldAccessor<BinaryFileReader, BinaryReader>("m_File");
+        //
+        // public static Stream GetBinaryFileReaderBaseStream(IGenericReader reader)
+        // {
+        //     if (reader is BinaryFileReader binaryFileReader)
+        //     {
+        //         return ZuluUtil.GetBinaryReader(binaryFileReader).BaseStream;
+        //     }
+        //
+        //     return null;
+        // }
 
-        public static Stream GetBinaryFileReaderBaseStream(IGenericReader reader)
-        {
-            if (reader is BinaryFileReader binaryFileReader)
-            {
-                return ZuluUtil.GetBinaryReader(binaryFileReader).BaseStream;
-            }
-
-            return null;
-        }
-
-        public static void Write<T>(this IGenericWriter stream, T value) where T : struct
-        {
-            var tSpan = MemoryMarshal.CreateSpan(ref value, 1);
-            var span = MemoryMarshal.AsBytes(tSpan);
-            stream.Write(span.ToArray());
-        }
-
-        public static T Read<T>(this IGenericReader reader) where T : struct
-        {
-            var result = default(T);
-            var tSpan = MemoryMarshal.CreateSpan(ref result, 1);
-            var span = MemoryMarshal.AsBytes(tSpan);
-            GetBinaryFileReaderBaseStream(reader).Read(span);
-            return result;
-        }
+        // public static void Write<T>(this IGenericWriter stream, T value) where T : struct
+        // {
+        //     var tSpan = MemoryMarshal.CreateSpan(ref value, 1);
+        //     var span = MemoryMarshal.AsBytes(tSpan);
+        //     stream.Write(span.ToArray());
+        // }
+        //
+        // public static T Read<T>(this IGenericReader reader) where T : struct
+        // {
+        //     var result = default(T);
+        //     var tSpan = MemoryMarshal.CreateSpan(ref result, 1);
+        //     var span = MemoryMarshal.AsBytes(tSpan);
+        //     GetBinaryFileReaderBaseStream(reader).Read(span);
+        //     return result;
+        // }
 
         public static double RandomGaussian(double mu, double sigma)
         {
@@ -91,24 +91,24 @@ namespace Scripts.Zulu.Utilities
             return null;
         }
 
-        public static Stream GetBaseStream(this IGenericWriter writer)
-        {
-            switch (writer)
-            {
-                case BinaryFileWriter binaryFileWriter:
-                    return binaryFileWriter.UnderlyingStream;
-                    break;
-                case BufferedFileWriter bufferedFileWriter:
-                    break;
-                case AsyncWriter asyncWriter:
-                    return asyncWriter.MemStream;
-                    break;
-                default:
-                    throw new ArgumentException($"Stream type not supported {nameof(writer)}");
-            }
-
-            return null;
-        }
+        // public static Stream GetBaseStream(this IGenericWriter writer)
+        // {
+        //     switch (writer)
+        //     {
+        //         case BinaryFileWriter binaryFileWriter:
+        //             return binaryFileWriter.UnderlyingStream;
+        //             break;
+        //         case BufferedFileWriter bufferedFileWriter:
+        //             break;
+        //         case AsyncWriter asyncWriter:
+        //             return asyncWriter.MemStream;
+        //             break;
+        //         default:
+        //             throw new ArgumentException($"Stream type not supported {nameof(writer)}");
+        //     }
+        //
+        //     return null;
+        // }
 
         public static Func<T, TR> GetFieldAccessor<T, TR>(string fieldName)
         {

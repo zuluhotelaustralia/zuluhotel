@@ -1,119 +1,78 @@
+using System;
+using System.Buffers.Binary;
 using Server.Network;
 
 namespace Server.Items
 {
     public class LOSBlocker : Item
-	{
-		public static void Initialize()
-		{
-			TileData.ItemTable[0x21A2].Flags = TileFlag.Wall | TileFlag.NoShoot;
-			TileData.ItemTable[0x21A2].Height = 20;
-		}
+    {
+        private const ushort GMItemId = 0x36FF;
 
-		public override string DefaultName
-		{
-			get { return "no line of sight"; }
-		}
+        [Constructible]
+        public LOSBlocker() : base(0x21A2) => Movable = false;
 
+        public LOSBlocker(Serial serial) : base(serial)
+        {
+        }
 
-		[Constructible]
-public LOSBlocker() : base( 0x21A2 )
-		{
-			Movable = false;
-		}
+        public override string DefaultName => "no line of sight";
 
-		[Constructible]
-public LOSBlocker( Serial serial ) : base( serial )
-		{
-		}
+        public static void Initialize()
+        {
+            TileData.ItemTable[0x21A2].Flags = TileFlag.Wall | TileFlag.NoShoot;
+            TileData.ItemTable[0x21A2].Height = 20;
+        }
 
-		protected override Packet GetWorldPacketFor( NetState state ) {
-			Mobile mob = state.Mobile;
+        public override void SendWorldPacketTo(NetState ns, ReadOnlySpan<byte> world = default)
+        {
+            var mob = ns.Mobile;
+            if (AccessLevel.GameMaster >= mob?.AccessLevel)
+            {
+                base.SendWorldPacketTo(ns, world);
+                return;
+            }
 
-			if ( mob != null && mob.AccessLevel >= AccessLevel.GameMaster ) {
-				return new GMItemPacket( this );
-			}
+            SendGMItem(ns);
+        }
 
-			return base.GetWorldPacketFor( state );
-		}
+        private void SendGMItem(NetState ns)
+        {
+            // GM Packet
+            Span<byte> buffer = stackalloc byte[OutgoingItemPackets.MaxWorldItemPacketLength];
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+            int length;
 
-			writer.Write( (int) 1 );
-		}
+            if (ns.StygianAbyss)
+            {
+                length = OutgoingItemPackets.CreateWorldItemNew(buffer, this, ns.HighSeas);
+                BinaryPrimitives.WriteUInt16BigEndian(buffer.Slice(8, 2), GMItemId);
+            }
+            else
+            {
+                length = OutgoingItemPackets.CreateWorldItem(buffer, this);
+                BinaryPrimitives.WriteUInt16BigEndian(buffer.Slice(7, 2), GMItemId);
+            }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            ns.Send(buffer.Slice(0, length));
+        }
 
-			int version = reader.ReadInt();
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			if ( version < 1 && ItemID == 0x2199 )
-				ItemID = 0x21A2;
-		}
+            writer.Write(1);
+        }
 
-		public sealed class GMItemPacket : Packet
-		{
-			public GMItemPacket( Item item ) : base( 0x1A )
-			{
-				EnsureCapacity( 20 );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-				// 14 base length
-				// +2 - Amount
-				// +2 - Hue
-				// +1 - Flags
+            var version = reader.ReadInt();
 
-				uint serial = (uint)item.Serial.Value;
-				int itemID = 0x36FF;
-				int amount = item.Amount;
-				Point3D loc = item.Location;
-				int x = loc.X;
-				int y = loc.Y;
-				int hue = item.Hue;
-				int flags = item.GetPacketFlags();
-				int direction = (int)item.Direction;
-
-				if ( amount != 0 )
-					serial |= 0x80000000;
-				else
-					serial &= 0x7FFFFFFF;
-
-				Stream.Write( (uint) serial );
-				Stream.Write( (short) (itemID & 0x7FFF) );
-
-				if ( amount != 0 )
-					Stream.Write( (short) amount );
-
-				x &= 0x7FFF;
-
-				if ( direction != 0 )
-					x |= 0x8000;
-
-				Stream.Write( (short) x );
-
-				y &= 0x3FFF;
-
-				if ( hue != 0 )
-					y |= 0x8000;
-
-				if ( flags != 0 )
-					y |= 0x4000;
-
-				Stream.Write( (short) y );
-
-				if ( direction != 0 )
-					Stream.Write( (byte) direction );
-
-				Stream.Write( (sbyte) loc.Z );
-
-				if ( hue != 0 )
-					Stream.Write( (ushort) hue );
-
-				if ( flags != 0 )
-					Stream.Write( (byte) flags );
-			}
-		}
-	}
+            if (version < 1 && ItemID == 0x2199)
+            {
+                ItemID = 0x21A2;
+            }
+        }
+    }
 }

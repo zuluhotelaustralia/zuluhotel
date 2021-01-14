@@ -50,7 +50,7 @@ public GuildTeleporter( Serial serial ) : base( serial )
 			{
 				case 0:
 				{
-					m_Stone = reader.ReadItem();
+					m_Stone = reader.ReadEntity<Item>();
 
 					break;
 				}

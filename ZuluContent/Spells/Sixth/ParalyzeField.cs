@@ -46,7 +46,7 @@ namespace Server.Spells.Sixth
                 else
                     eastToWest = false;
 
-                Effects.PlaySound(p, Caster.Map, 0x20B);
+                Effects.PlaySound((Point3D)p, Caster.Map, 0x20B);
 
                 var itemID = eastToWest ? 0x3967 : 0x3979;
 
@@ -139,7 +139,7 @@ namespace Server.Spells.Sixth
                 {
                     case 0:
                     {
-                        m_Caster = reader.ReadMobile();
+                        m_Caster = reader.ReadEntity<Mobile>();
                         m_End = reader.ReadDeltaTime();
 
                         m_Timer = new InternalTimer(this, m_End - DateTime.Now);

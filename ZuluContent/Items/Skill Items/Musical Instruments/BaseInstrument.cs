@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Server.Network;
 using Server.Mobiles;
 using Server.Targeting;
@@ -348,7 +349,8 @@ namespace Server.Items
 
         public override void OnSingleClick(Mobile from)
         {
-            ArrayList attrs = new ArrayList();
+            var attrs = new List<EquipInfoAttribute>();
+
 
             if (DisplayLootType)
             {
@@ -394,10 +396,7 @@ namespace Server.Items
             if (attrs.Count == 0 && Crafter == null && Name != null)
                 return;
 
-            EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false,
-                (EquipInfoAttribute[]) attrs.ToArray(typeof(EquipInfoAttribute)));
-
-            from.Send(new DisplayEquipmentInfo(this, eqInfo));
+            from.NetState.SendDisplayEquipmentInfo(Serial, number, m_Crafter?.RawName, false, attrs);
         }
 
         public BaseInstrument(Serial serial) : base(serial)
@@ -446,7 +445,7 @@ namespace Server.Items
                 }
                 case 2:
                 {
-                    m_Crafter = reader.ReadMobile();
+                    m_Crafter = reader.ReadEntity<Mobile>();
 
                     m_Quality = (InstrumentQuality) reader.ReadEncodedInt();
                     m_Slayer = (SlayerName) reader.ReadEncodedInt();
@@ -461,7 +460,7 @@ namespace Server.Items
                 }
                 case 1:
                 {
-                    m_Crafter = reader.ReadMobile();
+                    m_Crafter = reader.ReadEntity<Mobile>();
 
                     m_Quality = (InstrumentQuality) reader.ReadEncodedInt();
                     m_Slayer = (SlayerName) reader.ReadEncodedInt();

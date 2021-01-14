@@ -8,16 +8,15 @@ namespace Server.Items
 {
     public class PublicMoongate : Item
     {
-
         [Constructible]
-public PublicMoongate() : base(0xF6C)
+        public PublicMoongate() : base(0xF6C)
         {
             Movable = false;
             Light = LightType.Circle300;
         }
 
         [Constructible]
-public PublicMoongate(Serial serial) : base(serial)
+        public PublicMoongate(Serial serial) : base(serial)
         {
         }
 
@@ -34,9 +33,8 @@ public PublicMoongate(Serial serial) : base(serial)
 
         public override void OnSingleClick(Mobile from)
         {
-            int moonPhase = (int)Clock.GetMoonPhase(from.Map, from.X, from.Y);
-            from.Send(new AsciiMessage(Serial, ItemID, MessageType.Label, 0, 3, "",
-                $"Through the moongate you {PMList.Felucca.Entries[moonPhase].Description}"));
+            int moonPhase = (int) Clock.GetMoonPhase(from.Map, from.X, from.Y);
+            LabelTo(from, $"Through the moongate you {PMList.Felucca.Entries[moonPhase].Description}");
         }
 
         public override bool OnMoveOver(Mobile m)
@@ -52,7 +50,7 @@ public PublicMoongate(Serial serial) : base(serial)
             m.Combatant = null;
             m.Warmode = false;
 
-            int moonPhase = (int)Clock.GetMoonPhase(m.Map, m.X, m.Y);
+            int moonPhase = (int) Clock.GetMoonPhase(m.Map, m.X, m.Y);
 
             m.MoveToWorld(PMList.Felucca.Entries[moonPhase].Location, Map.Felucca);
             BaseCreature.TeleportPets(m, PMList.Felucca.Entries[moonPhase].Location, Map.Felucca);
@@ -67,7 +65,7 @@ public PublicMoongate(Serial serial) : base(serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write((int) 0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -133,18 +131,12 @@ public PublicMoongate(Serial serial) : base(serial)
 
         public Point3D Location
         {
-            get
-            {
-                return m_Location;
-            }
+            get { return m_Location; }
         }
 
         public string Description
         {
-            get
-            {
-                return m_Description;
-            }
+            get { return m_Description; }
         }
 
         public PMEntry(Point3D loc, string des)
@@ -161,18 +153,12 @@ public PublicMoongate(Serial serial) : base(serial)
 
         public Map Map
         {
-            get
-            {
-                return m_Map;
-            }
+            get { return m_Map; }
         }
 
         public PMEntry[] Entries
         {
-            get
-            {
-                return m_Entries;
-            }
+            get { return m_Entries; }
         }
 
         public PMList(Map map, PMEntry[] entries)
@@ -182,27 +168,41 @@ public PublicMoongate(Serial serial) : base(serial)
         }
 
         public static readonly PMList Trammel = new PMList(Map.Trammel, new[]
-                {
-                    new PMEntry( new Point3D( 1336, 1997, 5 ), "see a road to the east and mountains in the distance to the west." ), // Britain
-                    new PMEntry( new Point3D( 4467, 1283, 5 ), "see a small escarpment to the south and a large city to the North." ), // Moonglow
-					new PMEntry( new Point3D( 3563, 2139, Map.Trammel.GetAverageZ( 3563, 2139 ) ), "see what appears to be a small peninsula covered in lush foliage." ), // Magincia
-					new PMEntry( new Point3D(  643, 2067, 5 ), "see a small city to the south, while a vast ocean lies in all other directions." ), // Skara Brae
-					new PMEntry( new Point3D( 1828, 2948,-20), "see a large sandstone city standing on a far bank of the river to the north." ), // Trinsic
-					new PMEntry( new Point3D( 2701,  692, 5 ), "can just make out a road to the southwest and a river to the north." ), // Minoc
-					new PMEntry( new Point3D(  771,  752, 5 ), "see deep forest on all sides." ), // Yew
-                    new PMEntry( new Point3D( 1499, 3771, 5 ), "see a vast body of water to the east while to the west a city can be seen nearby." ), // Jhelom
-				});
+        {
+            new PMEntry(new Point3D(1336, 1997, 5),
+                "see a road to the east and mountains in the distance to the west."), // Britain
+            new PMEntry(new Point3D(4467, 1283, 5),
+                "see a small escarpment to the south and a large city to the North."), // Moonglow
+            new PMEntry(new Point3D(3563, 2139, Map.Trammel.GetAverageZ(3563, 2139)),
+                "see what appears to be a small peninsula covered in lush foliage."), // Magincia
+            new PMEntry(new Point3D(643, 2067, 5),
+                "see a small city to the south, while a vast ocean lies in all other directions."), // Skara Brae
+            new PMEntry(new Point3D(1828, 2948, -20),
+                "see a large sandstone city standing on a far bank of the river to the north."), // Trinsic
+            new PMEntry(new Point3D(2701, 692, 5),
+                "can just make out a road to the southwest and a river to the north."), // Minoc
+            new PMEntry(new Point3D(771, 752, 5), "see deep forest on all sides."), // Yew
+            new PMEntry(new Point3D(1499, 3771, 5),
+                "see a vast body of water to the east while to the west a city can be seen nearby."), // Jhelom
+        });
 
         public static readonly PMList Felucca = new PMList(Map.Felucca, new[]
-                {
-                    new PMEntry( new Point3D( 1336, 1997, 5 ), "see a road to the east and mountains in the distance to the west." ), // Britain
-                    new PMEntry( new Point3D( 4467, 1283, 5 ), "see a small escarpment to the south and a large city to the North." ), // Moonglow
-					new PMEntry( new Point3D( 3563, 2139, Map.Trammel.GetAverageZ( 3563, 2139 ) ), "see what appears to be a small peninsula covered in lush foliage." ), // Magincia
-					new PMEntry( new Point3D(  643, 2067, 5 ), "see a small city to the south, while a vast ocean lies in all other directions." ), // Skara Brae
-					new PMEntry( new Point3D( 1828, 2948,-20), "see a large sandstone city standing on a far bank of the river to the north." ), // Trinsic
-					new PMEntry( new Point3D( 2701,  692, 5 ), "can just make out a road to the southwest and a river to the north." ), // Minoc
-					new PMEntry( new Point3D(  771,  752, 5 ), "see deep forest on all sides." ), // Yew
-                    new PMEntry( new Point3D( 1499, 3771, 5 ), "see a vast body of water to the east while to the west a city can be seen nearby." ), // Jhelom
-				});
+        {
+            new PMEntry(new Point3D(1336, 1997, 5),
+                "see a road to the east and mountains in the distance to the west."), // Britain
+            new PMEntry(new Point3D(4467, 1283, 5),
+                "see a small escarpment to the south and a large city to the North."), // Moonglow
+            new PMEntry(new Point3D(3563, 2139, Map.Trammel.GetAverageZ(3563, 2139)),
+                "see what appears to be a small peninsula covered in lush foliage."), // Magincia
+            new PMEntry(new Point3D(643, 2067, 5),
+                "see a small city to the south, while a vast ocean lies in all other directions."), // Skara Brae
+            new PMEntry(new Point3D(1828, 2948, -20),
+                "see a large sandstone city standing on a far bank of the river to the north."), // Trinsic
+            new PMEntry(new Point3D(2701, 692, 5),
+                "can just make out a road to the southwest and a river to the north."), // Minoc
+            new PMEntry(new Point3D(771, 752, 5), "see deep forest on all sides."), // Yew
+            new PMEntry(new Point3D(1499, 3771, 5),
+                "see a vast body of water to the east while to the west a city can be seen nearby."), // Jhelom
+        });
     }
 }

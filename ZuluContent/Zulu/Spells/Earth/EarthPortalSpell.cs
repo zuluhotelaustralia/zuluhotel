@@ -46,7 +46,7 @@ namespace Scripts.Zulu.Spells.Earth
                         {
                             pmCaster.EarthPortalLocation = new Point3D(pmCaster.X, pmCaster.Y, pmCaster.Z);
                             Caster.PlaySound(0x1FA);
-                            Effects.SendLocationEffect(Caster, Caster.Map, 14201, 16);
+                            Effects.SendLocationEffect(Caster, 14201, 16);
                             Caster.SendMessage(
                                 "The spirits of the land agree to assist you, and you feel their minds touch your own.");
                         }

@@ -82,7 +82,7 @@ namespace Server.Mobiles
 
 				int version = reader.ReadInt();
 
-				m_Mobiles = reader.ReadStrongMobileList();
+				m_Mobiles = reader.ReadEntityList<Mobile>();;
 
 				for ( int i = 0; i < m_Mobiles.Count; ++i )
 					m_Mobiles[i].Delete();

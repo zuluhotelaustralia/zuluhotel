@@ -569,10 +569,7 @@ namespace Server.Items
             writer.Write( (int)m_Quantity );
         }
 
-        protected bool CheckType( string name )
-        {
-            return World.LoadingType == $"Server.Items.{name}";
-        }
+        protected bool CheckType(string name) => GetType().FullName == $"Server.Items.{name}";
 
         public override void Deserialize( IGenericReader reader )
         {
@@ -592,7 +589,7 @@ namespace Server.Items
             {
                 case 1:
                 {
-                    m_Poisoner = reader.ReadMobile();
+                    m_Poisoner = reader.ReadEntity<Mobile>();
                     goto case 0;
                 }
                 case 0:

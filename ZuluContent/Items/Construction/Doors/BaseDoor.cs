@@ -245,8 +245,7 @@ namespace Server.Items
 					else
 						Location = new Point3D( X - m_Offset.X, Y - m_Offset.Y, Z - m_Offset.Z );
 
-					Effects.PlaySound( this, Map, m_Open ? m_OpenedSound : m_ClosedSound );
-
+                    Effects.PlaySound(this, m_Open ? OpenedSound : ClosedSound);
 					if ( m_Open )
 						m_Timer.Start();
 					else
@@ -570,7 +569,7 @@ namespace Server.Items
 					m_OpenedSound = reader.ReadInt();
 					m_ClosedSound = reader.ReadInt();
 					m_Offset = reader.ReadPoint3D();
-					m_Link = reader.ReadItem() as BaseDoor;
+					m_Link = reader.ReadEntity<BaseDoor>();
 
 					m_Timer = new InternalTimer( this );
 

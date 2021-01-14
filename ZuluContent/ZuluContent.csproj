@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <UseNETCoreGenerator>true</UseNETCoreGenerator>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

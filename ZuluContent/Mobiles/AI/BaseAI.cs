@@ -80,7 +80,7 @@ namespace Server.Mobiles
         {
             string name = m_Mobile.Name;
 
-            return name != null && Insensitive.StartsWith(speech, name);
+            return name != null && InsensitiveStringHelpers.InsensitiveStartsWith(speech, name);
         }
 
         public virtual void BeginPickTarget(Mobile from, OrderType order)
@@ -627,7 +627,7 @@ namespace Server.Mobiles
                         {
                             string word = str[i];
 
-                            if (Insensitive.Equals(word, "obey"))
+                            if (InsensitiveStringHelpers.Equals(word, "obey"))
                             {
                                 m_Mobile.SetControlMaster(e.Mobile);
 

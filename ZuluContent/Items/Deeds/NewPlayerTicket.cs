@@ -51,7 +51,7 @@ public NewPlayerTicket( Serial serial ) : base( serial )
 			{
 				case 0:
 				{
-					m_Owner = reader.ReadMobile();
+					m_Owner = reader.ReadEntity<Mobile>();
 					break;
 				}
 			}

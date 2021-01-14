@@ -186,13 +186,13 @@ public RatCamp( Serial serial ) : base( serial )
 			{
 				case 1:
 				{
-					m_Prisoner = reader.ReadMobile();
+					m_Prisoner = reader.ReadEntity<Mobile>();
 					break;
 				}
 				case 0:
 				{
-					m_Prisoner = reader.ReadMobile();
-					reader.ReadItem();
+					m_Prisoner = reader.ReadEntity<Mobile>();
+					reader.ReadEntity<Item>();
 					break;
 				}
 			}

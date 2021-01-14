@@ -333,7 +333,7 @@ namespace Server.Commands.Generic
 
         CommandLogging.WriteLine(from, "{0} {1} playing sound {2} for {3}", from.AccessLevel,
           CommandLogging.Format(from), index, CommandLogging.Format(mob));
-        mob.Send(new PlaySound(index, mob.Location));
+        mob.SendSound(index, mob.Location);
       }
       else
       {

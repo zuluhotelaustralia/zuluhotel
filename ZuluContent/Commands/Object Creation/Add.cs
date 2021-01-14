@@ -80,7 +80,7 @@ namespace Server.Commands
       string[,] props = null;
 
       for (int i = 0; i < args.Length; ++i)
-        if (Insensitive.Equals(args[i], "set"))
+        if (InsensitiveStringHelpers.Equals(args[i], "set"))
         {
           int remains = args.Length - i - 1;
 
@@ -158,7 +158,7 @@ namespace Server.Commands
           string propName = props[i, 0];
 
           for (int j = 0; thisProp == null && j < allProps.Length; ++j)
-            if (Insensitive.Equals(propName, allProps[j].Name))
+            if (InsensitiveStringHelpers.Equals(propName, allProps[j].Name))
               thisProp = allProps[j];
 
           if (thisProp == null)

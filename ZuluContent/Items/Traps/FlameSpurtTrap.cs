@@ -171,7 +171,7 @@ namespace Server.Items
             {
                 case 0:
                 {
-                    Item item = reader.ReadItem();
+                    Item item = reader.ReadEntity<Item>();
 
                     if (item != null)
                         item.Delete();

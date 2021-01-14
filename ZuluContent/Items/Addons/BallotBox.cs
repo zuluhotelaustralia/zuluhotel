@@ -307,17 +307,22 @@ public BallotBox(Serial serial) : base(serial)
 
     public override void Serialize(IGenericWriter writer)
     {
-      base.Serialize(writer);
+        base.Serialize(writer);
 
-      writer.WriteEncodedInt(0); // version
+        writer.WriteEncodedInt(0); // version
 
-      writer.WriteEncodedInt(m_Topic.Length);
+        writer.WriteEncodedInt(Topic.Length);
 
-      for (int i = 0; i < m_Topic.Length; i++)
-        writer.Write((string) m_Topic[i]);
+        for (var i = 0; i < Topic.Length; i++)
+        {
+            writer.Write(Topic[i]);
+        }
 
-      writer.Write(m_Yes, true);
-      writer.Write(m_No, true);
+        Yes.Tidy();
+        writer.Write(Yes);
+
+        No.Tidy();
+        writer.Write(No);
     }
 
     public override void Deserialize(IGenericReader reader)
@@ -331,8 +336,8 @@ public BallotBox(Serial serial) : base(serial)
       for (int i = 0; i < m_Topic.Length; i++)
         m_Topic[i] = reader.ReadString();
 
-      m_Yes = reader.ReadStrongMobileList();
-      m_No = reader.ReadStrongMobileList();
+      m_Yes = reader.ReadEntityList<Mobile>();
+      m_No = reader.ReadEntityList<Mobile>();
     }
   }
 

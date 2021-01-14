@@ -63,8 +63,8 @@ public LargeForgeWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
-			m_Item2 = reader.ReadItem() as InternalItem2;
+			m_Item = reader.ReadEntity<InternalItem>();
+			m_Item2 = reader.ReadEntity<InternalItem2>();
 		}
 
 		[Engines.Craft.Forge]
@@ -118,7 +118,7 @@ public LargeForgeWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as LargeForgeWest;
+				m_Item = reader.ReadEntity<LargeForgeWest>();
 			}
 		}
 
@@ -173,7 +173,7 @@ public LargeForgeWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as LargeForgeWest;
+				m_Item = reader.ReadEntity<LargeForgeWest>();
 			}
 		}
 	}
@@ -239,8 +239,8 @@ public LargeForgeWest( Serial serial ) : base( serial )
 
 			int version = reader.ReadInt();
 
-			m_Item = reader.ReadItem() as InternalItem;
-			m_Item2 = reader.ReadItem() as InternalItem2;
+			m_Item = reader.ReadEntity<InternalItem>();
+			m_Item2 = reader.ReadEntity<InternalItem2>();
 		}
 
 		[Engines.Craft.Forge]
@@ -294,7 +294,7 @@ public LargeForgeWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as LargeForgeEast;
+				m_Item = reader.ReadEntity<LargeForgeEast>();
 			}
 		}
 
@@ -349,7 +349,7 @@ public LargeForgeWest( Serial serial ) : base( serial )
 
 				int version = reader.ReadInt();
 
-				m_Item = reader.ReadItem() as LargeForgeEast;
+				m_Item = reader.ReadEntity<LargeForgeEast>();
 			}
 		}
 	}

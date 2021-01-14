@@ -102,8 +102,8 @@ namespace Server.Mobiles
 				}
 				case 0:
 				{
-					m_Rider = reader.ReadMobile();
-					m_InternalItem = reader.ReadItem();
+					m_Rider = reader.ReadEntity<Mobile>();
+					m_InternalItem = reader.ReadEntity<Item>();
 
 					if ( m_InternalItem == null )
 						Delete();
@@ -349,8 +349,8 @@ namespace Server.Mobiles
 			switch ( version )
 			{
 				case 0:
-				{
-					m_Mount = reader.ReadMobile() as BaseMount;
+                {
+                    m_Mount = reader.ReadEntity<BaseMount>();
 
 					if ( m_Mount == null )
 						Delete();

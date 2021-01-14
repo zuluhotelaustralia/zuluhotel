@@ -211,7 +211,7 @@ namespace Server.Mobiles
 
 			for ( int i = 0; i < split.Length; ++i )
 			{
-				if ( Insensitive.Equals( split[i], "the" ) )
+				if ( InsensitiveStringHelpers.Equals( split[i], "the" ) )
 					continue;
 
 				if ( split[i].Length > 1 )
@@ -378,19 +378,10 @@ namespace Server.Mobiles
 				if ( ns == null )
 					return;
 
-				if ( ns.ContainerGridLines )
-					from.Send( new VendorBuyContent6017( list ) );
-				else
-					from.Send( new VendorBuyContent( list ) );
-
-				from.Send( new VendorBuyList( this, list ) );
-
-				if ( ns.HighSeas )
-					from.Send( new DisplayBuyListHS( this ) );
-				else
-					from.Send( new DisplayBuyList( this ) );
-
-				from.Send( new MobileStatusExtended( from ) );//make sure their gold amount is sent
+                from.NetState.SendVendorBuyContent(list);
+                from.NetState.SendVendorBuyList(this, list);
+                from.NetState.SendDisplayBuyList(Serial);
+                from.NetState.SendMobileStatus(from); // make sure their gold amount is sent
 
 				SayTo( from, 500186 ); // Greetings.  Have a look around.
 			}
@@ -398,36 +389,32 @@ namespace Server.Mobiles
 
 		public virtual void SendPacksTo( Mobile from )
 		{
-			Item pack = FindItemOnLayer( Layer.ShopBuy );
+            var pack = FindItemOnLayer(Layer.ShopBuy);
 
-			if ( pack == null )
-			{
-				pack = new Backpack();
-				pack.Layer = Layer.ShopBuy;
-				pack.Movable = false;
-				pack.Visible = false;
-				AddItem( pack );
-			}
+            if (pack == null)
+            {
+                pack = new Backpack { Layer = Layer.ShopBuy, Movable = false, Visible = false };
+                AddItem(pack);
+            }
 
-			from.Send( new EquipUpdate( pack ) );
+            from.NetState.SendEquipUpdate(pack);
 
-			pack = FindItemOnLayer( Layer.ShopSell );
+            pack = FindItemOnLayer(Layer.ShopSell);
 
-			if ( pack != null )
-				from.Send( new EquipUpdate( pack ) );
+            if (pack != null)
+            {
+                from.NetState.SendEquipUpdate(pack);
+            }
 
-			pack = FindItemOnLayer( Layer.ShopResale );
+            pack = FindItemOnLayer(Layer.ShopResale);
 
-			if ( pack == null )
-			{
-				pack = new Backpack();
-				pack.Layer = Layer.ShopResale;
-				pack.Movable = false;
-				pack.Visible = false;
-				AddItem( pack );
-			}
+            if (pack == null)
+            {
+                pack = new Backpack { Layer = Layer.ShopResale, Movable = false, Visible = false };
+                AddItem(pack);
+            }
 
-			from.Send( new EquipUpdate( pack ) );
+            from.NetState.SendEquipUpdate(pack);
 		}
 
 		public virtual void VendorSell( Mobile from )
@@ -470,7 +457,8 @@ namespace Server.Mobiles
 				{
 					SendPacksTo( from );
 
-					from.Send( new VendorSellList( this, table ) );
+                    from.NetState.SendVendorSellList(Serial, table);
+
 				}
 				else
 				{
