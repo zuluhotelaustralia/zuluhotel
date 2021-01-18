@@ -71,7 +71,7 @@ namespace Server.Items
         public virtual int DefaultMaxDamage => 0;
         public virtual int DefaultSpeed => 0;
         public virtual int DefaultMaxRange => 1;
-        public bool CanFortify => true;
+        public bool CanFortify { get; } = true;
 
         public virtual int InitMinHits => 0;
         public virtual int InitMaxHits => 0;

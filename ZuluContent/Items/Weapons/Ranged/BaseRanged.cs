@@ -9,17 +9,17 @@ namespace Server.Items
         public abstract Type AmmoType { get; }
         public abstract Item Ammo { get; }
 
-        public override int DefaultHitSound => 0x234;
+        public override int DefaultHitSound { get; } = 0x234;
 
-        public override int DefaultMissSound => 0x238;
+        public override int DefaultMissSound { get; } = 0x238;
 
-        public override SkillName DefaultSkill => SkillName.Archery;
+        public override SkillName DefaultSkill { get; } = SkillName.Archery;
 
-        public override WeaponType DefaultWeaponType => WeaponType.Ranged;
+        public override WeaponType DefaultWeaponType { get; } = WeaponType.Ranged;
 
-        public override WeaponAnimation DefaultAnimation => WeaponAnimation.ShootXBow;
+        public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.ShootXBow;
 
-        public override SkillName AccuracySkill => SkillName.Archery;
+        public override SkillName AccuracySkill { get; } = SkillName.Archery;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Balanced { get; set; }
