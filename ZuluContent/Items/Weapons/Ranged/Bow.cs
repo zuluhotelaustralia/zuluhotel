@@ -9,7 +9,7 @@ namespace Server.Items
 
         public override Type AmmoType => typeof(Arrow);
 
-        public override Item Ammo { get; } = new Arrow();
+        public override Item Ammo => new Arrow();
 
         public override int DefaultStrengthReq { get; } = 20;
 

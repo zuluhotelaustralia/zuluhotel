@@ -26,12 +26,12 @@ namespace Server.Commands.Generic
       Register(new FirewallCommand());
       Register(new TeleCommand());
       Register(new SetCommand());
-      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Immortal", "blessed", "true", ObjectTypes.Mobiles));
-      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Invul", "blessed", "true", ObjectTypes.Mobiles));
-      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Mortal", "blessed", "false", ObjectTypes.Mobiles));
-      Register(new AliasedSetCommand(AccessLevel.GameMaster, "NoInvul", "blessed", "false", ObjectTypes.Mobiles));
-      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Squelch", "squelched", "true", ObjectTypes.Mobiles));
-      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Unsquelch", "squelched", "false", ObjectTypes.Mobiles));
+      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Immortal", "Blessed", "true", ObjectTypes.Mobiles));
+      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Invul", "Blessed", "true", ObjectTypes.Mobiles));
+      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Mortal", "Blessed", "false", ObjectTypes.Mobiles));
+      Register(new AliasedSetCommand(AccessLevel.GameMaster, "NoInvul", "Blessed", "false", ObjectTypes.Mobiles));
+      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Squelch", "Squelched", "true", ObjectTypes.Mobiles));
+      Register(new AliasedSetCommand(AccessLevel.GameMaster, "Unsquelch", "Squelched", "false", ObjectTypes.Mobiles));
 
       Register(new AliasedSetCommand(AccessLevel.GameMaster, "ShaveHair", "HairItemID", "0", ObjectTypes.Mobiles));
       Register(new AliasedSetCommand(AccessLevel.GameMaster, "ShaveBeard", "FacialHairItemID", "0",
