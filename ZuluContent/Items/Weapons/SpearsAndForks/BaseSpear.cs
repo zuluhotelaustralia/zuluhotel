@@ -4,15 +4,15 @@ namespace Server.Items
 {
     public abstract class BaseSpear : BaseMeleeWeapon
     {
-        public override int DefaultHitSound { get; } = 0x23C;
+        public override int DefaultHitSound => 0x23C;
 
-        public override int DefaultMissSound { get; } = 0x238;
+        public override int DefaultMissSound => 0x238;
 
-        public override SkillName DefaultSkill { get; } = SkillName.Fencing;
+        public override SkillName DefaultSkill => SkillName.Fencing;
 
-        public override WeaponType DefaultWeaponType { get; } = WeaponType.Piercing;
+        public override WeaponType DefaultWeaponType => WeaponType.Piercing;
 
-        public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.Pierce2H;
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Pierce2H;
 
         public BaseSpear(int itemId) : base(itemId)
         {

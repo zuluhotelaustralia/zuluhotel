@@ -55,13 +55,13 @@ namespace Server.Items
         {
         }
 
-        public override bool PassivelyTriggered { get; } = false;
+        public override bool PassivelyTriggered => false;
 
-        public override TimeSpan PassiveTriggerDelay { get; } = TimeSpan.Zero;
+        public override TimeSpan PassiveTriggerDelay => TimeSpan.Zero;
 
-        public override int PassiveTriggerRange { get; } = 0;
+        public override int PassiveTriggerRange => 0;
 
-        public override TimeSpan ResetDelay { get; } = TimeSpan.FromSeconds(0.0);
+        public override TimeSpan ResetDelay => TimeSpan.FromSeconds(0.0);
 
         public override void OnTrigger(Mobile from)
         {

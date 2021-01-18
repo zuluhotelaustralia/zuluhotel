@@ -9,23 +9,23 @@ namespace Server.Items
 
         public override Type AmmoType => typeof(Arrow);
 
-        public override Item Ammo { get; } = new Arrow();
+        public override Item Ammo => new Arrow();
 
-        public override int DefaultStrengthReq { get; } = 20;
+        public override int DefaultStrengthReq => 20;
 
-        public override int DefaultMinDamage { get; } = 9;
+        public override int DefaultMinDamage => 9;
 
-        public override int DefaultMaxDamage { get; } = 41;
+        public override int DefaultMaxDamage => 41;
 
-        public override int DefaultSpeed { get; } = 20;
+        public override int DefaultSpeed => 20;
 
-        public override int DefaultMaxRange { get; } = 10;
+        public override int DefaultMaxRange => 10;
 
-        public override int InitMinHits { get; } = 31;
+        public override int InitMinHits => 31;
 
-        public override int InitMaxHits { get; } = 60;
+        public override int InitMaxHits => 60;
 
-        public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.ShootBow;
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.ShootBow;
 
 
         [Constructible]

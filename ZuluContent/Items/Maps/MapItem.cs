@@ -46,7 +46,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public Map Facet { get; set; }
 
-        public List<Point2D> Pins { get; } = new();
+        public List<Point2D> Pins => new();
 
         public int OnCraft(
             int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool,
@@ -324,49 +324,6 @@ namespace Server.Items
 
                     break;
                 }
-            }
-        }
-
-        public static void Initialize()
-        {
-            IncomingPackets.Register(0x56, 11, true, OnMapCommand);
-        }
-
-        private static void OnMapCommand(NetState state, CircularBufferReader reader)
-        {
-            var from = state.Mobile;
-
-            if (!(World.FindItem(reader.ReadUInt32()) is MapItem map))
-            {
-                return;
-            }
-
-            int command = reader.ReadByte();
-            int number = reader.ReadByte();
-
-            int x = reader.ReadInt16();
-            int y = reader.ReadInt16();
-
-            switch (command)
-            {
-                case 1:
-                    map.OnAddPin(from, x, y);
-                    break;
-                case 2:
-                    map.OnInsertPin(from, number, x, y);
-                    break;
-                case 3:
-                    map.OnChangePin(from, number, x, y);
-                    break;
-                case 4:
-                    map.OnRemovePin(from, number);
-                    break;
-                case 5:
-                    map.OnClearPins(from);
-                    break;
-                case 6:
-                    map.OnToggleEditable(from);
-                    break;
             }
         }
     }

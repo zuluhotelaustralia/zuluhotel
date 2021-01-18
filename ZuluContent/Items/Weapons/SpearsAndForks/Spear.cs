@@ -3,19 +3,19 @@ namespace Server.Items
     [FlipableAttribute(0xF62, 0xF63)]
     public class Spear : BaseSpear
     {
-        public override int DefaultStrengthReq { get; } = 30;
+        public override int DefaultStrengthReq => 30;
 
-        public override int DefaultMinDamage { get; } = 2;
+        public override int DefaultMinDamage => 2;
 
-        public override int DefaultMaxDamage { get; } = 36;
+        public override int DefaultMaxDamage => 36;
 
-        public override int DefaultSpeed { get; } = 46;
+        public override int DefaultSpeed => 46;
 
-        public override int InitMinHits { get; } = 31;
+        public override int InitMinHits => 31;
 
-        public override int InitMaxHits { get; } = 80;
+        public override int InitMaxHits => 80;
 
-        public override int DefaultMaxRange { get; } = 2;
+        public override int DefaultMaxRange => 2;
 
 
         [Constructible]

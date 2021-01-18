@@ -14,19 +14,19 @@ namespace Server.Items
 
         public override Item Ammo => new Bolt();
 
-        public override int DefaultStrengthReq { get; } = 30;
+        public override int DefaultStrengthReq => 30;
 
-        public override int DefaultMinDamage { get; } = 8;
+        public override int DefaultMinDamage => 8;
 
-        public override int DefaultMaxDamage { get; } = 43;
+        public override int DefaultMaxDamage => 43;
 
-        public override int DefaultSpeed { get; } = 18;
+        public override int DefaultSpeed => 18;
 
-        public override int DefaultMaxRange { get; } = 8;
+        public override int DefaultMaxRange => 8;
 
-        public override int InitMinHits { get; } = 31;
+        public override int InitMinHits => 31;
 
-        public override int InitMaxHits { get; } = 80;
+        public override int InitMaxHits => 80;
         
 
 
