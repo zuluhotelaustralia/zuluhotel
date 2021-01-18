@@ -32,17 +32,24 @@ namespace ZuluContent.Zulu.Items.SingleClick
             return (prefixes, suffixes);
         }
 
-        private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
+        public static string GetMagicItemName(IMagicItem item)
         {
-            if (!Validate(m, item))
-                return;
-            
             var (prefixes, suffixes) = GetAffixes(item);
 
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
-            
-            var text = $"{prefix}{GetItemDesc(item)}{suffix}{GetCraftedBy(item)}";
+
+            var text = $"{prefix}{GetItemDesc(item as Item)}{suffix}{GetCraftedBy(item as Item)}";
+
+            return text;
+        }
+
+        private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
+        {
+            if (!Validate(m, item))
+                return;
+
+            var text = GetMagicItemName(item);
 
             SendResponse(m, item, text);
         }
@@ -59,7 +66,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
             if (!ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc))
                 return false;
 
-            if (item is IMagicItem magicItem && !magicItem.Identified)
+            if (item is IMagicItem magicItem && m.AccessLevel == AccessLevel.Player && !magicItem.Identified)
             {
                 SendResponse(m, item, $"a magical {desc}");
                 return false;

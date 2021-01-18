@@ -179,7 +179,6 @@ namespace Server.Scripts.Engines.Loot
             }
         }
 
-
         public static bool MakeItemMagical(LootItem item)
         {
             bool isMagic = false;

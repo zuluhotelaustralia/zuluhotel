@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Server.Items;
 using static Server.Scripts.Engines.Loot.LootGroup;
 
@@ -54,6 +55,7 @@ namespace Server.Scripts.Engines.Loot
         public List<LootItem> Roll()
         {
             var lootItems = new List<LootItem>();
+            var lootItemsDict = new Dictionary<string, LootItem>();
             foreach (var entry in Groups)
             {
                 if (Utility.RandomDouble() < entry.Chance)
@@ -77,9 +79,18 @@ namespace Server.Scripts.Engines.Loot
             {
                 li.ItemLevel = ItemLevel;
                 li.ItemChance = ItemChance;
+                LootItem dictLi;
+                if (lootItemsDict.TryGetValue(li.Type.ToString(), out dictLi))
+                {
+                    dictLi.Quantity++;
+                }
+                else
+                {
+                    lootItemsDict.Add(li.Type.ToString(), li);
+                }
             }
 
-            return lootItems;
+            return lootItemsDict.Values.ToList();
         }
     }
 
@@ -99,6 +110,19 @@ namespace Server.Scripts.Engines.Loot
             {Armor, 1, 10, 0.5},
             {Jewelry, 1, 10, 0.5},
             {Clothing, 1, 10, 0.5},
+        };
+
+        // level6map, golden dragon, behemoth, balron, arachnidqueen
+        public static readonly LootTable Table2 = new LootTable(itemLevel: 10, itemChance: 1.0)
+        {
+            {typeof(Gold), 1000, 2000, 1.0},
+            {Reagents, 5, 6, 1.0},
+            {PaganReagents, 5, 6, 1.0},
+            {Gems, 1, 5, 1.0},
+            {Weapons, 1, 3, 0.5},
+            {Armor, 2, 3, 0.5},
+            {Jewelry, 1, 2, 1.0},
+            {Clothing, 1, 1, 1.0},
         };
     }
 }

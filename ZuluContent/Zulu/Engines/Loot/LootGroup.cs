@@ -94,6 +94,21 @@ namespace Server.Scripts.Engines.Loot
             {typeof(NewZuluOre), 1, 0.1},
         };
 
+        public static readonly LootGroup Gems = new LootGroup
+        {
+            Server.Loot.GemTypes
+        };
+
+        public static readonly LootGroup Reagents = new LootGroup
+        {
+            Server.Loot.RegTypes
+        };
+
+        public static readonly LootGroup PaganReagents = new LootGroup
+        {
+            Server.Loot.PaganRegTypes
+        };
+
         public static readonly LootGroup Weapons = new LootGroup
         {
             Server.Loot.WeaponTypes,

@@ -1,3 +1,5 @@
+using Server.Scripts.Engines.Loot;
+
 namespace Server.Mobiles
 {
     [CorpseName( "a giant toad corpse" )]
@@ -37,7 +39,7 @@ public GiantToad() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Poor );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override int Hides{ get{ return 12; } }

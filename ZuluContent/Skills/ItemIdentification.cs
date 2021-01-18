@@ -2,6 +2,7 @@ using System;
 using Server.Targeting;
 using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using ZuluContent.Zulu.Items.SingleClick;
 
 namespace Server.Items
 {
@@ -37,6 +38,7 @@ namespace Server.Items
                         if(!item.Identified)
                             item.Identified = true;
                         item.OnSingleClick(from);
+                        from.SendAsciiMessage(55, "It appears to be " + SingleClickHandler.GetMagicItemName(item));
                         break;
                     }
                     case Item item:
