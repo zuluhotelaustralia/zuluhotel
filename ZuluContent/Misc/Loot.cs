@@ -133,7 +133,7 @@ namespace Server
         get { return m_PaganRegTypes; }
     }
 
-        private static Type[] m_PotionTypes = new[]
+    private static Type[] m_PotionTypes = new[]
     {
       typeof(AgilityPotion), typeof(StrengthPotion), typeof(RefreshPotion),
       typeof(LesserCurePotion), typeof(LesserHealPotion), typeof(LesserPoisonPotion)
