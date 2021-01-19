@@ -18,6 +18,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnGetCastDelay(Mobile mobile, Spell spell, ref double delay);
 
+        public void OnParalysis(Mobile mobile, ref TimeSpan duration);
+
+        public void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref ApplyPoisonResult result);
+
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 
         public void OnSwing(Mobile attacker, Mobile defender, ref double damageBonus, ref TimeSpan result);

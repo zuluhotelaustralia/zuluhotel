@@ -103,7 +103,7 @@ namespace Server.Scripts.Engines.Loot
     [SuppressMessage("ReSharper", "ArgumentsStyleLiteral")]
     public partial class LootTable
     {
-        public static readonly LootTable Table1 = new LootTable(itemLevel: 9, itemChance: 1.0)
+        public static readonly LootTable Table1 = new LootTable(itemLevel: 1, itemChance: 1.0)
         {
             {typeof(CheeseSlice), 0.5},
             {Weapons, 1, 10, 0.5},
@@ -113,7 +113,7 @@ namespace Server.Scripts.Engines.Loot
         };
 
         // level6map, golden dragon, behemoth, balron, arachnidqueen
-        public static readonly LootTable Table2 = new LootTable(itemLevel: 10, itemChance: 1.0)
+        public static readonly LootTable Table2 = new LootTable(itemLevel: 5, itemChance: 1.0)
         {
             {typeof(Gold), 1000, 2000, 1.0},
             {Reagents, 5, 6, 1.0},
@@ -122,7 +122,7 @@ namespace Server.Scripts.Engines.Loot
             {Weapons, 1, 3, 0.5},
             {Armor, 2, 3, 0.5},
             {Jewelry, 1, 2, 1.0},
-            {Clothing, 1, 1, 1.0},
+            {Clothing, 15, 20, 1.0},
         };
     }
 }

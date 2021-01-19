@@ -1,4 +1,8 @@
+using System;
 using MessagePack;
+using Server;
+using Server.Network;
+using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -10,6 +14,21 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
         [Key(1)] 
         public int Value { get; set; } = 0;
+
+        public override void OnParalysis(Mobile mobile, ref TimeSpan duration)
+        {
+            if (Value >= 30)
+            {
+                duration = TimeSpan.Zero;
+                mobile.PrivateOverheadMessage(
+                    MessageType.Regular,
+                    mobile.SpeechHue,
+                    true,
+                    "You are magically protected from paralyzing effects.",
+                    mobile.NetState
+                );
+            }
+        }
     }
     
     public class ParalysisProtectionInfo : EnchantmentInfo

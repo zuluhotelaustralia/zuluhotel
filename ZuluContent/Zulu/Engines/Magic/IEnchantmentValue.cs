@@ -18,7 +18,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(11, typeof(ParalysisProtection))]
     [Union(12, typeof(PermMagicImmunity))]
     [Union(13, typeof(PhysicalProtection))]
-    [Union(14, typeof(PoisonProtection))]
+    [Union(14, typeof(PermPoisonProtection))]
     [Union(15, typeof(SkillBonus))]
     [Union(16, typeof(IntBonus))]
     [Union(17, typeof(DexBonus))]

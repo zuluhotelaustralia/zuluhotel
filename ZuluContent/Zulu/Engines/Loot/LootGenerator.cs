@@ -33,10 +33,13 @@ namespace Server.Scripts.Engines.Loot
         public ArmorBonusType ArmorMod = 0;
         public int Hue = 0;
 
+        public bool Cursed = false;
+
         //TODO: Temp attributes
 
         public ElementalType ProtectionType;
         public ElementalProtectionLevel ProtectionLevel;
+        public int Charges;
 
         public string Hitscript;
         public CreatureType SlayerType;
@@ -86,6 +89,7 @@ namespace Server.Scripts.Engines.Loot
                 {
                     magicItem.Enchantments.Set((FirstSkillBonus e) =>
                     {
+                        e.Cursed = Cursed;
                         e.Skill = SkillBonusName;
                         return e.Value = SkillBonusValue;
                     });
@@ -128,7 +132,11 @@ namespace Server.Scripts.Engines.Loot
                         break;
                     case BaseJewel jewelry:
                         jewelry.ArmorBonusType = ArmorMod;
-                        jewelry.Enchantments.SetResist(ProtectionType, GetResistForProtectionLevel(ProtectionLevel));
+                        jewelry.Enchantments.SetResist(
+                            ProtectionType,
+                            HasCharges(ProtectionType) ? Charges : GetResistForProtectionLevel(ProtectionLevel),
+                            Cursed
+                        );
                         break;
                 }
             }
@@ -172,7 +180,8 @@ namespace Server.Scripts.Engines.Loot
 
             foreach (var item in lootItems)
             {
-                if (MakeItemMagical(item))
+                if (!(item.Is<BaseWeapon>() || item.Is<BaseShield>() || item.Is<BaseClothing>() || item.Is<BaseJewel>() ||
+                      item.Is<BaseArmor>() || item.Is<BaseTool>() || item.Type == typeof(Pickaxe)) || MakeItemMagical(item))
                 {
                     item.CreateIn(container);
                 }
@@ -183,7 +192,7 @@ namespace Server.Scripts.Engines.Loot
         {
             bool isMagic = false;
 
-            while (item.ItemChance > 0)
+            while (item.ItemLevel > 0)
             {
                 if (RandomDouble() < item.ItemChance)
                 {
@@ -303,7 +312,15 @@ namespace Server.Scripts.Engines.Loot
                 }
             }
 
+            ApplyCursed(item);
+
             return isMagic;
+        }
+
+        private static void ApplyCursed(LootItem item)
+        {
+            if ((item.Is<BaseClothing>() || item.Is<BaseJewel>()) && Utility.Random(1, 100) <= 5)
+                item.Cursed = true;
         }
 
 
@@ -316,7 +333,7 @@ namespace Server.Scripts.Engines.Loot
                 return;
             }
 
-            var level = Utility.Random(1, 50) + item.ItemLevel * 2;
+            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
             int value = 0;
 
 
@@ -484,7 +501,7 @@ namespace Server.Scripts.Engines.Loot
                 _ => 30
             };
 
-            switch (Utility.Random(3) + 1)
+            switch (Utility.Random(1, 3))
             {
                 case 1:
                     item.BonusStr = amount;
@@ -507,13 +524,13 @@ namespace Server.Scripts.Engines.Loot
 
             if (level < 200)
             {
-                // ApplyProtection();
+                ApplyProtection(item);
             }
             else if (level < 500)
                 ApplyElementalImmunity(item);
             else
             {
-                // ApplyMagicImmunity();
+                // ApplyImmunity();
             }
 
 
@@ -528,11 +545,63 @@ namespace Server.Scripts.Engines.Loot
             }
         }
 
+        private static void ApplyProtection(LootItem item)
+        {
+            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            int charges = 0;
+            ElementalType element = 0;
+
+            switch (item.ItemLevel / 3)
+            {
+                case 1:
+                    if (level < 75)
+                        level = 75;
+                    break;
+                case 2:
+                    if (level < 150)
+                        level = 150;
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    if (level < 300)
+                        level = 300;
+                    break;
+            }
+
+            charges = level switch
+            {
+                < 75 => 5,
+                < 150 => 10,
+                < 300 => 15,
+                < 400 => 20,
+                < 550 => 25,
+                _ => 30
+            };
+
+            switch (Utility.Random(1, 3))
+            {
+                case 1:
+                    element = ElementalType.PoisonImmunity;
+                    break;
+                case 2:
+                    element = ElementalType.MagicImmunity;
+                    break;
+                case 3:
+                    element = ElementalType.SpellReflect;
+                    break;
+            }
+
+            item.Charges = charges;
+            item.ProtectionType = element;
+        }
+
 
         private static void ApplyElementalImmunity(LootItem item)
         {
             var level = Utility.Random(1, 100) * item.ItemLevel;
             ElementalProtectionLevel value = 0;
+            ElementalType element = 0;
 
             switch (item.ItemLevel / 3)
             {
@@ -562,17 +631,34 @@ namespace Server.Scripts.Engines.Loot
                 _ => ElementalProtectionLevel.Absorbsion
             };
 
-            var element = Utility.Random(1, 7) switch
+            switch (Utility.Random(1, 8))
             {
-                1 => ElementalType.Fire,
-                2 => ElementalType.Water,
-                3 => ElementalType.Air,
-                4 => ElementalType.Earth,
-                5 => ElementalType.Necro,
-                6 => ElementalType.Poison,
-                _ => ElementalType.None,
-            };
-
+                case 1:
+                    element = ElementalType.Fire;
+                    break;
+                case 2:
+                    element = ElementalType.Water;
+                    break;
+                case 3:
+                    element = ElementalType.Air;
+                    break;
+                case 4:
+                    element = ElementalType.Earth;
+                    break;
+                case 5:
+                    element = ElementalType.Paralysis;
+                    value = ElementalProtectionLevel.Bane;
+                    break;
+                case 6:
+                    element = ElementalType.Necro;
+                    break;
+                case 7:
+                    element = ElementalType.HealingBonus;
+                    break;
+                default:
+                    element = ElementalType.Physical;
+                    break;
+            }
 
             item.ProtectionLevel = value;
             item.ProtectionType = element;
@@ -757,7 +843,7 @@ namespace Server.Scripts.Engines.Loot
             item.SkillBonusName = RandomBool() ? SkillName.MagicResist : SkillName.Hiding;
             item.SkillBonusValue = value;
 
-            if (Utility.Random(1, 100) < 5 * item.ItemLevel)
+            if (Utility.Random(1, 100) <= 5 * item.ItemLevel)
                 ApplyDurabilityMod(item);
         }
 

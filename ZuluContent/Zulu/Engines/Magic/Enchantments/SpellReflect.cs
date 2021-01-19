@@ -4,7 +4,7 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
-    public class PermMagicImmunity : Enchantment<PermMagicImmunityInfo>
+    public class SpellReflect : Enchantment<SpellReflectInfo>
     {
         [IgnoreMember]
         public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
@@ -13,22 +13,22 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public int Value { get; set; } = 0;
     }
     
-    public class PermMagicImmunityInfo : EnchantmentInfo
+    public class SpellReflectInfo : EnchantmentInfo
     {
 
-        public override string Description { get; protected set; } = "Permanent Magic Immunity";
+        public override string Description { get; protected set; } = "Spell Reflection With Charges";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
 
         public override string[,] Names { get; protected set; } = {
             {string.Empty, string.Empty},
-            {"Raw Blackrock", "Chipped Blackrock"},
-            {"Refined Blackrock", "Cracked Blackrock"},
-            {"Processed Blackrock", "Flawed Blackrock"},
-            {"Smelted Blackrock", "Inferior Blackrock"},
-            {"Forged Blackrock", "Chaotic Blackrock"},
-            {"Tempered Blackrock", "Corrupted Blackrock"},
+            {"Raw Moonstone", "Chipped Moonstone"},
+            {"Cut Moonstone", "Cracked Moonstone"},
+            {"Refined Moonstone", "Flawed Moonstone"},
+            {"Prepared Moonstone", "Inferior Moonstone"},
+            {"Enchanted Moonstone", "Chaotic Moonstone"},
+            {"Flawless Moonstone", "Corrupted Moonstone"},
         };
     }
 }

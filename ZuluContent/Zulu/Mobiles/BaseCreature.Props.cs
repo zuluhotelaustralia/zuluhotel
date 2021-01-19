@@ -53,8 +53,8 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalPoisonResist
         {
-            get => Enchantments.Get((PoisonProtection e) => e.Value);
-            set => Enchantments.Set((PoisonProtection e) => e.Value = value);
+            get => Enchantments.Get((PermPoisonProtection e) => e.Value);
+            set => Enchantments.Set((PermPoisonProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

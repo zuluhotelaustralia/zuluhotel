@@ -48,14 +48,20 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public virtual void OnParalysis(Mobile mobile, ref TimeSpan duration)
+        {
+        }
+
+        public virtual void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref ApplyPoisonResult result)
+        {
+        }
+
         public virtual void OnBeforeSwing(Mobile attacker, Mobile defender)
         {
-            
         }
 
         public virtual void OnSwing(Mobile attacker, Mobile defender, ref double damageBonus, ref TimeSpan result)
         {
-            
         }
 
         public virtual void OnGetSwingDelay(ref double delayInSeconds, Mobile m)

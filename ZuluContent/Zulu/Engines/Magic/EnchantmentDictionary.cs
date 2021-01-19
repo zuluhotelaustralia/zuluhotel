@@ -98,30 +98,93 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             return result;
         }
 
-        public void SetResist(ElementalType protectionType, int value)
+        public void SetResist(ElementalType protectionType, int value, bool cursed)
         {
             switch (protectionType)
             {
                 case ElementalType.Water:
-                    Set((WaterProtection e) => e.Value = value);
+                    Set((WaterProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
                     break;
                 case ElementalType.Air:
-                    Set((AirProtection e) => e.Value = value);
+                    Set((AirProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
                     break;
                 case ElementalType.Physical:
-                    Set((PhysicalProtection e) => e.Value = value);
+                    Set((PhysicalProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
                     break;
                 case ElementalType.Fire:
-                    Set((FireProtection e) => e.Value = value);
-                    break;
-                case ElementalType.Poison:
-                    Set((PoisonProtection e) => e.Value = value);
+                    Set((FireProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
                     break;
                 case ElementalType.Earth:
-                    Set((EarthProtection e) => e.Value = value);
+                    Set((EarthProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
                     break;
                 case ElementalType.Necro:
-                    Set((NecroProtection e) => e.Value = value);
+                    Set((NecroProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.Paralysis:
+                    Set((ParalysisProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.HealingBonus:
+                    Set((HealingBonus e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.PoisonImmunity:
+                    Set((PoisonProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.MagicImmunity:
+                    Set((MagicImmunity e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.SpellReflect:
+                    Set((SpellReflect e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.PermPoisonImmunity:
+                    Set((PermPoisonProtection e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.PermMagicImmunity:
+                    Set((PermMagicImmunity e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
+                    break;
+                case ElementalType.PermSpellReflect:
+                    Set((PermSpellReflect e) => {
+                        e.Cursed = cursed;
+                        return e.Value = value;
+                    });
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(protectionType), protectionType, null);
@@ -136,9 +199,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
                 ElementalType.Air => Get((AirProtection e) => e.Value),
                 ElementalType.Physical => Get((PhysicalProtection e) => e.Value),
                 ElementalType.Fire => Get((FireProtection e) => e.Value),
-                ElementalType.Poison => Get((PoisonProtection e) => e.Value),
+                ElementalType.Poison => Get((PermPoisonProtection e) => e.Value),
                 ElementalType.Earth => Get((EarthProtection e) => e.Value),
                 ElementalType.Necro => Get((NecroProtection e) => e.Value),
+                ElementalType.Paralysis => Get((ParalysisProtection e) => e.Value),
+                ElementalType.HealingBonus => Get((HealingBonus e) => e.Value),
                 _ => throw new ArgumentOutOfRangeException(nameof(protectionType), protectionType, null)
             };
         }
