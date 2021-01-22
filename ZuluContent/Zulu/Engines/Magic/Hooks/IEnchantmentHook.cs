@@ -12,15 +12,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnAdded(IEntity entity);
 
-        public void OnRemoved(IEntity entity);
+        public void OnRemoved(IEntity entity, IEntity parent);
 
-        public void OnSpellDamage(Mobile attacker, Mobile defender, ElementalType damageType, ref int damage);
+        public void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage);
 
         public void OnGetCastDelay(Mobile mobile, Spell spell, ref double delay);
 
-        public void OnParalysis(Mobile mobile, ref TimeSpan duration);
+        public void OnParalysis(Mobile mobile, ref bool paralyze);
 
-        public void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref ApplyPoisonResult result);
+        public void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune);
+
+        public void OnHeal(Mobile healer, Mobile patient, ref double healAmount);
 
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 

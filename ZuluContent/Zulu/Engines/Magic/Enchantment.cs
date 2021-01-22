@@ -4,6 +4,7 @@ using Server;
 using Server.Engines.Magic;
 using Server.Items;
 using Server.Spells;
+using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 
@@ -25,6 +26,21 @@ namespace ZuluContent.Zulu.Engines.Magic
             Cursed = cursed;
         }
 
+        protected virtual void NotifyMobile(Mobile above, string text)
+        {
+            NotifyMobile(above, above, text);
+        }
+        protected virtual void NotifyMobile(Mobile above, Mobile who, string text)
+        {
+            above.PrivateOverheadMessage(
+                MessageType.Regular,
+                who.SpeechHue,
+                true,
+                text,
+                who.NetState
+            );
+        }
+
         public virtual void OnIdentified(IEntity entity)
         {
             
@@ -35,12 +51,11 @@ namespace ZuluContent.Zulu.Engines.Magic
             
         }
 
-        public virtual void OnRemoved(IEntity entity)
+        public virtual void OnRemoved(IEntity entity, IEntity parent)
         {
-            
         }
 
-        public virtual void OnSpellDamage(Mobile attacker, Mobile defender, ElementalType damageType, ref int damage)
+        public virtual void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
         {
         }
 
@@ -48,11 +63,15 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnParalysis(Mobile mobile, ref TimeSpan duration)
+        public virtual void OnParalysis(Mobile mobile, ref bool paralyze)
         {
         }
 
-        public virtual void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref ApplyPoisonResult result)
+        public virtual void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        {
+        }
+
+        public virtual void OnHeal(Mobile healer, Mobile patient, ref double healAmount)
         {
         }
 

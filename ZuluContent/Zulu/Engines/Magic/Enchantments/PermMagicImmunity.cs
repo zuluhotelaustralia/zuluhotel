@@ -1,5 +1,9 @@
 using MessagePack;
+using Server;
+using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
@@ -11,6 +15,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)] 
         public int Value { get; set; } = 0;
+
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
+        {
+            var protectionLevelFromCircle = GetProtectionLevelForResist(Value);
+            if ((int) protectionLevelFromCircle >= (int) circle)
+            {
+                damage = 0;
+                NotifyMobile(defender, attacker.Name + "'s spell is absorbed by your magical protection!");
+                NotifyMobile(defender, attacker, "The spell dissipates upon contact with " + defender.Name + "'s magical barrier!");
+            }
+        }
     }
     
     public class PermMagicImmunityInfo : EnchantmentInfo

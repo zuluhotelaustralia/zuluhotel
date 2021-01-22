@@ -31,14 +31,14 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         {
             if (entity is Item item && item.Parent is Mobile mobile)
             {
-                m_Mod = new DefaultSkillMod(Skill, true, Value);
+                m_Mod = new EquippedSkillMod(Skill, true, Value, item, mobile);
                 mobile.AddSkillMod(m_Mod);
             }
         }
 
-        public override void OnRemoved(IEntity entity)
+        public override void OnRemoved(IEntity entity, IEntity parent)
         {
-            if (entity is Item item && item.Parent is Mobile mobile)
+            if (entity is Item && parent is Mobile mobile)
             {
                 mobile.RemoveSkillMod(m_Mod);
             }

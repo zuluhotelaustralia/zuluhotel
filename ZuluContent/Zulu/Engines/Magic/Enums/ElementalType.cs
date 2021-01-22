@@ -21,6 +21,16 @@ namespace Server.Engines.Magic
 
         public int ElementalNecroResist { get; set; }
 
+        public int ParalysisResist { get; set; }
+
+        public int HealingBonus { get; set; }
+
+        public int MagicImmunity { get; set; }
+
+        public int SpellReflection { get; set; }
+
+
+
         private static readonly Dictionary<ElementalProtectionLevel, int> ProtectionToResist =
             new Dictionary<ElementalProtectionLevel, int>
             {
@@ -32,16 +42,6 @@ namespace Server.Engines.Magic
                 [ElementalProtectionLevel.Attunement] = 80,
                 [ElementalProtectionLevel.Absorbsion] = 100,
             };
-
-        private static readonly ElementalType[] ElementalTypesWithCharges = 
-            {
-                ElementalType.PoisonImmunity,
-                ElementalType.MagicImmunity,
-                ElementalType.SpellReflect
-            };
-
-        public static bool HasCharges(ElementalType type) =>
-            ElementalTypesWithCharges.Contains(type);
 
         public static int GetResistForProtectionLevel(ElementalProtectionLevel level) => 
             ProtectionToResist[level];
@@ -77,9 +77,6 @@ namespace Server.Engines.Magic
         Necro,
         Paralysis,
         HealingBonus,
-        PoisonImmunity,
-        MagicImmunity,
-        SpellReflect,
         PermPoisonImmunity,
         PermMagicImmunity,
         PermSpellReflect,

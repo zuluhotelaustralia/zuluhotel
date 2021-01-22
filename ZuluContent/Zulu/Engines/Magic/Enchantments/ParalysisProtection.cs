@@ -1,9 +1,8 @@
-using System;
 using MessagePack;
 using Server;
-using Server.Network;
 using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
@@ -15,18 +14,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)] 
         public int Value { get; set; } = 0;
 
-        public override void OnParalysis(Mobile mobile, ref TimeSpan duration)
+        public override void OnParalysis(Mobile mobile, ref bool paralyze)
         {
-            if (Value >= 30)
+            var protectionLevelFromParalysis = GetProtectionLevelForResist(Value);
+            if (protectionLevelFromParalysis >= ElementalProtectionLevel.Warding)
             {
-                duration = TimeSpan.Zero;
-                mobile.PrivateOverheadMessage(
-                    MessageType.Regular,
-                    mobile.SpeechHue,
-                    true,
-                    "You are magically protected from paralyzing effects.",
-                    mobile.NetState
-                );
+                paralyze = false;
+                NotifyMobile(mobile, "You are magically protected from paralyzing effects.");
             }
         }
     }

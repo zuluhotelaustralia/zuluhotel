@@ -1,5 +1,6 @@
 using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Fourth
 {
@@ -31,11 +32,13 @@ namespace Server.Spells.Fourth
 
                 // Algorithm: (40% of magery) + (1-10)
 
-                var toHeal = (int) (Caster.Skills[SkillName.Magery].Value * 0.4);
+                var toHeal = (Caster.Skills[SkillName.Magery].Value * 0.4);
                 toHeal += Utility.Random(1, 10);
 
+                Caster.FireHook(h => h.OnHeal(Caster, m, ref toHeal));
+
                 //m.Heal( toHeal, Caster );
-                SpellHelper.Heal(toHeal, m, Caster);
+                SpellHelper.Heal((int) toHeal, m, Caster);
 
                 m.FixedParticles(0x376A, 9, 32, 5030, EffectLayer.Waist);
                 m.PlaySound(0x202);

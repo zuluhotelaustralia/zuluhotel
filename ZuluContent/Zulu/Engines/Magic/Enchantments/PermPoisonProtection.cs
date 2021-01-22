@@ -1,6 +1,8 @@
 using MessagePack;
+using Server;
 using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
@@ -13,6 +15,16 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)]
         public int Value { get; set; } = 0;
+
+        public override void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        {
+            var poisonProtectionLevel = GetProtectionLevelForResist(Value);
+            if ((int)poisonProtectionLevel >= poison.Level)
+            {
+                immune = true;
+                NotifyMobile(defender, "Your items protected you from the poison!");
+            }
+        }
     }
     
     public class PermPoisonProtectionInfo : EnchantmentInfo

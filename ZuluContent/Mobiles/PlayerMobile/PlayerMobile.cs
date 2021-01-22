@@ -948,14 +948,22 @@ namespace Server.Mobiles
 
         public new void Paralyze(TimeSpan duration)
         {
-            this.FireHook(h => h.OnParalysis(this, ref duration));
-            base.Paralyze(duration);
+            bool paralyze = true;
+
+            this.FireHook(h => h.OnParalysis(this, ref paralyze));
+
+            if (paralyze)
+                base.Paralyze(duration);
         }
 
         public new void Freeze(TimeSpan duration)
         {
-            this.FireHook(h => h.OnParalysis(this, ref duration));
-            base.Freeze(duration);
+            bool freeze = true;
+
+            this.FireHook(h => h.OnParalysis(this, ref freeze));
+
+            if (freeze)
+                base.Freeze(duration);
         }
 
         private delegate void ContextCallback();
@@ -1254,9 +1262,13 @@ namespace Server.Mobiles
             if (!Alive)
                 return ApplyPoisonResult.Immune;
 
-            ApplyPoisonResult result = base.ApplyPoison(from, poison);
+            bool immuneFromPoison = false;
+            this.FireHook(h => h.OnPoison(from, this, poison, ref immuneFromPoison));
 
-            this.FireHook(h => h.OnPoison(from, this, poison, ref result));
+            if (immuneFromPoison)
+                return ApplyPoisonResult.Immune;
+
+            ApplyPoisonResult result = base.ApplyPoison(from, poison);
 
             if (from != null && result == ApplyPoisonResult.Poisoned && PoisonTimer is PoisonImpl.PoisonTimer timer)
                 timer.From = from;

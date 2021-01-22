@@ -1,6 +1,7 @@
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -15,7 +16,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)] 
         public int Value { get; set; } = 0;
         
-        public override void OnSpellDamage(Mobile attacker, Mobile defender, ElementalType damageType, ref int damage)
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
         {
             if (damageType == ElementalType.Fire) 
                 damage -= (int) (damage * ((double) Value / 100));

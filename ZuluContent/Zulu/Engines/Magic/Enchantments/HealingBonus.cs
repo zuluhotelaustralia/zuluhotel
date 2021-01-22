@@ -1,6 +1,7 @@
 using MessagePack;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
@@ -11,7 +12,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName => EnchantmentInfo.GetName(Value);
         [Key(1)] 
         public int Value { get; set; } = 0;
-        
+
+        public override void OnHeal(Mobile healer, Mobile patient, ref double healAmount)
+        {
+            var healingBonusLevel = GetProtectionLevelForResist(Value);
+            healAmount += healAmount * (int) healingBonusLevel * 0.1;
+        }
     }
     public class HealingBonusInfo : EnchantmentInfo
     {

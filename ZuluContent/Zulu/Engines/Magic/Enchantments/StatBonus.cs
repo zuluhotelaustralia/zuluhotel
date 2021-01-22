@@ -141,9 +141,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             }
         }
 
-        public override void OnRemoved(IEntity entity)
+        public override void OnRemoved(IEntity entity,  IEntity parent)
         {
-            if (entity is Item item && item.Parent is Mobile mobile)
+            if (entity is Item && parent is Mobile mobile)
             {
                 Item = null;
                 Mobile = null;

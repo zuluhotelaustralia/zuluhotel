@@ -1,4 +1,5 @@
 using MessagePack;
+using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -11,6 +12,22 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)] 
         public int Value { get; set; } = 0;
+
+        public override void OnAdded(IEntity entity)
+        {
+            if (entity is Item item && item.Parent is Mobile mobile)
+            {
+                mobile.MagicDamageAbsorb += Value;
+            }
+        }
+
+        public override void OnRemoved(IEntity entity, IEntity parent)
+        {
+            if (entity is Item && parent is Mobile mobile)
+            {
+                mobile.MagicDamageAbsorb -= Value;
+            }
+        }
     }
     
     public class PermSpellReflectInfo : EnchantmentInfo

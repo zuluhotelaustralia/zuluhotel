@@ -77,7 +77,35 @@ namespace ZuluContent.Zulu.Items
             get => Enchantments.Get((NecroProtection e) => e.Value);
             set => Enchantments.Set((NecroProtection e) => e.Value = value);
         }
-        
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ParalysisResist
+        {
+            get => Enchantments.Get((ParalysisProtection e) => e.Value);
+            set => Enchantments.Set((ParalysisProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int HealingBonus
+        {
+            get => Enchantments.Get((HealingBonus e) => e.Value);
+            set => Enchantments.Set((HealingBonus e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int MagicImmunity
+        {
+            get => Enchantments.Get((PermMagicImmunity e) => e.Value);
+            set => Enchantments.Set((PermMagicImmunity e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int SpellReflection
+        {
+            get => Enchantments.Get((PermSpellReflect e) => e.Value);
+            set => Enchantments.Set((PermSpellReflect e) => e.Value = value);
+        }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrBonus
         {
@@ -144,7 +172,7 @@ namespace ZuluContent.Zulu.Items
 
         public override void OnRemoved(IEntity parent)
         {
-            Enchantments.FireHook(e => e.OnRemoved(this));
+            Enchantments.FireHook(e => e.OnRemoved(this, parent));
             base.OnRemoved(parent);
         }
 

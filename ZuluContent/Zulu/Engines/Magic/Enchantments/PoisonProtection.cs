@@ -18,31 +18,19 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public int Value { get; set; } = 0;
 
-        public override void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref ApplyPoisonResult result)
+        public override void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
             if (Value == 0)
             {
-                defender.PrivateOverheadMessage(
-                    MessageType.Regular,
-                    defender.SpeechHue,
-                    true,
-                    "Your poison protection items are out of charges!",
-                    defender.NetState
-                );
+                NotifyMobile(defender, "Your poison protection items are out of charges!");
                 return;
             }
 
             if (Value >= poison.Level)
             {
-                result = ApplyPoisonResult.Immune;
+                immune = true;
                 Value--;
-                defender.PrivateOverheadMessage(
-                    MessageType.Regular,
-                    defender.SpeechHue,
-                    true,
-                    "Your items protected you from the poison!",
-                    defender.NetState
-                );
+                NotifyMobile(defender, "Your items protected you from the poison!");
             }
         }
     }

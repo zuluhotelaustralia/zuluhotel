@@ -98,93 +98,74 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             return result;
         }
 
-        public void SetResist(ElementalType protectionType, int value, bool cursed)
+        public void SetChargedResist(ChargeType chargeProtectionType, int value)
+        {
+            switch (chargeProtectionType)
+            {
+                case ChargeType.PoisonImmunity:
+                    Set((PoisonProtection e) => e.Value = value);
+                    break;
+                case ChargeType.MagicImmunity:
+                    Set((MagicImmunity e) => e.Value = value);
+                    break;
+                case ChargeType.SpellReflect:
+                    Set((SpellReflect e) => e.Value = value);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null);
+            }
+        }
+
+        public int GetChargedResist(ChargeType chargeProtectionType)
+        {
+            return chargeProtectionType switch
+            {
+                ChargeType.PoisonImmunity => Get((PoisonProtection e) => e.Value),
+                ChargeType.MagicImmunity => Get((MagicImmunity e) => e.Value),
+                ChargeType.SpellReflect => Get((SpellReflect e) => e.Value),
+                _ => throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null)
+            };
+        }
+
+        public void SetResist(ElementalType protectionType, int value)
         {
             switch (protectionType)
             {
                 case ElementalType.Water:
-                    Set((WaterProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((WaterProtection e) => e.Value = value);
                     break;
                 case ElementalType.Air:
-                    Set((AirProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((AirProtection e) => e.Value = value);
                     break;
                 case ElementalType.Physical:
-                    Set((PhysicalProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((PhysicalProtection e) => e.Value = value);
                     break;
                 case ElementalType.Fire:
-                    Set((FireProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((FireProtection e) => e.Value = value);
                     break;
                 case ElementalType.Earth:
-                    Set((EarthProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((EarthProtection e) => e.Value = value);
                     break;
                 case ElementalType.Necro:
-                    Set((NecroProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((NecroProtection e) => e.Value = value);
                     break;
                 case ElementalType.Paralysis:
-                    Set((ParalysisProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((ParalysisProtection e) => e.Value = value);
                     break;
                 case ElementalType.HealingBonus:
-                    Set((HealingBonus e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((HealingBonus e) => e.Value = value);
                     break;
-                case ElementalType.PoisonImmunity:
-                    Set((PoisonProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
-                    break;
-                case ElementalType.MagicImmunity:
-                    Set((MagicImmunity e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
-                    break;
-                case ElementalType.SpellReflect:
-                    Set((SpellReflect e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                case ElementalType.Poison:
+                    Set((PermPoisonProtection e) => e.Value = value);
                     break;
                 case ElementalType.PermPoisonImmunity:
-                    Set((PermPoisonProtection e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((PermPoisonProtection e) => e.Value = value);
                     break;
                 case ElementalType.PermMagicImmunity:
-                    Set((PermMagicImmunity e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((PermMagicImmunity e) => e.Value = value);
                     break;
                 case ElementalType.PermSpellReflect:
-                    Set((PermSpellReflect e) => {
-                        e.Cursed = cursed;
-                        return e.Value = value;
-                    });
+                    Set((PermSpellReflect e) => e.Value = value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(protectionType), protectionType, null);

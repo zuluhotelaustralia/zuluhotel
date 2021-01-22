@@ -1,4 +1,7 @@
 using MessagePack;
+using Server;
+using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -11,6 +14,23 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)] 
         public int Value { get; set; } = 0;
+
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
+        {
+            if (Value == 0)
+            {
+                NotifyMobile(defender, "Your magic protection items are out of charges!");
+                return;
+            }
+
+            if (Value >= (int)circle)
+            {
+                damage = 0;
+                Value--;
+                NotifyMobile(defender, "Your items protected you from the magic!");
+                NotifyMobile(defender, attacker, "The spell dissipates upon contact with " + defender.Name + "'s magical barrier!");
+            }
+        }
     }
     
     public class MagicImmunityInfo : EnchantmentInfo

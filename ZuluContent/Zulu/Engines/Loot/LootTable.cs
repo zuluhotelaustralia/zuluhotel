@@ -55,7 +55,6 @@ namespace Server.Scripts.Engines.Loot
         public List<LootItem> Roll()
         {
             var lootItems = new List<LootItem>();
-            var lootItemsDict = new Dictionary<string, LootItem>();
             foreach (var entry in Groups)
             {
                 if (Utility.RandomDouble() < entry.Chance)
@@ -79,18 +78,9 @@ namespace Server.Scripts.Engines.Loot
             {
                 li.ItemLevel = ItemLevel;
                 li.ItemChance = ItemChance;
-                LootItem dictLi;
-                if (lootItemsDict.TryGetValue(li.Type.ToString(), out dictLi))
-                {
-                    dictLi.Quantity++;
-                }
-                else
-                {
-                    lootItemsDict.Add(li.Type.ToString(), li);
-                }
             }
 
-            return lootItemsDict.Values.ToList();
+            return lootItems;
         }
     }
 
@@ -121,8 +111,8 @@ namespace Server.Scripts.Engines.Loot
             {Gems, 1, 5, 1.0},
             {Weapons, 1, 3, 0.5},
             {Armor, 2, 3, 0.5},
-            {Jewelry, 1, 2, 1.0},
-            {Clothing, 15, 20, 1.0},
+            {Jewelry, 50, 50, 1.0},
+            {Clothing, 50, 50, 1.0},
         };
     }
 }
