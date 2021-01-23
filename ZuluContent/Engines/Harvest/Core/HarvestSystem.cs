@@ -19,11 +19,15 @@ namespace Server.Engines.Harvest
 		public virtual bool CheckTool( Mobile from, Item tool )
 		{
 			bool wornOut = tool == null || tool.Deleted || tool is IUsesRemaining && ((IUsesRemaining)tool).UsesRemaining <= 0;
+            bool equipped = tool.Parent == from;
 
-			if ( wornOut )
+            if ( wornOut )
 				from.SendLocalizedMessage( 1044038 ); // You have worn out your tool!
 
-			return !wornOut;
+            if ( !equipped )
+                from.SendAsciiMessage(33, "You must equip it to mine.");
+
+            return !wornOut && equipped;
 		}
 
 		public virtual bool CheckHarvest( Mobile from, Item tool )
@@ -166,22 +170,9 @@ namespace Server.Engines.Harvest
 						if ( item.Stackable )
 						{
 							int amount = def.ConsumedPerHarvest;
-							int feluccaAmount = def.ConsumedPerFeluccaHarvest;
-
-							int racialAmount = (int)Math.Ceiling( amount * 1.1 );
-							int feluccaRacialAmount = (int)Math.Ceiling( feluccaAmount * 1.1 );
-
-							bool eligableForRacialBonus = def.RaceBonus && @from.Race == Race.Human;
-							bool inFelucca = map == Map.Felucca;
-
-							if( eligableForRacialBonus && inFelucca && bank.Current >= feluccaRacialAmount && 0.1 > Utility.RandomDouble() )
-								item.Amount = feluccaRacialAmount;
-							else if( inFelucca && bank.Current >= feluccaAmount )
-								item.Amount = feluccaAmount;
-							else if( eligableForRacialBonus && bank.Current >= racialAmount && 0.1 > Utility.RandomDouble() )
-								item.Amount = racialAmount;
-							else
-								item.Amount = amount;
+							
+							item.Amount = Utility.Random(amount, (int) (skillValue / 15) + 1);
+                            // TODO: Make this configurable and implement the rest of the harvesting logic from ZH
 						}
 
 						bank.Consume( item.Amount, from );
@@ -239,7 +230,13 @@ namespace Server.Engines.Harvest
 
 		public virtual void OnHarvestFinished( Mobile from, Item tool, HarvestDefinition def, HarvestVein vein, HarvestBank bank, HarvestResource resource, object harvested )
 		{
-		}
+            // Loop continuously until the player moves or their tool breaks
+            Timer.DelayCall(TimeSpan.FromMilliseconds(750),
+                delegate
+                {
+                    StartHarvesting(from, tool, harvested);
+                });
+        }
 
 		public virtual bool SpecialHarvest( Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc )
 		{

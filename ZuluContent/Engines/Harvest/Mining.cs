@@ -52,12 +52,12 @@ namespace Server.Engines.Harvest
 
             // One ore per harvest action
             oreAndStone.ConsumedPerHarvest = 1;
-            oreAndStone.ConsumedPerFeluccaHarvest = 2;
+            oreAndStone.ConsumedPerFeluccaHarvest = 1;
 
             // The digging effect
             oreAndStone.EffectActions = new[] {11};
             oreAndStone.EffectSounds = new[] {0x125, 0x126};
-            oreAndStone.EffectCounts = new[] {1};
+            oreAndStone.EffectCounts = new[] { 2, 2, 2, 3, 3, 4 };
             oreAndStone.EffectDelay = TimeSpan.FromSeconds(1.6);
             oreAndStone.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
 
@@ -114,41 +114,37 @@ namespace Server.Engines.Harvest
 
             veins = new[]
             {
-                new HarvestVein(49.6, 0.0, res[0], null),// Iron
-                new HarvestVein(11.2, 0.5, res[1], res[0]),// Gold
-                new HarvestVein(09.8, 0.5, res[2], res[0]),// Spike
-                new HarvestVein(08.4, 0.5, res[4], res[0]),// Fruity
-                new HarvestVein(07.0, 0.5, res[5], res[0]),// Bronze
-                new HarvestVein(05.6, 0.5, res[6], res[0]),// IceRock
-                new HarvestVein(04.2, 0.5, res[7], res[0]),// BlackDwarf
-                new HarvestVein(02.8, 0.5, res[8], res[0]),// DullCopper
-                new HarvestVein(01.4, 0.5, res[9], res[0]),// Platinum
-                new HarvestVein(0.1, 0.5, res[10], res[0]),// SilverRock
-                new HarvestVein(0.1, 0.5, res[11], res[0]),// DarkPagan
-                new HarvestVein(0.1, 0.5, res[12], res[0]),// Copper
-                new HarvestVein(0.1, 0.5, res[13], res[0]),// Mystic
-                new HarvestVein(0.1, 0.5, res[14], res[0]),// Spectral
-                new HarvestVein(0.1, 0.5, res[15], res[0]),// OldBritain
-                new HarvestVein(0.1, 0.5, res[16], res[0]),// Onyx
-                new HarvestVein(0.1, 0.5, res[17], res[0]),// RedElven
-                new HarvestVein(0.1, 0.5, res[18], res[0]),// Undead
-                new HarvestVein(0.1, 0.5, res[19], res[0]),// Pyrite
-                new HarvestVein(0.1, 0.5, res[20], res[0]),// Virginity
-                new HarvestVein(0.1, 0.5, res[21], res[0]),// Malachite
-                new HarvestVein(0.1, 0.5, res[22], res[0]),// Lavarock
-                new HarvestVein(0.1, 0.5, res[23], res[0]),// Azurite
-                new HarvestVein(0.1, 0.5, res[24], res[0]),// Dripstone
-                new HarvestVein(0.1, 0.5, res[24], res[0]),// Executor
-                new HarvestVein(0.1, 0.5, res[25], res[0]),// Peachblue
-                new HarvestVein(0.1, 0.5, res[26], res[0]),// Destruction
-                new HarvestVein(0.1, 0.5, res[27], res[0]),// Anra
-                new HarvestVein(0.1, 0.5, res[28], res[0]),// Crystal
-                new HarvestVein(0.1, 0.5, res[29], res[0]),// Doom
-                new HarvestVein(0.1, 0.5, res[30], res[0]),// Goddess
-                new HarvestVein(0.1, 0.5, res[31], res[0]),// NewZulu
-                new HarvestVein(0.1, 0.5, res[32], res[0]),// DarkSableRuby
-                new HarvestVein(0.1, 0.5, res[33], res[0]),// EbonTwilightSapphire
-                new HarvestVein(0.1, 0.5, res[34], res[0]),// RadiantNimbusDiamond
+                new HarvestVein(3.5, 0.0, res[30], res[0]),// Goddess
+                new HarvestVein(4.0, 0.0, res[29], res[0]),// Doom
+                new HarvestVein(5.0, 0.0, res[28], res[0]),// Crystal
+                new HarvestVein(6.0, 0.0, res[27], res[0]),// Anra
+                new HarvestVein(7.0, 0.0, res[26], res[0]),// Destruction
+                new HarvestVein(8.5, 0.0, res[25], res[0]),// Peachblue
+                new HarvestVein(10.0, 0.0, res[24], res[0]),// Executor
+                new HarvestVein(11.5, 0.0, res[24], res[0]),// Dripstone
+                new HarvestVein(13.0, 0.0, res[23], res[0]),// Azurite
+                new HarvestVein(16.5, 0.0, res[22], res[0]),// Lavarock
+                new HarvestVein(19.0, 0.0, res[21], res[0]),// Malachite
+                new HarvestVein(21.0, 0.0, res[20], res[0]),// Virginity
+                new HarvestVein(23.0, 0.0, res[19], res[0]),// Pyrite
+                new HarvestVein(25.5, 0.0, res[18], res[0]),// Undead
+                new HarvestVein(28.0, 0.0, res[17], res[0]),// RedElven
+                new HarvestVein(30.5, 0.0, res[16], res[0]),// Onyx
+                new HarvestVein(33.0, 0.0, res[15], res[0]),// OldBritain
+                new HarvestVein(35.5, 0.0, res[14], res[0]),// Spectral
+                new HarvestVein(37.5, 0.0, res[13], res[0]),// Mystic
+                new HarvestVein(40.0, 0.0, res[12], res[0]),// Copper
+                new HarvestVein(42.5, 0.0, res[11], res[0]),// DarkPagan
+                new HarvestVein(45.0, 0.0, res[10], res[0]),// SilverRock
+                new HarvestVein(50.0, 0.0, res[9], res[0]),// Platinum
+                new HarvestVein(55.0, 0.0, res[8], res[0]),// DullCopper
+                new HarvestVein(60.0, 0.0, res[7], res[0]),// BlackDwarf
+                new HarvestVein(62.5, 0.0, res[6], res[0]),// IceRock
+                new HarvestVein(65.0, 0.0, res[5], res[0]),// Bronze
+                new HarvestVein(70.0, 0.0, res[4], res[0]),// Fruity
+                new HarvestVein(77.5, 0.0, res[2], res[0]),// Spike
+                new HarvestVein(80.0, 0.0, res[1], res[0]),// Gold
+                new HarvestVein(100.0, 0.0, res[0], null),// Iron
             };
 
             oreAndStone.Resources = res;
@@ -186,12 +182,8 @@ namespace Server.Engines.Harvest
             if (!base.CheckHarvest(from, tool, def, toHarvest))
                 return false;
 
-            if (from.Mounted)
-            {
-                from.SendLocalizedMessage(501864); // You can't mine while riding.
-                return false;
-            }
-            else if (from.IsBodyMod && !from.Body.IsHuman)
+            
+            if (from.IsBodyMod && !from.Body.IsHuman)
             {
                 from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
                 return false;
@@ -225,67 +217,6 @@ namespace Server.Engines.Harvest
             1, 0,
             1, 1
         };
-
-        public override void OnHarvestFinished(Mobile from, Item tool, HarvestDefinition def, HarvestVein vein,
-            HarvestBank bank, HarvestResource resource, object harvested)
-        {
-            if (tool is GargoylesPickaxe && 0.1 > Utility.RandomDouble())
-            {
-                HarvestResource res = vein.PrimaryResource;
-
-                if (res == resource && res.Types.Length >= 3)
-                {
-                    try
-                    {
-                        Map map = from.Map;
-
-                        if (map == null)
-                            return;
-
-                        BaseCreature spawned =
-                            Activator.CreateInstance(res.Types[2], new object[] {25}) as BaseCreature;
-
-                        if (spawned != null)
-                        {
-                            int offset = Utility.Random(8) * 2;
-
-                            for (int i = 0; i < m_Offsets.Length; i += 2)
-                            {
-                                int x = from.X + m_Offsets[(offset + i) % m_Offsets.Length];
-                                int y = from.Y + m_Offsets[(offset + i + 1) % m_Offsets.Length];
-
-                                if (map.CanSpawnMobile(x, y, from.Z))
-                                {
-                                    spawned.OnBeforeSpawn(new Point3D(x, y, from.Z), map);
-                                    spawned.MoveToWorld(new Point3D(x, y, from.Z), map);
-                                    spawned.Combatant = from;
-                                    return;
-                                }
-                                else
-                                {
-                                    int z = map.GetAverageZ(x, y);
-
-                                    if (Math.Abs(z - from.Z) < 10 && map.CanSpawnMobile(x, y, z))
-                                    {
-                                        spawned.OnBeforeSpawn(new Point3D(x, y, z), map);
-                                        spawned.MoveToWorld(new Point3D(x, y, z), map);
-                                        spawned.Combatant = from;
-                                        return;
-                                    }
-                                }
-                            }
-
-                            spawned.OnBeforeSpawn(from.Location, from.Map);
-                            spawned.MoveToWorld(from.Location, from.Map);
-                            spawned.Combatant = from;
-                        }
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-        }
 
         public override bool BeginHarvesting(Mobile from, Item tool)
         {
