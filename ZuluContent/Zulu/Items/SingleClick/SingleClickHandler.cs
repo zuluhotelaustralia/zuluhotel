@@ -4,6 +4,7 @@ using System.Linq;
 using Scripts.Zulu.Packets;
 using Server;
 using Server.Engines.Craft;
+using Server.Items;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -11,7 +12,11 @@ namespace ZuluContent.Zulu.Items.SingleClick
 {
     public static partial class SingleClickHandler
     {
-        private static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+        public static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+
+        public static bool StaffRevealedMagicItems = true;
+
+        public static bool AsciiClickMessage { get; set; } = true;
 
         private static string GetItemDesc(Item item)
         {
@@ -42,7 +47,9 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
 
-            var text = $"{prefix}{GetItemDesc(item as Item)}{suffix}{GetCraftedBy(item as Item)}";
+            var text = item is ICraftable craftable && craftable.PlayerConstructed ?
+                $"{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}" :
+                $"{prefix}{GetItemDesc(item as Item)}{suffix}";
 
             return text;
         }
@@ -57,6 +64,18 @@ namespace ZuluContent.Zulu.Items.SingleClick
             SendResponse(m, item, text);
         }
 
+        private static string GetCraftedResource(Item item)
+        {
+            var itemName = "";
+            if (item is BaseArmor armor)
+                itemName = CraftResources.GetName(armor.Resource);
+            else if (item is BaseWeapon weapon)
+                itemName = CraftResources.GetName(weapon.Resource);
+            else if (item is BaseJewel jewel)
+                itemName = CraftResources.GetName(jewel.Resource);
+            return itemName + " ";
+        }
+
         private static string GetCraftedBy(Item item)
         {
             return item is ICraftable craftable && craftable.Crafter != null
@@ -69,7 +88,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
             if (!ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc))
                 return false;
 
-            if (item is IMagicItem magicItem && m.AccessLevel == AccessLevel.Player && !magicItem.Identified)
+            if (item is IMagicItem magicItem && (StaffRevealedMagicItems && m.AccessLevel == AccessLevel.Player) && !magicItem.Identified)
             {
                 SendResponse(m, item, $"a magic {desc}");
                 return false;

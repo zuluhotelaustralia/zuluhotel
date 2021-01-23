@@ -351,7 +351,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyCursed(LootItem item)
         {
-            if (Utility.Random(1, 100) <= 100)
+            if (Utility.Random(1, 100) <= 5)
                 item.Cursed = true;
         }
 

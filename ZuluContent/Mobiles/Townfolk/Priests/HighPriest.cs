@@ -131,10 +131,10 @@ public HighPriest()
             if (okay)
                 if (Banker.Withdraw(from, price))
                 {
-                    SpellHelper.Turn(this, from);
+                    Direction = GetDirectionTo(from);
                     PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
                             "Great Essence of the Virtues, I'm calling upon you to purify this item from all curses");
-                    Animate(17, 15, 1, true, false, 0);
+                    Animate(17, 10, 1, true, false, 0);
                     Timer.DelayCall(TimeSpan.FromSeconds(8),
                     delegate
                     {
