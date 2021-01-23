@@ -946,7 +946,7 @@ namespace Server.Mobiles
                 RecheckTownProtection();
         }
 
-        public new void Paralyze(TimeSpan duration)
+        public override void Paralyze(TimeSpan duration)
         {
             bool paralyze = true;
 
@@ -956,7 +956,7 @@ namespace Server.Mobiles
                 base.Paralyze(duration);
         }
 
-        public new void Freeze(TimeSpan duration)
+        public override void Freeze(TimeSpan duration)
         {
             bool freeze = true;
 
