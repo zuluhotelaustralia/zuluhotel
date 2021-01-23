@@ -10,7 +10,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class MagicImmunity : Enchantment<MagicImmunityInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
 
         [Key(1)] 
         public int Value { get; set; } = 0;
@@ -23,12 +23,20 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 return;
             }
 
-            if (Value >= (int)circle)
+            if (Value >= (int) circle)
             {
-                damage = 0;
-                Value--;
-                NotifyMobile(defender, "Your items protected you from the magic!");
-                NotifyMobile(defender, attacker, "The spell dissipates upon contact with " + defender.Name + "'s magical barrier!");
+                Value -= (int) circle;
+                if (Value < 0)
+                    Value = 0;
+
+                if (!Cursed)
+                {
+                    damage = 0;
+                    NotifyMobile(defender, "Your items protected you from the magic!");
+                    NotifyMobile(defender, attacker, "The spell dissipates upon contact with " + defender.Name + "'s magical barrier!");
+                }
+                else
+                    NotifyMobile(defender, "Your items prevent all reflections!");
             }
         }
     }

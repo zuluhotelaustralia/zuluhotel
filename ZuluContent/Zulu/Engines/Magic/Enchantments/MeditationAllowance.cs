@@ -9,9 +9,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class MeditationAllowance : Enchantment<ArmorBonusInfo>
     {
         [IgnoreMember]
+        private ArmorMeditationAllowance m_Value = ArmorMeditationAllowance.None;
+
+        [IgnoreMember]
         public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+
         [Key(1)]
-        public ArmorMeditationAllowance Value { get; set; } = ArmorMeditationAllowance.None;
+        public ArmorMeditationAllowance Value
+        {
+            get => Cursed ? (ArmorMeditationAllowance)(ArmorMeditationAllowance.None - m_Value) : m_Value;
+            set => m_Value = value;
+        }
     }
     
     public class AMeditationAllowanceInfo : EnchantmentInfo

@@ -30,6 +30,36 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
+        public bool Cursed
+        {
+            get => Enchantments.Values.Where(e => e.Value.Cursed == true)
+                       .Select(p => p.Value.Cursed)
+                       .FirstOrDefault();
+            set
+            {
+                foreach (var (key, val) in Enchantments.Values)
+                {
+                    val.Cursed = value;
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CurseLevelType CurseLevel
+        {
+            get => Enchantments.Values.Where(e => e.Value.Cursed == true)
+                       .Select(p => p.Value.CurseLevel)
+                       .FirstOrDefault();
+            set
+            {
+                foreach (var (key, val) in Enchantments.Values)
+                {
+                    val.CurseLevel = value;
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalWaterResist
         {
             get => Enchantments.Get((WaterProtection e) => e.Value);
@@ -174,6 +204,13 @@ namespace ZuluContent.Zulu.Items
         {
             Enchantments.FireHook(e => e.OnRemoved(this, parent));
             base.OnRemoved(parent);
+        }
+
+        public override bool OnDragLift(Mobile from)
+        {
+            bool canLift = true;
+            Enchantments.FireHook(e => e.OnBeforeRemoved(this, from, ref canLift));
+            return canLift;
         }
 
         public override void Serialize(IGenericWriter writer)

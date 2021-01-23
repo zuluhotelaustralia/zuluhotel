@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
@@ -10,14 +11,21 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class ParalysisProtection : Enchantment<ParalysisProtectionInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
         [Key(1)] 
         public int Value { get; set; } = 0;
 
-        public override void OnParalysis(Mobile mobile, ref bool paralyze)
+        public override void OnParalysis(Mobile mobile, ref TimeSpan duration, ref bool paralyze)
         {
             var protectionLevelFromParalysis = GetProtectionLevelForResist(Value);
-            if (protectionLevelFromParalysis >= ElementalProtectionLevel.Warding)
+
+            if (Cursed && protectionLevelFromParalysis == ElementalProtectionLevel.Bane)
+            {
+                duration *= 2;
+                return;
+            }
+
+            if (protectionLevelFromParalysis == ElementalProtectionLevel.Bane)
             {
                 paralyze = false;
                 NotifyMobile(mobile, "You are magically protected from paralyzing effects.");

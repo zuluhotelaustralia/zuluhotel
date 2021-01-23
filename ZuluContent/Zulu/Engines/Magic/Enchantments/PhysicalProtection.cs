@@ -12,12 +12,19 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class PhysicalProtection : Enchantment<PhysicalProtectionInfo>
     {
         [IgnoreMember]
-        public override string AffixName =>
-            EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
+        private int m_Value = 0;
+
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(
+            IElementalResistible.GetProtectionLevelForResist(Value), Cursed, CurseLevel);
 
         [Key(1)]
-        public int Value { get; set; } = 0;
-        
+        public int Value
+        {
+            get => Cursed ? -m_Value : m_Value;
+            set => m_Value = value;
+        }
+
         public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
         {
             if (damageType == ElementalType.Physical) 

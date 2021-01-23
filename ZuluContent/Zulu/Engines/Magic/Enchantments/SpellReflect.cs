@@ -8,13 +8,20 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class SpellReflect : Enchantment<SpellReflectInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        private int m_Value = 0;
 
-        [Key(1)] 
-        public int Value { get; set; } = 0;
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        [Key(1)]
+        public int Value
+        {
+            get => Cursed ? -m_Value : m_Value;
+            set => m_Value = value;
+        }
 
         public override void OnAdded(IEntity entity)
         {
+            base.OnAdded(entity);
             if (entity is Item item && item.Parent is Mobile mobile)
             {
                 // TODO: Figure out how to make this consume charges

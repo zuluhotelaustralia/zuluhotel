@@ -950,7 +950,7 @@ namespace Server.Mobiles
         {
             bool paralyze = true;
 
-            this.FireHook(h => h.OnParalysis(this, ref paralyze));
+            this.FireHook(h => h.OnParalysis(this, ref duration, ref paralyze));
 
             if (paralyze)
                 base.Paralyze(duration);
@@ -960,7 +960,7 @@ namespace Server.Mobiles
         {
             bool freeze = true;
 
-            this.FireHook(h => h.OnParalysis(this, ref freeze));
+            this.FireHook(h => h.OnParalysis(this, ref duration, ref freeze));
 
             if (freeze)
                 base.Freeze(duration);

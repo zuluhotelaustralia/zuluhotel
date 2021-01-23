@@ -9,14 +9,18 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class HealingBonus : Enchantment<HealingBonusInfo>
     {
         [IgnoreMember] 
-        public override string AffixName => EnchantmentInfo.GetName(Value);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
         [Key(1)] 
         public int Value { get; set; } = 0;
 
         public override void OnHeal(Mobile healer, Mobile patient, ref double healAmount)
         {
             var healingBonusLevel = GetProtectionLevelForResist(Value);
-            healAmount += healAmount * (int) healingBonusLevel * 0.1;
+            var healDelta = healAmount * (int) healingBonusLevel * 0.1;
+            if (Cursed)
+                healAmount += healDelta;
+            else
+                healAmount -= healDelta;
         }
     }
     public class HealingBonusInfo : EnchantmentInfo

@@ -11,7 +11,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     {
         [IgnoreMember]
         public override string AffixName =>
-            EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
+            EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed, CurseLevel);
 
         [Key(1)]
         public int Value { get; set; } = 0;
@@ -19,6 +19,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
             var poisonProtectionLevel = GetProtectionLevelForResist(Value);
+
+            if (Cursed)
+            {
+                NotifyMobile(defender, "Your items prevent all poison protection!");
+                return;
+            }
+
             if ((int)poisonProtectionLevel >= poison.Level)
             {
                 immune = true;

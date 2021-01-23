@@ -7,6 +7,9 @@ using Server.Spells;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
+
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
@@ -14,16 +17,28 @@ namespace ZuluContent.Zulu.Engines.Magic
         where TEnchantmentInfo : EnchantmentInfo, new()
     {
         public static readonly TEnchantmentInfo EnchantmentInfo = new TEnchantmentInfo();
-        [IgnoreMember] public virtual EnchantmentInfo Info => EnchantmentInfo;
 
-        [IgnoreMember] public abstract string AffixName { get; }
-        [Key(0)] public bool Cursed { get; set; }
+        [IgnoreMember]
+        public virtual EnchantmentInfo Info => EnchantmentInfo;
+
+        [IgnoreMember]
+        public abstract string AffixName { get; }
+
+        [Key(0)]
+        public bool Cursed { get; set; }
+
+        [Key(4)]
+        public CurseLevelType CurseLevel { get; set; }
 
         public virtual bool GetShouldDye() => Info.Hue != 0;
 
         protected Enchantment(bool cursed = false)
         {
             Cursed = cursed;
+            if (cursed)
+                CurseLevel = CurseLevelType.UnRevealed;
+            else
+                CurseLevel = CurseLevelType.None;
         }
 
         protected virtual void NotifyMobile(Mobile above, string text)
@@ -42,17 +57,30 @@ namespace ZuluContent.Zulu.Engines.Magic
         }
 
         public virtual void OnIdentified(IEntity entity)
-        {
-            
+        { 
         }
 
         public virtual void OnAdded(IEntity entity)
         {
-            
+            if (Cursed && CurseLevel == CurseLevelType.UnRevealed && entity is IMagicItem item && item.Parent is Mobile mobile)
+            {
+                CurseLevel = CurseLevelType.RevealedCantUnEquip;
+                mobile.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
+                mobile.PlaySound(0x1E1);
+                mobile.SendAsciiMessage(33, "That item is cursed, and reveals itself to be a " + GetMagicItemName(item));
+            }
         }
 
         public virtual void OnRemoved(IEntity entity, IEntity parent)
         {
+        }
+
+        public virtual void OnBeforeRemoved(IEntity entity, Mobile from, ref bool canRemove)
+        {
+            if (Cursed && CurseLevel == CurseLevelType.RevealedCantUnEquip && entity is Item item && item.Parent is Mobile parent && parent == from)
+            {
+                canRemove = false;
+            }
         }
 
         public virtual void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
@@ -63,7 +91,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnParalysis(Mobile mobile, ref bool paralyze)
+        public virtual void OnParalysis(Mobile mobile, ref TimeSpan duration, ref bool paralyze)
         {
         }
 

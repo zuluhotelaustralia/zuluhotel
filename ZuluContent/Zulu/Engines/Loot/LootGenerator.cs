@@ -151,10 +151,10 @@ namespace Server.Scripts.Engines.Loot
                         break;
                 }
 
-                List<int> keys = new List<int>(magicItem.Enchantments.Values.Keys);
-                foreach (var key in keys)
+                foreach (var (key, value) in magicItem.Enchantments.Values)
                 {
-                    magicItem.Enchantments.Values[key].Cursed = Cursed;
+                    value.Cursed = Cursed;
+                    value.CurseLevel = CurseLevelType.UnRevealed;
                 }
             }
 
@@ -191,33 +191,33 @@ namespace Server.Scripts.Engines.Loot
 
         public static void MakeLoot(Container container, LootTable table)
         {
-            var lootItems = table.Roll();
-            var itemsDict = new Dictionary<string, Item>();
-
-            foreach (var lootItem in lootItems)
-            {
-                if (!(lootItem.Is<BaseWeapon>() || lootItem.Is<BaseShield>() || lootItem.Is<BaseClothing>() || lootItem.Is<BaseJewel>() ||
-                      lootItem.Is<BaseArmor>() || lootItem.Is<BaseTool>() || lootItem.Type == typeof(Pickaxe)) || MakeItemMagical(lootItem))
+            var items = table.Roll()
+                .Select(lootItem =>
                 {
-                    Item item = lootItem.Create();
-                    if (item.Stackable)
+                    // Attempt to make the item magical, will do nothing if its not eligible.
+                    MakeItemMagical(lootItem);
+                    return lootItem.Create();
+                })
+                // Group the items by id and whether they're stackable
+                .GroupBy(item => new { item.Stackable, item.ItemID })
+                // Flattens a collection containing many collections of the same type,
+                // i.e. List<List<Item>> becomes List<Item>
+                .SelectMany(group =>
+                {
+                    // Merge the stackable items into the first instance and return that as an array to be flattened
+                    if (group.Key.Stackable)
                     {
-                        if (itemsDict.TryGetValue(item.GetType().ToString(), out var dictLi))
-                            dictLi.Amount++;
-                        else
-                            itemsDict.Add(item.GetType().ToString(), item);
+                        var item = group.First();
+                        item.Amount = group.Sum(x => x.Amount);
+                        return new[] { item };
                     }
-                    else
-                    {
-                        itemsDict.Add(item.Serial.ToString(), item);
-                    }
-                }
-            }
 
-            foreach (var item in itemsDict.Values)
-            {
+                    // If this group of items is not stackable just return the entire group
+                    return group.ToArray();
+                });
+
+            foreach (var item in items)
                 container.AddItem(item);
-            }
         }
 
         public static bool MakeItemMagical(LootItem item)
@@ -351,7 +351,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyCursed(LootItem item)
         {
-            if (Utility.Random(1, 100) <= 5)
+            if (Utility.Random(1, 100) <= 100)
                 item.Cursed = true;
         }
 

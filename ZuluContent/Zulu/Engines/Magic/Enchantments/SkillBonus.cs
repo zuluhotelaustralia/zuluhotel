@@ -15,20 +15,32 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class SecondSkillBonus : SkillBonus
     {
         // Only first skill has an affix
-        [IgnoreMember] public override string AffixName => string.Empty;
+        [IgnoreMember]
+        public override string AffixName => string.Empty;
     }
 
 
     public abstract class SkillBonus : Enchantment<SkillBonusInfo>
     {
-        [IgnoreMember] public override string AffixName => SkillBonusInfo.GetName(Skill, Value, Cursed);
-        [Key(1)] public SkillName Skill { get; set; } = SkillName.Alchemy;
-        [Key(2)] public double Value { get; set; } = 0;
+        [IgnoreMember]
+        private double m_Value = 0;
+
+        [IgnoreMember]
+        public override string AffixName => SkillBonusInfo.GetName(Skill, Value, Cursed, CurseLevel);
+        [Key(1)]
+        public SkillName Skill { get; set; } = SkillName.Alchemy;
+        [Key(2)]
+        public double Value
+        {
+            get => Cursed ? -m_Value : m_Value;
+            set => m_Value = value;
+        }
 
         private SkillMod m_Mod;
 
         public override void OnAdded(IEntity entity)
         {
+            base.OnAdded(entity);
             if (entity is Item item && item.Parent is Mobile mobile)
             {
                 m_Mod = new EquippedSkillMod(Skill, true, Value, item, mobile);
@@ -53,10 +65,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int CursedHue { get; protected set; } = 0;
         public override string[,] Names { get; protected set; } = DefaultSkillNames;
 
-        public static string GetName(SkillName name, double value, bool cursed)
+        public static string GetName(SkillName name, double value, bool cursed, CurseLevelType curseLevel)
         {
-            var n = value > 6 ? (int) value / 5 : (int) value;
-            return SkillSpecificNames[name][n, cursed ? 1 : 0];
+            var n = Math.Abs(value) > 6 ? (int)  Math.Abs(value) / 5 : (int) Math.Abs(value);
+            return SkillSpecificNames[name][n, cursed && curseLevel > CurseLevelType.UnRevealed ? 1 : 0];
         }
 
         private static readonly string[,] DefaultSkillNames =

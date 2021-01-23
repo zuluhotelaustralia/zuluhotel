@@ -12,7 +12,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [IgnoreMember]
         public override string AffixName =>
             EnchantmentInfo.GetName(
-                Value == 0 ? ElementalProtectionLevel.None : ElementalProtectionLevel.Bane, Cursed
+                Value == 0 ? ElementalProtectionLevel.None : ElementalProtectionLevel.Bane, Cursed, CurseLevel
             );
 
         [Key(1)]
@@ -28,9 +28,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
             if (Value >= poison.Level)
             {
-                immune = true;
-                Value--;
-                NotifyMobile(defender, "Your items protected you from the poison!");
+                Value -= poison.Level;
+                if (Value < 0)
+                    Value = 0;
+
+                if (!Cursed)
+                {
+                    immune = true;
+                    NotifyMobile(defender, "Your items protected you from the poison!");
+                }
+                else
+                    NotifyMobile(defender, "Your items prevent all poison protection!");
             }
         }
     }

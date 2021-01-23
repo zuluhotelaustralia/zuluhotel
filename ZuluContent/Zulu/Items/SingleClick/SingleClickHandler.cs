@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Scripts.Zulu.Packets;
 using Server;
@@ -10,9 +11,11 @@ namespace ZuluContent.Zulu.Items.SingleClick
 {
     public static partial class SingleClickHandler
     {
+        private static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+
         private static string GetItemDesc(Item item)
         {
-            return ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc) ? desc : null;
+            return ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc) ? TextInfo.ToTitleCase(desc) : null;
         }
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
@@ -68,7 +71,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
             if (item is IMagicItem magicItem && m.AccessLevel == AccessLevel.Player && !magicItem.Identified)
             {
-                SendResponse(m, item, $"a magical {desc}");
+                SendResponse(m, item, $"a magic {desc}");
                 return false;
             }
 

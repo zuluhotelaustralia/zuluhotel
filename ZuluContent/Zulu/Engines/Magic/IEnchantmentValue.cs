@@ -1,5 +1,6 @@
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 
 namespace ZuluContent.Zulu.Engines.Magic
@@ -32,15 +33,16 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(25, typeof(SlayerHit))]
     [Union(26, typeof(EffectHit))]
     [Union(27, typeof(PoisonHit))]
-    [Union(29, typeof(PermSpellReflect))]
-    [Union(30, typeof(PoisonProtection))]
-    [Union(31, typeof(MagicImmunity))]
-    [Union(32, typeof(SpellReflect))]
+    [Union(28, typeof(PermSpellReflect))]
+    [Union(29, typeof(PoisonProtection))]
+    [Union(30, typeof(MagicImmunity))]
+    [Union(31, typeof(SpellReflect))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }
         public string AffixName { get; }
         public bool Cursed { get; set; }
+        public CurseLevelType CurseLevel { get; set; }
         bool GetShouldDye();
     }
 }

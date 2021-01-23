@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Server;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 using ZuluContent.Zulu.Items;
@@ -112,12 +113,43 @@ namespace ZuluContent.Zulu.Engines.Magic
         private static void Fire(IEnumerable<IEnchantmentValue> values, Expression<Action<IEnchantmentHook>> expr)
         {
             var action = GetDelegate(expr);
-            var methodCallExpr = (MethodCallExpression) expr.Body;
+            var methodCallExpr = (MethodCallExpression)expr.Body;
 
-            values
-                .OrderByPriority(methodCallExpr.Method.Name)
+            var ordered = values
+                .OrderByPriority(methodCallExpr.Method.Name);
+
+            ordered
+                .Where(x => !(x is MagicImmunity || x is PoisonProtection || x is SpellReflect))
                 .ToList()
                 .ForEach(action);
+
+            var magicImmunityHook = ordered
+                .Where(x => x is MagicImmunity { Value: > 0 })
+                .Cast<MagicImmunity>()
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault();
+
+            var poisonProtectionHook = ordered
+                .Where(x => x is PoisonProtection { Value: > 0 })
+                .Cast<PoisonProtection>()
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault();
+
+            var spellReflectHook = ordered
+                .Where(x => x is SpellReflect { Value: > 0 })
+                .Cast<SpellReflect>()
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault();
+
+            if (magicImmunityHook != null)
+                action(magicImmunityHook);
+
+            if (poisonProtectionHook != null)
+                action(poisonProtectionHook);
+
+            if (spellReflectHook != null)
+                action(spellReflectHook);
+
         }
 
         public static IEnumerable<TResult> FireHook<TResult>(

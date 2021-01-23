@@ -11,7 +11,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class PermMagicImmunity : Enchantment<PermMagicImmunityInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
 
         [Key(1)] 
         public int Value { get; set; } = 0;
@@ -19,6 +19,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
         {
             var protectionLevelFromCircle = GetProtectionLevelForResist(Value);
+
+            if (Cursed)
+            {
+                NotifyMobile(defender, "Your items prevent all absorbtion!");
+                return;
+            }
+
             if ((int) protectionLevelFromCircle >= (int) circle)
             {
                 damage = 0;
