@@ -35,6 +35,10 @@
     </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Network\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'UNIX'">
       robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /FFT /XA:H
