@@ -64,7 +64,7 @@ namespace Server.Engines.Spawners
             for (var i = 0; i < spawners.Count; i++)
             {
                 var json = spawners[i];
-                Type type = AssemblyHandler.FindFirstTypeForName(json.Type);
+                Type type = AssemblyHandler.FindTypeByName(json.Type);
 
                 if (type == null || !typeof(BaseSpawner).IsAssignableFrom(type))
                 {
