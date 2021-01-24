@@ -43,7 +43,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x190,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of <random> the Enslaver",
                 CreatureType = CreatureType.Human,
                 DamageMax = 50,

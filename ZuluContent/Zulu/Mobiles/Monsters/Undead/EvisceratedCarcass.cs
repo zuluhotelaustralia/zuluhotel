@@ -36,7 +36,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x03,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of an Eviscerated Carcass",
                 CreatureType = CreatureType.Undead,
                 DamageMax = 55,

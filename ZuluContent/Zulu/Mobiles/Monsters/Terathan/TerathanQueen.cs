@@ -47,7 +47,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x48,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of a Terathan Queen",
                 CreatureType = CreatureType.Terathan,
                 DamageMax = 60,

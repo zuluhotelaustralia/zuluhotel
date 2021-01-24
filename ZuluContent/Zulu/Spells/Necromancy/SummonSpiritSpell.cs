@@ -37,7 +37,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
             var bonus = 0;
 
-            if (Spec.GetSpec(Caster).SpecName == SpecName.Mage) bonus = 1;
+            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage) bonus = 1;
 
             var amount = Utility.Dice(2, 2, bonus);
             Type toSummon;

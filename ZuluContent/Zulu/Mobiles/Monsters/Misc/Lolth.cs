@@ -51,7 +51,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x48,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of Lolth",
                 DamageMax = 66,
                 DamageMin = 36,

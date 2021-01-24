@@ -28,7 +28,7 @@ namespace Server.Mobiles
 
     #endregion
 
-    public partial class PlayerMobile : Mobile
+    public partial class PlayerMobile : Mobile, IZuluClassed
     {
         private class CountAndTimeStamp
         {
@@ -1919,7 +1919,7 @@ namespace Server.Mobiles
         }
 
         public Point3D EarthPortalLocation { get; set; }
-        public Spec Spec { get; set; }
+        public ZuluClass ZuluClass { get; set; }
 
         public override void OnSpeech(SpeechEventArgs e)
         {

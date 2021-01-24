@@ -37,7 +37,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x46,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of a Terathan Champion",
                 CreatureType = CreatureType.Terathan,
                 DamageMax = 43,

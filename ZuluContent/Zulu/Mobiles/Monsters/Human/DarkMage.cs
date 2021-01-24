@@ -63,7 +63,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x190,
                 ClassLevel = 10,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of <random> the Dark Mage",
                 CreatureType = CreatureType.Human,
                 DamageMax = 40,

@@ -49,7 +49,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x0e,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of an Earth Quaker",
                 CreatureType = CreatureType.Elemental,
                 DamageMax = 60,

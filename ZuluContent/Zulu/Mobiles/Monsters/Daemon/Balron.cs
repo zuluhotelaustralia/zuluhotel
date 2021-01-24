@@ -62,7 +62,7 @@ namespace Server.Mobiles
                 Body = 40,
                 CanFly = true,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of a Balron",
                 CreatureType = CreatureType.Daemon,
                 DamageMax = 75,

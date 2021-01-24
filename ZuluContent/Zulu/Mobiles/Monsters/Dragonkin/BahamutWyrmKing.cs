@@ -47,7 +47,7 @@ namespace Server.Mobiles
                 BaseSoundID = 362,
                 Body = 0x3b,
                 ClassLevel = 6,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of Bahamut, the Wyrm King",
                 CreatureType = CreatureType.Dragonkin,
                 DamageMax = 75,

@@ -61,7 +61,7 @@ namespace Scripts.Zulu.Spells.Necromancy
         {
             // this is the classic "waterfall spell"
             // as usual, in zhf this spell does 3d5 + ( magery / 4 ) which is then divided by 2 and
-            //then multiplied by your class bonus.  so, for a spec 4 mage @ 10%/level and 130 magery
+            //then multiplied by your class bonus.  so, for a zuluClass 4 mage @ 10%/level and 130 magery
             //it looks like an average of 20.5*1.4 = ~29 damage
             // however there is a cap of (spellcircle * (13+spellcircle))
             // zulu being overcomplicated means for single-target spells you subtract 3 from the circle.
@@ -69,7 +69,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             // so the cap on damage in this case ends up being 20*33=660 because that's a reasonable cap amirite :^)
             // that first half damage is dealt as elemental fire because everyone knows water is fire.
             //THEN, it attempts to "deal" (targets_mana * casters_class_bonus) amount of damage,
-            //modified by both caster's and target's spec bonuses and target's resist skill, "damage"
+            //modified by both caster's and target's zuluClass bonuses and target's resist skill, "damage"
             //is then floored and stolen from the target's mana pool and given to the caster
             //THEN it applies the other half of the real damage from the dice roll as elemental water.
 

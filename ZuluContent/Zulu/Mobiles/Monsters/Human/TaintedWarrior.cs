@@ -40,7 +40,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x22A,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of <random> the Tainted Warrior",
                 CreatureType = CreatureType.Human,
                 DamageMax = 65,

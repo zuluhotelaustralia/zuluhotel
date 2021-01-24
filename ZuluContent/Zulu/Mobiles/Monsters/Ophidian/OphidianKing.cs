@@ -39,7 +39,7 @@ namespace Server.Mobiles
                 AutoDispel = true,
                 Body = 0x56,
                 ClassLevel = 6,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of The Ophidian King",
                 CreatureType = CreatureType.Ophidian,
                 DamageMax = 75,

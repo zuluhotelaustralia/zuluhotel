@@ -399,7 +399,7 @@ namespace Server.Scripts.Engines.Loot
 
             var skill = RandomSkill();
 
-            if (Spec.SpecSkills[SpecName.Mage].Contains(skill) && item.ArmorMod > 0 && RandomBool())
+            if (ZuluClass.ClassSkills[ZuluClassType.Mage].Contains(skill) && item.ArmorMod > 0 && RandomBool())
                 item.ArmorMod = 0;
 
             item.SkillBonusName = skill;

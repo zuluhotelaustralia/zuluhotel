@@ -44,7 +44,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x18,
                 ClassLevel = 6,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of a Mind Flayer",
                 CreatureType = CreatureType.Daemon,
                 DamageMax = 50,

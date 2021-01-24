@@ -39,7 +39,7 @@ namespace Server.Mobiles
                 AutoDispel = true,
                 Body = 0x245,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of a Twisted Animation",
                 CreatureType = CreatureType.Elemental,
                 DamageMax = 73,

@@ -50,7 +50,7 @@ namespace Scripts.Zulu.Spells.Earth
             if (!CheckSequence()) goto Return;
 
             var range = 3.0;
-            if (Spec.GetSpec(Caster).SpecName == SpecName.Mage) range *= Spec.GetSpec(Caster).Bonus;
+            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage) range *= ZuluClass.GetClass(Caster).Bonus;
 
             var dmg = Caster.Skills[DamageSkill].Value / 6.0;
             var map = Caster.Map;

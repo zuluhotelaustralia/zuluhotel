@@ -47,7 +47,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x2f,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of a Twisted Bramble",
                 CreatureType = CreatureType.Plant,
                 DamageMax = 50,

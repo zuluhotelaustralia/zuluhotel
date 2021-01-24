@@ -51,7 +51,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x190,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of <random> the Tainted Mage",
                 CreatureType = CreatureType.Human,
                 DamageMax = 15,
