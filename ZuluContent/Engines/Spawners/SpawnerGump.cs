@@ -148,7 +148,7 @@ namespace Server.Engines.Spawners
 
         if (str.Length > 0)
         {
-          Type type = AssemblyHandler.FindFirstTypeForName(str);
+          Type type = AssemblyHandler.FindTypeByName(str);
 
           if (type == null)
           {

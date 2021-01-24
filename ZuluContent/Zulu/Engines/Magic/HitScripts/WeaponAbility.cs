@@ -8,8 +8,6 @@ namespace Server.Engines.Magic.HitScripts
 
         public virtual bool Validate(Mobile from)
         {
-
-
             NetState state = from.NetState;
 
             return state != null;

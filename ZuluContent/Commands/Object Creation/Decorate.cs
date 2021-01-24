@@ -874,10 +874,11 @@ namespace Server.Commands
 
       int indexOf = line.IndexOf(' ');
 
-      list.m_Type = AssemblyHandler.FindFirstTypeForName(line.Substring(0, indexOf++), true);
+      string name = line.Substring(0, indexOf++);
+      list.m_Type = AssemblyHandler.FindTypeByName(name, true);
 
       if (list.m_Type == null)
-        throw new ArgumentException($"Type not found for header: '{line}'");
+        throw new ArgumentException($"Type not found for header: '{line}', '{name}'");
 
       line = line.Substring(indexOf);
       indexOf = line.IndexOf('(');

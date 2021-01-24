@@ -42,7 +42,7 @@
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' == 'UNIX'">
       rsync -avh $(SolutionDir)Distribution/ $(OutDir)/../
-      rsync -avh $(SolutionDir)Distribution/Data $(OutDir)/../Data --delete
+      rsync -avh $(SolutionDir)Distribution/Data/ $(OutDir)/../Data/ --delete
     </PostBuildEvent>
 
   </PropertyGroup>
