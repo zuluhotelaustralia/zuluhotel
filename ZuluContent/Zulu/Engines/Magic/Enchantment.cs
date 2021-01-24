@@ -36,7 +36,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
             Cursed = cursed;
             if (cursed)
-                CurseLevel = CurseLevelType.UnRevealed;
+                CurseLevel = CurseLevelType.Unrevealed;
             else
                 CurseLevel = CurseLevelType.None;
         }
@@ -62,7 +62,7 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public virtual void OnAdded(IEntity entity)
         {
-            if (Cursed && CurseLevel == CurseLevelType.UnRevealed && entity is IMagicItem item && item.Parent is Mobile mobile)
+            if (Cursed && CurseLevel == CurseLevelType.Unrevealed && entity is IMagicItem item && item.Parent is Mobile mobile)
             {
                 CurseLevel = CurseLevelType.RevealedCantUnEquip;
                 mobile.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);

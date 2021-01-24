@@ -13,7 +13,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         
         public virtual string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
         {
-            return index < Names.GetLength(0) ? Names[Math.Abs(index), cursed && curseLevel > CurseLevelType.UnRevealed ? 1 : 0] : string.Empty;
+            return index < Names.GetLength(0) ? Names[Math.Abs(index), cursed && curseLevel > CurseLevelType.Unrevealed ? 1 : 0] : string.Empty;
         }
 
         public virtual string GetName(Enum target, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)

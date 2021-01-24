@@ -154,7 +154,7 @@ namespace Server.Scripts.Engines.Loot
                 foreach (var (key, value) in magicItem.Enchantments.Values)
                 {
                     value.Cursed = Cursed;
-                    value.CurseLevel = CurseLevelType.UnRevealed;
+                    value.CurseLevel = CurseLevelType.Unrevealed;
                 }
             }
 

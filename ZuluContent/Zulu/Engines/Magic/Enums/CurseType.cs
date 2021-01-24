@@ -3,8 +3,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
     public enum CurseLevelType
     {
         None = 0,
-        UnRevealed,
+        Unrevealed,
         RevealedCantUnEquip,
-        RevealedCanUnEquip,
+        Revealed,
     }
 }

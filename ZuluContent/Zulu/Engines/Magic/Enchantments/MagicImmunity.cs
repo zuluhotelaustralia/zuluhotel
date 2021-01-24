@@ -33,7 +33,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 {
                     damage = 0;
                     NotifyMobile(defender, "Your items protected you from the magic!");
-                    NotifyMobile(defender, attacker, "The spell dissipates upon contact with " + defender.Name + "'s magical barrier!");
+                    NotifyMobile(defender, attacker, $"The spell dissipates upon contact with {defender.Name}'s magical barrier!");
                 }
                 else
                     NotifyMobile(defender, "Your items prevent all reflections!");

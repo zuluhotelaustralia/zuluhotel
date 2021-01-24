@@ -18,9 +18,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             var healingBonusLevel = GetProtectionLevelForResist(Value);
             var healDelta = healAmount * (int) healingBonusLevel * 0.1;
             if (Cursed)
-                healAmount += healDelta;
-            else
                 healAmount -= healDelta;
+            else
+                healAmount += healDelta;
         }
     }
     public class HealingBonusInfo : EnchantmentInfo
