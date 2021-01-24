@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
@@ -9,13 +10,32 @@ using ZuluContent.Zulu.Items;
 
 namespace Server.Mobiles
 {
+    public enum PriestDemand
+    {
+        RemoveCurse,
+        DetectCurse,
+        Purify,
+        CastHeal,
+        CastCure,
+        CastProtect,
+        CastBless
+    }
+
     public class HighPriest : BasePriest
 	{
 		public override bool CanTeach{ get{ return false; } }
 
+        private record PriestRequest
+        {
+            protected PriestDemand PriestDemand { get; init; }
+            protected int PriestPrice { get; init; }
+            protected Serial TargetedItem { get; init; }
+        }
 
-		[Constructible]
-public HighPriest()
+        private Dictionary<Serial, PriestRequest> PriestRequests { get; set; } = new Dictionary<Serial, PriestRequest>();
+
+        [Constructible]
+        public HighPriest()
 		{
 			Title = "the High Priest";
 
@@ -67,9 +87,9 @@ public HighPriest()
 
         public void Appraise_OnTarget(Mobile from, object obj)
         {
-            if (obj is BaseEquippableItem)
+            if (obj is BaseEquippableItem equippableItem)
             {
-                BaseEquippableItem item = (BaseEquippableItem)obj;
+                BaseEquippableItem item = equippableItem;
 
                 if (!item.Cursed)
                 {
