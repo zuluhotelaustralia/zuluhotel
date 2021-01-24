@@ -324,6 +324,8 @@ namespace Server.Misc
 
     private static CityInfo GetStartLocation(CharacterCreatedEventArgs args, bool isYoung)
     {
+      if (args.City.Map == null)
+        args.City.Map = Map.Trammel;
       return args.City;
     }
 
