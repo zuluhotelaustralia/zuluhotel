@@ -16,17 +16,22 @@ namespace Scripts.Zulu.Engines.Classes
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
         private const double PerLevel = 0.1; //10% per level
-        private static double[] _minSkills;
-        private static double[] _maxSkills;
+        private const int MaxLevel = 7;
 
-        private readonly IZuluClassed m_Parent; //store the parent obj
-
-        [CommandProperty(AccessLevel.Counselor)]
-        public int Level { get; set; }
-
-        [CommandProperty(AccessLevel.Counselor)]
-        public ZuluClassType Type { get; set; }
-
+        private static readonly double[] MinSkills =
+            Enumerable
+                .Range(0, MaxLevel)
+                .Select(i => SkillBase + ClassPointsPerLevel * i)
+                .ToArray();
+        
+        private static readonly double[] MaxSkills = 
+            Enumerable
+                .Range(0, MaxLevel)
+                .Select(i =>  Math.Floor(MinSkills[i] / (PercentBase + PercentPerLevel * i)))
+                .ToArray();
+       
+        private readonly IZuluClassed m_Parent;
+        
         public static readonly IReadOnlyDictionary<ZuluClassType, SkillName[]> ClassSkills =
             new Dictionary<ZuluClassType, SkillName[]>
             {
@@ -86,7 +91,7 @@ namespace Scripts.Zulu.Engines.Classes
                     SkillName.Lockpicking,
                     SkillName.Snooping,
                 },
-                [ZuluClassType.Thief] = new[]
+                [ZuluClassType.Bard] = new[]
                 {
                     SkillName.Provocation,
                     SkillName.Musicianship,
@@ -99,12 +104,16 @@ namespace Scripts.Zulu.Engines.Classes
                 }
             };
 
-        //constructor needs a reference to the parent playermobile obj.
+        [CommandProperty(AccessLevel.Counselor)]
+        public int Level { get; set; } = 0;
+
+        [CommandProperty(AccessLevel.Counselor)]
+        public ZuluClassType Type { get; set; } = ZuluClassType.None;
+        
         public ZuluClass(IZuluClassed parent)
         {
             m_Parent = parent;
-            Type = ZuluClassType.None;
-            Level = 0;
+            ComputeClass();
         }
 
         [CommandProperty(AccessLevel.Counselor)]
@@ -113,7 +122,7 @@ namespace Scripts.Zulu.Engines.Classes
             : 1.0 + Level * PerLevel;
 
         public static double GetBonusFor(Mobile m, ZuluClassType name) =>
-            m is PlayerMobile mobile ? mobile.ZuluClass.GetBonusFor(name) : 1.0;
+            m is IZuluClassed classed ? classed.ZuluClass.GetBonusFor(name) : 1.0;
 
         public double GetBonusFor(ZuluClassType name) => Type == name ? Bonus : 1.0;
 
@@ -121,8 +130,6 @@ namespace Scripts.Zulu.Engines.Classes
         {
             CommandSystem.Register("class", AccessLevel.Player, ClassOnCommand);
             CommandSystem.Register("showclasse", AccessLevel.Player, ClassOnCommand);
-
-            SetMaximums();
         }
 
         public static void ClassOnCommand(CommandEventArgs e)
@@ -164,40 +171,37 @@ namespace Scripts.Zulu.Engines.Classes
             double total = skills.Total;
             total *= 0.1;
 
-            if (total < 600.0)
+            switch (total)
             {
-                return;
-            }
-
-            if (total >= 3920.0)
-            {
-                Type = ZuluClassType.Powerplayer;
-                Level = 1;
-
-                if (total >= 5145)
+                case < 600.0:
+                    Level = 0;
+                    Type = ZuluClassType.None;
+                    return;
+                case >= 3920.0:
                 {
-                    Level = 2;
+                    Type = ZuluClassType.Powerplayer;
+                    Level = 1;
 
-                    if (total >= 6370)
+                    if (total >= 5145)
                     {
-                        Level = 3;
+                        Level = 2;
+
+                        if (total >= 6370)
+                        {
+                            Level = 3;
+                        }
                     }
+
+                    //we're a pp so:
+                    return;
                 }
-
-                //we're a pp so:
-                return;
             }
 
-            int maxLevel = GetMaxLevel(total);
-            if (maxLevel > 6)
-            {
-                maxLevel = 6;
-            }
 
             foreach (var (spec, specSkills) in ClassSkills)
             {
                 var specTotal = specSkills.Select(s => skills[s].Value).Sum();
-                var level = GetSpecLevel(specTotal);
+                var level = GetClassLevel(specTotal);
 
                 if (level > 0)
                 {
@@ -206,10 +210,8 @@ namespace Scripts.Zulu.Engines.Classes
                 }
             }
 
-            if (Level > maxLevel)
-            {
-                Level = maxLevel;
-            }
+            if (Level > MaxLevel) 
+                Level = MaxLevel;
 
             if (Level <= 0)
             {
@@ -221,70 +223,18 @@ namespace Scripts.Zulu.Engines.Classes
         //idx:    0    1     2     3     4     5      6
         //Min: [ 480, 600,  720,  840,  960,  1080, 1200 ]
         //Max: [ 923, 1000, 1058, 1105, 1142, 1173, 1200 ]
-        private int GetSpecLevel(double totalSkills)
+        private int GetClassLevel(double totalSkills)
         {
-            if (totalSkills >= _minSkills[6] && totalSkills <= _maxSkills[6])
-                return 6;
-
-            if (totalSkills >= _minSkills[5] && totalSkills <= _maxSkills[5])
-                return 5;
-
-            if (totalSkills >= _minSkills[4] && totalSkills <= _maxSkills[4])
-                return 4;
-
-            if (totalSkills >= _minSkills[3] && totalSkills <= _maxSkills[3])
-                return 3;
-
-            if (totalSkills >= _minSkills[2] && totalSkills <= _maxSkills[2])
-                return 2;
-
-            if (totalSkills >= _minSkills[1] && totalSkills <= _maxSkills[1])
-                return 1;
-
-            return 0;
-        }
-
-        private int GetMaxLevel(double total)
-        {
-            int num = _maxSkills.Length;
-            num--;
-
-            for (int i = num; i >= 0; i--)
+            for (int i = 0; i < MaxLevel; i++)
             {
-                if (_maxSkills[i] >= total)
-                {
+                if (totalSkills >= MinSkills[i] && totalSkills <= MaxSkills[i])
                     return i;
-                }
             }
 
             return 0;
         }
-
-        private static void SetMaximums()
-        {
-            // max skill = minskill * (0.52 + 0.08*level)
-
-            _minSkills = new double[7];
-
-            for (int i = 0; i < 7; i++)
-            {
-                _minSkills[i] = SkillBase + ClassPointsPerLevel * i;
-            }
-
-            _maxSkills = new double[7];
-
-            for (int i = 0; i < 7; i++)
-            {
-                _maxSkills[i] = Math.Floor(_minSkills[i] / (PercentBase + PercentPerLevel * i));
-            }
-
-            // Console.WriteLine(
-            //     $"Min: [ {_minSkills[0]}, {_minSkills[1]}, {_minSkills[2]}, {_minSkills[3]}, {_minSkills[4]}, {_minSkills[5]}, {_minSkills[6]} ]");
-            // Console.WriteLine(
-            //     $"Max: [ {_maxSkills[0]}, {_maxSkills[1]}, {_maxSkills[2]}, {_maxSkills[3]}, {_maxSkills[4]}, {_maxSkills[5]}, {_minSkills[6]} ]");
-        }
-
-        public bool IsSkillOnSpec(SkillName sn)
+        
+        public bool IsSkillInClass(SkillName sn)
         {
             return ClassSkills.FirstOrDefault(kv => kv.Value.Contains(sn)).Key == Type;
         }
