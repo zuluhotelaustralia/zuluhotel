@@ -1,3 +1,5 @@
+using Server.Scripts.Engines.Loot;
+
 namespace Server.Mobiles
 {
     [CorpseName( "a hell cat corpse" )]
@@ -36,7 +38,7 @@ public PredatorHellCat() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2,
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Average );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override bool HasBreath{ get{ return true; } } // fire breath enabled

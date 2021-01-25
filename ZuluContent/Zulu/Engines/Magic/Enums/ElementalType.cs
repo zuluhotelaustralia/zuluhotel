@@ -13,14 +13,24 @@ namespace Server.Engines.Magic
         public int ElementalPhysicalResist { get; set; }
 
         public int ElementalFireResist { get; set; }
-        
+
         public int ElementalPoisonResist { get; set; }
 
 
         public int ElementalEarthResist { get; set; }
 
         public int ElementalNecroResist { get; set; }
-        
+
+        public int ParalysisResist { get; set; }
+
+        public int HealingBonus { get; set; }
+
+        public int MagicImmunity { get; set; }
+
+        public int SpellReflection { get; set; }
+
+
+
         private static readonly Dictionary<ElementalProtectionLevel, int> ProtectionToResist =
             new Dictionary<ElementalProtectionLevel, int>
             {
@@ -65,6 +75,11 @@ namespace Server.Engines.Magic
         Energy,
         Earth,
         Necro,
+        Paralysis,
+        HealingBonus,
+        PermPoisonImmunity,
+        PermMagicImmunity,
+        PermSpellReflect,
         None
     }
 }

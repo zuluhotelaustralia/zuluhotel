@@ -1,6 +1,7 @@
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -9,12 +10,20 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class EarthProtection : Enchantment<EarthProtectionInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value));
+        private int m_Value = 0;
 
-        [Key(1)] 
-        public int Value { get; set; } = 0;
-        
-        public override void OnSpellDamage(Mobile attacker, Mobile defender, ElementalType damageType, ref int damage)
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(
+            IElementalResistible.GetProtectionLevelForResist(Value), Cursed, CurseLevel);
+
+        [Key(1)]
+        public int Value
+        {
+            get => Cursed ? -m_Value : m_Value;
+            set => m_Value = value;
+        }
+
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
         {
             if (damageType == ElementalType.Earth) 
                 damage -= (int) (damage * ((double) Value / 100));

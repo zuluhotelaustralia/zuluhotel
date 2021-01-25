@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Server.Items;
 using static Server.Scripts.Engines.Loot.LootGroup;
 
@@ -92,13 +93,26 @@ namespace Server.Scripts.Engines.Loot
     [SuppressMessage("ReSharper", "ArgumentsStyleLiteral")]
     public partial class LootTable
     {
-        public static readonly LootTable Table1 = new LootTable(itemLevel: 9, itemChance: 1.0)
+        public static readonly LootTable Table1 = new LootTable(itemLevel: 1, itemChance: 1.0)
         {
             {typeof(CheeseSlice), 0.5},
             {Weapons, 1, 10, 0.5},
             {Armor, 1, 10, 0.5},
             {Jewelry, 1, 10, 0.5},
             {Clothing, 1, 10, 0.5},
+        };
+
+        // level6map, golden dragon, behemoth, balron, arachnidqueen
+        public static readonly LootTable Table2 = new LootTable(itemLevel: 5, itemChance: 1.0)
+        {
+            {typeof(Gold), 1000, 2000, 1.0},
+            {Reagents, 5, 6, 1.0},
+            {PaganReagents, 5, 6, 1.0},
+            {Gems, 1, 5, 1.0},
+            {Weapons, 1, 3, 0.5},
+            {Armor, 2, 3, 0.5},
+            {Jewelry, 10, 15, 1.0},
+            {Clothing, 10, 15, 1.0},
         };
     }
 }

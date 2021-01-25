@@ -10,6 +10,7 @@ using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Spells;
 using Server.Spells.Fourth;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
@@ -141,7 +142,7 @@ namespace Server.Mobiles
         public Dictionary<ElementalType, CreatureProp> Resistances { get; init; } =
             new Dictionary<ElementalType, CreatureProp>();
 
-        public Dictionary<LootPack, CreatureProp> Loot { get; init; } = new Dictionary<LootPack, CreatureProp>();
+        public Dictionary<LootTable, CreatureProp> Loot { get; init; } = new Dictionary<LootTable, CreatureProp>();
 
         public Dictionary<ElementalType, CreatureProp> DamageTypes { get; init; } =
             new Dictionary<ElementalType, CreatureProp>();
@@ -188,8 +189,13 @@ namespace Server.Mobiles
             foreach (var (resistance, prop) in Resistances)
                 dest.Enchantments.SetResist(resistance, prop);
 
-            foreach (var (pack, amount) in Loot)
-                dest.AddLoot(pack, amount);
+            foreach (var (table, amount) in Loot)
+            {
+                if(amount == 1)
+                {
+                    dest.AddLoot(table);
+                }
+            }
 
             // foreach (var (damageType, prop) in ElementalType.
             //     dest.SetDamageType(damageType, prop);

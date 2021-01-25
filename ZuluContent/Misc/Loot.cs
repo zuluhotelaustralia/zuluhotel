@@ -118,6 +118,21 @@ namespace Server
       get { return m_RegTypes; }
     }
 
+    private static Type[] m_PaganRegTypes = new[]
+    {
+      typeof(BatWing), typeof(Bone), typeof(DeadWood),
+      typeof(ExecutionersCap), typeof(FertileDirt), typeof(NoxCrystal),
+      typeof(Blackmoor), typeof(Brimstone), typeof(EyeOfNewt),
+      typeof(Pumice), typeof(VolcanicAsh), typeof(Obsidian),
+      typeof(PigIron), typeof(VialOfBlood), typeof(WyrmsHeart),
+      typeof(Bloodspawn), typeof(DaemonBone), typeof(DragonsBlood),
+    };
+
+    public static Type[] PaganRegTypes
+    {
+        get { return m_PaganRegTypes; }
+    }
+
     private static Type[] m_PotionTypes = new[]
     {
       typeof(AgilityPotion), typeof(StrengthPotion), typeof(RefreshPotion),

@@ -39,6 +39,16 @@ namespace Server.Items
         }
         
         [CommandProperty(AccessLevel.GameMaster)]
+        public int PermSpellReflect
+        {
+            get => Enchantments.Get((PermSpellReflect e) => e.Value);
+            set
+            {
+                Enchantments.Set((PermSpellReflect e) => e.Value = value);
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public ArmorBonusType ArmorBonusType
         {
             get => Enchantments.Get((ArmorBonus e) => e.Value);
@@ -46,7 +56,7 @@ namespace Server.Items
             {
                 if (value > ArmorBonusType.Adamantium)
                     return;
-                
+
                 Enchantments.Set((ArmorBonus e) => e.Value = value);
                 Invalidate();
             }

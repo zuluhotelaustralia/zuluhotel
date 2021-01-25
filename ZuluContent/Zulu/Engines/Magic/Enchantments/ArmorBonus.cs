@@ -9,9 +9,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class ArmorBonus : Enchantment<ArmorBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
-        [Key(1)] 
-        public ArmorBonusType Value { get; set; } = ArmorBonusType.None;
+        private ArmorBonusType m_Value = ArmorBonusType.None;
+
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+
+        [Key(1)]
+        public ArmorBonusType Value
+        {
+            get => Cursed ? (ArmorBonusType)(ArmorBonusType.None - m_Value) : m_Value;
+            set => m_Value = value;
+        }
 
         [CallPriority(1)]
         public override bool GetShouldDye() => Value > ArmorBonusType.None;

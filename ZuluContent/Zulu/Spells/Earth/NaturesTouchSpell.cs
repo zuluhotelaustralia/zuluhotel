@@ -6,6 +6,7 @@ using Server.Items;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Earth
 {
@@ -59,10 +60,12 @@ namespace Scripts.Zulu.Spells.Earth
 
             //original spell just healed 6d8+30 points of damage and scaled that by tgt's healing bonus if any
             // i think this is better --sith
-            var amount = (int) (Caster.Skills[DamageSkill].Value * 0.6);
-            amount += (int) (m.Skills[SkillName.Healing].Value * 0.4);
+            var amount = Caster.Skills[DamageSkill].Value * 0.6;
+            amount += m.Skills[SkillName.Healing].Value * 0.4;
 
-            SpellHelper.Heal(amount, m, Caster);
+            Caster.FireHook(h => h.OnHeal(Caster, m, ref amount));
+
+            SpellHelper.Heal((int) amount, m, Caster);
 
             Return:
             FinishSequence();

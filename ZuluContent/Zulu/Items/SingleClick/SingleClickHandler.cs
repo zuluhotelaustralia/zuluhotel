@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Scripts.Zulu.Packets;
 using Server;
 using Server.Engines.Craft;
+using Server.Items;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -10,9 +12,15 @@ namespace ZuluContent.Zulu.Items.SingleClick
 {
     public static partial class SingleClickHandler
     {
+        public static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+
+        public static bool StaffRevealedMagicItems = true;
+
+        public static bool AsciiClickMessage { get; set; } = true;
+
         private static string GetItemDesc(Item item)
         {
-            return ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc) ? desc : null;
+            return ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc) ? TextInfo.ToTitleCase(desc) : null;
         }
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
@@ -32,19 +40,40 @@ namespace ZuluContent.Zulu.Items.SingleClick
             return (prefixes, suffixes);
         }
 
-        private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
+        public static string GetMagicItemName(IMagicItem item)
         {
-            if (!Validate(m, item))
-                return;
-            
             var (prefixes, suffixes) = GetAffixes(item);
 
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
-            
-            var text = $"{prefix}{GetItemDesc(item)}{suffix}{GetCraftedBy(item)}";
+
+            var text = item is ICraftable craftable && craftable.PlayerConstructed ?
+                $"{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}" :
+                $"{prefix}{GetItemDesc(item as Item)}{suffix}";
+
+            return text;
+        }
+
+        private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
+        {
+            if (!Validate(m, item))
+                return;
+
+            var text = GetMagicItemName(item);
 
             SendResponse(m, item, text);
+        }
+
+        private static string GetCraftedResource(Item item)
+        {
+            var itemName = "";
+            if (item is BaseArmor armor)
+                itemName = CraftResources.GetName(armor.Resource);
+            else if (item is BaseWeapon weapon)
+                itemName = CraftResources.GetName(weapon.Resource);
+            else if (item is BaseJewel jewel)
+                itemName = CraftResources.GetName(jewel.Resource);
+            return itemName + " ";
         }
 
         private static string GetCraftedBy(Item item)
@@ -59,9 +88,9 @@ namespace ZuluContent.Zulu.Items.SingleClick
             if (!ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc))
                 return false;
 
-            if (item is IMagicItem magicItem && !magicItem.Identified)
+            if (item is IMagicItem magicItem && (StaffRevealedMagicItems && m.AccessLevel == AccessLevel.Player) && !magicItem.Identified)
             {
-                SendResponse(m, item, $"a magical {desc}");
+                SendResponse(m, item, $"a magic {desc}");
                 return false;
             }
 

@@ -30,6 +30,36 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
+        public bool Cursed
+        {
+            get => Enchantments.Values.Where(e => e.Value.Cursed == true)
+                       .Select(p => p.Value.Cursed)
+                       .FirstOrDefault();
+            set
+            {
+                foreach (var (key, val) in Enchantments.Values)
+                {
+                    val.Cursed = value;
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CurseLevelType CurseLevel
+        {
+            get => Enchantments.Values.Where(e => e.Value.Cursed == true)
+                       .Select(p => p.Value.CurseLevel)
+                       .FirstOrDefault();
+            set
+            {
+                foreach (var (key, val) in Enchantments.Values)
+                {
+                    val.CurseLevel = value;
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalWaterResist
         {
             get => Enchantments.Get((WaterProtection e) => e.Value);
@@ -60,8 +90,8 @@ namespace ZuluContent.Zulu.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalPoisonResist
         {
-            get => Enchantments.Get((PoisonProtection e) => e.Value);
-            set => Enchantments.Set((PoisonProtection e) => e.Value = value);
+            get => Enchantments.Get((PermPoisonProtection e) => e.Value);
+            set => Enchantments.Set((PermPoisonProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -77,7 +107,35 @@ namespace ZuluContent.Zulu.Items
             get => Enchantments.Get((NecroProtection e) => e.Value);
             set => Enchantments.Set((NecroProtection e) => e.Value = value);
         }
-        
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int ParalysisResist
+        {
+            get => Enchantments.Get((ParalysisProtection e) => e.Value);
+            set => Enchantments.Set((ParalysisProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int HealingBonus
+        {
+            get => Enchantments.Get((HealingBonus e) => e.Value);
+            set => Enchantments.Set((HealingBonus e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int MagicImmunity
+        {
+            get => Enchantments.Get((PermMagicImmunity e) => e.Value);
+            set => Enchantments.Set((PermMagicImmunity e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int SpellReflection
+        {
+            get => Enchantments.Get((PermSpellReflect e) => e.Value);
+            set => Enchantments.Set((PermSpellReflect e) => e.Value = value);
+        }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrBonus
         {
@@ -144,8 +202,15 @@ namespace ZuluContent.Zulu.Items
 
         public override void OnRemoved(IEntity parent)
         {
-            Enchantments.FireHook(e => e.OnRemoved(this));
+            Enchantments.FireHook(e => e.OnRemoved(this, parent));
             base.OnRemoved(parent);
+        }
+
+        public override bool OnDragLift(Mobile from)
+        {
+            bool canLift = true;
+            Enchantments.FireHook(e => e.OnBeforeRemoved(this, from, ref canLift));
+            return canLift;
         }
 
         public override void Serialize(IGenericWriter writer)

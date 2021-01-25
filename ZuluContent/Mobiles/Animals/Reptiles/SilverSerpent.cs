@@ -1,3 +1,5 @@
+using Server.Scripts.Engines.Loot;
+
 namespace Server.Mobiles
 {
     [CorpseName("a silver serpent corpse")]
@@ -33,8 +35,7 @@ public SilverSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Average );
-			AddLoot( LootPack.Gems, 2 );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override int Meat{ get{ return 1; } }

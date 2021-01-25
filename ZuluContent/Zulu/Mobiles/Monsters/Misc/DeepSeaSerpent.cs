@@ -1,6 +1,7 @@
 using System;
 using Server;
 using Server.Items;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
@@ -45,7 +46,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Meager);
+            AddLoot(LootTable.Table1);
         }
 
         public override bool HasBreath

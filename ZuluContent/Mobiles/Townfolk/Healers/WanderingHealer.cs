@@ -20,7 +20,7 @@ namespace Server.Mobiles
 
 
 		[Constructible]
-public WanderingHealer()
+        public WanderingHealer()
 		{
 			Title = "the wandering healer";
 

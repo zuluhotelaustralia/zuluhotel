@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
@@ -278,7 +279,9 @@ public Bandage( Serial serial ) : base( serial )
 
 					double toHeal = min + Utility.RandomDouble() * (max - min);
 
-					if ( m_Patient.Body.IsMonster || m_Patient.Body.IsAnimal )
+                    m_Healer.FireHook(h => h.OnHeal(m_Healer, m_Patient, ref toHeal));
+
+                    if ( m_Patient.Body.IsMonster || m_Patient.Body.IsAnimal )
 						toHeal += m_Patient.HitsMax / 100;
 
 					toHeal -= m_Slips * 4;

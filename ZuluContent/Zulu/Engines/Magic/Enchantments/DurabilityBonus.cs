@@ -7,9 +7,16 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class DurabilityBonus : Enchantment<DurabilityBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
-        [Key(1)] 
-        public int Value { get; set; } = 0;
+        private int m_Value = 0;
+
+        [IgnoreMember]
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        [Key(1)]
+        public int Value
+        {
+            get => Cursed ? -m_Value : m_Value;
+            set => m_Value = value;
+        }
     }
 
     public class DurabilityBonusInfo : EnchantmentInfo

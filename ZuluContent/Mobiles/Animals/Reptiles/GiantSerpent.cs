@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
@@ -40,7 +41,7 @@ public GiantSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Average );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override Poison PoisonImmune{ get{ return Poison.Greater; } }

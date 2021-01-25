@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
@@ -67,10 +68,7 @@ public Nightmare( string name ) : base( name, 0x74, 0x3EA7, AIType.AI_Mage, Figh
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Rich );
-			AddLoot( LootPack.Average );
-			AddLoot( LootPack.LowScrolls );
-			AddLoot( LootPack.Potions );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override int GetAngerSound()

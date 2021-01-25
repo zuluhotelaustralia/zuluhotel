@@ -22,7 +22,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         string[,] Names { get; }
         int Hue { get; }
         int CursedHue { get; }
-        string GetName(int index, bool cursed = false);
-        string GetName(Enum target, bool cursed = false);
+        string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None);
+        string GetName(Enum target, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None);
     }
 }

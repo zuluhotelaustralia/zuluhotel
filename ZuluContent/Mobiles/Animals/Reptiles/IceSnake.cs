@@ -1,3 +1,5 @@
+using Server.Scripts.Engines.Loot;
+
 namespace Server.Mobiles
 {
     [CorpseName( "an ice snake corpse" )]
@@ -33,7 +35,7 @@ public IceSnake() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Meager );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override int Meat{ get{ return 1; } }

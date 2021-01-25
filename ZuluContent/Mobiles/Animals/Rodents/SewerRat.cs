@@ -1,3 +1,5 @@
+using Server.Scripts.Engines.Loot;
+
 namespace Server.Mobiles
 {
     [CorpseName( "a sewer rat corpse" )]
@@ -36,7 +38,7 @@ public Sewerrat() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 
 		public override void GenerateLoot()
 		{
-			AddLoot( LootPack.Poor );
+			AddLoot(LootTable.Table1);
 		}
 
 		public override int Meat{ get{ return 1; } }

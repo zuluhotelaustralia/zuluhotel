@@ -20,6 +20,7 @@ using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using CalcMoves = Server.Movement.Movement;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Mobiles
 {
@@ -945,6 +946,26 @@ namespace Server.Mobiles
                 RecheckTownProtection();
         }
 
+        public override void Paralyze(TimeSpan duration)
+        {
+            bool paralyze = true;
+
+            this.FireHook(h => h.OnParalysis(this, ref duration, ref paralyze));
+
+            if (paralyze)
+                base.Paralyze(duration);
+        }
+
+        public override void Freeze(TimeSpan duration)
+        {
+            bool freeze = true;
+
+            this.FireHook(h => h.OnParalysis(this, ref duration, ref freeze));
+
+            if (freeze)
+                base.Freeze(duration);
+        }
+
         private delegate void ContextCallback();
 
         public override bool CheckEquip(Item item)
@@ -1239,6 +1260,12 @@ namespace Server.Mobiles
         public override ApplyPoisonResult ApplyPoison(Mobile from, Poison poison)
         {
             if (!Alive)
+                return ApplyPoisonResult.Immune;
+
+            bool immuneFromPoison = false;
+            this.FireHook(h => h.OnPoison(from, this, poison, ref immuneFromPoison));
+
+            if (immuneFromPoison)
                 return ApplyPoisonResult.Immune;
 
             ApplyPoisonResult result = base.ApplyPoison(from, poison);

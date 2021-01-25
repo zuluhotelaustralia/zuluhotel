@@ -10,6 +10,7 @@ using Server.Engines.PartySystem;
 using Server.Engines.Spawners;
 using Server.Guilds;
 using Server.SkillHandlers;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
@@ -2931,15 +2932,9 @@ namespace Server.Mobiles
         {
         }
 
-        public virtual void AddLoot(LootPack pack, int amount)
+        public virtual void AddLoot(LootTable table)
         {
-            for (int i = 0; i < amount; ++i)
-                AddLoot(pack);
-        }
-
-        public virtual void AddLoot(LootPack pack)
-        {
-            if (Summoned)
+            if (Summoned || m_Spawning)
                 return;
 
             Container backpack = Backpack;
@@ -2953,7 +2948,7 @@ namespace Server.Mobiles
                 AddItem(backpack);
             }
 
-            pack.Generate(this, backpack, m_Spawning, m_KillersLuck);
+            LootGenerator.MakeLoot(backpack, table);
         }
 
         public bool PackArmor(int minLevel, int maxLevel)

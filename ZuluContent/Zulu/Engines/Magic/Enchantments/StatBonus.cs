@@ -10,7 +10,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class IntBonus : BaseStatBonus<IntBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
         public IntBonus() : base(StatType.Int) { }
     }
     
@@ -38,7 +38,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class DexBonus : BaseStatBonus<DexBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
+        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed, CurseLevel);
         public DexBonus() : base(StatType.Dex) { }
     }
 
@@ -65,7 +65,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class StrBonus : BaseStatBonus<StrBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
+        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed, CurseLevel);
         public StrBonus() : base(StatType.Str) { }
     }
     
@@ -100,7 +100,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public virtual int Value
         {
-            get => m_Value;
+            get => Cursed ? -m_Value : m_Value;
             set
             {
                 if (value == m_Value || value == 0 && m_Value == 0)
@@ -133,6 +133,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public override void OnAdded(IEntity entity)
         {
+            base.OnAdded(entity);
             if (entity is Item item && item.Parent is Mobile mobile)
             {
                 Item = item;
@@ -141,9 +142,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             }
         }
 
-        public override void OnRemoved(IEntity entity)
+        public override void OnRemoved(IEntity entity,  IEntity parent)
         {
-            if (entity is Item item && item.Parent is Mobile mobile)
+            if (entity is Item && parent is Mobile mobile)
             {
                 Item = null;
                 Mobile = null;

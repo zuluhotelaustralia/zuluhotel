@@ -6,6 +6,7 @@ using Server.Items;
 using static Server.Mobiles.CreatureProp;
 using Server.Engines.Magic;
 using Server.Engines.Harvest;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
@@ -127,6 +128,10 @@ namespace Server.Mobiles
         {
         }
 
+        public override void GenerateLoot()
+        {
+            AddLoot(LootTable.Table2);
+        }
 
         public override void Serialize(IGenericWriter writer)
         {

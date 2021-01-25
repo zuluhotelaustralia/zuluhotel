@@ -18,7 +18,7 @@ namespace Server.Engines.Craft
         private const int Version = 1;
         public Mobile Crafter { get; set; }
         public bool PlayerConstructed { get; set; }
-        
+
         public static void Serialize(IGenericWriter writer, ICraftable item)
         {
             writer.Write(Version);
