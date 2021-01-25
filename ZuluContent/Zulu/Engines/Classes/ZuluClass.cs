@@ -16,20 +16,14 @@ namespace Scripts.Zulu.Engines.Classes
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
         private const double PerLevel = 0.1; //10% per level
-        private const int MaxLevel = 7;
+        private const int MaxLevel = 6;
 
         private static readonly double[] MinSkills =
             Enumerable
-                .Range(0, MaxLevel)
+                .Range(0, MaxLevel + 1) // Technically lvl 0 (none) is a level
                 .Select(i => SkillBase + ClassPointsPerLevel * i)
                 .ToArray();
-        
-        private static readonly double[] MaxSkills = 
-            Enumerable
-                .Range(0, MaxLevel)
-                .Select(i =>  Math.Floor(MinSkills[i] / (PercentBase + PercentPerLevel * i)))
-                .ToArray();
-       
+
         private readonly IZuluClassed m_Parent;
         
         public static readonly IReadOnlyDictionary<ZuluClassType, SkillName[]> ClassSkills =
@@ -56,7 +50,6 @@ namespace Scripts.Zulu.Engines.Classes
                     SkillName.Fishing,
                     SkillName.Camping,
                     SkillName.Cooking,
-                    SkillName.Tactics,
                 },
                 [ZuluClassType.Mage] = new[]
                 {
@@ -130,8 +123,7 @@ namespace Scripts.Zulu.Engines.Classes
         {
             CommandSystem.Register("class", AccessLevel.Player, ClassOnCommand);
             CommandSystem.Register("showclasse", AccessLevel.Player, ClassOnCommand);
-            CommandSystem.Register("setclass", AccessLevel.Player, SetClass);
-
+            CommandSystem.Register("setclass", AccessLevel.GameMaster, SetClass);
         }
 
         public static void ClassOnCommand(CommandEventArgs e)
@@ -155,19 +147,18 @@ namespace Scripts.Zulu.Engines.Classes
         }
 
         [Usage("SetClass <class> <level>")]
-        [Description("Sets you to the desired class and level.")]
+        [Description("Sets you to the desired class and level, sets all other skills to 0.")]
         public static void SetClass(CommandEventArgs e)
         {
             if (!(e.Mobile is PlayerMobile pm))
                 return;
-
-            if (pm.AccessLevel < AccessLevel.GameMaster)
-                return;
-
             
             if(e.Length == 2 && Enum.TryParse(e.GetString(0), out ZuluClassType classType))
             {
                 var level = e.GetInt32(1);
+
+                if (level > MaxLevel || level < 0)
+                    level = 0;
                 
                 foreach (var skill in pm.Skills)
                 {
@@ -189,16 +180,11 @@ namespace Scripts.Zulu.Engines.Classes
             var allSkillsTotal = 0.0;
             foreach (var skill in m_Parent.Skills)
             {
-                allSkillsTotal += skill.NonRacialValue;
+                allSkillsTotal += skill.Value;
             }
 
             Type = ZuluClassType.None;
             Level = 0;
-
-            //minimum on-class skill points per level are 600 for level 1, then += 120 pts per level
-            //maximum total skill points per level are 1000 for level 1, then ( 0.52 + 0.08(level) ) * minskill
-            // if you fail the maxskill check then you are still eligible for the next zuluClass down.
-            // average on-class skill must be satisfied for zuluClass.
             
             double total = m_Parent.Skills.Total;
             total *= 0.1;
@@ -257,13 +243,13 @@ namespace Scripts.Zulu.Engines.Classes
         //Max: [ 923, 1000, 1058, 1105, 1142, 1173, 1200 ]
         private int GetClassLevel(double classTotal, double allSkillsTotal)
         {
-            for (int i = MaxLevel - 1; i >= 0; i--)
+            for (int level = MinSkills.Length - 1; level >= 0; level--)
             {
-                var pct = Math.Clamp(PercentBase + PercentPerLevel * i, 0.0, 0.95);
-                var cpct = classTotal / allSkillsTotal;
-                
-                if (classTotal >= MinSkills[i] && cpct > pct)
-                    return i;
+                var levelReq = PercentBase + PercentPerLevel * level;
+                var classPct = classTotal / allSkillsTotal;
+
+                if (classTotal >= MinSkills[level] && classPct > levelReq)
+                    return level;
             }
 
             return 0;
