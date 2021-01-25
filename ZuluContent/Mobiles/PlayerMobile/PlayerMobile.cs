@@ -1908,6 +1908,16 @@ namespace Server.Mobiles
         }
 
         #endregion
+        
+        #region ZuluClass
+        private ZuluClass m_ZuluClass;
+
+        public ZuluClass ZuluClass
+        {
+            get => m_ZuluClass ??= new ZuluClass(this);
+        }
+
+        #endregion
 
         #region Speech log
 
@@ -1919,7 +1929,6 @@ namespace Server.Mobiles
         }
 
         public Point3D EarthPortalLocation { get; set; }
-        public ZuluClass ZuluClass { get; set; }
 
         public override void OnSpeech(SpeechEventArgs e)
         {

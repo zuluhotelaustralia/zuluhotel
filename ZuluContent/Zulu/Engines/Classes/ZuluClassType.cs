@@ -9,6 +9,6 @@ namespace Scripts.Zulu.Engines.Classes
         Ranger,
         Thief,
         Warrior,
-        Powerplayer
+        PowerPlayer
     }
 }

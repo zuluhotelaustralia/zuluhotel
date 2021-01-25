@@ -9,7 +9,7 @@ namespace Scripts.Zulu.Engines.Classes
                 ZuluClassType.Bard => "Bard",
                 ZuluClassType.Crafter => "Crafter",
                 ZuluClassType.Mage => "Mage",
-                ZuluClassType.Powerplayer => "Power Player",
+                ZuluClassType.PowerPlayer => "Power Player",
                 ZuluClassType.Ranger => "Ranger",
                 ZuluClassType.Warrior => "Warrior",
                 ZuluClassType.Thief => "Thief",

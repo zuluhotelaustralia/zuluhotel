@@ -117,7 +117,7 @@ namespace Scripts.Zulu.Engines.Classes
         }
 
         [CommandProperty(AccessLevel.Counselor)]
-        public double Bonus => Type == ZuluClassType.Powerplayer || Type == ZuluClassType.None
+        public double Bonus => Type == ZuluClassType.PowerPlayer || Type == ZuluClassType.None
             ? 1.0
             : 1.0 + Level * PerLevel;
 
@@ -130,6 +130,8 @@ namespace Scripts.Zulu.Engines.Classes
         {
             CommandSystem.Register("class", AccessLevel.Player, ClassOnCommand);
             CommandSystem.Register("showclasse", AccessLevel.Player, ClassOnCommand);
+            CommandSystem.Register("setclass", AccessLevel.Player, SetClass);
+
         }
 
         public static void ClassOnCommand(CommandEventArgs e)
@@ -152,12 +154,43 @@ namespace Scripts.Zulu.Engines.Classes
             pm.SendMessage(message);
         }
 
+        [Usage("SetClass <class> <level>")]
+        [Description("Sets you to the desired class and level.")]
+        public static void SetClass(CommandEventArgs e)
+        {
+            if (!(e.Mobile is PlayerMobile pm))
+                return;
+
+            if (pm.AccessLevel < AccessLevel.GameMaster)
+                return;
+
+            
+            if(e.Length == 2 && Enum.TryParse(e.GetString(0), out ZuluClassType classType))
+            {
+                var level = e.GetInt32(1);
+                
+                foreach (var skill in pm.Skills)
+                {
+                    skill.Base = ClassSkills[classType].Contains(skill.SkillName) 
+                        ? MinSkills[level] / ClassSkills[classType].Length
+                        : 0.0;
+                }
+            }
+
+        }
+
         public static ZuluClass GetClass(Mobile m) => m is IZuluClassed classed ? classed.ZuluClass : null;
 
         public void ComputeClass()
         {
             if (m_Parent is BaseCreature)
                 return;
+            
+            var allSkillsTotal = 0.0;
+            foreach (var skill in m_Parent.Skills)
+            {
+                allSkillsTotal += skill.NonRacialValue;
+            }
 
             Type = ZuluClassType.None;
             Level = 0;
@@ -166,9 +199,8 @@ namespace Scripts.Zulu.Engines.Classes
             //maximum total skill points per level are 1000 for level 1, then ( 0.52 + 0.08(level) ) * minskill
             // if you fail the maxskill check then you are still eligible for the next zuluClass down.
             // average on-class skill must be satisfied for zuluClass.
-
-            var skills = m_Parent.Skills;
-            double total = skills.Total;
+            
+            double total = m_Parent.Skills.Total;
             total *= 0.1;
 
             switch (total)
@@ -179,7 +211,7 @@ namespace Scripts.Zulu.Engines.Classes
                     return;
                 case >= 3920.0:
                 {
-                    Type = ZuluClassType.Powerplayer;
+                    Type = ZuluClassType.PowerPlayer;
                     Level = 1;
 
                     if (total >= 5145)
@@ -196,16 +228,16 @@ namespace Scripts.Zulu.Engines.Classes
                     return;
                 }
             }
-
-
-            foreach (var (spec, specSkills) in ClassSkills)
+            
+            foreach (var (classType, classSkills) in ClassSkills)
             {
-                var specTotal = specSkills.Select(s => skills[s].Value).Sum();
-                var level = GetClassLevel(specTotal);
-
+                var classTotal = classSkills.Select(s => m_Parent.Skills[s].Value).Sum();
+                
+                var level = GetClassLevel(classTotal, allSkillsTotal);
+                
                 if (level > 0)
                 {
-                    Type = spec;
+                    Type = classType;
                     Level = level;
                 }
             }
@@ -223,11 +255,14 @@ namespace Scripts.Zulu.Engines.Classes
         //idx:    0    1     2     3     4     5      6
         //Min: [ 480, 600,  720,  840,  960,  1080, 1200 ]
         //Max: [ 923, 1000, 1058, 1105, 1142, 1173, 1200 ]
-        private int GetClassLevel(double totalSkills)
+        private int GetClassLevel(double classTotal, double allSkillsTotal)
         {
-            for (int i = 0; i < MaxLevel; i++)
+            for (int i = MaxLevel - 1; i >= 0; i--)
             {
-                if (totalSkills >= MinSkills[i] && totalSkills <= MaxSkills[i])
+                var pct = Math.Clamp(PercentBase + PercentPerLevel * i, 0.0, 0.95);
+                var cpct = classTotal / allSkillsTotal;
+                
+                if (classTotal >= MinSkills[i] && cpct > pct)
                     return i;
             }
 
@@ -249,7 +284,7 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 if (from is IZuluClassed classed)
                 {
-                    classed.ZuluClass.ComputeClass();
+                    classed.ZuluClass?.ComputeClass();
                     from.SendMessage("{0}: {1}, level {2}", from.Name, classed.ZuluClass?.Type, classed.ZuluClass?.Level);
                 }
             }
