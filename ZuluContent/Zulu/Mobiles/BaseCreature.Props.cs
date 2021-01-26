@@ -13,7 +13,7 @@ namespace Server.Mobiles
 {
     public partial class BaseCreature : Mobile, IEnchanted, IZuluClassed
     {
-        public EnchantmentDictionary Enchantments { get; set; } = new EnchantmentDictionary();
+        public EnchantmentDictionary Enchantments { get; } = new();
 
         private ZuluClass m_ZuluClass;
 

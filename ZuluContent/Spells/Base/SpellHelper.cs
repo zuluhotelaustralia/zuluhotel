@@ -710,7 +710,7 @@ namespace Server.Spells
             DFAlgorithm dfa
         )
         {
-            defender.FireHook(h => h.OnSpellDamage(attacker, defender, spell.Circle, damageType, ref damage));
+            defender.FireHook(h => h.OnSpellDamage(attacker, defender, spell, damageType, ref damage));
 
             WeightOverloading.DFA = dfa;
 

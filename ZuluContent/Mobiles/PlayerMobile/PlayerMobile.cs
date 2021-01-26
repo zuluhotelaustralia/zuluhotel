@@ -811,6 +811,9 @@ namespace Server.Mobiles
         }
 
         #region [Zulu] Resistances
+        
+        public EnchantmentDictionary Enchantments { get; } = new();
+
 
         public int GetResistance(ElementalType type)
         {
@@ -1655,14 +1658,6 @@ namespace Server.Mobiles
 
         public override void OnKillsChange(int oldValue)
         {
-            if (Young && Kills > oldValue)
-            {
-                Account acc = Account as Account;
-
-                if (acc != null)
-                    acc.RemoveYoungStatus(0);
-            }
-
             InvalidateMyRunUO();
         }
 
@@ -1693,14 +1688,7 @@ namespace Server.Mobiles
 
         public override void OnSkillChange(SkillName skill, double oldBase)
         {
-            if (Young && SkillsTotal >= 4500)
-            {
-                Account acc = Account as Account;
-
-                if (acc != null)
-                    acc.RemoveYoungStatus(
-                        1019036); // You have successfully obtained a respectable skill level, and have outgrown your status as a young player!
-            }
+            ZuluClass?.ComputeClass();
 
             InvalidateMyRunUO();
         }
@@ -1942,5 +1930,6 @@ namespace Server.Mobiles
         }
 
         #endregion
+
     }
 }

@@ -215,13 +215,8 @@ namespace ZuluContent.Zulu.Items
 
         public override void Serialize(IGenericWriter writer)
         {
-            Console.WriteLine($"BaseEquippableItem::Serialize before -> {GetType().FullName} ");
-
             base.Serialize(writer);
             Enchantments.Serialize(writer);
-            
-            Console.WriteLine($"BaseEquippableItem::Serialize after -> {GetType().FullName} ");
-
         }
 
         public override void Deserialize(IGenericReader reader)

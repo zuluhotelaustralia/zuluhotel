@@ -83,7 +83,13 @@ namespace ZuluContent.Zulu.Engines.Magic
             }
         }
 
-        public virtual void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
+        public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
+        {
+            
+        }
+
+        public virtual void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
+            ref int damage)
         {
         }
 
@@ -99,7 +105,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnHeal(Mobile healer, Mobile patient, ref double healAmount)
+        public virtual void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
         {
         }
 

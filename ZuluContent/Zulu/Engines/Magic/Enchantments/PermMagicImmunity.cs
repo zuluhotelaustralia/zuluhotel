@@ -16,7 +16,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)] 
         public int Value { get; set; } = 0;
 
-        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
+            ref int damage)
         {
             var protectionLevelFromCircle = GetProtectionLevelForResist(Value);
 
@@ -26,7 +27,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 return;
             }
 
-            if ((int) protectionLevelFromCircle >= (int) circle)
+            if ((int) protectionLevelFromCircle >= (int) spell.Circle)
             {
                 damage = 0;
                 NotifyMobile(defender, attacker.Name + "'s spell is absorbed by your magical protection!");

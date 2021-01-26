@@ -15,7 +15,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)] 
         public int Value { get; set; } = 0;
 
-        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
+            ref int damage)
         {
             if (Value == 0)
             {
@@ -23,9 +24,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 return;
             }
 
-            if (Value >= (int) circle)
+            if (Value >= (int) spell.Circle)
             {
-                Value -= (int) circle;
+                Value -= (int) spell.Circle;
                 if (Value < 0)
                     Value = 0;
 

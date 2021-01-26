@@ -63,7 +63,7 @@ namespace Scripts.Zulu.Spells.Earth
             var amount = Caster.Skills[DamageSkill].Value * 0.6;
             amount += m.Skills[SkillName.Healing].Value * 0.4;
 
-            Caster.FireHook(h => h.OnHeal(Caster, m, ref amount));
+            Caster.FireHook(h => h.OnHeal(Caster, m, this, ref amount));
 
             SpellHelper.Heal((int) amount, m, Caster);
 

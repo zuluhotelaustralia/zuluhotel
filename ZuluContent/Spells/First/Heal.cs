@@ -33,7 +33,7 @@ namespace Server.Spells.First
                 var toHeal = Caster.Skills[SkillName.Magery].Value * 0.1;
                 toHeal += Utility.Random(1, 5);
 
-                Caster.FireHook(h => h.OnHeal(Caster, m, ref toHeal));
+                Caster.FireHook(h => h.OnHeal(Caster, m, this, ref toHeal));
 
                 //m.Heal( toHeal, Caster );
                 SpellHelper.Heal((int) toHeal, m, Caster);

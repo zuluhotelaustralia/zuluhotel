@@ -2,13 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Server;
+using Server.Engines.Magic;
+using Server.Items;
 using Server.Mobiles;
+using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Hooks;
 
 namespace Scripts.Zulu.Engines.Classes
 {
     [PropertyObject]
-    public class ZuluClass
+    public class ZuluClass : IEnchantmentHook
     {
         //reference original ZH Canada (ZH3) release
         private const double ClassPointsPerLevel = 120;
@@ -106,6 +110,7 @@ namespace Scripts.Zulu.Engines.Classes
         public ZuluClass(IZuluClassed parent)
         {
             m_Parent = parent;
+            
             ComputeClass();
         }
 
@@ -248,7 +253,7 @@ namespace Scripts.Zulu.Engines.Classes
                 var levelReq = PercentBase + PercentPerLevel * level;
                 var classPct = classTotal / allSkillsTotal;
 
-                if (classTotal >= MinSkills[level] && classPct > levelReq)
+                if (classTotal >= MinSkills[level] && classPct >= levelReq)
                     return level;
             }
 
@@ -275,5 +280,135 @@ namespace Scripts.Zulu.Engines.Classes
                 }
             }
         }
+
+        private static void DebugLog(Mobile m, string message)
+        {
+            if (m.AccessLevel >= AccessLevel.GameMaster)
+                m.SendMessage(1283, message);
+        }
+        
+        #region Class bonus hooks
+        
+        public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
+        {
+        }
+
+        public void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType, ref int damage)
+        {
+            DebugLog(attacker, $"OnSpellDamage::before {damage}");
+            
+            if (attacker is IZuluClassed {ZuluClass: {} attackerClass})
+            {
+                var bonus = attackerClass.Type switch
+                {
+                    ZuluClassType.Warrior => attackerClass.Bonus - 1.0,
+                    ZuluClassType.Mage => attackerClass.Bonus,
+                    _ => 1.0
+                };
+
+                damage = (int)(damage * bonus);
+
+                DebugLog(attacker, $"Changed damage of {spell} by {bonus} (level {attackerClass.Level} {attackerClass.Type})");
+            }
+            
+            if (defender is IZuluClassed {ZuluClass: {} defenderClass})
+            {
+                var bonus = defenderClass.Type switch
+                {
+                    ZuluClassType.Warrior => defenderClass.Bonus,
+                    ZuluClassType.Mage => defenderClass.Bonus - 1.0,
+                    _ => 1.0
+                };
+
+                damage = (int)(damage * bonus);
+
+                DebugLog(defender, $"Changed damage of {spell} by {bonus} (level {defenderClass.Level} {defenderClass.Type})");
+            }
+            
+            DebugLog(attacker, $"OnSpellDamage::after {damage}");
+        }
+
+        public void OnGetCastDelay(Mobile mobile, Spell spell, ref double delay)
+        {
+        }
+
+        public void OnParalysis(Mobile mobile, ref TimeSpan duration, ref bool paralyze)
+        {
+        }
+
+        public void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        {
+        }
+
+        public void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
+        {
+            if (healer is IZuluClassed {ZuluClass: {} cls})
+            {
+                var bonus = cls.Type switch
+                {
+                    ZuluClassType.Warrior when source is Bandage => cls.Bonus,
+                    ZuluClassType.Mage when source is Spell => cls.Bonus,
+                    _ => 1.0
+                };
+
+                healAmount *= bonus;
+
+                DebugLog(healer, $"Increased healing from {source} by {healAmount * cls.Bonus} (level {cls.Level} {cls.Type})");
+            }
+        }
+
+        public void OnBeforeSwing(Mobile attacker, Mobile defender)
+        {
+        }
+
+        public void OnSwing(Mobile attacker, Mobile defender, ref double damageBonus, ref TimeSpan result)
+        {
+        }
+
+        public void OnGetSwingDelay(ref double delayInSeconds, Mobile m)
+        {
+            m.SendAsciiMessage("OnSwing from ZuluClass");
+        }
+
+        public void OnCheckHit(Mobile attacker, Mobile defender, ref bool result)
+        {
+        }
+
+        public void OnMeleeHit(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        {
+        }
+
+        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        {
+        }
+
+        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage)
+        {
+        }
+
+        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
+        {
+        }
+        
+        #endregion
+        
+        #region Unused hooks
+        
+        public void OnIdentified(IEntity entity)
+        {
+        }
+
+        public void OnAdded(IEntity entity)
+        {
+        }
+
+        public void OnRemoved(IEntity entity, IEntity parent)
+        {
+        }
+
+        public void OnBeforeRemoved(IEntity entity, Mobile @from, ref bool canRemove)
+        {
+        }
+        #endregion
     }
 }
