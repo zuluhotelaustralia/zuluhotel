@@ -1,33 +1,30 @@
-using Server.Gumps;
 using Server.Spells;
 
 namespace Server.Items
 {
-    [CustomSpellSchool(CustomSpellSchoolType.Earth)]
-    public class Earthbook : CustomSpellbook
+    public class GustOfAirScroll : EarthSpellScroll
     {
         [Constructible]
-        public Earthbook() : base(0x0EFA)
+        public GustOfAirScroll() : this(1)
         {
-            Name = "Book of the Earth";
-            Hue = 0x48A;
+        }
+
+
+        [Constructible]
+        public GustOfAirScroll(int amount) : base(SpellEntry.GustOfAir, 0x1F32, amount)
+        {
         }
 
         [Constructible]
-        public Earthbook(Serial serial) : base(serial)
+        public GustOfAirScroll(Serial serial) : base(serial)
         {
-        }
-
-        public override void OnOpenSpellbook(Mobile from)
-        {
-            from.SendGump(new EarthbookGump(from, this));
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write(0);
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)

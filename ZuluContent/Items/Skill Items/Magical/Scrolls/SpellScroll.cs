@@ -17,12 +17,11 @@ namespace Server.Items
 
 
         [Constructible]
-        public SpellScroll(SpellEntry spellEntry, int itemId, int amount, int hue = 0x00) : base(itemId)
+        public SpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(itemId)
         {
             Stackable = true;
             Weight = 1.0;
             Amount = amount;
-            Hue = hue;
 
             SpellEntry = spellEntry;
         }

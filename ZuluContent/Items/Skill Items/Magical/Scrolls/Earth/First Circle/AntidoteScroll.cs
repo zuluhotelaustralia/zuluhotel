@@ -20,11 +20,6 @@ namespace Server.Items
         {
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            LabelTo(from, "Antidote");
-        }
-
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);

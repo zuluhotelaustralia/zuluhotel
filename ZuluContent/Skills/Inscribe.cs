@@ -1,86 +1,89 @@
 using System;
 using System.Collections;
+using System.Reflection;
 using Server.Targeting;
 using Server.Items;
+using Server.Spells;
 using static Server.Spells.SpellEntries;
 
 namespace Server.SkillHandlers
 {
     public class Inscribe
-	{
-		public static void Initialize()
-		{
-			SkillInfo.Table[(int)SkillName.Inscribe].Callback = OnUse;
-		}
+    {
+        public static void Initialize()
+        {
+            SkillInfo.Table[(int) SkillName.Inscribe].Callback = OnUse;
+        }
 
-		public static TimeSpan OnUse( Mobile m )
-		{
-			Target target = new InternalTargetSrc();
-			m.Target = target;
-			m.SendAsciiMessage("What would you like to inscribe?");
-			target.BeginTimeout( m, TimeSpan.FromMinutes( 1.0 ) );
+        public static TimeSpan OnUse(Mobile m)
+        {
+            Target target = new InternalTargetSrc();
+            m.Target = target;
+            m.SendAsciiMessage("What would you like to inscribe?");
+            target.BeginTimeout(m, TimeSpan.FromMinutes(1.0));
 
-			return TimeSpan.FromSeconds( 1.0 );
-		}
+            return TimeSpan.FromSeconds(1.0);
+        }
 
-		private static Hashtable m_UseTable = new Hashtable();
+        private static Hashtable m_UseTable = new Hashtable();
 
-		private static void SetUser( BaseBook book, Mobile mob )
-		{
-			m_UseTable[book] = mob;
-		}
+        private static void SetUser(BaseBook book, Mobile mob)
+        {
+            m_UseTable[book] = mob;
+        }
 
-		private static void CancelUser( BaseBook book )
-		{
-			m_UseTable.Remove( book );
-		}
+        private static void CancelUser(BaseBook book)
+        {
+            m_UseTable.Remove(book);
+        }
 
-		public static Mobile GetUser( BaseBook book )
-		{
-			return (Mobile)m_UseTable[book];
-		}
+        public static Mobile GetUser(BaseBook book)
+        {
+            return (Mobile) m_UseTable[book];
+        }
 
-		public static bool IsEmpty( BaseBook book )
-		{
-			foreach ( BookPageInfo page in book.Pages )
-			{
-				foreach ( string line in page.Lines )
-				{
-					if ( line.Trim().Length != 0 )
-						return false;
-				}
-			}
-			return true;
-		}
+        public static bool IsEmpty(BaseBook book)
+        {
+            foreach (BookPageInfo page in book.Pages)
+            {
+                foreach (string line in page.Lines)
+                {
+                    if (line.Trim().Length != 0)
+                        return false;
+                }
+            }
 
-		public static void Copy( BaseBook bookSrc, BaseBook bookDst )
-		{
-			bookDst.Title = bookSrc.Title;
-			bookDst.Author = bookSrc.Author;
+            return true;
+        }
 
-			BookPageInfo[] pagesSrc = bookSrc.Pages;
-			BookPageInfo[] pagesDst = bookDst.Pages;
-			for ( int i = 0; i < pagesSrc.Length && i < pagesDst.Length; i++ )
-			{
-				BookPageInfo pageSrc = pagesSrc[i];
-				BookPageInfo pageDst = pagesDst[i];
+        public static void Copy(BaseBook bookSrc, BaseBook bookDst)
+        {
+            bookDst.Title = bookSrc.Title;
+            bookDst.Author = bookSrc.Author;
 
-				int length = pageSrc.Lines.Length;
-				pageDst.Lines = new string[length];
+            BookPageInfo[] pagesSrc = bookSrc.Pages;
+            BookPageInfo[] pagesDst = bookDst.Pages;
+            for (int i = 0; i < pagesSrc.Length && i < pagesDst.Length; i++)
+            {
+                BookPageInfo pageSrc = pagesSrc[i];
+                BookPageInfo pageDst = pagesDst[i];
 
-				for ( int j = 0; j < length; j++ )
-					pageDst.Lines[j] = pageSrc.Lines[j];
-			}
-		}
+                int length = pageSrc.Lines.Length;
+                pageDst.Lines = new string[length];
 
-		private class InternalTargetSrc : Target
-		{
-			public InternalTargetSrc() :  base ( 3, false, TargetFlags.None )
-			{
-			}
+                for (int j = 0; j < length; j++)
+                    pageDst.Lines[j] = pageSrc.Lines[j];
+            }
+        }
 
-			protected override void OnTarget( Mobile from, object targeted )
-			{
+        private class InternalTargetSrc : Target
+        {
+            public InternalTargetSrc() : base(3, false, TargetFlags.None)
+            {
+            }
+
+            protected override void OnTarget(Mobile from, object targeted)
+            {
                 if (targeted is BaseBook book)
                 {
                     if (book == null)
@@ -98,81 +101,83 @@ namespace Server.SkillHandlers
                         SetUser(book, from);
                     }
                 }
-                else if (targeted is EarthSpellScroll earthScroll)
+                else if (targeted is CustomSpellScroll customScroll)
                 {
-                    Target target = new InternalTargetScrollDst(earthScroll);
+                    Target target = new InternalTargetScrollDst(customScroll);
                     from.Target = target;
                     from.SendAsciiMessage("Select a book to inscribe this to.");
                     target.BeginTimeout(from, TimeSpan.FromMinutes(1.0));
                 }
             }
 
-			protected override void OnTargetCancel( Mobile from, TargetCancelType cancelType )
-			{
-				if ( cancelType == TargetCancelType.Timeout )
-					from.SendLocalizedMessage( 501619 ); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
-			}
-		}
+            protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
+            {
+                if (cancelType == TargetCancelType.Timeout)
+                    from.SendLocalizedMessage(
+                        501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
+            }
+        }
 
-		private class InternalTargetBookDst : Target
-		{
-			private BaseBook m_BookSrc;
+        private class InternalTargetBookDst : Target
+        {
+            private BaseBook m_BookSrc;
 
-			public InternalTargetBookDst( BaseBook bookSrc ) : base ( 3, false, TargetFlags.None )
-			{
-				m_BookSrc = bookSrc;
-			}
+            public InternalTargetBookDst(BaseBook bookSrc) : base(3, false, TargetFlags.None)
+            {
+                m_BookSrc = bookSrc;
+            }
 
-			protected override void OnTarget( Mobile from, object targeted )
-			{
-				if ( m_BookSrc.Deleted )
-					return;
+            protected override void OnTarget(Mobile from, object targeted)
+            {
+                if (m_BookSrc.Deleted)
+                    return;
 
-				BaseBook bookDst = targeted as BaseBook;
+                BaseBook bookDst = targeted as BaseBook;
 
-				if ( bookDst == null )
-					from.SendLocalizedMessage( 1046296 ); // That is not a book
-				else if ( IsEmpty( m_BookSrc ) )
-					from.SendLocalizedMessage( 501611 ); // Can't copy an empty book.
-				else if ( bookDst == m_BookSrc )
-					from.SendLocalizedMessage( 501616 ); // Cannot copy a book onto itself.
-				else if ( !bookDst.Writable )
-					from.SendLocalizedMessage( 501614 ); // Cannot write into that book.
-				else if ( GetUser( bookDst ) != null )
-					from.SendLocalizedMessage( 501621 ); // Someone else is inscribing that item.
-				else
-				{
-					if ( from.CheckTargetSkill( SkillName.Inscribe, bookDst, 0, 50 ) )
-					{
-						Copy( m_BookSrc, bookDst );
+                if (bookDst == null)
+                    from.SendLocalizedMessage(1046296); // That is not a book
+                else if (IsEmpty(m_BookSrc))
+                    from.SendLocalizedMessage(501611); // Can't copy an empty book.
+                else if (bookDst == m_BookSrc)
+                    from.SendLocalizedMessage(501616); // Cannot copy a book onto itself.
+                else if (!bookDst.Writable)
+                    from.SendLocalizedMessage(501614); // Cannot write into that book.
+                else if (GetUser(bookDst) != null)
+                    from.SendLocalizedMessage(501621); // Someone else is inscribing that item.
+                else
+                {
+                    if (from.CheckTargetSkill(SkillName.Inscribe, bookDst, 0, 50))
+                    {
+                        Copy(m_BookSrc, bookDst);
 
-						from.SendLocalizedMessage( 501618 ); // You make a copy of the book.
-						from.PlaySound( 0x249 );
-					}
-					else
-					{
-						from.SendLocalizedMessage( 501617 ); // You fail to make a copy of the book.
-					}
-				}
-			}
+                        from.SendLocalizedMessage(501618); // You make a copy of the book.
+                        from.PlaySound(0x249);
+                    }
+                    else
+                    {
+                        from.SendLocalizedMessage(501617); // You fail to make a copy of the book.
+                    }
+                }
+            }
 
-			protected override void OnTargetCancel( Mobile from, TargetCancelType cancelType )
-			{
-				if ( cancelType == TargetCancelType.Timeout )
-					from.SendLocalizedMessage( 501619 ); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
-			}
+            protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
+            {
+                if (cancelType == TargetCancelType.Timeout)
+                    from.SendLocalizedMessage(
+                        501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
+            }
 
-			protected override void OnTargetFinish( Mobile from )
-			{
-				CancelUser( m_BookSrc );
-			}
-		}
+            protected override void OnTargetFinish(Mobile from)
+            {
+                CancelUser(m_BookSrc);
+            }
+        }
 
         private class InternalTargetScrollDst : Target
         {
-            private SpellScroll m_ScrollSrc;
+            private CustomSpellScroll m_ScrollSrc;
 
-            public InternalTargetScrollDst(SpellScroll scrollSrc) : base(3, false, TargetFlags.None)
+            public InternalTargetScrollDst(CustomSpellScroll scrollSrc) : base(3, false, TargetFlags.None)
             {
                 m_ScrollSrc = scrollSrc;
             }
@@ -182,13 +187,17 @@ namespace Server.SkillHandlers
                 if (m_ScrollSrc.Deleted)
                     return;
 
-                if (targeted is Earthbook earthBook)
+                var scrollSpellSchool = m_ScrollSrc.GetType().GetTypeInfo().GetCustomAttribute<CustomSpellSchool>();
+
+                if (targeted is CustomSpellbook customBook &&
+                    customBook.GetType().GetTypeInfo().GetCustomAttribute<CustomSpellSchool>()?.School ==
+                    scrollSpellSchool?.School)
                 {
-                    if (earthBook.Entries.Contains(GetSpellEntryName(m_ScrollSrc.SpellEntry)))
+                    if (customBook.Entries.Contains(GetSpellEntryName(m_ScrollSrc.SpellEntry)))
                         from.SendAsciiMessage(33, "That spell has already been inscribed.");
-                    else if (from.CheckTargetSkill(SkillName.Inscribe, earthBook, 100, 150))
+                    else if (from.CheckTargetSkill(SkillName.Inscribe, customBook, 100, 150))
                     {
-                        earthBook.Entries.Add(GetSpellEntryName(m_ScrollSrc.SpellEntry));
+                        customBook.AddEntry(m_ScrollSrc.SpellEntry);
                         m_ScrollSrc.Delete();
                         from.SendAsciiMessage(55, "You have successfully inscribed that spell.");
                         from.PlaySound(0x249);
@@ -208,7 +217,8 @@ namespace Server.SkillHandlers
             protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
             {
                 if (cancelType == TargetCancelType.Timeout)
-                    from.SendLocalizedMessage(501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
+                    from.SendLocalizedMessage(
+                        501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
             }
         }
     }

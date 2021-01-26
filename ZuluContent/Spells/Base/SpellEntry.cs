@@ -98,7 +98,7 @@ namespace Server.Spells
         LicheForm = 113,
         Plague = 114,
         Spellbind = 115,
-        
+
         // System
         EtherealMount = 230,
         SpiritSpeak = 269,
@@ -128,7 +128,47 @@ namespace Server.Spells
             var value = entry switch
             {
                 SpellEntry.Antidote => "Antidote",
+                SpellEntry.OwlSight => "Owl Sight",
+                SpellEntry.ShiftingEarth => "Shifting Earth",
+                SpellEntry.SummonMammals => "Summon Mammals",
+                SpellEntry.CallLightning => "Call Lightning",
+                SpellEntry.EarthsBlessing => "Earth Blessing",
+                SpellEntry.EarthPortal => "Earth Portal",
+                SpellEntry.NaturesTouch => "Nature's Touch",
+                SpellEntry.GustOfAir => "Gust of Air",
+                SpellEntry.RisingFire => "Rising Fire",
+                SpellEntry.Shapeshift => "Shapeshift",
+                SpellEntry.IceStrike => "Ice Strike",
+                SpellEntry.EarthSpirit => "Earth Spirit",
+                SpellEntry.FireSpirit => "Flame Spirit",
+                SpellEntry.StormSpirit => "Storm Spirit",
+                SpellEntry.WaterSpirit => "Water Spirit",
                 _ => "None"
+            };
+            return value;
+        }
+
+        public static int GetSpellEntryIndex(SpellEntry entry)
+        {
+            var value = entry switch
+            {
+                SpellEntry.Antidote => 0,
+                SpellEntry.OwlSight => 1,
+                SpellEntry.ShiftingEarth => 2,
+                SpellEntry.SummonMammals => 3,
+                SpellEntry.CallLightning => 4,
+                SpellEntry.EarthsBlessing => 5,
+                SpellEntry.EarthPortal => 6,
+                SpellEntry.NaturesTouch => 7,
+                SpellEntry.GustOfAir => 8,
+                SpellEntry.RisingFire => 9,
+                SpellEntry.Shapeshift => 10,
+                SpellEntry.IceStrike => 11,
+                SpellEntry.EarthSpirit => 12,
+                SpellEntry.FireSpirit => 13,
+                SpellEntry.StormSpirit => 14,
+                SpellEntry.WaterSpirit => 15,
+                _ => -1
             };
             return value;
         }

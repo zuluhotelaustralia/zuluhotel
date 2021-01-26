@@ -1,84 +1,13 @@
-using System;
-using System.Collections.Generic;
 using Scripts.Zulu.Spells.Earth;
 using Server.Items;
-using Server.Network;
-using Server.Spells.Fourth;
-using Server.Spells.Seventh;
-using Server.Prompts;
 using Server.Spells;
 
 namespace Server.Gumps
 {
-    public class EarthbookGump : Gump
+    public class EarthbookGump : CustomSpellbookGump
     {
-        private Earthbook m_Book;
-
-        public Earthbook Book
+        public EarthbookGump(Mobile from, Earthbook book) : base(from, book, 0x89B)
         {
-            get { return m_Book; }
-        }
-
-        public string GetName(string name)
-        {
-            if (name == null || (name = name.Trim()).Length <= 0)
-                return "(indescript)";
-
-            return name;
-        }
-
-        private void AddBackground()
-        {
-            AddPage(0);
-
-            // Background image
-            AddImage(100, 10, 2203);
-
-            // Circle 1 spells
-            AddHtml(130, 22, 100, 18, "Circle 1 Spells", false, false);
-
-            // Circle 2 spells
-            AddHtml(290, 22, 100, 18, "Circle 2 Spells", false, false);
-        }
-
-        private void AddIndex()
-        {
-            // Index
-            AddPage(1);
-
-            // List of entries
-            List<string> entries = m_Book.Entries;
-
-            for (int i = 0; i < 16; ++i)
-            {
-                string desc;
-                int hue;
-
-                if (i < entries.Count)
-                {
-                    desc = GetName(entries[i]);
-                    hue = 0;
-                }
-                else
-                {
-                    desc = "Empty";
-                    hue = 0;
-                }
-
-                // Use spell button
-                AddButton(130 + i / 8 * 160, 50 + i % 8 * 20, 2103, 2104, 2 + i, GumpButtonType.Reply, 0);
-
-                // Description label
-                AddLabelCropped(145 + i / 8 * 160, 45 + i % 8 * 20, 115, 17, hue, desc);
-            }
-        }
-
-        public EarthbookGump(Mobile from, Earthbook book) : base(150, 200)
-        {
-            m_Book = book;
-
-            AddBackground();
-            AddIndex();
         }
 
         public static bool HasSpell(Mobile from, SpellEntry spellId)
@@ -88,32 +17,91 @@ namespace Server.Gumps
             return book != null && book.HasSpell(spellId);
         }
 
-        public override void OnResponse(NetState state, RelayInfo info)
+        public override void OnSpellClick(Mobile from, int buttonID)
         {
-            Mobile from = state.Mobile;
-
-            if (m_Book.Deleted || !from.InRange(m_Book.GetWorldLocation(), 1))
+            switch (buttonID)
             {
-                m_Book.Openers.Remove(from);
-                return;
-            }
-
-            var buttonID = info.ButtonID;
-            buttonID -= 2;
-
-            if (buttonID >= 0 && buttonID < m_Book.Entries.Count)
-            {
-                switch (buttonID)
+                case 0:
                 {
-                    case 0:
-                    {
-                        new AntidoteSpell(from, m_Book).Cast();
-                        break;
-                    }
+                    new AntidoteSpell(from, Book).Cast();
+                    break;
+                }
+                case 1:
+                {
+                    new OwlSightSpell(from, Book).Cast();
+                    break;
+                }
+                case 2:
+                {
+                    new ShiftingEarthSpell(from, Book).Cast();
+                    break;
+                }
+                case 3:
+                {
+                    new SummonMammalsSpell(from, Book).Cast();
+                    break;
+                }
+                case 4:
+                {
+                    new CallLightningSpell(from, Book).Cast();
+                    break;
+                }
+                case 5:
+                {
+                    new EarthsBlessingSpell(from, Book).Cast();
+                    break;
+                }
+                case 6:
+                {
+                    new EarthPortalSpell(from, Book).Cast();
+                    break;
+                }
+                case 7:
+                {
+                    new NaturesTouchSpell(from, Book).Cast();
+                    break;
+                }
+                case 8:
+                {
+                    new GustOfAirSpell(from, Book).Cast();
+                    break;
+                }
+                case 9:
+                {
+                    new RisingFireSpell(from, Book).Cast();
+                    break;
+                }
+                case 10:
+                {
+                    new ShapeshiftSpell(from, Book).Cast();
+                    break;
+                }
+                case 11:
+                {
+                    new IceStrikeSpell(from, Book).Cast();
+                    break;
+                }
+                case 12:
+                {
+                    new EarthSpiritSpell(from, Book).Cast();
+                    break;
+                }
+                case 13:
+                {
+                    new FireSpiritSpell(from, Book).Cast();
+                    break;
+                }
+                case 14:
+                {
+                    new StormSpiritSpell(from, Book).Cast();
+                    break;
+                }
+                case 15:
+                {
+                    new WaterSpiritSpell(from, Book).Cast();
+                    break;
                 }
             }
-            
-            m_Book.Openers.Remove(from);
         }
     }
 }
