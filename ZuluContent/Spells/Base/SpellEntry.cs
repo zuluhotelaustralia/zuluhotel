@@ -120,4 +120,17 @@ namespace Server.Spells
         StormSpirit = 614,
         WaterSpirit = 615
     }
+
+    public record SpellEntries
+    {
+        public static string GetSpellEntryName(SpellEntry entry)
+        {
+            var value = entry switch
+            {
+                SpellEntry.Antidote => "Antidote",
+                _ => "None"
+            };
+            return value;
+        }
+    }
 }

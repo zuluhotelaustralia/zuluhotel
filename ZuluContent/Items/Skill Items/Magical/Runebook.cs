@@ -108,11 +108,11 @@ namespace Server.Items
 
 
 		[Constructible]
-public Runebook( int maxCharges ) : base( 0xEFA )
+        public Runebook( int maxCharges ) : base( 0x22C5 )
 		{
 			Weight = 3.0;
 			LootType = LootType.Blessed;
-			Hue = 0x461;
+			Hue = 0x00;
 
 			Layer = Layer.OneHanded;
 
@@ -127,7 +127,7 @@ public Runebook( int maxCharges ) : base( 0xEFA )
 
 
 		[Constructible]
-public Runebook() : this( 6 )
+        public Runebook() : this( 6 )
 		{
 		}
 
@@ -158,7 +158,7 @@ public Runebook() : this( 6 )
 		}
 
 		[Constructible]
-public Runebook( Serial serial ) : base( serial )
+        public Runebook( Serial serial ) : base( serial )
 		{
 		}
 
@@ -171,7 +171,7 @@ public Runebook( Serial serial ) : base( serial )
 		{
 			base.Serialize( writer );
 
-			writer.Write( (int) 3 );
+			writer.Write(3);
 
 			writer.Write( (byte) m_Quality );
 

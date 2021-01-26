@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Server.Targeting;
 using Server.Items;
+using static Server.Spells.SpellEntries;
 
 namespace Server.SkillHandlers
 {
@@ -16,7 +17,7 @@ namespace Server.SkillHandlers
 		{
 			Target target = new InternalTargetSrc();
 			m.Target = target;
-			m.SendLocalizedMessage( 1046295 ); // Target the book you wish to copy.
+			m.SendAsciiMessage("What would you like to inscribe?");
 			target.BeginTimeout( m, TimeSpan.FromMinutes( 1.0 ) );
 
 			return TimeSpan.FromSeconds( 1.0 );
@@ -80,22 +81,31 @@ namespace Server.SkillHandlers
 
 			protected override void OnTarget( Mobile from, object targeted )
 			{
-				BaseBook book = targeted as BaseBook;
-				if ( book == null )
-					from.SendLocalizedMessage( 1046296 ); // That is not a book
-				else if ( IsEmpty( book ) )
-					from.SendLocalizedMessage( 501611 ); // Can't copy an empty book.
-				else if ( GetUser( book ) != null )
-					from.SendLocalizedMessage( 501621 ); // Someone else is inscribing that item.
-				else
-				{
-					Target target = new InternalTargetDst( book );
-					from.Target = target;
-					from.SendLocalizedMessage( 501612 ); // Select a book to copy this to.
-					target.BeginTimeout( from, TimeSpan.FromMinutes( 1.0 ) );
-					SetUser( book, from );
-				}
-			}
+                if (targeted is BaseBook book)
+                {
+                    if (book == null)
+                        from.SendLocalizedMessage(1046296); // That is not a book
+                    else if (IsEmpty(book))
+                        from.SendLocalizedMessage(501611); // Can't copy an empty book.
+                    else if (GetUser(book) != null)
+                        from.SendLocalizedMessage(501621); // Someone else is inscribing that item.
+                    else
+                    {
+                        Target target = new InternalTargetBookDst(book);
+                        from.Target = target;
+                        from.SendLocalizedMessage(501612); // Select a book to copy this to.
+                        target.BeginTimeout(from, TimeSpan.FromMinutes(1.0));
+                        SetUser(book, from);
+                    }
+                }
+                else if (targeted is EarthSpellScroll earthScroll)
+                {
+                    Target target = new InternalTargetScrollDst(earthScroll);
+                    from.Target = target;
+                    from.SendAsciiMessage("Select a book to inscribe this to.");
+                    target.BeginTimeout(from, TimeSpan.FromMinutes(1.0));
+                }
+            }
 
 			protected override void OnTargetCancel( Mobile from, TargetCancelType cancelType )
 			{
@@ -104,11 +114,11 @@ namespace Server.SkillHandlers
 			}
 		}
 
-		private class InternalTargetDst : Target
+		private class InternalTargetBookDst : Target
 		{
 			private BaseBook m_BookSrc;
 
-			public InternalTargetDst( BaseBook bookSrc ) : base ( 3, false, TargetFlags.None )
+			public InternalTargetBookDst( BaseBook bookSrc ) : base ( 3, false, TargetFlags.None )
 			{
 				m_BookSrc = bookSrc;
 			}
@@ -157,5 +167,49 @@ namespace Server.SkillHandlers
 				CancelUser( m_BookSrc );
 			}
 		}
-	}
+
+        private class InternalTargetScrollDst : Target
+        {
+            private SpellScroll m_ScrollSrc;
+
+            public InternalTargetScrollDst(SpellScroll scrollSrc) : base(3, false, TargetFlags.None)
+            {
+                m_ScrollSrc = scrollSrc;
+            }
+
+            protected override void OnTarget(Mobile from, object targeted)
+            {
+                if (m_ScrollSrc.Deleted)
+                    return;
+
+                if (targeted is Earthbook earthBook)
+                {
+                    if (earthBook.Entries.Contains(GetSpellEntryName(m_ScrollSrc.SpellEntry)))
+                        from.SendAsciiMessage(33, "That spell has already been inscribed.");
+                    else if (from.CheckTargetSkill(SkillName.Inscribe, earthBook, 100, 150))
+                    {
+                        earthBook.Entries.Add(GetSpellEntryName(m_ScrollSrc.SpellEntry));
+                        m_ScrollSrc.Delete();
+                        from.SendAsciiMessage(55, "You have successfully inscribed that spell.");
+                        from.PlaySound(0x249);
+                    }
+                    else
+                    {
+                        m_ScrollSrc.Delete();
+                        from.SendAsciiMessage(33, "You fail to inscribe that scroll.");
+                    }
+                }
+                else
+                {
+                    from.SendAsciiMessage(33, "You cannot inscribe to that.");
+                }
+            }
+
+            protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
+            {
+                if (cancelType == TargetCancelType.Timeout)
+                    from.SendLocalizedMessage(501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
+            }
+        }
+    }
 }
