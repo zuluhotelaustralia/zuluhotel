@@ -98,7 +98,7 @@ namespace Server.Spells
         LicheForm = 113,
         Plague = 114,
         Spellbind = 115,
-        
+
         // System
         EtherealMount = 230,
         SpiritSpeak = 269,
