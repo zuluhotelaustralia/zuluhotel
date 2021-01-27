@@ -2,7 +2,6 @@
 
 namespace Server.Items
 {
-    [CustomSpellSchool(CustomSpellSchoolType.Earth)]
     public class EarthSpellScroll : CustomSpellScroll
     {
         [Constructible]

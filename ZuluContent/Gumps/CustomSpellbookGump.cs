@@ -49,18 +49,18 @@ namespace Server.Gumps
             AddPage(1);
 
             // List of entries
-            List<string> entries = m_Book.Entries;
+            ulong entries = m_Book.Entries;
 
             int negativeOffset = 0;
 
-            for (int i = 0; i < entries.Count; ++i)
+            for (int i = 0; i < 16; ++i)
             {
                 if (i % 8 == 0)
                     negativeOffset = 0;
 
-                if (!string.IsNullOrEmpty(entries[i]))
+                if ((entries & ((ulong) 1 << i)) != 0)
                 {
-                    var desc = GetName(entries[i]);
+                    var desc = GetName(SpellRegistry.GetInfo((SpellEntry) m_Book.BookOffset + i).Name);
                     var hue = 0;
 
                     // Use spell button
@@ -100,15 +100,15 @@ namespace Server.Gumps
             var buttonID = info.ButtonID;
             buttonID -= 2;
 
-            if (buttonID >= 0 && buttonID < m_Book.Entries.Count)
+            if (buttonID >= 0 && buttonID < 16)
             {
-                OnSpellClick(from, buttonID);
+                OnSpellClick(from, (SpellEntry) (m_Book.BookOffset + buttonID));
             }
 
             m_Book.Openers.Remove(from);
         }
 
-        public virtual void OnSpellClick(Mobile from, int buttonID)
+        public virtual void OnSpellClick(Mobile from, SpellEntry entry)
         {
         }
     }

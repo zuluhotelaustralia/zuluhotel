@@ -64,7 +64,7 @@ namespace Server.Spells
                 (caster, scroll) => (Spell) null,
                 new SpellInfo()
             );
-            
+
             Register(
                 SpellEntry.SpiritSpeak,
                 (caster, _) => new SpiritSpeak.SpiritSpeakSpell(caster),
@@ -74,7 +74,7 @@ namespace Server.Spells
                     Mantra = string.Empty
                 }
             );
-            
+
             Register(
                 SpellEntry.EtherealMount,
                 (caster, _) => (Spell) null,
@@ -2114,7 +2114,7 @@ namespace Server.Spells
                 new SpellInfo
                 {
                     Name = "Gust Of Air",
-                    Mantra = "Gusto Do Ar",
+                    Mantra = "Gust Do Ar",
                     Action = 230,
                     AllowTown = true,
                     LeftHandEffect = 9022,
@@ -2206,7 +2206,7 @@ namespace Server.Spells
                 new SpellInfo
                 {
                     Name = "Earth Spirit",
-                    Mantra = "Chame O Terra Elemental",
+                    Mantra = "Chame A Terra Elemental",
                     Action = 269,
                     AllowTown = true,
                     LeftHandEffect = 9010,
@@ -2252,7 +2252,7 @@ namespace Server.Spells
                 new SpellInfo
                 {
                     Name = "Storm Spirit",
-                    Mantra = "Chame O Fogo Elemental",
+                    Mantra = "Chame O Ar Elemental",
                     Action = 269,
                     AllowTown = true,
                     LeftHandEffect = 9010,
@@ -2275,7 +2275,7 @@ namespace Server.Spells
                 new SpellInfo
                 {
                     Name = "Water Spirit",
-                    Mantra = "Chame O Agua Elemental",
+                    Mantra = "Chame A Agua Elemental",
                     Action = 269,
                     AllowTown = true,
                     LeftHandEffect = 9010,

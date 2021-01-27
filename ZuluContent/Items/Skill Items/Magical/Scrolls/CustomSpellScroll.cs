@@ -1,5 +1,4 @@
 ﻿using Server.Spells;
-using static Server.Spells.SpellEntries;
 
 namespace Server.Items
 {
@@ -10,7 +9,7 @@ namespace Server.Items
             amount)
         {
             Hue = hue;
-            Name = GetSpellEntryName(spellEntry);
+            Name = SpellRegistry.GetInfo(spellEntry).Name;
         }
 
         [Constructible]

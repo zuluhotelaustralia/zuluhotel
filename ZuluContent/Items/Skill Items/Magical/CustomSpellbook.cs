@@ -5,14 +5,12 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Spells;
-using static Server.Spells.SpellEntries;
 
 namespace Server.Items
 {
     public class CustomSpellbook : Item, ISecurable
     {
-        private List<string> m_Entries;
-        private int m_DefaultIndex;
+        private ulong m_Entries;
         private SecureLevel m_Level;
 
         private List<Mobile> m_Openers = new List<Mobile>();
@@ -39,40 +37,35 @@ namespace Server.Items
 
             Layer = Layer.OneHanded;
 
-            m_Entries = new List<string>(new string[16]);
-
-            m_DefaultIndex = -1;
+            m_Entries = (ulong) 0;
 
             m_Level = SecureLevel.CoOwners;
         }
 
 
-        public List<string> Entries
+        [CommandProperty(AccessLevel.GameMaster)]
+        public ulong Entries
         {
-            get { return m_Entries; }
-        }
-
-        public string Default
-        {
-            get
-            {
-                if (m_DefaultIndex >= 0 && m_DefaultIndex < m_Entries.Count)
-                    return m_Entries[m_DefaultIndex];
-
-                return null;
-            }
+            get => m_Entries;
             set
             {
-                if (value == null)
-                    m_DefaultIndex = -1;
-                else
-                    m_DefaultIndex = m_Entries.IndexOf(value);
+                if (m_Entries != value)
+                {
+                    m_Entries = value;
+                }
             }
         }
 
         [Constructible]
         public CustomSpellbook(Serial serial) : base(serial)
         {
+        }
+
+        public bool HasSpell(SpellEntry spellId)
+        {
+            spellId -= BookOffset;
+
+            return spellId >= 0 && (int) spellId < BookCount && (m_Entries & ((ulong) 1 << (int) spellId)) != 0;
         }
 
         public override bool AllowEquippedCast(Mobile from)
@@ -88,12 +81,7 @@ namespace Server.Items
 
             writer.Write((int) m_Level);
 
-            writer.Write(m_Entries.Count);
-
-            for (int i = 0; i < m_Entries.Count; ++i)
-                writer.Write(m_Entries[i]);
-
-            writer.Write(m_DefaultIndex);
+            writer.Write(m_Entries);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -109,24 +97,78 @@ namespace Server.Items
                 case 0:
                 {
                     m_Level = (SecureLevel) reader.ReadInt();
-                    int count = reader.ReadInt();
 
-                    m_Entries = new List<string>(new string[count]);
-
-                    for (int i = 0; i < count; ++i)
-                        m_Entries[i] = reader.ReadString();
-
-                    m_DefaultIndex = reader.ReadInt();
+                    m_Entries = reader.ReadULong();
 
                     break;
                 }
             }
         }
 
-        public void AddEntry(SpellEntry entry)
+        public virtual int BookOffset
         {
-            var entryIndex = GetSpellEntryIndex(entry);
-            m_Entries[entryIndex] = GetSpellEntryName(entry);
+            get { return 0; }
+        }
+
+        public virtual int BookCount
+        {
+            get { return 16; }
+        }
+
+        public virtual SpellCircle SpellbookCircle
+        {
+            get => 0;
+        }
+
+        public static SpellCircle GetCircleForSpell(SpellEntry spellEntry)
+        {
+            return SpellRegistry.GetInfo(spellEntry).Circle;
+        }
+
+        public bool CanAddEntry(Mobile from, CustomSpellScroll scroll)
+        {
+            if (scroll.Amount == 1)
+            {
+                SpellCircle circle = GetCircleForSpell(scroll.SpellEntry);
+
+                if (circle != SpellbookCircle)
+                    return false;
+
+                if (HasSpell(scroll.SpellEntry))
+                {
+                    from.SendLocalizedMessage(500179); // That spell is already present in that spellbook.
+                    return false;
+                }
+
+                int val = (int) scroll.SpellEntry - BookOffset;
+
+                if (val >= 0 && val < BookCount)
+                {
+                    m_Entries |= (ulong) 1 << val;
+
+                    scroll.Delete();
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        public void AddEntry(CustomSpellScroll scroll)
+        {
+            if (scroll.Amount == 1)
+            {
+                int val = (int) scroll.SpellEntry - BookOffset;
+
+                if (val >= 0 && val < BookCount)
+                {
+                    m_Entries |= (ulong) 1 << val;
+
+                    scroll.Delete();
+                }
+            }
         }
 
         public bool IsOpen(Mobile toCheck)
@@ -207,14 +249,7 @@ namespace Server.Items
             if (book == null)
                 return;
 
-            book.m_Entries = new List<string>(16);
-
-            for (int i = 0; i < m_Entries.Count; i++)
-            {
-                string entry = m_Entries[i];
-
-                book.m_Entries[i] = entry;
-            }
+            book.m_Entries = m_Entries;
         }
 
         public bool CheckAccess(Mobile m)

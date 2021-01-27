@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Reflection;
 using Server.Targeting;
 using Server.Items;
-using Server.Spells;
-using static Server.Spells.SpellEntries;
 
 namespace Server.SkillHandlers
 {
@@ -86,9 +83,7 @@ namespace Server.SkillHandlers
             {
                 if (targeted is BaseBook book)
                 {
-                    if (book == null)
-                        from.SendLocalizedMessage(1046296); // That is not a book
-                    else if (IsEmpty(book))
+                    if (IsEmpty(book))
                         from.SendLocalizedMessage(501611); // Can't copy an empty book.
                     else if (GetUser(book) != null)
                         from.SendLocalizedMessage(501621); // Someone else is inscribing that item.
@@ -107,6 +102,10 @@ namespace Server.SkillHandlers
                     from.Target = target;
                     from.SendAsciiMessage("Select a book to inscribe this to.");
                     target.BeginTimeout(from, TimeSpan.FromMinutes(1.0));
+                }
+                else
+                {
+                    from.SendAsciiMessage(33, "That is not a valid selection.");
                 }
             }
 
@@ -187,18 +186,14 @@ namespace Server.SkillHandlers
                 if (m_ScrollSrc.Deleted)
                     return;
 
-                var scrollSpellSchool = m_ScrollSrc.GetType().GetTypeInfo().GetCustomAttribute<CustomSpellSchool>();
-
-                if (targeted is CustomSpellbook customBook &&
-                    customBook.GetType().GetTypeInfo().GetCustomAttribute<CustomSpellSchool>()?.School ==
-                    scrollSpellSchool?.School)
+                if (targeted is CustomSpellbook customBook)
                 {
-                    if (customBook.Entries.Contains(GetSpellEntryName(m_ScrollSrc.SpellEntry)))
-                        from.SendAsciiMessage(33, "That spell has already been inscribed.");
-                    else if (from.CheckTargetSkill(SkillName.Inscribe, customBook, 100, 150))
+                    if (!customBook.CanAddEntry(from, m_ScrollSrc))
+                        return;
+
+                    if (from.CheckTargetSkill(SkillName.Inscribe, customBook, 100, 150))
                     {
-                        customBook.AddEntry(m_ScrollSrc.SpellEntry);
-                        m_ScrollSrc.Delete();
+                        customBook.AddEntry(m_ScrollSrc);
                         from.SendAsciiMessage(55, "You have successfully inscribed that spell.");
                         from.PlaySound(0x249);
                     }
