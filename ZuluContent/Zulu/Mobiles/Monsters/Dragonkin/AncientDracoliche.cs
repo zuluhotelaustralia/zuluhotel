@@ -52,7 +52,7 @@ namespace Server.Mobiles
                 BaseSoundID = 362,
                 Body = 104,
                 ClassLevel = 5,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of an Ancient Dracoliche",
                 CreatureType = CreatureType.Dragonkin,
                 Dex = 175,

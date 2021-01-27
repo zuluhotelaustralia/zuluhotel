@@ -158,7 +158,7 @@ namespace Server.Mobiles
         public int ProvokeSkillOverride { get; init; }
         public bool SaySpellMantra { get; init; }
         public List<Type> PreferredSpells { get; init; }
-        public SpecName ClassSpec { get; init; }
+        public ZuluClassType ClassType { get; init; }
         public int ClassLevel { get; init; }
         public CreatureType CreatureType { get; init; }
         public HideType HideType { get; init; }

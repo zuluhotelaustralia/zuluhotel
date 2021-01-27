@@ -53,12 +53,12 @@ namespace Scripts.Zulu.Spells.Necromancy
             // TODO: Spell graphical and sound effects
 
             Caster.DoHarmful(m);
-            //a spec 4 mage with 130.0 spirit speak will instakill anyone with less than ~91 hp
+            //a zuluClass 4 mage with 130.0 spirit speak will instakill anyone with less than ~91 hp
             // if they have more than that they get a chance to resist and take half damage, otherwise
             // they take 90% of the instakill threshhold as damage
             var power = Caster.Skills[DamageSkill].Value / 3;
-            if (Spec.GetSpec(Caster).SpecName == SpecName.Mage && Spec.GetSpec(Caster).SpecLevel != 0)
-                power *= Spec.GetSpec(Caster).Bonus;
+            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage && ZuluClass.GetClass(Caster).Level != 0)
+                power *= ZuluClass.GetClass(Caster).Bonus;
 
             var safetymargin = power * 0.25;
             power -= safetymargin;

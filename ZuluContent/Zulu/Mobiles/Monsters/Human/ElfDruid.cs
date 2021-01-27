@@ -47,7 +47,7 @@ namespace Server.Mobiles
                 AiType = AIType.AI_Mage /* elfspellkillpcs */,
                 Body = 0x191,
                 ClassLevel = 2,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of an Elf Druid",
                 CreatureType = CreatureType.Human,
                 DamageMax = 40,

@@ -38,7 +38,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x03DF,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Ranger,
+                ClassType = ZuluClassType.Ranger,
                 CorpseNameOverride = "corpse of King of Nujelm",
                 CreatureType = CreatureType.Human,
                 DamageMax = 57,

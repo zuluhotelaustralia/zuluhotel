@@ -50,7 +50,7 @@ namespace Server.Mobiles
                 CanFly = true,
                 CanSwim = true,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of The Rainbow Wisp",
                 CreatureType = CreatureType.Elemental,
                 DamageMax = 66,

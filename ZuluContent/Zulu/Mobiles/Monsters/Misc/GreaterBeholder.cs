@@ -49,7 +49,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x16,
                 ClassLevel = 6,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of Greater Beholder",
                 DamageMax = 34,
                 DamageMin = 14,

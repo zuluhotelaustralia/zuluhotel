@@ -11,11 +11,11 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Mobiles
 {
-    public partial class BaseCreature : Mobile, IEnchanted
+    public partial class BaseCreature : Mobile, IEnchanted, IZuluClassed
     {
-        public EnchantmentDictionary Enchantments { get; set; } = new EnchantmentDictionary();
+        public EnchantmentDictionary Enchantments { get; } = new();
 
-        private Spec m_Spec;
+        private ZuluClass m_ZuluClass;
 
         public virtual CreatureProperties InitProperties
         {
@@ -148,21 +148,21 @@ namespace Server.Mobiles
         }
 
 
-        public virtual Spec Spec
+        public virtual ZuluClass ZuluClass
         {
             get
             {
-                if (m_Spec == null)
+                if (m_ZuluClass == null)
                 {
-                    m_Spec = new Spec(this);
+                    m_ZuluClass = new ZuluClass(this);
                     if (InitProperties != null)
                     {
-                        m_Spec.SpecName = InitProperties.ClassSpec;
-                        m_Spec.SpecLevel = InitProperties.ClassLevel;
+                        m_ZuluClass.Type = InitProperties.ClassType;
+                        m_ZuluClass.Level = InitProperties.ClassLevel;
                     }
                 }
 
-                return m_Spec;
+                return m_ZuluClass;
             }
         }
 

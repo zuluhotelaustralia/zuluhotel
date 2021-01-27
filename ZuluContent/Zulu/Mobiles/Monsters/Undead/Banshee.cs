@@ -45,7 +45,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 310,
                 ClassLevel = 6,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of a banshee",
                 CreatureType = CreatureType.Undead,
                 DamageMax = 40,

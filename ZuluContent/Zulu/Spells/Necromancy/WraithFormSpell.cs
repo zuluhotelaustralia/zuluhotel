@@ -198,7 +198,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
                     m.FixedParticles(0x374a, 10, 30, 5052, EffectLayer.LeftFoot);
                     m.PlaySound(0x1fa);
-                    //m.Damage( m_Damage, m_Caster, ElementalType.Necro );  //about 12 at spec 4
+                    //m.Damage( m_Damage, m_Caster, ElementalType.Necro );  //about 12 at zuluClass 4
                     SpellHelper.Damage(m_Damage, m, m_Caster, m_Spell, TimeSpan.Zero);
 
                     if (m_Caster.Mana + m_Damage > m_Caster.Int)

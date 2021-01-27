@@ -48,7 +48,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x190,
                 ClassLevel = 2,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of a Dark-Elf Necromancer",
                 CreatureType = CreatureType.Human,
                 DamageMax = 40,

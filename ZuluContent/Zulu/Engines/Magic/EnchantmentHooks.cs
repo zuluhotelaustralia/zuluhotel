@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Scripts.Zulu.Engines.Classes;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -61,7 +62,7 @@ namespace ZuluContent.Zulu.Engines.Magic
                 .FirstOrDefault()?.Priority ?? int.MaxValue;
         }
 
-        private static IOrderedEnumerable<IEnchantmentValue> OrderByPriority(this IEnumerable<IEnchantmentValue> values,
+        private static IOrderedEnumerable<IEnchantmentHook> OrderByPriority(this IEnumerable<IEnchantmentHook> values,
             string methodName)
         {
             return values.OrderBy(kv =>
@@ -89,15 +90,20 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public static void FireHook(this Mobile m, Expression<Action<IEnchantmentHook>> action)
         {
-            var values = m.Items
+            var hooks = new List<IEnchantmentHook>(
+                m.Items
                 .OfType<BaseEquippableItem>()
                 .SelectMany(e => e.Enchantments.Values.Values)
-                .ToList();
+                .ToList()
+            );
 
             if (m is IEnchanted enchanted) 
-                values.AddRange(enchanted.Enchantments.Values.Values);
+                hooks.AddRange(enchanted.Enchantments.Values.Values);
+            
+            if(m is IZuluClassed {ZuluClass: { }} classed)
+                hooks.Add(classed.ZuluClass);
 
-            Fire(values, action);
+            Fire(hooks, action);
         }
         
         public static void FireHook(this IEnchanted enchanted, Expression<Action<IEnchantmentHook>> action)
@@ -110,7 +116,7 @@ namespace ZuluContent.Zulu.Engines.Magic
             Fire(dictionary.Values.Values, action);
         }
 
-        private static void Fire(IEnumerable<IEnchantmentValue> values, Expression<Action<IEnchantmentHook>> expr)
+        private static void Fire(IEnumerable<IEnchantmentHook> values, Expression<Action<IEnchantmentHook>> expr)
         {
             var action = GetDelegate(expr);
             var methodCallExpr = (MethodCallExpression)expr.Body;
@@ -149,7 +155,6 @@ namespace ZuluContent.Zulu.Engines.Magic
 
             if (spellReflectHook != null)
                 action(spellReflectHook);
-
         }
 
         public static IEnumerable<TResult> FireHook<TResult>(

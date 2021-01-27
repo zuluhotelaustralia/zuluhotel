@@ -24,12 +24,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             set => m_Value = value;
         }
 
-        public override void OnSpellDamage(Mobile attacker, Mobile defender, SpellCircle circle, ElementalType damageType, ref int damage)
+        public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
+            ref int damage)
         {
             if (damageType == ElementalType.Air)
             {
-                if (damageType == ElementalType.Earth)
-                    damage -= (int)(damage * ((double)Value / 100));
+                damage -= (int)(damage * ((double)Value / 100));
             }
                 
         }

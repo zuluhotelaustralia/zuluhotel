@@ -49,7 +49,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x55,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of an Ophidian Elder",
                 CreatureType = CreatureType.Ophidian,
                 DamageMax = 30,

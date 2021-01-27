@@ -57,9 +57,9 @@ namespace Scripts.Zulu.Spells.Necromancy
             double strmod = Caster.RawStr / 2;
             double intmod = Caster.RawInt * 2;
 
-            if (Spec.GetSpec(Caster).SpecName == SpecName.Mage)
+            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage)
             {
-                var bonus = Spec.GetSpec(Caster).Bonus;
+                var bonus = ZuluClass.GetClass(Caster).Bonus;
                 dexmod /= bonus;
                 strmod /= bonus;
                 intmod *= bonus;

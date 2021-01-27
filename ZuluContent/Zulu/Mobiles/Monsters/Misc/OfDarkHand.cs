@@ -37,7 +37,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x190,
                 ClassLevel = 6,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of <random> of the Dark Hand",
                 DamageMax = 35,
                 DamageMin = 10,

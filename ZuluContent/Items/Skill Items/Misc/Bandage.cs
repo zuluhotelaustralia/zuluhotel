@@ -279,7 +279,7 @@ public Bandage( Serial serial ) : base( serial )
 
 					double toHeal = min + Utility.RandomDouble() * (max - min);
 
-                    m_Healer.FireHook(h => h.OnHeal(m_Healer, m_Patient, ref toHeal));
+                    m_Healer.FireHook(h => h.OnHeal(m_Healer, m_Patient, this, ref toHeal));
 
                     if ( m_Patient.Body.IsMonster || m_Patient.Body.IsAnimal )
 						toHeal += m_Patient.HitsMax / 100;

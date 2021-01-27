@@ -35,7 +35,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x56,
                 ClassLevel = 3,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of an Ophidian Defender",
                 CreatureType = CreatureType.Ophidian,
                 DamageMax = 44,

@@ -196,8 +196,8 @@ namespace Server.Spells
 
             var skill = caster.Skills[SkillName.Magery].Value / 130.0;
             var stat = caster.Int / 130.0;
-            var spec = caster is PlayerMobile mobile && mobile.Spec.SpecName == SpecName.Mage
-                ? mobile.Spec.Bonus
+            var spec = caster is PlayerMobile mobile && mobile.ZuluClass.Type == ZuluClassType.Mage
+                ? mobile.ZuluClass.Bonus
                 : 1.0;
 
             return 2 + 0.4 * skill + 0.3 * stat + 0.3 * spec;
@@ -710,7 +710,7 @@ namespace Server.Spells
             DFAlgorithm dfa
         )
         {
-            defender.FireHook(h => h.OnSpellDamage(attacker, defender, spell.Circle, damageType, ref damage));
+            defender.FireHook(h => h.OnSpellDamage(attacker, defender, spell, damageType, ref damage));
 
             WeightOverloading.DFA = dfa;
 

@@ -28,7 +28,7 @@ namespace Server.Mobiles
 
     #endregion
 
-    public partial class PlayerMobile : Mobile
+    public partial class PlayerMobile : Mobile, IZuluClassed
     {
         private class CountAndTimeStamp
         {
@@ -811,6 +811,9 @@ namespace Server.Mobiles
         }
 
         #region [Zulu] Resistances
+        
+        public EnchantmentDictionary Enchantments { get; } = new();
+
 
         public int GetResistance(ElementalType type)
         {
@@ -1655,14 +1658,6 @@ namespace Server.Mobiles
 
         public override void OnKillsChange(int oldValue)
         {
-            if (Young && Kills > oldValue)
-            {
-                Account acc = Account as Account;
-
-                if (acc != null)
-                    acc.RemoveYoungStatus(0);
-            }
-
             InvalidateMyRunUO();
         }
 
@@ -1693,14 +1688,7 @@ namespace Server.Mobiles
 
         public override void OnSkillChange(SkillName skill, double oldBase)
         {
-            if (Young && SkillsTotal >= 4500)
-            {
-                Account acc = Account as Account;
-
-                if (acc != null)
-                    acc.RemoveYoungStatus(
-                        1019036); // You have successfully obtained a respectable skill level, and have outgrown your status as a young player!
-            }
+            ZuluClass?.ComputeClass();
 
             InvalidateMyRunUO();
         }
@@ -1908,6 +1896,16 @@ namespace Server.Mobiles
         }
 
         #endregion
+        
+        #region ZuluClass
+        private ZuluClass m_ZuluClass;
+
+        public ZuluClass ZuluClass
+        {
+            get => m_ZuluClass ??= new ZuluClass(this);
+        }
+
+        #endregion
 
         #region Speech log
 
@@ -1919,7 +1917,6 @@ namespace Server.Mobiles
         }
 
         public Point3D EarthPortalLocation { get; set; }
-        public Spec Spec { get; set; }
 
         public override void OnSpeech(SpeechEventArgs e)
         {
@@ -1933,5 +1930,6 @@ namespace Server.Mobiles
         }
 
         #endregion
+
     }
 }

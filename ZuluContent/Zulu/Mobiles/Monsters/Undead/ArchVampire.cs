@@ -58,7 +58,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x190,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Mage,
+                ClassType = ZuluClassType.Mage,
                 CorpseNameOverride = "corpse of Arch Vampire",
                 CreatureType = CreatureType.Undead,
                 DamageMax = 40,

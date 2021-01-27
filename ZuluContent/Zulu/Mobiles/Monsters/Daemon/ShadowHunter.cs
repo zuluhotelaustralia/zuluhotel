@@ -38,7 +38,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x190,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Ranger,
+                ClassType = ZuluClassType.Ranger,
                 CorpseNameOverride = "corpse of <random> the Shadow Hunter",
                 CreatureType = CreatureType.Daemon,
                 DamageMax = 57,

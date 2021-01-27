@@ -57,10 +57,10 @@ namespace Scripts.Zulu.Spells.Earth
             var effectiveness = SpellHelper.GetEffectiveness(Caster);
 
             var duration = Caster.Skills[SkillName.Meditation].Value * 8;
-            if (Spec.GetSpec(Caster).SpecName == SpecName.Mage)
+            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage)
             {
                 duration *= 2;
-                duration *= Spec.GetSpec(Caster).Bonus;
+                duration *= ZuluClass.GetClass(Caster).Bonus;
             }
 
             var durr = TimeSpan.FromSeconds(duration);

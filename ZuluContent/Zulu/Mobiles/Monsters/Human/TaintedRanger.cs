@@ -39,7 +39,7 @@ namespace Server.Mobiles
                 AlwaysMurderer = true,
                 Body = 0x1B3,
                 ClassLevel = 1,
-                ClassSpec = SpecName.Ranger,
+                ClassType = ZuluClassType.Ranger,
                 CorpseNameOverride = "corpse of <random> the Tainted Ranger",
                 CreatureType = CreatureType.Human,
                 DamageMax = 57,

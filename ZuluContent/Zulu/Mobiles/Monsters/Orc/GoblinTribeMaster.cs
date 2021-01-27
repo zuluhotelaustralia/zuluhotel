@@ -43,7 +43,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x190,
                 ClassLevel = 5,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of <random> the Goblin Tribe Master",
                 CreatureType = CreatureType.Orc,
                 DamageMax = 50,

@@ -40,7 +40,7 @@ namespace Server.Mobiles
                 BardImmune = true,
                 Body = 0x190,
                 ClassLevel = 4,
-                ClassSpec = SpecName.Warrior,
+                ClassType = ZuluClassType.Warrior,
                 CorpseNameOverride = "corpse of <random> the Goblin Guard",
                 CreatureType = CreatureType.Orc,
                 DamageMax = 64,
