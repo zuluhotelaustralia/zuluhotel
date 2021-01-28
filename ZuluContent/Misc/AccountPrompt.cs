@@ -5,7 +5,7 @@ namespace Server.Misc
 {
     public class AccountPrompt
     {
-        private static readonly bool AutoCreateDefaultAccount;
+        private static readonly bool AutoCreateDefaultOwnerAccount;
 
         private static readonly string DefaultOwnerAcctName; 
         private static readonly string DefaultOwnerAcctPassword; 
@@ -13,8 +13,8 @@ namespace Server.Misc
 
         static AccountPrompt()
         {
-            AutoCreateDefaultAccount = 
-                ServerConfiguration.GetOrUpdateSetting("accountPrompt.autoCreateDefaultAccount", true);
+            AutoCreateDefaultOwnerAccount = 
+                ServerConfiguration.GetOrUpdateSetting("accountPrompt.autoCreateDefaultOwnerAccount", true);
             DefaultOwnerAcctName = 
                 ServerConfiguration.GetOrUpdateSetting("accountPrompt.defaultOwnerAcctName", "owner");
             DefaultOwnerAcctPassword =
@@ -28,7 +28,7 @@ namespace Server.Misc
             if (Accounts.Count == 0)
             {
                 var key = ConsoleKey.D;
-                if (!AutoCreateDefaultAccount)
+                if (!AutoCreateDefaultOwnerAccount)
                 {
                     Console.WriteLine("This server has no accounts.");
                     Console.Write("Do you want to create the owner account now? (y/n), " +
