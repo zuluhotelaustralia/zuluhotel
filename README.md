@@ -16,6 +16,8 @@ Custom functionality includes:
  
 ## Setup
 
+**Tip:** To speed up load times you should clone the project to an SSD if you have one available.
+
 You'll need to init the ModernUO git submodule when you first pull the project:
 ```bash
 git submodule update --init --recursive
@@ -25,6 +27,7 @@ If you get a `(publickey)` error updating the submodules you can either setup [s
 ```bash
 git config --global url."https://github.com/modernuo/ModernUO.git".insteadOf "git@github.com:modernuo/ModernUO.git"
 ```
+
 
 ### Building and running
 
