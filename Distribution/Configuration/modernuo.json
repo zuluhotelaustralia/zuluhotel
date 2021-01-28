@@ -1,6 +1,6 @@
 {
   "dataDirectories": [
-    "/home/jabin/games/ZuluHotelAustralia"
+    "/app/client/"
   ],
   "listeners": [
     "0.0.0.0:2593"
