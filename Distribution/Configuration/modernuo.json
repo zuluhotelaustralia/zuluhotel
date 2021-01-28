@@ -11,7 +11,7 @@
     "ipLimiter.enable": "True",
     "ipLimiter.blockAtConnection": "True",
     "ipLimiter.maxConnectionsPerIP": "10",
-    "accountHandler.maxAccountsPerIP": "1",
+    "accountHandler.maxAccountsPerIP": "10",
     "accountHandler.enableAutoAccountCreation": "True",
     "accountHandler.enablePlayerPasswordCommand": "False",
     "accountSecurity.encryptionAlgorithm": "Argon2",

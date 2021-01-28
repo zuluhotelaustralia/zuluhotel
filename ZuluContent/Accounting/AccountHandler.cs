@@ -27,7 +27,7 @@ namespace Server.Misc
         }
 
 
-        private static CityInfo[] StartingCities = {
+        public static readonly CityInfo[] StartingCities = {
             new("New Haven", "New Haven Bank", 1150168, 3667, 2625, 0, Map.Felucca),
             new("Yew", "The Empath Abbey", 1075072, 633, 858, 0, Map.Felucca),
             new("Minoc", "The Barnacle", 1075073, 2476, 413, 15, Map.Felucca),
