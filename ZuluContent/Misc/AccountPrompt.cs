@@ -3,37 +3,97 @@ using Server.Accounting;
 
 namespace Server.Misc
 {
-  public class AccountPrompt
-  {
-    public static void Initialize()
+    public class AccountPrompt
     {
-      if (Accounts.Count == 0)
-      {
-        Console.WriteLine("This server has no accounts.");
-        Console.Write("Do you want to create the owner account now? (y/n)");
+        private static readonly bool AutoCreateDefaultOwnerAccount;
 
-        if (Console.ReadKey(true).Key == ConsoleKey.Y)
+        private static readonly string DefaultOwnerAcctName; 
+        private static readonly string DefaultOwnerAcctPassword; 
+        private static readonly string DefaultOwnerPlayerName;
+
+        static AccountPrompt()
         {
-          Console.WriteLine();
-
-          Console.Write("Username: ");
-          string username = Console.ReadLine();
-
-          Console.Write("Password: ");
-          string password = Console.ReadLine();
-
-          Account a = new Account(username, password);
-          a.AccessLevel = AccessLevel.Owner;
-
-          Console.WriteLine("Account created.");
+            AutoCreateDefaultOwnerAccount = 
+                ServerConfiguration.GetOrUpdateSetting("accountPrompt.autoCreateDefaultOwnerAccount", true);
+            DefaultOwnerAcctName = 
+                ServerConfiguration.GetOrUpdateSetting("accountPrompt.defaultOwnerAcctName", "owner");
+            DefaultOwnerAcctPassword =
+                ServerConfiguration.GetOrUpdateSetting("accountPrompt.defaultOwnerAcctPassword", "owner");
+            DefaultOwnerPlayerName =
+                ServerConfiguration.GetOrUpdateSetting("accountPrompt.defaultOwnerPlayerName", "owner");
         }
-        else
+
+        public static void Initialize()
         {
-          Console.WriteLine();
+            if (Accounts.Count == 0)
+            {
+                var key = ConsoleKey.D;
+                if (!AutoCreateDefaultOwnerAccount)
+                {
+                    Console.WriteLine("This server has no accounts.");
+                    Console.Write("Do you want to create the owner account now? (y/n), " +
+                                  "Or create the default owner account? (d)");
+                    key = Console.ReadKey(true).Key;
+                }
 
-          Console.WriteLine("Account not created.");
+                switch (key)
+                {
+                    case ConsoleKey.Y:
+                    {
+                        Console.WriteLine();
+
+                        Console.Write("Username: ");
+                        var username = Console.ReadLine();
+
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+
+                        var account = new Account(username, password) {AccessLevel = AccessLevel.Owner};
+
+                        Console.WriteLine("Account created.");
+                        break;
+                    }
+                    case ConsoleKey.D:
+                    {
+                        var account = new Account(DefaultOwnerAcctName, DefaultOwnerAcctPassword) {AccessLevel = AccessLevel.Owner};
+                        
+                        var args = new CharacterCreatedEventArgs(
+                            null,
+                            account,
+                            DefaultOwnerPlayerName,
+                            false,
+                            Race.Human.RandomSkinHue(),
+                            130,
+                            130,
+                            130,
+                            Utility.RandomList(AccountHandler.StartingCities),
+                            new SkillNameValue[]
+                            {
+                                new(SkillName.Alchemy, 0),
+                                new(SkillName.Anatomy, 0),
+                                new(SkillName.Archery, 0),
+                            },
+                            Race.Human.RandomSkinHue(), 
+                            Utility.RandomDyedHue(), 
+                            Utility.RandomDyedHue(), 
+                            Race.Human.RandomHair(false), 
+                            Race.Human.RandomFacialHair(false), 
+                            Race.Human.RandomHairHue(), 
+                            0,
+                            Race.Human
+                        );
+                        CharacterCreation.HandleCharacterCreation(args);
+                        
+                        Console.WriteLine($"Default owner account created ({DefaultOwnerAcctName} / {DefaultOwnerAcctPassword}).");
+                        break;
+                    }
+                    default:
+                        Console.WriteLine();
+
+                        Console.WriteLine("Account not created.");
+                        break;
+                }
+            }
         }
-      }
     }
-  }
 }
