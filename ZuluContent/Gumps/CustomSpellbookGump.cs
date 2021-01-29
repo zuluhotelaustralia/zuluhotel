@@ -110,6 +110,7 @@ namespace Server.Gumps
 
         public virtual void OnSpellClick(Mobile from, SpellEntry entry)
         {
+            SpellRegistry.Create(entry, from, m_Book).Cast();
         }
     }
 }

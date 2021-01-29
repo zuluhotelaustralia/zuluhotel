@@ -5,67 +5,67 @@ using Server.Targeting;
 
 namespace Server.Items
 {
-    public class Earthbook : CustomSpellbook
+    public class Codex : CustomSpellbook
     {
         public static void Initialize()
         {
-            CommandSystem.Register("AllEarthSpells", AccessLevel.GameMaster, AllSpells_OnCommand);
+            CommandSystem.Register("AllCodexSpells", AccessLevel.GameMaster, AllSpells_OnCommand);
         }
 
-        [Usage("AllEarthSpells")]
-        [Description("Completely fills a targeted Earth Book with scrolls.")]
+        [Usage("AllCodexSpells")]
+        [Description("Completely fills a targeted Codex with scrolls.")]
         private static void AllSpells_OnCommand(CommandEventArgs e)
         {
             e.Mobile.BeginTarget(-1, false, TargetFlags.None, AllSpells_OnTarget);
-            e.Mobile.SendMessage("Target the Earth Book to fill.");
+            e.Mobile.SendMessage("Target the Codex to fill.");
         }
 
         private static void AllSpells_OnTarget(Mobile from, object obj)
         {
-            if (obj is Earthbook book)
+            if (obj is Codex book)
             {
                 if (book.BookCount == 16)
                     book.Entries = ulong.MaxValue;
                 else
                     book.Entries = (1ul << book.BookCount) - 1;
 
-                from.SendMessage("The Earth Book has been filled.");
+                from.SendMessage("The Codex has been filled.");
 
-                CommandLogging.WriteLine(from, "{0} {1} filling Earth Book {2}", from.AccessLevel,
+                CommandLogging.WriteLine(from, "{0} {1} filling Codex {2}", from.AccessLevel,
                     CommandLogging.Format(from), CommandLogging.Format(book));
             }
             else
             {
                 from.BeginTarget(-1, false, TargetFlags.None, AllSpells_OnTarget);
-                from.SendMessage("That is not an Earth Book. Try again.");
+                from.SendMessage("That is not a Codex. Try again.");
             }
         }
 
         [Constructible]
-        public Earthbook() : base(0x0FF2)
+        public Codex() : base(0x1C13)
         {
-            Name = "Book of the Earth";
-            Hue = 0x48A;
+            Name = "Codex Damnorum";
+            Hue = 0x66D;
         }
 
         [Constructible]
-        public Earthbook(Serial serial) : base(serial)
+        public Codex(Serial serial) : base(serial)
         {
         }
 
         public override int BookOffset
         {
-            get { return 600; }
+            get { return 100; }
         }
 
         public override SpellCircle SpellbookCircle
         {
-            get => SpellCircle.Earth;
+            get => SpellCircle.Necro;
         }
 
         public override void OnOpenSpellbook(Mobile from)
         {
-            from.SendGump(new CustomSpellbookGump(from, this, 0x89B));
+            from.SendGump(new CustomSpellbookGump(from, this, 0x898));
         }
 
         public override void Serialize(IGenericWriter writer)

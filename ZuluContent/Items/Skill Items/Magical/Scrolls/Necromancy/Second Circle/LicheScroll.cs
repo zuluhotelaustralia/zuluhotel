@@ -1,16 +1,22 @@
-﻿using Server.Spells;
+using Server.Spells;
 
 namespace Server.Items
 {
-    public class EarthSpellScroll : CustomSpellScroll
+    public class LicheScroll : NecroSpellScroll
     {
         [Constructible]
-        public EarthSpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(spellEntry, itemId, amount, 0x48A)
+        public LicheScroll() : this(1)
+        {
+        }
+
+
+        [Constructible]
+        public LicheScroll(int amount) : base(SpellEntry.LicheForm, 0x1F3A, amount)
         {
         }
 
         [Constructible]
-        public EarthSpellScroll(Serial serial) : base(serial)
+        public LicheScroll(Serial serial) : base(serial)
         {
         }
 

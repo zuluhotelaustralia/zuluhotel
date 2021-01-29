@@ -1,16 +1,22 @@
-﻿using Server.Spells;
+using Server.Spells;
 
 namespace Server.Items
 {
-    public class EarthSpellScroll : CustomSpellScroll
+    public class WraithsBreathScroll : NecroSpellScroll
     {
         [Constructible]
-        public EarthSpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(spellEntry, itemId, amount, 0x48A)
+        public WraithsBreathScroll() : this(1)
+        {
+        }
+
+
+        [Constructible]
+        public WraithsBreathScroll(int amount) : base(SpellEntry.WraithBreath, 0x1F3F, amount)
         {
         }
 
         [Constructible]
-        public EarthSpellScroll(Serial serial) : base(serial)
+        public WraithsBreathScroll(Serial serial) : base(serial)
         {
         }
 
