@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Server.Engines.PartySystem;
 using Server.Gumps;
 using Server.Network;
+using Server.Scripts.Engines.Loot;
 
 namespace Server.Items
 {
@@ -75,164 +76,13 @@ namespace Server.Items
             Fill(this, level);
         }
 
-        private static void GetRandomAOSStats(out int attributeCount, out int min, out int max)
-        {
-            int rnd = Utility.Random(15);
-
-            if (rnd < 1)
-            {
-                attributeCount = Utility.RandomMinMax(2, 5);
-                min = 20;
-                max = 70;
-            }
-            else if (rnd < 3)
-            {
-                attributeCount = Utility.RandomMinMax(2, 4);
-                min = 20;
-                max = 50;
-            }
-            else if (rnd < 6)
-            {
-                attributeCount = Utility.RandomMinMax(2, 3);
-                min = 20;
-                max = 40;
-            }
-            else if (rnd < 10)
-            {
-                attributeCount = Utility.RandomMinMax(1, 2);
-                min = 10;
-                max = 30;
-            }
-            else
-            {
-                attributeCount = 1;
-                min = 10;
-                max = 20;
-            }
-        }
-
         public static void Fill(LockableContainer cont, int level)
         {
             cont.Movable = false;
             cont.Locked = true;
-            int numberItems;
 
-            if (level == 0)
-            {
-                cont.LockLevel = 0; // Can't be unlocked
-
-                cont.DropItem(new Gold(Utility.RandomMinMax(50, 100)));
-
-                if (Utility.RandomDouble() < 0.75)
-                    cont.DropItem(new TreasureMap(0, Map.Felucca));
-            }
-            else
-            {
-                cont.TrapType = TrapType.ExplosionTrap;
-                cont.TrapPower = level * 25;
-                cont.TrapLevel = level;
-
-                switch (level)
-                {
-                    case 1:
-                        cont.RequiredSkill = 36;
-                        break;
-                    case 2:
-                        cont.RequiredSkill = 76;
-                        break;
-                    case 3:
-                        cont.RequiredSkill = 84;
-                        break;
-                    case 4:
-                        cont.RequiredSkill = 92;
-                        break;
-                    case 5:
-                        cont.RequiredSkill = 100;
-                        break;
-                    case 6:
-                        cont.RequiredSkill = 100;
-                        break;
-                }
-
-                cont.LockLevel = cont.RequiredSkill - 10;
-                cont.MaxLockLevel = cont.RequiredSkill + 40;
-
-                //Publish 67 gold change
-                //if ( Core.SA )
-                //	cont.DropItem( new Gold( level * 5000 ) );
-                //else
-                cont.DropItem(new Gold(level * 1000));
-
-                for (int i = 0; i < level * 5; ++i)
-                    cont.DropItem(Loot.RandomScroll(0, 63, SpellbookType.Regular));
-
-                numberItems = level * 6;
-
-                for (int i = 0; i < numberItems; ++i)
-                {
-                    Item item = Loot.RandomArmorOrShieldOrWeapon();
-
-                    if (item is BaseWeapon)
-                    {
-                        BaseWeapon weapon = (BaseWeapon) item;
-
-                        weapon.DamageLevel = (WeaponDamageLevel) Utility.Random(6);
-                        weapon.AccuracyLevel = (WeaponAccuracyLevel) Utility.Random(6);
-                        weapon.DurabilityLevel = (WeaponDurabilityLevel) Utility.Random(6);
-
-                        cont.DropItem(item);
-                    }
-                    else if (item is BaseArmor)
-                    {
-                        BaseArmor armor = (BaseArmor) item;
-
-                        armor.ProtectionLevel = (ArmorProtectionLevel) Utility.Random(6);
-                        armor.Durability = (ArmorDurabilityLevel) Utility.Random(6);
-
-                        cont.DropItem(item);
-                    }
-                    else if (item is BaseHat)
-                    {
-                        BaseHat hat = (BaseHat) item;
-
-                        cont.DropItem(item);
-                    }
-                    else if (item is BaseJewel)
-                    {
-                        int attributeCount;
-                        int min, max;
-
-                        GetRandomAOSStats(out attributeCount, out min, out max);
-
-                        cont.DropItem(item);
-                    }
-                }
-            }
-
-            int reagents;
-            if (level == 0)
-                reagents = 12;
-            else
-                reagents = level * 3;
-
-            for (int i = 0; i < reagents; i++)
-            {
-                Item item = Loot.RandomPossibleReagent();
-                item.Amount = Utility.RandomMinMax(40, 60);
-                cont.DropItem(item);
-            }
-
-            int gems;
-            if (level == 0)
-                gems = 2;
-            else
-                gems = level * 3;
-
-            for (int i = 0; i < gems; i++)
-            {
-                Item item = Loot.RandomGem();
-                cont.DropItem(item);
-            }
+            // TODO: Update to correct loot table based on map level
+            LootGenerator.MakeLoot(cont, LootTable.Table2);
         }
 
         public override bool CheckLocked(Mobile from)
