@@ -2,15 +2,15 @@
 
 namespace Server.Items
 {
-    public class EarthSpellScroll : CustomSpellScroll
+    public class NecroSpellScroll : CustomSpellScroll
     {
         [Constructible]
-        public EarthSpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(spellEntry, itemId, amount, 0x48A)
+        public NecroSpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(spellEntry, itemId, amount, 0x66D)
         {
         }
 
         [Constructible]
-        public EarthSpellScroll(Serial serial) : base(serial)
+        public NecroSpellScroll(Serial serial) : base(serial)
         {
         }
 

@@ -1,16 +1,22 @@
-﻿using Server.Spells;
+using Server.Spells;
 
 namespace Server.Items
 {
-    public class EarthSpellScroll : CustomSpellScroll
+    public class WyvernStrikeScroll : NecroSpellScroll
     {
         [Constructible]
-        public EarthSpellScroll(SpellEntry spellEntry, int itemId, int amount) : base(spellEntry, itemId, amount, 0x48A)
+        public WyvernStrikeScroll() : this(1)
+        {
+        }
+
+
+        [Constructible]
+        public WyvernStrikeScroll(int amount) : base(SpellEntry.WyvernStrike, 0x1F3C, amount)
         {
         }
 
         [Constructible]
-        public EarthSpellScroll(Serial serial) : base(serial)
+        public WyvernStrikeScroll(Serial serial) : base(serial)
         {
         }
 
