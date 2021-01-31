@@ -22,40 +22,45 @@ namespace Server.Engines.Spawners
 
             if (e.Arguments.Length == 0)
             {
-                from.SendMessage("Usage: [GenerateSpawners <path|search pattern>");
+               World.Broadcast(0x35, true, "Usage: [GenerateSpawners <path|search pattern>");
                 return;
             }
 
+            Generate(e.Arguments[0]);
+        }
+
+        public static void Generate(string filePattern)
+        {
             var di = new DirectoryInfo(Core.BaseDirectory);
 
-            var files = di.GetFiles(e.Arguments[0], SearchOption.AllDirectories);
+            var files = di.GetFiles(filePattern, SearchOption.AllDirectories);
+            
 
             if (files.Length == 0)
             {
-                from.SendMessage("GenerateSpawners: No files found matching the pattern");
+               World.Broadcast(0x35, true, "GenerateSpawners: No files found matching the pattern");
                 return;
             }
 
-            JsonSerializerOptions options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
+            var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
 
-            for (int i = 0; i < files.Length; i++)
+            foreach (var file in files)
             {
-                var file = files[i];
-                from.SendMessage("GenerateSpawners: Generating spawners for {0}...", file.Name);
+                World.Broadcast(0x35, true, "GenerateSpawners: Generating spawners for {0}...", file.Name);
                 try
                 {
                     var spawners = JsonConfig.Deserialize<List<DynamicJson>>(file.FullName);
-                    ParseSpawnerList(from, spawners, options);
+                    ParseSpawnerList(spawners, options);
                 }
                 catch (JsonException)
                 {
-                    from.SendMessage("GenerateSpawners: Exception parsing {0}, file may not be in the correct format.",
+                    World.Broadcast(0x35, true, "GenerateSpawners: Exception parsing {0}, file may not be in the correct format.",
                         file.FullName);
                 }
             }
         }
 
-        private static void ParseSpawnerList(Mobile from, List<DynamicJson> spawners, JsonSerializerOptions options)
+        private static void ParseSpawnerList(List<DynamicJson> spawners, JsonSerializerOptions options)
         {
             Stopwatch watch = Stopwatch.StartNew();
             List<string> failures = new List<string>();
@@ -72,7 +77,7 @@ namespace Server.Engines.Spawners
                     if (!failures.Contains(failure))
                     {
                         failures.Add(failure);
-                        from.SendMessage(failure);
+                       World.Broadcast(0x35, true, failure);
                     }
 
                     continue;
@@ -104,7 +109,7 @@ namespace Server.Engines.Spawners
                     if (!failures.Contains(failure))
                     {
                         failures.Add(failure);
-                        from.SendMessage(failure);
+                       World.Broadcast(0x35, true, failure);
                     }
 
                     continue;
@@ -114,7 +119,7 @@ namespace Server.Engines.Spawners
             }
 
             watch.Stop();
-            from.SendMessage("GenerateSpawners: Generated {0} spawners ({1:F2} seconds, {2} failures)", count,
+           World.Broadcast(0x35, true, "GenerateSpawners: Generated {0} spawners ({1:F2} seconds, {2} failures)", count,
                 watch.Elapsed.TotalSeconds, failures.Count);
         }
     }
