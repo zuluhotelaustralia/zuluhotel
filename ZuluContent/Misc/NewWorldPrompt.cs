@@ -25,19 +25,31 @@ namespace ZuluContent.Misc
         {
             if (World.Items.Any(kv => kv.Value is BaseDoor))
                 return;
-            
-            Console.WriteLine("This appears to be a new world, do you want generate signs/doors/decoration? (y/n)");
 
-            if (AutoSetupNewWorld || Console.ReadKey(true).Key == ConsoleKey.Y)
+            ConsoleKey key;
+            if (AutoSetupNewWorld)
+            {
+                Console.WriteLine("This appears to be a new world, automatically setting it up.");
+                key = ConsoleKey.Y;
+            }
+            else
+            {
+                Console.WriteLine("This appears to be a new world, do you want generate signs/doors/decoration? (y/n)");
+                key = Console.ReadKey(true).Key;
+            }
+            
+            if (key == ConsoleKey.Y)
             {
                 Console.Write("Generating... ");
                 DoorGenerator.Generate();
                 Decorate.Generate();
                 SignGenerator.Generate();
                 GenerateSpawners.Generate("felucca.json");
+
+                World.Save();
+                Console.WriteLine("New world generation complete.");
             }
             
-            Console.WriteLine("New world generation complete.");
         }
     }
 }
