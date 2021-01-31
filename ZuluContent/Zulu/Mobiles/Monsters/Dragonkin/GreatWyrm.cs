@@ -130,6 +130,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
+            // TODO: Update to correct loot table
             AddLoot(LootTable.Table2);
         }
 

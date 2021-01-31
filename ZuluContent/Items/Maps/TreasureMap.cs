@@ -10,8 +10,6 @@ namespace Server.Items
     public class TreasureMap : MapItem
     {
         private int m_Level;
-        private bool m_Completed;
-        private Mobile m_CompletedBy;
         private Mobile m_Decoder;
         private Map m_Map;
         private Point2D m_Location;
@@ -21,20 +19,6 @@ namespace Server.Items
         {
             get { return m_Level; }
             set { m_Level = value; }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool Completed
-        {
-            get { return m_Completed; }
-            set { m_Completed = value; }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile CompletedBy
-        {
-            get { return m_CompletedBy; }
-            set { m_CompletedBy = value; }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -59,20 +43,32 @@ namespace Server.Items
         }
 
         private static Point2D[] m_Locations;
-        private static Point2D[] m_HavenLocations;
 
         private static Type[][] m_SpawnTypes = new[]
         {
-            new[] {typeof(HeadlessOne), typeof(Skeleton)},
-            new[] {typeof(Mongbat), typeof(HeadlessOne), typeof(Skeleton), typeof(Zombie)},
-            new[] {typeof(Gargoyle), typeof(Gazer), typeof(HellHound), typeof(EarthElemental)},
-            new[] {typeof(Liche), typeof(OgreLord), typeof(AirElemental), typeof(FireElemental)},
-            new[] {typeof(LicheLord), typeof(Daemon), typeof(OgreLord)},
+            new[] {typeof(Skeleton)},
             new[]
             {
-                typeof(LicheLord), typeof(Daemon), typeof(PoisonElemental), typeof(BloodElemental)
+                typeof(Mongbat), typeof(OrcWarrior), typeof(OrcWarrior), typeof(OrcWarrior), typeof(RatmanMarksman),
+                typeof(RatmanMarksman), typeof(RatmanMarksman), typeof(HeadlessOne), typeof(Skeleton), typeof(Zombie)
             },
-            new[] { typeof(Balron), typeof(BloodElemental), typeof(PoisonElemental), typeof(Titan)}
+            new[] {typeof(OrcMage), typeof(OrcishLord), typeof(Gazer), typeof(Gargoyle)},
+            new[]
+            {
+                typeof(Liche), typeof(BoneKnight), typeof(AirElemental), typeof(WaterElemental), typeof(FireElemental),
+                typeof(EarthElemental), typeof(OgreLord), typeof(Troll)
+            },
+            new[]
+            {
+                typeof(OgreLord), typeof(Liche), typeof(Daemon), typeof(Drake), typeof(TrollLord), typeof(Vampire),
+                typeof(Vampire), typeof(Drake), typeof(SpectralDrake), typeof(AirElementalLord),
+                typeof(WaterElementalLord), typeof(EarthElementalLord), typeof(FireElementalLord)
+            },
+            new[]
+            {
+                typeof(BlackWisp), typeof(Dragon), typeof(Dragon), typeof(DaemonLieutenant), typeof(Dracula),
+                typeof(Wyvern), typeof(BloodElemental), typeof(PoisonElemental), typeof(RockDragon), typeof(MageHunter)
+            }
         };
 
         public const double LootChance = 0.01; // 1% chance to appear as loot
@@ -88,23 +84,11 @@ namespace Server.Items
             return Point2D.Zero;
         }
 
-        public static Point2D GetRandomHavenLocation()
-        {
-            if (m_HavenLocations == null)
-                LoadLocations();
-
-            if (m_HavenLocations.Length > 0)
-                return m_HavenLocations[Utility.Random(m_HavenLocations.Length)];
-
-            return Point2D.Zero;
-        }
-
         private static void LoadLocations()
         {
             string filePath = Path.Combine(Core.BaseDirectory, "Data/treasure.cfg");
 
             List<Point2D> list = new List<Point2D>();
-            List<Point2D> havenList = new List<Point2D>();
 
             if (File.Exists(filePath))
             {
@@ -122,9 +106,6 @@ namespace Server.Items
 
                             Point2D loc = new Point2D(x, y);
                             list.Add(loc);
-
-                            if (IsInHavenIsland(loc))
-                                havenList.Add(loc);
                         }
                         catch
                         {
@@ -134,12 +115,6 @@ namespace Server.Items
             }
 
             m_Locations = list.ToArray();
-            m_HavenLocations = havenList.ToArray();
-        }
-
-        public static bool IsInHavenIsland(IPoint2D loc)
-        {
-            return loc.X >= 3314 && loc.X <= 3814 && loc.Y >= 2345 && loc.Y <= 3095;
         }
 
         public static BaseCreature Spawn(int level, Point3D p, bool guardian)
@@ -160,12 +135,7 @@ namespace Server.Items
 
                 bc.Home = p;
                 bc.RangeHome = 5;
-
-                if (guardian && level == 0)
-                {
-                    bc.Name = "a chest guardian";
-                    bc.Hue = 0x835;
-                }
+                bc.Summoned = true;
 
                 return bc;
             }
@@ -223,18 +193,17 @@ namespace Server.Items
 
 
         [Constructible]
-public TreasureMap(int level, Map map)
+        public TreasureMap(int level, Map map)
         {
             m_Level = level;
             m_Map = map;
 
-            if (level == 0)
-                m_Location = GetRandomHavenLocation();
-            else
-                m_Location = GetRandomLocation();
+            m_Location = GetRandomLocation();
 
             Width = 300;
             Height = 300;
+
+            ItemID = 0x14ED;
 
             int width = 600;
             int height = 600;
@@ -262,12 +231,10 @@ public TreasureMap(int level, Map map)
 
             Bounds = new Rectangle2D(x1, y1, width, height);
             Protected = true;
-
-            AddWorldPin(m_Location.X, m_Location.Y);
         }
 
         [Constructible]
-public TreasureMap(Serial serial) : base(serial)
+        public TreasureMap(Serial serial) : base(serial)
         {
         }
 
@@ -289,21 +256,7 @@ public TreasureMap(Serial serial) : base(serial)
 
         public void OnBeginDig(Mobile from)
         {
-            if (m_Completed)
-            {
-                from.SendLocalizedMessage(503028); // The treasure for this map has already been found.
-            }
-            else if (m_Level == 0 && !CheckYoung(from))
-            {
-                from.SendLocalizedMessage(1046447); // Only a young player may use this treasure map.
-            }
-            /*
-            else if ( from != m_Decoder )
-            {
-                from.SendLocalizedMessage( 503016 ); // Only the person who decoded this map may actually dig up the treasure.
-            }
-            */
-            else if (m_Decoder != from && !HasRequiredSkill(from))
+            if (m_Decoder != from && !HasRequiredSkill(from))
             {
                 from.SendLocalizedMessage(
                     503031); // You did not decode this map and have no clue where to look for the treasure.
@@ -332,24 +285,14 @@ public TreasureMap(Serial serial) : base(serial)
                 m_Map = map;
             }
 
-            protected override void OnTarget(Mobile from, object targeted)
+            protected override async void OnTarget(Mobile from, object targeted)
             {
                 if (m_Map.Deleted)
                     return;
 
                 Map map = m_Map.m_Map;
 
-                if (m_Map.m_Completed)
-                {
-                    from.SendLocalizedMessage(503028); // The treasure for this map has already been found.
-                }
-                /*
-                else if ( from != m_Map.m_Decoder )
-                {
-                    from.SendLocalizedMessage( 503016 ); // Only the person who decoded this map may actually dig up the treasure.
-                }
-                */
-                else if (m_Map.m_Decoder != from && !m_Map.HasRequiredSkill(from))
+                if (m_Map.m_Decoder != from && !m_Map.HasRequiredSkill(from))
                 {
                     from.SendLocalizedMessage(
                         503031); // You did not decode this map and have no clue where to look for the treasure.
@@ -378,14 +321,29 @@ public TreasureMap(Serial serial) : base(serial)
                     else
                         targ3D = new Point3D(p);
 
+                    from.PlaySound(899);
+                    await Timer.Pause(600);
+                    from.PlaySound(901);
+                    await Timer.Pause(600);
+
                     int maxRange;
                     double skillValue = from.Skills[SkillName.Mining].Value;
 
-                    if (skillValue >= 100.0)
+                    // TODO: Add Ranger classe bonus
+
+                    if (skillValue >= 140.0)
+                        maxRange = 8;
+                    else if (skillValue >= 120.0)
+                        maxRange = 7;
+                    else if (skillValue >= 100.0)
+                        maxRange = 6;
+                    else if (skillValue >= 80.0)
+                        maxRange = 5;
+                    else if (skillValue >= 60.0)
                         maxRange = 4;
-                    else if (skillValue >= 81.0)
+                    else if (skillValue >= 40.0)
                         maxRange = 3;
-                    else if (skillValue >= 51.0)
+                    else if (skillValue >= 20.0)
                         maxRange = 2;
                     else
                         maxRange = 1;
@@ -395,84 +353,45 @@ public TreasureMap(Serial serial) : base(serial)
 
                     Point3D chest3D0 = new Point3D(loc, 0);
 
-                    if (Utility.InRange(targ3D, chest3D0, maxRange))
+                    if (!Utility.InRange(targ3D, chest3D0, maxRange))
                     {
-                        if (from.Location.X == x && from.Location.Y == y)
-                        {
-                            from.SendLocalizedMessage(
-                                503030); // The chest can't be dug up because you are standing on top of it.
-                        }
-                        else if (map != null)
-                        {
-                            int z = map.GetAverageZ(x, y);
+                        Direction dir = Utility.GetDirection(targ3D, chest3D0);
 
-                            if (!map.CanFit(x, y, z, 16, true, true))
-                            {
-                                from.SendLocalizedMessage(
-                                    503021); // You have found the treasure chest but something is keeping it from being dug up.
-                            }
-                            else if (from.BeginAction(typeof(TreasureMap)))
-                            {
-                                new DigTimer(from, m_Map, new Point3D(x, y, z), map).Start();
-                            }
-                            else
-                            {
-                                from.SendLocalizedMessage(503020); // You are already digging treasure.
-                            }
-                        }
-                    }
-                    else if (m_Map.Level > 0)
-                    {
-                        if (Utility.InRange(targ3D, chest3D0, 8)) // We're close, but not quite
+                        string sDir;
+                        switch (dir)
                         {
-                            from.SendLocalizedMessage(503032); // You dig and dig but no treasure seems to be here.
+                            case Direction.North:
+                                sDir = "north";
+                                break;
+                            case Direction.Right:
+                                sDir = "northeast";
+                                break;
+                            case Direction.East:
+                                sDir = "east";
+                                break;
+                            case Direction.Down:
+                                sDir = "southeast";
+                                break;
+                            case Direction.South:
+                                sDir = "south";
+                                break;
+                            case Direction.Left:
+                                sDir = "southwest";
+                                break;
+                            case Direction.West:
+                                sDir = "west";
+                                break;
+                            default:
+                                sDir = "northwest";
+                                break;
                         }
-                        else
-                        {
-                            from.SendLocalizedMessage(503035); // You dig and dig but fail to find any treasure.
-                        }
+
+                        from.SendAsciiMessage(0x44, $"You dig for awhile and have a feeling to travel to the {sDir}.");
                     }
                     else
                     {
-                        if (Utility.InRange(targ3D, chest3D0, 8)) // We're close, but not quite
-                        {
-                            from.SendAsciiMessage(0x44, "The treasure chest is very close!");
-                        }
-                        else
-                        {
-                            Direction dir = Utility.GetDirection(targ3D, chest3D0);
-
-                            string sDir;
-                            switch (dir)
-                            {
-                                case Direction.North:
-                                    sDir = "north";
-                                    break;
-                                case Direction.Right:
-                                    sDir = "northeast";
-                                    break;
-                                case Direction.East:
-                                    sDir = "east";
-                                    break;
-                                case Direction.Down:
-                                    sDir = "southeast";
-                                    break;
-                                case Direction.South:
-                                    sDir = "south";
-                                    break;
-                                case Direction.Left:
-                                    sDir = "southwest";
-                                    break;
-                                case Direction.West:
-                                    sDir = "west";
-                                    break;
-                                default:
-                                    sDir = "northwest";
-                                    break;
-                            }
-
-                            from.SendAsciiMessage(0x44, "Try looking for the treasure chest more to the {0}.", sDir);
-                        }
+                        int z = map.GetAverageZ(x, y);
+                        new DigTimer(from, m_Map, new Point3D(x, y, z), map).Start();
                     }
                 }
             }
@@ -492,13 +411,8 @@ public TreasureMap(Serial serial) : base(serial)
 
             private int m_Count;
 
-            private long m_NextSkillTime;
-            private long m_NextSpellTime;
-            private long m_NextActionTime;
-            private long m_LastMoveTime;
-
             public DigTimer(Mobile from, TreasureMap treasureMap, Point3D location, Map map) : base(TimeSpan.Zero,
-                TimeSpan.FromSeconds(1.0))
+                TimeSpan.FromMilliseconds(500))
             {
                 m_From = from;
                 m_TreasureMap = treasureMap;
@@ -506,62 +420,11 @@ public TreasureMap(Serial serial) : base(serial)
                 m_Location = location;
                 m_Map = map;
 
-                m_NextSkillTime = from.NextSkillTime;
-                m_NextSpellTime = from.NextSpellTime;
-                m_NextActionTime = from.NextActionTime;
-                m_LastMoveTime = from.LastMoveTime;
-
                 Priority = TimerPriority.TenMS;
-            }
-
-            private void Terminate()
-            {
-                Stop();
-                m_From.EndAction(typeof(TreasureMap));
-
-                if (m_Chest != null)
-                    m_Chest.Delete();
-
-                if (m_Dirt1 != null)
-                {
-                    m_Dirt1.Delete();
-                    m_Dirt2.Delete();
-                }
             }
 
             protected override void OnTick()
             {
-                if (m_NextSkillTime != m_From.NextSkillTime || m_NextSpellTime != m_From.NextSpellTime ||
-                    m_NextActionTime != m_From.NextActionTime)
-                {
-                    Terminate();
-                    return;
-                }
-
-                if (m_LastMoveTime != m_From.LastMoveTime)
-                {
-                    m_From.SendLocalizedMessage(
-                        503023); // You cannot move around while digging up treasure. You will need to start digging anew.
-                    Terminate();
-                    return;
-                }
-
-                int z = m_Chest != null ? m_Chest.Z + m_Chest.ItemData.Height : int.MinValue;
-                int height = 16;
-
-                if (z > m_Location.Z)
-                    height -= z - m_Location.Z;
-                else
-                    z = m_Location.Z;
-
-                if (!m_Map.CanFit(m_Location.X, m_Location.Y, z, height, true, true, false))
-                {
-                    m_From.SendLocalizedMessage(
-                        503024); // You stop digging because something is directly on top of the treasure chest.
-                    Terminate();
-                    return;
-                }
-
                 m_Count++;
 
                 m_From.RevealingAction();
@@ -576,16 +439,16 @@ public TreasureMap(Serial serial) : base(serial)
                     m_Dirt2.MoveToWorld(new Point3D(m_Location.X, m_Location.Y - 1, m_Location.Z), m_Map);
                 }
 
-                if (m_Count == 5)
+                if (m_Count == 3)
                 {
                     m_Dirt1.Turn1();
                 }
-                else if (m_Count == 10)
+                else if (m_Count == 6)
                 {
                     m_Dirt1.Turn2();
                     m_Dirt2.Turn2();
                 }
-                else if (m_Count > 10)
+                else if (m_Count > 6)
                 {
                     if (m_Chest == null)
                     {
@@ -603,11 +466,8 @@ public TreasureMap(Serial serial) : base(serial)
                 if (m_Chest != null && m_Chest.Location.Z >= m_Location.Z)
                 {
                     Stop();
-                    m_From.EndAction(typeof(TreasureMap));
 
                     m_Chest.Temporary = false;
-                    m_TreasureMap.Completed = true;
-                    m_TreasureMap.CompletedBy = m_From;
 
                     int spawns;
                     switch (m_TreasureMap.Level)
@@ -623,6 +483,9 @@ public TreasureMap(Serial serial) : base(serial)
                             break;
                     }
 
+                    m_From.SendAsciiMessage(0x44, "You unleash the treasure's guardians!");
+                    m_From.SendAsciiMessage(0x44, "The chest will unlock when all guardians are destroyed.");
+
                     for (int i = 0; i < spawns; ++i)
                     {
                         BaseCreature bc = Spawn(m_TreasureMap.Level, m_Chest.Location, m_Chest.Map, null, true);
@@ -630,12 +493,11 @@ public TreasureMap(Serial serial) : base(serial)
                         if (bc != null)
                             m_Chest.Guardians.Add(bc);
                     }
+
+                    m_TreasureMap.Delete();
                 }
                 else
                 {
-                    if (m_From.Body.IsHuman && !m_From.Mounted)
-                        m_From.Animate(11, 5, 1, true, false, 0);
-
                     new SoundTimer(m_From, 0x125 + m_Count % 2).Start();
                 }
             }
@@ -668,40 +530,21 @@ public TreasureMap(Serial serial) : base(serial)
                 return;
             }
 
-            if (!m_Completed && m_Decoder == null)
+            if (m_Decoder == null)
                 Decode(from);
             else
                 DisplayTo(from);
-        }
-
-        private bool CheckYoung(Mobile from)
-        {
-            if (from.AccessLevel >= AccessLevel.GameMaster)
-                return true;
-
-            if (from is PlayerMobile && ((PlayerMobile) from).Young)
-                return true;
-
-            if (from == Decoder)
-            {
-                Level = 1;
-                from.SendLocalizedMessage(1046446); // This is now a level one treasure map.
-                return true;
-            }
-
-            return false;
         }
 
         private double GetMinSkillLevel()
         {
             switch (m_Level)
             {
-                case 1: return -3.0;
-                case 2: return 41.0;
-                case 3: return 51.0;
-                case 4: return 61.0;
-                case 5: return 70.0;
-                case 6: return 70.0;
+                case 1: return 20.0;
+                case 2: return 40.0;
+                case 3: return 60.0;
+                case 4: return 80.0;
+                case 5: return 100.0;
 
                 default: return 0.0;
             }
@@ -714,61 +557,37 @@ public TreasureMap(Serial serial) : base(serial)
 
         public void Decode(Mobile from)
         {
-            if (m_Completed || m_Decoder != null)
+            if (m_Decoder != null)
                 return;
 
-            if (m_Level == 0)
+            double minSkill = GetMinSkillLevel();
+
+            if (from.Skills[SkillName.Cartography].Value < minSkill)
+                from.SendLocalizedMessage(503013); // The map is too difficult to attempt to decode.
+
+            double maxSkill = minSkill + 60.0;
+
+            if (!from.CheckSkill(SkillName.Cartography, minSkill, maxSkill))
             {
-                if (!CheckYoung(from))
-                {
-                    from.SendLocalizedMessage(1046447); // Only a young player may use this treasure map.
-                    return;
-                }
-            }
-            else
-            {
-                double minSkill = GetMinSkillLevel();
-
-                if (from.Skills[SkillName.Cartography].Value < minSkill)
-                    from.SendLocalizedMessage(503013); // The map is too difficult to attempt to decode.
-
-                double maxSkill = minSkill + 60.0;
-
-                if (!from.CheckSkill(SkillName.Cartography, minSkill, maxSkill))
-                {
-                    from.LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                        503018); // You fail to make anything of the map.
-                    return;
-                }
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2,
+                    503018); // You fail to make anything of the map.
+                return;
             }
 
             from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 503019); // You successfully decode a treasure map!
             Decoder = from;
+            ItemID = 0x14EC;
 
             DisplayTo(from);
         }
 
         public override void DisplayTo(Mobile from)
         {
-            if (m_Completed)
-            {
-                SendLocalizedMessageTo(from, 503014); // This treasure hunt has already been completed.
-            }
-            else if (m_Level == 0 && !CheckYoung(from))
-            {
-                from.SendLocalizedMessage(1046447); // Only a young player may use this treasure map.
-                return;
-            }
-            else if (m_Decoder != from && !HasRequiredSkill(from))
+            if (m_Decoder != from && !HasRequiredSkill(from))
             {
                 from.SendLocalizedMessage(
                     503031); // You did not decode this map and have no clue where to look for the treasure.
                 return;
-            }
-            else
-            {
-                SendLocalizedMessageTo(from,
-                    503017); // The treasure is marked by the red pin. Grab a shovel and go dig it up!
             }
 
             from.PlaySound(0x249);
@@ -795,25 +614,13 @@ public TreasureMap(Serial serial) : base(serial)
 
         public override void OnSingleClick(Mobile from)
         {
-            if (m_Completed)
+            if (m_Decoder != null)
             {
-                from.NetState.SendMessageLocalizedAffix(Serial, ItemID, MessageType.Label, 0x3B2, 3, 1048030, "",
-                    AffixType.Append,
-                    $" completed by {(m_CompletedBy == null ? "someone" : m_CompletedBy.Name)}");
-            }
-            else if (m_Decoder != null)
-            {
-                if (m_Level == 6)
-                    LabelTo(from, 1063453);
-                else
-                    LabelTo(from, 1041516 + m_Level);
+                LabelTo(from, $"a treasure map lvl{m_Level}");
             }
             else
             {
-                if (m_Level == 6)
-                    LabelTo(from, 1041522, $"#{1063452}\t \t#{(m_Map == Map.Felucca ? 1041502 : 1041503)}");
-                else
-                    LabelTo(from, 1041522, $"#{1041510 + m_Level}\t \t#{(m_Map == Map.Felucca ? 1041502 : 1041503)}");
+                LabelTo(from, "a tattered map");
             }
         }
 
@@ -821,12 +628,9 @@ public TreasureMap(Serial serial) : base(serial)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 1);
-
-            writer.Write((Mobile) m_CompletedBy);
+            writer.Write((int) 0);
 
             writer.Write(m_Level);
-            writer.Write(m_Completed);
             writer.Write(m_Decoder);
             writer.Write(m_Map);
             writer.Write(m_Location);
@@ -838,28 +642,10 @@ public TreasureMap(Serial serial) : base(serial)
 
             int version = reader.ReadInt();
 
-            switch (version)
-            {
-                case 1:
-                {
-                    m_CompletedBy = reader.ReadEntity<Mobile>();
-
-                    goto case 0;
-                }
-                case 0:
-                {
-                    m_Level = (int) reader.ReadInt();
-                    m_Completed = reader.ReadBool();
-                    m_Decoder = reader.ReadEntity<Mobile>();
-                    m_Map = reader.ReadMap();
-                    m_Location = reader.ReadPoint2D();
-
-                    if (version == 0 && m_Completed)
-                        m_CompletedBy = m_Decoder;
-
-                    break;
-                }
-            }
+            m_Level = (int) reader.ReadInt();
+            m_Decoder = reader.ReadEntity<Mobile>();
+            m_Map = reader.ReadMap();
+            m_Location = reader.ReadPoint2D();
         }
     }
 
