@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Engines.Classes;
 using Server.Regions;
 using Server.Network;
 using Server.Multis;
@@ -14,7 +15,7 @@ using Server.Scripts.Engines.Loot;
 
 namespace Server.Mobiles
 {
-    public partial class BaseCreature : Mobile
+    public partial class BaseCreature : Mobile, IShilCheckSkill
     {
         public const int MaxLoyalty = 100;
 
@@ -4352,5 +4353,14 @@ namespace Server.Mobiles
         }
 
         public bool IsAnimatedDead { get; set; }
+
+        #region ShilCheckSkill
+
+        public bool CheckSkill(SkillName skill, int difficulty, int points)
+        {
+            return true;
+        }
+
+        #endregion
     }
 }

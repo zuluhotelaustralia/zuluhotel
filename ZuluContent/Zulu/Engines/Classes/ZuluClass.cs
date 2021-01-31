@@ -19,7 +19,7 @@ namespace Scripts.Zulu.Engines.Classes
         private const double SkillBase = 480;
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
-        private const double PerLevel = 0.1; //10% per level
+        private const double PerLevel = 0.25; //25% per level
         private const int MaxLevel = 6;
 
         private static readonly double[] MinSkills =
@@ -29,7 +29,7 @@ namespace Scripts.Zulu.Engines.Classes
                 .ToArray();
 
         private readonly IZuluClassed m_Parent;
-        
+
         public static readonly IReadOnlyDictionary<ZuluClassType, SkillName[]> ClassSkills =
             new Dictionary<ZuluClassType, SkillName[]>
             {
@@ -106,11 +106,11 @@ namespace Scripts.Zulu.Engines.Classes
 
         [CommandProperty(AccessLevel.Counselor)]
         public ZuluClassType Type { get; set; } = ZuluClassType.None;
-        
+
         public ZuluClass(IZuluClassed parent)
         {
             m_Parent = parent;
-            
+
             ComputeClass();
         }
 
@@ -157,22 +157,21 @@ namespace Scripts.Zulu.Engines.Classes
         {
             if (!(e.Mobile is PlayerMobile pm))
                 return;
-            
-            if(e.Length == 2 && Enum.TryParse(e.GetString(0), out ZuluClassType classType))
+
+            if (e.Length == 2 && Enum.TryParse(e.GetString(0), out ZuluClassType classType))
             {
                 var level = e.GetInt32(1);
 
                 if (level > MaxLevel || level < 0)
                     level = 0;
-                
+
                 foreach (var skill in pm.Skills)
                 {
-                    skill.Base = ClassSkills[classType].Contains(skill.SkillName) 
+                    skill.Base = ClassSkills[classType].Contains(skill.SkillName)
                         ? MinSkills[level] / ClassSkills[classType].Length
                         : 0.0;
                 }
             }
-
         }
 
         public static ZuluClass GetClass(Mobile m) => m is IZuluClassed classed ? classed.ZuluClass : null;
@@ -181,7 +180,7 @@ namespace Scripts.Zulu.Engines.Classes
         {
             if (m_Parent is BaseCreature)
                 return;
-            
+
             var allSkillsTotal = 0.0;
             foreach (var skill in m_Parent.Skills)
             {
@@ -190,7 +189,7 @@ namespace Scripts.Zulu.Engines.Classes
 
             Type = ZuluClassType.None;
             Level = 0;
-            
+
             double total = m_Parent.Skills.Total;
             total *= 0.1;
 
@@ -219,13 +218,13 @@ namespace Scripts.Zulu.Engines.Classes
                     return;
                 }
             }
-            
+
             foreach (var (classType, classSkills) in ClassSkills)
             {
                 var classTotal = classSkills.Select(s => m_Parent.Skills[s].Value).Sum();
-                
+
                 var level = GetClassLevel(classTotal, allSkillsTotal);
-                
+
                 if (level > 0)
                 {
                     Type = classType;
@@ -233,7 +232,7 @@ namespace Scripts.Zulu.Engines.Classes
                 }
             }
 
-            if (Level > MaxLevel) 
+            if (Level > MaxLevel)
                 Level = MaxLevel;
 
             if (Level <= 0)
@@ -259,7 +258,7 @@ namespace Scripts.Zulu.Engines.Classes
 
             return 0;
         }
-        
+
         public bool IsSkillInClass(SkillName sn)
         {
             return ClassSkills.FirstOrDefault(kv => kv.Value.Contains(sn)).Key == Type;
@@ -276,7 +275,8 @@ namespace Scripts.Zulu.Engines.Classes
                 if (from is IZuluClassed classed)
                 {
                     classed.ZuluClass?.ComputeClass();
-                    from.SendMessage("{0}: {1}, level {2}", from.Name, classed.ZuluClass?.Type, classed.ZuluClass?.Level);
+                    from.SendMessage("{0}: {1}, level {2}", from.Name, classed.ZuluClass?.Type,
+                        classed.ZuluClass?.Level);
                 }
             }
         }
@@ -286,18 +286,19 @@ namespace Scripts.Zulu.Engines.Classes
             if (m.AccessLevel >= AccessLevel.GameMaster)
                 m.SendMessage(1283, message);
         }
-        
+
         #region Class bonus hooks
-        
+
         public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
         {
         }
 
-        public void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType, ref int damage)
+        public void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
+            ref int damage)
         {
             DebugLog(attacker, $"OnSpellDamage::before {damage}");
-            
-            if (attacker is IZuluClassed {ZuluClass: {} attackerClass})
+
+            if (attacker is IZuluClassed {ZuluClass: { } attackerClass})
             {
                 var bonus = attackerClass.Type switch
                 {
@@ -306,12 +307,13 @@ namespace Scripts.Zulu.Engines.Classes
                     _ => 1.0
                 };
 
-                damage = (int)(damage * bonus);
+                damage = (int) (damage * bonus);
 
-                DebugLog(attacker, $"Changed damage of {spell} by {bonus} (level {attackerClass.Level} {attackerClass.Type})");
+                DebugLog(attacker,
+                    $"Changed damage of {spell} by {bonus} (level {attackerClass.Level} {attackerClass.Type})");
             }
-            
-            if (defender is IZuluClassed {ZuluClass: {} defenderClass})
+
+            if (defender is IZuluClassed {ZuluClass: { } defenderClass})
             {
                 var bonus = defenderClass.Type switch
                 {
@@ -320,11 +322,12 @@ namespace Scripts.Zulu.Engines.Classes
                     _ => 1.0
                 };
 
-                damage = (int)(damage * bonus);
+                damage = (int) (damage * bonus);
 
-                DebugLog(defender, $"Changed damage of {spell} by {bonus} (level {defenderClass.Level} {defenderClass.Type})");
+                DebugLog(defender,
+                    $"Changed damage of {spell} by {bonus} (level {defenderClass.Level} {defenderClass.Type})");
             }
-            
+
             DebugLog(attacker, $"OnSpellDamage::after {damage}");
         }
 
@@ -342,7 +345,7 @@ namespace Scripts.Zulu.Engines.Classes
 
         public void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
         {
-            if (healer is IZuluClassed {ZuluClass: {} cls})
+            if (healer is IZuluClassed {ZuluClass: { } cls})
             {
                 var bonus = cls.Type switch
                 {
@@ -353,7 +356,8 @@ namespace Scripts.Zulu.Engines.Classes
 
                 healAmount *= bonus;
 
-                DebugLog(healer, $"Increased healing from {source} by {healAmount * cls.Bonus} (level {cls.Level} {cls.Type})");
+                DebugLog(healer,
+                    $"Increased healing from {source} by {healAmount * cls.Bonus} (level {cls.Level} {cls.Type})");
             }
         }
 
@@ -389,11 +393,11 @@ namespace Scripts.Zulu.Engines.Classes
         public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
         {
         }
-        
+
         #endregion
-        
+
         #region Unused hooks
-        
+
         public void OnIdentified(IEntity entity)
         {
         }
@@ -409,6 +413,7 @@ namespace Scripts.Zulu.Engines.Classes
         public void OnBeforeRemoved(IEntity entity, Mobile @from, ref bool canRemove)
         {
         }
+
         #endregion
     }
 }
