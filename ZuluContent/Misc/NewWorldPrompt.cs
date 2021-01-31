@@ -45,6 +45,8 @@ namespace ZuluContent.Misc
                 Decorate.Generate();
                 SignGenerator.Generate();
                 GenerateSpawners.Generate("felucca.json");
+                PublicMoongate.MoonGen(PMList.Felucca);
+                new GenTeleporter.TeleportersCreator().CreateTeleporters();
 
                 World.Save();
                 Console.WriteLine("New world generation complete.");

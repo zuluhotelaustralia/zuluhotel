@@ -88,7 +88,7 @@ namespace Server.Items
 
             int count = 0;
 
-            count += MoonGen(PMList.Trammel);
+            // count += MoonGen(PMList.Trammel);
             count += MoonGen(PMList.Felucca);
 
             World.Broadcast(0x35, true, "{0} moongates generated.", count);
@@ -111,7 +111,7 @@ namespace Server.Items
                 World.Broadcast(0x35, true, "{0} moongates removed.", list.Count);
         }
 
-        private static int MoonGen(PMList list)
+        public static int MoonGen(PMList list)
         {
             foreach (PMEntry entry in list.Entries)
             {
