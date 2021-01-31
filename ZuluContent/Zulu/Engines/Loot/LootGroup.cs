@@ -8,7 +8,7 @@ namespace Server.Scripts.Engines.Loot
 {
     public partial class LootGroup : IEnumerable
     {
-        public List<LootEntryItem> Items { get; } = new List<LootEntryItem>();
+        public List<LootEntryItem> Items { get; } = new();
 
         public void Add(LootEntryItem item) => Items.Add(item);
 
@@ -26,10 +26,16 @@ namespace Server.Scripts.Engines.Loot
             foreach (var t in types) 
                 Add(t);
         }
-
+        
         public IEnumerator GetEnumerator()
         {
             return Items.GetEnumerator();
+        }
+        
+        private void Add(LootGroup subGroup)
+        {
+            foreach (var i in subGroup.Items) 
+                Add(i);
         }
 
         public List<LootItem> Roll(int quantity)
@@ -59,7 +65,7 @@ namespace Server.Scripts.Engines.Loot
      */
     public partial class LootGroup
     {
-        public static readonly LootGroup Ores = new LootGroup
+        public static readonly LootGroup Ores = new()
         {
             {typeof(IronOre), 3, 9, 0.91},
             {typeof(SpikeOre), 3, 6, 0.88},
@@ -94,42 +100,101 @@ namespace Server.Scripts.Engines.Loot
             {typeof(NewZuluOre), 1, 0.1},
         };
 
-        public static readonly LootGroup Gems = new LootGroup
+        public static readonly LootGroup Gems = new()
         {
-            Server.Loot.GemTypes
+            typeof(Amber), typeof(Amethyst), typeof(Citrine),
+            typeof(Diamond), typeof(Emerald), typeof(Ruby),
+            typeof(Sapphire), typeof(StarSapphire), typeof(Tourmaline)
         };
 
-        public static readonly LootGroup Reagents = new LootGroup
+        public static readonly LootGroup Reagents = new()
         {
-            Server.Loot.RegTypes
+            typeof(BlackPearl), typeof(Bloodmoss), typeof(Garlic),
+            typeof(Ginseng), typeof(MandrakeRoot), typeof(Nightshade),
+            typeof(SulfurousAsh), typeof(SpidersSilk)
         };
 
-        public static readonly LootGroup PaganReagents = new LootGroup
+        public static readonly LootGroup PaganReagents = new()
         {
-            Server.Loot.PaganRegTypes
+            typeof(BatWing), typeof(Bone), typeof(DeadWood),
+            typeof(ExecutionersCap), typeof(FertileDirt), typeof(NoxCrystal),
+            typeof(Blackmoor), typeof(Brimstone), typeof(EyeOfNewt),
+            typeof(Pumice), typeof(VolcanicAsh), typeof(Obsidian),
+            typeof(PigIron), typeof(VialOfBlood), typeof(WyrmsHeart),
+            typeof(Bloodspawn), typeof(DaemonBone), typeof(DragonsBlood),
         };
 
-        public static readonly LootGroup Weapons = new LootGroup
+        public static readonly LootGroup MeleeWeapons = new()
         {
-            Server.Loot.WeaponTypes,
-            // Server.Loot.AosWeaponTypes
-        };
-
-        public static readonly LootGroup Armor = new LootGroup
-        {
-            Server.Loot.ArmorTypes,
-            Server.Loot.ShieldTypes,
-            Server.Loot.AosShieldTypes
-        };
-
-        public static readonly LootGroup Jewelry = new LootGroup
-        {
-            Server.Loot.JewelryTypes
+            typeof(Axe), typeof(BattleAxe), typeof(DoubleAxe),
+            typeof(ExecutionersAxe), typeof(Hatchet), typeof(LargeBattleAxe),
+            typeof(TwoHandedAxe), typeof(WarAxe), typeof(Club),
+            typeof(Mace), typeof(Maul), typeof(WarHammer),
+            typeof(WarMace), typeof(Bardiche), typeof(Halberd),
+            typeof(Spear), typeof(ShortSpear), typeof(Pitchfork),
+            typeof(WarFork), typeof(BlackStaff), typeof(GnarledStaff),
+            typeof(QuarterStaff), typeof(Broadsword), typeof(Cutlass),
+            typeof(Katana), typeof(Kryss), typeof(Longsword),
+            typeof(Scimitar), typeof(VikingSword), typeof(Pickaxe),
+            typeof(HammerPick), typeof(ButcherKnife), typeof(Cleaver),
+            typeof(Dagger), typeof(SkinningKnife), typeof(ShepherdsCrook),
         };
         
-        public static readonly LootGroup Clothing = new LootGroup
+        public static readonly LootGroup RangedWeapons = new()
         {
-            Server.Loot.ClothingTypes
+            typeof(Bow), typeof(Crossbow), typeof(HeavyCrossbow)
+        };
+        
+        public static readonly LootGroup Weapons = new()
+        {
+            MeleeWeapons, RangedWeapons
+        };
+
+        public static readonly LootGroup Armor = new()
+        {
+            typeof(BoneArms), typeof(BoneChest), typeof(BoneGloves),
+            typeof(BoneLegs), typeof(BoneHelm), typeof(ChainChest),
+            typeof(ChainLegs), typeof(ChainCoif), typeof(Bascinet),
+            typeof(CloseHelm), typeof(Helmet), typeof(NorseHelm),
+            typeof(OrcHelm), typeof(FemaleLeatherChest), typeof(LeatherArms),
+            typeof(LeatherBustierArms), typeof(LeatherChest), typeof(LeatherGloves),
+            typeof(LeatherGorget), typeof(LeatherLegs), typeof(LeatherShorts),
+            typeof(LeatherSkirt), typeof(LeatherCap), typeof(FemalePlateChest),
+            typeof(PlateArms), typeof(PlateChest), typeof(PlateGloves),
+            typeof(PlateGorget), typeof(PlateHelm), typeof(PlateLegs),
+            typeof(RingmailArms), typeof(RingmailChest), typeof(RingmailGloves),
+            typeof(RingmailLegs), typeof(FemaleStuddedChest), typeof(StuddedArms),
+            typeof(StuddedBustierArms), typeof(StuddedChest), typeof(StuddedGloves),
+            typeof(StuddedGorget), typeof(StuddedLegs)
+        };
+
+        public static readonly LootGroup Shields = new()
+        {
+            typeof(BronzeShield), typeof(Buckler), typeof(HeaterShield),
+            typeof(MetalShield), typeof(MetalKiteShield), typeof(WoodenKiteShield),
+            typeof(WoodenShield), typeof(ChaosShield), typeof(OrderShield)
+        };
+
+        public static readonly LootGroup Jewelry = new()
+        {
+            typeof(GoldRing), typeof(GoldBracelet),
+            typeof(SilverRing), typeof(SilverBracelet)
+        };
+        
+        public static readonly LootGroup Clothing = new()
+        {
+            typeof(Cloak),
+            typeof(Bonnet), typeof(Cap), typeof(FeatheredHat),
+            typeof(FloppyHat), typeof(JesterHat), typeof(Surcoat),
+            typeof(SkullCap), typeof(StrawHat), typeof(TallStrawHat),
+            typeof(TricorneHat), typeof(WideBrimHat), typeof(WizardsHat),
+            typeof(BodySash), typeof(Doublet), typeof(Boots),
+            typeof(FullApron), typeof(JesterSuit), typeof(Sandals),
+            typeof(Tunic), typeof(Shoes), typeof(Shirt),
+            typeof(Kilt), typeof(Skirt), typeof(FancyShirt),
+            typeof(FancyDress), typeof(ThighBoots), typeof(LongPants),
+            typeof(PlainDress), typeof(Robe), typeof(ShortPants),
+            typeof(HalfApron)
         };
     }
 }

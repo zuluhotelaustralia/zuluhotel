@@ -12,7 +12,7 @@ namespace Server.Scripts.Engines.Loot
     {
         public int ItemLevel { get; }
         public double ItemChance { get; }
-        public List<LootEntryGroup> Groups { get; } = new List<LootEntryGroup>();
+        public List<LootEntryGroup> Groups { get; } = new();
 
         public LootTable(int itemLevel, double itemChance)
         {
@@ -93,7 +93,7 @@ namespace Server.Scripts.Engines.Loot
     [SuppressMessage("ReSharper", "ArgumentsStyleLiteral")]
     public partial class LootTable
     {
-        public static readonly LootTable Table1 = new LootTable(itemLevel: 1, itemChance: 1.0)
+        public static readonly LootTable Table1 = new(itemLevel: 1, itemChance: 1.0)
         {
             {typeof(CheeseSlice), 0.5},
             {Weapons, 1, 10, 0.5},
@@ -103,7 +103,7 @@ namespace Server.Scripts.Engines.Loot
         };
 
         // level6map, golden dragon, behemoth, balron, arachnidqueen
-        public static readonly LootTable Table2 = new LootTable(itemLevel: 5, itemChance: 1.0)
+        public static readonly LootTable Table2 = new(itemLevel: 5, itemChance: 1.0)
         {
             {typeof(Gold), 1000, 2000, 1.0},
             {Reagents, 5, 6, 1.0},
