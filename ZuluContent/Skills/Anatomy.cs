@@ -48,10 +48,8 @@ namespace Server.SkillHandlers
                 {
                     var strength = mobile.Str;
                     var dexterity = mobile.Dex;
-                    string strMessage;
-                    string dexMessage;
 
-                    strMessage = strength switch
+                    var strMessage = strength switch
                     {
                         > 150 => "Superhumanly strong.",
                         > 135 => "One of the strongest people you have ever seen.",
@@ -66,7 +64,7 @@ namespace Server.SkillHandlers
                         _ => "Like they would have trouble lifting small objects."
                     };
 
-                    dexMessage = dexterity switch
+                    var dexMessage = dexterity switch
                     {
                         > 150 => "Superhumanly agile.",
                         > 135 => "One of the fastest people you have ever seen.",

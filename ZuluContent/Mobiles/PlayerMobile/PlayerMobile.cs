@@ -1903,10 +1903,17 @@ namespace Server.Mobiles
 
         public bool CheckSkill(SkillName skillName, int difficulty, int points)
         {
-            if (difficulty < 0)
-                return SkillAsPercentSkillCheck(this, skillName, points);
+            // In case they have the skill arrow down
+            if (difficulty == 0)
+            {
+                AwardSkillPoints(this, skillName, 0);
+                return true;
+            }
 
-            return true;
+            if (difficulty < 0)
+                return PercentSkillCheck(this, skillName, points);
+
+            return DifficultySkillCheck(this, skillName, difficulty, points);
         }
 
         #endregion

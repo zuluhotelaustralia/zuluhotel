@@ -12,6 +12,7 @@ using Server.Engines.Spawners;
 using Server.Guilds;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
+using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Mobiles
 {
@@ -4356,9 +4357,12 @@ namespace Server.Mobiles
 
         #region ShilCheckSkill
 
-        public bool CheckSkill(SkillName skill, int difficulty, int points)
+        public bool CheckSkill(SkillName skillName, int difficulty, int points)
         {
-            return true;
+            if (skillName != SkillName.DetectHidden)
+                return true;
+
+            return PercentSkillCheck(this, skillName, points);
         }
 
         #endregion
