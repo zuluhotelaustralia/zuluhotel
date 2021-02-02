@@ -8,7 +8,7 @@ namespace Server.Scripts.Engines.Loot
     {
         public List<LootEntryGroup> Groups { get; } = new();
 
-        public LootTable(int itemLevel, double itemChance)
+        public LootTable()
         {
 
         }

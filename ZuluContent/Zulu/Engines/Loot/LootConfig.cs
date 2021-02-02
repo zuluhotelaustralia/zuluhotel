@@ -55,7 +55,7 @@ namespace Server.Scripts.Engines.Loot
             var tables = new Dictionary<string, LootTable>(StringComparer.OrdinalIgnoreCase);
             foreach (var (name, list) in tableConfig)
             {
-                var t = new LootTable(1, 1);
+                var t = new LootTable();
                 foreach (var entry in list)
                 {
                     if (entry.Value.Contains("MissingObject"))
