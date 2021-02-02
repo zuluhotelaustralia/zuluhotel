@@ -2933,7 +2933,7 @@ namespace Server.Mobiles
             if (Summoned || m_Spawning)
                 return;
 
-            if (!LootConfig.Tables.TryGetValue(LootTable, out var table))
+            if (LootTable == null || !LootConfig.Tables.TryGetValue(LootTable, out var table))
                 return;
 
             
