@@ -13,7 +13,7 @@ namespace Server.Scripts.Engines.Loot
         }
 
         [Usage("lootgen <table> <itemLevel> <itemChance>")]
-        [Description("Reloads the loot groups/tables from the data directory")]
+        [Description("Generates loot into the target container")]
         private static void LootGen_OnCommand(CommandEventArgs e)
         {
             if (e.Arguments.Length != 3)
@@ -32,6 +32,7 @@ namespace Server.Scripts.Engines.Loot
         [Description("Reloads the loot groups/tables from the data directory (loottables.json/lootgroups.json)")]
         private static void LootConfigReload_OnCommand(CommandEventArgs e)
         {
+            // TODO: implement me!
         }
 
         private class InternalTarget : Target
