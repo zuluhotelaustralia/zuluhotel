@@ -30,6 +30,8 @@ namespace Scripts.Zulu.Engines.Classes
 
         private readonly IZuluClassed m_Parent;
 
+        public static readonly double ClasseBonus = 1.5;
+
         public static readonly IReadOnlyDictionary<ZuluClassType, SkillName[]> ClassSkills =
             new Dictionary<ZuluClassType, SkillName[]>
             {
@@ -126,9 +128,9 @@ namespace Scripts.Zulu.Engines.Classes
 
         public static void Initialize()
         {
-            CommandSystem.Register("class", AccessLevel.Player, ClassOnCommand);
-            CommandSystem.Register("showclasse", AccessLevel.Player, ClassOnCommand);
-            CommandSystem.Register("setclass", AccessLevel.GameMaster, SetClass);
+            CommandSystem.Register("Classe", AccessLevel.Player, ClassOnCommand);
+            CommandSystem.Register("ShowClasse", AccessLevel.Player, ClassOnCommand);
+            CommandSystem.Register("SetClasse", AccessLevel.GameMaster, SetClass);
         }
 
         public static void ClassOnCommand(CommandEventArgs e)
@@ -151,7 +153,7 @@ namespace Scripts.Zulu.Engines.Classes
             pm.SendMessage(message);
         }
 
-        [Usage("SetClass <class> <level>")]
+        [Usage("SetClasse <class> <level>")]
         [Description("Sets you to the desired class and level, sets all other skills to 0.")]
         public static void SetClass(CommandEventArgs e)
         {

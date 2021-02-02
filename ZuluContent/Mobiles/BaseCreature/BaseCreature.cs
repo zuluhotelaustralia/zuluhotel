@@ -57,6 +57,7 @@ namespace Server.Mobiles
 
         private double m_dMinTameSkill;
         private bool m_bTamable;
+        private DateTime m_timeUnresponsiveToTaming;
 
         private bool m_bSummoned = false;
         private DateTime m_SummonEnd;
@@ -1865,6 +1866,13 @@ namespace Server.Mobiles
         {
             get { return m_bTamable; }
             set { m_bTamable = value; }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public DateTime UnresponsiveToTamingEndTime
+        {
+            get { return m_timeUnresponsiveToTaming; }
+            set { m_timeUnresponsiveToTaming = value; }
         }
 
         [CommandProperty(AccessLevel.Administrator)]
