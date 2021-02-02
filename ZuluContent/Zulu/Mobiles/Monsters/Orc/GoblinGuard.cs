@@ -27,7 +27,7 @@ namespace Server.Mobiles
                 // guardignore = 1,
                 // HitSound = 0x1B3 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 59,
+                LootTable = "59",
                 // MissSound = 0x1B1 /* Weapon */,
                 // mount = 0x3ea4 264,
                 // mounttemplate = frenziedpoisonostard,

@@ -22,7 +22,7 @@ namespace Server.Mobiles
                 // Graphic = 0x0ec4 /* Weapon */,
                 // Hitscript = :combat:acidscript /* Weapon */,
                 // HitSound = 0x04F /* Weapon */,
-                // lootgroup = 125,
+                LootTable = "125",
                 // MissSound = 0x239 /* Weapon */,
                 // script = killpcsTeleporter,
                 // Speed = 10 /* Weapon */,

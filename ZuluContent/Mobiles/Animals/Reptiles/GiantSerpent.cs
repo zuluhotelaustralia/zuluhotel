@@ -39,10 +39,6 @@ public GiantSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.
 			// TODO: Body parts
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
 
 		public override Poison PoisonImmune{ get{ return Poison.Greater; } }
 		public override Poison HitPoison{ get{ return 0.8 >= Utility.RandomDouble() ? Poison.Greater : Poison.Deadly; } }

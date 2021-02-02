@@ -21,7 +21,7 @@ namespace Server.Mobiles
                 // Equip = seaserpent,
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x1C1 /* Weapon */,
-                // lootgroup = 50,
+                LootTable = "50",
                 // MissSound = 0x239 /* Weapon */,
                 // script = killpcs,
                 // Speed = 30 /* Weapon */,

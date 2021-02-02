@@ -36,10 +36,6 @@ public Sewerrat() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
 			MinTameSkill = -0.9;
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
 
 		public override int Meat{ get{ return 1; } }
 		public override FoodType FavoriteFood{ get{ return FoodType.Meat | FoodType.Eggs | FoodType.FruitsAndVegies; } }

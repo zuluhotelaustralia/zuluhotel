@@ -54,11 +54,6 @@ public IceSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 
 				PackItem( new GlacialStaff() );
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
-
 		public override int Meat{ get{ return 4; } }
 		public override int Hides{ get{ return 15; } }
 		public override HideType HideType{ get{ return HideType.Regular; } }

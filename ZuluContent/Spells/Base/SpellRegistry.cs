@@ -1733,8 +1733,8 @@ namespace Server.Spells
 
 
             Register(
-                SpellEntry.SorcerorsBane,
-                (caster, scroll) => new SorcerorsBaneSpell(caster, scroll),
+                SpellEntry.SorcerersBane,
+                (caster, scroll) => new SorcerersBaneSpell(caster, scroll),
                 new SpellInfo
                 {
                     Name = "Sorceror's Bane",

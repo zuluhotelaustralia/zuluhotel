@@ -33,11 +33,6 @@ public SilverSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0
 			VirtualArmor = 40;
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
-
 		public override int Meat{ get{ return 1; } }
 		public override Poison PoisonImmune{ get{ return Poison.Lethal; } }
 		public override Poison HitPoison{ get{ return Poison.Lethal; } }

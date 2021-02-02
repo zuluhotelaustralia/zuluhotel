@@ -21,7 +21,7 @@ namespace Server.Mobiles
                 // Equip = troll5,
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x233 /* Weapon */,
-                // lootgroup = 43,
+                LootTable = "43",
                 // MissSound = 0x23B /* Weapon */,
                 // script = killpcs,
                 // Speed = 35 /* Weapon */,

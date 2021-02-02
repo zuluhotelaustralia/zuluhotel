@@ -1,0 +1,4462 @@
+{
+  "Ammo": [
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 10,
+      "Chance": 0.5,
+      "Value": "MissingObject.thunderbolt"
+    },
+    {
+      "MinQuantity": 7,
+      "MaxQuantity": 15,
+      "Chance": 1,
+      "Value": "MissingObject.icearrow"
+    },
+    {
+      "MinQuantity": 7,
+      "MaxQuantity": 15,
+      "Chance": 1,
+      "Value": "MissingObject.firearrow"
+    },
+    {
+      "MinQuantity": 12,
+      "MaxQuantity": 20,
+      "Chance": 1,
+      "Value": "Server.Items.Bolt"
+    },
+    {
+      "MinQuantity": 12,
+      "MaxQuantity": 20,
+      "Chance": 1,
+      "Value": "Server.Items.Arrow"
+    }
+  ],
+  "Artifacts": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.earringsofmanycolors"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.necklaceofmanycolors"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.braceletofmanycolors"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ringofmanycolors"
+    }
+  ],
+  "BoneArmor": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneGloves"
+    }
+  ],
+  "Circle6Scrolls": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RevealScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ParalyzeFieldScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MassCurseScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "Server.Items.MarkScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.InvisibilityScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ExplosionScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.EnergyBoltScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DispelScroll"
+    }
+  ],
+  "Circle7Scrolls": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PolymorphScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.MeteorSwarmScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MassDispelScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.ManaVampireScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.GateTravelScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.FlamestrikeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.EnergyFieldScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainLightningScroll"
+    }
+  ],
+  "Circle8Scrolls": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SummonWaterElementalScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SummonFireElementalScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SummonEarthElementalScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.SummonDaemonScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SummonAirElementalScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "Server.Items.ResurrectionScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "Server.Items.EnergyVortexScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.EarthquakeScroll"
+    }
+  ],
+  "Clothes": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StrawHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TallStrawHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BearMask"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.OrcishKinMask"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DeerMask"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TribalMask"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TribalMask"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ThighBoots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Boots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Shoes"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Sandals"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WizardsHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.JesterHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TricorneHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FeatheredHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bonnet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cap"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WideBrimHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FloppyHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SkullCap"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BodySash"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bandana"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FullApron"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HalfApron"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LongPants"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Kilt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShortPants"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Skirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cloak"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Shirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Surcoat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Tunic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.JesterSuit"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Doublet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Robe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlainDress"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FancyDress"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FancyShirt"
+    }
+  ],
+  "EarthItem": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.WaterSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.StormSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.FlameSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.EarthSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.IceStrikeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.ShapeshiftScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.RisingFireScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.GustOfAirScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.NaturesTouchScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.EarthPortalScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.EarthBlessingScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.CallLightningScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SummonMammalsScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShiftingEarthScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.OwlSightScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.AntidoteScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "Server.Items.Earthbook"
+    }
+  ],
+  "Eggs": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "MissingObject.FrenziedEgg"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.OstardEgg"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.DragonEgg"
+    }
+  ],
+  "GMArmor": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.KrakenLeatherLeggings"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.KrakenLeatherTunic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.KrakenLeatherSleeves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.KrakenLeatherGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SagesRobe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SylvianFemaleStudded"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SylvianStuddedTunic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SylvianStuddedLeggings"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SylvianStuddedSleeves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SylvianStuddedGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SylvianStuddedGorget"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.InfernalRingmailGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.InfernalRingmailLeggings"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.InfernalRingmailSleeves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.InfernalRingmailTunic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ZephyrChainmailTunic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ZephyrChainmailLeggings"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ZephyrChainmailCoif"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ShieldofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ShieldofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ShieldofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ShieldofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlatemailofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGorgetofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGlovesofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateLeggingsofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateArmsofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateHelmofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.FemalePlateofTheDamned"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlatemailofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGorgetofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGlovesofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateLeggingsofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateArmsofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateHelmofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.FemalePlateofTheAbyss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlatemailofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGorgetofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGlovesofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateLeggingsofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateArmsofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateHelmofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.FemalePlateofTheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlatemailofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGorgetofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateGlovesofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateLeggingsofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateArmsofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.PlateHelmofHavoc"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.FemalePlateofHavoc"
+    }
+  ],
+  "GMWeapon": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.bowoftaintedblood"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.kryssoftheholyavenger"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.sniperscrossbowoferadication"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.XarafaxsAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.OmerosPickaxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.SwordofthePowerPlayer"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.MaceofMutilation"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.HalberdofthefallenPaladin"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.MaceoftheWarlord"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.katanaoftheDeadlyAssassin"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.StaffofMenace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.Undeadsaxeofexecution"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.ScimitarofIcyDoom"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.CrossbowoftheGods"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.Scalpeloftheduelist"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.LanceOftheLostSouls"
+    }
+  ],
+  "Gems": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Diamond"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 1,
+      "Value": "Server.Items.StarSapphire"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 1,
+      "Value": "Server.Items.Amethyst"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 1,
+      "Value": "Server.Items.Emerald"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.Sapphire"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.Ruby"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.Tourmaline"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.Citrine"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 5,
+      "Chance": 1,
+      "Value": "Server.Items.Amber"
+    }
+  ],
+  "Jewelry": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GoldEarrings"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SilverBracelet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GoldNecklace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GoldBeadNecklace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Necklace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GoldEarrings"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GoldBracelet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GoldRing"
+    }
+  ],
+  "Junk": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cabbage"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Lettuce"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Watermelon"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Lime"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Lemon"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Grapes"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pumpkin"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Banana"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Garlic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Onion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Peach"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Apple"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SlabOfBacon"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Sausage"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bacon"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Ham"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.fryingpan"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WoodenBowl"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RollingPin"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Muffins"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BreadLoaf"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cake"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ApplePie"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.wine"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.CheeseSlice"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.CheesePizza"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ThighBoots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Boots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Shoes"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Sandals"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MortarPestle"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TinkersTools"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SmoothingPlane"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MouldingPlane"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.JointingPlane"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Scorp"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Inshave"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Froe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DrawKnife"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DovetailSaw"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Saw"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Hammer"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Coconut"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.hairtonic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.hairbrush"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Torch"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pouch"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Backpack"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bag"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.straightrazor"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Scissors"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SewingKit"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WizardsHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.JesterHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TricorneHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FeatheredHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bonnet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cap"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WideBrimHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FloppyHat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SkullCap"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BodySash"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bandana"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FullApron"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HalfApron"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LongPants"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Kilt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShortPants"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Shirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cloak"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Shirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Surcoat"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Tunic"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.JesterSuit"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Doublet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Robe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlainDress"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FancyShirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Shovel"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.Honey"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Beeswax"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Candle"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RecallRune"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Tambourine"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Drums"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Lute"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Harp"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BoneGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Robe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateGorget"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MetalShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WoodenShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MetalKiteShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HeaterShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WoodenKiteShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Buckler"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BronzeShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.NorseHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bascinet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Helmet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.CloseHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainCoif"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ThighBoots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Boots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherShorts"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedBustierArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherBustierArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherSkirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FemaleLeatherChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FemaleStuddedChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedGorget"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherCap"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherGorget"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BlackStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShepherdsCrook"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.QuarterStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GnarledStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BlackStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pitchfork"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SmithHammer"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Club"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SkinningKnife"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cleaver"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ButcherKnife"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pickaxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Hatchet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.VikingSword"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Scimitar"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Kryss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Kryss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Katana"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Dagger"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cutlass"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Broadsword"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarFork"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarFork"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Spear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Spear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShortSpear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShortSpear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Halberd"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bardiche"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarMace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarHammer"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Maul"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Mace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HammerPick"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TwoHandedAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LargeBattleAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ExecutionersAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DoubleAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BattleAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Axe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HeavyCrossbow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Crossbow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Longsword"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Coconut"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.lifecrystal"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterCurePotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.CurePotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LesserCurePotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.NightSightPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterStrengthPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StrengthPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StrengthPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TotalRefreshPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RefreshPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterAgilityPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.AgilityPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.AgilityPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterExplosionPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ExplosionPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LesserExplosionPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DeadlyPoisonPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterPoisonPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PoisonPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LesserPoisonPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterHealPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HealPotion"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HealPotion"
+    }
+  ],
+  "MagicWands56": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand65"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand48"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand47"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand46"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand45"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand44"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand43"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WeaknessWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ManaDrainWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MagicArrowWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LightningWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HealWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HarmWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GreaterHealWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FireballWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FeebleWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ClumsyWand"
+    }
+  ],
+  "MagicWands78": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.IDWand"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand67"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand66"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand64"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand63"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand62"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand61"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand60"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand59"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand58"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand57"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand56"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand55"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand54"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand53"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand52"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand51"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand50"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.magicwand49"
+    }
+  ],
+  "MagicWeapons": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "MissingObject.Icebow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "MissingObject.firebow"
+    }
+  ],
+  "MiscMagicItem": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent1"
+    }
+  ],
+  "NecroItem": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.SpellbindScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.PlagueScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.LicheScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.KillScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.WyvernStrikeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.WraithformScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.SummonSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.SorcerersBaneScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.WraithsBreathScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.SacrificeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.AnimateDeadScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.AbyssalFlameScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.SpectresTouchScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.DecayingRayScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.DarknessScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.ControlUndeadScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "MissingObject.necrobook"
+    }
+  ],
+  "NormalArmor": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.OrderShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChaosShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateGorget"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.RingmailArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MetalShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WoodenShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.MetalKiteShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HeaterShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WoodenKiteShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Buckler"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BronzeShield"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.PlateHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.NorseHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bascinet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Helmet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.CloseHelm"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ChainCoif"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ThighBoots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Boots"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherShorts"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedBustierArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherBustierArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherSkirt"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FemaleLeatherChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.FemaleStuddedChest"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.StuddedGorget"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherArms"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherLegs"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherCap"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherGloves"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LeatherGorget"
+    }
+  ],
+  "NormalWeapons": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.paladinsword"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.compositebow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.RepeatingCrossbow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.crescentblade"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.lance"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.pike"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.bladedstaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.scepter"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.boneharvester"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.scythe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "MissingObject.doublebladedstaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShepherdsCrook"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.QuarterStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.GnarledStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BlackStaff"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pitchfork"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SmithHammer"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Club"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SkinningKnife"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cleaver"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ButcherKnife"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Pickaxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Hatchet"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.VikingSword"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Scimitar"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Kryss"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Katana"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Dagger"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Cutlass"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Broadsword"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarFork"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Spear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShortSpear"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Halberd"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bardiche"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarMace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarHammer"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Maul"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Mace"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HammerPick"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.TwoHandedAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.LargeBattleAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ExecutionersAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.DoubleAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.BattleAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Axe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.HeavyCrossbow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Crossbow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Bow"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.WarAxe"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.Longsword"
+    }
+  ],
+  "Ores": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.01,
+      "Value": "Server.Items.NewZuluOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.04,
+      "Value": "Server.Items.GoddessOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.07,
+      "Value": "Server.Items.DoomOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "Server.Items.CrystalOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.13,
+      "Value": "Server.Items.AnraOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 0.16,
+      "Value": "Server.Items.DestructionOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 0.19,
+      "Value": "Server.Items.PeachblueOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 0.22,
+      "Value": "Server.Items.ExecutorOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 0.25,
+      "Value": "Server.Items.DripstoneOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 0.28,
+      "Value": "Server.Items.IceRockOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 0.31,
+      "Value": "Server.Items.AzuriteOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 0.34,
+      "Value": "Server.Items.LavarockOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 0.37,
+      "Value": "Server.Items.MalachiteOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 0.4,
+      "Value": "Server.Items.VirginityOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 0.43,
+      "Value": "Server.Items.PyriteOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 0.46,
+      "Value": "Server.Items.UndeadOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 0.49,
+      "Value": "Server.Items.RedElvenOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 0.52,
+      "Value": "Server.Items.OldBritainOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 0.55,
+      "Value": "Server.Items.OnyxOre"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 4,
+      "Chance": 0.58,
+      "Value": "Server.Items.SpectralOre"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 0.61,
+      "Value": "Server.Items.CopperOre"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 0.64,
+      "Value": "Server.Items.MysticOre"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 0.67,
+      "Value": "Server.Items.DullCopperOre"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 0.7,
+      "Value": "Server.Items.PlatinumOre"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 0.73,
+      "Value": "Server.Items.SilverRockOre"
+    },
+    {
+      "MinQuantity": 3,
+      "MaxQuantity": 6,
+      "Chance": 0.76,
+      "Value": "Server.Items.DarkPaganOre"
+    },
+    {
+      "MinQuantity": 3,
+      "MaxQuantity": 6,
+      "Chance": 0.79,
+      "Value": "Server.Items.BronzeOre"
+    },
+    {
+      "MinQuantity": 3,
+      "MaxQuantity": 6,
+      "Chance": 0.82,
+      "Value": "Server.Items.BlackDwarfOre"
+    },
+    {
+      "MinQuantity": 3,
+      "MaxQuantity": 6,
+      "Chance": 0.85,
+      "Value": "Server.Items.FruityOre"
+    },
+    {
+      "MinQuantity": 3,
+      "MaxQuantity": 6,
+      "Chance": 0.88,
+      "Value": "Server.Items.SpikeOre"
+    },
+    {
+      "MinQuantity": 3,
+      "MaxQuantity": 9,
+      "Chance": 0.91,
+      "Value": "Server.Items.IronOre"
+    }
+  ],
+  "PaganMagicItem": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.poisonpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.shadowpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.firepent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.airpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.earthpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent9"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent8"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent7"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent6"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent5"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent4"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent3"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent2"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "MissingObject.waterpent1"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.WaterSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.StormSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.FlameSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.EarthSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.IceStrikeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.ShapeshiftScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.RisingFireScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.5,
+      "Value": "Server.Items.GustOfAirScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.NaturesTouchScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.EarthPortalScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.EarthBlessingScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.75,
+      "Value": "Server.Items.CallLightningScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.SummonMammalsScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.ShiftingEarthScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.OwlSightScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 1,
+      "Value": "Server.Items.AntidoteScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.25,
+      "Value": "Server.Items.Earthbook"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.SpellbindScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.PlagueScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.LicheScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.15,
+      "Value": "Server.Items.KillScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.WyvernStrikeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.WraithformScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.SummonSpiritScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.4,
+      "Value": "Server.Items.SorcerersBaneScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.WraithsBreathScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.SacrificeScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.AnimateDeadScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.65,
+      "Value": "Server.Items.AbyssalFlameScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.SpectresTouchScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.DecayingRayScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.DarknessScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.9,
+      "Value": "Server.Items.ControlUndeadScroll"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 1,
+      "Chance": 0.1,
+      "Value": "MissingObject.necrobook"
+    }
+  ],
+  "PaganReagents": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 1,
+      "Value": "Server.Items.DragonsBlood"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 1,
+      "Value": "Server.Items.DaemonBone"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 2,
+      "Chance": 1,
+      "Value": "Server.Items.Bloodspawn"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.WyrmsHeart"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.VialOfBlood"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.PigIron"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.Obsidian"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.VolcanicAsh"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.Pumice"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.EyeOfNewt"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.Brimstone"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 4,
+      "Chance": 1,
+      "Value": "Server.Items.Blackmoor"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "MissingObject.SerpentsScales"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.FertileDirt"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.ExecutionersCap"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.DeadWood"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.Bone"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.BatWing"
+    }
+  ],
+  "Reagents": [
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.BlackPearl"
+    },
+    {
+      "MinQuantity": 1,
+      "MaxQuantity": 3,
+      "Chance": 1,
+      "Value": "Server.Items.Bloodmoss"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.Ginseng"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.Nightshade"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.SulfurousAsh"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.MandrakeRoot"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.SpidersSilk"
+    },
+    {
+      "MinQuantity": 2,
+      "MaxQuantity": 6,
+      "Chance": 1,
+      "Value": "Server.Items.Garlic"
+    }
+  ]
+}

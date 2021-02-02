@@ -22,7 +22,7 @@ namespace Server.Mobiles
                 // dstart = 10,
                 // Equip = arcarcher,
                 // hostile = 1,
-                // lootgroup = 52,
+                LootTable = "52",
                 // missileweapon = archer,
                 // script = archerkillpcs,
                 // speech = 6,

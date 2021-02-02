@@ -24,7 +24,7 @@ namespace Server.Mobiles
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0xE8 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 52,
+                LootTable = "52",
                 // missileweapon = xbowman,
                 // MissSound = 0x239 /* Weapon */,
                 // script = explosionkillpcs,

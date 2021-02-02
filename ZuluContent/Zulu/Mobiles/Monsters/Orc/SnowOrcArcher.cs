@@ -23,7 +23,7 @@ namespace Server.Mobiles
                 // Equip = snoworcarcher,
                 // HitSound = 0x235 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 72,
+                LootTable = "72",
                 // missileweapon = xbowman,
                 // MissSound = 0x239 /* Weapon */,
                 // script = explosionkillpcs,

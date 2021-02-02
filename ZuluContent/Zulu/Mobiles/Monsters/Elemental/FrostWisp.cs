@@ -31,9 +31,9 @@ namespace Server.Mobiles
                 // Hitscript = :combat:banishscript /* Weapon */,
                 // HitSound = 0x1D5 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 35,
-                // MagicItemChance = 80,
-                // MagicItemLevel = 6,
+                LootTable = "35",
+                LootItemChance = 80,
+                LootItemLevel = 6,
                 // MissSound = 0x239 /* Weapon */,
                 // num_casts = 8,
                 // script = spellkillpcs,
@@ -75,7 +75,7 @@ namespace Server.Mobiles
                     typeof(Spells.Sixth.MassCurseSpell),
                     typeof(PlagueSpell),
                     typeof(WyvernStrikeSpell),
-                    typeof(SorcerorsBaneSpell)
+                    typeof(SorcerersBaneSpell)
                 },
                 ProvokeSkillOverride = 130,
                 Resistances = new Dictionary<ElementalType, CreatureProp>

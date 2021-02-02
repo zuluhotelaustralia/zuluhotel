@@ -10,7 +10,7 @@ using Server.Spells;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class SorcerorsBaneSpell : NecromancerSpell
+    public class SorcerersBaneSpell : NecromancerSpell
     {
         protected const int waterfallEW = 13591; //0x3517
         protected const int waterfallNS = 13561; //0x34f9
@@ -33,7 +33,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 100; }
         }
 
-        public SorcerorsBaneSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public SorcerersBaneSpell(Mobile caster, Item scroll) : base(caster, scroll)
         {
             // these indices in decimal
             //pool = new int[] {6054, 6051, 6047, 6056, 6039, 6053, 6049, 6045, 6055};
@@ -251,10 +251,10 @@ namespace Scripts.Zulu.Spells.Necromancy
 
         private class InternalTarget : Target
         {
-            private SorcerorsBaneSpell m_Owner;
+            private SorcerersBaneSpell m_Owner;
 
             // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(SorcerorsBaneSpell owner) : base(12, false, TargetFlags.Harmful)
+            public InternalTarget(SorcerersBaneSpell owner) : base(12, false, TargetFlags.Harmful)
             {
                 m_Owner = owner;
             }

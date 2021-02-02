@@ -25,7 +25,7 @@ namespace Server.Mobiles
                 // HitSound = 0x235 /* Weapon */,
                 // hostile = 1,
                 // leaderText = "Ego akoloutheou",
-                // lootgroup = 49,
+                LootTable = "49",
                 // missileweapon = archer,
                 // MissSound = 0x239 /* Weapon */,
                 // script = archerkillpcs,

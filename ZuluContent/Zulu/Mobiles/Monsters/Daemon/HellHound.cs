@@ -24,7 +24,7 @@ namespace Server.Mobiles
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0xE8 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 61,
+                LootTable = "61",
                 // MissSound = 0x239 /* Weapon */,
                 // num_casts = 5,
                 // script = spellkillpcs,

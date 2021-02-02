@@ -34,9 +34,9 @@ namespace Server.Mobiles
                 // Hitscript = :combat:customanim /* Weapon */,
                 // HitSound = 0x11C /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 137,
-                // MagicItemChance = 60,
-                // MagicItemLevel = 5,
+                LootTable = "137",
+                LootItemChance = 60,
+                LootItemLevel = 5,
                 // MissSound = 0x11D /* Weapon */,
                 // mount = 0x3e9f 1109,
                 // num_casts = 5,
@@ -74,7 +74,7 @@ namespace Server.Mobiles
                 PreferredSpells = new List<Type>
                 {
                     typeof(DecayingRaySpell),
-                    typeof(SorcerorsBaneSpell),
+                    typeof(SorcerersBaneSpell),
                     typeof(WyvernStrikeSpell),
                     typeof(WyvernStrikeSpell)
                 },

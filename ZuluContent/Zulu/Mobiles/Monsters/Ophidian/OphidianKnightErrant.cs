@@ -23,7 +23,7 @@ namespace Server.Mobiles
                 // Hitscript = :combat:poisonhit /* Weapon */,
                 // HitSound = 0x168 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 71,
+                LootTable = "71",
                 // MissSound = 0x169 /* Weapon */,
                 // script = killpcssprinters,
                 // Speed = 37 /* Weapon */,

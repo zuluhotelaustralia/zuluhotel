@@ -25,7 +25,7 @@ namespace Server.Mobiles
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x24D /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 63,
+                LootTable = "63",
                 // MissSound = 0x24E /* Weapon */,
                 // script = killpcssprinters,
                 // speech = 6,
