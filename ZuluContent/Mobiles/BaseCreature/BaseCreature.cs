@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Engines.Classes;
 using Server.Regions;
 using Server.Network;
 using Server.Multis;
@@ -11,10 +12,11 @@ using Server.Engines.Spawners;
 using Server.Guilds;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
+using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Mobiles
 {
-    public partial class BaseCreature : Mobile
+    public partial class BaseCreature : Mobile, IShilCheckSkill
     {
         public const int MaxLoyalty = 100;
 
@@ -4352,5 +4354,17 @@ namespace Server.Mobiles
         }
 
         public bool IsAnimatedDead { get; set; }
+
+        #region ShilCheckSkill
+
+        public bool CheckSkill(SkillName skillName, int difficulty, int points)
+        {
+            if (skillName != SkillName.DetectHidden)
+                return true;
+
+            return PercentSkillCheck(this, skillName, points);
+        }
+
+        #endregion
     }
 }

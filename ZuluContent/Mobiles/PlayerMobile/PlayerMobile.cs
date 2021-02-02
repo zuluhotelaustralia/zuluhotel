@@ -15,6 +15,7 @@ using Server.Regions;
 using Server.Accounting;
 using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
+using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
 using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -28,7 +29,7 @@ namespace Server.Mobiles
 
     #endregion
 
-    public partial class PlayerMobile : Mobile, IZuluClassed
+    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill
     {
         private class CountAndTimeStamp
         {
@@ -811,7 +812,7 @@ namespace Server.Mobiles
         }
 
         #region [Zulu] Resistances
-        
+
         public EnchantmentDictionary Enchantments { get; } = new();
 
 
@@ -1339,7 +1340,7 @@ namespace Server.Mobiles
             CountAndTimeStamp count = (CountAndTimeStamp) tbl[obj];
             if (count != null)
             {
-                if (count.TimeStamp + SkillCheck.AntiMacroExpire <= DateTime.Now)
+                if (count.TimeStamp + Misc.SkillCheck.AntiMacroExpire <= DateTime.Now)
                 {
                     count.Count = 1;
                     return true;
@@ -1347,7 +1348,7 @@ namespace Server.Mobiles
                 else
                 {
                     ++count.Count;
-                    if (count.Count <= SkillCheck.Allowance)
+                    if (count.Count <= Misc.SkillCheck.Allowance)
                         return true;
                     else
                         return false;
@@ -1444,7 +1445,8 @@ namespace Server.Mobiles
                 }
                 case 7:
                 {
-                    m_PermaFlags = reader.ReadEntityList<Mobile>();;
+                    m_PermaFlags = reader.ReadEntityList<Mobile>();
+                    ;
                     goto case 6;
                 }
                 case 6:
@@ -1512,7 +1514,7 @@ namespace Server.Mobiles
                 ArrayList remove = new ArrayList();
                 foreach (CountAndTimeStamp time in t.Values)
                 {
-                    if (time.TimeStamp + SkillCheck.AntiMacroExpire <= DateTime.Now)
+                    if (time.TimeStamp + Misc.SkillCheck.AntiMacroExpire <= DateTime.Now)
                         remove.Add(time);
                 }
 
@@ -1896,8 +1898,28 @@ namespace Server.Mobiles
         }
 
         #endregion
-        
+
+        #region ShilCheckSkill
+
+        public bool CheckSkill(SkillName skillName, int difficulty, int points)
+        {
+            // In case they have the skill arrow down
+            if (difficulty == 0)
+            {
+                AwardSkillPoints(this, skillName, 0);
+                return true;
+            }
+
+            if (difficulty < 0)
+                return PercentSkillCheck(this, skillName, points);
+
+            return DifficultySkillCheck(this, skillName, difficulty, points);
+        }
+
+        #endregion
+
         #region ZuluClass
+
         private ZuluClass m_ZuluClass;
 
         public ZuluClass ZuluClass
@@ -1930,6 +1952,5 @@ namespace Server.Mobiles
         }
 
         #endregion
-
     }
 }
