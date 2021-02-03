@@ -2,6 +2,7 @@ using System;
 using Server;
 using Server.Engines.Magic;
 using Server.Items;
+using Server.Mobiles;
 using Server.Spells;
 
 namespace ZuluContent.Zulu.Engines.Magic.Hooks
@@ -28,6 +29,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune);
 
         public void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount);
+
+        public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance);
 
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 

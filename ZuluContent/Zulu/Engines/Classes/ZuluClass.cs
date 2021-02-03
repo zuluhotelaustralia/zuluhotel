@@ -20,6 +20,7 @@ namespace Scripts.Zulu.Engines.Classes
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
         private const double PerLevel = 0.25; //25% per level
+        private const double ClasseBonus = 1.5;
         private const int MaxLevel = 6;
 
         private static readonly double[] MinSkills =
@@ -126,9 +127,9 @@ namespace Scripts.Zulu.Engines.Classes
 
         public static void Initialize()
         {
-            CommandSystem.Register("class", AccessLevel.Player, ClassOnCommand);
-            CommandSystem.Register("showclasse", AccessLevel.Player, ClassOnCommand);
-            CommandSystem.Register("setclass", AccessLevel.GameMaster, SetClass);
+            CommandSystem.Register("Classe", AccessLevel.Player, ClassOnCommand);
+            CommandSystem.Register("ShowClasse", AccessLevel.Player, ClassOnCommand);
+            CommandSystem.Register("SetClasse", AccessLevel.GameMaster, SetClass);
         }
 
         public static void ClassOnCommand(CommandEventArgs e)
@@ -151,7 +152,7 @@ namespace Scripts.Zulu.Engines.Classes
             pm.SendMessage(message);
         }
 
-        [Usage("SetClass <class> <level>")]
+        [Usage("SetClasse <class> <level>")]
         [Description("Sets you to the desired class and level, sets all other skills to 0.")]
         public static void SetClass(CommandEventArgs e)
         {
@@ -358,6 +359,17 @@ namespace Scripts.Zulu.Engines.Classes
 
                 DebugLog(healer,
                     $"Increased healing from {source} by {healAmount * cls.Bonus} (level {cls.Level} {cls.Type})");
+            }
+        }
+
+        public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance)
+        {
+            if (tamer is IZuluClassed {ZuluClass: { } cls})
+            {
+                if (cls.Type == ZuluClassType.Ranger)
+                {
+                    chance = (int) (chance / ClasseBonus);
+                }
             }
         }
 

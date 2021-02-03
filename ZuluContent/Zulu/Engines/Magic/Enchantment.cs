@@ -9,7 +9,7 @@ using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
-
+using Server.Mobiles;
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
@@ -18,17 +18,13 @@ namespace ZuluContent.Zulu.Engines.Magic
     {
         public static readonly TEnchantmentInfo EnchantmentInfo = new TEnchantmentInfo();
 
-        [IgnoreMember]
-        public virtual EnchantmentInfo Info => EnchantmentInfo;
+        [IgnoreMember] public virtual EnchantmentInfo Info => EnchantmentInfo;
 
-        [IgnoreMember]
-        public abstract string AffixName { get; }
+        [IgnoreMember] public abstract string AffixName { get; }
 
-        [Key(0)]
-        public bool Cursed { get; set; }
+        [Key(0)] public bool Cursed { get; set; }
 
-        [Key(4)]
-        public CurseLevelType CurseLevel { get; set; }
+        [Key(4)] public CurseLevelType CurseLevel { get; set; }
 
         public virtual bool GetShouldDye() => Info.Hue != 0;
 
@@ -45,6 +41,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
             NotifyMobile(above, above, text);
         }
+
         protected virtual void NotifyMobile(Mobile above, Mobile who, string text)
         {
             above.PrivateOverheadMessage(
@@ -57,17 +54,19 @@ namespace ZuluContent.Zulu.Engines.Magic
         }
 
         public virtual void OnIdentified(IEntity entity)
-        { 
+        {
         }
 
         public virtual void OnAdded(IEntity entity)
         {
-            if (Cursed && CurseLevel == CurseLevelType.Unrevealed && entity is IMagicItem item && item.Parent is Mobile mobile)
+            if (Cursed && CurseLevel == CurseLevelType.Unrevealed && entity is IMagicItem item &&
+                item.Parent is Mobile mobile)
             {
                 CurseLevel = CurseLevelType.RevealedCantUnEquip;
                 mobile.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
                 mobile.PlaySound(0x1E1);
-                mobile.SendAsciiMessage(33, "That item is cursed, and reveals itself to be a " + GetMagicItemName(item));
+                mobile.SendAsciiMessage(33,
+                    "That item is cursed, and reveals itself to be a " + GetMagicItemName(item));
             }
         }
 
@@ -77,7 +76,8 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public virtual void OnBeforeRemoved(IEntity entity, Mobile from, ref bool canRemove)
         {
-            if (Cursed && CurseLevel == CurseLevelType.RevealedCantUnEquip && entity is Item item && item.Parent is Mobile parent && parent == from)
+            if (Cursed && CurseLevel == CurseLevelType.RevealedCantUnEquip && entity is Item item &&
+                item.Parent is Mobile parent && parent == from)
             {
                 canRemove = false;
             }
@@ -85,7 +85,6 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
         {
-            
         }
 
         public virtual void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
@@ -106,6 +105,10 @@ namespace ZuluContent.Zulu.Engines.Magic
         }
 
         public virtual void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
+        {
+        }
+
+        public virtual void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance)
         {
         }
 
@@ -133,11 +136,13 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage)
+        public virtual void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield,
+            ref int damage)
         {
         }
 
-        public virtual void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
+        public virtual void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor,
+            ref int damage)
         {
         }
     }

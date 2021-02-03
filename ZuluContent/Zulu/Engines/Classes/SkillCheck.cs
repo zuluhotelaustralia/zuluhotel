@@ -8,7 +8,7 @@ namespace Scripts.Zulu.Engines.Classes
     public static class SkillCheck
     {
         public const int MaxStatCap = 60000;
-        public const int StatCap = 1350;
+        public const int StatCap = 1300;
 
         public record StatAdvancement
         {

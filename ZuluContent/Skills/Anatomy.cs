@@ -37,8 +37,8 @@ namespace Server.SkillHandlers
                     return;
                 }
 
-                if (!(from as IShilCheckSkill)?.CheckSkill(SkillName.Anatomy, -1,
-                    Configs[SkillName.Anatomy].DefaultPoints) ?? false)
+                if ((from as IShilCheckSkill)?.CheckSkill(SkillName.Anatomy, -1,
+                    Configs[SkillName.Anatomy].DefaultPoints) == false)
                 {
                     from.SendAsciiMessage("You're not sure...");
                     return;
