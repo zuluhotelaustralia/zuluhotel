@@ -97,7 +97,10 @@ namespace Server.Mobiles
                 StamMaxSeed = 1000,
                 Str = 1250,
                 Tamable = true,
-                VirtualArmor = 75
+                VirtualArmor = 75,
+                ActiveSpeed = 0.05,
+                PassiveSpeed = 0.2,
+                CanFly = true
             });
         }
 
