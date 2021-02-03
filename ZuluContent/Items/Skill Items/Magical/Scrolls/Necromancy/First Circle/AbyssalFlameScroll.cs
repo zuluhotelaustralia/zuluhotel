@@ -2,21 +2,21 @@ using Server.Spells;
 
 namespace Server.Items
 {
-    public class AbyssalFlame : NecroSpellScroll
+    public class AbyssalFlameScroll : NecroSpellScroll
     {
         [Constructible]
-        public AbyssalFlame() : this(1)
+        public AbyssalFlameScroll() : this(1)
         {
         }
 
 
         [Constructible]
-        public AbyssalFlame(int amount) : base(SpellEntry.AbyssalFlame, 0x1F3E, amount)
+        public AbyssalFlameScroll(int amount) : base(SpellEntry.AbyssalFlame, 0x1F3E, amount)
         {
         }
 
         [Constructible]
-        public AbyssalFlame(Serial serial) : base(serial)
+        public AbyssalFlameScroll(Serial serial) : base(serial)
         {
         }
 

@@ -21,7 +21,7 @@ namespace Server.Mobiles
                 // Equip = darklingslime,
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x1CB /* Weapon */,
-                // lootgroup = 125,
+                LootTable = "125",
                 // MissSound = 0x239 /* Weapon */,
                 // script = slime,
                 // Speed = 35 /* Weapon */,

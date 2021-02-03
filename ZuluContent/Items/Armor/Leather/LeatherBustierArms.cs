@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    [FlipableAttribute( 0x1c0a, 0x1c0b )]
+    [FlipableAttribute( 0x1c0a, 0x1c0b, 0x1C0A )]
 	public class LeatherBustierArms : BaseArmor
 	{
 		public override int InitMinHits{ get{ return 30; } }

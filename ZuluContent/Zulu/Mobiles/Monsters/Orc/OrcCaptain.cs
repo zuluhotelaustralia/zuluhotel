@@ -21,7 +21,7 @@ namespace Server.Mobiles
                 // Equip = orccaptain,
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x23D /* Weapon */,
-                // lootgroup = 42,
+                LootTable = "42",
                 // MissSound = 0x239 /* Weapon */,
                 // script = killpcs,
                 // speech = 6,

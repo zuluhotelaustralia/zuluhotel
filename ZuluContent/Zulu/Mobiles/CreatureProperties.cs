@@ -137,16 +137,9 @@ namespace Server.Mobiles
         public bool Tamable { get; init; } = false;
         public int ControlSlots { get; init; }
         public CreatureProp MinTameSkill { get; init; }
-        public Dictionary<SkillName, CreatureProp> Skills { get; init; } = new Dictionary<SkillName, CreatureProp>();
-
-        public Dictionary<ElementalType, CreatureProp> Resistances { get; init; } =
-            new Dictionary<ElementalType, CreatureProp>();
-
-        public Dictionary<LootTable, CreatureProp> Loot { get; init; } = new Dictionary<LootTable, CreatureProp>();
-
-        public Dictionary<ElementalType, CreatureProp> DamageTypes { get; init; } =
-            new Dictionary<ElementalType, CreatureProp>();
-
+        public Dictionary<SkillName, CreatureProp> Skills { get; init; } = new();
+        public Dictionary<ElementalType, CreatureProp> Resistances { get; init; } = new();
+        public Dictionary<ElementalType, CreatureProp> DamageTypes { get; init; } = new();
         public WeaponAbility WeaponAbility { get; init; } = null;
         public double WeaponAbilityChance { get; init; } = 0.4;
         public bool AutoDispel { get; init; } = false;
@@ -164,6 +157,10 @@ namespace Server.Mobiles
         public HideType HideType { get; init; }
         public int Hides { get; init; }
         public bool TargetAcquireExhaustion { get; init; }
+        
+        public string LootTable { get; set; }
+        public int LootItemLevel { get; set; }
+        public int LootItemChance { get; set; }
 
         private static readonly Action<CreatureProperties, BaseCreature> MapAction
             = ZuluUtil.BuildMapAction<CreatureProperties, BaseCreature>();
@@ -188,14 +185,7 @@ namespace Server.Mobiles
 
             foreach (var (resistance, prop) in Resistances)
                 dest.Enchantments.SetResist(resistance, prop);
-
-            foreach (var (table, amount) in Loot)
-            {
-                if(amount == 1)
-                {
-                    dest.AddLoot(table);
-                }
-            }
+            
 
             // foreach (var (damageType, prop) in ElementalType.
             //     dest.SetDamageType(damageType, prop);

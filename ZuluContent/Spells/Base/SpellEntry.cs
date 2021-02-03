@@ -90,7 +90,7 @@ namespace Server.Spells
         AnimateDead = 105,
         Sacrifice = 106,
         WraithBreath = 107,
-        SorcerorsBane = 108,
+        SorcerersBane = 108,
         SummonSpirit = 109,
         WraithForm = 110,
         WyvernStrike = 111,

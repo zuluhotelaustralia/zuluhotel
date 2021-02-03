@@ -23,7 +23,7 @@ namespace Server.Mobiles
                 // Equip = trollarcher3,
                 // HitSound = 0x235 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 41,
+                LootTable = "41",
                 // missileweapon = archer,
                 // MissSound = 0x239 /* Weapon */,
                 // script = archerkillpcs,

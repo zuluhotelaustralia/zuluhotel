@@ -38,11 +38,6 @@ public LavaSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4
 			// TODO: body parts, armour
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
-
 		public override bool HasBreath{ get{ return true; } } // fire breath enabled
 		public override int Meat{ get{ return 4; } }
 		public override int Hides{ get{ return 15; } }

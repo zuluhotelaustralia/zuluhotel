@@ -2,21 +2,21 @@ using Server.Spells;
 
 namespace Server.Items
 {
-    public class SorcerorsBaneScroll : NecroSpellScroll
+    public class SorcerersBaneScroll : NecroSpellScroll
     {
         [Constructible]
-        public SorcerorsBaneScroll() : this(1)
+        public SorcerersBaneScroll() : this(1)
         {
         }
 
 
         [Constructible]
-        public SorcerorsBaneScroll(int amount) : base(SpellEntry.SorcerorsBane, 0x1F36, amount)
+        public SorcerersBaneScroll(int amount) : base(SpellEntry.SorcerersBane, 0x1F36, amount)
         {
         }
 
         [Constructible]
-        public SorcerorsBaneScroll(Serial serial) : base(serial)
+        public SorcerersBaneScroll(Serial serial) : base(serial)
         {
         }
 

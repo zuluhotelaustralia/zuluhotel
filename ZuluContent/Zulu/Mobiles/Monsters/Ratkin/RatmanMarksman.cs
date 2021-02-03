@@ -23,7 +23,7 @@ namespace Server.Mobiles
                 // Equip = ratmanmarksman,
                 // HitSound = 0x235 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 51,
+                LootTable = "51",
                 // missileweapon = xbowman,
                 // MissSound = 0x239 /* Weapon */,
                 // script = explosionkillpcs,

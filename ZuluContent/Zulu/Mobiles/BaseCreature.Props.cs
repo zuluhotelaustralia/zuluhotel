@@ -146,7 +146,10 @@ namespace Server.Mobiles
         {
             get { return InitProperties?.SaySpellMantra ?? false; }
         }
-
+        
+        public virtual string LootTable { get; set; }
+        public virtual int LootItemLevel { get; set; }
+        public virtual int LootItemChance { get; set; }
 
         public virtual ZuluClass ZuluClass
         {

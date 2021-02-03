@@ -82,7 +82,7 @@ namespace Server.Items
             cont.Locked = true;
 
             // TODO: Update to correct loot table based on map level
-            LootGenerator.MakeLoot(cont, LootTable.Table2);
+            // LootGenerator.MakeLoot(cont, LootTable.Table2, 1, 1);
         }
 
         public override bool CheckLocked(Mobile from)

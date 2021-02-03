@@ -22,7 +22,7 @@ namespace Server.Mobiles
                 // food = meat,
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x1DE /* Weapon */,
-                // lootgroup = 48,
+                LootTable = "48",
                 // MissSound = 0x239 /* Weapon */,
                 // script = killpcs,
                 // Speed = 50 /* Weapon */,

@@ -22,7 +22,7 @@ namespace Server.Mobiles
                 // Graphic = 0x0ec4 /* Weapon */,
                 // HitSound = 0x1A9 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 58,
+                LootTable = "58",
                 // MissSound = 0x239 /* Weapon */,
                 // script = killpcs,
                 // Speed = 30 /* Weapon */,

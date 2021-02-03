@@ -21,7 +21,7 @@ namespace Server.Mobiles
                 // Equip = hauntedblade,
                 // HitSound = 0x23C /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 48,
+                LootTable = "48",
                 // MissSound = 0x23A /* Weapon */,
                 // script = killpcs,
                 // speech = 6,

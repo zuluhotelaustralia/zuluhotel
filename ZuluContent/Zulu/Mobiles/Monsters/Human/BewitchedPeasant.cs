@@ -21,7 +21,7 @@ namespace Server.Mobiles
                 // equip = cothes,
                 // Equip_0 = bewitchedpeasant,
                 // guardignore = 1,
-                // lootgroup = 47,
+                LootTable = "47",
                 // script = killpcs,
                 // Swordsmanship = 75,
                 // TrueColor = 33784,

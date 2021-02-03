@@ -165,33 +165,9 @@ namespace Server.Scripts.Engines.Loot
 
     public static class LootGenerator
     {
-        public static void Initialize()
+        public static void MakeLoot(Container container, LootTable table, int itemLevel, double itemChance)
         {
-            CommandSystem.Register("MakeLoot", AccessLevel.Developer, MakeLoot_OnCommand);
-        }
-
-        private static void MakeLoot_OnCommand(CommandEventArgs e)
-        {
-            e.Mobile.SendMessage("Target a container.");
-            e.Mobile.Target = new InternalTarget();
-        }
-
-        private class InternalTarget : Target
-        {
-            public InternalTarget() : base(-1, false, TargetFlags.None)
-            {
-            }
-
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                if (targeted is Container container)
-                    MakeLoot(container, LootTable.Table1);
-            }
-        }
-
-        public static void MakeLoot(Container container, LootTable table)
-        {
-            var items = table.Roll()
+            var items = table.Roll(itemLevel, itemChance)
                 .Select(lootItem =>
                 {
                     // Attempt to make the item magical, will do nothing if its not eligible.

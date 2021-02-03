@@ -24,7 +24,7 @@ namespace Server.Mobiles
                 // Hitscript = :combat:paralyzehit /* Weapon */,
                 // HitSound = 0x163 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 32,
+                LootTable = "32",
                 // Macefighting = 105,
                 // MissSound = 0x239 /* Weapon */,
                 // script = killpcs,

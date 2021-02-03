@@ -2932,27 +2932,23 @@ namespace Server.Mobiles
 
         public virtual void GenerateLoot()
         {
-        }
-
-        public virtual void AddLoot(LootTable table)
-        {
             if (Summoned || m_Spawning)
                 return;
 
-            Container backpack = Backpack;
+            if (LootTable == null || !LootConfig.Tables.TryGetValue(LootTable, out var table))
+                return;
 
+            
+            var backpack = Backpack;
             if (backpack == null)
             {
-                backpack = new Backpack();
-
-                backpack.Movable = false;
-
+                backpack = new Backpack {Movable = false};
                 AddItem(backpack);
             }
 
-            LootGenerator.MakeLoot(backpack, table);
+            LootGenerator.MakeLoot(backpack, table, LootItemLevel, LootItemChance);
         }
-
+        
         public bool PackArmor(int minLevel, int maxLevel)
         {
             return PackArmor(minLevel, maxLevel, 1.0);

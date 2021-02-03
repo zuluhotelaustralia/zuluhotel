@@ -27,7 +27,7 @@ namespace Server.Mobiles
                 // hostile = 1,
                 // idlesound1 = 0x35,
                 // idlesound2 = 0x2E4,
-                // lootgroup = 23,
+                LootTable = "23",
                 // script = killpcs,
                 // TrueColor = 0,
                 ActiveSpeed = 0.2,

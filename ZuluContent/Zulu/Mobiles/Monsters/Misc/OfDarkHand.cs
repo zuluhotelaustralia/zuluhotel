@@ -25,7 +25,7 @@ namespace Server.Mobiles
                 // guardignore = 1,
                 // HitSound = 0x238 /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 59,
+                LootTable = "59",
                 // MissSound = 0x233 /* Weapon */,
                 // mount = 0x3e9f 1170,
                 // script = killpcsTeleporter,

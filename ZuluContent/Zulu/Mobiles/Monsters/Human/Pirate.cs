@@ -20,7 +20,7 @@ namespace Server.Mobiles
                 // dstart = 10,
                 // Equip = pirate,
                 // HitSound = 0x23C /* Weapon */,
-                // lootgroup = 47,
+                LootTable = "47",
                 // MissSound = 0x23A /* Weapon */,
                 // script = killpcs,
                 // speech = 46,

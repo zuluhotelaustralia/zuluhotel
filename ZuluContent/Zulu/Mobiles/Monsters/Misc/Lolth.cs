@@ -31,9 +31,9 @@ namespace Server.Mobiles
                 // Hitscript = :combat:poisonspit /* Weapon */,
                 // HitSound = 0x1CB /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 9,
-                // MagicItemChance = 60,
-                // MagicItemLevel = 6,
+                LootTable = "9",
+                LootItemChance = 60,
+                LootItemLevel = 6,
                 // MissSound = 0x1CA /* Weapon */,
                 // script = elfspellkillpcs,
                 // Speed = 20 /* Weapon */,
@@ -69,7 +69,7 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 PreferredSpells = new List<Type>
                 {
-                    typeof(SorcerorsBaneSpell),
+                    typeof(SorcerersBaneSpell),
                     typeof(WyvernStrikeSpell),
                     typeof(DecayingRaySpell)
                 },

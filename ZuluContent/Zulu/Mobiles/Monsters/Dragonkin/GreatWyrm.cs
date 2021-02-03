@@ -26,9 +26,9 @@ namespace Server.Mobiles
                 // Hitscript = :combat:banishscript /* Weapon */,
                 // HitSound = 0x16B /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 35,
-                // MagicItemChance = 80,
-                // MagicItemLevel = 5,
+                LootTable = "35",
+                LootItemChance = 80,
+                LootItemLevel = 5,
                 // MissSound = 0x239 /* Weapon */,
                 // script = firebreather,
                 // Speed = 60 /* Weapon */,
@@ -126,12 +126,6 @@ namespace Server.Mobiles
         [Constructible]
         public GreatWyrm(Serial serial) : base(serial)
         {
-        }
-
-        public override void GenerateLoot()
-        {
-            // TODO: Update to correct loot table
-            AddLoot(LootTable.Table2);
         }
 
         public override void Serialize(IGenericWriter writer)

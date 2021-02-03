@@ -36,11 +36,6 @@ public PredatorHellCat() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2,
 			MinTameSkill = 89.1;
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
-
 		public override bool HasBreath{ get{ return true; } } // fire breath enabled
 		public override int Hides{ get{ return 10; } }
 		public override HideType HideType{ get{ return HideType.Regular; } }

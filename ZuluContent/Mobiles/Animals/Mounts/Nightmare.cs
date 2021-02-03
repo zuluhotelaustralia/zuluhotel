@@ -66,11 +66,6 @@ public Nightmare( string name ) : base( name, 0x74, 0x3EA7, AIType.AI_Mage, Figh
 			PackItem( new SulfurousAsh( Utility.RandomMinMax( 3, 5 ) ) );
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
-
 		public override int GetAngerSound()
 		{
 			if ( !Controlled )

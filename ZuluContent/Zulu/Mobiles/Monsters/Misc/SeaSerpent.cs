@@ -47,10 +47,6 @@ namespace Server.Mobiles
             //PackItem( new SpecialFishingNet() );
         }
 
-        public override void GenerateLoot()
-        {
-            AddLoot(LootTable.Table1);
-        }
 
         public override bool HasBreath
         {

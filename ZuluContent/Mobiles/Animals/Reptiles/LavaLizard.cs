@@ -41,10 +41,6 @@ public LavaLizard() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 
 			PackItem( new SulfurousAsh( Utility.Random( 4, 10 ) ) );
 		}
 
-		public override void GenerateLoot()
-		{
-			AddLoot(LootTable.Table1);
-		}
 
 		public override bool HasBreath{ get{ return true; } } // fire breath enabled
 		public override int Hides{ get{ return 12; } }

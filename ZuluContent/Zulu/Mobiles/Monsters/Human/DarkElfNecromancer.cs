@@ -30,9 +30,9 @@ namespace Server.Mobiles
                 // Graphic = 0x13f9 /* Weapon */,
                 // HitSound = 0x13C /* Weapon */,
                 // hostile = 1,
-                // lootgroup = 138,
-                // MagicItemChance = 60,
-                // MagicItemLevel = 4,
+                LootTable = "138",
+                LootItemChance = 60,
+                LootItemLevel = 4,
                 // MissSound = 0x239 /* Weapon */,
                 // num_casts = 5,
                 // script = elfspellkillpcs,
@@ -67,7 +67,7 @@ namespace Server.Mobiles
                 PreferredSpells = new List<Type>
                 {
                     typeof(DecayingRaySpell),
-                    typeof(SorcerorsBaneSpell),
+                    typeof(SorcerersBaneSpell),
                     typeof(WyvernStrikeSpell)
                 },
                 ProvokeSkillOverride = 120,

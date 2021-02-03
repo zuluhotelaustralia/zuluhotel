@@ -23,7 +23,7 @@ namespace Server.Mobiles
                 // HitSound = 0x23C /* Weapon */,
                 // hostile = 1,
                 // leaderText = "Ego akoloutheou",
-                // lootgroup = 15,
+                LootTable = "15",
                 // MissSound = 0x23A /* Weapon */,
                 // script = killpcs,
                 // Speed = 47 /* Weapon */,
