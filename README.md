@@ -2,78 +2,69 @@
     <img src="https://i.imgur.com/KNDuNQs.png" width="200" height="200"  alt="Ultima Online ZHA Logo">
 </p>
 
-An open source custom shard for Ultima Online, running on-top of the [ModernUO](https://github.com/modernuo/ModernUO/) emulator.
+This README is just a fast *quick overview* document. You can find more detailed documentation in our [Getting Started](https://zuluhotel.com.au/modernzhdocs/docs/getting-started/) guide.
 
-# Introduction
+What is Modern Zuluhotel?
+--------------
+Modern Zuluhotel is an open-source custom server for Ultima Online based on the old Zuluhotel scripts running on-top of the [ModernUO](https://github.com/modernuo/ModernUO/) emulator.
+Zuluhotel is an alternative ruleset for UO with diablo-like classes and magic systems with its original release dating back to on or before 2003. 
 
-Zuluhotel for ModernUO is a custom set of functionality based on the old Penultima Online scripts that date back to 2003.
+What is the point of this project?
+--------------
+The projects aim is to create a faithful reimplementation of the beloved but spaghetti code mess "Zuluhotel" servers using modern technology.
+ModernUO and other modern emulators offer a greater degree of flexibility and stability previously possible and new open-source recreations of the UO client like [ClassicUO](https://github.com/andreakarasho/ClassicUO) show there's still great potential to revive an old classic.
 
-Custom functionality includes:
+Why don't you just use the POL scripts?
+--------------
 
- - Classes (Warrior, Bard, Mage, Thief, Crafter, Ranger) with their own unique play styles and bonuses.
- - New resources with their own custom attributes
- - TODO
- 
-## Setup
+Undeniably there has been dozens if not hundreds of great Zuluhotel shards across the globe running POL and eScript from the beginning with ZHC to ZHBR and ZHA. 
 
-**Tip:** To speed up load times you should clone the project to an SSD if you have one available.
+There still exists servers today attracting hundreds of concurrent players. However the scripts those servers run on and the publicly available ones have been made over almost 2 decades by anonymous authors with varying degrees of quality control (usually none) and wildly different visions. 
+It's the definition of technical-debt where improving or adding new features often requires ripping out and replacing old code with your own flavour, continuing the cycle. Even then most scripts available are created for a POL version several years out of date containing many unfixable POL core bugs. 
 
-You'll need to init the ModernUO git submodule when you first pull the project:
-```bash
-git submodule update --init --recursive
-```
+From a technical stand-point: Untangling the spaghetti, cleaning up all the bad code, ripping it back to a baseline, and then updating the scripts to the latest POL requires a huge amount of effort that nears a total rewrite. 
+POL whilst a great battle-tested emulator is now showing it's age, namely with it's eScript language. eScript has fallen drastically behind modern languages on performance, ease of use, and features like package management, type-safety, debuggers, editor support, etc.
+Continuing to use POL is a non-starter for a rewrite when there exists equivalent or better emulators written in C# like ModernUO.
 
-If you get a `(publickey)` error updating the submodules you can either setup [ssh-key git authentication](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh) or rewrite the git url to https:
-```bash
-git config --global url."https://github.com/modernuo/ModernUO.git".insteadOf "git@github.com:modernuo/ModernUO.git"
-```
+From an open-source project standpoint: We want to attract as many contributors as possible and grow a community. RunUO/ServUO/ModernUO and by extension C# has orders of magnitude more developers proficient in it than POL's eScript making it again an obvious choice.
 
+From a community standpoint: With possibility of many more contributors, keeping the code open-source, and a high-quality project we hope to foster a new flame of people playing UO on the Zuluhotel-style servers we love.
 
-### Building and running
+What functionality will the first version have?
+--------------
+Right now [our first milestone is to reach a playable MVP](https://github.com/zuluhotelaustralia/zuluhotel/milestone/1) that looks and feels like the ZH3 era of servers (circa around 2003-2005)
 
-#### Running locally
+The base code for the ruleset is from the [RunUO.T2A](https://github.com/Grimoric/RunUO.T2A) project by Grimoric which aggressively cuts out anything post-T2A.
+That gave us a good base to selectively bring over the Zuluhotel functionality from [Daleron & Sith's](https://zuluhotel.ca/) now abandoned RunUO version.
 
-Change the `dataDirectories` entry in the `Distribution/Configuration/modernuo.json` to the root of your UO client installation directory (default is `/app/client/` for docker) e.g.
-```json
-  "dataDirectories": [
-    "C:\\Program Files (x86)\\Ultima Online Classic\\"
-  ],
-```
+We're attempting to be as accurate as possible with reproducing the behaviour in the POL-based scripts and to that end we are limiting the initial scope to the functionality in the [ZH3 scripts](https://github.com/zuluhotelaustralia/uoaus).
+To keep the project on-track we won't be implementing any features from later ZH releases until the first milestone is finished (e.g. No racial benefits, non-standard GM items, champion spawn systems etc.). 
 
-Open a terminal in the root of the repository and build/publish the solution
-```bash
-dotnet publish
-dotnet ModernUO/Distribution/ModernUO.dll
-```
+One exception is when we it's easier to implement a newer and better system than recreate an old messy one, e.g. we won't be rewriting the entire combat system to behave exactly like POLs, instead we'll tweak it to be very similar.
+However we do welcome all ideas, and encourage you to create issues detailing your ideas/improvements/feature requests, or discuss with us on discord.
 
-#### Running with docker
+Initial features implemented from ZH3 will include (but not limited to):
 
-```bash
-docker build . -t zuluhotelaustralia/zuluhotel
-docker run --rm -it \
-    --volume $HOME/zuluhotel/client/:/app/client/ \
-    --volume $HOME/zuluhotel/Saves/:/app/Saves/ \
-    -p 2593:2593 \
-    zuluhotelaustralia/zuluhotel
-```
+ - Classes (Warrior, Bard, Mage, Thief, Crafter, Ranger)
+ - Skills refactored from OSI to behave like their POL version counterparts
+ - Loot group system
+ - All magical enchantments
+ - Standard GM items (Omero's Pickaxe, Xarafax Axe, Katana of Kieri etc.)
+ - OSI resources replaced with Zulu ores/ingots/logs
+ - Modernized (gumps etc) crafting systems
+ - Necro/Earth magic
+ - Elemental pentagram system (weapons/armour etc)
+ - Creatures (golden dragons, great wyrms and the like)
+ - And more!
 
-### World Setup
+*Note: if we're missing anything of consequence please create an issue to add it*
 
-Run these commands as an administrator after first login:
+What do I do now?
+-------------
+Head over to our documentation site and read through our [Getting Started](https://zuluhotel.com.au/modernzhdocs/docs/getting-started/) guide, or come [join our discord](https://discord.gg/TNtDtK2sG4) to chat with us!
 
-```bash
-[decorate
-[doorgen
-[signgen
-[generatespawners felucca.json
-```
-
-### Next Steps
-
-At this point you will have a fully spawned world with NPCs. You may want to run the `[save` command to persist the world to disk. 
-
-### Credits
-
+Credits
+--------------
 1. [Zulu Hotel Canada](https://zuluhotel.ca/) (Daleron & Sith) for the initial open source release that this shard has used as a starting point and now continues.
 2. [RunUO.T2A](https://github.com/Grimoric/RunUO.T2A) for the initial T2A base that was used for layering on the Zuluhotel features.
 3. [ModernUO](https://github.com/modernuo/ModernUO/) for being our core emulator
