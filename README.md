@@ -40,7 +40,7 @@ That gave us a good base to selectively bring over the Zuluhotel functionality f
 We're attempting to be as accurate as possible with reproducing the behaviour in the POL-based scripts and to that end we are limiting the initial scope to the functionality in the [ZH3 scripts](https://github.com/zuluhotelaustralia/uoaus).
 To keep the project on-track we won't be implementing any features from later ZH releases until the first milestone is finished (e.g. No racial benefits, non-standard GM items, champion spawn systems etc.). 
 
-One exception is when we it's easier to implement a newer and better system than recreate an old messy one, e.g. we won't be rewriting the entire combat system to behave exactly like POLs, instead we'll tweak it to be very similar.
+One exception is when we think it's easier to implement a newer and better system than recreate an old messy one, e.g. we won't be rewriting the entire combat system to behave exactly like POLs, instead we'll tweak it to be very similar.
 However we do welcome all ideas, and encourage you to create issues detailing your ideas/improvements/feature requests, or discuss with us on discord.
 
 Initial features implemented from ZH3 will include (but not limited to):
