@@ -1869,11 +1869,7 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime UnresponsiveToTamingEndTime
-        {
-            get { return m_timeUnresponsiveToTaming; }
-            set { m_timeUnresponsiveToTaming = value; }
-        }
+        public long UnresponsiveToTamingEndTime { get; set; }
 
         [CommandProperty(AccessLevel.Administrator)]
         public bool Summoned

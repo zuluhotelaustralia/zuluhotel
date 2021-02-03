@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using Scripts.Zulu.Engines.Classes;
-using static Scripts.Zulu.Engines.Classes.ZuluClass;
 using Server.Targeting;
 using Server.Network;
 using Server.Mobiles;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.SkillHandlers
 {
@@ -37,11 +37,10 @@ namespace Server.SkillHandlers
             return Configs[SkillName.AnimalTaming].Delay;
         }
 
-        public static bool AngerBeast(BaseCreature creature, Mobile from, bool isClassedRanger)
+        public static bool AngerBeast(BaseCreature creature, Mobile from)
         {
             var chance = 75;
-            if (isClassedRanger)
-                chance = (int) (chance / ClasseBonus);
+            from.FireHook(h => h.OnAnimalTaming(from, creature, ref chance));
 
             if (Utility.Random(100) < chance)
             {
@@ -128,9 +127,7 @@ namespace Server.SkillHandlers
 
                 var calmingDifficulty = (int) difficulty + 10;
 
-                var isClassedRanger = (from as PlayerMobile)?.ZuluClass.Type == ZuluClassType.Ranger;
-
-                if (creature.UnresponsiveToTamingEndTime < DateTime.Now)
+                if (creature.UnresponsiveToTamingEndTime < Core.TickCount)
                 {
                     if ((from as IShilCheckSkill)?.CheckSkill(SkillName.AnimalLore, calmingDifficulty,
                         0) == true && creature.Warmode)
@@ -138,38 +135,36 @@ namespace Server.SkillHandlers
                         CalmBeast(creature, from);
                     }
                     else if (creature.CreatureType == CreatureType.Dragonkin &&
-                             AngerBeast(creature, from, isClassedRanger))
+                             AngerBeast(creature, from))
                         return;
                 }
                 else
                 {
-                    AngerBeast(creature, from, isClassedRanger);
+                    AngerBeast(creature, from);
                     from.SendAsciiMessage(33, "The creature is unresponsive to taming at this time.");
                     return;
                 }
 
                 m_BeingTamed[targeted] = from;
 
-                new InternalTimer(from, creature, isClassedRanger, difficulty).Start();
+                new InternalTimer(from, creature, difficulty).Start();
             }
 
             private class InternalTimer : Timer
             {
                 private static readonly int MaxCount = 4;
                 private Mobile m_Tamer;
-                private bool m_IsClassedRanger;
                 private BaseCreature m_Creature;
                 private int m_Count;
                 private double m_Difficulty;
 
-                public InternalTimer(Mobile tamer, BaseCreature creature, bool isClassedRanger,
+                public InternalTimer(Mobile tamer, BaseCreature creature,
                     double difficulty) : base(
                     TimeSpan.FromSeconds(0.0),
                     DelayBetweenSpeech, MaxCount)
                 {
                     m_Difficulty = difficulty;
                     m_Tamer = tamer;
-                    m_IsClassedRanger = isClassedRanger;
                     m_Creature = creature;
                     Priority = TimerPriority.TwoFiftyMS;
                 }
@@ -226,14 +221,14 @@ namespace Server.SkillHandlers
                     }
                     else
                     {
-                        if (DateTime.Now < m_Creature.UnresponsiveToTamingEndTime)
+                        if (Core.TickCount < m_Creature.UnresponsiveToTamingEndTime)
                         {
                             m_BeingTamed.Remove(m_Creature);
                             m_Tamer.SendAsciiMessage(33, $"You failed to tame the creature.");
                         }
                         else
                         {
-                            m_Creature.UnresponsiveToTamingEndTime = DateTime.Now;
+                            m_Creature.UnresponsiveToTamingEndTime = Core.TickCount;
 
                             if ((m_Tamer as IShilCheckSkill)?.CheckSkill(SkillName.AnimalTaming, (int) m_Difficulty,
                                 (int) m_Difficulty * PointMultiplier) == false)
@@ -243,18 +238,17 @@ namespace Server.SkillHandlers
                                 var chance = 80 -
                                              (int) ((m_Tamer.Skills[SkillName.AnimalTaming].Value - m_Difficulty + 20) *
                                                     2);
-                                if (m_IsClassedRanger)
-                                    chance = (int) (chance / ClasseBonus);
-
+                                m_Tamer.FireHook(h => h.OnAnimalTaming(m_Tamer, m_Creature, ref chance));
 
                                 if (chance < 1)
                                     chance = 1;
 
-
                                 if (Utility.Random(100) <= chance)
                                 {
                                     m_Tamer.SendAsciiMessage(33, $"And have made the creature unresponsive to taming.");
-                                    m_Creature.UnresponsiveToTamingEndTime = DateTime.Now + UnresponsiveTime;
+                                    m_Creature.UnresponsiveToTamingEndTime = Core.TickCount +
+                                                                             (int) UnresponsiveTime
+                                                                                 .TotalMilliseconds;
                                 }
                             }
                             else

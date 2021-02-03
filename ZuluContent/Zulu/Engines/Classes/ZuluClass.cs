@@ -20,6 +20,7 @@ namespace Scripts.Zulu.Engines.Classes
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
         private const double PerLevel = 0.25; //25% per level
+        private const double ClasseBonus = 1.5;
         private const int MaxLevel = 6;
 
         private static readonly double[] MinSkills =
@@ -29,8 +30,6 @@ namespace Scripts.Zulu.Engines.Classes
                 .ToArray();
 
         private readonly IZuluClassed m_Parent;
-
-        public static readonly double ClasseBonus = 1.5;
 
         public static readonly IReadOnlyDictionary<ZuluClassType, SkillName[]> ClassSkills =
             new Dictionary<ZuluClassType, SkillName[]>
@@ -360,6 +359,17 @@ namespace Scripts.Zulu.Engines.Classes
 
                 DebugLog(healer,
                     $"Increased healing from {source} by {healAmount * cls.Bonus} (level {cls.Level} {cls.Type})");
+            }
+        }
+
+        public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance)
+        {
+            if (tamer is IZuluClassed {ZuluClass: { } cls})
+            {
+                if (cls.Type == ZuluClassType.Ranger)
+                {
+                    chance = (int) (chance / ClasseBonus);
+                }
             }
         }
 
