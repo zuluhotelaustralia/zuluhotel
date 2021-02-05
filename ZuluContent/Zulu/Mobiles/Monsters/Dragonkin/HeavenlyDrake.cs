@@ -61,7 +61,7 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 130,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Poison, 100}
+                    {ElementalType.PermPoisonImmunity, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

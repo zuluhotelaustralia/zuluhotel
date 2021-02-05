@@ -18,7 +18,7 @@ namespace Scripts.Zulu.Spells.Earth
 
         public override SkillName DamageSkill
         {
-            get { return SkillName.Meditation; }
+            get { return SkillName.Magery; }
         }
 
         public override TimeSpan GetCastDelay()

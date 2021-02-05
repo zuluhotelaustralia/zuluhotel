@@ -714,7 +714,14 @@ namespace Server.Spells
 
             WeightOverloading.DFA = dfa;
 
-            defender.Damage(damage, attacker);
+            if (damage > 0)
+            {
+                defender.Damage(damage, attacker);
+            }
+            else
+            {
+                defender.Heal(damage * -1);
+            }
 
             if (attacker != null) // sanity check
                 DoLeech(damage, attacker, defender);
