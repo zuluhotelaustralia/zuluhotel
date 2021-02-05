@@ -153,7 +153,7 @@ namespace Scripts.Zulu.Engines.Classes
                 [SkillName.AnimalLore] = new SkillConfig
                 {
                     Delay = TimeSpan.FromSeconds(5.0),
-                    DefaultPoints = 200
+                    DefaultPoints = 250
                 },
                 [SkillName.AnimalTaming] = new SkillConfig
                 {
