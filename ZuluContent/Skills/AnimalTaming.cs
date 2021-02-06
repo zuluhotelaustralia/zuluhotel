@@ -260,8 +260,7 @@ namespace Server.SkillHandlers
                                     m_Tamer.NetState); // It seems to accept you as master.
                                 m_Creature.Owners.Add(m_Tamer);
                                 m_Creature.SetControlMaster(m_Tamer);
-                                if (m_Creature.Warmode)
-                                    PacifyBeast(m_Creature, m_Tamer);
+                                PacifyBeast(m_Creature, m_Tamer);
                             }
                         }
                     }

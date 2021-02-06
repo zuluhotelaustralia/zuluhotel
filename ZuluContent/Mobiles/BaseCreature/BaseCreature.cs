@@ -57,7 +57,6 @@ namespace Server.Mobiles
 
         private double m_dMinTameSkill;
         private bool m_bTamable;
-        private DateTime m_timeUnresponsiveToTaming;
 
         private bool m_bSummoned = false;
         private DateTime m_SummonEnd;
@@ -2942,7 +2941,7 @@ namespace Server.Mobiles
             if (LootTable == null || !LootConfig.Tables.TryGetValue(LootTable, out var table))
                 return;
 
-            
+
             var backpack = Backpack;
             if (backpack == null)
             {
@@ -2952,7 +2951,7 @@ namespace Server.Mobiles
 
             LootGenerator.MakeLoot(backpack, table, LootItemLevel, LootItemChance);
         }
-        
+
         public bool PackArmor(int minLevel, int maxLevel)
         {
             return PackArmor(minLevel, maxLevel, 1.0);

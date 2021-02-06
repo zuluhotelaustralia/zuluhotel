@@ -21,7 +21,7 @@ namespace Server.Mobiles
         {
             get { return CreatureProperties.Get(GetType()); }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalWaterResist
         {
@@ -37,12 +37,12 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPhysicalResist 
+        public int ElementalPhysicalResist
         {
             get => Enchantments.Get((PhysicalProtection e) => e.Value);
             set => Enchantments.Set((PhysicalProtection e) => e.Value = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalFireResist
         {
@@ -69,6 +69,13 @@ namespace Server.Mobiles
         {
             get => Enchantments.Get((NecroProtection e) => e.Value);
             set => Enchantments.Set((NecroProtection e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int PermMagicImmunity
+        {
+            get => Enchantments.Get((PermMagicImmunity e) => e.Value);
+            set => Enchantments.Set((PermMagicImmunity e) => e.Value = value);
         }
 
         public virtual bool InitialInnocent
@@ -146,7 +153,7 @@ namespace Server.Mobiles
         {
             get { return InitProperties?.SaySpellMantra ?? false; }
         }
-        
+
         public virtual string LootTable { get; set; }
         public virtual int LootItemLevel { get; set; }
         public virtual int LootItemChance { get; set; }
@@ -211,6 +218,5 @@ namespace Server.Mobiles
 
             Timer.DelayCall(RiseCreatureDelay, Rise);
         }
-
     }
 }
