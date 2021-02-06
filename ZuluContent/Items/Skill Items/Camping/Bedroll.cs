@@ -102,7 +102,7 @@ public Bedroll( Serial serial ) : base( serial )
 					pm.PlaceInBackpack( m_Bedroll );
 
 					pm.BedrollLogout = true;
-					sender.Dispose();
+					sender.Disconnect();
 				}
 
 				Campfire.RemoveEntry( m_Entry );

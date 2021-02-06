@@ -410,7 +410,7 @@ namespace Server.Mobiles
         {
             if (CanBeHarmful(target))
             {
-                DoHarmful(target);
+                DoHarmful(target, false);
                 BreathDealDamage(target);
             }
         }

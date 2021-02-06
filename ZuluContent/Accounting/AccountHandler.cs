@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Scripts.Zulu.Packets;
 using Server.Accounting;
 using Server.Engines.Help;
 using Server.Network;
@@ -178,7 +179,7 @@ namespace Server.Misc
         {
             if (!(state.Account is Account acct))
             {
-                state.Dispose();
+                state.Disconnect();
             }
             else if (index < 0 || index >= acct.Length)
             {
@@ -387,6 +388,8 @@ namespace Server.Misc
 
             if (!e.Accepted)
                 AccountAttackLimiter.RegisterInvalidAccess(e.State);
+
+            e.State.PacketEncoder = OutgoingPacketInterceptor.DelocalizeMessage;
         }
 
         public static bool CheckAccount(Mobile mobCheck, Mobile accCheck)
