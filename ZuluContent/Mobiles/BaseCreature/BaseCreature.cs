@@ -2542,7 +2542,7 @@ namespace Server.Mobiles
 
             Warmode = Combatant != null && !Combatant.Deleted && Combatant.Alive;
 
-            if (CanFly && Warmode)
+            if (CanFly && Warmode && Flying)
             {
                 Flying = false;
             }

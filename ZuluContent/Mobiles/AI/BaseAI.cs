@@ -703,7 +703,7 @@ namespace Server.Mobiles
                     m_Mobile.FocusMob = null;
                     m_Mobile.Combatant = null;
                     m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
-                    m_NextStopGuard = Core.TickCount + (int)TimeSpan.FromSeconds(10).TotalMilliseconds;
+                    m_NextStopGuard = Core.TickCount + (int) TimeSpan.FromSeconds(10).TotalMilliseconds;
                     m_Mobile.CurrentSpeed = m_Mobile.ActiveSpeed;
                     break;
 
@@ -769,12 +769,13 @@ namespace Server.Mobiles
 
         public virtual bool DoActionCombat()
         {
-            Mobile c = m_Mobile.Combatant;
+            Mobile combatant = m_Mobile.Combatant;
 
-            if (c == null || c.Deleted || c.Map != m_Mobile.Map || !c.Alive)
+            if (combatant == null || combatant.Deleted || combatant.Map != m_Mobile.Map || !combatant.Alive)
                 Action = ActionType.Wander;
+
             else
-                m_Mobile.Direction = m_Mobile.GetDirectionTo(c);
+                m_Mobile.Direction = m_Mobile.GetDirectionTo(combatant);
 
             return true;
         }
@@ -1739,6 +1740,34 @@ namespace Server.Mobiles
             }
         }
 
+        private long m_NextMove;
+
+        public long NextMove
+        {
+            get { return m_NextMove; }
+            set { m_NextMove = value; }
+        }
+
+        public virtual bool CheckMove()
+        {
+            return Core.TickCount >= m_NextMove;
+        }
+
+        public virtual bool DoMove(Direction d)
+        {
+            return DoMove(d, false);
+        }
+
+        public virtual bool DoMove(Direction d, bool badStateOk)
+        {
+            MoveResult res = DoMoveImpl(d);
+
+            return res == MoveResult.Success || res == MoveResult.SuccessAutoTurn ||
+                   badStateOk && res == MoveResult.BadState;
+        }
+
+        private static Queue m_Obstacles = new Queue();
+
         public double TransformMoveDelay(double delay)
         {
             bool isPassive = delay == m_Mobile.PassiveSpeed;
@@ -1792,34 +1821,6 @@ namespace Server.Mobiles
             return delay;
         }
 
-        private long m_NextMove;
-
-        public long NextMove
-        {
-            get { return m_NextMove; }
-            set { m_NextMove = value; }
-        }
-
-        public virtual bool CheckMove()
-        {
-            return Core.TickCount >= m_NextMove;
-        }
-
-        public virtual bool DoMove(Direction d)
-        {
-            return DoMove(d, false);
-        }
-
-        public virtual bool DoMove(Direction d, bool badStateOk)
-        {
-            MoveResult res = DoMoveImpl(d);
-
-            return res == MoveResult.Success || res == MoveResult.SuccessAutoTurn ||
-                   badStateOk && res == MoveResult.BadState;
-        }
-
-        private static Queue m_Obstacles = new Queue();
-
         public virtual MoveResult DoMoveImpl(Direction d)
         {
             if (m_Mobile.Deleted || m_Mobile.Frozen || m_Mobile.Paralyzed ||
@@ -1831,7 +1832,7 @@ namespace Server.Mobiles
             // This makes them always move one step, never any direction changes
             m_Mobile.Direction = d;
 
-            var delay = (int)TimeSpan.FromSeconds(TransformMoveDelay(m_Mobile.CurrentSpeed)).TotalMilliseconds;
+            var delay = (int) TimeSpan.FromSeconds(TransformMoveDelay(m_Mobile.CurrentSpeed)).TotalMilliseconds;
 
             m_NextMove += delay;
 
@@ -1839,6 +1840,15 @@ namespace Server.Mobiles
                 m_NextMove = Core.TickCount;
 
             m_Mobile.Pushing = false;
+
+            if (m_Mobile.CanFly && m_Mobile.Warmode && m_Mobile.Combatant != null)
+            {
+                var distance = m_Mobile.GetDistanceToSqrt(m_Mobile.Combatant);
+                if (!m_Mobile.Flying && distance > 1)
+                    m_Mobile.Flying = true;
+                else if (m_Mobile.Flying && distance <= 1)
+                    m_Mobile.Flying = false;
+            }
 
             MoveImpl.IgnoreMovableImpassables = m_Mobile.CanMoveOverObstacles && !m_Mobile.CanDestroyObstacles;
 
@@ -2279,7 +2289,7 @@ namespace Server.Mobiles
                 return false;
             }
 
-            m_Mobile.NextReacquireTime = Core.TickCount + (int)m_Mobile.ReacquireDelay.TotalMilliseconds;
+            m_Mobile.NextReacquireTime = Core.TickCount + (int) m_Mobile.ReacquireDelay.TotalMilliseconds;
 
             m_Mobile.DebugSay("Acquiring...");
 
@@ -2471,12 +2481,12 @@ namespace Server.Mobiles
 
         private void ReturnToHome()
         {
-          if (m_Mobile.Spawner != null)
-          {
-            Point3D loc = m_Mobile.Spawner.GetSpawnPosition(m_Mobile, m_Mobile.Spawner.Map);
+            if (m_Mobile.Spawner != null)
+            {
+                Point3D loc = m_Mobile.Spawner.GetSpawnPosition(m_Mobile, m_Mobile.Spawner.Map);
 
-            if (loc != Point3D.Zero) m_Mobile.MoveToWorld(loc, m_Mobile.Spawner.Map);
-          }
+                if (loc != Point3D.Zero) m_Mobile.MoveToWorld(loc, m_Mobile.Spawner.Map);
+            }
         }
 
         public virtual void Activate()
@@ -2598,7 +2608,9 @@ namespace Server.Mobiles
                     int min = delay * (9 / 10); // 13s at 1000 int, 33s at 400 int, 54s at <250 int
                     int max = delay * (10 / 9); // 16s at 1000 int, 41s at 400 int, 66s at <250 int
 
-                    m_Owner.m_NextDetectHidden = Core.TickCount + (int)TimeSpan.FromSeconds(Utility.RandomMinMax(min, max)).TotalMilliseconds;
+                    m_Owner.m_NextDetectHidden = Core.TickCount +
+                                                 (int) TimeSpan.FromSeconds(Utility.RandomMinMax(min, max))
+                                                     .TotalMilliseconds;
                 }
             }
         }
