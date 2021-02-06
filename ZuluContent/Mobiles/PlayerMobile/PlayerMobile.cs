@@ -697,7 +697,7 @@ namespace Server.Mobiles
         {
             NetState ns = ((Mobile) state).NetState;
 
-            ns?.Dispose();
+            ns?.Disconnect();
         }
 
         private static void OnLogout(Mobile mobile)

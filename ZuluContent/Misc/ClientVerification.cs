@@ -114,7 +114,7 @@ namespace Server.Misc
           if (state.Connection != null)
           {
             Console.WriteLine("Client: {0}: Disconnecting, bad version", state);
-            state.Dispose();
+            state.Disconnect();
           }
         });
       }
