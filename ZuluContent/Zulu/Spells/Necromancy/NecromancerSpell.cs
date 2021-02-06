@@ -28,7 +28,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
         public override SkillName DamageSkill
         {
-            get { return SkillName.SpiritSpeak; }
+            get { return SkillName.Magery; }
         }
 
         //public override int CastDelayBase{ get{ return base.CastDelayBase; } } // Reference, 3

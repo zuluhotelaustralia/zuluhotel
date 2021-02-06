@@ -85,7 +85,7 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 140,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 200}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

@@ -82,7 +82,7 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Poison, 100},
+                    {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Air, 75},
                     {ElementalType.Water, 75},
                     {ElementalType.Fire, 75}

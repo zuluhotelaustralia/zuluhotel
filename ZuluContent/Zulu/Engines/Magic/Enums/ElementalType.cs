@@ -30,27 +30,23 @@ namespace Server.Engines.Magic
         public int SpellReflection { get; set; }
 
 
-
         private static readonly Dictionary<ElementalProtectionLevel, int> ProtectionToResist =
             new Dictionary<ElementalProtectionLevel, int>
             {
                 [ElementalProtectionLevel.None] = 0,
-                [ElementalProtectionLevel.Bane] = 15,
-                [ElementalProtectionLevel.Warding] = 30,
-                [ElementalProtectionLevel.Protection] = 45,
-                [ElementalProtectionLevel.Immunity] = 65,
-                [ElementalProtectionLevel.Attunement] = 80,
-                [ElementalProtectionLevel.Absorbsion] = 100,
+                [ElementalProtectionLevel.Bane] = 25,
+                [ElementalProtectionLevel.Warding] = 50,
+                [ElementalProtectionLevel.Protection] = 75,
+                [ElementalProtectionLevel.Immunity] = 100,
+                [ElementalProtectionLevel.Attunement] = 125,
+                [ElementalProtectionLevel.Absorbsion] = 150,
             };
 
-        public static int GetResistForProtectionLevel(ElementalProtectionLevel level) => 
+        public static int GetResistForProtectionLevel(ElementalProtectionLevel level) =>
             ProtectionToResist[level];
 
         public static ElementalProtectionLevel GetProtectionLevelForResist(int resist) =>
-            ProtectionToResist.
-                Where(kv => kv.Value <= resist).
-                OrderByDescending(kv => kv.Value).
-                FirstOrDefault().Key;
+            ProtectionToResist.Where(kv => kv.Value <= resist).OrderByDescending(kv => kv.Value).FirstOrDefault().Key;
     }
 
     public enum ElementalProtectionLevel

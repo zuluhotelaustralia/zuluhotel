@@ -100,7 +100,7 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Water, 75},
                     {ElementalType.Air, 100},
-                    {ElementalType.Poison, 100}
+                    {ElementalType.PermPoisonImmunity, 100}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>
