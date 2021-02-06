@@ -99,7 +99,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static void SendResponse(Mobile m, Item item, string text)
         {
-            item.LabelTo(m, text.Trim());
+            m.NetState.SendMessage(item.Serial, item.ItemID, MessageType.Label, 0, 3, true, null, "", text);
         }
     }
 }
