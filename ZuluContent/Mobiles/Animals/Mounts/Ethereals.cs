@@ -119,11 +119,6 @@ namespace Server.Mobiles
                 from.SendLocalizedMessage(1042317, "", 0x41); // You may not ride at this time
                 return false;
             }
-            else if (@from.Followers + FollowerSlots > from.FollowersMax)
-            {
-                from.SendLocalizedMessage(1049679); // You have too many followers to summon your mount.
-                return false;
-            }
 
             return true;
         }

@@ -1368,11 +1368,19 @@ namespace Server.Mobiles
             return true;
         }
 
-        public virtual bool DoOrderRelease()
+        public virtual bool DoOrderRelease(bool frenzySummoned = false)
         {
             m_Mobile.DebugSay("I have been released");
 
             m_Mobile.PlaySound(m_Mobile.GetAngerSound());
+
+            if (m_Mobile.Summoned && frenzySummoned)
+            {
+                m_Mobile.Direction = m_Mobile.GetDirectionTo(m_Mobile.ControlMaster);
+                m_Mobile.BardEndTime = DateTime.Now;
+                m_Mobile.BardPacified = false;
+                m_Mobile.DoHarmful(m_Mobile.ControlMaster, true);
+            }
 
             m_Mobile.SetControlMaster(null);
             m_Mobile.SummonMaster = null;
@@ -1384,8 +1392,10 @@ namespace Server.Mobiles
                 m_Mobile.RangeHome = se.HomeRange;
             }
 
-            if (m_Mobile.DeleteOnRelease)
+            if (m_Mobile.DeleteOnRelease && !frenzySummoned)
                 m_Mobile.Delete();
+            else
+                m_Mobile.Say($"{m_Mobile.Name} can roam free again!");
 
             m_Mobile.BeginDeleteTimer();
             m_Mobile.DropBackpack();
@@ -1490,39 +1500,6 @@ namespace Server.Mobiles
                     from.SendLocalizedMessage(
                         502052); // As an older player, you may not transfer pets to young players.
                 }
-                else if (accepted && !m_Creature.CanBeControlledBy(to))
-                {
-                    string args = String.Format("{0}\t{1}\t ", to.Name, from.Name);
-
-                    from.SendLocalizedMessage(1043248,
-                        args); // The pet refuses to be transferred because it will not obey ~1_NAME~.~3_BLANK~
-                    to.SendLocalizedMessage(1043249,
-                        args); // The pet will not accept you as a master because it does not trust you.~3_BLANK~
-
-                    return false;
-                }
-                else if (accepted && !m_Creature.CanBeControlledBy(from))
-                {
-                    string args = String.Format("{0}\t{1}\t ", to.Name, from.Name);
-
-                    from.SendLocalizedMessage(1043250,
-                        args); // The pet refuses to be transferred because it will not obey you sufficiently.~3_BLANK~
-                    to.SendLocalizedMessage(1043251,
-                        args); // The pet will not accept you as a master because it does not trust ~2_NAME~.~3_BLANK~
-                }
-                else if (accepted && to.Followers + m_Creature.ControlSlots > to.FollowersMax)
-                {
-                    to.SendLocalizedMessage(1049607); // You have too many followers to control that creature.
-
-                    return false;
-                }
-                else if (accepted && IsInCombat(m_Creature))
-                {
-                    from.SendMessage("You may not transfer a pet that has recently been in combat.");
-                    to.SendMessage("The pet may not be transfered to you because it has recently been in combat.");
-
-                    return false;
-                }
 
                 return true;
             }
@@ -1549,7 +1526,9 @@ namespace Server.Mobiles
                             m_Creature.SummonMaster = to;
 
                         m_Creature.ControlTarget = to;
-                        m_Creature.ControlOrder = OrderType.Follow;
+
+                        if (m_Creature.CheckControlChance(to))
+                            m_Creature.ControlOrder = OrderType.Follow;
 
                         m_Creature.PlaySound(m_Creature.GetIdleSound());
 

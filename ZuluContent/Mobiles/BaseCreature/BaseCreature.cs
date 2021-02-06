@@ -555,67 +555,104 @@ namespace Server.Mobiles
 
         public virtual bool CheckControlChance(Mobile m)
         {
-            if (GetControlChance(m) > Utility.RandomDouble())
-            {
-                Loyalty += 1;
+            if (CanBeControlledBy(m))
                 return true;
-            }
 
-            PlaySound(GetAngerSound());
+            AIObject.DoOrderRelease(true);
 
-            if (Body.IsAnimal)
-                Animate(10, 5, 1, true, false, 0);
-            else if (Body.IsMonster)
-                Animate(18, 5, 1, true, false, 0);
-
-            Loyalty -= 3;
             return false;
         }
 
         public virtual bool CanBeControlledBy(Mobile m)
         {
-            return GetControlChance(m) > 0.0;
-        }
+            if (m is PlayerMobile owner)
+            {
+                var minSlots = 2;
 
-        public double GetControlChance(Mobile m)
-        {
-            return GetControlChance(m, false);
-        }
+                if (m_bSummoned)
+                {
+                    // TODO: Modify with magic efficiency
+                    var ownerInt = owner.Int;
+                    var petSlots = 0;
 
-        public virtual double GetControlChance(Mobile m, bool useBaseSkill)
-        {
-            if (m_dMinTameSkill <= 29.1 || m_bSummoned || m.AccessLevel >= AccessLevel.GameMaster)
-                return 1.0;
+                    foreach (Mobile follower in owner.AllFollowers)
+                    {
+                        if (follower is BaseCreature creature && creature.Summoned)
+                        {
+                            if (creature.Name.ToLower().Contains("elemental lord"))
+                            {
+                                if (creature.Serial != Serial)
+                                {
+                                    creature.AIObject.DoOrderRelease(true);
+                                }
+                                else
+                                    petSlots += 3;
+                            }
+                            else
+                            {
+                                var val = 1;
 
-            double dMinTameSkill = m_dMinTameSkill;
+                                if (creature.Int > ownerInt || creature.HitsMax > ownerInt)
+                                    val = 2;
 
-            int taming =
-                (int) ((useBaseSkill ? m.Skills[SkillName.AnimalTaming].Base : m.Skills[SkillName.AnimalTaming].Value) *
-                       10);
-            int lore =
-                (int) ((useBaseSkill ? m.Skills[SkillName.AnimalLore].Base : m.Skills[SkillName.AnimalLore].Value) *
-                       10);
-            int bonus = 0, chance = 700;
+                                // TODO: Add reanimated and charmed properties to BaseCreature class
 
-            int difficulty = (int) (dMinTameSkill * 10);
-            int weighted = (taming * 4 + lore) / 5;
-            bonus = weighted - difficulty;
+                                petSlots += val;
+                            }
+                        }
+                    }
 
-            if (bonus <= 0)
-                bonus *= 14;
-            else
-                bonus *= 6;
+                    // TODO: Modify with magic efficiency
+                    var magery = m.Skills[SkillName.Magery].Value;
+                    var maxSlots = (int) (magery / 20);
+                    return !(petSlots > maxSlots && petSlots > minSlots);
+                }
+                else
+                {
+                    var petSlots = 0;
 
-            chance += bonus;
+                    foreach (Mobile follower in owner.AllFollowers)
+                    {
+                        if (follower is BaseCreature creature && !creature.Summoned)
+                        {
+                            if (creature.AI == AIType.AI_Mage)
+                            {
+                                if (creature.HitsMax > 500)
+                                    petSlots += 9;
+                                else if (creature.HitsMax > 250)
+                                    petSlots += 6;
+                                else
+                                    petSlots += 3;
+                            }
+                            else if (creature.HasBreath)
+                            {
+                                if (creature.HitsMax > 500)
+                                    petSlots += 12;
+                                else if (creature.HitsMax > 250)
+                                    petSlots += 8;
+                                else
+                                    petSlots += 4;
+                            }
+                            else
+                            {
+                                if (creature.HitsMax > 300)
+                                    petSlots += 3;
+                                else if (creature.HitsMax > 150)
+                                    petSlots += 2;
+                                else
+                                    petSlots += 1;
+                            }
+                        }
+                    }
 
-            if (chance >= 0 && chance < 200)
-                chance = 200;
-            else if (chance > 990)
-                chance = 990;
+                    var animalLore = (int) m.Skills[SkillName.AnimalLore].Value;
+                    var animalTaming = (int) m.Skills[SkillName.AnimalTaming].Value;
+                    var maxSlots = (int) ((animalLore + animalTaming) / 15);
+                    return !(petSlots > maxSlots && petSlots > minSlots);
+                }
+            }
 
-            chance -= (MaxLoyalty - m_Loyalty) * 10;
-
-            return (double) chance / 1000;
+            return false;
         }
 
         public virtual bool DeleteCorpseOnDeath
@@ -3618,12 +3655,6 @@ namespace Server.Mobiles
                     Spawner = null;
                 }
 
-                if (m.Followers + ControlSlots > m.FollowersMax)
-                {
-                    m.SendLocalizedMessage(1049607); // You have too many followers to control that creature.
-                    return false;
-                }
-
                 CurrentWayPoint = null; //so tamed animals don't try to go back
 
                 Home = Point3D.Zero;
@@ -3678,13 +3709,6 @@ namespace Server.Mobiles
         public static bool Summon(BaseCreature creature, bool controlled, Mobile caster, Point3D p, int sound,
             TimeSpan duration)
         {
-            if (caster.Followers + creature.ControlSlots > caster.FollowersMax)
-            {
-                caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
-                creature.Delete();
-                return false;
-            }
-
             m_Summoning = true;
 
             if (controlled)

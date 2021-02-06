@@ -56,8 +56,6 @@ namespace Scripts.Zulu.Spells.Necromancy
                     if (group != OppositionGroup.FeyAndUndead)
                         creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1049655,
                             Caster.NetState); // That creature cannot be tamed.
-                    else if (Caster.Followers + creature.ControlSlots > Caster.FollowersMax)
-                        Caster.SendLocalizedMessage(1049611); // You have too many followers to tame that creature.
                     else
                         creature.SetControlMaster(Caster);
                 }

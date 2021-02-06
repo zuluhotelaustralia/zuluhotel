@@ -69,12 +69,6 @@ namespace Scripts.Zulu.Spells.Necromancy
                 goto Return;
             }
 
-            if (Caster.Followers + c.ControlSlots > Caster.FollowersMax)
-            {
-                Caster.SendLocalizedMessage(1049611); //you have too many followers
-                goto Return;
-            }
-
             SpellHelper.Turn(Caster, m);
 
             // target's difficulty is the higher of their str/dex/int scores divided by 2, scaled by their magicresist skill in some way
