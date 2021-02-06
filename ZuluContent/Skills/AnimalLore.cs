@@ -74,18 +74,6 @@ namespace Server.SkillHandlers
 
     public class AnimalLoreGump : Gump
     {
-        // TODO: Add the rest of the body mappings or find an easier way to do it
-        private static int GetMiniIcon(Body body)
-        {
-            return body.BodyID switch
-            {
-                0x3b => 0x206, // Dragon
-                0xC => 0x20D6, // Dragon
-                92 => 0x20FE, // Giant Snake
-                _ => 1
-            };
-        }
-
         private static string FormatSkill(BaseCreature c, SkillName name)
         {
             Skill skill = c.Skills[name];
@@ -187,7 +175,7 @@ namespace Server.SkillHandlers
 
             AddPage(++page);
 
-            AddItem(30, 50, GetMiniIcon(c.Body));
+            AddItem(30, 50, ShrinkTable.Lookup(c));
             AddHtml(80, 45, 140, 54, description, false, false);
 
             AddImage(30, 112, 2086);
