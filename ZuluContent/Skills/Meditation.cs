@@ -9,6 +9,8 @@ namespace Server.SkillHandlers
 {
     class Meditation
     {
+
+        private static readonly TimeSpan DefaultDelay = TimeSpan.FromSeconds(10.0);
         public static void Initialize()
         {
             SkillInfo.Table[46].Callback = OnUse;
@@ -21,31 +23,31 @@ namespace Server.SkillHandlers
             if (m.Mana >= m.ManaMax)
             {
                 m.SendLocalizedMessage(501846); // You are at peace.
-                return TimeSpan.FromSeconds(5.0);
+                return DefaultDelay;
             }
 
             if (m.Poisoned)
             {
                 m.SendAsciiMessage("You can't meditate while poisoned.");
-                return TimeSpan.FromSeconds(5.0);
+                return DefaultDelay;
             }
 
             if (m.Warmode)
             {
                 m.SendAsciiMessage("You can't meditate in war mode.");
-                return TimeSpan.FromSeconds(5.0);
+                return DefaultDelay;
             }
 
             if (!CheckValidHands(m))
             {
                 m.SendLocalizedMessage(502626); // Your hands must be free to cast spells or meditate.
-                return TimeSpan.FromSeconds(5.0);
+                return DefaultDelay;
             }
             
             if (GetMagicEfficiencyModifier(m) <= 0)
             {
                 m.SendAsciiMessage("Regenerative forces cannot penetrate your armor.");
-                return TimeSpan.FromSeconds(5.0);
+                return DefaultDelay;
             }
 
             if ((m as IShilCheckSkill)?.CheckSkill(SkillName.Meditation, -1,
@@ -65,7 +67,7 @@ namespace Server.SkillHandlers
 
             
             m.SendAsciiMessage("You cannot focus your concentration.");
-            return TimeSpan.FromSeconds(5.0);
+            return DefaultDelay;
         }
 
         public static bool CheckValidHands(Mobile m)
@@ -161,6 +163,9 @@ namespace Server.SkillHandlers
                 if (!CheckValidHands(m_Mobile))
                     return true;
 
+                if (m_Mobile.Hits < m_StartHits)
+                    return true;
+
                 return false;
             }
 
@@ -168,8 +173,9 @@ namespace Server.SkillHandlers
             {
                 if (ShouldBreakConcentration())
                 {
-                    m_Mobile.SendAsciiMessage("You lost your concetration.");
-                    m_Mobile.NextSkillTime = Core.TickCount + 10000;
+                    // m_Mobile.SendAsciiMessage("You lost your concentration.");
+                    m_Mobile.DisruptiveAction();
+                    m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;
                     Stop();
                     return;
                 }
@@ -186,7 +192,8 @@ namespace Server.SkillHandlers
                     else
                     {
                         m_Mobile.SendAsciiMessage("Regenerative forces cannot penetrate your armor.");
-                        m_Mobile.NextSkillTime = Core.TickCount + 5000;
+                        m_Mobile.DisruptiveAction();
+                        m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;;
                         Stop();
                         return;
                     }
@@ -194,13 +201,15 @@ namespace Server.SkillHandlers
 
                 if (m_Mobile.Mana == m_Mobile.ManaMax)
                 {
-                    m_Mobile.SendAsciiMessage("You stop meditating.");
-                    m_Mobile.NextSkillTime = Core.TickCount + 5000;
+                    // m_Mobile.SendAsciiMessage("You stop meditating.");
+                    m_Mobile.DisruptiveAction();
+                    m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;;
                     Stop();
                     return;
                 }
 
-                m_Mobile.NextSkillTime = Core.TickCount + (int)Interval.TotalMilliseconds * 2;
+                // Delay skill use long enough for the next meditation tick
+                m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds * 2;
             }
         }
     }
