@@ -389,7 +389,7 @@ namespace Server.Misc
             if (!e.Accepted)
                 AccountAttackLimiter.RegisterInvalidAccess(e.State);
 
-            // e.State.PacketEncoder = OutgoingPacketInterceptor.DelocalizeMessage;
+            e.State.PacketEncoder = OutgoingPacketInterceptor.Intercept;
         }
 
         public static bool CheckAccount(Mobile mobCheck, Mobile accCheck)
