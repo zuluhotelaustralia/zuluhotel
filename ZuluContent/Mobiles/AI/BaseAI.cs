@@ -793,6 +793,9 @@ namespace Server.Mobiles
                 Action = ActionType.Wander;
             }
 
+            if (m_Mobile.CanFly && m_Mobile.Flying)
+                m_Mobile.Flying = false;
+
             return true;
         }
 
@@ -1005,6 +1008,8 @@ namespace Server.Mobiles
             else
             {
                 m_Mobile.Warmode = false;
+                if (m_Mobile.CanFly && m_Mobile.Flying)
+                    m_Mobile.Flying = false;
             }
 
             return true;
@@ -1526,9 +1531,7 @@ namespace Server.Mobiles
                             m_Creature.SummonMaster = to;
 
                         m_Creature.ControlTarget = to;
-
-                        if (m_Creature.CheckControlChance(to))
-                            m_Creature.ControlOrder = OrderType.Follow;
+                        m_Creature.ControlOrder = OrderType.Follow;
 
                         m_Creature.PlaySound(m_Creature.GetIdleSound());
 

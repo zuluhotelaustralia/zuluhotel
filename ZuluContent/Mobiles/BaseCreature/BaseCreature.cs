@@ -567,89 +567,37 @@ namespace Server.Mobiles
         {
             if (m is PlayerMobile owner)
             {
-                var minSlots = 2;
+                const int minSlots = 2;
+                int maxSlots;
+                var petSlots = 0;
+
+                IPooledEnumerable eable = owner.Map.GetMobilesInRange(owner.Location, 8);
+
+                foreach (Mobile nearbyMobile in eable)
+                {
+                    if (nearbyMobile is BaseCreature creature &&
+                        (creature.ControlMaster == owner || creature.SummonMaster == owner))
+                    {
+                        if (creature.Summoned && creature.Serial != Serial &&
+                            creature.IsElementalLord)
+                            creature.AIObject.DoOrderRelease(true);
+                        else
+                            petSlots += creature.GetPetSlots(owner);
+                    }
+                }
 
                 if (m_bSummoned)
                 {
                     // TODO: Modify with magic efficiency
-                    var ownerInt = owner.Int;
-                    var petSlots = 0;
-
-                    foreach (Mobile follower in owner.AllFollowers)
-                    {
-                        if (follower is BaseCreature creature && creature.Summoned)
-                        {
-                            if (creature.Name.ToLower().Contains("elemental lord"))
-                            {
-                                if (creature.Serial != Serial)
-                                {
-                                    creature.AIObject.DoOrderRelease(true);
-                                }
-                                else
-                                    petSlots += 3;
-                            }
-                            else
-                            {
-                                var val = 1;
-
-                                if (creature.Int > ownerInt || creature.HitsMax > ownerInt)
-                                    val = 2;
-
-                                // TODO: Add reanimated and charmed properties to BaseCreature class
-
-                                petSlots += val;
-                            }
-                        }
-                    }
-
-                    // TODO: Modify with magic efficiency
                     var magery = m.Skills[SkillName.Magery].Value;
-                    var maxSlots = (int) (magery / 20);
+                    maxSlots = (int) (magery / 20);
                     return !(petSlots > maxSlots && petSlots > minSlots);
                 }
-                else
-                {
-                    var petSlots = 0;
 
-                    foreach (Mobile follower in owner.AllFollowers)
-                    {
-                        if (follower is BaseCreature creature && !creature.Summoned)
-                        {
-                            if (creature.AI == AIType.AI_Mage)
-                            {
-                                if (creature.HitsMax > 500)
-                                    petSlots += 9;
-                                else if (creature.HitsMax > 250)
-                                    petSlots += 6;
-                                else
-                                    petSlots += 3;
-                            }
-                            else if (creature.HasBreath)
-                            {
-                                if (creature.HitsMax > 500)
-                                    petSlots += 12;
-                                else if (creature.HitsMax > 250)
-                                    petSlots += 8;
-                                else
-                                    petSlots += 4;
-                            }
-                            else
-                            {
-                                if (creature.HitsMax > 300)
-                                    petSlots += 3;
-                                else if (creature.HitsMax > 150)
-                                    petSlots += 2;
-                                else
-                                    petSlots += 1;
-                            }
-                        }
-                    }
-
-                    var animalLore = (int) m.Skills[SkillName.AnimalLore].Value;
-                    var animalTaming = (int) m.Skills[SkillName.AnimalTaming].Value;
-                    var maxSlots = (int) ((animalLore + animalTaming) / 15);
-                    return !(petSlots > maxSlots && petSlots > minSlots);
-                }
+                var animalLore = (int) m.Skills[SkillName.AnimalLore].Value;
+                var animalTaming = (int) m.Skills[SkillName.AnimalTaming].Value;
+                maxSlots = (int) ((animalLore + animalTaming) / 15);
+                return !(petSlots > maxSlots && petSlots > minSlots);
             }
 
             return false;
@@ -1163,6 +1111,8 @@ namespace Server.Mobiles
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
+
+            CreatureProperties.Get(GetType())?.ApplyTo(this);
 
             int version = reader.ReadInt();
 
@@ -1973,6 +1923,60 @@ namespace Server.Mobiles
         public virtual bool IsScaredOfScaryThings
         {
             get { return true; }
+        }
+
+        public bool IsElementalLord
+        {
+            get { return Name.ToLower().EndsWith("elemental lord"); }
+        }
+
+        public virtual int GetPetSlots(PlayerMobile owner)
+        {
+            int slots;
+
+            if (m_bSummoned)
+            {
+                // TODO: Modify with magic efficiency
+                var ownerInt = owner.Int;
+                if (IsElementalLord)
+                    slots = 3;
+                else if (Int > ownerInt || HitsMax > ownerInt)
+                    slots = 2;
+                else
+                    slots = 1;
+            }
+            else
+            {
+                if (AI == AIType.AI_Mage)
+                {
+                    if (HitsMax > 500)
+                        slots = 9;
+                    else if (HitsMax > 250)
+                        slots = 6;
+                    else
+                        slots = 3;
+                }
+                else if (HasBreath)
+                {
+                    if (HitsMax > 500)
+                        slots = 12;
+                    else if (HitsMax > 250)
+                        slots = 8;
+                    else
+                        slots = 4;
+                }
+                else
+                {
+                    if (HitsMax > 300)
+                        slots = 3;
+                    else if (HitsMax > 150)
+                        slots = 2;
+                    else
+                        slots = 1;
+                }
+            }
+
+            return slots;
         }
 
         public virtual void OnGotMeleeAttack(Mobile attacker)
@@ -3662,7 +3666,10 @@ namespace Server.Mobiles
                 ControlMaster = m;
                 Controlled = true;
                 ControlTarget = null;
-                ControlOrder = OrderType.Come;
+                if (CheckControlChance(m))
+                    ControlOrder = OrderType.Come;
+                else
+                    ControlOrder = OrderType.None;
                 Guild = null;
 
                 if (m_DeleteTimer != null)
