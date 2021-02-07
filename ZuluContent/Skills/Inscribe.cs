@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Server.Targeting;
 using Server.Items;
+using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.SkillHandlers
 {
@@ -105,7 +106,7 @@ namespace Server.SkillHandlers
                 }
                 else
                 {
-                    from.SendAsciiMessage(33, "That is not a valid selection.");
+                    from.SendAsciiMessage(MessageFailureHue, "That is not a valid selection.");
                 }
             }
 
@@ -194,18 +195,18 @@ namespace Server.SkillHandlers
                     if (from.CheckTargetSkill(SkillName.Inscribe, customBook, 100, 150))
                     {
                         customBook.AddEntry(m_ScrollSrc);
-                        from.SendAsciiMessage(55, "You have successfully inscribed that spell.");
+                        from.SendAsciiMessage(MessageSuccessHue, "You have successfully inscribed that spell.");
                         from.PlaySound(0x249);
                     }
                     else
                     {
                         m_ScrollSrc.Delete();
-                        from.SendAsciiMessage(33, "You fail to inscribe that scroll.");
+                        from.SendAsciiMessage(MessageFailureHue, "You fail to inscribe that scroll.");
                     }
                 }
                 else
                 {
-                    from.SendAsciiMessage(33, "You cannot inscribe to that.");
+                    from.SendAsciiMessage(MessageFailureHue, "You cannot inscribe to that.");
                 }
             }
 
