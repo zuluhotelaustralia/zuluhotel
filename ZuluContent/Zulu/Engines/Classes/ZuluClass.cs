@@ -373,6 +373,15 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
+        public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})
+            {
+                regen = (int)(regen * ClasseBonus);
+                tickIntervalSeconds /= ClasseBonus;
+            }
+        }
+
         public void OnBeforeSwing(Mobile attacker, Mobile defender)
         {
         }

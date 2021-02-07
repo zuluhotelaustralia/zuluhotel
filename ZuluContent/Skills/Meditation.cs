@@ -60,6 +60,8 @@ namespace Server.SkillHandlers
                 
                 var regenBase = (int) (m.Skills[SkillName.Meditation].Value / 25 + m.Int / 35.0);
                 var interval = 5.0;
+
+                m.FireHook(h => h.OnMeditation(m, ref regenBase, ref interval));
                 
                 new InternalTimer( m, regenBase, TimeSpan.FromSeconds(interval)).Start();
                 return TimeSpan.FromSeconds(10.0);
