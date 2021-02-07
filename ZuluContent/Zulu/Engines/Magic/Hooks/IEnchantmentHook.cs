@@ -34,6 +34,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds);
 
+        public void OnModifyWithMagicEfficiency(Mobile mobile, ref int value);
+
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 
         public void OnSwing(Mobile attacker, Mobile defender, ref double damageBonus, ref TimeSpan result);

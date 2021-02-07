@@ -71,6 +71,18 @@ namespace Server.SkillHandlers
             m.SendAsciiMessage("You cannot focus your concentration.");
             return DefaultDelay;
         }
+        
+        public static double GetMagicEfficiencyModifier(Mobile from)
+        {
+            if (from is IZuluClassed classed)
+            {
+                var penalty = classed.ZuluClass.GetMagicEfficiencyPenalty();
+                return 100 - penalty * 2;
+            }
+
+            return 0;
+        }
+
 
         public static bool CheckValidHands(Mobile m)
         {
@@ -94,42 +106,6 @@ namespace Server.SkillHandlers
                         return false;
                 }
             });
-        }
-
-        public static double GetMagicEfficiencyModifier(Mobile from)
-        {
-            var armour = new[]
-            {
-                from.ShieldArmor as BaseArmor,
-                from.NeckArmor as BaseArmor,
-                from.HandArmor as BaseArmor,
-                from.HeadArmor as BaseArmor,
-                from.ArmsArmor as BaseArmor,
-                from.LegsArmor as BaseArmor,
-                from.ChestArmor as BaseArmor,
-            };
-
-            var magicPenalty = armour.Sum(a => a?.Enchantments.Get((MagicEfficiencyPenalty e) => e.Value) ?? 0);
-
-            // TODO: remove this when items have MagicEfficiencyPenalty properties
-            if (magicPenalty == 0) 
-                magicPenalty = armour.Sum(GetArmorMeditationValue) / 4;
-
-            return 100 - magicPenalty * 2;
-        }
-
-        private static double GetArmorMeditationValue(BaseArmor ar)
-        {
-            if (ar == null)
-                return 0.0;
-
-            switch (ar.MeditationAllowance)
-            {
-                default:
-                case ArmorMeditationAllowance.None: return ar.BaseArmorRatingScaled;
-                case ArmorMeditationAllowance.Half: return ar.BaseArmorRatingScaled / 2.0;
-                case ArmorMeditationAllowance.All: return 0.0;
-            }
         }
 
         private class InternalTimer : Timer

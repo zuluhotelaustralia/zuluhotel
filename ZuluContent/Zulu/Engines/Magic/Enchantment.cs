@@ -116,6 +116,10 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public void OnModifyWithMagicEfficiency(Mobile mobile, ref int value)
+        {
+        }
+
         public virtual void OnBeforeSwing(Mobile attacker, Mobile defender)
         {
         }

@@ -7,6 +7,7 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 
 namespace Scripts.Zulu.Engines.Classes
@@ -287,6 +288,47 @@ namespace Scripts.Zulu.Engines.Classes
             if (m.AccessLevel >= AccessLevel.GameMaster)
                 m.SendMessage(1283, message);
         }
+        
+        public double GetMagicEfficiencyPenalty()
+        {
+            if (m_Parent is Mobile mobile)
+            {
+                var armour = new[]
+                {
+                    mobile.ShieldArmor as BaseArmor,
+                    mobile.NeckArmor as BaseArmor,
+                    mobile.HandArmor as BaseArmor,
+                    mobile.HeadArmor as BaseArmor,
+                    mobile.ArmsArmor as BaseArmor,
+                    mobile.LegsArmor as BaseArmor,
+                    mobile.ChestArmor as BaseArmor,
+                };
+
+                var magicPenalty = armour.Sum(a => a?.Enchantments.Get((MagicEfficiencyPenalty e) => e.Value) ?? 0);
+
+                // TODO: remove this when items have MagicEfficiencyPenalty properties
+                if (magicPenalty == 0) 
+                    magicPenalty = armour.Sum(GetArmorMeditationValue) / 4;
+            
+                return magicPenalty;
+            }
+
+            return 0;
+        }
+
+        private static double GetArmorMeditationValue(BaseArmor ar)
+        {
+            if (ar == null)
+                return 0.0;
+
+            switch (ar.MeditationAllowance)
+            {
+                default:
+                case ArmorMeditationAllowance.None: return ar.BaseArmorRatingScaled;
+                case ArmorMeditationAllowance.Half: return ar.BaseArmorRatingScaled / 2.0;
+                case ArmorMeditationAllowance.All: return 0.0;
+            }
+        }
 
         #region Class bonus hooks
 
@@ -379,6 +421,23 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 regen = (int)(regen * ClasseBonus);
                 tickIntervalSeconds /= ClasseBonus;
+            }
+        }
+
+        public void OnModifyWithMagicEfficiency(Mobile mobile, ref int value)
+        {
+            if (mobile is IZuluClassed {ZuluClass: { } cls})
+            {
+                var bonus = cls.Type switch
+                {
+                    ZuluClassType.Warrior => value * ClasseBonus,
+                    ZuluClassType.Mage => value / ClasseBonus,
+                    _ => 1.0
+                };
+
+                var penalty = GetMagicEfficiencyPenalty();
+
+                value = (int)(value * (100 - penalty) / 100);
             }
         }
 
