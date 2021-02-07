@@ -110,8 +110,8 @@ namespace Server.Items
             get => Enchantments.Get((SpellHit e) => e.Chance);
             set => Enchantments.Set((SpellHit e) => e.Chance = value);
         }
-        
-        
+
+
         [CommandProperty(AccessLevel.GameMaster)]
         public EffectHitType EffectHitType
         {
@@ -148,22 +148,22 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int PoisonCharges
         {
-            get => Enchantments.Get((PoisonHit e) => e.Charges); 
-            set => Enchantments.Set((PoisonHit e) => e.Charges = value); 
-        }
-        
-        [CommandProperty(AccessLevel.GameMaster)]
-        public double PoisonChance
-        {
-            get => Enchantments.Get((PoisonHit e) => e.Chance); 
-            set => Enchantments.Set((PoisonHit e) => e.Chance = value); 
+            get => Enchantments.Get((PoisonHit e) => e.Charges);
+            set => Enchantments.Set((PoisonHit e) => e.Charges = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Poison Poison 
+        public double PoisonChance
         {
-            get => Enchantments.Get((PoisonHit e) => e.Poison); 
-            set => Enchantments.Set((PoisonHit e) => e.Level = value.Level); 
+            get => Enchantments.Get((PoisonHit e) => e.Chance);
+            set => Enchantments.Set((PoisonHit e) => e.Chance = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Poison Poison
+        {
+            get => Enchantments.Get((PoisonHit e) => e.Poison);
+            set => Enchantments.Set((PoisonHit e) => e.Level = value.Level);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -536,10 +536,9 @@ namespace Server.Items
             if (speed <= 0)
                 return TimeSpan.FromSeconds(10);
 
-            const double minDelay = 1.25;
+            const double minDelay = 0.5;
 
-            var stamina = Math.Clamp(m.Stam, 0, m.Dex);
-            var delayInSeconds = 15000.0 / ((stamina + 100) * speed);
+            var delayInSeconds = 15000.0 / ((m.Dex + 100) * speed);
 
             m.FireHook(h => h.OnGetSwingDelay(ref delayInSeconds, m));
 
@@ -687,7 +686,7 @@ namespace Server.Items
             attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
             defender.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
 
-            if (attacker is BaseCreature bc && bc.GetWeaponAbility() is {} ab &&
+            if (attacker is BaseCreature bc && bc.GetWeaponAbility() is { } ab &&
                 bc.WeaponAbilityChance >= Utility.RandomDouble())
             {
                 ab.OnHit(attacker, defender, ref damage);
@@ -1533,7 +1532,8 @@ namespace Server.Items
 
         private string GetNameString()
         {
-            return Name ?? $"#{LabelNumber}";;
+            return Name ?? $"#{LabelNumber}";
+            ;
         }
 
         [Hue, CommandProperty(AccessLevel.GameMaster)]
@@ -1551,8 +1551,8 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);
-            
-            
+
+
             /*var attrs = new List<EquipInfoAttribute>();
             var eqInfo = new EquipmentInfo(1041000, Crafter, false, attrs.ToArray());
             
