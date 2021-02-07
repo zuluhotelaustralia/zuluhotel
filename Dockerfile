@@ -11,7 +11,7 @@ RUN apt-get update \
 
 RUN dotnet publish -r linux-x64 -c Debug
 
-FROM debian:buster-slim
+FROM ubuntu:focal
 
 ARG user=zulu
 ARG group=zulu
@@ -21,7 +21,7 @@ ARG gid=1000
 
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \
-    ca-certificates libargon2-1 libargon2-dev zlib1g zlib1g-dev libicu63 \
+    ca-certificates libargon2-1 libargon2-dev zlib1g zlib1g-dev libicu66 libicu-dev \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
  

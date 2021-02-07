@@ -37,6 +37,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(29, typeof(PoisonProtection))]
     [Union(30, typeof(MagicImmunity))]
     [Union(31, typeof(SpellReflect))]
+    [Union(32, typeof(MagicEfficiencyPenalty))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }

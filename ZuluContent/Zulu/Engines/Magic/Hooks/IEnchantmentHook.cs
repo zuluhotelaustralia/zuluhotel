@@ -31,6 +31,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount);
 
         public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance);
+        
+        public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds);
+
+        public void OnModifyWithMagicEfficiency(Mobile mobile, ref int value);
 
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 
