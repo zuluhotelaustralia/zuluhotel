@@ -348,7 +348,7 @@ namespace Server
         {
             World.Broadcast(0x35, true, "Generating doors, please wait.");
 
-            NetState.Pause();
+            NetState.FlushAll();
 
             m_Map = Map.Felucca;
             m_Count = 0;
@@ -357,9 +357,7 @@ namespace Server
                 Generate(t);
 
             int feluccaCount = m_Count;
-
-            NetState.Resume();
-
+            
             World.Broadcast(0x35, true, $"Door generation complete. Felucca: {feluccaCount}");
         }
 

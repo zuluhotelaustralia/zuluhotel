@@ -179,7 +179,7 @@ namespace Server.Misc
         {
             if (!(state.Account is Account acct))
             {
-                state.Disconnect();
+                state.Disconnect("Attempted to delete character not tied to an account");
             }
             else if (index < 0 || index >= acct.Length)
             {

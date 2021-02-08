@@ -191,12 +191,10 @@ namespace Server.Commands
                 CommandLogging.WriteLine(from, "{0} {1} deleting {2} object{3}", from.AccessLevel,
                     CommandLogging.Format(from), list.Count, list.Count == 1 ? "" : "s");
 
-                NetState.Pause();
+                NetState.FlushAll();
 
                 for (int i = 0; i < list.Count; ++i)
                     list[i].Delete();
-
-                NetState.Resume();
 
                 from.SendMessage("You have deleted {0} object{1}.", list.Count, list.Count == 1 ? "" : "s");
             }

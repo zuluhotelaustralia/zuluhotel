@@ -41,7 +41,7 @@ namespace Server.Misc
         {
           NetState ns = from.NetState;
 
-          ns?.Disconnect();
+          ns?.Disconnect("Kicked for profanity");
 
           return false;
         }

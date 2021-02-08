@@ -27,15 +27,13 @@ namespace Server.Commands
       World.Broadcast(0x35, true, "Documentation is being generated, please wait.");
       Console.WriteLine("Documentation is being generated, please wait.");
 
-      NetState.Pause();
+      NetState.FlushAll();
 
       DateTime startTime = DateTime.UtcNow;
 
       bool generated = Document();
 
       DateTime endTime = DateTime.UtcNow;
-
-      NetState.Resume();
 
       if (generated)
       {
