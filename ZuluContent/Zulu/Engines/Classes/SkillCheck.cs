@@ -403,6 +403,16 @@ namespace Scripts.Zulu.Engines.Classes
                 },
             };
 
+        public static bool ShilCheckSkill(this Mobile mobile, SkillName skill, int? difficulty = null,
+            int? points = null)
+        {
+            return (mobile as IShilCheckSkill)?.CheckSkill(
+                skill, 
+                difficulty ?? -1,
+                points ?? Configs[skill].DefaultPoints
+            ) == true;
+        }
+
         public static bool DifficultySkillCheck(Mobile from, SkillName skillName, int difficulty, int points)
         {
             Skill skill = from.Skills[skillName];

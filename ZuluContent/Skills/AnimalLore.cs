@@ -47,8 +47,7 @@ namespace Server.SkillHandlers
                             return;
                         }
 
-                        if ((from as IShilCheckSkill)?.CheckSkill(SkillName.AnimalLore, -1,
-                            Configs[SkillName.AnimalLore].DefaultPoints) == false)
+                        if (!from.ShilCheckSkill(SkillName.AnimalLore))
                         {
                             creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true,
                                 "Hmm... you're not sure...", from.NetState);
