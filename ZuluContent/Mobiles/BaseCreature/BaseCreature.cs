@@ -580,7 +580,9 @@ namespace Server.Mobiles
                         (creature.ControlMaster == owner || creature.SummonMaster == owner))
                     {
                         if (creature.Summoned && creature.Serial != Serial &&
-                            creature.IsElementalLord)
+                            (creature is AirElementalLord || creature is EarthElementalLord ||
+                             creature is FireElementalLord ||
+                             creature is WaterElementalLord))
                             creature.AIObject.DoOrderRelease(true);
                         else
                             petSlots += creature.GetPetSlots(owner);
@@ -1926,11 +1928,6 @@ namespace Server.Mobiles
             get { return true; }
         }
 
-        public bool IsElementalLord
-        {
-            get { return Name.ToLower().EndsWith("elemental lord"); }
-        }
-
         public virtual int GetPetSlots(PlayerMobile owner)
         {
             int slots;
@@ -1939,7 +1936,8 @@ namespace Server.Mobiles
             {
                 var ownerInt = (double) owner.Int;
                 owner.FireHook(h => h.OnModifyWithMagicEfficiency(owner, ref ownerInt));
-                if (IsElementalLord)
+                if (this is AirElementalLord || this is EarthElementalLord || this is FireElementalLord ||
+                    this is WaterElementalLord)
                     slots = 3;
                 else if (Int > ownerInt || HitsMax > ownerInt)
                     slots = 2;
