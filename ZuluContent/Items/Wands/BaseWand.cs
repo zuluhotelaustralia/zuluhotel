@@ -9,17 +9,80 @@ namespace Server.Items
 {
     public enum WandEffect
     {
+        //First Circle
         Clumsiness,
-        Identification,
-        Healing,
+        CreateFood,
         Feeblemindedness,
-        Weakness,
+        Healing,
         MagicArrow,
-        Harming,
+        NightSight,
+        ReactiveArmor,
+        Weakness,
+        //Second Circle
+        Agility,
+        Cunning,
+        Cure,
+        Harm,
+        MagicTrap,
+        MagicUntrap,
+        Protection,
+        Strength,
+        // Third Circle
+        Bless,
         Fireball,
-        GreaterHealing,
+        MagicLock,
+        Poison,
+        Telekinesis,
+        Teleport,
+        Unlock,
+        WallOfStone,
+        // Fourth Circle
+        ArchCure,
+        ArchProtection,
+        Curse,
+        FireField,
+        GreaterHeal,
         Lightning,
-        ManaDraining
+        ManaDrain,
+        Recall,
+        // Fifith Circle
+        BladeSpirits,
+        DispelField,
+        Incognito,
+        MagicReflection,
+        MindBlast,
+        Paralyze,
+        PoisonField,
+        SummCreature,
+        // Sixth Circle
+        Dispel,
+        EnergyBolt,
+        Explosion,
+        Invisibility,
+        Mark,
+        MassCurse,
+        ParalyzeField,
+        Reveal,
+        // Seventh Circle
+        ChainLightning,
+        EnergyField,
+        Flamestrike,
+        GateTravel,
+        ManaVampire,
+        MassDispel,
+        MeteorSwarm,
+        Polymorph,
+        // Eighth Circle
+        Earthquake,
+        EnergyVortex,
+        Resurrection,
+        AirElemental,
+        SummonDaemon,
+        EarthElemental,
+        FireElemental,
+        WaterElemental,       
+
+        Identification        
     }
 
     public abstract class BaseWand : BaseBashing
@@ -146,18 +209,81 @@ namespace Server.Items
             {
                 int num = Effect switch
                 {
+                    // Frist Circle
                     WandEffect.Clumsiness => 3002011,
-                    WandEffect.Identification => 1044063,
-                    WandEffect.Healing => 3002014,
+                    WandEffect.CreateFood => 3002012,
                     WandEffect.Feeblemindedness => 3002013,
-                    WandEffect.Weakness => 3002018,
+                    WandEffect.Healing => 3002014,
                     WandEffect.MagicArrow => 3002015,
-                    WandEffect.Harming => 3002022,
+                    WandEffect.NightSight => 3002016,
+                    WandEffect.ReactiveArmor => 3002017,
+                    WandEffect.Weakness => 3002018,
+                    //Second Circle
+                    WandEffect.Agility => 3002019,
+                    WandEffect.Cunning => 3002020,
+                    WandEffect.Cure => 3002021,
+                    WandEffect.Harm => 3002022,
+                    WandEffect.MagicTrap => 3002023,
+                    WandEffect.MagicUntrap => 3002024,
+                    WandEffect.Protection => 3002025,
+                    WandEffect.Strength => 3002026,
+                    // Third Circle
+                    WandEffect.Bless => 3002027,
                     WandEffect.Fireball => 3002028,
-                    WandEffect.GreaterHealing => 3002039,
+                    WandEffect.MagicLock => 3002029,
+                    WandEffect.Poison => 3002030,
+                    WandEffect.Telekinesis => 3002031,
+                    WandEffect.Teleport => 3002032,
+                    WandEffect.Unlock => 3002033,
+                    WandEffect.WallOfStone => 3002034,
+                    // Fourth Circle
+                    WandEffect.ArchCure => 3002035,
+                    WandEffect.ArchProtection => 3002036,
+                    WandEffect.Curse => 3002037,
+                    WandEffect.FireField => 3002038,
+                    WandEffect.GreaterHeal => 3002039,
                     WandEffect.Lightning => 3002040,
-                    WandEffect.ManaDraining => 3002041,
-                    _ => 0
+                    WandEffect.ManaDrain => 3002041,
+                    WandEffect.Recall => 3002042,
+                    // Fifith Circle
+                    WandEffect.BladeSpirits => 3002043,
+                    WandEffect.DispelField => 3002044,
+                    WandEffect.Incognito => 3002045,
+                    WandEffect.MagicReflection => 3002046,
+                    WandEffect.MindBlast => 3002047,
+                    WandEffect.Paralyze => 3002048,
+                    WandEffect.PoisonField => 3002049,
+                    WandEffect.SummCreature => 3002050,
+                    // Sixth Circle
+                    WandEffect.Dispel => 3002051,
+                    WandEffect.EnergyBolt => 3002052,
+                    WandEffect.Explosion => 3002053,
+                    WandEffect.Invisibility => 3002054,
+                    WandEffect.Mark => 3002055,
+                    WandEffect.MassCurse => 3002056,
+                    WandEffect.ParalyzeField => 3002057,
+                    WandEffect.Reveal => 3002058,
+                    // Seventh Circle
+                    WandEffect.ChainLightning => 3002059,
+                    WandEffect.EnergyField => 3002060,
+                    WandEffect.Flamestrike => 3002061,
+                    WandEffect.GateTravel => 3002062,
+                    WandEffect.ManaVampire => 3002063,
+                    WandEffect.MassDispel => 3002064,
+                    WandEffect.MeteorSwarm => 3002065,
+                    WandEffect.Polymorph => 3002066,
+                    // Eighth Circle
+                    WandEffect.Earthquake => 3002067,
+                    WandEffect.EnergyVortex => 3002068,
+                    WandEffect.Resurrection => 3002069,
+                    WandEffect.AirElemental => 3002070,
+                    WandEffect.SummonDaemon => 3002071,
+                    WandEffect.EarthElemental => 3002072,
+                    WandEffect.FireElemental => 3002073,
+                    WandEffect.WaterElemental => 3002074,
+
+                    WandEffect.Identification => 1044063,
+                                _ => 0
                 };
 
                 if (num > 0)

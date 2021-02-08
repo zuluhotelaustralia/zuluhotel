@@ -1,0 +1,36 @@
+﻿using Server.Spells.Seventh;
+
+namespace Server.Items
+{
+    public class MeteorSwarmWand : BaseWand
+    {
+        [Constructible]
+        public MeteorSwarmWand() : base(WandEffect.MeteorSwarm, 2, 10)
+        {
+        }
+
+        [Constructible]
+        public MeteorSwarmWand(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+
+        public override void OnWandUse(Mobile from)
+        {
+            Cast(new MeteorSwarmSpell(from, this));
+        }
+    }
+}
