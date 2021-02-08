@@ -6,7 +6,7 @@ namespace Server.Items
 	{
 
 		[Constructible]
-public GreaterHealWand() : base( WandEffect.GreaterHealing, 1, 5 )
+public GreaterHealWand() : base( WandEffect.GreaterHeal, 1, 5 )
 		{
 		}
 

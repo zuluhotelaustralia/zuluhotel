@@ -6,7 +6,7 @@ namespace Server.Items
 	{
 
 		[Constructible]
-public HarmWand() : base( WandEffect.Harming, 5, 30 )
+public HarmWand() : base( WandEffect.Harm, 5, 30 )
 		{
 		}
 

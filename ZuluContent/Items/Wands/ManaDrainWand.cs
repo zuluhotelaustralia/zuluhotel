@@ -6,7 +6,7 @@ namespace Server.Items
 	{
 
 		[Constructible]
-public ManaDrainWand() : base( WandEffect.ManaDraining, 5, 30 )
+public ManaDrainWand() : base( WandEffect.ManaDrain, 5, 30 )
 		{
 		}
 
