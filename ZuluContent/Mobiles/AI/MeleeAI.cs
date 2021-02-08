@@ -192,9 +192,6 @@ namespace Server.Mobiles
                 base.DoActionGuard();
             }
 
-            if (m_Mobile.CanFly && m_Mobile.Flying)
-                m_Mobile.Flying = false;
-
             return true;
         }
 

@@ -168,8 +168,7 @@ namespace Server.Mobiles
             pet.SetControlMaster(from);
 
             pet.ControlTarget = from;
-            if (pet.CheckControlChance(from))
-                pet.ControlOrder = OrderType.Follow;
+            pet.ControlOrder = OrderType.Follow;
 
             pet.MoveToWorld(from.Location, from.Map);
 
@@ -178,6 +177,8 @@ namespace Server.Mobiles
 
             petClaimTicket.Stabled = null;
             petClaimTicket.Delete();
+
+            pet.CheckControlChance(from);
         }
 
         public override bool HandlesOnSpeech(Mobile from)

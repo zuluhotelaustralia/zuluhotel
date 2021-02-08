@@ -111,12 +111,12 @@ namespace ZuluContent.Zulu.Engines.Magic
         public virtual void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance)
         {
         }
-        
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
         }
 
-        public void OnModifyWithMagicEfficiency(Mobile mobile, ref int value)
+        public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value)
         {
         }
 

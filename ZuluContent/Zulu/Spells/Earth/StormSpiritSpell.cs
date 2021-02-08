@@ -34,12 +34,6 @@ namespace Scripts.Zulu.Spells.Earth
         {
             if (!CheckSequence()) goto Return;
 
-            if (Caster.Followers + 2 > Caster.FollowersMax)
-            {
-                Caster.SendLocalizedMessage(1049611); // get l10n rekt son
-                goto Return;
-            }
-
             var duration = TimeSpan.FromSeconds(2 * Caster.Skills[DamageSkill].Fixed / 4);
 
             SpellHelper.Summon(new AirElementalLord(), Caster, 0x217, duration, false, false);

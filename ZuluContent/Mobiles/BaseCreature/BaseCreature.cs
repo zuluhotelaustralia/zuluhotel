@@ -12,6 +12,7 @@ using Server.Engines.Spawners;
 using Server.Guilds;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
+using ZuluContent.Zulu.Engines.Magic;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Mobiles
@@ -555,67 +556,54 @@ namespace Server.Mobiles
 
         public virtual bool CheckControlChance(Mobile m)
         {
-            if (GetControlChance(m) > Utility.RandomDouble())
-            {
-                Loyalty += 1;
+            if (CanBeControlledBy(m))
                 return true;
-            }
 
-            PlaySound(GetAngerSound());
+            AIObject.DoOrderRelease(true);
 
-            if (Body.IsAnimal)
-                Animate(10, 5, 1, true, false, 0);
-            else if (Body.IsMonster)
-                Animate(18, 5, 1, true, false, 0);
-
-            Loyalty -= 3;
             return false;
         }
 
         public virtual bool CanBeControlledBy(Mobile m)
         {
-            return GetControlChance(m) > 0.0;
-        }
+            if (m is PlayerMobile owner)
+            {
+                const int minSlots = 2;
+                int maxSlots;
+                var petSlots = 0;
 
-        public double GetControlChance(Mobile m)
-        {
-            return GetControlChance(m, false);
-        }
+                IPooledEnumerable eable = owner.Map.GetMobilesInRange(owner.Location, 8);
 
-        public virtual double GetControlChance(Mobile m, bool useBaseSkill)
-        {
-            if (m_dMinTameSkill <= 29.1 || m_bSummoned || m.AccessLevel >= AccessLevel.GameMaster)
-                return 1.0;
+                foreach (Mobile nearbyMobile in eable)
+                {
+                    if (nearbyMobile is BaseCreature creature &&
+                        (creature.ControlMaster == owner || creature.SummonMaster == owner))
+                    {
+                        if (creature.Summoned && creature.Serial != Serial &&
+                            (creature is AirElementalLord || creature is EarthElementalLord ||
+                             creature is FireElementalLord ||
+                             creature is WaterElementalLord))
+                            creature.AIObject.DoOrderRelease(true);
+                        else
+                            petSlots += creature.GetPetSlots(owner);
+                    }
+                }
 
-            double dMinTameSkill = m_dMinTameSkill;
+                if (m_bSummoned)
+                {
+                    var magery = m.Skills[SkillName.Magery].Value;
+                    m.FireHook(h => h.OnModifyWithMagicEfficiency(m, ref magery));
+                    maxSlots = (int) (magery / 20);
+                    return !(petSlots > maxSlots && petSlots > minSlots);
+                }
 
-            int taming =
-                (int) ((useBaseSkill ? m.Skills[SkillName.AnimalTaming].Base : m.Skills[SkillName.AnimalTaming].Value) *
-                       10);
-            int lore =
-                (int) ((useBaseSkill ? m.Skills[SkillName.AnimalLore].Base : m.Skills[SkillName.AnimalLore].Value) *
-                       10);
-            int bonus = 0, chance = 700;
+                var animalLore = (int) m.Skills[SkillName.AnimalLore].Value;
+                var animalTaming = (int) m.Skills[SkillName.AnimalTaming].Value;
+                maxSlots = (int) ((animalLore + animalTaming) / 15);
+                return !(petSlots > maxSlots && petSlots > minSlots);
+            }
 
-            int difficulty = (int) (dMinTameSkill * 10);
-            int weighted = (taming * 4 + lore) / 5;
-            bonus = weighted - difficulty;
-
-            if (bonus <= 0)
-                bonus *= 14;
-            else
-                bonus *= 6;
-
-            chance += bonus;
-
-            if (chance >= 0 && chance < 200)
-                chance = 200;
-            else if (chance > 990)
-                chance = 990;
-
-            chance -= (MaxLoyalty - m_Loyalty) * 10;
-
-            return (double) chance / 1000;
+            return false;
         }
 
         public virtual bool DeleteCorpseOnDeath
@@ -1126,6 +1114,8 @@ namespace Server.Mobiles
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
+
+            CreatureProperties.Get(GetType())?.ApplyTo(this);
 
             int version = reader.ReadInt();
 
@@ -1936,6 +1926,56 @@ namespace Server.Mobiles
         public virtual bool IsScaredOfScaryThings
         {
             get { return true; }
+        }
+
+        public virtual int GetPetSlots(PlayerMobile owner)
+        {
+            int slots;
+
+            if (m_bSummoned)
+            {
+                var ownerInt = (double) owner.Int;
+                owner.FireHook(h => h.OnModifyWithMagicEfficiency(owner, ref ownerInt));
+                if (this is AirElementalLord || this is EarthElementalLord || this is FireElementalLord ||
+                    this is WaterElementalLord)
+                    slots = 3;
+                else if (Int > ownerInt || HitsMax > ownerInt)
+                    slots = 2;
+                else
+                    slots = 1;
+            }
+            else
+            {
+                if (AI == AIType.AI_Mage)
+                {
+                    if (HitsMax > 500)
+                        slots = 9;
+                    else if (HitsMax > 250)
+                        slots = 6;
+                    else
+                        slots = 3;
+                }
+                else if (HasBreath)
+                {
+                    if (HitsMax > 500)
+                        slots = 12;
+                    else if (HitsMax > 250)
+                        slots = 8;
+                    else
+                        slots = 4;
+                }
+                else
+                {
+                    if (HitsMax > 300)
+                        slots = 3;
+                    else if (HitsMax > 150)
+                        slots = 2;
+                    else
+                        slots = 1;
+                }
+            }
+
+            return slots;
         }
 
         public virtual void OnGotMeleeAttack(Mobile attacker)
@@ -3618,12 +3658,6 @@ namespace Server.Mobiles
                     Spawner = null;
                 }
 
-                if (m.Followers + ControlSlots > m.FollowersMax)
-                {
-                    m.SendLocalizedMessage(1049607); // You have too many followers to control that creature.
-                    return false;
-                }
-
                 CurrentWayPoint = null; //so tamed animals don't try to go back
 
                 Home = Point3D.Zero;
@@ -3631,7 +3665,10 @@ namespace Server.Mobiles
                 ControlMaster = m;
                 Controlled = true;
                 ControlTarget = null;
-                ControlOrder = OrderType.Come;
+                if (CheckControlChance(m))
+                    ControlOrder = OrderType.Come;
+                else
+                    ControlOrder = OrderType.None;
                 Guild = null;
 
                 if (m_DeleteTimer != null)
@@ -3678,13 +3715,6 @@ namespace Server.Mobiles
         public static bool Summon(BaseCreature creature, bool controlled, Mobile caster, Point3D p, int sound,
             TimeSpan duration)
         {
-            if (caster.Followers + creature.ControlSlots > caster.FollowersMax)
-            {
-                caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
-                creature.Delete();
-                return false;
-            }
-
             m_Summoning = true;
 
             if (controlled)

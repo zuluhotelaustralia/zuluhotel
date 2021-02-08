@@ -5,6 +5,7 @@ using Server.Targeting;
 using Server.Network;
 using Server.Mobiles;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
+using static Server.Configurations.MessageHueConfiguration;
 using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.SkillHandlers
@@ -84,7 +85,7 @@ namespace Server.SkillHandlers
 
                 if (!(targeted is BaseCreature))
                 {
-                    from.SendAsciiMessage(33, "You cannot tame this!");
+                    from.SendAsciiMessage(MessageFailureHue, "You cannot tame this!");
                     return;
                 }
 
@@ -92,13 +93,13 @@ namespace Server.SkillHandlers
 
                 if (!creature.Tamable)
                 {
-                    from.SendAsciiMessage(33, "You can't tame that!");
+                    from.SendAsciiMessage(MessageFailureHue, "You can't tame that!");
                     return;
                 }
 
                 if (creature.Controlled)
                 {
-                    from.SendAsciiMessage(33, "That creature looks pretty tame already.");
+                    from.SendAsciiMessage(MessageFailureHue, "That creature looks pretty tame already.");
                     return;
                 }
 
@@ -106,7 +107,7 @@ namespace Server.SkillHandlers
 
                 if (from.Skills[SkillName.AnimalTaming].Value < difficulty)
                 {
-                    from.SendAsciiMessage(33, "You have no chance of taming this creature!");
+                    from.SendAsciiMessage(MessageFailureHue, "You have no chance of taming this creature!");
                     return;
                 }
 
@@ -141,7 +142,7 @@ namespace Server.SkillHandlers
                 else
                 {
                     AngerBeast(creature, from);
-                    from.SendAsciiMessage(33, "The creature is unresponsive to taming at this time.");
+                    from.SendAsciiMessage(MessageFailureHue, "The creature is unresponsive to taming at this time.");
                     return;
                 }
 
@@ -176,47 +177,47 @@ namespace Server.SkillHandlers
                     if (!m_Tamer.InRange(m_Creature, MaxDistance))
                     {
                         m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendAsciiMessage(33, "You are too far away to continue taming.");
+                        m_Tamer.SendAsciiMessage(MessageFailureHue, "You are too far away to continue taming.");
                         Stop();
                     }
                     else if (!m_Tamer.CheckAlive())
                     {
                         m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendAsciiMessage(33, "You are dead and cannot continue taming.");
+                        m_Tamer.SendAsciiMessage(MessageFailureHue, "You are dead and cannot continue taming.");
                         Stop();
                     }
                     else if (!m_Tamer.CanSee(m_Creature) || !m_Tamer.InLOS(m_Creature) || !CanPath())
                     {
                         m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendAsciiMessage(33,
+                        m_Tamer.SendAsciiMessage(MessageFailureHue,
                             "You do not have a clear path to the animal you are taming, and must cease your attempt.");
                         Stop();
                     }
                     else if (!m_Creature.Tamable)
                     {
                         m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendAsciiMessage(33, "That creature cannot be tamed.");
+                        m_Tamer.SendAsciiMessage(MessageFailureHue, "That creature cannot be tamed.");
                         Stop();
                     }
                     else if (m_Creature.Controlled)
                     {
                         m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendAsciiMessage(33, $"{m_Creature.Name} belongs to someone else!");
+                        m_Tamer.SendAsciiMessage(MessageFailureHue, $"{m_Creature.Name} belongs to someone else!");
                         Stop();
                     }
                     else if (m_Count == 1)
                     {
-                        m_Tamer.PublicOverheadMessage(MessageType.Regular, 55, true,
+                        m_Tamer.PublicOverheadMessage(MessageType.Regular, MessageSuccessHue, true,
                             $"What a nice {m_Creature.Name}");
                     }
                     else if (m_Count == 2)
                     {
-                        m_Tamer.PublicOverheadMessage(MessageType.Regular, 55, true,
+                        m_Tamer.PublicOverheadMessage(MessageType.Regular, MessageSuccessHue, true,
                             $"I've always wanted a {m_Creature.Name} like you.");
                     }
                     else if (m_Count == 3)
                     {
-                        m_Tamer.PublicOverheadMessage(MessageType.Regular, 55, true,
+                        m_Tamer.PublicOverheadMessage(MessageType.Regular, MessageSuccessHue, true,
                             $"{m_Creature.Name}, will you be my friend?");
                     }
                     else
@@ -224,7 +225,7 @@ namespace Server.SkillHandlers
                         if (Core.TickCount < m_Creature.UnresponsiveToTamingEndTime)
                         {
                             m_BeingTamed.Remove(m_Creature);
-                            m_Tamer.SendAsciiMessage(33, $"You failed to tame the creature.");
+                            m_Tamer.SendAsciiMessage(MessageFailureHue, $"You failed to tame the creature.");
                         }
                         else
                         {
@@ -234,7 +235,7 @@ namespace Server.SkillHandlers
                                 (int) m_Difficulty * PointMultiplier) == false)
                             {
                                 m_BeingTamed.Remove(m_Creature);
-                                m_Tamer.SendAsciiMessage(33, $"You failed to tame the creature.");
+                                m_Tamer.SendAsciiMessage(MessageFailureHue, $"You failed to tame the creature.");
                                 var chance = 80 -
                                              (int) ((m_Tamer.Skills[SkillName.AnimalTaming].Value - m_Difficulty + 20) *
                                                     2);
@@ -245,7 +246,8 @@ namespace Server.SkillHandlers
 
                                 if (Utility.Random(100) <= chance)
                                 {
-                                    m_Tamer.SendAsciiMessage(33, $"And have made the creature unresponsive to taming.");
+                                    m_Tamer.SendAsciiMessage(MessageFailureHue,
+                                        $"And have made the creature unresponsive to taming.");
                                     m_Creature.UnresponsiveToTamingEndTime = Core.TickCount +
                                                                              (int) UnresponsiveTime
                                                                                  .TotalMilliseconds;
@@ -255,7 +257,8 @@ namespace Server.SkillHandlers
                             {
                                 m_Tamer.RevealingAction();
                                 m_BeingTamed.Remove(m_Creature);
-                                m_Tamer.SendAsciiMessage(55, $"You successfully tame the {m_Creature.Name}");
+                                m_Tamer.SendAsciiMessage(MessageSuccessHue,
+                                    $"You successfully tame the {m_Creature.Name}");
                                 m_Creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799,
                                     m_Tamer.NetState); // It seems to accept you as master.
                                 m_Creature.Owners.Add(m_Tamer);
