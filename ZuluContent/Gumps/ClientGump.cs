@@ -120,7 +120,7 @@ namespace Server.Gumps
 					{
 						focus.Say( "I've been kicked!" );
 
-						m_State.Disconnect();
+						m_State.Disconnect($"Kicked by {from.Name}");
 
 						CommandLogging.WriteLine( from, "{0} {1} kicking {2} ", from.AccessLevel, CommandLogging.Format( from ), CommandLogging.Format( focus ) );
 					}

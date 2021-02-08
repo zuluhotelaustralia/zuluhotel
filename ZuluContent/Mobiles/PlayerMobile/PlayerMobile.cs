@@ -386,9 +386,6 @@ namespace Server.Mobiles
 
         public static void Initialize()
         {
-            if (FastwalkPrevention)
-                IncomingPackets.RegisterThrottler(0x02, MovementThrottle_Callback);
-
             EventSink.Login += OnLogin;
             EventSink.Logout += OnLogout;
             EventSink.Connected += EventSink_Connected;
@@ -697,7 +694,7 @@ namespace Server.Mobiles
         {
             NetState ns = ((Mobile) state).NetState;
 
-            ns?.Disconnect();
+            ns?.Disconnect("Disconnected due to lockdown");
         }
 
         private static void OnLogout(Mobile mobile)
@@ -1740,32 +1737,6 @@ namespace Server.Mobiles
 
             return running ? CalcMoves.RunFootDelay : CalcMoves.WalkFootDelay;
         }
-
-        public static TimeSpan MovementThrottle_Callback(NetState ns)
-        {
-            if (!(ns.Mobile is PlayerMobile pm) || !pm.UsesFastwalkPrevention)
-                return TimeSpan.Zero;
-
-            if (!pm.m_HasMoved)
-            {
-                // has not yet moved
-                pm.m_NextMovementTime = Core.TickCount;
-                pm.m_HasMoved = true;
-                return TimeSpan.Zero;
-            }
-
-            long ts = pm.m_NextMovementTime - Core.TickCount;
-
-            if (ts < 0)
-            {
-                // been a while since we've last moved
-                pm.m_NextMovementTime = Core.TickCount;
-                return TimeSpan.Zero;
-            }
-
-            return ts < FastwalkThreshold ? TimeSpan.Zero : TimeSpan.FromTicks(ts);
-        }
-
         #endregion
 
         #region Hair and beard mods
