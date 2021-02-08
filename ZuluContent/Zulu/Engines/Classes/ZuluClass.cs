@@ -288,7 +288,7 @@ namespace Scripts.Zulu.Engines.Classes
             if (m.AccessLevel >= AccessLevel.GameMaster)
                 m.SendMessage(1283, message);
         }
-        
+
         public double GetMagicEfficiencyPenalty()
         {
             if (m_Parent is Mobile mobile)
@@ -307,9 +307,9 @@ namespace Scripts.Zulu.Engines.Classes
                 var magicPenalty = armour.Sum(a => a?.Enchantments.Get((MagicEfficiencyPenalty e) => e.Value) ?? 0);
 
                 // TODO: remove this when items have MagicEfficiencyPenalty properties
-                if (magicPenalty == 0) 
+                if (magicPenalty == 0)
                     magicPenalty = armour.Sum(GetArmorMeditationValue) / 4;
-            
+
                 return magicPenalty;
             }
 
@@ -419,12 +419,12 @@ namespace Scripts.Zulu.Engines.Classes
         {
             if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})
             {
-                regen = (int)(regen * ClasseBonus);
+                regen = (int) (regen * ClasseBonus);
                 tickIntervalSeconds /= ClasseBonus;
             }
         }
 
-        public void OnModifyWithMagicEfficiency(Mobile mobile, ref int value)
+        public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value)
         {
             if (mobile is IZuluClassed {ZuluClass: { } cls})
             {
@@ -437,7 +437,7 @@ namespace Scripts.Zulu.Engines.Classes
 
                 var penalty = GetMagicEfficiencyPenalty();
 
-                value = (int)(value * (100 - penalty) / 100);
+                value = (int) (value * (100 - penalty) / 100);
             }
         }
 

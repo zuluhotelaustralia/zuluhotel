@@ -12,6 +12,7 @@ using Server.Engines.Spawners;
 using Server.Guilds;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
+using ZuluContent.Zulu.Engines.Magic;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Mobiles
@@ -588,8 +589,8 @@ namespace Server.Mobiles
 
                 if (m_bSummoned)
                 {
-                    // TODO: Modify with magic efficiency
                     var magery = m.Skills[SkillName.Magery].Value;
+                    m.FireHook(h => h.OnModifyWithMagicEfficiency(m, ref magery));
                     maxSlots = (int) (magery / 20);
                     return !(petSlots > maxSlots && petSlots > minSlots);
                 }
@@ -1936,8 +1937,8 @@ namespace Server.Mobiles
 
             if (m_bSummoned)
             {
-                // TODO: Modify with magic efficiency
-                var ownerInt = owner.Int;
+                var ownerInt = (double) owner.Int;
+                owner.FireHook(h => h.OnModifyWithMagicEfficiency(owner, ref ownerInt));
                 if (IsElementalLord)
                     slots = 3;
                 else if (Int > ownerInt || HitsMax > ownerInt)
