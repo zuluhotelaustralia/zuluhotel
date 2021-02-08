@@ -13,9 +13,10 @@ jobs:
       - name: Publish to Registry
         uses: docker/build-push-action@v1
         with:
-          repository: zuluhotelaustralia/zuluhotel/server
+          repository: zuluhotelaustralia/zuluhotel/distribution
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           tag_with_ref: true
+          tag_with_sha: true
           add_git_labels: true
