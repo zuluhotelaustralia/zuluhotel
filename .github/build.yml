@@ -1,0 +1,19 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish to Registry
+        uses: docker/build-push-action@v1
+        with:
+          repository: zuluhotelaustralia/zuluhotel
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          tag_with_ref: true
+          tag_with_sha: true
+          add_git_labels: true

@@ -3,6 +3,8 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS builder
 COPY . /source
 WORKDIR /source
 
+RUN git submodule update --init --recursive
+
 RUN apt-get update \
  && apt-get install -y -q --no-install-recommends \
     ca-certificates rsync \
