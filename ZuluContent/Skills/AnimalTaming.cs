@@ -35,7 +35,7 @@ namespace Server.SkillHandlers
 
             m.SendLocalizedMessage(502789); // Tame which animal?
 
-            return Configs[SkillName.AnimalTaming].Delay;
+            return Configs[SkillName.AnimalTaming].DelayTimespan;
         }
 
         public static bool AngerBeast(BaseCreature creature, Mobile from)
@@ -130,14 +130,14 @@ namespace Server.SkillHandlers
 
                 if (creature.UnresponsiveToTamingEndTime < Core.TickCount)
                 {
-                    if ((from as IShilCheckSkill)?.CheckSkill(SkillName.AnimalLore, calmingDifficulty,
-                        0) == true && creature.Warmode)
+                    if (from.ShilCheckSkill(SkillName.AnimalLore, calmingDifficulty, 0) && creature.Warmode)
                     {
                         CalmBeast(creature, from);
                     }
-                    else if (creature.CreatureType == CreatureType.Dragonkin &&
-                             AngerBeast(creature, from))
+                    else if (creature.CreatureType == CreatureType.Dragonkin && AngerBeast(creature, from))
+                    {
                         return;
+                    }
                 }
                 else
                 {
@@ -231,8 +231,8 @@ namespace Server.SkillHandlers
                         {
                             m_Creature.UnresponsiveToTamingEndTime = Core.TickCount;
 
-                            if ((m_Tamer as IShilCheckSkill)?.CheckSkill(SkillName.AnimalTaming, (int) m_Difficulty,
-                                (int) m_Difficulty * PointMultiplier) == false)
+                            if (m_Tamer.ShilCheckSkill(SkillName.AnimalTaming, (int) m_Difficulty,
+                                (int) m_Difficulty * PointMultiplier))
                             {
                                 m_BeingTamed.Remove(m_Creature);
                                 m_Tamer.SendAsciiMessage(MessageFailureHue, $"You failed to tame the creature.");

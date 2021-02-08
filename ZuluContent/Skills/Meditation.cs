@@ -9,11 +9,11 @@ namespace Server.SkillHandlers
 {
     class Meditation
     {
-
-        private static readonly TimeSpan DefaultDelay = TimeSpan.FromSeconds(10.0);
+        private static readonly TimeSpan DefaultDelay = SkillCheck.Configs[SkillName.Meditation].DelayTimespan;
+        
         public static void Initialize()
         {
-            SkillInfo.Table[46].Callback = OnUse;
+            SkillInfo.Table[(int)SkillName.Meditation].Callback = OnUse;
         }
         
         public static TimeSpan OnUse(Mobile m)
@@ -49,27 +49,26 @@ namespace Server.SkillHandlers
                 m.SendAsciiMessage("Regenerative forces cannot penetrate your armor.");
                 return DefaultDelay;
             }
-
-            if ((m as IShilCheckSkill)?.CheckSkill(SkillName.Meditation, -1,
-                SkillCheck.Configs[SkillName.Meditation].DefaultPoints) == true)
-            {
-                m.SendLocalizedMessage(501851); // You enter a meditative trance.
-                m.Meditating = true;
-
-                m.PlaySound(0xFA);
-                
-                var regenBase = (int) (m.Skills[SkillName.Meditation].Value / 25 + m.Int / 35.0);
-                var interval = 5.0;
-
-                m.FireHook(h => h.OnMeditation(m, ref regenBase, ref interval));
-                
-                new InternalTimer( m, regenBase, TimeSpan.FromSeconds(interval)).Start();
-                return TimeSpan.FromSeconds(10.0);
-            }
-
             
-            m.SendAsciiMessage("You cannot focus your concentration.");
-            return DefaultDelay;
+            if (!m.ShilCheckSkill(SkillName.Meditation))
+            {
+                m.SendAsciiMessage("You cannot focus your concentration.");
+                return DefaultDelay;
+            }
+            
+            m.SendLocalizedMessage(501851); // You enter a meditative trance.
+            m.Meditating = true;
+
+            m.PlaySound(0xFA);
+                
+            var regenBase = (int) (m.Skills[SkillName.Meditation].Value / 25 + m.Int / 35.0);
+            var interval = 5.0;
+
+            m.FireHook(h => h.OnMeditation(m, ref regenBase, ref interval));
+                
+            new InternalTimer( m, regenBase, TimeSpan.FromSeconds(interval)).Start();
+            return TimeSpan.FromSeconds(10.0);
+            
         }
         
         public static double GetMagicEfficiencyModifier(Mobile from)

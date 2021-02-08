@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using Server;
 using Server.Mobiles;
+using Server.Text;
 
 namespace Scripts.Zulu.Engines.Classes
 {
@@ -20,388 +25,64 @@ namespace Scripts.Zulu.Engines.Classes
 
         public record SkillConfig
         {
-            public TimeSpan Delay { get; init; }
+            public double Delay { get; init; }
+
+            public TimeSpan DelayTimespan => TimeSpan.FromSeconds(Delay);
             public StatAdvancement StrAdvancement { get; init; }
             public StatAdvancement DexAdvancement { get; init; }
             public StatAdvancement IntAdvancement { get; init; }
             public int DefaultPoints { get; init; }
         }
 
-        public static readonly IReadOnlyDictionary<SkillName, SkillConfig> Configs =
-            new Dictionary<SkillName, SkillConfig>
+        public static void Initialize()
+        {
+            // this is here so our static constructor gets called
+        }
+
+        public static readonly IReadOnlyDictionary<SkillName, SkillConfig> Configs;
+
+        static SkillCheck()
+        {
+            var path = Path.Join(Core.BaseDirectory, "Data/skillconfigs.json");
+            
+            Console.WriteLine($"SkillCheck Configuration: loading skillconfigs.json from {path}");
+
+            if (!File.Exists(path))
             {
-                // Warrior
-                [SkillName.Anatomy] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 200
-                },
-                [SkillName.Fencing] = new SkillConfig
-                {
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 40, PointsAmount = 4, PointsSides = 4, PointsBonus = 0},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 4, PointsSides = 6, PointsBonus = 0},
-                    DefaultPoints = 20
-                },
-                [SkillName.Healing] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 4, PointsSides = 4, PointsBonus = 10},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 30, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
-                    DefaultPoints = 100
-                },
-                [SkillName.Macing] = new SkillConfig
-                {
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 65, PointsAmount = 4, PointsSides = 7, PointsBonus = 3},
-                    DefaultPoints = 20
-                },
-                [SkillName.Parry] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 1, PointsSides = 4, PointsBonus = 0},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 2, PointsSides = 3, PointsBonus = 0},
-                    DefaultPoints = 20
-                },
-                [SkillName.Swords] = new SkillConfig
-                {
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 4, PointsSides = 6, PointsBonus = 0},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 40, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 20
-                },
-                [SkillName.Tactics] = new SkillConfig
-                {
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 2, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 15
-                },
-                [SkillName.Wrestling] = new SkillConfig
-                {
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 4, PointsSides = 7, PointsBonus = 4},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 30, PointsAmount = 7, PointsSides = 8, PointsBonus = 0},
-                    DefaultPoints = 20
-                },
-
-                // Mage
-                [SkillName.Alchemy] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 100, PointsAmount = 4, PointsSides = 5, PointsBonus = 10},
-                    DefaultPoints = 200
-                },
-                [SkillName.EvalInt] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 90, PointsAmount = 5, PointsSides = 6, PointsBonus = 20},
-                    DefaultPoints = 200
-                },
-                [SkillName.Inscribe] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
-                    DefaultPoints = 600
-                },
-                [SkillName.ItemID] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(4.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 5, PointsSides = 5, PointsBonus = 15},
-                    DefaultPoints = 200
-                },
-                [SkillName.Magery] = new SkillConfig
-                {
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 100, PointsAmount = 5, PointsSides = 8, PointsBonus = 18},
-                    DefaultPoints = 300
-                },
-                [SkillName.MagicResist] = new SkillConfig
-                {
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 15},
-                    DefaultPoints = 50
-                },
-                [SkillName.Meditation] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 5, PointsSides = 5, PointsBonus = 15},
-                    DefaultPoints = 250
-                },
-                [SkillName.SpiritSpeak] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 100, PointsAmount = 5, PointsSides = 8, PointsBonus = 35},
-                    DefaultPoints = 20
-                },
-
-                // Ranger
-                [SkillName.AnimalLore] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(5.0),
-                    DefaultPoints = 250
-                },
-                [SkillName.AnimalTaming] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 10},
-                    DefaultPoints = 25
-                },
-                [SkillName.Archery] = new SkillConfig
-                {
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 4, PointsSides = 4, PointsBonus = 0},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 4, PointsSides = 6, PointsBonus = 8},
-                    DefaultPoints = 20
-                },
-                [SkillName.Camping] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 15, PointsAmount = 1, PointsSides = 8, PointsBonus = 0},
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 10, PointsAmount = 1, PointsSides = 6, PointsBonus = 0},
-                    DefaultPoints = 200
-                },
-                [SkillName.Cooking] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 30, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
-                    DefaultPoints = 300
-                },
-                [SkillName.Fishing] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(5.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 8},
-                    DefaultPoints = 200
-                },
-                [SkillName.Tracking] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 4, PointsSides = 4, PointsBonus = 15},
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 4, PointsSides = 2, PointsBonus = 5},
-                    DefaultPoints = 200
-                },
-                [SkillName.Veterinary] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 20, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
-                    DefaultPoints = 100
-                },
-
-                // Crafter
-                [SkillName.ArmsLore] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
-                    DefaultPoints = 200
-                },
-                [SkillName.Blacksmith] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
-                    DefaultPoints = 30
-                },
-                [SkillName.Carpentry] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 3, PointsSides = 6, PointsBonus = 5},
-                    DefaultPoints = 100
-                },
-                [SkillName.Fletching] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 3, PointsSides = 4, PointsBonus = 8},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 3, PointsSides = 6, PointsBonus = 8},
-                    DefaultPoints = 100
-                },
-                [SkillName.Lumberjacking] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 6, PointsBonus = 0},
-                    DefaultPoints = 100
-                },
-                [SkillName.Mining] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 25
-                },
-                [SkillName.Tailoring] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 50
-                },
-                [SkillName.Tinkering] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    StrAdvancement = new StatAdvancement
-                        {Chance = 10, PointsAmount = 2, PointsSides = 4, PointsBonus = 10},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
-                    DefaultPoints = 100
-                },
-
-                // Bard
-                [SkillName.Begging] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(20.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 200
-                },
-                [SkillName.Cartography] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 3, PointsSides = 4, PointsBonus = 5},
-                    DefaultPoints = 200
-                },
-                [SkillName.Discordance] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DefaultPoints = 200
-                },
-                [SkillName.Herding] = new SkillConfig
-                {
-                    DefaultPoints = 100
-                },
-                [SkillName.Musicianship] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(15.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 3, PointsSides = 5, PointsBonus = 8},
-                    DefaultPoints = 20
-                },
-                [SkillName.Peacemaking] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 15, PointsAmount = 1, PointsSides = 8, PointsBonus = 0},
-                    DefaultPoints = 200
-                },
-                [SkillName.Provocation] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 50, PointsAmount = 4, PointsSides = 10, PointsBonus = 0},
-                    DefaultPoints = 20
-                },
-                [SkillName.TasteID] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 85, PointsAmount = 4, PointsSides = 4, PointsBonus = 15},
-                    DefaultPoints = 200
-                },
-
-                // Thief
-                [SkillName.Hiding] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 70, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
-                    DefaultPoints = 200
-                },
-                [SkillName.Lockpicking] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 3, PointsSides = 4, PointsBonus = 12},
-                    DefaultPoints = 100
-                },
-                [SkillName.Poisoning] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 5, PointsSides = 6, PointsBonus = 40},
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 60, PointsAmount = 5, PointsSides = 4, PointsBonus = 30},
-                    DefaultPoints = 200
-                },
-                [SkillName.RemoveTrap] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 90, PointsAmount = 5, PointsSides = 8, PointsBonus = 15},
-                    DefaultPoints = 200
-                },
-                [SkillName.Snooping] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(5.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
-                    DefaultPoints = 200
-                },
-                [SkillName.Stealing] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(15.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 90, PointsAmount = 3, PointsSides = 4, PointsBonus = 9},
-                    DefaultPoints = 200
-                },
-                [SkillName.Stealth] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 100, PointsAmount = 6, PointsSides = 6, PointsBonus = 45},
-                    DefaultPoints = 200
-                },
-                [SkillName.DetectHidden] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(10.0),
-                    DexAdvancement = new StatAdvancement
-                        {Chance = 80, PointsAmount = 3, PointsSides = 5, PointsBonus = 10},
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 40, PointsAmount = 3, PointsSides = 6, PointsBonus = 0},
-                    DefaultPoints = 200
-                },
-
-                // Misc
-                [SkillName.Forensics] = new SkillConfig
-                {
-                    Delay = TimeSpan.FromSeconds(15.0),
-                    IntAdvancement = new StatAdvancement
-                        {Chance = 90, PointsAmount = 4, PointsSides = 4, PointsBonus = 12},
-                    DefaultPoints = 200
-                },
+                throw new DataException($"SkillCheck Configuration: {path} was not found, cannot continue!");
+            }
+        
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                AllowTrailingCommas = true,
+                IgnoreNullValues = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                PropertyNameCaseInsensitive = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             };
+
+            var text = File.ReadAllText(path, TextEncoding.UTF8);
+            Configs = JsonSerializer.Deserialize<Dictionary<SkillName, SkillConfig>>(text, options);
+
+            if (Configs == null)
+            {
+                throw new DataException($"SkillCheck Configuration: failed to deserialize {path}!");
+            }
+            
+            Console.WriteLine($"SkillCheck Configuration: loaded {Configs.Count} entries ");
+        }
+
+
+        public static bool ShilCheckSkill(this Mobile mobile, SkillName skill, int? difficulty = null,
+            int? points = null)
+        {
+            return (mobile as IShilCheckSkill)?.CheckSkill(
+                skill, 
+                difficulty ?? -1,
+                points ?? Configs[skill].DefaultPoints
+            ) == true;
+        }
 
         public static bool DifficultySkillCheck(Mobile from, SkillName skillName, int difficulty, int points)
         {

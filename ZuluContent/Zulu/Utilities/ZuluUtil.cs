@@ -130,8 +130,8 @@ namespace Scripts.Zulu.Utilities
 
                 if (targetProperty == null)
                 {
-                    Console.WriteLine(
-                        $"Skipped mapping property for {typeof(TSource)}.{sourceProperty.Name} does not exist on {typeof(TTarget)}");
+                    // Console.WriteLine(
+                    //     $"Skipped mapping property for {typeof(TSource)}.{sourceProperty.Name} does not exist on {typeof(TTarget)}");
                     continue;
                 }
 
@@ -148,18 +148,18 @@ namespace Scripts.Zulu.Utilities
 
                     if (!hasImplicitMethod)
                     {
-                        Console.WriteLine("Skipped mapping property no conversion available for " +
-                                          $"{typeof(TSource)}.{sourceProperty.Name}(read:{sourceProperty.PropertyType}) => " +
-                                          $"{typeof(TTarget)}.{targetProperty.Name}(write:{targetProperty.PropertyType})");
+                        // Console.WriteLine("Skipped mapping property no conversion available for " +
+                        //                   $"{typeof(TSource)}.{sourceProperty.Name}(read:{sourceProperty.PropertyType}) => " +
+                        //                   $"{typeof(TTarget)}.{targetProperty.Name}(write:{targetProperty.PropertyType})");
                         continue;
                     }
                 }
 
                 if (!sourceProperty.CanRead || !targetProperty.CanWrite)
                 {
-                    Console.WriteLine("Skipped mapping property for " +
-                                      $"{typeof(TSource)}.{sourceProperty.Name}(read:{sourceProperty.CanRead}) => " +
-                                      $"{typeof(TTarget)}.{targetProperty.Name}(write:{targetProperty.CanWrite})");
+                    // Console.WriteLine("Skipped mapping property for " +
+                    //                   $"{typeof(TSource)}.{sourceProperty.Name}(read:{sourceProperty.CanRead}) => " +
+                    //                   $"{typeof(TTarget)}.{targetProperty.Name}(write:{targetProperty.CanWrite})");
                     continue;
                 }
 
