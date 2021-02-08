@@ -1,7 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using Server;
 using Server.Mobiles;
+using Server.Text;
 
 namespace Scripts.Zulu.Engines.Classes
 {
@@ -20,11 +25,45 @@ namespace Scripts.Zulu.Engines.Classes
 
         public record SkillConfig
         {
-            public TimeSpan Delay { get; init; }
+            public double Delay { get; init; }
+
+            public TimeSpan DelayTimespan => TimeSpan.FromSeconds(Delay);
             public StatAdvancement StrAdvancement { get; init; }
             public StatAdvancement DexAdvancement { get; init; }
             public StatAdvancement IntAdvancement { get; init; }
             public int DefaultPoints { get; init; }
+        }
+
+        public static void Initialize()
+        {
+            // this is here so our static constructor gets called
+        }
+
+        static SkillCheck()
+        {
+            var path = Path.Join(Core.BaseDirectory, "Data/skillconfigs.json");
+            
+            Console.WriteLine($"Loading skillconfigs.json from {path}");
+
+            if (!File.Exists(path))
+            {
+                throw new DataException($"SkillCheck Configuration: {path} was not found, cannot continue!");
+            }
+        
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                AllowTrailingCommas = true,
+                IgnoreNullValues = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                PropertyNameCaseInsensitive = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            };
+
+            File.WriteAllText(path, JsonSerializer.Serialize(Configs, options));
+        
+            var text = File.ReadAllText(path, TextEncoding.UTF8);
+            Configs = JsonSerializer.Deserialize<Dictionary<SkillName, SkillConfig>>(text, options);
         }
 
         public static readonly IReadOnlyDictionary<SkillName, SkillConfig> Configs =
@@ -33,7 +72,7 @@ namespace Scripts.Zulu.Engines.Classes
                 // Warrior
                 [SkillName.Anatomy] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
                     DefaultPoints = 200
@@ -48,7 +87,7 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Healing] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 60, PointsAmount = 4, PointsSides = 4, PointsBonus = 10},
                     DexAdvancement = new StatAdvancement
@@ -63,7 +102,7 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Parry] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 1, PointsSides = 4, PointsBonus = 0},
                     DexAdvancement = new StatAdvancement
@@ -96,28 +135,28 @@ namespace Scripts.Zulu.Engines.Classes
                 // Mage
                 [SkillName.Alchemy] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 100, PointsAmount = 4, PointsSides = 5, PointsBonus = 10},
                     DefaultPoints = 200
                 },
                 [SkillName.EvalInt] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 90, PointsAmount = 5, PointsSides = 6, PointsBonus = 20},
                     DefaultPoints = 200
                 },
                 [SkillName.Inscribe] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 60, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
                     DefaultPoints = 600
                 },
                 [SkillName.ItemID] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(4.0),
+                    Delay = 4.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 5, PointsSides = 5, PointsBonus = 15},
                     DefaultPoints = 200
@@ -136,14 +175,14 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Meditation] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 5, PointsSides = 5, PointsBonus = 15},
                     DefaultPoints = 250
                 },
                 [SkillName.SpiritSpeak] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 100, PointsAmount = 5, PointsSides = 8, PointsBonus = 35},
                     DefaultPoints = 20
@@ -152,12 +191,12 @@ namespace Scripts.Zulu.Engines.Classes
                 // Ranger
                 [SkillName.AnimalLore] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(5.0),
+                    Delay = 5.0,
                     DefaultPoints = 250
                 },
                 [SkillName.AnimalTaming] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 10},
                     DefaultPoints = 25
@@ -172,7 +211,7 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Camping] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 15, PointsAmount = 1, PointsSides = 8, PointsBonus = 0},
                     IntAdvancement = new StatAdvancement
@@ -181,7 +220,7 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Cooking] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
                     IntAdvancement = new StatAdvancement
@@ -190,14 +229,14 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Fishing] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(5.0),
+                    Delay = 5.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 8},
                     DefaultPoints = 200
                 },
                 [SkillName.Tracking] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 4, PointsSides = 4, PointsBonus = 15},
                     IntAdvancement = new StatAdvancement
@@ -206,7 +245,7 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Veterinary] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 20, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
                     DefaultPoints = 100
@@ -215,7 +254,7 @@ namespace Scripts.Zulu.Engines.Classes
                 // Crafter
                 [SkillName.ArmsLore] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
                     StrAdvancement = new StatAdvancement
@@ -224,21 +263,21 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Blacksmith] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
                     DefaultPoints = 30
                 },
                 [SkillName.Carpentry] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 3, PointsSides = 6, PointsBonus = 5},
                     DefaultPoints = 100
                 },
                 [SkillName.Fletching] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 60, PointsAmount = 3, PointsSides = 4, PointsBonus = 8},
                     DexAdvancement = new StatAdvancement
@@ -247,28 +286,28 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Lumberjacking] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 6, PointsBonus = 0},
                     DefaultPoints = 100
                 },
                 [SkillName.Mining] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 5},
                     DefaultPoints = 25
                 },
                 [SkillName.Tailoring] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 50, PointsAmount = 3, PointsSides = 4, PointsBonus = 5},
                     DefaultPoints = 50
                 },
                 [SkillName.Tinkering] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     StrAdvancement = new StatAdvancement
                         {Chance = 10, PointsAmount = 2, PointsSides = 4, PointsBonus = 10},
                     DexAdvancement = new StatAdvancement
@@ -279,21 +318,21 @@ namespace Scripts.Zulu.Engines.Classes
                 // Bard
                 [SkillName.Begging] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(20.0),
+                    Delay = 20.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 4, PointsBonus = 5},
                     DefaultPoints = 200
                 },
                 [SkillName.Cartography] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 60, PointsAmount = 3, PointsSides = 4, PointsBonus = 5},
                     DefaultPoints = 200
                 },
                 [SkillName.Discordance] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DefaultPoints = 200
                 },
                 [SkillName.Herding] = new SkillConfig
@@ -302,7 +341,7 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Musicianship] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(15.0),
+                    Delay = 15.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 3, PointsSides = 4, PointsBonus = 0},
                     DexAdvancement = new StatAdvancement
@@ -311,21 +350,21 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.Peacemaking] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 15, PointsAmount = 1, PointsSides = 8, PointsBonus = 0},
                     DefaultPoints = 200
                 },
                 [SkillName.Provocation] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 50, PointsAmount = 4, PointsSides = 10, PointsBonus = 0},
                     DefaultPoints = 20
                 },
                 [SkillName.TasteID] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 85, PointsAmount = 4, PointsSides = 4, PointsBonus = 15},
                     DefaultPoints = 200
@@ -334,21 +373,21 @@ namespace Scripts.Zulu.Engines.Classes
                 // Thief
                 [SkillName.Hiding] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
                     DefaultPoints = 200
                 },
                 [SkillName.Lockpicking] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 3, PointsSides = 4, PointsBonus = 12},
                     DefaultPoints = 100
                 },
                 [SkillName.Poisoning] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 5, PointsSides = 6, PointsBonus = 40},
                     IntAdvancement = new StatAdvancement
@@ -357,35 +396,35 @@ namespace Scripts.Zulu.Engines.Classes
                 },
                 [SkillName.RemoveTrap] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 90, PointsAmount = 5, PointsSides = 8, PointsBonus = 15},
                     DefaultPoints = 200
                 },
                 [SkillName.Snooping] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(5.0),
+                    Delay = 5.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 4, PointsSides = 6, PointsBonus = 10},
                     DefaultPoints = 200
                 },
                 [SkillName.Stealing] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(15.0),
+                    Delay = 15.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 90, PointsAmount = 3, PointsSides = 4, PointsBonus = 9},
                     DefaultPoints = 200
                 },
                 [SkillName.Stealth] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 100, PointsAmount = 6, PointsSides = 6, PointsBonus = 45},
                     DefaultPoints = 200
                 },
                 [SkillName.DetectHidden] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(10.0),
+                    Delay = 10.0,
                     DexAdvancement = new StatAdvancement
                         {Chance = 80, PointsAmount = 3, PointsSides = 5, PointsBonus = 10},
                     IntAdvancement = new StatAdvancement
@@ -396,7 +435,7 @@ namespace Scripts.Zulu.Engines.Classes
                 // Misc
                 [SkillName.Forensics] = new SkillConfig
                 {
-                    Delay = TimeSpan.FromSeconds(15.0),
+                    Delay = 15.0,
                     IntAdvancement = new StatAdvancement
                         {Chance = 90, PointsAmount = 4, PointsSides = 4, PointsBonus = 12},
                     DefaultPoints = 200

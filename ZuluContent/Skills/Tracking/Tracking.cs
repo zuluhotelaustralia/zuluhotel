@@ -50,7 +50,7 @@ namespace Server.SkillHandlers
             }
 
 
-            return Configs[SkillName.Tracking].Delay;
+            return Configs[SkillName.Tracking].DelayTimespan;
         }
 
         public class TrackingInfo

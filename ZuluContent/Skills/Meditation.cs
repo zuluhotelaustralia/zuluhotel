@@ -9,11 +9,11 @@ namespace Server.SkillHandlers
 {
     class Meditation
     {
-
-        private static readonly TimeSpan DefaultDelay = TimeSpan.FromSeconds(10.0);
+        private static readonly TimeSpan DefaultDelay = SkillCheck.Configs[SkillName.Meditation].DelayTimespan;
+        
         public static void Initialize()
         {
-            SkillInfo.Table[46].Callback = OnUse;
+            SkillInfo.Table[(int)SkillName.Meditation].Callback = OnUse;
         }
         
         public static TimeSpan OnUse(Mobile m)

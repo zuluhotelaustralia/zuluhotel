@@ -19,7 +19,7 @@ namespace Server.SkillHandlers
 
             m.SendLocalizedMessage(500321); // Whom shall I examine?
 
-            return Configs[SkillName.Anatomy].Delay;
+            return Configs[SkillName.Anatomy].DelayTimespan;
         }
 
         private class InternalTarget : Target
