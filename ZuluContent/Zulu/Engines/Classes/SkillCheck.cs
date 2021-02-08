@@ -202,7 +202,7 @@ namespace Scripts.Zulu.Engines.Classes
                         {Chance = 70, PointsAmount = 4, PointsSides = 4, PointsBonus = 15},
                     IntAdvancement = new StatAdvancement
                         {Chance = 70, PointsAmount = 4, PointsSides = 2, PointsBonus = 5},
-                    DefaultPoints = 50
+                    DefaultPoints = 200
                 },
                 [SkillName.Veterinary] = new SkillConfig
                 {

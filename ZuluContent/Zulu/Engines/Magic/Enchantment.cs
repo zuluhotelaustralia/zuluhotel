@@ -112,6 +112,10 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public virtual void OnTracking(Mobile tracker, ref int range)
+        {
+        }
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
         }

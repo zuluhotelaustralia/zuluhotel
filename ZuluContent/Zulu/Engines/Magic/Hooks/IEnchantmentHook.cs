@@ -32,6 +32,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance);
 
+        public void OnTracking(Mobile tracker, ref int range);
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds);
 
         public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value);
