@@ -267,6 +267,22 @@ namespace Server.Mobiles
             set { m_PeacedUntil = value; }
         }
 
+        public QuestArrow QuestArrow
+        {
+            get => m_QuestArrow;
+            set
+            {
+                if (m_QuestArrow != value)
+                {
+                    m_QuestArrow?.Stop();
+
+                    m_QuestArrow = value;
+                }
+            }
+        }
+
+        public void ClearQuestArrow() => m_QuestArrow = null;
+
         public static Direction GetDirection4(Point3D from, Point3D to)
         {
             int dx = from.X - to.X;
@@ -720,6 +736,7 @@ namespace Server.Mobiles
                 pm.m_GameTime += DateTime.Now - pm.m_SessionStart;
                 pm.m_SpeechLog = null;
                 pm.LastOnline = DateTime.Now;
+                pm.ClearQuestArrow();
             }
 
             DisguiseTimers.StopTimer(from);
@@ -1636,6 +1653,8 @@ namespace Server.Mobiles
             set { m_BedrollLogout = value; }
         }
 
+        private QuestArrow m_QuestArrow;
+
         #region MyRunUO Invalidation
 
         private bool m_ChangedMyRunUO;
@@ -1737,6 +1756,7 @@ namespace Server.Mobiles
 
             return running ? CalcMoves.RunFootDelay : CalcMoves.WalkFootDelay;
         }
+
         #endregion
 
         #region Hair and beard mods

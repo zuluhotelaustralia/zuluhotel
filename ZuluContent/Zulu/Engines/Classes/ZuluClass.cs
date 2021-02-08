@@ -415,6 +415,17 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
+        public void OnTracking(Mobile tracker, ref int range)
+        {
+            if (tracker is IZuluClassed {ZuluClass: { } cls})
+            {
+                if (cls.Type == ZuluClassType.Ranger)
+                {
+                    range = (int) (range * cls.Bonus);
+                }
+            }
+        }
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
             if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})
