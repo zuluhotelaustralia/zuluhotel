@@ -1,121 +1,120 @@
 using System.Collections;
+using Scripts.Zulu.Engines.Classes;
 using Server.Network;
 using Server.Regions;
 
 namespace Server.Items
 {
     public class Kindling : Item
-	{
-
-		[Constructible]
-public Kindling() : this( 1 )
-		{
-		}
-
-
-		[Constructible]
-public Kindling( int amount ) : base( 0xDE1 )
-		{
-			Stackable = true;
-			Weight = 5.0;
-			Amount = amount;
-		}
-
-		[Constructible]
-public Kindling( Serial serial ) : base( serial )
-		{
-		}
+    {
+        [Constructible]
+        public Kindling() : this(1)
+        {
+        }
 
 
+        [Constructible]
+        public Kindling(int amount) : base(0xDE1)
+        {
+            Stackable = true;
+            Weight = 5.0;
+            Amount = amount;
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        [Constructible]
+        public Kindling(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !VerifyMove( from ) )
-				return;
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			if ( !from.InRange( GetWorldLocation(), 2 ) )
-			{
-				from.LocalOverheadMessage( MessageType.Regular, 0x3B2, 1019045 ); // I can't reach that.
-				return;
-			}
+            int version = reader.ReadInt();
+        }
 
-			Point3D fireLocation = GetFireLocation( from );
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (!VerifyMove(from))
+                return;
 
-			if ( fireLocation == Point3D.Zero )
-			{
-				from.SendLocalizedMessage( 501695 ); // There is not a spot nearby to place your campfire.
-			}
-			else if ( !from.CheckSkill( SkillName.Camping, 0.0, 100.0 ) )
-			{
-				from.SendLocalizedMessage( 501696 ); // You fail to ignite the campfire.
-			}
-			else
-			{
-				Consume();
+            if (!from.InRange(GetWorldLocation(), 2))
+            {
+                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+                return;
+            }
 
-				if ( !Deleted && Parent == null )
-					from.PlaceInBackpack( this );
+            Point3D fireLocation = GetFireLocation(from);
 
-				new Campfire().MoveToWorld( fireLocation, from.Map );
-			}
-		}
+            if (fireLocation == Point3D.Zero)
+            {
+                from.SendLocalizedMessage(501695); // There is not a spot nearby to place your campfire.
+            }
+            else if (!from.ShilCheckSkill(SkillName.Camping))
+            {
+                from.SendLocalizedMessage(501696); // You fail to ignite the campfire.
+            }
+            else
+            {
+                Consume();
 
-		private Point3D GetFireLocation( Mobile from )
-		{
-			if ( from.Region.IsPartOf<DungeonRegion>() )
-				return Point3D.Zero;
+                if (!Deleted && Parent == null)
+                    from.PlaceInBackpack(this);
 
-			if ( Parent == null )
-				return Location;
+                new Campfire().MoveToWorld(fireLocation, from.Map);
+            }
+        }
 
-			ArrayList list = new ArrayList( 4 );
+        private Point3D GetFireLocation(Mobile from)
+        {
+            if (from.Region.IsPartOf<DungeonRegion>())
+                return Point3D.Zero;
 
-			AddOffsetLocation( from,  0, -1, list );
-			AddOffsetLocation( from, -1,  0, list );
-			AddOffsetLocation( from,  0,  1, list );
-			AddOffsetLocation( from,  1,  0, list );
+            if (Parent == null)
+                return Location;
 
-			if ( list.Count == 0 )
-				return Point3D.Zero;
+            ArrayList list = new ArrayList(4);
 
-			int idx = Utility.Random( list.Count );
-			return (Point3D) list[idx];
-		}
+            AddOffsetLocation(from, 0, -1, list);
+            AddOffsetLocation(from, -1, 0, list);
+            AddOffsetLocation(from, 0, 1, list);
+            AddOffsetLocation(from, 1, 0, list);
 
-		private void AddOffsetLocation( Mobile from, int offsetX, int offsetY, ArrayList list )
-		{
-			Map map = from.Map;
+            if (list.Count == 0)
+                return Point3D.Zero;
 
-			int x = from.X + offsetX;
-			int y = from.Y + offsetY;
+            int idx = Utility.Random(list.Count);
+            return (Point3D) list[idx];
+        }
 
-			Point3D loc = new Point3D( x, y, from.Z );
+        private void AddOffsetLocation(Mobile from, int offsetX, int offsetY, ArrayList list)
+        {
+            Map map = from.Map;
 
-			if ( map.CanFit( loc, 1 ) && from.InLOS( loc ) )
-			{
-				list.Add( loc );
-			}
-			else
-			{
-				loc = new Point3D( x, y, map.GetAverageZ( x, y ) );
+            int x = from.X + offsetX;
+            int y = from.Y + offsetY;
 
-				if ( map.CanFit( loc, 1 ) && from.InLOS( loc ) )
-					list.Add( loc );
-			}
-		}
-	}
+            Point3D loc = new Point3D(x, y, from.Z);
+
+            if (map.CanFit(loc, 1) && from.InLOS(loc))
+            {
+                list.Add(loc);
+            }
+            else
+            {
+                loc = new Point3D(x, y, map.GetAverageZ(x, y));
+
+                if (map.CanFit(loc, 1) && from.InLOS(loc))
+                    list.Add(loc);
+            }
+        }
+    }
 }
