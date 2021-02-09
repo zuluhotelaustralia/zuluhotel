@@ -11,7 +11,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
 
-RUN dotnet publish -r linux-x64 -c Debug
+RUN dotnet publish -r linux-x64 -c Release
 
 FROM ubuntu:focal
 
