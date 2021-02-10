@@ -2,6 +2,7 @@ using System;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
+using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.Engines.Harvest
 {
@@ -29,13 +30,13 @@ namespace Server.Engines.Harvest
 
             HarvestDefinition oreAndStone = new HarvestDefinition();
 
-            // Resource banks are every 8x8 tiles
-            oreAndStone.BankWidth = 8;
-            oreAndStone.BankHeight = 8;
+            // Resource banks are every 1x1 tiles
+            oreAndStone.BankWidth = 1;
+            oreAndStone.BankHeight = 1;
 
-            // Every bank holds from 10 to 34 ore
-            oreAndStone.MinTotal = 10;
-            oreAndStone.MaxTotal = 34;
+            // Every bank holds from 45 to 90 ore
+            oreAndStone.MinTotal = 45;
+            oreAndStone.MaxTotal = 90;
 
             // A resource bank will respawn its content every 10 to 20 minutes
             oreAndStone.MinRespawn = TimeSpan.FromMinutes(10.0);
@@ -51,13 +52,12 @@ namespace Server.Engines.Harvest
             oreAndStone.MaxRange = 2;
 
             // One ore per harvest action
-            oreAndStone.ConsumedPerHarvest = 1;
-            oreAndStone.ConsumedPerFeluccaHarvest = 1;
+            oreAndStone.ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1;
 
             // The digging effect
             oreAndStone.EffectActions = new[] {11};
-            oreAndStone.EffectSounds = new[] {0x125, 0x126};
-            oreAndStone.EffectCounts = new[] { 2, 2, 2, 3, 3, 4 };
+            oreAndStone.EffectSounds = new[] {0x042};
+            oreAndStone.EffectCounts = new[] {4};
             oreAndStone.EffectDelay = TimeSpan.FromSeconds(1.6);
             oreAndStone.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
 
@@ -70,88 +70,119 @@ namespace Server.Engines.Harvest
             oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
 
             // "You dig some ~ore~ and put in your backpack."
-            
+
             res = new[]
             {
-                new HarvestResource(0.0, 0.0, 0.0, "You dig some Iron ore and put it in your backpack.", typeof(IronOre)),
-                new HarvestResource(1.0, 1.0, 1.0, "You dig some Gold ore and put it in your backpack.", typeof(GoldOre)),
-                new HarvestResource(5.0, 5.0, 5.0, "You dig some Spike ore and put it in your backpack.", typeof(SpikeOre)),
-                new HarvestResource(10.0, 10.0,  10.0, "You dig some Fruity ore and put it in your backpack.", typeof(FruityOre)),
-                new HarvestResource(15.0, 15.0,  15.0, "You dig some Bronze ore and put it in your backpack.", typeof(BronzeOre)),
-                new HarvestResource(20.0, 20.0,  20.0, "You dig some Ice Rock ore and put it in your backpack.", typeof(IceRockOre)),
-                new HarvestResource(25.0, 25.0,  25.0, "You dig some Black Dwarf ore and put it in your backpack.", typeof(BlackDwarfOre)),
-                new HarvestResource(30.0, 30.0,  30.0, "You dig some Dull Copper ore and put it in your backpack.", typeof(DullCopperOre)),
-                new HarvestResource(35.0, 35.0,  35.0, "You dig some Platinum ore and put it in your backpack.", typeof(PlatinumOre)),
-                new HarvestResource(40.0, 40.0,  40.0, "You dig some Silver Rock ore and put it in your backpack.", typeof(SilverRockOre)),
-                new HarvestResource(45.0, 45.0,  45.0, "You dig some Dark Pagan ore and put it in your backpack.", typeof(DarkPaganOre)),
-                new HarvestResource(50.0, 50.0,  50.0, "You dig some Copper ore and put it in your backpack.", typeof(CopperOre)),
-                new HarvestResource(55.0, 55.0,  55.0, "You dig some Mystic ore and put it in your backpack.", typeof(MysticOre)),
-                new HarvestResource(60.0, 60.0,  60.0, "You dig some Spectral ore and put it in your backpack.", typeof(SpectralOre)),
-                new HarvestResource(65.0, 65.0,  65.0, "You dig some Old Britain ore and put it in your backpack.", typeof(OldBritainOre)),
-                new HarvestResource(70.0, 70.0,  70.0, "You dig some Onyx ore and put it in your backpack.", typeof(OnyxOre)),
-                new HarvestResource(75.0, 75.0,  75.0, "You dig some Red Elven ore and put it in your backpack.", typeof(RedElvenOre)),
-                new HarvestResource(80.0, 80.0,  80.0, "You dig some Undead ore and put it in your backpack.", typeof(UndeadOre)),
-                new HarvestResource(85.0, 85.0,  85.0, "You dig some Pyrite ore and put it in your backpack.", typeof(PyriteOre)),
-                new HarvestResource(90.0, 90.0,  90.0, "You dig some Virginity ore and put it in your backpack.", typeof(VirginityOre)),
-                new HarvestResource(95.0, 95.0,  95.0, "You dig some Malachite ore and put it in your backpack.", typeof(MalachiteOre)),
-                new HarvestResource(97.0, 97.0,  97.0, "You dig some Lavarock ore and put it in your backpack.", typeof(LavarockOre)),
-                new HarvestResource(98.0, 98.0,  98.0, "You dig some Azurite ore and put it in your backpack.", typeof(AzuriteOre)),
-                new HarvestResource(100.0, 100.0, 100.0, "You dig some Dripstone ore and put it in your backpack.", typeof(DripstoneOre)),
-                new HarvestResource(104.0, 104.0, 104.0, "You dig some Executor ore and put it in your backpack.", typeof(ExecutorOre)),
-                new HarvestResource(108.0, 108.0, 108.0, "You dig some Peachblue ore and put it in your backpack.", typeof(PeachblueOre)),
-                new HarvestResource(112.0, 112.0, 112.0, "You dig some Destruction ore and put it in your backpack.", typeof(DestructionOre)),
-                new HarvestResource(116.0, 116.0, 116.0, "You dig some Anra ore and put it in your backpack.", typeof(AnraOre)),
-                new HarvestResource(119.0, 119.0, 119.0, "You dig some Crystal ore and put it in your backpack.", typeof(CrystalOre)),
-                new HarvestResource(122.0, 122.0, 122.0, "You dig some Doom ore and put it in your backpack.", typeof(DoomOre)),
-                new HarvestResource(125.0, 125.0, 125.0, "You dig some Goddess ore and put it in your backpack.", typeof(GoddessOre)),
-                new HarvestResource(129.0, 129.0, 129.0, "You dig some New Zulu ore and put it in your backpack.", typeof(NewZuluOre)),
-                new HarvestResource(130.0, 130.0, 130.0, "You dig some Dark Sable Ruby ore and put it in your backpack.", typeof(DarkSableRubyOre)),
-                new HarvestResource(130.0, 130.0, 130.0, "You dig some Ebon Twilight Sapphire ore and put it in your backpack.", typeof(EbonTwilightSapphireOre)),
-                new HarvestResource(140.0, 140.0, 140.0, "You dig some Radiant Nimbus Diamond ore and put it in your backpack.", typeof(RadiantNimbusDiamondOre)),
+                new HarvestResource(5.0, "You dig some Spike ore and put it in your backpack.",
+                    typeof(SpikeOre)),
+                new HarvestResource(10.0, "You dig some Fruity ore and put it in your backpack.",
+                    typeof(FruityOre)),
+                new HarvestResource(20.0, "You dig some Ice Rock ore and put it in your backpack.",
+                    typeof(IceRockOre)),
+                new HarvestResource(25.0, "You dig some Black Dwarf ore and put it in your backpack.",
+                    typeof(BlackDwarfOre)),
+                new HarvestResource(15.0, "You dig some Bronze ore and put it in your backpack.",
+                    typeof(BronzeOre)),
+                new HarvestResource(45.0, "You dig some Dark Pagan ore and put it in your backpack.",
+                    typeof(DarkPaganOre)),
+                new HarvestResource(40.0, "You dig some Silver Rock ore and put it in your backpack.",
+                    typeof(SilverRockOre)),
+                new HarvestResource(35.0, "You dig some Platinum ore and put it in your backpack.",
+                    typeof(PlatinumOre)),
+                new HarvestResource(30.0, "You dig some Dull Copper ore and put it in your backpack.",
+                    typeof(DullCopperOre)),
+                new HarvestResource(55.0, "You dig some Mystic ore and put it in your backpack.",
+                    typeof(MysticOre)),
+                new HarvestResource(50.0, "You dig some Copper ore and put it in your backpack.",
+                    typeof(CopperOre)),
+                new HarvestResource(60.0, "You dig some Spectral ore and put it in your backpack.",
+                    typeof(SpectralOre)),
+                new HarvestResource(65.0, "You dig some Old Britain ore and put it in your backpack.",
+                    typeof(OldBritainOre)),
+                new HarvestResource(70.0, "You dig some Onyx ore and put it in your backpack.",
+                    typeof(OnyxOre)),
+                new HarvestResource(75.0, "You dig some Red Elven ore and put it in your backpack.",
+                    typeof(RedElvenOre)),
+                new HarvestResource(80.0, "You dig some Undead ore and put it in your backpack.",
+                    typeof(UndeadOre)),
+                new HarvestResource(85.0, "You dig some Pyrite ore and put it in your backpack.",
+                    typeof(PyriteOre)),
+                new HarvestResource(90.0, "You dig some Virginity ore and put it in your backpack.",
+                    typeof(VirginityOre)),
+                new HarvestResource(95.0, "You dig some Malachite ore and put it in your backpack.",
+                    typeof(MalachiteOre)),
+                new HarvestResource(97.0, "You dig some Lavarock ore and put it in your backpack.",
+                    typeof(LavarockOre)),
+                new HarvestResource(98.0, "You dig some Azurite ore and put it in your backpack.",
+                    typeof(AzuriteOre)),
+                new HarvestResource(100.0, "You dig some Dripstone ore and put it in your backpack.",
+                    typeof(DripstoneOre)),
+                new HarvestResource(104.0, "You dig some Executor ore and put it in your backpack.",
+                    typeof(ExecutorOre)),
+                new HarvestResource(108.0, "You dig some Peachblue ore and put it in your backpack.",
+                    typeof(PeachblueOre)),
+                new HarvestResource(112.0, "You dig some Destruction ore and put it in your backpack.",
+                    typeof(DestructionOre)),
+                new HarvestResource(116.0, "You dig some Anra ore and put it in your backpack.",
+                    typeof(AnraOre)),
+                new HarvestResource(119.0, "You dig some Crystal ore and put it in your backpack.",
+                    typeof(CrystalOre)),
+                new HarvestResource(122.0, "You dig some Doom ore and put it in your backpack.",
+                    typeof(DoomOre)),
+                new HarvestResource(125.0, "You dig some Goddess ore and put it in your backpack.",
+                    typeof(GoddessOre)),
+                new HarvestResource(129.0, "You dig some New Zulu ore and put it in your backpack.",
+                    typeof(NewZuluOre)),
+                new HarvestResource(130.0,
+                    "You dig some Dark Sable Ruby ore and put it in your backpack.", typeof(DarkSableRubyOre)),
+                new HarvestResource(130.0,
+                    "You dig some Ebon Twilight Sapphire ore and put it in your backpack.",
+                    typeof(EbonTwilightSapphireOre)),
+                new HarvestResource(140.0,
+                    "You dig some Radiant Nimbus Diamond ore and put it in your backpack.",
+                    typeof(RadiantNimbusDiamondOre)),
             };
-            
 
 
             veins = new[]
             {
-                new HarvestVein(3.5, 0.0, res[30], res[0]),// Goddess
-                new HarvestVein(4.0, 0.0, res[29], res[0]),// Doom
-                new HarvestVein(5.0, 0.0, res[28], res[0]),// Crystal
-                new HarvestVein(6.0, 0.0, res[27], res[0]),// Anra
-                new HarvestVein(7.0, 0.0, res[26], res[0]),// Destruction
-                new HarvestVein(8.5, 0.0, res[25], res[0]),// Peachblue
-                new HarvestVein(10.0, 0.0, res[24], res[0]),// Executor
-                new HarvestVein(11.5, 0.0, res[24], res[0]),// Dripstone
-                new HarvestVein(13.0, 0.0, res[23], res[0]),// Azurite
-                new HarvestVein(16.5, 0.0, res[22], res[0]),// Lavarock
-                new HarvestVein(19.0, 0.0, res[21], res[0]),// Malachite
-                new HarvestVein(21.0, 0.0, res[20], res[0]),// Virginity
-                new HarvestVein(23.0, 0.0, res[19], res[0]),// Pyrite
-                new HarvestVein(25.5, 0.0, res[18], res[0]),// Undead
-                new HarvestVein(28.0, 0.0, res[17], res[0]),// RedElven
-                new HarvestVein(30.5, 0.0, res[16], res[0]),// Onyx
-                new HarvestVein(33.0, 0.0, res[15], res[0]),// OldBritain
-                new HarvestVein(35.5, 0.0, res[14], res[0]),// Spectral
-                new HarvestVein(37.5, 0.0, res[13], res[0]),// Mystic
-                new HarvestVein(40.0, 0.0, res[12], res[0]),// Copper
-                new HarvestVein(42.5, 0.0, res[11], res[0]),// DarkPagan
-                new HarvestVein(45.0, 0.0, res[10], res[0]),// SilverRock
-                new HarvestVein(50.0, 0.0, res[9], res[0]),// Platinum
-                new HarvestVein(55.0, 0.0, res[8], res[0]),// DullCopper
-                new HarvestVein(60.0, 0.0, res[7], res[0]),// BlackDwarf
-                new HarvestVein(62.5, 0.0, res[6], res[0]),// IceRock
-                new HarvestVein(65.0, 0.0, res[5], res[0]),// Bronze
-                new HarvestVein(70.0, 0.0, res[4], res[0]),// Fruity
-                new HarvestVein(77.5, 0.0, res[2], res[0]),// Spike
-                new HarvestVein(80.0, 0.0, res[1], res[0]),// Gold
-                new HarvestVein(100.0, 0.0, res[0], null),// Iron
+                new HarvestVein(2.0, res[28]), // Goddess
+                new HarvestVein(5.0, res[27]), // Doom
+                new HarvestVein(8.0, res[26]), // Crystal
+                new HarvestVein(10.0, res[25]), // Anra
+                new HarvestVein(14.0, res[24]), // Destruction
+                new HarvestVein(17.0, res[23]), // Peachblue
+                new HarvestVein(20.0, res[22]), // Executor
+                new HarvestVein(23.0, res[21]), // Dripstone
+                new HarvestVein(26.0, res[20]), // Azurite
+                new HarvestVein(33.0, res[19]), // Lavarock
+                new HarvestVein(38.0, res[18]), // Malachite
+                new HarvestVein(42.0, res[17]), // Virginity
+                new HarvestVein(46.0, res[16]), // Pyrite
+                new HarvestVein(51.0, res[15]), // Undead
+                new HarvestVein(56.0, res[14]), // RedElven
+                new HarvestVein(66.0, res[13]), // Onyx
+                new HarvestVein(61.0, res[12]), // OldBritain
+                new HarvestVein(71.0, res[11]), // Spectral
+                new HarvestVein(74.0, res[10]), // Copper
+                new HarvestVein(80.0, res[9]), // Mystic
+                new HarvestVein(85.0, res[8]), // DullCopper
+                new HarvestVein(90.0, res[7]), // Platinum
+                new HarvestVein(100.0, res[6]), // SilverRock
+                new HarvestVein(110.0, res[5]), // DarkPagan
+                new HarvestVein(120.0, res[4]), // Bronze
+                new HarvestVein(125.0, res[3]), // BlackDwarf
+                new HarvestVein(130.0, res[2]), // IceRock
+                new HarvestVein(140.0, res[1]), // Fruity
+                new HarvestVein(155.0, res[0]) // Spike
             };
 
             oreAndStone.Resources = res;
             oreAndStone.Veins = veins;
 
-            oreAndStone.RaceBonus = false;
-            oreAndStone.RandomizeVeins = false;
+            oreAndStone.DefaultVein = new HarvestVein(0.0, new HarvestResource(0.0,
+                "You dig some Iron ore and put it in your backpack.",
+                typeof(IronOre)));
 
             Definitions.Add(oreAndStone);
 
@@ -163,12 +194,7 @@ namespace Server.Engines.Harvest
             if (!base.CheckHarvest(from, tool))
                 return false;
 
-            if (from.Mounted)
-            {
-                from.SendLocalizedMessage(501864); // You can't mine while riding.
-                return false;
-            }
-            else if (from.IsBodyMod && !from.Body.IsHuman)
+            if (from.IsBodyMod && !from.Body.IsHuman)
             {
                 from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
                 return false;
@@ -182,7 +208,7 @@ namespace Server.Engines.Harvest
             if (!base.CheckHarvest(from, tool, def, toHarvest))
                 return false;
 
-            
+
             if (from.IsBodyMod && !from.Body.IsHuman)
             {
                 from.SendLocalizedMessage(501865); // You can't mine while polymorphed.
@@ -190,20 +216,6 @@ namespace Server.Engines.Harvest
             }
 
             return true;
-        }
-
-        public override HarvestVein MutateVein(Mobile from, Item tool, HarvestDefinition def, HarvestBank bank,
-            object toHarvest, HarvestVein vein)
-        {
-            if (tool is GargoylesPickaxe)
-            {
-                int veinIndex = Array.IndexOf(def.Veins, vein);
-
-                if (veinIndex >= 0 && veinIndex < def.Veins.Length - 1)
-                    return def.Veins[veinIndex + 1];
-            }
-
-            return base.MutateVein(from, tool, def, bank, toHarvest, vein);
         }
 
         private static int[] m_Offsets = new[]
@@ -225,6 +237,11 @@ namespace Server.Engines.Harvest
 
             from.SendLocalizedMessage(503033); // Where do you wish to dig?
             return true;
+        }
+
+        public override void OnHarvestStarted(Mobile from, Item tool, HarvestDefinition def, object toHarvest)
+        {
+            from.SendAsciiMessage(MessageSuccessHue, "You start mining...");
         }
 
         public override void OnBadHarvestTarget(Mobile from, Item tool, object toHarvest)
