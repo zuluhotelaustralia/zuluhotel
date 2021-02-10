@@ -3,40 +3,39 @@ using Server.Engines.Craft;
 namespace Server.Items
 {
     public class MortarPestle : BaseTool
-	{
-		public override CraftSystem CraftSystem{ get{ return DefAlchemy.CraftSystem; } }
+    {
+        public override CraftSystem CraftSystem => DefAlchemy.CraftSystem;
+
+        [Constructible]
+        public MortarPestle() : base(0xE9B)
+        {
+            Weight = 1.0;
+        }
 
 
-		[Constructible]
-public MortarPestle() : base( 0xE9B )
-		{
-			Weight = 1.0;
-		}
+        [Constructible]
+        public MortarPestle(int uses) : base(uses, 0xE9B)
+        {
+            Weight = 1.0;
+        }
 
+        [Constructible]
+        public MortarPestle(Serial serial) : base(serial)
+        {
+        }
 
-		[Constructible]
-public MortarPestle( int uses ) : base( uses, 0xE9B )
-		{
-			Weight = 1.0;
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		[Constructible]
-public MortarPestle( Serial serial ) : base( serial )
-		{
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

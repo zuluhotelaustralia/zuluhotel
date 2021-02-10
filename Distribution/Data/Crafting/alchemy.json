@@ -1,0 +1,431 @@
+{
+  "TypeOfPotion": "Server.Items.BasePotion",
+  "MainSkill": "Alchemy",
+  "GumpTitleId": 1044001,
+  "MinCraftDelays": 1,
+  "MaxCraftDelays": 1,
+  "Delay": 1.25,
+  "MinCraftChance": 0.0,
+  "CraftEntries": [
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "NameId": 1044538,
+      "GroupNameId": 1044530,
+      "MinSkill": -25,
+      "MaxSkill": 25,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.BlackPearl",
+          "NameId": 1044353,
+          "Amount": 1,
+          "MessageId": 1044361
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.TotalRefreshPotion",
+      "NameId": 1044539,
+      "GroupNameId": 1044530,
+      "MinSkill": 25,
+      "MaxSkill": 75,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.BlackPearl",
+          "NameId": 1044353,
+          "Amount": 5,
+          "MessageId": 1044361
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.AgilityPotion",
+      "NameId": 1044540,
+      "GroupNameId": 1044531,
+      "MinSkill": 15,
+      "MaxSkill": 65,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Bloodmoss",
+          "NameId": 1044354,
+          "Amount": 1,
+          "MessageId": 1044362
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.GreaterAgilityPotion",
+      "NameId": 1044541,
+      "GroupNameId": 1044531,
+      "MinSkill": 35,
+      "MaxSkill": 85,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Bloodmoss",
+          "NameId": 1044354,
+          "Amount": 3,
+          "MessageId": 1044362
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.NightSightPotion",
+      "NameId": 1044542,
+      "GroupNameId": 1044532,
+      "MinSkill": -25,
+      "MaxSkill": 25,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SpidersSilk",
+          "NameId": 1044360,
+          "Amount": 1,
+          "MessageId": 1044368
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.LesserHealPotion",
+      "NameId": 1044543,
+      "GroupNameId": 1044533,
+      "MinSkill": -25,
+      "MaxSkill": 25,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Ginseng",
+          "NameId": 1044356,
+          "Amount": 1,
+          "MessageId": 1044364
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.HealPotion",
+      "NameId": 1044544,
+      "GroupNameId": 1044533,
+      "MinSkill": 15,
+      "MaxSkill": 65,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Ginseng",
+          "NameId": 1044356,
+          "Amount": 3,
+          "MessageId": 1044364
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.GreaterHealPotion",
+      "NameId": 1044545,
+      "GroupNameId": 1044533,
+      "MinSkill": 55,
+      "MaxSkill": 105,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Ginseng",
+          "NameId": 1044356,
+          "Amount": 7,
+          "MessageId": 1044364
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.StrengthPotion",
+      "NameId": 1044546,
+      "GroupNameId": 1044534,
+      "MinSkill": 25,
+      "MaxSkill": 75,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.MandrakeRoot",
+          "NameId": 1044357,
+          "Amount": 2,
+          "MessageId": 1044365
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.GreaterStrengthPotion",
+      "NameId": 1044547,
+      "GroupNameId": 1044534,
+      "MinSkill": 45,
+      "MaxSkill": 95,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.MandrakeRoot",
+          "NameId": 1044357,
+          "Amount": 5,
+          "MessageId": 1044365
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.LesserPoisonPotion",
+      "NameId": 1044548,
+      "GroupNameId": 1044535,
+      "MinSkill": -5,
+      "MaxSkill": 45,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Nightshade",
+          "NameId": 1044358,
+          "Amount": 1,
+          "MessageId": 1044366
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.PoisonPotion",
+      "NameId": 1044549,
+      "GroupNameId": 1044535,
+      "MinSkill": 15,
+      "MaxSkill": 65,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Nightshade",
+          "NameId": 1044358,
+          "Amount": 2,
+          "MessageId": 1044366
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.GreaterPoisonPotion",
+      "NameId": 1044550,
+      "GroupNameId": 1044535,
+      "MinSkill": 55,
+      "MaxSkill": 105,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Nightshade",
+          "NameId": 1044358,
+          "Amount": 4,
+          "MessageId": 1044366
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.DeadlyPoisonPotion",
+      "NameId": 1044551,
+      "GroupNameId": 1044535,
+      "MinSkill": 90,
+      "MaxSkill": 140,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Nightshade",
+          "NameId": 1044358,
+          "Amount": 8,
+          "MessageId": 1044366
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.LesserCurePotion",
+      "NameId": 1044552,
+      "GroupNameId": 1044536,
+      "MinSkill": -10,
+      "MaxSkill": 40,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Garlic",
+          "NameId": 1044355,
+          "Amount": 1,
+          "MessageId": 1044363
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.CurePotion",
+      "NameId": 1044553,
+      "GroupNameId": 1044536,
+      "MinSkill": 25,
+      "MaxSkill": 75,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Garlic",
+          "NameId": 1044355,
+          "Amount": 3,
+          "MessageId": 1044363
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.GreaterCurePotion",
+      "NameId": 1044554,
+      "GroupNameId": 1044536,
+      "MinSkill": 65,
+      "MaxSkill": 115,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Garlic",
+          "NameId": 1044355,
+          "Amount": 6,
+          "MessageId": 1044363
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.LesserExplosionPotion",
+      "NameId": 1044555,
+      "GroupNameId": 1044537,
+      "MinSkill": 5,
+      "MaxSkill": 25,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SulfurousAsh",
+          "NameId": 1044359,
+          "Amount": 3,
+          "MessageId": 1044367
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.ExplosionPotion",
+      "NameId": 1044556,
+      "GroupNameId": 1044537,
+      "MinSkill": 35,
+      "MaxSkill": 85,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SulfurousAsh",
+          "NameId": 1044359,
+          "Amount": 5,
+          "MessageId": 1044367
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.GreaterExplosionPotion",
+      "NameId": 1044557,
+      "GroupNameId": 1044537,
+      "MinSkill": 65,
+      "MaxSkill": 115,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SulfurousAsh",
+          "NameId": 1044359,
+          "Amount": 10,
+          "MessageId": 1044367
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    }
+  ]
+}

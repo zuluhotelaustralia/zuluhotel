@@ -20,12 +20,12 @@
     "clientVerification.ageLeniency": "10.00:00:00",
     "clientVerification.gameTimeLeniency": "1.01:00:00",
     "clientVerification.kickDelay": "00:00:20",
-    "serverListing.address": "(-null-)",
+    "serverListing.address": "mc.jabin.id.au",
     "serverListing.autoDetect": "True",
     "serverListing.serverName": "ModernUO",
     "pathfinding.enable": "True",
     "visibleDamage": "True",
-    "singleClickProps": "False"
-    
+    "singleClickProps": "False",
+    "movement.enableFastWalkPrevention": "False"
   }
 }

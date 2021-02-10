@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Server;
+using Server.Json;
 using Server.Mobiles;
 using Server.Text;
 
@@ -51,20 +52,8 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 throw new DataException($"SkillCheck Configuration: {path} was not found, cannot continue!");
             }
-        
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                AllowTrailingCommas = true,
-                IgnoreNullValues = true,
-                ReadCommentHandling = JsonCommentHandling.Skip,
-                PropertyNameCaseInsensitive = true,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            };
 
-            var text = File.ReadAllText(path, TextEncoding.UTF8);
-            Configs = JsonSerializer.Deserialize<Dictionary<SkillName, SkillConfig>>(text, options);
-
+            Configs = JsonConfig.Deserialize<Dictionary<SkillName, SkillConfig>>(path);
             if (Configs == null)
             {
                 throw new DataException($"SkillCheck Configuration: failed to deserialize {path}!");

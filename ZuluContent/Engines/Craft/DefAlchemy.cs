@@ -1,158 +1,159 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
 using Server.Items;
+using Server.Json;
 
 namespace Server.Engines.Craft
 {
-	public class DefAlchemy : CraftSystem
-	{
-		public override SkillName MainSkill
-		{
-			get	{ return SkillName.Alchemy;	}
-		}
+    public sealed class DefAlchemy : CraftSystem
+    {
+        public static CraftSystem CraftSystem { get; private set; }
+        public static AlchemyConfig Config { get; private set; }
+        private static Type TypeOfPotion => Config.TypeOfPotion;
+        public override SkillName MainSkill => Config.MainSkill;
+        public override int GumpTitleNumber => Config.GumpTitleId;
 
-		public override int GumpTitleNumber
-		{
-			get { return 1044001; } // <CENTER>ALCHEMY MENU</CENTER>
-		}
+        public override double GetChanceAtMin(CraftItem item) => Config.MinCraftChance;
 
-		private static CraftSystem m_CraftSystem;
+        // This causes the craft system to be initialized at server start rather than triggered by skill use
+        //ReSharper disable once UnusedMember.Global
+        public static void Initialize()
+        {
+            var path = Path.Combine(Core.BaseDirectory, "Data/Crafting/alchemy.json");
+            Console.Write($"Alchemy Configuration: loading {path}... ");
 
-		public static CraftSystem CraftSystem
-		{
-			get
-			{
-				if ( m_CraftSystem == null )
-					m_CraftSystem = new DefAlchemy();
+            Config = JsonConfig.Deserialize<AlchemyConfig>(path);
 
-				return m_CraftSystem;
-			}
-		}
+            if (Config == null)
+                throw new DataException($"Alchemy Configuration: failed to deserialize {path}!");
 
-		public override double GetChanceAtMin( CraftItem item )
-		{
-			return 0.0; // 0%
-		}
+            CraftSystem = new DefAlchemy(Config.MinCraftDelays, Config.MaxCraftDelays, Config.Delay);
 
-		private DefAlchemy() : base( 1, 1, 1.25 )// base( 1, 1, 3.1 )
-		{
-		}
+            Console.WriteLine($"Done, loaded {Config.CraftEntries.Length} entries.");
+        }
 
-		public override int CanCraft( Mobile from, BaseTool tool, Type itemType )
-		{
-			if( tool == null || tool.Deleted || tool.UsesRemaining < 0 )
-				return 1044038; // You have worn out your tool!
-			else if ( !BaseTool.CheckAccessible( tool, from ) )
-				return 1044263; // The tool must be on your person to use.
+        private DefAlchemy(int minCraftDelays, int maxCraftDelays, double delay) :
+            base(minCraftDelays, maxCraftDelays, delay)
+        {
+        }
 
-			return 0;
-		}
+        public override void InitCraftList()
+        {
+            foreach (var entry in Config.CraftEntries)
+            {
+                var firstResource = entry.Resources.FirstOrDefault();
 
-		public override void PlayCraftEffect( Mobile from )
-		{
-			from.PlaySound( 0x242 );
-		}
+                if (firstResource == null)
+                    throw new ArgumentNullException($"Alchemy entry {entry.ItemType} must have at least one resource");
 
-		private static Type typeofPotion = typeof( BasePotion );
+                var idx = AddCraft(
+                    entry.ItemType,
+                    entry.GroupNameId,
+                    entry.NameId,
+                    entry.MinSkill,
+                    entry.MaxSkill,
+                    // AddCraft() needs at least one resource by default
+                    firstResource.ItemType,
+                    firstResource.NameId,
+                    firstResource.Amount,
+                    firstResource.MessageId
+                );
 
-		public static bool IsPotion( Type type )
-		{
-			return typeofPotion.IsAssignableFrom( type );
-		}
+                foreach (var c in entry.Resources.Skip(1))
+                {
+                    AddRes(idx, c.ItemType, c.NameId, c.Amount, c.MessageId);
+                }
+            }
+        }
 
-		public override int PlayEndingEffect( Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item )
-		{
-			if ( toolBroken )
-				from.SendLocalizedMessage( 1044038 ); // You have worn out your tool
+        public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
+        {
+            if (tool == null || tool.Deleted || tool.UsesRemaining < 0)
+                return 1044038; // You have worn out your tool!
+            else if (!BaseTool.CheckAccessible(tool, from))
+                return 1044263; // The tool must be on your person to use.
 
-			if ( failed )
-			{
-				if ( IsPotion( item.ItemType ) )
-				{
-					from.AddToBackpack( new Bottle() );
-					return 500287; // You fail to create a useful potion.
-				}
-				else
-				{
-					return 1044043; // You failed to create the item, and some of your materials are lost.
-				}
-			}
-			else
-			{
-				from.PlaySound( 0x240 ); // Sound of a filling bottle
+            return 0;
+        }
 
-				if ( IsPotion( item.ItemType ) )
-				{
-					if ( quality == -1 )
-						return 1048136; // You create the potion and pour it into a keg.
-					else
-						return 500279; // You pour the potion into a bottle...
-				}
-				else
-				{
-					return 1044154; // You create the item.
-				}
-			}
-		}
+        public override void PlayCraftEffect(Mobile from)
+        {
+            from.PlaySound(0x242);
+        }
 
-		public override void InitCraftList()
-		{
-			int index = -1;
 
-			// Refresh Potion
-			index = AddCraft( typeof( RefreshPotion ), 1044530, 1044538, -25, 25.0, typeof( BlackPearl ), 1044353, 1, 1044361 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( TotalRefreshPotion ), 1044530, 1044539, 25.0, 75.0, typeof( BlackPearl ), 1044353, 5, 1044361 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+        public static bool IsPotion(Type type)
+        {
+            return TypeOfPotion.IsAssignableFrom(type);
+        }
 
-			// Agility Potion
-			index = AddCraft( typeof( AgilityPotion ), 1044531, 1044540, 15.0, 65.0, typeof( Bloodmoss ), 1044354, 1, 1044362 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( GreaterAgilityPotion ), 1044531, 1044541, 35.0, 85.0, typeof( Bloodmoss ), 1044354, 3, 1044362 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+        public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality,
+            bool makersMark, CraftItem item)
+        {
+            if (toolBroken)
+                from.SendLocalizedMessage(1044038); // You have worn out your tool
 
-			// Nightsight Potion
-			index = AddCraft( typeof( NightSightPotion ), 1044532, 1044542, -25.0, 25.0, typeof( SpidersSilk ), 1044360, 1, 1044368 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+            if (failed)
+            {
+                if (IsPotion(item.ItemType))
+                {
+                    from.AddToBackpack(new Bottle());
+                    return 500287; // You fail to create a useful potion.
+                }
+                else
+                {
+                    return 1044043; // You failed to create the item, and some of your materials are lost.
+                }
+            }
+            else
+            {
+                from.PlaySound(0x240); // Sound of a filling bottle
 
-			// Heal Potion
-			index = AddCraft( typeof( LesserHealPotion ), 1044533, 1044543, -25.0, 25.0, typeof( Ginseng ), 1044356, 1, 1044364 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( HealPotion ), 1044533, 1044544, 15.0, 65.0, typeof( Ginseng ), 1044356, 3, 1044364 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( GreaterHealPotion ), 1044533, 1044545, 55.0, 105.0, typeof( Ginseng ), 1044356, 7, 1044364 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+                if (IsPotion(item.ItemType))
+                {
+                    return quality == -1 ? 1048136 : 500279;
+                }
+                else
+                {
+                    return 1044154; // You create the item.
+                }
+            }
+        }
+    }
 
-			// Strength Potion
-			index = AddCraft( typeof( StrengthPotion ), 1044534, 1044546, 25.0, 75.0, typeof( MandrakeRoot ), 1044357, 2, 1044365 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( GreaterStrengthPotion ), 1044534, 1044547, 45.0, 95.0, typeof( MandrakeRoot ), 1044357, 5, 1044365 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+    // ReSharper disable UnassignedGetOnlyAutoProperty ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global
+    public record AlchemyConfig
+    {
+        public Type TypeOfPotion { get; init; }
+        public SkillName MainSkill { get; init; }
+        public int GumpTitleId { get; init; }
+        public PotionCraftEntry[] CraftEntries { get; init; }
+        public int MinCraftDelays { get; init; }
+        public int MaxCraftDelays { get; init; }
+        public double Delay { get; init; }
+        public double MinCraftChance { get; init; }
 
-			// Poison Potion
-			index = AddCraft( typeof( LesserPoisonPotion ), 1044535, 1044548, -5.0, 45.0, typeof( Nightshade ), 1044358, 1, 1044366 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( PoisonPotion ), 1044535, 1044549, 15.0, 65.0, typeof( Nightshade ), 1044358, 2, 1044366 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( GreaterPoisonPotion ), 1044535, 1044550, 55.0, 105.0, typeof( Nightshade ), 1044358, 4, 1044366 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( DeadlyPoisonPotion ), 1044535, 1044551, 90.0, 140.0, typeof( Nightshade ), 1044358, 8, 1044366 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+        public record PotionCraftEntry
+        {
+            public Type ItemType { get; init; }
+            public int NameId { get; init; }
+            public int GroupNameId { get; init; }
+            public double MinSkill { get; init; }
+            public double MaxSkill { get; init; }
 
-			// Cure Potion
-			index = AddCraft( typeof( LesserCurePotion ), 1044536, 1044552, -10.0, 40.0, typeof( Garlic ), 1044355, 1, 1044363 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( CurePotion ), 1044536, 1044553, 25.0, 75.0, typeof( Garlic ), 1044355, 3, 1044363 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( GreaterCurePotion ), 1044536, 1044554, 65.0, 115.0, typeof( Garlic ), 1044355, 6, 1044363 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
+            public PotionResource[] Resources { get; init; }
+        }
 
-			// Explosion Potion
-			index = AddCraft( typeof( LesserExplosionPotion ), 1044537, 1044555, 5.0, 55.0, typeof( SulfurousAsh ), 1044359, 3, 1044367 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( ExplosionPotion ), 1044537, 1044556, 35.0, 85.0, typeof( SulfurousAsh ), 1044359, 5, 1044367 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-			index = AddCraft( typeof( GreaterExplosionPotion ), 1044537, 1044557, 65.0, 115.0, typeof( SulfurousAsh ), 1044359, 10, 1044367 );
-			AddRes( index, typeof ( Bottle ), 1044529, 1, 500315 );
-		}
-	}
+        public record PotionResource
+        {
+            public Type ItemType { get; init; }
+            public int NameId { get; init; }
+            public int Amount { get; init; }
+            public int MessageId { get; init; }
+        }
+    }
+    // ReSharper restore UnassignedGetOnlyAutoProperty ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global
 }
