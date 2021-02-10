@@ -10,11 +10,17 @@ namespace Server.Engines.Craft
 {
     public sealed class DefAlchemy : CraftSystem
     {
-        public static CraftSystem CraftSystem { get; private set; }
-        public static AlchemyConfig Config { get; private set; }
-        private static Type TypeOfPotion => Config.TypeOfPotion;
+        public static CraftSystem DefaultCraftSystem { get; private set; }
+        public static CraftSystem PlusCraftSystem { get; private set; }
+
+        public AlchemyConfig Config { get; private set; }
+        private static Type TypeOfPotion => typeof(BasePotion);
         public override SkillName MainSkill => Config.MainSkill;
         public override int GumpTitleNumber => Config.GumpTitleId;
+
+        public int CraftWorkSound => Config.CraftWorkSound;
+        public int CraftEndSound => Config.CraftEndSound;
+
 
         public override double GetChanceAtMin(CraftItem item) => Config.MinCraftChance;
 
@@ -22,26 +28,38 @@ namespace Server.Engines.Craft
         //ReSharper disable once UnusedMember.Global
         public static void Initialize()
         {
-            var path = Path.Combine(Core.BaseDirectory, "Data/Crafting/alchemy.json");
-            Console.Write($"Alchemy Configuration: loading {path}... ");
-
-            Config = JsonConfig.Deserialize<AlchemyConfig>(path);
-
-            if (Config == null)
-                throw new DataException($"Alchemy Configuration: failed to deserialize {path}!");
-
-            CraftSystem = new DefAlchemy(Config.MinCraftDelays, Config.MaxCraftDelays, Config.Delay);
-
-            Console.WriteLine($"Done, loaded {Config.CraftEntries.Length} entries.");
+            DefaultCraftSystem = LoadCraftSystem("alchemy");
+            PlusCraftSystem = LoadCraftSystem("alchemyplus");
         }
 
-        private DefAlchemy(int minCraftDelays, int maxCraftDelays, double delay) :
-            base(minCraftDelays, maxCraftDelays, delay)
+        private static CraftSystem LoadCraftSystem(string configFile)
         {
+            var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
+            Console.Write($"Alchemy Configuration: loading {path}... ");
+
+            var config = JsonConfig.Deserialize<AlchemyConfig>(path);
+
+            if (config == null)
+                throw new DataException($"Alchemy Configuration: failed to deserialize {path}!");
+
+            var craftSystem = new DefAlchemy(config);
+
+            Console.WriteLine($"Done, loaded {config.CraftEntries.Length} entries.");
+
+            return craftSystem;
+        }
+
+        private DefAlchemy(AlchemyConfig config) : base(config.MinCraftDelays, config.MaxCraftDelays, config.Delay)
+        {
+            Config = config;
+            InitCraftList();
         }
 
         public override void InitCraftList()
         {
+            if (Config == null)
+                return;
+            
             foreach (var entry in Config.CraftEntries)
             {
                 var firstResource = entry.Resources.FirstOrDefault();
@@ -81,9 +99,8 @@ namespace Server.Engines.Craft
 
         public override void PlayCraftEffect(Mobile from)
         {
-            from.PlaySound(0x242);
+            from.PlaySound(CraftWorkSound);
         }
-
 
         public static bool IsPotion(Type type)
         {
@@ -100,7 +117,9 @@ namespace Server.Engines.Craft
             {
                 if (IsPotion(item.ItemType))
                 {
-                    from.AddToBackpack(new Bottle());
+                    if (item.Resources.Cast<CraftRes>().Any(r => r.ItemType == typeof(Bottle))) 
+                        from.AddToBackpack(new Bottle());
+                    
                     return 500287; // You fail to create a useful potion.
                 }
                 else
@@ -110,7 +129,7 @@ namespace Server.Engines.Craft
             }
             else
             {
-                from.PlaySound(0x240); // Sound of a filling bottle
+                from.PlaySound(CraftEndSound); // Sound of a filling bottle
 
                 if (IsPotion(item.ItemType))
                 {
@@ -127,7 +146,6 @@ namespace Server.Engines.Craft
     // ReSharper disable UnassignedGetOnlyAutoProperty ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global
     public record AlchemyConfig
     {
-        public Type TypeOfPotion { get; init; }
         public SkillName MainSkill { get; init; }
         public int GumpTitleId { get; init; }
         public PotionCraftEntry[] CraftEntries { get; init; }
@@ -135,6 +153,8 @@ namespace Server.Engines.Craft
         public int MaxCraftDelays { get; init; }
         public double Delay { get; init; }
         public double MinCraftChance { get; init; }
+        public int CraftWorkSound { get; init; }
+        public int CraftEndSound { get; init; }
 
         public record PotionCraftEntry
         {

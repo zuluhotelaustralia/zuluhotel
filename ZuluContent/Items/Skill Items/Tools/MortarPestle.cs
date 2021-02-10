@@ -4,7 +4,7 @@ namespace Server.Items
 {
     public class MortarPestle : BaseTool
     {
-        public override CraftSystem CraftSystem => DefAlchemy.CraftSystem;
+        public override CraftSystem CraftSystem => DefAlchemy.DefaultCraftSystem;
 
         [Constructible]
         public MortarPestle() : base(0xE9B)

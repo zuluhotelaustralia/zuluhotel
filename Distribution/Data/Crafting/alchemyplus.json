@@ -1,0 +1,33 @@
+{
+  "MainSkill": "Alchemy",
+  "GumpTitleId": 1044001,
+  "MinCraftDelays": 4,
+  "MaxCraftDelays": 4,
+  "Delay": 1.0,
+  "MinCraftChance": 0.0,
+  "CraftWorkSound": 550,
+  "CraftEndSound": 549,
+  "CraftEntries": [
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "NameId": 1044538,
+      "GroupNameId": 1044530,
+      "MinSkill": -25,
+      "MaxSkill": 25,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.BlackPearl",
+          "NameId": 1044353,
+          "Amount": 1,
+          "MessageId": 1044361
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "NameId": 1044529,
+          "Amount": 1,
+          "MessageId": 500315
+        }
+      ]
+    }
+  ]
+}

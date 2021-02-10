@@ -41,9 +41,9 @@ namespace Server.Items
 	{
         public PotionEffect PotionEffect { get; set; }
 
-        public override int LabelNumber{ get{ return 1041314 + (int)PotionEffect; } }
+        public override int LabelNumber => 1041314 + (int)PotionEffect;
 
-		public BasePotion( int itemID, PotionEffect effect ) : base( itemID )
+        public BasePotion( int itemID, PotionEffect effect ) : base( itemID )
 		{
 			PotionEffect = effect;
 
@@ -55,9 +55,9 @@ namespace Server.Items
 		{
 		}
 
-		public virtual bool RequireFreeHand{ get{ return true; } }
+		public virtual bool RequireFreeHand => true;
 
-		public static bool HasFreeHand( Mobile m )
+        public static bool HasFreeHand( Mobile m )
 		{
 			Item handOne = m.FindItemOnLayer( Layer.OneHanded );
 			Item handTwo = m.FindItemOnLayer( Layer.TwoHanded );
@@ -76,48 +76,46 @@ namespace Server.Items
 		}
 
 		public override void OnDoubleClick( Mobile from )
-		{
-			if ( !Movable )
+        {
+            if ( !Movable )
 				return;
 
-			if ( from.InRange( GetWorldLocation(), 1 ) )
-			{
-				if (!RequireFreeHand || HasFreeHand(from))
-				{
-					if (this is BaseExplosionPotion && Amount > 1)
-					{
-						BasePotion pot = (BasePotion)Activator.CreateInstance(GetType());
+            if (!from.InRange(GetWorldLocation(), 1))
+            {
+                from.SendLocalizedMessage(502138); // That is too far away for you to use
+                return;
+            }
 
-						if (pot != null)
-						{
-							Amount--;
+            if (RequireFreeHand && !HasFreeHand(from))
+            {
+                from.SendLocalizedMessage(502172); // You must have a free hand to drink a potion.
+                return;
+            }
 
-							if (from.Backpack != null && !from.Backpack.Deleted)
-							{
-								from.Backpack.DropItem(pot);
-							}
-							else
-							{
-								pot.MoveToWorld(from.Location, from.Map);
-							}
-							pot.Drink( from );
-						}
-					}
-					else
-					{
-						Drink( from );
-					}
-				}
-				else
-				{
-					from.SendLocalizedMessage(502172); // You must have a free hand to drink a potion.
-				}
-			}
-			else
-			{
-				from.SendLocalizedMessage( 502138 ); // That is too far away for you to use
-			}
-		}
+            if (this is not BaseExplosionPotion || Amount <= 1)
+            {
+                Drink(from);
+                return;
+            }
+
+            var pot = (BasePotion) Activator.CreateInstance(GetType());
+
+            if (pot != null)
+            {
+                Amount--;
+
+                if (from.Backpack != null && !from.Backpack.Deleted)
+                {
+                    from.Backpack.DropItem(pot);
+                }
+                else
+                {
+                    pot.MoveToWorld(from.Location, from.Map);
+                }
+
+                pot.Drink(from);
+            }
+        }
 
 		public override void Serialize( IGenericWriter writer )
 		{
@@ -184,8 +182,8 @@ namespace Server.Items
 
 		public override bool StackWith( Mobile from, Item dropped, bool playSound )
 		{
-			if( dropped is BasePotion && ((BasePotion)dropped).PotionEffect == PotionEffect )
-				return base.StackWith( from, dropped, playSound );
+			if( dropped is BasePotion potion && potion.PotionEffect == PotionEffect )
+				return base.StackWith( from, potion, playSound );
 
 			return false;
 		}
@@ -222,7 +220,7 @@ namespace Server.Items
                         ++keg.Held;
 
                         Consume();
-                        @from.AddToBackpack( new Bottle() );
+                        from.AddToBackpack( new Bottle() );
 
                         return -1; // signal placed in keg
                     }

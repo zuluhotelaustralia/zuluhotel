@@ -1,11 +1,12 @@
 {
-  "TypeOfPotion": "Server.Items.BasePotion",
   "MainSkill": "Alchemy",
   "GumpTitleId": 1044001,
-  "MinCraftDelays": 1,
-  "MaxCraftDelays": 1,
-  "Delay": 1.25,
+  "MinCraftDelays": 4,
+  "MaxCraftDelays": 4,
+  "Delay": 1.0,
   "MinCraftChance": 0.0,
+  "CraftWorkSound": 578,
+  "CraftEndSound": 576,
   "CraftEntries": [
     {
       "ItemType": "Server.Items.RefreshPotion",
