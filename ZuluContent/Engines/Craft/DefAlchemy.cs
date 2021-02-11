@@ -13,7 +13,7 @@ namespace Server.Engines.Craft
         public static CraftSystem DefaultCraftSystem { get; private set; }
         public static CraftSystem PlusCraftSystem { get; private set; }
 
-        public AlchemyConfig Config { get; private set; }
+        public AlchemyConfig Config { get; }
         private static Type TypeOfPotion => typeof(BasePotion);
         public override SkillName MainSkill => Config.MainSkill;
         public override int GumpTitleNumber => Config.GumpTitleId;
@@ -37,7 +37,8 @@ namespace Server.Engines.Craft
             var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
             Console.Write($"Alchemy Configuration: loading {path}... ");
 
-            var config = JsonConfig.Deserialize<AlchemyConfig>(path);
+            var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
+            var config = JsonConfig.Deserialize<AlchemyConfig>(path, options);
 
             if (config == null)
                 throw new DataException($"Alchemy Configuration: failed to deserialize {path}!");
@@ -69,20 +70,20 @@ namespace Server.Engines.Craft
 
                 var idx = AddCraft(
                     entry.ItemType,
-                    entry.GroupNameId,
-                    entry.NameId,
+                    entry.GroupName,
+                    entry.Name,
                     entry.MinSkill,
                     entry.MaxSkill,
                     // AddCraft() needs at least one resource by default
                     firstResource.ItemType,
-                    firstResource.NameId,
+                    firstResource.Name,
                     firstResource.Amount,
-                    firstResource.MessageId
+                    firstResource.Message
                 );
 
                 foreach (var c in entry.Resources.Skip(1))
                 {
-                    AddRes(idx, c.ItemType, c.NameId, c.Amount, c.MessageId);
+                    AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
                 }
             }
         }
@@ -147,7 +148,7 @@ namespace Server.Engines.Craft
     public record AlchemyConfig
     {
         public SkillName MainSkill { get; init; }
-        public int GumpTitleId { get; init; }
+        public TextDefinition GumpTitleId { get; init; }
         public PotionCraftEntry[] CraftEntries { get; init; }
         public int MinCraftDelays { get; init; }
         public int MaxCraftDelays { get; init; }
@@ -159,8 +160,8 @@ namespace Server.Engines.Craft
         public record PotionCraftEntry
         {
             public Type ItemType { get; init; }
-            public int NameId { get; init; }
-            public int GroupNameId { get; init; }
+            public TextDefinition Name { get; init; }
+            public TextDefinition GroupName { get; init; }
             public double MinSkill { get; init; }
             public double MaxSkill { get; init; }
 
@@ -170,9 +171,9 @@ namespace Server.Engines.Craft
         public record PotionResource
         {
             public Type ItemType { get; init; }
-            public int NameId { get; init; }
+            public TextDefinition Name { get; init; }
             public int Amount { get; init; }
-            public int MessageId { get; init; }
+            public TextDefinition Message { get; init; }
         }
     }
     // ReSharper restore UnassignedGetOnlyAutoProperty ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global

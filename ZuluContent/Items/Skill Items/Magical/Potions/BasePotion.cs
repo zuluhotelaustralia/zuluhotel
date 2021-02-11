@@ -35,7 +35,10 @@ namespace Server.Items
 		Invisibility,
 		Parasitic,
 		Darkglow,
-	}
+        PhandelsFineIntellect,
+        PhandelsFabulousIntellect,
+        PhandelsFantasticIntellect,
+    }
 
 	public abstract class BasePotion : Item, ICraftable
 	{

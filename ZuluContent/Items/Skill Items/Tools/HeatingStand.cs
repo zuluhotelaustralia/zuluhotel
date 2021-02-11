@@ -6,11 +6,7 @@ namespace Server.Items
     public class HeatingStand : BaseTool
     {
         public override CraftSystem CraftSystem => DefAlchemy.PlusCraftSystem;
-
-        public Timer Timer { get; private set; }
-        
         public int LitItemId { get; } = 0x184A;
-
         public int UnlitItemId { get; } = 0x1849;
         
         public override int ItemID 
@@ -22,7 +18,6 @@ namespace Server.Items
                 base.ItemID = value;
             }
         }
-
         
         [Constructible]
         public HeatingStand(int uses) : base(uses, 0xE9B)
@@ -55,36 +50,21 @@ namespace Server.Items
             ItemID = UnlitItemId;
         }
 
-        public override void OnDoubleClick(Mobile @from)
+        public override void OnBeginCraft(Mobile from, CraftItem item, CraftSystem system)
         {
-            base.OnDoubleClick(@from);
-
             if (ItemID == UnlitItemId)
             {
                 ItemID = LitItemId;
                 Effects.PlaySound(GetWorldLocation(), Map, 0x47);
-                Timer = new InternalTimer(this, TimeSpan.FromSeconds(60.0));
-                Timer.Start();
             }
         }
 
-        private class InternalTimer : Timer
+        public override void OnEndCraft(Mobile @from, CraftItem craftItem, CraftSystem craftSystem)
         {
-            private readonly HeatingStand m_Stand;
-
-            public InternalTimer(HeatingStand stand, TimeSpan delay) : base(delay)
+            if (!Deleted)
             {
-                m_Stand = stand;
-                Priority = TimerPriority.FiveSeconds;
-            }
-
-            protected override void OnTick()
-            {
-                if (m_Stand != null && !m_Stand.Deleted)
-                {
-                    m_Stand.ItemID = m_Stand.UnlitItemId;
-                    Effects.PlaySound(m_Stand.GetWorldLocation(), m_Stand.Map, 0x3be);
-                }
+                ItemID = UnlitItemId;
+                Effects.PlaySound(GetWorldLocation(), Map, 0x3be);
             }
         }
     }

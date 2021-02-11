@@ -32,6 +32,8 @@ namespace Server.Spells
         public static readonly Type Bone = typeof(Bone);
         public static readonly Type DeadWood = typeof(DeadWood);
         public static readonly Type FertileDirt = typeof(FertileDirt);
+        public static readonly Type SerpentScale = typeof(SerpentScale);
+
 
         public static Type[] Types { get; } =
         {
@@ -61,7 +63,8 @@ namespace Server.Spells
             ExecutionersCap,
             Bone,
             DeadWood,
-            FertileDirt
+            FertileDirt,
+            SerpentScale
         };
     }
 }

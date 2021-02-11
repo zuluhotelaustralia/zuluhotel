@@ -1,21 +1,22 @@
 namespace Server.Items
 {
-    public class VolcanicAsh : BaseReagent
+    public class SerpentScale : BaseReagent
     {
-        public override string DefaultName { get; } = "Volcanic Ash";
+        public override string DefaultName { get; } = "Serpent's Scale";
+
         [Constructible]
-        public VolcanicAsh() : this(1)
+        public SerpentScale() : this(1)
         {
         }
 
 
         [Constructible]
-        public VolcanicAsh(int amount) : base(0xF8F, amount)
+        public SerpentScale(int amount) : base(0x0F8E, amount)
         {
         }
 
         [Constructible]
-        public VolcanicAsh(Serial serial) : base(serial)
+        public SerpentScale(Serial serial) : base(serial)
         {
         }
 

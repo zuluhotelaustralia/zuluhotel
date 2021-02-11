@@ -9,23 +9,386 @@
   "CraftEndSound": 549,
   "CraftEntries": [
     {
-      "ItemType": "Server.Items.RefreshPotion",
-      "NameId": 1044538,
-      "GroupNameId": 1044530,
-      "MinSkill": -25,
-      "MaxSkill": 25,
+      "ItemType": "Server.Items.PhandelsFineIntellectPotion",
+      "Name": "Phandel's Fine Intellect",
+      "GroupName": 3000112,
+      "MinSkill": 30,
+      "MaxSkill": 30,
       "Resources": [
         {
-          "ItemType": "Server.Items.BlackPearl",
-          "NameId": 1044353,
+          "ItemType": "Server.Items.FertileDirt",
+          "Name": 1023969,
           "Amount": 1,
-          "MessageId": 1044361
+          "Message": "You do not have enough Fertile Dirt to make that."
+        },
+        {
+          "Amount": 1,
+          "ItemType": "Server.Items.VolcanicAsh",
+          "Name": "Volcanic Ash",
+          "Message": "You do not have enough Volcanic Ash to make that."
         },
         {
           "ItemType": "Server.Items.Bottle",
-          "NameId": 1044529,
+          "Name": 1044529,
           "Amount": 1,
-          "MessageId": 500315
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.PhandelsFabulousIntellectPotion",
+      "Name": "Phandel's Fabulous Intellect",
+      "GroupName": 3000112,
+      "MinSkill": 60,
+      "MaxSkill": 60,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.FertileDirt",
+          "Name": 1023969,
+          "Amount": 2,
+          "Message": "You do not have enough Fertile Dirt to make that."
+        },
+        {
+          "Amount": 3,
+          "ItemType": "Server.Items.VolcanicAsh",
+          "Name": "Volcanic Ash",
+          "Message": "You do not have enough Volcanic Ash to make that."
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.PhandelsFantasticIntellectPotion",
+      "Name": "Phandel's Fantastic Intellect",
+      "GroupName": 3000112,
+      "MinSkill": 80,
+      "MaxSkill": 80,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.FertileDirt",
+          "Name": 1023969,
+          "Amount": 5,
+          "Message": "You do not have enough Fertile Dirt to make that."
+        },
+        {
+          "Amount": 7,
+          "ItemType": "Server.Items.VolcanicAsh",
+          "Name": "Volcanic Ash",
+          "Message": "You do not have enough Volcanic Ash to make that."
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "lesser Mego Invulnerability potion",
+      "GroupName": 3002025,
+      "MinSkill": 30,
+      "MaxSkill": 30,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SerpentScale",
+          "Name": "Serpent's Scale",
+          "Amount": 1,
+          "Message": "You do not have enough Serpent's Scales to make that."
+        },
+        {
+          "ItemType": "Server.Items.Ginseng",
+          "Name": 1044356,
+          "Amount": 1,
+          "Message": 1044364
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Mego Invulnerability potion",
+      "GroupName": 3002025,
+      "MinSkill": 50,
+      "MaxSkill": 50,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SerpentScale",
+          "Name": "Serpent's Scale",
+          "Amount": 4,
+          "Message": "You do not have enough Serpent's Scales to make that."
+        },
+        {
+          "ItemType": "Server.Items.Ginseng",
+          "Name": 1044356,
+          "Amount": 3,
+          "Message": 1044364
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "greater Mego Invulnerability potion",
+      "GroupName": 3002025,
+      "MinSkill": 80,
+      "MaxSkill": 80,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.SerpentScale",
+          "Name": "Serpent's Scale",
+          "Amount": 6,
+          "Message": "You do not have enough Serpent's Scale to make that."
+        },
+        {
+          "ItemType": "Server.Items.Ginseng",
+          "Name": 1044356,
+          "Amount": 5,
+          "Message": 1044364
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Grand Mage Refresh Elixir",
+      "GroupName": 1075867,
+      "MinSkill": 120,
+      "MaxSkill": 120,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.Blackmoor",
+          "Name": 1023961,
+          "Amount": 15,
+          "Message": "You do not have enough Blackmoor to make that."
+        },
+        {
+          "ItemType": "Server.Items.Amethyst",
+          "Name": 1023862,
+          "Amount": 3,
+          "Message": 1044240
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Homeric Might potion",
+      "GroupName": 1061146,
+      "MinSkill": 40,
+      "MaxSkill": 40,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.DragonsBlood",
+          "Name": 1023970,
+          "Amount": 1,
+          "Message": "You do not have enough Dragon's Blood to make that."
+        },
+        {
+          "ItemType": "Server.Items.GreaterStrengthPotion",
+          "Name": 1041321,
+          "Amount": 1,
+          "Message": "You do not have enough Greater Strength potions to make that."
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Greater Homeric Might potion",
+      "GroupName": 1061146,
+      "MinSkill": 75,
+      "MaxSkill": 75,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.DragonsBlood",
+          "Name": 1023970,
+          "Amount": 4,
+          "Message": "You do not have enough Dragon's Blood to make that."
+        },
+        {
+          "ItemType": "Server.Items.GreaterStrengthPotion",
+          "Name": 1041321,
+          "Amount": 1,
+          "Message": "You do not have enough Greater Strength potions to make that."
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Tamla Heal potion",
+      "GroupName": 1075867,
+      "MinSkill": 115,
+      "MaxSkill": 115,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.GreaterHealPotion",
+          "Name": 1073467,
+          "Amount": 1,
+          "Message": "You do not have enough Greater Heal potions to make that."
+        },
+        {
+          "ItemType": "Server.Items.StarSapphire",
+          "Name": 1023855,
+          "Amount": 3,
+          "Message": 1044240
+        },
+        {
+          "ItemType": "Server.Items.WyrmsHeart",
+          "Name": 1023985,
+          "Amount": 3,
+          "Message": "You do not have enough Wyrm's Hearts to make that."
+        },
+        {
+          "ItemType": "Server.Items.DragonsBlood",
+          "Name": 1023970,
+          "Amount": 2,
+          "Message": "You do not have enough Dragon's Blood to make that."
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Taint's Minor Transmutation",
+      "GroupName": 1075824,
+      "MinSkill": 70,
+      "MaxSkill": 70,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.FertileDirt",
+          "Name": 1023969,
+          "Amount": 2,
+          "Message": "You do not have enough Fertile Dirt to make that."
+        },
+        {
+          "ItemType": "Server.Items.DeadWood",
+          "Name": 1023984,
+          "Amount": 2,
+          "Message": "You do not have enough Dead Wood to make that."
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Taint's Major Transmutation",
+      "GroupName": 1075824,
+      "MinSkill": 90,
+      "MaxSkill": 90,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.FertileDirt",
+          "Name": 1023969,
+          "Amount": 5,
+          "Message": "You do not have enough Fertile Dirt to make that."
+        },
+        {
+          "ItemType": "Server.Items.DeadWood",
+          "Name": 1023984,
+          "Amount": 3,
+          "Message": "You do not have enough Dead Wood to make that."
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Totem",
+      "GroupName": "Familiars",
+      "MinSkill": 130,
+      "MaxSkill": 130,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.BatWing",
+          "Name": 1023960,
+          "Amount": 2,
+          "Message": "You do not have enough Bat Wings to make that."
+        },
+        {
+          "ItemType": "Server.Items.DaemonBone",
+          "Name": 1017412,
+          "Amount": 5,
+          "Message": "You do not have enough Daemon Bones to make that."
+        },
+        {
+          "ItemType": "Server.Items.TrollHides",
+          "Name": 1017412,
+          "Amount": 6,
+          "Message": "You do not have enough Troll Hides to make that."
+        }
+      ]
+    },
+    {
+      "ItemType": "Server.Items.RefreshPotion",
+      "Name": "Elixir",
+      "GroupName": "Familiars",
+      "MinSkill": 125,
+      "MaxSkill": 125,
+      "Resources": [
+        {
+          "ItemType": "Server.Items.WyrmsHeart",
+          "Name": 1023985,
+          "Amount": 3,
+          "Message": "You do not have enough Wyrm's Hearts to make that."
+        },
+        {
+          "ItemType": "Server.Items.Diamond",
+          "Name": 1023878,
+          "Amount": 1,
+          "Message": 1044240
+        },
+        {
+          "ItemType": "Server.Items.Bottle",
+          "Name": 1044529,
+          "Amount": 1,
+          "Message": 500315
         }
       ]
     }

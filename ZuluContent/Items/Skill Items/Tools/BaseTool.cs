@@ -89,6 +89,15 @@ namespace Server.Items
             base.OnSingleClick(from);
         }
 
+        public virtual void OnBeginCraft(Mobile from, CraftItem item, CraftSystem system)
+        {
+            
+        }
+        
+        public virtual void OnEndCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem)
+        {
+        }
+
         public override void OnDoubleClick(Mobile from)
         {
             if (IsChildOf(from.Backpack) || Parent == from)
@@ -162,5 +171,7 @@ namespace Server.Items
         }
 
         #endregion
+
+
     }
 }

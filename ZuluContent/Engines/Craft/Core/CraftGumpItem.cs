@@ -6,12 +6,12 @@ using Server.Mobiles;
 
 namespace Server.Engines.Craft
 {
-	public class CraftGumpItem : Gump
+	public class CraftGumpItem : Gump, ICraftGump
 	{
-		private Mobile m_From;
-		private CraftSystem m_CraftSystem;
-		private CraftItem m_CraftItem;
-		private BaseTool m_Tool;
+        public Mobile From { get; }
+        public CraftSystem CraftSystem { get; }
+        public CraftItem CraftItem { get; }
+        public BaseTool Tool { get; }
 
 		private const int LabelHue = 0x480; // 0x384
 		private const int RedLabelHue = 0x20;
@@ -25,10 +25,10 @@ namespace Server.Engines.Craft
 
 		public CraftGumpItem( Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool ) : base( 40, 40 )
 		{
-			m_From = from;
-			m_CraftSystem = craftSystem;
-			m_CraftItem = craftItem;
-			m_Tool = tool;
+			From = from;
+			CraftSystem = craftSystem;
+			CraftItem = craftItem;
+			Tool = tool;
 
 			from.CloseGump<CraftGump>();;
 			from.CloseGump<CraftGumpItem>();;
@@ -82,11 +82,11 @@ namespace Server.Engines.Craft
 
 		public void DrawItem()
 		{
-			Type type = m_CraftItem.ItemType;
+			Type type = CraftItem.ItemType;
 
-			AddItem( 20, 50, CraftItem.ItemIDOf( type ), m_CraftItem.ItemHue );
+			AddItem( 20, 50, CraftItem.ItemIDOf( type ), CraftItem.ItemHue );
 
-			if ( m_CraftItem.IsMarkable( type ) )
+			if ( CraftItem.IsMarkable( type ) )
 			{
 				AddHtmlLocalized( 170, 302 + m_OtherCount++ * 20, 310, 18, 1044059, LabelColor, false, false ); // This item may hold its maker's mark
 				m_ShowExceptionalChance = true;
@@ -95,9 +95,9 @@ namespace Server.Engines.Craft
 
         public void DrawSkill()
         {
-            for ( int i = 0; i < m_CraftItem.Skills.Count; i++ )
+            for ( int i = 0; i < CraftItem.Skills.Count; i++ )
             {
-                CraftSkill skill = m_CraftItem.Skills.GetAt( i );
+                CraftSkill skill = CraftItem.Skills.GetAt( i );
                 double minSkill = skill.MinSkill, maxSkill = skill.MaxSkill;
 
                 if ( minSkill < 0 )
@@ -107,17 +107,17 @@ namespace Server.Engines.Craft
                 AddLabel( 430, 132 + i * 20, LabelHue, $"{minSkill:F1}");
             }
 
-            CraftSubResCol res = m_CraftItem.UseSubRes2 ? m_CraftSystem.CraftSubRes2 : m_CraftSystem.CraftSubRes;
+            CraftSubResCol res = CraftItem.UseSubRes2 ? CraftSystem.CraftSubRes2 : CraftSystem.CraftSubRes;
             int resIndex = -1;
 
-            CraftContext context = m_CraftSystem.GetContext( m_From );
+            CraftContext context = CraftSystem.GetContext( From );
 
             if ( context != null )
-                resIndex = m_CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex;
+                resIndex = CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex;
 
             bool allRequiredSkills = true;
-            double chance = m_CraftItem.GetSuccessChance( m_From, resIndex > -1 ? res.GetAt( resIndex ).ItemType : null, m_CraftSystem, false, ref allRequiredSkills );
-            double excepChance = m_CraftItem.GetExceptionalChance( m_CraftSystem, chance, m_From );
+            double chance = CraftItem.GetSuccessChance( From, resIndex > -1 ? res.GetAt( resIndex ).ItemType : null, CraftSystem, false, ref allRequiredSkills );
+            double excepChance = CraftItem.GetExceptionalChance( CraftSystem, chance, From );
 
             if ( chance < 0.0 )
                 chance = 0.0;
@@ -146,25 +146,25 @@ namespace Server.Engines.Craft
 		{
 			bool retainedColor = false;
 
-			CraftContext context = m_CraftSystem.GetContext( m_From );
+			CraftContext context = CraftSystem.GetContext( From );
 
-			CraftSubResCol res = m_CraftItem.UseSubRes2 ? m_CraftSystem.CraftSubRes2 : m_CraftSystem.CraftSubRes;
+			CraftSubResCol res = CraftItem.UseSubRes2 ? CraftSystem.CraftSubRes2 : CraftSystem.CraftSubRes;
 			int resIndex = -1;
 
 			if ( context != null )
-				resIndex = m_CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex;
+				resIndex = CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex;
 
-			bool cropScroll = m_CraftItem.Resources.Count > 1
-				&& m_CraftItem.Resources.GetAt( m_CraftItem.Resources.Count - 1 ).ItemType == typeofBlankScroll
-				&& typeofSpellScroll.IsAssignableFrom( m_CraftItem.ItemType );
+			bool cropScroll = CraftItem.Resources.Count > 1
+				&& CraftItem.Resources.GetAt( CraftItem.Resources.Count - 1 ).ItemType == typeofBlankScroll
+				&& typeofSpellScroll.IsAssignableFrom( CraftItem.ItemType );
 
-			for ( int i = 0; i < m_CraftItem.Resources.Count - (cropScroll ? 1 : 0) && i < 4; i++ )
+			for ( int i = 0; i < CraftItem.Resources.Count - (cropScroll ? 1 : 0) && i < 4; i++ )
 			{
 				Type type;
 				string nameString;
 				int nameNumber;
 
-				CraftRes craftResource = m_CraftItem.Resources.GetAt( i );
+				CraftRes craftResource = CraftItem.Resources.GetAt( i );
 
 				type = craftResource.ItemType;
 				nameString = craftResource.NameString;
@@ -185,7 +185,7 @@ namespace Server.Engines.Craft
 				}
 				// ******************
 
-				if ( !retainedColor && m_CraftItem.RetainsColorFrom( m_CraftSystem, type ) )
+				if ( !retainedColor && CraftItem.RetainsColorFrom( CraftSystem, type ) )
 				{
 					retainedColor = true;
 					AddHtmlLocalized( 170, 302 + m_OtherCount++ * 20, 310, 18, 1044152, LabelColor, false, false ); // * The item retains the color of this material
@@ -200,10 +200,10 @@ namespace Server.Engines.Craft
 				AddLabel( 430, 219 + i * 20, LabelHue, craftResource.Amount.ToString() );
 			}
 
-			if ( m_CraftItem.NameNumber == 1041267 ) // runebook
+			if ( CraftItem.NameNumber == 1041267 ) // runebook
 			{
-				AddHtmlLocalized( 170, 219 + m_CraftItem.Resources.Count * 20, 310, 18, 1044447, LabelColor, false, false );
-				AddLabel( 430, 219 + m_CraftItem.Resources.Count * 20, LabelHue, "1" );
+				AddHtmlLocalized( 170, 219 + CraftItem.Resources.Count * 20, 310, 18, 1044447, LabelColor, false, false );
+				AddLabel( 430, 219 + CraftItem.Resources.Count * 20, LabelHue, "1" );
 			}
 
 			if ( cropScroll )
@@ -215,33 +215,33 @@ namespace Server.Engines.Craft
 			// Back Button
 			if ( info.ButtonID == 0 )
 			{
-				CraftGump craftGump = new CraftGump( m_From, m_CraftSystem, m_Tool, null );
-				m_From.SendGump( craftGump );
+				CraftGump craftGump = new CraftGump( From, CraftSystem, Tool, null );
+				From.SendGump( craftGump );
 			}
 			else // Make Button
 			{
-				int num = m_CraftSystem.CanCraft( m_From, m_Tool, m_CraftItem.ItemType );
+				int num = CraftSystem.CanCraft( From, Tool, CraftItem.ItemType );
 
 				if ( num > 0 )
 				{
-					m_From.SendGump( new CraftGump( m_From, m_CraftSystem, m_Tool, num ) );
+					From.SendGump( new CraftGump( From, CraftSystem, Tool, num ) );
 				}
 				else
 				{
 					Type type = null;
 
-					CraftContext context = m_CraftSystem.GetContext( m_From );
+					CraftContext context = CraftSystem.GetContext( From );
 
 					if ( context != null )
 					{
-						CraftSubResCol res = m_CraftItem.UseSubRes2 ? m_CraftSystem.CraftSubRes2 : m_CraftSystem.CraftSubRes;
-						int resIndex = m_CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex;
+						CraftSubResCol res = CraftItem.UseSubRes2 ? CraftSystem.CraftSubRes2 : CraftSystem.CraftSubRes;
+						int resIndex = CraftItem.UseSubRes2 ? context.LastResourceIndex2 : context.LastResourceIndex;
 
 						if ( resIndex > -1 )
 							type = res.GetAt( resIndex ).ItemType;
 					}
 
-					m_CraftSystem.CreateItem( m_From, m_CraftItem.ItemType, type, m_Tool, m_CraftItem );
+					CraftSystem.CreateItem( From, CraftItem.ItemType, type, Tool, CraftItem );
 				}
 			}
 		}

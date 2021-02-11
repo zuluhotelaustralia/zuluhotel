@@ -72,21 +72,9 @@ namespace Server.Engines.Craft
 
         private bool m_UseSubRes2;
 
-        private bool m_ForceNonExceptional;
+        public bool ForceNonExceptional { get; set; }
 
-        public bool ForceNonExceptional
-        {
-            get { return m_ForceNonExceptional; }
-            set { m_ForceNonExceptional = value; }
-        }
-
-        private Expansion m_RequiredExpansion;
-
-        public Expansion RequiredExpansion
-        {
-            get { return m_RequiredExpansion; }
-            set { m_RequiredExpansion = value; }
-        }
+        public Expansion RequiredExpansion { get; set; }
 
         private static Dictionary<Type, int> _itemIds = new Dictionary<Type, int>();
 
@@ -384,7 +372,7 @@ namespace Server.Engines.Craft
 
         public bool IsMarkable(Type type)
         {
-            if (m_ForceNonExceptional) //Don't even display the stuff for marking if it can't ever be exceptional.
+            if (ForceNonExceptional) //Don't even display the stuff for marking if it can't ever be exceptional.
                 return false;
 
             for (int i = 0; i < m_MarkableTable.Length; ++i)
@@ -443,7 +431,7 @@ namespace Server.Engines.Craft
 
             foreach (Item item in eable)
             {
-                if (item.Z + 16 > from.Z && @from.Z + 16 > item.Z && Find(item.ItemID, itemIDs))
+                if (item.Z + 16 > from.Z && from.Z + 16 > item.Z && Find(item.ItemID, itemIDs))
                 {
                     eable.Free();
                     return true;
@@ -466,7 +454,7 @@ namespace Server.Engines.Craft
                         int z = tiles[i].Z;
                         int id = tiles[i].ID;
 
-                        if (z + 16 > from.Z && @from.Z + 16 > z && Find(id, itemIDs))
+                        if (z + 16 > from.Z && from.Z + 16 > z && Find(id, itemIDs))
                             return true;
                     }
                 }
@@ -857,7 +845,7 @@ namespace Server.Engines.Craft
 
         public double GetExceptionalChance(CraftSystem system, double chance, Mobile from)
         {
-            if (m_ForceNonExceptional)
+            if (ForceNonExceptional)
                 return 0.0;
 
             switch (system.ECA)
@@ -871,7 +859,7 @@ namespace Server.Engines.Craft
                     break;
                 case CraftECA.ChanceMinusSixtyToFourtyFive:
                 {
-                    double offset = 0.60 - (@from.Skills[system.MainSkill].Value - 95.0) * 0.03;
+                    double offset = 0.60 - (from.Skills[system.MainSkill].Value - 95.0) * 0.03;
 
                     if (offset < 0.45)
                         offset = 0.45;
@@ -955,44 +943,37 @@ namespace Server.Engines.Craft
         {
             if (from.BeginAction(typeof(CraftSystem)))
             {
-                if (RequiredExpansion == Expansion.None || @from.NetState != null)
+                bool allRequiredSkills = true;
+                double chance = GetSuccessChance(from, typeRes, craftSystem, false, ref allRequiredSkills);
+
+                if (allRequiredSkills && chance >= 0.0)
                 {
-                    bool allRequiredSkills = true;
-                    double chance = GetSuccessChance(from, typeRes, craftSystem, false, ref allRequiredSkills);
+                    int badCraft = craftSystem.CanCraft(from, tool, m_Type);
 
-                    if (allRequiredSkills && chance >= 0.0)
+                    if (badCraft <= 0)
                     {
-                        int badCraft = craftSystem.CanCraft(from, tool, m_Type);
+                        int resHue = 0;
+                        int maxAmount = 0;
+                        object message = null;
 
-                        if (badCraft <= 0)
+                        if (ConsumeRes(from, typeRes, craftSystem, ref resHue, ref maxAmount, ConsumeType.None,
+                            ref message))
                         {
-                            int resHue = 0;
-                            int maxAmount = 0;
-                            object message = null;
+                            message = null;
 
-                            if (ConsumeRes(from, typeRes, craftSystem, ref resHue, ref maxAmount, ConsumeType.None,
-                                ref message))
+                            if (ConsumeAttributes(from, ref message, false))
                             {
-                                message = null;
+                                CraftContext context = craftSystem.GetContext(from);
 
-                                if (ConsumeAttributes(from, ref message, false))
-                                {
-                                    CraftContext context = craftSystem.GetContext(from);
+                                context?.OnMade(this);
 
-                                    if (context != null)
-                                        context.OnMade(this);
-
-                                    int iMin = craftSystem.MinCraftEffect;
-                                    int iMax = craftSystem.MaxCraftEffect - iMin + 1;
-                                    int iRandom = Utility.Random(iMax);
-                                    iRandom += iMin + 1;
-                                    new InternalTimer(from, craftSystem, this, typeRes, tool, iRandom).Start();
-                                }
-                                else
-                                {
-                                    from.EndAction(typeof(CraftSystem));
-                                    from.SendGump(new CraftGump(from, craftSystem, tool, message));
-                                }
+                                int iMin = craftSystem.MinCraftEffect;
+                                int iMax = craftSystem.MaxCraftEffect - iMin + 1;
+                                int iRandom = Utility.Random(iMax);
+                                iRandom += iMin + 1;
+                                
+                                tool.OnBeginCraft(from, this, craftSystem);
+                                new InternalTimer(from, craftSystem, this, typeRes, tool, iRandom).Start();
                             }
                             else
                             {
@@ -1003,22 +984,20 @@ namespace Server.Engines.Craft
                         else
                         {
                             from.EndAction(typeof(CraftSystem));
-                            from.SendGump(new CraftGump(from, craftSystem, tool, badCraft));
+                            from.SendGump(new CraftGump(from, craftSystem, tool, message));
                         }
                     }
                     else
                     {
                         from.EndAction(typeof(CraftSystem));
-                        from.SendGump(new CraftGump(from, craftSystem, tool,
-                            1044153)); // You don't have the required skills to attempt this item.
+                        from.SendGump(new CraftGump(from, craftSystem, tool, badCraft));
                     }
                 }
                 else
                 {
                     from.EndAction(typeof(CraftSystem));
-                    from.SendGump(new CraftGump(from, craftSystem, tool,
-                        RequiredExpansionMessage(
-                            RequiredExpansion))); //The {0} expansion is required to attempt this item.
+                    // You don't have the required skills to attempt this item.
+                    from.SendGump(new CraftGump(from, craftSystem, tool, 1044153));
                 }
             }
             else
@@ -1027,20 +1006,17 @@ namespace Server.Engines.Craft
             }
         }
 
-        private object
-            RequiredExpansionMessage(
-                Expansion expansion) //Eventually convert to TextDefinition, but that requires that we convert all the gumps to ues it too.  Not that it wouldn't be a bad idea.
+        //Eventually convert to TextDefinition, but that requires that we convert all the gumps to ues it too.  Not that it wouldn't be a bad idea.
+        private object RequiredExpansionMessage(Expansion expansion)
         {
-            switch (expansion)
+            return expansion switch
             {
-                case Expansion.SE:
-                    return 1063307; // The "Samurai Empire" expansion is required to attempt this item.
-                case Expansion.ML:
-                    return 1072650; // The "Mondain's Legacy" expansion is required to attempt this item.
-                default:
-                    return
-                        $"The \"{ExpansionInfo.GetInfo(expansion).Name}\" expansion is required to attempt this item.";
-            }
+                Expansion.SE => 1063307 // The "Samurai Empire" expansion is required to attempt this item.
+                ,
+                Expansion.ML => 1072650 // The "Mondain's Legacy" expansion is required to attempt this item.
+                ,
+                _ => $"The \"{ExpansionInfo.GetInfo(expansion).Name}\" expansion is required to attempt this item."
+            };
         }
 
         public void CompleteCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
@@ -1156,7 +1132,7 @@ namespace Server.Engines.Craft
                     {
                         endquality = craftable.OnCraft(quality, makersMark, from, craftSystem, typeRes, tool,
                             this, resHue);
-                        
+
                         craftable.PlayerConstructed = true;
                         craftable.Crafter = from;
                     }
@@ -1184,7 +1160,9 @@ namespace Server.Engines.Craft
                     num = craftSystem.PlayEndingEffect(from, false, true, toolBroken, endquality, makersMark, this);
 
                 if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
+                {
                     from.SendGump(new CraftGump(from, craftSystem, tool, num));
+                }
                 else if (num > 0)
                     from.SendLocalizedMessage(num);
             }
@@ -1228,10 +1206,13 @@ namespace Server.Engines.Craft
                 int num = craftSystem.PlayEndingEffect(from, true, true, toolBroken, endquality, false, this);
 
                 if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
+                {
                     from.SendGump(new CraftGump(from, craftSystem, tool, num));
+                }
                 else if (num > 0)
                     from.SendLocalizedMessage(num);
             }
+            tool?.OnEndCraft(from, this, craftSystem);
         }
 
         private class InternalTimer : Timer
