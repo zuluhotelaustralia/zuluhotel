@@ -117,11 +117,23 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
+        public virtual void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
         }
 
-        public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value)
+        public virtual void OnModifyWithMagicEfficiency(Mobile mobile, ref double value)
+        {
+        }
+
+        public virtual void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+        }
+
+        public virtual void OnHarvestColoredChance(Mobile mobile, ref int chance)
+        {
+        }
+
+        public virtual void OnHarvestAmount(Mobile harvester, ref int amount)
         {
         }
 

@@ -453,6 +453,34 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
+        public void OnHarvestAmount(Mobile mobile, ref int amount)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                amount = (int) (amount * ClasseBonus);
+            }
+        }
+
+        public void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                bonus = (int) (bonus * ClasseBonus);
+                toMod = (int) (toMod / ClasseBonus);
+            }
+        }
+
+        public void OnHarvestColoredChance(Mobile mobile, ref int chance)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                chance = (int) (chance * ClasseBonus);
+
+                if (chance > 90)
+                    chance = 90;
+            }
+        }
+
         public void OnBeforeSwing(Mobile attacker, Mobile defender)
         {
         }

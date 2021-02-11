@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Engines.Harvest
 {
@@ -239,12 +240,13 @@ namespace Server.Engines.Harvest
             return bank;
         }
 
-        public int ModifyHarvestAmount(Mobile from, int harvestAmount)
+        public int ModifyHarvestAmount(Mobile from, Item tool, int harvestAmount)
         {
             var skillValue = from.Skills[m_Skill].Value;
             var maxAmount = (int) (skillValue / 30);
 
-            // TODO: Multiply maxAmount by harvest bonus (omeros/xarafax)
+            if (tool is IEnchanted enchantedTool)
+                enchantedTool.FireHook(h => h.OnHarvestAmount(from, ref maxAmount));
 
             if (harvestAmount > maxAmount)
                 harvestAmount = maxAmount;
@@ -255,33 +257,33 @@ namespace Server.Engines.Harvest
             return harvestAmount;
         }
 
-        public HarvestVein GetColoredVein(Mobile from, int harvestAmount)
+        public HarvestVein GetColoredVein(Mobile from, Item tool, ref int harvestAmount)
         {
             var skillValue = from.Skills[m_Skill].Value;
             var chance = Utility.Random(1, 155);
+            var amountToHarvest = harvestAmount;
 
-            if (Utility.Random(2) > 0)
+            var fifty = Utility.Random(2);
+
+            if (fifty > 0)
             {
                 var bonus = (int) (skillValue / 4);
                 var toMod = 80;
 
-                // TODO: Multiply if classed crafter
+                from.FireHook(h => h.OnHarvestColoredChance(from, ref bonus, ref toMod));
+                from.FireHook(h => h.OnHarvestAmount(from, ref amountToHarvest), true);
 
-                // TODO: Multiply by harvest bonus (omeros/xarafax)
+                if (tool is IEnchanted enchantedTool)
+                    enchantedTool.FireHook(h => h.OnHarvestColoredChance(from, ref bonus, ref toMod));
 
                 if (chance > toMod)
                     chance -= bonus;
             }
 
-            var possibles = m_Veins.ToList().Where(v =>
-                chance <= v.VeinChance && from.ShilCheckSkill(m_Skill, (int) v.Resource.ReqSkill, 0)).ToList();
+            harvestAmount = amountToHarvest;
 
-            if (possibles.Count > 0)
-            {
-                return possibles.First();
-            }
-
-            return null;
+            return m_Veins.ToList().FirstOrDefault(v =>
+                chance <= v.VeinChance && from.ShilCheckSkill(m_Skill, (int) v.Resource.ReqSkill, 0));
         }
 
         public HarvestDefinition()

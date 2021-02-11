@@ -7,7 +7,6 @@ namespace Server.Engines.Harvest
         private int m_Current;
         private int m_Maximum;
         private DateTime m_NextRespawn;
-        private HarvestVein m_Vein;
 
         HarvestDefinition m_Definition;
 
@@ -25,24 +24,12 @@ namespace Server.Engines.Harvest
             }
         }
 
-        public HarvestVein Vein
-        {
-            get
-            {
-                CheckRespawn();
-                return m_Vein;
-            }
-            set { m_Vein = value; }
-        }
-
         public void CheckRespawn()
         {
             if (m_Current == m_Maximum || m_NextRespawn > DateTime.Now)
                 return;
 
             m_Current = m_Maximum;
-
-            m_Vein = null;
         }
 
         public void Consume(int amount, Mobile from)

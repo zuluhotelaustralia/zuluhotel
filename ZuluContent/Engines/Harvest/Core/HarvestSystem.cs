@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts.Zulu.Engines.Classes;
 using Server.Items;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Engines.Harvest
 {
@@ -73,17 +74,22 @@ namespace Server.Engines.Harvest
             return def.ConsumedPerHarvest(skillValue);
         }
 
-        public virtual int GetChanceForColored(Mobile from, HarvestDefinition def)
+        public virtual int GetChanceForColored(Mobile from, Item tool, HarvestDefinition def)
         {
             var skillValue = from.Skills[def.Skill].Value;
             var chanceForColored = (int) (skillValue / 5) + 35;
 
-            // TODO: Multiply by harvest bonus (omeros/xarafax)
+            if (tool is IEnchanted enchantedTool)
+            {
+                var toolBonusChanceForColored = 10;
+                enchantedTool.FireHook(h => h.OnHarvestAmount(from, ref toolBonusChanceForColored));
+                chanceForColored += toolBonusChanceForColored;
+            }
 
             if (chanceForColored > 75)
                 chanceForColored = 75;
 
-            // TODO: If classed crafter increase colored cap
+            from.FireHook(h => h.OnHarvestColoredChance(from, ref chanceForColored));
 
             return chanceForColored;
         }
@@ -167,28 +173,32 @@ namespace Server.Engines.Harvest
             {
                 var chanceForColored = 0;
                 var harvestAmount = consumeAmount;
+                HarvestVein vein;
 
                 if (def.Resources.Length > 0)
-                {
-                    chanceForColored = GetChanceForColored(from, def);
-                }
+                    chanceForColored = GetChanceForColored(from, tool, def);
+
+                if (tool is IEnchanted enchantedTool)
+                    enchantedTool.FireHook(h => h.OnHarvestAmount(from, ref harvestAmount));
 
                 if (chanceForColored > 0 && Utility.Random(1, 100) <= chanceForColored)
                 {
-                    var vein = def.GetColoredVein(from, consumeAmount);
-                    if (vein == null)
-                        return;
+                    harvestAmount = def.ModifyHarvestAmount(from, tool, harvestAmount);
 
-                    bank.Vein = vein;
-                    harvestAmount = def.ModifyHarvestAmount(from, harvestAmount);
+                    vein = def.GetColoredVein(from, tool, ref harvestAmount);
+                    if (vein == null)
+                    {
+                        def.SendMessageTo(from, "You fail to find any colored ore.");
+                        return;
+                    }
                 }
                 else
                 {
-                    bank.Vein = def.DefaultVein;
-                    // Check classe bonus for more iron
+                    vein = def.DefaultVein;
+                    from.FireHook(h => h.OnHarvestAmount(from, ref harvestAmount), true);
                 }
 
-                var resource = bank.Vein.Resource;
+                var resource = vein.Resource;
 
                 type = GetResourceType(from, tool, def, map, loc, resource);
 
@@ -251,7 +261,7 @@ namespace Server.Engines.Harvest
 
         public virtual void SendSuccessTo(Mobile from, Item item, HarvestResource resource)
         {
-            resource.SendSuccessTo(from);
+            resource.SendSuccessTo(from, item.Amount);
         }
 
         public virtual void SendPackFullTo(Mobile from, Item item, HarvestDefinition def, HarvestResource resource)

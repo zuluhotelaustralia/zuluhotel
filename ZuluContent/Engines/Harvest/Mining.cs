@@ -73,74 +73,64 @@ namespace Server.Engines.Harvest
 
             res = new[]
             {
-                new HarvestResource(5.0, "You dig some Spike ore and put it in your backpack.",
+                new HarvestResource(15.0, "spike",
                     typeof(SpikeOre)),
-                new HarvestResource(10.0, "You dig some Fruity ore and put it in your backpack.",
+                new HarvestResource(20.0, "fruity",
                     typeof(FruityOre)),
-                new HarvestResource(20.0, "You dig some Ice Rock ore and put it in your backpack.",
+                new HarvestResource(25.0, "icerock",
                     typeof(IceRockOre)),
-                new HarvestResource(25.0, "You dig some Black Dwarf ore and put it in your backpack.",
+                new HarvestResource(25.0, "blackdwarf",
                     typeof(BlackDwarfOre)),
-                new HarvestResource(15.0, "You dig some Bronze ore and put it in your backpack.",
+                new HarvestResource(35.0, "bronze",
                     typeof(BronzeOre)),
-                new HarvestResource(45.0, "You dig some Dark Pagan ore and put it in your backpack.",
+                new HarvestResource(40.0, "darkpagan",
                     typeof(DarkPaganOre)),
-                new HarvestResource(40.0, "You dig some Silver Rock ore and put it in your backpack.",
+                new HarvestResource(45.0, "silverrock",
                     typeof(SilverRockOre)),
-                new HarvestResource(35.0, "You dig some Platinum ore and put it in your backpack.",
+                new HarvestResource(50.0, "platinum",
                     typeof(PlatinumOre)),
-                new HarvestResource(30.0, "You dig some Dull Copper ore and put it in your backpack.",
+                new HarvestResource(55.0, "dull copper",
                     typeof(DullCopperOre)),
-                new HarvestResource(55.0, "You dig some Mystic ore and put it in your backpack.",
+                new HarvestResource(60.0, "mystic",
                     typeof(MysticOre)),
-                new HarvestResource(50.0, "You dig some Copper ore and put it in your backpack.",
+                new HarvestResource(65.0, "copper",
                     typeof(CopperOre)),
-                new HarvestResource(60.0, "You dig some Spectral ore and put it in your backpack.",
+                new HarvestResource(70.0, "spectral",
                     typeof(SpectralOre)),
-                new HarvestResource(65.0, "You dig some Old Britain ore and put it in your backpack.",
-                    typeof(OldBritainOre)),
-                new HarvestResource(70.0, "You dig some Onyx ore and put it in your backpack.",
+                new HarvestResource(75.0, "onyx",
                     typeof(OnyxOre)),
-                new HarvestResource(75.0, "You dig some Red Elven ore and put it in your backpack.",
+                new HarvestResource(80.0, "oldbritain",
+                    typeof(OldBritainOre)),
+                new HarvestResource(84.0, "redelven",
                     typeof(RedElvenOre)),
-                new HarvestResource(80.0, "You dig some Undead ore and put it in your backpack.",
+                new HarvestResource(88.0, "undead",
                     typeof(UndeadOre)),
-                new HarvestResource(85.0, "You dig some Pyrite ore and put it in your backpack.",
+                new HarvestResource(91.0, "pyrite",
                     typeof(PyriteOre)),
-                new HarvestResource(90.0, "You dig some Virginity ore and put it in your backpack.",
+                new HarvestResource(94.0, "virginity",
                     typeof(VirginityOre)),
-                new HarvestResource(95.0, "You dig some Malachite ore and put it in your backpack.",
+                new HarvestResource(95.0, "malachite",
                     typeof(MalachiteOre)),
-                new HarvestResource(97.0, "You dig some Lavarock ore and put it in your backpack.",
+                new HarvestResource(97.0, "lavarock",
                     typeof(LavarockOre)),
-                new HarvestResource(98.0, "You dig some Azurite ore and put it in your backpack.",
+                new HarvestResource(105.0, "azurite",
                     typeof(AzuriteOre)),
-                new HarvestResource(100.0, "You dig some Dripstone ore and put it in your backpack.",
+                new HarvestResource(120.0, "dripstone",
                     typeof(DripstoneOre)),
-                new HarvestResource(104.0, "You dig some Executor ore and put it in your backpack.",
+                new HarvestResource(120.0, "executor",
                     typeof(ExecutorOre)),
-                new HarvestResource(108.0, "You dig some Peachblue ore and put it in your backpack.",
+                new HarvestResource(120.0, "peachblue",
                     typeof(PeachblueOre)),
-                new HarvestResource(112.0, "You dig some Destruction ore and put it in your backpack.",
+                new HarvestResource(120.0, "destruction",
                     typeof(DestructionOre)),
-                new HarvestResource(116.0, "You dig some Anra ore and put it in your backpack.",
+                new HarvestResource(120.0, "anra",
                     typeof(AnraOre)),
-                new HarvestResource(119.0, "You dig some Crystal ore and put it in your backpack.",
+                new HarvestResource(120.0, "crystal",
                     typeof(CrystalOre)),
-                new HarvestResource(122.0, "You dig some Doom ore and put it in your backpack.",
+                new HarvestResource(125.0, "doom",
                     typeof(DoomOre)),
-                new HarvestResource(125.0, "You dig some Goddess ore and put it in your backpack.",
-                    typeof(GoddessOre)),
-                new HarvestResource(129.0, "You dig some New Zulu ore and put it in your backpack.",
-                    typeof(NewZuluOre)),
-                new HarvestResource(130.0,
-                    "You dig some Dark Sable Ruby ore and put it in your backpack.", typeof(DarkSableRubyOre)),
-                new HarvestResource(130.0,
-                    "You dig some Ebon Twilight Sapphire ore and put it in your backpack.",
-                    typeof(EbonTwilightSapphireOre)),
-                new HarvestResource(140.0,
-                    "You dig some Radiant Nimbus Diamond ore and put it in your backpack.",
-                    typeof(RadiantNimbusDiamondOre)),
+                new HarvestResource(130.0, "goddess",
+                    typeof(GoddessOre))
             };
 
 
@@ -161,8 +151,8 @@ namespace Server.Engines.Harvest
                 new HarvestVein(46.0, res[16]), // Pyrite
                 new HarvestVein(51.0, res[15]), // Undead
                 new HarvestVein(56.0, res[14]), // RedElven
-                new HarvestVein(66.0, res[13]), // Onyx
-                new HarvestVein(61.0, res[12]), // OldBritain
+                new HarvestVein(61.0, res[13]), // OldBritain
+                new HarvestVein(66.0, res[12]), // Onyx
                 new HarvestVein(71.0, res[11]), // Spectral
                 new HarvestVein(74.0, res[10]), // Copper
                 new HarvestVein(80.0, res[9]), // Mystic
@@ -181,7 +171,7 @@ namespace Server.Engines.Harvest
             oreAndStone.Veins = veins;
 
             oreAndStone.DefaultVein = new HarvestVein(0.0, new HarvestResource(0.0,
-                "You dig some Iron ore and put it in your backpack.",
+                "iron",
                 typeof(IronOre)));
 
             Definitions.Add(oreAndStone);

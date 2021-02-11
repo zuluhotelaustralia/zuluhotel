@@ -1,4 +1,5 @@
 using System;
+using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.Engines.Harvest
 {
@@ -25,12 +26,12 @@ namespace Server.Engines.Harvest
             get { return m_SuccessMessage; }
         }
 
-        public void SendSuccessTo(Mobile m)
+        public void SendSuccessTo(Mobile m, int amount)
         {
             if (m_SuccessMessage is int)
                 m.SendLocalizedMessage((int) m_SuccessMessage);
             else if (m_SuccessMessage is string)
-                m.SendMessage((string) m_SuccessMessage);
+                m.SendMessage(MessageSuccessHue, $"You put {amount} {(string) m_SuccessMessage} ore in your backpack.");
         }
 
         public HarvestResource(double reqSkill, object message, params Type[] types)

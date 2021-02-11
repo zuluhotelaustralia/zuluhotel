@@ -39,6 +39,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value);
 
+        public void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod);
+
+        public void OnHarvestColoredChance(Mobile mobile, ref int chance);
+
+        public void OnHarvestAmount(Mobile harvester, ref int amount);
+
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 
         public void OnSwing(Mobile attacker, Mobile defender, ref double damageBonus, ref TimeSpan result);

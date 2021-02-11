@@ -91,6 +91,13 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
+        public int HarvestBonus
+        {
+            get => Enchantments.Get((HarvestBonus e) => e.Value);
+            set => Enchantments.Set((HarvestBonus e) => e.Value = value);
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public CreatureType Slayer
         {
             get => Enchantments.Get((SlayerHit e) => e.Type);
