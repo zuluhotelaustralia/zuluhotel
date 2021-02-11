@@ -45,6 +45,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnHarvestAmount(Mobile harvester, ref int amount);
 
+        public void OnHarvestBonus(Mobile harvester, ref int amount);
+
         public void OnBeforeSwing(Mobile attacker, Mobile defender);
 
         public void OnSwing(Mobile attacker, Mobile defender, ref double damageBonus, ref TimeSpan result);

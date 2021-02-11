@@ -8,6 +8,8 @@ namespace Server.Engines.Harvest
 {
     public delegate int ConsumedPerHarvestCallback(double skillValue);
 
+    public delegate void BonusEffectCallback(Mobile harvester, Item tool);
+
     public class HarvestDefinition
     {
         private int m_BankWidth, m_BankHeight;
@@ -16,6 +18,7 @@ namespace Server.Engines.Harvest
         private bool m_RangedTiles;
         private TimeSpan m_MinRespawn, m_MaxRespawn;
         private ConsumedPerHarvestCallback m_ConsumedPerHarvestCallback;
+        private BonusEffectCallback m_BonusEffectCallback;
         private int m_MaxRange;
         private bool m_PlaceAtFeetIfFull;
         private SkillName m_Skill;
@@ -96,6 +99,12 @@ namespace Server.Engines.Harvest
         {
             get { return m_ConsumedPerHarvestCallback; }
             set { m_ConsumedPerHarvestCallback = value; }
+        }
+
+        public BonusEffectCallback BonusEffect
+        {
+            get { return m_BonusEffectCallback; }
+            set { m_BonusEffectCallback = value; }
         }
 
         public bool PlaceAtFeetIfFull
@@ -246,7 +255,7 @@ namespace Server.Engines.Harvest
             var maxAmount = (int) (skillValue / 30);
 
             if (tool is IEnchanted enchantedTool)
-                enchantedTool.FireHook(h => h.OnHarvestAmount(from, ref maxAmount));
+                enchantedTool.FireHook(h => h.OnHarvestBonus(from, ref maxAmount));
 
             if (harvestAmount > maxAmount)
                 harvestAmount = maxAmount;
@@ -263,15 +272,13 @@ namespace Server.Engines.Harvest
             var chance = Utility.Random(1, 155);
             var amountToHarvest = harvestAmount;
 
-            var fifty = Utility.Random(2);
-
-            if (fifty > 0)
+            if (Utility.Random(2) > 0)
             {
                 var bonus = (int) (skillValue / 4);
                 var toMod = 80;
 
                 from.FireHook(h => h.OnHarvestColoredChance(from, ref bonus, ref toMod));
-                from.FireHook(h => h.OnHarvestAmount(from, ref amountToHarvest), true);
+                from.FireHook(h => h.OnHarvestAmount(from, ref amountToHarvest));
 
                 if (tool is IEnchanted enchantedTool)
                     enchantedTool.FireHook(h => h.OnHarvestColoredChance(from, ref bonus, ref toMod));

@@ -4,6 +4,7 @@ using Scripts.Zulu.Engines.Classes;
 using Server.Items;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
 namespace Server.Engines.Harvest
 {
@@ -79,10 +80,10 @@ namespace Server.Engines.Harvest
             var skillValue = from.Skills[def.Skill].Value;
             var chanceForColored = (int) (skillValue / 5) + 35;
 
-            if (tool is IEnchanted enchantedTool)
+            if (tool is IEnchanted enchantedTool && enchantedTool.Enchantments.Get((HarvestBonus e) => e.Value) > 0)
             {
                 var toolBonusChanceForColored = 10;
-                enchantedTool.FireHook(h => h.OnHarvestAmount(from, ref toolBonusChanceForColored));
+                enchantedTool.FireHook(h => h.OnHarvestBonus(from, ref toolBonusChanceForColored));
                 chanceForColored += toolBonusChanceForColored;
             }
 
@@ -128,7 +129,7 @@ namespace Server.Engines.Harvest
             return true;
         }
 
-        public virtual void FinishHarvesting(Mobile from, Item tool, HarvestDefinition def, object toHarvest,
+        public virtual async void FinishHarvesting(Mobile from, Item tool, HarvestDefinition def, object toHarvest,
             object locked)
         {
             from.EndAction(locked);
@@ -179,7 +180,7 @@ namespace Server.Engines.Harvest
                     chanceForColored = GetChanceForColored(from, tool, def);
 
                 if (tool is IEnchanted enchantedTool)
-                    enchantedTool.FireHook(h => h.OnHarvestAmount(from, ref harvestAmount));
+                    enchantedTool.FireHook(h => h.OnHarvestBonus(from, ref harvestAmount));
 
                 if (chanceForColored > 0 && Utility.Random(1, 100) <= chanceForColored)
                 {
@@ -195,7 +196,7 @@ namespace Server.Engines.Harvest
                 else
                 {
                     vein = def.DefaultVein;
-                    from.FireHook(h => h.OnHarvestAmount(from, ref harvestAmount), true);
+                    from.FireHook(h => h.OnHarvestAmount(from, ref harvestAmount));
                 }
 
                 var resource = vein.Resource;
@@ -235,6 +236,11 @@ namespace Server.Engines.Harvest
 
             if (type == null)
                 def.SendMessageTo(from, def.FailMessage);
+
+            await Timer.Pause(1000);
+
+            if (type != null)
+                def.BonusEffect(from, tool);
 
             OnHarvestFinished(from, tool, def, bank, toHarvest);
         }

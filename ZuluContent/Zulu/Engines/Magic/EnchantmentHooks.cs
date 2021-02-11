@@ -90,11 +90,11 @@ namespace ZuluContent.Zulu.Engines.Magic
 
 
         public static void FireHook(this Mobile m, Expression<Action<IEnchantmentHook>> action,
-            bool zuluClassOnly = false)
+            bool ignoreItems = false)
         {
             List<IEnchantmentHook> hooks = new();
 
-            if (!zuluClassOnly)
+            if (!ignoreItems)
             {
                 hooks.AddRange(m.Items
                     .OfType<BaseEquippableItem>()

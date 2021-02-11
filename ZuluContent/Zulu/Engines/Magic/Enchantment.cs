@@ -137,6 +137,10 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public virtual void OnHarvestBonus(Mobile harvester, ref int amount)
+        {
+        }
+
         public virtual void OnBeforeSwing(Mobile attacker, Mobile defender)
         {
         }

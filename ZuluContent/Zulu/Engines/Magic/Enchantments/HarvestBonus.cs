@@ -19,7 +19,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             set => m_Value = value;
         }
 
-        public override void OnHarvestAmount(Mobile harvester, ref int amount)
+        public override void OnHarvestBonus(Mobile harvester, ref int amount)
         {
             amount *= Value;
         }

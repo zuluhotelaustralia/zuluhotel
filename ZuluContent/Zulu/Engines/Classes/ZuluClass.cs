@@ -461,6 +461,14 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
+        public void OnHarvestBonus(Mobile mobile, ref int amount)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                amount = (int) (amount * ClasseBonus) + 1;
+            }
+        }
+
         public void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod)
         {
             if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
