@@ -90,7 +90,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.LesserMegoInvulnerabilityPotion",
       "Name": "lesser Mego Invulnerability potion",
       "GroupName": 3002025,
       "MinSkill": 30,
@@ -117,7 +117,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.MegoInvulnerabilityPotion",
       "Name": "Mego Invulnerability potion",
       "GroupName": 3002025,
       "MinSkill": 50,
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.GreaterMegoInvulnerabilityPotion",
       "Name": "greater Mego Invulnerability potion",
       "GroupName": 3002025,
       "MinSkill": 80,
@@ -171,7 +171,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.GrandMageRefreshElixir",
       "Name": "Grand Mage Refresh Elixir",
       "GroupName": 1075867,
       "MinSkill": 120,
@@ -198,7 +198,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.HomericMightPotion",
       "Name": "Homeric Might potion",
       "GroupName": 1061146,
       "MinSkill": 40,
@@ -225,7 +225,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.GreaterHomericMightPotion",
       "Name": "Greater Homeric Might potion",
       "GroupName": 1061146,
       "MinSkill": 75,

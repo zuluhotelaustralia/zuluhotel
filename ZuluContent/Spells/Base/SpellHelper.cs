@@ -247,8 +247,7 @@ namespace Server.Spells
 
         public static bool AddStatBonus(Mobile caster, Mobile target, StatType type)
         {
-            return AddStatBonus(caster, target, type, GetOffset(caster, target, type, false),
-                GetDuration(caster, target));
+            return AddStatBonus(caster, target, type, GetOffset(caster, target, type, false), GetDuration(caster, target));
         }
 
         public static bool AddStatBonus(Mobile caster, Mobile target, StatType type, int bonus, TimeSpan duration)

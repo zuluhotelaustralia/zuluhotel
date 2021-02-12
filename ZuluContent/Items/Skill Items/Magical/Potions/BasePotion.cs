@@ -38,6 +38,12 @@ namespace Server.Items
         PhandelsFineIntellect,
         PhandelsFabulousIntellect,
         PhandelsFantasticIntellect,
+        LesserMegoInvulnerability,
+        MegoInvulnerability,
+        GreaterMegoInvulnerability,
+        GrandMageRefreshElixir,
+        HomericMight,
+        GreaterHomericMight,
     }
 
 	public abstract class BasePotion : Item, ICraftable

@@ -45,6 +45,8 @@ namespace Scripts.Zulu.Packets
             
             Console.WriteLine($"Cliloc loaded: {path}");
 
+            JsonConfig.Serialize(Core.BaseDirectory + "/Cliloc.json", entries);
+
             return entries;
         }
 

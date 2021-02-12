@@ -31,18 +31,18 @@ namespace Scripts.Zulu.Packets
                     case 0xBF:
                         if (input[4] == 0x10)
                         {
-                            Console.WriteLine("Sending EquipmentInfo message packet");
+                            // Console.WriteLine("Sending EquipmentInfo message packet");
                             RewriteEquipmentInfo(input, output, out length);
                             return;
                         }
                         break;
                     case 0xAE:
-                        Console.WriteLine("Rewriting unicode message packet");
+                        // Console.WriteLine("Rewriting unicode message packet");
                         RewriteUnicodeMessage(input, output, out length);
                         return;
                     case 0xC1:
                     case 0xCC:
-                        Console.WriteLine("Rewriting CreateMessageLocalizedAffix message packet");
+                        // Console.WriteLine("Rewriting CreateMessageLocalizedAffix message packet");
                         RewriteMessageLocalized(input, output, out length);
                         return;
                     // break;
