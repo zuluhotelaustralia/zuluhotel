@@ -92,7 +92,6 @@ namespace Server.Misc
             bank.DropItem(MakeNewbie(new Log(1000)));
 
             bank.DropItem(MakeNewbie(new IronIngot(5000)));
-            bank.DropItem(MakeNewbie(new GoldIngot(5000)));
             bank.DropItem(MakeNewbie(new SpikeIngot(5000)));
             bank.DropItem(MakeNewbie(new FruityIngot(5000)));
             bank.DropItem(MakeNewbie(new BronzeIngot(5000)));
@@ -296,7 +295,8 @@ namespace Server.Misc
             newChar.MoveToWorld(city.Location, city.Map);
             if (args.State != null)
             {
-                Console.WriteLine("Login: {0}: New character being created (account={1})", args.State, args.Account.Username);
+                Console.WriteLine("Login: {0}: New character being created (account={1})", args.State,
+                    args.Account.Username);
                 Console.WriteLine(" - Character: {0} (serial={1})", newChar.Name, newChar.Serial);
                 Console.WriteLine(" - Started: {0} {1} in {2}", city.City, city.Location, city.Map);
 

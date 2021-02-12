@@ -109,7 +109,7 @@ namespace Server.Engines.Harvest
              *  - 'return typeof( HarvestSystem );' : This will completely restrict concurrent harvesting.
              */
 
-            return tool;
+            return typeof(HarvestSystem);
         }
 
         public virtual void OnConcurrentHarvest(Mobile from, Item tool, HarvestDefinition def, object toHarvest)

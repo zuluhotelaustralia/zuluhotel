@@ -2,40 +2,40 @@
 
 namespace Server.Items
 {
-  public class EbonTwilightSapphireOre : BaseOre
-  {
-    [Constructible]
-    public EbonTwilightSapphireOre() : this(1)
+    public class EbonTwilightSapphireOre : BaseOre
     {
-    }
+        [Constructible]
+        public EbonTwilightSapphireOre() : this(1)
+        {
+        }
 
 
-    [Constructible]
-    public EbonTwilightSapphireOre(int amount) : base(CraftResource.EbonTwilightSapphire, amount)
-    {
-      this.Hue = 2760;
-    }
+        [Constructible]
+        public EbonTwilightSapphireOre(int amount) : base(CraftResource.EbonTwilightSapphire, amount)
+        {
+            ItemID = 0xF2D;
+        }
 
-    [Constructible]
-    public EbonTwilightSapphireOre(Serial serial) : base(serial)
-    {
-    }
+        [Constructible]
+        public EbonTwilightSapphireOre(Serial serial) : base(serial)
+        {
+        }
 
-    public override void Serialize(IGenericWriter writer)
-    {
-      base.Serialize(writer);
-      writer.Write((int) 0); // version
-    }
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int) 0); // version
+        }
 
-    public override void Deserialize(IGenericReader reader)
-    {
-      base.Deserialize(reader);
-      int version = reader.ReadInt();
-    }
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
 
-    public override BaseIngot GetIngot()
-    {
-      return new EbonTwilightSapphireIngot();
+        public override BaseIngot GetIngot()
+        {
+            return new EbonTwilightSapphireIngot();
+        }
     }
-  }
 }

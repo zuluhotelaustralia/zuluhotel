@@ -308,13 +308,11 @@ namespace Server.Engines.Craft
 
             foreach (var res in CraftResources.MetalInfo)
             {
-                
             }
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
             AddSubRes(typeof(IronIngot), "Iron", 0, 1044022, "Iron");
-            AddSubRes(typeof(GoldIngot), "Gold", 1, 1044022, "Gold");
             AddSubRes(typeof(SpikeIngot), "Spike", 5, 1044022, "Spike");
             AddSubRes(typeof(FruityIngot), "Fruity", 10, 1044022, "Fruity");
             AddSubRes(typeof(BronzeIngot), "Bronze", 15, 1044022, "Bronze");
@@ -346,8 +344,10 @@ namespace Server.Engines.Craft
             AddSubRes(typeof(GoddessIngot), "Goddess", 125, 1044022, "Goddess");
             AddSubRes(typeof(NewZuluIngot), "New Zulu", 129, 1044022, "New Zulu");
             AddSubRes(typeof(DarkSableRubyIngot), "Dark Sable Ruby", 130, 1044022, "Dark Sable Ruby");
-            AddSubRes(typeof(EbonTwilightSapphireIngot), "Ebon Twilight Sapphire", 130, 1044022, "Ebon Twilight Sapphire");
-            AddSubRes(typeof(RadiantNimbusDiamondIngot), "Radiant Nimbus Diamond", 140, 1044022, "Radiant Nimbus Diamond");
+            AddSubRes(typeof(EbonTwilightSapphireIngot), "Ebon Twilight Sapphire", 130, 1044022,
+                "Ebon Twilight Sapphire");
+            AddSubRes(typeof(RadiantNimbusDiamondIngot), "Radiant Nimbus Diamond", 140, 1044022,
+                "Radiant Nimbus Diamond");
 
             Resmelt = true;
             Repair = true;

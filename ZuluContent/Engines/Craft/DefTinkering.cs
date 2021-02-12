@@ -290,7 +290,6 @@ namespace Server.Engines.Craft
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
             AddSubRes(typeof(IronIngot), 1160300, 0, 1044268);
-            AddSubRes(typeof(GoldIngot), 1160301, 1, 1044268);
             AddSubRes(typeof(SpikeIngot), 1160302, 5, 1044268);
             AddSubRes(typeof(FruityIngot), 1160303, 10, 1044268);
             AddSubRes(typeof(BronzeIngot), 1160304, 15, 1044268);

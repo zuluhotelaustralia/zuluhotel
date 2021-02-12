@@ -5,35 +5,17 @@ namespace Server.Items
 {
     public class OmerosPickaxe : BaseAxe, IUsesRemaining, IEnchanted
     {
-        public override HarvestSystem HarvestSystem
-        {
-            get => Mining.System;
-        }
+        public override HarvestSystem HarvestSystem => Mining.System;
 
-        public override int DefaultStrengthReq
-        {
-            get => 20;
-        }
+        public override int DefaultStrengthReq => 20;
 
-        public override int DefaultMinDamage
-        {
-            get => 1;
-        }
+        public override int DefaultMinDamage => 1;
 
-        public override int DefaultMaxDamage
-        {
-            get => 15;
-        }
+        public override int DefaultMaxDamage => 15;
 
-        public override int DefaultSpeed
-        {
-            get => 40;
-        }
+        public override int DefaultSpeed => 40;
 
-        public override WeaponAnimation DefaultAnimation
-        {
-            get => WeaponAnimation.Slash1H;
-        }
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash1H;
 
 
         [Constructible]

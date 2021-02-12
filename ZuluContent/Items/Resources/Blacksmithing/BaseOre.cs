@@ -1,11 +1,8 @@
-// GENERATED FILE DO NOT MODIFY BY HAND.
-
-using System;
-using Server.Items;
-using Server.Network;
+using Scripts.Zulu.Engines.Classes;
 using Server.Targeting;
 using Server.Engines.Craft;
 using Server.Mobiles;
+using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.Items
 {
@@ -48,25 +45,11 @@ namespace Server.Items
             }
         }
 
-        private static int RandomSize()
-        {
-            /*  double rand = Utility.RandomDouble();
-
-            if ( rand < 0.12 )
-            return 0x19B7;
-            else if ( rand < 0.18 )
-            return 0x19B8;
-            else if ( rand < 0.25 )
-            return 0x19BA;
-            else */
-            return 0x19B9;
-        }
-
         public BaseOre(CraftResource resource) : this(resource, 1)
         {
         }
 
-        public BaseOre(CraftResource resource, int amount) : base(RandomSize())
+        public BaseOre(CraftResource resource, int amount) : base(0x19B9)
         {
             Stackable = true;
             Amount = amount;
@@ -79,6 +62,21 @@ namespace Server.Items
         {
         }
 
+        private bool IsForge(object obj)
+        {
+            if (obj.GetType().IsDefined(typeof(ForgeAttribute), false))
+                return true;
+
+            int itemID = 0;
+
+            if (obj is Item)
+                itemID = ((Item) obj).ItemID;
+            else if (obj is StaticTarget)
+                itemID = ((StaticTarget) obj).ItemID;
+
+            return (itemID == 4017 || (itemID >= 6522 && itemID <= 6569));
+        }
+
         public override void OnDoubleClick(Mobile from)
         {
             if (!Movable)
@@ -87,339 +85,78 @@ namespace Server.Items
             if (RootParent is BaseCreature)
             {
                 from.SendLocalizedMessage(500447); // That is not accessible
+                return;
             }
-            else if (from.InRange(this.GetWorldLocation(), 2))
-            {
-                from.SendLocalizedMessage(
-                    501971); // Select the forge on which to smelt the ore, or another pile of ore with which to combine it.
-                from.Target = new InternalTarget(this);
-            }
-            else
+
+            if (!from.InRange(this.GetWorldLocation(), 2))
             {
                 from.SendLocalizedMessage(501976); // The ore is too far away.
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private BaseOre m_Ore;
-
-            public InternalTarget(BaseOre ore) : base(2, false, TargetFlags.None)
-            {
-                m_Ore = ore;
+                return;
             }
 
-            private bool IsForge(object obj)
+            var difficulty = Resource switch
             {
-                if (obj.GetType().IsDefined(typeof(ForgeAttribute), false))
-                    return true;
+                CraftResource.Iron => 10.0,
+                CraftResource.Spike => 15.0,
+                CraftResource.Fruity => 20.0,
+                CraftResource.IceRock => 25.0,
+                CraftResource.BlackDwarf => 30.0,
+                CraftResource.Bronze => 35.0,
+                CraftResource.DarkPagan => 40.0,
+                CraftResource.SilverRock => 45.0,
+                CraftResource.Platinum => 50.0,
+                CraftResource.DullCopper => 55.0,
+                CraftResource.Mystic => 60.0,
+                CraftResource.Copper => 65.0,
+                CraftResource.Spectral => 70.0,
+                CraftResource.Onyx => 75.0,
+                CraftResource.OldBritain => 80.0,
+                CraftResource.RedElven => 84.0,
+                CraftResource.Undead => 88.0,
+                CraftResource.Pyrite => 91.0,
+                CraftResource.Virginity => 94.0,
+                CraftResource.Malachite => 95.0,
+                CraftResource.Lavarock => 97.0,
+                CraftResource.Azurite => 98.0,
+                CraftResource.Dripstone => 100.0,
+                CraftResource.Executor => 103.0,
+                CraftResource.Peachblue => 106.0,
+                CraftResource.Destruction => 109.0,
+                CraftResource.Anra => 112.0,
+                CraftResource.Crystal => 115.0,
+                CraftResource.Doom => 118.0,
+                CraftResource.Goddess => 121.0,
+                CraftResource.NewZulu => 125.0,
+                CraftResource.EbonTwilightSapphire => 125.0,
+                CraftResource.DarkSableRuby => 125.0,
+                CraftResource.RadiantNimbusDiamond => 125.0,
+                _ => 0.0
+            };
 
-                int itemID = 0;
-
-                if (obj is Item)
-                    itemID = ((Item) obj).ItemID;
-                else if (obj is StaticTarget)
-                    itemID = ((StaticTarget) obj).ItemID;
-
-                return (itemID == 4017 || (itemID >= 6522 && itemID <= 6569));
-            }
-
-            protected override void OnTarget(Mobile from, object targeted)
+            IPooledEnumerable eable = from.Map.GetItemsInRange(from.Location, 1);
+            foreach (Item nearbyItem in eable)
             {
-                if (m_Ore.Deleted)
-                    return;
-
-                if (!from.InRange(m_Ore.GetWorldLocation(), 2))
+                if (IsForge(nearbyItem))
                 {
-                    from.SendLocalizedMessage(501976); // The ore is too far away.
-                    return;
-                }
-
-                #region Combine Ore
-
-                if (targeted is BaseOre)
-                {
-                    BaseOre ore = (BaseOre) targeted;
-
-                    if (!ore.Movable)
+                    if (!from.ShilCheckSkill(SkillName.Mining, (int) difficulty, 0))
                     {
-                        return;
-                    }
-                    else if (m_Ore == ore)
-                    {
-                        from.SendLocalizedMessage(501972); // Select another pile or ore with which to combine this.
-                        from.Target = new InternalTarget(ore);
-                        return;
-                    }
-                    else if (ore.Resource != m_Ore.Resource)
-                    {
-                        from.SendLocalizedMessage(501979); // You cannot combine ores of different metals.
+                        Consume(1);
+                        from.SendAsciiMessage(MessageFailureHue, "You destroy some ore.");
                         return;
                     }
 
-                    int worth = ore.Amount;
-
-                    if (ore.ItemID == 0x19B9)
-                        worth *= 8;
-                    else if (ore.ItemID == 0x19B7)
-                        worth *= 2;
-                    else
-                        worth *= 4;
-
-                    int sourceWorth = m_Ore.Amount;
-
-                    if (m_Ore.ItemID == 0x19B9)
-                        sourceWorth *= 8;
-                    else if (m_Ore.ItemID == 0x19B7)
-                        sourceWorth *= 2;
-                    else
-                        sourceWorth *= 4;
-
-                    worth += sourceWorth;
-
-                    int plusWeight = 0;
-                    int newID = ore.ItemID;
-
-                    if (ore.DefaultWeight != m_Ore.DefaultWeight)
-                    {
-                        if (ore.ItemID == 0x19B7 || m_Ore.ItemID == 0x19B7)
-                        {
-                            newID = 0x19B7;
-                        }
-                        else if (ore.ItemID == 0x19B9)
-                        {
-                            newID = m_Ore.ItemID;
-                            plusWeight = ore.Amount * 2;
-                        }
-                        else
-                        {
-                            plusWeight = m_Ore.Amount * 2;
-                        }
-                    }
-
-                    if ((ore.ItemID == 0x19B9 && worth > 120000) ||
-                        ((ore.ItemID == 0x19B8 || ore.ItemID == 0x19BA) && worth > 60000) ||
-                        (ore.ItemID == 0x19B7 && worth > 30000))
-                    {
-                        from.SendLocalizedMessage(1062844); // There is too much ore to combine.
-                        return;
-                    }
-                    else if (ore.RootParent is Mobile && (plusWeight + ((Mobile) ore.RootParent).Backpack.TotalWeight) >
-                        ((Mobile) ore.RootParent).Backpack.MaxWeight)
-                    {
-                        from.SendLocalizedMessage(501978); // The weight is too great to combine in a container.
-                        return;
-                    }
-
-                    ore.ItemID = newID;
-
-                    if (ore.ItemID == 0x19B9)
-                        ore.Amount = worth / 8;
-                    else if (ore.ItemID == 0x19B7)
-                        ore.Amount = worth / 2;
-                    else
-                        ore.Amount = worth / 4;
-
-                    m_Ore.Delete();
+                    var ingot = GetIngot();
+                    ingot.Amount = Amount;
+                    from.PlaySound(0x2B);
+                    from.AddToBackpack(ingot);
+                    from.SendAsciiMessage(MessageSuccessHue,
+                        $"You create {Amount} ingots and place them in your pack.");
+                    Delete();
                     return;
                 }
-
-                #endregion
-
-                if (IsForge(targeted))
-                {
-                    double difficulty;
-
-                    switch (m_Ore.Resource)
-                    {
-                        default:
-                            difficulty = 50.0;
-                            break;
-                        case CraftResource.Iron:
-                            difficulty = 0.0;
-                            break;
-                        case CraftResource.Gold:
-                            difficulty = 1.0;
-                            break;
-                        case CraftResource.Spike:
-                            difficulty = 5.0;
-                            break;
-                        case CraftResource.Fruity:
-                            difficulty = 10.0;
-                            break;
-                        case CraftResource.Bronze:
-                            difficulty = 15.0;
-                            break;
-                        case CraftResource.IceRock:
-                            difficulty = 20.0;
-                            break;
-                        case CraftResource.BlackDwarf:
-                            difficulty = 25.0;
-                            break;
-                        case CraftResource.DullCopper:
-                            difficulty = 30.0;
-                            break;
-                        case CraftResource.Platinum:
-                            difficulty = 35.0;
-                            break;
-                        case CraftResource.SilverRock:
-                            difficulty = 40.0;
-                            break;
-                        case CraftResource.DarkPagan:
-                            difficulty = 45.0;
-                            break;
-                        case CraftResource.Copper:
-                            difficulty = 50.0;
-                            break;
-                        case CraftResource.Mystic:
-                            difficulty = 55.0;
-                            break;
-                        case CraftResource.Spectral:
-                            difficulty = 60.0;
-                            break;
-                        case CraftResource.OldBritain:
-                            difficulty = 65.0;
-                            break;
-                        case CraftResource.Onyx:
-                            difficulty = 70.0;
-                            break;
-                        case CraftResource.RedElven:
-                            difficulty = 75.0;
-                            break;
-                        case CraftResource.Undead:
-                            difficulty = 80.0;
-                            break;
-                        case CraftResource.Pyrite:
-                            difficulty = 85.0;
-                            break;
-                        case CraftResource.Virginity:
-                            difficulty = 90.0;
-                            break;
-                        case CraftResource.Malachite:
-                            difficulty = 95.0;
-                            break;
-                        case CraftResource.Lavarock:
-                            difficulty = 97.0;
-                            break;
-                        case CraftResource.Azurite:
-                            difficulty = 98.0;
-                            break;
-                        case CraftResource.Dripstone:
-                            difficulty = 100.0;
-                            break;
-                        case CraftResource.Executor:
-                            difficulty = 104.0;
-                            break;
-                        case CraftResource.Peachblue:
-                            difficulty = 108.0;
-                            break;
-                        case CraftResource.Destruction:
-                            difficulty = 112.0;
-                            break;
-                        case CraftResource.Anra:
-                            difficulty = 116.0;
-                            break;
-                        case CraftResource.Crystal:
-                            difficulty = 119.0;
-                            break;
-                        case CraftResource.Doom:
-                            difficulty = 122.0;
-                            break;
-                        case CraftResource.Goddess:
-                            difficulty = 125.0;
-                            break;
-                        case CraftResource.NewZulu:
-                            difficulty = 129.0;
-                            break;
-                        case CraftResource.EbonTwilightSapphire:
-                            difficulty = 130.0;
-                            break;
-                        case CraftResource.DarkSableRuby:
-                            difficulty = 130.0;
-                            break;
-                        case CraftResource.RadiantNimbusDiamond:
-                            difficulty = 140.0;
-                            break;
-                    }
-
-                    double minSkill = difficulty - 25.0;
-                    double maxSkill = difficulty + 25.0;
-
-                    if (difficulty > 50.0 && difficulty > from.Skills[SkillName.Mining].Value)
-                    {
-                        from.SendLocalizedMessage(501986); // You have no idea how to smelt this strange ore!
-                        return;
-                    }
-
-                    if (m_Ore.ItemID == 0x19B7 && m_Ore.Amount < 2)
-                    {
-                        from.SendLocalizedMessage(
-                            501987); // There is not enough metal-bearing ore in this pile to make an ingot.
-                        return;
-                    }
-
-                    if (from.CheckTargetSkill(SkillName.Mining, targeted, minSkill, maxSkill))
-                    {
-                        int toConsume = m_Ore.Amount;
-
-                        if (toConsume <= 0)
-                        {
-                            from.SendLocalizedMessage(
-                                501987); // There is not enough metal-bearing ore in this pile to make an ingot.
-                        }
-                        else
-                        {
-                            if (toConsume > 30000)
-                                toConsume = 30000;
-
-                            int ingotAmount;
-
-                            if (m_Ore.ItemID == 0x19B7)
-                            {
-                                ingotAmount = toConsume / 2;
-
-                                if (toConsume % 2 != 0)
-                                    --toConsume;
-                            }
-                            else if (m_Ore.ItemID == 0x19B9)
-                            {
-                                ingotAmount = toConsume * 2;
-                            }
-                            else
-                            {
-                                ingotAmount = toConsume;
-                            }
-
-                            BaseIngot ingot = m_Ore.GetIngot();
-                            ingot.Amount = ingotAmount;
-
-                            m_Ore.Consume(toConsume);
-                            from.AddToBackpack(ingot);
-                            //from.PlaySound( 0x57 );
-
-                            from.SendLocalizedMessage(
-                                501988); // You smelt the ore removing the impurities and put the metal in your backpack.
-                        }
-                    }
-                    else
-                    {
-                        if (m_Ore.Amount < 2)
-                        {
-                            if (m_Ore.ItemID == 0x19B9)
-                                m_Ore.ItemID = 0x19B8;
-                            else
-                                m_Ore.ItemID = 0x19B7;
-                        }
-                        else
-                        {
-                            m_Ore.Amount /= 2;
-                        }
-
-                        from.SendLocalizedMessage(
-                            501990); // You burn away the impurities but are left with less useable metal.
-                    }
-                }
             }
+
+            from.SendAsciiMessage(MessageFailureHue, "You must be near a forge to smelt ore!");
         }
     }
 }
