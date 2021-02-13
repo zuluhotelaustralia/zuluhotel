@@ -234,6 +234,18 @@ namespace Server.SkillHandlers
                             if (m_Tamer.ShilCheckSkill(SkillName.AnimalTaming, (int) m_Difficulty,
                                 (int) m_Difficulty * PointMultiplier))
                             {
+                                m_Tamer.RevealingAction();
+                                m_BeingTamed.Remove(m_Creature);
+                                m_Tamer.SendAsciiMessage(MessageSuccessHue,
+                                    $"You successfully tame the {m_Creature.Name}");
+                                m_Creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799,
+                                    m_Tamer.NetState); // It seems to accept you as master.
+                                m_Creature.Owners.Add(m_Tamer);
+                                m_Creature.SetControlMaster(m_Tamer);
+                                PacifyBeast(m_Creature, m_Tamer);
+                            }
+                            else
+                            {
                                 m_BeingTamed.Remove(m_Creature);
                                 m_Tamer.SendAsciiMessage(MessageFailureHue, $"You failed to tame the creature.");
                                 var chance = 80 -
@@ -252,18 +264,6 @@ namespace Server.SkillHandlers
                                                                              (int) UnresponsiveTime
                                                                                  .TotalMilliseconds;
                                 }
-                            }
-                            else
-                            {
-                                m_Tamer.RevealingAction();
-                                m_BeingTamed.Remove(m_Creature);
-                                m_Tamer.SendAsciiMessage(MessageSuccessHue,
-                                    $"You successfully tame the {m_Creature.Name}");
-                                m_Creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799,
-                                    m_Tamer.NetState); // It seems to accept you as master.
-                                m_Creature.Owners.Add(m_Tamer);
-                                m_Creature.SetControlMaster(m_Tamer);
-                                PacifyBeast(m_Creature, m_Tamer);
                             }
                         }
                     }
