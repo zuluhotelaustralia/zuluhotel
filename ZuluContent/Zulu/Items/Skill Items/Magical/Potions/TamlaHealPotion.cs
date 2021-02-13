@@ -1,16 +1,16 @@
 namespace Server.Items
 {
-    public class GrandMageRefreshElixir : BasePotion
+    public class TamlaHeal : BasePotion
     {
-        public override string DefaultName { get; } = "Grand Mage Refresh Elixir";
+        public override string DefaultName { get; } = "a Tamla Heal Potion";
 
-        public override int Hue { get; set; } = 0x486;
+        public override int Hue { get; set; } = 155;
 
-        public GrandMageRefreshElixir() : base(0xEFB, PotionEffect.GrandMageRefreshElixir)
+        public TamlaHeal() : base(0xF0B, PotionEffect.TamlaHeal)
         {
         }
 
-        public GrandMageRefreshElixir(Serial serial) : base(serial)
+        public TamlaHeal(Serial serial) : base(serial)
         {
         }
 
@@ -31,16 +31,16 @@ namespace Server.Items
 
         public override void Drink(Mobile from)
         {
-            if (from.Mana == from.ManaMax)
+            if (from.Hits == from.HitsMax)
             {
-                from.SendLocalizedMessage(501846); // You are at peace.
+                from.SendLocalizedMessage(1049547); // You are already at full health.
                 return;
             }
-            
+
             from.FixedEffect(0x3769, 10, 15);
             from.PlaySound(0x202);
 
-            from.Mana = from.ManaMax;
+            from.Hits = from.HitsMax;
             PlayDrinkEffect(from);
             Consume();
         }

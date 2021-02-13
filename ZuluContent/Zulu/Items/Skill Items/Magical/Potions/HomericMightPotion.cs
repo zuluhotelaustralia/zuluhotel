@@ -50,7 +50,7 @@ namespace Server.Items
     {
         public abstract uint PotionStrength { get; }
 
-        public BaseHomericMightPotion(PotionEffect effect) : base(3835, effect)
+        public BaseHomericMightPotion(PotionEffect effect) : base(0xEFB, effect)
         {
         }
 
@@ -90,6 +90,8 @@ namespace Server.Items
         {
             if (Buff(from))
             {
+                from.FixedEffect(0x3739, 10, 15);
+                from.PlaySound(0x1EA);
                 PlayDrinkEffect(from);
                 Consume();
             }

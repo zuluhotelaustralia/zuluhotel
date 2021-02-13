@@ -44,6 +44,7 @@ namespace Server.Items
         GrandMageRefreshElixir,
         HomericMight,
         GreaterHomericMight,
+        TamlaHeal
     }
 
 	public abstract class BasePotion : Item, ICraftable

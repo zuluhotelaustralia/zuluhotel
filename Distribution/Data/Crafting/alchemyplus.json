@@ -200,7 +200,7 @@
     {
       "ItemType": "Server.Items.HomericMightPotion",
       "Name": "Homeric Might potion",
-      "GroupName": 1061146,
+      "GroupName": 1044397,
       "MinSkill": 40,
       "MaxSkill": 40,
       "Resources": [
@@ -227,7 +227,7 @@
     {
       "ItemType": "Server.Items.GreaterHomericMightPotion",
       "Name": "Greater Homeric Might potion",
-      "GroupName": 1061146,
+      "GroupName": 1044397,
       "MinSkill": 75,
       "MaxSkill": 75,
       "Resources": [
@@ -252,7 +252,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.TamlaHealPotion",
       "Name": "Tamla Heal potion",
       "GroupName": 1075867,
       "MinSkill": 115,

@@ -97,8 +97,8 @@ namespace Server.Items
             
             if (SpellHelper.AddStatOffset(from, StatType.Int, mod, TimeSpan.FromSeconds(PotionStrength * 20)))
             {
-                from.FixedEffect(14137, 10, 15);
-                from.PlaySound(491);
+                from.FixedEffect(0x3739, 10, 15);
+                from.PlaySound(0x1EB);
                 return true;
             }
 
