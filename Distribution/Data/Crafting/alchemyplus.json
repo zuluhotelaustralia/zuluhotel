@@ -285,7 +285,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.TaintsTransmutationPotion",
       "Name": "Taint's Minor Transmutation",
       "GroupName": 1075824,
       "MinSkill": 70,
@@ -312,7 +312,7 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.TaintsMajorTransmutationPotion",
       "Name": "Taint's Major Transmutation",
       "GroupName": 1075824,
       "MinSkill": 90,

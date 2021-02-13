@@ -8,7 +8,35 @@ namespace Server.Spells.Seventh
 {
     public class PolymorphSpell : MagerySpell
     {
-        private static readonly Hashtable m_Timers = new Hashtable();
+        public static readonly PolymorphCategory[] Categories =
+        {
+            new(1015235, // Animals
+                PolymorphEntry.Chicken,
+                PolymorphEntry.Dog,
+                PolymorphEntry.Wolf,
+                PolymorphEntry.Panther,
+                PolymorphEntry.Gorilla,
+                PolymorphEntry.BlackBear,
+                PolymorphEntry.GrizzlyBear,
+                PolymorphEntry.PolarBear,
+                PolymorphEntry.HumanMale
+            ),
+
+            new(1015245, // Monsters
+                PolymorphEntry.Slime,
+                PolymorphEntry.Orc,
+                PolymorphEntry.LizardMan,
+                PolymorphEntry.Gargoyle,
+                PolymorphEntry.Ogre,
+                PolymorphEntry.Troll,
+                PolymorphEntry.Ettin,
+                PolymorphEntry.Daemon,
+                PolymorphEntry.HumanFemale
+            )
+        };
+        
+        private static readonly Hashtable Timers = new();
+        
 
         private readonly int m_NewBody;
 
@@ -50,7 +78,7 @@ namespace Server.Spells.Seventh
 
             if (m_NewBody == 0)
             {
-                Gump gump = new PolymorphGump(Caster, Scroll);
+                Gump gump = new PolymorphGump(Caster, Scroll, Categories);
 
                 Caster.SendGump(gump);
                 return false;
@@ -101,17 +129,14 @@ namespace Server.Spells.Seventh
                             Caster.HueMod = Race.DefaultRace.RandomSkinHue();
                         else
                             Caster.HueMod = 0;
+                        
+                        var val = (int) Caster.Skills[SkillName.Magery].Value;
+                        var duration = TimeSpan.FromSeconds(val > 120 ? 120 : val);
 
                         BaseArmor.ValidateMobile(Caster);
                         BaseClothing.ValidateMobile(Caster);
 
-                        StopTimer(Caster);
-
-                        Timer t = new InternalTimer(Caster);
-
-                        m_Timers[Caster] = t;
-
-                        t.Start();
+                        Buff(Caster, m_NewBody, duration);
                     }
                 }
                 else
@@ -123,14 +148,54 @@ namespace Server.Spells.Seventh
             FinishSequence();
         }
 
+        public static bool Buff(Mobile caster, int body, TimeSpan duration)
+        {
+            if (caster.BeginAction(typeof(PolymorphSpell)))
+            {
+                if (body != 0)
+                {
+                    if (!((Body) body).IsHuman)
+                    {
+                        var mt = caster.Mount;
+
+                        if (mt != null)
+                            mt.Rider = null;
+                    }
+
+                    caster.BodyMod = body;
+
+                    if (body == 400 || body == 401)
+                        caster.HueMod = Race.DefaultRace.RandomSkinHue();
+                    else
+                        caster.HueMod = 0;
+
+                    BaseArmor.ValidateMobile(caster);
+                    BaseClothing.ValidateMobile(caster);
+
+                    StopTimer(caster);
+                    
+                    Timer t = new InternalTimer(caster, duration);
+                    Timers[caster] = t;
+
+                    t.Start();
+                    return true;
+                }
+            }
+            else
+            {
+                caster.SendLocalizedMessage(1005559); // This spell is already in effect.
+            }
+            return false;
+        }
+
         public static bool StopTimer(Mobile m)
         {
-            var t = (Timer) m_Timers[m];
+            var t = (Timer) Timers[m];
 
             if (t != null)
             {
                 t.Stop();
-                m_Timers.Remove(m);
+                Timers.Remove(m);
             }
 
             return t != null;
@@ -153,16 +218,9 @@ namespace Server.Spells.Seventh
         {
             private readonly Mobile m_Owner;
 
-            public InternalTimer(Mobile owner) : base(TimeSpan.FromSeconds(0))
+            public InternalTimer(Mobile owner, TimeSpan duration) : base(duration)
             {
                 m_Owner = owner;
-
-                var val = (int) owner.Skills[SkillName.Magery].Value;
-
-                if (val > 120)
-                    val = 120;
-
-                Delay = TimeSpan.FromSeconds(val);
                 Priority = TimerPriority.OneSecond;
             }
 
