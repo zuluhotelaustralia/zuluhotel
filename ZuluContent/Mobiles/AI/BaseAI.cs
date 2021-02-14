@@ -21,7 +21,8 @@ namespace Server.Mobiles
         AI_Mage,
         AI_Berserk,
         AI_Predator,
-        AI_Thief
+        AI_Thief,
+        AI_Familiar,
     }
 
     public enum ActionType
@@ -1096,7 +1097,7 @@ namespace Server.Mobiles
             return true;
         }
 
-        public virtual bool DoOrderFollow()
+        public virtual bool DoOrderFollow(bool alwaysRun = false)
         {
             if (CheckHerding())
             {
@@ -1126,7 +1127,7 @@ namespace Server.Mobiles
                     m_Mobile.DebugSay("My master told me to follow: {0}", m_Mobile.ControlTarget.Name);
 
                     // Not exactly OSI style, but better than nothing.
-                    bool bRun = iCurrDist > 5;
+                    bool bRun = alwaysRun || iCurrDist > 5;
 
                     if (WalkMobileRange(m_Mobile.ControlTarget, 1, bRun, 0, 1))
                     {

@@ -95,7 +95,7 @@ namespace Server.Mobiles
             {
                 SayTo(from, 1042562); // You do not own that pet!
             }
-            else if (pet.Summoned)
+            else if (pet.Summoned || pet.AI == AIType.AI_Familiar)
             {
                 SayTo(from, 502673); // I can not stable summoned creatures.
             }

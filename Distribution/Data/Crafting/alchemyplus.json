@@ -339,9 +339,9 @@
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.Totem",
       "Name": "Totem",
-      "GroupName": "Familiars",
+      "GroupName": 1061664,
       "MinSkill": 130,
       "MaxSkill": 130,
       "Resources": [
@@ -359,18 +359,18 @@
         },
         {
           "ItemType": "Server.Items.TrollHides",
-          "Name": 1017412,
+          "Name": "Troll Hides",
           "Amount": 6,
           "Message": "You do not have enough Troll Hides to make that."
         }
       ]
     },
     {
-      "ItemType": "Server.Items.RefreshPotion",
+      "ItemType": "Server.Items.TotemElixir",
       "Name": "Elixir",
-      "GroupName": "Familiars",
-      "MinSkill": 125,
-      "MaxSkill": 125,
+      "GroupName": 1061664,
+      "MinSkill": 130,
+      "MaxSkill": 130,
       "Resources": [
         {
           "ItemType": "Server.Items.WyrmsHeart",

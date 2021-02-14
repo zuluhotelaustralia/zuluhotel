@@ -110,7 +110,7 @@ namespace Server.Spells.Fourth
             }
         }
 
-        private class InternalTarget : Target
+        public class InternalTarget : Target
         {
             private readonly ArchProtectionSpell m_Owner;
 
