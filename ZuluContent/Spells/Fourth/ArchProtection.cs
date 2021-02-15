@@ -44,7 +44,7 @@ namespace Server.Spells.Fourth
                     eable.Free();
                 }
 
-                Effects.PlaySound((Point3D)p, Caster.Map, 0x299);
+                Effects.PlaySound(new Point3D(p), Caster.Map, 0x299);
 
                 var val = (int) (Caster.Skills[SkillName.Magery].Value / 10.0 + 1);
                 

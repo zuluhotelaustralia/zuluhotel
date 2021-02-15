@@ -75,7 +75,7 @@ namespace Server.Mobiles
                 HitSound = 0x1A9,
                 MissSound = 0x239
             });
-            
+
             AddItem(new HeaterShield
             {
                 Movable = false,
@@ -85,9 +85,14 @@ namespace Server.Mobiles
                 HitPoints = 400
             });
 
+            Backpack?.Delete();
+            var pack = new StrongBackpack {Movable = false};
+            AddItem(pack);
+
             RemoveIfUntamed = true;
         }
 
+        public override bool CanDrop { get; } = true;
         public override bool CanBeDistracted { get; } = false;
 
         [Constructible]
@@ -104,7 +109,7 @@ namespace Server.Mobiles
         {
             return m == ControlMaster;
         }
-        
+
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);

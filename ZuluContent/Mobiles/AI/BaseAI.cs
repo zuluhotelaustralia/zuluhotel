@@ -142,7 +142,7 @@ namespace Server.Mobiles
 
             if (order == OrderType.Attack)
             {
-                if (target is BaseCreature && ((BaseCreature) target).IsScaryToPets && m_Mobile.IsScaredOfScaryThings)
+                if (target is BaseCreature {IsScaryToPets: true} && m_Mobile.IsScaredOfScaryThings)
                 {
                     m_Mobile.SayTo(from, "Your pet refuses to attack this creature!");
                     return;

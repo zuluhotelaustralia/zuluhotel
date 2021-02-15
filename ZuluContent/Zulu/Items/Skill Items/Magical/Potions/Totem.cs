@@ -97,6 +97,7 @@ namespace Server.Items
 
         public override int Hue { get; set; } = 746;
         
+        [Constructible]
         public Totem() : base(0x20D8)
         {
         }
@@ -124,6 +125,7 @@ namespace Server.Items
 
         public override int Hue { get; set; } = 0;
 
+        [Constructible]
         public TotemElixir() : base(0xE27)
         {
         }

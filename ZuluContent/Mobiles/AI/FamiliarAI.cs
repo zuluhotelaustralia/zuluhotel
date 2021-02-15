@@ -10,6 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Items;
+using Server.Scripts.Engines.Loot;
 using Server.Spells.First;
 using Server.Spells.Fourth;
 using Server.Spells.Second;
@@ -40,7 +42,7 @@ namespace Server.Mobiles
             },
             ["loot"] = (familiar, _) =>
             {
-                //DoLoot()
+                familiar.ControlOrder = OrderType.Loot;
             },
             ["fetch"] = (familiar, _) =>
             {
@@ -51,6 +53,10 @@ namespace Server.Mobiles
                 familiar.PlaySound(0x253);
             }
         };
+
+        private readonly IList<Item> m_ItemsToLoot = new List<Item>();
+        private const int LootDelay = 1_000;
+        private long m_NextLootTime = 0;
 
         public FamiliarAI(BaseCreature m) : base(m)
         {
@@ -69,8 +75,8 @@ namespace Server.Mobiles
                     {
                         case CureSpell.InternalTarget:
                         case GreaterHealSpell.InternalTarget:
-                        case ArchProtectionSpell.InternalTarget:
                         case BlessSpell.InternalTarget:
+                        case ArchProtectionSpell.InternalTarget:
                             m_Mobile.Target.Invoke(m_Mobile, m_Mobile.ControlMaster);
                             break;
                         default:
@@ -83,6 +89,10 @@ namespace Server.Mobiles
                     m_Mobile.Target.Cancel(m_Mobile, TargetCancelType.Canceled);
                 }
             }
+
+            if (m_Mobile.ControlOrder == OrderType.Loot) 
+                return DoOrderLoot();
+
 
             return base.Obey();
         }
@@ -106,6 +116,103 @@ namespace Server.Mobiles
                     m_Mobile.DebugSay("I am low on health!");
                     Action = ActionType.Flee;
                 }
+            }
+
+            return true;
+        }
+
+        public override void OnCurrentOrderChanged()
+        {
+            switch (m_Mobile.ControlOrder)
+            {
+                case OrderType.Loot:
+                {
+                    var map = m_Mobile.Map;
+                    IPooledEnumerable eable = map.GetItemsInRange(m_Mobile.Location, m_Mobile.RangePerception);
+
+                    
+                    foreach (Item item in eable)
+                    {
+                        if (
+                            (item.Movable && item.Decays || item is Corpse) 
+                            && map.LineOfSight(m_Mobile, item) 
+                            && item.IsAccessibleTo(m_Mobile)
+                        )
+                        {
+                            m_ItemsToLoot.Add(item);
+                        }
+                    }
+            
+                    eable.Free();
+                    break;
+                }
+                default:
+                    base.OnCurrentOrderChanged();
+                    break;
+            }
+        }
+
+        public bool DoOrderLoot()
+        {
+            if (m_NextLootTime > Core.TickCount)
+                return true;
+
+            static void LootItem(FamiliarAI ai, Item item)
+            {
+                if (item == null || !item.Movable)
+                    return;
+                
+                ai.m_Mobile.DebugSay($"I am looting {item}.");
+                ai.m_Mobile.Backpack?.DropItem(item);
+                ai.m_Mobile.Say("* Yoink *");
+
+                ai.m_NextLootTime = Core.TickCount + LootDelay;
+            }
+
+            if (m_ItemsToLoot.Count > 0)
+            {
+                var item = m_ItemsToLoot[0];
+
+                if (!m_Mobile.Map.LineOfSight(m_Mobile, item) || !item.IsAccessibleTo(m_Mobile))
+                {
+                    m_Mobile.DebugSay($"I tried to loot {item} but it's not in my line or sight, or accessible.");
+                    m_ItemsToLoot.Remove(item);
+                    return true;
+                }
+                
+                if (
+                    (item.X != m_Mobile.Location.X || item.Y != m_Mobile.Location.Y) 
+                    && item.Map == m_Mobile.Map 
+                    && item.Parent == null 
+                    && !item.Deleted
+                )
+                {
+                    m_Mobile.DebugSay($"I will move towards looting {item.Name}.");
+                    DoMove(m_Mobile.GetDirectionTo(item.Location));
+                }
+                else if(item is Corpse corpse)
+                {
+                    m_Mobile.DebugSay($"I will loot corpse {corpse.Name}.");
+
+                    if (corpse.Items.Count == 0)
+                    {
+                        m_ItemsToLoot.Remove(corpse);
+                        m_Mobile.DebugSay($"Corpse is empty {corpse.Name}, moving on.");
+                    }
+                    else
+                    {
+                        LootItem(this, corpse.Items.FirstOrDefault());
+                    }
+                }
+                else
+                {
+                    LootItem(this, item);
+                    m_ItemsToLoot.Remove(item);
+                }
+            }
+            else
+            {
+                m_Mobile.ControlOrder = OrderType.Follow;
             }
 
             return true;
