@@ -589,6 +589,8 @@ namespace Server.Mobiles
                     }
                 }
 
+                eable.Free();
+
                 if (m_bSummoned)
                 {
                     var magery = m.Skills[SkillName.Magery].Value;

@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Items
 {
@@ -9,18 +12,18 @@ namespace Server.Items
         Iron = 1,
         Spike = 2,
         Fruity = 3,
-        Bronze = 4,
-        IceRock = 5,
-        BlackDwarf = 6,
-        DullCopper = 7,
-        Platinum = 8,
-        SilverRock = 9,
-        DarkPagan = 10,
-        Copper = 11,
-        Mystic = 12,
+        IceRock = 4,
+        BlackDwarf = 5,
+        Bronze = 6,
+        DarkPagan = 7,
+        SilverRock = 8,
+        Platinum = 9,
+        DullCopper = 10,
+        Mystic = 11,
+        Copper = 12,
         Spectral = 13,
-        OldBritain = 14,
-        Onyx = 15,
+        Onyx = 14,
+        OldBritain = 15,
         RedElven = 16,
         Undead = 17,
         Pyrite = 18,
@@ -37,8 +40,8 @@ namespace Server.Items
         Doom = 29,
         Goddess = 30,
         NewZulu = 31,
-        DarkSableRuby = 32,
-        EbonTwilightSapphire = 33,
+        EbonTwilightSapphire = 32,
+        DarkSableRuby = 33,
         RadiantNimbusDiamond = 34,
 
         RegularLeather = 101,
@@ -92,785 +95,26 @@ namespace Server.Items
         Wood
     }
 
-    public class CraftAttributeInfo
-    {
-        private int m_WeaponDurability;
-        private int m_WeaponLowerRequirements;
-
-        private int m_ArmorDurability;
-        private int m_ArmorLowerRequirements;
-
-        private int m_RunicMinAttributes;
-        private int m_RunicMaxAttributes;
-        private int m_RunicMinIntensity;
-        private int m_RunicMaxIntensity;
-
-        public int WeaponDurability
-        {
-            get { return m_WeaponDurability; }
-            set { m_WeaponDurability = value; }
-        }
-
-        public int WeaponLowerRequirements
-        {
-            get { return m_WeaponLowerRequirements; }
-            set { m_WeaponLowerRequirements = value; }
-        }
-
-        public int ArmorDurability
-        {
-            get { return m_ArmorDurability; }
-            set { m_ArmorDurability = value; }
-        }
-
-        public int ArmorLowerRequirements
-        {
-            get { return m_ArmorLowerRequirements; }
-            set { m_ArmorLowerRequirements = value; }
-        }
-
-        public int RunicMinAttributes
-        {
-            get { return m_RunicMinAttributes; }
-            set { m_RunicMinAttributes = value; }
-        }
-
-        public int RunicMaxAttributes
-        {
-            get { return m_RunicMaxAttributes; }
-            set { m_RunicMaxAttributes = value; }
-        }
-
-        public int RunicMinIntensity
-        {
-            get { return m_RunicMinIntensity; }
-            set { m_RunicMinIntensity = value; }
-        }
-
-        public int RunicMaxIntensity
-        {
-            get { return m_RunicMaxIntensity; }
-            set { m_RunicMaxIntensity = value; }
-        }
-
-        public int ArmorEnergyResist { get; set; }
-
-        public int ArmorPoisonResist { get; set; }
-
-        public int ArmorColdResist { get; set; }
-
-        public int ArmorFireResist { get; set; }
-
-        public CraftAttributeInfo()
-        {
-        }
-
-        public static readonly CraftAttributeInfo Blank;
-
-        public static readonly CraftAttributeInfo
-            Gold,
-            Spike,
-            Fruity,
-            Bronze,
-            IceRock,
-            BlackDwarf,
-            DullCopper,
-            Platinum,
-            SilverRock,
-            DarkPagan,
-            Copper,
-            Mystic,
-            Spectral,
-            OldBritain,
-            Onyx,
-            RedElven,
-            Undead,
-            Pyrite,
-            Virginity,
-            Malachite,
-            Lavarock,
-            Azurite,
-            Dripstone,
-            Executor,
-            Peachblue,
-            Destruction,
-            Anra,
-            Crystal,
-            Doom,
-            Goddess,
-            NewZulu,
-            DarkSableRuby,
-            EbonTwilightSapphire,
-            RadiantNimbusDiamond;
-
-        public static readonly CraftAttributeInfo
-            Rat,
-            Wolf,
-            Bear,
-            Serpent,
-            Lizard,
-            Troll,
-            Ostard,
-            Necromancer,
-            Lava,
-            Liche,
-            IceCrystal,
-            Dragon,
-            Wyrm,
-            Balron,
-            GoldenDragon;
-
-        public static readonly CraftAttributeInfo
-            Pinetree,
-            Cherry,
-            Oak,
-            PurplePassion,
-            GoldenReflection,
-            Hardranger,
-            Jadewood,
-            Darkwood,
-            Stonewood,
-            Sunwood,
-            Gauntlet,
-            Swampwood,
-            Stardust,
-            Silverleaf,
-            Stormteal,
-            Emeraldwood,
-            Bloodwood,
-            Crystalwood,
-            Bloodhorse,
-            Doomwood,
-            Zulu,
-            Darkness,
-            Elven;
-
-        static CraftAttributeInfo()
-        {
-            Blank = new CraftAttributeInfo();
-
-            Gold = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Spike = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Fruity = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Bronze = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            IceRock = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            BlackDwarf = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            DullCopper = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Platinum = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            SilverRock = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            DarkPagan = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Copper = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Mystic = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Spectral = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            OldBritain = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Onyx = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            RedElven = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Undead = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Pyrite = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Virginity = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Malachite = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Lavarock = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Azurite = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Dripstone = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Executor = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Peachblue = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Destruction = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Anra = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Crystal = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Doom = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Goddess = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            NewZulu = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            DarkSableRuby = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            EbonTwilightSapphire = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            RadiantNimbusDiamond = new CraftAttributeInfo
-            {
-                ArmorDurability = 50,
-                ArmorLowerRequirements = 20,
-                WeaponDurability = 100,
-                WeaponLowerRequirements = 50,
-                RunicMinAttributes = 1,
-                RunicMaxAttributes = 2,
-                RunicMinIntensity = 10,
-                RunicMaxIntensity = 35,
-            };
-
-            Rat = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-                RunicMinIntensity = 40,
-                RunicMaxIntensity = 100
-            };
-
-
-            Wolf = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Bear = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Serpent = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Lizard = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Troll = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Ostard = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Necromancer = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Lava = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Liche = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            IceCrystal = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Dragon = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Wyrm = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            Balron = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-            GoldenDragon = new CraftAttributeInfo
-            {
-                ArmorFireResist = 1,
-                ArmorColdResist = 2,
-                ArmorPoisonResist = 3,
-                ArmorEnergyResist = 4,
-                RunicMinAttributes = 4,
-                RunicMaxAttributes = 5,
-            };
-
-            Pinetree = new CraftAttributeInfo();
-            Cherry = new CraftAttributeInfo();
-            Oak = new CraftAttributeInfo();
-            PurplePassion = new CraftAttributeInfo();
-            GoldenReflection = new CraftAttributeInfo();
-            Hardranger = new CraftAttributeInfo();
-            Jadewood = new CraftAttributeInfo();
-            Darkwood = new CraftAttributeInfo();
-            Stonewood = new CraftAttributeInfo();
-            Sunwood = new CraftAttributeInfo();
-            Gauntlet = new CraftAttributeInfo();
-            Swampwood = new CraftAttributeInfo();
-            Stardust = new CraftAttributeInfo();
-            Silverleaf = new CraftAttributeInfo();
-            Stormteal = new CraftAttributeInfo();
-            Emeraldwood = new CraftAttributeInfo();
-            Bloodwood = new CraftAttributeInfo();
-            Crystalwood = new CraftAttributeInfo();
-            Bloodhorse = new CraftAttributeInfo();
-            Doomwood = new CraftAttributeInfo();
-            Zulu = new CraftAttributeInfo();
-            Darkness = new CraftAttributeInfo();
-            Elven = new CraftAttributeInfo();
-        }
-    }
-
     public class CraftResourceInfo
     {
-        private int m_Hue;
-        private int m_Number;
-        private string m_Name;
-        private CraftAttributeInfo m_AttributeInfo;
-        private CraftResource m_Resource;
-        private Type[] m_ResourceTypes;
+        public int Hue { get; private set; }
 
-        public int Hue
-        {
-            get { return m_Hue; }
-        }
+        public string Name { get; private set; }
 
-        public int Number
-        {
-            get { return m_Number; }
-        }
+        public CraftResource Resource { get; private set; }
 
-        public string Name
-        {
-            get { return m_Name; }
-        }
+        public Type[] ResourceTypes { get; private set; }
 
-        public CraftAttributeInfo AttributeInfo
-        {
-            get { return m_AttributeInfo; }
-        }
+        public Dictionary<Type, int> Enchantments { get; private set; }
 
-        public CraftResource Resource
+        public CraftResourceInfo(int hue, string name,
+            CraftResource resource, Dictionary<Type, int> enchantments, params Type[] resourceTypes)
         {
-            get { return m_Resource; }
-        }
-
-        public Type[] ResourceTypes
-        {
-            get { return m_ResourceTypes; }
-        }
-
-        public CraftResourceInfo(int hue, int number, string name, CraftAttributeInfo attributeInfo,
-            CraftResource resource, params Type[] resourceTypes)
-        {
-            m_Hue = hue;
-            m_Number = number;
-            m_Name = name;
-            m_AttributeInfo = attributeInfo;
-            m_Resource = resource;
-            m_ResourceTypes = resourceTypes;
+            Hue = hue;
+            Name = name;
+            Resource = resource;
+            Enchantments = enchantments;
+            ResourceTypes = resourceTypes;
 
             foreach (var t in resourceTypes)
                 CraftResources.RegisterType(t, resource);
@@ -879,167 +123,96 @@ namespace Server.Items
 
     public class CraftResources
     {
-        public static readonly CraftResourceInfo[] MetalInfo =
-        {
-            new CraftResourceInfo(0x0, 1053109, "iron", CraftAttributeInfo.Blank, CraftResource.Iron, typeof(IronIngot),
-                typeof(IronOre)),
-            new CraftResourceInfo(1223, 1160001, "spike", CraftAttributeInfo.Spike, CraftResource.Spike,
-                typeof(SpikeIngot), typeof(SpikeOre)),
-            new CraftResourceInfo(1134, 1160002, "fruity", CraftAttributeInfo.Fruity, CraftResource.Fruity,
-                typeof(FruityIngot), typeof(FruityOre)),
-            new CraftResourceInfo(0x45e, 1160003, "bronze", CraftAttributeInfo.Bronze, CraftResource.Bronze,
-                typeof(BronzeIngot), typeof(BronzeOre)),
-            new CraftResourceInfo(1152, 1160004, "icerock", CraftAttributeInfo.IceRock, CraftResource.IceRock,
-                typeof(IceRockIngot), typeof(IceRockOre)),
-            new CraftResourceInfo(1105, 1160005, "blackdwarf", CraftAttributeInfo.BlackDwarf,
-                CraftResource.BlackDwarf, typeof(BlackDwarfIngot), typeof(BlackDwarfOre)),
-            new CraftResourceInfo(0x3ea, 1160006, "dull copper", CraftAttributeInfo.DullCopper,
-                CraftResource.DullCopper, typeof(DullCopperIngot), typeof(DullCopperOre)),
-            new CraftResourceInfo(1111, 1160007, "platinum", CraftAttributeInfo.Platinum, CraftResource.Platinum,
-                typeof(PlatinumIngot), typeof(PlatinumOre)),
-            new CraftResourceInfo(1001, 1160008, "silverrock", CraftAttributeInfo.SilverRock,
-                CraftResource.SilverRock, typeof(SilverRockIngot), typeof(SilverRockOre)),
-            new CraftResourceInfo(1131, 1160009, "darkpagan", CraftAttributeInfo.DarkPagan, CraftResource.DarkPagan,
-                typeof(DarkPaganIngot), typeof(DarkPaganOre)),
-            new CraftResourceInfo(0x602, 1160010, "copper", CraftAttributeInfo.Copper, CraftResource.Copper,
-                typeof(CopperIngot), typeof(CopperOre)),
-            new CraftResourceInfo(383, 1160011, "mystic", CraftAttributeInfo.Mystic, CraftResource.Mystic,
-                typeof(MysticIngot), typeof(MysticOre)),
-            new CraftResourceInfo(1155, 1160012, "spectral", CraftAttributeInfo.Spectral, CraftResource.Spectral,
-                typeof(SpectralIngot), typeof(SpectralOre)),
-            new CraftResourceInfo(0x852, 1160013, "oldbritain", CraftAttributeInfo.OldBritain,
-                CraftResource.OldBritain, typeof(OldBritainIngot), typeof(OldBritainOre)),
-            new CraftResourceInfo(0x455, 1160014, "onyx", CraftAttributeInfo.Onyx, CraftResource.Onyx,
-                typeof(OnyxIngot), typeof(OnyxOre)),
-            new CraftResourceInfo(1209, 1160015, "redelven", CraftAttributeInfo.RedElven, CraftResource.RedElven,
-                typeof(RedElvenIngot), typeof(RedElvenOre)),
-            new CraftResourceInfo(633, 1160016, "undead", CraftAttributeInfo.Undead, CraftResource.Undead,
-                typeof(UndeadIngot), typeof(UndeadOre)),
-            new CraftResourceInfo(0x6b8, 1160017, "pyrite", CraftAttributeInfo.Pyrite, CraftResource.Pyrite,
-                typeof(PyriteIngot), typeof(PyriteOre)),
-            new CraftResourceInfo(1154, 1160018, "virginity", CraftAttributeInfo.Virginity, CraftResource.Virginity,
-                typeof(VirginityIngot), typeof(VirginityOre)),
-            new CraftResourceInfo(1159, 1160019, "malachite", CraftAttributeInfo.Malachite, CraftResource.Malachite,
-                typeof(MalachiteIngot), typeof(MalachiteOre)),
-            new CraftResourceInfo(1158, 1160020, "lavarock", CraftAttributeInfo.Lavarock, CraftResource.Lavarock,
-                typeof(LavarockIngot), typeof(LavarockOre)),
-            new CraftResourceInfo(0x4df, 1160021, "azurite", CraftAttributeInfo.Azurite, CraftResource.Azurite,
-                typeof(AzuriteIngot), typeof(AzuriteOre)),
-            new CraftResourceInfo(0x49e, 1160022, "dripstone", CraftAttributeInfo.Dripstone, CraftResource.Dripstone,
-                typeof(DripstoneIngot), typeof(DripstoneOre)),
-            new CraftResourceInfo(0x499, 1160023, "executor", CraftAttributeInfo.Executor, CraftResource.Executor,
-                typeof(ExecutorIngot), typeof(ExecutorOre)),
-            new CraftResourceInfo(0x49c, 1160024, "peachblue", CraftAttributeInfo.Peachblue, CraftResource.Peachblue,
-                typeof(PeachblueIngot), typeof(PeachblueOre)),
-            new CraftResourceInfo(0x500, 1160025, "destruction", CraftAttributeInfo.Destruction,
-                CraftResource.Destruction, typeof(DestructionIngot), typeof(DestructionOre)),
-            new CraftResourceInfo(0x48b, 1160026, "anra", CraftAttributeInfo.Anra, CraftResource.Anra,
-                typeof(AnraIngot), typeof(AnraOre)),
-            new CraftResourceInfo(0x492, 1160027, "crystal", CraftAttributeInfo.Crystal, CraftResource.Crystal,
-                typeof(CrystalIngot), typeof(CrystalOre)),
-            new CraftResourceInfo(0x49f, 1160028, "doom", CraftAttributeInfo.Doom, CraftResource.Doom,
-                typeof(DoomIngot),
-                typeof(DoomOre)),
-            new CraftResourceInfo(0x501, 1160029, "goddess", CraftAttributeInfo.Goddess, CraftResource.Goddess,
-                typeof(GoddessIngot), typeof(GoddessOre)),
-            new CraftResourceInfo(1160, 1160030, "new Zulu", CraftAttributeInfo.NewZulu, CraftResource.NewZulu,
-                typeof(NewZuluIngot), typeof(NewZuluOre)),
-            new CraftResourceInfo(1172, 1160032, "Dark Sable Ruby", CraftAttributeInfo.DarkSableRuby,
-                CraftResource.DarkSableRuby, typeof(DarkSableRubyIngot), typeof(DarkSableRubyOre)
-            ),
-            new CraftResourceInfo(1171, 1160031, "Ebon Twilight Sapphire", CraftAttributeInfo.EbonTwilightSapphire,
-                CraftResource.EbonTwilightSapphire, typeof(EbonTwilightSapphireIngot), typeof(EbonTwilightSapphireOre)
-            ),
-            new CraftResourceInfo(1176, 1160033, "Radiant Nimbus Diamond", CraftAttributeInfo.RadiantNimbusDiamond,
-                CraftResource.RadiantNimbusDiamond, typeof(RadiantNimbusDiamondIngot), typeof(RadiantNimbusDiamondOre)
-            ),
-        };
+        public static readonly CraftResourceInfo[] MetalInfo = OreConfiguration.Entries.Select((e, i) =>
+            new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 1),
+                e.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
+                e.SmeltType, e.ResourceType)).ToArray();
 
         public static readonly CraftResourceInfo[] LeatherInfo =
         {
-            new CraftResourceInfo(0x000, 1049353, "Normal", CraftAttributeInfo.Blank, CraftResource.RegularLeather,
+            new CraftResourceInfo(0x000, "Normal", CraftResource.RegularLeather, null,
                 typeof(Leather), typeof(Hides)),
-            new CraftResourceInfo(0x7e2, 1160415, "Rat", CraftAttributeInfo.Rat, CraftResource.RatLeather,
+            new CraftResourceInfo(0x7e2, "Rat", CraftResource.RatLeather, null,
                 typeof(RatLeather), typeof(RatHides)),
-            new CraftResourceInfo(1102, 1160416, "Wolf", CraftAttributeInfo.Wolf, CraftResource.WolfLeather,
+            new CraftResourceInfo(1102, "Wolf", CraftResource.WolfLeather, null,
                 typeof(WolfLeather), typeof(WolfHides)),
-            new CraftResourceInfo(44, 1160417, "Bear", CraftAttributeInfo.Bear, CraftResource.BearLeather,
+            new CraftResourceInfo(44, "Bear", CraftResource.BearLeather, null,
                 typeof(BearLeather), typeof(BearHides)),
-            new CraftResourceInfo(0x8fd, 1160418, "Serpent", CraftAttributeInfo.Serpent, CraftResource.SerpentLeather,
+            new CraftResourceInfo(0x8fd, "Serpent", CraftResource.SerpentLeather, null,
                 typeof(SerpentLeather), typeof(SerpentHides)),
-            new CraftResourceInfo(0x852, 1160419, "Lizard", CraftAttributeInfo.Lizard, CraftResource.LizardLeather,
+            new CraftResourceInfo(0x852, "Lizard", CraftResource.LizardLeather, null,
                 typeof(LizardLeather), typeof(LizardHides)),
-            new CraftResourceInfo(0x54a, 1160420, "Troll", CraftAttributeInfo.Troll, CraftResource.TrollLeather,
+            new CraftResourceInfo(0x54a, "Troll", CraftResource.TrollLeather, null,
                 typeof(TrollLeather), typeof(TrollHides)),
-            new CraftResourceInfo(0x415, 1160421, "Ostard", CraftAttributeInfo.Ostard, CraftResource.OstardLeather,
+            new CraftResourceInfo(0x415, "Ostard", CraftResource.OstardLeather, null,
                 typeof(OstardLeather), typeof(OstardHides)),
-            new CraftResourceInfo(84, 1160422, "Necromancer", CraftAttributeInfo.Necromancer,
-                CraftResource.NecromancerLeather, typeof(NecromancerLeather), typeof(NecromancerHides)),
-            new CraftResourceInfo(2747, 1160423, "Lava", CraftAttributeInfo.Lava, CraftResource.LavaLeather,
+            new CraftResourceInfo(84, "Necromancer",
+                CraftResource.NecromancerLeather, null, typeof(NecromancerLeather), typeof(NecromancerHides)),
+            new CraftResourceInfo(2747, "Lava", CraftResource.LavaLeather, null,
                 typeof(LavaLeather), typeof(LavaHides)),
-            new CraftResourceInfo(2763, 1160424, "Liche", CraftAttributeInfo.Liche, CraftResource.LicheLeather,
+            new CraftResourceInfo(2763, "Liche", CraftResource.LicheLeather, null,
                 typeof(LicheLeather), typeof(LicheHides)),
-            new CraftResourceInfo(2759, 1160425, "Ice Crystal", CraftAttributeInfo.IceCrystal,
-                CraftResource.IceCrystalLeather, typeof(IceCrystalLeather), typeof(IceCrystalHides)),
-            new CraftResourceInfo(2761, 1160426, "Dragon", CraftAttributeInfo.Dragon, CraftResource.DragonLeather,
+            new CraftResourceInfo(2759, "Ice Crystal",
+                CraftResource.IceCrystalLeather, null, typeof(IceCrystalLeather), typeof(IceCrystalHides)),
+            new CraftResourceInfo(2761, "Dragon", CraftResource.DragonLeather, null,
                 typeof(DragonLeather), typeof(DragonHides)),
-            new CraftResourceInfo(2747, 1160427, "Wyrm", CraftAttributeInfo.Wyrm, CraftResource.WyrmLeather,
+            new CraftResourceInfo(2747, "Wyrm", CraftResource.WyrmLeather, null,
                 typeof(WyrmLeather), typeof(WyrmHides)),
-            new CraftResourceInfo(1175, 1160428, "Balron", CraftAttributeInfo.Balron, CraftResource.BalronLeather,
+            new CraftResourceInfo(1175, "Balron", CraftResource.BalronLeather, null,
                 typeof(BalronLeather), typeof(BalronHides)),
-            new CraftResourceInfo(48, 1160429, "Golden Dragon", CraftAttributeInfo.GoldenDragon,
-                CraftResource.GoldenDragonLeather, typeof(GoldenDragonLeather), typeof(GoldenDragonHides))
+            new CraftResourceInfo(48, "Golden Dragon",
+                CraftResource.GoldenDragonLeather, null, typeof(GoldenDragonLeather), typeof(GoldenDragonHides))
         };
 
         public static readonly CraftResourceInfo[] WoodInfo =
         {
-            new CraftResourceInfo(0x000, 1011542, "Normal", CraftAttributeInfo.Blank, CraftResource.RegularWood,
+            new CraftResourceInfo(0x000, "Normal", CraftResource.RegularWood, null,
                 typeof(Log), typeof(Board)),
-            new CraftResourceInfo(1132, 1160034, "Pinetree", CraftAttributeInfo.Pinetree, CraftResource.Pinetree,
+            new CraftResourceInfo(1132, "Pinetree", CraftResource.Pinetree, null,
                 typeof(PinetreeLog), typeof(PinetreeBoard)),
-            new CraftResourceInfo(2206, 1160035, "Cherry", CraftAttributeInfo.Cherry, CraftResource.Cherry,
+            new CraftResourceInfo(2206, "Cherry", CraftResource.Cherry, null,
                 typeof(CherryLog), typeof(CherryBoard)),
-            new CraftResourceInfo(1045, 1160036, "Oak", CraftAttributeInfo.Oak, CraftResource.Oak, typeof(OakLog),
+            new CraftResourceInfo(1045, "Oak", CraftResource.Oak, null, typeof(OakLog),
                 typeof(OakBoard)),
-            new CraftResourceInfo(515, 1160037, "Purple Passion", CraftAttributeInfo.PurplePassion,
-                CraftResource.PurplePassion, typeof(PurplePassionLog), typeof(PurplePassionBoard)),
-            new CraftResourceInfo(48, 1160038, "Golden Reflection", CraftAttributeInfo.GoldenReflection,
-                CraftResource.GoldenReflection, typeof(GoldenReflectionLog), typeof(GoldenReflectionBoard)),
-            new CraftResourceInfo(2778, 1160039, "Hardranger", CraftAttributeInfo.Hardranger, CraftResource.Hardranger,
+            new CraftResourceInfo(515, "Purple Passion",
+                CraftResource.PurplePassion, null, typeof(PurplePassionLog), typeof(PurplePassionBoard)),
+            new CraftResourceInfo(48, "Golden Reflection",
+                CraftResource.GoldenReflection, null, typeof(GoldenReflectionLog), typeof(GoldenReflectionBoard)),
+            new CraftResourceInfo(2778, "Hardranger", CraftResource.Hardranger, null,
                 typeof(HardrangerLog), typeof(HardrangerBoard)),
-            new CraftResourceInfo(1162, 1160040, "Jadewood", CraftAttributeInfo.Jadewood, CraftResource.Jadewood,
+            new CraftResourceInfo(1162, "Jadewood", CraftResource.Jadewood, null,
                 typeof(JadewoodLog), typeof(JadewoodBoard)),
-            new CraftResourceInfo(1109, 1160041, "Darkwood", CraftAttributeInfo.Darkwood, CraftResource.Darkwood,
+            new CraftResourceInfo(1109, "Darkwood", CraftResource.Darkwood, null,
                 typeof(DarkwoodLog), typeof(DarkwoodBoard)),
-            new CraftResourceInfo(1154, 1160042, "Stonewood", CraftAttributeInfo.Stonewood, CraftResource.Stonewood,
+            new CraftResourceInfo(1154, "Stonewood", CraftResource.Stonewood, null,
                 typeof(StonewoodLog), typeof(StonewoodBoard)),
-            new CraftResourceInfo(2766, 1160043, "Sunwood", CraftAttributeInfo.Sunwood, CraftResource.Sunwood,
+            new CraftResourceInfo(2766, "Sunwood", CraftResource.Sunwood, null,
                 typeof(SunwoodLog), typeof(SunwoodBoard)),
-            new CraftResourceInfo(2777, 1160044, "Gauntlet", CraftAttributeInfo.Gauntlet, CraftResource.Gauntlet,
+            new CraftResourceInfo(2777, "Gauntlet", CraftResource.Gauntlet, null,
                 typeof(GauntletLog), typeof(GauntletBoard)),
-            new CraftResourceInfo(2767, 1160045, "Swampwood", CraftAttributeInfo.Swampwood, CraftResource.Swampwood,
+            new CraftResourceInfo(2767, "Swampwood", CraftResource.Swampwood, null,
                 typeof(SwampwoodLog), typeof(SwampwoodBoard)),
-            new CraftResourceInfo(2751, 1160046, "Stardust", CraftAttributeInfo.Stardust, CraftResource.Stardust,
+            new CraftResourceInfo(2751, "Stardust", CraftResource.Stardust, null,
                 typeof(StardustLog), typeof(StardustBoard)),
-            new CraftResourceInfo(2301, 1160047, "Silver leaf", CraftAttributeInfo.Silverleaf, CraftResource.Silverleaf,
+            new CraftResourceInfo(2301, "Silver leaf", CraftResource.Silverleaf, null,
                 typeof(SilverleafLog), typeof(SilverleafBoard)),
-            new CraftResourceInfo(1346, 1160048, "Stormteal", CraftAttributeInfo.Stormteal, CraftResource.Stormteal,
+            new CraftResourceInfo(1346, "Stormteal", CraftResource.Stormteal, null,
                 typeof(StormtealLog), typeof(StormtealBoard)),
-            new CraftResourceInfo(2748, 1160049, "Emerald wood", CraftAttributeInfo.Emeraldwood,
-                CraftResource.Emeraldwood, typeof(EmeraldwoodLog), typeof(EmeraldwoodBoard)),
-            new CraftResourceInfo(1645, 1160050, "Bloodwood", CraftAttributeInfo.Bloodwood, CraftResource.Bloodwood,
+            new CraftResourceInfo(2748, "Emerald wood",
+                CraftResource.Emeraldwood, null, typeof(EmeraldwoodLog), typeof(EmeraldwoodBoard)),
+            new CraftResourceInfo(1645, "Bloodwood", CraftResource.Bloodwood, null,
                 typeof(BloodwoodLog), typeof(BloodwoodBoard)),
-            new CraftResourceInfo(2759, 1160051, "Crystal wood", CraftAttributeInfo.Crystalwood,
-                CraftResource.Crystalwood, typeof(CrystalwoodLog), typeof(CrystalwoodBoard)),
-            new CraftResourceInfo(2780, 1160052, "Bloodhorse", CraftAttributeInfo.Bloodhorse, CraftResource.Bloodhorse,
+            new CraftResourceInfo(2759, "Crystal wood",
+                CraftResource.Crystalwood, null, typeof(CrystalwoodLog), typeof(CrystalwoodBoard)),
+            new CraftResourceInfo(2780, "Bloodhorse", CraftResource.Bloodhorse, null,
                 typeof(BloodhorseLog), typeof(BloodhorseBoard)),
-            new CraftResourceInfo(2772, 1160053, "Doom wood", CraftAttributeInfo.Doomwood, CraftResource.Doomwood,
+            new CraftResourceInfo(2772, "Doom wood", CraftResource.Doomwood, null,
                 typeof(DoomwoodLog), typeof(DoomwoodBoard)),
-            new CraftResourceInfo(2749, 1160054, "Zulu", CraftAttributeInfo.Zulu, CraftResource.Zulu, typeof(ZuluLog),
+            new CraftResourceInfo(2749, "Zulu", CraftResource.Zulu, null, typeof(ZuluLog),
                 typeof(ZuluBoard)),
-            new CraftResourceInfo(1175, 1160055, "Darkness", CraftAttributeInfo.Darkness, CraftResource.Darkness,
+            new CraftResourceInfo(1175, "Darkness", CraftResource.Darkness, null,
                 typeof(DarknessLog), typeof(DarknessBoard)),
-            new CraftResourceInfo(1165, 1160056, "Elven", CraftAttributeInfo.Elven, CraftResource.Elven,
+            new CraftResourceInfo(1165, "Elven", CraftResource.Elven, null,
                 typeof(ElvenLog), typeof(ElvenBoard)),
         };
 
@@ -1149,16 +322,6 @@ namespace Server.Items
         }
 
         /// <summary>
-        /// Returns the <see cref="CraftResourceInfo.Number"/> property of '<paramref name="resource"/>' -or- 0 if an invalid resource was specified.
-        /// </summary>
-        public static int GetLocalizationNumber(CraftResource resource)
-        {
-            CraftResourceInfo info = GetInfo(resource);
-
-            return info == null ? 0 : info.Number;
-        }
-
-        /// <summary>
         /// Returns the <see cref="CraftResourceInfo.Hue"/> property of '<paramref name="resource"/>' -or- 0 if an invalid resource was specified.
         /// </summary>
         public static int GetHue(CraftResource resource)
@@ -1176,6 +339,13 @@ namespace Server.Items
             CraftResourceInfo info = GetInfo(resource);
 
             return info == null ? String.Empty : info.Name;
+        }
+
+        public static Dictionary<Type, int> GetEnchantments(CraftResource resource)
+        {
+            CraftResourceInfo info = GetInfo(resource);
+
+            return info == null ? null : info.Enchantments;
         }
 
         /// <summary>

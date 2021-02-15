@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Server.Items;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -57,15 +59,14 @@ namespace Server.Engines.Craft
         private static Type typeofAnvil = typeof(AnvilAttribute);
         private static Type typeofForge = typeof(ForgeAttribute);
 
-        public static void CheckAnvilAndForge(Mobile from, int range, out bool anvil, out bool forge)
+        public static bool CheckAnvil(Mobile from, int range)
         {
-            anvil = false;
-            forge = false;
+            var anvil = false;
 
             Map map = from.Map;
 
             if (map == null)
-                return;
+                return false;
 
             IPooledEnumerable eable = map.GetItemsInRange(from.Location, range);
 
@@ -75,49 +76,105 @@ namespace Server.Engines.Craft
 
                 bool isAnvil = type.IsDefined(typeofAnvil, false) || item.ItemID == 4015 || item.ItemID == 4016 ||
                                item.ItemID == 0x2DD5 || item.ItemID == 0x2DD6;
-                bool isForge = type.IsDefined(typeofForge, false) || item.ItemID == 4017 ||
-                               item.ItemID >= 6522 && item.ItemID <= 6569 || item.ItemID == 0x2DD8;
 
-                if (isAnvil || isForge)
+                if (isAnvil)
                 {
                     if (@from.Z + 16 < item.Z || item.Z + 16 < from.Z || !from.InLOS(item))
                         continue;
 
                     anvil = anvil || isAnvil;
-                    forge = forge || isForge;
 
-                    if (anvil && forge)
+                    if (anvil)
                         break;
                 }
             }
 
             eable.Free();
 
-            for (int x = -range; (!anvil || !forge) && x <= range; ++x)
+            for (int x = -range; !anvil && x <= range; ++x)
             {
-                for (int y = -range; (!anvil || !forge) && y <= range; ++y)
+                for (int y = -range; !anvil && y <= range; ++y)
                 {
                     StaticTile[] tiles = map.Tiles.GetStaticTiles(from.X + x, from.Y + y, true);
 
-                    for (int i = 0; (!anvil || !forge) && i < tiles.Length; ++i)
+                    for (int i = 0; !anvil && i < tiles.Length; ++i)
                     {
                         int id = tiles[i].ID;
 
                         bool isAnvil = id == 4015 || id == 4016 || id == 0x2DD5 || id == 0x2DD6;
-                        bool isForge = id == 4017 || id >= 6522 && id <= 6569 || id == 0x2DD8;
 
-                        if (isAnvil || isForge)
+                        if (isAnvil)
                         {
                             if (@from.Z + 16 < tiles[i].Z || tiles[i].Z + 16 < from.Z ||
                                 !from.InLOS(new Point3D(from.X + x, from.Y + y, tiles[i].Z + tiles[i].Height / 2 + 1)))
                                 continue;
 
                             anvil = anvil || isAnvil;
+                        }
+                    }
+                }
+            }
+
+            return anvil;
+        }
+
+        public static bool CheckForge(Mobile from, int range)
+        {
+            var forge = false;
+
+            Map map = from.Map;
+
+            if (map == null)
+                return false;
+
+            IPooledEnumerable eable = map.GetItemsInRange(from.Location, range);
+
+            foreach (Item item in eable)
+            {
+                Type type = item.GetType();
+
+                bool isForge = type.IsDefined(typeofForge, false) || item.ItemID == 4017 ||
+                               item.ItemID >= 6522 && item.ItemID <= 6569 || item.ItemID == 0x2DD8;
+
+                if (isForge)
+                {
+                    if (@from.Z + 16 < item.Z || item.Z + 16 < from.Z || !from.InLOS(item))
+                        continue;
+
+                    forge = forge || isForge;
+
+                    if (forge)
+                        break;
+                }
+            }
+
+            eable.Free();
+
+            for (int x = -range; !forge && x <= range; ++x)
+            {
+                for (int y = -range; !forge && y <= range; ++y)
+                {
+                    StaticTile[] tiles = map.Tiles.GetStaticTiles(from.X + x, from.Y + y, true);
+
+                    for (int i = 0; !forge && i < tiles.Length; ++i)
+                    {
+                        int id = tiles[i].ID;
+
+                        bool isForge = id == 4017 || id >= 6522 && id <= 6569 || id == 0x2DD8;
+
+                        if (isForge)
+                        {
+                            if (@from.Z + 16 < tiles[i].Z || tiles[i].Z + 16 < from.Z ||
+                                !from.InLOS(new Point3D(from.X + x, from.Y + y, tiles[i].Z + tiles[i].Height / 2 + 1)))
+                                continue;
+
                             forge = forge || isForge;
                         }
                     }
                 }
             }
+
+            return forge;
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
@@ -127,13 +184,10 @@ namespace Server.Engines.Craft
             else if (!BaseTool.CheckAccessible(tool, from))
                 return 1044263; // The tool must be on your person to use.
 
-            bool anvil, forge;
-            CheckAnvilAndForge(from, 2, out anvil, out forge);
-
-            if (anvil && forge)
+            if (CheckAnvil(from, 1))
                 return 0;
 
-            return 1044267; // You must be near an anvil and a forge to smith items.
+            return 1044266; // You must be near an anvil
         }
 
         public override void PlayCraftEffect(Mobile from)
@@ -312,42 +366,8 @@ namespace Server.Engines.Craft
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
-            AddSubRes(typeof(IronIngot), "Iron", 0, 1044022, "Iron");
-            AddSubRes(typeof(SpikeIngot), "Spike", 5, 1044022, "Spike");
-            AddSubRes(typeof(FruityIngot), "Fruity", 10, 1044022, "Fruity");
-            AddSubRes(typeof(BronzeIngot), "Bronze", 15, 1044022, "Bronze");
-            AddSubRes(typeof(IceRockIngot), "Ice Rock", 20, 1044022, "Ice Rock");
-            AddSubRes(typeof(BlackDwarfIngot), "Black Dwarf", 25, 1044022, "Black Dwarf");
-            AddSubRes(typeof(DullCopperIngot), "Dull Copper", 30, 1044022, "Dull Copper");
-            AddSubRes(typeof(PlatinumIngot), "Platinum", 35, 1044022, "Platinum");
-            AddSubRes(typeof(SilverRockIngot), "Silver Rock", 40, 1044022, "Silver Rock");
-            AddSubRes(typeof(DarkPaganIngot), "Dark Pagan", 45, 1044022, "Dark Pagan");
-            AddSubRes(typeof(CopperIngot), "Copper", 50, 1044022, "Copper");
-            AddSubRes(typeof(MysticIngot), "Mystic", 55, 1044022, "Mystic");
-            AddSubRes(typeof(SpectralIngot), "Spectral", 60, 1044022, "Spectral");
-            AddSubRes(typeof(OldBritainIngot), "Old Britain", 65, 1044022, "Old Britain");
-            AddSubRes(typeof(OnyxIngot), "Onyx", 70, 1044022, "Onyx");
-            AddSubRes(typeof(RedElvenIngot), "Red Elven", 75, 1044022, "Red Elven");
-            AddSubRes(typeof(UndeadIngot), "Undead", 80, 1044022, "Undead");
-            AddSubRes(typeof(PyriteIngot), "Pyrite", 85, 1044022, "Pyrite");
-            AddSubRes(typeof(VirginityIngot), "Virginity", 90, 1044022, "Virginity");
-            AddSubRes(typeof(MalachiteIngot), "Malachite", 95, 1044022, "Malachite");
-            AddSubRes(typeof(LavarockIngot), "Lavarock", 97, 1044022, "Lavarock");
-            AddSubRes(typeof(AzuriteIngot), "Azurite", 98, 1044022, "Azurite");
-            AddSubRes(typeof(DripstoneIngot), "Dripstone", 100, 1044022, "Dripstone");
-            AddSubRes(typeof(ExecutorIngot), "Executor", 104, 1044022, "Executor");
-            AddSubRes(typeof(PeachblueIngot), "Peachblue", 108, 1044022, "Peachblue");
-            AddSubRes(typeof(DestructionIngot), "Destruction", 112, 1044022, "Destruction");
-            AddSubRes(typeof(AnraIngot), "Anra", 116, 1044022, "Anra");
-            AddSubRes(typeof(CrystalIngot), "Crystal", 119, 1044022, "Crystal");
-            AddSubRes(typeof(DoomIngot), "Doom", 122, 1044022, "Doom");
-            AddSubRes(typeof(GoddessIngot), "Goddess", 125, 1044022, "Goddess");
-            AddSubRes(typeof(NewZuluIngot), "New Zulu", 129, 1044022, "New Zulu");
-            AddSubRes(typeof(DarkSableRubyIngot), "Dark Sable Ruby", 130, 1044022, "Dark Sable Ruby");
-            AddSubRes(typeof(EbonTwilightSapphireIngot), "Ebon Twilight Sapphire", 130, 1044022,
-                "Ebon Twilight Sapphire");
-            AddSubRes(typeof(RadiantNimbusDiamondIngot), "Radiant Nimbus Diamond", 140, 1044022,
-                "Radiant Nimbus Diamond");
+            OreConfiguration.Entries.ToList()
+                .ForEach(e => AddSubRes(e.ResourceType, e.Name, e.CraftSkillRequired, 1044022, e.Name));
 
             Resmelt = true;
             Repair = true;

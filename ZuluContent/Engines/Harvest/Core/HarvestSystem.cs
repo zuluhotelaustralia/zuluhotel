@@ -378,7 +378,9 @@ namespace Server.Engines.Harvest
         {
             from.Direction = from.GetDirectionTo(loc);
 
-            from.Animate(Utility.RandomList(def.EffectActions), 5, 1, true, false, 0);
+            var effectAction = from.Mounted ? 26 : Utility.RandomList(def.EffectActions);
+
+            from.Animate(effectAction, 5, 1, true, false, 0);
         }
 
         public virtual HarvestDefinition GetDefinition(int tileID)

@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using static Server.Configurations.MessageHueConfiguration;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Harvest
 {
@@ -25,8 +27,10 @@ namespace Server.Engines.Harvest
 
         private Mining()
         {
-            HarvestResource[] res;
-            HarvestVein[] veins;
+            var res = OreConfiguration.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
+                new HarvestResource(e.HarvestSkillRequired, e.Name, e.ResourceType)).ToArray();
+            var veins = OreConfiguration.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
+                new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
 
             #region Mining for ore and stone
 
@@ -70,104 +74,6 @@ namespace Server.Engines.Harvest
             oreAndStone.FailMessage = 503043; // You loosen some rocks but fail to find any useable ore.
             oreAndStone.PackFullMessage = 1010481; // Your backpack is full, so the ore you mined is lost.
             oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
-
-            // "You dig some ~ore~ and put in your backpack."
-
-            res = new[]
-            {
-                new HarvestResource(15.0, "spike",
-                    typeof(SpikeOre)),
-                new HarvestResource(20.0, "fruity",
-                    typeof(FruityOre)),
-                new HarvestResource(25.0, "icerock",
-                    typeof(IceRockOre)),
-                new HarvestResource(25.0, "blackdwarf",
-                    typeof(BlackDwarfOre)),
-                new HarvestResource(35.0, "bronze",
-                    typeof(BronzeOre)),
-                new HarvestResource(40.0, "darkpagan",
-                    typeof(DarkPaganOre)),
-                new HarvestResource(45.0, "silverrock",
-                    typeof(SilverRockOre)),
-                new HarvestResource(50.0, "platinum",
-                    typeof(PlatinumOre)),
-                new HarvestResource(55.0, "dull copper",
-                    typeof(DullCopperOre)),
-                new HarvestResource(60.0, "mystic",
-                    typeof(MysticOre)),
-                new HarvestResource(65.0, "copper",
-                    typeof(CopperOre)),
-                new HarvestResource(70.0, "spectral",
-                    typeof(SpectralOre)),
-                new HarvestResource(75.0, "onyx",
-                    typeof(OnyxOre)),
-                new HarvestResource(80.0, "oldbritain",
-                    typeof(OldBritainOre)),
-                new HarvestResource(84.0, "redelven",
-                    typeof(RedElvenOre)),
-                new HarvestResource(88.0, "undead",
-                    typeof(UndeadOre)),
-                new HarvestResource(91.0, "pyrite",
-                    typeof(PyriteOre)),
-                new HarvestResource(94.0, "virginity",
-                    typeof(VirginityOre)),
-                new HarvestResource(95.0, "malachite",
-                    typeof(MalachiteOre)),
-                new HarvestResource(97.0, "lavarock",
-                    typeof(LavarockOre)),
-                new HarvestResource(105.0, "azurite",
-                    typeof(AzuriteOre)),
-                new HarvestResource(120.0, "dripstone",
-                    typeof(DripstoneOre)),
-                new HarvestResource(120.0, "executor",
-                    typeof(ExecutorOre)),
-                new HarvestResource(120.0, "peachblue",
-                    typeof(PeachblueOre)),
-                new HarvestResource(120.0, "destruction",
-                    typeof(DestructionOre)),
-                new HarvestResource(120.0, "anra",
-                    typeof(AnraOre)),
-                new HarvestResource(120.0, "crystal",
-                    typeof(CrystalOre)),
-                new HarvestResource(125.0, "doom",
-                    typeof(DoomOre)),
-                new HarvestResource(130.0, "goddess",
-                    typeof(GoddessOre))
-            };
-
-
-            veins = new[]
-            {
-                new HarvestVein(2.0, res[28]), // Goddess
-                new HarvestVein(5.0, res[27]), // Doom
-                new HarvestVein(8.0, res[26]), // Crystal
-                new HarvestVein(10.0, res[25]), // Anra
-                new HarvestVein(14.0, res[24]), // Destruction
-                new HarvestVein(17.0, res[23]), // Peachblue
-                new HarvestVein(20.0, res[22]), // Executor
-                new HarvestVein(23.0, res[21]), // Dripstone
-                new HarvestVein(26.0, res[20]), // Azurite
-                new HarvestVein(33.0, res[19]), // Lavarock
-                new HarvestVein(38.0, res[18]), // Malachite
-                new HarvestVein(42.0, res[17]), // Virginity
-                new HarvestVein(46.0, res[16]), // Pyrite
-                new HarvestVein(51.0, res[15]), // Undead
-                new HarvestVein(56.0, res[14]), // RedElven
-                new HarvestVein(61.0, res[13]), // OldBritain
-                new HarvestVein(66.0, res[12]), // Onyx
-                new HarvestVein(71.0, res[11]), // Spectral
-                new HarvestVein(74.0, res[10]), // Copper
-                new HarvestVein(80.0, res[9]), // Mystic
-                new HarvestVein(85.0, res[8]), // DullCopper
-                new HarvestVein(90.0, res[7]), // Platinum
-                new HarvestVein(100.0, res[6]), // SilverRock
-                new HarvestVein(110.0, res[5]), // DarkPagan
-                new HarvestVein(120.0, res[4]), // Bronze
-                new HarvestVein(125.0, res[3]), // BlackDwarf
-                new HarvestVein(130.0, res[2]), // IceRock
-                new HarvestVein(140.0, res[1]), // Fruity
-                new HarvestVein(155.0, res[0]) // Spike
-            };
 
             oreAndStone.Resources = res;
             oreAndStone.Veins = veins;
@@ -367,18 +273,6 @@ namespace Server.Engines.Harvest
 
             return true;
         }
-
-        private static int[] m_Offsets = new[]
-        {
-            -1, -1,
-            -1, 0,
-            -1, 1,
-            0, -1,
-            0, 1,
-            1, -1,
-            1, 0,
-            1, 1
-        };
 
         public override bool BeginHarvesting(Mobile from, Item tool)
         {

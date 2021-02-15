@@ -442,14 +442,14 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 var bonus = cls.Type switch
                 {
-                    ZuluClassType.Warrior => value * ClasseBonus,
-                    ZuluClassType.Mage => value / ClasseBonus,
-                    _ => 1.0
+                    ZuluClassType.Warrior => (int) (value * ClasseBonus),
+                    ZuluClassType.Mage => (int) (value / ClasseBonus),
+                    _ => (int) value
                 };
 
                 var penalty = GetMagicEfficiencyPenalty();
 
-                value = (int) (value * (100 - penalty) / 100);
+                value = (int) (bonus * (100 - penalty) / 100);
             }
         }
 
