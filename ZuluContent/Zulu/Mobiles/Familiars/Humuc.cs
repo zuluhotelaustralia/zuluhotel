@@ -15,7 +15,7 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Humuc>(new CreatureProperties
             {
-                ActiveSpeed = 0.06,
+                ActiveSpeed = 0.2,
                 AiType = AIType.AI_Familiar,
                 InitialInnocent = true,
                 AlwaysMurderer = false,
@@ -36,7 +36,7 @@ namespace Server.Mobiles
                 Int = 75,
                 ManaMaxSeed = 75,
                 MinTameSkill = 0,
-                Name = "a totem",
+                Name = "totem",
                 PassiveSpeed = 0.5,
                 PerceptionRange = 10,
                 ProvokeSkillOverride = 150,
@@ -93,7 +93,7 @@ namespace Server.Mobiles
         }
 
         public override bool CanDrop { get; } = true;
-        public override bool CanBeDistracted { get; } = false;
+        public override bool PlayerRangeSensitive => ControlMaster == null || ControlMaster.Map == Map.Internal;
 
         [Constructible]
         public Humuc(Serial serial) : base(serial)
@@ -109,7 +109,7 @@ namespace Server.Mobiles
         {
             return m == ControlMaster;
         }
-
+        
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);

@@ -10,7 +10,7 @@ namespace Server.Mobiles
 {
     public class MeleeAI : BaseAI
     {
-        private readonly Dictionary<Serial, double> m_AcquireExhaustion = new Dictionary<Serial, double>();
+        private readonly Dictionary<Serial, double> m_AcquireExhaustion = new();
 
         public MeleeAI(BaseCreature m) : base(m)
         {
@@ -34,17 +34,6 @@ namespace Server.Mobiles
                 m_AcquireExhaustion.Remove(combatant.Serial);
                 DoTeleport(m_Mobile, combatant);
             }
-        }
-
-        private void DoTeleport(Mobile from, Mobile to)
-        {
-            Effects.SendLocationParticles(EffectItem.Create(from.Location, from.Map, EffectItem.DefaultDuration),
-                0x3728, 10, 10, 2023);
-            Effects.SendLocationParticles(EffectItem.Create(to.Location, to.Map, EffectItem.DefaultDuration), 0x3728,
-                10, 10, 5023);
-            from.PlaySound(0x1FE);
-
-            from.SetLocation(to.Location, true);
         }
 
         public override bool DoActionWander()

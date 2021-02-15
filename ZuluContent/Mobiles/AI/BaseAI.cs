@@ -834,6 +834,17 @@ namespace Server.Mobiles
         {
             return true;
         }
+        
+        protected void DoTeleport(Mobile from, Mobile to)
+        {
+            Effects.SendLocationParticles(EffectItem.Create(from.Location, from.Map, EffectItem.DefaultDuration),
+                0x3728, 10, 10, 2023);
+            Effects.SendLocationParticles(EffectItem.Create(to.Location, to.Map, EffectItem.DefaultDuration), 0x3728,
+                10, 10, 5023);
+            from.PlaySound(0x1FE);
+
+            from.SetLocation(to.Location, true);
+        }
 
         public virtual bool Obey()
         {
@@ -2293,6 +2304,10 @@ namespace Server.Mobiles
 
                     // Let's not target ourselves...
                     if (m == m_Mobile)
+                        continue;
+
+                    // We consider Familiars to be neutral
+                    if (m is BaseCreature {AI: AIType.AI_Familiar})
                         continue;
 
                     // Dead targets are invalid.
