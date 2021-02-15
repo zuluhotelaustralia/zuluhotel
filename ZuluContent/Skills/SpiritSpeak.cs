@@ -1,4 +1,5 @@
 using System;
+using Scripts.Zulu.Engines.Classes;
 using Server.Items;
 using Server.Spells;
 using Server.Network;
@@ -9,34 +10,28 @@ namespace Server.SkillHandlers
     {
         public static void Initialize()
         {
-            SkillInfo.Table[32].Callback = OnUse;
+            SkillInfo.Table[(int)SkillName.SpiritSpeak].Callback = OnUse;
         }
 
         public static TimeSpan OnUse(Mobile m)
         {
             m.RevealingAction();
 
-            if (m.CheckSkill(SkillName.SpiritSpeak, 0, 100))
+            if (m.ShilCheckSkill(SkillName.SpiritSpeak))
             {
                 if (!m.CanHearGhosts)
                 {
-                    Timer t = new SpiritSpeakTimer(m);
-                    double secs = m.Skills[SkillName.SpiritSpeak].Base / 50;
-                    secs *= 90;
-                    if (secs < 15)
-                        secs = 15;
-
-                    t.Delay = TimeSpan.FromSeconds(secs); //15seconds to 3 minutes
-                    t.Start();
+                    var secs = m.Skills[SkillName.SpiritSpeak].Base / 50 * 90;
+                    new SpiritSpeakTimer(m,TimeSpan.FromSeconds(secs < 15 ? 15 : secs)).Start();
                     m.CanHearGhosts = true;
                 }
 
                 m.PlaySound(0x24A);
-                m.SendLocalizedMessage(502444); //You contact the neitherworld.
+                m.SendLocalizedMessage(502444); //You contact the netherworld.
             }
             else
             {
-                m.SendLocalizedMessage(502443); //You fail to contact the neitherworld.
+                m.SendLocalizedMessage(502443); //You fail to contact the netherworld.
                 m.CanHearGhosts = false;
             }
 
@@ -45,9 +40,9 @@ namespace Server.SkillHandlers
 
         private class SpiritSpeakTimer : Timer
         {
-            private Mobile m_Owner;
+            private readonly Mobile m_Owner;
 
-            public SpiritSpeakTimer(Mobile m) : base(TimeSpan.FromMinutes(2.0))
+            public SpiritSpeakTimer(Mobile m, TimeSpan duration) : base(duration)
             {
                 m_Owner = m;
                 Priority = TimerPriority.FiveSeconds;
@@ -56,7 +51,7 @@ namespace Server.SkillHandlers
             protected override void OnTick()
             {
                 m_Owner.CanHearGhosts = false;
-                m_Owner.SendLocalizedMessage(502445); //You feel your contact with the neitherworld fading.
+                m_Owner.SendLocalizedMessage(502445); //You feel your contact with the netherworld fading.
             }
         }
 
@@ -66,46 +61,21 @@ namespace Server.SkillHandlers
             {
             }
 
-            public override bool ClearHandsOnCast
-            {
-                get { return false; }
-            }
-
-            public override double CastDelayFastScalar
-            {
-                get { return 0; }
-            }
-
-            public override TimeSpan CastDelayBase
-            {
-                get { return TimeSpan.FromSeconds(1.0); }
-            }
-
-            public override int GetMana()
-            {
-                return 0;
-            }
-
+            public override bool ClearHandsOnCast { get; } = false;
+            public override double CastDelayFastScalar { get; } = 0;
+            public override TimeSpan CastDelayBase { get; } = TimeSpan.FromSeconds(1.0);
+            public override bool CheckNextSpellTime { get; } = false;
+            
+            public override int GetMana() => 0;
             public override void OnCasterHurt()
             {
                 if (IsCasting)
                     Disturb(DisturbType.Hurt, false, true);
             }
 
-            public override bool ConsumeReagents()
-            {
-                return true;
-            }
+            public override bool ConsumeReagents() => true;
 
-            public override bool CheckFizzle()
-            {
-                return true;
-            }
-
-            public override bool CheckNextSpellTime
-            {
-                get { return false; }
-            }
+            public override bool CheckFizzle() => true;
 
             public override void OnDisturb(DisturbType type, bool message)
             {
@@ -133,11 +103,11 @@ namespace Server.SkillHandlers
             {
                 Corpse toChannel = null;
 
-                foreach (Item item in Caster.GetItemsInRange(3))
+                foreach (var item in Caster.GetItemsInRange(3))
                 {
-                    if (item is Corpse && !((Corpse) item).Channeled)
+                    if (item is Corpse {Channeled: false} corpse)
                     {
-                        toChannel = (Corpse) item;
+                        toChannel = corpse;
                         break;
                     }
                 }
