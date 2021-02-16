@@ -67,9 +67,9 @@ namespace ZuluContent.Zulu.Items.SingleClick
         private static string GetCraftedExceptional(Item item)
         {
             var isExceptional = false;
-            if (item is BaseArmor armor && armor.Quality == ArmorQuality.Exceptional)
+            if (item is BaseArmor armor && armor.Mark == ArmorQuality.Exceptional)
                 isExceptional = true;
-            else if (item is BaseWeapon weapon && weapon.Quality == WeaponQuality.Exceptional)
+            else if (item is BaseWeapon weapon && weapon.Mark == WeaponQuality.Exceptional)
                 isExceptional = true;
             return isExceptional ? "Exceptional " : "";
         }

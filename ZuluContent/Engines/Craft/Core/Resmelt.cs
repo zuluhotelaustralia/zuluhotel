@@ -139,13 +139,7 @@ namespace Server.Engines.Craft
                 {
                     if (num == 1044267)
                     {
-                        bool anvil, forge;
-
-                        DefBlacksmithy.CheckAnvilAndForge(from, 2, out anvil, out forge);
-
-                        if (!anvil)
-                            num = 1044266; // You must be near an anvil
-                        else if (!forge)
+                        if (!DefBlacksmithy.CheckForge(from, 1))
                             num = 1044265; // You must be near a forge.
                     }
 

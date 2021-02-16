@@ -7,12 +7,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class MagicEfficiencyPenalty : Enchantment<MagicEfficiencyInfo>
     {
-        [IgnoreMember]
-        private double m_Value = 0;
+        [IgnoreMember] private double m_Value = 0;
 
-        [IgnoreMember]
-        public override string AffixName => string.Empty;
-        
+        [IgnoreMember] public override string AffixName => string.Empty;
+
         [Key(1)]
         public double Value
         {
@@ -23,7 +21,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public class MagicEfficiencyInfo : EnchantmentInfo
     {
-
         public override string Description { get; protected set; } = "Magic Efficiency Penalty";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;
         public override int Hue { get; protected set; } = 0;
@@ -35,5 +32,4 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             return string.Empty;
         }
     }
-
 }

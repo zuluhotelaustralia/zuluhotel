@@ -1,36 +1,42 @@
 namespace Server.Items
 {
     public class HeaterShield : BaseShield
-	{
-		public override int InitMinHits{ get{ return 50; } }
-		public override int InitMaxHits{ get{ return 65; } }
+    {
+        public override int InitMinHits => 130;
 
-		public override int ArmorBase{ get{ return 23; } }
+        public override int InitMaxHits => 130;
 
+        public override int ArmorBase => 16;
 
-		[Constructible]
-public HeaterShield() : base( 0x1B76 )
-		{
-			Weight = 8.0;
-		}
+        public override int DefaultStrReq => 30;
 
-		[Constructible]
-public HeaterShield( Serial serial ) : base(serial)
-		{
-		}
+        public override int DefaultDexBonus => -5;
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override double DefaultMagicEfficiencyPenalty => 16.0;
 
-			int version = reader.ReadInt();
-		}
+        [Constructible]
+        public HeaterShield() : base(0x1B76)
+        {
+            Weight = 8.0;
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        [Constructible]
+        public HeaterShield(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int)0 );//version
-		}
-	}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int) 0); //version
+        }
+    }
 }

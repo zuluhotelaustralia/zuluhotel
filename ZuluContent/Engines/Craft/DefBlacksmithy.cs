@@ -367,7 +367,7 @@ namespace Server.Engines.Craft
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
             OreConfiguration.Entries.ToList()
-                .ForEach(e => AddSubRes(e.ResourceType, e.Name, e.CraftSkillRequired, 1044022, e.Name));
+                .ForEach(e => AddSubRes(e.SmeltType, e.Name, e.CraftSkillRequired, 1044022, e.Name));
 
             Resmelt = true;
             Repair = true;

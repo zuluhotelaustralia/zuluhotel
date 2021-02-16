@@ -3,280 +3,315 @@ using System;
 namespace Server.Items
 {
     public class Fists : BaseMeleeWeapon
-	{
-		public static void Initialize()
-		{
-			Mobile.DefaultWeapon = new Fists();
+    {
+        public static void Initialize()
+        {
+            Mobile.DefaultWeapon = new Fists();
 
-			EventSink.DisarmRequest += EventSink_DisarmRequest;
-			EventSink.StunRequest += EventSink_StunRequest;
-		}
+            EventSink.DisarmRequest += EventSink_DisarmRequest;
+            EventSink.StunRequest += EventSink_StunRequest;
+        }
 
-		public override int DefaultStrengthReq{ get{ return 0; } }
-		public override int DefaultMinDamage{ get{ return 1; } }
-		public override int DefaultMaxDamage{ get{ return 8; } }
-		public override int DefaultSpeed{ get{ return 30; } }
+        public override int DefaultStrengthReq
+        {
+            get { return 0; }
+        }
 
-		public override int DefaultHitSound{ get{ return -1; } }
-		public override int DefaultMissSound{ get{ return -1; } }
+        public override int DefaultMinDamage
+        {
+            get { return 1; }
+        }
 
-		public override SkillName DefaultSkill{ get{ return SkillName.Wrestling; } }
-		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Fists; } }
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Wrestle; } }
+        public override int DefaultMaxDamage
+        {
+            get { return 8; }
+        }
 
-		public Fists() : base( 0 )
-		{
-			Visible = false;
-			Movable = false;
-			Quality = WeaponQuality.Regular;
-		}
+        public override int DefaultSpeed
+        {
+            get { return 30; }
+        }
 
-		public Fists( Serial serial ) : base( serial )
-		{
-		}
+        public override int DefaultHitSound
+        {
+            get { return -1; }
+        }
 
-		public override double GetDefendSkillValue( Mobile attacker, Mobile defender )
-		{
-			double wresValue = defender.Skills[SkillName.Wrestling].Value;
-			double anatValue = defender.Skills[SkillName.Anatomy].Value;
-			double evalValue = defender.Skills[SkillName.EvalInt].Value;
-			double incrValue = (anatValue + evalValue + 20.0) * 0.5;
+        public override int DefaultMissSound
+        {
+            get { return -1; }
+        }
 
-			if ( incrValue > 120.0 )
-				incrValue = 120.0;
+        public override SkillName DefaultSkill
+        {
+            get { return SkillName.Wrestling; }
+        }
 
-			if ( wresValue > incrValue )
-				return wresValue;
-			else
-				return incrValue;
-		}
+        public override WeaponType DefaultWeaponType
+        {
+            get { return WeaponType.Fists; }
+        }
 
-		private void CheckPreAOSMoves( Mobile attacker, Mobile defender )
-		{
-			if ( attacker.StunReady )
-			{
-				if ( attacker.CanBeginAction( typeof( Fists ) ) )
-				{
-					if ( attacker.Skills[SkillName.Anatomy].Value >= 80.0 && attacker.Skills[SkillName.Wrestling].Value >= 80.0 )
-					{
-						if ( attacker.Stam >= 15 )
-						{
-							attacker.Stam -= 15;
+        public override WeaponAnimation DefaultAnimation
+        {
+            get { return WeaponAnimation.Wrestle; }
+        }
 
-							if ( CheckMove( attacker, SkillName.Anatomy ) )
-							{
-								StartMoveDelay( attacker );
+        public Fists() : base(0)
+        {
+            Visible = false;
+            Movable = false;
+            Mark = WeaponQuality.Regular;
+        }
 
-								attacker.StunReady = false;
+        public Fists(Serial serial) : base(serial)
+        {
+        }
 
-								attacker.SendLocalizedMessage( 1004013 ); // You successfully stun your opponent!
-								defender.SendLocalizedMessage( 1004014 ); // You have been stunned!
+        public override double GetDefendSkillValue(Mobile attacker, Mobile defender)
+        {
+            double wresValue = defender.Skills[SkillName.Wrestling].Value;
+            double anatValue = defender.Skills[SkillName.Anatomy].Value;
+            double evalValue = defender.Skills[SkillName.EvalInt].Value;
+            double incrValue = (anatValue + evalValue + 20.0) * 0.5;
 
-								defender.Freeze( TimeSpan.FromSeconds( 4.0 ) );
-							}
-							else
-							{
-								attacker.SendLocalizedMessage( 1004010 ); // You failed in your attempt to stun.
-								defender.SendLocalizedMessage( 1004011 ); // Your opponent tried to stun you and failed.
-							}
-						}
-						else
-						{
-							attacker.SendLocalizedMessage( 1004009 ); // You are too fatigued to attempt anything.
-						}
-					}
-					else
-					{
-						attacker.SendLocalizedMessage( 1004008 ); // You are not skilled enough to stun your opponent.
-						attacker.StunReady = false;
-					}
-				}
-			}
-			else if ( attacker.DisarmReady )
-			{
-				if ( attacker.CanBeginAction( typeof( Fists ) ) )
-				{
-					if ( defender.Player || defender.Body.IsHuman )
-					{
-						if ( attacker.Skills[SkillName.ArmsLore].Value >= 80.0 && attacker.Skills[SkillName.Wrestling].Value >= 80.0 )
-						{
-							if ( attacker.Stam >= 15 )
-							{
-								Item toDisarm = defender.FindItemOnLayer( Layer.OneHanded );
+            if (incrValue > 120.0)
+                incrValue = 120.0;
 
-								if ( toDisarm == null || !toDisarm.Movable )
-									toDisarm = defender.FindItemOnLayer( Layer.TwoHanded );
+            if (wresValue > incrValue)
+                return wresValue;
+            else
+                return incrValue;
+        }
 
-								Container pack = defender.Backpack;
+        private void CheckPreAOSMoves(Mobile attacker, Mobile defender)
+        {
+            if (attacker.StunReady)
+            {
+                if (attacker.CanBeginAction(typeof(Fists)))
+                {
+                    if (attacker.Skills[SkillName.Anatomy].Value >= 80.0 &&
+                        attacker.Skills[SkillName.Wrestling].Value >= 80.0)
+                    {
+                        if (attacker.Stam >= 15)
+                        {
+                            attacker.Stam -= 15;
 
-								if ( pack == null || toDisarm == null || !toDisarm.Movable )
-								{
-									attacker.SendLocalizedMessage( 1004001 ); // You cannot disarm your opponent.
-								}
-								else if ( CheckMove( attacker, SkillName.ArmsLore ) )
-								{
-									StartMoveDelay( attacker );
+                            if (CheckMove(attacker, SkillName.Anatomy))
+                            {
+                                StartMoveDelay(attacker);
 
-									attacker.Stam -= 15;
-									attacker.DisarmReady = false;
+                                attacker.StunReady = false;
 
-									attacker.SendLocalizedMessage( 1004006 ); // You successfully disarm your opponent!
-									defender.SendLocalizedMessage( 1004007 ); // You have been disarmed!
+                                attacker.SendLocalizedMessage(1004013); // You successfully stun your opponent!
+                                defender.SendLocalizedMessage(1004014); // You have been stunned!
 
-									pack.DropItem( toDisarm );
-								}
-								else
-								{
-									attacker.Stam -= 15;
+                                defender.Freeze(TimeSpan.FromSeconds(4.0));
+                            }
+                            else
+                            {
+                                attacker.SendLocalizedMessage(1004010); // You failed in your attempt to stun.
+                                defender.SendLocalizedMessage(1004011); // Your opponent tried to stun you and failed.
+                            }
+                        }
+                        else
+                        {
+                            attacker.SendLocalizedMessage(1004009); // You are too fatigued to attempt anything.
+                        }
+                    }
+                    else
+                    {
+                        attacker.SendLocalizedMessage(1004008); // You are not skilled enough to stun your opponent.
+                        attacker.StunReady = false;
+                    }
+                }
+            }
+            else if (attacker.DisarmReady)
+            {
+                if (attacker.CanBeginAction(typeof(Fists)))
+                {
+                    if (defender.Player || defender.Body.IsHuman)
+                    {
+                        if (attacker.Skills[SkillName.ArmsLore].Value >= 80.0 &&
+                            attacker.Skills[SkillName.Wrestling].Value >= 80.0)
+                        {
+                            if (attacker.Stam >= 15)
+                            {
+                                Item toDisarm = defender.FindItemOnLayer(Layer.OneHanded);
 
-									attacker.SendLocalizedMessage( 1004004 ); // You failed in your attempt to disarm.
-									defender.SendLocalizedMessage( 1004005 ); // Your opponent tried to disarm you but failed.
-								}
-							}
-							else
-							{
-								attacker.SendLocalizedMessage( 1004003 ); // You are too fatigued to attempt anything.
-							}
-						}
-						else
-						{
-							attacker.SendLocalizedMessage( 1004002 ); // You are not skilled enough to disarm your opponent.
-							attacker.DisarmReady = false;
-						}
-					}
-					else
-					{
-						attacker.SendLocalizedMessage( 1004001 ); // You cannot disarm your opponent.
-					}
-				}
-			}
-		}
+                                if (toDisarm == null || !toDisarm.Movable)
+                                    toDisarm = defender.FindItemOnLayer(Layer.TwoHanded);
 
-		public override TimeSpan OnSwing( Mobile attacker, Mobile defender )
-		{
-			CheckPreAOSMoves( attacker, defender );
+                                Container pack = defender.Backpack;
 
-			return base.OnSwing( attacker, defender );
-		}
+                                if (pack == null || toDisarm == null || !toDisarm.Movable)
+                                {
+                                    attacker.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
+                                }
+                                else if (CheckMove(attacker, SkillName.ArmsLore))
+                                {
+                                    StartMoveDelay(attacker);
 
-		/*public override void OnMiss( Mobile attacker, Mobile defender )
-		{
-			base.PlaySwingAnimation( attacker );
-		}*/
+                                    attacker.Stam -= 15;
+                                    attacker.DisarmReady = false;
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+                                    attacker.SendLocalizedMessage(1004006); // You successfully disarm your opponent!
+                                    defender.SendLocalizedMessage(1004007); // You have been disarmed!
 
-			writer.Write( (int) 0 ); // version
-		}
+                                    pack.DropItem(toDisarm);
+                                }
+                                else
+                                {
+                                    attacker.Stam -= 15;
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+                                    attacker.SendLocalizedMessage(1004004); // You failed in your attempt to disarm.
+                                    defender.SendLocalizedMessage(
+                                        1004005); // Your opponent tried to disarm you but failed.
+                                }
+                            }
+                            else
+                            {
+                                attacker.SendLocalizedMessage(1004003); // You are too fatigued to attempt anything.
+                            }
+                        }
+                        else
+                        {
+                            attacker.SendLocalizedMessage(
+                                1004002); // You are not skilled enough to disarm your opponent.
+                            attacker.DisarmReady = false;
+                        }
+                    }
+                    else
+                    {
+                        attacker.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
+                    }
+                }
+            }
+        }
 
-			int version = reader.ReadInt();
+        public override TimeSpan OnSwing(Mobile attacker, Mobile defender)
+        {
+            CheckPreAOSMoves(attacker, defender);
 
-			Delete();
-		}
+            return base.OnSwing(attacker, defender);
+        }
 
-		/* Wrestling moves */
+        /*public override void OnMiss( Mobile attacker, Mobile defender )
+        {
+            base.PlaySwingAnimation( attacker );
+        }*/
 
-		private static bool CheckMove( Mobile m, SkillName other )
-		{
-			double wresValue = m.Skills[SkillName.Wrestling].Value;
-			double scndValue = m.Skills[other].Value;
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			/* 40% chance at 80, 80
-			 * 50% chance at 100, 100
-			 * 60% chance at 120, 120
-			 */
+            writer.Write((int) 0); // version
+        }
 
-			double chance = (wresValue + scndValue) / 400.0;
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			return chance >= Utility.RandomDouble();
-		}
+            int version = reader.ReadInt();
 
-		private static bool HasFreeHands( Mobile m )
-		{
-			Item item = m.FindItemOnLayer( Layer.OneHanded );
+            Delete();
+        }
 
-			if ( item != null && !(item is Spellbook) )
-				return false;
+        /* Wrestling moves */
 
-			return m.FindItemOnLayer( Layer.TwoHanded ) == null;
-		}
+        private static bool CheckMove(Mobile m, SkillName other)
+        {
+            double wresValue = m.Skills[SkillName.Wrestling].Value;
+            double scndValue = m.Skills[other].Value;
 
-		private static void EventSink_DisarmRequest( Mobile m )
-		{
+            /* 40% chance at 80, 80
+             * 50% chance at 100, 100
+             * 60% chance at 120, 120
+             */
 
-			double armsValue = m.Skills[SkillName.ArmsLore].Value;
-			double wresValue = m.Skills[SkillName.Wrestling].Value;
+            double chance = (wresValue + scndValue) / 400.0;
 
-			if ( !HasFreeHands( m ) )
-			{
-				m.SendLocalizedMessage( 1004029 ); // You must have your hands free to attempt to disarm your opponent.
-				m.DisarmReady = false;
-			}
-			else if ( armsValue >= 80.0 && wresValue >= 80.0 )
-			{
-				m.DisruptiveAction();
-				m.DisarmReady = !m.DisarmReady;
-				m.SendLocalizedMessage( m.DisarmReady ? 1019013 : 1019014 );
-			}
-			else
-			{
-				m.SendLocalizedMessage( 1004002 ); // You are not skilled enough to disarm your opponent.
-				m.DisarmReady = false;
-			}
-		}
+            return chance >= Utility.RandomDouble();
+        }
 
-		private static void EventSink_StunRequest( Mobile m )
-		{
+        private static bool HasFreeHands(Mobile m)
+        {
+            Item item = m.FindItemOnLayer(Layer.OneHanded);
 
-			double anatValue = m.Skills[SkillName.Anatomy].Value;
-			double wresValue = m.Skills[SkillName.Wrestling].Value;
+            if (item != null && !(item is Spellbook))
+                return false;
 
-			if ( !HasFreeHands( m ) )
-			{
-				m.SendLocalizedMessage( 1004031 ); // You must have your hands free to attempt to stun your opponent.
-				m.StunReady = false;
-			}
-			else if ( anatValue >= 80.0 && wresValue >= 80.0 )
-			{
-				m.DisruptiveAction();
-				m.StunReady = !m.StunReady;
-				m.SendLocalizedMessage( m.StunReady ? 1019011 : 1019012 );
-			}
-			else
-			{
-				m.SendLocalizedMessage( 1004008 ); // You are not skilled enough to stun your opponent.
-				m.StunReady = false;
-			}
-		}
+            return m.FindItemOnLayer(Layer.TwoHanded) == null;
+        }
 
-		private class MoveDelayTimer : Timer
-		{
-			private Mobile m_Mobile;
+        private static void EventSink_DisarmRequest(Mobile m)
+        {
+            double armsValue = m.Skills[SkillName.ArmsLore].Value;
+            double wresValue = m.Skills[SkillName.Wrestling].Value;
 
-			public MoveDelayTimer( Mobile m ) : base( TimeSpan.FromSeconds( 10.0 ) )
-			{
-				m_Mobile = m;
+            if (!HasFreeHands(m))
+            {
+                m.SendLocalizedMessage(1004029); // You must have your hands free to attempt to disarm your opponent.
+                m.DisarmReady = false;
+            }
+            else if (armsValue >= 80.0 && wresValue >= 80.0)
+            {
+                m.DisruptiveAction();
+                m.DisarmReady = !m.DisarmReady;
+                m.SendLocalizedMessage(m.DisarmReady ? 1019013 : 1019014);
+            }
+            else
+            {
+                m.SendLocalizedMessage(1004002); // You are not skilled enough to disarm your opponent.
+                m.DisarmReady = false;
+            }
+        }
 
-				Priority = TimerPriority.TwoFiftyMS;
+        private static void EventSink_StunRequest(Mobile m)
+        {
+            double anatValue = m.Skills[SkillName.Anatomy].Value;
+            double wresValue = m.Skills[SkillName.Wrestling].Value;
 
-				m_Mobile.BeginAction( typeof( Fists ) );
-			}
+            if (!HasFreeHands(m))
+            {
+                m.SendLocalizedMessage(1004031); // You must have your hands free to attempt to stun your opponent.
+                m.StunReady = false;
+            }
+            else if (anatValue >= 80.0 && wresValue >= 80.0)
+            {
+                m.DisruptiveAction();
+                m.StunReady = !m.StunReady;
+                m.SendLocalizedMessage(m.StunReady ? 1019011 : 1019012);
+            }
+            else
+            {
+                m.SendLocalizedMessage(1004008); // You are not skilled enough to stun your opponent.
+                m.StunReady = false;
+            }
+        }
 
-			protected override void OnTick()
-			{
-				m_Mobile.EndAction( typeof( Fists ) );
-			}
-		}
+        private class MoveDelayTimer : Timer
+        {
+            private Mobile m_Mobile;
 
-		private static void StartMoveDelay( Mobile m )
-		{
-			new MoveDelayTimer( m ).Start();
-		}
-	}
+            public MoveDelayTimer(Mobile m) : base(TimeSpan.FromSeconds(10.0))
+            {
+                m_Mobile = m;
+
+                Priority = TimerPriority.TwoFiftyMS;
+
+                m_Mobile.BeginAction(typeof(Fists));
+            }
+
+            protected override void OnTick()
+            {
+                m_Mobile.EndAction(typeof(Fists));
+            }
+        }
+
+        private static void StartMoveDelay(Mobile m)
+        {
+            new MoveDelayTimer(m).Start();
+        }
+    }
 }

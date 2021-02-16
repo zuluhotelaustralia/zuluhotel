@@ -174,15 +174,22 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public WeaponQuality Quality
+        public WeaponQuality Mark
         {
-            get => Enchantments.Get((ItemQuality e) => (WeaponQuality) e.Value);
+            get => Enchantments.Get((ItemMark e) => (WeaponQuality) e.Value);
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((ItemQuality e) => e.Value = (int) value);
+                Enchantments.Set((ItemMark e) => e.Value = (int) value);
                 ScaleDurability();
             }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double Quality
+        {
+            get => Enchantments.Get((ItemQuality e) => e.Value);
+            set => Enchantments.Set((ItemQuality e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -376,7 +383,7 @@ namespace Server.Items
                 _ => 0
             };
 
-            var exceptionalBonus = Quality == WeaponQuality.Exceptional ? 20 : 0;
+            var exceptionalBonus = Mark == WeaponQuality.Exceptional ? 20 : 0;
             return bonus + exceptionalBonus;
         }
 
@@ -855,7 +862,7 @@ namespace Server.Items
 
         public virtual int GetDamageBonus()
         {
-            var qualityBonus = Quality switch
+            var qualityBonus = Mark switch
             {
                 WeaponQuality.Low => -20,
                 WeaponQuality.Exceptional => 20,
@@ -937,8 +944,8 @@ namespace Server.Items
             }
 
             // New quality bonus:
-            if (Quality != WeaponQuality.Regular)
-                modifiers += ((int) Quality - 1) * 0.2;
+            if (Mark != WeaponQuality.Regular)
+                modifiers += ((int) Mark - 1) * 0.2;
 
             // Virtual damage bonus:
             if (VirtualDamageBonus != 0)
@@ -1105,7 +1112,7 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.DamageLevel, DamageLevel != WeaponDamageLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.AccuracyLevel, AccuracyLevel != WeaponAccuracyLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.DurabilityLevel, DurabilityLevel != WeaponDurabilityLevel.Regular);
-                SetSaveFlag(ref flags, SaveFlag.Quality, Quality != WeaponQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != WeaponQuality.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified);
                 SetSaveFlag(ref flags, SaveFlag.Poison, Poison != null);
                 SetSaveFlag(ref flags, SaveFlag.PoisonCharges, PoisonCharges != 0);
@@ -1143,8 +1150,8 @@ namespace Server.Items
             if (GetSaveFlag(flags, SaveFlag.DurabilityLevel))
                 writer.Write((int) DurabilityLevel);
 
-            if (GetSaveFlag(flags, SaveFlag.Quality))
-                writer.Write((int) Quality);
+            if (GetSaveFlag(flags, SaveFlag.Mark))
+                writer.Write((int) Mark);
 
             if (GetSaveFlag(flags, SaveFlag.Hits))
                 writer.Write((int) m_Hits);
@@ -1220,7 +1227,7 @@ namespace Server.Items
             DamageLevel = 0x00000001,
             AccuracyLevel = 0x00000002,
             DurabilityLevel = 0x00000004,
-            Quality = 0x00000008,
+            Mark = 0x00000008,
             Hits = 0x00000010,
             MaxHits = 0x00000020,
             Slayer = 0x00000040,
@@ -1295,10 +1302,10 @@ namespace Server.Items
                             DurabilityLevel = WeaponDurabilityLevel.Durable;
                     }
 
-                    if (GetSaveFlag(flags, SaveFlag.Quality))
-                        Quality = (WeaponQuality) reader.ReadInt();
+                    if (GetSaveFlag(flags, SaveFlag.Mark))
+                        Mark = (WeaponQuality) reader.ReadInt();
                     else
-                        Quality = WeaponQuality.Regular;
+                        Mark = WeaponQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.Hits))
                         m_Hits = reader.ReadInt();
@@ -1449,7 +1456,7 @@ namespace Server.Items
                     DamageLevel = (WeaponDamageLevel) reader.ReadInt();
                     AccuracyLevel = (WeaponAccuracyLevel) reader.ReadInt();
                     DurabilityLevel = (WeaponDurabilityLevel) reader.ReadInt();
-                    Quality = (WeaponQuality) reader.ReadInt();
+                    Mark = (WeaponQuality) reader.ReadInt();
 
                     Crafter = reader.ReadEntity<Mobile>();
 
@@ -1514,7 +1521,7 @@ namespace Server.Items
         {
             Layer = (Layer) ItemData.Quality;
 
-            Quality = WeaponQuality.Regular;
+            Mark = WeaponQuality.Regular;
             m_StrReq = -1;
             m_DexReq = -1;
             m_IntReq = -1;
@@ -1578,8 +1585,8 @@ namespace Server.Items
                     attrs.Add(new EquipInfoAttribute(1049643)); // cursed
             }
 
-            if (Quality == WeaponQuality.Exceptional)
-                attrs.Add(new EquipInfoAttribute(1018305 - (int) Quality));
+            if (Mark == WeaponQuality.Exceptional)
+                attrs.Add(new EquipInfoAttribute(1018305 - (int) Mark));
 
             if (Identified || from.AccessLevel >= AccessLevel.GameMaster)
             {
@@ -1642,12 +1649,20 @@ namespace Server.Items
         public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Quality = (WeaponQuality) quality;
+            Mark = (WeaponQuality) quality;
 
             if (makersMark)
                 Crafter = from;
 
             PlayerConstructed = true;
+
+            var resEnchantments = CraftResources.GetEnchantments(Resource);
+            foreach (var (key, value) in resEnchantments)
+            {
+                Enchantments.SetFromResourceType(key, value);
+            }
+
+            Quality = CraftResources.GetQuality(Resource);
 
             return quality;
         }

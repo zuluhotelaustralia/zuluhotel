@@ -5,6 +5,7 @@ using Server.Engines.Craft;
 using Server.Engines.Magic;
 using Server.Mobiles;
 using ZuluContent.Zulu;
+using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -106,11 +107,16 @@ namespace Server.Items
             get { return 0; }
         }
 
+        public virtual double DefaultMagicEfficiencyPenalty
+        {
+            get { return 0.0; }
+        }
+
         public virtual bool CanFortify
         {
             get { return true; }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public CreatureType CreatureProtection
         {
@@ -145,161 +151,13 @@ namespace Server.Items
         {
             get
             {
-                double ar = BaseArmorRating;
+                var ar = BaseArmorRating;
 
                 if (ProtectionLevel != ArmorProtectionLevel.Regular)
                     ar += 10 + 5 * (int) ProtectionLevel;
 
-                switch (m_Resource)
-                {
-                    case CraftResource.Spike:
-                        ar += 5;
-                        break;
-                    case CraftResource.Fruity:
-                        ar += 5;
-                        break;
-                    case CraftResource.Bronze:
-                        ar += 5;
-                        break;
-                    case CraftResource.IceRock:
-                        ar += 10;
-                        break;
-                    case CraftResource.BlackDwarf:
-                        ar += 10;
-                        break;
-                    case CraftResource.DullCopper:
-                        ar += 10;
-                        break;
-                    case CraftResource.Platinum:
-                        ar += 10;
-                        break;
-                    case CraftResource.SilverRock:
-                        ar += 11;
-                        break;
-                    case CraftResource.DarkPagan:
-                        ar += 12;
-                        break;
-                    case CraftResource.Copper:
-                        ar += 13;
-                        break;
-                    case CraftResource.Mystic:
-                        ar += 14;
-                        break;
-                    case CraftResource.Spectral:
-                        ar += 15;
-                        break;
-                    case CraftResource.OldBritain:
-                        ar += 16;
-                        break;
-                    case CraftResource.Onyx:
-                        ar += 17;
-                        break;
-                    case CraftResource.RedElven:
-                        ar += 18;
-                        break;
-                    case CraftResource.Undead:
-                        ar += 19;
-                        break;
-                    case CraftResource.Pyrite:
-                        ar += 20;
-                        break;
-                    case CraftResource.Virginity:
-                        ar += 20;
-                        break;
-                    case CraftResource.Malachite:
-                        ar += 20;
-                        break;
-                    case CraftResource.Lavarock:
-                        ar += 20;
-                        break;
-                    case CraftResource.Azurite:
-                        ar += 21;
-                        break;
-                    case CraftResource.Dripstone:
-                        ar += 22;
-                        break;
-                    case CraftResource.Executor:
-                        ar += 23;
-                        break;
-                    case CraftResource.Peachblue:
-                        ar += 24;
-                        break;
-                    case CraftResource.Destruction:
-                        ar += 25;
-                        break;
-                    case CraftResource.Anra:
-                        ar += 26;
-                        break;
-                    case CraftResource.Crystal:
-                        ar += 27;
-                        break;
-                    case CraftResource.Doom:
-                        ar += 28;
-                        break;
-                    case CraftResource.Goddess:
-                        ar += 29;
-                        break;
-                    case CraftResource.NewZulu:
-                        ar += 30;
-                        break;
-                    case CraftResource.EbonTwilightSapphire:
-                        ar += 25;
-                        break;
-                    case CraftResource.DarkSableRuby:
-                        ar += 25;
-                        break;
-                    case CraftResource.RadiantNimbusDiamond:
-                        ar += 25;
-                        break;
+                ar = (int) (ar * Quality);
 
-                    case CraftResource.RatLeather:
-                        ar *= 1.15;
-                        break;
-                    case CraftResource.WolfLeather:
-                        ar *= 1.20;
-                        break;
-                    case CraftResource.BearLeather:
-                        ar *= 1.25;
-                        break;
-                    case CraftResource.SerpentLeather:
-                        ar *= 1.30;
-                        break;
-                    case CraftResource.LizardLeather:
-                        ar *= 1.35;
-                        break;
-                    case CraftResource.TrollLeather:
-                        ar *= 1.40;
-                        break;
-                    case CraftResource.OstardLeather:
-                        ar *= 1.45;
-                        break;
-                    case CraftResource.NecromancerLeather:
-                        ar *= 1.50;
-                        break;
-                    case CraftResource.LavaLeather:
-                        ar *= 1.55;
-                        break;
-                    case CraftResource.LicheLeather:
-                        ar *= 1.60;
-                        break;
-                    case CraftResource.IceCrystalLeather:
-                        ar *= 1.65;
-                        break;
-                    case CraftResource.DragonLeather:
-                        ar *= 1.70;
-                        break;
-                    case CraftResource.WyrmLeather:
-                        ar *= 1.80;
-                        break;
-                    case CraftResource.BalronLeather:
-                        ar *= 1.90;
-                        break;
-                    case CraftResource.GoldenDragonLeather:
-                        ar *= 2.0;
-                        break;
-                }
-
-                ar += -8 + 8 * (int) Quality;
                 return ScaleArmorByDurability(ar);
             }
         }
@@ -308,7 +166,7 @@ namespace Server.Items
         {
             get { return ArmorRating * ArmorScalar; }
         }
-        
+
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrRequirement
@@ -330,13 +188,9 @@ namespace Server.Items
             get { return m_IntReq == -1 ? DefaultIntReq : m_IntReq; }
             set { m_IntReq = value; }
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool PlayerConstructed
-        {
-            get;
-            set;
-        }
+        public bool PlayerConstructed { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
@@ -366,12 +220,9 @@ namespace Server.Items
         {
             get
             {
-                int pos = (int) BodyPosition;
-
-                if (pos >= 0 && pos < ArmorScalars.Length)
-                    return ArmorScalars[pos];
-
-                return 1.0;
+                if (!ArmorScalars.TryGetValue(BodyPosition, out var scalar))
+                    scalar = 1.0;
+                return scalar;
             }
         }
 
@@ -406,16 +257,23 @@ namespace Server.Items
 
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ArmorQuality Quality
+        public ArmorQuality Mark
         {
-            get => Enchantments.Get((ItemQuality e) => (ArmorQuality) e.Value);
+            get => Enchantments.Get((ItemMark e) => (ArmorQuality) e.Value);
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((ItemQuality e) => e.Value = (int)value);
+                Enchantments.Set((ItemMark e) => e.Value = (int) value);
                 Invalidate();
                 ScaleDurability();
             }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double Quality
+        {
+            get => Enchantments.Get((ItemQuality e) => e.Value);
+            set => Enchantments.Set((ItemQuality e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -425,7 +283,7 @@ namespace Server.Items
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((DurabilityBonus e) => e.Value = (int)value);
+                Enchantments.Set((DurabilityBonus e) => e.Value = (int) value);
                 ScaleDurability();
             }
         }
@@ -483,13 +341,13 @@ namespace Server.Items
                     Layer.Gloves => ArmorBodyType.Gloves,
                     Layer.Helm => ArmorBodyType.Helmet,
                     Layer.Arms => ArmorBodyType.Arms,
-                    Layer.InnerLegs => ArmorBodyType.Legs,
-                    Layer.OuterLegs => ArmorBodyType.Legs,
-                    Layer.Pants => ArmorBodyType.Legs,
-                    Layer.InnerTorso => ArmorBodyType.Chest,
-                    Layer.OuterTorso => ArmorBodyType.Chest,
-                    Layer.Shirt => ArmorBodyType.Chest,
-                    _ => ArmorBodyType.Gorget
+                    Layer.InnerLegs => ArmorBodyType.InnerLegs,
+                    Layer.OuterLegs => ArmorBodyType.OuterLegs,
+                    Layer.Pants => ArmorBodyType.Pants,
+                    Layer.InnerTorso => ArmorBodyType.InnerChest,
+                    Layer.OuterTorso => ArmorBodyType.OuterChest,
+                    Layer.Shirt => ArmorBodyType.Shirt,
+                    _ => ArmorBodyType.Necklace
                 };
             }
         }
@@ -522,7 +380,7 @@ namespace Server.Items
                 _ => 0
             };
 
-            if (Quality == ArmorQuality.Exceptional)
+            if (Mark == ArmorQuality.Exceptional)
                 bonus += 20;
 
             return bonus;
@@ -558,7 +416,16 @@ namespace Server.Items
             return false;
         }
 
-        public static double[] ArmorScalars { get; set; } = {0.07, 0.07, 0.14, 0.15, 0.22, 0.35};
+        public static Dictionary<ArmorBodyType, double> ArmorScalars = new()
+        {
+            {ArmorBodyType.InnerChest, 0.4},
+            {ArmorBodyType.Arms, 0.15},
+            {ArmorBodyType.InnerLegs, 0.15},
+            {ArmorBodyType.Gorget, 0.07},
+            {ArmorBodyType.Gloves, 0.07},
+            {ArmorBodyType.Helmet, 0.15},
+            {ArmorBodyType.Shield, 0.56}
+        };
 
         public static void ValidateMobile(Mobile m)
         {
@@ -606,12 +473,7 @@ namespace Server.Items
 
         public virtual double ScaleArmorByDurability(double armor)
         {
-            int scale = 100;
-
-            if (MaxHitPoints > 0 && m_HitPoints < MaxHitPoints)
-                scale = 50 + 50 * m_HitPoints / MaxHitPoints;
-
-            return armor * scale / 100;
+            return armor * (m_HitPoints / MaxHitPoints);
         }
 
         protected void Invalidate()
@@ -650,7 +512,7 @@ namespace Server.Items
             MaxHitPoints = 0x00000100,
             HitPoints = 0x00000200,
             Crafter = 0x00000400,
-            Quality = 0x00000800,
+            Mark = 0x00000800,
             Durability = 0x00001000,
             Protection = 0x00002000,
             Resource = 0x00004000,
@@ -677,7 +539,7 @@ namespace Server.Items
 
             SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
-            
+
             if (!GetSaveFlag(flags, SaveFlag.ICraftable))
             {
                 SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
@@ -688,7 +550,7 @@ namespace Server.Items
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
             {
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified != false);
-                SetSaveFlag(ref flags, SaveFlag.Quality, Quality != ArmorQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != ArmorQuality.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Durability, Durability != ArmorDurabilityLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Protection, ProtectionLevel != ArmorProtectionLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.MedAllowance, m_Meditate != (AMA) (-1));
@@ -707,9 +569,9 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.IntReq, m_IntReq != -1);
 
             writer.WriteEncodedInt((int) flags);
-            
+
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
-               ICraftable.Serialize(writer, this);
+                ICraftable.Serialize(writer, this);
 
             if (GetSaveFlag(flags, SaveFlag.MaxHitPoints))
                 writer.WriteEncodedInt((int) MaxHitPoints);
@@ -720,8 +582,8 @@ namespace Server.Items
             if (GetSaveFlag(flags, SaveFlag.Crafter))
                 writer.Write((Mobile) m_Crafter);
 
-            if (GetSaveFlag(flags, SaveFlag.Quality))
-                writer.WriteEncodedInt((int) Quality);
+            if (GetSaveFlag(flags, SaveFlag.Mark))
+                writer.WriteEncodedInt((int) Mark);
 
             if (GetSaveFlag(flags, SaveFlag.Durability))
                 writer.WriteEncodedInt((int) Durability);
@@ -787,13 +649,13 @@ namespace Server.Items
                     if (GetSaveFlag(flags, SaveFlag.Crafter))
                         m_Crafter = reader.ReadEntity<Mobile>();
 
-                    if (GetSaveFlag(flags, SaveFlag.Quality))
-                        Quality = (ArmorQuality) reader.ReadEncodedInt();
-                    else
-                        Quality = ArmorQuality.Regular;
+                    if (GetSaveFlag(flags, SaveFlag.Mark))
+                        Mark = (ArmorQuality) reader.ReadEncodedInt();
+                    else if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
+                        Mark = ArmorQuality.Regular;
 
-                    if (version == 5 && Quality == ArmorQuality.Low)
-                        Quality = ArmorQuality.Regular;
+                    if (version == 5 && Mark == ArmorQuality.Low)
+                        Mark = ArmorQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.Durability))
                     {
@@ -877,7 +739,7 @@ namespace Server.Items
                     MaxHitPoints = reader.ReadInt();
                     m_HitPoints = reader.ReadInt();
                     m_Crafter = reader.ReadEntity<Mobile>();
-                    Quality = (ArmorQuality) reader.ReadInt();
+                    Mark = (ArmorQuality) reader.ReadInt();
                     Durability = (ArmorDurabilityLevel) reader.ReadInt();
                     ProtectionLevel = (ArmorProtectionLevel) reader.ReadInt();
 
@@ -992,7 +854,10 @@ namespace Server.Items
             DexBonus = DefaultDexBonus;
             IntBonus = DefaultIntBonus;
 
-            Quality = ArmorQuality.Regular;
+            MagicEfficiencyPenalty = DefaultMagicEfficiencyPenalty;
+
+            Mark = ArmorQuality.Regular;
+            Quality = 1.0;
             Durability = ArmorDurabilityLevel.Regular;
             m_Crafter = null;
 
@@ -1193,7 +1058,7 @@ namespace Server.Items
         public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Quality = (ArmorQuality) quality;
+            Mark = (ArmorQuality) quality;
 
             if (makersMark)
                 Crafter = from;
@@ -1205,6 +1070,14 @@ namespace Server.Items
 
             Resource = CraftResources.GetFromType(resourceType);
             PlayerConstructed = true;
+
+            var resEnchantments = CraftResources.GetEnchantments(Resource);
+            foreach (var (key, value) in resEnchantments)
+            {
+                Enchantments.SetFromResourceType(key, value);
+            }
+
+            Quality = CraftResources.GetQuality(Resource);
 
             CraftContext context = craftSystem.GetContext(from);
 

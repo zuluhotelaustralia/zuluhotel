@@ -9,7 +9,8 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseClothing : BaseEquippableItem, IDyable, IScissorable, ICraftable, IWearableDurability, IArmorRating, IMagicItem
+    public abstract class BaseClothing : BaseEquippableItem, IDyable, IScissorable, ICraftable, IWearableDurability,
+        IArmorRating, IMagicItem
     {
         public virtual bool CanFortify
         {
@@ -29,7 +30,7 @@ namespace Server.Items
             {
                 if (value > ArmorBonusType.Adamantium)
                     return;
-                
+
                 Enchantments.Set((ArmorBonus e) => e.Value = value);
                 Invalidate();
             }
@@ -39,11 +40,23 @@ namespace Server.Items
         public int BaseArmorRating
         {
             get => (int) ArmorBonusType;
-            set => ArmorBonusType = (ArmorBonusType)value;
+            set => ArmorBonusType = (ArmorBonusType) value;
         }
 
         public double BaseArmorRatingScaled => BaseArmorRating;
-        public double ArmorRating => BaseArmorRating;
+
+        public double ArmorRating
+        {
+            get
+            {
+                var ar = BaseArmorRating;
+
+                ar = (int) (ar * Quality);
+
+                return ar;
+            }
+        }
+
         public double ArmorRatingScaled => BaseArmorRating;
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -80,21 +93,24 @@ namespace Server.Items
             get { return m_StrReq == -1 ? DefaultStrReq : m_StrReq; }
             set { m_StrReq = value; }
         }
-        
+
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ClothingQuality Quality
+        public ClothingQuality Mark
         {
-            get => Enchantments.Get((ItemQuality e) => (ClothingQuality)e.Value);
-            set => Enchantments.Set((ItemQuality e) => e.Value = (int)value);
+            get => Enchantments.Get((ItemMark e) => (ClothingQuality) e.Value);
+            set => Enchantments.Set((ItemMark e) => e.Value = (int) value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool PlayerConstructed
+        public double Quality
         {
-            get;
-            set;
+            get => Enchantments.Get((ItemQuality e) => e.Value);
+            set => Enchantments.Set((ItemQuality e) => e.Value = value);
         }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
 
         public virtual CraftResource DefaultResource
         {
@@ -111,7 +127,7 @@ namespace Server.Items
                 Hue = CraftResources.GetHue(m_Resource);
             }
         }
-        
+
         public virtual int DefaultStrBonus
         {
             get => 0;
@@ -126,7 +142,7 @@ namespace Server.Items
         {
             get => 0;
         }
-        
+
         public virtual Race RequiredRace
         {
             get { return null; }
@@ -134,7 +150,6 @@ namespace Server.Items
 
         public override bool CanEquip(Mobile from)
         {
-
             if (RequiredRace != null && from.Race != RequiredRace)
             {
                 if (RequiredRace == Race.Elf)
@@ -225,7 +240,7 @@ namespace Server.Items
                 _ => 0
             };
         }
-        
+
         public static void ValidateMobile(Mobile m)
         {
             for (int i = m.Items.Count - 1; i >= 0; --i)
@@ -267,7 +282,7 @@ namespace Server.Items
                 }
             }
         }
-        
+
         protected void Invalidate()
         {
             if (Parent is Mobile mp)
@@ -351,12 +366,12 @@ namespace Server.Items
             StrBonus = DefaultStrBonus;
             DexBonus = DefaultDexBonus;
             IntBonus = DefaultIntBonus;
-            
+
             Layer = layer;
             Hue = hue;
 
             m_Resource = DefaultResource;
-            Quality = ClothingQuality.Regular;
+            Mark = ClothingQuality.Regular;
 
             m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
         }
@@ -386,7 +401,7 @@ namespace Server.Items
 
             return false;
         }
-        
+
         public override void OnSingleClick(Mobile from)
         {
             // List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
@@ -411,7 +426,7 @@ namespace Server.Items
             // EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false, attrs.ToArray());
             //
             // from.Send(new DisplayEquipmentInfo(this, eqInfo));
-            
+
             HandleSingleClick(this, from);
         }
 
@@ -425,8 +440,8 @@ namespace Server.Items
                     attrs.Add(new EquipInfoAttribute(1049643)); // cursed
             }
 
-            if (Quality == ClothingQuality.Exceptional)
-                attrs.Add(new EquipInfoAttribute(1018305 - (int) Quality));
+            if (Mark == ClothingQuality.Exceptional)
+                attrs.Add(new EquipInfoAttribute(1018305 - (int) Mark));
         }
 
         #region Serialization
@@ -455,7 +470,7 @@ namespace Server.Items
             HitPoints = 0x00000040,
             PlayerConstructed = 0x00000080,
             Crafter = 0x00000100,
-            Quality = 0x00000200,
+            Mark = 0x00000200,
             StrReq = 0x00000400,
             NewMagicalProperties = 0x00080000,
             ICraftable = 0x00100000
@@ -468,10 +483,10 @@ namespace Server.Items
             writer.Write((int) 7); // version
 
             SaveFlag flags = SaveFlag.None;
-            
+
             SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
-            
+
             if (!GetSaveFlag(flags, SaveFlag.ICraftable))
             {
                 SetSaveFlag(ref flags, SaveFlag.PlayerConstructed, PlayerConstructed);
@@ -480,7 +495,7 @@ namespace Server.Items
 
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
             {
-                SetSaveFlag(ref flags, SaveFlag.Quality, Quality != ClothingQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != ClothingQuality.Regular);
             }
 
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != DefaultResource);
@@ -489,7 +504,7 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
 
             writer.WriteEncodedInt((int) flags);
-            
+
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
                 ICraftable.Serialize(writer, this);
 
@@ -505,8 +520,8 @@ namespace Server.Items
             if (GetSaveFlag(flags, SaveFlag.Crafter))
                 writer.Write((Mobile) Crafter);
 
-            if (GetSaveFlag(flags, SaveFlag.Quality))
-                writer.WriteEncodedInt((int) Quality);
+            if (GetSaveFlag(flags, SaveFlag.Mark))
+                writer.WriteEncodedInt((int) Mark);
 
             if (GetSaveFlag(flags, SaveFlag.StrReq))
                 writer.WriteEncodedInt((int) m_StrReq);
@@ -542,10 +557,10 @@ namespace Server.Items
                     if (GetSaveFlag(flags, SaveFlag.Crafter))
                         Crafter = reader.ReadEntity<Mobile>();
 
-                    if (GetSaveFlag(flags, SaveFlag.Quality))
-                        Quality = (ClothingQuality) reader.ReadEncodedInt();
-                    else if(!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                        Quality = ClothingQuality.Regular;
+                    if (GetSaveFlag(flags, SaveFlag.Mark))
+                        Mark = (ClothingQuality) reader.ReadEncodedInt();
+                    else if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
+                        Mark = ClothingQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.StrReq))
                         m_StrReq = reader.ReadEncodedInt();
@@ -572,13 +587,13 @@ namespace Server.Items
                 case 1:
                 {
                     Crafter = reader.ReadEntity<Mobile>();
-                    Quality = (ClothingQuality) reader.ReadInt();
+                    Mark = (ClothingQuality) reader.ReadInt();
                     break;
                 }
                 case 0:
                 {
                     Crafter = null;
-                    Quality = ClothingQuality.Regular;
+                    Mark = ClothingQuality.Regular;
                     break;
                 }
             }
@@ -659,7 +674,7 @@ namespace Server.Items
         public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Quality = (ClothingQuality) quality;
+            Mark = (ClothingQuality) quality;
 
             if (makersMark)
                 Crafter = from;
@@ -679,6 +694,14 @@ namespace Server.Items
             }
 
             PlayerConstructed = true;
+
+            var resEnchantments = CraftResources.GetEnchantments(Resource);
+            foreach (var (key, value) in resEnchantments)
+            {
+                Enchantments.SetFromResourceType(key, value);
+            }
+
+            Quality = CraftResources.GetQuality(Resource);
 
             CraftContext context = craftSystem.GetContext(from);
 
