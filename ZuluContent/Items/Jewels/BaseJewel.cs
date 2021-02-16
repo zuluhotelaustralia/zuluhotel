@@ -240,7 +240,7 @@ namespace Server.Items
             Type resourceType = typeRes;
 
             if (resourceType == null)
-                resourceType = craftItem.Resources.GetAt(0).ItemType;
+                resourceType = craftItem.Resources[0].ItemType;
 
             Resource = CraftResources.GetFromType(resourceType);
 
@@ -251,7 +251,7 @@ namespace Server.Items
 
             if (1 < craftItem.Resources.Count)
             {
-                resourceType = craftItem.Resources.GetAt(1).ItemType;
+                resourceType = craftItem.Resources[1].ItemType;
 
                 if (resourceType == typeof(StarSapphire))
                     GemType = GemType.StarSapphire;

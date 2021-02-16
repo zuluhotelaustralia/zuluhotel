@@ -1,6 +1,7 @@
 using System;
 using MessagePack;
 using Server;
+using Server.Engines.Craft;
 using Server.Engines.Magic;
 using Server.Items;
 using Server.Spells;
@@ -156,6 +157,16 @@ namespace ZuluContent.Zulu.Engines.Magic
         public virtual void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor,
             ref int damage)
         {
+        }
+        
+        public void OnItemCrafted(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        {
+            
+        }
+        
+        public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)
+        {
+            
         }
     }
 }

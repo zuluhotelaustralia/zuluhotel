@@ -2,6 +2,8 @@ namespace Server.Items
 {
     public class GrandMageRefreshElixir : BasePotion
     {
+        public override uint PotionStrength { get; set; } = 1;
+
         public override string DefaultName { get; } = "Grand Mage Refresh Elixir";
 
         public override int Hue { get; set; } = 0x486;

@@ -2,20 +2,11 @@ namespace Server.Items
 {
     public class HealPotion : BaseHealPotion
     {
-        public override int MinHeal
-        {
-            get { return 6; }
-        }
+        public override int MinHeal { get; } = 6;
+        public override int MaxHeal { get; } = 20;
+        public override double Delay { get; } = 10.0;
 
-        public override int MaxHeal
-        {
-            get { return 20; }
-        }
-
-        public override double Delay
-        {
-            get { return 10.0; }
-        }
+        public override uint PotionStrength { get; set; } = 3;
 
 
         [Constructible]

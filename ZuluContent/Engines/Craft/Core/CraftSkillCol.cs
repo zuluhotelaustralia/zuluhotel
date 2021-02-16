@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Server.Engines.Craft
 {
     public class CraftSkillCol : System.Collections.CollectionBase
@@ -21,6 +24,7 @@ namespace Server.Engines.Craft
 				List.RemoveAt( index );
 			}
 		}
+
 
 		public CraftSkill GetAt( int index )
 		{

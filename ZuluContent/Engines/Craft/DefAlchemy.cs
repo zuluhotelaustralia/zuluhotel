@@ -72,8 +72,8 @@ namespace Server.Engines.Craft
                     entry.ItemType,
                     entry.GroupName,
                     entry.Name,
-                    entry.MinSkill,
-                    entry.MaxSkill,
+                    entry.Skill,
+                    entry.Skill,
                     // AddCraft() needs at least one resource by default
                     firstResource.ItemType,
                     firstResource.Name,
@@ -162,9 +162,7 @@ namespace Server.Engines.Craft
             public Type ItemType { get; init; }
             public TextDefinition Name { get; init; }
             public TextDefinition GroupName { get; init; }
-            public double MinSkill { get; init; }
-            public double MaxSkill { get; init; }
-
+            public double Skill { get; init; }
             public PotionResource[] Resources { get; init; }
         }
 

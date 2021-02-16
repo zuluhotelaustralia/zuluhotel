@@ -12,8 +12,7 @@
       "ItemType": "Server.Items.RefreshPotion",
       "Name": 1044538,
       "GroupName": 1044530,
-      "MinSkill": -25,
-      "MaxSkill": 25,
+      "Skill": 10,
       "Resources": [
         {
           "ItemType": "Server.Items.BlackPearl",
@@ -33,8 +32,7 @@
       "ItemType": "Server.Items.TotalRefreshPotion",
       "Name": 1044539,
       "GroupName": 1044530,
-      "MinSkill": 25,
-      "MaxSkill": 75,
+      "Skill": 50,
       "Resources": [
         {
           "ItemType": "Server.Items.BlackPearl",
@@ -54,8 +52,7 @@
       "ItemType": "Server.Items.AgilityPotion",
       "Name": 1044540,
       "GroupName": 1044531,
-      "MinSkill": 15,
-      "MaxSkill": 65,
+      "Skill": 30,
       "Resources": [
         {
           "ItemType": "Server.Items.Bloodmoss",
@@ -75,8 +72,7 @@
       "ItemType": "Server.Items.GreaterAgilityPotion",
       "Name": 1044541,
       "GroupName": 1044531,
-      "MinSkill": 35,
-      "MaxSkill": 85,
+      "Skill": 70,
       "Resources": [
         {
           "ItemType": "Server.Items.Bloodmoss",
@@ -96,8 +92,7 @@
       "ItemType": "Server.Items.NightSightPotion",
       "Name": 1044542,
       "GroupName": 1044532,
-      "MinSkill": -25,
-      "MaxSkill": 25,
+      "Skill": 10,
       "Resources": [
         {
           "ItemType": "Server.Items.SpidersSilk",
@@ -117,8 +112,7 @@
       "ItemType": "Server.Items.LesserHealPotion",
       "Name": 1044543,
       "GroupName": 1044533,
-      "MinSkill": -25,
-      "MaxSkill": 25,
+      "Skill": 15,
       "Resources": [
         {
           "ItemType": "Server.Items.Ginseng",
@@ -138,8 +132,7 @@
       "ItemType": "Server.Items.HealPotion",
       "Name": 1044544,
       "GroupName": 1044533,
-      "MinSkill": 15,
-      "MaxSkill": 65,
+      "Skill": 60,
       "Resources": [
         {
           "ItemType": "Server.Items.Ginseng",
@@ -159,8 +152,7 @@
       "ItemType": "Server.Items.GreaterHealPotion",
       "Name": 1044545,
       "GroupName": 1044533,
-      "MinSkill": 55,
-      "MaxSkill": 105,
+      "Skill": 85,
       "Resources": [
         {
           "ItemType": "Server.Items.Ginseng",
@@ -180,8 +172,7 @@
       "ItemType": "Server.Items.StrengthPotion",
       "Name": 1044546,
       "GroupName": 1044534,
-      "MinSkill": 25,
-      "MaxSkill": 75,
+      "Skill": 30,
       "Resources": [
         {
           "ItemType": "Server.Items.MandrakeRoot",
@@ -201,8 +192,7 @@
       "ItemType": "Server.Items.GreaterStrengthPotion",
       "Name": 1044547,
       "GroupName": 1044534,
-      "MinSkill": 45,
-      "MaxSkill": 95,
+      "Skill": 70,
       "Resources": [
         {
           "ItemType": "Server.Items.MandrakeRoot",
@@ -222,8 +212,7 @@
       "ItemType": "Server.Items.LesserPoisonPotion",
       "Name": 1044548,
       "GroupName": 1044535,
-      "MinSkill": -5,
-      "MaxSkill": 45,
+      "Skill": 15,
       "Resources": [
         {
           "ItemType": "Server.Items.Nightshade",
@@ -243,8 +232,7 @@
       "ItemType": "Server.Items.PoisonPotion",
       "Name": 1044549,
       "GroupName": 1044535,
-      "MinSkill": 15,
-      "MaxSkill": 65,
+      "Skill": 50,
       "Resources": [
         {
           "ItemType": "Server.Items.Nightshade",
@@ -264,8 +252,7 @@
       "ItemType": "Server.Items.GreaterPoisonPotion",
       "Name": 1044550,
       "GroupName": 1044535,
-      "MinSkill": 55,
-      "MaxSkill": 105,
+      "Skill": 90,
       "Resources": [
         {
           "ItemType": "Server.Items.Nightshade",
@@ -285,8 +272,7 @@
       "ItemType": "Server.Items.DeadlyPoisonPotion",
       "Name": 1044551,
       "GroupName": 1044535,
-      "MinSkill": 90,
-      "MaxSkill": 140,
+      "Skill": 100,
       "Resources": [
         {
           "ItemType": "Server.Items.Nightshade",
@@ -306,8 +292,7 @@
       "ItemType": "Server.Items.LesserCurePotion",
       "Name": 1044552,
       "GroupName": 1044536,
-      "MinSkill": -10,
-      "MaxSkill": 40,
+      "Skill": 15,
       "Resources": [
         {
           "ItemType": "Server.Items.Garlic",
@@ -327,8 +312,7 @@
       "ItemType": "Server.Items.CurePotion",
       "Name": 1044553,
       "GroupName": 1044536,
-      "MinSkill": 25,
-      "MaxSkill": 75,
+      "Skill": 50,
       "Resources": [
         {
           "ItemType": "Server.Items.Garlic",
@@ -348,8 +332,7 @@
       "ItemType": "Server.Items.GreaterCurePotion",
       "Name": 1044554,
       "GroupName": 1044536,
-      "MinSkill": 65,
-      "MaxSkill": 115,
+      "Skill": 90,
       "Resources": [
         {
           "ItemType": "Server.Items.Garlic",
@@ -369,8 +352,7 @@
       "ItemType": "Server.Items.LesserExplosionPotion",
       "Name": 1044555,
       "GroupName": 1044537,
-      "MinSkill": 5,
-      "MaxSkill": 25,
+      "Skill": 25,
       "Resources": [
         {
           "ItemType": "Server.Items.SulfurousAsh",
@@ -390,8 +372,7 @@
       "ItemType": "Server.Items.ExplosionPotion",
       "Name": 1044556,
       "GroupName": 1044537,
-      "MinSkill": 35,
-      "MaxSkill": 85,
+      "Skill": 70,
       "Resources": [
         {
           "ItemType": "Server.Items.SulfurousAsh",
@@ -411,8 +392,7 @@
       "ItemType": "Server.Items.GreaterExplosionPotion",
       "Name": 1044557,
       "GroupName": 1044537,
-      "MinSkill": 65,
-      "MaxSkill": 115,
+      "Skill": 90,
       "Resources": [
         {
           "ItemType": "Server.Items.SulfurousAsh",

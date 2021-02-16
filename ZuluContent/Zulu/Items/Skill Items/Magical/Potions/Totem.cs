@@ -3,12 +3,14 @@ using System.Linq;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Utilities;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
     public abstract class BaseTotem : BasePotion
     {
-        
+        public override uint PotionStrength { get; set; } = 1;
+
         protected BaseTotem(int itemId) : base(itemId,  PotionEffect.Totem)
         {
         }
@@ -53,6 +55,7 @@ namespace Server.Items
                 foreach (var s in caster.Skills) 
                     creature.Skills[s.SkillName].Base = s.Base;
 
+                caster.FireHook(h => h.OnSummonFamiliar(caster, creature));
                 return true;
             }
             

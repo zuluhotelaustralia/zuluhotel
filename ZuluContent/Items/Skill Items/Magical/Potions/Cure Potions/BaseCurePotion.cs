@@ -1,3 +1,6 @@
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+
 namespace Server.Items
 {
     public record CureLevelInfo(Poison Poison, double Chance);
@@ -30,27 +33,20 @@ namespace Server.Items
 
         public void DoCure(Mobile from)
         {
-            bool cure = false;
+            
+            var power = PotionStrength;
+            
+            if ((from as IEnchanted)?.Enchantments.Get((HealingBonus e) => e.Value) > 0) 
+                power += 1;
 
-            CureLevelInfo[] info = LevelInfo;
-
-            foreach (var li in info)
-            {
-                if (li.Poison == @from.Poison && Scale(@from, li.Chance) > Utility.RandomDouble())
-                {
-                    cure = true;
-                    break;
-                }
-            }
-
-            if (cure && from.CurePoison(from))
+            if (power > from.Poison.Level && from.CurePoison(from))
             {
                 from.SendLocalizedMessage(500231); // You feel cured of poison!
 
                 from.FixedEffect(0x373A, 10, 15);
                 from.PlaySound(0x1E0);
             }
-            else if (!cure)
+            else
             {
                 from.SendLocalizedMessage(500232); // That potion was not strong enough to cure your ailment!
             }

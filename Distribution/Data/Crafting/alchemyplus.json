@@ -12,8 +12,7 @@
       "ItemType": "Server.Items.PhandelsFineIntellectPotion",
       "Name": "Phandel's Fine Intellect",
       "GroupName": 3000112,
-      "MinSkill": 30,
-      "MaxSkill": 30,
+      "Skill": 30,
       "Resources": [
         {
           "ItemType": "Server.Items.FertileDirt",
@@ -39,8 +38,7 @@
       "ItemType": "Server.Items.PhandelsFabulousIntellectPotion",
       "Name": "Phandel's Fabulous Intellect",
       "GroupName": 3000112,
-      "MinSkill": 60,
-      "MaxSkill": 60,
+      "Skill": 60,
       "Resources": [
         {
           "ItemType": "Server.Items.FertileDirt",
@@ -66,8 +64,7 @@
       "ItemType": "Server.Items.PhandelsFantasticIntellectPotion",
       "Name": "Phandel's Fantastic Intellect",
       "GroupName": 3000112,
-      "MinSkill": 80,
-      "MaxSkill": 80,
+      "Skill": 80,
       "Resources": [
         {
           "ItemType": "Server.Items.FertileDirt",
@@ -93,8 +90,7 @@
       "ItemType": "Server.Items.LesserMegoInvulnerabilityPotion",
       "Name": "lesser Mego Invulnerability potion",
       "GroupName": 3002025,
-      "MinSkill": 30,
-      "MaxSkill": 30,
+      "Skill": 30,
       "Resources": [
         {
           "ItemType": "Server.Items.SerpentScale",
@@ -120,8 +116,7 @@
       "ItemType": "Server.Items.MegoInvulnerabilityPotion",
       "Name": "Mego Invulnerability potion",
       "GroupName": 3002025,
-      "MinSkill": 50,
-      "MaxSkill": 50,
+      "Skill": 50,
       "Resources": [
         {
           "ItemType": "Server.Items.SerpentScale",
@@ -147,8 +142,7 @@
       "ItemType": "Server.Items.GreaterMegoInvulnerabilityPotion",
       "Name": "greater Mego Invulnerability potion",
       "GroupName": 3002025,
-      "MinSkill": 80,
-      "MaxSkill": 80,
+      "Skill": 80,
       "Resources": [
         {
           "ItemType": "Server.Items.SerpentScale",
@@ -174,8 +168,7 @@
       "ItemType": "Server.Items.GrandMageRefreshElixir",
       "Name": "Grand Mage Refresh Elixir",
       "GroupName": 1075867,
-      "MinSkill": 120,
-      "MaxSkill": 120,
+      "Skill": 120,
       "Resources": [
         {
           "ItemType": "Server.Items.Blackmoor",
@@ -201,8 +194,7 @@
       "ItemType": "Server.Items.HomericMightPotion",
       "Name": "Homeric Might potion",
       "GroupName": 1044397,
-      "MinSkill": 40,
-      "MaxSkill": 40,
+      "Skill": 40,
       "Resources": [
         {
           "ItemType": "Server.Items.DragonsBlood",
@@ -228,8 +220,7 @@
       "ItemType": "Server.Items.GreaterHomericMightPotion",
       "Name": "Greater Homeric Might potion",
       "GroupName": 1044397,
-      "MinSkill": 75,
-      "MaxSkill": 75,
+      "Skill": 75,
       "Resources": [
         {
           "ItemType": "Server.Items.DragonsBlood",
@@ -255,8 +246,7 @@
       "ItemType": "Server.Items.TamlaHealPotion",
       "Name": "Tamla Heal potion",
       "GroupName": 1075867,
-      "MinSkill": 115,
-      "MaxSkill": 115,
+      "Skill": 115,
       "Resources": [
         {
           "ItemType": "Server.Items.GreaterHealPotion",
@@ -288,8 +278,7 @@
       "ItemType": "Server.Items.TaintsTransmutationPotion",
       "Name": "Taint's Minor Transmutation",
       "GroupName": 1075824,
-      "MinSkill": 70,
-      "MaxSkill": 70,
+      "Skill": 70,
       "Resources": [
         {
           "ItemType": "Server.Items.FertileDirt",
@@ -315,8 +304,7 @@
       "ItemType": "Server.Items.TaintsMajorTransmutationPotion",
       "Name": "Taint's Major Transmutation",
       "GroupName": 1075824,
-      "MinSkill": 90,
-      "MaxSkill": 90,
+      "Skill": 90,
       "Resources": [
         {
           "ItemType": "Server.Items.FertileDirt",
@@ -342,8 +330,7 @@
       "ItemType": "Server.Items.Totem",
       "Name": "Totem",
       "GroupName": 1061664,
-      "MinSkill": 130,
-      "MaxSkill": 130,
+      "Skill": 130,
       "Resources": [
         {
           "ItemType": "Server.Items.BatWing",
@@ -369,8 +356,7 @@
       "ItemType": "Server.Items.TotemElixir",
       "Name": "Elixir",
       "GroupName": 1061664,
-      "MinSkill": 130,
-      "MaxSkill": 130,
+      "Skill": 130,
       "Resources": [
         {
           "ItemType": "Server.Items.WyrmsHeart",

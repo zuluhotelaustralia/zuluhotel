@@ -623,7 +623,7 @@ namespace Server.Items
 
             CraftItem item = system.CraftItems.SearchFor(GetType());
 
-            if (item != null && item.Resources.Count == 1 && item.Resources.GetAt(0).Amount >= 2)
+            if (item != null && item.Resources.Count == 1 && item.Resources[0].Amount >= 2)
             {
                 try
                 {
@@ -635,11 +635,11 @@ namespace Server.Items
                         resourceType = info.ResourceTypes[0];
 
                     if (resourceType == null)
-                        resourceType = item.Resources.GetAt(0).ItemType;
+                        resourceType = item.Resources[0].ItemType;
 
                     Item res = (Item) Activator.CreateInstance(resourceType);
 
-                    ScissorHelper(from, res, PlayerConstructed ? item.Resources.GetAt(0).Amount / 2 : 1);
+                    ScissorHelper(from, res, PlayerConstructed ? item.Resources[0].Amount / 2 : 1);
 
                     res.LootType = LootType.Regular;
 
@@ -669,7 +669,7 @@ namespace Server.Items
                 Type resourceType = typeRes;
 
                 if (resourceType == null)
-                    resourceType = craftItem.Resources.GetAt(0).ItemType;
+                    resourceType = craftItem.Resources[0].ItemType;
 
                 Resource = CraftResources.GetFromType(resourceType);
             }

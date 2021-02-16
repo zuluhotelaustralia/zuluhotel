@@ -1,4 +1,5 @@
 using System;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -31,10 +32,12 @@ namespace Server.Items
 
 		public bool DoAgility( Mobile from )
 		{
-			// TODO: Verify scaled; is it offset, duration, or both?
-			if ( Spells.SpellHelper.AddStatOffset( from, StatType.Dex, Scale( from, DexOffset ), Duration ) )
-			{
-				from.FixedEffect( 0x375A, 10, 15 );
+            var mod = Utility.Dice(PotionStrength, 2, 5);
+            var duration = TimeSpan.FromSeconds(PotionStrength * 120);
+
+            if (SpellHelper.AddStatBonus(from, from, StatType.Dex, mod, duration))
+            {
+                from.FixedEffect( 0x375A, 10, 15 );
 				from.PlaySound( 0x1E7 );
 				return true;
 			}

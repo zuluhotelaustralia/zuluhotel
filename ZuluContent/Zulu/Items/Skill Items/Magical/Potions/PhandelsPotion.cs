@@ -8,9 +8,30 @@ namespace Server.Items
     public class PhandelsFineIntellectPotion : BasePhandelsPotion
     {
         public override string DefaultName { get; } = "a Phandel's Fine Intellect potion";
-        public override uint PotionStrength { get; } = 3;
+        public override uint PotionStrength { get; set; } = 3;
         public PhandelsFineIntellectPotion() : base(PotionEffect.PhandelsFineIntellect) { }
         public PhandelsFineIntellectPotion(Serial serial) : base(serial) { }
+        
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
+        }
+    }
+    
+    public class PhandelsFabulousIntellectPotion : BasePhandelsPotion
+    {
+        public override uint PotionStrength { get; set; } = 5;
+
+        public override string DefaultName { get; } = "a Phandel's Fabulous Intellect potion";
+        public PhandelsFabulousIntellectPotion() : base(PotionEffect.PhandelsFabulousIntellect) { }
+        public PhandelsFabulousIntellectPotion(Serial serial) : base(serial) { }
         
         public override void Serialize(IGenericWriter writer)
         {
@@ -28,7 +49,7 @@ namespace Server.Items
     public class PhandelsFantasticIntellectPotion : BasePhandelsPotion
     {
         public override string DefaultName { get; } = "a Phandel's Fantastic Intellect potion";
-        public override uint PotionStrength { get; } = 5;
+        public override uint PotionStrength { get; set; } = 7;
         public PhandelsFantasticIntellectPotion() : base(PotionEffect.PhandelsFantasticIntellect) { }
         public PhandelsFantasticIntellectPotion(Serial serial) : base(serial) { }
         
@@ -45,30 +66,8 @@ namespace Server.Items
         }
     }
     
-    public class PhandelsFabulousIntellectPotion : BasePhandelsPotion
-    {
-        public override string DefaultName { get; } = "a Phandel's Fabulous Intellect potion";
-        public override uint PotionStrength { get; } = 7;
-        public PhandelsFabulousIntellectPotion() : base(PotionEffect.PhandelsFabulousIntellect) { }
-        public PhandelsFabulousIntellectPotion(Serial serial) : base(serial) { }
-        
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
-        }
-    }
-    
     public abstract class BasePhandelsPotion : BasePotion
     {
-        public abstract uint PotionStrength { get; }
-
         public BasePhandelsPotion(PotionEffect effect) : base(0xE29, effect)
         {
         }

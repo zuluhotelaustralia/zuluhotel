@@ -8,7 +8,7 @@ namespace Server.Items
         public override int Hue { get; set; } = 133;
 
         public override string DefaultName { get; } = "a Homeric Might potion";
-        public override uint PotionStrength { get; } = 4;
+        public override uint PotionStrength { get; set; } = 4;
         public HomericMightPotion() : base(PotionEffect.HomericMight) { }
         public HomericMightPotion(Serial serial) : base(serial) { }
         
@@ -30,10 +30,11 @@ namespace Server.Items
         public override int Hue { get; set; } = 0;
 
         public override string DefaultName { get; } = "a greater Homeric Might potion";
-        public override uint PotionStrength { get; } = 9;
+        public override uint PotionStrength { get; set; } = 9;
         public GreaterHomericMightPotion() : base(PotionEffect.GreaterHomericMight) { }
         public GreaterHomericMightPotion(Serial serial) : base(serial) { }
-        
+
+
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
@@ -48,8 +49,6 @@ namespace Server.Items
     }
     public abstract class BaseHomericMightPotion : BasePotion
     {
-        public abstract uint PotionStrength { get; }
-
         public BaseHomericMightPotion(PotionEffect effect) : base(0xEFB, effect)
         {
         }
