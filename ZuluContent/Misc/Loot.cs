@@ -121,7 +121,7 @@ namespace Server
     private static Type[] m_PaganRegTypes = new[]
     {
       typeof(BatWing), typeof(Bone), typeof(DeadWood),
-      typeof(ExecutionersCap), typeof(FertileDirt), typeof(NoxCrystal),
+      typeof(ExecutionersCap), typeof(FertileDirt), typeof(SerpentScale),
       typeof(Blackmoor), typeof(Brimstone), typeof(EyeOfNewt),
       typeof(Pumice), typeof(VolcanicAsh), typeof(Obsidian),
       typeof(PigIron), typeof(VialOfBlood), typeof(WyrmsHeart),

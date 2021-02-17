@@ -158,10 +158,13 @@ namespace ZuluContent.Zulu.Engines.Magic
             ref int damage)
         {
         }
-        
-        public void OnItemCrafted(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+
+        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
         {
-            
+        }
+
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        {
         }
         
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)

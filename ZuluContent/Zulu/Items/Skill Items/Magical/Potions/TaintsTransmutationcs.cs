@@ -9,7 +9,7 @@ namespace Server.Items
         public override int Hue { get; set; } = 155;
 
         public override uint PotionStrength { get; set; } = 1;
-        public override string DefaultName { get; } = "a Taint's Minor Transmutation";
+        public override string DefaultName { get; } = "Taint's Minor Transmutation potion";
 
         public TaintsTransmutationPotion() : base(PotionEffect.TaintsTransmutation)
         {
@@ -36,7 +36,7 @@ namespace Server.Items
     {
         public override int Hue { get; set; } = 0;
 
-        public override string DefaultName { get; } = "a Taint's Major Transmutation";
+        public override string DefaultName { get; } = "Taint's Major Transmutation potion";
         public override uint PotionStrength { get; set; } = 2;
 
         public TaintsMajorTransmutationPotion() : base(PotionEffect.TaintsMajorTransmutation)

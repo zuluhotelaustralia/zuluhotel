@@ -4,7 +4,7 @@ namespace Server.Items
     {
         public override uint PotionStrength { get; set; } = 1;
 
-        public override string DefaultName { get; } = "a Tamla Heal Potion";
+        public override string DefaultName { get; } = "Tamla Heal Potion";
 
         public override int Hue { get; set; } = 155;
 

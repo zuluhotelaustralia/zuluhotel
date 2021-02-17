@@ -1,41 +1,39 @@
 namespace Server.Items
 {
     public class Bottle : Item
-	{
-
-		[Constructible]
-public Bottle() : this( 1 )
-		{
-		}
-
-
-		[Constructible]
-public Bottle( int amount ) : base( 0xF0E )
-		{
-			Stackable = true;
-			Weight = 1.0;
-			Amount = amount;
-		}
-
-		[Constructible]
-public Bottle( Serial serial ) : base( serial )
-		{
-		}
+    {
+        [Constructible]
+        public Bottle() : this(1)
+        {
+        }
 
 
+        [Constructible]
+        public Bottle(int amount) : base(0xF0E)
+        {
+            Stackable = true;
+            Weight = 1.0;
+            Amount = amount;
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        [Constructible]
+        public Bottle(Serial serial) : base(serial)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-	}
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

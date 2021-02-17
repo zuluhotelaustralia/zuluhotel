@@ -118,9 +118,7 @@ namespace Server.Engines.Craft
             {
                 if (IsPotion(item.ItemType))
                 {
-                    if (item.Resources.Cast<CraftRes>().Any(r => r.ItemType == typeof(Bottle))) 
-                        from.AddToBackpack(new Bottle());
-                    
+                    RecycleBottles(from, item);
                     return 500287; // You fail to create a useful potion.
                 }
                 else
@@ -141,6 +139,16 @@ namespace Server.Engines.Craft
                     return 1044154; // You create the item.
                 }
             }
+        }
+
+        public static void RecycleBottles(Mobile from, CraftItem craftItem)
+        {
+            var usedBottles = craftItem.Resources
+                .Where(r => r.ItemType == typeof(Bottle) || r.ItemType.IsSubclassOf(typeof(BasePotion)))
+                .Sum(r => r.Amount);
+                        
+            if (usedBottles > 0) 
+                from.AddToBackpack(new Bottle(usedBottles));
         }
     }
 

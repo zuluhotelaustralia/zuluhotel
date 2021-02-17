@@ -485,13 +485,13 @@ namespace Scripts.Zulu.Engines.Classes
         public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
         {
         }
-        
-        public void OnItemCrafted(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+
+        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
         {
             if (
-                craftSystem is DefAlchemy 
-                && from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}} 
+                craftSystem is DefAlchemy
                 && item is BasePotion potion
+                && from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}} 
             )
             {
                 var bonus = (uint) (potion.PotionStrength * ClasseBonus - potion.PotionStrength);
@@ -500,6 +500,11 @@ namespace Scripts.Zulu.Engines.Classes
 
                 potion.PotionStrength += bonus;
             }
+        }
+
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        {
+
         }
         
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)

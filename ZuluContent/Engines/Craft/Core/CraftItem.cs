@@ -1003,6 +1003,7 @@ namespace Server.Engines.Craft
                 Item item;
                 if (customCraft != null)
                 {
+                    
                     item = customCraft.CompleteCraft(out num);
                 }
                 else if (typeof(MapItem).IsAssignableFrom(ItemType) && from.Map != Map.Felucca)
@@ -1017,6 +1018,8 @@ namespace Server.Engines.Craft
 
                 if (item != null)
                 {
+                    from.FireHook(h => h.OnCraftItemCreated(from, craftSystem, this, tool, item));
+
                     if (item is ICraftable craftable)
                     {
                         endquality = craftable.OnCraft(quality, makersMark, from, craftSystem, typeRes, tool,
@@ -1036,12 +1039,16 @@ namespace Server.Engines.Craft
                             item.Amount = maxAmount;
                     }
 
-                    from.FireHook(h => h.OnItemCrafted(from, craftSystem, this, tool, item));
                     from.AddToBackpack(item);
+                    from.FireHook(h => h.OnCraftItemAddToBackpack(from, craftSystem, this, tool, item));
 
                     if (from.AccessLevel > AccessLevel.Player)
-                        CommandLogging.WriteLine(from, "Crafting {0} with craft system {1}",
-                            CommandLogging.Format(item), craftSystem.GetType().Name);
+                    {
+                        CommandLogging.WriteLine(
+                            from, 
+                            $"Crafting {CommandLogging.Format(item)} with craft system {craftSystem.GetType()}"
+                        );
+                    }
 
                     //from.PlaySound( 0x57 );
                 }

@@ -1,6 +1,8 @@
 using System;
 using Server.Engines.Craft;
 using System.Collections.Generic;
+using System.Linq;
+using Server.Network;
 
 namespace Server.Items
 {
@@ -54,8 +56,9 @@ namespace Server.Items
     {
         public PotionEffect PotionEffect { get; set; }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public abstract uint PotionStrength { get; set; }
-
+        
         public override int LabelNumber => 1041314 + (int) PotionEffect;
 
         public BasePotion(int itemID, PotionEffect effect) : base(itemID)
@@ -127,17 +130,25 @@ namespace Server.Items
                 {
                     pot.MoveToWorld(from.Location, from.Map);
                 }
-
+                
                 pot.Drink(from);
             }
+        }
+        
+        public override void OnSingleClick(Mobile from)
+        {
+            base.OnSingleClick(from);
+            if(from.Skills[SkillName.Alchemy].Value >= 100)
+                LabelTo(from, $"Strength: {PotionStrength}");
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 1); // version
+            writer.Write((int) 2); // version
 
+            writer.Write(PotionStrength);
             writer.Write((int) PotionEffect);
         }
 
@@ -149,6 +160,11 @@ namespace Server.Items
 
             switch (version)
             {
+                case 2:
+                {
+                    PotionStrength = reader.ReadUInt();
+                    goto case 1;
+                }
                 case 1:
                 case 0:
                 {
@@ -217,7 +233,7 @@ namespace Server.Items
 
                 if (pack != null)
                 {
-                    if ((int) PotionEffect >= (int) PotionEffect.Invisibility)
+                    if ((int) PotionEffect >= (int) PotionEffect.TaintsMajorTransmutation)
                         return 1;
 
                     var kegs = pack.FindItemsByType<PotionKeg>();
@@ -230,13 +246,15 @@ namespace Server.Items
                         if (keg.Held <= 0 || keg.Held >= 100)
                             continue;
 
-                        if (keg.Type != PotionEffect)
+                        if (keg.Type != PotionEffect || keg.PotionStrength != PotionStrength)
                             continue;
 
                         ++keg.Held;
 
                         Consume();
-                        from.AddToBackpack(new Bottle());
+
+                        DefAlchemy.RecycleBottles(from, craftItem);
+                        from.SendLocalizedMessage(500282); // You create the potion and pour it into the keg.
 
                         return -1; // signal placed in keg
                     }

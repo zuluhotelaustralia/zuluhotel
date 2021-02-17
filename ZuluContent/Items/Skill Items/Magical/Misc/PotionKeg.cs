@@ -2,7 +2,7 @@ using System;
 
 namespace Server.Items
 {
-    public class PotionKeg : Item
+    public class PotionKeg : Item, IDyable
     {
         private int m_Held;
 
@@ -23,11 +23,14 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public PotionEffect Type { get; set; }
         
+        [CommandProperty(AccessLevel.GameMaster)]
+        public uint PotionStrength { get; set; }
+
         public static void Initialize()
         {
             TileData.ItemTable[0x1940].Height = 4;
         }
-        
+
         [Constructible]
         public PotionKeg() : base(0x1940)
         {
@@ -50,8 +53,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 1); // version
+            writer.Write((int) 2); // version
 
+            writer.Write(PotionStrength);
             writer.Write((int) Type);
             writer.Write((int) m_Held);
         }
@@ -64,6 +68,11 @@ namespace Server.Items
 
             switch (version)
             {
+                case 2:
+                {
+                    PotionStrength = reader.ReadUInt();
+                    goto case 1;
+                }
                 case 1:
                 case 0:
                 {
@@ -110,8 +119,12 @@ namespace Server.Items
                 < 100 => 502257,
                 _ => 502258
             };
+            
+            if(from.Skills[SkillName.Alchemy].Value >= 100 && m_Held > 0)
+                LabelTo(from, $"Strength: {PotionStrength}");
 
             LabelTo(from, number);
+            
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -128,14 +141,15 @@ namespace Server.Items
                 return;
             }
 
-            Container pack = from.Backpack;
+            var pack = from.Backpack;
 
             if (pack != null && pack.ConsumeTotal(typeof(Bottle), 1))
             {
                 // You pour some of the keg's contents into an empty bottle...
                 from.SendLocalizedMessage(502242);
 
-                BasePotion pot = FillBottle();
+                var pot = FillBottle(Type);
+                pot.PotionStrength = PotionStrength;
 
                 if (pack.TryDropItem(from, pot, false))
                 {
@@ -144,7 +158,10 @@ namespace Server.Items
                     from.PlaySound(0x240);
 
                     if (--Held == 0)
+                    {
                         from.SendLocalizedMessage(502245); // The keg is now empty.
+                        Name = null;
+                    }
                 }
                 else
                 {
@@ -161,87 +178,79 @@ namespace Server.Items
 
         public override bool OnDragDrop(Mobile from, Item item)
         {
-            if (item is BasePotion pot)
-            {
-                int toHold = Math.Min(100 - m_Held, pot.Amount);
-
-                if (toHold <= 0)
-                {
-                    from.SendLocalizedMessage(502233); // The keg will not hold any more!
-                    return false;
-                }
-                else if (m_Held == 0)
-                {
-                    #region Mondain's Legacy
-
-                    if ((int) pot.PotionEffect >= (int) PotionEffect.Invisibility)
-                    {
-                        from.SendLocalizedMessage(502232); // The keg is not designed to hold that type of object.
-                        return false;
-                    }
-
-                    #endregion
-
-                    if (GiveBottle(from, toHold))
-                    {
-                        Type = pot.PotionEffect;
-                        Held = toHold;
-
-                        from.PlaySound(0x240);
-
-                        from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
-
-                        pot.Consume(toHold);
-
-                        if (!pot.Deleted)
-                            pot.Bounce(from);
-
-                        return true;
-                    }
-                    else
-                    {
-                        from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
-                        return false;
-                    }
-                }
-                else if (pot.PotionEffect != Type)
-                {
-                    from.SendLocalizedMessage(
-                        502236); // You decide that it would be a bad idea to mix different types of potions.
-                    return false;
-                }
-                else
-                {
-                    if (GiveBottle(from, toHold))
-                    {
-                        Held += toHold;
-
-                        from.PlaySound(0x240);
-
-                        from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
-
-                        pot.Consume(toHold);
-
-                        if (!pot.Deleted)
-                            pot.Bounce(from);
-
-                        return true;
-                    }
-                    else
-                    {
-                        from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
-                        return false;
-                    }
-                }
-            }
-            else
+            if (item is not BasePotion pot)
             {
                 from.SendLocalizedMessage(502232); // The keg is not designed to hold that type of object.
                 return false;
             }
+
+            int toHold = Math.Min(100 - m_Held, pot.Amount);
+
+            if (toHold <= 0)
+            {
+                from.SendLocalizedMessage(502233); // The keg will not hold any more!
+                return false;
+            }
+
+            if (m_Held == 0)
+            {
+                if (GiveBottle(from, toHold))
+                {
+                    PotionStrength = pot.PotionStrength;
+                    Type = pot.PotionEffect;
+                    if ((int) Type >= (int) PotionEffect.PhandelsFineIntellect)
+                        Name = $"A keg of {pot.Name}s"; // Assumes the name can be plural
+                    
+                    Held = toHold;
+
+                    from.PlaySound(0x240);
+
+                    from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
+
+                    pot.Consume(toHold);
+
+                    if (!pot.Deleted)
+                        pot.Bounce(from);
+
+                    return true;
+                }
+
+                from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
+                return false;
+            }
+
+            if (pot.PotionEffect != Type)
+            {
+                // You decide that it would be a bad idea to mix different types of potions.
+                from.SendLocalizedMessage(502236);
+                return false;
+            }
+
+            if (PotionStrength != pot.PotionStrength)
+            {
+                from.SendAsciiMessage("You decide it would be a bad idea to mix different potencies of potions.");
+                return false;
+            }
+
+            if (GiveBottle(from, toHold))
+            {
+                Held += toHold;
+
+                from.PlaySound(0x240);
+                from.SendLocalizedMessage(502237); // You place the empty bottle in your backpack.
+                pot.Consume(toHold);
+
+                if (!pot.Deleted)
+                    pot.Bounce(from);
+
+                return true;
+            }
+
+            from.SendLocalizedMessage(502238); // You don't have room for the empty bottle in your backpack.
+            return false;
         }
 
-        public bool GiveBottle(Mobile m, int amount)
+        private static bool GiveBottle(Mobile m, int amount)
         {
             Container pack = m.Backpack;
 
@@ -256,38 +265,56 @@ namespace Server.Items
             return true;
         }
 
-        public BasePotion FillBottle()
+        private static BasePotion FillBottle(PotionEffect type)
         {
-            switch (Type)
+            BasePotion potion = type switch
             {
-                default:
-                case PotionEffect.Nightsight: return new NightSightPotion();
-                case PotionEffect.CureLesser: return new LesserCurePotion();
-                case PotionEffect.Cure: return new CurePotion();
-                case PotionEffect.CureGreater: return new GreaterCurePotion();
+                PotionEffect.Invisibility => new InvisibilityPotion(),
+                PotionEffect.Nightsight => new NightSightPotion(),
+                PotionEffect.CureLesser => new LesserCurePotion(),
+                PotionEffect.Cure => new CurePotion(),
+                PotionEffect.CureGreater => new GreaterCurePotion(),
+                PotionEffect.Agility => new AgilityPotion(),
+                PotionEffect.AgilityGreater => new GreaterAgilityPotion(),
+                PotionEffect.Strength => new StrengthPotion(),
+                PotionEffect.StrengthGreater => new GreaterStrengthPotion(),
+                PotionEffect.PoisonLesser => new LesserPoisonPotion(),
+                PotionEffect.Poison => new PoisonPotion(),
+                PotionEffect.PoisonGreater => new GreaterPoisonPotion(),
+                PotionEffect.PoisonDeadly => new DeadlyPoisonPotion(),
+                PotionEffect.Refresh => new RefreshPotion(),
+                PotionEffect.RefreshTotal => new TotalRefreshPotion(),
+                PotionEffect.HealLesser => new LesserHealPotion(),
+                PotionEffect.Heal => new HealPotion(),
+                PotionEffect.HealGreater => new GreaterHealPotion(),
+                PotionEffect.ExplosionLesser => new LesserExplosionPotion(),
+                PotionEffect.Explosion => new ExplosionPotion(),
+                PotionEffect.ExplosionGreater => new GreaterExplosionPotion(),
+                // Alchemy plus
+                PotionEffect.PhandelsFineIntellect => new PhandelsFineIntellectPotion(),
+                PotionEffect.PhandelsFabulousIntellect => new PhandelsFabulousIntellectPotion(),
+                PotionEffect.PhandelsFantasticIntellect => new PhandelsFantasticIntellectPotion(),
+                PotionEffect.LesserMegoInvulnerability => new LesserMegoInvulnerabilityPotion(),
+                PotionEffect.MegoInvulnerability => new MegoInvulnerabilityPotion(),
+                PotionEffect.GreaterMegoInvulnerability => new GreaterMegoInvulnerabilityPotion(),
+                PotionEffect.GrandMageRefreshElixir => new GrandMageRefreshElixir(),
+                PotionEffect.HomericMight => new HomericMightPotion(),
+                PotionEffect.GreaterHomericMight => new GreaterHomericMightPotion(),
+                PotionEffect.TamlaHeal => new TamlaHealPotion(),
+                PotionEffect.TaintsTransmutation => new TaintsTransmutationPotion(),
+                PotionEffect.TaintsMajorTransmutation => new TaintsMajorTransmutationPotion(),
+                _ => null
+            };
 
-                case PotionEffect.Agility: return new AgilityPotion();
-                case PotionEffect.AgilityGreater: return new GreaterAgilityPotion();
 
-                case PotionEffect.Strength: return new StrengthPotion();
-                case PotionEffect.StrengthGreater: return new GreaterStrengthPotion();
+            return potion;
+        }
 
-                case PotionEffect.PoisonLesser: return new LesserPoisonPotion();
-                case PotionEffect.Poison: return new PoisonPotion();
-                case PotionEffect.PoisonGreater: return new GreaterPoisonPotion();
-                case PotionEffect.PoisonDeadly: return new DeadlyPoisonPotion();
-
-                case PotionEffect.Refresh: return new RefreshPotion();
-                case PotionEffect.RefreshTotal: return new TotalRefreshPotion();
-
-                case PotionEffect.HealLesser: return new LesserHealPotion();
-                case PotionEffect.Heal: return new HealPotion();
-                case PotionEffect.HealGreater: return new GreaterHealPotion();
-
-                case PotionEffect.ExplosionLesser: return new LesserExplosionPotion();
-                case PotionEffect.Explosion: return new ExplosionPotion();
-                case PotionEffect.ExplosionGreater: return new GreaterExplosionPotion();
-            }
+        public bool Dye(Mobile from, DyeTub sender)
+        {
+            if (Deleted) return false;
+            Hue = sender.DyedHue;
+            return true;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Server.Spells
         public Type[] Reagents => ReagentCosts.Keys.ToArray();
         public int LeftHandEffect { get; init; }
         public int RightHandEffect { get; init; }
-        public Dictionary<Type, int> ReagentCosts { get; init; } = new Dictionary<Type, int>();
+        public Dictionary<Type, int> ReagentCosts { get; init; } = new();
 
         public ElementalType DamageType { get; init; } = ElementalType.None;
     }

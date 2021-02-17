@@ -3,7 +3,7 @@ using Server.Items;
 
 namespace Server.Spells
 {
-    public class Reagent
+    public static class Reagent
     {
         public static readonly Type BlackPearl = typeof(BlackPearl);
         public static readonly Type Bloodmoss = typeof(Bloodmoss);
@@ -15,7 +15,6 @@ namespace Server.Spells
         public static readonly Type SpidersSilk = typeof(SpidersSilk);
         public static readonly Type BatWing = typeof(BatWing);
         public static readonly Type DaemonBlood = typeof(DaemonBlood);
-        public static readonly Type NoxCrystal = typeof(NoxCrystal);
         public static readonly Type PigIron = typeof(PigIron);
         public static readonly Type Blackmoor = typeof(Blackmoor);
         public static readonly Type Bloodspawn = typeof(Bloodspawn);
@@ -33,9 +32,8 @@ namespace Server.Spells
         public static readonly Type DeadWood = typeof(DeadWood);
         public static readonly Type FertileDirt = typeof(FertileDirt);
         public static readonly Type SerpentScale = typeof(SerpentScale);
-
-
-        public static Type[] Types { get; } =
+        
+        public static readonly Type[] Types =
         {
             BlackPearl,
             Bloodmoss,
@@ -47,7 +45,6 @@ namespace Server.Spells
             SpidersSilk,
             BatWing,
             DaemonBlood,
-            NoxCrystal,
             PigIron,
             Blackmoor,
             Bloodspawn,

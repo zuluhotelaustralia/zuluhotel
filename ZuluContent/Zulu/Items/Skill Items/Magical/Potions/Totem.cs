@@ -26,20 +26,6 @@ namespace Server.Items
             if (map == null)
                 return false;
 
-            // var scale = 1.0 + (caster.Skills[SkillName.Magery].Value - 100.0) / 200.0;
-
-            // if (scaleStats)
-            // {
-            //     creature.RawStr = (int) (creature.RawStr * scale);
-            //     creature.Hits = creature.HitsMax;
-            //
-            //     creature.RawDex = (int) (creature.RawDex * scale);
-            //     creature.Stam = creature.StamMax;
-            //
-            //     creature.RawInt = (int) (creature.RawInt * scale);
-            //     creature.Mana = creature.ManaMax;
-            // }
-            
             var p = new Point3D(caster);
 
             var creature = typeof(T).CreateInstance<Humuc>();
@@ -89,8 +75,8 @@ namespace Server.Items
                 PlayDrinkEffect(from);
                 Consume();
             }
-            
         }
+        
     }
 
     
@@ -101,7 +87,7 @@ namespace Server.Items
         public override int Hue { get; set; } = 746;
         
         [Constructible]
-        public Totem() : base(0x20D8)
+        public Totem() : base(0x20D9)
         {
         }
 
@@ -129,7 +115,7 @@ namespace Server.Items
         public override int Hue { get; set; } = 0;
 
         [Constructible]
-        public TotemElixir() : base(0xE27)
+        public TotemElixir() : base(0xE28)
         {
         }
 

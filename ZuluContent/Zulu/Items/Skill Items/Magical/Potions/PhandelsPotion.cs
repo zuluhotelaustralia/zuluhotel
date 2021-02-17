@@ -7,7 +7,7 @@ namespace Server.Items
 {
     public class PhandelsFineIntellectPotion : BasePhandelsPotion
     {
-        public override string DefaultName { get; } = "a Phandel's Fine Intellect potion";
+        public override string DefaultName { get; } = "Phandel's Fine Intellect potion";
         public override uint PotionStrength { get; set; } = 3;
         public PhandelsFineIntellectPotion() : base(PotionEffect.PhandelsFineIntellect) { }
         public PhandelsFineIntellectPotion(Serial serial) : base(serial) { }
@@ -29,7 +29,7 @@ namespace Server.Items
     {
         public override uint PotionStrength { get; set; } = 5;
 
-        public override string DefaultName { get; } = "a Phandel's Fabulous Intellect potion";
+        public override string DefaultName { get; } = "Phandel's Fabulous Intellect potion";
         public PhandelsFabulousIntellectPotion() : base(PotionEffect.PhandelsFabulousIntellect) { }
         public PhandelsFabulousIntellectPotion(Serial serial) : base(serial) { }
         
@@ -48,7 +48,7 @@ namespace Server.Items
     
     public class PhandelsFantasticIntellectPotion : BasePhandelsPotion
     {
-        public override string DefaultName { get; } = "a Phandel's Fantastic Intellect potion";
+        public override string DefaultName { get; } = "Phandel's Fantastic Intellect potion";
         public override uint PotionStrength { get; set; } = 7;
         public PhandelsFantasticIntellectPotion() : base(PotionEffect.PhandelsFantasticIntellect) { }
         public PhandelsFantasticIntellectPotion(Serial serial) : base(serial) { }

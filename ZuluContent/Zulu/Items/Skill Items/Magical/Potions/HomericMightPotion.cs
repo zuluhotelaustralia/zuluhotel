@@ -7,7 +7,7 @@ namespace Server.Items
     {
         public override int Hue { get; set; } = 133;
 
-        public override string DefaultName { get; } = "a Homeric Might potion";
+        public override string DefaultName { get; } = "Homeric Might potion";
         public override uint PotionStrength { get; set; } = 4;
         public HomericMightPotion() : base(PotionEffect.HomericMight) { }
         public HomericMightPotion(Serial serial) : base(serial) { }

@@ -54,8 +54,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage);
 
         public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage);
-
-        public void OnItemCrafted(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item);
+        
+        public void OnCraftItemCreated(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item);
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item);
 
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar);
     }
