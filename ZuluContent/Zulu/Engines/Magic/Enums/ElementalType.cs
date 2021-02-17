@@ -68,7 +68,7 @@ namespace Server.Engines.Magic
         Fire,
         Cold,
         Poison,
-        Energy,
+        Holy,
         Earth,
         Necro,
         Paralysis,

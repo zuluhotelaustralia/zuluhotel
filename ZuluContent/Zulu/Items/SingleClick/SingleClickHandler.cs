@@ -47,9 +47,9 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
 
-            var text = item is ICraftable craftable && craftable.PlayerConstructed ?
-                $"{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}" :
-                $"{prefix}{GetItemDesc(item as Item)}{suffix}";
+            var text = item is ICraftable craftable && craftable.PlayerConstructed
+                ? $"{GetCraftedExceptional(item as Item)}{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}"
+                : $"{prefix}{GetItemDesc(item as Item)}{suffix}";
 
             return text;
         }
@@ -62,6 +62,16 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var text = GetMagicItemName(item);
 
             SendResponse(m, item, text);
+        }
+
+        private static string GetCraftedExceptional(Item item)
+        {
+            var isExceptional = false;
+            if (item is BaseArmor armor && armor.Mark == ArmorQuality.Exceptional)
+                isExceptional = true;
+            else if (item is BaseWeapon weapon && weapon.Mark == WeaponQuality.Exceptional)
+                isExceptional = true;
+            return isExceptional ? "Exceptional " : "";
         }
 
         private static string GetCraftedResource(Item item)
@@ -88,7 +98,8 @@ namespace ZuluContent.Zulu.Items.SingleClick
             if (!ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc))
                 return false;
 
-            if (item is IMagicItem magicItem && (StaffRevealedMagicItems && m.AccessLevel == AccessLevel.Player) && !magicItem.Identified)
+            if (item is IMagicItem magicItem && (StaffRevealedMagicItems && m.AccessLevel == AccessLevel.Player) &&
+                !magicItem.Identified)
             {
                 SendResponse(m, item, $"a magic {desc}");
                 return false;

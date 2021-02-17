@@ -117,11 +117,35 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
+        public virtual void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
         }
 
-        public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value)
+        public virtual void OnModifyWithMagicEfficiency(Mobile mobile, ref double value)
+        {
+        }
+
+        public virtual void OnToolHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+        }
+
+        public virtual void OnHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+        }
+
+        public virtual void OnHarvestColoredChance(Mobile mobile, ref int chance)
+        {
+        }
+
+        public virtual void OnHarvestAmount(Mobile harvester, ref int amount)
+        {
+        }
+
+        public virtual void OnToolHarvestBonus(Mobile harvester, ref int amount)
+        {
+        }
+
+        public virtual void OnHarvestBonus(Mobile harvester, ref int amount)
         {
         }
 
@@ -159,17 +183,18 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item)
         {
         }
 
-        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item)
         {
         }
-        
+
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)
         {
-            
         }
     }
 }

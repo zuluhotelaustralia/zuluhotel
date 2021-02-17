@@ -357,7 +357,7 @@
       "PointsSides": 4,
       "PointsBonus": 5
     },
-    "DefaultPoints": 25
+    "DefaultPoints": 100
   },
   "Tailoring": {
     "Delay": 10,

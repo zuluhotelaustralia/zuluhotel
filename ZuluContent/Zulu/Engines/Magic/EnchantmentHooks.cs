@@ -93,20 +93,20 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
             var hooks = new List<IEnchantmentHook>(
                 m.Items
-                .OfType<BaseEquippableItem>()
-                .SelectMany(e => e.Enchantments.Values.Values)
-                .ToList()
+                    .OfType<BaseEquippableItem>()
+                    .SelectMany(e => e.Enchantments.Values.Values)
+                    .ToList()
             );
 
-            if (m is IEnchanted enchanted) 
+            if (m is IEnchanted enchanted)
                 hooks.AddRange(enchanted.Enchantments.Values.Values);
-            
-            if(m is IZuluClassed {ZuluClass: { }} classed)
+
+            if (m is IZuluClassed {ZuluClass: { }} classed)
                 hooks.Add(classed.ZuluClass);
 
             Fire(hooks, action);
         }
-        
+
         public static void FireHook(this IEnchanted enchanted, Expression<Action<IEnchantmentHook>> action)
         {
             Fire(enchanted.Enchantments.Values.Values, action);
@@ -120,7 +120,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         private static void Fire(IEnumerable<IEnchantmentHook> values, Expression<Action<IEnchantmentHook>> expr)
         {
             var action = GetDelegate(expr);
-            var methodCallExpr = (MethodCallExpression)expr.Body;
+            var methodCallExpr = (MethodCallExpression) expr.Body;
 
             var ordered = values
                 .OrderByPriority(methodCallExpr.Method.Name);
@@ -131,19 +131,19 @@ namespace ZuluContent.Zulu.Engines.Magic
                 .ForEach(action);
 
             var magicImmunityHook = ordered
-                .Where(x => x is MagicImmunity { Value: > 0 })
+                .Where(x => x is MagicImmunity {Value: > 0})
                 .Cast<MagicImmunity>()
                 .OrderByDescending(x => x.Value)
                 .FirstOrDefault();
 
             var poisonProtectionHook = ordered
-                .Where(x => x is PoisonProtection { Value: > 0 })
+                .Where(x => x is PoisonProtection {Value: > 0})
                 .Cast<PoisonProtection>()
                 .OrderByDescending(x => x.Value)
                 .FirstOrDefault();
 
             var spellReflectHook = ordered
-                .Where(x => x is SpellReflect { Value: > 0 })
+                .Where(x => x is SpellReflect {Value: > 0})
                 .Cast<SpellReflect>()
                 .OrderByDescending(x => x.Value)
                 .FirstOrDefault();

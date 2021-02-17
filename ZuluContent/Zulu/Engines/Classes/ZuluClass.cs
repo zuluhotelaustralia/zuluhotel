@@ -442,14 +442,50 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 var bonus = cls.Type switch
                 {
-                    ZuluClassType.Warrior => value * ClasseBonus,
-                    ZuluClassType.Mage => value / ClasseBonus,
-                    _ => 1.0
+                    ZuluClassType.Warrior => (int) (value * ClasseBonus),
+                    ZuluClassType.Mage => (int) (value / ClasseBonus),
+                    _ => (int) value
                 };
 
                 var penalty = GetMagicEfficiencyPenalty();
 
-                value = (int) (value * (100 - penalty) / 100);
+                value = (int) (bonus * (100 - penalty) / 100);
+            }
+        }
+
+        public void OnHarvestAmount(Mobile mobile, ref int amount)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                amount = (int) (amount * ClasseBonus);
+            }
+        }
+
+        public void OnHarvestBonus(Mobile mobile, ref int amount)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                amount = (int) (amount * ClasseBonus) + 1;
+            }
+        }
+
+        public void OnHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                bonus = (int) (bonus * ClasseBonus);
+                toMod = (int) (toMod / ClasseBonus);
+            }
+        }
+
+        public void OnHarvestColoredChance(Mobile mobile, ref int chance)
+        {
+            if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                chance = (int) (chance * ClasseBonus);
+
+                if (chance > 90)
+                    chance = 90;
             }
         }
 
@@ -486,12 +522,13 @@ namespace Scripts.Zulu.Engines.Classes
         {
         }
 
-        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item)
         {
             if (
                 craftSystem is DefAlchemy
                 && item is BasePotion potion
-                && from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}} 
+                && from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}}
             )
             {
                 var bonus = (uint) (potion.PotionStrength * ClasseBonus - potion.PotionStrength);
@@ -502,11 +539,11 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
-        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item)
         {
-
         }
-        
+
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)
         {
             if (caster is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})
@@ -520,6 +557,14 @@ namespace Scripts.Zulu.Engines.Classes
         #endregion
 
         #region Unused hooks
+
+        public void OnToolHarvestBonus(Mobile harvester, ref int amount)
+        {
+        }
+
+        public void OnToolHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+        }
 
         public void OnIdentified(IEntity entity)
         {

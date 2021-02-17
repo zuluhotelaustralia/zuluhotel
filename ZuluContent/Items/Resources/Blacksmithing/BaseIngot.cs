@@ -54,7 +54,7 @@ namespace Server.Items
         {
             Stackable = true;
             Amount = amount;
-            //Hue = CraftResources.GetHue( resource );
+            Hue = CraftResources.GetHue(resource);
 
             Resource = resource;
         }
@@ -62,6 +62,5 @@ namespace Server.Items
         public BaseIngot(Serial serial) : base(serial)
         {
         }
-
     }
 }

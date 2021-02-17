@@ -11,6 +11,7 @@ namespace ZuluContent.Zulu.Items
     public abstract class BaseEquippableItem : Item, IMagicItem, IElementalResistible
     {
         private EnchantmentDictionary m_Enchantments;
+
         public EnchantmentDictionary Enchantments
         {
             get => m_Enchantments ??= new EnchantmentDictionary();
@@ -22,9 +23,9 @@ namespace ZuluContent.Zulu.Items
             get => Enchantments.Identified;
             set
             {
-                if (!Enchantments.Identified && value) 
+                if (!Enchantments.Identified && value)
                     Enchantments.OnIdentified(this);
-                
+
                 Enchantments.Identified = value;
             }
         }
@@ -33,8 +34,8 @@ namespace ZuluContent.Zulu.Items
         public bool Cursed
         {
             get => Enchantments.Values.Where(e => e.Value.Cursed == true)
-                       .Select(p => p.Value.Cursed)
-                       .FirstOrDefault();
+                .Select(p => p.Value.Cursed)
+                .FirstOrDefault();
             set
             {
                 foreach (var (key, val) in Enchantments.Values)
@@ -48,8 +49,8 @@ namespace ZuluContent.Zulu.Items
         public CurseLevelType CurseLevel
         {
             get => Enchantments.Values.Where(e => e.Value.Cursed == true)
-                       .Select(p => p.Value.CurseLevel)
-                       .FirstOrDefault();
+                .Select(p => p.Value.CurseLevel)
+                .FirstOrDefault();
             set
             {
                 foreach (var (key, val) in Enchantments.Values)
@@ -74,12 +75,12 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPhysicalResist 
+        public int ElementalPhysicalResist
         {
             get => Enchantments.Get((PhysicalProtection e) => e.Value);
             set => Enchantments.Set((PhysicalProtection e) => e.Value = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalFireResist
         {
@@ -156,14 +157,21 @@ namespace ZuluContent.Zulu.Items
             get => Enchantments.Get((IntBonus e) => e.Value);
             set => Enchantments.Set((IntBonus e) => e.Value = value);
         }
-        
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public double MagicEfficiencyPenalty
+        {
+            get => Enchantments.Get((MagicEfficiencyPenalty e) => e.Value);
+            set => Enchantments.Set((MagicEfficiencyPenalty e) => e.Value = value);
+        }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public SkillName FirstSkillBonusName
         {
             get => Enchantments.Get((FirstSkillBonus e) => e.Skill);
             set => Enchantments.Set((FirstSkillBonus e) => e.Skill = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public double FirstSkillBonusValue
         {
@@ -171,14 +179,14 @@ namespace ZuluContent.Zulu.Items
             set => Enchantments.Set((FirstSkillBonus e) => e.Value = value);
         }
 
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public SkillName SecondSkillBonusName
         {
             get => Enchantments.Get((SecondSkillBonus e) => e.Skill);
             set => Enchantments.Set((SecondSkillBonus e) => e.Skill = value);
         }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public double SecondSkillBonusValue
         {
@@ -186,7 +194,7 @@ namespace ZuluContent.Zulu.Items
             set => Enchantments.Set((SecondSkillBonus e) => e.Value = value);
         }
 
-        public BaseEquippableItem(Serial serial): base(serial)
+        public BaseEquippableItem(Serial serial) : base(serial)
         {
         }
 
@@ -223,7 +231,7 @@ namespace ZuluContent.Zulu.Items
         {
             base.Deserialize(reader);
             m_Enchantments = EnchantmentDictionary.Deserialize(reader);
-            if(Parent is Mobile m)
+            if (Parent is Mobile m)
                 m_Enchantments.FireHook(e => e.OnAdded(this));
         }
     }

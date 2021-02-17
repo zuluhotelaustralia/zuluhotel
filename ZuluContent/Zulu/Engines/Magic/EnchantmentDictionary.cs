@@ -90,9 +90,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
 
             target = new T();
             var result = expr(target);
-            
+
             // This is to guard against creating unnecessary enchantments from default values
-            if (result != null && Comparer<TResult>.Default.Compare(result, default) != 0) 
+            if (result != null && Comparer<TResult>.Default.Compare(result, default) != 0)
                 Set(target);
 
             return result;
@@ -188,24 +188,64 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
                 _ => throw new ArgumentOutOfRangeException(nameof(protectionType), protectionType, null)
             };
         }
-        
+
+        public void SetFromResourceType(Type enchantmentType, int value)
+        {
+            if (enchantmentType == typeof(DexBonus))
+            {
+                Set((DexBonus e) => e.Value += value);
+            }
+            else if (enchantmentType == typeof(MagicEfficiencyPenalty))
+            {
+                Set((MagicEfficiencyPenalty e) => e.Value += value);
+            }
+            else if (enchantmentType == typeof(PermMagicImmunity))
+            {
+                Set((PermMagicImmunity e) => e.Value = value);
+            }
+            else if (enchantmentType == typeof(AirProtection))
+            {
+                Set((AirProtection e) => e.Value = value);
+            }
+            else if (enchantmentType == typeof(EarthProtection))
+            {
+                Set((EarthProtection e) => e.Value = value);
+            }
+            else if (enchantmentType == typeof(FireProtection))
+            {
+                Set((FireProtection e) => e.Value = value);
+            }
+            else if (enchantmentType == typeof(HolyProtection))
+            {
+                Set((HolyProtection e) => e.Value = value);
+            }
+            else if (enchantmentType == typeof(NecroProtection))
+            {
+                Set((NecroProtection e) => e.Value = value);
+            }
+            else if (enchantmentType == typeof(WaterProtection))
+            {
+                Set((WaterProtection e) => e.Value = value);
+            }
+        }
+
         public void OnIdentified(Item item)
         {
             foreach (var value in Values.Values)
             {
                 if (value.GetShouldDye())
                     item.Hue = value.Info.Hue;
-        
+
                 value.OnIdentified(item);
             }
         }
-        
+
         public static EnchantmentDictionary Deserialize(IGenericReader reader)
         {
             var bytes = new byte[reader.ReadInt()];
             reader.Read(bytes);
-            
-            return MessagePackSerializer.Deserialize<EnchantmentDictionary>((ReadOnlyMemory<byte>)bytes);
+
+            return MessagePackSerializer.Deserialize<EnchantmentDictionary>((ReadOnlyMemory<byte>) bytes);
         }
 
         public void Serialize(IGenericWriter writer)
