@@ -42,7 +42,7 @@ namespace Server.Spells.Third
             FinishSequence();
         }
 
-        private class InternalTarget : Target
+        public class InternalTarget : Target
         {
             private readonly BlessSpell m_Owner;
 

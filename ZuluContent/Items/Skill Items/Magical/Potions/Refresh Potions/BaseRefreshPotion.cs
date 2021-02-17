@@ -29,12 +29,19 @@ namespace Server.Items
 		public override void Drink( Mobile from )
 		{
 			if ( from.Stam < from.StamMax )
-			{
-				from.Stam += Scale( from, (int)(Refresh * from.StamMax) );
+            {
+                if (PotionStrength > 3)
+                {
+                    from.Stam = from.StamMax;
+                }
+                else
+                {
+                    var mod = Utility.Dice(5, 5, 5) * (int)PotionStrength;
+                    from.Stam += mod;
+                }
 
-				PlayDrinkEffect( from );
-
-				Consume();
+                PlayDrinkEffect( from );
+                Consume();
 			}
 			else
 			{

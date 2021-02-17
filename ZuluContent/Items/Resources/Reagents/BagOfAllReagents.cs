@@ -21,7 +21,7 @@ namespace Server.Items
             DropItem(new SpidersSilk(amount));
             DropItem(new BatWing(amount));
             DropItem(new DaemonBlood(amount));
-            DropItem(new NoxCrystal(amount));
+            DropItem(new SerpentScale(amount));
             DropItem(new PigIron(amount));
             DropItem(new Blackmoor(amount));
             DropItem(new Bloodspawn(amount));

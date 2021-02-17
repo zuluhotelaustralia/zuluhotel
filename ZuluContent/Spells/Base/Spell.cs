@@ -22,8 +22,7 @@ namespace Server.Spells
         //the possibility of stacking 'em.  Note that a MA & an Explosion will stack, but
         //of course, two MA's won't.
 
-        private static readonly Dictionary<Type, DelayedDamageContextWrapper> ContextTable =
-            new Dictionary<Type, DelayedDamageContextWrapper>();
+        private static readonly Dictionary<Type, DelayedDamageContextWrapper> ContextTable = new();
 
         private AnimTimer m_AnimTimer;
 

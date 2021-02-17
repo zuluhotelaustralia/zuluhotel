@@ -4,25 +4,25 @@ using Server.Items;
 
 namespace Server.Engines.Craft
 {
-    public class QueryMakersMarkGump : Gump
+    public class QueryMakersMarkGump : Gump, ICraftGump
 	{
-		private int m_Quality;
-		private Mobile m_From;
-		private CraftItem m_CraftItem;
-		private CraftSystem m_CraftSystem;
-		private Type m_TypeRes;
-		private BaseTool m_Tool;
+        public Mobile From { get; }
+        public CraftItem CraftItem { get; }
+        public CraftSystem CraftSystem { get; }
+        public BaseTool Tool { get; }
+        private readonly int m_Quality;
+        private readonly Type m_TypeRes;
 
-		public QueryMakersMarkGump( int quality, Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes, BaseTool tool ) : base( 100, 200 )
+        public QueryMakersMarkGump( int quality, Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes, BaseTool tool ) : base( 100, 200 )
 		{
 			from.CloseGump<QueryMakersMarkGump>();;
 
 			m_Quality = quality;
-			m_From = from;
-			m_CraftItem = craftItem;
-			m_CraftSystem = craftSystem;
+			From = from;
+			CraftItem = craftItem;
+			CraftSystem = craftSystem;
 			m_TypeRes = typeRes;
-			m_Tool = tool;
+			Tool = tool;
 
 			AddPage( 0 );
 
@@ -43,11 +43,11 @@ namespace Server.Engines.Craft
 			bool makersMark = info.ButtonID == 1;
 
 			if ( makersMark )
-				m_From.SendLocalizedMessage( 501808 ); // You mark the item.
+				From.SendLocalizedMessage( 501808 ); // You mark the item.
 			else
-				m_From.SendLocalizedMessage( 501809 ); // Cancelled mark.
+				From.SendLocalizedMessage( 501809 ); // Cancelled mark.
 
-			m_CraftItem.CompleteCraft( m_Quality, makersMark, m_From, m_CraftSystem, m_TypeRes, m_Tool, null );
+			CraftItem.CompleteCraft( m_Quality, makersMark, From, CraftSystem, m_TypeRes, Tool, null );
 		}
 	}
 }

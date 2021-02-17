@@ -25,7 +25,7 @@
     "serverListing.serverName": "ModernUO",
     "pathfinding.enable": "True",
     "visibleDamage": "True",
-    "singleClickProps": "False"
-    
+    "singleClickProps": "False",
+    "movement.enableFastWalkPrevention": "False"
   }
 }

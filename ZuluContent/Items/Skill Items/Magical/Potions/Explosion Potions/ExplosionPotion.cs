@@ -1,33 +1,31 @@
 namespace Server.Items
 {
     public class ExplosionPotion : BaseExplosionPotion
-	{
-		public override int MinDamage { get { return 10; } }
-		public override int MaxDamage { get { return 20; } }
+    {
+        public override uint PotionStrength { get; set; } = 3;
+        
+        [Constructible]
+        public ExplosionPotion() : base(PotionEffect.Explosion)
+        {
+        }
 
+        [Constructible]
+        public ExplosionPotion(Serial serial) : base(serial)
+        {
+        }
 
-		[Constructible]
-public ExplosionPotion() : base( PotionEffect.Explosion )
-		{
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		[Constructible]
-public ExplosionPotion( Serial serial ) : base( serial )
-		{
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

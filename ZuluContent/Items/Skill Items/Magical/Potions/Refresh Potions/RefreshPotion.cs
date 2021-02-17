@@ -2,10 +2,9 @@ namespace Server.Items
 {
     public class RefreshPotion : BaseRefreshPotion
     {
-        public override double Refresh
-        {
-            get { return 0.25; }
-        }
+        public override uint PotionStrength { get; set; } = 1;
+
+        public override double Refresh { get; } = 0.25;
 
 
         [Constructible]

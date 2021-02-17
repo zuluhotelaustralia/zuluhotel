@@ -2,7 +2,7 @@
 
 namespace Server.Items
 {
-    public class CustomSpellScroll : SpellScroll
+    public abstract class CustomSpellScroll : SpellScroll
     {
         [Constructible]
         public CustomSpellScroll(SpellEntry spellEntry, int itemId, int amount, int hue) : base(spellEntry, itemId,

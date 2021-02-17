@@ -1,4 +1,5 @@
 using System;
+using Server.Spells;
 
 namespace Server.Items
 {
@@ -30,10 +31,12 @@ namespace Server.Items
 		}
 
 		public bool DoStrength( Mobile from )
-		{
-			// TODO: Verify scaled; is it offset, duration, or both?
-			if ( Spells.SpellHelper.AddStatOffset( from, StatType.Str, Scale( from, StrOffset ), Duration ) )
-			{
+        {
+            var mod = Utility.Dice(PotionStrength * 2, 5, 0);
+            var duration = TimeSpan.FromSeconds(PotionStrength * 120);
+
+            if (SpellHelper.AddStatBonus(from, from, StatType.Str, mod, duration))
+            {
 				from.FixedEffect( 0x375A, 10, 15 );
 				from.PlaySound( 0x1E7 );
 				return true;

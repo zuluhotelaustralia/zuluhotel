@@ -18,13 +18,9 @@ namespace Server.Spells
 {
     public static class SpellRegistry
     {
-        public static readonly Dictionary<Type, Func<Mobile, Item, Spell>> SpellCreators =
-            new Dictionary<Type, Func<Mobile, Item, Spell>>();
-
-        public static readonly Dictionary<Type, SpellInfo> SpellInfos = new Dictionary<Type, SpellInfo>();
-
-        public static readonly Dictionary<SpellEntry, Type> SpellTypes =
-            new Dictionary<SpellEntry, Type>();
+        public static readonly Dictionary<Type, Func<Mobile, Item, Spell>> SpellCreators = new();
+        public static readonly Dictionary<Type, SpellInfo> SpellInfos = new();
+        public static readonly Dictionary<SpellEntry, Type> SpellTypes = new();
 
         public static void Register<TSpell>(SpellEntry spellEntry, Func<Mobile, Item, TSpell> creator, SpellInfo info)
             where TSpell : Spell
@@ -1819,7 +1815,7 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.DragonsBlood] = 1,
-                        [Reagent.NoxCrystal] = 1,
+                        [Reagent.SerpentScale] = 1,
                         [Reagent.Blackmoor] = 1,
                         [Reagent.Bloodspawn] = 1
                     }
@@ -1896,7 +1892,7 @@ namespace Server.Spells
                         [Reagent.DragonsBlood] = 1,
                         [Reagent.Bloodspawn] = 1,
                         [Reagent.Pumice] = 1,
-                        [Reagent.NoxCrystal] = 1
+                        [Reagent.SerpentScale] = 1
                     }
                 }
             );
@@ -2008,7 +2004,7 @@ namespace Server.Spells
                     DamageType = ElementalType.None,
                     ReagentCosts = new Dictionary<Type, int>
                     {
-                        [Reagent.NoxCrystal] = 1,
+                        [Reagent.SerpentScale] = 1,
                         [Reagent.PigIron] = 1,
                         [Reagent.EyeOfNewt] = 1
                     }
@@ -2285,7 +2281,7 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.WyrmsHeart] = 1,
-                        [Reagent.NoxCrystal] = 1,
+                        [Reagent.SerpentScale] = 1,
                         [Reagent.EyeOfNewt] = 1
                     }
                 }

@@ -3,36 +3,31 @@ using System.IO;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using Server;
+using Server.Json;
 
 namespace Scripts.Zulu.Packets
 {
     public static class ClilocList
     {
-        public static readonly string ClilocPath = Path.Combine("Data/", "Cliloc.");
 
-        private static SortedDictionary<int, string> _entries = new SortedDictionary<int, string>();
+        public static IReadOnlyDictionary<int, string> Entries { get; private set; }
 
-        public static IReadOnlyDictionary<int, string> Entries
+        public static void Initialize()
         {
-            get
-            {
-                if (_entries.Count == 0)
-                    Load("enu");
-
-                return _entries;
-            }
+            Entries = Load("enu");
         }
 
-        private static void Load(string language)
+        private static SortedDictionary<int, string> Load(string language)
         {
-            var file = new FileInfo(ClilocPath + language);
-            if (!file.Exists)
-                throw new FileNotFoundException(file.FullName);
+            var path = Core.FindDataFile($"Cliloc.{language}");
 
-            using var bin = new BinaryReader(new PeekableStream(new FileStream(file.FullName, FileMode.Open, FileAccess.Read, FileShare.Read)));
+            using var bin = new BinaryReader(new PeekableStream(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)));
             var stream = (PeekableStream)bin.BaseStream;
             bin.ReadInt32();
             bin.ReadInt16();
+
+            var entries = new SortedDictionary<int, string>();
 
             var buf = new byte[1024];
             while (stream.PeekByte() != -1)
@@ -45,8 +40,14 @@ namespace Scripts.Zulu.Packets
                     buf = new byte[(length + 1023) & ~1023];
 
                 bin.Read(buf, 0, length);
-                _entries.Add(number, Encoding.UTF8.GetString(buf, 0, length));
+                entries.Add(number, Encoding.UTF8.GetString(buf, 0, length));
             }
+            
+            Console.WriteLine($"Cliloc loaded: {path}");
+
+            JsonConfig.Serialize(Core.BaseDirectory + "/Cliloc.json", entries);
+
+            return entries;
         }
 
         public static string Translate(string baseCliloc, string arg = "", bool capitalize = false)
@@ -96,7 +97,7 @@ namespace Scripts.Zulu.Packets
                     }
                     else if (has_arguments && int.TryParse(a, out int clil))
                     {
-                        if (_entries.TryGetValue(clil, out string value) && !string.IsNullOrEmpty(value))
+                        if (Entries.TryGetValue(clil, out string value) && !string.IsNullOrEmpty(value))
                             arguments[index] = value;
                     }
                 }

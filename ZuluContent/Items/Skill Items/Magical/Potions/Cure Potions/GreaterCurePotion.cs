@@ -2,19 +2,15 @@ namespace Server.Items
 {
     public class GreaterCurePotion : BaseCurePotion
     {
-        private static readonly CureLevelInfo[] DefaultLevelInfo = {
-            new CureLevelInfo(Poison.Lesser, 1.00), // 100% chance to cure lesser poison
-            new CureLevelInfo(Poison.Regular, 1.00), // 100% chance to cure regular poison
-            new CureLevelInfo(Poison.Greater, 1.00), // 100% chance to cure greater poison
-            new CureLevelInfo(Poison.Deadly, 0.75), //  75% chance to cure deadly poison
-            new CureLevelInfo(Poison.Lethal, 0.25) //  25% chance to cure lethal poison
-        };
+        public override uint PotionStrength { get; set; } = 5;
         
-        public override CureLevelInfo[] LevelInfo
-        {
-            get { return DefaultLevelInfo; }
-        }
-
+        public override CureLevelInfo[] LevelInfo { get; } = {
+            new(Poison.Lesser, 1.00), // 100% chance to cure lesser poison
+            new(Poison.Regular, 1.00), // 100% chance to cure regular poison
+            new(Poison.Greater, 1.00), // 100% chance to cure greater poison
+            new(Poison.Deadly, 0.75), //  75% chance to cure deadly poison
+            new(Poison.Lethal, 0.25) //  25% chance to cure lethal poison
+        };
 
         [Constructible]
         public GreaterCurePotion() : base(PotionEffect.CureGreater)

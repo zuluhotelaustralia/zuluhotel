@@ -1542,7 +1542,7 @@ namespace Server.Mobiles
             get { return null; }
         }
 
-        public void ChangeAIType(AIType NewAI)
+        public void ChangeAIType(AIType newAi)
         {
             m_AI?.m_Timer.Stop();
 
@@ -1552,7 +1552,7 @@ namespace Server.Mobiles
                 return;
             }
 
-            m_AI = NewAI switch
+            m_AI = newAi switch
             {
                 AIType.AI_Melee => new MeleeAI(this),
                 AIType.AI_Animal => new AnimalAI(this),
@@ -1565,6 +1565,7 @@ namespace Server.Mobiles
                     //m_AI = new PredatorAI(this);
                     new MeleeAI(this),
                 AIType.AI_Thief => new ThiefAI(this),
+                AIType.AI_Familiar => new FamiliarAI(this),
                 _ => null
             };
         }

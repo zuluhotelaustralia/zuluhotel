@@ -1,26 +1,28 @@
 namespace Server.Items
 {
-    public class BagOfNecroReagents : Bag
+    public class SerpentScale : BaseReagent
     {
+        public override string DefaultName { get; } = "Serpent's Scale";
+
         [Constructible]
-        public BagOfNecroReagents() : this(50)
+        public SerpentScale() : this(1)
         {
         }
 
 
         [Constructible]
-        public BagOfNecroReagents(int amount)
+        public SerpentScale(int amount) : base(0x0F8E, amount)
         {
-            DropItem(new BatWing(amount));
-            //DropItem( new GraveDust  ( amount ) );
-            DropItem(new DaemonBlood(amount));
-            DropItem(new NoxCrystal(amount));
-            DropItem(new PigIron(amount));
         }
 
         [Constructible]
-        public BagOfNecroReagents(Serial serial) : base(serial)
+        public SerpentScale(Serial serial) : base(serial)
         {
+        }
+
+        public override double DefaultWeight
+        {
+            get { return 0.1; }
         }
 
         public override void Serialize(IGenericWriter writer)

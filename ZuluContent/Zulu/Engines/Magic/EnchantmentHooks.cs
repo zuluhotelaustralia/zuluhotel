@@ -24,7 +24,7 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         static EnchantmentHooks()
         {
-            HookPriorities = EnchantmentDictionary.EnchantmentInfoMap.Keys
+            var mapped = EnchantmentDictionary.EnchantmentInfoMap.Keys
                 .SelectMany(t =>
                 {
                     var map = t.GetInterfaceMap(typeof(IEnchantmentHook));
@@ -38,7 +38,8 @@ namespace ZuluContent.Zulu.Engines.Magic
                         .Select(m => (InterfaceMethod: map.InterfaceMethods[Array.IndexOf(map.TargetMethods, m)],
                             HookMethod: m));
                 })
-                .GroupBy(x => x.InterfaceMethod)
+                .GroupBy(x => x.InterfaceMethod).ToList();
+            HookPriorities = mapped
                 .ToDictionary(
                     x => x.Key.Name,
                     x => x.Select(y => (T: y.HookMethod?.ReflectedType, P: y.HookMethod.GetActionPriority()))

@@ -21,7 +21,8 @@ namespace Server.Mobiles
         AI_Mage,
         AI_Berserk,
         AI_Predator,
-        AI_Thief
+        AI_Thief,
+        AI_Familiar,
     }
 
     public enum ActionType
@@ -141,7 +142,7 @@ namespace Server.Mobiles
 
             if (order == OrderType.Attack)
             {
-                if (target is BaseCreature && ((BaseCreature) target).IsScaryToPets && m_Mobile.IsScaredOfScaryThings)
+                if (target is BaseCreature {IsScaryToPets: true} && m_Mobile.IsScaredOfScaryThings)
                 {
                     m_Mobile.SayTo(from, "Your pet refuses to attack this creature!");
                     return;
@@ -833,6 +834,17 @@ namespace Server.Mobiles
         {
             return true;
         }
+        
+        protected void DoTeleport(Mobile from, Mobile to)
+        {
+            Effects.SendLocationParticles(EffectItem.Create(from.Location, from.Map, EffectItem.DefaultDuration),
+                0x3728, 10, 10, 2023);
+            Effects.SendLocationParticles(EffectItem.Create(to.Location, to.Map, EffectItem.DefaultDuration), 0x3728,
+                10, 10, 5023);
+            from.PlaySound(0x1FE);
+
+            from.SetLocation(to.Location, true);
+        }
 
         public virtual bool Obey()
         {
@@ -1096,7 +1108,7 @@ namespace Server.Mobiles
             return true;
         }
 
-        public virtual bool DoOrderFollow()
+        public virtual bool DoOrderFollow(bool alwaysRun = false)
         {
             if (CheckHerding())
             {
@@ -1126,7 +1138,7 @@ namespace Server.Mobiles
                     m_Mobile.DebugSay("My master told me to follow: {0}", m_Mobile.ControlTarget.Name);
 
                     // Not exactly OSI style, but better than nothing.
-                    bool bRun = iCurrDist > 5;
+                    bool bRun = alwaysRun || iCurrDist > 5;
 
                     if (WalkMobileRange(m_Mobile.ControlTarget, 1, bRun, 0, 1))
                     {
@@ -2292,6 +2304,10 @@ namespace Server.Mobiles
 
                     // Let's not target ourselves...
                     if (m == m_Mobile)
+                        continue;
+
+                    // We consider Familiars to be neutral
+                    if (m is BaseCreature {AI: AIType.AI_Familiar})
                         continue;
 
                     // Dead targets are invalid.

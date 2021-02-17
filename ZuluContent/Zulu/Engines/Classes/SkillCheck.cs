@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Server;
+using Server.Json;
 using Server.Mobiles;
 using Server.Text;
 
@@ -51,20 +52,8 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 throw new DataException($"SkillCheck Configuration: {path} was not found, cannot continue!");
             }
-        
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                AllowTrailingCommas = true,
-                IgnoreNullValues = true,
-                ReadCommentHandling = JsonCommentHandling.Skip,
-                PropertyNameCaseInsensitive = true,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            };
 
-            var text = File.ReadAllText(path, TextEncoding.UTF8);
-            Configs = JsonSerializer.Deserialize<Dictionary<SkillName, SkillConfig>>(text, options);
-
+            Configs = JsonConfig.Deserialize<Dictionary<SkillName, SkillConfig>>(path);
             if (Configs == null)
             {
                 throw new DataException($"SkillCheck Configuration: failed to deserialize {path}!");
@@ -84,23 +73,16 @@ namespace Scripts.Zulu.Engines.Classes
             ) == true;
         }
 
-        public static bool DifficultySkillCheck(Mobile from, SkillName skillName, int difficulty, int points)
+        public static int GetSkillCheckChance(Mobile from, SkillName skillName, int difficulty)
         {
-            Skill skill = from.Skills[skillName];
+            var skill = from.Skills[skillName];
 
             var skillValue = (int) skill.Value;
 
             if (skillValue == 0 && from is BaseCreature)
-                return false;
+                return 0;
 
             var chance = skillValue - difficulty + 20;
-
-            // In case skill arrow is down
-            if (chance < 0)
-            {
-                AwardSkillPoints(from, skillName, 0);
-                return false;
-            }
 
             if (chance == 0)
                 chance = 2;
@@ -110,6 +92,20 @@ namespace Scripts.Zulu.Engines.Classes
                 if (chance > 98)
                     chance = 98;
             }
+
+            return chance;
+        }
+
+        public static bool DifficultySkillCheck(Mobile from, SkillName skillName, int difficulty, int points)
+        {
+            // In case skill arrow is down
+            if (from.Skills[skillName].Value - difficulty + 20 < 0)
+            {
+                AwardSkillPoints(from, skillName, 0);
+                return false;
+            }
+
+            var chance = GetSkillCheckChance(from, skillName, difficulty);
 
             var check = Utility.Random(100);
             if (check >= chance)
