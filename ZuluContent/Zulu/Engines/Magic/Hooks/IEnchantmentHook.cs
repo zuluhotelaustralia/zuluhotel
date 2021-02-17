@@ -39,11 +39,15 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value);
 
-        public void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod);
+        public void OnToolHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod);
+
+        public void OnHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod);
 
         public void OnHarvestColoredChance(Mobile mobile, ref int chance);
 
         public void OnHarvestAmount(Mobile harvester, ref int amount);
+
+        public void OnToolHarvestBonus(Mobile harvester, ref int amount);
 
         public void OnHarvestBonus(Mobile harvester, ref int amount);
 
@@ -62,9 +66,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage);
 
         public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage);
-        
-        public void OnCraftItemCreated(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item);
-        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item);
+
+        public void OnCraftItemCreated(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item);
+
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item);
 
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar);
     }

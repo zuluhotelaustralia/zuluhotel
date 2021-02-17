@@ -82,167 +82,169 @@ namespace Server.Engines.Harvest
                 "iron",
                 typeof(IronOre)));
 
-            oreAndStone.BonusEffect = (Mobile harvester, Item tool) =>
-            {
-                var chance = Utility.Random(1, 100);
-                var bonus = (int) (harvester.Skills[SkillName.Mining].Value / 30);
-
-                harvester.FireHook(h => h.OnHarvestBonus(harvester, ref bonus), true);
-
-                chance += bonus;
-
-                if (tool is IEnchanted enchantedTool && enchantedTool.Enchantments.Get((HarvestBonus e) => e.Value) > 0)
-                {
-                    var toolBonusChance = 2;
-                    enchantedTool.FireHook(h => h.OnHarvestBonus(harvester, ref toolBonusChance));
-                    chance += toolBonusChance;
-                }
-
-                Item item = null;
-                var message = "";
-
-                switch (chance)
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    {
-                        message = "Oh no your tool breaks!";
-                        tool.Delete();
-                        break;
-                    }
-                    case 98:
-                    {
-                        item = new TreasureMap(1, Map.Felucca);
-                        message = "You discover a tattered map!";
-                        break;
-                    }
-                    case 99:
-                    {
-                        item = new Amber(1);
-                        message = "You find a chunk of fossilized sap!";
-                        break;
-                    }
-                    case 100:
-                    {
-                        item = new NewZuluOre(1);
-                        message = "You find a piece of elusive NEW ZULU ORE!";
-                        break;
-                    }
-                    case 105:
-                    {
-                        item = new Diamond(1);
-                        message = "You find a diamond!";
-                        break;
-                    }
-                    case 106:
-                    {
-                        item = new NewZuluOre(1);
-                        message = "You find a piece of elusive NEW ZULU ORE!";
-                        break;
-                    }
-                    case 107:
-                    {
-                        item = new TreasureMap(3, Map.Felucca);
-                        message = "You discover a tattered map!";
-                        break;
-                    }
-                    case 108:
-                    {
-                        item = new StarSapphire(3);
-                        message = "You find 3 star sapphires!";
-                        break;
-                    }
-                    case 109:
-                    case 110:
-                    {
-                        item = new NewZuluOre(2);
-                        message = "You find 2 pieces of elusive NEW ZULU ORE!";
-                        break;
-                    }
-                    case 111:
-                    case 112:
-                    {
-                        item = new TreasureMap(4, Map.Felucca);
-                        message = "You discover a tattered map!";
-                        break;
-                    }
-                    case 113:
-                    {
-                        if (Utility.Random(5) < 1)
-                        {
-                            item = new EbonTwilightSapphireOre(1);
-                            message = "You find a strange looking blue gem!";
-                        }
-
-                        break;
-                    }
-                    case 114:
-                    {
-                        if (Utility.Random(10) < 1)
-                        {
-                            item = new DarkSableRubyOre(1);
-                            message = "You find a strange looking red gem!";
-                        }
-
-                        break;
-                    }
-                    case 115:
-                    {
-                        if (Utility.Random(15) < 1)
-                        {
-                            item = new RadiantNimbusDiamondOre(1);
-                            message = "You find a glowing bright white gem!";
-                        }
-
-                        break;
-                    }
-                    case 116:
-                    case 117:
-                    case 118:
-                    {
-                        if (Utility.Random(15) < 1)
-                        {
-                            var gemChance = Utility.Random(3);
-
-                            if (gemChance == 0)
-                            {
-                                item = new EbonTwilightSapphireOre(1);
-                                message = "You find a strange looking blue gem!";
-                            }
-                            else if (gemChance == 1)
-                            {
-                                item = new DarkSableRubyOre(1);
-                                message = "You find a strange looking red gem!";
-                            }
-                            else if (gemChance == 2)
-                            {
-                                item = new RadiantNimbusDiamondOre(1);
-                                message = "You find a glowing bright white gem!";
-                            }
-                        }
-
-                        break;
-                    }
-                }
-
-                if (item != null)
-                {
-                    var cont = harvester.Backpack;
-                    if (cont.TryDropItem(harvester, item, false))
-                    {
-                        if (message.Length > 0)
-                            harvester.SendAsciiMessage(MessageSuccessHue, message);
-                    }
-                    else if (message.Length > 0)
-                        harvester.SendAsciiMessage(MessageFailureHue, message);
-                }
-            };
+            oreAndStone.BonusEffect = HarvestBonusEffect;
 
             Definitions.Add(oreAndStone);
 
             #endregion
+        }
+
+        private static void HarvestBonusEffect(Mobile harvester, Item tool)
+        {
+            var chance = Utility.Random(1, 100);
+            var bonus = (int) (harvester.Skills[SkillName.Mining].Value / 30);
+
+            harvester.FireHook(h => h.OnHarvestBonus(harvester, ref bonus));
+
+            chance += bonus;
+
+            if (tool is IEnchanted enchantedTool && enchantedTool.Enchantments.Get((HarvestBonus e) => e.Value) > 0)
+            {
+                var toolBonusChance = 2;
+                harvester.FireHook(h => h.OnToolHarvestBonus(harvester, ref toolBonusChance));
+                chance += toolBonusChance;
+            }
+
+            Item item = null;
+            var message = "";
+
+            switch (chance)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                {
+                    message = "Oh no your tool breaks!";
+                    tool.Delete();
+                    break;
+                }
+                case 98:
+                {
+                    item = new TreasureMap(1, Map.Felucca);
+                    message = "You discover a tattered map!";
+                    break;
+                }
+                case 99:
+                {
+                    item = new Amber(1);
+                    message = "You find a chunk of fossilized sap!";
+                    break;
+                }
+                case 100:
+                {
+                    item = new NewZuluOre(1);
+                    message = "You find a piece of elusive NEW ZULU ORE!";
+                    break;
+                }
+                case 105:
+                {
+                    item = new Diamond(1);
+                    message = "You find a diamond!";
+                    break;
+                }
+                case 106:
+                {
+                    item = new NewZuluOre(1);
+                    message = "You find a piece of elusive NEW ZULU ORE!";
+                    break;
+                }
+                case 107:
+                {
+                    item = new TreasureMap(3, Map.Felucca);
+                    message = "You discover a tattered map!";
+                    break;
+                }
+                case 108:
+                {
+                    item = new StarSapphire(3);
+                    message = "You find 3 star sapphires!";
+                    break;
+                }
+                case 109:
+                case 110:
+                {
+                    item = new NewZuluOre(2);
+                    message = "You find 2 pieces of elusive NEW ZULU ORE!";
+                    break;
+                }
+                case 111:
+                case 112:
+                {
+                    item = new TreasureMap(4, Map.Felucca);
+                    message = "You discover a tattered map!";
+                    break;
+                }
+                case 113:
+                {
+                    if (Utility.Random(5) < 1)
+                    {
+                        item = new EbonTwilightSapphireOre(1);
+                        message = "You find a strange looking blue gem!";
+                    }
+
+                    break;
+                }
+                case 114:
+                {
+                    if (Utility.Random(10) < 1)
+                    {
+                        item = new DarkSableRubyOre(1);
+                        message = "You find a strange looking red gem!";
+                    }
+
+                    break;
+                }
+                case 115:
+                {
+                    if (Utility.Random(15) < 1)
+                    {
+                        item = new RadiantNimbusDiamondOre(1);
+                        message = "You find a glowing bright white gem!";
+                    }
+
+                    break;
+                }
+                case 116:
+                case 117:
+                case 118:
+                {
+                    if (Utility.Random(15) < 1)
+                    {
+                        var gemChance = Utility.Random(3);
+
+                        if (gemChance == 0)
+                        {
+                            item = new EbonTwilightSapphireOre(1);
+                            message = "You find a strange looking blue gem!";
+                        }
+                        else if (gemChance == 1)
+                        {
+                            item = new DarkSableRubyOre(1);
+                            message = "You find a strange looking red gem!";
+                        }
+                        else if (gemChance == 2)
+                        {
+                            item = new RadiantNimbusDiamondOre(1);
+                            message = "You find a glowing bright white gem!";
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            if (item != null)
+            {
+                var cont = harvester.Backpack;
+                if (cont.TryDropItem(harvester, item, false))
+                {
+                    if (message.Length > 0)
+                        harvester.SendAsciiMessage(MessageSuccessHue, message);
+                }
+                else if (message.Length > 0)
+                    harvester.SendAsciiMessage(MessageFailureHue, message);
+            }
         }
 
         public override bool CheckHarvest(Mobile from, Item tool)

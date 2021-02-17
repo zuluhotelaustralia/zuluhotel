@@ -1,6 +1,7 @@
 using System;
 using Server.Targeting;
 using Server.Items;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -65,44 +66,9 @@ namespace Server.Engines.Craft
                     if (craftResource.Amount < 2)
                         return SmeltResult.Invalid; // Not enough metal to resmelt
 
-                    double difficulty = resource switch
-                    {
-                        CraftResource.Iron => 60,
-                        CraftResource.Spike => 60,
-                        CraftResource.Fruity => 60,
-                        CraftResource.Bronze => 60,
-                        CraftResource.IceRock => 60,
-                        CraftResource.BlackDwarf => 60,
-                        CraftResource.DullCopper => 60,
-                        CraftResource.Platinum => 60,
-                        CraftResource.SilverRock => 60,
-                        CraftResource.DarkPagan => 60,
-                        CraftResource.Copper => 60,
-                        CraftResource.Mystic => 60,
-                        CraftResource.Spectral => 60,
-                        CraftResource.OldBritain => 60,
-                        CraftResource.Onyx => 60,
-                        CraftResource.RedElven => 60,
-                        CraftResource.Undead => 60,
-                        CraftResource.Pyrite => 60,
-                        CraftResource.Virginity => 60,
-                        CraftResource.Malachite => 60,
-                        CraftResource.Lavarock => 60,
-                        CraftResource.Azurite => 60,
-                        CraftResource.Dripstone => 60,
-                        CraftResource.Executor => 60,
-                        CraftResource.Peachblue => 60,
-                        CraftResource.Destruction => 60,
-                        CraftResource.Anra => 60,
-                        CraftResource.Crystal => 60,
-                        CraftResource.Doom => 60,
-                        CraftResource.Goddess => 60,
-                        CraftResource.NewZulu => 60,
-                        CraftResource.DarkSableRuby => 60,
-                        CraftResource.EbonTwilightSapphire => 60,
-                        CraftResource.RadiantNimbusDiamond => 60,
-                        _ => 0.0
-                    };
+                    var oreEntry = OreConfiguration.Entries[(int) resource - 1];
+
+                    var difficulty = oreEntry.SmeltSkillRequired;
 
                     if (difficulty > from.Skills[SkillName.Mining].Value)
                         return SmeltResult.NoSkill;
@@ -120,8 +86,7 @@ namespace Server.Engines.Craft
                     item.Delete();
                     from.AddToBackpack(ingot);
 
-                    from.PlaySound(0x2A);
-                    from.PlaySound(0x240);
+                    from.PlaySound(0x2B);
                     return SmeltResult.Success;
                 }
                 catch

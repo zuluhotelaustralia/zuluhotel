@@ -32,7 +32,7 @@ namespace Server.Engines.Harvest
                 from.SendLocalizedMessage(1044038); // You have worn out your tool!
 
             if (!equipped)
-                from.SendAsciiMessage(33, "You must equip it to mine.");
+                from.SendLocalizedMessage(502641); // You must equip this item to use it.
 
             return !wornOut && equipped;
         }
@@ -83,7 +83,7 @@ namespace Server.Engines.Harvest
             if (tool is IEnchanted enchantedTool && enchantedTool.Enchantments.Get((HarvestBonus e) => e.Value) > 0)
             {
                 var toolBonusChanceForColored = 10;
-                enchantedTool.FireHook(h => h.OnHarvestBonus(from, ref toolBonusChanceForColored));
+                from.FireHook(h => h.OnToolHarvestBonus(from, ref toolBonusChanceForColored));
                 chanceForColored += toolBonusChanceForColored;
             }
 
@@ -179,8 +179,7 @@ namespace Server.Engines.Harvest
                 if (def.Resources.Length > 0)
                     chanceForColored = GetChanceForColored(from, tool, def);
 
-                if (tool is IEnchanted enchantedTool)
-                    enchantedTool.FireHook(h => h.OnHarvestBonus(from, ref harvestAmount));
+                from.FireHook(h => h.OnToolHarvestBonus(from, ref harvestAmount));
 
                 if (chanceForColored > 0 && Utility.Random(1, 100) <= chanceForColored)
                 {

@@ -19,12 +19,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             set => m_Value = value;
         }
 
-        public override void OnHarvestBonus(Mobile harvester, ref int amount)
+        public override void OnToolHarvestBonus(Mobile harvester, ref int amount)
         {
             amount *= Value;
         }
 
-        public override void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod)
+        public override void OnToolHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
         {
             bonus += 6 * Value;
             toMod -= 5 * Value;

@@ -469,7 +469,7 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
-        public void OnHarvestColoredChance(Mobile mobile, ref int bonus, ref int toMod)
+        public void OnHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
         {
             if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
             {
@@ -522,12 +522,13 @@ namespace Scripts.Zulu.Engines.Classes
         {
         }
 
-        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item)
         {
             if (
                 craftSystem is DefAlchemy
                 && item is BasePotion potion
-                && from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}} 
+                && from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}}
             )
             {
                 var bonus = (uint) (potion.PotionStrength * ClasseBonus - potion.PotionStrength);
@@ -538,11 +539,11 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
-        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool, Item item)
+        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item)
         {
-
         }
-        
+
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)
         {
             if (caster is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})
@@ -556,6 +557,14 @@ namespace Scripts.Zulu.Engines.Classes
         #endregion
 
         #region Unused hooks
+
+        public void OnToolHarvestBonus(Mobile harvester, ref int amount)
+        {
+        }
+
+        public void OnToolHarvestColoredQualityChance(Mobile mobile, ref int bonus, ref int toMod)
+        {
+        }
 
         public void OnIdentified(IEntity entity)
         {

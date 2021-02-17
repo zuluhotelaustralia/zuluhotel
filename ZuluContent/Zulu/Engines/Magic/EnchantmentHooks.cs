@@ -89,18 +89,14 @@ namespace ZuluContent.Zulu.Engines.Magic
         }
 
 
-        public static void FireHook(this Mobile m, Expression<Action<IEnchantmentHook>> action,
-            bool ignoreItems = false)
+        public static void FireHook(this Mobile m, Expression<Action<IEnchantmentHook>> action)
         {
-            List<IEnchantmentHook> hooks = new();
-
-            if (!ignoreItems)
-            {
-                hooks.AddRange(m.Items
+            var hooks = new List<IEnchantmentHook>(
+                m.Items
                     .OfType<BaseEquippableItem>()
                     .SelectMany(e => e.Enchantments.Values.Values)
-                    .ToList());
-            }
+                    .ToList()
+            );
 
             if (m is IEnchanted enchanted)
                 hooks.AddRange(enchanted.Enchantments.Values.Values);
