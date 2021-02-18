@@ -9,23 +9,27 @@ namespace Server.Configurations
     {
         public static OreConfig OreConfiguration { get; private set; }
 
+        public static LogConfig LogConfiguration { get; private set; }
+
+
         public static void Initialize()
         {
-            OreConfiguration = LoadResourceConfig("ores");
+            OreConfiguration = LoadResourceConfig<OreConfig>("ores");
+            LogConfiguration = LoadResourceConfig<LogConfig>("logs");
         }
 
-        private static OreConfig LoadResourceConfig(string configFile)
+        private static T LoadResourceConfig<T>(string configFile)
         {
             var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
             Console.Write($"Ore Configuration: loading {path}... ");
 
             var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
-            var config = JsonConfig.Deserialize<OreConfig>(path, options);
+            var config = JsonConfig.Deserialize<T>(path, options);
 
             if (config == null)
                 throw new DataException($"Ore Configuration: failed to deserialize {path}!");
 
-            Console.WriteLine($"Done, loaded {config.Entries.Length} entries.");
+            Console.WriteLine("Done.");
 
             return config;
         }
@@ -53,6 +57,22 @@ namespace Server.Configurations
         {
             public Type EnchantmentType { get; init; }
             public int EnchantmentValue { get; init; }
+        }
+    }
+
+    public record LogConfig
+    {
+        public LogEntry[] Entries { get; init; }
+
+        public record LogEntry
+        {
+            public string Name { get; init; }
+            public Type ResourceType { get; init; }
+            public double HarvestSkillRequired { get; init; }
+            public double CraftSkillRequired { get; init; }
+            public double VeinChance { get; init; }
+            public int Hue { get; init; }
+            public double Quality { get; init; }
         }
     }
 }

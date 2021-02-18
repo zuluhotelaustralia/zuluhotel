@@ -64,6 +64,8 @@ namespace Server.Engines.Harvest
 
         public HarvestVein DefaultVein { get; set; }
 
+        public int MaxChance { get; set; }
+
         public Dictionary<Map, Dictionary<Point2D, HarvestBank>> Banks { get; set; }
 
         public void SendMessageTo(Mobile from, object message)
@@ -117,7 +119,7 @@ namespace Server.Engines.Harvest
         public HarvestVein GetColoredVein(Mobile from, Item tool, ref int harvestAmount)
         {
             var skillValue = from.Skills[Skill].Value;
-            var chance = Utility.Random(1, 155);
+            var chance = Utility.Random(1, MaxChance);
             var amountToHarvest = harvestAmount;
 
             if (Utility.Random(2) > 0)

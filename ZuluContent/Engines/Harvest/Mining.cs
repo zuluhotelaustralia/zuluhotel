@@ -60,6 +60,9 @@ namespace Server.Engines.Harvest
             // One ore per harvest action
             oreAndStone.ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1;
 
+            // Maximum chance to roll for colored veins
+            oreAndStone.MaxChance = 155;
+
             // The digging effect
             oreAndStone.EffectActions = new[] {11};
             oreAndStone.EffectSounds = new[] {0x042};
@@ -79,7 +82,7 @@ namespace Server.Engines.Harvest
             oreAndStone.Veins = veins;
 
             oreAndStone.DefaultVein = new HarvestVein(0.0, new HarvestResource(0.0,
-                "iron",
+                "Iron",
                 typeof(IronOre)));
 
             oreAndStone.BonusEffect = HarvestBonusEffect;

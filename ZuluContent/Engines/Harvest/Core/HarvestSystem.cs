@@ -188,7 +188,7 @@ namespace Server.Engines.Harvest
                     vein = def.GetColoredVein(from, tool, ref harvestAmount);
                     if (vein == null)
                     {
-                        def.SendMessageTo(from, "You fail to find any colored ore.");
+                        def.SendMessageTo(from, "You fail to find any colored veins.");
                         return;
                     }
                 }

@@ -1,6 +1,11 @@
 using System;
+using System.Linq;
 using Server.Items;
 using Server.Network;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using static Server.Configurations.MessageHueConfiguration;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Harvest
 {
@@ -19,17 +24,14 @@ namespace Server.Engines.Harvest
             }
         }
 
-        private HarvestDefinition m_Definition;
-
-        public HarvestDefinition Definition
-        {
-            get { return m_Definition; }
-        }
+        public HarvestDefinition Definition { get; set; }
 
         private Lumberjacking()
         {
-            HarvestResource[] res;
-            HarvestVein[] veins;
+            var res = LogConfiguration.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
+                new HarvestResource(e.HarvestSkillRequired, e.Name, e.ResourceType)).ToArray();
+            var veins = LogConfiguration.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
+                new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
 
             #region Lumberjacking
 
@@ -59,6 +61,9 @@ namespace Server.Engines.Harvest
             // Ten logs per harvest action
             lumber.ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1;
 
+            // Maximum chance to roll for colored veins
+            lumber.MaxChance = 100;
+
             // The chopping effect
             lumber.EffectActions = new[] {13};
             lumber.EffectSounds = new[] {0x13E};
@@ -72,12 +77,119 @@ namespace Server.Engines.Harvest
             lumber.PackFullMessage = 500497; // You can't place any wood into your backpack!
             lumber.ToolBrokeMessage = 500499; // You broke your axe.
 
-            lumber.DefaultVein = new HarvestVein(100.0, new HarvestResource(0.0, 500498, typeof(Log)));
+            lumber.Resources = res;
+            lumber.Veins = veins;
 
-            m_Definition = lumber;
+            lumber.DefaultVein = new HarvestVein(0.0, new HarvestResource(0.0,
+                500498,
+                typeof(Log)));
+
+            lumber.BonusEffect = HarvestBonusEffect;
+
+            Definition = lumber;
             Definitions.Add(lumber);
 
             #endregion
+        }
+
+        private static void HarvestBonusEffect(Mobile harvester, Item tool)
+        {
+            var chance = Utility.Random(1, 100);
+            var bonus = (int) (harvester.Skills[SkillName.Lumberjacking].Value / 30);
+
+            harvester.FireHook(h => h.OnHarvestBonus(harvester, ref bonus));
+
+            chance += bonus;
+
+            if (tool is IEnchanted enchantedTool && enchantedTool.Enchantments.Get((HarvestBonus e) => e.Value) > 0)
+            {
+                var toolBonusChance = 2;
+                harvester.FireHook(h => h.OnToolHarvestBonus(harvester, ref toolBonusChance));
+                chance += toolBonusChance;
+            }
+
+            Item item = null;
+            var message = "";
+
+            switch (chance)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                {
+                    message = "Oh no your tool breaks!";
+                    tool.Delete();
+                    break;
+                }
+                case 96:
+                case 97:
+                case 98:
+                case 99:
+                case 100:
+                {
+                    item = new DeadWood(1);
+                    message = "You find some dead wood!";
+                    break;
+                }
+                case 101:
+                case 102:
+                case 103:
+                case 104:
+                {
+                    item = new YoungOakLog(1);
+                    message = "You find some young oak wood!";
+                    break;
+                }
+                case 105:
+                case 106:
+                case 107:
+                case 108:
+                {
+                    item = new DeadWood(2);
+                    message = "You find some dead wood!";
+                    break;
+                }
+                case 109:
+                case 110:
+                {
+                    item = new YoungOakLog(2);
+                    message = "You find some young oak wood!";
+                    break;
+                }
+                case 111:
+                case 112:
+                {
+                    item = new DeadWood(3);
+                    message = "You find some dead wood!";
+                    break;
+                }
+                case 113:
+                case 114:
+                {
+                    item = new YoungOakLog(3);
+                    message = "You find some young oak wood!";
+                    break;
+                }
+                case 115:
+                {
+                    item = new YoungOakLog(4);
+                    message = "You find some young oak wood!";
+                    break;
+                }
+            }
+
+            if (item != null)
+            {
+                var cont = harvester.Backpack;
+                if (cont.TryDropItem(harvester, item, false))
+                {
+                    if (message.Length > 0)
+                        harvester.SendAsciiMessage(MessageSuccessHue, message);
+                }
+                else if (message.Length > 0)
+                    harvester.SendAsciiMessage(MessageFailureHue, message);
+            }
         }
 
         public override bool CheckHarvest(Mobile from, Item tool)
@@ -106,6 +218,11 @@ namespace Server.Engines.Harvest
             }
 
             return true;
+        }
+
+        public override void OnHarvestStarted(Mobile from, Item tool, HarvestDefinition def, object toHarvest)
+        {
+            from.SendAsciiMessage(MessageSuccessHue, "You start lumberjacking...");
         }
 
         public override void OnBadHarvestTarget(Mobile from, Item tool, object toHarvest)
