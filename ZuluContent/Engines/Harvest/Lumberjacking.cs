@@ -29,62 +29,65 @@ namespace Server.Engines.Harvest
         private Lumberjacking()
         {
             var res = LogConfiguration.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
-                new HarvestResource(e.HarvestSkillRequired, e.Name, e.ResourceType)).ToArray();
+                new HarvestResource(e.HarvestSkillRequired, $"{e.Name}(s)", e.ResourceType)).ToArray();
             var veins = LogConfiguration.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
                 new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
+            var defaultLog = LogConfiguration.Entries[0];
+            var defaultVein = new HarvestVein(defaultLog.VeinChance, new HarvestResource(
+                defaultLog.HarvestSkillRequired,
+                defaultLog.Name, defaultLog.ResourceType));
 
             #region Lumberjacking
 
-            HarvestDefinition lumber = new HarvestDefinition();
+            HarvestDefinition lumber = new HarvestDefinition
+            {
+                // Resource banks are every 1x1 tiles
+                BankWidth = LogConfiguration.BankWidth,
+                BankHeight = LogConfiguration.BankHeight,
 
-            // Resource banks are every 1x1 tiles
-            lumber.BankWidth = 1;
-            lumber.BankHeight = 1;
+                // Every bank holds from 45 to 90 ore
+                MinTotal = LogConfiguration.MinTotal,
+                MaxTotal = LogConfiguration.MaxTotal,
 
-            // Every bank holds from 45 to 90 logs
-            lumber.MinTotal = 45;
-            lumber.MaxTotal = 90;
+                // A resource bank will respawn its content every 10 to 20 minutes
+                MinRespawn = TimeSpan.FromMinutes(LogConfiguration.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(LogConfiguration.MaxRespawn),
 
-            // A resource bank will respawn its content every 20 to 30 minutes
-            lumber.MinRespawn = TimeSpan.FromMinutes(20.0);
-            lumber.MaxRespawn = TimeSpan.FromMinutes(30.0);
+                // Skill checking is done on the Mining skill
+                Skill = LogConfiguration.Skill,
 
-            // Skill checking is done on the Lumberjacking skill
-            lumber.Skill = SkillName.Lumberjacking;
+                // Set the list of harvestable tiles
+                Tiles = m_TreeTiles,
 
-            // Set the list of harvestable tiles
-            lumber.Tiles = m_TreeTiles;
+                // Players must be within 2 tiles to harvest
+                MaxRange = LogConfiguration.MaxRange,
 
-            // Players must be within 2 tiles to harvest
-            lumber.MaxRange = 2;
+                // Ten logs per harvest action
+                ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1,
 
-            // Ten logs per harvest action
-            lumber.ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1;
+                // Maximum chance to roll for colored veins
+                MaxChance = LogConfiguration.MaxChance,
 
-            // Maximum chance to roll for colored veins
-            lumber.MaxChance = 100;
+                // The chopping effect
+                EffectActions = LogConfiguration.LogEffect.Actions,
+                EffectSounds = LogConfiguration.LogEffect.Sounds,
+                EffectCounts = LogConfiguration.LogEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(LogConfiguration.LogEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(LogConfiguration.LogEffect.SoundDelay),
 
-            // The chopping effect
-            lumber.EffectActions = new[] {13};
-            lumber.EffectSounds = new[] {0x13E};
-            lumber.EffectCounts = new[] {4};
-            lumber.EffectDelay = TimeSpan.FromSeconds(1.6);
-            lumber.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
+                NoResourcesMessage = 500493, // There's not enough wood here to harvest.
+                FailMessage = 500495, // You hack at the tree for a while, but fail to produce any useable wood.
+                OutOfRangeMessage = 500446, // That is too far away.
+                PackFullMessage = 500497, // You can't place any wood into your backpack!
+                ToolBrokeMessage = 500499, // You broke your axe.
 
-            lumber.NoResourcesMessage = 500493; // There's not enough wood here to harvest.
-            lumber.FailMessage = 500495; // You hack at the tree for a while, but fail to produce any useable wood.
-            lumber.OutOfRangeMessage = 500446; // That is too far away.
-            lumber.PackFullMessage = 500497; // You can't place any wood into your backpack!
-            lumber.ToolBrokeMessage = 500499; // You broke your axe.
+                Resources = res,
+                Veins = veins,
 
-            lumber.Resources = res;
-            lumber.Veins = veins;
+                DefaultVein = defaultVein,
 
-            lumber.DefaultVein = new HarvestVein(0.0, new HarvestResource(0.0,
-                500498,
-                typeof(Log)));
-
-            lumber.BonusEffect = HarvestBonusEffect;
+                BonusEffect = HarvestBonusEffect
+            };
 
             Definition = lumber;
             Definitions.Add(lumber);

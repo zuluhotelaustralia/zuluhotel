@@ -1,4 +1,20 @@
 {
+  "BankWidth": 1,
+  "BankHeight": 1,
+  "MinTotal": 45,
+  "MaxTotal":  90,
+  "MinRespawn": 10.0,
+  "MaxRespawn": 20.0,
+  "Skill": "Mining",
+  "MaxRange": 2,
+  "MaxChance": 155,
+  "OreEffect": {
+    "Actions": [ 11 ],
+    "Sounds": [ 66 ],
+    "Counts": [ 4 ],
+    "Delay": 1.6,
+    "SoundDelay": 0.9 
+  },
   "Entries": [
     {
       "Name": "Iron",

@@ -1,4 +1,20 @@
 {
+  "BankWidth": 1,
+  "BankHeight": 1,
+  "MinTotal": 45,
+  "MaxTotal": 90,
+  "MinRespawn": 10.0,
+  "MaxRespawn": 20.0,
+  "Skill": "Lumberjacking",
+  "MaxRange": 2,
+  "MaxChance": 100,
+  "LogEffect": {
+    "Actions": [ 13 ],
+    "Sounds": [ 318 ],
+    "Counts": [ 4 ],
+    "Delay": 1.6,
+    "SoundDelay": 0.9
+  },
   "Entries": [
     {
       "Name": "log",

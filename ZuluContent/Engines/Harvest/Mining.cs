@@ -28,64 +28,67 @@ namespace Server.Engines.Harvest
         private Mining()
         {
             var res = OreConfiguration.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
-                new HarvestResource(e.HarvestSkillRequired, e.Name, e.ResourceType)).ToArray();
+                new HarvestResource(e.HarvestSkillRequired, $"{e.Name} ore", e.ResourceType)).ToArray();
             var veins = OreConfiguration.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
                 new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
+            var defaultOre = OreConfiguration.Entries[0];
+            var defaultVein = new HarvestVein(defaultOre.VeinChance, new HarvestResource(
+                defaultOre.HarvestSkillRequired,
+                defaultOre.Name, defaultOre.ResourceType));
 
             #region Mining for ore and stone
 
-            HarvestDefinition oreAndStone = new HarvestDefinition();
+            HarvestDefinition oreAndStone = new HarvestDefinition
+            {
+                // Resource banks are every 1x1 tiles
+                BankWidth = OreConfiguration.BankWidth,
+                BankHeight = OreConfiguration.BankHeight,
 
-            // Resource banks are every 1x1 tiles
-            oreAndStone.BankWidth = 1;
-            oreAndStone.BankHeight = 1;
+                // Every bank holds from 45 to 90 ore
+                MinTotal = OreConfiguration.MinTotal,
+                MaxTotal = OreConfiguration.MaxTotal,
 
-            // Every bank holds from 45 to 90 ore
-            oreAndStone.MinTotal = 45;
-            oreAndStone.MaxTotal = 90;
+                // A resource bank will respawn its content every 10 to 20 minutes
+                MinRespawn = TimeSpan.FromMinutes(OreConfiguration.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(OreConfiguration.MaxRespawn),
 
-            // A resource bank will respawn its content every 10 to 20 minutes
-            oreAndStone.MinRespawn = TimeSpan.FromMinutes(10.0);
-            oreAndStone.MaxRespawn = TimeSpan.FromMinutes(20.0);
+                // Skill checking is done on the Mining skill
+                Skill = OreConfiguration.Skill,
 
-            // Skill checking is done on the Mining skill
-            oreAndStone.Skill = SkillName.Mining;
+                // Set the list of harvestable tiles
+                Tiles = m_MountainAndCaveTiles,
 
-            // Set the list of harvestable tiles
-            oreAndStone.Tiles = m_MountainAndCaveTiles;
+                // Players must be within 2 tiles to harvest
+                MaxRange = OreConfiguration.MaxRange,
 
-            // Players must be within 2 tiles to harvest
-            oreAndStone.MaxRange = 2;
+                // One ore per harvest action
+                ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1,
 
-            // One ore per harvest action
-            oreAndStone.ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1;
+                // Maximum chance to roll for colored veins
+                MaxChance = OreConfiguration.MaxChance,
 
-            // Maximum chance to roll for colored veins
-            oreAndStone.MaxChance = 155;
+                // The digging effect
+                EffectActions = OreConfiguration.OreEffect.Actions,
+                EffectSounds = OreConfiguration.OreEffect.Sounds,
+                EffectCounts = OreConfiguration.OreEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.SoundDelay),
 
-            // The digging effect
-            oreAndStone.EffectActions = new[] {11};
-            oreAndStone.EffectSounds = new[] {0x042};
-            oreAndStone.EffectCounts = new[] {4};
-            oreAndStone.EffectDelay = TimeSpan.FromSeconds(1.6);
-            oreAndStone.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
+                NoResourcesMessage = 503040, // There is no metal here to mine.
+                DoubleHarvestMessage = 503042, // Someone has gotten to the metal before you.
+                TimedOutOfRangeMessage = 503041, // You have moved too far away to continue mining.
+                OutOfRangeMessage = 500446, // That is too far away.
+                FailMessage = 503043, // You loosen some rocks but fail to find any useable ore.
+                PackFullMessage = 1010481, // Your backpack is full, so the ore you mined is lost.
+                ToolBrokeMessage = 1044038, // You have worn out your tool!
 
-            oreAndStone.NoResourcesMessage = 503040; // There is no metal here to mine.
-            oreAndStone.DoubleHarvestMessage = 503042; // Someone has gotten to the metal before you.
-            oreAndStone.TimedOutOfRangeMessage = 503041; // You have moved too far away to continue mining.
-            oreAndStone.OutOfRangeMessage = 500446; // That is too far away.
-            oreAndStone.FailMessage = 503043; // You loosen some rocks but fail to find any useable ore.
-            oreAndStone.PackFullMessage = 1010481; // Your backpack is full, so the ore you mined is lost.
-            oreAndStone.ToolBrokeMessage = 1044038; // You have worn out your tool!
+                Resources = res,
+                Veins = veins,
 
-            oreAndStone.Resources = res;
-            oreAndStone.Veins = veins;
+                DefaultVein = defaultVein,
 
-            oreAndStone.DefaultVein = new HarvestVein(0.0, new HarvestResource(0.0,
-                "Iron",
-                typeof(IronOre)));
-
-            oreAndStone.BonusEffect = HarvestBonusEffect;
+                BonusEffect = HarvestBonusEffect
+            };
 
             Definitions.Add(oreAndStone);
 
