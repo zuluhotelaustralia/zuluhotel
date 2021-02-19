@@ -9,23 +9,27 @@ namespace Server.Configurations
     {
         public static OreConfig OreConfiguration { get; private set; }
 
+        public static LogConfig LogConfiguration { get; private set; }
+
+
         public static void Initialize()
         {
-            OreConfiguration = LoadResourceConfig("ores");
+            OreConfiguration = LoadResourceConfig<OreConfig>("ores");
+            LogConfiguration = LoadResourceConfig<LogConfig>("logs");
         }
 
-        private static OreConfig LoadResourceConfig(string configFile)
+        private static T LoadResourceConfig<T>(string configFile)
         {
             var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
             Console.Write($"Ore Configuration: loading {path}... ");
 
             var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
-            var config = JsonConfig.Deserialize<OreConfig>(path, options);
+            var config = JsonConfig.Deserialize<T>(path, options);
 
             if (config == null)
                 throw new DataException($"Ore Configuration: failed to deserialize {path}!");
 
-            Console.WriteLine($"Done, loaded {config.Entries.Length} entries.");
+            Console.WriteLine("Done.");
 
             return config;
         }
@@ -33,7 +37,26 @@ namespace Server.Configurations
 
     public record OreConfig
     {
+        public int BankWidth { get; init; }
+        public int BankHeight { get; init; }
+        public int MinTotal { get; init; }
+        public int MaxTotal { get; init; }
+        public double MinRespawn { get; init; }
+        public double MaxRespawn { get; init; }
+        public SkillName Skill { get; init; }
+        public int MaxRange { get; init; }
+        public int MaxChance { get; init; }
+        public Effect OreEffect { get; init; }
         public OreEntry[] Entries { get; init; }
+
+        public record Effect
+        {
+            public int[] Actions { get; init; }
+            public int[] Sounds { get; init; }
+            public int[] Counts { get; init; }
+            public double Delay { get; init; }
+            public double SoundDelay { get; init; }
+        }
 
         public record OreEntry
         {
@@ -53,6 +76,41 @@ namespace Server.Configurations
         {
             public Type EnchantmentType { get; init; }
             public int EnchantmentValue { get; init; }
+        }
+    }
+
+    public record LogConfig
+    {
+        public int BankWidth { get; init; }
+        public int BankHeight { get; init; }
+        public int MinTotal { get; init; }
+        public int MaxTotal { get; init; }
+        public double MinRespawn { get; init; }
+        public double MaxRespawn { get; init; }
+        public SkillName Skill { get; init; }
+        public int MaxRange { get; init; }
+        public int MaxChance { get; init; }
+        public Effect LogEffect { get; init; }
+        public LogEntry[] Entries { get; init; }
+
+        public record Effect
+        {
+            public int[] Actions { get; init; }
+            public int[] Sounds { get; init; }
+            public int[] Counts { get; init; }
+            public double Delay { get; init; }
+            public double SoundDelay { get; init; }
+        }
+
+        public record LogEntry
+        {
+            public string Name { get; init; }
+            public Type ResourceType { get; init; }
+            public double HarvestSkillRequired { get; init; }
+            public double CraftSkillRequired { get; init; }
+            public double VeinChance { get; init; }
+            public int Hue { get; init; }
+            public double Quality { get; init; }
         }
     }
 }

@@ -830,7 +830,7 @@ namespace Server.Misc
                 }
                 case SkillName.Fletching:
                 {
-                    PackItem(new Board(14));
+                    PackItem(new Log(14));
                     PackItem(new Feather(5));
                     PackItem(new Shaft(5));
                     break;
@@ -843,7 +843,7 @@ namespace Server.Misc
                 }
                 case SkillName.Carpentry:
                 {
-                    PackItem(new Board(10));
+                    PackItem(new Log(10));
                     PackItem(new Saw());
                     EquipItem(new HalfApron(Utility.RandomYellowHue()));
                     break;

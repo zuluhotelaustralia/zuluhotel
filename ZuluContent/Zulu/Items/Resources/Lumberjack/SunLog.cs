@@ -2,21 +2,21 @@
 
 namespace Server.Items
 {
-    public class PurplePassionLog : BaseLog
+    public class SunLog : BaseLog
     {
         [Constructible]
-        public PurplePassionLog() : this(1)
+        public SunLog() : this(1)
         {
         }
 
 
         [Constructible]
-        public PurplePassionLog(int amount) : base(CraftResource.PurplePassion, amount)
+        public SunLog(int amount) : base(CraftResource.Sunwood, amount)
         {
         }
 
         [Constructible]
-        public PurplePassionLog(Serial serial) : base(serial)
+        public SunLog(Serial serial) : base(serial)
         {
         }
 

@@ -32,48 +32,49 @@ namespace Server.Engines.Harvest
         {
             #region Fishing
 
-            HarvestDefinition fish = new HarvestDefinition();
+            HarvestDefinition fish = new HarvestDefinition
+            {
+                // Resource banks are every 1x1 tiles
+                BankWidth = 1,
+                BankHeight = 1,
 
-            // Resource banks are every 1x1 tiles
-            fish.BankWidth = 1;
-            fish.BankHeight = 1;
+                // Every bank holds from 5 to 15 fish
+                MinTotal = 5,
+                MaxTotal = 15,
 
-            // Every bank holds from 5 to 15 fish
-            fish.MinTotal = 5;
-            fish.MaxTotal = 15;
+                // A resource bank will respawn its content every 10 to 20 minutes
+                MinRespawn = TimeSpan.FromMinutes(10.0),
+                MaxRespawn = TimeSpan.FromMinutes(20.0),
 
-            // A resource bank will respawn its content every 10 to 20 minutes
-            fish.MinRespawn = TimeSpan.FromMinutes(10.0);
-            fish.MaxRespawn = TimeSpan.FromMinutes(20.0);
+                // Skill checking is done on the Fishing skill
+                Skill = SkillName.Fishing,
 
-            // Skill checking is done on the Fishing skill
-            fish.Skill = SkillName.Fishing;
+                // Set the list of harvestable tiles
+                Tiles = m_WaterTiles,
+                RangedTiles = true,
 
-            // Set the list of harvestable tiles
-            fish.Tiles = m_WaterTiles;
-            fish.RangedTiles = true;
+                // Players must be within 4 tiles to harvest
+                MaxRange = 4,
 
-            // Players must be within 4 tiles to harvest
-            fish.MaxRange = 4;
+                // One fish per harvest action
+                ConsumedPerHarvest = skillValue => 1,
 
-            // One fish per harvest action
-            fish.ConsumedPerHarvest = skillValue => 1;
+                // The fishing
+                EffectActions = new[] {12},
+                EffectSounds = new int[0],
+                EffectCounts = new[] {1},
+                EffectDelay = TimeSpan.Zero,
+                EffectSoundDelay = TimeSpan.FromSeconds(8.0),
 
-            // The fishing
-            fish.EffectActions = new[] {12};
-            fish.EffectSounds = new int[0];
-            fish.EffectCounts = new[] {1};
-            fish.EffectDelay = TimeSpan.Zero;
-            fish.EffectSoundDelay = TimeSpan.FromSeconds(8.0);
+                NoResourcesMessage = 503172, // The fish don't seem to be biting here.
+                FailMessage = 503171, // You fish a while, but fail to catch anything.
+                TimedOutOfRangeMessage = 500976, // You need to be closer to the water to fish!
+                OutOfRangeMessage = 500976, // You need to be closer to the water to fish!
+                PackFullMessage = 503176, // You do not have room in your backpack for a fish.
+                ToolBrokeMessage = 503174, // You broke your fishing pole.
 
-            fish.NoResourcesMessage = 503172; // The fish don't seem to be biting here.
-            fish.FailMessage = 503171; // You fish a while, but fail to catch anything.
-            fish.TimedOutOfRangeMessage = 500976; // You need to be closer to the water to fish!
-            fish.OutOfRangeMessage = 500976; // You need to be closer to the water to fish!
-            fish.PackFullMessage = 503176; // You do not have room in your backpack for a fish.
-            fish.ToolBrokeMessage = 503174; // You broke your fishing pole.
-
-            fish.DefaultVein = new HarvestVein(100.0, new HarvestResource(0.0, 1043297, typeof(Fish)));
+                DefaultVein = new HarvestVein(100.0, new HarvestResource(0.0, 1043297, typeof(Fish)))
+            };
 
             m_Definition = fish;
             Definitions.Add(fish);

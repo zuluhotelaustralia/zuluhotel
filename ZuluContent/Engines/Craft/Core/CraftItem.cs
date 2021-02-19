@@ -253,7 +253,7 @@ namespace Server.Engines.Craft
 
         private static Type[][] m_TypesTable = new[]
         {
-            new[] {typeof(Log), typeof(Board)},
+            new[] {typeof(Log), typeof(Log)},
             new[] {typeof(Leather), typeof(Hides)},
             new[] {typeof(BlankMap), typeof(BlankScroll)},
             new[] {typeof(Cloth), typeof(UncutCloth)},
@@ -814,7 +814,7 @@ namespace Server.Engines.Craft
 
             if (GetExceptionalChance(craftSystem, chance, from) > Utility.RandomDouble())
                 quality = 2;
-            
+
             var maxSkill = (int) (craftSkill?.MaxSkill ?? 0);
             return from.ShilCheckSkill(craftSystem.MainSkill, maxSkill, maxSkill * 15);
         }
@@ -823,9 +823,9 @@ namespace Server.Engines.Craft
             ref bool allRequiredSkills)
         {
             var craftSkill = Skills.FirstOrDefault(sk => sk.SkillToMake == craftSystem.MainSkill);
-            var chance = SkillCheck.GetSkillCheckChance(from, craftSystem.MainSkill, (int)(craftSkill?.MaxSkill ?? 0));
-            
-            return (double)chance / 100;
+            var chance = SkillCheck.GetSkillCheckChance(from, craftSystem.MainSkill, (int) (craftSkill?.MaxSkill ?? 0));
+
+            return (double) chance / 100;
         }
 
         public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool)
@@ -860,7 +860,7 @@ namespace Server.Engines.Craft
                                 int iMax = craftSystem.MaxCraftEffect - iMin + 1;
                                 int iRandom = Utility.Random(iMax);
                                 iRandom += iMin + 1;
-                                
+
                                 tool.OnBeginCraft(from, this, craftSystem);
                                 new InternalTimer(from, craftSystem, this, typeRes, tool, iRandom).Start();
                             }
@@ -1003,7 +1003,6 @@ namespace Server.Engines.Craft
                 Item item;
                 if (customCraft != null)
                 {
-                    
                     item = customCraft.CompleteCraft(out num);
                 }
                 else if (typeof(MapItem).IsAssignableFrom(ItemType) && from.Map != Map.Felucca)
@@ -1045,7 +1044,7 @@ namespace Server.Engines.Craft
                     if (from.AccessLevel > AccessLevel.Player)
                     {
                         CommandLogging.WriteLine(
-                            from, 
+                            from,
                             $"Crafting {CommandLogging.Format(item)} with craft system {craftSystem.GetType()}"
                         );
                     }
@@ -1109,6 +1108,7 @@ namespace Server.Engines.Craft
                 else if (num > 0)
                     from.SendLocalizedMessage(num);
             }
+
             tool?.OnEndCraft(from, this, craftSystem);
         }
 
@@ -1172,24 +1172,24 @@ namespace Server.Engines.Craft
                     {
                         // TODO: CustomCrafts, i.e. traps don't seem to be able to fail in RunUO?
                         m_CraftItem.CheckSkills(
-                            m_From, 
-                            m_TypeRes, 
-                            m_CraftSystem, 
-                            ref quality, 
+                            m_From,
+                            m_TypeRes,
+                            m_CraftSystem,
+                            ref quality,
                             ref allRequiredSkills,
                             false
                         );
-                        
+
                         var cc = m_CraftItem.ItemType.CreateInstance<CustomCraft>(
-                            m_CraftItem.ItemType, 
-                            m_From, 
+                            m_CraftItem.ItemType,
+                            m_From,
                             m_CraftItem,
-                            m_CraftSystem, 
-                            m_TypeRes, 
-                            m_Tool, 
+                            m_CraftSystem,
+                            m_TypeRes,
+                            m_Tool,
                             quality
                         );
-                        
+
                         cc?.EndCraftAction();
 
                         return;

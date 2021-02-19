@@ -16,7 +16,7 @@ namespace Server.Engines.Harvest
             if (SuccessMessage is int)
                 m.SendLocalizedMessage((int) SuccessMessage);
             else if (SuccessMessage is string)
-                m.SendMessage(MessageSuccessHue, $"You put {amount} {(string) SuccessMessage} ore in your backpack.");
+                m.SendMessage(MessageSuccessHue, $"You put {amount} {(string) SuccessMessage} in your backpack.");
         }
 
         public HarvestResource(double reqSkill, object message, params Type[] types)

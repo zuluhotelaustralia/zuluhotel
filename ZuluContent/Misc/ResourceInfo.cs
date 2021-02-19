@@ -66,25 +66,26 @@ namespace Server.Items
         Cherry = 303,
         Oak = 304,
         PurplePassion = 305,
-        GoldenReflection = 306,
-        Hardranger = 307,
-        Jadewood = 308,
-        Darkwood = 309,
-        Stonewood = 310,
-        Sunwood = 311,
-        Gauntlet = 312, //312
-        Swampwood = 313,
-        Stardust = 314,
-        Silverleaf = 315,
-        Stormteal = 316,
-        Emeraldwood = 317,
-        Bloodwood = 318,
-        Crystalwood = 319,
-        Bloodhorse = 320,
-        Doomwood = 321,
+        GoldenReflections = 306,
+        Jadewood = 307,
+        Darkwood = 308,
+        Stonewood = 309,
+        Sunwood = 310,
+        Swampwood = 311,
+        Stardust = 312,
+        Silverleaf = 313,
+        Stormteal = 314,
+        Emeraldwood = 315,
+        Bloodwood = 316,
+        Hardranger = 317,
+        Crystalwood = 318,
+        Gauntlet = 319,
+        Doomwood = 320,
+        Bloodhorse = 321,
         Zulu = 322,
         Darkness = 323,
         Elven = 324,
+        YoungOak = 325,
     }
 
     public enum CraftResourceType
@@ -167,57 +168,10 @@ namespace Server.Items
                 CraftResource.GoldenDragonLeather, null, 1.0, typeof(GoldenDragonLeather), typeof(GoldenDragonHides))
         };
 
-        public static readonly CraftResourceInfo[] WoodInfo =
-        {
-            new CraftResourceInfo(0x000, "Normal", CraftResource.RegularWood, null, 1.0,
-                typeof(Log), typeof(Board)),
-            new CraftResourceInfo(1132, "Pinetree", CraftResource.Pinetree, null, 1.0,
-                typeof(PinetreeLog), typeof(PinetreeBoard)),
-            new CraftResourceInfo(2206, "Cherry", CraftResource.Cherry, null, 1.0,
-                typeof(CherryLog), typeof(CherryBoard)),
-            new CraftResourceInfo(1045, "Oak", CraftResource.Oak, null, 1.0, typeof(OakLog),
-                typeof(OakBoard)),
-            new CraftResourceInfo(515, "Purple Passion",
-                CraftResource.PurplePassion, null, 1.0, typeof(PurplePassionLog), typeof(PurplePassionBoard)),
-            new CraftResourceInfo(48, "Golden Reflection",
-                CraftResource.GoldenReflection, null, 1.0, typeof(GoldenReflectionLog), typeof(GoldenReflectionBoard)),
-            new CraftResourceInfo(2778, "Hardranger", CraftResource.Hardranger, null, 1.0,
-                typeof(HardrangerLog), typeof(HardrangerBoard)),
-            new CraftResourceInfo(1162, "Jadewood", CraftResource.Jadewood, null, 1.0,
-                typeof(JadewoodLog), typeof(JadewoodBoard)),
-            new CraftResourceInfo(1109, "Darkwood", CraftResource.Darkwood, null, 1.0,
-                typeof(DarkwoodLog), typeof(DarkwoodBoard)),
-            new CraftResourceInfo(1154, "Stonewood", CraftResource.Stonewood, null, 1.0,
-                typeof(StonewoodLog), typeof(StonewoodBoard)),
-            new CraftResourceInfo(2766, "Sunwood", CraftResource.Sunwood, null, 1.0,
-                typeof(SunwoodLog), typeof(SunwoodBoard)),
-            new CraftResourceInfo(2777, "Gauntlet", CraftResource.Gauntlet, null, 1.0,
-                typeof(GauntletLog), typeof(GauntletBoard)),
-            new CraftResourceInfo(2767, "Swampwood", CraftResource.Swampwood, null, 1.0,
-                typeof(SwampwoodLog), typeof(SwampwoodBoard)),
-            new CraftResourceInfo(2751, "Stardust", CraftResource.Stardust, null, 1.0,
-                typeof(StardustLog), typeof(StardustBoard)),
-            new CraftResourceInfo(2301, "Silver leaf", CraftResource.Silverleaf, null, 1.0,
-                typeof(SilverleafLog), typeof(SilverleafBoard)),
-            new CraftResourceInfo(1346, "Stormteal", CraftResource.Stormteal, null, 1.0,
-                typeof(StormtealLog), typeof(StormtealBoard)),
-            new CraftResourceInfo(2748, "Emerald wood",
-                CraftResource.Emeraldwood, null, 1.0, typeof(EmeraldwoodLog), typeof(EmeraldwoodBoard)),
-            new CraftResourceInfo(1645, "Bloodwood", CraftResource.Bloodwood, null, 1.0,
-                typeof(BloodwoodLog), typeof(BloodwoodBoard)),
-            new CraftResourceInfo(2759, "Crystal wood",
-                CraftResource.Crystalwood, null, 1.0, typeof(CrystalwoodLog), typeof(CrystalwoodBoard)),
-            new CraftResourceInfo(2780, "Bloodhorse", CraftResource.Bloodhorse, null, 1.0,
-                typeof(BloodhorseLog), typeof(BloodhorseBoard)),
-            new CraftResourceInfo(2772, "Doom wood", CraftResource.Doomwood, null, 1.0,
-                typeof(DoomwoodLog), typeof(DoomwoodBoard)),
-            new CraftResourceInfo(2749, "Zulu", CraftResource.Zulu, null, 1.0, typeof(ZuluLog),
-                typeof(ZuluBoard)),
-            new CraftResourceInfo(1175, "Darkness", CraftResource.Darkness, null, 1.0,
-                typeof(DarknessLog), typeof(DarknessBoard)),
-            new CraftResourceInfo(1165, "Elven", CraftResource.Elven, null, 1.0,
-                typeof(ElvenLog), typeof(ElvenBoard)),
-        };
+        public static readonly CraftResourceInfo[] WoodInfo = LogConfiguration.Entries.Select((e, i) =>
+            new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 301),
+                null,
+                e.Quality, e.ResourceType)).ToArray();
 
         /// <summary>
         /// Returns true if '<paramref name="resource"/>' is None, Iron, RegularLeather or RegularWood. False if otherwise.
@@ -291,7 +245,7 @@ namespace Server.Items
             if (resource >= CraftResource.RegularLeather && resource <= CraftResource.GoldenDragonLeather)
                 return CraftResourceType.Leather;
 
-            if (resource >= CraftResource.RegularWood && resource <= CraftResource.Elven)
+            if (resource >= CraftResource.RegularWood && resource <= CraftResource.YoungOak)
                 return CraftResourceType.Wood;
 
             return CraftResourceType.None;
