@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using Server.Items;
 using Server.Targeting;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -289,40 +291,8 @@ namespace Server.Engines.Craft
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
-            AddSubRes(typeof(IronIngot), 1160300, 0, 1044268);
-            AddSubRes(typeof(SpikeIngot), 1160302, 5, 1044268);
-            AddSubRes(typeof(FruityIngot), 1160303, 10, 1044268);
-            AddSubRes(typeof(BronzeIngot), 1160304, 15, 1044268);
-            AddSubRes(typeof(IceRockIngot), 1160305, 20, 1044268);
-            AddSubRes(typeof(BlackDwarfIngot), 1160306, 25, 1044268);
-            AddSubRes(typeof(DullCopperIngot), 1160307, 30, 1044268);
-            AddSubRes(typeof(PlatinumIngot), 1160308, 35, 1044268);
-            AddSubRes(typeof(SilverRockIngot), 1160309, 40, 1044268);
-            AddSubRes(typeof(DarkPaganIngot), 1160310, 45, 1044268);
-            AddSubRes(typeof(CopperIngot), 1160311, 50, 1044268);
-            AddSubRes(typeof(MysticIngot), 1160312, 55, 1044268);
-            AddSubRes(typeof(SpectralIngot), 1160313, 60, 1044268);
-            AddSubRes(typeof(OldBritainIngot), 1160314, 65, 1044268);
-            AddSubRes(typeof(OnyxIngot), 1160315, 70, 1044268);
-            AddSubRes(typeof(RedElvenIngot), 1160316, 75, 1044268);
-            AddSubRes(typeof(UndeadIngot), 1160317, 80, 1044268);
-            AddSubRes(typeof(PyriteIngot), 1160318, 85, 1044268);
-            AddSubRes(typeof(VirginityIngot), 1160319, 90, 1044268);
-            AddSubRes(typeof(MalachiteIngot), 1160320, 95, 1044268);
-            AddSubRes(typeof(LavarockIngot), 1160321, 97, 1044268);
-            AddSubRes(typeof(AzuriteIngot), 1160322, 98, 1044268);
-            AddSubRes(typeof(DripstoneIngot), 1160323, 100, 1044268);
-            AddSubRes(typeof(ExecutorIngot), 1160324, 104, 1044268);
-            AddSubRes(typeof(PeachblueIngot), 1160325, 108, 1044268);
-            AddSubRes(typeof(DestructionIngot), 1160326, 112, 1044268);
-            AddSubRes(typeof(AnraIngot), 1160327, 116, 1044268);
-            AddSubRes(typeof(CrystalIngot), 1160328, 119, 1044268);
-            AddSubRes(typeof(DoomIngot), 1160329, 122, 1044268);
-            AddSubRes(typeof(GoddessIngot), 1160330, 125, 1044268);
-            AddSubRes(typeof(NewZuluIngot), 1160331, 129, 1044268);
-            AddSubRes(typeof(EbonTwilightSapphireIngot), 1160332, 130, 1044268);
-            AddSubRes(typeof(DarkSableRubyIngot), 1160333, 130, 1044268);
-            AddSubRes(typeof(RadiantNimbusDiamondIngot), 1160334, 140, 1044268);
+            OreConfiguration.Entries.ToList()
+                .ForEach(e => AddSubRes(e.SmeltType, e.Name, e.CraftSkillRequired, 1160300, e.Name));
 
             MarkOption = true;
             Repair = true;
@@ -342,7 +312,7 @@ namespace Server.Engines.Craft
         public abstract TrapType TrapType { get; }
 
         public TrapCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes, BaseTool tool,
-            int quality) : base(from, craftItem, craftSystem, typeRes, tool, quality)
+            int mark, double quality) : base(from, craftItem, craftSystem, typeRes, tool, mark, quality)
         {
         }
 
@@ -401,7 +371,7 @@ namespace Server.Engines.Craft
                 int message;
 
                 if (m_TrapCraft.Acquire(targeted, out message))
-                    m_TrapCraft.CraftItem.CompleteCraft(m_TrapCraft.Quality, false, m_TrapCraft.From,
+                    m_TrapCraft.CraftItem.CompleteCraft(m_TrapCraft.Mark, m_TrapCraft.Quality, false, m_TrapCraft.From,
                         m_TrapCraft.CraftSystem, m_TrapCraft.TypeRes, m_TrapCraft.Tool, m_TrapCraft);
                 else
                     Failure(message);
@@ -454,7 +424,7 @@ namespace Server.Engines.Craft
         }
 
         public DartTrapCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes, BaseTool tool,
-            int quality) : base(from, craftItem, craftSystem, typeRes, tool, quality)
+            int mark, double quality) : base(from, craftItem, craftSystem, typeRes, tool, mark, quality)
         {
         }
     }
@@ -468,7 +438,8 @@ namespace Server.Engines.Craft
         }
 
         public PoisonTrapCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes, BaseTool tool,
-            int quality) : base(from, craftItem, craftSystem, typeRes, tool, quality)
+            int mark,
+            double quality) : base(from, craftItem, craftSystem, typeRes, tool, mark, quality)
         {
         }
     }
@@ -482,7 +453,7 @@ namespace Server.Engines.Craft
         }
 
         public ExplosionTrapCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes,
-            BaseTool tool, int quality) : base(from, craftItem, craftSystem, typeRes, tool, quality)
+            BaseTool tool, int mark, double quality) : base(from, craftItem, craftSystem, typeRes, tool, mark, quality)
         {
         }
     }

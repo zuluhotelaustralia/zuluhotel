@@ -30,17 +30,12 @@ namespace Server.Engines.Craft
             }
         }
 
-        public override CraftECA ECA
-        {
-            get { return CraftECA.ChanceMinusSixtyToFourtyFive; }
-        }
-
         public override double GetChanceAtMin(CraftItem item)
         {
             return 0.0; // 0%
         }
 
-        private DefBlacksmithy() : base(1, 1, 1.25) // base( 1, 2, 1.7 )
+        private DefBlacksmithy() : base(3, 3, 2) // base( 1, 2, 1.7 )
         {
             /*
             

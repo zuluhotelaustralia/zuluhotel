@@ -5,52 +5,30 @@ namespace Server.Engines.Craft
 {
     public abstract class CustomCraft
     {
-        private Mobile m_From;
-        private CraftItem m_CraftItem;
-        private CraftSystem m_CraftSystem;
-        private Type m_TypeRes;
-        private BaseTool m_Tool;
-        private int m_Quality;
+        public Mobile From { get; set; }
 
-        public Mobile From
-        {
-            get { return m_From; }
-        }
+        public CraftItem CraftItem { get; set; }
 
-        public CraftItem CraftItem
-        {
-            get { return m_CraftItem; }
-        }
+        public CraftSystem CraftSystem { get; set; }
 
-        public CraftSystem CraftSystem
-        {
-            get { return m_CraftSystem; }
-        }
+        public Type TypeRes { get; set; }
 
-        public Type TypeRes
-        {
-            get { return m_TypeRes; }
-        }
+        public BaseTool Tool { get; set; }
 
-        public BaseTool Tool
-        {
-            get { return m_Tool; }
-        }
+        public int Mark { get; set; }
 
-        public int Quality
-        {
-            get { return m_Quality; }
-        }
+        public double Quality { get; set; }
 
         public CustomCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem, Type typeRes, BaseTool tool,
-            int quality)
+            int mark, double quality)
         {
-            m_From = from;
-            m_CraftItem = craftItem;
-            m_CraftSystem = craftSystem;
-            m_TypeRes = typeRes;
-            m_Tool = tool;
-            m_Quality = quality;
+            From = from;
+            CraftItem = craftItem;
+            CraftSystem = craftSystem;
+            TypeRes = typeRes;
+            Tool = tool;
+            Mark = mark;
+            Quality = quality;
         }
 
         public abstract void EndCraftAction();

@@ -58,7 +58,7 @@ namespace Server.Items
 
         [CommandProperty(AccessLevel.GameMaster)]
         public abstract uint PotionStrength { get; set; }
-        
+
         public override int LabelNumber => 1041314 + (int) PotionEffect;
 
         public BasePotion(int itemID, PotionEffect effect) : base(itemID)
@@ -74,7 +74,7 @@ namespace Server.Items
         }
 
         public virtual bool RequireFreeHand => true;
-        
+
         public static bool HasFreeHand(Mobile m)
         {
             Item handOne = m.FindItemOnLayer(Layer.OneHanded);
@@ -130,15 +130,15 @@ namespace Server.Items
                 {
                     pot.MoveToWorld(from.Location, from.Map);
                 }
-                
+
                 pot.Drink(from);
             }
         }
-        
+
         public override void OnSingleClick(Mobile from)
         {
             base.OnSingleClick(from);
-            if(from.Skills[SkillName.Alchemy].Value >= 100)
+            if (from.Skills[SkillName.Alchemy].Value >= 100)
                 LabelTo(from, $"Strength: {PotionStrength}");
         }
 
@@ -224,7 +224,8 @@ namespace Server.Items
         public Mobile Crafter { get; set; }
         public bool PlayerConstructed { get; set; }
 
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
             if (craftSystem is DefAlchemy)

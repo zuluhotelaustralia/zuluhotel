@@ -26,7 +26,7 @@ namespace Server.Items
         public string EngravedText { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public BookQuality Quality { get; set; }
+        public BookQuality Mark { get; set; }
 
         public static void Initialize()
         {
@@ -96,7 +96,7 @@ namespace Server.Items
 
         public static SpellbookType GetTypeForSpell(SpellEntry spellId)
         {
-            if ((int)spellId >= 0 && (int)spellId < 64)
+            if ((int) spellId >= 0 && (int) spellId < 64)
                 return SpellbookType.Regular;
 
             return SpellbookType.Invalid;
@@ -141,7 +141,8 @@ namespace Server.Items
             return book;
         }
 
-        public static Spellbook FindSpellbookInList(List<Spellbook> list, Mobile from, SpellEntry spellId, SpellbookType type)
+        public static Spellbook FindSpellbookInList(List<Spellbook> list, Mobile from, SpellEntry spellId,
+            SpellbookType type)
         {
             Container pack = from.Backpack;
 
@@ -251,7 +252,7 @@ namespace Server.Items
                 }
                 else
                 {
-                    int val = (int)scroll.SpellEntry - BookOffset;
+                    int val = (int) scroll.SpellEntry - BookOffset;
 
                     if (val >= 0 && val < BookCount)
                     {
@@ -323,7 +324,7 @@ namespace Server.Items
         {
             spellId -= BookOffset;
 
-            return spellId >= 0 && (int)spellId < BookCount && (m_Content & ((ulong) 1 << (int)spellId)) != 0;
+            return spellId >= 0 && (int) spellId < BookCount && (m_Content & ((ulong) 1 << (int) spellId)) != 0;
         }
 
         [Constructible]
@@ -408,7 +409,7 @@ namespace Server.Items
 
             writer.Write((int) 5); // version
 
-            writer.Write((byte) Quality);
+            writer.Write((byte) Mark);
 
             writer.Write((string) EngravedText);
 
@@ -431,7 +432,7 @@ namespace Server.Items
             {
                 case 5:
                 {
-                    Quality = (BookQuality) reader.ReadByte();
+                    Mark = (BookQuality) reader.ReadByte();
 
                     goto case 4;
                 }
@@ -468,15 +469,16 @@ namespace Server.Items
 
         public bool PlayerConstructed { get; set; }
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
             if (makersMark)
                 Crafter = from;
 
-            Quality = (BookQuality) (quality - 1);
+            Mark = (BookQuality) (mark - 1);
 
-            return quality;
+            return mark;
         }
     }
 }

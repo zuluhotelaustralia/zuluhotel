@@ -13,7 +13,7 @@ namespace Server.Items
 
     public abstract class BaseTool : Item, IUsesRemaining, ICraftable
     {
-        private ToolQuality m_Quality;
+        private ToolQuality m_Mark;
 
         public BaseTool(int itemID) : this(Utility.RandomMinMax(25, 75), itemID)
         {
@@ -22,7 +22,7 @@ namespace Server.Items
         public BaseTool(int uses, int itemID) : base(itemID)
         {
             UsesRemaining = uses;
-            m_Quality = ToolQuality.Regular;
+            m_Mark = ToolQuality.Regular;
         }
 
         public BaseTool(Serial serial) : base(serial)
@@ -33,13 +33,13 @@ namespace Server.Items
         public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ToolQuality Quality
+        public ToolQuality Mark
         {
-            get { return m_Quality; }
+            get { return m_Mark; }
             set
             {
                 UnscaleUses();
-                m_Quality = value;
+                m_Mark = value;
                 ScaleUses();
             }
         }
@@ -69,7 +69,7 @@ namespace Server.Items
 
         public int GetUsesScalar()
         {
-            return m_Quality == ToolQuality.Exceptional ? 200 : 100;
+            return m_Mark == ToolQuality.Exceptional ? 200 : 100;
         }
 
         public virtual void DisplayDurabilityTo(Mobile m)
@@ -91,9 +91,8 @@ namespace Server.Items
 
         public virtual void OnBeginCraft(Mobile from, CraftItem item, CraftSystem system)
         {
-            
         }
-        
+
         public virtual void OnEndCraft(Mobile from, CraftItem craftItem, CraftSystem craftSystem)
         {
         }
@@ -128,7 +127,7 @@ namespace Server.Items
             writer.Write((int) 1); // version
 
             writer.Write((Mobile) Crafter);
-            writer.Write((int) m_Quality);
+            writer.Write((int) m_Mark);
 
             writer.Write((int) UsesRemaining);
         }
@@ -144,7 +143,7 @@ namespace Server.Items
                 case 1:
                 {
                     Crafter = reader.ReadEntity<Mobile>();
-                    m_Quality = (ToolQuality) reader.ReadInt();
+                    m_Mark = (ToolQuality) reader.ReadInt();
                     goto case 0;
                 }
                 case 0:
@@ -159,19 +158,18 @@ namespace Server.Items
 
         public bool PlayerConstructed { get; set; }
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Quality = (ToolQuality) quality;
+            Mark = (ToolQuality) mark;
 
             if (makersMark)
                 Crafter = from;
 
-            return quality;
+            return mark;
         }
 
         #endregion
-
-
     }
 }

@@ -28,11 +28,6 @@ namespace Server.Engines.Craft
             }
         }
 
-        public override CraftECA ECA
-        {
-            get { return CraftECA.ChanceMinusSixtyToFourtyFive; }
-        }
-
         public override double GetChanceAtMin(CraftItem item)
         {
             return 0.5; // 50%
