@@ -31,11 +31,6 @@ namespace Server.Engines.Craft
 
         public virtual string GumpTitleString => "";
 
-        public virtual CraftECA ECA
-        {
-            get { return CraftECA.ChanceMinusSixty; }
-        }
-
         private readonly Dictionary<Mobile, CraftContext> m_ContextTable = new();
 
         public abstract double GetChanceAtMin(CraftItem item);

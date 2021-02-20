@@ -427,6 +427,30 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
+        public void OnExceptionalChance(Mobile crafter, ref double exceptionalChance, ref int exceptionalDifficulty)
+        {
+            if (crafter is IZuluClassed {ZuluClass: { } cls} && cls.Type == ZuluClassType.Crafter)
+            {
+                exceptionalChance *= Bonus;
+                exceptionalDifficulty += 20;
+            }
+            else
+            {
+                exceptionalDifficulty += 40;
+            }
+        }
+
+        public void OnQualityBonus(Mobile crafter, ref int multiplier)
+        {
+            if (crafter is IZuluClassed {ZuluClass: { } cls})
+            {
+                if (cls.Type == ZuluClassType.Crafter)
+                {
+                    multiplier = (int) (multiplier * cls.Bonus);
+                }
+            }
+        }
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
             if (mobile is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})

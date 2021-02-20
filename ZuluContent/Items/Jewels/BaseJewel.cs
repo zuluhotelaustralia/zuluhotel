@@ -32,20 +32,13 @@ namespace Server.Items
         public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool PlayerConstructed
-        {
-            get;
-            set;
-        }
-        
+        public bool PlayerConstructed { get; set; }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int PermSpellReflect
         {
             get => Enchantments.Get((PermSpellReflect e) => e.Value);
-            set
-            {
-                Enchantments.Set((PermSpellReflect e) => e.Value = value);
-            }
+            set { Enchantments.Set((PermSpellReflect e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -66,7 +59,7 @@ namespace Server.Items
         public int BaseArmorRating
         {
             get => (int) ArmorBonusType;
-            set => ArmorBonusType = (ArmorBonusType)value;
+            set => ArmorBonusType = (ArmorBonusType) value;
         }
 
         public double BaseArmorRatingScaled => BaseArmorRating;
@@ -173,9 +166,9 @@ namespace Server.Items
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-            
+
             writer.Write((int) 5); // version
-            
+
             ICraftable.Serialize(writer, this);
 
             writer.WriteEncodedInt((int) MaxHitPoints);
@@ -188,7 +181,7 @@ namespace Server.Items
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-            
+
             int version = reader.ReadInt();
 
             switch (version)
@@ -233,8 +226,8 @@ namespace Server.Items
 
         #region ICraftable Members
 
-
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
             Type resourceType = typeRes;
