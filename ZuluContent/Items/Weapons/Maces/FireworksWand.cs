@@ -101,7 +101,7 @@ public FireworksWand( Serial serial ) : base( serial )
 			int renderMode = Utility.RandomList( 0, 2, 3, 4, 5, 7 );
 
 			Effects.PlaySound( endLoc, map, Utility.Random( 0x11B, 4 ) );
-			Effects.SendLocationEffect( endLoc, map, 0x373A + 0x10 * Utility.Random( 4 ), 16, 10, hue, renderMode );
+			Effects.SendLocationEffect( endLoc, map, 14138 + 16 * Utility.Random( 4 ), 16, 10, hue, renderMode );
 		}
 
 		public override void Serialize( IGenericWriter writer )

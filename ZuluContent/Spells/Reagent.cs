@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Server.Items;
 
 namespace Server.Spells
@@ -32,8 +33,8 @@ namespace Server.Spells
         public static readonly Type DeadWood = typeof(DeadWood);
         public static readonly Type FertileDirt = typeof(FertileDirt);
         public static readonly Type SerpentScale = typeof(SerpentScale);
-        
-        public static readonly Type[] Types =
+
+        public static readonly Type[] NormalReagents =
         {
             BlackPearl,
             Bloodmoss,
@@ -43,6 +44,10 @@ namespace Server.Spells
             Nightshade,
             SulfurousAsh,
             SpidersSilk,
+        };
+
+        public static readonly Type[] NecroReagents =
+        {
             BatWing,
             DaemonBlood,
             PigIron,
@@ -63,5 +68,7 @@ namespace Server.Spells
             FertileDirt,
             SerpentScale
         };
+
+        public static readonly Type[] AllReagents = NormalReagents.Concat(NecroReagents).ToArray();
     }
 }

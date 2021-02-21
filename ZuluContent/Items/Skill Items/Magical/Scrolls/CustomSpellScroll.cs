@@ -9,18 +9,11 @@ namespace Server.Items
             amount)
         {
             Hue = hue;
-            Name = SpellRegistry.GetInfo(spellEntry).Name;
         }
 
         [Constructible]
         public CustomSpellScroll(Serial serial) : base(serial)
         {
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
         }
 
         public override void Serialize(IGenericWriter writer)

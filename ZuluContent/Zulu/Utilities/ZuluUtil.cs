@@ -11,7 +11,7 @@ namespace Scripts.Zulu.Utilities
 {
     public static class ZuluUtil
     {
-        private static Gaussian m_Gaussian = new Gaussian();
+        private static readonly Gaussian Gaussian = new();
 
         public static IEnumerable<InterfaceMapping> GetAllInterfaceMaps(this Type t) =>
             t.GetTypeInfo()
@@ -36,38 +36,9 @@ namespace Scripts.Zulu.Utilities
             return m.GetBaseDefinition().DeclaringType != m.DeclaringType;
         }
 
-        // private static readonly Func<BinaryFileReader, BinaryReader> GetBinaryReader =
-        //     GetFieldAccessor<BinaryFileReader, BinaryReader>("m_File");
-        //
-        // public static Stream GetBinaryFileReaderBaseStream(IGenericReader reader)
-        // {
-        //     if (reader is BinaryFileReader binaryFileReader)
-        //     {
-        //         return ZuluUtil.GetBinaryReader(binaryFileReader).BaseStream;
-        //     }
-        //
-        //     return null;
-        // }
-
-        // public static void Write<T>(this IGenericWriter stream, T value) where T : struct
-        // {
-        //     var tSpan = MemoryMarshal.CreateSpan(ref value, 1);
-        //     var span = MemoryMarshal.AsBytes(tSpan);
-        //     stream.Write(span.ToArray());
-        // }
-        //
-        // public static T Read<T>(this IGenericReader reader) where T : struct
-        // {
-        //     var result = default(T);
-        //     var tSpan = MemoryMarshal.CreateSpan(ref result, 1);
-        //     var span = MemoryMarshal.AsBytes(tSpan);
-        //     GetBinaryFileReaderBaseStream(reader).Read(span);
-        //     return result;
-        // }
-
         public static double RandomGaussian(double mu, double sigma)
         {
-            return m_Gaussian.Next(mu, sigma);
+            return Gaussian.Next(mu, sigma);
         }
 
         public static Type[] GetInheritedClasses(this Type parent)
@@ -91,25 +62,6 @@ namespace Scripts.Zulu.Utilities
             return null;
         }
 
-        // public static Stream GetBaseStream(this IGenericWriter writer)
-        // {
-        //     switch (writer)
-        //     {
-        //         case BinaryFileWriter binaryFileWriter:
-        //             return binaryFileWriter.UnderlyingStream;
-        //             break;
-        //         case BufferedFileWriter bufferedFileWriter:
-        //             break;
-        //         case AsyncWriter asyncWriter:
-        //             return asyncWriter.MemStream;
-        //             break;
-        //         default:
-        //             throw new ArgumentException($"Stream type not supported {nameof(writer)}");
-        //     }
-        //
-        //     return null;
-        // }
-
         public static Func<T, TR> GetFieldAccessor<T, TR>(string fieldName)
         {
             ParameterExpression param = Expression.Parameter(typeof(T), "arg");
@@ -120,6 +72,35 @@ namespace Scripts.Zulu.Utilities
             return compiled;
         }
 
+        public static List<Point3D> FindStaticTileByName(Mobile mobile, string name, int range = 10)
+        {
+            var eye = new Point3D(mobile);
+            eye.Z += 14;
+            return FindStaticTileByName(eye, mobile.Map, name, range);
+        }
+
+        public static List<Point3D> FindStaticTileByName(Point3D loc, Map map, string name, int range = 10)
+        {
+            loc.Z += 14; // Eye level adjustment
+            var list = new List<Point3D>();
+
+            for (int x = -range; x <= range; ++x)
+            {
+                for (int y = -range; y <= range; ++y)
+                {
+                    list.AddRange(map.Tiles.GetStaticTiles(loc.X + x, loc.Y + y)
+                        .Where(t =>
+                        {
+                            var los = map.LineOfSight(loc, new Point3D(loc.X + x, loc.Y + y, t.Z + t.Height / 2 + 1));
+                            var staticName = TileData.ItemTable[t.ID].Name;
+                            return staticName.InsensitiveEquals(name) && los;
+                        })
+                        .Select(t => new Point3D(loc.X + x, loc.Y + y, t.Z)));
+                }
+            }
+
+            return list;
+        }
 
         public static Action<TSource, TTarget> BuildMapAction<TSource, TTarget>()
         {
