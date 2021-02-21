@@ -88,7 +88,7 @@ namespace Server.SkillHandlers
 
             // 1 in 20 chance this is a gravestone that can be channeled
             // In a large graveyard like Vesper on average only 4-5 graves can be channelled 
-            if (Utility.RandomDouble() > 0.05)
+            if (!UsedGravestones.ContainsKey(stone) && Utility.RandomDouble() > 0.05)
             {
                 // Set an effectively infinite cooldown
                 UsedGravestones[stone] = long.MaxValue;
@@ -96,7 +96,6 @@ namespace Server.SkillHandlers
                 return;
             }
             
-            // Each stone after being used either successfully or unsuccessfully has a cooldown
             var level = Utility.Random(0, UndeadKnowledgeConfig.Length);
 
             if (!m.ShilCheckSkill(SkillName.SpiritSpeak, level * 6, 0))
