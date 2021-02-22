@@ -21,10 +21,11 @@ namespace Server.Engines.Craft
 
         public int CraftWorkSound => Settings.CraftWorkSound;
         public int CraftEndSound => Settings.CraftEndSound;
-        
+
         public override double GetChanceAtMin(CraftItem item) => Settings.MinCraftChance;
 
-        private DefAlchemy(AlchemySettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
+        private DefAlchemy(AlchemySettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays,
+            settings.Delay)
         {
             Settings = settings;
             InitCraftList();
@@ -34,7 +35,7 @@ namespace Server.Engines.Craft
         {
             if (Settings == null)
                 return;
-            
+
             foreach (var entry in Settings.CraftEntries)
             {
                 var firstResource = entry.Resources.FirstOrDefault();
@@ -60,6 +61,11 @@ namespace Server.Engines.Craft
                     AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
                 }
             }
+        }
+
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return itemSkillRequired * 15;
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
@@ -120,8 +126,8 @@ namespace Server.Engines.Craft
             var usedBottles = craftItem.Resources
                 .Where(r => r.ItemType == typeof(Bottle) || r.ItemType.IsSubclassOf(typeof(BasePotion)))
                 .Sum(r => r.Amount);
-                        
-            if (usedBottles > 0) 
+
+            if (usedBottles > 0)
                 from.AddToBackpack(new Bottle(usedBottles));
         }
     }

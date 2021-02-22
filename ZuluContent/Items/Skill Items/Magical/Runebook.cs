@@ -303,7 +303,6 @@ namespace Server.Items
                 }
 
                 from.CloseGump<RunebookGump>();
-                ;
                 from.SendGump(new RunebookGump(from, this));
 
                 m_Openers.Add(from);

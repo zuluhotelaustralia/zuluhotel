@@ -836,18 +836,9 @@ namespace Server.Engines.Craft
 
         public int GetCraftSkillRequired(Mobile from, Type typeRes, CraftSystem craftSystem)
         {
-            int craftSkillRequired;
             var itemSkillRequired = GetCraftItemSkillRequired(from, craftSystem);
-
-            if (craftSystem == DefBlacksmithy.CraftSystem)
-            {
-                var resource = CraftResources.GetFromType(typeRes);
-                craftSkillRequired = itemSkillRequired + (int) (CraftResources.GetCraftSkillRequired(resource) / 3);
-            }
-            else
-            {
-                craftSkillRequired = itemSkillRequired;
-            }
+            var craftResourceType = typeRes != null ? typeRes : Resources[0].ItemType;
+            var craftSkillRequired = craftSystem.GetCraftSkillRequired(itemSkillRequired, craftResourceType);
 
             if (craftSkillRequired < 1)
                 craftSkillRequired = 1;
@@ -859,18 +850,8 @@ namespace Server.Engines.Craft
 
         public int GetCraftPoints(Mobile from, Type typeRes, CraftSystem craftSystem)
         {
-            int points;
             var itemSkillRequired = GetCraftItemSkillRequired(from, craftSystem);
-
-            if (craftSystem == DefBlacksmithy.CraftSystem)
-            {
-                var materialAmount = Resources[0].Amount;
-                points = (itemSkillRequired + materialAmount) * 8;
-            }
-            else
-            {
-                points = itemSkillRequired * 15;
-            }
+            var points = craftSystem.GetCraftPoints(itemSkillRequired, Resources[0].Amount);
 
             return points;
         }
@@ -884,7 +865,7 @@ namespace Server.Engines.Craft
             return (double) chance / 100;
         }
 
-        public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool)
+        public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, ref bool success)
         {
             if (from.BeginAction(typeof(CraftSystem)))
             {
@@ -893,7 +874,7 @@ namespace Server.Engines.Craft
 
                 if (allRequiredSkills && chance >= 0.0)
                 {
-                    int badCraft = craftSystem.CanCraft(from, tool, ItemType);
+                    var badCraft = craftSystem.CanCraft(from, tool, ItemType);
 
                     if (badCraft <= 0)
                     {
@@ -916,30 +897,35 @@ namespace Server.Engines.Craft
                                 int iMax = craftSystem.MaxCraftEffect - iMin + 1;
                                 int iRandom = Utility.Random(iMax);
                                 iRandom += iMin + 1;
+                                success = true;
 
                                 tool.OnBeginCraft(from, this, craftSystem);
                                 new InternalTimer(from, craftSystem, this, typeRes, tool, iRandom).Start();
                             }
                             else
                             {
+                                success = false;
                                 from.EndAction(typeof(CraftSystem));
                                 from.SendGump(new CraftGump(from, craftSystem, tool, message));
                             }
                         }
                         else
                         {
+                            success = false;
                             from.EndAction(typeof(CraftSystem));
                             from.SendGump(new CraftGump(from, craftSystem, tool, message));
                         }
                     }
                     else
                     {
+                        success = false;
                         from.EndAction(typeof(CraftSystem));
                         from.SendGump(new CraftGump(from, craftSystem, tool, badCraft));
                     }
                 }
                 else
                 {
+                    success = false;
                     from.EndAction(typeof(CraftSystem));
                     // You don't have the required skills to attempt this item.
                     from.SendGump(new CraftGump(from, craftSystem, tool, 1044153));
@@ -947,6 +933,7 @@ namespace Server.Engines.Craft
             }
             else
             {
+                success = false;
                 from.SendLocalizedMessage(500119); // You must wait to perform another action
             }
         }

@@ -21,6 +21,8 @@ namespace Server.Engines.Craft
 
         public int LastGroupIndex { get; set; }
 
+        public int CraftNumber { get; set; }
+
         public bool DoNotColor
         {
             get
@@ -38,6 +40,7 @@ namespace Server.Engines.Craft
             LastResourceIndex = -1;
             LastResourceIndex2 = -1;
             LastGroupIndex = -1;
+            CraftNumber = 1;
         }
 
         public CraftItem LastMade
