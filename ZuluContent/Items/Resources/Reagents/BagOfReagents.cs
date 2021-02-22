@@ -14,7 +14,7 @@ namespace Server.Items
         [Constructible]
         public BagOfReagents(int amount)
         {
-            foreach (var t in Reagent.Types)
+            foreach (var t in Reagent.AllReagents)
             {
                 var reg = (BaseReagent) Activator.CreateInstance(t);
                 if (reg != null)

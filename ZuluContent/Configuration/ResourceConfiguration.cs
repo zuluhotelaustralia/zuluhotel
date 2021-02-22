@@ -12,7 +12,7 @@ namespace Server.Configurations
         public static LogConfig LogConfiguration { get; private set; }
 
 
-        public static void Initialize()
+        public static void Configure()
         {
             OreConfiguration = LoadResourceConfig<OreConfig>("ores");
             LogConfiguration = LoadResourceConfig<LogConfig>("logs");

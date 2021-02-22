@@ -53,6 +53,11 @@ namespace Server.Items
                 }
             }
         }
+        
+        public override void OnSingleClick(Mobile from)
+        {
+            LabelTo(from, $"{SpellRegistry.GetInfo(SpellEntry).Name} scroll");
+        }
 
         public override void OnDoubleClick(Mobile from)
         {
