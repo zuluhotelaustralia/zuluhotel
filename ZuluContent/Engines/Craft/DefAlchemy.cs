@@ -60,7 +60,7 @@ namespace Server.Engines.Craft
         {
             if (Config == null)
                 return;
-            
+
             foreach (var entry in Config.CraftEntries)
             {
                 var firstResource = entry.Resources.FirstOrDefault();
@@ -86,6 +86,11 @@ namespace Server.Engines.Craft
                     AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
                 }
             }
+        }
+
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return itemSkillRequired * 15;
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
@@ -146,8 +151,8 @@ namespace Server.Engines.Craft
             var usedBottles = craftItem.Resources
                 .Where(r => r.ItemType == typeof(Bottle) || r.ItemType.IsSubclassOf(typeof(BasePotion)))
                 .Sum(r => r.Amount);
-                        
-            if (usedBottles > 0) 
+
+            if (usedBottles > 0)
                 from.AddToBackpack(new Bottle(usedBottles));
         }
     }

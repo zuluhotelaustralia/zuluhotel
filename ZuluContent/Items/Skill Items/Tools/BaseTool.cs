@@ -109,6 +109,10 @@ namespace Server.Items
                 {
                     from.SendLocalizedMessage(num);
                 }
+                else if (!from.CanBeginAction(typeof(CraftSystem)))
+                {
+                    from.SendLocalizedMessage(500119); // You must wait to perform another action
+                }
                 else
                 {
                     from.SendGump(new CraftGump(from, system, this, null));

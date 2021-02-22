@@ -85,6 +85,16 @@ namespace Server.Engines.Craft
             InitCraftList();
         }
 
+        public virtual int GetCraftSkillRequired(int itemSkillRequired, Type craftResourceType)
+        {
+            return itemSkillRequired;
+        }
+
+        public virtual int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return itemSkillRequired;
+        }
+
         public virtual bool ConsumeOnFailure(Mobile from, Type resourceType, CraftItem craftItem)
         {
             return true;
@@ -92,11 +102,18 @@ namespace Server.Engines.Craft
 
         public virtual void CreateItem(Mobile from, Type type, Type typeRes, BaseTool tool, CraftItem craftItem)
         {
+            var ignored = false;
+            CreateItem(from, type, typeRes, tool, craftItem, ref ignored);
+        }
+
+        public virtual void CreateItem(Mobile from, Type type, Type typeRes, BaseTool tool, CraftItem craftItem,
+            ref bool success)
+        {
             // Verify if the type is in the list of the craftable item
             if (CraftItems.SearchFor(type) != null)
             {
                 // The item is in the list, try to create it
-                craftItem.Craft(from, this, typeRes, tool);
+                craftItem.Craft(from, this, typeRes, tool, ref success);
             }
         }
 
