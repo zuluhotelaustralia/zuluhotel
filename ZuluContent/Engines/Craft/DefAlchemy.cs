@@ -5,63 +5,37 @@ using System.IO;
 using System.Linq;
 using Server.Items;
 using Server.Json;
+using ZuluContent.Configuration;
 
 namespace Server.Engines.Craft
 {
     public sealed class DefAlchemy : CraftSystem
     {
-        public static CraftSystem DefaultCraftSystem { get; private set; }
-        public static CraftSystem PlusCraftSystem { get; private set; }
+        public static CraftSystem NormalCraftSystem { get; } = new DefAlchemy(ZHConfig.Alchemy.Normal);
+        public static CraftSystem PlusCraftSystem { get; } = new DefAlchemy(ZHConfig.Alchemy.Plus);
 
-        public AlchemyConfig Config { get; }
+        public readonly AlchemySettings Settings;
         private static Type TypeOfPotion => typeof(BasePotion);
-        public override SkillName MainSkill => Config.MainSkill;
-        public override int GumpTitleNumber => Config.GumpTitleId;
+        public override SkillName MainSkill => Settings.MainSkill;
+        public override int GumpTitleNumber => Settings.GumpTitleId;
 
-        public int CraftWorkSound => Config.CraftWorkSound;
-        public int CraftEndSound => Config.CraftEndSound;
+        public int CraftWorkSound => Settings.CraftWorkSound;
+        public int CraftEndSound => Settings.CraftEndSound;
+        
+        public override double GetChanceAtMin(CraftItem item) => Settings.MinCraftChance;
 
-
-        public override double GetChanceAtMin(CraftItem item) => Config.MinCraftChance;
-
-        // This causes the craft system to be initialized at server start rather than triggered by skill use
-        //ReSharper disable once UnusedMember.Global
-        public static void Initialize()
+        private DefAlchemy(AlchemySettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
         {
-            DefaultCraftSystem = LoadCraftSystem("alchemy");
-            PlusCraftSystem = LoadCraftSystem("alchemyplus");
-        }
-
-        private static CraftSystem LoadCraftSystem(string configFile)
-        {
-            var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
-            Console.Write($"Alchemy Configuration: loading {path}... ");
-
-            var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
-            var config = JsonConfig.Deserialize<AlchemyConfig>(path, options);
-
-            if (config == null)
-                throw new DataException($"Alchemy Configuration: failed to deserialize {path}!");
-
-            var craftSystem = new DefAlchemy(config);
-
-            Console.WriteLine($"Done, loaded {config.CraftEntries.Length} entries.");
-
-            return craftSystem;
-        }
-
-        private DefAlchemy(AlchemyConfig config) : base(config.MinCraftDelays, config.MaxCraftDelays, config.Delay)
-        {
-            Config = config;
+            Settings = settings;
             InitCraftList();
         }
 
         public override void InitCraftList()
         {
-            if (Config == null)
+            if (Settings == null)
                 return;
             
-            foreach (var entry in Config.CraftEntries)
+            foreach (var entry in Settings.CraftEntries)
             {
                 var firstResource = entry.Resources.FirstOrDefault();
 
@@ -151,36 +125,4 @@ namespace Server.Engines.Craft
                 from.AddToBackpack(new Bottle(usedBottles));
         }
     }
-
-    // ReSharper disable UnassignedGetOnlyAutoProperty ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global
-    public record AlchemyConfig
-    {
-        public SkillName MainSkill { get; init; }
-        public TextDefinition GumpTitleId { get; init; }
-        public PotionCraftEntry[] CraftEntries { get; init; }
-        public int MinCraftDelays { get; init; }
-        public int MaxCraftDelays { get; init; }
-        public double Delay { get; init; }
-        public double MinCraftChance { get; init; }
-        public int CraftWorkSound { get; init; }
-        public int CraftEndSound { get; init; }
-
-        public record PotionCraftEntry
-        {
-            public Type ItemType { get; init; }
-            public TextDefinition Name { get; init; }
-            public TextDefinition GroupName { get; init; }
-            public double Skill { get; init; }
-            public PotionResource[] Resources { get; init; }
-        }
-
-        public record PotionResource
-        {
-            public Type ItemType { get; init; }
-            public TextDefinition Name { get; init; }
-            public int Amount { get; init; }
-            public TextDefinition Message { get; init; }
-        }
-    }
-    // ReSharper restore UnassignedGetOnlyAutoProperty ClassNeverInstantiated.Global UnusedAutoPropertyAccessor.Global
 }
