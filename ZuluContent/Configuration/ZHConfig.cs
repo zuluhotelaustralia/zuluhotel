@@ -26,21 +26,21 @@ namespace Server
             stopwatch.Start();
             Console.WriteLine("Starting load of Zuluhotel configurations.");
 
-            Add(MessagingConfiguration.Instance);
-            Add(ResourceConfiguration.Instance);
-            Add(AlchemyConfiguration.Instance);
-
+            Add<MessagingConfiguration, MessagingConfiguration>();
+            Add<ResourceConfiguration, ResourceConfiguration>();
+            Add<AlchemyConfiguration, AlchemyConfiguration>();
+            
             stopwatch.Stop();
             Console.WriteLine($"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
         }
 
-        public static bool Add<T>(BaseSingleton<T> config) => 
-            Cache.TryAdd(typeof(T), config);
+        public static bool Add<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType> => 
+            Cache.TryAdd(typeof(TTargetType), BaseSingleton<TInstanceType>.Instance);
 
-        public static void Replace<T>(BaseSingleton<T> config)
+        public static void Replace<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType>
         {
-            if (!Add(config))
-                Cache[typeof(T)] = config;
+            if (!Add<TTargetType, TInstanceType>())
+                Cache[typeof(TTargetType)] = BaseSingleton<TInstanceType>.Instance;
         }
         
         public static T Get<T>() where T : BaseSingleton<T> {
