@@ -137,10 +137,10 @@ namespace Server.Items
                 e.Quality, e.CraftSkillRequired, e.SmeltType, e.ResourceType)).ToArray();
 
         public static readonly CraftResourceInfo[] LeatherInfo =
-        {
-            new CraftResourceInfo(0x000, "Normal", CraftResource.RegularLeather, null, 1.0, 0.0,
-                typeof(Leather), typeof(Hides)),
-        };
+            HideConfiguration.Entries.Select((e, i) =>
+                new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 101),
+                    e.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
+                    e.Quality, e.ResourceType)).ToArray();
 
         public static readonly CraftResourceInfo[] WoodInfo = LogConfiguration.Entries.Select((e, i) =>
             new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 301),
@@ -291,6 +291,20 @@ namespace Server.Items
             CraftResourceInfo info = GetInfo(resource);
 
             return info == null ? 0.0 : info.CraftSkillRequired;
+        }
+
+        public static Type GetTypeFromResource(CraftResource resource)
+        {
+            if (m_TypeTable == null)
+                return null;
+
+            foreach (DictionaryEntry entry in m_TypeTable)
+            {
+                if (entry.Value is CraftResource entryResource && entryResource == resource)
+                    return (Type) entry.Key;
+            }
+
+            return null;
         }
 
         /// <summary>

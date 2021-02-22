@@ -255,7 +255,7 @@ namespace Server.Engines.Craft
         private static Type[][] m_TypesTable = new[]
         {
             new[] {typeof(Log), typeof(Log)},
-            new[] {typeof(Leather), typeof(Hides)},
+            new[] {typeof(Hide), typeof(Hide)},
             new[] {typeof(BlankMap), typeof(BlankScroll)},
             new[] {typeof(Cloth), typeof(UncutCloth)},
             new[] {typeof(CheeseWheel), typeof(CheeseWedge)},
@@ -272,7 +272,6 @@ namespace Server.Engines.Craft
         private static Type[] m_ColoredResourceTable = new[]
         {
             typeof(BaseIngot), typeof(BaseOre),
-            typeof(BaseLeather), typeof(BaseHides),
             typeof(UncutCloth), typeof(Cloth)
         };
 

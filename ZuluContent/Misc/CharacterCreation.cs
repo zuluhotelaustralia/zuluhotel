@@ -86,7 +86,7 @@ namespace Server.Misc
             bank.DropItem(MakeNewbie(new Feather(1000)));
             bank.DropItem(MakeNewbie(new BoltOfCloth(1000)));
             bank.DropItem(MakeNewbie(new BlankScroll(1000)));
-            bank.DropItem(MakeNewbie(new Hides(1000)));
+            bank.DropItem(MakeNewbie(new Hide(1000)));
             bank.DropItem(MakeNewbie(new Bandage(1000)));
             bank.DropItem(MakeNewbie(new Bottle(1000)));
             bank.DropItem(MakeNewbie(new Log(1000)));

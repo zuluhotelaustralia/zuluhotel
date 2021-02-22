@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Server.Items;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -142,76 +144,77 @@ namespace Server.Engines.Craft
 
             #region Footwear
 
-            AddCraft(typeof(Sandals), 1015288, 1025901, 12.4, 37.4, typeof(Leather), 1044462, 4, 1044463);
-            AddCraft(typeof(Shoes), 1015288, 1025904, 16.5, 41.5, typeof(Leather), 1044462, 6, 1044463);
-            AddCraft(typeof(Boots), 1015288, 1025899, 33.1, 58.1, typeof(Leather), 1044462, 8, 1044463);
-            AddCraft(typeof(ThighBoots), 1015288, 1025906, 41.4, 66.4, typeof(Leather), 1044462, 10, 1044463);
+            AddCraft(typeof(Sandals), 1015288, 1025901, 12.4, 37.4, typeof(Hide), 1044462, 4, 1044463);
+            AddCraft(typeof(Shoes), 1015288, 1025904, 16.5, 41.5, typeof(Hide), 1044462, 6, 1044463);
+            AddCraft(typeof(Boots), 1015288, 1025899, 33.1, 58.1, typeof(Hide), 1044462, 8, 1044463);
+            AddCraft(typeof(ThighBoots), 1015288, 1025906, 41.4, 66.4, typeof(Hide), 1044462, 10, 1044463);
 
             #endregion
 
             #region Leather Armor
 
-            AddCraft(typeof(LeatherGorget), 1015293, 1025063, 53.9, 78.9, typeof(Leather), 1044462, 4, 1044463);
-            AddCraft(typeof(LeatherCap), 1015293, 1027609, 6.2, 31.2, typeof(Leather), 1044462, 2, 1044463);
-            AddCraft(typeof(LeatherGloves), 1015293, 1025062, 51.8, 76.8, typeof(Leather), 1044462, 3, 1044463);
-            AddCraft(typeof(LeatherArms), 1015293, 1025061, 53.9, 78.9, typeof(Leather), 1044462, 4, 1044463);
-            AddCraft(typeof(LeatherLegs), 1015293, 1025067, 66.3, 91.3, typeof(Leather), 1044462, 10, 1044463);
-            AddCraft(typeof(LeatherChest), 1015293, 1025068, 70.5, 95.5, typeof(Leather), 1044462, 12, 1044463);
+            AddCraft(typeof(LeatherGorget), 1015293, 1025063, 53.9, 78.9, typeof(Hide), 1044462, 4, 1044463);
+            AddCraft(typeof(LeatherCap), 1015293, 1027609, 6.2, 31.2, typeof(Hide), 1044462, 2, 1044463);
+            AddCraft(typeof(LeatherGloves), 1015293, 1025062, 51.8, 76.8, typeof(Hide), 1044462, 3, 1044463);
+            AddCraft(typeof(LeatherArms), 1015293, 1025061, 53.9, 78.9, typeof(Hide), 1044462, 4, 1044463);
+            AddCraft(typeof(LeatherLegs), 1015293, 1025067, 66.3, 91.3, typeof(Hide), 1044462, 10, 1044463);
+            AddCraft(typeof(LeatherChest), 1015293, 1025068, 70.5, 95.5, typeof(Hide), 1044462, 12, 1044463);
 
             #endregion
 
             #region Studded Armor
 
-            AddCraft(typeof(StuddedGorget), 1015300, 1025078, 78.8, 103.8, typeof(Leather), 1044462, 6, 1044463);
-            AddCraft(typeof(StuddedGloves), 1015300, 1025077, 82.9, 107.9, typeof(Leather), 1044462, 8, 1044463);
-            AddCraft(typeof(StuddedArms), 1015300, 1025076, 87.1, 112.1, typeof(Leather), 1044462, 10, 1044463);
-            AddCraft(typeof(StuddedLegs), 1015300, 1025082, 91.2, 116.2, typeof(Leather), 1044462, 12, 1044463);
-            AddCraft(typeof(StuddedChest), 1015300, 1025083, 94.0, 119.0, typeof(Leather), 1044462, 14, 1044463);
+            AddCraft(typeof(StuddedGorget), 1015300, 1025078, 78.8, 103.8, typeof(Hide), 1044462, 6, 1044463);
+            AddCraft(typeof(StuddedGloves), 1015300, 1025077, 82.9, 107.9, typeof(Hide), 1044462, 8, 1044463);
+            AddCraft(typeof(StuddedArms), 1015300, 1025076, 87.1, 112.1, typeof(Hide), 1044462, 10, 1044463);
+            AddCraft(typeof(StuddedLegs), 1015300, 1025082, 91.2, 116.2, typeof(Hide), 1044462, 12, 1044463);
+            AddCraft(typeof(StuddedChest), 1015300, 1025083, 94.0, 119.0, typeof(Hide), 1044462, 14, 1044463);
 
             #endregion
 
             #region Female Armor
 
-            AddCraft(typeof(LeatherShorts), 1015306, 1027168, 62.2, 87.2, typeof(Leather), 1044462, 8, 1044463);
-            AddCraft(typeof(LeatherSkirt), 1015306, 1027176, 58.0, 83.0, typeof(Leather), 1044462, 6, 1044463);
-            AddCraft(typeof(LeatherBustierArms), 1015306, 1027178, 58.0, 83.0, typeof(Leather), 1044462, 6, 1044463);
-            AddCraft(typeof(StuddedBustierArms), 1015306, 1027180, 82.9, 107.9, typeof(Leather), 1044462, 8, 1044463);
-            AddCraft(typeof(FemaleLeatherChest), 1015306, 1027174, 62.2, 87.2, typeof(Leather), 1044462, 8, 1044463);
-            AddCraft(typeof(FemaleStuddedChest), 1015306, 1027170, 87.1, 112.1, typeof(Leather), 1044462, 10, 1044463);
+            AddCraft(typeof(LeatherShorts), 1015306, 1027168, 62.2, 87.2, typeof(Hide), 1044462, 8, 1044463);
+            AddCraft(typeof(LeatherSkirt), 1015306, 1027176, 58.0, 83.0, typeof(Hide), 1044462, 6, 1044463);
+            AddCraft(typeof(LeatherBustierArms), 1015306, 1027178, 58.0, 83.0, typeof(Hide), 1044462, 6, 1044463);
+            AddCraft(typeof(StuddedBustierArms), 1015306, 1027180, 82.9, 107.9, typeof(Hide), 1044462, 8, 1044463);
+            AddCraft(typeof(FemaleLeatherChest), 1015306, 1027174, 62.2, 87.2, typeof(Hide), 1044462, 8, 1044463);
+            AddCraft(typeof(FemaleStuddedChest), 1015306, 1027170, 87.1, 112.1, typeof(Hide), 1044462, 10, 1044463);
 
             #endregion
 
             #region Bone Armor
 
-            index = AddCraft(typeof(BoneHelm), 1049149, 1025206, 85.0, 110.0, typeof(Leather), 1044462, 4, 1044463);
+            index = AddCraft(typeof(BoneHelm), 1049149, 1025206, 85.0, 110.0, typeof(Hide), 1044462, 4, 1044463);
             AddRes(index, typeof(Bone), 1049064, 2, 1049063);
 
-            index = AddCraft(typeof(BoneGloves), 1049149, 1025205, 89.0, 114.0, typeof(Leather), 1044462, 6, 1044463);
+            index = AddCraft(typeof(BoneGloves), 1049149, 1025205, 89.0, 114.0, typeof(Hide), 1044462, 6, 1044463);
             AddRes(index, typeof(Bone), 1049064, 2, 1049063);
 
-            index = AddCraft(typeof(BoneArms), 1049149, 1025203, 92.0, 117.0, typeof(Leather), 1044462, 8, 1044463);
+            index = AddCraft(typeof(BoneArms), 1049149, 1025203, 92.0, 117.0, typeof(Hide), 1044462, 8, 1044463);
             AddRes(index, typeof(Bone), 1049064, 4, 1049063);
 
-            index = AddCraft(typeof(BoneLegs), 1049149, 1025202, 95.0, 120.0, typeof(Leather), 1044462, 10, 1044463);
+            index = AddCraft(typeof(BoneLegs), 1049149, 1025202, 95.0, 120.0, typeof(Hide), 1044462, 10, 1044463);
             AddRes(index, typeof(Bone), 1049064, 6, 1049063);
 
-            index = AddCraft(typeof(BoneChest), 1049149, 1025199, 96.0, 121.0, typeof(Leather), 1044462, 12, 1044463);
+            index = AddCraft(typeof(BoneChest), 1049149, 1025199, 96.0, 121.0, typeof(Hide), 1044462, 12, 1044463);
             AddRes(index, typeof(Bone), 1049064, 10, 1049063);
 
-            index = AddCraft(typeof(OrcHelm), 1049149, 1027947, 90.0, 115.0, typeof(Leather), 1044462, 6, 1044463);
+            index = AddCraft(typeof(OrcHelm), 1049149, 1027947, 90.0, 115.0, typeof(Hide), 1044462, 6, 1044463);
             AddRes(index, typeof(Bone), 1049064, 4, 1049063);
 
             #endregion
 
             // Set the overridable material
-            SetSubRes(typeof(Leather), 1049150);
+            SetSubRes(typeof(Hide), 1049150);
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
-            AddSubRes(typeof(Leather), 1049150, 00.0, 1044462, 1049311);
+            HideConfiguration.Entries.ToList()
+                .ForEach(e => AddSubRes(e.ResourceType, e.Name, e.CraftSkillRequired, 1044462, e.Name));
 
             MarkOption = true;
-            Repair = false;
+            Repair = true;
             CanEnhance = false;
         }
     }
