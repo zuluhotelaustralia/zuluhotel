@@ -172,6 +172,17 @@ namespace Server.Engines.Craft
             return forge;
         }
 
+        public override int GetCraftSkillRequired(int itemSkillRequired, Type craftResourceType)
+        {
+            var resource = CraftResources.GetFromType(craftResourceType);
+            return itemSkillRequired + (int) (CraftResources.GetCraftSkillRequired(resource) / 3);
+        }
+
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return (itemSkillRequired + materialAmount) * 8;
+        }
+
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
         {
             if (tool == null || tool.Deleted || tool.UsesRemaining < 0)
@@ -259,96 +270,95 @@ namespace Server.Engines.Craft
 
             #region Ringmail
 
-            AddCraft(typeof(RingmailGloves), 1011076, 1025099, 12.0, 62.0, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(RingmailLegs), 1011076, 1025104, 19.4, 69.4, typeof(IronIngot), 1044036, 16, 1044037);
-            AddCraft(typeof(RingmailArms), 1011076, 1025103, 16.9, 66.9, typeof(IronIngot), 1044036, 14, 1044037);
-            AddCraft(typeof(RingmailChest), 1011076, 1025100, 21.9, 71.9, typeof(IronIngot), 1044036, 18, 1044037);
+            AddCraft(typeof(RingmailGloves), 1011076, 1025099, 22.0, 22.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(RingmailLegs), 1011076, 1025104, 29.0, 29.0, typeof(IronIngot), 1044036, 16, 1044037);
+            AddCraft(typeof(RingmailArms), 1011076, 1025103, 27.0, 27.0, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(RingmailChest), 1011076, 1025100, 32.0, 32.0, typeof(IronIngot), 1044036, 18, 1044037);
 
             #endregion
 
             #region Chainmail
 
-            AddCraft(typeof(ChainCoif), 1011077, 1025051, 14.5, 64.5, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(ChainLegs), 1011077, 1025054, 36.7, 86.7, typeof(IronIngot), 1044036, 18, 1044037);
-            AddCraft(typeof(ChainChest), 1011077, 1025055, 39.1, 89.1, typeof(IronIngot), 1044036, 20, 1044037);
+            AddCraft(typeof(ChainCoif), 1011077, 1025051, 24.0, 24.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(ChainLegs), 1011077, 1025054, 46.0, 46.0, typeof(IronIngot), 1044036, 18, 1044037);
+            AddCraft(typeof(ChainChest), 1011077, 1025055, 49.0, 49.0, typeof(IronIngot), 1044036, 20, 1044037);
 
             #endregion
 
             #region Platemail
 
-            AddCraft(typeof(PlateArms), 1011078, 1025136, 66.3, 116.3, typeof(IronIngot), 1044036, 18, 1044037);
-            AddCraft(typeof(PlateGloves), 1011078, 1025140, 58.9, 108.9, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(PlateGorget), 1011078, 1025139, 56.4, 106.4, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(PlateLegs), 1011078, 1025137, 68.8, 118.8, typeof(IronIngot), 1044036, 20, 1044037);
-            AddCraft(typeof(PlateChest), 1011078, 1046431, 75.0, 125.0, typeof(IronIngot), 1044036, 25, 1044037);
-            AddCraft(typeof(FemalePlateChest), 1011078, 1046430, 44.1, 94.1, typeof(IronIngot), 1044036, 20, 1044037);
+            AddCraft(typeof(PlateArms), 1011078, 1025136, 76.0, 76.0, typeof(IronIngot), 1044036, 18, 1044037);
+            AddCraft(typeof(PlateGloves), 1011078, 1025140, 69.0, 69.0, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(PlateGorget), 1011078, 1025139, 66.0, 66.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(PlateLegs), 1011078, 1025137, 79.0, 79.0, typeof(IronIngot), 1044036, 20, 1044037);
+            AddCraft(typeof(PlateChest), 1011078, 1046431, 85.0, 85.0, typeof(IronIngot), 1044036, 25, 1044037);
+            AddCraft(typeof(FemalePlateChest), 1011078, 1046430, 54.0, 54.0, typeof(IronIngot), 1044036, 20, 1044037);
 
             #endregion
 
             #region Helmets
 
-            AddCraft(typeof(Bascinet), 1011079, 1025132, 8.3, 58.3, typeof(IronIngot), 1044036, 15, 1044037);
-            AddCraft(typeof(CloseHelm), 1011079, 1025128, 37.9, 87.9, typeof(IronIngot), 1044036, 15, 1044037);
-            AddCraft(typeof(Helmet), 1011079, 1025130, 37.9, 87.9, typeof(IronIngot), 1044036, 15, 1044037);
-            AddCraft(typeof(NorseHelm), 1011079, 1025134, 37.9, 87.9, typeof(IronIngot), 1044036, 15, 1044037);
-            AddCraft(typeof(PlateHelm), 1011079, 1025138, 62.6, 112.6, typeof(IronIngot), 1044036, 15, 1044037);
+            AddCraft(typeof(Bascinet), 1011079, 1025132, 18.0, 18.0, typeof(IronIngot), 1044036, 15, 1044037);
+            AddCraft(typeof(CloseHelm), 1011079, 1025128, 48.0, 48.0, typeof(IronIngot), 1044036, 15, 1044037);
+            AddCraft(typeof(Helmet), 1011079, 1025130, 48.0, 48.0, typeof(IronIngot), 1044036, 15, 1044037);
+            AddCraft(typeof(NorseHelm), 1011079, 1025134, 48.0, 48.0, typeof(IronIngot), 1044036, 15, 1044037);
+            AddCraft(typeof(PlateHelm), 1011079, 1025138, 72.0, 72.0, typeof(IronIngot), 1044036, 15, 1044037);
 
             #endregion
 
             #region Shields
 
-            AddCraft(typeof(Buckler), 1011080, 1027027, -25.0, 25.0, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(BronzeShield), 1011080, 1027026, -15.2, 34.8, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(HeaterShield), 1011080, 1027030, 24.3, 74.3, typeof(IronIngot), 1044036, 18, 1044037);
-            AddCraft(typeof(MetalShield), 1011080, 1027035, -10.2, 39.8, typeof(IronIngot), 1044036, 14, 1044037);
-            AddCraft(typeof(MetalKiteShield), 1011080, 1027028, 4.6, 54.6, typeof(IronIngot), 1044036, 16, 1044037);
-            AddCraft(typeof(WoodenKiteShield), 1011080, 1027032, -15.2, 34.8, typeof(IronIngot), 1044036, 8, 1044037);
+            AddCraft(typeof(Buckler), 1011080, 1027027, 5.0, 5.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(BronzeShield), 1011080, 1027026, 10.0, 10.0, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(HeaterShield), 1011080, 1027030, 34.0, 34.0, typeof(IronIngot), 1044036, 18, 1044037);
+            AddCraft(typeof(MetalShield), 1011080, 1027035, 15.0, 15.0, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(MetalKiteShield), 1011080, 1027028, 25.0, 25.0, typeof(IronIngot), 1044036, 16, 1044037);
+            AddCraft(typeof(WoodenKiteShield), 1011080, 1027032, 25.0, 25.0, typeof(IronIngot), 1044036, 8, 1044037);
 
             #endregion
 
             #region Bladed
 
-            AddCraft(typeof(Broadsword), 1011081, 1023934, 35.4, 85.4, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(Cutlass), 1011081, 1025185, 24.3, 74.3, typeof(IronIngot), 1044036, 8, 1044037);
-            AddCraft(typeof(Dagger), 1011081, 1023921, -0.4, 49.6, typeof(IronIngot), 1044036, 3, 1044037);
-            AddCraft(typeof(Katana), 1011081, 1025119, 44.1, 94.1, typeof(IronIngot), 1044036, 8, 1044037);
-            AddCraft(typeof(Kryss), 1011081, 1025121, 36.7, 86.7, typeof(IronIngot), 1044036, 8, 1044037);
-            AddCraft(typeof(Longsword), 1011081, 1023937, 28.0, 78.0, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(Scimitar), 1011081, 1025046, 31.7, 81.7, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(VikingSword), 1011081, 1025049, 24.3, 74.3, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(Broadsword), 1011081, 1023934, 45.0, 45.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(Cutlass), 1011081, 1025185, 34.0, 34.0, typeof(IronIngot), 1044036, 8, 1044037);
+            AddCraft(typeof(Dagger), 1011081, 1023921, 1.0, 1.0, typeof(IronIngot), 1044036, 3, 1044037);
+            AddCraft(typeof(Katana), 1011081, 1025119, 54.0, 54.0, typeof(IronIngot), 1044036, 8, 1044037);
+            AddCraft(typeof(Kryss), 1011081, 1025121, 46.0, 46.0, typeof(IronIngot), 1044036, 8, 1044037);
+            AddCraft(typeof(Longsword), 1011081, 1023937, 38.0, 38.0, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(Scimitar), 1011081, 1025046, 41.0, 41.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(VikingSword), 1011081, 1025049, 34.0, 34.0, typeof(IronIngot), 1044036, 14, 1044037);
 
             #endregion
 
             #region Axes
 
-            AddCraft(typeof(Axe), 1011082, 1023913, 34.2, 84.2, typeof(IronIngot), 1044036, 14, 1044037);
-            AddCraft(typeof(BattleAxe), 1011082, 1023911, 30.5, 80.5, typeof(IronIngot), 1044036, 14, 1044037);
-            AddCraft(typeof(DoubleAxe), 1011082, 1023915, 29.3, 79.3, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(ExecutionersAxe), 1011082, 1023909, 34.2, 84.2, typeof(IronIngot), 1044036, 14, 1044037);
-            AddCraft(typeof(LargeBattleAxe), 1011082, 1025115, 28.0, 78.0, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(TwoHandedAxe), 1011082, 1025187, 33.0, 83.0, typeof(IronIngot), 1044036, 16, 1044037);
-            AddCraft(typeof(WarAxe), 1011082, 1025040, 39.1, 89.1, typeof(IronIngot), 1044036, 16, 1044037);
+            AddCraft(typeof(Axe), 1011082, 1023913, 44.0, 44.0, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(BattleAxe), 1011082, 1023911, 40.0, 40.0, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(DoubleAxe), 1011082, 1023915, 39.0, 39.0, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(ExecutionersAxe), 1011082, 1023909, 44.0, 44.0, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(LargeBattleAxe), 1011082, 1025115, 38.0, 38.0, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(TwoHandedAxe), 1011082, 1025187, 43.0, 43.0, typeof(IronIngot), 1044036, 16, 1044037);
+            AddCraft(typeof(WarAxe), 1011082, 1025040, 49.0, 49.0, typeof(IronIngot), 1044036, 16, 1044037);
 
             #endregion
 
             #region Pole Arms
 
-            AddCraft(typeof(Bardiche), 1011083, 1023917, 31.7, 81.7, typeof(IronIngot), 1044036, 18, 1044037);
-            AddCraft(typeof(Halberd), 1011083, 1025183, 39.1, 89.1, typeof(IronIngot), 1044036, 20, 1044037);
-            AddCraft(typeof(ShortSpear), 1011083, 1025123, 45.3, 95.3, typeof(IronIngot), 1044036, 6, 1044037);
-            AddCraft(typeof(Spear), 1011083, 1023938, 49.0, 99.0, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(WarFork), 1011083, 1025125, 42.9, 92.9, typeof(IronIngot), 1044036, 12, 1044037);
-            AddCraft(typeof(Pitchfork), 1011083, 1023720, 36.1, 86.1, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(Bardiche), 1011083, 1023917, 55.0, 55.0, typeof(IronIngot), 1044036, 18, 1044037);
+            AddCraft(typeof(Halberd), 1011083, 1025183, 59.0, 59.0, typeof(IronIngot), 1044036, 20, 1044037);
+            AddCraft(typeof(ShortSpear), 1011083, 1025123, 45.0, 45.0, typeof(IronIngot), 1044036, 6, 1044037);
+            AddCraft(typeof(Spear), 1011083, 1023938, 49.0, 49.0, typeof(IronIngot), 1044036, 12, 1044037);
+            AddCraft(typeof(WarFork), 1011083, 1025125, 48.0, 48.0, typeof(IronIngot), 1044036, 12, 1044037);
 
             #endregion
 
             #region Bashing
 
-            AddCraft(typeof(HammerPick), 1011084, 1025181, 34.2, 84.2, typeof(IronIngot), 1044036, 16, 1044037);
-            AddCraft(typeof(Mace), 1011084, 1023932, 14.5, 64.5, typeof(IronIngot), 1044036, 6, 1044037);
-            AddCraft(typeof(Maul), 1011084, 1025179, 19.4, 69.4, typeof(IronIngot), 1044036, 10, 1044037);
-            AddCraft(typeof(WarMace), 1011084, 1025127, 28.0, 78.0, typeof(IronIngot), 1044036, 14, 1044037);
-            AddCraft(typeof(WarHammer), 1011084, 1025177, 34.2, 84.2, typeof(IronIngot), 1044036, 16, 1044037);
+            AddCraft(typeof(HammerPick), 1011084, 1025181, 35.0, 35.0, typeof(IronIngot), 1044036, 16, 1044037);
+            AddCraft(typeof(Mace), 1011084, 1023932, 24.0, 24.0, typeof(IronIngot), 1044036, 6, 1044037);
+            AddCraft(typeof(Maul), 1011084, 1025179, 29.0, 29.0, typeof(IronIngot), 1044036, 10, 1044037);
+            AddCraft(typeof(WarMace), 1011084, 1025127, 38.0, 38.0, typeof(IronIngot), 1044036, 14, 1044037);
+            AddCraft(typeof(WarHammer), 1011084, 1025177, 44.0, 44.0, typeof(IronIngot), 1044036, 16, 1044037);
 
             #endregion
 
