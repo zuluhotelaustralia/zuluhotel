@@ -74,25 +74,29 @@ namespace Server.SkillHandlers
             // Must be facing a gravestone
             if (stone == default || (m.Direction & Direction.Mask) != m.GetDirectionTo(stone))
                 return;
-
-            // Stone on cooldown
-            if (UsedGravestones.TryGetValue(stone, out var cd) && cd > Core.TickCount)
-            {
-                m.SendFailureMessage("This grave seems to have been disturbed recently...");
-                return;
-            }
             
-            // Anh Mi Sah Ko
-            m.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1062074, "", false);
-            m.PlaySound(0x24A);
-
             // 1 in 20 chance this is a gravestone that can be channeled
             // In a large graveyard like Vesper on average only 4-5 graves can be channelled 
             if (!UsedGravestones.ContainsKey(stone) && Utility.RandomDouble() > 0.05)
             {
                 // Set an effectively infinite cooldown
                 UsedGravestones[stone] = long.MaxValue;
-                m.SendFailureMessage("You reach out to the graves spirit but find nothing of interest...");
+            }
+            
+            // Anh Mi Sah Ko
+            m.PublicOverheadMessage(MessageType.Regular, 0x3B2, 1062074, "", false);
+            m.PlaySound(0x24A);
+            // Bow
+            m.Animate(32, 5, 1, true, false, 0);
+
+            await Timer.Pause(1000);
+            // Stone on cooldown
+            if (UsedGravestones.TryGetValue(stone, out var cd) && cd > Core.TickCount)
+            {
+                m.SendFailureMessage(cd == long.MaxValue 
+                    ? "You reach out to the grave's spirit but find nothing of interest..." 
+                    : "This grave seems to have been disturbed recently..."
+                );
                 return;
             }
             
@@ -101,6 +105,7 @@ namespace Server.SkillHandlers
             if (!m.ShilCheckSkill(SkillName.SpiritSpeak, level * 6, 0))
             {
                 m.SendFailureMessage("You sense the presence of a dark spirit but fail to channel it.");
+                UsedGravestones[stone] = 0; // Allow them to attempt again
                 return;
             }
             
@@ -108,9 +113,6 @@ namespace Server.SkillHandlers
             
             // Set cooldown on success
             UsedGravestones[stone] = Core.TickCount + GravestoneCooldown;
-
-            // Bow
-            m.Animate(32, 5, 1, true, false, 0);
             
             // Paralyze
             m.PlaySound(0x204);
@@ -119,7 +121,7 @@ namespace Server.SkillHandlers
 
             await Timer.Pause(3000);
 
-            m.LocalOverheadMessage(MessageType.Regular, 0, true, "*Your body moves on its own as you become possessed by a dark spirit!*");
+            m.LocalOverheadMessage(MessageType.Emote, 0, true, "*Your body moves on its own as you become possessed by a dark spirit!*");
             
             // Ensure we can spawn a creature here
             if (!SpellHelper.FindValidSpawnLocation(m.Map, ref stone, true))
@@ -139,6 +141,7 @@ namespace Server.SkillHandlers
             
             for (var i = 0; i < 3; i++)
             {
+                // Summoning anim
                 m.Animate(0x10D, 7, 3, true, false, 0);
                 await Timer.Pause(1000);
             }
