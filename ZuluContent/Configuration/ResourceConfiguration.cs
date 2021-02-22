@@ -1,41 +1,23 @@
 using System;
-using System.Data;
-using System.IO;
-using Server.Json;
 
+// ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
 namespace Server.Configurations
 {
-    public static class ResourceConfiguration
+    public partial class ResourceConfiguration : BaseSingleton<ResourceConfiguration>
     {
-        public static OreConfig OreConfiguration { get; private set; }
+        public readonly OreSettings Ores;
 
-        public static LogConfig LogConfiguration { get; private set; }
+        public readonly LogSettings Logs;
 
-
-        public static void Configure()
+        protected ResourceConfiguration()
         {
-            OreConfiguration = LoadResourceConfig<OreConfig>("ores");
-            LogConfiguration = LoadResourceConfig<LogConfig>("logs");
-        }
-
-        private static T LoadResourceConfig<T>(string configFile)
-        {
-            var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
-            Console.Write($"Ore Configuration: loading {path}... ");
-
-            var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
-            var config = JsonConfig.Deserialize<T>(path, options);
-
-            if (config == null)
-                throw new DataException($"Ore Configuration: failed to deserialize {path}!");
-
-            Console.WriteLine("Done.");
-
-            return config;
+            const string baseDir = "Data/Crafting";
+            Ores = ZHConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/ores.json");
+            Logs = ZHConfig.DeserializeJsonConfig<LogSettings>($"{baseDir}/logs.json");
         }
     }
 
-    public record OreConfig
+    public record OreSettings
     {
         public int BankWidth { get; init; }
         public int BankHeight { get; init; }
@@ -79,7 +61,7 @@ namespace Server.Configurations
         }
     }
 
-    public record LogConfig
+    public record LogSettings
     {
         public int BankWidth { get; init; }
         public int BankHeight { get; init; }
