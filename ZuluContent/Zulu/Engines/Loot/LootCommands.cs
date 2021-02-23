@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using Server.Items;
 using Server.Json;
 using Server.Targeting;
@@ -20,8 +22,8 @@ namespace Server.Scripts.Engines.Loot
                 return;
 
             var table = e.GetString(0);
-            var itemLevel = e.GetInt32(0);
-            var itemChance = e.GetDouble(0);
+            var itemLevel = e.GetInt32(1);
+            var itemChance = e.GetDouble(2);
 
 
             e.Mobile.SendMessage("Target a container.");
@@ -33,6 +35,38 @@ namespace Server.Scripts.Engines.Loot
         private static void LootConfigReload_OnCommand(CommandEventArgs e)
         {
             // TODO: implement me!
+        }
+        
+        [Usage("BenchmarkLoot <iterations> <table> <itemLevel> <itemChance>")]
+        [Description("Run a benchmark on the loot generation system.")]
+        private static void BenchmarkHooks_OnCommand(CommandEventArgs e)
+        {
+            if (e.Arguments.Length != 1)
+                return;
+            
+            var iterations = e.GetUInt32(0);
+            
+            var tableId = e.GetString(1);
+            var itemLevel = e.GetInt32(2);
+            var itemChance = e.GetDouble(3);
+            
+            var backpack = new BackpackOfHolding();
+            e.Mobile.AddToBackpack(backpack);
+            
+            LootConfig.Tables.TryGetValue(tableId, out var table);
+
+            var watch = new Stopwatch();
+            watch.Start();
+
+            var items = 0;
+
+            for (var i = 0; i < iterations; i++)
+            {
+                items += LootGenerator.MakeLoot(backpack, table, itemLevel, itemChance);
+            }
+
+            watch.Stop();
+            Console.WriteLine($"Ran {iterations} iterations generating {items} which took {watch.Elapsed.TotalSeconds:F2} seconds.");
         }
 
         private class InternalTarget : Target

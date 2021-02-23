@@ -40,7 +40,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
         }
 
         [Key(0)]
-        public Dictionary<int, IEnchantmentValue> Values { get; set; } = new Dictionary<int, IEnchantmentValue>();
+        public Dictionary<int, IEnchantmentValue> Values { get; set; } = new();
 
         [Key(1)] public bool Identified { get; set; } = true;
 

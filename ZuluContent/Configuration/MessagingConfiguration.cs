@@ -24,7 +24,7 @@ namespace Server.Configurations
 
         protected MessagingConfiguration()
         {
-            var config = ZHConfig.DeserializeJsonConfig<MessagingSettings>("Data/messaging.json");
+            var config = ZhConfig.DeserializeJsonConfig<MessagingSettings>("Data/messaging.json");
 
             SuccessHue = config.SuccessHue;
             FailureHue = config.FailureHue;

@@ -11,8 +11,8 @@ namespace Server.Engines.Craft
 {
     public sealed class DefAlchemy : CraftSystem
     {
-        public static CraftSystem NormalCraftSystem { get; } = new DefAlchemy(ZHConfig.Alchemy.Normal);
-        public static CraftSystem PlusCraftSystem { get; } = new DefAlchemy(ZHConfig.Alchemy.Plus);
+        public static CraftSystem NormalCraftSystem { get; } = new DefAlchemy(ZhConfig.Alchemy.Normal);
+        public static CraftSystem PlusCraftSystem { get; } = new DefAlchemy(ZhConfig.Alchemy.Plus);
 
         public readonly AlchemySettings Settings;
         private static Type TypeOfPotion => typeof(BasePotion);

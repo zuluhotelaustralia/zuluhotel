@@ -10,7 +10,7 @@ using ZuluContent.Configuration;
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
 namespace Server
 {
-    public static class ZHConfig
+    public static class ZhConfig
     {
         public static MessagingConfiguration Messaging => Get<MessagingConfiguration>();
         public static ResourceConfiguration Resources => Get<ResourceConfiguration>();
@@ -19,7 +19,7 @@ namespace Server
         private static readonly Dictionary<Type, object> Cache = new();
 
         // ReSharper disable once UnusedMember.Global
-        [CallPriority(int.MaxValue)]
+        [CallPriority(ushort.MaxValue)]
         public static void Configure()
         {
             var stopwatch = new Stopwatch();

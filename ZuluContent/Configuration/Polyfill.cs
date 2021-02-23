@@ -6,13 +6,13 @@ namespace Server.Configurations
 {
     public static class MessageHueConfiguration
     {
-        public static int MessageSuccessHue => ZHConfig.Messaging.SuccessHue;
-        public static int MessageFailureHue => ZHConfig.Messaging.FailureHue;
+        public static int MessageSuccessHue => ZhConfig.Messaging.SuccessHue;
+        public static int MessageFailureHue => ZhConfig.Messaging.FailureHue;
     }
 
     public partial class ResourceConfiguration
     {
-        public static OreSettings OreConfiguration => ZHConfig.Resources.Ores;
-        public static LogSettings LogConfiguration => ZHConfig.Resources.Logs;
+        public static OreSettings OreConfiguration => ZhConfig.Resources.Ores;
+        public static LogSettings LogConfiguration => ZhConfig.Resources.Logs;
     }
 }
