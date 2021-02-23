@@ -21,10 +21,11 @@ namespace Server.Engines.Craft
 
         public int CraftWorkSound => Settings.CraftWorkSound;
         public int CraftEndSound => Settings.CraftEndSound;
-        
+
         public override double GetChanceAtMin(CraftItem item) => Settings.MinCraftChance;
 
-        private DefAlchemy(AlchemySettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
+        private DefAlchemy(AlchemySettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays,
+            settings.Delay)
         {
             Settings = settings;
             InitCraftList();
@@ -35,7 +36,7 @@ namespace Server.Engines.Craft
             if (Settings == null)
                 return;
 
-            foreach (var entry in Config.CraftEntries)
+            foreach (var entry in Settings.CraftEntries)
             {
                 var firstResource = entry.Resources.FirstOrDefault();
 

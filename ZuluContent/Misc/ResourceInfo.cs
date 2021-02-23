@@ -140,7 +140,7 @@ namespace Server.Items
             HideConfiguration.Entries.Select((e, i) =>
                 new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 101),
                     e.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
-                    e.Quality, e.ResourceType)).ToArray();
+                    e.Quality, e.CraftSkillRequired, e.ResourceType)).ToArray();
 
         public static readonly CraftResourceInfo[] WoodInfo = LogConfiguration.Entries.Select((e, i) =>
             new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 301),
