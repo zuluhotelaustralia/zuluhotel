@@ -11,8 +11,8 @@ namespace ZuluContent.Configuration
         protected AlchemyConfiguration()
         {
             const string baseDir = "Data/Crafting";
-            Normal = ZHConfig.DeserializeJsonConfig<AlchemySettings>($"{baseDir}/alchemy.json");
-            Plus = ZHConfig.DeserializeJsonConfig<AlchemySettings>($"{baseDir}/alchemyplus.json");
+            Normal = ZhConfig.DeserializeJsonConfig<AlchemySettings>($"{baseDir}/alchemy.json");
+            Plus = ZhConfig.DeserializeJsonConfig<AlchemySettings>($"{baseDir}/alchemyplus.json");
         }
     }
     

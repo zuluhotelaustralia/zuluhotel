@@ -12,8 +12,8 @@ namespace Server.Configurations
         protected ResourceConfiguration()
         {
             const string baseDir = "Data/Crafting";
-            Ores = ZHConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/ores.json");
-            Logs = ZHConfig.DeserializeJsonConfig<LogSettings>($"{baseDir}/logs.json");
+            Ores = ZhConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/ores.json");
+            Logs = ZhConfig.DeserializeJsonConfig<LogSettings>($"{baseDir}/logs.json");
         }
     }
 
