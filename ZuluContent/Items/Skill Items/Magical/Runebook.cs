@@ -12,13 +12,13 @@ namespace Server.Items
     {
         public static readonly TimeSpan UseDelay = TimeSpan.FromSeconds(7.0);
 
-        private BookQuality m_Quality;
+        private BookQuality m_Mark;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public BookQuality Quality
+        public BookQuality Mark
         {
-            get { return m_Quality; }
-            set { m_Quality = value; }
+            get { return m_Mark; }
+            set { m_Mark = value; }
         }
 
         private List<RunebookEntry> m_Entries;
@@ -149,7 +149,7 @@ namespace Server.Items
 
             writer.Write(3);
 
-            writer.Write((byte) m_Quality);
+            writer.Write((byte) m_Mark);
 
             writer.Write(m_Crafter);
 
@@ -178,7 +178,7 @@ namespace Server.Items
             {
                 case 3:
                 {
-                    m_Quality = (BookQuality) reader.ReadByte();
+                    m_Mark = (BookQuality) reader.ReadByte();
                     goto case 2;
                 }
                 case 2:
@@ -303,7 +303,6 @@ namespace Server.Items
                 }
 
                 from.CloseGump<RunebookGump>();
-                ;
                 from.SendGump(new RunebookGump(from, this));
 
                 m_Openers.Add(from);
@@ -420,10 +419,11 @@ namespace Server.Items
 
         public bool PlayerConstructed { get; set; }
 
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            int charges = 5 + quality + (int) (from.Skills[SkillName.Inscribe].Value / 30);
+            int charges = 5 + mark + (int) (from.Skills[SkillName.Inscribe].Value / 30);
 
             if (charges > 10)
                 charges = 10;
@@ -433,9 +433,9 @@ namespace Server.Items
             if (makersMark)
                 Crafter = from;
 
-            m_Quality = (BookQuality) (quality - 1);
+            m_Mark = (BookQuality) (mark - 1);
 
-            return quality;
+            return mark;
         }
 
         #endregion

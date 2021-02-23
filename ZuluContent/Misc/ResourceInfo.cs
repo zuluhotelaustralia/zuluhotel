@@ -108,16 +108,20 @@ namespace Server.Items
 
         public double Quality { get; private set; }
 
+        public double CraftSkillRequired { get; private set; }
+
         public Dictionary<Type, int> Enchantments { get; private set; }
 
         public CraftResourceInfo(int hue, string name,
-            CraftResource resource, Dictionary<Type, int> enchantments, double quality, params Type[] resourceTypes)
+            CraftResource resource, Dictionary<Type, int> enchantments, double quality, double craftSkillRequired,
+            params Type[] resourceTypes)
         {
             Hue = hue;
             Name = name;
             Resource = resource;
             Enchantments = enchantments;
             Quality = quality;
+            CraftSkillRequired = craftSkillRequired;
             ResourceTypes = resourceTypes;
 
             foreach (var t in resourceTypes)
@@ -130,48 +134,18 @@ namespace Server.Items
         public static readonly CraftResourceInfo[] MetalInfo = OreConfiguration.Entries.Select((e, i) =>
             new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 1),
                 e.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
-                e.Quality, e.SmeltType, e.ResourceType)).ToArray();
+                e.Quality, e.CraftSkillRequired, e.SmeltType, e.ResourceType)).ToArray();
 
         public static readonly CraftResourceInfo[] LeatherInfo =
         {
-            new CraftResourceInfo(0x000, "Normal", CraftResource.RegularLeather, null, 1.0,
+            new CraftResourceInfo(0x000, "Normal", CraftResource.RegularLeather, null, 1.0, 0.0,
                 typeof(Leather), typeof(Hides)),
-            new CraftResourceInfo(0x7e2, "Rat", CraftResource.RatLeather, null, 1.0,
-                typeof(RatLeather), typeof(RatHides)),
-            new CraftResourceInfo(1102, "Wolf", CraftResource.WolfLeather, null, 1.0,
-                typeof(WolfLeather), typeof(WolfHides)),
-            new CraftResourceInfo(44, "Bear", CraftResource.BearLeather, null, 1.0,
-                typeof(BearLeather), typeof(BearHides)),
-            new CraftResourceInfo(0x8fd, "Serpent", CraftResource.SerpentLeather, null, 1.0,
-                typeof(SerpentLeather), typeof(SerpentHides)),
-            new CraftResourceInfo(0x852, "Lizard", CraftResource.LizardLeather, null, 1.0,
-                typeof(LizardLeather), typeof(LizardHides)),
-            new CraftResourceInfo(0x54a, "Troll", CraftResource.TrollLeather, null, 1.0,
-                typeof(TrollLeather), typeof(TrollHides)),
-            new CraftResourceInfo(0x415, "Ostard", CraftResource.OstardLeather, null, 1.0,
-                typeof(OstardLeather), typeof(OstardHides)),
-            new CraftResourceInfo(84, "Necromancer",
-                CraftResource.NecromancerLeather, null, 1.0, typeof(NecromancerLeather), typeof(NecromancerHides)),
-            new CraftResourceInfo(2747, "Lava", CraftResource.LavaLeather, null, 1.0,
-                typeof(LavaLeather), typeof(LavaHides)),
-            new CraftResourceInfo(2763, "Liche", CraftResource.LicheLeather, null, 1.0,
-                typeof(LicheLeather), typeof(LicheHides)),
-            new CraftResourceInfo(2759, "Ice Crystal",
-                CraftResource.IceCrystalLeather, null, 1.0, typeof(IceCrystalLeather), typeof(IceCrystalHides)),
-            new CraftResourceInfo(2761, "Dragon", CraftResource.DragonLeather, null, 1.0,
-                typeof(DragonLeather), typeof(DragonHides)),
-            new CraftResourceInfo(2747, "Wyrm", CraftResource.WyrmLeather, null, 1.0,
-                typeof(WyrmLeather), typeof(WyrmHides)),
-            new CraftResourceInfo(1175, "Balron", CraftResource.BalronLeather, null, 1.0,
-                typeof(BalronLeather), typeof(BalronHides)),
-            new CraftResourceInfo(48, "Golden Dragon",
-                CraftResource.GoldenDragonLeather, null, 1.0, typeof(GoldenDragonLeather), typeof(GoldenDragonHides))
         };
 
         public static readonly CraftResourceInfo[] WoodInfo = LogConfiguration.Entries.Select((e, i) =>
             new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 301),
                 null,
-                e.Quality, e.ResourceType)).ToArray();
+                e.Quality, e.CraftSkillRequired, e.ResourceType)).ToArray();
 
         /// <summary>
         /// Returns true if '<paramref name="resource"/>' is None, Iron, RegularLeather or RegularWood. False if otherwise.
@@ -310,6 +284,13 @@ namespace Server.Items
             CraftResourceInfo info = GetInfo(resource);
 
             return info == null ? 1.0 : info.Quality;
+        }
+
+        public static double GetCraftSkillRequired(CraftResource resource)
+        {
+            CraftResourceInfo info = GetInfo(resource);
+
+            return info == null ? 0.0 : info.CraftSkillRequired;
         }
 
         /// <summary>

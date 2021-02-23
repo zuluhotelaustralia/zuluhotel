@@ -35,6 +35,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnTracking(Mobile tracker, ref int range);
 
+        public void OnExceptionalChance(Mobile crafter, ref double exceptionalChance, ref int exceptionalDifficulty);
+
+        public void OnQualityBonus(Mobile crafter, ref int multiplier);
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds);
 
         public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value);

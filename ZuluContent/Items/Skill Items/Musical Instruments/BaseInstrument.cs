@@ -21,7 +21,7 @@ namespace Server.Items
     {
         private int m_WellSound, m_BadlySound;
         private SlayerName m_Slayer, m_Slayer2;
-        private InstrumentQuality m_Quality;
+        private InstrumentQuality m_Mark;
         private Mobile m_Crafter;
         private int m_UsesRemaining;
 
@@ -54,13 +54,13 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public InstrumentQuality Quality
+        public InstrumentQuality Mark
         {
-            get { return m_Quality; }
+            get { return m_Mark; }
             set
             {
                 UnscaleUses();
-                m_Quality = value;
+                m_Mark = value;
                 ScaleUses();
             }
         }
@@ -155,7 +155,7 @@ namespace Server.Items
 
         public int GetUsesScalar()
         {
-            if (m_Quality == InstrumentQuality.Exceptional)
+            if (m_Mark == InstrumentQuality.Exceptional)
                 return 200;
 
             return 100;
@@ -303,7 +303,7 @@ namespace Server.Items
         {
             double val = GetBaseDifficulty(targ);
 
-            if (m_Quality == InstrumentQuality.Exceptional)
+            if (m_Mark == InstrumentQuality.Exceptional)
                 val -= 5.0; // 10%
 
             if (m_Slayer != SlayerName.None)
@@ -360,8 +360,8 @@ namespace Server.Items
                     attrs.Add(new EquipInfoAttribute(1049643)); // cursed
             }
 
-            if (m_Quality == InstrumentQuality.Exceptional)
-                attrs.Add(new EquipInfoAttribute(1018305 - (int) m_Quality));
+            if (m_Mark == InstrumentQuality.Exceptional)
+                attrs.Add(new EquipInfoAttribute(1018305 - (int) m_Mark));
 
             if (m_ReplenishesCharges)
                 attrs.Add(new EquipInfoAttribute(1070928)); // Replenish Charges
@@ -416,7 +416,7 @@ namespace Server.Items
 
             writer.Write(m_Crafter);
 
-            writer.WriteEncodedInt((int) m_Quality);
+            writer.WriteEncodedInt((int) m_Mark);
             writer.WriteEncodedInt((int) m_Slayer);
             writer.WriteEncodedInt((int) m_Slayer2);
 
@@ -447,7 +447,7 @@ namespace Server.Items
                 {
                     m_Crafter = reader.ReadEntity<Mobile>();
 
-                    m_Quality = (InstrumentQuality) reader.ReadEncodedInt();
+                    m_Mark = (InstrumentQuality) reader.ReadEncodedInt();
                     m_Slayer = (SlayerName) reader.ReadEncodedInt();
                     m_Slayer2 = (SlayerName) reader.ReadEncodedInt();
 
@@ -462,7 +462,7 @@ namespace Server.Items
                 {
                     m_Crafter = reader.ReadEntity<Mobile>();
 
-                    m_Quality = (InstrumentQuality) reader.ReadEncodedInt();
+                    m_Mark = (InstrumentQuality) reader.ReadEncodedInt();
                     m_Slayer = (SlayerName) reader.ReadEncodedInt();
 
                     UsesRemaining = reader.ReadEncodedInt();
@@ -546,16 +546,17 @@ namespace Server.Items
 
         public bool PlayerConstructed { get; set; }
 
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool,
             CraftItem craftItem, int resHue)
         {
-            Quality = (InstrumentQuality) quality;
+            Mark = (InstrumentQuality) mark;
 
             if (makersMark)
                 Crafter = from;
 
-            return quality;
+            return mark;
         }
 
         #endregion

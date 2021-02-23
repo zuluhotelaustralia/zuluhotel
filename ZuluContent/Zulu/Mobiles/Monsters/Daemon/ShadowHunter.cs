@@ -114,7 +114,7 @@ namespace Server.Mobiles
                 Hue = 1157
             });
 
-            AddItem(new RangerChest
+            AddItem(new LeatherChest
             {
                 Movable = false,
                 Name = "a Tunic of Woven Shadows",

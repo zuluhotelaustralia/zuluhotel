@@ -117,6 +117,15 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public virtual void OnExceptionalChance(Mobile crafter, ref double exceptionalChance,
+            ref int exceptionalDifficulty)
+        {
+        }
+
+        public virtual void OnQualityBonus(Mobile crafter, ref int multiplier)
+        {
+        }
+
         public virtual void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
         }

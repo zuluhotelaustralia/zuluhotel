@@ -44,7 +44,8 @@ namespace Server.Engines.Craft
                 item.Crafter = reader.ReadEntity<Mobile>();
         }
 
-        int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool,
+        int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+            BaseTool tool,
             CraftItem craftItem, int resHue);
     }
 
@@ -766,69 +767,105 @@ namespace Server.Engines.Craft
             return b.Hue.CompareTo(a.Hue);
         }
 
-        public double GetExceptionalChance(CraftSystem system, double chance, Mobile from)
+        public double GetExceptionalChance(Mobile from, CraftSystem system, ref int exceptionalDifficulty)
         {
             if (ForceNonExceptional)
                 return 0.0;
 
-            switch (system.ECA)
-            {
-                default:
-                case CraftECA.ChanceMinusSixty:
-                    chance -= 0.6;
-                    break;
-                case CraftECA.FiftyPercentChanceMinusTenPercent:
-                    chance = chance * 0.5 - 0.1;
-                    break;
-                case CraftECA.ChanceMinusSixtyToFourtyFive:
-                {
-                    double offset = 0.60 - (from.Skills[system.MainSkill].Value - 95.0) * 0.03;
+            var innerExceptionalDifficulty = exceptionalDifficulty;
 
-                    if (offset < 0.45)
-                        offset = 0.45;
-                    else if (offset > 0.60)
-                        offset = 0.60;
+            var exceptionalChance = 10.0;
 
-                    chance -= offset;
-                    break;
-                }
-            }
+            from.FireHook(h => h.OnExceptionalChance(from, ref exceptionalChance, ref innerExceptionalDifficulty));
 
-            if (chance > 0)
-                return chance;
+            if (innerExceptionalDifficulty < 90)
+                innerExceptionalDifficulty = 90;
 
-            return chance;
+            exceptionalDifficulty = innerExceptionalDifficulty;
+
+            return exceptionalChance;
         }
 
-        public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality,
+        public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int mark, ref double quality,
             ref bool allRequiredSkills)
         {
-            return CheckSkills(from, typeRes, craftSystem, ref quality, ref allRequiredSkills, true);
+            return CheckSkills(from, typeRes, craftSystem, ref mark, ref quality, ref allRequiredSkills, true);
         }
 
-        public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality,
+        public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int mark, ref double quality,
             ref bool allRequiredSkills, bool gainSkills)
         {
-            double chance = GetSuccessChance(from, typeRes, craftSystem, gainSkills, ref allRequiredSkills);
-            var craftSkill = Skills.First(sk => sk.SkillToMake == craftSystem.MainSkill);
+            var craftSkillRequired = GetCraftSkillRequired(from, typeRes, craftSystem);
+            var exceptionalDifficulty = craftSkillRequired;
+            var points = gainSkills ? GetCraftPoints(from, typeRes, craftSystem) : 0;
+            var exceptionalChance = GetExceptionalChance(from, craftSystem, ref exceptionalDifficulty);
+            var resource = CraftResources.GetFromType(typeRes);
+            var resQuality = CraftResources.GetQuality(resource);
 
-            if (GetExceptionalChance(craftSystem, chance, from) > Utility.RandomDouble())
-                quality = 2;
+            quality = resQuality;
 
+            if (exceptionalChance > Utility.RandomDouble() &&
+                from.ShilCheckSkill(craftSystem.MainSkill, exceptionalDifficulty, 0))
+            {
+                mark = 2;
+
+                quality = (double) (int) (quality * GetQualityBonus(from)) / 100;
+            }
+
+            return from.ShilCheckSkill(craftSystem.MainSkill, craftSkillRequired, points);
+        }
+
+        public int GetQualityBonus(Mobile from)
+        {
+            var armsLoreValue = from.Skills[SkillName.ArmsLore].Value;
+            var multiplier = 5 + (int) (armsLoreValue / 10);
+
+            from.FireHook(h => h.OnQualityBonus(from, ref multiplier));
+
+            multiplier += 100;
+
+            return multiplier;
+        }
+
+        public int GetCraftItemSkillRequired(Mobile from, CraftSystem craftSystem)
+        {
+            var craftSkill = Skills.FirstOrDefault(sk => sk.SkillToMake == craftSystem.MainSkill);
             var maxSkill = (int) (craftSkill?.MaxSkill ?? 0);
-            return from.ShilCheckSkill(craftSystem.MainSkill, maxSkill, maxSkill * 15);
+            return maxSkill;
+        }
+
+        public int GetCraftSkillRequired(Mobile from, Type typeRes, CraftSystem craftSystem)
+        {
+            var itemSkillRequired = GetCraftItemSkillRequired(from, craftSystem);
+            var craftResourceType = typeRes != null ? typeRes : Resources[0].ItemType;
+            var craftSkillRequired = craftSystem.GetCraftSkillRequired(itemSkillRequired, craftResourceType);
+
+            if (craftSkillRequired < 1)
+                craftSkillRequired = 1;
+            else if (craftSkillRequired > 140)
+                craftSkillRequired = 140;
+
+            return craftSkillRequired;
+        }
+
+        public int GetCraftPoints(Mobile from, Type typeRes, CraftSystem craftSystem)
+        {
+            var itemSkillRequired = GetCraftItemSkillRequired(from, craftSystem);
+            var points = craftSystem.GetCraftPoints(itemSkillRequired, Resources[0].Amount);
+
+            return points;
         }
 
         public double GetSuccessChance(Mobile from, Type typeRes, CraftSystem craftSystem, bool gainSkills,
             ref bool allRequiredSkills)
         {
-            var craftSkill = Skills.FirstOrDefault(sk => sk.SkillToMake == craftSystem.MainSkill);
-            var chance = SkillCheck.GetSkillCheckChance(from, craftSystem.MainSkill, (int) (craftSkill?.MaxSkill ?? 0));
+            var craftSkillRequired = GetCraftSkillRequired(from, typeRes, craftSystem);
+            var chance = SkillCheck.GetSkillCheckChance(from, craftSystem.MainSkill, craftSkillRequired);
 
             return (double) chance / 100;
         }
 
-        public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool)
+        public void Craft(Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool, ref bool success)
         {
             if (from.BeginAction(typeof(CraftSystem)))
             {
@@ -837,7 +874,7 @@ namespace Server.Engines.Craft
 
                 if (allRequiredSkills && chance >= 0.0)
                 {
-                    int badCraft = craftSystem.CanCraft(from, tool, ItemType);
+                    var badCraft = craftSystem.CanCraft(from, tool, ItemType);
 
                     if (badCraft <= 0)
                     {
@@ -860,30 +897,35 @@ namespace Server.Engines.Craft
                                 int iMax = craftSystem.MaxCraftEffect - iMin + 1;
                                 int iRandom = Utility.Random(iMax);
                                 iRandom += iMin + 1;
+                                success = true;
 
                                 tool.OnBeginCraft(from, this, craftSystem);
                                 new InternalTimer(from, craftSystem, this, typeRes, tool, iRandom).Start();
                             }
                             else
                             {
+                                success = false;
                                 from.EndAction(typeof(CraftSystem));
                                 from.SendGump(new CraftGump(from, craftSystem, tool, message));
                             }
                         }
                         else
                         {
+                            success = false;
                             from.EndAction(typeof(CraftSystem));
                             from.SendGump(new CraftGump(from, craftSystem, tool, message));
                         }
                     }
                     else
                     {
+                        success = false;
                         from.EndAction(typeof(CraftSystem));
                         from.SendGump(new CraftGump(from, craftSystem, tool, badCraft));
                     }
                 }
                 else
                 {
+                    success = false;
                     from.EndAction(typeof(CraftSystem));
                     // You don't have the required skills to attempt this item.
                     from.SendGump(new CraftGump(from, craftSystem, tool, 1044153));
@@ -891,6 +933,7 @@ namespace Server.Engines.Craft
             }
             else
             {
+                success = false;
                 from.SendLocalizedMessage(500119); // You must wait to perform another action
             }
         }
@@ -908,7 +951,8 @@ namespace Server.Engines.Craft
             };
         }
 
-        public void CompleteCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public void CompleteCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CustomCraft customCraft)
         {
             int badCraft = craftSystem.CanCraft(from, tool, ItemType);
@@ -951,14 +995,15 @@ namespace Server.Engines.Craft
                 return;
             }
 
-            bool toolBroken = false;
+            var toolBroken = false;
 
-            int ignored = 1;
-            int endquality = 1;
+            var ignored1 = 1;
+            var ignored2 = 1.0;
+            var endmark = 1;
 
-            bool allRequiredSkills = true;
+            var allRequiredSkills = true;
 
-            if (CheckSkills(from, typeRes, craftSystem, ref ignored, ref allRequiredSkills))
+            if (CheckSkills(from, typeRes, craftSystem, ref ignored1, ref ignored2, ref allRequiredSkills))
             {
                 // Resource
                 int resHue = 0;
@@ -1021,7 +1066,7 @@ namespace Server.Engines.Craft
 
                     if (item is ICraftable craftable)
                     {
-                        endquality = craftable.OnCraft(quality, makersMark, from, craftSystem, typeRes, tool,
+                        endmark = craftable.OnCraft(mark, quality, makersMark, from, craftSystem, typeRes, tool,
                             this, resHue);
 
                         craftable.PlayerConstructed = true;
@@ -1053,7 +1098,7 @@ namespace Server.Engines.Craft
                 }
 
                 if (num == 0)
-                    num = craftSystem.PlayEndingEffect(from, false, true, toolBroken, endquality, makersMark, this);
+                    num = craftSystem.PlayEndingEffect(from, false, true, toolBroken, endmark, makersMark, this);
 
                 if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
                 {
@@ -1099,7 +1144,7 @@ namespace Server.Engines.Craft
                     tool.Delete();
 
                 // SkillCheck failed.
-                int num = craftSystem.PlayEndingEffect(from, true, true, toolBroken, endquality, false, this);
+                int num = craftSystem.PlayEndingEffect(from, true, true, toolBroken, endmark, false, this);
 
                 if (tool != null && !tool.Deleted && tool.UsesRemaining > 0)
                 {
@@ -1148,7 +1193,7 @@ namespace Server.Engines.Craft
                 {
                     m_From.EndAction(typeof(CraftSystem));
 
-                    int badCraft = m_CraftSystem.CanCraft(m_From, m_Tool, m_CraftItem.ItemType);
+                    var badCraft = m_CraftSystem.CanCraft(m_From, m_Tool, m_CraftItem.ItemType);
 
                     if (badCraft > 0)
                     {
@@ -1160,10 +1205,21 @@ namespace Server.Engines.Craft
                         return;
                     }
 
-                    int quality = 1;
-                    bool allRequiredSkills = true;
+                    var mark = 1;
+                    var quality = 1.0;
+                    var allRequiredSkills = true;
 
                     CraftContext context = m_CraftSystem.GetContext(m_From);
+
+                    m_CraftItem.CheckSkills(
+                        m_From,
+                        m_TypeRes,
+                        m_CraftSystem,
+                        ref mark,
+                        ref quality,
+                        ref allRequiredSkills,
+                        false
+                    );
 
                     if (context == null)
                         return;
@@ -1171,15 +1227,6 @@ namespace Server.Engines.Craft
                     if (typeof(CustomCraft).IsAssignableFrom(m_CraftItem.ItemType))
                     {
                         // TODO: CustomCrafts, i.e. traps don't seem to be able to fail in RunUO?
-                        m_CraftItem.CheckSkills(
-                            m_From,
-                            m_TypeRes,
-                            m_CraftSystem,
-                            ref quality,
-                            ref allRequiredSkills,
-                            false
-                        );
-
                         var cc = m_CraftItem.ItemType.CreateInstance<CustomCraft>(
                             m_CraftItem.ItemType,
                             m_From,
@@ -1187,7 +1234,7 @@ namespace Server.Engines.Craft
                             m_CraftSystem,
                             m_TypeRes,
                             m_Tool,
-                            quality
+                            mark
                         );
 
                         cc?.EndCraftAction();
@@ -1197,12 +1244,13 @@ namespace Server.Engines.Craft
 
                     bool makersMark = false;
 
-                    if (quality == 2 && m_From.Skills[m_CraftSystem.MainSkill].Base >= 100.0)
+                    if (mark == 2 && m_From.Skills[m_CraftSystem.MainSkill].Base >= 100.0)
                         makersMark = m_CraftItem.IsMarkable(m_CraftItem.ItemType);
 
                     if (makersMark && context.MarkOption == CraftMarkOption.PromptForMark)
                     {
-                        m_From.SendGump(new QueryMakersMarkGump(quality, m_From, m_CraftItem, m_CraftSystem, m_TypeRes,
+                        m_From.SendGump(new QueryMakersMarkGump(mark, quality, m_From, m_CraftItem, m_CraftSystem,
+                            m_TypeRes,
                             m_Tool));
                     }
                     else
@@ -1210,7 +1258,8 @@ namespace Server.Engines.Craft
                         if (context.MarkOption == CraftMarkOption.DoNotMark)
                             makersMark = false;
 
-                        m_CraftItem.CompleteCraft(quality, makersMark, m_From, m_CraftSystem, m_TypeRes, m_Tool, null);
+                        m_CraftItem.CompleteCraft(mark, quality, makersMark, m_From, m_CraftSystem, m_TypeRes, m_Tool,
+                            null);
                     }
                 }
             }

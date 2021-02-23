@@ -671,10 +671,11 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (ClothingQuality) quality;
+            Mark = (ClothingQuality) mark;
 
             if (makersMark)
                 Crafter = from;
@@ -701,14 +702,14 @@ namespace Server.Items
                 Enchantments.SetFromResourceType(key, value);
             }
 
-            Quality = CraftResources.GetQuality(Resource);
+            Quality = quality;
 
             CraftContext context = craftSystem.GetContext(from);
 
             if (context != null && context.DoNotColor)
                 Hue = 0;
 
-            return quality;
+            return mark;
         }
 
         #endregion

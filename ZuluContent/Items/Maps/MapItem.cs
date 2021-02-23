@@ -10,11 +10,12 @@ namespace Server.Items
     {
         private const int MaxUserPins = 50;
         private bool m_Editable;
-        
+
         #region ICraftable Members
+
         public Mobile Crafter { get; set; }
         public bool PlayerConstructed { get; set; }
-        
+
         #endregion
 
         [Constructible]
@@ -49,7 +50,8 @@ namespace Server.Items
         public List<Point2D> Pins => new();
 
         public int OnCraft(
-            int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, BaseTool tool,
+            int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+            BaseTool tool,
             CraftItem craftItem, int resHue
         )
         {
@@ -327,5 +329,4 @@ namespace Server.Items
             }
         }
     }
-
 }

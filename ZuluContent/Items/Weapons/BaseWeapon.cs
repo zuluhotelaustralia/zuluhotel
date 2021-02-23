@@ -1646,10 +1646,11 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (WeaponQuality) quality;
+            Mark = (WeaponQuality) mark;
 
             if (makersMark)
                 Crafter = from;
@@ -1662,9 +1663,9 @@ namespace Server.Items
                 Enchantments.SetFromResourceType(key, value);
             }
 
-            Quality = CraftResources.GetQuality(Resource);
+            Quality = quality;
 
-            return quality;
+            return mark;
         }
 
         #endregion
