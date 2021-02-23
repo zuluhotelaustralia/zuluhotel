@@ -34,8 +34,16 @@ namespace Server
             Console.WriteLine($"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
         }
 
-        public static bool Add<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType> => 
-            Cache.TryAdd(typeof(TTargetType), BaseSingleton<TInstanceType>.Instance);
+        public static bool Add<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType>
+        {
+            if (!Cache.ContainsKey(typeof(TTargetType)))
+            {
+                Cache.Add(typeof(TTargetType), BaseSingleton<TInstanceType>.Instance);
+                return true;
+            }
+
+            return false;
+        }
 
         public static void Replace<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType>
         {
