@@ -6,7 +6,7 @@ namespace Server.Items
     public class DragonEgg : Item
     {
         public override double DefaultWeight => 0.02;
-
+        public static WeightedRandomType<BaseCreature> WeightedDragons;
 
         [Constructible]
         public DragonEgg() : this(1)
@@ -80,41 +80,41 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        private static BaseCreature GetDragonByChance()
+        static BaseCreature GetDragonByChance()
         {
-            WeightedRandomType<BaseCreature> random = new WeightedRandomType<BaseCreature>();
+            WeightedDragons = new WeightedRandomType<BaseCreature>();
                        
             // 25% chance to spawn color dragons
             if (Utility.RandomMinMax(0,4) == 4)
             {
-                random.AddEntry<AdamantineDragon>(1);
-                random.AddEntry<RockDragon>(1);
-                random.AddEntry<CelestialDragon>(1);
-                random.AddEntry<FrostDragon>(1);
-                random.AddEntry<InfernoDragon>(1);
-                random.AddEntry<PoisonDragon>(1);
-                random.AddEntry<RockDragon>(1);
-                random.AddEntry<WaterDrake>(1);
-                random.AddEntry<ShadowDragon>(1);
-                random.AddEntry<StormDragon>(1);
-                random.AddEntry<TidalDragon>(1);
-                random.AddEntry<AirDrake>(1);
-                random.AddEntry<EarthDrake>(1);
-                random.AddEntry<FireDrake>(1);
-                random.AddEntry<FrostDrake>(1);
-                random.AddEntry<HeavenlyDrake>(1);
-                random.AddEntry<PoisonDrake>(1);
-                random.AddEntry<SpectralDrake>(1);
-                random.AddEntry<UndeadDrake>(1);
+                WeightedDragons.AddEntry<AdamantineDragon>(1);
+                WeightedDragons.AddEntry<RockDragon>(1);
+                WeightedDragons.AddEntry<CelestialDragon>(1);
+                WeightedDragons.AddEntry<FrostDragon>(1);
+                WeightedDragons.AddEntry<InfernoDragon>(1);
+                WeightedDragons.AddEntry<PoisonDragon>(1);
+                WeightedDragons.AddEntry<RockDragon>(1);
+                WeightedDragons.AddEntry<WaterDrake>(1);
+                WeightedDragons.AddEntry<ShadowDragon>(1);
+                WeightedDragons.AddEntry<StormDragon>(1);
+                WeightedDragons.AddEntry<TidalDragon>(1);
+                WeightedDragons.AddEntry<AirDrake>(1);
+                WeightedDragons.AddEntry<EarthDrake>(1);
+                WeightedDragons.AddEntry<FireDrake>(1);
+                WeightedDragons.AddEntry<FrostDrake>(1);
+                WeightedDragons.AddEntry<HeavenlyDrake>(1);
+                WeightedDragons.AddEntry<PoisonDrake>(1);
+                WeightedDragons.AddEntry<SpectralDrake>(1);
+                WeightedDragons.AddEntry<UndeadDrake>(1);
             }
             // 75% chance to spawn regular dragon or drake
             else
             {
-                random.AddEntry<Drake>(1);
-                random.AddEntry<Dragon>(1);
+                WeightedDragons.AddEntry<Drake>(1);
+                WeightedDragons.AddEntry<Dragon>(1);
             }
 
-            return random.GetRandom();
+            return WeightedDragons.GetRandom();
         }
     }
 }

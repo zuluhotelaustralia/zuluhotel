@@ -6,8 +6,7 @@ namespace Server.Items
 
     public class FrenziedOstardEgg : Item
     {
-        public int forcadoostard { get; set; }
-
+        public static WeightedRandomType<BaseCreature> WeightedOstards;
         public override double DefaultWeight => 0.02;
 
         [Constructible]
@@ -89,32 +88,32 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        private static BaseCreature GetOstardByChance()
+        static BaseCreature GetOstardByChance()
         {
             // From ZHA scripts, 50% fail chance
             if (Utility.Random(0, 1) == 1)
                 return null;
 
-            var random = new WeightedRandomType<BaseCreature>();
+            WeightedOstards = new WeightedRandomType<BaseCreature>();
 
-            random.AddEntry<FrenziedOstard>(1);
-            random.AddEntry<GoldenFrenziedOstard>(1);
-            random.AddEntry<PlainsFrenziedOstard>(1);
-            random.AddEntry<MountainFrenziedOstard>(1);
-            random.AddEntry<SwampFrenziedOstard>(1);
-            random.AddEntry<HighlandFrenziedOstard>(1);
-            random.AddEntry<ShadowFrenziedOstard>(1);
-            random.AddEntry<ValleyFrenziedOstard>(1);
-            random.AddEntry<StoneFrenziedOstard>(1);
-            random.AddEntry<EmeraldFrenziedOstard>(1);
-            random.AddEntry<RubyFrenziedOstard>(1);
-            random.AddEntry<TropicalFrenziedOstard>(1);
-            random.AddEntry<SnowFrenziedOstard>(1);
-            random.AddEntry<IceFrenziedOstard>(1);
-            random.AddEntry<FireFrenziedOstard>(1);
-            random.AddEntry<HeavenlyFrenziedOstard>(1);            
+            WeightedOstards.AddEntry<FrenziedOstard>(1);
+            WeightedOstards.AddEntry<GoldenFrenziedOstard>(1);
+            WeightedOstards.AddEntry<PlainsFrenziedOstard>(1);
+            WeightedOstards.AddEntry<MountainFrenziedOstard>(1);
+            WeightedOstards.AddEntry<SwampFrenziedOstard>(1);
+            WeightedOstards.AddEntry<HighlandFrenziedOstard>(1);
+            WeightedOstards.AddEntry<ShadowFrenziedOstard>(1);
+            WeightedOstards.AddEntry<ValleyFrenziedOstard>(1);
+            WeightedOstards.AddEntry<StoneFrenziedOstard>(1);
+            WeightedOstards.AddEntry<EmeraldFrenziedOstard>(1);
+            WeightedOstards.AddEntry<RubyFrenziedOstard>(1);
+            WeightedOstards.AddEntry<TropicalFrenziedOstard>(1);
+            WeightedOstards.AddEntry<SnowFrenziedOstard>(1);
+            WeightedOstards.AddEntry<IceFrenziedOstard>(1);
+            WeightedOstards.AddEntry<FireFrenziedOstard>(1);
+            WeightedOstards.AddEntry<HeavenlyFrenziedOstard>(1);            
 
-            return random.GetRandom();
+            return WeightedOstards.GetRandom();
         }
     }
 }
