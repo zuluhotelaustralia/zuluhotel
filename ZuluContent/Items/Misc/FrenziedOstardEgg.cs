@@ -1,18 +1,14 @@
 ﻿using Server.Mobiles;
-using System;
+using Server.Spells;
 
 namespace Server.Items
 {
 
     public class FrenziedOstardEgg : Item
     {
+        public int forcadoostard { get; set; }
 
-
-        public override double DefaultWeight
-        {
-            get { return 0.02; }
-        }
-
+        public override double DefaultWeight => 0.02;
 
         [Constructible]
         public FrenziedOstardEgg() : this(1)
@@ -31,7 +27,7 @@ namespace Server.Items
         {
             Stackable = true;
             Amount = amount;
-            Name = "FrenziedOstardEgg";
+            Name = "Frenzied Ostard Egg";
             Hue = 0x494;
         }
 
@@ -42,7 +38,6 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-
             if (!Movable)
                 return;
 
@@ -51,6 +46,11 @@ namespace Server.Items
                 from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
                 return;
             }
+            
+            var p = new Point3D(from);
+
+            if (!SpellHelper.FindValidSpawnLocation(from.Map, ref p, true))
+                return;
 
             Consume(1);
 
@@ -60,11 +60,9 @@ namespace Server.Items
                 from.SendMessage("The poor creature died just after hatching. ");
                 return;
             }
-
-            var p = new Point3D(from);
-
-            from.SendMessage("The egg begins to move and ");
             
+            from.SendMessage("The egg begins to move and ");
+
             if (Utility.RandomMinMax(0, 100) < 75)
             {
                 ostard.Owners.Add(from);
@@ -74,7 +72,7 @@ namespace Server.Items
             else
                 from.SendMessage("A baby ostard appears!");
 
-            ostard.MoveToWorld(p, from.Map);            
+            ostard.MoveToWorld(p, from.Map);
         }
 
         public override void Serialize(IGenericWriter writer)
@@ -91,41 +89,32 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        private BaseCreature GetOstardByChance()
+        private static BaseCreature GetOstardByChance()
         {
+            // From ZHA scripts, 50% fail chance
+            if (Utility.Random(0, 1) == 1)
+                return null;
 
-            return (Utility.RandomMinMax(0, 34)) switch
-            {
-                0 or 1 or 2 or 3 => null,
-                4 => new FrenziedOstard(),
-                5 or 6 => null,
-                7 => new GoldenFrenziedOstard(),
-                8 or 9 => null,
-                10 => new PlainsFrenziedOstard(),
-                11 or 12 => null,
-                13 => new MountainFrenziedOstard(),
-                14 or 15 => null,
-                16 => new SwampFrenziedOstard(),
-                17 => null,
-                18 => new HighlandFrenziedOstard(),
-                19 => null,
-                20 => new ShadowFrenziedOstard(),
-                21 => null,
-                22 => new ValleyFrenziedOstard(),
-                23 => null,
-                24 => new StoneFrenziedOstard(),
-                25 => null,
-                26 => new EmeraldFrenziedOstard(),
-                27 => null,
-                28 => new RubyFrenziedOstard(),
-                29 => null,
-                30 => new TropicalFrenziedOstard(),
-                31 => new SnowFrenziedOstard(),
-                32 => new IceFrenziedOstard(),
-                33 => new FireFrenziedOstard(),
-                34 => new HeavenlyFrenziedOstard(),
-                _ => null,
-            };
+            var random = new WeightedRandomType<BaseCreature>();
+
+            random.AddEntry<FrenziedOstard>(1);
+            random.AddEntry<GoldenFrenziedOstard>(1);
+            random.AddEntry<PlainsFrenziedOstard>(1);
+            random.AddEntry<MountainFrenziedOstard>(1);
+            random.AddEntry<SwampFrenziedOstard>(1);
+            random.AddEntry<HighlandFrenziedOstard>(1);
+            random.AddEntry<ShadowFrenziedOstard>(1);
+            random.AddEntry<ValleyFrenziedOstard>(1);
+            random.AddEntry<StoneFrenziedOstard>(1);
+            random.AddEntry<EmeraldFrenziedOstard>(1);
+            random.AddEntry<RubyFrenziedOstard>(1);
+            random.AddEntry<TropicalFrenziedOstard>(1);
+            random.AddEntry<SnowFrenziedOstard>(1);
+            random.AddEntry<IceFrenziedOstard>(1);
+            random.AddEntry<FireFrenziedOstard>(1);
+            random.AddEntry<HeavenlyFrenziedOstard>(1);            
+
+            return random.GetRandom();
         }
     }
 }

@@ -1,16 +1,11 @@
 ﻿using Server.Mobiles;
+using Server.Spells;
 
 namespace Server.Items
 {
-
     public class DragonEgg : Item
     {
-
-
-        public override double DefaultWeight
-        {
-            get { return 0.02; }
-        }
+        public override double DefaultWeight => 0.02;
 
 
         [Constructible]
@@ -24,13 +19,13 @@ namespace Server.Items
         {
         }
 
-
+        
         [Constructible]
         public DragonEgg(int amount) : base(0x1725)
         {
             Stackable = true;
             Amount = amount;
-            Name = "DragonEgg";
+            Name = "Dragons Egg";
             Hue = 33;
         }
 
@@ -50,10 +45,13 @@ namespace Server.Items
                 return;
             }
 
-            Consume(1);
-            from.SendMessage("The egg begins to move and ");
-            
             var p = new Point3D(from);
+            if (!SpellHelper.FindValidSpawnLocation(from.Map, ref p, true))
+                return;
+
+            Consume(1);
+            from.SendMessage("The egg begins to move and ");            
+
             var dragon = GetDragonByChance();
 
             if (from.Skills.AnimalTaming.Value > 90 && Utility.RandomMinMax(0, 100) > 70)
@@ -78,47 +76,45 @@ namespace Server.Items
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-
+            
             int version = reader.ReadInt();
         }
 
-        private BaseCreature GetDragonByChance()
-        {                 
+        private static BaseCreature GetDragonByChance()
+        {
+            WeightedRandomType<BaseCreature> random = new WeightedRandomType<BaseCreature>();
+                       
+            // 25% chance to spawn color dragons
             if (Utility.RandomMinMax(0,4) == 4)
             {
-                return (Utility.RandomMinMax(1, 19)) switch
-                {
-                    1 => new AdamantineDragon(),
-                    2 => new RockDragon(),
-                    3 => new CelestialDragon(),
-                    4 => new FrostDragon(),
-                    5 => new InfernoDragon(),
-                    6 => new PoisonDragon(),
-                    7 => new RockDragon(),
-                    8 => new WaterDrake(),
-                    9 => new ShadowDragon(),
-                    10 => new StormDragon(),
-                    11 => new TidalDragon(),
-                    12 => new AirDrake(),
-                    13 => new EarthDrake(),
-                    14 => new FireDrake(),
-                    15 => new FrostDrake(),
-                    16 => new HeavenlyDrake(),
-                    17 => new PoisonDrake(),
-                    18 => new SpectralDrake(),
-                    19 => new UndeadDrake(),
-                    _ => null,
-                };
+                random.AddEntry<AdamantineDragon>(1);
+                random.AddEntry<RockDragon>(1);
+                random.AddEntry<CelestialDragon>(1);
+                random.AddEntry<FrostDragon>(1);
+                random.AddEntry<InfernoDragon>(1);
+                random.AddEntry<PoisonDragon>(1);
+                random.AddEntry<RockDragon>(1);
+                random.AddEntry<WaterDrake>(1);
+                random.AddEntry<ShadowDragon>(1);
+                random.AddEntry<StormDragon>(1);
+                random.AddEntry<TidalDragon>(1);
+                random.AddEntry<AirDrake>(1);
+                random.AddEntry<EarthDrake>(1);
+                random.AddEntry<FireDrake>(1);
+                random.AddEntry<FrostDrake>(1);
+                random.AddEntry<HeavenlyDrake>(1);
+                random.AddEntry<PoisonDrake>(1);
+                random.AddEntry<SpectralDrake>(1);
+                random.AddEntry<UndeadDrake>(1);
             }
+            // 75% chance to spawn regular dragon or drake
             else
             {
-                return (Utility.RandomMinMax(1, 2)) switch
-                {
-                    1 => new Drake(),
-                    2 => new Dragon(),
-                    _ => null,
-                };
-            }            
+                random.AddEntry<Drake>(1);
+                random.AddEntry<Dragon>(1);
+            }
+
+            return random.GetRandom();
         }
     }
 }

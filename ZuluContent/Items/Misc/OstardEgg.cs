@@ -1,4 +1,5 @@
 ﻿using Server.Mobiles;
+using Server.Spells;
 using System;
 
 namespace Server.Items
@@ -8,10 +9,7 @@ namespace Server.Items
     {
 
 
-        public override double DefaultWeight
-        {
-            get { return 0.02; }
-        }
+        public override double DefaultWeight => 0.02;
 
 
         [Constructible]
@@ -31,7 +29,7 @@ namespace Server.Items
         {
             Stackable = true;
             Amount = amount;
-            Name = "OstardEgg";
+            Name = "Ostard Egg";
             Hue = 1102;
         }
 
@@ -42,7 +40,6 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-
             if (!Movable)
                 return;
 
@@ -51,9 +48,13 @@ namespace Server.Items
                 from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
                 return;
             }
-
+            
             var p = new Point3D(from);
+            
+            if (!SpellHelper.FindValidSpawnLocation(from.Map, ref p, true))
+                return;
 
+            Consume(1);
             from.SendMessage("The egg begins to move and ");
 
             var ostard = GetOstardByChance();
@@ -67,8 +68,7 @@ namespace Server.Items
             else
                 from.SendMessage("A baby ostard appears!");
 
-            ostard.MoveToWorld(p, from.Map);
-            Consume(1);
+            ostard.MoveToWorld(p, from.Map);            
         }
 
         public override void Serialize(IGenericWriter writer)
@@ -85,28 +85,30 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        private BaseCreature GetOstardByChance()
+        private static BaseCreature GetOstardByChance()
         {
-            object ostard = Utility.Random(0, 33) switch
-            {
-                < 4 => new GoldenOstard(),
-                < 7 => new PlainsOstard(),
-                < 11 => new MountainOstard(),
-                < 15 => new SwampOstard(),
-                < 19 => new HighlandOstard(),
-                < 21 => new ShadowOstard(),
-                < 23 => new ValleyOstard(),
-                < 25 => new StoneOstard(),
-                < 27 => new EmeraldOstard(),
-                < 29 => new RubyOstard(),
-                < 30 => new TropicalOstard(),
-                < 31 => new SnowOstard(),
-                < 32 => new IceOstard(),
-                < 33 => new FireOstard(),
-                >= 33 => new HeavenlyOstard()                
-            };
+            WeightedRandomType<BaseCreature> random = new WeightedRandomType<BaseCreature>();
 
-            return (BaseCreature)ostard;
+            // Weight 4
+            random.AddEntry<GoldenOstard>(4);
+            random.AddEntry<PlainsOstard>(4);
+            random.AddEntry<MountainOstard>(4);
+            random.AddEntry<SwampOstard>(4);
+            random.AddEntry<HighlandOstard>(4);
+            // Weight 2
+            random.AddEntry<ShadowOstard>(2);
+            random.AddEntry<ValleyOstard>(2);
+            random.AddEntry<StoneOstard>(2);
+            random.AddEntry<EmeraldOstard>(2);
+            random.AddEntry<RubyOstard>(2);
+            // Weight 1
+            random.AddEntry<TropicalOstard>(1);
+            random.AddEntry<SnowOstard>(1);
+            random.AddEntry<IceOstard>(1);
+            random.AddEntry<FireOstard>(1);
+            random.AddEntry<HeavenlyOstard>(1);
+
+            return random.GetRandom();
         }
     }
 }
