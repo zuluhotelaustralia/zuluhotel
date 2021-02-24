@@ -5,7 +5,9 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource { get; set; }
 
-        public override string DefaultName => CraftResources.GetName(Resource);
+        public override string DefaultName => CraftResources.GetName(Resource).Length > 0
+            ? $"{CraftResources.GetName(Resource)} hide"
+            : "hide";
 
         public override void Serialize(IGenericWriter writer)
         {

@@ -418,14 +418,15 @@ namespace Server.Engines.Craft
 
                     From.CloseGump<CraftGump>();
                     From.CloseGump<CraftGumpItem>();
-                    From.SendAsciiMessage(89, $"Looping [{i} more to go].");
+
                     CraftSystem.CreateItem(From, item.ItemType, type, Tool, item, ref success);
 
                     if (!success)
                     {
-                        From.SendAsciiMessage(89, "Looping aborted.");
                         return;
                     }
+
+                    From.SendAsciiMessage(89, $"Looping [{i} more to go].");
 
                     await Timer.Pause(((int) (CraftSystem.Delay * CraftSystem.MaxCraftEffect) + 6) * 1000);
                 }

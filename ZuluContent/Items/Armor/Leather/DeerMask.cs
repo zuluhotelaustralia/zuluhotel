@@ -1,26 +1,32 @@
 namespace Server.Items
 {
-    [Flipable]
-    public class Robe : BaseOuterTorso
+    public class DeerMask : BaseArmor
     {
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
 
+        public override int ArmorBase => 13;
+
+        public override int DefaultStrReq => 25;
+
+        public override int DefaultDexBonus => -2;
+
+        public override double DefaultMagicEfficiencyPenalty => 4.0;
+
+        public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
+
+        public override CraftResource DefaultResource => CraftResource.RegularLeather;
+
+
         [Constructible]
-        public Robe() : this(0)
+        public DeerMask() : base(0x1547)
         {
+            Weight = 4.0;
         }
 
-
         [Constructible]
-        public Robe(int hue) : base(0x1F03, hue)
-        {
-            Weight = 3.0;
-        }
-
-        [Constructible]
-        public Robe(Serial serial) : base(serial)
+        public DeerMask(Serial serial) : base(serial)
         {
         }
 

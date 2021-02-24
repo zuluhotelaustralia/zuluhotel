@@ -407,29 +407,23 @@ namespace Scripts.Zulu.Engines.Classes
 
         public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance)
         {
-            if (tamer is IZuluClassed {ZuluClass: { } cls})
+            if (tamer is IZuluClassed {ZuluClass: {Type: ZuluClassType.Ranger}})
             {
-                if (cls.Type == ZuluClassType.Ranger)
-                {
-                    chance = (int) (chance / ClasseBonus);
-                }
+                chance = (int) (chance / ClasseBonus);
             }
         }
 
         public void OnTracking(Mobile tracker, ref int range)
         {
-            if (tracker is IZuluClassed {ZuluClass: { } cls})
+            if (tracker is IZuluClassed {ZuluClass: {Type: ZuluClassType.Ranger} cls})
             {
-                if (cls.Type == ZuluClassType.Ranger)
-                {
-                    range = (int) (range * cls.Bonus);
-                }
+                range = (int) (range * cls.Bonus);
             }
         }
 
         public void OnExceptionalChance(Mobile crafter, ref double exceptionalChance, ref int exceptionalDifficulty)
         {
-            if (crafter is IZuluClassed {ZuluClass: { } cls} && cls.Type == ZuluClassType.Crafter)
+            if (crafter is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
             {
                 exceptionalChance *= Bonus;
                 exceptionalDifficulty += 20;
@@ -442,12 +436,9 @@ namespace Scripts.Zulu.Engines.Classes
 
         public void OnQualityBonus(Mobile crafter, ref int multiplier)
         {
-            if (crafter is IZuluClassed {ZuluClass: { } cls})
+            if (crafter is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter} cls})
             {
-                if (cls.Type == ZuluClassType.Crafter)
-                {
-                    multiplier = (int) (multiplier * cls.Bonus);
-                }
+                multiplier = (int) (multiplier * cls.Bonus);
             }
         }
 
@@ -566,6 +557,14 @@ namespace Scripts.Zulu.Engines.Classes
         public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
             Item item)
         {
+        }
+
+        public void OnCraftSkillRequiredForFame(Mobile from, ref int craftSkillRequiredForFame)
+        {
+            if (from is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter}})
+            {
+                craftSkillRequiredForFame = 110;
+            }
         }
 
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)

@@ -1,13 +1,16 @@
 namespace Server.Items
 {
-    [Flipable]
-    public class LeatherGloves : BaseArmor
+    public class VoodooMask : BaseArmor
     {
-        public override int InitMinHits => 70;
+        public override int InitMinHits => 65;
 
-        public override int InitMaxHits => 70;
+        public override int InitMaxHits => 65;
 
-        public override int ArmorBase => 13;
+        public override int ArmorBase => 15;
+
+        public override int DefaultStrReq => 40;
+
+        public override int DefaultDexBonus => -6;
 
         public override double DefaultMagicEfficiencyPenalty => 1.0;
 
@@ -17,13 +20,13 @@ namespace Server.Items
 
 
         [Constructible]
-        public LeatherGloves() : base(0x13C6)
+        public VoodooMask() : base(0x154B)
         {
-            Weight = 1.0;
+            Weight = 2.0;
         }
 
         [Constructible]
-        public LeatherGloves(Serial serial) : base(serial)
+        public VoodooMask(Serial serial) : base(serial)
         {
         }
 
@@ -39,6 +42,9 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            /*if ( Hue != 0 && (Hue < 2101 || Hue > 2130) )
+				Hue = GetRandomHue();*/
         }
     }
 }

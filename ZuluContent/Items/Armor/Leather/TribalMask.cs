@@ -1,15 +1,16 @@
 namespace Server.Items
 {
-    [FlipableAttribute(0x1c08, 0x1c09)]
-    public class LeatherSkirt : BaseArmor
+    public class TribalMask : BaseArmor
     {
-        public override int InitMinHits => 70;
+        public override int InitMinHits => 65;
 
-        public override int InitMaxHits => 70;
+        public override int InitMaxHits => 65;
 
-        public override int ArmorBase => 13;
+        public override int ArmorBase => 15;
 
-        public override int DefaultDexBonus => -1;
+        public override int DefaultStrReq => 40;
+
+        public override int DefaultDexBonus => -4;
 
         public override double DefaultMagicEfficiencyPenalty => 2.0;
 
@@ -19,28 +20,27 @@ namespace Server.Items
 
 
         [Constructible]
-        public LeatherSkirt() : base(0x1C08)
+        public TribalMask() : base(0x1549)
         {
-            Weight = 1.0;
+            Weight = 2.0;
         }
 
         [Constructible]
-        public LeatherSkirt(Serial serial) : base(serial)
+        public TribalMask(Serial serial) : base(serial)
         {
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int) 0);
 
-            if (Weight == 3.0)
-                Weight = 1.0;
+            writer.Write((int) 0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
+
             int version = reader.ReadInt();
         }
     }

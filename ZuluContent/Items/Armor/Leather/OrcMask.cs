@@ -1,26 +1,30 @@
 namespace Server.Items
 {
-    [Flipable]
-    public class Robe : BaseOuterTorso
+    public class OrcMask : BaseArmor
     {
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
 
+        public override int ArmorBase => 10;
+
+        public override int DefaultDexBonus => -1;
+
+        public override double DefaultMagicEfficiencyPenalty => 2.0;
+
+        public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
+
+        public override CraftResource DefaultResource => CraftResource.RegularLeather;
+
+
         [Constructible]
-        public Robe() : this(0)
+        public OrcMask() : base(0x141B)
         {
+            Weight = 2.0;
         }
 
-
         [Constructible]
-        public Robe(int hue) : base(0x1F03, hue)
-        {
-            Weight = 3.0;
-        }
-
-        [Constructible]
-        public Robe(Serial serial) : base(serial)
+        public OrcMask(Serial serial) : base(serial)
         {
         }
 
@@ -36,6 +40,9 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            /*if ( Hue != 0x8A4 )
+				Hue = 0x8A4;*/
         }
     }
 }

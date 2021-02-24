@@ -1,7 +1,7 @@
 {
   "Entries": [
     {
-      "Name": "hide",
+      "Name": "",
       "ResourceType": "Hide",
       "CraftSkillRequired": 0.0,
       "Hue": 0,
@@ -9,7 +9,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Rat hide",
+      "Name": "Rat",
       "ResourceType": "RatHide",
       "CraftSkillRequired": 10.0,
       "Hue": 2018,
@@ -17,7 +17,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Wolf hide",
+      "Name": "Wolf",
       "ResourceType": "WolfHide",
       "CraftSkillRequired": 20.0,
       "Hue": 1102,
@@ -25,7 +25,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Bear hide",
+      "Name": "Bear",
       "ResourceType": "BearHide",
       "CraftSkillRequired": 30.0,
       "Hue": 44,
@@ -33,7 +33,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Serpent hide",
+      "Name": "Serpent",
       "ResourceType": "SerpentHide",
       "CraftSkillRequired": 40.0,
       "Hue": 2301,
@@ -41,7 +41,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Lizard hide",
+      "Name": "Lizard",
       "ResourceType": "LizardHide",
       "CraftSkillRequired": 50.0,
       "Hue": 2130,
@@ -49,7 +49,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Troll hide",
+      "Name": "Troll",
       "ResourceType": "TrollHide",
       "CraftSkillRequired": 60.0,
       "Hue": 1354,
@@ -57,7 +57,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Ostard hide",
+      "Name": "Ostard",
       "ResourceType": "OstardHide",
       "CraftSkillRequired": 70.0,
       "Hue": 1045,
@@ -65,7 +65,7 @@
       "Enchantments": []
     },
     {
-      "Name": "Necromancer hide",
+      "Name": "Necromancer",
       "ResourceType": "NecromancerHide",
       "CraftSkillRequired": 80.0,
       "Hue": 84,
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "Name": "Lava hide",
+      "Name": "Lava",
       "ResourceType": "LavaHide",
       "CraftSkillRequired": 90.0,
       "Hue": 1158,
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "Name": "Liche hide",
+      "Name": "Liche",
       "ResourceType": "LicheHide",
       "CraftSkillRequired": 100.0,
       "Hue": 1174,
@@ -112,7 +112,7 @@
       ]
     },
     {
-      "Name": "Ice Crystal hide",
+      "Name": "Ice Crystal",
       "ResourceType": "IceCrystalHide",
       "CraftSkillRequired": 110.0,
       "Hue": 1170,
@@ -125,7 +125,7 @@
       ]
     },
     {
-      "Name": "Dragon hide",
+      "Name": "Dragon",
       "ResourceType": "DragonHide",
       "CraftSkillRequired": 115.0,
       "Hue": 1172,
@@ -146,7 +146,7 @@
       ]
     },
     {
-      "Name": "Wyrm hide",
+      "Name": "Wyrm",
       "ResourceType": "WyrmHide",
       "CraftSkillRequired": 120.0,
       "Hue": 1159,
@@ -167,7 +167,7 @@
       ]
     },
     {
-      "Name": "Balron hide",
+      "Name": "Balron",
       "ResourceType": "BalronHide",
       "CraftSkillRequired": 125.0,
       "Hue": 1157,
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "Name": "Golden Dragon hide",
+      "Name": "Golden Dragon",
       "ResourceType": "GoldenDragonHide",
       "CraftSkillRequired": 130.0,
       "Hue": 48,

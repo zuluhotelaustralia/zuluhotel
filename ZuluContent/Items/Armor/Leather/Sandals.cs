@@ -1,26 +1,26 @@
 namespace Server.Items
 {
-    [Flipable]
-    public class Robe : BaseOuterTorso
+    [Flipable(0x170d, 0x170e)]
+    public class Sandals : BaseArmor
     {
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
 
+        public override int ArmorBase => 2;
+
+        public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
+
+        public override CraftResource DefaultResource => CraftResource.RegularLeather;
+
         [Constructible]
-        public Robe() : this(0)
+        public Sandals() : base(0x170D)
         {
+            Weight = 1.0;
         }
 
-
         [Constructible]
-        public Robe(int hue) : base(0x1F03, hue)
-        {
-            Weight = 3.0;
-        }
-
-        [Constructible]
-        public Robe(Serial serial) : base(serial)
+        public Sandals(Serial serial) : base(serial)
         {
         }
 

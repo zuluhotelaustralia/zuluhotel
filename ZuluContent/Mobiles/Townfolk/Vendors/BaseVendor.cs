@@ -263,16 +263,16 @@ namespace Server.Mobiles
             switch (ShoeType)
             {
                 case VendorShoeType.Shoes:
-                    AddItem(new Shoes(GetShoeHue()));
+                    AddItem(new Shoes());
                     break;
                 case VendorShoeType.Boots:
-                    AddItem(new Boots(GetShoeHue()));
+                    AddItem(new Boots());
                     break;
                 case VendorShoeType.Sandals:
-                    AddItem(new Sandals(GetShoeHue()));
+                    AddItem(new Sandals());
                     break;
                 case VendorShoeType.ThighBoots:
-                    AddItem(new ThighBoots(GetShoeHue()));
+                    AddItem(new ThighBoots());
                     break;
             }
 

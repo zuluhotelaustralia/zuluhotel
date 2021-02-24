@@ -2,11 +2,68 @@ using System.Collections.Generic;
 using Server.Multis;
 using Server.Mobiles;
 using Server.Network;
+using Server.Engines.Craft;
+using System;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseContainer : Container
+    public abstract class BaseContainer : Container, ICraftable, IMagicItem
     {
+        private CraftResource m_Resource;
+        private EnchantmentDictionary m_Enchantments;
+
+        public EnchantmentDictionary Enchantments
+        {
+            get => m_Enchantments ??= new EnchantmentDictionary();
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool Identified
+        {
+            get => Enchantments.Identified;
+            set
+            {
+                if (!Enchantments.Identified && value)
+                    Enchantments.OnIdentified(this);
+
+                Enchantments.Identified = value;
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public ContainerQuality Mark
+        {
+            get => Enchantments.Get((ItemMark e) => (ContainerQuality) e.Value);
+            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+
+                    if (CraftItem.RetainsColor(GetType()))
+                    {
+                        Hue = CraftResources.GetHue(m_Resource);
+                    }
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
+
         public override int DefaultMaxWeight
         {
             get
@@ -87,6 +144,11 @@ namespace Server.Items
             return true;
         }
 
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
+        }
+
         public override void OnDoubleClick(Mobile from)
         {
             if (from.AccessLevel > AccessLevel.Player || from.InRange(GetWorldLocation(), 2) ||
@@ -101,19 +163,63 @@ namespace Server.Items
             DisplayTo(from);
         }
 
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
+            BaseTool tool, CraftItem craftItem, int resHue)
+        {
+            Mark = (ContainerQuality) mark;
+
+            if (makersMark)
+                Crafter = from;
+
+            Type resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
+            PlayerConstructed = true;
+
+            CraftContext context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
+
+            return mark;
+        }
+
         public BaseContainer(Serial serial) : base(serial)
         {
         }
 
-        /* Note: base class insertion; we cannot serialize anything here */
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
+
+            writer.Write(1); // version
+
+            ICraftable.Serialize(writer, this);
+
+            Enchantments.Serialize(writer);
+
+            writer.WriteEncodedInt((int) m_Resource);
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
+
+            var version = reader.ReadInt();
+
+            if (version == 1)
+            {
+                ICraftable.Deserialize(reader, this);
+
+                m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+
+                m_Resource = (CraftResource) reader.ReadEncodedInt();
+            }
         }
     }
 

@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Mobiles;
 using Server.Commands;
+using Server.Misc;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
+using SkillCheck = Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Engines.Craft
 {
@@ -266,7 +269,7 @@ namespace Server.Engines.Craft
         private static Type[] m_ColoredItemTable = new[]
         {
             typeof(BaseWeapon), typeof(BaseArmor), typeof(BaseClothing),
-            typeof(BaseJewel)
+            typeof(BaseJewel), typeof(BaseContainer)
         };
 
         private static Type[] m_ColoredResourceTable = new[]
@@ -786,12 +789,15 @@ namespace Server.Engines.Craft
         }
 
         public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int mark, ref double quality,
+            ref int craftSkill,
             ref bool allRequiredSkills)
         {
-            return CheckSkills(from, typeRes, craftSystem, ref mark, ref quality, ref allRequiredSkills, true);
+            return CheckSkills(from, typeRes, craftSystem, ref mark, ref quality, ref craftSkill, ref allRequiredSkills,
+                true);
         }
 
         public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int mark, ref double quality,
+            ref int craftSkill,
             ref bool allRequiredSkills, bool gainSkills)
         {
             var craftSkillRequired = GetCraftSkillRequired(from, typeRes, craftSystem);
@@ -801,6 +807,7 @@ namespace Server.Engines.Craft
             var resource = CraftResources.GetFromType(typeRes);
             var resQuality = CraftResources.GetQuality(resource);
 
+            craftSkill = craftSkillRequired;
             quality = resQuality;
 
             if (exceptionalChance > Utility.RandomDouble() &&
@@ -950,7 +957,8 @@ namespace Server.Engines.Craft
             };
         }
 
-        public void CompleteCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+        public void CompleteCraft(int mark, double quality, int craftSkill, bool makersMark, Mobile from,
+            CraftSystem craftSystem,
             Type typeRes,
             BaseTool tool, CustomCraft customCraft)
         {
@@ -998,11 +1006,13 @@ namespace Server.Engines.Craft
 
             var ignored1 = 1;
             var ignored2 = 1.0;
+            var ignored3 = 0;
             var endmark = 1;
 
             var allRequiredSkills = true;
 
-            if (CheckSkills(from, typeRes, craftSystem, ref ignored1, ref ignored2, ref allRequiredSkills))
+            if (CheckSkills(from, typeRes, craftSystem, ref ignored1, ref ignored2, ref ignored3,
+                ref allRequiredSkills))
             {
                 // Resource
                 int resHue = 0;
@@ -1093,7 +1103,23 @@ namespace Server.Engines.Craft
                         );
                     }
 
-                    //from.PlaySound( 0x57 );
+                    if (mark == 2)
+                    {
+                        from.SendSuccessMessage("You make an exceptional item and put it in your pack.");
+
+                        var craftSkillRequiredForFame = 130;
+                        from.FireHook(h => h.OnCraftSkillRequiredForFame(from, ref craftSkillRequiredForFame));
+
+                        if (craftSkill >= craftSkillRequiredForFame)
+                        {
+                            from.SendSuccessMessage("This masterpiece will make you famous around the world!");
+                            Titles.AwardFame(from, 100, true);
+                        }
+                    }
+                    else
+                    {
+                        from.SendSuccessMessage("You create the item and place it in your pack.");
+                    }
                 }
 
                 if (num == 0)
@@ -1206,6 +1232,7 @@ namespace Server.Engines.Craft
 
                     var mark = 1;
                     var quality = 1.0;
+                    var craftSkill = 0;
                     var allRequiredSkills = true;
 
                     CraftContext context = m_CraftSystem.GetContext(m_From);
@@ -1216,6 +1243,7 @@ namespace Server.Engines.Craft
                         m_CraftSystem,
                         ref mark,
                         ref quality,
+                        ref craftSkill,
                         ref allRequiredSkills,
                         false
                     );
@@ -1248,7 +1276,8 @@ namespace Server.Engines.Craft
 
                     if (makersMark && context.MarkOption == CraftMarkOption.PromptForMark)
                     {
-                        m_From.SendGump(new QueryMakersMarkGump(mark, quality, m_From, m_CraftItem, m_CraftSystem,
+                        m_From.SendGump(new QueryMakersMarkGump(mark, quality, craftSkill, m_From, m_CraftItem,
+                            m_CraftSystem,
                             m_TypeRes,
                             m_Tool));
                     }
@@ -1257,7 +1286,8 @@ namespace Server.Engines.Craft
                         if (context.MarkOption == CraftMarkOption.DoNotMark)
                             makersMark = false;
 
-                        m_CraftItem.CompleteCraft(mark, quality, makersMark, m_From, m_CraftSystem, m_TypeRes, m_Tool,
+                        m_CraftItem.CompleteCraft(mark, quality, craftSkill, makersMark, m_From, m_CraftSystem,
+                            m_TypeRes, m_Tool,
                             null);
                     }
                 }
