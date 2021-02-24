@@ -77,6 +77,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
             Item item);
 
+        public void OnCraftSkillRequiredForFame(Mobile from, ref int craftSkillRequiredForFame);
+
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar);
     }
 }

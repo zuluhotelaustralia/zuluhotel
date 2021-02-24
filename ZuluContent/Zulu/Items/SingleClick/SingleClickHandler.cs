@@ -69,6 +69,8 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var isExceptional = false;
             if (item is BaseArmor armor && armor.Mark == ArmorQuality.Exceptional)
                 isExceptional = true;
+            else if (item is BaseContainer container && container.Mark == ContainerQuality.Exceptional)
+                isExceptional = true;
             else if (item is BaseWeapon weapon && weapon.Mark == WeaponQuality.Exceptional)
                 isExceptional = true;
             return isExceptional ? "Exceptional " : "";
@@ -83,6 +85,8 @@ namespace ZuluContent.Zulu.Items.SingleClick
                 itemName = CraftResources.GetName(weapon.Resource);
             else if (item is BaseJewel jewel)
                 itemName = CraftResources.GetName(jewel.Resource);
+            else if (item is BaseContainer container)
+                itemName = CraftResources.GetName(container.Resource);
             return itemName + " ";
         }
 

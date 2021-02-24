@@ -1,5 +1,6 @@
 using System;
 using Server;
+
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
 namespace ZuluContent.Configuration
 {
@@ -7,7 +8,7 @@ namespace ZuluContent.Configuration
     {
         public readonly AlchemySettings Normal;
         public readonly AlchemySettings Plus;
-        
+
         protected AlchemyConfiguration()
         {
             const string baseDir = "Data/Crafting";
@@ -15,7 +16,7 @@ namespace ZuluContent.Configuration
             Plus = ZhConfig.DeserializeJsonConfig<AlchemySettings>($"{baseDir}/alchemyplus.json");
         }
     }
-    
+
     public record AlchemySettings
     {
         public SkillName MainSkill { get; init; }

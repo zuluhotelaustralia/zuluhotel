@@ -1,36 +1,39 @@
 namespace Server.Items
 {
-    [Flipable( 0x1541, 0x1542 )]
+    [Flipable(0x1541, 0x1542)]
     public class BodySash : BaseMiddleTorso
     {
+        public override int InitMinHits => 70;
+
+        public override int InitMaxHits => 70;
 
         [Constructible]
-public BodySash() : this( 0 )
+        public BodySash() : this(0)
         {
         }
 
 
         [Constructible]
-public BodySash( int hue ) : base( 0x1541, hue )
+        public BodySash(int hue) : base(0x1541, hue)
         {
             Weight = 1.0;
         }
 
         [Constructible]
-public BodySash( Serial serial ) : base( serial )
+        public BodySash(Serial serial) : base(serial)
         {
         }
 
-        public override void Serialize( IGenericWriter writer )
+        public override void Serialize(IGenericWriter writer)
         {
-            base.Serialize( writer );
+            base.Serialize(writer);
 
-            writer.Write( (int) 0 ); // version
+            writer.Write((int) 0); // version
         }
 
-        public override void Deserialize( IGenericReader reader )
+        public override void Deserialize(IGenericReader reader)
         {
-            base.Deserialize( reader );
+            base.Deserialize(reader);
 
             int version = reader.ReadInt();
         }

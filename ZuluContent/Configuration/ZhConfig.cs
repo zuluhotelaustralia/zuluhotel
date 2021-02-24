@@ -15,7 +15,7 @@ namespace Server
         public static MessagingConfiguration Messaging => Get<MessagingConfiguration>();
         public static ResourceConfiguration Resources => Get<ResourceConfiguration>();
         public static AlchemyConfiguration Alchemy => Get<AlchemyConfiguration>();
-        
+
         private static readonly Dictionary<Type, object> Cache = new();
 
         // ReSharper disable once UnusedMember.Global
@@ -29,9 +29,10 @@ namespace Server
             Add<MessagingConfiguration, MessagingConfiguration>();
             Add<ResourceConfiguration, ResourceConfiguration>();
             Add<AlchemyConfiguration, AlchemyConfiguration>();
-            
+
             stopwatch.Stop();
-            Console.WriteLine($"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
+            Console.WriteLine(
+                $"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
         }
 
         public static bool Add<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType>
@@ -50,10 +51,11 @@ namespace Server
             if (!Add<TTargetType, TInstanceType>())
                 Cache[typeof(TTargetType)] = BaseSingleton<TInstanceType>.Instance;
         }
-        
-        public static T Get<T>() where T : BaseSingleton<T> {
-            
-            if (Cache.TryGetValue(typeof(T), out var value) && value is T singleton) {
+
+        public static T Get<T>() where T : BaseSingleton<T>
+        {
+            if (Cache.TryGetValue(typeof(T), out var value) && value is T singleton)
+            {
                 return singleton;
             }
 
@@ -64,7 +66,7 @@ namespace Server
         {
             var path = Path.Combine(Core.BaseDirectory, configFile);
             Console.Write($"\tDeserializeJsonConfig<{typeof(T).Name}>: loading {path} ... ");
-            
+
             if (!File.Exists(path))
             {
                 throw new FileLoadException($"DeserializeJsonConfig<{typeof(T).Name}>: {path} was not found!");
@@ -81,5 +83,4 @@ namespace Server
             return config;
         }
     }
-
 }

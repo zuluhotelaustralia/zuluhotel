@@ -86,7 +86,7 @@ namespace Server.Misc
             bank.DropItem(MakeNewbie(new Feather(1000)));
             bank.DropItem(MakeNewbie(new BoltOfCloth(1000)));
             bank.DropItem(MakeNewbie(new BlankScroll(1000)));
-            bank.DropItem(MakeNewbie(new Hides(1000)));
+            bank.DropItem(MakeNewbie(new Hide(1000)));
             bank.DropItem(MakeNewbie(new Bandage(1000)));
             bank.DropItem(MakeNewbie(new Bottle(1000)));
             bank.DropItem(MakeNewbie(new Log(1000)));
@@ -185,7 +185,7 @@ namespace Server.Misc
 
         private static void AddShoes(Mobile m)
         {
-            EquipItem(new Shoes(Utility.RandomYellowHue()), true);
+            EquipItem(new Shoes(), true);
         }
 
         private static Mobile CreateMobile(Account a)
@@ -1050,9 +1050,7 @@ namespace Server.Misc
                             shoes.Delete();
                     }
 
-                    int hue = Utility.RandomYellowHue();
-
-                    EquipItem(new Boots(hue));
+                    EquipItem(new Boots());
 
                     EquipItem(new SkinningKnife());
                     break;

@@ -1,4 +1,3 @@
-
 using Server.Network;
 using ZuluContent.Zulu.Items.SingleClick;
 
@@ -9,7 +8,7 @@ namespace Server.Configurations
     {
         public readonly int SuccessHue;
         public readonly int FailureHue;
-        
+
         private record MessagingSettings
         {
             public int SuccessHue { get; init; }
@@ -28,7 +27,7 @@ namespace Server.Configurations
 
             SuccessHue = config.SuccessHue;
             FailureHue = config.FailureHue;
-            
+
             ObjectPropertyList.Enabled = config.ObjectPropertyList;
             Mobile.VisibleDamageType = config.VisibleDamage ? VisibleDamageType.Related : VisibleDamageType.None;
             Mobile.GuildClickMessage = config.GuildClickMessage;
@@ -36,6 +35,5 @@ namespace Server.Configurations
             IncomingEntityPackets.SingleClickProps = config.SingleClickProps;
             SingleClickHandler.StaffRevealedMagicItems = config.StaffRevealMagicItems;
         }
-        
     }
 }

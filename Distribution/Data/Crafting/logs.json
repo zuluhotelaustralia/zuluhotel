@@ -17,7 +17,7 @@
   },
   "Entries": [
     {
-      "Name": "log",
+      "Name": "",
       "ResourceType": "Log",
       "HarvestSkillRequired": 0.0,
       "CraftSkillRequired": 0.0,
@@ -26,7 +26,7 @@
       "Quality": 1.0
     },
     {
-      "Name": "Pinetree log",
+      "Name": "Pinetree",
       "ResourceType": "PinetreeLog",
       "HarvestSkillRequired": 50.0,
       "CraftSkillRequired": 15.0,
@@ -35,7 +35,7 @@
       "Quality": 1.05
     },
     {
-      "Name": "Cherry log",
+      "Name": "Cherry",
       "ResourceType": "CherryLog",
       "HarvestSkillRequired": 55.0,
       "CraftSkillRequired": 28.0,
@@ -44,7 +44,7 @@
       "Quality": 1.1
     },
     {
-      "Name": "Oak log",
+      "Name": "Oak",
       "ResourceType": "OakLog",
       "HarvestSkillRequired": 60.0,
       "CraftSkillRequired": 39.0,
@@ -53,7 +53,7 @@
       "Quality": 1.15
     },
     {
-      "Name": "Purple Passion log",
+      "Name": "Purple Passion",
       "ResourceType": "PurplePassionLog",
       "HarvestSkillRequired": 65.0,
       "CraftSkillRequired": 50.0,
@@ -62,7 +62,7 @@
       "Quality": 1.2
     },
     {
-      "Name": "Golden Reflections log",
+      "Name": "Golden Reflections",
       "ResourceType": "GoldenReflectionsLog",
       "HarvestSkillRequired": 70.0,
       "CraftSkillRequired": 59.0,
@@ -71,7 +71,7 @@
       "Quality": 1.25
     },
     {
-      "Name": "Jade log",
+      "Name": "Jade",
       "ResourceType": "JadeLog",
       "HarvestSkillRequired": 75.0,
       "CraftSkillRequired": 68.0,
@@ -80,7 +80,7 @@
       "Quality": 1.3
     },
     {
-      "Name": "Darkwood log",
+      "Name": "Darkwood",
       "ResourceType": "DarkwoodLog",
       "HarvestSkillRequired": 75.0,
       "CraftSkillRequired": 77.0,
@@ -89,7 +89,7 @@
       "Quality": 1.35
     },
     {
-      "Name": "Stonewood log",
+      "Name": "Stonewood",
       "ResourceType": "StonewoodLog",
       "HarvestSkillRequired": 80.0,
       "CraftSkillRequired": 84.0,
@@ -98,7 +98,7 @@
       "Quality": 1.4
     },
     {
-      "Name": "Sun log",
+      "Name": "Sun",
       "ResourceType": "SunLog",
       "HarvestSkillRequired": 85.0,
       "CraftSkillRequired": 91.0,
@@ -107,7 +107,7 @@
       "Quality": 1.45
     },
     {
-      "Name": "Swamp log",
+      "Name": "Swamp",
       "ResourceType": "SwampLog",
       "HarvestSkillRequired": 90.0,
       "CraftSkillRequired": 98.0,
@@ -116,7 +116,7 @@
       "Quality": 1.5
     },
     {
-      "Name": "Stardust log",
+      "Name": "Stardust",
       "ResourceType": "StardustLog",
       "HarvestSkillRequired": 95.0,
       "CraftSkillRequired": 105.0,
@@ -125,7 +125,7 @@
       "Quality": 1.55
     },
     {
-      "Name": "Silverleaf log",
+      "Name": "Silverleaf",
       "ResourceType": "SilverleafLog",
       "HarvestSkillRequired": 100.0,
       "CraftSkillRequired": 110.0,
@@ -134,7 +134,7 @@
       "Quality": 1.6
     },
     {
-      "Name": "Storm Teal log",
+      "Name": "Storm Teal",
       "ResourceType": "StormTealLog",
       "HarvestSkillRequired": 105.0,
       "CraftSkillRequired": 114.0,
@@ -143,7 +143,7 @@
       "Quality": 1.65
     },
     {
-      "Name": "Emerald log",
+      "Name": "Emerald",
       "ResourceType": "EmeraldLog",
       "HarvestSkillRequired": 110.0,
       "CraftSkillRequired": 118.0,
@@ -152,7 +152,7 @@
       "Quality": 1.7
     },
     {
-      "Name": "Blood log",
+      "Name": "Blood",
       "ResourceType": "BloodLog",
       "HarvestSkillRequired": 115.0,
       "CraftSkillRequired": 122.0,
@@ -161,7 +161,7 @@
       "Quality": 1.75
     },
     {
-      "Name": "Hardranger log",
+      "Name": "Hardranger",
       "ResourceType": "HardrangerLog",
       "HarvestSkillRequired": 65.0,
       "CraftSkillRequired": 65.0,
@@ -170,7 +170,7 @@
       "Quality": 1.28
     },
     {
-      "Name": "Crystal log",
+      "Name": "Crystal",
       "ResourceType": "CrystalLog",
       "HarvestSkillRequired": 120.0,
       "CraftSkillRequired": 125.0,
@@ -179,7 +179,7 @@
       "Quality": 1.8
     },
     {
-      "Name": "Gauntlet log",
+      "Name": "Gauntlet",
       "ResourceType": "GauntletLog",
       "HarvestSkillRequired": 95.0,
       "CraftSkillRequired": 95.0,
@@ -188,7 +188,7 @@
       "Quality": 1.48
     },
     {
-      "Name": "Doom log",
+      "Name": "Doom",
       "ResourceType": "DoomLog",
       "HarvestSkillRequired": 125.0,
       "CraftSkillRequired": 128.0,
@@ -197,7 +197,7 @@
       "Quality": 1.9
     },
     {
-      "Name": "Bloodhorse log",
+      "Name": "Bloodhorse",
       "ResourceType": "BloodhorseLog",
       "HarvestSkillRequired": 127.0,
       "CraftSkillRequired": 127.0,
@@ -206,7 +206,7 @@
       "Quality": 1.82
     },
     {
-      "Name": "Zulu log",
+      "Name": "Zulu",
       "ResourceType": "ZuluLog",
       "HarvestSkillRequired": 130.0,
       "CraftSkillRequired": 130.0,
@@ -215,7 +215,7 @@
       "Quality": 2.0
     },
     {
-      "Name": "Darkness log",
+      "Name": "Darkness",
       "ResourceType": "DarknessLog",
       "HarvestSkillRequired": 140.0,
       "CraftSkillRequired": 140.0,
@@ -224,7 +224,7 @@
       "Quality": 2.05
     },
     {
-      "Name": "Elven log",
+      "Name": "Elven",
       "ResourceType": "ElvenLog",
       "HarvestSkillRequired": 145.0,
       "CraftSkillRequired": 145.0,
@@ -233,7 +233,7 @@
       "Quality": 2.1
     },
     {
-      "Name": "Young Oak log",
+      "Name": "Young Oak",
       "ResourceType": "YoungOakLog",
       "HarvestSkillRequired": 0.0,
       "CraftSkillRequired": 100.0,

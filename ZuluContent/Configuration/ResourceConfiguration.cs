@@ -9,11 +9,14 @@ namespace Server.Configurations
 
         public readonly LogSettings Logs;
 
+        public readonly HideSettings Hides;
+
         protected ResourceConfiguration()
         {
             const string baseDir = "Data/Crafting";
             Ores = ZhConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/ores.json");
             Logs = ZhConfig.DeserializeJsonConfig<LogSettings>($"{baseDir}/logs.json");
+            Hides = ZhConfig.DeserializeJsonConfig<HideSettings>($"{baseDir}/hides.json");
         }
     }
 
@@ -93,6 +96,27 @@ namespace Server.Configurations
             public double VeinChance { get; init; }
             public int Hue { get; init; }
             public double Quality { get; init; }
+        }
+    }
+
+    public record HideSettings
+    {
+        public HideEntry[] Entries { get; init; }
+
+        public record HideEntry
+        {
+            public string Name { get; init; }
+            public Type ResourceType { get; init; }
+            public double CraftSkillRequired { get; init; }
+            public int Hue { get; init; }
+            public double Quality { get; init; }
+            public EnchantmentEntry[] Enchantments { get; init; }
+        }
+
+        public record EnchantmentEntry
+        {
+            public Type EnchantmentType { get; init; }
+            public int EnchantmentValue { get; init; }
         }
     }
 }

@@ -379,11 +379,6 @@ namespace Server.Engines.Harvest
                     number = 1008124;
                     name = item.ItemData.Name;
                 }
-                else if (item is BaseShoes)
-                {
-                    number = 1008124;
-                    name = item.ItemData.Name;
-                }
                 else if (item is TreasureMap)
                 {
                     number = 1008125;
