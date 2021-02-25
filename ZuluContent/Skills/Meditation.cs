@@ -9,7 +9,7 @@ namespace Server.SkillHandlers
 {
     class Meditation
     {
-        private static readonly TimeSpan DefaultDelay = SkillCheck.Configs[SkillName.Meditation].DelayTimespan;
+        private static readonly TimeSpan DefaultDelay = ZhConfig.Skills.Entries[SkillName.Meditation].DelayTimespan;
         
         public static void Initialize()
         {

@@ -64,7 +64,7 @@ namespace Server.SkillHandlers
             if(m.CanHearGhosts)
                 TryContactUndead(m);
 
-            return SkillCheck.Configs[SkillName.SpiritSpeak].DelayTimespan;
+            return ZhConfig.Skills.Entries[SkillName.SpiritSpeak].DelayTimespan;
         }
 
         private static async void TryContactUndead(Mobile m)

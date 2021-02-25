@@ -15,7 +15,10 @@ namespace Server
         public static MessagingConfiguration Messaging => Get<MessagingConfiguration>();
         public static ResourceConfiguration Resources => Get<ResourceConfiguration>();
         public static AlchemyConfiguration Alchemy => Get<AlchemyConfiguration>();
-        
+        public static LootConfiguration Loot => Get<LootConfiguration>();
+        public static SkillConfiguration Skills => Get<SkillConfiguration>();
+
+
         private static readonly Dictionary<Type, object> Cache = new();
 
         // ReSharper disable once UnusedMember.Global
@@ -26,12 +29,25 @@ namespace Server
             stopwatch.Start();
             Console.WriteLine("Starting load of Zuluhotel configurations.");
 
-            Add<MessagingConfiguration, MessagingConfiguration>();
-            Add<ResourceConfiguration, ResourceConfiguration>();
-            Add<AlchemyConfiguration, AlchemyConfiguration>();
-            
+            Add<MessagingConfiguration>();
+            Add<ResourceConfiguration>();
+            Add<AlchemyConfiguration>();
+            Add<LootConfiguration>();
+            Add<SkillConfiguration>();
+
             stopwatch.Stop();
             Console.WriteLine($"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
+        }
+        
+        public static bool Add<TTargetType>() where TTargetType : BaseSingleton<TTargetType>
+        {
+            if (!Cache.ContainsKey(typeof(TTargetType)))
+            {
+                Cache.Add(typeof(TTargetType), BaseSingleton<TTargetType>.Instance);
+                return true;
+            }
+
+            return false;
         }
 
         public static bool Add<TTargetType, TInstanceType>() where TInstanceType : BaseSingleton<TInstanceType>

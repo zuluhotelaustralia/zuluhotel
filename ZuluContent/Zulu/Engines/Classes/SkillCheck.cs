@@ -1,75 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Text.Encodings.Web;
-using System.Text.Json;
 using Server;
-using Server.Json;
 using Server.Mobiles;
-using Server.Text;
 
 namespace Scripts.Zulu.Engines.Classes
 {
     public static class SkillCheck
     {
-        public const int MaxStatCap = 60000;
-        public const int StatCap = 1300;
-
-        public record StatAdvancement
-        {
-            public int Chance { get; init; }
-            public uint PointsAmount { get; init; }
-            public uint PointsSides { get; init; }
-            public int PointsBonus { get; init; }
-        }
-
-        public record SkillConfig
-        {
-            public double Delay { get; init; }
-
-            public TimeSpan DelayTimespan => TimeSpan.FromSeconds(Delay);
-            public StatAdvancement StrAdvancement { get; init; }
-            public StatAdvancement DexAdvancement { get; init; }
-            public StatAdvancement IntAdvancement { get; init; }
-            public int DefaultPoints { get; init; }
-        }
-
-        public static void Initialize()
-        {
-            // this is here so our static constructor gets called
-        }
-
-        public static readonly IReadOnlyDictionary<SkillName, SkillConfig> Configs;
-
-        static SkillCheck()
-        {
-            var path = Path.Join(Core.BaseDirectory, "Data/skillconfigs.json");
-            
-            Console.WriteLine($"SkillCheck Configuration: loading skillconfigs.json from {path}");
-
-            if (!File.Exists(path))
-            {
-                throw new DataException($"SkillCheck Configuration: {path} was not found, cannot continue!");
-            }
-
-            Configs = JsonConfig.Deserialize<Dictionary<SkillName, SkillConfig>>(path);
-            if (Configs == null)
-            {
-                throw new DataException($"SkillCheck Configuration: failed to deserialize {path}!");
-            }
-            
-            Console.WriteLine($"SkillCheck Configuration: loaded {Configs.Count} entries ");
-        }
-
-
         public static bool ShilCheckSkill(this Mobile mobile, SkillName skill, int? difficulty = null,
             int? points = null)
         {
             return (mobile as IShilCheckSkill)?.CheckSkill(
                 skill, 
                 difficulty ?? -1,
-                points ?? Configs[skill].DefaultPoints
+                points ?? ZhConfig.Skills.Entries[skill].DefaultPoints
             ) == true;
         }
 
@@ -232,7 +175,7 @@ namespace Scripts.Zulu.Engines.Classes
 
         public static void AwardPoints(PlayerMobile from, SkillName skillName, int points)
         {
-            var config = Configs[skillName];
+            var config = ZhConfig.Skills.Entries[skillName];
 
             Skill skill = from.Skills[skillName];
 
@@ -285,12 +228,12 @@ namespace Scripts.Zulu.Engines.Classes
 
             if (current != initial)
             {
-                if (current > MaxStatCap)
-                    current = MaxStatCap;
+                if (current > ZhConfig.Skills.MaxStatCap)
+                    current = ZhConfig.Skills.MaxStatCap;
 
                 // TODO: Add cmd level check
-                if (current > StatCap)
-                    current = StatCap;
+                if (current > ZhConfig.Skills.StatCap)
+                    current = ZhConfig.Skills.StatCap;
 
                 skill.BaseFixedPoint = current;
             }
@@ -324,12 +267,12 @@ namespace Scripts.Zulu.Engines.Classes
 
             if (current != initial)
             {
-                if (current > MaxStatCap)
-                    current = MaxStatCap;
+                if (current > ZhConfig.Skills.MaxStatCap)
+                    current = ZhConfig.Skills.MaxStatCap;
 
                 // TODO: Add cmd level check
-                if (current > StatCap)
-                    current = StatCap;
+                if (current > ZhConfig.Skills.StatCap)
+                    current = ZhConfig.Skills.StatCap;
 
                 if (stat == StatType.Str)
                     from.RawStr = current / 10;

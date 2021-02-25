@@ -53,7 +53,7 @@ namespace Server.Scripts.Engines.Loot
             var backpack = new BackpackOfHolding();
             e.Mobile.AddToBackpack(backpack);
             
-            LootConfig.Tables.TryGetValue(tableId, out var table);
+            ZhConfig.Loot.Tables.TryGetValue(tableId, out var table);
 
             var watch = new Stopwatch();
             watch.Start();
@@ -84,7 +84,7 @@ namespace Server.Scripts.Engines.Loot
 
             protected override void OnTarget(Mobile from, object targeted)
             {
-                if (!LootConfig.Tables.TryGetValue(m_Table, out var lootTable))
+                if (!ZhConfig.Loot.Tables.TryGetValue(m_Table, out var lootTable))
                     return;
                 
                 if (targeted is Container container)
