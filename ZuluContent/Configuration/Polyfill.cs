@@ -14,5 +14,6 @@ namespace Server.Configurations
     {
         public static OreSettings OreConfiguration => ZhConfig.Resources.Ores;
         public static LogSettings LogConfiguration => ZhConfig.Resources.Logs;
+        public static HideSettings HideConfiguration => ZhConfig.Resources.Hides;
     }
 }

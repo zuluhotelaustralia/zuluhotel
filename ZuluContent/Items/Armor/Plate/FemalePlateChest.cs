@@ -3,8 +3,6 @@ namespace Server.Items
     [FlipableAttribute(0x1c04, 0x1c05)]
     public class FemalePlateChest : BaseArmor
     {
-        public override bool AllowMaleWearer => false;
-
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;

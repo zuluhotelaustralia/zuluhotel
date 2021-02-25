@@ -1,44 +1,44 @@
 namespace Server.Items
 {
     [Flipable]
-	public class LeatherGloves : BaseArmor
-	{
-		public override int InitMinHits{ get{ return 30; } }
-		public override int InitMaxHits{ get{ return 40; } }
+    public class LeatherGloves : BaseArmor
+    {
+        public override int InitMinHits => 70;
 
-		public override int DefaultStrReq{ get{ return 10; } }
+        public override int InitMaxHits => 70;
 
-		public override int ArmorBase{ get{ return 13; } }
+        public override int ArmorBase => 13;
 
-		public override ArmorMaterialType MaterialType{ get{ return ArmorMaterialType.Leather; } }
-		public override CraftResource DefaultResource{ get{ return CraftResource.RegularLeather; } }
+        public override double DefaultMagicEfficiencyPenalty => 1.0;
 
-		public override ArmorMeditationAllowance DefMedAllowance{ get{ return ArmorMeditationAllowance.All; } }
+        public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
+
+        public override CraftResource DefaultResource => CraftResource.RegularLeather;
 
 
-		[Constructible]
-public LeatherGloves() : base( 0x13C6 )
-		{
-			Weight = 1.0;
-		}
+        [Constructible]
+        public LeatherGloves() : base(0x13C6)
+        {
+            Weight = 1.0;
+        }
 
-		[Constructible]
-public LeatherGloves( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public LeatherGloves(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

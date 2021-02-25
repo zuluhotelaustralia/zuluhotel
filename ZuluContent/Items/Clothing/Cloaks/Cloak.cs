@@ -3,34 +3,37 @@ namespace Server.Items
     [Flipable]
     public class Cloak : BaseCloak
     {
+        public override int InitMinHits => 70;
+
+        public override int InitMaxHits => 70;
 
         [Constructible]
-public Cloak() : this( 0 )
+        public Cloak() : this(0)
         {
         }
 
 
         [Constructible]
-public Cloak( int hue ) : base( 0x1515, hue )
+        public Cloak(int hue) : base(0x1515, hue)
         {
             Weight = 5.0;
         }
 
         [Constructible]
-public Cloak( Serial serial ) : base( serial )
+        public Cloak(Serial serial) : base(serial)
         {
         }
 
-        public override void Serialize( IGenericWriter writer )
+        public override void Serialize(IGenericWriter writer)
         {
-            base.Serialize( writer );
+            base.Serialize(writer);
 
-            writer.Write( (int) 0 ); // version
+            writer.Write((int) 0); // version
         }
 
-        public override void Deserialize( IGenericReader reader )
+        public override void Deserialize(IGenericReader reader)
         {
-            base.Deserialize( reader );
+            base.Deserialize(reader);
 
             int version = reader.ReadInt();
         }
