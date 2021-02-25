@@ -92,7 +92,9 @@ namespace Server
             if (config == null)
                 throw new DataException($"DeserializeJsonConfig<{typeof(T).Name}>: failed to deserialize {path}!");
 
-            Console.WriteLine("Done.");
+            Utility.PushColor(ConsoleColor.Green);
+            Console.WriteLine("done.");
+            Utility.PopColor();
 
             return config;
         }

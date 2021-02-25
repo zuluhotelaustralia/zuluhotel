@@ -11,11 +11,11 @@ namespace Server.Items
     {
         public override uint PotionStrength { get; set; } = 1;
 
-        protected BaseTotem(int itemId) : base(itemId,  PotionEffect.Totem)
+        public BaseTotem(int itemId) : base(itemId,  PotionEffect.Totem)
         {
         }
 
-        protected BaseTotem(Serial serial) : base(serial)
+        public BaseTotem(Serial serial) : base(serial)
         {
         }
         
@@ -75,6 +75,18 @@ namespace Server.Items
                 PlayDrinkEffect(from);
                 Consume();
             }
+        }
+        
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+            int version = reader.ReadInt();
         }
         
     }
