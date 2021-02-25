@@ -192,6 +192,11 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public virtual void OnCraftSkillRequiredForFame(Mobile from, ref int craftSkillRequiredForFame)
+        {
+        }
+
+
         public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
             Item item)
         {

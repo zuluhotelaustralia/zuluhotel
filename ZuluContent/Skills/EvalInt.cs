@@ -19,7 +19,7 @@ namespace Server.SkillHandlers
 
             m.SendLocalizedMessage(500906); // What do you wish to evaluate?
 
-            return SkillCheck.Configs[SkillName.EvalInt].DelayTimespan;
+            return ZhConfig.Skills.Entries[SkillName.EvalInt].DelayTimespan;
         }
 
         private class InternalTarget : Target

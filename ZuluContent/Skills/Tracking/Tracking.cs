@@ -32,8 +32,7 @@ namespace Server.SkillHandlers
         {
             if (m is PlayerMobile from)
             {
-                if (from.CheckSkill(SkillName.Tracking, -1,
-                    Configs[SkillName.Anatomy].DefaultPoints) == false)
+                if (from.CheckSkill(SkillName.Tracking, -1, ZhConfig.Skills.Entries[SkillName.Anatomy].DefaultPoints) == false)
                 {
                     from.SendAsciiMessage(MessageFailureHue, "You fail to find any creatures nearby");
                 }
@@ -50,7 +49,7 @@ namespace Server.SkillHandlers
             }
 
 
-            return Configs[SkillName.Tracking].DelayTimespan;
+            return ZhConfig.Skills.Entries[SkillName.Tracking].DelayTimespan;
         }
 
         public class TrackingInfo

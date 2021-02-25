@@ -63,7 +63,7 @@ namespace Scripts.Zulu.Packets
 
             var item = World.FindItem(serial);
 
-            if ( !ClilocList.Entries.TryGetValue(label, out var text))
+            if ( !ZhConfig.Messaging.Cliloc.TryGetValue(label, out var text))
             {
                 length = NetworkCompression.Compress(input, output);
                 return;
@@ -148,13 +148,13 @@ namespace Scripts.Zulu.Packets
             var affix = isAffix ? reader.ReadAscii() : string.Empty;
             var args = isAffix ? reader.ReadBigUni() : reader.ReadLittleUni();
             
-            if (!ClilocList.Entries.TryGetValue(label, out var clilocEntry))
+            if (!ZhConfig.Messaging.Cliloc.TryGetValue(label, out var clilocEntry))
             {
                 length = NetworkCompression.Compress(input, output);
                 return;
             }
             
-            var text = ClilocList.Translate(clilocEntry, args);
+            var text = ClilocList.Translate(ZhConfig.Messaging.Cliloc, label, args);
             
             if (isAffix)
             {

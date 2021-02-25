@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Regions;
 using Server.Network;
 using Server.Multis;
@@ -12,6 +13,7 @@ using Server.Engines.Spawners;
 using Server.Guilds;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
+using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
@@ -920,10 +922,12 @@ namespace Server.Mobiles
 
                 if (hides != 0)
                 {
-                    if (HideType == HideType.Regular)
-                        corpse.DropItem(new Hides(hides));
-
-                    from.SendLocalizedMessage(500471); // You skin it, and the hides are now in the corpse.
+                    var hideType = CraftResources.GetTypeFromResource((CraftResource) (101 + HideType));
+                    if (hideType != null)
+                    {
+                        from.PlaceInBackpack(hideType.CreateInstance<BaseHide>(hides));
+                        from.SendSuccessMessage("You place the items in your pack.");
+                    }
                 }
 
                 corpse.Carved = true;
@@ -2981,7 +2985,7 @@ namespace Server.Mobiles
             if (Summoned || m_Spawning)
                 return;
 
-            if (LootTable == null || !LootConfig.Tables.TryGetValue(LootTable, out var table))
+            if (LootTable == null || !ZhConfig.Loot.Tables.TryGetValue(LootTable, out var table))
                 return;
 
 

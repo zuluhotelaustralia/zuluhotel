@@ -16,6 +16,7 @@
   
   <ItemGroup>
 
+    <PackageReference Include="FastExpressionCompiler" Version="3.0.0-preview-07" />
     <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.5" />
@@ -37,6 +38,10 @@
 
   <ItemGroup>
     <Folder Include="Network\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Items\Body Parts\PentagramPiece.cs" />
   </ItemGroup>
 
   <PropertyGroup>

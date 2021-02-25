@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using FastExpressionCompiler;
 using Scripts.Zulu.Engines.Classes;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -76,7 +77,7 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         private static T GetDelegate<T>(Expression<T> expr) where T : Delegate
         {
-            return expr.Compile();
+            return expr.CompileFast();
             // TODO: expr.ToString() should be an comparer using a hashing function
             // var exprKey = expr.ToString();
             //
@@ -88,8 +89,17 @@ namespace ZuluContent.Zulu.Engines.Magic
             // return func;
         }
 
+        public static void FireOrderedHook(this IEnchanted enchanted, Expression<Action<IEnchantmentHook>> action)
+        {
+            FireOrdered(enchanted.Enchantments.Values.Values, action);
+        }
 
-        public static void FireHook(this Mobile m, Expression<Action<IEnchantmentHook>> action)
+        public static void FireOrderedHook(this EnchantmentDictionary dictionary, Expression<Action<IEnchantmentHook>> action)
+        {
+            FireOrdered(dictionary.Values.Values, action);
+        }
+
+        public static void FireOrderedHook(this Mobile m, Expression<Action<IEnchantmentHook>> action)
         {
             var hooks = new List<IEnchantmentHook>(
                 m.Items
@@ -104,20 +114,11 @@ namespace ZuluContent.Zulu.Engines.Magic
             if (m is IZuluClassed {ZuluClass: { }} classed)
                 hooks.Add(classed.ZuluClass);
 
-            Fire(hooks, action);
+            FireOrdered(hooks, action);
         }
+        
 
-        public static void FireHook(this IEnchanted enchanted, Expression<Action<IEnchantmentHook>> action)
-        {
-            Fire(enchanted.Enchantments.Values.Values, action);
-        }
-
-        public static void FireHook(this EnchantmentDictionary dictionary, Expression<Action<IEnchantmentHook>> action)
-        {
-            Fire(dictionary.Values.Values, action);
-        }
-
-        private static void Fire(IEnumerable<IEnchantmentHook> values, Expression<Action<IEnchantmentHook>> expr)
+        private static void FireOrdered(IEnumerable<IEnchantmentHook> values, Expression<Action<IEnchantmentHook>> expr)
         {
             var action = GetDelegate(expr);
             var methodCallExpr = (MethodCallExpression) expr.Body;
@@ -157,14 +158,78 @@ namespace ZuluContent.Zulu.Engines.Magic
             if (spellReflectHook != null)
                 action(spellReflectHook);
         }
+        
+        public static void FireHook(this Mobile m, Action<IEnchantmentHook> action)
+        {
+            var hooks = new List<IEnchantmentHook>(
+                m.Items
+                    .OfType<BaseEquippableItem>()
+                    .SelectMany(e => e.Enchantments.Values.Values)
+                    .ToList()
+            );
 
-        public static IEnumerable<TResult> FireHook<TResult>(
+            if (m is IEnchanted enchanted)
+                hooks.AddRange(enchanted.Enchantments.Values.Values);
+
+            if (m is IZuluClassed {ZuluClass: { }} classed)
+                hooks.Add(classed.ZuluClass);
+
+            Fire(hooks, action);
+        }
+        
+        public static void FireHook(this IEnchanted enchanted, Action<IEnchantmentHook> action)
+        {
+            Fire(enchanted.Enchantments.Values.Values, action);
+        }
+
+        public static void FireHook(this EnchantmentDictionary dictionary, Action<IEnchantmentHook> action)
+        {
+            Fire(dictionary.Values.Values, action);
+        }
+
+
+        private static void Fire(IEnumerable<IEnchantmentHook> values, Action<IEnchantmentHook> action)
+        {
+            values
+                .Where(x => !(x is MagicImmunity || x is PoisonProtection || x is SpellReflect))
+                .ToList()
+                .ForEach(action);
+
+            var magicImmunityHook = values
+                .Where(x => x is MagicImmunity {Value: > 0})
+                .Cast<MagicImmunity>()
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault();
+
+            var poisonProtectionHook = values
+                .Where(x => x is PoisonProtection {Value: > 0})
+                .Cast<PoisonProtection>()
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault();
+
+            var spellReflectHook = values
+                .Where(x => x is SpellReflect {Value: > 0})
+                .Cast<SpellReflect>()
+                .OrderByDescending(x => x.Value)
+                .FirstOrDefault();
+
+            if (magicImmunityHook != null)
+                action(magicImmunityHook);
+
+            if (poisonProtectionHook != null)
+                action(poisonProtectionHook);
+
+            if (spellReflectHook != null)
+                action(spellReflectHook);
+        }
+
+        public static IEnumerable<TResult> FireOrderedHook<TResult>(
             this Mobile m,
             Expression<Func<IEnchantmentHook, TResult>> func
         )
             where TResult : unmanaged, IComparable, IEquatable<TResult>
         {
-            return Fire(
+            return FireOrdered(
                 m.Items
                     .OfType<BaseEquippableItem>()
                     .SelectMany(e => e.Enchantments.Values.Values),
@@ -172,16 +237,16 @@ namespace ZuluContent.Zulu.Engines.Magic
             );
         }
 
-        public static IEnumerable<TResult> FireHook<TResult>(
+        public static IEnumerable<TResult> FireOrderedHook<TResult>(
             this EnchantmentDictionary dictionary,
             Expression<Func<IEnchantmentHook, TResult>> action
         )
             where TResult : unmanaged, IComparable, IEquatable<TResult>
         {
-            return Fire(dictionary.Values.Values, action);
+            return FireOrdered(dictionary.Values.Values, action);
         }
 
-        private static IEnumerable<TResult> Fire<TResult>(
+        private static IEnumerable<TResult> FireOrdered<TResult>(
             IEnumerable<IEnchantmentValue> values,
             Expression<Func<IEnchantmentHook, TResult>> expr
         )

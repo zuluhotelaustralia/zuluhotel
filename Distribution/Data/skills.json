@@ -1,0 +1,568 @@
+{
+  "MaxStatCap": 60000,
+  "StatCap": 1300,
+  "Entries": {
+    "Anatomy": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 200
+    },
+    "Fencing": {
+      "Delay": 0,
+      "StrAdvancement": {
+        "Chance": 40,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "DexAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 20
+    },
+    "Healing": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 30,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "IntAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 100
+    },
+    "Macing": {
+      "Delay": 0,
+      "StrAdvancement": {
+        "Chance": 65,
+        "PointsAmount": 4,
+        "PointsSides": 7,
+        "PointsBonus": 3
+      },
+      "DefaultPoints": 20
+    },
+    "Parry": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 1,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "DexAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 2,
+        "PointsSides": 3,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 20
+    },
+    "Swords": {
+      "Delay": 0,
+      "StrAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 0
+      },
+      "DexAdvancement": {
+        "Chance": 40,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 20
+    },
+    "Tactics": {
+      "Delay": 0,
+      "DexAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 2,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 15
+    },
+    "Wrestling": {
+      "Delay": 0,
+      "StrAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 4,
+        "PointsSides": 7,
+        "PointsBonus": 4
+      },
+      "DexAdvancement": {
+        "Chance": 30,
+        "PointsAmount": 7,
+        "PointsSides": 8,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 20
+    },
+    "Alchemy": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 100,
+        "PointsAmount": 4,
+        "PointsSides": 5,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 200
+    },
+    "EvalInt": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 90,
+        "PointsAmount": 5,
+        "PointsSides": 6,
+        "PointsBonus": 20
+      },
+      "DefaultPoints": 200
+    },
+    "Inscribe": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 600
+    },
+    "ItemID": {
+      "Delay": 4,
+      "IntAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 5,
+        "PointsSides": 5,
+        "PointsBonus": 15
+      },
+      "DefaultPoints": 200
+    },
+    "Magery": {
+      "Delay": 0,
+      "IntAdvancement": {
+        "Chance": 100,
+        "PointsAmount": 5,
+        "PointsSides": 8,
+        "PointsBonus": 18
+      },
+      "DefaultPoints": 300
+    },
+    "MagicResist": {
+      "Delay": 0,
+      "IntAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 15
+      },
+      "DefaultPoints": 50
+    },
+    "Meditation": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 5,
+        "PointsSides": 5,
+        "PointsBonus": 15
+      },
+      "DefaultPoints": 250
+    },
+    "SpiritSpeak": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 100,
+        "PointsAmount": 5,
+        "PointsSides": 8,
+        "PointsBonus": 35
+      },
+      "DefaultPoints": 20
+    },
+    "AnimalLore": {
+      "Delay": 5,
+      "DefaultPoints": 250
+    },
+    "AnimalTaming": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 25
+    },
+    "Archery": {
+      "Delay": 0,
+      "StrAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "DexAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 8
+      },
+      "DefaultPoints": 20
+    },
+    "Camping": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 15,
+        "PointsAmount": 1,
+        "PointsSides": 8,
+        "PointsBonus": 0
+      },
+      "IntAdvancement": {
+        "Chance": 10,
+        "PointsAmount": 1,
+        "PointsSides": 6,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 200
+    },
+    "Cooking": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "IntAdvancement": {
+        "Chance": 30,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 300
+    },
+    "Fishing": {
+      "Delay": 5,
+      "DexAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 8
+      },
+      "DefaultPoints": 200
+    },
+    "Tracking": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 15
+      },
+      "IntAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 4,
+        "PointsSides": 2,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 200
+    },
+    "Veterinary": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 20,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 100
+    },
+    "ArmsLore": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "IntAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 200
+    },
+    "Blacksmith": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 30
+    },
+    "Carpentry": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 3,
+        "PointsSides": 6,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 100
+    },
+    "Fletching": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 8
+      },
+      "DexAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 3,
+        "PointsSides": 6,
+        "PointsBonus": 8
+      },
+      "DefaultPoints": 100
+    },
+    "Lumberjacking": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 100
+    },
+    "Mining": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 100
+    },
+    "Tailoring": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 50
+    },
+    "Tinkering": {
+      "Delay": 10,
+      "StrAdvancement": {
+        "Chance": 10,
+        "PointsAmount": 2,
+        "PointsSides": 4,
+        "PointsBonus": 10
+      },
+      "DexAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 100
+    },
+    "Begging": {
+      "Delay": 20,
+      "IntAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 200
+    },
+    "Cartography": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 5
+      },
+      "DefaultPoints": 200
+    },
+    "Discordance": {
+      "Delay": 10,
+      "DefaultPoints": 200
+    },
+    "Herding": {
+      "Delay": 0,
+      "DefaultPoints": 100
+    },
+    "Musicianship": {
+      "Delay": 15,
+      "DexAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 3,
+        "PointsSides": 5,
+        "PointsBonus": 8
+      },
+      "IntAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 20
+    },
+    "Peacemaking": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 15,
+        "PointsAmount": 1,
+        "PointsSides": 8,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 200
+    },
+    "Provocation": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 50,
+        "PointsAmount": 4,
+        "PointsSides": 10,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 20
+    },
+    "TasteID": {
+      "Delay": 10,
+      "IntAdvancement": {
+        "Chance": 85,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 15
+      },
+      "DefaultPoints": 200
+    },
+    "Hiding": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 70,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 200
+    },
+    "Lockpicking": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 12
+      },
+      "DefaultPoints": 100
+    },
+    "Poisoning": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 5,
+        "PointsSides": 6,
+        "PointsBonus": 40
+      },
+      "IntAdvancement": {
+        "Chance": 60,
+        "PointsAmount": 5,
+        "PointsSides": 4,
+        "PointsBonus": 30
+      },
+      "DefaultPoints": 200
+    },
+    "RemoveTrap": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 90,
+        "PointsAmount": 5,
+        "PointsSides": 8,
+        "PointsBonus": 15
+      },
+      "DefaultPoints": 200
+    },
+    "Snooping": {
+      "Delay": 5,
+      "DexAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 4,
+        "PointsSides": 6,
+        "PointsBonus": 10
+      },
+      "DefaultPoints": 200
+    },
+    "Stealing": {
+      "Delay": 15,
+      "DexAdvancement": {
+        "Chance": 90,
+        "PointsAmount": 3,
+        "PointsSides": 4,
+        "PointsBonus": 9
+      },
+      "DefaultPoints": 200
+    },
+    "Stealth": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 100,
+        "PointsAmount": 6,
+        "PointsSides": 6,
+        "PointsBonus": 45
+      },
+      "DefaultPoints": 200
+    },
+    "DetectHidden": {
+      "Delay": 10,
+      "DexAdvancement": {
+        "Chance": 80,
+        "PointsAmount": 3,
+        "PointsSides": 5,
+        "PointsBonus": 10
+      },
+      "IntAdvancement": {
+        "Chance": 40,
+        "PointsAmount": 3,
+        "PointsSides": 6,
+        "PointsBonus": 0
+      },
+      "DefaultPoints": 200
+    },
+    "Forensics": {
+      "Delay": 15,
+      "IntAdvancement": {
+        "Chance": 90,
+        "PointsAmount": 4,
+        "PointsSides": 4,
+        "PointsBonus": 12
+      },
+      "DefaultPoints": 200
+    }
+  }
+}

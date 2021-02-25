@@ -100,7 +100,9 @@ namespace Server.Mobiles
                 VirtualArmor = 75,
                 ActiveSpeed = 0.05,
                 PassiveSpeed = 0.2,
-                CanFly = true
+                CanFly = true,
+                HideType = HideType.GoldenDragon,
+                Hides = 5
             });
         }
 

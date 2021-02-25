@@ -3,39 +3,27 @@ using System.Data;
 using System.IO;
 using Server.Json;
 
+// ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
 namespace Server.Configurations
 {
-    public static class ResourceConfiguration
+    public partial class ResourceConfiguration : BaseSingleton<ResourceConfiguration>
     {
-        public static OreConfig OreConfiguration { get; private set; }
+        public readonly OreSettings Ores;
 
-        public static LogConfig LogConfiguration { get; private set; }
+        public readonly LogSettings Logs;
 
+        public readonly HideSettings Hides;
 
-        public static void Configure()
+        protected ResourceConfiguration()
         {
-            OreConfiguration = LoadResourceConfig<OreConfig>("ores");
-            LogConfiguration = LoadResourceConfig<LogConfig>("logs");
-        }
-
-        private static T LoadResourceConfig<T>(string configFile)
-        {
-            var path = Path.Combine(Core.BaseDirectory, $"Data/Crafting/{configFile}.json");
-            Console.Write($"Ore Configuration: loading {path}... ");
-
-            var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
-            var config = JsonConfig.Deserialize<T>(path, options);
-
-            if (config == null)
-                throw new DataException($"Ore Configuration: failed to deserialize {path}!");
-
-            Console.WriteLine("Done.");
-
-            return config;
+            const string baseDir = "Data/Crafting";
+            Ores = ZhConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/ores.json");
+            Logs = ZhConfig.DeserializeJsonConfig<LogSettings>($"{baseDir}/logs.json");
+            Hides = ZhConfig.DeserializeJsonConfig<HideSettings>($"{baseDir}/hides.json");
         }
     }
 
-    public record OreConfig
+    public record OreSettings
     {
         public int BankWidth { get; init; }
         public int BankHeight { get; init; }
@@ -79,7 +67,7 @@ namespace Server.Configurations
         }
     }
 
-    public record LogConfig
+    public record LogSettings
     {
         public int BankWidth { get; init; }
         public int BankHeight { get; init; }
@@ -111,6 +99,27 @@ namespace Server.Configurations
             public double VeinChance { get; init; }
             public int Hue { get; init; }
             public double Quality { get; init; }
+        }
+    }
+
+    public record HideSettings
+    {
+        public HideEntry[] Entries { get; init; }
+
+        public record HideEntry
+        {
+            public string Name { get; init; }
+            public Type ResourceType { get; init; }
+            public double CraftSkillRequired { get; init; }
+            public int Hue { get; init; }
+            public double Quality { get; init; }
+            public EnchantmentEntry[] Enchantments { get; init; }
+        }
+
+        public record EnchantmentEntry
+        {
+            public Type EnchantmentType { get; init; }
+            public int EnchantmentValue { get; init; }
         }
     }
 }

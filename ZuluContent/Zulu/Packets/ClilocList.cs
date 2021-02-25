@@ -10,18 +10,8 @@ namespace Scripts.Zulu.Packets
 {
     public static class ClilocList
     {
-
-        public static IReadOnlyDictionary<int, string> Entries { get; private set; }
-
-        public static void Initialize()
+        public static SortedDictionary<int, string> Load(string path)
         {
-            Entries = Load("enu");
-        }
-
-        private static SortedDictionary<int, string> Load(string language)
-        {
-            var path = Core.FindDataFile($"Cliloc.{language}");
-
             using var bin = new BinaryReader(new PeekableStream(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)));
             var stream = (PeekableStream)bin.BaseStream;
             bin.ReadInt32();
@@ -42,16 +32,15 @@ namespace Scripts.Zulu.Packets
                 bin.Read(buf, 0, length);
                 entries.Add(number, Encoding.UTF8.GetString(buf, 0, length));
             }
-            
-            Console.WriteLine($"Cliloc loaded: {path}");
-
-            // JsonConfig.Serialize(Core.BaseDirectory + "/Cliloc.json", entries);
-
             return entries;
         }
 
-        public static string Translate(string baseCliloc, string arg = "", bool capitalize = false)
+        public static string Translate(IReadOnlyDictionary<int, string> entries, int label, string arg = "", bool capitalize = false)
         {
+            if (!entries.TryGetValue(label, out var baseCliloc))
+                return string.Empty;
+            
+            
             while (arg.Length != 0 && arg[0] == '\t')
                 arg = arg.Remove(0, 1);
 
@@ -91,13 +80,13 @@ namespace Scripts.Zulu.Packets
                     if (a[0] == '#')
                     {
                         if (int.TryParse(a.Substring(1), out int id1))
-                            arguments[index] = Entries.ContainsKey(id1) ? Entries[id1] : string.Empty;
+                            arguments[index] = ZhConfig.Messaging.Cliloc.ContainsKey(id1) ? entries[id1] : string.Empty;
                         else
                             arguments[index] = a;
                     }
                     else if (has_arguments && int.TryParse(a, out int clil))
                     {
-                        if (Entries.TryGetValue(clil, out string value) && !string.IsNullOrEmpty(value))
+                        if (entries.TryGetValue(clil, out string value) && !string.IsNullOrEmpty(value))
                             arguments[index] = value;
                     }
                 }

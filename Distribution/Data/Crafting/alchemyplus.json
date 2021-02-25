@@ -345,7 +345,7 @@
           "Message": "You do not have enough Daemon Bones to make that."
         },
         {
-          "ItemType": "Server.Items.TrollHides",
+          "ItemType": "Server.Items.TrollHide",
           "Name": "Troll Hides",
           "Amount": 6,
           "Message": "You do not have enough Troll Hides to make that."

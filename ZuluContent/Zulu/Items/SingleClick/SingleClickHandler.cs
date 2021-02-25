@@ -20,7 +20,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static string GetItemDesc(Item item)
         {
-            return ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc) ? TextInfo.ToTitleCase(desc) : null;
+            return ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc) ? TextInfo.ToTitleCase(desc) : null;
         }
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
@@ -69,6 +69,8 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var isExceptional = false;
             if (item is BaseArmor armor && armor.Mark == ArmorQuality.Exceptional)
                 isExceptional = true;
+            else if (item is BaseContainer container && container.Mark == ContainerQuality.Exceptional)
+                isExceptional = true;
             else if (item is BaseWeapon weapon && weapon.Mark == WeaponQuality.Exceptional)
                 isExceptional = true;
             return isExceptional ? "Exceptional " : "";
@@ -83,6 +85,8 @@ namespace ZuluContent.Zulu.Items.SingleClick
                 itemName = CraftResources.GetName(weapon.Resource);
             else if (item is BaseJewel jewel)
                 itemName = CraftResources.GetName(jewel.Resource);
+            else if (item is BaseContainer container)
+                itemName = CraftResources.GetName(container.Resource);
             return itemName + " ";
         }
 
@@ -95,7 +99,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static bool Validate(Mobile m, Item item)
         {
-            if (!ClilocList.Entries.TryGetValue(item.LabelNumber, out var desc))
+            if (!ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc))
                 return false;
 
             if (item is IMagicItem magicItem && (StaffRevealedMagicItems && m.AccessLevel == AccessLevel.Player) &&

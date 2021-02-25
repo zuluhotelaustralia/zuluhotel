@@ -165,7 +165,7 @@ namespace Server.Scripts.Engines.Loot
 
     public static class LootGenerator
     {
-        public static void MakeLoot(Container container, LootTable table, int itemLevel, double itemChance)
+        public static int MakeLoot(Container container, LootTable table, int itemLevel, double itemChance)
         {
             var items = table.Roll(itemLevel, itemChance)
                 .Select(lootItem =>
@@ -194,6 +194,8 @@ namespace Server.Scripts.Engines.Loot
 
             foreach (var item in items)
                 container.AddItem(item);
+
+            return items.Count();
         }
 
         public static bool MakeItemMagical(LootItem item)
