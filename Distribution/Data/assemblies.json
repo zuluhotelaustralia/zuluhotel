@@ -16,5 +16,6 @@
   "Microsoft.Bcl.AsyncInterfaces.dll",
   "MessagePack.Annotations.dll",
   "MessagePack.dll",
+  "FastExpressionCompiler.dll",
   "ZuluContent.dll"
 ]

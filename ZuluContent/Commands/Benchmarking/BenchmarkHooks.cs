@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -27,6 +28,7 @@ namespace Server.Commands
             elapsed += RunBench(
                 "EnchantmentDictionary.Set",
                 iterations, 
+                null,
                 (i, enchanted) => enchanted.Enchantments.Set((DexBonus e) => e.Value = i)
             );
 
@@ -34,27 +36,30 @@ namespace Server.Commands
             
             elapsed += RunBench(
                 "EnchantmentDictionary.Get",
-                iterations, 
+                iterations,
+                null,
                 (_, enchanted) => enchanted.Enchantments.Get((DexBonus e) => e.Value)
             );
 
             await Timer.Pause(1_000);
-            
+
             elapsed += RunBench(
                 "EnchantmentHooks.FireOrderedHook",
-                iterations, 
-                (i, enchanted) =>
+                iterations,
+                subject => Enumerable.Range(0, 10).ToList().ForEach(i => subject.Enchantments.Set((HealingBonus e) => e.Value = i)),
+                (i, enchanted) => 
                 {
-                    var val = 10.0;
+                    var val = 10.0 * i;
                     (enchanted as Mobile).FireOrderedHook(h => h.OnHeal(enchanted, enchanted, null, ref val));
                 });
 
             elapsed += RunBench(
                 "EnchantmentHooks.FireUnorderedHook",
                 iterations, 
+                subject => Enumerable.Range(0, 10).ToList().ForEach(i => subject.Enchantments.Set((HealingBonus e) => e.Value = i)),
                 (i, enchanted) =>
                 {
-                    var val = 10.0;
+                    var val = 10.0 * i;
                     (enchanted as Mobile).FireHook(h => h.OnHeal(enchanted, enchanted, null, ref val));
                 });
 
@@ -62,16 +67,18 @@ namespace Server.Commands
         }
 
 
-        private static TimeSpan RunBench(string name, uint iterations, Action<int, BaseCreature> benchFunc)
+        private static TimeSpan RunBench(string name, uint iterations, Action<BaseCreature> setupFunc = null, Action<int, BaseCreature> benchFunc = null)
         {
             var subject = new Rat();
             
             var watch = new Stopwatch();
             watch.Start();
-            
+
+            setupFunc?.Invoke(subject);
+
             for (var i = 0; i < iterations; i++)
             {
-                benchFunc(i, subject);
+                benchFunc?.Invoke(i, subject);
             }
 
             watch.Stop();

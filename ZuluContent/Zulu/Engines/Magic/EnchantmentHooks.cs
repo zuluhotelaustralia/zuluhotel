@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using FastExpressionCompiler;
 using Scripts.Zulu.Engines.Classes;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -76,7 +77,7 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         private static T GetDelegate<T>(Expression<T> expr) where T : Delegate
         {
-            return expr.Compile();
+            return expr.CompileFast();
             // TODO: expr.ToString() should be an comparer using a hashing function
             // var exprKey = expr.ToString();
             //
