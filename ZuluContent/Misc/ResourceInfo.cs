@@ -173,15 +173,15 @@ namespace Server.Items
         /// </summary>
         public static CraftResource GetFromType(Type resourceType)
         {
-            if (m_TypeTable == null)
+            if (resourceType == null || !m_TypeTable.ContainsKey(resourceType))
                 return CraftResource.None;
+            
+            var obj = m_TypeTable[resourceType];
 
-            object obj = m_TypeTable[resourceType];
+            if (obj is CraftResource resource)
+                return resource;
 
-            if (!(obj is CraftResource))
-                return CraftResource.None;
-
-            return (CraftResource) obj;
+            return CraftResource.None;
         }
 
         /// <summary>

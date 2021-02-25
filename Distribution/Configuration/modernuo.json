@@ -1,5 +1,7 @@
 {
   "dataDirectories": [
+    "/app/client/",
+    "C:\\Program Files (x86)\\Electronic Arts\\Ultima Online Classic",
     "D:\\Program Files (x86)\\Electronic Arts\\Ultima Online Classic"
   ],
   "listeners": [
