@@ -7,13 +7,6 @@ using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
-    public enum FortifyResult
-    {
-        Success,
-        Invalid,
-        NoSkill
-    }
-
     public class Fortify
     {
         public Fortify()
