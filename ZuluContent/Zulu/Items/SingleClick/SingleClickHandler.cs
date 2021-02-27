@@ -20,7 +20,9 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static string GetItemDesc(Item item)
         {
-            return ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc) ? TextInfo.ToTitleCase(desc) : null;
+            return ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc)
+                ? TextInfo.ToTitleCase(desc)
+                : null;
         }
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
@@ -48,7 +50,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
 
             var text = item is ICraftable craftable && craftable.PlayerConstructed
-                ? $"{GetCraftedExceptional(item as Item)}{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}"
+                ? $"{GetCraftedFortified(item as Item)}{GetCraftedExceptional(item as Item)}{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}"
                 : $"{prefix}{GetItemDesc(item as Item)}{suffix}";
 
             return text;
@@ -64,35 +66,42 @@ namespace ZuluContent.Zulu.Items.SingleClick
             SendResponse(m, item, text);
         }
 
+        private static string GetCraftedFortified(Item item)
+        {
+            return item is BaseHat {Fortified: HatFortification.Fortified} ? "Fortified " : "";
+        }
+
         private static string GetCraftedExceptional(Item item)
         {
             var isExceptional = false;
-            if (item is BaseArmor armor && armor.Mark == ArmorQuality.Exceptional)
+            if (item is BaseArmor {Mark: ArmorQuality.Exceptional})
                 isExceptional = true;
-            else if (item is BaseContainer container && container.Mark == ContainerQuality.Exceptional)
+            else if (item is BaseClothing {Mark: ClothingQuality.Exceptional})
                 isExceptional = true;
-            else if (item is BaseWeapon weapon && weapon.Mark == WeaponQuality.Exceptional)
+            else if (item is BaseContainer {Mark: ContainerQuality.Exceptional})
+                isExceptional = true;
+            else if (item is BaseWeapon {Mark: WeaponQuality.Exceptional})
                 isExceptional = true;
             return isExceptional ? "Exceptional " : "";
         }
 
         private static string GetCraftedResource(Item item)
         {
-            var itemName = "";
+            var resName = "";
             if (item is BaseArmor armor)
-                itemName = CraftResources.GetName(armor.Resource);
+                resName = CraftResources.GetName(armor.Resource);
             else if (item is BaseWeapon weapon)
-                itemName = CraftResources.GetName(weapon.Resource);
+                resName = CraftResources.GetName(weapon.Resource);
             else if (item is BaseJewel jewel)
-                itemName = CraftResources.GetName(jewel.Resource);
+                resName = CraftResources.GetName(jewel.Resource);
             else if (item is BaseContainer container)
-                itemName = CraftResources.GetName(container.Resource);
-            return itemName + " ";
+                resName = CraftResources.GetName(container.Resource);
+            return resName.Length > 0 ? resName + " " : resName;
         }
 
         private static string GetCraftedBy(Item item)
         {
-            return item is ICraftable craftable && craftable.Crafter != null
+            return item is ICraftable {Crafter: not null} craftable
                 ? $" [Crafted by {craftable.Crafter.Name}]"
                 : string.Empty;
         }

@@ -15,6 +15,7 @@ namespace ZuluContent.Zulu.Items
         public EnchantmentDictionary Enchantments
         {
             get => m_Enchantments ??= new EnchantmentDictionary();
+            set => m_Enchantments = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
