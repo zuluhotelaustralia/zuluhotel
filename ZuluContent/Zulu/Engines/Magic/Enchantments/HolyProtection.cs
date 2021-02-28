@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
@@ -28,6 +29,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             if (damageType == ElementalType.Holy)
                 damage -= (int) (damage * ((double) Value / 100));
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            HolyProtection other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
 
     public class HolyProtectionInfo : EnchantmentInfo

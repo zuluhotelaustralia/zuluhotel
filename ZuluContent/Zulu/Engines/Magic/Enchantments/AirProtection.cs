@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
@@ -33,6 +34,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             }
                 
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            AirProtection other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
 
     public class AirProtectionInfo : EnchantmentInfo

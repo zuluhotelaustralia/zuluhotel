@@ -29,6 +29,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             bonus += 6 * Value;
             toMod -= 5 * Value;
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            HarvestBonus other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
 
     public class HarvestBonusInfo : EnchantmentInfo

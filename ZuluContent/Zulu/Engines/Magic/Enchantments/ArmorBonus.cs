@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -23,6 +24,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [CallPriority(1)]
         public override bool GetShouldDye() => Value > ArmorBonusType.None;
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            ArmorBonus other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
     
     public class ArmorBonusInfo : EnchantmentInfo

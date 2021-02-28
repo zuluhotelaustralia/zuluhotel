@@ -259,7 +259,7 @@ namespace Server.Items
         {
             CraftResourceInfo info = GetInfo(resource);
 
-            return info == null ? 0 : info.Hue;
+            return info?.Hue ?? 0;
         }
 
         /// <summary>
@@ -276,21 +276,21 @@ namespace Server.Items
         {
             CraftResourceInfo info = GetInfo(resource);
 
-            return info == null ? null : info.Enchantments;
+            return info?.Enchantments;
         }
 
         public static double GetQuality(CraftResource resource)
         {
             CraftResourceInfo info = GetInfo(resource);
 
-            return info == null ? 1.0 : info.Quality;
+            return info?.Quality ?? 1.0;
         }
 
         public static double GetCraftSkillRequired(CraftResource resource)
         {
             CraftResourceInfo info = GetInfo(resource);
 
-            return info == null ? 0.0 : info.CraftSkillRequired;
+            return info?.CraftSkillRequired ?? 0.0;
         }
 
         public static Type GetTypeFromResource(CraftResource resource)

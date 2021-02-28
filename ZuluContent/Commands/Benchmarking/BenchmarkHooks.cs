@@ -44,17 +44,7 @@ namespace Server.Commands
             await Timer.Pause(1_000);
 
             elapsed += RunBench(
-                "EnchantmentHooks.FireOrderedHook",
-                iterations,
-                subject => Enumerable.Range(0, 10).ToList().ForEach(i => subject.Enchantments.Set((HealingBonus e) => e.Value = i)),
-                (i, enchanted) => 
-                {
-                    var val = 10.0 * i;
-                    (enchanted as Mobile).FireOrderedHook(h => h.OnHeal(enchanted, enchanted, null, ref val));
-                });
-
-            elapsed += RunBench(
-                "EnchantmentHooks.FireUnorderedHook",
+                "EnchantmentHooks.Fire",
                 iterations, 
                 subject => Enumerable.Range(0, 10).ToList().ForEach(i => subject.Enchantments.Set((HealingBonus e) => e.Value = i)),
                 (i, enchanted) =>

@@ -39,6 +39,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             if (Chance > Utility.RandomDouble() && Effects.TryGetValue(EffectHitType, out var ability))
                 ability.OnHit(attacker, defender, ref damage);
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            EffectHit other => ReferenceEquals(this, other) 
+                ? 0 
+                : other.EffectHitType == EffectHitType 
+                    ? Chance.CompareTo(other.Chance) 
+                    : EffectHitType.CompareTo(other.EffectHitType),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
 
     public class EffectHitInfo : EnchantmentInfo

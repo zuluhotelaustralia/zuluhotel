@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -17,6 +18,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             get => Cursed ? -m_Value : m_Value;
             set => m_Value = value;
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            DurabilityBonus other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
 
     public class DurabilityBonusInfo : EnchantmentInfo

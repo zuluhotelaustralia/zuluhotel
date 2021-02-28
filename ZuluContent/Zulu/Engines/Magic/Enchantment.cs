@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using MessagePack;
 using Server;
 using Server.Engines.Craft;
@@ -6,18 +8,17 @@ using Server.Engines.Magic;
 using Server.Items;
 using Server.Spells;
 using Server.Network;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using ZuluContent.Zulu.Engines.Magic.Hooks;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 using Server.Mobiles;
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
-    public abstract class Enchantment<TEnchantmentInfo> : IEnchantmentValue
+    [MessagePackObject]
+    public abstract class Enchantment<TEnchantmentInfo> : IComparable, IEnchantmentValue
         where TEnchantmentInfo : EnchantmentInfo, new()
     {
-        public static readonly TEnchantmentInfo EnchantmentInfo = new TEnchantmentInfo();
+        public static readonly TEnchantmentInfo EnchantmentInfo = new();
 
         [IgnoreMember] public virtual EnchantmentInfo Info => EnchantmentInfo;
 
@@ -28,14 +29,14 @@ namespace ZuluContent.Zulu.Engines.Magic
         [Key(4)] public CurseLevelType CurseLevel { get; set; }
 
         public virtual bool GetShouldDye() => Info.Hue != 0;
+        
+        [IgnoreMember]
+        public virtual EnchantmentDistinctBehaviour DistinctBehaviour => EnchantmentDistinctBehaviour.None;
 
         protected Enchantment(bool cursed = false)
         {
             Cursed = cursed;
-            if (cursed)
-                CurseLevel = CurseLevelType.Unrevealed;
-            else
-                CurseLevel = CurseLevelType.None;
+            CurseLevel = cursed ? CurseLevelType.Unrevealed : CurseLevelType.None;
         }
 
         protected virtual void NotifyMobile(Mobile above, string text)
@@ -210,5 +211,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)
         {
         }
+
+        public virtual int CompareTo(object obj) => Comparer<object>.Default.Compare(this, obj);
     }
 }

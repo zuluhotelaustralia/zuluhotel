@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
@@ -29,6 +30,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             if (damageType == ElementalType.Earth) 
                 damage -= (int) (damage * ((double) Value / 100));
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            EarthProtection other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
     
     public class EarthProtectionInfo : EnchantmentInfo

@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using Server.Spells;
@@ -23,6 +24,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             else
                 healAmount += healDelta;
         }
+        
+        public override int CompareTo(object obj) => obj switch
+        {
+            HealingBonus other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
     public class HealingBonusInfo : EnchantmentInfo
     {
