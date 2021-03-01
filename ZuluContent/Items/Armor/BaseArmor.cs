@@ -16,7 +16,8 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseArmor : BaseEquippableItem, IScissorable, ICraftable, IWearableDurability, IArmorRating
+    public abstract class BaseArmor : BaseEquippableItem, IScissorable, ICraftable, IWearableDurability, IArmorRating,
+        IRepairable
     {
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -142,10 +143,7 @@ namespace Server.Items
             }
         }
 
-        public double BaseArmorRatingScaled
-        {
-            get { return BaseArmorRating * ArmorScalar; }
-        }
+        public double BaseArmorRatingScaled => BaseArmorRating * ArmorScalar;
 
         public virtual double ArmorRating
         {
@@ -162,10 +160,7 @@ namespace Server.Items
             }
         }
 
-        public double ArmorRatingScaled
-        {
-            get { return ArmorRating * ArmorScalar; }
-        }
+        public double ArmorRatingScaled => ArmorRating * ArmorScalar;
 
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -473,7 +468,7 @@ namespace Server.Items
 
         public virtual double ScaleArmorByDurability(double armor)
         {
-            return armor * (m_HitPoints / MaxHitPoints);
+            return armor * ((double) HitPoints / (double) MaxHitPoints);
         }
 
         protected void Invalidate()

@@ -305,30 +305,10 @@ namespace Scripts.Zulu.Engines.Classes
                     mobile.ChestArmor as BaseArmor,
                 };
 
-                var magicPenalty = armour.Sum(a => a?.Enchantments.Get((MagicEfficiencyPenalty e) => e.Value) ?? 0);
-
-                // TODO: remove this when items have MagicEfficiencyPenalty properties
-                if (magicPenalty == 0)
-                    magicPenalty = armour.Sum(GetArmorMeditationValue) / 4;
-
-                return magicPenalty;
+                return armour.Sum(a => a?.Enchantments.Get((MagicEfficiencyPenalty e) => e.Value) ?? 0);
             }
 
             return 0;
-        }
-
-        private static double GetArmorMeditationValue(BaseArmor ar)
-        {
-            if (ar == null)
-                return 0.0;
-
-            switch (ar.MeditationAllowance)
-            {
-                default:
-                case ArmorMeditationAllowance.None: return ar.BaseArmorRatingScaled;
-                case ArmorMeditationAllowance.Half: return ar.BaseArmorRatingScaled / 2.0;
-                case ArmorMeditationAllowance.All: return 0.0;
-            }
         }
 
         #region Class bonus hooks
@@ -426,6 +406,14 @@ namespace Scripts.Zulu.Engines.Classes
             if (crafter is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter} cls})
             {
                 multiplier = (int) (multiplier * cls.Bonus);
+            }
+        }
+
+        public void OnArmsLoreBonus(Mobile crafter, ref double armsLoreValue)
+        {
+            if (crafter is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter} cls})
+            {
+                armsLoreValue = (int) (armsLoreValue * cls.Bonus);
             }
         }
 

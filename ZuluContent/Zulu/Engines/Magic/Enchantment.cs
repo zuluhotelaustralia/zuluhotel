@@ -126,6 +126,10 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
+        public virtual void OnArmsLoreBonus(Mobile crafter, ref double armsLoreValue)
+        {
+        }
+
         public virtual void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds)
         {
         }
