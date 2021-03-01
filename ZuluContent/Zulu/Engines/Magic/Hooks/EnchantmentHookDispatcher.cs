@@ -6,12 +6,18 @@ using System.Reflection;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
+using ZuluContent.Zulu.Utilities;
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
     public class EnchantmentHookDispatcher : DispatchProxy
     {
-        public static readonly Dictionary<string, Dictionary<Type, int>> HookPriorities;
+        // ReSharper disable once SuspiciousTypeConversion.Global
+        private static readonly ObjectPool<EnchantmentHookDispatcher> Pool = new(() =>
+            (EnchantmentHookDispatcher) Create<IEnchantmentHook, EnchantmentHookDispatcher>());
+
+        private static readonly Dictionary<string, Dictionary<Type, int>> HookPriorities;
+        private IEnumerable<IEnchantmentHook> Values { get; set; }
         
         static EnchantmentHookDispatcher()
         {
@@ -26,8 +32,12 @@ namespace ZuluContent.Zulu.Engines.Magic
                                 m.DeclaringType.GetGenericTypeDefinition() == typeof(Enchantment<>)
                             )
                         )
-                        .Select(m => (InterfaceMethod: map.InterfaceMethods[Array.IndexOf(map.TargetMethods, m)],
-                            HookMethod: m));
+                        .Select(m => 
+                            (
+                                InterfaceMethod: map.InterfaceMethods[Array.IndexOf(map.TargetMethods, m)],
+                                HookMethod: m
+                            )
+                        );
                 })
                 .GroupBy(x => x.InterfaceMethod).ToList();
             
@@ -55,35 +65,64 @@ namespace ZuluContent.Zulu.Engines.Magic
                 .FirstOrDefault()?.Priority ?? int.MaxValue;
         }
         
-        private IEnumerable<IEnchantmentHook> Values { get; set; }
-        
-        [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
-        public static IEnchantmentHook Create(IEnumerable<IEnchantmentHook> values = null)
-        {
-            var proxy = (EnchantmentHookDispatcher) Create<IEnchantmentHook, EnchantmentHookDispatcher>();
-            
-            proxy.Values = values ?? new List<IEnchantmentHook>();
-
-            return proxy as IEnchantmentHook;
-        }
-        
-        private static IOrderedEnumerable<IEnchantmentHook> OrderByPriority(IEnumerable<IEnchantmentHook> values,
-            string methodName)
+        private static IOrderedEnumerable<IEnchantmentHook> OrderByPriority(
+            IEnumerable<IEnchantmentHook> values,
+            string methodName
+        )
         {
             return values.OrderBy(kv =>
-                HookPriorities.ContainsKey(methodName) &&
                 HookPriorities[methodName].TryGetValue(kv.GetType(), out var priority)
                     ? priority
                     : -1
             );
         }
+
+        public EnchantmentHookDispatcher() : base()
+        {
+            
+        }
+        
+        private static readonly Dictionary<string, Dictionary<Type, bool>> HookImplementedMap = new();
+
+        private static bool IsOverridden(MethodInfo targetMethod, Type targetType)
+        {
+            if (!HookImplementedMap.ContainsKey(targetMethod.Name))
+                HookImplementedMap.TryAdd(targetMethod.Name, new Dictionary<Type, bool>());
+
+            var dict = HookImplementedMap[targetMethod.Name];
+            
+            if (dict.TryGetValue(targetType, out var implemented))
+            {
+                return implemented;
+            }
+
+            implemented = targetType.GetMethod(targetMethod.Name)?.DeclaringType == targetType;
+
+            dict.Add(targetType, implemented);
+            return implemented;
+        }
+
+        public static void Dispatch(IEnumerable<IEnchantmentHook> values, Action<IEnchantmentHook> action)
+        {
+            var dispatcher = Pool.Get();
+            dispatcher.Values = values;
+            action(dispatcher as IEnchantmentHook);
+            dispatcher.Values = null;
+            Pool.Return(dispatcher);
+        }
         
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
+            if (Values == null)
+                return null;
+            
             try
             {
-                foreach (var target in OrderByPriority(Values, targetMethod.Name)) 
+                var values = OrderByPriority(Values, targetMethod.Name);
+                foreach (var target in values)
+                {
                     targetMethod.Invoke(target, args);
+                }
             }
             catch (TargetInvocationException exc)
             {

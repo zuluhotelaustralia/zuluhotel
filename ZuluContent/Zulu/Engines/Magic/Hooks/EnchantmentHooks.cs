@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using FastExpressionCompiler;
 using Scripts.Zulu.Engines.Classes;
-using Scripts.Zulu.Utilities;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -16,6 +13,9 @@ namespace ZuluContent.Zulu.Engines.Magic
 {
     public static class EnchantmentHooks
     {
+        public static Action<IEnumerable<IEnchantmentHook>, Action<IEnchantmentHook>> Dispatcher { get; set; } =
+            EnchantmentHookDispatcher.Dispatch;
+        
         public static void FireHook(this Mobile m, Action<IEnchantmentHook> action)
         {
             var hooks = new List<IEnchantmentHook>(
@@ -78,7 +78,7 @@ namespace ZuluContent.Zulu.Engines.Magic
             if (spellReflectHook != null)
                 filtered.Add(spellReflectHook);
             
-            action(EnchantmentHookDispatcher.Create(filtered));
+            Dispatcher(filtered, action);
         }
     }
 }

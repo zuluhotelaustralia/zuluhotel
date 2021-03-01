@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using MessagePack;
 using Server;
@@ -61,14 +60,13 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public virtual void OnAdded(IEntity entity)
         {
-            if (Cursed && CurseLevel == CurseLevelType.Unrevealed && entity is IMagicItem item &&
-                item.Parent is Mobile mobile)
+            if (Cursed && CurseLevel == CurseLevelType.Unrevealed && entity is IMagicItem {Parent: Mobile mobile} item)
             {
                 CurseLevel = CurseLevelType.RevealedCantUnEquip;
                 mobile.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
                 mobile.PlaySound(0x1E1);
                 mobile.SendAsciiMessage(33,
-                    "That item is cursed, and reveals itself to be a " + GetMagicItemName(item));
+                    $"That item is cursed, and reveals itself to be a {GetMagicItemName(item)}");
             }
         }
 
