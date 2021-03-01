@@ -218,6 +218,7 @@ namespace Server.Engines.Craft
 
             MarkOption = true;
             Repair = true;
+            Fortify = true;
             CanEnhance = false;
         }
     }

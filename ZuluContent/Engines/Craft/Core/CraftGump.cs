@@ -102,6 +102,15 @@ namespace Server.Engines.Craft
             }
             // ****************************************
 
+            // Fortify option
+            if (craftSystem.Fortify)
+            {
+                AddButton(320, 432, 4005, 4007, GetButtonID(6, 8), GumpButtonType.Reply, 0);
+                AddHtml(355, 435, 150, 18, "<BASEFONT COLOR=#FFFFFF>FORTIFY ITEM</BASEFONT>", false,
+                    false); // FORTIFY ITEM
+            }
+            // ****************************************
+
             // Make amount
             AddImage(180, 302, 2443);
             AddTextEntry(190, 304, 30, 18, LabelHue, 0, context.CraftNumber.ToString());
@@ -651,6 +660,13 @@ namespace Server.Engines.Craft
                         {
                             if (system.CraftSubRes2.Init)
                                 From.SendGump(new CraftGump(From, system, Tool, null, CraftPage.PickResource2));
+
+                            break;
+                        }
+                        case 8: // Fortify item
+                        {
+                            if (system.Fortify)
+                                Fortify.Do(From, system, Tool);
 
                             break;
                         }

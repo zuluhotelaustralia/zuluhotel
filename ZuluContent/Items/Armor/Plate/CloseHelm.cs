@@ -1,6 +1,8 @@
+using ZuluContent.Zulu.Engines.Magic;
+
 namespace Server.Items
 {
-    public class CloseHelm : BaseArmor
+    public class CloseHelm : BaseArmor, IFortifiable
     {
         public override int InitMinHits => 100;
 

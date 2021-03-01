@@ -1,7 +1,9 @@
+using ZuluContent.Zulu.Engines.Magic;
+
 namespace Server.Items
 {
     [FlipableAttribute(0x13BB, 0x13C0)]
-    public class ChainCoif : BaseArmor
+    public class ChainCoif : BaseArmor, IFortifiable
     {
         public override int InitMinHits => 70;
 

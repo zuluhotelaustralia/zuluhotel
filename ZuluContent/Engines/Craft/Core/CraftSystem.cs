@@ -64,6 +64,8 @@ namespace Server.Engines.Craft
 
         public bool Repair { get; set; }
 
+        public bool Fortify { get; set; }
+
         public bool MarkOption { get; set; }
 
         public bool CanEnhance { get; set; }

@@ -1,7 +1,9 @@
+using ZuluContent.Zulu.Engines.Magic;
+
 namespace Server.Items
 {
     [FlipableAttribute(0x1db9, 0x1dba)]
-    public class LeatherCap : BaseArmor
+    public class LeatherCap : BaseArmor, IFortifiable
     {
         public override int InitMinHits => 70;
 

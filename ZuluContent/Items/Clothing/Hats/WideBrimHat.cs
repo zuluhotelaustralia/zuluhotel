@@ -6,6 +6,8 @@ namespace Server.Items
 
         public override int InitMaxHits => 70;
 
+        public override int ArmorBase => 2;
+
 
         [Constructible]
         public WideBrimHat() : this(0)

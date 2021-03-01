@@ -39,8 +39,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
                 .ToDictionary(k => k.enchantmentType, v => v.infoType);
         }
 
-        [Key(0)]
-        public Dictionary<int, IEnchantmentValue> Values { get; set; } = new();
+        [Key(0)] public Dictionary<int, IEnchantmentValue> Values { get; set; } = new();
 
         [Key(1)] public bool Identified { get; set; } = true;
 
@@ -68,7 +67,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             return null;
         }
 
-        private T Set<T>(T value) where T : class, IEnchantmentValue
+        public T Set<T>(T value) where T : class, IEnchantmentValue
         {
             Values.TryAdd(EnchantUnionMap[typeof(T)], value);
             return value;

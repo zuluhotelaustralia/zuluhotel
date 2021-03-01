@@ -62,7 +62,7 @@ namespace Server.Scripts.Engines.Loot
         {
             Type = t;
         }
-        
+
         public bool Is<T>() => Type.IsSubclassOf(typeof(T));
 
 
@@ -116,7 +116,7 @@ namespace Server.Scripts.Engines.Loot
                             weapon.EffectHitType = EffectHitType;
                             weapon.EffectHitTypeChance = EffectHitTypeChance;
                         }
-                        
+
                         weapon.MagicalWeaponType = MagicalWeaponType;
                         break;
                     case BaseArmor armor:
@@ -148,10 +148,11 @@ namespace Server.Scripts.Engines.Loot
                                 GetResistForProtectionLevel(ProtectionLevel)
                             );
                         }
+
                         break;
                 }
 
-                foreach (var (key, value) in magicItem.Enchantments.Values)
+                foreach (var (_, value) in magicItem.Enchantments.Values)
                 {
                     value.Cursed = Cursed;
                     value.CurseLevel = CurseLevelType.Unrevealed;
@@ -175,7 +176,7 @@ namespace Server.Scripts.Engines.Loot
                     return lootItem.Create();
                 })
                 // Group the items by id and whether they're stackable
-                .GroupBy(item => new { item.Stackable, item.ItemID })
+                .GroupBy(item => new {item.Stackable, item.ItemID})
                 // Flattens a collection containing many collections of the same type,
                 // i.e. List<List<Item>> becomes List<Item>
                 .SelectMany(group =>
@@ -185,7 +186,7 @@ namespace Server.Scripts.Engines.Loot
                     {
                         var item = group.First();
                         item.Amount = group.Sum(x => x.Amount);
-                        return new[] { item };
+                        return new[] {item};
                     }
 
                     // If this group of items is not stackable just return the entire group
@@ -248,6 +249,7 @@ namespace Server.Scripts.Engines.Loot
                             ApplyWeaponHitScript(item);
                             break;
                     }
+
                     break;
                 }
 
@@ -265,6 +267,7 @@ namespace Server.Scripts.Engines.Loot
                             ApplyArmorMod(item);
                             break;
                     }
+
                     break;
                 }
 
@@ -292,6 +295,7 @@ namespace Server.Scripts.Engines.Loot
                             ApplyMiscArmorMod(item);
                             break;
                     }
+
                     break;
                 }
 
@@ -318,6 +322,7 @@ namespace Server.Scripts.Engines.Loot
                             ApplyOnHitScript(item);
                             break;
                     }
+
                     break;
                 }
             }
@@ -391,7 +396,7 @@ namespace Server.Scripts.Engines.Loot
                 .OfType<CreatureType>()
                 .ToList()
                 .RandomElement();
-            
+
             item.CreatureProtection = creature;
         }
 
@@ -423,13 +428,13 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyGreaterHitscript(LootItem item)
         {
-            item.EffectHitType = (EffectHitType)RandomMinMax(1, 6);
+            item.EffectHitType = (EffectHitType) RandomMinMax(1, 6);
             item.EffectHitTypeChance = 1.0;
         }
 
         private static void ApplyEffectHitscript(LootItem item)
         {
-            item.EffectHitType = (EffectHitType)RandomMinMax(7, 9);
+            item.EffectHitType = (EffectHitType) RandomMinMax(7, 9);
             item.EffectHitTypeChance = 1.0;
         }
 
@@ -444,7 +449,6 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplySpellHitscript(LootItem item)
         {
-
             var roll = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
 
             SpellCircle circle = roll switch
@@ -462,9 +466,9 @@ namespace Server.Scripts.Engines.Loot
                 .Where(k => SpellRegistry.GetInfo(k)?.Circle == circle)
                 .ToList()
                 .RandomElement();
-            
 
-            var effectChance = Utility.Random(1, 10) * item.ItemLevel / (double)100;
+
+            var effectChance = Utility.Random(1, 10) * item.ItemLevel / (double) 100;
             // var effectChancemod = hitscriptcfg[n].ChanceOfEffectMod;
 
             var effectChanceMod = 0.0;

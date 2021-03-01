@@ -12,15 +12,15 @@ namespace Server.Items
     public abstract class BaseClothing : BaseEquippableItem, IDyable, IScissorable, ICraftable, IWearableDurability,
         IArmorRating, IMagicItem
     {
-        public virtual bool CanFortify
-        {
-            get { return true; }
-        }
+        public virtual bool CanFortify => true;
 
         private int m_MaxHitPoints;
         private int m_HitPoints;
         protected CraftResource m_Resource;
         private int m_StrReq = -1;
+        private int m_ArmorBase = -1;
+
+        public virtual int ArmorBase => 0;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorBonusType ArmorBonusType
@@ -39,11 +39,18 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int BaseArmorRating
         {
+            get { return m_ArmorBase == -1 ? ArmorBase : m_ArmorBase; }
+            set { m_ArmorBase = value; }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int BonusArmorRating
+        {
             get => (int) ArmorBonusType;
             set => ArmorBonusType = (ArmorBonusType) value;
         }
 
-        public double BaseArmorRatingScaled => BaseArmorRating;
+        public double BaseArmorRatingScaled => (BaseArmorRating * ArmorScalar) + BonusArmorRating;
 
         public double ArmorRating
         {
@@ -57,7 +64,9 @@ namespace Server.Items
             }
         }
 
-        public double ArmorRatingScaled => BaseArmorRating;
+        public double ArmorRatingScaled => (ArmorRating * ArmorScalar) + BonusArmorRating;
+
+        public virtual double ArmorScalar => 0.5;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int MaxHitPoints
@@ -128,25 +137,13 @@ namespace Server.Items
             }
         }
 
-        public virtual int DefaultStrBonus
-        {
-            get => 0;
-        }
+        public virtual int DefaultStrBonus => 0;
 
-        public virtual int DefaultDexBonus
-        {
-            get => 0;
-        }
+        public virtual int DefaultDexBonus => 0;
 
-        public virtual int DefaultIntBonus
-        {
-            get => 0;
-        }
+        public virtual int DefaultIntBonus => 0;
 
-        public virtual Race RequiredRace
-        {
-            get { return null; }
-        }
+        public virtual Race RequiredRace => null;
 
         public override bool CanEquip(Mobile from)
         {
@@ -404,29 +401,6 @@ namespace Server.Items
 
         public override void OnSingleClick(Mobile from)
         {
-            // List<EquipInfoAttribute> attrs = new List<EquipInfoAttribute>();
-            //
-            // AddEquipInfoAttributes(from, attrs);
-            //
-            // int number;
-            //
-            // if (Name == null)
-            // {
-            //     number = LabelNumber;
-            // }
-            // else
-            // {
-            //     LabelTo(from, Name);
-            //     number = 1041000;
-            // }
-            //
-            // if (attrs.Count == 0 && Crafter == null && Name != null)
-            //     return;
-            //
-            // EquipmentInfo eqInfo = new EquipmentInfo(number, m_Crafter, false, attrs.ToArray());
-            //
-            // from.Send(new DisplayEquipmentInfo(this, eqInfo));
-
             HandleSingleClick(this, from);
         }
 
@@ -473,19 +447,21 @@ namespace Server.Items
             Mark = 0x00000200,
             StrReq = 0x00000400,
             NewMagicalProperties = 0x00080000,
-            ICraftable = 0x00100000
+            ICraftable = 0x00100000,
+            ArmorBase = 0x00110000,
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int) 7); // version
+            writer.Write((int) 8); // version
 
             SaveFlag flags = SaveFlag.None;
 
             SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
+            SetSaveFlag(ref flags, SaveFlag.ArmorBase, true);
 
             if (!GetSaveFlag(flags, SaveFlag.ICraftable))
             {
@@ -504,6 +480,9 @@ namespace Server.Items
             SetSaveFlag(ref flags, SaveFlag.StrReq, m_StrReq != -1);
 
             writer.WriteEncodedInt((int) flags);
+
+            if (GetSaveFlag(flags, SaveFlag.ArmorBase))
+                writer.WriteEncodedInt(m_ArmorBase);
 
             if (GetSaveFlag(flags, SaveFlag.ICraftable))
                 ICraftable.Serialize(writer, this);
@@ -536,6 +515,10 @@ namespace Server.Items
 
             switch (version)
             {
+                case 8:
+                    if (GetSaveFlag(flags, SaveFlag.ArmorBase))
+                        m_ArmorBase = reader.ReadEncodedInt();
+                    goto case 7;
                 case 7:
                     if (GetSaveFlag(flags, SaveFlag.ICraftable))
                         ICraftable.Deserialize(reader, this);
@@ -697,9 +680,12 @@ namespace Server.Items
             PlayerConstructed = true;
 
             var resEnchantments = CraftResources.GetEnchantments(Resource);
-            foreach (var (key, value) in resEnchantments)
+            if (resEnchantments != null)
             {
-                Enchantments.SetFromResourceType(key, value);
+                foreach (var (key, value) in resEnchantments)
+                {
+                    Enchantments.SetFromResourceType(key, value);
+                }
             }
 
             Quality = quality;

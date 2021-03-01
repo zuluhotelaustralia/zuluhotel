@@ -1,62 +1,54 @@
-using Server.Network;
-using System.Collections.Generic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
 namespace Server.Items
 {
-	public abstract class BaseHat : BaseClothing, IShipwreckedItem
-	{
-		private bool m_IsShipwreckedItem;
+    public abstract class BaseHat : BaseClothing
+    {
+        [CommandProperty(AccessLevel.GameMaster)]
+        public ItemFortificationType Fortified
+        {
+            get => Enchantments.Get((ItemFortification e) => e.Value);
+            set => Enchantments.Set((ItemFortification e) => e.Value = value);
+        }
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public bool IsShipwreckedItem
-		{
-			get { return m_IsShipwreckedItem; }
-			set { m_IsShipwreckedItem = value; }
-		}
+        public override double ArmorScalar => Fortified == ItemFortificationType.Fortified ? 0.15 : 0.5;
 
-		public BaseHat( int itemID ) : this( itemID, 0 )
-		{
-		}
+        public BaseHat(int itemID, int hue) : base(itemID, Layer.Helm, hue)
+        {
+        }
 
-		public BaseHat( int itemID, int hue ) : base( itemID, Layer.Helm, hue )
-		{
-		}
+        public BaseHat(Serial serial) : base(serial)
+        {
+        }
 
-		public BaseHat( Serial serial ) : base( serial )
-		{
-		}
+        public void Fortify(BaseArmor helm)
+        {
+            MaxHitPoints = helm.MaxHitPoints;
+            HitPoints = helm.HitPoints;
+            BaseArmorRating = helm.BaseArmorRating;
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+            foreach (var (_, value) in helm.Enchantments.Values)
+            {
+                Enchantments.Set(value);
+            }
 
-			writer.Write( (int) 1 ); // version
+            Fortified = ItemFortificationType.Fortified;
 
-			writer.Write( m_IsShipwreckedItem );
-		}
+            helm.Delete();
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
+            writer.Write((int) 1); // version
+        }
 
-			switch ( version )
-			{
-				case 1:
-				{
-					m_IsShipwreckedItem = reader.ReadBool();
-					break;
-				}
-			}
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void AddEquipInfoAttributes( Mobile from, List<EquipInfoAttribute> attrs )
-		{
-			base.AddEquipInfoAttributes( from, attrs );
-
-			if( m_IsShipwreckedItem )
-				attrs.Add( new EquipInfoAttribute( 1041645 ) );	// recovered from a shipwreck
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }
