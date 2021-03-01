@@ -1,6 +1,8 @@
+using ZuluContent.Zulu.Engines.Magic;
+
 namespace Server.Items
 {
-    public class Bascinet : BaseArmor
+    public class Bascinet : BaseArmor, IFortifiable
     {
         public override int InitMinHits => 100;
 

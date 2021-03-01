@@ -1,7 +1,9 @@
+using ZuluContent.Zulu.Engines.Magic;
+
 namespace Server.Items
 {
     [FlipableAttribute(0x1451, 0x1456)]
-    public class BoneHelm : BaseArmor
+    public class BoneHelm : BaseArmor, IFortifiable
     {
         public override int InitMinHits => 20;
 

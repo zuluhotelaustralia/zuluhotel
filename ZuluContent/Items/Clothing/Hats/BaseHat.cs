@@ -1,20 +1,17 @@
-using Server.Network;
-using System.Collections.Generic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Items
 {
     public abstract class BaseHat : BaseClothing
     {
         [CommandProperty(AccessLevel.GameMaster)]
-        public HatFortification Fortified
+        public ItemFortificationType Fortified
         {
-            get => Enchantments.Get((ItemFortification e) => (HatFortification) e.Value);
-            set => Enchantments.Set((ItemFortification e) => e.Value = (int) value);
+            get => Enchantments.Get((ItemFortification e) => e.Value);
+            set => Enchantments.Set((ItemFortification e) => e.Value = value);
         }
 
-        public override double ArmorScalar => Fortified == HatFortification.Fortified ? 0.15 : 0.5;
+        public override double ArmorScalar => Fortified == ItemFortificationType.Fortified ? 0.15 : 0.5;
 
         public BaseHat(int itemID, int hue) : base(itemID, Layer.Helm, hue)
         {
@@ -32,10 +29,10 @@ namespace Server.Items
 
             foreach (var (_, value) in helm.Enchantments.Values)
             {
-                Enchantments.SetFromFortified(value);
+                Enchantments.Set(value);
             }
 
-            Fortified = HatFortification.Fortified;
+            Fortified = ItemFortificationType.Fortified;
 
             helm.Delete();
         }

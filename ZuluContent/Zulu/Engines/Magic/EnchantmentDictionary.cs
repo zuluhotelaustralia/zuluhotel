@@ -67,7 +67,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             return null;
         }
 
-        private T Set<T>(T value) where T : class, IEnchantmentValue
+        public T Set<T>(T value) where T : class, IEnchantmentValue
         {
             Values.TryAdd(EnchantUnionMap[typeof(T)], value);
             return value;
@@ -225,50 +225,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             else if (enchantmentType == typeof(WaterProtection))
             {
                 Set((WaterProtection e) => e.Value = value);
-            }
-        }
-
-        public void SetFromFortified(IEnchantmentValue value)
-        {
-            if (value is ItemQuality itemQuality)
-            {
-                Set((ItemQuality e) => e.Value = itemQuality.Value);
-            }
-            else if (value is DexBonus dexBonus)
-            {
-                Set((DexBonus e) => e.Value = dexBonus.Value);
-            }
-            else if (value is MagicEfficiencyPenalty magicPenalty)
-            {
-                Set((MagicEfficiencyPenalty e) => e.Value = magicPenalty.Value);
-            }
-            else if (value is PermMagicImmunity permMagicImmunity)
-            {
-                Set((PermMagicImmunity e) => e.Value = permMagicImmunity.Value);
-            }
-            else if (value is AirProtection airProtection)
-            {
-                Set((AirProtection e) => e.Value = airProtection.Value);
-            }
-            else if (value is EarthProtection earthProtection)
-            {
-                Set((EarthProtection e) => e.Value = earthProtection.Value);
-            }
-            else if (value is FireProtection fireProtection)
-            {
-                Set((FireProtection e) => e.Value = fireProtection.Value);
-            }
-            else if (value is HolyProtection holyProtection)
-            {
-                Set((HolyProtection e) => e.Value = holyProtection.Value);
-            }
-            else if (value is NecroProtection necroProtection)
-            {
-                Set((NecroProtection e) => e.Value = necroProtection.Value);
-            }
-            else if (value is WaterProtection waterProtection)
-            {
-                Set((WaterProtection e) => e.Value = waterProtection.Value);
             }
         }
 

@@ -1,4 +1,5 @@
 using MessagePack;
+using Server.Items;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -6,16 +7,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class ItemFortification : Enchantment<ItemFortificationInfo>
     {
-        [IgnoreMember] private int m_Value = 0;
-
         [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
 
-        [Key(1)]
-        public int Value
-        {
-            get => Cursed ? -m_Value : m_Value;
-            set => m_Value = value;
-        }
+        [Key(1)] public ItemFortificationType Value { get; set; }
     }
 
     public class ItemFortificationInfo : EnchantmentInfo

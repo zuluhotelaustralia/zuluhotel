@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public enum HatFortification
+    public enum ItemFortificationType
     {
         Regular,
         Fortified

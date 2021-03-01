@@ -3,6 +3,7 @@ using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Items;
+using ZuluContent.Zulu.Engines.Magic;
 using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
@@ -60,7 +61,7 @@ namespace Server.Engines.Craft
                         return;
                     }
 
-                    if (hat.Fortified == HatFortification.Fortified)
+                    if (hat.Fortified == ItemFortificationType.Fortified)
                     {
                         from.SendFailureMessage("That is fortified already!");
                         return;
@@ -98,12 +99,6 @@ namespace Server.Engines.Craft
                 m_Hat = hat;
             }
 
-            private static bool IsHelm(object targeted)
-            {
-                return targeted is Bascinet || targeted is CloseHelm || targeted is Helmet || targeted is NorseHelm ||
-                       targeted is PlateHelm || targeted is ChainCoif || targeted is BoneHelm || targeted is LeatherCap;
-            }
-
             protected override void OnTarget(Mobile from, object targeted)
             {
                 int num = m_CraftSystem.CanCraft(from, m_Tool, null);
@@ -114,7 +109,7 @@ namespace Server.Engines.Craft
                     return;
                 }
 
-                if (targeted is BaseArmor helm && IsHelm(helm))
+                if (targeted is BaseArmor helm && helm is IFortifiable)
                 {
                     if (!helm.IsChildOf(from.Backpack))
                     {

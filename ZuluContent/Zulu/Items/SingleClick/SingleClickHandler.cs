@@ -68,7 +68,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static string GetCraftedFortified(Item item)
         {
-            return item is BaseHat {Fortified: HatFortification.Fortified} ? "Fortified " : "";
+            return item is BaseHat {Fortified: ItemFortificationType.Fortified} ? "Fortified " : "";
         }
 
         private static string GetCraftedExceptional(Item item)
