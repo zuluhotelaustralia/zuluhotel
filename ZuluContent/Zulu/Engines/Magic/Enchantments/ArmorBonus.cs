@@ -13,24 +13,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         private ArmorBonusType m_Value = ArmorBonusType.None;
 
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
         [Key(1)]
         public ArmorBonusType Value
         {
-            get => Cursed ? (ArmorBonusType)(ArmorBonusType.None - m_Value) : m_Value;
+            get => Cursed > CurseType.None ? (ArmorBonusType)(ArmorBonusType.None - m_Value) : m_Value;
             set => m_Value = value;
         }
 
         [CallPriority(1)]
         public override bool GetShouldDye() => Value > ArmorBonusType.None;
-        
-        public override int CompareTo(object obj) => obj switch
-        {
-            ArmorBonus other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
-            null => 1,
-            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
-        };
     }
     
     public class ArmorBonusInfo : EnchantmentInfo

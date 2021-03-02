@@ -17,7 +17,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public ArmorMeditationAllowance Value
         {
-            get => Cursed ? (ArmorMeditationAllowance)(ArmorMeditationAllowance.None - m_Value) : m_Value;
+            get => Cursed > CurseType.None ? (ArmorMeditationAllowance)(ArmorMeditationAllowance.None - m_Value) : m_Value;
             set => m_Value = value;
         }
     }

@@ -9,19 +9,19 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
-    public class AirProtection : Enchantment<AirProtectionInfo>
+    public class AirProtection : Enchantment<AirProtectionInfo>, IDistinctEnchantment
     {
         [IgnoreMember]
         private int m_Value = 0;
 
         [IgnoreMember]
         public override string AffixName => EnchantmentInfo.GetName(
-            IElementalResistible.GetProtectionLevelForResist(Value), Cursed, CurseLevel);
+            IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
 
         [Key(1)]
         public int Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
 
@@ -35,7 +35,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 
         }
         
-        public override int CompareTo(object obj) => obj switch
+        public int CompareTo(object obj) => obj switch
         {
             AirProtection other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
             null => 1,

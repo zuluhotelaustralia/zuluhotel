@@ -8,10 +8,10 @@ using static Server.Engines.Magic.IElementalResistible;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
-    public class HealingBonus : Enchantment<HealingBonusInfo>
+    public class HealingBonus : Enchantment<HealingBonusInfo>, IDistinctEnchantment
     {
         [IgnoreMember] 
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
         [Key(1)] 
         public int Value { get; set; } = 0;
 
@@ -19,13 +19,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         {
             var healingBonusLevel = GetProtectionLevelForResist(Value);
             var healDelta = healAmount * (int) healingBonusLevel * 0.1;
-            if (Cursed)
+            if (Cursed > CurseType.None)
                 healAmount -= healDelta;
             else
                 healAmount += healDelta;
         }
         
-        public override int CompareTo(object obj) => obj switch
+        public int CompareTo(object obj) => obj switch
         {
             HealingBonus other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
             null => 1,

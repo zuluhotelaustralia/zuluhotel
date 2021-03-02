@@ -29,13 +29,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             bonus += 6 * Value;
             toMod -= 5 * Value;
         }
-        
-        public override int CompareTo(object obj) => obj switch
-        {
-            HarvestBonus other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
-            null => 1,
-            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
-        };
     }
 
     public class HarvestBonusInfo : EnchantmentInfo
@@ -46,7 +39,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int CursedHue { get; protected set; } = 0;
         public override string[,] Names { get; protected set; } = { };
 
-        public override string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
+        public override string GetName(int index, CurseType curse = CurseType.None)
         {
             return string.Empty;
         }

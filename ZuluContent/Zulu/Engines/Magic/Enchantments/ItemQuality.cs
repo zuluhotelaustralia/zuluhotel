@@ -14,16 +14,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public double Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
-        
-        public override int CompareTo(object obj) => obj switch
-        {
-            ItemQuality other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
-            null => 1,
-            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
-        };
     }
 
     public class ItemQualityInfo : EnchantmentInfo
@@ -35,7 +28,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public override string[,] Names { get; protected set; } = { };
 
-        public override string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
+        public override string GetName(int index, CurseType curse = CurseType.None)
         {
             return string.Empty;
         }

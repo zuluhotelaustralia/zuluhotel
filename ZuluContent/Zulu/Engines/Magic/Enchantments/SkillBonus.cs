@@ -26,13 +26,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         private double m_Value = 0;
 
         [IgnoreMember]
-        public override string AffixName => SkillBonusInfo.GetName(Skill, Value, Cursed, CurseLevel);
+        public override string AffixName => SkillBonusInfo.GetName(Skill, Value, Cursed);
         [Key(1)]
         public SkillName Skill { get; set; } = SkillName.Alchemy;
         [Key(2)]
         public double Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
 
@@ -41,7 +41,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override void OnAdded(IEntity entity)
         {
             base.OnAdded(entity);
-            if (entity is Item item && item.Parent is Mobile mobile)
+            if (entity is Item {Parent: Mobile mobile} item)
             {
                 m_Mod = new EquippedSkillMod(Skill, true, Value, item, mobile);
                 mobile.AddSkillMod(m_Mod);
@@ -65,10 +65,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int CursedHue { get; protected set; } = 0;
         public override string[,] Names { get; protected set; } = DefaultSkillNames;
 
-        public static string GetName(SkillName name, double value, bool cursed, CurseLevelType curseLevel)
+        public static string GetName(SkillName name, double value, CurseType curse)
         {
             var n = Math.Abs(value) > 6 ? (int)  Math.Abs(value) / 5 : (int) Math.Abs(value);
-            return SkillSpecificNames[name][n, cursed && curseLevel > CurseLevelType.Unrevealed ? 1 : 0];
+            return SkillSpecificNames[name][n, curse > CurseType.Unrevealed ? 1 : 0];
         }
 
         private static readonly string[,] DefaultSkillNames =

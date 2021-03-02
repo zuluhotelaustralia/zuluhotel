@@ -24,11 +24,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 MagicalWeaponType.Stygian => 0.15,
                 _ => 0.0
             };
-
             
-            m.SendMessage($"Decreasing Swing delay by {delay * percentage} seconds");
             delay -= delay * percentage;
-
         }
     }
 

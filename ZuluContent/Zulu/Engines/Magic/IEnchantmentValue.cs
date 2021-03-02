@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -45,8 +46,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     {
         public EnchantmentInfo Info { get; }
         public string AffixName { get; }
-        public bool Cursed { get; set; }
-        public CurseLevelType CurseLevel { get; set; }
+        public CurseType Cursed { get; set; }
         bool GetShouldDye();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -5,17 +6,17 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
-    public class PermSpellReflect : Enchantment<PermSpellReflectInfo>
+    public class PermSpellReflect : Enchantment<PermSpellReflectInfo>, IDistinctEnchantment
     {
         [IgnoreMember]
         private int m_Value = 0;
 
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
         [Key(1)]
         public int Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
 
@@ -34,6 +35,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 mobile.MagicDamageAbsorb -= Value;
             }
         }
+        
+        public int CompareTo(object obj) => obj switch
+        {
+            PermSpellReflect other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
     
     public class PermSpellReflectInfo : EnchantmentInfo

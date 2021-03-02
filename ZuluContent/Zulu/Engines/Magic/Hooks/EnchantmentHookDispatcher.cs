@@ -56,56 +56,41 @@ namespace ZuluContent.Zulu.Engines.Magic
                 .ToList()
                 .ForEach(m => HookPriorities.Add(m.Name, new Dictionary<Type, int>()));
         }
-
-        private static int GetActionPriority(ICustomAttributeProvider m)
-        {
-            return m.GetCustomAttributes(true)
-                .OfType<CallPriorityAttribute>()
-                .OrderBy(x => x.Priority)
-                .FirstOrDefault()?.Priority ?? int.MaxValue;
-        }
         
-        private static IOrderedEnumerable<IEnchantmentHook> OrderByPriority(
-            IEnumerable<IEnchantmentHook> values,
-            string methodName
-        )
-        {
-            return values.OrderBy(kv =>
-                HookPriorities[methodName].TryGetValue(kv.GetType(), out var priority)
-                    ? priority
-                    : -1
-            );
-        }
-
         public EnchantmentHookDispatcher() : base()
         {
             
         }
-        
-        private static readonly Dictionary<string, Dictionary<Type, bool>> HookImplementedMap = new();
 
-        private static bool IsOverridden(MethodInfo targetMethod, Type targetType)
+        private static int GetActionPriority(ICustomAttributeProvider m) => m.GetCustomAttributes(true)
+                .OfType<CallPriorityAttribute>()
+                .OrderBy(x => x.Priority)
+                .FirstOrDefault()?.Priority ?? int.MaxValue;
+
+        private static IOrderedEnumerable<IEnchantmentHook> DistinctOrderByPriority(
+            IEnumerable<IEnchantmentHook> values,
+            string methodName
+        )
         {
-            if (!HookImplementedMap.ContainsKey(targetMethod.Name))
-                HookImplementedMap.TryAdd(targetMethod.Name, new Dictionary<Type, bool>());
-
-            var dict = HookImplementedMap[targetMethod.Name];
-            
-            if (dict.TryGetValue(targetType, out var implemented))
-            {
-                return implemented;
-            }
-
-            implemented = targetType.GetMethod(targetMethod.Name)?.DeclaringType == targetType;
-
-            dict.Add(targetType, implemented);
-            return implemented;
+            // Remove duplicate distinct enchantments and recombine
+            return values
+                .OfType<IDistinctEnchantment>()
+                .GroupBy(e => e.GetType())
+                .Select(g => g.OrderByDescending(x => x).First())
+                .Cast<IEnchantmentValue>()
+                .Concat(values.Where(e => !(e is IDistinctEnchantment)))
+                .OrderBy(kv =>
+                    HookPriorities[methodName].TryGetValue(kv.GetType(), out var priority)
+                        ? priority
+                        : -1
+                );
         }
-
+        
         public static void Dispatch(IEnumerable<IEnchantmentHook> values, Action<IEnchantmentHook> action)
         {
             var dispatcher = Pool.Get();
             dispatcher.Values = values;
+            // ReSharper disable once SuspiciousTypeConversion.Global
             action(dispatcher as IEnchantmentHook);
             dispatcher.Values = null;
             Pool.Return(dispatcher);
@@ -118,7 +103,7 @@ namespace ZuluContent.Zulu.Engines.Magic
             
             try
             {
-                var values = OrderByPriority(Values, targetMethod.Name);
+                var values = DistinctOrderByPriority(Values, targetMethod.Name);
                 foreach (var target in values)
                 {
                     targetMethod.Invoke(target, args);

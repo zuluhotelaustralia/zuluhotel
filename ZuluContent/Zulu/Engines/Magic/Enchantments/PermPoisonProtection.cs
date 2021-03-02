@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
@@ -7,11 +8,11 @@ using static Server.Engines.Magic.IElementalResistible;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
-    public class PermPoisonProtection : Enchantment<PermPoisonProtectionInfo>
+    public class PermPoisonProtection : Enchantment<PermPoisonProtectionInfo>, IDistinctEnchantment
     {
         [IgnoreMember]
         public override string AffixName =>
-            EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed, CurseLevel);
+            EnchantmentInfo.GetName(IElementalResistible.GetProtectionLevelForResist(Value), Cursed);
 
         [Key(1)]
         public int Value { get; set; } = 0;
@@ -20,7 +21,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         {
             var poisonProtectionLevel = GetProtectionLevelForResist(Value);
 
-            if (Cursed)
+            if (Cursed > CurseType.None)
             {
                 NotifyMobile(defender, "Your items prevent all poison protection!");
                 return;
@@ -32,6 +33,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 NotifyMobile(defender, "Your items protected you from the poison!");
             }
         }
+        
+        public int CompareTo(object obj) => obj switch
+        {
+            PermPoisonProtection other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
     
     public class PermPoisonProtectionInfo : EnchantmentInfo

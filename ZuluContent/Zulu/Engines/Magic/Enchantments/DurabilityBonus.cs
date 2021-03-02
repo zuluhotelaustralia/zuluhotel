@@ -11,20 +11,14 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         private int m_Value = 0;
 
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
         [Key(1)]
         public int Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
         
-        public override int CompareTo(object obj) => obj switch
-        {
-            DurabilityBonus other => ReferenceEquals(this, other) ? 0 : m_Value.CompareTo(other.m_Value),
-            null => 1,
-            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
-        };
     }
 
     public class DurabilityBonusInfo : EnchantmentInfo

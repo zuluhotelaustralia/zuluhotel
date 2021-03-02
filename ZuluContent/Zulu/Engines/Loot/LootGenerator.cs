@@ -151,10 +151,12 @@ namespace Server.Scripts.Engines.Loot
                         break;
                 }
 
-                foreach (var (key, value) in magicItem.Enchantments.Values)
+                if (Cursed)
                 {
-                    value.Cursed = Cursed;
-                    value.CurseLevel = CurseLevelType.Unrevealed;
+                    foreach (var (_, value) in magicItem.Enchantments.Values)
+                    {
+                        value.Cursed = CurseType.Unrevealed;
+                    }
                 }
             }
 

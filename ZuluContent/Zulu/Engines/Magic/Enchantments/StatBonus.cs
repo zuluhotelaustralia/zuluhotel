@@ -10,7 +10,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class IntBonus : BaseStatBonus<IntBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
         public IntBonus() : base(StatType.Int) { }
     }
     
@@ -38,7 +38,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class DexBonus : BaseStatBonus<DexBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
         public DexBonus() : base(StatType.Dex) { }
     }
 
@@ -65,7 +65,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class StrBonus : BaseStatBonus<StrBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
         public StrBonus() : base(StatType.Str) { }
     }
     
@@ -100,7 +100,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public virtual int Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set
             {
                 if (value == m_Value || value == 0 && m_Value == 0)
