@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -12,12 +13,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         private ArmorBonusType m_Value = ArmorBonusType.None;
 
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
         [Key(1)]
         public ArmorBonusType Value
         {
-            get => Cursed ? (ArmorBonusType)(ArmorBonusType.None - m_Value) : m_Value;
+            get => Cursed > CurseType.None ? (ArmorBonusType)(ArmorBonusType.None - m_Value) : m_Value;
             set => m_Value = value;
         }
 

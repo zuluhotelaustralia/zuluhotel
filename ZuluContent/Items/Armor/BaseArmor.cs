@@ -1025,12 +1025,7 @@ namespace Server.Items
 
         private string GetNameString()
         {
-            string name = Name;
-
-            if (name == null)
-                name = $"#{LabelNumber}";
-
-            return name;
+            return Name ?? $"#{LabelNumber}";
         }
 
         [Hue, CommandProperty(AccessLevel.GameMaster)]
@@ -1039,15 +1034,7 @@ namespace Server.Items
             get { return base.Hue; }
             set { base.Hue = value; }
         }
-
-        public override bool AllowEquippedCast(Mobile from)
-        {
-            if (base.AllowEquippedCast(from))
-                return true;
-
-            return false;
-        }
-
+        
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);

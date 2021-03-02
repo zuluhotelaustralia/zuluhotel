@@ -22,8 +22,11 @@ namespace Server.Mobiles
     }
 
     public class HighPriest : BasePriest
-	{
-		public override bool CanTeach{ get{ return false; } }
+    {
+        public override bool CanTeach
+        {
+            get { return false; }
+        }
 
         private record PriestRequest
         {
@@ -32,19 +35,20 @@ namespace Server.Mobiles
             protected Serial TargetedItem { get; init; }
         }
 
-        private Dictionary<Serial, PriestRequest> PriestRequests { get; set; } = new Dictionary<Serial, PriestRequest>();
+        private Dictionary<Serial, PriestRequest> PriestRequests { get; set; } =
+            new Dictionary<Serial, PriestRequest>();
 
         [Constructible]
         public HighPriest()
-		{
-			Title = "the High Priest";
+        {
+            Title = "the High Priest";
 
-			AddItem( new GnarledStaff() );
+            AddItem(new GnarledStaff());
 
-			SetSkill( SkillName.Camping, 80.0, 100.0 );
-			SetSkill( SkillName.Forensics, 80.0, 100.0 );
-			SetSkill( SkillName.SpiritSpeak, 80.0, 100.0 );
-		}
+            SetSkill(SkillName.Camping, 80.0, 100.0);
+            SetSkill(SkillName.Forensics, 80.0, 100.0);
+            SetSkill(SkillName.SpiritSpeak, 80.0, 100.0);
+        }
 
         public override void InitBody()
         {
@@ -91,7 +95,7 @@ namespace Server.Mobiles
             {
                 BaseEquippableItem item = equippableItem;
 
-                if (!item.Cursed)
+                if (item.Cursed == CurseType.None)
                 {
                     PublicOverheadMessage(MessageType.Regular, 0x3B2, 500607); // I'm not interested in that.
                     return;
@@ -111,7 +115,8 @@ namespace Server.Mobiles
             }
             else
             {
-                PublicOverheadMessage(MessageType.Regular, 0x3B2, 500609); // I can't appraise things I know nothing about...
+                PublicOverheadMessage(MessageType.Regular, 0x3B2,
+                    500609); // I can't appraise things I know nothing about...
             }
         }
 
@@ -119,9 +124,9 @@ namespace Server.Mobiles
         {
             if (obj is BaseEquippableItem)
             {
-                BaseEquippableItem item = (BaseEquippableItem)obj;
+                BaseEquippableItem item = (BaseEquippableItem) obj;
 
-                if (!item.Cursed)
+                if (item.Cursed == CurseType.None)
                 {
                     PublicOverheadMessage(MessageType.Regular, 0x3B2, 500607); // I'm not interested in that.
                     return;
@@ -137,12 +142,11 @@ namespace Server.Mobiles
             else
             {
                 PublicOverheadMessage(MessageType.Regular, 0x3B2, true, "Are you deaf?");
-                Timer.DelayCall(TimeSpan.FromSeconds(2),
-                    delegate
-                    {
-                        PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
-                            "I asked you what ITEM you wanted me to free from all malefical magical influences!");
-                    });
+                Timer.DelayCall(TimeSpan.FromSeconds(2), () =>
+                {
+                    PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
+                        "I asked you what ITEM you wanted me to free from all malefical magical influences!");
+                });
             }
         }
 
@@ -153,13 +157,10 @@ namespace Server.Mobiles
                 {
                     Direction = GetDirectionTo(from);
                     PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
-                            "Great Essence of the Virtues, I'm calling upon you to purify this item from all curses");
+                        "Great Essence of the Virtues, I'm calling upon you to purify this item from all curses");
                     Animate(17, 10, 1, true, false, 0);
-                    Timer.DelayCall(TimeSpan.FromSeconds(8),
-                    delegate
-                    {
-                        item.Cursed = false;
-                        item.CurseLevel = CurseLevelType.None;
+                    Timer.DelayCall(TimeSpan.FromSeconds(8), () => {
+                        item.Cursed = CurseType.None;
                         from.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);
                         from.PlaySound(0x1EA);
                         PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
@@ -168,7 +169,7 @@ namespace Server.Mobiles
                 }
                 else
                     PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
-                            "You donot have enough gold in your bank for that.");
+                        "You donot have enough gold in your bank for that.");
         }
 
         /* public override bool OnDragDrop(Mobile from, Item dropped)
@@ -204,45 +205,48 @@ namespace Server.Mobiles
             return base.OnDragDrop(from, dropped);
         } */
 
-        public override bool ClickTitle{ get{ return false; } } // Do not display title in OnSingleClick
+        public override bool ClickTitle
+        {
+            get { return false; }
+        } // Do not display title in OnSingleClick
 
-		public override bool CheckResurrect( Mobile m )
-		{
-			if ( m.Criminal )
-			{
-				Say( 501222 ); // Thou art a criminal.  I shall not resurrect thee.
-				return false;
-			}
-			else if ( m.Kills >= 5 )
-			{
-				Say( 501223 ); // Thou'rt not a decent and good person. I shall not resurrect thee.
-				return false;
-			}
-			else if ( m.Karma < 0 )
-			{
-				Say( 501224 ); // Thou hast strayed from the path of virtue, but thou still deservest a second chance.
-			}
+        public override bool CheckResurrect(Mobile m)
+        {
+            if (m.Criminal)
+            {
+                Say(501222); // Thou art a criminal.  I shall not resurrect thee.
+                return false;
+            }
+            else if (m.Kills >= 5)
+            {
+                Say(501223); // Thou'rt not a decent and good person. I shall not resurrect thee.
+                return false;
+            }
+            else if (m.Karma < 0)
+            {
+                Say(501224); // Thou hast strayed from the path of virtue, but thou still deservest a second chance.
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		[Constructible]
-public HighPriest( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public HighPriest(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

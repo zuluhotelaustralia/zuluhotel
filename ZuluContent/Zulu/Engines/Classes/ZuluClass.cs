@@ -400,8 +400,10 @@ namespace Scripts.Zulu.Engines.Classes
 
                 healAmount *= bonus;
 
-                DebugLog(healer,
-                    $"Increased healing from {source} by {healAmount * cls.Bonus} (level {cls.Level} {cls.Type})");
+                if(bonus > 1.0)
+                    DebugLog(healer, $"Increased healing from {source} " +
+                                     $"by {healAmount * cls.Bonus} " +
+                                     $"(level {cls.Level} {cls.Type})");
             }
         }
 

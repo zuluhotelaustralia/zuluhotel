@@ -10,6 +10,7 @@ using Microsoft.Toolkit.HighPerformance.Extensions;
 using Scripts.Zulu.Utilities;
 using Server;
 using Server.Engines.Magic;
+using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enums
@@ -62,8 +63,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
 
             if (Values.TryGetValue(EnchantUnionMap[typeof(T)], out var value) && value is T result)
                 return result;
-
-
+            
             return null;
         }
 
@@ -110,6 +110,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
                 case ChargeType.SpellReflect:
                     Set((SpellReflect e) => e.Value = value);
                     break;
+                case ChargeType.None:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null);
             }
@@ -122,6 +124,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
                 ChargeType.PoisonImmunity => Get((PoisonProtection e) => e.Value),
                 ChargeType.MagicImmunity => Get((MagicImmunity e) => e.Value),
                 ChargeType.SpellReflect => Get((SpellReflect e) => e.Value),
+                ChargeType.None => 0,
                 _ => throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null)
             };
         }
@@ -190,6 +193,15 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
 
         public void SetFromResourceType(Type enchantmentType, int value)
         {
+            if (!enchantmentType.IsInstanceOfType(typeof(IEnchantmentValue)))
+            {
+                Console.WriteLine(
+                    $"{nameof(SetFromResourceType)}: Attempted to set an enchantment of type ${enchantmentType.Name} " +
+                    $"but that type is not an instance of {nameof(IEnchantmentValue)}"
+                );
+                return;
+            }
+            
             if (enchantmentType == typeof(DexBonus))
             {
                 Set((DexBonus e) => e.Value += value);

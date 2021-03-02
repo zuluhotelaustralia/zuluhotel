@@ -39,7 +39,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int CursedHue { get; protected set; } = 0;
         public override string[,] Names { get; protected set; } = { };
 
-        public override string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
+        public override string GetName(int index, CurseType curse = CurseType.None)
         {
             return string.Empty;
         }

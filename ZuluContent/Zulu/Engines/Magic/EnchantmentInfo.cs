@@ -11,14 +11,14 @@ namespace ZuluContent.Zulu.Engines.Magic
         public abstract int Hue { get; protected set;}
         public abstract int CursedHue { get; protected set;}
         
-        public virtual string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
+        public virtual string GetName(int index, CurseType curse = CurseType.None)
         {
-            return index < Names.GetLength(0) ? Names[Math.Abs(index), cursed && curseLevel > CurseLevelType.Unrevealed ? 1 : 0] : string.Empty;
+            return index < Names.GetLength(0) ? Names[Math.Abs(index), curse > CurseType.Unrevealed ? 1 : 0] : string.Empty;
         }
 
-        public virtual string GetName(Enum target, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
+        public virtual string GetName(Enum target, CurseType curse = CurseType.None)
         {
-            return GetName(Math.Abs((int) (object) target), cursed, curseLevel);
+            return GetName(Math.Abs((int) (object) target), curse);
         }
         
         protected static string[,] MakeSkillNames(string profession, string[,] defaults)

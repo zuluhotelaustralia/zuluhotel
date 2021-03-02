@@ -1,10 +1,10 @@
 namespace ZuluContent.Zulu.Engines.Magic.Enums
 {
-    public enum CurseLevelType
+    public enum CurseType
     {
         None = 0,
         Unrevealed,
-        RevealedCantUnEquip,
         Revealed,
+        RevealedCantUnEquip,
     }
 }

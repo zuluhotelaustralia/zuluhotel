@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -13,7 +14,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public double Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
     }
@@ -27,7 +28,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public override string[,] Names { get; protected set; } = { };
 
-        public override string GetName(int index, bool cursed = false, CurseLevelType curseLevel = CurseLevelType.None)
+        public override string GetName(int index, CurseType curse = CurseType.None)
         {
             return string.Empty;
         }

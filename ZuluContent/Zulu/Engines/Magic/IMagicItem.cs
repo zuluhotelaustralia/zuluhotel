@@ -10,7 +10,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
     public partial interface IMagicItem : IEnchanted
     {
         public IEntity Parent { get; set; }
-        
+
         public void OnSingleClick(Mobile m);
 
         [CommandProperty(AccessLevel.GameMaster)]

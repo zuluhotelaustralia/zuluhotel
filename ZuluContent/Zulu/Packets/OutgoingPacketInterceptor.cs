@@ -26,26 +26,21 @@ namespace Scripts.Zulu.Packets
                 switch (input[0])
                 {
                     case 0x1C:
-                        Console.WriteLine("Sending ascii message packet");
                         break;
                     case 0xBF:
                         if (input[4] == 0x10)
                         {
-                            // Console.WriteLine("Sending EquipmentInfo message packet");
                             RewriteEquipmentInfo(input, output, out length);
                             return;
                         }
                         break;
                     case 0xAE:
-                        // Console.WriteLine("Rewriting unicode message packet");
                         RewriteUnicodeMessage(input, output, out length);
                         return;
                     case 0xC1:
                     case 0xCC:
-                        // Console.WriteLine("Rewriting CreateMessageLocalizedAffix message packet");
                         RewriteMessageLocalized(input, output, out length);
                         return;
-                    // break;
                 }
             }
 
@@ -148,7 +143,7 @@ namespace Scripts.Zulu.Packets
             var affix = isAffix ? reader.ReadAscii() : string.Empty;
             var args = isAffix ? reader.ReadBigUni() : reader.ReadLittleUni();
             
-            if (!ZhConfig.Messaging.Cliloc.TryGetValue(label, out var clilocEntry))
+            if (!ZhConfig.Messaging.Cliloc.ContainsKey(label))
             {
                 length = NetworkCompression.Compress(input, output);
                 return;

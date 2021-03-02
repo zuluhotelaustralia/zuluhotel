@@ -366,8 +366,8 @@ namespace Server.Spells
 
             switch (State)
             {
-                case SpellState.Casting when !firstCircle && this is MagerySpell &&
-                                             ((MagerySpell) this).Circle == SpellCircle.First:
+                case SpellState.Casting 
+                    when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
                     return;
                 case SpellState.Casting:
                 {
@@ -383,8 +383,8 @@ namespace Server.Spells
                     Caster.NextSpellTime = Core.TickCount + (int) GetDisturbRecovery().TotalMilliseconds;
                     break;
                 }
-                case SpellState.Sequencing when !firstCircle && this is MagerySpell &&
-                                                ((MagerySpell) this).Circle == SpellCircle.First:
+                case SpellState.Sequencing 
+                    when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
                     return;
                 case SpellState.Sequencing:
                     State = SpellState.None;
@@ -438,79 +438,90 @@ namespace Server.Spells
             if (IsWand() && Caster.Spell != null && Caster.Spell.IsCasting)
             {
                 Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
-            }
-            else if (Caster.Spell != null && Caster.Spell.IsCasting)
-            {
-                Caster.SendLocalizedMessage(502642); // You are already casting a spell.
-            }
-            else if (!IsWand() && (Caster.Paralyzed || Caster.Frozen))
-            {
-                Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
-            }
-            else if (CheckNextSpellTime && Core.TickCount < Caster.NextSpellTime)
-            {
-                Caster.SendLocalizedMessage(502644); // You have not yet recovered from casting a spell.
-            }
-            else if (Caster is PlayerMobile && ((PlayerMobile) Caster).PeacedUntil > DateTime.Now)
-            {
-                Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
-            }
-            else if (Caster.Mana >= GetMana() || m_SpellStrike)
-            {
-                if (Caster.Spell == null && Caster.CheckSpellCast(this) && CheckCast() &&
-                    Caster.Region.OnBeginSpellCast(Caster, this))
-                {
-                    State = SpellState.Casting;
-                    Caster.Spell = this;
-
-                    if (!IsWand() && RevealOnCast)
-                        Caster.RevealingAction();
-
-                    SayMantra();
-
-                    var castDelay = m_SpellStrike ? TimeSpan.Zero : GetCastDelay();
-
-                    if (ShowHandMovement && (Caster.Body.IsHuman || Caster.Player && Caster.Body.IsMonster))
-                    {
-                        var count = (int) Math.Ceiling(castDelay.TotalSeconds / AnimateDelay.TotalSeconds);
-
-                        if (count != 0)
-                        {
-                            m_AnimTimer = new AnimTimer(this, count);
-                            m_AnimTimer.Start();
-                        }
-
-                        if (Info.LeftHandEffect > 0)
-                            Caster.FixedParticles(0, 10, 5, Info.LeftHandEffect, EffectLayer.LeftHand);
-
-                        if (Info.RightHandEffect > 0)
-                            Caster.FixedParticles(0, 10, 5, Info.RightHandEffect, EffectLayer.RightHand);
-                    }
-
-                    if (ClearHandsOnCast)
-                        Caster.ClearHands();
-
-                    m_CastTimer = new CastTimer(this, castDelay);
-                    //m_CastTimer.Start();
-
-                    OnBeginCast();
-
-                    if (castDelay > TimeSpan.Zero)
-                        m_CastTimer.Start();
-                    else
-                        m_CastTimer.Tick();
-
-                    return true;
-                }
-
                 return false;
             }
-            else
+            if (Caster.Spell != null && Caster.Spell.IsCasting)
+            {
+                Caster.SendLocalizedMessage(502642); // You are already casting a spell.
+                return false;
+            }
+            
+            if (!IsWand() && (Caster.Paralyzed || Caster.Frozen))
+            {
+                Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
+                return false;
+            }
+            
+            if (CheckNextSpellTime && Core.TickCount < Caster.NextSpellTime)
+            {
+                Caster.SendLocalizedMessage(502644); // You have not yet recovered from casting a spell.
+                return false;
+            }
+            
+            if (Caster.FindItemOnLayer(Layer.OneHanded) != null || Caster.FindItemOnLayer(Layer.TwoHanded) != null)
+            {
+                Caster.SendLocalizedMessage(502626); // You have not yet recovered from casting a spell.
+                return false;
+            }
+            
+            if (Caster is PlayerMobile player && player.PeacedUntil > DateTime.Now)
+            {
+                Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
+                return false;
+            }
+            
+            if (GetMana() > Caster.Mana && !m_SpellStrike)
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, $"{GetMana()}"); // Insufficient mana
+                return false;
             }
 
-            return false;
+            if (Caster.Spell != null || !Caster.CheckSpellCast(this) || !CheckCast() ||
+                !Caster.Region.OnBeginSpellCast(Caster, this))
+            {
+                Caster.SendLocalizedMessage(502629); // You cannot cast spells here.
+                return false;
+            }
+
+
+            State = SpellState.Casting;
+            Caster.Spell = this;
+
+            if (!IsWand() && RevealOnCast)
+                Caster.RevealingAction();
+
+            SayMantra();
+
+            var castDelay = m_SpellStrike ? TimeSpan.Zero : GetCastDelay();
+
+            if (ShowHandMovement && (Caster.Body.IsHuman || Caster.Player && Caster.Body.IsMonster))
+            {
+                var count = (int) Math.Ceiling(castDelay.TotalSeconds / AnimateDelay.TotalSeconds);
+
+                if (count != 0)
+                {
+                    m_AnimTimer = new AnimTimer(this, count);
+                    m_AnimTimer.Start();
+                }
+
+                if (Info.LeftHandEffect > 0)
+                    Caster.FixedParticles(0, 10, 5, Info.LeftHandEffect, EffectLayer.LeftHand);
+
+                if (Info.RightHandEffect > 0)
+                    Caster.FixedParticles(0, 10, 5, Info.RightHandEffect, EffectLayer.RightHand);
+            }
+
+            m_CastTimer = new CastTimer(this, castDelay);
+            //m_CastTimer.Start();
+
+            OnBeginCast();
+
+            if (castDelay > TimeSpan.Zero)
+                m_CastTimer.Start();
+            else
+                m_CastTimer.Tick();
+
+            return true;
         }
 
         public abstract void OnCast();
@@ -529,9 +540,7 @@ namespace Server.Spells
             if (IsWand())
                 return true;
 
-            double minSkill, maxSkill;
-
-            GetCastSkills(out minSkill, out maxSkill);
+            GetCastSkills(out var minSkill, out var maxSkill);
 
             if (DamageSkill != CastSkill)
                 Caster.CheckSkill(DamageSkill, 0.0, Caster.Skills[DamageSkill].Cap);
@@ -608,7 +617,7 @@ namespace Server.Spells
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625); // Insufficient mana for this spell.
             }
-            else if (Caster is PlayerMobile && ((PlayerMobile) Caster).PeacedUntil > DateTime.Now)
+            else if (Caster is PlayerMobile playerMobile && playerMobile.PeacedUntil > DateTime.Now)
             {
                 Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
                 DoFizzle();

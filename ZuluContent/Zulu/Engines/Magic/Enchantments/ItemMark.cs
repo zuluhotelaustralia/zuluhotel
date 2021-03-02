@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -8,12 +9,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     {
         [IgnoreMember] private int m_Value = 0;
 
-        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
         [Key(1)]
         public int Value
         {
-            get => Cursed ? -m_Value : m_Value;
+            get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
     }

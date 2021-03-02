@@ -1,3 +1,4 @@
+using System;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
@@ -7,10 +8,10 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 {
     [MessagePackObject]
-    public class MagicImmunity : Enchantment<MagicImmunityInfo>
+    public class MagicImmunity : Enchantment<MagicImmunityInfo>, IDistinctEnchantment
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
         [Key(1)] 
         public int Value { get; set; } = 0;
@@ -30,7 +31,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 if (Value < 0)
                     Value = 0;
 
-                if (!Cursed)
+                if (Cursed == CurseType.None)
                 {
                     damage = 0;
                     NotifyMobile(defender, "Your items protected you from the magic!");
@@ -40,6 +41,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                     NotifyMobile(defender, "Your items prevent all reflections!");
             }
         }
+        
+        public int CompareTo(object obj) => obj switch
+        {
+            MagicImmunity other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
     }
     
     public class MagicImmunityInfo : EnchantmentInfo

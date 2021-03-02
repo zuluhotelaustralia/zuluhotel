@@ -5,6 +5,7 @@ using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using ZuluContent.Zulu.Items.SingleClick;
 
 namespace ZuluContent.Zulu.Items
 {
@@ -29,34 +30,23 @@ namespace ZuluContent.Zulu.Items
                 Enchantments.Identified = value;
             }
         }
-
+        
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Cursed
+        public CurseType Cursed
         {
-            get => Enchantments.Values.Where(e => e.Value.Cursed == true)
-                .Select(p => p.Value.Cursed)
-                .FirstOrDefault();
+            get => Enchantments.Values.Count > 0
+                    ? Enchantments.Values.First().Value.Cursed
+                    : CurseType.None;
             set
             {
-                foreach (var (key, val) in Enchantments.Values)
+                Movable = value switch
                 {
+                    < CurseType.RevealedCantUnEquip => true,
+                    CurseType.RevealedCantUnEquip => false,
+                };
+
+                foreach (var (_, val) in Enchantments.Values)
                     val.Cursed = value;
-                }
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public CurseLevelType CurseLevel
-        {
-            get => Enchantments.Values.Where(e => e.Value.Cursed == true)
-                .Select(p => p.Value.CurseLevel)
-                .FirstOrDefault();
-            set
-            {
-                foreach (var (key, val) in Enchantments.Values)
-                {
-                    val.CurseLevel = value;
-                }
             }
         }
 
@@ -205,6 +195,16 @@ namespace ZuluContent.Zulu.Items
         public override void OnAdded(IEntity parent)
         {
             base.OnAdded(parent);
+            
+            if (parent is Mobile mobile && Cursed == CurseType.Unrevealed)
+            {
+                Cursed = CurseType.RevealedCantUnEquip;
+                mobile.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
+                mobile.PlaySound(0x1E1);
+                mobile.SendAsciiMessage(33,
+                    $"That item is cursed, and reveals itself to be a {SingleClickHandler.GetMagicItemName(this)}");    
+            }
+            
             Enchantments.FireHook(e => e.OnAdded(this));
         }
 
@@ -218,6 +218,10 @@ namespace ZuluContent.Zulu.Items
         {
             bool canLift = true;
             Enchantments.FireHook(e => e.OnBeforeRemoved(this, from, ref canLift));
+
+            if (Cursed == CurseType.RevealedCantUnEquip && Parent is Mobile parent && parent == from)
+                canLift = Movable = false;
+
             return canLift;
         }
 
