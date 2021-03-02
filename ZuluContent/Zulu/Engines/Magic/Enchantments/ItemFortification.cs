@@ -7,7 +7,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class ItemFortification : Enchantment<ItemFortificationInfo>
     {
-        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value, Cursed, CurseLevel);
+        [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
         [Key(1)] public ItemFortificationType Value { get; set; }
     }
