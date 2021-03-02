@@ -422,7 +422,7 @@ namespace Scripts.Zulu.Engines.Classes
                 range = (int) (range * cls.Bonus);
             }
         }
-        
+
         public void OnQualityBonus(Mobile crafter, ref int multiplier)
         {
             if (crafter is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter} cls})
@@ -433,9 +433,9 @@ namespace Scripts.Zulu.Engines.Classes
 
         public void OnExceptionalChance(Mobile crafter, ref double exceptionalChance, ref int exceptionalDifficulty)
         {
-            if (crafter is IZuluClassed {ZuluClass: { } cls} && cls.Type == ZuluClassType.Crafter)
+            if (crafter is IZuluClassed {ZuluClass: {Type: ZuluClassType.Crafter} cls})
             {
-                exceptionalChance *= Bonus;
+                exceptionalChance *= cls.Bonus;
                 exceptionalDifficulty += 20;
             }
             else

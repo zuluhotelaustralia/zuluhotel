@@ -1,15 +1,13 @@
 namespace Server.Items
 {
     [Flipable(0x170d, 0x170e)]
-    public class Sandals : BaseArmor
+    public class Sandals : BaseClothing
     {
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
 
         public override int ArmorBase => 2;
-
-        public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
 
         public override CraftResource DefaultResource => CraftResource.RegularLeather;
 
