@@ -1,10 +1,7 @@
-using System;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Items;
-using ZuluContent.Zulu.Engines.Magic;
-using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {

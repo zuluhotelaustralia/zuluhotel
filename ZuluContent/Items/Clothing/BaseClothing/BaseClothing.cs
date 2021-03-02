@@ -10,7 +10,7 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 namespace Server.Items
 {
     public abstract class BaseClothing : BaseEquippableItem, IDyable, IScissorable, ICraftable, IWearableDurability,
-        IArmorRating, IMagicItem
+        IArmorRating, IRepairable
     {
         public virtual bool CanFortify => true;
 
@@ -40,7 +40,11 @@ namespace Server.Items
         public int BaseArmorRating
         {
             get { return m_ArmorBase == -1 ? ArmorBase : m_ArmorBase; }
-            set { m_ArmorBase = value; }
+            set
+            {
+                m_ArmorBase = value;
+                Invalidate();
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

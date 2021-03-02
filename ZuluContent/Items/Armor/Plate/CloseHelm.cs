@@ -1,4 +1,4 @@
-using ZuluContent.Zulu.Engines.Magic;
+using Server.Engines.Craft;
 
 namespace Server.Items
 {

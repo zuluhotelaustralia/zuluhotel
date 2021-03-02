@@ -39,6 +39,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnQualityBonus(Mobile crafter, ref int multiplier);
 
+        public void OnArmsLoreBonus(Mobile crafter, ref double armsLoreValue);
+
         public void OnMeditation(Mobile mobile, ref int regen, ref double tickIntervalSeconds);
 
         public void OnModifyWithMagicEfficiency(Mobile mobile, ref double value);

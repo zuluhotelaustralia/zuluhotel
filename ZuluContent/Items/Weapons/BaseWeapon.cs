@@ -19,7 +19,7 @@ namespace Server.Items
         SlayerName OldSlayer2 { get; set; }
     }
 
-    public abstract class BaseWeapon : BaseEquippableItem, IWeapon, ICraftable, ISlayer, IDurability, IMagicItem
+    public abstract class BaseWeapon : BaseEquippableItem, IWeapon, ICraftable, ISlayer, IDurability, IRepairable
     {
         /* Weapon internals work differently now (Mar 13 2003)
          *
