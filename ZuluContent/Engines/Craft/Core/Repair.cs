@@ -37,7 +37,7 @@ namespace Server.Engines.Craft
                 if (damageAmount >= repairable.HitPoints)
                 {
                     number = 500424; // You destroyed the item.
-                    from.SendFailureMessage("You fail and destroy the item.");
+                    from.SendFailureMessage(number);
                     repairable.Delete();
                 }
                 else
@@ -67,7 +67,7 @@ namespace Server.Engines.Craft
                     if (repairable.HitPoints == repairable.MaxHitPoints)
                     {
                         number = 500423; // That is already in full repair.
-                        from.SendSuccessMessage("That item is in perfect condition already.");
+                        from.SendSuccessMessage(number);
                         from.SendGump(new CraftGump(from, m_CraftSystem, m_Tool, number));
                         return;
                     }
