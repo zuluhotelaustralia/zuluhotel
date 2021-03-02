@@ -4,7 +4,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
     {
         None = 0,
         Unrevealed,
-        RevealedCantUnEquip,
         Revealed,
+        RevealedCantUnEquip,
     }
 }
