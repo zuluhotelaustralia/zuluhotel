@@ -1,4 +1,5 @@
 {
   "SuccessHue": 55,
-  "FailureHue": 33
+  "FailureHue": 33,
+  "VisibleDamage": true
 }

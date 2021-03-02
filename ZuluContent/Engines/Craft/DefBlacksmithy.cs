@@ -365,10 +365,6 @@ namespace Server.Engines.Craft
             // Set the overridable material
             SetSubRes(typeof(IronIngot), 1044022);
 
-            foreach (var res in CraftResources.MetalInfo)
-            {
-            }
-
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
             OreConfiguration.Entries.ToList()

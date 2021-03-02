@@ -2,11 +2,11 @@ using System;
 
 namespace Server
 {
-  public class CurrentExpansion
-  {
-    public static void Configure()
+    public class CurrentExpansion
     {
-      Mobile.VisibleDamageType = VisibleDamageType.Related;
+        public static void Configure()
+        {
+            Mobile.VisibleDamageType = VisibleDamageType.Related;
+        }
     }
-  }
 }

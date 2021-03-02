@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using Server.Items;
+using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -30,11 +32,22 @@ namespace Server.Engines.Craft
 
         public override double GetChanceAtMin(CraftItem item)
         {
-            return 0.5; // 50%
+            return 0.0;
         }
 
-        private DefBowFletching() : base(1, 1, 1.25) // base( 1, 2, 1.7 )
+        private DefBowFletching() : base(3, 3, 2)
         {
+        }
+
+        public override int GetCraftSkillRequired(int itemSkillRequired, Type craftResourceType)
+        {
+            var resource = CraftResources.GetFromType(craftResourceType);
+            return itemSkillRequired + (int) (CraftResources.GetCraftSkillRequired(resource) / 4);
+        }
+
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return (itemSkillRequired + materialAmount) * 8;
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
@@ -49,11 +62,7 @@ namespace Server.Engines.Craft
 
         public override void PlayCraftEffect(Mobile from)
         {
-            // no animation
-            //if ( from.Body.Type == BodyType.Human && !from.Mounted )
-            //	from.Animate( 33, 5, 1, true, false, 0 );
-
-            from.PlaySound(0x55);
+            from.PlaySound(0x56);
         }
 
         public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality,
@@ -106,8 +115,15 @@ namespace Server.Engines.Craft
             AddCraft(typeof(Crossbow), 1044566, 1023919, 60.0, 100.0, typeof(Log), 1044041, 7, 1044351);
             AddCraft(typeof(HeavyCrossbow), 1044566, 1025117, 80.0, 120.0, typeof(Log), 1044041, 10, 1044351);
 
+            // Set the overridable material
+            SetSubRes(typeof(Log), 1027136);
+
+            LogConfiguration.Entries.ToList()
+                .ForEach(e => AddSubRes(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired,
+                    1044022, e.Name));
+
             MarkOption = true;
-            Repair = false;
+            Repair = true;
         }
     }
 }

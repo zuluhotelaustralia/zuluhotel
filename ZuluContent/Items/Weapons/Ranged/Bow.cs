@@ -11,19 +11,19 @@ namespace Server.Items
 
         public override Item Ammo => new Arrow();
 
-        public override int DefaultStrengthReq { get; } = 20;
+        public override int DefaultStrengthReq => 20;
 
-        public override int DefaultMinDamage { get; } = 9;
+        public override int DefaultMinDamage => 10;
 
-        public override int DefaultMaxDamage { get; } = 41;
+        public override int DefaultMaxDamage => 22;
 
-        public override int DefaultSpeed { get; } = 20;
+        public override int DefaultSpeed => 35;
 
-        public override int DefaultMaxRange { get; } = 10;
+        public override int DefaultMaxRange => 7;
 
-        public override int InitMinHits { get; } = 31;
+        public override int InitMinHits => 70;
 
-        public override int InitMaxHits { get; } = 60;
+        public override int InitMaxHits => 70;
 
         public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.ShootBow;
 

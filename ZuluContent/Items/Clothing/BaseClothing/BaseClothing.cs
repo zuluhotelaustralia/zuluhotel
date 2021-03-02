@@ -694,6 +694,9 @@ namespace Server.Items
 
             Quality = quality;
 
+            MaxHitPoints = (int) (MaxHitPoints * quality);
+            HitPoints = MaxHitPoints;
+
             CraftContext context = craftSystem.GetContext(from);
 
             if (context != null && context.DoNotColor)

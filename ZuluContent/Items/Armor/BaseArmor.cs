@@ -1059,12 +1059,13 @@ namespace Server.Items
             if (makersMark)
                 Crafter = from;
 
-            Type resourceType = typeRes;
+            var resourceType = typeRes;
 
             if (resourceType == null)
                 resourceType = craftItem.Resources[0].ItemType;
 
             Resource = CraftResources.GetFromType(resourceType);
+
             PlayerConstructed = true;
 
             var resEnchantments = CraftResources.GetEnchantments(Resource);
@@ -1074,6 +1075,9 @@ namespace Server.Items
             }
 
             Quality = quality;
+
+            MaxHitPoints = (int) (MaxHitPoints * quality);
+            HitPoints = MaxHitPoints;
 
             CraftContext context = craftSystem.GetContext(from);
 
