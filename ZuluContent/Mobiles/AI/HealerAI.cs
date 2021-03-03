@@ -36,7 +36,7 @@ namespace Server.Mobiles
                 {
                     ProcessTarget(targ, m_AGHeal);
                 }
-                else if (targ is HealSpell.InternalTarget)
+                else if (targ is AsyncTarget<object>)
                 {
                     ProcessTarget(targ, m_ALHeal);
                 }

@@ -530,37 +530,40 @@ namespace Server.Spells
             Caster.Region?.OnSpellCast(Caster, this);
             Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
 
-            await OnCastAsync();
+
+            var target = GetTarget();
+            
+            TargetResponse<object> targetResponse = null;
+            if (target != null)
+            {
+                Caster.Target = target;
+                targetResponse = await target;
+            }
+            
+            await OnCastAsync(targetResponse);
+            
             OnCast();
-
-            if (Caster.Target is AsyncTarget<Mobile> target)
-            {
-            }
-            else if (Caster.Player && Caster.Target != originalTarget)
-            {
+            if (Caster.Player && Caster.Target != originalTarget)
                 Caster.Target?.BeginTimeout(Caster, TimeSpan.FromSeconds(30.0));
-            }
-
-
-            // if (castDelay > TimeSpan.Zero)
-            //     m_CastTimer.Start();
-            // else
-            //     m_CastTimer.Tick();
-
-            // return true;
+            
+            FinishSequence();
         }
 
-        public virtual Target GetTarget()
+        public virtual AsyncTarget<object> GetTarget()
         {
             return null;
         }
+        
 
-        public virtual Task OnCastAsync()
+        public virtual Task OnCastAsync(TargetResponse<object> response = null)
         {
             return Task.CompletedTask;
         }
 
-        public abstract void OnCast();
+        public virtual void OnCast()
+        {
+            
+        }
 
         public virtual void OnBeginCast()
         {

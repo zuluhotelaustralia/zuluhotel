@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Server.Network;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
+#pragma warning disable 1998
 
 namespace Server.Spells.First
 {
@@ -9,60 +11,47 @@ namespace Server.Spells.First
         public HealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
-
-
-        public override void OnCast()
+        
+        public readonly TargetOptions Options = new()
         {
-            Caster.Target = new InternalTarget(this);
-        }
+            Range = 12,
+            AllowGround = false,
+            Flags = TargetFlags.Beneficial
+        };
+        
+        public override AsyncTarget<object> GetTarget() => new(Caster, Options);
 
-        public void Target(Mobile m)
+        public override async Task OnCastAsync(TargetResponse<object> response = null)
         {
-            if (!Caster.CanSee(m))
+            if (!(response?.Target is Mobile mobile))
+                return;
+
+            if (!Caster.CanSee(mobile))
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
+                return;
             }
-            else if (m.Poisoned)
+            
+            if (mobile.Poisoned)
             {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, Caster == m ? 1005000 : 1010398);
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, Caster == mobile ? 1005000 : 1010398);
+                return;
             }
-            else if (CheckBSequence(m))
-            {
-                SpellHelper.Turn(Caster, m);
+            
+            if (!CheckBSequence(mobile))
+                return;
 
-                var toHeal = Caster.Skills[SkillName.Magery].Value * 0.1;
-                toHeal += Utility.Random(1, 5);
+            SpellHelper.Turn(Caster, mobile);
 
-                Caster.FireHook(h => h.OnHeal(Caster, m, this, ref toHeal));
+            var toHeal = Caster.Skills[SkillName.Magery].Value * 0.1;
+            toHeal += Utility.Random(1, 5);
 
-                //m.Heal( toHeal, Caster );
-                SpellHelper.Heal((int) toHeal, m, Caster);
+            Caster.FireHook(h => h.OnHeal(Caster, mobile, this, ref toHeal));
+                
+            SpellHelper.Heal((int) toHeal, mobile, Caster);
 
-                m.FixedParticles(0x376A, 9, 32, 5005, EffectLayer.Waist);
-                m.PlaySound(0x1F2);
-            }
-
-            FinishSequence();
-        }
-
-        public class InternalTarget : Target
-        {
-            private readonly HealSpell m_Owner;
-
-            public InternalTarget(HealSpell owner) : base(12, false, TargetFlags.Beneficial)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile) m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            mobile.FixedParticles(0x376A, 9, 32, 5005, EffectLayer.Waist);
+            mobile.PlaySound(0x1F2);
         }
     }
 }

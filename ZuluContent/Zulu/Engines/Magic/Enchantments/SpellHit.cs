@@ -16,6 +16,7 @@ using Server.Spells.Second;
 using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
+using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments
@@ -29,7 +30,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [SpellEntry.None]  = (a, d) => {},
                 [SpellEntry.Clumsy] = (a, d) => Spell.Create<ClumsySpell>(a, null, true).Target(d),
                 [SpellEntry.Feeblemind] = (a, d) => Spell.Create<FeeblemindSpell>(a, null, true).Target(d),
-                [SpellEntry.MagicArrow] = (a, d) => Spell.Create<MagicArrowSpell>(a, null, true).Target(d),
+                [SpellEntry.MagicArrow] = (a, d) => Spell.Create<MagicArrowSpell>(a, null, true).OnCastAsync(new TargetResponse<object> { Target = d }),
                 [SpellEntry.Weaken] = (a, d) => Spell.Create<WeakenSpell>(a, null, true).Target(d),
                 [SpellEntry.Harm] = (a, d) => Spell.Create<HarmSpell>(a, null, true).Target(d),
                 [SpellEntry.Fireball] = (a, d) => Spell.Create<FireballSpell>(a, null, true).Target(d),
