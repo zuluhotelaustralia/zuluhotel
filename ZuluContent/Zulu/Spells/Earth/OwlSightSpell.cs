@@ -25,7 +25,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 5; }
         }
 
-        public OwlSightSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public OwlSightSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

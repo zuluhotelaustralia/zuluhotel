@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 100; }
         }
 
-        public SummonSpiritSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public SummonSpiritSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

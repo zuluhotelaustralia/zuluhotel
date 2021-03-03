@@ -34,7 +34,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 5; }
         }
 
-        public AntidoteSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AntidoteSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

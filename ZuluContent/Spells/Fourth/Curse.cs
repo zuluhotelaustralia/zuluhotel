@@ -7,7 +7,7 @@ namespace Server.Spells.Fourth
     {
         private static readonly Hashtable m_UnderEffect = new Hashtable();
 
-        public CurseSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public CurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

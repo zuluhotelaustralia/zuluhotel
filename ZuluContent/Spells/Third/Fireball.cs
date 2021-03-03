@@ -4,7 +4,7 @@ namespace Server.Spells.Third
 {
     public class FireballSpell : MagerySpell
     {
-        public FireballSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public FireballSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

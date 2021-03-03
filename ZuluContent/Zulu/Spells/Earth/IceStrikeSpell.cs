@@ -18,7 +18,7 @@ namespace Scripts.Zulu.Spells.Earth
 
         public override int RequiredMana { get; } = 20;
 
-        public IceStrikeSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public IceStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

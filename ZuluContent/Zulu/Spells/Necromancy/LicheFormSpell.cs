@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 130; }
         }
 
-        public LicheFormSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public LicheFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

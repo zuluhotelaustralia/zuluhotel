@@ -19,7 +19,7 @@ namespace Server.Spells.First
             new FoodInfo(typeof(Peach), "a peach")
         };
 
-        public CreateFoodSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public CreateFoodSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

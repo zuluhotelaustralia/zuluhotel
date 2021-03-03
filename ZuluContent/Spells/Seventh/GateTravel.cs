@@ -12,11 +12,11 @@ namespace Server.Spells.Seventh
     {
         private readonly RunebookEntry m_Entry;
 
-        public GateTravelSpell(Mobile caster, Item scroll) : this(caster, scroll, null)
+        public GateTravelSpell(Mobile caster, Item spellItem) : this(caster, spellItem, null)
         {
         }
 
-        public GateTravelSpell(Mobile caster, Item scroll, RunebookEntry entry) : base(caster, scroll)
+        public GateTravelSpell(Mobile caster, Item spellItem, RunebookEntry entry) : base(caster, spellItem)
         {
             m_Entry = entry;
         }
@@ -28,23 +28,6 @@ namespace Server.Spells.Seventh
                 Caster.Target = new InternalTarget(this);
             else
                 Effect(m_Entry.Location, m_Entry.Map, true);
-        }
-
-        public override bool CheckCast()
-        {
-            if (Caster.Criminal)
-            {
-                Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.
-                return false;
-            }
-
-            if (SpellHelper.CheckCombat(Caster))
-            {
-                Caster.SendLocalizedMessage(1005564, "", 0x22); // Wouldst thou flee during the heat of battle??
-                return false;
-            }
-
-            return SpellHelper.CheckTravel(Caster, TravelCheckType.GateFrom);
         }
 
         private bool GateExistsAt(Map map, Point3D loc)

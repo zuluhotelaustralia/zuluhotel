@@ -7,7 +7,7 @@ namespace Server.Spells.Third
 {
     public class WallOfStoneSpell : MagerySpell
     {
-        public WallOfStoneSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public WallOfStoneSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

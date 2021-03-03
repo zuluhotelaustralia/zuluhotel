@@ -5,7 +5,7 @@ namespace Server.Spells.Sixth
 {
     public class RevealSpell : MagerySpell
     {
-        public RevealSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public RevealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

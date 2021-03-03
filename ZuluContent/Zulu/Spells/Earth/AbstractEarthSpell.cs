@@ -31,7 +31,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return TimeSpan.FromSeconds(5); }
         }
 
-        public AbstractEarthSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AbstractEarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

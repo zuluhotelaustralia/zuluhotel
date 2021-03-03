@@ -25,13 +25,16 @@ namespace Server.Spells.Fifth
             0x204D, 0x0000
         };
 
-        public IncognitoSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public IncognitoSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (!Caster.CanBeginAction(typeof(IncognitoSpell)))
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.

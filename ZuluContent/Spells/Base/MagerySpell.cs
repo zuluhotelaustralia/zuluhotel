@@ -9,7 +9,7 @@ namespace Server.Spells
 
         private static readonly int[] ManaTable = {4, 6, 9, 11, 14, 20, 40, 50};
 
-        public MagerySpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MagerySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -23,7 +23,7 @@ namespace Server.Spells
         {
             var circle = (int) Circle;
 
-            if (Scroll != null)
+            if (SpellItem != null)
                 circle -= 2;
 
             var avg = ChanceLength * circle;
@@ -34,7 +34,7 @@ namespace Server.Spells
 
         public override int GetMana()
         {
-            return Scroll is BaseWand ? 0 : ManaTable[(int) Circle];
+            return SpellItem is BaseWand ? 0 : ManaTable[(int) Circle];
         }
 
         public override double GetResistSkill(Mobile m)
@@ -50,7 +50,7 @@ namespace Server.Spells
 
         public override TimeSpan GetCastDelay()
         {
-            if (Scroll is BaseWand)
+            if (SpellItem is BaseWand)
                 return TimeSpan.Zero;
 
             return TimeSpan.FromSeconds(0.5 + 0.25 * (int) Circle);

@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 60; }
         }
 
-        public AnimateDeadSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AnimateDeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

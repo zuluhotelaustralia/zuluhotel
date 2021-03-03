@@ -5,7 +5,7 @@ namespace Server.Spells.Eighth
 {
     public class ResurrectionSpell : MagerySpell
     {
-        public ResurrectionSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ResurrectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -6,7 +6,7 @@ namespace Server.Spells.Fifth
 {
     public class DispelFieldSpell : MagerySpell
     {
-        public DispelFieldSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public DispelFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -10,7 +10,7 @@ namespace Server.Spells.Sixth
     {
         private static readonly Hashtable m_Table = new Hashtable();
 
-        public InvisibilitySpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public InvisibilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

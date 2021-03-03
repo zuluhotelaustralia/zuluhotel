@@ -4,7 +4,7 @@ namespace Server.Spells.Sixth
 {
     public class EnergyBoltSpell : MagerySpell
     {
-        public EnergyBoltSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public EnergyBoltSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

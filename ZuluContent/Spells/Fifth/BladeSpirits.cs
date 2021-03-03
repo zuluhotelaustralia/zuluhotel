@@ -6,7 +6,7 @@ namespace Server.Spells.Fifth
 {
     public class BladeSpiritsSpell : MagerySpell
     {
-        public BladeSpiritsSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public BladeSpiritsSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -14,14 +14,6 @@ namespace Server.Spells.Fifth
         public override TimeSpan GetCastDelay()
         {
             return base.GetCastDelay() + TimeSpan.FromSeconds(6.0);
-        }
-
-        public override bool CheckCast()
-        {
-            if (!base.CheckCast())
-                return false;
-
-            return true;
         }
 
         public override void OnCast()

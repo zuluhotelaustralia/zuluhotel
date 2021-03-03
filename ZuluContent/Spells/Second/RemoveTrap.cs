@@ -5,7 +5,7 @@ namespace Server.Spells.Second
 {
     public class RemoveTrapSpell : MagerySpell
     {
-        public RemoveTrapSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public RemoveTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

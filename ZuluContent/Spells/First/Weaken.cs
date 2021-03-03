@@ -4,7 +4,7 @@ namespace Server.Spells.First
 {
     public class WeakenSpell : MagerySpell
     {
-        public WeakenSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public WeakenSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

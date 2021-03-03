@@ -7,7 +7,7 @@ namespace Server.Spells.Fourth
     {
         private static readonly Dictionary<Mobile, Timer> m_Table = new Dictionary<Mobile, Timer>();
 
-        public ManaDrainSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ManaDrainSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

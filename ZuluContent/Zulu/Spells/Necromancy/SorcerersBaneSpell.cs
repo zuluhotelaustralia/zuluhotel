@@ -33,7 +33,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 100; }
         }
 
-        public SorcerersBaneSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public SorcerersBaneSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
             // these indices in decimal
             //pool = new int[] {6054, 6051, 6047, 6056, 6039, 6053, 6049, 6045, 6055};

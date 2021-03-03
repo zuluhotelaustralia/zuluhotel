@@ -4,7 +4,7 @@ namespace Server.Spells.Third
 {
     public class BlessSpell : MagerySpell
     {
-        public BlessSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public BlessSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

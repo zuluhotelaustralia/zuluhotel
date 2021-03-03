@@ -4,7 +4,7 @@ namespace Server.Spells.Second
 {
     public class HarmSpell : MagerySpell
     {
-        public HarmSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public HarmSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 10; }
         }
 
-        public EarthPortalSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public EarthPortalSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

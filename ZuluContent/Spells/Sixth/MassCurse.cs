@@ -5,7 +5,7 @@ namespace Server.Spells.Sixth
 {
     public class MassCurseSpell : MagerySpell
     {
-        public MassCurseSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MassCurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

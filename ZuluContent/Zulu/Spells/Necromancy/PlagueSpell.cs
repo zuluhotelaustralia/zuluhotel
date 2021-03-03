@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 130; }
         }
 
-        public PlagueSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public PlagueSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

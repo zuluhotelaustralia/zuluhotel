@@ -38,7 +38,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 5; }
         }
 
-        public SummonMammalsSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public SummonMammalsSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

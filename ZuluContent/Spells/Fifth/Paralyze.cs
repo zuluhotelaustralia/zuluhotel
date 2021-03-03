@@ -5,7 +5,7 @@ namespace Server.Spells.Fifth
 {
     public class ParalyzeSpell : MagerySpell
     {
-        public ParalyzeSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ParalyzeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

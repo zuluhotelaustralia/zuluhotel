@@ -6,13 +6,16 @@ namespace Server.Spells.First
     {
         private static readonly Hashtable m_Table = new Hashtable();
 
-        public ReactiveArmorSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ReactiveArmorSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (Caster.MeleeDamageAbsorb > 0)
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.

@@ -6,13 +6,16 @@ namespace Server.Spells.Fifth
     {
         private static readonly Hashtable m_Table = new Hashtable();
 
-        public MagicReflectSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MagicReflectSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (Caster.MagicDamageAbsorb > 0)
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.

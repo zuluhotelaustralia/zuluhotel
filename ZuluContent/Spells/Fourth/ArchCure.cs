@@ -6,7 +6,7 @@ namespace Server.Spells.Fourth
 {
     public class ArchCureSpell : MagerySpell
     {
-        public ArchCureSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ArchCureSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

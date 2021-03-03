@@ -8,7 +8,7 @@ namespace Server.Spells.Fourth
     {
         private static readonly Dictionary<Mobile, int> Table = new();
 
-        public ArchProtectionSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ArchProtectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

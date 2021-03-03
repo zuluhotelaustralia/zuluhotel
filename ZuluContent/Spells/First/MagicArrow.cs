@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
 using Server.Targeting;
 
 namespace Server.Spells.First
 {
     public class MagicArrowSpell : MagerySpell
     {
-        public MagicArrowSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MagicArrowSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -19,10 +20,30 @@ namespace Server.Spells.First
             get { return true; }
         }
 
+        public readonly TargetOptions Options = new()
+        {
+            Range = 12,
+            AllowGround = false,
+            Flags = TargetFlags.Harmful
+        };
+
+        public override async Task OnCastAsync()
+        {
+            var target = new AsyncTarget<Mobile>(Caster, Options);
+            Caster.Target = target;
+
+            var response = await target;
+
+            if (response.Type != TargetResponseType.Success)
+                return;
+            
+            response.Target.SendMessage($"Hello from {nameof(OnCastAsync)}");
+            Target(response.Target);
+        }
 
         public override void OnCast()
         {
-            Caster.Target = new InternalTarget(this);
+            //Caster.Target = new AwaitableSpellTarget<Mobile>(this, Options);
         }
 
         public void Target(Mobile m)
@@ -57,26 +78,6 @@ namespace Server.Spells.First
             }
 
             FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly MagicArrowSpell m_Owner;
-
-            public InternalTarget(MagicArrowSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile) m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
         }
     }
 }

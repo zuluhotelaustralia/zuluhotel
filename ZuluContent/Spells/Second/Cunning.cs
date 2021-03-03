@@ -4,7 +4,7 @@ namespace Server.Spells.Second
 {
     public class CunningSpell : MagerySpell
     {
-        public CunningSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public CunningSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

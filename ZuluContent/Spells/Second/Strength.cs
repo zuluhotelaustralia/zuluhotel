@@ -4,7 +4,7 @@ namespace Server.Spells.Second
 {
     public class StrengthSpell : MagerySpell
     {
-        public StrengthSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public StrengthSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

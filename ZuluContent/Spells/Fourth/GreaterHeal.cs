@@ -6,7 +6,7 @@ namespace Server.Spells.Fourth
 {
     public class GreaterHealSpell : MagerySpell
     {
-        public GreaterHealSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public GreaterHealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -4,7 +4,7 @@ namespace Server.Spells.Fifth
 {
     public class MindBlastSpell : MagerySpell
     {
-        public MindBlastSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MindBlastSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -525,10 +525,8 @@ namespace Server.Spells
             }
 
             // Always allow monsters to teleport
-            if (caster is BaseCreature && (type == TravelCheckType.TeleportTo || type == TravelCheckType.TeleportFrom))
+            if (caster is BaseCreature bc && (type == TravelCheckType.TeleportTo || type == TravelCheckType.TeleportFrom))
             {
-                var bc = (BaseCreature) caster;
-
                 if (!bc.Controlled && !bc.Summoned)
                     return true;
             }

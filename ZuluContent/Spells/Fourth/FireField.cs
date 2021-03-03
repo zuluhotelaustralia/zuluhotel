@@ -9,7 +9,7 @@ namespace Server.Spells.Fourth
 {
     public class FireFieldSpell : MagerySpell
     {
-        public FireFieldSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public FireFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

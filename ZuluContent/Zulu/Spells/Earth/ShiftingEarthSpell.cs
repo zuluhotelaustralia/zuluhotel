@@ -28,7 +28,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 5; }
         }
 
-        public ShiftingEarthSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ShiftingEarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

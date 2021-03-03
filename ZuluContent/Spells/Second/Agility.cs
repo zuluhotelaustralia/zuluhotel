@@ -4,7 +4,7 @@ namespace Server.Spells.Second
 {
     public class AgilitySpell : MagerySpell
     {
-        public AgilitySpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AgilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

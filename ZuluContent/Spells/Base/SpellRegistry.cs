@@ -52,6 +52,11 @@ namespace Server.Spells
         {
             return (T) Create(typeof(T), caster, scroll);
         }
+        
+        public static SpellInfo GetInfo(SpellEntry spellEntry)
+        {
+            return SpellInfos[SpellTypes[spellEntry]];
+        }
 
         static SpellRegistry()
         {
@@ -2286,11 +2291,6 @@ namespace Server.Spells
                     }
                 }
             );
-        }
-
-        public static SpellInfo GetInfo(SpellEntry spellEntry)
-        {
-            return SpellInfos[SpellTypes[spellEntry]];
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 100; }
         }
 
-        public WyvernStrikeSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public WyvernStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

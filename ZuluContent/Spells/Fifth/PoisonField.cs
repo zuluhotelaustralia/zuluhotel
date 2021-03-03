@@ -9,7 +9,7 @@ namespace Server.Spells.Fifth
 {
     public class PoisonFieldSpell : MagerySpell
     {
-        public PoisonFieldSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public PoisonFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

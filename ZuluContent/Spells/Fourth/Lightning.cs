@@ -4,7 +4,7 @@ namespace Server.Spells.Fourth
 {
     public class LightningSpell : MagerySpell
     {
-        public LightningSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public LightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

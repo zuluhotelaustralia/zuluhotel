@@ -6,7 +6,7 @@ namespace Server.Spells.Sixth
 {
     public class MarkSpell : MagerySpell
     {
-        public MarkSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MarkSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -16,12 +16,9 @@ namespace Server.Spells.Sixth
             Caster.Target = new InternalTarget(this);
         }
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
-            if (!base.CheckCast())
-                return false;
-
-            return SpellHelper.CheckTravel(Caster, TravelCheckType.Mark);
+            return base.CanCast() && SpellHelper.CheckTravel(Caster, TravelCheckType.Mark);
         }
 
         public void Target(RecallRune rune)

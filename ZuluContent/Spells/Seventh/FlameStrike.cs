@@ -4,7 +4,7 @@ namespace Server.Spells.Seventh
 {
     public class FlameStrikeSpell : MagerySpell
     {
-        public FlameStrikeSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public FlameStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

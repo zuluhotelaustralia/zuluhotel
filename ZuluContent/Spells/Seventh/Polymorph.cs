@@ -40,18 +40,21 @@ namespace Server.Spells.Seventh
 
         private readonly int m_NewBody;
 
-        public PolymorphSpell(Mobile caster, Item scroll, int body) : base(caster, scroll)
+        public PolymorphSpell(Mobile caster, Item spellItem, int body) : base(caster, spellItem)
         {
             m_NewBody = body;
         }
 
-        public PolymorphSpell(Mobile caster, Item scroll) : this(caster, scroll, 0)
+        public PolymorphSpell(Mobile caster, Item spellItem) : this(caster, spellItem, 0)
         {
         }
 
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (Caster.Mounted)
             {
                 Caster.SendLocalizedMessage(1042561); //Please dismount first.
@@ -78,7 +81,7 @@ namespace Server.Spells.Seventh
 
             if (m_NewBody == 0)
             {
-                Gump gump = new PolymorphGump(Caster, Scroll, Categories);
+                Gump gump = new PolymorphGump(Caster, SpellItem, Categories);
 
                 Caster.SendGump(gump);
                 return false;

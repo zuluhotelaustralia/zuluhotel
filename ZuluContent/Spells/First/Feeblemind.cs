@@ -4,7 +4,7 @@ namespace Server.Spells.First
 {
     public class FeeblemindSpell : MagerySpell
     {
-        public FeeblemindSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public FeeblemindSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

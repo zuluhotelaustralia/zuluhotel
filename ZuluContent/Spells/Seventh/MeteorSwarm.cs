@@ -5,7 +5,7 @@ namespace Server.Spells.Seventh
 {
     public class MeteorSwarmSpell : MagerySpell
     {
-        public MeteorSwarmSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MeteorSwarmSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

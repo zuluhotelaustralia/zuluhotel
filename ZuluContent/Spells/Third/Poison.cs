@@ -4,7 +4,7 @@ namespace Server.Spells.Third
 {
     public class PoisonSpell : MagerySpell
     {
-        public PoisonSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public PoisonSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

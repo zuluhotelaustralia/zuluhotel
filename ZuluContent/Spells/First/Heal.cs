@@ -6,7 +6,7 @@ namespace Server.Spells.First
 {
     public class HealSpell : MagerySpell
     {
-        public HealSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public HealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -4,7 +4,7 @@ namespace Server.Spells.First
 {
     public class NightSightSpell : MagerySpell
     {
-        public NightSightSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public NightSightSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
