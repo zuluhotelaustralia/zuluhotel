@@ -27,7 +27,7 @@ namespace Server.Spells.First
                 return;
             }
             
-            if (!CheckBSequence(mobile))
+            if (!CheckBeneficialSequence(mobile))
                 return;
 
             SpellHelper.Turn(Caster, mobile);

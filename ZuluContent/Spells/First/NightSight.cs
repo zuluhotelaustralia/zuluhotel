@@ -25,7 +25,7 @@ namespace Server.Spells.First
 
             protected override void OnTarget(Mobile from, object targeted)
             {
-                if (targeted is Mobile && m_Spell.CheckBSequence((Mobile) targeted))
+                if (targeted is Mobile && m_Spell.CheckBeneficialSequence((Mobile) targeted))
                 {
                     var targ = (Mobile) targeted;
 

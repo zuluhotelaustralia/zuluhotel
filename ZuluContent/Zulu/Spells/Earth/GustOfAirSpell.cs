@@ -49,7 +49,7 @@ namespace Scripts.Zulu.Spells.Earth
                 goto Return;
             }
 
-            if (!CheckHSequence(m)) goto Return;
+            if (!CheckHarmfulSequence(m)) goto Return;
 
             SpellHelper.Turn(Caster, m);
 

@@ -25,7 +25,7 @@ namespace Server.Spells.Sixth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 var source = Caster;
 

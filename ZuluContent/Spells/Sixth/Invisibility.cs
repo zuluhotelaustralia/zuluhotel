@@ -30,7 +30,7 @@ namespace Server.Spells.Sixth
             {
                 Caster.SendLocalizedMessage(501857); // This spell won't work on that!
             }
-            else if (CheckBSequence(m))
+            else if (CheckBeneficialSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 

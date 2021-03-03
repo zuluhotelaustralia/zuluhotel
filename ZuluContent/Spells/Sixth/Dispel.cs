@@ -23,7 +23,7 @@ namespace Server.Spells.Sixth
             {
                 attacker.SendLocalizedMessage(1005049); // That cannot be dispelled.
             }
-            else if (CheckHSequence(defender))
+            else if (CheckHarmfulSequence(defender))
             {
                 SpellHelper.Turn(attacker, defender);
 

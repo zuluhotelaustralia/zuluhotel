@@ -17,7 +17,7 @@ namespace Server.Spells.First
             if (!(response?.Target is Mobile mobile))
                 return;
 
-            if (!CheckHSequence(mobile))
+            if (!CheckHarmfulSequence(mobile))
                 return;
 
             var source = Caster;

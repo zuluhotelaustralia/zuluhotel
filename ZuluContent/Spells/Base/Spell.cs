@@ -529,26 +529,24 @@ namespace Server.Spells
 
             Caster.Region?.OnSpellCast(Caster, this);
             Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
-
-
-            
             
             var target = GetTarget();
-            
-            TargetResponse<object> targetResponse = null;
             if (target != null)
             {
                 Caster.Target = target;
-                targetResponse = await target;
+                var targetResponse = await target;
+                CheckSequence();
+
+                await OnCastAsync(targetResponse);
+                FinishSequence();
             }
+            else
+            {
+                OnCast();
             
-            await OnCastAsync(targetResponse);
-            
-            OnCast();
-            if (Caster.Player && Caster.Target != originalTarget)
-                Caster.Target?.BeginTimeout(Caster, TimeSpan.FromSeconds(30.0));
-            
-            FinishSequence();
+                if (Caster.Player && Caster.Target != originalTarget)
+                    Caster.Target?.BeginTimeout(Caster, TimeSpan.FromSeconds(30.0));
+            }
         }
 
         public virtual AsyncTarget<object> GetTarget()
@@ -723,13 +721,8 @@ namespace Server.Spells
 
             return true;
         }
-
-        public bool CheckBSequence(Mobile target)
-        {
-            return CheckBSequence(target, false);
-        }
-
-        public bool CheckBSequence(Mobile target, bool allowDead)
+        
+        public bool CheckBeneficialSequence(Mobile target, bool allowDead = false)
         {
             if (!target.Alive && !allowDead)
             {
@@ -746,7 +739,7 @@ namespace Server.Spells
             return false;
         }
 
-        public bool CheckHSequence(Mobile target)
+        public bool CheckHarmfulSequence(Mobile target)
         {
             if (!target.Alive)
             {

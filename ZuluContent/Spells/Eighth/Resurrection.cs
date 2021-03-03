@@ -51,7 +51,7 @@ namespace Server.Spells.Eighth
                 Caster.SendLocalizedMessage(
                     1010395); // The veil of death in this area is too strong and resists thy efforts to restore life.
             }
-            else if (CheckBSequence(m, true))
+            else if (CheckBeneficialSequence(m, true))
             {
                 SpellHelper.Turn(Caster, m);
 
