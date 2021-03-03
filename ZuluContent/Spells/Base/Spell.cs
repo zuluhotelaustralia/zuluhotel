@@ -531,6 +531,8 @@ namespace Server.Spells
             Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
 
 
+            
+            
             var target = GetTarget();
             
             TargetResponse<object> targetResponse = null;
@@ -551,10 +553,9 @@ namespace Server.Spells
 
         public virtual AsyncTarget<object> GetTarget()
         {
-            return null;
+            return Info.TargetOptions != null ? new AsyncTarget<object>(Caster, Info.TargetOptions) : null; 
         }
         
-
         public virtual Task OnCastAsync(TargetResponse<object> response = null)
         {
             return Task.CompletedTask;

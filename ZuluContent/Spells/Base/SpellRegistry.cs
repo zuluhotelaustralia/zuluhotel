@@ -13,6 +13,7 @@ using Server.Spells.Second;
 using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
+using Server.Targeting;
 
 namespace Server.Spells
 {
@@ -171,6 +172,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.Ginseng] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = 12,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -192,6 +199,12 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = 12,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );

@@ -9,18 +9,9 @@ namespace Server.Spells.First
         public override bool DelayedDamageStacking => true;
 
         public override bool DelayedDamage => true;
-
-        public readonly TargetOptions Options = new()
-        {
-            Range = 12,
-            AllowGround = false,
-            Flags = TargetFlags.Harmful
-        };
         
         public MagicArrowSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-
-        public override AsyncTarget<object> GetTarget() => new(Caster, Options);
-
+        
         public override async Task OnCastAsync(TargetResponse<object> response = null)
         {
             if (!(response?.Target is Mobile mobile))

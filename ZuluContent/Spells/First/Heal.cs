@@ -8,18 +8,7 @@ namespace Server.Spells.First
 {
     public class HealSpell : MagerySpell
     {
-        public HealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-        
-        public readonly TargetOptions Options = new()
-        {
-            Range = 12,
-            AllowGround = false,
-            Flags = TargetFlags.Beneficial
-        };
-        
-        public override AsyncTarget<object> GetTarget() => new(Caster, Options);
+        public HealSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public override async Task OnCastAsync(TargetResponse<object> response = null)
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using Server.Commands;
 using Server.Engines.Magic;
 using Server.Items;
+using Server.Targeting;
 
 namespace Server.Spells
 {
@@ -21,5 +22,7 @@ namespace Server.Spells
         public Dictionary<Type, int> ReagentCosts { get; init; } = new();
 
         public ElementalType DamageType { get; init; } = ElementalType.None;
+
+        public TargetOptions TargetOptions { get; init; } = null;
     }
 }
