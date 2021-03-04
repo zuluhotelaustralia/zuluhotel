@@ -62,15 +62,15 @@ namespace Server.Spells
 
         public virtual bool RevealOnCast => Info.RevealOnCast;
 
-        public virtual bool ClearHandsOnCast => Info.RevealOnCast;
+        public virtual bool ClearHandsOnCast => Info.ClearHandsOnCast;
 
-        public virtual bool ShowHandMovement => Info.RevealOnCast;
+        public virtual bool ShowHandMovement => Info.ShowHandMovement;
 
-        public virtual bool DelayedDamage => Info.RevealOnCast;
+        public virtual bool DelayedDamage => Info.DelayedDamage;
 
-        public virtual bool DelayedDamageStacking => Info.RevealOnCast;
+        public virtual bool DelayedDamageStacking => Info.DelayedDamageStacking;
 
-        public virtual bool BlocksMovement => Info.RevealOnCast;
+        public virtual bool BlocksMovement => Info.BlocksMovement;
 
         public virtual bool CheckNextSpellTime => !IsWand() || !m_SpellStrike;
 

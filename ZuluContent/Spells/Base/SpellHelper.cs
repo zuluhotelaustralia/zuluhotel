@@ -187,7 +187,7 @@ namespace Server.Spells
         public static double CalcSpellDamage(Mobile caster, Mobile defender, Spell spell, bool areaSpell = false)
         {
             const int mageryDivider = 5;
-            const int onPlayerDivider = 3;
+            const int playerDivider = 3;
             const int circleMultiplier = 3;
             const int dices = 5;
 
@@ -199,7 +199,7 @@ namespace Server.Spells
                 circle -= 3;
 
             if (circle < 1)
-                return 0.0;
+                circle = 1;
 
             var damage = Utility.RandomMinMax(circle * circleMultiplier, circle * circleMultiplier * dices) +
                          caster.Skills[SkillName.Magery].Value / mageryDivider;
@@ -211,7 +211,7 @@ namespace Server.Spells
             caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref damage));
             
             if (defender.Player)
-                damage /= onPlayerDivider;
+                damage /= playerDivider;
 
             return damage;
         }
