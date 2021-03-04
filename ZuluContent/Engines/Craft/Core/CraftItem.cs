@@ -20,7 +20,7 @@ namespace Server.Engines.Craft
         None
     }
 
-    public interface ICraftable
+    public interface ICraftable : IEnchanted
     {
         private const int Version = 1;
         public Mobile Crafter { get; set; }
@@ -50,6 +50,8 @@ namespace Server.Engines.Craft
         int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
             BaseTool tool,
             CraftItem craftItem, int resHue);
+
+        public void OnSingleClick(Mobile m);
     }
 
     public class CraftItem

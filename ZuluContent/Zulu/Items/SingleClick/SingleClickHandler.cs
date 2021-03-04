@@ -50,10 +50,16 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
 
             var text = item is ICraftable craftable && craftable.PlayerConstructed
-                ? $"{GetCraftedFortified(item as Item)}{GetCraftedExceptional(item as Item)}{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}"
+                ? GetCraftableItemName(craftable)
                 : $"{prefix}{GetItemDesc(item as Item)}{suffix}";
 
             return text;
+        }
+
+        public static string GetCraftableItemName(ICraftable item)
+        {
+            return
+                $"{GetCraftedFortified(item as Item)}{GetCraftedExceptional(item as Item)}{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}";
         }
 
         private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
@@ -62,6 +68,16 @@ namespace ZuluContent.Zulu.Items.SingleClick
                 return;
 
             var text = GetMagicItemName(item);
+
+            SendResponse(m, item, text);
+        }
+
+        private static void CraftableHandleSingleClick<T>(T item, Mobile m) where T : Item, ICraftable
+        {
+            if (!Validate(m, item))
+                return;
+
+            var text = GetCraftableItemName(item);
 
             SendResponse(m, item, text);
         }

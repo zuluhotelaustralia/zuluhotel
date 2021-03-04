@@ -10,7 +10,7 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseContainer : Container, ICraftable, IMagicItem
+    public abstract class BaseContainer : Container, ICraftable
     {
         private CraftResource m_Resource;
         private EnchantmentDictionary m_Enchantments;
@@ -18,19 +18,6 @@ namespace Server.Items
         public EnchantmentDictionary Enchantments
         {
             get => m_Enchantments ??= new EnchantmentDictionary();
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool Identified
-        {
-            get => Enchantments.Identified;
-            set
-            {
-                if (!Enchantments.Identified && value)
-                    Enchantments.OnIdentified(this);
-
-                Enchantments.Identified = value;
-            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
