@@ -177,7 +177,7 @@ namespace Server.Spells
                     {
                         Range = 12,
                         AllowGround = false,
-                        Flags = TargetFlags.Beneficial
+                        Flags = TargetFlags.Beneficial,
                     }
                 }
             );
@@ -1427,6 +1427,7 @@ namespace Server.Spells
                     Mantra = "An Corp",
                     Action = 245,
                     AllowTown = true,
+                    AllowDead = true,
                     LeftHandEffect = 9062,
                     RightHandEffect = 9062,
                     Circle = SpellCircle.Eighth,

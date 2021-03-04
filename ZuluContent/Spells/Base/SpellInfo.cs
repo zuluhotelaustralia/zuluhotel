@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Server.Commands;
 using Server.Engines.Magic;
-using Server.Items;
 using Server.Targeting;
 
 namespace Server.Spells
@@ -13,6 +11,9 @@ namespace Server.Spells
         public SpellCircle Circle { get; init; }
         public int Action { get; init; }
         public bool AllowTown { get; init; }
+        public bool AllowDead { get; init; }
+        public bool DelayedDamageStacking { get; init; }
+        public bool DelayedDamage { get; init; }
         public int[] Amounts => ReagentCosts.Values.ToArray();
         public string Mantra { get; init; }
         public string Name { get; init; }
@@ -20,9 +21,7 @@ namespace Server.Spells
         public int LeftHandEffect { get; init; }
         public int RightHandEffect { get; init; }
         public Dictionary<Type, int> ReagentCosts { get; init; } = new();
-
         public ElementalType DamageType { get; init; } = ElementalType.None;
-
-        public TargetOptions TargetOptions { get; init; } = null;
+        public TargetOptions TargetOptions { get; init; }
     }
 }

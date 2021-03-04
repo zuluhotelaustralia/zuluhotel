@@ -51,7 +51,7 @@ namespace Server.Spells.Eighth
                 Caster.SendLocalizedMessage(
                     1010395); // The veil of death in this area is too strong and resists thy efforts to restore life.
             }
-            else if (CheckBeneficialSequence(m, true))
+            else if (CheckBeneficialSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -59,7 +59,6 @@ namespace Server.Spells.Eighth
                 m.FixedEffect(0x376A, 10, 16);
 
                 m.CloseGump<ResurrectGump>();
-                ;
                 m.SendGump(new ResurrectGump(m, Caster));
             }
 

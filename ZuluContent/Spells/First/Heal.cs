@@ -6,29 +6,22 @@ using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.First
 {
-    public class HealSpell : MagerySpell
+    public class HealSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
         public HealSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        public override async Task OnCastAsync(TargetResponse<object> response = null)
+        public async Task OnCastAsync(ITargetResponse<Mobile> response)
         {
-            if (!(response?.Target is Mobile mobile))
+            if (!response.HasValue)
                 return;
-
-            if (!Caster.CanSee(mobile))
-            {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                return;
-            }
+            
+            var mobile = response.Target;
             
             if (mobile.Poisoned)
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, Caster == mobile ? 1005000 : 1010398);
                 return;
             }
-            
-            if (!CheckBeneficialSequence(mobile))
-                return;
 
             SpellHelper.Turn(Caster, mobile);
 

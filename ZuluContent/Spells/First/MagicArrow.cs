@@ -4,7 +4,7 @@ using Server.Targeting;
 
 namespace Server.Spells.First
 {
-    public class MagicArrowSpell : MagerySpell
+    public class MagicArrowSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
         public override bool DelayedDamageStacking => true;
 
@@ -12,14 +12,13 @@ namespace Server.Spells.First
         
         public MagicArrowSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
         
-        public override async Task OnCastAsync(TargetResponse<object> response = null)
+        public async Task OnCastAsync(ITargetResponse<Mobile> response)
         {
-            if (!(response?.Target is Mobile mobile))
+            if (!response.HasValue)
                 return;
-
-            if (!CheckHarmfulSequence(mobile))
-                return;
-
+            
+            var mobile = response.Target;
+            
             var source = Caster;
 
             SpellHelper.Turn(source, mobile);

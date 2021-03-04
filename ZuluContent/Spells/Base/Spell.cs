@@ -37,6 +37,7 @@ namespace Server.Spells
             Caster = caster;
             SpellItem = spellItem;
             m_SpellStrike = spellStrike;
+            
         }
 
         public SpellCircle Circle => Info.Circle;
@@ -529,36 +530,23 @@ namespace Server.Spells
 
             Caster.Region?.OnSpellCast(Caster, this);
             Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
-            
-            var target = GetTarget();
-            if (target != null)
-            {
-                Caster.Target = target;
-                var targetResponse = await target;
-                CheckSequence();
 
-                await OnCastAsync(targetResponse);
+            if (this is IAsyncSpell asyncSpell)
+            {
+                CheckSequence();
+                await asyncSpell.CastAsync();
                 FinishSequence();
             }
             else
             {
                 OnCast();
-            
                 if (Caster.Player && Caster.Target != originalTarget)
+                {
                     Caster.Target?.BeginTimeout(Caster, TimeSpan.FromSeconds(30.0));
+                }
             }
         }
-
-        public virtual AsyncTarget<object> GetTarget()
-        {
-            return Info.TargetOptions != null ? new AsyncTarget<object>(Caster, Info.TargetOptions) : null; 
-        }
         
-        public virtual Task OnCastAsync(TargetResponse<object> response = null)
-        {
-            return Task.CompletedTask;
-        }
-
         public virtual void OnCast()
         {
             
@@ -722,15 +710,15 @@ namespace Server.Spells
             return true;
         }
         
-        public bool CheckBeneficialSequence(Mobile target, bool allowDead = false)
+        public bool CheckBeneficialSequence(Mobile target)
         {
-            if (!target.Alive && !allowDead)
+            if (!target.Alive && !Info.AllowDead)
             {
                 Caster.SendLocalizedMessage(501857); // This spell won't work on that!
                 return false;
             }
 
-            if (Caster.CanBeBeneficial(target, true, allowDead) && CheckSequence())
+            if (Caster.CanBeBeneficial(target, true, Info.AllowDead) && CheckSequence())
             {
                 Caster.DoBeneficial(target);
                 return true;
