@@ -157,7 +157,7 @@ namespace Scripts.Zulu.Packets
                 {
                     AffixType.Append => $"{text}{affix}",
                     AffixType.Prepend => $"{affix}{text}",
-                    _ => $"{affix}{text}"
+                    _ => $"{text}{affix}"
                 };
 
                 if ((flags & AffixType.System) != 0)

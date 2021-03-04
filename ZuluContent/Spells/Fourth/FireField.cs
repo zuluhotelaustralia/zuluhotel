@@ -183,8 +183,7 @@ namespace Server.Spells.Fourth
                     m.Damage(damage, m_Caster);
                     m.PlaySound(0x208);
 
-                    if (m is BaseCreature)
-                        ((BaseCreature) m).OnHarmfulSpell(m_Caster);
+
                 }
 
                 return true;
@@ -264,9 +263,6 @@ namespace Server.Spells.Fourth
 
                                 m.Damage(damage, caster);
                                 m.PlaySound(0x208);
-
-                                if (m is BaseCreature)
-                                    ((BaseCreature) m).OnHarmfulSpell(caster);
                             }
                         }
                     }

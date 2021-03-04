@@ -1,77 +1,58 @@
-using System.Collections;
+using System;
+using System.Threading.Tasks;
+using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+
+#pragma warning disable 1998
 
 namespace Server.Spells.First
 {
-    public class ReactiveArmorSpell : MagerySpell
+    public class ReactiveArmorSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        private static readonly Hashtable m_Table = new Hashtable();
-
-        public ReactiveArmorSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ReactiveArmorSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
+            if (!response.HasValue)
+                return;
 
-
-        public override bool CanCast()
-        {
-            if (!base.CanCast())
-                return false;
+            var mobile = response.Target;
             
-            if (Caster.MeleeDamageAbsorb > 0)
+            if (!mobile.BeginAction(typeof(ReactiveArmorSpell)))
             {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-                return false;
+                Caster.SendLocalizedMessage(Caster == mobile 
+                    ? 1005384 // You currently have a reactive armor spell in effect.
+                    : 502349 // This target already has Reactive Armor
+                ); 
+                return;
             }
 
-            if (!Caster.CanBeginAction(typeof(DefensiveSpell)))
+            var charges = Caster.Skills[SkillName.Magery].Value / 15;
+            var duration = Caster.Skills[SkillName.Magery].Value / 5;
+            
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref charges));
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+
+            if (Caster is IEnchanted enchanted)
             {
-                Caster.SendLocalizedMessage(1005385); // The spell will not adhere to you at this time.
-                return false;
+                enchanted.Enchantments.Set((ReactiveArmor e) => e.Value = (int) charges);
             }
 
-            return true;
+            Caster.FixedParticles(0x376A, 9, 32, 5008, EffectLayer.Waist);
+            Caster.PlaySound(0x1F2);
+
+            EndActionAsync(mobile, duration);
         }
 
-        public override void OnCast()
+        private static async void EndActionAsync(Mobile mobile, double duration)
         {
-            if (Caster.MeleeDamageAbsorb > 0)
+            await Timer.Pause(TimeSpan.FromSeconds(duration));
+
+            if (!mobile.CanBeginAction<ReactiveArmorSpell>())
             {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
+                mobile.SendLocalizedMessage(1005556); // Your reactive armor spell has been nullified.
+                mobile.EndAction<ReactiveArmorSpell>();
             }
-            else if (!Caster.CanBeginAction(typeof(DefensiveSpell)))
-            {
-                Caster.SendLocalizedMessage(1005385); // The spell will not adhere to you at this time.
-            }
-            else if (CheckSequence())
-            {
-                if (Caster.BeginAction(typeof(DefensiveSpell)))
-                {
-                    var value = (int) (Caster.Skills[SkillName.Magery].Value +
-                                       Caster.Skills[SkillName.Meditation].Value +
-                                       Caster.Skills[SkillName.Inscribe].Value);
-                    value /= 3;
-
-                    if (value < 0)
-                        value = 1;
-                    else if (value > 75)
-                        value = 75;
-
-                    Caster.MeleeDamageAbsorb = value;
-
-                    Caster.FixedParticles(0x376A, 9, 32, 5008, EffectLayer.Waist);
-                    Caster.PlaySound(0x1F2);
-                }
-                else
-                {
-                    Caster.SendLocalizedMessage(1005385); // The spell will not adhere to you at this time.
-                }
-            }
-
-            FinishSequence();
-        }
-
-        public static void EndArmor(Mobile m)
-        {
-            if (m_Table.Contains(m)) m_Table.Remove(m);
         }
     }
 }

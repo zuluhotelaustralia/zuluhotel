@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Server.Targeting;
 
@@ -16,6 +17,12 @@ namespace Server.Spells
     {
         async Task IAsyncSpell.CastAsync()
         {
+            if (Info.TargetOptions == null)
+            {
+                Console.WriteLine($"Missing {nameof(TargetOptions)} for {GetType().FullName}");
+                return;
+            }
+            
             var target = new AsyncTarget<T>(Caster, Info.TargetOptions);
             Caster.Target = target;
 
@@ -30,9 +37,11 @@ namespace Server.Spells
                     return;
             }
             
-            await OnCastAsync(response);
+            
+            
+            await OnTargetAsync(response);
         }
         
-        public Task OnCastAsync(ITargetResponse<T> response);
+        public Task OnTargetAsync(ITargetResponse<T> response);
     }
 }

@@ -69,7 +69,6 @@ namespace Server.Spells.Fourth
 
                 var args = $"{percentage}\t{percentage}\t{percentage}\t{10}\t{10}\t{10}\t{10}";
 
-                HarmfulSpell(m);
             }
 
             FinishSequence();

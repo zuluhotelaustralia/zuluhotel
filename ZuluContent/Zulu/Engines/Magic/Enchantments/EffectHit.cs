@@ -43,7 +43,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public class EffectHitInfo : EnchantmentInfo
     {
-        private static EffectHitInfo DefaultVariant = new EffectHitInfo();
+        private static EffectHitInfo DefaultVariant = new();
         
         public override string Description { get; protected set; } = "Effect On Hit";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
@@ -57,35 +57,35 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [EffectHitType.None] = DefaultVariant,
                 [EffectHitType.Banish] = DefaultVariant,
                 [EffectHitType.TriElemental] = DefaultVariant,
-                [EffectHitType.Piercing] = new EffectHitInfo
+                [EffectHitType.Piercing] = new()
                 {
                     Hue = 1141, 
                     CursedHue = 1645
                 },
-                [EffectHitType.LifeDrain] = new EffectHitInfo
+                [EffectHitType.LifeDrain] = new()
                 {
                     Hue = 138, 
                     CursedHue = 137, 
                     Place = EnchantNameType.Prefix
                 },
-                [EffectHitType.ManaDrain] = new EffectHitInfo
+                [EffectHitType.ManaDrain] = new()
                 {
                     Hue = 0, 
                     CursedHue = 0,
                     Place = EnchantNameType.Prefix
                 },
-                [EffectHitType.StamDrain] = new EffectHitInfo
+                [EffectHitType.StamDrain] = new()
                 {
                     Hue = 0, 
                     CursedHue = 0,
                     Place = EnchantNameType.Prefix
                 },
-                [EffectHitType.Blackrock] = new EffectHitInfo
+                [EffectHitType.Blackrock] = new()
                 {
                     Hue = 1157, 
                     CursedHue = 1174
                 },
-                [EffectHitType.Void] = new EffectHitInfo
+                [EffectHitType.Void] = new()
                 {
                     Hue = 1175,
                     CursedHue = 1174

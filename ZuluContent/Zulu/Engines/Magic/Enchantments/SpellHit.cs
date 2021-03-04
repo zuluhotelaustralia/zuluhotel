@@ -24,28 +24,29 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class SpellHit : Enchantment<SpellHitInfo>
     {
+        // TODO: Replace with ITargetableAsyncSpell
         public static readonly IReadOnlyDictionary<SpellEntry, Action<Mobile, Mobile>> Spells =
             new Dictionary<SpellEntry, Action<Mobile, Mobile>>
             {
                 [SpellEntry.None]  = (a, d) => {},
-                [SpellEntry.Clumsy] = (a, d) => Spell.Create<ClumsySpell>(a, null, true).Target(d),
-                [SpellEntry.Feeblemind] = (a, d) => Spell.Create<FeeblemindSpell>(a, null, true).Target(d),
-                [SpellEntry.MagicArrow] = (a, d) => Spell.Create<MagicArrowSpell>(a, null, true).OnCastAsync(new TargetResponse<Mobile> { Target = d }),
-                [SpellEntry.Weaken] = (a, d) => Spell.Create<WeakenSpell>(a, null, true).Target(d),
-                [SpellEntry.Harm] = (a, d) => Spell.Create<HarmSpell>(a, null, true).Target(d),
-                [SpellEntry.Fireball] = (a, d) => Spell.Create<FireballSpell>(a, null, true).Target(d),
-                [SpellEntry.Curse] = (a, d) => Spell.Create<CurseSpell>(a, null, true).Target(d),
-                [SpellEntry.Lightning] = (a, d) => Spell.Create<LightningSpell>(a, null, true).Target(d),
-                [SpellEntry.ManaDrain] = (a, d) => Spell.Create<ManaDrainSpell>(a, null, true).Target(d),
-                [SpellEntry.MindBlast] = (a, d) => Spell.Create<MindBlastSpell>(a, null, true).Target(d),
-                [SpellEntry.Paralyze] = (a, d) => Spell.Create<ParalyzeSpell>(a, null, true).Target(d),
-                [SpellEntry.EnergyBolt] = (a, d) => Spell.Create<EnergyBoltSpell>(a, null, true).Target(d),
-                [SpellEntry.Explosion] = (a, d) => Spell.Create<ExplosionSpell>(a, null, true).Target(d),
-                [SpellEntry.MassCurse] = (a, d) => Spell.Create<MassCurseSpell>(a, null, true).Target(d),
-                [SpellEntry.ChainLightning] = (a, d) => Spell.Create<ChainLightningSpell>(a, null, true).Target(d),
-                [SpellEntry.FlameStrike] = (a, d) => Spell.Create<FlameStrikeSpell>(a, null, true).Target(d),
-                [SpellEntry.MeteorSwarm] = (a, d) => Spell.Create<MeteorSwarmSpell>(a, null, true).Target(d),
-                [SpellEntry.Earthquake] = (a, _) => Spell.Create<EarthquakeSpell>(a, null, true).OnCast(),
+                // [SpellEntry.Clumsy] = (a, d) => Spell.Create<ClumsySpell>(a, null, true).Target(d),
+                // [SpellEntry.Feeblemind] = (a, d) => Spell.Create<FeeblemindSpell>(a, null, true).Target(d),
+                // [SpellEntry.MagicArrow] = (a, d) => Spell.Create<MagicArrowSpell>(a, null, true).OnTargetAsync(new TargetResponse<Mobile> { Target = d }),
+                // [SpellEntry.Weaken] = (a, d) => Spell.Create<WeakenSpell>(a, null, true).Target(d),
+                // [SpellEntry.Harm] = (a, d) => Spell.Create<HarmSpell>(a, null, true).Target(d),
+                // [SpellEntry.Fireball] = (a, d) => Spell.Create<FireballSpell>(a, null, true).Target(d),
+                // [SpellEntry.Curse] = (a, d) => Spell.Create<CurseSpell>(a, null, true).Target(d),
+                // [SpellEntry.Lightning] = (a, d) => Spell.Create<LightningSpell>(a, null, true).Target(d),
+                // [SpellEntry.ManaDrain] = (a, d) => Spell.Create<ManaDrainSpell>(a, null, true).Target(d),
+                // [SpellEntry.MindBlast] = (a, d) => Spell.Create<MindBlastSpell>(a, null, true).Target(d),
+                // [SpellEntry.Paralyze] = (a, d) => Spell.Create<ParalyzeSpell>(a, null, true).Target(d),
+                // [SpellEntry.EnergyBolt] = (a, d) => Spell.Create<EnergyBoltSpell>(a, null, true).Target(d),
+                // [SpellEntry.Explosion] = (a, d) => Spell.Create<ExplosionSpell>(a, null, true).Target(d),
+                // [SpellEntry.MassCurse] = (a, d) => Spell.Create<MassCurseSpell>(a, null, true).Target(d),
+                // [SpellEntry.ChainLightning] = (a, d) => Spell.Create<ChainLightningSpell>(a, null, true).Target(d),
+                // [SpellEntry.FlameStrike] = (a, d) => Spell.Create<FlameStrikeSpell>(a, null, true).Target(d),
+                // [SpellEntry.MeteorSwarm] = (a, d) => Spell.Create<MeteorSwarmSpell>(a, null, true).Target(d),
+                // [SpellEntry.Earthquake] = (a, _) => Spell.Create<EarthquakeSpell>(a, null, true).OnCast(),
             };
 
         private static readonly List<SpellEntry> Entries = Spells.Keys.ToList();

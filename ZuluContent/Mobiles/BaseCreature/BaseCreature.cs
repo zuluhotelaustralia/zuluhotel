@@ -869,15 +869,7 @@ namespace Server.Mobiles
                 CheckDistracted(from);
             }
         }
-
-        public virtual void OnHarmfulSpell(Mobile from)
-        {
-        }
-
-        public virtual void CheckReflect(Mobile caster, ref bool reflect)
-        {
-        }
-
+        
         public virtual void OnCarve(Mobile from, Corpse corpse, Item with)
         {
             int feathers = Feathers;
@@ -4402,5 +4394,9 @@ namespace Server.Mobiles
         }
 
         #endregion
+
+        public virtual void CheckReflect(Mobile caster, ref bool reflect)
+        {
+        }
     }
 }

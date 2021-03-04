@@ -58,7 +58,6 @@ namespace Server.Spells.Sixth
                     m.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
                     m.PlaySound(0x1FB);
 
-                    HarmfulSpell(m);
                 }
             }
 

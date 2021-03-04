@@ -621,15 +621,14 @@ namespace Server.Items
 
         #endregion
 
-        public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage, bool skipHooks = false)
+        public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage)
         {
             if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
             {
                 damage = shield.OnHit(this, damage);
 
                 // ReSharper disable once AccessToModifiedClosure
-                if (!skipHooks)
-                    defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
+                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
             }
 
             double chance = Utility.RandomDouble();
@@ -647,8 +646,7 @@ namespace Server.Items
             if (armorItem is BaseArmor armor)
             {
                 damage = armor.OnHit(this, damage);
-                if (!skipHooks)
-                    armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
+                armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
             }
 
             int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
@@ -674,8 +672,7 @@ namespace Server.Items
                 damage -= Utility.Random(from, to - from + 1);
             }
 
-            if (!skipHooks)
-                defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
+            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
 
             return damage;
         }
@@ -698,7 +695,6 @@ namespace Server.Items
 
             // ReSharper disable once AccessToModifiedClosure
             attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
-            defender.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
 
             if (attacker is BaseCreature bc && bc.GetWeaponAbility() is { } ab &&
                 bc.WeaponAbilityChance >= Utility.RandomDouble())

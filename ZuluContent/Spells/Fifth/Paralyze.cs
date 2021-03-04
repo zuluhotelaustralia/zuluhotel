@@ -38,8 +38,6 @@ namespace Server.Spells.Fifth
 
                 m.PlaySound(0x204);
                 m.FixedEffect(0x376A, 6, 1);
-
-                HarmfulSpell(m);
             }
 
             FinishSequence();

@@ -60,17 +60,17 @@ namespace Server.Spells
 
         public virtual SkillName DamageSkill { get; } = SkillName.EvalInt;
 
-        public virtual bool RevealOnCast { get; } = true;
+        public virtual bool RevealOnCast => Info.RevealOnCast;
 
-        public virtual bool ClearHandsOnCast { get; } = true;
+        public virtual bool ClearHandsOnCast => Info.RevealOnCast;
 
-        public virtual bool ShowHandMovement { get; } = true;
+        public virtual bool ShowHandMovement => Info.RevealOnCast;
 
-        public virtual bool DelayedDamage { get; } = false;
+        public virtual bool DelayedDamage => Info.RevealOnCast;
 
-        public virtual bool DelayedDamageStacking { get; } = true;
+        public virtual bool DelayedDamageStacking => Info.RevealOnCast;
 
-        public virtual bool BlocksMovement { get; } = true;
+        public virtual bool BlocksMovement => Info.RevealOnCast;
 
         public virtual bool CheckNextSpellTime => !IsWand() || !m_SpellStrike;
 
@@ -192,13 +192,7 @@ namespace Server.Spells
 
             contexts.Remove(m);
         }
-
-        public void HarmfulSpell(Mobile m)
-        {
-            if (m is BaseCreature creature)
-                creature.OnHarmfulSpell(Caster);
-        }
-
+        
         public virtual bool OnCasterEquiping(Item item)
         {
             if (IsCasting)
