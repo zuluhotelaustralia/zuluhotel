@@ -5,29 +5,25 @@ namespace Server.Items
     [FlipableAttribute(0xF50, 0xF4F)]
     public class Crossbow : BaseRanged
     {
-        public override int EffectId
-        {
-            get { return 0x1BFE; }
-        }
+        public override int EffectId => 0x1BFE;
 
         public override Type AmmoType => typeof(Bolt);
 
         public override Item Ammo => new Bolt();
 
-        public override int DefaultStrengthReq { get; } = 30;
+        public override int DefaultStrengthReq => 30;
 
-        public override int DefaultMinDamage { get; } = 8;
+        public override int DefaultMinDamage => 12;
 
-        public override int DefaultMaxDamage { get; } = 43;
+        public override int DefaultMaxDamage => 27;
 
-        public override int DefaultSpeed { get; } = 18;
+        public override int DefaultSpeed => 30;
 
-        public override int DefaultMaxRange { get; } = 8;
+        public override int DefaultMaxRange => 4;
 
-        public override int InitMinHits { get; } = 31;
+        public override int InitMinHits => 70;
 
-        public override int InitMaxHits { get; } = 80;
-        
+        public override int InitMaxHits => 70;
 
 
         [Constructible]

@@ -2,48 +2,53 @@ using System;
 
 namespace Server.Items
 {
-    [FlipableAttribute( 0x13FD, 0x13FC )]
-	public class HeavyCrossbow : BaseRanged
-	{
-		public override int EffectId{ get{ return 0x1BFE; } }
-		public override Type AmmoType{ get{ return typeof( Bolt ); } }
-		public override Item Ammo{ get{ return new Bolt(); } }
+    [FlipableAttribute(0x13FD, 0x13FC)]
+    public class HeavyCrossbow : BaseRanged
+    {
+        public override int EffectId => 0x1BFE;
 
-		public override int DefaultStrengthReq{ get{ return 40; } }
-		public override int DefaultMinDamage{ get{ return 11; } }
-		public override int DefaultMaxDamage{ get{ return 56; } }
-		public override int DefaultSpeed{ get{ return 10; } }
+        public override Type AmmoType => typeof(Bolt);
 
-		public override int DefaultMaxRange{ get{ return 8; } }
+        public override Item Ammo => new Bolt();
 
-		public override int InitMinHits{ get{ return 31; } }
-		public override int InitMaxHits{ get{ return 100; } }
+        public override int DefaultStrengthReq => 40;
 
+        public override int DefaultMinDamage => 12;
 
-		[Constructible]
-        public HeavyCrossbow() : base( 0x13FD )
-		{
-			Weight = 9.0;
-			Layer = Layer.TwoHanded;
-		}
+        public override int DefaultMaxDamage => 32;
 
-		[Constructible]
-        public HeavyCrossbow( Serial serial ) : base( serial )
-		{
-		}
+        public override int DefaultSpeed => 25;
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override int DefaultMaxRange => 5;
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override int InitMinHits => 70;
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override int InitMaxHits => 70;
 
-			int version = reader.ReadInt();
-		}
-	}
+        [Constructible]
+        public HeavyCrossbow() : base(0x13FD)
+        {
+            Weight = 9.0;
+            Layer = Layer.TwoHanded;
+        }
+
+        [Constructible]
+        public HeavyCrossbow(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

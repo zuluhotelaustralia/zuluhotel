@@ -950,6 +950,9 @@ namespace Server.Items
             // Apply bonuses
             damage += damage * modifiers;
 
+            // Scale by durability
+            damage *= ((double) HitPoints / (double) MaxHitPoints);
+
             return (int) damage;
         }
 
@@ -1651,15 +1654,29 @@ namespace Server.Items
             if (makersMark)
                 Crafter = from;
 
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
             PlayerConstructed = true;
 
             var resEnchantments = CraftResources.GetEnchantments(Resource);
-            foreach (var (key, value) in resEnchantments)
+
+            if (resEnchantments != null)
             {
-                Enchantments.SetFromResourceType(key, value);
+                foreach (var (key, value) in resEnchantments)
+                {
+                    Enchantments.SetFromResourceType(key, value);
+                }
             }
 
             Quality = quality;
+
+            MaxHitPoints = (int) (MaxHitPoints * quality);
+            HitPoints = MaxHitPoints;
 
             return mark;
         }
