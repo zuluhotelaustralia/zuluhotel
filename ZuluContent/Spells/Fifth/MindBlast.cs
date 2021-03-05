@@ -4,7 +4,7 @@ namespace Server.Spells.Fifth
 {
     public class MindBlastSpell : MagerySpell
     {
-        public MindBlastSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MindBlastSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Server.Spells.Fifth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 Mobile from = Caster, target = m;
 

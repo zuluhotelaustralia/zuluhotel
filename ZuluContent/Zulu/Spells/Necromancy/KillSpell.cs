@@ -28,7 +28,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 130; }
         }
 
-        public KillSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public KillSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

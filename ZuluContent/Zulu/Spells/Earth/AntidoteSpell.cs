@@ -34,7 +34,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 5; }
         }
 
-        public AntidoteSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AntidoteSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -57,7 +57,7 @@ namespace Scripts.Zulu.Spells.Earth
                 goto Return;
             }
 
-            if (!CheckBSequence(m)) goto Return;
+            if (!CheckBeneficialSequence(m)) goto Return;
 
             SpellHelper.Turn(Caster, m);
 

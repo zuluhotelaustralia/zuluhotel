@@ -4,7 +4,7 @@ namespace Server.Spells.Third
 {
     public class FireballSpell : MagerySpell
     {
-        public FireballSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public FireballSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Server.Spells.Third
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 var source = Caster;
 

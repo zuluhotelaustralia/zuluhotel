@@ -9,7 +9,7 @@ namespace Server.Spells.Fifth
 {
     public class PoisonFieldSpell : MagerySpell
     {
-        public PoisonFieldSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public PoisonFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -154,9 +154,6 @@ namespace Server.Spells.Fifth
                 if (m.ApplyPoison(m_Caster, p) == ApplyPoisonResult.Poisoned)
                     if (SpellHelper.CanRevealCaster(m))
                         m_Caster.RevealingAction();
-
-                if (m is BaseCreature)
-                    ((BaseCreature) m).OnHarmfulSpell(m_Caster);
             }
 
             public override bool OnMoveOver(Mobile m)

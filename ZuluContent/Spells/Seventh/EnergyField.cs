@@ -8,7 +8,7 @@ namespace Server.Spells.Seventh
 {
     public class EnergyFieldSpell : MagerySpell
     {
-        public EnergyFieldSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public EnergyFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Server.Engines.Magic;
 using Server.Items;
 using Server.Misc;
@@ -30,11 +32,12 @@ namespace Server.Spells
         private bool m_SpellStrike;
         private long m_StartCastTime;
 
-        public Spell(Mobile caster, Item scroll, bool spellStrike = false)
+        public Spell(Mobile caster, Item spellItem, bool spellStrike = false)
         {
             Caster = caster;
-            Scroll = scroll;
-            m_SpellStrike = false;
+            SpellItem = spellItem;
+            m_SpellStrike = spellStrike;
+            
         }
 
         public SpellCircle Circle => Info.Circle;
@@ -51,23 +54,23 @@ namespace Server.Spells
 
         public Type[] Reagents => Info.Reagents;
 
-        public Item Scroll { get; private set; }
+        public Item SpellItem { get; private set; }
 
         public virtual SkillName CastSkill { get; } = SkillName.Magery;
 
         public virtual SkillName DamageSkill { get; } = SkillName.EvalInt;
 
-        public virtual bool RevealOnCast { get; } = true;
+        public virtual bool RevealOnCast => Info.RevealOnCast;
 
-        public virtual bool ClearHandsOnCast { get; } = true;
+        public virtual bool ClearHandsOnCast => Info.ClearHandsOnCast;
 
-        public virtual bool ShowHandMovement { get; } = true;
+        public virtual bool ShowHandMovement => Info.ShowHandMovement;
 
-        public virtual bool DelayedDamage { get; } = false;
+        public virtual bool DelayedDamage => Info.DelayedDamage;
 
-        public virtual bool DelayedDamageStacking { get; } = true;
+        public virtual bool DelayedDamageStacking => Info.DelayedDamageStacking;
 
-        public virtual bool BlocksMovement { get; } = true;
+        public virtual bool BlocksMovement => Info.BlocksMovement;
 
         public virtual bool CheckNextSpellTime => !IsWand() || !m_SpellStrike;
 
@@ -150,7 +153,7 @@ namespace Server.Spells
             var spell = SpellRegistry.Create<T>(caster, scroll);
 
             spell.Caster = caster;
-            spell.Scroll = scroll;
+            spell.SpellItem = scroll;
             spell.m_SpellStrike = spellStrike;
 
             return spell;
@@ -161,7 +164,7 @@ namespace Server.Spells
             var spell = SpellRegistry.Create(entry, caster, scroll);
 
             spell.Caster = caster;
-            spell.Scroll = scroll;
+            spell.SpellItem = scroll;
             spell.m_SpellStrike = spellStrike;
 
             return spell;
@@ -189,13 +192,7 @@ namespace Server.Spells
 
             contexts.Remove(m);
         }
-
-        public void HarmfulSpell(Mobile m)
-        {
-            if (m is BaseCreature creature)
-                creature.OnHarmfulSpell(Caster);
-        }
-
+        
         public virtual bool OnCasterEquiping(Item item)
         {
             if (IsCasting)
@@ -214,7 +211,7 @@ namespace Server.Spells
 
         public virtual bool ConsumeReagents()
         {
-            if (Scroll != null || !Caster.Player)
+            if (SpellItem != null || !Caster.Player)
                 return true;
 
             var pack = Caster.Backpack;
@@ -409,31 +406,10 @@ namespace Server.Spells
                 Caster.SendLocalizedMessage(500641); // Your concentration is disturbed, thus ruining thy spell.
         }
 
-        public virtual bool CheckCast()
+        public virtual bool CanCast()
         {
-            return true;
-        }
-
-        public virtual bool IsWand()
-        {
-            return Scroll is BaseWand;
-        }
-
-        public virtual void SayMantra()
-        {
-            if (IsWand() || m_SpellStrike)
-                return;
-
-            if (!string.IsNullOrEmpty(Info.Mantra) &&
-                (Caster is BaseCreature creature && creature.SaySpellMantra || Caster.Player))
-                Caster.PublicOverheadMessage(MessageType.Spell, Caster.SpeechHue, true, Info.Mantra, false);
-        }
-
-        public bool Cast()
-        {
-            m_StartCastTime = Core.TickCount;
-
-            if (!Caster.CheckAlive()) return false;
+            if (!Caster.CheckAlive()) 
+                return false;
 
             if (IsWand() && Caster.Spell != null && Caster.Spell.IsCasting)
             {
@@ -476,13 +452,31 @@ namespace Server.Spells
                 return false;
             }
 
-            if (Caster.Spell != null || !Caster.CheckSpellCast(this) || !CheckCast() ||
-                !Caster.Region.OnBeginSpellCast(Caster, this))
+            if (Caster.Spell != null || !Caster.CheckSpellCast(this) || !Caster.Region.OnBeginSpellCast(Caster, this))
             {
-                Caster.SendLocalizedMessage(502629); // You cannot cast spells here.
                 return false;
             }
+            
+            return true;
+        }
 
+        public virtual bool IsWand() => SpellItem is BaseWand;
+
+        public virtual void SayMantra()
+        {
+            if (IsWand() || m_SpellStrike)
+                return;
+
+            if (!string.IsNullOrEmpty(Info.Mantra) && (Caster is BaseCreature {SaySpellMantra: true} || Caster.Player))
+                Caster.PublicOverheadMessage(MessageType.Spell, Caster.SpeechHue, true, Info.Mantra, false);
+        }
+
+        public async void Cast()
+        {
+            m_StartCastTime = Core.TickCount;
+
+            if (!CanCast())
+                return;
 
             State = SpellState.Casting;
             Caster.Spell = this;
@@ -511,20 +505,46 @@ namespace Server.Spells
                     Caster.FixedParticles(0, 10, 5, Info.RightHandEffect, EffectLayer.RightHand);
             }
 
-            m_CastTimer = new CastTimer(this, castDelay);
+            // m_CastTimer = new CastTimer(this, castDelay);
             //m_CastTimer.Start();
 
             OnBeginCast();
+            
+            var originalTarget = Caster.Target;
 
-            if (castDelay > TimeSpan.Zero)
-                m_CastTimer.Start();
+            if(castDelay > TimeSpan.Zero)
+                await Timer.Pause(castDelay);
+
+            Caster.OnSpellCast(this);
+
+            if (Caster.Spell != this || State != SpellState.Casting)
+                return;
+
+            State = SpellState.Sequencing;
+
+            Caster.Region?.OnSpellCast(Caster, this);
+            Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
+
+            if (this is IAsyncSpell asyncSpell)
+            {
+                CheckSequence();
+                await asyncSpell.CastAsync();
+                FinishSequence();
+            }
             else
-                m_CastTimer.Tick();
-
-            return true;
+            {
+                OnCast();
+                if (Caster.Player && Caster.Target != originalTarget)
+                {
+                    Caster.Target?.BeginTimeout(Caster, TimeSpan.FromSeconds(30.0));
+                }
+            }
         }
-
-        public abstract void OnCast();
+        
+        public virtual void OnCast()
+        {
+            
+        }
 
         public virtual void OnBeginCast()
         {
@@ -601,87 +621,98 @@ namespace Server.Spells
             if (Caster.Deleted || !Caster.Alive || Caster.Spell != this || State != SpellState.Sequencing)
             {
                 DoFizzle();
+                return false;
             }
-            else if (Scroll != null && !(Scroll is Runebook) &&
-                     (Scroll.Amount <= 0 || Scroll.Deleted || Scroll.RootParent != Caster ||
-                      IsWand() && (((BaseWand) Scroll).Charges <= 0 || Scroll.Parent != Caster)))
+
+            if (SpellItem is Runebook)
+                return true;
+
+            if (SpellItem != null && (SpellItem.Amount <= 0 || SpellItem.Deleted || SpellItem.RootParent != Caster))
             {
                 DoFizzle();
+                return false;
             }
-            else if (!ConsumeReagents())
+
+            if (SpellItem is BaseWand {Charges: <= 0})
             {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22,
-                    502630); // More reagents are needed for this spell.
+                DoFizzle();
+                return false;
             }
-            else if (Caster.Mana < mana)
-            {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625); // Insufficient mana for this spell.
-            }
-            else if (Caster is PlayerMobile playerMobile && playerMobile.PeacedUntil > DateTime.Now)
+            
+            if (Caster is PlayerMobile playerMobile && playerMobile.PeacedUntil > DateTime.Now)
             {
                 Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
                 DoFizzle();
+                return false;
             }
-            else if (CheckFizzle())
+            
+            if (!ConsumeReagents())
             {
-                Caster.Mana -= mana;
-
-                if (Scroll is SpellScroll)
-                {
-                    Scroll.Consume();
-                }
-                else if (IsWand())
-                {
-                    ((BaseWand) Scroll).ConsumeCharge(Caster);
-                    Caster.RevealingAction();
-                }
-
-                if (IsWand())
-                {
-                    var m = Scroll.Movable;
-
-                    Scroll.Movable = false;
-
-                    if (ClearHandsOnCast)
-                        Caster.ClearHands();
-
-                    Scroll.Movable = m;
-                }
-                else
-                {
-                    if (ClearHandsOnCast)
-                        Caster.ClearHands();
-                }
-
-                var karma = ComputeKarmaAward();
-
-                if (karma != 0)
-                    Titles.AwardKarma(Caster, karma, true);
-
-                return true;
+                // More reagents are needed for this spell.
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502630);
+                return false;
             }
-            else
+            
+            if (Caster.Mana < mana)
+            {
+                // Insufficient mana for this spell.
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625); 
+                return false;
+            }
+
+            if (!CheckFizzle())
             {
                 DoFizzle();
+                return false;
             }
 
-            return false;
-        }
+            Caster.Mana -= mana;
 
-        public bool CheckBSequence(Mobile target)
-        {
-            return CheckBSequence(target, false);
-        }
+            switch (SpellItem)
+            {
+                case SpellScroll:
+                    SpellItem.Consume();
+                    break;
+                case BaseWand wand:
+                {
+                    wand.ConsumeCharge(Caster);
+                    
+                    Caster.RevealingAction();
+                    var m = wand.Movable;
 
-        public bool CheckBSequence(Mobile target, bool allowDead)
+                    wand.Movable = false;
+
+                    if (ClearHandsOnCast)
+                        Caster.ClearHands();
+
+                    wand.Movable = m;
+                    break;
+                }
+                default:
+                {
+                    if (ClearHandsOnCast)
+                        Caster.ClearHands();
+                    break;
+                }
+            }
+
+            var karma = ComputeKarmaAward();
+
+            if (karma != 0)
+                Titles.AwardKarma(Caster, karma, true);
+
+            return true;
+        }
+        
+        public bool CheckBeneficialSequence(Mobile target)
         {
-            if (!target.Alive && !allowDead)
+            if (!target.Alive && !Info.AllowDead)
             {
                 Caster.SendLocalizedMessage(501857); // This spell won't work on that!
                 return false;
             }
 
-            if (Caster.CanBeBeneficial(target, true, allowDead) && CheckSequence())
+            if (Caster.CanBeBeneficial(target, true, Info.AllowDead) && CheckSequence())
             {
                 Caster.DoBeneficial(target);
                 return true;
@@ -690,7 +721,7 @@ namespace Server.Spells
             return false;
         }
 
-        public bool CheckHSequence(Mobile target)
+        public bool CheckHarmfulSequence(Mobile target)
         {
             if (!target.Alive)
             {

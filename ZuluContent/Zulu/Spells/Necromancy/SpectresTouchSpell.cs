@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 40; }
         }
 
-        public SpectresTouchSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public SpectresTouchSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

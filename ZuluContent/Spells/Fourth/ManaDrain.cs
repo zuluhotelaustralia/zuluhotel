@@ -7,7 +7,7 @@ namespace Server.Spells.Fourth
     {
         private static readonly Dictionary<Mobile, Timer> m_Table = new Dictionary<Mobile, Timer>();
 
-        public ManaDrainSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ManaDrainSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -41,7 +41,7 @@ namespace Server.Spells.Fourth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -62,7 +62,6 @@ namespace Server.Spells.Fourth
                 m.FixedParticles(0x374A, 10, 15, 5032, EffectLayer.Head);
                 m.PlaySound(0x1F8);
 
-                HarmfulSpell(m);
             }
 
             FinishSequence();

@@ -72,17 +72,20 @@ namespace Scripts.Zulu.Spells.Earth
 
         private Entry m_NewBody = null;
 
-        public ShapeshiftSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ShapeshiftSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public ShapeshiftSpell(Mobile caster, Item scroll, Entry entry) : base(caster, scroll)
+        public ShapeshiftSpell(Mobile caster, Item spellItem, Entry entry) : base(caster, spellItem)
         {
             m_NewBody = entry;
         }
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (!Caster.CanBeginAction(typeof(ShapeshiftSpell)))
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
@@ -100,7 +103,7 @@ namespace Scripts.Zulu.Spells.Earth
             }
             else if (m_NewBody == null)
             {
-                Caster.SendGump(new ShapeshiftGump(Caster, Scroll, m_Entries));
+                Caster.SendGump(new ShapeshiftGump(Caster, SpellItem, m_Entries));
                 return false;
             }
 

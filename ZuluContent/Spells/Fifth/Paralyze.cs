@@ -5,7 +5,7 @@ namespace Server.Spells.Fifth
 {
     public class ParalyzeSpell : MagerySpell
     {
-        public ParalyzeSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ParalyzeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -21,7 +21,7 @@ namespace Server.Spells.Fifth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -38,8 +38,6 @@ namespace Server.Spells.Fifth
 
                 m.PlaySound(0x204);
                 m.FixedEffect(0x376A, 6, 1);
-
-                HarmfulSpell(m);
             }
 
             FinishSequence();

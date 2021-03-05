@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 10; }
         }
 
-        public CallLightningSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public CallLightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

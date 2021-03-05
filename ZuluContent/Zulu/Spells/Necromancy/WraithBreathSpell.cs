@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 60; }
         }
 
-        public WraithBreathSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public WraithBreathSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

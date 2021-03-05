@@ -7,15 +7,18 @@ namespace Server.Spells.Second
     {
         private static readonly Hashtable m_Table = new Hashtable();
 
-        public ProtectionSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ProtectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
         public static Hashtable Registry { get; } = new Hashtable();
 
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (Registry.ContainsKey(Caster))
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.

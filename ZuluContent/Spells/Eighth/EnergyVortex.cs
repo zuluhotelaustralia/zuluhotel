@@ -6,18 +6,10 @@ namespace Server.Spells.Eighth
 {
     public class EnergyVortexSpell : MagerySpell
     {
-        public EnergyVortexSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public EnergyVortexSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-
-        public override bool CheckCast()
-        {
-            if (!base.CheckCast())
-                return false;
-
-            return true;
-        }
 
         public override void OnCast()
         {

@@ -31,6 +31,11 @@ namespace ZuluContent.Zulu.Engines.Magic
 
             Dispatcher(hooks, action);
         }
+        
+        public static void FireHook<T>(this T enchanted, Action<IEnchantmentHook> action) where T : Mobile, IEnchanted
+        {
+            (enchanted as Mobile).FireHook(action);
+        }
 
         public static void FireHook(this IEnchanted enchanted, Action<IEnchantmentHook> action)
         {

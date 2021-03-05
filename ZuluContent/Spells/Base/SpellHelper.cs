@@ -4,6 +4,7 @@ using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Magic;
 using Server.Engines.PartySystem;
 using Server.Guilds;
+using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Multis;
@@ -100,30 +101,18 @@ namespace Server.Spells
             return !sp.DelayedDamage ? TimeSpan.Zero : DefaultDamageDelay;
         }
 
-        public static bool CheckMulti(Point3D p, Map map)
-        {
-            return CheckMulti(p, map, true, 0);
-        }
-
-        public static bool CheckMulti(Point3D p, Map map, bool houses)
-        {
-            return CheckMulti(p, map, houses, 0);
-        }
-
-        public static bool CheckMulti(Point3D p, Map map, bool houses, int housingrange)
+        public static bool CheckMulti(Point3D p, Map map, bool houses = true, int housingRange = 0)
         {
             if (map == null || map == Map.Internal)
                 return false;
 
             var sector = map.GetSector(p.X, p.Y);
 
-            for (var i = 0; i < sector.Multis.Count; ++i)
+            foreach (var multi in sector.Multis)
             {
-                var multi = sector.Multis[i];
-
                 if (multi is BaseHouse bh)
                 {
-                    if (houses && bh.IsInside(p, 16) || housingrange > 0 && bh.InRange(p, housingrange))
+                    if (houses && bh.IsInside(p, 16) || housingRange > 0 && bh.InRange(p, housingRange))
                         return true;
                 }
                 else if (multi.Contains(p))
@@ -139,19 +128,24 @@ namespace Server.Spells
         {
             var target = to as IPoint3D;
 
-            if (target == null)
-                return;
-
-            if (target is Item)
+            switch (target)
             {
-                var item = (Item) target;
-
-                if (item.RootParent != from)
-                    from.Direction = from.GetDirectionTo(item.GetWorldLocation());
-            }
-            else if (from != target)
-            {
-                from.Direction = from.GetDirectionTo(target);
+                case null:
+                    return;
+                case Item item:
+                {
+                    if (item.RootParent != from)
+                        from.Direction = from.GetDirectionTo(item.GetWorldLocation());
+                    break;
+                }
+                default:
+                {
+                    if (!ReferenceEquals(from, target))
+                    {
+                        from.Direction = from.GetDirectionTo(target);
+                    }
+                    break;
+                }
             }
         }
 
@@ -190,6 +184,38 @@ namespace Server.Spells
             return false;
         }
 
+        public static double CalcSpellDamage(Mobile caster, Mobile defender, Spell spell, bool areaSpell = false)
+        {
+            const int mageryDivider = 5;
+            const int playerDivider = 3;
+            const int circleMultiplier = 3;
+            const int dices = 5;
+
+            if (!caster.Alive || !defender.Alive || defender.Hidden)
+                return 0.0;
+
+            var circle = (int)spell.Info.Circle + 1;
+            if (areaSpell)
+                circle -= 3;
+
+            if (circle < 1)
+                circle = 1;
+
+            var damage = Utility.RandomMinMax(circle * circleMultiplier, circle * circleMultiplier * dices) +
+                         caster.Skills[SkillName.Magery].Value / mageryDivider;
+
+            var circleMaxDamage = circle * (13 + circle); 
+            if (damage > circleMaxDamage)
+                damage = circleMaxDamage;
+
+            caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref damage));
+            
+            if (defender.Player)
+                damage /= playerDivider;
+
+            return damage;
+        }
+
         public static double GetEffectiveness(Mobile caster)
         {
             // TODO: Think about what makes sense here.
@@ -206,43 +232,38 @@ namespace Server.Spells
 
         public static bool CanRevealCaster(Mobile m)
         {
-            if (m is BaseCreature)
-            {
-                var c = (BaseCreature) m;
-
-                if (!c.Controlled)
-                    return true;
-            }
-
-            return false;
+            return m is BaseCreature {Controlled: false};
         }
 
         public static void GetSurfaceTop(ref IPoint3D p)
         {
-            if (p is Item)
+            switch (p)
             {
-                p = ((Item) p).GetSurfaceTop();
-            }
-            else if (p is StaticTarget)
-            {
-                var t = (StaticTarget) p;
-                var z = t.Z;
+                case Item item:
+                    p = item.GetSurfaceTop();
+                    break;
+                case StaticTarget target:
+                {
+                    var t = target;
+                    var z = t.Z;
 
-                if ((t.Flags & TileFlag.Surface) == 0)
-                    z -= TileData.ItemTable[t.ItemID & TileData.MaxItemValue].CalcHeight;
+                    if ((t.Flags & TileFlag.Surface) == 0)
+                        z -= TileData.ItemTable[t.ItemID & TileData.MaxItemValue].CalcHeight;
 
-                p = new Point3D(t.X, t.Y, z);
+                    p = new Point3D(t.X, t.Y, z);
+                    break;
+                }
             }
         }
 
         public static bool AddStatOffset(Mobile m, StatType type, int offset, TimeSpan duration)
         {
-            if (offset > 0)
-                return AddStatBonus(m, m, type, offset, duration);
-            if (offset < 0)
-                return AddStatCurse(m, m, type, -offset, duration);
-
-            return true;
+            return offset switch
+            {
+                > 0 => AddStatBonus(m, m, type, offset, duration),
+                < 0 => AddStatCurse(m, m, type, -offset, duration),
+                _ => true
+            };
         }
 
         public static bool AddStatBonus(Mobile caster, Mobile target, StatType type)
@@ -274,8 +295,7 @@ namespace Server.Spells
 
         public static bool AddStatCurse(Mobile caster, Mobile target, StatType type)
         {
-            return AddStatCurse(caster, target, type, GetOffset(caster, target, type, true),
-                GetDuration(caster, target));
+            return AddStatCurse(caster, target, type, GetOffset(caster, target, type, true), GetDuration(caster, target));
         }
 
         public static bool AddStatCurse(Mobile caster, Mobile target, StatType type, int curse, TimeSpan duration)
@@ -302,7 +322,10 @@ namespace Server.Spells
 
         public static TimeSpan GetDuration(Mobile caster, Mobile target)
         {
-            return TimeSpan.FromSeconds(caster.Skills[SkillName.Magery].Value * 1.2);
+            var duration = caster.Skills[SkillName.Magery].Value * 4.0;
+            caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref duration));
+
+            return TimeSpan.FromSeconds(duration < 1.0 ? 1.0 : duration);
         }
 
         public static double GetOffsetScalar(Mobile caster, Mobile target, bool curse)
@@ -324,16 +347,18 @@ namespace Server.Spells
 
         public static int GetOffset(Mobile caster, Mobile target, StatType type, bool curse)
         {
-            return 1 + (int) (caster.Skills[SkillName.Magery].Value * 0.1);
+            var modAmount = Utility.RandomMinMax(0, 15) + caster.Skills[SkillName.Magery].Value / 10;
+            caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref modAmount));
+            
+            return (int) (modAmount < 1.0 ? 1.0 : modAmount);
         }
 
         public static Guild GetGuildFor(Mobile m)
         {
             var g = m.Guild as Guild;
 
-            if (g == null && m is BaseCreature)
+            if (g == null && m is BaseCreature c)
             {
-                var c = (BaseCreature) m;
                 m = c.ControlMaster;
 
                 if (m != null)
@@ -525,10 +550,8 @@ namespace Server.Spells
             }
 
             // Always allow monsters to teleport
-            if (caster is BaseCreature && (type == TravelCheckType.TeleportTo || type == TravelCheckType.TeleportFrom))
+            if (caster is BaseCreature bc && (type == TravelCheckType.TeleportTo || type == TravelCheckType.TeleportFrom))
             {
-                var bc = (BaseCreature) caster;
-
                 if (!bc.Controlled && !bc.Summoned)
                     return true;
             }
@@ -633,9 +656,6 @@ namespace Server.Spells
 
                 var reflect = target.MagicDamageAbsorb >= 0;
 
-                if (target is BaseCreature creature)
-                    creature.CheckReflect(caster, ref reflect);
-
                 if (target.MagicDamageAbsorb <= 0)
                 {
                     target.MagicDamageAbsorb = 0;
@@ -729,7 +749,6 @@ namespace Server.Spells
 
             if (defender is BaseCreature c && attacker != null)
             {
-                c.OnHarmfulSpell(attacker);
                 c.OnDamagedBySpell(attacker);
             }
 

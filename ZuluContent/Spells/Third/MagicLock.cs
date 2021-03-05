@@ -7,7 +7,7 @@ namespace Server.Spells.Third
 {
     public class MagicLockSpell : MagerySpell
     {
-        public MagicLockSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MagicLockSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

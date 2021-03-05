@@ -73,6 +73,17 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             return value;
         }
 
+        public bool Remove(IEnchantmentValue value)
+        {
+            if (Values.ContainsKey(EnchantUnionMap[value.GetType()]))
+            {
+                Values.Remove(EnchantUnionMap[value.GetType()]);
+                return true;
+            }
+
+            return false;
+        }
+
         public TResult Get<TSource, TResult>(Func<TSource, TResult> selector, TResult @default = default)
             where TSource : class, IEnchantmentValue
         {

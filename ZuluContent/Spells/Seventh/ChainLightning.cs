@@ -6,7 +6,7 @@ namespace Server.Spells.Seventh
 {
     public class ChainLightningSpell : MagerySpell
     {
-        public ChainLightningSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ChainLightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

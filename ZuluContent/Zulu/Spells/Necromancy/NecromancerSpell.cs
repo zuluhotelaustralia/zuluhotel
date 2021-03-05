@@ -43,7 +43,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 0; }
         } // Necromancer spells are not affected by fast cast items, though they are by fast cast recovery
 
-        public NecromancerSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public NecromancerSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -60,7 +60,7 @@ namespace Scripts.Zulu.Spells.Necromancy
         public override void GetCastSkills(out double min, out double max)
         {
             min = RequiredSkill;
-            max = Scroll != null ? min : RequiredSkill + 40.0;
+            max = SpellItem != null ? min : RequiredSkill + 40.0;
 
             if (max > 150) max = 150;
         }

@@ -22,7 +22,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override void OnAdded(IEntity entity)
         {
             base.OnAdded(entity);
-            if (entity is Item item && item.Parent is Mobile mobile)
+            if (entity is Item {Parent: Mobile mobile})
             {
                 // TODO: Figure out how to make this consume charges
                 mobile.MagicDamageAbsorb += Value;

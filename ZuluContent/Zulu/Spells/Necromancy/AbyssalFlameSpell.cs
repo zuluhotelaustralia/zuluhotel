@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 60; }
         }
 
-        public AbyssalFlameSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AbyssalFlameSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -43,6 +43,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(34, typeof(HolyProtection))]
     [Union(35, typeof(ItemMark))]
     [Union(36, typeof(ItemFortification))]
+    [Union(37, typeof(ReactiveArmor))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }

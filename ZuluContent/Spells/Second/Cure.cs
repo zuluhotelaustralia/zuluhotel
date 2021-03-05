@@ -4,7 +4,7 @@ namespace Server.Spells.Second
 {
     public class CureSpell : MagerySpell
     {
-        public CureSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public CureSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -20,7 +20,7 @@ namespace Server.Spells.Second
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckBSequence(m))
+            else if (CheckBeneficialSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 

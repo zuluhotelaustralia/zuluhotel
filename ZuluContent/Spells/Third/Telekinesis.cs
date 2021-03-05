@@ -5,7 +5,7 @@ namespace Server.Spells.Third
 {
     public class TelekinesisSpell : MagerySpell
     {
-        public TelekinesisSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public TelekinesisSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

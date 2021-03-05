@@ -5,7 +5,7 @@ namespace Server.Spells.Second
 {
     public class MagicTrapSpell : MagerySpell
     {
-        public MagicTrapSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MagicTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

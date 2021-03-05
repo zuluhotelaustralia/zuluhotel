@@ -28,7 +28,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 60; }
         }
 
-        public SacrificeSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public SacrificeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -687,8 +687,11 @@ namespace Server.Mobiles
                     m_RevealTarget = new LandTarget(m_LastTargetLoc, map);
                     Spell spell = new RevealSpell(m_Mobile, null);
 
-                    if (spell.Cast())
+                    if (spell.CanCast())
+                    {
+                        spell.Cast();
                         m_LastTarget = null; // only do it once
+                    }
 
                     m_NextCastTime = Core.TickCount + (int)GetDelay(spell).TotalMilliseconds;
                 }

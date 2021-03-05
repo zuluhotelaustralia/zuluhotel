@@ -13,11 +13,11 @@ namespace Server.Spells.Fourth
 
         private readonly RunebookEntry m_Entry;
 
-        public RecallSpell(Mobile caster, Item scroll) : this(caster, scroll, null, null)
+        public RecallSpell(Mobile caster, Item spellItem) : this(caster, spellItem, null, null)
         {
         }
 
-        public RecallSpell(Mobile caster, Item scroll, RunebookEntry entry, Runebook book) : base(caster, scroll)
+        public RecallSpell(Mobile caster, Item spellItem, RunebookEntry entry, Runebook book) : base(caster, spellItem)
         {
             m_Entry = entry;
             m_Book = book;
@@ -32,8 +32,11 @@ namespace Server.Spells.Fourth
                 Effect(m_Entry.Location, m_Entry.Map, true);
         }
 
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (Caster.Criminal)
             {
                 Caster.SendLocalizedMessage(1005561, "", 0x22); // Thou'rt a criminal and cannot escape so easily.

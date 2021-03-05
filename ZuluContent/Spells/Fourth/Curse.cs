@@ -7,7 +7,7 @@ namespace Server.Spells.Fourth
     {
         private static readonly Hashtable m_UnderEffect = new Hashtable();
 
-        public CurseSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public CurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -35,7 +35,7 @@ namespace Server.Spells.Fourth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -69,7 +69,6 @@ namespace Server.Spells.Fourth
 
                 var args = $"{percentage}\t{percentage}\t{percentage}\t{10}\t{10}\t{10}\t{10}";
 
-                HarmfulSpell(m);
             }
 
             FinishSequence();

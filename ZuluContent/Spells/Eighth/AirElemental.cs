@@ -5,16 +5,8 @@ namespace Server.Spells.Eighth
 {
     public class AirElementalSpell : MagerySpell
     {
-        public AirElementalSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public AirElementalSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
-        }
-
-        public override bool CheckCast()
-        {
-            if (!base.CheckCast())
-                return false;
-
-            return true;
         }
 
         public override void OnCast()

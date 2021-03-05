@@ -25,7 +25,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 5; }
         }
 
-        public OwlSightSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public OwlSightSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -43,7 +43,7 @@ namespace Scripts.Zulu.Spells.Earth
                 goto Return;
             }
 
-            if (!CheckBSequence(m)) goto Return;
+            if (!CheckBeneficialSequence(m)) goto Return;
 
             if (!m.BeginAction(typeof(OwlSightSpell))) goto Return;
 

@@ -7,7 +7,7 @@ namespace Server.Spells.Seventh
 {
     public class MassDispelSpell : MagerySpell
     {
-        public MassDispelSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MassDispelSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

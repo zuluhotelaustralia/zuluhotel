@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 10; }
         }
 
-        public NaturesTouchSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public NaturesTouchSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

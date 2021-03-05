@@ -10,13 +10,15 @@ namespace Server.Spells.Third
 {
     public class TeleportSpell : MagerySpell
     {
-        public TeleportSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public TeleportSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-
-        public override bool CheckCast()
+        public override bool CanCast()
         {
+            if (!base.CanCast())
+                return false;
+            
             if (WeightOverloading.IsOverloaded(Caster))
             {
                 Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.

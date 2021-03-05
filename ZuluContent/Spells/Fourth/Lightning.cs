@@ -4,7 +4,7 @@ namespace Server.Spells.Fourth
 {
     public class LightningSpell : MagerySpell
     {
-        public LightningSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public LightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Server.Spells.Fourth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 

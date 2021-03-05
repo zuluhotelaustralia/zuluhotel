@@ -4,7 +4,7 @@ namespace Server.Spells.Third
 {
     public class PoisonSpell : MagerySpell
     {
-        public PoisonSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public PoisonSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -20,7 +20,7 @@ namespace Server.Spells.Third
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -60,8 +60,6 @@ namespace Server.Spells.Third
 
                 m.FixedParticles(0x374A, 10, 15, 5021, EffectLayer.Waist);
                 m.PlaySound(0x205);
-
-                HarmfulSpell(m);
             }
 
             FinishSequence();

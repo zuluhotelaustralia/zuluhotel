@@ -1,62 +1,38 @@
+using System.Threading.Tasks;
 using Server.Targeting;
+#pragma warning disable 1998
 
 namespace Server.Spells.First
 {
-    public class NightSightSpell : MagerySpell
+    public class NightSightSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public NightSightSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public NightSightSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
+            if (!response.HasValue)
+                return;
+            
+            var mobile = response.Target;
 
+            SpellHelper.Turn(Caster, mobile);
 
-        public override void OnCast()
-        {
-            Caster.Target = new NightSightTarget(this);
-        }
-
-        private class NightSightTarget : Target
-        {
-            private readonly Spell m_Spell;
-
-            public NightSightTarget(Spell spell) : base(12, false, TargetFlags.Beneficial)
+            if (!mobile.BeginAction(typeof(LightCycle)))
             {
-                m_Spell = spell;
+                Caster.SendMessage("{0} already has nightsight.", Caster == mobile ? "You" : "They");
+                return;
             }
 
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                if (targeted is Mobile && m_Spell.CheckBSequence((Mobile) targeted))
-                {
-                    var targ = (Mobile) targeted;
+            new LightCycle.NightSightTimer(mobile).Start();
+            var level = (int) (LightCycle.DungeonLevel * (Caster.Skills[SkillName.Magery].Value / 100));
 
-                    SpellHelper.Turn(m_Spell.Caster, targ);
+            if (level < 0)
+                level = 0;
 
-                    if (targ.BeginAction(typeof(LightCycle)))
-                    {
-                        new LightCycle.NightSightTimer(targ).Start();
-                        var level = (int) (LightCycle.DungeonLevel * (from.Skills[SkillName.Magery].Value / 100));
+            mobile.LightLevel = level;
 
-                        if (level < 0)
-                            level = 0;
-
-                        targ.LightLevel = level;
-
-                        targ.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
-                        targ.PlaySound(0x1E3);
-                    }
-                    else
-                    {
-                        from.SendMessage("{0} already have nightsight.", from == targ ? "You" : "They");
-                    }
-                }
-
-                m_Spell.FinishSequence();
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Spell.FinishSequence();
-            }
+            mobile.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
+            mobile.PlaySound(0x1E3);
         }
     }
 }

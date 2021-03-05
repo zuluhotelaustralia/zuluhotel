@@ -10,7 +10,7 @@ namespace Server.Items
         {
         }
 
-        public override int AbsorbDamage(Mobile attacker, Mobile defender, int damage, bool skipHooks = false)
+        public override int AbsorbDamage(Mobile attacker, Mobile defender, int damage)
         {
             damage = base.AbsorbDamage(attacker, defender, damage);
 

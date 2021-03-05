@@ -4,7 +4,7 @@ namespace Server.Spells.Sixth
 {
     public class EnergyBoltSpell : MagerySpell
     {
-        public EnergyBoltSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public EnergyBoltSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Server.Spells.Sixth
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 var source = Caster;
 

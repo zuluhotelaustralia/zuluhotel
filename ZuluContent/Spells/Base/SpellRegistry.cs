@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Scripts.Zulu.Spells.Earth;
 using Scripts.Zulu.Spells.Necromancy;
 using Server.Engines.Magic;
-using Server.Mobiles;
 using Server.SkillHandlers;
 using Server.Spells.Eighth;
 using Server.Spells.Fifth;
@@ -13,6 +12,7 @@ using Server.Spells.Second;
 using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
+using Server.Targeting;
 
 namespace Server.Spells
 {
@@ -51,6 +51,11 @@ namespace Server.Spells
         public static T Create<T>(Mobile caster, Item scroll) where T : Spell
         {
             return (T) Create(typeof(T), caster, scroll);
+        }
+        
+        public static SpellInfo GetInfo(SpellEntry spellEntry)
+        {
+            return SpellInfos[SpellTypes[spellEntry]];
         }
 
         static SpellRegistry()
@@ -98,6 +103,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -143,6 +154,12 @@ namespace Server.Spells
                     {
                         [Reagent.Ginseng] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -166,6 +183,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.Ginseng] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial,
                     }
                 }
             );
@@ -187,6 +210,12 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -209,6 +238,12 @@ namespace Server.Spells
                     {
                         [Reagent.SulfurousAsh] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -232,6 +267,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.SpidersSilk] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -254,6 +295,12 @@ namespace Server.Spells
                     {
                         [Reagent.Garlic] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -276,6 +323,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -298,6 +351,12 @@ namespace Server.Spells
                     {
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -320,6 +379,12 @@ namespace Server.Spells
                     {
                         [Reagent.Garlic] = 1,
                         [Reagent.Ginseng] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -342,6 +407,12 @@ namespace Server.Spells
                     {
                         [Reagent.Nightshade] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -365,6 +436,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.SpidersSilk] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -387,6 +464,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -410,6 +493,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.Ginseng] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -432,6 +521,12 @@ namespace Server.Spells
                     {
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -454,6 +549,12 @@ namespace Server.Spells
                     {
                         [Reagent.Garlic] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -475,6 +576,12 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.BlackPearl] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -498,6 +605,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -519,6 +632,12 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -541,6 +660,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -563,6 +688,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -585,7 +716,14 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.SulfurousAsh] = 1
-                    }
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
+                    },
+                    
                 }
             );
 
@@ -607,6 +745,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.Garlic] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -630,6 +774,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.Ginseng] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -654,6 +804,12 @@ namespace Server.Spells
                         [Reagent.Ginseng] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -677,6 +833,12 @@ namespace Server.Spells
                         [Reagent.Nightshade] = 1,
                         [Reagent.Garlic] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -700,6 +862,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.SpidersSilk] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -724,6 +892,12 @@ namespace Server.Spells
                         [Reagent.Ginseng] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -746,6 +920,12 @@ namespace Server.Spells
                     {
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -769,6 +949,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -792,6 +978,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -815,6 +1007,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -839,6 +1037,12 @@ namespace Server.Spells
                         [Reagent.SpidersSilk] = 1,
                         [Reagent.SulfurousAsh] = 1,
                         [Reagent.Garlic] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -909,6 +1113,12 @@ namespace Server.Spells
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.Nightshade] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -932,6 +1142,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -955,6 +1171,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.Nightshade] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1001,6 +1223,12 @@ namespace Server.Spells
                         [Reagent.Garlic] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1023,6 +1251,12 @@ namespace Server.Spells
                     {
                         [Reagent.BlackPearl] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1045,6 +1279,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1067,6 +1307,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -1090,6 +1336,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1114,6 +1366,12 @@ namespace Server.Spells
                         [Reagent.Nightshade] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1137,6 +1395,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.Ginseng] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1159,6 +1423,12 @@ namespace Server.Spells
                     {
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1183,6 +1453,12 @@ namespace Server.Spells
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1207,6 +1483,12 @@ namespace Server.Spells
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SpidersSilk] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1229,6 +1511,12 @@ namespace Server.Spells
                     {
                         [Reagent.SpidersSilk] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1252,6 +1540,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1276,6 +1570,12 @@ namespace Server.Spells
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1300,6 +1600,12 @@ namespace Server.Spells
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.BlackPearl] = 1,
                         [Reagent.SulfurousAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1324,6 +1630,12 @@ namespace Server.Spells
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.SulfurousAsh] = 1,
                         [Reagent.SpidersSilk] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1395,6 +1707,12 @@ namespace Server.Spells
                         [Reagent.BlackPearl] = 1,
                         [Reagent.MandrakeRoot] = 1,
                         [Reagent.Nightshade] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1409,6 +1727,7 @@ namespace Server.Spells
                     Mantra = "An Corp",
                     Action = 245,
                     AllowTown = true,
+                    AllowDead = true,
                     LeftHandEffect = 9062,
                     RightHandEffect = 9062,
                     Circle = SpellCircle.Eighth,
@@ -1418,6 +1737,12 @@ namespace Server.Spells
                         [Reagent.Bloodmoss] = 1,
                         [Reagent.Garlic] = 1,
                         [Reagent.Ginseng] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = 1,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -1558,6 +1883,12 @@ namespace Server.Spells
                         [Reagent.Bloodspawn] = 1,
                         [Reagent.Blackmoor] = 1,
                         [Reagent.Bone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1580,6 +1911,12 @@ namespace Server.Spells
                     {
                         [Reagent.Pumice] = 1,
                         [Reagent.PigIron] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1604,6 +1941,12 @@ namespace Server.Spells
                         [Reagent.VialOfBlood] = 1,
                         [Reagent.VolcanicAsh] = 1,
                         [Reagent.DaemonBone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1627,6 +1970,12 @@ namespace Server.Spells
                         [Reagent.ExecutionersCap] = 1,
                         [Reagent.Brimstone] = 1,
                         [Reagent.DaemonBone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1651,6 +2000,12 @@ namespace Server.Spells
                         [Reagent.Obsidian] = 1,
                         [Reagent.VolcanicAsh] = 1,
                         [Reagent.DaemonBone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1675,6 +2030,12 @@ namespace Server.Spells
                         [Reagent.VialOfBlood] = 1,
                         [Reagent.Bone] = 1,
                         [Reagent.Obsidian] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1699,6 +2060,12 @@ namespace Server.Spells
                         [Reagent.Bloodspawn] = 1,
                         [Reagent.WyrmsHeart] = 1,
                         [Reagent.Bone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1723,6 +2090,12 @@ namespace Server.Spells
                         [Reagent.Obsidian] = 1,
                         [Reagent.Bone] = 1,
                         [Reagent.Blackmoor] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1747,6 +2120,12 @@ namespace Server.Spells
                         [Reagent.Pumice] = 1,
                         [Reagent.DragonsBlood] = 1,
                         [Reagent.DeadWood] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1818,6 +2197,12 @@ namespace Server.Spells
                         [Reagent.SerpentScale] = 1,
                         [Reagent.Blackmoor] = 1,
                         [Reagent.Bloodspawn] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1842,6 +2227,12 @@ namespace Server.Spells
                         [Reagent.ExecutionersCap] = 1,
                         [Reagent.VialOfBlood] = 1,
                         [Reagent.WyrmsHeart] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1893,6 +2284,12 @@ namespace Server.Spells
                         [Reagent.Bloodspawn] = 1,
                         [Reagent.Pumice] = 1,
                         [Reagent.SerpentScale] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -1917,6 +2314,12 @@ namespace Server.Spells
                         [Reagent.VialOfBlood] = 1,
                         [Reagent.FertileDirt] = 1,
                         [Reagent.PigIron] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -1940,6 +2343,12 @@ namespace Server.Spells
                         [Reagent.DeadWood] = 1,
                         [Reagent.FertileDirt] = 1,
                         [Reagent.ExecutionersCap] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -1961,6 +2370,12 @@ namespace Server.Spells
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.EyeOfNewt] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -1984,6 +2399,12 @@ namespace Server.Spells
                         [Reagent.FertileDirt] = 1,
                         [Reagent.Obsidian] = 1,
                         [Reagent.DeadWood] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -2030,6 +2451,12 @@ namespace Server.Spells
                         [Reagent.WyrmsHeart] = 1,
                         [Reagent.PigIron] = 1,
                         [Reagent.Bone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -2053,6 +2480,12 @@ namespace Server.Spells
                         [Reagent.PigIron] = 1,
                         [Reagent.Obsidian] = 1,
                         [Reagent.VolcanicAsh] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -2076,6 +2509,12 @@ namespace Server.Spells
                         [Reagent.Brimstone] = 1,
                         [Reagent.ExecutionersCap] = 1,
                         [Reagent.EyeOfNewt] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -2099,6 +2538,12 @@ namespace Server.Spells
                         [Reagent.Pumice] = 1,
                         [Reagent.VialOfBlood] = 1,
                         [Reagent.Obsidian] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Beneficial
                     }
                 }
             );
@@ -2122,6 +2567,12 @@ namespace Server.Spells
                         [Reagent.BatWing] = 1,
                         [Reagent.Brimstone] = 1,
                         [Reagent.VialOfBlood] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -2145,6 +2596,12 @@ namespace Server.Spells
                         [Reagent.BatWing] = 1,
                         [Reagent.Brimstone] = 1,
                         [Reagent.VialOfBlood] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = true,
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -2191,6 +2648,12 @@ namespace Server.Spells
                         [Reagent.Bone] = 1,
                         [Reagent.BatWing] = 1,
                         [Reagent.Brimstone] = 1
+                    },
+                    TargetOptions = new TargetOptions
+                    {
+                        Range = SpellInfo.DefaultSpellRange,
+                        AllowGround = false,
+                        Flags = TargetFlags.Harmful
                     }
                 }
             );
@@ -2286,11 +2749,6 @@ namespace Server.Spells
                     }
                 }
             );
-        }
-
-        public static SpellInfo GetInfo(SpellEntry spellEntry)
-        {
-            return SpellInfos[SpellTypes[spellEntry]];
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Server.Spells.Eighth
 {
     public class ResurrectionSpell : MagerySpell
     {
-        public ResurrectionSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ResurrectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -51,7 +51,7 @@ namespace Server.Spells.Eighth
                 Caster.SendLocalizedMessage(
                     1010395); // The veil of death in this area is too strong and resists thy efforts to restore life.
             }
-            else if (CheckBSequence(m, true))
+            else if (CheckBeneficialSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -59,7 +59,6 @@ namespace Server.Spells.Eighth
                 m.FixedEffect(0x376A, 10, 16);
 
                 m.CloseGump<ResurrectGump>();
-                ;
                 m.SendGump(new ResurrectGump(m, Caster));
             }
 

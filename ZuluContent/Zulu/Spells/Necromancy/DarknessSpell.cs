@@ -25,7 +25,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 40; }
         }
 
-        public DarknessSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public DarknessSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

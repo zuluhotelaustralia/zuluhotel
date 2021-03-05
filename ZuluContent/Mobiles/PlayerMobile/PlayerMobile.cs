@@ -29,7 +29,7 @@ namespace Server.Mobiles
 
     #endregion
 
-    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill
+    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted
     {
         private class CountAndTimeStamp
         {

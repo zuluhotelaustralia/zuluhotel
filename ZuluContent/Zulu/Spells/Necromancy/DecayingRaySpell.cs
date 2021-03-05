@@ -25,7 +25,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return 40; }
         }
 
-        public DecayingRaySpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public DecayingRaySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

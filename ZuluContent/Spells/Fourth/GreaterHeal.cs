@@ -6,7 +6,7 @@ namespace Server.Spells.Fourth
 {
     public class GreaterHealSpell : MagerySpell
     {
-        public GreaterHealSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public GreaterHealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Server.Spells.Fourth
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, Caster == m ? 1005000 : 1010398);
             }
-            else if (CheckBSequence(m))
+            else if (CheckBeneficialSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 

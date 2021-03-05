@@ -10,7 +10,7 @@ namespace Server.Spells.Sixth
     {
         private static readonly Hashtable m_Table = new Hashtable();
 
-        public InvisibilitySpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public InvisibilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -30,7 +30,7 @@ namespace Server.Spells.Sixth
             {
                 Caster.SendLocalizedMessage(501857); // This spell won't work on that!
             }
-            else if (CheckBSequence(m))
+            else if (CheckBeneficialSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 

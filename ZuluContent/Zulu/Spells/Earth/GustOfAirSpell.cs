@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return 15; }
         }
 
-        public GustOfAirSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public GustOfAirSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -49,7 +49,7 @@ namespace Scripts.Zulu.Spells.Earth
                 goto Return;
             }
 
-            if (!CheckHSequence(m)) goto Return;
+            if (!CheckHarmfulSequence(m)) goto Return;
 
             SpellHelper.Turn(Caster, m);
 

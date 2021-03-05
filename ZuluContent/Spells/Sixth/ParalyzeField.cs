@@ -8,7 +8,7 @@ namespace Server.Spells.Sixth
 {
     public class ParalyzeFieldSpell : MagerySpell
     {
-        public ParalyzeFieldSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ParalyzeFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -167,8 +167,6 @@ namespace Server.Spells.Sixth
                     m.PlaySound(0x204);
                     m.FixedEffect(0x376A, 10, 16);
 
-                    if (m is BaseCreature)
-                        ((BaseCreature) m).OnHarmfulSpell(m_Caster);
                 }
 
                 return true;

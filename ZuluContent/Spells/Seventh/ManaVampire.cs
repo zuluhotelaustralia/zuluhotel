@@ -4,7 +4,7 @@ namespace Server.Spells.Seventh
 {
     public class ManaVampireSpell : MagerySpell
     {
-        public ManaVampireSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public ManaVampireSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -20,7 +20,7 @@ namespace Server.Spells.Seventh
             {
                 Caster.SendLocalizedMessage(500237); // Target can not be seen.
             }
-            else if (CheckHSequence(m))
+            else if (CheckHarmfulSequence(m))
             {
                 SpellHelper.Turn(Caster, m);
 
@@ -47,7 +47,6 @@ namespace Server.Spells.Seventh
                 m.FixedParticles(0x374A, 10, 15, 5054, EffectLayer.Head);
                 m.PlaySound(0x1F9);
 
-                HarmfulSpell(m);
             }
 
             FinishSequence();

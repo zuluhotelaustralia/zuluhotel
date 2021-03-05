@@ -35,7 +35,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             get { return m_Timers; }
         }
 
-        public WraithFormSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public WraithFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

@@ -5,7 +5,7 @@ namespace Server.Spells.Sixth
 {
     public class MassCurseSpell : MagerySpell
     {
-        public MassCurseSpell(Mobile caster, Item scroll) : base(caster, scroll)
+        public MassCurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
@@ -58,7 +58,6 @@ namespace Server.Spells.Sixth
                     m.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
                     m.PlaySound(0x1FB);
 
-                    HarmfulSpell(m);
                 }
             }
 
