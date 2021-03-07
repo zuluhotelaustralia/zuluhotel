@@ -24,8 +24,8 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int TrapLevel { get; set; }
         
+        [CommandProperty(AccessLevel.GameMaster)]
         public Mobile TrappedBy { get; set; }
-
 
         public virtual bool TrapOnOpen => true;
 
@@ -60,12 +60,12 @@ namespace Server.Items
                 Point3D loc = GetWorldLocation();
                 Map facet = Map;
 
-                // if (from.AccessLevel >= AccessLevel.GameMaster)
-                // {
-                //     SendMessageTo(from, "That is trapped, but you open it with your godly powers.", 0x3B2);
-                //     return false;
-                // }
-                //
+                if (from.AccessLevel >= AccessLevel.GameMaster)
+                {
+                    SendMessageTo(from, "That is trapped, but you open it with your godly powers.", 0x3B2);
+                    return false;
+                }
+                
                 SendMessageTo(from, 502999, 0x3B2); // You set off a trap!
 
                 switch (TrapType)
