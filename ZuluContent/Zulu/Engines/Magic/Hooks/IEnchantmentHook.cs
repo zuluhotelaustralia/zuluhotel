@@ -82,5 +82,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnCraftSkillRequiredForFame(Mobile from, ref int craftSkillRequiredForFame);
 
         public void OnSummonFamiliar(Mobile caster, BaseCreature familiar);
+        
+        public void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty);
+
+        public void OnTrap(Mobile caster, Container target, ref double strength);
     }
 }

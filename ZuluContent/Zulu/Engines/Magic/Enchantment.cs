@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using MessagePack;
 using Server;
 using Server.Engines.Craft;
@@ -8,9 +7,7 @@ using Server.Items;
 using Server.Spells;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enums;
-using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 using Server.Mobiles;
-using ZuluContent.Zulu.Items;
 
 namespace ZuluContent.Zulu.Engines.Magic
 {
@@ -177,23 +174,18 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnCraftSkillRequiredForFame(Mobile from, ref int craftSkillRequiredForFame)
-        {
-        }
+        public virtual void OnCraftSkillRequiredForFame(Mobile from, ref int craftSkillRequiredForFame) { }
 
 
-        public void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
-            Item item)
-        {
-        }
+        public virtual void OnCraftItemCreated(Mobile @from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item) { }
 
-        public void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
-            Item item)
-        {
-        }
+        public virtual void OnCraftItemAddToBackpack(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
+            Item item) { }
 
-        public void OnSummonFamiliar(Mobile caster, BaseCreature familiar)
-        {
-        }
+        public virtual void OnSummonFamiliar(Mobile caster, BaseCreature familiar) { }
+
+        public virtual void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty) { }
+        public void OnTrap(Mobile caster, Container target, ref double strength) { }
     }
 }

@@ -1,78 +1,52 @@
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Second
 {
-    public class CureSpell : MagerySpell
+    public class CureSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public CureSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public CureSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-
-        public override void OnCast()
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            Caster.Target = new InternalTarget(this);
-        }
+            if (!response.HasValue)
+                return;
 
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            var m = response.Target;
+            
+            SpellHelper.Turn(Caster, m);
+
+            var p = m.Poison;
+            if (p is null)
+                return;
+            
+            double difficulty = p.Level * 15 + 60;
+            Caster.FireHook(h => h.OnCure(Caster, m, p, this, ref difficulty));
+
+            if (difficulty < 10)
+                difficulty = 10;
+            
+            if (Caster.ShilCheckSkill(SkillName.Magery, (int)difficulty, 0) && m.CurePoison(Caster))
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (CheckBeneficialSequence(m))
-            {
-                SpellHelper.Turn(Caster, m);
-
-                var p = m.Poison;
-
-                if (p != null)
+                if (Caster != m)
                 {
-                    var chanceToCure = 10000 + (int) (Caster.Skills[SkillName.Magery].Value * 75) -
-                                       (p.Level + 1) * 1750;
-                    chanceToCure /= 100;
-
-                    if (chanceToCure > Utility.Random(100))
-                    {
-                        if (m.CurePoison(Caster))
-                        {
-                            if (Caster != m)
-                                Caster.SendLocalizedMessage(1010058); // You have cured the target of all poisons!
-
-                            m.SendLocalizedMessage(1010059); // You have been cured of all poisons.
-                        }
-                    }
-                    else
-                    {
-                        m.SendLocalizedMessage(1010060); // You have failed to cure your target!
-                    }
+                    Caster.SendLocalizedMessage(1010058); // You have cured the target of all poisons!
+                    m.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
                 }
-
-                m.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
-                m.PlaySound(0x1E0);
+                else
+                {
+                    Caster.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
+                }
             }
-
-            FinishSequence();
-        }
-
-        public class InternalTarget : Target
-        {
-            private readonly CureSpell m_Owner;
-
-            public InternalTarget(CureSpell owner) : base(12, false, TargetFlags.Beneficial)
+            else
             {
-                m_Owner = owner;
+                m.SendLocalizedMessage(1010060); // You have failed to cure your target!
             }
 
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile) m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            m.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
+            m.PlaySound(0x1E0);
         }
     }
 }

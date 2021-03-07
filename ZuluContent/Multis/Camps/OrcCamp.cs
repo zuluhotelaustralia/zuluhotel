@@ -100,7 +100,7 @@ public OrcCamp() : base( 0x10EE ) // dummy garbage at center
 			}
 
 			crates.TrapType = TrapType.ExplosionTrap;
-			crates.TrapPower = Utility.RandomMinMax(30, 40);
+			crates.TrapStrength = Utility.RandomMinMax(30, 40);
 			crates.TrapLevel = 2;
 
 			crates.RequiredSkill = 76;

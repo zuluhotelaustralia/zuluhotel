@@ -405,7 +405,7 @@ namespace Server.Engines.Craft
                 int trapLevel = (int) (From.Skills.Tinkering.Value / 10);
 
                 Container.TrapType = TrapType;
-                Container.TrapPower = trapLevel * 9;
+                Container.TrapStrength = trapLevel * 9;
                 Container.TrapLevel = trapLevel;
                 Container.TrapOnLockpick = true;
 

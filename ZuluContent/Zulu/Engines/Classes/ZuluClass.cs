@@ -7,6 +7,7 @@ using Server.Engines.Magic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
+using Server.Spells.Second;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
@@ -382,7 +383,7 @@ namespace Scripts.Zulu.Engines.Classes
 
                 if(bonus > 1.0)
                     DebugLog(healer, $"Increased healing from {source} " +
-                                     $"by {healAmount * cls.Bonus} " +
+                                     $"by {cls.Bonus} " +
                                      $"(level {cls.Level} {cls.Type})");
             }
         }
@@ -565,6 +566,18 @@ namespace Scripts.Zulu.Engines.Classes
                 familiar.RawInt += caster.RawInt;
                 familiar.RawDex += caster.RawDex;
             }
+        }
+
+        public void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty)
+        {
+            if (source is CureSpell && caster is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}}) 
+                difficulty /= Bonus;
+        }
+
+        public void OnTrap(Mobile caster, Container target, ref double strength)
+        {
+            if (caster is IZuluClassed {ZuluClass: {Type: ZuluClassType.Mage}})
+                strength *= Bonus;
         }
 
         #endregion

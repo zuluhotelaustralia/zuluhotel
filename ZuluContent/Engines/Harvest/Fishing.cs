@@ -290,7 +290,7 @@ namespace Server.Engines.Harvest
                         chest.Movable = true;
                         chest.Locked = false;
                         chest.TrapType = TrapType.None;
-                        chest.TrapPower = 0;
+                        chest.TrapStrength = 0;
                         chest.TrapLevel = 0;
 
                         sos.Delete();

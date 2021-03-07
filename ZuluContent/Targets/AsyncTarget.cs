@@ -70,10 +70,7 @@ namespace Server.Targeting
 
     public class AsyncTarget<T> : AsyncTarget
     {
-        public AsyncTarget(Mobile mobile, TargetOptions opts) : base(mobile, opts)
-        {
-        }
-        
+        public AsyncTarget(Mobile mobile, TargetOptions opts) : base(mobile, opts) { }
         public override AsyncTarget<T> GetAwaiter() => this;
         public new TargetResponse<T> GetResult() => Response.Cast<T>();
     }

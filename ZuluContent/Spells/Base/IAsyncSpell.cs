@@ -23,7 +23,7 @@ namespace Server.Spells
                 return;
             }
             
-            var target = new AsyncTarget<T>(Caster, Info.TargetOptions);
+            var target = new AsyncSpellTarget<T>(this, Caster, Info.TargetOptions);
             Caster.Target = target;
 
             var response = await target;

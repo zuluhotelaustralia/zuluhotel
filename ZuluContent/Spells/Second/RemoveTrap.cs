@@ -1,70 +1,37 @@
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Targeting;
 
 namespace Server.Spells.Second
 {
-    public class RemoveTrapSpell : MagerySpell
+    public class RemoveTrapSpell : MagerySpell, ITargetableAsyncSpell<TrapableContainer>
     {
-        public RemoveTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public RemoveTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-
-        public override void OnCast()
+        public async Task OnTargetAsync(ITargetResponse<TrapableContainer> response)
         {
-            Caster.Target = new InternalTarget(this);
-            Caster.SendMessage("What do you wish to untrap?");
-        }
+            if (!response.HasValue)
+                return;
 
-        public void Target(TrapableContainer item)
-        {
-            if (!Caster.CanSee(item))
-            {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (item.TrapType != TrapType.None && item.TrapType != TrapType.MagicTrap)
+            var item = response.Target;
+            
+            if (item.TrapType != TrapType.None && item.TrapType != TrapType.MagicTrap)
             {
                 base.DoFizzle();
-            }
-            else if (CheckSequence())
-            {
-                SpellHelper.Turn(Caster, item);
-
-                var loc = item.GetWorldLocation();
-
-                Effects.SendLocationParticles(EffectItem.Create(loc, item.Map, EffectItem.DefaultDuration), 0x376A, 9,
-                    32, 5015);
-                Effects.PlaySound(loc, item.Map, 0x1F0);
-
-                item.TrapType = TrapType.None;
-                item.TrapPower = 0;
-                item.TrapLevel = 0;
+                return;
             }
 
-            FinishSequence();
-        }
+            SpellHelper.Turn(Caster, item);
 
-        private class InternalTarget : Target
-        {
-            private readonly RemoveTrapSpell m_Owner;
+            var loc = item.GetWorldLocation();
 
-            public InternalTarget(RemoveTrapSpell owner) : base(12, false, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
+            Effects.SendLocationParticles(EffectItem.Create(loc, item.Map, EffectItem.DefaultDuration), 0x376A, 9,
+                32, 5015);
+            Effects.PlaySound(loc, item.Map, 0x1F0);
 
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is TrapableContainer)
-                    m_Owner.Target((TrapableContainer) o);
-                else
-                    @from.SendMessage("You can't disarm that");
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            item.TrapType = TrapType.None;
+            item.TrapStrength = 0;
+            item.TrapLevel = 0;
         }
     }
 }

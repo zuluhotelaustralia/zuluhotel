@@ -12,6 +12,7 @@
     <RootNamespace>ZuluContent</RootNamespace>
     <Configurations>Release;Debug</Configurations>
     <Platforms>x64</Platforms>
+    <NoWarn>1998</NoWarn>
   </PropertyGroup>
   
   <ItemGroup>
