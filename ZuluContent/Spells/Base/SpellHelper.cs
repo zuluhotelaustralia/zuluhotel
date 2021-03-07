@@ -268,7 +268,7 @@ namespace Server.Spells
 
         public static bool AddStatBonus(Mobile caster, Mobile target, StatType type)
         {
-            return AddStatBonus(caster, target, type, GetOffset(caster, target, type, false), GetDuration(caster, target));
+            return AddStatBonus(caster, target, type, GetModAmount(caster, target, type, false), GetDuration(caster, target));
         }
 
         public static bool AddStatBonus(Mobile caster, Mobile target, StatType type, int bonus, TimeSpan duration)
@@ -295,7 +295,7 @@ namespace Server.Spells
 
         public static bool AddStatCurse(Mobile caster, Mobile target, StatType type)
         {
-            return AddStatCurse(caster, target, type, GetOffset(caster, target, type, true), GetDuration(caster, target));
+            return AddStatCurse(caster, target, type, GetModAmount(caster, target, type, true), GetDuration(caster, target));
         }
 
         public static bool AddStatCurse(Mobile caster, Mobile target, StatType type, int curse, TimeSpan duration)
@@ -345,7 +345,7 @@ namespace Server.Spells
             return percent;
         }
 
-        public static int GetOffset(Mobile caster, Mobile target, StatType type, bool curse)
+        public static int GetModAmount(Mobile caster, Mobile target, StatType? type = null, bool curse = false)
         {
             var modAmount = Utility.RandomMinMax(0, 15) + caster.Skills[SkillName.Magery].Value / 10;
             caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref modAmount));

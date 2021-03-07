@@ -2,6 +2,7 @@ using System;
 using MessagePack;
 using Server;
 using Server.Spells;
+using Server.Spells.Second;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static Server.Engines.Magic.IElementalResistible;
 
@@ -24,7 +25,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             else
                 healAmount += healDelta;
         }
-        
+
+        public override void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty)
+        {
+            if(source is CureSpell)
+                difficulty -= Value * 10;
+        }
+
         public int CompareTo(object obj) => obj switch
         {
             HealingBonus other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),

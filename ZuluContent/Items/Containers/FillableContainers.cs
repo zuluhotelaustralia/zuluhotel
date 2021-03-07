@@ -181,13 +181,13 @@ namespace Server.Items
                 else
                     TrapType = TrapType.ExplosionTrap;
 
-                TrapPower = m_Content.Level * Utility.RandomMinMax(10, 30);
+                TrapStrength = m_Content.Level * Utility.RandomMinMax(10, 30);
                 TrapLevel = m_Content.Level;
             }
             else
             {
                 TrapType = TrapType.None;
-                TrapPower = 0;
+                TrapStrength = 0;
                 TrapLevel = 0;
             }
 

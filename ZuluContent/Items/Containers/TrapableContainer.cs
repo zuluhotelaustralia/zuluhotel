@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Server.Network;
 
 namespace Server.Items
@@ -14,35 +15,19 @@ namespace Server.Items
 
     public abstract class TrapableContainer : BaseContainer, ITelekinesisable
     {
-        private TrapType m_TrapType;
-        private int m_TrapPower;
-        private int m_TrapLevel;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public TrapType TrapType { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public TrapType TrapType
-        {
-            get { return m_TrapType; }
-            set { m_TrapType = value; }
-        }
+        public int TrapStrength { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int TrapPower
-        {
-            get { return m_TrapPower; }
-            set { m_TrapPower = value; }
-        }
-
+        public int TrapLevel { get; set; }
+        
         [CommandProperty(AccessLevel.GameMaster)]
-        public int TrapLevel
-        {
-            get { return m_TrapLevel; }
-            set { m_TrapLevel = value; }
-        }
+        public Mobile TrappedBy { get; set; }
 
-        public virtual bool TrapOnOpen
-        {
-            get { return true; }
-        }
+        public virtual bool TrapOnOpen => true;
 
         public TrapableContainer(int itemID) : base(itemID)
         {
@@ -70,7 +55,7 @@ namespace Server.Items
 
         public virtual bool ExecuteTrap(Mobile from)
         {
-            if (m_TrapType != TrapType.None)
+            if (TrapType != TrapType.None)
             {
                 Point3D loc = GetWorldLocation();
                 Map facet = Map;
@@ -80,37 +65,40 @@ namespace Server.Items
                     SendMessageTo(from, "That is trapped, but you open it with your godly powers.", 0x3B2);
                     return false;
                 }
+                
+                SendMessageTo(from, 502999, 0x3B2); // You set off a trap!
+                int damage = Utility.RandomMinMax(0, 15) * TrapStrength * 2;
 
-                switch (m_TrapType)
+                switch (TrapType)
                 {
                     case TrapType.ExplosionTrap:
                     {
-                        SendMessageTo(from, 502999, 0x3B2); // You set off a trap!
-
-                        if (from.InRange(loc, 3))
-                        {
-                            int damage;
-
-                            if (m_TrapLevel > 0)
-                                damage = Utility.RandomMinMax(10, 30) * m_TrapLevel;
-                            else
-                                damage = m_TrapPower;
-
-                            from.Damage(damage);
-
-                            // Your skin blisters from the heat!
-                            from.LocalOverheadMessage(Network.MessageType.Regular, 0x2A, 503000);
-                        }
-
                         Effects.SendLocationEffect(loc, facet, 0x36BD, 15, 10);
                         Effects.PlaySound(loc, facet, 0x307);
 
+                        IPooledEnumerable eable = facet.GetMobilesInRange(new Point3D(loc), TrapStrength);
+
+                        foreach (Mobile m in eable)
+                        {
+                            if (m.InRange(loc, TrapStrength))
+                            {
+                                m.Damage(damage);
+                                // Your skin blisters from the heat!
+                                m.LocalOverheadMessage(MessageType.Regular, 0x2A, 503000);
+                                
+                                Effects.SendLocationEffect(new Point3D(m), facet, 0x36BD, 15, 10);
+                                Effects.PlaySound(new Point3D(m), facet, 0x307);
+                            }
+                        }
+
+                        eable.Free();
+                        
                         break;
                     }
                     case TrapType.MagicTrap:
                     {
                         if (from.InRange(loc, 1))
-                            from.Damage(m_TrapPower);
+                            from.Damage(damage);
 
                         Effects.PlaySound(loc, Map, 0x307);
 
@@ -126,21 +114,12 @@ namespace Server.Items
                     }
                     case TrapType.DartTrap:
                     {
-                        SendMessageTo(from, 502999, 0x3B2); // You set off a trap!
-
                         if (from.InRange(loc, 3))
                         {
-                            int damage;
-
-                            if (m_TrapLevel > 0)
-                                damage = Utility.RandomMinMax(5, 15) * m_TrapLevel;
-                            else
-                                damage = m_TrapPower;
-
                             from.Damage(damage);
 
                             // A dart imbeds itself in your flesh!
-                            from.LocalOverheadMessage(Network.MessageType.Regular, 0x62, 502998);
+                            from.LocalOverheadMessage(MessageType.Regular, 0x62, 502998);
                         }
 
                         Effects.PlaySound(loc, facet, 0x223);
@@ -149,26 +128,14 @@ namespace Server.Items
                     }
                     case TrapType.PoisonTrap:
                     {
-                        SendMessageTo(from, 502999, 0x3B2); // You set off a trap!
-
                         if (from.InRange(loc, 3))
                         {
-                            Poison poison;
-
-                            if (m_TrapLevel > 0)
-                            {
-                                poison = Poison.GetPoison(Math.Max(0, Math.Min(4, m_TrapLevel - 1)));
-                            }
-                            else
-                            {
-                                from.Damage(m_TrapPower);
-                                poison = Poison.Greater;
-                            }
+                            var poison = Poison.GetPoison(Math.Min(TrapStrength, Poison.Poisons.Count - 1));
 
                             from.ApplyPoison(from, poison);
 
                             // You are enveloped in a noxious green cloud!
-                            from.LocalOverheadMessage(Network.MessageType.Regular, 0x44, 503004);
+                            from.LocalOverheadMessage(MessageType.Regular, 0x44, 503004);
                         }
 
                         Effects.SendLocationEffect(loc, facet, 0x113A, 10, 20);
@@ -178,9 +145,9 @@ namespace Server.Items
                     }
                 }
 
-                m_TrapType = TrapType.None;
-                m_TrapPower = 0;
-                m_TrapLevel = 0;
+                TrapType = TrapType.None;
+                TrapStrength = 0;
+                TrapLevel = 0;
                 return true;
             }
 
@@ -209,12 +176,12 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 2); // version
+            writer.Write(3); // version
 
-            writer.Write((int) m_TrapLevel);
-
-            writer.Write((int) m_TrapPower);
-            writer.Write((int) m_TrapType);
+            writer.Write(TrappedBy);
+            writer.Write(TrapLevel);
+            writer.Write(TrapStrength);
+            writer.Write((int) TrapType);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -225,19 +192,24 @@ namespace Server.Items
 
             switch (version)
             {
+                case 3:
+                {
+                    TrappedBy = reader.ReadEntity<Mobile>();
+                    goto case 2;
+                }
                 case 2:
                 {
-                    m_TrapLevel = reader.ReadInt();
+                    TrapLevel = reader.ReadInt();
                     goto case 1;
                 }
                 case 1:
                 {
-                    m_TrapPower = reader.ReadInt();
+                    TrapStrength = reader.ReadInt();
                     goto case 0;
                 }
                 case 0:
                 {
-                    m_TrapType = (TrapType) reader.ReadInt();
+                    TrapType = (TrapType) reader.ReadInt();
                     break;
                 }
             }

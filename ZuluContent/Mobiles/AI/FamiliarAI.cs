@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Server.Items;
+using Server.Spells;
 using Server.Spells.Fourth;
 using Server.Spells.Second;
 using Server.Spells.Third;
@@ -58,17 +59,20 @@ namespace Server.Mobiles
             {
                 if (m_Mobile.InRange(m_Mobile.ControlMaster, m_Mobile.Target.Range))
                 {
-                    switch (m_Mobile.Target)
+                    if (m_Mobile.Target is AsyncSpellTarget target)
                     {
-                        case CureSpell.InternalTarget:
-                        case GreaterHealSpell.InternalTarget:
-                        case BlessSpell.InternalTarget:
-                        case ArchProtectionSpell.InternalTarget:
-                            m_Mobile.Target.Invoke(m_Mobile, m_Mobile.ControlMaster);
-                            break;
-                        default:
-                            m_Mobile.Target.Cancel(m_Mobile, TargetCancelType.Canceled);
-                            break;
+                        switch (target.Spell)
+                        {
+                            case CureSpell:
+                            case GreaterHealSpell:
+                            case BlessSpell:
+                            case ArchProtectionSpell:
+                                target.Invoke(m_Mobile, m_Mobile.ControlMaster);
+                                break;
+                            default:
+                                m_Mobile.Target.Cancel(m_Mobile, TargetCancelType.Canceled);
+                                break;
+                        }
                     }
                 }
                 else

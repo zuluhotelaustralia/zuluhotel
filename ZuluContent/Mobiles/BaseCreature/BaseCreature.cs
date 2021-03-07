@@ -1556,7 +1556,7 @@ namespace Server.Mobiles
                 AIType.AI_Animal => new AnimalAI(this),
                 AIType.AI_Berserk => new BerserkAI(this),
                 AIType.AI_Archer => new ArcherAI(this),
-                AIType.AI_Healer => new HealerAI(this),
+                AIType.AI_Healer => new HealerAi(this),
                 AIType.AI_Vendor => new VendorAI(this),
                 AIType.AI_Mage => new MageAI(this),
                 AIType.AI_Predator =>

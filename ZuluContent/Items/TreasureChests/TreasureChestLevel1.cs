@@ -53,7 +53,7 @@ public TreasureChestLevel1()
 			Movable = false;
 
 			TrapType = TrapType.DartTrap;
-			TrapPower = m_Level * Utility.Random( 1, 25 );
+			TrapStrength = m_Level * Utility.Random( 1, 25 );
 			Locked = true;
 
 			RequiredSkill = 57;

@@ -1,3 +1,4 @@
+using Server.Spells;
 using Server.Targeting;
 using Server.Spells.First;
 using Server.Spells.Second;
@@ -5,17 +6,17 @@ using Server.Spells.Fourth;
 
 namespace Server.Mobiles
 {
-    public class HealerAI : BaseAI
+    public class HealerAi : BaseAI
     {
-        private static NeedDelegate m_Cure = NeedCure;
-        private static NeedDelegate m_GHeal = NeedGHeal;
-        private static NeedDelegate m_LHeal = NeedLHeal;
-        private static NeedDelegate[] m_ACure = new NeedDelegate[] {m_Cure};
-        private static NeedDelegate[] m_AGHeal = new NeedDelegate[] {m_GHeal};
-        private static NeedDelegate[] m_ALHeal = new NeedDelegate[] {m_LHeal};
-        private static NeedDelegate[] m_All = new NeedDelegate[] {m_Cure, m_GHeal, m_LHeal};
+        private static readonly NeedDelegate Cure = NeedCure;
+        private static readonly NeedDelegate GHeal = NeedGHeal;
+        private static readonly NeedDelegate LHeal = NeedLHeal;
+        private static readonly NeedDelegate[] ACure = {Cure};
+        private static readonly NeedDelegate[] AgHeal = {GHeal};
+        private static readonly NeedDelegate[] AlHeal = {LHeal};
+        private static readonly NeedDelegate[] All = {Cure, GHeal, LHeal};
 
-        public HealerAI(BaseCreature m) : base(m)
+        public HealerAi(BaseCreature m) : base(m)
         {
         }
 
@@ -24,30 +25,27 @@ namespace Server.Mobiles
             if (m_Mobile.Deleted)
                 return false;
 
-            Target targ = m_Mobile.Target;
-
-            if (targ != null)
+            if (m_Mobile.Target is AsyncSpellTarget target)
             {
-                if (targ is CureSpell.InternalTarget)
+                switch (target.Spell)
                 {
-                    ProcessTarget(targ, m_ACure);
-                }
-                else if (targ is GreaterHealSpell.InternalTarget)
-                {
-                    ProcessTarget(targ, m_AGHeal);
-                }
-                else if (targ is AsyncTarget<object>)
-                {
-                    ProcessTarget(targ, m_ALHeal);
-                }
-                else
-                {
-                    targ.Cancel(m_Mobile, TargetCancelType.Canceled);
+                    case CureSpell:
+                        ProcessTarget( target, ACure );
+                        break;
+                    case GreaterHealSpell:
+                        ProcessTarget( target, AgHeal );
+                        break;
+                    case HealSpell:
+                        ProcessTarget( target, AlHeal );
+                        break;
+                    default:
+                        m_Mobile.Target.Cancel(m_Mobile, TargetCancelType.Canceled);
+                        break;
                 }
             }
             else
             {
-                Mobile toHelp = Find(m_All);
+                Mobile toHelp = Find(All);
 
                 if (toHelp != null)
                 {

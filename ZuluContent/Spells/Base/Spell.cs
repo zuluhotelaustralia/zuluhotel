@@ -92,15 +92,7 @@ namespace Server.Spells
 
             if (IsCasting)
             {
-                var o = ProtectionSpell.Registry[Caster];
-                var disturb = true;
-
-                if (o != null && o is double d)
-                    if (d > Utility.RandomDouble() * 100.0)
-                        disturb = false;
-
-                if (disturb)
-                    Disturb(DisturbType.Hurt, false, true);
+                Disturb(DisturbType.Hurt, false, true);
             }
         }
 

@@ -73,7 +73,7 @@ namespace Server.Items
             Movable = false;
 
             TrapType = TrapType.ExplosionTrap;
-            TrapPower = m_Level * Utility.Random(10, 25);
+            TrapStrength = m_Level * Utility.Random(10, 25);
             Locked = true;
 
             RequiredSkill = 92;

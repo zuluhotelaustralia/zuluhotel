@@ -1,83 +1,61 @@
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Second
 {
-    public class MagicTrapSpell : MagerySpell
+    public class MagicTrapSpell : MagerySpell, ITargetableAsyncSpell<TrapableContainer>
     {
-        public MagicTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public MagicTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<TrapableContainer> response)
         {
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(TrapableContainer item)
-        {
-            if (!Caster.CanSee(item))
+            if (!response.HasValue)
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+                Caster.SendLocalizedMessage(502942); // You can't trap this!
+                return;
             }
-            else if (item.TrapType != TrapType.None && item.TrapType != TrapType.MagicTrap)
+            
+            var item = response.Target;
+
+            if (item.TrapType != TrapType.None && item.TrapType != TrapType.MagicTrap)
             {
-                base.DoFizzle();
-            }
-            else if (CheckSequence())
-            {
-                SpellHelper.Turn(Caster, item);
-
-                item.TrapType = TrapType.MagicTrap;
-                item.TrapPower = 1;
-                item.TrapLevel = 0;
-
-                var loc = item.GetWorldLocation();
-
-                Effects.SendLocationParticles(
-                    EffectItem.Create(new Point3D(loc.X + 1, loc.Y, loc.Z), item.Map, EffectItem.DefaultDuration),
-                    0x376A, 9, 10, 9502);
-                Effects.SendLocationParticles(
-                    EffectItem.Create(new Point3D(loc.X, loc.Y - 1, loc.Z), item.Map, EffectItem.DefaultDuration),
-                    0x376A, 9, 10, 9502);
-                Effects.SendLocationParticles(
-                    EffectItem.Create(new Point3D(loc.X - 1, loc.Y, loc.Z), item.Map, EffectItem.DefaultDuration),
-                    0x376A, 9, 10, 9502);
-                Effects.SendLocationParticles(
-                    EffectItem.Create(new Point3D(loc.X, loc.Y + 1, loc.Z), item.Map, EffectItem.DefaultDuration),
-                    0x376A, 9, 10, 9502);
-                Effects.SendLocationParticles(
-                    EffectItem.Create(new Point3D(loc.X, loc.Y, loc.Z), item.Map, EffectItem.DefaultDuration), 0, 0, 0,
-                    5014);
-
-                Effects.PlaySound(loc, item.Map, 0x1EF);
+                DoFizzle();
+                return;
             }
 
-            FinishSequence();
-        }
+            var strength = Caster.Skills[SkillName.Magery].Value / 30;
+            Caster.FireHook(h => h.OnTrap(Caster, item, ref strength));
 
-        private class InternalTarget : Target
-        {
-            private readonly MagicTrapSpell m_Owner;
+            if (strength < 0)
+                strength = 1;
+            
+            SpellHelper.Turn(Caster, item);
 
-            public InternalTarget(MagicTrapSpell owner) : base(12, false, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
+            item.TrapType = TrapType.MagicTrap;
+            item.TrapStrength = (int)strength;
+            item.TrapLevel = 0;
 
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is TrapableContainer)
-                    m_Owner.Target((TrapableContainer) o);
-                else
-                    @from.SendMessage("You can't trap that");
-            }
+            var loc = item.GetWorldLocation();
 
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            Effects.SendLocationParticles(
+                EffectItem.Create(new Point3D(loc.X + 1, loc.Y, loc.Z), item.Map, EffectItem.DefaultDuration),
+                0x376A, 9, 10, 9502);
+            Effects.SendLocationParticles(
+                EffectItem.Create(new Point3D(loc.X, loc.Y - 1, loc.Z), item.Map, EffectItem.DefaultDuration),
+                0x376A, 9, 10, 9502);
+            Effects.SendLocationParticles(
+                EffectItem.Create(new Point3D(loc.X - 1, loc.Y, loc.Z), item.Map, EffectItem.DefaultDuration),
+                0x376A, 9, 10, 9502);
+            Effects.SendLocationParticles(
+                EffectItem.Create(new Point3D(loc.X, loc.Y + 1, loc.Z), item.Map, EffectItem.DefaultDuration),
+                0x376A, 9, 10, 9502);
+            Effects.SendLocationParticles(
+                EffectItem.Create(new Point3D(loc.X, loc.Y, loc.Z), item.Map, EffectItem.DefaultDuration), 0, 0, 0,
+                5014);
+
+            Effects.PlaySound(loc, item.Map, 0x1EF);
         }
     }
 }
