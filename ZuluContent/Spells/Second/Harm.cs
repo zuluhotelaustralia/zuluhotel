@@ -13,15 +13,15 @@ namespace Server.Spells.Second
             if (!response.HasValue)
                 return;
 
-            var m = response.Target;
+            var target = response.Target;
 
-            SpellHelper.Turn(Caster, m);
+            SpellHelper.Turn(Caster, target);
 
-            m.FixedParticles(0x37C4, 10, 15, 5013, EffectLayer.Waist);
-            m.PlaySound(0x1F1);
+            target.FixedParticles(0x37C4, 10, 15, 5013, EffectLayer.Waist);
+            target.PlaySound(0x1F1);
             
-            var damage = SpellHelper.CalcSpellDamage(Caster, m, this);
-            SpellHelper.Damage(damage, m, Caster, this, null, ElementalType.Water);
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            SpellHelper.Damage(damage, target, Caster, this, null, ElementalType.Water);
         }
     }
 }

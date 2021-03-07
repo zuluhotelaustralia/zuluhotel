@@ -14,22 +14,22 @@ namespace Server.Spells.Second
             if (!response.HasValue)
                 return;
 
-            var m = response.Target;
+            var target = response.Target;
             
-            if (!m.BeginAction<ProtectionSpell>())
+            if (!target.BeginAction<ProtectionSpell>())
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
                 return;
             }
 
-            var amount = SpellHelper.GetModAmount(Caster, m);
-            var duration = SpellHelper.GetDuration(Caster, m);
+            var amount = SpellHelper.GetModAmount(Caster, target);
+            var duration = SpellHelper.GetDuration(Caster, target);
 
-            m.VirtualArmorMod += amount;
-            m.FixedParticles(0x373B, 9, 20, 5027, EffectLayer.Waist);
-            m.PlaySound(0x1ED);
+            target.VirtualArmorMod += amount;
+            target.FixedParticles(0x373B, 9, 20, 5027, EffectLayer.Waist);
+            target.PlaySound(0x1ED);
 
-            EndActionAsync(m, amount, duration);
+            EndActionAsync(target, amount, duration);
         }
         
         private static async void EndActionAsync(Mobile mobile, int amount, TimeSpan duration)

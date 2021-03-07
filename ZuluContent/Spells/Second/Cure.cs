@@ -14,26 +14,26 @@ namespace Server.Spells.Second
             if (!response.HasValue)
                 return;
 
-            var m = response.Target;
+            var target = response.Target;
             
-            SpellHelper.Turn(Caster, m);
+            SpellHelper.Turn(Caster, target);
 
-            var p = m.Poison;
-            if (p is null)
+            var poison = target.Poison;
+            if (poison is null)
                 return;
             
-            double difficulty = p.Level * 15 + 60;
-            Caster.FireHook(h => h.OnCure(Caster, m, p, this, ref difficulty));
+            double difficulty = poison.Level * 15 + 60;
+            Caster.FireHook(h => h.OnCure(Caster, target, poison, this, ref difficulty));
 
             if (difficulty < 10)
                 difficulty = 10;
             
-            if (Caster.ShilCheckSkill(SkillName.Magery, (int)difficulty, 0) && m.CurePoison(Caster))
+            if (Caster.ShilCheckSkill(SkillName.Magery, (int)difficulty, 0) && target.CurePoison(Caster))
             {
-                if (Caster != m)
+                if (Caster != target)
                 {
                     Caster.SendLocalizedMessage(1010058); // You have cured the target of all poisons!
-                    m.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
+                    target.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
                 }
                 else
                 {
@@ -42,11 +42,11 @@ namespace Server.Spells.Second
             }
             else
             {
-                m.SendLocalizedMessage(1010060); // You have failed to cure your target!
+                target.SendLocalizedMessage(1010060); // You have failed to cure your target!
             }
 
-            m.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
-            m.PlaySound(0x1E0);
+            target.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
+            target.PlaySound(0x1E0);
         }
     }
 }

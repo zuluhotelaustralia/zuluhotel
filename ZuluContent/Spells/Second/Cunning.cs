@@ -12,13 +12,13 @@ namespace Server.Spells.Second
             if (!response.HasValue)
                 return;
 
-            var m = response.Target;
+            var target = response.Target;
             
-            SpellHelper.Turn(Caster, m);
-            SpellHelper.AddStatBonus(Caster, m, StatType.Int);
+            SpellHelper.Turn(Caster, target);
+            SpellHelper.AddStatBonus(Caster, target, StatType.Int);
 
-            m.FixedParticles(0x375A, 10, 15, 5011, EffectLayer.Head);
-            m.PlaySound(0x1EB);
+            target.FixedParticles(0x375A, 10, 15, 5011, EffectLayer.Head);
+            target.PlaySound(0x1EB);
         }
     }
 }
