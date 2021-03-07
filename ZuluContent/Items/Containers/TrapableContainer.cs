@@ -67,14 +67,12 @@ namespace Server.Items
                 }
                 
                 SendMessageTo(from, 502999, 0x3B2); // You set off a trap!
+                int damage = Utility.RandomMinMax(0, 15) * TrapStrength * 2;
 
                 switch (TrapType)
                 {
                     case TrapType.ExplosionTrap:
                     {
-
-                        int damage = Utility.RandomMinMax(0, 15) * TrapStrength * 2;
-                        
                         Effects.SendLocationEffect(loc, facet, 0x36BD, 15, 10);
                         Effects.PlaySound(loc, facet, 0x307);
 
@@ -99,7 +97,6 @@ namespace Server.Items
                     }
                     case TrapType.MagicTrap:
                     {
-                        int damage = Utility.RandomMinMax(0, 15) * TrapStrength * 2;
                         if (from.InRange(loc, 1))
                             from.Damage(damage);
 
@@ -119,8 +116,6 @@ namespace Server.Items
                     {
                         if (from.InRange(loc, 3))
                         {
-                            int damage = Utility.RandomMinMax(0, 15) * TrapStrength * 2;
-
                             from.Damage(damage);
 
                             // A dart imbeds itself in your flesh!
