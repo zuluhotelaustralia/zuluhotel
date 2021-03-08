@@ -476,6 +476,7 @@ namespace Server.Spells
             if (!IsWand() && RevealOnCast)
                 Caster.RevealingAction();
 
+            Caster.DisruptiveAction();
             SayMantra();
 
             var castDelay = m_SpellStrike ? TimeSpan.Zero : GetCastDelay();
@@ -519,8 +520,8 @@ namespace Server.Spells
 
             if (this is IAsyncSpell asyncSpell)
             {
-                CheckSequence();
-                await asyncSpell.CastAsync();
+                if (CheckSequence())
+                    await asyncSpell.CastAsync();
                 FinishSequence();
             }
             else
@@ -704,7 +705,7 @@ namespace Server.Spells
                 return false;
             }
 
-            if (Caster.CanBeBeneficial(target, true, Info.AllowDead) && CheckSequence())
+            if (Caster.CanBeBeneficial(target, true, Info.AllowDead))
             {
                 Caster.DoBeneficial(target);
                 return true;
@@ -721,7 +722,7 @@ namespace Server.Spells
                 return false;
             }
 
-            if (Caster.CanBeHarmful(target) && CheckSequence())
+            if (Caster.CanBeHarmful(target))
             {
                 Caster.DoHarmful(target);
                 return true;

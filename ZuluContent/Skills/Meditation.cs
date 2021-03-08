@@ -59,7 +59,7 @@ namespace Server.SkillHandlers
             m.SendLocalizedMessage(501851); // You enter a meditative trance.
             m.Meditating = true;
 
-            m.PlaySound(0xFA);
+            m.PlaySound(0xF9);
                 
             var regenBase = (int) (m.Skills[SkillName.Meditation].Value / 25 + m.Int / 35.0);
             var interval = 5.0;
@@ -68,7 +68,6 @@ namespace Server.SkillHandlers
                 
             new InternalTimer( m, regenBase, TimeSpan.FromSeconds(interval)).Start();
             return TimeSpan.FromSeconds(10.0);
-            
         }
         
         public static double GetMagicEfficiencyModifier(Mobile from)
@@ -148,7 +147,7 @@ namespace Server.SkillHandlers
 
             protected override void OnTick()
             {
-                if (ShouldBreakConcentration())
+                if (ShouldBreakConcentration() || !m_Mobile.Meditating)
                 {
                     // m_Mobile.SendAsciiMessage("You lost your concentration.");
                     m_Mobile.DisruptiveAction();

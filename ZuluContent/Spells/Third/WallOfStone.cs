@@ -1,89 +1,82 @@
 using System;
+using System.Threading.Tasks;
+using Server.Items;
 using Server.Misc;
-using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Third
 {
-    public class WallOfStoneSpell : MagerySpell
+    public class WallOfStoneSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public WallOfStoneSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public WallOfStoneSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-        }
+            if (!response.HasValue)
+                return;
 
+            var point = response.Target;
+            
+            SpellHelper.Turn(Caster, point);
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
+            SpellHelper.GetSurfaceTop(ref point);
 
-        public void Target(IPoint3D p)
-        {
-            if (!Caster.CanSee(p))
+            var dx = Caster.Location.X - point.X;
+            var dy = Caster.Location.Y - point.Y;
+            var rx = (dx - dy) * 44;
+            var ry = (dx + dy) * 44;
+
+            var eastToWest = rx switch
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
+                >= 0 when ry >= 0 => false,
+                >= 0 => true,
+                _ => ry >= 0
+            };
+
+            Effects.PlaySound(new Point3D(point), Caster.Map, 0x1F6);
+            
+            var durationSeconds = Caster.Skills[SkillName.Magery].Value * 3.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref durationSeconds));
+            var duration = TimeSpan.FromSeconds(durationSeconds);
+
+            for (var i = -2; i <= 2; ++i)
             {
-                SpellHelper.Turn(Caster, p);
+                var loc = new Point3D(eastToWest ? point.X + i : point.X, eastToWest ? point.Y : point.Y + i, point.Z);
+                var canFit = SpellHelper.AdjustField(ref loc, Caster.Map, 22, true);
 
-                SpellHelper.GetSurfaceTop(ref p);
+                Effects.SendLocationParticles( EffectItem.Create( loc, Caster.Map, EffectItem.DefaultDuration ), 0x376A, 9, 10, 5025 );
 
-                var dx = Caster.Location.X - p.X;
-                var dy = Caster.Location.Y - p.Y;
-                var rx = (dx - dy) * 44;
-                var ry = (dx + dy) * 44;
+                if (!canFit)
+                    continue;
 
-                bool eastToWest;
+                Item item = new MagicStoneWall(loc, Caster, duration, eastToWest);
 
-                if (rx >= 0 && ry >= 0)
-                    eastToWest = false;
-                else if (rx >= 0)
-                    eastToWest = true;
-                else if (ry >= 0)
-                    eastToWest = true;
-                else
-                    eastToWest = false;
-
-                Effects.PlaySound((Point3D)p, Caster.Map, 0x1F6);
-
-                for (var i = -1; i <= 1; ++i)
-                {
-                    var loc = new Point3D(eastToWest ? p.X + i : p.X, eastToWest ? p.Y : p.Y + i, p.Z);
-                    var canFit = SpellHelper.AdjustField(ref loc, Caster.Map, 22, true);
-
-                    //Effects.SendLocationParticles( EffectItem.Create( loc, Caster.Map, EffectItem.DefaultDuration ), 0x376A, 9, 10, 5025 );
-
-                    if (!canFit)
-                        continue;
-
-                    Item item = new InternalItem(loc, Caster.Map, Caster);
-
-                    Effects.SendLocationParticles(item, 0x376A, 9, 10, 5025);
-
-                    //new InternalItem( loc, Caster.Map, Caster );
-                }
+                Effects.SendLocationParticles(item, 0x376A, 9, 10, 5025);
             }
-
-            FinishSequence();
         }
 
         [DispellableField]
-        private class InternalItem : Item
+        private sealed class MagicStoneWall : Item
         {
             private readonly Mobile m_Caster;
             private DateTime m_End;
             private Timer m_Timer;
 
-            public InternalItem(Point3D loc, Map map, Mobile caster) : base(0x82)
+            public MagicStoneWall(
+                Point3D loc, 
+                Mobile caster, 
+                TimeSpan duration,
+                bool eastToWest
+            ) 
+                : base(eastToWest ? 0x58 : 0x57)
             {
                 Visible = false;
                 Movable = false;
-
-                MoveToWorld(loc, map);
-
                 m_Caster = caster;
 
+                MoveToWorld(loc, m_Caster.Map);
+                
                 if (caster.InLOS(this))
                     Visible = true;
                 else
@@ -92,20 +85,15 @@ namespace Server.Spells.Third
                 if (Deleted)
                     return;
 
-                m_Timer = new InternalTimer(this, TimeSpan.FromSeconds(10.0));
+                m_Timer = new InternalTimer(this, duration);
                 m_Timer.Start();
 
-                m_End = DateTime.Now + TimeSpan.FromSeconds(10.0);
+                m_End = DateTime.Now + duration;
             }
 
-            public InternalItem(Serial serial) : base(serial)
-            {
-            }
+            public MagicStoneWall(Serial serial) : base(serial) { }
 
-            public override bool BlocksFit
-            {
-                get { return true; }
-            }
+            public override bool BlocksFit => true;
 
             public override void Serialize(IGenericWriter writer)
             {
@@ -147,33 +135,17 @@ namespace Server.Spells.Third
                 }
             }
 
-            public override bool OnMoveOver(Mobile m)
-            {
-                int noto;
-
-                if (m is PlayerMobile)
-                {
-                    noto = Notoriety.Compute(m_Caster, m);
-                    if (noto == Notoriety.Enemy || noto == Notoriety.Ally)
-                        return false;
-                }
-
-                return base.OnMoveOver(m);
-            }
-
             public override void OnAfterDelete()
             {
                 base.OnAfterDelete();
-
-                if (m_Timer != null)
-                    m_Timer.Stop();
+                m_Timer?.Stop();
             }
 
             private class InternalTimer : Timer
             {
-                private readonly InternalItem m_Item;
+                private readonly MagicStoneWall m_Item;
 
-                public InternalTimer(InternalItem item, TimeSpan duration) : base(duration)
+                public InternalTimer(MagicStoneWall item, TimeSpan duration) : base(duration)
                 {
                     Priority = TimerPriority.OneSecond;
                     m_Item = item;
@@ -183,27 +155,6 @@ namespace Server.Spells.Third
                 {
                     m_Item.Delete();
                 }
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly WallOfStoneSpell m_Owner;
-
-            public InternalTarget(WallOfStoneSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is IPoint3D)
-                    m_Owner.Target((IPoint3D) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
             }
         }
     }

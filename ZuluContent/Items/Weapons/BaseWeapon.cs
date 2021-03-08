@@ -951,7 +951,8 @@ namespace Server.Items
             damage += damage * modifiers;
 
             // Scale by durability
-            damage *= ((double) HitPoints / (double) MaxHitPoints);
+            if(MaxHitPoints > 0)
+                damage *= HitPoints / (double) MaxHitPoints;
 
             return (int) damage;
         }
