@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Server.Engines.Craft;
 using Server.Network;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Items
 {
@@ -13,14 +15,32 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public Mobile Crafter { get; set; }
+        private EnchantmentDictionary m_Enchantments;
+
+        public EnchantmentDictionary Enchantments
+        {
+            get => m_Enchantments ??= new EnchantmentDictionary();
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark
+        {
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
 
         #endregion
 
         [Constructible]
         public MapItem(Map facet = null) : base(0x14EC)
         {
+            Mark = MarkQuality.Regular;
             Weight = 1.0;
 
             Width = 200;
@@ -56,7 +76,15 @@ namespace Server.Items
         )
         {
             CraftInit(from);
-            return 1;
+
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
+
+            return mark;
         }
 
         public virtual void CraftInit(Mobile from)
@@ -285,7 +313,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(0);
+            writer.Write(1);
+
+            ICraftable.Serialize(writer, this);
 
             writer.Write(Bounds);
 
@@ -309,6 +339,10 @@ namespace Server.Items
 
             switch (version)
             {
+                case 1:
+                    ICraftable.Deserialize(reader, this);
+
+                    goto case 0;
                 case 0:
                 {
                     Bounds = reader.ReadRect2D();

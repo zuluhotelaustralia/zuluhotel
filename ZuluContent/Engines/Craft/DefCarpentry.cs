@@ -140,31 +140,6 @@ namespace Server.Engines.Craft
             AddSkill(index, SkillName.Tailoring, 40.0, 45.0);
             AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
 
-            // Instruments
-            index = AddCraft(typeof(LapHarp), 1044293, 1023762, 63.1, 88.1, typeof(Log), 1044041, 20, 1044351);
-            AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
-            AddRes(index, typeof(Cloth), 1044286, 10, 1044287);
-
-            index = AddCraft(typeof(Harp), 1044293, 1023761, 78.9, 103.9, typeof(Log), 1044041, 35, 1044351);
-            AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
-            AddRes(index, typeof(Cloth), 1044286, 15, 1044287);
-
-            index = AddCraft(typeof(Drums), 1044293, 1023740, 57.8, 82.8, typeof(Log), 1044041, 20, 1044351);
-            AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
-            AddRes(index, typeof(Cloth), 1044286, 10, 1044287);
-
-            index = AddCraft(typeof(Lute), 1044293, 1023763, 68.4, 93.4, typeof(Log), 1044041, 25, 1044351);
-            AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
-            AddRes(index, typeof(Cloth), 1044286, 10, 1044287);
-
-            index = AddCraft(typeof(Tambourine), 1044293, 1023741, 57.8, 82.8, typeof(Log), 1044041, 15, 1044351);
-            AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
-            AddRes(index, typeof(Cloth), 1044286, 10, 1044287);
-
-            index = AddCraft(typeof(TambourineTassel), 1044293, 1044320, 57.8, 82.8, typeof(Log), 1044041, 15, 1044351);
-            AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
-            AddRes(index, typeof(Cloth), 1044286, 15, 1044287);
-
             // Misc
             index = AddCraft(typeof(SmallBedSouthDeed), 1044290, 1044321, 94.7, 119.8, typeof(Log), 1044041, 100,
                 1044351);

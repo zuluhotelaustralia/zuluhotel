@@ -14,19 +14,10 @@ namespace Server.Items
         Regular
     }
 
-    public enum BookQuality
-    {
-        Regular,
-        Exceptional,
-    }
-
-    public class Spellbook : Item, ICraftable, ISlayer
+    public class Spellbook : Item, ISlayer
     {
         [CommandProperty(AccessLevel.GameMaster)]
         public string EngravedText { get; set; }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public BookQuality Mark { get; set; }
 
         public static void Initialize()
         {
@@ -359,15 +350,6 @@ namespace Server.Items
             to.NetState.SendSpellbookContent(Serial, ItemID, BookOffset + 1, m_Content);
         }
 
-        private Mobile m_Crafter;
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter
-        {
-            get { return m_Crafter; }
-            set { m_Crafter = value; }
-        }
-
         public override bool DisplayLootType
         {
             get { return false; }
@@ -376,9 +358,6 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             base.OnSingleClick(from);
-
-            if (m_Crafter != null)
-                LabelTo(from, 1050043, m_Crafter.Name); // crafted by ~1_NAME~
 
             LabelTo(from, 1042886, SpellCount.ToString());
         }
@@ -407,13 +386,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 5); // version
-
-            writer.Write((byte) Mark);
+            writer.Write((int) 2); // version
 
             writer.Write((string) EngravedText);
-
-            writer.Write(m_Crafter);
 
             writer.Write((int) OldSlayer);
             writer.Write((int) OldSlayer2);
@@ -430,25 +405,9 @@ namespace Server.Items
 
             switch (version)
             {
-                case 5:
-                {
-                    Mark = (BookQuality) reader.ReadByte();
-
-                    goto case 4;
-                }
-                case 4:
-                {
-                    EngravedText = reader.ReadString();
-
-                    goto case 3;
-                }
-                case 3:
-                {
-                    m_Crafter = reader.ReadEntity<Mobile>();
-                    goto case 2;
-                }
                 case 2:
                 {
+                    EngravedText = reader.ReadString();
                     OldSlayer = (SlayerName) reader.ReadInt();
                     OldSlayer2 = (SlayerName) reader.ReadInt();
                     goto case 1;
@@ -465,20 +424,6 @@ namespace Server.Items
 
             if (Parent is Mobile)
                 ((Mobile) Parent).CheckStatTimers();
-        }
-
-        public bool PlayerConstructed { get; set; }
-
-        public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
-            Type typeRes,
-            BaseTool tool, CraftItem craftItem, int resHue)
-        {
-            if (makersMark)
-                Crafter = from;
-
-            Mark = (BookQuality) (mark - 1);
-
-            return mark;
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public enum ClothingQuality
+    public enum MarkQuality
     {
         Low,
         Regular,

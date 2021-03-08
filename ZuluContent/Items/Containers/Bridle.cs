@@ -1,15 +1,30 @@
 using System;
 using Scripts.Zulu.Utilities;
 using Server.Engines.Craft;
-using Server.Gumps;
 using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public class Bridle : Item, ICraftable
+    public class Bridle : Item, ICraftable, IResource
     {
         private CraftResource m_Resource;
+        private EnchantmentDictionary m_Enchantments;
+
+        public EnchantmentDictionary Enchantments
+        {
+            get => m_Enchantments ??= new EnchantmentDictionary();
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark
+        {
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
@@ -29,6 +44,8 @@ namespace Server.Items
         public Bridle() : base(0x1374)
         {
             Weight = 1;
+
+            Mark = MarkQuality.Regular;
         }
 
         [Constructible]
@@ -44,19 +61,31 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Type resourceType = typeRes;
+            Mark = (MarkQuality) mark;
+
+            if (makersMark)
+                Crafter = from;
+
+            var resourceType = typeRes;
 
             if (resourceType == null)
                 resourceType = craftItem.Resources[0].ItemType;
 
             Resource = CraftResources.GetFromType(resourceType);
 
-            CraftContext context = craftSystem.GetContext(from);
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
 
             if (context != null && context.DoNotColor)
                 Hue = 0;
 
             return mark;
+        }
+
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -125,6 +154,12 @@ namespace Server.Items
             base.Serialize(writer);
 
             writer.Write((int) 0); // version
+
+            ICraftable.Serialize(writer, this);
+
+            Enchantments.Serialize(writer);
+
+            writer.WriteEncodedInt((int) m_Resource);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -132,6 +167,12 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            ICraftable.Deserialize(reader, this);
+
+            m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+
+            m_Resource = (CraftResource) reader.ReadEncodedInt();
         }
     }
 }

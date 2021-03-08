@@ -10,15 +10,9 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 namespace Server.Items
 {
     [Flipable(0x14F0, 0x14EF)]
-    public abstract class BaseAddonDeed : Item, ICraftable
+    public abstract class BaseAddonDeed : Item, ICraftable, IResource
     {
         public abstract BaseAddon Addon { get; }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter { get; set; }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool PlayerConstructed { get; set; }
 
         private CraftResource m_Resource;
         private EnchantmentDictionary m_Enchantments;
@@ -29,9 +23,9 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public AddonQuality Mark
+        public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (AddonQuality) e.Value);
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
             set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
         }
 
@@ -49,9 +43,17 @@ namespace Server.Items
             }
         }
 
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
         public BaseAddonDeed() : base(0x14F0)
         {
             Weight = 1.0;
+
+            Mark = MarkQuality.Regular;
 
             LootType = LootType.Newbied;
         }
@@ -96,7 +98,7 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (AddonQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;
@@ -109,16 +111,6 @@ namespace Server.Items
             Resource = CraftResources.GetFromType(resourceType);
 
             PlayerConstructed = true;
-
-            var resEnchantments = CraftResources.GetEnchantments(Resource);
-
-            if (resEnchantments != null)
-            {
-                foreach (var (key, value) in resEnchantments)
-                {
-                    Enchantments.SetFromResourceType(key, value);
-                }
-            }
 
             return mark;
         }

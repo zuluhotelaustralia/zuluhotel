@@ -10,19 +10,10 @@ namespace Server.Items
 {
     public delegate void InstrumentPickedCallback(Mobile from, BaseInstrument instrument);
 
-    public enum InstrumentQuality
-    {
-        Low,
-        Regular,
-        Exceptional
-    }
-
-    public abstract class BaseInstrument : Item, ICraftable, ISlayer
+    public abstract class BaseInstrument : Item, ISlayer
     {
         private int m_WellSound, m_BadlySound;
         private SlayerName m_Slayer, m_Slayer2;
-        private InstrumentQuality m_Mark;
-        private Mobile m_Crafter;
         private int m_UsesRemaining;
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -51,25 +42,6 @@ namespace Server.Items
         {
             get { return m_Slayer2; }
             set { m_Slayer2 = value; }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public InstrumentQuality Mark
-        {
-            get { return m_Mark; }
-            set
-            {
-                UnscaleUses();
-                m_Mark = value;
-                ScaleUses();
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter
-        {
-            get { return m_Crafter; }
-            set { m_Crafter = value; }
         }
 
         public virtual int InitMinUses
@@ -155,9 +127,6 @@ namespace Server.Items
 
         public int GetUsesScalar()
         {
-            if (m_Mark == InstrumentQuality.Exceptional)
-                return 200;
-
             return 100;
         }
 
@@ -303,9 +272,6 @@ namespace Server.Items
         {
             double val = GetBaseDifficulty(targ);
 
-            if (m_Mark == InstrumentQuality.Exceptional)
-                val -= 5.0; // 10%
-
             if (m_Slayer != SlayerName.None)
             {
                 SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer);
@@ -360,9 +326,6 @@ namespace Server.Items
                     attrs.Add(new EquipInfoAttribute(1049643)); // cursed
             }
 
-            if (m_Mark == InstrumentQuality.Exceptional)
-                attrs.Add(new EquipInfoAttribute(1018305 - (int) m_Mark));
-
             if (m_ReplenishesCharges)
                 attrs.Add(new EquipInfoAttribute(1070928)); // Replenish Charges
 
@@ -393,10 +356,10 @@ namespace Server.Items
                 number = 1041000;
             }
 
-            if (attrs.Count == 0 && Crafter == null && Name != null)
+            if (attrs.Count == 0 && Name != null)
                 return;
 
-            from.NetState.SendDisplayEquipmentInfo(Serial, number, m_Crafter?.RawName, false, attrs);
+            from.NetState.SendDisplayEquipmentInfo(Serial, number, null, false, attrs);
         }
 
         public BaseInstrument(Serial serial) : base(serial)
@@ -413,10 +376,6 @@ namespace Server.Items
             if (m_ReplenishesCharges)
                 writer.Write(m_LastReplenished);
 
-
-            writer.Write(m_Crafter);
-
-            writer.WriteEncodedInt((int) m_Mark);
             writer.WriteEncodedInt((int) m_Slayer);
             writer.WriteEncodedInt((int) m_Slayer2);
 
@@ -445,9 +404,6 @@ namespace Server.Items
                 }
                 case 2:
                 {
-                    m_Crafter = reader.ReadEntity<Mobile>();
-
-                    m_Mark = (InstrumentQuality) reader.ReadEncodedInt();
                     m_Slayer = (SlayerName) reader.ReadEncodedInt();
                     m_Slayer2 = (SlayerName) reader.ReadEncodedInt();
 
@@ -460,9 +416,6 @@ namespace Server.Items
                 }
                 case 1:
                 {
-                    m_Crafter = reader.ReadEntity<Mobile>();
-
-                    m_Mark = (InstrumentQuality) reader.ReadEncodedInt();
                     m_Slayer = (SlayerName) reader.ReadEncodedInt();
 
                     UsesRemaining = reader.ReadEncodedInt();
@@ -541,24 +494,5 @@ namespace Server.Items
                 m_From.EndAction(typeof(BaseInstrument));
             }
         }
-
-        #region ICraftable Members
-
-        public bool PlayerConstructed { get; set; }
-
-        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
-            Type typeRes,
-            BaseTool tool,
-            CraftItem craftItem, int resHue)
-        {
-            Mark = (InstrumentQuality) mark;
-
-            if (makersMark)
-                Crafter = from;
-
-            return mark;
-        }
-
-        #endregion
     }
 }

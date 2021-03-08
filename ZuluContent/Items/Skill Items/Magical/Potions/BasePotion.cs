@@ -3,6 +3,8 @@ using Server.Engines.Craft;
 using System.Collections.Generic;
 using System.Linq;
 using Server.Network;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Items
 {
@@ -54,6 +56,26 @@ namespace Server.Items
 
     public abstract class BasePotion : Item, ICraftable
     {
+        private EnchantmentDictionary m_Enchantments;
+
+        public EnchantmentDictionary Enchantments
+        {
+            get => m_Enchantments ??= new EnchantmentDictionary();
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark
+        {
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
+
         public PotionEffect PotionEffect { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -63,6 +85,7 @@ namespace Server.Items
 
         public BasePotion(int itemID, PotionEffect effect) : base(itemID)
         {
+            Mark = MarkQuality.Regular;
             PotionEffect = effect;
 
             Stackable = false;
@@ -146,7 +169,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 2); // version
+            writer.Write((int) 3); // version
+
+            ICraftable.Serialize(writer, this);
 
             writer.Write(PotionStrength);
             writer.Write((int) PotionEffect);
@@ -160,6 +185,10 @@ namespace Server.Items
 
             switch (version)
             {
+                case 3:
+                    ICraftable.Deserialize(reader, this);
+
+                    goto case 0;
                 case 2:
                 {
                     PotionStrength = reader.ReadUInt();
@@ -221,13 +250,12 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public Mobile Crafter { get; set; }
-        public bool PlayerConstructed { get; set; }
-
         public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
+            PlayerConstructed = true;
+
             if (craftSystem is DefAlchemy)
             {
                 var pack = from.Backpack;

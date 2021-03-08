@@ -1,13 +1,11 @@
-using System.Linq;
 using Server;
-using Server.Items;
-using ZuluContent.Zulu.Engines.Magic.Enums;
+using Server.Engines.Craft;
 
 namespace ZuluContent.Zulu.Items.SingleClick
 {
     public static partial class SingleClickHandler
     {
-        public static void HandleSingleClick(BaseContainer item, Mobile m)
+        public static void HandleSingleClick<T>(T item, Mobile m) where T : Item, ICraftable
         {
             CraftableHandleSingleClick(item, m);
         }

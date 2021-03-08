@@ -109,9 +109,9 @@ namespace Server.Items
 
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ClothingQuality Mark
+        public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (ClothingQuality) e.Value);
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
             set => Enchantments.Set((ItemMark e) => e.Value = (int) value);
         }
 
@@ -372,7 +372,7 @@ namespace Server.Items
             Hue = hue;
 
             m_Resource = DefaultResource;
-            Mark = ClothingQuality.Regular;
+            Mark = MarkQuality.Regular;
 
             m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
         }
@@ -418,7 +418,7 @@ namespace Server.Items
                     attrs.Add(new EquipInfoAttribute(1049643)); // cursed
             }
 
-            if (Mark == ClothingQuality.Exceptional)
+            if (Mark == MarkQuality.Exceptional)
                 attrs.Add(new EquipInfoAttribute(1018305 - (int) Mark));
         }
 
@@ -475,7 +475,7 @@ namespace Server.Items
 
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
             {
-                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != ClothingQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != MarkQuality.Regular);
             }
 
             SetSaveFlag(ref flags, SaveFlag.Resource, m_Resource != DefaultResource);
@@ -545,9 +545,9 @@ namespace Server.Items
                         Crafter = reader.ReadEntity<Mobile>();
 
                     if (GetSaveFlag(flags, SaveFlag.Mark))
-                        Mark = (ClothingQuality) reader.ReadEncodedInt();
+                        Mark = (MarkQuality) reader.ReadEncodedInt();
                     else if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                        Mark = ClothingQuality.Regular;
+                        Mark = MarkQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.StrReq))
                         m_StrReq = reader.ReadEncodedInt();
@@ -574,13 +574,13 @@ namespace Server.Items
                 case 1:
                 {
                     Crafter = reader.ReadEntity<Mobile>();
-                    Mark = (ClothingQuality) reader.ReadInt();
+                    Mark = (MarkQuality) reader.ReadInt();
                     break;
                 }
                 case 0:
                 {
                     Crafter = null;
-                    Mark = ClothingQuality.Regular;
+                    Mark = MarkQuality.Regular;
                     break;
                 }
             }
@@ -662,7 +662,7 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (ClothingQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;

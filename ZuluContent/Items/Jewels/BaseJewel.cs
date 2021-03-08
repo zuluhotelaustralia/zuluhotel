@@ -22,11 +22,18 @@ namespace Server.Items
         Diamond
     }
 
-    public abstract class BaseJewel : BaseEquippableItem, ICraftable, IArmorRating, IMagicItem, IElementalResistible
+    public abstract class BaseJewel : BaseEquippableItem, ICraftable, IArmorRating, IMagicItem, IElementalResistible,
+        IResource
     {
         private int m_HitPoints;
 
         private CraftResource m_Resource;
+        private EnchantmentDictionary m_Enchantments;
+
+        public EnchantmentDictionary Enchantments
+        {
+            get => m_Enchantments ??= new EnchantmentDictionary();
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }
@@ -99,6 +106,13 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark
+        {
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public GemType GemType { get; set; }
 
         public virtual int BaseGemTypeNumber => 0;
@@ -124,6 +138,8 @@ namespace Server.Items
             GemType = GemType.None;
 
             Layer = layer;
+
+            Mark = MarkQuality.Regular;
 
             m_HitPoints = MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
         }
@@ -167,7 +183,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 5); // version
+            writer.Write((int) 6); // version
+
+            Enchantments.Serialize(writer);
 
             ICraftable.Serialize(writer, this);
 
@@ -186,6 +204,9 @@ namespace Server.Items
 
             switch (version)
             {
+                case 6:
+                    m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+                    goto case 5;
                 case 5:
                     ICraftable.Deserialize(reader, this);
                     goto case 4;
@@ -230,14 +251,21 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Type resourceType = typeRes;
+            Mark = (MarkQuality) mark;
+
+            if (makersMark)
+                Crafter = from;
+
+            var resourceType = typeRes;
 
             if (resourceType == null)
                 resourceType = craftItem.Resources[0].ItemType;
 
             Resource = CraftResources.GetFromType(resourceType);
 
-            CraftContext context = craftSystem.GetContext(from);
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
 
             if (context != null && context.DoNotColor)
                 Hue = 0;

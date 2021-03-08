@@ -4,28 +4,13 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Craft;
 using System;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using ZuluContent.Zulu.Engines.Magic.Enums;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseContainer : Container, ICraftable
+    public abstract class BaseContainer : Container, ICraftable, IResource
     {
         private CraftResource m_Resource;
-        private EnchantmentDictionary m_Enchantments;
-
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public ContainerQuality Mark
-        {
-            get => Enchantments.Get((ItemMark e) => (ContainerQuality) e.Value);
-            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
-        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool PlayerConstructed { get; set; }
@@ -49,6 +34,9 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual Mobile Crafter { get; set; }
 
         public override int DefaultMaxWeight
@@ -64,6 +52,7 @@ namespace Server.Items
 
         public BaseContainer(int itemID) : base(itemID)
         {
+            Mark = MarkQuality.Regular;
         }
 
         public override bool IsAccessibleTo(Mobile m)
@@ -154,12 +143,12 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (ContainerQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;
 
-            Type resourceType = typeRes;
+            var resourceType = typeRes;
 
             if (resourceType == null)
                 resourceType = craftItem.Resources[0].ItemType;
@@ -168,7 +157,7 @@ namespace Server.Items
 
             PlayerConstructed = true;
 
-            CraftContext context = craftSystem.GetContext(from);
+            var context = craftSystem.GetContext(from);
 
             if (context != null && context.DoNotColor)
                 Hue = 0;
@@ -188,8 +177,6 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            Enchantments.Serialize(writer);
-
             writer.WriteEncodedInt((int) m_Resource);
         }
 
@@ -202,8 +189,6 @@ namespace Server.Items
             if (version == 1)
             {
                 ICraftable.Deserialize(reader, this);
-
-                m_Enchantments = EnchantmentDictionary.Deserialize(reader);
 
                 m_Resource = (CraftResource) reader.ReadEncodedInt();
             }

@@ -19,7 +19,8 @@ namespace Server.Items
         SlayerName OldSlayer2 { get; set; }
     }
 
-    public abstract class BaseWeapon : BaseEquippableItem, IWeapon, ICraftable, ISlayer, IDurability, IRepairable
+    public abstract class BaseWeapon : BaseEquippableItem, IWeapon, ICraftable, ISlayer, IDurability, IRepairable,
+        IResource
     {
         /* Weapon internals work differently now (Mar 13 2003)
          *
@@ -174,9 +175,9 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public WeaponQuality Mark
+        public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (WeaponQuality) e.Value);
+            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
             set
             {
                 UnscaleDurability();
@@ -383,7 +384,7 @@ namespace Server.Items
                 _ => 0
             };
 
-            var exceptionalBonus = Mark == WeaponQuality.Exceptional ? 20 : 0;
+            var exceptionalBonus = Mark == MarkQuality.Exceptional ? 20 : 0;
             return bonus + exceptionalBonus;
         }
 
@@ -860,8 +861,8 @@ namespace Server.Items
         {
             var qualityBonus = Mark switch
             {
-                WeaponQuality.Low => -20,
-                WeaponQuality.Exceptional => 20,
+                MarkQuality.Low => -20,
+                MarkQuality.Exceptional => 20,
                 _ => 0
             };
 
@@ -940,7 +941,7 @@ namespace Server.Items
             }
 
             // New quality bonus:
-            if (Mark != WeaponQuality.Regular)
+            if (Mark != MarkQuality.Regular)
                 modifiers += ((int) Mark - 1) * 0.2;
 
             // Virtual damage bonus:
@@ -1112,7 +1113,7 @@ namespace Server.Items
                 SetSaveFlag(ref flags, SaveFlag.DamageLevel, DamageLevel != WeaponDamageLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.AccuracyLevel, AccuracyLevel != WeaponAccuracyLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.DurabilityLevel, DurabilityLevel != WeaponDurabilityLevel.Regular);
-                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != WeaponQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != MarkQuality.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified);
                 SetSaveFlag(ref flags, SaveFlag.Poison, Poison != null);
                 SetSaveFlag(ref flags, SaveFlag.PoisonCharges, PoisonCharges != 0);
@@ -1303,9 +1304,9 @@ namespace Server.Items
                     }
 
                     if (GetSaveFlag(flags, SaveFlag.Mark))
-                        Mark = (WeaponQuality) reader.ReadInt();
+                        Mark = (MarkQuality) reader.ReadInt();
                     else
-                        Mark = WeaponQuality.Regular;
+                        Mark = MarkQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.Hits))
                         m_Hits = reader.ReadInt();
@@ -1456,7 +1457,7 @@ namespace Server.Items
                     DamageLevel = (WeaponDamageLevel) reader.ReadInt();
                     AccuracyLevel = (WeaponAccuracyLevel) reader.ReadInt();
                     DurabilityLevel = (WeaponDurabilityLevel) reader.ReadInt();
-                    Mark = (WeaponQuality) reader.ReadInt();
+                    Mark = (MarkQuality) reader.ReadInt();
 
                     Crafter = reader.ReadEntity<Mobile>();
 
@@ -1521,7 +1522,7 @@ namespace Server.Items
         {
             Layer = (Layer) ItemData.Quality;
 
-            Mark = WeaponQuality.Regular;
+            Mark = MarkQuality.Regular;
             m_StrReq = -1;
             m_DexReq = -1;
             m_IntReq = -1;
@@ -1650,7 +1651,7 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (WeaponQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;

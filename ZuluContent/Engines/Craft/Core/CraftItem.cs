@@ -4,7 +4,6 @@ using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Items;
-using Server.Mobiles;
 using Server.Commands;
 using Server.Misc;
 using Server.Utilities;
@@ -20,11 +19,13 @@ namespace Server.Engines.Craft
         None
     }
 
-    public interface ICraftable : IEnchanted
+    public interface ICraftable
     {
         private const int Version = 1;
         public Mobile Crafter { get; set; }
         public bool PlayerConstructed { get; set; }
+
+        public MarkQuality Mark { get; set; }
 
         public static void Serialize(IGenericWriter writer, ICraftable item)
         {
@@ -47,11 +48,17 @@ namespace Server.Engines.Craft
                 item.Crafter = reader.ReadEntity<Mobile>();
         }
 
-        int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool,
             CraftItem craftItem, int resHue);
 
         public void OnSingleClick(Mobile m);
+    }
+
+    public interface IResource
+    {
+        public CraftResource Resource { get; set; }
     }
 
     public class CraftItem
@@ -285,10 +292,9 @@ namespace Server.Engines.Craft
             typeof(BaseArmor),
             typeof(BaseWeapon),
             typeof(BaseClothing),
-            typeof(BaseInstrument),
             typeof(BaseTool),
             typeof(BaseHarvestTool),
-            typeof(Spellbook), typeof(Runebook)
+            typeof(Runebook)
         };
 
         private static Type[] m_NeverColorTable = new[]

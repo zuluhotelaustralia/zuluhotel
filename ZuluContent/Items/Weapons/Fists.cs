@@ -61,7 +61,7 @@ namespace Server.Items
         {
             Visible = false;
             Movable = false;
-            Mark = WeaponQuality.Regular;
+            Mark = MarkQuality.Regular;
         }
 
         public Fists(Serial serial) : base(serial)
