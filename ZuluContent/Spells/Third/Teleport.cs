@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Misc;
 using Server.Regions;
@@ -8,120 +9,76 @@ using Server.Targeting;
 
 namespace Server.Spells.Third
 {
-    public class TeleportSpell : MagerySpell
+    public class TeleportSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public TeleportSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public TeleportSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-        }
+            if (!response.HasValue)
+                return;
 
-        public override bool CanCast()
-        {
-            if (!base.CanCast())
-                return false;
+            var point = response.Target;
             
-            if (WeightOverloading.IsOverloaded(Caster))
-            {
-                Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
-                return false;
-            }
-
-            return SpellHelper.CheckTravel(Caster, TravelCheckType.TeleportFrom);
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(IPoint3D p)
-        {
-            var orig = p;
+            var orig = point;
             var map = Caster.Map;
 
-            SpellHelper.GetSurfaceTop(ref p);
+            SpellHelper.GetSurfaceTop(ref point);
 
             var from = Caster.Location;
-            var to = new Point3D(p);
+            var to = new Point3D(point);
 
-            if (WeightOverloading.IsOverloaded(Caster))
+            if (!SpellHelper.CheckTravel(Caster, TravelCheckType.TeleportFrom))
             {
-                Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
+                Caster.SendLocalizedMessage(502361); // You cannot teleport into that area from here.
+                return;
             }
-            else if (!SpellHelper.CheckTravel(Caster, TravelCheckType.TeleportFrom))
+            
+            if (!SpellHelper.CheckTravel(Caster, map, to, TravelCheckType.TeleportTo))
             {
+                Caster.SendLocalizedMessage(502360); // You cannot teleport into that area.
+                return;
             }
-            else if (!SpellHelper.CheckTravel(Caster, map, to, TravelCheckType.TeleportTo))
-            {
-            }
-            else if (map == null || !map.CanSpawnMobile(p.X, p.Y, p.Z))
+            
+            if (map == null || !map.CanSpawnMobile(to))
             {
                 Caster.SendLocalizedMessage(501942); // That location is blocked.
+                return;
             }
-            else if (SpellHelper.CheckMulti(to, map))
+            
+            if (SpellHelper.CheckMulti(to, map) || Region.Find(to, map).GetRegion(typeof(HouseRegion)) != null)
             {
                 Caster.SendLocalizedMessage(502831); // Cannot teleport to that spot.
+                return;
             }
-            else if (Region.Find(to, map).GetRegion(typeof(HouseRegion)) != null)
+            
+            SpellHelper.Turn(Caster, orig);
+
+            Caster.Location = to;
+            Caster.ProcessDelta();
+            
+            if (Caster.Player)
             {
-                Caster.SendLocalizedMessage(502829); // Cannot teleport to that spot.
+                Effects.SendLocationParticles(EffectItem.Create(from, Caster.Map, EffectItem.DefaultDuration), 0x3728,
+                    10, 10, 2023);
+                Effects.SendLocationParticles(EffectItem.Create(to, Caster.Map, EffectItem.DefaultDuration), 0x3728, 10,
+                    10, 5023);
             }
-            else if (CheckSequence())
+            else
             {
-                SpellHelper.Turn(Caster, orig);
-
-                var m = Caster;
-
-                m.Location = to;
-                m.ProcessDelta();
-
-                if (m.Player)
-                {
-                    Effects.SendLocationParticles(EffectItem.Create(from, m.Map, EffectItem.DefaultDuration), 0x3728,
-                        10, 10, 2023);
-                    Effects.SendLocationParticles(EffectItem.Create(to, m.Map, EffectItem.DefaultDuration), 0x3728, 10,
-                        10, 5023);
-                }
-                else
-                {
-                    m.FixedParticles(0x376A, 9, 32, 0x13AF, EffectLayer.Waist);
-                }
-
-                m.PlaySound(0x1FE);
-
-                IPooledEnumerable eable = m.GetItemsInRange(0);
-
-                foreach (Item item in eable)
-                    if (item is ParalyzeFieldSpell.InternalItem || item is PoisonFieldSpell.InternalItem ||
-                        item is FireFieldSpell.FireFieldItem)
-                        item.OnMoveOver(m);
-
-                eable.Free();
+                Caster.FixedParticles(0x376A, 9, 32, 0x13AF, EffectLayer.Waist);
             }
 
-            FinishSequence();
-        }
+            Caster.PlaySound(0x1FE);
 
-        public class InternalTarget : Target
-        {
-            private readonly TeleportSpell m_Owner;
+            IPooledEnumerable eable = Caster.GetItemsInRange(0);
 
-            public InternalTarget(TeleportSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
+            foreach (Item item in eable)
+                if (item is ParalyzeFieldSpell.InternalItem || item is PoisonFieldSpell.InternalItem ||
+                    item is FireFieldSpell.FireFieldItem)
+                    item.OnMoveOver(Caster);
 
-            protected override void OnTarget(Mobile from, object o)
-            {
-                var p = o as IPoint3D;
-
-                if (p != null)
-                    m_Owner.Target(p);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            eable.Free();
         }
     }
 }

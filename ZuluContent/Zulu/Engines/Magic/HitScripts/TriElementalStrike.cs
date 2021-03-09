@@ -8,11 +8,12 @@ namespace Server.Engines.Magic.HitScripts
 {
     public class TriElementalStrike : WeaponAbility
     {
+        // TODO convert to ITargetableAsyncSpell
         private static readonly Action<Mobile, Mobile>[] Spells =
         {
-            (attacker, defender) => Spell.Create<LightningSpell>(attacker, null, true).Target(defender),
-            (attacker, defender) => Spell.Create<FireballSpell>(attacker, null, true).Target(defender),
-            (attacker, defender) => Spell.Create<IceStrikeSpell>(attacker, null, true).Target(defender)
+            // (attacker, defender) => Spell.Create<LightningSpell>(attacker, null, true).Target(defender),
+            // (attacker, defender) => Spell.Create<FireballSpell>(attacker, null, true).Target(defender),
+            // (attacker, defender) => Spell.Create<IceStrikeSpell>(attacker, null, true).Target(defender)
         };
 
         public override void OnHit(Mobile attacker, Mobile defender, ref int damage)

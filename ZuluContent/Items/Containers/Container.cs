@@ -41,7 +41,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool PlayerConstructed { get; set; }
+        public virtual bool PlayerConstructed { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
@@ -62,7 +62,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter { get; set; }
+        public virtual Mobile Crafter { get; set; }
 
         public override int DefaultMaxWeight
         {
@@ -163,7 +163,7 @@ namespace Server.Items
             DisplayTo(from);
         }
 
-        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+        public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {

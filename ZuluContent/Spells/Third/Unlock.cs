@@ -1,100 +1,93 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server.Items;
+using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Third
 {
-    public class UnlockSpell : MagerySpell
+    public class UnlockSpell : MagerySpell, ITargetableAsyncSpell<ILockpickable>
     {
-        public UnlockSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public UnlockSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<ILockpickable> response)
         {
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly UnlockSpell m_Owner;
-
-            public InternalTarget(UnlockSpell owner) : base(12, false, TargetFlags.None)
+            if (!response.HasValue || !(response.Target is IPoint3D))
             {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                var loc = o as IPoint3D;
-
-                if (loc == null)
-                    return;
-
-                if (m_Owner.CheckSequence())
+                switch (response.InvalidTarget)
                 {
-                    SpellHelper.Turn(from, o);
-
-                    Effects.SendLocationParticles(
-                        EffectItem.Create(new Point3D(loc), from.Map, EffectItem.DefaultDuration), 0x376A, 9, 32, 5024);
-
-                    Effects.PlaySound((Point3D)loc, from.Map, 0x1FF);
-
-                    if (o is Mobile)
-                    {
-                        @from.LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                            503101); // That did not need to be unlocked.
-                    }
-                    else if (!(o is LockableContainer))
-                    {
-                        @from.SendLocalizedMessage(501666); // You can't unlock that!
-                    }
-                    else
-                    {
-                        var cont = (LockableContainer) o;
-
-                        if (BaseHouse.CheckSecured(cont))
-                        {
-                            @from.SendLocalizedMessage(503098); // You cannot cast this on a secure item.
-                        }
-                        else if (!cont.Locked)
-                        {
-                            @from.LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                                503101); // That did not need to be unlocked.
-                        }
-                        else if (cont.LockLevel == 0)
-                        {
-                            @from.SendLocalizedMessage(501666); // You can't unlock that!
-                        }
-                        else
-                        {
-                            var level = (int) (from.Skills[SkillName.Magery].Value * 0.8) - 4;
-
-                            if (level >= cont.RequiredSkill &&
-                                !(cont is TreasureMapChest && ((TreasureMapChest) cont).Level > 2))
-                            {
-                                cont.Locked = false;
-
-                                if (cont.LockLevel == -255)
-                                    cont.LockLevel = cont.RequiredSkill - 10;
-                            }
-                            else
-                            {
-                                @from.LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                                    503099); // My spell does not seem to have an effect on that lock.
-                            }
-                        }
-                    }
+                    case Mobile:
+                        // That did not need to be unlocked.
+                        Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 503101);
+                        break;
+                    case Item:
+                        Caster.SendLocalizedMessage(501666); // You can't unlock that!
+                        break;
                 }
 
-                m_Owner.FinishSequence();
+                return;
+            }
+            
+            var lockpickable = response.Target;
+            
+            if (response.Target is LockableContainer {IsSecure: true})
+            {
+                Caster.SendLocalizedMessage(503098); // You cannot cast this on a secure item.
+                return;
+            }
+            
+            if (lockpickable.LockLevel == 0)
+            {
+                Caster.SendLocalizedMessage(501666); // You can't unlock that!
+                return;
+            }
+            
+            var loc = new Point3D((IPoint3D)lockpickable);
+
+            SpellHelper.Turn(Caster, lockpickable);
+
+            if (!lockpickable.Locked)
+            {
+                // That did not need to be unlocked.
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 503101);
+                return;
             }
 
-            protected override void OnTargetFinish(Mobile from)
+            var enemyCount = Caster.Map
+                .GetMobilesInRange(new Point3D(Caster), 4)
+                .Count(m => SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false));
+            
+            if (enemyCount > 1)
             {
-                m_Owner.FinishSequence();
+                // There are ~1_NUMBER~ enemies near.
+                Caster.SendLocalizedMessage(1045105, enemyCount.ToString()); 
+                // Your concentration is disturbed, thus ruining thy spell.
+                Caster.SendLocalizedMessage(500641, enemyCount.ToString());
+                
+                Effects.PlaySound(loc, Caster.Map, 0x11E);
+                return;
+            }
+
+            var bonus = (double)lockpickable.LockLevel;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref bonus));
+            // OnModifyWithMagicEfficiency only does + modifiers, but lower is better here
+            var level = (int)(lockpickable.LockLevel - bonus);
+            
+            if (Caster.ShilCheckSkill(SkillName.Magery, level, 0))
+            {
+                lockpickable.Locked = false;
+                Effects.SendLocationParticles(EffectItem.Create(new Point3D(loc), Caster.Map, EffectItem.DefaultDuration), 0x376A, 9, 32, 5024);
+                Effects.PlaySound(loc, Caster.Map, 0x1FF);
+            }
+            else
+            {
+                // My spell does not seem to have an effect on that lock.
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 503099);
+                Effects.PlaySound(loc, Caster.Map, 0x11E);
             }
         }
     }

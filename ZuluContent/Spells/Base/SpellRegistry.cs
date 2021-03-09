@@ -106,6 +106,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -157,6 +158,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -186,6 +188,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial,
@@ -213,6 +216,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -241,6 +245,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -270,6 +275,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -298,6 +304,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -326,6 +333,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -354,6 +362,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -382,6 +391,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -410,6 +420,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -439,6 +450,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -467,6 +479,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -496,6 +509,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -524,6 +538,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -552,6 +567,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -579,6 +595,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -608,6 +625,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -635,6 +653,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -663,6 +682,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -691,6 +711,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -719,6 +740,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -748,6 +770,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -777,6 +800,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -807,6 +831,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -836,6 +861,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -865,6 +891,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -895,6 +922,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -923,6 +951,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -952,6 +981,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -981,6 +1011,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -1010,6 +1041,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1040,6 +1072,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1116,6 +1149,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1145,6 +1179,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1174,6 +1209,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1226,6 +1262,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1254,6 +1291,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1282,6 +1320,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1310,6 +1349,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -1339,6 +1379,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -1369,6 +1410,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1398,6 +1440,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1426,6 +1469,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1456,6 +1500,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1486,6 +1531,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1514,6 +1560,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1543,6 +1590,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -1573,6 +1621,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1603,6 +1652,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1633,6 +1683,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1710,6 +1761,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -1740,6 +1792,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = 1,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -1886,6 +1939,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1914,6 +1968,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1944,6 +1999,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -1973,6 +2029,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -2003,6 +2060,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.Harmful
@@ -2033,6 +2091,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -2063,6 +2122,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2093,6 +2153,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2123,6 +2184,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2200,6 +2262,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2230,6 +2293,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2287,6 +2351,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -2317,6 +2382,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2346,6 +2412,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -2373,6 +2440,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -2402,6 +2470,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2454,6 +2523,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -2483,6 +2553,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -2512,6 +2583,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.None
@@ -2541,6 +2613,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
@@ -2570,6 +2643,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful
@@ -2599,6 +2673,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = true,
                         Flags = TargetFlags.None
@@ -2651,6 +2726,7 @@ namespace Server.Spells
                     },
                     TargetOptions = new TargetOptions
                     {
+                        CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Harmful

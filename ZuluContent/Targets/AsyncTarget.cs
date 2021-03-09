@@ -8,6 +8,9 @@ namespace Server.Targeting
     {
         public int Range { get; init; }
         public bool AllowGround { get; init; }
+        public bool AllowMultis { get; init; } = true;
+        public bool AllowNonLocal { get; init; }
+        public bool CheckLos { get; init; }
         public TargetFlags Flags { get; init; }
     }
 
@@ -88,6 +91,9 @@ namespace Server.Targeting
 
         public AsyncTarget(Mobile mobile, TargetOptions opts) : base(opts.Range, opts.AllowGround, opts.Flags)
         {
+            DisallowMultis = !opts.AllowMultis;
+            CheckLOS = opts.CheckLos;
+            AllowNonlocal = opts.AllowNonLocal;
             Mobile = mobile;
         }
 
