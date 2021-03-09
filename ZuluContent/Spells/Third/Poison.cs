@@ -16,7 +16,7 @@ namespace Server.Spells.Third
 
             var target = response.Target;
             
-            double level = (int)(Caster.Skills[SkillName.Magery].Value / 40) + 1;
+            var level = Caster.Skills[SkillName.Magery].Value / 40 + 1.0;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref level));
 
             target.ApplyPoison(Caster, Poison.GetPoison(Math.Min((int)level, Poison.Poisons.Count - 1)));

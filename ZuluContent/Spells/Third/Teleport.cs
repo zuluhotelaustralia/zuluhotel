@@ -28,12 +28,6 @@ namespace Server.Spells.Third
             var from = Caster.Location;
             var to = new Point3D(point);
 
-            if (WeightOverloading.IsOverloaded(Caster))
-            {
-                Caster.SendLocalizedMessage(502359, "", 0x22); // Thou art too encumbered to move.
-                return;
-            }
-            
             if (!SpellHelper.CheckTravel(Caster, TravelCheckType.TeleportFrom))
             {
                 Caster.SendLocalizedMessage(502361); // You cannot teleport into that area from here.
@@ -46,7 +40,7 @@ namespace Server.Spells.Third
                 return;
             }
             
-            if (map == null || !map.CanSpawnMobile(point.X, point.Y, point.Z))
+            if (map == null || !map.CanSpawnMobile(to))
             {
                 Caster.SendLocalizedMessage(501942); // That location is blocked.
                 return;

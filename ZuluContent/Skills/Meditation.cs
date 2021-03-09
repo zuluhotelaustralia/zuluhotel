@@ -147,11 +147,14 @@ namespace Server.SkillHandlers
 
             protected override void OnTick()
             {
-                if (ShouldBreakConcentration() || !m_Mobile.Meditating)
+                if (ShouldBreakConcentration())
                 {
-                    // m_Mobile.SendAsciiMessage("You lost your concentration.");
                     m_Mobile.DisruptiveAction();
                     m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;
+                }
+
+                if (!m_Mobile.Meditating)
+                {
                     Stop();
                     return;
                 }
@@ -177,7 +180,6 @@ namespace Server.SkillHandlers
 
                 if (m_Mobile.Mana == m_Mobile.ManaMax)
                 {
-                    // m_Mobile.SendAsciiMessage("You stop meditating.");
                     m_Mobile.DisruptiveAction();
                     m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;;
                     Stop();
