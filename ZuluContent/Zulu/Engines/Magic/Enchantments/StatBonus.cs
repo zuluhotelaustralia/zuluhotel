@@ -91,10 +91,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public abstract class BaseStatBonus<T> : Enchantment<T> where T : EnchantmentInfo, new()
     {
-        protected StatType StatType;
+        protected readonly StatType StatType;
         protected StatMod Mod;
         private int m_Value;
-        protected Item Item;
         protected Mobile Mobile;
 
         [Key(1)]
@@ -106,7 +105,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 if (value == m_Value || value == 0 && m_Value == 0)
                     return;
                 
-                AddStatMod(Item, Mobile);
+                AddStatMod(Mobile);
                 m_Value = value;
             }
         }
@@ -116,14 +115,14 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             StatType = statType;
         }
 
-        protected void AddStatMod(Item item, Mobile mobile)
+        protected void AddStatMod(Mobile mobile)
         {
-            if (item == null || mobile == null)
+            if (mobile == null)
                 return;
             
             Mod = new StatMod(
                 StatType,
-                $"{item.Serial.ToString()}:{StatType.ToString()}",
+                $"{GetType().Name}:{StatType.ToString()}",
                 Value,
                 TimeSpan.Zero
             );
@@ -134,19 +133,18 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override void OnAdded(IEntity entity)
         {
             base.OnAdded(entity);
-            if (entity is Item item && item.Parent is Mobile mobile)
+
+            if (entity is Mobile mobile)
             {
-                Item = item;
                 Mobile = mobile;
-                AddStatMod(item, mobile);
+                AddStatMod(mobile);
             }
         }
 
-        public override void OnRemoved(IEntity entity,  IEntity parent)
+        public override void OnRemoved(IEntity entity, IEntity parent)
         {
-            if (entity is Item && parent is Mobile mobile)
+            if (parent is Mobile mobile)
             {
-                Item = null;
                 Mobile = null;
 
                 if (Mod != null)

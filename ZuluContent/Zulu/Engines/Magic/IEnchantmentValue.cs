@@ -1,6 +1,7 @@
 using System;
 using MessagePack;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 
@@ -44,6 +45,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(35, typeof(ItemMark))]
     [Union(36, typeof(ItemFortification))]
     [Union(37, typeof(ReactiveArmor))]
+    [Union(38, typeof(Agility))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }

@@ -17,6 +17,7 @@ using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -29,7 +30,7 @@ namespace Server.Mobiles
 
     #endregion
 
-    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted
+    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted, IBuffable
     {
         private class CountAndTimeStamp
         {
@@ -734,7 +735,7 @@ namespace Server.Mobiles
             if (from is PlayerMobile pm)
             {
                 pm.m_GameTime += DateTime.Now - pm.m_SessionStart;
-                pm.m_SpeechLog = null;
+                pm.SpeechLog = null;
                 pm.LastOnline = DateTime.Now;
                 pm.ClearQuestArrow();
             }
@@ -1125,7 +1126,7 @@ namespace Server.Mobiles
         {
             CheckLightLevels(false);
         }
-
+        
         public override bool OnMoveOver(Mobile m)
         {
             if (m is BaseCreature creature && !creature.Controlled)
@@ -1908,7 +1909,13 @@ namespace Server.Mobiles
         }
 
         #endregion
+        #region BuffManager
 
+        private BuffManager m_BuffManager;
+        public BuffManager BuffManager => m_BuffManager ??= new BuffManager(this);
+
+        #endregion
+        
         #region ZuluClass
 
         private ZuluClass m_ZuluClass;
@@ -1922,12 +1929,7 @@ namespace Server.Mobiles
 
         #region Speech log
 
-        private SpeechLog m_SpeechLog;
-
-        public SpeechLog SpeechLog
-        {
-            get { return m_SpeechLog; }
-        }
+        public SpeechLog SpeechLog { get; private set; }
 
         public Point3D EarthPortalLocation { get; set; }
 
@@ -1935,13 +1937,15 @@ namespace Server.Mobiles
         {
             if (SpeechLog.Enabled && NetState != null)
             {
-                if (m_SpeechLog == null)
-                    m_SpeechLog = new SpeechLog();
+                if (SpeechLog == null)
+                    SpeechLog = new SpeechLog();
 
-                m_SpeechLog.Add(e.Mobile, e.Speech);
+                SpeechLog.Add(e.Mobile, e.Speech);
             }
         }
 
         #endregion
+
+
     }
 }

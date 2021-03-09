@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 #pragma warning disable 1998
 
@@ -16,9 +16,12 @@ namespace Server.Spells.First
             if (!response.HasValue)
                 return;
 
+            if (!(response.Target is IBuffable buffable))
+                return;
+
             var mobile = response.Target;
             
-            if (!mobile.BeginAction(typeof(ReactiveArmorSpell)))
+            if (buffable.BuffManager.HasBuff<ReactiveArmor>())
             {
                 Caster.SendLocalizedMessage(Caster == mobile 
                     ? 1005384 // You currently have a reactive armor spell in effect.
@@ -33,26 +36,15 @@ namespace Server.Spells.First
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref charges));
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
 
-            if (Caster is IEnchanted enchanted)
+            buffable.BuffManager.AddBuff(new ReactiveArmor
             {
-                enchanted.Enchantments.Set((ReactiveArmor e) => e.Value = (int) charges);
-            }
+                Value = (int)charges,
+                Start = DateTime.UtcNow,
+                Duration = TimeSpan.FromSeconds(duration),
+            });
 
-            Caster.FixedParticles(0x376A, 9, 32, 5008, EffectLayer.Waist);
-            Caster.PlaySound(0x1F2);
-
-            EndActionAsync(mobile, duration);
-        }
-
-        private static async void EndActionAsync(Mobile mobile, double duration)
-        {
-            await Timer.Pause(TimeSpan.FromSeconds(duration));
-
-            if (!mobile.CanBeginAction<ReactiveArmorSpell>())
-            {
-                mobile.SendLocalizedMessage(1005556); // Your reactive armor spell has been nullified.
-                mobile.EndAction<ReactiveArmorSpell>();
-            }
+            mobile.FixedParticles(0x376A, 9, 32, 5008, EffectLayer.Waist);
+            mobile.PlaySound(0x1E9);
         }
     }
 }

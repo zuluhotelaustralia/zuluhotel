@@ -4398,5 +4398,12 @@ namespace Server.Mobiles
         public virtual void CheckReflect(Mobile caster, ref bool reflect)
         {
         }
+        
+        #region BuffManager
+
+        private BuffManager m_BuffManager;
+        public BuffManager BuffManager => m_BuffManager ??= new BuffManager(this);
+
+        #endregion
     }
 }
