@@ -19,16 +19,22 @@ namespace Server.Spells
         private readonly Mobile m_Parent;
         private readonly Dictionary<BuffIcon, IBuff> m_BuffTable = new();
 
-        public BuffManager(Mobile parent)
-        {
-            m_Parent = parent;
-        }
+        public BuffManager(Mobile parent) => m_Parent = parent;
 
-        public static void Initialize() => EventSink.ClientVersionReceived += (ns, _) =>
+        public static void Initialize()
         {
-            if (ns.Mobile is IBuffable buffable)
-                Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.ResendAllBuffs);
-        };
+            EventSink.ClientVersionReceived += (ns, _) =>
+            {
+                if (ns.Mobile is IBuffable buffable)
+                    Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.ResendAllBuffs);
+            };
+
+            EventSink.PlayerDeath += mobile =>
+            {
+                if (mobile is IBuffable buffable)
+                    Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.RemoveBuffsOnDeath);
+            };
+        }
 
         public bool AddBuff(IBuff b)
         {
@@ -70,8 +76,45 @@ namespace Server.Spells
             return false;
         }
 
-        public bool HasBuff(BuffIcon icon) => m_BuffTable.ContainsKey(icon);
-        public bool HasBuff<T>() where T : IBuff => m_BuffTable.Values.Any(b => b is T);
+        public void DispelBuffs()
+        {
+            m_BuffTable.Values
+                .Where(b => b.Dispellable)
+                .ToList()
+                .ForEach(b => RemoveBuff(b));
+        }
+
+        private void RemoveBuffsOnDeath()
+        {
+            m_BuffTable.Values
+                .Where(b => !b.RetainThroughDeath)
+                .ToList()
+                .ForEach(b => RemoveBuff(b));
+        }
+
+        public bool HasBuff(BuffIcon icon)
+        {
+            return m_BuffTable.ContainsKey(icon);
+        }
+
+        public bool HasBuff<T>() where T : IBuff
+        {
+            return m_BuffTable.Values.Any(b => b is T);
+        }
+
+        public bool CanBuffWithNotifyOnFail<T>(Mobile caster) where T : IBuff
+        {
+            if (HasBuff<T>())
+            {
+                caster.SendLocalizedMessage(caster == m_Parent 
+                        ? 502173 // You are already under a similar effect.
+                        : 1156094 // Your target is already under the effect of this ability.
+                );
+                return false;
+            }
+
+            return true;
+        }
 
         public void ResendAllBuffs()
         {
@@ -94,6 +137,7 @@ namespace Server.Spells
             SendAddBuffPacket(m_Parent.NetState, m_Parent.Serial, buff);
         }
 
+        #region Packets
         private static void SendAddBuffPacket(NetState ns, Serial m, IBuff buff) => SendAddBuffPacket(
             ns,
             m,
@@ -171,16 +215,18 @@ namespace Server.Spells
 
             ns.Send(writer.Span);
         }
+        #endregion
 
+        #region Internal Timer
         private class BuffTimer : Timer
         {
             private readonly BuffManager m_Manager;
 
-            public BuffTimer(BuffManager m)
-                : base(TimeSpan.Zero, TimeSpan.FromSeconds(1.0)) =>
+            public BuffTimer(BuffManager m) : base(TimeSpan.Zero, TimeSpan.FromSeconds(1.0)) =>
                 (m_Manager, Priority) = (m, TimerPriority.OneSecond);
 
             protected override void OnTick() => m_Manager.ExpireBuffs();
         }
+        #endregion
     }
 }

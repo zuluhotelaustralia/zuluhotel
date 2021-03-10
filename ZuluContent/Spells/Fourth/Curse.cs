@@ -1,98 +1,35 @@
-using System.Collections;
+using System.Threading.Tasks;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Spells.Fourth
 {
-    public class CurseSpell : MagerySpell
+    public class CurseSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        private static readonly Hashtable m_UnderEffect = new Hashtable();
+        public CurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        public CurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
+            if (!response.HasValue || !(response.Target is IBuffable buffable))
+                return;
 
+            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Bless>(Caster))
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public static void RemoveEffect(object state)
-        {
-            var m = (Mobile) state;
-
-            m_UnderEffect.Remove(m);
-        }
-
-        public static bool UnderEffect(Mobile m)
-        {
-            return m_UnderEffect.Contains(m);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            buffable.BuffManager.AddBuff(new Bless
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (CheckHarmfulSequence(m))
-            {
-                SpellHelper.Turn(Caster, m);
+                Value = SpellHelper.GetModAmount(Caster, target, StatType.All) * -1,
+                Duration = SpellHelper.GetDuration(Caster, target),
+            });
+            
+            target.Spell?.OnCasterHurt();
+            target.Paralyzed = false;
 
-                SpellHelper.CheckReflect((int) Circle, Caster, ref m);
-
-                SpellHelper.AddStatCurse(Caster, m, StatType.Str);
-                SpellHelper.DisableSkillCheck = true;
-                SpellHelper.AddStatCurse(Caster, m, StatType.Dex);
-                SpellHelper.AddStatCurse(Caster, m, StatType.Int);
-                SpellHelper.DisableSkillCheck = false;
-
-                var t = (Timer) m_UnderEffect[m];
-
-                if (Caster.Player && m.Player /*&& Caster != m */ && t == null
-                ) //On OSI you CAN curse yourself and get this effect.
-                {
-                    var duration = SpellHelper.GetDuration(Caster, m);
-                    m_UnderEffect[m] = t = Timer.DelayCall(duration, RemoveEffect, m);
-                }
-
-                if (m.Spell != null)
-                    m.Spell.OnCasterHurt();
-
-                m.Paralyzed = false;
-
-                m.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
-                m.PlaySound(0x1E1);
-
-                var percentage = (int) (SpellHelper.GetOffsetScalar(Caster, m, true) * 100);
-                var length = SpellHelper.GetDuration(Caster, m);
-
-                var args = $"{percentage}\t{percentage}\t{percentage}\t{10}\t{10}\t{10}\t{10}";
-
-            }
-
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly CurseSpell m_Owner;
-
-            public InternalTarget(CurseSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            target.FixedParticles(0x374A, 10, 15, 5028, EffectLayer.Waist);
+            target.PlaySound(0x1E1);
         }
     }
 }

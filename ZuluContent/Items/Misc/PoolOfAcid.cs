@@ -73,9 +73,9 @@ public PoolOfAcid( TimeSpan duration, int minDamage, int maxDamage )
 					Damage( toDamage[i] );
 			}
 		}
-		public override bool OnMoveOver( Mobile m )
+		public override bool OnMoveOver( Mobile mobile )
 		{
-			Damage( m );
+			Damage( mobile );
 			return true;
 		}
 

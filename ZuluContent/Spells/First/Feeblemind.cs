@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+
 #pragma warning disable 1998
 
 namespace Server.Spells.First
@@ -12,20 +15,27 @@ namespace Server.Spells.First
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue)
+            if (!response.HasValue || !(response.Target is IBuffable buffable))
                 return;
 
-            var m = response.Target;
+            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Agility>(Caster))
+                return;
             
-            SpellHelper.Turn(Caster, m);
-            SpellHelper.AddStatCurse(Caster, m, StatType.Int);
+            var target = response.Target;
 
-            m.Spell?.OnCasterHurt();
+            SpellHelper.Turn(Caster, target);
+            
+            buffable.BuffManager.AddBuff(new Cunning
+            {
+                Value = SpellHelper.GetModAmount(Caster, target, StatType.Int) * -1,
+                Duration = SpellHelper.GetDuration(Caster, target),
+            });
 
-            m.Paralyzed = false;
+            target.Spell?.OnCasterHurt();
+            target.Paralyzed = false;
 
-            m.FixedParticles(0x3779, 10, 15, 5004, EffectLayer.Head);
-            m.PlaySound(0x1E4);
+            target.FixedParticles(0x3779, 10, 15, 5004, EffectLayer.Head);
+            target.PlaySound(0x1E4);
         }
     }
 }

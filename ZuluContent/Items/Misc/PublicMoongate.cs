@@ -37,10 +37,10 @@ namespace Server.Items
             LabelTo(from, $"Through the moongate you {PMList.Felucca.Entries[moonPhase].Description}");
         }
 
-        public override bool OnMoveOver(Mobile m)
+        public override bool OnMoveOver(Mobile mobile)
         {
-            if (m.Player)
-                UseGate(m);
+            if (mobile.Player)
+                UseGate(mobile);
 
             return false;
         }

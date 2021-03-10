@@ -150,22 +150,22 @@ namespace Server.Spells.Sixth
                 }
             }
 
-            public override bool OnMoveOver(Mobile m)
+            public override bool OnMoveOver(Mobile mobile)
             {
-                if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, m) &&
-                    m_Caster.CanBeHarmful(m, false))
+                if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, mobile) &&
+                    m_Caster.CanBeHarmful(mobile, false))
                 {
-                    if (SpellHelper.CanRevealCaster(m))
+                    if (SpellHelper.CanRevealCaster(mobile))
                         m_Caster.RevealingAction();
 
-                    m_Caster.DoHarmful(m);
+                    m_Caster.DoHarmful(mobile);
 
                     var duration = 7.0 + m_Caster.Skills[SkillName.Magery].Value * 0.2;
 
-                    m.Paralyze(TimeSpan.FromSeconds(duration));
+                    mobile.Paralyze(TimeSpan.FromSeconds(duration));
 
-                    m.PlaySound(0x204);
-                    m.FixedEffect(0x376A, 10, 16);
+                    mobile.PlaySound(0x204);
+                    mobile.FixedEffect(0x376A, 10, 16);
 
                 }
 

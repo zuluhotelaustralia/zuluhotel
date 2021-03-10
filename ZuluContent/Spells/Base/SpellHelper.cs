@@ -229,19 +229,55 @@ namespace Server.Spells
             return 2 + 0.4 * skill + 0.3 * stat + 0.3 * spec;
         }
 
+        public static int GetDamageAfterResist(Spell spell, Mobile target, double damage)
+        {
+            return GetDamageAfterResist(spell.Caster, target, damage);
+        }
+
+
+        public static int GetDamageAfterResist(Mobile caster, Mobile target, double damage)
+        {
+
+            if (!caster.Alive || !target.Alive)
+                return 0;
+
+            var evalInt = caster.Skills[SkillName.EvalInt].Value;
+            var resist = target.Skills[SkillName.MagicResist].Value;
+
+            damage /= 2;
+            
+            if (damage < 1)
+                damage = 1;
+
+            damage = (int)(damage * (1.0 + evalInt - resist) / 200.0);
+
+            // Inverting the efficiency bonus, e.g. Mages get less spell damage, warriors get more
+            var temp = damage;
+            caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref temp));
+            damage -= damage - temp;
+
+            if (damage < 0)
+                damage = 0;
+
+            return (int)damage;
+        }
 
         public static bool CanRevealCaster(Mobile m)
         {
             return m is BaseCreature {Controlled: false};
         }
 
-        public static void GetSurfaceTop(ref IPoint3D p)
+        public static void GetSurfaceTop(ref IPoint3D point)
         {
-            switch (p)
+            point = GetSurfaceTop(point);
+        }
+        
+        public static Point3D GetSurfaceTop(IPoint3D point)
+        {
+            switch (point)
             {
                 case Item item:
-                    p = item.GetSurfaceTop();
-                    break;
+                    return item.GetSurfaceTop();
                 case StaticTarget target:
                 {
                     var t = target;
@@ -250,9 +286,10 @@ namespace Server.Spells
                     if ((t.Flags & TileFlag.Surface) == 0)
                         z -= TileData.ItemTable[t.ItemID & TileData.MaxItemValue].CalcHeight;
 
-                    p = new Point3D(t.X, t.Y, z);
-                    break;
+                    return new Point3D(t.X, t.Y, z);
                 }
+                default:
+                    return new Point3D(point);
             }
         }
 

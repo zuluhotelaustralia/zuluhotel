@@ -156,15 +156,15 @@ namespace Server.Spells.Fifth
                         m_Caster.RevealingAction();
             }
 
-            public override bool OnMoveOver(Mobile m)
+            public override bool OnMoveOver(Mobile mobile)
             {
-                if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, m) &&
-                    m_Caster.CanBeHarmful(m, false))
+                if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, mobile) &&
+                    m_Caster.CanBeHarmful(mobile, false))
                 {
-                    m_Caster.DoHarmful(m);
+                    m_Caster.DoHarmful(mobile);
 
-                    ApplyPoisonTo(m);
-                    m.PlaySound(0x474);
+                    ApplyPoisonTo(mobile);
+                    mobile.PlaySound(0x474);
                 }
 
                 return true;

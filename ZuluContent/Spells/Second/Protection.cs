@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Server.Spells.First;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Spells.Second
 {
@@ -11,37 +12,23 @@ namespace Server.Spells.Second
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue)
+            if (!response.HasValue || !(response.Target is IBuffable buffable))
                 return;
 
-            var target = response.Target;
+            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Protection>(Caster))
+                return;
             
-            if (!target.BeginAction<ProtectionSpell>())
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
+
+            buffable.BuffManager.AddBuff(new Protection
             {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-                return;
-            }
-
-            var amount = SpellHelper.GetModAmount(Caster, target);
-            var duration = SpellHelper.GetDuration(Caster, target);
-
-            target.VirtualArmorMod += amount;
+                Value = (int)(SpellHelper.GetModAmount(Caster, target) / 2.0),
+                Duration = SpellHelper.GetDuration(Caster, target),
+            });
+            
             target.FixedParticles(0x373B, 9, 20, 5027, EffectLayer.Waist);
             target.PlaySound(0x1ED);
-
-            EndActionAsync(target, amount, duration);
-        }
-        
-        private static async void EndActionAsync(Mobile mobile, int amount, TimeSpan duration)
-        {
-            await Timer.Pause(duration);
-
-            if (!mobile.CanBeginAction<ProtectionSpell>())
-            {
-                mobile.VirtualArmorMod -= amount;
-                mobile.SendLocalizedMessage(1005550); // Your protection spell has been nullified.
-                mobile.EndAction<ProtectionSpell>();
-            }
         }
     }
 }

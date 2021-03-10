@@ -81,10 +81,10 @@ namespace Server.Items
                 from.SendLocalizedMessage(500446); // That is too far away.
         }
 
-        public override bool OnMoveOver(Mobile m)
+        public override bool OnMoveOver(Mobile mobile)
         {
-            if (m.Player)
-                CheckGate(m, 0);
+            if (mobile.Player)
+                CheckGate(mobile, 0);
 
             return true;
         }

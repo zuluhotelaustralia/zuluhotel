@@ -71,9 +71,9 @@ public AcidSlime( TimeSpan duration, int minDamage, int maxDamage )
 			}
 		}
 
-		public override bool OnMoveOver( Mobile m )
+		public override bool OnMoveOver( Mobile mobile )
 		{
-			Damage( m );
+			Damage( mobile );
 			return true;
 		}
 

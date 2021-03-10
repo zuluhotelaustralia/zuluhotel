@@ -11,6 +11,7 @@ namespace Server.Spells
         public int SecondaryCliloc { get; }
         public TextDefinition Args { get; }
         public bool RetainThroughDeath { get; }
+        public bool Dispellable { get; }
         public TimeSpan Duration { get; }
         public DateTime Start { get; }
         public void OnBuffAdded(Mobile parent);

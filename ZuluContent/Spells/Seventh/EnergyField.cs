@@ -126,18 +126,18 @@ namespace Server.Spells.Seventh
                 var version = reader.ReadInt();
             }
 
-            public override bool OnMoveOver(Mobile m)
+            public override bool OnMoveOver(Mobile mobile)
             {
                 int noto;
 
-                if (m is PlayerMobile)
+                if (mobile is PlayerMobile)
                 {
-                    noto = Notoriety.Compute(m_Caster, m);
+                    noto = Notoriety.Compute(m_Caster, mobile);
                     if (noto == Notoriety.Enemy || noto == Notoriety.Ally)
                         return false;
                 }
 
-                return base.OnMoveOver(m);
+                return base.OnMoveOver(mobile);
             }
 
             public override void OnAfterDelete()

@@ -20,23 +20,21 @@ namespace Server.Spells.Fourth
             if (!response.HasValue)
                 return;
 
-            var target = response.Target;
+            var target = SpellHelper.GetSurfaceTop(response.Target);
 
             SpellHelper.Turn(Caster, target);
-            SpellHelper.GetSurfaceTop(ref target);
 
             var targets = new List<Mobile>();
             var map = Caster.Map;
-
-
-            IPooledEnumerable eable = map.GetMobilesInRange(new Point3D(target), 2);
+            
+            IPooledEnumerable eable = map.GetMobilesInRange(target, 2);
             targets.AddRange(eable.Cast<Mobile>().Where(m => Caster.CanBeBeneficial(m, false)));
             eable.Free();
 
             if (targets.Count <= 0)
                 return;
             
-            Effects.PlaySound(new Point3D(target), Caster.Map, 0x299);
+            Effects.PlaySound(target, Caster.Map, 0x299);
 
             foreach (var mobile in targets)
             {

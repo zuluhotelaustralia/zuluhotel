@@ -905,7 +905,7 @@ namespace Server.Mobiles
                 return false;
 
             bool isReveal = targ is RevealSpell.InternalTarget;
-            bool isDispel = targ is DispelSpell.InternalTarget;
+            bool isDispel = targ is AsyncSpellTarget {Spell: DispelSpell};
             bool isParalyze = targ is ParalyzeSpell.InternalTarget;
             bool isTeleport = targ is AsyncSpellTarget {Spell: TeleportSpell};
             bool isInvisible = targ is InvisibilitySpell.InternalTarget;

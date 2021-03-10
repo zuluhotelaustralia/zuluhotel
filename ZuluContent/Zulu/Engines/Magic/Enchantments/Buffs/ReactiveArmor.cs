@@ -44,6 +44,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         [IgnoreMember] public int SecondaryCliloc { get; } = 1076207; // Remaining Charges: ~1_val~
         [IgnoreMember] public TextDefinition Args => $"{Value}";
         [IgnoreMember] public bool RetainThroughDeath { get; } = false;
+        [IgnoreMember] public bool Dispellable { get; } = true;
         [IgnoreMember] public TimeSpan Duration { get; init; }
         [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
         
@@ -63,7 +64,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         
         #endregion
     }
-
+    
+    #region EnchantmentInfo
     public class ReactiveArmorInfo : EnchantmentInfo
     {
         public override string Description { get; protected set; } = "Reactive Armor";
@@ -77,4 +79,5 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             return string.Empty;
         }
     }
+    #endregion
 }

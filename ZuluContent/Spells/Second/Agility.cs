@@ -11,29 +11,18 @@ namespace Server.Spells.Second
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue)
+            if (!response.HasValue || !(response.Target is IBuffable buffable))
                 return;
-            
-            if (!(response.Target is IBuffable buffable))
+
+            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Agility>(Caster))
                 return;
             
             var target = response.Target;
-
-            if (buffable.BuffManager.HasBuff<Agility>())
-            {
-                Caster.SendLocalizedMessage(Caster == target 
-                    ? 502173 // You are already under a similar effect.
-                    : 1156094 // Your target is already under the effect of this ability.
-                ); 
-                return;
-            }
-            
             SpellHelper.Turn(Caster, target);
-            
+
             buffable.BuffManager.AddBuff(new Agility
             {
                 Value = SpellHelper.GetModAmount(Caster, target, StatType.Dex),
-                Start = DateTime.UtcNow,
                 Duration = SpellHelper.GetDuration(Caster, target),
             });
 

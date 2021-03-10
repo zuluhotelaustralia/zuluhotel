@@ -237,7 +237,7 @@ namespace Server.Spells
         {
             return GetResistPercentForCircle(target, Circle);
         }
-
+        
         public virtual bool CheckResisted(Mobile target)
         {
             var n = GetResistPercent(target);

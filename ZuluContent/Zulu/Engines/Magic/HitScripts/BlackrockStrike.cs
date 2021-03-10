@@ -1,6 +1,7 @@
 using System;
 using Server.Spells;
 using Server.Spells.Sixth;
+using Server.Targeting;
 
 namespace Server.Engines.Magic.HitScripts
 {
@@ -14,7 +15,11 @@ namespace Server.Engines.Magic.HitScripts
             try
             {
                 var spell = Spell.Create<DispelSpell>(attacker, null, true);
-                spell.Target(attacker, defender);
+                
+                spell.OnTargetAsync(new TargetResponse<Mobile>
+                {
+                    Target = defender,
+                }).ConfigureAwait(false);
                 
                 if (spell.CheckResisted(defender))
                     defender.Mana = 0;
