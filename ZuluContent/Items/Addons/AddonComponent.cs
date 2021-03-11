@@ -1,283 +1,305 @@
+using System;
+using Server.Engines.Craft;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
+
 namespace Server.Items
 {
     [Engines.Craft.Anvil]
-	public class AnvilComponent : AddonComponent
-	{
+    public class AnvilComponent : AddonComponent
+    {
+        [Constructible]
+        public AnvilComponent(int itemID) : base(itemID)
+        {
+        }
 
-		[Constructible]
-public AnvilComponent( int itemID ) : base( itemID )
-		{
-		}
+        [Constructible]
+        public AnvilComponent(Serial serial) : base(serial)
+        {
+        }
 
-		[Constructible]
-public AnvilComponent( Serial serial ) : base( serial )
-		{
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+            writer.Write((int) 0); // version
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            int version = reader.ReadInt();
+        }
+    }
 
-			int version = reader.ReadInt();
-		}
-	}
+    [Engines.Craft.Forge]
+    public class ForgeComponent : AddonComponent
+    {
+        public ForgeComponent(int itemID) : base(itemID)
+        {
+        }
 
-	[Engines.Craft.Forge]
-	public class ForgeComponent : AddonComponent
-	{
+        public ForgeComponent(Serial serial) : base(serial)
+        {
+        }
 
-		public ForgeComponent( int itemID ) : base( itemID )
-		{
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public ForgeComponent( Serial serial ) : base( serial )
-		{
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			writer.Write( (int) 0 ); // version
-		}
+            int version = reader.ReadInt();
+        }
+    }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+    public class LocalizedAddonComponent : AddonComponent
+    {
+        private int m_LabelNumber;
 
-			int version = reader.ReadInt();
-		}
-	}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int Number
+        {
+            get { return m_LabelNumber; }
+            set { m_LabelNumber = value; }
+        }
 
-	public class LocalizedAddonComponent : AddonComponent
-	{
-		private int m_LabelNumber;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int Number
-		{
-			get{ return m_LabelNumber; }
-			set{ m_LabelNumber = value; }
-		}
-
-		public override int LabelNumber{ get{ return m_LabelNumber; } }
-
-
-		public LocalizedAddonComponent( int itemID, int labelNumber ) : base( itemID )
-		{
-			m_LabelNumber = labelNumber;
-		}
-
-		public LocalizedAddonComponent( Serial serial ) : base( serial )
-		{
-		}
-
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-
-			writer.Write( (int) m_LabelNumber );
-		}
-
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-
-			switch ( version )
-			{
-				case 0:
-				{
-					m_LabelNumber = reader.ReadInt();
-					break;
-				}
-			}
-		}
-	}
-
-	public class AddonComponent : Item, IChopable
-	{
-		private Point3D m_Offset;
-		private BaseAddon m_Addon;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public BaseAddon Addon
-		{
-			get
-			{
-				return m_Addon;
-			}
-			set
-			{
-				m_Addon = value;
-			}
-		}
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public Point3D Offset
-		{
-			get
-			{
-				return m_Offset;
-			}
-			set
-			{
-				m_Offset = value;
-			}
-		}
-
-		[Hue, CommandProperty( AccessLevel.GameMaster )]
-		public override int Hue
-		{
-			get
-			{
-				return base.Hue;
-			}
-			set
-			{
-				base.Hue = value;
-
-				if ( m_Addon != null && m_Addon.ShareHue )
-					m_Addon.Hue = value;
-			}
-		}
-
-		public virtual bool NeedsWall{ get{ return false; } }
-		public virtual Point3D WallPosition{ get{ return Point3D.Zero; } }
+        public override int LabelNumber
+        {
+            get { return m_LabelNumber; }
+        }
 
 
-		public AddonComponent( int itemID ) : base( itemID )
-		{
-			Movable = false;
-			ApplyLightTo( this );
-		}
+        public LocalizedAddonComponent(int itemID, int labelNumber) : base(itemID)
+        {
+            m_LabelNumber = labelNumber;
+        }
 
-		public AddonComponent( Serial serial ) : base( serial )
-		{
-		}
+        public LocalizedAddonComponent(Serial serial) : base(serial)
+        {
+        }
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( m_Addon != null )
-				m_Addon.OnComponentUsed( this, from );
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public void OnChop( Mobile from )
-		{
-			if ( m_Addon != null && from.InRange( GetWorldLocation(), 3 ) )
-				m_Addon.OnChop( from );
-			else
-				from.SendLocalizedMessage( 500446 ); // That is too far away.
-		}
+            writer.Write((int) 0); // version
 
-		public override void OnLocationChange( Point3D old )
-		{
-			if ( m_Addon != null )
-				m_Addon.Location = new Point3D( X - m_Offset.X, Y - m_Offset.Y, Z - m_Offset.Z );
-		}
+            writer.Write((int) m_LabelNumber);
+        }
 
-		public override void OnMapChange()
-		{
-			if ( m_Addon != null )
-				m_Addon.Map = Map;
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void OnAfterDelete()
-		{
-			base.OnAfterDelete();
+            int version = reader.ReadInt();
 
-			if ( m_Addon != null )
-				m_Addon.Delete();
-		}
+            switch (version)
+            {
+                case 0:
+                {
+                    m_LabelNumber = reader.ReadInt();
+                    break;
+                }
+            }
+        }
+    }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+    public class AddonComponent : Item, IChopable, ICraftable, IResource
+    {
+        private CraftResource m_Resource;
 
-			writer.Write( (int) 1 ); // version
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark { get; set; }
 
-			writer.Write( m_Addon );
-			writer.Write( m_Offset );
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+                    Hue = CraftResources.GetHue(m_Resource);
+                }
+            }
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
 
-			int version = reader.ReadInt();
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
 
-			switch ( version )
-			{
-				case 1:
-				case 0:
-				{
-					m_Addon = reader.ReadEntity<BaseAddon>();
-					m_Offset = reader.ReadPoint3D();
+        [CommandProperty(AccessLevel.GameMaster)]
+        public BaseAddon Addon { get; set; }
 
-                    m_Addon?.OnComponentLoaded( this );
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Point3D Offset { get; set; }
 
-                    ApplyLightTo( this );
+        public virtual bool NeedsWall => false;
 
-					break;
-				}
-			}
+        public virtual Point3D WallPosition => Point3D.Zero;
 
-			if ( version < 1 && Weight == 0 )
-				Weight = -1;
-		}
+        public AddonComponent(int itemID) : base(itemID)
+        {
+            Mark = MarkQuality.Regular;
+            Movable = false;
+            ApplyLightTo(this);
+        }
 
-		public static void ApplyLightTo( Item item )
-		{
-			if ( (item.ItemData.Flags & TileFlag.LightSource) == 0 )
-				return; // not a light source
+        public AddonComponent(Serial serial) : base(serial)
+        {
+        }
 
-			int itemID = item.ItemID;
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
+        }
 
-			for ( int i = 0; i < m_Entries.Length; ++i )
-			{
-				LightEntry entry = m_Entries[i];
-				int[] toMatch = entry.m_ItemIDs;
-				bool contains = false;
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (Addon != null)
+                Addon.OnComponentUsed(this, from);
+        }
 
-				for ( int j = 0; !contains && j < toMatch.Length; ++j )
-					contains = itemID == toMatch[j];
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes, BaseTool tool,
+            CraftItem craftItem, int resHue)
+        {
+            return mark;
+        }
 
-				if ( contains )
-				{
-					item.Light = entry.m_Light;
-					return;
-				}
-			}
-		}
+        public void OnChop(Mobile from)
+        {
+            if (Addon != null && from.InRange(GetWorldLocation(), 3))
+                Addon.OnChop(from);
+            else
+                from.SendLocalizedMessage(500446); // That is too far away.
+        }
 
-		private static LightEntry[] m_Entries = new[]
-			{
-				new LightEntry( LightType.WestSmall, 1122, 1123, 1124, 1141, 1142, 1143, 1144, 1145, 1146, 2347, 2359, 2360, 2361, 2362, 2363, 2364, 2387, 2388, 2389, 2390, 2391, 2392 ),
-				new LightEntry( LightType.NorthSmall, 1131, 1133, 1134, 1147, 1148, 1149, 1150, 1151, 1152, 2352, 2373, 2374, 2375, 2376, 2377, 2378, 2401, 2402, 2403, 2404, 2405, 2406 ),
-				new LightEntry( LightType.Circle300, 6526, 6538, 6571 ),
-				new LightEntry( LightType.Circle150, 5703, 6587 )
-			};
+        public override void OnLocationChange(Point3D old)
+        {
+            if (Addon != null)
+                Addon.Location = new Point3D(X - Offset.X, Y - Offset.Y, Z - Offset.Z);
+        }
 
-		private class LightEntry
-		{
-			public LightType m_Light;
-			public int[] m_ItemIDs;
+        public override void OnMapChange()
+        {
+            if (Addon != null)
+                Addon.Map = Map;
+        }
 
-			public LightEntry( LightType light, params int[] itemIDs )
-			{
-				m_Light = light;
-				m_ItemIDs = itemIDs;
-			}
-		}
-	}
+        public override void OnAfterDelete()
+        {
+            base.OnAfterDelete();
+
+            if (Addon != null)
+                Addon.Delete();
+        }
+
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int) 2); // version
+
+            ICraftable.Serialize(writer, this);
+
+            writer.WriteEncodedInt((int) Mark);
+
+            writer.WriteEncodedInt((int) m_Resource);
+
+            writer.Write(Addon);
+            writer.Write(Offset);
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+
+            switch (version)
+            {
+                case 2:
+                    ICraftable.Deserialize(reader, this);
+
+                    Mark = (MarkQuality) reader.ReadEncodedInt();
+
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
+
+                    goto case 1;
+                case 1:
+                case 0:
+                {
+                    Addon = reader.ReadEntity<BaseAddon>();
+                    Offset = reader.ReadPoint3D();
+
+                    Addon?.OnComponentLoaded(this);
+
+                    ApplyLightTo(this);
+
+                    break;
+                }
+            }
+
+            if (version < 1 && Weight == 0)
+                Weight = -1;
+        }
+
+        public static void ApplyLightTo(Item item)
+        {
+            if ((item.ItemData.Flags & TileFlag.LightSource) == 0)
+                return; // not a light source
+
+            int itemID = item.ItemID;
+
+            for (int i = 0; i < m_Entries.Length; ++i)
+            {
+                LightEntry entry = m_Entries[i];
+                int[] toMatch = entry.m_ItemIDs;
+                bool contains = false;
+
+                for (int j = 0; !contains && j < toMatch.Length; ++j)
+                    contains = itemID == toMatch[j];
+
+                if (contains)
+                {
+                    item.Light = entry.m_Light;
+                    return;
+                }
+            }
+        }
+
+        private static LightEntry[] m_Entries = new[]
+        {
+            new LightEntry(LightType.WestSmall, 1122, 1123, 1124, 1141, 1142, 1143, 1144, 1145, 1146, 2347, 2359, 2360,
+                2361, 2362, 2363, 2364, 2387, 2388, 2389, 2390, 2391, 2392),
+            new LightEntry(LightType.NorthSmall, 1131, 1133, 1134, 1147, 1148, 1149, 1150, 1151, 1152, 2352, 2373, 2374,
+                2375, 2376, 2377, 2378, 2401, 2402, 2403, 2404, 2405, 2406),
+            new LightEntry(LightType.Circle300, 6526, 6538, 6571),
+            new LightEntry(LightType.Circle150, 5703, 6587)
+        };
+
+        private class LightEntry
+        {
+            public LightType m_Light;
+            public int[] m_ItemIDs;
+
+            public LightEntry(LightType light, params int[] itemIDs)
+            {
+                m_Light = light;
+                m_ItemIDs = itemIDs;
+            }
+        }
+    }
 }

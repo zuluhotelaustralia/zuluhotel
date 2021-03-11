@@ -14,12 +14,6 @@ namespace Server.Items
         public abstract BaseAddonContainer Addon { get; }
 
         private CraftResource m_Resource;
-        private EnchantmentDictionary m_Enchantments;
-
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
@@ -39,11 +33,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public MarkQuality Mark
-        {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
-            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
-        }
+        public MarkQuality Mark { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }
@@ -70,7 +60,7 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            Enchantments.Serialize(writer);
+            writer.WriteEncodedInt((int) Mark);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -84,7 +74,8 @@ namespace Server.Items
                 case 2:
                     ICraftable.Deserialize(reader, this);
 
-                    m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+                    Mark = (MarkQuality) reader.ReadEncodedInt();
+
                     goto case 1;
                 case 1:
                     m_Resource = (CraftResource) reader.ReadInt();

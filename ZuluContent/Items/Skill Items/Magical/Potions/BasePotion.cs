@@ -56,22 +56,11 @@ namespace Server.Items
 
     public abstract class BasePotion : Item, ICraftable
     {
-        private EnchantmentDictionary m_Enchantments;
-
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
-
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public MarkQuality Mark
-        {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
-            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
-        }
+        public MarkQuality Mark { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }

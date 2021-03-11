@@ -14,25 +14,14 @@ namespace Server.Items
     {
         public static readonly TimeSpan UseDelay = TimeSpan.FromSeconds(7.0);
 
-        private EnchantmentDictionary m_Enchantments;
-
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
 
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
-
         [CommandProperty(AccessLevel.GameMaster)]
-        public MarkQuality Mark
-        {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
-            set => Enchantments.Set((ItemMark e) => e.Value = (int) value);
-        }
+        public MarkQuality Mark { get; set; }
 
         private List<RunebookEntry> m_Entries;
         private string m_Description;
@@ -158,7 +147,7 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            Enchantments.Serialize(writer);
+            writer.WriteEncodedInt((int) Mark);
 
             writer.Write((int) m_Level);
 
@@ -187,7 +176,7 @@ namespace Server.Items
                 {
                     ICraftable.Deserialize(reader, this);
 
-                    m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+                    Mark = (MarkQuality) reader.ReadEncodedInt();
 
                     goto case 1;
                 }

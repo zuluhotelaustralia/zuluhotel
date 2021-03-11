@@ -151,6 +151,8 @@ namespace Server.Items
                 {
                     BaseAddon addon = m_Deed.Addon;
 
+                    addon.SetComponentProps(m_Deed.Mark, m_Deed.Resource, m_Deed.Crafter, m_Deed.PlayerConstructed);
+
                     Spells.SpellHelper.GetSurfaceTop(ref p);
 
                     BaseHouse house = null;

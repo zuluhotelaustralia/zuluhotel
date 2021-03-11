@@ -7,15 +7,10 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseTool : Item, IUsesRemaining, ICraftable, IResource
+    public abstract class BaseTool : Item, IUsesRemaining, IResource, ICraftable
     {
         private CraftResource m_Resource;
-        private EnchantmentDictionary m_Enchantments;
-
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
+        private MarkQuality m_Mark;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
@@ -41,11 +36,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            get => m_Mark;
             set
             {
                 UnscaleUses();
-                Enchantments.Set((ItemMark e) => e.Value = (int) value);
+                m_Mark = value;
                 ScaleUses();
             }
         }
@@ -155,7 +150,7 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            Enchantments.Serialize(writer);
+            writer.WriteEncodedInt((int) Mark);
 
             writer.WriteEncodedInt((int) m_Resource);
 
@@ -174,7 +169,7 @@ namespace Server.Items
                 {
                     ICraftable.Deserialize(reader, this);
 
-                    m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+                    Mark = (MarkQuality) reader.ReadEncodedInt();
 
                     m_Resource = (CraftResource) reader.ReadEncodedInt();
 

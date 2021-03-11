@@ -176,7 +176,7 @@ namespace Server.Items
             writer.Write(1); // version
 
             ICraftable.Serialize(writer, this);
-
+            
             writer.WriteEncodedInt((int) m_Resource);
         }
 
@@ -189,7 +189,7 @@ namespace Server.Items
             if (version == 1)
             {
                 ICraftable.Deserialize(reader, this);
-
+                
                 m_Resource = (CraftResource) reader.ReadEncodedInt();
             }
         }
