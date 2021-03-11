@@ -262,7 +262,7 @@ namespace Scripts.Zulu.Engines.Classes
 
             return 0;
         }
-
+        
         public bool IsSkillInClass(SkillName sn)
         {
             return ClassSkills.FirstOrDefault(kv => kv.Value.Contains(sn)).Key == Type;
@@ -448,8 +448,8 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 var bonus = cls.Type switch
                 {
-                    ZuluClassType.Warrior => (int) (value * ClasseBonus),
-                    ZuluClassType.Mage => (int) (value / ClasseBonus),
+                    ZuluClassType.Warrior => (int) (value / ClasseBonus),
+                    ZuluClassType.Mage => (int) (value * ClasseBonus),
                     _ => (int) value
                 };
 

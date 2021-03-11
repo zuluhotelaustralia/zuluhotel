@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
+using Server.Engines.Magic;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
@@ -13,9 +14,7 @@ namespace Server.Spells.Fourth
 {
     public class FireFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public FireFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public FireFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
@@ -40,8 +39,6 @@ namespace Server.Spells.Fourth
 
             Effects.PlaySound(point, Caster.Map, 0x20C);
 
-            var itemId = eastToWest ? 0x398C : 0x3996;
-
             var power = 2.0;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
             var damage = Utility.Dice((uint)power, 8, 0);
@@ -54,12 +51,12 @@ namespace Server.Spells.Fourth
             {
                 var loc = new Point3D(eastToWest ? point.X + i : point.X, eastToWest ? point.Y : point.Y + i, point.Z);
 
-                Item item = new FireFieldItem(itemId, loc, Caster, Caster.Map, duration, i, damage);
+                Item item = new FireFieldItem(eastToWest ? 0x398C : 0x3996, loc, Caster, duration, i, damage);
                 Effects.SendLocationParticles(item, 0x376A, 9, 10, 5025);
             }
         }
 
-        private static void FireFieldDamage(Mobile caster, Mobile target, int damage)
+        private static void DamageMobile(Mobile caster, Mobile target, int damage)
         {
             if (SpellHelper.CanRevealCaster(target))
                 caster.RevealingAction();
@@ -72,7 +69,7 @@ namespace Server.Spells.Fourth
                 target.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
             }
 
-            target.Damage(damage, caster);
+            SpellHelper.Damage(damage, target, caster, null, null, ElementalType.Fire);
             target.PlaySound(0x208);
         }
 
@@ -86,16 +83,16 @@ namespace Server.Spells.Fourth
             private DateTime m_End;
             private Timer m_Timer;
 
-            public FireFieldItem(int itemId, Point3D loc, Mobile caster, Map map, TimeSpan duration, int val,
-                int damage = 2) : base(itemId)
+            public FireFieldItem(int itemId, Point3D loc, Mobile caster, TimeSpan duration, int val, int damage) 
+                : base(itemId)
             {
-                var canFit = SpellHelper.AdjustField(ref loc, map, 12, false);
+                var canFit = SpellHelper.AdjustField(ref loc, caster.Map, 12, false);
 
                 Visible = false;
                 Movable = false;
                 Light = LightType.Circle300;
 
-                MoveToWorld(loc, map);
+                MoveToWorld(loc, caster.Map);
 
                 m_Caster = caster;
                 m_Damage = damage;
@@ -164,7 +161,7 @@ namespace Server.Spells.Fourth
                 if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, mobile) &&
                     m_Caster.CanBeHarmful(mobile, false))
                 {
-                    FireFieldDamage(m_Caster, mobile, m_Damage);
+                    DamageMobile(m_Caster, mobile, m_Damage);
                 }
 
                 return true;
@@ -234,7 +231,7 @@ namespace Server.Spells.Fourth
 
                     foreach (var mobile in mobiles)
                     {
-                        FireFieldDamage(caster, mobile, m_Item.m_Damage);
+                        DamageMobile(caster, mobile, m_Item.m_Damage);
                     }
                 }
             }

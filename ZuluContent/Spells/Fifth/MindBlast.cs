@@ -78,11 +78,6 @@ namespace Server.Spells.Fifth
             FinishSequence();
         }
 
-        public override double GetSlayerDamageScalar(Mobile target)
-        {
-            return 1.0; //This spell isn't affected by slayer spellbooks
-        }
-
         private class InternalTarget : Target
         {
             private readonly MindBlastSpell m_Owner;

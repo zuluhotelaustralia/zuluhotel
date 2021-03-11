@@ -15,7 +15,9 @@ namespace Server.Spells
     
     public interface ITargetableAsyncSpell<in T> : ISpell, IAsyncSpell
     {
-        async Task IAsyncSpell.CastAsync()
+        async Task IAsyncSpell.CastAsync() => await SendTargetAsync();
+
+        public async Task SendTargetAsync()
         {
             if (Info.TargetOptions == null)
             {
@@ -36,8 +38,6 @@ namespace Server.Spells
                 if (Info.TargetOptions.Flags == TargetFlags.Harmful && !CheckHarmfulSequence(mobile))
                     return;
             }
-            
-            
             
             await OnTargetAsync(response);
         }

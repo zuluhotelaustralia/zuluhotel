@@ -38,20 +38,13 @@ namespace Server.Spells.First
             if (healed > maxHeal)
                 healed = maxHeal;
             
-            Caster.FireHook(h => h.OnHeal(Caster, mobile, this, ref healed));
-            
             mobile.FixedParticles(0x376A, 9, 32, 5005, EffectLayer.Waist);
             mobile.PlaySound(0x1F2);
 
             if (mobile is BaseCreature {CreatureType: CreatureType.Undead})
-            {
                 SpellHelper.Damage(healed, mobile, Caster, this);
-            }
             else
-            {
-                SpellHelper.Heal((int)healed, mobile, Caster);
-                Caster.SendSuccessMessage($"You healed {healed:F0} damage.");
-            }
+                SpellHelper.Heal((int) healed, mobile, Caster, this);
         }
     }
 }

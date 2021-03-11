@@ -65,7 +65,7 @@ namespace Scripts.Zulu.Spells.Earth
 
             Caster.FireHook(h => h.OnHeal(Caster, m, this, ref amount));
 
-            SpellHelper.Heal((int) amount, m, Caster);
+            SpellHelper.Heal((int) amount, m, Caster, this);
 
             Return:
             FinishSequence();
