@@ -53,7 +53,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             {
                 Caster.DoHarmful(m);
                 //m.Damage( (int)dmg, Caster, m_DamageType );
-                SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
+                SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
                 m.FixedParticles(0x374A, 10, 15, 5013, EffectLayer.Waist);
                 m.PlaySound(0x1f2);
             }

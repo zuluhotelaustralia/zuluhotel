@@ -130,7 +130,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             }
 
             //m.Damage((int)dmg, m, ElementalType.Water);
-            SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
+            SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
 
             var manastolen = (int) dmg;
 

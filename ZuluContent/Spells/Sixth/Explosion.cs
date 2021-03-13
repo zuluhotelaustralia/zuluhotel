@@ -86,7 +86,7 @@ namespace Server.Spells.Sixth
                     m_Target.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);
                     m_Target.PlaySound(0x307);
 
-                    SpellHelper.Damage(damage, m_Defender, m_Attacker, m_Spell);
+                    SpellHelper.Damage((int) damage, m_Defender, m_Attacker, m_Spell);
 
                     m_Spell?.RemoveDelayedDamageContext(m_Attacker);
                 }

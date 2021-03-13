@@ -10,21 +10,29 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
     [MessagePackObject]
     public class Protection : Enchantment<ProtectionInfo>, IBuff
     {
+        private string m_Description;
         [IgnoreMember] public override string AffixName => string.Empty;
 
-        [Key(1)]
-        public int Value { get; set; } = 0;
+        [Key(1)] public int Value { get; set; }
 
         #region IBuff
-        [IgnoreMember] public BuffIcon Icon { get; } = BuffIcon.Protection;
-        [IgnoreMember] public int TitleCliloc { get; } = 1075814; // Protection
-        [IgnoreMember] public int SecondaryCliloc { get; } = IBuff.BlankCliloc;
-        [IgnoreMember] public TextDefinition Args =>  Value.ToString("+0;-#") + " armor";
-        [IgnoreMember] public bool RetainThroughDeath { get; } = false;
-        [IgnoreMember] public bool Dispellable { get; } = true;
+
+        [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.Protection;
+        [IgnoreMember] public string Title { get; init; } = "Protection";
+
+        [IgnoreMember]
+        public string Description
+        {
+            get => m_Description ??= Value.ToString("+0;-#") + " Armor";
+            init => m_Description = value;
+        }
+        
+        [IgnoreMember] public string[] Details { get; init; }
+        [IgnoreMember] public bool ExpireOnDeath { get; init; } = true;
+        [IgnoreMember] public bool Dispellable { get; init; } = true;
         [IgnoreMember] public TimeSpan Duration { get; init; }
         [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
-        
+
         public void OnBuffAdded(Mobile parent)
         {
             parent.VirtualArmorMod += Value;
@@ -37,15 +45,16 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
             if (parent.VirtualArmorMod < 0)
                 parent.VirtualArmorMod = 0;
-            
-            if (parent is IEnchanted enchanted) 
+
+            if (parent is IEnchanted enchanted)
                 enchanted.Enchantments.Remove(this);
         }
-        
+
         #endregion
     }
 
     #region EnchantmentInfo
+
     public class ProtectionInfo : EnchantmentInfo
     {
         public override string Description { get; protected set; } = "Protection";
@@ -59,5 +68,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             return string.Empty;
         }
     }
+
     #endregion
 }

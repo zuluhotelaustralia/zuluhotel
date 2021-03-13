@@ -42,7 +42,7 @@ namespace Server.Spells.First
             mobile.PlaySound(0x1F2);
 
             if (mobile is BaseCreature {CreatureType: CreatureType.Undead})
-                SpellHelper.Damage(healed, mobile, Caster, this);
+                SpellHelper.Damage((int) healed, mobile, Caster, this);
             else
                 SpellHelper.Heal((int) healed, mobile, Caster, this);
         }

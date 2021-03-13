@@ -63,7 +63,7 @@ namespace Server.Spells
         private static readonly TimeSpan DefaultDamageDelay = TimeSpan.FromSeconds(0.5);
 
         private static readonly TimeSpan CombatHeatDelay = TimeSpan.FromSeconds(30.0);
-        private static readonly bool RestrictTravelCombat = true;
+        private static readonly bool RestrictTravelCombat = false;
 
         private static readonly int[] Offsets =
         {
@@ -77,7 +77,7 @@ namespace Server.Spells
             1, 1
         };
 
-        private static readonly TravelValidator[] Validators =
+        private static readonly Func<Map, Point3D, bool>[] Validators =
         {
             IsFeluccaT2A,
             IsFeluccaWind,
@@ -158,15 +158,7 @@ namespace Server.Spells
             if (!RestrictTravelCombat)
                 return false;
 
-            for (var i = 0; i < m.Aggressed.Count; ++i)
-            {
-                var info = m.Aggressed[i];
-
-                if (info.Defender.Player && DateTime.Now - info.LastCombatTime < CombatHeatDelay)
-                    return true;
-            }
-
-            return false;
+            return m.Aggressed.Any(info => info.Defender.Player && DateTime.Now - info.LastCombatTime < CombatHeatDelay);
         }
 
         public static bool AdjustField(ref Point3D p, Map map, int height, bool mobsBlock)
@@ -195,7 +187,6 @@ namespace Server.Spells
 
             var points = (int) circle * 40.0;
             var magery = caster.Skills[SkillName.Magery].Value;
-            var evalInt = caster.Skills[SkillName.EvalInt].Value;
             var resist = target.Skills[SkillName.MagicResist].Value;
             var chance = resist / 6.0;
             var secondaryChance = resist - magery / 4.0 + (int) circle * 6.0;
@@ -248,50 +239,7 @@ namespace Server.Spells
 
             return damage;
         }
-
-        public static double CalcSpellDamage(Mobile caster, Mobile target, Spell spell, bool areaSpell = false)
-        {
-            const int mageryDivider = 5;
-            const int playerDivider = 3;
-            const int circleMultiplier = 3;
-            const int dices = 5;
-
-            if (!caster.Alive || !target.Alive || target.Hidden)
-                return 0.0;
-
-            var circle = (int) spell.Info.Circle + 1;
-            if (areaSpell)
-                circle -= 3;
-
-            if (circle < 1)
-                circle = 1;
-
-            var damage = Utility.RandomMinMax(circle * circleMultiplier, circle * circleMultiplier * dices) +
-                         caster.Skills[SkillName.Magery].Value / mageryDivider;
-
-            var circleMaxDamage = circle * (13 + circle);
-            if (damage > circleMaxDamage)
-                damage = circleMaxDamage;
-
-            if (target.Player)
-                damage /= playerDivider;
-
-            return damage;
-        }
-
-        public static double GetEffectiveness(Mobile caster)
-        {
-            // TODO: Think about what makes sense here.
-
-            var skill = caster.Skills[SkillName.Magery].Value / 130.0;
-            var stat = caster.Int / 130.0;
-            var spec = caster is PlayerMobile mobile && mobile.ZuluClass.Type == ZuluClassType.Mage
-                ? mobile.ZuluClass.Bonus
-                : 1.0;
-
-            return 2 + 0.4 * skill + 0.3 * stat + 0.3 * spec;
-        }
-
+        
         public static int GetDamageAfterResist(Mobile caster, Mobile target, double damage)
         {
             if (!caster.Alive || !target.Alive)
@@ -316,6 +264,49 @@ namespace Server.Spells
                 damage = 0;
 
             return (int) damage;
+        }
+
+        public static int CalcSpellDamage(Mobile caster, Mobile target, Spell spell, bool areaSpell = false)
+        {
+            const int mageryDivider = 5;
+            const int playerDivider = 3;
+            const int circleMultiplier = 3;
+            const int dices = 5;
+
+            if (!caster.Alive || !target.Alive || target.Hidden)
+                return 0;
+
+            var circle = (int) spell.Info.Circle + 1;
+            if (areaSpell)
+                circle -= 3;
+
+            if (circle < 1)
+                circle = 1;
+
+            var damage = Utility.RandomMinMax(circle * circleMultiplier, circle * circleMultiplier * dices) +
+                         caster.Skills[SkillName.Magery].Value / mageryDivider;
+
+            var circleMaxDamage = circle * (13 + circle);
+            if (damage > circleMaxDamage)
+                damage = circleMaxDamage;
+
+            if (target.Player)
+                damage /= playerDivider;
+
+            return (int)damage;
+        }
+
+        public static double GetEffectiveness(Mobile caster)
+        {
+            // TODO: Think about what makes sense here.
+
+            var skill = caster.Skills[SkillName.Magery].Value / 130.0;
+            var stat = caster.Int / 130.0;
+            var spec = caster is PlayerMobile mobile && mobile.ZuluClass.Type == ZuluClassType.Mage
+                ? mobile.ZuluClass.Bonus
+                : 1.0;
+
+            return 2 + 0.4 * skill + 0.3 * stat + 0.3 * spec;
         }
 
         public static bool CanRevealCaster(Mobile m)
@@ -471,59 +462,55 @@ namespace Server.Spells
             return g;
         }
 
-        public static bool ValidIndirectTarget(Mobile caster, Mobile to)
+        public static bool ValidIndirectTarget(Mobile caster, Mobile target)
         {
-            if (caster == to)
+            if (caster == target)
                 return true;
 
-            if (to.Hidden && to.AccessLevel > caster.AccessLevel)
+            if (target.Hidden && target.AccessLevel > caster.AccessLevel)
                 return false;
 
             var casterGuild = GetGuildFor(caster);
-            var toGuild = GetGuildFor(to);
+            var toGuild = GetGuildFor(target);
 
             if (casterGuild != null && toGuild != null && (casterGuild == toGuild || casterGuild.IsAlly(toGuild)))
                 return false;
 
             var p = Party.Get(caster);
 
-            if (p != null && p.Contains(to))
+            if (p != null && p.Contains(target))
                 return false;
 
-            if (to is BaseCreature)
+            if (target is BaseCreature targetCreature)
             {
-                var c = (BaseCreature) to;
-
-                if (c.Controlled || c.Summoned)
+                if (targetCreature.Controlled || targetCreature.Summoned)
                 {
-                    if (c.ControlMaster == caster || c.SummonMaster == caster)
+                    if (targetCreature.ControlMaster == caster || targetCreature.SummonMaster == caster)
                         return false;
 
-                    if (p != null && (p.Contains(c.ControlMaster) || p.Contains(c.SummonMaster)))
+                    if (p != null && (p.Contains(targetCreature.ControlMaster) || p.Contains(targetCreature.SummonMaster)))
                         return false;
                 }
             }
 
-            if (caster is BaseCreature)
+            if (caster is BaseCreature casterCreature)
             {
-                var c = (BaseCreature) caster;
-
-                if (c.Controlled || c.Summoned)
+                if (casterCreature.Controlled || casterCreature.Summoned)
                 {
-                    if (c.ControlMaster == to || c.SummonMaster == to)
+                    if (casterCreature.ControlMaster == target || casterCreature.SummonMaster == target)
                         return false;
 
-                    p = Party.Get(to);
+                    p = Party.Get(target);
 
-                    if (p != null && (p.Contains(c.ControlMaster) || p.Contains(c.SummonMaster)))
+                    if (p != null && (p.Contains(casterCreature.ControlMaster) || p.Contains(casterCreature.SummonMaster)))
                         return false;
                 }
             }
 
-            if (to is BaseCreature && !((BaseCreature) to).Controlled && ((BaseCreature) to).InitialInnocent)
+            if (target is BaseCreature {Controlled: false, InitialInnocent: true})
                 return true;
 
-            var noto = Notoriety.Compute(caster, to);
+            var noto = Notoriety.Compute(caster, target);
 
             return noto != Notoriety.Innocent || caster.Kills >= 5;
         }
@@ -615,12 +602,27 @@ namespace Server.Spells
 
         public static void SendInvalidMessage(Mobile caster, TravelCheckType type)
         {
-            if (type == TravelCheckType.RecallTo || type == TravelCheckType.GateTo)
-                caster.SendLocalizedMessage(1019004); // You are not allowed to travel there.
-            else if (type == TravelCheckType.TeleportTo)
-                caster.SendLocalizedMessage(501035); // You cannot teleport caster here to the destination.
-            else
-                caster.SendLocalizedMessage(501802); // Thy spell doth not appear to work...
+            switch (type)
+            {
+                case TravelCheckType.RecallTo:
+                case TravelCheckType.GateTo:
+                    caster.SendLocalizedMessage(1019004); // You are not allowed to travel there.
+                    break;
+                case TravelCheckType.TeleportTo:
+                    caster.SendLocalizedMessage(501035); // You cannot teleport caster here to the destination.
+                    break;
+                case TravelCheckType.RecallFrom:
+                    break;
+                case TravelCheckType.GateFrom:
+                    break;
+                case TravelCheckType.Mark:
+                    break;
+                case TravelCheckType.TeleportFrom:
+                    break;
+                default:
+                    caster.SendLocalizedMessage(501802); // Thy spell doth not appear to work...
+                    break;
+            }
         }
 
         public static bool CheckTravel(Mobile caster, TravelCheckType type)
@@ -785,9 +787,9 @@ namespace Server.Spells
         }
 
         public static async void Damage(
-            double damage,
+            int damage,
             Mobile target,
-            Mobile attacker = null,
+            Mobile caster = null,
             Spell spell = null,
             TimeSpan? delay = null,
             ElementalType? damageType = null,
@@ -795,47 +797,31 @@ namespace Server.Spells
         )
         {
             delay ??= spell != null ? GetDamageDelayForSpell(spell) : TimeSpan.Zero;
-
-            if (spell != null && damageType == null && SpellInfos.TryGetValue(spell.GetType(), out var info))
-                damageType = info.DamageType;
-            else
-                damageType = ElementalType.None;
-
-            var iDamage = (int) damage;
-
+            damageType = spell != null && damageType == null && SpellInfos.TryGetValue(spell.GetType(), out var info) 
+                ? info.DamageType
+                : ElementalType.None;
+            
             if (delay.Value > TimeSpan.Zero)
                 await Timer.Pause(delay.Value);
 
-            DoDamage(attacker, target, spell, iDamage, damageType.Value, dfa);
-        }
 
-        private static void DoDamage(
-            Mobile attacker,
-            Mobile target,
-            Spell spell,
-            int damage,
-            ElementalType damageType,
-            DFAlgorithm dfa
-        )
-        {
-            target.FireHook(h => h.OnSpellDamage(attacker, target, spell, damageType, ref damage));
-
-            damage = TryResistDamage(attacker, target, spell.Circle, damage);
+            target.FireHook(h => h.OnSpellDamage(caster, target, spell, damageType.Value, ref damage));
+            damage = TryResistDamage(caster, target, spell?.Circle ?? SpellCircle.First, damage);
 
             WeightOverloading.DFA = dfa;
 
             if (damage > 0)
-                target.Damage(damage, attacker);
+                target.Damage(damage, caster);
             else
                 target.Heal(damage * -1);
 
-            if (attacker != null) // sanity check
-                DoLeech(damage, attacker, target);
+            if (caster != null) // sanity check
+                DoLeech(damage, caster, target);
 
             WeightOverloading.DFA = DFAlgorithm.Standard;
 
-            if (target is BaseCreature c && attacker != null)
-                c.OnDamagedBySpell(attacker);
+            if (target is BaseCreature c && caster != null)
+                c.OnDamagedBySpell(caster);
 
             spell?.RemoveDelayedDamageContext(target);
         }
@@ -848,47 +834,6 @@ namespace Server.Spells
         {
             target.FireHook(h => h.OnHeal(caster, target, spell, ref amount));
             target.Heal((int) amount, caster, message);
-        }
-
-        private delegate bool TravelValidator(Map map, Point3D loc);
-
-        private class SpellDamageTimer : Timer
-        {
-            private readonly int m_Damage;
-            private readonly ElementalType m_DamageType;
-            private readonly DFAlgorithm m_Dfa;
-            private readonly Spell m_Spell;
-            private readonly Mobile m_Target;
-            private readonly Mobile m_From;
-
-            public SpellDamageTimer(
-                Spell s,
-                Mobile target,
-                Mobile caster,
-                int damage,
-                TimeSpan delay,
-                ElementalType damageType,
-                DFAlgorithm dfa = DFAlgorithm.Standard
-            )
-                : base(delay)
-            {
-                m_Target = target;
-                m_From = caster;
-                m_Damage = damage;
-                m_DamageType = damageType;
-                m_Dfa = dfa;
-                m_Spell = s;
-
-                if (m_Spell != null && m_Spell.DelayedDamage && !m_Spell.DelayedDamageStacking)
-                    m_Spell.StartDelayedDamageContext(target, this);
-
-                Priority = TimerPriority.TwentyFiveMS;
-            }
-
-            protected override void OnTick()
-            {
-                DoDamage(m_From, m_Target, m_Spell, m_Damage, m_DamageType, m_Dfa);
-            }
         }
     }
 }

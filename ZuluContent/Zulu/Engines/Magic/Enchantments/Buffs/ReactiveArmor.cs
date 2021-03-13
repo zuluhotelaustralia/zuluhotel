@@ -11,10 +11,20 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
     [MessagePackObject]
     public class ReactiveArmor : Enchantment<ReactiveArmorInfo>, IBuff
     {
+        private string m_Description;
+        private int m_Value;
         [IgnoreMember] public override string AffixName => string.Empty;
 
         [Key(1)]
-        public int Value { get; set; } = 0;
+        public int Value
+        {
+            get => m_Value;
+            set
+            {
+                m_Description = $"Remaining charges: {Value}";
+                m_Value = value;
+            }
+        }
 
         public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
         {
@@ -31,23 +41,30 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
             if (defender is IBuffable buffable)
             {
-                if(Value <= 0)
+                if (Value <= 0)
                     buffable.BuffManager.RemoveBuff(this);
                 else
-                    buffable.BuffManager.ResendBuff(this);  
+                    buffable.BuffManager.ResendBuff(this);
             }
         }
 
         #region IBuff
-        [IgnoreMember] public BuffIcon Icon { get; } = BuffIcon.ReactiveArmor;
-        [IgnoreMember] public int TitleCliloc { get; } = 1075812; // Reactive Armor
-        [IgnoreMember] public int SecondaryCliloc { get; } = 1076207; // Remaining Charges: ~1_val~
-        [IgnoreMember] public TextDefinition Args => $"{Value}";
-        [IgnoreMember] public bool RetainThroughDeath { get; } = false;
-        [IgnoreMember] public bool Dispellable { get; } = true;
-        [IgnoreMember] public TimeSpan Duration { get; init; }
+
+        [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.ReactiveArmor;
+        [IgnoreMember] public string Title { get; init; } = "Reactive Armor";
+        [IgnoreMember]
+        public string Description
+        {
+            get => m_Description;
+            init => m_Description = value;
+        }
+
+        [IgnoreMember] public string[] Details { get; init; }
+        [IgnoreMember] public bool ExpireOnDeath { get; init; } = true;
+        [IgnoreMember] public bool Dispellable { get; init; } = true;
+        [IgnoreMember] public TimeSpan Duration { get; init; } = TimeSpan.Zero;
         [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
-        
+
         public void OnBuffAdded(Mobile parent)
         {
             (parent as IEnchanted)?.Enchantments.Set(this);
@@ -61,11 +78,12 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
                 parent.SendLocalizedMessage(1005556); // Your reactive armor spell has been nullified.
             }
         }
-        
+
         #endregion
     }
-    
+
     #region EnchantmentInfo
+
     public class ReactiveArmorInfo : EnchantmentInfo
     {
         public override string Description { get; protected set; } = "Reactive Armor";
@@ -79,5 +97,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             return string.Empty;
         }
     }
+
     #endregion
 }

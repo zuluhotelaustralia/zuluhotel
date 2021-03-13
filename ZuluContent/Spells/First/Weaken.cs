@@ -11,22 +11,22 @@ namespace Server.Spells.First
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue || !(response.Target is IBuffable buffable))
-                return;
-
-            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Agility>(Caster))
+            if (!response.HasValue)
                 return;
             
             var target = response.Target;
-
-            SpellHelper.Turn(Caster, target);
             
-            buffable.BuffManager.AddBuff(new Cunning
+            if (!Caster.CanBuff(target, BuffIcon.Weaken))
+                return;
+            
+            target.TryAddBuff(new StatBuff(StatType.Str)
             {
                 Value = SpellHelper.GetModAmount(Caster, target, StatType.Str) * -1,
                 Duration = SpellHelper.GetDuration(Caster, target),
             });
             
+            SpellHelper.Turn(Caster, target);
+
             target.Spell?.OnCasterHurt();
             target.Paralyzed = false;
 

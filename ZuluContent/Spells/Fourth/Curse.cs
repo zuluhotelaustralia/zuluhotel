@@ -10,20 +10,21 @@ namespace Server.Spells.Fourth
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue || !(response.Target is IBuffable buffable))
-                return;
-
-            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Bless>(Caster))
+            if (!response.HasValue)
                 return;
             
             var target = response.Target;
-            SpellHelper.Turn(Caster, target);
-
-            buffable.BuffManager.AddBuff(new Bless
+            
+            if (!Caster.CanBuff(target, BuffIcon.Curse))
+                return;
+            
+            target.TryAddBuff(new StatBuff(StatType.All)
             {
                 Value = SpellHelper.GetModAmount(Caster, target, StatType.All) * -1,
                 Duration = SpellHelper.GetDuration(Caster, target),
             });
+            
+            SpellHelper.Turn(Caster, target);
             
             target.Spell?.OnCasterHurt();
             target.Paralyzed = false;

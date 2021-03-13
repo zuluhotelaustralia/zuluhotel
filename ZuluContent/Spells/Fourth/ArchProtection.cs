@@ -32,11 +32,11 @@ namespace Server.Spells.Fourth
 
             foreach (var mobile in targets)
             {
-                if (mobile is IBuffable buffable && !buffable.BuffManager.HasBuff<Protection>())
+                if (Caster.CanBuff(mobile, BuffIcon.Protection, false))
                 {
                     Caster.DoBeneficial(mobile);
                     
-                    buffable.BuffManager.AddBuff(new Protection
+                    mobile.TryAddBuff(new Protection
                     {
                         Value = (int) (SpellHelper.GetModAmount(Caster, mobile) / 1.5),
                         Duration = SpellHelper.GetDuration(Caster, mobile),

@@ -15,17 +15,17 @@ namespace Server.Spells.First
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue || !(response.Target is IBuffable buffable))
-                return;
-
-            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Agility>(Caster))
+            if (!response.HasValue)
                 return;
             
             var target = response.Target;
 
             SpellHelper.Turn(Caster, target);
             
-            buffable.BuffManager.AddBuff(new Cunning
+            if (!Caster.CanBuff(target, BuffIcon.FeebleMind))
+                return;
+            
+            target.TryAddBuff(new StatBuff(StatType.Int)
             {
                 Value = SpellHelper.GetModAmount(Caster, target, StatType.Int) * -1,
                 Duration = SpellHelper.GetDuration(Caster, target),

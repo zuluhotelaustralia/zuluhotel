@@ -30,7 +30,7 @@ namespace Server.Spells.Fourth
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref healed));
             
             if (target is BaseCreature {CreatureType: CreatureType.Undead})
-                SpellHelper.Damage(healed, target, Caster, this);
+                SpellHelper.Damage((int) healed, target, Caster, this);
             else
                 SpellHelper.Heal((int) healed, target, Caster, this);
 

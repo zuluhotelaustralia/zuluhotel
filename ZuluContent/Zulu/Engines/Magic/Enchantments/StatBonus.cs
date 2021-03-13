@@ -91,7 +91,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public abstract class BaseStatBonus<T> : Enchantment<T> where T : EnchantmentInfo, new()
     {
-        protected readonly StatType StatType;
+        protected StatType StatType;
         protected StatMod Mod;
         private int m_Value;
         protected Mobile Mobile;
@@ -115,6 +115,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             StatType = statType;
         }
 
+        protected virtual string StatModName => $"{GetType().Name}:{StatType.ToString()}";
+
         protected void AddStatMod(Mobile mobile)
         {
             if (mobile == null)
@@ -122,7 +124,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             
             Mod = new StatMod(
                 StatType,
-                $"{GetType().Name}:{StatType.ToString()}",
+                StatModName,
                 Value,
                 TimeSpan.Zero
             );

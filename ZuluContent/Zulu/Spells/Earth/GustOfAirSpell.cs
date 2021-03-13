@@ -64,7 +64,7 @@ namespace Scripts.Zulu.Spells.Earth
             double damage = Utility.Dice(3, 6, (int) avg); //i.e. 3d6 + 30, clusters about 40, ranges 33 to 48
 
             //m.Damage((int)damage, Caster, ElementalType.Air);
-            SpellHelper.Damage(damage, m, Caster, this, TimeSpan.Zero);
+            SpellHelper.Damage((int) damage, m, Caster, this, TimeSpan.Zero);
 
 
             Return:

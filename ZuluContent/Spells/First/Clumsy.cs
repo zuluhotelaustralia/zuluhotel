@@ -13,20 +13,21 @@ namespace Server.Spells.First
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!response.HasValue || !(response.Target is IBuffable buffable))
+            if (!response.HasValue)
                 return;
 
-            if (!buffable.BuffManager.CanBuffWithNotifyOnFail<Agility>(Caster))
+            var target = response.Target;
+
+            if (!Caster.CanBuff(target, BuffIcon.Clumsy))
                 return;
             
-            var target = response.Target;
-            SpellHelper.Turn(Caster, target);
-
-            buffable.BuffManager.AddBuff(new Agility
+            target.TryAddBuff(new StatBuff(StatType.Dex)
             {
                 Value = SpellHelper.GetModAmount(Caster, target, StatType.Dex) * -1,
                 Duration = SpellHelper.GetDuration(Caster, target),
             });
+            
+            SpellHelper.Turn(Caster, target);
 
             target.Spell?.OnCasterHurt();
             target.Paralyzed = false;
