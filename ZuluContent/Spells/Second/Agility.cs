@@ -21,13 +21,8 @@ namespace Server.Spells.Second
             
             target.TryAddBuff(new StatBuff(StatType.Dex)
             {
-                Title = "This is my agility now",
-                Description = "Fuck the police!",
                 Value = SpellHelper.GetModAmount(Caster, target, StatType.Dex),
                 Duration = SpellHelper.GetDuration(Caster, target),
-                Details = new [] { "My custom detail" },
-                ExpireOnDeath = false,
-                Dispellable = false
             });
             SpellHelper.Turn(Caster, target);
 
