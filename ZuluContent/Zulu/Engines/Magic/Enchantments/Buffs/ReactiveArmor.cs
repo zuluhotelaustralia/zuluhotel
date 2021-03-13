@@ -21,7 +21,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             get => m_Value;
             set
             {
-                m_Description = $"Remaining charges: {Value}";
+                m_Description = $"Remaining charges: {value}";
                 m_Value = value;
             }
         }
