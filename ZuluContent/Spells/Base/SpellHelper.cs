@@ -339,23 +339,7 @@ namespace Server.Spells
                     return new Point3D(point);
             }
         }
-
-        public static bool AddStatOffset(Mobile m, StatType type, int offset, TimeSpan duration)
-        {
-            return offset switch
-            {
-                > 0 => AddStatBonus(m, m, type, offset, duration),
-                < 0 => AddStatCurse(m, m, type, -offset, duration),
-                _ => true
-            };
-        }
-
-        public static bool AddStatBonus(Mobile caster, Mobile target, StatType type)
-        {
-            return AddStatBonus(caster, target, type, GetModAmount(caster, target, type, false),
-                GetDuration(caster, target));
-        }
-
+        
         public static bool AddStatBonus(Mobile caster, Mobile target, StatType type, int bonus, TimeSpan duration)
         {
             var offset = bonus;

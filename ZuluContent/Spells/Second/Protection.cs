@@ -20,7 +20,7 @@ namespace Server.Spells.Second
             if (!Caster.CanBuff(target, BuffIcon.Protection))
                 return;
             
-            target.TryAddBuff(new Protection
+            target.TryAddBuff(new ArmorBuff
             {
                 Value = (int)(SpellHelper.GetModAmount(Caster, target) / 2.0),
                 Duration = SpellHelper.GetDuration(Caster, target),

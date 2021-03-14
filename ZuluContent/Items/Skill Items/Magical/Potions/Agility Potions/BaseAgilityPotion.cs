@@ -1,5 +1,7 @@
 using System;
+using Scripts.Zulu.Packets;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Items
 {
@@ -32,17 +34,18 @@ namespace Server.Items
 
         public bool DoAgility(Mobile from)
         {
-            var mod = Utility.Dice(PotionStrength, 2, 5);
-            var duration = TimeSpan.FromSeconds(PotionStrength * 120);
-
-            if (SpellHelper.AddStatBonus(from, from, StatType.Dex, mod, duration))
+            if (from.CanBuff(from, BuffIcon.Agility))
             {
-                from.FixedEffect(0x375A, 10, 15);
-                from.PlaySound(0x1E7);
+                from.TryAddBuff(new StatBuff(StatType.Dex)
+                {
+                    Title = LabelNumber > 0 ? ClilocList.Translate(LabelNumber, string.Empty, true) : null,
+                    Details = new []{ $"Potion Strength: {PotionStrength}"},
+                    Value = Utility.Dice(PotionStrength, 2, 5),
+                    Duration = TimeSpan.FromSeconds(PotionStrength * 120),
+                });
                 return true;
             }
-
-            from.SendLocalizedMessage(502173); // You are already under a similar effect.
+            
             return false;
         }
 
@@ -50,6 +53,8 @@ namespace Server.Items
         {
             if (DoAgility(from))
             {
+                from.FixedEffect(0x375A, 10, 15);
+                from.PlaySound(0x1E7);
                 PlayDrinkEffect(from);
                 Consume();
             }

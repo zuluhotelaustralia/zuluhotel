@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using Server;
 using Server.Json;
 
@@ -10,6 +11,9 @@ namespace Scripts.Zulu.Packets
 {
     public static class ClilocList
     {
+        public static readonly TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+
+        
         public static SortedDictionary<int, string> Load(string path)
         {
             using var bin = new BinaryReader(new PeekableStream(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)));
@@ -35,8 +39,10 @@ namespace Scripts.Zulu.Packets
             return entries;
         }
 
-        public static string Translate(IReadOnlyDictionary<int, string> entries, int label, string arg = "", bool capitalize = false)
+        public static string Translate(int label, string arg = "", bool capitalize = false, IReadOnlyDictionary<int, string> entries = null)
         {
+            entries ??= ZhConfig.Messaging.Cliloc;
+            
             if (!entries.TryGetValue(label, out var baseCliloc))
                 return string.Empty;
             
@@ -95,7 +101,7 @@ namespace Scripts.Zulu.Packets
                 index++;
             }
 
-            return baseCliloc;
+            return capitalize ? TextInfo.ToTitleCase(baseCliloc) : baseCliloc;
         }
 
         private class PeekableStream : Stream

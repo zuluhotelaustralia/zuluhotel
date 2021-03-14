@@ -36,7 +36,7 @@ namespace Server.Spells.Fourth
                 {
                     Caster.DoBeneficial(mobile);
                     
-                    mobile.TryAddBuff(new Protection
+                    mobile.TryAddBuff(new ArmorBuff
                     {
                         Value = (int) (SpellHelper.GetModAmount(Caster, mobile) / 1.5),
                         Duration = SpellHelper.GetDuration(Caster, mobile),

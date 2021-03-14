@@ -8,7 +8,7 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 {
     [MessagePackObject]
-    public class Protection : Enchantment<ProtectionInfo>, IBuff
+    public class ArmorBuff : Enchantment<ArmorBuffInfo>, IBuff
     {
         private string m_Description;
         [IgnoreMember] public override string AffixName => string.Empty;
@@ -55,7 +55,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
     #region EnchantmentInfo
 
-    public class ProtectionInfo : EnchantmentInfo
+    public class ArmorBuffInfo : EnchantmentInfo
     {
         public override string Description { get; protected set; } = "Protection";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;
