@@ -1,5 +1,6 @@
 using System;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Items
 {
@@ -29,7 +30,7 @@ namespace Server.Items
     {
         public override int Hue { get; set; } = 0;
 
-        public override string DefaultName { get; } = "a greater Homeric Might potion";
+        public override string DefaultName { get; } = "Greater Homeric Might potion";
         public override uint PotionStrength { get; set; } = 9;
         public GreaterHomericMightPotion() : base(PotionEffect.GreaterHomericMight) { }
         public GreaterHomericMightPotion(Serial serial) : base(serial) { }
@@ -71,17 +72,17 @@ namespace Server.Items
 
         public bool Buff(Mobile from)
         {
-            var mod = Utility.Dice(PotionStrength, 3, 0);
-            var duration = TimeSpan.FromSeconds(PotionStrength * 15);
-
-            if (SpellHelper.AddStatBonus(from, from, StatType.Str, mod, duration))
+            if (from.CanBuff(from, BuffIcon.Bless))
             {
-                SpellHelper.AddStatBonus(from, from, StatType.Int, mod, duration);
-                SpellHelper.AddStatBonus(from, from, StatType.Dex, mod, duration);
+                from.TryAddBuff(new StatBuff(StatType.All)
+                {
+                    Title = DefaultName,
+                    Details = new []{ $"Potion Strength: {PotionStrength}"},
+                    Value = Utility.Dice(PotionStrength, 3, 0),
+                    Duration = TimeSpan.FromSeconds(PotionStrength * 15),
+                });
                 return true;
             }
-
-            from.SendLocalizedMessage(502173); // You are already under a similar effect.
             return false;
         }
 

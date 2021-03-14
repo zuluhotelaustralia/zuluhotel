@@ -110,18 +110,18 @@ namespace Server.Items
             }
         }
 
-        public override bool OnMoveOver(Mobile m)
+        public override bool OnMoveOver(Mobile mobile)
         {
-            if (m.AccessLevel > AccessLevel.Player)
+            if (mobile.AccessLevel > AccessLevel.Player)
                 return true;
 
-            if (m.Player && m.Alive)
+            if (mobile.Player && mobile.Alive)
             {
                 CheckTimer();
 
-                SpellHelper.Damage(Utility.RandomMinMax(1, 30), m, m, null, TimeSpan.FromTicks(1));
+                SpellHelper.Damage(Utility.RandomMinMax(1, 30), mobile, mobile, null, TimeSpan.FromTicks(1));
 
-                m.PlaySound(m.Female ? 0x327 : 0x437);
+                mobile.PlaySound(mobile.Female ? 0x327 : 0x437);
             }
 
             return false;

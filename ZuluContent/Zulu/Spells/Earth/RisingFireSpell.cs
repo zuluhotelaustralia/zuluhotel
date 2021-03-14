@@ -63,7 +63,7 @@ namespace Scripts.Zulu.Spells.Earth
                     {
                         Caster.DoHarmful(mob);
                         mob.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
-                        SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
+                        SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
                     }
 
             Caster.PlaySound(0x208);

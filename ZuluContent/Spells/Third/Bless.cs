@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Spells.Third
 {
@@ -11,15 +12,18 @@ namespace Server.Spells.Third
         {
             if (!response.HasValue)
                 return;
-
+            
             var target = response.Target;
             
+            if (!Caster.CanBuff(target, BuffIcon.Bless))
+                return;
+            
+            target.TryAddBuff(new StatBuff(StatType.All)
+            {
+                Value = SpellHelper.GetModAmount(Caster, target, StatType.All),
+                Duration = SpellHelper.GetDuration(Caster, target),
+            });
             SpellHelper.Turn(Caster, target);
-
-            var bonus = SpellHelper.GetModAmount(Caster, target, StatType.All);
-            var duration = SpellHelper.GetDuration(Caster, target);
-
-            SpellHelper.AddStatBonus(Caster, target, StatType.All, bonus, duration);
 
             target.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);
             target.PlaySound(0x1EA);

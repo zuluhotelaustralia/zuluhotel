@@ -2,6 +2,7 @@ using System;
 using Server;
 using Server.Items;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Items
 {
@@ -92,16 +93,18 @@ namespace Server.Items
 
         public bool Buff(Mobile from)
         {
-            var mod = Utility.Dice(PotionStrength, 10, 0);
-            
-            if (SpellHelper.AddStatOffset(from, StatType.Int, mod, TimeSpan.FromSeconds(PotionStrength * 20)))
+            if (from.CanBuff(from, BuffIcon.Cunning))
             {
-                from.FixedEffect(0x3739, 10, 15);
-                from.PlaySound(0x1EB);
+                from.TryAddBuff(new StatBuff(StatType.Int)
+                {
+                    Title = DefaultName,
+                    Details = new []{ $"Potion Strength: {PotionStrength}"},
+                    Value = Utility.Dice(PotionStrength, 10, 0),
+                    Duration = TimeSpan.FromSeconds(PotionStrength * 20),
+                });
                 return true;
             }
 
-            from.SendLocalizedMessage(502173); // You are already under a similar effect.
             return false;
         }
 
@@ -109,6 +112,8 @@ namespace Server.Items
         {
             if (Buff(from))
             {
+                from.FixedEffect(0x3739, 10, 15);
+                from.PlaySound(0x1EB);
                 PlayDrinkEffect(from);
                 Consume();
             }

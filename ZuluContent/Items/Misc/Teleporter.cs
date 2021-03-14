@@ -195,11 +195,11 @@ public Teleporter(Point3D pointDest, Map mapDest, bool creatures)
 				Effects.PlaySound(m.Location, m.Map, m_SoundID);
 		}
 
-		public override bool OnMoveOver(Mobile m)
+		public override bool OnMoveOver(Mobile mobile)
 		{
-			if (m_Active && CanTeleport(m))
+			if (m_Active && CanTeleport(mobile))
 			{
-				StartTeleport(m);
+				StartTeleport(mobile);
 				return false;
 			}
 
@@ -447,7 +447,7 @@ public Teleporter(Serial serial)
 			base.DoTeleport(m);
 		}
 
-		public override bool OnMoveOver(Mobile m)
+		public override bool OnMoveOver(Mobile mobile)
 		{
 			return true;
 		}
@@ -743,14 +743,14 @@ public Teleporter(Serial serial)
 			base.DoTeleport(m);
 		}
 
-		public override bool OnMoveOver(Mobile m)
+		public override bool OnMoveOver(Mobile mobile)
 		{
 			if (Active)
 			{
-				if (!CanTeleport(m))
+				if (!CanTeleport(mobile))
 					return false;
 
-				StartTimer(m);
+				StartTimer(mobile);
 			}
 
 			return true;
@@ -819,10 +819,10 @@ public Teleporter(Serial serial)
 			Hue = 1154;
 		}
 
-		public override bool OnMoveOver(Mobile m)
+		public override bool OnMoveOver(Mobile mobile)
 		{
 			if (m_Teleporter != null)
-				m_Teleporter.StopTimer(m);
+				m_Teleporter.StopTimer(mobile);
 
 			return true;
 		}

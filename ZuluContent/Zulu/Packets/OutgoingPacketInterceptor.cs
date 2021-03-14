@@ -149,7 +149,7 @@ namespace Scripts.Zulu.Packets
                 return;
             }
             
-            var text = ClilocList.Translate(ZhConfig.Messaging.Cliloc, label, args);
+            var text = ClilocList.Translate(label, args);
             
             if (isAffix)
             {

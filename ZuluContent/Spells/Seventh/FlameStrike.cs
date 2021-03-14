@@ -46,7 +46,7 @@ namespace Server.Spells.Seventh
                 m.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
                 m.PlaySound(0x208);
 
-                SpellHelper.Damage(damage, m, Caster, this);
+                SpellHelper.Damage((int) damage, m, Caster, this);
             }
 
             FinishSequence();

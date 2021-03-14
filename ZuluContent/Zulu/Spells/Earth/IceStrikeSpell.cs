@@ -42,7 +42,7 @@ namespace Scripts.Zulu.Spells.Earth
 
             var damage = Caster.Skills[DamageSkill].Value * 0.5;
             //m.Damage( (int)damage, Caster, ElementalType.Water );
-            SpellHelper.Damage(damage, m, Caster, this, TimeSpan.Zero);
+            SpellHelper.Damage((int) damage, m, Caster, this, TimeSpan.Zero);
 
             Caster.DoHarmful(m);
 

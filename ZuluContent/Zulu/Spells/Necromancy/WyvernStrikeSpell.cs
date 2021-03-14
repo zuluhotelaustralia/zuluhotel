@@ -83,7 +83,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             }
 
             //m.Damage((int)dmg, m, ElementalType.Necro);
-            SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
+            SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
             m.ApplyPoison(Caster, Poison.GetPoison(level));
 
             Return:

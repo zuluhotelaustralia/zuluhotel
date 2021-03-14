@@ -68,7 +68,7 @@ namespace Server.Spells.Seventh
 
                         toDeal *= GetDamageScalar(m);
                         Caster.DoHarmful(m);
-                        SpellHelper.Damage(toDeal, m, Caster, this);
+                        SpellHelper.Damage((int) toDeal, m, Caster, this);
 
 
                         m.BoltEffect(0);

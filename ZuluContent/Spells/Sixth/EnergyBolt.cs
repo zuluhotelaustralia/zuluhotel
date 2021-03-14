@@ -50,7 +50,7 @@ namespace Server.Spells.Sixth
                 source.PlaySound(0x20A);
 
                 // Deal the damage
-                SpellHelper.Damage(damage, m, Caster, this);
+                SpellHelper.Damage((int) damage, m, Caster, this);
             }
 
             FinishSequence();

@@ -134,11 +134,11 @@ namespace Server.Items
 				m_Boat.Refresh();
 		}
 
-		public override bool OnMoveOver( Mobile from )
+		public override bool OnMoveOver( Mobile mobile )
 		{
 			if ( IsOpen )
 			{
-				if ( (from.Direction & Direction.Running) != 0 || m_Boat != null && !m_Boat.Contains( @from ) )
+				if ( (mobile.Direction & Direction.Running) != 0 || m_Boat != null && !m_Boat.Contains( mobile ) )
 					return true;
 
 				Map map = Map;
@@ -165,14 +165,14 @@ namespace Server.Items
 
 					for ( int j = -8; j <= 8; ++j )
 					{
-						z = from.Z + j;
+						z = mobile.Z + j;
 
 						if ( map.CanFit( x, y, z, 16, false, false ) && !Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) )
 						{
 							if ( i == 1 && j >= -2 && j <= 2 )
 								return true;
 
-							from.Location = new Point3D( x, y, z );
+							mobile.Location = new Point3D( x, y, z );
 							return false;
 						}
 					}
@@ -184,7 +184,7 @@ namespace Server.Items
 						if ( i == 1 )
 							return true;
 
-						from.Location = new Point3D( x, y, z );
+						mobile.Location = new Point3D( x, y, z );
 						return false;
 					}
 				}

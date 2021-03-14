@@ -12,7 +12,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 {
     public static partial class SingleClickHandler
     {
-        public static TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+        public static readonly TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
 
         public static bool StaffRevealedMagicItems = true;
 

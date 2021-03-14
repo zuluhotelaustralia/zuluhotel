@@ -55,7 +55,7 @@ namespace Scripts.Zulu.Spells.Earth
                 (double) Utility.Dice((uint) (Caster.Skills[DamageSkill].Value / 15.0), 5,
                     0); //caps around 24 damage at 130 skill
             //m.Damage((int)dmg, Caster, ElementalType.Air);
-            SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
+            SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
 
             Return:
             FinishSequence();

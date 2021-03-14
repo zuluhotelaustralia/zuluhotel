@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+
 #pragma warning disable 1998
 
 namespace Server.Spells.First
@@ -13,16 +16,24 @@ namespace Server.Spells.First
             if (!response.HasValue)
                 return;
 
-            var m = response.Target;
+            var target = response.Target;
+
+            if (!Caster.CanBuff(target, BuffIcon.Clumsy))
+                return;
             
-            SpellHelper.Turn(Caster, m);
-            SpellHelper.AddStatCurse(Caster, m, StatType.Dex);
+            target.TryAddBuff(new StatBuff(StatType.Dex)
+            {
+                Value = SpellHelper.GetModAmount(Caster, target, StatType.Dex) * -1,
+                Duration = SpellHelper.GetDuration(Caster, target),
+            });
+            
+            SpellHelper.Turn(Caster, target);
 
-            m.Spell?.OnCasterHurt();
-            m.Paralyzed = false;
+            target.Spell?.OnCasterHurt();
+            target.Paralyzed = false;
 
-            m.FixedParticles(0x3779, 10, 15, 5002, EffectLayer.Head);
-            m.PlaySound(0x1DF);
+            target.FixedParticles(0x3779, 10, 15, 5002, EffectLayer.Head);
+            target.PlaySound(0x1DF);
         }
     }
 }

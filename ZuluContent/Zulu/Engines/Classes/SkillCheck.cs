@@ -73,7 +73,7 @@ namespace Scripts.Zulu.Engines.Classes
                 }
             }
 
-            if (from is PlayerMobile)
+            if (from is Mobile)
             {
                 points = (int) (points * (1.0 - ((chance) / 100.0)));
                 AwardSkillPoints(from, skillName, points);
@@ -125,7 +125,7 @@ namespace Scripts.Zulu.Engines.Classes
                 }
             }
 
-            if (from is PlayerMobile)
+            if (from is Mobile)
             {
                 AwardSkillPoints(from, skillName, points);
             }
@@ -159,21 +159,21 @@ namespace Scripts.Zulu.Engines.Classes
             if (points == 0)
                 return;
 
-            points = (int) (points * GetSkillPointsMultiplier(from as PlayerMobile, skillName));
+            points = (int) (points * GetSkillPointsMultiplier(from as Mobile, skillName));
 
             // TODO: Should we implement global multipliers?
 
-            AwardPoints(from as PlayerMobile, skillName, points);
+            AwardPoints(from as Mobile, skillName, points);
         }
 
-        public static double GetSkillPointsMultiplier(PlayerMobile from, SkillName skillName)
+        public static double GetSkillPointsMultiplier(Mobile from, SkillName skillName)
         {
-            if (from.ZuluClass.IsSkillInClass(skillName))
-                return from.ZuluClass.Bonus;
+            if (from is IZuluClassed {ZuluClass: { }} classed && classed.ZuluClass.IsSkillInClass(skillName))
+                return classed.ZuluClass.Bonus;
             return 1.0;
         }
 
-        public static void AwardPoints(PlayerMobile from, SkillName skillName, int points)
+        public static void AwardPoints(Mobile from, SkillName skillName, int points)
         {
             var config = ZhConfig.Skills.Entries[skillName];
 
@@ -206,7 +206,7 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
-        public static void AwardRawAttributePoints(PlayerMobile from, Skill skill, double rawPoints)
+        public static void AwardRawAttributePoints(Mobile from, Skill skill, double rawPoints)
         {
             if (rawPoints == 0.0)
                 return;
@@ -239,7 +239,7 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
-        public static void AwardRawAttributePoints(PlayerMobile from, StatType stat, double rawPoints)
+        public static void AwardRawAttributePoints(Mobile from, StatType stat, double rawPoints)
         {
             if (rawPoints == 0.0)
                 return;

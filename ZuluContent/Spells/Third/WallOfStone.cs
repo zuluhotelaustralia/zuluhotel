@@ -51,7 +51,6 @@ namespace Server.Spells.Third
                     continue;
 
                 Item item = new MagicStoneWall(loc, Caster, duration, eastToWest);
-
                 Effects.SendLocationParticles(item, 0x376A, 9, 10, 5025);
             }
         }

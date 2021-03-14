@@ -68,7 +68,7 @@ namespace Scripts.Zulu.Spells.Earth
             }
 
             //m.Damage((int)dmg, Caster, ElementalType.Earth);
-            SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
+            SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
 
             SpellHelper.AddStatCurse(Caster, m, StatType.Dex);
             var percentage = (int) (SpellHelper.GetOffsetScalar(Caster, m, true) * 100);

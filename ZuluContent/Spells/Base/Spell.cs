@@ -237,7 +237,7 @@ namespace Server.Spells
         {
             return GetResistPercentForCircle(target, Circle);
         }
-
+        
         public virtual bool CheckResisted(Mobile target)
         {
             var n = GetResistPercent(target);
@@ -283,46 +283,7 @@ namespace Server.Spells
 
             return scalar;
         }
-
-        public virtual double GetSlayerDamageScalar(Mobile defender)
-        {
-            var atkBook = Spellbook.FindEquippedSpellbook(Caster);
-
-            var scalar = 1.0;
-            if (atkBook != null)
-            {
-                var atkSlayer = SlayerGroup.GetEntryByName(atkBook.OldSlayer);
-                var atkSlayer2 = SlayerGroup.GetEntryByName(atkBook.OldSlayer2);
-
-                if (atkSlayer != null && atkSlayer.Slays(defender) || atkSlayer2 != null && atkSlayer2.Slays(defender))
-                {
-                    defender.FixedEffect(0x37B9, 10, 5); //TODO: Confirm this displays on OSIs
-                    scalar = 2.0;
-                }
-
-
-                if (scalar != 1.0)
-                    return scalar;
-            }
-
-            ISlayer defISlayer = Spellbook.FindEquippedSpellbook(defender);
-
-            if (defISlayer == null)
-                defISlayer = defender.Weapon as ISlayer;
-
-            if (defISlayer != null)
-            {
-                var defSlayer = SlayerGroup.GetEntryByName(defISlayer.OldSlayer);
-                var defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.OldSlayer2);
-
-                if (defSlayer != null && defSlayer.Group.OppositionSuperSlays(Caster) ||
-                    defSlayer2 != null && defSlayer2.Group.OppositionSuperSlays(Caster))
-                    scalar = 2.0;
-            }
-
-            return scalar;
-        }
-
+        
         public virtual void DoFizzle()
         {
             Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502632); // The spell fizzles.
@@ -335,11 +296,6 @@ namespace Server.Spells
             }
         }
 
-        public void Disturb(DisturbType type)
-        {
-            Disturb(type, true, false);
-        }
-
         public virtual bool CheckDisturb(DisturbType type, bool firstCircle, bool resistable)
         {
             if (resistable && IsWand())
@@ -348,15 +304,14 @@ namespace Server.Spells
             return true;
         }
 
-        public void Disturb(DisturbType type, bool firstCircle, bool resistable)
+        public void Disturb(DisturbType type, bool firstCircle = true, bool resistable = false)
         {
             if (!CheckDisturb(type, firstCircle, resistable))
                 return;
 
             switch (State)
             {
-                case SpellState.Casting 
-                    when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
+                case SpellState.Casting when !firstCircle && this is MagerySpell {Circle: SpellCircle.First}:
                     return;
                 case SpellState.Casting:
                 {
@@ -372,8 +327,7 @@ namespace Server.Spells
                     Caster.NextSpellTime = Core.TickCount + (int) GetDisturbRecovery().TotalMilliseconds;
                     break;
                 }
-                case SpellState.Sequencing 
-                    when !firstCircle && this is MagerySpell && ((MagerySpell) this).Circle == SpellCircle.First:
+                case SpellState.Sequencing when !firstCircle && this is MagerySpell {Circle: SpellCircle.First}:
                     return;
                 case SpellState.Sequencing:
                     State = SpellState.None;

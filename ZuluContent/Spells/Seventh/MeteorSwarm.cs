@@ -73,7 +73,7 @@ namespace Server.Spells.Seventh
 
                         toDeal *= GetDamageScalar(m);
                         Caster.DoHarmful(m);
-                        SpellHelper.Damage(toDeal, m, Caster, this);
+                        SpellHelper.Damage((int) toDeal, m, Caster, this);
 
                         Caster.MovingParticles(m, 0x36D4, 7, 0, false, true, 9501, 1, 0, 0x100);
                     }

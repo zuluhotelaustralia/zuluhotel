@@ -79,7 +79,7 @@ namespace Scripts.Zulu.Spells.Necromancy
                 }
 
                 //m.Damage((int)damage, Caster, m_DamageType);
-                SpellHelper.Damage(damage, m, Caster, this, TimeSpan.Zero);
+                SpellHelper.Damage((int) damage, m, Caster, this, TimeSpan.Zero);
             }
 
             Return:

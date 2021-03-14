@@ -1,6 +1,7 @@
 using System;
 using Server.Spells;
 using Server.Spells.Seventh;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Items
 {
@@ -89,19 +90,20 @@ namespace Server.Items
             var idx = Utility.Random(entries.Length);
             var body = entries[idx].BodyID;
 
-            var mod = (int) PotionStrength * 5 + idx;
             var duration = TimeSpan.FromSeconds(PotionStrength * 120);
 
-            if (PolymorphSpell.Buff(from, body, duration))
+            if (from.CanBuff(from, BuffIcon.Bless) && PolymorphSpell.Buff(from, body, duration))
             {
-                SpellHelper.AddStatBonus(from, from, StatType.Str, mod, duration);
-                SpellHelper.AddStatBonus(from, from, StatType.Int, mod, duration);
-                SpellHelper.AddStatBonus(from, from, StatType.Dex, mod, duration);
-                
+                from.TryAddBuff(new StatBuff(StatType.All)
+                {
+                    Title = DefaultName,
+                    Details = new []{ $"Potion Strength: {PotionStrength}"},
+                    Value = (int) PotionStrength * 5 + idx,
+                    Duration = duration,
+                });
                 return true;
             }
 
-            from.SendLocalizedMessage(502173); // You are already under a similar effect.
             return true;
         }
 

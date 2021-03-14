@@ -1,96 +1,48 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Fourth
 {
-    public class ManaDrainSpell : MagerySpell
+    public class ManaDrainSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        private static readonly Dictionary<Mobile, Timer> m_Table = new Dictionary<Mobile, Timer>();
-
-        public ManaDrainSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ManaDrainSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
+            target.Spell?.OnCasterHurt();
+            target.Paralyzed = false;
+            
+            var magery = Caster.Skills[SkillName.Magery].Value;
+            var resist = target.Skills[SkillName.MagicResist].Value;
 
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref magery));
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        private void AosDelay_Callback(object state)
-        {
-            var states = (object[]) state;
-
-            var m = (Mobile) states[0];
-            var mana = (int) states[1];
-
-            if (m.Alive)
+            string message;
+            if (resist >= magery + 5)
+                message = $"{target.Name}'s will is too strong!";
+            else
             {
-                m.Mana += mana;
-
-                m.FixedEffect(0x3779, 10, 25);
-                m.PlaySound(0x28E);
+                var amount = SpellHelper.GetDamageAfterResist(Caster, target, magery);
+                var mana = target.Mana - amount;
+                target.Mana = mana > 0 ? mana : 0;
+                
+                message = $"You expelled {amount} mana out of {target.Name}'s aura!";
             }
 
-            m_Table.Remove(m);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
-            {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (CheckHarmfulSequence(m))
-            {
-                SpellHelper.Turn(Caster, m);
-
-                SpellHelper.CheckReflect((int) Circle, Caster, ref m);
-
-                if (m.Spell != null)
-                    m.Spell.OnCasterHurt();
-
-                m.Paralyzed = false;
-
-                if (CheckResisted(m))
-                    m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                else if (m.Mana >= 100)
-                    m.Mana -= Utility.Random(1, 100);
-                else
-                    m.Mana -= Utility.Random(1, m.Mana);
-
-                m.FixedParticles(0x374A, 10, 15, 5032, EffectLayer.Head);
-                m.PlaySound(0x1F8);
-
-            }
-
-            FinishSequence();
-        }
-
-        public override double GetResistPercent(Mobile target)
-        {
-            return 99.0;
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly ManaDrainSpell m_Owner;
-
-            public InternalTarget(ManaDrainSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            target.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, message, Caster.NetState);
+            
+            target.FixedParticles(0x374A, 10, 15, 5032, EffectLayer.Head);
+            target.PlaySound(0x1F8);
         }
     }
 }
