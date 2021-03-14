@@ -21,7 +21,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
         {
-            get { return m_Resource; }
+            get => m_Resource;
             set
             {
                 if (m_Resource != value)
@@ -59,8 +59,6 @@ namespace Server.Items
             writer.Write((int) m_Resource);
 
             ICraftable.Serialize(writer, this);
-
-            writer.WriteEncodedInt((int) Mark);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -73,8 +71,6 @@ namespace Server.Items
             {
                 case 2:
                     ICraftable.Deserialize(reader, this);
-
-                    Mark = (MarkQuality) reader.ReadEncodedInt();
 
                     goto case 1;
                 case 1:

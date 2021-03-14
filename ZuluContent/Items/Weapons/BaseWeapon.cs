@@ -44,6 +44,7 @@ namespace Server.Items
         private int m_Hits;
 
         // private SkillMod m_SkillMod, m_MageMod;
+        private MarkQuality m_Mark;
         private CraftResource m_Resource;
 
         // Overridable values. These values are provided to override the defaults which get defined in the individual weapon scripts.
@@ -177,11 +178,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            get => m_Mark;
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((ItemMark e) => e.Value = (int) value);
+                m_Mark = value;
                 ScaleDurability();
             }
         }

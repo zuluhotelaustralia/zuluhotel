@@ -2,10 +2,7 @@ namespace Server.Items
 {
     public class AltarAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed
-        {
-            get { return new AltarDeed(); }
-        }
+        public override BaseAddonDeed Deed => new AltarDeed();
 
 
         [Constructible]
@@ -44,15 +41,9 @@ namespace Server.Items
 
     public class AltarDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon
-        {
-            get { return new AltarAddon(); }
-        }
+        public override BaseAddon Addon => new AltarAddon();
 
-        public override int LabelNumber
-        {
-            get { return 1044329; }
-        } // Altar
+        public override int LabelNumber => 1044329; // Altar
 
 
         public AltarDeed()

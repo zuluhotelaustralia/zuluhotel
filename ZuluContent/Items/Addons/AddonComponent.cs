@@ -67,14 +67,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int Number
         {
-            get { return m_LabelNumber; }
-            set { m_LabelNumber = value; }
+            get => m_LabelNumber;
+            set => m_LabelNumber = value;
         }
 
-        public override int LabelNumber
-        {
-            get { return m_LabelNumber; }
-        }
+        public override int LabelNumber => m_LabelNumber;
 
 
         public LocalizedAddonComponent(int itemID, int labelNumber) : base(itemID)
@@ -122,7 +119,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
         {
-            get { return m_Resource; }
+            get => m_Resource;
             set
             {
                 if (m_Resource != value)
@@ -214,8 +211,6 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            writer.WriteEncodedInt((int) Mark);
-
             writer.WriteEncodedInt((int) m_Resource);
 
             writer.Write(Addon);
@@ -232,8 +227,6 @@ namespace Server.Items
             {
                 case 2:
                     ICraftable.Deserialize(reader, this);
-
-                    Mark = (MarkQuality) reader.ReadEncodedInt();
 
                     m_Resource = (CraftResource) reader.ReadEncodedInt();
 

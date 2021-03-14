@@ -147,8 +147,6 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            writer.WriteEncodedInt((int) Mark);
-
             writer.WriteEncodedInt((int) m_Resource);
         }
 
@@ -159,8 +157,6 @@ namespace Server.Items
             int version = reader.ReadInt();
 
             ICraftable.Deserialize(reader, this);
-
-            Mark = (MarkQuality) reader.ReadEncodedInt();
 
             m_Resource = (CraftResource) reader.ReadEncodedInt();
         }

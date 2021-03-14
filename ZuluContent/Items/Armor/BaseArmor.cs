@@ -37,6 +37,7 @@ namespace Server.Items
         // Instance values. These values must are unique to each armor piece.
         private int m_HitPoints;
         private Mobile m_Crafter;
+        private MarkQuality m_Mark;
         private CraftResource m_Resource;
 
         // Overridable values. These values are provided to override the defaults which get defined in the individual armor scripts.
@@ -247,11 +248,11 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
+            get => m_Mark;
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((ItemMark e) => e.Value = (int) value);
+                m_Mark = value;
                 Invalidate();
                 ScaleDurability();
             }

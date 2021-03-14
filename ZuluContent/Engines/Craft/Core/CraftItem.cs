@@ -30,6 +30,7 @@ namespace Server.Engines.Craft
         public static void Serialize(IGenericWriter writer, ICraftable item)
         {
             writer.Write(Version);
+            writer.WriteEncodedInt((int) item.Mark);
             writer.Write(item.PlayerConstructed);
 
             writer.Write(item.Crafter != null);
@@ -42,6 +43,9 @@ namespace Server.Engines.Craft
         public static void Deserialize(IGenericReader reader, ICraftable item)
         {
             var version = reader.ReadInt();
+
+            item.Mark = (MarkQuality) reader.ReadEncodedInt();
+
             item.PlayerConstructed = reader.ReadBool();
 
             if (reader.ReadBool())

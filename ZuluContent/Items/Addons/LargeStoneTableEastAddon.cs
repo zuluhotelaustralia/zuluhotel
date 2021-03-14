@@ -2,10 +2,7 @@ namespace Server.Items
 {
     public class LargeStoneTableEastAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed
-        {
-            get { return new LargeStoneTableEastDeed(); }
-        }
+        public override BaseAddonDeed Deed => new LargeStoneTableEastDeed();
 
 
         [Constructible]
@@ -45,15 +42,9 @@ namespace Server.Items
 
     public class LargeStoneTableEastDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon
-        {
-            get { return new LargeStoneTableEastAddon(Hue); }
-        }
+        public override BaseAddon Addon => new LargeStoneTableEastAddon(Hue);
 
-        public override int LabelNumber
-        {
-            get { return 1044511; }
-        } // large stone table (east)
+        public override int LabelNumber => 1044511; // large stone table (east)
 
 
         public LargeStoneTableEastDeed()

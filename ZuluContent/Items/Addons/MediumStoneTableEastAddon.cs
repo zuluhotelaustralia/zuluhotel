@@ -2,10 +2,7 @@ namespace Server.Items
 {
     public class MediumStoneTableEastAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed
-        {
-            get { return new MediumStoneTableEastDeed(); }
-        }
+        public override BaseAddonDeed Deed => new MediumStoneTableEastDeed();
 
 
         [Constructible]
@@ -44,15 +41,9 @@ namespace Server.Items
 
     public class MediumStoneTableEastDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon
-        {
-            get { return new MediumStoneTableEastAddon(Hue); }
-        }
+        public override BaseAddon Addon => new MediumStoneTableEastAddon(Hue);
 
-        public override int LabelNumber
-        {
-            get { return 1044508; }
-        } // stone table (east)
+        public override int LabelNumber => 1044508; // stone table (east)
 
 
         public MediumStoneTableEastDeed()

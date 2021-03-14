@@ -15,24 +15,14 @@ namespace Server.Items
         public abstract BaseAddon Addon { get; }
 
         private CraftResource m_Resource;
-        private EnchantmentDictionary m_Enchantments;
-
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public MarkQuality Mark
-        {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
-            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
-        }
+        public MarkQuality Mark { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
         {
-            get { return m_Resource; }
+            get => m_Resource;
             set
             {
                 if (m_Resource != value)
@@ -70,8 +60,6 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            Enchantments.Serialize(writer);
-
             writer.WriteEncodedInt((int) m_Resource);
         }
 
@@ -84,8 +72,6 @@ namespace Server.Items
             if (version == 1)
             {
                 ICraftable.Deserialize(reader, this);
-
-                m_Enchantments = EnchantmentDictionary.Deserialize(reader);
 
                 m_Resource = (CraftResource) reader.ReadEncodedInt();
             }

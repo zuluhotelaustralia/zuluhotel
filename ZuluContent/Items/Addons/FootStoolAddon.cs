@@ -1,19 +1,18 @@
 namespace Server.Items
 {
-    public class SandstoneFireplaceEastAddon : BaseAddon
+    public class FootStoolAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed => new SandstoneFireplaceEastDeed();
+        public override BaseAddonDeed Deed => new FootStoolDeed();
 
 
         [Constructible]
-        public SandstoneFireplaceEastAddon()
+        public FootStoolAddon()
         {
-            AddComponent(new AddonComponent(0x489), 0, 0, 0);
-            AddComponent(new AddonComponent(0x475), 0, 1, 0);
+            AddComponent(new AddonComponent(0xB5E), 0, 0, 0);
         }
 
         [Constructible]
-        public SandstoneFireplaceEastAddon(Serial serial) : base(serial)
+        public FootStoolAddon(Serial serial) : base(serial)
         {
         }
 
@@ -32,17 +31,18 @@ namespace Server.Items
         }
     }
 
-    public class SandstoneFireplaceEastDeed : BaseAddonDeed
+    public class FootStoolDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon => new SandstoneFireplaceEastAddon();
-        public override int LabelNumber => 1061844; // sandstone fireplace (east)
+        public override BaseAddon Addon => new FootStoolAddon();
+
+        public override int LabelNumber => 1022910; // foot stool
 
 
-        public SandstoneFireplaceEastDeed()
+        public FootStoolDeed()
         {
         }
 
-        public SandstoneFireplaceEastDeed(Serial serial) : base(serial)
+        public FootStoolDeed(Serial serial) : base(serial)
         {
         }
 

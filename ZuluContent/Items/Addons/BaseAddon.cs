@@ -76,17 +76,14 @@ namespace Server.Items
 
                 house.Addons.Remove(this);
 
-                BaseAddonDeed deed = Deed;
+                var deed = Deed;
 
                 if (deed != null)
                 {
-                    if (deed is BaseAddonDeed addonDeed)
-                    {
-                        addonDeed.Mark = m_Components[0].Mark;
-                        addonDeed.Resource = m_Components[0].Resource;
-                        addonDeed.PlayerConstructed = m_Components[0].PlayerConstructed;
-                        addonDeed.Crafter = m_Components[0].Crafter;
-                    }
+                    deed.Mark = m_Components[0].Mark;
+                    deed.Resource = m_Components[0].Resource;
+                    deed.PlayerConstructed = m_Components[0].PlayerConstructed;
+                    deed.Crafter = m_Components[0].Crafter;
 
                     from.AddToBackpack(deed);
                 }

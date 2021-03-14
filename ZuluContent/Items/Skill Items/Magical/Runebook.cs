@@ -147,8 +147,6 @@ namespace Server.Items
 
             ICraftable.Serialize(writer, this);
 
-            writer.WriteEncodedInt((int) Mark);
-
             writer.Write((int) m_Level);
 
             writer.Write(m_Entries.Count);
@@ -175,8 +173,6 @@ namespace Server.Items
                 case 2:
                 {
                     ICraftable.Deserialize(reader, this);
-
-                    Mark = (MarkQuality) reader.ReadEncodedInt();
 
                     goto case 1;
                 }

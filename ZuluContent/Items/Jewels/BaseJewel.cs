@@ -106,11 +106,7 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public MarkQuality Mark
-        {
-            get => Enchantments.Get((ItemMark e) => (MarkQuality) e.Value);
-            set { Enchantments.Set((ItemMark e) => e.Value = (int) value); }
-        }
+        public MarkQuality Mark { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public GemType GemType { get; set; }
