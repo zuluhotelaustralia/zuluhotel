@@ -43,12 +43,12 @@ namespace Server.Spells
                     if (!CheckHarmfulSequence(mobile))
                         return;
                     
-                    if (Info.Reflectable)
+                    if (Info.Reflectable && Caster is T c)
                     {
                         var reflected = false;
                         mobile.FireHook(h => h.OnCheckMagicReflection(mobile, this as Spell, ref reflected));
 
-                        if (reflected && Caster is T c)
+                        if (reflected)
                         {
                             response = new TargetResponse<T>
                             {

@@ -31,12 +31,11 @@ namespace Server.Spells.First
 
         public async Task OnSpellReflected(Mobile target)
         {
-            Caster.MovingParticles(target, 0x36E4, 7, 0, false, false, 3006, 0, 0);
-            Caster.PlaySound(0x1E5);
+            Caster.MovingParticles(target, 0x36E4, 5, 0, false, false, 3006, 0, 0);
 
             await Timer.Pause(500);
             
-            target.MovingParticles(Caster, 0x36E4, 7, 0, false, false, 3006, 0, 0);
+            target.MovingParticles(Caster, 0x36E4, 5, 0, false, false, 3006, 0, 0);
         }
     }
 }

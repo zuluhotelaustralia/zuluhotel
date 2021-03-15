@@ -10,17 +10,15 @@ namespace Server.Spells.Fifth
 
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, BuffIcon.MagicReflection))
+            if (!Caster.CanBuff(Caster, BuffIcon.MagicReflection, false))
             {
-                Caster.SendLocalizedMessage(1005559);
+                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
                 return;
             }
 
             Caster.TryAddBuff(new MagicReflection());
             
-            // Caster.FixedParticles(0x375A, 10, 15, 5037, EffectLayer.Waist);
-            // Caster.PlaySound(0x1E9);
-            Caster.FixedEffect(0x374B, 10, 10);
+            Caster.FixedParticles(0x374B, 10, 10, 5037, EffectLayer.Waist);
             Caster.PlaySound(0x1E7);
         }
     }
