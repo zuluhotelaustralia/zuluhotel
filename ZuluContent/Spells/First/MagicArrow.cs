@@ -20,15 +20,23 @@ namespace Server.Spells.First
             
             var mobile = response.Target;
             
-            var source = Caster;
-
-            SpellHelper.Turn(source, mobile);
+            SpellHelper.Turn(Caster, mobile);
             
-            source.MovingParticles(mobile, 0x36E4, 5, 0, false, false, 3006, 0, 0);
-            source.PlaySound(0x1E5);
+            Caster.MovingParticles(mobile, 0x36E4, 5, 0, false, false, 3006, 0, 0);
+            Caster.PlaySound(0x1E5);
 
             var damage = SpellHelper.CalcSpellDamage(Caster, mobile, this);
             SpellHelper.Damage(damage, mobile, Caster, this, null, ElementalType.Earth);
+        }
+
+        public async Task OnSpellReflected(Mobile target)
+        {
+            Caster.MovingParticles(target, 0x36E4, 7, 0, false, false, 3006, 0, 0);
+            Caster.PlaySound(0x1E5);
+
+            await Timer.Pause(500);
+            
+            target.MovingParticles(Caster, 0x36E4, 7, 0, false, false, 3006, 0, 0);
         }
     }
 }

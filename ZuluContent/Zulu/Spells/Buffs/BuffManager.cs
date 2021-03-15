@@ -115,8 +115,10 @@ namespace Server.Spells
 
         private void ExpireBuffs()
         {
-            foreach (var buff in m_BuffTable.Values.Where(b => b.Start + b.Duration < DateTime.UtcNow))
-                RemoveBuff(buff);
+            m_BuffTable.Values
+                .Where(b => b.Start != DateTime.MinValue && b.Start + b.Duration < DateTime.UtcNow)
+                .ToList()
+                .ForEach(b => RemoveBuff(b));
         }
 
         public void ResendBuff(IBuff buff)

@@ -314,6 +314,10 @@ namespace Scripts.Zulu.Engines.Classes
 
         #region Class bonus hooks
 
+        public void OnCheckMagicReflection(Mobile target, Spell spell, ref bool reflected)
+        {
+        }
+
         public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
         {
         }

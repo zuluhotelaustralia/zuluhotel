@@ -1,70 +1,27 @@
 using System.Collections;
+using System.Threading.Tasks;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Spells.Fifth
 {
-    public class MagicReflectSpell : MagerySpell
+    public class MagicReflectSpell : MagerySpell, IAsyncSpell
     {
-        private static readonly Hashtable m_Table = new Hashtable();
+        public MagicReflectSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        public MagicReflectSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public async Task CastAsync()
         {
-        }
+            if (!Caster.CanBuff(Caster, BuffIcon.MagicReflection))
+            {
+                Caster.SendLocalizedMessage(1005559);
+                return;
+            }
 
-
-        public override bool CanCast()
-        {
-            if (!base.CanCast())
-                return false;
+            Caster.TryAddBuff(new MagicReflection());
             
-            if (Caster.MagicDamageAbsorb > 0)
-            {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-                return false;
-            }
-
-            if (!Caster.CanBeginAction(typeof(DefensiveSpell)))
-            {
-                Caster.SendLocalizedMessage(1005385); // The spell will not adhere to you at this time.
-                return false;
-            }
-
-            return true;
-        }
-
-        public override void OnCast()
-        {
-            if (Caster.MagicDamageAbsorb > 0)
-            {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-            }
-            else if (!Caster.CanBeginAction(typeof(DefensiveSpell)))
-            {
-                Caster.SendLocalizedMessage(1005385); // The spell will not adhere to you at this time.
-            }
-            else if (CheckSequence())
-            {
-                if (Caster.BeginAction(typeof(DefensiveSpell)))
-                {
-                    var value = (int) (Caster.Skills[SkillName.Magery].Value + Caster.Skills[SkillName.Inscribe].Value);
-                    value = (int) (8 + value / 200 * 7.0); //absorb from 8 to 15 "circles"
-
-                    Caster.MagicDamageAbsorb = value;
-
-                    Caster.FixedParticles(0x375A, 10, 15, 5037, EffectLayer.Waist);
-                    Caster.PlaySound(0x1E9);
-                }
-                else
-                {
-                    Caster.SendLocalizedMessage(1005385); // The spell will not adhere to you at this time.
-                }
-            }
-
-            FinishSequence();
-        }
-
-        public static void EndReflect(Mobile m)
-        {
-            if (m_Table.Contains(m)) m_Table.Remove(m);
+            // Caster.FixedParticles(0x375A, 10, 15, 5037, EffectLayer.Waist);
+            // Caster.PlaySound(0x1E9);
+            Caster.FixedEffect(0x374B, 10, 10);
+            Caster.PlaySound(0x1E7);
         }
     }
 }

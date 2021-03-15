@@ -18,6 +18,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnBeforeRemoved(IEntity entity, Mobile from, ref bool canRemove);
 
+        public void OnCheckMagicReflection(Mobile parent, Spell spell, ref bool reflected);
+
         public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area);
 
         public void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
