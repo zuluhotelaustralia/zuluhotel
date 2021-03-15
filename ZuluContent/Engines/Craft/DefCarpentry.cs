@@ -86,25 +86,32 @@ namespace Server.Engines.Craft
 
             // Chairs
             AddCraft(typeof(FootStoolDeed), 1015076, 1022910, 28.0, 28.0, typeof(Log), 1044041, 10, 1044351);
-            AddCraft(typeof(Stool), 1015076, 1022602, 68.0, 68.0, typeof(Log), 1044041, 21, 1044351);
-            AddCraft(typeof(WoodenThrone), 1015076, 1044304, 15.0, 15.0, typeof(Log), 1044041, 12, 1044351);
-            AddCraft(typeof(Throne), 1015076, 1044305, 84.0, 84.0, typeof(Log), 1044041, 19, 1044351);
-            AddCraft(typeof(FancyWoodenChairCushion), 1015076, 1044302, 52.0, 52.0, typeof(Log), 1044041, 15, 1044351);
-            AddCraft(typeof(WoodenChairCushion), 1015076, 1044303, 52.0, 52.0, typeof(Log), 1044041, 15, 1044351);
-            AddCraft(typeof(WoodenChair), 1015076, 1044301, 31.0, 31.0, typeof(Log), 1044041, 13, 1044351);
-            AddCraft(typeof(BambooChair), 1015076, 1044300, 31.0, 31.0, typeof(Log), 1044041, 13, 1044351);
-            AddCraft(typeof(WoodenBench), 1015076, 1022860, 10.0, 10.0, typeof(Log), 1044041, 10, 1044351);
-            AddCraft(typeof(WoodenBench), 1015076, 1024169, 10.0, 10.0, typeof(Log), 1044041, 10,
-                1044351); // loom bench
-            AddCraft(typeof(WoodenBench), 1015076, 1022860, 63.0, 63.0, typeof(Log), 1044041, 17, 1044351); // bench 1
-            AddCraft(typeof(WoodenBench), 1015076, 1022860, 83.0, 83.0, typeof(Log), 1044041, 25, 1044351); // bench 2
-            AddCraft(typeof(WoodenBench), 1015076, 1022860, 95.0, 95.0, typeof(Log), 1044041, 35, 1044351); // bench 3
-            index = AddCraft(typeof(WoodenBench), 1015076, 1024620, 50.0, 50.0, typeof(Log), 1044041, 15,
-                1044351); // stone bench
+            AddCraft(typeof(StoolDeed), 1015076, 1022602, 68.0, 68.0, typeof(Log), 1044041, 21, 1044351);
+            AddCraft(typeof(WoodenThroneDeed), 1015076, 1044304, 15.0, 15.0, typeof(Log), 1044041, 12, 1044351);
+            AddCraft(typeof(ThroneDeed), 1015076, 1044305, 84.0, 84.0, typeof(Log), 1044041, 19, 1044351);
+            AddCraft(typeof(FancyWoodenChairCushionDeed), 1015076, 1044302, 52.0, 52.0, typeof(Log), 1044041, 15, 1044351);
+            AddCraft(typeof(WoodenChairCushionDeed), 1015076, 1044303, 52.0, 52.0, typeof(Log), 1044041, 15, 1044351);
+            AddCraft(typeof(WoodenChairDeed), 1015076, 1044301, 31.0, 31.0, typeof(Log), 1044041, 13, 1044351);
+            AddCraft(typeof(BambooChairDeed), 1015076, 1044300, 31.0, 31.0, typeof(Log), 1044041, 13, 1044351);
+            AddCraft(typeof(WoodenBenchDeed), 1015076, 1022860, 10.0, 10.0, typeof(Log), 1044041, 10, 1044351);
+            AddCraft(typeof(LoomBenchDeed), 1015076, 1024169, 10.0, 10.0, typeof(Log), 1044041, 10,
+                1044351);
+            AddCraft(typeof(WoodenBench2EastDeed), 1015076, "long wooden bench (east)", 63.0, 63.0, typeof(Log), 1044041, 17, 1044351);
+            AddCraft(typeof(WoodenBench2SouthDeed), 1015076, "long wooden bench (south)", 63.0, 63.0, typeof(Log), 1044041, 17, 1044351);
+            AddCraft(typeof(WoodenBench3EastDeed), 1015076, "long wooden bench 2 (east)", 83.0, 83.0, typeof(Log), 1044041, 25, 1044351);
+            AddCraft(typeof(WoodenBench3SouthDeed), 1015076, "long wooden bench 2 (south)", 83.0, 83.0, typeof(Log), 1044041, 25, 1044351);
+            AddCraft(typeof(WoodenBench4EastDeed), 1015076, "wooden booth (east)", 95.0, 95.0, typeof(Log), 1044041, 35, 1044351);
+            AddCraft(typeof(WoodenBench4SouthDeed), 1015076, "wooden booth (south)", 95.0, 95.0, typeof(Log), 1044041, 35, 1044351);
+            index = AddCraft(typeof(StoneBenchEastDeed), 1015076, "stone bench (east)", 50.0, 50.0, typeof(Log), 1044041, 15,
+                1044351);
             AddSkill(index, SkillName.Tinkering, 85.0, 85.0);
             AddRes(index, typeof(IronIngot), 1044036, 70, 1044037);
-            index = AddCraft(typeof(WoodenBench), 1015076, 1024635, 40.0, 40.0, typeof(Log), 1044041, 10,
-                1044351); // stone chair
+            index = AddCraft(typeof(StoneBenchSouthDeed), 1015076, "stone bench (south)", 50.0, 50.0, typeof(Log), 1044041, 15,
+                1044351);
+            AddSkill(index, SkillName.Tinkering, 85.0, 85.0);
+            AddRes(index, typeof(IronIngot), 1044036, 70, 1044037);
+            index = AddCraft(typeof(StoneChairDeed), 1015076, 1024635, 40.0, 40.0, typeof(Log), 1044041, 10,
+                1044351);
             AddSkill(index, SkillName.Tinkering, 85.0, 85.0);
             AddRes(index, typeof(IronIngot), 1044036, 70, 1044037);
 
@@ -255,7 +262,7 @@ namespace Server.Engines.Craft
             AddSkill(index, SkillName.Tinkering, 60.0, 60.0);
             AddRes(index, typeof(IronIngot), 1044036, 125, 1044037);
             index = AddCraft(typeof(WaterVatEast), 1044294, 1025460, 80.0, 80.0, typeof(Log), 1044041, 75,
-                1044351); //  vat
+                1044351);
             AddSkill(index, SkillName.Tinkering, 50.0, 50.0);
             AddRes(index, typeof(IronIngot), 1044036, 15, 1044037);
 

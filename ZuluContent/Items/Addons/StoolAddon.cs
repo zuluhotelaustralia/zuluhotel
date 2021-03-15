@@ -1,19 +1,19 @@
 namespace Server.Items
 {
     [Furniture]
-    public class FootStoolAddon : BaseAddon
+    public class StoolAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed => new FootStoolDeed();
+        public override BaseAddonDeed Deed => new StoolDeed();
 
 
         [Constructible]
-        public FootStoolAddon()
+        public StoolAddon()
         {
-            AddComponent(new AddonComponent(0xB5E), 0, 0, 0);
+            AddComponent(new AddonComponent(0xA2A), 0, 0, 0);
         }
 
         [Constructible]
-        public FootStoolAddon(Serial serial) : base(serial)
+        public StoolAddon(Serial serial) : base(serial)
         {
         }
 
@@ -32,18 +32,18 @@ namespace Server.Items
         }
     }
 
-    public class FootStoolDeed : BaseAddonDeed
+    public class StoolDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon => new FootStoolAddon();
+        public override BaseAddon Addon => new StoolAddon();
 
-        public override int LabelNumber => 1022910; // foot stool
+        public override int LabelNumber => 1022602; // stool
 
 
-        public FootStoolDeed()
+        public StoolDeed()
         {
         }
 
-        public FootStoolDeed(Serial serial) : base(serial)
+        public StoolDeed(Serial serial) : base(serial)
         {
         }
 
