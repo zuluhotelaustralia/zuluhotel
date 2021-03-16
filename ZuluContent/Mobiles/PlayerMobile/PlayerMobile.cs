@@ -828,7 +828,7 @@ namespace Server.Mobiles
 
         #region [Zulu] Resistances
 
-        public EnchantmentDictionary Enchantments { get; } = new();
+        public EnchantmentDictionary Enchantments { get; private set; } = new();
 
 
         public int GetResistance(ElementalType type)
@@ -1201,10 +1201,7 @@ namespace Server.Mobiles
             HueMod = -1;
             NameMod = null;
 
-            SetHairMods(-1, -1);
-
             PolymorphSpell.StopTimer(this);
-            IncognitoSpell.StopTimer(this);
             DisguiseTimers.RemoveTimer(this);
 
             EndAction(typeof(PolymorphSpell));
@@ -1378,11 +1375,6 @@ namespace Server.Mobiles
             }
         }
 
-        private void RevertHair()
-        {
-            SetHairMods(-1, -1);
-        }
-
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
@@ -1390,6 +1382,13 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 29:
+                {
+                    Enchantments = EnchantmentDictionary.Deserialize(reader);
+                    foreach (var buff in Enchantments.Values.Values.OfType<IBuff>()) 
+                        BuffManager.TryAddBuff(buff);
+                    goto case 28;
+                }
                 case 28:
                 {
                     m_PeacedUntil = reader.ReadDateTime();
@@ -1442,10 +1441,10 @@ namespace Server.Mobiles
                 {
                     if (reader.ReadBool())
                     {
-                        m_HairModID = reader.ReadInt();
-                        m_HairModHue = reader.ReadInt();
-                        m_BeardModID = reader.ReadInt();
-                        m_BeardModHue = reader.ReadInt();
+                        HairItemIdReal = reader.ReadInt();
+                        HairHueReal = reader.ReadInt();
+                        FacialHairItemIdReal = reader.ReadInt();
+                        FacialHairHueReal = reader.ReadInt();
                     }
 
                     goto case 9;
@@ -1541,7 +1540,9 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 28); // version
+            writer.Write((int) 29); // version
+            
+            Enchantments.Serialize(writer);
 
             writer.Write((DateTime) m_PeacedUntil);
             writer.Write((DateTime) m_AnkhNextUse);
@@ -1554,16 +1555,16 @@ namespace Server.Mobiles
 
             writer.WriteEncodedInt(m_Profession);
 
-            bool useMods = m_HairModID != -1 || m_BeardModID != -1;
+            bool useMods = HairItemIdReal != -1 || FacialHairItemIdReal != -1;
 
             writer.Write(useMods);
 
             if (useMods)
             {
-                writer.Write((int) m_HairModID);
-                writer.Write((int) m_HairModHue);
-                writer.Write((int) m_BeardModID);
-                writer.Write((int) m_BeardModHue);
+                writer.Write((int) HairItemIdReal);
+                writer.Write((int) HairHueReal);
+                writer.Write((int) FacialHairItemIdReal);
+                writer.Write((int) FacialHairHueReal);
             }
 
             writer.Write((int) m_NpcGuild);
@@ -1762,65 +1763,73 @@ namespace Server.Mobiles
 
         #region Hair and beard mods
 
-        private int m_HairModID = -1, m_HairModHue;
-        private int m_BeardModID = -1, m_BeardModHue;
-
-        public void SetHairMods(int hairID, int beardID)
+        public void SetHairMods(int? hairId = null, int? hairHue = null, int? facialId = null, int? facialHue = null)
         {
-            if (hairID == -1)
-                InternalRestoreHair(true, ref m_HairModID, ref m_HairModHue);
-            else if (hairID != -2)
-                InternalChangeHair(true, hairID, ref m_HairModID, ref m_HairModHue);
-
-            if (beardID == -1)
-                InternalRestoreHair(false, ref m_BeardModID, ref m_BeardModHue);
-            else if (beardID != -2)
-                InternalChangeHair(false, beardID, ref m_BeardModID, ref m_BeardModHue);
-        }
-
-        private void CreateHair(bool hair, int id, int hue)
-        {
-            if (hair)
+            if (hairId.HasValue)
             {
-                //TODO Verification?
-                HairItemID = id;
-                HairHue = hue;
+                if(HairItemIdReal == -1)
+                    HairItemIdReal = HairItemID;
+
+                HairItemID = hairId.Value;
             }
-            else
+            
+            if (hairHue.HasValue)
             {
-                FacialHairItemID = id;
-                FacialHairHue = hue;
+                if(HairHueReal == -1)
+                    HairHueReal = HairHue;
+                
+                HairHue = hairHue.Value;
             }
-        }
-
-        private void InternalRestoreHair(bool hair, ref int id, ref int hue)
-        {
-            if (id == -1)
-                return;
-
-            if (hair)
-                HairItemID = 0;
-            else
-                FacialHairItemID = 0;
-
-            //if( id != 0 )
-            CreateHair(hair, id, hue);
-
-            id = -1;
-            hue = 0;
-        }
-
-        private void InternalChangeHair(bool hair, int id, ref int storeID, ref int storeHue)
-        {
-            if (storeID == -1)
+            
+            if (facialId.HasValue)
             {
-                storeID = hair ? HairItemID : FacialHairItemID;
-                storeHue = hair ? HairHue : FacialHairHue;
+                if(FacialHairItemIdReal == -1)
+                    FacialHairItemIdReal = FacialHairItemID;
+                
+                FacialHairItemID = facialId.Value;
             }
-
-            CreateHair(hair, id, 0);
+            
+            if (facialHue.HasValue)
+            {
+                if(FacialHairHueReal == -1)
+                    FacialHairHueReal = FacialHairHue;
+                
+                FacialHairHue = facialHue.Value;
+            }
         }
 
+        public void RemoveHairMods()
+        {
+            if (HairItemIdReal > -1)
+            {
+                HairItemID = HairItemIdReal;
+                HairItemIdReal = -1;
+            }
+            
+            if (HairHueReal > -1)
+            {
+                HairHue = HairHueReal;
+                HairHueReal = -1;
+            }
+            
+            if (FacialHairItemIdReal > -1)
+            {
+                FacialHairItemID = FacialHairItemIdReal;
+                FacialHairItemIdReal = -1;
+            }
+            
+            if (FacialHairHueReal > -1)
+            {
+                FacialHairHue = FacialHairHueReal;
+                FacialHairHueReal = -1;
+            }
+        }
+
+        public int HairItemIdReal { get; private set; } = -1;
+        public int HairHueReal { get; private set; } = -1;
+        public int FacialHairItemIdReal { get; private set; } = -1;
+        public int FacialHairHueReal { get; private set; } = -1;
+        
         #endregion
 
         #region Young system

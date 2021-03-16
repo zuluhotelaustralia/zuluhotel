@@ -47,6 +47,8 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(37, typeof(ReactiveArmor))]
     [Union(38, typeof(StatBuff))]
     [Union(39, typeof(ArmorBuff))]
+    [Union(40, typeof(MagicReflection))]
+    [Union(41, typeof(Incognito))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }

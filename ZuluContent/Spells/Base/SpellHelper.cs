@@ -180,16 +180,16 @@ namespace Server.Spells
             return false;
         }
 
-        public static int TryResistDamage(Mobile caster, Mobile target, SpellCircle circle, int damage)
+        public static bool TryResist(Mobile caster, Mobile target, SpellCircle circle)
         {
             if (!caster.Alive || !target.Alive || target.Hidden)
-                return 0;
+                return false;
 
             var points = (int) circle * 40.0;
             var magery = caster.Skills[SkillName.Magery].Value;
             var resist = target.Skills[SkillName.MagicResist].Value;
             var chance = resist / 6.0;
-            var secondaryChance = resist - magery / 4.0 + (int) circle * 6.0;
+            var secondaryChance = resist - (magery / 4.0 + (int) circle * 6.0);
 
             if (secondaryChance > chance)
                 chance = secondaryChance;
@@ -228,7 +228,12 @@ namespace Server.Spells
                 AwardPoints(target, SkillName.MagicResist, (int)points / 3);
             }
 
-            if (Utility.RandomMinMax(0, 100) <= chance)
+            return Utility.RandomMinMax(0, 100) <= chance;
+        }
+
+        public static int TryResistDamage(Mobile caster, Mobile target, SpellCircle circle, int damage)
+        {
+            if (TryResist(caster, target, circle))
             {
                 target.SendLocalizedMessage(502635); // You feel yourself resisting magical energy!
                 target.PlaySound(0x1E6);
@@ -253,12 +258,12 @@ namespace Server.Spells
             if (damage < 1)
                 damage = 1;
 
-            damage = (int) (damage * (1.0 + evalInt - resist) / 200.0);
+            damage = (int) (damage * (1.0 + (evalInt - resist) / 200.0));
 
             // Inverting the efficiency bonus, e.g. Mages get less spell damage, warriors get more
-            var temp = damage;
-            target.FireHook(h => h.OnModifyWithMagicEfficiency(target, ref temp));
-            damage -= damage - temp;
+            // var temp = damage;
+            // target.FireHook(h => h.OnModifyWithMagicEfficiency(target, ref temp));
+            // damage -= damage - temp;
 
             if (damage < 0)
                 damage = 0;

@@ -525,8 +525,10 @@ public CustomHairstylist( Serial serial ) : base( serial )
 					{
 						ChangeHairstyleEntry entry = m_Entries[index];
 
-						if ( m_From is PlayerMobile )
-							((PlayerMobile)m_From).SetHairMods( -1, -1 );
+                        if (m_From is PlayerMobile player)
+                        {
+                            player.RemoveHairMods();
+                        }
 
 						int hairID = m_From.HairItemID;
 						int facialHairID = m_From.FacialHairItemID;

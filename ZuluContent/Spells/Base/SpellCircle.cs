@@ -12,6 +12,8 @@ namespace Server.Spells
         Eighth,
         Earth,
         Necro,
+        
+        // System should always be the last circle
         System
     }
 }

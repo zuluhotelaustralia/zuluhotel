@@ -207,9 +207,9 @@ public DisguiseKit( Serial serial ) : base( serial )
 					PlayerMobile pm = (PlayerMobile)m_From;
 
 					if ( hair )
-						pm.SetHairMods( entry.m_ItemID, -2 );
+						pm.SetHairMods( entry.m_ItemID );
 					else
-						pm.SetHairMods( -2, entry.m_ItemID );
+						pm.SetHairMods( null, entry.m_ItemID );
 				}
 
 				m_From.SendGump( new DisguiseGump( m_From, m_Kit, hair, true ) );
@@ -287,8 +287,8 @@ public DisguiseKit( Serial serial ) : base( serial )
 			{
 				m_Player.NameMod = null;
 
-				if ( m_Player is PlayerMobile )
-					((PlayerMobile)m_Player).SetHairMods( -1, -1 );
+				if ( m_Player is PlayerMobile playerMobile )
+					playerMobile.RemoveHairMods();
 
 				RemoveTimer( m_Player );
 			}

@@ -62,7 +62,11 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
+        public virtual void OnCheckMagicReflection(Mobile caster, Spell spell1, ref bool b)
+        {
+        }
+
+        public virtual void OnSpellAreaCalculation(Mobile caster, Spell spell, ElementalType damageType, ref double area)
         {
         }
 
@@ -186,6 +190,6 @@ namespace ZuluContent.Zulu.Engines.Magic
         public virtual void OnSummonFamiliar(Mobile caster, BaseCreature familiar) { }
 
         public virtual void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty) { }
-        public void OnTrap(Mobile caster, Container target, ref double strength) { }
+        public virtual void OnTrap(Mobile caster, Container target, ref double strength) { }
     }
 }

@@ -21,6 +21,7 @@ namespace Server.Spells
         public bool ShowHandMovement { get; init; } = true;
         public bool BlocksMovement { get; init; } = true;
         public bool Resistable { get; init; } = true;
+        public bool Reflectable { get; init; } = true;
         public int[] Amounts => ReagentCosts.Values.ToArray();
         public string Mantra { get; init; }
         public string Name { get; init; }

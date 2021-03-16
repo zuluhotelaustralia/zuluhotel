@@ -74,7 +74,7 @@ namespace Server.Spells.Third
             IPooledEnumerable eable = Caster.GetItemsInRange(0);
 
             foreach (Item item in eable)
-                if (item is ParalyzeFieldSpell.InternalItem || item is PoisonFieldSpell.InternalItem ||
+                if (item is ParalyzeFieldSpell.InternalItem || item is PoisonFieldSpell.PoisonFieldItem ||
                     item is FireFieldSpell.FireFieldItem)
                     item.OnMoveOver(Caster);
 

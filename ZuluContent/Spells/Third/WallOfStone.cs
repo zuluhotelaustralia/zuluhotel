@@ -16,11 +16,9 @@ namespace Server.Spells.Third
             if (!response.HasValue)
                 return;
 
-            var point = response.Target;
+            var point = SpellHelper.GetSurfaceTop(response.Target);
             
             SpellHelper.Turn(Caster, point);
-
-            SpellHelper.GetSurfaceTop(ref point);
 
             var dx = Caster.Location.X - point.X;
             var dy = Caster.Location.Y - point.Y;
