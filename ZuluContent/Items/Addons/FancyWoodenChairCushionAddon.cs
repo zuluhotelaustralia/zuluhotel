@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB4F, 0xB4E, 0xB50, 0xB51 )]
+    [Flipable(0xB4F, 0xB4E, 0xB50, 0xB51)]
     public class FancyWoodenChairCushionComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class FancyWoodenChairCushionAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new FancyWoodenChairCushionDeed();

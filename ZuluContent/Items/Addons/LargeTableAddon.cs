@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB90, 0xB7D )]
+    [Flipable(0xB90, 0xB7D)]
     public class LargeTableComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class LargeTableAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new LargeTableDeed();

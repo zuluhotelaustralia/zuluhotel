@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class ThroneAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new ThroneDeed();

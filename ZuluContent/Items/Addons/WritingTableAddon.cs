@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB4A,0xB49, 0xB4B, 0xB4C )]
+    [Flipable(0xB4A, 0xB49, 0xB4B, 0xB4C)]
     public class WritingTableComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class WritingTableAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new WritingTableDeed();

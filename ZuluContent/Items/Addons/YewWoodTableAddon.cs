@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB8F, 0xB7C )]
+    [Flipable(0xB8F, 0xB7C)]
     public class YewWoodTableComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class YewWoodTableAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new YewWoodTableDeed();

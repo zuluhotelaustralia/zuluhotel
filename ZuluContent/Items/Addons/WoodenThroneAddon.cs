@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB2E, 0xB2F, 0xB31, 0xB30 )]
+    [Flipable(0xB2E, 0xB2F, 0xB31, 0xB30)]
     public class WoodenThroneComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class WoodenThroneAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new WoodenThroneDeed();

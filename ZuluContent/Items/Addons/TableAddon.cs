@@ -62,7 +62,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class TableSouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new TableSouthDeed();
@@ -125,7 +125,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table2EastAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table2EastDeed();
@@ -187,7 +187,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table2SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table2SouthDeed();
@@ -249,7 +249,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table3EastAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table3EastDeed();
@@ -315,7 +315,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table3SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table3SouthDeed();
@@ -381,7 +381,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table4EastAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table4EastDeed();
@@ -443,7 +443,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table4SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table4SouthDeed();
@@ -505,7 +505,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table5EastAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table5EastDeed();
@@ -568,7 +568,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class Table5SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new Table5SouthDeed();

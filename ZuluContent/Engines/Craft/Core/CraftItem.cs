@@ -282,7 +282,8 @@ namespace Server.Engines.Craft
         private static Type[] m_ColoredItemTable = new[]
         {
             typeof(BaseWeapon), typeof(BaseArmor), typeof(BaseClothing),
-            typeof(BaseJewel), typeof(BaseContainer), typeof(BaseInstrument)
+            typeof(BaseJewel), typeof(BaseContainer), typeof(BaseInstrument),
+            typeof(FishingPole)
         };
 
         private static Type[] m_ColoredResourceTable = new[]
@@ -299,7 +300,8 @@ namespace Server.Engines.Craft
             typeof(BaseTool),
             typeof(BaseHarvestTool),
             typeof(Runebook),
-            typeof(BaseInstrument)
+            typeof(BaseInstrument),
+            typeof(FishingPole)
         };
 
         private static Type[] m_NeverColorTable = new[]
@@ -823,7 +825,7 @@ namespace Server.Engines.Craft
             craftSkill = craftSkillRequired;
             quality = resQuality;
 
-            if (exceptionalChance > Utility.RandomDouble() &&
+            if (exceptionalChance > Utility.Random(100) &&
                 from.ShilCheckSkill(craftSystem.MainSkill, exceptionalDifficulty, 0))
             {
                 mark = 2;

@@ -133,16 +133,16 @@ namespace Server.Engines.Craft
             AddCraft(typeof(WritingTableDeed), 1015086, 1022890, 73.0, 73.0, typeof(Log), 1044041, 17, 1044351);
             AddCraft(typeof(YewWoodTableDeed), 1015086, 1044308, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
             AddCraft(typeof(LargeTableDeed), 1015086, 1044307, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
-            AddCraft(typeof(TableEastDeed), 1015086, "table (east)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 1
-            AddCraft(typeof(TableSouthDeed), 1015086, "table (south)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 1
-            AddCraft(typeof(Table2EastDeed), 1015086, "table 2 (east)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 2
-            AddCraft(typeof(Table2SouthDeed), 1015086, "table 2 (south)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 2
-            AddCraft(typeof(Table3EastDeed), 1015086, "table 3 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 3
-            AddCraft(typeof(Table3SouthDeed), 1015086, "table 3 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 3
-            AddCraft(typeof(Table4EastDeed), 1015086, "table 4 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 4
-            AddCraft(typeof(Table4SouthDeed), 1015086, "table 4 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 4
-            AddCraft(typeof(Table5EastDeed), 1015086, "table 5 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 5
-            AddCraft(typeof(Table5SouthDeed), 1015086, "table 5 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 5
+            AddCraft(typeof(TableEastDeed), 1015086, "table (east)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351);
+            AddCraft(typeof(TableSouthDeed), 1015086, "table (south)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351);
+            AddCraft(typeof(Table2EastDeed), 1015086, "table 2 (east)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351);
+            AddCraft(typeof(Table2SouthDeed), 1015086, "table 2 (south)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351);
+            AddCraft(typeof(Table3EastDeed), 1015086, "table 3 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(Table3SouthDeed), 1015086, "table 3 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(Table4EastDeed), 1015086, "table 4 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(Table4SouthDeed), 1015086, "table 4 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(Table5EastDeed), 1015086, "table 5 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(Table5SouthDeed), 1015086, "table 5 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
             index = AddCraft(typeof(LargeStoneTableEastDeed), 1015086, 1044511, 60.0, 60.0, typeof(Log), 1044041, 20,
                 1044351);
             AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
@@ -201,7 +201,7 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
 
             // Tailoring
-            index = AddCraft(typeof(Dressform), 1044298, 1044339, 73.0, 73.0, typeof(Log), 1044041, 25, 1044351);
+            index = AddCraft(typeof(DressformDeed), 1044298, 1044339, 73.0, 73.0, typeof(Log), 1044041, 25, 1044351);
             AddSkill(index, SkillName.Tailoring, 75.0, 75.0);
             AddRes(index, typeof(Cloth), 1044286, 10, 1044287);
             index = AddCraft(typeof(SpinningwheelEastDeed), 1044298, 1044341, 84.0, 84.0, typeof(Log), 1044041, 75,
@@ -259,7 +259,7 @@ namespace Server.Engines.Craft
             // Other
             AddCraft(typeof(BarrelStaves), 1044294, 1027857, 2.0, 2.0, typeof(Log), 1044041, 5, 1044351);
             AddCraft(typeof(BarrelLid), 1044294, 1027608, 4.0, 4.0, typeof(Log), 1044041, 4, 1044351);
-            AddCraft(typeof(TallMusicStand), 1044294, 1044315, 91.0, 91.0, typeof(Log), 1044041, 20, 1044351);
+            AddCraft(typeof(TallMusicStandDeed), 1044294, 1044315, 91.0, 91.0, typeof(Log), 1044041, 20, 1044351);
             index = AddCraft(typeof(StoneFireplaceEastDeed), 1044294, 1061848, 75.0, 75.0, typeof(Log), 1044041, 85,
                 1044351);
             AddSkill(index, SkillName.Tinkering, 60.0, 60.0);
@@ -268,7 +268,7 @@ namespace Server.Engines.Craft
                 1044351);
             AddSkill(index, SkillName.Tinkering, 60.0, 60.0);
             AddRes(index, typeof(IronIngot), 1044036, 125, 1044037);
-            index = AddCraft(typeof(WaterVatEast), 1044294, 1025460, 80.0, 80.0, typeof(Log), 1044041, 75,
+            index = AddCraft(typeof(WaterVatDeed), 1044294, 1025460, 80.0, 80.0, typeof(Log), 1044041, 75,
                 1044351);
             AddSkill(index, SkillName.Tinkering, 50.0, 50.0);
             AddRes(index, typeof(IronIngot), 1044036, 15, 1044037);
@@ -289,12 +289,20 @@ namespace Server.Engines.Craft
                 1044351);
             AddSkill(index, SkillName.Tailoring, 85.0, 85.0);
             AddRes(index, typeof(Cloth), 1044286, 150, 1044287);
-            index = AddCraft(typeof(LargePainting), 1044294, 1023748, 50.0, 50.0, typeof(Log), 1044041, 5,
-                1044351); // painting 1
+            index = AddCraft(typeof(Painting1EastDeed), 1044294, "painting (east)", 50.0, 50.0, typeof(Log), 1044041, 5,
+                1044351);
             AddSkill(index, SkillName.Tailoring, 30.0, 30.0);
             AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
-            index = AddCraft(typeof(LargePainting), 1044294, 1023748, 50.0, 50.0, typeof(Log), 1044041, 5,
-                1044351); // painting 2
+            index = AddCraft(typeof(Painting1SouthDeed), 1044294, "painting (south)", 50.0, 50.0, typeof(Log), 1044041, 5,
+                1044351);
+            AddSkill(index, SkillName.Tailoring, 30.0, 30.0);
+            AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
+            index = AddCraft(typeof(Painting2EastDeed), 1044294, "painting 2 (east)", 50.0, 50.0, typeof(Log), 1044041, 5,
+                1044351);
+            AddSkill(index, SkillName.Tailoring, 30.0, 30.0);
+            AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
+            index = AddCraft(typeof(Painting2SouthDeed), 1044294, "painting 2 (south)", 50.0, 50.0, typeof(Log), 1044041, 5,
+                1044351);
             AddSkill(index, SkillName.Tailoring, 30.0, 30.0);
             AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
             AddCraft(typeof(DartBoardSouthDeed), 1044294, 1044325, 26.0, 26.0, typeof(Log), 1044041, 5, 1044351);
@@ -305,16 +313,28 @@ namespace Server.Engines.Craft
             index = AddCraft(typeof(AltarDeed), 1044294, 1024628, 110.0, 110.0, typeof(Log), 1044041, 100, 1044351);
             AddSkill(index, SkillName.Magery, 60.0, 60.0);
             AddRes(index, typeof(IronIngot), 1044036, 40, 1044037);
-            index = AddCraft(typeof(StatueEast), 1044294, 1030912, 95.0, 95.0, typeof(Log), 1044041, 10,
-                1044351); //  statue 1
+            index = AddCraft(typeof(StatueEastDeed), 1044294, "statue (east)", 95.0, 95.0, typeof(Log), 1044041, 10,
+                1044351);
             AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
             AddRes(index, typeof(IronIngot), 1044036, 125, 1044037);
-            index = AddCraft(typeof(StatueEast), 1044294, 1030912, 95.0, 95.0, typeof(Log), 1044041, 10,
-                1044351); //  statue 2
+            index = AddCraft(typeof(StatueSouthDeed), 1044294, "statue (south)", 95.0, 95.0, typeof(Log), 1044041, 10,
+                1044351);
             AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
             AddRes(index, typeof(IronIngot), 1044036, 125, 1044037);
-            index = AddCraft(typeof(StatueEast), 1044294, 1030912, 95.0, 95.0, typeof(Log), 1044041, 10,
-                1044351); //  statue 3
+            index = AddCraft(typeof(Statue2EastDeed), 1044294, "statue 2 (east)", 95.0, 95.0, typeof(Log), 1044041, 10,
+                1044351);
+            AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
+            AddRes(index, typeof(IronIngot), 1044036, 125, 1044037);
+            index = AddCraft(typeof(Statue2SouthDeed), 1044294, "statue 2 (south)", 95.0, 95.0, typeof(Log), 1044041, 10,
+                1044351);
+            AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
+            AddRes(index, typeof(IronIngot), 1044036, 125, 1044037);
+            index = AddCraft(typeof(Statue3EastDeed), 1044294, "statue 3 (east)", 95.0, 95.0, typeof(Log), 1044041, 10,
+                1044351);
+            AddSkill(index, SkillName.Tinkering, 85.0, 85.0);
+            AddRes(index, typeof(IronIngot), 1044036, 100, 1044037);
+            index = AddCraft(typeof(Statue3SouthDeed), 1044294, "statue 3 (south)", 95.0, 95.0, typeof(Log), 1044041, 10,
+                1044351);
             AddSkill(index, SkillName.Tinkering, 85.0, 85.0);
             AddRes(index, typeof(IronIngot), 1044036, 100, 1044037);
 

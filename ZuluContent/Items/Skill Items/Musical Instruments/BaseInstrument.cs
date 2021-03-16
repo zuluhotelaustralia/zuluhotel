@@ -5,16 +5,45 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Targeting;
 using Server.Engines.Craft;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
     public delegate void InstrumentPickedCallback(Mobile from, BaseInstrument instrument);
 
-    public abstract class BaseInstrument : Item, ISlayer
+    public abstract class BaseInstrument : Item, ISlayer, ICraftable, IResource
     {
         private int m_WellSound, m_BadlySound;
         private SlayerName m_Slayer, m_Slayer2;
         private int m_UsesRemaining;
+        private CraftResource m_Resource;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+
+                    if (CraftItem.RetainsColor(GetType()))
+                    {
+                        Hue = CraftResources.GetHue(m_Resource);
+                    }
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int SuccessSound
@@ -313,55 +342,6 @@ namespace Server.Items
             UsesRemaining = Utility.RandomMinMax(InitMinUses, InitMaxUses);
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            var attrs = new List<EquipInfoAttribute>();
-
-
-            if (DisplayLootType)
-            {
-                if (LootType == LootType.Blessed)
-                    attrs.Add(new EquipInfoAttribute(1038021)); // blessed
-                else if (LootType == LootType.Cursed)
-                    attrs.Add(new EquipInfoAttribute(1049643)); // cursed
-            }
-
-            if (m_ReplenishesCharges)
-                attrs.Add(new EquipInfoAttribute(1070928)); // Replenish Charges
-
-            // TODO: Must this support item identification?
-            if (m_Slayer != SlayerName.None)
-            {
-                SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer);
-                if (entry != null)
-                    attrs.Add(new EquipInfoAttribute(entry.Title));
-            }
-
-            if (m_Slayer2 != SlayerName.None)
-            {
-                SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer2);
-                if (entry != null)
-                    attrs.Add(new EquipInfoAttribute(entry.Title));
-            }
-
-            int number;
-
-            if (Name == null)
-            {
-                number = LabelNumber;
-            }
-            else
-            {
-                LabelTo(from, Name);
-                number = 1041000;
-            }
-
-            if (attrs.Count == 0 && Name != null)
-                return;
-
-            from.NetState.SendDisplayEquipmentInfo(Serial, number, null, false, attrs);
-        }
-
         public BaseInstrument(Serial serial) : base(serial)
         {
         }
@@ -370,7 +350,11 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 3); // version
+            writer.Write((int) 4); // version
+            
+            ICraftable.Serialize(writer, this);
+
+            writer.WriteEncodedInt((int) m_Resource);
 
             writer.Write(m_ReplenishesCharges);
             if (m_ReplenishesCharges)
@@ -393,6 +377,14 @@ namespace Server.Items
 
             switch (version)
             {
+                case 4:
+                {
+                    ICraftable.Deserialize(reader, this);
+
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
+
+                    goto case 3;
+                }
                 case 3:
                 {
                     m_ReplenishesCharges = reader.ReadBool();
@@ -437,6 +429,11 @@ namespace Server.Items
 
             CheckReplenishUses();
         }
+        
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
+        }
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -460,6 +457,32 @@ namespace Server.Items
             {
                 from.SendLocalizedMessage(500119); // You must wait to perform another action
             }
+        }
+        
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
+            BaseTool tool, CraftItem craftItem, int resHue)
+        {
+            Mark = (MarkQuality) mark;
+
+            if (makersMark)
+                Crafter = from;
+
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
+
+            return mark;
         }
 
         public static bool CheckMusicianship(Mobile m)

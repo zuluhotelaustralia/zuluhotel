@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB5B, 0xB5A, 0xB5C, 0xB5D )]
+    [Flipable(0xB5B, 0xB5A, 0xB5C, 0xB5D)]
     public class BambooChairComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class BambooChairAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new BambooChairDeed();

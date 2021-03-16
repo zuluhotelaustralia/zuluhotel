@@ -1,16 +1,16 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable(0x1218, 0x1219, 0x121A, 0x121B)]
-    public class StoneChairComponent : AddonComponent
+    [Flipable(0x0EC6, 0x0EC7)]
+    public class DressformComponent : AddonComponent
     {
         [Constructible]
-        public StoneChairComponent(int itemID) : base(itemID)
+        public DressformComponent(int itemID) : base(itemID)
         {
         }
 
         [Constructible]
-        public StoneChairComponent(Serial serial) : base(serial)
+        public DressformComponent(Serial serial) : base(serial)
         {
         }
 
@@ -29,19 +29,19 @@ namespace Server.Items
         }
     }
 
-    public class StoneChairAddon : BaseAddon
+    public class DressformAddon : BaseAddon
     {
-        public override BaseAddonDeed Deed => new StoneChairDeed();
+        public override BaseAddonDeed Deed => new DressformDeed();
 
 
         [Constructible]
-        public StoneChairAddon()
+        public DressformAddon()
         {
-            AddComponent(new StoneChairComponent(0x1218), 0, 0, 0);
+            AddComponent(new DressformComponent(0x0EC6), 0, 0, 0);
         }
 
         [Constructible]
-        public StoneChairAddon(Serial serial) : base(serial)
+        public DressformAddon(Serial serial) : base(serial)
         {
         }
 
@@ -60,18 +60,18 @@ namespace Server.Items
         }
     }
 
-    public class StoneChairDeed : BaseAddonDeed
+    public class DressformDeed : BaseAddonDeed
     {
-        public override BaseAddon Addon => new StoneChairAddon();
+        public override BaseAddon Addon => new DressformAddon();
 
-        public override int LabelNumber => 1024632; // stone chair
+        public override int LabelNumber => 1044339; // dressform (front)
 
 
-        public StoneChairDeed()
+        public DressformDeed()
         {
         }
 
-        public StoneChairDeed(Serial serial) : base(serial)
+        public DressformDeed(Serial serial) : base(serial)
         {
         }
 

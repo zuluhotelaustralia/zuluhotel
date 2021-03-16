@@ -1,9 +1,10 @@
 namespace Server.Items
 {
-    public class WaterVatEast : BaseAddon
+    public class WaterVatAddon : BaseAddon
     {
-        [Constructible]
-        public WaterVatEast()
+        public override BaseAddonDeed Deed => new WaterVatDeed();
+
+        public WaterVatAddon()
         {
             AddComponent(new AddonComponent(0x1558), 0, 0, 0);
             AddComponent(new AddonComponent(0x14DE), -1, 1, 0);
@@ -22,8 +23,7 @@ namespace Server.Items
             AddComponent(new AddonComponent(0x21A4), 0, 3, 0);
         }
 
-        [Constructible]
-        public WaterVatEast(Serial serial) : base(serial)
+        public WaterVatAddon(Serial serial) : base(serial)
         {
         }
 
@@ -42,28 +42,17 @@ namespace Server.Items
         }
     }
 
-    public class WaterVatSouth : BaseAddon
+    public class WaterVatDeed : BaseAddonDeed
     {
-        public WaterVatSouth()
-        {
-            AddComponent(new AddonComponent(0x1558), 0, 0, 0);
-            AddComponent(new AddonComponent(0x14DE), -1, 1, 0);
-            AddComponent(new AddonComponent(0x1552), 0, 1, 0);
-            AddComponent(new AddonComponent(0x14DF), 1, -1, 0);
-            AddComponent(new AddonComponent(0x1554), 1, 0, 0);
-            AddComponent(new AddonComponent(0x1559), 1, 1, 0);
-            AddComponent(new AddonComponent(0x1551), 1, 3, 0);
-            AddComponent(new AddonComponent(0x1556), 3, 1, 0);
-            AddComponent(new AddonComponent(0x14D7), 2, 2, 0);
+        public override BaseAddon Addon => new WaterVatAddon();
+        public override int LabelNumber => 1025460; // vat
 
-            // Blockers
-            AddComponent(new AddonComponent(0x21A4), 2, -1, 0);
-            AddComponent(new AddonComponent(0x21A4), 3, 0, 0);
-            AddComponent(new AddonComponent(0x21A4), -1, 2, 0);
-            AddComponent(new AddonComponent(0x21A4), 0, 3, 0);
+
+        public WaterVatDeed()
+        {
         }
 
-        public WaterVatSouth(Serial serial) : base(serial)
+        public WaterVatDeed(Serial serial) : base(serial)
         {
         }
 
@@ -71,14 +60,14 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.WriteEncodedInt((int) 0); // version
+            writer.Write((int) 0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadEncodedInt();
+            int version = reader.ReadInt();
         }
     }
 }

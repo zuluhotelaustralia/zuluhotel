@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Furniture]
-    [Flipable( 0xB2D, 0xB2C )]
+    [Flipable(0xB2D, 0xB2C)]
     public class WoodenBenchComponent : AddonComponent
     {
         [Constructible]
@@ -28,7 +28,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class WoodenBenchAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new WoodenBenchDeed();
@@ -152,7 +152,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class WoodenBench2SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new WoodenBench2SouthDeed();
@@ -278,7 +278,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class WoodenBench3SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new WoodenBench3SouthDeed();
@@ -403,7 +403,7 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-    
+
     public class WoodenBench4SouthAddon : BaseAddon
     {
         public override BaseAddonDeed Deed => new WoodenBench4SouthDeed();
