@@ -1,111 +1,120 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Misc;
-using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Fifth
 {
-    public class PoisonFieldSpell : MagerySpell
+    public class PoisonFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
         public PoisonFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-
-        public override void OnCast()
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-            Caster.Target = new InternalTarget(this);
+            if (!response.HasValue)
+                return;
+
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            SpellHelper.Turn(Caster, point);
+
+            var dx = Caster.Location.X - point.X;
+            var dy = Caster.Location.Y - point.Y;
+            var rx = (dx - dy) * 44;
+            var ry = (dx + dy) * 44;
+
+            bool eastToWest;
+
+            if (rx >= 0 && ry >= 0)
+                eastToWest = false;
+            else if (rx >= 0)
+                eastToWest = true;
+            else if (ry >= 0)
+                eastToWest = true;
+            else
+                eastToWest = false;
+
+            Effects.PlaySound(point, Caster.Map, 0x20B);
+
+            var itemId = eastToWest ? 0x3915 : 0x3922;
+
+            var power = 2.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
+
+            var seconds = Caster.Skills[SkillName.Magery].Value / 5.0 + 20.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref seconds));
+            var duration = TimeSpan.FromSeconds(seconds);
+
+            for (var i = -2; i <= 2; ++i)
+            {
+                var loc = new Point3D(eastToWest ? point.X + i : point.X, eastToWest ? point.Y : point.Y + i, point.Z);
+                var item = new PoisonFieldItem(itemId, loc, Caster, (int)power, duration, i);
+            }
         }
 
-        public void Target(IPoint3D p)
+        private static void ApplyPoison(Mobile caster, Mobile target, int power)
         {
-            if (!Caster.CanSee(p))
-            {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
-            {
-                SpellHelper.Turn(Caster, p);
+            if (caster == null)
+                return;
+            
+            caster.DoHarmful(target);
 
-                SpellHelper.GetSurfaceTop(ref p);
+            var level = SpellHelper.TryResist(caster, target, SpellCircle.Fifth) 
+                ? Utility.Dice(1, (uint)power, 0) 
+                : power;
 
-                var dx = Caster.Location.X - p.X;
-                var dy = Caster.Location.Y - p.Y;
-                var rx = (dx - dy) * 44;
-                var ry = (dx + dy) * 44;
-
-                bool eastToWest;
-
-                if (rx >= 0 && ry >= 0)
-                    eastToWest = false;
-                else if (rx >= 0)
-                    eastToWest = true;
-                else if (ry >= 0)
-                    eastToWest = true;
-                else
-                    eastToWest = false;
-
-                Effects.PlaySound((Point3D)p, Caster.Map, 0x20B);
-
-                var itemID = eastToWest ? 0x3915 : 0x3922;
-
-                var duration = TimeSpan.FromSeconds(3 + Caster.Skills.Magery.Fixed / 25);
-
-                for (var i = -2; i <= 2; ++i)
-                {
-                    var loc = new Point3D(eastToWest ? p.X + i : p.X, eastToWest ? p.Y : p.Y + i, p.Z);
-
-                    new InternalItem(itemID, loc, Caster, Caster.Map, duration, i);
-                }
-            }
-
-            FinishSequence();
+            
+            var p = Poison.GetPoison(Math.Min(level, Poison.Poisons.Count - 1));
+            target.PlaySound(0x474);
+            
+            if (target.ApplyPoison(caster, p) == ApplyPoisonResult.Poisoned)
+                if (SpellHelper.CanRevealCaster(target))
+                    caster.RevealingAction();
         }
 
         [DispellableField]
-        public class InternalItem : Item
+        public class PoisonFieldItem : Item
         {
             private Mobile m_Caster;
             private DateTime m_End;
             private Timer m_Timer;
+            private int m_Power;
 
-            public InternalItem(int itemID, Point3D loc, Mobile caster, Map map, TimeSpan duration, int val) :
-                base(itemID)
+            public PoisonFieldItem(int itemId, Point3D loc, Mobile caster, int power, TimeSpan duration, int val) :
+                base(itemId)
             {
-                var canFit = SpellHelper.AdjustField(ref loc, map, 12, false);
+                var canFit = SpellHelper.AdjustField(ref loc, caster.Map, 12, false);
 
                 Visible = false;
                 Movable = false;
                 Light = LightType.Circle300;
 
-                MoveToWorld(loc, map);
+                MoveToWorld(loc, caster.Map);
 
                 m_Caster = caster;
+                m_Power = power;
 
                 m_End = DateTime.Now + duration;
 
-                m_Timer = new InternalTimer(this, TimeSpan.FromSeconds(Math.Abs(val) * 0.2), caster.InLOS(this),
-                    canFit);
+                m_Timer = new InternalTimer(this, TimeSpan.FromSeconds(Math.Abs(val) * 0.2), caster.InLOS(this), canFit);
                 m_Timer.Start();
             }
 
-            public InternalItem(Serial serial) : base(serial)
+            public PoisonFieldItem(Serial serial) : base(serial)
             {
             }
 
-            public override bool BlocksFit
-            {
-                get { return true; }
-            }
+            public override bool BlocksFit => true;
 
             public override void OnAfterDelete()
             {
                 base.OnAfterDelete();
 
-                if (m_Timer != null)
-                    m_Timer.Stop();
+                m_Timer?.Stop();
             }
 
             public override void Serialize(IGenericWriter writer)
@@ -144,27 +153,11 @@ namespace Server.Spells.Fifth
                 }
             }
 
-            public void ApplyPoisonTo(Mobile m)
-            {
-                if (m_Caster == null)
-                    return;
-
-                var p = Poison.Regular;
-
-                if (m.ApplyPoison(m_Caster, p) == ApplyPoisonResult.Poisoned)
-                    if (SpellHelper.CanRevealCaster(m))
-                        m_Caster.RevealingAction();
-            }
-
             public override bool OnMoveOver(Mobile mobile)
             {
-                if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, mobile) &&
-                    m_Caster.CanBeHarmful(mobile, false))
+                if (Visible && m_Caster != null && SpellHelper.ValidIndirectTarget(m_Caster, mobile) && m_Caster.CanBeHarmful(mobile, false))
                 {
-                    m_Caster.DoHarmful(mobile);
-
-                    ApplyPoisonTo(mobile);
-                    mobile.PlaySound(0x474);
+                    ApplyPoison(m_Caster, mobile, m_Power);
                 }
 
                 return true;
@@ -172,16 +165,15 @@ namespace Server.Spells.Fifth
 
             private class InternalTimer : Timer
             {
-                private static readonly Queue m_Queue = new Queue();
-                private readonly bool m_InLOS;
+                private readonly bool m_InLos;
                 private readonly bool m_CanFit;
-                private readonly InternalItem m_Item;
+                private readonly PoisonFieldItem m_Item;
 
-                public InternalTimer(InternalItem item, TimeSpan delay, bool inLOS, bool canFit) : base(delay,
-                    TimeSpan.FromSeconds(1.5))
+                public InternalTimer(PoisonFieldItem item, TimeSpan delay, bool inLos, bool canFit) 
+                    : base(delay, TimeSpan.FromSeconds(1.5))
                 {
                     m_Item = item;
-                    m_InLOS = inLOS;
+                    m_InLos = inLos;
                     m_CanFit = canFit;
 
                     Priority = TimerPriority.FiftyMS;
@@ -194,7 +186,7 @@ namespace Server.Spells.Fifth
 
                     if (!m_Item.Visible)
                     {
-                        if (m_InLOS && m_CanFit)
+                        if (m_InLos && m_CanFit)
                             m_Item.Visible = true;
                         else
                             m_Item.Delete();
@@ -220,50 +212,30 @@ namespace Server.Spells.Fifth
                         if (map != null && caster != null)
                         {
                             var eastToWest = m_Item.ItemID == 0x3915;
-                            IPooledEnumerable eable = map.GetMobilesInBounds(new Rectangle2D(
-                                m_Item.X - (eastToWest ? 0 : 1), m_Item.Y - (eastToWest ? 1 : 0), eastToWest ? 1 : 2,
-                                eastToWest ? 2 : 1));
+                            IPooledEnumerable eable = map.GetMobilesInBounds(
+                                new Rectangle2D(
+                                    m_Item.X - (eastToWest ? 0 : 1), 
+                                    m_Item.Y - (eastToWest ? 1 : 0), 
+                                    eastToWest ? 1 : 2, eastToWest ? 2 : 1
+                                )
+                            );
 
                             foreach (Mobile m in eable)
+                            {
                                 if (m.Z + 16 > m_Item.Z && m_Item.Z + 12 > m.Z &&
                                     SpellHelper.ValidIndirectTarget(caster, m) && caster.CanBeHarmful(m, false))
-                                    m_Queue.Enqueue(m);
+                                {
+                                    caster.DoHarmful(m);
+
+                                    ApplyPoison(m_Item.m_Caster, m, m_Item.m_Power);
+                                    m.PlaySound(0x474);
+                                }
+                            }
 
                             eable.Free();
-
-                            while (m_Queue.Count > 0)
-                            {
-                                var m = (Mobile) m_Queue.Dequeue();
-
-                                caster.DoHarmful(m);
-
-                                m_Item.ApplyPoisonTo(m);
-                                m.PlaySound(0x474);
-                            }
                         }
                     }
                 }
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly PoisonFieldSpell m_Owner;
-
-            public InternalTarget(PoisonFieldSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Point3D point3D)
-                    m_Owner.Target(point3D);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
             }
         }
     }

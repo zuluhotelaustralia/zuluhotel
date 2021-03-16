@@ -15,6 +15,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
         [Key(1)] public int Value { get; set; } = 1;
 
+        [Key(2)] public SpellCircle Circle { get; set; } = SpellCircle.First;
+
         #region IBuff
 
         [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.MagicReflection;

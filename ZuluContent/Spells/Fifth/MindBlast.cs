@@ -1,102 +1,45 @@
+using System;
+using System.Threading.Tasks;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Fifth
 {
-    public class MindBlastSpell : MagerySpell
+    public class MindBlastSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public MindBlastSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public MindBlastSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
 
+            var casterInt = (double)Caster.Int;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref casterInt));
+            
+            var targetInt = (double)target.Int;
+            target.FireHook(h => h.OnModifyWithMagicEfficiency(target, ref targetInt));
 
-        public override bool DelayedDamage
-        {
-            get { return true; }
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            if (targetInt > casterInt)
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+                target.FixedEffect(0x374B, 10, 10);
+                target.PlaySound(0x1E7);
             }
-            else if (CheckHarmfulSequence(m))
+            else if (Math.Abs(targetInt - casterInt) < 1.0)
             {
-                Mobile from = Caster, target = m;
-
-                SpellHelper.Turn(from, target);
-
-                SpellHelper.CheckReflect((int) Circle, ref from, ref target);
-
-                // Algorithm: (highestStat - lowestStat) / 2 [- 50% if resisted]
-
-                int highestStat = target.Str, lowestStat = target.Str;
-
-                if (target.Dex > highestStat)
-                    highestStat = target.Dex;
-
-                if (target.Dex < lowestStat)
-                    lowestStat = target.Dex;
-
-                if (target.Int > highestStat)
-                    highestStat = target.Int;
-
-                if (target.Int < lowestStat)
-                    lowestStat = target.Int;
-
-                if (highestStat > 150)
-                    highestStat = 150;
-
-                if (lowestStat > 150)
-                    lowestStat = 150;
-
-                var damage = GetDamageScalar(m) * (highestStat - lowestStat) / 4; //less damage
-
-                if (damage > 45)
-                    damage = 45;
-
-                if (CheckResisted(target))
-                {
-                    damage /= 2;
-                    target.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                }
-
-                from.FixedParticles(0x374A, 10, 15, 2038, EffectLayer.Head);
-
-                target.FixedParticles(0x374A, 10, 15, 5038, EffectLayer.Head);
-                target.PlaySound(0x213);
-
-                SpellHelper.Damage((int) damage, target, Caster, this);
+                Caster.SendMessage("You are of equal intellect!");
+                return;
             }
+            
+            Caster.FixedParticles(0x374A, 10, 15, 2038, EffectLayer.Head);
+            target.FixedParticles(0x374A, 10, 15, 5038, EffectLayer.Head);
+            target.PlaySound(0x213);
 
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly MindBlastSpell m_Owner;
-
-            public InternalTarget(MindBlastSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            SpellHelper.Damage(SpellHelper.CalcSpellDamage(Caster, target, this), target, Caster, this);
         }
     }
 }

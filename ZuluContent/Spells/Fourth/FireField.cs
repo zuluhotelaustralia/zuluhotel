@@ -62,13 +62,6 @@ namespace Server.Spells.Fourth
                 caster.RevealingAction();
 
             caster.DoHarmful(target);
-
-            if (target.ShilCheckSkill(SkillName.MagicResist, 30, 25))
-            {
-                damage = SpellHelper.GetDamageAfterResist(caster, target, damage);
-                target.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-            }
-
             SpellHelper.Damage(damage, target, caster, null, null, ElementalType.Fire);
             target.PlaySound(0x208);
         }

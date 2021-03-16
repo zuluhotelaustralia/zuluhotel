@@ -96,7 +96,7 @@ public HairRestylingDeed( Serial serial ) : base( serial )
 				{
 					PlayerMobile pm = (PlayerMobile)m_From;
 
-					pm.SetHairMods( -1, -1 ); // clear any hairmods (disguise kit, incognito)
+					pm.RemoveHairMods(); // clear any hairmods (disguise kit, incognito)
 					m_From.HairItemID = m_From.Female ? RacialData[info.ButtonID][2] : RacialData[info.ButtonID][3];
 					m_Deed.Delete();
 				}
