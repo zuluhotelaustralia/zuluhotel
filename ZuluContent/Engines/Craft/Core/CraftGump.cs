@@ -386,6 +386,10 @@ namespace Server.Engines.Craft
             {
                 From.SendGump(new CraftGump(From, CraftSystem, Tool, num));
             }
+            else if (From.NextSkillTime > Core.TickCount)
+            {
+                From.SendGump(new CraftGump(From, CraftSystem, Tool, 1045157)); // You must wait to perform another action.
+            }
             else
             {
                 Type type = null;
@@ -437,7 +441,11 @@ namespace Server.Engines.Craft
 
                     From.SendAsciiMessage(89, $"Looping [{i} more to go].");
 
-                    await Timer.Pause(((int) (CraftSystem.Delay * CraftSystem.MaxCraftEffect) + 6) * 1000);
+                    var loopDelay = ((int) (CraftSystem.Delay * CraftSystem.MaxCraftEffect) + 6) * 1000;
+                    
+                    From.NextSkillTime = Core.TickCount + loopDelay;
+
+                    await Timer.Pause(loopDelay);
                 }
             }
         }

@@ -128,20 +128,27 @@ namespace Server.Engines.Craft
             AddCraft(typeof(PicnicBasket), 1044292, 1023706, 15.0, 15.0, typeof(Log), 1044041, 3, 1044351);
 
             // Tables
-            AddCraft(typeof(Nightstand), 1015086, 1022620, 100.0, 100.0, typeof(Log), 1044041, 50, 1044351); // dresser
-            AddCraft(typeof(Nightstand), 1015086, 1044306, 52.0, 52.0, typeof(Log), 1044041, 17, 1044351);
-            AddCraft(typeof(WritingTable), 1015086, 1022890, 73.0, 73.0, typeof(Log), 1044041, 17, 1044351);
-            AddCraft(typeof(YewWoodTable), 1015086, 1044307, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
-            AddCraft(typeof(LargeTable), 1015086, 1044308, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 1
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 2
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 3
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 4
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 5
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 6
-            AddCraft(typeof(LargeTable), 1015086, 1022868, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 7
-            index = AddCraft(typeof(LargeTable), 1015086, 1025460, 60.0, 60.0, typeof(Log), 1044041, 20,
-                1044351); // stone table 8
+            AddCraft(typeof(DresserDeed), 1015086, 1022620, 100.0, 100.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(NightstandDeed), 1015086, 1044306, 52.0, 52.0, typeof(Log), 1044041, 17, 1044351);
+            AddCraft(typeof(WritingTableDeed), 1015086, 1022890, 73.0, 73.0, typeof(Log), 1044041, 17, 1044351);
+            AddCraft(typeof(YewWoodTableDeed), 1015086, 1044308, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(LargeTableDeed), 1015086, 1044307, 85.0, 85.0, typeof(Log), 1044041, 50, 1044351);
+            AddCraft(typeof(TableEastDeed), 1015086, "table (east)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 1
+            AddCraft(typeof(TableSouthDeed), 1015086, "table (south)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 1
+            AddCraft(typeof(Table2EastDeed), 1015086, "table 2 (east)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 2
+            AddCraft(typeof(Table2SouthDeed), 1015086, "table 2 (south)", 75.0, 75.0, typeof(Log), 1044041, 25, 1044351); // table 2
+            AddCraft(typeof(Table3EastDeed), 1015086, "table 3 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 3
+            AddCraft(typeof(Table3SouthDeed), 1015086, "table 3 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 3
+            AddCraft(typeof(Table4EastDeed), 1015086, "table 4 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 4
+            AddCraft(typeof(Table4SouthDeed), 1015086, "table 4 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 4
+            AddCraft(typeof(Table5EastDeed), 1015086, "table 5 (east)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 5
+            AddCraft(typeof(Table5SouthDeed), 1015086, "table 5 (south)", 85.0, 85.0, typeof(Log), 1044041, 50, 1044351); // table 5
+            index = AddCraft(typeof(LargeStoneTableEastDeed), 1015086, 1044511, 60.0, 60.0, typeof(Log), 1044041, 20,
+                1044351);
+            AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
+            AddRes(index, typeof(IronIngot), 1044036, 85, 1044037);
+            index = AddCraft(typeof(LargeStoneTableSouthDeed), 1015086, 1044512, 60.0, 60.0, typeof(Log), 1044041, 20,
+                1044351);
             AddSkill(index, SkillName.Tinkering, 95.0, 95.0);
             AddRes(index, typeof(IronIngot), 1044036, 85, 1044037);
 

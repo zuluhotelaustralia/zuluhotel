@@ -1050,9 +1050,13 @@ namespace Server.Items
             PlayerConstructed = true;
 
             var resEnchantments = CraftResources.GetEnchantments(Resource);
-            foreach (var (key, value) in resEnchantments)
+
+            if (resEnchantments != null)
             {
-                Enchantments.SetFromResourceType(key, value);
+                foreach (var (key, value) in resEnchantments)
+                {
+                    Enchantments.SetFromResourceType(key, value);
+                }
             }
 
             Quality = quality;

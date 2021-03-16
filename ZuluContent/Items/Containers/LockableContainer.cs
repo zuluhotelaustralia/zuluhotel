@@ -1,4 +1,5 @@
 using System;
+using Scripts.Zulu.Utilities;
 using Server.Network;
 using Server.Engines.Craft;
 
@@ -48,9 +49,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 7); // version
-
-            ICraftable.Serialize(writer, this);
+            writer.Write((int) 6); // version
 
             writer.Write(IsShipwreckedItem);
 
@@ -73,9 +72,6 @@ namespace Server.Items
 
             switch (version)
             {
-                case 7:
-                    ICraftable.Deserialize(reader, this);
-                    goto case 6;
                 case 6:
                 {
                     IsShipwreckedItem = reader.ReadBool();
@@ -285,22 +281,22 @@ namespace Server.Items
         }
 
         #region ICraftable Members
-        
+
         public override int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes, BaseTool tool,
             CraftItem craftItem, int resHue)
         {
             if (from.CheckSkill(SkillName.Tinkering, -5.0, 15.0))
             {
-                from.SendLocalizedMessage(500636); // Your tinker skill was sufficient to make the item lockable.
+                from.SendSuccessMessage(500636); // Your tinker skill was sufficient to make the item lockable.
 
-                Key key = new Key(KeyType.Copper, Key.RandomValue());
+                var key = new Key(KeyType.Copper, Key.RandomValue());
 
                 KeyValue = key.KeyValue;
                 DropItem(key);
 
-                double tinkering = from.Skills[SkillName.Tinkering].Value;
-                int level = (int) (tinkering * 0.8);
+                var tinkering = from.Skills[SkillName.Tinkering].Value;
+                var level = (int) (tinkering * 0.8);
 
                 RequiredSkill = level - 4;
                 LockLevel = level - 14;
@@ -319,9 +315,28 @@ namespace Server.Items
             }
             else
             {
-                from.SendLocalizedMessage(500637); // Your tinker skill was insufficient to make the item lockable.
+                from.SendFailureMessage(500637); // Your tinker skill was insufficient to make the item lockable.
             }
+            
+            Mark = (MarkQuality) mark;
 
+            if (makersMark)
+                Crafter = from;
+
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
+            
             return base.OnCraft(mark, quality, makersMark, from, craftSystem, typeRes, tool, craftItem, resHue);
         }
 
