@@ -22,7 +22,10 @@ namespace Server.Spells.Fifth
             var eable = Caster.Map.GetItemsInRange(target, (int) range);
             foreach (var item in eable)
             {
-                if (item is not IDispellable {Dispellable: true})
+                if (!item.GetType().IsDefined(typeof(DispellableFieldAttribute), false))
+                    continue;
+
+                if (item is Moongate {Dispellable: false})
                     continue;
 
                 Effects.SendLocationParticles(EffectItem.Create(item.Location, item.Map, EffectItem.DefaultDuration),

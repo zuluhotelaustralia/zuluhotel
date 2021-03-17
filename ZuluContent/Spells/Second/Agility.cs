@@ -16,7 +16,7 @@ namespace Server.Spells.Second
             
             var target = response.Target;
             
-            if (!Caster.CanBuff(target, icons: BuffIcon.Agility))
+            if (!Caster.CanBuff(target, BuffIcon.Agility))
                 return;
             
             target.TryAddBuff(new StatBuff(StatType.Dex)

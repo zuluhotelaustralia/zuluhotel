@@ -1,50 +1,113 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
-using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Spells.Sixth
 {
-    public class InvisibilitySpell : MagerySpell, ITargetableAsyncSpell<Mobile>
+    public class InvisibilitySpell : MagerySpell
     {
-        public InvisibilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-        
-        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
+        private static readonly Hashtable m_Table = new Hashtable();
+
+        public InvisibilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
-            if (!response.HasValue)
-                return;
-            
-            var target = response.Target;
-            
-            if (target is BaseVendor || target is PlayerVendor || target.AccessLevel > Caster.AccessLevel)
+        }
+
+
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
+        }
+
+        public void Target(Mobile m)
+        {
+            if (!Caster.CanSee(m))
+            {
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+            }
+            else if (m is BaseVendor || m is PlayerVendor || m.AccessLevel > Caster.AccessLevel)
             {
                 Caster.SendLocalizedMessage(501857); // This spell won't work on that!
-                return;
             }
-            
-            if (!Caster.CanBuff(target, icons: BuffIcon.HidingAndOrStealth))
-                return;
-
-            var duration = Caster.Skills[SkillName.Magery].Value;
-            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
-            
-            target.TryAddBuff(new Invisibility
+            else if (CheckBeneficialSequence(m))
             {
-                Title = "Invisible",
-                Duration = TimeSpan.FromSeconds(duration),
-                Start = DateTime.UtcNow,
-            });
-            
-            SpellHelper.Turn(Caster, target);
-            
-            Effects.SendLocationParticles(
-                EffectItem.Create(new Point3D(target.X, target.Y, target.Z + 16), Caster.Map, EffectItem.DefaultDuration), 0x376A,
-                10, 15, 5045);
-            target.PlaySound(0x3C4);
+                SpellHelper.Turn(Caster, m);
+
+                Effects.SendLocationParticles(
+                    EffectItem.Create(new Point3D(m.X, m.Y, m.Z + 16), Caster.Map, EffectItem.DefaultDuration), 0x376A,
+                    10, 15, 5045);
+                m.PlaySound(0x3C4);
+
+                m.Hidden = true;
+                m.Combatant = null;
+                m.Warmode = false;
+
+                RemoveTimer(m);
+
+                var duration = TimeSpan.FromSeconds(1.2 * Caster.Skills.Magery.Fixed / 10);
+
+                Timer t = new InternalTimer(m, duration);
+
+                m_Table[m] = t;
+
+                t.Start();
+            }
+
+            FinishSequence();
+        }
+
+        public static bool HasTimer(Mobile m)
+        {
+            return m_Table[m] != null;
+        }
+
+        public static void RemoveTimer(Mobile m)
+        {
+            var t = (Timer) m_Table[m];
+
+            if (t != null)
+            {
+                t.Stop();
+                m_Table.Remove(m);
+            }
+        }
+
+        private class InternalTimer : Timer
+        {
+            private readonly Mobile m_Mobile;
+
+            public InternalTimer(Mobile m, TimeSpan duration) : base(duration)
+            {
+                Priority = TimerPriority.OneSecond;
+                m_Mobile = m;
+            }
+
+            protected override void OnTick()
+            {
+                m_Mobile.RevealingAction();
+                RemoveTimer(m_Mobile);
+            }
+        }
+
+        public class InternalTarget : Target
+        {
+            private readonly InvisibilitySpell m_Owner;
+
+            public InternalTarget(InvisibilitySpell owner) : base(12, false, TargetFlags.Beneficial)
+            {
+                m_Owner = owner;
+            }
+
+            protected override void OnTarget(Mobile from, object o)
+            {
+                if (o is Mobile) m_Owner.Target((Mobile) o);
+            }
+
+            protected override void OnTargetFinish(Mobile from)
+            {
+                m_Owner.FinishSequence();
+            }
         }
     }
 }

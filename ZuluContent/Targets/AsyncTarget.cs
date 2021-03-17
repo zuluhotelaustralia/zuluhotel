@@ -66,7 +66,7 @@ namespace Server.Targeting
         {
             Target = Target is TCast value ? value : default,
             Type = Type,
-            InvalidTarget = Target is not TCast ? Target : InvalidTarget,
+            InvalidTarget = InvalidTarget,
             CancelType = CancelType
         };
     }

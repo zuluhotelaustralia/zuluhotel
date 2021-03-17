@@ -1,57 +1,90 @@
-using System.Threading.Tasks;
-using Server.Network;
+using System.Collections.Generic;
+using Server.Targeting;
 
 namespace Server.Spells.Sixth
 {
-    public class RevealSpell : MagerySpell, IAsyncSpell
+    public class RevealSpell : MagerySpell
     {
-        public RevealSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-
-        public async Task CastAsync()
+        public RevealSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
-            var target = SpellHelper.GetSurfaceTop(Caster.Location);
+        }
 
-            var range = (int) (Caster.Skills[SkillName.Magery].Value / 10.0 - 5);
 
-            var found = 0;
-            var eable = Caster.Map.GetMobilesInRange(target, range > 1 ? range : 1);
-            foreach (var hider in eable)
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
+        }
+
+        public void Target(IPoint3D p)
+        {
+            if (!Caster.CanSee(p))
             {
-                if (!hider.Hidden)
-                    continue;
-                
-                var skill = SpellHelper.TryResistDamage(Caster, hider, Circle, (int)Caster.Skills[SkillName.Magery].Value);
-                var resist = hider.Skills[SkillName.MagicResist].Value / 1.5;
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+            }
+            else if (CheckSequence())
+            {
+                SpellHelper.Turn(Caster, p);
 
-                if (skill > resist)
+                SpellHelper.GetSurfaceTop(ref p);
+
+                var targets = new List<Mobile>();
+
+                var map = Caster.Map;
+
+                if (map != null)
                 {
-                    hider.RevealingAction();
+                    IPooledEnumerable eable = map.GetMobilesInRange(new Point3D(p),
+                        1 + (int) (Caster.Skills[SkillName.Magery].Value / 20.0));
 
-                    hider.FixedParticles(0x375A, 9, 20, 5049, EffectLayer.Head);
-                    hider.PlaySound(0x1FD);
-                    
-                    // You have been revealed!
-                    hider.PrivateOverheadMessage(
-                        MessageType.Regular, 
-                        ZhConfig.Messaging.FailureHue, 
-                        500814,
-                        hider.NetState
-                    );
-                    
-                    hider.PrivateOverheadMessage(
-                        MessageType.Regular, 
-                        ZhConfig.Messaging.SuccessHue, 
-                        true,
-                        "Ah ha!!",
-                        Caster.NetState
-                    );
-                    found++;
+                    foreach (Mobile m in eable)
+                        if (m.Hidden && (m.AccessLevel == AccessLevel.Player || Caster.AccessLevel > m.AccessLevel) &&
+                            CheckDifficulty(Caster, m))
+                            targets.Add(m);
+
+                    eable.Free();
+                }
+
+                for (var i = 0; i < targets.Count; ++i)
+                {
+                    var m = targets[i];
+
+                    m.RevealingAction();
+
+                    m.FixedParticles(0x375A, 9, 20, 5049, EffectLayer.Head);
+                    m.PlaySound(0x1FD);
                 }
             }
-            eable.Free();
 
-            if (found == 0) 
-                Caster.SendLocalizedMessage(500817); // You can see nothing hidden there.
+            FinishSequence();
+        }
+
+        // Reveal uses magery and detect hidden vs. hide and stealth 
+        private static bool CheckDifficulty(Mobile from, Mobile m)
+        {
+            return true;
+        }
+
+        public class InternalTarget : Target
+        {
+            private readonly RevealSpell m_Owner;
+
+            public InternalTarget(RevealSpell owner) : base(12, true, TargetFlags.None)
+            {
+                m_Owner = owner;
+            }
+
+            protected override void OnTarget(Mobile from, object o)
+            {
+                var p = o as IPoint3D;
+
+                if (p != null)
+                    m_Owner.Target(p);
+            }
+
+            protected override void OnTargetFinish(Mobile from)
+            {
+                m_Owner.FinishSequence();
+            }
         }
     }
 }

@@ -584,13 +584,6 @@ namespace Scripts.Zulu.Engines.Classes
                 strength *= Bonus;
         }
 
-        public virtual void OnMove(Mobile mobile, Direction direction, ref bool canMove)
-        {
-            
-        }
-
-        public void OnHiddenChanged(Mobile mobile) { }
-
         #endregion
 
         #region Unused hooks

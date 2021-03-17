@@ -7,9 +7,9 @@ namespace Server.Spells
 {
     public static class BuffExtensions
     {
-        public static bool CanBuff(this Mobile caster, Mobile target, bool notify = true, params BuffIcon[] icons)
+        public static bool CanBuff(this Mobile caster, Mobile target, BuffIcon icon, bool notify = true)
         {
-            if (target.HasOneOfBuffs(icons))
+            if ((target as IBuffable)?.BuffManager.HasBuff(icon) == true)
             {
                 if (caster != null && notify)
                     caster.SendLocalizedMessage(caster == target

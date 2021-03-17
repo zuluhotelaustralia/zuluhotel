@@ -1703,7 +1703,14 @@ namespace Server.Mobiles
                 Delta(MobileDelta.Noto);
             }
         }
-        
+
+        public override void RevealingAction()
+        {
+            Spells.Sixth.InvisibilitySpell.RemoveTimer(this);
+
+            base.RevealingAction();
+        }
+
         public void RemoveFollowers()
         {
             if (m_ControlMaster != null)

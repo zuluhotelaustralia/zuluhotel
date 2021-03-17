@@ -745,6 +745,8 @@ namespace Server.Mobiles
 
         public override void RevealingAction()
         {
+            Spells.Sixth.InvisibilitySpell.RemoveTimer(this);
+
             base.RevealingAction();
 
             m_IsStealthing = false; // IsStealthing should be moved to Server.Mobiles
@@ -1124,20 +1126,7 @@ namespace Server.Mobiles
         {
             CheckLightLevels(false);
         }
-
-        protected override bool OnMove(Direction d)
-        {
-            var canMove = base.OnMove(d);
-            this.FireHook(h => h.OnMove(this, d, ref canMove));
-            return canMove;
-        }
-
-        public override void OnHiddenChanged()
-        {
-            base.OnHiddenChanged();
-            this.FireHook(h => h.OnHiddenChanged(this));
-        }
-
+        
         public override bool OnMoveOver(Mobile m)
         {
             if (m is BaseCreature creature && !creature.Controlled)
@@ -1933,8 +1922,6 @@ namespace Server.Mobiles
 
         private BuffManager m_BuffManager;
         public BuffManager BuffManager => m_BuffManager ??= new BuffManager(this);
-        
-        
 
         #endregion
         

@@ -4,35 +4,54 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Gumps;
 using Server.Regions;
-using Server.Spells;
 
 namespace Server.Items
 {
     [DispellableFieldAttribute]
-    public class Moongate : Item, IDispellable
+    public class Moongate : Item
     {
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Point3D Target { get; set; }
+        private Point3D m_Target;
+        private Map m_TargetMap;
+        private bool m_bDispellable;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Map TargetMap { get; set; }
+        public Point3D Target
+        {
+            get { return m_Target; }
+            set { m_Target = value; }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Dispellable { get; set; }
+        public Map TargetMap
+        {
+            get { return m_TargetMap; }
+            set { m_TargetMap = value; }
+        }
 
-        public virtual bool ShowFeluccaWarning => false;
-        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool Dispellable
+        {
+            get { return m_bDispellable; }
+            set { m_bDispellable = value; }
+        }
+
+        public virtual bool ShowFeluccaWarning
+        {
+            get { return false; }
+        }
+
+
         [Constructible]
         public Moongate() : this(Point3D.Zero, null)
         {
-            Dispellable = true;
+            m_bDispellable = true;
         }
 
 
         [Constructible]
         public Moongate(bool bDispellable) : this(Point3D.Zero, null)
         {
-            Dispellable = bDispellable;
+            m_bDispellable = bDispellable;
         }
 
 
@@ -42,8 +61,8 @@ namespace Server.Items
             Movable = false;
             Light = LightType.Circle300;
 
-            Target = target;
-            TargetMap = targetMap;
+            m_Target = target;
+            m_TargetMap = targetMap;
         }
 
         [Constructible]
@@ -83,11 +102,11 @@ namespace Server.Items
         {
             ClientFlags flags = m.NetState == null ? ClientFlags.None : m.NetState.Flags;
 
-            if (TargetMap == Map.Felucca && m is PlayerMobile && ((PlayerMobile) m).Young)
+            if (m_TargetMap == Map.Felucca && m is PlayerMobile && ((PlayerMobile) m).Young)
             {
                 m.SendLocalizedMessage(1049543); // You decide against traveling to Felucca while you are still young.
             }
-            else if (m.Kills >= 5 && TargetMap != Map.Felucca)
+            else if (m.Kills >= 5 && m_TargetMap != Map.Felucca)
             {
                 m.SendLocalizedMessage(1019004); // You are not allowed to travel there.
             }
@@ -95,11 +114,11 @@ namespace Server.Items
             {
                 m.SendLocalizedMessage(1049616); // You are too busy to do that at the moment.
             }
-            else if (TargetMap != null && TargetMap != Map.Internal)
+            else if (m_TargetMap != null && m_TargetMap != Map.Internal)
             {
-                BaseCreature.TeleportPets(m, Target, TargetMap);
+                BaseCreature.TeleportPets(m, m_Target, m_TargetMap);
 
-                m.MoveToWorld(Target, TargetMap);
+                m.MoveToWorld(m_Target, m_TargetMap);
 
                 if (m.AccessLevel == AccessLevel.Player || !m.Hidden)
                     m.PlaySound(0x1FE);
@@ -118,11 +137,11 @@ namespace Server.Items
 
             writer.Write((int) 1); // version
 
-            writer.Write(Target);
-            writer.Write(TargetMap);
+            writer.Write(m_Target);
+            writer.Write(m_TargetMap);
 
             // Version 1
-            writer.Write(Dispellable);
+            writer.Write(m_bDispellable);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -131,11 +150,11 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            Target = reader.ReadPoint3D();
-            TargetMap = reader.ReadMap();
+            m_Target = reader.ReadPoint3D();
+            m_TargetMap = reader.ReadMap();
 
             if (version >= 1)
-                Dispellable = reader.ReadBool();
+                m_bDispellable = reader.ReadBool();
         }
 
         public virtual bool ValidateUse(Mobile from, bool message)
@@ -156,7 +175,7 @@ namespace Server.Items
 
         public virtual void BeginConfirmation(Mobile from)
         {
-            if (IsInTown(from.Location, from.Map) && !IsInTown(Target, TargetMap) ||
+            if (IsInTown(from.Location, from.Map) && !IsInTown(m_Target, m_TargetMap) ||
                 @from.Map != Map.Felucca && TargetMap == Map.Felucca && ShowFeluccaWarning)
             {
                 if (from.AccessLevel == AccessLevel.Player || !from.Hidden)
@@ -184,7 +203,7 @@ namespace Server.Items
             if (!ValidateUse(from, false) || !from.InRange(this, range))
                 return;
 
-            if (TargetMap != null)
+            if (m_TargetMap != null)
                 BeginConfirmation(from);
             else
                 from.SendMessage("This moongate does not seem to go anywhere.");
@@ -222,26 +241,65 @@ namespace Server.Items
 
     public class ConfirmationMoongate : Moongate
     {
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int GumpWidth { get; set; }
+        private int m_GumpWidth;
+        private int m_GumpHeight;
+
+        private int m_TitleColor;
+        private int m_MessageColor;
+
+        private int m_TitleNumber;
+        private int m_MessageNumber;
+
+        private string m_MessageString;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int GumpHeight { get; set; }
+        public int GumpWidth
+        {
+            get { return m_GumpWidth; }
+            set { m_GumpWidth = value; }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int TitleColor { get; set; }
+        public int GumpHeight
+        {
+            get { return m_GumpHeight; }
+            set { m_GumpHeight = value; }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int MessageColor { get; set; }
+        public int TitleColor
+        {
+            get { return m_TitleColor; }
+            set { m_TitleColor = value; }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int TitleNumber { get; set; }
+        public int MessageColor
+        {
+            get { return m_MessageColor; }
+            set { m_MessageColor = value; }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int MessageNumber { get; set; }
+        public int TitleNumber
+        {
+            get { return m_TitleNumber; }
+            set { m_TitleNumber = value; }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public string MessageString { get; set; }
+        public int MessageNumber
+        {
+            get { return m_MessageNumber; }
+            set { m_MessageNumber = value; }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public string MessageString
+        {
+            get { return m_MessageString; }
+            set { m_MessageString = value; }
+        }
 
 
         public ConfirmationMoongate() : this(Point3D.Zero, null)
@@ -259,8 +317,8 @@ namespace Server.Items
 
         public override void BeginConfirmation(Mobile from)
         {
-            if (GumpWidth > 0 && GumpHeight > 0 && TitleNumber > 0 &&
-                (MessageNumber > 0 || MessageString != null))
+            if (m_GumpWidth > 0 && m_GumpHeight > 0 && m_TitleNumber > 0 &&
+                (m_MessageNumber > 0 || m_MessageString != null))
             {
                 void Callback(bool okay)
                 {
@@ -268,9 +326,9 @@ namespace Server.Items
                 }
 
                 from.CloseGump<WarningGump>();
-                from.SendGump(new WarningGump(TitleNumber, TitleColor,
-                    MessageString == null ? (object) MessageNumber : (object) MessageString, MessageColor,
-                    GumpWidth, GumpHeight, Callback));
+                from.SendGump(new WarningGump(m_TitleNumber, m_TitleColor,
+                    m_MessageString == null ? (object) m_MessageNumber : (object) m_MessageString, m_MessageColor,
+                    m_GumpWidth, m_GumpHeight, Callback));
             }
             else
             {
@@ -284,16 +342,16 @@ namespace Server.Items
 
             writer.Write((int) 0); // version
 
-            writer.WriteEncodedInt(GumpWidth);
-            writer.WriteEncodedInt(GumpHeight);
+            writer.WriteEncodedInt(m_GumpWidth);
+            writer.WriteEncodedInt(m_GumpHeight);
 
-            writer.WriteEncodedInt(TitleColor);
-            writer.WriteEncodedInt(MessageColor);
+            writer.WriteEncodedInt(m_TitleColor);
+            writer.WriteEncodedInt(m_MessageColor);
 
-            writer.WriteEncodedInt(TitleNumber);
-            writer.WriteEncodedInt(MessageNumber);
+            writer.WriteEncodedInt(m_TitleNumber);
+            writer.WriteEncodedInt(m_MessageNumber);
 
-            writer.Write(MessageString);
+            writer.Write(m_MessageString);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -306,16 +364,16 @@ namespace Server.Items
             {
                 case 0:
                 {
-                    GumpWidth = reader.ReadEncodedInt();
-                    GumpHeight = reader.ReadEncodedInt();
+                    m_GumpWidth = reader.ReadEncodedInt();
+                    m_GumpHeight = reader.ReadEncodedInt();
 
-                    TitleColor = reader.ReadEncodedInt();
-                    MessageColor = reader.ReadEncodedInt();
+                    m_TitleColor = reader.ReadEncodedInt();
+                    m_MessageColor = reader.ReadEncodedInt();
 
-                    TitleNumber = reader.ReadEncodedInt();
-                    MessageNumber = reader.ReadEncodedInt();
+                    m_TitleNumber = reader.ReadEncodedInt();
+                    m_MessageNumber = reader.ReadEncodedInt();
 
-                    MessageString = reader.ReadString();
+                    m_MessageString = reader.ReadString();
 
                     break;
                 }

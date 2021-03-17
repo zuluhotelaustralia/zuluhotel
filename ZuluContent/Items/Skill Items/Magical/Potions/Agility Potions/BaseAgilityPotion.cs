@@ -34,7 +34,7 @@ namespace Server.Items
 
         public bool DoAgility(Mobile from)
         {
-            if (from.CanBuff(from, icons: BuffIcon.Agility))
+            if (from.CanBuff(from, BuffIcon.Agility))
             {
                 from.TryAddBuff(new StatBuff(StatType.Dex)
                 {

@@ -32,14 +32,12 @@ namespace Server.Spells.Fourth
 
             foreach (var mobile in targets)
             {
-                if (!Caster.HasOneOfBuffs(BuffIcon.Protection, BuffIcon.ArchProtection))
+                if (Caster.CanBuff(mobile, BuffIcon.Protection, false))
                 {
                     Caster.DoBeneficial(mobile);
                     
                     mobile.TryAddBuff(new ArmorBuff
                     {
-                        Icon = BuffIcon.ArchProtection,
-                        Title = "Arch Protection",
                         Value = (int) (SpellHelper.GetModAmount(Caster, mobile) / 1.5),
                         Duration = SpellHelper.GetDuration(Caster, mobile),
                     });

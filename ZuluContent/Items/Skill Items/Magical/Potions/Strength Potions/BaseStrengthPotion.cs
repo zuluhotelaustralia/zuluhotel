@@ -34,7 +34,7 @@ namespace Server.Items
 
         public bool DoStrength(Mobile from)
         {
-            if (from.CanBuff(from, icons: BuffIcon.Strength))
+            if (from.CanBuff(from, BuffIcon.Strength))
             {
                 from.TryAddBuff(new StatBuff(StatType.Str)
                 {

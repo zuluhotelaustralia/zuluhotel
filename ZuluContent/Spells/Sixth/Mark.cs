@@ -1,41 +1,77 @@
-using System.Threading.Tasks;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
 
 namespace Server.Spells.Sixth
 {
-    public class MarkSpell : MagerySpell, ITargetableAsyncSpell<RecallRune>
+    public class MarkSpell : MagerySpell
     {
-        public MarkSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-        
-        public async Task OnTargetAsync(ITargetResponse<RecallRune> response)
+        public MarkSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
-            if (!response.HasValue)
-                return;
-            
-            var target = response.Target;
-            
-            if (!SpellHelper.CheckTravel(Caster, TravelCheckType.Mark))
-                return;
+        }
 
-            if (SpellHelper.CheckMulti(Caster.Location, Caster.Map, true))
+
+        public override void OnCast()
+        {
+            Caster.Target = new InternalTarget(this);
+        }
+
+        public override bool CanCast()
+        {
+            return base.CanCast() && SpellHelper.CheckTravel(Caster, TravelCheckType.Mark);
+        }
+
+        public void Target(RecallRune rune)
+        {
+            if (!Caster.CanSee(rune))
+            {
+                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+            }
+            else if (!SpellHelper.CheckTravel(Caster, TravelCheckType.Mark))
+            {
+            }
+            else if (SpellHelper.CheckMulti(Caster.Location, Caster.Map, true))
             {
                 Caster.SendLocalizedMessage(501942); // That location is blocked.
-                return;
             }
-            
-            if (!target.IsChildOf(Caster.Backpack))
+            else if (!rune.IsChildOf(Caster.Backpack))
             {
-                // You must have this rune in your backpack in order to mark it.
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1062422);
-                return;
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2,
+                    1062422); // You must have this rune in your backpack in order to mark it.
             }
-            
-            target.Mark(Caster);
+            else if (CheckSequence())
+            {
+                rune.Mark(Caster);
 
-            Caster.PlaySound(0x1FA);
-            Effects.SendLocationEffect(Caster, 14201, 16);
+                Caster.PlaySound(0x1FA);
+                Effects.SendLocationEffect(Caster, 14201, 16);
+            }
+
+            FinishSequence();
+        }
+
+        private class InternalTarget : Target
+        {
+            private readonly MarkSpell m_Owner;
+
+            public InternalTarget(MarkSpell owner) : base(12, false, TargetFlags.None)
+            {
+                m_Owner = owner;
+            }
+
+            protected override void OnTarget(Mobile from, object o)
+            {
+                if (o is RecallRune)
+                    m_Owner.Target((RecallRune) o);
+                else
+                    @from.NetState.SendMessageLocalized(@from.Serial, @from.Body, MessageType.Regular, 0x3B2, 3, 501797,
+                        @from.Name, ""); // I cannot mark that object.
+            }
+
+            protected override void OnTargetFinish(Mobile from)
+            {
+                m_Owner.FinishSequence();
+            }
         }
     }
 }

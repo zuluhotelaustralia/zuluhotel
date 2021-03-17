@@ -904,11 +904,11 @@ namespace Server.Mobiles
             if (targ == null)
                 return false;
 
-            bool isReveal = targ is AsyncSpellTarget {Spell: RevealSpell};;
+            bool isReveal = targ is RevealSpell.InternalTarget;
             bool isDispel = targ is AsyncSpellTarget {Spell: DispelSpell};
             bool isParalyze = targ is AsyncSpellTarget {Spell: ParalyzeSpell};
             bool isTeleport = targ is AsyncSpellTarget {Spell: TeleportSpell};
-            bool isInvisible = targ is AsyncSpellTarget {Spell: InvisibilitySpell};
+            bool isInvisible = targ is InvisibilitySpell.InternalTarget;
             bool teleportAway = false;
 
             Mobile toTarget;
