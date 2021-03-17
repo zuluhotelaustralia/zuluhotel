@@ -30,7 +30,7 @@ namespace Server.Spells.Fifth
                 return;
             }
             
-            if (!Caster.CanBuff(Caster, BuffIcon.Incognito, false))
+            if (!Caster.CanBuff(Caster, false, BuffIcon.Incognito))
             {
                 Caster.SendLocalizedMessage(1079022); // You're already incognitoed!
                 return;

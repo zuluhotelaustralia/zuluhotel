@@ -54,11 +54,13 @@ namespace Server.Spells.Third
         }
 
         [DispellableField]
-        private sealed class MagicStoneWall : Item
+        private sealed class MagicStoneWall : Item, IDispellable
         {
             private readonly Mobile m_Caster;
             private DateTime m_End;
             private Timer m_Timer;
+
+            public bool Dispellable { get; set; } = true;
 
             public MagicStoneWall(
                 Point3D loc, 

@@ -16,7 +16,7 @@ namespace Server.Spells.First
             
             var target = response.Target;
             
-            if (!Caster.CanBuff(target, BuffIcon.Weaken))
+            if (!Caster.CanBuff(target, icons: BuffIcon.Weaken))
                 return;
             
             target.TryAddBuff(new StatBuff(StatType.Str)

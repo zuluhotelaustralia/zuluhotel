@@ -69,12 +69,14 @@ namespace Server.Spells.Fourth
         #region Item
 
         [DispellableField]
-        public class FireFieldItem : Item
+        public class FireFieldItem : Item, IDispellable
         {
             private Mobile m_Caster;
             private int m_Damage;
             private DateTime m_End;
             private Timer m_Timer;
+
+            public bool Dispellable { get; set; } = true;
 
             public FireFieldItem(int itemId, Point3D loc, Mobile caster, TimeSpan duration, int val, int damage) 
                 : base(itemId)
