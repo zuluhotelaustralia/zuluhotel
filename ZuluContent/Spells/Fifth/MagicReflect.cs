@@ -11,7 +11,7 @@ namespace Server.Spells.Fifth
 
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, BuffIcon.MagicReflection, false))
+            if (!Caster.CanBuff(Caster, false, BuffIcon.MagicReflection))
             {
                 Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
                 return;

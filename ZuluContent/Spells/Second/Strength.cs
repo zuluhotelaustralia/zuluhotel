@@ -16,7 +16,7 @@ namespace Server.Spells.Second
             
             var target = response.Target;
             
-            if (!Caster.CanBuff(target, BuffIcon.Strength))
+            if (!Caster.CanBuff(target, icons: BuffIcon.Strength))
                 return;
             
             target.TryAddBuff(new StatBuff(StatType.Str)

@@ -15,7 +15,7 @@ namespace Server.Spells.Third
             
             var target = response.Target;
             
-            if (!Caster.CanBuff(target, BuffIcon.Bless))
+            if (!Caster.CanBuff(target, true, BuffIcon.Curse, BuffIcon.Bless))
                 return;
             
             target.TryAddBuff(new StatBuff(StatType.All)

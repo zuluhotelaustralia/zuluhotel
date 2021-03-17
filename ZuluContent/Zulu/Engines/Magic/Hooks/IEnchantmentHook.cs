@@ -88,5 +88,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty);
 
         public void OnTrap(Mobile caster, Container target, ref double strength);
+        
+        public void OnMove(Mobile mobile, Direction direction, ref bool canMove);
+
+        public void OnHiddenChanged(Mobile mobile);
     }
 }

@@ -72,7 +72,7 @@ namespace Server.Items
 
         public bool Buff(Mobile from)
         {
-            if (from.CanBuff(from, BuffIcon.Bless))
+            if (from.CanBuff(from, icons: BuffIcon.Bless))
             {
                 from.TryAddBuff(new StatBuff(StatType.All)
                 {

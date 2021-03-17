@@ -191,5 +191,7 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public virtual void OnCure(Mobile caster, Mobile target, Poison poison, object source, ref double difficulty) { }
         public virtual void OnTrap(Mobile caster, Container target, ref double strength) { }
+        public virtual void OnMove(Mobile mobile, Direction direction, ref bool canMove) { }
+        public virtual void OnHiddenChanged(Mobile mobile) { }
     }
 }
