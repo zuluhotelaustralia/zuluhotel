@@ -1,100 +1,89 @@
 using System;
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Sixth
 {
-    public class ParalyzeFieldSpell : MagerySpell
+    public class ParalyzeFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public ParalyzeFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ParalyzeFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-        }
+            if (!response.HasValue)
+                return;
+            
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            
+            SpellHelper.Turn(Caster, point);
 
+            var dx = Caster.Location.X - point.X;
+            var dy = Caster.Location.Y - point.Y;
+            var rx = (dx - dy) * 44;
+            var ry = (dx + dy) * 44;
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(IPoint3D p)
-        {
-            if (!Caster.CanSee(p))
+            var eastToWest = rx switch
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
+                >= 0 when ry >= 0 => false,
+                >= 0 => true,
+                _ => ry >= 0
+            };
+
+            Effects.PlaySound(point, Caster.Map, 0x20B);
+
+            var itemId = eastToWest ? 0x3967 : 0x3979;
+
+            var power = 2.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
+
+            var seconds = Caster.Skills[SkillName.Magery].Value / 5.0 + 20.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref seconds));
+            var duration = TimeSpan.FromSeconds(seconds);
+
+            for (var i = -2; i <= 2; ++i)
             {
-                SpellHelper.Turn(Caster, p);
+                var loc = new Point3D(eastToWest ? point.X + i : point.X, eastToWest ? point.Y : point.Y + i, point.Z);
+                var canFit = SpellHelper.AdjustField(ref loc, Caster.Map, 12, false);
 
-                SpellHelper.GetSurfaceTop(ref p);
+                if (!canFit)
+                    continue;
 
-                var dx = Caster.Location.X - p.X;
-                var dy = Caster.Location.Y - p.Y;
-                var rx = (dx - dy) * 44;
-                var ry = (dx + dy) * 44;
+                Item item = new ParalyzeFieldItem(Caster, itemId, loc, duration);
+                item.ProcessDelta();
 
-                bool eastToWest;
-
-                if (rx >= 0 && ry >= 0)
-                    eastToWest = false;
-                else if (rx >= 0)
-                    eastToWest = true;
-                else if (ry >= 0)
-                    eastToWest = true;
-                else
-                    eastToWest = false;
-
-                Effects.PlaySound((Point3D)p, Caster.Map, 0x20B);
-
-                var itemID = eastToWest ? 0x3967 : 0x3979;
-
-                var duration = TimeSpan.FromSeconds(3.0 + Caster.Skills[SkillName.Magery].Value / 3.0);
-
-                for (var i = -2; i <= 2; ++i)
-                {
-                    var loc = new Point3D(eastToWest ? p.X + i : p.X, eastToWest ? p.Y : p.Y + i, p.Z);
-                    var canFit = SpellHelper.AdjustField(ref loc, Caster.Map, 12, false);
-
-                    if (!canFit)
-                        continue;
-
-                    Item item = new InternalItem(Caster, itemID, loc, Caster.Map, duration);
-                    item.ProcessDelta();
-
-                    Effects.SendLocationParticles(EffectItem.Create(loc, Caster.Map, EffectItem.DefaultDuration),
-                        0x376A, 9, 10, 5048);
-                }
+                Effects.SendLocationParticles(EffectItem.Create(loc, Caster.Map, EffectItem.DefaultDuration),
+                    0x376A, 9, 10, 5048);
             }
-
-            FinishSequence();
         }
 
         [DispellableField]
-        public class InternalItem : Item
+        public class ParalyzeFieldItem : Item
         {
             private Mobile m_Caster;
             private DateTime m_End;
             private Timer m_Timer;
 
-            public InternalItem(Mobile caster, int itemID, Point3D loc, Map map, TimeSpan duration) : base(itemID)
+            public ParalyzeFieldItem(Mobile caster, int itemId, Point3D loc, TimeSpan duration) : base(itemId)
             {
                 Visible = false;
                 Movable = false;
                 Light = LightType.Circle300;
+                m_Caster = caster;
 
-                MoveToWorld(loc, map);
+                MoveToWorld(loc, m_Caster.Map);
 
                 if (caster.InLOS(this))
                     Visible = true;
                 else
-                    Delete();
+                    base.Delete();
 
                 if (Deleted)
                     return;
 
-                m_Caster = caster;
 
                 m_Timer = new InternalTimer(this, duration);
                 m_Timer.Start();
@@ -102,21 +91,15 @@ namespace Server.Spells.Sixth
                 m_End = DateTime.Now + duration;
             }
 
-            public InternalItem(Serial serial) : base(serial)
-            {
-            }
+            public ParalyzeFieldItem(Serial serial) : base(serial) { }
 
-            public override bool BlocksFit
-            {
-                get { return true; }
-            }
+            public override bool BlocksFit => true;
 
             public override void OnAfterDelete()
             {
                 base.OnAfterDelete();
 
-                if (m_Timer != null)
-                    m_Timer.Stop();
+                m_Timer?.Stop();
             }
 
             public override void Serialize(IGenericWriter writer)
@@ -160,13 +143,15 @@ namespace Server.Spells.Sixth
 
                     m_Caster.DoHarmful(mobile);
 
-                    var duration = 7.0 + m_Caster.Skills[SkillName.Magery].Value * 0.2;
+                    var duration = 10.0;
+                    m_Caster.FireHook(h => h.OnModifyWithMagicEfficiency(m_Caster, ref duration));
 
-                    mobile.Paralyze(TimeSpan.FromSeconds(duration));
-
-                    mobile.PlaySound(0x204);
-                    mobile.FixedEffect(0x376A, 10, 16);
-
+                    if (!SpellHelper.TryResist(m_Caster, mobile, SpellCircle.Fifth))
+                    {
+                        mobile.Paralyze(TimeSpan.FromSeconds(duration));
+                        mobile.PlaySound(0x204);
+                        mobile.FixedEffect(0x376A, 10, 16);
+                    }
                 }
 
                 return true;
@@ -186,27 +171,6 @@ namespace Server.Spells.Sixth
                 {
                     m_Item.Delete();
                 }
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly ParalyzeFieldSpell m_Owner;
-
-            public InternalTarget(ParalyzeFieldSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is IPoint3D)
-                    m_Owner.Target((IPoint3D) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
             }
         }
     }

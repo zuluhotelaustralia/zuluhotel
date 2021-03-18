@@ -63,6 +63,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         [IgnoreMember] public override string AffixName => string.Empty;
         
         protected override string StatModName => $"{GetType().Name}:{StatType.ToString()}:{Icon}";
+
+        public StatBuff() : base(StatType.All) { }
         
         public StatBuff(StatType stat) : base(stat)
         {

@@ -18,7 +18,7 @@ namespace Server.Spells.First
 
             var target = response.Target;
             
-            if (!Caster.CanBuff(target, BuffIcon.ReactiveArmor))
+            if (!Caster.CanBuff(target, icons: BuffIcon.ReactiveArmor))
                 return;
 
             var charges = Caster.Skills[SkillName.Magery].Value / 15;

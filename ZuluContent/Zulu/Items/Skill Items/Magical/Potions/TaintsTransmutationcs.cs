@@ -92,7 +92,7 @@ namespace Server.Items
 
             var duration = TimeSpan.FromSeconds(PotionStrength * 120);
 
-            if (from.CanBuff(from, BuffIcon.Bless) && PolymorphSpell.Buff(from, body, duration))
+            if (from.CanBuff(from, icons: BuffIcon.Bless) && PolymorphSpell.Buff(from, body, duration))
             {
                 from.TryAddBuff(new StatBuff(StatType.All)
                 {

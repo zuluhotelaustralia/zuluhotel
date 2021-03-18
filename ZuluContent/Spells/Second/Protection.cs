@@ -17,7 +17,7 @@ namespace Server.Spells.Second
             
             var target = response.Target;
             
-            if (!Caster.CanBuff(target, BuffIcon.Protection))
+            if (!Caster.CanBuff(target, true, BuffIcon.Protection, BuffIcon.ArchProtection))
                 return;
             
             target.TryAddBuff(new ArmorBuff
