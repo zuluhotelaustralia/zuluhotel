@@ -91,7 +91,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public abstract class BaseStatBonus<T> : Enchantment<T> where T : EnchantmentInfo, new()
     {
-        protected StatType StatType;
+        [Key(2)]protected StatType StatType;
         protected StatMod Mod;
         private int m_Value;
         protected Mobile Mobile;

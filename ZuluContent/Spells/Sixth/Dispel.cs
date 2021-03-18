@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
@@ -31,7 +32,7 @@ namespace Server.Spells.Sixth
                     if (!Caster.ShilCheckSkill(SkillName.MagicResist, (int) magery, 25))
                         item.Delete();
                     else
-                        Caster.SendMessage("You failed to dispell the field.");
+                        Caster.SendFailureMessage("You failed to dispel the field.");
                 }
                 else
                 {
@@ -47,7 +48,6 @@ namespace Server.Spells.Sixth
 
             SpellHelper.Turn(Caster, loc);
 
-            Caster.DoHarmful(target);
             (target as IBuffable)?.BuffManager.DispelBuffs();
 
             if (target is BaseCreature {Summoned: true} creature)

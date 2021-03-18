@@ -17,7 +17,7 @@ namespace Server.Spells.Sixth
             var eable = Caster.Map.GetMobilesInRange(target, range > 1 ? range : 1);
             foreach (var hider in eable)
             {
-                if (!hider.Hidden)
+                if (!hider.Hidden || hider.AccessLevel > Caster.AccessLevel)
                     continue;
                 
                 var skill = SpellHelper.TryResistDamage(Caster, hider, Circle, (int)Caster.Skills[SkillName.Magery].Value);
