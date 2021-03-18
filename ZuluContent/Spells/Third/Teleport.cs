@@ -11,15 +11,17 @@ namespace Server.Spells.Third
 {
     public class TeleportSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public TeleportSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-        
+        public TeleportSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        {
+        }
+
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
             if (!response.HasValue)
                 return;
 
             var point = response.Target;
-            
+
             var orig = point;
             var map = Caster.Map;
 
@@ -33,30 +35,30 @@ namespace Server.Spells.Third
                 Caster.SendLocalizedMessage(502361); // You cannot teleport into that area from here.
                 return;
             }
-            
+
             if (!SpellHelper.CheckTravel(Caster, map, to, TravelCheckType.TeleportTo))
             {
                 Caster.SendLocalizedMessage(502360); // You cannot teleport into that area.
                 return;
             }
-            
+
             if (map == null || !map.CanSpawnMobile(to))
             {
                 Caster.SendLocalizedMessage(501942); // That location is blocked.
                 return;
             }
-            
+
             if (SpellHelper.CheckMulti(to, map) || Region.Find(to, map).GetRegion(typeof(HouseRegion)) != null)
             {
                 Caster.SendLocalizedMessage(502831); // Cannot teleport to that spot.
                 return;
             }
-            
+
             SpellHelper.Turn(Caster, orig);
 
             Caster.Location = to;
             Caster.ProcessDelta();
-            
+
             if (Caster.Player)
             {
                 Effects.SendLocationParticles(EffectItem.Create(from, Caster.Map, EffectItem.DefaultDuration), 0x3728,
@@ -74,9 +76,10 @@ namespace Server.Spells.Third
             IPooledEnumerable eable = Caster.GetItemsInRange(0);
 
             foreach (Item item in eable)
-                if (item is ParalyzeFieldSpell.ParalyzeFieldItem || item is PoisonFieldSpell.PoisonFieldItem ||
-                    item is FireFieldSpell.FireFieldItem)
+            {
+                if (item is FieldItem)
                     item.OnMoveOver(Caster);
+            }
 
             eable.Free();
         }

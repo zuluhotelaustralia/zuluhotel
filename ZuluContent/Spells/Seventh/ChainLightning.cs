@@ -1,109 +1,41 @@
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using System.Threading.Tasks;
+using Server.Engines.Magic;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Seventh
 {
-    public class ChainLightningSpell : MagerySpell
+    public class ChainLightningSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public ChainLightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ChainLightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-        }
-
-
-        public override bool DelayedDamage
-        {
-            get { return true; }
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(IPoint3D p)
-        {
-            if (!Caster.CanSee(p))
+            if (!response.HasValue)
+                return;
+            
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            
+            var range = Caster.Skills[SkillName.Magery].Value / 15.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
+            
+            var eable = Caster.Map.GetMobilesInRange(point, (int)range);
+            foreach (var target in eable)
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
+                if (!SpellHelper.ValidIndirectTarget(Caster, target) || 
+                    !Caster.CanBeHarmful(target, false) ||
+                    !Caster.InLOS(target)
+                )
+                    continue;
+
+                var damage = SpellHelper.CalcSpellDamage(Caster, target, this, true);
+                target.BoltEffect(0);
+                SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
             }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
-            {
-                SpellHelper.Turn(Caster, p);
+            eable.Free();
 
-                if (p is Item item)
-                    p = item.GetWorldLocation();
-
-
-                var map = Caster.Map;
-
-                if (map == null)
-                    return;
-
-                var mobilesInRange = map.GetMobilesInRange(new Point3D(p), 2);
-
-                var targets = mobilesInRange
-                    .Where(m => SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false));
-
-                mobilesInRange.Free();
-
-                double damage = Utility.Random(27, 22);
-
-                if (targets.Any())
-                {
-                    damage /= targets.Count();
-
-                    foreach (var t in targets)
-                    {
-                        var toDeal = damage;
-                        var m = t;
-
-                        if (CheckResisted(m))
-                        {
-                            toDeal *= 0.5;
-
-                            m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                        }
-
-                        toDeal *= GetDamageScalar(m);
-                        Caster.DoHarmful(m);
-                        SpellHelper.Damage((int) toDeal, m, Caster, this);
-
-
-                        m.BoltEffect(0);
-                    }
-                }
-                else
-                {
-                    Caster.PlaySound(0x29);
-                }
-            }
-
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly ChainLightningSpell m_Owner;
-
-            public InternalTarget(ChainLightningSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                var p = o as IPoint3D;
-
-                if (p != null)
-                    m_Owner.Target(p);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            Caster.PlaySound(0x29);
         }
     }
 }

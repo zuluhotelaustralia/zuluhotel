@@ -33,6 +33,19 @@ namespace Server.Spells
 
             var response = await target;
 
+            // If the target request is typeof IPoint3D and they target a mobile, rewrite the response Mobile.Location
+            if (response is ITargetResponse<IPoint3D> {InvalidTarget: Mobile {Location: T location}})
+            {
+                response = new TargetResponse<T>
+                {
+                    Target = location,
+                    Type = response.Type,
+                    InvalidTarget = response.InvalidTarget,
+                    CancelType = response.CancelType,
+                };
+            }
+
+            // If the target request is typeof Mobile do the beneficial/harmful sequences and check magic reflection
             if (response.Target is Mobile mobile)
             {
                 if (Info.TargetOptions.Flags == TargetFlags.Beneficial && !CheckBeneficialSequence(mobile))

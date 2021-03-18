@@ -177,7 +177,7 @@ namespace Server.Items
                 case 3:
                     ICraftable.Deserialize(reader, this);
 
-                    goto case 0;
+                    goto case 2;
                 case 2:
                 {
                     PotionStrength = reader.ReadUInt();

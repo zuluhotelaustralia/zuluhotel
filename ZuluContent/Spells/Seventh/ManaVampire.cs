@@ -1,80 +1,51 @@
+using System.Threading.Tasks;
+using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Seventh
 {
-    public class ManaVampireSpell : MagerySpell
+    public class ManaVampireSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ManaVampireSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ManaVampireSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
+            target.Spell?.OnCasterHurt();
+            target.Paralyzed = false;
+            
+            var magery = Caster.Skills[SkillName.Magery].Value;
+            var resist = target.Skills[SkillName.MagicResist].Value;
 
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref magery));
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            string message;
+            if (resist >= magery + 5)
+                message = $"{target.Name}'s will is too strong!";
+            else
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (CheckHarmfulSequence(m))
-            {
-                SpellHelper.Turn(Caster, m);
+                var amount = SpellHelper.TryResistDamage(Caster, target, SpellCircle.Seventh, (int)magery);
+                if (amount > target.Mana)
+                    amount = target.Mana;
 
-                SpellHelper.CheckReflect((int) Circle, Caster, ref m);
-
-                if (m.Spell != null)
-                    m.Spell.OnCasterHurt();
-
-                m.Paralyzed = false;
-
-                var toDrain = 0;
-
-                if (CheckResisted(m))
-                    m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                else
-                    toDrain = m.Mana;
-
-                if (toDrain > Caster.ManaMax - Caster.Mana)
-                    toDrain = Caster.ManaMax - Caster.Mana;
-
-                m.Mana -= toDrain;
-                Caster.Mana += toDrain;
-
-                m.FixedParticles(0x374A, 10, 15, 5054, EffectLayer.Head);
-                m.PlaySound(0x1F9);
-
+                target.Mana -= amount;
+                Caster.Mana += amount;
+                
+                message = $"You drained {amount} mana out of {target.Name}'s aura!";
             }
 
-            FinishSequence();
-        }
+            target.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, message, Caster.NetState);
+            
+            target.FixedParticles(0x374A, 10, 15, 5054, EffectLayer.Head);
+            target.PlaySound(0x1F9);
 
-        public override double GetResistPercent(Mobile target)
-        {
-            return 98.0;
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly ManaVampireSpell m_Owner;
-
-            public InternalTarget(ManaVampireSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile) m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
         }
     }
 }
