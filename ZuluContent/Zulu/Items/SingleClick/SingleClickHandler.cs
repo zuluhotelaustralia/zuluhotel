@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -49,11 +50,17 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
 
-            var text = item is ICraftable craftable && craftable.PlayerConstructed
-                ? $"{GetCraftedFortified(item as Item)}{GetCraftedExceptional(item as Item)}{GetCraftedResource(item as Item)}{GetItemDesc(item as Item)}{GetCraftedBy(item as Item)}"
+            var text = item is ICraftable {PlayerConstructed: true} craftable
+                ? GetCraftableItemName(craftable)
                 : $"{prefix}{GetItemDesc(item as Item)}{suffix}";
 
             return text;
+        }
+
+        public static string GetCraftableItemName(ICraftable craftable)
+        {
+            return
+                $"{GetCraftedFortified(craftable)}{GetCraftedExceptional(craftable)}{GetCraftedResource(craftable)}{GetItemDesc(craftable as Item)}{GetCraftedBy(craftable)}";
         }
 
         private static void DefaultHandleSingleClick<T>(T item, Mobile m) where T : Item, IMagicItem
@@ -66,42 +73,37 @@ namespace ZuluContent.Zulu.Items.SingleClick
             SendResponse(m, item, text);
         }
 
-        private static string GetCraftedFortified(Item item)
+        private static void CraftableHandleSingleClick<T>(T item, Mobile m) where T : Item, ICraftable
         {
-            return item is BaseHat {Fortified: ItemFortificationType.Fortified} ? "Fortified " : "";
+            if (!Validate(m, item))
+                return;
+
+            var text = GetCraftableItemName(item);
+
+            SendResponse(m, item, text);
         }
 
-        private static string GetCraftedExceptional(Item item)
+        private static string GetCraftedFortified(ICraftable craftable)
         {
-            var isExceptional = false;
-            if (item is BaseArmor {Mark: ArmorQuality.Exceptional})
-                isExceptional = true;
-            else if (item is BaseClothing {Mark: ClothingQuality.Exceptional})
-                isExceptional = true;
-            else if (item is BaseContainer {Mark: ContainerQuality.Exceptional})
-                isExceptional = true;
-            else if (item is BaseWeapon {Mark: WeaponQuality.Exceptional})
-                isExceptional = true;
-            return isExceptional ? "Exceptional " : "";
+            return craftable is BaseHat {Fortified: ItemFortificationType.Fortified} ? "Fortified " : "";
         }
 
-        private static string GetCraftedResource(Item item)
+        private static string GetCraftedExceptional(ICraftable craftable)
         {
-            var resName = "";
-            if (item is BaseArmor armor)
-                resName = CraftResources.GetName(armor.Resource);
-            else if (item is BaseWeapon weapon)
-                resName = CraftResources.GetName(weapon.Resource);
-            else if (item is BaseJewel jewel)
-                resName = CraftResources.GetName(jewel.Resource);
-            else if (item is BaseContainer container)
-                resName = CraftResources.GetName(container.Resource);
+            return craftable.Mark == MarkQuality.Exceptional ? "Exceptional " : "";
+        }
+
+        private static string GetCraftedResource(ICraftable craftable)
+        {
+            var resName = craftable is IResource craftableResource
+                ? CraftResources.GetName(craftableResource.Resource)
+                : String.Empty;
             return resName.Length > 0 ? resName + " " : resName;
         }
 
-        private static string GetCraftedBy(Item item)
+        private static string GetCraftedBy(ICraftable craftable)
         {
-            return item is ICraftable {Crafter: not null} craftable
+            return craftable.Crafter != null
                 ? $" [Crafted by {craftable.Crafter.Name}]"
                 : string.Empty;
         }

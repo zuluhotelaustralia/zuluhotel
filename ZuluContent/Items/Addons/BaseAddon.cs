@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.Engines.Craft;
 using Server.Multis;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Items
 {
@@ -23,26 +27,6 @@ namespace Server.Items
 
     public abstract class BaseAddon : Item, IChopable, IAddon
     {
-        #region Mondain's Legacy
-
-        private CraftResource m_Resource;
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public CraftResource Resource
-        {
-            get { return m_Resource; }
-            set
-            {
-                if (m_Resource != value)
-                {
-                    m_Resource = value;
-                    Hue = CraftResources.GetHue(m_Resource);
-                }
-            }
-        }
-
-        #endregion
-
         private List<AddonComponent> m_Components;
 
         public void AddComponent(AddonComponent c, int x, int y, int z)
@@ -57,17 +41,26 @@ namespace Server.Items
             c.MoveToWorld(new Point3D(X + x, Y + y, Z + z), Map);
         }
 
+        public void SetComponentProps(MarkQuality mark, CraftResource resource, Mobile crafter, bool playerConstructed)
+        {
+            if (!Deleted && m_Components != null)
+            {
+                foreach (var component in m_Components)
+                {
+                    component.Mark = mark;
+                    component.Resource = resource;
+                    component.Crafter = crafter;
+                    component.PlayerConstructed = playerConstructed;
+                }
+            }
+        }
+
         public BaseAddon() : base(1)
         {
             Movable = false;
             Visible = false;
 
             m_Components = new List<AddonComponent>();
-        }
-
-        public virtual bool RetainDeedHue
-        {
-            get { return false; }
         }
 
         public virtual void OnChop(Mobile from)
@@ -79,49 +72,29 @@ namespace Server.Items
                 Effects.PlaySound(GetWorldLocation(), Map, 0x3B3);
                 from.SendLocalizedMessage(500461); // You destroy the item.
 
-                int hue = 0;
-
-                if (RetainDeedHue)
-                {
-                    for (int i = 0; hue == 0 && i < m_Components.Count; ++i)
-                    {
-                        AddonComponent c = m_Components[i];
-
-                        if (c.Hue != 0)
-                            hue = c.Hue;
-                    }
-                }
-
                 Delete();
 
                 house.Addons.Remove(this);
 
-                BaseAddonDeed deed = Deed;
+                var deed = Deed;
 
                 if (deed != null)
                 {
-                    if (RetainDeedHue)
-                        deed.Hue = hue;
+                    deed.Mark = m_Components[0].Mark;
+                    deed.Resource = m_Components[0].Resource;
+                    deed.PlayerConstructed = m_Components[0].PlayerConstructed;
+                    deed.Crafter = m_Components[0].Crafter;
 
                     from.AddToBackpack(deed);
                 }
             }
         }
 
-        public virtual BaseAddonDeed Deed
-        {
-            get { return null; }
-        }
+        public virtual BaseAddonDeed Deed => null;
 
-        Item IAddon.Deed
-        {
-            get { return Deed; }
-        }
+        Item IAddon.Deed => Deed;
 
-        public List<AddonComponent> Components
-        {
-            get { return m_Components; }
-        }
+        public List<AddonComponent> Components => m_Components;
 
         public BaseAddon(Serial serial) : base(serial)
         {
@@ -241,30 +214,6 @@ namespace Server.Items
 
             foreach (AddonComponent c in m_Components)
                 c.Delete();
-        }
-
-        public virtual bool ShareHue
-        {
-            get { return true; }
-        }
-
-        [Hue, CommandProperty(AccessLevel.GameMaster)]
-        public override int Hue
-        {
-            get { return base.Hue; }
-            set
-            {
-                if (base.Hue != value)
-                {
-                    base.Hue = value;
-
-                    if (!Deleted && ShareHue && m_Components != null)
-                    {
-                        foreach (AddonComponent c in m_Components)
-                            c.Hue = value;
-                    }
-                }
-            }
         }
 
         public override void Serialize(IGenericWriter writer)

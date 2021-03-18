@@ -689,7 +689,6 @@ namespace Server
 
                     BaseInstrument instr = (BaseInstrument) item;
 
-                    instr.Mark = InstrumentQuality.Regular;
                     instr.OldSlayer = slayer;
                 }
 

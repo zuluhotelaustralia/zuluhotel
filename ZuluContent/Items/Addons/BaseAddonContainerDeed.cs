@@ -2,20 +2,26 @@ using System;
 using Server.Multis;
 using Server.Targeting;
 using Server.Engines.Craft;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
     [Flipable(0x14F0, 0x14EF)]
-    public abstract class BaseAddonContainerDeed : Item, ICraftable
+    public abstract class BaseAddonContainerDeed : Item, ICraftable, IResource
     {
         public abstract BaseAddonContainer Addon { get; }
 
         private CraftResource m_Resource;
 
         [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
         {
-            get { return m_Resource; }
+            get => m_Resource;
             set
             {
                 if (m_Resource != value)
@@ -25,6 +31,12 @@ namespace Server.Items
                 }
             }
         }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
 
         public BaseAddonContainerDeed() : base(0x14F0)
         {
@@ -41,10 +53,12 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 1); // version
+            writer.Write((int) 2); // version
 
             // version 1
             writer.Write((int) m_Resource);
+
+            ICraftable.Serialize(writer, this);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -55,10 +69,19 @@ namespace Server.Items
 
             switch (version)
             {
+                case 2:
+                    ICraftable.Deserialize(reader, this);
+
+                    goto case 1;
                 case 1:
                     m_Resource = (CraftResource) reader.ReadInt();
                     break;
             }
+        }
+
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -70,9 +93,6 @@ namespace Server.Items
         }
 
         #region ICraftable
-
-        public Mobile Crafter { get; set; }
-        public bool PlayerConstructed { get; set; }
 
         public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes,

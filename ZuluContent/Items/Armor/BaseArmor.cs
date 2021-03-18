@@ -17,7 +17,7 @@ using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 namespace Server.Items
 {
     public abstract class BaseArmor : BaseEquippableItem, IScissorable, ICraftable, IWearableDurability, IArmorRating,
-        IRepairable
+        IRepairable, IResource
     {
         /* Armor internals work differently now (Jun 19 2003)
          *
@@ -37,6 +37,7 @@ namespace Server.Items
         // Instance values. These values must are unique to each armor piece.
         private int m_HitPoints;
         private Mobile m_Crafter;
+        private MarkQuality m_Mark;
         private CraftResource m_Resource;
 
         // Overridable values. These values are provided to override the defaults which get defined in the individual armor scripts.
@@ -123,13 +124,6 @@ namespace Server.Items
         {
             get => Enchantments.Get((SlayerHit e) => e.Type);
             set => Enchantments.Set((SlayerHit e) => e.Type = value);
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public AMA MeditationAllowance
-        {
-            get => Enchantments.Get((MeditationAllowance e) => e.Value);
-            set => Enchantments.Set((MeditationAllowance e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -252,13 +246,13 @@ namespace Server.Items
 
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ArmorQuality Mark
+        public MarkQuality Mark
         {
-            get => Enchantments.Get((ItemMark e) => (ArmorQuality) e.Value);
+            get => m_Mark;
             set
             {
                 UnscaleDurability();
-                Enchantments.Set((ItemMark e) => e.Value = (int) value);
+                m_Mark = value;
                 Invalidate();
                 ScaleDurability();
             }
@@ -375,7 +369,7 @@ namespace Server.Items
                 _ => 0
             };
 
-            if (Mark == ArmorQuality.Exceptional)
+            if (Mark == MarkQuality.Exceptional)
                 bonus += 20;
 
             return bonus;
@@ -545,7 +539,7 @@ namespace Server.Items
             if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
             {
                 SetSaveFlag(ref flags, SaveFlag.Identified, Identified != false);
-                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != ArmorQuality.Regular);
+                SetSaveFlag(ref flags, SaveFlag.Mark, Mark != MarkQuality.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Durability, Durability != ArmorDurabilityLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.Protection, ProtectionLevel != ArmorProtectionLevel.Regular);
                 SetSaveFlag(ref flags, SaveFlag.MedAllowance, m_Meditate != (AMA) (-1));
@@ -645,12 +639,12 @@ namespace Server.Items
                         m_Crafter = reader.ReadEntity<Mobile>();
 
                     if (GetSaveFlag(flags, SaveFlag.Mark))
-                        Mark = (ArmorQuality) reader.ReadEncodedInt();
+                        Mark = (MarkQuality) reader.ReadEncodedInt();
                     else if (!GetSaveFlag(flags, SaveFlag.NewMagicalProperties))
-                        Mark = ArmorQuality.Regular;
+                        Mark = MarkQuality.Regular;
 
-                    if (version == 5 && Mark == ArmorQuality.Low)
-                        Mark = ArmorQuality.Regular;
+                    if (version == 5 && Mark == MarkQuality.Low)
+                        Mark = MarkQuality.Regular;
 
                     if (GetSaveFlag(flags, SaveFlag.Durability))
                     {
@@ -734,7 +728,7 @@ namespace Server.Items
                     MaxHitPoints = reader.ReadInt();
                     m_HitPoints = reader.ReadInt();
                     m_Crafter = reader.ReadEntity<Mobile>();
-                    Mark = (ArmorQuality) reader.ReadInt();
+                    Mark = (MarkQuality) reader.ReadInt();
                     Durability = (ArmorDurabilityLevel) reader.ReadInt();
                     ProtectionLevel = (ArmorProtectionLevel) reader.ReadInt();
 
@@ -851,7 +845,7 @@ namespace Server.Items
 
             MagicEfficiencyPenalty = DefaultMagicEfficiencyPenalty;
 
-            Mark = ArmorQuality.Regular;
+            Mark = MarkQuality.Regular;
             Quality = 1.0;
             Durability = ArmorDurabilityLevel.Regular;
             m_Crafter = null;
@@ -1041,7 +1035,7 @@ namespace Server.Items
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (ArmorQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;
@@ -1056,9 +1050,13 @@ namespace Server.Items
             PlayerConstructed = true;
 
             var resEnchantments = CraftResources.GetEnchantments(Resource);
-            foreach (var (key, value) in resEnchantments)
+
+            if (resEnchantments != null)
             {
-                Enchantments.SetFromResourceType(key, value);
+                foreach (var (key, value) in resEnchantments)
+                {
+                    Enchantments.SetFromResourceType(key, value);
+                }
             }
 
             Quality = quality;

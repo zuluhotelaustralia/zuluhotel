@@ -4,7 +4,6 @@ using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Items;
-using Server.Mobiles;
 using Server.Commands;
 using Server.Misc;
 using Server.Utilities;
@@ -26,9 +25,12 @@ namespace Server.Engines.Craft
         public Mobile Crafter { get; set; }
         public bool PlayerConstructed { get; set; }
 
+        public MarkQuality Mark { get; set; }
+
         public static void Serialize(IGenericWriter writer, ICraftable item)
         {
             writer.Write(Version);
+            writer.WriteEncodedInt((int) item.Mark);
             writer.Write(item.PlayerConstructed);
 
             writer.Write(item.Crafter != null);
@@ -41,15 +43,26 @@ namespace Server.Engines.Craft
         public static void Deserialize(IGenericReader reader, ICraftable item)
         {
             var version = reader.ReadInt();
+
+            item.Mark = (MarkQuality) reader.ReadEncodedInt();
+
             item.PlayerConstructed = reader.ReadBool();
 
             if (reader.ReadBool())
                 item.Crafter = reader.ReadEntity<Mobile>();
         }
 
-        int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes,
+        public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
             BaseTool tool,
             CraftItem craftItem, int resHue);
+
+        public void OnSingleClick(Mobile m);
+    }
+
+    public interface IResource
+    {
+        public CraftResource Resource { get; set; }
     }
 
     public class CraftItem
@@ -269,7 +282,8 @@ namespace Server.Engines.Craft
         private static Type[] m_ColoredItemTable = new[]
         {
             typeof(BaseWeapon), typeof(BaseArmor), typeof(BaseClothing),
-            typeof(BaseJewel), typeof(BaseContainer)
+            typeof(BaseJewel), typeof(BaseContainer), typeof(BaseInstrument),
+            typeof(FishingPole)
         };
 
         private static Type[] m_ColoredResourceTable = new[]
@@ -283,10 +297,11 @@ namespace Server.Engines.Craft
             typeof(BaseArmor),
             typeof(BaseWeapon),
             typeof(BaseClothing),
-            typeof(BaseInstrument),
             typeof(BaseTool),
             typeof(BaseHarvestTool),
-            typeof(Spellbook), typeof(Runebook)
+            typeof(Runebook),
+            typeof(BaseInstrument),
+            typeof(FishingPole)
         };
 
         private static Type[] m_NeverColorTable = new[]
@@ -810,7 +825,7 @@ namespace Server.Engines.Craft
             craftSkill = craftSkillRequired;
             quality = resQuality;
 
-            if (exceptionalChance > Utility.RandomDouble() &&
+            if (exceptionalChance > Utility.Random(100) &&
                 from.ShilCheckSkill(craftSystem.MainSkill, exceptionalDifficulty, 0))
             {
                 mark = 2;

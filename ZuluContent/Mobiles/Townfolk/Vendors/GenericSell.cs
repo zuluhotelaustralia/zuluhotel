@@ -28,9 +28,9 @@ namespace Server.Mobiles
             {
                 BaseArmor armor = (BaseArmor) item;
 
-                if (armor.Mark == ArmorQuality.Low)
+                if (armor.Mark == MarkQuality.Low)
                     price = (int) (price * 0.60);
-                else if (armor.Mark == ArmorQuality.Exceptional)
+                else if (armor.Mark == MarkQuality.Exceptional)
                     price = (int) (price * 1.25);
 
                 price += 100 * (int) armor.Durability;
@@ -44,9 +44,9 @@ namespace Server.Mobiles
             {
                 BaseWeapon weapon = (BaseWeapon) item;
 
-                if (weapon.Mark == WeaponQuality.Low)
+                if (weapon.Mark == MarkQuality.Low)
                     price = (int) (price * 0.60);
-                else if (weapon.Mark == WeaponQuality.Exceptional)
+                else if (weapon.Mark == MarkQuality.Exceptional)
                     price = (int) (price * 1.25);
 
                 price += 100 * (int) weapon.DurabilityLevel;

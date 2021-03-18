@@ -5,6 +5,8 @@ using Server.Network;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Engines.Craft;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Items
 {
@@ -12,21 +14,20 @@ namespace Server.Items
     {
         public static readonly TimeSpan UseDelay = TimeSpan.FromSeconds(7.0);
 
-        private BookQuality m_Mark;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public BookQuality Mark
-        {
-            get { return m_Mark; }
-            set { m_Mark = value; }
-        }
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark { get; set; }
 
         private List<RunebookEntry> m_Entries;
         private string m_Description;
         private int m_CurCharges, m_MaxCharges;
         private int m_DefaultIndex;
         private SecureLevel m_Level;
-        private Mobile m_Crafter;
 
         private DateTime m_NextUse;
 
@@ -37,13 +38,6 @@ namespace Server.Items
         {
             get { return m_NextUse; }
             set { m_NextUse = value; }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter
-        {
-            get { return m_Crafter; }
-            set { m_Crafter = value; }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -92,6 +86,8 @@ namespace Server.Items
             Weight = 3.0;
             LootType = LootType.Blessed;
             Hue = 0x00;
+
+            Mark = MarkQuality.Regular;
 
             Layer = Layer.OneHanded;
 
@@ -147,11 +143,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(3);
+            writer.Write(2);
 
-            writer.Write((byte) m_Mark);
-
-            writer.Write(m_Crafter);
+            ICraftable.Serialize(writer, this);
 
             writer.Write((int) m_Level);
 
@@ -176,14 +170,10 @@ namespace Server.Items
 
             switch (version)
             {
-                case 3:
-                {
-                    m_Mark = (BookQuality) reader.ReadByte();
-                    goto case 2;
-                }
                 case 2:
                 {
-                    m_Crafter = reader.ReadEntity<Mobile>();
+                    ICraftable.Deserialize(reader, this);
+
                     goto case 1;
                 }
                 case 1:
@@ -282,8 +272,8 @@ namespace Server.Items
 
             base.OnSingleClick(from);
 
-            if (m_Crafter != null)
-                LabelTo(from, 1050043, m_Crafter.Name);
+            if (Crafter != null)
+                LabelTo(from, 1050043, Crafter.Name);
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -417,8 +407,6 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public bool PlayerConstructed { get; set; }
-
         public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
@@ -433,7 +421,9 @@ namespace Server.Items
             if (makersMark)
                 Crafter = from;
 
-            m_Mark = (BookQuality) (mark - 1);
+            Mark = (MarkQuality) mark;
+
+            PlayerConstructed = true;
 
             return mark;
         }

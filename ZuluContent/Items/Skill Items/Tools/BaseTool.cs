@@ -1,19 +1,52 @@
 using System;
 using Server.Network;
 using Server.Engines.Craft;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public enum ToolQuality
+    public abstract class BaseTool : Item, IUsesRemaining, IResource, ICraftable
     {
-        Low,
-        Regular,
-        Exceptional
-    }
+        private CraftResource m_Resource;
+        private MarkQuality m_Mark;
 
-    public abstract class BaseTool : Item, IUsesRemaining, ICraftable
-    {
-        private ToolQuality m_Mark;
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+
+                    if (CraftItem.RetainsColor(GetType()))
+                    {
+                        Hue = CraftResources.GetHue(m_Resource);
+                    }
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark
+        {
+            get => m_Mark;
+            set
+            {
+                UnscaleUses();
+                m_Mark = value;
+                ScaleUses();
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public Mobile Crafter { get; set; }
 
         public BaseTool(int itemID) : this(Utility.RandomMinMax(25, 75), itemID)
         {
@@ -22,26 +55,11 @@ namespace Server.Items
         public BaseTool(int uses, int itemID) : base(itemID)
         {
             UsesRemaining = uses;
-            m_Mark = ToolQuality.Regular;
+            Mark = MarkQuality.Regular;
         }
 
         public BaseTool(Serial serial) : base(serial)
         {
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter { get; set; }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public ToolQuality Mark
-        {
-            get { return m_Mark; }
-            set
-            {
-                UnscaleUses();
-                m_Mark = value;
-                ScaleUses();
-            }
         }
 
         public virtual bool BreakOnDepletion => true;
@@ -69,7 +87,7 @@ namespace Server.Items
 
         public int GetUsesScalar()
         {
-            return m_Mark == ToolQuality.Exceptional ? 200 : 100;
+            return Mark == MarkQuality.Exceptional ? 200 : 100;
         }
 
         public virtual void DisplayDurabilityTo(Mobile m)
@@ -86,7 +104,7 @@ namespace Server.Items
         {
             DisplayDurabilityTo(from);
 
-            base.OnSingleClick(from);
+            HandleSingleClick(this, from);
         }
 
         public virtual void OnBeginCraft(Mobile from, CraftItem item, CraftSystem system)
@@ -130,8 +148,9 @@ namespace Server.Items
 
             writer.Write((int) 1); // version
 
-            writer.Write((Mobile) Crafter);
-            writer.Write((int) m_Mark);
+            ICraftable.Serialize(writer, this);
+
+            writer.WriteEncodedInt((int) m_Resource);
 
             writer.Write((int) UsesRemaining);
         }
@@ -146,8 +165,10 @@ namespace Server.Items
             {
                 case 1:
                 {
-                    Crafter = reader.ReadEntity<Mobile>();
-                    m_Mark = (ToolQuality) reader.ReadInt();
+                    ICraftable.Deserialize(reader, this);
+
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
+
                     goto case 0;
                 }
                 case 0:
@@ -160,16 +181,28 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public bool PlayerConstructed { get; set; }
-
         public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
         {
-            Mark = (ToolQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;
+
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
 
             return mark;
         }

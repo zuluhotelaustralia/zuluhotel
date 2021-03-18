@@ -1,9 +1,10 @@
 using System;
-using System.Collections.Generic;
-using Server.Mobiles;
 using Server.Network;
 using Server.Engines.Craft;
 using Server.Engines.Harvest;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
@@ -13,23 +14,39 @@ namespace Server.Items
         bool ShowUsesRemaining { get; set; }
     }
 
-    public abstract class BaseHarvestTool : Item, IUsesRemaining, ICraftable
+    public abstract class BaseHarvestTool : Item, IUsesRemaining, ICraftable, IResource
     {
-        private Mobile m_Crafter;
-        private ToolQuality m_Mark;
-        private int m_UsesRemaining;
+        private CraftResource m_Resource;
+        private MarkQuality m_Mark;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Crafter
+        public Mobile Crafter { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
         {
-            get { return m_Crafter; }
-            set { m_Crafter = value; }
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+
+                    if (CraftItem.RetainsColor(GetType()))
+                    {
+                        Hue = CraftResources.GetHue(m_Resource);
+                    }
+                }
+            }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ToolQuality Mark
+        public MarkQuality Mark
         {
-            get { return m_Mark; }
+            get => m_Mark;
             set
             {
                 UnscaleUses();
@@ -39,25 +56,21 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int UsesRemaining
-        {
-            get { return m_UsesRemaining; }
-            set { m_UsesRemaining = value; }
-        }
+        public int UsesRemaining { get; set; }
 
         public void ScaleUses()
         {
-            m_UsesRemaining = m_UsesRemaining * GetUsesScalar() / 100;
+            UsesRemaining = UsesRemaining * GetUsesScalar() / 100;
         }
 
         public void UnscaleUses()
         {
-            m_UsesRemaining = m_UsesRemaining * 100 / GetUsesScalar();
+            UsesRemaining = UsesRemaining * 100 / GetUsesScalar();
         }
 
         public int GetUsesScalar()
         {
-            if (m_Mark == ToolQuality.Exceptional)
+            if (Mark == MarkQuality.Exceptional)
                 return 200;
 
             return 100;
@@ -77,20 +90,20 @@ namespace Server.Items
 
         public BaseHarvestTool(int usesRemaining, int itemID) : base(itemID)
         {
-            m_UsesRemaining = usesRemaining;
-            m_Mark = ToolQuality.Regular;
+            UsesRemaining = usesRemaining;
+            Mark = MarkQuality.Regular;
         }
 
         public virtual void DisplayDurabilityTo(Mobile m)
         {
-            LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString()); // Durability
+            LabelToAffix(m, 1017323, AffixType.Append, ": " + UsesRemaining.ToString()); // Durability
         }
 
         public override void OnSingleClick(Mobile from)
         {
             DisplayDurabilityTo(from);
 
-            base.OnSingleClick(from);
+            HandleSingleClick(this, from);
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -111,10 +124,11 @@ namespace Server.Items
 
             writer.Write((int) 1); // version
 
-            writer.Write((Mobile) m_Crafter);
-            writer.Write((int) m_Mark);
+            ICraftable.Serialize(writer, this);
 
-            writer.Write((int) m_UsesRemaining);
+            writer.WriteEncodedInt((int) m_Resource);
+
+            writer.Write((int) UsesRemaining);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -127,13 +141,15 @@ namespace Server.Items
             {
                 case 1:
                 {
-                    m_Crafter = reader.ReadEntity<Mobile>();
-                    m_Mark = (ToolQuality) reader.ReadInt();
+                    ICraftable.Deserialize(reader, this);
+
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
+
                     goto case 0;
                 }
                 case 0:
                 {
-                    m_UsesRemaining = reader.ReadInt();
+                    UsesRemaining = reader.ReadInt();
                     break;
                 }
             }
@@ -141,16 +157,28 @@ namespace Server.Items
 
         #region ICraftable Members
 
-        public bool PlayerConstructed { get; set; }
-
         public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes, BaseTool tool,
             CraftItem craftItem, int resHue)
         {
-            Mark = (ToolQuality) mark;
+            Mark = (MarkQuality) mark;
 
             if (makersMark)
                 Crafter = from;
+
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
 
             return mark;
         }
