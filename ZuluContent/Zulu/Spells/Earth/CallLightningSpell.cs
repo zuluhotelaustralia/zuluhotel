@@ -9,7 +9,7 @@ using Server.Spells;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class CallLightningSpell : AbstractEarthSpell
+    public class CallLightningSpell : EarthSpell
     {
         public override TimeSpan CastDelayBase
         {

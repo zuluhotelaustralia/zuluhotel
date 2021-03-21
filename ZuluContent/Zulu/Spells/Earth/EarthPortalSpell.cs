@@ -9,7 +9,7 @@ using Server.Mobiles;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class EarthPortalSpell : AbstractEarthSpell
+    public class EarthPortalSpell : EarthSpell
     {
         public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
 

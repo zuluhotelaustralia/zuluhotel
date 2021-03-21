@@ -9,7 +9,7 @@ using Server.Targeting;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class GustOfAirSpell : AbstractEarthSpell, IMobileTargeted
+    public class GustOfAirSpell : EarthSpell, IMobileTargeted
     {
         public override TimeSpan CastDelayBase
         {

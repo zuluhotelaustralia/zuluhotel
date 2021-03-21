@@ -11,7 +11,7 @@ using Server.Spells;
 //earth damage on single target, dex debuff
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class ShiftingEarthSpell : AbstractEarthSpell
+    public class ShiftingEarthSpell : EarthSpell
     {
         public override TimeSpan CastDelayBase
         {

@@ -10,7 +10,7 @@ using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class NaturesTouchSpell : AbstractEarthSpell
+    public class NaturesTouchSpell : EarthSpell
     {
         public override TimeSpan CastDelayBase
         {

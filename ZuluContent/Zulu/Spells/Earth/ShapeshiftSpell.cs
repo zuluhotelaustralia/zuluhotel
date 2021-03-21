@@ -11,7 +11,7 @@ using Server.Targeting;
 namespace Scripts.Zulu.Spells.Earth
 {
     // polymorph into a variety of animals, one of which is the little bird
-    public class ShapeshiftSpell : AbstractEarthSpell
+    public class ShapeshiftSpell : EarthSpell
     {
         private Entry[] m_Entries =
         {

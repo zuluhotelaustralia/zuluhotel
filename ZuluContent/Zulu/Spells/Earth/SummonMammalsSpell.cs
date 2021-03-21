@@ -9,7 +9,7 @@ using Server.Spells;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class SummonMammalsSpell : AbstractEarthSpell
+    public class SummonMammalsSpell : EarthSpell
     {
         private static Type[] m_Mammals =
         {

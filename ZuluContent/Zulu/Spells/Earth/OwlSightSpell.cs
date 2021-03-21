@@ -8,7 +8,7 @@ using Server.Targeting;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class OwlSightSpell : AbstractEarthSpell
+    public class OwlSightSpell : EarthSpell
     {
         public override TimeSpan CastDelayBase
         {

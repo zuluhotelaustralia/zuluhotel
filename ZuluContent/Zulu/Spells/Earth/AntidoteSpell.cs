@@ -1,86 +1,48 @@
-using System;
-using System.Collections;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server;
-using Server.Network;
-using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class AntidoteSpell : AbstractEarthSpell, IMobileTargeted
+    public class AntidoteSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        // Original zuluhotel functionality
-        // cure poisons no matter what
-        // leave target with poison immunity for duration based on skill
+        public AntidoteSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        // Current functionality:
-        // Cures poison more or less 100% chance
-        // Planned to add poison resistance when we add a zulu based prots system
-
-
-        public override TimeSpan CastDelayBase
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            get { return TimeSpan.FromSeconds(0); }
-        }
+            if (!response.HasValue)
+                return;
 
-        public override double RequiredSkill
-        {
-            get { return 60.0; }
-        }
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
 
-        public override int RequiredMana
-        {
-            get { return 5; }
-        }
+            var poison = target.Poison;
+            if (poison is null)
+                return;
 
-        public AntidoteSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new MobileTarget(this, 10, TargetFlags.Beneficial);
-        }
-
-        public void OnTargetFinished(Mobile from)
-        {
-            FinishSequence();
-        }
-
-        public void OnTarget(Mobile from, Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            if (target.CurePoison(Caster))
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                if (Caster != target)
+                {
+                    Caster.SendLocalizedMessage(1010058); // You have cured the target of all poisons!
+                    target.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
+                }
+                else
+                {
+                    Caster.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
+                }
+            }
+            else
+            {
+                target.SendLocalizedMessage(1010060); // You have failed to cure your target!
             }
 
-            if (!CheckBeneficialSequence(m)) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            var p = m.Poison;
-
-            if (p != null)
-                if (m.CurePoison(Caster))
-                {
-                    if (Caster != m)
-                        Caster.SendLocalizedMessage(1010058); // You have cured the target of all poisons!
-
-                    m.SendLocalizedMessage(1010059); // You have been cured of all poisons.
-                }
-
-
-            // TODO: Effects stolen from Cure spell, we may want
-            // different ones, or at least a different sound
-            // effect,
-            m.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
-            m.PlaySound(0x1E0);
-
-            Return:
-            FinishSequence();
+            target.FixedParticles(0x373A, 10, 15, 5012, EffectLayer.Waist);
+            target.PlaySound(0x1E0);
         }
     }
 }

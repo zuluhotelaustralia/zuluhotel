@@ -12,7 +12,7 @@ using Server.Spells;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class RisingFireSpell : AbstractEarthSpell
+    public class RisingFireSpell : EarthSpell
     {
         public override TimeSpan CastDelayBase
         {
