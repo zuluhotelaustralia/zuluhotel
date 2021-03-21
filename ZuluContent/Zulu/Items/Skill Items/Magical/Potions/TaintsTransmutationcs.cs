@@ -88,18 +88,18 @@ namespace Server.Items
         {
             var entries = Utility.RandomList(PolymorphSpell.Categories).Entries;
             var idx = Utility.Random(entries.Length);
-            var body = entries[idx].BodyID;
+            var body = entries[idx].BodyId;
 
             var duration = TimeSpan.FromSeconds(PotionStrength * 120);
 
-            if (from.CanBuff(from, icons: BuffIcon.Bless) && PolymorphSpell.Buff(from, body, duration))
+            if (from.CanBuff(from, true, BuffIcon.Polymorph))
             {
-                from.TryAddBuff(new StatBuff(StatType.All)
+                from.TryAddBuff(new Polymorph
                 {
                     Title = DefaultName,
-                    Details = new []{ $"Potion Strength: {PotionStrength}"},
-                    Value = (int) PotionStrength * 5 + idx,
                     Duration = duration,
+                    Value = (int) PotionStrength * 5 + idx,
+                    BodyMods = (body, 0)
                 });
                 return true;
             }

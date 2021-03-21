@@ -10,12 +10,12 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 {
     [MessagePackObject]
-    public class Incognito : Enchantment<IncognitoInfo>, IBuff
+    public class Polymorph : BaseStatBonus<PolymorphInfo>, IBuff
     {
         [IgnoreMember] public override string AffixName => string.Empty;
 
-        [Key(1)]
-        public (int body, int bodyHue, int hair, int hairHue, int facial, int facialHue, string name) Values
+        [Key(2)]
+        public (int body, int bodyHue) BodyMods
         {
             get;
             init;
@@ -23,25 +23,26 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
         #region IBuff
 
-        [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.Incognito;
-        [IgnoreMember] public string Title { get; init; } = "Incognito";
+        [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.Polymorph;
+        [IgnoreMember] public string Title { get; init; } = "Polymorph";
         [IgnoreMember] public string Description { get; init; }
         [IgnoreMember] public string[] Details { get; init; }
         [IgnoreMember] public bool ExpireOnDeath { get; init; } = true;
         [IgnoreMember] public bool Dispellable { get; init; } = true;
         [IgnoreMember] public TimeSpan Duration { get; init; } = TimeSpan.Zero;
         [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
+        
+        protected override string StatModName => $"{GetType().Name}:{StatType.ToString()}:{Icon}";
 
         public void OnBuffAdded(Mobile parent)
         {
-            parent.BodyMod = Values.body;
-            parent.HueMod = Values.bodyHue;
-            (parent as PlayerMobile)?.SetHairMods(Values.hair, Values.hairHue, Values.facial, Values.facialHue);
-            parent.NameMod = Values.name;
+            parent.BodyMod = BodyMods.body;
+            parent.HueMod = BodyMods.bodyHue;
             
             BaseArmor.ValidateMobile(parent);
             BaseClothing.ValidateMobile(parent);
             (parent as IEnchanted)?.Enchantments.Set(this);
+            OnAdded(parent);
         }
 
         public void OnBuffRemoved(Mobile parent)
@@ -50,25 +51,27 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             {
                 parent.BodyMod = 0;
                 parent.HueMod = -1;
-                (parent as PlayerMobile)?.RemoveHairMods();
-                parent.NameMod = null;
                 
                 BaseArmor.ValidateMobile(parent);
                 BaseClothing.ValidateMobile(parent);
                 
                 enchanted.Enchantments.Remove(this);
-                parent.SendLocalizedMessage(1112074); // You have removed your disguise.
+                OnRemoved(parent, parent);
             }
         }
 
         #endregion
+
+        public Polymorph() : base(StatType.All)
+        {
+        }
     }
 
     #region EnchantmentInfo
 
-    public class IncognitoInfo : EnchantmentInfo
+    public class PolymorphInfo : EnchantmentInfo
     {
-        public override string Description { get; protected set; } = "Incognito";
+        public override string Description { get; protected set; } = "Reactive Armor";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;
