@@ -1211,12 +1211,8 @@ namespace Server.Mobiles
 
             HueMod = -1;
             NameMod = null;
-
-            PolymorphSpell.StopTimer(this);
+            
             DisguiseTimers.RemoveTimer(this);
-
-            EndAction(typeof(PolymorphSpell));
-            EndAction(typeof(IncognitoSpell));
 
             SkillHandlers.StolenItem.ReturnOnDeath(this, c);
 

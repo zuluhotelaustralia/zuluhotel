@@ -1,109 +1,50 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Server.Engines.Magic;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Seventh
 {
-    public class MeteorSwarmSpell : MagerySpell
+    public class MeteorSwarmSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public MeteorSwarmSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public MeteorSwarmSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
+            if (!response.HasValue)
+                return;
+
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+
+            var range = 3.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
+
+            var eable = Caster.Map.GetMobilesInRange(point, (int) range);
+
+            var targets = eable.Where(target =>
+                SpellHelper.ValidIndirectTarget(Caster, target) && 
+                Caster.CanBeHarmful(target, false) &&
+                Caster.InLOS(target)
+            ).ToList();
+            
+            eable.Free();
+            
+            targets.ForEach(DealDamage);
+            await Timer.Pause(1000);
+            targets.ForEach(DealDamage);
         }
 
-
-        public override bool DelayedDamage
+        private void DealDamage(Mobile target)
         {
-            get { return true; }
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(IPoint3D p)
-        {
-            if (!Caster.CanSee(p))
-            {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
-            {
-                SpellHelper.Turn(Caster, p);
-
-                if (p is Item)
-                    p = ((Item) p).GetWorldLocation();
-
-                var targets = new List<Mobile>();
-
-                var map = Caster.Map;
-
-                if (map != null)
-                {
-                    IPooledEnumerable eable = map.GetMobilesInRange(new Point3D(p), 2);
-
-                    foreach (Mobile m in eable)
-                        if (Caster != m && SpellHelper.ValidIndirectTarget(Caster, m) && Caster.CanBeHarmful(m, false))
-                            targets.Add(m);
-
-                    eable.Free();
-                }
-
-                double damage = Utility.Random(27, 22);
-
-                if (targets.Count > 0)
-                {
-                    Effects.PlaySound((Point3D)p, Caster.Map, 0x160);
-
-                    damage /= targets.Count;
-
-                    double toDeal;
-                    for (var i = 0; i < targets.Count; ++i)
-                    {
-                        var m = targets[i];
-
-                        toDeal = damage;
-
-                        if (CheckResisted(m))
-                        {
-                            damage *= 0.5;
-
-                            m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-                        }
-
-                        toDeal *= GetDamageScalar(m);
-                        Caster.DoHarmful(m);
-                        SpellHelper.Damage((int) toDeal, m, Caster, this);
-
-                        Caster.MovingParticles(m, 0x36D4, 7, 0, false, true, 9501, 1, 0, 0x100);
-                    }
-                }
-            }
-
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly MeteorSwarmSpell m_Owner;
-
-            public InternalTarget(MeteorSwarmSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                var p = o as IPoint3D;
-
-                if (p != null)
-                    m_Owner.Target(p);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this, true);
+            
+            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
+            Effects.PlaySound(Caster.Location, Caster.Map, 0x160);
+            
+            Caster.MovingParticles(target, 0x36D4, 7, 0, false, true, 9501, 1, 0, 0x100);
         }
     }
 }

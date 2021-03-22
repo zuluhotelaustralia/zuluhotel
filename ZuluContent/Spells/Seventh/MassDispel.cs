@@ -1,22 +1,19 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Server.Engines.Magic;
 using Server.Items;
 using Server.Mobiles;
+using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Seventh
 {
-    public class MassDispelSpell : MagerySpell
+    public class MassDispelSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public MassDispelSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
+        public MassDispelSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
         public void Target(IPoint3D p)
         {
             if (!Caster.CanSee(p))
@@ -76,27 +73,55 @@ namespace Server.Spells.Seventh
             FinishSequence();
         }
 
-        private class InternalTarget : Target
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-            private readonly MassDispelSpell m_Owner;
-
-            public InternalTarget(MassDispelSpell owner) : base(12, true, TargetFlags.None)
+            if (!response.HasValue)
+                return;
+            
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            
+            var magery = Caster.Skills[SkillName.Magery].Value;
+            var range = magery / 15.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
+            
+            var eable = Caster.Map.GetMobilesInRange(point, (int)range);
+            foreach (var target in eable)
             {
-                m_Owner = owner;
-            }
+                if (!SpellHelper.ValidIndirectTarget(Caster, target) || 
+                    !Caster.CanBeHarmful(target, false) ||
+                    !Caster.InLOS(target)
+                )
+                    continue;
+                
+                target.DoHarmful(target, true);
+                (target as IBuffable)?.BuffManager.DispelBuffs();
 
-            protected override void OnTarget(Mobile from, object o)
-            {
-                var p = o as IPoint3D;
+                if (target is BaseCreature {Summoned: true} creature)
+                {
+                    if (!creature.ShilCheckSkill(SkillName.MagicResist, (int) magery, 50))
+                    {
+                        // Your summoned creature has been dispelled.
+                        (creature.ControlMaster as PlayerMobile)?.SendLocalizedMessage(1153193);
+                        creature.Delete();
+                    }
+                    else
+                    {
+                        target.PrivateOverheadMessage(
+                            MessageType.Regular, 
+                            ZhConfig.Messaging.FailureHue, 
+                            1010084,
+                            Caster.NetState
+                        );
+                    }
+                }
 
-                if (p != null)
-                    m_Owner.Target(p);
+                Effects.SendLocationParticles(
+                    EffectItem.Create(target.Location, target.Map, EffectItem.DefaultDuration),
+                    0x3728, 8, 20, 5042
+                );
+                Effects.PlaySound(target, 0x201);
             }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            eable.Free();
         }
     }
 }

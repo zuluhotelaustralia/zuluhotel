@@ -11,23 +11,23 @@ namespace Server.Items
             WeightedOstards = new WeightedRandomType<BaseCreature>();
 
             // Weight 4
-            WeightedOstards.AddEntry<GoldenOstard>(4);
-            WeightedOstards.AddEntry<PlainsOstard>(4);
-            WeightedOstards.AddEntry<MountainOstard>(4);
-            WeightedOstards.AddEntry<SwampOstard>(4);
-            WeightedOstards.AddEntry<HighlandOstard>(4);
+            WeightedOstards.Add<GoldenOstard>(4);
+            WeightedOstards.Add<PlainsOstard>(4);
+            WeightedOstards.Add<MountainOstard>(4);
+            WeightedOstards.Add<SwampOstard>(4);
+            WeightedOstards.Add<HighlandOstard>(4);
             // Weight 2
-            WeightedOstards.AddEntry<ShadowOstard>(2);
-            WeightedOstards.AddEntry<ValleyOstard>(2);
-            WeightedOstards.AddEntry<StoneOstard>(2);
-            WeightedOstards.AddEntry<EmeraldOstard>(2);
-            WeightedOstards.AddEntry<RubyOstard>(2);
+            WeightedOstards.Add<ShadowOstard>(2);
+            WeightedOstards.Add<ValleyOstard>(2);
+            WeightedOstards.Add<StoneOstard>(2);
+            WeightedOstards.Add<EmeraldOstard>(2);
+            WeightedOstards.Add<RubyOstard>(2);
             // Weight 1
-            WeightedOstards.AddEntry<TropicalOstard>(1);
-            WeightedOstards.AddEntry<SnowOstard>(1);
-            WeightedOstards.AddEntry<IceOstard>(1);
-            WeightedOstards.AddEntry<FireOstard>(1);
-            WeightedOstards.AddEntry<HeavenlyOstard>(1);
+            WeightedOstards.Add<TropicalOstard>(1);
+            WeightedOstards.Add<SnowOstard>(1);
+            WeightedOstards.Add<IceOstard>(1);
+            WeightedOstards.Add<FireOstard>(1);
+            WeightedOstards.Add<HeavenlyOstard>(1);
         }
 
         [Constructible]

@@ -1,66 +1,90 @@
 using System;
-using System.Collections;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server.Gumps;
 using Server.Items;
-using Server.Spells.Fifth;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+using static Server.Gumps.PolymorphEntry;
 
 namespace Server.Spells.Seventh
 {
-    public class PolymorphSpell : MagerySpell
+    public class PolymorphSpell : MagerySpell, IAsyncSpell
     {
-        public static readonly PolymorphCategory[] Categories =
+        public static readonly PolymorphEntry[][] Groups =
         {
-            new(1015235, // Animals
-                PolymorphEntry.Chicken,
-                PolymorphEntry.Dog,
-                PolymorphEntry.Wolf,
-                PolymorphEntry.Panther,
-                PolymorphEntry.Gorilla,
-                PolymorphEntry.BlackBear,
-                PolymorphEntry.GrizzlyBear,
-                PolymorphEntry.PolarBear,
-                PolymorphEntry.HumanMale
-            ),
-
-            new(1015245, // Monsters
-                PolymorphEntry.Slime,
-                PolymorphEntry.Orc,
-                PolymorphEntry.LizardMan,
-                PolymorphEntry.Gargoyle,
-                PolymorphEntry.Ogre,
-                PolymorphEntry.Troll,
-                PolymorphEntry.Ettin,
-                PolymorphEntry.Daemon,
-                PolymorphEntry.HumanFemale
-            )
+            new [] {
+                Bird,
+                Slime,
+                Eagle,
+                Mongbat,
+                Headless,
+                Gorilla,
+                Ratman,
+                GiantSpider,
+                GiantSpider,
+                GiantSpider
+            },
+            new [] {
+                Scorpion,
+                Orc,
+                Zombie,
+                Orc,
+                LizardMan,
+                Ghoul,
+                GiantSerpent,
+                Harpy,
+                Harpy,
+                Harpy,
+            },
+            new []
+            {
+                Ettin,
+                Corpser,
+                Gazer,
+                EarthElemental,
+                WaterElemental,
+                FireElemental,
+                AirElemental,
+                Ent,
+                Ent,
+                Ent
+            },
+            new []
+            {
+                Ogre,
+                Gargoyle,
+                Liche,
+                SeaSerpent,
+                Daemon,
+                Dragon,
+                DaemonWithSword,
+                Wisp,
+                Dragon,
+                Dragon
+            },
+            new []
+            {
+                SeaSerpent,
+                Wisp,
+                Liche,
+                SeaSerpent,
+                Daemon,
+                Dragon,
+                Daemon,
+                Wisp,
+                Dragon,
+                Dragon
+            }
+            
         };
         
-        private static readonly Hashtable Timers = new();
-        
-
-        private readonly int m_NewBody;
-
-        public PolymorphSpell(Mobile caster, Item spellItem, int body) : base(caster, spellItem)
-        {
-            m_NewBody = body;
-        }
-
-        public PolymorphSpell(Mobile caster, Item spellItem) : this(caster, spellItem, 0)
-        {
-        }
-
+        public PolymorphSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public override bool CanCast()
         {
             if (!base.CanCast())
                 return false;
             
-            if (Caster.Mounted)
-            {
-                Caster.SendLocalizedMessage(1042561); //Please dismount first.
-                return false;
-            }
-
             if (DisguiseTimers.IsDisguised(Caster))
             {
                 Caster.SendLocalizedMessage(502167); // You cannot polymorph while disguised.
@@ -73,164 +97,57 @@ namespace Server.Spells.Seventh
                 return false;
             }
 
-            if (!Caster.CanBeginAction(typeof(PolymorphSpell)))
-            {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-                return false;
-            }
-
-            if (m_NewBody == 0)
-            {
-                Gump gump = new PolymorphGump(Caster, SpellItem, Categories);
-
-                Caster.SendGump(gump);
-                return false;
-            }
-
             return true;
         }
-
-        public override void OnCast()
+        
+        public async Task CastAsync()
         {
-            if (Caster.Mounted)
-            {
-                Caster.SendLocalizedMessage(1042561); //Please dismount first.
-            }
-            else if (!Caster.CanBeginAction(typeof(PolymorphSpell)))
-            {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-            }
-            else if (DisguiseTimers.IsDisguised(Caster))
-            {
-                Caster.SendLocalizedMessage(502167); // You cannot polymorph while disguised.
-            }
-            else if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
-            {
-                Caster.SendLocalizedMessage(1042512); // You cannot polymorph while wearing body paint
-            }
-            else if (!Caster.CanBeginAction(typeof(IncognitoSpell)) || Caster.IsBodyMod)
-            {
-                DoFizzle();
-            }
-            else if (CheckSequence())
-            {
-                if (Caster.BeginAction(typeof(PolymorphSpell)))
-                {
-                    if (m_NewBody != 0)
-                    {
-                        if (!((Body) m_NewBody).IsHuman)
-                        {
-                            var mt = Caster.Mount;
+            if (!Caster.CanBuff(Caster, icons: BuffIcon.Polymorph))
+                return;
 
-                            if (mt != null)
-                                mt.Rider = null;
-                        }
+            var magery = Caster.Skills[SkillName.Magery].Value;
 
-                        Caster.BodyMod = m_NewBody;
-
-                        if (m_NewBody == 400 || m_NewBody == 401)
-                            Caster.HueMod = Race.DefaultRace.RandomSkinHue();
-                        else
-                            Caster.HueMod = 0;
-                        
-                        var val = (int) Caster.Skills[SkillName.Magery].Value;
-                        var duration = TimeSpan.FromSeconds(val > 120 ? 120 : val);
-
-                        BaseArmor.ValidateMobile(Caster);
-                        BaseClothing.ValidateMobile(Caster);
-
-                        Buff(Caster, m_NewBody, duration);
-                    }
-                }
-                else
-                {
-                    Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-                }
+            var group = Utility.RandomMinMax(0, 1);
+            var critter = Utility.RandomMinMax(0, 9);
+            
+            switch (magery)
+            {
+                case < 80:
+                    group += 1;
+                    break;
+                case < 90:
+                    group += 2;
+                    break;
+                case >= 90:
+                    group = 3;
+                    break;
             }
 
-            FinishSequence();
-        }
-
-        public static bool Buff(Mobile caster, int body, TimeSpan duration)
-        {
-            if (caster.BeginAction(typeof(PolymorphSpell)))
+            if (Caster.GetClassBonus(SkillName.Magery) > 1.0)
             {
-                if (body != 0)
-                {
-                    if (!((Body) body).IsHuman)
-                    {
-                        var mt = caster.Mount;
-
-                        if (mt != null)
-                            mt.Rider = null;
-                    }
-
-                    caster.BodyMod = body;
-
-                    if (body == 400 || body == 401)
-                        caster.HueMod = Race.DefaultRace.RandomSkinHue();
-                    else
-                        caster.HueMod = 0;
-
-                    BaseArmor.ValidateMobile(caster);
-                    BaseClothing.ValidateMobile(caster);
-
-                    StopTimer(caster);
-                    
-                    Timer t = new InternalTimer(caster, duration);
-                    Timers[caster] = t;
-
-                    t.Start();
-                    return true;
-                }
-            }
-            else
-            {
-                caster.SendLocalizedMessage(1005559); // This spell is already in effect.
-            }
-            return false;
-        }
-
-        public static bool StopTimer(Mobile m)
-        {
-            var t = (Timer) Timers[m];
-
-            if (t != null)
-            {
-                t.Stop();
-                Timers.Remove(m);
+                group += 1;
+                critter += 2;
             }
 
-            return t != null;
-        }
+            group = Math.Clamp(group, 0, Groups.Length - 1);
+            critter = Math.Clamp(critter, 0, Groups[group].Length - 1);
+            
+            
+            // TODO: Use this for ebook Shape Shift?
+            // var bodyId = await new NewPolymorphGump(Caster);
+            var bodyId = Groups[group][critter].BodyId;
+            
+            if (bodyId <= 0)
+                return;
 
-        private static void EndPolymorph(Mobile m)
-        {
-            if (!m.CanBeginAction(typeof(PolymorphSpell)))
+            var hueMod = bodyId == SeaSerpent.BodyId ? 233 : 0;
+            
+            Caster.TryAddBuff(new Polymorph
             {
-                m.BodyMod = 0;
-                m.HueMod = -1;
-                m.EndAction(typeof(PolymorphSpell));
-
-                BaseArmor.ValidateMobile(m);
-                BaseClothing.ValidateMobile(m);
-            }
-        }
-
-        private class InternalTimer : Timer
-        {
-            private readonly Mobile m_Owner;
-
-            public InternalTimer(Mobile owner, TimeSpan duration) : base(duration)
-            {
-                m_Owner = owner;
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                EndPolymorph(m_Owner);
-            }
+                Duration = SpellHelper.GetDuration(Caster, Caster),
+                BodyMods = (bodyId, hueMod),
+                Value = SpellHelper.GetModAmount(Caster, Caster, StatType.All)
+            });
         }
     }
 }

@@ -10,22 +10,22 @@ namespace Server.Items
         {
             WeightedOstards = new WeightedRandomType<BaseCreature>();
 
-            WeightedOstards.AddEntry<FrenziedOstard>(1);
-            WeightedOstards.AddEntry<GoldenFrenziedOstard>(1);
-            WeightedOstards.AddEntry<PlainsFrenziedOstard>(1);
-            WeightedOstards.AddEntry<MountainFrenziedOstard>(1);
-            WeightedOstards.AddEntry<SwampFrenziedOstard>(1);
-            WeightedOstards.AddEntry<HighlandFrenziedOstard>(1);
-            WeightedOstards.AddEntry<ShadowFrenziedOstard>(1);
-            WeightedOstards.AddEntry<ValleyFrenziedOstard>(1);
-            WeightedOstards.AddEntry<StoneFrenziedOstard>(1);
-            WeightedOstards.AddEntry<EmeraldFrenziedOstard>(1);
-            WeightedOstards.AddEntry<RubyFrenziedOstard>(1);
-            WeightedOstards.AddEntry<TropicalFrenziedOstard>(1);
-            WeightedOstards.AddEntry<SnowFrenziedOstard>(1);
-            WeightedOstards.AddEntry<IceFrenziedOstard>(1);
-            WeightedOstards.AddEntry<FireFrenziedOstard>(1);
-            WeightedOstards.AddEntry<HeavenlyFrenziedOstard>(1);
+            WeightedOstards.Add<FrenziedOstard>(1);
+            WeightedOstards.Add<GoldenFrenziedOstard>(1);
+            WeightedOstards.Add<PlainsFrenziedOstard>(1);
+            WeightedOstards.Add<MountainFrenziedOstard>(1);
+            WeightedOstards.Add<SwampFrenziedOstard>(1);
+            WeightedOstards.Add<HighlandFrenziedOstard>(1);
+            WeightedOstards.Add<ShadowFrenziedOstard>(1);
+            WeightedOstards.Add<ValleyFrenziedOstard>(1);
+            WeightedOstards.Add<StoneFrenziedOstard>(1);
+            WeightedOstards.Add<EmeraldFrenziedOstard>(1);
+            WeightedOstards.Add<RubyFrenziedOstard>(1);
+            WeightedOstards.Add<TropicalFrenziedOstard>(1);
+            WeightedOstards.Add<SnowFrenziedOstard>(1);
+            WeightedOstards.Add<IceFrenziedOstard>(1);
+            WeightedOstards.Add<FireFrenziedOstard>(1);
+            WeightedOstards.Add<HeavenlyFrenziedOstard>(1);
         }
         
         [Constructible]
