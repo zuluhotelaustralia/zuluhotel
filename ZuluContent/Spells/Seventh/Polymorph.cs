@@ -1,38 +1,81 @@
 using System;
 using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server.Gumps;
 using Server.Items;
 using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+using static Server.Gumps.PolymorphEntry;
 
 namespace Server.Spells.Seventh
 {
     public class PolymorphSpell : MagerySpell, IAsyncSpell
     {
-        public static readonly PolymorphCategory[] Categories =
+        public static readonly PolymorphEntry[][] Groups =
         {
-            new(1015235, // Animals
-                PolymorphEntry.Chicken,
-                PolymorphEntry.Dog,
-                PolymorphEntry.Wolf,
-                PolymorphEntry.Panther,
-                PolymorphEntry.Gorilla,
-                PolymorphEntry.BlackBear,
-                PolymorphEntry.GrizzlyBear,
-                PolymorphEntry.PolarBear,
-                PolymorphEntry.HumanMale
-            ),
-
-            new(1015245, // Monsters
-                PolymorphEntry.Slime,
-                PolymorphEntry.Orc,
-                PolymorphEntry.LizardMan,
-                PolymorphEntry.Gargoyle,
-                PolymorphEntry.Ogre,
-                PolymorphEntry.Troll,
-                PolymorphEntry.Ettin,
-                PolymorphEntry.Daemon,
-                PolymorphEntry.HumanFemale
-            )
+            new [] {
+                Bird,
+                Slime,
+                Eagle,
+                Mongbat,
+                Headless,
+                Gorilla,
+                Ratman,
+                GiantSpider,
+                GiantSpider,
+                GiantSpider
+            },
+            new [] {
+                Scorpion,
+                Orc,
+                Zombie,
+                Orc,
+                LizardMan,
+                Ghoul,
+                GiantSerpent,
+                Harpy,
+                Harpy,
+                Harpy,
+            },
+            new []
+            {
+                Ettin,
+                Corpser,
+                Gazer,
+                EarthElemental,
+                WaterElemental,
+                FireElemental,
+                AirElemental,
+                Ent,
+                Ent,
+                Ent
+            },
+            new []
+            {
+                Ogre,
+                Gargoyle,
+                Liche,
+                SeaSerpent,
+                Daemon,
+                Dragon,
+                DaemonWithSword,
+                Wisp,
+                Dragon,
+                Dragon
+            },
+            new []
+            {
+                SeaSerpent,
+                Wisp,
+                Liche,
+                SeaSerpent,
+                Daemon,
+                Dragon,
+                Daemon,
+                Wisp,
+                Dragon,
+                Dragon
+            }
+            
         };
         
         public PolymorphSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
@@ -41,13 +84,7 @@ namespace Server.Spells.Seventh
         {
             if (!base.CanCast())
                 return false;
-
-            if (Caster.Mounted)
-            {
-                Caster.SendLocalizedMessage(1042561); //Please dismount first.
-                return false;
-            }
-
+            
             if (DisguiseTimers.IsDisguised(Caster))
             {
                 Caster.SendLocalizedMessage(502167); // You cannot polymorph while disguised.
@@ -68,23 +105,42 @@ namespace Server.Spells.Seventh
             if (!Caster.CanBuff(Caster, icons: BuffIcon.Polymorph))
                 return;
 
-            var gump = new PolymorphGump(Caster, Categories);
-            var bodyId = await gump;
+            var magery = Caster.Skills[SkillName.Magery].Value;
 
+            var group = Utility.RandomMinMax(0, 1);
+            var critter = Utility.RandomMinMax(0, 9);
+            
+            switch (magery)
+            {
+                case < 80:
+                    group += 1;
+                    break;
+                case < 90:
+                    group += 2;
+                    break;
+                case >= 90:
+                    group = 3;
+                    break;
+            }
+
+            if (Caster.GetClassBonus(SkillName.Magery) > 1.0)
+            {
+                group += 1;
+                critter += 2;
+            }
+
+            group = Math.Clamp(group, 0, Groups.Length - 1);
+            critter = Math.Clamp(critter, 0, Groups[group].Length - 1);
+            
+            
+            // TODO: Use this for ebook Shape Shift?
+            // var bodyId = await new NewPolymorphGump(Caster);
+            var bodyId = Groups[group][critter].BodyId;
+            
             if (bodyId <= 0)
                 return;
 
-            var body = (Body) bodyId;
-
-            if (!body.IsHuman)
-            {
-                var mt = Caster.Mount;
-
-                if (mt != null)
-                    mt.Rider = null;
-            }
-
-            var hueMod = bodyId == 400 || bodyId == 401 ? Race.DefaultRace.RandomSkinHue() : 0;
+            var hueMod = bodyId == SeaSerpent.BodyId ? 233 : 0;
             
             Caster.TryAddBuff(new Polymorph
             {

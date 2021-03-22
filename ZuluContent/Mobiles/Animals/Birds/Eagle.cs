@@ -1,62 +1,80 @@
 namespace Server.Mobiles
 {
-    [CorpseName( "an eagle corpse" )]
-	public class Eagle : BaseCreature
-	{
+    [CorpseName("an eagle corpse")]
+    public class Eagle : BaseCreature
+    {
+        [Constructible]
+        public Eagle() : base(AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+        {
+            Name = "an eagle";
+            Body = 5;
+            BaseSoundID = 0x2EE;
 
-		[Constructible]
-public Eagle() : base( AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
-		{
-			Name = "an eagle";
-			Body = 5;
-			BaseSoundID = 0x2EE;
+            SetStr(31, 47);
+            SetDex(36, 60);
+            SetInt(8, 20);
 
-			SetStr( 31, 47 );
-			SetDex( 36, 60 );
-			SetInt( 8, 20 );
+            SetHits(20, 27);
+            SetMana(0);
 
-			SetHits( 20, 27 );
-			SetMana( 0 );
+            SetDamage(5, 10);
 
-			SetDamage( 5, 10 );
+            SetSkill(SkillName.MagicResist, 15.3, 30.0);
+            SetSkill(SkillName.Tactics, 18.1, 37.0);
+            SetSkill(SkillName.Wrestling, 20.1, 30.0);
 
-			SetSkill( SkillName.MagicResist, 15.3, 30.0 );
-			SetSkill( SkillName.Tactics, 18.1, 37.0 );
-			SetSkill( SkillName.Wrestling, 20.1, 30.0 );
+            Fame = 300;
+            Karma = 0;
 
-			Fame = 300;
-			Karma = 0;
+            VirtualArmor = 22;
 
-			VirtualArmor = 22;
+            Tamable = true;
+            ControlSlots = 1;
+            MinTameSkill = 17.1;
+        }
 
-			Tamable = true;
-			ControlSlots = 1;
-			MinTameSkill = 17.1;
-		}
+        public override int Meat
+        {
+            get { return 1; }
+        }
 
-		public override int Meat{ get{ return 1; } }
-		public override MeatType MeatType{ get{ return MeatType.Bird; } }
-		public override int Feathers{ get{ return 36; } }
-		public override FoodType FavoriteFood{ get{ return FoodType.Meat | FoodType.Fish; } }
-		public override bool CanFly { get { return true; } }
+        public override MeatType MeatType
+        {
+            get { return MeatType.Bird; }
+        }
 
-		[Constructible]
-public Eagle(Serial serial) : base(serial)
-		{
-		}
+        public override int Feathers
+        {
+            get { return 36; }
+        }
 
-		public override void Serialize(IGenericWriter writer)
-		{
-			base.Serialize(writer);
+        public override FoodType FavoriteFood
+        {
+            get { return FoodType.Meat | FoodType.Fish; }
+        }
 
-			writer.Write((int) 0);
-		}
+        public override bool CanFly
+        {
+            get { return true; }
+        }
 
-		public override void Deserialize(IGenericReader reader)
-		{
-			base.Deserialize(reader);
+        [Constructible]
+        public Eagle(Serial serial) : base(serial)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
-	}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int) 0);
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 }

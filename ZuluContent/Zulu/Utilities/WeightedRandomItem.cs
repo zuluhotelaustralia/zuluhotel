@@ -3,22 +3,21 @@ using System.Collections.Generic;
 
 namespace Server
 {
-    public class WeightedRandomType <U>
+    public class WeightedRandomType<T>
     {
-        private List<(double weight, Type t)> m_Entries = new List<(double weight, Type t)>();
+        private readonly List<(double weight, Type t)> m_Entries = new ();
         private double m_AccumulatedWeight;        
 
-        public void AddEntry<T>(double weight) where T: U
+        public void Add<TU>(double weight) where TU: T
         {
             m_AccumulatedWeight += weight;
-            m_Entries.Add((m_AccumulatedWeight, typeof(T)));
+            m_Entries.Add((m_AccumulatedWeight, typeof(TU)));
         }
-
-        public U GetRandom()
+        
+        public T GetRandom()
         {
-            double r = Utility.RandomDouble() * m_AccumulatedWeight;
-
-            return (U)Activator.CreateInstance(m_Entries.Find(p => p.weight >= r).t);
+            var r = Utility.RandomDouble() * m_AccumulatedWeight;
+            return (T)Activator.CreateInstance(m_Entries.Find(p => p.weight >= r).t);
         }
     }
 }

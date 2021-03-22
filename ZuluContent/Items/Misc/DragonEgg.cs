@@ -12,29 +12,29 @@ namespace Server.Items
         {
             WeightedDragons = new WeightedRandomType<BaseCreature>();
 
-            WeightedDragons.AddEntry<AdamantineDragon>(1);
-            WeightedDragons.AddEntry<RockDragon>(1);
-            WeightedDragons.AddEntry<CelestialDragon>(1);
-            WeightedDragons.AddEntry<FrostDragon>(1);
-            WeightedDragons.AddEntry<InfernoDragon>(1);
-            WeightedDragons.AddEntry<PoisonDragon>(1);
-            WeightedDragons.AddEntry<RockDragon>(1);
-            WeightedDragons.AddEntry<WaterDrake>(1);
-            WeightedDragons.AddEntry<ShadowDragon>(1);
-            WeightedDragons.AddEntry<StormDragon>(1);
-            WeightedDragons.AddEntry<TidalDragon>(1);
-            WeightedDragons.AddEntry<AirDrake>(1);
-            WeightedDragons.AddEntry<EarthDrake>(1);
-            WeightedDragons.AddEntry<FireDrake>(1);
-            WeightedDragons.AddEntry<FrostDrake>(1);
-            WeightedDragons.AddEntry<HeavenlyDrake>(1);
-            WeightedDragons.AddEntry<PoisonDrake>(1);
-            WeightedDragons.AddEntry<SpectralDrake>(1);
-            WeightedDragons.AddEntry<UndeadDrake>(1);
+            WeightedDragons.Add<AdamantineDragon>(1);
+            WeightedDragons.Add<RockDragon>(1);
+            WeightedDragons.Add<CelestialDragon>(1);
+            WeightedDragons.Add<FrostDragon>(1);
+            WeightedDragons.Add<InfernoDragon>(1);
+            WeightedDragons.Add<PoisonDragon>(1);
+            WeightedDragons.Add<RockDragon>(1);
+            WeightedDragons.Add<WaterDrake>(1);
+            WeightedDragons.Add<ShadowDragon>(1);
+            WeightedDragons.Add<StormDragon>(1);
+            WeightedDragons.Add<TidalDragon>(1);
+            WeightedDragons.Add<AirDrake>(1);
+            WeightedDragons.Add<EarthDrake>(1);
+            WeightedDragons.Add<FireDrake>(1);
+            WeightedDragons.Add<FrostDrake>(1);
+            WeightedDragons.Add<HeavenlyDrake>(1);
+            WeightedDragons.Add<PoisonDrake>(1);
+            WeightedDragons.Add<SpectralDrake>(1);
+            WeightedDragons.Add<UndeadDrake>(1);
 
             WeightedStandardDragons = new WeightedRandomType<BaseCreature>();
-            WeightedStandardDragons.AddEntry<Drake>(1);
-            WeightedStandardDragons.AddEntry<Dragon>(1);
+            WeightedStandardDragons.Add<Drake>(1);
+            WeightedStandardDragons.Add<Dragon>(1);
         }
 
         [Constructible]

@@ -86,18 +86,16 @@ namespace Server.Items
 
         public bool Buff(Mobile from)
         {
-            var entries = Utility.RandomList(PolymorphSpell.Categories).Entries;
+            var entries = Utility.RandomList(PolymorphSpell.Groups);
             var idx = Utility.Random(entries.Length);
             var body = entries[idx].BodyId;
-
-            var duration = TimeSpan.FromSeconds(PotionStrength * 120);
 
             if (from.CanBuff(from, true, BuffIcon.Polymorph))
             {
                 from.TryAddBuff(new Polymorph
                 {
                     Title = DefaultName,
-                    Duration = duration,
+                    Duration = TimeSpan.FromSeconds(PotionStrength * 120),
                     Value = (int) PotionStrength * 5 + idx,
                     BodyMods = (body, 0)
                 });

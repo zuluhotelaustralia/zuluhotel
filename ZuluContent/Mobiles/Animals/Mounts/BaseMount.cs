@@ -120,12 +120,12 @@ namespace Server.Mobiles
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			if ( from.IsBodyMod && !from.Body.IsHuman )
-			{
-				from.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
-
-				return;
-			}
+			// if ( from.IsBodyMod && !from.Body.IsHuman )
+			// {
+			// 	from.SendLocalizedMessage( 1061628 ); // You can't do that while polymorphed.
+			//
+			// 	return;
+			// }
 
 			if ( !CheckMountAllowed( from ) )
 				return;
@@ -260,13 +260,11 @@ namespace Server.Mobiles
 
 		public static bool CheckMountAllowed( Mobile mob )
 		{
-			bool result = true;
-
-			if (mob is PlayerMobile && (mob as PlayerMobile).MountBlockReason != BlockMountType.None)
+			var result = true;
+            if (mob is PlayerMobile playerMobile && playerMobile.MountBlockReason != BlockMountType.None)
 			{
-				mob.SendLocalizedMessage((int)(mob as PlayerMobile).MountBlockReason);
-
-				result = false;
+				playerMobile.SendLocalizedMessage((int)playerMobile.MountBlockReason);
+                result = false;
 			}
 
 			return result;
