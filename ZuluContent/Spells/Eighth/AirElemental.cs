@@ -1,24 +1,17 @@
 using System;
+using System.Threading.Tasks;
 using Server.Mobiles;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Eighth
 {
-    public class AirElementalSpell : MagerySpell
+    public class AirElementalSpell : MagerySpell, IAsyncSpell
     {
-        public AirElementalSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public AirElementalSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task CastAsync()
         {
-        }
-
-        public override void OnCast()
-        {
-            if (CheckSequence())
-            {
-                var duration = TimeSpan.FromSeconds(2 * Caster.Skills.Magery.Fixed / 5);
-
-                SpellHelper.Summon(new AirElemental(), Caster, 0x217, duration, false, false);
-            }
-
-            FinishSequence();
+            SpellHelper.Summon(new AirElemental(), Caster, 0x217);
         }
     }
 }

@@ -1,87 +1,77 @@
+using System;
+using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
+using Server.Engines.Magic;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Eighth
 {
-    public class ResurrectionSpell : MagerySpell
+    public class ResurrectionSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ResurrectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ResurrectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-        }
-
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
+            if (!Caster.CanSee(target))
             {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (m == Caster)
-            {
-                Caster.SendLocalizedMessage(501039); // Thou can not resurrect thyself.
-            }
-            else if (!Caster.Alive)
-            {
-                Caster.SendLocalizedMessage(501040); // The resurrecter must be alive.
-            }
-            else if (m.Alive)
-            {
-                Caster.SendLocalizedMessage(501041); // Target is not dead.
-            }
-            else if (!Caster.InRange(m, 1))
-            {
-                Caster.SendLocalizedMessage(501042); // Target is not close enough.
-            }
-            else if (!m.Player)
-            {
-                Caster.SendLocalizedMessage(501043); // Target is not a being.
-            }
-            else if (m.Map == null || !m.Map.CanFit(m.Location, 16, false, false))
-            {
-                Caster.SendLocalizedMessage(501042); // Target can not be resurrected at that location.
-                m.SendLocalizedMessage(502391); // Thou can not be resurrected there!
-            }
-            else if (m.Region != null && m.Region.IsPartOf("Khaldun"))
-            {
-                Caster.SendLocalizedMessage(
-                    1010395); // The veil of death in this area is too strong and resists thy efforts to restore life.
-            }
-            else if (CheckBeneficialSequence(m))
-            {
-                SpellHelper.Turn(Caster, m);
-
-                m.PlaySound(0x214);
-                m.FixedEffect(0x376A, 10, 16);
-
-                m.CloseGump<ResurrectGump>();
-                m.SendGump(new ResurrectGump(m, Caster));
+                Caster.SendFailureMessage(500237); // Target can not be seen.
+                return;
             }
 
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly ResurrectionSpell m_Owner;
-
-            public InternalTarget(ResurrectionSpell owner) : base(1, false, TargetFlags.Beneficial)
+            if (target == Caster)
             {
-                m_Owner = owner;
+                Caster.SendFailureMessage(501039); // Thou can not resurrect thyself.
+                return;
+            }
+            
+            if (!Caster.Alive)
+            {
+                Caster.SendFailureMessage(501040); // The resurrecter must be alive.
+                return;
             }
 
-            protected override void OnTarget(Mobile from, object o)
+            if (target.Map == null || !target.Map.CanFit(target.Location, 16, false, false))
             {
-                if (o is Mobile) m_Owner.Target((Mobile) o);
+                Caster.SendFailureMessage(501042); // Target can not be resurrected at that location.
+                target.SendFailureMessage(502391); // Thou can not be resurrected there!
+                return;
             }
-
-            protected override void OnTargetFinish(Mobile from)
+            
+            if (target.Region != null && target.Region.IsPartOf("Khaldun"))
             {
-                m_Owner.FinishSequence();
+                // The veil of death in this area is too strong and resists thy efforts to restore life.
+                Caster.SendFailureMessage(1010395); 
+                return;
+            }
+            
+            target.PlaySound(0x214);
+            target.FixedEffect(0x376A, 10, 16);
+            
+            switch (target)
+            {
+                case BaseCreature {CreatureType: CreatureType.Undead}:
+                {
+                    // Note: this seems OP? One sots undead if they don't resist it
+                    var damage = SpellHelper.TryResist(Caster, target, SpellCircle.Eighth) ? target.Hits / 2 : target.Hits;
+                    target.Damage(damage, Caster); // Raw damage
+                    return;
+                }
+                case PlayerMobile {Alive: false} player:
+                {
+                    player.CloseGump<ResurrectGump>();
+                    player.SendGump(new ResurrectGump(player, Caster));
+                    break;
+                }
             }
         }
     }
