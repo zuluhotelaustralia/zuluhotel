@@ -1,101 +1,44 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Server;
 using Server.Engines.Magic;
 using Server.Network;
 using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class IceStrikeSpell : EarthSpell
+    public class IceStrikeSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase { get; } = TimeSpan.Zero;
-
-
-        public override double RequiredSkill { get; } = 120.0;
-
-        public override int RequiredMana { get; } = 20;
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public IceStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
-            }
-
-            if (!CheckSequence()) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            var damage = Caster.Skills[DamageSkill].Value * 0.5;
-            //m.Damage( (int)damage, Caster, ElementalType.Water );
-            SpellHelper.Damage((int) damage, m, Caster, this, TimeSpan.Zero);
-
-            Caster.DoHarmful(m);
-
-            m.PlaySound(0x0117);
-            m.PlaySound(0x0118);
-            m.FixedParticles(0x3789, 10, 30, 5052, EffectLayer.Waist);
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(IceStrikeSpell));
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private IceStrikeSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(IceStrikeSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile mobile)
-                    m_Owner.Target(mobile);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            
+            target.FixedParticles(0x3789, 30, 30, 5028, EffectLayer.Waist);
+            target.PlaySound(0x0116);
+            target.PlaySound(0x0117);
+            
+            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Water);
         }
     }
 }
