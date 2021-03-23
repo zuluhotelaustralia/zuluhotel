@@ -1,90 +1,54 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Server;
 using Server.Network;
 using Server.Items;
+using Server.Mobiles;
 using Server.Spells;
 using Server.Targeting;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class OwlSightSpell : EarthSpell
+    public class OwlSightSpell : EarthSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(0); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 60.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 5; }
-        }
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public OwlSightSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        public async Task CastAsync()
         {
-            Caster.Target = new InternalTarget(this);
-        }
+            var range = Caster.Skills[SkillName.Magery].Value / 10.0;
+            var duration = Caster.Skills[SkillName.Magery].Value * 70;
+            
+            var mobiles = Caster.GetMobilesInRange((int) range);
 
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            foreach (var target in mobiles)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                if (!(target is PlayerMobile))
+                {
+                    continue;
+                }
+                
+                target.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
+                target.PlaySound(0x1E3);
+                
+                if (!target.BeginAction(typeof(LightCycle)))
+                {
+                    continue;
+                }
+                
+                new LightCycle.OwlSightTimer(target, TimeSpan.FromSeconds(duration)).Start();
+                target.LightLevel = 0;
             }
 
-            if (!CheckBeneficialSequence(m)) goto Return;
-
-            if (!m.BeginAction(typeof(OwlSightSpell))) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            if (m.BeginAction(typeof(LightCycle)))
-            {
-                new LightCycle.OwlSightTimer(m).Start();
-                var level = (int) LightCycle.DungeonLevel; //0
-
-                m.LightLevel = level;
-                m.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
-                m.PlaySound(0x1E3);
-
-                // BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.NightSight, 1075643));    //Night Sight/You ignore lighting effects
-            }
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private OwlSightSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(OwlSightSpell owner) : base(12, false, TargetFlags.Beneficial)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            mobiles.Free();
         }
     }
 }

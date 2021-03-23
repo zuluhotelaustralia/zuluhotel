@@ -20,12 +20,6 @@ namespace Server.Spells.First
                 return;
             
             var mobile = response.Target;
-            
-            if (mobile.Poisoned)
-            {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, Caster == mobile ? 1005000 : 1010398);
-                return;
-            }
 
             SpellHelper.Turn(Caster, mobile);
             var healed = Utility.Random(1, 6) + Caster.Skills[SkillName.Magery].Value / 20 + 5;
@@ -44,7 +38,10 @@ namespace Server.Spells.First
             if (mobile is BaseCreature {CreatureType: CreatureType.Undead})
                 SpellHelper.Damage((int) healed, mobile, Caster, this);
             else
+            {
                 SpellHelper.Heal((int) healed, mobile, Caster, this);
+                Caster.SendSuccessMessage($"You healed {(int) healed} damage.");
+            }
         }
     }
 }

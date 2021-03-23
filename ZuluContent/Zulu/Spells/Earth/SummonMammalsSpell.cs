@@ -1,71 +1,60 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells;
+using Server.Utilities;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class SummonMammalsSpell : EarthSpell
+    public class SummonMammalsSpell : EarthSpell, IAsyncSpell
     {
-        private static Type[] m_Mammals =
-        {
-            typeof(GreyWolf),
-            typeof(TimberWolf),
-            typeof(Horse),
-            typeof(Cougar),
-            typeof(Panther),
-            typeof(BrownBear),
-            typeof(GrizzlyBear),
-            typeof(ForestOstard)
-        };
-
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(4); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 60.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 5; }
-        }
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public SummonMammalsSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
-
-        public override void OnCast()
+        
+        public async Task CastAsync()
         {
-            if (!CheckSequence()) goto Return;
-
-            var effectiveness = SpellHelper.GetEffectiveness(Caster);
-
-            var count = (int) (3 * effectiveness);
-
-            // TODO: Weight higher up mammals more if skill/effectiveness is higher.
-
+            var count = Utility.RandomMinMax(1, 2);
+            var bonus = 0;
+            
+            if (Caster.GetClassBonus(SkillName.Magery) > 1.0)
+            {
+                count += 1;
+                bonus = 1;
+            }
+            
             for (var i = 0; i < count; i++)
             {
-                var roll = 0.8 * Utility.RandomDouble() + 0.2 * effectiveness;
-                var mammal = (int) Math.Min(m_Mammals.Length - 1,
-                    Math.Floor(m_Mammals.Length * roll));
+                var roll = Utility.RandomMinMax(1, 8) + bonus;
+                var mammal = roll switch
+                {
+                    1 => typeof(TimberWolf),
+                    2 => typeof(GreyWolf),
+                    >= 3 and < 5 => typeof(Horse),
+                    5 => typeof(Cougar),
+                    6 => typeof(Panther),
+                    7 => typeof(BrownBear),
+                    8 => typeof(GrizzlyBear),
+                    9 => typeof(ForestOstard),
+                    _ => typeof(TimberWolf)
+                };
 
-                var creature = (BaseCreature) Activator.CreateInstance(m_Mammals[mammal]);
-                var duration = TimeSpan.FromSeconds((int) (5 * 60 * effectiveness));
+                var creature = mammal.CreateInstance<BaseCreature>();
 
-                SpellHelper.Summon(creature, Caster, 0x215, duration, false);
+                SpellHelper.Summon(creature, Caster, 0x217);
             }
-
-            Return:
-            FinishSequence();
         }
     }
 }
