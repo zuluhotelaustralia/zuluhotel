@@ -1,14 +1,24 @@
+using System;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Server;
+using Server.Engines.Magic;
 using Server.Spells;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Earth
 {
     public class AntidoteSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
+        
         public AntidoteSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
@@ -20,10 +30,6 @@ namespace Scripts.Zulu.Spells.Earth
             
             SpellHelper.Turn(Caster, target);
 
-            var poison = target.Poison;
-            if (poison is null)
-                return;
-
             if (target.CurePoison(Caster))
             {
                 if (Caster != target)
@@ -34,6 +40,24 @@ namespace Scripts.Zulu.Spells.Earth
                 else
                 {
                     Caster.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
+                }
+
+                if (target is IEnchanted enchantedTarget && enchantedTarget.Enchantments.GetResist(ElementalType.Poison) == 0)
+                {
+                    if (!Caster.CanBuff(target, icons: BuffIcon.PoisonImmunity))
+                        return;
+                    
+                    var power = Caster.Skills[SkillName.Magery].Value / 25;
+                    Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
+                    
+                    var duration = Caster.Skills[SkillName.Magery].Value * 2;
+                    Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+                    
+                    target.TryAddBuff(new PoisonImmunity
+                    {
+                        Value = (int) power * 25,
+                        Duration = TimeSpan.FromSeconds(duration),
+                    });
                 }
             }
             else
