@@ -35,12 +35,8 @@ namespace Server.Spells.Fifth
         {
             var creature = (BaseCreature) Activator.CreateInstance(Types[Utility.Random(Types.Length)]);
             
-            if (creature != null)
-            {
-                var duration = TimeSpan.FromSeconds(20 + Caster.Skills[SkillName.Magery].Value * 2);
-                creature.Skills[SkillName.MagicResist].BaseFixedPoint = Caster.Skills[SkillName.Magery].BaseFixedPoint;
-                SpellHelper.Summon(creature, Caster, 0x215, duration, false, false);
-            }
+            if (creature != null) 
+                SpellHelper.Summon(creature, Caster, 0x215);
         }
     }
 }

@@ -1,69 +1,27 @@
 using System;
+using System.Threading.Tasks;
 using Server.Mobiles;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells.Eighth
 {
-    public class EnergyVortexSpell : MagerySpell
+    public class EnergyVortexSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public EnergyVortexSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public EnergyVortexSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-        }
+            if (!response.HasValue)
+                return;
 
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(IPoint3D p)
-        {
-            var map = Caster.Map;
-
-            SpellHelper.GetSurfaceTop(ref p);
-
-            if (map == null || !map.CanSpawnMobile(p.X, p.Y, p.Z))
-            {
-                Caster.SendLocalizedMessage(501942); // That location is blocked.
-            }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
-            {
-                var duration = TimeSpan.FromSeconds(Utility.Random(80, 40));
-
-                BaseCreature.Summon(new EnergyVortex(), false, Caster, new Point3D(p), 0x212, duration);
-            }
-
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private EnergyVortexSpell m_Owner;
-
-            public InternalTarget(EnergyVortexSpell owner) : base(12, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is IPoint3D)
-                    m_Owner.Target((IPoint3D) o);
-            }
-
-            protected override void OnTargetOutOfLOS(Mobile from, object o)
-            {
-                from.SendLocalizedMessage(501943); // Target cannot be seen. Try again.
-                from.Target = new InternalTarget(m_Owner);
-                from.Target.BeginTimeout(from, TimeoutTime - DateTime.Now);
-                m_Owner = null;
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                if (m_Owner != null)
-                    m_Owner.FinishSequence();
-            }
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            SpellHelper.Turn(Caster, point);
+            
+            var duration = Caster.Skills[SkillName.Magery].Value / 3.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+            
+            BaseCreature.Summon(new EnergyVortex(), false, Caster, point, 0x212, TimeSpan.FromSeconds(duration));
         }
     }
 }

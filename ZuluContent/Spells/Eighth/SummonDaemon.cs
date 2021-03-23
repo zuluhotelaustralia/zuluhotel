@@ -1,24 +1,16 @@
 using System;
+using System.Threading.Tasks;
 using Server.Mobiles;
 
 namespace Server.Spells.Eighth
 {
-    public class SummonDaemonSpell : MagerySpell
+    public class SummonDaemonSpell : MagerySpell, IAsyncSpell
     {
-        public SummonDaemonSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public SummonDaemonSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task CastAsync()
         {
-        }
-
-        public override void OnCast()
-        {
-            if (CheckSequence())
-            {
-                var duration = TimeSpan.FromSeconds(2 * Caster.Skills.Magery.Fixed / 5);
-
-                SpellHelper.Summon(new Daemon(), Caster, 0x216, duration, false, false);
-            }
-
-            FinishSequence();
+            SpellHelper.Summon(new Daemon(), Caster, 0x216);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace Scripts.Zulu.Spells.Earth
                 var creature = (BaseCreature) Activator.CreateInstance(m_Mammals[mammal]);
                 var duration = TimeSpan.FromSeconds((int) (5 * 60 * effectiveness));
 
-                SpellHelper.Summon(creature, Caster, 0x215, duration, false, false);
+                SpellHelper.Summon(creature, Caster, 0x215, duration, false);
             }
 
             Return:

@@ -36,7 +36,7 @@ namespace Scripts.Zulu.Spells.Earth
 
             var duration = TimeSpan.FromSeconds(2 * Caster.Skills[DamageSkill].Fixed / 4);
 
-            SpellHelper.Summon(new AirElementalLord(), Caster, 0x217, duration, false, false);
+            SpellHelper.Summon(new AirElementalLord(), Caster, 0x217, duration, false);
 
             Return:
             FinishSequence();

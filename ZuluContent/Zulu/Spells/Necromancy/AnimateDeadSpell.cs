@@ -82,7 +82,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
                         var duration = TimeSpan.FromSeconds(2 * (int) Caster.Skills[DamageSkill].Value / 5);
 
-                        SpellHelper.Summon(new Zombie(), Caster, 0x1FB, duration, false, false);
+                        SpellHelper.Summon(new Zombie(), Caster, 0x1FB, duration, false);
                     }
                 }
             }

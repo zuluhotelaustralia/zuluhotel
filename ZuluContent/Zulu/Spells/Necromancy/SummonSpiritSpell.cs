@@ -57,7 +57,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
                 var duration = TimeSpan.FromSeconds((int) Caster.Skills[DamageSkill].Value);
                 var creature = (BaseCreature) Activator.CreateInstance(toSummon);
-                SpellHelper.Summon(creature, Caster, 0x215, duration, false, false);
+                SpellHelper.Summon(creature, Caster, 0x215, duration, false);
 
                 amount--;
             }

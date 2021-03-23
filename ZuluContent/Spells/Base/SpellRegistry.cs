@@ -1793,7 +1793,7 @@ namespace Server.Spells
                     TargetOptions = new TargetOptions
                     {
                         CheckLos = true,
-                        Range = 1,
+                        Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
                         Flags = TargetFlags.Beneficial
                     }

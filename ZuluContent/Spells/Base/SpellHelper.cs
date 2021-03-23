@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Engines.Magic;
 using Server.Engines.PartySystem;
 using Server.Guilds;
@@ -504,28 +505,33 @@ namespace Server.Spells
             return noto != Notoriety.Innocent || caster.Kills >= 5;
         }
 
-        public static void Summon(BaseCreature creature, Mobile caster, int sound, TimeSpan duration,
-            bool scaleDuration, bool scaleStats)
+        public static void Summon(BaseCreature creature, Mobile caster, int sound, TimeSpan? duration = null, bool scaleStats = true)
         {
+            if (duration == null)
+            {
+                var secs = caster.Skills[SkillName.Magery].Value * 2.0;
+                caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref secs));
+                duration = TimeSpan.FromSeconds(secs);
+            }
+            
+            
             var map = caster.Map;
 
             if (map == null)
                 return;
 
-            var scale = 1.0 + (caster.Skills[SkillName.Magery].Value - 100.0) / 200.0;
-
-            if (scaleDuration)
-                duration = TimeSpan.FromSeconds(duration.TotalSeconds * scale);
-
             if (scaleStats)
             {
-                creature.RawStr = (int) (creature.RawStr * scale);
+                var power = caster.Skills[SkillName.Magery].Value / 1.5;
+                caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref power));
+                
+                creature.RawStr = (int) (creature.RawStr * power / 100);
                 creature.Hits = creature.HitsMax;
 
-                creature.RawDex = (int) (creature.RawDex * scale);
+                creature.RawDex = (int) (creature.RawDex * power / 100);
                 creature.Stam = creature.StamMax;
 
-                creature.RawInt = (int) (creature.RawInt * scale);
+                creature.RawInt = (int) (creature.RawInt * power / 100);
                 creature.Mana = creature.ManaMax;
             }
 
@@ -533,13 +539,13 @@ namespace Server.Spells
 
             if (FindValidSpawnLocation(map, ref p, true))
             {
-                BaseCreature.Summon(creature, caster, p, sound, duration);
+                BaseCreature.Summon(creature, caster, p, sound, duration.Value);
                 return;
             }
 
 
             creature.Delete();
-            caster.SendLocalizedMessage(501942); // That location is blocked.
+            caster.SendFailureMessage(501942); // That location is blocked.
         }
 
         public static bool FindValidSpawnLocation(Map map, ref Point3D p, bool surroundingsOnly)
