@@ -10,7 +10,7 @@ using Server.Targeting;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class OwlSightSpell : EarthSpell, IAsyncSpell
+    public class OwlSightSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
         public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
     
@@ -22,30 +22,37 @@ namespace Scripts.Zulu.Spells.Earth
         {
         }
 
-        public async Task CastAsync()
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
             var range = Caster.Skills[SkillName.Magery].Value / 10.0;
             var duration = Caster.Skills[SkillName.Magery].Value * 70;
             
-            var mobiles = Caster.GetMobilesInRange((int) range);
+            var mobiles = target.GetMobilesInRange((int) range);
 
-            foreach (var target in mobiles)
+            foreach (var mobile in mobiles)
             {
-                if (!(target is PlayerMobile))
+                if (!(mobile is PlayerMobile))
                 {
                     continue;
                 }
                 
-                target.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
-                target.PlaySound(0x1E3);
+                mobile.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
+                mobile.PlaySound(0x1E3);
                 
-                if (!target.BeginAction(typeof(LightCycle)))
+                if (!mobile.BeginAction(typeof(LightCycle)))
                 {
                     continue;
                 }
                 
-                new LightCycle.OwlSightTimer(target, TimeSpan.FromSeconds(duration)).Start();
-                target.LightLevel = 0;
+                new LightCycle.OwlSightTimer(mobile, TimeSpan.FromSeconds(duration)).Start();
+                mobile.LightLevel = 0;
             }
 
             mobiles.Free();

@@ -42,23 +42,20 @@ namespace Scripts.Zulu.Spells.Earth
                     Caster.SendLocalizedMessage(1010059);  // You have been cured of all poisons.
                 }
 
-                if (target is IEnchanted enchantedTarget && enchantedTarget.Enchantments.GetResist(ElementalType.Poison) == 0)
+                if (!Caster.CanBuff(target, icons: BuffIcon.PoisonImmunity))
+                    return;
+                    
+                var power = Caster.Skills[SkillName.Magery].Value / 25;
+                Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
+                    
+                var duration = Caster.Skills[SkillName.Magery].Value * 2;
+                Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+                    
+                target.TryAddBuff(new PoisonImmunity
                 {
-                    if (!Caster.CanBuff(target, icons: BuffIcon.PoisonImmunity))
-                        return;
-                    
-                    var power = Caster.Skills[SkillName.Magery].Value / 25;
-                    Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
-                    
-                    var duration = Caster.Skills[SkillName.Magery].Value * 2;
-                    Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
-                    
-                    target.TryAddBuff(new PoisonImmunity
-                    {
-                        Value = (int) power * 25,
-                        Duration = TimeSpan.FromSeconds(duration),
-                    });
-                }
+                    Value = (int) power * 25,
+                    Duration = TimeSpan.FromSeconds(duration),
+                });
             }
             else
             {

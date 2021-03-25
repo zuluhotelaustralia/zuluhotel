@@ -1,119 +1,87 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Server.Engines.Magic;
-using Server.Network;
-using Server.Items;
-using Server.Targeting;
+using System.Threading.Tasks;
 using Server.Mobiles;
 using Scripts.Zulu.Engines.Classes;
 using Server;
+using Server.Engines.Magic;
 using Server.Spells;
+using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class RisingFireSpell : EarthSpell
+    public class RisingFireSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(0); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 100.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 15; }
-        }
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public RisingFireSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        private async void RaiseFire(Mobile target)
         {
-            Caster.Target = new InternalTarget(this);
+            target.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
+
+            await Timer.Pause(250);
+            
+            target.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
+            target.PlaySound(0x208);
+            
+            await Timer.Pause(250);
+            
+            target.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
+            target.PlaySound(0x208);
+            
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            SpellHelper.Damage(damage / 2, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
         }
 
-        public void Target(Mobile m)
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            if (!Caster.CanSee(m))
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
-            }
-
-            if (!CheckSequence()) goto Return;
-
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
             var range = 3.0;
-            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage) range *= ZuluClass.GetClass(Caster).Bonus;
+            
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
 
-            var dmg = Caster.Skills[DamageSkill].Value / 6.0;
-            var map = Caster.Map;
-            if (map != null)
-                foreach (var mob in m.GetMobilesInRange((int) range))
-                    if (Caster != mob &&
-                        SpellHelper.ValidIndirectTarget(Caster, mob) &&
-                        Caster.CanBeHarmful(mob, false) &&
-                        m.InLOS(mob))
-                    {
-                        Caster.DoHarmful(mob);
-                        mob.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
-                        SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
-                    }
+            var mobiles = target.GetMobilesInRange((int) range);
 
-            Caster.PlaySound(0x208);
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
+            foreach (var mobile in mobiles)
             {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
+                if (!Caster.Map.LineOfSight(Caster, mobile))
+                {
+                    continue;
+                }
+                
+                RaiseFire(mobile);
             }
 
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(RisingFireSpell));
-            }
-        }
+            mobiles.Free();
+            
+            await Timer.Pause(1000);
 
-        private class InternalTarget : Target
-        {
-            private RisingFireSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(RisingFireSpell owner) : base(12, false, TargetFlags.Harmful)
+            mobiles = Caster.GetMobilesInRange(3);
+            
+            foreach (var mobile in mobiles)
             {
-                m_Owner = owner;
+                if (!Caster.Map.LineOfSight(Caster, mobile))
+                {
+                    continue;
+                }
+                
+                RaiseFire(mobile);
             }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            
+            mobiles.Free();
         }
     }
 }

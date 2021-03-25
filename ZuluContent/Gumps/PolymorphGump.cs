@@ -19,6 +19,10 @@ namespace Server.Gumps
     public record PolymorphEntry
     {
         public static readonly PolymorphEntry Bird = new(8430, 6, 1072458, 17, 10);
+        public static readonly PolymorphEntry Rabbit = new(8485, 205, 1018268, 17, 10);
+        public static readonly PolymorphEntry Cat = new(8475, 201, 1028475, 17, 10);
+        public static readonly PolymorphEntry Deer = new(8404, 234, 1018292, 17, 10);
+        public static readonly PolymorphEntry Reaper = new(8442, 47, 1018139, 17, 10);
         public static readonly PolymorphEntry Slime = new(8424, 51, 1015246, 5, 10);
         public static readonly PolymorphEntry Eagle = new(8434, 5, 1072461, 5, 10);
         public static readonly PolymorphEntry Mongbat = new(8441, 39, 1072441, 5, 10);
@@ -28,6 +32,8 @@ namespace Server.Gumps
         public static readonly PolymorphEntry GiantSpider = new(8445, 28, 1072424, 23, 10);
         public static readonly PolymorphEntry Scorpion = new(8420, 48, 1018140, 23, 10);
         public static readonly PolymorphEntry Orc = new(8416, 17, 1015247, 29, 10);
+        public static readonly PolymorphEntry GiantSerpent = new(9663, 21, 1072430, 17, 10);
+
 
         public static readonly PolymorphEntry LizardMan = new(8414, 33, 1015248, 26, 10);
         public static readonly PolymorphEntry Ghoul = new(8457, 26, 1018245, 23, 10);
@@ -43,8 +49,8 @@ namespace Server.Gumps
         public static readonly PolymorphEntry Gargoyle = new(8409, 4, 1015249, 22, 10);
         public static readonly PolymorphEntry Liche = new(8440, 24, 1028440, 23, 10);
         public static readonly PolymorphEntry Daemon = new(8403, 9, 1015253, 25, 8);
-        public static readonly PolymorphEntry Dragon = new(8406, 12, 1028440, 23, 10);
-        public static readonly PolymorphEntry Wisp = new(8448, 58, 1028440, 23, 10);
+        public static readonly PolymorphEntry Dragon = new(8406, 12, 1018105, 23, 10);
+        public static readonly PolymorphEntry Wisp = new(8448, 58, 1018151, 23, 10);
 
         
         public static readonly PolymorphEntry Chicken = new(8401, 208, 1015236, 15, 10);
@@ -63,7 +69,6 @@ namespace Server.Gumps
         // Missing ArtId, Cliloc, x, y
         public static readonly PolymorphEntry Zombie = new(0, 3, 0, 0, 0);
         public static readonly PolymorphEntry DaemonWithSword = new(0, 10, 0, 0, 0);
-        public static readonly PolymorphEntry GiantSerpent = new(1, 21, 0, 0, 0);
         public static readonly PolymorphEntry SeaSerpent = new(1, 150, 0, 0, 0);
         public static readonly PolymorphEntry Ent = new(1, 47, 0, 0, 0);
 
