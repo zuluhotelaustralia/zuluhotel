@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Warlock>(new CreatureProperties
             {
                 // cast_pct = 50,
-                // CProp_PermMagicImmunity = i2,
                 // DataElementId = lizardmanwarlock,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -71,6 +70,10 @@ namespace Server.Mobiles
                 },
                 ProvokeSkillOverride = 105,
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 2}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Tactics, 50},

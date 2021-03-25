@@ -17,9 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<FallenAngel>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i500,
-                // CProp_EarthProtection = i2,
-                // CProp_NecroProtection = i4,
-                // CProp_PermMagicImmunity = i6,
                 // CProp_Permmr = i8,
                 // DataElementId = fallenangel,
                 // DataElementType = NpcTemplate,
@@ -62,7 +59,10 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 150,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 50},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

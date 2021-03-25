@@ -16,10 +16,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<DemonicOstard>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i250,
-                // CProp_EarthProtection = i2,
-                // CProp_HolyProtection = i2,
-                // CProp_NecroProtection = i2,
-                // CProp_PermMagicImmunity = i5,
+
                 // CProp_SuperOsty = i1,
                 // DataElementId = demonicostard,
                 // DataElementType = NpcTemplate,
@@ -62,7 +59,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 50},
-                    {ElementalType.Water, 50}
+                    {ElementalType.Water, 50},
+                    {ElementalType.Necro, 50},
+                    {ElementalType.Earth, 50},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

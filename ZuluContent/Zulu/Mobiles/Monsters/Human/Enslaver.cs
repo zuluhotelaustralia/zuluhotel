@@ -17,8 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Enslaver>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i3,
-                // CProp_NecroProtection = i3,
                 // CProp_NoReactiveArmour = i1,
                 // CProp_NoReactiveArmour_0 = i1,
                 // CProp_untamemountatdeath = i1,
@@ -63,7 +61,9 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 75},
                     {ElementalType.Air, 75},
                     {ElementalType.Water, 75},
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 75},
+                    {ElementalType.Earth, 75}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

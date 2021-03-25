@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<UndeadLizard>(new CreatureProperties
             {
                 // cast_pct = 42,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = deadlizard,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -75,7 +74,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 3}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

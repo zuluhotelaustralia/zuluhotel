@@ -491,7 +491,7 @@ namespace Server.Mobiles
 
                                 if (WasNamed(speech) && m_Mobile.CheckControlChance(e.Mobile))
                                 {
-                                    if (m_Mobile.Summoned)
+                                    if (m_Mobile.Summoned || m_Mobile.SpellBound)
                                         e.Mobile.SendLocalizedMessage(
                                             1005481); // Summoned creatures are loyal only to their summoners.
                                     else if (e.Mobile.HasTrade)
@@ -587,7 +587,7 @@ namespace Server.Mobiles
 
                                 if (WasNamed(speech) && m_Mobile.CheckControlChance(e.Mobile))
                                 {
-                                    if (m_Mobile.Summoned)
+                                    if (m_Mobile.Summoned || m_Mobile.SpellBound)
                                         e.Mobile.SendLocalizedMessage(
                                             1005487); // You cannot transfer ownership of a summoned creature.
                                     else if (e.Mobile.HasTrade)

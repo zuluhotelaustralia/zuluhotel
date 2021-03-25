@@ -18,7 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<InfernoDragon>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = infernodragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -85,7 +84,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 140,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 200}
+                    {ElementalType.Fire, 200},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

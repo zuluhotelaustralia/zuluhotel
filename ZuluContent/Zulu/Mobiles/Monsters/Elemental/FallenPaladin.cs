@@ -16,11 +16,8 @@ namespace Server.Mobiles
             CreatureProperties.Register<FallenPaladin>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i2000,
-                // CProp_EarthProtection = i8,
-                // CProp_NecroProtection = i8,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i8,
                 // CProp_risewithloot = i1,
                 // DataElementId = hiddenfallenpaladin,
                 // DataElementType = NpcTemplate,
@@ -61,7 +58,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 RiseCreatureDelay = TimeSpan.FromSeconds(0),
                 RiseCreatureType = typeof(HellbornePaladinsRevenant),

@@ -11,6 +11,7 @@ using Scripts.Zulu.Utilities;
 using Server.Spells;
 using Server.Spells.Fourth;
 using Server.Scripts.Engines.Loot;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Mobiles
 {
@@ -27,7 +28,7 @@ namespace Server.Mobiles
 
         public static CreatureProp Between(double min, double max)
         {
-            return new CreatureProp(min, max);
+            return new(min, max);
         }
 
         public static CreatureProp Dice(string d)
@@ -57,7 +58,7 @@ namespace Server.Mobiles
 
         public static implicit operator CreatureProp(double d)
         {
-            return new CreatureProp(d);
+            return new(d);
         }
 
         private double Next()
@@ -71,8 +72,7 @@ namespace Server.Mobiles
 
     public record CreatureProperties
     {
-        private static readonly Dictionary<Type, CreatureProperties> CreatureMap =
-            new Dictionary<Type, CreatureProperties>();
+        private static readonly Dictionary<Type, CreatureProperties> CreatureMap = new();
 
         public static IReadOnlyDictionary<Type, CreatureProperties> Creatures
         {
@@ -157,7 +157,6 @@ namespace Server.Mobiles
         public HideType HideType { get; init; }
         public int Hides { get; init; }
         public bool TargetAcquireExhaustion { get; init; }
-        
         public string LootTable { get; set; }
         public int LootItemLevel { get; set; }
         public int LootItemChance { get; set; }
@@ -184,8 +183,8 @@ namespace Server.Mobiles
                 dest.SetSkill(skill, prop);
 
             foreach (var (resistance, prop) in Resistances)
-                dest.Enchantments.SetResist(resistance, prop);
-            
+                dest.TrySetResist(resistance, prop);
+
 
             // foreach (var (damageType, prop) in ElementalType.
             //     dest.SetDamageType(damageType, prop);

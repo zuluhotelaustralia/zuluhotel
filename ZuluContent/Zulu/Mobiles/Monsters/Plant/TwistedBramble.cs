@@ -17,7 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<TwistedBramble>(new CreatureProperties
             {
                 // cast_pct = 100,
-                // CProp_EarthProtection = i4,
                 // DataElementId = twistedbramble,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -75,7 +74,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

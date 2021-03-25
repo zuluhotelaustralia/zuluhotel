@@ -17,8 +17,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<OrcHighCleric>(new CreatureProperties
             {
                 // cast_pct = 25,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
+
                 // DataElementId = orchighcleric,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -84,7 +83,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Corpser>(new CreatureProperties
             {
-                // CProp_EarthProtection = i5,
                 // DataElementId = corpser,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -49,6 +48,10 @@ namespace Server.Mobiles
                 Name = "a corpser",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Earth, 100}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 20},

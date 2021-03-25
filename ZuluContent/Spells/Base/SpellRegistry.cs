@@ -1942,7 +1942,7 @@ namespace Server.Spells
                         CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
-                        Flags = TargetFlags.Harmful
+                        Flags = TargetFlags.None
                     }
                 }
             );
@@ -2081,7 +2081,7 @@ namespace Server.Spells
                     LeftHandEffect = 9031,
                     RightHandEffect = 9031,
                     Circle = SpellCircle.Necro,
-                    DamageType = ElementalType.None,
+                    DamageType = ElementalType.Necro,
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.FertileDirt] = 1,

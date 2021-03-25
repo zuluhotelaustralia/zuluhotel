@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Wisp>(new CreatureProperties
             {
-                // CProp_EarthProtection = i4,
                 // CProp_Permmr = i8,
                 // DataElementId = wisp,
                 // DataElementType = NpcTemplate,
@@ -71,7 +70,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 160,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

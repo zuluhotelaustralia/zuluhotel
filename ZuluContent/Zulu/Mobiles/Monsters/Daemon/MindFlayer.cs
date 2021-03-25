@@ -18,8 +18,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<MindFlayer>(new CreatureProperties
             {
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = mindflayer,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -59,7 +57,9 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

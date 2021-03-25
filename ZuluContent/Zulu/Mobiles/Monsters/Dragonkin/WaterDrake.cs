@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<WaterDrake>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = waterdrake,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -60,7 +59,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 120,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.PermMagicImmunity, 3}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

@@ -1,135 +1,104 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
 using Server;
 using Server.Network;
 using Server.Mobiles;
 using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class AnimateDeadSpell : NecromancerSpell
+    public class AnimateDeadSpell : NecromancerSpell, ITargetableAsyncSpell<Corpse>
     {
-        public override TimeSpan CastDelayBase
+        public AnimateDeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<Corpse> response)
         {
-            get { return TimeSpan.FromSeconds(2); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 100.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 60; }
-        }
-
-        public AnimateDeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(object obj)
-        {
-            if (!Caster.CanSee(obj))
+            if (!response.HasValue)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                Caster.SendFailureMessage(1061084); // You cannot animate that.
+                return;
             }
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
 
-            if (!CheckSequence()) goto Return;
-
-            SpellHelper.Turn(Caster, obj);
-
-            var c = obj as Corpse;
-
-            if (c == null)
+            var magery = Caster.Skills[SkillName.Magery].Value;
+            var duration = magery * 3.0;
+            var power = magery - 20.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
+            
+            
+            if (target.Animated || target.IsBones || !(target.Owner is BaseCreature creature) || power < 1)
             {
-                Caster.SendLocalizedMessage(1061084); // You cannot animate that.
+                Caster.SendFailureMessage(1061084); // There's not enough life force there to animate.
+                return;
             }
-            else
+            
+            if (power > 95)
+                power = 95;
+
+            var props = CreatureProperties.Get(creature.GetType());
+
+            if (props is null)
+                return;
+
+            if (props.Resistances.TryGetValue(Info.DamageType, out var value))
             {
-                Type type = null;
+                var modifier = 100.0 - value.Min;
+                duration = duration * (modifier / 100);
+                power = power * modifier / 100;
 
-                if (c.Owner != null) type = c.Owner.GetType();
-
-                if (c.ItemID != 0x2006 ||
-                    c.Animated ||
-                    type == typeof(PlayerMobile) ||
-                    type == null ||
-                    c.Owner != null && c.Owner.Fame < 100 ||
-                    c.Owner != null && c.Owner is BaseCreature && ((BaseCreature) c.Owner).Summoned)
+                if (duration < 1 || power < 1)
                 {
-                    Caster.SendLocalizedMessage(1061085); // There's not enough life force there to animate.
-                }
-                else
-                {
-                    var p = c.GetWorldLocation();
-                    var map = c.Map;
-
-                    if (map != null)
-                    {
-                        Effects.SendLocationParticles(EffectItem.Create(p, map, EffectItem.DefaultDuration), 0x3789, 1,
-                            40, 0x3F, 3, 9907, 0);
-
-                        var duration = TimeSpan.FromSeconds(2 * (int) Caster.Skills[DamageSkill].Value / 5);
-
-                        SpellHelper.Summon(new Zombie(), Caster, 0x1FB, duration, false);
-                    }
+                    // TODO: this should be a PrivateOverheadMessage but no overload exists in MUO's Item.cs
+                    target.PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
+                        "The nature of the target prevents it from being animated!"
+                    );
+                    return;
                 }
             }
+            
+            Effects.SendLocationParticles(
+                EffectItem.Create(target.Location, target.Map, EffectItem.DefaultDuration), 
+                0x37BA, 7, 0xa, 0, 3, 9907, 0
+            );
 
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
+            if (Activator.CreateInstance(creature.GetType()) is BaseCreature summoned)
             {
-                m_Target = target;
+                var location = SpellHelper.GetSurfaceTop(target.Location);
+                target.Delete();
+                
+                // ReSharper disable once ForCanBeConvertedToForeach
+                for (var i = 0; i < summoned.Skills.Length; i++)
+                {
+                    summoned.Skills[i].BaseFixedPoint = (int)(summoned.Skills[i].BaseFixedPoint * power / 10.0);
+                }
 
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
+                summoned.CreatureType = CreatureType.Undead;
 
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(AnimateDeadSpell));
-            }
-        }
+                SpellHelper.Summon(summoned, Caster, 0x22A, TimeSpan.FromSeconds(duration), false);
 
-        private class InternalTarget : Target
-        {
-            private AnimateDeadSpell m_Owner;
+                if (!summoned.Deleted)
+                {
+                    summoned.Hue = 1154;
+                    summoned.SpellBound = true;
+                
+                    summoned.RawStr = (int)(summoned.RawStr * power / 100);
+                    summoned.RawInt = (int)(summoned.RawInt * power / 100);
+                    summoned.RawDex = (int)(summoned.RawDex * power / 100);
 
-            public InternalTarget(AnimateDeadSpell owner) : base(12, false, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                m_Owner.Target(o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
+                    summoned.Hits = summoned.HitsMax;
+                    summoned.Mana = summoned.ManaMax;
+                    summoned.Stam = summoned.StamMax;
+                    
+                    summoned.Location = location;
+                }
             }
         }
     }

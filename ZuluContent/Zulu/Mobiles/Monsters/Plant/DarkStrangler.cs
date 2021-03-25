@@ -17,7 +17,6 @@ namespace Server.Mobiles
             {
                 // ammoamount = 300,
                 // ammotype = 0xEED,
-                // CProp_EarthProtection = i5,
                 // DataElementId = darkstrangler,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -55,6 +54,10 @@ namespace Server.Mobiles
                 Name = "a Dark Strangler",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Earth, 100}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 90},

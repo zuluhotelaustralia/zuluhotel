@@ -21,10 +21,7 @@ namespace Server.Mobiles
                 // CProp_AttackTypeImmunities = i256,
                 // CProp_BaseHpRegen = i450,
                 // CProp_BaseManaRegen = i500,
-                // CProp_EarthProtection = i4,
-                // CProp_massCastRange = i15,
-                // CProp_NecroProtection = i1,
-                // CProp_PermMagicImmunity = i8,
+
                 // CProp_Permmr = i4,
                 // DataElementId = GreaterEvilBookOfTheEarth,
                 // DataElementType = NpcTemplate,
@@ -83,7 +80,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 25},
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 25},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

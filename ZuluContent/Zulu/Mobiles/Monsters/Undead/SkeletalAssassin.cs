@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<SkeletalAssassin>(new CreatureProperties
             {
                 // buddyText = "Emos hetairos",
-                // CProp_NecroProtection = i3,
                 // DataElementId = skeletalassassin,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -54,7 +53,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 75}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

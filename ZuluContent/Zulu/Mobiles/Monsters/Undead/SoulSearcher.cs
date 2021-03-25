@@ -17,8 +17,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<SoulSearcher>(new CreatureProperties
             {
                 // cast_pct = 32,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
+
                 // DataElementId = soulsearcher,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -76,7 +75,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

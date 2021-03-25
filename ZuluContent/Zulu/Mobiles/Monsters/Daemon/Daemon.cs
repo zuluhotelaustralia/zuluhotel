@@ -16,8 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Daemon>(new CreatureProperties
             {
                 // cast_pct = 20,
-                // CProp_NecroProtection = i3,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = daemon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -81,6 +79,11 @@ namespace Server.Mobiles
                     typeof(Spells.Sixth.MassCurseSpell)
                 },
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.Earth, 75},
+                    {ElementalType.PermMagicImmunity, 3}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 65},

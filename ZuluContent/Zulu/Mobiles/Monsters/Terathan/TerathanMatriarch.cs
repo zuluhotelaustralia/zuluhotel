@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<TerathanMatriarch>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = terathanmatriarch,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -62,6 +61,10 @@ namespace Server.Mobiles
                     typeof(Spells.Sixth.ExplosionSpell)
                 },
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 65},

@@ -15,10 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<CelestialOstard>(new CreatureProperties
             {
-                // CProp_EarthProtection = i2,
-                // CProp_HolyProtection = i3,
-                // CProp_NecroProtection = i4,
-                // CProp_PermMagicImmunity = i5,
                 // CProp_SuperOsty = i1,
                 // DataElementId = celestialostard,
                 // DataElementType = NpcTemplate,
@@ -62,7 +58,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Air, 50},
                     {ElementalType.Water, 50},
-                    {ElementalType.Fire, 50}
+                    {ElementalType.Fire, 50},
+                    {ElementalType.Necro, 50},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

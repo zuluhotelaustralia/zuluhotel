@@ -53,8 +53,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermMagicImmunity, 100},
-                },
+                    {ElementalType.PermMagicImmunity, 100}
+                }
             });
         }
 
@@ -93,7 +93,11 @@ namespace Server.Mobiles
         }
 
         public override bool CanDrop { get; } = true;
-        public override bool PlayerRangeSensitive => ControlMaster == null || ControlMaster.Map == Map.Internal;
+
+        public override bool PlayerRangeSensitive
+        {
+            get { return ControlMaster == null || ControlMaster.Map == Map.Internal; }
+        }
 
         [Constructible]
         public Humuc(Serial serial) : base(serial)
@@ -109,7 +113,7 @@ namespace Server.Mobiles
         {
             return m == ControlMaster;
         }
-        
+
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);

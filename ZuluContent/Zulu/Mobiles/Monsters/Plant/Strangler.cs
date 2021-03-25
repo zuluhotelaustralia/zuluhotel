@@ -19,11 +19,8 @@ namespace Server.Mobiles
             {
                 // cast_pct = 75,
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i8,
                 // CProp_massCastRange = i15,
-                // CProp_NecroProtection = i8,
                 // CProp_noanimate = i1,
-                // CProp_PermMagicImmunity = i8 ,
                 // CProp_untamable_0 = i1,
                 // DataElementId = strangler,
                 // DataElementType = NpcTemplate,
@@ -32,8 +29,8 @@ namespace Server.Mobiles
                 // HitSound = 0x168 /* Weapon */,
                 // hostile = 1,
                 LootTable = "201",
-                LootItemChance = 100 ,
-                LootItemLevel = 8 ,
+                LootItemChance = 100,
+                LootItemLevel = 8,
                 // MissSound = 0x169 /* Weapon */,
                 // num_casts = 400,
                 // script = killpcssprinters,
@@ -77,7 +74,10 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 100},
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

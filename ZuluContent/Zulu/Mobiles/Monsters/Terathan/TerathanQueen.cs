@@ -17,7 +17,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<TerathanQueen>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = terathanqueen,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -63,6 +62,10 @@ namespace Server.Mobiles
                 Name = "a Terathan Queen",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 8}
+                },
                 PreferredSpells = new List<Type>
                 {
                     typeof(Spells.Third.PoisonSpell),

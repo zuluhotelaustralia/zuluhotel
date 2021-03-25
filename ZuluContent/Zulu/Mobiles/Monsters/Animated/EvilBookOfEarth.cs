@@ -19,9 +19,7 @@ namespace Server.Mobiles
                 // cast_pct = 60,
                 // CProp_BaseHpRegen = i350,
                 // CProp_BaseManaRegen = i500,
-                // CProp_EarthProtection = i5,
-                // CProp_NecroProtection = i3,
-                // CProp_PermMagicImmunity = i8,
+
                 // CProp_Permmr = i5,
                 // DataElementId = EvilBookOfTheEarth,
                 // DataElementType = NpcTemplate,
@@ -83,7 +81,10 @@ namespace Server.Mobiles
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 100},
                     {ElementalType.Fire, 75},
-                    {ElementalType.Physical, 75}
+                    {ElementalType.Physical, 75},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

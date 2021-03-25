@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<FlamingGargoyle>(new CreatureProperties
             {
                 // cast_pct = 30,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = flamegargoyle,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -65,7 +64,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 105,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.PermMagicImmunity, 3}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

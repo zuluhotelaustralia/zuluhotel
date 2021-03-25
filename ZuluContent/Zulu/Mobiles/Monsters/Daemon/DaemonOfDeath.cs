@@ -19,11 +19,8 @@ namespace Server.Mobiles
                 // cast_pct = 20,
                 // CProp_BaseHpRegen = i500,
                 // CProp_BaseManaRegen = i1000,
-                // CProp_EarthProtection = i3,
-                // CProp_NecroProtection = i8,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i8,
                 // CProp_Permmr = i5,
                 // DataElementId = daemonofdeath,
                 // DataElementType = NpcTemplate,
@@ -92,7 +89,9 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Water, 75},
                     {ElementalType.Air, 75},
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.Necro, 100}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

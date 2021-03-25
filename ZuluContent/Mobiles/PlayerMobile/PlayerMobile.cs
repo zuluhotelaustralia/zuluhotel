@@ -825,15 +825,8 @@ namespace Server.Mobiles
         }
 
         #region [Zulu] Resistances
-
         public EnchantmentDictionary Enchantments { get; private set; } = new();
-
-
-        public int GetResistance(ElementalType type)
-        {
-            return Items.OfType<BaseEquippableItem>().Sum(i => i.Enchantments.GetResist(type));
-        }
-
+        
         #endregion
 
 

@@ -38,6 +38,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         {
             parent.BodyMod = BodyMods.body;
             parent.HueMod = BodyMods.bodyHue;
+            parent.VirtualArmorMod += Value / 3;
             
             BaseArmor.ValidateMobile(parent);
             BaseClothing.ValidateMobile(parent);
@@ -51,6 +52,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             {
                 parent.BodyMod = 0;
                 parent.HueMod = -1;
+                
+                parent.VirtualArmorMod -= Value / 3;
+                if (parent.VirtualArmorMod < 0)
+                    parent.VirtualArmorMod = 0;
                 
                 BaseArmor.ValidateMobile(parent);
                 BaseClothing.ValidateMobile(parent);

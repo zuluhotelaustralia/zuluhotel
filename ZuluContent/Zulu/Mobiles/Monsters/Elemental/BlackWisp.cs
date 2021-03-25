@@ -17,9 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<BlackWisp>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_EarthProtection = i4,
-                // CProp_NecroProtection = i2,
-                // CProp_PermMagicImmunity = i6,
                 // CProp_Permmr = i8,
                 // DataElementId = blackwisp,
                 // DataElementType = NpcTemplate,
@@ -83,6 +80,12 @@ namespace Server.Mobiles
                     typeof(DecayingRaySpell)
                 },
                 ProvokeSkillOverride = 120,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Tactics, 100},

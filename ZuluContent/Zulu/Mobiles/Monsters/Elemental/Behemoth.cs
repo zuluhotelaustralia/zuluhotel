@@ -16,9 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Behemoth>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i8,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = behemoth,
                 // DataElementType = NpcTemplate,
                 // Equip = behemoth,
@@ -57,7 +54,10 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

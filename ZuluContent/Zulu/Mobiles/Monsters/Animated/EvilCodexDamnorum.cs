@@ -16,9 +16,6 @@ namespace Server.Mobiles
                 // CProp_AttackTypeImmunities = i256,
                 // CProp_BaseHpRegen = i350,
                 // CProp_BaseManaRegen = i500,
-                // CProp_EarthProtection = i3,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i6,
                 // CProp_Permmr = i4,
                 // DataElementId = EvilCodexDamnorum,
                 // DataElementType = NpcTemplate,
@@ -84,7 +81,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Air, 75},
                     {ElementalType.Water, 75},
-                    {ElementalType.Fire, 75}
+                    {ElementalType.Fire, 75},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

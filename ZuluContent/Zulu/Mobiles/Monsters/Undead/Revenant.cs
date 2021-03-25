@@ -17,7 +17,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Revenant>(new CreatureProperties
             {
-                // CProp_NecroProtection = i6,
                 // DataElementId = revenant,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -55,7 +54,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

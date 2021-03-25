@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<TerathanAvenger>(new CreatureProperties
             {
-                // CProp_EarthProtection = i3,
                 // DataElementId = terathanavenger,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -70,7 +69,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 90,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Air, 75}
+                    {ElementalType.Air, 75},
+                    {ElementalType.Earth, 75}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

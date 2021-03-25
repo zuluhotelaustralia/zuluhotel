@@ -15,13 +15,11 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<GoldenDragonLord>(new CreatureProperties
             {
+                // CProp_looter = s1,
+                // CProp_noanimate = i1,
                 // CProp_BaseHpRegen = i500,
                 // CProp_BaseManaRegen = i500,
-                // CProp_EarthProtection = i4,
-                // CProp_looter = s1,
-                // CProp_NecroProtection = i2,
-                // CProp_noanimate = i1,
-                // CProp_PermMagicImmunity = i7,
+
                 // CProp_Permmr = i6,
                 // DataElementId = goldendragonlord,
                 // DataElementType = NpcTemplate,
@@ -84,7 +82,10 @@ namespace Server.Mobiles
                 {
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
-                    {ElementalType.Air, 50}
+                    {ElementalType.Air, 50},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 50},
+                    {ElementalType.PermMagicImmunity, 7}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

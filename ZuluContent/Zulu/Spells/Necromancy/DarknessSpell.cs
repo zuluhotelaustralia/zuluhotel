@@ -1,39 +1,23 @@
 using System;
 using System.Collections;
+using System.Linq;
+using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
 using Server;
 using Server.Network;
 using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class DarknessSpell : NecromancerSpell
+    public class DarknessSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(2); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 80.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 40; }
-        }
-
-        public DarknessSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
+        public DarknessSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
         public void Target(Mobile m)
         {
             if (!Caster.CanSee(m))
@@ -64,51 +48,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             Return:
             FinishSequence();
         }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(DarknessSpell));
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private DarknessSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(DarknessSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-
+        
         private class DarknessTimer : Timer
         {
             private Mobile m_Owner;
@@ -125,6 +65,54 @@ namespace Scripts.Zulu.Spells.Necromancy
                 m_Owner.EndAction(typeof(LightCycle));
                 m_Owner.LightLevel = 0;
             }
+        }
+
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
+        {
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
+
+            if (!Caster.CanBuff(target, icons: BuffIcon.NightSight))
+                return;
+
+            var level = 20.0 + Caster.Skills.Magery.Value / 15.0; 
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref level));
+            var duration = SpellHelper.GetDuration(Caster, target).TotalSeconds;
+
+            if (level > 30)
+                level = 30;
+
+            var protection = target.GetResist(Info.DamageType);
+            if (protection > 0)
+            {
+                var modifier = 100.0 - protection;
+                duration *= modifier / 100;
+                
+                if (duration < 1)
+                {
+                    target.PrivateOverheadMessage(
+                        MessageType.Regular, 
+                        0x3B2, 
+                        true, 
+                        "The nature of the target prevents it from being affected by that spell!", 
+                        Caster.NetState
+                    );
+                    return;
+                }
+            }
+
+            target.TryAddBuff(new NightSight
+            {
+                Title = "Darkness",
+                Value = LightCycle.DungeonLevel,
+                Duration = TimeSpan.FromSeconds(duration),
+            });
+
+            target.FixedParticles(0x373B, 10, 10, 5007, EffectLayer.Waist);
+            target.PlaySound(0x1E3);
         }
     }
 }

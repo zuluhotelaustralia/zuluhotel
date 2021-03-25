@@ -17,11 +17,8 @@ namespace Server.Mobiles
             CreatureProperties.Register<CorruptCounselor>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i3,
-                // CProp_NecroProtection = i3,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = corruptcounselor,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -63,7 +60,10 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 75},
                     {ElementalType.Water, 75},
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Necro, 75},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

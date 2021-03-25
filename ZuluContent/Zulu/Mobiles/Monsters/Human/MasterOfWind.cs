@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<MasterOfWind>(new CreatureProperties
             {
                 // cast_pct = 65,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = airmaster,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -63,7 +62,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 94,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Air, 100}
+                    {ElementalType.Air, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

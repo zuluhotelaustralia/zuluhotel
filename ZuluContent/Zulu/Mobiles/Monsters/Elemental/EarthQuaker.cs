@@ -20,10 +20,7 @@ namespace Server.Mobiles
                 // cast_pct = 50,
                 // count_casts = 0,
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i8,
                 // CProp_massCastRange = i12,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = earthquaker,
                 // DataElementType = NpcTemplate,
                 // Equip = behemoth,
@@ -75,7 +72,10 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

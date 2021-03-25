@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<ShadowWarrior>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i4,
                 // CProp_summoned = i1,
                 // DataElementId = shadowwarrior,
                 // DataElementType = NpcTemplate,
@@ -54,7 +53,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

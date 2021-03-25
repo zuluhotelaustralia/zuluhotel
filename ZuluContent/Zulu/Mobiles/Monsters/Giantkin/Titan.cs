@@ -15,9 +15,7 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Titan>(new CreatureProperties
             {
-                // CProp_EarthProtection = i3,
                 // CProp_HolyProtection = i3,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = titan,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -75,6 +73,11 @@ namespace Server.Mobiles
                     typeof(Spells.Fifth.ParalyzeSpell)
                 },
                 ProvokeSkillOverride = 100,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Earth, 75},
+                    {ElementalType.PermMagicImmunity, 3}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 50},

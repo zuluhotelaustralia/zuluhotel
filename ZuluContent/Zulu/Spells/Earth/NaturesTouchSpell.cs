@@ -45,7 +45,7 @@ namespace Scripts.Zulu.Spells.Earth
                 goto Return;
             }
 
-            if (m is BaseCreature && ((BaseCreature) m).IsAnimatedDead)
+            if (m is BaseCreature && ((BaseCreature) m).AnimatedDead)
             {
                 Caster.SendLocalizedMessage(1061654); // You cannot heal that which is not alive.
                 goto Return;

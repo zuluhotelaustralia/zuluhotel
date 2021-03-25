@@ -22,7 +22,6 @@ namespace Server.Mobiles
                 // count_casts = 0,
                 // CProp_looter = s1,
                 // CProp_massCastRange = i15,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = DarkMage,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -101,6 +100,10 @@ namespace Server.Mobiles
                 },
                 ProvokeSkillOverride = 120,
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Macing, 95},

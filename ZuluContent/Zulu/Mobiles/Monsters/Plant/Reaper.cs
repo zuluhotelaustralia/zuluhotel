@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Reaper>(new CreatureProperties
             {
-                // CProp_EarthProtection = i4,
                 // DataElementId = reaper,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -50,7 +49,8 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.PermPoisonImmunity, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Earth, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

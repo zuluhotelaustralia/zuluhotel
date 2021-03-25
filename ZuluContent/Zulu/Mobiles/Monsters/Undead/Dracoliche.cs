@@ -18,8 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Dracoliche>(new CreatureProperties
             {
                 // cast_pct = 20,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = dracoliche,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -91,7 +89,9 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 120,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

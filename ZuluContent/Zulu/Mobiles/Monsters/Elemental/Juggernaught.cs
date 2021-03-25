@@ -19,11 +19,8 @@ namespace Server.Mobiles
                 // cast_pct = 100,
                 // count_casts = 0,
                 // CProp_BaseHpRegen = i3000,
-                // CProp_EarthProtection = i4,
                 // CProp_massCastRange = i15,
-                // CProp_NecroProtection = i4,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i4,
                 // CProp_SpecialAttack = i14360,
                 // DataElementId = juggernaught,
                 // DataElementType = NpcTemplate,
@@ -75,7 +72,10 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

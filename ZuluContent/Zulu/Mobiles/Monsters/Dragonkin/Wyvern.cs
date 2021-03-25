@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Wyvern>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = wyvern,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -61,7 +60,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 120,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 3}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

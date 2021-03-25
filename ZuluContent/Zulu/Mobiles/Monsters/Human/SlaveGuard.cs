@@ -17,8 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<SlaveGuard>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i1,
-                // CProp_NecroProtection = i1,
                 // CProp_NoReactiveArmour = i1,
                 // CProp_NoReactiveArmour_0 = i1,
                 // CProp_untamemountatdeath = i1,
@@ -65,7 +63,9 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 25},
                     {ElementalType.Air, 25},
                     {ElementalType.Water, 25},
-                    {ElementalType.PermPoisonImmunity, 75}
+                    {ElementalType.PermPoisonImmunity, 75},
+                    {ElementalType.Necro, 25},
+                    {ElementalType.Earth, 25}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

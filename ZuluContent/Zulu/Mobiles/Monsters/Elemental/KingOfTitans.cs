@@ -16,9 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<KingOfTitans>(new CreatureProperties
             {
                 // cast_pct = 95,
-                // CProp_EarthProtection = i8,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = hiddenkingoftitans,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -59,7 +56,10 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 75},
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

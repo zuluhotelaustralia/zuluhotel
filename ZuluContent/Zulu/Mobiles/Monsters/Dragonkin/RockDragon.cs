@@ -18,8 +18,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<RockDragon>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_EarthProtection = i8,
-                // CProp_PermMagicImmunity = i4,
+
                 // DataElementId = rockdragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -83,6 +82,11 @@ namespace Server.Mobiles
                     typeof(Spells.Sixth.MassCurseSpell)
                 },
                 ProvokeSkillOverride = 140,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 4}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 80},

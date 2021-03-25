@@ -20,7 +20,6 @@ namespace Server.Mobiles
             {
                 // cast_pct = 30,
                 // CProp_AttackTypeImmunities = i256,
-                // CProp_NecroProtection = i4,
                 // DataElementId = wraith,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -86,7 +85,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Physical, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

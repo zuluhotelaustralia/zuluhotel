@@ -20,8 +20,6 @@ namespace Server.Mobiles
                 // cast_pct = 20,
                 // CProp_AttackTypeImmunities = i256,
                 // CProp_BaseHpRegen = i500,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i4,
                 // CProp_Permmr = i2,
                 // DataElementId = lessershadow,
                 // DataElementType = NpcTemplate,
@@ -82,7 +80,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

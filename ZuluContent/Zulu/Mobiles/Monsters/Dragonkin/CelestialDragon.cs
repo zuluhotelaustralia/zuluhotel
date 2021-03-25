@@ -18,7 +18,6 @@ namespace Server.Mobiles
             {
                 // cast_pct = 40,
                 // CProp_HolyProtection = i6,
-                // CProp_PermMagicImmunity = i5,
                 // DataElementId = celestialdragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -85,7 +84,8 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.PermPoisonImmunity, 100},
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

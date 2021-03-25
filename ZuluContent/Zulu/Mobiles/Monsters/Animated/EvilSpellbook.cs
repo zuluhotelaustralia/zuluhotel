@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<EvilSpellbook>(new CreatureProperties
             {
                 // cast_pct = 60,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = evilspellbook,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -79,6 +78,10 @@ namespace Server.Mobiles
                     typeof(Spells.Fourth.GreaterHealSpell)
                 },
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 65},

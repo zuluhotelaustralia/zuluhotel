@@ -18,7 +18,6 @@ namespace Server.Mobiles
                 // AttackAttribute = MaceFighting,
                 // AttackSpeed = 80,
                 // cast_pct = 100,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = gwenno,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -65,7 +64,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

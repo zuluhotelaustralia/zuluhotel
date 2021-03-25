@@ -17,7 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<OphidianQueen>(new CreatureProperties
             {
                 // cast_pct = 10,
-                // CProp_PermMagicImmunity = i8,
                 // CProp_PhysicalResistance = i6,
                 // DataElementId = ophidianqueen,
                 // DataElementType = NpcTemplate,
@@ -84,6 +83,10 @@ namespace Server.Mobiles
                     typeof(Spells.Sixth.MassCurseSpell)
                 },
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 8}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 160},

@@ -17,8 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<ShadowLord>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i500,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i6,
                 // CProp_Permmr = i4,
                 // DataElementId = shadowlord,
                 // DataElementType = NpcTemplate,
@@ -58,7 +56,9 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

@@ -12,6 +12,7 @@ namespace ZuluContent.Zulu.Engines.Magic
 {
     public static class EnchantmentHookExtensions
     {
+        // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
         public static Action<IEnumerable<IEnchantmentHook>, Action<IEnchantmentHook>> Dispatcher { get; set; } =
             EnchantmentHookDispatcher.Dispatch;
 
@@ -51,5 +52,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
             Dispatcher(new[] {hook}, action);
         }
+
+
     }
 }

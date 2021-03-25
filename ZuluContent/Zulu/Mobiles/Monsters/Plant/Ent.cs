@@ -15,8 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Ent>(new CreatureProperties
             {
-                // CProp_EarthProtection = i5,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = ent,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -49,6 +47,11 @@ namespace Server.Mobiles
                 Name = "an ent",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Tactics, 150},

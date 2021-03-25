@@ -17,7 +17,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<AirDrake>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = airdrake,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -61,7 +60,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 130,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Air, 100}
+                    {ElementalType.Air, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

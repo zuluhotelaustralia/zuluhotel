@@ -17,7 +17,6 @@ namespace Server.Mobiles
             {
                 // cast_pct = 60,
                 // CProp_nocorpse = i1,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = efreeti,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -64,7 +63,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Air, 100}
+                    {ElementalType.Air, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

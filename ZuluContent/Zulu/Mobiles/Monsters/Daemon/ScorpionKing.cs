@@ -19,11 +19,10 @@ namespace Server.Mobiles
                 // cast_pct = 20,
                 // CProp_BaseHpRegen = i500,
                 // CProp_BaseManaRegen = i1000,
-                // CProp_EarthProtection = i4,
-                // CProp_NecroProtection = i4,
+
+
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i7,
                 // CProp_Permmr = i5,
                 // DataElementId = scorpionking,
                 // DataElementType = NpcTemplate,
@@ -99,7 +98,10 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 75},
                     {ElementalType.Water, 75},
                     {ElementalType.Air, 100},
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 7}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

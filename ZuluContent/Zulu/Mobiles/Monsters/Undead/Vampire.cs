@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Vampire>(new CreatureProperties
             {
                 // cast_pct = 80,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = Vampire2,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -69,7 +68,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 3}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

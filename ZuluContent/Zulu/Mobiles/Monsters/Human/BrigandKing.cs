@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<BrigandKing>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = brigandking,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -54,7 +53,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

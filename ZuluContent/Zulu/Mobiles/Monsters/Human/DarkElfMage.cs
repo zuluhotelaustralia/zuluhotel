@@ -18,7 +18,6 @@ namespace Server.Mobiles
                 // cast_pct = 10,
                 // count_casts = 1,
                 // CProp_looter = s1,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = drow,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -60,6 +59,10 @@ namespace Server.Mobiles
                 Name = "a dark elf mage",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 PreferredSpells = new List<Type>
                 {
                     typeof(Spells.Third.FireballSpell),

@@ -17,12 +17,9 @@ namespace Server.Mobiles
             CreatureProperties.Register<NightWalker>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i7,
-                // CProp_NecroProtection = i7,
                 // CProp_noanimate = i1,
                 // CProp_nomountatdeath = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = mountednightwalker,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -63,7 +60,10 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 100},
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>
