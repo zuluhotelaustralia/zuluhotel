@@ -425,10 +425,8 @@ namespace Server.Items
 
                 Item item = m.Items[i];
 
-                if (item is BaseArmor)
+                if (item is BaseArmor armor)
                 {
-                    BaseArmor armor = (BaseArmor) item;
-
                     if (armor.RequiredRace != null && m.Race != armor.RequiredRace)
                     {
                         if (armor.RequiredRace == Race.Elf)

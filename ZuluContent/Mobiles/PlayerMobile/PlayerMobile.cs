@@ -23,6 +23,7 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using CalcMoves = Server.Movement.Movement;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Mobiles
 {
@@ -819,8 +820,11 @@ namespace Server.Mobiles
         {
             get
             {
+                var mod = this.GetAllEnchantmentsOfType<IArmorMod>().Sum(b => b.ArmorMod);
                 var rating = Items.OfType<IArmorRating>().Sum(i => i.ArmorRatingScaled);
-                return VirtualArmor + VirtualArmorMod + rating;
+                var value = VirtualArmor + VirtualArmorMod + rating + mod;
+
+                return value >= 0 ? value : 0;
             }
         }
 

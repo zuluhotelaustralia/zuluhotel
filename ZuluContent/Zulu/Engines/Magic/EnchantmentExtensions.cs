@@ -17,7 +17,6 @@ namespace ZuluContent.Zulu.Engines.Magic
             GetAllEnchantmentsOfType<IEnchantmentValue>(mobile, includeEquipped);
 
         public static List<T> GetAllEnchantmentsOfType<T>(this Mobile mobile, bool includeEquipped = true)
-            where T : IEnchantmentValue, IEnchantmentHook
         {
             var values = new List<T>();
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Regions;
@@ -15,6 +16,8 @@ using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+using ZuluContent.Zulu.Items;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Mobiles
@@ -593,6 +596,17 @@ namespace Server.Mobiles
             get { return false; }
         }
 
+        public override double ArmorRating
+        {
+            get
+            {
+                var mod = this.GetAllEnchantmentsOfType<IArmorMod>().Sum(b => b.ArmorMod);
+                var rating = Items.OfType<IArmorRating>().Sum(i => i.ArmorRatingScaled);
+                var value = VirtualArmor + VirtualArmorMod + rating + mod;
+
+                return value >= 0 ? value : 0;
+            }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual int DamageMin

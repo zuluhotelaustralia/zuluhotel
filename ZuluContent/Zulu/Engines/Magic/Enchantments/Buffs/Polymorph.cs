@@ -2,81 +2,80 @@ using System;
 using MessagePack;
 using Server;
 using Server.Items;
-using Server.Mobiles;
 using Server.Spells;
-using Server.Spells.First;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 {
     [MessagePackObject]
-    public class Polymorph : BaseStatBonus<PolymorphInfo>, IBuff
+    public class Polymorph : Enchantment<PolymorphInfo>, IBuff, IArmorMod
     {
         [IgnoreMember] public override string AffixName => string.Empty;
-
-        [Key(2)]
-        public (int body, int bodyHue) BodyMods
-        {
-            get;
-            init;
-        }
-
+        [IgnoreMember] private StatMod[] m_Mods;
+        [Key(1)] public (int StrMod, int DexMod, int IntMod) StatMods { get; init; }
+        [Key(2)] public (int body, int bodyHue) BodyMods { get; init; }
+        [Key(3)] public int ArmorMod { get; init; }
+        
         #region IBuff
 
         [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.Polymorph;
         [IgnoreMember] public string Title { get; init; } = "Polymorph";
         [IgnoreMember] public string Description { get; init; }
+
         [IgnoreMember] public string[] Details { get; init; }
         [IgnoreMember] public bool ExpireOnDeath { get; init; } = true;
         [IgnoreMember] public bool Dispellable { get; init; } = true;
         [IgnoreMember] public TimeSpan Duration { get; init; } = TimeSpan.Zero;
         [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
-        
-        protected override string StatModName => $"{GetType().Name}:{StatType.ToString()}:{Icon}";
 
         public void OnBuffAdded(Mobile parent)
         {
+            (parent as IEnchanted)?.Enchantments.Set(this);
+            
             parent.BodyMod = BodyMods.body;
             parent.HueMod = BodyMods.bodyHue;
-            parent.VirtualArmorMod += Value / 3;
+
+            m_Mods = new[]
+            {
+                new StatMod(StatType.Str, $"{GetType().Name}:{StatType.Str}", StatMods.StrMod, TimeSpan.Zero),
+                new StatMod(StatType.Dex, $"{GetType().Name}:{StatType.Dex}", StatMods.DexMod, TimeSpan.Zero),
+                new StatMod(StatType.Int, $"{GetType().Name}:{StatType.Int}", StatMods.IntMod, TimeSpan.Zero),
+            };
+
+            foreach (var mod in m_Mods) 
+                parent.AddStatMod(mod);
+
+            parent.Delta(MobileDelta.Armor);
             
             BaseArmor.ValidateMobile(parent);
             BaseClothing.ValidateMobile(parent);
-            (parent as IEnchanted)?.Enchantments.Set(this);
-            OnAdded(parent);
         }
 
         public void OnBuffRemoved(Mobile parent)
         {
-            if (parent is IEnchanted enchanted)
-            {
-                parent.BodyMod = 0;
-                parent.HueMod = -1;
-                
-                parent.VirtualArmorMod -= Value / 3;
-                if (parent.VirtualArmorMod < 0)
-                    parent.VirtualArmorMod = 0;
-                
-                BaseArmor.ValidateMobile(parent);
-                BaseClothing.ValidateMobile(parent);
-                
-                enchanted.Enchantments.Remove(this);
-                OnRemoved(parent, parent);
-            }
+            (parent as IEnchanted)?.Enchantments.Remove(this);
+            
+            parent.BodyMod = 0;
+            parent.HueMod = -1;
+
+            foreach (var mod in m_Mods) 
+                parent.RemoveStatMod(mod.Name);
+
+            parent.Delta(MobileDelta.Armor);
+            
+            BaseArmor.ValidateMobile(parent);
+            BaseClothing.ValidateMobile(parent);
         }
 
         #endregion
 
-        public Polymorph() : base(StatType.All)
-        {
-        }
     }
 
     #region EnchantmentInfo
 
     public class PolymorphInfo : EnchantmentInfo
     {
-        public override string Description { get; protected set; } = "Reactive Armor";
+        public override string Description { get; protected set; } = "Polymorph";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;
         public override int Hue { get; protected set; } = 0;
         public override int CursedHue { get; protected set; } = 0;

@@ -45,7 +45,7 @@ namespace Scripts.Zulu.Spells.Necromancy
                 }
                 
                 SpellHelper.Damage(damage / 2, mobile, Caster, this);
-                mobile.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);
+                mobile.FixedParticles(0x36BD, 20, 10, 5030, EffectLayer.Head);
                 mobile.PlaySound(0x307);
             }
             eable.Free();

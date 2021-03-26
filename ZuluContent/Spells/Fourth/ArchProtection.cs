@@ -40,7 +40,7 @@ namespace Server.Spells.Fourth
                     {
                         Icon = BuffIcon.ArchProtection,
                         Title = "Arch Protection",
-                        Value = (int) (SpellHelper.GetModAmount(Caster, mobile) / 1.5),
+                        ArmorMod = (int) (SpellHelper.GetModAmount(Caster, mobile) / 1.5),
                         Duration = SpellHelper.GetDuration(Caster, mobile),
                     });
                     

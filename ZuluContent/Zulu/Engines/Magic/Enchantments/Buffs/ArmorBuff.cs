@@ -8,12 +8,12 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 {
     [MessagePackObject]
-    public class ArmorBuff : Enchantment<ArmorBuffInfo>, IBuff
+    public class ArmorBuff : Enchantment<ArmorBuffInfo>, IBuff, IArmorMod
     {
         private string m_Description;
         [IgnoreMember] public override string AffixName => string.Empty;
 
-        [Key(1)] public int Value { get; set; }
+        [Key(1)] public int ArmorMod { get; init; }
 
         #region IBuff
 
@@ -23,7 +23,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         [IgnoreMember]
         public string Description
         {
-            get => m_Description ??= Value.ToString("+0;-#") + " Armor";
+            get => m_Description ??= ArmorMod.ToString("+0;-#") + " Armor";
             init => m_Description = value;
         }
         
@@ -35,22 +35,19 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
         public void OnBuffAdded(Mobile parent)
         {
-            parent.VirtualArmorMod += Value;
             (parent as IEnchanted)?.Enchantments.Set(this);
+            parent.Delta(MobileDelta.Armor);
         }
 
         public void OnBuffRemoved(Mobile parent)
         {
-            parent.VirtualArmorMod -= Value;
-
-            if (parent.VirtualArmorMod < 0)
-                parent.VirtualArmorMod = 0;
-
             if (parent is IEnchanted enchanted)
                 enchanted.Enchantments.Remove(this);
+            parent.Delta(MobileDelta.Armor);
         }
 
         #endregion
+
     }
 
     #region EnchantmentInfo

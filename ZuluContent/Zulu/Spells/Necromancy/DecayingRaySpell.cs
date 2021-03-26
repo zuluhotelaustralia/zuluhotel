@@ -1,126 +1,72 @@
 using System;
-using System.Collections;
+using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
 using Server;
 using Server.Network;
-using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class DecayingRaySpell : NecromancerSpell
+    public class DecayingRaySpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
+        public DecayingRaySpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            get { return TimeSpan.FromSeconds(1.0); }
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
 
-        public override double RequiredSkill
-        {
-            get { return 80.0; }
-        }
+            if (!Caster.CanBuff(target, true, BuffIcon.Protection, BuffIcon.HitLowerDefense))
+                return;
 
-        public override int RequiredMana
-        {
-            get { return 40; }
-        }
-
-        public DecayingRaySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            var amount = SpellHelper.GetModAmount(Caster, target) * 1.25;
+            var duration = SpellHelper.GetDuration(Caster, target).TotalSeconds;
+            
+            var protection = target.GetResist(Info.DamageType);
+            if (protection > 0)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                var modifier = 100.0 - protection;
+                duration *= modifier / 100;
+                amount *= modifier / 100;
+                
+                if (duration < 1 || amount < 1)
+                {
+                    target.PrivateOverheadMessage(
+                        MessageType.Regular, 
+                        0x3B2, 
+                        true, 
+                        "The nature of the target prevents it from being affected by that spell!", 
+                        Caster.NetState
+                    );
+                    return;
+                }
             }
 
-            if (!CheckSequence()) goto Return;
+            amount = SpellHelper.TryResistDamage(Caster, target, Circle, (int) amount);
+            duration = SpellHelper.TryResistDamage(Caster, target, Circle, (int) duration);
 
-            // Prevent stacking of DecayingRay.
-            if (!m.BeginAction(typeof(DecayingRaySpell))) goto Return;
-
-            // Turn caster towards the target.
-            SpellHelper.Turn(Caster, m);
-
-            // TODO: Spell Effects.
-
-            m.PlaySound(0x0fe);
-            Caster.DoHarmful(m);
-
-            // Feel free to fck with this formula, I just mostly copied it from POL 093.  I don't care so long as it's balanced --sith
-            var val = Caster.Skills[SkillName.SpiritSpeak].Value;
-            val /= 10;
-            val += 5;
-            val *= 2;
-
-            if (val < 0)
-                val = 0;
-            else if (val > 75)
-                val = 75;
-
-            m.VirtualArmorMod -= (int) val;
-
-            new InternalTimer(m, Caster, (int) val).Start();
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-            private int m_Value;
-
-            public InternalTimer(Mobile target, Mobile caster, int value) : base(TimeSpan.FromSeconds(0))
+            if (amount < 1)
+                return;
+            
+            target.TryAddBuff(new ArmorBuff
             {
-                m_Value = value;
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                // durations are done in POL under scripts/include/dotempmods.inc under GetModDuration or somesuch --sith
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(DecayingRaySpell));
-                m_Target.VirtualArmorMod += m_Value;
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private DecayingRaySpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(DecayingRaySpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+                Icon = BuffIcon.HitLowerDefense,
+                Title = "Decaying Ray",
+                ArmorMod = (int)amount * -1,
+                Duration = TimeSpan.FromSeconds(duration),
+            });
+            
+            if(Caster != target)
+                Caster.SendSuccessMessage($"You reduced {target.Name}'s armor rating by {amount}.");
+            
+            target.SendSuccessMessage($"Your armor rating was reduced by {amount}.");
+            target.PlaySound(0xFD);
         }
     }
 }
