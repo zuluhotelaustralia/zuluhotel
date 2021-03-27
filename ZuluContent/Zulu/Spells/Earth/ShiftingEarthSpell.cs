@@ -40,7 +40,7 @@ namespace Scripts.Zulu.Spells.Earth
             
             SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Earth);
             
-            if (!Caster.CanBuff(target, true, BuffIcon.Curse, BuffIcon.Bless))
+            if (!Caster.CanBuff(target, true, BuffIcon.Clumsy, BuffIcon.Agility))
                 return;
 
             target.TryAddBuff(new StatBuff(StatType.Dex)

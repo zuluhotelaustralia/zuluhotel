@@ -4,6 +4,7 @@ using Server.Mobiles;
 using Scripts.Zulu.Engines.Classes;
 using Server;
 using Server.Engines.Magic;
+using Server.Multis;
 using Server.Spells;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
@@ -35,7 +36,7 @@ namespace Scripts.Zulu.Spells.Earth
             
             target.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot);
             target.PlaySound(0x208);
-            
+
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
             SpellHelper.Damage(damage / 2, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
         }
@@ -54,13 +55,22 @@ namespace Scripts.Zulu.Spells.Earth
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
 
             var mobiles = target.GetMobilesInRange((int) range);
+            
+            var casterHouse = BaseHouse.FindHouseAt(Caster);
 
             foreach (var mobile in mobiles)
             {
-                if (!Caster.Map.LineOfSight(Caster, mobile))
-                {
+                if (!SpellHelper.ValidIndirectTarget(Caster, target) ||
+                    !Caster.CanBeHarmful(target, false)
+                )
                     continue;
-                }
+
+                if (BaseHouse.FindHouseAt(target) is { } targetHouse && 
+                    casterHouse == targetHouse &&
+                    Caster.Location.Z != target.Location.Z && 
+                    target.Location.Z >= Caster.Location.Z + 10
+                )
+                    continue;
                 
                 RaiseFire(mobile);
             }
@@ -73,10 +83,17 @@ namespace Scripts.Zulu.Spells.Earth
             
             foreach (var mobile in mobiles)
             {
-                if (!Caster.Map.LineOfSight(Caster, mobile))
-                {
+                if (!SpellHelper.ValidIndirectTarget(Caster, target) ||
+                    !Caster.CanBeHarmful(target, false)
+                )
                     continue;
-                }
+
+                if (BaseHouse.FindHouseAt(target) is { } targetHouse && 
+                    casterHouse == targetHouse &&
+                    Caster.Location.Z != target.Location.Z && 
+                    target.Location.Z >= Caster.Location.Z + 10
+                )
+                    continue;
                 
                 RaiseFire(mobile);
             }

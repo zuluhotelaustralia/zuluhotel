@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Earth
 
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, true, BuffIcon.Curse, BuffIcon.Bless))
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Curse, BuffIcon.Bless, BuffIcon.GiftOfRenewal))
                 return;
 
             var modAmount = (int) (SpellHelper.GetModAmount(Caster, Caster, StatType.All) * 1.5);
@@ -34,6 +34,8 @@ namespace Scripts.Zulu.Spells.Earth
             
             Caster.TryAddBuff(new StatBuff(StatType.All)
             {
+                Title = "Earth's Blessing",
+                Icon = BuffIcon.GiftOfRenewal,
                 Value = modAmount,
                 Duration = duration
             });
@@ -41,11 +43,13 @@ namespace Scripts.Zulu.Spells.Earth
             Caster.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);
             Caster.PlaySound(0x1EA);
             
-            if (!Caster.CanBuff(Caster, true, BuffIcon.Protection, BuffIcon.ArchProtection))
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Protection, BuffIcon.ArchProtection, BuffIcon.Resilience))
                 return;
             
             Caster.TryAddBuff(new ArmorBuff
             {
+                Title = "Earth's Blessing Armor",
+                Icon = BuffIcon.Resilience,
                 Value = (int) (modAmount * 0.75 + 1),
                 Duration = duration
             });

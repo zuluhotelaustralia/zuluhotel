@@ -51,7 +51,7 @@ namespace Scripts.Zulu.Spells.Earth
                 target.Location.Z);
             var map = target.Map;
 
-            if (map.CanSpawnMobile(newTargetLocation))
+            if (map.LineOfSight(Caster, newTargetLocation) && map.CanSpawnMobile(newTargetLocation))
                 target.Location = newTargetLocation;
         }
     }
