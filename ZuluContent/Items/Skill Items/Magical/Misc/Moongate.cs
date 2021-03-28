@@ -322,6 +322,37 @@ namespace Server.Items
             }
         }
     }
+    
+    public class BlackMoongate : Moongate
+    {
+        public BlackMoongate() : this(Point3D.Zero, null)
+        {
+        }
+
+
+        public BlackMoongate(Point3D target, Map targetMap) : base(target, targetMap)
+        {
+            ItemID = 0x1FD4;
+        }
+
+        public BlackMoongate(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int) 0); // version
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
 
     public class MoongateConfirmGump : Gump
     {

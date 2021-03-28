@@ -51,6 +51,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(41, typeof(Incognito))]
     [Union(42, typeof(Invisibility))]
     [Union(43, typeof(Polymorph))]
+    [Union(44, typeof(PoisonImmunity))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }

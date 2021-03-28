@@ -794,7 +794,7 @@ namespace Server.Spells
             delay ??= spell != null ? GetDamageDelayForSpell(spell) : TimeSpan.Zero;
             damageType = spell != null && damageType == null && SpellInfos.TryGetValue(spell.GetType(), out var info) 
                 ? info.DamageType
-                : ElementalType.None;
+                : damageType;
             
             if (delay.Value > TimeSpan.Zero)
                 await Timer.Pause(delay.Value);

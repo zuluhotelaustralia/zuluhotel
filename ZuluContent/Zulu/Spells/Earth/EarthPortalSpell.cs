@@ -1,146 +1,104 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Server;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
 using Server.Spells;
 using Server.Mobiles;
+using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
+using Server.Multis;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class EarthPortalSpell : AbstractEarthSpell
+    public class EarthPortalSpell : EarthSpell, ITargetableAsyncSpell<Item>
     {
         public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
-
-        public override double RequiredSkill => 80.0;
-
-        public override int RequiredMana => 10;
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public EarthPortalSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
         
-        public readonly TargetOptions Options = new()
+        public async Task OnTargetAsync(ITargetResponse<Item> response)
         {
-            Range = 12,
-            AllowGround = false,
-            Flags = TargetFlags.Harmful
-        };
-        
-
-        public override void OnCast()
-        {
-            // don't bother with the rest of this shit if the seq is bad
-            if (CheckSequence())
-                if (Caster is PlayerMobile)
+            if (!response.HasValue)
+                return;
+            
+            switch (response.Target)
+            {
+                case RecallRune rune:
                 {
-                    var origin = new Point3D(0, 0, 0);
-                    var pmCaster = Caster as PlayerMobile;
-
-                    // they don't have a stored recall location, so set one.
-                    if (pmCaster.EarthPortalLocation == origin)
-                    {
-                        if (SpellHelper.CheckTravel(pmCaster, TravelCheckType.Mark))
-                        {
-                            pmCaster.EarthPortalLocation = new Point3D(pmCaster.X, pmCaster.Y, pmCaster.Z);
-                            Caster.PlaySound(0x1FA);
-                            Effects.SendLocationEffect(Caster, 14201, 16);
-                            Caster.SendMessage(
-                                "The spirits of the land agree to assist you, and you feel their minds touch your own.");
-                        }
-                        else
-                        {
-                            Caster.SendMessage("The spirits of the land do not answer your call.");
-                        }
-                    }
+                    if (rune.Marked)
+                        Effect(rune.Target, rune.TargetMap, true);
                     else
-                    {
-                        //if we're here then Mobile.EarthPortalLocation must be non-null, so
-                        if (SpellHelper.CheckTravel(pmCaster, TravelCheckType.RecallFrom) && Caster.Map == Map.Felucca)
-                        {
-                            BaseCreature.TeleportPets(Caster, pmCaster.EarthPortalLocation, Caster.Map, true);
-                            Caster.PlaySound(0x1FC);
-                            Caster.MoveToWorld(pmCaster.EarthPortalLocation, Caster.Map);
-                            Caster.PlaySound(0x1FC);
-                            Caster.SendMessage(
-                                "You thank the spirits of the land for their assistance, and you no longer feel their touch on your mind.");
-                            pmCaster.EarthPortalLocation = origin;
-                        }
-                        else
-                        {
-                            Caster.SendMessage("The spirits of the land do not answer your call.");
-                        }
-                    }
+                        Caster.SendFailureMessage(501805); // That rune is not yet marked.
+
+                    return;
                 }
+                case Key key when key.KeyValue != 0 && key.Link is BaseBoat boat:
+                {
+                    if (!boat.Deleted && boat.CheckKey(key.KeyValue))
+                        Effect(boat.GetMarkedLocation(), boat.Map, false);
+                    return;
+                }
+            }
 
-            FinishSequence();
+            Caster.SendFailureMessage(501030); // I can not gate travel from that object.
+        }
+        
+        private void Effect(Point3D loc, Map map, bool checkMulti)
+        {
+            if (map == null || Caster.Map != map)
+            {
+                Caster.SendFailureMessage(1005569); // You can not recall to another facet.
+                return;
+            }
+
+            if (!SpellHelper.CheckTravel(Caster, TravelCheckType.GateFrom))
+                return;
+
+            if (!SpellHelper.CheckTravel(Caster, map, loc, TravelCheckType.GateTo))
+                return;
+            
+            if (!map.CanSpawnMobile(loc.X, loc.Y, loc.Z))
+            {
+                Caster.SendFailureMessage(501942); // That location is blocked.
+                return;
+            }
+
+            if (checkMulti && SpellHelper.CheckMulti(loc, map))
+            {
+                Caster.SendFailureMessage(501942); // That location is blocked.
+                return;
+            }
+            
+            Caster.SendSuccessMessage(501024); // You open a magical gate to another location
+
+            Effects.PlaySound(Caster.Location, Caster.Map, 0x20E);
+
+            var firstGate = new BlackMoongate(loc, map) {Dispellable = true};
+            firstGate.MoveToWorld(Caster.Location, Caster.Map);
+
+            Effects.PlaySound(loc, map, 0x20E);
+
+            var secondGate = new BlackMoongate(Caster.Location, Caster.Map) {Dispellable = true};
+            secondGate.MoveToWorld(loc, map);
+
+            CloseGatesAfterDelay(TimeSpan.FromSeconds(Caster.Skills[SkillName.Magery].Value / 2), firstGate, secondGate);
         }
 
-        public void Target(Mobile m)
+        private static async void CloseGatesAfterDelay(TimeSpan delay, params Moongate[] gates)
         {
-            if (!Caster.CanSee(m))
+            await Timer.Pause(delay);
+
+            foreach (var gate in gates)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
-            }
-
-            if (!CheckSequence()) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            // TODO: Spell graphical and sound effects.
-
-            Caster.DoHarmful(m);
-
-            // TODO: Spell action ( buff/debuff/damage/etc. )
-
-            new InternalTimer(m, Caster).Start();
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(EarthPortalSpell));
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private EarthPortalSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(EarthPortalSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
+                if(gate?.Deleted == false)
+                    gate.Delete();
             }
         }
     }
