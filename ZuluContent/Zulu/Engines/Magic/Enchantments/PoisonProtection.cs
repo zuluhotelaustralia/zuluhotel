@@ -17,7 +17,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)]
         public int Value { get; set; } = 0;
 
-        public override void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        public override void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
             if (Value == 0)
             {

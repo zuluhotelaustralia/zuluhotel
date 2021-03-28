@@ -537,10 +537,7 @@ namespace Server.Mobiles
             return false;
         }
 
-        public virtual bool DeleteCorpseOnDeath
-        {
-            get { return m_bSummoned; }
-        }
+        public virtual bool DeleteCorpseOnDeath { get; set; }
 
         public override void SetLocation(Point3D newLocation, bool isTeleport)
         {
@@ -565,10 +562,13 @@ namespace Server.Mobiles
 
         public override bool CheckPoisonImmunity(Mobile from, Poison poison)
         {
-            if (base.CheckPoisonImmunity(from, poison))
+            var immune = base.CheckPoisonImmunity(from, poison);
+            this.FireHook(h => h.OnCheckPoisonImmunity(from, this, poison, ref immune));
+            
+            if (immune)
                 return true;
 
-            Poison p = PoisonImmune;
+            var p = PoisonImmune;
 
             return p != null && p.Level >= poison.Level;
         }
@@ -1713,6 +1713,7 @@ namespace Server.Mobiles
 
                 NextReacquireTime = Core.TickCount;
 
+                DeleteCorpseOnDeath = value;
                 m_bSummoned = value;
                 Delta(MobileDelta.Noto);
             }
