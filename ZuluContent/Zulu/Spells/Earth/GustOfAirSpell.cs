@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Earth
             
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
             
-            target.FixedParticles(0x37CC, 30, 30, 5028, EffectLayer.Waist);
+            target.FixedParticles(0x37CC, 30, 30, 5028, EffectLayer.LeftFoot);
             target.PlaySound(0x0107);
             target.PlaySound(0x0108);
             
@@ -36,9 +36,9 @@ namespace Scripts.Zulu.Spells.Earth
             
             // TODO: Check for cursed to amplify magery?
 
-            var kickbackX = Utility.Random((int) magery) - (int) (magery / 2);
-            var kickbackY = Utility.Random((int) magery) - (int) (magery / 2);
-
+            var kickbackX = magery > 0 ? Utility.Random((int) magery) - (int) (magery / 2) : 0;
+            var kickbackY = magery > 0 ? Utility.Random((int) magery) - (int) (magery / 2) : 0;
+            
             var newTargetLocation = new Point3D(target.Location.X + kickbackX, target.Location.Y + kickbackY,
                 target.Location.Z);
             var map = target.Map;

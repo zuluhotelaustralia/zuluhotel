@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Scripts.Zulu.Spells.Earth;
 using Scripts.Zulu.Spells.Necromancy;
+using Scripts.Zulu.Spells.TriElemental;
 using Server;
 using Server.Misc;
 using Server.Items;
@@ -102,7 +103,7 @@ namespace Server.Mobiles
                 Str = 125,
                 Tamable = false,
                 VirtualArmor = 40,
-                WeaponAbility = new TriElementalStrike(),
+                WeaponAbility = new SpellStrike<TriElementalSpell>(),
                 WeaponAbilityChance = 1.0
             });
         }

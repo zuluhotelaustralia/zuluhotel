@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Spells.TriElemental;
 using Server;
 using Server.Misc;
 using Server.Items;
@@ -71,7 +72,7 @@ namespace Server.Mobiles
                 StamMaxSeed = 80,
                 Str = 550,
                 Tamable = false,
-                WeaponAbility = new TriElementalStrike(),
+                WeaponAbility = new SpellStrike<TriElementalSpell>(),
                 WeaponAbilityChance = 1.0
             });
         }

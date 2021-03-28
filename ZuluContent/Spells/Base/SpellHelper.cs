@@ -236,6 +236,11 @@ namespace Server.Spells
 
         public static int CalcSpellDamage(Mobile caster, Mobile target, Spell spell, bool areaSpell = false)
         {
+            return CalcSpellDamage(caster, target, spell.Info.Circle, areaSpell);
+        }
+
+        public static int CalcSpellDamage(Mobile caster, Mobile target, SpellCircle spellCircle, bool areaSpell = false)
+        {
             const int mageryDivider = 5;
             const int playerDivider = 3;
             const int circleMultiplier = 3;
@@ -243,8 +248,9 @@ namespace Server.Spells
 
             if (!caster.Alive || !target.Alive || target.Hidden)
                 return 0;
-
-            var circle = (int) spell.Info.Circle;
+            
+            var circle = (int) spellCircle;
+            
             if (areaSpell)
                 circle -= 3;
 
