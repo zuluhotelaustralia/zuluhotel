@@ -17,12 +17,6 @@ namespace Server.Spells.Fourth
                 return;
 
             var target = response.Target;
-            
-            if (target.Poisoned)
-            {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, Caster == target ? 1005000 : 1010398);
-                return;
-            }
 
             SpellHelper.Turn(Caster, target);
             var healed = Utility.Random(3, 18) + Caster.Skills[SkillName.Magery].Value / 4;
@@ -32,7 +26,10 @@ namespace Server.Spells.Fourth
             if (target is BaseCreature {CreatureType: CreatureType.Undead})
                 SpellHelper.Damage((int) healed, target, Caster, this);
             else
+            {
                 SpellHelper.Heal((int) healed, target, Caster, this);
+                Caster.SendSuccessMessage($"You healed {(int) healed} damage.");
+            }
 
             target.FixedParticles(0x376A, 9, 32, 5030, EffectLayer.Waist);
             target.PlaySound(0x202);

@@ -1,11 +1,10 @@
 using System;
 using Server;
-using Server.Engines.Magic;
 using Server.Spells;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public abstract class AbstractEarthSpell : Spell
+    public abstract class EarthSpell : Spell
     {
         public abstract double RequiredSkill { get; }
         public abstract int RequiredMana { get; }
@@ -31,7 +30,7 @@ namespace Scripts.Zulu.Spells.Earth
             get { return TimeSpan.FromSeconds(5); }
         }
 
-        public AbstractEarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public EarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 

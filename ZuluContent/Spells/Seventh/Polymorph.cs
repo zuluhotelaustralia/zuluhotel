@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Server.Gumps;
 using Server.Items;
+using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 using static Server.Gumps.PolymorphEntry;
 
@@ -102,7 +103,7 @@ namespace Server.Spells.Seventh
         
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.LichForm))
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.AnimalForm, BuffIcon.LichForm))
                 return;
 
             var magery = Caster.Skills[SkillName.Magery].Value;
@@ -132,16 +133,17 @@ namespace Server.Spells.Seventh
             group = Math.Clamp(group, 0, Groups.Length - 1);
             critter = Math.Clamp(critter, 0, Groups[group].Length - 1);
             
-            
-            // TODO: Use this for ebook Shape Shift?
-            // var bodyId = await new NewPolymorphGump(Caster);
             var bodyId = Groups[group][critter].BodyId;
             
             if (bodyId <= 0)
                 return;
 
             var hueMod = bodyId == SeaSerpent.BodyId ? 233 : 0;
-            var statMod = SpellHelper.GetModAmount(Caster, Caster, StatType.All);
+            var modAmount = group * 3.0;
+
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref modAmount));
+
+            var statMod = (int) modAmount;
             var arMod = statMod / 3;
             
             Caster.TryAddBuff(new Polymorph

@@ -32,7 +32,7 @@ namespace Server.Spells.Fourth
 
             foreach (var mobile in targets)
             {
-                if (!Caster.HasOneOfBuffs(BuffIcon.Protection, BuffIcon.ArchProtection))
+                if (!Caster.HasOneOfBuffs(BuffIcon.Protection, BuffIcon.ArchProtection, BuffIcon.Resilience))
                 {
                     Caster.DoBeneficial(mobile);
                     

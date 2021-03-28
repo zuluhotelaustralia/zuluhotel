@@ -132,7 +132,7 @@ namespace Server
         {
             private Mobile m_Owner;
 
-            public OwlSightTimer(Mobile owner) : base(TimeSpan.FromMinutes(Utility.Random(60, 90)))
+            public OwlSightTimer(Mobile owner, TimeSpan delay) : base(delay)
             {
                 m_Owner = owner;
                 Priority = TimerPriority.OneMinute;
@@ -141,9 +141,7 @@ namespace Server
             protected override void OnTick()
             {
                 m_Owner.EndAction(typeof(LightCycle));
-                m_Owner.EndAction(typeof(OwlSightSpell));
                 m_Owner.LightLevel = 0;
-                // BuffInfo.RemoveBuff(m_Owner, BuffIcon.NightSight);
             }
         }
     }

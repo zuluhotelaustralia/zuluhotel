@@ -1,74 +1,58 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Server;
 using Server.Engines.Magic;
 using Server.Network;
 using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class GustOfAirSpell : AbstractEarthSpell, IMobileTargeted
+    public class GustOfAirSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(0); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 100.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 15; }
-        }
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public GustOfAirSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            Caster.Target = new MobileTarget(this, 10, TargetFlags.Harmful);
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            
+            SpellHelper.Turn(Caster, target);
+            
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            
+            target.FixedParticles(0x37CC, 30, 30, 5028, EffectLayer.Waist);
+            target.PlaySound(0x0107);
+            target.PlaySound(0x0108);
+            
+            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
+            
+            var magery = Caster.Skills[SkillName.Magery].Value / 10;
+            
+            // TODO: Check for cursed to amplify magery?
 
-        public void OnTargetFinished(Mobile from)
-        {
-            FinishSequence();
-        }
+            var kickbackX = Utility.Random((int) magery) - (int) (magery / 2);
+            var kickbackY = Utility.Random((int) magery) - (int) (magery / 2);
 
-        public void OnTarget(Mobile from, Mobile m)
-        {
-            if (!Caster.CanSee(m))
-            {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
-            }
+            var newTargetLocation = new Point3D(target.Location.X + kickbackX, target.Location.Y + kickbackY,
+                target.Location.Z);
+            var map = target.Map;
 
-            if (!CheckHarmfulSequence(m)) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            // TODO: Push player in random direction
-
-            // Do the effects
-            Caster.MovingParticles(m, 0x379F, 7, 0, false, true, 3043, 4043, 0x211);
-            Caster.PlaySound(0x20A);
-
-            // 40 damage average at 130 skill
-            var avg = 4 * Caster.Skills[DamageSkill].Value / 13;
-            double damage = Utility.Dice(3, 6, (int) avg); //i.e. 3d6 + 30, clusters about 40, ranges 33 to 48
-
-            //m.Damage((int)damage, Caster, ElementalType.Air);
-            SpellHelper.Damage((int) damage, m, Caster, this, TimeSpan.Zero);
-
-
-            Return:
-            FinishSequence();
+            if (map.LineOfSight(Caster, newTargetLocation) && map.CanSpawnMobile(newTargetLocation))
+                target.Location = newTargetLocation;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Server.Network;
 using Server.Items;
 using Server.Mobiles;
@@ -7,80 +8,51 @@ using Scripts.Zulu.Engines.Classes;
 using Server;
 using Server.Targeting;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Earth
 {
-    public class EarthsBlessingSpell : AbstractEarthSpell, IMobileTargeted
+    public class EarthsBlessingSpell : EarthSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(2); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 60.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 10; }
-        }
+        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
+    
+        public override double RequiredSkill => 60.0;
+    
+        public override int RequiredMana => 5;
 
         public EarthsBlessingSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        public async Task CastAsync()
         {
-            Caster.Target = new MobileTarget(this, 10, TargetFlags.Beneficial);
-        }
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Curse, BuffIcon.Bless, BuffIcon.GiftOfRenewal))
+                return;
 
-        public void OnTargetFinished(Mobile from)
-        {
-            FinishSequence();
-        }
-
-        public void OnTarget(Mobile from, Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            var modAmount = (int) (SpellHelper.GetModAmount(Caster, Caster, StatType.All) * 1.5);
+            var duration = SpellHelper.GetDuration(Caster, Caster) * 1.5;
+            
+            Caster.TryAddBuff(new StatBuff(StatType.All)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
-            }
+                Title = "Earth's Blessing",
+                Icon = BuffIcon.GiftOfRenewal,
+                Value = modAmount,
+                Duration = duration
+            });
 
-            if (!CheckBeneficialSequence(m)) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            var effectiveness = SpellHelper.GetEffectiveness(Caster);
-
-            var duration = Caster.Skills[SkillName.Meditation].Value * 8;
-            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage)
+            Caster.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);
+            Caster.PlaySound(0x1EA);
+            
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Protection, BuffIcon.ArchProtection, BuffIcon.Resilience))
+                return;
+            
+            Caster.TryAddBuff(new ArmorBuff
             {
-                duration *= 2;
-                duration *= ZuluClass.GetClass(Caster).Bonus;
-            }
-
-            var durr = TimeSpan.FromSeconds(duration);
-
-            var roll = 0.8 * effectiveness + 0.2 * Utility.RandomDouble();
-
-            var str = (int) (25 * roll);
-            var inte = (int) (25 * roll);
-            var dex = (int) (25 * roll);
-
-            SpellHelper.AddStatBonus(Caster, m, StatType.Str, str, durr);
-            SpellHelper.AddStatBonus(Caster, m, StatType.Int, inte, durr);
-            SpellHelper.AddStatBonus(Caster, m, StatType.Dex, dex, durr);
-
-            // TODO: Find different sounds/effects?  These are copied from Bless
-            m.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);
-            m.PlaySound(0x1EA);
-
-            Return:
-            FinishSequence();
+                Title = "Earth's Blessing Armor",
+                Icon = BuffIcon.Resilience,
+                ArmorMod = (int) (modAmount * 0.75 + 1),
+                Duration = duration
+            });
         }
     }
 }

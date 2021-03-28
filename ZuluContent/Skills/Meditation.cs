@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Items;
+using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
@@ -16,57 +18,58 @@ namespace Server.SkillHandlers
             SkillInfo.Table[(int)SkillName.Meditation].Callback = OnUse;
         }
         
-        public static TimeSpan OnUse(Mobile m)
+        public static TimeSpan OnUse(Mobile mobile)
         {
-            m.RevealingAction();
+            mobile.RevealingAction();
 
-            if (m.Mana >= m.ManaMax)
+            if (mobile.Mana >= mobile.ManaMax)
             {
-                m.SendLocalizedMessage(501846); // You are at peace.
+                mobile.SendSuccessMessage(501846); // You are at peace.
                 return DefaultDelay;
             }
 
-            if (m.Poisoned)
+            if (mobile.Poisoned)
             {
-                m.SendAsciiMessage("You can't meditate while poisoned.");
+                mobile.SendFailureMessage("You can't meditate while poisoned.");
                 return DefaultDelay;
             }
 
-            if (m.Warmode)
+            if (mobile.Warmode)
             {
-                m.SendAsciiMessage("You can't meditate in war mode.");
+                mobile.SendFailureMessage("You can't meditate in war mode.");
                 return DefaultDelay;
             }
 
-            if (!CheckValidHands(m))
+            if (!CheckValidHands(mobile))
             {
-                m.SendLocalizedMessage(502626); // Your hands must be free to cast spells or meditate.
+                mobile.SendFailureMessage(502626); // Your hands must be free to cast spells or meditate.
                 return DefaultDelay;
             }
             
-            if (GetMagicEfficiencyModifier(m) <= 0)
+            if (GetMagicEfficiencyModifier(mobile) <= 0)
             {
-                m.SendAsciiMessage("Regenerative forces cannot penetrate your armor.");
+                mobile.SendFailureMessage("Regenerative forces cannot penetrate your armor.");
                 return DefaultDelay;
             }
             
-            if (!m.ShilCheckSkill(SkillName.Meditation))
+            if (!mobile.ShilCheckSkill(SkillName.Meditation))
             {
-                m.SendAsciiMessage("You cannot focus your concentration.");
+                mobile.SendFailureMessage("You cannot focus your concentration.");
                 return DefaultDelay;
             }
             
-            m.SendLocalizedMessage(501851); // You enter a meditative trance.
-            m.Meditating = true;
+            mobile.PublicOverheadMessage(MessageType.Regular, 0x3B2, true, "*Meditating*");
+            mobile.SendSuccessMessage(501851); // You enter a meditative trance.
+            mobile.Meditating = true;
 
-            m.PlaySound(0xF9);
+            mobile.PlaySound(0xF9);
                 
-            var regenBase = (int) (m.Skills[SkillName.Meditation].Value / 25 + m.Int / 35.0);
+            var regenBase = (int) (mobile.Skills[SkillName.Meditation].Value / 25 + mobile.Int / 35.0);
             var interval = 5.0;
 
-            m.FireHook(h => h.OnMeditation(m, ref regenBase, ref interval));
+            mobile.FireHook(h => h.OnMeditation(mobile, ref regenBase, ref interval));
                 
-            new InternalTimer( m, regenBase, TimeSpan.FromSeconds(interval)).Start();
+            new InternalTimer( mobile, regenBase, TimeSpan.FromSeconds(interval)).Start();
             return TimeSpan.FromSeconds(10.0);
         }
         
@@ -82,9 +85,9 @@ namespace Server.SkillHandlers
         }
 
 
-        public static bool CheckValidHands(Mobile m)
+        public static bool CheckValidHands(Mobile mobile)
         {
-            var items = new[] {m.FindItemOnLayer(Layer.OneHanded), m.FindItemOnLayer(Layer.TwoHanded)};
+            var items = new[] {mobile.FindItemOnLayer(Layer.OneHanded), mobile.FindItemOnLayer(Layer.TwoHanded)};
             
             return items.All(item =>
             {
@@ -170,7 +173,7 @@ namespace Server.SkillHandlers
                     }
                     else
                     {
-                        m_Mobile.SendAsciiMessage("Regenerative forces cannot penetrate your armor.");
+                        m_Mobile.SendFailureMessage("Regenerative forces cannot penetrate your armor.");
                         m_Mobile.DisruptiveAction();
                         m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;;
                         Stop();
