@@ -1,43 +1,38 @@
 namespace Server.Items
 {
-    [FlipableAttribute( 0x1439, 0x1438 )]
-	public class WarHammer : BaseBashing
-	{
-		public override int DefaultStrengthReq{ get{ return 40; } }
-		public override int DefaultMinDamage{ get{ return 8; } }
-		public override int DefaultMaxDamage{ get{ return 36; } }
-		public override int DefaultSpeed{ get{ return 31; } }
+    [FlipableAttribute(0x1439, 0x1438)]
+    public class WarHammer : BaseBashing
+    {
+        public override int DefaultStrengthReq => 40;
+        public override int DefaultMinDamage => 6;
+        public override int DefaultMaxDamage => 26;
+        public override int DefaultSpeed => 34;
+        public override int InitMinHits => 110;
+        public override int InitMaxHits => 110;
 
-		public override int InitMinHits{ get{ return 31; } }
-		public override int InitMaxHits{ get{ return 110; } }
+        [Constructible]
+        public WarHammer() : base(0x1439)
+        {
+            Weight = 10.0;
+        }
 
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Bash2H; } }
+        [Constructible]
+        public WarHammer(Serial serial) : base(serial)
+        {
+        }
 
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		[Constructible]
-public WarHammer() : base( 0x1439 )
-		{
-			Weight = 10.0;
-			Layer = Layer.TwoHanded;
-		}
+            writer.Write((int) 0); // version
+        }
 
-		[Constructible]
-public WarHammer( Serial serial ) : base( serial )
-		{
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-		}
-	}
+            int version = reader.ReadInt();
+        }
+    }
 }

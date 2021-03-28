@@ -3,38 +3,43 @@ using Server.Targets;
 namespace Server.Items
 {
     public abstract class BaseSword : BaseMeleeWeapon
-	{
-		public override SkillName DefaultSkill{ get{ return SkillName.Swords; } }
-		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Slashing; } }
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Slash1H; } }
+    {
+        public override int DefaultHitSound => 0x23B;
+        public override int DefaultMissSound => 0x239;
 
-		public BaseSword( int itemID ) : base( itemID )
-		{
-		}
+        public override SkillName DefaultSkill => SkillName.Swords;
 
-		public BaseSword( Serial serial ) : base( serial )
-		{
-		}
+        public override WeaponType DefaultWeaponType => WeaponType.Slashing;
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash1H;
 
-			writer.Write( (int) 0 ); // version
-		}
+        public BaseSword(int itemID) : base(itemID)
+        {
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public BaseSword(Serial serial) : base(serial)
+        {
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			from.SendLocalizedMessage( 1010018 ); // What do you want to use this item on?
+            writer.Write((int) 0); // version
+        }
 
-			from.Target = new BladedItemTarget( this );
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            from.SendLocalizedMessage(1010018); // What do you want to use this item on?
+
+            from.Target = new BladedItemTarget(this);
+        }
     }
 }

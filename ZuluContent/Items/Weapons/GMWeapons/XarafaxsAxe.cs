@@ -33,6 +33,7 @@ namespace Server.Items
             UsesRemaining = uses;
             ShowUsesRemaining = true;
             HarvestBonus = 2;
+            Identified = false;
         }
 
         [Constructible]

@@ -4,17 +4,18 @@ namespace Server.Items
     public class Bardiche : BasePoleArm
     {
         public override int DefaultStrengthReq => 40;
-        public override int DefaultMinDamage => 5;
-        public override int DefaultMaxDamage => 43;
-        public override int DefaultSpeed => 26;
-        public override int InitMinHits => 31;
-        public override int InitMaxHits => 100;
+        public override int DefaultMinDamage => 8;
+        public override int DefaultMaxDamage => 33;
+        public override int DefaultSpeed => 22;
+        public override int InitMinHits => 70;
+        public override int InitMaxHits => 70;
 
 
         [Constructible]
         public Bardiche() : base(0xF4D)
         {
             Weight = 7.0;
+            Layer = Layer.TwoHanded;
         }
 
         [Constructible]

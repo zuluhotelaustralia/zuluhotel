@@ -5,109 +5,113 @@ using Server.Engines.Harvest;
 namespace Server.Items
 {
     public abstract class BasePoleArm : BaseMeleeWeapon, IUsesRemaining
-	{
-		public override int DefaultHitSound{ get{ return 0x237; } }
-		public override int DefaultMissSound{ get{ return 0x238; } }
+    {
+        public virtual HarvestSystem HarvestSystem => Lumberjacking.System;
 
-		public override SkillName DefaultSkill{ get{ return SkillName.Swords; } }
-		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Polearm; } }
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Slash2H; } }
+        public override int DefaultHitSound => 0x236;
+        public override int DefaultMissSound => 0x232;
 
-		public virtual HarvestSystem HarvestSystem{ get{ return Lumberjacking.System; } }
+        public override SkillName DefaultSkill => SkillName.Swords;
 
-		private int m_UsesRemaining;
-		private bool m_ShowUsesRemaining;
+        public override WeaponType DefaultWeaponType => WeaponType.Polearm;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int UsesRemaining
-		{
-			get { return m_UsesRemaining; }
-			set { m_UsesRemaining = value; }
-		}
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash2H;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public bool ShowUsesRemaining
-		{
-			get { return m_ShowUsesRemaining; }
-			set { m_ShowUsesRemaining = value; }
-		}
+        private int m_UsesRemaining;
+        private bool m_ShowUsesRemaining;
 
-		public BasePoleArm( int itemID ) : base( itemID )
-		{
-			m_UsesRemaining = 150;
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int UsesRemaining
+        {
+            get { return m_UsesRemaining; }
+            set { m_UsesRemaining = value; }
+        }
 
-		public BasePoleArm( Serial serial ) : base( serial )
-		{
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool ShowUsesRemaining
+        {
+            get { return m_ShowUsesRemaining; }
+            set { m_ShowUsesRemaining = value; }
+        }
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( HarvestSystem == null )
-				return;
+        public BasePoleArm(int itemID) : base(itemID)
+        {
+            m_UsesRemaining = 150;
+        }
 
-			if ( IsChildOf( from.Backpack ) || Parent == from )
-				HarvestSystem.BeginHarvesting( from, this );
-			else
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-		}
+        public BasePoleArm(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (HarvestSystem == null)
+                return;
 
-			writer.Write( (int) 2 ); // version
+            if (IsChildOf(from.Backpack) || Parent == from)
+                HarvestSystem.BeginHarvesting(from, this);
+            else
+                from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+        }
 
-			writer.Write( (bool) m_ShowUsesRemaining );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) m_UsesRemaining );
-		}
+            writer.Write((int) 2); // version
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((bool) m_ShowUsesRemaining);
 
-			int version = reader.ReadInt();
+            writer.Write((int) m_UsesRemaining);
+        }
 
-			switch ( version )
-			{
-				case 2:
-				{
-					m_ShowUsesRemaining = reader.ReadBool();
-					goto case 1;
-				}
-				case 1:
-				{
-					m_UsesRemaining = reader.ReadInt();
-					goto case 0;
-				}
-				case 0:
-				{
-					if ( m_UsesRemaining < 1 )
-						m_UsesRemaining = 150;
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-					break;
-				}
-			}
-		}
+            int version = reader.ReadInt();
 
-		public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
-		{
-			base.OnHit( attacker, defender, damageBonus );
+            switch (version)
+            {
+                case 2:
+                {
+                    m_ShowUsesRemaining = reader.ReadBool();
+                    goto case 1;
+                }
+                case 1:
+                {
+                    m_UsesRemaining = reader.ReadInt();
+                    goto case 0;
+                }
+                case 0:
+                {
+                    if (m_UsesRemaining < 1)
+                        m_UsesRemaining = 150;
 
-			if (  (attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble() )
-			{
-				StatMod mod = defender.GetStatMod( "Concussion" );
+                    break;
+                }
+            }
+        }
 
-				if ( mod == null )
-				{
-					defender.SendMessage( "You receive a concussion blow!" );
-					defender.AddStatMod( new StatMod( StatType.Int, "Concussion", -(defender.RawInt / 2), TimeSpan.FromSeconds( 30.0 ) ) );
+        public override void OnHit(Mobile attacker, Mobile defender, double damageBonus)
+        {
+            base.OnHit(attacker, defender, damageBonus);
 
-					attacker.SendMessage( "You deliver a concussion blow!" );
-					attacker.PlaySound( 0x11C );
-				}
-			}
-		}
-	}
+            if ((attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded &&
+                attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble())
+            {
+                StatMod mod = defender.GetStatMod("Concussion");
+
+                if (mod == null)
+                {
+                    defender.SendMessage("You receive a concussion blow!");
+                    defender.AddStatMod(new StatMod(StatType.Int, "Concussion", -(defender.RawInt / 2),
+                        TimeSpan.FromSeconds(30.0)));
+
+                    attacker.SendMessage("You deliver a concussion blow!");
+                    attacker.PlaySound(0x11C);
+                }
+            }
+        }
+    }
 }

@@ -4,17 +4,18 @@ namespace Server.Items
     public class Halberd : BasePoleArm
     {
         public override int DefaultStrengthReq => 45;
-        public override int DefaultMinDamage => 5;
-        public override int DefaultMaxDamage => 49;
-        public override int DefaultSpeed => 25;
-        public override int InitMinHits => 31;
+        public override int DefaultMinDamage => 10;
+        public override int DefaultMaxDamage => 35;
+        public override int DefaultSpeed => 15;
+        public override int InitMinHits => 80;
         public override int InitMaxHits => 80;
-
+        public override int DefaultHitSound => 0x237;
 
         [Constructible]
         public Halberd() : base(0x143E)
         {
             Weight = 16.0;
+            Layer = Layer.TwoHanded;
         }
 
         [Constructible]

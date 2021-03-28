@@ -3,130 +3,134 @@ using System;
 namespace Server.Items
 {
     public class FireworksWand : MagicWand
-	{
-		public override int LabelNumber{ get{ return 1041424; } } // a fireworks wand
+    {
+        public override int LabelNumber
+        {
+            get { return 1041424; }
+        } // a fireworks wand
 
-		private int m_Charges;
+        private int m_Charges;
 
-		[CommandProperty( AccessLevel.GameMaster )]
-		public int Charges
-		{
-			get{ return m_Charges; }
-			set{ m_Charges = value; }
-		}
-
-
-		[Constructible]
-public FireworksWand() : this( 100 )
-		{
-		}
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int Charges
+        {
+            get { return m_Charges; }
+            set { m_Charges = value; }
+        }
 
 
-		[Constructible]
-public FireworksWand( int charges )
-		{
-			m_Charges = charges;
-			LootType = LootType.Blessed;
-		}
+        [Constructible]
+        public FireworksWand() : this(100)
+        {
+        }
 
-		[Constructible]
-public FireworksWand( Serial serial ) : base( serial )
-		{
-		}
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			BeginLaunch( from, true );
-		}
+        [Constructible]
+        public FireworksWand(int charges)
+        {
+            m_Charges = charges;
+            LootType = LootType.Blessed;
+        }
 
-		public void BeginLaunch( Mobile from, bool useCharges )
-		{
-			Map map = from.Map;
+        [Constructible]
+        public FireworksWand(Serial serial) : base(serial)
+        {
+        }
 
-			if ( map == null || map == Map.Internal )
-				return;
+        public override void OnDoubleClick(Mobile from)
+        {
+            BeginLaunch(from, true);
+        }
 
-			if ( useCharges )
-			{
-				if ( Charges > 0 )
-				{
-					--Charges;
-				}
-				else
-				{
-					from.SendLocalizedMessage( 502412 ); // There are no charges left on that item.
-					return;
-				}
-			}
+        public void BeginLaunch(Mobile from, bool useCharges)
+        {
+            Map map = from.Map;
 
-			from.SendLocalizedMessage( 502615 ); // You launch a firework!
+            if (map == null || map == Map.Internal)
+                return;
 
-			Point3D ourLoc = GetWorldLocation();
+            if (useCharges)
+            {
+                if (Charges > 0)
+                {
+                    --Charges;
+                }
+                else
+                {
+                    from.SendLocalizedMessage(502412); // There are no charges left on that item.
+                    return;
+                }
+            }
 
-			Point3D startLoc = new Point3D( ourLoc.X, ourLoc.Y, ourLoc.Z + 10 );
-			Point3D endLoc = new Point3D( startLoc.X + Utility.RandomMinMax( -2, 2 ), startLoc.Y + Utility.RandomMinMax( -2, 2 ), startLoc.Z + 32 );
+            from.SendLocalizedMessage(502615); // You launch a firework!
 
-			Effects.SendMovingEffect( new Entity( Serial.Zero, startLoc, map ), new Entity( Serial.Zero, endLoc, map ),
-				0x36E4, 5, 0, false, false );
+            Point3D ourLoc = GetWorldLocation();
 
-			Timer.DelayCall( TimeSpan.FromSeconds( 1.0 ), FinishLaunch, new object[]{ from, endLoc, map } );
-		}
+            Point3D startLoc = new Point3D(ourLoc.X, ourLoc.Y, ourLoc.Z + 10);
+            Point3D endLoc = new Point3D(startLoc.X + Utility.RandomMinMax(-2, 2),
+                startLoc.Y + Utility.RandomMinMax(-2, 2), startLoc.Z + 32);
 
-		private void FinishLaunch( object state )
-		{
-			object[] states = (object[])state;
+            Effects.SendMovingEffect(new Entity(Serial.Zero, startLoc, map), new Entity(Serial.Zero, endLoc, map),
+                0x36E4, 5, 0, false, false);
 
-			Mobile from = (Mobile)states[0];
-			Point3D endLoc = (Point3D)states[1];
-			Map map = (Map)states[2];
+            Timer.DelayCall(TimeSpan.FromSeconds(1.0), FinishLaunch, new object[] {from, endLoc, map});
+        }
 
-			int hue = Utility.Random( 40 );
+        private void FinishLaunch(object state)
+        {
+            object[] states = (object[]) state;
 
-			if ( hue < 8 )
-				hue = 0x66D;
-			else if ( hue < 10 )
-				hue = 0x482;
-			else if ( hue < 12 )
-				hue = 0x47E;
-			else if ( hue < 16 )
-				hue = 0x480;
-			else if ( hue < 20 )
-				hue = 0x47F;
-			else
-				hue = 0;
+            Mobile from = (Mobile) states[0];
+            Point3D endLoc = (Point3D) states[1];
+            Map map = (Map) states[2];
 
-			if ( Utility.RandomBool() )
-				hue = Utility.RandomList( 0x47E, 0x47F, 0x480, 0x482, 0x66D );
+            int hue = Utility.Random(40);
 
-			int renderMode = Utility.RandomList( 0, 2, 3, 4, 5, 7 );
+            if (hue < 8)
+                hue = 0x66D;
+            else if (hue < 10)
+                hue = 0x482;
+            else if (hue < 12)
+                hue = 0x47E;
+            else if (hue < 16)
+                hue = 0x480;
+            else if (hue < 20)
+                hue = 0x47F;
+            else
+                hue = 0;
 
-			Effects.PlaySound( endLoc, map, Utility.Random( 0x11B, 4 ) );
-			Effects.SendLocationEffect( endLoc, map, 14138 + 16 * Utility.Random( 4 ), 16, 10, hue, renderMode );
-		}
+            if (Utility.RandomBool())
+                hue = Utility.RandomList(0x47E, 0x47F, 0x480, 0x482, 0x66D);
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+            int renderMode = Utility.RandomList(0, 2, 3, 4, 5, 7);
 
-			writer.Write( (int) 0 ); // version
+            Effects.PlaySound(endLoc, map, Utility.Random(0x11B, 4));
+            Effects.SendLocationEffect(endLoc, map, 14138 + 16 * Utility.Random(4), 16, 10, hue, renderMode);
+        }
 
-			writer.Write( (int) m_Charges );
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            writer.Write((int) 0); // version
 
-			int version = reader.ReadInt();
+            writer.Write((int) m_Charges);
+        }
 
-			switch ( version )
-			{
-				case 0:
-				{
-					m_Charges = reader.ReadInt();
-					break;
-				}
-			}
-		}
-	}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+
+            switch (version)
+            {
+                case 0:
+                {
+                    m_Charges = reader.ReadInt();
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -8,45 +8,22 @@ namespace Server.Items
     [FlipableAttribute(0xE81, 0xE82)]
     public class ShepherdsCrook : BaseStaff
     {
-        public override int DefaultStrengthReq
-        {
-            get { return 10; }
-        }
-
-        public override int DefaultMinDamage
-        {
-            get { return 3; }
-        }
-
-        public override int DefaultMaxDamage
-        {
-            get { return 12; }
-        }
-
-        public override int DefaultSpeed
-        {
-            get { return 30; }
-        }
-
-        public override int InitMinHits
-        {
-            get { return 31; }
-        }
-
-        public override int InitMaxHits
-        {
-            get { return 50; }
-        }
+        public override int DefaultMinDamage => 3;
+        public override int DefaultMaxDamage => 12;
+        public override int DefaultSpeed => 30;
+        public override int InitMinHits => 70;
+        public override int InitMaxHits => 70;
 
 
         [Constructible]
-public ShepherdsCrook() : base(0xE81)
+        public ShepherdsCrook() : base(0xE81)
         {
             Weight = 4.0;
+            Layer = Layer.TwoHanded;
         }
 
         [Constructible]
-public ShepherdsCrook(Serial serial) : base(serial)
+        public ShepherdsCrook(Serial serial) : base(serial)
         {
         }
 
