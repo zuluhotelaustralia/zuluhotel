@@ -16,11 +16,8 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<AdamantineDragon>(new CreatureProperties
             {
-                // cast_pct = 40,
-                // CProp_EarthProtection = i8,
                 // CProp_looter = s1,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i4,
+                // cast_pct = 40,
                 // DataElementId = adamantinedragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -85,7 +82,10 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Fire, 50},
                     {ElementalType.Water, 100},
-                    {ElementalType.Physical, 100}
+                    {ElementalType.Physical, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

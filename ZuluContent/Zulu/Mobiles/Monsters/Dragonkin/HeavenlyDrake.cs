@@ -17,7 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<HeavenlyDrake>(new CreatureProperties
             {
                 // CProp_HolyProtection = i8,
-                // CProp_PermMagicImmunity = i5,
                 // DataElementId = heavenlydrake,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -61,7 +60,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 130,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

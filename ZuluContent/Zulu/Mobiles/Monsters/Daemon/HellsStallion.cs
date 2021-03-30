@@ -15,9 +15,9 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<HellsStallion>(new CreatureProperties
             {
-                // CProp_NecroProtection = i3,
                 // CProp_noanimate = i1,
-                // CProp_PermMagicImmunity = i6,
+
+
                 // DataElementId = hellsstallion,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -56,7 +56,9 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 160,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

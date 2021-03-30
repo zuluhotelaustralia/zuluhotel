@@ -1,80 +1,54 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Server;
 using Server.Engines.Magic;
 using Server.Network;
 using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class AbyssalFlameSpell : NecromancerSpell
+    public class AbyssalFlameSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(2); }
-        }
+        public AbyssalFlameSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        public override double RequiredSkill
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            get { return 100.0; }
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
+            
+            Caster.MovingEffect(target, 0x36D5, 5, 0, false, false);
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            SpellHelper.Damage(damage, target, Caster, this);
 
-        public override int RequiredMana
-        {
-            get { return 60; }
-        }
+            await Timer.Pause(500);
+            
+            var range = Caster.Skills[CastSkill].Value / 15.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
 
-        public AbyssalFlameSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            if (CheckSequence())
+            var eable = Caster.GetMobilesInRange((int) range);
+            foreach (var mobile in eable)
             {
-                var map = Caster.Map;
-                if (map != null)
-                    foreach (var m in Caster.GetMobilesInRange(1 + (int) (Caster.Skills[CastSkill].Value / 15.0)))
-                        if (Caster != m && SpellHelper.ValidIndirectTarget(Caster, m) &&
-                            Caster.CanBeHarmful(m, false) &&
-                            Caster.InLOS(m))
-                        {
-                            var dmg = Utility.Random(30, 30);
-
-                            Caster.DoHarmful(m);
-
-                            //m.Damage( dmg, Caster, m_DamageType ); //resist?  reflect?
-                            SpellHelper.Damage(dmg, m, Caster, this, TimeSpan.Zero);
-                            m.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot); //flamestrike effect
-
-                            new AbyssalFlameTimer(Caster, m).Start();
-                        }
-
-                Caster.PlaySound(0x208);
+                if (Caster == mobile || 
+                    !SpellHelper.ValidIndirectTarget(Caster, mobile) ||
+                    !Caster.CanBeHarmful(mobile, false) || 
+                    !Caster.InLOS(mobile))
+                {
+                    continue;
+                }
+                
+                SpellHelper.Damage(damage / 2, mobile, Caster, this);
+                mobile.FixedParticles(0x36BD, 20, 10, 5030, EffectLayer.Head);
+                mobile.PlaySound(0x307);
             }
-
-            FinishSequence();
-        }
-
-        private class AbyssalFlameTimer : Timer
-        {
-            private Mobile m_Target;
-            private Mobile m_Caster;
-
-            public AbyssalFlameTimer(Mobile caster, Mobile target) : base(TimeSpan.Zero, TimeSpan.FromSeconds(1), 3)
-            {
-                m_Target = target;
-                m_Caster = caster;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.FixedParticles(0x3709, 10, 30, 5052, EffectLayer.LeftFoot); //flamestrike effect
-                m_Target.PlaySound(0x208); //foom
-            }
+            eable.Free();
         }
     }
 }

@@ -16,8 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<GreaterShadow>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i500,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i5,
                 // CProp_Permmr = i3,
                 // DataElementId = greatershadow,
                 // DataElementType = NpcTemplate,
@@ -57,7 +55,9 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

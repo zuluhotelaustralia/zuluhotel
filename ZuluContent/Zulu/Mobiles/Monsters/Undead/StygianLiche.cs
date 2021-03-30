@@ -18,8 +18,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<StygianLiche>(new CreatureProperties
             {
                 // cast_pct = 60,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
+
                 // DataElementId = stygianliche,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -88,7 +87,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

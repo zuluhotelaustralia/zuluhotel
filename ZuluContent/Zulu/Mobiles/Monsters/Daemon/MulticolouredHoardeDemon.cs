@@ -17,9 +17,7 @@ namespace Server.Mobiles
             {
                 // CProp_AtDeathScript = s:death:hoardedemon,
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i8,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
+
                 // DataElementId = multicolouredhoardedemon,
                 // DataElementType = NpcTemplate,
                 // Equip = behemoth,
@@ -57,7 +55,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

@@ -17,7 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<GoblinGuard>(new CreatureProperties
             {
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i1,
                 // CProp_untamemountatdeath = i1,
                 // DataElementId = goblinguardmounted,
                 // DataElementType = NpcTemplate,
@@ -58,7 +57,8 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.Physical, 25},
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.PermMagicImmunity, 1}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

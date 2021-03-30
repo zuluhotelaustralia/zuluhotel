@@ -16,7 +16,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<OphidianKing>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i10,
                 // CProp_PhysicalResistance = i6,
                 // DataElementId = ophidianking,
                 // DataElementType = NpcTemplate,
@@ -55,6 +54,10 @@ namespace Server.Mobiles
                 Name = "The Ophidian King",
                 PerceptionRange = 10,
                 ProvokeSkillOverride = 150,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 10}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 160},

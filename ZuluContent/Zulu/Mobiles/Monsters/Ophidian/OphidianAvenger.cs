@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<OphidianAvenger>(new CreatureProperties
             {
-                // CProp_EarthProtection = i4,
                 // DataElementId = ophidianavenger,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -57,7 +56,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 110,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 75}
+                    {ElementalType.Fire, 75},
+                    {ElementalType.Earth, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

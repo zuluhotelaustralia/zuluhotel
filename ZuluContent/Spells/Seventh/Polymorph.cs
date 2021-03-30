@@ -103,7 +103,7 @@ namespace Server.Spells.Seventh
         
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.AnimalForm))
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.AnimalForm, BuffIcon.LichForm))
                 return;
 
             var magery = Caster.Skills[SkillName.Magery].Value;
@@ -139,16 +139,20 @@ namespace Server.Spells.Seventh
                 return;
 
             var hueMod = bodyId == SeaSerpent.BodyId ? 233 : 0;
-            
-            var modAmount = (double) group * 3;
-                
+            var modAmount = group * 3.0;
+
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref modAmount));
+
+            var statMod = (int) modAmount;
+            var arMod = statMod / 3;
             
             Caster.TryAddBuff(new Polymorph
             {
+                Description = $"<br>Str: +{statMod}<br>Dex: +{statMod}<br>Int: +{statMod}<br>Armor: +{arMod}",
                 Duration = SpellHelper.GetDuration(Caster, Caster),
                 BodyMods = (bodyId, hueMod),
-                Value = (int) modAmount
+                StatMods = (StrMod: statMod, DexMod: statMod, IntMod: statMod),
+                ArmorMod = arMod,
             });
         }
     }

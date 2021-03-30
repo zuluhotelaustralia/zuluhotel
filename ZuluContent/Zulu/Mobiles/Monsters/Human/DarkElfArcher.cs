@@ -18,7 +18,6 @@ namespace Server.Mobiles
                 // ammoamount = 60,
                 // ammotype = 0xf3f,
                 // CProp_looter = s1,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = drowarcher,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -52,6 +51,10 @@ namespace Server.Mobiles
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
                 ProvokeSkillOverride = 60,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Macing, 95},

@@ -23,6 +23,7 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 using CalcMoves = Server.Movement.Movement;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Mobiles
 {
@@ -819,21 +820,17 @@ namespace Server.Mobiles
         {
             get
             {
+                var mod = this.GetAllEnchantmentsOfType<IArmorMod>().Sum(b => b.ArmorMod);
                 var rating = Items.OfType<IArmorRating>().Sum(i => i.ArmorRatingScaled);
-                return VirtualArmor + VirtualArmorMod + rating;
+                var value = VirtualArmor + VirtualArmorMod + rating + mod;
+
+                return value >= 0 ? value : 0;
             }
         }
 
         #region [Zulu] Resistances
-
         public EnchantmentDictionary Enchantments { get; private set; } = new();
-
-
-        public int GetResistance(ElementalType type)
-        {
-            return Items.OfType<BaseEquippableItem>().Sum(i => i.Enchantments.GetResist(type));
-        }
-
+        
         #endregion
 
 
@@ -1285,13 +1282,7 @@ namespace Server.Mobiles
             if (!Alive)
                 return ApplyPoisonResult.Immune;
 
-            bool immuneFromPoison = false;
-            this.FireHook(h => h.OnPoison(from, this, poison, ref immuneFromPoison));
-
-            if (immuneFromPoison)
-                return ApplyPoisonResult.Immune;
-
-            ApplyPoisonResult result = base.ApplyPoison(from, poison);
+            var result = base.ApplyPoison(from, poison);
 
             if (from != null && result == ApplyPoisonResult.Poisoned && PoisonTimer is PoisonImpl.PoisonTimer timer)
                 timer.From = from;
@@ -1306,6 +1297,14 @@ namespace Server.Mobiles
                     502808); // You would have been poisoned, were you not new to the land of Britannia. Be careful in the future.
             else
                 base.OnPoisonImmunity(from, poison);
+        }
+
+        public override bool CheckPoisonImmunity(Mobile from, Poison poison)
+        {
+            var immune = base.CheckPoisonImmunity(@from, poison);
+            this.FireHook(h => h.OnCheckPoisonImmunity(@from, this, poison, ref immune));
+
+            return immune;
         }
 
         #endregion

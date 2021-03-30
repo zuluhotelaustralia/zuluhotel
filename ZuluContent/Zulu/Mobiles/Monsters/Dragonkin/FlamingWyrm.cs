@@ -17,8 +17,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<FlamingWyrm>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i250,
-                // CProp_EarthProtection = i2,
-                // CProp_PermMagicImmunity = i5,
+
                 // DataElementId = flamingwyrm,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -87,7 +86,9 @@ namespace Server.Mobiles
                 {
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Air, 50},
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.Earth, 50},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

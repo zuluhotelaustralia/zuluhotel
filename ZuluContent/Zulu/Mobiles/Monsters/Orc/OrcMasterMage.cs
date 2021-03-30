@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<OrcMasterMage>(new CreatureProperties
             {
                 // cast_pct = 50,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = orcmastermage,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -74,6 +73,10 @@ namespace Server.Mobiles
                 },
                 ProvokeSkillOverride = 100,
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 3}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.MagicResist, 85},

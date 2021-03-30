@@ -16,8 +16,7 @@ namespace Server.Mobiles
             CreatureProperties.Register<Bloodliche>(new CreatureProperties
             {
                 // cast_pct = 25,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i7,
+
                 // DataElementId = bloodliche,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -84,7 +83,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 7}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

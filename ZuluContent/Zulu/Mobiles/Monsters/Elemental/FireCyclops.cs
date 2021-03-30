@@ -18,7 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<FireCyclops>(new CreatureProperties
             {
                 // cast_pct = 60,
-                // CProp_PermMagicImmunity = i5,
                 // DataElementId = firecyclops,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -64,7 +63,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<IceFiend>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i5,
                 // DataElementId = icefiend,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -65,6 +64,10 @@ namespace Server.Mobiles
                 },
                 ProvokeSkillOverride = 130,
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 5}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.MagicResist, 90},

@@ -1,213 +1,84 @@
 using System;
-using System.Collections.Generic;
-using System.Collections;
+using System.Linq;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server;
-using Server.Engines.Magic;
-using Server.Network;
-using Server.Items;
-using Server.Targeting;
-using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class WraithFormSpell : NecromancerSpell
+    public class WraithFormSpell : NecromancerSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(2); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 120.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 100; }
-        }
-
-        private static Hashtable m_Timers = new Hashtable();
-
-        public static Hashtable Timers
-        {
-            get { return m_Timers; }
-        }
-
         public WraithFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        public async Task CastAsync()
         {
-            if (DisguiseTimers.IsDisguised(Caster))
-            {
-                Caster.SendLocalizedMessage(502167); // You cannot polymorph while disguised.
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.LichForm))
                 return;
-            }
-            else if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
+
+            var magery = Caster.Skills.Magery.Value;
+            var duration = magery / 15.0;
+            var range = magery / 30.0;
+            var powerLevel = magery / 15.0;
+
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref powerLevel));
+
+            var bonus = Caster.GetClassBonus(SkillName.Magery);
+            var sleepTime = 5.0;
+
+            if (bonus > 1.0)
+                sleepTime /= bonus;
+
+            Caster.PlaySound(0x20F);
+
+            void OnTick()
             {
-                Caster.SendLocalizedMessage(1042512); // You cannot polymorph while wearing body paint
-                return;
-            }
+                if (!Caster.Alive) return;
 
-            if (!CheckSequence()) goto Return;
+                var eable = Caster.GetMobilesInRange((int) range);
 
-            if (!Caster.BeginAction(typeof(WraithFormSpell)))
-            {
-                Caster.SendLocalizedMessage(1005559); //this spell already in effect
-                goto Return;
-            }
-
-            if (Caster is PlayerMobile)
-            {
-                Caster.HueMod = 0x482;
-                Caster.BodyMod = 0x1a;
-            }
-
-            Caster.PlaySound(0x210);
-
-            var interval = 0;
-            var intermediate = 150.0 / Caster.Skills[CastSkill].Value;
-            if (intermediate < 2)
-                interval = 4;
-            else
-                // should proc damage no faster than every 4 seconds
-                interval = (int) intermediate;
-
-            //e.g. 130 seconds or whatever
-            var duration = (int) Caster.Skills[DamageSkill].Value;
-
-            double dmg = Utility.Dice(2, (uint) (Caster.Skills[DamageSkill].Value / 20.0), 0);
-
-            Timer t = new WraithFormTimer(Caster, TimeSpan.FromSeconds(interval), duration, (int) dmg, this);
-            m_Timers[Caster] = t;
-            t.Start();
-
-            Return:
-            FinishSequence();
-        }
-
-        public static void EndWraithForm(Mobile m)
-        {
-            if (!m.CanBeginAction(typeof(WraithFormSpell)))
-            {
-                m.BodyMod = 0;
-                m.HueMod = -1;
-                m.EndAction(typeof(WraithFormSpell));
-
-                BaseArmor.ValidateMobile(m);
-                BaseClothing.ValidateMobile(m);
-            }
-
-            StopTimers(m);
-        }
-
-        public static bool StopTimers(Mobile m)
-        {
-            var t = m_Timers[m] as WraithFormTimer;
-
-            if (t != null)
-            {
-                t.StopSubtimer();
-                t.Stop();
-                m_Timers.Remove(m);
-            }
-
-            return t != null;
-        }
-
-        // this one lasts for the duration of the transformation, i.e. this is your polymorph
-        private class WraithFormTimer : Timer
-        {
-            private readonly Mobile m_Owner;
-            private readonly int m_Damage;
-            private readonly Spell m_Spell;
-            private readonly TimeSpan m_SubtimerDuration;
-            private Subtimer m_Subtimer;
-
-            public WraithFormTimer(Mobile owner, TimeSpan interval, int duration, int damage, Spell spell) :
-                base(TimeSpan.FromSeconds(duration))
-            {
-                m_Owner = owner;
-                Priority = TimerPriority.OneSecond;
-                m_Damage = damage;
-                m_Spell = spell;
-                m_SubtimerDuration = interval;
-                m_Subtimer = new Subtimer(interval, this, owner, damage, m_Spell);
-                m_Subtimer.Start();
-            }
-
-            protected override void OnTick()
-            {
-                m_Subtimer.Stop();
-                EndWraithForm(m_Owner);
-            }
-
-            public void StopSubtimer()
-            {
-                m_Subtimer.Stop();
-            }
-
-            public void SubtimerCallback()
-            {
-                m_Subtimer.Stop();
-                m_Subtimer = new Subtimer(m_SubtimerDuration, this, m_Owner, m_Damage, m_Spell);
-                m_Subtimer.Start();
-            }
-        }
-
-        // and this one actually procs your AOE necro damage
-        private class Subtimer : Timer
-        {
-            private readonly WraithFormTimer m_ParentTimer;
-            private readonly Mobile m_Caster;
-            private readonly int m_Damage;
-            private readonly Spell m_Spell;
-
-            public Subtimer(TimeSpan duration, WraithFormTimer parent, Mobile caster, int dmg, Spell spell) : base(
-                duration)
-            {
-                m_ParentTimer = parent;
-                m_Caster = caster;
-                m_Damage = dmg;
-                m_Spell = spell;
-            }
-
-            protected override void OnTick()
-            {
-                var targets = new List<Mobile>();
-                var map = m_Caster.Map;
-
-                //build a target list
-                if (map != null)
-                    foreach (var m in m_Caster.GetMobilesInRange(
-                        1 + (int) (m_Caster.Skills.SpiritSpeak.Value / 15.0)))
-                        if (m_Caster != m &&
-                            SpellHelper.ValidIndirectTarget(m_Caster, m) &&
-                            m_Caster.CanBeHarmful(m, false) &&
-                            m_Caster.InLOS(m)
-                        )
-                            targets.Add(m);
-
-                // yeet on em
-                foreach (var m in targets)
+                foreach (var mobile in eable)
                 {
-                    m_Caster.DoHarmful(m);
+                    if (Caster == mobile || !SpellHelper.ValidIndirectTarget(Caster, mobile) ||
+                        !Caster.CanBeHarmful(mobile, false))
+                    {
+                        continue;
+                    }
 
-                    m.FixedParticles(0x374a, 10, 30, 5052, EffectLayer.LeftFoot);
-                    m.PlaySound(0x1fa);
-                    //m.Damage( m_Damage, m_Caster, ElementalType.Necro );  //about 12 at zuluClass 4
-                    SpellHelper.Damage(m_Damage, m, m_Caster, m_Spell, TimeSpan.Zero);
+                    var damage = Utility.RandomMinMax(2, 2 * (int) powerLevel);
 
-                    if (m_Caster.Mana + m_Damage > m_Caster.Int)
-                        m_Caster.Mana = m_Caster.Int;
-                    else
-                        m_Caster.Mana += m_Damage;
+                    SpellHelper.Damage(damage, mobile, Caster, this);
+
+                    Caster.Mana += damage;
+
+                    mobile.FixedParticles(0x3749, 7, 16, 5013, EffectLayer.Waist);
+                    mobile.PlaySound(0x1F9);
                 }
 
-                m_ParentTimer.SubtimerCallback();
+                eable.Free();
+            }
+
+            if (Caster is IBuffable {BuffManager: { } manager})
+            {
+                var buff = manager.HasBuff<WraithForm>()
+                    ? manager.Values.FirstOrDefault(b => b is WraithForm) as WraithForm
+                    : new WraithForm
+                    {
+                        Title = "Wraith Form",
+                        Icon = BuffIcon.WraithForm,
+                        BodyMods = (body: 0x1a, bodyHue: 0x482),
+                        Duration = TimeSpan.FromSeconds(duration),
+                        StatMods = (0, 0, 0)
+                    };
+
+                manager.TryAddBuff(buff);
+                buff?.AddStack(TimeSpan.FromSeconds(duration), TimeSpan.FromSeconds(sleepTime), OnTick);
             }
         }
     }

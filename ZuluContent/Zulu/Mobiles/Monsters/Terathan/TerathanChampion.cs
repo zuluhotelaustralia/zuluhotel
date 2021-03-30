@@ -16,8 +16,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<TerathanChampion>(new CreatureProperties
             {
-                // CProp_EarthProtection = i4,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = terathanchampion,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -57,7 +55,9 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.Physical, 100},
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

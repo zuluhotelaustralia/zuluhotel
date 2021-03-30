@@ -1,111 +1,61 @@
-using System;
-using System.Collections;
-using Server.Engines.Magic;
-using Server.Network;
-using Server.Items;
+using System.Threading.Tasks;
 using Server.Targeting;
-using Server.Mobiles;
-using Scripts.Zulu.Engines.Classes;
 using Server;
+using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class KillSpell : NecromancerSpell
+    public class KillSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(1); }
-        }
+        public KillSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        public override double RequiredSkill
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            get { return 140.0; }
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
 
-        public override int RequiredMana
-        {
-            get { return 130; }
-        }
+            var multiplier = target is BaseCreature ? 2.0 : 1.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref multiplier));
 
-        public KillSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            var protection = (int)GetProtectionLevelForResist(target.GetResist(Info.DamageType));
+            var instantKill = (int)(Caster.Skills.Magery.Value * multiplier / 3);
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            if (protection > 0)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                instantKill -= (int) (instantKill * protection * 0.25);
+                if (instantKill < 1)
+                    instantKill = 1;
             }
+            
+            target.FixedParticles(0x375B, 1, 16, 5044, EffectLayer.Waist);
+            target.PlaySound(0x201);
 
-            if (!CheckSequence()) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            // TODO: Spell graphical and sound effects
-
-            Caster.DoHarmful(m);
-            //a zuluClass 4 mage with 130.0 spirit speak will instakill anyone with less than ~91 hp
-            // if they have more than that they get a chance to resist and take half damage, otherwise
-            // they take 90% of the instakill threshhold as damage
-            var power = Caster.Skills[DamageSkill].Value / 3;
-            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage && ZuluClass.GetClass(Caster).Level != 0)
-                power *= ZuluClass.GetClass(Caster).Bonus;
-
-            var safetymargin = power * 0.25;
-            power -= safetymargin;
-
-            if (m.Hits <= (int) power)
+            if (target.Hits <= instantKill)
             {
-                m.Kill();
+                target.Damage(target.HitsMax); // Raw damage
+            }
+            else if(target.Hits <= instantKill * 1.5)
+            {
+                var victimSkill = target.Skills.MagicResist.Value;
+                var resistChance = (int) (victimSkill / multiplier) - (Caster.Skills.EvalInt.Value / 3);
+                if (Utility.RandomMinMax(1, 100) <= resistChance)
+                    SpellHelper.Damage(damage, target, Caster, this);
+                else
+                    target.Damage(target.HitsMax); // Raw damage
             }
             else
             {
-                var damage = 0.5 * Caster.Hits;
-
-                if (CheckResisted(m))
-                {
-                    damage *= 0.5;
-
-                    m.SendLocalizedMessage(501783); //you resist the blah blah blah
-                }
-
-                //m.Damage((int)damage, Caster, m_DamageType);
-                SpellHelper.Damage((int) damage, m, Caster, this, TimeSpan.Zero);
+                SpellHelper.Damage(damage, target, Caster, this);
             }
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private KillSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(KillSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            
+            
         }
     }
 }

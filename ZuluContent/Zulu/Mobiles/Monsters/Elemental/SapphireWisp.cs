@@ -18,9 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<SapphireWisp>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_EarthProtection = i4,
-                // CProp_NecroProtection = i2,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = sapphirewisp,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -81,7 +78,10 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 120,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.Necro, 50},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

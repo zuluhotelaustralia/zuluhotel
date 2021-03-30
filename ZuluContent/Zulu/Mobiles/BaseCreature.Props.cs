@@ -25,57 +25,57 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalWaterResist
         {
-            get => Enchantments.Get((WaterProtection e) => e.Value);
-            set => Enchantments.Set((WaterProtection e) => e.Value = value);
+            get { return Enchantments.Get((WaterProtection e) => e.Value); }
+            set { Enchantments.Set((WaterProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalAirResist
         {
-            get => Enchantments.Get((AirProtection e) => e.Value);
-            set => Enchantments.Set((AirProtection e) => e.Value = value);
+            get { return Enchantments.Get((AirProtection e) => e.Value); }
+            set { Enchantments.Set((AirProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalPhysicalResist
         {
-            get => Enchantments.Get((PhysicalProtection e) => e.Value);
-            set => Enchantments.Set((PhysicalProtection e) => e.Value = value);
+            get { return Enchantments.Get((PhysicalProtection e) => e.Value); }
+            set { Enchantments.Set((PhysicalProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalFireResist
         {
-            get => Enchantments.Get((FireProtection e) => e.Value);
-            set => Enchantments.Set((FireProtection e) => e.Value = value);
+            get { return Enchantments.Get((FireProtection e) => e.Value); }
+            set { Enchantments.Set((FireProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalPoisonResist
         {
-            get => Enchantments.Get((PermPoisonProtection e) => e.Value);
-            set => Enchantments.Set((PermPoisonProtection e) => e.Value = value);
+            get { return Enchantments.Get((PermPoisonProtection e) => e.Value); }
+            set { Enchantments.Set((PermPoisonProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalEarthResist
         {
-            get => Enchantments.Get((EarthProtection e) => e.Value);
-            set => Enchantments.Set((EarthProtection e) => e.Value = value);
+            get { return Enchantments.Get((EarthProtection e) => e.Value); }
+            set { Enchantments.Set((EarthProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int ElementalNecroResist
         {
-            get => Enchantments.Get((NecroProtection e) => e.Value);
-            set => Enchantments.Set((NecroProtection e) => e.Value = value);
+            get { return Enchantments.Get((NecroProtection e) => e.Value); }
+            set { Enchantments.Set((NecroProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int PermMagicImmunity
         {
-            get => Enchantments.Get((PermMagicImmunity e) => e.Value);
-            set => Enchantments.Set((PermMagicImmunity e) => e.Value = value);
+            get { return Enchantments.Get((PermMagicImmunity e) => e.Value); }
+            set { Enchantments.Set((PermMagicImmunity e) => e.Value = value); }
         }
 
         public virtual bool InitialInnocent
@@ -114,7 +114,7 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual CreatureType CreatureType => InitProperties?.CreatureType ?? CreatureType.None;
+        public virtual CreatureType CreatureType { get; set; } = CreatureType.None;
 
         public virtual double WeaponAbilityChance
         {

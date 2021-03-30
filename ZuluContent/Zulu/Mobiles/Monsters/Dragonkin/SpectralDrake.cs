@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<SpectralDrake>(new CreatureProperties
             {
                 // cast_pct = 17,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = spectraldrake,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -68,6 +67,10 @@ namespace Server.Mobiles
                     typeof(Spells.Fourth.LightningSpell)
                 },
                 ProvokeSkillOverride = 130,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 4}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Tactics, 120},

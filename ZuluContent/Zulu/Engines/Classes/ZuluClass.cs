@@ -368,7 +368,7 @@ namespace Scripts.Zulu.Engines.Classes
         {
         }
 
-        public void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        public void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
         }
 

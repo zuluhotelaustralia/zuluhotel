@@ -35,7 +35,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         
         // We should use this first before checking item enchantments
         [CallPriority(1)]
-        public override void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        public override void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
             var poisonProtectionLevel = GetProtectionLevelForResist(Value);
 

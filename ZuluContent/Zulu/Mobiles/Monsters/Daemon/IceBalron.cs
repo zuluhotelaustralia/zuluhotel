@@ -19,9 +19,7 @@ namespace Server.Mobiles
                 // cast_pct = 25,
                 // CProp_BaseHpRegen = i500,
                 // CProp_BaseManaRegen = i1000,
-                // CProp_EarthProtection = i4,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
+
                 // CProp_Permmr = i5,
                 // DataElementId = icebalron,
                 // DataElementType = NpcTemplate,
@@ -92,7 +90,10 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Water, 75},
                     {ElementalType.Air, 100},
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

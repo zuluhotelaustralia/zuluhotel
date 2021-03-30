@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<FlamingSkeleton>(new CreatureProperties
             {
                 // cast_pct = 25,
-                // CProp_NecroProtection = i3,
                 // DataElementId = flamingskeleton,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -61,7 +60,8 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 75}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

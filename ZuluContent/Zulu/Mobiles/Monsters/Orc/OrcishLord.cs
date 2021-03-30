@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<OrcishLord>(new CreatureProperties
             {
-                // CProp_EarthProtection = i3,
                 // DataElementId = orc_lord,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -54,7 +53,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 90,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 75}
+                    {ElementalType.Fire, 75},
+                    {ElementalType.Earth, 75}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

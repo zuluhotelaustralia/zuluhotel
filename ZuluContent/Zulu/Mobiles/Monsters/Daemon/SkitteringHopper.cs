@@ -16,9 +16,9 @@ namespace Server.Mobiles
             CreatureProperties.Register<SkitteringHopper>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i3,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i4,
+
+
                 // DataElementId = skitteringhopper,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -53,7 +53,9 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

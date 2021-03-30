@@ -16,8 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<LicheLord>(new CreatureProperties
             {
                 // cast_pct = 42,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = lichelord,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -70,7 +68,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

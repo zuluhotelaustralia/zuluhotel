@@ -17,10 +17,8 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<ShadowDragon>(new CreatureProperties
             {
-                // CProp_AttackTypeImmunities = i256,
-                // CProp_NecroProtection = i8,
                 // CProp_noanimate = i1,
-                // CProp_PermMagicImmunity = i4,
+                // CProp_AttackTypeImmunities = i256,
                 // DataElementId = shadowdragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -61,6 +59,11 @@ namespace Server.Mobiles
                 ManaMaxSeed = 200,
                 Name = "a Shadow Dragon",
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.Necro, 100},
+                    {ElementalType.PermMagicImmunity, 4}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 200},

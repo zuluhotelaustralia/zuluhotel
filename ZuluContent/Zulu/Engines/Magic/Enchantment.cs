@@ -83,7 +83,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnPoison(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
+        public virtual void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
         }
 

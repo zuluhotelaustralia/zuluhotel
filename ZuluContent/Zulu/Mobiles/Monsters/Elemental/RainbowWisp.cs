@@ -18,7 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<RainbowWisp>(new CreatureProperties
             {
                 // CProp_Elf = i1,
-                // CProp_NecroProtection = i2,
                 // CProp_Permmr = i8,
                 // DataElementId = rainbowwisp,
                 // DataElementType = NpcTemplate,
@@ -79,7 +78,8 @@ namespace Server.Mobiles
                 {
                     {ElementalType.PermPoisonImmunity, 25},
                     {ElementalType.Water, 100},
-                    {ElementalType.Air, 100}
+                    {ElementalType.Air, 100},
+                    {ElementalType.Necro, 50}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

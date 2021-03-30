@@ -17,9 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<DiamondWisp>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_EarthProtection = i4,
-                // CProp_NecroProtection = i4,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = diamondwisp,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -79,7 +76,10 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 120,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Air, 100}
+                    {ElementalType.Air, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

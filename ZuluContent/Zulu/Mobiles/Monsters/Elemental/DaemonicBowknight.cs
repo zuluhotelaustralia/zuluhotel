@@ -18,9 +18,6 @@ namespace Server.Mobiles
                 // ammoamount = 300,
                 // ammotype = 0xEED,
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i8,
-                // CProp_NecroProtection = i8,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = daemonicbowknight,
                 // DataElementType = NpcTemplate,
                 // Equip = daemonicbowknight,
@@ -59,7 +56,10 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

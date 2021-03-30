@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<Ghost>(new CreatureProperties
             {
-                // CProp_NecroProtection = i3,
                 // DataElementId = ghost,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -49,6 +48,10 @@ namespace Server.Mobiles
                 Name = "a ghost",
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.Necro, 75}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Fencing, 50},

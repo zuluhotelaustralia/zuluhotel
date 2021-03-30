@@ -90,14 +90,16 @@ namespace Server.Items
             var idx = Utility.Random(entries.Length);
             var body = entries[idx].BodyId;
 
+            var mod = (int) PotionStrength * 5 + idx;
+
             if (from.CanBuff(from, true, BuffIcon.Polymorph))
             {
                 from.TryAddBuff(new Polymorph
                 {
                     Title = DefaultName,
                     Duration = TimeSpan.FromSeconds(PotionStrength * 120),
-                    Value = (int) PotionStrength * 5 + idx,
-                    BodyMods = (body, 0)
+                    StatMods = (StrMod: mod, DexMod: mod, IntMod: mod),
+                    BodyMods = (body: body, bodyHue: 0)
                 });
                 return true;
             }

@@ -22,7 +22,7 @@ namespace Server.Spells.Second
             
             target.TryAddBuff(new ArmorBuff
             {
-                Value = (int)(SpellHelper.GetModAmount(Caster, target) / 2.0),
+                ArmorMod = (int)(SpellHelper.GetModAmount(Caster, target) / 2.0),
                 Duration = SpellHelper.GetDuration(Caster, target),
             });
             

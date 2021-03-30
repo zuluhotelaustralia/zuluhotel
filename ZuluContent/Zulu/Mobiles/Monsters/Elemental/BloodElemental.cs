@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<BloodElemental>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = bloodelemental,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -62,6 +61,10 @@ namespace Server.Mobiles
                     typeof(Spells.Second.HarmSpell)
                 },
                 ProvokeSkillOverride = 115,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 3}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Tactics, 100},

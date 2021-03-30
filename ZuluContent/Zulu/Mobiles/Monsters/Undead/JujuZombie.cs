@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<JujuZombie>(new CreatureProperties
             {
-                // CProp_NecroProtection = i8,
                 // CProp_NoReactiveArmour = i1,
                 // DataElementId = jujuzombie,
                 // DataElementType = NpcTemplate,
@@ -54,7 +53,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

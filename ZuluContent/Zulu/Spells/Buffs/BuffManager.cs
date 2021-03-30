@@ -6,13 +6,6 @@ using Server.Network;
 
 namespace Server.Spells
 {
-    // <body><basefont SIZE=5 FACE=UO_Gargish_20pt>Elemental Protections:</basefont>
-    // <basefont SIZE=5 FACE=UO_Gargish_16pt COLOR=#6A6A6A>+1 Air Protection</basefont>
-    // <basefont SIZE=5 FACE=UO_Gargish_16pt COLOR=#834118>+2 Earth Protection</basefont>
-    // <basefont SIZE=5 FACE=UO_Gargish_16pt COLOR=#DE4f45>+3 Fire Protection</basefont>
-    // <basefont SIZE=5 FACE=UO_Gargish_16pt COLOR=#2083CD>+4 Necro Protection</basefont>
-    // <basefont SIZE=5 FACE=UO_Gargish_16pt COLOR=#395A52>+5 Poison Protection</basefont></body>
-
     public class BuffManager
     {
         private BuffTimer m_Timer;
@@ -34,14 +27,25 @@ namespace Server.Spells
                 if (mobile is IBuffable buffable)
                     Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.RemoveBuffsOnDeath);
             };
+
+            EventSink.Login += mobile =>
+            {
+                if (mobile is IBuffable buffable) 
+                    Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.Start);
+            };
         }
 
         public IEnumerable<IBuff> Values => m_BuffTable.Values;
 
-        public bool TryAddBuff(IBuff b)
+        private void Start()
         {
             m_Timer ??= new BuffTimer(this);
             m_Timer.Start();
+        }
+
+        public bool TryAddBuff(IBuff b)
+        {
+            Start();
 
             if (m_BuffTable.TryAdd(b.Icon, b))
             {

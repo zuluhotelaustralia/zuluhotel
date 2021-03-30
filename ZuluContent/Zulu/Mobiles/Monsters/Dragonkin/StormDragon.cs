@@ -18,7 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<StormDragon>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = stormdragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -84,7 +83,8 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 140,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Air, 100}
+                    {ElementalType.Air, 100},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

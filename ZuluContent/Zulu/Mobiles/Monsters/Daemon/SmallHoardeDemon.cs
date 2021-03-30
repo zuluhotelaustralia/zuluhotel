@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<SmallHoardeDemon>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i1,
                 // DataElementId = smallhoardedemon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -52,7 +51,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.PermMagicImmunity, 1}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

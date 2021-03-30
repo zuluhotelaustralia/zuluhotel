@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using Server;
 
 namespace Scripts.Zulu.Utilities
@@ -48,19 +49,11 @@ namespace Scripts.Zulu.Utilities
                 .ToArray();
         }
 
-        public static Stream GetBaseStream(this IGenericReader reader)
+        public static string TrimIndefiniteArticle(string value)
         {
-            var field = reader.GetType().GetField("m_File", BindingFlags.Instance | BindingFlags.NonPublic);
-
-            if (field != null)
-            {
-                var baseReader = (BinaryReader) field.GetValue(reader);
-                if (baseReader != null)
-                    return baseReader.BaseStream;
-            }
-
-            return null;
+            return Regex.Replace(value, "^[a|an] ", string.Empty);
         }
+
 
         public static Func<T, TR> GetFieldAccessor<T, TR>(string fieldName)
         {

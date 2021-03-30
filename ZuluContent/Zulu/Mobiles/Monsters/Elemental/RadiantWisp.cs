@@ -17,8 +17,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<RadiantWisp>(new CreatureProperties
             {
-                // CProp_EarthProtection = i4,
-                // CProp_NecroProtection = i8,
                 // CProp_Permmr = i8,
                 // DataElementId = radiantwisp,
                 // DataElementType = NpcTemplate,
@@ -88,7 +86,9 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.PermPoisonImmunity, 100},
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

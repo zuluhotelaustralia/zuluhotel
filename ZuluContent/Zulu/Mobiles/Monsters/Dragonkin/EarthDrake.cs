@@ -15,8 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<EarthDrake>(new CreatureProperties
             {
-                // CProp_EarthProtection = i8,
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = earthdrake,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -58,6 +56,11 @@ namespace Server.Mobiles
                 Name = "an Earth Drake",
                 PerceptionRange = 10,
                 ProvokeSkillOverride = 120,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 4}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 70},

@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using Server.Network;
-using Server.Items;
-using Server.Targeting;
+using System.Threading.Tasks;
 using Server.Mobiles;
 using Scripts.Zulu.Engines.Classes;
 using Server;
@@ -10,60 +7,29 @@ using Server.Spells;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class SummonSpiritSpell : NecromancerSpell
+    public class SummonSpiritSpell : NecromancerSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase
+        public SummonSpiritSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        
+        public async Task CastAsync()
         {
-            get { return TimeSpan.FromSeconds(4); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 120.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 100; }
-        }
-
-        public SummonSpiritSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            if (!CheckSequence()) goto Return;
-
-            var bonus = 0;
-
-            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage) bonus = 1;
-
+            var bonus = Caster.GetClassBonus(SkillName.Magery) > 1.0 ? 2 : 0;
             var amount = Utility.Dice(2, 2, bonus);
-            Type toSummon;
 
-            while (amount > 0)
+            for (var i = 0; i < amount; i++)
             {
                 var choice = Utility.Dice(1, 8, bonus);
 
-                if (choice <= 4)
-                    toSummon = typeof(Shade);
-                else if (choice <= 7)
-                    toSummon = typeof(Liche);
-                else if (choice <= 9)
-                    toSummon = typeof(LicheLord);
-                else
-                    toSummon = typeof(Dracoliche);
+                BaseCreature creature = choice switch
+                {
+                    <= 4 => new Shade(),
+                    <= 7 => new Liche(),
+                    <= 9 => new LicheLord(),
+                    _ => new Dracoliche()
+                };
 
-                var duration = TimeSpan.FromSeconds((int) Caster.Skills[DamageSkill].Value);
-                var creature = (BaseCreature) Activator.CreateInstance(toSummon);
-                SpellHelper.Summon(creature, Caster, 0x215, duration, false);
-
-                amount--;
+                SpellHelper.Summon(creature, Caster, 0x22A, null, false);
             }
-
-            Return:
-            FinishSequence();
         }
     }
 }

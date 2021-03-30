@@ -15,6 +15,7 @@ using ZuluContent.Zulu.Items;
 using static Server.Utility;
 using static Server.Engines.Magic.IElementalResistible;
 using System.Collections.Generic;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Scripts.Engines.Loot
 {
@@ -135,19 +136,9 @@ namespace Server.Scripts.Engines.Loot
                     case BaseJewel jewelry:
                         jewelry.ArmorBonusType = ArmorMod;
                         if (Charges > 0)
-                        {
-                            jewelry.Enchantments.SetChargedResist(
-                                ChargeProtectionType,
-                                Charges
-                            );
-                        }
+                            jewelry.SetChargedResist(ChargeProtectionType, Charges);
                         else
-                        {
-                            jewelry.Enchantments.SetResist(
-                                ProtectionType,
-                                GetResistForProtectionLevel(ProtectionLevel)
-                            );
-                        }
+                            jewelry.TrySetResist(ProtectionType, ProtectionLevel);
 
                         break;
                 }

@@ -1,116 +1,52 @@
 using System;
-using System.Collections;
-using Server.Network;
-using Server.Items;
-using Server.Targeting;
-using Server.Mobiles;
+using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Server;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class LicheFormSpell : NecromancerSpell
+    public class LicheFormSpell : NecromancerSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase
+        public LicheFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task CastAsync()
         {
-            get { return TimeSpan.FromSeconds(1); }
-        }
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.LichForm))
+                return;
 
-        public override double RequiredSkill
-        {
-            get { return 140.0; }
-        }
+            var casterSkill = Caster.Skills.Magery.Value;
+            var duration = casterSkill * 5;
 
-        public override int RequiredMana
-        {
-            get { return 130; }
-        }
+            var strMod = 0 - Caster.Str / 2.0;
+            var dexMod = 0 - Caster.Dex / 2.0;
+            var intMod = (double)Caster.Int;
 
-        public LicheFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            if (DisguiseTimers.IsDisguised(Caster))
+            var classBonus = Caster.GetClassBonus(SkillName.Magery);
+            if (classBonus > 1.0)
             {
-                Caster.SendLocalizedMessage(502167); //fuck off, etc.
-                goto Return;
+                duration *= classBonus;
+                strMod /= classBonus;
+                dexMod /= classBonus;
+                intMod *= classBonus;
             }
+            
+            Caster.FixedParticles(0x375B, 1, 16, 5044, EffectLayer.Waist);
+            Caster.PlaySound(0x209);
 
-            if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
+            const int bodyId = 0x18;
+            const int hueMod = 0;
+            
+            Caster.TryAddBuff(new Polymorph
             {
-                Caster.SendLocalizedMessage(1042512); //no
-                goto Return;
-            }
-
-            if (!Caster.CanBeginAction(typeof(LicheFormSpell)))
-            {
-                Caster.SendLocalizedMessage(1005559); //no
-                goto Return;
-            }
-
-            if (!CheckSequence()) goto Return;
-
-            double dexmod = Caster.RawDex / 2;
-            double strmod = Caster.RawStr / 2;
-            double intmod = Caster.RawInt * 2;
-
-            if (ZuluClass.GetClass(Caster).Type == ZuluClassType.Mage)
-            {
-                var bonus = ZuluClass.GetClass(Caster).Bonus;
-                dexmod /= bonus;
-                strmod /= bonus;
-                intmod *= bonus;
-            }
-
-            var newBody = 0x18;
-
-            //hocus pocus... SpellHelper sets its own timers, we only need to clean up after the hue and body mods --sith
-            Caster.BodyMod = newBody;
-            Caster.HueMod = 0;
-            SpellHelper.AddStatBonus(Caster, Caster, StatType.Int, (int) intmod,
-                TimeSpan.FromSeconds(Caster.Skills[DamageSkill].Value * 5));
-            SpellHelper.AddStatCurse(Caster, Caster, StatType.Dex, (int) dexmod,
-                TimeSpan.FromSeconds(Caster.Skills[DamageSkill].Value * 5));
-            SpellHelper.AddStatCurse(Caster, Caster, StatType.Str, (int) strmod,
-                TimeSpan.FromSeconds(Caster.Skills[DamageSkill].Value * 5));
-
-            Caster.PlaySound(0x202);
-
-            //polymorph calls these... do we need to? --sith
-            BaseArmor.ValidateMobile(Caster);
-            BaseClothing.ValidateMobile(Caster);
-
-            new InternalTimer(Caster).Start();
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Caster;
-
-            public InternalTimer(Mobile caster) : base(TimeSpan.FromSeconds(0))
-            {
-                m_Caster = caster;
-
-                var time = m_Caster.Skills[SkillName.SpiritSpeak].Value * 5;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Caster.EndAction(typeof(LicheFormSpell));
-                m_Caster.BodyMod = 0;
-                m_Caster.HueMod = -1;
-
-                BaseArmor.ValidateMobile(m_Caster);
-                BaseClothing.ValidateMobile(m_Caster);
-            }
+                Title = "Liche Form",
+                Description = $"<br>Str: {strMod}<br>Dex: {dexMod}<br>Int: +{intMod}",
+                Icon = BuffIcon.LichForm,
+                BodyMods = (bodyId, hueMod),
+                StatMods = (StrMod: (int)strMod, DexMod: (int)dexMod, IntMod: (int)intMod),
+                Duration = TimeSpan.FromSeconds(duration),
+            });
         }
     }
 }

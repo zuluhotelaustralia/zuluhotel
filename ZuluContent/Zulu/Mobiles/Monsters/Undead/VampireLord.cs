@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<VampireLord>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = vampirelord,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -55,7 +54,8 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 50}
+                    {ElementalType.Water, 50},
+                    {ElementalType.PermMagicImmunity, 4}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

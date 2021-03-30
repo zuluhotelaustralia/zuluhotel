@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Linq;
+using System.Threading.Tasks;
 using Scripts.Zulu.Utilities;
 using Server;
 using Server.Engines.Magic;
@@ -8,38 +10,14 @@ using Server.Items;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class SacrificeSpell : NecromancerSpell
+    public class SacrificeSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(1); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 100.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 60; }
-        }
-
         public SacrificeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void OnTargetFinished(Mobile m)
-        {
-            FinishSequence();
         }
 
         public void Target(Mobile from, Mobile m)
@@ -88,25 +66,52 @@ namespace Scripts.Zulu.Spells.Necromancy
             FinishSequence();
         }
 
-        private class InternalTarget : Target
+        public async Task OnTargetAsync(ITargetResponse<BaseCreature> response)
         {
-            private SacrificeSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(SacrificeSpell owner) : base(10, false, TargetFlags.Harmful)
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
+            
+            if (target.ControlMaster != Caster)
             {
-                m_Owner = owner;
+                Caster.SendMessage("You can only sacrifice one of yours pets");
+                return;
             }
 
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target(from, (Mobile) o);
-            }
+            const int range = 4;
+            var hp = (double)target.Hits;
+            var loc = target.Location;
+            
+            target.BoltEffect(0);
+            target.DeleteCorpseOnDeath = true;
+            target.Kill();
 
-            protected override void OnTargetFinish(Mobile from)
+            var eable = Caster.Map.GetMobilesInRange(loc, range);
+            var victims = eable.Where(m => m != Caster).ToList();
+            eable.Free();
+
+            var damage = hp / victims.Count;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref damage));
+
+            if (damage < 1)
+                damage = 1;
+
+            foreach (var mobile in victims)
             {
-                m_Owner.FinishSequence();
+                if (Caster == mobile || 
+                    !SpellHelper.ValidIndirectTarget(Caster, mobile) ||
+                    !Caster.CanBeHarmful(mobile, false) || 
+                    !Caster.InLOS(mobile))
+                {
+                    continue;
+                }
+
+                SpellHelper.Damage((int)(mobile is BaseCreature ? damage : damage / 2), mobile, Caster, this);
+
+                mobile.FixedParticles(0x36B1, 7, 16, 5021, EffectLayer.Waist);
+                mobile.PlaySound(0x207);
             }
         }
     }

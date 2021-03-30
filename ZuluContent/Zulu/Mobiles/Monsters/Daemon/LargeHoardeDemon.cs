@@ -16,9 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<LargeHoardeDemon>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i1000,
-                // CProp_EarthProtection = i6,
-                // CProp_NecroProtection = i6,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = largehoardedemon,
                 // DataElementType = NpcTemplate,
                 // Equip = behemoth,
@@ -56,7 +53,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

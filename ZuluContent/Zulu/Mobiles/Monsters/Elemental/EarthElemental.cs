@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<EarthElemental>(new CreatureProperties
             {
-                // CProp_EarthProtection = i5,
                 // DataElementId = earthelemental,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -52,8 +51,7 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.Earth, 100},
-                    {ElementalType.Air, -50}
-
+                    {ElementalType.Air, -50},
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

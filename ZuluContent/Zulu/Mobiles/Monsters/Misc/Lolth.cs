@@ -18,7 +18,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Lolth>(new CreatureProperties
             {
                 // CProp_Dark-Elf = i1,
-                // CProp_NecroProtection = i4,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
                 // CProp_Permmr = i8,
@@ -78,7 +77,8 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Air, 50},
                     {ElementalType.Fire, 100},
-                    {ElementalType.PermPoisonImmunity, 25}
+                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Necro, 100}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

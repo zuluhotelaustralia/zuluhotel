@@ -15,7 +15,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<TerathanWarrior>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i5,
                 // DataElementId = terathanwarrior,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -50,6 +49,10 @@ namespace Server.Mobiles
                 PassiveSpeed = 0.4,
                 PerceptionRange = 10,
                 ProvokeSkillOverride = 70,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 5}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Tactics, 90},

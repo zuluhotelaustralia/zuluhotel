@@ -50,7 +50,7 @@ namespace Scripts.Zulu.Spells.Earth
             {
                 Title = "Earth's Blessing Armor",
                 Icon = BuffIcon.Resilience,
-                Value = (int) (modAmount * 0.75 + 1),
+                ArmorMod = (int) (modAmount * 0.75 + 1),
                 Duration = duration
             });
         }

@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<DeathChaser>(new CreatureProperties
             {
                 // CProp_BaseHpRegen = i250,
-                // CProp_PermMagicImmunity = i5,
                 // DataElementId = deathchaser,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -84,7 +83,8 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.PermPoisonImmunity, 100},
-                    {ElementalType.Fire, 100}
+                    {ElementalType.Fire, 100},
+                    {ElementalType.PermMagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

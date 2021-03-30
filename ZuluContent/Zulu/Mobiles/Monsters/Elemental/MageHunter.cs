@@ -17,7 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<MageHunter>(new CreatureProperties
             {
                 // CProp_AttackTypeImmunities = i639,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = hiddenmagehunter,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -52,7 +51,8 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

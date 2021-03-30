@@ -22,10 +22,8 @@ namespace Server.Mobiles
                 // CProp_Dark-Elf = i1,
                 // CProp_leavecorpse = i1,
                 // CProp_looter = s1,
-                // CProp_NecroProtection = i4,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = darkelfqueen,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -84,7 +82,9 @@ namespace Server.Mobiles
                     {ElementalType.Air, 50},
                     {ElementalType.Water, 25},
                     {ElementalType.Fire, 50},
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 6}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

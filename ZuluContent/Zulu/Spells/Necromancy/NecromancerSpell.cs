@@ -8,8 +8,8 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public abstract class NecromancerSpell : Spell
     {
-        public abstract double RequiredSkill { get; }
-        public abstract int RequiredMana { get; }
+        public virtual double RequiredSkill { get; }
+        public virtual int RequiredMana { get; }
 
         public override TimeSpan GetCastDelay()
         {

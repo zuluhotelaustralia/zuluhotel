@@ -34,6 +34,7 @@ namespace Server.Spells.Sixth
             
             target.TryAddBuff(new Invisibility
             {
+                Icon = BuffIcon.Invisibility,
                 Title = "Invisible",
                 Duration = TimeSpan.FromSeconds(duration),
                 Start = DateTime.UtcNow,

@@ -1,123 +1,78 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Server;
+using Server.Engines.Magic;
 using Server.Network;
 using Server.Items;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
+using static Server.Engines.Magic.IElementalResistible;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class ControlUndeadSpell : NecromancerSpell
+    public class ControlUndeadSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(2); }
-        }
-
-        public override double RequiredSkill
-        {
-            get { return 100.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 60; }
-        }
-
         public ControlUndeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
 
-        public override void OnCast()
+        public async Task OnTargetAsync(ITargetResponse<BaseCreature> response)
         {
-            Caster.Target = new InternalTarget(this);
-        }
+            if (!response.HasValue)
+                return;
 
-        public void Target(Mobile targeted)
-        {
-            if (!Caster.CanSee(targeted))
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
+
+            if (target is BaseVendor || target.CreatureType != CreatureType.Undead || target.Summoned ||
+                target.IsInvulnerable || target.ControlMaster != null)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                // That creature cannot be tamed.
+                target.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1049655, Caster.NetState);
+                return;
             }
 
-            if (!CheckSequence()) goto Return;
-
-            if (targeted is Mobile)
+            var duration = Caster.Skills[SkillName.Magery].Value * 3.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+            
+            var resist = target.GetResist(Info.DamageType);
+            if (resist > 0)
             {
-                if (targeted is BaseCreature)
+                duration -= duration * resist * 0.25;
+                if (duration < 1)
                 {
-                    var creature = (BaseCreature) targeted;
-                    var group = creature.OppositionGroup;
-
-                    if (group != OppositionGroup.FeyAndUndead)
-                        creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1049655,
-                            Caster.NetState); // That creature cannot be tamed.
-                    else
-                        creature.SetControlMaster(Caster);
-                }
-                else
-                {
-                    Caster.SendLocalizedMessage(502469); // That being cannot be tamed. check this --sith
+                    target.PrivateOverheadMessage(
+                        MessageType.Regular,
+                        0x3B2,
+                        true,
+                        "This undead is immune to your spell!",
+                        Caster.NetState
+                    );
+                    return;
                 }
             }
-            else
-            {
-                Caster.SendLocalizedMessage(502801); // You can't tame that!
-            }
 
-            SpellHelper.Turn(Caster, targeted);
+            target.SetControlMaster(Caster);
+            target.SummonMaster = Caster;
+            target.ControlOrder = OrderType.Follow;
+            target.SpellBound = true;
 
-            // TODO: Spell graphical and sound effects.
-
-            Return:
-            FinishSequence();
+            ReleaseControlAfterDelay(target, Caster, TimeSpan.FromSeconds(duration));
         }
 
-        private class InternalTimer : Timer
+        private static async void ReleaseControlAfterDelay(BaseCreature creature, Mobile caster, TimeSpan delay)
         {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
+            await Timer.Pause(delay);
+            if (creature?.Deleted == false && creature.ControlMaster == caster)
             {
-                m_Target = target;
+                creature.ControlOrder = OrderType.Release;
+                creature.SpellBound = false;
 
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(ControlUndeadSpell));
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private ControlUndeadSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(ControlUndeadSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
+                await Timer.Pause(500);
+                creature.Attack(caster);
             }
         }
     }

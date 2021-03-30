@@ -17,12 +17,11 @@ namespace Server.Mobiles
             {
                 // CProp_BaseHpRegen = i500,
                 // CProp_BaseManaRegen = i500,
-                // CProp_EarthProtection = i4,
                 // CProp_looter = s1,
-                // CProp_NecroProtection = i3,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i7,
+
+
                 // CProp_Permmr = i6,
                 // DataElementId = undeadmenace,
                 // DataElementType = NpcTemplate,
@@ -67,7 +66,10 @@ namespace Server.Mobiles
                     {ElementalType.PermPoisonImmunity, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 50}
+                    {ElementalType.Water, 50},
+                    {ElementalType.PermMagicImmunity, 7},
+                    {ElementalType.Earth, 75},
+                    {ElementalType.Necro, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

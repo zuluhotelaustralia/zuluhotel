@@ -73,12 +73,10 @@ namespace Scripts.Zulu.Spells.Earth
         
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, icons: BuffIcon.Polymorph))
-            {
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.LichForm, BuffIcon.WraithForm))
                 return;
-            }
-            
-            if (!Caster.CanBuff(Caster, icons: BuffIcon.AnimalForm))
+
+            if (!Caster.CanBuff(Caster, false, BuffIcon.AnimalForm))
             {
                 (Caster as IBuffable)?.BuffManager.RemoveBuff<Polymorph>();
                 Caster.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
@@ -103,14 +101,16 @@ namespace Scripts.Zulu.Spells.Earth
             
             Caster.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
             Caster.PlaySound(0x209);
+
+            var statMod = (int) (SpellHelper.GetModAmount(Caster, Caster, StatType.All) * 0.75);
             
             Caster.TryAddBuff(new Polymorph
             {
                 Title = "Shapeshift",
                 Icon = BuffIcon.AnimalForm,
                 Duration = SpellHelper.GetDuration(Caster, Caster),
-                BodyMods = (bodyId, hueMod),
-                Value = (int) (SpellHelper.GetModAmount(Caster, Caster, StatType.All) * 0.75)
+                BodyMods = (body: bodyId, bodyHue: hueMod),
+                StatMods = (StrMod: statMod, DexMod: statMod, IntMod: statMod)
             });
         }
     }

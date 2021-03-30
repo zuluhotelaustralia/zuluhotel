@@ -16,7 +16,6 @@ namespace Server.Mobiles
         {
             CreatureProperties.Register<OphidianElder>(new CreatureProperties
             {
-                // CProp_PermMagicImmunity = i4,
                 // DataElementId = ophidianelder,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -80,6 +79,10 @@ namespace Server.Mobiles
                     typeof(Spells.First.WeakenSpell)
                 },
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 4}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 130},

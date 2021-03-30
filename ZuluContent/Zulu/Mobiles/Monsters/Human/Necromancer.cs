@@ -17,8 +17,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Necromancer>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_EarthProtection = i3,
-                // CProp_NecroProtection = i3,
                 // DataElementId = necromancer,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -81,7 +79,9 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 90,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.Fire, 75}
+                    {ElementalType.Fire, 75},
+                    {ElementalType.Necro, 75},
+                    {ElementalType.Earth, 75}
                 },
                 RiseCreatureDelay = TimeSpan.FromSeconds(8),
                 SaySpellMantra = true,

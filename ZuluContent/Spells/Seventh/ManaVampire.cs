@@ -31,7 +31,7 @@ namespace Server.Spells.Seventh
                 message = $"{target.Name}'s will is too strong!";
             else
             {
-                var amount = SpellHelper.TryResistDamage(Caster, target, SpellCircle.Seventh, (int)magery);
+                var amount = SpellHelper.TryResistDamage(Caster, target, Circle, (int)magery);
                 if (amount > target.Mana)
                     amount = target.Mana;
 

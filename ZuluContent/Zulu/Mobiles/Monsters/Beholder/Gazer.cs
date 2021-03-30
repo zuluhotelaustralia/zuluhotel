@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<Gazer>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_PermMagicImmunity = i2,
                 // DataElementId = gazer,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -72,6 +71,10 @@ namespace Server.Mobiles
                     typeof(Spells.First.WeakenSpell)
                 },
                 ProvokeSkillOverride = 95,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 2}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 65},

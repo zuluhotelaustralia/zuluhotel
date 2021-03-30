@@ -20,8 +20,6 @@ namespace Server.Mobiles
             {
                 // cast_pct = 80,
                 // CProp_massCastRange = i15,
-                // CProp_NecroProtection = i3,
-                // CProp_PermMagicImmunity = i3,
                 // CProp_Untameable = i1,
                 // DataElementId = archvampire,
                 // DataElementType = NpcTemplate,
@@ -90,7 +88,9 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100}
+                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Necro, 75},
+                    {ElementalType.PermMagicImmunity, 3}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

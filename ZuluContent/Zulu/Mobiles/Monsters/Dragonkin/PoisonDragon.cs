@@ -16,7 +16,6 @@ namespace Server.Mobiles
             CreatureProperties.Register<PoisonDragon>(new CreatureProperties
             {
                 // cast_pct = 40,
-                // CProp_PermMagicImmunity = i3,
                 // DataElementId = poisondragon,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -81,6 +80,10 @@ namespace Server.Mobiles
                     typeof(Spells.Sixth.MassCurseSpell)
                 },
                 ProvokeSkillOverride = 140,
+                Resistances = new Dictionary<ElementalType, CreatureProp>()
+                {
+                    {ElementalType.PermMagicImmunity, 3}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Parry, 80},

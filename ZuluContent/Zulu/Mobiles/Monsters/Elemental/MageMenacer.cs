@@ -18,11 +18,8 @@ namespace Server.Mobiles
             {
                 // alignment_0 = evil,
                 // CProp_AttackTypeImmunities = i639,
-                // CProp_EarthProtection = i8,
-                // CProp_NecroProtection = i8,
                 // CProp_noanimate = i1,
                 // CProp_NoReactiveArmour = i1,
-                // CProp_PermMagicImmunity = i8,
                 // DataElementId = hiddenmagemenacer,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -68,7 +65,10 @@ namespace Server.Mobiles
                     {ElementalType.Physical, 100},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.Water, 100}
+                    {ElementalType.Water, 100},
+                    {ElementalType.Necro, 100},
+                    {ElementalType.Earth, 100},
+                    {ElementalType.PermMagicImmunity, 8}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

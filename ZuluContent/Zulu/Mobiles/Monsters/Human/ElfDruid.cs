@@ -22,7 +22,6 @@ namespace Server.Mobiles
                 // CProp_Elf = i1,
                 // CProp_leavecorpse = i1,
                 // CProp_looter = s1,
-                // CProp_PermMagicImmunity = i6,
                 // DataElementId = elfdruid,
                 // DataElementType = NpcTemplate,
                 // dstart = 10,
@@ -71,6 +70,10 @@ namespace Server.Mobiles
                 },
                 ProvokeSkillOverride = 120,
                 SaySpellMantra = true,
+                Resistances = new Dictionary<ElementalType, CreatureProp>
+                {
+                    {ElementalType.PermMagicImmunity, 6}
+                },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {
                     {SkillName.Macing, 100},
