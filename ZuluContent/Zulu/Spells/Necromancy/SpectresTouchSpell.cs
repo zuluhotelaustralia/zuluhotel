@@ -1,87 +1,46 @@
-using System;
-using System.Collections.Generic;
-using System.Collections;
+using System.Threading.Tasks;
 using Server;
-using Server.Engines.Magic;
-using Server.Network;
-using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class SpectresTouchSpell : NecromancerSpell
+    public class SpectresTouchSpell : NecromancerSpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public override TimeSpan CastDelayBase
+        public SpectresTouchSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-            get { return TimeSpan.FromSeconds(1); }
-        }
+            if (!response.HasValue)
+                return;
 
-        public override double RequiredSkill
-        {
-            get { return 80.0; }
-        }
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            SpellHelper.Turn(Caster, point);
 
-        public override int RequiredMana
-        {
-            get { return 40; }
-        }
+            var range = Caster.Skills.Magery.Value / 30.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
 
-        public SpectresTouchSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+            var eable = Caster.Map.GetMobilesInRange(point, (int) range);
 
-        public override void OnCast()
-        {
-            if (!CheckSequence()) goto Return;
-
-            var targets = new List<Mobile>();
-            var map = Caster.Map;
-            if (map != null)
-                foreach (var m in Caster.GetMobilesInRange(1 + (int) (Caster.Skills[CastSkill].Value / 15.0)))
-                    if (Caster != m &&
-                        SpellHelper.ValidIndirectTarget(Caster, m) &&
-                        Caster.CanBeHarmful(m, false) &&
-                        Caster.InLOS(m)
-                    )
-                        targets.Add(m);
-
-            double dmg = Utility.Dice(3, 5, (int) (Caster.Skills[DamageSkill].Value / 4.0)); //avg 41 or so
-
-            Caster.PlaySound(0x1F1);
-            foreach (var m in targets)
+            foreach (var mobile in eable)
             {
-                Caster.DoHarmful(m);
-                //m.Damage( (int)dmg, Caster, m_DamageType );
-                SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
-                m.FixedParticles(0x374A, 10, 15, 5013, EffectLayer.Waist);
-                m.PlaySound(0x1f2);
+                if (Caster == mobile || 
+                    !SpellHelper.ValidIndirectTarget(Caster, mobile) ||
+                    !Caster.CanBeHarmful(mobile, false) || 
+                    !Caster.InLOS(mobile))
+                {
+                    continue;
+                }
+
+                var damage = SpellHelper.CalcSpellDamage(Caster, mobile, this, true);
+                
+                SpellHelper.Damage(damage, mobile, Caster, this);
+                mobile.FixedParticles(0x37C4, 10, 15, 5013, EffectLayer.Waist);
+                mobile.PlaySound(0x1F1);
             }
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private Mobile m_Target;
-
-            public InternalTimer(Mobile target, Mobile caster) : base(TimeSpan.FromSeconds(0))
-            {
-                m_Target = target;
-
-                // TODO: Compute a reasonable duration, this is stolen from ArchProtection
-                var time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
-            }
-
-            protected override void OnTick()
-            {
-                m_Target.EndAction(typeof(SpectresTouchSpell));
-            }
+            
+            eable.Free();
         }
     }
 }

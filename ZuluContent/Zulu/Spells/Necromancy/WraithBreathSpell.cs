@@ -1,65 +1,49 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Server;
-using Server.Network;
-using Server.Items;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class WraithBreathSpell : NecromancerSpell
+    public class WraithBreathSpell : NecromancerSpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public override TimeSpan CastDelayBase
+        public WraithBreathSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {
-            get { return TimeSpan.FromSeconds(1); }
-        }
+            if (!response.HasValue)
+                return;
 
-        public override double RequiredSkill
-        {
-            get { return 100.0; }
-        }
+            var point = SpellHelper.GetSurfaceTop(response.Target);
+            SpellHelper.Turn(Caster, point);
+            
+            var magery = Caster.Skills.Magery.Value;
+            var range = magery / 30.0;
+            var durationSeconds = 15.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref durationSeconds));
 
-        public override int RequiredMana
-        {
-            get { return 60; }
-        }
-
-        public WraithBreathSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            if (!CheckSequence()) goto Return;
-
-            var targets = new List<Mobile>();
-            var map = Caster.Map;
-            var duration = 10.0 + Caster.Skills[DamageSkill].Value * 0.2;
-
-            if (map != null)
-                foreach (var m in Caster.GetMobilesInRange(1 + (int) (Caster.Skills[CastSkill].Value / 15.0)))
-                    if (Caster != m &&
-                        SpellHelper.ValidIndirectTarget(Caster, m) &&
-                        Caster.CanBeHarmful(m, false)
-                        && Caster.InLOS(m) &&
-                        !m.Paralyzed &&
-                        !m.Frozen)
-                    {
-                        Caster.DoHarmful(m);
-
-                        if (CheckResisted(m)) duration *= 0.5;
-
-                        m.FixedEffect(0x376A, 6, 1);
-                        m.PlaySound(0x204);
-                        m.Paralyze(TimeSpan.FromSeconds(duration));
-                    }
-
-            Caster.PlaySound(0x204);
-
-            Return:
-            FinishSequence();
+            var duration = TimeSpan.FromSeconds(durationSeconds);
+            
+            var eable = Caster.Map.GetMobilesInRange(point, (int) range);
+            foreach (var mobile in eable)
+            {
+                if (Caster == mobile || 
+                    !SpellHelper.ValidIndirectTarget(Caster, mobile) ||
+                    !Caster.CanBeHarmful(mobile, false) || 
+                    !Caster.InLOS(mobile))
+                {
+                    continue;
+                }
+                
+                mobile.Paralyze(duration);
+                Caster.DoHarmful(mobile, true);
+                mobile.FixedParticles(0x374B, 7, 16, 5013, EffectLayer.Waist);
+                mobile.PlaySound(0x1F9);
+            }
+            eable.Free();
         }
     }
 }

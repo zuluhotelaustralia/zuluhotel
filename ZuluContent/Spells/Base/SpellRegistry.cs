@@ -2372,7 +2372,7 @@ namespace Server.Spells
                     LeftHandEffect = 9002,
                     RightHandEffect = 9002,
                     Circle = SpellCircle.Necro,
-                    DamageType = ElementalType.None,
+                    DamageType = ElementalType.Necro,
                     ReagentCosts = new Dictionary<Type, int>
                     {
                         [Reagent.EyeOfNewt] = 1,
@@ -2385,7 +2385,7 @@ namespace Server.Spells
                         CheckLos = true,
                         Range = SpellInfo.DefaultSpellRange,
                         AllowGround = false,
-                        Flags = TargetFlags.Harmful
+                        Flags = TargetFlags.None
                     }
                 }
             );

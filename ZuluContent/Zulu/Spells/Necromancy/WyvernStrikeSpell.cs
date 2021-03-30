@@ -1,115 +1,48 @@
 using System;
-using System.Collections;
+using System.Threading.Tasks;
 using Server;
-using Server.Engines.Magic;
-using Server.Network;
-using Server.Items;
 using Server.Targeting;
-using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class WyvernStrikeSpell : NecromancerSpell
+    public class WyvernStrikeSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase
-        {
-            get { return TimeSpan.FromSeconds(2); }
-        }
+        public WyvernStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
-        public override double RequiredSkill
+        public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
-            get { return 120.0; }
-        }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
 
-        public override int RequiredMana
-        {
-            get { return 100; }
-        }
 
-        public WyvernStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            var magery = Caster.Skills.Magery.Value;
+            var plvl = magery / 40.0 + 1.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref plvl));
+            var max = 4.0;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref max));
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
+            plvl = SpellHelper.TryResistDamage(Caster, target, Circle, (int)plvl);
 
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            if (plvl > max)
+                plvl = max;
+
+            var protection = target.GetResist(Info.DamageType);
+            if (protection > 0)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
+                plvl -= (int) (plvl * protection);
+                if (plvl < 1)
+                    plvl = 0;
             }
 
-            if (!CheckSequence()) goto Return;
-
-            SpellHelper.Turn(Caster, m);
-
-            m.FixedParticles(0x3709, 10, 15, 5021, EffectLayer.Waist);
-            m.PlaySound(0x1e2);
-
-            Caster.DoHarmful(m);
-
-            var level = 0;
-            var pStr = Caster.Skills[CastSkill].Value;
-
-            if (pStr > 100)
-                level = 1;
-            else if (pStr > 110)
-                level = 2;
-            else if (pStr > 130)
-                level = 3;
-            else if (pStr > 140)
-                level = 4;
-            else
-                level = 0;
-
-            var ss = Caster.Skills[DamageSkill].Value;
-            var bonus = (int) ss / 4;
-
-            var dmg = (double) Utility.Dice(3, 5, bonus);
-            dmg /= 2; //necessary?
-
-            //sith: change this, see issue tracker on gitlab
-            if (CheckResisted(m))
-            {
-                dmg *= 0.75;
-
-                m.SendLocalizedMessage(501783); // You feel yourself resisting magical energy.
-            }
-
-            //m.Damage((int)dmg, m, ElementalType.Necro);
-            SpellHelper.Damage((int) dmg, m, Caster, this, TimeSpan.Zero);
-            m.ApplyPoison(Caster, Poison.GetPoison(level));
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTarget : Target
-        {
-            private WyvernStrikeSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(WyvernStrikeSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile mobile)
-                    m_Owner.Target(mobile);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
+            SpellHelper.Damage(damage, target, Caster, this);
+            if (plvl > 0) 
+                target.ApplyPoison(Caster, Poison.GetPoison(Math.Min((int) plvl, Poison.Poisons.Count - 1)));
         }
     }
 }

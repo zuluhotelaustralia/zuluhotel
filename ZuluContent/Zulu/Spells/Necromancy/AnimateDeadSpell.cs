@@ -14,8 +14,10 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class AnimateDeadSpell : NecromancerSpell, ITargetableAsyncSpell<Corpse>
     {
-        public AnimateDeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-        
+        public AnimateDeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        {
+        }
+
         public async Task OnTargetAsync(ITargetResponse<Corpse> response)
         {
             if (!response.HasValue)
@@ -23,7 +25,7 @@ namespace Scripts.Zulu.Spells.Necromancy
                 Caster.SendFailureMessage(1061084); // You cannot animate that.
                 return;
             }
-            
+
             var target = response.Target;
             SpellHelper.Turn(Caster, target);
 
@@ -32,14 +34,15 @@ namespace Scripts.Zulu.Spells.Necromancy
             var power = magery - 20.0;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref power));
-            
-            
-            if (target.Animated || target.IsBones || !(target.Owner is BaseCreature creature) || power < 1)
+
+
+            if (target.Animated || target.IsBones || !(target.Owner is BaseCreature creature) ||
+                creature is BaseVendor || creature.IsInvulnerable || power < 1)
             {
                 Caster.SendFailureMessage(1061084); // There's not enough life force there to animate.
                 return;
             }
-            
+
             if (power > 95)
                 power = 95;
 
@@ -63,9 +66,9 @@ namespace Scripts.Zulu.Spells.Necromancy
                     return;
                 }
             }
-            
+
             Effects.SendLocationParticles(
-                EffectItem.Create(target.Location, target.Map, EffectItem.DefaultDuration), 
+                EffectItem.Create(target.Location, target.Map, EffectItem.DefaultDuration),
                 0x37BA, 7, 0xa, 0, 3, 9907, 0
             );
 
@@ -73,11 +76,11 @@ namespace Scripts.Zulu.Spells.Necromancy
             {
                 var location = SpellHelper.GetSurfaceTop(target.Location);
                 target.Delete();
-                
+
                 // ReSharper disable once ForCanBeConvertedToForeach
                 for (var i = 0; i < summoned.Skills.Length; i++)
                 {
-                    summoned.Skills[i].BaseFixedPoint = (int)(summoned.Skills[i].BaseFixedPoint * power / 10.0);
+                    summoned.Skills[i].BaseFixedPoint = (int) (summoned.Skills[i].BaseFixedPoint * power / 10.0);
                 }
 
                 summoned.CreatureType = CreatureType.Undead;
@@ -88,15 +91,15 @@ namespace Scripts.Zulu.Spells.Necromancy
                 {
                     summoned.Hue = 1154;
                     summoned.SpellBound = true;
-                
-                    summoned.RawStr = (int)(summoned.RawStr * power / 100);
-                    summoned.RawInt = (int)(summoned.RawInt * power / 100);
-                    summoned.RawDex = (int)(summoned.RawDex * power / 100);
+
+                    summoned.RawStr = (int) (summoned.RawStr * power / 100);
+                    summoned.RawInt = (int) (summoned.RawInt * power / 100);
+                    summoned.RawDex = (int) (summoned.RawDex * power / 100);
 
                     summoned.Hits = summoned.HitsMax;
                     summoned.Mana = summoned.ManaMax;
                     summoned.Stam = summoned.StamMax;
-                    
+
                     summoned.Location = location;
                 }
             }

@@ -20,15 +20,15 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
         [IgnoreMember] public BuffIcon Icon { get; init; } = BuffIcon.Polymorph;
         [IgnoreMember] public string Title { get; init; } = "Polymorph";
-        [IgnoreMember] public string Description { get; init; }
+        [IgnoreMember] public virtual string Description { get; init; }
 
         [IgnoreMember] public string[] Details { get; init; }
         [IgnoreMember] public bool ExpireOnDeath { get; init; } = true;
         [IgnoreMember] public bool Dispellable { get; init; } = true;
-        [IgnoreMember] public TimeSpan Duration { get; init; } = TimeSpan.Zero;
-        [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
+        [IgnoreMember] public virtual TimeSpan Duration { get; init; } = TimeSpan.Zero;
+        [IgnoreMember] public virtual DateTime Start { get; init; } = DateTime.UtcNow;
 
-        public void OnBuffAdded(Mobile parent)
+        public virtual void OnBuffAdded(Mobile parent)
         {
             (parent as IEnchanted)?.Enchantments.Set(this);
             
@@ -51,7 +51,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             BaseClothing.ValidateMobile(parent);
         }
 
-        public void OnBuffRemoved(Mobile parent)
+        public virtual void OnBuffRemoved(Mobile parent)
         {
             (parent as IEnchanted)?.Enchantments.Remove(this);
             

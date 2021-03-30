@@ -73,12 +73,10 @@ namespace Scripts.Zulu.Spells.Earth
         
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, icons: BuffIcon.Polymorph))
-            {
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.LichForm, BuffIcon.WraithForm))
                 return;
-            }
-            
-            if (!Caster.CanBuff(Caster, icons: BuffIcon.AnimalForm))
+
+            if (!Caster.CanBuff(Caster, false, BuffIcon.AnimalForm))
             {
                 (Caster as IBuffable)?.BuffManager.RemoveBuff<Polymorph>();
                 Caster.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);

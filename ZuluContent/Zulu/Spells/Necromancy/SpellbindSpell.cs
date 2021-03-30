@@ -1,141 +1,138 @@
 using System;
-using System.Collections;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server;
 using Server.Network;
-using Server.Items;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic;
 
-// note that there is basically a blacklist of certain creatures that cannot be spellbound, no doubt giant monsters like balrogs or something
 namespace Scripts.Zulu.Spells.Necromancy
 {
-    public class SpellbindSpell : NecromancerSpell
+    public class SpellbindSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public override TimeSpan CastDelayBase
+        public SpellbindSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+
+        public async Task OnTargetAsync(ITargetResponse<BaseCreature> response)
         {
-            get { return TimeSpan.FromSeconds(3); }
+            if (!response.HasValue)
+                return;
+            
+            var target = response.Target;
+            SpellHelper.Turn(Caster, target);
+            
+            if (!target.Tamable || target.IsInvulnerable || target is BaseVendor)
+            {
+                // That creature cannot be tamed.
+                target.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1049655, Caster.NetState);
+                return;
+            }
+            
+            var difficulty = target.MinTameSkill;
+
+            difficulty = target.Str / 2.0;
+            if (target.Int / 2.0 > difficulty) 
+                difficulty = target.Int / 2.0;
+
+            if (target.Dex / 2.0 > difficulty) 
+                difficulty = target.Dex / 2.0;
+
+            var magery = Caster.Skills.Magery.Value;
+            Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref magery));
+
+            var victimResist = target.Skills.MagicResist.Value;
+            var duration = magery - victimResist / 2.0;
+            
+            var resist = target.GetResist(Info.DamageType);
+            if (resist > 0)
+            {
+                duration -= duration * resist * 0.25;
+                if (duration <= 0 || resist >= 100)
+                    return;
+            }
+
+            if (magery < difficulty)
+            {
+                target.PrivateOverheadMessage(
+                    MessageType.Regular,
+                    0x3B2,
+                    true,
+                    "The creature's will is too strong!",
+                    Caster.NetState
+                );
+                Caster.DoHarmful(target);
+                return;
+            }
+
+            if (target.Controlled)
+            {
+                if (target.ControlMaster == Caster)
+                {
+                    Caster.SendFailureMessage("This creature is already under your control");
+                    return;
+                }
+
+                if (target.ControlMaster is {} owner)
+                {
+                    var ownerTaming = owner.Skills.AnimalTaming.Value;
+                    var ownerMagery = owner.Skills.Magery.Value;
+
+                    if (owner.GetClassBonus(SkillName.AnimalTaming) > 1.0)
+                        ownerTaming *= owner.GetClassBonus(SkillName.AnimalTaming);
+
+                    if (owner.GetClassBonus(SkillName.Magery) > 1.0)
+                        ownerMagery *= owner.GetClassBonus(SkillName.Magery);
+
+                    if (ownerTaming > magery || ownerMagery > magery)
+                    {
+                        Caster.SendFailureMessage("The control of the owner over their pet is stronger than your spell!");
+                        owner.SendMessage($"{Caster.Name} tried to take control of {target.Name}!");
+                        Caster.DoHarmful(target);
+                        return;
+                    }
+                }
+            }
+            
+            target.PrivateOverheadMessage(
+                MessageType.Regular,
+                0x3B2,
+                true,
+                $"You successfully take control of {target.Name}'s mind.",
+                Caster.NetState
+            );
+            
+            target.SetControlMaster(Caster);
+            target.ControlOrder = OrderType.Follow;
+            target.SpellBound = true;
+
+            duration = 10.0;
+            ReleaseControlAfterDelay(target, Caster, TimeSpan.FromSeconds(duration));
         }
 
-        public override double RequiredSkill
+        private static async void ReleaseControlAfterDelay(BaseCreature creature, Mobile caster, TimeSpan delay)
         {
-            get { return 140.0; }
-        }
-
-        public override int RequiredMana
-        {
-            get { return 130; }
-        }
-
-        public SpellbindSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
-
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
-
-        public void Target(Mobile m)
-        {
-            if (!Caster.CanSee(m))
+            await Timer.Pause(delay);
+            if (creature?.Deleted == false && creature.ControlMaster == caster)
             {
-                // Seems like this should be responsibility of the targetting system.  --daleron
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-                goto Return;
-            }
+                creature.ControlOrder = OrderType.Release;
+                creature.SpellBound = false;
+                
+                if (creature is BaseMount {Rider: { }} mount) 
+                    mount.Rider = null;
 
-            if (!CheckSequence()) goto Return;
+                var magery = caster.Skills.Magery.Value;
+                caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref magery));
+                var evalInt = caster.Skills.EvalInt.Value;
+                caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref evalInt));
 
-            if (!m.BeginAction(typeof(SpellbindSpell))) goto Return;
-
-            var c = m as BaseCreature;
-
-            if (c == null)
-            {
-                Caster.SendLocalizedMessage(502801); // u cannae tame tha', Harry.
-                goto Return;
-            }
-
-            if (!c.Tamable)
-            {
-                c.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1049655, Caster.NetState); //that cannot be tamed
-                goto Return;
-            }
-
-            if (c.Controlled)
-            {
-                c.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502804, Caster.NetState); //that looks tame already
-                goto Return;
-            }
-
-            SpellHelper.Turn(Caster, m);
-
-            // target's difficulty is the higher of their str/dex/int scores divided by 2, scaled by their magicresist skill in some way
-            var tdiff = 0.5 * Math.Max(m.Str, Math.Max(m.Dex, m.Int)) / 2.0 +
-                        0.5 * m.Skills[SkillName.MagicResist].Value;
-
-            // caster's power is determined by Magery in zhf, should probably be spirit speak aka DamageSkill
-            // if any of you are medically-inclined, yes I called it cdiff on purpose... "shitty" pun ;)
-            var cdiff = Caster.Skills[DamageSkill].Value;
-
-            if (cdiff < tdiff)
-            {
-                DoFizzle();
-                goto Return;
-            }
-
-            m.PlaySound(0x20d);
-            m.FixedParticles(0x37b9, 10, 30, 5052, EffectLayer.Waist); //hopefully this works --sith
-
-            c.Owners.Add(Caster);
-            c.SetControlMaster(Caster);
-
-            var duration = cdiff - m.Skills[SkillName.MagicResist].Value * 0.5;
-
-            new InternalTimer(c, (int) duration).Start();
-
-            Return:
-            FinishSequence();
-        }
-
-        private class InternalTimer : Timer
-        {
-            private BaseCreature m_Creature;
-
-            public InternalTimer(BaseCreature target, int duration) : base(TimeSpan.FromSeconds(0))
-            {
-                Delay = TimeSpan.FromSeconds(duration);
-                Priority = TimerPriority.OneSecond;
-
-                m_Creature = target;
-            }
-
-            protected override void OnTick()
-            {
-                m_Creature.SetControlMaster(null); //see BaseCreature
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private SpellbindSpell m_Owner;
-
-            // TODO: What is thie Core.ML stuff, is it needed?
-            public InternalTarget(SpellbindSpell owner) : base(12, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                if (o is Mobile)
-                    m_Owner.Target((Mobile) o);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
+                if (creature.Int > magery / 2 + 15 && 
+                    (creature.Int > magery + 20 || Utility.RandomMinMax(1, 100) <= (creature.Int - evalInt) / 2))
+                {
+                    await Timer.Pause(500);
+                    creature.Attack(caster);
+                }
             }
         }
     }

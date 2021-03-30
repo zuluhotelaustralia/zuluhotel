@@ -15,17 +15,20 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class ControlUndeadSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public ControlUndeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
-        
+        public ControlUndeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        {
+        }
+
         public async Task OnTargetAsync(ITargetResponse<BaseCreature> response)
         {
             if (!response.HasValue)
                 return;
-            
+
             var target = response.Target;
             SpellHelper.Turn(Caster, target);
 
-            if (target.CreatureType != CreatureType.Undead || target.Summoned || target.ControlMaster != null)
+            if (target is BaseVendor || target.CreatureType != CreatureType.Undead || target.Summoned ||
+                target.IsInvulnerable || target.ControlMaster != null)
             {
                 // That creature cannot be tamed.
                 target.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 1049655, Caster.NetState);
@@ -34,18 +37,18 @@ namespace Scripts.Zulu.Spells.Necromancy
 
             var duration = Caster.Skills[SkillName.Magery].Value * 3.0;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
-            var resist = target.GetResist(Info.DamageType);
             
+            var resist = target.GetResist(Info.DamageType);
             if (resist > 0)
             {
                 duration -= duration * resist * 0.25;
-                if(duration < 1)
+                if (duration < 1)
                 {
                     target.PrivateOverheadMessage(
-                        MessageType.Regular, 
-                        0x3B2, 
-                        true, 
-                        "This undead is immune to your spell!", 
+                        MessageType.Regular,
+                        0x3B2,
+                        true,
+                        "This undead is immune to your spell!",
                         Caster.NetState
                     );
                     return;
@@ -56,7 +59,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             target.SummonMaster = Caster;
             target.ControlOrder = OrderType.Follow;
             target.SpellBound = true;
-            
+
             ReleaseControlAfterDelay(target, Caster, TimeSpan.FromSeconds(duration));
         }
 
