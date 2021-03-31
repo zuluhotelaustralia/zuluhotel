@@ -21,7 +21,7 @@ namespace Server.Spells.First
             ("a peach", () => new Peach())
         };
 
-        public CreateFoodSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public CreateFoodSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task CastAsync()
         {

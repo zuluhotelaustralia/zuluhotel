@@ -32,7 +32,7 @@ namespace Server.Spells
         private bool m_SpellStrike;
         private long m_StartCastTime;
 
-        public Spell(Mobile caster, Item spellItem, bool spellStrike = false)
+        public Spell(Mobile caster, Item spellItem = null, bool spellStrike = false)
         {
             Caster = caster;
             SpellItem = spellItem;

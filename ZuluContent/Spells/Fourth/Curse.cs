@@ -6,7 +6,7 @@ namespace Server.Spells.Fourth
 {
     public class CurseSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public CurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public CurseSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

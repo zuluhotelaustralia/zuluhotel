@@ -13,7 +13,7 @@ namespace Server.Spells.Eighth
     {
         public override bool DelayedDamage { get; } = true;
 
-        public EarthquakeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public EarthquakeSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

@@ -9,7 +9,7 @@ namespace Server.Spells.Fourth
 {
     public class ArchProtectionSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public ArchProtectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ArchProtectionSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

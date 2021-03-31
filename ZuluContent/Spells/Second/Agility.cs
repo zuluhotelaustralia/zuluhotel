@@ -7,7 +7,7 @@ namespace Server.Spells.Second
 {
     public class AgilitySpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public AgilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public AgilitySpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

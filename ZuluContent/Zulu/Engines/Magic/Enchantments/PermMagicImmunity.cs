@@ -15,12 +15,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
 
         [Key(1)] 
-        public int Value { get; set; } = 0;
+        public SpellCircle Value { get; set; } = 0;
 
         public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
             ref int damage)
         {
-            var protectionLevelFromCircle = GetProtectionLevelForResist(Value);
 
             if (Cursed > CurseType.None)
             {
@@ -28,11 +27,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 return;
             }
 
-            if ((int) protectionLevelFromCircle >= (int) spell.Circle)
+            if (Value >= spell.Circle)
             {
                 damage = 0;
-                NotifyMobile(defender, attacker.Name + "'s spell is absorbed by your magical protection!");
-                NotifyMobile(defender, attacker, "The spell dissipates upon contact with " + defender.Name + "'s magical barrier!");
+                NotifyMobile(defender, $"{attacker.Name}'s spell is absorbed by your magical protection!");
+                NotifyMobile(defender, attacker, $"The spell dissipates upon contact with {defender.Name}'s magical barrier!");
             }
         }
         
@@ -49,8 +48,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public override string Description { get; protected set; } = "Permanent Magic Immunity";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
-        public override int Hue { get; protected set; } = 0;
-        public override int CursedHue { get; protected set; } = 0;
+        public override int Hue { get; protected set; } = 802;
+        public override int CursedHue { get; protected set; } = 802;
 
         public override string[,] Names { get; protected set; } = {
             {string.Empty, string.Empty},

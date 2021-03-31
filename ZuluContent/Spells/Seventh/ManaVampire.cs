@@ -7,7 +7,7 @@ namespace Server.Spells.Seventh
 {
     public class ManaVampireSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ManaVampireSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ManaVampireSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

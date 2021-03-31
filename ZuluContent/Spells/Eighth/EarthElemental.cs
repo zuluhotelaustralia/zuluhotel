@@ -5,7 +5,7 @@ namespace Server.Spells.Eighth
 {
     public class EarthElementalSpell : MagerySpell, IAsyncSpell
     {
-        public EarthElementalSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public EarthElementalSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

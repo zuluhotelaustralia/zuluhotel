@@ -4,6 +4,7 @@ using Server.Mobiles;
 using Server.Engines.Craft;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Engines.Magic;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -172,7 +173,7 @@ namespace Server.Items
         public Poison Poison
         {
             get => Enchantments.Get((PoisonHit e) => e.Poison);
-            set => Enchantments.Set((PoisonHit e) => e.Level = value.Level);
+            set => Enchantments.Set((PoisonHit e) => e.Level = (PoisonLevel)value.Level);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

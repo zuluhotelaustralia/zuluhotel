@@ -36,7 +36,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public class SlayerHitInfo : EnchantmentInfo
     {
-        private static readonly SlayerHitInfo DefaultVariant = new SlayerHitInfo();
+        private static readonly SlayerHitInfo DefaultVariant = new();
 
         public override string Description { get; protected set; } = "Creature Slayer";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
@@ -58,37 +58,37 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [CreatureType.Gargoyle] = DefaultVariant,
                 [CreatureType.Giantkin] = DefaultVariant,
                 [CreatureType.Daemon] = DefaultVariant,
-                [CreatureType.Animal] = new SlayerHitInfo
+                [CreatureType.Animal] = new()
                 {
                     Hue = 871,
                     CursedHue = 867
                 },
-                [CreatureType.Orc] = new SlayerHitInfo
+                [CreatureType.Orc] = new()
                 {
                     Hue = 845,
                     CursedHue = 842
                 },
-                [CreatureType.Troll] = new SlayerHitInfo
+                [CreatureType.Troll] = new()
                 {
                     Hue = 816,
                     CursedHue = 812
                 },
-                [CreatureType.Elemental] = new SlayerHitInfo
+                [CreatureType.Elemental] = new()
                 {
                     Hue = 901,
                     CursedHue = 897
                 },
-                [CreatureType.Undead] = new SlayerHitInfo
+                [CreatureType.Undead] = new()
                 {
                     Hue = 856,
                     CursedHue = 852
                 },
-                [CreatureType.Dragonkin] = new SlayerHitInfo
+                [CreatureType.Dragonkin] = new()
                 {
                     Hue = 641,
                     CursedHue = 631
                 },
-                [CreatureType.Human] = new SlayerHitInfo
+                [CreatureType.Human] = new()
                 {
                     Hue = 1002,
                     CursedHue = 1020

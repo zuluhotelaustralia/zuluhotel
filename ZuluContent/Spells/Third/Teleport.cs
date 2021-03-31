@@ -11,7 +11,7 @@ namespace Server.Spells.Third
 {
     public class TeleportSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public TeleportSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public TeleportSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

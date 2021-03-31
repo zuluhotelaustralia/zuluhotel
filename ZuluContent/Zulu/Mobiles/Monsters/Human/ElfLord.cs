@@ -81,7 +81,7 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Air, 50},
                     {ElementalType.Water, 50},
-                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Poison, 6},
                     {ElementalType.Earth, 100},
                     {ElementalType.PermMagicImmunity, 6}
                 },

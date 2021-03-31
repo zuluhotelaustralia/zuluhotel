@@ -5,7 +5,7 @@ namespace Server.Spells.Sixth
 {
     public class RevealSpell : MagerySpell, IAsyncSpell
     {
-        public RevealSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public RevealSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

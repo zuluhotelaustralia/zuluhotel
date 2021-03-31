@@ -7,7 +7,7 @@ namespace Server.Spells.First
 {
     public class WeakenSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public WeakenSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public WeakenSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

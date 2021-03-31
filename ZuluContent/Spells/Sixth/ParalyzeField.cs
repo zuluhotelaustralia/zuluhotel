@@ -8,7 +8,7 @@ namespace Server.Spells.Sixth
 {
     public class ParalyzeFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public ParalyzeFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ParalyzeFieldSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

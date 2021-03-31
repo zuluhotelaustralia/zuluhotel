@@ -9,7 +9,7 @@ namespace Server.Spells.Third
 {
     public class MagicLockSpell : MagerySpell, ITargetableAsyncSpell<ILockpickable>
     {
-        public MagicLockSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MagicLockSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<ILockpickable> response)
         {

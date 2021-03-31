@@ -7,7 +7,7 @@ namespace Server.Spells.Third
 {
     public class PoisonSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public PoisonSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public PoisonSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

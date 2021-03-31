@@ -7,7 +7,7 @@ namespace Server.Spells.Sixth
 {
     public class MarkSpell : MagerySpell, ITargetableAsyncSpell<RecallRune>
     {
-        public MarkSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MarkSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<RecallRune> response)
         {

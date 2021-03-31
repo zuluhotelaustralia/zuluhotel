@@ -9,7 +9,7 @@ namespace Server.Spells.First
 {
     public class ClumsySpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ClumsySpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ClumsySpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

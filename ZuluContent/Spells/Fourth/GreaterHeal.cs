@@ -9,7 +9,7 @@ namespace Server.Spells.Fourth
 {
     public class GreaterHealSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public GreaterHealSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public GreaterHealSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

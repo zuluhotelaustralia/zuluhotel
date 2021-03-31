@@ -29,7 +29,7 @@ namespace Server.Spells.Fifth
             typeof(Rabbit)
         };
 
-        public SummonCreatureSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public SummonCreatureSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task CastAsync()
         {

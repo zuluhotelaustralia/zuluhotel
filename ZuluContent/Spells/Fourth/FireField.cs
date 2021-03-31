@@ -14,7 +14,7 @@ namespace Server.Spells.Fourth
 {
     public class FireFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public FireFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public FireFieldSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

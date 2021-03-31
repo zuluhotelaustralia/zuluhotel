@@ -1,5 +1,6 @@
 using MessagePack;
 using Server;
+using Server.Engines.Magic;
 using Server.Items;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -12,9 +13,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName => EnchantmentInfo.GetName(Level > 0 ? 1 : 0, Cursed);
 
         [IgnoreMember]
-        public Poison Poison => Poison.GetPoison(Level);
+        public Poison Poison => Poison.GetPoison((int)Level);
 
-        [Key(1)] public int Level { get; set; } = 0;
+        [Key(1)] public PoisonLevel Level { get; set; } = 0;
         
         [Key(2)] public int Charges { get; set; } = 0;
         

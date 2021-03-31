@@ -8,7 +8,7 @@ namespace Server.Spells.Sixth
 {
     public class MassCurseSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public MassCurseSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MassCurseSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

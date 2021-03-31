@@ -7,7 +7,7 @@ namespace Server.Spells.Fifth
 {
     public class DispelFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public DispelFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public DispelFieldSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

@@ -11,7 +11,7 @@ namespace Server.Spells.First
 
         public override bool DelayedDamage => true;
         
-        public MagicArrowSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MagicArrowSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

@@ -7,7 +7,7 @@ namespace Server.Spells.Second
 {
     public class StrengthSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public StrengthSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public StrengthSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

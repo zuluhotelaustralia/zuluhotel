@@ -444,7 +444,7 @@ namespace Server.Scripts.Engines.Loot
         {
             var roll = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
 
-            SpellCircle circle = roll switch
+            var circle = roll switch
             {
                 < 50 => SpellCircle.First,
                 < 100 => SpellCircle.Second,
@@ -640,13 +640,13 @@ namespace Server.Scripts.Engines.Loot
             switch (Utility.Random(1, 3))
             {
                 case 1:
-                    element = ElementalType.PermPoisonImmunity;
+                    element = ElementalType.Poison;
                     break;
                 case 2:
                     element = ElementalType.PermMagicImmunity;
                     break;
                 default:
-                    element = ElementalType.PermSpellReflect;
+                    element = ElementalType.PermMagicReflection;
                     break;
             }
 

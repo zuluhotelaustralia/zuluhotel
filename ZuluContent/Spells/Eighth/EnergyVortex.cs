@@ -8,7 +8,7 @@ namespace Server.Spells.Eighth
 {
     public class EnergyVortexSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public EnergyVortexSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public EnergyVortexSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

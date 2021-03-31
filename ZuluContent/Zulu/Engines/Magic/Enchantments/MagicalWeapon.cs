@@ -31,9 +31,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
     public class MagicalWeaponInfo : EnchantmentInfo
     {
-        private static readonly MagicalWeaponInfo SwiftInfo = new MagicalWeaponInfo { Hue = 621 };
-        private static readonly MagicalWeaponInfo StygianInfo = new MagicalWeaponInfo { Hue = 1174 };
-        private static readonly MagicalWeaponInfo MysticalInfo = new MagicalWeaponInfo { Hue = 6 };
+        private static readonly MagicalWeaponInfo SwiftInfo = new() { Hue = 621 };
+        private static readonly MagicalWeaponInfo StygianInfo = new() { Hue = 1174 };
+        private static readonly MagicalWeaponInfo MysticalInfo = new() { Hue = 6 };
 
         public override string Description { get; protected set; } = "Magical Weapon Type";
         public override EnchantNameType Place { get; protected set; } = EnchantNameType.Prefix;

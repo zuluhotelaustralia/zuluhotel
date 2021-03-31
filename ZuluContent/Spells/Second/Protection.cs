@@ -8,7 +8,7 @@ namespace Server.Spells.Second
 {
     public class ProtectionSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ProtectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ProtectionSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

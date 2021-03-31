@@ -6,7 +6,7 @@ namespace Server.Spells.Eighth
 {
     public class SummonDaemonSpell : MagerySpell, IAsyncSpell
     {
-        public SummonDaemonSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public SummonDaemonSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

@@ -51,7 +51,7 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Poison, 1},
                     {ElementalType.PermMagicImmunity, 1}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>

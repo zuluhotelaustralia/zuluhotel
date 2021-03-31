@@ -6,7 +6,7 @@ namespace Server.Spells.Eighth
 {
     public class WaterElementalSpell : MagerySpell, IAsyncSpell
     {
-        public WaterElementalSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public WaterElementalSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

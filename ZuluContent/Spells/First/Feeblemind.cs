@@ -9,7 +9,7 @@ namespace Server.Spells.First
 {
     public class FeeblemindSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public FeeblemindSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public FeeblemindSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

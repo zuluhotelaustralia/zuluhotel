@@ -15,7 +15,7 @@ namespace Server.Spells.Third
 {
     public class TelekinesisSpell : MagerySpell, ITargetableAsyncSpell<Item>
     {
-        public TelekinesisSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public TelekinesisSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         public async Task OnTargetAsync(ITargetResponse<Item> response)
         {
             if (!response.HasValue)

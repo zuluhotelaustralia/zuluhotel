@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using MessagePack;
 using Server;
 using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enums
@@ -123,7 +124,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             }
             else if (enchantmentType == typeof(PermMagicImmunity))
             {
-                Set((PermMagicImmunity e) => e.Value = value);
+                Set((PermMagicImmunity e) => e.Value = (SpellCircle)value);
             }
             else if (enchantmentType == typeof(AirProtection))
             {
@@ -136,10 +137,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             else if (enchantmentType == typeof(FireProtection))
             {
                 Set((FireProtection e) => e.Value = value);
-            }
-            else if (enchantmentType == typeof(HolyProtection))
-            {
-                Set((HolyProtection e) => e.Value = value);
             }
             else if (enchantmentType == typeof(NecroProtection))
             {

@@ -7,7 +7,7 @@ namespace Server.Spells.Sixth
 {
     public class EnergyBoltSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public EnergyBoltSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public EnergyBoltSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
