@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Zulu.Spells.TriElemental;
 using Server;
 using Server.Misc;
 using Server.Items;
@@ -77,7 +76,7 @@ namespace Server.Mobiles
                 Str = 600,
                 Tamable = false,
                 VirtualArmor = 40,
-                WeaponAbility = new SpellStrike<TriElementalSpell>(),
+                WeaponAbility = new TriElementalStrike(),
                 WeaponAbilityChance = 1.0
             });
         }

@@ -9,7 +9,6 @@ using Server.Engines.Harvest;
 using Server.Engines.Magic.HitScripts;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Spells.Necromancy;
-using Scripts.Zulu.Spells.TriElemental;
 
 namespace Server.Mobiles
 {
@@ -85,7 +84,7 @@ namespace Server.Mobiles
                 Tamable = false,
                 TargetAcquireExhaustion = true,
                 VirtualArmor = 40,
-                WeaponAbility = new SpellStrike<TriElementalSpell>(),
+                WeaponAbility = new TriElementalStrike(),
                 WeaponAbilityChance = 1.0
             });
         }

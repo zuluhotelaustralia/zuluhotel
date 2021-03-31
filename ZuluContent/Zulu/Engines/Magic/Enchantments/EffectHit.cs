@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MessagePack;
-using Scripts.Zulu.Spells.TriElemental;
 using Server;
 using Server.Engines.Magic.HitScripts;
 using Server.Items;
@@ -24,7 +23,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 [EffectHitType.StamDrain] = new StamDrainStrike(),
                 [EffectHitType.Blackrock] = new BlackrockStrike(),
                 [EffectHitType.Void] = new VoidStrike(),
-                [EffectHitType.TriElemental] = new SpellStrike<TriElementalSpell>(),
+                [EffectHitType.TriElemental] = new TriElementalStrike(),
             };
 
         [IgnoreMember] public override string AffixName => EnchantmentInfo.GetName((int) EffectHitType, Cursed);
