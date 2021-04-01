@@ -66,7 +66,7 @@ namespace Server.Mobiles
                     {ElementalType.Poison, 6},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
-                    {ElementalType.PermMagicImmunity, 7},
+                    {ElementalType.MagicImmunity, 7},
                     {ElementalType.Necro, 100},
                     {ElementalType.Earth, 100}
                 },

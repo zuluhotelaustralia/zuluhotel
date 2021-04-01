@@ -131,22 +131,41 @@ namespace Server.Items
 
     public class CraftResources
     {
-        public static readonly CraftResourceInfo[] MetalInfo = OreConfiguration.Entries.Select((e, i) =>
-            new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 1),
-                e.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
-                e.Quality, e.CraftSkillRequired, e.SmeltType, e.ResourceType)).ToArray();
-
-        public static readonly CraftResourceInfo[] LeatherInfo =
-            HideConfiguration.Entries.Select((e, i) =>
-                new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 101),
-                    e.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
-                    e.Quality, e.CraftSkillRequired, e.ResourceType)).ToArray();
-
-        public static readonly CraftResourceInfo[] WoodInfo = LogConfiguration.Entries.Select((e, i) =>
-            new CraftResourceInfo(e.Hue, e.Name, (CraftResource) (i + 301),
-                null,
-                e.Quality, e.CraftSkillRequired, e.ResourceType)).ToArray();
-
+        public static readonly CraftResourceInfo[] MetalInfo = 
+            ZhConfig.Resources.Ores.Entries.Select((entry, idx) =>
+                new CraftResourceInfo(
+                    entry.Hue, 
+                    entry.Name, (CraftResource) (idx + 1),
+                    entry.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
+                    entry.Quality, 
+                    entry.CraftSkillRequired, 
+                    entry.SmeltType,
+                    entry.ResourceType
+                )
+            ).ToArray();
+        
+        public static readonly CraftResourceInfo[] LeatherInfo = ZhConfig.Resources.Hides.Entries.Select((entry, idx) =>
+            new CraftResourceInfo(
+                entry.Hue, 
+                entry.Name, 
+                (CraftResource) (idx + 101),
+                entry.Enchantments.ToDictionary(x => x.EnchantmentType, y => y.EnchantmentValue),
+                entry.Quality, entry.CraftSkillRequired, entry.ResourceType
+            )
+        ).ToArray();
+        
+        public static readonly CraftResourceInfo[] WoodInfo = ZhConfig.Resources.Logs.Entries.Select((entry, idx) =>
+            new CraftResourceInfo(
+                entry.Hue, 
+                entry.Name, 
+                (CraftResource) (idx + 301), 
+                null, 
+                entry.Quality, 
+                entry.CraftSkillRequired, 
+                entry.ResourceType
+            )
+        ).ToArray();
+        
         /// <summary>
         /// Returns true if '<paramref name="resource"/>' is None, Iron, RegularLeather or RegularWood. False if otherwise.
         /// </summary>
@@ -175,7 +194,7 @@ namespace Server.Items
         {
             if (resourceType == null || !m_TypeTable.ContainsKey(resourceType))
                 return CraftResource.None;
-            
+
             var obj = m_TypeTable[resourceType];
 
             if (obj is CraftResource resource)

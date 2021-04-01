@@ -65,24 +65,15 @@ namespace Server.Spells
                 (caster, scroll) => (Spell) null,
                 new SpellInfo()
             );
-
-            Register(
-                SpellEntry.SpiritSpeak,
-                (caster, _) => new SpiritSpeak.SpiritSpeakSpell(caster),
-                new SpellInfo
-                {
-                    Name = "Spirit Speak",
-                    Mantra = string.Empty
-                }
-            );
-
+            
             Register(
                 SpellEntry.EtherealMount,
                 (caster, _) => (Spell) null,
                 new SpellInfo
                 {
                     Name = "Ethereal Mount",
-                    Mantra = string.Empty
+                    Mantra = string.Empty,
+                    Circle = SpellCircle.System
                 }
             );
 

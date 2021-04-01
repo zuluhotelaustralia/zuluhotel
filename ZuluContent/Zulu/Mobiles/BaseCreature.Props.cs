@@ -76,8 +76,8 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public SpellCircle PermMagicImmunity
         {
-            get { return Enchantments.Get((PermMagicImmunity e) => e.Value); }
-            set { Enchantments.Set((PermMagicImmunity e) => e.Value = value); }
+            get { return Enchantments.Get((MagicImmunity e) => e.Value); }
+            set { Enchantments.Set((MagicImmunity e) => e.Value = value); }
         }
 
         public virtual bool InitialInnocent

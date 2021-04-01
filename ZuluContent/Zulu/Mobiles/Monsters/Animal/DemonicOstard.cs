@@ -62,7 +62,7 @@ namespace Server.Mobiles
                     {ElementalType.Water, 50},
                     {ElementalType.Necro, 50},
                     {ElementalType.Earth, 50},
-                    {ElementalType.PermMagicImmunity, 5}
+                    {ElementalType.MagicImmunity, 5}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

@@ -122,9 +122,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
             {
                 Set((MagicEfficiencyPenalty e) => e.Value += value);
             }
-            else if (enchantmentType == typeof(PermMagicImmunity))
+            else if (enchantmentType == typeof(MagicImmunity))
             {
-                Set((PermMagicImmunity e) => e.Value = (SpellCircle)value);
+                Set((MagicImmunity e) => e.Value = (SpellCircle)value);
             }
             else if (enchantmentType == typeof(AirProtection))
             {

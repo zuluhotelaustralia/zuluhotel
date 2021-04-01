@@ -30,8 +30,16 @@ namespace Server.Spells
             
             var target = new AsyncSpellTarget<T>(this, Caster, Info.TargetOptions);
             Caster.Target = target;
-
+            
+            var targetLoc = new Point3D(Caster.Location);
+            
             var response = await target;
+
+            if (targetLoc != Caster.Location)
+            {
+                Caster.Spell?.OnCasterMoving(Caster.Direction);
+                return;
+            }
 
             // If the target request is typeof IPoint3D and they target a mobile, rewrite the response Mobile.Location
             if (response is ITargetResponse<IPoint3D> {InvalidTarget: Mobile {Location: T location}})

@@ -65,7 +65,7 @@ namespace Server.Mobiles
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
                     {ElementalType.Fire, 100},
-                    {ElementalType.PermMagicImmunity, 3}
+                    {ElementalType.MagicImmunity, 3}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

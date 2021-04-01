@@ -87,11 +87,11 @@ namespace ZuluContent.Zulu.Engines.Magic
                 case ElementalType.Poison:
                     enchanted.Enchantments.Set((PoisonProtection e) => e.Value = (PoisonLevel) value);
                     break;
-                case ElementalType.PermMagicImmunity:
-                    enchanted.Enchantments.Set((PermMagicImmunity e) => e.Value = (SpellCircle)value);
+                case ElementalType.MagicImmunity:
+                    enchanted.Enchantments.Set((MagicImmunity e) => e.Value = (SpellCircle)value);
                     break;
-                case ElementalType.PermMagicReflection:
-                    enchanted.Enchantments.Set((PermMagicReflection e) => e.Value = (SpellCircle)value);
+                case ElementalType.MagicReflection:
+                    enchanted.Enchantments.Set((MagicReflection e) => e.Value = (SpellCircle)value);
                     break;
                 case ElementalType.None:
                     break;
@@ -123,9 +123,8 @@ namespace ZuluContent.Zulu.Engines.Magic
             ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
             ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
             ElementalType.Poison => (int)(ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
-            ElementalType.PermMagicImmunity => (int)(ench.GetDistinctEnchantment<PermMagicImmunity>()?.Value ?? 0),
-            ElementalType.PermMagicReflection => (int)(ench.GetDistinctEnchantment<PermMagicReflection>()?.Value ?? 0),
-
+            ElementalType.MagicImmunity => (int)(ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0),
+            ElementalType.MagicReflection => (int)(ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
 
@@ -135,36 +134,22 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static int GetResist<T>(this T creature, ElementalType type) where T : Mobile, IEnchanted
             => GetResist((IEnchanted) creature, type);
 
-        public static void SetChargedResist(this IEnchanted enchanted, ChargeType chargeProtectionType, int value)
+        public static int SetResistCharges(this IEnchanted enchanted, ElementalType type, int value) => type switch
         {
-            switch (chargeProtectionType)
-            {
-                case ChargeType.PoisonImmunity:
-                    enchanted.Enchantments.Set((PoisonProtection e) => e.Charges = value);
-                    break;
-                case ChargeType.MagicImmunity:
-                    enchanted.Enchantments.Set((MagicImmunity e) => e.Value = value);
-                    break;
-                case ChargeType.SpellReflect:
-                    enchanted.Enchantments.Set((SpellReflect e) => e.Value = value);
-                    break;
-                case ChargeType.None:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null);
-            }
-        }
+            ElementalType.Poison => enchanted.Enchantments.Set((PoisonProtection e) => e.Charges = value),
+            ElementalType.MagicImmunity => enchanted.Enchantments.Set((MagicImmunity e) => e.Charges = value),
+            ElementalType.MagicReflection => enchanted.Enchantments.Set((MagicReflection e) => e.Charges = value),
+            ElementalType.None => 0,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
 
-        public static int GetChargedResist(this IEnchanted enchanted, ChargeType chargeProtectionType)
+        public static int GetResistCharges(this IEnchanted enchanted, ElementalType type) => type switch
         {
-            return chargeProtectionType switch
-            {
-                ChargeType.PoisonImmunity => enchanted.Enchantments.Get((PoisonProtection e) => e.Charges),
-                ChargeType.MagicImmunity => enchanted.Enchantments.Get((MagicImmunity e) => e.Value),
-                ChargeType.SpellReflect => enchanted.Enchantments.Get((SpellReflect e) => e.Value),
-                ChargeType.None => 0,
-                _ => throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null)
-            };
-        }
+            ElementalType.Poison => enchanted.Enchantments.Get((PoisonProtection e) => e.Charges),
+            ElementalType.MagicImmunity => enchanted.Enchantments.Get((MagicImmunity e) => e.Charges),
+            ElementalType.MagicReflection => enchanted.Enchantments.Get((MagicReflection e) => e.Charges),
+            ElementalType.None => 0,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
     }
 }

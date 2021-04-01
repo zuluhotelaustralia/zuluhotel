@@ -55,5 +55,10 @@ namespace Server.Items
 
             defender.Stam -= Utility.Random(3, 3); // 3-5 points of stamina loss
         }
+        
+        public override bool AllowEquippedCast(Mobile from)
+        {
+            return true;
+        }
     }
 }

@@ -1547,12 +1547,6 @@ namespace Server.Items
         {
         }
 
-        private string GetNameString()
-        {
-            return Name ?? $"#{LabelNumber}";
-            ;
-        }
-
         [Hue, CommandProperty(AccessLevel.GameMaster)]
         public override int Hue
         {
@@ -1562,7 +1556,8 @@ namespace Server.Items
 
         public override bool AllowEquippedCast(Mobile from)
         {
-            return base.AllowEquippedCast(@from);
+            var type = Enchantments.Get((MagicalWeapon e) => e.Value);
+            return type == MagicalWeaponType.Mystical || type == MagicalWeaponType.Stygian;
         }
 
         public override void OnSingleClick(Mobile from)

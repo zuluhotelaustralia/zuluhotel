@@ -118,15 +118,15 @@ namespace ZuluContent.Zulu.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public SpellCircle MagicImmunity
         {
-            get => Enchantments.Get((PermMagicImmunity e) => e.Value);
-            set => Enchantments.Set((PermMagicImmunity e) => e.Value = value);
+            get => Enchantments.Get((MagicImmunity e) => e.Value);
+            set => Enchantments.Set((MagicImmunity e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SpellCircle MagicReflection
         {
-            get => Enchantments.Get((PermMagicReflection e) => e.Value);
-            set => Enchantments.Set((PermMagicReflection e) => e.Value = value);
+            get => Enchantments.Get((MagicReflection e) => e.Value);
+            set => Enchantments.Set((MagicReflection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

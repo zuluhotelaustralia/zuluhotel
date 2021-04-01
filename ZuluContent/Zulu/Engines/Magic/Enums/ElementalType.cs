@@ -80,7 +80,7 @@ namespace Server.Engines.Magic
         Necro,
         Paralysis,
         HealingBonus,
-        PermMagicImmunity,
-        PermMagicReflection,
+        MagicImmunity,
+        MagicReflection,
     }
 }

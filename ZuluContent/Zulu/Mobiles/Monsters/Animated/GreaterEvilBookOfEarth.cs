@@ -83,7 +83,7 @@ namespace Server.Mobiles
                     {ElementalType.Fire, 100},
                     {ElementalType.Earth, 100},
                     {ElementalType.Necro, 25},
-                    {ElementalType.PermMagicImmunity, 8}
+                    {ElementalType.MagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

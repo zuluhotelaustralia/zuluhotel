@@ -381,14 +381,6 @@ namespace Server.Items
         {
         }
 
-        public override bool AllowEquippedCast(Mobile from)
-        {
-            if (base.AllowEquippedCast(from))
-                return true;
-
-            return false;
-        }
-
         public override bool CheckPropertyConflict(Mobile m)
         {
             if (base.CheckPropertyConflict(m))

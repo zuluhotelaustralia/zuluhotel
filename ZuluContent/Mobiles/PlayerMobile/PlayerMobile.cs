@@ -1970,8 +1970,8 @@ namespace Server.Mobiles
         public int ParalysisProtection => this.GetResist(ElementalType.Paralysis);
         public int HealingBonus => this.GetResist(ElementalType.HealingBonus);
         public PoisonLevel PoisonImmunity => (PoisonLevel)this.GetResist(ElementalType.Poison);
-        public SpellCircle MagicImmunity => (SpellCircle)this.GetResist(ElementalType.PermMagicImmunity);
-        public SpellCircle MagicReflection => (SpellCircle)this.GetResist(ElementalType.PermMagicReflection);
+        public SpellCircle MagicImmunity => (SpellCircle)this.GetResist(ElementalType.MagicImmunity);
+        public SpellCircle MagicReflection => (SpellCircle)this.GetResist(ElementalType.MagicReflection);
         
         #endregion
     }
