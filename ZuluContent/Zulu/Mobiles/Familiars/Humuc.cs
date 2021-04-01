@@ -53,7 +53,7 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.MagicImmunity, 100}
+                    {ElementalType.MagicImmunity, 8}
                 }
             });
         }

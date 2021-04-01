@@ -86,13 +86,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             Hue = 802,
             CursedHue = 802,
             Names = new [,] {
-                {string.Empty, string.Empty},
-                {"Raw Blackrock", "Chipped Blackrock"},
-                {"Refined Blackrock", "Cracked Blackrock"},
-                {"Processed Blackrock", "Flawed Blackrock"},
-                {"Smelted Blackrock", "Inferior Blackrock"},
-                {"Forged Blackrock", "Chaotic Blackrock"},
-                {"Tempered Blackrock", "Corrupted Blackrock"},
+                {"Magic Absorbsion", "Magical Amplification"},
             }
         };
 
