@@ -19,16 +19,6 @@ namespace Server.Configurations
 
             SpellInfos = config.ToDictionary(kv => kv.Value.Type, kv => kv.Value);
             SpellTypes = config.ToDictionary(kv => kv.Key, kv => kv.Value.Type);
-            
-            var path = Path.Combine(Core.BaseDirectory, "Data/Magic/spells.json");
-            var jsOpts = JsonConfig.GetOptions(new TextDefinitionConverterFactory(), new ValueTupleFactory());
-            
-            Dictionary<SpellEntry, SpellInfo> infos = SpellInfos
-                .ToDictionary(kv => SpellTypes.First(xk => xk.Value == kv.Key).Key, kv => kv.Value);
-            
-            JsonConfig.Serialize(path, infos, jsOpts);
-
         }
-
     }
 }
