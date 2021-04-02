@@ -1,46 +1,44 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Spells;
 
 namespace Server.Engines.Magic
 {
     public interface IElementalResistible
     {
-        public int ElementalWaterResist { get; set; }
+        public int ElementalWaterResist { get; }
 
-        public int ElementalAirResist { get; set; }
+        public int ElementalAirResist { get; }
 
-        public int ElementalPhysicalResist { get; set; }
+        public int ElementalPhysicalResist { get; }
 
-        public int ElementalFireResist { get; set; }
+        public int ElementalFireResist { get; }
 
-        public int ElementalPoisonResist { get; set; }
+        public int ElementalEarthResist { get; }
 
+        public int ElementalNecroResist { get; }
 
-        public int ElementalEarthResist { get; set; }
+        public int ParalysisProtection { get; }
 
-        public int ElementalNecroResist { get; set; }
+        public int HealingBonus { get; }
+        public PoisonLevel PoisonImmunity { get; }
 
-        public int ParalysisResist { get; set; }
+        public SpellCircle MagicImmunity { get; }
 
-        public int HealingBonus { get; set; }
-
-        public int MagicImmunity { get; set; }
-
-        public int SpellReflection { get; set; }
+        public SpellCircle MagicReflection { get; }
 
 
-        private static readonly Dictionary<ElementalProtectionLevel, int> ProtectionToResist =
-            new Dictionary<ElementalProtectionLevel, int>
-            {
-                [ElementalProtectionLevel.None] = 0,
-                [ElementalProtectionLevel.Bane] = 25,
-                [ElementalProtectionLevel.Warding] = 50,
-                [ElementalProtectionLevel.Protection] = 75,
-                [ElementalProtectionLevel.Immunity] = 100,
-                [ElementalProtectionLevel.Attunement] = 125,
-                [ElementalProtectionLevel.Absorbsion] = 150,
-            };
+        private static readonly Dictionary<ElementalProtectionLevel, int> ProtectionToResist = new()
+        {
+            [ElementalProtectionLevel.None] = 0,
+            [ElementalProtectionLevel.Bane] = 25,
+            [ElementalProtectionLevel.Warding] = 50,
+            [ElementalProtectionLevel.Protection] = 75,
+            [ElementalProtectionLevel.Immunity] = 100,
+            [ElementalProtectionLevel.Attunement] = 125,
+            [ElementalProtectionLevel.Absorbsion] = 150,
+        };
 
         public static int GetResistForProtectionLevel(ElementalProtectionLevel level) =>
             ProtectionToResist[level];
@@ -60,22 +58,29 @@ namespace Server.Engines.Magic
         Absorbsion
     }
 
+    public enum PoisonLevel
+    {
+        None = 0,
+        Lesser,
+        Medium,
+        Greater,
+        Deadly,
+        Lethal
+    }
+
     public enum ElementalType
     {
-        Water = 0,
+        None = 0,
+        Water,
         Air,
         Physical,
         Fire,
-        Cold,
         Poison,
-        Holy,
         Earth,
         Necro,
         Paralysis,
         HealingBonus,
-        PermPoisonImmunity,
-        PermMagicImmunity,
-        PermSpellReflect,
-        None
+        MagicImmunity,
+        MagicReflection,
     }
 }

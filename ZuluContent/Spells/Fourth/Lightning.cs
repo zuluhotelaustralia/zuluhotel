@@ -7,7 +7,7 @@ namespace Server.Spells.Fourth
 {
     public class LightningSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public LightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public LightningSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

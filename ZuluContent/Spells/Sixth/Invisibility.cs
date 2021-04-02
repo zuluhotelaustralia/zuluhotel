@@ -11,7 +11,7 @@ namespace Server.Spells.Sixth
 {
     public class InvisibilitySpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public InvisibilitySpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public InvisibilitySpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

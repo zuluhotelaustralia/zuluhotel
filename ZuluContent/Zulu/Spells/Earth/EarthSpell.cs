@@ -38,14 +38,5 @@ namespace Scripts.Zulu.Spells.Earth
         {
             return RequiredMana;
         }
-
-        public override void GetCastSkills(out double min, out double max)
-        {
-            // TODO: Pick a good max skill value
-            min = RequiredSkill;
-            max = RequiredSkill + 40;
-
-            if (max > 150) max = 150;
-        }
     }
 }

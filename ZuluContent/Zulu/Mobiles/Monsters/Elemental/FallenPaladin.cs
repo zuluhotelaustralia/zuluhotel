@@ -55,13 +55,13 @@ namespace Server.Mobiles
                 ProvokeSkillOverride = 170,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Poison, 6},
                     {ElementalType.Fire, 100},
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 100},
                     {ElementalType.Necro, 100},
                     {ElementalType.Earth, 100},
-                    {ElementalType.PermMagicImmunity, 8}
+                    {ElementalType.MagicImmunity, 8}
                 },
                 RiseCreatureDelay = TimeSpan.FromSeconds(0),
                 RiseCreatureType = typeof(HellbornePaladinsRevenant),

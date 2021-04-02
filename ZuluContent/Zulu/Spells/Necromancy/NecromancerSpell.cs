@@ -30,9 +30,7 @@ namespace Scripts.Zulu.Spells.Necromancy
         {
             get { return SkillName.Magery; }
         }
-
-        //public override int CastDelayBase{ get{ return base.CastDelayBase; } } // Reference, 3
-
+        
         public override bool ClearHandsOnCast
         {
             get { return false; }
@@ -46,25 +44,7 @@ namespace Scripts.Zulu.Spells.Necromancy
         public NecromancerSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
         {
         }
-
-        public override int ComputeKarmaAward()
-        {
-            //TODO: Verify this formula being that Necro spells don't HAVE a circle.
-            //int karma = -(70 + (10 * (int)Circle));
-            var karma = -(40 + (int) (10 * (CastDelayBase.TotalSeconds / CastDelaySecondsPerTick)));
-
-
-            return karma;
-        }
-
-        public override void GetCastSkills(out double min, out double max)
-        {
-            min = RequiredSkill;
-            max = SpellItem != null ? min : RequiredSkill + 40.0;
-
-            if (max > 150) max = 150;
-        }
-
+        
         public override int GetMana()
         {
             return RequiredMana;

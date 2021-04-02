@@ -182,8 +182,8 @@
           "EnchantmentValue": 25
         },
         {
-          "EnchantmentType": "PermMagicImmunity",
-          "EnchantmentValue": 25
+          "EnchantmentType": "MagicImmunity",
+          "EnchantmentValue": 1
         }
       ]
     },

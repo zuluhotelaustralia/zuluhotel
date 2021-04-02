@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Spells;
 
@@ -268,60 +269,27 @@ namespace Server.Mobiles
         {
         }
 
-        public class EtherealSpell : Spell
+        public class EtherealSpell : Spell, IAsyncSpell
         {
-            private EtherealMount m_Mount;
-            private Mobile m_Rider;
+            private readonly EtherealMount m_Mount;
+            private readonly Mobile m_Rider;
+            private bool m_Stop;
 
-            public EtherealSpell(EtherealMount mount, Mobile rider)
-                : base(rider, null)
+            public EtherealSpell(EtherealMount mount, Mobile rider) : base(rider, null)
             {
                 m_Rider = rider;
                 m_Mount = mount;
             }
 
-            public override bool ClearHandsOnCast
-            {
-                get { return false; }
-            }
-
-            public override bool RevealOnCast
-            {
-                get { return false; }
-            }
-
-            public override TimeSpan GetCastRecovery()
-            {
-                return TimeSpan.Zero;
-            }
-
-            public override double CastDelayFastScalar
-            {
-                get { return 0; }
-            }
-
-            public override TimeSpan CastDelayBase
-            {
-                get { return TimeSpan.FromSeconds(2.0); }
-            }
-
-            public override int GetMana()
-            {
-                return 0;
-            }
-
-            public override bool ConsumeReagents()
-            {
-                return true;
-            }
-
-            public override bool CheckFizzle()
-            {
-                return true;
-            }
-
-            private bool m_Stop;
-
+            public override bool ClearHandsOnCast => false;
+            public override bool RevealOnCast => false;
+            public override TimeSpan GetCastRecovery() => TimeSpan.Zero;
+            public override double CastDelayFastScalar => 0;
+            public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(2.0);
+            public override int GetMana() => 0;
+            public override bool ConsumeReagents() => true;
+            public override bool CheckFizzle() => true;
+            
             public void Stop()
             {
                 m_Stop = true;
@@ -356,8 +324,8 @@ namespace Server.Mobiles
 
                 //m_Mount.UnmountMe();
             }
-
-            public override void OnCast()
+            
+            public async Task CastAsync()
             {
                 if (!m_Mount.Deleted && m_Mount.Rider == null && m_Mount.Validate(m_Rider))
                     m_Mount.Rider = m_Rider;

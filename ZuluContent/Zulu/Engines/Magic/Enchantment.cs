@@ -15,7 +15,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     public abstract class Enchantment<TEnchantmentInfo> : IEnchantmentValue
         where TEnchantmentInfo : EnchantmentInfo, new()
     {
-        public static readonly TEnchantmentInfo EnchantmentInfo = new();
+        protected static readonly TEnchantmentInfo EnchantmentInfo = new();
 
         [IgnoreMember] public virtual EnchantmentInfo Info => EnchantmentInfo;
 

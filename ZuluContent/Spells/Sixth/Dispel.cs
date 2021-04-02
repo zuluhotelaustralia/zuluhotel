@@ -11,7 +11,7 @@ namespace Server.Spells.Sixth
 {
     public class DispelSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public DispelSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public DispelSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

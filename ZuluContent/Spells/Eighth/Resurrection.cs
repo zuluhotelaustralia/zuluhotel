@@ -11,7 +11,7 @@ namespace Server.Spells.Eighth
 {
     public class ResurrectionSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ResurrectionSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ResurrectionSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

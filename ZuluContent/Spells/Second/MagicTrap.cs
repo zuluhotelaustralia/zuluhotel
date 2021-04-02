@@ -7,7 +7,7 @@ namespace Server.Spells.Second
 {
     public class MagicTrapSpell : MagerySpell, ITargetableAsyncSpell<TrapableContainer>
     {
-        public MagicTrapSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MagicTrapSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<TrapableContainer> response)
         {

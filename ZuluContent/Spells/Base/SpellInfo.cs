@@ -19,7 +19,7 @@ namespace Server.Spells
         public bool RevealOnCast { get; init; } = true;
         public bool ClearHandsOnCast { get; init; } = true;
         public bool ShowHandMovement { get; init; } = true;
-        public bool BlocksMovement { get; init; } = true;
+        public bool BlocksMovement { get; init; } = false;
         public bool Resistable { get; init; } = true;
         public bool Reflectable { get; init; } = true;
         public int[] Amounts => ReagentCosts.Values.ToArray();

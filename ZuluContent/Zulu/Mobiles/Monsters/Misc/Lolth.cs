@@ -77,7 +77,7 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Air, 50},
                     {ElementalType.Fire, 100},
-                    {ElementalType.PermPoisonImmunity, 25},
+                    {ElementalType.Poison, 1},
                     {ElementalType.Necro, 100}
                 },
                 SaySpellMantra = true,

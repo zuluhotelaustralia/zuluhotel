@@ -6,7 +6,7 @@ namespace Server.Spells.Third
 {
     public class FireballSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public FireballSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public FireballSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
             if (!response.HasValue)

@@ -12,6 +12,7 @@ using Server.Multis;
 using Server.Regions;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using static Server.Spells.SpellRegistry;
 using static Scripts.Zulu.Engines.Classes.ZuluClassExtensions;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
@@ -817,8 +818,6 @@ namespace Server.Spells
 
             if (target is BaseCreature c && caster != null)
                 c.OnDamagedBySpell(caster);
-
-            spell?.RemoveDelayedDamageContext(target);
         }
 
         private static void DoLeech(int damageGiven, Mobile caster, Mobile target)
@@ -829,6 +828,14 @@ namespace Server.Spells
         {
             target.FireHook(h => h.OnHeal(caster, target, spell, ref amount));
             target.Heal((int) amount, caster, message);
+        }
+        
+        public static bool CheckValidHands(Mobile mobile)
+        {
+            var one = mobile.FindItemOnLayer(Layer.OneHanded)?.AllowEquippedCast(mobile);
+            var two = mobile.FindItemOnLayer(Layer.TwoHanded)?.AllowEquippedCast(mobile);
+
+            return (one == null || one == true) && (two == null || two == true);
         }
     }
 }

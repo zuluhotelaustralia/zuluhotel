@@ -4,6 +4,7 @@ using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Network;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
@@ -40,7 +41,7 @@ namespace Server.SkillHandlers
                 return DefaultDelay;
             }
 
-            if (!CheckValidHands(mobile))
+            if (!SpellHelper.CheckValidHands(mobile))
             {
                 mobile.SendFailureMessage(502626); // Your hands must be free to cast spells or meditate.
                 return DefaultDelay;
@@ -83,32 +84,7 @@ namespace Server.SkillHandlers
 
             return 0;
         }
-
-
-        public static bool CheckValidHands(Mobile mobile)
-        {
-            var items = new[] {mobile.FindItemOnLayer(Layer.OneHanded), mobile.FindItemOnLayer(Layer.TwoHanded)};
-            
-            return items.All(item =>
-            {
-                switch (item)
-                {
-                    case null:
-                    case Spellbook:
-                    case Runebook:
-                    case BaseStaff:
-                        return true;
-                    case IEnchanted enchanted:
-                    {
-                        var magical = enchanted.Enchantments.Get((MagicalWeapon e) => e.Value);
-                        return magical == MagicalWeaponType.Mystical || magical == MagicalWeaponType.Stygian;
-                    }
-                    default:
-                        return false;
-                }
-            });
-        }
-
+        
         private class InternalTimer : Timer
         {
             private readonly Mobile m_Mobile;
@@ -139,7 +115,7 @@ namespace Server.SkillHandlers
                 if (m_Mobile.Warmode)
                     return true;
 
-                if (!CheckValidHands(m_Mobile))
+                if (!SpellHelper.CheckValidHands(m_Mobile))
                     return true;
 
                 if (m_Mobile.Hits < m_StartHits)

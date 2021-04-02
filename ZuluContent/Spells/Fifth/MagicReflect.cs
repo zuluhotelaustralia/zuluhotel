@@ -7,7 +7,7 @@ namespace Server.Spells.Fifth
 {
     public class MagicReflectSpell : MagerySpell, IAsyncSpell
     {
-        public MagicReflectSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MagicReflectSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {
@@ -20,11 +20,12 @@ namespace Server.Spells.Fifth
             var value = Caster.Skills[SkillName.Magery].Value / 12.0 + 1.0;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref value));
 
-            Caster.TryAddBuff(new MagicReflection
+            Caster.TryAddBuff(new MagicReflectionBuff
             {
-                Circle = value >= (int)SpellCircle.System 
-                    ? (SpellCircle)(int)SpellCircle.System - 1 
-                    : (SpellCircle)(int)value
+                Value = value >= (int)SpellCircle.System 
+                    ? SpellCircle.System - 1 
+                    : (SpellCircle)value,
+                Charges = 1
             });
             
             Caster.FixedParticles(0x374B, 10, 10, 5037, EffectLayer.Waist);

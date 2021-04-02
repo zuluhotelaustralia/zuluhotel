@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Server;
 using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -16,6 +17,7 @@ namespace ZuluContent.Zulu.Items
         public EnchantmentDictionary Enchantments
         {
             get => m_Enchantments ??= new EnchantmentDictionary();
+            protected set => m_Enchantments = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -79,10 +81,10 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPoisonResist
+        public PoisonLevel PoisonImmunity
         {
-            get => Enchantments.Get((PermPoisonProtection e) => e.Value);
-            set => Enchantments.Set((PermPoisonProtection e) => e.Value = value);
+            get => Enchantments.Get((PoisonProtection e) => e.Value);
+            set => Enchantments.Set((PoisonProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -100,7 +102,7 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ParalysisResist
+        public int ParalysisProtection
         {
             get => Enchantments.Get((ParalysisProtection e) => e.Value);
             set => Enchantments.Set((ParalysisProtection e) => e.Value = value);
@@ -114,17 +116,17 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int MagicImmunity
+        public SpellCircle MagicImmunity
         {
-            get => Enchantments.Get((PermMagicImmunity e) => e.Value);
-            set => Enchantments.Set((PermMagicImmunity e) => e.Value = value);
+            get => Enchantments.Get((MagicImmunity e) => e.Value);
+            set => Enchantments.Set((MagicImmunity e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int SpellReflection
+        public SpellCircle MagicReflection
         {
-            get => Enchantments.Get((PermSpellReflect e) => e.Value);
-            set => Enchantments.Set((PermSpellReflect e) => e.Value = value);
+            get => Enchantments.Get((MagicReflection e) => e.Value);
+            set => Enchantments.Set((MagicReflection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]

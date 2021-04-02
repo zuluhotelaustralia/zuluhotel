@@ -77,14 +77,14 @@ namespace Server.Mobiles
                 },
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 100},
+                    {ElementalType.Poison, 6},
                     {ElementalType.Air, 100},
                     {ElementalType.Water, 100},
                     {ElementalType.Fire, 75},
                     {ElementalType.Physical, 75},
                     {ElementalType.Necro, 100},
                     {ElementalType.Earth, 75},
-                    {ElementalType.PermMagicImmunity, 8}
+                    {ElementalType.MagicImmunity, 8}
                 },
                 SaySpellMantra = true,
                 Skills = new Dictionary<SkillName, CreatureProp>

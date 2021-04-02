@@ -10,7 +10,7 @@ namespace Server.Spells.Fifth
 {
     public class IncognitoSpell : MagerySpell, IAsyncSpell
     {
-        public IncognitoSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public IncognitoSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task CastAsync()
         {

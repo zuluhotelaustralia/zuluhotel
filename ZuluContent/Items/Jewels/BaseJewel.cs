@@ -1,6 +1,7 @@
 using System;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -22,32 +23,18 @@ namespace Server.Items
         Diamond
     }
 
-    public abstract class BaseJewel : BaseEquippableItem, ICraftable, IArmorRating, IMagicItem, IElementalResistible,
-        IResource
+    public abstract class BaseJewel : BaseEquippableItem, ICraftable, IArmorRating, IResource
     {
         private int m_HitPoints;
 
         private CraftResource m_Resource;
-        private EnchantmentDictionary m_Enchantments;
-
-        public EnchantmentDictionary Enchantments
-        {
-            get => m_Enchantments ??= new EnchantmentDictionary();
-        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int PermSpellReflect
-        {
-            get => Enchantments.Get((PermSpellReflect e) => e.Value);
-            set { Enchantments.Set((PermSpellReflect e) => e.Value = value); }
-        }
-
+        
         [CommandProperty(AccessLevel.GameMaster)]
         public ArmorBonusType ArmorBonusType
         {
@@ -201,7 +188,7 @@ namespace Server.Items
             switch (version)
             {
                 case 6:
-                    m_Enchantments = EnchantmentDictionary.Deserialize(reader);
+                    Enchantments = EnchantmentDictionary.Deserialize(reader);
                     goto case 5;
                 case 5:
                     ICraftable.Deserialize(reader, this);

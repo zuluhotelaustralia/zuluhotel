@@ -61,7 +61,7 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermMagicImmunity, 6}
+                    {ElementalType.MagicImmunity, 6}
                 },
                 PreferredSpells = new List<Type>
                 {

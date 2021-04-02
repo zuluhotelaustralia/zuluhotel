@@ -8,7 +8,7 @@ namespace Server.Spells.Fourth
 {
     public class ManaDrainSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ManaDrainSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ManaDrainSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

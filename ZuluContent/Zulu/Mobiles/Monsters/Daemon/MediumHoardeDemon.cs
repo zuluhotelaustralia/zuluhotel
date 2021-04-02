@@ -52,13 +52,13 @@ namespace Server.Mobiles
                 PerceptionRange = 10,
                 Resistances = new Dictionary<ElementalType, CreatureProp>
                 {
-                    {ElementalType.PermPoisonImmunity, 75},
+                    {ElementalType.Poison, 3},
                     {ElementalType.Fire, 75},
                     {ElementalType.Air, 75},
                     {ElementalType.Water, 75},
                     {ElementalType.Necro, 75},
                     {ElementalType.Earth, 75},
-                    {ElementalType.PermMagicImmunity, 3}
+                    {ElementalType.MagicImmunity, 3}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

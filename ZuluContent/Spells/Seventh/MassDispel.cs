@@ -13,7 +13,7 @@ namespace Server.Spells.Seventh
 {
     public class MassDispelSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public MassDispelSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MassDispelSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         public void Target(IPoint3D p)
         {
             if (!Caster.CanSee(p))

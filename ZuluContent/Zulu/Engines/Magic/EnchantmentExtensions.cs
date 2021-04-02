@@ -4,6 +4,7 @@ using System.Linq;
 using Server;
 using Server.Engines.Magic;
 using Server.Mobiles;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
@@ -84,20 +85,13 @@ namespace ZuluContent.Zulu.Engines.Magic
                     enchanted.Enchantments.Set((HealingBonus e) => e.Value = value);
                     break;
                 case ElementalType.Poison:
-                    enchanted.Enchantments.Set((PermPoisonProtection e) => e.Value = value);
+                    enchanted.Enchantments.Set((PoisonProtection e) => e.Value = (PoisonLevel) value);
                     break;
-                case ElementalType.PermPoisonImmunity:
-                    enchanted.Enchantments.Set((PermPoisonProtection e) => e.Value = value);
+                case ElementalType.MagicImmunity:
+                    enchanted.Enchantments.Set((MagicImmunity e) => e.Value = (SpellCircle)value);
                     break;
-                case ElementalType.PermMagicImmunity:
-                    enchanted.Enchantments.Set((PermMagicImmunity e) => e.Value = value);
-                    break;
-                case ElementalType.PermSpellReflect:
-                    enchanted.Enchantments.Set((PermSpellReflect e) => e.Value = value);
-                    break;
-                case ElementalType.Cold:
-                    break;
-                case ElementalType.Holy:
+                case ElementalType.MagicReflection:
+                    enchanted.Enchantments.Set((MagicReflection e) => e.Value = (SpellCircle)value);
                     break;
                 case ElementalType.None:
                     break;
@@ -118,22 +112,21 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static bool TrySetResist<T>(this T mobile, ElementalType type, ElementalProtectionLevel level)
             where T : Mobile, IEnchanted => TrySetResist((IEnchanted) mobile, type, level);
 
-        public static int GetResist(this IEnchanted enchanted, ElementalType type)
+        public static int GetResist(this IEnchanted ench, ElementalType type) => type switch
         {
-            return type switch
-            {
-                ElementalType.Water => enchanted.GetDistinctEnchantment<WaterProtection>()?.Value ?? 0,
-                ElementalType.Air => enchanted.GetDistinctEnchantment<AirProtection>()?.Value ?? 0,
-                ElementalType.Physical => enchanted.GetDistinctEnchantment<PhysicalProtection>()?.Value ?? 0,
-                ElementalType.Fire => enchanted.GetDistinctEnchantment<FireProtection>()?.Value ?? 0,
-                ElementalType.Poison => enchanted.GetDistinctEnchantment<PermPoisonProtection>()?.Value ?? 0,
-                ElementalType.Earth => enchanted.GetDistinctEnchantment<EarthProtection>()?.Value ?? 0,
-                ElementalType.Necro => enchanted.GetDistinctEnchantment<NecroProtection>()?.Value ?? 0,
-                ElementalType.Paralysis => enchanted.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
-                ElementalType.HealingBonus => enchanted.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-            };
-        }
+            ElementalType.Water => ench.GetDistinctEnchantment<WaterProtection>()?.Value ?? 0,
+            ElementalType.Air => ench.GetDistinctEnchantment<AirProtection>()?.Value ?? 0,
+            ElementalType.Physical => ench.GetDistinctEnchantment<PhysicalProtection>()?.Value ?? 0,
+            ElementalType.Fire => ench.GetDistinctEnchantment<FireProtection>()?.Value ?? 0,
+            ElementalType.Earth => ench.GetDistinctEnchantment<EarthProtection>()?.Value ?? 0,
+            ElementalType.Necro => ench.GetDistinctEnchantment<NecroProtection>()?.Value ?? 0,
+            ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
+            ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
+            ElementalType.Poison => (int)(ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
+            ElementalType.MagicImmunity => (int)(ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0),
+            ElementalType.MagicReflection => (int)(ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
 
         public static int GetResist(this Mobile mobile, ElementalType type) =>
             mobile is IEnchanted enchanted ? GetResist(enchanted, type) : 0;
@@ -141,36 +134,22 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static int GetResist<T>(this T creature, ElementalType type) where T : Mobile, IEnchanted
             => GetResist((IEnchanted) creature, type);
 
-        public static void SetChargedResist(this IEnchanted enchanted, ChargeType chargeProtectionType, int value)
+        public static int SetResistCharges(this IEnchanted enchanted, ElementalType type, int value) => type switch
         {
-            switch (chargeProtectionType)
-            {
-                case ChargeType.PoisonImmunity:
-                    enchanted.Enchantments.Set((PoisonProtection e) => e.Value = value);
-                    break;
-                case ChargeType.MagicImmunity:
-                    enchanted.Enchantments.Set((MagicImmunity e) => e.Value = value);
-                    break;
-                case ChargeType.SpellReflect:
-                    enchanted.Enchantments.Set((SpellReflect e) => e.Value = value);
-                    break;
-                case ChargeType.None:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null);
-            }
-        }
+            ElementalType.Poison => enchanted.Enchantments.Set((PoisonProtection e) => e.Charges = value),
+            ElementalType.MagicImmunity => enchanted.Enchantments.Set((MagicImmunity e) => e.Charges = value),
+            ElementalType.MagicReflection => enchanted.Enchantments.Set((MagicReflection e) => e.Charges = value),
+            ElementalType.None => 0,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
 
-        public static int GetChargedResist(this IEnchanted enchanted, ChargeType chargeProtectionType)
+        public static int GetResistCharges(this IEnchanted enchanted, ElementalType type) => type switch
         {
-            return chargeProtectionType switch
-            {
-                ChargeType.PoisonImmunity => enchanted.Enchantments.Get((PoisonProtection e) => e.Value),
-                ChargeType.MagicImmunity => enchanted.Enchantments.Get((MagicImmunity e) => e.Value),
-                ChargeType.SpellReflect => enchanted.Enchantments.Get((SpellReflect e) => e.Value),
-                ChargeType.None => 0,
-                _ => throw new ArgumentOutOfRangeException(nameof(chargeProtectionType), chargeProtectionType, null)
-            };
-        }
+            ElementalType.Poison => enchanted.Enchantments.Get((PoisonProtection e) => e.Charges),
+            ElementalType.MagicImmunity => enchanted.Enchantments.Get((MagicImmunity e) => e.Charges),
+            ElementalType.MagicReflection => enchanted.Enchantments.Get((MagicReflection e) => e.Charges),
+            ElementalType.None => 0,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
     }
 }

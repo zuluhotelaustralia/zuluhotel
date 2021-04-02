@@ -1,14 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Server.Engines.Magic;
 using Server.Items;
-using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
-using Server.Spells.Second;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
 
@@ -19,25 +13,17 @@ namespace Server.Spells
         private static readonly TimeSpan NextSpellDelay = TimeSpan.FromSeconds(0.75);
 
         private static readonly TimeSpan AnimateDelay = TimeSpan.FromSeconds(1.5);
-        //In reality, it's ANY delayed Damage spell Post-AoS that can't stack, but, only
-        //Expo & Magic Arrow have enough delay and a short enough cast time to bring up
-        //the possibility of stacking 'em.  Note that a MA & an Explosion will stack, but
-        //of course, two MA's won't.
-
-        private static readonly Dictionary<Type, DelayedDamageContextWrapper> ContextTable = new();
 
         private AnimTimer m_AnimTimer;
 
-        private CastTimer m_CastTimer;
         private bool m_SpellStrike;
         private long m_StartCastTime;
 
-        public Spell(Mobile caster, Item spellItem, bool spellStrike = false)
+        public Spell(Mobile caster, Item spellItem = null, bool spellStrike = false)
         {
             Caster = caster;
             SpellItem = spellItem;
             m_SpellStrike = spellStrike;
-            
         }
 
         public SpellCircle Circle => Info.Circle;
@@ -83,6 +69,9 @@ namespace Server.Spells
         public virtual TimeSpan CastDelayMinimum { get; } = TimeSpan.FromSeconds(0.25);
 
         public virtual bool IsCasting => State == SpellState.Casting;
+        
+        public virtual bool IsTargeting => State == SpellState.Sequencing && Caster.Target is AsyncSpellTarget;
+
 
         public virtual void OnCasterHurt()
         {
@@ -108,17 +97,18 @@ namespace Server.Spells
 
         public virtual bool OnCasterMoving(Direction d)
         {
-            if (IsCasting && BlocksMovement)
+            if (IsCasting)
             {
-                Caster.SendLocalizedMessage(500111); // You are frozen and can not move.
-                return false;
+                if (BlocksMovement)
+                {
+                    Caster.SendLocalizedMessage(500111); // You are frozen and can not move.
+                    return false;
+                }
             }
+            
+            if (Caster.Target is AsyncSpellTarget target && target.Spell == this) 
+                Disturb(DisturbType.Movement);
 
-            return true;
-        }
-
-        public bool OnCasterEquipping(Item item)
-        {
             return true;
         }
 
@@ -161,31 +151,8 @@ namespace Server.Spells
 
             return spell;
         }
-
-
-        public void StartDelayedDamageContext(Mobile m, Timer t)
-        {
-            if (DelayedDamageStacking)
-                return; //Sanity
-
-            if (!ContextTable.TryGetValue(GetType(), out var contexts))
-            {
-                contexts = new DelayedDamageContextWrapper();
-                ContextTable.Add(GetType(), contexts);
-            }
-
-            contexts.Add(m, t);
-        }
-
-        public void RemoveDelayedDamageContext(Mobile m)
-        {
-            if (!ContextTable.TryGetValue(GetType(), out var contexts))
-                return;
-
-            contexts.Remove(m);
-        }
         
-        public virtual bool OnCasterEquiping(Item item)
+        public virtual bool OnCasterEquipping(Item item)
         {
             if (IsCasting)
                 Disturb(DisturbType.EquipRequest);
@@ -217,73 +184,6 @@ namespace Server.Spells
             return false;
         }
 
-        public virtual double GetResistSkill(Mobile m)
-        {
-            return m.Skills[SkillName.MagicResist].Value;
-        }
-
-
-        public virtual double GetResistPercentForCircle(Mobile target, SpellCircle circle)
-        {
-            var firstPercent = target.Skills[SkillName.MagicResist].Value / 5.0;
-            var secondPercent = target.Skills[SkillName.MagicResist].Value -
-                                ((Caster.Skills[CastSkill].Value - 20.0) / 5.0 + (1 + (int) circle) * 5.0);
-
-            return (firstPercent > secondPercent ? firstPercent : secondPercent) /
-                   2.0; // Seems should be about half of what stratics says.
-        }
-
-        public virtual double GetResistPercent(Mobile target)
-        {
-            return GetResistPercentForCircle(target, Circle);
-        }
-        
-        public virtual bool CheckResisted(Mobile target)
-        {
-            var n = GetResistPercent(target);
-
-            n /= 100.0;
-
-            if (n <= 0.0)
-                return false;
-
-            if (n >= 1.0)
-                return true;
-
-            var maxSkill = (1 + (int) Circle) * 10;
-            maxSkill += (1 + (int) Circle / 6) * 25;
-
-            if (target.Skills[SkillName.MagicResist].Value < maxSkill)
-                target.CheckSkill(SkillName.MagicResist, 0.0, target.Skills[SkillName.MagicResist].Cap);
-
-            return n >= Utility.RandomDouble();
-        }
-
-        public virtual double GetDamageScalar(Mobile target)
-        {
-            var scalar = 1.0;
-
-            var casterEI = Caster.Skills[DamageSkill].Value;
-            var targetRS = target.Skills[SkillName.MagicResist].Value;
-
-            //m_Caster.CheckSkill( DamageSkill, 0.0, 120.0 );
-
-            if (casterEI > targetRS)
-                scalar = 1.0 + (casterEI - targetRS) / 500.0;
-            else
-                scalar = 1.0 + (casterEI - targetRS) / 200.0;
-
-            // magery damage bonus, -25% at 0 skill, +0% at 100 skill, +5% at 120 skill
-            scalar += (Caster.Skills[CastSkill].Value - 100.0) / 400.0;
-
-            if (!target.Player && !target.Body.IsHuman /*&& !Core.AOS*/)
-                scalar *= 2.0; // Double magery damage to monsters/animals if not AOS
-
-            target.Region.SpellDamageScalar(Caster, target, ref scalar);
-
-            return scalar;
-        }
-        
         public virtual void DoFizzle()
         {
             Caster.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502632); // The spell fizzles.
@@ -320,8 +220,6 @@ namespace Server.Spells
 
                     OnDisturb(type, true);
 
-                    m_CastTimer?.Stop();
-
                     m_AnimTimer?.Stop();
 
                     Caster.NextSpellTime = Core.TickCount + (int) GetDisturbRecovery().TotalMilliseconds;
@@ -333,7 +231,7 @@ namespace Server.Spells
                     State = SpellState.None;
                     Caster.Spell = null;
 
-                    OnDisturb(type, false);
+                    OnDisturb(type, type == DisturbType.Movement);
 
                     Target.Cancel(Caster);
                     break;
@@ -380,9 +278,9 @@ namespace Server.Spells
                 return false;
             }
             
-            if (Caster.FindItemOnLayer(Layer.OneHanded) != null || Caster.FindItemOnLayer(Layer.TwoHanded) != null)
+            if (!SpellHelper.CheckValidHands(Caster))
             {
-                Caster.SendLocalizedMessage(502626); // You have not yet recovered from casting a spell.
+                Caster.SendLocalizedMessage(502626); // Your hands must be free to cast spells or meditate.
                 return false;
             }
             
@@ -452,12 +350,6 @@ namespace Server.Spells
                     Caster.FixedParticles(0, 10, 5, Info.RightHandEffect, EffectLayer.RightHand);
             }
 
-            // m_CastTimer = new CastTimer(this, castDelay);
-            //m_CastTimer.Start();
-
-            OnBeginCast();
-            
-            var originalTarget = Caster.Target;
 
             if(castDelay > TimeSpan.Zero)
                 await Timer.Pause(castDelay);
@@ -472,34 +364,10 @@ namespace Server.Spells
             Caster.Region?.OnSpellCast(Caster, this);
             Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
 
-            if (this is IAsyncSpell asyncSpell)
-            {
-                if (CheckSequence())
-                    await asyncSpell.CastAsync();
-                FinishSequence();
-            }
-            else
-            {
-                OnCast();
-                if (Caster.Player && Caster.Target != originalTarget)
-                {
-                    Caster.Target?.BeginTimeout(Caster, TimeSpan.FromSeconds(30.0));
-                }
-            }
-        }
-        
-        public virtual void OnCast()
-        {
+            if (this is IAsyncSpell asyncSpell && CheckSequence()) 
+                await asyncSpell.CastAsync();
             
-        }
-
-        public virtual void OnBeginCast()
-        {
-        }
-
-        public virtual void GetCastSkills(out double min, out double max)
-        {
-            min = max = 0; //Intended but not required for overriding.
+            FinishSequence();
         }
 
         public virtual bool CheckFizzle()
@@ -507,8 +375,19 @@ namespace Server.Spells
             if (IsWand())
                 return true;
 
-            GetCastSkills(out var minSkill, out var maxSkill);
+            const double chanceOffset = 20.0;
+            const double chanceLength = 100.0 / 7.0;
+            
+            var circle = (int) Circle;
 
+            if (SpellItem != null)
+                circle -= 2;
+
+            var avg = chanceLength * circle;
+
+            var minSkill = avg - chanceOffset;
+            var maxSkill = avg + chanceOffset;
+            
             if (DamageSkill != CastSkill)
                 Caster.CheckSkill(DamageSkill, 0.0, Caster.Skills[DamageSkill].Cap);
 
@@ -552,12 +431,7 @@ namespace Server.Spells
 
             //return TimeSpan.FromSeconds( (double)delay / CastDelayPerSecond );
         }
-
-        public virtual int ComputeKarmaAward()
-        {
-            return 0;
-        }
-
+        
         public virtual bool CheckSequence()
         {
             if (m_SpellStrike)
@@ -643,11 +517,6 @@ namespace Server.Spells
                 }
             }
 
-            var karma = ComputeKarmaAward();
-
-            if (karma != 0)
-                Titles.AwardKarma(Caster, karma, true);
-
             return true;
         }
         
@@ -684,28 +553,7 @@ namespace Server.Spells
 
             return false;
         }
-
-        private class DelayedDamageContextWrapper
-        {
-            private readonly Dictionary<Mobile, Timer> m_Contexts = new Dictionary<Mobile, Timer>();
-
-            public void Add(Mobile m, Timer t)
-            {
-                if (m_Contexts.TryGetValue(m, out var oldTimer))
-                {
-                    oldTimer.Stop();
-                    m_Contexts.Remove(m);
-                }
-
-                m_Contexts.Add(m, t);
-            }
-
-            public void Remove(Mobile m)
-            {
-                m_Contexts.Remove(m);
-            }
-        }
-
+        
         private class AnimTimer : Timer
         {
             private readonly Spell m_Spell;
@@ -735,49 +583,6 @@ namespace Server.Spells
 
                 if (!Running)
                     m_Spell.m_AnimTimer = null;
-            }
-        }
-
-        private class CastTimer : Timer
-        {
-            private readonly Spell m_Spell;
-
-            public CastTimer(Spell spell, TimeSpan castDelay) : base(castDelay)
-            {
-                m_Spell = spell;
-
-                Priority = TimerPriority.TwentyFiveMS;
-            }
-
-            protected override void OnTick()
-            {
-                if (m_Spell?.Caster == null
-                    || m_Spell.State != SpellState.Casting
-                    || m_Spell.Caster.Spell != m_Spell
-                )
-                    return;
-
-                m_Spell.State = SpellState.Sequencing;
-                m_Spell.m_CastTimer = null;
-                m_Spell.Caster.OnSpellCast(m_Spell);
-
-                m_Spell.Caster.Region?.OnSpellCast(m_Spell.Caster, m_Spell);
-                m_Spell.Caster.NextSpellTime =
-                    Core.TickCount + (int) m_Spell.GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
-
-                var originalTarget = m_Spell.Caster.Target;
-
-                m_Spell.OnCast();
-
-                if (m_Spell.Caster.Player && m_Spell.Caster.Target != originalTarget)
-                    m_Spell.Caster.Target?.BeginTimeout(m_Spell.Caster, TimeSpan.FromSeconds(30.0));
-
-                m_Spell.m_CastTimer = null;
-            }
-
-            public void Tick()
-            {
-                OnTick();
             }
         }
     }

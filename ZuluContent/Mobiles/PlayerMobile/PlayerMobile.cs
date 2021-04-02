@@ -27,11 +27,7 @@ using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Mobiles
 {
-    #region Enums
-
-    #endregion
-
-    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted, IBuffable
+    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted, IBuffable, IElementalResistible
     {
         private class CountAndTimeStamp
         {
@@ -1963,6 +1959,20 @@ namespace Server.Mobiles
 
         #endregion
 
+        #region IElementalResistible
 
+        public int ElementalWaterResist => this.GetResist(ElementalType.Water);
+        public int ElementalAirResist => this.GetResist(ElementalType.Air);
+        public int ElementalPhysicalResist => this.GetResist(ElementalType.Physical);
+        public int ElementalFireResist => this.GetResist(ElementalType.Fire);
+        public int ElementalEarthResist => this.GetResist(ElementalType.Earth);
+        public int ElementalNecroResist => this.GetResist(ElementalType.Necro);
+        public int ParalysisProtection => this.GetResist(ElementalType.Paralysis);
+        public int HealingBonus => this.GetResist(ElementalType.HealingBonus);
+        public PoisonLevel PoisonImmunity => (PoisonLevel)this.GetResist(ElementalType.Poison);
+        public SpellCircle MagicImmunity => (SpellCircle)this.GetResist(ElementalType.MagicImmunity);
+        public SpellCircle MagicReflection => (SpellCircle)this.GetResist(ElementalType.MagicReflection);
+        
+        #endregion
     }
 }

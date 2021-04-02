@@ -10,7 +10,7 @@ namespace Server.Spells.First
 {
     public class ReactiveArmorSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ReactiveArmorSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ReactiveArmorSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {
             if (!response.HasValue)

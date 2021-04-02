@@ -4,7 +4,9 @@ using Server.Engines.Magic.HitScripts;
 using Server.Items;
 using Server.Misc;
 using Scripts.Zulu.Engines.Classes;
+using Server.Engines.Magic;
 using Server.Network;
+using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -51,10 +53,10 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPoisonResist
+        public PoisonLevel ElementalPoisonResist
         {
-            get { return Enchantments.Get((PermPoisonProtection e) => e.Value); }
-            set { Enchantments.Set((PermPoisonProtection e) => e.Value = value); }
+            get { return Enchantments.Get((PoisonProtection e) => e.Value); }
+            set { Enchantments.Set((PoisonProtection e) => e.Value = value); }
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -72,10 +74,10 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int PermMagicImmunity
+        public SpellCircle PermMagicImmunity
         {
-            get { return Enchantments.Get((PermMagicImmunity e) => e.Value); }
-            set { Enchantments.Set((PermMagicImmunity e) => e.Value = value); }
+            get { return Enchantments.Get((MagicImmunity e) => e.Value); }
+            set { Enchantments.Set((MagicImmunity e) => e.Value = value); }
         }
 
         public virtual bool InitialInnocent

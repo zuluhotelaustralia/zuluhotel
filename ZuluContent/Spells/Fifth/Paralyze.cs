@@ -7,7 +7,7 @@ namespace Server.Spells.Fifth
 {
     public class ParalyzeSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public ParalyzeSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ParalyzeSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

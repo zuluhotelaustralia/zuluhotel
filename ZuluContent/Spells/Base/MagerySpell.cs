@@ -9,7 +9,7 @@ namespace Server.Spells
 
         private static readonly int[] ManaTable = {4, 6, 9, 11, 14, 20, 40, 50};
 
-        public MagerySpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public MagerySpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 
@@ -18,36 +18,11 @@ namespace Server.Spells
             get { return TimeSpan.FromSeconds((3 + (int) Circle) * CastDelaySecondsPerTick); }
         }
 
-
-        public override void GetCastSkills(out double min, out double max)
-        {
-            var circle = (int) Circle;
-
-            if (SpellItem != null)
-                circle -= 2;
-
-            var avg = ChanceLength * circle;
-
-            min = avg - ChanceOffset;
-            max = avg + ChanceOffset;
-        }
-
         public override int GetMana()
         {
             return SpellItem is BaseWand ? 0 : ManaTable[(int) Circle];
         }
-
-        public override double GetResistSkill(Mobile m)
-        {
-            var maxSkill = (1 + (int) Circle) * 10;
-            maxSkill += (1 + (int) Circle / 6) * 25;
-
-            if (m.Skills[SkillName.MagicResist].Value < maxSkill)
-                m.CheckSkill(SkillName.MagicResist, 0.0, m.Skills[SkillName.MagicResist].Cap);
-
-            return m.Skills[SkillName.MagicResist].Value;
-        }
-
+        
         public override TimeSpan GetCastDelay()
         {
             if (SpellItem is BaseWand)

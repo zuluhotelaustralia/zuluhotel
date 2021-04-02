@@ -7,7 +7,7 @@ namespace Server.Spells.Fifth
 {
     public class MindBlastSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public MindBlastSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MindBlastSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

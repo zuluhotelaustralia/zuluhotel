@@ -10,7 +10,7 @@ namespace Server.Spells.Seventh
 {
     public class MeteorSwarmSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public MeteorSwarmSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public MeteorSwarmSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

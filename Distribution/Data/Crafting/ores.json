@@ -13,7 +13,7 @@
     "Sounds": [ 66 ],
     "Counts": [ 4 ],
     "Delay": 1.6,
-    "SoundDelay": 0.9 
+    "SoundDelay": 0.9
   },
   "Entries": [
     {
@@ -304,10 +304,6 @@
         {
           "EnchantmentType": "NecroProtection",
           "EnchantmentValue": 25
-        },
-        {
-          "EnchantmentType": "HolyProtection",
-          "EnchantmentValue": 25
         }
       ]
     },
@@ -549,8 +545,8 @@
           "EnchantmentValue": 3
         },
         {
-          "EnchantmentType": "PermMagicImmunity",
-          "EnchantmentValue": 50
+          "EnchantmentType": "MagicImmunity",
+          "EnchantmentValue": 2
         },
         {
           "EnchantmentType": "WaterProtection",
@@ -578,8 +574,8 @@
           "EnchantmentValue": 3
         },
         {
-          "EnchantmentType": "PermMagicImmunity",
-          "EnchantmentValue": 50
+          "EnchantmentType": "MagicImmunity",
+          "EnchantmentValue": 2
         },
         {
           "EnchantmentType": "FireProtection",
@@ -607,8 +603,8 @@
           "EnchantmentValue": 3
         },
         {
-          "EnchantmentType": "PermMagicImmunity",
-          "EnchantmentValue": 100
+          "EnchantmentType": "MagicImmunity",
+          "EnchantmentValue": 4
         },
         {
           "EnchantmentType": "NecroProtection",

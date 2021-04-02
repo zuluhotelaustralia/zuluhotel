@@ -11,7 +11,7 @@ namespace Server.Spells.Fourth
 {
     public class ArchCureSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public ArchCureSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ArchCureSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

@@ -10,7 +10,7 @@ namespace Server.Spells.Fifth
 {
     public class PoisonFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public PoisonFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public PoisonFieldSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

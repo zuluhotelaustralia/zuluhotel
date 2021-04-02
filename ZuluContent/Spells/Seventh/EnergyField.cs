@@ -10,7 +10,7 @@ namespace Server.Spells.Seventh
 {
     public class EnergyFieldSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public EnergyFieldSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public EnergyFieldSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

@@ -21,7 +21,7 @@ namespace Server.Engines.Magic.HitScripts
                     Target = defender,
                 }).ConfigureAwait(false);
                 
-                if (spell.CheckResisted(defender))
+                if (SpellHelper.TryResist(attacker, defender, spell.Circle))
                     defender.Mana = 0;
             }
             catch (Exception e)

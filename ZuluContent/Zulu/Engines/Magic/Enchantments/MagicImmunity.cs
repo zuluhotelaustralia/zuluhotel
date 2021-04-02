@@ -11,34 +11,46 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class MagicImmunity : Enchantment<MagicImmunityInfo>, IDistinctEnchantment
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        public override string AffixName => Info.GetName(Value, Cursed);
+        [IgnoreMember]
+        public override EnchantmentInfo Info => Charges != int.MaxValue
+            ? MagicImmunityInfo.ChargedMagicImmunity
+            : MagicImmunityInfo.PermMagicImmunity;
 
-        [Key(1)] 
-        public int Value { get; set; } = 0;
+        [Key(1)] public SpellCircle Value { get; set; } = 0;
+        [Key(2)] public int Charges { get; set; } = int.MaxValue;
 
         public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
             ref int damage)
         {
-            if (Value == 0)
+
+            if (Cursed > CurseType.None)
             {
-                NotifyMobile(defender, "Your magic protection items are out of charges!");
+                NotifyMobile(defender, "Your items prevent all absorbtion!");
                 return;
             }
 
-            if (Value >= (int) spell.Circle)
+            if (Value >= spell.Circle)
             {
-                Value -= (int) spell.Circle;
-                if (Value < 0)
-                    Value = 0;
+                var nullify = false;
+                if (Charges == int.MaxValue)
+                {
+                    nullify = true;
+                }
+                else if (Charges >= (int)spell.Circle)
+                {
+                    if ((Charges -= (int)spell.Circle) == 0)
+                        NotifyMobile(defender, "One of your magic immunity items has run out of charges!");
 
-                if (Cursed == CurseType.None)
+                    nullify = true;
+                }
+
+                if (nullify)
                 {
                     damage = 0;
-                    NotifyMobile(defender, "Your items protected you from the magic!");
+                    NotifyMobile(defender, $"{attacker.Name}'s spell is absorbed by your magical protection!");
                     NotifyMobile(defender, attacker, $"The spell dissipates upon contact with {defender.Name}'s magical barrier!");
                 }
-                else
-                    NotifyMobile(defender, "Your items prevent all reflections!");
             }
         }
         
@@ -52,20 +64,36 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     
     public class MagicImmunityInfo : EnchantmentInfo
     {
-
-        public override string Description { get; protected set; } = "Magic Protection With Charges";
-        public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
-        public override int Hue { get; protected set; } = 0;
-        public override int CursedHue { get; protected set; } = 0;
-
-        public override string[,] Names { get; protected set; } = {
-            {string.Empty, string.Empty},
-            {"Raw Moonstone", "Chipped Moonstone"},
-            {"Cut Moonstone", "Cracked Moonstone"},
-            {"Refined Moonstone", "Flawed Moonstone"},
-            {"Prepared Moonstone", "Inferior Moonstone"},
-            {"Enchanted Moonstone", "Chaotic Moonstone"},
-            {"Flawless Moonstone", "Corrupted Moonstone"},
+        public static readonly MagicImmunityInfo PermMagicImmunity = new()
+        {
+            Description = "Permanent Magic Immunity",
+            Hue = 802,
+            CursedHue = 802,
+            Names = new [,] {
+                {string.Empty, string.Empty},
+                {"Raw Blackrock", "Chipped Blackrock"},
+                {"Refined Blackrock", "Cracked Blackrock"},
+                {"Processed Blackrock", "Flawed Blackrock"},
+                {"Smelted Blackrock", "Inferior Blackrock"},
+                {"Forged Blackrock", "Chaotic Blackrock"},
+                {"Tempered Blackrock", "Corrupted Blackrock"},
+            }
         };
+        
+        public static readonly MagicImmunityInfo ChargedMagicImmunity = new()
+        {
+            Description = "Permanent Magic Immunity",
+            Hue = 802,
+            CursedHue = 802,
+            Names = new [,] {
+                {"Magic Absorbsion", "Magical Amplification"},
+            }
+        };
+
+        public override string Description { get; protected set; }
+        public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
+        public override int Hue { get; protected set; }
+        public override int CursedHue { get; protected set; }
+        public override string[,] Names { get; protected set; }
     }
 }

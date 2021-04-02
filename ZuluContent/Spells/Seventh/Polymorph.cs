@@ -79,7 +79,7 @@ namespace Server.Spells.Seventh
             
         };
         
-        public PolymorphSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public PolymorphSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public override bool CanCast()
         {

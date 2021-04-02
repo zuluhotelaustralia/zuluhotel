@@ -6,7 +6,7 @@ namespace Server.Spells.Second
 {
     public class HarmSpell : MagerySpell, ITargetableAsyncSpell<Mobile> 
     {
-        public HarmSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public HarmSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

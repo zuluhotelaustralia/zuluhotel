@@ -8,7 +8,7 @@ namespace Server.Spells.Seventh
 {
     public class ChainLightningSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public ChainLightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public ChainLightningSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

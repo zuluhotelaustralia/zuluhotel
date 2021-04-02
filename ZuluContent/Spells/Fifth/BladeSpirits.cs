@@ -7,7 +7,7 @@ namespace Server.Spells.Fifth
 {
     public class BladeSpiritsSpell : MagerySpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public BladeSpiritsSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public BladeSpiritsSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public override TimeSpan GetCastDelay() => base.GetCastDelay() + TimeSpan.FromSeconds(6.0);
         

@@ -1,7 +1,6 @@
 using System;
 using MessagePack;
 using Server;
-using Server.Network;
 using Server.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -10,34 +9,35 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class PoisonProtection : Enchantment<PoisonProtectionInfo>, IDistinctEnchantment
     {
-        [IgnoreMember]
-        public override string AffixName =>
-            EnchantmentInfo.GetName(Value == 0 ? ElementalProtectionLevel.None : ElementalProtectionLevel.Bane, Cursed);
+        [IgnoreMember] public override string AffixName => Info.GetName(Value, Cursed);
 
-        [Key(1)]
-        public int Value { get; set; } = 0;
+        [IgnoreMember] public override EnchantmentInfo Info => Charges != int.MaxValue
+            ? PoisonProtectionInfo.ChargedPoisonProtection
+            : PoisonProtectionInfo.PermPoisonProtection;
+
+        [Key(1)] public PoisonLevel Value { get; set; } = 0;
+
+        [Key(2)] public int Charges { get; set; } = int.MaxValue;
 
         public override void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
-            if (Value == 0)
+            if (Cursed > CurseType.None)
             {
-                NotifyMobile(defender, "Your poison protection items are out of charges!");
+                NotifyMobile(defender, "Your items prevent all poison protection!");
                 return;
             }
 
-            if (Value >= poison.Level)
+            if (Charges != int.MaxValue && (int)Value >= poison.Level || Charges >= poison.Level)
             {
-                Value -= poison.Level;
-                if (Value < 0)
-                    Value = 0;
-
-                if (Cursed == CurseType.None)
+                if (Charges != int.MaxValue)
                 {
-                    immune = true;
-                    NotifyMobile(defender, "Your items protected you from the poison!");
+                    Charges -= poison.Level;
+                    if(Charges <= 0)
+                        NotifyMobile(defender, "One of your poison protection items has run out of charges!");
                 }
-                else
-                    NotifyMobile(defender, "Your items prevent all poison protection!");
+                
+                // Mobile.OnPoisonImmunity will send the cliloc: * The poison seems to have no effect. *
+                immune = true;
             }
         }
         
@@ -51,15 +51,36 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     
     public class PoisonProtectionInfo : EnchantmentInfo
     {
-        public override string Description { get; protected set; } = "Poison Protection With Charges";
-        public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
-
-        public override string[,] Names { get; protected set; } = {
-            {string.Empty, string.Empty},
-            {"Antidotes", "Burning Poison"}
+        public static readonly PoisonProtectionInfo PermPoisonProtection = new()
+        {
+            Description = "Elemental Poison Protection",
+            Hue = 783,
+            CursedHue = 783,
+            Names = new[,] {
+                {string.Empty, string.Empty},
+                {"Lesser Poison Protection", "Adder's Venom"},
+                {"Medium Poison Protection", "Cobra's Venom"},
+                {"Greater Poison Protection", "Giant Serpent's Venom"},
+                {"Deadly Poison Protection", "Silver Serpent's Venom"},
+                {"the Snake Handler", "Spider's Venom"},
+                {"Poison Absorbsion", "Dread Spider's Venom"},
+            },
         };
-
-        public override int Hue { get; protected set; } = 0;
-        public override int CursedHue { get; protected set; } = 0;
+        
+        public static readonly PoisonProtectionInfo ChargedPoisonProtection = new()
+        {
+            Description = "Poison Protection With Charges",
+            Hue = 0,
+            CursedHue = 0,
+            Names = new[,] {
+                {"Antidotes", "Burning Poison"}
+            }
+        };
+        
+        public override string Description { get; protected set; }
+        public override EnchantNameType Place { get; protected set; } = EnchantNameType.Suffix;
+        public override string[,] Names { get; protected set; }
+        public override int Hue { get; protected set; }
+        public override int CursedHue { get; protected set; }
     }
 }

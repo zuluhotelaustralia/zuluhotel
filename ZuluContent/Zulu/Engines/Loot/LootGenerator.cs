@@ -41,9 +41,7 @@ namespace Server.Scripts.Engines.Loot
 
         public ElementalType ProtectionType;
         public ElementalProtectionLevel ProtectionLevel;
-
-        public ChargeType ChargeProtectionType;
-        public int Charges;
+        public int ProtectionCharges;
 
         public string Hitscript;
         public CreatureType SlayerType;
@@ -135,11 +133,13 @@ namespace Server.Scripts.Engines.Loot
                         break;
                     case BaseJewel jewelry:
                         jewelry.ArmorBonusType = ArmorMod;
-                        if (Charges > 0)
-                            jewelry.SetChargedResist(ChargeProtectionType, Charges);
-                        else
-                            jewelry.TrySetResist(ProtectionType, ProtectionLevel);
 
+                        if (ProtectionType >= ElementalType.None)
+                        {
+                            jewelry.TrySetResist(ProtectionType, ProtectionLevel);
+                            if (ProtectionCharges > 0)
+                                jewelry.SetResistCharges(ProtectionType, ProtectionCharges);
+                        }
                         break;
                 }
 
@@ -444,7 +444,7 @@ namespace Server.Scripts.Engines.Loot
         {
             var roll = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
 
-            SpellCircle circle = roll switch
+            var circle = roll switch
             {
                 < 50 => SpellCircle.First,
                 < 100 => SpellCircle.Second,
@@ -556,7 +556,7 @@ namespace Server.Scripts.Engines.Loot
         {
             var level = Utility.Random(1, 50) * item.ItemLevel * 2;
             int charges = 0;
-            ChargeType chargeProtection = 0;
+            ElementalType chargeProtection = 0;
 
             switch (item.ItemLevel / 3)
             {
@@ -586,21 +586,16 @@ namespace Server.Scripts.Engines.Loot
                 _ => 30
             };
 
-            switch (Utility.Random(1, 3))
+            chargeProtection = Utility.Random(1, 3) switch
             {
-                case 1:
-                    chargeProtection = ChargeType.PoisonImmunity;
-                    break;
-                case 2:
-                    chargeProtection = ChargeType.MagicImmunity;
-                    break;
-                case 3:
-                    chargeProtection = ChargeType.SpellReflect;
-                    break;
-            }
+                1 => ElementalType.Poison,
+                2 => ElementalType.MagicImmunity,
+                3 => ElementalType.MagicReflection,
+                _ => chargeProtection
+            };
 
-            item.Charges = charges;
-            item.ChargeProtectionType = chargeProtection;
+            item.ProtectionCharges = charges;
+            item.ProtectionType = chargeProtection;
         }
 
         private static void ApplyImmunity(LootItem item)
@@ -640,13 +635,13 @@ namespace Server.Scripts.Engines.Loot
             switch (Utility.Random(1, 3))
             {
                 case 1:
-                    element = ElementalType.PermPoisonImmunity;
+                    element = ElementalType.Poison;
                     break;
                 case 2:
-                    element = ElementalType.PermMagicImmunity;
+                    element = ElementalType.MagicImmunity;
                     break;
                 default:
-                    element = ElementalType.PermSpellReflect;
+                    element = ElementalType.MagicReflection;
                     break;
             }
 
