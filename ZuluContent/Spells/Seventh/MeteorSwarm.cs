@@ -41,7 +41,7 @@ namespace Server.Spells.Seventh
         {
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this, true);
             
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
+            SpellHelper.Damage(damage, target, Caster, this);
             Effects.PlaySound(Caster.Location, Caster.Map, 0x160);
             
             Caster.MovingParticles(target, 0x36D4, 7, 0, false, true, 9501, 1, 0, 0x100);

@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using Server.Gumps;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
-using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.Mobiles
 {
@@ -73,7 +71,7 @@ namespace Server.Mobiles
             if (Deleted || !from.CheckAlive())
                 return;
 
-            from.SendAsciiMessage(MessageSuccessHue, "Which pet would you like to Stable?");
+            from.SendSuccessMessage("Which pet would you like to Stable?");
 
             from.Target = new StableTarget(this);
         }

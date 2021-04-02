@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Server.Items;
-using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -118,7 +117,7 @@ namespace Server.Engines.Craft
             // Set the overridable material
             SetSubRes(typeof(Log), 1027136);
 
-            LogConfiguration.Entries.ToList()
+            ZhConfig.Resources.Logs.Entries.ToList()
                 .ForEach(e => AddSubRes(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired,
                     1044022, e.Name));
 

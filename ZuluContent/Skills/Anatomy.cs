@@ -1,8 +1,7 @@
 using System;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Targeting;
-using static Scripts.Zulu.Engines.Classes.SkillCheck;
-using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.SkillHandlers
 {
@@ -32,7 +31,7 @@ namespace Server.SkillHandlers
             {
                 if (!(targeted is Mobile))
                 {
-                    from.SendAsciiMessage(MessageFailureHue, "This has no anatomy at all!");
+                    from.SendFailureMessage("This has no anatomy at all!");
                     return;
                 }
 
@@ -77,13 +76,13 @@ namespace Server.SkillHandlers
                         _ => "Like they barely manage to stay standing."
                     };
 
-                    from.SendAsciiMessage(MessageSuccessHue, strMessage);
-                    from.SendAsciiMessage(MessageSuccessHue, dexMessage);
+                    from.SendSuccessMessage(strMessage);
+                    from.SendSuccessMessage(dexMessage);
 
                     if (from.Skills[SkillName.Anatomy].Value > 75)
                     {
                         var percent = mobile.Stam * 100 / Math.Max(mobile.StamMax, 1);
-                        from.SendAsciiMessage(MessageSuccessHue, $"This being is at {percent}% of their max vigor.");
+                        from.SendSuccessMessage($"This being is at {percent}% of their max vigor.");
                     }
                 }
             }

@@ -3,6 +3,7 @@ namespace Server.Items
     public class VolcanicAsh : BaseReagent
     {
         public override string DefaultName { get; } = "Volcanic Ash";
+
         [Constructible]
         public VolcanicAsh() : this(1)
         {
@@ -19,10 +20,6 @@ namespace Server.Items
         {
         }
 
-        public override double DefaultWeight
-        {
-            get { return 0.1; }
-        }
 
         public override void Serialize(IGenericWriter writer)
         {

@@ -13,7 +13,7 @@ namespace Scripts.Zulu.Spells.Necromancy
         
         public async Task CastAsync()
         {
-            var bonus = Caster.GetClassBonus(SkillName.Magery) > 1.0 ? 2 : 0;
+            var bonus = Caster.GetClassModifier(SkillName.Magery) > 1.0 ? 2 : 0;
             var amount = Utility.Dice(2, 2, bonus);
 
             for (var i = 0; i < amount; i++)

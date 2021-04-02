@@ -21,7 +21,7 @@ namespace Server.Spells.Second
             target.PlaySound(0x1F1);
             
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
-            SpellHelper.Damage(damage, target, Caster, this, null, ElementalType.Water);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
     }
 }

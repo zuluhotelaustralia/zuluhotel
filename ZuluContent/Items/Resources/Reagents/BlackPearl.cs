@@ -7,7 +7,6 @@ namespace Server.Items
         {
         }
 
-
         [Constructible]
         public BlackPearl(int amount) : base(0xF7A, amount)
         {

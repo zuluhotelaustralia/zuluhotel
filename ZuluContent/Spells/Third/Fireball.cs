@@ -18,7 +18,7 @@ namespace Server.Spells.Third
             Caster.MovingParticles(target, 0x36D4, 7, 0, false, true, 9502, 4019, 0x160);
             Caster.PlaySound(0x44B);
 
-            SpellHelper.Damage(SpellHelper.CalcSpellDamage(Caster, target, this), target, Caster, this, null, ElementalType.Fire);
+            SpellHelper.Damage(SpellHelper.CalcSpellDamage(Caster, target, this), target, Caster, this);
         }
     }
 }

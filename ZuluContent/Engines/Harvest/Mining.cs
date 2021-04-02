@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using static Server.Configurations.MessageHueConfiguration;
 using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Harvest
@@ -27,11 +27,11 @@ namespace Server.Engines.Harvest
 
         private Mining()
         {
-            var res = OreConfiguration.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
+            var res = ZhConfig.Resources.Ores.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
                 new HarvestResource(e.HarvestSkillRequired, $"{e.Name} ore", e.ResourceType)).ToArray();
-            var veins = OreConfiguration.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
+            var veins = ZhConfig.Resources.Ores.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
                 new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
-            var defaultOre = OreConfiguration.Entries[0];
+            var defaultOre = ZhConfig.Resources.Ores.Entries[0];
             var defaultVein = new HarvestVein(defaultOre.VeinChance, new HarvestResource(
                 defaultOre.HarvestSkillRequired,
                 defaultOre.Name, defaultOre.ResourceType));
@@ -41,38 +41,38 @@ namespace Server.Engines.Harvest
             HarvestDefinition oreAndStone = new HarvestDefinition
             {
                 // Resource banks are every 1x1 tiles
-                BankWidth = OreConfiguration.BankWidth,
-                BankHeight = OreConfiguration.BankHeight,
+                BankWidth = ZhConfig.Resources.Ores.BankWidth,
+                BankHeight = ZhConfig.Resources.Ores.BankHeight,
 
                 // Every bank holds from 45 to 90 ore
-                MinTotal = OreConfiguration.MinTotal,
-                MaxTotal = OreConfiguration.MaxTotal,
+                MinTotal = ZhConfig.Resources.Ores.MinTotal,
+                MaxTotal = ZhConfig.Resources.Ores.MaxTotal,
 
                 // A resource bank will respawn its content every 10 to 20 minutes
-                MinRespawn = TimeSpan.FromMinutes(OreConfiguration.MinRespawn),
-                MaxRespawn = TimeSpan.FromMinutes(OreConfiguration.MaxRespawn),
+                MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MaxRespawn),
 
                 // Skill checking is done on the Mining skill
-                Skill = OreConfiguration.Skill,
+                Skill = ZhConfig.Resources.Ores.Skill,
 
                 // Set the list of harvestable tiles
                 Tiles = m_MountainAndCaveTiles,
 
                 // Players must be within 2 tiles to harvest
-                MaxRange = OreConfiguration.MaxRange,
+                MaxRange = ZhConfig.Resources.Ores.MaxRange,
 
                 // One ore per harvest action
                 ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1,
 
                 // Maximum chance to roll for colored veins
-                MaxChance = OreConfiguration.MaxChance,
+                MaxChance = ZhConfig.Resources.Ores.MaxChance,
 
                 // The digging effect
-                EffectActions = OreConfiguration.OreEffect.Actions,
-                EffectSounds = OreConfiguration.OreEffect.Sounds,
-                EffectCounts = OreConfiguration.OreEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Ores.OreEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Ores.OreEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Ores.OreEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.SoundDelay),
 
                 NoResourcesMessage = 503040, // There is no metal here to mine.
                 DoubleHarvestMessage = 503042, // Someone has gotten to the metal before you.
@@ -246,10 +246,10 @@ namespace Server.Engines.Harvest
                 if (cont.TryDropItem(harvester, item, false))
                 {
                     if (message.Length > 0)
-                        harvester.SendAsciiMessage(MessageSuccessHue, message);
+                        harvester.SendSuccessMessage(message);
                 }
                 else if (message.Length > 0)
-                    harvester.SendAsciiMessage(MessageFailureHue, message);
+                    harvester.SendFailureMessage(message);
             }
         }
 
@@ -293,7 +293,7 @@ namespace Server.Engines.Harvest
 
         public override void OnHarvestStarted(Mobile from, Item tool, HarvestDefinition def, object toHarvest)
         {
-            from.SendAsciiMessage(MessageSuccessHue, "You start mining...");
+            from.SendSuccessMessage("You start mining...");
         }
 
         public override void OnBadHarvestTarget(Mobile from, Item tool, object toHarvest)

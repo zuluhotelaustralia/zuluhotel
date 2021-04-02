@@ -52,10 +52,6 @@ namespace Server.Spells
 
         public virtual bool ShowHandMovement => Info.ShowHandMovement;
 
-        public virtual bool DelayedDamage => Info.DelayedDamage;
-
-        public virtual bool DelayedDamageStacking => Info.DelayedDamageStacking;
-
         public virtual bool BlocksMovement => Info.BlocksMovement;
 
         public virtual bool CheckNextSpellTime => !IsWand() || !m_SpellStrike;

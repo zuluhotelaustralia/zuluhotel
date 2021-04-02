@@ -7,10 +7,6 @@ namespace Server.Spells.First
 {
     public class MagicArrowSpell : MagerySpell, ITargetableAsyncSpell<Mobile>
     {
-        public override bool DelayedDamageStacking => true;
-
-        public override bool DelayedDamage => true;
-        
         public MagicArrowSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
@@ -26,7 +22,7 @@ namespace Server.Spells.First
             Caster.PlaySound(0x1E5);
 
             var damage = SpellHelper.CalcSpellDamage(Caster, mobile, this);
-            SpellHelper.Damage(damage, mobile, Caster, this, null, ElementalType.Earth);
+            SpellHelper.Damage(damage, mobile, Caster, this);
         }
 
         public async Task OnSpellReflected(Mobile target)

@@ -833,16 +833,7 @@ namespace Server.Mobiles
         #region [Stats]Max
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public override int HitsMax
-        {
-            get
-            {
-                int strBase = RawStr;
-                int strOffs = GetStatOffset(StatType.Str);
-
-                return strBase / 2 + 50 + strOffs;
-            }
-        }
+        public override int HitsMax => RawStr + GetStatOffset(StatType.Str);
 
         #endregion
 
@@ -882,7 +873,6 @@ namespace Server.Mobiles
                     if (Alive)
                     {
                         CloseGump<ResurrectGump>();
-                        ;
                     }
                     else
                     {
@@ -1960,19 +1950,28 @@ namespace Server.Mobiles
         #endregion
 
         #region IElementalResistible
-
-        public int ElementalWaterResist => this.GetResist(ElementalType.Water);
-        public int ElementalAirResist => this.GetResist(ElementalType.Air);
-        public int ElementalPhysicalResist => this.GetResist(ElementalType.Physical);
-        public int ElementalFireResist => this.GetResist(ElementalType.Fire);
-        public int ElementalEarthResist => this.GetResist(ElementalType.Earth);
-        public int ElementalNecroResist => this.GetResist(ElementalType.Necro);
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int WaterResist => this.GetResist(ElementalType.Water);
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int AirResist => this.GetResist(ElementalType.Air);
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int PhysicalResist => this.GetResist(ElementalType.Physical);
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int FireResist => this.GetResist(ElementalType.Fire);
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int EarthResist => this.GetResist(ElementalType.Earth);
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int NecroResist => this.GetResist(ElementalType.Necro);
+        [CommandProperty(AccessLevel.GameMaster)]
         public int ParalysisProtection => this.GetResist(ElementalType.Paralysis);
+        [CommandProperty(AccessLevel.GameMaster)]
         public int HealingBonus => this.GetResist(ElementalType.HealingBonus);
+        [CommandProperty(AccessLevel.GameMaster)]
         public PoisonLevel PoisonImmunity => (PoisonLevel)this.GetResist(ElementalType.Poison);
+        [CommandProperty(AccessLevel.GameMaster)]
         public SpellCircle MagicImmunity => (SpellCircle)this.GetResist(ElementalType.MagicImmunity);
+        [CommandProperty(AccessLevel.GameMaster)]
         public SpellCircle MagicReflection => (SpellCircle)this.GetResist(ElementalType.MagicReflection);
-        
         #endregion
     }
 }

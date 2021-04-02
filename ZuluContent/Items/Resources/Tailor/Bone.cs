@@ -13,15 +13,13 @@ namespace Server.Items
         {
             Stackable = true;
             Amount = amount;
-            Weight = 1.0;
         }
 
         [Constructible]
         public Bone(Serial serial) : base(serial)
         {
         }
-
-
+        
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);

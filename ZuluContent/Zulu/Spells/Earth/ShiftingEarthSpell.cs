@@ -38,7 +38,7 @@ namespace Scripts.Zulu.Spells.Earth
             target.FixedParticles(0x3789, 10, 10, 5028, EffectLayer.Waist);
             target.PlaySound(0x020D);
             
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Earth);
+            SpellHelper.Damage(damage, target, Caster, this);
             
             if (!Caster.CanBuff(target, true, BuffIcon.Clumsy, BuffIcon.Agility))
                 return;

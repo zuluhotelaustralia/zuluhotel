@@ -10,6 +10,7 @@ using Server.Mobiles;
 using System.Threading.Tasks;
 using Scripts.Zulu.Utilities;
 using Server.Multis;
+using ZuluContent.Multis;
 
 namespace Scripts.Zulu.Spells.Earth
 {
@@ -70,7 +71,7 @@ namespace Scripts.Zulu.Spells.Earth
                 return;
             }
 
-            if (checkMulti && SpellHelper.CheckMulti(loc, map))
+            if (checkMulti && loc.GetMulti(map)?.IsMultiFriend(Caster) == false)
             {
                 Caster.SendFailureMessage(501942); // That location is blocked.
                 return;

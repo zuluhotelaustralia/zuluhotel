@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
+using Server.Engines.Magic;
 using Server.Regions;
 using Server.Network;
 using Server.Multis;

@@ -1,9 +1,8 @@
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
-using Server.Targeting;
+using Scripts.Zulu.Utilities;
 using Server.Engines.Craft;
 using Server.Mobiles;
-using static Server.Configurations.MessageHueConfiguration;
 using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Items
@@ -83,20 +82,20 @@ namespace Server.Items
 
             if (!DefBlacksmithy.CheckForge(from, 1))
             {
-                from.SendAsciiMessage(MessageFailureHue, "You must be near a forge to smelt ore!");
+                from.SendFailureMessage("You must be near a forge to smelt ore!");
                 return;
             }
 
             var oreType = GetType();
 
-            var oreEntry = OreConfiguration.Entries.Single(e => e.ResourceType == oreType);
+            var oreEntry = ZhConfig.Resources.Ores.Entries.Single(e => e.ResourceType == oreType);
 
             var difficulty = oreEntry.SmeltSkillRequired;
 
             if (!from.ShilCheckSkill(SkillName.Mining, (int) difficulty, 0))
             {
                 Consume(1);
-                from.SendAsciiMessage(MessageFailureHue, "You destroy some ore.");
+                from.SendFailureMessage("You destroy some ore.");
                 return;
             }
 
@@ -104,8 +103,7 @@ namespace Server.Items
             ingot.Amount = Amount;
             from.PlaySound(0x2B);
             from.AddToBackpack(ingot);
-            from.SendAsciiMessage(MessageSuccessHue,
-                $"You create {Amount} ingots and place them in your pack.");
+            from.SendSuccessMessage($"You create {Amount} ingots and place them in your pack.");
             Delete();
             return;
         }

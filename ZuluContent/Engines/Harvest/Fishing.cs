@@ -3,6 +3,7 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using System.Collections.Generic;
+using ZuluContent.Multis;
 
 namespace Server.Engines.Harvest
 {
@@ -326,7 +327,8 @@ namespace Server.Engines.Harvest
                     LandTile t = map.Tiles.GetLandTile(tx, ty);
 
                     if (t.Z == -5 && (t.ID >= 0xA8 && t.ID <= 0xAB || t.ID >= 0x136 && t.ID <= 0x137) &&
-                        !Spells.SpellHelper.CheckMulti(new Point3D(tx, ty, -5), map))
+                        new Point3D(tx, ty, -5).GetMulti(map) == null
+                    )
                     {
                         x = tx;
                         y = ty;

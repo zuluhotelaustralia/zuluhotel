@@ -13,20 +13,20 @@ namespace Scripts.Zulu.Engines.Classes
             return false;
         }
         
-        
-        public static double GetClassBonus(this Mobile mobile)
+        public static double GetClassModifier(this Mobile mobile)
         {
             if (mobile is IZuluClassed {ZuluClass: { } cls})
                 return cls.Bonus;
 
-            return 0.0;
+            return 1.0;
         }
-        public static double GetClassBonus(this Mobile mobile, SkillName skill)
+        
+        public static double GetClassModifier(this Mobile mobile, SkillName skill)
         {
             if (mobile is IZuluClassed {ZuluClass: { } cls} && cls.IsSkillInClass(skill))
                 return cls.Bonus;
 
-            return 0.0;
+            return 1.0;
         }
     }
 }

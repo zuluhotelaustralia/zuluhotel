@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Scripts.Zulu.Utilities;
@@ -8,6 +9,7 @@ using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using Server.Targeting;
+using ZuluContent.Multis;
 
 namespace Server.Spells.Seventh
 {
@@ -15,6 +17,11 @@ namespace Server.Spells.Seventh
     {
         private readonly RunebookEntry m_Entry;
 
+        [SuppressMessage("ReSharper", "RedundantOverload.Global")]
+        public GateTravelSpell(Mobile caster, Item spellItem) : this(caster, spellItem, null)
+        {
+        }
+        
         public GateTravelSpell(Mobile caster, Item spellItem, RunebookEntry entry = null) : base(caster, spellItem)
         {
             m_Entry = entry;
@@ -86,7 +93,7 @@ namespace Server.Spells.Seventh
                 return;
             }
 
-            if (checkMulti && SpellHelper.CheckMulti(loc, map))
+            if (checkMulti && loc.GetMulti(map)?.IsMultiFriend(Caster) == false)
             {
                 Caster.SendFailureMessage(501942); // That location is blocked.
                 return;

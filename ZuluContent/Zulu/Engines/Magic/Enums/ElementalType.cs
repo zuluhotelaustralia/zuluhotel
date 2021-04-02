@@ -7,27 +7,17 @@ namespace Server.Engines.Magic
 {
     public interface IElementalResistible
     {
-        public int ElementalWaterResist { get; }
-
-        public int ElementalAirResist { get; }
-
-        public int ElementalPhysicalResist { get; }
-
-        public int ElementalFireResist { get; }
-
-        public int ElementalEarthResist { get; }
-
-        public int ElementalNecroResist { get; }
-
+        public int WaterResist { get; }
+        public int AirResist { get; }
+        public int PhysicalResist { get; }
+        public int FireResist { get; }
+        public int EarthResist { get; }
+        public int NecroResist { get; }
         public int ParalysisProtection { get; }
-
         public int HealingBonus { get; }
         public PoisonLevel PoisonImmunity { get; }
-
         public SpellCircle MagicImmunity { get; }
-
         public SpellCircle MagicReflection { get; }
-
 
         private static readonly Dictionary<ElementalProtectionLevel, int> ProtectionToResist = new()
         {

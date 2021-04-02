@@ -1,5 +1,5 @@
 using System;
-using static Server.Configurations.MessageHueConfiguration;
+using Scripts.Zulu.Utilities;
 
 namespace Server.Engines.Harvest
 {
@@ -13,10 +13,15 @@ namespace Server.Engines.Harvest
 
         public void SendSuccessTo(Mobile m, int amount)
         {
-            if (SuccessMessage is int)
-                m.SendLocalizedMessage((int) SuccessMessage);
-            else if (SuccessMessage is string)
-                m.SendMessage(MessageSuccessHue, $"You put {amount} {(string) SuccessMessage} in your backpack.");
+            switch (SuccessMessage)
+            {
+                case int message:
+                    m.SendLocalizedMessage(message);
+                    break;
+                case string message:
+                    m.SendSuccessMessage($"You put {amount} {message} in your backpack.");
+                    break;
+            }
         }
 
         public HarvestResource(double reqSkill, object message, params Type[] types)

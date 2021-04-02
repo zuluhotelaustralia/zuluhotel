@@ -428,7 +428,7 @@ namespace Server.Multis
             if (m == null || m.Deleted)
                 return null;
 
-            return FindHouseAt(m.Location, m.Map, 16);
+            return FindHouseAt(m.Location, m.Map);
         }
 
         public static BaseHouse FindHouseAt(Item item)
@@ -439,7 +439,7 @@ namespace Server.Multis
             return FindHouseAt(item.GetWorldLocation(), item.Map, item.ItemData.Height);
         }
 
-        public static BaseHouse FindHouseAt(Point3D loc, Map map, int height)
+        public static BaseHouse FindHouseAt(Point3D loc, Map map, int height = 16)
         {
             if (map == null || map == Map.Internal)
                 return null;

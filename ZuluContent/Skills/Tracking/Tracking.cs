@@ -4,9 +4,8 @@ using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
-using static Scripts.Zulu.Engines.Classes.SkillCheck;
-using static Server.Configurations.MessageHueConfiguration;
 using System.Linq;
+using Scripts.Zulu.Utilities;
 
 namespace Server.SkillHandlers
 {
@@ -34,7 +33,7 @@ namespace Server.SkillHandlers
             {
                 if (from.CheckSkill(SkillName.Tracking, -1, ZhConfig.Skills.Entries[SkillName.Anatomy].DefaultPoints) == false)
                 {
-                    from.SendAsciiMessage(MessageFailureHue, "You fail to find any creatures nearby");
+                    from.SendFailureMessage("You fail to find any creatures nearby");
                 }
                 else
                 {

@@ -21,7 +21,7 @@ namespace Server.Spells.Fourth
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
             target.BoltEffect(0);
 
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
     }
 }

@@ -119,7 +119,7 @@ namespace Server.Items
             {
                 CheckTimer();
 
-                SpellHelper.Damage(Utility.RandomMinMax(1, 30), mobile, mobile, null, TimeSpan.FromTicks(1));
+                SpellHelper.Damage(Utility.RandomMinMax(1, 30), mobile, mobile);
 
                 mobile.PlaySound(mobile.Female ? 0x327 : 0x437);
             }

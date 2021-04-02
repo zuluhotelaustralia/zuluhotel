@@ -38,7 +38,7 @@ namespace Scripts.Zulu.Spells.Earth
             target.PlaySound(0x208);
 
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
-            SpellHelper.Damage(damage / 2, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
+            SpellHelper.Damage(damage / 2, target, Caster, this);
         }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)

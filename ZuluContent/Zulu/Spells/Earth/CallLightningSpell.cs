@@ -36,7 +36,7 @@ namespace Scripts.Zulu.Spells.Earth
             await Timer.Pause(100);
             target.BoltEffect(0);
             
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
     }
 }
