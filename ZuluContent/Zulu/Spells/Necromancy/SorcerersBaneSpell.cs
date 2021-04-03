@@ -53,7 +53,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             Caster.Mana += amount;
             
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
-            SpellHelper.Damage(damage / 2, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
+            SpellHelper.Damage(damage / 2, target, Caster, this);
             
             await Timer.Pause(500);
             Caster.PlaySound(0x217);
@@ -83,7 +83,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             Effects.PlaySound(point, map, 0x10);
             
             if(!target.Deleted && target.Alive)
-                SpellHelper.Damage(damage / 2, target, Caster, this, TimeSpan.Zero, ElementalType.Water);
+                SpellHelper.Damage(damage / 2, target, Caster, this);
         }
     }
 }

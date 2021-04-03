@@ -72,6 +72,13 @@ namespace Server.Items
 
         public virtual void CheckGate(Mobile m, int range)
         {
+            if (!SpellHelper.CheckTravel(m, Map, Location, TravelCheckType.GateFrom) ||
+                !SpellHelper.CheckTravel(m, TargetMap, Target, TravelCheckType.GateTo)
+            )
+            {
+                return;
+            }
+
             new DelayTimer(m, this, range).Start();
         }
 

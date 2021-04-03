@@ -23,7 +23,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             var dexMod = 0 - Caster.Dex / 2.0;
             var intMod = (double)Caster.Int;
 
-            var classBonus = Caster.GetClassBonus(SkillName.Magery);
+            var classBonus = Caster.GetClassModifier(SkillName.Magery);
             if (classBonus > 1.0)
             {
                 duration *= classBonus;

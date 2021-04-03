@@ -1,9 +1,9 @@
 using System;
+using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
-using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.Items
 {
@@ -39,7 +39,7 @@ namespace Server.Items
                         if (!item.Identified)
                             item.Identified = true;
                         item.OnSingleClick(from);
-                        from.SendAsciiMessage(MessageSuccessHue, "It appears to be " + GetMagicItemName(item));
+                        from.SendSuccessMessage("It appears to be " + GetMagicItemName(item));
                         break;
                     }
                     case Item item:

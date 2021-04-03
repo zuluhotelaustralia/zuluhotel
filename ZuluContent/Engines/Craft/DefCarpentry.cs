@@ -366,7 +366,7 @@ namespace Server.Engines.Craft
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material	TODO: Verify the required skill amount
-            LogConfiguration.Entries.ToList()
+            ZhConfig.Resources.Logs.Entries.ToList()
                 .ForEach(e => AddSubRes(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired,
                     1044022, e.Name));
         }

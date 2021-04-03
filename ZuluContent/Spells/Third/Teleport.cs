@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Misc;
 using Server.Regions;
@@ -6,6 +7,7 @@ using Server.Spells.Fifth;
 using Server.Spells.Fourth;
 using Server.Spells.Sixth;
 using Server.Targeting;
+using ZuluContent.Multis;
 
 namespace Server.Spells.Third
 {
@@ -20,50 +22,47 @@ namespace Server.Spells.Third
             if (!response.HasValue)
                 return;
 
-            var point = response.Target;
+            var point = SpellHelper.GetSurfaceTop(response.Target);
 
             var orig = point;
             var map = Caster.Map;
 
-            SpellHelper.GetSurfaceTop(ref point);
-
             var from = Caster.Location;
-            var to = new Point3D(point);
 
             if (!SpellHelper.CheckTravel(Caster, TravelCheckType.TeleportFrom))
             {
-                Caster.SendLocalizedMessage(502361); // You cannot teleport into that area from here.
+                Caster.SendFailureMessage(502361); // You cannot teleport into that area from here.
                 return;
             }
 
-            if (!SpellHelper.CheckTravel(Caster, map, to, TravelCheckType.TeleportTo))
+            if (!SpellHelper.CheckTravel(Caster, map, point, TravelCheckType.TeleportTo))
             {
-                Caster.SendLocalizedMessage(502360); // You cannot teleport into that area.
+                Caster.SendFailureMessage(502360); // You cannot teleport into that area.
                 return;
             }
 
-            if (map == null || !map.CanSpawnMobile(to))
+            if (map == null || !map.CanSpawnMobile(point))
             {
-                Caster.SendLocalizedMessage(501942); // That location is blocked.
+                Caster.SendFailureMessage(501942); // That location is blocked.
                 return;
             }
 
-            if (SpellHelper.CheckMulti(to, map) || Region.Find(to, map).GetRegion(typeof(HouseRegion)) != null)
+            if (point.GetMulti(map)?.IsMultiFriend(Caster) == false)
             {
-                Caster.SendLocalizedMessage(502831); // Cannot teleport to that spot.
+                Caster.SendFailureMessage(502831); // Cannot teleport to that spot.
                 return;
             }
 
             SpellHelper.Turn(Caster, orig);
 
-            Caster.Location = to;
+            Caster.Location = point;
             Caster.ProcessDelta();
 
             if (Caster.Player)
             {
                 Effects.SendLocationParticles(EffectItem.Create(from, Caster.Map, EffectItem.DefaultDuration), 0x3728,
                     10, 10, 2023);
-                Effects.SendLocationParticles(EffectItem.Create(to, Caster.Map, EffectItem.DefaultDuration), 0x3728, 10,
+                Effects.SendLocationParticles(EffectItem.Create(point, Caster.Map, EffectItem.DefaultDuration), 0x3728, 10,
                     10, 5023);
             }
             else

@@ -23,7 +23,7 @@ namespace Server.Spells.Sixth
             Caster.PlaySound(0x20A);
 
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
         
         public async Task OnSpellReflected(Mobile target)

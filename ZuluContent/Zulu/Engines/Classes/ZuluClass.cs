@@ -135,6 +135,8 @@ namespace Scripts.Zulu.Engines.Classes
             CommandSystem.Register("SetClasse", AccessLevel.GameMaster, SetClass);
         }
 
+        public override string ToString() => Level > 0 ? $"Level {Level} {Type.FriendlyName()}" : "None";
+
         public static void ClassOnCommand(CommandEventArgs e)
         {
             if (!(e.Mobile is PlayerMobile pm))
@@ -329,32 +331,28 @@ namespace Scripts.Zulu.Engines.Classes
 
             if (attacker is IZuluClassed {ZuluClass: { } attackerClass})
             {
-                var bonus = attackerClass.Type switch
+                var value = attackerClass.Type switch
                 {
-                    ZuluClassType.Warrior => attackerClass.Bonus - 1.0,
-                    ZuluClassType.Mage => attackerClass.Bonus,
-                    _ => 1.0
+                    ZuluClassType.Warrior => damage / ClasseBonus,
+                    ZuluClassType.Mage => damage * ClasseBonus,
+                    _ => damage
                 };
 
-                damage = (int) (damage * bonus);
-
-                DebugLog(attacker,
-                    $"Changed damage of {spell} by {bonus} (level {attackerClass.Level} {attackerClass.Type})");
+                DebugLog(attacker, $"(Attacker) Damage: {spell} from {damage} to {(int)value} ({attackerClass})");
+                damage = (int)value;
             }
-
+            
             if (defender is IZuluClassed {ZuluClass: { } defenderClass})
             {
-                var bonus = defenderClass.Type switch
+                var value = defenderClass.Type switch
                 {
-                    ZuluClassType.Warrior => defenderClass.Bonus,
-                    ZuluClassType.Mage => defenderClass.Bonus - 1.0,
-                    _ => 1.0
+                    ZuluClassType.Warrior => damage * ClasseBonus,
+                    ZuluClassType.Mage => damage / ClasseBonus,
+                    _ => damage
                 };
 
-                damage = (int) (damage * bonus);
-
-                DebugLog(defender,
-                    $"Changed damage of {spell} by {bonus} (level {defenderClass.Level} {defenderClass.Type})");
+                DebugLog(attacker, $"(Defender) Damage: {spell} from {damage} to {(int)value} ({defenderClass})");
+                damage = (int)value;
             }
 
             DebugLog(attacker, $"OnSpellDamage::after {damage}");

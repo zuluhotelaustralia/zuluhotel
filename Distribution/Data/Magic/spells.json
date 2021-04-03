@@ -1,0 +1,3678 @@
+{
+  "Clumsy": {
+    "Type": "Server.Spells.First.ClumsySpell",
+    "Name": "Clumsy",
+    "Mantra": "Uus Jux",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "CreateFood": {
+    "Type": "Server.Spells.First.CreateFoodSpell",
+    "Name": "Create Food",
+    "Mantra": "In Mani Ylem",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9011,
+    "LeftHandEffect": 9011,
+    "Action": 224,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Feeblemind": {
+    "Type": "Server.Spells.First.FeeblemindSpell",
+    "Name": "Feeblemind",
+    "Mantra": "Rel Wis",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Heal": {
+    "Type": "Server.Spells.First.HealSpell",
+    "Name": "Heal",
+    "Mantra": "In Mani",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 224,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "MagicArrow": {
+    "Type": "Server.Spells.First.MagicArrowSpell",
+    "Name": "Magic Arrow",
+    "Mantra": "In Por Ylem",
+    "Circle": "First",
+    "DamageType": "Fire",
+    "RightHandEffect": 9041,
+    "LeftHandEffect": 9041,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "NightSight": {
+    "Type": "Server.Spells.First.NightSightSpell",
+    "Name": "Night Sight",
+    "Mantra": "In Lor",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "ReactiveArmor": {
+    "Type": "Server.Spells.First.ReactiveArmorSpell",
+    "Name": "Reactive Armor",
+    "Mantra": "Flam Sanct",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9011,
+    "LeftHandEffect": 9011,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Weaken": {
+    "Type": "Server.Spells.First.WeakenSpell",
+    "Name": "Weaken",
+    "Mantra": "Des Mani",
+    "Circle": "First",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Agility": {
+    "Type": "Server.Spells.Second.AgilitySpell",
+    "Name": "Agility",
+    "Mantra": "Ex Uus",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Cunning": {
+    "Type": "Server.Spells.Second.CunningSpell",
+    "Name": "Cunning",
+    "Mantra": "Uus Wis",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Cure": {
+    "Type": "Server.Spells.Second.CureSpell",
+    "Name": "Cure",
+    "Mantra": "An Nox",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      }
+    ]
+  },
+  "Harm": {
+    "Type": "Server.Spells.Second.HarmSpell",
+    "Name": "Harm",
+    "Mantra": "An Mani",
+    "Circle": "Second",
+    "DamageType": "Necro",
+    "RightHandEffect": 9041,
+    "LeftHandEffect": 9041,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "MagicTrap": {
+    "Type": "Server.Spells.Second.MagicTrapSpell",
+    "Name": "Magic Trap",
+    "Mantra": "In Jux",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9001,
+    "LeftHandEffect": 9001,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "RemoveTrap": {
+    "Type": "Server.Spells.Second.RemoveTrapSpell",
+    "Name": "Remove Trap",
+    "Mantra": "An Jux",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9001,
+    "LeftHandEffect": 9001,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Protection": {
+    "Type": "Server.Spells.Second.ProtectionSpell",
+    "Name": "Protection",
+    "Mantra": "Uus Sanct",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9011,
+    "LeftHandEffect": 9011,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Strength": {
+    "Type": "Server.Spells.Second.StrengthSpell",
+    "Name": "Strength",
+    "Mantra": "Uus Mani",
+    "Circle": "Second",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Bless": {
+    "Type": "Server.Spells.Third.BlessSpell",
+    "Name": "Bless",
+    "Mantra": "Rel Sanct",
+    "Circle": "Third",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 203,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Fireball": {
+    "Type": "Server.Spells.Third.FireballSpell",
+    "Name": "Fireball",
+    "Mantra": "Vas Flam",
+    "Circle": "Third",
+    "DamageType": "Fire",
+    "RightHandEffect": 9041,
+    "LeftHandEffect": 9041,
+    "Action": 203,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      }
+    ]
+  },
+  "MagicLock": {
+    "Type": "Server.Spells.Third.MagicLockSpell",
+    "Name": "Magic Lock",
+    "Mantra": "An Por",
+    "Circle": "Third",
+    "DamageType": "None",
+    "RightHandEffect": 9001,
+    "LeftHandEffect": 9001,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Poison": {
+    "Type": "Server.Spells.Third.PoisonSpell",
+    "Name": "Poison",
+    "Mantra": "In Nox",
+    "Circle": "Third",
+    "DamageType": "Poison",
+    "RightHandEffect": 9051,
+    "LeftHandEffect": 9051,
+    "Action": 203,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Telekinesis": {
+    "Type": "Server.Spells.Third.TelekinesisSpell",
+    "Name": "Telekinesis",
+    "Mantra": "Ort Por Ylem",
+    "Circle": "Third",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 203,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Teleport": {
+    "Type": "Server.Spells.Third.TeleportSpell",
+    "Name": "Teleport",
+    "Mantra": "Rel Por",
+    "Circle": "Third",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Unlock": {
+    "Type": "Server.Spells.Third.UnlockSpell",
+    "Name": "Unlock Spell",
+    "Mantra": "Ex Por",
+    "Circle": "Third",
+    "DamageType": "None",
+    "RightHandEffect": 9001,
+    "LeftHandEffect": 9001,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "WallOfStone": {
+    "Type": "Server.Spells.Third.WallOfStoneSpell",
+    "Name": "Wall of Stone",
+    "Mantra": "In Sanct Ylem",
+    "Circle": "Third",
+    "DamageType": "None",
+    "RightHandEffect": 9011,
+    "LeftHandEffect": 9011,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      }
+    ]
+  },
+  "ArchCure": {
+    "Type": "Server.Spells.Fourth.ArchCureSpell",
+    "Name": "Arch Cure",
+    "Mantra": "Vas An Nox",
+    "Circle": "Fourth",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "ArchProtection": {
+    "Type": "Server.Spells.Fourth.ArchProtectionSpell",
+    "Name": "Arch Protection",
+    "Mantra": "Vas Uus Sanct",
+    "Circle": "Fourth",
+    "DamageType": "None",
+    "RightHandEffect": 9011,
+    "LeftHandEffect": 9011,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Curse": {
+    "Type": "Server.Spells.Fourth.CurseSpell",
+    "Name": "Curse",
+    "Mantra": "Des Sanct",
+    "Circle": "Fourth",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "FireField": {
+    "Type": "Server.Spells.Fourth.FireFieldSpell",
+    "Name": "Fire Field",
+    "Mantra": "In Flam Grav",
+    "Circle": "Fourth",
+    "DamageType": "Fire",
+    "RightHandEffect": 9041,
+    "LeftHandEffect": 9041,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "GreaterHeal": {
+    "Type": "Server.Spells.Fourth.GreaterHealSpell",
+    "Name": "Greater Heal",
+    "Mantra": "In Vas Mani",
+    "Circle": "Fourth",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 204,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "Lightning": {
+    "Type": "Server.Spells.Fourth.LightningSpell",
+    "Name": "Lightning",
+    "Mantra": "Por Ort Grav",
+    "Circle": "Fourth",
+    "DamageType": "Air",
+    "RightHandEffect": 9021,
+    "LeftHandEffect": 9021,
+    "Action": 239,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "ManaDrain": {
+    "Type": "Server.Spells.Fourth.ManaDrainSpell",
+    "Name": "Mana Drain",
+    "Mantra": "Ort Rel",
+    "Circle": "Fourth",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 215,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "Recall": {
+    "Type": "Server.Spells.Fourth.RecallSpell",
+    "Name": "Recall",
+    "Mantra": "Kal Ort Por",
+    "Circle": "Fourth",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 239,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "BladeSpirits": {
+    "Type": "Server.Spells.Fifth.BladeSpiritsSpell",
+    "Name": "Blade Spirits",
+    "Mantra": "In Jux Hur Ylem",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 9040,
+    "LeftHandEffect": 9040,
+    "Action": 266,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "DispelField": {
+    "Type": "Server.Spells.Fifth.DispelFieldSpell",
+    "Name": "Dispel Field",
+    "Mantra": "An Grav",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 206,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      }
+    ]
+  },
+  "Incognito": {
+    "Type": "Server.Spells.Fifth.IncognitoSpell",
+    "Name": "Incognito",
+    "Mantra": "Kal In Ex",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 206,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "MagicReflect": {
+    "Type": "Server.Spells.Fifth.MagicReflectSpell",
+    "Name": "Magic Reflection",
+    "Mantra": "In Jux Sanct",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 9012,
+    "LeftHandEffect": 9012,
+    "Action": 242,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "MindBlast": {
+    "Type": "Server.Spells.Fifth.MindBlastSpell",
+    "Name": "Mind Blast",
+    "Mantra": "Por Corp Wis",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 9032,
+    "LeftHandEffect": 9032,
+    "Action": 218,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Paralyze": {
+    "Type": "Server.Spells.Fifth.ParalyzeSpell",
+    "Name": "Paralyze",
+    "Mantra": "An Ex Por",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 9012,
+    "LeftHandEffect": 9012,
+    "Action": 218,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "PoisonField": {
+    "Type": "Server.Spells.Fifth.PoisonFieldSpell",
+    "Name": "Poison Field",
+    "Mantra": "In Nox Grav",
+    "Circle": "Fifth",
+    "DamageType": "Poison",
+    "RightHandEffect": 9052,
+    "LeftHandEffect": 9052,
+    "Action": 230,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "SummonCreature": {
+    "Type": "Server.Spells.Fifth.SummonCreatureSpell",
+    "Name": "Summon Creature",
+    "Mantra": "Kal Xen",
+    "Circle": "Fifth",
+    "DamageType": "None",
+    "RightHandEffect": 0,
+    "LeftHandEffect": 0,
+    "Action": 16,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "Dispel": {
+    "Type": "Server.Spells.Sixth.DispelSpell",
+    "Name": "Dispel",
+    "Mantra": "An Ort",
+    "Circle": "Sixth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 218,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "EnergyBolt": {
+    "Type": "Server.Spells.Sixth.EnergyBoltSpell",
+    "Name": "Energy Bolt",
+    "Mantra": "Corp Por",
+    "Circle": "Sixth",
+    "DamageType": "Air",
+    "RightHandEffect": 9022,
+    "LeftHandEffect": 9022,
+    "Action": 230,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Explosion": {
+    "Type": "Server.Spells.Sixth.ExplosionSpell",
+    "Name": "Explosion",
+    "Mantra": "Vas Ort Flam",
+    "Circle": "Sixth",
+    "DamageType": "Fire",
+    "RightHandEffect": 9041,
+    "LeftHandEffect": 9041,
+    "Action": 230,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Invisibility": {
+    "Type": "Server.Spells.Sixth.InvisibilitySpell",
+    "Name": "Invisibility",
+    "Mantra": "An Lor Xen",
+    "Circle": "Sixth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 206,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Mark": {
+    "Type": "Server.Spells.Sixth.MarkSpell",
+    "Name": "Mark",
+    "Mantra": "Kal Por Ylem",
+    "Circle": "Sixth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 218,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "MassCurse": {
+    "Type": "Server.Spells.Sixth.MassCurseSpell",
+    "Name": "Mass Curse",
+    "Mantra": "Vas Des Sanct",
+    "Circle": "Sixth",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 218,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "ParalyzeField": {
+    "Type": "Server.Spells.Sixth.ParalyzeFieldSpell",
+    "Name": "Paralyze Field",
+    "Mantra": "In Ex Grav",
+    "Circle": "Sixth",
+    "DamageType": "None",
+    "RightHandEffect": 9012,
+    "LeftHandEffect": 9012,
+    "Action": 230,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "Reveal": {
+    "Type": "Server.Spells.Sixth.RevealSpell",
+    "Name": "Reveal",
+    "Mantra": "Wis Quas",
+    "Circle": "Sixth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 206,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "ChainLightning": {
+    "Type": "Server.Spells.Seventh.ChainLightningSpell",
+    "Name": "Chain Lightning",
+    "Mantra": "Vas Ort Grav",
+    "Circle": "Seventh",
+    "DamageType": "Air",
+    "RightHandEffect": 9022,
+    "LeftHandEffect": 9022,
+    "Action": 209,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "EnergyField": {
+    "Type": "Server.Spells.Seventh.EnergyFieldSpell",
+    "Name": "Energy Field",
+    "Mantra": "In Sanct Grav",
+    "Circle": "Seventh",
+    "DamageType": "Air",
+    "RightHandEffect": 9022,
+    "LeftHandEffect": 9022,
+    "Action": 221,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "FlameStrike": {
+    "Type": "Server.Spells.Seventh.FlameStrikeSpell",
+    "Name": "Flame Strike",
+    "Mantra": "Kal Vas Flam",
+    "Circle": "Seventh",
+    "DamageType": "Fire",
+    "RightHandEffect": 9042,
+    "LeftHandEffect": 9042,
+    "Action": 245,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "GateTravel": {
+    "Type": "Server.Spells.Seventh.GateTravelSpell",
+    "Name": "Gate Travel",
+    "Mantra": "Vas Rel Por",
+    "Circle": "Seventh",
+    "DamageType": "None",
+    "RightHandEffect": 9032,
+    "LeftHandEffect": 9032,
+    "Action": 263,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "ManaVampire": {
+    "Type": "Server.Spells.Seventh.ManaVampireSpell",
+    "Name": "Mana Vampire",
+    "Mantra": "Ort Sanct",
+    "Circle": "Seventh",
+    "DamageType": "None",
+    "RightHandEffect": 9032,
+    "LeftHandEffect": 9032,
+    "Action": 221,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "MassDispel": {
+    "Type": "Server.Spells.Seventh.MassDispelSpell",
+    "Name": "Mass Dispel",
+    "Mantra": "Vas An Ort",
+    "Circle": "Seventh",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 263,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "MeteorSwarm": {
+    "Type": "Server.Spells.Seventh.MeteorSwarmSpell",
+    "Name": "Meteor Swarm",
+    "Mantra": "Flam Kal Des Ylem",
+    "Circle": "Seventh",
+    "DamageType": "None",
+    "RightHandEffect": 9042,
+    "LeftHandEffect": 9042,
+    "Action": 233,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "Polymorph": {
+    "Type": "Server.Spells.Seventh.PolymorphSpell",
+    "Name": "Polymorph",
+    "Mantra": "Vas Ylem Rel",
+    "Circle": "Seventh",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 221,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      }
+    ]
+  },
+  "Earthquake": {
+    "Type": "Server.Spells.Eighth.EarthquakeSpell",
+    "Name": "Earthquake",
+    "Mantra": "In Vas Por",
+    "Circle": "Eighth",
+    "DamageType": "Earth",
+    "RightHandEffect": 9012,
+    "LeftHandEffect": 9012,
+    "Action": 233,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "EnergyVortex": {
+    "Type": "Server.Spells.Eighth.EnergyVortexSpell",
+    "Name": "Energy Vortex",
+    "Mantra": "Vas Corp Por",
+    "Circle": "Eighth",
+    "DamageType": "Air",
+    "RightHandEffect": 9032,
+    "LeftHandEffect": 9032,
+    "Action": 260,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.BlackPearl",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Nightshade",
+        "Amount": 1
+      }
+    ]
+  },
+  "Resurrection": {
+    "Type": "Server.Spells.Eighth.ResurrectionSpell",
+    "Name": "Resurrection",
+    "Mantra": "An Corp",
+    "Circle": "Eighth",
+    "DamageType": "None",
+    "RightHandEffect": 9062,
+    "LeftHandEffect": 9062,
+    "Action": 245,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": true,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Garlic",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Ginseng",
+        "Amount": 1
+      }
+    ]
+  },
+  "AirElemental": {
+    "Type": "Server.Spells.Eighth.AirElementalSpell",
+    "Name": "Air Elemental",
+    "Mantra": "Kal Vas Xen Hur",
+    "Circle": "Eighth",
+    "DamageType": "None",
+    "RightHandEffect": 9010,
+    "LeftHandEffect": 9010,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "SummonDaemon": {
+    "Type": "Server.Spells.Eighth.SummonDaemonSpell",
+    "Name": "Summon Daemon",
+    "Mantra": "Kal Vas Xen Corp",
+    "Circle": "Eighth",
+    "DamageType": "None",
+    "RightHandEffect": 9050,
+    "LeftHandEffect": 9050,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "EarthElemental": {
+    "Type": "Server.Spells.Eighth.EarthElementalSpell",
+    "Name": "Earth Elemental",
+    "Mantra": "Kal Vas Xen Ylem",
+    "Circle": "Eighth",
+    "DamageType": "None",
+    "RightHandEffect": 9020,
+    "LeftHandEffect": 9020,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "FireElemental": {
+    "Type": "Server.Spells.Eighth.FireElementalSpell",
+    "Name": "Fire Elemental",
+    "Mantra": "Kal Vas Xen Flam",
+    "Circle": "Eighth",
+    "DamageType": "None",
+    "RightHandEffect": 9050,
+    "LeftHandEffect": 9050,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SulfurousAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "WaterElemental": {
+    "Type": "Server.Spells.Eighth.WaterElementalSpell",
+    "Name": "Water Elemental",
+    "Mantra": "Kal Vas Xen An Flam",
+    "Circle": "Eighth",
+    "DamageType": "None",
+    "RightHandEffect": 9070,
+    "LeftHandEffect": 9070,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodmoss",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.MandrakeRoot",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SpidersSilk",
+        "Amount": 1
+      }
+    ]
+  },
+  "ControlUndead": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.ControlUndeadSpell",
+    "Name": "Control Undead",
+    "Mantra": "Nutu Magistri Supplicare",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bloodspawn",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Blackmoor",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bone",
+        "Amount": 1
+      }
+    ]
+  },
+  "Darkness": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.DarknessSpell",
+    "Name": "Darkness",
+    "Mantra": "In Caligne Abditus",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Pumice",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.PigIron",
+        "Amount": 1
+      }
+    ]
+  },
+  "DecayingRay": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.DecayingRaySpell",
+    "Name": "Decaying Ray",
+    "Mantra": "Umbra Aufero Vita",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      }
+    ]
+  },
+  "SpectresTouch": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell",
+    "Name": "Spectres Touch",
+    "Mantra": "Enevare",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.ExecutionersCap",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      }
+    ]
+  },
+  "AbyssalFlame": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell",
+    "Name": "Abyssal Flame",
+    "Mantra": "Orinundus Barathrum Erado Hostes Hostium",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      }
+    ]
+  },
+  "AnimateDead": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.AnimateDeadSpell",
+    "Name": "Animate Dead",
+    "Mantra": "Corpus Sine Nomine Expergefaceret",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.FertileDirt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      }
+    ]
+  },
+  "Sacrifice": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.SacrificeSpell",
+    "Name": "Sacrifice",
+    "Mantra": "Animus Ex Corporis Resolveretur",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 0,
+    "LeftHandEffect": 0,
+    "Action": 16,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.ExecutionersCap",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodspawn",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.WyrmsHeart",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bone",
+        "Amount": 1
+      }
+    ]
+  },
+  "WraithBreath": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Name": "Wraith Breath",
+    "Mantra": "Manes Sollicti Mi Compellere",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Pumice",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Blackmoor",
+        "Amount": 1
+      }
+    ]
+  },
+  "SorcerersBane": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Name": "Sorceror's Bane",
+    "Mantra": "Fluctus Perturbo Magus Navitas",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Pumice",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DragonsBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DeadWood",
+        "Amount": 1
+      }
+    ]
+  },
+  "SummonSpirit": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.SummonSpiritSpell",
+    "Name": "Summon Spirit",
+    "Mantra": "Manes Turbidi Sollictique Resolverent",
+    "Circle": "Necro",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 221,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DragonsBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodspawn",
+        "Amount": 1
+      }
+    ]
+  },
+  "WraithForm": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.WraithFormSpell",
+    "Name": "Wraith Form",
+    "Mantra": "Manes Sollicti Mihi Infundite",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodspawn",
+        "Amount": 1
+      }
+    ]
+  },
+  "WyvernStrike": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Name": "Wyvern Strike",
+    "Mantra": "Ubrae Tenebrae Venarent",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DragonsBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SerpentScale",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Blackmoor",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodspawn",
+        "Amount": 1
+      }
+    ]
+  },
+  "Kill": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.KillSpell",
+    "Name": "Kill",
+    "Mantra": "Ulties Manum Necarent",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.ExecutionersCap",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.WyrmsHeart",
+        "Amount": 1
+      }
+    ]
+  },
+  "LicheForm": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.LicheFormSpell",
+    "Name": "Liche Form",
+    "Mantra": "Umbrae Tenebrae Miserere",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DragonsBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "Plague": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Name": "Plague",
+    "Mantra": "Fluctus Puter Se Aresceret",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 227,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.BatWing",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DaemonBone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DragonsBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bloodspawn",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Pumice",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SerpentScale",
+        "Amount": 1
+      }
+    ]
+  },
+  "Spellbind": {
+    "Type": "Scripts.Zulu.Spells.Necromancy.SpellbindSpell",
+    "Name": "Spellbind",
+    "Mantra": "Nutu Magistri Se Compellere",
+    "Circle": "Necro",
+    "DamageType": "Necro",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 221,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.EyeOfNewt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.FertileDirt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.PigIron",
+        "Amount": 1
+      }
+    ]
+  },
+  "Antidote": {
+    "Type": "Scripts.Zulu.Spells.Earth.AntidoteSpell",
+    "Name": "Antidote",
+    "Mantra": "Puissante Terre Traite Ce Patient",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 212,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DeadWood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.FertileDirt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.ExecutionersCap",
+        "Amount": 1
+      }
+    ]
+  },
+  "OwlSight": {
+    "Type": "Scripts.Zulu.Spells.Earth.OwlSightSpell",
+    "Name": "Owl Sight",
+    "Mantra": "Vista Da Noite",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.EyeOfNewt",
+        "Amount": 1
+      }
+    ]
+  },
+  "ShiftingEarth": {
+    "Type": "Scripts.Zulu.Spells.Earth.ShiftingEarthSpell",
+    "Name": "Shifting Earth",
+    "Mantra": "Esmagamento Con Pedra",
+    "Circle": "Earth",
+    "DamageType": "Earth",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.FertileDirt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.DeadWood",
+        "Amount": 1
+      }
+    ]
+  },
+  "SummonMammals": {
+    "Type": "Scripts.Zulu.Spells.Earth.SummonMammalsSpell",
+    "Name": "Summon Mammals",
+    "Mantra": "Chame O Mamifero Agora",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 0,
+    "LeftHandEffect": 0,
+    "Action": 16,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": false,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.SerpentScale",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.PigIron",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.EyeOfNewt",
+        "Amount": 1
+      }
+    ]
+  },
+  "CallLightning": {
+    "Type": "Scripts.Zulu.Spells.Earth.CallLightningSpell",
+    "Name": "Call Lightning",
+    "Mantra": "Batida Do Deus",
+    "Circle": "Earth",
+    "DamageType": "Air",
+    "RightHandEffect": 9031,
+    "LeftHandEffect": 9031,
+    "Action": 236,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.WyrmsHeart",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.PigIron",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Bone",
+        "Amount": 1
+      }
+    ]
+  },
+  "EarthsBlessing": {
+    "Type": "Scripts.Zulu.Spells.Earth.EarthsBlessingSpell",
+    "Name": "Earths Blessing",
+    "Mantra": "Foria Da Terra",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 203,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.PigIron",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "EarthPortal": {
+    "Type": "Scripts.Zulu.Spells.Earth.EarthPortalSpell",
+    "Name": "Earth Portal",
+    "Mantra": "Destraves Limites Da Natureza",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9032,
+    "LeftHandEffect": 9032,
+    "Action": 263,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.ExecutionersCap",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.EyeOfNewt",
+        "Amount": 1
+      }
+    ]
+  },
+  "NaturesTouch": {
+    "Type": "Scripts.Zulu.Spells.Earth.NaturesTouchSpell",
+    "Name": "Natures Touch",
+    "Mantra": "Guerissez Par Terre",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9061,
+    "LeftHandEffect": 9061,
+    "Action": 204,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Beneficial"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Pumice",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      }
+    ]
+  },
+  "GustOfAir": {
+    "Type": "Scripts.Zulu.Spells.Earth.GustOfAirSpell",
+    "Name": "Gust Of Air",
+    "Mantra": "Gust Do Ar",
+    "Circle": "Earth",
+    "DamageType": "Air",
+    "RightHandEffect": 9022,
+    "LeftHandEffect": 9022,
+    "Action": 230,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BatWing",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      }
+    ]
+  },
+  "RisingFire": {
+    "Type": "Scripts.Zulu.Spells.Earth.RisingFireSpell",
+    "Name": "Rising Fire",
+    "Mantra": "Batida Do Fogo",
+    "Circle": "Earth",
+    "DamageType": "Fire",
+    "RightHandEffect": 9012,
+    "LeftHandEffect": 9012,
+    "Action": 233,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": true,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "None"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.BatWing",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VialOfBlood",
+        "Amount": 1
+      }
+    ]
+  },
+  "Shapeshift": {
+    "Type": "Scripts.Zulu.Spells.Earth.ShapeshiftSpell",
+    "Name": "Shapeshift",
+    "Mantra": "Mude Minha Forma",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9002,
+    "LeftHandEffect": 9002,
+    "Action": 221,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.WyrmsHeart",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Blackmoor",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.BatWing",
+        "Amount": 1
+      }
+    ]
+  },
+  "IceStrike": {
+    "Type": "Scripts.Zulu.Spells.Earth.IceStrikeSpell",
+    "Name": "Ice Strike",
+    "Mantra": "Geada Com Inverno",
+    "Circle": "Earth",
+    "DamageType": "Water",
+    "RightHandEffect": 9012,
+    "LeftHandEffect": 9012,
+    "Action": 233,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "TargetOptions": {
+      "Range": 12,
+      "AllowGround": false,
+      "AllowMultis": true,
+      "AllowNonLocal": false,
+      "CheckLos": true,
+      "Flags": "Harmful"
+    },
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.Bone",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.BatWing",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Brimstone",
+        "Amount": 1
+      }
+    ]
+  },
+  "EarthSpirit": {
+    "Type": "Scripts.Zulu.Spells.Earth.EarthSpiritSpell",
+    "Name": "Earth Spirit",
+    "Mantra": "Chame A Terra Elemental",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9010,
+    "LeftHandEffect": 9010,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.DragonsBlood",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.FertileDirt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      }
+    ]
+  },
+  "FireSpirit": {
+    "Type": "Scripts.Zulu.Spells.Earth.FireSpiritSpell",
+    "Name": "Fire Spirit",
+    "Mantra": "Chame O Fogo Elemental",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9010,
+    "LeftHandEffect": 9010,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.EyeOfNewt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Blackmoor",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.Obsidian",
+        "Amount": 1
+      }
+    ]
+  },
+  "StormSpirit": {
+    "Type": "Scripts.Zulu.Spells.Earth.StormSpiritSpell",
+    "Name": "Storm Spirit",
+    "Mantra": "Chame O Ar Elemental",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9010,
+    "LeftHandEffect": 9010,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.FertileDirt",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.VolcanicAsh",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.BatWing",
+        "Amount": 1
+      }
+    ]
+  },
+  "WaterSpirit": {
+    "Type": "Scripts.Zulu.Spells.Earth.WaterSpiritSpell",
+    "Name": "Water Spirit",
+    "Mantra": "Chame A Agua Elemental",
+    "Circle": "Earth",
+    "DamageType": "None",
+    "RightHandEffect": 9010,
+    "LeftHandEffect": 9010,
+    "Action": 269,
+    "ShowHandMovement": true,
+    "RevealOnCast": true,
+    "Resistable": true,
+    "Reflectable": true,
+    "ClearHandsOnCast": true,
+    "BlocksMovement": false,
+    "AllowTown": true,
+    "AllowDead": false,
+    "ReagentCosts": [
+      {
+        "Reagent": "Server.Items.WyrmsHeart",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.SerpentScale",
+        "Amount": 1
+      },
+      {
+        "Reagent": "Server.Items.EyeOfNewt",
+        "Amount": 1
+      }
+    ]
+  }
+}

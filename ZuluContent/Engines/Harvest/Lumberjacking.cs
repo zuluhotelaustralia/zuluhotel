@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using static Server.Configurations.MessageHueConfiguration;
 using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Harvest
@@ -28,11 +28,11 @@ namespace Server.Engines.Harvest
 
         private Lumberjacking()
         {
-            var res = LogConfiguration.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
+            var res = ZhConfig.Resources.Logs.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
                 new HarvestResource(e.HarvestSkillRequired, $"{e.Name}(s)", e.ResourceType)).ToArray();
-            var veins = LogConfiguration.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
+            var veins = ZhConfig.Resources.Logs.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
                 new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
-            var defaultLog = LogConfiguration.Entries[0];
+            var defaultLog = ZhConfig.Resources.Logs.Entries[0];
             var defaultVein = new HarvestVein(defaultLog.VeinChance, new HarvestResource(
                 defaultLog.HarvestSkillRequired,
                 defaultLog.Name, defaultLog.ResourceType));
@@ -42,38 +42,38 @@ namespace Server.Engines.Harvest
             HarvestDefinition lumber = new HarvestDefinition
             {
                 // Resource banks are every 1x1 tiles
-                BankWidth = LogConfiguration.BankWidth,
-                BankHeight = LogConfiguration.BankHeight,
+                BankWidth = ZhConfig.Resources.Logs.BankWidth,
+                BankHeight = ZhConfig.Resources.Logs.BankHeight,
 
                 // Every bank holds from 45 to 90 ore
-                MinTotal = LogConfiguration.MinTotal,
-                MaxTotal = LogConfiguration.MaxTotal,
+                MinTotal = ZhConfig.Resources.Logs.MinTotal,
+                MaxTotal = ZhConfig.Resources.Logs.MaxTotal,
 
                 // A resource bank will respawn its content every 10 to 20 minutes
-                MinRespawn = TimeSpan.FromMinutes(LogConfiguration.MinRespawn),
-                MaxRespawn = TimeSpan.FromMinutes(LogConfiguration.MaxRespawn),
+                MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Logs.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Logs.MaxRespawn),
 
                 // Skill checking is done on the Mining skill
-                Skill = LogConfiguration.Skill,
+                Skill = ZhConfig.Resources.Logs.Skill,
 
                 // Set the list of harvestable tiles
                 Tiles = m_TreeTiles,
 
                 // Players must be within 2 tiles to harvest
-                MaxRange = LogConfiguration.MaxRange,
+                MaxRange = ZhConfig.Resources.Logs.MaxRange,
 
                 // Ten logs per harvest action
                 ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1,
 
                 // Maximum chance to roll for colored veins
-                MaxChance = LogConfiguration.MaxChance,
+                MaxChance = ZhConfig.Resources.Logs.MaxChance,
 
                 // The chopping effect
-                EffectActions = LogConfiguration.LogEffect.Actions,
-                EffectSounds = LogConfiguration.LogEffect.Sounds,
-                EffectCounts = LogConfiguration.LogEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(LogConfiguration.LogEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(LogConfiguration.LogEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Logs.LogEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Logs.LogEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Logs.LogEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Logs.LogEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Logs.LogEffect.SoundDelay),
 
                 NoResourcesMessage = 500493, // There's not enough wood here to harvest.
                 FailMessage = 500495, // You hack at the tree for a while, but fail to produce any useable wood.
@@ -188,10 +188,10 @@ namespace Server.Engines.Harvest
                 if (cont.TryDropItem(harvester, item, false))
                 {
                     if (message.Length > 0)
-                        harvester.SendAsciiMessage(MessageSuccessHue, message);
+                        harvester.SendSuccessMessage(message);
                 }
                 else if (message.Length > 0)
-                    harvester.SendAsciiMessage(MessageFailureHue, message);
+                    harvester.SendFailureMessage(message);
             }
         }
 
@@ -225,7 +225,7 @@ namespace Server.Engines.Harvest
 
         public override void OnHarvestStarted(Mobile from, Item tool, HarvestDefinition def, object toHarvest)
         {
-            from.SendAsciiMessage(MessageSuccessHue, "You start lumberjacking...");
+            from.SendSuccessMessage("You start lumberjacking...");
         }
 
         public override void OnBadHarvestTarget(Mobile from, Item tool, object toHarvest)

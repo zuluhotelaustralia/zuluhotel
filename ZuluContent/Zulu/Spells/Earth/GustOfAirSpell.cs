@@ -38,7 +38,7 @@ namespace Scripts.Zulu.Spells.Earth
             target.PlaySound(0x0107);
             target.PlaySound(0x0108);
             
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
+            SpellHelper.Damage(damage, target, Caster, this);
             
             var magery = Caster.Skills[SkillName.Magery].Value / 10;
             

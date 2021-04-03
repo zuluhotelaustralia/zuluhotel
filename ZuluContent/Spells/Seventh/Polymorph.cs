@@ -124,7 +124,7 @@ namespace Server.Spells.Seventh
                     break;
             }
 
-            if (Caster.GetClassBonus(SkillName.Magery) > 1.0)
+            if (Caster.GetClassModifier(SkillName.Magery) > 1.0)
             {
                 group += 1;
                 critter += 2;

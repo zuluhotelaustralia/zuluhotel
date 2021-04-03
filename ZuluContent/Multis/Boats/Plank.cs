@@ -1,5 +1,6 @@
 using System;
 using Server.Multis;
+using ZuluContent.Multis;
 
 namespace Server.Items
 {
@@ -167,7 +168,7 @@ namespace Server.Items
 					{
 						z = mobile.Z + j;
 
-						if ( map.CanFit( x, y, z, 16, false, false ) && !Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) )
+						if ( map.CanFit( x, y, z, 16, false, false ) && new Point3D(x, y, z).GetMulti(map) == null)
 						{
 							if ( i == 1 && j >= -2 && j <= 2 )
 								return true;
@@ -179,7 +180,7 @@ namespace Server.Items
 
 					z = map.GetAverageZ( x, y );
 
-					if ( map.CanFit( x, y, z, 16, false, false ) && !Spells.SpellHelper.CheckMulti( new Point3D( x, y, z ), map ) )
+					if ( map.CanFit( x, y, z, 16, false, false ) && new Point3D(x, y, z).GetMulti(map) == null)
 					{
 						if ( i == 1 )
 							return true;

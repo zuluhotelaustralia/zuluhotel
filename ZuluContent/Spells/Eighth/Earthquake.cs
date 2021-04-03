@@ -11,8 +11,6 @@ namespace Server.Spells.Eighth
 {
     public class EarthquakeSpell : MagerySpell, IAsyncSpell
     {
-        public override bool DelayedDamage { get; } = true;
-
         public EarthquakeSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }

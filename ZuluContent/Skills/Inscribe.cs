@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
+using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Items;
-using static Server.Configurations.MessageHueConfiguration;
 
 namespace Server.SkillHandlers
 {
@@ -106,7 +106,7 @@ namespace Server.SkillHandlers
                 }
                 else
                 {
-                    from.SendAsciiMessage(MessageFailureHue, "That is not a valid selection.");
+                    from.SendFailureMessage("That is not a valid selection.");
                 }
             }
 
@@ -195,18 +195,18 @@ namespace Server.SkillHandlers
                     if (from.CheckTargetSkill(SkillName.Inscribe, customBook, 100, 150))
                     {
                         customBook.AddEntry(m_ScrollSrc);
-                        from.SendAsciiMessage(MessageSuccessHue, "You have successfully inscribed that spell.");
+                        from.SendSuccessMessage("You have successfully inscribed that spell.");
                         from.PlaySound(0x249);
                     }
                     else
                     {
                         m_ScrollSrc.Delete();
-                        from.SendAsciiMessage(MessageFailureHue, "You fail to inscribe that scroll.");
+                        from.SendFailureMessage("You fail to inscribe that scroll.");
                     }
                 }
                 else
                 {
-                    from.SendAsciiMessage(MessageFailureHue, "You cannot inscribe to that.");
+                    from.SendFailureMessage("You cannot inscribe to that.");
                 }
             }
 

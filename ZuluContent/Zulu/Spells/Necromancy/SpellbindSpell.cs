@@ -79,11 +79,11 @@ namespace Scripts.Zulu.Spells.Necromancy
                     var ownerTaming = owner.Skills.AnimalTaming.Value;
                     var ownerMagery = owner.Skills.Magery.Value;
 
-                    if (owner.GetClassBonus(SkillName.AnimalTaming) > 1.0)
-                        ownerTaming *= owner.GetClassBonus(SkillName.AnimalTaming);
+                    if (owner.GetClassModifier(SkillName.AnimalTaming) > 1.0)
+                        ownerTaming *= owner.GetClassModifier(SkillName.AnimalTaming);
 
-                    if (owner.GetClassBonus(SkillName.Magery) > 1.0)
-                        ownerMagery *= owner.GetClassBonus(SkillName.Magery);
+                    if (owner.GetClassModifier(SkillName.Magery) > 1.0)
+                        ownerMagery *= owner.GetClassModifier(SkillName.Magery);
 
                     if (ownerTaming > magery || ownerMagery > magery)
                     {

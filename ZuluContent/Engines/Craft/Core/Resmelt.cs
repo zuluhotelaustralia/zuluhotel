@@ -66,7 +66,7 @@ namespace Server.Engines.Craft
                     if (craftResource.Amount < 2)
                         return SmeltResult.Invalid; // Not enough metal to resmelt
 
-                    var oreEntry = OreConfiguration.Entries[(int) resource - 1];
+                    var oreEntry = ZhConfig.Resources.Ores.Entries[(int) resource - 1];
 
                     var difficulty = oreEntry.SmeltSkillRequired;
 

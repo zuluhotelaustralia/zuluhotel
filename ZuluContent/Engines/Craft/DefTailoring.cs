@@ -213,7 +213,7 @@ namespace Server.Engines.Craft
 
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
-            HideConfiguration.Entries.ToList()
+            ZhConfig.Resources.Hides.Entries.ToList()
                 .ForEach(e => AddSubRes(e.ResourceType, e.Name, e.CraftSkillRequired, 1044462, e.Name));
 
             MarkOption = true;

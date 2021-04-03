@@ -29,7 +29,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref range));
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref powerLevel));
 
-            var bonus = Caster.GetClassBonus(SkillName.Magery);
+            var bonus = Caster.GetClassModifier(SkillName.Magery);
             var sleepTime = 5.0;
 
             if (bonus > 1.0)

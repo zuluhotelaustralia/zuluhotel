@@ -9,6 +9,7 @@ using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Third;
 using Server.Targeting;
+using ZuluContent.Multis;
 
 namespace Server.Mobiles
 {
@@ -1012,7 +1013,7 @@ namespace Server.Mobiles
                     LandTarget lt = new LandTarget(p, map);
 
                     if ((targ.Range == -1 || m_Mobile.InRange(p, targ.Range)) && m_Mobile.InLOS(lt) &&
-                        map.CanSpawnMobile(px + x, py + y, lt.Z) && !SpellHelper.CheckMulti(p, map))
+                        map.CanSpawnMobile(px + x, py + y, lt.Z) && p.GetMulti(map) == null)
                     {
                         targ.Invoke(m_Mobile, lt);
                         return true;
@@ -1032,7 +1033,7 @@ namespace Server.Mobiles
                     LandTarget lt = new LandTarget(randomPoint, map);
 
                     if (m_Mobile.InLOS(lt) && map.CanSpawnMobile(lt.X, lt.Y, lt.Z) &&
-                        !SpellHelper.CheckMulti(randomPoint, map))
+                        randomPoint.GetMulti(map) == null)
                     {
                         targ.Invoke(m_Mobile, new LandTarget(randomPoint, map));
                         return true;

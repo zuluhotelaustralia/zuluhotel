@@ -9,9 +9,7 @@ namespace Server.Configurations
     public partial class ResourceConfiguration : BaseSingleton<ResourceConfiguration>
     {
         public readonly OreSettings Ores;
-
         public readonly LogSettings Logs;
-
         public readonly HideSettings Hides;
 
         protected ResourceConfiguration()

@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Server.Items;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Targeting;
+using ZuluContent.Multis;
 
 namespace Server.Spells.Fourth
 {
@@ -11,6 +13,12 @@ namespace Server.Spells.Fourth
     {
         private readonly Runebook m_Book;
         private readonly RunebookEntry m_Entry;
+
+        [SuppressMessage("ReSharper", "RedundantOverload.Global")]
+        public RecallSpell(Mobile caster, Item spellItem) : this(caster, spellItem, null)
+        {
+            
+        }
 
         public RecallSpell(Mobile caster, Item spellItem, RunebookEntry entry = null, Runebook book = null)
             : base(caster, spellItem)
@@ -28,7 +36,7 @@ namespace Server.Spells.Fourth
             if (m_Book == null && m_Entry == null)
                 await (this as ITargetableAsyncSpell<Item>).SendTargetAsync();
             else
-                Effect(m_Entry.Location, m_Entry.Map, true);
+                Effect(m_Entry.Location, m_Entry.Map);
         }
 
         public async Task OnTargetAsync(ITargetResponse<Item> response)
@@ -41,7 +49,7 @@ namespace Server.Spells.Fourth
                 case RecallRune rune:
                 {
                     if (rune.Marked)
-                        Effect(rune.Target, rune.TargetMap, true);
+                        Effect(rune.Target, rune.TargetMap);
                     else
                         Caster.SendLocalizedMessage(501805); // That rune is not yet marked.
 
@@ -54,7 +62,7 @@ namespace Server.Spells.Fourth
                     if (entry is null)
                         Caster.SendLocalizedMessage(502423); // This place in the book is empty.
                     else
-                        Effect(entry.Location, entry.Map, true);
+                        Effect(entry.Location, entry.Map);
 
                     return;
                 }
@@ -69,7 +77,7 @@ namespace Server.Spells.Fourth
             Caster.SendLocalizedMessage(502357); // I can not recall from that object.
         }
 
-        private void Effect(Point3D loc, Map map, bool checkMulti)
+        private void Effect(Point3D loc, Map map, bool checkMulti = true)
         {
             if (map == null || Caster.Map != map)
             {
@@ -89,7 +97,7 @@ namespace Server.Spells.Fourth
                 return;
             }
 
-            if (checkMulti && SpellHelper.CheckMulti(loc, map))
+            if (checkMulti && loc.GetMulti(map)?.IsMultiFriend(Caster) == false)
             {
                 Caster.SendLocalizedMessage(501942); // That location is blocked.
                 return;

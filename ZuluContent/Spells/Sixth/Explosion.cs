@@ -22,7 +22,7 @@ namespace Server.Spells.Sixth
             target.PlaySound(0x307);
 
             var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Fire);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
     }
 }

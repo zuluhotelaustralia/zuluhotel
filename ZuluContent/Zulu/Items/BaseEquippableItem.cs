@@ -53,28 +53,28 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalWaterResist
+        public int WaterResist
         {
             get => Enchantments.Get((WaterProtection e) => e.Value);
             set => Enchantments.Set((WaterProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalAirResist
+        public int AirResist
         {
             get => Enchantments.Get((AirProtection e) => e.Value);
             set => Enchantments.Set((AirProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPhysicalResist
+        public int PhysicalResist
         {
             get => Enchantments.Get((PhysicalProtection e) => e.Value);
             set => Enchantments.Set((PhysicalProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalFireResist
+        public int FireResist
         {
             get => Enchantments.Get((FireProtection e) => e.Value);
             set => Enchantments.Set((FireProtection e) => e.Value = value);
@@ -88,14 +88,14 @@ namespace ZuluContent.Zulu.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalEarthResist
+        public int EarthResist
         {
             get => Enchantments.Get((EarthProtection e) => e.Value);
             set => Enchantments.Set((EarthProtection e) => e.Value = value);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalNecroResist
+        public int NecroResist
         {
             get => Enchantments.Get((NecroProtection e) => e.Value);
             set => Enchantments.Set((NecroProtection e) => e.Value = value);

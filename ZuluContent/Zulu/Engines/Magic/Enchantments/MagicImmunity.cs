@@ -82,7 +82,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         
         public static readonly MagicImmunityInfo ChargedMagicImmunity = new()
         {
-            Description = "Permanent Magic Immunity",
+            Description = "Charged Magic Immunity",
             Hue = 802,
             CursedHue = 802,
             Names = new [,] {

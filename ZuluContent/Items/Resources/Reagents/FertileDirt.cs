@@ -12,7 +12,6 @@ namespace Server.Items
         public FertileDirt(int amount) : base(0xF81)
         {
             Stackable = true;
-            Weight = 0.1;
             Amount = amount;
         }
 

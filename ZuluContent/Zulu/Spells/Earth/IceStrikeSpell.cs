@@ -38,7 +38,7 @@ namespace Scripts.Zulu.Spells.Earth
             target.PlaySound(0x0116);
             target.PlaySound(0x0117);
             
-            SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Water);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
     }
 }

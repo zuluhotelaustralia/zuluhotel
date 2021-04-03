@@ -209,16 +209,15 @@ namespace Server.Items
 
             m_Entries.RemoveAt(index);
 
-            RecallRune rune = new RecallRune();
-
-            rune.Target = e.Location;
-            rune.TargetMap = e.Map;
-            rune.Description = e.Description;
-            rune.House = e.House;
-            rune.Marked = true;
-
+            var rune = new RecallRune
+            {
+                Target = e.Location, 
+                TargetMap = e.Map, 
+                Description = e.Description, 
+                Marked = true
+            };
+            
             from.AddToBackpack(rune);
-
             from.SendLocalizedMessage(502421); // You have removed the rune.
         }
 

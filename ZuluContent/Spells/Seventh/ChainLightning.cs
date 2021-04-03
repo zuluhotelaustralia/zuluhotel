@@ -31,7 +31,7 @@ namespace Server.Spells.Seventh
 
                 var damage = SpellHelper.CalcSpellDamage(Caster, target, this, true);
                 target.BoltEffect(0);
-                SpellHelper.Damage(damage, target, Caster, this, TimeSpan.Zero, ElementalType.Air);
+                SpellHelper.Damage(damage, target, Caster, this);
             }
             eable.Free();
 

@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Network;
 using Server.Targeting;
+using ZuluContent.Multis;
 
 namespace Server.Spells.Sixth
 {
@@ -15,13 +17,17 @@ namespace Server.Spells.Sixth
                 return;
             
             var target = response.Target;
-            
-            if (!SpellHelper.CheckTravel(Caster, TravelCheckType.Mark))
-                return;
 
-            if (SpellHelper.CheckMulti(Caster.Location, Caster.Map, true))
+            if (!SpellHelper.CheckTravel(Caster, TravelCheckType.Mark))
             {
-                Caster.SendLocalizedMessage(501942); // That location is blocked.
+                // Thy spell doth not appear to work...
+                Caster.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 501802, Caster.NetState);
+                return;
+            }
+
+            if (Caster.GetMulti()?.IsMultiOwner(Caster) == false)
+            {
+                Caster.SendFailureMessage(1010587); // You are not a co-owner of this house.
                 return;
             }
             

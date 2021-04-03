@@ -29,7 +29,7 @@ namespace Scripts.Zulu.Spells.Earth
             var count = Utility.RandomMinMax(1, 2);
             var bonus = 0;
             
-            if (Caster.GetClassBonus(SkillName.Magery) > 1.0)
+            if (Caster.GetClassModifier(SkillName.Magery) > 1.0)
             {
                 count += 1;
                 bonus = 1;

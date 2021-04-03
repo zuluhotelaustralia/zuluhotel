@@ -5,16 +5,12 @@ using Scripts.Zulu.Utilities;
 using Server.Engines.Magic;
 using Server.Engines.PartySystem;
 using Server.Guilds;
-using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
-using Server.Multis;
 using Server.Regions;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using static Server.Spells.SpellRegistry;
-using static Scripts.Zulu.Engines.Classes.ZuluClassExtensions;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server
@@ -90,45 +86,15 @@ namespace Server.Spells
         private static readonly bool[,] Rules =
         {
             /*T2A(Fel),	Wind(Fel),	Dungeons(Fel),	SafeZone */
-            /* Recall From */ {false, false, false, true},
+            /* Recall From */ {false, false, true, true},
             /* Recall To */ {false, false, false, false},
-            /* Gate From */ {false, false, false, false},
+            /* Gate From */ {false, false, true, false},
             /* Gate To */ {false, false, false, false},
             /* Mark In */ {false, false, false, false},
             /* Tele From */ {true, true, true, true},
             /* Tele To */ {true, true, true, false}
         };
-
-        public static bool DisableSkillCheck { get; set; }
-
-        public static TimeSpan GetDamageDelayForSpell(Spell sp)
-        {
-            return !sp.DelayedDamage ? TimeSpan.Zero : DefaultDamageDelay;
-        }
-
-        public static bool CheckMulti(Point3D p, Map map, bool houses = true, int housingRange = 0)
-        {
-            if (map == null || map == Map.Internal)
-                return false;
-
-            var sector = map.GetSector(p.X, p.Y);
-
-            foreach (var multi in sector.Multis)
-            {
-                if (multi is BaseHouse bh)
-                {
-                    if (houses && bh.IsInside(p, 16) || housingRange > 0 && bh.InRange(p, housingRange))
-                        return true;
-                }
-                else if (multi.Contains(p))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
+        
         public static void Turn(Mobile caster, object to)
         {
             var target = to as IPoint3D;
@@ -191,14 +157,14 @@ namespace Server.Spells
             var magery = caster.Skills[SkillName.Magery].Value;
             var resist = target.Skills[SkillName.MagicResist].Value;
             var chance = resist / 6.0;
-            var secondaryChance = resist - (magery / 4.0 + (int) circle * 6.0);
+            var secondaryChance = resist - ((magery / 4.0) + ((int) circle * 6.0));
 
             if (secondaryChance > chance)
                 chance = secondaryChance;
 
             if (target.ClassContainsSkill(SkillName.Magery))
             {
-                chance *= target.GetClassBonus(SkillName.Magery);
+                chance *= target.GetClassModifier(SkillName.Magery);
             }
             /*
              * TODO: Replace hacky class checking
@@ -208,7 +174,7 @@ namespace Server.Spells
              */
             else if (target.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
             {
-                var bonus = target.GetClassBonus(SkillName.Swords);
+                var bonus = target.GetClassModifier(SkillName.Swords);
                 chance = chance / bonus / 2;
                 resist /= bonus;
             }
@@ -216,11 +182,11 @@ namespace Server.Spells
             // Same as above, just the inverse for the caster
             if (caster.ClassContainsSkill(SkillName.Magery))
             {
-                chance /= caster.GetClassBonus(SkillName.Magery);
+                chance /= caster.GetClassModifier(SkillName.Magery);
             }
             else if (caster.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
             {
-                var bonus = caster.GetClassBonus(SkillName.Swords);
+                var bonus = caster.GetClassModifier(SkillName.Swords);
                 chance = chance * bonus * 2;
                 resist *= bonus;
             }
@@ -229,7 +195,7 @@ namespace Server.Spells
             {
                 AwardPoints(target, SkillName.MagicResist, (int)points / 3);
             }
-
+            
             return Utility.RandomMinMax(0, 100) <= chance;
         }
 
@@ -261,12 +227,7 @@ namespace Server.Spells
                 damage = 1;
 
             damage = (int) (damage * (1.0 + (evalInt - resist) / 200.0));
-
-            // Inverting the efficiency bonus, e.g. Mages get less spell damage, warriors get more
-            // var temp = damage;
-            // target.FireHook(h => h.OnModifyWithMagicEfficiency(target, ref temp));
-            // damage -= damage - temp;
-
+            
             if (damage < 0)
                 damage = 0;
 
@@ -523,9 +484,18 @@ namespace Server.Spells
 
             if (scaleStats)
             {
-                var power = caster.Skills[SkillName.Magery].Value / 1.5;
+                var magery = caster.Skills.Magery.Value * caster.GetClassModifier(SkillName.Magery);
+                var power = magery / 1.5;
                 caster.FireHook(h => h.OnModifyWithMagicEfficiency(caster, ref power));
-                
+
+                // The scaled stats should never exceed base stats of the creature
+                power = power switch
+                {
+                    > 100 => 100,
+                    < 1 => 1,
+                    _ => power
+                };
+
                 creature.RawStr = (int) (creature.RawStr * power / 100);
                 creature.Hits = creature.HitsMax;
 
@@ -792,15 +762,13 @@ namespace Server.Spells
             DFAlgorithm dfa = DFAlgorithm.Standard
         )
         {
-            delay ??= spell != null ? GetDamageDelayForSpell(spell) : TimeSpan.Zero;
-            damageType = spell != null && damageType == null && SpellInfos.TryGetValue(spell.GetType(), out var info) 
+            damageType ??= spell != null && SpellInfos.TryGetValue(spell.GetType(), out var info)
                 ? info.DamageType
-                : damageType;
-            
-            if (delay.Value > TimeSpan.Zero)
+                : ElementalType.None;
+
+            if (delay.HasValue && delay.Value > TimeSpan.Zero)
                 await Timer.Pause(delay.Value);
-
-
+            
             target.FireHook(h => h.OnSpellDamage(caster, target, spell, damageType.Value, ref damage));
             damage = TryResistDamage(caster, target, spell?.Circle ?? SpellCircle.First, damage);
 

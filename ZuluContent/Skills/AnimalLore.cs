@@ -220,28 +220,28 @@ namespace Server.SkillHandlers
             AddHtml(140, 68, 75, 18, FormatSkill(c, SkillName.MagicResist), false, false);
 
             AddLabel(50, 86, LabelColor, "Air Resist");
-            AddHtml(140, 86, 75, 18, FormatStat(c.ElementalAirResist), false, false);
+            AddHtml(140, 86, 75, 18, FormatStat(c.AirResist), false, false);
 
             AddLabel(50, 104, LabelColor, "Earth Resist");
-            AddHtml(140, 104, 75, 18, FormatStat(c.ElementalEarthResist), false, false);
+            AddHtml(140, 104, 75, 18, FormatStat(c.EarthResist), false, false);
 
             AddLabel(50, 122, LabelColor, "Fire Resist");
-            AddHtml(140, 122, 75, 18, FormatStat(c.ElementalFireResist), false, false);
+            AddHtml(140, 122, 75, 18, FormatStat(c.FireResist), false, false);
 
             AddLabel(50, 140, LabelColor, "Necro Resist");
-            AddHtml(140, 140, 75, 18, FormatStat(c.ElementalNecroResist), false, false);
+            AddHtml(140, 140, 75, 18, FormatStat(c.NecroResist), false, false);
 
             AddLabel(50, 158, LabelColor, "Water Resist");
-            AddHtml(140, 158, 75, 18, FormatStat(c.ElementalWaterResist), false, false);
+            AddHtml(140, 158, 75, 18, FormatStat(c.WaterResist), false, false);
 
             AddLabel(50, 176, LabelColor, "Poison Protection");
-            AddHtml(140, 176, 75, 18, FormatStat((int)c.ElementalPoisonResist), false, false);
+            AddHtml(140, 176, 75, 18, FormatStat((int)c.PoisonImmunity), false, false);
 
             AddLabel(50, 194, LabelColor, "Physical Protection");
-            AddHtml(140, 194, 75, 18, FormatStat(c.ElementalPhysicalResist), false, false);
+            AddHtml(140, 194, 75, 18, FormatStat(c.PhysicalResist), false, false);
 
             AddLabel(50, 212, LabelColor, "Magic Immunity");
-            AddHtml(140, 212, 75, 18, FormatStat((int)c.PermMagicImmunity), false, false);
+            AddHtml(140, 212, 75, 18, FormatStat((int)c.MagicImmunity), false, false);
 
             AddImage(30, 244, 2086);
             AddLabel(50, 242, HeaderColor, "Preferred Foods");

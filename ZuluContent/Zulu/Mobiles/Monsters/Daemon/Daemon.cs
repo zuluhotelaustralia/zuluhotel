@@ -55,13 +55,16 @@ namespace Server.Mobiles
                 CreatureType = CreatureType.Daemon,
                 DamageMax = 40,
                 DamageMin = 10,
-                Dex = 80,
                 Female = false,
                 FightMode = FightMode.Closest,
                 FightRange = 1,
                 HitsMax = 450,
                 Hue = 33784,
+                Str = 450,
                 Int = 350,
+                Dex = 80,
+                StamMaxSeed = 70,
+                VirtualArmor = 30,
                 ManaMaxSeed = 200,
                 Name = "<random> the Daemon",
                 PassiveSpeed = 0.4,
@@ -93,9 +96,6 @@ namespace Server.Mobiles
                     {SkillName.Magery, 100},
                     {SkillName.EvalInt, 100}
                 },
-                StamMaxSeed = 70,
-                Str = 450,
-                VirtualArmor = 30
             });
         }
 

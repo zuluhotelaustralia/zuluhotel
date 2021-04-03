@@ -13,153 +13,136 @@ using ZuluContent.Zulu.Engines.Magic.Enums;
 
 namespace Server.Mobiles
 {
-    public partial class BaseCreature : Mobile, IEnchanted, IZuluClassed
+    public partial class BaseCreature : Mobile, IEnchanted, IZuluClassed, IElementalResistible
     {
         public EnchantmentDictionary Enchantments { get; } = new();
 
         private ZuluClass m_ZuluClass;
 
-        public virtual CreatureProperties InitProperties
-        {
-            get { return CreatureProperties.Get(GetType()); }
-        }
+        public virtual CreatureProperties InitProperties => CreatureProperties.Get(GetType());
+
+        #region IElementalResistible
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalWaterResist
-        {
-            get { return Enchantments.Get((WaterProtection e) => e.Value); }
-            set { Enchantments.Set((WaterProtection e) => e.Value = value); }
-        }
+        public int WaterResist => this.GetResist(ElementalType.Water);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalAirResist
-        {
-            get { return Enchantments.Get((AirProtection e) => e.Value); }
-            set { Enchantments.Set((AirProtection e) => e.Value = value); }
-        }
+        public int AirResist => this.GetResist(ElementalType.Air);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalPhysicalResist
-        {
-            get { return Enchantments.Get((PhysicalProtection e) => e.Value); }
-            set { Enchantments.Set((PhysicalProtection e) => e.Value = value); }
-        }
+        public int PhysicalResist => this.GetResist(ElementalType.Physical);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalFireResist
-        {
-            get { return Enchantments.Get((FireProtection e) => e.Value); }
-            set { Enchantments.Set((FireProtection e) => e.Value = value); }
-        }
+        public int FireResist => this.GetResist(ElementalType.Fire);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public PoisonLevel ElementalPoisonResist
-        {
-            get { return Enchantments.Get((PoisonProtection e) => e.Value); }
-            set { Enchantments.Set((PoisonProtection e) => e.Value = value); }
-        }
+        public int EarthResist => this.GetResist(ElementalType.Earth);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalEarthResist
-        {
-            get { return Enchantments.Get((EarthProtection e) => e.Value); }
-            set { Enchantments.Set((EarthProtection e) => e.Value = value); }
-        }
+        public int NecroResist => this.GetResist(ElementalType.Necro);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int ElementalNecroResist
-        {
-            get { return Enchantments.Get((NecroProtection e) => e.Value); }
-            set { Enchantments.Set((NecroProtection e) => e.Value = value); }
-        }
+        public int ParalysisProtection => this.GetResist(ElementalType.Paralysis);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle PermMagicImmunity
-        {
-            get { return Enchantments.Get((MagicImmunity e) => e.Value); }
-            set { Enchantments.Set((MagicImmunity e) => e.Value = value); }
-        }
+        public int HealingBonus => this.GetResist(ElementalType.HealingBonus);
 
-        public virtual bool InitialInnocent
-        {
-            get { return InitProperties?.InitialInnocent ?? false; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public PoisonLevel PoisonImmunity => (PoisonLevel) this.GetResist(ElementalType.Poison);
 
-        public virtual bool AlwaysMurderer
-        {
-            get { return InitProperties?.AlwaysMurderer ?? false; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public SpellCircle MagicImmunity => (SpellCircle) this.GetResist(ElementalType.MagicImmunity);
 
-        public virtual bool AlwaysAttackable
-        {
-            get { return InitProperties?.AlwaysAttackable ?? false; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public SpellCircle MagicReflection => (SpellCircle) this.GetResist(ElementalType.MagicReflection);
 
-        public virtual bool TargetAcquireExhaustion
-        {
-            get { return InitProperties.TargetAcquireExhaustion; }
-        }
+        #endregion
 
-        public virtual Type RiseCreatureType
-        {
-            get { return InitProperties?.RiseCreatureType; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool InitialInnocent => InitProperties?.InitialInnocent ?? false;
 
-        public virtual TimeSpan RiseCreatureDelay
-        {
-            get { return InitProperties?.RiseCreatureDelay ?? TimeSpan.FromSeconds(5.0); }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool AlwaysMurderer => InitProperties?.AlwaysMurderer ?? false;
 
-        public virtual List<Type> PreferredSpells
-        {
-            get { return InitProperties?.PreferredSpells; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool AlwaysAttackable => InitProperties?.AlwaysAttackable ?? false;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool TargetAcquireExhaustion => InitProperties.TargetAcquireExhaustion;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual Type RiseCreatureType => InitProperties?.RiseCreatureType;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual TimeSpan RiseCreatureDelay => InitProperties?.RiseCreatureDelay ?? TimeSpan.FromSeconds(5.0);
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual List<Type> PreferredSpells => InitProperties?.PreferredSpells;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual CreatureType CreatureType { get; set; } = CreatureType.None;
 
-        public virtual double WeaponAbilityChance
-        {
-            get { return InitProperties?.WeaponAbilityChance ?? 0.4; }
-        }
-
-        public virtual WeaponAbility GetWeaponAbility()
-        {
-            return InitProperties?.WeaponAbility;
-        }
-
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual double WeaponAbilityChance => InitProperties?.WeaponAbilityChance ?? 0.4;
+        
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool HasBreath { get; set; } = false;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual Poison HitPoison { get; set; } = null;
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual double HitPoisonChance { get; } = 0.5;
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool CanFly { get; set; } = false;
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual InhumanSpeech SpeechType { get; set; } = null;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual OppositionGroup OppositionGroup { get; set; } = null;
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual TimeSpan ReacquireDelay { get; set; } = TimeSpan.FromSeconds(10.0);
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual int TreasureMapLevel { get; set; } = -1;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool CanRummageCorpses { get; set; } = true;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual int Meat { get; set; } = 0;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual int Hides { get; set; } = 0;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual HideType HideType { get; set; } = HideType.Regular;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool AutoDispel { get; set; } = false;
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool BardImmune { get; set; } = false;
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual int ProvokeSkillOverride { get; set; } = -1;
 
-        public virtual bool SaySpellMantra
-        {
-            get { return InitProperties?.SaySpellMantra ?? false; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool SaySpellMantra => InitProperties?.SaySpellMantra ?? false;
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual string LootTable { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual int LootItemLevel { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual int LootItemChance { get; set; }
 
+        [CommandProperty(AccessLevel.GameMaster)]
         public virtual ZuluClass ZuluClass
         {
             get
@@ -177,7 +160,8 @@ namespace Server.Mobiles
                 return m_ZuluClass;
             }
         }
-
+        
+        public virtual WeaponAbility GetWeaponAbility() => InitProperties?.WeaponAbility;
         public virtual void OnRiseSpawn(Type creatureType, Container corpse)
         {
             if (!creatureType.IsSubclassOf(typeof(BaseCreature)))
