@@ -1,8 +1,10 @@
 using System;
+using Server.Engines.Craft;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
-    public abstract class BaseLight : Item
+    public abstract class BaseLight : Item, ICraftable, IResource
     {
         private Timer m_Timer;
         private DateTime m_End;
@@ -10,6 +12,34 @@ namespace Server.Items
         private bool m_Burning = false;
         private bool m_Protected = false;
         private TimeSpan m_Duration = TimeSpan.Zero;
+        private CraftResource m_Resource;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool PlayerConstructed { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+
+                    if (CraftItem.RetainsColor(GetType()))
+                    {
+                        Hue = CraftResources.GetHue(m_Resource);
+                    }
+                }
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public MarkQuality Mark { get; set; }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual Mobile Crafter { get; set; }
 
         public abstract int LitItemID { get; }
 
@@ -88,11 +118,38 @@ namespace Server.Items
         [Constructible]
         public BaseLight(int itemID) : base(itemID)
         {
+            Mark = MarkQuality.Regular;
         }
 
         [Constructible]
         public BaseLight(Serial serial) : base(serial)
         {
+        }
+
+        public virtual int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
+            Type typeRes,
+            BaseTool tool, CraftItem craftItem, int resHue)
+        {
+            Mark = (MarkQuality) mark;
+
+            if (makersMark)
+                Crafter = from;
+
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
+            PlayerConstructed = true;
+
+            var context = craftSystem.GetContext(from);
+
+            if (context != null && context.DoNotColor)
+                Hue = 0;
+
+            return mark;
         }
 
         public virtual void PlayLitSound()
@@ -172,6 +229,11 @@ namespace Server.Items
             m_Timer = new InternalTimer(this, delay);
             m_Timer.Start();
         }
+        
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
+        }
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -199,7 +261,11 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0);
+            writer.Write((int) 1);
+            
+            ICraftable.Serialize(writer, this);
+            writer.WriteEncodedInt((int) m_Resource);
+            
             writer.Write(m_BurntOut);
             writer.Write(m_Burning);
             writer.Write(m_Duration);
@@ -217,6 +283,14 @@ namespace Server.Items
 
             switch (version)
             {
+                case 1:
+                {
+                    ICraftable.Deserialize(reader, this);
+
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
+
+                    goto case 0;
+                }
                 case 0:
                 {
                     m_BurntOut = reader.ReadBool();

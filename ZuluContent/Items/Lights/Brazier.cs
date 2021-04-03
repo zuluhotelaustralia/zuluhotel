@@ -10,8 +10,7 @@ namespace Server.Items
 		[Constructible]
 public Brazier() : base( 0xE31 )
 		{
-			Movable = false;
-			Duration = TimeSpan.Zero; // Never burnt out
+            Duration = TimeSpan.Zero; // Never burnt out
 			Burning = true;
 			Light = LightType.Circle225;
 			Weight = 20.0;
