@@ -1,3 +1,5 @@
+using System;
+using Scripts.Zulu.Spells.Necromancy;
 using Server.Commands;
 using Server.Gumps;
 using Server.Spells;
@@ -7,6 +9,36 @@ namespace Server.Items
 {
     public class Codex : CustomSpellbook
     {
+        public override int Hue { get; set; } = 0x66D;
+        public override string DefaultName { get; } = "Codex Damnorum";
+        public override int BookOffset { get; } = 100;
+        
+        public override Type SpellType { get; } = typeof(NecromancerSpell);
+
+        [Constructible]
+        public Codex() : base(0x1C13) { }
+
+        [Constructible]
+        public Codex(Serial serial) : base(serial) { }
+        
+        public override void OnOpenSpellbook(Mobile from)
+        {
+            from.SendGump(new CustomSpellbookGump(from, this, 0x898));
+        }
+
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(0);
+        }
+
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+            var version = reader.ReadInt();
+        }
+        
+        #region Commands
         public static void Initialize()
         {
             CommandSystem.Register("AllCodexSpells", AccessLevel.GameMaster, AllSpells_OnCommand);
@@ -40,40 +72,6 @@ namespace Server.Items
                 from.SendMessage("That is not a Codex. Try again.");
             }
         }
-        
-        public override int Hue { get; set; } = 0x66D;
-        public override string DefaultName { get; } = "Codex Damnorum";
-        public override int BookOffset { get; } = 100;
-
-        [Constructible]
-        public Codex() : base(0x1C13) { }
-
-        [Constructible]
-        public Codex(Serial serial) : base(serial) { }
-        
-        public override bool CanAddEntry(Mobile from, CustomSpellScroll scroll)
-        {
-            return scroll.SpellEntry >= SpellEntry.ControlUndead && scroll.SpellEntry <= SpellEntry.Spellbind &&
-                   base.CanAddEntry(from, scroll);
-        }
-
-        public override void OnOpenSpellbook(Mobile from)
-        {
-            from.SendGump(new CustomSpellbookGump(from, this, 0x898));
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write(0);
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            var version = reader.ReadInt();
-        }
+        #endregion
     }
 }
