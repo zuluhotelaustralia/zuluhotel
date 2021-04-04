@@ -12,15 +12,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class WaterSpiritSpell : EarthSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
-    
-        public override double RequiredSkill => 60.0;
-    
-        public override int RequiredMana => 5;
-
-        public WaterSpiritSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public WaterSpiritSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

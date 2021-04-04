@@ -12,12 +12,12 @@ namespace Server.Spells
         public static readonly Dictionary<Type, Func<Mobile, Item, Spell>> SpellCreators =
             SpellInfos.Keys.ToDictionary(k => k, SpellCreatorLambda);
 
-        public static Spell Create(SpellEntry spellId, Mobile caster, Item scroll)
+        public static Spell Create(SpellEntry spellId, Mobile caster, Item scroll = null)
         {
             return !SpellTypes.TryGetValue(spellId, out var t) ? null : Create(t, caster, scroll);
         }
 
-        public static Spell Create(string name, Mobile caster, Item scroll)
+        public static Spell Create(string name, Mobile caster, Item scroll = null)
         {
             if (Enum.TryParse(typeof(SpellEntry), name, true, out var result) && result is SpellEntry entry)
                 return Create(entry, caster, scroll);
@@ -25,12 +25,12 @@ namespace Server.Spells
             return null;
         }
 
-        public static Spell Create(Type t, Mobile caster, Item scroll)
+        public static Spell Create(Type t, Mobile caster, Item scroll = null)
         {
             return SpellCreators.TryGetValue(t, out var creator) ? creator(caster, scroll) : null;
         }
 
-        public static T Create<T>(Mobile caster, Item scroll) where T : Spell
+        public static T Create<T>(Mobile caster, Item scroll = null) where T : Spell
         {
             return (T) Create(typeof(T), caster, scroll);
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Engines.Classes;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
@@ -11,64 +12,29 @@ namespace Server.Spells
     public abstract class Spell : ISpell
     {
         private static readonly TimeSpan NextSpellDelay = TimeSpan.FromSeconds(0.75);
-
         private static readonly TimeSpan AnimateDelay = TimeSpan.FromSeconds(1.5);
-
         private AnimTimer m_AnimTimer;
-
-        private bool m_SpellStrike;
         private long m_StartCastTime;
-
-        public Spell(Mobile caster, Item spellItem = null, bool spellStrike = false)
+        public Mobile Caster { get; }
+        public SpellCircle Circle { get; }
+        public SpellState State { get; protected set; }
+        public SpellInfo Info { get; }
+        public Item SpellItem { get; }
+        public virtual SkillName CastSkill { get; } = SkillName.Magery;
+        public virtual SkillName DamageSkill { get; } = SkillName.EvalInt;
+        public virtual bool CheckNextSpellTime => !IsWand();
+        public virtual int Mana => Circle.Mana;
+        public virtual bool IsCasting => State == SpellState.Casting;
+        public virtual bool IsTargeting => State == SpellState.Sequencing && Caster.Target is AsyncSpellTarget;
+        
+        public Spell(Mobile caster, Item spellItem = null)
         {
             Caster = caster;
             SpellItem = spellItem;
-            m_SpellStrike = spellStrike;
+            Info = SpellRegistry.SpellInfos[GetType()];
+            Circle = Info.Circle;
         }
-
-        public SpellCircle Circle => Info.Circle;
-
-        public SpellState State { get; set; }
-
-        public Mobile Caster { get; private set; }
-
-        public SpellInfo Info => SpellRegistry.SpellInfos[GetType()];
-
-        public string Name => Info.Name;
-
-        public string Mantra => Info.Mantra;
-
-        public Type[] Reagents => Info.Reagents;
-
-        public Item SpellItem { get; private set; }
-
-        public virtual SkillName CastSkill { get; } = SkillName.Magery;
-
-        public virtual SkillName DamageSkill { get; } = SkillName.EvalInt;
-
-        public virtual bool RevealOnCast => Info.RevealOnCast;
-
-        public virtual bool ClearHandsOnCast => Info.ClearHandsOnCast;
-
-        public virtual bool ShowHandMovement => Info.ShowHandMovement;
-
-        public virtual bool BlocksMovement => Info.BlocksMovement;
-
-        public virtual bool CheckNextSpellTime => !IsWand() || !m_SpellStrike;
-
-        public abstract TimeSpan CastDelayBase { get; }
-
-        public virtual double CastDelayFastScalar { get; } = 1;
-
-        public virtual double CastDelaySecondsPerTick { get; } = 0.25;
-
-        public virtual TimeSpan CastDelayMinimum { get; } = TimeSpan.FromSeconds(0.25);
-
-        public virtual bool IsCasting => State == SpellState.Casting;
         
-        public virtual bool IsTargeting => State == SpellState.Sequencing && Caster.Target is AsyncSpellTarget;
-
-
         public virtual void OnCasterHurt()
         {
             //Confirm: Monsters and pets cannot be disturbed.
@@ -93,13 +59,10 @@ namespace Server.Spells
 
         public virtual bool OnCasterMoving(Direction d)
         {
-            if (IsCasting)
+            if (IsCasting && Info.BlocksMovement)
             {
-                if (BlocksMovement)
-                {
-                    Caster.SendLocalizedMessage(500111); // You are frozen and can not move.
-                    return false;
-                }
+                Caster.SendLocalizedMessage(500111); // You are frozen and can not move.
+                return false;
             }
             
             if (Caster.Target is AsyncSpellTarget target && target.Spell == this) 
@@ -124,28 +87,6 @@ namespace Server.Spells
 
             if (Caster.Spell == this)
                 Caster.Spell = null;
-        }
-
-        public static T Create<T>(Mobile caster, Item scroll = null, bool spellStrike = false) where T : Spell
-        {
-            var spell = SpellRegistry.Create<T>(caster, scroll);
-
-            spell.Caster = caster;
-            spell.SpellItem = scroll;
-            spell.m_SpellStrike = spellStrike;
-
-            return spell;
-        }
-        
-        public static Spell Create(SpellEntry entry, Mobile caster, Item scroll = null, bool spellStrike = false)
-        {
-            var spell = SpellRegistry.Create(entry, caster, scroll);
-
-            spell.Caster = caster;
-            spell.SpellItem = scroll;
-            spell.m_SpellStrike = spellStrike;
-
-            return spell;
         }
         
         public virtual bool OnCasterEquipping(Item item)
@@ -187,7 +128,6 @@ namespace Server.Spells
             if (Caster.Player)
             {
                 Caster.FixedEffect(0x3735, 6, 30);
-
                 Caster.PlaySound(0x5C);
             }
         }
@@ -207,7 +147,7 @@ namespace Server.Spells
 
             switch (State)
             {
-                case SpellState.Casting when !firstCircle && this is MagerySpell {Circle: SpellCircle.First}:
+                case SpellState.Casting when !firstCircle && this is MagerySpell && Circle == SpellCircle.First:
                     return;
                 case SpellState.Casting:
                 {
@@ -221,7 +161,7 @@ namespace Server.Spells
                     Caster.NextSpellTime = Core.TickCount + (int) GetDisturbRecovery().TotalMilliseconds;
                     break;
                 }
-                case SpellState.Sequencing when !firstCircle && this is MagerySpell {Circle: SpellCircle.First}:
+                case SpellState.Sequencing when !firstCircle && this is MagerySpell && Circle == SpellCircle.First:
                     return;
                 case SpellState.Sequencing:
                     State = SpellState.None;
@@ -286,9 +226,9 @@ namespace Server.Spells
                 return false;
             }
             
-            if (GetMana() > Caster.Mana && !m_SpellStrike)
+            if (Mana > Caster.Mana)
             {
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, $"{GetMana()}"); // Insufficient mana
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, $"{Mana}"); // Insufficient mana
                 return false;
             }
 
@@ -304,7 +244,7 @@ namespace Server.Spells
 
         public virtual void SayMantra()
         {
-            if (IsWand() || m_SpellStrike)
+            if (IsWand())
                 return;
 
             if (!string.IsNullOrEmpty(Info.Mantra) && (Caster is BaseCreature {SaySpellMantra: true} || Caster.Player))
@@ -321,15 +261,15 @@ namespace Server.Spells
             State = SpellState.Casting;
             Caster.Spell = this;
 
-            if (!IsWand() && RevealOnCast)
+            if (!IsWand() && Info.RevealOnCast)
                 Caster.RevealingAction();
 
             Caster.DisruptiveAction();
             SayMantra();
 
-            var castDelay = m_SpellStrike ? TimeSpan.Zero : GetCastDelay();
+            var castDelay = GetCastDelay();
 
-            if (ShowHandMovement && (Caster.Body.IsHuman || Caster.Player && Caster.Body.IsMonster))
+            if (Info.ShowHandMovement && (Caster.Body.IsHuman || Caster.Player && Caster.Body.IsMonster))
             {
                 var count = (int) Math.Ceiling(castDelay.TotalSeconds / AnimateDelay.TotalSeconds);
 
@@ -347,7 +287,7 @@ namespace Server.Spells
             }
 
 
-            if(castDelay > TimeSpan.Zero)
+            if (castDelay > TimeSpan.Zero) 
                 await Timer.Pause(castDelay);
 
             Caster.OnSpellCast(this);
@@ -368,29 +308,9 @@ namespace Server.Spells
 
         public virtual bool CheckFizzle()
         {
-            if (IsWand())
-                return true;
-
-            const double chanceOffset = 20.0;
-            const double chanceLength = 100.0 / 7.0;
-            
-            var circle = (int) Circle;
-
-            if (SpellItem != null)
-                circle -= 2;
-
-            var avg = chanceLength * circle;
-
-            var minSkill = avg - chanceOffset;
-            var maxSkill = avg + chanceOffset;
-            
-            if (DamageSkill != CastSkill)
-                Caster.CheckSkill(DamageSkill, 0.0, Caster.Skills[DamageSkill].Cap);
-
-            return Caster.CheckSkill(CastSkill, minSkill, maxSkill);
+            return IsWand() || Caster.ShilCheckSkill(CastSkill, Circle.Difficulty, Circle.PointValue);
         }
 
-        public abstract int GetMana();
 
         public virtual TimeSpan GetDisturbRecovery()
         {
@@ -409,31 +329,21 @@ namespace Server.Spells
 
         public virtual TimeSpan GetCastDelay()
         {
-            if (IsWand())
-                return TimeSpan.Zero;
+            var delay = (double)Circle.Delay;
 
-            var baseDelay = CastDelayBase.TotalMilliseconds;
+            if (Circle > 8)
+            {
+                var modifier = Caster.GetClassModifier(CastSkill);
+                if(modifier > 1.0)
+                    delay = Circle.Delay / Caster.GetClassModifier(CastSkill);
+            }
 
-            var fcDelay = -(CastDelayFastScalar * CastDelaySecondsPerTick);
-
-            //int delay = CastDelayBase + circleDelay + fcDelay;
-            var delay = baseDelay + fcDelay;
-
-            Caster.FireHook(h => h.OnGetCastDelay(Caster, this, ref delay));
-
-            return delay < CastDelayMinimum.TotalMilliseconds
-                ? CastDelayMinimum
-                : TimeSpan.FromSeconds(delay);
-
-            //return TimeSpan.FromSeconds( (double)delay / CastDelayPerSecond );
+            return TimeSpan.FromMilliseconds(delay);
         }
         
         public virtual bool CheckSequence()
         {
-            if (m_SpellStrike)
-                return true;
-
-            var mana = GetMana();
+            var mana = Mana;
 
             if (Caster.Deleted || !Caster.Alive || Caster.Spell != this || State != SpellState.Sequencing)
             {
@@ -499,7 +409,7 @@ namespace Server.Spells
 
                     wand.Movable = false;
 
-                    if (ClearHandsOnCast)
+                    if (Info.ClearHandsOnCast)
                         Caster.ClearHands();
 
                     wand.Movable = m;
@@ -507,7 +417,7 @@ namespace Server.Spells
                 }
                 default:
                 {
-                    if (ClearHandsOnCast)
+                    if (Info.ClearHandsOnCast)
                         Caster.ClearHands();
                     break;
                 }
@@ -557,7 +467,6 @@ namespace Server.Spells
             public AnimTimer(Spell spell, int count) : base(TimeSpan.Zero, AnimateDelay, count)
             {
                 m_Spell = spell;
-
                 Priority = TimerPriority.FiftyMS;
             }
 

@@ -14,15 +14,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class EarthsBlessingSpell : EarthSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
-    
-        public override double RequiredSkill => 60.0;
-    
-        public override int RequiredMana => 5;
-
-        public EarthsBlessingSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public EarthsBlessingSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

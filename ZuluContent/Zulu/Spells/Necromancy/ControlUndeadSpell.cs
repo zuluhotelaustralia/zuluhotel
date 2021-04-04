@@ -15,9 +15,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class ControlUndeadSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public ControlUndeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public ControlUndeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<BaseCreature> response)
         {

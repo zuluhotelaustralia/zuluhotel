@@ -14,15 +14,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class ShiftingEarthSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
-    
-        public override double RequiredSkill => 60.0;
-    
-        public override int RequiredMana => 5;
-
-        public ShiftingEarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public ShiftingEarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

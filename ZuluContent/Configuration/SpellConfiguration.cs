@@ -12,11 +12,19 @@ namespace Server.Configurations
     {
         public readonly Dictionary<Type, SpellInfo> SpellInfos;
         public readonly Dictionary<SpellEntry, Type> SpellTypes;
+        public readonly Dictionary<int, SpellCircle> SpellCircles;
 
         protected SpellConfiguration()
         {
-            var config = ZhConfig.DeserializeJsonConfig<Dictionary<SpellEntry, SpellInfo>>("Data/Magic/spells.json");
+            var circleConfig = ZhConfig.DeserializeJsonConfig<SpellCircle[]>("Data/Magic/circles.json");
+            SpellCircles = circleConfig.ToDictionary(v => v.Id, v => v);
+            
+            var config = ZhConfig.DeserializeJsonConfig<Dictionary<SpellEntry, SpellInfo>>(
+                "Data/Magic/spells.json",
+                JsonConfig.GetOptions(new SpellCircleConverterFactory(SpellCircles.Values))
+            );
 
+            
             SpellInfos = config.ToDictionary(kv => kv.Value.Type, kv => kv.Value);
             SpellTypes = config.ToDictionary(kv => kv.Key, kv => kv.Value.Type);
         }

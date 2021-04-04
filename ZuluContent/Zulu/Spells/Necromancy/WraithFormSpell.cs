@@ -11,9 +11,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class WraithFormSpell : NecromancerSpell, IAsyncSpell
     {
-        public WraithFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public WraithFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

@@ -40,27 +40,21 @@ namespace Server.Items
                 from.SendMessage("That is not a Codex. Try again.");
             }
         }
+        
+        public override int Hue { get; set; } = 0x66D;
+        public override string DefaultName { get; } = "Codex Damnorum";
+        public override int BookOffset { get; } = 100;
 
         [Constructible]
-        public Codex() : base(0x1C13)
-        {
-            Name = "Codex Damnorum";
-            Hue = 0x66D;
-        }
+        public Codex() : base(0x1C13) { }
 
         [Constructible]
-        public Codex(Serial serial) : base(serial)
+        public Codex(Serial serial) : base(serial) { }
+        
+        public override bool CanAddEntry(Mobile from, CustomSpellScroll scroll)
         {
-        }
-
-        public override int BookOffset
-        {
-            get { return 100; }
-        }
-
-        public override SpellCircle SpellbookCircle
-        {
-            get => SpellCircle.Necro;
+            return scroll.SpellEntry >= SpellEntry.ControlUndead && scroll.SpellEntry <= SpellEntry.Spellbind &&
+                   base.CanAddEntry(from, scroll);
         }
 
         public override void OnOpenSpellbook(Mobile from)
