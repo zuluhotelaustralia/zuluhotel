@@ -244,7 +244,7 @@ namespace Server.Spells
             if (!caster.Alive || !target.Alive || target.Hidden)
                 return 0;
 
-            var circle = (int) spell.Info.Circle + 1;
+            var circle = (int) spell.Info.Circle;
             if (areaSpell)
                 circle -= 3;
 

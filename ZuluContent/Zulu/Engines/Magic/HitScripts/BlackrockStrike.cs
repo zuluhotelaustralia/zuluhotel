@@ -14,7 +14,7 @@ namespace Server.Engines.Magic.HitScripts
 
             try
             {
-                var spell = Spell.Create<DispelSpell>(attacker, null, true);
+                var spell = SpellRegistry.Create<DispelSpell>(attacker);
                 
                 spell.OnTargetAsync(new TargetResponse<Mobile>
                 {

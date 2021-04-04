@@ -5,8 +5,8 @@ namespace Server.Items
     public abstract class CustomSpellScroll : SpellScroll
     {
         [Constructible]
-        public CustomSpellScroll(SpellEntry spellEntry, int itemId, int amount, int hue) : base(spellEntry, itemId,
-            amount)
+        public CustomSpellScroll(SpellEntry spellEntry, int itemId, int amount, int hue) 
+            : base(spellEntry, itemId, amount)
         {
             Hue = hue;
         }

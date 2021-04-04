@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Text.Json;
 using Server.Configurations;
 using Server.Json;
 using ZuluContent.Configuration;
@@ -78,7 +79,7 @@ namespace Server
             throw new ArgumentNullException($"{typeof(T)} is not registered");
         }
 
-        public static T DeserializeJsonConfig<T>(string configFile)
+        public static T DeserializeJsonConfig<T>(string configFile, JsonSerializerOptions options = null)
         {
             var path = Path.Combine(Core.BaseDirectory, configFile);
             Console.Write($"\tDeserializeJsonConfig<{typeof(T).Name}>: loading {path} ... ");
@@ -87,9 +88,8 @@ namespace Server
             {
                 throw new FileLoadException($"DeserializeJsonConfig<{typeof(T).Name}>: {path} was not found!");
             }
-
-            var options = JsonConfig.GetOptions(new TextDefinitionConverterFactory());
-            var config = JsonConfig.Deserialize<T>(path, options);
+            
+            var config = JsonConfig.Deserialize<T>(path, options ?? JsonConfig.GetOptions(new TextDefinitionConverterFactory()));
 
             if (config == null)
                 throw new DataException($"DeserializeJsonConfig<{typeof(T).Name}>: failed to deserialize {path}!");

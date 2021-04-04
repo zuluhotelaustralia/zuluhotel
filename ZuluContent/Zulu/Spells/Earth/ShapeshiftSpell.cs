@@ -17,12 +17,6 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class ShapeshiftSpell : EarthSpell, IAsyncSpell
     {
-        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
-    
-        public override double RequiredSkill => 60.0;
-    
-        public override int RequiredMana => 5;
-
         private static readonly Dictionary<int, (int Difficulty, int Points)> BodyData =
             new()
             {

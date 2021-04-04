@@ -13,15 +13,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class GustOfAirSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0);
-    
-        public override double RequiredSkill => 60.0;
-    
-        public override int RequiredMana => 5;
-
-        public GustOfAirSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
-        {
-        }
+        public GustOfAirSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

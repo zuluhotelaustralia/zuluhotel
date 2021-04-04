@@ -1,59 +1,38 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Utilities;
 using Server.Gumps;
-using Server.Network;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Spells;
 
 namespace Server.Items
 {
-    public class CustomSpellbook : Item, ISecurable
+    public abstract class CustomSpellbook : Item, ISecurable
     {
-        private ulong m_Entries;
-        private SecureLevel m_Level;
-
-        private List<Mobile> m_Openers = new List<Mobile>();
+        [CommandProperty(AccessLevel.GameMaster)]
+        public SecureLevel Level { get; set; }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public List<Mobile> Openers { get; set; } = new();
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SecureLevel Level
-        {
-            get { return m_Level; }
-            set { m_Level = value; }
-        }
-
-        public List<Mobile> Openers
-        {
-            get { return m_Openers; }
-            set { m_Openers = value; }
-        }
-
+        public ulong Entries { get; set; }
+        public abstract Type SpellType { get; }
+        public virtual int BookOffset { get; } = 0;
+        public virtual int BookCount { get; } = 16;
+        public override bool DisplayLootType { get; } = false;
 
         [Constructible]
-        public CustomSpellbook(int itemID) : base(itemID)
+        public CustomSpellbook(int itemId) : base(itemId)
         {
             Weight = 3.0;
             LootType = LootType.Blessed;
 
             Layer = Layer.OneHanded;
 
-            m_Entries = (ulong) 0;
+            Entries = (ulong) 0;
 
-            m_Level = SecureLevel.CoOwners;
-        }
-
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public ulong Entries
-        {
-            get => m_Entries;
-            set
-            {
-                if (m_Entries != value)
-                {
-                    m_Entries = value;
-                }
-            }
+            Level = SecureLevel.CoOwners;
         }
 
         [Constructible]
@@ -65,7 +44,7 @@ namespace Server.Items
         {
             spellId -= BookOffset;
 
-            return spellId >= 0 && (int) spellId < BookCount && (m_Entries & ((ulong) 1 << (int) spellId)) != 0;
+            return spellId >= 0 && (int) spellId < BookCount && (Entries & ((ulong) 1 << (int) spellId)) != 0;
         }
 
         public override bool AllowEquippedCast(Mobile from)
@@ -73,78 +52,27 @@ namespace Server.Items
             return true;
         }
 
-        public override void Serialize(IGenericWriter writer)
+        public virtual bool CanAddEntry(Mobile from, CustomSpellScroll scroll)
         {
-            base.Serialize(writer);
-
-            writer.Write(0);
-
-            writer.Write((int) m_Level);
-
-            writer.Write(m_Entries);
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            LootType = LootType.Blessed;
-
-            int version = reader.ReadInt();
-
-            switch (version)
+            if (!SpellRegistry.GetInfo(scroll.SpellEntry).Type.IsAssignableTo(SpellType))
             {
-                case 0:
-                {
-                    m_Level = (SecureLevel) reader.ReadInt();
-
-                    m_Entries = reader.ReadULong();
-
-                    break;
-                }
+                from.SendFailureMessage(501624); // Can't inscribe that item.
+                return false;
             }
-        }
-
-        public virtual int BookOffset
-        {
-            get { return 0; }
-        }
-
-        public virtual int BookCount
-        {
-            get { return 16; }
-        }
-
-        public virtual SpellCircle SpellbookCircle
-        {
-            get => 0;
-        }
-
-        public static SpellCircle GetCircleForSpell(SpellEntry spellEntry)
-        {
-            return SpellRegistry.GetInfo(spellEntry).Circle;
-        }
-
-        public bool CanAddEntry(Mobile from, CustomSpellScroll scroll)
-        {
+            
             if (scroll.Amount == 1)
             {
-                SpellCircle circle = GetCircleForSpell(scroll.SpellEntry);
-
-                if (circle != SpellbookCircle)
-                    return false;
-
                 if (HasSpell(scroll.SpellEntry))
                 {
-                    from.SendLocalizedMessage(500179); // That spell is already present in that spellbook.
+                    from.SendFailureMessage(500179); // That spell is already present in that spellbook.
                     return false;
                 }
 
-                int val = (int) scroll.SpellEntry - BookOffset;
+                var val = (int) scroll.SpellEntry - BookOffset;
 
                 if (val >= 0 && val < BookCount)
                 {
-                    m_Entries |= (ulong) 1 << val;
+                    Entries |= (ulong) 1 << val;
 
                     scroll.Delete();
                     return true;
@@ -160,11 +88,11 @@ namespace Server.Items
         {
             if (scroll.Amount == 1)
             {
-                int val = (int) scroll.SpellEntry - BookOffset;
+                var val = (int) scroll.SpellEntry - BookOffset;
 
                 if (val >= 0 && val < BookCount)
                 {
-                    m_Entries |= (ulong) 1 << val;
+                    Entries |= (ulong) 1 << val;
 
                     scroll.Delete();
                 }
@@ -173,15 +101,13 @@ namespace Server.Items
 
         public bool IsOpen(Mobile toCheck)
         {
-            NetState ns = toCheck.NetState;
+            var ns = toCheck.NetState;
 
             if (ns != null)
             {
                 foreach (var gump in ns.Gumps)
                 {
-                    CustomSpellbookGump bookGump = gump as CustomSpellbookGump;
-
-                    if (bookGump != null && bookGump.Book == this)
+                    if (gump is CustomSpellbookGump bookGump && bookGump.Book == this)
                     {
                         return true;
                     }
@@ -191,10 +117,6 @@ namespace Server.Items
             return false;
         }
 
-        public override bool DisplayLootType
-        {
-            get { return false; }
-        }
 
         public override bool OnDragLift(Mobile from)
         {
@@ -204,13 +126,11 @@ namespace Server.Items
                 return false;
             }
 
-            foreach (Mobile m in m_Openers)
+            foreach (var m in Openers)
                 if (IsOpen(m))
                     m.CloseGump<CustomSpellbookGump>();
-            ;
 
-            m_Openers.Clear();
-
+            Openers.Clear();
             return true;
         }
 
@@ -234,7 +154,7 @@ namespace Server.Items
 
                 OnOpenSpellbook(from);
 
-                m_Openers.Add(from);
+                Openers.Add(from);
             }
         }
 
@@ -244,12 +164,10 @@ namespace Server.Items
 
         public override void OnAfterDuped(Item newItem)
         {
-            CustomSpellbook book = newItem as CustomSpellbook;
-
-            if (book == null)
+            if (!(newItem is CustomSpellbook book))
                 return;
 
-            book.m_Entries = m_Entries;
+            book.Entries = Entries;
         }
 
         public bool CheckAccess(Mobile m)
@@ -257,9 +175,35 @@ namespace Server.Items
             if (!IsLockedDown || m.AccessLevel >= AccessLevel.GameMaster)
                 return true;
 
-            BaseHouse house = BaseHouse.FindHouseAt(this);
+            var house = BaseHouse.FindHouseAt(this);
+            return house != null && house.HasSecureAccess(m, Level);
+        }
+        
+        
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
+            writer.Write(0);
+            writer.Write((int) Level);
+            writer.Write(Entries);
+        }
 
-            return house != null && house.HasSecureAccess(m, m_Level);
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            LootType = LootType.Blessed;
+            var version = reader.ReadInt();
+
+            switch (version)
+            {
+                case 0:
+                {
+                    Level = (SecureLevel) reader.ReadInt();
+                    Entries = reader.ReadULong();
+                    break;
+                }
+            }
         }
     }
 }

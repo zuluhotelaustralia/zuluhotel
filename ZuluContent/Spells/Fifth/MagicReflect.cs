@@ -22,8 +22,8 @@ namespace Server.Spells.Fifth
 
             Caster.TryAddBuff(new MagicReflectionBuff
             {
-                Value = value >= (int)SpellCircle.System 
-                    ? SpellCircle.System - 1 
+                Value = value >= (int)SpellCircle.Highest 
+                    ? SpellCircle.Highest - 1 
                     : (SpellCircle)value,
                 Charges = 1
             });

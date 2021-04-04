@@ -1,6 +1,7 @@
 using System;
 using Server.Mobiles;
 using Server.Spells;
+using Server.Targeting;
 
 
 namespace Server.Engines.Magic.HitScripts
@@ -13,10 +14,19 @@ namespace Server.Engines.Magic.HitScripts
                 return;
             try
             {
-                var spell = Spell.Create<T>(attacker, null, true);
-
-                spell?.Cast();
-                attacker.Target?.Invoke(attacker, defender);
+                switch (SpellRegistry.Create<T>(attacker))
+                {
+                    case ITargetableAsyncSpell<Mobile> targetableAsyncSpell:
+                        targetableAsyncSpell.OnTargetAsync(new TargetResponse<Mobile>
+                        {
+                            Target = defender,
+                            Type = TargetResponseType.Success
+                        });
+                        break;
+                    case IAsyncSpell asyncSpell:
+                        asyncSpell.CastAsync();
+                        break;
+                }
             }
             catch (Exception e)
             {

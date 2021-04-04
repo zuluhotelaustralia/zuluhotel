@@ -9,7 +9,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class MagicReflection : Enchantment<MagicReflectionInfo>, IDistinctEnchantment
     {
-        [IgnoreMember] private SpellCircle m_Value = 0;
+        [IgnoreMember] private int m_Value = 0;
         [IgnoreMember] public override string AffixName => Info.GetName(Value, Cursed);
 
         [IgnoreMember]
@@ -18,7 +18,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             : MagicReflectionInfo.PermMagicReflection;
 
         [Key(1)]
-        public SpellCircle Value
+        public int Value
         {
             get => Cursed > CurseType.None ? 0 : m_Value;
             set => m_Value = value;
@@ -39,9 +39,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 {
                     reflected = true;
                 }
-                else if (Charges >= (int)spell.Circle)
+                else if (Charges >= spell.Circle)
                 {
-                    if ((Charges -= (int)spell.Circle) == 0)
+                    if ((Charges -= spell.Circle) == 0)
                         NotifyMobile(parent, "One of your magic reflection items has run out of charges!");
                     
                     reflected = true;

@@ -17,7 +17,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             ? MagicImmunityInfo.ChargedMagicImmunity
             : MagicImmunityInfo.PermMagicImmunity;
 
-        [Key(1)] public SpellCircle Value { get; set; } = 0;
+        [Key(1)] public int Value { get; set; } = 0;
         [Key(2)] public int Charges { get; set; } = int.MaxValue;
 
         public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
@@ -37,9 +37,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
                 {
                     nullify = true;
                 }
-                else if (Charges >= (int)spell.Circle)
+                else if (Charges >= spell.Circle)
                 {
-                    if ((Charges -= (int)spell.Circle) == 0)
+                    if ((Charges -= spell.Circle) == 0)
                         NotifyMobile(defender, "One of your magic immunity items has run out of charges!");
 
                     nullify = true;

@@ -467,21 +467,21 @@ namespace Server.Scripts.Engines.Loot
             var effectChanceMod = 0.0;
             switch (circle)
             {
-                case SpellCircle.First:
-                case SpellCircle.Second:
+                case 1:
+                case 2:
                     effectChanceMod = 0.15;
                     break;
-                case SpellCircle.Third:
+                case 3:
                     effectChanceMod = 0.05;
                     break;
-                case SpellCircle.Fourth:
-                case SpellCircle.Fifth:
+                case 4:
+                case 5:
                     effectChanceMod = -0.05;
                     break;
-                case SpellCircle.Sixth:
+                case 6:
                     effectChanceMod = -0.10;
                     break;
-                case SpellCircle.Seventh:
+                case 7:
                     effectChanceMod = -0.15;
                     break;
             }
