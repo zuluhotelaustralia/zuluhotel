@@ -80,6 +80,8 @@ namespace Server.Targeting
 
     public class AsyncTarget : Target, INotifyCompletion
     {
+        public static long TargetTimeout = (int) TimeSpan.FromMinutes(1.0).TotalMilliseconds;
+
         protected readonly Mobile Mobile;
         protected Action Continuation;
         public bool IsCompleted { get; private set; }
@@ -97,16 +99,15 @@ namespace Server.Targeting
             Mobile = mobile;
         }
 
-
         public virtual AsyncTarget GetAwaiter() => this;
         public TargetResponse<object> GetResult() => Response;
 
         public void OnCompleted(Action continuation)
         {
-            if (!IsCompleted && TimeoutTime < DateTime.Now)
+            if (!IsCompleted && TimeoutTime < Core.TickCount)
             {
                 Continuation = continuation;
-                BeginTimeout(Mobile, TimeSpan.FromSeconds(30.0));
+                BeginTimeout(Mobile, TargetTimeout);
             }
             else
             {

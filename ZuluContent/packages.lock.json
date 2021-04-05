@@ -445,7 +445,7 @@
       "ModernUO": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Toolkit.HighPerformance": "7.0.0-preview4",
+          "Microsoft.Toolkit.HighPerformance": "7.0.0-preview5",
           "Zlib.Bindings": "1.4.0"
         }
       }
