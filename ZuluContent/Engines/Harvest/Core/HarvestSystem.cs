@@ -24,17 +24,18 @@ namespace Server.Engines.Harvest
 
         public virtual bool CheckTool(Mobile from, Item tool)
         {
-            bool wornOut = tool == null || tool.Deleted ||
+            var wornOut = tool == null || tool.Deleted ||
                            tool is IUsesRemaining && ((IUsesRemaining) tool).UsesRemaining <= 0;
-            bool equipped = tool.Parent == from;
+            var checkEquip = !(tool is Shovel);
+            var equipped = tool?.Parent == from;
 
             if (wornOut)
                 from.SendLocalizedMessage(1044038); // You have worn out your tool!
 
-            if (!equipped)
+            if (checkEquip && !equipped)
                 from.SendLocalizedMessage(502641); // You must equip this item to use it.
 
-            return !wornOut && equipped;
+            return wornOut || !checkEquip || equipped;
         }
 
         public virtual bool CheckHarvest(Mobile from, Item tool)
@@ -176,7 +177,7 @@ namespace Server.Engines.Harvest
                 var harvestAmount = consumeAmount;
                 HarvestVein vein;
 
-                if (def.Resources.Length > 0)
+                if (def.Resources?.Length > 0)
                     chanceForColored = GetChanceForColored(from, tool, def);
 
                 from.FireHook(h => h.OnToolHarvestBonus(from, ref harvestAmount));
@@ -240,17 +241,18 @@ namespace Server.Engines.Harvest
             await Timer.Pause(1000);
 
             if (type != null)
-                def.BonusEffect(from, tool);
+                def.BonusEffect?.Invoke(from, tool);
 
             OnHarvestFinished(from, tool, def, bank, toHarvest);
         }
 
-        public virtual void OnHarvestFinished(Mobile from, Item tool, HarvestDefinition def,
+        public virtual async void OnHarvestFinished(Mobile from, Item tool, HarvestDefinition def,
             HarvestBank bank, object harvested)
         {
             // Loop continuously until the player moves or their tool breaks
-            Timer.DelayCall(TimeSpan.FromSeconds(6),
-                delegate { StartHarvesting(from, tool, harvested); });
+            await Timer.Pause(6000);
+
+            StartHarvesting(from, tool, harvested);
         }
 
         public virtual Item Construct(Type type, Mobile from)
@@ -437,6 +439,7 @@ namespace Server.Engines.Harvest
             }
 
             new HarvestTimer(from, tool, this, def, toHarvest, toLock).Start();
+            from.NextSkillTime = Core.TickCount + ((int) def.EffectDelay.TotalMilliseconds * def.EffectCounts[0]) + 7000;
             OnHarvestStarted(from, tool, def, toHarvest);
         }
 

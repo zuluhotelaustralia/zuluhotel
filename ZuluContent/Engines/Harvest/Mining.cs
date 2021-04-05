@@ -38,7 +38,7 @@ namespace Server.Engines.Harvest
 
             #region Mining for ore and stone
 
-            HarvestDefinition oreAndStone = new HarvestDefinition
+            var oreAndStone = new HarvestDefinition
             {
                 // Resource banks are every 1x1 tiles
                 BankWidth = ZhConfig.Resources.Ores.BankWidth,
@@ -61,7 +61,7 @@ namespace Server.Engines.Harvest
                 // Players must be within 2 tiles to harvest
                 MaxRange = ZhConfig.Resources.Ores.MaxRange,
 
-                // One ore per harvest action
+                // Random amount of ore per harvest action
                 ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1,
 
                 // Maximum chance to roll for colored veins
@@ -89,8 +89,107 @@ namespace Server.Engines.Harvest
 
                 BonusEffect = HarvestBonusEffect
             };
-
+                
             Definitions.Add(oreAndStone);
+            
+            var sand = new HarvestDefinition
+            {
+                // Resource banks are every 1x1 tiles
+                BankWidth = OreConfiguration.BankWidth,
+                BankHeight = OreConfiguration.BankHeight,
+
+                // Every bank holds from 45 to 90 ore
+                MinTotal = OreConfiguration.MinTotal,
+                MaxTotal = OreConfiguration.MaxTotal,
+
+                // A resource bank will respawn its content every 10 to 20 minutes
+                MinRespawn = TimeSpan.FromMinutes(OreConfiguration.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(OreConfiguration.MaxRespawn),
+
+                // Skill checking is done on the Mining skill
+                Skill = OreConfiguration.Skill,
+
+                // Set the list of harvestable tiles
+                Tiles = m_SandTiles,
+
+                // Players must be within 2 tiles to harvest
+                MaxRange = OreConfiguration.MaxRange,
+
+                // Two sand per harvest action
+                ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
+
+                // Maximum chance to roll for colored veins
+                MaxChance = OreConfiguration.MaxChance,
+
+                // The digging effect
+                EffectActions = OreConfiguration.OreEffect.Actions,
+                EffectSounds = OreConfiguration.OreEffect.Sounds,
+                EffectCounts = OreConfiguration.OreEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.SoundDelay),
+                
+                NoResourcesMessage = 1044629, // There is no sand here to mine.
+                DoubleHarvestMessage = 1044629, // There is no sand here to mine.
+                TimedOutOfRangeMessage = 503041, // You have moved too far away to continue mining.
+                OutOfRangeMessage = 500446, // That is too far away.
+                FailMessage = 1044630, // You dig for a while but fail to find any of sufficient quality for glassblowing.
+                PackFullMessage = 1044632, // Your backpack can't hold the sand, and it is lost!
+                ToolBrokeMessage = 1044038, // You have worn out your tool!
+
+                DefaultVein = new HarvestVein(100.0, new HarvestResource(0.0, "units of sand", typeof(Sand)))
+            };
+            
+            Definitions.Add(sand);
+            
+            var clay = new HarvestDefinition
+            {
+                // Resource banks are every 1x1 tiles
+                BankWidth = OreConfiguration.BankWidth,
+                BankHeight = OreConfiguration.BankHeight,
+
+                // Every bank holds from 45 to 90 ore
+                MinTotal = OreConfiguration.MinTotal,
+                MaxTotal = OreConfiguration.MaxTotal,
+
+                // A resource bank will respawn its content every 10 to 20 minutes
+                MinRespawn = TimeSpan.FromMinutes(OreConfiguration.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(OreConfiguration.MaxRespawn),
+
+                // Skill checking is done on the Mining skill
+                Skill = OreConfiguration.Skill,
+
+                // Set the list of harvestable tiles
+                Tiles = m_SwampTiles,
+                RangedTiles = true,
+
+                // Players must be within 2 tiles to harvest
+                MaxRange = OreConfiguration.MaxRange,
+
+                // Two sand per harvest action
+                ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
+
+                // Maximum chance to roll for colored veins
+                MaxChance = OreConfiguration.MaxChance,
+
+                // The digging effect
+                EffectActions = OreConfiguration.OreEffect.Actions,
+                EffectSounds = OreConfiguration.OreEffect.Sounds,
+                EffectCounts = OreConfiguration.OreEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.SoundDelay),
+                
+                NoResourcesMessage = "There is no clay here to mine.",
+                DoubleHarvestMessage = "There is no clay here to mine.",
+                TimedOutOfRangeMessage = 503041, // You have moved too far away to continue mining.
+                OutOfRangeMessage = 500446, // That is too far away.
+                FailMessage = "You dig for a while but fail to find any clay.",
+                PackFullMessage = "Your backpack can't hold the clay, and it is lost!",
+                ToolBrokeMessage = 1044038, // You have worn out your tool!
+
+                DefaultVein = new HarvestVein(100.0, new HarvestResource(0.0, "blocks of clay", typeof(Clay)))
+            };
+            
+            Definitions.Add(clay);
 
             #endregion
         }
@@ -368,6 +467,12 @@ namespace Server.Engines.Harvest
             1456, 1457, 1458, 1611, 1612, 1613, 1614, 1615, 1616,
             1617, 1618, 1623, 1624, 1625, 1626, 1635, 1636, 1637,
             1638, 1639, 1640, 1641, 1642, 1647, 1648, 1649, 1650
+        };
+        
+        private static int[] m_SwampTiles = new[]
+        {
+            0x240, 0x250,
+            0x3D65, 0x3EF0
         };
 
         #endregion

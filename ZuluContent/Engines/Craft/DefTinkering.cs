@@ -25,7 +25,7 @@ namespace Server.Engines.Craft
             }
         }
 
-        private DefTinkering() : base(1, 1, 1.25) // base( 1, 1, 3.0 )
+        private DefTinkering() : base(3, 3, 2)
         {
         }
 
@@ -74,8 +74,7 @@ namespace Server.Engines.Craft
 
         public override void PlayCraftEffect(Mobile from)
         {
-            // no sound
-            //from.PlaySound( 0x241 );
+            from.PlaySound( 0x241 );
         }
 
         public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality,
