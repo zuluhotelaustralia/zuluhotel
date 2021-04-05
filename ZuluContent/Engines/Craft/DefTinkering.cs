@@ -258,28 +258,42 @@ namespace Server.Engines.Craft
             // Empty flask 3
             // Empty vials
             
+            AddCraft(typeof(AlchemicalSymbol1), 1044050, 1026173, 75.0, 75.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol2), 1044050, 1026173, 80.0, 80.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol3), 1044050, 1026173, 85.0, 85.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol4), 1044050, 1026173, 90.0, 90.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol5), 1044050, 1026173, 95.0, 95.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol6), 1044050, 1026173, 100.0, 100.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol7), 1044050, 1026173, 105.0, 105.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol8), 1044050, 1026173, 110.0, 110.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol9), 1044050, 1026173, 115.0, 115.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol10), 1044050, 1026173, 125.0, 125.0, typeof(Clay), 1044036, 25, 1044037);
+            AddCraft(typeof(AlchemicalSymbol11), 1044050, 1026173, 135.0, 135.0, typeof(Clay), 1044036, 25, 1044037);
+            
+            AddCraft(typeof(RecallRune), 1044050, 1027956, 90.0, 90.0, typeof(Clay), 1044036, 7, 1044037);
+
             #endregion
 
             #region Multi-Component Items
 
-            index = AddCraft(typeof(AxleGears), 1044051, 1024177, 0.0, 0.0, typeof(Axle), 1044169, 1, 1044253);
+            index = AddCraft(typeof(AxleGears), 1044051, 1024177, 40.0, 40.0, typeof(Axle), 1044169, 1, 1044253);
             AddRes(index, typeof(Gears), 1044254, 1, 1044253);
 
-            index = AddCraft(typeof(ClockParts), 1044051, 1024175, 0.0, 0.0, typeof(AxleGears), 1044170, 1, 1044253);
+            index = AddCraft(typeof(ClockParts), 1044051, 1024175, 40.0, 40.0, typeof(AxleGears), 1044170, 1, 1044253);
             AddRes(index, typeof(Springs), 1044171, 1, 1044253);
 
-            index = AddCraft(typeof(SextantParts), 1044051, 1024185, 0.0, 0.0, typeof(AxleGears), 1044170, 1, 1044253);
+            index = AddCraft(typeof(SextantParts), 1044051, 1024185, 40.0, 40.0, typeof(AxleGears), 1044170, 1, 1044253);
             AddRes(index, typeof(Hinge), 1044172, 1, 1044253);
 
-            index = AddCraft(typeof(ClockRight), 1044051, 1044257, 0.0, 0.0, typeof(ClockFrame), 1044174, 1, 1044253);
+            index = AddCraft(typeof(ClockRight), 1044051, 1044257, 40.0, 40.0, typeof(ClockFrame), 1044174, 1, 1044253);
             AddRes(index, typeof(ClockParts), 1044173, 1, 1044253);
 
-            index = AddCraft(typeof(ClockLeft), 1044051, 1044256, 0.0, 0.0, typeof(ClockFrame), 1044174, 1, 1044253);
+            index = AddCraft(typeof(ClockLeft), 1044051, 1044256, 40.0, 40.0, typeof(ClockFrame), 1044174, 1, 1044253);
             AddRes(index, typeof(ClockParts), 1044173, 1, 1044253);
 
-            AddCraft(typeof(Sextant), 1044051, 1024183, 0.0, 0.0, typeof(SextantParts), 1044175, 1, 1044253);
+            AddCraft(typeof(Sextant), 1044051, 1024183, 40.0, 40.0, typeof(SextantParts), 1044175, 1, 1044253);
 
-            index = AddCraft(typeof(PotionKeg), 1044051, 1044258, 75.0, 100.0, typeof(Keg), 1044255, 1, 1044253);
+            index = AddCraft(typeof(PotionKeg), 1044051, 1044258, 75.0, 75.0, typeof(Keg), 1044255, 1, 1044253);
             AddRes(index, typeof(Bottle), 1044250, 10, 1044253);
             AddRes(index, typeof(BarrelLid), 1044251, 1, 1044253);
             AddRes(index, typeof(BarrelTap), 1044252, 1, 1044253);
