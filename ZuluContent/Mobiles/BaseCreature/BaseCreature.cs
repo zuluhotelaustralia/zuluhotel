@@ -23,7 +23,7 @@ using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.Mobiles
 {
-    public partial class BaseCreature : Mobile, IShilCheckSkill
+    public partial class BaseCreature : Mobile, IShilCheckSkill, IBuffable
     {
         public const int MaxLoyalty = 100;
 
@@ -587,16 +587,13 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public IPoint2D TargetLocation { get; set; } = null;
 
-        public virtual Mobile ConstantFocus
-        {
-            get { return null; }
-        }
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual Mobile ConstantFocus { get; set; }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool DisallowAllMoves { get; set; }
 
-        public virtual bool DisallowAllMoves
-        {
-            get { return false; }
-        }
-
+        [CommandProperty(AccessLevel.GameMaster)]
         public override double ArmorRating
         {
             get
@@ -2502,6 +2499,12 @@ namespace Server.Mobiles
                     Timer.DelayCall(TimeSpan.Zero, ReleaseGuardDupeLock);
                 }
             }
+        }
+        
+        public override void OnHiddenChanged()
+        {
+            base.OnHiddenChanged();
+            this.FireHook(h => h.OnHiddenChanged(this));
         }
 
         public void AddSpellAttack(Type type)

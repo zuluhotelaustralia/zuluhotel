@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+
 #pragma warning disable 1998
 
 namespace Server.Spells.First
@@ -13,26 +16,21 @@ namespace Server.Spells.First
             if (!response.HasValue)
                 return;
             
-            var mobile = response.Target;
+            var target = response.Target;
 
-            SpellHelper.Turn(Caster, mobile);
-
-            if (!mobile.BeginAction(typeof(LightCycle)))
-            {
-                Caster.SendMessage("{0} already has nightsight.", Caster == mobile ? "You" : "They");
+            SpellHelper.Turn(Caster, target);
+            
+            if (!Caster.CanBuff(target, true, BuffIcon.NightSight, BuffIcon.Shadow))
                 return;
-            }
 
-            new LightCycle.NightSightTimer(mobile).Start();
-            var level = (int) (LightCycle.DungeonLevel * (Caster.Skills[SkillName.Magery].Value / 100));
-
-            if (level < 0)
-                level = 0;
-
-            mobile.LightLevel = level;
-
-            mobile.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
-            mobile.PlaySound(0x1E3);
+            target.TryAddBuff(new NightSight
+            {
+                Value = LightCycle.DayLevel,
+                Duration = TimeSpan.FromSeconds(Caster.Skills.Magery.Value * 60),
+            });
+            
+            target.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
+            target.PlaySound(0x1E3);
         }
     }
 }

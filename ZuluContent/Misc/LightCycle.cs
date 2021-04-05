@@ -110,39 +110,5 @@ namespace Server
                 }
             }
         }
-
-        public class NightSightTimer : Timer
-        {
-            private Mobile m_Owner;
-
-            public NightSightTimer(Mobile owner) : base(TimeSpan.FromMinutes(Utility.Random(15, 25)))
-            {
-                m_Owner = owner;
-                Priority = TimerPriority.OneMinute;
-            }
-
-            protected override void OnTick()
-            {
-                m_Owner.EndAction(typeof(LightCycle));
-                m_Owner.LightLevel = 0;
-            }
-        }
-
-        public class OwlSightTimer : Timer
-        {
-            private Mobile m_Owner;
-
-            public OwlSightTimer(Mobile owner, TimeSpan delay) : base(delay)
-            {
-                m_Owner = owner;
-                Priority = TimerPriority.OneMinute;
-            }
-
-            protected override void OnTick()
-            {
-                m_Owner.EndAction(typeof(LightCycle));
-                m_Owner.LightLevel = 0;
-            }
-        }
     }
 }

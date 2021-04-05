@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             var target = response.Target;
             SpellHelper.Turn(Caster, target);
 
-            if (!Caster.CanBuff(target, icons: BuffIcon.NightSight))
+            if (!Caster.CanBuff(target, true, BuffIcon.NightSight, BuffIcon.Shadow))
                 return;
 
             var level = 20.0 + Caster.Skills.Magery.Value / 15.0; 
@@ -58,6 +58,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             target.TryAddBuff(new NightSight
             {
                 Title = "Darkness",
+                Icon = BuffIcon.Shadow,
                 Value = LightCycle.DungeonLevel,
                 Duration = TimeSpan.FromSeconds(duration),
             });

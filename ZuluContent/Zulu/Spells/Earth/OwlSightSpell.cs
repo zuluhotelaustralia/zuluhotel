@@ -7,6 +7,7 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
 using Server.Targeting;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Earth
 {
@@ -35,16 +36,19 @@ namespace Scripts.Zulu.Spells.Earth
                     continue;
                 }
                 
+                if (!Caster.CanBuff(mobile, true, BuffIcon.NightSight, BuffIcon.Shadow))
+                    continue;
+
+                mobile.TryAddBuff(new NightSight
+                {
+                    Title = "Owl Sight",
+                    Icon = BuffIcon.NightSight,
+                    Value = LightCycle.DayLevel,
+                    Duration = TimeSpan.FromSeconds(duration),
+                });
+                
                 mobile.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
                 mobile.PlaySound(0x1E3);
-                
-                if (!mobile.BeginAction(typeof(LightCycle)))
-                {
-                    continue;
-                }
-                
-                new LightCycle.OwlSightTimer(mobile, TimeSpan.FromSeconds(duration)).Start();
-                mobile.LightLevel = 0;
             }
 
             mobiles.Free();

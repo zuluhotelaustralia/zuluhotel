@@ -47,7 +47,7 @@ namespace Scripts.Zulu.Spells.Earth
                     
                 target.TryAddBuff(new PoisonImmunity
                 {
-                    Value = (int) power * 25,
+                    Value = (int) power,
                     Duration = TimeSpan.FromSeconds(duration),
                 });
             }

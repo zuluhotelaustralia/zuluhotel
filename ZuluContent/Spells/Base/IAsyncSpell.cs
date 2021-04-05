@@ -1,11 +1,12 @@
 using System;
 using System.Threading.Tasks;
+using Server.Mobiles;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells
 {
-    public interface IAsyncSpell
+    public interface IAsyncSpell : ISpell
     {
         public Mobile Caster { get; }
         public SpellInfo Info { get; }
@@ -14,7 +15,7 @@ namespace Server.Spells
         public Task CastAsync();
     }
     
-    public interface ITargetableAsyncSpell<in T> : ISpell, IAsyncSpell
+    public interface ITargetableAsyncSpell<in T> : IAsyncSpell
     {
         async Task IAsyncSpell.CastAsync() => await SendTargetAsync();
 
@@ -32,13 +33,12 @@ namespace Server.Spells
             Caster.Target = target;
             
             var targetLoc = new Point3D(Caster.Location);
-            
             var response = await target;
-
             if (targetLoc != Caster.Location)
             {
                 Caster.Spell?.OnCasterMoving(Caster.Direction);
-                return;
+                if (Caster.Spell == null)
+                    return;
             }
 
             // If the target request is typeof IPoint3D and they target a mobile, rewrite the response Mobile.Location
