@@ -8,6 +8,8 @@ namespace Server.SkillHandlers
 {
     public class Inscribe
     {
+        private static readonly long TargetTimeout = (int) TimeSpan.FromMinutes(1.0).TotalMilliseconds;
+        
         public static void Initialize()
         {
             SkillInfo.Table[(int) SkillName.Inscribe].Callback = OnUse;
@@ -18,7 +20,7 @@ namespace Server.SkillHandlers
             Target target = new InternalTargetSrc();
             m.Target = target;
             m.SendAsciiMessage("What would you like to inscribe?");
-            target.BeginTimeout(m, TimeSpan.FromMinutes(1.0));
+            target.BeginTimeout(m, TargetTimeout);
 
             return TimeSpan.FromSeconds(1.0);
         }
@@ -93,7 +95,7 @@ namespace Server.SkillHandlers
                         Target target = new InternalTargetBookDst(book);
                         from.Target = target;
                         from.SendLocalizedMessage(501612); // Select a book to copy this to.
-                        target.BeginTimeout(from, TimeSpan.FromMinutes(1.0));
+                        target.BeginTimeout(from, 60000);
                         SetUser(book, from);
                     }
                 }
@@ -102,7 +104,7 @@ namespace Server.SkillHandlers
                     Target target = new InternalTargetScrollDst(customScroll);
                     from.Target = target;
                     from.SendAsciiMessage("Select a book to inscribe this to.");
-                    target.BeginTimeout(from, TimeSpan.FromMinutes(1.0));
+                    target.BeginTimeout(from, 60000);
                 }
                 else
                 {

@@ -1,101 +1,99 @@
 namespace Server.Multis
 {
     public class SmallBoat : BaseBoat
-	{
-		public override int NorthID{ get{ return 0x0; } }
-		public override int  EastID{ get{ return 0x1; } }
-		public override int SouthID{ get{ return 0x2; } }
-		public override int  WestID{ get{ return 0x3; } }
+    {
+        [Constructible]
+        public SmallBoat()
+        {
+        }
 
-		public override int HoldDistance{ get{ return 4; } }
-		public override int TillerManDistance{ get{ return -4; } }
+        public SmallBoat(Serial serial) : base(serial)
+        {
+        }
 
-		public override Point2D StarboardOffset{ get{ return new Point2D(  2, 0 ); } }
-		public override Point2D      PortOffset{ get{ return new Point2D( -2, 0 ); } }
+        public override int NorthID => 0x0;
+        public override int EastID => 0x1;
+        public override int SouthID => 0x2;
+        public override int WestID => 0x3;
 
-		public override Point3D MarkOffset{ get{ return new Point3D( 0, 1, 3 ); } }
+        public override int HoldDistance => 4;
+        public override int TillerManDistance => -4;
 
-		public override BaseDockedBoat DockedBoat{ get{ return new SmallDockedBoat( this ); } }
+        public override Point2D StarboardOffset => new(2, 0);
+        public override Point2D PortOffset => new(-2, 0);
 
+        public override Point3D MarkOffset => new(0, 1, 3);
 
-		[Constructible]
-public SmallBoat()
-		{
-		}
+        public override BaseDockedBoat DockedBoat => new SmallDockedBoat(this);
 
-		[Constructible]
-public SmallBoat( Serial serial ) : base( serial )
-		{
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+            var version = reader.ReadInt();
+        }
 
-			int version = reader.ReadInt();
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+            writer.Write(0);
+        }
+    }
 
-			writer.Write( (int)0 );
-		}
-	}
+    public class SmallBoatDeed : BaseBoatDeed
+    {
+        [Constructible]
+        public SmallBoatDeed() : base(0x0, Point3D.Zero)
+        {
+        }
 
-	public class SmallBoatDeed : BaseBoatDeed
-	{
-		public override int LabelNumber{ get{ return 1041205; } } // small ship deed
-		public override BaseBoat Boat{ get{ return new SmallBoat(); } }
+        public SmallBoatDeed(Serial serial) : base(serial)
+        {
+        }
 
+        public override int LabelNumber => 1041205; // small ship deed
+        public override BaseBoat Boat => new SmallBoat();
 
-		public SmallBoatDeed() : base( 0x0, Point3D.Zero )
-		{
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public SmallBoatDeed( Serial serial ) : base( serial )
-		{
-		}
+            var version = reader.ReadInt();
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
+            writer.Write(0);
+        }
+    }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+    public class SmallDockedBoat : BaseDockedBoat
+    {
+        public SmallDockedBoat(BaseBoat boat) : base(0x0, Point3D.Zero, boat)
+        {
+        }
 
-			writer.Write( (int)0 );
-		}
-	}
+        public SmallDockedBoat(Serial serial) : base(serial)
+        {
+        }
 
-	public class SmallDockedBoat : BaseDockedBoat
-	{
-		public override BaseBoat Boat{ get{ return new SmallBoat(); } }
+        public override BaseBoat Boat => new SmallBoat();
 
-		public SmallDockedBoat( BaseBoat boat ) : base( 0x0, Point3D.Zero, boat )
-		{
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		public SmallDockedBoat( Serial serial ) : base( serial )
-		{
-		}
+            var version = reader.ReadInt();
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
-
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int)0 );
-		}
-	}
+            writer.Write(0);
+        }
+    }
 }
