@@ -13,20 +13,19 @@ namespace Server.Spells
         public string Mantra { init; get; }
         public SpellCircle Circle { get; init; }
         public ElementalType DamageType { get; init; } = ElementalType.None;
-        public int RightHandEffect { get; init; }
-        public int LeftHandEffect { get; init; }
-        public int Action { get; init; }
+        public int RightHandEffect { get; init; } = 9061;
+        public int LeftHandEffect { get; init; } = 9061;
+        public int Action { get; init; } = 212;
         public bool ShowHandMovement { get; init; } = true;
         public bool RevealOnCast { get; init; } = true;
         public bool Resistable { get; init; } = true;
         public bool Reflectable { get; init; } = true;
         public bool ClearHandsOnCast { get; init; } = true;
         public bool BlocksMovement { get; init; } = false;
-        public bool AllowTown { get; init; }
-        public bool AllowDead { get; init; }
+        public bool AllowTown { get; init; } = true;
+        public bool AllowDead { get; init; } = false;
         public TargetOptions TargetOptions { get; init; }
         public ReagentCost[] ReagentCosts { get; init; } = Array.Empty<ReagentCost>();
-
 
         private int[] m_Amounts;
         [JsonIgnore]

@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using Scripts.Zulu.Engines.Classes;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Spells
 {
@@ -26,7 +24,7 @@ namespace Server.Spells
         public virtual int Mana => Circle.Mana;
         public virtual bool IsCasting => State == SpellState.Casting;
         public virtual bool IsTargeting => State == SpellState.Sequencing && Caster.Target is AsyncSpellTarget;
-        
+
         public Spell(Mobile caster, Item spellItem = null)
         {
             Caster = caster;
@@ -34,7 +32,7 @@ namespace Server.Spells
             Info = SpellRegistry.SpellInfos[GetType()];
             Circle = Info.Circle;
         }
-        
+
         public virtual void OnCasterHurt()
         {
             //Confirm: Monsters and pets cannot be disturbed.
@@ -64,8 +62,8 @@ namespace Server.Spells
                 Caster.SendLocalizedMessage(500111); // You are frozen and can not move.
                 return false;
             }
-            
-            if (Caster.Target is AsyncSpellTarget target && target.Spell == this) 
+
+            if (Caster.Target is AsyncSpellTarget target && target.Spell == this)
                 Disturb(DisturbType.Movement);
 
             return true;
@@ -88,7 +86,7 @@ namespace Server.Spells
             if (Caster.Spell == this)
                 Caster.Spell = null;
         }
-        
+
         public virtual bool OnCasterEquipping(Item item)
         {
             if (IsCasting)
@@ -137,6 +135,9 @@ namespace Server.Spells
             if (resistable && IsWand())
                 return false;
 
+            if (type == DisturbType.Movement && !Caster.Player)
+                return false;
+
             return true;
         }
 
@@ -148,7 +149,9 @@ namespace Server.Spells
             switch (State)
             {
                 case SpellState.Casting when !firstCircle && this is MagerySpell && Circle == SpellCircle.First:
+                {
                     return;
+                }
                 case SpellState.Casting:
                 {
                     State = SpellState.None;
@@ -162,8 +165,11 @@ namespace Server.Spells
                     break;
                 }
                 case SpellState.Sequencing when !firstCircle && this is MagerySpell && Circle == SpellCircle.First:
+                {
                     return;
+                }
                 case SpellState.Sequencing:
+                {
                     State = SpellState.None;
                     Caster.Spell = null;
 
@@ -171,6 +177,7 @@ namespace Server.Spells
 
                     Target.Cancel(Caster);
                     break;
+                }
             }
         }
 
@@ -188,7 +195,7 @@ namespace Server.Spells
 
         public virtual bool CanCast()
         {
-            if (!Caster.CheckAlive()) 
+            if (!Caster.CheckAlive())
                 return false;
 
             if (IsWand() && Caster.Spell != null && Caster.Spell.IsCasting)
@@ -196,36 +203,37 @@ namespace Server.Spells
                 Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
                 return false;
             }
+
             if (Caster.Spell != null && Caster.Spell.IsCasting)
             {
                 Caster.SendLocalizedMessage(502642); // You are already casting a spell.
                 return false;
             }
-            
+
             if (!IsWand() && (Caster.Paralyzed || Caster.Frozen))
             {
                 Caster.SendLocalizedMessage(502643); // You can not cast a spell while frozen.
                 return false;
             }
-            
+
             if (CheckNextSpellTime && Core.TickCount < Caster.NextSpellTime)
             {
                 Caster.SendLocalizedMessage(502644); // You have not yet recovered from casting a spell.
                 return false;
             }
-            
+
             if (!SpellHelper.CheckValidHands(Caster))
             {
                 Caster.SendLocalizedMessage(502626); // Your hands must be free to cast spells or meditate.
                 return false;
             }
-            
+
             if (Caster is PlayerMobile player && player.PeacedUntil > DateTime.Now)
             {
                 Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
                 return false;
             }
-            
+
             if (Mana > Caster.Mana)
             {
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625, $"{Mana}"); // Insufficient mana
@@ -236,7 +244,7 @@ namespace Server.Spells
             {
                 return false;
             }
-            
+
             return true;
         }
 
@@ -287,7 +295,7 @@ namespace Server.Spells
             }
 
 
-            if (castDelay > TimeSpan.Zero) 
+            if (castDelay > TimeSpan.Zero)
                 await Timer.Pause(castDelay);
 
             Caster.OnSpellCast(this);
@@ -300,9 +308,9 @@ namespace Server.Spells
             Caster.Region?.OnSpellCast(Caster, this);
             Caster.NextSpellTime = Core.TickCount + (int) GetCastRecovery().TotalMilliseconds; // Spell.NextSpellDelay;
 
-            if (this is IAsyncSpell asyncSpell && CheckSequence()) 
+            if (this is IAsyncSpell asyncSpell && CheckSequence())
                 await asyncSpell.CastAsync();
-            
+
             FinishSequence();
         }
 
@@ -329,18 +337,18 @@ namespace Server.Spells
 
         public virtual TimeSpan GetCastDelay()
         {
-            var delay = (double)Circle.Delay;
+            var delay = (double) Circle.Delay;
 
             if (Circle > 8)
             {
                 var modifier = Caster.GetClassModifier(CastSkill);
-                if(modifier > 1.0)
+                if (modifier > 1.0)
                     delay = Circle.Delay / Caster.GetClassModifier(CastSkill);
             }
 
             return TimeSpan.FromMilliseconds(delay);
         }
-        
+
         public virtual bool CheckSequence()
         {
             var mana = Mana;
@@ -365,25 +373,25 @@ namespace Server.Spells
                 DoFizzle();
                 return false;
             }
-            
+
             if (Caster is PlayerMobile playerMobile && playerMobile.PeacedUntil > DateTime.Now)
             {
                 Caster.SendLocalizedMessage(1072060); // You cannot cast a spell while calmed.
                 DoFizzle();
                 return false;
             }
-            
+
             if (!ConsumeReagents())
             {
                 // More reagents are needed for this spell.
                 Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502630);
                 return false;
             }
-            
+
             if (Caster.Mana < mana)
             {
                 // Insufficient mana for this spell.
-                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625); 
+                Caster.LocalOverheadMessage(MessageType.Regular, 0x22, 502625);
                 return false;
             }
 
@@ -403,7 +411,7 @@ namespace Server.Spells
                 case BaseWand wand:
                 {
                     wand.ConsumeCharge(Caster);
-                    
+
                     Caster.RevealingAction();
                     var m = wand.Movable;
 
@@ -425,7 +433,7 @@ namespace Server.Spells
 
             return true;
         }
-        
+
         public bool CheckBeneficialSequence(Mobile target)
         {
             if (!target.Alive && !Info.AllowDead)
@@ -459,7 +467,7 @@ namespace Server.Spells
 
             return false;
         }
-        
+
         private class AnimTimer : Timer
         {
             private readonly Spell m_Spell;

@@ -702,56 +702,7 @@ namespace Server.Spells
 
             return true;
         }
-
-        public static void CheckReflect(int circle, Mobile caster, ref Mobile target)
-        {
-            CheckReflect(circle, ref caster, ref target);
-        }
-
-        public static void CheckReflect(int circle, ref Mobile caster, ref Mobile target)
-        {
-            if (target.MagicDamageAbsorb > 0)
-            {
-                ++circle;
-
-                target.MagicDamageAbsorb -= circle;
-
-                // This order isn't very intuitive, but you have to nullify reflect before target gets switched
-
-                var reflect = target.MagicDamageAbsorb >= 0;
-
-                if (target.MagicDamageAbsorb <= 0)
-                {
-                    target.MagicDamageAbsorb = 0;
-                    DefensiveSpell.Nullify(target);
-                }
-
-                if (reflect)
-                {
-                    target.FixedEffect(0x37B9, 10, 5);
-
-                    var temp = caster;
-                    caster = target;
-                    target = temp;
-                }
-            }
-            else if (target is BaseCreature creature)
-            {
-                var reflect = false;
-
-                creature.CheckReflect(caster, ref reflect);
-
-                if (reflect)
-                {
-                    creature.FixedEffect(0x37B9, 10, 5);
-
-                    var temp = caster;
-                    caster = creature;
-                    target = temp;
-                }
-            }
-        }
-
+        
         public static async void Damage(
             int damage,
             Mobile target,
@@ -770,7 +721,9 @@ namespace Server.Spells
                 await Timer.Pause(delay.Value);
             
             target.FireHook(h => h.OnSpellDamage(caster, target, spell, damageType.Value, ref damage));
-            damage = TryResistDamage(caster, target, spell?.Circle ?? SpellCircle.First, damage);
+            
+            if(spell?.Info.Resistable ?? true)
+                damage = TryResistDamage(caster, target, spell?.Circle ?? SpellCircle.First, damage);
 
             WeightOverloading.DFA = dfa;
 
@@ -800,6 +753,9 @@ namespace Server.Spells
         
         public static bool CheckValidHands(Mobile mobile)
         {
+            if (mobile is BaseCreature)
+                return true;
+            
             var one = mobile.FindItemOnLayer(Layer.OneHanded)?.AllowEquippedCast(mobile);
             var two = mobile.FindItemOnLayer(Layer.TwoHanded)?.AllowEquippedCast(mobile);
 

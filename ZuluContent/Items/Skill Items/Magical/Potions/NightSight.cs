@@ -1,3 +1,7 @@
+using System;
+using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+
 namespace Server.Items
 {
     public class NightSightPotion : BasePotion
@@ -30,22 +34,21 @@ namespace Server.Items
 
         public override void Drink(Mobile from)
         {
-            if (from.BeginAction(typeof(LightCycle)))
+            if (!from.CanBuff(from, true, BuffIcon.NightSight, BuffIcon.Shadow))
+                return;
+
+            from.TryAddBuff(new NightSight
             {
-                new LightCycle.NightSightTimer(from).Start();
-                from.LightLevel = LightCycle.DungeonLevel / 2;
+                Value = LightCycle.DayLevel,
+                Duration = TimeSpan.FromSeconds(from.Skills.Magery.Value * 60),
+            });
+            
+            from.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
+            from.PlaySound(0x1E3);
 
-                from.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
-                from.PlaySound(0x1E3);
+            PlayDrinkEffect(from);
 
-                PlayDrinkEffect(from);
-
-                Consume();
-            }
-            else
-            {
-                from.SendMessage("You already have nightsight.");
-            }
+            Consume();
         }
     }
 }
