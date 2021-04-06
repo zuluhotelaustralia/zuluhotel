@@ -283,7 +283,7 @@ namespace Server.Engines.Craft
         {
             typeof(BaseWeapon), typeof(BaseArmor), typeof(BaseClothing),
             typeof(BaseJewel), typeof(BaseContainer), typeof(BaseInstrument),
-            typeof(FishingPole), typeof(BaseLight)
+            typeof(FishingPole), typeof(BaseLight), typeof(BaseTool)
         };
 
         private static Type[] m_ColoredResourceTable = new[]

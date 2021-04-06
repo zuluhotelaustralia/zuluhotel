@@ -4,18 +4,8 @@ using Server.Items;
 
 namespace Server.Engines.Craft
 {
-    public enum CraftECA
-    {
-        ChanceMinusSixty,
-        FiftyPercentChanceMinusTenPercent,
-        ChanceMinusSixtyToFourtyFive
-    }
-
     public abstract class CraftSystem
     {
-        private List<int> m_Recipes;
-        private List<int> m_RareRecipes;
-
         public int MinCraftEffect { get; }
         public int MaxCraftEffect { get; }
         public double Delay { get; }
@@ -80,9 +70,6 @@ namespace Server.Engines.Craft
             CraftGroups = new CraftGroupCol();
             CraftSubRes = new CraftSubResCol();
             CraftSubRes2 = new CraftSubResCol();
-
-            m_Recipes = new List<int>();
-            m_RareRecipes = new List<int>();
 
             InitCraftList();
         }
@@ -164,6 +151,12 @@ namespace Server.Engines.Craft
             CraftItem craftItem = CraftItems.GetAt(index);
             craftItem.UseAllRes = useAll;
         }
+        
+        public void SetUseSubRes2(int index, bool useSubRes)
+        {
+            CraftItem craftItem = CraftItems.GetAt(index);
+            craftItem.UseSubRes2 = useSubRes;
+        }
 
         public void SetNeedHeat(int index, bool needHeat)
         {
@@ -218,6 +211,31 @@ namespace Server.Engines.Craft
         {
             CraftSubRes craftSubRes = new CraftSubRes(type, name, reqSkill, genericName, message);
             CraftSubRes.Add(craftSubRes);
+        }
+        
+        public void SetSubRes2(Type type, int name)
+        {
+            CraftSubRes2.ResType = type;
+            CraftSubRes2.NameNumber = name;
+            CraftSubRes2.Init = true;
+        }
+
+        public void AddSubRes2(Type type, int name, double reqSkill, object message)
+        {
+            var craftSubRes = new CraftSubRes(type, name, reqSkill, message);
+            CraftSubRes2.Add(craftSubRes);
+        }
+
+        public void AddSubRes2(Type type, int name, double reqSkill, int genericName, object message)
+        {
+            var craftSubRes = new CraftSubRes(type, name, reqSkill, genericName, message);
+            CraftSubRes2.Add(craftSubRes);
+        }
+
+        public void AddSubRes2(Type type, string name, double reqSkill, object message)
+        {
+            var craftSubRes = new CraftSubRes(type, name, reqSkill, message);
+            CraftSubRes2.Add(craftSubRes);
         }
 
         public abstract void InitCraftList();

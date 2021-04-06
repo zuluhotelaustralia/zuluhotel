@@ -54,7 +54,8 @@ namespace Server.Engines.Craft
             typeof(Candelabra),
             typeof(Key), typeof(Globe),
             typeof(Spyglass),
-            typeof(HeatingStand), typeof(BaseLight)
+            typeof(HeatingStand), typeof(BaseLight),
+            typeof(BaseTool)
         };
 
         public override bool RetainsColorFrom(CraftItem item, Type type)
@@ -138,18 +139,38 @@ namespace Server.Engines.Craft
 
             #region Wooden Items
 
-            AddCraft(typeof(JointingPlane), 1044042, 1024144, 40.0, 40.0, typeof(Log), 1044041, 4, 1044351);
-            AddCraft(typeof(MouldingPlane), 1044042, 1024140, 40.0, 40.0, typeof(Log), 1044041, 4, 1044351);
-            AddCraft(typeof(SmoothingPlane), 1044042, 1024146, 28.0, 28.0, typeof(Log), 1044041, 4, 1044351);
-            AddCraft(typeof(BlankScroll), 1044042, 1023636, 85.0, 85.0, typeof(Log), 1044041, 3, 1044351);
-            AddCraft(typeof(Spellbook), 1044042, 1023643, 90.0, 90.0, typeof(Log), 1044041, 10, 1044351);
+            index = AddCraft(typeof(JointingPlane), 1044042, 1024144, 40.0, 40.0, typeof(Log), 1044041, 4, 1044351);
+            SetUseSubRes2(index, true);
+            
+            index = AddCraft(typeof(MouldingPlane), 1044042, 1024140, 40.0, 40.0, typeof(Log), 1044041, 4, 1044351);
+            SetUseSubRes2(index, true);
+
+            index = AddCraft(typeof(SmoothingPlane), 1044042, 1024146, 28.0, 28.0, typeof(Log), 1044041, 4, 1044351);
+            SetUseSubRes2(index, true);
+
+            index = AddCraft(typeof(BlankScroll), 1044042, 1023636, 85.0, 85.0, typeof(Log), 1044041, 3, 1044351);
+            SetUseSubRes2(index, true);
+
+            index = AddCraft(typeof(Spellbook), 1044042, 1023643, 90.0, 90.0, typeof(Log), 1044041, 10, 1044351);
+            SetUseSubRes2(index, true);
+
             // Tarot cards
-            AddCraft(typeof(BlankMap), 1044042, "blank map", 85.0, 85.0, typeof(Log), 1044041, 5, 1044351);
+            index = AddCraft(typeof(BlankMap), 1044042, "blank map", 85.0, 85.0, typeof(Log), 1044041, 5, 1044351);
+            SetUseSubRes2(index, true);
+
             // Wig stand
-            AddCraft(typeof(DyeTub), 1044042, 1024011, 65.0, 65.0, typeof(Log), 1044041, 10, 1044351);
-            AddCraft(typeof(Globe), 1044042, 1011215, 85.0, 85.0, typeof(Log), 1044041, 15, 1044351);
-            AddCraft(typeof(ClockFrame), 1044042, 1024173, 40.0, 40.0, typeof(Log), 1044041, 6, 1044351);
-            AddCraft(typeof(Axle), 1044042, 1024187, 20.0, 20.0, typeof(Log), 1044041, 2, 1044351);
+            index = AddCraft(typeof(DyeTub), 1044042, 1024011, 65.0, 65.0, typeof(Log), 1044041, 10, 1044351);
+            SetUseSubRes2(index, true);
+
+            index = AddCraft(typeof(Globe), 1044042, 1011215, 85.0, 85.0, typeof(Log), 1044041, 15, 1044351);
+            SetUseSubRes2(index, true);
+
+            index = AddCraft(typeof(ClockFrame), 1044042, 1024173, 40.0, 40.0, typeof(Log), 1044041, 6, 1044351);
+            SetUseSubRes2(index, true);
+
+            index = AddCraft(typeof(Axle), 1044042, 1024187, 20.0, 20.0, typeof(Log), 1044041, 2, 1044351);
+            SetUseSubRes2(index, true);
+
             // Ship model
             // Glass mugs
             // Tankards
@@ -306,6 +327,11 @@ namespace Server.Engines.Craft
             // This will override the overridable material
             ZhConfig.Resources.Ores.Entries.ToList()
                 .ForEach(e => AddSubRes(e.SmeltType, e.Name, e.CraftSkillRequired, 1160300, e.Name));
+            
+            SetSubRes2(typeof(Log), 1027136);
+
+            LogConfiguration.Entries.ToList()
+                .ForEach(e => AddSubRes2(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired, e.Name));
 
             MarkOption = true;
             Repair = true;
