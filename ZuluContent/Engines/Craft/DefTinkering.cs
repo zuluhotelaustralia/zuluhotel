@@ -320,6 +320,8 @@ namespace Server.Engines.Craft
             AddCraft(typeof(AlchemicalSymbol11), 1044294, 1026173, 135.0, 135.0, typeof(Clay), 1044036, 25, 1044037);
             
             AddCraft(typeof(RecallRune), 1044294, 1027956, 90.0, 90.0, typeof(Clay), 1044036, 7, 1044037);
+            
+            // TODO: Add the rest of the clay items from ZH3?
 
             #endregion
 

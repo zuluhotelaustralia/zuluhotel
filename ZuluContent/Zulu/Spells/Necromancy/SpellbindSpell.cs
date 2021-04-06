@@ -32,12 +32,16 @@ namespace Scripts.Zulu.Spells.Necromancy
             
             var difficulty = target.MinTameSkill;
 
-            difficulty = target.Str / 2.0;
-            if (target.Int / 2.0 > difficulty) 
-                difficulty = target.Int / 2.0;
+            if (difficulty == 0.0)
+            {
+                difficulty = target.Str / 2.0;
+                if (target.Int / 2.0 > difficulty) 
+                    difficulty = target.Int / 2.0;
 
-            if (target.Dex / 2.0 > difficulty) 
-                difficulty = target.Dex / 2.0;
+                if (target.Dex / 2.0 > difficulty) 
+                    difficulty = target.Dex / 2.0;
+            }
+            
 
             var magery = Caster.Skills.Magery.Value;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref magery));
@@ -103,11 +107,10 @@ namespace Scripts.Zulu.Spells.Necromancy
                 Caster.NetState
             );
             
+            target.SpellBound = true;
             target.SetControlMaster(Caster);
             target.ControlOrder = OrderType.Follow;
-            target.SpellBound = true;
-
-            duration = 10.0;
+            
             ReleaseControlAfterDelay(target, Caster, TimeSpan.FromSeconds(duration));
         }
 
