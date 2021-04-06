@@ -105,7 +105,6 @@ namespace Server.Items
             from.AddToBackpack(ingot);
             from.SendSuccessMessage($"You create {Amount} ingots and place them in your pack.");
             Delete();
-            return;
         }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Server.Items;
 using Server.Targeting;
-using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {
@@ -334,7 +333,7 @@ namespace Server.Engines.Craft
             
             SetSubRes2(typeof(Log), 1027136);
 
-            LogConfiguration.Entries.ToList()
+            ZhConfig.Resources.Logs.Entries.ToList()
                 .ForEach(e => AddSubRes2(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired, e.Name));
 
             MarkOption = true;

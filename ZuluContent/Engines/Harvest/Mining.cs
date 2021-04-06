@@ -2,11 +2,9 @@ using System;
 using System.Linq;
 using Scripts.Zulu.Utilities;
 using Server.Items;
-using Server.Mobiles;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Harvest
 {
@@ -95,38 +93,35 @@ namespace Server.Engines.Harvest
             var sand = new HarvestDefinition
             {
                 // Resource banks are every 1x1 tiles
-                BankWidth = OreConfiguration.BankWidth,
-                BankHeight = OreConfiguration.BankHeight,
+                BankWidth = ZhConfig.Resources.Ores.BankWidth,
+                BankHeight = ZhConfig.Resources.Ores.BankHeight,
 
                 // Every bank holds from 45 to 90 ore
-                MinTotal = OreConfiguration.MinTotal,
-                MaxTotal = OreConfiguration.MaxTotal,
+                MinTotal = ZhConfig.Resources.Ores.MinTotal,
+                MaxTotal = ZhConfig.Resources.Ores.MaxTotal,
 
                 // A resource bank will respawn its content every 10 to 20 minutes
-                MinRespawn = TimeSpan.FromMinutes(OreConfiguration.MinRespawn),
-                MaxRespawn = TimeSpan.FromMinutes(OreConfiguration.MaxRespawn),
+                MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MaxRespawn),
 
                 // Skill checking is done on the Mining skill
-                Skill = OreConfiguration.Skill,
+                Skill = ZhConfig.Resources.Ores.Skill,
 
                 // Set the list of harvestable tiles
                 Tiles = m_SandTiles,
 
                 // Players must be within 2 tiles to harvest
-                MaxRange = OreConfiguration.MaxRange,
+                MaxRange = ZhConfig.Resources.Ores.MaxRange,
 
                 // Two sand per harvest action
                 ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
 
-                // Maximum chance to roll for colored veins
-                MaxChance = OreConfiguration.MaxChance,
-
                 // The digging effect
-                EffectActions = OreConfiguration.OreEffect.Actions,
-                EffectSounds = OreConfiguration.OreEffect.Sounds,
-                EffectCounts = OreConfiguration.OreEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Ores.OreEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Ores.OreEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Ores.OreEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.SoundDelay),
                 
                 NoResourcesMessage = 1044629, // There is no sand here to mine.
                 DoubleHarvestMessage = 1044629, // There is no sand here to mine.
@@ -144,39 +139,36 @@ namespace Server.Engines.Harvest
             var clay = new HarvestDefinition
             {
                 // Resource banks are every 1x1 tiles
-                BankWidth = OreConfiguration.BankWidth,
-                BankHeight = OreConfiguration.BankHeight,
+                BankWidth = ZhConfig.Resources.Ores.BankWidth,
+                BankHeight = ZhConfig.Resources.Ores.BankHeight,
 
                 // Every bank holds from 45 to 90 ore
-                MinTotal = OreConfiguration.MinTotal,
-                MaxTotal = OreConfiguration.MaxTotal,
+                MinTotal = ZhConfig.Resources.Ores.MinTotal,
+                MaxTotal = ZhConfig.Resources.Ores.MaxTotal,
 
                 // A resource bank will respawn its content every 10 to 20 minutes
-                MinRespawn = TimeSpan.FromMinutes(OreConfiguration.MinRespawn),
-                MaxRespawn = TimeSpan.FromMinutes(OreConfiguration.MaxRespawn),
+                MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MinRespawn),
+                MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MaxRespawn),
 
                 // Skill checking is done on the Mining skill
-                Skill = OreConfiguration.Skill,
+                Skill = ZhConfig.Resources.Ores.Skill,
 
                 // Set the list of harvestable tiles
                 Tiles = m_SwampTiles,
                 RangedTiles = true,
 
                 // Players must be within 2 tiles to harvest
-                MaxRange = OreConfiguration.MaxRange,
+                MaxRange = ZhConfig.Resources.Ores.MaxRange,
 
                 // Two sand per harvest action
                 ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
 
-                // Maximum chance to roll for colored veins
-                MaxChance = OreConfiguration.MaxChance,
-
                 // The digging effect
-                EffectActions = OreConfiguration.OreEffect.Actions,
-                EffectSounds = OreConfiguration.OreEffect.Sounds,
-                EffectCounts = OreConfiguration.OreEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(OreConfiguration.OreEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Ores.OreEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Ores.OreEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Ores.OreEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.SoundDelay),
                 
                 NoResourcesMessage = "There is no clay here to mine.",
                 DoubleHarvestMessage = "There is no clay here to mine.",
