@@ -1,6 +1,6 @@
 ﻿namespace Server.Items
 {
-    public class Kettle : Item
+    public class Kettle : BaseTinkerItem
     {
         [Constructible]
         public Kettle() : base(0x9ED)

@@ -14,7 +14,7 @@ namespace Server.Items
         Regular
     }
 
-    public class Spellbook : Item, ISlayer
+    public class Spellbook : BaseTinkerItem, ISlayer
     {
         [CommandProperty(AccessLevel.GameMaster)]
         public string EngravedText { get; set; }

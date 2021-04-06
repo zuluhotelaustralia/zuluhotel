@@ -276,7 +276,7 @@ public Fork( Serial serial ) : base( serial )
 	}
     
     [Flipable(0x9D4, 0x9D5)]
-    public class Silverware : Item
+    public class Silverware : BaseTinkerItem
     {
         [Constructible]
         public Silverware() : base(0x9D4)

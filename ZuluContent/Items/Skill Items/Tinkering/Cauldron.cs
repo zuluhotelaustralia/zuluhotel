@@ -1,6 +1,6 @@
 ﻿namespace Server.Items
 {
-    public class Cauldron : Item
+    public class Cauldron : BaseTinkerItem
     {
         [Constructible]
         public Cauldron() : base(0x975)

@@ -1,6 +1,6 @@
 ﻿namespace Server.Items
 {
-    public class Shackles : Item
+    public class Shackles : BaseTinkerItem
     {
         [Constructible]
         public Shackles() : base(0x1640)

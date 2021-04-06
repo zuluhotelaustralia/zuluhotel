@@ -1,6 +1,6 @@
 ﻿namespace Server.Items
 {
-    public class Frypan : Item
+    public class Frypan : BaseTinkerItem
     {
         [Constructible]
         public Frypan() : base(0x97F)
