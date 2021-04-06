@@ -88,10 +88,10 @@ namespace ZuluContent.Zulu.Engines.Magic
                     enchanted.Enchantments.Set((PoisonProtection e) => e.Value = (PoisonLevel) value);
                     break;
                 case ElementalType.MagicImmunity:
-                    enchanted.Enchantments.Set((MagicImmunity e) => e.Value = (SpellCircle)value);
+                    enchanted.Enchantments.Set((MagicImmunity e) => e.Value = (SpellCircle) value);
                     break;
                 case ElementalType.MagicReflection:
-                    enchanted.Enchantments.Set((MagicReflection e) => e.Value = (SpellCircle)value);
+                    enchanted.Enchantments.Set((MagicReflection e) => e.Value = (SpellCircle) value);
                     break;
                 case ElementalType.None:
                     break;
@@ -104,7 +104,11 @@ namespace ZuluContent.Zulu.Engines.Magic
 
         public static bool TrySetResist(this IEnchanted enchanted, ElementalType type,
             ElementalProtectionLevel level) =>
-            enchanted.TrySetResist(type, IElementalResistible.GetResistForProtectionLevel(level));
+            enchanted.TrySetResist(type,
+                (type == ElementalType.Poison || type == ElementalType.MagicImmunity ||
+                 type == ElementalType.MagicReflection)
+                    ? (int) level
+                    : IElementalResistible.GetResistForProtectionLevel(level));
 
         public static bool TrySetResist(this Mobile mobile, ElementalType type, ElementalProtectionLevel level) =>
             mobile is IEnchanted enchanted && TrySetResist(enchanted, type, level);
@@ -122,9 +126,9 @@ namespace ZuluContent.Zulu.Engines.Magic
             ElementalType.Necro => ench.GetDistinctEnchantment<NecroProtection>()?.Value ?? 0,
             ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
             ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
-            ElementalType.Poison => (int)(ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
-            ElementalType.MagicImmunity => (int)(ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0),
-            ElementalType.MagicReflection => (int)(ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
+            ElementalType.Poison => (int) (ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
+            ElementalType.MagicImmunity => (int) (ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0),
+            ElementalType.MagicReflection => (int) (ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
 

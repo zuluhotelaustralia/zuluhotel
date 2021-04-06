@@ -134,10 +134,11 @@ namespace Server.Scripts.Engines.Loot
                     case BaseJewel jewelry:
                         jewelry.ArmorBonusType = ArmorMod;
 
-                        if (ProtectionType >= ElementalType.None)
+                        if (ProtectionType > ElementalType.None)
                         {
-                            jewelry.TrySetResist(ProtectionType, ProtectionLevel);
-                            if (ProtectionCharges > 0)
+                            if (ProtectionLevel > 0)
+                                jewelry.TrySetResist(ProtectionType, ProtectionLevel);
+                            else if (ProtectionCharges > 0)
                                 jewelry.SetResistCharges(ProtectionType, ProtectionCharges);
                         }
                         break;
@@ -456,6 +457,7 @@ namespace Server.Scripts.Engines.Loot
             };
 
             var spellEntry = SpellHit.Spells.Keys
+                .Skip(1)
                 .Where(k => SpellRegistry.GetInfo(k)?.Circle == circle)
                 .ToList()
                 .RandomElement();
