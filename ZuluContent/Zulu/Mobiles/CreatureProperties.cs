@@ -33,7 +33,7 @@ namespace Server.Mobiles
 
         public static CreatureProp Dice(string d)
         {
-            var dice = new LootPackDice(d);
+            DiceRoll dice = d;
             var value = new CreatureProp(dice.Count + dice.Bonus, dice.Count * dice.Sides + dice.Bonus);
 
             return value;

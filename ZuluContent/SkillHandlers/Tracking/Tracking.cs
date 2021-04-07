@@ -38,17 +38,14 @@ namespace Server.SkillHandlers
                 else
                 {
                     from.SendLocalizedMessage(1011350); // What do you wish to track?
-
                     from.CloseGump<TrackWhatGump>();
-                    ;
                     from.CloseGump<TrackWhoGump>();
-                    ;
                     from.SendGump(new TrackWhatGump(from));
                 }
             }
 
 
-            return ZhConfig.Skills.Entries[SkillName.Tracking].DelayTimespan;
+            return ZhConfig.Skills.Entries[SkillName.Tracking].Delay;
         }
 
         public class TrackingInfo

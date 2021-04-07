@@ -175,34 +175,12 @@ namespace Scripts.Zulu.Engines.Classes
 
         public static void AwardPoints(Mobile from, SkillName skillName, int points)
         {
-            var config = ZhConfig.Skills.Entries[skillName];
+            AwardRawAttributePoints(from, from.Skills[skillName], points);
 
-            Skill skill = from.Skills[skillName];
-
-            AwardRawAttributePoints(from, skill, points);
-
-            // Check the strength advancement
-            if (config.StrAdvancement != null && Utility.Random(1000) < config.StrAdvancement.Chance * 10)
+            foreach (var (stat, adv) in ZhConfig.Skills.Entries[skillName].StatAdvancements)
             {
-                AwardRawAttributePoints(from, StatType.Str,
-                    Utility.Dice(config.StrAdvancement.PointsAmount, config.StrAdvancement.PointsSides,
-                        config.StrAdvancement.PointsBonus));
-            }
-
-            // Check the dexterity advancement
-            if (config.DexAdvancement != null && Utility.Random(1000) < config.DexAdvancement.Chance * 10)
-            {
-                AwardRawAttributePoints(from, StatType.Dex,
-                    Utility.Dice(config.DexAdvancement.PointsAmount, config.DexAdvancement.PointsSides,
-                        config.DexAdvancement.PointsBonus));
-            }
-
-            // Check intelligence advancement
-            if (config.IntAdvancement != null && Utility.Random(1000) < config.IntAdvancement.Chance * 10)
-            {
-                AwardRawAttributePoints(from, StatType.Int,
-                    Utility.Dice(config.IntAdvancement.PointsAmount, config.IntAdvancement.PointsSides,
-                        config.IntAdvancement.PointsBonus));
+                if (Utility.RandomDouble() < adv.Chance)
+                    AwardRawAttributePoints(from, stat, Utility.RandomMinMax(adv.MinGain, adv.MaxGain));
             }
         }
 

@@ -34,7 +34,7 @@ namespace Server.SkillHandlers
 
             m.SendLocalizedMessage(502789); // Tame which animal?
 
-            return ZhConfig.Skills.Entries[SkillName.AnimalTaming].DelayTimespan;
+            return ZhConfig.Skills.Entries[SkillName.AnimalTaming].Delay;
         }
 
         public static bool AngerBeast(BaseCreature creature, Mobile from)

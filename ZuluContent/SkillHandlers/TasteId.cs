@@ -5,7 +5,7 @@ using Server.Mobiles;
 
 namespace Server.SkillHandlers
 {
-    public class TasteID
+    public class TasteId
 	{
 		public static void Initialize()
 		{

@@ -897,8 +897,6 @@ namespace Server.Mobiles
             InhumanSpeech speechType = SpeechType;
 
             speechType?.OnConstruct(this);
-
-            GenerateLoot(true);
         }
 
         protected BaseCreature(CreatureProperties p) : this(p.AiType, p.FightMode, p.PerceptionRange, p.FightRange,
@@ -2800,31 +2798,14 @@ namespace Server.Mobiles
             }
         }
 
-        protected bool m_Spawning;
-        protected int m_KillersLuck;
-
-        public virtual void GenerateLoot(bool spawning)
-        {
-            m_Spawning = spawning;
-
-            if (!spawning)
-                m_KillersLuck = LootPack.GetLuckChanceForKiller(this);
-
-            GenerateLoot();
-
-            m_Spawning = false;
-            m_KillersLuck = 0;
-        }
-
         public virtual void GenerateLoot()
         {
-            if (Summoned || m_Spawning)
+            if (Summoned)
                 return;
 
             if (LootTable == null || !ZhConfig.Loot.Tables.TryGetValue(LootTable, out var table))
                 return;
-
-
+            
             var backpack = Backpack;
             if (backpack == null)
             {
@@ -3180,7 +3161,7 @@ namespace Server.Mobiles
             if (!Summoned && !NoKillAwards && !m_HasGeneratedLoot)
             {
                 m_HasGeneratedLoot = true;
-                GenerateLoot(false);
+                GenerateLoot();
             }
 
             InhumanSpeech speechType = SpeechType;

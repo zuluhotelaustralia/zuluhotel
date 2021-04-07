@@ -5,9 +5,9 @@ using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
-namespace Server.Items
+namespace Server.SkillHandlers
 {
-    public class ItemIdentification
+    public class ItemId
     {
         public static void Initialize()
         {

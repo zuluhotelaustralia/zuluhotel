@@ -21,7 +21,7 @@ namespace Server.SkillHandlers
 
             m.SendLocalizedMessage(500328); // What animal should I look at?
 
-            return ZhConfig.Skills.Entries[SkillName.AnimalTaming].DelayTimespan;
+            return ZhConfig.Skills.Entries[SkillName.AnimalTaming].Delay;
         }
 
         private class InternalTarget : Target
