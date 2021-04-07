@@ -1274,13 +1274,13 @@ namespace Server.Engines.Craft
                     {
                         // TODO: CustomCrafts, i.e. traps don't seem to be able to fail in RunUO?
                         var cc = m_CraftItem.ItemType.CreateInstance<CustomCraft>(
-                            m_CraftItem.ItemType,
                             m_From,
                             m_CraftItem,
                             m_CraftSystem,
                             m_TypeRes,
                             m_Tool,
-                            mark
+                            mark,
+                            quality
                         );
 
                         cc?.EndCraftAction();

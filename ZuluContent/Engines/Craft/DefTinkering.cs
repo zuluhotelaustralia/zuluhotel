@@ -304,6 +304,22 @@ namespace Server.Engines.Craft
             AddRes(index, typeof(BarrelTap), 1044252, 1, 1044253);
 
             #endregion
+            
+            #region Traps
+
+            // Dart Trap
+            AddCraft(typeof(DartTrapCraft), 1044052, 1024396, 54.0, 54.0, typeof(Bolt), 1044036, 1,
+                1044037);
+
+            // Poison Trap
+            AddCraft(typeof(PoisonTrapCraft), 1044052, 1044593, 71.0, 71.0, typeof(BasePoisonPotion), 1044036, 1,
+                1044037);
+
+            // Explosion Trap
+            AddCraft(typeof(ExplosionTrapCraft), 1044052, 1044597, 77.0, 77.0, typeof(BaseExplosionPotion), 1044036, 1,
+                1044037);
+
+            #endregion
 
             #region Other
 
@@ -446,7 +462,7 @@ namespace Server.Engines.Craft
 
             if (message == 0)
             {
-                int trapLevel = (int) (From.Skills.Tinkering.Value / 10);
+                var trapLevel = (int) (From.Skills.Tinkering.Value / 10);
 
                 Container.TrapType = TrapType;
                 Container.TrapStrength = trapLevel * 9;
