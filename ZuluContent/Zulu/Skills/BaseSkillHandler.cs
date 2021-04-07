@@ -10,14 +10,15 @@ namespace ZuluContent.Zulu.Skills
         public static TimeSpan Delay => ZhConfig.Skills.Entries[SkillName.Anatomy].Delay;
         
         
-        public abstract Task<TimeSpan> OnUse(Mobile mobile);
+        public abstract Task<TimeSpan> OnUse(Mobile @from);
 
         public static TimeSpan DispatchOnUseSkillHandler(Mobile mobile, BaseSkillHandler handler)
         {
             handler.OnUse(mobile)
                 .ContinueWith(t => mobile.NextSkillTime = Core.TickCount + (int) t.Result.TotalMilliseconds);
             
-            return TimeSpan.MaxValue;
+            // Prevent skill use whilst async handler is running
+            return TimeSpan.FromHours(1);
         }
     }
 }

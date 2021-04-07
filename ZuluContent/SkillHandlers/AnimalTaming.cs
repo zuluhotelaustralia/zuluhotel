@@ -1,43 +1,175 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Network;
 using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic;
-
+using ZuluContent.Zulu.Skills;
+using static Scripts.Zulu.Utilities.ZuluUtil;
 namespace Server.SkillHandlers
 {
-    public class AnimalTaming
+    public class AnimalTaming : BaseSkillHandler
     {
-        private static readonly int MaxDistance = 20;
-        private static readonly int PrevTamedMinus = 20;
+        private const int MaxDistance = 20;
+        private const int PrevTamedMinus = 20;
+        private const int PointMultiplier = 15;
         private static readonly TimeSpan DelayBetweenSpeech = TimeSpan.FromSeconds(3.0);
-        private static readonly int PointMultiplier = 15;
         private static readonly TimeSpan UnresponsiveTime = TimeSpan.FromSeconds(300.0);
+        private static readonly Dictionary<Serial, Serial> BeingTamed = new();
 
+        private static readonly string[] SpeechLines = {
+            "What a nice {0}",
+            "I've always wanted a {0} like you.",
+            "{0}, will you be my friend?"
+        };
 
-        private static Hashtable m_BeingTamed = new Hashtable();
+        public override SkillName Skill { get; } = SkillName.AnimalTaming;
 
-        public static void Initialize()
+        private static readonly TargetOptions TargetOptions = new()
         {
-            SkillInfo.Table[(int) SkillName.AnimalTaming].Callback = OnUse;
+            Range = 12,
+        };
+
+        public override async Task<TimeSpan> OnUse(Mobile from)
+        {
+            var target = new AsyncTarget<BaseCreature>(from, TargetOptions);
+            from.Target = target;
+            from.RevealingAction();
+
+            from.SendLocalizedMessage(502789); // Tame which animal?
+
+            var (creature, responseType) = await target;
+
+            if (responseType != TargetResponseType.Success)
+                return Delay;
+            
+            if (!creature.Tamable)
+                return FinishTaming(from, creature, "You can't tame that!");
+
+            if (creature.Controlled)
+                return FinishTaming(from, creature, "That creature looks pretty tame already.");
+
+            var difficulty = (int) creature.MinTameSkill;
+
+            if (from.Skills[SkillName.AnimalTaming].Value < difficulty)
+                return FinishTaming(from, creature, "You have no chance of taming this creature!");
+
+            if (BeingTamed.ContainsKey(creature.Serial))
+            {
+                // Someone else is already taming this.
+                return FinishTaming(from, creature, 502802);
+            }
+
+            difficulty += 10;
+
+            var timesPreviouslyTamed = creature.Owners.Count;
+
+            difficulty -= PrevTamedMinus * timesPreviouslyTamed;
+            if (difficulty < 1)
+                difficulty = 1;
+
+            var calmingDifficulty = difficulty + 10;
+
+            if (creature.UnresponsiveToTamingEndTime < Core.TickCount)
+            {
+                if (from.ShilCheckSkill(SkillName.AnimalLore, calmingDifficulty, 0) && creature.Warmode)
+                    CalmBeast(creature, from);
+                else if (creature.CreatureType == CreatureType.Dragonkin && AngerBeast(creature, from))
+                    return FinishTaming(from, creature);
+            }
+            else
+            {
+                AngerBeast(creature, from);
+                return FinishTaming(from, creature, "The creature is unresponsive to taming at this time.");
+            }
+
+            BeingTamed[creature.Serial] = from.Serial;
+
+            foreach (var line in SpeechLines)
+            {
+                if (!from.InRange(creature, MaxDistance))
+                    return FinishTaming(from, creature, "You are too far away to continue taming.");
+
+                if (!from.CheckAlive())
+                {
+                    BeingTamed.Remove(creature.Serial);
+                    return FinishTaming(from, creature, "You are dead and cannot continue taming.");
+                }
+
+                if (!from.CanSee(creature) || !from.InLOS(creature) || !CanPath(from, creature))
+                    return FinishTaming(from, creature,
+                        "You do not have a clear path to the animal you are taming, and must cease your attempt.");
+
+                if (!creature.Tamable)
+                    return FinishTaming(from, creature, "That creature cannot be tamed.");
+
+                if (creature.Controlled)
+                    return FinishTaming(from, creature, $"{creature.Name} belongs to someone else!");
+
+                from.SendSuccessPublicOverHeadMessage(string.Format(line, TrimIndefiniteArticle(creature.Name)));
+                await Timer.Pause(DelayBetweenSpeech);
+            }
+            
+            if (Core.TickCount < creature.UnresponsiveToTamingEndTime)
+                return FinishTaming(from, creature, "You failed to tame the creature.");
+
+            creature.UnresponsiveToTamingEndTime = Core.TickCount;
+
+            if (from.ShilCheckSkill(SkillName.AnimalTaming, difficulty, difficulty * PointMultiplier))
+            {
+                from.RevealingAction();
+                from.SendSuccessMessage($"You successfully tame the {TrimIndefiniteArticle(creature.Name)}");
+
+                // It seems to accept you as master.
+                creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799, from.NetState);
+                creature.Owners.Add(from);
+                creature.SetControlMaster(from);
+                PacifyBeast(creature, from);
+            }
+            else
+            {
+                from.SendFailureMessage("You failed to tame the creature.");
+                var chance = 80 - (int) ((from.Skills[SkillName.AnimalTaming].Value - difficulty + 20) * 2);
+                from.FireHook(h => h.OnAnimalTaming(from, creature, ref chance));
+
+                if (chance < 1)
+                    chance = 1;
+
+                if (Utility.Random(100) <= chance)
+                {
+                    creature.UnresponsiveToTamingEndTime = Core.TickCount + (int) UnresponsiveTime.TotalMilliseconds;
+                    return FinishTaming(from, creature, "And have made the creature unresponsive to taming.");
+                }
+            }
+            
+            return FinishTaming(from, creature);
         }
 
-        public static TimeSpan OnUse(Mobile m)
+        private static TimeSpan FinishTaming(Mobile from, BaseCreature targeted, TextDefinition message = null)
         {
-            m.RevealingAction();
-
-            m.Target = new InternalTarget();
-            m.RevealingAction();
-
-            m.SendLocalizedMessage(502789); // Tame which animal?
-
-            return ZhConfig.Skills.Entries[SkillName.AnimalTaming].Delay;
+            if(BeingTamed.ContainsKey(targeted.Serial))
+                BeingTamed.Remove(targeted.Serial);
+            
+            if(message != null)
+                from.SendFailureMessage(message);
+            
+            return Delay;
         }
 
-        public static bool AngerBeast(BaseCreature creature, Mobile from)
+        private static bool CanPath(IEntity from, Mobile targeted)
+        {
+            if (targeted.InRange(from, 1))
+                return true;
+
+            var path = new MovementPath(targeted, from.Location);
+            return path.Success;
+        }
+
+        private static bool AngerBeast(BaseCreature creature, Mobile from)
         {
             var chance = 75;
             from.FireHook(h => h.OnAnimalTaming(from, creature, ref chance));
@@ -57,228 +189,19 @@ namespace Server.SkillHandlers
             return false;
         }
 
-        public static void CalmBeast(BaseCreature creature, Mobile from)
+        private static void CalmBeast(BaseCreature creature, Mobile from)
         {
             PacifyBeast(creature, from);
             creature.PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
                 $"{from.Name} has calmed the beast!");
         }
 
-        public static void PacifyBeast(BaseCreature creature, Mobile from)
+        private static void PacifyBeast(BaseCreature creature, Mobile from)
         {
             from.Combatant = null;
             creature.Combatant = null;
             creature.Warmode = false;
             creature.Pacify(from, DateTime.Now + TimeSpan.FromSeconds(1.0));
-        }
-
-        private class InternalTarget : Target
-        {
-            public InternalTarget() : base(MaxDistance, false, TargetFlags.None)
-            {
-            }
-
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                from.RevealingAction();
-
-                if (!(targeted is BaseCreature))
-                {
-                    from.SendFailureMessage("You cannot tame this!");
-                    return;
-                }
-
-                BaseCreature creature = (BaseCreature) targeted;
-
-                if (!creature.Tamable)
-                {
-                    from.SendFailureMessage("You can't tame that!");
-                    return;
-                }
-
-                if (creature.Controlled)
-                {
-                    from.SendFailureMessage("That creature looks pretty tame already.");
-                    return;
-                }
-
-                var difficulty = creature.MinTameSkill;
-
-                if (from.Skills[SkillName.AnimalTaming].Value < difficulty)
-                {
-                    from.SendFailureMessage("You have no chance of taming this creature!");
-                    return;
-                }
-
-                if (m_BeingTamed.Contains(targeted))
-                {
-                    creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502802,
-                        from.NetState); // Someone else is already taming this.
-                    return;
-                }
-
-                difficulty += 10;
-
-                var timesPreviouslyTamed = creature.Owners.Count;
-
-                difficulty -= PrevTamedMinus * timesPreviouslyTamed;
-                if (difficulty < 1.0)
-                    difficulty = 1.0;
-
-                var calmingDifficulty = (int) difficulty + 10;
-
-                if (creature.UnresponsiveToTamingEndTime < Core.TickCount)
-                {
-                    if (from.ShilCheckSkill(SkillName.AnimalLore, calmingDifficulty, 0) && creature.Warmode)
-                    {
-                        CalmBeast(creature, from);
-                    }
-                    else if (creature.CreatureType == CreatureType.Dragonkin && AngerBeast(creature, from))
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    AngerBeast(creature, from);
-                    from.SendFailureMessage("The creature is unresponsive to taming at this time.");
-                    return;
-                }
-
-                m_BeingTamed[targeted] = from;
-
-                new InternalTimer(from, creature, difficulty).Start();
-            }
-
-            private class InternalTimer : Timer
-            {
-                private static readonly int MaxCount = 4;
-                private Mobile m_Tamer;
-                private BaseCreature m_Creature;
-                private int m_Count;
-                private double m_Difficulty;
-
-                public InternalTimer(Mobile tamer, BaseCreature creature,
-                    double difficulty) : base(
-                    TimeSpan.FromSeconds(0.0),
-                    DelayBetweenSpeech, MaxCount)
-                {
-                    m_Difficulty = difficulty;
-                    m_Tamer = tamer;
-                    m_Creature = creature;
-                    Priority = TimerPriority.TwoFiftyMS;
-                }
-
-                protected override void OnTick()
-                {
-                    m_Count++;
-
-                    if (!m_Tamer.InRange(m_Creature, MaxDistance))
-                    {
-                        m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendFailureMessage("You are too far away to continue taming.");
-                        Stop();
-                    }
-                    else if (!m_Tamer.CheckAlive())
-                    {
-                        m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendFailureMessage("You are dead and cannot continue taming.");
-                        Stop();
-                    }
-                    else if (!m_Tamer.CanSee(m_Creature) || !m_Tamer.InLOS(m_Creature) || !CanPath())
-                    {
-                        m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendFailureMessage("You do not have a clear path to the animal you are taming, and must cease your attempt.");
-                        Stop();
-                    }
-                    else if (!m_Creature.Tamable)
-                    {
-                        m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendFailureMessage("That creature cannot be tamed.");
-                        Stop();
-                    }
-                    else if (m_Creature.Controlled)
-                    {
-                        m_BeingTamed.Remove(m_Creature);
-                        m_Tamer.SendFailureMessage($"{m_Creature.Name} belongs to someone else!");
-                        Stop();
-                    }
-                    else if (m_Count == 1)
-                    {
-                        m_Tamer.PublicOverheadMessage(MessageType.Regular, ZhConfig.Messaging.FailureHue, true,
-                            $"What a nice {m_Creature.Name}");
-                    }
-                    else if (m_Count == 2)
-                    {
-                        m_Tamer.PublicOverheadMessage(MessageType.Regular, ZhConfig.Messaging.FailureHue, true,
-                            $"I've always wanted a {m_Creature.Name} like you.");
-                    }
-                    else if (m_Count == 3)
-                    {
-                        m_Tamer.PublicOverheadMessage(MessageType.Regular, ZhConfig.Messaging.FailureHue, true,
-                            $"{m_Creature.Name}, will you be my friend?");
-                    }
-                    else
-                    {
-                        if (Core.TickCount < m_Creature.UnresponsiveToTamingEndTime)
-                        {
-                            m_BeingTamed.Remove(m_Creature);
-                            m_Tamer.SendFailureMessage($"You failed to tame the creature.");
-                        }
-                        else
-                        {
-                            m_Creature.UnresponsiveToTamingEndTime = Core.TickCount;
-
-                            if (m_Tamer.ShilCheckSkill(SkillName.AnimalTaming, (int) m_Difficulty,
-                                (int) m_Difficulty * PointMultiplier))
-                            {
-                                m_Tamer.RevealingAction();
-                                m_BeingTamed.Remove(m_Creature);
-                                m_Tamer.SendSuccessMessage($"You successfully tame the {m_Creature.Name}");
-                                m_Creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799,
-                                    m_Tamer.NetState); // It seems to accept you as master.
-                                m_Creature.Owners.Add(m_Tamer);
-                                m_Creature.SetControlMaster(m_Tamer);
-                                PacifyBeast(m_Creature, m_Tamer);
-                            }
-                            else
-                            {
-                                m_BeingTamed.Remove(m_Creature);
-                                m_Tamer.SendFailureMessage($"You failed to tame the creature.");
-                                var chance = 80 -
-                                             (int) ((m_Tamer.Skills[SkillName.AnimalTaming].Value - m_Difficulty + 20) *
-                                                    2);
-                                m_Tamer.FireHook(h => h.OnAnimalTaming(m_Tamer, m_Creature, ref chance));
-
-                                if (chance < 1)
-                                    chance = 1;
-
-                                if (Utility.Random(100) <= chance)
-                                {
-                                    m_Tamer.SendFailureMessage($"And have made the creature unresponsive to taming.");
-                                    m_Creature.UnresponsiveToTamingEndTime = Core.TickCount +
-                                                                             (int) UnresponsiveTime
-                                                                                 .TotalMilliseconds;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                private bool CanPath()
-                {
-                    IPoint3D p = m_Tamer as IPoint3D;
-
-                    if (p == null)
-                        return false;
-
-                    if (m_Creature.InRange(new Point3D(p), 1))
-                        return true;
-
-                    MovementPath path = new MovementPath(m_Creature, new Point3D(p));
-                    return path.Success;
-                }
-            }
         }
     }
 }
