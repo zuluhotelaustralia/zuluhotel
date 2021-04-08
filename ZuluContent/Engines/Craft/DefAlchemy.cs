@@ -11,10 +11,10 @@ namespace Server.Engines.Craft
 {
     public sealed class DefAlchemy : CraftSystem
     {
-        public static CraftSystem NormalCraftSystem { get; } = new DefAlchemy(ZhConfig.Alchemy.Normal);
-        public static CraftSystem PlusCraftSystem { get; } = new DefAlchemy(ZhConfig.Alchemy.Plus);
+        public static CraftSystem NormalCraftSystem { get; } = new DefAlchemy(ZhConfig.Crafting.Alchemy);
+        public static CraftSystem PlusCraftSystem { get; } = new DefAlchemy(ZhConfig.Crafting.AlchemyPlus);
 
-        public readonly AlchemySettings Settings;
+        public readonly CraftSettings Settings;
         private static Type TypeOfPotion => typeof(BasePotion);
         public override SkillName MainSkill => Settings.MainSkill;
         public override int GumpTitleNumber => Settings.GumpTitleId;
@@ -24,7 +24,7 @@ namespace Server.Engines.Craft
         
         public override double GetChanceAtMin(CraftItem item) => Settings.MinCraftChance;
 
-        private DefAlchemy(AlchemySettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
+        private DefAlchemy(CraftSettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
         {
             Settings = settings;
             InitCraftList();

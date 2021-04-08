@@ -15,7 +15,7 @@ namespace Server
     {
         public static MessagingConfiguration Messaging => Get<MessagingConfiguration>();
         public static ResourceConfiguration Resources => Get<ResourceConfiguration>();
-        public static AlchemyConfiguration Alchemy => Get<AlchemyConfiguration>();
+        public static CraftConfiguration Crafting => Get<CraftConfiguration>();
         public static LootConfiguration Loot => Get<LootConfiguration>();
         public static SkillConfiguration Skills => Get<SkillConfiguration>();
         public static SpellConfiguration Spells => Get<SpellConfiguration>();
@@ -33,7 +33,7 @@ namespace Server
 
             Add<MessagingConfiguration>();
             Add<ResourceConfiguration>();
-            Add<AlchemyConfiguration>();
+            Add<CraftConfiguration>();
             Add<LootConfiguration>();
             Add<SkillConfiguration>();
             Add<SpellConfiguration>();
