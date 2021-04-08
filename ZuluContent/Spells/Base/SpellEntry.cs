@@ -118,8 +118,6 @@ namespace Server.Spells
         EarthSpirit = 612,
         FireSpirit = 613,
         StormSpirit = 614,
-        WaterSpirit = 615,
-        
-        TriElemental = 700
+        WaterSpirit = 615
     }
 }
