@@ -1,8 +1,5 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Server.Items;
 using Server.Targeting;
 using ZuluContent.Configuration;
@@ -11,30 +8,10 @@ namespace Server.Engines.Craft
 {
     public sealed class DefTinkering : CraftSystem
     {
-        public readonly CraftSettings Settings;
-
-        public override SkillName MainSkill => Settings.MainSkill;
-
-        public override int GumpTitleNumber => Settings.GumpTitleId;
-        
-        public int CraftWorkSound => Settings.CraftWorkSound;
-        
-        public int CraftEndSound => Settings.CraftEndSound;
-
         public static CraftSystem CraftSystem => new DefTinkering(ZhConfig.Crafting.Tinkering);
 
-        private DefTinkering(CraftSettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
+        private DefTinkering(CraftSettings settings) : base(settings)
         {
-            Settings = settings;
-            InitCraftList();
-        }
-
-        public override double GetChanceAtMin(CraftItem item)
-        {
-            if (item.NameNumber == 1044258 || item.NameNumber == 1046445) // potion keg and faction trap removal kit
-                return 0.5; // 50%
-
-            return 0.0; // 0%
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
@@ -73,11 +50,6 @@ namespace Server.Engines.Craft
             return contains;
         }
 
-        public override void PlayCraftEffect(Mobile from)
-        {
-            from.PlaySound(CraftWorkSound);
-        }
-
         public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality,
             bool makersMark, CraftItem item)
         {
@@ -106,34 +78,8 @@ namespace Server.Engines.Craft
 
         public override void InitCraftList()
         {
-            if (Settings == null)
-                return;
+            base.InitCraftList();
             
-            foreach (var entry in Settings.CraftEntries)
-            {
-                var firstResource = entry.Resources.FirstOrDefault();
-
-                if (firstResource == null)
-                    throw new ArgumentNullException($"Tinkering entry {entry.ItemType} must have at least one resource");
-
-                var idx = AddCraft(
-                    entry.ItemType,
-                    entry.GroupName,
-                    entry.Name,
-                    entry.Skill,
-                    entry.Skill,
-                    firstResource.ItemType,
-                    firstResource.Name,
-                    firstResource.Amount,
-                    firstResource.Message
-                );
-
-                foreach (var c in entry.Resources.Skip(1))
-                {
-                    AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
-                }
-            }
-
             // Set the overridable material
             SetSubRes(typeof(IronIngot), 1044022);
 

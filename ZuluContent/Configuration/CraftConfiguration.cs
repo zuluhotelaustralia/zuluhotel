@@ -7,6 +7,13 @@ namespace ZuluContent.Configuration
     {
         public readonly CraftSettings Alchemy;
         public readonly CraftSettings AlchemyPlus;
+        public readonly CraftSettings Blacksmithy;
+        public readonly CraftSettings Carpentry;
+        public readonly CraftSettings Cartography;
+        public readonly CraftSettings Cooking;
+        public readonly CraftSettings Fletching;
+        public readonly CraftSettings Inscription;
+        public readonly CraftSettings Tailoring;
         public readonly CraftSettings Tinkering;
         
         protected CraftConfiguration()
@@ -14,6 +21,13 @@ namespace ZuluContent.Configuration
             const string baseDir = "Data/Crafting";
             Alchemy = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/alchemy.json");
             AlchemyPlus = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/alchemyplus.json");
+            Blacksmithy = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/blacksmithy.json");
+            Carpentry = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/carpentry.json");
+            Cartography = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/cartography.json");
+            Cooking = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/cooking.json");
+            Fletching = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/fletching.json");
+            Inscription = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/inscription.json");
+            Tailoring = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/tailoring.json");
             Tinkering = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/tinkering.json");
         }
     }
@@ -37,6 +51,11 @@ namespace ZuluContent.Configuration
             public TextDefinition GroupName { get; init; }
             public double Skill { get; init; }
             public CraftResource[] Resources { get; init; }
+            public bool UseAllRes { get; init; }
+            public bool NeedHeat { get; init; }
+            public bool NeedOven { get; init; }
+            public bool NeedMill { get; init; }
+
         }
 
         public record CraftResource

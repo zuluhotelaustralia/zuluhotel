@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
 using System.Linq;
 using Server.Items;
-using Server.Json;
 using ZuluContent.Configuration;
 
 namespace Server.Engines.Craft
@@ -13,53 +9,11 @@ namespace Server.Engines.Craft
     {
         public static CraftSystem NormalCraftSystem { get; } = new DefAlchemy(ZhConfig.Crafting.Alchemy);
         public static CraftSystem PlusCraftSystem { get; } = new DefAlchemy(ZhConfig.Crafting.AlchemyPlus);
-
-        public readonly CraftSettings Settings;
-        private static Type TypeOfPotion => typeof(BasePotion);
-        public override SkillName MainSkill => Settings.MainSkill;
-        public override int GumpTitleNumber => Settings.GumpTitleId;
-
-        public int CraftWorkSound => Settings.CraftWorkSound;
-        public int CraftEndSound => Settings.CraftEndSound;
         
-        public override double GetChanceAtMin(CraftItem item) => Settings.MinCraftChance;
+        private static Type TypeOfPotion => typeof(BasePotion);
 
-        private DefAlchemy(CraftSettings settings) : base(settings.MinCraftDelays, settings.MaxCraftDelays, settings.Delay)
+        private DefAlchemy(CraftSettings settings) : base(settings)
         {
-            Settings = settings;
-            InitCraftList();
-        }
-
-        public override void InitCraftList()
-        {
-            if (Settings == null)
-                return;
-            
-            foreach (var entry in Settings.CraftEntries)
-            {
-                var firstResource = entry.Resources.FirstOrDefault();
-
-                if (firstResource == null)
-                    throw new ArgumentNullException($"Alchemy entry {entry.ItemType} must have at least one resource");
-
-                var idx = AddCraft(
-                    entry.ItemType,
-                    entry.GroupName,
-                    entry.Name,
-                    entry.Skill,
-                    entry.Skill,
-                    // AddCraft() needs at least one resource by default
-                    firstResource.ItemType,
-                    firstResource.Name,
-                    firstResource.Amount,
-                    firstResource.Message
-                );
-
-                foreach (var c in entry.Resources.Skip(1))
-                {
-                    AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
-                }
-            }
         }
 
         public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
@@ -75,11 +29,6 @@ namespace Server.Engines.Craft
                 return 1044263; // The tool must be on your person to use.
 
             return 0;
-        }
-
-        public override void PlayCraftEffect(Mobile from)
-        {
-            from.PlaySound(CraftWorkSound);
         }
 
         public static bool IsPotion(Type type)
