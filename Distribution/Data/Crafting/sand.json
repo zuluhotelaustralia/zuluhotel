@@ -1,0 +1,41 @@
+{
+  "BankWidth": 1,
+  "BankHeight": 1,
+  "MinTotal": 45,
+  "MaxTotal":  90,
+  "MinRespawn": 10.0,
+  "MaxRespawn": 20.0,
+  "Skill": "Mining",
+  "MaxRange": 2,
+  "MaxChance": 155,
+  "OreEffect": {
+    "Actions": [ 11 ],
+    "Sounds": [ 66 ],
+    "Counts": [ 4 ],
+    "Delay": 1.6,
+    "SoundDelay": 0.9
+  },
+  "Messages": {
+    "NoResourcesMessage": 1044629,
+    "DoubleHarvestMessage": 1044629,
+    "TimedOutOfRangeMessage": 503041,
+    "OutOfRangeMessage": 500446,
+    "FailMessage": 1044630,
+    "PackFullMessage": 1044632,
+    "ToolBrokeMessage": 1044038
+  },
+  "Entries": [
+    {
+      "Name": "units of sand",
+      "ResourceType": "Sand",
+      "SmeltType": "RawGlass",
+      "HarvestSkillRequired": 0.0,
+      "SmeltSkillRequired": 0.0,
+      "CraftSkillRequired": 0.0,
+      "VeinChance": 100.0,
+      "Hue": 0,
+      "Quality": 1.0,
+      "Enchantments": []
+    }
+  ]
+}
