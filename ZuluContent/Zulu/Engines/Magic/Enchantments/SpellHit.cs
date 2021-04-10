@@ -23,7 +23,6 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     {
         public static readonly Dictionary<SpellEntry, Func<Mobile, Spell>> Spells = new()
         {
-            [SpellEntry.None] = _ => null,
             [SpellEntry.Clumsy] = caster => new ClumsySpell(caster),
             [SpellEntry.Feeblemind] = caster => new FeeblemindSpell(caster),
             [SpellEntry.MagicArrow] = caster => new MagicArrowSpell(caster),
@@ -62,6 +61,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public override void OnMeleeHit(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
         {
+            if (m_SpellEntry == SpellEntry.None)
+                return;
+            
             if (Chance > Utility.RandomDouble() && Spells.TryGetValue(SpellEntry, out var action))
             {
                 var spell = action(attacker);

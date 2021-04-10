@@ -6,7 +6,7 @@ using Server.Items;
 
 namespace Server.SkillHandlers
 {
-    public class ForensicEvaluation
+    public class Forensics
 	{
 		public static void Initialize()
 		{

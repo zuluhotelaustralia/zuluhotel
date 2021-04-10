@@ -1,73 +1,66 @@
 using System;
+using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Skills;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 
 namespace Server.SkillHandlers
 {
-    public class AnimalLore
+    public class AnimalLore : BaseSkillHandler
     {
-        public static void Initialize()
+        public override SkillName Skill { get; } = SkillName.AnimalLore;
+
+        private static readonly TargetOptions TargetOptions = new()
         {
-            SkillInfo.Table[(int) SkillName.AnimalLore].Callback = OnUse;
-        }
+            Range = 12,
+        };
 
-        public static TimeSpan OnUse(Mobile m)
+        public override async Task<TimeSpan> OnUse(Mobile from)
         {
-            m.Target = new InternalTarget();
+            var target = new AsyncTarget<BaseCreature>(from, TargetOptions);
+            from.Target = target;
 
-            m.SendLocalizedMessage(500328); // What animal should I look at?
+            from.SendLocalizedMessage(500328); // What animal should I look at?
 
-            return ZhConfig.Skills.Entries[SkillName.AnimalTaming].DelayTimespan;
-        }
+            var (creature, responseType) = await target;
 
-        private class InternalTarget : Target
-        {
-            public InternalTarget() : base(-1, false, TargetFlags.None)
+            if (responseType != TargetResponseType.Success)
+                return Delay;
+
+            if (creature == null || !(creature.Body.IsAnimal || creature.Body.IsMonster || creature.Body.IsSea))
             {
+                from.SendFailureMessage(500329); // That's not an animal!
+                return Delay;
+            }
+            
+            if (!from.Alive)
+            {
+                from.SendLocalizedMessage(500331); // The spirits of the dead are not the province of animal lore.
+                return Delay;
             }
 
-            protected override void OnTarget(Mobile from, object targeted)
+            if (creature.Controlled)
             {
-                if (!from.Alive)
-                {
-                    from.SendLocalizedMessage(500331); // The spirits of the dead are not the province of animal lore.
-                }
-                else if (targeted is BaseCreature creature)
-                {
-                    if (creature.Body.IsAnimal || creature.Body.IsMonster || creature.Body.IsSea)
-                    {
-                        if (creature.Controlled)
-                        {
-                            creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true,
-                                "Looks like someone's pet.", from.NetState);
-                            return;
-                        }
-
-                        if (!from.ShilCheckSkill(SkillName.AnimalLore))
-                        {
-                            creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true,
-                                "Hmm... you're not sure...", from.NetState);
-                            return;
-                        }
-
-
-                        from.CloseGump<AnimalLoreGump>();
-                        from.SendGump(new AnimalLoreGump(creature));
-                    }
-                    else
-                    {
-                        from.SendLocalizedMessage(500329); // That's not an animal!
-                    }
-                }
-                else
-                {
-                    from.SendLocalizedMessage(500329); // That's not an animal!
-                }
+                creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, "Looks like someone's pet.", from.NetState);
+                return Delay;
             }
+
+            if (!from.ShilCheckSkill(SkillName.AnimalLore))
+            {
+                creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, "Hmm... you're not sure...", from.NetState);
+                return Delay;
+            }
+
+
+            from.CloseGump<AnimalLoreGump>();
+            from.SendGump(new AnimalLoreGump(creature));
+
+            return Delay;
         }
     }
 
@@ -235,13 +228,13 @@ namespace Server.SkillHandlers
             AddHtml(140, 158, 75, 18, FormatStat(c.WaterResist), false, false);
 
             AddLabel(50, 176, LabelColor, "Poison Protection");
-            AddHtml(140, 176, 75, 18, FormatStat((int)c.PoisonImmunity), false, false);
+            AddHtml(140, 176, 75, 18, FormatStat((int) c.PoisonImmunity), false, false);
 
             AddLabel(50, 194, LabelColor, "Physical Protection");
             AddHtml(140, 194, 75, 18, FormatStat(c.PhysicalResist), false, false);
 
             AddLabel(50, 212, LabelColor, "Magic Immunity");
-            AddHtml(140, 212, 75, 18, FormatStat((int)c.MagicImmunity), false, false);
+            AddHtml(140, 212, 75, 18, FormatStat((int) c.MagicImmunity), false, false);
 
             AddImage(30, 244, 2086);
             AddLabel(50, 242, HeaderColor, "Preferred Foods");

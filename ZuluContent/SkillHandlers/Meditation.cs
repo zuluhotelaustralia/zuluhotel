@@ -12,7 +12,7 @@ namespace Server.SkillHandlers
 {
     class Meditation
     {
-        private static readonly TimeSpan DefaultDelay = ZhConfig.Skills.Entries[SkillName.Meditation].DelayTimespan;
+        private static readonly TimeSpan DefaultDelay = ZhConfig.Skills.Entries[SkillName.Meditation].Delay;
         
         public static void Initialize()
         {

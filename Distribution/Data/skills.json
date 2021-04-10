@@ -3,566 +3,622 @@
   "StatCap": 1300,
   "Entries": {
     "Anatomy": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Anatomy",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.8,
+          "MinGain": 9,
+          "MaxGain": 21
+        }
+      }
     },
     "Fencing": {
-      "Delay": 0,
-      "StrAdvancement": {
-        "Chance": 40,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "DexAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:00",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.4,
+          "MinGain": 4,
+          "MaxGain": 16
+        },
+        "Dex": {
+          "Chance": 0.6,
+          "MinGain": 4,
+          "MaxGain": 24
+        }
+      }
     },
     "Healing": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 30,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "IntAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.6,
+          "MinGain": 14,
+          "MaxGain": 26
+        },
+        "Dex": {
+          "Chance": 0.3,
+          "MinGain": 3,
+          "MaxGain": 12
+        }
+      }
     },
     "Macing": {
-      "Delay": 0,
-      "StrAdvancement": {
-        "Chance": 65,
-        "PointsAmount": 4,
-        "PointsSides": 7,
-        "PointsBonus": 3
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:00",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.65,
+          "MinGain": 7,
+          "MaxGain": 31
+        }
+      }
     },
     "Parry": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 1,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "DexAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 2,
-        "PointsSides": 3,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:10",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.7,
+          "MinGain": 1,
+          "MaxGain": 4
+        },
+        "Dex": {
+          "Chance": 0.6,
+          "MinGain": 2,
+          "MaxGain": 6
+        }
+      }
     },
     "Swords": {
-      "Delay": 0,
-      "StrAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 0
-      },
-      "DexAdvancement": {
-        "Chance": 40,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:00",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.5,
+          "MinGain": 4,
+          "MaxGain": 24
+        },
+        "Dex": {
+          "Chance": 0.4,
+          "MinGain": 9,
+          "MaxGain": 21
+        }
+      }
     },
     "Tactics": {
-      "Delay": 0,
-      "DexAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 2,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 15
+      "Delay": "00:00:00",
+      "DefaultPoints": 15,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.5,
+          "MinGain": 7,
+          "MaxGain": 13
+        }
+      }
     },
     "Wrestling": {
-      "Delay": 0,
-      "StrAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 4,
-        "PointsSides": 7,
-        "PointsBonus": 4
-      },
-      "DexAdvancement": {
-        "Chance": 30,
-        "PointsAmount": 7,
-        "PointsSides": 8,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:00",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.7,
+          "MinGain": 8,
+          "MaxGain": 32
+        },
+        "Dex": {
+          "Chance": 0.3,
+          "MinGain": 7,
+          "MaxGain": 56
+        }
+      }
     },
     "Alchemy": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 100,
-        "PointsAmount": 4,
-        "PointsSides": 5,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 200
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 1,
+          "MinGain": 14,
+          "MaxGain": 30
+        }
+      }
     },
     "EvalInt": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 90,
-        "PointsAmount": 5,
-        "PointsSides": 6,
-        "PointsBonus": 20
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.EvalInt",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.9,
+          "MinGain": 25,
+          "MaxGain": 50
+        }
+      }
     },
     "Inscribe": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 600
+      "OnUseHandler": "Server.SkillHandlers.Inscribe",
+      "Delay": "00:00:10",
+      "DefaultPoints": 600,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.6,
+          "MinGain": 14,
+          "MaxGain": 34
+        }
+      }
     },
     "ItemID": {
-      "Delay": 4,
-      "IntAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 5,
-        "PointsSides": 5,
-        "PointsBonus": 15
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.ItemId",
+      "Delay": "00:00:04",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.7,
+          "MinGain": 20,
+          "MaxGain": 40
+        }
+      }
     },
     "Magery": {
-      "Delay": 0,
-      "IntAdvancement": {
-        "Chance": 100,
-        "PointsAmount": 5,
-        "PointsSides": 8,
-        "PointsBonus": 18
-      },
-      "DefaultPoints": 300
+      "Delay": "00:00:00",
+      "DefaultPoints": 300,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 1,
+          "MinGain": 23,
+          "MaxGain": 58
+        }
+      }
     },
     "MagicResist": {
-      "Delay": 0,
-      "IntAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 15
-      },
-      "DefaultPoints": 50
+      "Delay": "00:00:00",
+      "DefaultPoints": 50,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.5,
+          "MinGain": 18,
+          "MaxGain": 27
+        }
+      }
     },
     "Meditation": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 5,
-        "PointsSides": 5,
-        "PointsBonus": 15
-      },
-      "DefaultPoints": 250
+      "OnUseHandler": "Server.SkillHandlers.Meditation",
+      "Delay": "00:00:10",
+      "DefaultPoints": 250,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.7,
+          "MinGain": 20,
+          "MaxGain": 40
+        }
+      }
     },
     "SpiritSpeak": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 100,
-        "PointsAmount": 5,
-        "PointsSides": 8,
-        "PointsBonus": 35
-      },
-      "DefaultPoints": 20
+      "OnUseHandler": "Server.SkillHandlers.SpiritSpeak",
+      "Delay": "00:00:10",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 1,
+          "MinGain": 40,
+          "MaxGain": 75
+        }
+      }
     },
     "AnimalLore": {
-      "Delay": 5,
-      "DefaultPoints": 250
+      "OnUseHandler": "Server.SkillHandlers.AnimalLore",
+      "Delay": "00:00:05",
+      "DefaultPoints": 250,
+      "StatAdvancements": {}
     },
     "AnimalTaming": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 25
+      "OnUseHandler": "Server.SkillHandlers.AnimalTaming",
+      "Delay": "00:00:10",
+      "DefaultPoints": 25,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.8,
+          "MinGain": 14,
+          "MaxGain": 26
+        }
+      }
     },
     "Archery": {
-      "Delay": 0,
-      "StrAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "DexAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 8
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:00",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.5,
+          "MinGain": 4,
+          "MaxGain": 16
+        },
+        "Dex": {
+          "Chance": 0.6,
+          "MinGain": 12,
+          "MaxGain": 32
+        }
+      }
     },
     "Camping": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 15,
-        "PointsAmount": 1,
-        "PointsSides": 8,
-        "PointsBonus": 0
-      },
-      "IntAdvancement": {
-        "Chance": 10,
-        "PointsAmount": 1,
-        "PointsSides": 6,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 200
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.1,
+          "MinGain": 1,
+          "MaxGain": 6
+        },
+        "Dex": {
+          "Chance": 0.15,
+          "MinGain": 1,
+          "MaxGain": 8
+        }
+      }
     },
     "Cooking": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "IntAdvancement": {
-        "Chance": 30,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 300
+      "Delay": "00:00:10",
+      "DefaultPoints": 300,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.3,
+          "MinGain": 3,
+          "MaxGain": 12
+        },
+        "Dex": {
+          "Chance": 0.5,
+          "MinGain": 3,
+          "MaxGain": 12
+        }
+      }
     },
     "Fishing": {
-      "Delay": 5,
-      "DexAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 8
-      },
-      "DefaultPoints": 200
+      "Delay": "00:00:05",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.8,
+          "MinGain": 12,
+          "MaxGain": 24
+        }
+      }
     },
     "Tracking": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 15
-      },
-      "IntAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 4,
-        "PointsSides": 2,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Tracking",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.7,
+          "MinGain": 9,
+          "MaxGain": 13
+        },
+        "Dex": {
+          "Chance": 0.7,
+          "MinGain": 23,
+          "MaxGain": 31
+        }
+      }
     },
     "Veterinary": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 20,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.2,
+          "MinGain": 3,
+          "MaxGain": 12
+        }
+      }
     },
     "ArmsLore": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "IntAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.ArmsLore",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.5,
+          "MinGain": 3,
+          "MaxGain": 12
+        },
+        "Int": {
+          "Chance": 0.7,
+          "MinGain": 9,
+          "MaxGain": 21
+        }
+      }
     },
     "Blacksmith": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 30
+      "Delay": "00:00:10",
+      "DefaultPoints": 30,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.8,
+          "MinGain": 14,
+          "MaxGain": 34
+        }
+      }
     },
     "Carpentry": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 3,
-        "PointsSides": 6,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.8,
+          "MinGain": 8,
+          "MaxGain": 23
+        }
+      }
     },
     "Fletching": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 8
-      },
-      "DexAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 3,
-        "PointsSides": 6,
-        "PointsBonus": 8
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.6,
+          "MinGain": 11,
+          "MaxGain": 20
+        },
+        "Dex": {
+          "Chance": 0.6,
+          "MinGain": 11,
+          "MaxGain": 26
+        }
+      }
     },
     "Lumberjacking": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.8,
+          "MinGain": 4,
+          "MaxGain": 24
+        }
+      }
     },
     "Mining": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.5,
+          "MinGain": 8,
+          "MaxGain": 17
+        }
+      }
     },
     "Tailoring": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 50
+      "Delay": "00:00:10",
+      "DefaultPoints": 50,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.5,
+          "MinGain": 8,
+          "MaxGain": 17
+        }
+      }
     },
     "Tinkering": {
-      "Delay": 10,
-      "StrAdvancement": {
-        "Chance": 10,
-        "PointsAmount": 2,
-        "PointsSides": 4,
-        "PointsBonus": 10
-      },
-      "DexAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Str": {
+          "Chance": 0.1,
+          "MinGain": 12,
+          "MaxGain": 18
+        },
+        "Dex": {
+          "Chance": 0.6,
+          "MinGain": 14,
+          "MaxGain": 34
+        }
+      }
     },
     "Begging": {
-      "Delay": 20,
-      "IntAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Begging",
+      "Delay": "00:00:20",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.8,
+          "MinGain": 9,
+          "MaxGain": 21
+        }
+      }
     },
     "Cartography": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 5
-      },
-      "DefaultPoints": 200
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.6,
+          "MinGain": 8,
+          "MaxGain": 17
+        }
+      }
     },
     "Discordance": {
-      "Delay": 10,
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Discordance",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {}
     },
     "Herding": {
-      "Delay": 0,
-      "DefaultPoints": 100
+      "Delay": "00:00:00",
+      "DefaultPoints": 100,
+      "StatAdvancements": {}
     },
     "Musicianship": {
-      "Delay": 15,
-      "DexAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 3,
-        "PointsSides": 5,
-        "PointsBonus": 8
-      },
-      "IntAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 20
+      "Delay": "00:00:15",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.8,
+          "MinGain": 3,
+          "MaxGain": 12
+        },
+        "Dex": {
+          "Chance": 0.7,
+          "MinGain": 11,
+          "MaxGain": 23
+        }
+      }
     },
     "Peacemaking": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 15,
-        "PointsAmount": 1,
-        "PointsSides": 8,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Peacemaking",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.15,
+          "MinGain": 1,
+          "MaxGain": 8
+        }
+      }
     },
     "Provocation": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 50,
-        "PointsAmount": 4,
-        "PointsSides": 10,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 20
+      "OnUseHandler": "Server.SkillHandlers.Provocation",
+      "Delay": "00:00:10",
+      "DefaultPoints": 20,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.5,
+          "MinGain": 4,
+          "MaxGain": 40
+        }
+      }
     },
     "TasteID": {
-      "Delay": 10,
-      "IntAdvancement": {
-        "Chance": 85,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 15
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.TasteId",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.85,
+          "MinGain": 19,
+          "MaxGain": 31
+        }
+      }
     },
     "Hiding": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 70,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Hiding",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.7,
+          "MinGain": 14,
+          "MaxGain": 34
+        }
+      }
     },
     "Lockpicking": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 12
-      },
-      "DefaultPoints": 100
+      "Delay": "00:00:10",
+      "DefaultPoints": 100,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.8,
+          "MinGain": 15,
+          "MaxGain": 24
+        }
+      }
     },
     "Poisoning": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 5,
-        "PointsSides": 6,
-        "PointsBonus": 40
-      },
-      "IntAdvancement": {
-        "Chance": 60,
-        "PointsAmount": 5,
-        "PointsSides": 4,
-        "PointsBonus": 30
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Poisoning",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.6,
+          "MinGain": 35,
+          "MaxGain": 50
+        },
+        "Dex": {
+          "Chance": 0.8,
+          "MinGain": 45,
+          "MaxGain": 70
+        }
+      }
     },
     "RemoveTrap": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 90,
-        "PointsAmount": 5,
-        "PointsSides": 8,
-        "PointsBonus": 15
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.RemoveTrap",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.9,
+          "MinGain": 20,
+          "MaxGain": 55
+        }
+      }
     },
     "Snooping": {
-      "Delay": 5,
-      "DexAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 4,
-        "PointsSides": 6,
-        "PointsBonus": 10
-      },
-      "DefaultPoints": 200
+      "Delay": "00:00:05",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.8,
+          "MinGain": 14,
+          "MaxGain": 34
+        }
+      }
     },
     "Stealing": {
-      "Delay": 15,
-      "DexAdvancement": {
-        "Chance": 90,
-        "PointsAmount": 3,
-        "PointsSides": 4,
-        "PointsBonus": 9
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Stealing",
+      "Delay": "00:00:15",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 0.9,
+          "MinGain": 12,
+          "MaxGain": 21
+        }
+      }
     },
     "Stealth": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 100,
-        "PointsAmount": 6,
-        "PointsSides": 6,
-        "PointsBonus": 45
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Stealth",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Dex": {
+          "Chance": 1,
+          "MinGain": 51,
+          "MaxGain": 81
+        }
+      }
     },
     "DetectHidden": {
-      "Delay": 10,
-      "DexAdvancement": {
-        "Chance": 80,
-        "PointsAmount": 3,
-        "PointsSides": 5,
-        "PointsBonus": 10
-      },
-      "IntAdvancement": {
-        "Chance": 40,
-        "PointsAmount": 3,
-        "PointsSides": 6,
-        "PointsBonus": 0
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.DetectHidden",
+      "Delay": "00:00:10",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.4,
+          "MinGain": 3,
+          "MaxGain": 18
+        },
+        "Dex": {
+          "Chance": 0.8,
+          "MinGain": 13,
+          "MaxGain": 25
+        }
+      }
     },
     "Forensics": {
-      "Delay": 15,
-      "IntAdvancement": {
-        "Chance": 90,
-        "PointsAmount": 4,
-        "PointsSides": 4,
-        "PointsBonus": 12
-      },
-      "DefaultPoints": 200
+      "OnUseHandler": "Server.SkillHandlers.Forensics",
+      "Delay": "00:00:15",
+      "DefaultPoints": 200,
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.9,
+          "MinGain": 16,
+          "MaxGain": 28
+        }
+      }
     }
   }
 }
