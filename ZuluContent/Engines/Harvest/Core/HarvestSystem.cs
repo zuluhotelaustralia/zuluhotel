@@ -25,7 +25,7 @@ namespace Server.Engines.Harvest
         public virtual bool CheckTool(Mobile from, Item tool)
         {
             var wornOut = tool == null || tool.Deleted ||
-                           tool is IUsesRemaining && ((IUsesRemaining) tool).UsesRemaining <= 0;
+                          tool is IUsesRemaining && ((IUsesRemaining) tool).UsesRemaining <= 0;
             var checkEquip = !(tool is Shovel);
             var equipped = tool?.Parent == from;
 
@@ -440,7 +440,8 @@ namespace Server.Engines.Harvest
 
             var timer = new HarvestTimer(from, tool, this, def, toHarvest, toLock);
             timer.Start();
-            from.NextSkillTime = Core.TickCount + timer.Interval.Milliseconds * timer.Count + TimeSpan.FromSeconds(ZhConfig.Crafting.AutoLoop.Delay).Milliseconds;
+            from.NextSkillTime = Core.TickCount + timer.Interval.Milliseconds * timer.Count +
+                                 TimeSpan.FromSeconds(ZhConfig.Crafting.AutoLoop.Delay + 1.0).Milliseconds;
             OnHarvestStarted(from, tool, def, toHarvest);
         }
 

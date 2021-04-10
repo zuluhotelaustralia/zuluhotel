@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Server;
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
 namespace ZuluContent.Configuration
@@ -57,6 +58,9 @@ namespace ZuluContent.Configuration
             public TextDefinition Name { get; init; }
             public TextDefinition GroupName { get; init; }
             public double Skill { get; init; }
+            public SkillName? SecondarySkill { get; init; }
+            public double? Skill2 { get; init; }
+
             public CraftResource[] Resources { get; init; }
             public bool UseAllRes { get; init; }
             public bool NeedHeat { get; init; }

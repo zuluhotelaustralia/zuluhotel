@@ -268,6 +268,9 @@ namespace Server.Engines.Craft
                     firstResource.Amount,
                     firstResource.Message
                 );
+
+                if (entry.SecondarySkill != null && entry.Skill2 != null)
+                    AddSkill(idx, (SkillName) entry.SecondarySkill, (double) entry.Skill2, (double) entry.Skill2);
                 
                 foreach (var c in entry.Resources.Skip(1))
                 {

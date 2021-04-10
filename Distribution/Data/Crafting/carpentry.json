@@ -237,6 +237,8 @@
       "Name": "stone bench (east)",
       "GroupName": 1015076,
       "Skill": 50,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -257,6 +259,8 @@
       "Name": "stone bench (south)",
       "GroupName": 1015076,
       "Skill": 50,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -277,6 +281,8 @@
       "Name": 1024635,
       "GroupName": 1015076,
       "Skill": 40,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -673,6 +679,8 @@
       "Name": 1044511,
       "GroupName": 1015086,
       "Skill": 60,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 95,
       "Resources": [
         {
           "ItemType": "Log",
@@ -693,6 +701,8 @@
       "Name": 1044512,
       "GroupName": 1015086,
       "Skill": 60,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 95,
       "Resources": [
         {
           "ItemType": "Log",
@@ -797,6 +807,8 @@
       "Name": 1044330,
       "GroupName": 1044296,
       "Skill": 84,
+      "SecondarySkill": "Blacksmith",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -817,6 +829,8 @@
       "Name": 1044331,
       "GroupName": 1044296,
       "Skill": 84,
+      "SecondarySkill": "Blacksmith",
+      "Skill2": 90,
       "Resources": [
         {
           "ItemType": "Log",
@@ -837,6 +851,8 @@
       "Name": 1044332,
       "GroupName": 1044296,
       "Skill": 84,
+      "SecondarySkill": "Blacksmith",
+      "Skill2": 90,
       "Resources": [
         {
           "ItemType": "Log",
@@ -857,6 +873,8 @@
       "Name": 1044333,
       "GroupName": 1044296,
       "Skill": 84,
+      "SecondarySkill": "Blacksmith",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -877,6 +895,8 @@
       "Name": 1044334,
       "GroupName": 1044296,
       "Skill": 84,
+      "SecondarySkill": "Blacksmith",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -897,6 +917,8 @@
       "Name": 1023519,
       "GroupName": 1044297,
       "Skill": 78,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 50,
       "Resources": [
         {
           "ItemType": "Log",
@@ -917,6 +939,8 @@
       "Name": 1044335,
       "GroupName": 1044297,
       "Skill": 78,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -937,6 +961,8 @@
       "Name": 1044336,
       "GroupName": 1044297,
       "Skill": 78,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -957,6 +983,8 @@
       "Name": 1044337,
       "GroupName": 1044297,
       "Skill": 84,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -977,6 +1005,8 @@
       "Name": 1044338,
       "GroupName": 1044297,
       "Skill": 84,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -997,6 +1027,8 @@
       "Name": 1044339,
       "GroupName": 1044298,
       "Skill": 73,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1017,6 +1049,8 @@
       "Name": 1044341,
       "GroupName": 1044298,
       "Skill": 84,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1037,6 +1071,8 @@
       "Name": 1044342,
       "GroupName": 1044298,
       "Skill": 84,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1057,6 +1093,8 @@
       "Name": 1044343,
       "GroupName": 1044298,
       "Skill": 94,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1077,6 +1115,8 @@
       "Name": 1044344,
       "GroupName": 1044298,
       "Skill": 94,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 75,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1097,6 +1137,8 @@
       "Name": 1023740,
       "GroupName": 1044293,
       "Skill": 68,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 55,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1117,6 +1159,8 @@
       "Name": 1023742,
       "GroupName": 1044293,
       "Skill": 68,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 55,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1137,6 +1181,8 @@
       "Name": 1023761,
       "GroupName": 1044293,
       "Skill": 89,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 55,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1157,6 +1203,8 @@
       "Name": 1023762,
       "GroupName": 1044293,
       "Skill": 73,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 55,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1177,6 +1225,8 @@
       "Name": 1023763,
       "GroupName": 1044293,
       "Skill": 78,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 55,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1197,6 +1247,8 @@
       "Name": 1044345,
       "GroupName": 1044299,
       "Skill": 78,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1217,6 +1269,8 @@
       "Name": 1044346,
       "GroupName": 1044299,
       "Skill": 78,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1237,6 +1291,8 @@
       "Name": 1044347,
       "GroupName": 1044299,
       "Skill": 105,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1257,6 +1313,8 @@
       "Name": 1044348,
       "GroupName": 1044299,
       "Skill": 105,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1347,6 +1405,8 @@
       "Name": 1061848,
       "GroupName": 1044294,
       "Skill": 75,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1367,6 +1427,8 @@
       "Name": 1061849,
       "GroupName": 1044294,
       "Skill": 75,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1387,6 +1449,8 @@
       "Name": 1025460,
       "GroupName": 1044294,
       "Skill": 80,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 50,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1407,6 +1471,8 @@
       "Name": 1044321,
       "GroupName": 1044294,
       "Skill": 105,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1427,6 +1493,8 @@
       "Name": 1044322,
       "GroupName": 1044294,
       "Skill": 105,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1447,6 +1515,8 @@
       "Name": 1044323,
       "GroupName": 1044294,
       "Skill": 105,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1467,6 +1537,8 @@
       "Name": 1044324,
       "GroupName": 1044294,
       "Skill": 105,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1487,6 +1559,8 @@
       "Name": "painting (east)",
       "GroupName": 1044294,
       "Skill": 50,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 30,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1507,6 +1581,8 @@
       "Name": "painting (south)",
       "GroupName": 1044294,
       "Skill": 50,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 30,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1527,6 +1603,8 @@
       "Name": "painting 2 (east)",
       "GroupName": 1044294,
       "Skill": 50,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 30,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1547,6 +1625,8 @@
       "Name": "painting 2 (south)",
       "GroupName": 1044294,
       "Skill": 50,
+      "SecondarySkill": "Tailoring",
+      "Skill2": 30,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1595,6 +1675,8 @@
       "Name": 1044328,
       "GroupName": 1044294,
       "Skill": 110,
+      "SecondarySkill": "Magery",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1615,6 +1697,8 @@
       "Name": 1024628,
       "GroupName": 1044294,
       "Skill": 110,
+      "SecondarySkill": "Magery",
+      "Skill2": 60,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1635,6 +1719,8 @@
       "Name": "statue (east)",
       "GroupName": 1044294,
       "Skill": 95,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 95,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1655,6 +1741,8 @@
       "Name": "statue (south)",
       "GroupName": 1044294,
       "Skill": 95,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 95,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1675,6 +1763,8 @@
       "Name": "statue 2 (east)",
       "GroupName": 1044294,
       "Skill": 95,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 95,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1695,6 +1785,8 @@
       "Name": "statue 2 (south)",
       "GroupName": 1044294,
       "Skill": 95,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 95,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1715,6 +1807,8 @@
       "Name": "statue 3 (east)",
       "GroupName": 1044294,
       "Skill": 95,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
@@ -1735,6 +1829,8 @@
       "Name": "statue 3 (south)",
       "GroupName": 1044294,
       "Skill": 95,
+      "SecondarySkill": "Tinkering",
+      "Skill2": 85,
       "Resources": [
         {
           "ItemType": "Log",
