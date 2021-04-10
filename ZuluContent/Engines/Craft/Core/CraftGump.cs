@@ -441,7 +441,7 @@ namespace Server.Engines.Craft
 
                     From.SendAsciiMessage(89, $"Looping [{i} more to go].");
 
-                    var loopDelay = ((int) (CraftSystem.Delay * CraftSystem.MaxCraftEffect) + 6) * 1000;
+                    var loopDelay = ((int) (CraftSystem.Delay * CraftSystem.MaxCraftEffect) + (int) ZhConfig.Crafting.AutoLoop.Delay) * 1000;
                     
                     From.NextSkillTime = Core.TickCount + loopDelay;
 

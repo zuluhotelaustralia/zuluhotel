@@ -13,6 +13,17 @@ namespace Server.Engines.Craft
         private DefTinkering(CraftSettings settings) : base(settings)
         {
         }
+        
+        public override int GetCraftSkillRequired(int itemSkillRequired, Type craftResourceType)
+        {
+            var resource = CraftResources.GetFromType(craftResourceType);
+            return itemSkillRequired + (int) (CraftResources.GetCraftSkillRequired(resource) / 4);
+        }
+
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return (itemSkillRequired + materialAmount) * 10;
+        }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
         {

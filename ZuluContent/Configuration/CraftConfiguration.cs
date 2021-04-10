@@ -5,6 +5,7 @@ namespace ZuluContent.Configuration
 {
     public class CraftConfiguration : BaseSingleton<CraftConfiguration>
     {
+        public readonly AutoLoopSettings AutoLoop;
         public readonly CraftSettings Alchemy;
         public readonly CraftSettings AlchemyPlus;
         public readonly CraftSettings Blacksmithy;
@@ -19,6 +20,7 @@ namespace ZuluContent.Configuration
         protected CraftConfiguration()
         {
             const string baseDir = "Data/Crafting";
+            AutoLoop = ZhConfig.DeserializeJsonConfig<AutoLoopSettings>($"{baseDir}/autoloop.json");
             Alchemy = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/alchemy.json");
             AlchemyPlus = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/alchemyplus.json");
             Blacksmithy = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/blacksmithy.json");
@@ -30,6 +32,11 @@ namespace ZuluContent.Configuration
             Tailoring = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/tailoring.json");
             Tinkering = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/tinkering.json");
         }
+    }
+    
+    public record AutoLoopSettings
+    {
+        public double Delay { get; init; }
     }
     
     public record CraftSettings

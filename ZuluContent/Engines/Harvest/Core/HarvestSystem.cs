@@ -250,7 +250,7 @@ namespace Server.Engines.Harvest
             HarvestBank bank, object harvested)
         {
             // Loop continuously until the player moves or their tool breaks
-            await Timer.Pause(6000);
+            await Timer.Pause(TimeSpan.FromSeconds(ZhConfig.Crafting.AutoLoop.Delay));
 
             StartHarvesting(from, tool, harvested);
         }
@@ -438,8 +438,9 @@ namespace Server.Engines.Harvest
                 return;
             }
 
-            new HarvestTimer(from, tool, this, def, toHarvest, toLock).Start();
-            from.NextSkillTime = Core.TickCount + ((int) def.EffectDelay.TotalMilliseconds * def.EffectCounts[0]) + 7000;
+            var timer = new HarvestTimer(from, tool, this, def, toHarvest, toLock);
+            timer.Start();
+            from.NextSkillTime = Core.TickCount + timer.Interval.Milliseconds * timer.Count + TimeSpan.FromSeconds(ZhConfig.Crafting.AutoLoop.Delay).Milliseconds;
             OnHarvestStarted(from, tool, def, toHarvest);
         }
 

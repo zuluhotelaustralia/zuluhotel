@@ -8,7 +8,7 @@ namespace Server.Engines.Craft
 	{
         public static CraftSystem CraftSystem => new DefInscription(ZhConfig.Crafting.Inscription);
 
-        private DefInscription(CraftSettings settings) : base(settings) // 1 1 1.25
+        private DefInscription(CraftSettings settings) : base(settings)
 		{
 		}
 

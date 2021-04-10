@@ -9,7 +9,7 @@ namespace Server.Engines.Craft
     {
         public static CraftSystem CraftSystem => new DefCarpentry(ZhConfig.Crafting.Carpentry);
 
-        private DefCarpentry(CraftSettings settings) : base(settings) // 3 3 2
+        private DefCarpentry(CraftSettings settings) : base(settings)
         {
         }
 
