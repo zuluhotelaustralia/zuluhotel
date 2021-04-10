@@ -1,174 +1,180 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Misc;
 using Server.Targeting;
 using Server.Items;
 using Server.Network;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class Begging
-	{
-		public static void Initialize()
-		{
-			SkillInfo.Table[(int)SkillName.Begging].Callback = OnUse;
-		}
+    public class Begging : BaseSkillHandler
+    {
+        private const int BegRange = 2;
+        private const int BegDelayMs = 2000;
+        private static readonly int BegCooldown = (int)TimeSpan.FromMinutes(30).TotalMilliseconds;
+        private static readonly Dictionary<uint, long> MobileBegCooldown = new();
 
-		public static TimeSpan OnUse( Mobile m )
-		{
-			m.RevealingAction();
+        private static readonly string[] BeggingLines =
+        {
+            "Give me something please...",
+            "I need something to eat!",
+            "I've got four children, please help me!",
+            "Could thee spare a dime?",
+            "Some thieves stole me everything, I'm broken now..."
+        };
 
-			m.Target = new InternalTarget();
-			m.RevealingAction();
+        private static readonly string[] ExitLines =
+        {
+            "I have to go!",
+            "I must leave!!",
+            "no....ehm...bye!",
+            "Bye!!",
+            "I must flee!!",
+            "I gotta go!",
+        };
 
-			m.SendLocalizedMessage( 500397 ); // To whom do you wish to grovel?
 
-			return TimeSpan.FromHours( 6.0 );
-		}
+        private static readonly TargetOptions TargetOptions = new()
+        {
+            Range = 1,
+        };
 
-		private class InternalTarget : Target
-		{
-			private bool m_SetSkillTime = true;
+        public override SkillName Skill { get; } = SkillName.Begging;
 
-			public InternalTarget() :  base ( 12, false, TargetFlags.None )
-			{
-			}
+        public override async Task<TimeSpan> OnUse(Mobile from)
+        {
+            var target = new AsyncTarget<Mobile>(from, TargetOptions);
+            from.Target = target;
+            from.RevealingAction();
 
-			protected override void OnTargetFinish( Mobile from )
-			{
-				if ( m_SetSkillTime )
-					from.NextSkillTime = Core.TickCount;
-			}
+            from.SendLocalizedMessage(500397); // To whom do you wish to grovel?
 
-			protected override void OnTarget( Mobile from, object targeted )
-			{
-				from.RevealingAction();
+            var (targeted, responseType) = await target;
 
-				int number = -1;
+            if (responseType != TargetResponseType.Success || targeted == null || !targeted.Body.IsHuman)
+            {
+                from.SendFailureMessage(500399); // There is little chance of getting money from that!
+                return Delay;
+            }
 
-				if ( targeted is Mobile )
-				{
-					Mobile targ = (Mobile)targeted;
+            if (targeted.Player) // We can't beg from players
+            {
+                from.SendFailureMessage(500398); // Perhaps just asking would work better.
+                return Delay;
+            }
+            
+            if (!CheckRange(from, targeted))
+                return Delay;
 
-					if ( targ.Player ) // We can't beg from players
-					{
-						number = 500398; // Perhaps just asking would work better.
-					}
-					else if ( !targ.Body.IsHuman ) // Make sure the NPC is human
-					{
-						number = 500399; // There is little chance of getting money from that!
-					}
-					else if ( !from.InRange( targ, 2 ) )
-					{
-						if ( !targ.Female )
-							number = 500401; // You are too far away to beg from him.
-						else
-							number = 500402; // You are too far away to beg from her.
-					}
-					else if ( from.Mounted ) // If we're on a mount, who would give us money?
-					{
-						number = 500404; // They seem unwilling to give you any money.
-					}
-					else
-					{
-						// Face eachother
-						from.Direction = from.GetDirectionTo( targ );
-						targ.Direction = targ.GetDirectionTo( from );
+            if (from.Mounted) // If we're on a mount, who would give us money?
+            {
+                from.SendFailureMessage(500404); // They seem unwilling to give you any money.
+                return Delay;
+            }
 
-						from.Animate( 32, 5, 1, true, false, 0 ); // Bow
+            if (!await DoSpeech(from, targeted))
+            {
+                // Exit message
+                from.PublicOverheadMessage(MessageType.Regular, from.SpeechHue, true, ExitLines.RandomElement());
+                return Delay;
+            }
+            
+            if (MobileBegCooldown.TryGetValue(targeted.Serial, out var nextBegTime) && nextBegTime > Core.TickCount)
+            {
+                targeted.PublicOverheadMessage(MessageType.Regular, targeted.SpeechHue, true, "Hey!! I seem a bank?");
+                return Delay;
+            }
 
-						new InternalTimer( from, targ ).Start();
+            var theirPack = targeted.Backpack;
+            var badKarmaChance = 0.5 - (double) from.Karma / 8570;
 
-						m_SetSkillTime = false;
-					}
-				}
-				else // Not a Mobile
-				{
-					number = 500399; // There is little chance of getting money from that!
-				}
+            if (theirPack == null)
+            {
+                from.SendFailureMessage(500404); // They seem unwilling to give you any money.
+                return Delay;
+            }
 
-				if ( number != -1 )
-					from.SendLocalizedMessage( number );
-			}
+            if (from.Karma < 0 && badKarmaChance > Utility.RandomDouble())
+            {
+                // Thou dost not look trustworthy... no gold for thee today!
+                targeted.PublicOverheadMessage(MessageType.Regular, targeted.SpeechHue, 500406);
+                return Delay;
+            }
 
-			private class InternalTimer : Timer
-			{
-				private Mobile m_From, m_Target;
+            if (!from.ShilCheckSkill(SkillName.Begging))
+            {
+                targeted.SendFailureMessage(500404); // They seem unwilling to give you any money.
+                return Delay;
+            }
 
-				public InternalTimer( Mobile from, Mobile target ) : base( TimeSpan.FromSeconds( 2.0 ) )
-				{
-					m_From = from;
-					m_Target = target;
-					Priority = TimerPriority.TwoFiftyMS;
-				}
+            var toConsume = Utility.Random((int) from.Skills.Begging.Value) + Utility.Random(10) + 3;
+            var consumed = theirPack.ConsumeUpTo(typeof(Gold), toConsume);
 
-				protected override void OnTick()
-				{
-					Container theirPack = m_Target.Backpack;
+            if (consumed <= 0)
+            {
+                // I have not enough money to give thee any!
+                targeted.PublicOverheadMessage(MessageType.Regular, targeted.SpeechHue, 500407);
+                return Delay;
+            }
 
-					double badKarmaChance = 0.5 - (double)m_From.Karma / 8570;
+            // I feel sorry for thee...
+            targeted.PublicOverheadMessage(MessageType.Regular, targeted.SpeechHue, 500405);
 
-					if ( theirPack == null )
-					{
-						m_From.SendLocalizedMessage( 500404 ); // They seem unwilling to give you any money.
-					}
-					else if ( m_From.Karma < 0 && badKarmaChance > Utility.RandomDouble() )
-					{
-						m_Target.PublicOverheadMessage( MessageType.Regular, m_Target.SpeechHue, 500406 ); // Thou dost not look trustworthy... no gold for thee today!
-					}
-					else if ( m_From.CheckTargetSkill( SkillName.Begging, m_Target, 0.0, 100.0 ) )
-					{
-						int toConsume = theirPack.GetAmount( typeof( Gold ) ) / 10;
-						int max = 10 + m_From.Fame / 2500;
+            var gold = new Gold(consumed);
 
-						if ( max > 14 )
-							max = 14;
-						else if ( max < 10 )
-							max = 10;
+            from.AddToBackpack(gold);
+            from.PlaySound(gold.GetDropSound());
 
-						if ( toConsume > max )
-							toConsume = max;
+            if (from.Karma > Titles.KarmaCriminalLimit) 
+                Titles.AwardKarma(from, -25, true);
 
-						if ( toConsume > 0 )
-						{
-							int consumed = theirPack.ConsumeUpTo( typeof( Gold ), toConsume );
+            MobileBegCooldown[targeted.Serial] = Core.TickCount + BegCooldown;
 
-							if ( consumed > 0 )
-							{
-								m_Target.PublicOverheadMessage( MessageType.Regular, m_Target.SpeechHue, 500405 ); // I feel sorry for thee...
+            return Delay;
+        }
 
-								Gold gold = new Gold( consumed );
+        public static bool CheckRange(Mobile from, Mobile targeted)
+        {
+            if (!from.InRange(targeted, BegRange))
+            {
+                from.SendFailureMessage(targeted.Female
+                        ? 500402 // You are too far away to beg from her.
+                        : 500401 // You are too far away to beg from him.
+                );
+                return false;
+            }
 
-								m_From.AddToBackpack( gold );
-								m_From.PlaySound( gold.GetDropSound() );
+            return true;
+        }
 
-								if ( m_From.Karma > -3000 )
-								{
-									int toLose = m_From.Karma + 3000;
+        private static async Task<bool> DoSpeech(Mobile from, Mobile targeted)
+        {
+            // Face each other
+            from.Direction = from.GetDirectionTo(targeted);
+            targeted.Direction = targeted.GetDirectionTo(from);
 
-									if ( toLose > 40 )
-										toLose = 40;
+            var speechLines = new[]
+            {
+                $"Sorry... {(targeted.Female ? "lady" : "sir")}!",
+                BeggingLines.RandomElement(),
+                "Pleeeease!"
+            };
 
-									Titles.AwardKarma( m_From, -toLose, true );
-								}
-							}
-							else
-							{
-								m_Target.PublicOverheadMessage( MessageType.Regular, m_Target.SpeechHue, 500407 ); // I have not enough money to give thee any!
-							}
-						}
-						else
-						{
-							m_Target.PublicOverheadMessage( MessageType.Regular, m_Target.SpeechHue, 500407 ); // I have not enough money to give thee any!
-						}
-					}
-					else
-					{
-						m_Target.SendLocalizedMessage( 500404 ); // They seem unwilling to give you any money.
-					}
+            foreach (var line in speechLines)
+            {
+                from.Animate(32, 5, 1, true, false, 0); // Bow
+                from.PublicOverheadMessage(MessageType.Regular, from.SpeechHue, true, line);
+                await Timer.Pause(BegDelayMs);
 
-					m_From.NextSkillTime = Core.TickCount + 10000;
-				}
-			}
-		}
-	}
+                if (!CheckRange(from, targeted))
+                    return false;
+            }
+
+            return true;
+        }
+    }
 }

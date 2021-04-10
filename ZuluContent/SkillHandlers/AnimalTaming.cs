@@ -19,7 +19,7 @@ namespace Server.SkillHandlers
         private const int PointMultiplier = 15;
         private static readonly TimeSpan DelayBetweenSpeech = TimeSpan.FromSeconds(3.0);
         private static readonly TimeSpan UnresponsiveTime = TimeSpan.FromSeconds(300.0);
-        private static readonly Dictionary<Serial, Serial> BeingTamed = new();
+        private static readonly Dictionary<uint, uint> BeingTamed = new();
 
         private static readonly string[] SpeechLines = {
             "What a nice {0}",
@@ -44,7 +44,7 @@ namespace Server.SkillHandlers
 
             var (creature, responseType) = await target;
 
-            if (responseType != TargetResponseType.Success)
+            if (responseType != TargetResponseType.Success || creature == null)
                 return Delay;
             
             if (!creature.Tamable)
