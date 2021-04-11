@@ -22,7 +22,7 @@ namespace Server.Engines.Craft
 
         public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
         {
-            return (itemSkillRequired + materialAmount) * 10;
+            return (itemSkillRequired + materialAmount / 3) * 10;
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
