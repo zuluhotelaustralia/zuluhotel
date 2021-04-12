@@ -48,8 +48,8 @@ namespace ZuluContent.Misc
                 PublicMoongate.MoonGen(PMList.Felucca);
                 new GenTeleporter.TeleportersCreator().CreateTeleporters();
 
-                World.Save();
                 Console.WriteLine("New world generation complete.");
+                Timer.DelayCall(TimeSpan.FromMilliseconds(100), World.Save);
             }
             
         }
