@@ -5,51 +5,23 @@ namespace Server.Items
     [FlipableAttribute(0xE86, 0xE85)]
     public class Pickaxe : BaseAxe, IUsesRemaining
     {
-        public override HarvestSystem HarvestSystem
-        {
-            get { return Mining.System; }
-        }
+        public override HarvestSystem HarvestSystem => Mining.System;
 
-        public override int DefaultStrengthReq
-        {
-            get { return 25; }
-        }
-
-        public override int DefaultMinDamage
-        {
-            get { return 1; }
-        }
-
-        public override int DefaultMaxDamage
-        {
-            get { return 15; }
-        }
-
-        public override int DefaultSpeed
-        {
-            get { return 35; }
-        }
-
-        public override int InitMinHits
-        {
-            get { return 31; }
-        }
-
-        public override int InitMaxHits
-        {
-            get { return 60; }
-        }
-
-        public override WeaponAnimation DefaultAnimation
-        {
-            get { return WeaponAnimation.Slash1H; }
-        }
-
+        public override int DefaultStrengthReq => 15;
+        public override int DefaultMinDamage => 1;
+        public override int DefaultMaxDamage => 15;
+        public override int DefaultSpeed => 35;
+        public override SkillName DefaultSkill => SkillName.Macing;
+        public override WeaponType DefaultWeaponType => WeaponType.Bashing;
+        public override int InitMinHits => 70;
+        public override int InitMaxHits => 70;
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Bash2H;
 
         [Constructible]
         public Pickaxe() : base(0xE86)
         {
             Weight = 11.0;
+            Layer = Layer.TwoHanded;
             UsesRemaining = 50;
             ShowUsesRemaining = true;
         }

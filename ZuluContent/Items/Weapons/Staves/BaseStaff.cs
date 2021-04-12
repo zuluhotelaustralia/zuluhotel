@@ -2,30 +2,14 @@ namespace Server.Items
 {
     public abstract class BaseStaff : BaseMeleeWeapon
     {
-        public override int DefaultHitSound
-        {
-            get { return 0x233; }
-        }
+        public override int DefaultHitSound => 0x13B;
+        public override int DefaultMissSound => 0x233;
 
-        public override int DefaultMissSound
-        {
-            get { return 0x239; }
-        }
+        public override SkillName DefaultSkill => SkillName.Macing;
 
-        public override SkillName DefaultSkill
-        {
-            get { return SkillName.Macing; }
-        }
+        public override WeaponType DefaultWeaponType => WeaponType.Staff;
 
-        public override WeaponType DefaultWeaponType
-        {
-            get { return WeaponType.Staff; }
-        }
-
-        public override WeaponAnimation DefaultAnimation
-        {
-            get { return WeaponAnimation.Bash2H; }
-        }
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash2H;
 
         public BaseStaff(int itemID) : base(itemID)
         {

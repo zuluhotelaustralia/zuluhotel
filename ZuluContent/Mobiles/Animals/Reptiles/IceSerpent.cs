@@ -51,7 +51,7 @@ public IceSerpent() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 
 			}
 
 			if ( 0.025 > Utility.RandomDouble() )
-				PackItem( new GlacialStaff() );
+				PackItem( new GnarledStaff() );
 		}
 
 		public override int Meat{ get{ return 4; } }

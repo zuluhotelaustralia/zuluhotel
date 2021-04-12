@@ -31,8 +31,7 @@ namespace Server.Items
 		[Constructible]
 public WallSconce() : base( 0x9FB )
 		{
-			Movable = false;
-			Duration = TimeSpan.Zero; // Never burnt out
+            Duration = TimeSpan.Zero; // Never burnt out
 			Burning = false;
 			Light = LightType.WestBig;
 			Weight = 3.0;

@@ -1,18 +1,3 @@
-/*************************************************************************
- * ModernUO                                                              *
- * Copyright (C) 2019-2021 - ModernUO Development Team                   *
- * Email: hi@modernuo.com                                                *
- * File: BoatPackets.cs                                                  *
- *                                                                       *
- * This program is free software: you can redistribute it and/or modify  *
- * it under the terms of the GNU General Public License as published by  *
- * the Free Software Foundation, either version 3 of the License, or     *
- * (at your option) any later version.                                   *
- *                                                                       *
- * You should have received a copy of the GNU General Public License     *
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
- *************************************************************************/
-
 using System;
 using System.Buffers;
 using System.IO;
@@ -48,6 +33,8 @@ namespace Server.Multis.Boats
 
             foreach (var ent in ents)
             {
+                // If we assume that the entities list contains everything a player can see,
+                // then this can be removed and the packet can be written once and copied to improve performance
                 if (!beholder.CanSee(ent))
                 {
                     continue;
@@ -74,9 +61,6 @@ namespace Server.Multis.Boats
                 return;
             }
 
-            bool isSA = ns.StygianAbyss;
-            bool isHS = ns.HighSeas;
-
             var minLength = PacketContainerBuilder.MinPacketLength
                             + OutgoingEntityPackets.MaxWorldEntityPacketLength
                             * 5; // Minimum of boat, hold, planks, and the player
@@ -93,7 +77,7 @@ namespace Server.Multis.Boats
                 }
 
                 buffer.InitializePacket();
-                var bytesWritten = OutgoingEntityPackets.CreateWorldEntity(buffer, entity, isSA, isHS);
+                var bytesWritten = OutgoingEntityPackets.CreateWorldEntity(buffer, entity, true);
                 builder.Advance(bytesWritten);
             }
 

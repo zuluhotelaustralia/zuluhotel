@@ -1,21 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Server.Items;
+using ZuluContent.Configuration;
 
 namespace Server.Engines.Craft
 {
-    public enum CraftECA
-    {
-        ChanceMinusSixty,
-        FiftyPercentChanceMinusTenPercent,
-        ChanceMinusSixtyToFourtyFive
-    }
-
     public abstract class CraftSystem
     {
-        private List<int> m_Recipes;
-        private List<int> m_RareRecipes;
-
+        public readonly CraftSettings Settings;
         public int MinCraftEffect { get; }
         public int MaxCraftEffect { get; }
         public double Delay { get; }
@@ -25,15 +18,17 @@ namespace Server.Engines.Craft
         public CraftSubResCol CraftSubRes { get; }
         public CraftSubResCol CraftSubRes2 { get; }
 
-        public abstract SkillName MainSkill { get; }
+        public SkillName MainSkill => Settings.MainSkill;
 
-        public virtual int GumpTitleNumber => 0;
+        public int GumpTitleNumber => Settings.GumpTitleId;
+        
+        public int CraftWorkSound => Settings.CraftWorkSound;
+        
+        public int CraftEndSound => Settings.CraftEndSound;
 
         public virtual string GumpTitleString => "";
 
         private readonly Dictionary<Mobile, CraftContext> m_ContextTable = new();
-
-        public abstract double GetChanceAtMin(CraftItem item);
 
         public virtual bool RetainsColorFrom(CraftItem item, Type type)
         {
@@ -70,19 +65,18 @@ namespace Server.Engines.Craft
 
         public bool CanEnhance { get; set; }
 
-        public CraftSystem(int minCraftEffect, int maxCraftEffect, double delay)
+        public CraftSystem(CraftSettings settings)
         {
-            MinCraftEffect = minCraftEffect;
-            MaxCraftEffect = maxCraftEffect;
-            Delay = delay;
+            Settings = settings;
+            
+            MinCraftEffect = settings.MinCraftDelays;
+            MaxCraftEffect = settings.MaxCraftDelays;
+            Delay = settings.Delay;
 
             CraftItems = new CraftItemCol();
             CraftGroups = new CraftGroupCol();
             CraftSubRes = new CraftSubResCol();
             CraftSubRes2 = new CraftSubResCol();
-
-            m_Recipes = new List<int>();
-            m_RareRecipes = new List<int>();
 
             InitCraftList();
         }
@@ -164,6 +158,12 @@ namespace Server.Engines.Craft
             CraftItem craftItem = CraftItems.GetAt(index);
             craftItem.UseAllRes = useAll;
         }
+        
+        public void SetUseSubRes2(int index, bool useSubRes)
+        {
+            CraftItem craftItem = CraftItems.GetAt(index);
+            craftItem.UseSubRes2 = useSubRes;
+        }
 
         public void SetNeedHeat(int index, bool needHeat)
         {
@@ -219,10 +219,82 @@ namespace Server.Engines.Craft
             CraftSubRes craftSubRes = new CraftSubRes(type, name, reqSkill, genericName, message);
             CraftSubRes.Add(craftSubRes);
         }
+        
+        public void SetSubRes2(Type type, int name)
+        {
+            CraftSubRes2.ResType = type;
+            CraftSubRes2.NameNumber = name;
+            CraftSubRes2.Init = true;
+        }
 
-        public abstract void InitCraftList();
+        public void AddSubRes2(Type type, int name, double reqSkill, object message)
+        {
+            var craftSubRes = new CraftSubRes(type, name, reqSkill, message);
+            CraftSubRes2.Add(craftSubRes);
+        }
 
-        public abstract void PlayCraftEffect(Mobile from);
+        public void AddSubRes2(Type type, int name, double reqSkill, int genericName, object message)
+        {
+            var craftSubRes = new CraftSubRes(type, name, reqSkill, genericName, message);
+            CraftSubRes2.Add(craftSubRes);
+        }
+
+        public void AddSubRes2(Type type, string name, double reqSkill, object message)
+        {
+            var craftSubRes = new CraftSubRes(type, name, reqSkill, message);
+            CraftSubRes2.Add(craftSubRes);
+        }
+
+        public virtual void InitCraftList()
+        {
+            if (Settings == null)
+                return;
+            
+            foreach (var entry in Settings.CraftEntries)
+            {
+                var firstResource = entry.Resources.FirstOrDefault();
+
+                if (firstResource == null)
+                    throw new ArgumentNullException($"Tinkering entry {entry.ItemType} must have at least one resource");
+
+                var idx = AddCraft(
+                    entry.ItemType,
+                    entry.GroupName,
+                    entry.Name,
+                    entry.Skill,
+                    entry.Skill,
+                    firstResource.ItemType,
+                    firstResource.Name,
+                    firstResource.Amount,
+                    firstResource.Message
+                );
+
+                if (entry.SecondarySkill != null && entry.Skill2 != null)
+                    AddSkill(idx, (SkillName) entry.SecondarySkill, (double) entry.Skill2, (double) entry.Skill2);
+                
+                foreach (var c in entry.Resources.Skip(1))
+                {
+                    AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
+                }
+                
+                if (entry.UseAllRes)
+                    SetUseAllRes(idx, true);
+                
+                if (entry.NeedHeat)
+                    SetNeedHeat(idx, true);
+                
+                if (entry.NeedOven)
+                    SetNeedOven(idx, true);
+                
+                if (entry.NeedMill)
+                    SetNeedMill(idx, true);
+            }
+        }
+
+        public virtual void PlayCraftEffect(Mobile from)
+        {
+            from.PlaySound(CraftWorkSound);
+        }
 
         public abstract int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality,
             bool makersMark, CraftItem item);

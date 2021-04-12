@@ -9,6 +9,8 @@ namespace Server.Configurations
     public partial class ResourceConfiguration : BaseSingleton<ResourceConfiguration>
     {
         public readonly OreSettings Ores;
+        public readonly OreSettings Sand;
+        public readonly OreSettings Clay;
         public readonly LogSettings Logs;
         public readonly HideSettings Hides;
 
@@ -16,6 +18,8 @@ namespace Server.Configurations
         {
             const string baseDir = "Data/Crafting";
             Ores = ZhConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/ores.json");
+            Sand = ZhConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/sand.json");
+            Clay = ZhConfig.DeserializeJsonConfig<OreSettings>($"{baseDir}/clay.json");
             Logs = ZhConfig.DeserializeJsonConfig<LogSettings>($"{baseDir}/logs.json");
             Hides = ZhConfig.DeserializeJsonConfig<HideSettings>($"{baseDir}/hides.json");
         }
@@ -33,6 +37,7 @@ namespace Server.Configurations
         public int MaxRange { get; init; }
         public int MaxChance { get; init; }
         public Effect OreEffect { get; init; }
+        public Message Messages { get; init; }
         public OreEntry[] Entries { get; init; }
 
         public record Effect
@@ -42,6 +47,17 @@ namespace Server.Configurations
             public int[] Counts { get; init; }
             public double Delay { get; init; }
             public double SoundDelay { get; init; }
+        }
+        
+        public record Message
+        {
+            public TextDefinition NoResourcesMessage { get; init; }
+            public TextDefinition DoubleHarvestMessage { get; init; }
+            public TextDefinition TimedOutOfRangeMessage { get; init; }
+            public TextDefinition OutOfRangeMessage { get; init; }
+            public TextDefinition FailMessage { get; init; }
+            public TextDefinition PackFullMessage { get; init; }
+            public TextDefinition ToolBrokeMessage { get; init; }
         }
 
         public record OreEntry
@@ -77,6 +93,7 @@ namespace Server.Configurations
         public int MaxRange { get; init; }
         public int MaxChance { get; init; }
         public Effect LogEffect { get; init; }
+        public Message Messages { get; init; }
         public LogEntry[] Entries { get; init; }
 
         public record Effect
@@ -86,6 +103,15 @@ namespace Server.Configurations
             public int[] Counts { get; init; }
             public double Delay { get; init; }
             public double SoundDelay { get; init; }
+        }
+        
+        public record Message
+        {
+            public TextDefinition NoResourcesMessage { get; init; }
+            public TextDefinition OutOfRangeMessage { get; init; }
+            public TextDefinition FailMessage { get; init; }
+            public TextDefinition PackFullMessage { get; init; }
+            public TextDefinition ToolBrokeMessage { get; init; }
         }
 
         public record LogEntry

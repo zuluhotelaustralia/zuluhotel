@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class BlankScroll : Item
+    public class BlankScroll : BaseTinkerItem
 	{
 
 		[Constructible]

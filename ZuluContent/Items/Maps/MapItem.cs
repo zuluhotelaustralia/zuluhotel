@@ -2,21 +2,39 @@ using System;
 using System.Collections.Generic;
 using Server.Engines.Craft;
 using Server.Network;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using ZuluContent.Zulu.Engines.Magic.Enums;
+using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.Items
 {
     [Flipable(0x14EB, 0x14EC)]
-    public class MapItem : Item, ICraftable
+    public class MapItem : Item, ICraftable, IResource
     {
         private const int MaxUserPins = 50;
         private bool m_Editable;
+        private CraftResource m_Resource;
 
         #region ICraftable Members
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public CraftResource Resource
+        {
+            get { return m_Resource; }
+            set
+            {
+                if (m_Resource != value)
+                {
+                    m_Resource = value;
+
+                    if (CraftItem.RetainsColor(GetType()))
+                    {
+                        Hue = CraftResources.GetHue(m_Resource);
+                    }
+                }
+            }
+        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public MarkQuality Mark { get; set; }
@@ -66,6 +84,18 @@ namespace Server.Items
         {
             CraftInit(from);
 
+            Mark = (MarkQuality) mark;
+
+            if (makersMark)
+                Crafter = from;
+
+            var resourceType = typeRes;
+
+            if (resourceType == null)
+                resourceType = craftItem.Resources[0].ItemType;
+
+            Resource = CraftResources.GetFromType(resourceType);
+
             PlayerConstructed = true;
 
             var context = craftSystem.GetContext(from);
@@ -106,6 +136,11 @@ namespace Server.Items
             }
 
             Bounds = new Rectangle2D(x1, y1, x2 - x1, y2 - y1);
+        }
+        
+        public override void OnSingleClick(Mobile from)
+        {
+            HandleSingleClick(this, from);
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -305,6 +340,8 @@ namespace Server.Items
             writer.Write(1);
 
             ICraftable.Serialize(writer, this);
+            
+            writer.WriteEncodedInt((int) m_Resource);
 
             writer.Write(Bounds);
 
@@ -330,6 +367,8 @@ namespace Server.Items
             {
                 case 1:
                     ICraftable.Deserialize(reader, this);
+                    
+                    m_Resource = (CraftResource) reader.ReadEncodedInt();
 
                     goto case 0;
                 case 0:

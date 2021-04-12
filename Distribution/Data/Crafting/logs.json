@@ -15,6 +15,13 @@
     "Delay": 1.6,
     "SoundDelay": 0.9
   },
+  "Messages": {
+    "NoResourcesMessage": 500493,
+    "OutOfRangeMessage": 500446,
+    "FailMessage": 500495,
+    "PackFullMessage": 500497,
+    "ToolBrokeMessage": 500499
+  },
   "Entries": [
     {
       "Name": "",

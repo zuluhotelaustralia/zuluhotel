@@ -43,15 +43,15 @@ namespace Server.Items
 
             return damage;
         }
-        
-        public override void Serialize( IGenericWriter writer )
+
+        public override void Serialize(IGenericWriter writer)
         {
-            base.Serialize( writer );
+            base.Serialize(writer);
         }
 
-        public override void Deserialize( IGenericReader reader )
+        public override void Deserialize(IGenericReader reader)
         {
-            base.Deserialize( reader );
+            base.Deserialize(reader);
         }
     }
 }

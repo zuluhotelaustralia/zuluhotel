@@ -1,43 +1,41 @@
 namespace Server.Items
 {
-    [FlipableAttribute( 0x143B, 0x143A )]
-	public class Maul : BaseBashing
-	{
-		public override int DefaultStrengthReq{ get{ return 20; } }
-		public override int DefaultMinDamage{ get{ return 10; } }
-		public override int DefaultMaxDamage{ get{ return 30; } }
-		public override int DefaultSpeed{ get{ return 30; } }
+    [FlipableAttribute(0x143B, 0x143A)]
+    public class Maul : BaseBashing
+    {
+        public override int DefaultStrengthReq => 20;
+        public override int DefaultMinDamage => 6;
+        public override int DefaultMaxDamage => 18;
+        public override int DefaultSpeed => 40;
+        public override int InitMinHits => 70;
+        public override int InitMaxHits => 70;
 
-		public override int InitMinHits{ get{ return 31; } }
-		public override int InitMaxHits{ get{ return 70; } }
+        [Constructible]
+        public Maul() : base(0x143B)
+        {
+            Weight = 10.0;
+        }
 
+        [Constructible]
+        public Maul(Serial serial) : base(serial)
+        {
+        }
 
-		[Constructible]
-public Maul() : base( 0x143B )
-		{
-			Weight = 10.0;
-		}
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-		[Constructible]
-public Maul( Serial serial ) : base( serial )
-		{
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			writer.Write( (int) 0 ); // version
-		}
+            int version = reader.ReadInt();
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-
-			if ( Weight == 14.0 )
-				Weight = 10.0;
-		}
-	}
+            if (Weight == 14.0)
+                Weight = 10.0;
+        }
+    }
 }

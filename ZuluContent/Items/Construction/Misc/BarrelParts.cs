@@ -57,7 +57,7 @@ public BarrelLid(Serial serial) : base(serial)
 		}
 	}
 
-	public class BarrelHoops : Item
+	public class BarrelHoops : BaseTinkerItem
 	{
 		public override int LabelNumber { get { return 1011228; } } // Barrel hoops
 
@@ -86,7 +86,7 @@ public BarrelLid(Serial serial) : base(serial)
 		}
 	}
 
-	public class BarrelTap : Item
+	public class BarrelTap : BaseTinkerItem
 	{
 
 		public BarrelTap() : base(0x1004)

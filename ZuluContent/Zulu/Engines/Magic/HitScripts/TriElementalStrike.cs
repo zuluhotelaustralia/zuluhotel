@@ -1,36 +1,40 @@
-using System;
+﻿using System;
 using Server.Spells;
-using Scripts.Zulu.Spells.Earth;
-using Server.Spells.Fourth;
-using Server.Spells.Third;
 
 namespace Server.Engines.Magic.HitScripts
 {
     public class TriElementalStrike : WeaponAbility
     {
-        // TODO convert to ITargetableAsyncSpell
-        private static readonly Action<Mobile, Mobile>[] Spells =
-        {
-            // (attacker, defender) => Spell.Create<LightningSpell>(attacker, null, true).Target(defender),
-            // (attacker, defender) => Spell.Create<FireballSpell>(attacker, null, true).Target(defender),
-            // (attacker, defender) => Spell.Create<IceStrikeSpell>(attacker, null, true).Target(defender)
-        };
-
         public override void OnHit(Mobile attacker, Mobile defender, ref int damage)
         {
             if (!Validate(attacker))
                 return;
 
-            try
-            {
-                foreach (var castAction in Spells) 
-                    castAction(attacker, defender);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(
-                    $"Failed to invoke {GetType().Name}> for Creature: {attacker.GetType().Name}, Serial: {attacker.Serial}");
-            }
+            Cast(attacker, defender);
+        }
+        
+        private static async void Cast(Mobile caster, Mobile defender)
+        {
+            var damage = SpellHelper.CalcSpellDamage(caster, defender, SpellCircle.Third);
+
+            caster.MovingParticles(defender, 0x36D4, 7, 0, false, true, 9502, 4019, 0x160);
+            caster.PlaySound(0x44B);
+
+            await Timer.Pause(250);
+            
+            damage += SpellHelper.CalcSpellDamage(caster, defender, SpellCircle.Third);
+            
+            defender.BoltEffect(0);
+            
+            await Timer.Pause(250);
+
+            damage += SpellHelper.CalcSpellDamage(caster, defender, SpellCircle.Third);
+
+            defender.FixedParticles(0x3789, 30, 30, 5028, EffectLayer.Waist);
+            defender.PlaySound(0x0116);
+            defender.PlaySound(0x0117);
+            
+            SpellHelper.Damage(damage, defender, caster, null, TimeSpan.Zero, ElementalType.None);
         }
     }
 }

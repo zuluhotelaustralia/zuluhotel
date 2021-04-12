@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Flipable( 0x1059, 0x105A )]
-	public class SextantParts : Item
+	public class SextantParts : BaseTinkerItem
 	{
 
 		[Constructible]

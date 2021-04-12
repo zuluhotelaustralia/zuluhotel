@@ -283,7 +283,8 @@ namespace Server.Engines.Craft
         {
             typeof(BaseWeapon), typeof(BaseArmor), typeof(BaseClothing),
             typeof(BaseJewel), typeof(BaseContainer), typeof(BaseInstrument),
-            typeof(FishingPole)
+            typeof(FishingPole), typeof(BaseLight), typeof(BaseTool),
+            typeof(BaseTinkerItem), typeof(MapItem)
         };
 
         private static Type[] m_ColoredResourceTable = new[]
@@ -301,7 +302,10 @@ namespace Server.Engines.Craft
             typeof(BaseHarvestTool),
             typeof(Runebook),
             typeof(BaseInstrument),
-            typeof(FishingPole)
+            typeof(FishingPole),
+            typeof(BaseLight),
+            typeof(BaseTinkerItem),
+            typeof(MapItem)
         };
 
         private static Type[] m_NeverColorTable = new[]
@@ -1270,13 +1274,13 @@ namespace Server.Engines.Craft
                     {
                         // TODO: CustomCrafts, i.e. traps don't seem to be able to fail in RunUO?
                         var cc = m_CraftItem.ItemType.CreateInstance<CustomCraft>(
-                            m_CraftItem.ItemType,
                             m_From,
                             m_CraftItem,
                             m_CraftSystem,
                             m_TypeRes,
                             m_Tool,
-                            mark
+                            mark,
+                            quality
                         );
 
                         cc?.EndCraftAction();

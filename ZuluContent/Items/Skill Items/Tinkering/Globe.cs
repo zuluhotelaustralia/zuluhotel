@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class Globe : Item
+    public class Globe : BaseTinkerItem
 	{
 
 		[Constructible]

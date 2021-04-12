@@ -1,56 +1,59 @@
 namespace Server.Items
 {
     public abstract class BaseBashing : BaseMeleeWeapon
-	{
-		public override int DefaultHitSound{ get{ return 0x233; } }
-		public override int DefaultMissSound{ get{ return 0x239; } }
+    {
+        public override int DefaultHitSound => 0x13B;
+        public override int DefaultMissSound => 0x233;
 
-		public override SkillName DefaultSkill{ get{ return SkillName.Macing; } }
-		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Bashing; } }
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Bash1H; } }
+        public override SkillName DefaultSkill => SkillName.Macing;
 
-		public BaseBashing( int itemID ) : base( itemID )
-		{
-		}
+        public override WeaponType DefaultWeaponType => WeaponType.Bashing;
 
-		public BaseBashing( Serial serial ) : base( serial )
-		{
-		}
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Bash1H;
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public BaseBashing(int itemID) : base(itemID)
+        {
+        }
 
-			writer.Write( (int) 0 ); // version
-		}
+        public BaseBashing(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			int version = reader.ReadInt();
-		}
+            writer.Write((int) 0); // version
+        }
 
-		public override void OnHit( Mobile attacker, Mobile defender, double damageBonus )
-		{
-			base.OnHit( attacker, defender, damageBonus );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			defender.Stam -= Utility.Random( 3, 3 ); // 3-5 points of stamina loss
-		}
+            int version = reader.ReadInt();
+        }
 
-		public override double GetBaseDamage( Mobile attacker )
-		{
-			double damage = base.GetBaseDamage( attacker );
+        public override void OnHit(Mobile attacker, Mobile defender, double damageBonus)
+        {
+            base.OnHit(attacker, defender, damageBonus);
 
-			if (  (attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble() )
-			{
-				damage *= 1.5;
+            defender.Stam -= Utility.Random(3, 3); // 3-5 points of stamina loss
+        }
 
-				attacker.SendMessage( "You deliver a crushing blow!" ); // Is this not localized?
-				attacker.PlaySound( 0x11C );
-			}
+        public override double GetBaseDamage(Mobile attacker)
+        {
+            double damage = base.GetBaseDamage(attacker);
 
-			return damage;
-		}
-	}
+            if ((attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded &&
+                attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble())
+            {
+                damage *= 1.5;
+
+                attacker.SendMessage("You deliver a crushing blow!"); // Is this not localized?
+                attacker.PlaySound(0x11C);
+            }
+
+            return damage;
+        }
+    }
 }

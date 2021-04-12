@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public class KeyRing : Item
+    public class KeyRing : BaseTinkerItem
 	{
 		public static readonly int MaxKeys = 20;
 

@@ -3,19 +3,17 @@ namespace Server.Items
     [FlipableAttribute(0xE87, 0xE88)]
     public class Pitchfork : BaseSpear
     {
-        public override int DefaultStrengthReq { get; } = 15;
+        public override int DefaultMaxRange => 2;
+        public override int DefaultStrengthReq => 15;
+        public override int DefaultMinDamage => 5;
+        public override int DefaultMaxDamage => 20;
+        public override int DefaultSpeed => 30;
 
-        public override int DefaultMinDamage { get; } = 4;
+        public override int DefaultHitSound => 0x23C;
+        public override int DefaultMissSound => 0x23A;
 
-        public override int DefaultMaxDamage { get; } = 16;
-
-        public override int DefaultSpeed { get; } = 45;
-
-        public override int InitMinHits { get; } = 31;
-
-        public override int InitMaxHits { get; } = 60;
-
-        public override int DefaultMaxRange { get; } = 2;
+        public override int InitMinHits => 70;
+        public override int InitMaxHits => 70;
 
         [Constructible]
         public Pitchfork() : base(0xE87)

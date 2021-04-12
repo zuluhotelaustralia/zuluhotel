@@ -57,7 +57,7 @@ namespace Server.Mobiles
                 DamageMin = 25,
                 Dex = 340,
                 Female = false,
-                FightMode = FightMode.Aggressor,
+                FightMode = FightMode.Closest,
                 FightRange = 1,
                 HasBreath = true,
                 Hides = 5,

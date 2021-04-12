@@ -249,7 +249,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponAnimation Animation
         {
-            get { return m_Animation == default ? DefaultAnimation : m_Animation; }
+            get { return (int) m_Animation == -1 ? DefaultAnimation : m_Animation; }
             set { m_Animation = value; }
         }
 
@@ -954,7 +954,7 @@ namespace Server.Items
             damage += damage * modifiers;
 
             // Scale by durability
-            if(MaxHitPoints > 0)
+            if (MaxHitPoints > 0)
                 damage *= HitPoints / (double) MaxHitPoints;
 
             return (int) damage;
@@ -1023,13 +1023,6 @@ namespace Server.Items
                     switch (Animation)
                     {
                         default:
-                        case WeaponAnimation.Wrestle:
-                        case WeaponAnimation.Bash1H:
-                        case WeaponAnimation.Pierce1H:
-                        case WeaponAnimation.Slash1H:
-                        case WeaponAnimation.Bash2H:
-                        case WeaponAnimation.Pierce2H:
-                        case WeaponAnimation.Slash2H:
                             action = Utility.Random(4, 3);
                             break;
                         case WeaponAnimation.ShootBow: return; // 7
@@ -1046,27 +1039,19 @@ namespace Server.Items
                     }
                     else
                     {
-                        switch (Animation)
+                        action = Animation switch
                         {
-                            default:
-                            case WeaponAnimation.Wrestle:
-                            case WeaponAnimation.Bash1H:
-                            case WeaponAnimation.Pierce1H:
-                            case WeaponAnimation.Slash1H:
-                                action = 26;
-                                break;
-                            case WeaponAnimation.Bash2H:
-                            case WeaponAnimation.Pierce2H:
-                            case WeaponAnimation.Slash2H:
-                                action = 29;
-                                break;
-                            case WeaponAnimation.ShootBow:
-                                action = 27;
-                                break;
-                            case WeaponAnimation.ShootXBow:
-                                action = 28;
-                                break;
-                        }
+                            WeaponAnimation.Wrestle => 26,
+                            WeaponAnimation.Bash1H => 26,
+                            WeaponAnimation.Pierce1H => 26,
+                            WeaponAnimation.Slash1H => 26,
+                            WeaponAnimation.Bash2H => 29,
+                            WeaponAnimation.Pierce2H => 29,
+                            WeaponAnimation.Slash2H => 29,
+                            WeaponAnimation.ShootBow => 27,
+                            WeaponAnimation.ShootXBow => 28,
+                            _ => 26
+                        };
                     }
 
                     break;

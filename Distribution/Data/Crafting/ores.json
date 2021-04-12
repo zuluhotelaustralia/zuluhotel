@@ -15,6 +15,15 @@
     "Delay": 1.6,
     "SoundDelay": 0.9
   },
+  "Messages": {
+    "NoResourcesMessage": 503040,
+    "DoubleHarvestMessage": 503042,
+    "TimedOutOfRangeMessage": 503041,
+    "OutOfRangeMessage": 500446,
+    "FailMessage": 503043,
+    "PackFullMessage": 1010481,
+    "ToolBrokeMessage": 1044038
+  },
   "Entries": [
     {
       "Name": "Iron",

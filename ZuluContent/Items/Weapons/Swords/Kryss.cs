@@ -1,50 +1,43 @@
 namespace Server.Items
 {
-    [FlipableAttribute( 0x1401, 0x1400 )]
-	public class Kryss : BaseSword
-	{
-		public override int DefaultStrengthReq{ get{ return 10; } }
-		public override int DefaultMinDamage{ get{ return 3; } }
-		public override int DefaultMaxDamage{ get{ return 28; } }
-		public override int DefaultSpeed{ get{ return 53; } }
+    [FlipableAttribute(0x1401, 0x1400)]
+    public class Kryss : BaseSword
+    {
+        public override int DefaultMinDamage => 5;
+        public override int DefaultMaxDamage => 11;
+        public override int DefaultSpeed => 65;
+        public override int InitMinHits => 90;
+        public override int InitMaxHits => 90;
+        public override SkillName DefaultSkill => SkillName.Fencing;
+        public override WeaponType DefaultWeaponType => WeaponType.Piercing;
+        public override WeaponAnimation DefaultAnimation => WeaponAnimation.Pierce1H;
 
-		public override int DefaultHitSound{ get{ return 0x23C; } }
-		public override int DefaultMissSound{ get{ return 0x238; } }
+        [Constructible]
+        public Kryss() : base(0x1401)
+        {
+            Weight = 2.0;
+        }
 
-		public override int InitMinHits{ get{ return 31; } }
-		public override int InitMaxHits{ get{ return 90; } }
+        [Constructible]
+        public Kryss(Serial serial) : base(serial)
+        {
+        }
 
-		public override SkillName DefaultSkill{ get{ return SkillName.Fencing; } }
-		public override WeaponType DefaultWeaponType{ get{ return WeaponType.Piercing; } }
-		public override WeaponAnimation DefaultAnimation{ get{ return WeaponAnimation.Pierce1H; } }
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
+            writer.Write((int) 0); // version
+        }
 
-		[Constructible]
-public Kryss() : base( 0x1401 )
-		{
-			Weight = 2.0;
-		}
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-		[Constructible]
-public Kryss( Serial serial ) : base( serial )
-		{
-		}
+            int version = reader.ReadInt();
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
-		}
-
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
-
-			int version = reader.ReadInt();
-
-			if ( Weight == 1.0 )
-				Weight = 2.0;
-		}
-	}
+            if (Weight == 1.0)
+                Weight = 2.0;
+        }
+    }
 }
