@@ -1,21 +1,15 @@
 namespace Server.Items
 {
-    public class Fish : Item, ICarvable
+    public class Seaweed : Item
     {
-        public void Carve(Mobile from, Item item)
-        {
-            base.ScissorHelper(from, new RawFishSteak(), 4);
-        }
-
-
         [Constructible]
-        public Fish() : this(1)
+        public Seaweed() : this(1)
         {
         }
 
 
         [Constructible]
-        public Fish(int amount) : base(Utility.Random(0x09CC, 4))
+        public Seaweed(int amount) : base(0xDBA)
         {
             Stackable = true;
             Weight = 1.0;
@@ -23,7 +17,7 @@ namespace Server.Items
         }
 
         [Constructible]
-        public Fish(Serial serial) : base(serial)
+        public Seaweed(Serial serial) : base(serial)
         {
         }
 
