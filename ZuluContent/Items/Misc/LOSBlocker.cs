@@ -44,7 +44,7 @@ namespace Server.Items
 
             if (ns.StygianAbyss)
             {
-                length = OutgoingEntityPackets.CreateWorldEntity(buffer, this, ns.IsSAClient, ns.HighSeas);
+                length = OutgoingEntityPackets.CreateWorldEntity(buffer, this, ns.HighSeas);
                 BinaryPrimitives.WriteUInt16BigEndian(buffer.Slice(8, 2), GMItemId);
             }
             else
