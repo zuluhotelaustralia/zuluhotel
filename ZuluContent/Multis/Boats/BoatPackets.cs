@@ -77,7 +77,7 @@ namespace Server.Multis.Boats
                 }
 
                 buffer.InitializePacket();
-                var bytesWritten = OutgoingEntityPackets.CreateWorldEntity(buffer, entity, true);
+                var bytesWritten = OutgoingEntityPackets.CreateWorldEntity(buffer, entity, ns.IsSAClient, true);
                 builder.Advance(bytesWritten);
             }
 
