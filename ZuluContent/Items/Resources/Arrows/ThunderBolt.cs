@@ -1,28 +1,27 @@
 namespace Server.Items
 {
-    public class Bolt : Item
+    public class ThunderBolt : Item
     {
-        public override double DefaultWeight
+        public override double DefaultWeight => 0.1;
+
+        public override string DefaultName => "thunder bolt";
+
+        [Constructible]
+        public ThunderBolt() : this(1)
         {
-            get { return 0.1; }
         }
 
 
         [Constructible]
-        public Bolt() : this(1)
+        public ThunderBolt(int amount) : base(0x1BFB)
         {
-        }
-
-
-        [Constructible]
-        public Bolt(int amount) : base(0x1BFB)
-        {
+            Hue = 0x502;
             Stackable = true;
             Amount = amount;
         }
 
         [Constructible]
-        public Bolt(Serial serial) : base(serial)
+        public ThunderBolt(Serial serial) : base(serial)
         {
         }
 

@@ -78,8 +78,6 @@ namespace Server.Engines.Harvest
         {
             var chance = Utility.Random(5);
 
-            BaseShell shell;
-            
             switch (chance)
             {
                 case 0:
@@ -113,7 +111,8 @@ namespace Server.Engines.Harvest
 
             if (Utility.Random(100) < 2 && harvester.ShilCheckSkill(SkillName.Fishing, 110, 200))
             {
-                // Create SOS Bottle
+                var sosBottle = new MessageInABottle();
+                harvester.AddToBackpack(sosBottle);
                 return;
             }
            
