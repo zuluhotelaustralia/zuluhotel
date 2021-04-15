@@ -4,6 +4,7 @@ using Server.Mobiles;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Regions;
+using Server.Spells;
 using Server.Utilities;
 
 namespace Server.Engines.Harvest
@@ -68,10 +69,14 @@ namespace Server.Engines.Harvest
 
         private static void SpawnCreature(Mobile harvester, Type creatureType)
         {
-            var creature = creatureType.CreateInstance<BaseCreature>();
-            var location = harvester.Location;
-            location.X -= 1;
-            creature.MoveToWorld(location, harvester.Map);
+            var p = new Point3D(harvester);
+            p.X -= 1;
+            
+            if (SpellHelper.FindValidSpawnLocation(harvester.Map, ref p, true))
+            {
+                var creature = creatureType.CreateInstance<BaseCreature>();
+                creature.MoveToWorld(p, harvester.Map);
+            }
         }
         
         private static Shell GetRandomShell(Mobile harvester)
