@@ -48,11 +48,11 @@ namespace Server.Engines.Harvest
                 
                 MaxChance = ZhConfig.Resources.Ores.MaxChance,
                 
-                EffectActions = ZhConfig.Resources.Ores.OreEffect.Actions,
-                EffectSounds = ZhConfig.Resources.Ores.OreEffect.Sounds,
-                EffectCounts = ZhConfig.Resources.Ores.OreEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.OreEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Ores.ResourceEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Ores.ResourceEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Ores.ResourceEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.ResourceEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Ores.ResourceEffect.SoundDelay),
 
                 NoResourcesMessage = ZhConfig.Resources.Ores.Messages.NoResourcesMessage,
                 DoubleHarvestMessage = ZhConfig.Resources.Ores.Messages.DoubleHarvestMessage,
@@ -96,11 +96,11 @@ namespace Server.Engines.Harvest
                 
                 ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
                 
-                EffectActions = ZhConfig.Resources.Sand.OreEffect.Actions,
-                EffectSounds = ZhConfig.Resources.Sand.OreEffect.Sounds,
-                EffectCounts = ZhConfig.Resources.Sand.OreEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Sand.OreEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Sand.OreEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Sand.ResourceEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Sand.ResourceEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Sand.ResourceEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Sand.ResourceEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Sand.ResourceEffect.SoundDelay),
                 
                 NoResourcesMessage = ZhConfig.Resources.Sand.Messages.NoResourcesMessage,
                 DoubleHarvestMessage = ZhConfig.Resources.Sand.Messages.DoubleHarvestMessage,
@@ -140,11 +140,11 @@ namespace Server.Engines.Harvest
                 
                 ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
                 
-                EffectActions = ZhConfig.Resources.Clay.OreEffect.Actions,
-                EffectSounds = ZhConfig.Resources.Clay.OreEffect.Sounds,
-                EffectCounts = ZhConfig.Resources.Clay.OreEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Clay.OreEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Clay.OreEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Clay.ResourceEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Clay.ResourceEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Clay.ResourceEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Clay.ResourceEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Clay.ResourceEffect.SoundDelay),
                 
                 NoResourcesMessage = ZhConfig.Resources.Clay.Messages.NoResourcesMessage,
                 DoubleHarvestMessage = ZhConfig.Resources.Clay.Messages.DoubleHarvestMessage,

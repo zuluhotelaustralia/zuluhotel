@@ -7,7 +7,7 @@
   "MaxRespawn": 20.0,
   "Skill": "Fishing",
   "MaxRange": 6,
-  "FishEffect": {
+  "ResourceEffect": {
     "Actions": [ 12 ],
     "Sounds": [ 0 ],
     "Counts": [ 1 ],

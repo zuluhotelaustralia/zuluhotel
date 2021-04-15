@@ -1,9 +1,10 @@
 using Server.Engines.Harvest;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    public class XarafaxsAxe : BaseAxe, IUsesRemaining, IEnchanted
+    public class XarafaxsAxe : BaseAxe, IUsesRemaining, IGMItem
     {
         public override HarvestSystem HarvestSystem => Lumberjacking.System;
 
@@ -39,12 +40,6 @@ namespace Server.Items
         [Constructible]
         public XarafaxsAxe(Serial serial) : base(serial)
         {
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
         }
 
         public override void Serialize(IGenericWriter writer)

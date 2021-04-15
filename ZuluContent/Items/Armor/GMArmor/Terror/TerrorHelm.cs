@@ -1,9 +1,10 @@
 using Server.Engines.Craft;
+using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
     [FlipableAttribute(0x1451, 0x1456)]
-    public class TerrorHelm : BaseArmor, IFortifiable
+    public class TerrorHelm : BaseArmor, IFortifiable, IGMItem
     {
         public override int InitMinHits => 100;
 
@@ -32,12 +33,6 @@ namespace Server.Items
         [Constructible]
         public TerrorHelm(Serial serial) : base(serial)
         {
-        }
-        
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
         }
 
         public override void Serialize(IGenericWriter writer)

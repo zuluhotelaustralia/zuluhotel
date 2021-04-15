@@ -1018,8 +1018,8 @@ namespace Server.Items
         [Hue, CommandProperty(AccessLevel.GameMaster)]
         public override int Hue
         {
-            get { return base.Hue; }
-            set { base.Hue = value; }
+            get => Identified ? base.Hue : 0x0;
+            set => base.Hue = value;
         }
         
         public override void OnSingleClick(Mobile from)

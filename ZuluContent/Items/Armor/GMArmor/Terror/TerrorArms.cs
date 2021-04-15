@@ -1,7 +1,9 @@
+using ZuluContent.Zulu.Items;
+
 namespace Server.Items
 {
     [FlipableAttribute(0x144e, 0x1453)]
-    public class TerrorArms : BaseArmor
+    public class TerrorArms : BaseArmor, IGMItem
     {
         public override int InitMinHits => 100;
 
@@ -29,12 +31,6 @@ namespace Server.Items
         [Constructible]
         public TerrorArms(Serial serial) : base(serial)
         {
-        }
-        
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
         }
 
         public override void Serialize(IGenericWriter writer)

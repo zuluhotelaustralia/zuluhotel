@@ -1,9 +1,10 @@
 using Server.Engines.Harvest;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    public class OmerosPickaxe : BaseAxe, IUsesRemaining, IEnchanted
+    public class OmerosPickaxe : BaseAxe, IUsesRemaining, IGMItem
     {
         public override HarvestSystem HarvestSystem => Mining.System;
 
@@ -39,12 +40,6 @@ namespace Server.Items
         [Constructible]
         public OmerosPickaxe(Serial serial) : base(serial)
         {
-        }
-
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
         }
 
         public override void Serialize(IGenericWriter writer)

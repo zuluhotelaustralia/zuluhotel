@@ -1,58 +1,62 @@
 using System;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Targeting;
-using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
+using ZuluContent.Zulu.Skills;
 using static ZuluContent.Zulu.Items.SingleClick.SingleClickHandler;
 
 namespace Server.SkillHandlers
 {
-    public class ItemId
+    public class ItemId : BaseSkillHandler
     {
-        public static void Initialize()
-        {
-            SkillInfo.Table[(int) SkillName.ItemID].Callback = OnUse;
-        }
+        public override SkillName Skill { get; } = SkillName.ItemID;
 
-        public static TimeSpan OnUse(Mobile from)
+        private static readonly TargetOptions TargetOptions = new()
         {
+            Range = 2,
+        };
+        
+        public override async Task<TimeSpan> OnUse(Mobile from)
+        {
+            var target = new AsyncTarget<object>(from, TargetOptions);
+            from.Target = target;
+            
             from.SendLocalizedMessage(500343); // What do you wish to appraise and identify?
-            from.Target = new InternalTarget();
+            
+            var (targeted, responseType) = await target;
 
-            return TimeSpan.FromSeconds(1.0);
-        }
+            if (responseType != TargetResponseType.Success)
+                return Delay;
 
-        [PlayerVendorTarget]
-        private class InternalTarget : Target
-        {
-            public InternalTarget() : base(8, false, TargetFlags.None)
+            switch (targeted)
             {
-                AllowNonlocal = true;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                switch (o)
+                case IMagicItem magicItem when from.ShilCheckSkill(SkillName.ItemID):
                 {
-                    case IMagicItem item when from.CheckTargetSkill(SkillName.ItemID, item, 0, 100):
+                    if (!magicItem.Identified)
                     {
-                        if (!item.Identified)
-                            item.Identified = true;
-                        item.OnSingleClick(from);
-                        from.SendSuccessMessage("It appears to be " + GetMagicItemName(item));
-                        break;
+                        magicItem.Identified = true;
+                        // Update the color of the item
+                        if (magicItem is Item item)
+                            item.Delta(ItemDelta.Update);
                     }
-                    case Item item:
-                        from.SendLocalizedMessage(500353); // You are not certain...
-                        break;
-                    case Mobile mobile:
-                        mobile.OnSingleClick(from);
-                        break;
-                    default:
-                        from.SendLocalizedMessage(500353); // You are not certain...
-                        break;
+                    magicItem.OnSingleClick(from);
+                    from.SendSuccessMessage($"It appears to be {GetMagicItemName(magicItem)}");
+                    break;
                 }
+                case Item:
+                    from.SendLocalizedMessage(500353); // You are not certain...
+                    break;
+                case Mobile mobile:
+                    mobile.OnSingleClick(from);
+                    break;
+                default:
+                    from.SendLocalizedMessage(500353); // You are not certain...
+                    break;
             }
+
+            return ZhConfig.Skills.Entries[SkillName.ItemID].Delay;
         }
     }
 }

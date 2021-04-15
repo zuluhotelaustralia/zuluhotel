@@ -10,7 +10,7 @@ namespace Server.Items
     {
         public override double DefaultWeight { get; } = 1.0;
 
-        public virtual int Piece => 0;
+        public int Piece { get; set; }
 
         public BaseShrine(int itemID) : base(itemID)
         {
@@ -35,15 +35,24 @@ namespace Server.Items
         }
     }
 
-    public class BaseShell : BaseShrine
+    public class Shell : BaseShrine
     {
+        private static string[] Names = { "Aquaria Shell 1", "Capricornia Shell 2", "Sea Nymph 3", "Neptune's Nautilus 4", "Sea Shore Sand Dollar 5", "Divinia Shell 6", "Mermaid Shell 7", "Ocean Odyssey 8", "Talimari 9" };
+
+        private static int[] ItemIDs = { 0xFC4, 0xFC5, 0xFC6, 0xFC7, 0xFC8, 0xFC9, 0xFCA, 0xFCB, 0xFCC  };
+
+        private static int[] Hues = { 0x504, 0x519, 0x606, 0x505, 0x501, 0x499, 0x480, 0x489, 0x496 };
+        
         [Constructible]
-        public BaseShell(int itemID) : base(itemID)
+        public Shell(int piece) : base(ItemIDs[piece])
         {
+            Piece = piece;
+            Name = Names[piece];
+            Hue = Hues[piece];
         }
 
         [Constructible]
-        public BaseShell(Serial serial) : base(serial)
+        public Shell(Serial serial) : base(serial)
         {
         }
 
@@ -51,7 +60,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
+            
+            writer.WriteEncodedInt(Piece);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -59,286 +70,8 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            Piece = reader.ReadEncodedInt();
         }
     }
-
-    public class AquariaShell : BaseShell
-    {
-        public override int Piece => 1;
-        public override string DefaultName => "Aquaria Shell 1";
-
-        [Constructible]
-        public AquariaShell() : base(0xFC4)
-        {
-            Hue = 0x504;
-        }
-
-        [Constructible]
-        public AquariaShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class CapricorniaShell : BaseShell
-    {
-        public override int Piece => 2;
-        public override string DefaultName => "Capricornia Shell 2";
-
-        [Constructible]
-        public CapricorniaShell() : base(0xFC5)
-        {
-            Hue = 0x519;
-        }
-
-        [Constructible]
-        public CapricorniaShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class SeaNymphShell : BaseShell
-    {
-        public override int Piece => 3;
-        public override string DefaultName => "Sea Nymph 3";
-
-        [Constructible]
-        public SeaNymphShell() : base(0xFC6)
-        {
-            Hue = 0x606;
-        }
-
-        [Constructible]
-        public SeaNymphShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class NeptunesNautilusShell : BaseShell
-    {
-        public override int Piece => 4;
-        public override string DefaultName => "Neptune's Nautilus 4";
-
-        [Constructible]
-        public NeptunesNautilusShell() : base(0xFC7)
-        {
-            Hue = 0x505;
-        }
-
-        [Constructible]
-        public NeptunesNautilusShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class SeaShoreSandDollarShell : BaseShell
-    {
-        public override int Piece => 5;
-        public override string DefaultName => "Sea Shore Sand Dollar 5";
-
-        [Constructible]
-        public SeaShoreSandDollarShell() : base(0xFC8)
-        {
-            Hue = 0x501;
-        }
-
-        [Constructible]
-        public SeaShoreSandDollarShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class DiviniaShell : BaseShell
-    {
-        public override int Piece => 6;
-        public override string DefaultName => "Divinia Shell 6";
-
-        [Constructible]
-        public DiviniaShell() : base(0xFC9)
-        {
-            Hue = 0x499;
-        }
-
-        [Constructible]
-        public DiviniaShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class MermaidShell : BaseShell
-    {
-        public override int Piece => 7;
-        public override string DefaultName => "Mermaid Shell 7";
-
-        [Constructible]
-        public MermaidShell() : base(0xFCA)
-        {
-            Hue = 0x48D;
-        }
-
-        [Constructible]
-        public MermaidShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class OceanOdysseyShell : BaseShell
-    {
-        public override int Piece => 8;
-        public override string DefaultName => "Ocean Odyssey 8";
-
-        [Constructible]
-        public OceanOdysseyShell() : base(0xFCB)
-        {
-            Hue = 0x489;
-        }
-
-        [Constructible]
-        public OceanOdysseyShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
-    public class TalimariShell : BaseShell
-    {
-        public override int Piece => 9;
-        public override string DefaultName => "Talimari 9";
-
-        [Constructible]
-        public TalimariShell() : base(0xFCC)
-        {
-            Hue = 0x496;
-        }
-
-        [Constructible]
-        public TalimariShell(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
-    
 }

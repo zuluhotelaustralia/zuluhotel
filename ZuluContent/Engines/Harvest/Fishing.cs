@@ -43,11 +43,11 @@ namespace Server.Engines.Harvest
                 
                 ConsumedPerHarvest = skillValue => 1,
                 
-                EffectActions = ZhConfig.Resources.Fish.FishEffect.Actions,
-                EffectSounds = ZhConfig.Resources.Fish.FishEffect.Sounds,
-                EffectCounts = ZhConfig.Resources.Fish.FishEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Fish.FishEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Fish.FishEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Fish.ResourceEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Fish.ResourceEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Fish.ResourceEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Fish.ResourceEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Fish.ResourceEffect.SoundDelay),
 
                 NoResourcesMessage = ZhConfig.Resources.Fish.Messages.NoResourcesMessage,
                 TimedOutOfRangeMessage = ZhConfig.Resources.Fish.Messages.TimedOutOfRangeMessage,
@@ -74,33 +74,33 @@ namespace Server.Engines.Harvest
             creature.MoveToWorld(location, harvester.Map);
         }
         
-        private static BaseShell GetRandomShell(Mobile harvester)
+        private static Shell GetRandomShell(Mobile harvester)
         {
             var chance = Utility.Random(5);
 
             switch (chance)
             {
                 case 0:
-                    return new AquariaShell();
+                    return new Shell(0);
                 case 1:
-                    return new CapricorniaShell();
+                    return new Shell(1);
                 case 2:
-                    return new SeaNymphShell();
+                    return new Shell(2);
                 case 3:
                 case 4:
                 {
                     if (harvester.Skills[SkillName.Fishing].Value > 100.0)
                     {
                         if (Utility.Random(3) == 2)
-                            return new NeptunesNautilusShell();
+                            return new Shell(3);
                         
-                        return new SeaShoreSandDollarShell();
+                        return new Shell(4);
                     }
                     
-                    return new SeaNymphShell();
+                    return new Shell(2);
                 }
                 default:
-                    return new AquariaShell();
+                    return new Shell(0);
             }
         }
         

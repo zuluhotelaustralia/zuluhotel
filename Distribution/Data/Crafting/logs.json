@@ -8,7 +8,7 @@
   "Skill": "Lumberjacking",
   "MaxRange": 2,
   "MaxChance": 100,
-  "LogEffect": {
+  "ResourceEffect": {
     "Actions": [ 13 ],
     "Sounds": [ 318 ],
     "Counts": [ 4 ],

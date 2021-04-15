@@ -473,33 +473,33 @@ namespace Server.Items
             return null;
         }
         
-        private static BaseShell GetRandomShell(Mobile from)
+        private static Shell GetRandomShell(Mobile from)
         {
             var chance = Utility.Random(5);
 
             switch (chance)
             {
                 case 0:
-                    return new SeaShoreSandDollarShell();
+                    return new Shell(4);
                 case 1:
-                    return new DiviniaShell();
+                    return new Shell(5);
                 case 2:
-                    return new MermaidShell();
+                    return new Shell(6);
                 case 3:
                 case 4:
                 {
                     if (from.Skills[SkillName.Fishing].Value > 100.0)
                     {
                         if (Utility.Random(3) == 2)
-                            return new OceanOdysseyShell();
+                            return new Shell(7);
                         
-                        return new TalimariShell();
+                        return new Shell(8);
                     }
                     
-                    return new MermaidShell();
+                    return new Shell(6);
                 }
                 default:
-                    return new SeaShoreSandDollarShell();
+                    return new Shell(4);
             }
         }
 
