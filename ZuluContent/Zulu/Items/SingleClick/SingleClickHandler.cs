@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Scripts.Zulu.Packets;
 using Server;
 using Server.Engines.Craft;
 using Server.Items;
@@ -14,10 +13,6 @@ namespace ZuluContent.Zulu.Items.SingleClick
     public static partial class SingleClickHandler
     {
         public static readonly TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
-
-        public static bool StaffRevealedMagicItems = true;
-
-        public static bool AsciiClickMessage { get; set; } = true;
 
         private static string GetItemDesc(Item item)
         {

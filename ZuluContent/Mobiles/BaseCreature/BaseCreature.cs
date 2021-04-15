@@ -2813,7 +2813,7 @@ namespace Server.Mobiles
                 AddItem(backpack);
             }
 
-            LootGenerator.MakeLoot(backpack, table, LootItemLevel, LootItemChance);
+            LootGenerator.MakeLoot(LastKiller, backpack, table, LootItemLevel, LootItemChance);
         }
 
         public bool PackArmor(int minLevel, int maxLevel)
