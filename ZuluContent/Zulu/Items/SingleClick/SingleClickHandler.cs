@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Scripts.Zulu.Packets;
 using Server;
 using Server.Engines.Craft;
 using Server.Items;
@@ -14,10 +13,6 @@ namespace ZuluContent.Zulu.Items.SingleClick
     public static partial class SingleClickHandler
     {
         public static readonly TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
-
-        public static bool StaffRevealedMagicItems = true;
-
-        public static bool AsciiClickMessage { get; set; } = true;
 
         private static string GetItemDesc(Item item)
         {
@@ -50,10 +45,15 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
             var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
 
-            var text = item is ICraftable {PlayerConstructed: true} craftable
-                ? GetCraftableItemName(craftable)
-                : $"{prefix}{GetItemDesc(item as Item)}{suffix}";
+            string text;
 
+            if (item is ICraftable {PlayerConstructed: true} craftableItem)
+                text = GetCraftableItemName(craftableItem);
+            else if (item is IGMItem gmItem)
+                text = gmItem.Name;
+            else
+                text = $"{prefix}{GetItemDesc(item as Item)}{suffix}";
+            
             return text;
         }
 
@@ -113,10 +113,10 @@ namespace ZuluContent.Zulu.Items.SingleClick
             if (!ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc))
                 return false;
 
-            if (item is IMagicItem magicItem && (StaffRevealedMagicItems && m.AccessLevel == AccessLevel.Player) &&
-                !magicItem.Identified)
+            if (item is IMagicItem magicItem && !magicItem.Identified)
             {
-                SendResponse(m, item, $"a magic {desc}");
+                var itemName = magicItem is IGMItem ? desc : $"a magic {desc}";
+                SendResponse(m, item, itemName);
                 return false;
             }
 

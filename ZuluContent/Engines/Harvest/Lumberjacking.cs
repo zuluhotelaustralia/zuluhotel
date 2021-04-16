@@ -51,11 +51,11 @@ namespace Server.Engines.Harvest
                 
                 MaxChance = ZhConfig.Resources.Logs.MaxChance,
                 
-                EffectActions = ZhConfig.Resources.Logs.LogEffect.Actions,
-                EffectSounds = ZhConfig.Resources.Logs.LogEffect.Sounds,
-                EffectCounts = ZhConfig.Resources.Logs.LogEffect.Counts,
-                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Logs.LogEffect.Delay),
-                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Logs.LogEffect.SoundDelay),
+                EffectActions = ZhConfig.Resources.Logs.ResourceEffect.Actions,
+                EffectSounds = ZhConfig.Resources.Logs.ResourceEffect.Sounds,
+                EffectCounts = ZhConfig.Resources.Logs.ResourceEffect.Counts,
+                EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Logs.ResourceEffect.Delay),
+                EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Logs.ResourceEffect.SoundDelay),
 
                 NoResourcesMessage = ZhConfig.Resources.Logs.Messages.NoResourcesMessage,
                 FailMessage = ZhConfig.Resources.Logs.Messages.FailMessage,

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Scripts.Zulu.Packets;
 using Server.Network;
+using Server.Scripts.Engines.Loot;
 using ZuluContent.Zulu.Items.SingleClick;
 
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
@@ -32,8 +33,7 @@ namespace Server.Configurations
             Mobile.GuildClickMessage = config.GuildClickMessage;
             Mobile.AsciiClickMessage = config.AsciiClickMessage;
             IncomingEntityPackets.SingleClickProps = config.SingleClickProps;
-            SingleClickHandler.StaffRevealedMagicItems = config.StaffRevealMagicItems;
-            
+            LootItem.StaffRevealMagicItems = config.StaffRevealMagicItems;
         }
         
         private record MessagingSettings

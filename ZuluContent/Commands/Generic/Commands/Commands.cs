@@ -867,6 +867,7 @@ namespace Server.Commands.Generic
         {
           CommandLogging.WriteLine(from, "{0} {1} killing {2}", from.AccessLevel, CommandLogging.Format(from),
             CommandLogging.Format(mob));
+          mob.LastKiller = from;
           mob.Kill();
 
           AddResponse("They have been killed.");

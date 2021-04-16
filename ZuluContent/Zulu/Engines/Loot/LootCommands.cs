@@ -62,7 +62,7 @@ namespace Server.Scripts.Engines.Loot
 
             for (var i = 0; i < iterations; i++)
             {
-                items += LootGenerator.MakeLoot(backpack, table, itemLevel, itemChance);
+                items += LootGenerator.MakeLoot(e.Mobile, backpack, table, itemLevel, itemChance);
             }
 
             watch.Stop();
@@ -88,7 +88,7 @@ namespace Server.Scripts.Engines.Loot
                     return;
                 
                 if (targeted is Container container)
-                    LootGenerator.MakeLoot(container, lootTable, m_Level, m_Chance);
+                    LootGenerator.MakeLoot(from, container, lootTable, m_Level, m_Chance);
             }
         }
         

@@ -8,7 +8,7 @@
   "Skill": "Mining",
   "MaxRange": 2,
   "MaxChance": 155,
-  "OreEffect": {
+  "ResourceEffect": {
     "Actions": [ 11 ],
     "Sounds": [ 66 ],
     "Counts": [ 4 ],

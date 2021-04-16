@@ -1,31 +1,25 @@
 namespace Server.Items
 {
-    public class Bolt : Item
+    public class Seaweed : Item
     {
-        public override double DefaultWeight
-        {
-            get { return 0.1; }
-        }
-
-
         [Constructible]
-        public Bolt() : this(1)
+        public Seaweed() : this(1)
         {
         }
 
 
         [Constructible]
-        public Bolt(int amount) : base(0x1BFB)
+        public Seaweed(int amount) : base(0xDBA)
         {
             Stackable = true;
+            Weight = 1.0;
             Amount = amount;
         }
 
         [Constructible]
-        public Bolt(Serial serial) : base(serial)
+        public Seaweed(Serial serial) : base(serial)
         {
         }
-
 
         public override void Serialize(IGenericWriter writer)
         {

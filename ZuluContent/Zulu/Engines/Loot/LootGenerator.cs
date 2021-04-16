@@ -56,6 +56,8 @@ namespace Server.Scripts.Engines.Loot
         public CreatureType CreatureProtection { get; set; }
         public EffectHitType EffectHitType { get; set; }
         public double EffectHitTypeChance { get; set; }
+        
+        public static bool StaffRevealMagicItems { get; set; } = true;
 
         public LootItem(Type t)
         {
@@ -65,7 +67,7 @@ namespace Server.Scripts.Engines.Loot
         public bool Is<T>() => Type.IsSubclassOf(typeof(T));
 
 
-        public Item Create()
+        public Item Create(Mobile killedBy)
         {
             Item item = null;
             try
@@ -85,8 +87,6 @@ namespace Server.Scripts.Engines.Loot
 
             if (item is IMagicItem magicItem)
             {
-                magicItem.Identified = false;
-
                 if (SkillBonusValue > 0)
                 {
                     magicItem.Enchantments.Set((FirstSkillBonus e) =>
@@ -151,6 +151,11 @@ namespace Server.Scripts.Engines.Loot
                         value.Cursed = CurseType.Unrevealed;
                     }
                 }
+                
+                if (StaffRevealMagicItems && killedBy.AccessLevel >= AccessLevel.GameMaster)
+                    magicItem.Identified = true;
+                else
+                    magicItem.Identified = false;
             }
 
             return item;
@@ -160,14 +165,14 @@ namespace Server.Scripts.Engines.Loot
 
     public static class LootGenerator
     {
-        public static int MakeLoot(Container container, LootTable table, int itemLevel, double itemChance)
+        public static int MakeLoot(Mobile killedBy, Container container, LootTable table, int itemLevel, double itemChance)
         {
             var items = table.Roll(itemLevel, itemChance)
                 .Select(lootItem =>
                 {
                     // Attempt to make the item magical, will do nothing if its not eligible.
                     MakeItemMagical(lootItem);
-                    return lootItem.Create();
+                    return lootItem.Create(killedBy);
                 })
                 // Group the items by id and whether they're stackable
                 .GroupBy(item => new {item.Stackable, item.ItemID})
@@ -268,10 +273,12 @@ namespace Server.Scripts.Engines.Loot
                 case not null when item.Is<BaseClothing>():
                 {
                     if (item.EnchantLevel < 2.5)
+                    {
                         ApplyMiscSkillMod(item);
+                        AddRandomColor(item);
+                    }
                     else
                         ApplyMiscArmorMod(item);
-                    AddRandomColor(item);
                     break;
                 }
 
