@@ -31,7 +31,7 @@ namespace Server.Items
 
         public virtual void CheckTimer()
         {
-            Map map = Map;
+            var map = Map;
 
             if (map != null && map.GetSector(GetWorldLocation()).Active)
                 StartTimer();
@@ -80,9 +80,9 @@ namespace Server.Items
             if (Deleted)
                 return;
 
-            bool foundPlayer = false;
+            var foundPlayer = false;
 
-            foreach (Mobile mob in GetMobilesInRange(3))
+            foreach (var mob in GetMobilesInRange(3))
             {
                 if (!mob.Player || !mob.Alive || mob.AccessLevel > AccessLevel.Player)
                     continue;
@@ -165,13 +165,13 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             switch (version)
             {
                 case 0:
                 {
-                    Item item = reader.ReadEntity<Item>();
+                    var item = reader.ReadEntity<Item>();
 
                     if (item != null)
                         item.Delete();

@@ -9,7 +9,7 @@ namespace Server.SkillHandlers
 {
     public class Anatomy : BaseSkillHandler
     {
-        public override SkillName Skill { get; } = SkillName.Anatomy;
+        public override SkillName Skill => SkillName.Anatomy;
 
         private static readonly TargetOptions TargetOptions = new()
         {

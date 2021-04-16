@@ -27,7 +27,7 @@ namespace Server.SkillHandlers
             "{0}, will you be my friend?"
         };
 
-        public override SkillName Skill { get; } = SkillName.AnimalTaming;
+        public override SkillName Skill => SkillName.AnimalTaming;
 
         private static readonly TargetOptions TargetOptions = new()
         {

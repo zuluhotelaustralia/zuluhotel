@@ -68,7 +68,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             if (ItemID == 0x1126)
                 OnMushroomReset();

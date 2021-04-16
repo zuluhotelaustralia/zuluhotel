@@ -1,85 +1,72 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
+using Server.Items;
 using Server.Multis;
+using Server.Network;
 using Server.Targeting;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class DetectHidden
-	{
-		public static void Initialize()
-		{
-			SkillInfo.Table[(int)SkillName.DetectHidden].Callback = OnUse;
-		}
+    public class DetectHidden : BaseSkillHandler
+    {
+        public override SkillName Skill => SkillName.DetectHidden;
 
-		public static TimeSpan OnUse( Mobile src )
-		{
-			src.SendLocalizedMessage( 500819 );//Where will you search?
-			src.Target = new InternalTarget();
+        public override async Task<TimeSpan> OnUse(Mobile from)
+        {
+            if (!from.ShilCheckSkill(Skill))
+            {
+                from.SendFailureMessage(500817); // You can see nothing hidden there.
+                return Delay;
+            }
 
-			return TimeSpan.FromSeconds( 6.0 );
-		}
+            var range = (int)(from.Skills.DetectHidden.Value / 15.0 * from.GetClassModifier(Skill));
 
-		private class InternalTarget : Target
-		{
-			public InternalTarget() : base( 12, true, TargetFlags.None )
-			{
-			}
+            var eable = from.GetMobilesInRange(range);
+            var hiddenMobiles = eable.Where(mobile => TryDetect(from, mobile)).ToList();
+            eable.Free();
 
-			protected override void OnTarget( Mobile src, object targ )
-			{
-				bool foundAnyone = false;
+            hiddenMobiles.ForEach(mobile =>
+            {
+                mobile.Hidden = false;
+                mobile.SendFailureLocalOverHeadMessage(500814); // You have been revealed!
+                from.SendSuccessPrivateOverHeadMessage(mobile, "You found someone!");
+            });
 
-				Point3D p;
-				if ( targ is Mobile )
-					p = ((Mobile)targ).Location;
-				else if ( targ is Item )
-					p = ((Item)targ).Location;
-				else if ( targ is IPoint3D )
-					p = new Point3D( (IPoint3D)targ );
-				else 
-					p = src.Location;
+            var itemEable = from.GetItemsInRange(range);
+            foreach (var item in itemEable)
+            {
+                if (item is BaseTrap || item is TrapableContainer container && container.TrapType != TrapType.None)
+                {
+                    item.OnSingleClick(from);
+                    item.LabelTo(from, 500851); // [trapped]
+                }
+            }
 
-				double srcSkill = src.Skills[SkillName.DetectHidden].Value;
-				int range = (int)(srcSkill / 10.0);
+            var found = hiddenMobiles.Count + itemEable.Count();
+            
+            if(found == 0)
+                from.SendFailureMessage(500817); // You can see nothing hidden there.
+            
+            itemEable.Free();
 
-				if ( !src.CheckSkill( SkillName.DetectHidden, 0.0, 100.0 ) )
-					range /= 2;
+            return Delay;
+        }
 
-				BaseHouse house = BaseHouse.FindHouseAt( p, src.Map, 16 );
+        private static bool TryDetect(Mobile finder, Mobile hider)
+        {
+            if (!finder.Hidden || finder == hider)
+                return false;
 
-				bool inHouse = house != null && house.IsFriend( src );
+            var finderSkill = finder.Skills.DetectHidden.Value * finder.GetClassModifier(SkillName.DetectHidden);
+            var hiderSkill = hider.Skills.DetectHidden.Value * hider.GetClassModifier(SkillName.DetectHidden);
 
-				if ( inHouse )
-					range = 22;
+            var chance = finderSkill - (hiderSkill / 2);
 
-				if ( range > 0 )
-				{
-					IPooledEnumerable inRange = src.Map.GetMobilesInRange( p, range );
-
-					foreach ( Mobile trg in inRange )
-					{
-						if ( trg.Hidden && src != trg )
-						{
-							double ss = srcSkill + Utility.Random( 21 ) - 10;
-							double ts = trg.Skills[SkillName.Hiding].Value + Utility.Random( 21 ) - 10;
-
-							if ( src.AccessLevel >= trg.AccessLevel && ( ss >= ts || inHouse && house.IsInside( trg ) ) )
-							{
-								trg.RevealingAction();
-								trg.SendLocalizedMessage( 500814 ); // You have been revealed!
-								foundAnyone = true;
-							}
-						}
-					}
-
-					inRange.Free();
-				}
-
-				if ( !foundAnyone )
-				{
-					src.SendLocalizedMessage( 500817 ); // You can see nothing hidden there.
-				}
-			}
-		}
-	}
+            return Utility.RandomMinMax(1, 100) < chance;
+        }
+    }
 }

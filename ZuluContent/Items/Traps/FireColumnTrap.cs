@@ -71,7 +71,8 @@ namespace Server.Items
 
             if (from.Alive && CheckRange(from.Location, 0))
             {
-                SpellHelper.Damage(Utility.RandomMinMax(MinDamage, MaxDamage), from, from, null, TimeSpan.FromSeconds(0.5));
+                SpellHelper.Damage(Utility.RandomMinMax(MinDamage, MaxDamage), from, from, null,
+                    TimeSpan.FromSeconds(0.5));
 
                 if (!WarningFlame)
                     DoEffect();
@@ -105,7 +106,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             switch (version)
             {

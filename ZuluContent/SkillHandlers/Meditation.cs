@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Items;
@@ -7,61 +8,56 @@ using Server.Network;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    class Meditation
+    class Meditation : BaseSkillHandler
     {
-        private static readonly TimeSpan DefaultDelay = ZhConfig.Skills.Entries[SkillName.Meditation].Delay;
-        
-        public static void Initialize()
-        {
-            SkillInfo.Table[(int)SkillName.Meditation].Callback = OnUse;
-        }
-        
-        public static TimeSpan OnUse(Mobile mobile)
+        public override SkillName Skill { get; } = SkillName.Meditation;
+
+        public override async Task<TimeSpan> OnUse(Mobile mobile)
         {
             mobile.RevealingAction();
 
             if (mobile.Mana >= mobile.ManaMax)
             {
                 mobile.SendSuccessMessage(501846); // You are at peace.
-                return DefaultDelay;
+                return Delay;
             }
 
             if (mobile.Poisoned)
             {
                 mobile.SendFailureMessage("You can't meditate while poisoned.");
-                return DefaultDelay;
+                return Delay;
             }
 
             if (mobile.Warmode)
             {
                 mobile.SendFailureMessage("You can't meditate in war mode.");
-                return DefaultDelay;
+                return Delay;
             }
 
             if (!SpellHelper.CheckValidHands(mobile))
             {
                 mobile.SendFailureMessage(502626); // Your hands must be free to cast spells or meditate.
-                return DefaultDelay;
+                return Delay;
             }
             
             if (GetMagicEfficiencyModifier(mobile) <= 0)
             {
                 mobile.SendFailureMessage("Regenerative forces cannot penetrate your armor.");
-                return DefaultDelay;
+                return Delay;
             }
             
             if (!mobile.ShilCheckSkill(SkillName.Meditation))
             {
                 mobile.SendFailureMessage("You cannot focus your concentration.");
-                return DefaultDelay;
+                return Delay;
             }
             
             mobile.PublicOverheadMessage(MessageType.Regular, 0x3B2, true, "*Meditating*");
             mobile.SendSuccessMessage(501851); // You enter a meditative trance.
-            mobile.Meditating = true;
 
             mobile.PlaySound(0xF9);
                 
@@ -69,12 +65,41 @@ namespace Server.SkillHandlers
             var interval = 5.0;
 
             mobile.FireHook(h => h.OnMeditation(mobile, ref regenBase, ref interval));
+            var intervalTimespan = TimeSpan.FromSeconds(interval);
+
+            var shouldBreakConcentration = GetShouldBreakConcentration(mobile);
+
+            mobile.Meditating = true;
+            while (mobile.Mana < mobile.ManaMax && mobile.Meditating && !shouldBreakConcentration())
+            {
+                await Timer.Pause(intervalTimespan);
                 
-            new InternalTimer( mobile, regenBase, TimeSpan.FromSeconds(interval)).Start();
-            return TimeSpan.FromSeconds(10.0);
+                if (!mobile.Meditating)
+                    break;
+
+                var modifier = GetMagicEfficiencyModifier(mobile);
+                
+                if (modifier > 0)
+                {
+                    var restored = (int)(regenBase * modifier / 100);
+                    if (restored >= 0)
+                    {
+                        mobile.Mana += restored;
+                    }
+                    else
+                    {
+                        mobile.SendFailureMessage("Regenerative forces cannot penetrate your armor.");
+                        break;
+                    }
+                }
+            }
+            mobile.Meditating = false;
+            mobile.SendLocalizedMessage(500134); // You stop meditating.
+
+            return Delay;
         }
-        
-        public static double GetMagicEfficiencyModifier(Mobile from)
+
+        private static double GetMagicEfficiencyModifier(Mobile from)
         {
             if (from is IZuluClassed classed)
             {
@@ -85,89 +110,33 @@ namespace Server.SkillHandlers
             return 0;
         }
         
-        private class InternalTimer : Timer
+        private static Func<bool> GetShouldBreakConcentration(Mobile mobile)
         {
-            private readonly Mobile m_Mobile;
-            private readonly int m_RegenBase;
-            private readonly int m_StartHits;
-            private readonly Point3D m_StartLocation;
-
-            public InternalTimer(Mobile mobile, int regenBase, TimeSpan interval) : base(interval, interval)
+            var startHits = mobile.Hits;
+            var startLocation = mobile.Location;
+            
+            return () =>
             {
-                m_Mobile = mobile;
-                m_RegenBase = regenBase;
-                m_StartLocation = mobile.Location;
-                m_StartHits = mobile.Hits;
-                Priority = TimerPriority.TwoFiftyMS;
-            }
-
-            private bool ShouldBreakConcentration()
-            {
-                if (m_Mobile.Location != m_StartLocation)
+                if (mobile.Location != startLocation)
                     return true;
 
-                if (m_Mobile.Mana == m_Mobile.ManaMax)
+                if (mobile.Mana == mobile.ManaMax)
                     return true;
 
-                if (m_Mobile.Poisoned)
+                if (mobile.Poisoned)
                     return true;
 
-                if (m_Mobile.Warmode)
+                if (mobile.Warmode)
                     return true;
 
-                if (!SpellHelper.CheckValidHands(m_Mobile))
+                if (!SpellHelper.CheckValidHands(mobile))
                     return true;
 
-                if (m_Mobile.Hits < m_StartHits)
+                if (mobile.Hits < startHits)
                     return true;
 
                 return false;
-            }
-
-            protected override void OnTick()
-            {
-                if (ShouldBreakConcentration())
-                {
-                    m_Mobile.DisruptiveAction();
-                    m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;
-                }
-
-                if (!m_Mobile.Meditating)
-                {
-                    Stop();
-                    return;
-                }
-                
-                var modifier = GetMagicEfficiencyModifier(m_Mobile);
-
-                if (modifier > 0)
-                {
-                    var restored = (int)(m_RegenBase * modifier / 100);
-                    if (restored >= 0)
-                    {
-                        m_Mobile.Mana += restored;
-                    }
-                    else
-                    {
-                        m_Mobile.SendFailureMessage("Regenerative forces cannot penetrate your armor.");
-                        m_Mobile.DisruptiveAction();
-                        m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;;
-                        Stop();
-                        return;
-                    }
-                }
-
-                if (m_Mobile.Mana == m_Mobile.ManaMax)
-                {
-                    m_Mobile.DisruptiveAction();
-                    m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds;;
-                    Stop();
-                    return;
-                }
-
-                // Delay skill use long enough for the next meditation tick
-                m_Mobile.NextSkillTime = Core.TickCount + (int)DefaultDelay.TotalMilliseconds * 2;
-            }
+            };
         }
     }
 }

@@ -27,21 +27,18 @@ using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Server.Mobiles
 {
-    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted, IBuffable, IElementalResistible
+    public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted, IBuffable,
+        IElementalResistible
     {
         private class CountAndTimeStamp
         {
             private int m_Count;
-            private DateTime m_Stamp;
 
             public CountAndTimeStamp()
             {
             }
 
-            public DateTime TimeStamp
-            {
-                get { return m_Stamp; }
-            }
+            public DateTime TimeStamp { get; private set; }
 
             public int Count
             {
@@ -49,35 +46,20 @@ namespace Server.Mobiles
                 set
                 {
                     m_Count = value;
-                    m_Stamp = DateTime.Now;
+                    TimeStamp = DateTime.Now;
                 }
             }
         }
 
-        private NpcGuild m_NpcGuild;
-        private DateTime m_NpcGuildJoinTime;
-        private TimeSpan m_NpcGuildGameTime;
-        private PlayerFlag m_Flags;
-        private int m_StepsTaken;
-        private int m_Profession;
-        private bool m_IsStealthing; // IsStealthing should be moved to Server.Mobiles
         private bool m_IgnoreMobiles; // IgnoreMobiles should be moved to Server.Mobiles
 
-        private DateTime m_LastOnline;
         private Guilds.RankDefinition m_GuildRank;
 
-        private int m_GuildMessageHue, m_AllianceMessageHue;
-
         private List<Mobile> m_AllFollowers;
-        private List<Mobile> m_RecentlyReported;
 
         #region Getters & Setters
 
-        public List<Mobile> RecentlyReported
-        {
-            get { return m_RecentlyReported; }
-            set { m_RecentlyReported = value; }
-        }
+        public List<Mobile> RecentlyReported { get; set; }
 
         public List<Mobile> AllFollowers
         {
@@ -102,39 +84,19 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int GuildMessageHue
-        {
-            get { return m_GuildMessageHue; }
-            set { m_GuildMessageHue = value; }
-        }
+        public int GuildMessageHue { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int AllianceMessageHue
-        {
-            get { return m_AllianceMessageHue; }
-            set { m_AllianceMessageHue = value; }
-        }
+        public int AllianceMessageHue { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public int Profession
-        {
-            get { return m_Profession; }
-            set { m_Profession = value; }
-        }
+        public int Profession { get; set; }
 
-        public int StepsTaken
-        {
-            get { return m_StepsTaken; }
-            set { m_StepsTaken = value; }
-        }
+        public int StepsTaken { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsStealthing // IsStealthing should be moved to Server.Mobiles
-        {
-            get { return m_IsStealthing; }
-            set { m_IsStealthing = value; }
-        }
-
+        public bool IsStealthing => AllowedStealthSteps > 0;
+        
         [CommandProperty(AccessLevel.GameMaster)]
         public bool IgnoreMobiles // IgnoreMobiles should be moved to Server.Mobiles
         {
@@ -150,25 +112,13 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public NpcGuild NpcGuild
-        {
-            get { return m_NpcGuild; }
-            set { m_NpcGuild = value; }
-        }
+        public NpcGuild NpcGuild { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime NpcGuildJoinTime
-        {
-            get { return m_NpcGuildJoinTime; }
-            set { m_NpcGuildJoinTime = value; }
-        }
+        public DateTime NpcGuildJoinTime { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime LastOnline
-        {
-            get { return m_LastOnline; }
-            set { m_LastOnline = value; }
-        }
+        public DateTime LastOnline { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public long LastMoved
@@ -177,21 +127,13 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public TimeSpan NpcGuildGameTime
-        {
-            get { return m_NpcGuildGameTime; }
-            set { m_NpcGuildGameTime = value; }
-        }
+        public TimeSpan NpcGuildGameTime { get; set; }
 
         #endregion
 
         #region PlayerFlags
 
-        public PlayerFlag Flags
-        {
-            get { return m_Flags; }
-            set { m_Flags = value; }
-        }
+        public PlayerFlag Flags { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool PagingSquelched
@@ -241,14 +183,8 @@ namespace Server.Mobiles
 
         #endregion
 
-        private DateTime m_AnkhNextUse;
-
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime AnkhNextUse
-        {
-            get { return m_AnkhNextUse; }
-            set { m_AnkhNextUse = value; }
-        }
+        public DateTime AnkhNextUse { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public TimeSpan DisguiseTimeLeft
@@ -256,14 +192,8 @@ namespace Server.Mobiles
             get { return DisguiseTimers.TimeRemaining(this); }
         }
 
-        private DateTime m_PeacedUntil;
-
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime PeacedUntil
-        {
-            get { return m_PeacedUntil; }
-            set { m_PeacedUntil = value; }
-        }
+        public DateTime PeacedUntil { get; set; }
 
         public QuestArrow QuestArrow
         {
@@ -387,15 +317,15 @@ namespace Server.Mobiles
 
         public bool GetFlag(PlayerFlag flag)
         {
-            return (m_Flags & flag) != 0;
+            return (Flags & flag) != 0;
         }
 
         public void SetFlag(PlayerFlag flag, bool value)
         {
             if (value)
-                m_Flags |= flag;
+                Flags |= flag;
             else
-                m_Flags &= ~flag;
+                Flags &= ~flag;
         }
 
         public static void Initialize()
@@ -719,7 +649,7 @@ namespace Server.Mobiles
         {
             if (mobile is PlayerMobile pm)
             {
-                pm.m_SessionStart = DateTime.Now;
+                pm.SessionStart = DateTime.Now;
                 pm.BedrollLogout = false;
                 pm.LastOnline = DateTime.Now;
             }
@@ -731,20 +661,13 @@ namespace Server.Mobiles
         {
             if (from is PlayerMobile pm)
             {
-                pm.m_GameTime += DateTime.Now - pm.m_SessionStart;
+                pm.m_GameTime += DateTime.Now - pm.SessionStart;
                 pm.SpeechLog = null;
                 pm.LastOnline = DateTime.Now;
                 pm.ClearQuestArrow();
             }
 
             DisguiseTimers.StopTimer(from);
-        }
-
-        public override void RevealingAction()
-        {
-            base.RevealingAction();
-
-            m_IsStealthing = false; // IsStealthing should be moved to Server.Mobiles
         }
 
         public override void OnSubItemAdded(Item item)
@@ -825,8 +748,9 @@ namespace Server.Mobiles
         }
 
         #region [Zulu] Resistances
+
         public EnchantmentDictionary Enchantments { get; private set; } = new();
-        
+
         #endregion
 
 
@@ -1194,14 +1118,14 @@ namespace Server.Mobiles
 
             HueMod = -1;
             NameMod = null;
-            
+
             DisguiseTimers.RemoveTimer(this);
 
             SkillHandlers.StolenItem.ReturnOnDeath(this, c);
 
-            if (m_PermaFlags.Count > 0)
+            if (PermaFlags.Count > 0)
             {
-                m_PermaFlags.Clear();
+                PermaFlags.Clear();
 
                 if (c is Corpse corpse)
                     corpse.Criminal = true;
@@ -1222,35 +1146,22 @@ namespace Server.Mobiles
             }
         }
 
-        private List<Mobile> m_PermaFlags;
-        private List<Mobile> m_VisList;
         private Hashtable m_AntiMacroTable;
         private TimeSpan m_GameTime;
         private TimeSpan m_ShortTermElapse;
         private TimeSpan m_LongTermElapse;
-        private DateTime m_SessionStart;
-        private DateTime m_LastEscortTime;
-        private SkillName m_Learning = (SkillName) (-1);
 
-        public SkillName Learning
-        {
-            get { return m_Learning; }
-            set { m_Learning = value; }
-        }
+        public SkillName Learning { get; set; } = (SkillName) (-1);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime LastEscortTime
-        {
-            get { return m_LastEscortTime; }
-            set { m_LastEscortTime = value; }
-        }
+        public DateTime LastEscortTime { get; set; }
 
         public PlayerMobile()
         {
-            m_VisList = new List<Mobile>();
-            m_PermaFlags = new List<Mobile>();
+            VisibilityList = new List<Mobile>();
+            PermaFlags = new List<Mobile>();
             m_AntiMacroTable = new Hashtable();
-            m_RecentlyReported = new List<Mobile>();
+            RecentlyReported = new List<Mobile>();
 
             m_GameTime = TimeSpan.Zero;
             m_ShortTermElapse = TimeSpan.FromHours(8.0);
@@ -1297,25 +1208,19 @@ namespace Server.Mobiles
 
         public PlayerMobile(Serial s) : base(s)
         {
-            m_VisList = new List<Mobile>();
+            VisibilityList = new List<Mobile>();
             m_AntiMacroTable = new Hashtable();
             InvalidateMyRunUO();
         }
 
-        public List<Mobile> VisibilityList
-        {
-            get { return m_VisList; }
-        }
+        public List<Mobile> VisibilityList { get; }
 
-        public List<Mobile> PermaFlags
-        {
-            get { return m_PermaFlags; }
-        }
+        public List<Mobile> PermaFlags { get; private set; }
 
         public override bool IsHarmfulCriminal(Mobile target)
         {
             if (SkillHandlers.Stealing.ClassicMode && target is PlayerMobile &&
-                ((PlayerMobile) target).m_PermaFlags.Count > 0)
+                ((PlayerMobile) target).PermaFlags.Count > 0)
             {
                 int noto = Notoriety.Compute(this, target);
 
@@ -1377,19 +1282,19 @@ namespace Server.Mobiles
                 case 29:
                 {
                     Enchantments = EnchantmentDictionary.Deserialize(reader);
-                    foreach (var buff in Enchantments.Values.Values.OfType<IBuff>()) 
+                    foreach (var buff in Enchantments.Values.Values.OfType<IBuff>())
                         BuffManager.TryAddBuff(buff);
                     goto case 28;
                 }
                 case 28:
                 {
-                    m_PeacedUntil = reader.ReadDateTime();
+                    PeacedUntil = reader.ReadDateTime();
 
                     goto case 27;
                 }
                 case 27:
                 {
-                    m_AnkhNextUse = reader.ReadDateTime();
+                    AnkhNextUse = reader.ReadDateTime();
 
                     goto case 26;
                 }
@@ -1401,8 +1306,8 @@ namespace Server.Mobiles
                 case 21:
                 case 20:
                 {
-                    m_AllianceMessageHue = reader.ReadEncodedInt();
-                    m_GuildMessageHue = reader.ReadEncodedInt();
+                    AllianceMessageHue = reader.ReadEncodedInt();
+                    GuildMessageHue = reader.ReadEncodedInt();
 
                     goto case 19;
                 }
@@ -1414,14 +1319,14 @@ namespace Server.Mobiles
                         rank = maxRank;
 
                     m_GuildRank = Guilds.RankDefinition.Ranks[rank];
-                    m_LastOnline = reader.ReadDateTime();
+                    LastOnline = reader.ReadDateTime();
                     goto case 18;
                 }
                 case 18:
                 case 17:
                 case 16:
                 {
-                    m_Profession = reader.ReadEncodedInt();
+                    Profession = reader.ReadEncodedInt();
                     goto case 15;
                 }
                 case 15:
@@ -1444,14 +1349,14 @@ namespace Server.Mobiles
                 case 9:
                 case 8:
                 {
-                    m_NpcGuild = (NpcGuild) reader.ReadInt();
-                    m_NpcGuildJoinTime = reader.ReadDateTime();
-                    m_NpcGuildGameTime = reader.ReadTimeSpan();
+                    NpcGuild = (NpcGuild) reader.ReadInt();
+                    NpcGuildJoinTime = reader.ReadDateTime();
+                    NpcGuildGameTime = reader.ReadTimeSpan();
                     goto case 7;
                 }
                 case 7:
                 {
-                    m_PermaFlags = reader.ReadEntityList<Mobile>();
+                    PermaFlags = reader.ReadEntityList<Mobile>();
                     ;
                     goto case 6;
                 }
@@ -1461,7 +1366,7 @@ namespace Server.Mobiles
                 case 3:
                 case 2:
                 {
-                    m_Flags = (PlayerFlag) reader.ReadInt();
+                    Flags = (PlayerFlag) reader.ReadInt();
                     goto case 1;
                 }
                 case 1:
@@ -1477,23 +1382,23 @@ namespace Server.Mobiles
                 }
             }
 
-            if (m_RecentlyReported == null)
-                m_RecentlyReported = new List<Mobile>();
+            if (RecentlyReported == null)
+                RecentlyReported = new List<Mobile>();
 
             // Professions weren't verified on 1.0 RC0
-            if (!CharacterCreation.VerifyProfession(m_Profession))
-                m_Profession = 0;
+            if (!CharacterCreation.VerifyProfession(Profession))
+                Profession = 0;
 
-            if (m_PermaFlags == null)
-                m_PermaFlags = new List<Mobile>();
+            if (PermaFlags == null)
+                PermaFlags = new List<Mobile>();
 
             if (m_GuildRank == null)
                 m_GuildRank =
                     Guilds.RankDefinition
                         .Member; //Default to member if going from older version to new version (only time it should be null)
 
-            if (m_LastOnline == DateTime.MinValue && Account != null)
-                m_LastOnline = ((Account) Account).LastLogin;
+            if (LastOnline == DateTime.MinValue && Account != null)
+                LastOnline = ((Account) Account).LastLogin;
 
             if (AccessLevel > AccessLevel.Player)
                 m_IgnoreMobiles = true;
@@ -1533,19 +1438,19 @@ namespace Server.Mobiles
             base.Serialize(writer);
 
             writer.Write((int) 29); // version
-            
+
             Enchantments.Serialize(writer);
 
-            writer.Write((DateTime) m_PeacedUntil);
-            writer.Write((DateTime) m_AnkhNextUse);
+            writer.Write((DateTime) PeacedUntil);
+            writer.Write((DateTime) AnkhNextUse);
 
-            writer.WriteEncodedInt(m_AllianceMessageHue);
-            writer.WriteEncodedInt(m_GuildMessageHue);
+            writer.WriteEncodedInt(AllianceMessageHue);
+            writer.WriteEncodedInt(GuildMessageHue);
 
             writer.WriteEncodedInt(m_GuildRank.Rank);
-            writer.Write(m_LastOnline);
+            writer.Write(LastOnline);
 
-            writer.WriteEncodedInt(m_Profession);
+            writer.WriteEncodedInt(Profession);
 
             bool useMods = HairItemIdReal != -1 || FacialHairItemIdReal != -1;
 
@@ -1559,13 +1464,13 @@ namespace Server.Mobiles
                 writer.Write((int) FacialHairHueReal);
             }
 
-            writer.Write((int) m_NpcGuild);
-            writer.Write((DateTime) m_NpcGuildJoinTime);
-            writer.Write((TimeSpan) m_NpcGuildGameTime);
+            writer.Write((int) NpcGuild);
+            writer.Write((DateTime) NpcGuildJoinTime);
+            writer.Write((TimeSpan) NpcGuildGameTime);
 
-            writer.Write(m_PermaFlags);
+            writer.Write(PermaFlags);
 
-            writer.Write((int) m_Flags);
+            writer.Write((int) Flags);
 
             writer.Write(m_LongTermElapse);
             writer.Write(m_ShortTermElapse);
@@ -1596,10 +1501,7 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime SessionStart
-        {
-            get { return m_SessionStart; }
-        }
+        public DateTime SessionStart { get; private set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public TimeSpan GameTime
@@ -1607,7 +1509,7 @@ namespace Server.Mobiles
             get
             {
                 if (NetState != null)
-                    return m_GameTime + (DateTime.Now - m_SessionStart);
+                    return m_GameTime + (DateTime.Now - SessionStart);
                 else
                     return m_GameTime;
             }
@@ -1615,7 +1517,7 @@ namespace Server.Mobiles
 
         public override bool CanSee(Mobile m)
         {
-            if (m is PlayerMobile && ((PlayerMobile) m).m_VisList.Contains(this))
+            if (m is PlayerMobile && ((PlayerMobile) m).VisibilityList.Contains(this))
                 return true;
 
             return base.CanSee(m);
@@ -1639,31 +1541,19 @@ namespace Server.Mobiles
             DisguiseTimers.RemoveTimer(this);
         }
 
-        private bool m_BedrollLogout;
-
-        public bool BedrollLogout
-        {
-            get { return m_BedrollLogout; }
-            set { m_BedrollLogout = value; }
-        }
+        public bool BedrollLogout { get; set; }
 
         private QuestArrow m_QuestArrow;
 
         #region MyRunUO Invalidation
 
-        private bool m_ChangedMyRunUO;
-
-        public bool ChangedMyRunUO
-        {
-            get { return m_ChangedMyRunUO; }
-            set { m_ChangedMyRunUO = value; }
-        }
+        public bool ChangedMyRunUO { get; set; }
 
         public void InvalidateMyRunUO()
         {
-            if (!Deleted && !m_ChangedMyRunUO)
+            if (!Deleted && !ChangedMyRunUO)
             {
-                m_ChangedMyRunUO = true;
+                ChangedMyRunUO = true;
                 // Engines.MyRunUO.MyRunUO.QueueMobileUpdate( this );
             }
         }
@@ -1759,33 +1649,33 @@ namespace Server.Mobiles
         {
             if (hairId.HasValue)
             {
-                if(HairItemIdReal == -1)
+                if (HairItemIdReal == -1)
                     HairItemIdReal = HairItemID;
 
                 HairItemID = hairId.Value;
             }
-            
+
             if (hairHue.HasValue)
             {
-                if(HairHueReal == -1)
+                if (HairHueReal == -1)
                     HairHueReal = HairHue;
-                
+
                 HairHue = hairHue.Value;
             }
-            
+
             if (facialId.HasValue)
             {
-                if(FacialHairItemIdReal == -1)
+                if (FacialHairItemIdReal == -1)
                     FacialHairItemIdReal = FacialHairItemID;
-                
+
                 FacialHairItemID = facialId.Value;
             }
-            
+
             if (facialHue.HasValue)
             {
-                if(FacialHairHueReal == -1)
+                if (FacialHairHueReal == -1)
                     FacialHairHueReal = FacialHairHue;
-                
+
                 FacialHairHue = facialHue.Value;
             }
         }
@@ -1797,19 +1687,19 @@ namespace Server.Mobiles
                 HairItemID = HairItemIdReal;
                 HairItemIdReal = -1;
             }
-            
+
             if (HairHueReal > -1)
             {
                 HairHue = HairHueReal;
                 HairHueReal = -1;
             }
-            
+
             if (FacialHairItemIdReal > -1)
             {
                 FacialHairItemID = FacialHairItemIdReal;
                 FacialHairItemIdReal = -1;
             }
-            
+
             if (FacialHairHueReal > -1)
             {
                 FacialHairHue = FacialHairHueReal;
@@ -1821,7 +1711,7 @@ namespace Server.Mobiles
         public int HairHueReal { get; private set; } = -1;
         public int FacialHairItemIdReal { get; private set; } = -1;
         public int FacialHairHueReal { get; private set; } = -1;
-        
+
         #endregion
 
         #region Young system
@@ -1910,15 +1800,14 @@ namespace Server.Mobiles
         }
 
         #endregion
+
         #region BuffManager
 
         private BuffManager m_BuffManager;
         public BuffManager BuffManager => m_BuffManager ??= new BuffManager(this);
-        
-        
 
         #endregion
-        
+
         #region ZuluClass
 
         private ZuluClass m_ZuluClass;
@@ -1950,28 +1839,40 @@ namespace Server.Mobiles
         #endregion
 
         #region IElementalResistible
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int WaterResist => this.GetResist(ElementalType.Water);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int AirResist => this.GetResist(ElementalType.Air);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int PhysicalResist => this.GetResist(ElementalType.Physical);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int FireResist => this.GetResist(ElementalType.Fire);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int EarthResist => this.GetResist(ElementalType.Earth);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int NecroResist => this.GetResist(ElementalType.Necro);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int ParalysisProtection => this.GetResist(ElementalType.Paralysis);
+
         [CommandProperty(AccessLevel.GameMaster)]
         public int HealingBonus => this.GetResist(ElementalType.HealingBonus);
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public PoisonLevel PoisonImmunity => (PoisonLevel)this.GetResist(ElementalType.Poison);
+        public PoisonLevel PoisonImmunity => (PoisonLevel) this.GetResist(ElementalType.Poison);
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicImmunity => (SpellCircle)this.GetResist(ElementalType.MagicImmunity);
+        public SpellCircle MagicImmunity => (SpellCircle) this.GetResist(ElementalType.MagicImmunity);
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicReflection => (SpellCircle)this.GetResist(ElementalType.MagicReflection);
+        public SpellCircle MagicReflection => (SpellCircle) this.GetResist(ElementalType.MagicReflection);
+
         #endregion
     }
 }

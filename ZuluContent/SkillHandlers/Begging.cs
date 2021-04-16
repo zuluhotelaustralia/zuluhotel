@@ -43,7 +43,7 @@ namespace Server.SkillHandlers
             Range = 1,
         };
 
-        public override SkillName Skill { get; } = SkillName.Begging;
+        public override SkillName Skill => SkillName.Begging;
 
         public override async Task<TimeSpan> OnUse(Mobile from)
         {

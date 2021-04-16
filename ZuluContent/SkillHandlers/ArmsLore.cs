@@ -10,7 +10,7 @@ namespace Server.SkillHandlers
 {
     public class ArmsLore : BaseSkillHandler
     {
-        public override SkillName Skill { get; } = SkillName.ArmsLore;
+        public override SkillName Skill => SkillName.ArmsLore;
 
         private static readonly TargetOptions TargetOptions = new()
         {
