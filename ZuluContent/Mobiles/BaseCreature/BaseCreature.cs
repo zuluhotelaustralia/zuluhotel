@@ -1478,6 +1478,7 @@ namespace Server.Mobiles
                     new MeleeAI(this),
                 AIType.AI_Thief => new ThiefAI(this),
                 AIType.AI_Familiar => new FamiliarAI(this),
+                AIType.AI_Spider => new SpiderAI(this),
                 _ => null
             };
         }

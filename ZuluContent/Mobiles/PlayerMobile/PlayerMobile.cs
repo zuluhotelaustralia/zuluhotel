@@ -15,6 +15,7 @@ using Server.Regions;
 using Server.Accounting;
 using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Engines.Races;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
 using Server.Spells;
@@ -28,7 +29,7 @@ using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 namespace Server.Mobiles
 {
     public partial class PlayerMobile : Mobile, IZuluClassed, IShilCheckSkill, IEnchanted, IBuffable,
-        IElementalResistible
+        IElementalResistible, IZuluRace
     {
         private class CountAndTimeStamp
         {
@@ -96,7 +97,7 @@ namespace Server.Mobiles
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool IsStealthing => AllowedStealthSteps > 0;
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public bool IgnoreMobiles // IgnoreMobiles should be moved to Server.Mobiles
         {
@@ -1144,6 +1145,31 @@ namespace Server.Mobiles
                 if (master != null)
                     killer = master;
             }
+
+            if (FreeDeath)
+            {
+                FreeDeath = false;
+
+                Resurrect();
+
+                if (Poison != null)
+                    CurePoison(this);
+
+                Hits = HitsMax;
+                Mana = ManaMax;
+                Stam = StamMax;
+                Warmode = false;
+                Hidden = true;
+
+                var pack = Backpack;
+
+                for (var i = 0; i < c.Items.Count; i++)
+                {
+                    pack.DropItem(c.Items[i]);
+                }
+
+                c.Delete();
+            }
         }
 
         private Hashtable m_AntiMacroTable;
@@ -1152,6 +1178,8 @@ namespace Server.Mobiles
         private TimeSpan m_LongTermElapse;
 
         public SkillName Learning { get; set; } = (SkillName) (-1);
+
+        public bool FreeDeath { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime LastEscortTime { get; set; }
@@ -1279,6 +1307,16 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 31:
+                {
+                    ZuluRaceType = (ZuluRaceType) reader.ReadInt();
+                    goto case 30;
+                }
+                case 30:
+                {
+                    FreeDeath = reader.ReadBool();
+                    goto case 29;
+                }
                 case 29:
                 {
                     Enchantments = EnchantmentDictionary.Deserialize(reader);
@@ -1437,7 +1475,11 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 29); // version
+            writer.Write((int) 31); // version
+            
+            writer.Write((int) ZuluRaceType);
+
+            writer.Write(FreeDeath);
 
             Enchantments.Serialize(writer);
 
@@ -1816,6 +1858,19 @@ namespace Server.Mobiles
         {
             get => m_ZuluClass ??= new ZuluClass(this);
         }
+
+        #endregion
+        
+        #region ZuluRace
+
+        private ZuluRace m_ZuluRace;
+
+        public ZuluRace ZuluRace
+        {
+            get => m_ZuluRace ??= new ZuluRace(this);
+        }
+
+        public ZuluRaceType ZuluRaceType { get; set; } = ZuluRaceType.None;
 
         #endregion
 

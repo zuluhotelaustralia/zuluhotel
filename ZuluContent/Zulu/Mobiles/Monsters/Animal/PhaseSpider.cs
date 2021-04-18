@@ -33,7 +33,7 @@ namespace Server.Mobiles
                 // spell_2 = harm,
                 // spell_3 = magicarrow,
                 // TrueColor = 25125,
-                AiType = AIType.AI_Melee /* killpcsTeleporter */,
+                AiType = AIType.AI_Spider /* killpcsTeleporter */,
                 AlwaysMurderer = true,
                 Body = 0x1c,
                 CorpseNameOverride = "corpse of a phase spider",

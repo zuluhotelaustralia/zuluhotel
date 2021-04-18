@@ -32,7 +32,7 @@ namespace Server.Mobiles
                 // spell_0 = flamestrike,
                 // spell_1 = Meteorswarm,
                 // TrueColor = 232,
-                AiType = AIType.AI_Melee /* firebreather */,
+                AiType = AIType.AI_Spider /* firebreather */,
                 AlwaysMurderer = true,
                 Body = 0x1c,
                 CorpseNameOverride = "corpse of a giant flaming spider",
