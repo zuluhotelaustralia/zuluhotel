@@ -1,107 +1,66 @@
 using System;
-using Server.Network;
-using Server.Multis;
+using System.Linq;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
+using Server.Spells;
+using ZuluContent.Multis;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class Hiding
-	{
-		private static bool m_CombatOverride;
+    public class Hiding : BaseSkillHandler
+    {
+        public override SkillName Skill { get; } = SkillName.Hiding;
 
-		public static bool CombatOverride
-		{
-			get{ return m_CombatOverride; }
-			set{ m_CombatOverride = value; }
-		}
+        public override async Task<TimeSpan> OnUse(Mobile mobile)
+        {
+            if (mobile.Spell != null || mobile.Target != null)
+            {
+                mobile.SendLocalizedMessage(501238); // You are busy doing something else and cannot hide.
+                return TimeSpan.FromSeconds(1.0);
+            }
+            
+            if (mobile.Warmode)
+            {
+                mobile.SendFailureLocalOverHeadMessage("You cannot hide while in War Mode.");
+                return Delay;
+            }
 
-		public static void Initialize()
-		{
-			SkillInfo.Table[21].Callback = OnUse;
-		}
+            var range = (int)(mobile.Skills[Skill].Value switch
+            {
+                > 130 => 1,
+                > 110 => 2,
+                > 90 => 3,
+                > 75 => 4,
+                > 60 => 5,
+                > 45 => 6,
+                > 30 => 8,
+                > 15 => 9,
+                _ => 10
+            } / mobile.GetClassModifier(Skill));
 
-		public static TimeSpan OnUse( Mobile m )
-		{
-			if ( m.Spell != null )
-			{
-				m.SendLocalizedMessage( 501238 ); // You are busy doing something else and cannot hide.
-				return TimeSpan.FromSeconds( 1.0 );
-			}
+            var eable = mobile.GetMobilesInRange(range);
+            var hostiles = eable.Any(m => m.Combatant == mobile);
+            eable.Free();
+            
+            if (hostiles)
+            {
+                mobile.SendFailureLocalOverHeadMessage("You cannot hide as there are hostiles in view!");
+                return Delay;
+            }
 
-			double bonus = 0.0;
+            if (mobile.GetMulti()?.IsMultiFriend(mobile) == true || mobile.ShilCheckSkill(Skill))
+            {
+                mobile.SendSuccessLocalOverHeadMessage(501240); // You have hidden yourself well.
+                mobile.TryAddBuff(new Invisibility());
+                return Delay;
+            }
+            
+            mobile.SendFailureLocalOverHeadMessage(501237);  // You can't seem to hide right now.
 
-			BaseHouse house = BaseHouse.FindHouseAt( m );
-
-			if ( house != null && house.IsFriend( m ) )
-			{
-				bonus = 100.0;
-			}
-			else
-			{
-				if ( house == null )
-					house = BaseHouse.FindHouseAt( new Point3D( m.X - 1, m.Y, 127 ), m.Map, 16 );
-
-				if ( house == null )
-					house = BaseHouse.FindHouseAt( new Point3D( m.X + 1, m.Y, 127 ), m.Map, 16 );
-
-				if ( house == null )
-					house = BaseHouse.FindHouseAt( new Point3D( m.X, m.Y - 1, 127 ), m.Map, 16 );
-
-				if ( house == null )
-					house = BaseHouse.FindHouseAt( new Point3D( m.X, m.Y + 1, 127 ), m.Map, 16 );
-
-				if ( house != null )
-					bonus = 50.0;
-			}
-
-			//int range = 18 - (int)(m.Skills[SkillName.Hiding].Value / 10);
-			int range = Math.Min( (int)((100 - m.Skills[SkillName.Hiding].Value)/2) + 8, 18 );	//Cap of 18 not OSI-exact, intentional difference
-
-			bool badCombat = !m_CombatOverride && m.Combatant != null && m.InRange( m.Combatant.Location, range ) && m.Combatant.InLOS( m );
-			bool ok = !badCombat;
-
-			if ( ok )
-			{
-				if ( !m_CombatOverride )
-				{
-					foreach ( Mobile check in m.GetMobilesInRange( range ) )
-					{
-						if ( check.InLOS( m ) && check.Combatant == m )
-						{
-							badCombat = true;
-							ok = false;
-							break;
-						}
-					}
-				}
-
-				ok = !badCombat && m.CheckSkill( SkillName.Hiding, 0.0 - bonus, 100.0 - bonus );
-			}
-
-			if ( badCombat )
-			{
-				m.RevealingAction();
-
-				m.LocalOverheadMessage( MessageType.Regular, 0x22, 501237 ); // You can't seem to hide right now.
-
-				return TimeSpan.FromSeconds( 1.0 );
-			}
-			else 
-			{
-				if ( ok )
-				{
-					m.Hidden = true;
-					m.Warmode = false;
-					m.LocalOverheadMessage( MessageType.Regular, 0x1F4, 501240 ); // You have hidden yourself well.
-				}
-				else
-				{
-					m.RevealingAction();
-
-					m.LocalOverheadMessage( MessageType.Regular, 0x22, 501241 ); // You can't seem to hide here.
-				}
-
-				return TimeSpan.FromSeconds( 10.0 );
-			}
-		}
-	}
+            return Delay;
+        }
+    }
 }

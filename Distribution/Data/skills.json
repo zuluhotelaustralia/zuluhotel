@@ -445,7 +445,13 @@
       "OnUseHandler": "Server.SkillHandlers.Discordance",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
-      "StatAdvancements": {}
+      "StatAdvancements": {
+        "Int": {
+          "Chance": 0.15,
+          "MinGain": 1,
+          "MaxGain": 8
+        }
+      }
     },
     "Herding": {
       "Delay": "00:00:00",

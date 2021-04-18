@@ -298,7 +298,7 @@ namespace Server.Misc
                 Console.WriteLine("Login: {0}: New character being created (account={1})", args.State,
                     args.Account.Username);
                 Console.WriteLine(" - Character: {0} (serial={1})", newChar.Name, newChar.Serial);
-                Console.WriteLine(" - Started: {0} {1} in {2}", city.City, city.Location, city.Map);
+                Console.WriteLine(" - Started: {0} {1} in {2}", city.City, city.Location, newChar.Map);
 
                 new WelcomeTimer(newChar).Start();
             }

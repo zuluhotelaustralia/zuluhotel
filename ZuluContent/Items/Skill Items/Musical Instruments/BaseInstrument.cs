@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Server.Network;
 using Server.Mobiles;
 using Server.Targeting;
@@ -176,18 +178,16 @@ namespace Server.Items
             }
         }
 
-        private static Hashtable m_Instruments = new Hashtable();
+        private static readonly Hashtable Instruments = new Hashtable();
 
         public static BaseInstrument GetInstrument(Mobile from)
         {
-            BaseInstrument item = m_Instruments[from] as BaseInstrument;
-
-            if (item == null)
+            if (!(Instruments[from] is BaseInstrument item))
                 return null;
 
             if (!item.IsChildOf(from.Backpack))
             {
-                m_Instruments.Remove(from);
+                Instruments.Remove(from);
                 return null;
             }
 
@@ -201,12 +201,11 @@ namespace Server.Items
 
         public static void PickInstrument(Mobile from, InstrumentPickedCallback callback)
         {
-            BaseInstrument instrument = GetInstrument(from);
+            var instrument = GetInstrument(from);
 
             if (instrument != null)
             {
-                if (callback != null)
-                    callback(from, instrument);
+                callback?.Invoke(from, instrument);
             }
             else
             {
@@ -215,11 +214,40 @@ namespace Server.Items
             }
         }
 
+        public static async Task<BaseInstrument> PickInstrumentAsync(Mobile from)
+        {
+            var instrument = GetInstrument(from);
+            if (instrument != null)
+                return instrument;
+            
+            from.SendLocalizedMessage(500617); // What instrument shall you play?
+            var target = new AsyncTarget<Item>(from, new TargetOptions
+            {
+                Range = 1,
+            });
+            
+            from.Target = target;
+
+            var (item, _) = await target;
+
+            switch (item)
+            {
+                case null:
+                    break;
+                case BaseInstrument targeted:
+                    SetInstrument(from, targeted);
+                    return targeted;
+                default:
+                    from.SendLocalizedMessage(500619); // That is not a musical instrument.
+                    break;
+            }
+
+            return null;
+        }
+
         public static void OnPickedInstrument(Mobile from, object targeted, object state)
         {
-            BaseInstrument instrument = targeted as BaseInstrument;
-
-            if (instrument == null)
+            if (!(targeted is BaseInstrument instrument))
             {
                 from.SendLocalizedMessage(500619); // That is not a musical instrument.
             }
@@ -227,9 +255,7 @@ namespace Server.Items
             {
                 SetInstrument(from, instrument);
 
-                InstrumentPickedCallback callback = state as InstrumentPickedCallback;
-
-                if (callback != null)
+                if (state is InstrumentPickedCallback callback)
                     callback(from, instrument);
             }
         }
@@ -332,7 +358,7 @@ namespace Server.Items
 
         public static void SetInstrument(Mobile from, BaseInstrument item)
         {
-            m_Instruments[from] = item;
+            Instruments[from] = item;
         }
 
         public BaseInstrument(int itemID, int wellSound, int badlySound) : base(itemID)
@@ -351,7 +377,7 @@ namespace Server.Items
             base.Serialize(writer);
 
             writer.Write((int) 4); // version
-            
+
             ICraftable.Serialize(writer, this);
 
             writer.WriteEncodedInt((int) m_Resource);
@@ -429,7 +455,7 @@ namespace Server.Items
 
             CheckReplenishUses();
         }
-        
+
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);
@@ -458,7 +484,7 @@ namespace Server.Items
                 from.SendLocalizedMessage(500119); // You must wait to perform another action
             }
         }
-        
+
         public int OnCraft(int mark, double quality, bool makersMark, Mobile from, CraftSystem craftSystem,
             Type typeRes,
             BaseTool tool, CraftItem craftItem, int resHue)
@@ -487,9 +513,7 @@ namespace Server.Items
 
         public static bool CheckMusicianship(Mobile m)
         {
-            m.CheckSkill(SkillName.Musicianship, 0.0, 120.0);
-
-            return m.Skills[SkillName.Musicianship].Value / 100 > Utility.RandomDouble();
+            return m.ShilCheckSkill(SkillName.Musicianship);
         }
 
         public void PlayInstrumentWell(Mobile from)

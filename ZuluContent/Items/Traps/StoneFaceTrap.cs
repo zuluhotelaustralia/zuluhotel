@@ -34,7 +34,7 @@ namespace Server.Items
             }
             set
             {
-                bool breathing = Breathing;
+                var breathing = Breathing;
 
                 ItemID = breathing ? GetFireID(value) : GetBaseID(value);
             }
@@ -123,13 +123,9 @@ namespace Server.Items
 
         public virtual void TriggerDamage()
         {
-            foreach (Mobile mob in GetMobilesInRange(1))
-            {
+            foreach (var mob in GetMobilesInRange(1))
                 if (mob.Alive && mob.AccessLevel == AccessLevel.Player)
-                {
                     SpellHelper.Damage(Utility.Dice(3, 15, 0), mob, mob, null, TimeSpan.FromTicks(1));
-                }
-            }
         }
 
         [Constructible]
@@ -148,7 +144,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             Breathing = false;
         }
@@ -180,7 +176,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Scripts.Zulu.Utilities
                     success ? ZhConfig.Messaging.SuccessHue : ZhConfig.Messaging.FailureHue,
                     def.String
                 );
-            else if (args is not null && def.IsNumber)
-                mobile.SendAsciiMessage(
+            else if (def.IsNumber)
+                mobile.SendLocalizedMessage(
                     def.Number,
                     args,
                     success ? ZhConfig.Messaging.SuccessHue : ZhConfig.Messaging.FailureHue
@@ -91,13 +91,13 @@ namespace Scripts.Zulu.Utilities
         
         
         public static void SendFailurePrivateOverHeadMessage(this Mobile mobile, Mobile above, TextDefinition text, string args = "") =>
-            SendPrivateOverhead(mobile, above, true, text, args);
+            SendPrivateOverhead(mobile, above, false, text, args);
 
         public static void SendFailurePublicOverHeadMessage(this Mobile mobile, TextDefinition text, string args = "") =>
-            SendPublicOverhead(mobile, true, text, args);
+            SendPublicOverhead(mobile, false, text, args);
         
         public static void SendFailureLocalOverHeadMessage(this Mobile mobile, TextDefinition text, string args = "") =>
-            SendLocalOverhead(mobile, true, text, args);
+            SendLocalOverhead(mobile, false, text, args);
         
         public static void SendFailureMessage(this Mobile mobile, TextDefinition text, string args = "") =>
             SendAscii(mobile, false, text, args);

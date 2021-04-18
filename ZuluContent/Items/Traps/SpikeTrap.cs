@@ -39,7 +39,7 @@ namespace Server.Items
             }
             set
             {
-                bool extended = Extended;
+                var extended = Extended;
 
                 ItemID = extended ? GetExtendedID(value) : GetBaseID(value);
             }
@@ -129,13 +129,9 @@ namespace Server.Items
             Effects.SendLocationEffect(Location, Map, GetBaseID(Type) + 1, 18, 3, GetEffectHue(), 0);
             Effects.PlaySound(Location, Map, 0x22C);
 
-            foreach (Mobile mob in GetMobilesInRange(0))
-            {
+            foreach (var mob in GetMobilesInRange(0))
                 if (mob.Alive)
-                {
                     SpellHelper.Damage(Utility.RandomMinMax(1, 6) * 6, mob, mob, null, TimeSpan.FromTicks(1));
-                }
-            }
 
             Timer.DelayCall(TimeSpan.FromSeconds(1.0), OnSpikeExtended);
 
@@ -170,7 +166,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             Extended = false;
         }

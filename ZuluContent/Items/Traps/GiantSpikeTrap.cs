@@ -38,9 +38,7 @@ namespace Server.Items
             Effects.SendLocationEffect(Location, Map, 0x1D99, 48, 2, GetEffectHue(), 0);
 
             if (from.Alive && CheckRange(from.Location, 0))
-            {
-                SpellHelper.Damage(Utility.Dice(10, 7, 0), from, from, null, TimeSpan.FromTicks(1));
-            }
+                SpellHelper.Damage(Utility.Dice(10, 7, 0), @from, @from, null, TimeSpan.FromTicks(1));
         }
 
         [Constructible]
@@ -59,7 +57,7 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

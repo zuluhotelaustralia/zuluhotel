@@ -13,7 +13,7 @@ namespace Server.SkillHandlers
 {
     public class AnimalLore : BaseSkillHandler
     {
-        public override SkillName Skill { get; } = SkillName.AnimalLore;
+        public override SkillName Skill => SkillName.AnimalLore;
 
         private static readonly TargetOptions TargetOptions = new()
         {

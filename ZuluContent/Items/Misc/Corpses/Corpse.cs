@@ -83,16 +83,16 @@ namespace Server.Items
 
         // For notoriety:
         private AccessLevel m_AccessLevel; // Which AccessLevel the owner had when he died
-        private Guild m_Guild; // Which Guild the owner was in when he died
+        private readonly Guild m_Guild; // Which Guild the owner was in when he died
         private int m_Kills; // How many kills the owner had when he died
 
         private DateTime m_TimeOfDeath; // What time was this corpse created?
 
-        private HairInfo m_Hair; // This contains the hair of the owner
-        private FacialHairInfo m_FacialHair; // This contains the facial hair of the owner
+        private readonly HairInfo m_Hair; // This contains the hair of the owner
+        private readonly FacialHairInfo m_FacialHair; // This contains the facial hair of the owner
 
         // For Forensics Evaluation
-        public string m_Forensicist; // Name of the first PlayerMobile who used Forensic Evaluation on the corpse
+        public string Forensicist; // Name of the first PlayerMobile who used Forensic Evaluation on the corpse
 
         public static readonly TimeSpan MonsterLootRightSacrifice = TimeSpan.Zero;
 
