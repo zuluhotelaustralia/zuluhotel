@@ -127,8 +127,8 @@ namespace ZuluContent.Zulu.Engines.Magic
             ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
             ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
             ElementalType.Poison => (int) (ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
-            ElementalType.MagicImmunity => (int) (ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0),
-            ElementalType.MagicReflection => (int) (ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
+            ElementalType.MagicImmunity => ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0,
+            ElementalType.MagicReflection => (ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
 

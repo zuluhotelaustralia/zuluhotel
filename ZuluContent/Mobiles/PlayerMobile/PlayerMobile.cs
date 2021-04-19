@@ -15,6 +15,7 @@ using Server.Regions;
 using Server.Accounting;
 using Server.Engines.Craft;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Packets;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
 using Server.Spells;
@@ -623,10 +624,17 @@ namespace Server.Mobiles
             }
         }
 
+        public override void OnConnected()
+        {
+            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
+        }
+
         public override void Delta(MobileDelta flag)
         {
             base.Delta(flag);
 
+            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
+            
             if ((flag & MobileDelta.Stat) != 0)
                 ValidateEquipment();
 
@@ -715,6 +723,8 @@ namespace Server.Mobiles
             if (NetState != null)
                 CheckLightLevels(false);
 
+            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
+
             InvalidateMyRunUO();
         }
 
@@ -731,6 +741,8 @@ namespace Server.Mobiles
 
             if (NetState != null)
                 CheckLightLevels(false);
+
+            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
 
             InvalidateMyRunUO();
         }
@@ -1837,6 +1849,7 @@ namespace Server.Mobiles
         }
 
         #endregion
+        
 
         #region IElementalResistible
 
@@ -1868,10 +1881,10 @@ namespace Server.Mobiles
         public PoisonLevel PoisonImmunity => (PoisonLevel) this.GetResist(ElementalType.Poison);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicImmunity => (SpellCircle) this.GetResist(ElementalType.MagicImmunity);
+        public SpellCircle MagicImmunity => this.GetResist(ElementalType.MagicImmunity);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicReflection => (SpellCircle) this.GetResist(ElementalType.MagicReflection);
+        public SpellCircle MagicReflection => this.GetResist(ElementalType.MagicReflection);
 
         #endregion
     }
