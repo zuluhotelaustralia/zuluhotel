@@ -87,6 +87,9 @@ namespace Server.Mobiles
         
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool HasBreath { get; set; } = false;
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool HasWebs { get; set; } = false;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual Poison HitPoison { get; set; } = null;

@@ -1146,10 +1146,12 @@ namespace Server.Mobiles
                     killer = master;
             }
 
-            if (FreeDeath)
-            {
-                FreeDeath = false;
+            var willDie = true;
 
+            this.FireHook(h => h.OnDeath(this, ref willDie));
+            
+            if (!willDie)
+            {
                 Resurrect();
 
                 if (Poison != null)
@@ -1176,10 +1178,8 @@ namespace Server.Mobiles
         private TimeSpan m_GameTime;
         private TimeSpan m_ShortTermElapse;
         private TimeSpan m_LongTermElapse;
-
+        
         public SkillName Learning { get; set; } = (SkillName) (-1);
-
-        public bool FreeDeath { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime LastEscortTime { get; set; }
@@ -1307,14 +1307,9 @@ namespace Server.Mobiles
 
             switch (version)
             {
-                case 31:
-                {
-                    ZuluRaceType = (ZuluRaceType) reader.ReadInt();
-                    goto case 30;
-                }
                 case 30:
                 {
-                    FreeDeath = reader.ReadBool();
+                    ZuluRaceType = (ZuluRaceType) reader.ReadInt();
                     goto case 29;
                 }
                 case 29:
@@ -1475,12 +1470,10 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 31); // version
+            writer.Write((int) 30); // version
             
             writer.Write((int) ZuluRaceType);
-
-            writer.Write(FreeDeath);
-
+            
             Enchantments.Serialize(writer);
 
             writer.Write((DateTime) PeacedUntil);

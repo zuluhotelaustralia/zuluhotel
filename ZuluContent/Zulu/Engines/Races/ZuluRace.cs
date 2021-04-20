@@ -76,6 +76,10 @@ namespace Scripts.Zulu.Engines.Races
         }
 
         #region Unused hooks
+        
+        public void OnDeath(Mobile victim, ref bool willDie)
+        {
+        }
 
         public void OnCheckMagicReflection(Mobile target, Spell spell, ref bool reflected)
         {

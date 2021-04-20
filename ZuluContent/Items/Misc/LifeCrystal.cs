@@ -43,12 +43,16 @@ namespace Server.Items
                     continue;
                 }
                 
-                if (playerMobile.FreeDeath)
+                if (!mobile.CanBuff(mobile, true, BuffIcon.GiftOfLife))
                     continue;
+
+                mobile.TryAddBuff(new DeathPardon()
+                {
+                    Value = true
+                });
                 
                 playerMobile.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
                 playerMobile.PlaySound(0x202);
-                playerMobile.FreeDeath = true;
                 playerMobile.SendSuccessMessage("Death pardons your next transgression into the nether realm...");
             }
 

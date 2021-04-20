@@ -32,6 +32,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
         public void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune);
 
         public void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount);
+        
+        public void OnDeath(Mobile victim, ref bool willDie);
 
         public void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance);
 

@@ -593,6 +593,10 @@ namespace Scripts.Zulu.Engines.Classes
 
         #region Unused hooks
 
+        public void OnDeath(Mobile victim, ref bool willDie)
+        {
+        }
+
         public void OnToolHarvestBonus(Mobile harvester, ref int amount)
         {
         }
