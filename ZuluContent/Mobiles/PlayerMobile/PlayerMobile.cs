@@ -624,11 +624,6 @@ namespace Server.Mobiles
             }
         }
 
-        public override void OnConnected()
-        {
-            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
-        }
-
         public override void Delta(MobileDelta flag)
         {
             base.Delta(flag);
