@@ -89,7 +89,7 @@ namespace Scripts.Zulu.Engines.Races
 
         #region Unused hooks
         
-        public void OnDeath(Mobile victim, ref bool willDie)
+        public void OnDeath(Mobile victim, ref bool resurrect)
         {
         }
 

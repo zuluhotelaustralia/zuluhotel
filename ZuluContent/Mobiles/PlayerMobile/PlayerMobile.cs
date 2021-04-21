@@ -1140,11 +1140,11 @@ namespace Server.Mobiles
                     killer = master;
             }
 
-            var willDie = true;
+            var resurrect = false;
 
-            this.FireHook(h => h.OnDeath(this, ref willDie));
+            this.FireHook(h => h.OnDeath(this, ref resurrect));
             
-            if (!willDie)
+            if (resurrect)
             {
                 Resurrect();
 

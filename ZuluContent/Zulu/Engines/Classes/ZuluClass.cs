@@ -593,7 +593,7 @@ namespace Scripts.Zulu.Engines.Classes
 
         #region Unused hooks
 
-        public void OnDeath(Mobile victim, ref bool willDie)
+        public void OnDeath(Mobile victim, ref bool resurrect)
         {
         }
 

@@ -18,11 +18,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             set;
         }
         
-        public override void OnDeath(Mobile victim, ref bool willDie)
+        public override void OnDeath(Mobile victim, ref bool resurrect)
         {
             if (Value)
             {
-                willDie = false;
+                resurrect = true;
             }
         }
 

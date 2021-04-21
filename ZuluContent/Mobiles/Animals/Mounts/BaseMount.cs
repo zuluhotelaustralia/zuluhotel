@@ -61,11 +61,11 @@ namespace Server.Mobiles
 
         public override bool OnBeforeDeath()
         {
-            var willDie = true;
+            var resurrect = false;
             if (Rider is PlayerMobile playerMobile)
-                playerMobile.FireHook(h => h.OnDeath(playerMobile, ref willDie));
+                playerMobile.FireHook(h => h.OnDeath(playerMobile, ref resurrect));
             
-            if (willDie)
+            if (!resurrect)
                 Rider = null;
 
             return base.OnBeforeDeath();
@@ -336,11 +336,11 @@ namespace Server.Mobiles
         {
             if (m_Mount != null)
             {
-                var willDie = true;
+                var resurrect = false;
                 if (parent is PlayerMobile playerMobile)
-                    playerMobile.FireHook(h => h.OnDeath(playerMobile, ref willDie));
+                    playerMobile.FireHook(h => h.OnDeath(playerMobile, ref resurrect));
                 
-                if (willDie)
+                if (!resurrect)
                     m_Mount.Rider = null;
             }
 

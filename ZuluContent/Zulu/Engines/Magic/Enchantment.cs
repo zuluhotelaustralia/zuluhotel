@@ -91,7 +91,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
         
-        public virtual void OnDeath(Mobile victim, ref bool willDie)
+        public virtual void OnDeath(Mobile victim, ref bool resurrect)
         {
         }
 
