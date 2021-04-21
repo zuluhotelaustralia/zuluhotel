@@ -27,7 +27,8 @@ namespace Server.Items
                 
             playerMobile.SendSuccessMessage($"You are now the race of {playerMobile.ZuluRaceType.ToString()}");
 
-            playerMobile.MoveToWorld(new Point3D(1475, 1645, 20), Map.Felucca);
+            var raceAttrs = ZuluRace.Races[RaceType];
+            playerMobile.MoveToWorld(raceAttrs.Location, raceAttrs.Map);
             
             return false;
         }

@@ -20,27 +20,39 @@ namespace Scripts.Zulu.Engines.Races
             {
                 [ZuluRaceType.Human] = new()
                 {
-                    Hue = 0
+                    Hue = 0,
+                    Location = new (1475, 1645, 20),
+                    Map = Map.Felucca
                 },
                 [ZuluRaceType.Elf] = new()
                 {
-                    Hue = 770
+                    Hue = 770,
+                    Location = new (1475, 1645, 20),
+                    Map = Map.Felucca
                 },
                 [ZuluRaceType.DarkElf] = new()
                 {
-                    Hue = 33877
+                    Hue = 33877,
+                    Location = new (1475, 1645, 20),
+                    Map = Map.Felucca
                 },
                 [ZuluRaceType.Goblin] = new()
                 {
-                    Hue = 34186
+                    Hue = 34186,
+                    Location = new (1475, 1645, 20),
+                    Map = Map.Felucca
                 },
                 [ZuluRaceType.Barbarian] = new()
                 {
-                    Hue = 33804
+                    Hue = 33804,
+                    Location = new (1475, 1645, 20),
+                    Map = Map.Felucca
                 },
                 [ZuluRaceType.Dwarf] = new()
                 {
-                    Hue = 33888
+                    Hue = 33888,
+                    Location = new (1475, 1645, 20),
+                    Map = Map.Felucca
                 }
             };
 
