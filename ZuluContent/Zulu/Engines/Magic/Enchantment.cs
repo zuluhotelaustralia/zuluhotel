@@ -90,6 +90,10 @@ namespace ZuluContent.Zulu.Engines.Magic
         public virtual void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
         {
         }
+        
+        public virtual void OnDeath(Mobile victim, ref bool resurrect)
+        {
+        }
 
         public virtual void OnAnimalTaming(Mobile tamer, BaseCreature creature, ref int chance)
         {

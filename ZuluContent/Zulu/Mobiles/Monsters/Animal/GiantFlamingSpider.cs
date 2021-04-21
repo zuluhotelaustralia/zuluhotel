@@ -44,6 +44,7 @@ namespace Server.Mobiles
                 FightMode = FightMode.Aggressor,
                 FightRange = 1,
                 HasBreath = true,
+                HasWebs = true,
                 HitPoison = Poison.Regular,
                 HitsMax = 250,
                 Hue = 232,

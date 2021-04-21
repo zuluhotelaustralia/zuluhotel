@@ -343,14 +343,15 @@ namespace Server.Mobiles
 
             if (DateTime.Now - m_LastRestock > RestockDelay)
                 Restock();
-
-            int count = 0;
+            
             List<BuyItemState> list;
             IBuyItemInfo[] buyInfo = this.GetBuyInfo();
             IShopSellInfo[] sellInfo = this.GetSellInfo();
 
             list = new List<BuyItemState>(buyInfo.Length);
             Container cont = this.BuyPack;
+            
+            var opls = new List<ObjectPropertyList>();
 
             for (int idx = 0; idx < buyInfo.Length; idx++)
             {
@@ -365,7 +366,11 @@ namespace Server.Mobiles
 
                 list.Add(new BuyItemState(buyItem.Name, cont.Serial, disp == null ? (Serial) 0x7FC0FFEE : disp.Serial,
                     buyItem.Price, buyItem.Amount, buyItem.ItemID, buyItem.Hue));
-                count++;
+                
+                if (disp is IPropertyListObject obj)
+                {
+                    opls.Add(obj.PropertyList);
+                }
             }
 
             List<Item> playerItems = cont.Items;
@@ -402,7 +407,7 @@ namespace Server.Mobiles
                 {
                     list.Add(
                         new BuyItemState(name, cont.Serial, item.Serial, price, item.Amount, item.ItemID, item.Hue));
-                    count++;
+                    opls.Add(item.PropertyList);
                 }
             }
 
@@ -425,6 +430,11 @@ namespace Server.Mobiles
                 from.NetState.SendVendorBuyList(this, list);
                 from.NetState.SendDisplayBuyList(Serial);
                 from.NetState.SendMobileStatus(from); // make sure their gold amount is sent
+                
+                for (var i = 0; i < opls.Count; ++i)
+                {
+                    from.NetState?.Send(opls[i].Buffer);
+                }
 
                 SayTo(from, 500186); // Greetings.  Have a look around.
             }

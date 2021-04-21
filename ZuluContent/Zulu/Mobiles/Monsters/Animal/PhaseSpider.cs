@@ -44,6 +44,7 @@ namespace Server.Mobiles
                 Female = false,
                 FightMode = FightMode.Aggressor,
                 FightRange = 1,
+                HasWebs = true,
                 HitPoison = Poison.Regular,
                 HitsMax = 250,
                 Hue = 25125,

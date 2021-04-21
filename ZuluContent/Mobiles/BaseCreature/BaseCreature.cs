@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Engines.Magic;
@@ -204,7 +205,7 @@ namespace Server.Mobiles
 
         #region Breath ability, like dragon fire breath
 
-        private DateTime m_NextBreathTime;
+        private long m_NextBreathTime;
 
         // Base damage given is: CurrentHitPoints * BreathDamageScalar
         public virtual double BreathDamageScalar
@@ -373,7 +374,20 @@ namespace Server.Mobiles
         }
 
         #endregion
+        
+        #region Spitting web ability
+        
+        public virtual double SpitWebMinDelay
+        {
+            get { return 10.0; }
+        }
 
+        public virtual double SpitWebMaxDelay
+        {
+            get { return 20.0; }
+        }
+        
+        #endregion
 
         #region Flee!!!
 
@@ -3559,6 +3573,24 @@ namespace Server.Mobiles
 
             return true;
         }
+        
+        public virtual async Task SpitWeb(Mobile target)
+        {
+            Say("The spider spits a web!");
+
+            var location = target.Location;
+            
+            await Timer.Pause(300);
+
+            var web = new SpiderWeb(location, target.Map, TimeSpan.FromMinutes(2));
+            
+            MovingParticles(web, 0xEE4, 7, 0, false, true, 3043, 4043, 0x211);
+
+            if (target.Location == location)
+            {
+                SpiderWeb.Stick(target);
+            }
+        }
 
         private static bool EnableRummaging = true;
 
@@ -3570,7 +3602,14 @@ namespace Server.Mobiles
         private const double MinutesToNextChanceMin = 0.25;
         private const double MinutesToNextChanceMax = 0.75;
 
-        private DateTime m_NextRummageTime;
+        private long m_NextRummageTime;
+
+        private long m_NextSpitWebTime;
+        
+        public virtual bool CanSpitWebs
+        {
+            get { return HasWebs && !Summoned; }
+        }
 
         public virtual bool CanBreath
         {
@@ -3772,7 +3811,7 @@ namespace Server.Mobiles
 
         #region Damaging Aura
 
-        private DateTime m_NextAura;
+        private long m_NextAura;
 
         public virtual bool HasAura
         {
@@ -3834,7 +3873,7 @@ namespace Server.Mobiles
 
         public virtual void OnThink()
         {
-            if (EnableRummaging && CanRummageCorpses && !Summoned && !Controlled && DateTime.Now >= m_NextRummageTime)
+            if (EnableRummaging && CanRummageCorpses && !Summoned && !Controlled && Core.TickCount >= m_NextRummageTime)
             {
                 double min, max;
 
@@ -3850,25 +3889,42 @@ namespace Server.Mobiles
                 }
 
                 double delay = min + Utility.RandomDouble() * (max - min);
-                m_NextRummageTime = DateTime.Now + TimeSpan.FromMinutes(delay);
+                m_NextRummageTime = Core.TickCount + (int) TimeSpan.FromMinutes(delay).TotalMilliseconds;
             }
 
-            if (CanBreath && DateTime.Now >= m_NextBreathTime
-            ) // tested: controlled dragons do breath fire, what about summoned skeletal dragons?
+            if (CanBreath && Core.TickCount >= m_NextBreathTime) // tested: controlled dragons do breath fire, what about summoned skeletal dragons?
             {
                 Mobile target = Combatant;
 
                 if (target != null && target.Alive && CanBeHarmful(target) && target.Map == Map &&
                     target.InRange(this, BreathRange) && InLOS(target) && !BardPacified)
                 {
-                    if (DateTime.Now - m_NextBreathTime < TimeSpan.FromSeconds(30) && Utility.RandomBool())
+                    if (Core.TickCount - m_NextBreathTime < (int) TimeSpan.FromSeconds(30).TotalMilliseconds && Utility.RandomBool())
                     {
                         BreathStart(target);
                     }
 
-                    m_NextBreathTime = DateTime.Now +
-                                       TimeSpan.FromSeconds(
-                                           BreathMinDelay + Utility.RandomDouble() * (BreathMaxDelay - BreathMinDelay));
+                    m_NextBreathTime = Core.TickCount +
+                                       (int) TimeSpan.FromSeconds(
+                                           BreathMinDelay + Utility.RandomDouble() * (BreathMaxDelay - BreathMinDelay)).TotalMilliseconds;
+                }
+            }
+            
+            if (CanSpitWebs && Core.TickCount >= m_NextSpitWebTime)
+            {
+                Mobile target = Combatant;
+
+                if (target != null && target.Alive && CanBeHarmful(target) && target.Map == Map &&
+                    InLOS(target) && !BardPacified && !target.Paralyzed)
+                {
+                    if (Core.TickCount - m_NextSpitWebTime < (int) TimeSpan.FromSeconds(30).TotalMilliseconds && Utility.RandomBool())
+                    {
+                        SpitWeb(target);
+                    }
+
+                    m_NextSpitWebTime =  Core.TickCount +
+                                         (int) TimeSpan.FromSeconds(
+                                             SpitWebMinDelay + Utility.RandomDouble() * (SpitWebMaxDelay - SpitWebMinDelay)).TotalMilliseconds;
                 }
             }
 
@@ -3913,10 +3969,10 @@ namespace Server.Mobiles
                 m_FailedReturnHome = 0;
             }
 
-            if (HasAura && DateTime.Now >= m_NextAura)
+            if (HasAura && Core.TickCount >= m_NextAura)
             {
                 AuraDamage();
-                m_NextAura = DateTime.Now + AuraInterval;
+                m_NextAura = Core.TickCount + (int) AuraInterval.TotalMilliseconds;
             }
         }
 

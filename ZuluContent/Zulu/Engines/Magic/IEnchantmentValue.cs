@@ -50,6 +50,7 @@ namespace ZuluContent.Zulu.Engines.Magic
     [Union(40, typeof(PoisonImmunity))]
     [Union(41, typeof(NightSight))]
     [Union(42, typeof(WraithForm))]
+    [Union(43, typeof(DeathPardon))]
     public interface IEnchantmentValue : IEnchantmentHook
     {
         public EnchantmentInfo Info { get; }
