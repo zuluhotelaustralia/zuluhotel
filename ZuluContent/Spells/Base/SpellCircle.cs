@@ -40,7 +40,7 @@ namespace Server.Spells
         public static implicit operator SpellCircle(string name) =>
             ZhConfig.Spells.SpellCircles.FirstOrDefault(kv => kv.Value.Name == name).Value;
 
-        public static implicit operator int(SpellCircle c) => c.EffectiveCircle;
+        public static implicit operator int(SpellCircle c) => c?.EffectiveCircle ?? 0;
 
         public override string ToString() => Name ?? Id.ToString();
 

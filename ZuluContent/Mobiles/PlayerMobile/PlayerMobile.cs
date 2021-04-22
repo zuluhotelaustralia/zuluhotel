@@ -11,6 +11,7 @@ using Server.Network;
 using Server.Regions;
 using Server.Accounting;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Packets;
 using Scripts.Zulu.Engines.Races;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
@@ -710,6 +711,8 @@ namespace Server.Mobiles
             if (NetState != null)
                 CheckLightLevels(false);
 
+            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
+
             InvalidateMyRunUO();
         }
 
@@ -726,6 +729,8 @@ namespace Server.Mobiles
 
             if (NetState != null)
                 CheckLightLevels(false);
+
+            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
 
             InvalidateMyRunUO();
         }
@@ -1879,6 +1884,7 @@ namespace Server.Mobiles
         }
 
         #endregion
+        
 
         #region IElementalResistible
 
@@ -1910,10 +1916,10 @@ namespace Server.Mobiles
         public PoisonLevel PoisonImmunity => (PoisonLevel) this.GetResist(ElementalType.Poison);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicImmunity => (SpellCircle) this.GetResist(ElementalType.MagicImmunity);
+        public SpellCircle MagicImmunity => this.GetResist(ElementalType.MagicImmunity);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicReflection => (SpellCircle) this.GetResist(ElementalType.MagicReflection);
+        public SpellCircle MagicReflection => this.GetResist(ElementalType.MagicReflection);
 
         #endregion
     }

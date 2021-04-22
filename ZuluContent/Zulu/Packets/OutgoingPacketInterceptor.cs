@@ -21,27 +21,23 @@ namespace Scripts.Zulu.Packets
         
         public static void Intercept(ReadOnlySpan<byte> input, CircularBuffer<byte> output, out int length)
         {
-            if (RewriteOutgoingMessagesToAscii)
+            switch (input[0])
             {
-                switch (input[0])
-                {
-                    case 0x1C:
-                        break;
-                    case 0xBF:
-                        if (input[4] == 0x10)
-                        {
-                            RewriteEquipmentInfo(input, output, out length);
-                            return;
-                        }
-                        break;
-                    case 0xAE:
+                case 0x1C:
+                    break;
+                case 0xBF:
+                    if (RewriteOutgoingMessagesToAscii && input[4] == 0x10)
+                        RewriteEquipmentInfo(input, output, out length);
+                    break;
+                case 0xAE:
+                    if (RewriteOutgoingMessagesToAscii) 
                         RewriteUnicodeMessage(input, output, out length);
-                        return;
-                    case 0xC1:
-                    case 0xCC:
+                    break;
+                case 0xC1:
+                case 0xCC:
+                    if (RewriteOutgoingMessagesToAscii) 
                         RewriteMessageLocalized(input, output, out length);
-                        return;
-                }
+                    break;
             }
 
             length = NetworkCompression.Compress(input, output);
