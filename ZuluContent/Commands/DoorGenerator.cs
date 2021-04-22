@@ -341,24 +341,22 @@ namespace Server
         [Description("Generates doors by analyzing the map. Slow.")]
         public static void DoorGen_OnCommand(CommandEventArgs e)
         {
-            Generate();
+            Generate(e.Mobile.Map);
         }
 
-        public static void Generate()
+        public static void Generate(Map map = null)
         {
             World.Broadcast(0x35, true, "Generating doors, please wait.");
 
             NetState.FlushAll();
 
-            m_Map = Map.Felucca;
+            m_Map = map ?? Map.Felucca;
             m_Count = 0;
 
             foreach (var t in m_BritRegions)
                 Generate(t);
-
-            int feluccaCount = m_Count;
             
-            World.Broadcast(0x35, true, $"Door generation complete. Felucca: {feluccaCount}");
+            World.Broadcast(0x35, true, $"Door generation complete. {m_Map.Name}: {m_Count}");
         }
 
         public static bool IsFrame(int id, int[] list)

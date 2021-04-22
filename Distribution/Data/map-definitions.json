@@ -60,6 +60,16 @@
     "rules": "TrammelRules"
   },
   {
+    "index": 6,
+    "id": 6,
+    "fileIndex": 6,
+    "name": "Shandalaar",
+    "width": 7168,
+    "height": 4096,
+    "season": 0,
+    "rules": "FeluccaRules"
+  },
+  {
     "index": 127,
     "id": 127,
     "fileIndex": 127,
