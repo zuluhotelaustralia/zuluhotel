@@ -8,15 +8,13 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     [MessagePackObject]
     public class HarvestBonus : Enchantment<HarvestBonusInfo>
     {
-        [IgnoreMember] private int m_Value = 0;
-
         [IgnoreMember] public override string AffixName => string.Empty;
 
         [Key(1)]
         public int Value
         {
-            get => m_Value;
-            set => m_Value = value;
+            get;
+            set;
         }
 
         public override void OnToolHarvestBonus(Mobile harvester, ref int amount)

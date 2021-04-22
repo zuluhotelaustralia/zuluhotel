@@ -104,6 +104,7 @@ namespace Server.Mobiles
         public CreatureProp ManaMaxSeed { get; init; } = 0;
         public CreatureProp StamMaxSeed { get; init; } = 0;
         public bool HasBreath { get; init; } = false;
+        public bool HasWebs { get; init; } = false;
         public Poison HitPoison { get; init; } = null;
         public bool CanSwim { get; init; } = false;
         public bool CanFly { get; init; } = false;

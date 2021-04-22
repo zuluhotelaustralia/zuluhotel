@@ -1,4 +1,5 @@
 using System;
+using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Mobiles
 {
@@ -60,7 +61,12 @@ namespace Server.Mobiles
 
         public override bool OnBeforeDeath()
         {
-            Rider = null;
+            var resurrect = false;
+            if (Rider is PlayerMobile playerMobile)
+                playerMobile.FireHook(h => h.OnDeath(playerMobile, ref resurrect));
+            
+            if (!resurrect)
+                Rider = null;
 
             return base.OnBeforeDeath();
         }
@@ -329,7 +335,14 @@ namespace Server.Mobiles
         public override DeathMoveResult OnParentDeath(Mobile parent)
         {
             if (m_Mount != null)
-                m_Mount.Rider = null;
+            {
+                var resurrect = false;
+                if (parent is PlayerMobile playerMobile)
+                    playerMobile.FireHook(h => h.OnDeath(playerMobile, ref resurrect));
+                
+                if (!resurrect)
+                    m_Mount.Rider = null;
+            }
 
             return DeathMoveResult.RemainEquipped;
         }
