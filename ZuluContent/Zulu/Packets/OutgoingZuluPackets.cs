@@ -3,6 +3,8 @@ using System.Buffers;
 using Server;
 using Server.Mobiles;
 using Server.Network;
+using Server.Spells;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Packets
 {
@@ -19,11 +21,20 @@ namespace Scripts.Zulu.Packets
                     Timer.DelayCall(TimeSpan.Zero, SendZuluPlayerStatus, player.NetState, player);
             }
 
-            EventSink.Connected += ZuluPlayerStatusEventHandler;
             EventSink.PlayerDeath += ZuluPlayerStatusEventHandler;
             EventSink.Login += ZuluPlayerStatusEventHandler;
+
+            static void OnBuffManagerAddRemove(Mobile mobile, IBuff buff)
+            {
+                if (buff is PoisonImmunity && mobile is PlayerMobile player)
+                    Timer.DelayCall(TimeSpan.Zero, SendZuluPlayerStatus, player.NetState, player);
+            }
+            
+            BuffManager.OnAddBuff += OnBuffManagerAddRemove;
+            BuffManager.OnRemoveBuff += OnBuffManagerAddRemove;
+
         }
-        
+
         public static void SendZuluPlayerStatus(NetState ns, PlayerMobile player)
         {
             if (ns == null || player == null || !ns.Version.SourceString.InsensitiveContains(ZuluClientSuffix))

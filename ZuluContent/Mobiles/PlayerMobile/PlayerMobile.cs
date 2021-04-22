@@ -628,8 +628,6 @@ namespace Server.Mobiles
         {
             base.Delta(flag);
 
-            OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
-            
             if ((flag & MobileDelta.Stat) != 0)
                 ValidateEquipment();
 

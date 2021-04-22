@@ -11,6 +11,11 @@ namespace Server.Spells
         private BuffTimer m_Timer;
         private readonly Mobile m_Parent;
         private readonly Dictionary<BuffIcon, IBuff> m_BuffTable = new();
+        
+        public static event Action<Mobile, IBuff> OnRemoveBuff;
+        private static void InvokeOnRemoveBuff(Mobile mobile, IBuff buff) => OnRemoveBuff?.Invoke(mobile, buff);
+        public static event Action<Mobile, IBuff> OnAddBuff;
+        private static void InvokeOnAddBuff(Mobile mobile, IBuff buff) => OnAddBuff?.Invoke(mobile, buff);
 
         public BuffManager(Mobile parent) => m_Parent = parent;
 
@@ -51,6 +56,7 @@ namespace Server.Spells
             {
                 b.OnBuffAdded(m_Parent);
                 b.SendAddBuffPacket(m_Parent);
+                InvokeOnAddBuff(m_Parent, b);
                 return true;
             }
 
@@ -69,6 +75,7 @@ namespace Server.Spells
                     m_Timer.Stop();
 
                 b.SendRemoveBuffPacket(m_Parent);
+                InvokeOnRemoveBuff(m_Parent, b);
             }
 
             return false;
