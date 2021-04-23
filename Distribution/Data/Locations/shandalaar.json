@@ -32,15 +32,15 @@
     {
       "name": "Dungeons",
       "locations": [
-        { "name": "Valor", "location": [2982, 818, 0] },
-        { "name": "Blood", "location": [2982, 818, 0] },
-        { "name": "Infernum", "location": [2982, 818, 0] },
-        { "name": "Nox", "location": [2982, 818, 0] },
-        { "name": "Havoc", "location": [2982, 818, 0] },
-        { "name": "Arcanum Magicae", "location": [2982, 818, 0] },
-        { "name": "Ignis", "location": [2982, 818, 0] },
-        { "name": "Vortex", "location": [2982, 818, 0] },
-        { "name": "Oceanum", "location": [2982, 818, 0] }
+        { "name": "Valor", "location": [5483, 898, 65] }, 
+        { "name": "Blood", "location": [5984, 44, 4] }, 
+        { "name": "Infernum", "location": [5241, 737, 20] }, 
+        { "name": "Nox", "location": [5679, 673, 0] }, 
+        { "name": "Havoc", "location": [5790, 924, 3] }, 
+        { "name": "Arcanum Magicae", "location": [5991, 477, 4] }, 
+        { "name": "Ignis", "location": [5711, 2213, 0] }, 
+        { "name": "Vortex", "location": [6707, 180, 0] }, 
+        { "name": "Oceanum", "location": [6328, 419, 80] }
       ]
     },
     {
