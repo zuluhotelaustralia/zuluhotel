@@ -68,7 +68,7 @@ namespace Server.Mobiles
         public virtual bool AlwaysAttackable => InitProperties?.AlwaysAttackable ?? false;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool TargetAcquireExhaustion => InitProperties.TargetAcquireExhaustion;
+        public virtual bool TargetAcquireExhaustion => InitProperties.TargetAcquireExhaustion ?? false;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual Type RiseCreatureType => InitProperties?.RiseCreatureType;
@@ -92,7 +92,7 @@ namespace Server.Mobiles
         public virtual bool HasWebs { get; set; } = false;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual Poison HitPoison { get; set; } = null;
+        public virtual Poison HitPoison { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double HitPoisonChance { get; } = 0.5;
@@ -101,13 +101,13 @@ namespace Server.Mobiles
         public virtual bool CanFly { get; set; } = false;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual InhumanSpeech SpeechType { get; set; } = null;
+        public virtual InhumanSpeech SpeechType { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual OppositionGroup OppositionGroup { get; set; } = null;
+        public virtual OppositionGroup OppositionGroup { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual TimeSpan ReacquireDelay { get; set; } = TimeSpan.FromSeconds(10.0);
+        public virtual TimeSpan ReacquireDelay { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual int TreasureMapLevel { get; set; } = -1;
@@ -155,8 +155,8 @@ namespace Server.Mobiles
                     m_ZuluClass = new ZuluClass(this);
                     if (InitProperties != null)
                     {
-                        m_ZuluClass.Type = InitProperties.ClassType;
-                        m_ZuluClass.Level = InitProperties.ClassLevel;
+                        m_ZuluClass.Type = InitProperties.ClassType ?? ZuluClassType.None;
+                        m_ZuluClass.Level = InitProperties.ClassLevel ?? 0;
                     }
                 }
 

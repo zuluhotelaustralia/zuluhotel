@@ -75,7 +75,7 @@ namespace Server.Mobiles
                 Str = 400,
                 Tamable = true,
                 VirtualArmor = 20,
-                WeaponAbility = new SpellStrike<CallLightningSpell>(),
+                WeaponAbility = new SpellStrike(typeof(CallLightningSpell)),
                 WeaponAbilityChance = 0.5
             });
         }

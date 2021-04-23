@@ -98,7 +98,7 @@ namespace Server.Mobiles
                 Str = 600,
                 Tamable = true,
                 VirtualArmor = 30,
-                WeaponAbility = new SpellStrike<GustOfAirSpell>(),
+                WeaponAbility = new SpellStrike(typeof(GustOfAirSpell)),
                 WeaponAbilityChance = 0.65
             });
         }

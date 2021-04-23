@@ -74,7 +74,7 @@ namespace Server.Mobiles
                 Str = 350,
                 Tamable = true,
                 VirtualArmor = 30,
-                WeaponAbility = new SpellStrike<Spells.Sixth.ExplosionSpell>(),
+                WeaponAbility = new SpellStrike(typeof(Spells.Sixth.ExplosionSpell)),
                 WeaponAbilityChance = 0.5
             });
         }

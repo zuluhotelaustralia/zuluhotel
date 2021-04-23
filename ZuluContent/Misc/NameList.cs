@@ -31,13 +31,30 @@ namespace Server
 
         public static NameList GetNameList(string type)
         {
-            m_Table.TryGetValue(type, out NameList n);
+            Table.TryGetValue(type.ToLowerInvariant(), out var n);
             return n;
         }
 
-        public static string RandomName(string type) => GetNameList(type)?.GetRandomName() ?? "";
+        public static string RandomName(string entry)
+        {
+            if (Table.TryGetValue(entry.ToLowerInvariant(), out var list))
+                return GetNameList(entry)?.GetRandomName();
 
-        private static readonly Dictionary<string, NameList> m_Table = new Dictionary<string, NameList>(StringComparer.OrdinalIgnoreCase);
+            try
+            {
+                list = Table.First(kv => entry.Contains(kv.Key, StringComparison.InvariantCultureIgnoreCase)).Value;
+            }
+            catch (InvalidOperationException)
+            {
+                list = GetNameList("male");
+            }
+
+
+            return list?.GetRandomName() ?? string.Empty;
+        }
+
+
+        private static readonly Dictionary<string, NameList> Table = new(StringComparer.OrdinalIgnoreCase);
 
         public static void Configure()
         {
@@ -48,33 +65,21 @@ namespace Server
             foreach (var nameList in nameLists)
             {
                 nameList.FixNames();
-                m_Table.Add(nameList.Type, nameList);
+                Table.Add(nameList.Type, nameList);
             }
         }
-        
-        public static void SubstituteCreatureName(BaseCreature c)
+
+        public static bool HasPlaceholder(string name)
         {
-            if (!c.Name.Contains(RandomNamePlaceholder) || !c.CorpseNameOverride.Contains(RandomNamePlaceholder))
-                return;
-
-            string value;
-            try
-            {
-                var pair = m_Table.First(
-                    kv => c.Name.Contains(kv.Key, StringComparison.InvariantCultureIgnoreCase) ||
-                          c.GetType().Name.Contains(kv.Key, StringComparison.InvariantCultureIgnoreCase)
-                );
-                value = pair.Value.GetRandomName();
-            }
-            catch (InvalidOperationException)
-            {
-                value = RandomName("male");
-            }
-
-            c.Name = c.Name.Replace(RandomNamePlaceholder, value, StringComparison.InvariantCultureIgnoreCase);
-
-            c.CorpseNameOverride = c.CorpseNameOverride.Replace(RandomNamePlaceholder, value,
-                StringComparison.InvariantCultureIgnoreCase);
+            return name != null && name.Contains(RandomNamePlaceholder, StringComparison.InvariantCulture);
+        }
+        
+        public static string SubstitutePlaceholderName(string name, string substitute)
+        {
+            if (!HasPlaceholder(name))
+                return name;
+            
+            return name.Replace(RandomNamePlaceholder, substitute, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private void FixNames()

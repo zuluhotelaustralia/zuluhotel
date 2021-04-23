@@ -99,7 +99,7 @@ namespace Server.Mobiles
                 Str = 500,
                 Tamable = true,
                 VirtualArmor = 40,
-                WeaponAbility = new SpellStrike<RisingFireSpell>(),
+                WeaponAbility = new SpellStrike(typeof(RisingFireSpell)),
                 WeaponAbilityChance = 0.5
             });
         }

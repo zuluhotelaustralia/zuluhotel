@@ -76,7 +76,7 @@ namespace Server.Mobiles
                 Str = 3000,
                 Tamable = false,
                 VirtualArmor = 20,
-                WeaponAbility = new SpellStrike<DecayingRaySpell>(),
+                WeaponAbility = new SpellStrike(typeof(DecayingRaySpell)),
                 WeaponAbilityChance = 1
             });
         }

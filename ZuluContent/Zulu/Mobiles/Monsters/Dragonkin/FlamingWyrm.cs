@@ -102,7 +102,7 @@ namespace Server.Mobiles
                 Str = 2800,
                 Tamable = true,
                 VirtualArmor = 100,
-                WeaponAbility = new SpellStrike<Spells.Seventh.FlameStrikeSpell>(),
+                WeaponAbility = new SpellStrike(typeof(Spells.Seventh.FlameStrikeSpell)),
                 WeaponAbilityChance = 0.65
             });
         }

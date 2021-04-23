@@ -90,7 +90,7 @@ namespace Server.Mobiles
                 Str = 1000,
                 Tamable = false,
                 VirtualArmor = 100,
-                WeaponAbility = new SpellStrike<Spells.Fourth.LightningSpell>(),
+                WeaponAbility = new SpellStrike(typeof(Spells.Fourth.LightningSpell)),
                 WeaponAbilityChance = 1
             });
         }

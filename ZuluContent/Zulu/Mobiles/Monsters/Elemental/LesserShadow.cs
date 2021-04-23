@@ -95,7 +95,7 @@ namespace Server.Mobiles
                 StamMaxSeed = 80,
                 Str = 300,
                 Tamable = false,
-                WeaponAbility = new SpellStrike<DarknessSpell>(),
+                WeaponAbility = new SpellStrike(typeof(DarknessSpell)),
                 WeaponAbilityChance = 1.0
             });
         }

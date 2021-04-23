@@ -68,8 +68,30 @@ namespace Server.Mobiles
         [CommandProperty(AccessLevel.GameMaster)]
         public bool SeeksHome { get; set; }
 
+        private string m_RandomName;
+        
+        public override string Name
+        {
+            get => base.Name;
+            set
+            {
+                base.Name = NameList.HasPlaceholder(value) 
+                    ? NameList.SubstitutePlaceholderName(value, m_RandomName ??= NameList.RandomName(value)) 
+                    : value;
+            }
+        }
+
         [CommandProperty(AccessLevel.GameMaster)]
-        public string CorpseNameOverride { get; set; }
+        public string CorpseNameOverride
+        {
+            get => m_CorpseNameOverride;
+            set
+            {
+                m_CorpseNameOverride = NameList.HasPlaceholder(value) 
+                    ? NameList.SubstitutePlaceholderName(value, m_RandomName ??= NameList.RandomName(value)) 
+                    : value;
+            }
+        }
 
         [CommandProperty(AccessLevel.GameMaster, AccessLevel.Administrator)]
         public bool IsStabled
@@ -1884,12 +1906,7 @@ namespace Server.Mobiles
 
             base.OnAfterDelete();
         }
-
-        public override void OnAfterNameChange(string oldName, string newName)
-        {
-            NameList.SubstituteCreatureName(this);
-        }
-
+        
         public void DebugSay(string text)
         {
             if (Debug)
@@ -4260,6 +4277,7 @@ namespace Server.Mobiles
         #region BuffManager
 
         private BuffManager m_BuffManager;
+        private string m_CorpseNameOverride;
         public BuffManager BuffManager => m_BuffManager ??= new BuffManager(this);
 
         #endregion

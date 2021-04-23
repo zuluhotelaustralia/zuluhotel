@@ -108,7 +108,7 @@ namespace Server.Mobiles
                 Str = 650,
                 Tamable = true,
                 VirtualArmor = 40,
-                WeaponAbility = new SpellStrike<WraithBreathSpell>(),
+                WeaponAbility = new SpellStrike(typeof(WraithBreathSpell)),
                 WeaponAbilityChance = 0.4
             });
         }

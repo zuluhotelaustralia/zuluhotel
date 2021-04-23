@@ -74,7 +74,7 @@ namespace Server.Mobiles
                 Tamable = false,
                 TargetAcquireExhaustion = true,
                 VirtualArmor = 60,
-                WeaponAbility = new SpellStrike<ControlUndeadSpell>(),
+                WeaponAbility = new SpellStrike(typeof(ControlUndeadSpell)),
                 WeaponAbilityChance = 1
             });
         }

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Server;
 
@@ -113,12 +111,10 @@ namespace Scripts.Zulu.Utilities
                 if (sourceProperty.PropertyType != targetProperty.PropertyType &&
                     !targetProperty.PropertyType.IsAssignableFrom(sourceProperty.PropertyType))
                 {
-                    bool hasImplicitMethod = (
-                        from method in sourceProperty.PropertyType.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                        where method.Name == "op_Implicit" && method.ReturnType == targetProperty.PropertyType ||
-                              method.Name == "op_Explicit" && method.ReturnType == targetProperty.PropertyType
-                        select method
-                    ).Any();
+                    var hasImplicitMethod = sourceProperty.PropertyType
+                        .GetMethods(BindingFlags.Static | BindingFlags.Public)
+                        .Any(method => method.Name == "op_Implicit" && method.ReturnType == targetProperty.PropertyType ||
+                                       method.Name == "op_Explicit" && method.ReturnType == targetProperty.PropertyType);
 
                     if (!hasImplicitMethod)
                     {

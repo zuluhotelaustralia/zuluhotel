@@ -7,11 +7,19 @@ using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Json
 {
+    
+    public class EnchantmentConverterFactory : JsonConverterFactory
+    {
+        public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(IEnchantmentValue);
+
+        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
+            new EnchantmentConverter();
+    }
+    
     /// <summary>
     /// Read and Writes IEnchantmentValue objects to JSON
     /// </summary>
     /// <remarks>This implementation is very unoptimized and only to be used only for small configuration loading</remarks>
-
     public class EnchantmentConverter : JsonConverter<IEnchantmentValue>
     {
         private static readonly MessagePackSerializerOptions MessagePackOptions = ContractlessStandardResolver

@@ -65,7 +65,7 @@ namespace Server.Mobiles
                 StamMaxSeed = 30,
                 Str = 135,
                 VirtualArmor = 20,
-                WeaponAbility = new SpellStrike<DarknessSpell>(),
+                WeaponAbility = new SpellStrike(typeof(DarknessSpell)),
                 WeaponAbilityChance = 1.0
             });
         }
