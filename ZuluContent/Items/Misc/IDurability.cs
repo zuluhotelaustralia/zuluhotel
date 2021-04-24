@@ -13,6 +13,6 @@ namespace Server.Items
 
 	interface IWearableDurability : IDurability
 	{
-		int OnHit( BaseWeapon weapon, int damageTaken );
+		double OnHit( BaseWeapon weapon, double damageTaken );
 	}
 }

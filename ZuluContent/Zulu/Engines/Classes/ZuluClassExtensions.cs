@@ -28,5 +28,13 @@ namespace Scripts.Zulu.Engines.Classes
 
             return 1.0;
         }
+
+        public static int GetClassLevel(this Mobile mobile, SkillName skill)
+        {
+            if (mobile is IZuluClassed {ZuluClass: { } cls} && cls.IsSkillInClass(skill))
+                return cls.Level;
+
+            return 0;
+        }
     }
 }

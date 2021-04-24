@@ -123,6 +123,8 @@ namespace Scripts.Zulu.Engines.Classes
             ? 1.0
             : 1.0 + Level * PerLevel;
 
+        public static double GetBonusByLevel(int level) => 1.0 + level * PerLevel; 
+
         public static double GetBonusFor(Mobile m, ZuluClassType name) =>
             m is IZuluClassed classed ? classed.ZuluClass.GetBonusFor(name) : 1.0;
 
@@ -518,15 +520,15 @@ namespace Scripts.Zulu.Engines.Classes
         {
         }
 
-        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage)
         {
         }
 
-        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage)
+        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref double damage)
         {
         }
 
-        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
+        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref double damage)
         {
         }
 

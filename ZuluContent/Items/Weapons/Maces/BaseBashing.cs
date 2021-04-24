@@ -33,27 +33,11 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        public override void OnHit(Mobile attacker, Mobile defender, double damageBonus)
+        public override void OnHit(Mobile attacker, Mobile defender)
         {
-            base.OnHit(attacker, defender, damageBonus);
+            base.OnHit(attacker, defender);
 
-            defender.Stam -= Utility.Random(3, 3); // 3-5 points of stamina loss
-        }
-
-        public override double GetBaseDamage(Mobile attacker)
-        {
-            double damage = base.GetBaseDamage(attacker);
-
-            if ((attacker.Player || attacker.Body.IsHuman) && Layer == Layer.TwoHanded &&
-                attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble())
-            {
-                damage *= 1.5;
-
-                attacker.SendMessage("You deliver a crushing blow!"); // Is this not localized?
-                attacker.PlaySound(0x11C);
-            }
-
-            return damage;
+            defender.Stam -= Utility.RandomMinMax(1, 3); // 1-3 points of stamina loss
         }
     }
 }

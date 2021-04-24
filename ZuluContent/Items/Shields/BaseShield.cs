@@ -1,4 +1,8 @@
+using System;
 using System.Linq;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
+using Server.Mobiles;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
 
@@ -30,71 +34,40 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
 
-        public override int OnHit(BaseWeapon weapon, int damage)
+        public override double OnHit(BaseWeapon weapon, double damage)
         {
             if (!(Parent is Mobile owner))
                 return damage;
+            
+            var armorRating = ArmorRating;
 
-            double ar = ArmorRating;
-            double chance = (owner.Skills[SkillName.Parry].Value - ar * 2.0) / 100.0;
-
-            if (chance < 0.01)
-                chance = 0.01;
-            /*
-            FORMULA: Displayed AR = ((Parrying Skill * Base AR of Shield) � 200) + 1
-
-            FORMULA: % Chance of Blocking = parry skill - (shieldAR * 2)
-
-            FORMULA: Melee Damage Absorbed = (AR of Shield) / 2 | Archery Damage Absorbed = AR of Shield
-            */
-            if (owner.CheckSkill(SkillName.Parry, chance))
+            if (armorRating > 0)
             {
-                if (weapon.Skill == SkillName.Archery)
-                    damage -= (int) ar;
-                else
-                    damage -= (int) (ar / 2.0);
+                var parrySkillVal = owner.Skills[SkillName.Parry].Value;
+                if (owner.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
+                    parrySkillVal *= owner.GetClassModifier(SkillName.Swords);
+                
+                owner.AwardSkillPoints(SkillName.Parry, 20);
 
-                if (damage < 0)
-                    damage = 0;
-
-                owner.FixedEffect(0x37B9, 10, 16);
-
-                if (25 > Utility.Random(100)) // 25% chance to lower durability
+                if (Utility.RandomMinMax(1, 100) <= (int) (parrySkillVal / 2))
                 {
-                    int wear = Utility.Random(2);
+                    owner.FixedEffect(0x37B9, 10, 16);
+                    owner.SendSuccessMessage("You successfully parry the attack.");
 
-                    if (wear > 0 && MaxHitPoints > 0)
-                    {
-                        if (HitPoints >= wear)
-                        {
-                            HitPoints -= wear;
-                            wear = 0;
-                        }
-                        else
-                        {
-                            wear -= HitPoints;
-                            HitPoints = 0;
-                        }
+                    double absorbAmount;
 
-                        if (wear > 0)
-                        {
-                            if (MaxHitPoints > wear)
-                            {
-                                MaxHitPoints -= wear;
+                    if (weapon.Parent is Mobile weaponOwner && weapon.GetUsedSkill(weaponOwner) == SkillName.Archery)
+                        absorbAmount = armorRating;
+                    else
+                        absorbAmount = armorRating / 2;
 
-                                if (Parent is Mobile)
-                                    ((Mobile) Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                                        1061121); // Your equipment is severely damaged.
-                            }
-                            else
-                            {
-                                Delete();
-                            }
-                        }
-                    }
+                    damage -= absorbAmount;
+                    damage = Math.Max(damage, 0);
                 }
             }
 
+            base.OnHit(weapon, damage);
+            
             return damage;
         }
     }

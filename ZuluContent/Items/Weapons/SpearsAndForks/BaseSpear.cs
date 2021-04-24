@@ -35,19 +35,5 @@ namespace Server.Items
 
             int version = reader.ReadInt();
         }
-
-        public override void OnHit(Mobile attacker, Mobile defender, double damageBonus)
-        {
-            base.OnHit(attacker, defender, damageBonus);
-
-            if (Layer == Layer.TwoHanded && attacker.Skills[SkillName.Anatomy].Value / 400.0 >= Utility.RandomDouble())
-            {
-                defender.SendMessage("You receive a paralyzing blow!"); // Is this not localized?
-                defender.Freeze(TimeSpan.FromSeconds(2.0));
-
-                attacker.SendMessage("You deliver a paralyzing blow!"); // Is this not localized?
-                attacker.PlaySound(0x11C);
-            }
-        }
     }
 }

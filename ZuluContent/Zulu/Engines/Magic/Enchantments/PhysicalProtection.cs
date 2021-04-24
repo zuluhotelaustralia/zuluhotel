@@ -26,21 +26,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             set => m_Value = value;
         }
 
-        public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
-            ref int damage)
+        public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage)
         {
-            if (damageType == ElementalType.Physical) 
-                damage -= (int) (damage * ((double) Value / 100));
-        }
-
-        public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
-        {
-            var reduction = (int) (damage * ((double) Value / 100));
-
-            if (attacker is PlayerMobile) 
-                reduction /= 2;
-
-            damage -= reduction;
+            damage *= 1 - Value * 0.002;
         }
         
         public int CompareTo(object obj) => obj switch

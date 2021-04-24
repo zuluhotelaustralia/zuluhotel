@@ -71,11 +71,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
 
         public void OnMeleeHit(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage);
 
-        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage);
+        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage);
 
-        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage);
+        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref double damage);
 
-        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage);
+        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref double damage);
 
         public void OnCraftItemCreated(Mobile from, CraftSystem craftSystem, CraftItem craftItem, BaseTool tool,
             Item item);

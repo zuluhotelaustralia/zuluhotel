@@ -133,7 +133,7 @@ namespace Scripts.Zulu.Engines.Classes
             return true;
         }
 
-        public static void AwardSkillPoints(Mobile from, SkillName skillName, int points)
+        public static void AwardSkillPoints(this Mobile from, SkillName skillName, int points)
         {
             Skill skill = from.Skills[skillName];
 

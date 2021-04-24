@@ -4,6 +4,7 @@ using Server.Mobiles;
 using Server.Engines.Craft;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Magic;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
@@ -494,7 +495,7 @@ namespace Server.Items
             base.OnRemoved(parent);
         }
 
-        public virtual SkillName GetUsedSkill(Mobile m, bool checkSkillAttrs)
+        public SkillName GetUsedSkill(Mobile m)
         {
             SkillName sk = Skill;
 
@@ -505,48 +506,30 @@ namespace Server.Items
             return sk;
         }
 
-        public virtual double GetAttackSkillValue(Mobile attacker, Mobile defender)
+        public double GetAttackSkillValue(Mobile attacker, Mobile defender)
         {
-            return attacker.Skills[GetUsedSkill(attacker, true)].Value;
+            return attacker.Skills[GetUsedSkill(attacker)].Value;
         }
 
         public virtual double GetDefendSkillValue(Mobile attacker, Mobile defender)
         {
-            return defender.Skills[GetUsedSkill(defender, true)].Value;
+            return defender.Skills[GetUsedSkill(defender)].Value;
         }
 
-        public virtual bool CheckHit(Mobile attacker, Mobile defender)
+        public bool CheckHit(Mobile attacker, Mobile defender)
         {
-            BaseWeapon atkWeapon = attacker.Weapon as BaseWeapon;
-            BaseWeapon defWeapon = defender.Weapon as BaseWeapon;
+            var atkWeapon = attacker.Weapon as BaseWeapon;
+            var defWeapon = defender.Weapon as BaseWeapon;
 
-            Skill atkSkill = attacker.Skills[atkWeapon.Skill];
-            Skill defSkill = defender.Skills[defWeapon.Skill];
+            var atkValue = atkWeapon.GetAttackSkillValue(attacker, defender) + 50.0;
+            var defValue = defWeapon.GetDefendSkillValue(attacker, defender) + 50.0;
 
-            double atkValue = atkWeapon.GetAttackSkillValue(attacker, defender);
-            double defValue = defWeapon.GetDefendSkillValue(attacker, defender);
+            var hitChance = atkValue / (defValue * 2.0);
 
-            double ourValue, theirValue;
-
-            int bonus = GetHitChanceBonus();
-
-            if (atkValue <= -50.0)
-                atkValue = -49.9;
-
-            if (defValue <= -50.0)
-                defValue = -49.9;
-
-            ourValue = atkValue + 50.0;
-            theirValue = defValue + 50.0;
-
-            double chance = ourValue / (theirValue * 2.0);
-
-            chance *= 1.0 + (double) bonus / 100;
-
-            return attacker.CheckSkill(atkSkill.SkillName, chance);
+            return Utility.RandomDouble() < hitChance;
         }
 
-        public virtual TimeSpan GetDelay(Mobile m)
+        public TimeSpan GetDelay(Mobile m)
         {
             var speed = Speed;
 
@@ -568,11 +551,6 @@ namespace Server.Items
 
         public virtual TimeSpan OnSwing(Mobile attacker, Mobile defender)
         {
-            return OnSwing(attacker, defender, 1.0);
-        }
-
-        public virtual TimeSpan OnSwing(Mobile attacker, Mobile defender, double damageBonus)
-        {
             if (attacker.HarmfulCheck(defender))
             {
                 attacker.DisruptiveAction();
@@ -581,7 +559,7 @@ namespace Server.Items
 
                 if (CheckHit(attacker, defender))
                 {
-                    OnHit(attacker, defender, damageBonus);
+                    OnHit(attacker, defender);
                 }
                 else
                 {
@@ -624,19 +602,11 @@ namespace Server.Items
 
         #endregion
 
-        public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage)
+        public BaseArmor? GetDefenderArmor(Mobile defender)
         {
-            if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
-            {
-                damage = shield.OnHit(this, damage);
+            var chance = Utility.RandomDouble();
 
-                // ReSharper disable once AccessToModifiedClosure
-                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
-            }
-
-            double chance = Utility.RandomDouble();
-
-            Item armorItem = chance switch
+            var armorItem = chance switch
             {
                 < 0.07 => defender.NeckArmor,
                 < 0.14 => defender.HandArmor,
@@ -645,56 +615,22 @@ namespace Server.Items
                 < 0.65 => defender.LegsArmor,
                 _ => defender.ChestArmor
             };
-
-            if (armorItem is BaseArmor armor)
-            {
-                damage = armor.OnHit(this, damage);
-                armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
-            }
-
-            int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
-
-            if (virtualArmor > 0)
-            {
-                double scalar;
-
-                if (chance < 0.14)
-                    scalar = 0.07;
-                else if (chance < 0.28)
-                    scalar = 0.14;
-                else if (chance < 0.43)
-                    scalar = 0.15;
-                else if (chance < 0.65)
-                    scalar = 0.22;
-                else
-                    scalar = 0.35;
-
-                int from = (int) (virtualArmor * scalar) / 2;
-                int to = (int) (virtualArmor * scalar);
-
-                damage -= Utility.Random(from, to - from + 1);
-            }
-
-            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
-
-            return damage;
+            
+            return armorItem as BaseArmor;
         }
 
-        public void OnHit(Mobile attacker, Mobile defender)
-        {
-            OnHit(attacker, defender, 1.0);
-        }
-
-        public virtual void OnHit(Mobile attacker, Mobile defender, double damageBonus)
+        public virtual void OnHit(Mobile attacker, Mobile defender)
         {
             PlaySwingAnimation(attacker);
             PlayHurtAnimation(defender);
 
             attacker.PlaySound(GetHitAttackSound(attacker, defender));
             defender.PlaySound(GetHitDefendSound(attacker, defender));
+            
+            var attackerWeapon = attacker.Weapon as BaseWeapon;
+            var defenderArmor = GetDefenderArmor(defender);
 
-
-            int damage = ComputeDamage(attacker, defender);
+            var damage = ComputeDamage(attacker, defender, attackerWeapon, defenderArmor);
 
             // ReSharper disable once AccessToModifiedClosure
             attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
@@ -705,40 +641,28 @@ namespace Server.Items
                 ab.OnHit(attacker, defender, ref damage);
             }
 
-            damage = AbsorbDamage(attacker, defender, damage);
-
             if (damage < 1)
                 damage = 1;
 
             AddBlood(attacker, defender, damage);
 
             defender.Damage(damage, attacker);
-
-            // Stratics says 50% chance, seems more like 4%..
-            if (MaxHitPoints > 0 && (MaxRange <= 1 && defender is Slime || Utility.Random(25) == 0))
+            
+            // Award skill points
+            attacker.AwardSkillPoints(attackerWeapon.GetUsedSkill(attacker), 20);
+            attacker.AwardSkillPoints(SkillName.Tactics, 20);
+            
+            defenderArmor?.OnHit(attackerWeapon, damage);
+            
+            if (Utility.Random(100) < 2)
             {
-                if (MaxRange <= 1 && defender is Slime)
-                    attacker.LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                        500263); // *Acid blood scars your weapon!*
+                if (MaxHitPoints > 0)
+                    HitPoints -= 1;
+            }
 
-                if (m_Hits > 0)
-                {
-                    --HitPoints;
-                }
-                else if (MaxHitPoints > 1)
-                {
-                    --MaxHitPoints;
-
-                    if (Parent is Mobile parentMobile)
-                    {
-                        // Your equipment is severely damaged.
-                        parentMobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121);
-                    }
-                }
-                else
-                {
-                    Delete();
-                }
+            if (Quality > 0 && HitPoints < 1)
+            {
+                Delete();
             }
 
             if (attacker is BaseCreature attackingCreature)
@@ -748,31 +672,7 @@ namespace Server.Items
                 defendingCreature.OnGotMeleeAttack(attacker);
         }
 
-        public virtual CheckSlayerResult CheckSlayers(Mobile attacker, Mobile defender)
-        {
-            BaseWeapon atkWeapon = attacker.Weapon as BaseWeapon;
-            SlayerEntry atkSlayer = SlayerGroup.GetEntryByName(atkWeapon.OldSlayer);
-            SlayerEntry atkSlayer2 = SlayerGroup.GetEntryByName(atkWeapon.OldSlayer2);
-
-            if (atkSlayer != null && atkSlayer.Slays(defender) || atkSlayer2 != null && atkSlayer2.Slays(defender))
-                return CheckSlayerResult.Slayer;
-
-            ISlayer defISlayer = Spellbook.FindEquippedSpellbook(defender) ?? defender.Weapon as ISlayer;
-
-            if (defISlayer != null)
-            {
-                SlayerEntry defSlayer = SlayerGroup.GetEntryByName(defISlayer.OldSlayer);
-                SlayerEntry defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.OldSlayer2);
-
-                if (defSlayer != null && defSlayer.Group.OppositionSuperSlays(attacker) ||
-                    defSlayer2 != null && defSlayer2.Group.OppositionSuperSlays(attacker))
-                    return CheckSlayerResult.Opposition;
-            }
-
-            return CheckSlayerResult.None;
-        }
-
-        public virtual void AddBlood(Mobile attacker, Mobile defender, int damage)
+        public void AddBlood(Mobile attacker, Mobile defender, int damage)
         {
             if (damage > 0)
             {
@@ -797,7 +697,7 @@ namespace Server.Items
             defender.PlaySound(GetMissDefendSound(attacker, defender));
         }
 
-        public virtual void GetBaseDamageRange(Mobile attacker, out int min, out int max)
+        public void GetBaseDamageRange(Mobile attacker, out int min, out int max)
         {
             if (attacker is BaseCreature)
             {
@@ -822,156 +722,131 @@ namespace Server.Items
             max = MaxDamage;
         }
 
-        public virtual double GetBaseDamage(Mobile attacker)
+        public double GetBaseDamage(Mobile attacker)
         {
             int min, max;
 
             GetBaseDamageRange(attacker, out min, out max);
 
-            int damage = Utility.RandomMinMax(min, max);
-
-            /* Apply damage level offset
-             * : Regular : 0
-             * : Ruin    : 1
-             * : Might   : 3
-             * : Force   : 5
-             * : Power   : 7
-             * : Vanq    : 9
-             */
-            if (DamageLevel != WeaponDamageLevel.Regular)
-                damage += 2 * (int) DamageLevel - 1;
+            var damage = Utility.RandomMinMax(min, max);
 
             return damage;
         }
 
-        public virtual double GetBonus(double value, double scalar, double threshold, double offset)
-        {
-            double bonus = value * scalar;
-
-            if (value >= threshold)
-                bonus += offset;
-
-            return bonus / 100;
-        }
-
-        public virtual int GetHitChanceBonus()
-        {
-            return 0;
-        }
-
-        public virtual int GetDamageBonus()
-        {
-            var qualityBonus = Mark switch
-            {
-                MarkQuality.Low => -20,
-                MarkQuality.Exceptional => 20,
-                _ => 0
-            };
-
-            var damageBonus = DamageLevel switch
-            {
-                WeaponDamageLevel.Ruin => 15,
-                WeaponDamageLevel.Might => 20,
-                WeaponDamageLevel.Force => 25,
-                WeaponDamageLevel.Power => 30,
-                WeaponDamageLevel.Vanquishing => 35,
-                WeaponDamageLevel.Devastation => 40,
-                _ => 0
-            };
-
-            return VirtualDamageBonus + qualityBonus + damageBonus;
-        }
-
-        public virtual void GetStatusDamage(Mobile from, out int min, out int max)
+        public virtual void GetStatusDamage(Mobile attacker, Mobile defender, out int min, out int max)
         {
             int baseMin, baseMax;
 
-            GetBaseDamageRange(from, out baseMin, out baseMax);
-
-            min = Math.Max((int) ScaleDamageOld(from, baseMin, false), 1);
-            max = Math.Max((int) ScaleDamageOld(from, baseMax, false), 1);
+            GetBaseDamageRange(attacker, out baseMin, out baseMax);
+            
+            var attackerWeapon = attacker.Weapon as BaseWeapon;
+            var defenderArmor = GetDefenderArmor(defender);
+            
+            min = Math.Max((int) ScaleDamage(attacker, defender, baseMin, attackerWeapon, defenderArmor), 1);
+            max = Math.Max((int) ScaleDamage(attacker, defender, baseMax, attackerWeapon, defenderArmor), 1);
         }
 
-        public virtual double ScaleDamageOld(Mobile attacker, double damage, bool checkSkills)
+        public double ShieldAbsorbDamage(Mobile attacker, Mobile defender, double damage)
         {
-            if (checkSkills)
+            if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
             {
-                attacker.CheckSkill(SkillName.Tactics, 0.0,
-                    attacker.Skills[SkillName.Tactics].Cap); // Passively check tactics for gain
-                attacker.CheckSkill(SkillName.Anatomy, 0.0,
-                    attacker.Skills[SkillName.Anatomy].Cap); // Passively check Anatomy for gain
+                damage = shield.OnHit(this, damage);
 
-                if (Type == WeaponType.Axe)
-                    attacker.CheckSkill(SkillName.Lumberjacking, 0.0, 100.0); // Passively check Lumberjacking for gain
+                // ReSharper disable once AccessToModifiedClosure
+                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
             }
-
-            /* Compute tactics modifier
-             * :   0.0 = 50% loss
-             * :  50.0 = unchanged
-             * : 100.0 = 50% bonus
-             */
-            damage += damage * ((attacker.Skills[SkillName.Tactics].Value - 50.0) / 100.0);
-
-
-            /* Compute strength modifier
-             * : 1% bonus for every 5 strength
-             */
-            double modifiers = attacker.Str / 5.0 / 100.0;
-
-            /* Compute anatomy modifier
-             * : 1% bonus for every 5 points of anatomy
-             * : +10% bonus at Grandmaster or higher
-             */
-            double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
-            modifiers += anatomyValue / 5.0 / 100.0;
-
-            if (anatomyValue >= 100.0)
-                modifiers += 0.1;
-
-            /* Compute lumberjacking bonus
-             * : 1% bonus for every 5 points of lumberjacking
-             * : +10% bonus at Grandmaster or higher
-             */
-            if (Type == WeaponType.Axe)
-            {
-                double lumberValue = attacker.Skills[SkillName.Lumberjacking].Value;
-
-                modifiers += lumberValue / 5.0 / 100.0;
-
-                if (lumberValue >= 100.0)
-                    modifiers += 0.1;
-            }
-
-            // New quality bonus:
-            if (Mark != MarkQuality.Regular)
-                modifiers += ((int) Mark - 1) * 0.2;
-
-            // Virtual damage bonus:
-            if (VirtualDamageBonus != 0)
-                modifiers += VirtualDamageBonus / 100.0;
-
-            // Apply bonuses
-            damage += damage * modifiers;
-
-            // Scale by durability
-            if (MaxHitPoints > 0)
-                damage *= HitPoints / (double) MaxHitPoints;
-
-            return (int) damage;
-        }
-
-        public virtual int ComputeDamage(Mobile attacker, Mobile defender)
-        {
-            int damage = (int) ScaleDamageOld(attacker, GetBaseDamage(attacker), true);
-
-            // pre-AOS, halve damage if the defender is a player or the attacker is not a player
-            if (defender is PlayerMobile || !(attacker is PlayerMobile))
-                damage = (int) (damage / 2.0);
 
             return damage;
         }
 
-        public virtual void PlayHurtAnimation(Mobile from)
+        public double ModByDist(Mobile attacker, Mobile defender, double damage, BaseWeapon weapon)
+        {
+            if (weapon.GetUsedSkill(attacker) == SkillName.Archery)
+            {
+                damage *= (attacker.Dex + 60) * 0.01 /
+                          ((attacker.Skills[SkillName.Tactics].Value + 50.0 + attacker.Str / 5.0) * 0.01);
+
+                var dist = attacker.GetDistanceToSqrt(defender);
+
+                if (dist <= 1 || dist > 10)
+                    damage *= 0.25;
+                
+                if (attacker.ClassContainsSkill(SkillName.Archery))
+                    damage *= attacker.GetClassModifier(SkillName.Archery);
+            }
+            else if (attacker.ClassContainsSkill(SkillName.Magery))
+                damage /= attacker.GetClassModifier(SkillName.Magery);
+            else if (attacker.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
+            {
+                if (defender is BaseCreature)
+                    damage *= attacker.GetClassModifier(SkillName.Swords);
+                else
+                {
+                    var level = attacker.GetClassLevel(SkillName.Swords);
+
+                    if (level > 0)
+                    {
+                        level -= 2;
+
+                        if (level >= 1)
+                            damage *= ZuluClass.GetBonusByLevel(level);
+                    }
+                }
+            }
+            
+            if (defender.ClassContainsSkill(SkillName.Magery))
+                damage *= defender.GetClassModifier(SkillName.Magery);
+
+            return damage;
+        }
+
+        public double ModByProt(Mobile attacker, Mobile defender, double damage)
+        {
+            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
+
+            return damage;
+        }
+
+        public double ScaleDamage(Mobile attacker, Mobile defender, double baseDamage, BaseWeapon weapon, BaseArmor armor = null, bool piercing = false)
+        {
+            var anatomyVal = attacker.Skills[SkillName.Anatomy].Value;
+            double rawDamage;
+
+            if (attacker is PlayerMobile && defender is BaseCreature)
+                baseDamage *= 1.5;
+
+            baseDamage = ModByDist(attacker, defender, baseDamage, weapon);
+            baseDamage *= 1 + anatomyVal * 0.002;
+
+            if (!piercing)
+            {
+                var armorRating = armor?.ArmorRating ?? 0 + defender.VirtualArmor + defender.VirtualArmorMod;
+
+                rawDamage = ShieldAbsorbDamage(attacker, defender, baseDamage);
+                rawDamage -= armorRating * (Utility.Random(51) + 50) * 0.01;
+            }
+            else
+            {
+                rawDamage = baseDamage;
+            }
+
+            rawDamage *= 0.5;
+
+            rawDamage = ModByProt(attacker, defender, rawDamage);
+
+            rawDamage = Math.Max(rawDamage, 0);
+
+            return rawDamage;
+        }
+
+        public int ComputeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor = null, bool piercing = false)
+        {
+            var damage = (int) ScaleDamage(attacker, defender, GetBaseDamage(attacker), weapon, armor, piercing);
+
+            return damage;
+        }
+
+        public void PlayHurtAnimation(Mobile from)
         {
             int action;
             int frames;
@@ -1666,12 +1541,5 @@ namespace Server.Items
         }
 
         #endregion
-    }
-
-    public enum CheckSlayerResult
-    {
-        None,
-        Slayer,
-        Opposition
     }
 }
