@@ -44,8 +44,7 @@ namespace Server.Items
             if (armorRating > 0)
             {
                 var parrySkillVal = owner.Skills[SkillName.Parry].Value;
-                if (owner.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
-                    parrySkillVal *= owner.GetClassModifier(SkillName.Swords);
+                parrySkillVal *= owner.GetClassModifier(SkillName.Swords);
                 
                 owner.AwardSkillPoints(SkillName.Parry, 20);
 
