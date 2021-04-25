@@ -27,16 +27,25 @@ namespace Scripts.Zulu.Packets
                     break;
                 case 0xBF:
                     if (RewriteOutgoingMessagesToAscii && input[4] == 0x10)
+                    {
                         RewriteEquipmentInfo(input, output, out length);
+                        return;
+                    }
                     break;
                 case 0xAE:
-                    if (RewriteOutgoingMessagesToAscii) 
+                    if (RewriteOutgoingMessagesToAscii)
+                    {
                         RewriteUnicodeMessage(input, output, out length);
+                        return;
+                    }
                     break;
                 case 0xC1:
                 case 0xCC:
-                    if (RewriteOutgoingMessagesToAscii) 
+                    if (RewriteOutgoingMessagesToAscii)
+                    {
                         RewriteMessageLocalized(input, output, out length);
+                        return;
+                    }
                     break;
             }
 
