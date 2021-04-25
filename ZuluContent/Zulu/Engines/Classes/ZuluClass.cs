@@ -22,7 +22,7 @@ namespace Scripts.Zulu.Engines.Classes
         private const double SkillBase = 480;
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
-        private const double PerLevel = 0.25; //25% per level
+        private const double PerLevel = 0.15; //25% per level
         private const double ClasseBonus = 1.5;
         private const int MaxLevel = 6;
 
