@@ -217,6 +217,20 @@ namespace Server.Items
                 ScaleDurability();
             }
         }
+        
+        private static readonly Dictionary<WeaponDamageLevel, int> DamageLevelToBonus = new()
+        {
+            [WeaponDamageLevel.Regular] = 0,
+            [WeaponDamageLevel.Ruin] = 5,
+            [WeaponDamageLevel.Might] = 10,
+            [WeaponDamageLevel.Force] = 15,
+            [WeaponDamageLevel.Power] = 20,
+            [WeaponDamageLevel.Vanquishing] = 25,
+            [WeaponDamageLevel.Devastation] = 30
+        };
+
+        public static int GetBonusForDamageLevel(WeaponDamageLevel level) =>
+            DamageLevelToBonus[level];
 
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponDamageLevel DamageLevel
@@ -604,6 +618,9 @@ namespace Server.Items
 
         public BaseArmor? GetDefenderArmor(Mobile defender)
         {
+            if (defender == null)
+                return null;
+            
             var chance = Utility.RandomDouble();
 
             var armorItem = chance switch
@@ -631,10 +648,7 @@ namespace Server.Items
             var defenderArmor = GetDefenderArmor(defender);
 
             var damage = ComputeDamage(attacker, defender, attackerWeapon, defenderArmor);
-
-            // ReSharper disable once AccessToModifiedClosure
-            attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
-
+            
             if (attacker is BaseCreature bc && bc.GetWeaponAbility() is { } ab &&
                 bc.WeaponAbilityChance >= Utility.RandomDouble())
             {
@@ -722,13 +736,13 @@ namespace Server.Items
             max = MaxDamage;
         }
 
-        public double GetBaseDamage(Mobile attacker)
+        public int GetBaseDamage(Mobile attacker)
         {
             int min, max;
 
             GetBaseDamageRange(attacker, out min, out max);
 
-            var damage = Utility.RandomMinMax(min, max);
+            var damage = Utility.RandomMinMax(min, max) + GetBonusForDamageLevel(DamageLevel);
 
             return damage;
         }
@@ -807,7 +821,7 @@ namespace Server.Items
             return damage;
         }
 
-        public double ScaleDamage(Mobile attacker, Mobile defender, double baseDamage, BaseWeapon weapon, BaseArmor armor = null, bool piercing = false)
+        public double ScaleDamage(Mobile attacker, Mobile? defender, double baseDamage, BaseWeapon weapon, BaseArmor armor = null, bool piercing = false)
         {
             var anatomyVal = attacker.Skills[SkillName.Anatomy].Value;
             double rawDamage;
@@ -818,7 +832,7 @@ namespace Server.Items
             baseDamage = ModByDist(attacker, defender, baseDamage, weapon);
             baseDamage *= 1 + anatomyVal * 0.002;
 
-            if (!piercing)
+            if (!piercing && defender != null)
             {
                 var armorRating = armor?.ArmorRating ?? 0 + defender.VirtualArmor + defender.VirtualArmorMod;
 
@@ -832,7 +846,8 @@ namespace Server.Items
 
             rawDamage *= 0.5;
 
-            rawDamage = ModByProt(attacker, defender, rawDamage);
+            if (defender != null)
+                rawDamage = ModByProt(attacker, defender, rawDamage);
 
             rawDamage = Math.Max(rawDamage, 0);
 
@@ -841,7 +856,11 @@ namespace Server.Items
 
         public int ComputeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor = null, bool piercing = false)
         {
-            var damage = (int) ScaleDamage(attacker, defender, GetBaseDamage(attacker), weapon, armor, piercing);
+            var baseDamage = GetBaseDamage(attacker);
+                
+            attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref baseDamage));
+
+            var damage = (int) ScaleDamage(attacker, defender, baseDamage, weapon, armor, piercing);
 
             return damage;
         }

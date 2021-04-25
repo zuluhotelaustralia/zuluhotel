@@ -35,6 +35,7 @@ namespace Server.Items
     {
         Regular,
         Accurate,
+        Precisely,
         Surpassingly,
         Eminently,
         Exceedingly,
