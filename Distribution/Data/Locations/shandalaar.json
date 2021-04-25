@@ -1,0 +1,68 @@
+
+{
+  "name": "Shandalaar",
+  "categories": [
+    {
+      "name": "Towns",
+      "locations": [
+        { "name": "Shandalaar", "location": [1415, 1865, 32] },
+        { "name": "Dracham", "location": [675, 2050, 0] },
+        { "name": "Faymoor", "location": [3585, 1500, 22] },
+        { "name": "Kaz Darak", "location": [5540, 1135, 0] },
+        { "name": "Winterwyn", "location": [986, 620, 0] },
+        { "name": "Bayfort", "location": [2055, 2708, 0] },
+        { "name": "Arcanus", "location": [1874, 504, 2] },
+        { "name": "Delmere", "location": [712, 1804, 0] },
+        { "name": "Summermere", "location": [1151, 1602, 12] },
+        { "name": "Nexus", "location": [5286, 1984, 20] },
+        { "name": "Aelcoast", "location": [993, 1145, 0] },
+        { "name": "Woodmeadow", "location": [964, 1418, 40] },
+        { "name": "Oasis", "location": [2312, 2560, 0] },
+        { "name": "Janacres", "location": [2960, 2673, 0] },
+        { "name": "Erilyn", "location": [246, 1472, 0] },
+        { "name": "Wintercoast", "location": [988, 908, 0] },
+        { "name": "Sanctuary", "location": [4240, 2124, 15] },
+        { "name": "Hathor", "location": [3842, 3300, 0] },
+        { "name": "Rebellion Island", "location": [331, 2598, 0] },
+        { "name": "Ice Island", "location": [4387, 430, 0] },
+        { "name": "Player Town", "location": [2283, 3417, 55] },
+        { "name": "Randorin", "location": [6267, 2705, 15] }
+      ]
+    },
+    {
+      "name": "Dungeons",
+      "locations": [
+        { "name": "Valor", "location": [5483, 898, 65] }, 
+        { "name": "Blood", "location": [5984, 44, 4] }, 
+        { "name": "Infernum", "location": [5241, 737, 20] }, 
+        { "name": "Nox", "location": [5679, 673, 0] }, 
+        { "name": "Havoc", "location": [5790, 924, 3] }, 
+        { "name": "Arcanum Magicae", "location": [5991, 477, 4] }, 
+        { "name": "Ignis", "location": [5711, 2213, 0] }, 
+        { "name": "Vortex", "location": [6707, 180, 0] }, 
+        { "name": "Oceanum", "location": [6328, 419, 80] }
+      ]
+    },
+    {
+      "name": "Points of Interest",
+      "locations": [
+        { "name": "Black City", "location": [1176, 2899, 0] },
+        { "name": "Lost City", "location": [664, 1598, 45] },
+        { "name": "Sunken City", "location": [1911, 3665, 55] },
+        { "name": "Great Maze", "location": [2704, 1968, 0] },
+        { "name": "Monastery", "location": [1687, 857, 0] },
+        { "name": "Champion Island", "location": [745, 3536, 60] },
+        { "name": "Event Arena", "location": [6682, 554, 20] },
+        { "name": "Race Room", "location": [7060, 70, 0] },
+        { "name": "Solitary Isle", "location": [2190, 1123, 0] },
+        { "name": "Hamlet", "location": [2008, 2004, 0] },
+        { "name": "Player Fort", "location": [1294, 960, 5] },
+        { "name": "Player Castle", "location": [1606, 1586, 0] },
+        { "name": "Eventlands", "location": [6553, 3253, 66] },
+        { "name": "Green Acres", "location": [6236, 3142, 0] },
+        { "name": "Winterwyn Jail", "location": [917, 387, 45] },
+        { "name": "Jail", "location": [5200, 1575, 0] }
+      ]
+    }
+  ]
+}

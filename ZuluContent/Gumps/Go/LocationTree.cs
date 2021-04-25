@@ -5,54 +5,61 @@ using Server.Json;
 
 namespace Server.Gumps
 {
-  public class LocationTree
-  {
-    public LocationTree(string fileName, Map map)
+    public class LocationTree
     {
-      LastBranch = new Dictionary<Mobile, GoCategory>();
-      Map = map;
+        public static readonly string LocationsPath = Path.Combine(Core.BaseDirectory, "Data/Locations/");
 
-      string path = Path.Combine($"Data/Locations/{fileName}.json");
+        public static bool Exists(string fileName)
+        {
+            return File.Exists(Path.Combine(LocationsPath, $"{fileName}.json"));
+        }
+        
+        public LocationTree(string fileName, Map map)
+        {
+            LastBranch = new Dictionary<Mobile, GoCategory>();
+            Map = map;
 
-      if (!File.Exists(path))
-      {
-        Console.WriteLine("Go Locations: {0} does not exist", path);
-        return;
-      }
+            var path = Path.Combine(LocationsPath, $"{fileName}.json");
 
-      try
-      {
-        Root = JsonConfig.Deserialize<GoCategory>(path);
-        SetParents(Root);
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine("Go Locations: Error in deserializing {0}", path);
-        Console.WriteLine(e);
-      }
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Go Locations: {0} does not exist", path);
+                return;
+            }
+
+            try
+            {
+                Root = JsonConfig.Deserialize<GoCategory>(path);
+                SetParents(Root);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Go Locations: Error in deserializing {0}", path);
+                Console.WriteLine(e);
+            }
+        }
+
+        public Dictionary<Mobile, GoCategory> LastBranch { get; }
+
+        public Map Map { get; }
+
+        public GoCategory Root { get; }
+
+        private static void SetParents(GoCategory parent)
+        {
+            // Deserialization may leave these null
+            parent.Categories ??= Array.Empty<GoCategory>();
+            parent.Locations ??= Array.Empty<GoLocation>();
+
+            for (var i = 0; i < parent.Categories.Length; i++)
+            {
+                var category = parent.Categories[i];
+                category.Parent = parent;
+                SetParents(category);
+            }
+
+            for (var j = 0; j < parent.Locations.Length; j++)
+                parent.Locations[j].Parent = parent;
+        }
     }
-
-    public Dictionary<Mobile, GoCategory> LastBranch { get; }
-
-    public Map Map { get; }
-
-    public GoCategory Root { get; }
-
-    private static void SetParents(GoCategory parent)
-    {
-      // Deserialization may leave these null
-      parent.Categories ??= Array.Empty<GoCategory>();
-      parent.Locations ??= Array.Empty<GoLocation>();
-
-      for (int i = 0; i < parent.Categories.Length; i++)
-      {
-        GoCategory category = parent.Categories[i];
-        category.Parent = parent;
-        SetParents(category);
-      }
-
-      for (int j = 0; j < parent.Locations.Length; j++)
-        parent.Locations[j].Parent = parent;
-    }
-  }
 }
