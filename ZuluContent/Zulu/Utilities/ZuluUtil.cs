@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Server;
+using ZuluContent.Zulu.Items;
 
 namespace Scripts.Zulu.Utilities
 {
@@ -184,6 +185,20 @@ namespace Scripts.Zulu.Utilities
             var lambda = Expression.Lambda<Action<TSource, TTarget>>(body, source, target);
 
             return lambda.Compile();
+        }
+        
+        public static Func<T> ItemCreatorLambda<T>(Type type) where T : Item
+        {
+            var constructor = type.GetConstructor(Array.Empty<Type>());
+
+            if (constructor == null)
+            {
+                throw new ArgumentOutOfRangeException(nameof(type), "No parameterless constructor found");
+            }
+
+            var expr = Expression.Lambda<Func<T>>(Expression.New(constructor), null).Compile();
+
+            return expr;
         }
     }
 }

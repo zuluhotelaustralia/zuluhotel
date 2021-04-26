@@ -3,26 +3,26 @@ using System.ComponentModel;
 
 namespace Server.Mobiles
 {
-    public record CreatureProp
+    public record PropValue
     {
         public double Min { get; set; }
         public double? Max { get; set; }
 
-        public CreatureProp(double min, double? max = null)
+        public PropValue(double min, double? max = null)
         {
             Min = min;
             Max = max;
         }
 
-        public static CreatureProp Between(double min, double max)
+        public static PropValue Between(double min, double max)
         {
             return new(min, max);
         }
 
-        public static CreatureProp Dice(string d)
+        public static PropValue Dice(string d)
         {
             DiceRoll dice = d;
-            var value = new CreatureProp(dice.Count + dice.Bonus, dice.Count * dice.Sides + dice.Bonus);
+            var value = new PropValue(dice.Count + dice.Bonus, dice.Count * dice.Sides + dice.Bonus);
 
             return value;
         }
@@ -34,22 +34,22 @@ namespace Server.Mobiles
             max = Max;
         }
 
-        public static implicit operator int(CreatureProp d)
+        public static implicit operator int(PropValue d)
         {
             return Convert.ToInt32(d.Next());
         }
 
-        public static implicit operator double(CreatureProp d)
+        public static implicit operator double(PropValue d)
         {
             return d.Next();
         }
 
-        public static implicit operator CreatureProp(double d)
+        public static implicit operator PropValue(double d)
         {
             return new(d);
         }
         
-        public static implicit operator CreatureProp((double min, double max ) value)
+        public static implicit operator PropValue((double min, double max ) value)
         {
             return new(value.min, value.max);
         }

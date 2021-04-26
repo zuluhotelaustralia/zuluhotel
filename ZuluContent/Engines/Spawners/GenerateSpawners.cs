@@ -18,11 +18,11 @@ namespace Server.Engines.Spawners
 
         private static void GenerateSpawners_OnCommand(CommandEventArgs e)
         {
-            Mobile from = e.Mobile;
+            var from = e.Mobile;
 
             if (e.Arguments.Length == 0)
             {
-               World.Broadcast(0x35, true, "Usage: [GenerateSpawners <path|search pattern>");
+                World.Broadcast(0x35, true, "Usage: [GenerateSpawners <path|search pattern>");
                 return;
             }
 
@@ -34,11 +34,11 @@ namespace Server.Engines.Spawners
             var di = new DirectoryInfo(Core.BaseDirectory);
 
             var files = di.GetFiles(filePattern, SearchOption.AllDirectories);
-            
+
 
             if (files.Length == 0)
             {
-               World.Broadcast(0x35, true, "GenerateSpawners: No files found matching the pattern");
+                World.Broadcast(0x35, true, "GenerateSpawners: No files found matching the pattern");
                 return;
             }
 
@@ -54,7 +54,8 @@ namespace Server.Engines.Spawners
                 }
                 catch (JsonException)
                 {
-                    World.Broadcast(0x35, true, "GenerateSpawners: Exception parsing {0}, file may not be in the correct format.",
+                    World.Broadcast(0x35, true,
+                        "GenerateSpawners: Exception parsing {0}, file may not be in the correct format.",
                         file.FullName);
                 }
             }
@@ -62,22 +63,22 @@ namespace Server.Engines.Spawners
 
         private static void ParseSpawnerList(List<DynamicJson> spawners, JsonSerializerOptions options)
         {
-            Stopwatch watch = Stopwatch.StartNew();
-            List<string> failures = new List<string>();
-            int count = 0;
+            var watch = Stopwatch.StartNew();
+            var failures = new List<string>();
+            var count = 0;
 
             for (var i = 0; i < spawners.Count; i++)
             {
                 var json = spawners[i];
-                Type type = AssemblyHandler.FindTypeByName(json.Type);
+                var type = AssemblyHandler.FindTypeByName(json.Type);
 
                 if (type == null || !typeof(BaseSpawner).IsAssignableFrom(type))
                 {
-                    string failure = $"GenerateSpawners: Invalid spawner type {json.Type ?? "(-null-)"} ({i})";
+                    var failure = $"GenerateSpawners: Invalid spawner type {json.Type ?? "(-null-)"} ({i})";
                     if (!failures.Contains(failure))
                     {
                         failures.Add(failure);
-                       World.Broadcast(0x35, true, failure);
+                        World.Broadcast(0x35, true, failure);
                     }
 
                     continue;
@@ -105,11 +106,11 @@ namespace Server.Engines.Spawners
                 }
                 catch (Exception)
                 {
-                    string failure = $"GenerateSpawners: Spawner {type} failed to construct";
+                    var failure = $"GenerateSpawners: Spawner {type} failed to construct";
                     if (!failures.Contains(failure))
                     {
                         failures.Add(failure);
-                       World.Broadcast(0x35, true, failure);
+                        World.Broadcast(0x35, true, failure);
                     }
 
                     continue;
@@ -119,7 +120,8 @@ namespace Server.Engines.Spawners
             }
 
             watch.Stop();
-           World.Broadcast(0x35, true, "GenerateSpawners: Generated {0} spawners ({1:F2} seconds, {2} failures)", count,
+            World.Broadcast(0x35, true, "GenerateSpawners: Generated {0} spawners ({1:F2} seconds, {2} failures)",
+                count,
                 watch.Elapsed.TotalSeconds, failures.Count);
         }
     }

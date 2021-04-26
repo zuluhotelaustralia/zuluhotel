@@ -7,15 +7,15 @@ namespace Server.Json
 {
     public class CreaturePropConverterFactory : JsonConverterFactory
     {
-        public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(CreatureProp);
+        public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(PropValue);
 
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
             new CreaturePropConverter();
     }
 
-    public class CreaturePropConverter : JsonConverter<CreatureProp>
+    public class CreaturePropConverter : JsonConverter<PropValue>
     {
-        public override CreatureProp Read(ref Utf8JsonReader reader, Type typeToConvert,
+        public override PropValue Read(ref Utf8JsonReader reader, Type typeToConvert,
             JsonSerializerOptions options)
         {
             double? min = null;
@@ -36,9 +36,9 @@ namespace Server.Json
                         if (reader.TokenType != JsonTokenType.Number)
                             throw new JsonException();
 
-                        if (propertyName == nameof(CreatureProp.Min).ToLowerInvariant())
+                        if (propertyName == nameof(PropValue.Min).ToLowerInvariant())
                             min = reader.GetDouble();
-                        else if (propertyName == nameof(CreatureProp.Max).ToLowerInvariant()) 
+                        else if (propertyName == nameof(PropValue.Max).ToLowerInvariant()) 
                             max = reader.GetDouble();
 
                         reader.Read();
@@ -47,7 +47,7 @@ namespace Server.Json
                     if (!min.HasValue)
                         throw new JsonException();
 
-                    return new CreatureProp(min.Value, max);
+                    return new PropValue(min.Value, max);
                 }
                 case JsonTokenType.Number:
                 {
@@ -58,14 +58,14 @@ namespace Server.Json
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, CreatureProp value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, PropValue value, JsonSerializerOptions options)
         {
             if (value.Max.HasValue)
             {
                 writer.WriteStartObject();
-                writer.WritePropertyName(nameof(CreatureProp.Min));
+                writer.WritePropertyName(nameof(PropValue.Min));
                 writer.WriteNumberValue(value.Min);
-                writer.WritePropertyName(nameof(CreatureProp.Max));
+                writer.WritePropertyName(nameof(PropValue.Max));
                 writer.WriteNumberValue(value.Max.Value);
                 writer.WriteEndObject();
             }

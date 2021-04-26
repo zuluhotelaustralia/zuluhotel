@@ -46,7 +46,7 @@ namespace Server.Engines.Spawners
             params string[] spawnedNames) : base(0x1f13)
         {
             InitSpawn(amount, minDelay, maxDelay, team, homeRange);
-            for (int i = 0; i < spawnedNames.Length; i++)
+            for (var i = 0; i < spawnedNames.Length; i++)
                 AddEntry(spawnedNames[i], 100, amount, false);
         }
 
@@ -72,9 +72,21 @@ namespace Server.Engines.Spawners
         {
         }
 
-        public override string DefaultName => "Spawner";
-        public bool IsFull => Spawned?.Count >= m_Count;
-        public bool IsEmpty => Spawned?.Count == 0;
+        public override string DefaultName
+        {
+            get { return "Spawner"; }
+        }
+
+        public bool IsFull
+        {
+            get { return Spawned?.Count >= m_Count; }
+        }
+
+        public bool IsEmpty
+        {
+            get { return Spawned?.Count == 0; }
+        }
+
         public DateTime End { get; set; }
 
         public List<SpawnerEntry> Entries { get; private set; }
@@ -87,7 +99,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public int Count
         {
-            get => m_Count;
+            get { return m_Count; }
             set
             {
                 m_Count = value;
@@ -105,7 +117,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public bool Running
         {
-            get => m_Running;
+            get { return m_Running; }
             set
             {
                 if (value)
@@ -120,7 +132,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public int WalkingRange
         {
-            get => m_WalkingRange;
+            get { return m_WalkingRange; }
             set
             {
                 m_WalkingRange = value;
@@ -131,7 +143,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public int Team
         {
-            get => m_Team;
+            get { return m_Team; }
             set
             {
                 m_Team = value;
@@ -142,7 +154,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public TimeSpan MinDelay
         {
-            get => m_MinDelay;
+            get { return m_MinDelay; }
             set
             {
                 m_MinDelay = value;
@@ -153,7 +165,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public TimeSpan MaxDelay
         {
-            get => m_MaxDelay;
+            get { return m_MaxDelay; }
             set
             {
                 m_MaxDelay = value;
@@ -164,7 +176,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public TimeSpan NextSpawn
         {
-            get => m_Running && m_Timer?.Running == true ? End - DateTime.UtcNow : TimeSpan.FromSeconds(0);
+            get { return m_Running && m_Timer?.Running == true ? End - DateTime.UtcNow : TimeSpan.FromSeconds(0); }
             set
             {
                 Start();
@@ -175,7 +187,7 @@ namespace Server.Engines.Spawners
         [CommandProperty(AccessLevel.Developer)]
         public bool Group
         {
-            get => m_Group;
+            get { return m_Group; }
             set
             {
                 m_Group = value;
@@ -183,13 +195,20 @@ namespace Server.Engines.Spawners
             }
         }
 
-        public virtual Point3D HomeLocation => Location;
-        public bool UnlinkOnTaming => true;
+        public virtual Point3D HomeLocation
+        {
+            get { return Location; }
+        }
+
+        public bool UnlinkOnTaming
+        {
+            get { return true; }
+        }
 
         [CommandProperty(AccessLevel.Developer)]
         public int HomeRange
         {
-            get => m_HomeRange;
+            get { return m_HomeRange; }
             set
             {
                 m_HomeRange = value;
@@ -197,7 +216,10 @@ namespace Server.Engines.Spawners
             }
         }
 
-        Region ISpawner.Region => Region.Find(Location, Map);
+        Region ISpawner.Region
+        {
+            get { return Region.Find(Location, Map); }
+        }
 
         public void Remove(ISpawnable spawn)
         {
@@ -205,7 +227,7 @@ namespace Server.Engines.Spawners
 
             if (spawn != null)
             {
-                Spawned.TryGetValue(spawn, out SpawnerEntry entry);
+                Spawned.TryGetValue(spawn, out var entry);
 
                 entry?.Spawned.Remove(spawn);
 
@@ -219,7 +241,7 @@ namespace Server.Engines.Spawners
         public override void OnAfterDuped(Item newItem)
         {
             if (newItem is BaseSpawner newSpawner)
-                for (int i = 0; i < Entries.Count; i++)
+                for (var i = 0; i < Entries.Count; i++)
                     newSpawner.AddEntry(Entries[i].SpawnedName, Entries[i].SpawnedProbability,
                         Entries[i].SpawnedMaxCount,
                         false);
@@ -227,7 +249,7 @@ namespace Server.Engines.Spawners
 
         public SpawnerEntry AddEntry(string creaturename, int probability = 100, int amount = 1, bool dotimer = true)
         {
-            SpawnerEntry entry = new SpawnerEntry(creaturename, probability, amount);
+            var entry = new SpawnerEntry(creaturename, probability, amount);
             Entries.Add(entry);
             if (dotimer)
                 DoTimer(TimeSpan.FromSeconds(1));
@@ -280,7 +302,7 @@ namespace Server.Engines.Spawners
 
                 GetSpawnerProperties(list);
 
-                for (int i = 0; i < 6 && i < Entries.Count; ++i)
+                for (var i = 0; i < 6 && i < Entries.Count; ++i)
                     list.Add(1060658 + i, "\t{0}\t{1}", Entries[i].SpawnedName, CountSpawns(Entries[i]));
             }
             else
@@ -322,7 +344,7 @@ namespace Server.Engines.Spawners
         {
             Entries ??= new List<SpawnerEntry>();
 
-            for (int i = 0; i < Entries.Count; ++i)
+            for (var i = 0; i < Entries.Count; ++i)
                 Entries[i].Defrag(this);
         }
 
@@ -365,7 +387,7 @@ namespace Server.Engines.Spawners
         {
             RemoveSpawns();
 
-            for (int i = 0; i < m_Count; i++)
+            for (var i = 0; i < m_Count; i++)
                 Spawn();
 
             DoTimer(); // Turn off the timer!
@@ -378,22 +400,22 @@ namespace Server.Engines.Spawners
             if (Entries.Count <= 0 || IsFull)
                 return;
 
-            int probsum = Entries.Where(t => !t.IsFull).Sum(t => t.SpawnedProbability);
+            var probsum = Entries.Where(t => !t.IsFull).Sum(t => t.SpawnedProbability);
 
             if (probsum <= 0)
                 return;
 
-            int rand = Utility.RandomMinMax(1, probsum);
+            var rand = Utility.RandomMinMax(1, probsum);
 
-            for (int i = 0; i < Entries.Count; i++)
+            for (var i = 0; i < Entries.Count; i++)
             {
-                SpawnerEntry entry = Entries[i];
+                var entry = Entries[i];
                 if (entry.IsFull)
                     continue;
 
                 if (rand <= entry.SpawnedProbability)
                 {
-                    Spawn(entry, out EntryFlags flags);
+                    Spawn(entry, out var flags);
                     entry.Valid = flags;
                     return;
                 }
@@ -406,7 +428,7 @@ namespace Server.Engines.Spawners
         {
             string[,] props;
 
-            int remains = args.Length;
+            var remains = args.Length;
 
             if (remains >= 2)
             {
@@ -414,7 +436,7 @@ namespace Server.Engines.Spawners
 
                 remains /= 2;
 
-                for (int j = 0; j < remains; ++j)
+                for (var j = 0; j < remains; ++j)
                 {
                     props[j, 0] = args[j * 2];
                     props[j, 1] = args[j * 2 + 1];
@@ -436,22 +458,22 @@ namespace Server.Engines.Spawners
             {
                 realProps = new PropertyInfo[props.GetLength(0)];
 
-                PropertyInfo[] allProps =
+                var allProps =
                     type.GetProperties(BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public);
 
-                for (int i = 0; i < realProps.Length; ++i)
+                for (var i = 0; i < realProps.Length; ++i)
                 {
                     PropertyInfo thisProp = null;
 
-                    string propName = props[i, 0];
+                    var propName = props[i, 0];
 
-                    for (int j = 0; thisProp == null && j < allProps.Length; ++j)
-                        if (InsensitiveStringHelpers.Equals(propName, allProps[j].Name))
+                    for (var j = 0; thisProp == null && j < allProps.Length; ++j)
+                        if (Equals(propName, allProps[j].Name))
                             thisProp = allProps[j];
 
                     if (thisProp == null)
                         return null;
-                    CPA attr = Properties.GetCPA(thisProp);
+                    var attr = Properties.GetCPA(thisProp);
 
                     if (attr == null || attr.WriteLevel > AccessLevel.Developer || !thisProp.CanWrite || attr.ReadOnly)
                         return null;
@@ -472,7 +494,7 @@ namespace Server.Engines.Spawners
 
         public bool Spawn(SpawnerEntry entry, out EntryFlags flags)
         {
-            Map map = GetSpawnMap();
+            var map = GetSpawnMap();
             flags = EntryFlags.None;
 
             if (map == null || map == Map.Internal || Parent != null)
@@ -481,7 +503,7 @@ namespace Server.Engines.Spawners
             // Defrag taken care of in Spawn(), beforehand
             // Count check taken care of in Spawn(), beforehand
 
-            Type type = AssemblyHandler.FindTypeByName(entry.SpawnedName);
+            var type = AssemblyHandler.FindTypeByName(entry.SpawnedName);
 
             if (type != null)
             {
@@ -495,9 +517,9 @@ namespace Server.Engines.Spawners
                         ? Array.Empty<string>()
                         : CommandSystem.Split(entry.Properties.Trim());
 
-                    string[,] props = FormatProperties(propargs);
+                    var props = FormatProperties(propargs);
 
-                    PropertyInfo[] realProps = GetTypeProperties(type, props);
+                    var realProps = GetTypeProperties(type, props);
 
                     if (realProps == null)
                     {
@@ -515,19 +537,19 @@ namespace Server.Engines.Spawners
                     }
                     else
                     {
-                        ConstructorInfo[] ctors = type.GetConstructors();
+                        var ctors = type.GetConstructors();
 
-                        for (int i = 0; i < ctors.Length; ++i)
+                        for (var i = 0; i < ctors.Length; ++i)
                         {
-                            ConstructorInfo ctor = ctors[i];
+                            var ctor = ctors[i];
 
                             if (Add.IsConstructible(ctor, AccessLevel.Developer))
                             {
-                                ParameterInfo[] paramList = ctor.GetParameters();
+                                var paramList = ctor.GetParameters();
 
                                 if (paramargs.Length == paramList.Length)
                                 {
-                                    object[] paramValues = Add.ParseValues(paramList, paramargs);
+                                    var paramValues = Add.ParseValues(paramList, paramargs);
 
                                     if (paramValues != null)
                                     {
@@ -539,11 +561,11 @@ namespace Server.Engines.Spawners
                         }
                     }
 
-                    for (int i = 0; i < realProps.Length; i++)
+                    for (var i = 0; i < realProps.Length; i++)
                         if (realProps[i] != null)
                         {
                             object toSet = null;
-                            string result = Properties.ConstructFromString(realProps[i].PropertyType, o, props[i, 1],
+                            var result = Properties.ConstructFromString(realProps[i].PropertyType, o, props[i, 1],
                                 ref toSet);
 
                             if (result == null)
@@ -565,7 +587,7 @@ namespace Server.Engines.Spawners
                         Spawned.Add(m, entry);
                         entry.Spawned.Add(m);
 
-                        Point3D loc = m is BaseVendor ? Location : GetSpawnPosition(m, map);
+                        var loc = m is BaseVendor ? Location : GetSpawnPosition(m, map);
 
                         m.OnBeforeSpawn(loc, map);
                         InvalidateProperties();
@@ -574,7 +596,7 @@ namespace Server.Engines.Spawners
 
                         if (m is BaseCreature c)
                         {
-                            int walkrange = GetWalkingRange();
+                            var walkrange = GetWalkingRange();
 
                             c.RangeHome = walkrange >= 0 ? walkrange : m_HomeRange;
                             c.CurrentWayPoint = WayPoint;
@@ -594,7 +616,7 @@ namespace Server.Engines.Spawners
                         Spawned.Add(item, entry);
                         entry.Spawned.Add(item);
 
-                        Point3D loc = GetSpawnPosition(item, map);
+                        var loc = GetSpawnPosition(item, map);
 
                         item.OnBeforeSpawn(loc, map);
 
@@ -624,21 +646,27 @@ namespace Server.Engines.Spawners
             return false;
         }
 
-        public virtual int GetWalkingRange() => m_WalkingRange;
+        public virtual int GetWalkingRange()
+        {
+            return m_WalkingRange;
+        }
 
         public abstract Point3D GetSpawnPosition(ISpawnable spawned, Map map);
 
-        public virtual Map GetSpawnMap() => Map;
+        public virtual Map GetSpawnMap()
+        {
+            return Map;
+        }
 
         public void DoTimer()
         {
             if (!m_Running)
                 return;
 
-            int minSeconds = (int) m_MinDelay.TotalSeconds;
-            int maxSeconds = (int) m_MaxDelay.TotalSeconds;
+            var minSeconds = (int) m_MinDelay.TotalSeconds;
+            var maxSeconds = (int) m_MaxDelay.TotalSeconds;
 
-            TimeSpan delay = TimeSpan.FromSeconds(Utility.RandomMinMax(minSeconds, maxSeconds));
+            var delay = TimeSpan.FromSeconds(Utility.RandomMinMax(minSeconds, maxSeconds));
             DoTimer(delay);
         }
 
@@ -667,9 +695,9 @@ namespace Server.Engines.Spawners
         {
             Defrag();
 
-            for (int i = entry.Spawned.Count - 1; i >= 0; i--)
+            for (var i = entry.Spawned.Count - 1; i >= 0; i--)
             {
-                ISpawnable e = entry.Spawned[i];
+                var e = entry.Spawned[i];
                 entry.Spawned.RemoveAt(i);
                 e?.Delete();
             }
@@ -690,9 +718,9 @@ namespace Server.Engines.Spawners
 
         public void RemoveSpawn(SpawnerEntry entry)
         {
-            for (int i = entry.Spawned.Count - 1; i >= 0; i--)
+            for (var i = entry.Spawned.Count - 1; i >= 0; i--)
             {
-                ISpawnable e = entry.Spawned[i];
+                var e = entry.Spawned[i];
 
                 if (e != null)
                 {
@@ -708,13 +736,13 @@ namespace Server.Engines.Spawners
         {
             Defrag();
 
-            for (int i = 0; i < Entries.Count; i++)
+            for (var i = 0; i < Entries.Count; i++)
             {
-                SpawnerEntry entry = Entries[i];
+                var entry = Entries[i];
 
-                for (int j = entry.Spawned.Count - 1; j >= 0; j--)
+                for (var j = entry.Spawned.Count - 1; j >= 0; j--)
                 {
-                    ISpawnable e = entry.Spawned[j];
+                    var e = entry.Spawned[j];
 
                     if (e != null)
                     {
@@ -735,7 +763,7 @@ namespace Server.Engines.Spawners
         {
             Defrag();
 
-            foreach (ISpawnable e in Spawned.Keys) e?.MoveToWorld(Location, Map);
+            foreach (var e in Spawned.Keys) e?.MoveToWorld(Location, Map);
         }
 
         public override void OnDelete()
@@ -756,7 +784,7 @@ namespace Server.Engines.Spawners
 
             writer.Write(Entries.Count);
 
-            for (int i = 0; i < Entries.Count; ++i)
+            for (var i = 0; i < Entries.Count; ++i)
                 Entries[i].Serialize(writer);
 
             writer.Write(m_WalkingRange);
@@ -780,7 +808,7 @@ namespace Server.Engines.Spawners
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             Spawned = new Dictionary<ISpawnable, SpawnerEntry>();
 
@@ -796,22 +824,22 @@ namespace Server.Engines.Spawners
                 }
                 case 7:
                 {
-                    int size = reader.ReadInt();
+                    var size = reader.ReadInt();
 
                     Entries = new List<SpawnerEntry>(size);
 
-                    for (int i = 0; i < size; ++i)
+                    for (var i = 0; i < size; ++i)
                         Entries.Add(new SpawnerEntry(this, reader));
 
                     goto case 4; // Skip the other crap
                 }
                 case 6:
                 {
-                    int size = reader.ReadInt();
+                    var size = reader.ReadInt();
 
-                    bool addentries = Entries.Count == 0;
+                    var addentries = Entries.Count == 0;
 
-                    for (int i = 0; i < size; ++i)
+                    for (var i = 0; i < size; ++i)
                         if (addentries)
                             Entries.Add(new SpawnerEntry(string.Empty, 100, reader.ReadInt()));
                         else
@@ -821,11 +849,11 @@ namespace Server.Engines.Spawners
                 }
                 case 5:
                 {
-                    int size = reader.ReadInt();
+                    var size = reader.ReadInt();
 
-                    bool addentries = Entries.Count == 0;
+                    var addentries = Entries.Count == 0;
 
-                    for (int i = 0; i < size; ++i)
+                    for (var i = 0; i < size; ++i)
                         if (addentries)
                             Entries.Add(new SpawnerEntry(string.Empty, reader.ReadInt(), 1));
                         else
@@ -863,20 +891,20 @@ namespace Server.Engines.Spawners
                     m_HomeRange = reader.ReadInt();
                     m_Running = reader.ReadBool();
 
-                    TimeSpan ts = TimeSpan.Zero;
+                    var ts = TimeSpan.Zero;
 
                     if (m_Running)
                         ts = reader.ReadDeltaTime() - DateTime.UtcNow;
 
                     if (version < 7)
                     {
-                        int size = reader.ReadInt();
+                        var size = reader.ReadInt();
 
-                        bool addentries = Entries.Count == 0;
+                        var addentries = Entries.Count == 0;
 
-                        for (int i = 0; i < size; ++i)
+                        for (var i = 0; i < size; ++i)
                         {
-                            string typeName = reader.ReadString();
+                            var typeName = reader.ReadString();
 
                             if (addentries)
                                 Entries.Add(new SpawnerEntry(typeName, 100, 1));
@@ -891,9 +919,9 @@ namespace Server.Engines.Spawners
                             }
                         }
 
-                        int count = reader.ReadInt();
+                        var count = reader.ReadInt();
 
-                        for (int i = 0; i < count; ++i)
+                        for (var i = 0; i < count; ++i)
                             if (reader.ReadEntity<Mobile>() is ISpawnable e)
                             {
                                 if (e is BaseCreature creature)
@@ -901,7 +929,7 @@ namespace Server.Engines.Spawners
 
                                 e.Spawner = this;
 
-                                for (int j = 0; j < Entries.Count; j++)
+                                for (var j = 0; j < Entries.Count; j++)
                                     if (AssemblyHandler.FindTypeByName(Entries[j].SpawnedName) == e.GetType())
                                     {
                                         Entries[j].Spawned.Add(e);
@@ -964,12 +992,12 @@ namespace Server.Engines.Spawners
                 {
                     Console.WriteLine("Warning: {0} bad spawns detected, logged: 'badspawn.log'", m_List.Count);
 
-                    using StreamWriter op = new StreamWriter("badspawn.log", true);
+                    using var op = new StreamWriter("badspawn.log", true);
                     op.WriteLine("# Bad spawns : {0}", DateTime.Now);
                     op.WriteLine("# Format: X Y Z F Name");
                     op.WriteLine();
 
-                    foreach (WarnEntry e in m_List)
+                    foreach (var e in m_List)
                         op.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", e.m_Point.X, e.m_Point.Y, e.m_Point.Z, e.m_Map,
                             e.m_Name);
 

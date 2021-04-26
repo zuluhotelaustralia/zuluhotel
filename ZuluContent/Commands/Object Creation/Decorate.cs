@@ -28,7 +28,7 @@ namespace Server.Commands
         public static void Generate()
         {
             World.Broadcast(0x35, true, "Generating world decoration, please wait.");
-            
+
             Generate("Data/Decoration/Britannia", Map.Trammel, Map.Felucca);
             Generate("Data/Decoration/Trammel", Map.Trammel);
             Generate("Data/Decoration/Felucca", Map.Felucca);
@@ -44,13 +44,13 @@ namespace Server.Commands
             if (!Directory.Exists(folder))
                 return;
 
-            string[] files = Directory.GetFiles(folder, "*.cfg");
+            var files = Directory.GetFiles(folder, "*.cfg");
 
-            for (int i = 0; i < files.Length; ++i)
+            for (var i = 0; i < files.Length; ++i)
             {
-                List<DecorationList> list = DecorationList.ReadAll(files[i]);
+                var list = DecorationList.ReadAll(files[i]);
 
-                for (int j = 0; j < list.Count; ++j)
+                for (var j = 0; j < list.Count; ++j)
                     _count += list[j].Generate(maps);
             }
         }
@@ -69,7 +69,7 @@ namespace Server.Commands
         private static readonly Type typeofHintItem = typeof(HintItem);
         private static readonly Type typeofSerpentPillar = typeof(SerpentPillar);
 
-        private static readonly Queue<Item> m_DeleteQueue = new Queue<Item>();
+        private static readonly Queue<Item> m_DeleteQueue = new();
 
         private static readonly string[] m_EmptyParams = Array.Empty<string>();
         private List<DecorationEntry> m_Entries;
@@ -92,12 +92,12 @@ namespace Server.Commands
                 }
                 else if (m_Type == typeofLocalizedStatic)
                 {
-                    int labelNumber = 0;
+                    var labelNumber = 0;
 
-                    for (int i = 0; i < m_Params.Length; ++i)
+                    for (var i = 0; i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("LabelNumber"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                             {
@@ -110,12 +110,12 @@ namespace Server.Commands
                 }
                 else if (m_Type == typeofLocalizedSign)
                 {
-                    int labelNumber = 0;
+                    var labelNumber = 0;
 
-                    for (int i = 0; i < m_Params.Length; ++i)
+                    for (var i = 0; i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("LabelNumber"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                             {
@@ -128,9 +128,9 @@ namespace Server.Commands
                 }
                 else if (m_Type == typeofAnkhWest || m_Type == typeofAnkhNorth)
                 {
-                    bool bloodied = false;
+                    var bloodied = false;
 
-                    for (int i = 0; !bloodied && i < m_Params.Length; ++i)
+                    for (var i = 0; !bloodied && i < m_Params.Length; ++i)
                         bloodied = m_Params[i] == "Bloodied";
 
                     if (m_Type == typeofAnkhWest)
@@ -140,58 +140,58 @@ namespace Server.Commands
                 }
                 else if (m_Type == typeofHintItem)
                 {
-                    int range = 0;
-                    int messageNumber = 0;
+                    var range = 0;
+                    var messageNumber = 0;
                     string messageString = null;
-                    int hintNumber = 0;
+                    var hintNumber = 0;
                     string hintString = null;
-                    TimeSpan resetDelay = TimeSpan.Zero;
+                    var resetDelay = TimeSpan.Zero;
 
-                    for (int i = 0; i < m_Params.Length; ++i)
+                    for (var i = 0; i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("Range"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 range = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                         }
                         else if (m_Params[i].StartsWith("WarningString"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 messageString = m_Params[i].Substring(++indexOf);
                         }
                         else if (m_Params[i].StartsWith("WarningNumber"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 messageNumber = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                         }
                         else if (m_Params[i].StartsWith("HintString"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 hintString = m_Params[i].Substring(++indexOf);
                         }
                         else if (m_Params[i].StartsWith("HintNumber"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 hintNumber = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                         }
                         else if (m_Params[i].StartsWith("ResetDelay"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 resetDelay = TimeSpan.Parse(m_Params[i].Substring(++indexOf));
                         }
 
-                    HintItem hi = new HintItem(m_ItemID, range, messageNumber, hintNumber);
+                    var hi = new HintItem(m_ItemID, range, messageNumber, hintNumber);
 
                     hi.WarningString = messageString;
                     hi.HintString = hintString;
@@ -201,42 +201,42 @@ namespace Server.Commands
                 }
                 else if (m_Type == typeofWarningItem)
                 {
-                    int range = 0;
-                    int messageNumber = 0;
+                    var range = 0;
+                    var messageNumber = 0;
                     string messageString = null;
-                    TimeSpan resetDelay = TimeSpan.Zero;
+                    var resetDelay = TimeSpan.Zero;
 
-                    for (int i = 0; i < m_Params.Length; ++i)
+                    for (var i = 0; i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("Range"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 range = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                         }
                         else if (m_Params[i].StartsWith("WarningString"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 messageString = m_Params[i].Substring(++indexOf);
                         }
                         else if (m_Params[i].StartsWith("WarningNumber"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 messageNumber = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                         }
                         else if (m_Params[i].StartsWith("ResetDelay"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 resetDelay = TimeSpan.Parse(m_Params[i].Substring(++indexOf));
                         }
 
-                    WarningItem wi = new WarningItem(m_ItemID, range, messageNumber);
+                    var wi = new WarningItem(m_ItemID, range, messageNumber);
 
                     wi.WarningString = messageString;
                     wi.ResetDelay = resetDelay;
@@ -246,26 +246,26 @@ namespace Server.Commands
                 else if (m_Type == typeofSerpentPillar)
                 {
                     string word = null;
-                    Rectangle2D destination = new Rectangle2D();
+                    var destination = new Rectangle2D();
 
-                    for (int i = 0; i < m_Params.Length; ++i)
+                    for (var i = 0; i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("Word"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 word = m_Params[i].Substring(++indexOf);
                         }
                         else if (m_Params[i].StartsWith("DestStart"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 destination.Start = Point2D.Parse(m_Params[i].Substring(++indexOf));
                         }
                         else if (m_Params[i].StartsWith("DestEnd"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                                 destination.End = Point2D.Parse(m_Params[i].Substring(++indexOf));
@@ -275,13 +275,13 @@ namespace Server.Commands
                 }
                 else if (m_Type.IsSubclassOf(typeofBeverage))
                 {
-                    BeverageType content = BeverageType.Liquor;
-                    bool fill = false;
+                    var content = BeverageType.Liquor;
+                    var fill = false;
 
-                    for (int i = 0; !fill && i < m_Params.Length; ++i)
+                    for (var i = 0; !fill && i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("Content"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                             {
@@ -296,12 +296,12 @@ namespace Server.Commands
                 }
                 else if (m_Type.IsSubclassOf(typeofBaseDoor))
                 {
-                    DoorFacing facing = DoorFacing.WestCW;
+                    var facing = DoorFacing.WestCW;
 
-                    for (int i = 0; i < m_Params.Length; ++i)
+                    for (var i = 0; i < m_Params.Length; ++i)
                         if (m_Params[i].StartsWith("Facing"))
                         {
-                            int indexOf = m_Params[i].IndexOf('=');
+                            var indexOf = m_Params[i].IndexOf('=');
 
                             if (indexOf >= 0)
                             {
@@ -327,11 +327,11 @@ namespace Server.Commands
             {
                 if (m_ItemID > 0)
                 {
-                    List<AddonComponent> comps = addon.Components;
+                    var comps = addon.Components;
 
-                    for (int i = 0; i < comps.Count; ++i)
+                    for (var i = 0; i < comps.Count; ++i)
                     {
-                        AddonComponent comp = comps[i];
+                        var comp = comps[i];
 
                         if (comp.Offset == Point3D.Zero)
                             comp.ItemID = m_ItemID;
@@ -342,7 +342,7 @@ namespace Server.Commands
             {
                 bool unlit = false, unprotected = false;
 
-                for (int i = 0; i < m_Params.Length; ++i)
+                for (var i = 0; i < m_Params.Length; ++i)
                 {
                     if (!unlit && m_Params[i] == "Unlit")
                         unlit = true;
@@ -363,31 +363,31 @@ namespace Server.Commands
             }
             else if (item is RecallRune rune)
             {
-                for (int i = 0; i < m_Params.Length; ++i)
+                for (var i = 0; i < m_Params.Length; ++i)
                     if (m_Params[i].StartsWith("Description"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             rune.Description = m_Params[i].Substring(++indexOf);
                     }
                     else if (m_Params[i].StartsWith("Marked"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             rune.Marked = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("TargetMap"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             rune.TargetMap = Map.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Target"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             rune.Target = Point3D.Parse(m_Params[i].Substring(++indexOf));
@@ -395,10 +395,10 @@ namespace Server.Commands
             }
             else if (item is SkillTeleporter st)
             {
-                for (int i = 0; i < m_Params.Length; ++i)
+                for (var i = 0; i < m_Params.Length; ++i)
                     if (m_Params[i].StartsWith("Skill"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.Skill = (SkillName) Enum.Parse(typeof(SkillName), m_Params[i].Substring(++indexOf),
@@ -406,77 +406,77 @@ namespace Server.Commands
                     }
                     else if (m_Params[i].StartsWith("RequiredFixedPoint"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.Required = Utility.ToInt32(m_Params[i].Substring(++indexOf)) * 0.1;
                     }
                     else if (m_Params[i].StartsWith("Required"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.Required = Utility.ToDouble(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("MessageString"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.MessageString = m_Params[i].Substring(++indexOf);
                     }
                     else if (m_Params[i].StartsWith("MessageNumber"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.MessageNumber = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("PointDest"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.PointDest = Point3D.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("MapDest"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.MapDest = Map.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Creatures"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.Creatures = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("SourceEffect"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.SourceEffect = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("DestEffect"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.DestEffect = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("SoundID"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.SoundID = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Delay"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             st.Delay = TimeSpan.Parse(m_Params[i].Substring(++indexOf));
@@ -487,73 +487,73 @@ namespace Server.Commands
             }
             else if (item is KeywordTeleporter kt)
             {
-                for (int i = 0; i < m_Params.Length; ++i)
+                for (var i = 0; i < m_Params.Length; ++i)
                     if (m_Params[i].StartsWith("Substring"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.Substring = m_Params[i].Substring(++indexOf);
                     }
                     else if (m_Params[i].StartsWith("Keyword"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.Keyword = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Range"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.Range = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("PointDest"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.PointDest = Point3D.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("MapDest"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.MapDest = Map.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Creatures"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.Creatures = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("SourceEffect"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.SourceEffect = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("DestEffect"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.DestEffect = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("SoundID"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.SoundID = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Delay"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             kt.Delay = TimeSpan.Parse(m_Params[i].Substring(++indexOf));
@@ -564,52 +564,52 @@ namespace Server.Commands
             }
             else if (item is Teleporter tp)
             {
-                for (int i = 0; i < m_Params.Length; ++i)
+                for (var i = 0; i < m_Params.Length; ++i)
                     if (m_Params[i].StartsWith("PointDest"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.PointDest = Point3D.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("MapDest"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.MapDest = Map.Parse(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Creatures"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.Creatures = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("SourceEffect"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.SourceEffect = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("DestEffect"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.DestEffect = Utility.ToBoolean(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("SoundID"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.SoundID = Utility.ToInt32(m_Params[i].Substring(++indexOf));
                     }
                     else if (m_Params[i].StartsWith("Delay"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             tp.Delay = TimeSpan.Parse(m_Params[i].Substring(++indexOf));
@@ -620,10 +620,10 @@ namespace Server.Commands
             }
             else if (item is FillableContainer cont)
             {
-                for (int i = 0; i < m_Params.Length; ++i)
+                for (var i = 0; i < m_Params.Length; ++i)
                     if (m_Params[i].StartsWith("ContentType"))
                     {
-                        int indexOf = m_Params[i].IndexOf('=');
+                        var indexOf = m_Params[i].IndexOf('=');
 
                         if (indexOf >= 0)
                             cont.ContentType = (FillableContentType) Enum.Parse(typeof(FillableContentType),
@@ -640,21 +640,21 @@ namespace Server.Commands
 
             item.Movable = false;
 
-            for (int i = 0; i < m_Params.Length; ++i)
+            for (var i = 0; i < m_Params.Length; ++i)
                 if (m_Params[i].StartsWith("Light"))
                 {
-                    int indexOf = m_Params[i].IndexOf('=');
+                    var indexOf = m_Params[i].IndexOf('=');
 
                     if (indexOf >= 0)
                         item.Light = (LightType) Enum.Parse(typeof(LightType), m_Params[i].Substring(++indexOf), true);
                 }
                 else if (m_Params[i].StartsWith("Hue"))
                 {
-                    int indexOf = m_Params[i].IndexOf('=');
+                    var indexOf = m_Params[i].IndexOf('=');
 
                     if (indexOf >= 0)
                     {
-                        int hue = Utility.ToInt32(m_Params[i].Substring(++indexOf));
+                        var hue = Utility.ToInt32(m_Params[i].Substring(++indexOf));
 
                         if (item is DyeTub tub)
                             tub.DyedHue = hue;
@@ -664,20 +664,20 @@ namespace Server.Commands
                 }
                 else if (m_Params[i].StartsWith("Name"))
                 {
-                    int indexOf = m_Params[i].IndexOf('=');
+                    var indexOf = m_Params[i].IndexOf('=');
 
                     if (indexOf >= 0)
                         item.Name = m_Params[i].Substring(++indexOf);
                 }
                 else if (m_Params[i].StartsWith("Amount"))
                 {
-                    int indexOf = m_Params[i].IndexOf('=');
+                    var indexOf = m_Params[i].IndexOf('=');
 
                     if (indexOf >= 0)
                     {
                         // Must supress stackable warnings
 
-                        bool wasStackable = item.Stackable;
+                        var wasStackable = item.Stackable;
 
                         item.Stackable = true;
                         item.Amount = Utility.ToInt32(m_Params[i].Substring(++indexOf));
@@ -690,9 +690,9 @@ namespace Server.Commands
 
         private static bool FindItem(int x, int y, int z, Map map, Item srcItem)
         {
-            int itemID = srcItem.ItemID;
+            var itemID = srcItem.ItemID;
 
-            bool res = false;
+            var res = false;
 
             IPooledEnumerable<Item> eable;
 
@@ -700,12 +700,12 @@ namespace Server.Commands
             {
                 eable = map.GetItemsInRange(new Point3D(x, y, z), 1);
 
-                foreach (Item item in eable)
+                foreach (var item in eable)
                 {
                     if (!(item is BaseDoor))
                         continue;
 
-                    BaseDoor bd = (BaseDoor) item;
+                    var bd = (BaseDoor) item;
                     Point3D p;
                     int bdItemID;
 
@@ -733,10 +733,10 @@ namespace Server.Commands
             {
                 eable = map.GetItemsInRange(new Point3D(x, y, z), 0);
 
-                LightType lt = srcItem.Light;
-                string srcName = srcItem.ItemData.Name;
+                var lt = srcItem.Light;
+                var srcName = srcItem.ItemData.Name;
 
-                foreach (Item item in eable)
+                foreach (var item in eable)
                     if (item.Z == z)
                     {
                         if (item.ItemID == itemID)
@@ -756,9 +756,9 @@ namespace Server.Commands
             {
                 eable = map.GetItemsInRange(new Point3D(x, y, z), 0);
 
-                Type type = srcItem.GetType();
+                var type = srcItem.GetType();
 
-                foreach (Item item in eable)
+                foreach (var item in eable)
                     if (item.Z == z && item.ItemID == itemID)
                     {
                         if (item.GetType() != type)
@@ -788,17 +788,17 @@ namespace Server.Commands
 
         public int Generate(Map[] maps)
         {
-            int count = 0;
+            var count = 0;
 
             Item item = null;
 
-            for (int i = 0; i < m_Entries.Count; ++i)
+            for (var i = 0; i < m_Entries.Count; ++i)
             {
-                DecorationEntry entry = m_Entries[i];
-                Point3D loc = entry.Location;
-                string extra = entry.Extra;
+                var entry = m_Entries[i];
+                var loc = entry.Location;
+                var extra = entry.Extra;
 
-                for (int j = 0; j < maps.Length; ++j)
+                for (var j = 0; j < maps.Length; ++j)
                 {
                     try
                     {
@@ -824,11 +824,11 @@ namespace Server.Commands
 
                         if (item is BaseDoor door)
                         {
-                            IPooledEnumerable<BaseDoor> eable = maps[j].GetItemsInRange<BaseDoor>(loc, 1);
+                            var eable = maps[j].GetItemsInRange<BaseDoor>(loc, 1);
 
-                            Type itemType = door.GetType();
+                            var itemType = door.GetType();
 
-                            foreach (BaseDoor link in eable)
+                            foreach (var link in eable)
                                 if (link != item && link.Z == door.Z && link.GetType() == itemType)
                                 {
                                     door.Link = link;
@@ -851,8 +851,8 @@ namespace Server.Commands
 
         public static List<DecorationList> ReadAll(string path)
         {
-            using StreamReader ip = new StreamReader(path);
-            List<DecorationList> list = new List<DecorationList>();
+            using var ip = new StreamReader(path);
+            var list = new List<DecorationList>();
             DecorationList v;
 
             while ((v = Read(ip)) != null)
@@ -876,11 +876,11 @@ namespace Server.Commands
             if (string.IsNullOrEmpty(line))
                 return null;
 
-            DecorationList list = new DecorationList();
+            var list = new DecorationList();
 
-            int indexOf = line.IndexOf(' ');
+            var indexOf = line.IndexOf(' ');
 
-            string name = line.Substring(0, indexOf++);
+            var name = line.Substring(0, indexOf++);
             list.m_Type = AssemblyHandler.FindTypeByName(name, true);
 
             if (list.m_Type == null)
@@ -892,14 +892,14 @@ namespace Server.Commands
             {
                 list.m_ItemID = Utility.ToInt32(line.Substring(0, indexOf - 1));
 
-                string parms = line.Substring(++indexOf);
+                var parms = line.Substring(++indexOf);
 
                 if (line.EndsWith(")"))
                     parms = parms.Substring(0, parms.Length - 1);
 
                 list.m_Params = parms.Split(';');
 
-                for (int i = 0; i < list.m_Params.Length; ++i)
+                for (var i = 0; i < list.m_Params.Length; ++i)
                     list.m_Params[i] = list.m_Params[i].Trim();
             }
             else
@@ -931,9 +931,9 @@ namespace Server.Commands
     {
         public DecorationEntry(string line)
         {
-            Pop(out string x, ref line);
-            Pop(out string y, ref line);
-            Pop(out string z, ref line);
+            Pop(out var x, ref line);
+            Pop(out var y, ref line);
+            Pop(out var z, ref line);
 
             Location = new Point3D(Utility.ToInt32(x), Utility.ToInt32(y), Utility.ToInt32(z));
             Extra = line;
@@ -945,7 +945,7 @@ namespace Server.Commands
 
         public static void Pop(out string v, ref string line)
         {
-            int space = line.IndexOf(' ');
+            var space = line.IndexOf(' ');
 
             if (space >= 0)
             {

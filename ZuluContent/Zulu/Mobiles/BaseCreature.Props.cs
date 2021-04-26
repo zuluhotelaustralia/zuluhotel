@@ -51,45 +51,45 @@ namespace Server.Mobiles
         public PoisonLevel PoisonImmunity => (PoisonLevel) this.GetResist(ElementalType.Poison);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicImmunity => (SpellCircle) this.GetResist(ElementalType.MagicImmunity);
+        public SpellCircle MagicImmunity => this.GetResist(ElementalType.MagicImmunity);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public SpellCircle MagicReflection => (SpellCircle) this.GetResist(ElementalType.MagicReflection);
+        public SpellCircle MagicReflection => this.GetResist(ElementalType.MagicReflection);
 
         #endregion
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool InitialInnocent => InitProperties?.InitialInnocent ?? false;
+        public virtual bool InitialInnocent { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool AlwaysMurderer => InitProperties?.AlwaysMurderer ?? false;
+        public virtual bool AlwaysMurderer { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool AlwaysAttackable => InitProperties?.AlwaysAttackable ?? false;
+        public virtual bool AlwaysAttackable { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool TargetAcquireExhaustion => InitProperties.TargetAcquireExhaustion ?? false;
+        public virtual bool TargetAcquireExhaustion { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual Type RiseCreatureType => InitProperties?.RiseCreatureType;
+        public virtual Type RiseCreatureType { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual TimeSpan RiseCreatureDelay => InitProperties?.RiseCreatureDelay ?? TimeSpan.FromSeconds(5.0);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual List<Type> PreferredSpells => InitProperties?.PreferredSpells;
+        public virtual List<Type> PreferredSpells { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual CreatureType CreatureType { get; set; } = CreatureType.None;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual double WeaponAbilityChance => InitProperties?.WeaponAbilityChance ?? 0.4;
+        public virtual double WeaponAbilityChance { get; set; } = 0.4;
         
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool HasBreath { get; set; } = false;
+        public virtual bool HasBreath { get; set; }
         
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool HasWebs { get; set; } = false;
+        public virtual bool HasWebs { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual Poison HitPoison { get; set; }

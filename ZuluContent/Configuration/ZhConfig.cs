@@ -19,6 +19,7 @@ namespace Server
         public static LootConfiguration Loot => Get<LootConfiguration>();
         public static SkillConfiguration Skills => Get<SkillConfiguration>();
         public static SpellConfiguration Spells => Get<SpellConfiguration>();
+        public static CreatureConfiguration Creatures => Get<CreatureConfiguration>();
 
 
         private static readonly Dictionary<Type, object> Cache = new();
@@ -37,6 +38,7 @@ namespace Server
             Add<LootConfiguration>();
             Add<SkillConfiguration>();
             Add<SpellConfiguration>();
+            Add<CreatureConfiguration>();
 
             stopwatch.Stop();
             Console.WriteLine($"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
