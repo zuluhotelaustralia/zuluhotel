@@ -1,0 +1,56 @@
+{
+  "Name": "an Ophidian Shaman",
+  "CorpseNameOverride": "corpse of an Ophidian Shaman",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 500,
+  "Int": 350,
+  "Dex": 160,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 85,
+  "CanRummageCorpses": true,
+  "CreatureType": "Ophidian",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Serpent",
+  "Hides": 5,
+  "HitsMax": 500,
+  "Hue": 88,
+  "LootItemChance": 30,
+  "LootItemLevel": 4,
+  "LootTable": "69",
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 160,
+  "PreferredSpells": [
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Resistances": {
+    "Air": 75,
+    "Water": 75
+  },
+  "Skills": {
+    "Parry": 120,
+    "Magery": 120,
+    "Macing": 120,
+    "Tactics": 70,
+    "MagicResist": 90
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 3,
+      "Max": 30
+    },
+    "HitSound": 360,
+    "MissSound": 361
+  }
+}

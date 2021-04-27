@@ -1,0 +1,41 @@
+{
+  "Name": "<random> the marksman",
+  "CorpseNameOverride": "corpse of <random> the marksman",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 135,
+  "Int": 35,
+  "Dex": 190,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Archer",
+  "AlwaysMurderer": true,
+  "Body": 17,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 10,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 135,
+  "Hue": 0,
+  "LootTable": "52",
+  "ManaMaxSeed": 25,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 80,
+  "StamMaxSeed": 90,
+  "Skills": {
+    "MagicResist": 50,
+    "Tactics": 100,
+    "Macing": 65,
+    "Archery": 100
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 3,
+      "Max": 12
+    },
+    "HitSound": 232,
+    "MissSound": 569
+  }
+}

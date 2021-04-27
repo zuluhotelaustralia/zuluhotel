@@ -1,0 +1,49 @@
+{
+  "Name": "a Shade of Zanroth",
+  "CorpseNameOverride": "corpse of a Shade of Zanroth",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 500,
+  "Int": 500,
+  "Dex": 500,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "Body": 970,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 60,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 8,
+  "HitsMax": 500,
+  "Hue": 17969,
+  "LootItemChance": 0,
+  "LootItemLevel": 0,
+  "LootTable": "142",
+  "ManaMaxSeed": 500,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 500,
+  "TargetAcquireExhaustion": true,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100
+  },
+  "Skills": {
+    "MagicResist": 120,
+    "Tactics": 180
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 31,
+      "Max": 61
+    },
+    "Skill": "Swords",
+    "Animation": "Slash1H",
+    "HitSound": 591,
+    "MissSound": 590,
+    "MaxRange": 8
+  }
+}

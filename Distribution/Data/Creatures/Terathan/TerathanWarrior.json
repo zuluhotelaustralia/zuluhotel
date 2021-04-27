@@ -1,0 +1,44 @@
+{
+  "Name": "a Terathan Warrior",
+  "CorpseNameOverride": "corpse of a Terathan Warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 550,
+  "Int": 35,
+  "Dex": 105,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 70,
+  "CanRummageCorpses": true,
+  "CreatureType": "Terathan",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 550,
+  "Hue": 0,
+  "LootTable": "63",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 70,
+  "StamMaxSeed": 70,
+  "Resistances": {
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "Tactics": 90,
+    "MagicResist": 90,
+    "Parry": 75
+  },
+  "Attack": {
+    "Speed": 37,
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "Skill": "Swords",
+    "HitSound": 589,
+    "MissSound": 590
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "Name": "an imp",
+  "CorpseNameOverride": "corpse of an imp",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 175,
+  "Int": 85,
+  "Dex": 150,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 422,
+  "Body": 39,
+  "CanRummageCorpses": true,
+  "CreatureType": "Daemon",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 175,
+  "Hue": 35,
+  "LootTable": "58",
+  "ManaMaxSeed": 0,
+  "MinTameSkill": 90,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 75,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Tactics": 70,
+    "Macing": 50,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 2,
+      "Max": 30
+    },
+    "HitSound": 425,
+    "MissSound": 569,
+    "HasBreath": true
+  }
+}

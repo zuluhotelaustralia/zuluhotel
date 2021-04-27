@@ -1,0 +1,59 @@
+{
+  "Name": "a Mind Flayer",
+  "CorpseNameOverride": "corpse of a Mind Flayer",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1200,
+  "Int": 2750,
+  "Dex": 310,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "Body": 24,
+  "CanRummageCorpses": true,
+  "ClassLevel": 6,
+  "ClassType": "Warrior",
+  "CreatureType": "Daemon",
+  "VirtualArmor": 60,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 6,
+  "HitsMax": 1200,
+  "Hue": 2222,
+  "LootItemChance": 90,
+  "LootItemLevel": 6,
+  "LootTable": "35",
+  "ManaMaxSeed": 2750,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Tamable": false,
+  "TargetAcquireExhaustion": true,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "MagicImmunity": 8
+  },
+  "Skills": {
+    "Magery": 375,
+    "MagicResist": 150,
+    "Tactics": 150,
+    "Macing": 150,
+    "DetectHidden": 200
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 14,
+      "Max": 50
+    },
+    "HitSound": 532,
+    "MissSound": 569,
+    "MaxRange": 6,
+    "Ability": {
+      "Type": "SpellStrike",
+      "SpellType": "ControlUndeadSpell"
+    },
+    "AbilityChance": 1
+  }
+}

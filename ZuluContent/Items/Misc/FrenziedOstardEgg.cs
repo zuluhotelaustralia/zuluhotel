@@ -5,27 +5,27 @@ namespace Server.Items
 {
     public class FrenziedOstardEgg : BaseEgg
     {
-        public static WeightedRandomType<BaseCreature> WeightedOstards;
+        public static readonly WeightedRandom<string> WeightedOstards;
         static FrenziedOstardEgg()
         {
-            WeightedOstards = new WeightedRandomType<BaseCreature>();
+            WeightedOstards = new WeightedRandom<string>();
 
-            WeightedOstards.Add<FrenziedOstard>(1);
-            WeightedOstards.Add<GoldenFrenziedOstard>(1);
-            WeightedOstards.Add<PlainsFrenziedOstard>(1);
-            WeightedOstards.Add<MountainFrenziedOstard>(1);
-            WeightedOstards.Add<SwampFrenziedOstard>(1);
-            WeightedOstards.Add<HighlandFrenziedOstard>(1);
-            WeightedOstards.Add<ShadowFrenziedOstard>(1);
-            WeightedOstards.Add<ValleyFrenziedOstard>(1);
-            WeightedOstards.Add<StoneFrenziedOstard>(1);
-            WeightedOstards.Add<EmeraldFrenziedOstard>(1);
-            WeightedOstards.Add<RubyFrenziedOstard>(1);
-            WeightedOstards.Add<TropicalFrenziedOstard>(1);
-            WeightedOstards.Add<SnowFrenziedOstard>(1);
-            WeightedOstards.Add<IceFrenziedOstard>(1);
-            WeightedOstards.Add<FireFrenziedOstard>(1);
-            WeightedOstards.Add<HeavenlyFrenziedOstard>(1);
+            WeightedOstards.Add(1, "FrenziedOstard");
+            WeightedOstards.Add(1, "GoldenFrenziedOstard");
+            WeightedOstards.Add(1, "PlainsFrenziedOstard");
+            WeightedOstards.Add(1, "MountainFrenziedOstard");
+            WeightedOstards.Add(1, "SwampFrenziedOstard");
+            WeightedOstards.Add(1, "HighlandFrenziedOstard");
+            WeightedOstards.Add(1, "ShadowFrenziedOstard");
+            WeightedOstards.Add(1, "ValleyFrenziedOstard");
+            WeightedOstards.Add(1, "StoneFrenziedOstard");
+            WeightedOstards.Add(1, "EmeraldFrenziedOstard");
+            WeightedOstards.Add(1, "RubyFrenziedOstard");
+            WeightedOstards.Add(1, "TropicalFrenziedOstard");
+            WeightedOstards.Add(1, "SnowFrenziedOstard");
+            WeightedOstards.Add(1, "IceFrenziedOstard");
+            WeightedOstards.Add(1, "FireFrenziedOstard");
+            WeightedOstards.Add(1, "HeavenlyFrenziedOstard");
         }
         
         [Constructible]
@@ -92,7 +92,7 @@ namespace Server.Items
             if (Utility.Random(1, 2) == 1)
                 return null;    
 
-            return WeightedOstards.GetRandom();
+            return Creatures.Create(WeightedOstards.GetRandom());
         }
     }
 }

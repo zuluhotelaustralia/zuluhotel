@@ -1,0 +1,56 @@
+{
+  "Name": "a wisp",
+  "CorpseNameOverride": "corpse of a wisp",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 225,
+  "Int": 500,
+  "Dex": 185,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "Body": 58,
+  "CanFly": true,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 225,
+  "Hue": 0,
+  "InitialInnocent": true,
+  "LootItemChance": 25,
+  "LootItemLevel": 3,
+  "LootTable": "125",
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 160,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fourth.CurseSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Earth": 100
+  },
+  "Skills": {
+    "Parry": 80,
+    "Tactics": 100,
+    "MagicResist": 90,
+    "Magery": 120
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 21,
+      "Max": 45
+    },
+    "Skill": "Swords",
+    "HitSound": 469,
+    "MissSound": 569
+  }
+}

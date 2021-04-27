@@ -10,7 +10,7 @@ namespace Server.Spells.Eighth
 
         public async Task CastAsync()
         {
-            SpellHelper.Summon(new Daemon(), Caster, 0x216);
+            SpellHelper.Summon(Creatures.Create("Daemon"), Caster, 0x216);
         }
     }
 }

@@ -1,0 +1,40 @@
+{
+  "Name": "a skeleton",
+  "CorpseNameOverride": "corpse of a skeleton",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 60,
+  "Int": 30,
+  "Dex": 70,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 57,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 5,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 60,
+  "Hue": 33784,
+  "LootTable": "15",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 60,
+  "Resistances": {
+    "Poison": 6
+  },
+  "Skills": {
+    "Parry": 50,
+    "Tactics": 60,
+    "Macing": 50,
+    "MagicResist": 20
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 4,
+      "Max": 16
+    }
+  }
+}

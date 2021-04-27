@@ -5,36 +5,36 @@ namespace Server.Items
 {
     public class DragonEgg : BaseEgg
     {        
-        public static WeightedRandomType<BaseCreature> WeightedStandardDragons;
-        public static WeightedRandomType<BaseCreature> WeightedDragons;
+        public static readonly WeightedRandom<string> WeightedStandardDragons;
+        public static readonly WeightedRandom<string> WeightedDragons;
         
         static DragonEgg()
         {
-            WeightedDragons = new WeightedRandomType<BaseCreature>();
+            WeightedDragons = new WeightedRandom<string>();
 
-            WeightedDragons.Add<AdamantineDragon>(1);
-            WeightedDragons.Add<RockDragon>(1);
-            WeightedDragons.Add<CelestialDragon>(1);
-            WeightedDragons.Add<FrostDragon>(1);
-            WeightedDragons.Add<InfernoDragon>(1);
-            WeightedDragons.Add<PoisonDragon>(1);
-            WeightedDragons.Add<RockDragon>(1);
-            WeightedDragons.Add<WaterDrake>(1);
-            WeightedDragons.Add<ShadowDragon>(1);
-            WeightedDragons.Add<StormDragon>(1);
-            WeightedDragons.Add<TidalDragon>(1);
-            WeightedDragons.Add<AirDrake>(1);
-            WeightedDragons.Add<EarthDrake>(1);
-            WeightedDragons.Add<FireDrake>(1);
-            WeightedDragons.Add<FrostDrake>(1);
-            WeightedDragons.Add<HeavenlyDrake>(1);
-            WeightedDragons.Add<PoisonDrake>(1);
-            WeightedDragons.Add<SpectralDrake>(1);
-            WeightedDragons.Add<UndeadDrake>(1);
+            WeightedDragons.Add(1, "AdamantineDragon");
+            WeightedDragons.Add(1, "RockDragon");
+            WeightedDragons.Add(1, "CelestialDragon");
+            WeightedDragons.Add(1, "FrostDragon");
+            WeightedDragons.Add(1, "InfernoDragon");
+            WeightedDragons.Add(1, "PoisonDragon");
+            WeightedDragons.Add(1, "RockDragon");
+            WeightedDragons.Add(1, "WaterDrake");
+            WeightedDragons.Add(1, "ShadowDragon");
+            WeightedDragons.Add(1, "StormDragon");
+            WeightedDragons.Add(1, "TidalDragon");
+            WeightedDragons.Add(1, "AirDrake");
+            WeightedDragons.Add(1, "EarthDrake");
+            WeightedDragons.Add(1, "FireDrake");
+            WeightedDragons.Add(1, "FrostDrake");
+            WeightedDragons.Add(1, "HeavenlyDrake");
+            WeightedDragons.Add(1, "PoisonDrake");
+            WeightedDragons.Add(1, "SpectralDrake");
+            WeightedDragons.Add(1, "UndeadDrake");
 
-            WeightedStandardDragons = new WeightedRandomType<BaseCreature>();
-            WeightedStandardDragons.Add<Drake>(1);
-            WeightedStandardDragons.Add<Dragon>(1);
+            WeightedStandardDragons = new WeightedRandom<string>();
+            WeightedStandardDragons.Add(1, "Drake");
+            WeightedStandardDragons.Add(1, "Dragon");
         }
 
         [Constructible]
@@ -95,10 +95,10 @@ namespace Server.Items
         {                                   
             // 25% chance to spawn color dragons
             if (Utility.RandomMinMax(1,5) == 5)            
-                return WeightedDragons.GetRandom();            
+                return Creatures.Create(WeightedDragons.GetRandom());            
             // 75% chance to spawn regular dragon or drake
             else            
-                return WeightedStandardDragons.GetRandom();                        
+                return Creatures.Create(WeightedStandardDragons.GetRandom());                        
         }
     }
 }

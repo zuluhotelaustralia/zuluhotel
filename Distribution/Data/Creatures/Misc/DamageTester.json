@@ -1,0 +1,35 @@
+{
+  "Name": "<random> the damage tester",
+  "CorpseNameOverride": "corpse of <random> the damage tester",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 60000,
+  "Int": 200,
+  "Dex": 200,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Animal",
+  "AlwaysMurderer": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 100000,
+  "Hue": 33784,
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 200,
+  "Skills": {
+    "Parry": 200,
+    "Mining": 1,
+    "Fencing": 1,
+    "Tactics": 1,
+    "Wrestling": 1
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 0,
+      "Max": 0
+    }
+  }
+}

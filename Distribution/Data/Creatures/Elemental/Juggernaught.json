@@ -1,0 +1,79 @@
+{
+  "Name": "a Juggernaught",
+  "CorpseNameOverride": "corpse of a Juggernaught",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1000,
+  "Int": 1000,
+  "Dex": 10,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "BaseSoundID": 532,
+  "Body": 14,
+  "CanRummageCorpses": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 100,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 6,
+  "HitsMax": 2000,
+  "Hue": 0,
+  "LootItemChance": 50,
+  "LootItemLevel": 6,
+  "LootTable": "9",
+  "ManaMaxSeed": 1000,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 200,
+  "Tamable": false,
+  "PreferredSpells": [
+    "Server.Spells.Third.WallOfStoneSpell",
+    "Server.Spells.Fifth.BladeSpiritsSpell",
+    "Server.Spells.Fifth.DispelFieldSpell"
+  ],
+  "Resistances": {
+    "Fire": 100,
+    "Air": 100,
+    "Water": 100,
+    "Necro": 100,
+    "Earth": 100,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "Tactics": 250,
+    "Fencing": 200,
+    "MagicResist": 200,
+    "Magery": 200,
+    "DetectHidden": 200,
+    "Meditation": 200
+  },
+  "Attack": {
+    "Speed": 99,
+    "Damage": {
+      "Min": 7,
+      "Max": 70
+    },
+    "HitSound": 757,
+    "MissSound": 537,
+    "MaxRange": 6,
+    "Ability": {
+      "Type": "SpellStrike",
+      "SpellType": "LightningSpell"
+    },
+    "AbilityChance": 1
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.Spear",
+      "Name": "Juggernaught Weapon",
+      "Hue": 0
+    },
+    {
+      "ItemType": "Server.Items.HeaterShield",
+      "Name": "Shield AR40",
+      "Hue": 0,
+      "ArmorRating": 40
+    }
+  ]
+}

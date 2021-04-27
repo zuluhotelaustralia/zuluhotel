@@ -1,0 +1,42 @@
+{
+  "Name": "a hunting dog",
+  "CorpseNameOverride": "corpse of a hunting dog",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 45,
+  "Int": 25,
+  "Dex": 80,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Animal",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 133,
+  "Body": 217,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 5,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 45,
+  "Hue": 33784,
+  "ManaMaxSeed": 0,
+  "MinTameSkill": 10,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 30,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Tactics": 60,
+    "Macing": 55,
+    "MagicResist": 40
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 2,
+      "Max": 8
+    },
+    "HitSound": 136,
+    "MissSound": 569
+  }
+}

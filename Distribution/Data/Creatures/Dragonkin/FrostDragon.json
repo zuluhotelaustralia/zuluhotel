@@ -1,0 +1,69 @@
+{
+  "Name": "a Frost Dragon",
+  "CorpseNameOverride": "corpse of a Frost Dragon",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 800,
+  "Int": 400,
+  "Dex": 60,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 362,
+  "Body": 12,
+  "CanFly": true,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "IceCrystal",
+  "Hides": 5,
+  "HitsMax": 800,
+  "Hue": 1176,
+  "LootItemChance": 75,
+  "LootItemLevel": 5,
+  "LootTable": "37",
+  "ManaMaxSeed": 200,
+  "MinTameSkill": 140,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 140,
+  "StamMaxSeed": 140,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.First.WeakenSpell",
+    "Server.Spells.Sixth.MassCurseSpell"
+  ],
+  "Resistances": {
+    "Water": 100,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "Parry": 80,
+    "MagicResist": 75,
+    "Tactics": 120,
+    "Macing": 130,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 65,
+    "Damage": {
+      "Min": 25,
+      "Max": 75
+    },
+    "HitSound": 365,
+    "MissSound": 569,
+    "Ability": {
+      "Type": "SpellStrike",
+      "SpellType": "IceStrikeSpell"
+    },
+    "AbilityChance": 0.8
+  }
+}

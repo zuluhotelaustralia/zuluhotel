@@ -1,0 +1,48 @@
+{
+  "Name": "a brigand",
+  "CorpseNameOverride": "corpse of a brigand",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 130,
+  "Int": 105,
+  "Dex": 300,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 130,
+  "Hue": 0,
+  "LootItemChance": 1,
+  "LootTable": "47",
+  "ManaMaxSeed": 95,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 94,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Tactics": 85,
+    "Fencing": 85,
+    "MagicResist": 50
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 5,
+      "Max": 50
+    },
+    "HitSound": 360,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.Cutlass",
+      "Name": "Brigand1 Weapon",
+      "Hue": 0
+    }
+  ]
+}

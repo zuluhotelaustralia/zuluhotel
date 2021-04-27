@@ -1,0 +1,66 @@
+{
+  "Name": "a wraith",
+  "CorpseNameOverride": "corpse of a wraith",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 125,
+  "Int": 1025,
+  "Dex": 380,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 26,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 125,
+  "Hue": 16385,
+  "LootItemChance": 80,
+  "LootItemLevel": 5,
+  "LootTable": "35",
+  "ManaMaxSeed": 1025,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 80,
+  "Tamable": false,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Server.Spells.Eighth.EarthquakeSpell",
+    "Server.Spells.Fifth.DispelFieldSpell",
+    "Server.Spells.Seventh.MassDispelSpell",
+    "Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell",
+    "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Scripts.Zulu.Spells.Earth.IceStrikeSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "Physical": 4
+  },
+  "Skills": {
+    "EvalInt": 100,
+    "Magery": 150,
+    "Parry": 80,
+    "MagicResist": 105,
+    "Tactics": 120,
+    "Fencing": 120
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 15,
+      "Max": 40
+    },
+    "HitSound": 643,
+    "MissSound": 642,
+    "Ability": "TriElementalStrike",
+    "AbilityChance": 1
+  }
+}

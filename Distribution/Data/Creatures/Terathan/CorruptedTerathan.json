@@ -1,0 +1,49 @@
+{
+  "Name": "a Corrupted Terathan",
+  "CorpseNameOverride": "corpse of a Corrupted Terathan",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 400,
+  "Int": 110,
+  "Dex": 250,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 70,
+  "CanRummageCorpses": true,
+  "CreatureType": "Terathan",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 400,
+  "Hue": 1304,
+  "LootItemChance": 90,
+  "LootItemLevel": 3,
+  "LootTable": "127",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 70,
+  "Skills": {
+    "Macing": 120,
+    "Tactics": 100,
+    "MagicResist": 100,
+    "Parry": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "HitSound": 589,
+    "MissSound": 590
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.HeaterShield",
+      "Name": "Shield AR20",
+      "Hue": 0,
+      "ArmorRating": 20
+    }
+  ]
+}

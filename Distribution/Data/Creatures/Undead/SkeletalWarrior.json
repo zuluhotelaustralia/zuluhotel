@@ -1,0 +1,43 @@
+{
+  "Name": "a skeletal warrior",
+  "CorpseNameOverride": "corpse of a skeletal warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 300,
+  "Int": 35,
+  "Dex": 350,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 57,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 300,
+  "Hue": 1127,
+  "LootItemChance": 5,
+  "LootTable": "59",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 175,
+  "Resistances": {
+    "Poison": 6
+  },
+  "Skills": {
+    "Tactics": 120,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 13,
+      "Max": 45
+    },
+    "Skill": "Swords",
+    "HitSound": 573,
+    "MissSound": 569
+  }
+}

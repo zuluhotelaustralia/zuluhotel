@@ -1,0 +1,47 @@
+{
+  "Name": "<random> the Orcish Cleric",
+  "CorpseNameOverride": "corpse of <random> the Orcish Cleric",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 215,
+  "Int": 290,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 17,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 215,
+  "Hue": 1401,
+  "LootItemChance": 60,
+  "LootItemLevel": 1,
+  "LootTable": "31",
+  "ManaMaxSeed": 90,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 115,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 80,
+  "PreferredSpells": [
+    "Server.Spells.Fourth.LightningSpell"
+  ],
+  "Skills": {
+    "MagicResist": 80,
+    "Tactics": 50,
+    "Macing": 75,
+    "Magery": 100
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 4,
+      "Max": 32
+    },
+    "HitSound": 436,
+    "MissSound": 569
+  }
+}

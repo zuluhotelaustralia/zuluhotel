@@ -44,30 +44,29 @@ namespace Server.Items
 
         private static Point2D[] m_Locations;
 
-        private static Type[][] m_SpawnTypes = new[]
-        {
-            new[] {typeof(Skeleton)},
+        private static readonly string[][] SpawnTypes = {
+            new[] {"Skeleton"},
             new[]
             {
-                typeof(Mongbat), typeof(OrcWarrior), typeof(OrcWarrior), typeof(OrcWarrior), typeof(RatmanMarksman),
-                typeof(RatmanMarksman), typeof(RatmanMarksman), typeof(HeadlessOne), typeof(Skeleton), typeof(Zombie)
+                "Mongbat", "OrcWarrior", "OrcWarrior", "OrcWarrior", "RatmanMarksman",
+                "RatmanMarksman", "RatmanMarksman", "HeadlessOne", "Skeleton", "Zombie"
             },
-            new[] {typeof(OrcMage), typeof(OrcishLord), typeof(Gazer), typeof(Gargoyle)},
+            new[] {"OrcMage", "OrcishLord", "Gazer", "Gargoyle"},
             new[]
             {
-                typeof(Liche), typeof(BoneKnight), typeof(AirElemental), typeof(WaterElemental), typeof(FireElemental),
-                typeof(EarthElemental), typeof(OgreLord), typeof(Troll)
-            },
-            new[]
-            {
-                typeof(OgreLord), typeof(Liche), typeof(Daemon), typeof(Drake), typeof(TrollLord), typeof(Vampire),
-                typeof(Vampire), typeof(Drake), typeof(SpectralDrake), typeof(AirElementalLord),
-                typeof(WaterElementalLord), typeof(EarthElementalLord), typeof(FireElementalLord)
+                "Liche", "BoneKnight", "AirElemental", "WaterElemental", "FireElemental",
+                "EarthElemental", "OgreLord", "Troll"
             },
             new[]
             {
-                typeof(BlackWisp), typeof(Dragon), typeof(Dragon), typeof(DaemonLieutenant), typeof(Dracula),
-                typeof(Wyvern), typeof(BloodElemental), typeof(PoisonElemental), typeof(RockDragon), typeof(MageHunter)
+                "OgreLord", "Liche", "Daemon", "Drake", "TrollLord", "Vampire",
+                "Vampire", "Drake", "SpectralDrake", "AirElementalLord",
+                "WaterElementalLord", "EarthElementalLord", "FireElementalLord"
+            },
+            new[]
+            {
+                "BlackWisp", "Dragon", "Dragon", "DaemonLieutenant", "Dracula",
+                "Wyvern", "BloodElemental", "PoisonElemental", "RockDragon", "MageHunter"
             }
         };
 
@@ -119,14 +118,13 @@ namespace Server.Items
 
         public static BaseCreature Spawn(int level, Point3D p, bool guardian)
         {
-            if (level >= 0 && level < m_SpawnTypes.Length)
+            if (level >= 0 && level < SpawnTypes.Length)
             {
                 BaseCreature bc;
 
                 try
                 {
-                    bc = (BaseCreature) Activator.CreateInstance(
-                        m_SpawnTypes[level][Utility.Random(m_SpawnTypes[level].Length)]);
+                    bc = Creatures.Create(SpawnTypes[level][Utility.Random(SpawnTypes[level].Length)]);
                 }
                 catch
                 {

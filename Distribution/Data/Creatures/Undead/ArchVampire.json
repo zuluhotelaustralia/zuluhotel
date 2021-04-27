@@ -1,0 +1,71 @@
+{
+  "Name": "Arch Vampire",
+  "CorpseNameOverride": "corpse of Arch Vampire",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 550,
+  "Int": 700,
+  "Dex": 550,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "ClassLevel": 4,
+  "ClassType": "Mage",
+  "CreatureType": "Undead",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 350,
+  "Hue": 0,
+  "LootItemChance": 75,
+  "LootItemLevel": 5,
+  "LootTable": "71",
+  "ManaMaxSeed": 700,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 550,
+  "TargetAcquireExhaustion": true,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Server.Spells.Fifth.DispelFieldSpell",
+    "Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell",
+    "Scripts.Zulu.Spells.Necromancy.DarknessSpell",
+    "Scripts.Zulu.Spells.Earth.GustOfAirSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Scripts.Zulu.Spells.Earth.IceStrikeSpell",
+    "Scripts.Zulu.Spells.Earth.ShiftingEarthSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 75,
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "MagicResist": 100,
+    "Tactics": 200,
+    "Macing": 200,
+    "Magery": 200
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 12,
+      "Max": 40
+    },
+    "HitSound": 364,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.ShortHair",
+      "Hue": 1
+    }
+  ]
+}

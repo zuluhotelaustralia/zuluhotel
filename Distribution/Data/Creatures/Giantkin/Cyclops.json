@@ -1,0 +1,42 @@
+{
+  "Name": "a cyclops",
+  "CorpseNameOverride": "corpse of a cyclops",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 65,
+  "Dex": 130,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 75,
+  "CanRummageCorpses": true,
+  "CreatureType": "Giantkin",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 350,
+  "Hue": 33784,
+  "LootItemChance": 50,
+  "LootItemLevel": 3,
+  "LootTable": "40",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 99,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Parry": 80,
+    "Tactics": 110,
+    "MagicResist": 85
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 15,
+      "Max": 75
+    },
+    "HitSound": 607,
+    "MissSound": 361
+  }
+}

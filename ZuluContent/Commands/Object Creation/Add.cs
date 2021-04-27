@@ -108,7 +108,7 @@ namespace Server.Commands
             Type type;
             
             if (ZhConfig.Creatures.Entries.TryGetValue(name, out var creatureProperties) && 
-                creatureProperties.BaseType.IsSubclassOf(typeof(BaseCreatureTemplate)))
+                creatureProperties.BaseType.IsAssignableTo(typeof(BaseCreatureTemplate)))
             {
                 type = creatureProperties.BaseType;
                 args = new []{ name }.Concat(args).ToArray();

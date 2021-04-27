@@ -1,0 +1,63 @@
+{
+  "Name": "a Greater Evil Book of the Earth",
+  "CorpseNameOverride": "corpse of a Greater Evil Book of the Earth",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1600,
+  "Int": 1910,
+  "Dex": 1600,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "Body": 985,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animated",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 1850,
+  "Hue": 1645,
+  "LootItemChance": 65,
+  "LootItemLevel": 7,
+  "LootTable": "9",
+  "ManaMaxSeed": 1600,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 800,
+  "TargetAcquireExhaustion": true,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Earth.ShiftingEarthSpell",
+    "Scripts.Zulu.Spells.Earth.GustOfAirSpell",
+    "Scripts.Zulu.Spells.Earth.CallLightningSpell",
+    "Scripts.Zulu.Spells.Earth.IceStrikeSpell",
+    "Server.Spells.Seventh.MassDispelSpell",
+    "Server.Spells.First.ClumsySpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Air": 100,
+    "Water": 25,
+    "Fire": 100,
+    "Earth": 100,
+    "Necro": 25,
+    "MagicImmunity": 8
+  },
+  "Skills": {
+    "Parry": 150,
+    "MagicResist": 150,
+    "Tactics": 150,
+    "Magery": 185,
+    "Healing": 175
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 25,
+      "Max": 70
+    },
+    "Skill": "Swords",
+    "HitSound": 611,
+    "MissSound": 612
+  }
+}

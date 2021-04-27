@@ -1,0 +1,61 @@
+{
+  "Name": "a Bloodliche",
+  "CorpseNameOverride": "corpse of a Bloodliche",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 275,
+  "Int": 900,
+  "Dex": 210,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 24,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Liche",
+  "Hides": 3,
+  "HitsMax": 275,
+  "Hue": 1209,
+  "LootItemChance": 25,
+  "LootItemLevel": 5,
+  "LootTable": "22",
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Third.PoisonSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Sixth.ExplosionSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Sixth.MassCurseSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "MagicImmunity": 7
+  },
+  "Skills": {
+    "Magery": 175,
+    "MagicResist": 150,
+    "Tactics": 50,
+    "Macing": 160
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 9,
+      "Max": 45
+    },
+    "HitSound": 415,
+    "MissSound": 413
+  }
+}

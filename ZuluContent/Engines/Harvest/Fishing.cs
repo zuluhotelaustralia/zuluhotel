@@ -67,15 +67,15 @@ namespace Server.Engines.Harvest
             #endregion
         }
 
-        private static void SpawnCreature(Mobile harvester, Type creatureType)
+        private static void SpawnCreature(Mobile harvester, string template)
         {
             var p = new Point3D(harvester);
             p.X -= 1;
             
             if (SpellHelper.FindValidSpawnLocation(harvester.Map, ref p, true))
             {
-                var creature = creatureType.CreateInstance<BaseCreature>();
-                creature.MoveToWorld(p, harvester.Map);
+                var creature = Creatures.Create(template);
+                creature?.MoveToWorld(p, harvester.Map);
             }
         }
         
@@ -139,7 +139,7 @@ namespace Server.Engines.Harvest
                     if (Utility.Random(10) < 4 && !Region.Find(harvester.Location, harvester.Map)
                         .GetRegion<GuardedRegion>()?.IsDisabled() == false)
                     {
-                        SpawnCreature(harvester, typeof(WaterElemental));
+                        SpawnCreature(harvester, "WaterElemental");
                         message = "You attract the attention of a water elemental";
                     }
                     break;
@@ -148,7 +148,7 @@ namespace Server.Engines.Harvest
                 {
                     if (Utility.Random(10) < 4)
                     {
-                        SpawnCreature(harvester, typeof(Walrus));
+                        SpawnCreature(harvester, "Walrus");
                         message = "A walrus comes by to see what you're doing";
                     }
                     break;

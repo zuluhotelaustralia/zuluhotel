@@ -72,20 +72,11 @@ namespace Server.Engines.Spawners
         {
         }
 
-        public override string DefaultName
-        {
-            get { return "Spawner"; }
-        }
+        public override string DefaultName { get; } = "Spawner";
 
-        public bool IsFull
-        {
-            get { return Spawned?.Count >= m_Count; }
-        }
+        public bool IsFull => Spawned?.Count >= m_Count;
 
-        public bool IsEmpty
-        {
-            get { return Spawned?.Count == 0; }
-        }
+        public bool IsEmpty => Spawned?.Count == 0;
 
         public DateTime End { get; set; }
 
@@ -195,15 +186,9 @@ namespace Server.Engines.Spawners
             }
         }
 
-        public virtual Point3D HomeLocation
-        {
-            get { return Location; }
-        }
+        public virtual Point3D HomeLocation => Location;
 
-        public bool UnlinkOnTaming
-        {
-            get { return true; }
-        }
+        public bool UnlinkOnTaming => true;
 
         [CommandProperty(AccessLevel.Developer)]
         public int HomeRange
@@ -216,10 +201,7 @@ namespace Server.Engines.Spawners
             }
         }
 
-        Region ISpawner.Region
-        {
-            get { return Region.Find(Location, Map); }
-        }
+        Region ISpawner.Region => Region.Find(Location, Map);
 
         public void Remove(ISpawnable spawn)
         {
@@ -502,8 +484,19 @@ namespace Server.Engines.Spawners
 
             // Defrag taken care of in Spawn(), beforehand
             // Count check taken care of in Spawn(), beforehand
-
-            var type = AssemblyHandler.FindTypeByName(entry.SpawnedName);
+            
+            Type type;
+            
+            if (ZhConfig.Creatures.Entries.TryGetValue(entry.SpawnedName, out var creatureProperties) && 
+                creatureProperties.BaseType.IsAssignableTo(typeof(BaseCreatureTemplate)))
+            {
+                type = creatureProperties.BaseType;
+                entry.Parameters ??= entry.SpawnedName;
+            }
+            else
+            {
+                type = AssemblyHandler.FindTypeByName(entry.SpawnedName);
+            }
 
             if (type != null)
             {
@@ -914,7 +907,6 @@ namespace Server.Engines.Spawners
                             if (AssemblyHandler.FindTypeByName(typeName) == null)
                             {
                                 m_WarnTimer ??= new WarnTimer();
-
                                 m_WarnTimer.Add(Location, Map, typeName);
                             }
                         }
@@ -922,6 +914,7 @@ namespace Server.Engines.Spawners
                         var count = reader.ReadInt();
 
                         for (var i = 0; i < count; ++i)
+                        {
                             if (reader.ReadEntity<Mobile>() is ISpawnable e)
                             {
                                 if (e is BaseCreature creature)
@@ -930,13 +923,16 @@ namespace Server.Engines.Spawners
                                 e.Spawner = this;
 
                                 for (var j = 0; j < Entries.Count; j++)
+                                {
                                     if (AssemblyHandler.FindTypeByName(Entries[j].SpawnedName) == e.GetType())
                                     {
                                         Entries[j].Spawned.Add(e);
                                         Spawned.Add(e, Entries[j]);
                                         break;
                                     }
+                                }
                             }
+                        }
                     }
 
                     DoTimer(ts);

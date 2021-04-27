@@ -1,0 +1,55 @@
+{
+  "Name": "Celestial Ostard",
+  "CorpseNameOverride": "corpse of Celestial Ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 650,
+  "Int": 400,
+  "Dex": 300,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Healer",
+  "AutoDispel": true,
+  "BaseSoundID": 624,
+  "Body": 218,
+  "CanFly": true,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 50,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 650,
+  "Hue": 1176,
+  "InitialInnocent": true,
+  "ManaMaxSeed": 200,
+  "MinTameSkill": 115,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 150,
+  "StamMaxSeed": 175,
+  "Tamable": true,
+  "Resistances": {
+    "Poison": 6,
+    "Air": 50,
+    "Water": 50,
+    "Fire": 50,
+    "Necro": 50,
+    "Earth": 100,
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "MagicResist": 110,
+    "Tactics": 100,
+    "Macing": 140,
+    "DetectHidden": 130,
+    "Magery": 200
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 25,
+      "Max": 75
+    },
+    "HitSound": 363,
+    "MissSound": 569
+  }
+}

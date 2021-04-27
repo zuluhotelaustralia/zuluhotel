@@ -1,0 +1,42 @@
+{
+  "Name": "<random> the elite warrior",
+  "CorpseNameOverride": "corpse of <random> the elite warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 220,
+  "Int": 50,
+  "Dex": 103,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 417,
+  "Body": 36,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Lizard",
+  "Hides": 5,
+  "HitsMax": 220,
+  "Hue": 0,
+  "LootTable": "14",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 70,
+  "StamMaxSeed": 75,
+  "Skills": {
+    "Tactics": 80,
+    "MagicResist": 60
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 5,
+      "Max": 30
+    },
+    "HitSound": 316,
+    "MissSound": 569
+  }
+}

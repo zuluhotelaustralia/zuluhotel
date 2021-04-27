@@ -1,0 +1,60 @@
+{
+  "Name": "Vampire",
+  "CorpseNameOverride": "corpse of Vampire",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 350,
+  "Dex": 350,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 350,
+  "Hue": 0,
+  "LootItemChance": 75,
+  "LootItemLevel": 3,
+  "LootTable": "71",
+  "ManaMaxSeed": 350,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 350,
+  "PreferredSpells": [
+    "Server.Spells.Third.PoisonSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Fourth.ManaDrainSpell",
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "MagicResist": 100,
+    "Tactics": 100,
+    "Macing": 110,
+    "Magery": 100
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 12,
+      "Max": 40
+    },
+    "HitSound": 364,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.ShortHair",
+      "Hue": 1
+    }
+  ]
+}

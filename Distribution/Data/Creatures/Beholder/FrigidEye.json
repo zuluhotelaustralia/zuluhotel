@@ -1,0 +1,51 @@
+{
+  "Name": "a frigid eye",
+  "CorpseNameOverride": "corpse of a frigid eye",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 250,
+  "Int": 450,
+  "Dex": 100,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 377,
+  "Body": 22,
+  "CanRummageCorpses": true,
+  "CreatureType": "Beholder",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 250,
+  "Hue": 1154,
+  "LootItemChance": 2,
+  "LootTable": "45",
+  "ManaMaxSeed": 120,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 95,
+  "StamMaxSeed": 65,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.ExplosionSpell",
+    "Server.Spells.Sixth.MassCurseSpell",
+    "Server.Spells.First.WeakenSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fourth.LightningSpell"
+  ],
+  "Skills": {
+    "MagicResist": 80,
+    "Tactics": 65,
+    "Macing": 100,
+    "Magery": 95
+  },
+  "Attack": {
+    "Speed": 33,
+    "Damage": {
+      "Min": 5,
+      "Max": 35
+    },
+    "HitSound": 380,
+    "MissSound": 569
+  }
+}

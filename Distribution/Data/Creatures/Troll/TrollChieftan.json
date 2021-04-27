@@ -1,0 +1,44 @@
+{
+  "Name": "a Troll Chieftan",
+  "CorpseNameOverride": "corpse of a Troll Chieftan",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 90,
+  "Dex": 220,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 53,
+  "CanRummageCorpses": true,
+  "CreatureType": "Troll",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Troll",
+  "Hides": 4,
+  "HitsMax": 350,
+  "Hue": 1125,
+  "LootItemChance": 30,
+  "LootItemLevel": 3,
+  "LootTable": "60",
+  "ManaMaxSeed": 80,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 120,
+  "StamMaxSeed": 90,
+  "Skills": {
+    "Tactics": 140,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 21,
+      "Max": 45
+    },
+    "Skill": "Swords",
+    "HitSound": 563,
+    "MissSound": 571
+  }
+}

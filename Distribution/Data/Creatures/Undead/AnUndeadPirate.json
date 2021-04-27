@@ -1,0 +1,40 @@
+{
+  "Name": "<random>, an undead pirate",
+  "CorpseNameOverride": "corpse of <random>, an undead pirate",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 110,
+  "Int": 20,
+  "Dex": 110,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 110,
+  "Hue": 0,
+  "LootItemChance": 10,
+  "LootItemLevel": 1,
+  "LootTable": "47",
+  "ManaMaxSeed": 100,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 100,
+  "Resistances": {
+    "Poison": 6
+  },
+  "Skills": {
+    "Tactics": 100,
+    "MagicResist": 30
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 4,
+      "Max": 16
+    }
+  }
+}

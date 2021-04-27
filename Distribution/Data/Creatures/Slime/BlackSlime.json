@@ -1,0 +1,42 @@
+{
+  "Name": "a black slime",
+  "CorpseNameOverride": "corpse of a black slime",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 230,
+  "Int": 15,
+  "Dex": 50,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "Body": 51,
+  "CanRummageCorpses": true,
+  "CreatureType": "Slime",
+  "VirtualArmor": 10,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 230,
+  "Hue": 1109,
+  "LootTable": "58",
+  "ManaMaxSeed": 5,
+  "MinTameSkill": 75,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 19,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Tactics": 100,
+    "Macing": 100,
+    "MagicResist": 90
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 2,
+      "Max": 10
+    },
+    "HitSound": 459,
+    "MissSound": 569
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "Name": "a shadow",
+  "CorpseNameOverride": "corpse of a shadow",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1200,
+  "Int": 1200,
+  "Dex": 500,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 412,
+  "Body": 24,
+  "CanRummageCorpses": true,
+  "VirtualArmor": 45,
+  "Fame": 5,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 1200,
+  "Hue": 0,
+  "Karma": 5,
+  "LootItemChance": 100,
+  "LootTable": "97",
+  "ManaMaxSeed": 1200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 500,
+  "PreferredSpells": [
+    "Server.Spells.Third.PoisonSpell",
+    "Server.Spells.Seventh.FlameStrikeSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Sixth.ExplosionSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Fifth.DispelFieldSpell",
+    "Server.Spells.Second.CureSpell",
+    "Server.Spells.Eighth.EarthquakeSpell",
+    "Server.Spells.Fourth.ManaDrainSpell"
+  ],
+  "Skills": {
+    "MagicResist": 100,
+    "Tactics": 100,
+    "Macing": 100,
+    "Magery": 100,
+    "EvalInt": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 13,
+      "Max": 85
+    }
+  }
+}

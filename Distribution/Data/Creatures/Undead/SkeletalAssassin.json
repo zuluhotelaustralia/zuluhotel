@@ -1,0 +1,44 @@
+{
+  "Name": "a skeletal assassin",
+  "CorpseNameOverride": "corpse of a skeletal assassin",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 130,
+  "Int": 60,
+  "Dex": 125,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 50,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 130,
+  "Hue": 17969,
+  "LootItemChance": 4,
+  "LootTable": "10",
+  "ManaMaxSeed": 50,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 115,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 75
+  },
+  "Skills": {
+    "MagicResist": 50,
+    "Tactics": 60,
+    "Hiding": 90,
+    "Stealth": 85
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 8,
+      "Max": 44
+    },
+    "HitSound": 454,
+    "MissSound": 569
+  }
+}

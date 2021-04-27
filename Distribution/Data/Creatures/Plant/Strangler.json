@@ -1,0 +1,62 @@
+{
+  "Name": "a Strangler",
+  "CorpseNameOverride": "corpse of a Strangler",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1500,
+  "Int": 255,
+  "Dex": 400,
+  "ActiveSpeed": 0.15,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "Body": 28,
+  "CanRummageCorpses": true,
+  "CreatureType": "Plant",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 2000,
+  "Hue": 1175,
+  "LootItemChance": 100,
+  "LootItemLevel": 8,
+  "LootTable": "201",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.3,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 500,
+  "Tamable": false,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Earth.ShiftingEarthSpell",
+    "Scripts.Zulu.Spells.Earth.GustOfAirSpell",
+    "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Server.Spells.Seventh.MassDispelSpell"
+  ],
+  "Resistances": {
+    "Fire": 100,
+    "Air": 100,
+    "Water": 100,
+    "Poison": 1,
+    "Earth": 100,
+    "Necro": 100,
+    "MagicImmunity": 8
+  },
+  "Skills": {
+    "Poisoning": 90,
+    "Tactics": 150,
+    "Macing": 200,
+    "MagicResist": 200,
+    "DetectHidden": 200,
+    "Hiding": 200,
+    "Magery": 200
+  },
+  "Attack": {
+    "Speed": 37,
+    "Damage": {
+      "Min": 11,
+      "Max": 41
+    },
+    "HitSound": 360,
+    "MissSound": 361
+  }
+}

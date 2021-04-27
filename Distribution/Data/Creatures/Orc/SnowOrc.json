@@ -1,0 +1,40 @@
+{
+  "Name": "<random> the snow orc",
+  "CorpseNameOverride": "corpse of <random> the snow orc",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 150,
+  "Int": 35,
+  "Dex": 135,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 41,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 150,
+  "Hue": 1154,
+  "LootTable": "43",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 95,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "MagicResist": 60,
+    "Macing": 85,
+    "Tactics": 80
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "HitSound": 316,
+    "MissSound": 569
+  }
+}

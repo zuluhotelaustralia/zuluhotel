@@ -1,0 +1,46 @@
+{
+  "Name": "a reaper",
+  "CorpseNameOverride": "corpse of a reaper",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 210,
+  "Int": 35,
+  "Dex": 110,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 47,
+  "CanRummageCorpses": true,
+  "CreatureType": "Plant",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 210,
+  "Hue": 0,
+  "LootTable": "34",
+  "ManaMaxSeed": 25,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 100,
+  "Resistances": {
+    "Poison": 6,
+    "Water": 100,
+    "Earth": 100
+  },
+  "Skills": {
+    "Parry": 60,
+    "Magery": 100,
+    "Tactics": 100,
+    "Macing": 150,
+    "MagicResist": 75
+  },
+  "Attack": {
+    "Speed": 20,
+    "Damage": {
+      "Min": 5,
+      "Max": 50
+    },
+    "HitSound": 445,
+    "MissSound": 569
+  }
+}

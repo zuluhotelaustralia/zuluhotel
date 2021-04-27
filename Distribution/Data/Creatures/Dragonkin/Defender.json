@@ -1,0 +1,44 @@
+{
+  "Name": "<random> the Defender",
+  "CorpseNameOverride": "corpse of <random> the Defender",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 275,
+  "Int": 45,
+  "Dex": 180,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 417,
+  "Body": 33,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Lizard",
+  "Hides": 5,
+  "HitsMax": 275,
+  "Hue": 1454,
+  "LootItemChance": 2,
+  "LootTable": "56",
+  "ManaMaxSeed": 35,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 100,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Tactics": 90,
+    "Macing": 100,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "HitSound": 418,
+    "MissSound": 419
+  }
+}

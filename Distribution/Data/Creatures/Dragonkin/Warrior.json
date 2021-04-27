@@ -1,0 +1,42 @@
+{
+  "Name": "<random> the warrior",
+  "CorpseNameOverride": "corpse of <random> the warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 205,
+  "Int": 60,
+  "Dex": 103,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 417,
+  "Body": 36,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Lizard",
+  "Hides": 5,
+  "HitsMax": 205,
+  "Hue": 0,
+  "LootTable": "11",
+  "ManaMaxSeed": 40,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 70,
+  "StamMaxSeed": 75,
+  "Skills": {
+    "MagicResist": 60,
+    "Tactics": 80
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 5,
+      "Max": 30
+    },
+    "HitSound": 316,
+    "MissSound": 569
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "Name": "a Dracoliche",
+  "CorpseNameOverride": "corpse of a Dracoliche",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 650,
+  "Int": 700,
+  "Dex": 150,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 362,
+  "Body": 104,
+  "CanFly": true,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Liche",
+  "Hides": 5,
+  "HitsMax": 650,
+  "Hue": 1282,
+  "LootItemChance": 75,
+  "LootItemLevel": 5,
+  "LootTable": "35",
+  "ManaMaxSeed": 200,
+  "MinTameSkill": 135,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 120,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 140,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Server.Spells.Eighth.EarthquakeSpell",
+    "Scripts.Zulu.Spells.Necromancy.DecayingRaySpell",
+    "Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell",
+    "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Scripts.Zulu.Spells.Necromancy.DarknessSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "Parry": 80,
+    "MagicResist": 110,
+    "Tactics": 110,
+    "Macing": 130,
+    "Magery": 140,
+    "EvalInt": 140,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 365,
+    "MissSound": 569,
+    "Ability": {
+      "Type": "SpellStrike",
+      "SpellType": "WraithBreathSpell"
+    },
+    "AbilityChance": 0.4
+  }
+}

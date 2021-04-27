@@ -1,0 +1,40 @@
+{
+  "Name": "Bewitched Armor",
+  "CorpseNameOverride": "corpse of Bewitched Armor",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 210,
+  "Int": 110,
+  "Dex": 110,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 527,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animated",
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 210,
+  "Hue": 0,
+  "LootItemChance": 1,
+  "LootTable": "48",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 94,
+  "StamMaxSeed": 100,
+  "Skills": {
+    "Tactics": 100,
+    "Macing": 140,
+    "MagicResist": 70
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 6,
+      "Max": 36
+    },
+    "HitSound": 383,
+    "MissSound": 386
+  }
+}

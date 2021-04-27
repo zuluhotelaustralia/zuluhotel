@@ -1,0 +1,41 @@
+{
+  "Name": "a rabid dog",
+  "CorpseNameOverride": "corpse of a rabid dog",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 40,
+  "Int": 25,
+  "Dex": 85,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 133,
+  "Body": 217,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 5,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 40,
+  "Hue": 33784,
+  "ManaMaxSeed": 15,
+  "MinTameSkill": 35,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 20,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Tactics": 60,
+    "Macing": 60
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 3,
+      "Max": 9
+    },
+    "HitSound": 136,
+    "MissSound": 569
+  }
+}

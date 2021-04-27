@@ -1,0 +1,43 @@
+{
+  "Name": "a sea monster",
+  "CorpseNameOverride": "corpse of a sea monster",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 250,
+  "Int": 35,
+  "Dex": 160,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "Body": 95,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 250,
+  "Hue": 33784,
+  "LootItemChance": 1,
+  "LootTable": "50",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 60,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Parry": 70,
+    "Tactics": 100,
+    "Macing": 120,
+    "MagicResist": 40
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 9,
+      "Max": 45
+    },
+    "HitSound": 447,
+    "MissSound": 448
+  }
+}

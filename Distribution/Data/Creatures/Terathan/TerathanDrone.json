@@ -1,0 +1,41 @@
+{
+  "Name": "a Terathan Drone",
+  "CorpseNameOverride": "corpse of a Terathan Drone",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 170,
+  "Int": 55,
+  "Dex": 135,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 71,
+  "CanRummageCorpses": true,
+  "CreatureType": "Terathan",
+  "VirtualArmor": 10,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 70,
+  "Hue": 0,
+  "LootTable": "64",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 70,
+  "StamMaxSeed": 125,
+  "Skills": {
+    "Tactics": 50,
+    "MagicResist": 30,
+    "Parry": 40
+  },
+  "Attack": {
+    "Speed": 43,
+    "Damage": {
+      "Min": 8,
+      "Max": 44
+    },
+    "Skill": "Swords",
+    "HitSound": 594,
+    "MissSound": 595
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "Name": "a Skittering Hopper",
+  "CorpseNameOverride": "corpse of a Skittering Hopper",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 200,
+  "Int": 200,
+  "Dex": 200,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 302,
+  "CanRummageCorpses": true,
+  "CreatureType": "Daemon",
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 300,
+  "Hue": 33784,
+  "LootItemChance": 70,
+  "LootItemLevel": 3,
+  "LootTable": "69",
+  "ManaMaxSeed": 400,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 400,
+  "Tamable": false,
+  "TargetAcquireExhaustion": true,
+  "Resistances": {
+    "Poison": 6,
+    "Earth": 75,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "Tactics": 110,
+    "Macing": 110,
+    "MagicResist": 110
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 602,
+    "MissSound": 569
+  }
+}

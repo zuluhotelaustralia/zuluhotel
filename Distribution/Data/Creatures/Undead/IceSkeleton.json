@@ -1,0 +1,44 @@
+{
+  "Name": "an ice skeleton",
+  "CorpseNameOverride": "corpse of an ice skeleton",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 200,
+  "Int": 35,
+  "Dex": 180,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 57,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 200,
+  "Hue": 1301,
+  "LootItemChance": 2,
+  "LootTable": "14",
+  "ManaMaxSeed": 25,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 75
+  },
+  "Skills": {
+    "Tactics": 120,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 44
+    },
+    "Skill": "Swords",
+    "HitSound": 453,
+    "MissSound": 569
+  }
+}

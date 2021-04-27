@@ -51,25 +51,5 @@ namespace Server.Mobiles
                 }
             }
         }
-        
-        public static BaseCreatureTemplate Create(string templateName)
-        {
-            var properties = ZhConfig.Creatures.Entries[templateName];
-            
-            BaseCreatureTemplate creature;
-            if (properties.BaseType != typeof(BaseCreatureTemplate))
-            {
-                if (!properties.BaseType.IsSubclassOf(typeof(BaseCreatureTemplate)))
-                    return null;
-
-                creature = properties.BaseType.CreateInstance<BaseCreatureTemplate>(templateName);
-            }
-            else
-            {
-                creature = new BaseCreatureTemplate(templateName);
-            }
-
-            return creature;
-        }
     }
 }

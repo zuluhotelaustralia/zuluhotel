@@ -1,0 +1,49 @@
+{
+  "Name": "a Troll Shaman",
+  "CorpseNameOverride": "corpse of a Troll Shaman",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 225,
+  "Int": 285,
+  "Dex": 170,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 54,
+  "CanRummageCorpses": true,
+  "CreatureType": "Troll",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Troll",
+  "Hides": 4,
+  "HitsMax": 225,
+  "Hue": 544,
+  "LootItemChance": 60,
+  "LootItemLevel": 2,
+  "LootTable": "54",
+  "ManaMaxSeed": 85,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 100,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Skills": {
+    "MagicResist": 60,
+    "Tactics": 60,
+    "Macing": 90,
+    "Magery": 90
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "HitSound": 435,
+    "MissSound": 569
+  }
+}

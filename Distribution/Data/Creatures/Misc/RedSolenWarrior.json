@@ -1,0 +1,40 @@
+{
+  "Name": "a red solen warrior",
+  "CorpseNameOverride": "corpse of a red solen warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 500,
+  "Int": 60,
+  "Dex": 125,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 265,
+  "Body": 782,
+  "CanRummageCorpses": true,
+  "VirtualArmor": 35,
+  "Fame": 3,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 400,
+  "Hue": 0,
+  "Karma": 3,
+  "LootItemChance": 100,
+  "LootTable": "51",
+  "ManaMaxSeed": 60,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 80,
+  "StamMaxSeed": 125,
+  "Skills": {
+    "MagicResist": 60,
+    "Tactics": 80,
+    "Wrestling": 80
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 10,
+      "Max": 25
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "Name": "a black gate daemon",
+  "CorpseNameOverride": "corpse of a black gate daemon",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1500,
+  "Int": 290,
+  "Dex": 165,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 168,
+  "Body": 228,
+  "CanRummageCorpses": true,
+  "VirtualArmor": 20,
+  "Fame": 4,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 1500,
+  "Hue": 0,
+  "Karma": 5,
+  "ManaMaxSeed": 465,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 150,
+  "StamMaxSeed": 165,
+  "PreferredSpells": [
+    "Server.Spells.Eighth.SummonDaemonSpell"
+  ],
+  "Skills": {
+    "MagicResist": 120,
+    "Tactics": 90,
+    "Wrestling": 90,
+    "Magery": 100,
+    "EvalInt": 90,
+    "Anatomy": 25
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 2,
+      "Max": 16
+    }
+  }
+}

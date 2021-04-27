@@ -1,0 +1,58 @@
+{
+  "Name": "a Titan",
+  "CorpseNameOverride": "corpse of a Titan",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 600,
+  "Int": 210,
+  "Dex": 180,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 76,
+  "CanRummageCorpses": true,
+  "CreatureType": "Giantkin",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 1000,
+  "Hue": 0,
+  "LootItemChance": 50,
+  "LootItemLevel": 4,
+  "LootTable": "22",
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 100,
+  "StamMaxSeed": 300,
+  "PreferredSpells": [
+    "Server.Spells.Third.PoisonSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Sixth.ExplosionSpell",
+    "Server.Spells.Fifth.ParalyzeSpell"
+  ],
+  "Resistances": {
+    "Earth": 75,
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "Parry": 50,
+    "Magery": 120,
+    "Tactics": 100,
+    "Macing": 110,
+    "MagicResist": 90
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "HitSound": 607,
+    "MissSound": 361
+  }
+}

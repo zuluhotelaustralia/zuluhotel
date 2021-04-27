@@ -1,0 +1,55 @@
+{
+  "Name": "a Twisted Animation",
+  "CorpseNameOverride": "corpse of a Twisted Animation",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 700,
+  "Int": 200,
+  "Dex": 100,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "AutoDispel": true,
+  "Body": 581,
+  "CanRummageCorpses": true,
+  "ClassLevel": 4,
+  "ClassType": "Warrior",
+  "CreatureType": "Elemental",
+  "VirtualArmor": 50,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 700,
+  "Hue": 49408,
+  "LootItemChance": 75,
+  "LootItemLevel": 5,
+  "LootTable": "132",
+  "ManaMaxSeed": 100,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Tactics": 120,
+    "MagicResist": 150
+  },
+  "Attack": {
+    "Speed": 50,
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 572,
+    "MissSound": 570
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.Longsword",
+      "Name": "an animation's blade",
+      "Hue": 33870
+    },
+    {
+      "ItemType": "Server.Items.GoldBracelet",
+      "Name": "a animation's shield",
+      "Hue": 0
+    }
+  ]
+}

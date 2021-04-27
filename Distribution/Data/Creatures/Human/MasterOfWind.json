@@ -1,0 +1,61 @@
+{
+  "Name": "a master of the wind",
+  "CorpseNameOverride": "corpse of a master of the wind",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 160,
+  "Int": 295,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 160,
+  "Hue": 0,
+  "LootItemChance": 66,
+  "LootItemLevel": 3,
+  "LootTable": "57",
+  "ManaMaxSeed": 95,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 94,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Fourth.LightningSpell"
+  ],
+  "Resistances": {
+    "Air": 100,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "MagicResist": 120,
+    "Tactics": 100,
+    "Magery": 150
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 6,
+      "Max": 60
+    },
+    "HitSound": 360,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.LongHair",
+      "Hue": 1128
+    },
+    {
+      "ItemType": "Server.Items.GnarledStaff",
+      "Name": "Air Master Weapon",
+      "Hue": 0
+    }
+  ]
+}

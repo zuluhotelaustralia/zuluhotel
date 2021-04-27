@@ -1,0 +1,54 @@
+{
+  "Name": "an earth elemental",
+  "CorpseNameOverride": "corpse of an earth elemental",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 230,
+  "Int": 45,
+  "Dex": 50,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "Body": 14,
+  "CanRummageCorpses": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 230,
+  "Hue": 33784,
+  "LootItemChance": 25,
+  "LootItemLevel": 3,
+  "LootTable": "21",
+  "ManaMaxSeed": 35,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 40,
+  "Resistances": {
+    "Earth": 100,
+    "Air": -50
+  },
+  "Skills": {
+    "Parry": 75,
+    "MagicResist": 40,
+    "Tactics": 90,
+    "Macing": 120
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "HitSound": 271,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.HeaterShield",
+      "Name": "Shield AR20",
+      "Hue": 0,
+      "ArmorRating": 20
+    }
+  ]
+}

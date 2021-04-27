@@ -1,0 +1,51 @@
+{
+  "Name": "a Medium Hoarde Demon",
+  "CorpseNameOverride": "corpse of a Medium Hoarde Demon",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1000,
+  "Int": 200,
+  "Dex": 200,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "AutoDispel": true,
+  "Body": 795,
+  "CanRummageCorpses": true,
+  "CreatureType": "Daemon",
+  "VirtualArmor": 45,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 1200,
+  "Hue": 0,
+  "LootItemChance": 10,
+  "LootItemLevel": 5,
+  "LootTable": "37",
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 200,
+  "Resistances": {
+    "Poison": 3,
+    "Fire": 75,
+    "Air": 75,
+    "Water": 75,
+    "Necro": 75,
+    "Earth": 75,
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "Tactics": 150,
+    "Macing": 175,
+    "MagicResist": 60,
+    "DetectHidden": 200
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 10,
+      "Max": 60
+    },
+    "HitSound": 365,
+    "MissSound": 569
+  }
+}

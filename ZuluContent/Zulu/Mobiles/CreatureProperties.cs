@@ -83,7 +83,6 @@ namespace Server.Mobiles
         public OppositionGroup OppositionGroup { get; set; }
         public PropValue PassiveSpeed { get; set; } = 0.2;
         public PropValue PerceptionRange { get; set; }
-        public List<Type> PreferredSpells { get; set; }
         public int? ProvokeSkillOverride { get; set; }
         public Race Race { get; set; }
         public TimeSpan? ReacquireDelay { get; set; }
@@ -97,6 +96,7 @@ namespace Server.Mobiles
         public int? Team { get; set; }
         public string Title { get; set; }
         public PropValue TreasureMapLevel { get; set; }
+        public List<Type> PreferredSpells { get; set; }
         public Dictionary<ElementalType, PropValue> Resistances { get; set; }
         public Dictionary<SkillName, PropValue> Skills { get; set; }
         public WeaponAbility WeaponAbility { get; set; }

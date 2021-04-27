@@ -1,0 +1,54 @@
+{
+  "Name": "a fire elemental",
+  "CorpseNameOverride": "corpse of a fire elemental",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 180,
+  "Int": 205,
+  "Dex": 80,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 15,
+  "CanRummageCorpses": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 180,
+  "Hue": 33784,
+  "LootItemChance": 25,
+  "LootItemLevel": 3,
+  "LootTable": "20",
+  "ManaMaxSeed": 100,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fifth.MagicReflectSpell",
+    "Server.Spells.Sixth.ExplosionSpell",
+    "Server.Spells.Seventh.FlameStrikeSpell"
+  ],
+  "Resistances": {
+    "Fire": 100
+  },
+  "Skills": {
+    "Parry": 55,
+    "Tactics": 100,
+    "MagicResist": 70,
+    "Magery": 100,
+    "EvalInt": 65
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 21,
+      "Max": 45
+    },
+    "Skill": "Swords",
+    "HitSound": 276,
+    "MissSound": 569
+  }
+}

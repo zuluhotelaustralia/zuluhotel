@@ -1,0 +1,40 @@
+{
+  "Name": "<random> the ratman marksman",
+  "CorpseNameOverride": "corpse of <random> the ratman marksman",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 160,
+  "Int": 35,
+  "Dex": 180,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Archer",
+  "AlwaysMurderer": true,
+  "Body": 42,
+  "CanRummageCorpses": true,
+  "CreatureType": "Ratkin",
+  "VirtualArmor": 5,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Rat",
+  "Hides": 5,
+  "HitsMax": 160,
+  "Hue": 0,
+  "LootTable": "51",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 55,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "MagicResist": 40,
+    "Tactics": 60,
+    "Macing": 65,
+    "Archery": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 10,
+      "Max": 22
+    }
+  }
+}

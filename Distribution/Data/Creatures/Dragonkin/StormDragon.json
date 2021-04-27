@@ -1,0 +1,70 @@
+{
+  "Name": "a Storm Dragon",
+  "CorpseNameOverride": "corpse of a Storm Dragon",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 600,
+  "Int": 400,
+  "Dex": 340,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 362,
+  "Body": 12,
+  "CanFly": true,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Dragon",
+  "Hides": 5,
+  "HitsMax": 600,
+  "Hue": 1170,
+  "LootItemChance": 75,
+  "LootItemLevel": 5,
+  "LootTable": "37",
+  "ManaMaxSeed": 200,
+  "MinTameSkill": 140,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 140,
+  "StamMaxSeed": 140,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.First.WeakenSpell",
+    "Server.Spells.Sixth.MassCurseSpell"
+  ],
+  "Resistances": {
+    "Air": 100,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "Parry": 80,
+    "MagicResist": 105,
+    "Tactics": 110,
+    "Macing": 150,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 65,
+    "Damage": {
+      "Min": 25,
+      "Max": 75
+    },
+    "HitSound": 365,
+    "MissSound": 569,
+    "Ability": {
+      "Type": "SpellStrike",
+      "SpellType": "GustOfAirSpell"
+    },
+    "AbilityChance": 0.65,
+    "HasBreath": true
+  }
+}

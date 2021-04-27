@@ -1,0 +1,40 @@
+{
+  "Name": "a troll marksman",
+  "CorpseNameOverride": "corpse of a troll marksman",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 185,
+  "Int": 55,
+  "Dex": 120,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Archer",
+  "AlwaysMurderer": true,
+  "Body": 54,
+  "CanRummageCorpses": true,
+  "CreatureType": "Troll",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Troll",
+  "Hides": 4,
+  "HitsMax": 185,
+  "Hue": 33784,
+  "LootTable": "41",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 80,
+  "StamMaxSeed": 60,
+  "Skills": {
+    "MagicResist": 60,
+    "Tactics": 105,
+    "Macing": 115,
+    "Archery": 130
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 12,
+      "Max": 27
+    }
+  }
+}

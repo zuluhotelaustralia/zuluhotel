@@ -1,0 +1,67 @@
+{
+  "Name": "an Ancient Dracoliche",
+  "CorpseNameOverride": "corpse of an Ancient Dracoliche",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 3000,
+  "Int": 1500,
+  "Dex": 175,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 362,
+  "Body": 104,
+  "CanRummageCorpses": true,
+  "ClassLevel": 5,
+  "ClassType": "Mage",
+  "CreatureType": "Dragonkin",
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 2000,
+  "Hue": 1282,
+  "LootItemChance": 70,
+  "LootItemLevel": 7,
+  "LootTable": "9",
+  "ManaMaxSeed": 1500,
+  "MinTameSkill": 170,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 170,
+  "SaySpellMantra": false,
+  "StamMaxSeed": 175,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell",
+    "Scripts.Zulu.Spells.Earth.IceStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Server.Spells.Eighth.EarthquakeSpell",
+    "Server.Spells.Seventh.MassDispelSpell",
+    "Scripts.Zulu.Spells.Necromancy.DarknessSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Water": 50,
+    "Fire": 100,
+    "Physical": 100,
+    "Earth": 100,
+    "MagicImmunity": 8
+  },
+  "Skills": {
+    "Parry": 200,
+    "Tactics": 200,
+    "Fencing": 150,
+    "MagicResist": 200,
+    "Magery": 200,
+    "DetectHidden": 200,
+    "EvalInt": 200
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 0,
+      "Max": 0
+    }
+  }
+}

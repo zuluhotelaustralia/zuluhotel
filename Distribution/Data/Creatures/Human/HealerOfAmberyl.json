@@ -1,0 +1,33 @@
+{
+  "Name": "<random>, Healer of Amberyl",
+  "CorpseNameOverride": "corpse of <random>, Healer of Amberyl",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 300,
+  "Int": 300,
+  "Dex": 200,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Healer",
+  "Body": 401,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "VirtualArmor": 100,
+  "Female": true,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 300,
+  "Hue": 33784,
+  "InitialInnocent": true,
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 100,
+  "Skills": {
+    "Magery": 200
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 0,
+      "Max": 0
+    }
+  }
+}

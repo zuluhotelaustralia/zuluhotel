@@ -1,0 +1,35 @@
+{
+  "Name": "<random> the bewitched peasant",
+  "CorpseNameOverride": "corpse of <random> the bewitched peasant",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 80,
+  "Int": 60,
+  "Dex": 60,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 80,
+  "Hue": 33784,
+  "LootTable": "47",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "RiseCreatureDelay": "00:00:25",
+  "RiseCreatureType": "Server.Mobiles.Spectre",
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Tactics": 50
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 0,
+      "Max": 0
+    }
+  }
+}

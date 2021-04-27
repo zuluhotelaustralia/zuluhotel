@@ -1,0 +1,45 @@
+{
+  "Name": "a tropical frenzied ostard",
+  "CorpseNameOverride": "corpse of a tropical frenzied ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 275,
+  "Int": 135,
+  "Dex": 400,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysAttackable": true,
+  "Body": 218,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HideType": "Ostard",
+  "Hides": 4,
+  "HitsMax": 275,
+  "Hue": 1155,
+  "ManaMaxSeed": 125,
+  "MinTameSkill": 105,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 130,
+  "StamMaxSeed": 175,
+  "Tamable": true,
+  "Skills": {
+    "Parry": 110,
+    "MagicResist": 100,
+    "Tactics": 110,
+    "Macing": 160,
+    "Magery": 225
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 13,
+      "Max": 48
+    },
+    "HitSound": 596,
+    "MissSound": 598
+  }
+}

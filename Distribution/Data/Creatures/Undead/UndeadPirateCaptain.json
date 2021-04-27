@@ -1,0 +1,49 @@
+{
+  "Name": "<random>, undead pirate captain",
+  "CorpseNameOverride": "corpse of <random>, undead pirate captain",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 250,
+  "Int": 300,
+  "Dex": 250,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 250,
+  "Hue": 0,
+  "LootItemChance": 1,
+  "LootItemLevel": 1,
+  "LootTable": "23",
+  "ManaMaxSeed": 400,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 150,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Resistances": {
+    "Poison": 6
+  },
+  "Skills": {
+    "MagicResist": 60,
+    "Tactics": 100,
+    "Macing": 100,
+    "Magery": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 4,
+      "Max": 16
+    }
+  }
+}

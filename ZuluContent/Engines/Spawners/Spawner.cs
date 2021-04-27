@@ -61,21 +61,6 @@ namespace Server.Engines.Spawners
         {
         }
 
-        /*
-        public override bool OnDefragSpawn(ISpawnable spawned, bool remove)
-        {
-          // To despawn a mob that was lured 4x away from its spawner
-          // TODO: Move this to a config
-          if (spawned is BaseCreature c && c.Combatant == null && c.GetDistanceToSqrt( Location ) > c.RangeHome * 4)
-          {
-            c.Delete();
-            remove = true;
-          }
-    
-          return base.OnDefragSpawn(entry, spawned, remove);
-        }
-        */
-
         public override Point3D GetSpawnPosition(ISpawnable spawned, Map map)
         {
             if (map == null || map == Map.Internal)

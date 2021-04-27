@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace ZuluContent.Configuration
     public class CreatureConfiguration : BaseSingleton<CreatureConfiguration>
     {
         private static readonly string BasePath = Path.Combine(Core.BaseDirectory, "Data/Creatures/");
+        private static readonly string SrcBasePath = Path.GetFullPath(Path.Combine(Core.BaseDirectory, "../../ZuluContent/Zulu/Mobiles/"));
+
 
         private static readonly JsonSerializerOptions SerializerOptions = JsonConfig.GetOptions(
             new TextDefinitionConverterFactory(),
@@ -32,11 +35,14 @@ namespace ZuluContent.Configuration
 
         protected CreatureConfiguration()
         {
+            LoadCreatures();
+        }
+        
+        private void LoadCreatures()
+        {
             Console.Write(
                 $"\tDeserializeJsonConfig<CreatureConfiguration>: loading creatures from {BasePath}*.json ... ");
-
-            ConvertTemplatesTest();
-
+            
             var failed = new ConcurrentBag<string>();
 
             var files = Directory.GetFiles(BasePath, "*.json", new EnumerationOptions {RecurseSubdirectories = true});
@@ -44,14 +50,18 @@ namespace ZuluContent.Configuration
             {
                 try
                 {
+                    var key = Path.GetFileNameWithoutExtension(file);
                     var props = JsonConfig.Deserialize<CreatureProperties>(file, SerializerOptions);
                     if (props == null)
                     {
-                        failed.Add($"Failed to load entry: {Path.GetFileName(file)}, serialization returned null");
+                        failed.Add($"Failed to load entry: {key}, serialization returned null");
                         return;
                     }
 
-                    Entries.TryAdd(Path.GetFileNameWithoutExtension(file), props);
+                    if (Entries.ContainsKey(key))
+                        Entries.Remove(key, out _);
+
+                    Entries.TryAdd(key, props);
                 }
                 catch (Exception e)
                 {
@@ -73,32 +83,27 @@ namespace ZuluContent.Configuration
                 Utility.PopColor();
             }
         }
-        
-        private static void ConvertTemplatesTest()
-        {
-            Parallel.ForEach(CreatureProperties.Creatures, kv =>
-            {
-                var (type, props) = kv;
-                var filePath = Path.Combine(BasePath, $"{type.Name}.json");
-                JsonConfig.Serialize(filePath, props, SerializerOptions);
-            });
-        }
 
         static CreatureConfiguration()
         {
             CommandSystem.Register("ConvertTemplates", AccessLevel.Owner, ConvertTemplates_OnCommand);
+            CommandSystem.Register("LoadCreatureTemplates", AccessLevel.Owner, _ => Instance.LoadCreatures());
         }
-
+        
         [Usage("ConvertTemplates")]
         private static async void ConvertTemplates_OnCommand(CommandEventArgs e)
         {
-            if (!(e.Mobile is PlayerMobile pm))
+            if (!(e.Mobile is PlayerMobile))
                 return;
+        
+            
+            var files = Directory.GetFiles(SrcBasePath, "*.cs", new EnumerationOptions {RecurseSubdirectories = true});
 
+            
             foreach (var (type, props) in CreatureProperties.Creatures)
             {
                 var creature = type.CreateInstance<BaseCreature>();
-
+        
                 if (creature == null)
                     return;
 
@@ -110,14 +115,14 @@ namespace ZuluContent.Configuration
                     HasBreath = props.HasBreath,
                     HasWebs = props.HasWebs
                 };
-
+        
                 props.WeaponAbility = null;
                 props.WeaponAbilityChance = null;
                 props.HasBreath = null;
                 props.HasWebs = null;
                 props.DamageMin = null;
                 props.DamageMax = null;
-
+        
                 foreach (var item in creature.Items)
                 {
                     if (item is BaseWeapon weapon)
@@ -129,28 +134,34 @@ namespace ZuluContent.Configuration
                         props.Attack.MissSound = weapon.MissSound;
                         props.Attack.MaxRange = weapon.DefaultMaxRange != weapon.MaxRange ? weapon.MaxRange : null;
                     }
-
+        
                     if (item is SkinningKnife)
                         continue;
-
-
+        
+        
                     var equip = new CreatureEquip
                     {
                         ItemType = item.GetType(),
                         Name = item.DefaultName != item.Name ? item.Name : null,
                         Hue = item.Hue,
                     };
-
+        
                     if (item is BaseArmor armor)
                         equip.ArmorRating = armor.BaseArmorRating;
-
+        
                     props.Equipment ??= new List<CreatureEquip>();
                     props.Equipment.Add(equip);
                 }
-
+        
                 creature.Delete();
 
-                var filePath = Path.Combine(BasePath, $"{type.Name}.json");
+                var srcPath = files.FirstOrDefault(f => f.EndsWith($"/{type.Name}.cs"))?.Replace(SrcBasePath, "").Replace($"{type.Name}.cs", "");
+                var filePath = Path.Combine(BasePath, srcPath ?? "", $"{type.Name}.json");
+                var subDir = Path.GetDirectoryName(filePath);
+                
+                if(subDir != null && !Directory.Exists(subDir))
+                    Directory.CreateDirectory(subDir);
+                
                 JsonConfig.Serialize(filePath, props, SerializerOptions);
             }
         }

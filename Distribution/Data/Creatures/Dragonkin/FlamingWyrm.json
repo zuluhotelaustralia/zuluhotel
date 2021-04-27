@@ -1,0 +1,73 @@
+{
+  "Name": "a Flaming Wyrm",
+  "CorpseNameOverride": "corpse of a Flaming Wyrm",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 2800,
+  "Int": 3500,
+  "Dex": 475,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 362,
+  "Body": 46,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 100,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 2000,
+  "Hue": 1305,
+  "LootItemChance": 65,
+  "LootItemLevel": 6,
+  "LootTable": "9",
+  "ManaMaxSeed": 1500,
+  "MinTameSkill": 160,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 150,
+  "StamMaxSeed": 175,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Sixth.MassCurseSpell",
+    "Server.Spells.Fourth.GreaterHealSpell",
+    "Server.Spells.Eighth.EarthquakeSpell",
+    "Server.Spells.Seventh.ManaVampireSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Third.FireballSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Air": 50,
+    "Fire": 100,
+    "Earth": 50,
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "Tactics": 180,
+    "Macing": 150,
+    "MagicResist": 200,
+    "Magery": 150,
+    "DetectHidden": 180
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 20,
+      "Max": 110
+    },
+    "HitSound": 365,
+    "MissSound": 569,
+    "Ability": {
+      "Type": "SpellStrike",
+      "SpellType": "FlameStrikeSpell"
+    },
+    "AbilityChance": 0.65,
+    "HasBreath": true
+  }
+}

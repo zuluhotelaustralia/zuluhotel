@@ -1,0 +1,56 @@
+{
+  "Name": "<random> the Orc Master Mage",
+  "CorpseNameOverride": "corpse of <random> the Orc Master Mage",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 255,
+  "Int": 255,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "Body": 17,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 255,
+  "Hue": 1554,
+  "LootItemChance": 75,
+  "LootItemLevel": 3,
+  "LootTable": "31",
+  "ManaMaxSeed": 205,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 100,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 80,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Sixth.MassCurseSpell",
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Resistances": {
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "MagicResist": 85,
+    "Tactics": 80,
+    "Macing": 100,
+    "Magery": 120
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "HitSound": 435,
+    "MissSound": 569
+  }
+}
