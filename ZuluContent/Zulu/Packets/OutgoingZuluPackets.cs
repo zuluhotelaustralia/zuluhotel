@@ -41,7 +41,7 @@ namespace Scripts.Zulu.Packets
                 return;
 
             int minDamage = 0, maxDamage = 0;
-            player.Weapon?.GetStatusDamage(player, null, out minDamage, out maxDamage);
+            player.Weapon?.GetStatusDamage(player, out minDamage, out maxDamage);
 
             var writer = new SpanWriter(stackalloc byte[ZuluPlayerStatusMaxLength]);
             writer.Write((byte)0xF9); // Packet ID
