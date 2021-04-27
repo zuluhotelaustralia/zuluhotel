@@ -559,6 +559,11 @@ namespace Server.Items
 
         public virtual TimeSpan OnSwing(Mobile attacker, Mobile defender)
         {
+            return OnSwing(attacker, defender, 0);
+        }
+
+        public virtual TimeSpan OnSwing(Mobile attacker, Mobile defender, double bonus)
+        {
             if (attacker.HarmfulCheck(defender))
             {
                 attacker.DisruptiveAction();
@@ -743,19 +748,18 @@ namespace Server.Items
             return damage;
         }
 
-        public virtual void GetStatusDamage(Mobile attacker, Mobile defender, out int min, out int max)
+        public virtual void GetStatusDamage(Mobile from, out int min, out int max)
         {
             int baseMin, baseMax;
 
-            GetBaseDamageRange(attacker, out baseMin, out baseMax);
+            GetBaseDamageRange(from, out baseMin, out baseMax);
 
-            var attackerWeapon = attacker.Weapon as BaseWeapon;
-            var defenderArmor = GetDefenderArmor(defender);
+            var attackerWeapon = from.Weapon as BaseWeapon;
             var bonusDamage = GetBonusForDamageLevel(DamageLevel);
 
-            min = Math.Max((int) ScaleDamage(attacker, defender, baseMin, attackerWeapon, defenderArmor), 1) +
+            min = Math.Max((int) ScaleDamage(from, null, baseMin, attackerWeapon), 1) +
                   bonusDamage;
-            max = Math.Max((int) ScaleDamage(attacker, defender, baseMax, attackerWeapon, defenderArmor), 1) +
+            max = Math.Max((int) ScaleDamage(from, null, baseMax, attackerWeapon), 1) +
                   bonusDamage;
         }
 
