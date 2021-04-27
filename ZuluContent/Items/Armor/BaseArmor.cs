@@ -458,7 +458,7 @@ namespace Server.Items
             }
         }
 
-        public virtual double ScaleArmorByDurability(double armor)
+        public double ScaleArmorByDurability(double armor)
         {
             return armor * ((double) HitPoints / (double) MaxHitPoints);
         }
@@ -956,57 +956,27 @@ namespace Server.Items
             base.OnRemoved(parent);
         }
 
-        public virtual int OnHit(BaseWeapon weapon, int damageTaken)
+        public virtual double OnHit(BaseWeapon weapon, double damageTaken)
         {
-            double halfAr = ArmorRating / 2.0;
-            int absorbed = (int) (halfAr + halfAr * Utility.RandomDouble());
-
-            damageTaken -= absorbed;
-            if (damageTaken < 0)
-                damageTaken = 0;
-
-            if (absorbed < 2)
-                absorbed = 2;
-
-            if (25 > Utility.Random(100)) // 25% chance to lower durability
+            if (weapon.Type == WeaponType.Bashing)
             {
-                int wear;
-
-                if (weapon.Type == WeaponType.Bashing)
-                    wear = absorbed / 2;
-                else
-                    wear = Utility.Random(2);
-
-                if (wear > 0 && MaxHitPoints > 0)
+                if (MaxHitPoints > 0)
                 {
-                    if (m_HitPoints >= wear)
-                    {
-                        HitPoints -= wear;
-                        wear = 0;
-                    }
-                    else
-                    {
-                        wear -= HitPoints;
-                        HitPoints = 0;
-                    }
-
-                    if (wear > 0)
-                    {
-                        if (MaxHitPoints > wear)
-                        {
-                            MaxHitPoints -= wear;
-
-                            if (Parent is Mobile mobile) // Your equipment is severely damaged.
-                                mobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121);
-                        }
-                        else
-                        {
-                            Delete();
-                        }
-                    }
+                    if (Utility.Random(100) < 5)
+                        HitPoints -= 1;
                 }
             }
+            else if (Utility.Random(100) < 2)
+            {
+                if (MaxHitPoints > 0)
+                    HitPoints -= 1;
+            }
 
+            if (Quality > 0 && HitPoints < 1)
+            {
+                Delete();
+            }
+            
             return damageTaken;
         }
 

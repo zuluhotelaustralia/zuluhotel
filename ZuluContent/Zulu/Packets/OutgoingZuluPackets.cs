@@ -10,7 +10,7 @@ namespace Scripts.Zulu.Packets
 {
     public static class OutgoingZuluPackets
     {
-        private const int ZuluPlayerStatusMaxLength = 32;
+        private const int ZuluPlayerStatusMaxLength = 36;
         private const string ZuluClientSuffix = "zuluhotel";
         
         public static void Initialize()
@@ -40,6 +40,9 @@ namespace Scripts.Zulu.Packets
             if (ns == null || player == null || !ns.Version.SourceString.InsensitiveContains(ZuluClientSuffix))
                 return;
 
+            int minDamage = 0, maxDamage = 0;
+            player.Weapon?.GetStatusDamage(player, null, out minDamage, out maxDamage);
+
             var writer = new SpanWriter(stackalloc byte[ZuluPlayerStatusMaxLength]);
             writer.Write((byte)0xF9); // Packet ID
             writer.Write((byte)0x1); // Sub-command PlayerStatus
@@ -57,6 +60,8 @@ namespace Scripts.Zulu.Packets
             writer.Write((short)player.NecroResist);
             writer.Write((short)0); // Criminal Timer Minutes
             writer.Write((short)0); // Murderer Timer Minutes
+            writer.Write((short)minDamage); // Min Damage
+            writer.Write((short)maxDamage); // Max Damage
             
             ns.Send(writer.Span);
         }

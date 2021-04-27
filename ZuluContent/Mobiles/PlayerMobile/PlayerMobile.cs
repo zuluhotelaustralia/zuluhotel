@@ -1823,7 +1823,7 @@ namespace Server.Mobiles
             // In case they have the skill arrow down
             if (difficulty == 0)
             {
-                AwardSkillPoints(this, skillName, 0);
+                this.AwardSkillPoints(skillName, 0);
                 return true;
             }
 

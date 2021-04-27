@@ -847,8 +847,8 @@ namespace Server.Scripts.Engines.Loot
 
             var value = level switch
             {
-                < 100 => WeaponAccuracyLevel.Regular,
-                < 200 => WeaponAccuracyLevel.Accurate,
+                < 100 => WeaponAccuracyLevel.Accurate,
+                < 200 => WeaponAccuracyLevel.Precisely,
                 < 350 => WeaponAccuracyLevel.Surpassingly,
                 < 450 => WeaponAccuracyLevel.Eminently,
                 < 550 => WeaponAccuracyLevel.Exceedingly,

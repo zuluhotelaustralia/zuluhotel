@@ -87,7 +87,7 @@ namespace Server.Mobiles
                 {
                     {ElementalType.Poison, 6},
                     {ElementalType.Necro, 100},
-                    {ElementalType.Physical, 4}
+                    {ElementalType.Physical, 100}
                 },
                 Skills = new Dictionary<SkillName, CreatureProp>
                 {

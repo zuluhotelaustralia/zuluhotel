@@ -22,7 +22,7 @@ namespace Scripts.Zulu.Engines.Classes
         private const double SkillBase = 480;
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
-        private const double PerLevel = 0.25; //25% per level
+        private const double PerLevel = 0.15; //25% per level
         private const double ClasseBonus = 1.5;
         private const int MaxLevel = 6;
 
@@ -122,6 +122,8 @@ namespace Scripts.Zulu.Engines.Classes
         public double Bonus => Type == ZuluClassType.PowerPlayer || Type == ZuluClassType.None
             ? 1.0
             : 1.0 + Level * PerLevel;
+
+        public static double GetBonusByLevel(int level) => 1.0 + level * PerLevel; 
 
         public static double GetBonusFor(Mobile m, ZuluClassType name) =>
             m is IZuluClassed classed ? classed.ZuluClass.GetBonusFor(name) : 1.0;
@@ -518,15 +520,15 @@ namespace Scripts.Zulu.Engines.Classes
         {
         }
 
-        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        public void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage)
         {
         }
 
-        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref int damage)
+        public void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield, ref double damage)
         {
         }
 
-        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref int damage)
+        public void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor, ref double damage)
         {
         }
 

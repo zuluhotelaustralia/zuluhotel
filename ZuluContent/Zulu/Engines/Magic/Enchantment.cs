@@ -168,17 +168,17 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        public virtual void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage)
         {
         }
 
         public virtual void OnShieldHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseShield shield,
-            ref int damage)
+            ref double damage)
         {
         }
 
         public virtual void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor,
-            ref int damage)
+            ref double damage)
         {
         }
 

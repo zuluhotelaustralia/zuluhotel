@@ -310,55 +310,8 @@ namespace Server.Items
             base.OnRemoved(parent);
         }
 
-        public virtual int OnHit(BaseWeapon weapon, int damageTaken)
+        public virtual double OnHit(BaseWeapon weapon, double damageTaken)
         {
-            int Absorbed = Utility.RandomMinMax(1, 4);
-
-            damageTaken -= Absorbed;
-
-            if (damageTaken < 0)
-                damageTaken = 0;
-
-            if (25 > Utility.Random(100)) // 25% chance to lower durability
-            {
-                int wear;
-
-                if (weapon.Type == WeaponType.Bashing)
-                    wear = Absorbed / 2;
-                else
-                    wear = Utility.Random(2);
-
-                if (wear > 0 && m_MaxHitPoints > 0)
-                {
-                    if (m_HitPoints >= wear)
-                    {
-                        HitPoints -= wear;
-                        wear = 0;
-                    }
-                    else
-                    {
-                        wear -= HitPoints;
-                        HitPoints = 0;
-                    }
-
-                    if (wear > 0)
-                    {
-                        if (m_MaxHitPoints > wear)
-                        {
-                            MaxHitPoints -= wear;
-
-                            if (Parent is Mobile)
-                                ((Mobile) Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                                    1061121); // Your equipment is severely damaged.
-                        }
-                        else
-                        {
-                            Delete();
-                        }
-                    }
-                }
-            }
-
             return damageTaken;
         }
 

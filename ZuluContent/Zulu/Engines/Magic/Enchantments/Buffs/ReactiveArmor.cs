@@ -26,7 +26,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
             }
         }
 
-        public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
+        public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage)
         {
             if (!attacker.Alive || !defender.Alive || Value <= 0 || damage <= 0)
                 return;

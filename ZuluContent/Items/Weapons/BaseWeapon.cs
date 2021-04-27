@@ -1,10 +1,10 @@
 using System;
-using Server.Network;
-using Server.Mobiles;
-using Server.Engines.Craft;
 using System.Collections.Generic;
-using System.Linq;
+using Scripts.Zulu.Engines.Classes;
+using Server.Engines.Craft;
 using Server.Engines.Magic;
+using Server.Mobiles;
+using Server.Network;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -139,7 +139,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int HitPoints
         {
-            get { return m_Hits; }
+            get => m_Hits;
             set
             {
                 if (m_Hits == value)
@@ -173,7 +173,7 @@ namespace Server.Items
         public Poison Poison
         {
             get => Enchantments.Get((PoisonHit e) => e.Poison);
-            set => Enchantments.Set((PoisonHit e) => e.Level = (PoisonLevel)value.Level);
+            set => Enchantments.Set((PoisonHit e) => e.Level = (PoisonLevel) value.Level);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -207,7 +207,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource
         {
-            get { return m_Resource; }
+            get => m_Resource;
             set
             {
                 UnscaleDurability();
@@ -215,6 +215,22 @@ namespace Server.Items
                 Hue = CraftResources.GetHue(m_Resource);
                 ScaleDurability();
             }
+        }
+
+        private static readonly Dictionary<WeaponDamageLevel, int> DamageLevelToBonus = new()
+        {
+            [WeaponDamageLevel.Regular] = 0,
+            [WeaponDamageLevel.Ruin] = 5,
+            [WeaponDamageLevel.Might] = 10,
+            [WeaponDamageLevel.Force] = 15,
+            [WeaponDamageLevel.Power] = 20,
+            [WeaponDamageLevel.Vanquishing] = 25,
+            [WeaponDamageLevel.Devastation] = 30
+        };
+
+        public static int GetBonusForDamageLevel(WeaponDamageLevel level)
+        {
+            return DamageLevelToBonus[level];
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -242,63 +258,60 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int MaxRange
         {
-            get { return m_MaxRange == -1 ? DefaultMaxRange : m_MaxRange; }
-            set { m_MaxRange = value; }
+            get => m_MaxRange == -1 ? DefaultMaxRange : m_MaxRange;
+            set => m_MaxRange = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponAnimation Animation
         {
-            get { return (int) m_Animation == -1 ? DefaultAnimation : m_Animation; }
-            set { m_Animation = value; }
+            get => (int) m_Animation == -1 ? DefaultAnimation : m_Animation;
+            set => m_Animation = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public WeaponType Type
         {
-            get { return m_Type == (WeaponType) (-1) ? DefaultWeaponType : m_Type; }
-            set { m_Type = value; }
+            get => m_Type == (WeaponType) (-1) ? DefaultWeaponType : m_Type;
+            set => m_Type = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SkillName Skill
         {
-            get { return m_Skill == (SkillName) (-1) ? DefaultSkill : m_Skill; }
-            set { m_Skill = value; }
+            get => m_Skill == (SkillName) (-1) ? DefaultSkill : m_Skill;
+            set => m_Skill = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int HitSound
         {
-            get { return m_HitSound == -1 ? DefaultHitSound : m_HitSound; }
-            set { m_HitSound = value; }
+            get => m_HitSound == -1 ? DefaultHitSound : m_HitSound;
+            set => m_HitSound = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int MissSound
         {
-            get { return m_MissSound == -1 ? DefaultMissSound : m_MissSound; }
-            set { m_MissSound = value; }
+            get => m_MissSound == -1 ? DefaultMissSound : m_MissSound;
+            set => m_MissSound = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int MinDamage
         {
-            get { return m_MinDamage == -1 ? DefaultMinDamage : m_MinDamage; }
-            set { m_MinDamage = value; }
+            get => m_MinDamage == -1 ? DefaultMinDamage : m_MinDamage;
+            set => m_MinDamage = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int MaxDamage
         {
-            get { return m_MaxDamage == -1 ? DefaultMaxDamage : m_MaxDamage; }
-            set { m_MaxDamage = value; }
+            get => m_MaxDamage == -1 ? DefaultMaxDamage : m_MaxDamage;
+            set => m_MaxDamage = value;
         }
 
-        public virtual bool UseSkillMod
-        {
-            get { return true; }
-        }
+        public virtual bool UseSkillMod => true;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public float Speed
@@ -310,28 +323,28 @@ namespace Server.Items
 
                 return DefaultSpeed;
             }
-            set { m_Speed = value; }
+            set => m_Speed = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrRequirement
         {
-            get { return m_StrReq == -1 ? DefaultStrengthReq : m_StrReq; }
-            set { m_StrReq = value; }
+            get => m_StrReq == -1 ? DefaultStrengthReq : m_StrReq;
+            set => m_StrReq = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int DexRequirement
         {
-            get { return m_DexReq == -1 ? DefaultDexterityReq : m_DexReq; }
-            set { m_DexReq = value; }
+            get => m_DexReq == -1 ? DefaultDexterityReq : m_DexReq;
+            set => m_DexReq = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int IntRequirement
         {
-            get { return m_IntReq == -1 ? DefaultIntelligenceReq : m_IntReq; }
-            set { m_IntReq = value; }
+            get => m_IntReq == -1 ? DefaultIntelligenceReq : m_IntReq;
+            set => m_IntReq = value;
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -345,13 +358,11 @@ namespace Server.Items
                     Enchantments.Set((WeaponAccuracyBonus e) => e.Value = value);
 
                     if (UseSkillMod)
-                    {
                         Enchantments.Set((SecondSkillBonus e) =>
                         {
                             e.Skill = Skill;
                             return e.Value = (int) value * 5;
                         });
-                    }
                 }
             }
         }
@@ -360,7 +371,7 @@ namespace Server.Items
 
         public virtual void UnscaleDurability()
         {
-            int scale = 100 + GetDurabilityBonus();
+            var scale = 100 + GetDurabilityBonus();
 
             m_Hits = (m_Hits * 100 + (scale - 1)) / scale;
             MaxHitPoints = (MaxHitPoints * 100 + (scale - 1)) / scale;
@@ -368,7 +379,7 @@ namespace Server.Items
 
         public virtual void ScaleDurability()
         {
-            int scale = 100 + GetDurabilityBonus();
+            var scale = 100 + GetDurabilityBonus();
 
             m_Hits = (m_Hits * scale + 99) / 100;
             MaxHitPoints = (MaxHitPoints * scale + 99) / 100;
@@ -392,7 +403,7 @@ namespace Server.Items
 
         private class ResetEquipTimer : Timer
         {
-            private Mobile m_Mobile;
+            private readonly Mobile m_Mobile;
 
             public ResetEquipTimer(Mobile m, TimeSpan duration) : base(duration)
             {
@@ -424,10 +435,8 @@ namespace Server.Items
             }
         }
 
-        public virtual Race RequiredRace
-        {
-            get { return null; }
-        } //On OSI, there are no weapons with race requirements, this is for custom stuff
+        public virtual Race RequiredRace =>
+            null; //On OSI, there are no weapons with race requirements, this is for custom stuff
 
         public override bool CanEquip(Mobile from)
         {
@@ -494,9 +503,9 @@ namespace Server.Items
             base.OnRemoved(parent);
         }
 
-        public virtual SkillName GetUsedSkill(Mobile m, bool checkSkillAttrs)
+        public SkillName GetUsedSkill(Mobile m)
         {
-            SkillName sk = Skill;
+            var sk = Skill;
 
             if (sk != SkillName.Wrestling && !m.Player && !m.Body.IsHuman &&
                 m.Skills[SkillName.Wrestling].Value > m.Skills[sk].Value)
@@ -505,48 +514,30 @@ namespace Server.Items
             return sk;
         }
 
-        public virtual double GetAttackSkillValue(Mobile attacker, Mobile defender)
+        public double GetAttackSkillValue(Mobile attacker, Mobile defender)
         {
-            return attacker.Skills[GetUsedSkill(attacker, true)].Value;
+            return attacker.Skills[GetUsedSkill(attacker)].Value;
         }
 
         public virtual double GetDefendSkillValue(Mobile attacker, Mobile defender)
         {
-            return defender.Skills[GetUsedSkill(defender, true)].Value;
+            return defender.Skills[GetUsedSkill(defender)].Value;
         }
 
-        public virtual bool CheckHit(Mobile attacker, Mobile defender)
+        public bool CheckHit(Mobile attacker, Mobile defender)
         {
-            BaseWeapon atkWeapon = attacker.Weapon as BaseWeapon;
-            BaseWeapon defWeapon = defender.Weapon as BaseWeapon;
+            var atkWeapon = attacker.Weapon as BaseWeapon;
+            var defWeapon = defender.Weapon as BaseWeapon;
 
-            Skill atkSkill = attacker.Skills[atkWeapon.Skill];
-            Skill defSkill = defender.Skills[defWeapon.Skill];
+            var atkValue = atkWeapon.GetAttackSkillValue(attacker, defender) + 50.0;
+            var defValue = defWeapon.GetDefendSkillValue(attacker, defender) + 50.0;
 
-            double atkValue = atkWeapon.GetAttackSkillValue(attacker, defender);
-            double defValue = defWeapon.GetDefendSkillValue(attacker, defender);
+            var hitChance = atkValue / (defValue * 2.0);
 
-            double ourValue, theirValue;
-
-            int bonus = GetHitChanceBonus();
-
-            if (atkValue <= -50.0)
-                atkValue = -49.9;
-
-            if (defValue <= -50.0)
-                defValue = -49.9;
-
-            ourValue = atkValue + 50.0;
-            theirValue = defValue + 50.0;
-
-            double chance = ourValue / (theirValue * 2.0);
-
-            chance *= 1.0 + (double) bonus / 100;
-
-            return attacker.CheckSkill(atkSkill.SkillName, chance);
+            return Utility.RandomDouble() < hitChance;
         }
 
-        public virtual TimeSpan GetDelay(Mobile m)
+        public TimeSpan GetDelay(Mobile m)
         {
             var speed = Speed;
 
@@ -568,11 +559,6 @@ namespace Server.Items
 
         public virtual TimeSpan OnSwing(Mobile attacker, Mobile defender)
         {
-            return OnSwing(attacker, defender, 1.0);
-        }
-
-        public virtual TimeSpan OnSwing(Mobile attacker, Mobile defender, double damageBonus)
-        {
             if (attacker.HarmfulCheck(defender))
             {
                 attacker.DisruptiveAction();
@@ -580,13 +566,9 @@ namespace Server.Items
                 attacker.NetState?.SendSwing(attacker.Serial, defender.Serial);
 
                 if (CheckHit(attacker, defender))
-                {
-                    OnHit(attacker, defender, damageBonus);
-                }
+                    OnHit(attacker, defender);
                 else
-                {
                     OnMiss(attacker, defender);
-                }
             }
 
             return GetDelay(attacker);
@@ -596,7 +578,7 @@ namespace Server.Items
 
         public virtual int GetHitAttackSound(Mobile attacker, Mobile defender)
         {
-            int sound = attacker.GetAttackSound();
+            var sound = attacker.GetAttackSound();
 
             if (sound == -1)
                 sound = HitSound;
@@ -613,8 +595,7 @@ namespace Server.Items
         {
             if (attacker.GetAttackSound() == -1)
                 return MissSound;
-            else
-                return -1;
+            return -1;
         }
 
         public virtual int GetMissDefendSound(Mobile attacker, Mobile defender)
@@ -624,19 +605,14 @@ namespace Server.Items
 
         #endregion
 
-        public virtual int AbsorbDamage(Mobile attacker, Mobile defender, int damage)
+        public BaseArmor? GetDefenderArmor(Mobile defender)
         {
-            if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
-            {
-                damage = shield.OnHit(this, damage);
+            if (defender == null)
+                return null;
 
-                // ReSharper disable once AccessToModifiedClosure
-                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
-            }
+            var chance = Utility.RandomDouble();
 
-            double chance = Utility.RandomDouble();
-
-            Item armorItem = chance switch
+            var armorItem = chance switch
             {
                 < 0.07 => defender.NeckArmor,
                 < 0.14 => defender.HandArmor,
@@ -646,46 +622,23 @@ namespace Server.Items
                 _ => defender.ChestArmor
             };
 
-            if (armorItem is BaseArmor armor)
-            {
-                damage = armor.OnHit(this, damage);
-                armor.FireHook(h => h.OnArmorHit(attacker, defender, this, armor, ref damage));
-            }
-
-            int virtualArmor = defender.VirtualArmor + defender.VirtualArmorMod;
-
-            if (virtualArmor > 0)
-            {
-                double scalar;
-
-                if (chance < 0.14)
-                    scalar = 0.07;
-                else if (chance < 0.28)
-                    scalar = 0.14;
-                else if (chance < 0.43)
-                    scalar = 0.15;
-                else if (chance < 0.65)
-                    scalar = 0.22;
-                else
-                    scalar = 0.35;
-
-                int from = (int) (virtualArmor * scalar) / 2;
-                int to = (int) (virtualArmor * scalar);
-
-                damage -= Utility.Random(from, to - from + 1);
-            }
-
-            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
-
-            return damage;
+            return armorItem as BaseArmor;
         }
 
-        public void OnHit(Mobile attacker, Mobile defender)
+        public void CheckApplyPoison(Mobile attacker, Mobile defender)
         {
-            OnHit(attacker, defender, 1.0);
+            if (Poison != null && PoisonCharges > 0)
+            {
+                PoisonCharges -= 1;
+
+                defender.ApplyPoison(attacker, Poison);
+
+                if (PoisonCharges == 0)
+                    Poison = null;
+            }
         }
 
-        public virtual void OnHit(Mobile attacker, Mobile defender, double damageBonus)
+        public virtual void OnHit(Mobile attacker, Mobile defender)
         {
             PlaySwingAnimation(attacker);
             PlayHurtAnimation(defender);
@@ -693,53 +646,35 @@ namespace Server.Items
             attacker.PlaySound(GetHitAttackSound(attacker, defender));
             defender.PlaySound(GetHitDefendSound(attacker, defender));
 
+            var attackerWeapon = attacker.Weapon as BaseWeapon;
+            var defenderArmor = GetDefenderArmor(defender);
 
-            int damage = ComputeDamage(attacker, defender);
-
-            // ReSharper disable once AccessToModifiedClosure
-            attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref damage));
+            var damage = ComputeDamage(attacker, defender, attackerWeapon, defenderArmor);
 
             if (attacker is BaseCreature bc && bc.GetWeaponAbility() is { } ab &&
                 bc.WeaponAbilityChance >= Utility.RandomDouble())
-            {
                 ab.OnHit(attacker, defender, ref damage);
-            }
-
-            damage = AbsorbDamage(attacker, defender, damage);
 
             if (damage < 1)
                 damage = 1;
+
+            CheckApplyPoison(attacker, defender);
 
             AddBlood(attacker, defender, damage);
 
             defender.Damage(damage, attacker);
 
-            // Stratics says 50% chance, seems more like 4%..
-            if (MaxHitPoints > 0 && (MaxRange <= 1 && defender is Slime || Utility.Random(25) == 0))
-            {
-                if (MaxRange <= 1 && defender is Slime)
-                    attacker.LocalOverheadMessage(MessageType.Regular, 0x3B2,
-                        500263); // *Acid blood scars your weapon!*
+            // Award skill points
+            attacker.AwardSkillPoints(attackerWeapon.GetUsedSkill(attacker), 20);
+            attacker.AwardSkillPoints(SkillName.Tactics, 20);
 
-                if (m_Hits > 0)
-                {
-                    --HitPoints;
-                }
-                else if (MaxHitPoints > 1)
-                {
-                    --MaxHitPoints;
+            defenderArmor?.OnHit(attackerWeapon, damage);
 
-                    if (Parent is Mobile parentMobile)
-                    {
-                        // Your equipment is severely damaged.
-                        parentMobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121);
-                    }
-                }
-                else
-                {
-                    Delete();
-                }
-            }
+            if (Utility.Random(100) < 2)
+                if (MaxHitPoints > 0)
+                    HitPoints -= 1;
+
+            if (Quality > 0 && HitPoints < 1) Delete();
 
             if (attacker is BaseCreature attackingCreature)
                 attackingCreature.OnGaveMeleeAttack(defender);
@@ -748,45 +683,19 @@ namespace Server.Items
                 defendingCreature.OnGotMeleeAttack(attacker);
         }
 
-        public virtual CheckSlayerResult CheckSlayers(Mobile attacker, Mobile defender)
-        {
-            BaseWeapon atkWeapon = attacker.Weapon as BaseWeapon;
-            SlayerEntry atkSlayer = SlayerGroup.GetEntryByName(atkWeapon.OldSlayer);
-            SlayerEntry atkSlayer2 = SlayerGroup.GetEntryByName(atkWeapon.OldSlayer2);
-
-            if (atkSlayer != null && atkSlayer.Slays(defender) || atkSlayer2 != null && atkSlayer2.Slays(defender))
-                return CheckSlayerResult.Slayer;
-
-            ISlayer defISlayer = Spellbook.FindEquippedSpellbook(defender) ?? defender.Weapon as ISlayer;
-
-            if (defISlayer != null)
-            {
-                SlayerEntry defSlayer = SlayerGroup.GetEntryByName(defISlayer.OldSlayer);
-                SlayerEntry defSlayer2 = SlayerGroup.GetEntryByName(defISlayer.OldSlayer2);
-
-                if (defSlayer != null && defSlayer.Group.OppositionSuperSlays(attacker) ||
-                    defSlayer2 != null && defSlayer2.Group.OppositionSuperSlays(attacker))
-                    return CheckSlayerResult.Opposition;
-            }
-
-            return CheckSlayerResult.None;
-        }
-
-        public virtual void AddBlood(Mobile attacker, Mobile defender, int damage)
+        public void AddBlood(Mobile attacker, Mobile defender, int damage)
         {
             if (damage > 0)
             {
                 new Blood().MoveToWorld(defender.Location, defender.Map);
 
-                int extraBlood = Utility.RandomMinMax(0, 1);
+                var extraBlood = Utility.RandomMinMax(0, 1);
 
-                for (int i = 0; i < extraBlood; i++)
-                {
+                for (var i = 0; i < extraBlood; i++)
                     new Blood().MoveToWorld(new Point3D(
                         defender.X + Utility.RandomMinMax(-1, 1),
                         defender.Y + Utility.RandomMinMax(-1, 1),
                         defender.Z), defender.Map);
-                }
             }
         }
 
@@ -797,11 +706,11 @@ namespace Server.Items
             defender.PlaySound(GetMissDefendSound(attacker, defender));
         }
 
-        public virtual void GetBaseDamageRange(Mobile attacker, out int min, out int max)
+        public void GetBaseDamageRange(Mobile attacker, out int min, out int max)
         {
             if (attacker is BaseCreature)
             {
-                BaseCreature c = (BaseCreature) attacker;
+                var c = (BaseCreature) attacker;
 
                 if (c.DamageMin >= 0)
                 {
@@ -822,156 +731,158 @@ namespace Server.Items
             max = MaxDamage;
         }
 
-        public virtual double GetBaseDamage(Mobile attacker)
+        public int GetBaseDamage(Mobile attacker)
         {
             int min, max;
 
             GetBaseDamageRange(attacker, out min, out max);
 
-            int damage = Utility.RandomMinMax(min, max);
-
-            /* Apply damage level offset
-             * : Regular : 0
-             * : Ruin    : 1
-             * : Might   : 3
-             * : Force   : 5
-             * : Power   : 7
-             * : Vanq    : 9
-             */
-            if (DamageLevel != WeaponDamageLevel.Regular)
-                damage += 2 * (int) DamageLevel - 1;
+            var bonusDamage = GetBonusForDamageLevel(DamageLevel);
+            var damage = Utility.RandomMinMax(min, max) + bonusDamage;
 
             return damage;
         }
 
-        public virtual double GetBonus(double value, double scalar, double threshold, double offset)
-        {
-            double bonus = value * scalar;
-
-            if (value >= threshold)
-                bonus += offset;
-
-            return bonus / 100;
-        }
-
-        public virtual int GetHitChanceBonus()
-        {
-            return 0;
-        }
-
-        public virtual int GetDamageBonus()
-        {
-            var qualityBonus = Mark switch
-            {
-                MarkQuality.Low => -20,
-                MarkQuality.Exceptional => 20,
-                _ => 0
-            };
-
-            var damageBonus = DamageLevel switch
-            {
-                WeaponDamageLevel.Ruin => 15,
-                WeaponDamageLevel.Might => 20,
-                WeaponDamageLevel.Force => 25,
-                WeaponDamageLevel.Power => 30,
-                WeaponDamageLevel.Vanquishing => 35,
-                WeaponDamageLevel.Devastation => 40,
-                _ => 0
-            };
-
-            return VirtualDamageBonus + qualityBonus + damageBonus;
-        }
-
-        public virtual void GetStatusDamage(Mobile from, out int min, out int max)
+        public virtual void GetStatusDamage(Mobile attacker, Mobile defender, out int min, out int max)
         {
             int baseMin, baseMax;
 
-            GetBaseDamageRange(from, out baseMin, out baseMax);
+            GetBaseDamageRange(attacker, out baseMin, out baseMax);
 
-            min = Math.Max((int) ScaleDamageOld(from, baseMin, false), 1);
-            max = Math.Max((int) ScaleDamageOld(from, baseMax, false), 1);
+            var attackerWeapon = attacker.Weapon as BaseWeapon;
+            var defenderArmor = GetDefenderArmor(defender);
+            var bonusDamage = GetBonusForDamageLevel(DamageLevel);
+
+            min = Math.Max((int) ScaleDamage(attacker, defender, baseMin, attackerWeapon, defenderArmor), 1) +
+                  bonusDamage;
+            max = Math.Max((int) ScaleDamage(attacker, defender, baseMax, attackerWeapon, defenderArmor), 1) +
+                  bonusDamage;
         }
 
-        public virtual double ScaleDamageOld(Mobile attacker, double damage, bool checkSkills)
+        public double ShieldAbsorbDamage(Mobile attacker, Mobile defender, double damage)
         {
-            if (checkSkills)
+            if (defender.FindItemOnLayer(Layer.TwoHanded) is BaseShield shield)
             {
-                attacker.CheckSkill(SkillName.Tactics, 0.0,
-                    attacker.Skills[SkillName.Tactics].Cap); // Passively check tactics for gain
-                attacker.CheckSkill(SkillName.Anatomy, 0.0,
-                    attacker.Skills[SkillName.Anatomy].Cap); // Passively check Anatomy for gain
+                damage = shield.OnHit(this, damage);
 
-                if (Type == WeaponType.Axe)
-                    attacker.CheckSkill(SkillName.Lumberjacking, 0.0, 100.0); // Passively check Lumberjacking for gain
+                // ReSharper disable once AccessToModifiedClosure
+                defender.FireHook(h => h.OnShieldHit(attacker, defender, this, shield, ref damage));
             }
-
-            /* Compute tactics modifier
-             * :   0.0 = 50% loss
-             * :  50.0 = unchanged
-             * : 100.0 = 50% bonus
-             */
-            damage += damage * ((attacker.Skills[SkillName.Tactics].Value - 50.0) / 100.0);
-
-
-            /* Compute strength modifier
-             * : 1% bonus for every 5 strength
-             */
-            double modifiers = attacker.Str / 5.0 / 100.0;
-
-            /* Compute anatomy modifier
-             * : 1% bonus for every 5 points of anatomy
-             * : +10% bonus at Grandmaster or higher
-             */
-            double anatomyValue = attacker.Skills[SkillName.Anatomy].Value;
-            modifiers += anatomyValue / 5.0 / 100.0;
-
-            if (anatomyValue >= 100.0)
-                modifiers += 0.1;
-
-            /* Compute lumberjacking bonus
-             * : 1% bonus for every 5 points of lumberjacking
-             * : +10% bonus at Grandmaster or higher
-             */
-            if (Type == WeaponType.Axe)
-            {
-                double lumberValue = attacker.Skills[SkillName.Lumberjacking].Value;
-
-                modifiers += lumberValue / 5.0 / 100.0;
-
-                if (lumberValue >= 100.0)
-                    modifiers += 0.1;
-            }
-
-            // New quality bonus:
-            if (Mark != MarkQuality.Regular)
-                modifiers += ((int) Mark - 1) * 0.2;
-
-            // Virtual damage bonus:
-            if (VirtualDamageBonus != 0)
-                modifiers += VirtualDamageBonus / 100.0;
-
-            // Apply bonuses
-            damage += damage * modifiers;
-
-            // Scale by durability
-            if (MaxHitPoints > 0)
-                damage *= HitPoints / (double) MaxHitPoints;
-
-            return (int) damage;
-        }
-
-        public virtual int ComputeDamage(Mobile attacker, Mobile defender)
-        {
-            int damage = (int) ScaleDamageOld(attacker, GetBaseDamage(attacker), true);
-
-            // pre-AOS, halve damage if the defender is a player or the attacker is not a player
-            if (defender is PlayerMobile || !(attacker is PlayerMobile))
-                damage = (int) (damage / 2.0);
 
             return damage;
         }
 
-        public virtual void PlayHurtAnimation(Mobile from)
+        public double ModByDist(Mobile attacker, Mobile defender, double damage, BaseWeapon weapon)
+        {
+            if (weapon.GetUsedSkill(attacker) == SkillName.Archery)
+            {
+                damage *= (attacker.Dex + 60) * 0.01 /
+                          ((attacker.Skills[SkillName.Tactics].Value + 50.0 + attacker.Str / 5.0) * 0.01);
+
+                var dist = attacker.GetDistanceToSqrt(defender);
+
+                if (dist <= 1 || dist > 10)
+                    damage *= 0.25;
+
+                if (attacker.ClassContainsSkill(SkillName.Archery))
+                    damage *= attacker.GetClassModifier(SkillName.Archery);
+            }
+            else if (attacker.ClassContainsSkill(SkillName.Magery))
+            {
+                damage /= attacker.GetClassModifier(SkillName.Magery);
+            }
+            else if (attacker.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
+            {
+                if (defender is BaseCreature)
+                {
+                    damage *= attacker.GetClassModifier(SkillName.Swords);
+                }
+                else
+                {
+                    var level = attacker.GetClassLevel(SkillName.Swords);
+
+                    if (level > 0)
+                    {
+                        level -= 2;
+
+                        if (level >= 1)
+                            damage *= ZuluClass.GetBonusByLevel(level);
+                    }
+                }
+            }
+
+            if (defender.ClassContainsSkill(SkillName.Magery))
+                damage *= defender.GetClassModifier(SkillName.Magery);
+
+            return damage;
+        }
+
+        public double ModByProt(Mobile attacker, Mobile defender, double damage)
+        {
+            defender.FireHook(h => h.OnAbsorbMeleeDamage(attacker, defender, this, ref damage));
+
+            return damage;
+        }
+
+        public double ModByClass(Mobile attacker, Mobile defender, double damage)
+        {
+            if (attacker is BaseCreature &&
+                defender.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
+                damage /= defender.GetClassModifier(SkillName.Swords);
+
+            return damage;
+        }
+
+        public double ScaleDamage(Mobile attacker, Mobile? defender, double baseDamage, BaseWeapon weapon,
+            BaseArmor armor = null, bool piercing = false)
+        {
+            var anatomyVal = attacker.Skills[SkillName.Anatomy].Value;
+            double rawDamage;
+
+            if (attacker is PlayerMobile && defender is BaseCreature)
+                baseDamage *= 1.5;
+
+            baseDamage = ModByDist(attacker, defender, baseDamage, weapon);
+            baseDamage *= 1 + anatomyVal * 0.002;
+
+            if (!piercing && defender != null)
+            {
+                var armorRating = armor?.ArmorRating ?? 0 + defender.VirtualArmor + defender.VirtualArmorMod;
+
+                rawDamage = ShieldAbsorbDamage(attacker, defender, baseDamage);
+                rawDamage -= armorRating * (Utility.Random(51) + 50) * 0.01;
+            }
+            else
+            {
+                rawDamage = baseDamage;
+            }
+
+            rawDamage *= 0.5;
+
+            if (defender != null)
+            {
+                rawDamage = ModByProt(attacker, defender, rawDamage);
+                rawDamage = ModByClass(attacker, defender, rawDamage);
+            }
+
+            rawDamage = Math.Max(rawDamage, 0);
+
+            return rawDamage;
+        }
+
+        public int ComputeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor = null,
+            bool piercing = false)
+        {
+            var baseDamage = GetBaseDamage(attacker);
+
+            attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref baseDamage));
+
+            var damage = (int) ScaleDamage(attacker, defender, baseDamage, weapon, armor, piercing);
+
+            return damage;
+        }
+
+        public void PlayHurtAnimation(Mobile from)
         {
             int action;
             int frames;
@@ -1034,11 +945,8 @@ namespace Server.Items
                 case BodyType.Human:
                 {
                     if (!from.Mounted)
-                    {
                         action = (int) Animation;
-                    }
                     else
-                    {
                         action = Animation switch
                         {
                             WeaponAnimation.Wrestle => 26,
@@ -1052,7 +960,6 @@ namespace Server.Items
                             WeaponAnimation.ShootXBow => 28,
                             _ => 26
                         };
-                    }
 
                     break;
                 }
@@ -1081,9 +988,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 11); // version
+            writer.Write(11); // version
 
-            SaveFlag flags = SaveFlag.None;
+            var flags = SaveFlag.None;
 
             SetSaveFlag(ref flags, SaveFlag.ICraftable, true);
             SetSaveFlag(ref flags, SaveFlag.NewMagicalProperties, true);
@@ -1142,10 +1049,10 @@ namespace Server.Items
                 writer.Write((int) Mark);
 
             if (GetSaveFlag(flags, SaveFlag.Hits))
-                writer.Write((int) m_Hits);
+                writer.Write(m_Hits);
 
             if (GetSaveFlag(flags, SaveFlag.MaxHits))
-                writer.Write((int) MaxHitPoints);
+                writer.Write(MaxHitPoints);
 
             if (GetSaveFlag(flags, SaveFlag.Slayer))
                 writer.Write((int) OldSlayer);
@@ -1154,40 +1061,40 @@ namespace Server.Items
                 Poison.Serialize(Poison, writer);
 
             if (GetSaveFlag(flags, SaveFlag.PoisonCharges))
-                writer.Write((int) PoisonCharges);
+                writer.Write(PoisonCharges);
 
             if (GetSaveFlag(flags, SaveFlag.Crafter))
-                writer.Write((Mobile) Crafter);
+                writer.Write(Crafter);
 
             if (GetSaveFlag(flags, SaveFlag.Identified))
-                writer.Write((bool) Identified);
+                writer.Write(Identified);
 
             if (GetSaveFlag(flags, SaveFlag.StrReq))
-                writer.Write((int) m_StrReq);
+                writer.Write(m_StrReq);
 
             if (GetSaveFlag(flags, SaveFlag.DexReq))
-                writer.Write((int) m_DexReq);
+                writer.Write(m_DexReq);
 
             if (GetSaveFlag(flags, SaveFlag.IntReq))
-                writer.Write((int) m_IntReq);
+                writer.Write(m_IntReq);
 
             if (GetSaveFlag(flags, SaveFlag.MinDamage))
-                writer.Write((int) m_MinDamage);
+                writer.Write(m_MinDamage);
 
             if (GetSaveFlag(flags, SaveFlag.MaxDamage))
-                writer.Write((int) m_MaxDamage);
+                writer.Write(m_MaxDamage);
 
             if (GetSaveFlag(flags, SaveFlag.HitSound))
-                writer.Write((int) m_HitSound);
+                writer.Write(m_HitSound);
 
             if (GetSaveFlag(flags, SaveFlag.MissSound))
-                writer.Write((int) m_MissSound);
+                writer.Write(m_MissSound);
 
             if (GetSaveFlag(flags, SaveFlag.Speed))
-                writer.Write((float) m_Speed);
+                writer.Write(m_Speed);
 
             if (GetSaveFlag(flags, SaveFlag.MaxRange))
-                writer.Write((int) m_MaxRange);
+                writer.Write(m_MaxRange);
 
             if (GetSaveFlag(flags, SaveFlag.Skill))
                 writer.Write((int) m_Skill);
@@ -1202,7 +1109,7 @@ namespace Server.Items
                 writer.Write((int) m_Resource);
 
             if (GetSaveFlag(flags, SaveFlag.PlayerConstructed))
-                writer.Write((bool) PlayerConstructed);
+                writer.Write(PlayerConstructed);
 
             if (GetSaveFlag(flags, SaveFlag.Slayer2))
                 writer.Write((int) OldSlayer2);
@@ -1242,16 +1149,16 @@ namespace Server.Items
             SkillBonuses = 0x08000000,
             Slayer2 = 0x10000000,
             ElementalDamages = 0x20000000,
-            NewMagicalProperties = 0x40000000,
+            NewMagicalProperties = 0x40000000
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
-            SaveFlag flags = (SaveFlag) reader.ReadInt();
+            var flags = (SaveFlag) reader.ReadInt();
 
             switch (version)
             {
@@ -1359,7 +1266,9 @@ namespace Server.Items
                             m_Speed = reader.ReadFloat();
                     }
                     else
+                    {
                         m_Speed = -1;
+                    }
 
                     if (GetSaveFlag(flags, SaveFlag.MaxRange))
                         m_MaxRange = reader.ReadInt();
@@ -1425,10 +1334,7 @@ namespace Server.Items
                     if (version == 0)
                         m_MaxRange = 1; // default
 
-                    if (version < 5)
-                    {
-                        m_Resource = CraftResource.Iron;
-                    }
+                    if (version < 5) m_Resource = CraftResource.Iron;
 
                     m_MinDamage = reader.ReadInt();
                     m_MaxDamage = reader.ReadInt();
@@ -1495,9 +1401,7 @@ namespace Server.Items
                 ((Mobile) Parent).CheckStatTimers();
 
             if (m_Hits <= 0 && MaxHitPoints <= 0)
-            {
                 m_Hits = MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
-            }
 
             if (version < 6)
                 PlayerConstructed = true; // we don't know, so, assume it's crafted
@@ -1532,7 +1436,8 @@ namespace Server.Items
         {
         }
 
-        [Hue, CommandProperty(AccessLevel.GameMaster)]
+        [Hue]
+        [CommandProperty(AccessLevel.GameMaster)]
         public override int Hue
         {
             get => Identified ? base.Hue : 0x0;
@@ -1650,12 +1555,8 @@ namespace Server.Items
             var resEnchantments = CraftResources.GetEnchantments(Resource);
 
             if (resEnchantments != null)
-            {
                 foreach (var (key, value) in resEnchantments)
-                {
                     Enchantments.SetFromResourceType(key, value);
-                }
-            }
 
             Quality = quality;
 
@@ -1666,12 +1567,5 @@ namespace Server.Items
         }
 
         #endregion
-    }
-
-    public enum CheckSlayerResult
-    {
-        None,
-        Slayer,
-        Opposition
     }
 }
