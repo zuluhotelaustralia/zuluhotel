@@ -1,0 +1,44 @@
+{
+  "Name": "a Troll Warlord",
+  "CorpseNameOverride": "corpse of a Troll Warlord",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 60,
+  "Dex": 190,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 561,
+  "Body": 53,
+  "CanRummageCorpses": true,
+  "CreatureType": "Troll",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Troll",
+  "Hides": 4,
+  "HitsMax": 350,
+  "Hue": 1109,
+  "LootItemChance": 25,
+  "LootItemLevel": 3,
+  "LootTable": "19",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 120,
+  "StamMaxSeed": 90,
+  "Skills": {
+    "Tactics": 140,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 21,
+      "Max": 45
+    },
+    "HitSound": 563,
+    "MissSound": 571
+  }
+}

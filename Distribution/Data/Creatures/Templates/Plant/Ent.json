@@ -1,0 +1,45 @@
+{
+  "Name": "an ent",
+  "CorpseNameOverride": "corpse of an ent",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 300,
+  "Int": 75,
+  "Dex": 160,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 443,
+  "Body": 47,
+  "CanRummageCorpses": true,
+  "CreatureType": "Plant",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 300,
+  "Hue": 0,
+  "LootItemChance": 1,
+  "LootTable": "34",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Resistances": {
+    "Earth": 100,
+    "MagicImmunity": 6
+  },
+  "Skills": {
+    "Tactics": 150,
+    "Macing": 100,
+    "MagicResist": 200
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 24,
+      "Max": 44
+    },
+    "HitSound": 445,
+    "MissSound": 444
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "Name": "a troll warrior",
+  "CorpseNameOverride": "corpse of a troll warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 225,
+  "Int": 40,
+  "Dex": 80,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 323,
+  "Body": 54,
+  "CanRummageCorpses": true,
+  "CreatureType": "Troll",
+  "VirtualArmor": 10,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Troll",
+  "Hides": 4,
+  "HitsMax": 225,
+  "Hue": 33784,
+  "LootTable": "14",
+  "ManaMaxSeed": 30,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 80,
+  "StamMaxSeed": 60,
+  "Skills": {
+    "MagicResist": 80,
+    "Tactics": 115,
+    "Macing": 115
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 8,
+      "Max": 20
+    },
+    "HitSound": 325,
+    "MissSound": 571
+  }
+}

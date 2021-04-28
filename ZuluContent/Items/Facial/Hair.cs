@@ -230,14 +230,12 @@ namespace Server.Items
 
     public class LongHair : Hair
     {
-        private LongHair()
-            : this(0)
+        public LongHair() : base(Utility.RandomDyedHue())
         {
         }
 
 
-        public LongHair(int hue)
-            : base(0x203C, hue)
+        public LongHair(int hue = 0) : base(0x203C, hue)
         {
         }
 
@@ -263,14 +261,12 @@ namespace Server.Items
 
     public class ShortHair : Hair
     {
-        private ShortHair()
-            : this(0)
+        public ShortHair() : this(Utility.RandomDyedHue())
         {
         }
 
 
-        public ShortHair(int hue)
-            : base(0x203B, hue)
+        public ShortHair(int hue = 0) : base(0x203B, hue)
         {
         }
 

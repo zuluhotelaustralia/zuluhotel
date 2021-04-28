@@ -1,0 +1,55 @@
+{
+  "Name": "a fallen angel",
+  "CorpseNameOverride": "corpse of a fallen angel",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 600,
+  "Int": 285,
+  "Dex": 285,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 641,
+  "Body": 4,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Daemon",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 600,
+  "Hue": 1174,
+  "LootItemChance": 25,
+  "LootItemLevel": 2,
+  "LootTable": "35",
+  "ManaMaxSeed": 85,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 150,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 75,
+  "Tamable": false,
+  "Resistances": {
+    "Poison": 6,
+    "Earth": 50,
+    "Necro": 100,
+    "MagicImmunity": 6
+  },
+  "Skills": {
+    "MagicResist": 150,
+    "Tactics": 100,
+    "Fencing": 150,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 21,
+      "Max": 51
+    },
+    "HitSound": 643,
+    "MissSound": 642,
+    "Ability": "TriElementalStrike",
+    "AbilityChance": 1
+  }
+}

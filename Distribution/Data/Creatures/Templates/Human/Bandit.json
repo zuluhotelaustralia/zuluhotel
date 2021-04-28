@@ -1,0 +1,47 @@
+{
+  "Name": "a bandit",
+  "CorpseNameOverride": "corpse of a bandit",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 30,
+  "Int": 20,
+  "Dex": 30,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 358,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 30,
+  "Hue": 0,
+  "LootItemChance": 1,
+  "LootTable": "47",
+  "ManaMaxSeed": 10,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 50,
+  "StamMaxSeed": 30,
+  "Skills": {
+    "Tactics": 30,
+    "Fencing": 30
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 5,
+      "Max": 50
+    },
+    "HitSound": 360,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.Cutlass",
+      "Name": "Brigand1 Weapon",
+      "Hue": 0
+    }
+  ]
+}

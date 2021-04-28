@@ -1,0 +1,66 @@
+{
+  "Name": "Shadow Destroyer",
+  "CorpseNameOverride": "corpse of Shadow Destroyer",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1550,
+  "Int": 500,
+  "Dex": 450,
+  "ActiveSpeed": 0.15,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "AutoDispel": true,
+  "BardImmune": true,
+  "BaseSoundID": 571,
+  "Body": 311,
+  "CanRummageCorpses": true,
+  "CreatureType": "Daemon",
+  "VirtualArmor": 75,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 1200,
+  "Hue": 1172,
+  "LootItemChance": 90,
+  "LootItemLevel": 7,
+  "LootTable": "9",
+  "ManaMaxSeed": 500,
+  "PassiveSpeed": 0.3,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 160,
+  "StamMaxSeed": 500,
+  "Tamable": false,
+  "TargetAcquireExhaustion": true,
+  "Resistances": {
+    "Poison": 6,
+    "Fire": 100,
+    "Air": 100,
+    "MagicImmunity": 7,
+    "Necro": 100,
+    "Earth": 100
+  },
+  "Skills": {
+    "Tactics": 150,
+    "Macing": 150,
+    "Magery": 150,
+    "MagicResist": 100,
+    "Parry": 100,
+    "DetectHidden": 200
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 15,
+      "Max": 150
+    },
+    "HitSound": 573,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.HeaterShield",
+      "Name": "Shield AR50",
+      "Hue": 0,
+      "ArmorRating": 50
+    }
+  ]
+}

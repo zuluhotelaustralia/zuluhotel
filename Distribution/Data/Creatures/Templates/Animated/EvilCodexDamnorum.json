@@ -1,0 +1,66 @@
+{
+  "Name": "an Evil Codex Damnorum",
+  "CorpseNameOverride": "corpse of an Evil Codex Damnorum",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 600,
+  "Int": 910,
+  "Dex": 600,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 609,
+  "Body": 985,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animated",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 850,
+  "Hue": 1645,
+  "LootItemChance": 75,
+  "LootItemLevel": 6,
+  "LootTable": "141",
+  "ManaMaxSeed": 1600,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 600,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Necromancy.DarknessSpell",
+    "Scripts.Zulu.Spells.Necromancy.DecayingRaySpell",
+    "Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell",
+    "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell",
+    "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.PlagueSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Air": 75,
+    "Water": 75,
+    "Fire": 75,
+    "Earth": 75,
+    "Necro": 100,
+    "MagicImmunity": 6
+  },
+  "Skills": {
+    "Parry": 100,
+    "MagicResist": 120,
+    "Tactics": 100,
+    "Magery": 180,
+    "Healing": 100
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 25,
+      "Max": 65
+    },
+    "Skill": "Swords",
+    "HitSound": 611,
+    "MissSound": 612
+  }
+}

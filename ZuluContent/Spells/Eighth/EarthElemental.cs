@@ -9,7 +9,7 @@ namespace Server.Spells.Eighth
 
         public async Task CastAsync()
         {
-            SpellHelper.Summon(new EarthElemental(), Caster, 0x217);
+            SpellHelper.Summon("EarthElemental", Caster, 0x217);
         }
     }
 }

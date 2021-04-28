@@ -85,15 +85,7 @@ namespace Server.Items
                     from.SendLocalizedMessage(502472); // You don't seem to be able to persuade that to move.
                 }
             }
-
-            private static Type[] m_ChampTamables = new[]
-            {
-                typeof(Imp), typeof(GiantScorpion), typeof(GiantRockSpider),
-                typeof(Snake), typeof(LavaLizard), typeof(Drake), typeof(Dragon),
-                typeof(GiantRat), typeof(Slime),
-                typeof(DireWolf), typeof(HellHound)
-            };
-
+            
             private bool IsHerdable(BaseCreature bc)
             {
                 if (bc.Tamable)

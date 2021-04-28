@@ -16,7 +16,7 @@ namespace Scripts.Zulu.Spells.Earth
 
         public async Task CastAsync()
         {
-            SpellHelper.Summon(Creatures.Create("AirElementalLord"), Caster, 0x217);
+            SpellHelper.Summon("AirElementalLord", Caster, 0x217);
         }
     }
 }

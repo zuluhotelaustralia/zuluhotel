@@ -1,0 +1,66 @@
+{
+  "Name": "a Poison Wyrm",
+  "CorpseNameOverride": "corpse of a Poison Wyrm",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1900,
+  "Int": 400,
+  "Dex": 340,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "BaseSoundID": 361,
+  "Body": 59,
+  "CanFly": true,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 60,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitPoison": "Deadly",
+  "HitsMax": 800,
+  "Hue": 264,
+  "LootItemChance": 90,
+  "LootItemLevel": 6,
+  "LootTable": "37",
+  "ManaMaxSeed": 200,
+  "MinTameSkill": 140,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 140,
+  "StamMaxSeed": 140,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Fifth.MindBlastSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.First.WeakenSpell",
+    "Server.Spells.Sixth.MassCurseSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "Parry": 80,
+    "MagicResist": 165,
+    "Tactics": 120,
+    "Macing": 140,
+    "Poisoning": 140,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 20,
+      "Max": 155
+    },
+    "HitSound": 363,
+    "MissSound": 569,
+    "HasBreath": true
+  }
+}

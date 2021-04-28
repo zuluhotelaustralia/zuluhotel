@@ -1,0 +1,62 @@
+{
+  "Name": "<random> the Evil Mage",
+  "CorpseNameOverride": "corpse of <random> the Evil Mage",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 180,
+  "Int": 385,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 314,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 180,
+  "Hue": 0,
+  "LootItemChance": 2,
+  "LootTable": "57",
+  "ManaMaxSeed": 105,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 94,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 80,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Skills": {
+    "MagicResist": 170,
+    "Tactics": 380,
+    "Macing": 95,
+    "Magery": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 4,
+      "Max": 40
+    },
+    "HitSound": 316,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.LongHair",
+      "Hue": 1110
+    },
+    {
+      "ItemType": "Server.Items.GnarledStaff",
+      "Name": "Evil Mage Weapon",
+      "Hue": 0
+    }
+  ]
+}

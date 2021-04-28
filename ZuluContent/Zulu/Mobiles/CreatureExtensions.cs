@@ -1,28 +1,19 @@
 #nullable enable
 using System;
-using Server;
 using Server.Mobiles;
 using Server.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace Server
 {
     public static class Creatures
     {
-        public static BaseCreatureTemplate? Create(
-            string template,
-            [CallerMemberName] string memberName = "",
-            [CallerFilePath] string sourceFilePath = "",
-            [CallerLineNumber] int sourceLineNumber = 0
-        )
+        public static BaseCreatureTemplate? Create(string template)
         {
             if (!ZhConfig.Creatures.Entries.TryGetValue(template, out var properties))
             {
                 Utility.PushColor(ConsoleColor.DarkYellow);
                 Console.WriteLine($"Failed {nameof(BaseCreatureTemplate)} creation, template {template} does not exist:");
-                Console.WriteLine($"\tCalling member name: {memberName}");
-                Console.WriteLine($"\tSource file path: {sourceFilePath}");
-                Console.WriteLine($"\tSource line number: {sourceLineNumber}");
+                Console.WriteLine(Environment.StackTrace);
                 Utility.PopColor();
                 return null;
             }
@@ -34,6 +25,7 @@ namespace Server
                 {
                     Utility.PushColor(ConsoleColor.DarkYellow);
                     Console.WriteLine($"BaseType {properties.BaseType} is not assignable to {typeof(BaseCreature)}");
+                    Console.WriteLine(Environment.StackTrace);
                     Utility.PopColor();
                     return null;
                 }
@@ -59,5 +51,7 @@ namespace Server
 
             return creature;
         }
+
+        public static bool Exists(string template) => ZhConfig.Creatures.Entries.ContainsKey(template);
     }
 }

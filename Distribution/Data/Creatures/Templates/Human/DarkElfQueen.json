@@ -1,0 +1,85 @@
+{
+  "Name": "a Dark-Elf Queen",
+  "CorpseNameOverride": "corpse of a Dark-Elf Queen",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 700,
+  "Int": 1500,
+  "Dex": 195,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 282,
+  "Body": 401,
+  "CanRummageCorpses": true,
+  "ClassLevel": 2,
+  "ClassType": "Mage",
+  "CreatureType": "Human",
+  "Female": true,
+  "FightMode": "Closest",
+  "FightRange": 12,
+  "HitsMax": 1500,
+  "Hue": 1109,
+  "LootItemChance": 60,
+  "LootItemLevel": 5,
+  "LootTable": "137",
+  "ManaMaxSeed": 1500,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 140,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 195,
+  "PreferredSpells": [
+    "Scripts.Zulu.Spells.Necromancy.DecayingRaySpell",
+    "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell"
+  ],
+  "Resistances": {
+    "Air": 50,
+    "Water": 25,
+    "Fire": 50,
+    "Poison": 6,
+    "Earth": 100,
+    "MagicImmunity": 6
+  },
+  "Skills": {
+    "Macing": 150,
+    "Tactics": 75,
+    "MagicResist": 150,
+    "Magery": 200,
+    "DetectHidden": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 31,
+      "Max": 61
+    },
+    "Animation": "Bash2H",
+    "HitSound": 284,
+    "MissSound": 285,
+    "MaxRange": 12
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.GnarledStaff",
+      "Name": "Staff of Fire",
+      "Hue": 1100
+    },
+    {
+      "ItemType": "Server.Items.FemalePlateChest",
+      "Name": "Elven Platemail",
+      "Hue": 0,
+      "ArmorRating": 80
+    },
+    {
+      "ItemType": "Server.Items.PlateLegs",
+      "Name": "Long pants",
+      "Hue": 1172,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.LongHair",
+      "Hue": 1156
+    }
+  ]
+}

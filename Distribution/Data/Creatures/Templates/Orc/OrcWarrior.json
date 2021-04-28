@@ -1,0 +1,41 @@
+{
+  "Name": "<random> the orc warrior",
+  "CorpseNameOverride": "corpse of <random> the orc warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 160,
+  "Int": 35,
+  "Dex": 190,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 314,
+  "Body": 41,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 160,
+  "Hue": 0,
+  "LootTable": "43",
+  "ManaMaxSeed": 25,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 70,
+  "StamMaxSeed": 70,
+  "Skills": {
+    "Macing": 95,
+    "Tactics": 90,
+    "MagicResist": 60
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 8,
+      "Max": 29
+    },
+    "HitSound": 316,
+    "MissSound": 569
+  }
+}

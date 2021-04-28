@@ -1,0 +1,55 @@
+{
+  "Name": "a frost gargoyle",
+  "CorpseNameOverride": "corpse of a frost gargoyle",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 250,
+  "Int": 285,
+  "Dex": 95,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 373,
+  "Body": 4,
+  "CanRummageCorpses": true,
+  "CreatureType": "Gargoyle",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 250,
+  "Hue": 1154,
+  "LootItemChance": 25,
+  "LootItemLevel": 2,
+  "LootTable": "38",
+  "ManaMaxSeed": 85,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 105,
+  "StamMaxSeed": 75,
+  "PreferredSpells": [
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Fourth.CurseSpell",
+    "Server.Spells.First.WeakenSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell"
+  ],
+  "Resistances": {
+    "Water": 75,
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "MagicResist": 80,
+    "Tactics": 120,
+    "Macing": 135,
+    "Magery": 100
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "HitSound": 375,
+    "MissSound": 569
+  }
+}

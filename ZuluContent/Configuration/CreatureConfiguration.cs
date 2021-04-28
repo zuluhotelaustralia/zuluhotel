@@ -19,7 +19,7 @@ namespace ZuluContent.Configuration
     public class CreatureConfiguration : BaseSingleton<CreatureConfiguration>
     {
         private static readonly string BasePath = Path.Combine(Core.BaseDirectory, "Data/Creatures/");
-        private static readonly string SrcBasePath = Path.GetFullPath(Path.Combine(Core.BaseDirectory, "../../ZuluContent/Zulu/Mobiles/"));
+        private static readonly string TemplatePath = Path.Combine(BasePath, "Templates/");
 
 
         private static readonly JsonSerializerOptions SerializerOptions = JsonConfig.GetOptions(
@@ -41,11 +41,11 @@ namespace ZuluContent.Configuration
         private void LoadCreatures()
         {
             Console.Write(
-                $"\tDeserializeJsonConfig<CreatureConfiguration>: loading creatures from {BasePath}*.json ... ");
+                $"\tDeserializeJsonConfig<CreatureConfiguration>: loading templates from {TemplatePath}*.json ... ");
             
             var failed = new ConcurrentBag<string>();
 
-            var files = Directory.GetFiles(BasePath, "*.json", new EnumerationOptions {RecurseSubdirectories = true});
+            var files = Directory.GetFiles(TemplatePath, "*.json", new EnumerationOptions {RecurseSubdirectories = true});
             Parallel.ForEach(files, file =>
             {
                 try
@@ -86,84 +86,7 @@ namespace ZuluContent.Configuration
 
         static CreatureConfiguration()
         {
-            CommandSystem.Register("ConvertTemplates", AccessLevel.Owner, ConvertTemplates_OnCommand);
             CommandSystem.Register("LoadCreatureTemplates", AccessLevel.Owner, _ => Instance.LoadCreatures());
-        }
-        
-        [Usage("ConvertTemplates")]
-        private static async void ConvertTemplates_OnCommand(CommandEventArgs e)
-        {
-            if (!(e.Mobile is PlayerMobile))
-                return;
-        
-            
-            var files = Directory.GetFiles(SrcBasePath, "*.cs", new EnumerationOptions {RecurseSubdirectories = true});
-
-            
-            foreach (var (type, props) in CreatureProperties.Creatures)
-            {
-                var creature = type.CreateInstance<BaseCreature>();
-        
-                if (creature == null)
-                    return;
-
-                props.Attack = new CreatureAttack
-                {
-                    Damage = (props.DamageMin ?? 0, props.DamageMax ?? props.DamageMin ?? 0),
-                    Ability = props.WeaponAbility,
-                    AbilityChance = props.WeaponAbilityChance,
-                    HasBreath = props.HasBreath,
-                    HasWebs = props.HasWebs
-                };
-        
-                props.WeaponAbility = null;
-                props.WeaponAbilityChance = null;
-                props.HasBreath = null;
-                props.HasWebs = null;
-                props.DamageMin = null;
-                props.DamageMax = null;
-        
-                foreach (var item in creature.Items)
-                {
-                    if (item is BaseWeapon weapon)
-                    {
-                        props.Attack.Speed = Math.Abs(weapon.DefaultSpeed - weapon.Speed) > 0.01 ? weapon.Speed : null;
-                        props.Attack.Skill = weapon.DefaultSkill != weapon.Skill ? weapon.Skill : null;
-                        props.Attack.Animation = weapon.DefaultAnimation != weapon.Animation ? weapon.Animation : null;
-                        props.Attack.HitSound = weapon.HitSound;
-                        props.Attack.MissSound = weapon.MissSound;
-                        props.Attack.MaxRange = weapon.DefaultMaxRange != weapon.MaxRange ? weapon.MaxRange : null;
-                    }
-        
-                    if (item is SkinningKnife)
-                        continue;
-        
-        
-                    var equip = new CreatureEquip
-                    {
-                        ItemType = item.GetType(),
-                        Name = item.DefaultName != item.Name ? item.Name : null,
-                        Hue = item.Hue,
-                    };
-        
-                    if (item is BaseArmor armor)
-                        equip.ArmorRating = armor.BaseArmorRating;
-        
-                    props.Equipment ??= new List<CreatureEquip>();
-                    props.Equipment.Add(equip);
-                }
-        
-                creature.Delete();
-
-                var srcPath = files.FirstOrDefault(f => f.EndsWith($"/{type.Name}.cs"))?.Replace(SrcBasePath, "").Replace($"{type.Name}.cs", "");
-                var filePath = Path.Combine(BasePath, srcPath ?? "", $"{type.Name}.json");
-                var subDir = Path.GetDirectoryName(filePath);
-                
-                if(subDir != null && !Directory.Exists(subDir))
-                    Directory.CreateDirectory(subDir);
-                
-                JsonConfig.Serialize(filePath, props, SerializerOptions);
-            }
         }
     }
 }

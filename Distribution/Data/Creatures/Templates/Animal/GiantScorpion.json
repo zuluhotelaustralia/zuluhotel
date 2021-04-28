@@ -1,0 +1,45 @@
+{
+  "Name": "a giant scorpion",
+  "CorpseNameOverride": "corpse of a giant scorpion",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 100,
+  "Int": 35,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 398,
+  "Body": 48,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitPoison": "Regular",
+  "HitsMax": 100,
+  "Hue": 0,
+  "ManaMaxSeed": 25,
+  "MinTameSkill": 70,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 90,
+  "StamMaxSeed": 80,
+  "Tamable": true,
+  "Skills": {
+    "Parry": 65,
+    "Poisoning": 90,
+    "MagicResist": 40,
+    "Tactics": 70
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 3,
+      "Max": 24
+    },
+    "Skill": "Swords",
+    "HitSound": 400,
+    "MissSound": 569
+  }
+}

@@ -71,10 +71,10 @@ namespace Server.Mobiles
         public virtual bool TargetAcquireExhaustion { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual Type RiseCreatureType { get; set; }
+        public virtual string RiseCreatureTemplate { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual TimeSpan RiseCreatureDelay => InitProperties?.RiseCreatureDelay ?? TimeSpan.FromSeconds(5.0);
+        public virtual TimeSpan RiseCreatureDelay { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual List<Type> PreferredSpells { get; set; }
@@ -134,7 +134,7 @@ namespace Server.Mobiles
         public virtual int ProvokeSkillOverride { get; set; } = -1;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool SaySpellMantra => InitProperties?.SaySpellMantra ?? false;
+        public virtual bool SaySpellMantra { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual string LootTable { get; set; }
@@ -165,9 +165,9 @@ namespace Server.Mobiles
         }
         
         public virtual WeaponAbility GetWeaponAbility() => InitProperties?.WeaponAbility;
-        public virtual void OnRiseSpawn(Type creatureType, Container corpse)
+        public virtual void OnRiseSpawn(string creatureType, Container corpse)
         {
-            if (!creatureType.IsSubclassOf(typeof(BaseCreature)))
+            if (!Creatures.Exists(creatureType))
                 return;
 
             void Announce()
@@ -183,7 +183,7 @@ namespace Server.Mobiles
             {
                 try
                 {
-                    var creature = (BaseCreature) Activator.CreateInstance(creatureType, null);
+                    BaseCreature creature = creatureType;
                     if (creature == null)
                         return;
 
@@ -206,6 +206,11 @@ namespace Server.Mobiles
                 Timer.DelayCall(RiseCreatureDelay / 2, Announce);
 
             Timer.DelayCall(RiseCreatureDelay, Rise);
+        }
+        
+        public static implicit operator BaseCreature(string template)
+        {
+            return Creatures.Create(template);
         }
     }
 }

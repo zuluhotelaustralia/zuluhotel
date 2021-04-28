@@ -1,0 +1,45 @@
+{
+  "Name": "a troll lord",
+  "CorpseNameOverride": "corpse of a troll lord",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 65,
+  "Dex": 150,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 462,
+  "Body": 55,
+  "CanRummageCorpses": true,
+  "CreatureType": "Troll",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Troll",
+  "Hides": 4,
+  "HitsMax": 350,
+  "Hue": 33784,
+  "LootItemChance": 25,
+  "LootItemLevel": 2,
+  "LootTable": "19",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 99,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Tactics": 130,
+    "Macing": 150,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 18,
+      "Max": 58
+    },
+    "HitSound": 464,
+    "MissSound": 569
+  }
+}

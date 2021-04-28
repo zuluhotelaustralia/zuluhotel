@@ -1,0 +1,58 @@
+{
+  "Name": "a Soul Searcher",
+  "CorpseNameOverride": "corpse of a Soul Searcher",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 1200,
+  "Int": 2750,
+  "Dex": 310,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 363,
+  "Body": 970,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 45,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 1200,
+  "Hue": 1170,
+  "LootItemChance": 100,
+  "LootItemLevel": 7,
+  "LootTable": "9",
+  "ManaMaxSeed": 2750,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Sixth.ExplosionSpell",
+    "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Scripts.Zulu.Spells.Necromancy.DarknessSpell",
+    "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "MagicImmunity": 8
+  },
+  "Skills": {
+    "Magery": 195,
+    "MagicResist": 150,
+    "Tactics": 150,
+    "Macing": 160,
+    "DetectHidden": 200
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 10,
+      "Max": 60
+    },
+    "HitSound": 365,
+    "MissSound": 569
+  }
+}

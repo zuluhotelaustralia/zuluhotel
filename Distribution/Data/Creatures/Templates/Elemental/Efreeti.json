@@ -1,0 +1,53 @@
+{
+  "Name": "an efreeti",
+  "CorpseNameOverride": "corpse of an efreeti",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 355,
+  "Dex": 100,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 264,
+  "Body": 13,
+  "CanRummageCorpses": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 350,
+  "Hue": 93,
+  "LootItemChance": 50,
+  "LootItemLevel": 4,
+  "LootTable": "46",
+  "ManaMaxSeed": 160,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 90,
+  "PreferredSpells": [
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell"
+  ],
+  "Resistances": {
+    "Air": 100,
+    "MagicImmunity": 4
+  },
+  "Skills": {
+    "Tactics": 85,
+    "Macing": 160,
+    "Magery": 100,
+    "MagicResist": 130
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 5,
+      "Max": 50
+    },
+    "HitSound": 266,
+    "MissSound": 569
+  }
+}

@@ -6,12 +6,8 @@ namespace Server.Multis
 {
     public class OrcCamp : BaseCamp
     {
-        public virtual Mobile Orcs
-        {
-            get { return new OrcWarrior(); }
-        }
-
-        private Mobile m_Prisoner;
+        public virtual BaseCreature Orcs => "OrcWarrior";
+        private BaseCreature m_Prisoner;
 
 
         [Constructible]
@@ -58,7 +54,7 @@ namespace Server.Multis
                 AddMobile(Orcs, 6, Utility.RandomMinMax(-7, 7), Utility.RandomMinMax(-7, 7), 0);
             }
 
-            AddMobile(new OrcCaptain(), 2, Utility.RandomMinMax(-7, 7), Utility.RandomMinMax(-7, 7), 0);
+            AddMobile("OrcCaptain", 2, Utility.RandomMinMax(-7, 7), Utility.RandomMinMax(-7, 7), 0);
 
             switch (Utility.Random(2))
             {
@@ -235,12 +231,12 @@ namespace Server.Multis
             {
                 case 1:
                 {
-                    m_Prisoner = reader.ReadEntity<Mobile>();
+                    m_Prisoner = reader.ReadEntity<BaseCreature>();
                     break;
                 }
                 case 0:
                 {
-                    m_Prisoner = reader.ReadEntity<Mobile>();
+                    m_Prisoner = reader.ReadEntity<BaseCreature>();
                     reader.ReadEntity<Item>();
                     break;
                 }

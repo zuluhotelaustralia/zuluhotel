@@ -1,0 +1,45 @@
+{
+  "Name": "an Ophidian Warrior",
+  "CorpseNameOverride": "corpse of an Ophidian Warrior",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 300,
+  "Int": 160,
+  "Dex": 160,
+  "ActiveSpeed": 0.15,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 358,
+  "Body": 86,
+  "CanRummageCorpses": true,
+  "CreatureType": "Ophidian",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Serpent",
+  "Hides": 5,
+  "HitsMax": 600,
+  "Hue": 0,
+  "LootTable": "67",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.3,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 110,
+  "StamMaxSeed": 320,
+  "Skills": {
+    "Parry": 100,
+    "Magery": 100,
+    "Macing": 100,
+    "Tactics": 100,
+    "MagicResist": 100
+  },
+  "Attack": {
+    "Speed": 37,
+    "Damage": {
+      "Min": 11,
+      "Max": 41
+    },
+    "HitSound": 360,
+    "MissSound": 361
+  }
+}

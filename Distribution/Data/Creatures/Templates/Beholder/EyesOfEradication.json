@@ -1,0 +1,52 @@
+{
+  "Name": "Eyes of Eradication",
+  "CorpseNameOverride": "corpse of Eyes of Eradication",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 500,
+  "Int": 600,
+  "Dex": 500,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 378,
+  "Body": 22,
+  "CanRummageCorpses": true,
+  "CreatureType": "Beholder",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 500,
+  "Hue": 1172,
+  "LootItemChance": 75,
+  "LootItemLevel": 4,
+  "LootTable": "57",
+  "ManaMaxSeed": 500,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 160,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 500,
+  "Tamable": false,
+  "PreferredSpells": [
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Sixth.MassCurseSpell"
+  ],
+  "Skills": {
+    "MagicResist": 200,
+    "Tactics": 200,
+    "Macing": 150,
+    "Magery": 300
+  },
+  "Attack": {
+    "Speed": 33,
+    "Damage": {
+      "Min": 14,
+      "Max": 34
+    },
+    "HitSound": 380,
+    "MissSound": 569
+  }
+}

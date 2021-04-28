@@ -1,0 +1,44 @@
+{
+  "Name": "a bone knight",
+  "CorpseNameOverride": "corpse of a bone knight",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 160,
+  "Int": 35,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 452,
+  "Body": 57,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 160,
+  "Hue": 33784,
+  "LootItemChance": 2,
+  "LootTable": "16",
+  "ManaMaxSeed": 25,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 80,
+  "Resistances": {
+    "Poison": 6
+  },
+  "Skills": {
+    "Tactics": 100,
+    "MagicResist": 50
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "Skill": "Swords",
+    "HitSound": 454,
+    "MissSound": 569
+  }
+}

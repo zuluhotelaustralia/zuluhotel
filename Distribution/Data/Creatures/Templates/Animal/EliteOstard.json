@@ -1,0 +1,54 @@
+{
+  "Name": "Elite Ostard",
+  "CorpseNameOverride": "corpse of Elite Ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 600,
+  "Int": 650,
+  "Dex": 300,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "AutoDispel": true,
+  "BaseSoundID": 361,
+  "Body": 218,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 50,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 600,
+  "Hue": 1298,
+  "ManaMaxSeed": 150,
+  "MinTameSkill": 115,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 150,
+  "StamMaxSeed": 125,
+  "Tamable": true,
+  "Resistances": {
+    "Poison": 6,
+    "Air": 50,
+    "Water": 50,
+    "Fire": 50,
+    "Necro": 50,
+    "Earth": 50,
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "Tactics": 100,
+    "Macing": 130,
+    "MagicResist": 100,
+    "DetectHidden": 100
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 25,
+      "Max": 75
+    },
+    "HitSound": 363,
+    "MissSound": 569,
+    "HasBreath": true
+  }
+}

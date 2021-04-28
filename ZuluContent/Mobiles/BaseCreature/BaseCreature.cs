@@ -484,40 +484,33 @@ namespace Server.Mobiles
 
         public virtual bool IsFriend(Mobile m)
         {
-            OppositionGroup g = OppositionGroup;
+            var g = OppositionGroup;
 
-            if (g != null && g.IsEnemy(this, m))
+            if (!(m is BaseCreature creature))
                 return false;
 
-            if (!(m is BaseCreature))
-                return false;
-
-            BaseCreature c = (BaseCreature) m;
-
-            return m_iTeam == c.m_iTeam && (m_bSummoned || m_bControlled) == (c.m_bSummoned || c.m_bControlled);
+            return g?.IsFriendly(this, creature) ?? true;
         }
 
         #endregion
 
         public virtual bool IsEnemy(Mobile m)
         {
-            OppositionGroup g = OppositionGroup;
-
-            if (g != null && g.IsEnemy(this, m))
-                return true;
-
+            var g = OppositionGroup;
+            
             if (m is BaseGuard)
                 return false;
 
-            if (!(m is BaseCreature))
+            if (!(m is BaseCreature creature))
+                return true;
+            
+            if (g != null && g.IsEnemy(this, creature))
                 return true;
 
-            BaseCreature c = (BaseCreature) m;
-
-            if (FightMode == FightMode.Evil && m.Karma < 0 || c.FightMode == FightMode.Evil && Karma < 0)
+            if (FightMode == FightMode.Evil && m.Karma < 0 || creature.FightMode == FightMode.Evil && Karma < 0)
                 return true;
 
-            return m_iTeam != c.m_iTeam || (m_bSummoned || m_bControlled) != (c.m_bSummoned || c.m_bControlled);
+            return m_iTeam != creature.m_iTeam || (m_bSummoned || m_bControlled) != (creature.m_bSummoned || creature.m_bControlled);
         }
 
         public virtual bool CheckControlChance(Mobile m)
@@ -545,13 +538,14 @@ namespace Server.Mobiles
                     if (nearbyMobile is BaseCreature creature &&
                         (creature.ControlMaster == owner || creature.SummonMaster == owner))
                     {
-                        if (creature.Summoned && creature.Serial != Serial &&
-                            (creature is AirElementalLord || creature is EarthElementalLord ||
-                             creature is FireElementalLord ||
-                             creature is WaterElementalLord))
-                            creature.AIObject.DoOrderRelease(true);
-                        else
+                        if (!(creature.Summoned &&
+                              creature.Serial != Serial &&
+                              creature is BaseElementalLord &&
+                              creature.AIObject.DoOrderRelease(true)
+                            ))
+                        {
                             petSlots += creature.GetPetSlots(owner);
+                        }
                     }
                 }
 
@@ -906,8 +900,6 @@ namespace Server.Mobiles
 
             m_iTeam = 0;
 
-            SpeedInfo.GetSpeeds(this, ref dActiveSpeed, ref dPassiveSpeed);
-
             ActiveSpeed = dActiveSpeed;
             PassiveSpeed = dPassiveSpeed;
             m_dCurrentSpeed = dPassiveSpeed;
@@ -1197,8 +1189,6 @@ namespace Server.Mobiles
 
             double activeSpeed = ActiveSpeed;
             double passiveSpeed = PassiveSpeed;
-
-            SpeedInfo.GetSpeeds(this, ref activeSpeed, ref passiveSpeed);
 
             bool isStandardActive = false;
             for (int i = 0; !isStandardActive && i < m_StandardActiveSpeeds.Length; ++i)
@@ -1807,8 +1797,7 @@ namespace Server.Mobiles
             {
                 var ownerInt = (double) owner.Int;
                 owner.FireHook(h => h.OnModifyWithMagicEfficiency(owner, ref ownerInt));
-                if (this is AirElementalLord || this is EarthElementalLord || this is FireElementalLord ||
-                    this is WaterElementalLord)
+                if (this is BaseElementalLord)
                     slots = 3;
                 else if (Int > ownerInt || HitsMax > ownerInt)
                     slots = 2;
@@ -2907,40 +2896,6 @@ namespace Server.Mobiles
             return val;
         }
 
-        public bool PackSlayer()
-        {
-            return PackSlayer(0.05);
-        }
-
-        public bool PackSlayer(double chance)
-        {
-            if (chance <= Utility.RandomDouble())
-                return false;
-
-            if (Utility.RandomBool())
-            {
-                BaseInstrument instrument = Loot.RandomInstrument();
-
-                if (instrument != null)
-                {
-                    instrument.OldSlayer = SlayerGroup.GetLootSlayerType(GetType());
-                    PackItem(instrument);
-                }
-            }
-            else
-            {
-                BaseWeapon weapon = Loot.RandomWeapon();
-
-                if (weapon != null)
-                {
-                    weapon.OldSlayer = SlayerGroup.GetLootSlayerType(GetType());
-                    PackItem(weapon);
-                }
-            }
-
-            return true;
-        }
-
         public bool PackWeapon(int minLevel, int maxLevel)
         {
             return PackWeapon(minLevel, maxLevel, 1.0);
@@ -3352,8 +3307,8 @@ namespace Server.Mobiles
 
         public override void OnDeath(Container c)
         {
-            if (RiseCreatureType != null)
-                OnRiseSpawn(RiseCreatureType, c);
+            if (RiseCreatureTemplate != null)
+                OnRiseSpawn(RiseCreatureTemplate, c);
 
             if (!Summoned && !NoKillAwards)
             {

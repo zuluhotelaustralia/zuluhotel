@@ -7,33 +7,33 @@ namespace Server.Spells.Fifth
     public class SummonCreatureSpell : MagerySpell, IAsyncSpell
     {
         // NOTE: Creature list based on 1hr of summon/release on OSI.
-        private static readonly Type[] Types =
+        private static readonly string[] Creatures =
         {
-            typeof(PolarBear),
-            typeof(GrizzlyBear),
-            typeof(BlackBear),
-            typeof(Horse),
-            typeof(Walrus),
-            typeof(Chicken),
-            typeof(GiantScorpion),
-            typeof(GiantSerpent),
-            typeof(Llama),
-            typeof(Alligator),
-            typeof(GreyWolf),
-            typeof(Slime),
-            typeof(Eagle),
-            typeof(Gorilla),
-            typeof(SnowLeopard),
-            typeof(Pig),
-            typeof(Hind),
-            typeof(Rabbit)
+            "PolarBear",
+            "GrizzlyBear",
+            "BlackBear",
+            "Horse",
+            "Walrus",
+            "Chicken",
+            "GiantScorpion",
+            "GiantSerpent",
+            "Llama",
+            "Alligator",
+            "GreyWolf",
+            "Slime",
+            "Eagle",
+            "Gorilla",
+            "SnowLeopard",
+            "Pig",
+            "Hind",
+            "Rabbit"
         };
 
         public SummonCreatureSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task CastAsync()
         {
-            var creature = (BaseCreature) Activator.CreateInstance(Types[Utility.Random(Types.Length)]);
+            BaseCreature creature = Creatures[Utility.Random(Creatures.Length)];
             
             if (creature != null) 
                 SpellHelper.Summon(creature, Caster, 0x215);

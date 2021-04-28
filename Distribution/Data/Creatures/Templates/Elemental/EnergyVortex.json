@@ -1,0 +1,44 @@
+{
+  "Name": "an energy vortex",
+  "CorpseNameOverride": "corpse of an energy vortex",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 110,
+  "Dex": 190,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 528,
+  "Body": 573,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitPoison": "Regular",
+  "HitsMax": 350,
+  "Hue": 0,
+  "ManaMaxSeed": 125,
+  "MinTameSkill": 130,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 80,
+  "Tamable": true,
+  "Skills": {
+    "Poisoning": 100,
+    "MagicResist": 150,
+    "Tactics": 125,
+    "Macing": 200
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 5,
+      "Max": 20
+    },
+    "HitSound": 530,
+    "MissSound": 569
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "Name": "a Shadow Lord",
+  "CorpseNameOverride": "corpse of a Shadow Lord",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 550,
+  "Int": 200,
+  "Dex": 300,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 641,
+  "Body": 146,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Elemental",
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 550,
+  "Hue": 1,
+  "LootItemChance": 15,
+  "LootItemLevel": 5,
+  "LootTable": "79",
+  "ManaMaxSeed": 125,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 80,
+  "Tamable": false,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "MagicImmunity": 6
+  },
+  "Skills": {
+    "MagicResist": 150,
+    "Tactics": 100,
+    "Fencing": 150,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 37,
+    "Damage": {
+      "Min": 16,
+      "Max": 46
+    },
+    "HitSound": 643,
+    "MissSound": 642,
+    "Ability": "TriElementalStrike",
+    "AbilityChance": 1
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.BoneGloves",
+      "Name": "Blue Bone Gloves AR10",
+      "Hue": 1170,
+      "ArmorRating": 10
+    },
+    {
+      "ItemType": "Server.Items.BoneHelm",
+      "Name": "Red Bone Helm AR45",
+      "Hue": 1172,
+      "ArmorRating": 45
+    }
+  ]
+}

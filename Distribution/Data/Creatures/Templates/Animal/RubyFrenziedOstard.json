@@ -1,0 +1,45 @@
+{
+  "Name": "a ruby frenzied ostard",
+  "CorpseNameOverride": "corpse of a ruby frenzied ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 210,
+  "Int": 170,
+  "Dex": 320,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 594,
+  "Body": 218,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HideType": "Ostard",
+  "Hides": 4,
+  "HitsMax": 210,
+  "Hue": 1645,
+  "ManaMaxSeed": 160,
+  "MinTameSkill": 95,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 120,
+  "StamMaxSeed": 160,
+  "Tamable": true,
+  "Skills": {
+    "Parry": 100,
+    "MagicResist": 90,
+    "Tactics": 120,
+    "Macing": 160
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 10,
+      "Max": 45
+    },
+    "HitSound": 596,
+    "MissSound": 598
+  }
+}

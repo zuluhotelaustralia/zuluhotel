@@ -1,0 +1,42 @@
+{
+  "Name": "<random> the snow orc lord",
+  "CorpseNameOverride": "corpse of <random> the snow orc lord",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 180,
+  "Int": 30,
+  "Dex": 210,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 431,
+  "Body": 7,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 180,
+  "Hue": 1154,
+  "LootItemChance": 20,
+  "LootItemLevel": 2,
+  "LootTable": "42",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 100,
+  "StamMaxSeed": 80,
+  "Skills": {
+    "Tactics": 90,
+    "MagicResist": 80
+  },
+  "Attack": {
+    "Speed": 55,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "HitSound": 433,
+    "MissSound": 569
+  }
+}

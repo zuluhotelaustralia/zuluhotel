@@ -1,0 +1,52 @@
+{
+  "Name": "a drake",
+  "CorpseNameOverride": "corpse of a drake",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 500,
+  "Int": 90,
+  "Dex": 110,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 363,
+  "Body": 61,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Dragon",
+  "Hides": 2,
+  "HitsMax": 500,
+  "Hue": 0,
+  "LootItemChance": 25,
+  "LootItemLevel": 4,
+  "LootTable": "36",
+  "ManaMaxSeed": 80,
+  "MinTameSkill": 110,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 120,
+  "StamMaxSeed": 130,
+  "Tamable": true,
+  "Resistances": {
+    "MagicImmunity": 3
+  },
+  "Skills": {
+    "Parry": 70,
+    "MagicResist": 90,
+    "Tactics": 100,
+    "Macing": 120
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 365,
+    "MissSound": 569,
+    "HasBreath": true
+  }
+}

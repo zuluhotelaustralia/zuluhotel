@@ -1,0 +1,55 @@
+{
+  "Name": "a frost drake",
+  "CorpseNameOverride": "corpse of a frost drake",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 385,
+  "Dex": 290,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 363,
+  "Body": 60,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "IceCrystal",
+  "Hides": 5,
+  "HitsMax": 350,
+  "Hue": 1154,
+  "LootItemChance": 60,
+  "LootItemLevel": 3,
+  "LootTable": "36",
+  "ManaMaxSeed": 85,
+  "MinTameSkill": 115,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 130,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell"
+  ],
+  "Resistances": {
+    "Water": 75
+  },
+  "Skills": {
+    "MagicResist": 100,
+    "Tactics": 100,
+    "Macing": 120,
+    "Magery": 110
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 365,
+    "MissSound": 569
+  }
+}

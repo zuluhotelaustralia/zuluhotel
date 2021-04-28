@@ -1,0 +1,50 @@
+{
+  "Name": "<random> the Sapper",
+  "CorpseNameOverride": "corpse of <random> the Sapper",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 205,
+  "Int": 30,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "BaseSoundID": 363,
+  "Body": 17,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 45,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 205,
+  "Hue": 1295,
+  "LootItemChance": 6,
+  "LootItemLevel": 3,
+  "LootTable": "42",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 80,
+  "Tamable": false,
+  "Skills": {
+    "Tactics": 300,
+    "Macing": 300
+  },
+  "Attack": {
+    "Speed": 50,
+    "Damage": {
+      "Min": 1,
+      "Max": 8
+    },
+    "HitSound": 365,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.WarHammer",
+      "Name": "Bomber weapon",
+      "Hue": 0
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "Name": "a Golden Dragon Lord",
+  "CorpseNameOverride": "corpse of a Golden Dragon Lord",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 2250,
+  "Int": 500,
+  "Dex": 450,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "AutoDispel": true,
+  "BardImmune": true,
+  "BaseSoundID": 361,
+  "Body": 12,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 100,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 5250,
+  "Hue": 1300,
+  "LootItemChance": 100,
+  "LootItemLevel": 9,
+  "LootTable": "150",
+  "ManaMaxSeed": 800,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 160,
+  "StamMaxSeed": 500,
+  "Tamable": false,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Sixth.MassCurseSpell",
+    "Server.Spells.Fourth.GreaterHealSpell",
+    "Server.Spells.Eighth.EarthquakeSpell",
+    "Server.Spells.Seventh.ManaVampireSpell",
+    "Server.Spells.Fifth.ParalyzeSpell"
+  ],
+  "Resistances": {
+    "Poison": 6,
+    "Fire": 100,
+    "Air": 50,
+    "Earth": 100,
+    "Necro": 50,
+    "MagicImmunity": 7
+  },
+  "Skills": {
+    "Tactics": 250,
+    "Macing": 150,
+    "Magery": 150,
+    "MagicResist": 300,
+    "Parry": 300,
+    "DetectHidden": 200
+  },
+  "Attack": {
+    "Speed": 60,
+    "Damage": {
+      "Min": 15,
+      "Max": 150
+    },
+    "HitSound": 363,
+    "MissSound": 569,
+    "HasBreath": true
+  }
+}

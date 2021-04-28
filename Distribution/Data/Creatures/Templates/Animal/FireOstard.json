@@ -1,0 +1,46 @@
+{
+  "Name": "a fire ostard",
+  "CorpseNameOverride": "corpse of a fire ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 160,
+  "Int": 110,
+  "Dex": 400,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 594,
+  "Body": 219,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HideType": "Ostard",
+  "Hides": 4,
+  "HitsMax": 160,
+  "Hue": 1158,
+  "ManaMaxSeed": 100,
+  "MinTameSkill": 115,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 110,
+  "StamMaxSeed": 150,
+  "Tamable": true,
+  "Skills": {
+    "Parry": 100,
+    "MagicResist": 70,
+    "Tactics": 90,
+    "Macing": 100
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 15,
+      "Max": 64
+    },
+    "HitSound": 596,
+    "MissSound": 598,
+    "HasBreath": true
+  }
+}

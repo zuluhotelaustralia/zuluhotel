@@ -1,0 +1,45 @@
+{
+  "Name": "a shadow ostard",
+  "CorpseNameOverride": "corpse of a shadow ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 175,
+  "Int": 135,
+  "Dex": 350,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Animal",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 594,
+  "Body": 219,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HideType": "Ostard",
+  "Hides": 4,
+  "HitsMax": 175,
+  "Hue": 1904,
+  "ManaMaxSeed": 125,
+  "MinTameSkill": 65,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 90,
+  "StamMaxSeed": 125,
+  "Tamable": true,
+  "Skills": {
+    "Parry": 70,
+    "MagicResist": 70,
+    "Tactics": 80,
+    "Macing": 80
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 13,
+      "Max": 48
+    },
+    "HitSound": 596,
+    "MissSound": 598
+  }
+}

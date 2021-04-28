@@ -1,0 +1,64 @@
+{
+  "Name": "a Greater Shadow",
+  "CorpseNameOverride": "corpse of a Greater Shadow",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 200,
+  "Dex": 275,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 641,
+  "Body": 573,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Elemental",
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 350,
+  "Hue": 1,
+  "LootItemChance": 15,
+  "LootItemLevel": 4,
+  "LootTable": "78",
+  "ManaMaxSeed": 125,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 80,
+  "Tamable": false,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100,
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "MagicResist": 125,
+    "Tactics": 125,
+    "Fencing": 150,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 37,
+    "Damage": {
+      "Min": 21,
+      "Max": 45
+    },
+    "HitSound": 643,
+    "MissSound": 642
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.BoneGloves",
+      "Name": "Green Bone Gloves AR10",
+      "Hue": 1169,
+      "ArmorRating": 10
+    },
+    {
+      "ItemType": "Server.Items.BoneHelm",
+      "Name": "Red Bone Helm AR45",
+      "Hue": 1172,
+      "ArmorRating": 45
+    }
+  ]
+}

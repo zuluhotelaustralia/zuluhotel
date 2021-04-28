@@ -1,0 +1,53 @@
+{
+  "Name": "a Dire Weaver",
+  "CorpseNameOverride": "corpse of a Dire Weaver",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 450,
+  "Int": 35,
+  "Dex": 300,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 388,
+  "Body": 28,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitPoison": "Greater",
+  "HitsMax": 450,
+  "Hue": 1409,
+  "ManaMaxSeed": 25,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Resistances": {
+    "Poison": 3
+  },
+  "Skills": {
+    "Parry": 85,
+    "Poisoning": 70,
+    "MagicResist": 80,
+    "Tactics": 120
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 25,
+      "Max": 75
+    },
+    "Skill": "Swords",
+    "HitSound": 390,
+    "MissSound": 391
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.HeaterShield",
+      "Name": "Shield AR20",
+      "Hue": 0,
+      "ArmorRating": 20
+    }
+  ]
+}

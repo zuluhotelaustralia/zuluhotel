@@ -1,110 +1,76 @@
 using System;
+using System.Linq;
 using Server.Mobiles;
 
 namespace Server
 {
     public class OppositionGroup
-	{
-		private Type[][] m_Types;
+    {
+        public CreatureType Type { get; init; }
 
-		public OppositionGroup( Type[][] types )
-		{
-			m_Types = types;
-		}
+        public CreatureType[] Friendlies { get; init; }
+        public CreatureType[] Enemies { get; init; }
 
-		public bool IsEnemy( object from, object target )
-		{
-			int fromGroup = IndexOf( from );
-			int targGroup = IndexOf( target );
+        public OppositionGroup(CreatureType[] friendlies, CreatureType[] enemies)
+        {
+            Friendlies = friendlies;
+            Enemies = enemies;
+        }
 
-			return fromGroup != -1 && targGroup != -1 && fromGroup != targGroup;
-		}
+        public bool IsEnemy(BaseCreature from, BaseCreature target)
+        {
+            return from.CreatureType == Type && Enemies.Contains(target.CreatureType);
+        }
+        
+        public bool IsFriendly(BaseCreature from, BaseCreature target)
+        {
+            return from.CreatureType == Type && Friendlies.Contains(target.CreatureType);
+        }
 
-		public int IndexOf( object obj )
-		{
-			if ( obj == null )
-				return -1;
-
-			Type type = obj.GetType();
-
-			for ( int i = 0; i < m_Types.Length; ++i )
-			{
-				Type[] group = m_Types[i];
-
-				bool contains = false;
-
-				for ( int j = 0; !contains && j < group.Length; ++j )
-					contains = group[j].IsAssignableFrom( type );
-
-				if ( contains )
-					return i;
-			}
-
-			return -1;
-		}
-
-		private static OppositionGroup m_TerathansAndOphidians = new OppositionGroup( new Type[][]
-			{
-				new Type[]
-				{
-					typeof( TerathanAvenger ),
-					typeof( TerathanDrone ),
-					typeof( TerathanMatriarch ),
-					typeof( TerathanWarrior )
-				},
-				new Type[]
-				{
-					typeof( OphidianShaman ),
-					typeof( OphidianAvenger ),
-					typeof( OphidianWarrior )
-				}
-			} );
-
-		public static OppositionGroup TerathansAndOphidians
-		{
-			get{ return m_TerathansAndOphidians; }
-		}
-
-		private static OppositionGroup m_SavagesAndOrcs = new OppositionGroup( new Type[][]
-			{
-				new Type[]
-				{
-					typeof( OrcCaptain ),
-					typeof( OrcishLord ),
-				},
-				new Type[]
-				{
-				}
-			} );
-
-		public static OppositionGroup SavagesAndOrcs
-		{
-			get{ return m_SavagesAndOrcs; }
-		}
-		
-		private static OppositionGroup m_FeyAndUndead = new OppositionGroup( new Type[][]
-			{
-				new Type[]
-				{
-					typeof( Wisp )
-                },
-				new Type[]
-				{
-					typeof( LicheLord ),
-					typeof( Shade ),
-					typeof( Spectre ),
-					typeof( Wraith ),
-					typeof( BoneKnight ),
-					typeof( Mummy ),
-					typeof( Skeleton ),
-					typeof( Zombie ),
-					typeof( Liche )
-				}
-			} );
-
-		public static OppositionGroup FeyAndUndead
-		{
-			get{ return m_FeyAndUndead; }
-		}
-	}
+        // public static OppositionGroup TerathansAndOphidians { get; } = new(
+        //     new[]
+        //     {
+        //         "TerathanAvenger",
+        //         "TerathanDrone",
+        //         "TerathanMatriarch",
+        //         "TerathanWarrior"
+        //     },
+        //     new[]
+        //     {
+        //         "OphidianShaman",
+        //         "OphidianAvenger",
+        //         "OphidianWarrior"
+        //     }
+        // );
+        //
+        // public static OppositionGroup SavagesAndOrcs { get; } = new(
+        //     new[]
+        //     {
+        //         "OrcCaptain",
+        //         "OrcishLord"
+        //     },
+        //     new string[]
+        //     {
+        //     }
+        // );
+        //
+        // public static OppositionGroup FeyAndUndead { get; } = new(
+        //     new[]
+        //     {
+        //         "Wisp"
+        //     },
+        //     new[]
+        //     {
+        //         "LicheLord",
+        //         "Shade",
+        //         "Spectre",
+        //         "Wraith",
+        //         "BoneKnight",
+        //         "Mummy",
+        //         "Skeleton",
+        //         "Zombie",
+        //         "Liche"
+        //     }
+        // );
+    }
 }

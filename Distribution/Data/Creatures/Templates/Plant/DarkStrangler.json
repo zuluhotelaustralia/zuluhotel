@@ -1,0 +1,61 @@
+{
+  "Name": "a Dark Strangler",
+  "CorpseNameOverride": "corpse of a Dark Strangler",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 400,
+  "Int": 45,
+  "Dex": 200,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Archer",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 457,
+  "Body": 8,
+  "CanRummageCorpses": true,
+  "CreatureType": "Plant",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 7,
+  "HitPoison": "Regular",
+  "HitsMax": 400,
+  "Hue": 1285,
+  "LootItemChance": 50,
+  "LootItemLevel": 4,
+  "LootTable": "128",
+  "ManaMaxSeed": 35,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 95,
+  "Resistances": {
+    "Earth": 100
+  },
+  "Skills": {
+    "Parry": 90,
+    "Hiding": 125,
+    "Tactics": 110,
+    "MagicResist": 75,
+    "Archery": 150
+  },
+  "Attack": {
+    "Speed": 20,
+    "Damage": {
+      "Min": 16,
+      "Max": 46
+    },
+    "HitSound": 459,
+    "MissSound": 458
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.Bow",
+      "Name": "Dark Strangler Weapon",
+      "Hue": 1171
+    },
+    {
+      "ItemType": "Server.Items.HeaterShield",
+      "Name": "Shield AR30",
+      "Hue": 0,
+      "ArmorRating": 30
+    }
+  ]
+}

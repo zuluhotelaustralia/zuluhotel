@@ -6,21 +6,13 @@ namespace Server.Multis
 {
     public class BrigandCamp : BaseCamp
     {
-        public virtual Mobile Brigands
-        {
-            get { return new Brigand(); }
-        }
+        public virtual BaseCreature Brigands => "Brigand";
+        public virtual BaseCreature Executioners => "BrigandKing";
 
-        public virtual Mobile Executioners
-        {
-            get { return new BrigandKing(); }
-        }
-
-        private Mobile m_Prisoner;
-
-
+        private BaseCreature m_Prisoner;
+        
         [Constructible]
-public BrigandCamp() : base(0x10EE) // dummy garbage at center
+        public BrigandCamp() : base(0x10EE) // dummy garbage at center
         {
         }
 
@@ -206,7 +198,7 @@ public BrigandCamp() : base(0x10EE) // dummy garbage at center
         }
 
         [Constructible]
-public BrigandCamp(Serial serial) : base(serial)
+        public BrigandCamp(Serial serial) : base(serial)
         {
         }
 
@@ -231,16 +223,13 @@ public BrigandCamp(Serial serial) : base(serial)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
-            switch (version)
+            m_Prisoner = version switch
             {
-                case 0:
-                {
-                    m_Prisoner = reader.ReadEntity<Mobile>();
-                    break;
-                }
-            }
+                0 => reader.ReadEntity<BaseCreature>(),
+                _ => m_Prisoner
+            };
         }
     }
 }

@@ -1,0 +1,53 @@
+{
+  "Name": "a Terathan Matriarch",
+  "CorpseNameOverride": "corpse of a Terathan Matriarch",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 350,
+  "Int": 650,
+  "Dex": 70,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 597,
+  "Body": 72,
+  "CanRummageCorpses": true,
+  "CreatureType": "Terathan",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 350,
+  "Hue": 0,
+  "LootItemChance": 50,
+  "LootItemLevel": 4,
+  "LootTable": "65",
+  "ManaMaxSeed": 200,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Third.PoisonSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Sixth.ExplosionSpell"
+  ],
+  "Resistances": {
+    "MagicImmunity": 6
+  },
+  "Skills": {
+    "Parry": 65,
+    "Tactics": 90,
+    "Macing": 110,
+    "Magery": 175,
+    "MagicResist": 150
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 20,
+      "Max": 60
+    },
+    "HitSound": 599,
+    "MissSound": 600
+  }
+}

@@ -16,22 +16,22 @@ namespace Server.SkillHandlers
         private static readonly Dictionary<Point3D, long> UsedGravestones = new();
         private static readonly long GravestoneCooldown = (int) TimeSpan.FromHours(6).TotalMilliseconds;
         
-        private static readonly (Type mobile, Type item)[] UndeadKnowledgeConfig =
+        private static readonly (string template, Type item)[] UndeadKnowledgeConfig =
         {
-            (typeof(Skeleton), typeof(ControlUndeadScroll)),
-            (typeof(SkeletonArcher), typeof(DarknessScroll)),
-            (typeof(Ghost), typeof(DecayingRayScroll)),
-            (typeof(BoneKnight), typeof(SpectresTouchScroll)),
-            (typeof(Wraith), typeof(AbyssalFlameScroll)),
-            (typeof(BoneMagician), typeof(AnimateDeadScroll)),
-            (typeof(Spectre), typeof(SacrificeScroll)),
-            (typeof(FlamingSkeleton), typeof(WraithsBreathScroll)),
-            (typeof(Revenant), typeof(SorcerersBaneScroll)),
-            (typeof(Frankenstein), typeof(SummonSpiritScroll)),
-            (typeof(Liche), typeof(WraithformScroll)),
-            (typeof(Daemon), typeof(WyvernStrikeScroll)),
-            (typeof(Bloodliche), typeof(KillScroll)),
-            (typeof(DaemonLieutenant), typeof(LicheScroll)),
+            ("Skeleton", typeof(ControlUndeadScroll)),
+            ("SkeletonArcher", typeof(DarknessScroll)),
+            ("Ghost", typeof(DecayingRayScroll)),
+            ("BoneKnight", typeof(SpectresTouchScroll)),
+            ("Wraith", typeof(AbyssalFlameScroll)),
+            ("BoneMagician", typeof(AnimateDeadScroll)),
+            ("Spectre", typeof(SacrificeScroll)),
+            ("FlamingSkeleton", typeof(WraithsBreathScroll)),
+            ("Revenant", typeof(SorcerersBaneScroll)),
+            ("Frankenstein", typeof(SummonSpiritScroll)),
+            ("Liche", typeof(WraithformScroll)),
+            ("Daemon", typeof(WyvernStrikeScroll)),
+            ("Bloodliche", typeof(KillScroll)),
+            ("DaemonLieutenant", typeof(LicheScroll)),
         };
 
         public static void Initialize()
@@ -147,8 +147,8 @@ namespace Server.SkillHandlers
             }
             
             var (creatureType, itemType) = UndeadKnowledgeConfig[level];
-            
-            var creature = creatureType.CreateInstance<BaseCreature>();
+
+            BaseCreature creature = creatureType;
             creature.Summoned = true;
             creature.Blessed = true; // Invulnerable
             creature.BardImmune = true;

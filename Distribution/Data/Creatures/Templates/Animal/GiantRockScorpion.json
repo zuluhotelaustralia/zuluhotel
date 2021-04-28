@@ -1,0 +1,46 @@
+{
+  "Name": "a giant rock scorpion",
+  "CorpseNameOverride": "corpse of a giant rock scorpion",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 230,
+  "Int": 40,
+  "Dex": 80,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 398,
+  "Body": 48,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitPoison": "Greater",
+  "HitsMax": 230,
+  "Hue": 1118,
+  "ManaMaxSeed": 0,
+  "MinTameSkill": 80,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 90,
+  "StamMaxSeed": 70,
+  "Tamable": true,
+  "Resistances": {
+    "Poison": 3
+  },
+  "Skills": {
+    "Tactics": 70,
+    "Macing": 130,
+    "MagicResist": 50
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 11,
+      "Max": 35
+    },
+    "HitSound": 400,
+    "MissSound": 569
+  }
+}

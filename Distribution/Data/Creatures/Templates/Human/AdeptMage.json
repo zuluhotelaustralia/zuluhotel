@@ -1,0 +1,63 @@
+{
+  "Name": "an adept mage",
+  "CorpseNameOverride": "corpse of an adept mage",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 200,
+  "Int": 295,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 314,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Human",
+  "VirtualArmor": 20,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 200,
+  "Hue": 0,
+  "LootItemChance": 75,
+  "LootItemLevel": 2,
+  "LootTable": "25",
+  "ManaMaxSeed": 95,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 94,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 50,
+  "PreferredSpells": [
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Fourth.CurseSpell",
+    "Server.Spells.First.WeakenSpell",
+    "Server.Spells.First.ClumsySpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Sixth.EnergyBoltSpell"
+  ],
+  "Skills": {
+    "MagicResist": 90,
+    "Tactics": 85,
+    "Magery": 100
+  },
+  "Attack": {
+    "Damage": {
+      "Min": 4,
+      "Max": 40
+    },
+    "HitSound": 316,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.LongHair",
+      "Hue": 1140
+    },
+    {
+      "ItemType": "Server.Items.GnarledStaff",
+      "Name": "Evil Mage Weapon",
+      "Hue": 0
+    }
+  ]
+}

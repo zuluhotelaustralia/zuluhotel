@@ -1,0 +1,55 @@
+{
+  "Name": "<random> the Orcmage",
+  "CorpseNameOverride": "corpse of <random> the Orcmage",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 195,
+  "Int": 300,
+  "Dex": 90,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 433,
+  "Body": 17,
+  "CanRummageCorpses": true,
+  "CreatureType": "Orc",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HitsMax": 195,
+  "Hue": 201,
+  "LootItemChance": 75,
+  "LootItemLevel": 2,
+  "LootTable": "31",
+  "ManaMaxSeed": 90,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 105,
+  "SaySpellMantra": true,
+  "StamMaxSeed": 80,
+  "PreferredSpells": [
+    "Server.Spells.Sixth.EnergyBoltSpell",
+    "Server.Spells.Fourth.LightningSpell",
+    "Server.Spells.Second.HarmSpell",
+    "Server.Spells.Third.PoisonSpell",
+    "Server.Spells.First.MagicArrowSpell",
+    "Server.Spells.Third.FireballSpell",
+    "Server.Spells.Fifth.ParalyzeSpell",
+    "Server.Spells.Fourth.CurseSpell"
+  ],
+  "Skills": {
+    "MagicResist": 70,
+    "Tactics": 50,
+    "Macing": 75,
+    "Magery": 100
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 2,
+      "Max": 8
+    },
+    "HitSound": 435,
+    "MissSound": 569
+  }
+}

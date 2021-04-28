@@ -1,0 +1,47 @@
+{
+  "Name": "a giant rock spider",
+  "CorpseNameOverride": "corpse of a giant rock spider",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 185,
+  "Int": 50,
+  "Dex": 110,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 388,
+  "Body": 28,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitPoison": "Regular",
+  "HitsMax": 185,
+  "Hue": 1118,
+  "ManaMaxSeed": 40,
+  "MinTameSkill": 80,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 90,
+  "StamMaxSeed": 70,
+  "Tamable": true,
+  "Resistances": {
+    "Poison": 3
+  },
+  "Skills": {
+    "Tactics": 100,
+    "Macing": 110,
+    "MagicResist": 40
+  },
+  "Attack": {
+    "Speed": 38,
+    "Damage": {
+      "Min": 9,
+      "Max": 25
+    },
+    "HitSound": 390,
+    "MissSound": 569,
+    "HasWebs": true
+  }
+}

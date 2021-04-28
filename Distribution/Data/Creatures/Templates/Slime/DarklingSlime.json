@@ -1,0 +1,44 @@
+{
+  "Name": "a darkling slime",
+  "CorpseNameOverride": "corpse of a darkling slime",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 200,
+  "Int": 10,
+  "Dex": 150,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 457,
+  "Body": 51,
+  "CanRummageCorpses": true,
+  "CreatureType": "Slime",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 200,
+  "Hue": 25125,
+  "LootTable": "125",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Resistances": {
+    "Poison": 6
+  },
+  "Skills": {
+    "MagicResist": 90,
+    "Poisoning": 40,
+    "Tactics": 100
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 43
+    },
+    "Skill": "Swords",
+    "HitSound": 459,
+    "MissSound": 569
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "Name": "a rock lizard",
+  "CorpseNameOverride": "corpse of a rock lizard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 190,
+  "Int": 20,
+  "Dex": 80,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 648,
+  "Body": 202,
+  "CanRummageCorpses": true,
+  "CanSwim": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HideType": "Lizard",
+  "Hides": 5,
+  "HitsMax": 190,
+  "Hue": 1546,
+  "ManaMaxSeed": 20,
+  "MinTameSkill": 75,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 90,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Tactics": 100,
+    "Macing": 130,
+    "MagicResist": 60
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 4,
+      "Max": 28
+    },
+    "HitSound": 650,
+    "MissSound": 569
+  }
+}

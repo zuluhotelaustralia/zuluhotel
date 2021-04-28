@@ -1,0 +1,40 @@
+{
+  "Name": "a blade spirit",
+  "CorpseNameOverride": "corpse of a blade spirit",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 200,
+  "Int": 25,
+  "Dex": 200,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 571,
+  "Body": 574,
+  "CanRummageCorpses": true,
+  "CreatureType": "Elemental",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 200,
+  "Hue": 33784,
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Poisoning": 100,
+    "Tactics": 50,
+    "Macing": 125,
+    "MagicResist": 110
+  },
+  "Attack": {
+    "Speed": 20,
+    "Damage": {
+      "Min": 2,
+      "Max": 8
+    },
+    "HitSound": 573,
+    "MissSound": 569
+  }
+}

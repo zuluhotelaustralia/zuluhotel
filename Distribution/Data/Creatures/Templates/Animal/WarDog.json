@@ -1,0 +1,42 @@
+{
+  "Name": "a war dog",
+  "CorpseNameOverride": "corpse of a war dog",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 80,
+  "Int": 35,
+  "Dex": 75,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 134,
+  "Body": 217,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 15,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HitsMax": 80,
+  "Hue": 33784,
+  "ManaMaxSeed": 0,
+  "MinTameSkill": 50,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 70,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Tactics": 60,
+    "Macing": 75,
+    "MagicResist": 40
+  },
+  "Attack": {
+    "Speed": 30,
+    "Damage": {
+      "Min": 3,
+      "Max": 12
+    },
+    "HitSound": 136,
+    "MissSound": 569
+  }
+}

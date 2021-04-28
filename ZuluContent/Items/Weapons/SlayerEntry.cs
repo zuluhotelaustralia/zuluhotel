@@ -1,31 +1,11 @@
 using System;
+using System.Linq;
 
 namespace Server.Items
 {
     public class SlayerEntry
     {
-        private SlayerGroup m_Group;
-        private SlayerName m_Name;
-        private Type[] m_Types;
-
-        public SlayerGroup Group
-        {
-            get { return m_Group; }
-            set { m_Group = value; }
-        }
-
-        public SlayerName Name
-        {
-            get { return m_Name; }
-        }
-
-        public Type[] Types
-        {
-            get { return m_Types; }
-        }
-
-        private static int[] m_AosTitles = new[]
-        {
+        private static readonly int[] AosTitles = {
             1060479, // undead slayer
             1060470, // orc slayer
             1060480, // troll slayer
@@ -55,8 +35,7 @@ namespace Server.Items
             1070855 // fey slayer
         };
 
-        private static int[] m_DefaultTitles = new[]
-        {
+        private static readonly int[] DefaultTitles = {
             1017384, // Silver
             1017385, // Orc Slaying
             1017386, // Troll Slaughter
@@ -86,33 +65,23 @@ namespace Server.Items
             1070855 // fey slayer
         };
 
-        public int Title
-        {
-            get
-            {
-                int[] titles = m_DefaultTitles;
+        // public SlayerGroup Group { get; set; }
 
-                return titles[(int) m_Name - 1];
-            }
-        }
+        public SlayerName Name { get; }
+        public Type[] Types { get; }
+        public int Title => DefaultTitles[(int) Name - 1];
 
         public SlayerEntry(SlayerName name, params Type[] types)
         {
-            m_Name = name;
-            m_Types = types;
+            Name = name;
+            Types = types;
         }
 
         public bool Slays(Mobile m)
         {
-            Type t = m.GetType();
+            var t = m.GetType();
 
-            for (int i = 0; i < m_Types.Length; ++i)
-            {
-                if (m_Types[i].IsAssignableFrom(t))
-                    return true;
-            }
-
-            return false;
+            return Types.Any(t1 => t1.IsAssignableFrom(t));
         }
     }
 }

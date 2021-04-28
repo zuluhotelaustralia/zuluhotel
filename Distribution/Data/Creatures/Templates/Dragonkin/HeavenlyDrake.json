@@ -1,0 +1,56 @@
+{
+  "Name": "a Heavenly Drake",
+  "CorpseNameOverride": "corpse of a Heavenly Drake",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 400,
+  "Int": 90,
+  "Dex": 300,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "BaseSoundID": 363,
+  "Body": 60,
+  "CanRummageCorpses": true,
+  "CreatureType": "Dragonkin",
+  "VirtualArmor": 40,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Dragon",
+  "Hides": 5,
+  "HitsMax": 400,
+  "Hue": 1181,
+  "InitialInnocent": true,
+  "LootItemChance": 25,
+  "LootItemLevel": 4,
+  "LootTable": "37",
+  "ManaMaxSeed": 80,
+  "MinTameSkill": 125,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 130,
+  "StamMaxSeed": 100,
+  "Tamable": true,
+  "Resistances": {
+    "Poison": 6,
+    "MagicImmunity": 5
+  },
+  "Skills": {
+    "Parry": 70,
+    "MagicResist": 110,
+    "Tactics": 100,
+    "Macing": 150,
+    "DetectHidden": 130
+  },
+  "Attack": {
+    "Speed": 45,
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 365,
+    "MissSound": 569,
+    "Ability": "TriElementalStrike",
+    "AbilityChance": 1,
+    "HasBreath": true
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "Name": "a Small Hoarde Demon",
+  "CorpseNameOverride": "corpse of a Small Hoarde Demon",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 600,
+  "Int": 100,
+  "Dex": 500,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 600,
+  "Body": 776,
+  "CanRummageCorpses": true,
+  "CreatureType": "Daemon",
+  "VirtualArmor": 35,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 600,
+  "Hue": 0,
+  "LootItemChance": 50,
+  "LootItemLevel": 5,
+  "LootTable": "69",
+  "ManaMaxSeed": 100,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 400,
+  "Resistances": {
+    "Poison": 1,
+    "MagicImmunity": 1
+  },
+  "Skills": {
+    "Tactics": 130,
+    "Macing": 130,
+    "MagicResist": 130
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 33,
+      "Max": 73
+    },
+    "HitSound": 602,
+    "MissSound": 569
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.ShortHair",
+      "Hue": 1
+    }
+  ]
+}

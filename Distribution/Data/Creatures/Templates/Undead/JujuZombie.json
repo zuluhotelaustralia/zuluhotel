@@ -1,0 +1,50 @@
+{
+  "Name": "a juju zombie",
+  "CorpseNameOverride": "corpse of a juju zombie",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 375,
+  "Int": 15,
+  "Dex": 400,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BardImmune": true,
+  "BaseSoundID": 282,
+  "Body": 3,
+  "CanRummageCorpses": true,
+  "CreatureType": "Undead",
+  "VirtualArmor": 50,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 4,
+  "HitsMax": 375,
+  "Hue": 1300,
+  "LootItemChance": 0,
+  "LootItemLevel": 0,
+  "LootTable": "24",
+  "ManaMaxSeed": 5,
+  "PassiveSpeed": 0.2,
+  "PerceptionRange": 10,
+  "StamMaxSeed": 400,
+  "TargetAcquireExhaustion": true,
+  "Resistances": {
+    "Poison": 6,
+    "Necro": 100
+  },
+  "Skills": {
+    "MagicResist": 40,
+    "Tactics": 80
+  },
+  "Attack": {
+    "Speed": 40,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "Skill": "Swords",
+    "Animation": "Slash1H",
+    "HitSound": 284,
+    "MissSound": 285,
+    "MaxRange": 4
+  }
+}

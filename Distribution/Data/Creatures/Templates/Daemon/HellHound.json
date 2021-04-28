@@ -1,0 +1,49 @@
+{
+  "Name": "a hell hound",
+  "CorpseNameOverride": "corpse of a hell hound",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 170,
+  "Int": 60,
+  "Dex": 185,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Mage",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 230,
+  "Body": 225,
+  "CanRummageCorpses": true,
+  "CreatureType": "Daemon",
+  "VirtualArmor": 25,
+  "Female": false,
+  "FightMode": "Closest",
+  "FightRange": 1,
+  "HideType": "Wolf",
+  "Hides": 5,
+  "HitsMax": 170,
+  "Hue": 232,
+  "LootTable": "61",
+  "ManaMaxSeed": 50,
+  "MinTameSkill": 95,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 80,
+  "StamMaxSeed": 70,
+  "Tamable": true,
+  "PreferredSpells": [
+    "Server.Spells.Third.FireballSpell"
+  ],
+  "Skills": {
+    "Tactics": 100,
+    "Macing": 110,
+    "Magery": 90,
+    "MagicResist": 70
+  },
+  "Attack": {
+    "Speed": 35,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "HitSound": 232,
+    "MissSound": 569
+  }
+}

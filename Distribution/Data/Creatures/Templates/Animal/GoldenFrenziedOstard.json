@@ -1,0 +1,45 @@
+{
+  "Name": "a golden frenzied ostard",
+  "CorpseNameOverride": "corpse of a golden frenzied ostard",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 130,
+  "Int": 35,
+  "Dex": 180,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysAttackable": true,
+  "BaseSoundID": 594,
+  "Body": 218,
+  "CanRummageCorpses": true,
+  "CreatureType": "Animal",
+  "VirtualArmor": 10,
+  "Female": false,
+  "FightMode": "None",
+  "FightRange": 1,
+  "HideType": "Ostard",
+  "Hides": 4,
+  "HitsMax": 130,
+  "Hue": 48,
+  "ManaMaxSeed": 0,
+  "MinTameSkill": 80,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 110,
+  "StamMaxSeed": 50,
+  "Tamable": true,
+  "Skills": {
+    "Parry": 80,
+    "MagicResist": 70,
+    "Tactics": 100,
+    "Macing": 140
+  },
+  "Attack": {
+    "Speed": 25,
+    "Damage": {
+      "Min": 10,
+      "Max": 45
+    },
+    "HitSound": 596,
+    "MissSound": 598
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "Name": "<random> the Ratlord",
+  "CorpseNameOverride": "corpse of <random> the Ratlord",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 300,
+  "Int": 65,
+  "Dex": 450,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 438,
+  "Body": 45,
+  "CanRummageCorpses": true,
+  "CreatureType": "Ratkin",
+  "VirtualArmor": 30,
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HideType": "Rat",
+  "Hides": 5,
+  "HitsMax": 300,
+  "Hue": 0,
+  "LootItemChance": 50,
+  "LootItemLevel": 1,
+  "LootTable": "27",
+  "ManaMaxSeed": 0,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 95,
+  "StamMaxSeed": 50,
+  "Skills": {
+    "Tactics": 100,
+    "MagicResist": 75
+  },
+  "Attack": {
+    "Speed": 55,
+    "Damage": {
+      "Min": 8,
+      "Max": 64
+    },
+    "Skill": "Swords",
+    "HitSound": 440,
+    "MissSound": 569
+  }
+}

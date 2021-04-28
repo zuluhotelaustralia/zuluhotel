@@ -28,7 +28,7 @@ namespace Server.Spells.Fifth
 
             var duration = TimeSpan.FromSeconds(Utility.Random(80, 40));
 
-            BaseCreature.Summon(Creatures.Create("BladeSpirit"), false, Caster, new Point3D(point), 0x212, duration);
+            BaseCreature.Summon("BladeSpirit", false, Caster, new Point3D(point), 0x212, duration);
         }
     }
 }

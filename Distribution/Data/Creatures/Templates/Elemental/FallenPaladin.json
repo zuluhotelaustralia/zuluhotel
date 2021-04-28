@@ -1,0 +1,97 @@
+{
+  "Name": "a Fallen Paladin",
+  "CorpseNameOverride": "corpse of a Fallen Paladin",
+  "BaseType": "Server.Mobiles.BaseCreatureTemplate",
+  "Str": 2500,
+  "Int": 250,
+  "Dex": 1000,
+  "ActiveSpeed": 0.2,
+  "AiType": "AI_Melee",
+  "AlwaysMurderer": true,
+  "BaseSoundID": 566,
+  "Body": 400,
+  "CanRummageCorpses": true,
+  "CreatureType": "Elemental",
+  "Female": false,
+  "FightMode": "Aggressor",
+  "FightRange": 1,
+  "HitsMax": 6000,
+  "Hue": 33784,
+  "ManaMaxSeed": 0,
+  "MinTameSkill": 170,
+  "PassiveSpeed": 0.4,
+  "PerceptionRange": 10,
+  "ProvokeSkillOverride": 170,
+  "RiseCreatureDelay": "00:00:00",
+  "StamMaxSeed": 3000,
+  "Tamable": true,
+  "Resistances": {
+    "Poison": 6,
+    "Fire": 100,
+    "Air": 100,
+    "Water": 100,
+    "Necro": 100,
+    "Earth": 100,
+    "MagicImmunity": 8
+  },
+  "Skills": {
+    "Tactics": 350,
+    "Fencing": 150,
+    "MagicResist": 250,
+    "DetectHidden": 200,
+    "Hiding": 200
+  },
+  "Attack": {
+    "Speed": 50,
+    "Damage": {
+      "Min": 55,
+      "Max": 80
+    },
+    "Animation": "Bash2H",
+    "HitSound": 568,
+    "MissSound": 563
+  },
+  "Equipment": [
+    {
+      "ItemType": "Server.Items.PlateChest",
+      "Name": "Platemail of the Paladin",
+      "Hue": 1176,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.PlateGloves",
+      "Name": "Platemail Gloves of the Paladin",
+      "Hue": 1176,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.PlateGorget",
+      "Name": "Platemail Gorget of the Paladin",
+      "Hue": 1176,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.PlateLegs",
+      "Name": "Platemail Legs of the Paladin",
+      "Hue": 1176,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.PlateArms",
+      "Name": "Platemail Arms of the Paladin",
+      "Hue": 1176,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.PlateHelm",
+      "Name": "Platemail Helm of the Paladin",
+      "Hue": 1176,
+      "ArmorRating": 70
+    },
+    {
+      "ItemType": "Server.Items.Halberd",
+      "Name": "Paladin's Halberd of Destruction",
+      "Hue": 1157
+    }
+  ]
+}
