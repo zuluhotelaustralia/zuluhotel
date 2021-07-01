@@ -6,9 +6,10 @@
   "Int": 1500,
   "Dex": 195,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 282,
+  "BaseSoundID": 281,
   "Body": 401,
   "CanRummageCorpses": true,
   "ClassLevel": 2,
@@ -23,7 +24,6 @@
   "LootItemLevel": 5,
   "LootTable": "137",
   "ManaMaxSeed": 1500,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 140,
   "SaySpellMantra": true,
@@ -55,8 +55,8 @@
       "Max": 61
     },
     "Animation": "Bash2H",
-    "HitSound": 284,
-    "MissSound": 285,
+    "HitSound": 283,
+    "MissSound": 284,
     "MaxRange": 12
   },
   "Equipment": [

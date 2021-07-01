@@ -6,6 +6,7 @@
   "Int": 250,
   "Dex": 145,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysAttackable": true,
   "BaseSoundID": 372,
@@ -22,7 +23,6 @@
   "LootItemChance": 100,
   "LootTable": "42",
   "ManaMaxSeed": 250,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 120,
   "StamMaxSeed": 145,
@@ -47,6 +47,7 @@
     "Damage": {
       "Min": 6,
       "Max": 36
-    }
+    },
+    "MissSound": 568
   }
 }

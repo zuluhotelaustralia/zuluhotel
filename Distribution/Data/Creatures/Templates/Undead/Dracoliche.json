@@ -6,9 +6,10 @@
   "Int": 700,
   "Dex": 150,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 363,
+  "BaseSoundID": 1160,
   "Body": 104,
   "CanFly": true,
   "CanRummageCorpses": true,
@@ -26,7 +27,6 @@
   "LootTable": "35",
   "ManaMaxSeed": 200,
   "MinTameSkill": 135,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 120,
   "SaySpellMantra": true,
@@ -54,7 +54,7 @@
     "Parry": 80,
     "MagicResist": 110,
     "Tactics": 110,
-    "Macing": 130,
+    "Wrestling": 130,
     "Magery": 140,
     "EvalInt": 140,
     "DetectHidden": 130
@@ -64,8 +64,8 @@
       "Min": 33,
       "Max": 73
     },
-    "HitSound": 365,
-    "MissSound": 569,
+    "HitSound": 364,
+    "MissSound": 568,
     "Ability": {
       "Type": "SpellStrike",
       "SpellType": "WraithBreathSpell"

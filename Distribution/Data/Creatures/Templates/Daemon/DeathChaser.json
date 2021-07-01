@@ -6,10 +6,11 @@
   "Int": 650,
   "Dex": 475,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "AutoDispel": true,
-  "BaseSoundID": 361,
+  "BaseSoundID": 357,
   "Body": 43,
   "CanRummageCorpses": true,
   "CreatureType": "Daemon",
@@ -23,7 +24,6 @@
   "LootItemLevel": 5,
   "LootTable": "35",
   "ManaMaxSeed": 150,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 150,
   "StamMaxSeed": 175,
@@ -47,7 +47,7 @@
   },
   "Skills": {
     "Tactics": 150,
-    "Macing": 200,
+    "Wrestling": 200,
     "MagicResist": 110,
     "Magery": 150,
     "DetectHidden": 150
@@ -58,7 +58,7 @@
       "Min": 25,
       "Max": 75
     },
-    "HitSound": 363,
-    "MissSound": 569
+    "HitSound": 362,
+    "MissSound": 568
   }
 }

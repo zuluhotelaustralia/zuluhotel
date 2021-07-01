@@ -6,6 +6,7 @@
   "Int": 126,
   "Dex": 60,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BaseSoundID": 569,
@@ -21,11 +22,10 @@
   "LootItemChance": 1,
   "LootTable": "47",
   "ManaMaxSeed": 26,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 50,
   "Skills": {
-    "Fencing": 50,
+    "Wrestling": 50,
     "Parry": 50,
     "Macing": 50,
     "Tactics": 50,
@@ -36,7 +36,7 @@
       "Min": 3,
       "Max": 30
     },
-    "HitSound": 571,
-    "MissSound": 569
+    "HitSound": 570,
+    "MissSound": 568
   }
 }

@@ -6,8 +6,10 @@
   "Int": 35,
   "Dex": 180,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Archer",
   "AlwaysMurderer": true,
+  "BaseSoundID": 437,
   "Body": 42,
   "CanRummageCorpses": true,
   "CreatureType": "Ratkin",
@@ -21,20 +23,20 @@
   "Hue": 0,
   "LootTable": "51",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 55,
   "StamMaxSeed": 50,
   "Skills": {
     "MagicResist": 40,
     "Tactics": 60,
-    "Macing": 65,
+    "Wrestling": 65,
     "Archery": 100
   },
   "Attack": {
     "Damage": {
       "Min": 10,
       "Max": 22
-    }
+    },
+    "MissSound": 568
   }
 }

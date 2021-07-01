@@ -6,6 +6,7 @@
   "Int": 500,
   "Dex": 500,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysAttackable": true,
   "BaseSoundID": 168,
@@ -23,7 +24,6 @@
   "LootTable": "26",
   "ManaMaxSeed": 500,
   "MinTameSkill": 110,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 95,
   "StamMaxSeed": 500,
@@ -39,6 +39,7 @@
     "Damage": {
       "Min": 2,
       "Max": 16
-    }
+    },
+    "MissSound": 568
   }
 }

@@ -6,9 +6,10 @@
   "Int": 200,
   "Dex": 250,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 566,
+  "BaseSoundID": 565,
   "Body": 554,
   "CanRummageCorpses": true,
   "ClassLevel": 3,
@@ -24,7 +25,6 @@
   "LootItemLevel": 4,
   "LootTable": "131",
   "ManaMaxSeed": 100,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "RiseCreatureDelay": "00:00:02",
   "StamMaxSeed": 50,
@@ -39,8 +39,8 @@
       "Max": 65
     },
     "Animation": "Bash2H",
-    "HitSound": 568,
-    "MissSound": 563,
+    "HitSound": 567,
+    "MissSound": 562,
     "Ability": {
       "Type": "SpellStrike",
       "SpellType": "DarknessSpell"

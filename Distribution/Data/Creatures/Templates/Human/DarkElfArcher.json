@@ -6,6 +6,7 @@
   "Int": 95,
   "Dex": 130,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Archer",
   "AlwaysMurderer": true,
   "Body": 401,
@@ -19,7 +20,6 @@
   "Hue": 1109,
   "LootTable": "41",
   "ManaMaxSeed": 85,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 60,
   "StamMaxSeed": 95,
@@ -27,7 +27,7 @@
     "MagicImmunity": 6
   },
   "Skills": {
-    "Macing": 95,
+    "Wrestling": 95,
     "Tactics": 150,
     "MagicResist": 110,
     "Archery": 150,
@@ -37,6 +37,7 @@
     "Damage": {
       "Min": 10,
       "Max": 22
-    }
+    },
+    "MissSound": 568
   }
 }

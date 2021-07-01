@@ -6,9 +6,10 @@
   "Int": 35,
   "Dex": 210,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Animal",
   "AlwaysAttackable": true,
-  "BaseSoundID": 594,
+  "BaseSoundID": 624,
   "Body": 219,
   "CanRummageCorpses": true,
   "CreatureType": "Animal",
@@ -22,7 +23,6 @@
   "Hue": 1154,
   "ManaMaxSeed": 125,
   "MinTameSkill": 75,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 90,
   "StamMaxSeed": 125,
@@ -31,7 +31,7 @@
     "Parry": 70,
     "MagicResist": 70,
     "Tactics": 80,
-    "Macing": 80
+    "Wrestling": 80
   },
   "Attack": {
     "Speed": 35,
@@ -39,7 +39,7 @@
       "Min": 13,
       "Max": 48
     },
-    "HitSound": 596,
-    "MissSound": 598
+    "HitSound": 595,
+    "MissSound": 597
   }
 }

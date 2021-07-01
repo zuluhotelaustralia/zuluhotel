@@ -6,6 +6,7 @@
   "Int": 35,
   "Dex": 180,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysAttackable": true,
   "BaseSoundID": 447,
@@ -22,14 +23,13 @@
   "Hue": 33784,
   "LootTable": "50",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 60,
   "StamMaxSeed": 50,
   "Skills": {
     "Parry": 70,
     "Tactics": 50,
-    "Macing": 150,
+    "Wrestling": 150,
     "MagicResist": 90,
     "Poisoning": 80
   },
@@ -39,7 +39,7 @@
       "Min": 2,
       "Max": 16
     },
-    "HitSound": 449,
-    "MissSound": 569
+    "HitSound": 448,
+    "MissSound": 568
   }
 }

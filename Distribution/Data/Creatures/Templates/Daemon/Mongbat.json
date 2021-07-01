@@ -6,9 +6,10 @@
   "Int": 35,
   "Dex": 60,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 423,
+  "BaseSoundID": 422,
   "Body": 39,
   "CanRummageCorpses": true,
   "CreatureType": "Daemon",
@@ -21,7 +22,6 @@
   "LootTable": "33",
   "ManaMaxSeed": 0,
   "MinTameSkill": 25,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 55,
   "StamMaxSeed": 50,
@@ -38,7 +38,7 @@
       "Max": 6
     },
     "Skill": "Swords",
-    "HitSound": 425,
-    "MissSound": 569
+    "HitSound": 424,
+    "MissSound": 568
   }
 }

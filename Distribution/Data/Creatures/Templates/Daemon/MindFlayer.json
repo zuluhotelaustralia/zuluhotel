@@ -6,10 +6,11 @@
   "Int": 2750,
   "Dex": 310,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BardImmune": true,
-  "BaseSoundID": 530,
+  "BaseSoundID": 1001,
   "Body": 24,
   "CanRummageCorpses": true,
   "ClassLevel": 6,
@@ -25,7 +26,6 @@
   "LootItemLevel": 6,
   "LootTable": "35",
   "ManaMaxSeed": 2750,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "StamMaxSeed": 50,
   "Tamable": false,
@@ -39,7 +39,7 @@
     "Magery": 375,
     "MagicResist": 150,
     "Tactics": 150,
-    "Macing": 150,
+    "Wrestling": 150,
     "DetectHidden": 200
   },
   "Attack": {
@@ -48,8 +48,8 @@
       "Min": 14,
       "Max": 50
     },
-    "HitSound": 532,
-    "MissSound": 569,
+    "HitSound": 531,
+    "MissSound": 568,
     "MaxRange": 6,
     "Ability": {
       "Type": "SpellStrike",

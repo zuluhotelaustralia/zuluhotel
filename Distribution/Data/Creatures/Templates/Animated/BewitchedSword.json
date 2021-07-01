@@ -6,6 +6,7 @@
   "Int": 110,
   "Dex": 110,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "Body": 643,
@@ -20,7 +21,6 @@
   "LootItemChance": 1,
   "LootTable": "48",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 94,
   "StamMaxSeed": 100,
@@ -32,6 +32,7 @@
     "Damage": {
       "Min": 1,
       "Max": 23
-    }
+    },
+    "MissSound": 568
   }
 }

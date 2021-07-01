@@ -6,9 +6,10 @@
   "Int": 35,
   "Dex": 210,
   "ActiveSpeed": 0.15,
+  "PassiveSpeed": 0.3,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 358,
+  "BaseSoundID": 634,
   "Body": 86,
   "CanRummageCorpses": true,
   "ClassLevel": 3,
@@ -24,7 +25,6 @@
   "Hue": 0,
   "LootTable": "70",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.3,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 110,
   "StamMaxSeed": 70,
@@ -35,7 +35,7 @@
   "Skills": {
     "Parry": 200,
     "Magery": 80,
-    "Macing": 100,
+    "Wrestling": 100,
     "Tactics": 90,
     "MagicResist": 130
   },
@@ -45,7 +45,7 @@
       "Min": 8,
       "Max": 44
     },
-    "HitSound": 360,
-    "MissSound": 361
+    "HitSound": 359,
+    "MissSound": 360
   }
 }

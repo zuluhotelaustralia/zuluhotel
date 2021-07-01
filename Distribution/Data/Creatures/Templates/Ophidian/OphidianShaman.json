@@ -6,9 +6,10 @@
   "Int": 350,
   "Dex": 160,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 358,
+  "BaseSoundID": 639,
   "Body": 85,
   "CanRummageCorpses": true,
   "CreatureType": "Ophidian",
@@ -24,7 +25,6 @@
   "LootItemLevel": 4,
   "LootTable": "69",
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "SaySpellMantra": true,
   "StamMaxSeed": 160,
@@ -41,7 +41,7 @@
   "Skills": {
     "Parry": 120,
     "Magery": 120,
-    "Macing": 120,
+    "Wrestling": 120,
     "Tactics": 70,
     "MagicResist": 90
   },
@@ -51,7 +51,7 @@
       "Min": 3,
       "Max": 30
     },
-    "HitSound": 360,
-    "MissSound": 361
+    "HitSound": 359,
+    "MissSound": 360
   }
 }

@@ -6,9 +6,10 @@
   "Int": 60,
   "Dex": 125,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysAttackable": true,
-  "BaseSoundID": 265,
+  "BaseSoundID": 959,
   "Body": 782,
   "CanRummageCorpses": true,
   "VirtualArmor": 35,
@@ -22,7 +23,6 @@
   "LootItemChance": 100,
   "LootTable": "51",
   "ManaMaxSeed": 60,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 80,
   "StamMaxSeed": 125,
@@ -32,9 +32,12 @@
     "Wrestling": 80
   },
   "Attack": {
+    "Speed": 25,
     "Damage": {
-      "Min": 10,
-      "Max": 25
-    }
+      "Min": 9,
+      "Max": 14
+    },
+    "HitSound": 181,
+    "MissSound": 649
   }
 }

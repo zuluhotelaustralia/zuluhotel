@@ -6,9 +6,10 @@
   "Int": 400,
   "Dex": 340,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 363,
+  "BaseSoundID": 362,
   "Body": 12,
   "CanFly": true,
   "CanRummageCorpses": true,
@@ -26,7 +27,6 @@
   "LootTable": "37",
   "ManaMaxSeed": 200,
   "MinTameSkill": 140,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 140,
   "StamMaxSeed": 140,
@@ -49,7 +49,7 @@
     "Parry": 80,
     "MagicResist": 130,
     "Tactics": 100,
-    "Macing": 120,
+    "Wrestling": 120,
     "DetectHidden": 130
   },
   "Attack": {
@@ -58,8 +58,8 @@
       "Min": 25,
       "Max": 75
     },
-    "HitSound": 365,
-    "MissSound": 569,
+    "HitSound": 364,
+    "MissSound": 568,
     "Ability": {
       "Type": "SpellStrike",
       "SpellType": "SorcerersBaneSpell"

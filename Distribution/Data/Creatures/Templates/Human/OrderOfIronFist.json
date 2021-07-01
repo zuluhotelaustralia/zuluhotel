@@ -6,8 +6,10 @@
   "Int": 210,
   "Dex": 300,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
+  "BaseSoundID": 471,
   "Body": 400,
   "CanRummageCorpses": true,
   "CreatureType": "Human",
@@ -18,7 +20,6 @@
   "Hue": 0,
   "LootTable": "59",
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 200,
   "Skills": {
@@ -29,6 +30,7 @@
     "Damage": {
       "Min": 10,
       "Max": 35
-    }
+    },
+    "MissSound": 568
   }
 }

@@ -6,8 +6,10 @@
   "Int": 55,
   "Dex": 120,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Archer",
   "AlwaysMurderer": true,
+  "BaseSoundID": 461,
   "Body": 54,
   "CanRummageCorpses": true,
   "CreatureType": "Troll",
@@ -21,20 +23,20 @@
   "Hue": 33784,
   "LootTable": "41",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 80,
   "StamMaxSeed": 60,
   "Skills": {
     "MagicResist": 60,
     "Tactics": 105,
-    "Macing": 115,
+    "Wrestling": 115,
     "Archery": 130
   },
   "Attack": {
     "Damage": {
       "Min": 12,
       "Max": 27
-    }
+    },
+    "MissSound": 568
   }
 }

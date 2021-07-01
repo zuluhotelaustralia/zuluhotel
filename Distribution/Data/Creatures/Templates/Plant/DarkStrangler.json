@@ -6,9 +6,10 @@
   "Int": 45,
   "Dex": 200,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Archer",
   "AlwaysMurderer": true,
-  "BaseSoundID": 457,
+  "BaseSoundID": 684,
   "Body": 8,
   "CanRummageCorpses": true,
   "CreatureType": "Plant",
@@ -23,7 +24,6 @@
   "LootItemLevel": 4,
   "LootTable": "128",
   "ManaMaxSeed": 35,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 95,
   "Resistances": {
@@ -42,8 +42,8 @@
       "Min": 16,
       "Max": 46
     },
-    "HitSound": 459,
-    "MissSound": 458
+    "HitSound": 458,
+    "MissSound": 457
   },
   "Equipment": [
     {

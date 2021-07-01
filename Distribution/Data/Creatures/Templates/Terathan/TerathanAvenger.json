@@ -6,9 +6,10 @@
   "Int": 250,
   "Dex": 160,
   "ActiveSpeed": 0.15,
+  "PassiveSpeed": 0.3,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 587,
+  "BaseSoundID": 589,
   "Body": 70,
   "CanRummageCorpses": true,
   "CreatureType": "Terathan",
@@ -23,7 +24,6 @@
   "LootItemLevel": 2,
   "LootTable": "68",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.3,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 90,
   "StamMaxSeed": 70,
@@ -40,7 +40,7 @@
   },
   "Skills": {
     "Magery": 80,
-    "Macing": 95,
+    "Wrestling": 95,
     "Tactics": 100,
     "MagicResist": 130,
     "Parry": 75
@@ -51,7 +51,7 @@
       "Min": 8,
       "Max": 44
     },
-    "HitSound": 589,
-    "MissSound": 590
+    "HitSound": 588,
+    "MissSound": 589
   }
 }

@@ -6,9 +6,10 @@
   "Int": 250,
   "Dex": 80,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 279,
+  "BaseSoundID": 278,
   "Body": 16,
   "CanRummageCorpses": true,
   "CanSwim": true,
@@ -23,7 +24,6 @@
   "LootItemLevel": 3,
   "LootTable": "20",
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 70,
   "PreferredSpells": [
@@ -50,7 +50,7 @@
       "Max": 45
     },
     "Skill": "Swords",
-    "HitSound": 281,
-    "MissSound": 569
+    "HitSound": 280,
+    "MissSound": 568
   }
 }

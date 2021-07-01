@@ -6,9 +6,10 @@
   "Int": 90,
   "Dex": 60,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 363,
+  "BaseSoundID": 362,
   "Body": 60,
   "CanRummageCorpses": true,
   "CreatureType": "Dragonkin",
@@ -25,7 +26,6 @@
   "LootTable": "36",
   "ManaMaxSeed": 80,
   "MinTameSkill": 115,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 120,
   "StamMaxSeed": 100,
@@ -38,7 +38,7 @@
     "Parry": 70,
     "MagicResist": 80,
     "Tactics": 110,
-    "Macing": 130,
+    "Wrestling": 130,
     "DetectHidden": 130
   },
   "Attack": {
@@ -47,8 +47,8 @@
       "Min": 33,
       "Max": 73
     },
-    "HitSound": 365,
-    "MissSound": 569,
+    "HitSound": 364,
+    "MissSound": 568,
     "HasBreath": true
   }
 }

@@ -6,8 +6,10 @@
   "Int": 20,
   "Dex": 110,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
+  "BaseSoundID": 471,
   "Body": 400,
   "CanRummageCorpses": true,
   "CreatureType": "Undead",
@@ -21,7 +23,6 @@
   "LootItemLevel": 1,
   "LootTable": "47",
   "ManaMaxSeed": 100,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 100,
   "Resistances": {
@@ -35,6 +36,7 @@
     "Damage": {
       "Min": 4,
       "Max": 16
-    }
+    },
+    "MissSound": 568
   }
 }

@@ -6,9 +6,10 @@
   "Int": 65,
   "Dex": 450,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 438,
+  "BaseSoundID": 437,
   "Body": 45,
   "CanRummageCorpses": true,
   "CreatureType": "Ratkin",
@@ -24,7 +25,6 @@
   "LootItemLevel": 1,
   "LootTable": "27",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 95,
   "StamMaxSeed": 50,
@@ -39,7 +39,7 @@
       "Max": 64
     },
     "Skill": "Swords",
-    "HitSound": 440,
-    "MissSound": 569
+    "HitSound": 439,
+    "MissSound": 568
   }
 }

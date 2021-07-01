@@ -6,6 +6,7 @@
   "Int": 510,
   "Dex": 510,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
   "Body": 401,
@@ -20,7 +21,6 @@
   "LootItemLevel": 5,
   "LootTable": "35",
   "ManaMaxSeed": 500,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 500,
   "PreferredSpells": [
@@ -35,12 +35,13 @@
   },
   "Skills": {
     "MagicResist": 80,
-    "Macing": 100
+    "Wrestling": 100
   },
   "Attack": {
     "Damage": {
       "Min": 5,
       "Max": 50
-    }
+    },
+    "MissSound": 568
   }
 }

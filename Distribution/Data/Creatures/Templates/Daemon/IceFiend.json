@@ -6,9 +6,10 @@
   "Int": 500,
   "Dex": 300,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 358,
+  "BaseSoundID": 357,
   "Body": 43,
   "CanRummageCorpses": true,
   "CreatureType": "Daemon",
@@ -24,7 +25,6 @@
   "LootItemLevel": 4,
   "LootTable": "22",
   "ManaMaxSeed": 500,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 130,
   "SaySpellMantra": true,
@@ -41,7 +41,7 @@
   "Skills": {
     "MagicResist": 90,
     "Tactics": 125,
-    "Macing": 175,
+    "Wrestling": 175,
     "Magery": 110,
     "EvalInt": 110
   },
@@ -51,7 +51,7 @@
       "Min": 10,
       "Max": 40
     },
-    "HitSound": 360,
-    "MissSound": 569
+    "HitSound": 359,
+    "MissSound": 568
   }
 }

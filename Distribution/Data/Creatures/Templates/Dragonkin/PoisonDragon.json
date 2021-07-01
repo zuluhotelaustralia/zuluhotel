@@ -6,9 +6,10 @@
   "Int": 400,
   "Dex": 340,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 363,
+  "BaseSoundID": 362,
   "Body": 12,
   "CanFly": true,
   "CanRummageCorpses": true,
@@ -27,7 +28,6 @@
   "LootTable": "37",
   "ManaMaxSeed": 200,
   "MinTameSkill": 140,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 140,
   "StamMaxSeed": 140,
@@ -49,7 +49,7 @@
     "Parry": 80,
     "MagicResist": 95,
     "Tactics": 120,
-    "Macing": 140,
+    "Wrestling": 140,
     "Poisoning": 140,
     "DetectHidden": 130
   },
@@ -59,8 +59,8 @@
       "Min": 25,
       "Max": 75
     },
-    "HitSound": 365,
-    "MissSound": 569,
+    "HitSound": 364,
+    "MissSound": 568,
     "HasBreath": true
   }
 }

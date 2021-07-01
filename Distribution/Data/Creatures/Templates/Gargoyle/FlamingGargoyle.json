@@ -6,9 +6,10 @@
   "Int": 335,
   "Dex": 95,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 373,
+  "BaseSoundID": 372,
   "Body": 4,
   "CanRummageCorpses": true,
   "CreatureType": "Gargoyle",
@@ -22,7 +23,6 @@
   "LootItemLevel": 2,
   "LootTable": "38",
   "ManaMaxSeed": 100,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 105,
   "StamMaxSeed": 75,
@@ -37,7 +37,7 @@
   "Skills": {
     "MagicResist": 80,
     "Tactics": 90,
-    "Macing": 150,
+    "Wrestling": 150,
     "Magery": 120
   },
   "Attack": {
@@ -46,7 +46,7 @@
       "Min": 8,
       "Max": 64
     },
-    "HitSound": 375,
-    "MissSound": 569
+    "HitSound": 374,
+    "MissSound": 568
   }
 }

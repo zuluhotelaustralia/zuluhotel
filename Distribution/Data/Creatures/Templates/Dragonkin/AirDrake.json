@@ -6,6 +6,7 @@
   "Int": 90,
   "Dex": 400,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BaseSoundID": 362,
@@ -25,7 +26,6 @@
   "LootTable": "36",
   "ManaMaxSeed": 80,
   "MinTameSkill": 115,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 130,
   "StamMaxSeed": 130,
@@ -38,7 +38,7 @@
     "Parry": 70,
     "MagicResist": 95,
     "Tactics": 110,
-    "Macing": 110,
+    "Wrestling": 110,
     "DetectHidden": 130
   },
   "Attack": {
@@ -46,6 +46,7 @@
       "Min": 33,
       "Max": 73
     },
+    "MissSound": 568,
     "Ability": {
       "Type": "SpellStrike",
       "SpellType": "CallLightningSpell"

@@ -6,9 +6,10 @@
   "Int": 550,
   "Dex": 275,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AutoDispel": true,
-  "BaseSoundID": 467,
+  "BaseSoundID": 466,
   "Body": 58,
   "CanFly": true,
   "CanRummageCorpses": true,
@@ -25,7 +26,6 @@
   "LootItemLevel": 4,
   "LootTable": "80",
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 125,
   "StamMaxSeed": 50,
@@ -60,7 +60,7 @@
       "Max": 80
     },
     "Skill": "Swords",
-    "HitSound": 469,
-    "MissSound": 569
+    "HitSound": 468,
+    "MissSound": 568
   }
 }

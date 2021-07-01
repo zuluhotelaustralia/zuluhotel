@@ -6,9 +6,10 @@
   "Int": 75,
   "Dex": 230,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 428,
+  "BaseSoundID": 427,
   "Body": 1,
   "CanRummageCorpses": true,
   "CreatureType": "Giantkin",
@@ -22,13 +23,12 @@
   "LootItemLevel": 4,
   "LootTable": "59",
   "ManaMaxSeed": 65,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 80,
   "StamMaxSeed": 80,
   "Skills": {
     "Tactics": 100,
-    "Macing": 150,
+    "Wrestling": 150,
     "MagicResist": 80
   },
   "Attack": {
@@ -37,7 +37,7 @@
       "Min": 21,
       "Max": 45
     },
-    "HitSound": 430,
-    "MissSound": 569
+    "HitSound": 429,
+    "MissSound": 568
   }
 }

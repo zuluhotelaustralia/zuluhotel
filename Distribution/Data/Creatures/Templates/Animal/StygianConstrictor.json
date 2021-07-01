@@ -6,6 +6,7 @@
   "Int": 175,
   "Dex": 110,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BaseSoundID": 219,
@@ -21,7 +22,6 @@
   "HitsMax": 275,
   "Hue": 1157,
   "ManaMaxSeed": 70,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 75,
   "Resistances": {
@@ -39,7 +39,7 @@
       "Max": 69
     },
     "Skill": "Swords",
-    "HitSound": 221,
-    "MissSound": 220
+    "HitSound": 220,
+    "MissSound": 219
   }
 }

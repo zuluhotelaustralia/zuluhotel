@@ -6,9 +6,10 @@
   "Int": 30,
   "Dex": 90,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 571,
+  "BaseSoundID": 1114,
   "Body": 7,
   "CanRummageCorpses": true,
   "CreatureType": "Orc",
@@ -22,7 +23,6 @@
   "LootItemLevel": 3,
   "LootTable": "42",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 90,
   "StamMaxSeed": 80,
@@ -41,7 +41,7 @@
       "Max": 64
     },
     "Skill": "Swords",
-    "HitSound": 573,
-    "MissSound": 569
+    "HitSound": 572,
+    "MissSound": 568
   }
 }

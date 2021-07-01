@@ -6,9 +6,10 @@
   "Int": 250,
   "Dex": 1000,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 566,
+  "BaseSoundID": 471,
   "Body": 400,
   "CanRummageCorpses": true,
   "CreatureType": "Elemental",
@@ -19,7 +20,6 @@
   "Hue": 33784,
   "ManaMaxSeed": 0,
   "MinTameSkill": 170,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 170,
   "RiseCreatureDelay": "00:00:00",
@@ -48,8 +48,8 @@
       "Max": 80
     },
     "Animation": "Bash2H",
-    "HitSound": 568,
-    "MissSound": 563
+    "HitSound": 567,
+    "MissSound": 562
   },
   "Equipment": [
     {

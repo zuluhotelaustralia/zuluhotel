@@ -42,6 +42,7 @@ namespace Server.Mobiles
         public PropValue Int { get; set; }
         public PropValue Dex { get; set; }
         public PropValue ActiveSpeed { get; set; } = 0.2;
+        public PropValue PassiveSpeed { get; set; } = 0.2;
         public AIType AiType { get; set; }
         public bool? AlwaysAttackable { get; set; }
         public bool? AlwaysMurderer { get; set; }
@@ -81,7 +82,6 @@ namespace Server.Mobiles
         public PropValue Meat { get; set; }
         public PropValue MinTameSkill { get; set; }
         public OppositionGroup OppositionGroup { get; set; }
-        public PropValue PassiveSpeed { get; set; } = 0.2;
         public PropValue PerceptionRange { get; set; }
         public int? ProvokeSkillOverride { get; set; }
         public Race Race { get; set; }
@@ -141,9 +141,9 @@ namespace Server.Mobiles
             {
                 foreach (var equip in Equipment)
                 {
-                    if (equip.ItemType == null) 
+                    if (equip.ItemType == null)
                         continue;
-                    
+
                     var item = equip.ItemType.CreateInstance<Item>();
 
                     if (item == null)
@@ -152,7 +152,7 @@ namespace Server.Mobiles
                     if (equip.Name != null)
                         item.Name = equip.Name;
 
-                    if (equip.Hue != null) 
+                    if (equip.Hue != null)
                         item.Hue = equip.Hue;
 
                     if (item is BaseArmor armor && equip.ArmorRating != null)
@@ -163,22 +163,38 @@ namespace Server.Mobiles
                 }
             }
 
-            if (dest.Weapon is BaseWeapon weapon && Attack != null)
+
+            if (Attack != null)
             {
-                dest.DamageMin = (int)Attack.Damage.Min;
-                dest.DamageMin = (int)(Attack.Damage.Max ?? Attack.Damage.Min);
-                
-                if (Attack.Animation != null) 
-                    weapon.Animation = Attack.Animation.Value;
+                dest.DamageMin = (int) Attack.Damage.Min;
+                dest.DamageMax = (int) (Attack.Damage.Max ?? Attack.Damage.Min);
 
-                if (Attack.HitSound != null) 
-                    weapon.HitSound = Attack.HitSound.Value;
+                if (dest.Weapon == null && (
+                        Attack.Animation != null || Attack.HitSound != null ||
+                        Attack.MissSound != null || Attack.MaxRange != null
+                    )
+                )
+                {
+                    dest.AddItem(new Fists());
+                }
 
-                if (Attack.MissSound != null) 
-                    weapon.MissSound = Attack.MissSound.Value;
-                
-                if (Attack.MaxRange != null) 
-                    weapon.MaxRange = Attack.MaxRange.Value;
+                if (dest.Weapon is BaseWeapon weapon)
+                {
+                    if (Attack.Animation != null)
+                        weapon.Animation = Attack.Animation.Value;
+
+                    if (Attack.HitSound != null)
+                        weapon.HitSound = Attack.HitSound.Value;
+
+                    if (Attack.MissSound != null)
+                        weapon.MissSound = Attack.MissSound.Value;
+
+                    if (Attack.MaxRange != null)
+                        weapon.MaxRange = Attack.MaxRange.Value;
+                    
+                    if (Attack.Speed != null)
+                        weapon.Speed = Attack.Speed;
+                }
             }
         }
     }

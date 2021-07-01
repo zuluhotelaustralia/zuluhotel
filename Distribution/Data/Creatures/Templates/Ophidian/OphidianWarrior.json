@@ -6,9 +6,10 @@
   "Int": 160,
   "Dex": 160,
   "ActiveSpeed": 0.15,
+  "PassiveSpeed": 0.3,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 358,
+  "BaseSoundID": 634,
   "Body": 86,
   "CanRummageCorpses": true,
   "CreatureType": "Ophidian",
@@ -22,14 +23,13 @@
   "Hue": 0,
   "LootTable": "67",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.3,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 110,
   "StamMaxSeed": 320,
   "Skills": {
     "Parry": 100,
     "Magery": 100,
-    "Macing": 100,
+    "Wrestling": 100,
     "Tactics": 100,
     "MagicResist": 100
   },
@@ -39,7 +39,7 @@
       "Min": 11,
       "Max": 41
     },
-    "HitSound": 360,
-    "MissSound": 361
+    "HitSound": 359,
+    "MissSound": 360
   }
 }

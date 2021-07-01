@@ -6,9 +6,10 @@
   "Int": 15,
   "Dex": 60,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysAttackable": true,
-  "BaseSoundID": 210,
+  "BaseSoundID": 27,
   "Body": 6,
   "CanRummageCorpses": true,
   "CreatureType": "Animal",
@@ -20,7 +21,6 @@
   "Hue": 1109,
   "ManaMaxSeed": 0,
   "MinTameSkill": 10,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 10,
   "StamMaxSeed": 50,
@@ -28,7 +28,7 @@
   "Skills": {
     "Tactics": 50,
     "MagicResist": 20,
-    "Macing": 20
+    "Wrestling": 20
   },
   "Attack": {
     "Speed": 20,
@@ -36,7 +36,7 @@
       "Min": 1,
       "Max": 6
     },
-    "HitSound": 212,
-    "MissSound": 213
+    "HitSound": 211,
+    "MissSound": 212
   }
 }

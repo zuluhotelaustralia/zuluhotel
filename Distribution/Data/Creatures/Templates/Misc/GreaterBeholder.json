@@ -6,10 +6,11 @@
   "Int": 1600,
   "Dex": 500,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
   "BardImmune": true,
-  "BaseSoundID": 378,
+  "BaseSoundID": 377,
   "Body": 22,
   "CanRummageCorpses": true,
   "ClassLevel": 6,
@@ -24,7 +25,6 @@
   "LootItemLevel": 4,
   "LootTable": "57",
   "ManaMaxSeed": 1500,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "SaySpellMantra": true,
   "StamMaxSeed": 500,
@@ -42,7 +42,7 @@
   "Skills": {
     "MagicResist": 200,
     "Tactics": 200,
-    "Macing": 200,
+    "Wrestling": 200,
     "Magery": 300
   },
   "Attack": {
@@ -51,7 +51,7 @@
       "Min": 14,
       "Max": 34
     },
-    "HitSound": 380,
-    "MissSound": 569
+    "HitSound": 379,
+    "MissSound": 568
   }
 }

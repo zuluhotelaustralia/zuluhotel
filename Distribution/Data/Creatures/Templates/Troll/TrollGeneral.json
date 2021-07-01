@@ -6,9 +6,10 @@
   "Int": 80,
   "Dex": 90,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 314,
+  "BaseSoundID": 461,
   "Body": 55,
   "CanRummageCorpses": true,
   "CreatureType": "Troll",
@@ -22,7 +23,6 @@
   "Hue": 33784,
   "LootTable": "46",
   "ManaMaxSeed": 70,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 80,
   "StamMaxSeed": 75,
@@ -36,7 +36,7 @@
       "Min": 9,
       "Max": 37
     },
-    "HitSound": 316,
-    "MissSound": 571
+    "HitSound": 315,
+    "MissSound": 570
   }
 }

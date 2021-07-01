@@ -6,6 +6,7 @@
   "Int": 35,
   "Dex": 250,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "Body": 614,
@@ -19,19 +20,19 @@
   "Hue": 0,
   "LootTable": "48",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 60,
   "StamMaxSeed": 50,
   "Skills": {
     "MagicResist": 60,
-    "Macing": 85,
+    "Wrestling": 85,
     "Tactics": 90
   },
   "Attack": {
     "Damage": {
       "Min": 5,
       "Max": 17
-    }
+    },
+    "MissSound": 568
   }
 }

@@ -6,6 +6,7 @@
   "Int": 600,
   "Dex": 120,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysAttackable": true,
   "BaseSoundID": 168,
@@ -23,7 +24,6 @@
   "LootTable": "26",
   "ManaMaxSeed": 600,
   "MinTameSkill": 150,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 150,
   "StamMaxSeed": 120,
@@ -50,9 +50,12 @@
     "Magery": 100
   },
   "Attack": {
+    "Speed": 55,
     "Damage": {
-      "Min": 2,
-      "Max": 16
-    }
+      "Min": 8,
+      "Max": 10
+    },
+    "HitSound": 170,
+    "MissSound": 568
   }
 }

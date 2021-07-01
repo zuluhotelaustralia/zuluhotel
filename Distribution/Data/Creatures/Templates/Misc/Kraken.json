@@ -6,9 +6,10 @@
   "Int": 40,
   "Dex": 245,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysAttackable": true,
-  "BaseSoundID": 357,
+  "BaseSoundID": 684,
   "Body": 8,
   "CanRummageCorpses": true,
   "VirtualArmor": 45,
@@ -22,7 +23,6 @@
   "LootItemChance": 100,
   "LootTable": "100",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 140,
   "StamMaxSeed": 245,
@@ -32,9 +32,12 @@
     "Wrestling": 60
   },
   "Attack": {
+    "Speed": 35,
     "Damage": {
-      "Min": 11,
-      "Max": 47
-    }
+      "Min": 12,
+      "Max": 18
+    },
+    "HitSound": 354,
+    "MissSound": 568
   }
 }

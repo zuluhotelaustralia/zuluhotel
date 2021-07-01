@@ -6,6 +6,7 @@
   "Int": 35,
   "Dex": 180,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BaseSoundID": 451,
@@ -21,7 +22,6 @@
   "LootItemChance": 2,
   "LootTable": "14",
   "ManaMaxSeed": 25,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 50,
   "Resistances": {
@@ -39,7 +39,7 @@
       "Max": 44
     },
     "Skill": "Swords",
-    "HitSound": 453,
-    "MissSound": 569
+    "HitSound": 452,
+    "MissSound": 568
   }
 }

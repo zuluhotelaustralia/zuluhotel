@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -37,15 +38,17 @@ namespace ZuluContent.Configuration
         {
             LoadCreatures();
         }
-        
+
         private void LoadCreatures()
         {
             Console.Write(
                 $"\tDeserializeJsonConfig<CreatureConfiguration>: loading templates from {TemplatePath}*.json ... ");
-            
+
+
             var failed = new ConcurrentBag<string>();
 
-            var files = Directory.GetFiles(TemplatePath, "*.json", new EnumerationOptions {RecurseSubdirectories = true});
+            var files = Directory.GetFiles(TemplatePath, "*.json",
+                new EnumerationOptions {RecurseSubdirectories = true});
             Parallel.ForEach(files, file =>
             {
                 try
@@ -60,6 +63,8 @@ namespace ZuluContent.Configuration
 
                     if (Entries.ContainsKey(key))
                         Entries.Remove(key, out _);
+
+                    Convert(file, props);
 
                     Entries.TryAdd(key, props);
                 }
@@ -87,6 +92,25 @@ namespace ZuluContent.Configuration
         static CreatureConfiguration()
         {
             CommandSystem.Register("LoadCreatureTemplates", AccessLevel.Owner, _ => Instance.LoadCreatures());
+        }
+        
+        private static void Convert(string file, CreatureProperties props)
+        {
+            var key = Path.GetFileNameWithoutExtension(file);
+
+            if (props.WeaponAbility != null)
+            {
+                props.Attack.Ability = props.WeaponAbility;
+                if (props.WeaponAbilityChance != null)
+                {
+                    props.Attack.AbilityChance = props.WeaponAbilityChance;
+                }
+
+                props.WeaponAbility = null;
+                props.WeaponAbilityChance = null;
+            }
+            
+            JsonConfig.Serialize(file, props, SerializerOptions);
         }
     }
 }

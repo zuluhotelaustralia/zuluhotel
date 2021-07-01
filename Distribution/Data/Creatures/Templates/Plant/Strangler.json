@@ -6,10 +6,11 @@
   "Int": 255,
   "Dex": 400,
   "ActiveSpeed": 0.15,
+  "PassiveSpeed": 0.3,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BardImmune": true,
-  "BaseSoundID": 358,
+  "BaseSoundID": 904,
   "Body": 28,
   "CanRummageCorpses": true,
   "CreatureType": "Plant",
@@ -23,7 +24,6 @@
   "LootItemLevel": 8,
   "LootTable": "201",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.3,
   "PerceptionRange": 10,
   "StamMaxSeed": 500,
   "Tamable": false,
@@ -45,7 +45,7 @@
   "Skills": {
     "Poisoning": 90,
     "Tactics": 150,
-    "Macing": 200,
+    "Wrestling": 200,
     "MagicResist": 200,
     "DetectHidden": 200,
     "Hiding": 200,
@@ -57,7 +57,7 @@
       "Min": 11,
       "Max": 41
     },
-    "HitSound": 360,
-    "MissSound": 361
+    "HitSound": 359,
+    "MissSound": 360
   }
 }

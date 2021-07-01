@@ -6,8 +6,9 @@
   "Int": 400,
   "Dex": 150,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
-  "BaseSoundID": 363,
+  "BaseSoundID": 362,
   "Body": 103,
   "CanFly": true,
   "CanRummageCorpses": true,
@@ -26,7 +27,6 @@
   "LootTable": "35",
   "ManaMaxSeed": 200,
   "MinTameSkill": 145,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 140,
   "StamMaxSeed": 140,
@@ -50,7 +50,7 @@
     "Parry": 80,
     "MagicResist": 110,
     "Tactics": 120,
-    "Macing": 140,
+    "Wrestling": 140,
     "DetectHidden": 130
   },
   "Attack": {
@@ -59,8 +59,8 @@
       "Min": 25,
       "Max": 75
     },
-    "HitSound": 365,
-    "MissSound": 569,
+    "HitSound": 364,
+    "MissSound": 568,
     "Ability": "BlackrockStrike",
     "AbilityChance": 1,
     "HasBreath": true

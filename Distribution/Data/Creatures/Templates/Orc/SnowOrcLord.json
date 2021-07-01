@@ -6,9 +6,10 @@
   "Int": 30,
   "Dex": 210,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysAttackable": true,
-  "BaseSoundID": 431,
+  "BaseSoundID": 1114,
   "Body": 7,
   "CanRummageCorpses": true,
   "CreatureType": "Orc",
@@ -22,7 +23,6 @@
   "LootItemLevel": 2,
   "LootTable": "42",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 100,
   "StamMaxSeed": 80,
@@ -36,7 +36,7 @@
       "Min": 8,
       "Max": 64
     },
-    "HitSound": 433,
-    "MissSound": 569
+    "HitSound": 432,
+    "MissSound": 568
   }
 }

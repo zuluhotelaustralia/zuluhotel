@@ -6,8 +6,10 @@
   "Int": 60,
   "Dex": 60,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysAttackable": true,
+  "BaseSoundID": 471,
   "Body": 400,
   "CanRummageCorpses": true,
   "CreatureType": "Human",
@@ -18,10 +20,8 @@
   "Hue": 33784,
   "LootTable": "47",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "RiseCreatureDelay": "00:00:25",
-  "RiseCreatureTemplate": "Spectre",
   "StamMaxSeed": 50,
   "Skills": {
     "Tactics": 50
@@ -30,6 +30,7 @@
     "Damage": {
       "Min": 0,
       "Max": 0
-    }
+    },
+    "MissSound": 568
   }
 }

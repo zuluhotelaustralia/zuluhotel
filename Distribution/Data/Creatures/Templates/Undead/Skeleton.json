@@ -6,8 +6,10 @@
   "Int": 30,
   "Dex": 70,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
+  "BaseSoundID": 451,
   "Body": 57,
   "CanRummageCorpses": true,
   "CreatureType": "Undead",
@@ -19,7 +21,6 @@
   "Hue": 33784,
   "LootTable": "15",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 60,
   "Resistances": {
@@ -28,13 +29,14 @@
   "Skills": {
     "Parry": 50,
     "Tactics": 60,
-    "Macing": 50,
+    "Wrestling": 50,
     "MagicResist": 20
   },
   "Attack": {
     "Damage": {
       "Min": 4,
       "Max": 16
-    }
+    },
+    "MissSound": 568
   }
 }

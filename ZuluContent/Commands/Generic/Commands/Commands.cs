@@ -445,9 +445,9 @@ namespace Server.Commands.Generic
         {
             if (e.Length >= 1)
             {
-                var t = AssemblyHandler.FindTypeByName(e.GetString(0));
+                var input = e.GetString(0);
 
-                if (t == null)
+                if (AssemblyHandler.FindTypeByName(input) == null && !Creatures.Exists(input))
                 {
                     e.Mobile.SendMessage("No type with that name was found.");
 

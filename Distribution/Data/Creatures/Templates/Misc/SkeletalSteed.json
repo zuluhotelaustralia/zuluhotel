@@ -6,6 +6,7 @@
   "Int": 60,
   "Dex": 55,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Animal",
   "AlwaysAttackable": true,
   "BaseSoundID": 168,
@@ -21,7 +22,6 @@
   "Karma": 3,
   "ManaMaxSeed": 60,
   "MinTameSkill": 120,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 130,
   "StamMaxSeed": 55,
@@ -32,9 +32,12 @@
     "Wrestling": 80
   },
   "Attack": {
+    "Speed": 35,
     "Damage": {
-      "Min": 2,
-      "Max": 16
-    }
+      "Min": 8,
+      "Max": 10
+    },
+    "HitSound": 170,
+    "MissSound": 568
   }
 }

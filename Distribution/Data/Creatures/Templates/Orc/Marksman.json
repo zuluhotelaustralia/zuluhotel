@@ -6,9 +6,10 @@
   "Int": 35,
   "Dex": 190,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Archer",
   "AlwaysMurderer": true,
-  "BaseSoundID": 230,
+  "BaseSoundID": 1114,
   "Body": 17,
   "CanRummageCorpses": true,
   "CreatureType": "Orc",
@@ -20,14 +21,13 @@
   "Hue": 0,
   "LootTable": "52",
   "ManaMaxSeed": 25,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 80,
   "StamMaxSeed": 90,
   "Skills": {
     "MagicResist": 50,
     "Tactics": 100,
-    "Macing": 65,
+    "Wrestling": 65,
     "Archery": 100
   },
   "Attack": {
@@ -36,7 +36,7 @@
       "Min": 3,
       "Max": 12
     },
-    "HitSound": 232,
-    "MissSound": 569
+    "HitSound": 231,
+    "MissSound": 568
   }
 }

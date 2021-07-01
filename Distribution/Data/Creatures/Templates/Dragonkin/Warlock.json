@@ -6,9 +6,10 @@
   "Int": 295,
   "Dex": 180,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 419,
+  "BaseSoundID": 418,
   "Body": 33,
   "CanRummageCorpses": true,
   "CreatureType": "Dragonkin",
@@ -24,7 +25,6 @@
   "LootItemLevel": 2,
   "LootTable": "55",
   "ManaMaxSeed": 155,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 105,
   "SaySpellMantra": true,
@@ -41,7 +41,7 @@
   },
   "Skills": {
     "Tactics": 50,
-    "Macing": 50,
+    "Wrestling": 50,
     "MagicResist": 90,
     "Magery": 110
   },
@@ -51,7 +51,7 @@
       "Min": 4,
       "Max": 32
     },
-    "HitSound": 421,
-    "MissSound": 569
+    "HitSound": 420,
+    "MissSound": 568
   }
 }

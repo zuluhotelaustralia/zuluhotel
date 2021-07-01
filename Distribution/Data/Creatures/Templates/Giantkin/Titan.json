@@ -6,9 +6,10 @@
   "Int": 210,
   "Dex": 180,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 605,
+  "BaseSoundID": 609,
   "Body": 76,
   "CanRummageCorpses": true,
   "CreatureType": "Giantkin",
@@ -22,7 +23,6 @@
   "LootItemLevel": 4,
   "LootTable": "22",
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 100,
   "StamMaxSeed": 300,
@@ -44,7 +44,7 @@
     "Parry": 50,
     "Magery": 120,
     "Tactics": 100,
-    "Macing": 110,
+    "Wrestling": 110,
     "MagicResist": 90
   },
   "Attack": {
@@ -53,7 +53,7 @@
       "Min": 8,
       "Max": 43
     },
-    "HitSound": 607,
-    "MissSound": 361
+    "HitSound": 606,
+    "MissSound": 360
   }
 }

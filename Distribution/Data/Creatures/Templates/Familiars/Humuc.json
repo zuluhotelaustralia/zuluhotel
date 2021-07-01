@@ -6,9 +6,10 @@
   "Int": 75,
   "Dex": 100,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.5,
   "AiType": "AI_Familiar",
   "AlwaysMurderer": false,
-  "BaseSoundID": 423,
+  "BaseSoundID": 422,
   "Body": 39,
   "CanFly": true,
   "CanRummageCorpses": true,
@@ -22,7 +23,6 @@
   "InitialInnocent": true,
   "ManaMaxSeed": 75,
   "MinTameSkill": 0,
-  "PassiveSpeed": 0.5,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 150,
   "SaySpellMantra": true,
@@ -32,7 +32,7 @@
     "MagicImmunity": 8
   },
   "Skills": {
-    "Macing": 150,
+    "Wrestling": 150,
     "Tactics": 50,
     "MagicResist": 160,
     "Magery": 75
@@ -44,8 +44,8 @@
       "Max": 2
     },
     "Skill": "Macing",
-    "HitSound": 425,
-    "MissSound": 569
+    "HitSound": 424,
+    "MissSound": 568
   },
   "Equipment": [
     {

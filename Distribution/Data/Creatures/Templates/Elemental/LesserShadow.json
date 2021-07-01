@@ -6,9 +6,10 @@
   "Int": 500,
   "Dex": 200,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 641,
+  "BaseSoundID": 640,
   "Body": 573,
   "CanRummageCorpses": true,
   "CanSwim": true,
@@ -22,7 +23,6 @@
   "LootItemLevel": 3,
   "LootTable": "77",
   "ManaMaxSeed": 125,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 80,
   "Tamable": false,
@@ -44,7 +44,7 @@
   "Skills": {
     "MagicResist": 105,
     "Tactics": 125,
-    "Fencing": 130,
+    "Wrestling": 130,
     "EvalInt": 100,
     "DetectHidden": 130
   },
@@ -54,8 +54,8 @@
       "Min": 13,
       "Max": 53
     },
-    "HitSound": 643,
-    "MissSound": 642,
+    "HitSound": 642,
+    "MissSound": 641,
     "Ability": {
       "Type": "SpellStrike",
       "SpellType": "DarknessSpell"

@@ -6,9 +6,10 @@
   "Int": 35,
   "Dex": 135,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 314,
+  "BaseSoundID": 313,
   "Body": 41,
   "CanRummageCorpses": true,
   "CreatureType": "Orc",
@@ -20,13 +21,12 @@
   "Hue": 1154,
   "LootTable": "43",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 95,
   "StamMaxSeed": 50,
   "Skills": {
     "MagicResist": 60,
-    "Macing": 85,
+    "Wrestling": 85,
     "Tactics": 80
   },
   "Attack": {
@@ -35,7 +35,7 @@
       "Min": 8,
       "Max": 43
     },
-    "HitSound": 316,
-    "MissSound": 569
+    "HitSound": 315,
+    "MissSound": 568
   }
 }

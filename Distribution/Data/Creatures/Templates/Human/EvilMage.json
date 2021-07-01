@@ -6,9 +6,10 @@
   "Int": 385,
   "Dex": 90,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysAttackable": true,
-  "BaseSoundID": 314,
+  "BaseSoundID": 471,
   "Body": 400,
   "CanRummageCorpses": true,
   "CreatureType": "Human",
@@ -21,7 +22,6 @@
   "LootItemChance": 2,
   "LootTable": "57",
   "ManaMaxSeed": 105,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 94,
   "SaySpellMantra": true,
@@ -45,8 +45,8 @@
       "Min": 4,
       "Max": 40
     },
-    "HitSound": 316,
-    "MissSound": 569
+    "HitSound": 315,
+    "MissSound": 568
   },
   "Equipment": [
     {

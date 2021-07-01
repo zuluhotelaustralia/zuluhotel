@@ -6,9 +6,10 @@
   "Int": 55,
   "Dex": 135,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 592,
+  "BaseSoundID": 594,
   "Body": 71,
   "CanRummageCorpses": true,
   "CreatureType": "Terathan",
@@ -20,7 +21,6 @@
   "Hue": 0,
   "LootTable": "64",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 70,
   "StamMaxSeed": 125,
@@ -36,7 +36,7 @@
       "Max": 44
     },
     "Skill": "Swords",
-    "HitSound": 594,
-    "MissSound": 595
+    "HitSound": 593,
+    "MissSound": 594
   }
 }

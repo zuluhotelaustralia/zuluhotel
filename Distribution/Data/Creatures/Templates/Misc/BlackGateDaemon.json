@@ -6,6 +6,7 @@
   "Int": 290,
   "Dex": 165,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysAttackable": true,
   "BaseSoundID": 168,
@@ -20,7 +21,6 @@
   "Hue": 0,
   "Karma": 5,
   "ManaMaxSeed": 465,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 150,
   "StamMaxSeed": 165,
@@ -36,9 +36,12 @@
     "Anatomy": 25
   },
   "Attack": {
+    "Speed": 35,
     "Damage": {
-      "Min": 2,
-      "Max": 16
-    }
+      "Min": 8,
+      "Max": 10
+    },
+    "HitSound": 170,
+    "MissSound": 568
   }
 }

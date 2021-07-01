@@ -6,6 +6,7 @@
   "Int": 300,
   "Dex": 200,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Healer",
   "Body": 401,
   "CanRummageCorpses": true,
@@ -18,7 +19,6 @@
   "Hue": 33784,
   "InitialInnocent": true,
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 100,
   "Skills": {
@@ -28,6 +28,7 @@
     "Damage": {
       "Min": 0,
       "Max": 0
-    }
+    },
+    "MissSound": 568
   }
 }

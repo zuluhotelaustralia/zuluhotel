@@ -6,9 +6,10 @@
   "Int": 290,
   "Dex": 90,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 434,
+  "BaseSoundID": 1114,
   "Body": 17,
   "CanRummageCorpses": true,
   "CreatureType": "Orc",
@@ -22,7 +23,6 @@
   "LootItemLevel": 1,
   "LootTable": "31",
   "ManaMaxSeed": 90,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 115,
   "SaySpellMantra": true,
@@ -33,7 +33,7 @@
   "Skills": {
     "MagicResist": 80,
     "Tactics": 50,
-    "Macing": 75,
+    "Wrestling": 75,
     "Magery": 100
   },
   "Attack": {
@@ -42,7 +42,7 @@
       "Min": 4,
       "Max": 32
     },
-    "HitSound": 436,
-    "MissSound": 569
+    "HitSound": 435,
+    "MissSound": 568
   }
 }

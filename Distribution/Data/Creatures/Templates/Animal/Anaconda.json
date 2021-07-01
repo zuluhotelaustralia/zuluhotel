@@ -6,10 +6,11 @@
   "Int": 0,
   "Dex": 500,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "AutoDispel": true,
-  "BaseSoundID": 363,
+  "BaseSoundID": 219,
   "Body": 21,
   "CanRummageCorpses": true,
   "CreatureType": "Animal",
@@ -20,7 +21,6 @@
   "HitsMax": 2250,
   "Hue": 1157,
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "StamMaxSeed": 400,
   "TargetAcquireExhaustion": true,
@@ -44,7 +44,7 @@
       "Min": 10,
       "Max": 60
     },
-    "HitSound": 365,
-    "MissSound": 569
+    "HitSound": 364,
+    "MissSound": 568
   }
 }

@@ -6,10 +6,11 @@
   "Int": 210,
   "Dex": 300,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.2,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BardImmune": true,
-  "BaseSoundID": 570,
+  "BaseSoundID": 471,
   "Body": 400,
   "CanRummageCorpses": true,
   "ClassLevel": 6,
@@ -22,7 +23,6 @@
   "Hue": 1002,
   "LootTable": "59",
   "ManaMaxSeed": 200,
-  "PassiveSpeed": 0.2,
   "PerceptionRange": 10,
   "StamMaxSeed": 200,
   "TargetAcquireExhaustion": true,
@@ -36,8 +36,8 @@
       "Min": 33,
       "Max": 45
     },
-    "HitSound": 572,
-    "MissSound": 570
+    "HitSound": 571,
+    "MissSound": 569
   },
   "Equipment": [
     {

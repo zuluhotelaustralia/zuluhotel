@@ -6,9 +6,10 @@
   "Int": 60,
   "Dex": 125,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 452,
+  "BaseSoundID": 451,
   "Body": 50,
   "CanRummageCorpses": true,
   "CreatureType": "Undead",
@@ -21,7 +22,6 @@
   "LootItemChance": 4,
   "LootTable": "10",
   "ManaMaxSeed": 50,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 115,
   "Resistances": {
@@ -39,7 +39,7 @@
       "Min": 8,
       "Max": 44
     },
-    "HitSound": 454,
-    "MissSound": 569
+    "HitSound": 453,
+    "MissSound": 568
   }
 }

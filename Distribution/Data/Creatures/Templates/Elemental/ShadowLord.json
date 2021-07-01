@@ -6,9 +6,10 @@
   "Int": 200,
   "Dex": 300,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
-  "BaseSoundID": 641,
+  "BaseSoundID": 640,
   "Body": 146,
   "CanRummageCorpses": true,
   "CanSwim": true,
@@ -22,7 +23,6 @@
   "LootItemLevel": 5,
   "LootTable": "79",
   "ManaMaxSeed": 125,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "SaySpellMantra": true,
   "StamMaxSeed": 80,
@@ -35,7 +35,7 @@
   "Skills": {
     "MagicResist": 150,
     "Tactics": 100,
-    "Fencing": 150,
+    "Wrestling": 150,
     "DetectHidden": 130
   },
   "Attack": {
@@ -44,8 +44,8 @@
       "Min": 16,
       "Max": 46
     },
-    "HitSound": 643,
-    "MissSound": 642,
+    "HitSound": 642,
+    "MissSound": 641,
     "Ability": "TriElementalStrike",
     "AbilityChance": 1
   },

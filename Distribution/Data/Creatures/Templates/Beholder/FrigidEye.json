@@ -6,9 +6,10 @@
   "Int": 450,
   "Dex": 100,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 378,
+  "BaseSoundID": 377,
   "Body": 22,
   "CanRummageCorpses": true,
   "CreatureType": "Beholder",
@@ -21,7 +22,6 @@
   "LootItemChance": 2,
   "LootTable": "45",
   "ManaMaxSeed": 120,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 95,
   "StamMaxSeed": 65,
@@ -36,7 +36,7 @@
   "Skills": {
     "MagicResist": 80,
     "Tactics": 65,
-    "Macing": 100,
+    "Wrestling": 100,
     "Magery": 95
   },
   "Attack": {
@@ -45,7 +45,7 @@
       "Min": 5,
       "Max": 35
     },
-    "HitSound": 380,
-    "MissSound": 569
+    "HitSound": 379,
+    "MissSound": 568
   }
 }

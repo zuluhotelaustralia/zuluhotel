@@ -6,9 +6,10 @@
   "Int": 255,
   "Dex": 300,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 605,
+  "BaseSoundID": 604,
   "Body": 75,
   "CanRummageCorpses": true,
   "CreatureType": "Elemental",
@@ -22,7 +23,6 @@
   "LootItemLevel": 5,
   "LootTable": "9",
   "ManaMaxSeed": 1600,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "SaySpellMantra": true,
   "StamMaxSeed": 90,
@@ -37,7 +37,7 @@
   },
   "Skills": {
     "Tactics": 180,
-    "Macing": 180,
+    "Wrestling": 180,
     "Magery": 180,
     "MagicResist": 180
   },
@@ -47,7 +47,7 @@
       "Min": 6,
       "Max": 60
     },
-    "HitSound": 607,
-    "MissSound": 361
+    "HitSound": 606,
+    "MissSound": 360
   }
 }

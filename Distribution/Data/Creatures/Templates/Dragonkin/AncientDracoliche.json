@@ -6,9 +6,10 @@
   "Int": 1500,
   "Dex": 175,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 362,
+  "BaseSoundID": 1160,
   "Body": 104,
   "CanRummageCorpses": true,
   "ClassLevel": 5,
@@ -24,7 +25,6 @@
   "LootTable": "9",
   "ManaMaxSeed": 1500,
   "MinTameSkill": 170,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 170,
   "SaySpellMantra": false,
@@ -52,7 +52,7 @@
   "Skills": {
     "Parry": 200,
     "Tactics": 200,
-    "Fencing": 150,
+    "Wrestling": 150,
     "MagicResist": 200,
     "Magery": 200,
     "DetectHidden": 200,
@@ -62,6 +62,7 @@
     "Damage": {
       "Min": 0,
       "Max": 0
-    }
+    },
+    "MissSound": 568
   }
 }

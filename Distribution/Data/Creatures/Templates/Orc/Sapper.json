@@ -6,10 +6,11 @@
   "Int": 30,
   "Dex": 90,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Melee",
   "AlwaysMurderer": true,
   "BardImmune": true,
-  "BaseSoundID": 363,
+  "BaseSoundID": 1114,
   "Body": 17,
   "CanRummageCorpses": true,
   "CreatureType": "Orc",
@@ -23,7 +24,6 @@
   "LootItemLevel": 3,
   "LootTable": "42",
   "ManaMaxSeed": 0,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "StamMaxSeed": 80,
   "Tamable": false,
@@ -37,8 +37,8 @@
       "Min": 1,
       "Max": 8
     },
-    "HitSound": 365,
-    "MissSound": 569
+    "HitSound": 364,
+    "MissSound": 568
   },
   "Equipment": [
     {

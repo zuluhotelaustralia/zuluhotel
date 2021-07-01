@@ -6,9 +6,10 @@
   "Int": 285,
   "Dex": 170,
   "ActiveSpeed": 0.2,
+  "PassiveSpeed": 0.4,
   "AiType": "AI_Mage",
   "AlwaysMurderer": true,
-  "BaseSoundID": 433,
+  "BaseSoundID": 461,
   "Body": 54,
   "CanRummageCorpses": true,
   "CreatureType": "Troll",
@@ -24,7 +25,6 @@
   "LootItemLevel": 2,
   "LootTable": "54",
   "ManaMaxSeed": 85,
-  "PassiveSpeed": 0.4,
   "PerceptionRange": 10,
   "ProvokeSkillOverride": 100,
   "SaySpellMantra": true,
@@ -35,7 +35,7 @@
   "Skills": {
     "MagicResist": 60,
     "Tactics": 60,
-    "Macing": 90,
+    "Wrestling": 90,
     "Magery": 90
   },
   "Attack": {
@@ -44,7 +44,7 @@
       "Min": 8,
       "Max": 64
     },
-    "HitSound": 435,
-    "MissSound": 569
+    "HitSound": 434,
+    "MissSound": 568
   }
 }
