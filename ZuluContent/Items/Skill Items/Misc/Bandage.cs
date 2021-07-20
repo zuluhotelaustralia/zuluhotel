@@ -198,9 +198,10 @@ namespace Server.Items
             {
                 var healing = Healer.Skills[primarySkill].Value;
                 var anatomy = Healer.Skills[secondarySkill].Value;
-                var difficulty = ResDifficulty * PointsMultiplier;
+                var difficulty = ResDifficulty;
+                var points = difficulty * PointsMultiplier;
 
-                if (healing >= 90.0 && anatomy >= 90.0 && Healer.ShilCheckSkill(primarySkill, difficulty))
+                if (healing >= 90.0 && anatomy >= 90.0 && Healer.ShilCheckSkill(primarySkill, difficulty, points))
                 {
                     if (Patient.Map == null || !Patient.Map.CanFit(Patient.Location, 16, false, false))
                     {
@@ -260,7 +261,6 @@ namespace Server.Items
             else
             {
                 patientNumber = -1;
-
                 
                 var difficulty = Patient.HitsMax - Patient.Hits;
                 var points = difficulty * PointsMultiplier;

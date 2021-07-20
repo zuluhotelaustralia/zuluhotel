@@ -6,6 +6,7 @@ using Server.Engines.Magic;
 using Server.Mobiles;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 using ZuluContent.Zulu.Items;
@@ -116,6 +117,19 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static bool TrySetResist<T>(this T mobile, ElementalType type, ElementalProtectionLevel level)
             where T : Mobile, IEnchanted => TrySetResist((IEnchanted) mobile, type, level);
 
+        public static PoisonLevel GetPoisonResist(IEnchanted ench)
+        {
+            var resistImmunity = ench.GetDistinctEnchantment<PoisonImmunity>()?.Value ?? 0;
+            if (resistImmunity > PoisonLevel.None)
+                return resistImmunity;
+
+            var resistProtection = ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0;
+            if (resistProtection > PoisonLevel.None)
+                return resistProtection;
+
+            return PoisonLevel.None;
+        }
+
         public static int GetResist(this IEnchanted ench, ElementalType type) => type switch
         {
             ElementalType.Water => ench.GetDistinctEnchantment<WaterProtection>()?.Value ?? 0,
@@ -126,7 +140,7 @@ namespace ZuluContent.Zulu.Engines.Magic
             ElementalType.Necro => ench.GetDistinctEnchantment<NecroProtection>()?.Value ?? 0,
             ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
             ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
-            ElementalType.Poison => (int) (ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
+            ElementalType.Poison => (int) GetPoisonResist(ench),
             ElementalType.MagicImmunity => ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0,
             ElementalType.MagicReflection => (ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
