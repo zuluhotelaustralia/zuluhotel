@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Scripts.Zulu.Packets;
 using Server.Accounting;
 using Server.Engines.Help;
 using Server.Logging;
@@ -448,6 +449,8 @@ namespace Server.Misc
             {
                 AccountAttackLimiter.RegisterInvalidAccess(e.State);
             }
+            
+            e.State.PacketEncoder = OutgoingPacketInterceptor.Intercept;
         }
 
         public static bool CheckAccount(Mobile mobCheck, Mobile accCheck)
