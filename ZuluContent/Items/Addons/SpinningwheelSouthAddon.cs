@@ -106,7 +106,6 @@ namespace Server.Items
                 m_Callback = callback;
                 m_From = from;
                 m_Hue = hue;
-                Priority = TimerPriority.TwoFiftyMS;
             }
 
             protected override void OnTick()

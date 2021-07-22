@@ -313,7 +313,6 @@ namespace Server.Items
             public InternalTimer(BandageContext context, TimeSpan delay) : base(delay)
             {
                 m_Context = context;
-                Priority = TimerPriority.FiftyMS;
             }
 
             protected override void OnTick()

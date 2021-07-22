@@ -143,7 +143,6 @@ namespace Server.Spells
             {
                 m_Item = item;
                 m_End = Core.TickCount + (int)duration.TotalMilliseconds;
-                Priority = TimerPriority.FiftyMS;
             }
 
             protected override void OnTick()

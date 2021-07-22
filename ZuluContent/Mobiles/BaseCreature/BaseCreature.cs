@@ -126,7 +126,6 @@ namespace Server.Mobiles
             public DeleteTimer(Mobile creature, TimeSpan delay) : base(delay)
             {
                 m = creature;
-                Priority = TimerPriority.OneMinute;
             }
 
             protected override void OnTick()

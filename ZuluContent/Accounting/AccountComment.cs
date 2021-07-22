@@ -8,7 +8,7 @@ namespace Server.Accounting
         private string m_Content;
 
         /// <summary>
-        ///   Constructs a new AccountComment instance.
+        ///     Constructs a new AccountComment instance.
         /// </summary>
         /// <param name="addedBy">Initial AddedBy value.</param>
         /// <param name="content">Initial Content value.</param>
@@ -16,17 +16,17 @@ namespace Server.Accounting
         {
             AddedBy = addedBy;
             m_Content = content;
-            LastModified = DateTime.UtcNow;
+            LastModified = Core.Now;
         }
 
         /// <summary>
-        ///   Deserializes an AccountComment instance from an xml element.
+        ///     Deserializes an AccountComment instance from an xml element.
         /// </summary>
         /// <param name="node">The XmlElement instance from which to deserialize.</param>
         public AccountComment(XmlElement node)
         {
             AddedBy = Utility.GetAttribute(node, "addedBy", "empty");
-            LastModified = Utility.GetXMLDateTime(Utility.GetAttribute(node, "lastModified"), DateTime.UtcNow);
+            LastModified = Utility.GetXMLDateTime(Utility.GetAttribute(node, "lastModified"), Core.Now);
             m_Content = Utility.GetText(node, "");
         }
 
@@ -42,12 +42,12 @@ namespace Server.Accounting
         }
 
         /// <summary>
-        ///   A string representing who added this comment.
+        ///     A string representing who added this comment.
         /// </summary>
         public string AddedBy { get; }
 
         /// <summary>
-        ///   Gets or sets the body of this comment. Setting this value will reset LastModified.
+        ///     Gets or sets the body of this comment. Setting this value will reset LastModified.
         /// </summary>
         public string Content
         {
@@ -55,32 +55,14 @@ namespace Server.Accounting
             set
             {
                 m_Content = value;
-                LastModified = DateTime.UtcNow;
+                LastModified = Core.Now;
             }
         }
 
         /// <summary>
-        ///   The date and time when this account was last modified -or- the comment creation time, if never modified.
+        ///     The date and time when this account was last modified -or- the comment creation time, if never modified.
         /// </summary>
         public DateTime LastModified { get; private set; }
-
-        /// <summary>
-        ///   Serializes this AccountComment instance to an XmlTextWriter.
-        /// </summary>
-        /// <param name="xml">The XmlTextWriter instance from which to serialize.</param>
-        public void Save(XmlTextWriter xml)
-        {
-            xml.WriteStartElement("comment");
-
-            xml.WriteAttributeString("addedBy", AddedBy);
-
-            xml.WriteAttributeString("lastModified",
-                XmlConvert.ToString(LastModified, XmlDateTimeSerializationMode.Utc));
-
-            xml.WriteString(m_Content);
-
-            xml.WriteEndElement();
-        }
 
         /// <summary>
         ///     Serializes this AccountComment instance.

@@ -140,7 +140,6 @@ public TrashBarrel( Serial serial ) : base( serial )
 			public EmptyTimer( TrashBarrel barrel ) : base( TimeSpan.FromMinutes( 3.0 ) )
 			{
 				m_Barrel = barrel;
-				Priority = TimerPriority.FiveSeconds;
 			}
 
 			protected override void OnTick()

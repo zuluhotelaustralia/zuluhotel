@@ -475,7 +475,6 @@ namespace Server.Spells
             public AnimTimer(Spell spell, int count) : base(TimeSpan.Zero, AnimateDelay, count)
             {
                 m_Spell = spell;
-                Priority = TimerPriority.FiftyMS;
             }
 
             protected override void OnTick()

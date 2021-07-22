@@ -95,7 +95,7 @@ namespace Scripts.Zulu.Packets
                 text
             );
 
-            buffer = buffer.SliceToLength(pLength);
+            buffer = buffer[..pLength];
             length = NetworkCompression.Compress(buffer, output);
         }
         
@@ -127,7 +127,7 @@ namespace Scripts.Zulu.Packets
                 text
             );
 
-            buffer = buffer.SliceToLength(pLength);
+            buffer = buffer[..pLength];
             length = NetworkCompression.Compress(buffer, output);
         }
         
@@ -183,7 +183,7 @@ namespace Scripts.Zulu.Packets
                 text
             );
 
-            buffer = buffer.SliceToLength(pLength);
+            buffer = buffer[..pLength];
 
             length = NetworkCompression.Compress(buffer, output);
         }
