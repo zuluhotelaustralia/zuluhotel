@@ -383,7 +383,7 @@ namespace Server.Mobiles
 
         public virtual double SpitWebMaxDelay
         {
-            get { return 20.0; }
+            get { return 15.0; }
         }
         
         #endregion
@@ -3577,15 +3577,17 @@ namespace Server.Mobiles
         {
             Say("The spider spits a web!");
 
-            var location = target.Location;
+            var toLocation = target.Location;
             
             await Timer.Pause(300);
-
-            var web = new SpiderWeb(location, target.Map, TimeSpan.FromMinutes(2));
             
-            MovingParticles(web, 0xEE4, 7, 0, false, true, 3043, 4043, 0x211);
+            Effects.SendMovingEffect(target.Map, 0xEE4, Location, toLocation, 7, 0);
 
-            if (target.Location == location)
+            await Timer.Pause(200);
+            
+            new SpiderWeb(toLocation, target.Map, TimeSpan.FromMinutes(2));
+
+            if (target.Location == toLocation)
             {
                 SpiderWeb.Stick(target);
             }

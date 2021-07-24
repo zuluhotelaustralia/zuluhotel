@@ -660,8 +660,8 @@ namespace Server.Items
                 bc.WeaponAbilityChance >= Utility.RandomDouble())
                 ab.OnHit(attacker, defender, ref damage);
 
-            if (damage < 1)
-                damage = 1;
+            if (damage < 2)
+                damage = 2;
 
             CheckApplyPoison(attacker, defender);
 
