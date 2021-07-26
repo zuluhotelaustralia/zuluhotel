@@ -107,7 +107,7 @@ namespace Server.Mobiles
         public virtual OppositionGroup OppositionGroup { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual TimeSpan ReacquireDelay { get; set; }
+        public virtual TimeSpan ReacquireDelay { get; set; } = TimeSpan.FromSeconds(10);
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual int TreasureMapLevel { get; set; } = -1;
