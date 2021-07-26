@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Server.Logging;
 
 namespace Server.Accounting
 {
-    public class Accounts
+    public static class Accounts
     {
-        private static readonly Dictionary<string, IAccount>
-            _accountsByName = new(32, StringComparer.OrdinalIgnoreCase);
+        private static readonly ILogger logger = LogFactory.GetLogger(typeof(Accounts));
 
-        private static Dictionary<Serial, IAccount> _accountsById = new(32);
+        private static readonly Dictionary<string, Account> _accountsByName = new(32, StringComparer.OrdinalIgnoreCase);
+        private static Dictionary<Serial, Account> _accountsById = new(32);
         private static Serial _lastAccount;
         internal static List<Type> Types { get; } = new();
 
@@ -40,10 +41,10 @@ namespace Server.Accounting
         public static int Count => _accountsByName.Count;
 
         public static void Configure() =>
-            Persistence.Register(Serialize, WriteSnapshot, Deserialize);
+            Persistence.Register("Accounts", Serialize, WriteSnapshot, Deserialize);
 
         internal static void Serialize() =>
-            EntityPersistence.SaveEntities(_accountsById.Values, account => account.Serialize());
+            EntityPersistence.SaveEntities(_accountsById.Values, account => ((ISerializable)account).Serialize());
 
         internal static void WriteSnapshot(string basePath)
         {
@@ -53,20 +54,19 @@ namespace Server.Accounting
 
         public static IEnumerable<IAccount> GetAccounts() => _accountsByName.Values;
 
-        public static IAccount GetAccount(string username)
+        public static Account GetAccount(string username)
         {
             _accountsByName.TryGetValue(username, out var a);
-
             return a;
         }
 
-        public static void Add(IAccount a)
+        public static void Add(Account a)
         {
             _accountsByName[a.Username] = a;
             _accountsById[a.Serial] = a;
         }
 
-        public static void Remove(IAccount a)
+        public static void Remove(Account a)
         {
             _accountsByName.Remove(a.Username);
             _accountsById.Remove(a.Serial);
@@ -85,7 +85,7 @@ namespace Server.Accounting
 
             IIndexInfo<Serial> indexInfo = new EntityTypeIndex("Accounts");
 
-            _accountsById = EntityPersistence.LoadIndex(path, indexInfo, out List<EntityIndex<IAccount>> accounts);
+            _accountsById = EntityPersistence.LoadIndex(path, indexInfo, out List<EntityIndex<Account>> accounts);
             EntityPersistence.LoadData(path, indexInfo, accounts);
 
             foreach (var a in _accountsById.Values)
@@ -100,6 +100,7 @@ namespace Server.Accounting
             doc.Load(filePath);
 
             var root = doc["accounts"];
+
             if (root == null)
             {
                 throw new FileLoadException("Unable to load xml file");
@@ -113,7 +114,7 @@ namespace Server.Accounting
                 }
                 catch
                 {
-                    Console.WriteLine("Warning: Account instance load failed");
+                    logger.Warning("Account instance load failed");
                 }
             }
         }

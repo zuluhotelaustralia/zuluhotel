@@ -1,6 +1,6 @@
 {
   "Clumsy": {
-    "Type": "Server.Spells.First.ClumsySpell",
+    "Type": "ClumsySpell",
     "Name": "Clumsy",
     "Mantra": "Uus Jux",
     "Circle": "First",
@@ -26,17 +26,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "CreateFood": {
-    "Type": "Server.Spells.First.CreateFoodSpell",
+    "Type": "CreateFoodSpell",
     "Name": "Create Food",
     "Mantra": "In Mani Ylem",
     "Circle": "First",
@@ -54,21 +54,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Feeblemind": {
-    "Type": "Server.Spells.First.FeeblemindSpell",
+    "Type": "FeeblemindSpell",
     "Name": "Feeblemind",
     "Mantra": "Rel Wis",
     "Circle": "First",
@@ -94,17 +94,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Heal": {
-    "Type": "Server.Spells.First.HealSpell",
+    "Type": "HealSpell",
     "Name": "Heal",
     "Mantra": "In Mani",
     "Circle": "First",
@@ -130,21 +130,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "MagicArrow": {
-    "Type": "Server.Spells.First.MagicArrowSpell",
+    "Type": "MagicArrowSpell",
     "Name": "Magic Arrow",
     "Mantra": "In Por Ylem",
     "Circle": "First",
@@ -170,13 +170,13 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "NightSight": {
-    "Type": "Server.Spells.First.NightSightSpell",
+    "Type": "NightSightSpell",
     "Name": "Night Sight",
     "Mantra": "In Lor",
     "Circle": "First",
@@ -202,17 +202,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "ReactiveArmor": {
-    "Type": "Server.Spells.First.ReactiveArmorSpell",
+    "Type": "ReactiveArmorSpell",
     "Name": "Reactive Armor",
     "Mantra": "Flam Sanct",
     "Circle": "First",
@@ -238,21 +238,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "Weaken": {
-    "Type": "Server.Spells.First.WeakenSpell",
+    "Type": "WeakenSpell",
     "Name": "Weaken",
     "Mantra": "Des Mani",
     "Circle": "First",
@@ -278,17 +278,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Agility": {
-    "Type": "Server.Spells.Second.AgilitySpell",
+    "Type": "AgilitySpell",
     "Name": "Agility",
     "Mantra": "Ex Uus",
     "Circle": "Second",
@@ -314,17 +314,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Cunning": {
-    "Type": "Server.Spells.Second.CunningSpell",
+    "Type": "CunningSpell",
     "Name": "Cunning",
     "Mantra": "Uus Wis",
     "Circle": "Second",
@@ -350,17 +350,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Cure": {
-    "Type": "Server.Spells.Second.CureSpell",
+    "Type": "CureSpell",
     "Name": "Cure",
     "Mantra": "An Nox",
     "Circle": "Second",
@@ -386,17 +386,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       }
     ]
   },
   "Harm": {
-    "Type": "Server.Spells.Second.HarmSpell",
+    "Type": "HarmSpell",
     "Name": "Harm",
     "Mantra": "An Mani",
     "Circle": "Second",
@@ -422,17 +422,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "MagicTrap": {
-    "Type": "Server.Spells.Second.MagicTrapSpell",
+    "Type": "MagicTrapSpell",
     "Name": "Magic Trap",
     "Mantra": "In Jux",
     "Circle": "Second",
@@ -458,21 +458,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "RemoveTrap": {
-    "Type": "Server.Spells.Second.RemoveTrapSpell",
+    "Type": "RemoveTrapSpell",
     "Name": "Remove Trap",
     "Mantra": "An Jux",
     "Circle": "Second",
@@ -498,17 +498,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "Protection": {
-    "Type": "Server.Spells.Second.ProtectionSpell",
+    "Type": "ProtectionSpell",
     "Name": "Protection",
     "Mantra": "Uus Sanct",
     "Circle": "Second",
@@ -534,21 +534,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "Strength": {
-    "Type": "Server.Spells.Second.StrengthSpell",
+    "Type": "StrengthSpell",
     "Name": "Strength",
     "Mantra": "Uus Mani",
     "Circle": "Second",
@@ -574,17 +574,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Bless": {
-    "Type": "Server.Spells.Third.BlessSpell",
+    "Type": "BlessSpell",
     "Name": "Bless",
     "Mantra": "Rel Sanct",
     "Circle": "Third",
@@ -610,17 +610,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Fireball": {
-    "Type": "Server.Spells.Third.FireballSpell",
+    "Type": "FireballSpell",
     "Name": "Fireball",
     "Mantra": "Vas Flam",
     "Circle": "Third",
@@ -646,13 +646,13 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       }
     ]
   },
   "MagicLock": {
-    "Type": "Server.Spells.Third.MagicLockSpell",
+    "Type": "MagicLockSpell",
     "Name": "Magic Lock",
     "Mantra": "An Por",
     "Circle": "Third",
@@ -678,21 +678,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "Poison": {
-    "Type": "Server.Spells.Third.PoisonSpell",
+    "Type": "PoisonSpell",
     "Name": "Poison",
     "Mantra": "In Nox",
     "Circle": "Third",
@@ -718,13 +718,13 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Telekinesis": {
-    "Type": "Server.Spells.Third.TelekinesisSpell",
+    "Type": "TelekinesisSpell",
     "Name": "Telekinesis",
     "Mantra": "Ort Por Ylem",
     "Circle": "Third",
@@ -750,17 +750,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Teleport": {
-    "Type": "Server.Spells.Third.TeleportSpell",
+    "Type": "TeleportSpell",
     "Name": "Teleport",
     "Mantra": "Rel Por",
     "Circle": "Third",
@@ -786,17 +786,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Unlock": {
-    "Type": "Server.Spells.Third.UnlockSpell",
+    "Type": "UnlockSpell",
     "Name": "Unlock Spell",
     "Mantra": "Ex Por",
     "Circle": "Third",
@@ -822,17 +822,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "WallOfStone": {
-    "Type": "Server.Spells.Third.WallOfStoneSpell",
+    "Type": "WallOfStoneSpell",
     "Name": "Wall of Stone",
     "Mantra": "In Sanct Ylem",
     "Circle": "Third",
@@ -858,17 +858,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       }
     ]
   },
   "ArchCure": {
-    "Type": "Server.Spells.Fourth.ArchCureSpell",
+    "Type": "ArchCureSpell",
     "Name": "Arch Cure",
     "Mantra": "Vas An Nox",
     "Circle": "Fourth",
@@ -894,21 +894,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "ArchProtection": {
-    "Type": "Server.Spells.Fourth.ArchProtectionSpell",
+    "Type": "ArchProtectionSpell",
     "Name": "Arch Protection",
     "Mantra": "Vas Uus Sanct",
     "Circle": "Fourth",
@@ -934,25 +934,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "Curse": {
-    "Type": "Server.Spells.Fourth.CurseSpell",
+    "Type": "CurseSpell",
     "Name": "Curse",
     "Mantra": "Des Sanct",
     "Circle": "Fourth",
@@ -978,21 +978,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "FireField": {
-    "Type": "Server.Spells.Fourth.FireFieldSpell",
+    "Type": "FireFieldSpell",
     "Name": "Fire Field",
     "Mantra": "In Flam Grav",
     "Circle": "Fourth",
@@ -1018,21 +1018,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "GreaterHeal": {
-    "Type": "Server.Spells.Fourth.GreaterHealSpell",
+    "Type": "GreaterHealSpell",
     "Name": "Greater Heal",
     "Mantra": "In Vas Mani",
     "Circle": "Fourth",
@@ -1058,25 +1058,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "Lightning": {
-    "Type": "Server.Spells.Fourth.LightningSpell",
+    "Type": "LightningSpell",
     "Name": "Lightning",
     "Mantra": "Por Ort Grav",
     "Circle": "Fourth",
@@ -1102,17 +1102,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "ManaDrain": {
-    "Type": "Server.Spells.Fourth.ManaDrainSpell",
+    "Type": "ManaDrainSpell",
     "Name": "Mana Drain",
     "Mantra": "Ort Rel",
     "Circle": "Fourth",
@@ -1138,21 +1138,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "Recall": {
-    "Type": "Server.Spells.Fourth.RecallSpell",
+    "Type": "RecallSpell",
     "Name": "Recall",
     "Mantra": "Kal Ort Por",
     "Circle": "Fourth",
@@ -1178,21 +1178,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "BladeSpirits": {
-    "Type": "Server.Spells.Fifth.BladeSpiritsSpell",
+    "Type": "BladeSpiritsSpell",
     "Name": "Blade Spirits",
     "Mantra": "In Jux Hur Ylem",
     "Circle": "Fifth",
@@ -1218,21 +1218,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "DispelField": {
-    "Type": "Server.Spells.Fifth.DispelFieldSpell",
+    "Type": "DispelFieldSpell",
     "Name": "Dispel Field",
     "Mantra": "An Grav",
     "Circle": "Fifth",
@@ -1258,25 +1258,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       }
     ]
   },
   "Incognito": {
-    "Type": "Server.Spells.Fifth.IncognitoSpell",
+    "Type": "IncognitoSpell",
     "Name": "Incognito",
     "Mantra": "Kal In Ex",
     "Circle": "Fifth",
@@ -1294,21 +1294,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "MagicReflect": {
-    "Type": "Server.Spells.Fifth.MagicReflectSpell",
+    "Type": "MagicReflectSpell",
     "Name": "Magic Reflection",
     "Mantra": "In Jux Sanct",
     "Circle": "Fifth",
@@ -1326,21 +1326,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "MindBlast": {
-    "Type": "Server.Spells.Fifth.MindBlastSpell",
+    "Type": "MindBlastSpell",
     "Name": "Mind Blast",
     "Mantra": "Por Corp Wis",
     "Circle": "Fifth",
@@ -1366,25 +1366,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "Paralyze": {
-    "Type": "Server.Spells.Fifth.ParalyzeSpell",
+    "Type": "ParalyzeSpell",
     "Name": "Paralyze",
     "Mantra": "An Ex Por",
     "Circle": "Fifth",
@@ -1410,21 +1410,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "PoisonField": {
-    "Type": "Server.Spells.Fifth.PoisonFieldSpell",
+    "Type": "PoisonFieldSpell",
     "Name": "Poison Field",
     "Mantra": "In Nox Grav",
     "Circle": "Fifth",
@@ -1450,21 +1450,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "SummonCreature": {
-    "Type": "Server.Spells.Fifth.SummonCreatureSpell",
+    "Type": "SummonCreatureSpell",
     "Name": "Summon Creature",
     "Mantra": "Kal Xen",
     "Circle": "Fifth",
@@ -1482,21 +1482,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "Dispel": {
-    "Type": "Server.Spells.Sixth.DispelSpell",
+    "Type": "DispelSpell",
     "Name": "Dispel",
     "Mantra": "An Ort",
     "Circle": "Sixth",
@@ -1522,21 +1522,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "EnergyBolt": {
-    "Type": "Server.Spells.Sixth.EnergyBoltSpell",
+    "Type": "EnergyBoltSpell",
     "Name": "Energy Bolt",
     "Mantra": "Corp Por",
     "Circle": "Sixth",
@@ -1562,17 +1562,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Explosion": {
-    "Type": "Server.Spells.Sixth.ExplosionSpell",
+    "Type": "ExplosionSpell",
     "Name": "Explosion",
     "Mantra": "Vas Ort Flam",
     "Circle": "Sixth",
@@ -1598,17 +1598,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Invisibility": {
-    "Type": "Server.Spells.Sixth.InvisibilitySpell",
+    "Type": "InvisibilitySpell",
     "Name": "Invisibility",
     "Mantra": "An Lor Xen",
     "Circle": "Sixth",
@@ -1634,17 +1634,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Mark": {
-    "Type": "Server.Spells.Sixth.MarkSpell",
+    "Type": "MarkSpell",
     "Name": "Mark",
     "Mantra": "Kal Por Ylem",
     "Circle": "Sixth",
@@ -1670,21 +1670,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "MassCurse": {
-    "Type": "Server.Spells.Sixth.MassCurseSpell",
+    "Type": "MassCurseSpell",
     "Name": "Mass Curse",
     "Mantra": "Vas Des Sanct",
     "Circle": "Sixth",
@@ -1710,25 +1710,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "ParalyzeField": {
-    "Type": "Server.Spells.Sixth.ParalyzeFieldSpell",
+    "Type": "ParalyzeFieldSpell",
     "Name": "Paralyze Field",
     "Mantra": "In Ex Grav",
     "Circle": "Sixth",
@@ -1754,21 +1754,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "Reveal": {
-    "Type": "Server.Spells.Sixth.RevealSpell",
+    "Type": "RevealSpell",
     "Name": "Reveal",
     "Mantra": "Wis Quas",
     "Circle": "Sixth",
@@ -1794,17 +1794,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "ChainLightning": {
-    "Type": "Server.Spells.Seventh.ChainLightningSpell",
+    "Type": "ChainLightningSpell",
     "Name": "Chain Lightning",
     "Mantra": "Vas Ort Grav",
     "Circle": "Seventh",
@@ -1830,25 +1830,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "EnergyField": {
-    "Type": "Server.Spells.Seventh.EnergyFieldSpell",
+    "Type": "EnergyFieldSpell",
     "Name": "Energy Field",
     "Mantra": "In Sanct Grav",
     "Circle": "Seventh",
@@ -1874,25 +1874,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "FlameStrike": {
-    "Type": "Server.Spells.Seventh.FlameStrikeSpell",
+    "Type": "FlameStrikeSpell",
     "Name": "Flame Strike",
     "Mantra": "Kal Vas Flam",
     "Circle": "Seventh",
@@ -1918,17 +1918,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "GateTravel": {
-    "Type": "Server.Spells.Seventh.GateTravelSpell",
+    "Type": "GateTravelSpell",
     "Name": "Gate Travel",
     "Mantra": "Vas Rel Por",
     "Circle": "Seventh",
@@ -1954,21 +1954,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "ManaVampire": {
-    "Type": "Server.Spells.Seventh.ManaVampireSpell",
+    "Type": "ManaVampireSpell",
     "Name": "Mana Vampire",
     "Mantra": "Ort Sanct",
     "Circle": "Seventh",
@@ -1994,25 +1994,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "MassDispel": {
-    "Type": "Server.Spells.Seventh.MassDispelSpell",
+    "Type": "MassDispelSpell",
     "Name": "Mass Dispel",
     "Mantra": "Vas An Ort",
     "Circle": "Seventh",
@@ -2038,25 +2038,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "MeteorSwarm": {
-    "Type": "Server.Spells.Seventh.MeteorSwarmSpell",
+    "Type": "MeteorSwarmSpell",
     "Name": "Meteor Swarm",
     "Mantra": "Flam Kal Des Ylem",
     "Circle": "Seventh",
@@ -2082,25 +2082,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "Polymorph": {
-    "Type": "Server.Spells.Seventh.PolymorphSpell",
+    "Type": "PolymorphSpell",
     "Name": "Polymorph",
     "Mantra": "Vas Ylem Rel",
     "Circle": "Seventh",
@@ -2118,21 +2118,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       }
     ]
   },
   "Earthquake": {
-    "Type": "Server.Spells.Eighth.EarthquakeSpell",
+    "Type": "EarthquakeSpell",
     "Name": "Earthquake",
     "Mantra": "In Vas Por",
     "Circle": "Eighth",
@@ -2150,25 +2150,25 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "EnergyVortex": {
-    "Type": "Server.Spells.Eighth.EnergyVortexSpell",
+    "Type": "EnergyVortexSpell",
     "Name": "Energy Vortex",
     "Mantra": "Vas Corp Por",
     "Circle": "Eighth",
@@ -2194,25 +2194,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.BlackPearl",
+        "Reagent": "BlackPearl",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Nightshade",
+        "Reagent": "Nightshade",
         "Amount": 1
       }
     ]
   },
   "Resurrection": {
-    "Type": "Server.Spells.Eighth.ResurrectionSpell",
+    "Type": "ResurrectionSpell",
     "Name": "Resurrection",
     "Mantra": "An Corp",
     "Circle": "Eighth",
@@ -2238,21 +2238,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Garlic",
+        "Reagent": "Garlic",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Ginseng",
+        "Reagent": "Ginseng",
         "Amount": 1
       }
     ]
   },
   "AirElemental": {
-    "Type": "Server.Spells.Eighth.AirElementalSpell",
+    "Type": "AirElementalSpell",
     "Name": "Air Elemental",
     "Mantra": "Kal Vas Xen Hur",
     "Circle": "Eighth",
@@ -2270,21 +2270,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "SummonDaemon": {
-    "Type": "Server.Spells.Eighth.SummonDaemonSpell",
+    "Type": "SummonDaemonSpell",
     "Name": "Summon Daemon",
     "Mantra": "Kal Vas Xen Corp",
     "Circle": "Eighth",
@@ -2302,25 +2302,25 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "EarthElemental": {
-    "Type": "Server.Spells.Eighth.EarthElementalSpell",
+    "Type": "EarthElementalSpell",
     "Name": "Earth Elemental",
     "Mantra": "Kal Vas Xen Ylem",
     "Circle": "Eighth",
@@ -2338,21 +2338,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "FireElemental": {
-    "Type": "Server.Spells.Eighth.FireElementalSpell",
+    "Type": "FireElementalSpell",
     "Name": "Fire Elemental",
     "Mantra": "Kal Vas Xen Flam",
     "Circle": "Eighth",
@@ -2370,25 +2370,25 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SulfurousAsh",
+        "Reagent": "SulfurousAsh",
         "Amount": 1
       }
     ]
   },
   "WaterElemental": {
-    "Type": "Server.Spells.Eighth.WaterElementalSpell",
+    "Type": "WaterElementalSpell",
     "Name": "Water Elemental",
     "Mantra": "Kal Vas Xen An Flam",
     "Circle": "Eighth",
@@ -2406,21 +2406,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodmoss",
+        "Reagent": "Bloodmoss",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.MandrakeRoot",
+        "Reagent": "MandrakeRoot",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SpidersSilk",
+        "Reagent": "SpidersSilk",
         "Amount": 1
       }
     ]
   },
   "ControlUndead": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.ControlUndeadSpell",
+    "Type": "ControlUndeadSpell",
     "Name": "Control Undead",
     "Mantra": "Nutu Magistri Supplicare",
     "Circle": "Lower lesser Chants of Necromancy",
@@ -2446,21 +2446,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bloodspawn",
+        "Reagent": "Bloodspawn",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Blackmoor",
+        "Reagent": "Blackmoor",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bone",
+        "Reagent": "Bone",
         "Amount": 1
       }
     ]
   },
   "Darkness": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.DarknessSpell",
+    "Type": "DarknessSpell",
     "Name": "Darkness",
     "Mantra": "In Caligne Abditus",
     "Circle": "Lower lesser Chants of Necromancy",
@@ -2486,17 +2486,17 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Pumice",
+        "Reagent": "Pumice",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.PigIron",
+        "Reagent": "PigIron",
         "Amount": 1
       }
     ]
   },
   "DecayingRay": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.DecayingRaySpell",
+    "Type": "DecayingRaySpell",
     "Name": "Decaying Ray",
     "Mantra": "Umbra Aufero Vita",
     "Circle": "Lower lesser Chants of Necromancy",
@@ -2522,25 +2522,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       }
     ]
   },
   "SpectresTouch": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.SpectresTouchSpell",
+    "Type": "SpectresTouchSpell",
     "Name": "Spectres Touch",
     "Mantra": "Enevare",
     "Circle": "Lower lesser Chants of Necromancy",
@@ -2566,21 +2566,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.ExecutionersCap",
+        "Reagent": "ExecutionersCap",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       }
     ]
   },
   "AbyssalFlame": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.AbyssalFlameSpell",
+    "Type": "AbyssalFlameSpell",
     "Name": "Abyssal Flame",
     "Mantra": "Orinundus Barathrum Erado Hostes Hostium",
     "Circle": "Higher lesser Chants of Necromancy",
@@ -2606,25 +2606,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       }
     ]
   },
   "AnimateDead": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.AnimateDeadSpell",
+    "Type": "AnimateDeadSpell",
     "Name": "Animate Dead",
     "Mantra": "Corpus Sine Nomine Expergefaceret",
     "Circle": "Higher lesser Chants of Necromancy",
@@ -2650,25 +2650,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.FertileDirt",
+        "Reagent": "FertileDirt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bone",
+        "Reagent": "Bone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       }
     ]
   },
   "Sacrifice": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.SacrificeSpell",
+    "Type": "SacrificeSpell",
     "Name": "Sacrifice",
     "Mantra": "Animus Ex Corporis Resolveretur",
     "Circle": "Higher lesser Chants of Necromancy",
@@ -2694,25 +2694,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.ExecutionersCap",
+        "Reagent": "ExecutionersCap",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodspawn",
+        "Reagent": "Bloodspawn",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.WyrmsHeart",
+        "Reagent": "WyrmsHeart",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bone",
+        "Reagent": "Bone",
         "Amount": 1
       }
     ]
   },
   "WraithBreath": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.WraithBreathSpell",
+    "Type": "WraithBreathSpell",
     "Name": "Wraith Breath",
     "Mantra": "Manes Sollicti Mi Compellere",
     "Circle": "Higher lesser Chants of Necromancy",
@@ -2738,25 +2738,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Pumice",
+        "Reagent": "Pumice",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bone",
+        "Reagent": "Bone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Blackmoor",
+        "Reagent": "Blackmoor",
         "Amount": 1
       }
     ]
   },
   "SorcerersBane": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.SorcerersBaneSpell",
+    "Type": "SorcerersBaneSpell",
     "Name": "Sorceror's Bane",
     "Mantra": "Fluctus Perturbo Magus Navitas",
     "Circle": "Lower greater Chants of Necromancy",
@@ -2782,25 +2782,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Pumice",
+        "Reagent": "Pumice",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DragonsBlood",
+        "Reagent": "DragonsBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DeadWood",
+        "Reagent": "DeadWood",
         "Amount": 1
       }
     ]
   },
   "SummonSpirit": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.SummonSpiritSpell",
+    "Type": "SummonSpiritSpell",
     "Name": "Summon Spirit",
     "Mantra": "Manes Turbidi Sollictique Resolverent",
     "Circle": "Lower greater Chants of Necromancy",
@@ -2818,25 +2818,25 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DragonsBlood",
+        "Reagent": "DragonsBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodspawn",
+        "Reagent": "Bloodspawn",
         "Amount": 1
       }
     ]
   },
   "WraithForm": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.WraithFormSpell",
+    "Type": "WraithFormSpell",
     "Name": "Wraith Form",
     "Mantra": "Manes Sollicti Mihi Infundite",
     "Circle": "Lower greater Chants of Necromancy",
@@ -2854,21 +2854,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodspawn",
+        "Reagent": "Bloodspawn",
         "Amount": 1
       }
     ]
   },
   "WyvernStrike": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.WyvernStrikeSpell",
+    "Type": "WyvernStrikeSpell",
     "Name": "Wyvern Strike",
     "Mantra": "Ubrae Tenebrae Venarent",
     "Circle": "Lower greater Chants of Necromancy",
@@ -2894,25 +2894,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DragonsBlood",
+        "Reagent": "DragonsBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SerpentScale",
+        "Reagent": "SerpentScale",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Blackmoor",
+        "Reagent": "Blackmoor",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodspawn",
+        "Reagent": "Bloodspawn",
         "Amount": 1
       }
     ]
   },
   "Kill": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.KillSpell",
+    "Type": "KillSpell",
     "Name": "Kill",
     "Mantra": "Ulties Manum Necarent",
     "Circle": "Higher greater Chants of Necromancy",
@@ -2938,25 +2938,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.ExecutionersCap",
+        "Reagent": "ExecutionersCap",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.WyrmsHeart",
+        "Reagent": "WyrmsHeart",
         "Amount": 1
       }
     ]
   },
   "LicheForm": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.LicheFormSpell",
+    "Type": "LicheFormSpell",
     "Name": "Liche Form",
     "Mantra": "Umbrae Tenebrae Miserere",
     "Circle": "Higher greater Chants of Necromancy",
@@ -2974,25 +2974,25 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DragonsBlood",
+        "Reagent": "DragonsBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       }
     ]
   },
   "Plague": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.PlagueSpell",
+    "Type": "PlagueSpell",
     "Name": "Plague",
     "Mantra": "Fluctus Puter Se Aresceret",
     "Circle": "Higher greater Chants of Necromancy",
@@ -3018,37 +3018,37 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.BatWing",
+        "Reagent": "BatWing",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DaemonBone",
+        "Reagent": "DaemonBone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DragonsBlood",
+        "Reagent": "DragonsBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bloodspawn",
+        "Reagent": "Bloodspawn",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Pumice",
+        "Reagent": "Pumice",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SerpentScale",
+        "Reagent": "SerpentScale",
         "Amount": 1
       }
     ]
   },
   "Spellbind": {
-    "Type": "Scripts.Zulu.Spells.Necromancy.SpellbindSpell",
+    "Type": "SpellbindSpell",
     "Name": "Spellbind",
     "Mantra": "Nutu Magistri Se Compellere",
     "Circle": "Higher greater Chants of Necromancy",
@@ -3074,25 +3074,25 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.EyeOfNewt",
+        "Reagent": "EyeOfNewt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.FertileDirt",
+        "Reagent": "FertileDirt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.PigIron",
+        "Reagent": "PigIron",
         "Amount": 1
       }
     ]
   },
   "Antidote": {
-    "Type": "Scripts.Zulu.Spells.Earth.AntidoteSpell",
+    "Type": "AntidoteSpell",
     "Name": "Antidote",
     "Mantra": "Puissante Terre Traite Ce Patient",
     "Circle": "Lower 1st Circle of Earth spells",
@@ -3118,21 +3118,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DeadWood",
+        "Reagent": "DeadWood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.FertileDirt",
+        "Reagent": "FertileDirt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.ExecutionersCap",
+        "Reagent": "ExecutionersCap",
         "Amount": 1
       }
     ]
   },
   "OwlSight": {
-    "Type": "Scripts.Zulu.Spells.Earth.OwlSightSpell",
+    "Type": "OwlSightSpell",
     "Name": "Owl Sight",
     "Mantra": "Vista Da Noite",
     "Circle": "Lower 1st Circle of Earth spells",
@@ -3158,13 +3158,13 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.EyeOfNewt",
+        "Reagent": "EyeOfNewt",
         "Amount": 1
       }
     ]
   },
   "ShiftingEarth": {
-    "Type": "Scripts.Zulu.Spells.Earth.ShiftingEarthSpell",
+    "Type": "ShiftingEarthSpell",
     "Name": "Shifting Earth",
     "Mantra": "Esmagamento Con Pedra",
     "Circle": "Lower 1st Circle of Earth spells",
@@ -3190,21 +3190,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.FertileDirt",
+        "Reagent": "FertileDirt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.DeadWood",
+        "Reagent": "DeadWood",
         "Amount": 1
       }
     ]
   },
   "SummonMammals": {
-    "Type": "Scripts.Zulu.Spells.Earth.SummonMammalsSpell",
+    "Type": "SummonMammalsSpell",
     "Name": "Summon Mammals",
     "Mantra": "Chame O Mamifero Agora",
     "Circle": "Lower 1st Circle of Earth spells",
@@ -3222,21 +3222,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.SerpentScale",
+        "Reagent": "SerpentScale",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.PigIron",
+        "Reagent": "PigIron",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.EyeOfNewt",
+        "Reagent": "EyeOfNewt",
         "Amount": 1
       }
     ]
   },
   "CallLightning": {
-    "Type": "Scripts.Zulu.Spells.Earth.CallLightningSpell",
+    "Type": "CallLightningSpell",
     "Name": "Call Lightning",
     "Mantra": "Batida Do Deus",
     "Circle": "Higher 1st Circle of Earth spells",
@@ -3262,21 +3262,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.WyrmsHeart",
+        "Reagent": "WyrmsHeart",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.PigIron",
+        "Reagent": "PigIron",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Bone",
+        "Reagent": "Bone",
         "Amount": 1
       }
     ]
   },
   "EarthsBlessing": {
-    "Type": "Scripts.Zulu.Spells.Earth.EarthsBlessingSpell",
+    "Type": "EarthsBlessingSpell",
     "Name": "Earths Blessing",
     "Mantra": "Foria Da Terra",
     "Circle": "Higher 1st Circle of Earth spells",
@@ -3302,21 +3302,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.PigIron",
+        "Reagent": "PigIron",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       }
     ]
   },
   "EarthPortal": {
-    "Type": "Scripts.Zulu.Spells.Earth.EarthPortalSpell",
+    "Type": "EarthPortalSpell",
     "Name": "Earth Portal",
     "Mantra": "Destraves Limites Da Natureza",
     "Circle": "Higher 1st Circle of Earth spells",
@@ -3342,21 +3342,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.ExecutionersCap",
+        "Reagent": "ExecutionersCap",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.EyeOfNewt",
+        "Reagent": "EyeOfNewt",
         "Amount": 1
       }
     ]
   },
   "NaturesTouch": {
-    "Type": "Scripts.Zulu.Spells.Earth.NaturesTouchSpell",
+    "Type": "NaturesTouchSpell",
     "Name": "Natures Touch",
     "Mantra": "Guerissez Par Terre",
     "Circle": "Higher 1st Circle of Earth spells",
@@ -3382,21 +3382,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Pumice",
+        "Reagent": "Pumice",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       }
     ]
   },
   "GustOfAir": {
-    "Type": "Scripts.Zulu.Spells.Earth.GustOfAirSpell",
+    "Type": "GustOfAirSpell",
     "Name": "Gust Of Air",
     "Mantra": "Gust Do Ar",
     "Circle": "Lower 2nd Circle of Earth spells",
@@ -3422,21 +3422,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BatWing",
+        "Reagent": "BatWing",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       }
     ]
   },
   "RisingFire": {
-    "Type": "Scripts.Zulu.Spells.Earth.RisingFireSpell",
+    "Type": "RisingFireSpell",
     "Name": "Rising Fire",
     "Mantra": "Batida Do Fogo",
     "Circle": "Lower 2nd Circle of Earth spells",
@@ -3462,21 +3462,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.BatWing",
+        "Reagent": "BatWing",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VialOfBlood",
+        "Reagent": "VialOfBlood",
         "Amount": 1
       }
     ]
   },
   "Shapeshift": {
-    "Type": "Scripts.Zulu.Spells.Earth.ShapeshiftSpell",
+    "Type": "ShapeshiftSpell",
     "Name": "Shapeshift",
     "Mantra": "Mude Minha Forma",
     "Circle": "Lower 2nd Circle of Earth spells",
@@ -3494,21 +3494,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.WyrmsHeart",
+        "Reagent": "WyrmsHeart",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Blackmoor",
+        "Reagent": "Blackmoor",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.BatWing",
+        "Reagent": "BatWing",
         "Amount": 1
       }
     ]
   },
   "IceStrike": {
-    "Type": "Scripts.Zulu.Spells.Earth.IceStrikeSpell",
+    "Type": "IceStrikeSpell",
     "Name": "Ice Strike",
     "Mantra": "Geada Com Inverno",
     "Circle": "Higher 2nd Circle of Earth spells",
@@ -3534,21 +3534,21 @@
     },
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.Bone",
+        "Reagent": "Bone",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.BatWing",
+        "Reagent": "BatWing",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Brimstone",
+        "Reagent": "Brimstone",
         "Amount": 1
       }
     ]
   },
   "EarthSpirit": {
-    "Type": "Scripts.Zulu.Spells.Earth.EarthSpiritSpell",
+    "Type": "EarthSpiritSpell",
     "Name": "Earth Spirit",
     "Mantra": "Chame A Terra Elemental",
     "Circle": "Higher 2nd Circle of Earth spells",
@@ -3566,21 +3566,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.DragonsBlood",
+        "Reagent": "DragonsBlood",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.FertileDirt",
+        "Reagent": "FertileDirt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       }
     ]
   },
   "FireSpirit": {
-    "Type": "Scripts.Zulu.Spells.Earth.FireSpiritSpell",
+    "Type": "FireSpiritSpell",
     "Name": "Fire Spirit",
     "Mantra": "Chame O Fogo Elemental",
     "Circle": "Higher 2nd Circle of Earth spells",
@@ -3598,21 +3598,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.EyeOfNewt",
+        "Reagent": "EyeOfNewt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Blackmoor",
+        "Reagent": "Blackmoor",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.Obsidian",
+        "Reagent": "Obsidian",
         "Amount": 1
       }
     ]
   },
   "StormSpirit": {
-    "Type": "Scripts.Zulu.Spells.Earth.StormSpiritSpell",
+    "Type": "StormSpiritSpell",
     "Name": "Storm Spirit",
     "Mantra": "Chame O Ar Elemental",
     "Circle": "Higher 2nd Circle of Earth spells",
@@ -3630,21 +3630,21 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.FertileDirt",
+        "Reagent": "FertileDirt",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.VolcanicAsh",
+        "Reagent": "VolcanicAsh",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.BatWing",
+        "Reagent": "BatWing",
         "Amount": 1
       }
     ]
   },
   "WaterSpirit": {
-    "Type": "Scripts.Zulu.Spells.Earth.WaterSpiritSpell",
+    "Type": "WaterSpiritSpell",
     "Name": "Water Spirit",
     "Mantra": "Chame A Agua Elemental",
     "Circle": "Higher 2nd Circle of Earth spells",
@@ -3662,15 +3662,15 @@
     "AllowDead": false,
     "ReagentCosts": [
       {
-        "Reagent": "Server.Items.WyrmsHeart",
+        "Reagent": "WyrmsHeart",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.SerpentScale",
+        "Reagent": "SerpentScale",
         "Amount": 1
       },
       {
-        "Reagent": "Server.Items.EyeOfNewt",
+        "Reagent": "EyeOfNewt",
         "Amount": 1
       }
     ]

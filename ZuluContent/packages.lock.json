@@ -85,15 +85,15 @@
       },
       "Microsoft.Toolkit.HighPerformance": {
         "type": "Direct",
-        "requested": "[7.0.0-preview5, )",
-        "resolved": "7.0.0-preview5",
-        "contentHash": "T+ozZZDYFk9Moi97TQteZ+2ZqhY4fpAVJDBVjkj4xUnNBnlWlni9VnV7jS3yE9c1Gsqkx5ouWP54Z9OklVc7ZA=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "tG6v0AhDw/yJMtiH/tI4F6I/+sNIfu4++6WFfN73FyNcPh31et33w45wo8Lx1sfxcfLtkYk+w2fvU/MubYg4VQ=="
       },
       "Zlib.Bindings": {
         "type": "Direct",
-        "requested": "[1.4.0, )",
-        "resolved": "1.4.0",
-        "contentHash": "ynaf1cOY3jLmD9Z+JwI0/CVWY7PP7TVGNPmU2Avo/nR/tciaL0eL7FfxAVdo8xjUj1CfCpW/Og1+FFVdfADHHg=="
+        "requested": "[1.5.0, )",
+        "resolved": "1.5.0",
+        "contentHash": "OmH15iciKDzx8WrVRXuBNg6++UPb2YNRNwzFVsqenG/q5P8b3iuxYOHJdnYWjzFznTywD0ZUno5GrfxqIni7xA=="
       },
       "MessagePack.Annotations": {
         "type": "Transitive",
@@ -161,6 +161,27 @@
         "type": "Transitive",
         "resolved": "1.8.8",
         "contentHash": "1rxdf8NfyAxLlqIEciCl/yNhmz1YiLkmp6rrF8p3/NVmyHHzPWLx8djtDvSAwhPLg64BXvsRcM3+5bP1HAUdYg=="
+      },
+      "Serilog": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+QX0hmf37a0/OZLxM3wL7V6/ADvC1XihXN4Kq/p6d8lCPfgkRdiuhbWlMaFjR9Av0dy5F0+MBeDmDdRZN/YwQA=="
+      },
+      "Serilog.Sinks.Async": {
+        "type": "Transitive",
+        "resolved": "1.5.0",
+        "contentHash": "csHYIqAwI4Gy9oAhXYRwxGrQEAtBg3Ep7WaCzsnA1cZuBZjVAU0n7hWaJhItjO7hbLHh/9gRVxALCUB4Dv+gZw==",
+        "dependencies": {
+          "Serilog": "2.9.0"
+        }
+      },
+      "Serilog.Sinks.Console": {
+        "type": "Transitive",
+        "resolved": "4.0.0",
+        "contentHash": "yJQit9sTJ4xGLKgCujqDJsaGqBNJwGB/H898z+xYlMG06twy4//6LLnSrsmpduZxcHIG4im7cv+JmXLzXz2EkQ==",
+        "dependencies": {
+          "Serilog": "2.10.0"
+        }
       },
       "System.Buffers": {
         "type": "Transitive",
@@ -445,8 +466,11 @@
       "ModernUO": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Toolkit.HighPerformance": "7.0.0-preview5",
-          "Zlib.Bindings": "1.4.0"
+          "Microsoft.Toolkit.HighPerformance": "7.0.2",
+          "Serilog": "2.10.0",
+          "Serilog.Sinks.Async": "1.5.0",
+          "Serilog.Sinks.Console": "4.0.0",
+          "Zlib.Bindings": "1.5.0"
         }
       }
     }

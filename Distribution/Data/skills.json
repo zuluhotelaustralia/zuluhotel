@@ -3,7 +3,7 @@
   "StatCap": 1300,
   "Entries": {
     "Anatomy": {
-      "OnUseHandler": "Server.SkillHandlers.Anatomy",
+      "OnUseHandler": "Anatomy",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -128,7 +128,7 @@
       }
     },
     "EvalInt": {
-      "OnUseHandler": "Server.SkillHandlers.EvalInt",
+      "OnUseHandler": "EvalInt",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -140,7 +140,7 @@
       }
     },
     "Inscribe": {
-      "OnUseHandler": "Server.SkillHandlers.Inscribe",
+      "OnUseHandler": "Inscribe",
       "Delay": "00:00:10",
       "DefaultPoints": 600,
       "StatAdvancements": {
@@ -152,7 +152,7 @@
       }
     },
     "ItemID": {
-      "OnUseHandler": "Server.SkillHandlers.ItemId",
+      "OnUseHandler": "ItemId",
       "Delay": "00:00:04",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -186,7 +186,7 @@
       }
     },
     "Meditation": {
-      "OnUseHandler": "Server.SkillHandlers.Meditation",
+      "OnUseHandler": "Meditation",
       "Delay": "00:00:10",
       "DefaultPoints": 250,
       "StatAdvancements": {
@@ -198,7 +198,7 @@
       }
     },
     "SpiritSpeak": {
-      "OnUseHandler": "Server.SkillHandlers.SpiritSpeak",
+      "OnUseHandler": "SpiritSpeak",
       "Delay": "00:00:10",
       "DefaultPoints": 20,
       "StatAdvancements": {
@@ -210,13 +210,13 @@
       }
     },
     "AnimalLore": {
-      "OnUseHandler": "Server.SkillHandlers.AnimalLore",
+      "OnUseHandler": "AnimalLore",
       "Delay": "00:00:05",
       "DefaultPoints": 250,
       "StatAdvancements": {}
     },
     "AnimalTaming": {
-      "OnUseHandler": "Server.SkillHandlers.AnimalTaming",
+      "OnUseHandler": "AnimalTaming",
       "Delay": "00:00:10",
       "DefaultPoints": 25,
       "StatAdvancements": {
@@ -287,7 +287,7 @@
       }
     },
     "Tracking": {
-      "OnUseHandler": "Server.SkillHandlers.Tracking",
+      "OnUseHandler": "Tracking",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -315,7 +315,7 @@
       }
     },
     "ArmsLore": {
-      "OnUseHandler": "Server.SkillHandlers.ArmsLore",
+      "OnUseHandler": "ArmsLore",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -419,7 +419,7 @@
       }
     },
     "Begging": {
-      "OnUseHandler": "Server.SkillHandlers.Begging",
+      "OnUseHandler": "Begging",
       "Delay": "00:00:20",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -442,7 +442,7 @@
       }
     },
     "Discordance": {
-      "OnUseHandler": "Server.SkillHandlers.Discordance",
+      "OnUseHandler": "Discordance",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -475,7 +475,7 @@
       }
     },
     "Peacemaking": {
-      "OnUseHandler": "Server.SkillHandlers.Peacemaking",
+      "OnUseHandler": "Peacemaking",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -487,7 +487,7 @@
       }
     },
     "Provocation": {
-      "OnUseHandler": "Server.SkillHandlers.Provocation",
+      "OnUseHandler": "Provocation",
       "Delay": "00:00:10",
       "DefaultPoints": 20,
       "StatAdvancements": {
@@ -499,7 +499,7 @@
       }
     },
     "TasteID": {
-      "OnUseHandler": "Server.SkillHandlers.TasteId",
+      "OnUseHandler": "TasteId",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -511,7 +511,7 @@
       }
     },
     "Hiding": {
-      "OnUseHandler": "Server.SkillHandlers.Hiding",
+      "OnUseHandler": "Hiding",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -534,7 +534,7 @@
       }
     },
     "Poisoning": {
-      "OnUseHandler": "Server.SkillHandlers.Poisoning",
+      "OnUseHandler": "Poisoning",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -551,7 +551,7 @@
       }
     },
     "RemoveTrap": {
-      "OnUseHandler": "Server.SkillHandlers.RemoveTrap",
+      "OnUseHandler": "RemoveTrap",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -574,7 +574,7 @@
       }
     },
     "Stealing": {
-      "OnUseHandler": "Server.SkillHandlers.Stealing",
+      "OnUseHandler": "Stealing",
       "Delay": "00:00:15",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -586,7 +586,7 @@
       }
     },
     "Stealth": {
-      "OnUseHandler": "Server.SkillHandlers.Stealth",
+      "OnUseHandler": "Stealth",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -598,7 +598,7 @@
       }
     },
     "DetectHidden": {
-      "OnUseHandler": "Server.SkillHandlers.DetectHidden",
+      "OnUseHandler": "DetectHidden",
       "Delay": "00:00:10",
       "DefaultPoints": 200,
       "StatAdvancements": {
@@ -615,7 +615,7 @@
       }
     },
     "Forensics": {
-      "OnUseHandler": "Server.SkillHandlers.Forensics",
+      "OnUseHandler": "Forensics",
       "Delay": "00:00:15",
       "DefaultPoints": 200,
       "StatAdvancements": {

@@ -39,8 +39,6 @@ namespace Server.Items
             {
                 m_Player = player;
 
-                Priority = TimerPriority.TwoFiftyMS;
-
                 Start();
             }
 
@@ -80,8 +78,6 @@ namespace Server.Items
             public DefenseTimer(Mobile player) : base(DefenseEffectDuration)
             {
                 m_Player = player;
-
-                Priority = TimerPriority.TwoFiftyMS;
 
                 Start();
             }

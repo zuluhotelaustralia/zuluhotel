@@ -79,7 +79,6 @@ namespace Server.Items
 			public FreeTimer( EffectItem item, TimeSpan delay ) : base( delay )
 			{
 				m_Item = item;
-				Priority = TimerPriority.OneSecond;
 			}
 
 			protected override void OnTick()

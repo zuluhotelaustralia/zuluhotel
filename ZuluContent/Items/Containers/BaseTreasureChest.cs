@@ -239,7 +239,6 @@ namespace Server.Items
 			public TreasureResetTimer( BaseTreasureChest chest ) : base ( TimeSpan.FromMinutes( Utility.Random( chest.MinSpawnTime, chest.MaxSpawnTime ) ) )
 			{
 				m_Chest = chest;
-				Priority = TimerPriority.OneMinute;
 			}
 
 			protected override void OnTick()

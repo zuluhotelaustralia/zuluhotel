@@ -31,8 +31,6 @@ namespace Server
                 : base(TimeSpan.FromMinutes(1.0))
             {
                 m_Mobile = m;
-
-                Priority = TimerPriority.OneSecond;
             }
 
             protected override void OnTick()

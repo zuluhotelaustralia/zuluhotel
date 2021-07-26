@@ -45,9 +45,7 @@ public Blood( Serial serial ) : base( serial )
 
 			public InternalTimer( Item blood ) : base( TimeSpan.FromSeconds( 5.0 ) )
 			{
-				Priority = TimerPriority.OneSecond;
-
-				m_Blood = blood;
+                m_Blood = blood;
 			}
 
 			protected override void OnTick()
