@@ -31,8 +31,6 @@ namespace Server
                 : base(TimeSpan.FromMinutes(1.0))
             {
                 m_Mobile = m;
-
-                Priority = TimerPriority.OneSecond;
             }
 
             protected override void OnTick()
@@ -726,7 +724,8 @@ namespace Server.Spells
             if (delay.HasValue && delay.Value > TimeSpan.Zero)
                 await Timer.Pause(delay.Value);
             
-            target.FireHook(h => h.OnSpellDamage(caster, target, spell, damageType.Value, ref damage));
+            if (spell != null)
+                target.FireHook(h => h.OnSpellDamage(caster, target, spell, damageType.Value, ref damage));
             
             if(spell?.Info.Resistable ?? true)
                 damage = TryResistDamage(caster, target, spell?.Circle ?? SpellCircle.First, damage);

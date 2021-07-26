@@ -49,7 +49,7 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            Timer.DelayCall(TimeSpan.Zero, Delete);
+            Delete();
         }
     }
 }

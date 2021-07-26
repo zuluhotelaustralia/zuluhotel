@@ -99,7 +99,6 @@ namespace Server
         {
             public LightCycleTimer() : base(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(5.0))
             {
-                Priority = TimerPriority.FiveSeconds;
             }
 
             protected override void OnTick()

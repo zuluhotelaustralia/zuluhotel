@@ -1,6 +1,7 @@
 using System;
 using MessagePack;
 using Server;
+using Server.Engines.Magic;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static Server.Engines.Magic.IElementalResistible;
@@ -8,12 +9,12 @@ using static Server.Engines.Magic.IElementalResistible;
 namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 {
     [MessagePackObject]
-    public class PoisonImmunity : Enchantment<PoisonImmunityInfo>, IBuff
+    public class PoisonImmunity : Enchantment<PoisonImmunityInfo>, IDistinctEnchantment, IBuff
     {
         private string m_Description;
         [IgnoreMember] public override string AffixName => string.Empty;
 
-        [Key(1)] public int Value { get; set; }
+        [Key(1)] public PoisonLevel Value { get; set; } = 0;
 
         #region IBuff
 
@@ -29,7 +30,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
 
         [IgnoreMember] public string[] Details { get; init; }
         [IgnoreMember] public bool ExpireOnDeath { get; init; } = true;
-        [IgnoreMember] public bool Dispellable { get; init; } = false;
+        [IgnoreMember] public bool Dispellable { get; init; } = true;
         [IgnoreMember] public TimeSpan Duration { get; init; } = TimeSpan.Zero;
         [IgnoreMember] public DateTime Start { get; init; } = DateTime.UtcNow;
         
@@ -37,14 +38,19 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         [CallPriority(1)]
         public override void OnCheckPoisonImmunity(Mobile attacker, Mobile defender, Poison poison, ref bool immune)
         {
-            var poisonProtectionLevel = GetProtectionLevelForResist(Value);
-
-            if ((int)poisonProtectionLevel >= poison.Level)
+            if ((int)Value >= poison.Level)
             {
                 immune = true;
                 NotifyMobile(defender, "Your poison immunity protected you from the poison!");
             }
         }
+        
+        public int CompareTo(object obj) => obj switch
+        {
+            PoisonImmunity other => ReferenceEquals(this, other) ? 0 : Value.CompareTo(other.Value),
+            null => 1,
+            _ => throw new ArgumentException($"Object must be of type {GetType().FullName}")
+        };
 
         public void OnBuffAdded(Mobile parent)
         {

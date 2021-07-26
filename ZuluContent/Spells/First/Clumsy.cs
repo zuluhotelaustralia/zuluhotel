@@ -18,7 +18,7 @@ namespace Server.Spells.First
 
             var target = response.Target;
 
-            if (!Caster.CanBuff(target, icons: BuffIcon.Clumsy))
+            if (!Caster.CanBuff(target, true, BuffIcon.Bless, BuffIcon.Agility, BuffIcon.Resilience, BuffIcon.Clumsy))
                 return;
             
             target.TryAddBuff(new StatBuff(StatType.Dex)

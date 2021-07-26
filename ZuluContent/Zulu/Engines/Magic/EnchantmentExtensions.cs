@@ -6,6 +6,7 @@ using Server.Engines.Magic;
 using Server.Mobiles;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
 using ZuluContent.Zulu.Items;
@@ -116,21 +117,26 @@ namespace ZuluContent.Zulu.Engines.Magic
         public static bool TrySetResist<T>(this T mobile, ElementalType type, ElementalProtectionLevel level)
             where T : Mobile, IEnchanted => TrySetResist((IEnchanted) mobile, type, level);
 
-        public static int GetResist(this IEnchanted ench, ElementalType type) => type switch
+        public static int GetResist(this IEnchanted ench, ElementalType type)
         {
-            ElementalType.Water => ench.GetDistinctEnchantment<WaterProtection>()?.Value ?? 0,
-            ElementalType.Air => ench.GetDistinctEnchantment<AirProtection>()?.Value ?? 0,
-            ElementalType.Physical => ench.GetDistinctEnchantment<PhysicalProtection>()?.Value ?? 0,
-            ElementalType.Fire => ench.GetDistinctEnchantment<FireProtection>()?.Value ?? 0,
-            ElementalType.Earth => ench.GetDistinctEnchantment<EarthProtection>()?.Value ?? 0,
-            ElementalType.Necro => ench.GetDistinctEnchantment<NecroProtection>()?.Value ?? 0,
-            ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
-            ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
-            ElementalType.Poison => (int) (ench.GetDistinctEnchantment<PoisonProtection>()?.Value ?? 0),
-            ElementalType.MagicImmunity => ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0,
-            ElementalType.MagicReflection => (ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0),
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-        };
+            return type switch
+            {
+                ElementalType.Water => ench.GetDistinctEnchantment<WaterProtection>()?.Value ?? 0,
+                ElementalType.Air => ench.GetDistinctEnchantment<AirProtection>()?.Value ?? 0,
+                ElementalType.Physical => ench.GetDistinctEnchantment<PhysicalProtection>()?.Value ?? 0,
+                ElementalType.Fire => ench.GetDistinctEnchantment<FireProtection>()?.Value ?? 0,
+                ElementalType.Earth => ench.GetDistinctEnchantment<EarthProtection>()?.Value ?? 0,
+                ElementalType.Necro => ench.GetDistinctEnchantment<NecroProtection>()?.Value ?? 0,
+                ElementalType.Paralysis => ench.GetDistinctEnchantment<ParalysisProtection>()?.Value ?? 0,
+                ElementalType.HealingBonus => ench.GetDistinctEnchantment<HealingBonus>()?.Value ?? 0,
+                ElementalType.Poison => (int) (ench.GetDistinctEnchantment<PoisonImmunity>()?.Value
+                                               ?? ench.GetDistinctEnchantment<PoisonProtection>()?.Value
+                                               ?? 0),
+                ElementalType.MagicImmunity => ench.GetDistinctEnchantment<MagicImmunity>()?.Value ?? 0,
+                ElementalType.MagicReflection => ench.GetDistinctEnchantment<MagicReflection>()?.Value ?? 0,
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+            };
+        }
 
         public static int GetResist(this Mobile mobile, ElementalType type) =>
             mobile is IEnchanted enchanted ? GetResist(enchanted, type) : 0;

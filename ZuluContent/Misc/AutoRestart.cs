@@ -45,9 +45,7 @@ namespace Server.Misc
 
     public AutoRestart() : base(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.0))
     {
-      Priority = TimerPriority.FiveSeconds;
-
-      m_RestartTime = DateTime.Now.Date + RestartTime;
+        m_RestartTime = DateTime.Now.Date + RestartTime;
 
       if (m_RestartTime < DateTime.Now)
         m_RestartTime += TimeSpan.FromDays(1.0);

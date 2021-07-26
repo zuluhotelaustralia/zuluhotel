@@ -16,7 +16,6 @@ namespace Server.Mobiles
         public LoyaltyTimer() : base(InternalDelay, InternalDelay)
         {
             m_NextHourlyCheck = DateTime.Now + TimeSpan.FromHours(1.0);
-            Priority = TimerPriority.FiveSeconds;
         }
 
         private DateTime m_NextHourlyCheck;

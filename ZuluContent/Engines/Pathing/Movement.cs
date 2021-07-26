@@ -105,7 +105,7 @@ namespace Server.Movement
 
 			int landZ = 0, landCenter = 0, landTop = 0;
 
-			map.GetAverageZ( x, y, ref landZ, ref landCenter, ref landTop );
+			map.GetAverageZ( x, y, out landZ, out landCenter, out landTop );
 
 			bool moveIsOk = false;
 
@@ -497,7 +497,7 @@ namespace Server.Movement
 			else if ( m.CantWalk && (TileData.LandTable[landTile.ID & TileData.MaxLandValue].Flags & TileFlag.Wet) == 0 )
 				landBlocks = true;
 
-			map.GetAverageZ( xCheck, yCheck, ref landZ, ref landCenter, ref landTop );
+			map.GetAverageZ( xCheck, yCheck, out landZ, out landCenter, out landTop );
 
 			bool considerLand = !landTile.Ignored;
 

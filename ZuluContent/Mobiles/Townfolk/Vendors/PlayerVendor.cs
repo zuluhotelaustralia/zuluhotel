@@ -982,8 +982,6 @@ namespace Server.Mobiles
             public PayTimer(PlayerVendor vendor, TimeSpan delay) : base(delay, GetInterval())
             {
                 m_Vendor = vendor;
-
-                Priority = TimerPriority.OneMinute;
             }
 
             protected override void OnTick()

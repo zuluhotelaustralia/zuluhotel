@@ -18,7 +18,6 @@ namespace Server.Misc
 
     public StatusPage() : base(TimeSpan.FromSeconds(5.0), TimeSpan.FromSeconds(60.0))
     {
-      Priority = TimerPriority.FiveSeconds;
     }
 
     private static string Encode(string input)
