@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Network;
 using Server.Mobiles;
 using Server.Targeting;
@@ -172,7 +173,7 @@ namespace Server.Items
             else
             {
                 if (from != null)
-                    from.SendLocalizedMessage(502079); // The instrument played its last tune.
+                    from.SendFailureMessage(502079); // The instrument played its last tune.
 
                 Delete();
             }
@@ -193,71 +194,35 @@ namespace Server.Items
 
             return item;
         }
+        
+        public static BaseInstrument FindInstrument(Mobile from)
+        {
+            var backpack = from.Backpack;
+
+            var instrumentItem = backpack.FindItemByType(typeof(BaseInstrument));
+
+            if (instrumentItem is BaseInstrument instrument)
+            {
+                SetInstrument(from, instrument);
+                return instrument;
+            }
+
+            return null;
+        }
 
         public static int GetBardRange(Mobile bard, SkillName skill)
         {
             return 8 + (int) (bard.Skills[skill].Value / 15);
         }
 
-        public static void PickInstrument(Mobile from, InstrumentPickedCallback callback)
+        public static BaseInstrument PickInstrument(Mobile from)
         {
             var instrument = GetInstrument(from);
 
-            if (instrument != null)
-            {
-                callback?.Invoke(from, instrument);
-            }
-            else
-            {
-                from.SendLocalizedMessage(500617); // What instrument shall you play?
-                from.BeginTarget(1, false, TargetFlags.None, OnPickedInstrument, callback);
-            }
-        }
-
-        public static async Task<BaseInstrument> PickInstrumentAsync(Mobile from)
-        {
-            var instrument = GetInstrument(from);
             if (instrument != null)
                 return instrument;
-            
-            from.SendLocalizedMessage(500617); // What instrument shall you play?
-            var target = new AsyncTarget<Item>(from, new TargetOptions
-            {
-                Range = 1,
-            });
-            
-            from.Target = target;
 
-            var (item, _) = await target;
-
-            switch (item)
-            {
-                case null:
-                    break;
-                case BaseInstrument targeted:
-                    SetInstrument(from, targeted);
-                    return targeted;
-                default:
-                    from.SendLocalizedMessage(500619); // That is not a musical instrument.
-                    break;
-            }
-
-            return null;
-        }
-
-        public static void OnPickedInstrument(Mobile from, object targeted, object state)
-        {
-            if (!(targeted is BaseInstrument instrument))
-            {
-                from.SendLocalizedMessage(500619); // That is not a musical instrument.
-            }
-            else
-            {
-                SetInstrument(from, instrument);
-
-                if (state is InstrumentPickedCallback callback)
-                    callback(from, instrument);
-            }
+            return FindInstrument(from);
         }
 
         public static bool IsMageryCreature(BaseCreature bc)
@@ -470,9 +435,13 @@ namespace Server.Items
             else if (from.BeginAction(typeof(BaseInstrument)))
             {
                 SetInstrument(from, this);
+                
+                var prevLocation = from.Location;
 
                 // Delay of 7 second before beign able to play another instrument again
-                new InternalTimer(from).Start();
+                new InternalTimer(from, prevLocation, this).Start();
+                
+                from.SendSuccessMessage("You begin playing...");
 
                 if (CheckMusicianship(from))
                     PlayInstrumentWell(from);
@@ -511,9 +480,17 @@ namespace Server.Items
             return mark;
         }
 
-        public static bool CheckMusicianship(Mobile m)
+        public bool CheckMusicianship(Mobile m)
         {
-            return m.ShilCheckSkill(SkillName.Musicianship);
+            var difficulty = (int) m.Skills[SkillName.Musicianship].Value - 10;
+            difficulty = Math.Max(difficulty, 10);
+
+            var points = difficulty * 2;
+
+            if (this is Harp)
+                points *= 2;
+            
+            return m.ShilCheckSkill(SkillName.Musicianship, difficulty, points);
         }
 
         public void PlayInstrumentWell(Mobile from)
@@ -529,15 +506,24 @@ namespace Server.Items
         private class InternalTimer : Timer
         {
             private Mobile m_From;
+            private Point3D m_PrevLocation;
+            private BaseInstrument m_Instrument;
 
-            public InternalTimer(Mobile from) : base(TimeSpan.FromSeconds(6.0))
+            public InternalTimer(Mobile from, Point3D prevLocation, BaseInstrument instrument) : base(TimeSpan.FromSeconds(6.0))
             {
                 m_From = from;
+                m_PrevLocation = prevLocation;
+                m_Instrument = instrument;
             }
 
             protected override void OnTick()
             {
                 m_From.EndAction(typeof(BaseInstrument));
+                
+                if (m_From.Location == m_PrevLocation)
+                    m_Instrument.OnDoubleClick(m_From);
+                else
+                    m_From.SendSuccessMessage("You stop playing...");
             }
         }
     }

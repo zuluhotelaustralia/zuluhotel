@@ -16,7 +16,7 @@ namespace Server.SkillHandlers
 		{
 			m.RevealingAction();
 
-			BaseInstrument.PickInstrument( m, OnPickedInstrument );
+			BaseInstrument.PickInstrument(m);
 
 			return TimeSpan.FromSeconds( 1.0 ); // Cannot use another skill for 1 second
 		}
@@ -66,7 +66,7 @@ namespace Server.SkillHandlers
 					{
 						// Standard mode : reset combatants for everyone in the area
 
-						if ( !BaseInstrument.CheckMusicianship( from ) )
+						if ( !m_Instrument.CheckMusicianship( from ) )
 						{
 							from.SendLocalizedMessage( 500612 ); // You play poorly, and there is no effect.
 							m_Instrument.PlayInstrumentBadly( from );
@@ -135,7 +135,7 @@ namespace Server.SkillHandlers
 							from.SendLocalizedMessage( 1049527 ); // That creature is already being calmed.
 							m_SetSkillTime = true;
 						}
-						else if ( !BaseInstrument.CheckMusicianship( from ) )
+						else if ( !m_Instrument.CheckMusicianship( from ) )
 						{
 							from.SendLocalizedMessage( 500612 ); // You play poorly, and there is no effect.
 							from.NextSkillTime = Core.TickCount + (int)TimeSpan.FromSeconds( 5.0 ).TotalMilliseconds;

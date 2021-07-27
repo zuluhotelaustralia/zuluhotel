@@ -15,23 +15,22 @@ namespace Server.SkillHandlers
         private static readonly Dictionary<Serial, DiscordanceInfo> ActiveDiscords = new();
 
         public override SkillName Skill { get; } = SkillName.Discordance;
-        
-        private static readonly TargetOptions TargetOptions = new()
-        {
-            Range = 12,
-        };
 
         public override async Task<TimeSpan> OnUse(Mobile from)
         {
             from.RevealingAction();
 
-            var instrument = await BaseInstrument.PickInstrumentAsync(from);
+            var instrument = BaseInstrument.PickInstrument(from);
 
             if (instrument == null)
+            {
+                from.SendFailureMessage("You don't have an instrument to play!");
                 return Delay;
+            }
 
-            from.SendLocalizedMessage(1049541); // Choose the target for your song of discordance.
-            var target = new AsyncTarget<BaseCreature>(from, TargetOptions);
+            from.SendSuccessMessage(1049541); // Choose the target for your song of discordance.
+            var target = new AsyncTarget<BaseCreature>(from,
+                new TargetOptions {Range = BaseInstrument.GetBardRange(from, SkillName.Provocation)});
             from.Target = target;
 
             var (creature, _) = await target;
@@ -63,7 +62,7 @@ namespace Server.SkillHandlers
 
             diff /= from.GetClassModifier(Skill);
 
-            if (!BaseInstrument.CheckMusicianship(from))
+            if (!instrument.CheckMusicianship(from))
             {
                 from.SendFailureMessage(500612); // You play poorly, and there is no effect.
                 instrument.PlayInstrumentBadly(from);
