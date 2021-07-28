@@ -54,7 +54,7 @@ namespace Server.SkillHandlers
                 return Delay;
             }
 
-            var diff = instrument.GetDifficultyFor(creature) - 10.0;
+            var diff = BaseInstrument.GetDifficulty(creature) - 10.0;
             var music = from.Skills[SkillName.Musicianship].Value;
 
             if (music > 100.0)

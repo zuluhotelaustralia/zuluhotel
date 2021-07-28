@@ -4023,6 +4023,7 @@ namespace Server.Mobiles
 
         public void Pacify(Mobile master, DateTime endtime)
         {
+            PublicOverheadMessage(MessageType.Emote, EmoteHue, false, "*pacified*");
             BardPacified = true;
             BardEndTime = endtime;
         }

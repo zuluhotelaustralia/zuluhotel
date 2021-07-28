@@ -28,7 +28,7 @@ namespace Server.SkillHandlers
             from.Target = target1;
             from.RevealingAction();
 
-            from.SendSuccessMessage( 501587 ); // Whom do you wish to incite?
+            from.SendSuccessMessage(501587); // Whom do you wish to incite?
 
             var (targeted1, _) = await target1;
             
@@ -90,15 +90,13 @@ namespace Server.SkillHandlers
                 return Delay;
             }
 
-            var difficulty = targeted1.ProvokeSkillOverride;
-            if (difficulty == 0)
-                difficulty = 100;
+            var difficulty = BaseInstrument.GetDifficulty(targeted1);
 
             if (from.ShilCheckSkill(SkillName.Provocation, difficulty, difficulty * 10))
             {
                 if (from.ShilCheckSkill(SkillName.Musicianship, difficulty, difficulty * 5))
                 {
-                    from.SendSuccessMessage( 501602 ); // Your music succeeds, as you start a fight.
+                    from.SendSuccessMessage(501602); // Your music succeeds, as you start a fight.
                     instrument.PlayInstrumentWell(from);
                     instrument.ConsumeUse(from);
                     targeted1.Provoke(from, targeted2, true);

@@ -225,100 +225,12 @@ namespace Server.Items
             return FindInstrument(from);
         }
 
-        public static bool IsMageryCreature(BaseCreature bc)
+        public static int GetDifficulty(BaseCreature creature)
         {
-            return bc != null && bc.AI == AIType.AI_Mage && bc.Skills[SkillName.Magery].Base > 5.0;
-        }
+            var difficulty = creature.ProvokeSkillOverride;
+            difficulty = Math.Max(difficulty, 100);
 
-        public static bool IsFireBreathingCreature(BaseCreature bc)
-        {
-            if (bc == null)
-                return false;
-
-            return bc.HasBreath;
-        }
-
-        public static bool IsPoisonImmune(BaseCreature bc)
-        {
-            return bc != null && bc.PoisonImmune != null;
-        }
-
-        public static int GetPoisonLevel(BaseCreature bc)
-        {
-            if (bc == null)
-                return 0;
-
-            Poison p = bc.HitPoison;
-
-            if (p == null)
-                return 0;
-
-            return p.Level + 1;
-        }
-
-        public static double GetBaseDifficulty(Mobile targ)
-        {
-            /* Difficulty TODO: Add another 100 points for each of the following abilities:
-              - Radiation or Aura Damage (Heat, Cold etc.)
-              - Summoning Undead
-            */
-
-            double val = targ.HitsMax * 1.6 + targ.StamMax + targ.ManaMax;
-
-            val += targ.SkillsTotal / 10;
-
-            if (val > 700)
-                val = 700 + (int) ((val - 700) * (3.0 / 11));
-
-            BaseCreature bc = targ as BaseCreature;
-
-            if (IsMageryCreature(bc))
-                val += 100;
-
-            if (IsFireBreathingCreature(bc))
-                val += 100;
-
-            if (IsPoisonImmune(bc))
-                val += 100;
-
-            val += GetPoisonLevel(bc) * 20;
-
-            val /= 10;
-
-            return val;
-        }
-
-        public double GetDifficultyFor(Mobile targ)
-        {
-            double val = GetBaseDifficulty(targ);
-
-            if (m_Slayer != SlayerName.None)
-            {
-                SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer);
-
-                if (entry != null)
-                {
-                    if (entry.Slays(targ))
-                        val -= 10.0; // 20%
-                    else if (entry.Group.OppositionSuperSlays(targ))
-                        val += 10.0; // -20%
-                }
-            }
-
-            if (m_Slayer2 != SlayerName.None)
-            {
-                SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer2);
-
-                if (entry != null)
-                {
-                    if (entry.Slays(targ))
-                        val -= 10.0; // 20%
-                    else if (entry.Group.OppositionSuperSlays(targ))
-                        val += 10.0; // -20%
-                }
-            }
-
-            return val;
+            return difficulty;
         }
 
         public static void SetInstrument(Mobile from, BaseInstrument item)
