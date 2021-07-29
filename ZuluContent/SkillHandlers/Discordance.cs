@@ -54,15 +54,11 @@ namespace Server.SkillHandlers
                 return Delay;
             }
 
-            var diff = BaseInstrument.GetDifficulty(creature) - 10.0;
-            var music = from.Skills[SkillName.Musicianship].Value;
+            var difficulty = BaseInstrument.GetDifficulty(creature);
 
-            if (music > 100.0)
-                diff -= (music - 100.0) * 0.5;
+            difficulty /= from.GetClassModifier(Skill);
 
-            diff /= from.GetClassModifier(Skill);
-
-            if (!instrument.CheckMusicianship(from))
+            if (!from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (difficulty * 10)))
             {
                 from.SendFailureMessage(500612); // You play poorly, and there is no effect.
                 instrument.PlayInstrumentBadly(from);
@@ -70,7 +66,7 @@ namespace Server.SkillHandlers
                 return Delay;
             }
 
-            if (!from.ShilCheckSkill(SkillName.Discordance, (int)diff, (int)(diff * 10)))
+            if (!from.ShilCheckSkill(SkillName.Discordance, (int) difficulty, (int) (difficulty * 10)))
             {
                 from.SendFailureMessage(1049540); // You fail to disrupt your target
                 instrument.PlayInstrumentBadly(from);

@@ -91,10 +91,12 @@ namespace Server.SkillHandlers
             }
 
             var difficulty = BaseInstrument.GetDifficulty(targeted1);
+            
+            difficulty /= from.GetClassModifier(Skill);
 
-            if (from.ShilCheckSkill(SkillName.Provocation, difficulty, difficulty * 10))
+            if (from.ShilCheckSkill(SkillName.Provocation, (int) difficulty, (int) (difficulty * 10)))
             {
-                if (from.ShilCheckSkill(SkillName.Musicianship, difficulty, difficulty * 5))
+                if (from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (difficulty * 5)))
                 {
                     from.SendSuccessMessage(501602); // Your music succeeds, as you start a fight.
                     instrument.PlayInstrumentWell(from);

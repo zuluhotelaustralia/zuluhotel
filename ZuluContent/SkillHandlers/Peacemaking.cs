@@ -67,12 +67,14 @@ namespace Server.SkillHandlers
                             continue;
 
                         var difficulty  = m is BaseCreature creature ? BaseInstrument.GetDifficulty(creature) : m.Int;
+                        
+                        difficulty /= from.GetClassModifier(Skill);
 
                         var points = calmed ? 0 : difficulty * 10;
 
-                        if (from.ShilCheckSkill(SkillName.Peacemaking, difficulty, points))
+                        if (from.ShilCheckSkill(SkillName.Peacemaking, (int) difficulty, (int) points))
                         {
-                            if (from.ShilCheckSkill(SkillName.Musicianship, difficulty, points / 3))
+                            if (from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (points / 3)))
                             {
                                 calmed = true;
 
@@ -122,9 +124,9 @@ namespace Server.SkillHandlers
                     var difficulty = targeted is BaseCreature creature ? BaseInstrument.GetDifficulty(creature) : targeted.Int;
                     var points = difficulty * 10;
                     
-                    if (from.ShilCheckSkill(SkillName.Peacemaking, difficulty, points))
+                    if (from.ShilCheckSkill(SkillName.Peacemaking, (int) difficulty, (int) points))
                     {
-                        if (from.ShilCheckSkill(SkillName.Musicianship, difficulty, points / 3))
+                        if (from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (points / 3)))
                         {
                             instrument.PlayInstrumentWell(from);
                             instrument.ConsumeUse(from);

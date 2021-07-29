@@ -225,10 +225,12 @@ namespace Server.Items
             return FindInstrument(from);
         }
 
-        public static int GetDifficulty(BaseCreature creature)
+        public static double GetDifficulty(BaseCreature creature)
         {
             var difficulty = creature.ProvokeSkillOverride;
-            difficulty = Math.Max(difficulty, 100);
+            
+            if (difficulty == 0)
+                difficulty = 100;
 
             return difficulty;
         }
