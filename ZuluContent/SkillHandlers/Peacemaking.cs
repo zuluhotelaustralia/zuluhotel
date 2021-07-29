@@ -46,6 +46,8 @@ namespace Server.SkillHandlers
 
             if (targeted == from)
             {
+                instrument.PlayMusicEffect(from, 0x5A);
+
                 // Standard mode : reset combatants for everyone in the area
                 var map = from.Map;
 

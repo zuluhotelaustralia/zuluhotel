@@ -415,6 +415,37 @@ namespace Server.Items
             from.PlaySound(m_BadlySound);
         }
 
+        public void PlayMusicEffect(Mobile musician, int hue)
+        {
+            new MusicEffectTimer(musician, ItemID, hue).Start();
+        }
+
+        private class MusicEffectTimer : Timer
+        {
+            private Mobile m_From;
+            private int m_ItemID;
+            private int m_Hue;
+
+            public MusicEffectTimer(Mobile from, int itemID, int hue) : base(TimeSpan.Zero, TimeSpan.FromMilliseconds(50), 30)
+            {
+                m_From = from;
+                m_ItemID = itemID;
+                m_Hue = hue;
+            }
+
+            protected override void OnTick()
+            {
+                var map = m_From.Map;
+                var fromLocation = new Point3D(m_From.Location.X - 1, m_From.Location.Y, m_From.Location.Z);
+                var x = fromLocation.X - Utility.RandomMinMax(5, 15);
+                var y = fromLocation.Y + Utility.RandomMinMax(-10, 10);
+                var z = fromLocation.Z + 20;
+                var toLocation = new Point3D(x, y, z);
+
+                Effects.SendMovingEffect(map, m_ItemID, fromLocation, toLocation, 10, 10, false, true, m_Hue);
+            }
+        }
+
         private class InternalTimer : Timer
         {
             private Mobile m_From;

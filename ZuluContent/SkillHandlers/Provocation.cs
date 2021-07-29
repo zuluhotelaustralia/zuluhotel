@@ -38,7 +38,7 @@ namespace Server.SkillHandlers
                 return Delay;
             }
             
-            if (targeted1 == from || (targeted1.BardImmune || !from.CanBeHarmful(targeted1, false)))
+            if (targeted1 == null || (targeted1.BardImmune || !from.CanBeHarmful(targeted1, false)))
             {
                 from.SendFailureMessage(501589); // You can't incite that!
                 return Delay;
