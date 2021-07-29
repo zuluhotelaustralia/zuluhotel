@@ -336,6 +336,8 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);
+            from.NetState.SendMessage(Serial, ItemID, MessageType.Label, 0, 3, true, null, "",
+                $"{UsesRemaining} uses remaining");
         }
 
         public override void OnDoubleClick(Mobile from)
