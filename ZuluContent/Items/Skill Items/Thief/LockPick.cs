@@ -1,4 +1,6 @@
 using System;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Targeting;
 
 namespace Server.Items
@@ -55,7 +57,7 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            from.SendLocalizedMessage(502068); // What do you want to pick?
+            from.SendSuccessMessage(502068); // What do you want to pick?
             from.Target = new InternalTarget(this);
         }
 
@@ -151,7 +153,7 @@ namespace Server.Items
                         return;
                     }
 
-                    if (m_From.CheckTargetSkill(SkillName.Lockpicking, m_Item, m_Item.LockLevel, m_Item.MaxLockLevel))
+                    if (m_From.ShilCheckSkill(SkillName.Lockpicking, m_Item.LockLevel))
                     {
                         // Success! Pick the lock!
                         item.SendLocalizedMessageTo(m_From, 502076); // The lock quickly yields to your skill.

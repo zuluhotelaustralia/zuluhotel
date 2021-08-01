@@ -1,92 +1,61 @@
 using System;
-using Server.Mobiles;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class Stealth
+    public class Stealth : BaseSkillHandler
     {
-        public static void Initialize()
-        {
-            SkillInfo.Table[(int) SkillName.Stealth].Callback = OnUse;
-        }
+        public override SkillName Skill => SkillName.Stealth;
 
-        public static double HidingRequirement
-        {
-            get { return 80.0; }
-        }
+        public static double HidingRequirement => 80;
 
-        public static int[,] ArmorTable
+        public override async Task<TimeSpan> OnUse(Mobile mobile)
         {
-            get { return m_ArmorTable; }
-        }
-
-        private static int[,] m_ArmorTable = new[,]
-        {
-            //	Gorget	Gloves	Helmet	Arms	Legs	Chest	Shield
-            /* Cloth	*/ {0, 0, 0, 0, 0, 0, 0},
-            /* Leather	*/ {0, 0, 0, 0, 0, 0, 0},
-            /* Studded	*/ {2, 2, 0, 4, 6, 10, 0},
-            /* Bone		*/ {0, 5, 10, 10, 15, 25, 0},
-            /* Spined	*/ {0, 0, 0, 0, 0, 0, 0},
-            /* Horned	*/ {0, 0, 0, 0, 0, 0, 0},
-            /* Barbed	*/ {0, 0, 0, 0, 0, 0, 0},
-            /* Ring		*/ {0, 5, 0, 10, 15, 25, 0},
-            /* Chain	*/ {0, 0, 10, 0, 15, 25, 0},
-            /* Plate	*/ {5, 5, 10, 10, 15, 25, 0},
-            /* Dragon	*/ {0, 5, 10, 10, 15, 25, 0}
-        };
-
-        public static int GetArmorRating(Mobile m)
-        {
-            return (int) m.ArmorRating;
-        }
-
-        public static TimeSpan OnUse(Mobile m)
-        {
-            if (!m.Hidden)
+            if (!mobile.Hidden)
             {
-                m.SendLocalizedMessage(502725); // You must hide first
-            }
-            else if (m.Skills[SkillName.Hiding].Base < HidingRequirement)
-            {
-                m.SendLocalizedMessage(502726); // You are not hidden well enough.  Become better at hiding.
-                m.RevealingAction();
-            }
-            else if (!m.CanBeginAction(typeof(Stealth)))
-            {
-                m.SendLocalizedMessage(1063086); // You cannot use this skill right now.
-                m.RevealingAction();
-            }
-            else
-            {
-                int armorRating = GetArmorRating(m);
-
-                if (armorRating >= 26) //I have a hunch '42' was chosen cause someone's a fan of DNA
-                {
-                    m.SendLocalizedMessage(502727); // You could not hope to move quietly wearing this much armor.
-                    m.RevealingAction();
-                }
-                else if (m.CheckSkill(SkillName.Stealth, -20.0 + armorRating * 2, 80.0 + armorRating * 2))
-                {
-                    int steps = (int) (m.Skills[SkillName.Stealth].Value / 10.0);
-
-                    if (steps < 1)
-                        steps = 1;
-
-                    m.AllowedStealthSteps = steps;
-
-                    m.SendLocalizedMessage(502730); // You begin to move quietly.
-
-                    return TimeSpan.FromSeconds(10.0);
-                }
-                else
-                {
-                    m.SendLocalizedMessage(502731); // You fail in your attempt to move unnoticed.
-                    m.RevealingAction();
-                }
+                mobile.SendFailureMessage(502725); // You must hide first
+                return Delay;
             }
 
-            return TimeSpan.FromSeconds(10.0);
+            if (mobile.Skills[SkillName.Hiding].Value < HidingRequirement)
+            {
+                mobile.SendFailureMessage(502726); // You are not hidden well enough.  Become better at hiding.
+                mobile.RevealingAction();
+                return Delay;
+            }
+
+            if (!mobile.CanBeginAction(typeof(Stealth)))
+            {
+                mobile.SendFailureMessage(1063086); // You cannot use this skill right now.
+                mobile.RevealingAction();
+                return Delay;
+            }
+
+            if (!mobile.ShilCheckSkill(SkillName.Stealth))
+            {
+                mobile.SendFailureLocalOverHeadMessage(502731); // You fail in your attempt to move unnoticed.
+                mobile.RevealingAction();
+                return Delay;
+            }
+
+            var steps = mobile.Skills[SkillName.Stealth].Value / 12.0 + 1;
+
+            steps *= mobile.GetClassModifier(Skill);
+
+            mobile.AllowedStealthSteps = (int) steps;
+            mobile.SendSuccessMessage(502730); // You begin to move quietly.
+
+            Timer.DelayCall(Delay, StealthReady_Callback, mobile);
+
+            return Delay;
+        }
+
+        public static void StealthReady_Callback(Mobile mobile)
+        {
+            mobile.SendSuccessMessage("You feel ready to stealth again.");
         }
     }
 }
