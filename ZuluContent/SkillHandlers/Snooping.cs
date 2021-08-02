@@ -39,6 +39,11 @@ namespace Server.SkillHandlers
             return 0;
         }
 
+        public static void SetNextSkillTime(Mobile from)
+        {
+            from.NextSkillTime = Core.TickCount + (int) Delay.TotalMilliseconds;
+        }
+
         public static async void Container_Snoop(Container cont, Mobile from)
         {
             if (from.AccessLevel == AccessLevel.Player)
@@ -61,19 +66,25 @@ namespace Server.SkillHandlers
                     return;
                 }
             }
-            
+
             var victim = cont.RootParent as Mobile;
 
             if (victim is {Alive: false})
                 return;
+            
+            if (from.AccessLevel > AccessLevel.Player)
+            {
+                cont.DisplayTo(from);
+                return;
+            }
 
-            if (victim is {AccessLevel: > AccessLevel.Player} && from.AccessLevel == AccessLevel.Player)
+            if (victim is {AccessLevel: > AccessLevel.Player})
             {
                 from.SendFailureMessage(500209); // You can not peek into the container.
                 return;
             }
 
-            if (victim != null && from.AccessLevel == AccessLevel.Player && !CheckSnoopAllowed(from, victim))
+            if (victim != null && !CheckSnoopAllowed(from, victim))
             {
                 from.SendFailureMessage(1001018); // You cannot perform negative acts on your target.
                 return;
@@ -86,6 +97,7 @@ namespace Server.SkillHandlers
             {
                 from.SendFailureMessage("You'd be caught red-handed!!!");
                 from.SendFailureMessage("You have to improve thy snooping skill...");
+                SetNextSkillTime(from);
                 return;
             }
 
@@ -95,10 +107,10 @@ namespace Server.SkillHandlers
 
             if (from.HandArmor is not ThiefGloves)
                 difficulty += 20.0;
-            
+
             // TODO: Should classed thieves get a bonus to the difficulty check here?
 
-            if (from.AccessLevel == AccessLevel.Player && !from.ShilCheckSkill(SkillName.Snooping,
+            if (!from.ShilCheckSkill(SkillName.Snooping,
                 (int) difficulty, (int) (difficulty * 20.0)))
             {
                 from.RevealingAction();
@@ -128,39 +140,35 @@ namespace Server.SkillHandlers
                 from.SendFailureMessage(500210); // You failed to peek into the container.
                 from.CriminalAction(false);
 
+                SetNextSkillTime(from);
                 return;
             }
 
-            if (from.AccessLevel == AccessLevel.Player)
+            from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true,
+                "You attempt to open the backpack...", from.NetState);
+
+            var snoopDelay = (int) (10 - snoopingSkill / 10) * 1000;
+
+            from.NextSkillTime = Core.TickCount + snoopDelay;
+            await Timer.Pause(snoopDelay);
+
+            if (!from.InRange(cont.GetWorldLocation(), 1))
             {
-                from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true,
-                    "You attempt to open the backpack...", from.NetState);
-
-                var snoopDelay = (int) (10 - snoopingSkill / 10) * 1000;
-
-                from.NextSkillTime = Core.TickCount + snoopDelay;
-                await Timer.Pause(snoopDelay);
-
-                if (!from.InRange(cont.GetWorldLocation(), 1))
-                {
-                    from.SendFailureMessage($"You need to stay close to {victim.Name}.");
-                    return;
-                }
-
-                if (cont is TrapableContainer container && container.ExecuteTrap(from))
-                    return;
-
-                from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, "...backpack opened!",
-                    from.NetState);
-                cont.DisplayTo(from);
-            }
-            else
-            {
-                cont.DisplayTo(from);
+                from.SendFailureMessage($"You need to stay close to {victim.Name}.");
+                SetNextSkillTime(from);
+                return;
             }
 
-            if (from.AccessLevel == AccessLevel.Player)
-                from.NextSkillTime = Core.TickCount + (int) Delay.TotalMilliseconds;
+            if (cont is TrapableContainer container && container.ExecuteTrap(from))
+            {
+                SetNextSkillTime(from);
+                return;
+            }
+
+            from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, "...backpack opened!",
+                from.NetState);
+            cont.DisplayTo(from);
+            SetNextSkillTime(from);
         }
     }
 }
