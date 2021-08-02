@@ -440,8 +440,8 @@ namespace Server.Engines.Harvest
 
             var timer = new HarvestTimer(from, tool, this, def, toHarvest, toLock);
             timer.Start();
-            from.NextSkillTime = Core.TickCount + timer.Interval.Milliseconds * timer.Count +
-                                 TimeSpan.FromSeconds(ZhConfig.Crafting.AutoLoop.Delay + 1.0).Milliseconds;
+            from.NextSkillTime = Core.TickCount + (int) timer.Interval.TotalMilliseconds * timer.Count +
+                                 (int) TimeSpan.FromSeconds(ZhConfig.Crafting.AutoLoop.Delay + 1.0).TotalMilliseconds;
             OnHarvestStarted(from, tool, def, toHarvest);
         }
 

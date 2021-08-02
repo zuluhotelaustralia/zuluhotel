@@ -1,105 +1,166 @@
 using System;
-using Server.Misc;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Items;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
-using Server.Regions;
 
 namespace Server.SkillHandlers
 {
     public class Snooping
-	{
-		public static void Configure()
-		{
-			Container.SnoopHandler = Container_Snoop;
-		}
+    {
+        public static TimeSpan Delay => ZhConfig.Skills.Entries[SkillName.Snooping].Delay;
 
-		public static bool CheckSnoopAllowed( Mobile from, Mobile to )
-		{
-			Map map = from.Map;
+        public static void Configure()
+        {
+            Container.SnoopHandler = Container_Snoop;
+        }
 
-			if ( to.Player )
-				return from.CanBeHarmful( to, false, true ); // normal restrictions
+        private static bool CheckSnoopAllowed(Mobile from, Mobile victim)
+        {
+            if (victim.Player)
+                return from.CanBeHarmful(victim, false, true); // normal restrictions
 
-			if ( map != null && (map.Rules & MapRules.HarmfulRestrictions) == 0 )
-				return true; // felucca you can snoop anybody
+            return true;
+        }
 
-			GuardedRegion reg = (GuardedRegion) to.Region.GetRegion( typeof( GuardedRegion ) );
+        private static int CheckSnoopVictimDifficulty(Mobile victim)
+        {
+            if (victim is BaseVendor)
+                return 40;
 
-			if ( reg == null || reg.IsDisabled() )
-				return true; // not in town? we can snoop any npc
+            if (victim is Warrior)
+                return 80;
 
-			BaseCreature cret = to as BaseCreature;
+            if (victim is BaseGuard)
+                return 100;
 
-			if ( to.Body.IsHuman && (cret == null || !cret.AlwaysAttackable && !cret.AlwaysMurderer) )
-				return false; // in town we cannot snoop blue human npcs
+            return 0;
+        }
 
-			return true;
-		}
+        public static async void Container_Snoop(Container cont, Mobile from)
+        {
+            if (from.AccessLevel == AccessLevel.Player)
+            {
+                if (from.NextSkillTime > Core.TickCount)
+                {
+                    from.SendLocalizedMessage(1045157); // You must wait to perform another action.
+                    return;
+                }
 
-		public static void Container_Snoop( Container cont, Mobile from )
-		{
-			if ( from.AccessLevel > AccessLevel.Player || from.InRange( cont.GetWorldLocation(), 1 ) )
-			{
-				Mobile root = cont.RootParent as Mobile;
+                if ((from.FindItemOnLayer(Layer.OneHanded) ?? from.FindItemOnLayer(Layer.TwoHanded)) != null)
+                {
+                    from.SendFailureMessage("You'll need your hands empty for that!");
+                    return;
+                }
 
-				if ( root != null && !root.Alive )
-					return;
+                if (!from.InRange(cont.GetWorldLocation(), 1))
+                {
+                    from.SendFailureMessage(500446); // That is too far away.
+                    return;
+                }
+            }
+            
+            var victim = cont.RootParent as Mobile;
 
-				if ( root != null && root.AccessLevel > AccessLevel.Player && from.AccessLevel == AccessLevel.Player )
-				{
-					from.SendLocalizedMessage( 500209 ); // You can not peek into the container.
-					return;
-				}
+            if (victim is {Alive: false})
+                return;
 
-				if ( root != null && from.AccessLevel == AccessLevel.Player && !CheckSnoopAllowed( from, root ) )
-				{
-					from.SendLocalizedMessage( 1001018 ); // You cannot perform negative acts on your target.
-					return;
-				}
+            if (victim is {AccessLevel: > AccessLevel.Player} && from.AccessLevel == AccessLevel.Player)
+            {
+                from.SendFailureMessage(500209); // You can not peek into the container.
+                return;
+            }
 
-				if ( root != null && from.AccessLevel == AccessLevel.Player && from.Skills[SkillName.Snooping].Value < Utility.Random( 100 ) )
-				{
-					Map map = from.Map;
+            if (victim != null && from.AccessLevel == AccessLevel.Player && !CheckSnoopAllowed(from, victim))
+            {
+                from.SendFailureMessage(1001018); // You cannot perform negative acts on your target.
+                return;
+            }
 
-					if ( map != null )
-					{
-						string message = $"You notice {@from.Name} attempting to peek into {root.Name}'s belongings.";
+            var victimDifficulty = CheckSnoopVictimDifficulty(victim);
+            var snoopingSkill = from.Skills[SkillName.Snooping].Value;
 
-						IPooledEnumerable eable = map.GetClientsInRange( from.Location, 8 );
+            if (victimDifficulty > snoopingSkill + 20.0)
+            {
+                from.SendFailureMessage("You'd be caught red-handed!!!");
+                from.SendFailureMessage("You have to improve thy snooping skill...");
+                return;
+            }
 
-						foreach ( NetState ns in eable )
-						{
-							if ( ns.Mobile != from )
-								ns.Mobile.SendMessage( message );
-						}
+            var difficulty = victim.Dex - from.Dex +
+                             Math.Max(victim.Skills[SkillName.Snooping].Value, victim.Int / 2);
+            difficulty = Math.Max(difficulty, 0.0);
 
-						eable.Free();
-					}
-				}
+            if (from.HandArmor is not ThiefGloves)
+                difficulty += 20.0;
+            
+            // TODO: Should classed thieves get a bonus to the difficulty check here?
 
-				if ( from.AccessLevel == AccessLevel.Player )
-					Titles.AwardKarma( from, -4, true );
+            if (from.AccessLevel == AccessLevel.Player && !from.ShilCheckSkill(SkillName.Snooping,
+                (int) difficulty, (int) (difficulty * 20.0)))
+            {
+                from.RevealingAction();
 
-				if ( from.AccessLevel > AccessLevel.Player || from.CheckTargetSkill( SkillName.Snooping, cont, 0.0, 100.0 ) )
-				{
-					if ( cont is TrapableContainer && ((TrapableContainer)cont).ExecuteTrap( from ) )
-						return;
+                var map = from.Map;
 
-					cont.DisplayTo( from );
-				}
-				else
-				{
-					from.SendLocalizedMessage( 500210 ); // You failed to peek into the container.
-					
-					if ( from.Skills[SkillName.Hiding].Value / 2 < Utility.Random( 100 ) )
-						from.RevealingAction();
-				}
-			}
-			else
-			{
-				from.SendLocalizedMessage( 500446 ); // That is too far away.
-			}
-		}
-	}
+                if (map != null)
+                {
+                    var message = $"You notice {from.Name} attempting to peek into {victim.Name}'s belongings.";
+
+                    var range = (int) (15 - from.Skills[SkillName.Stealth].Value / 10);
+                    range = Math.Max(range, 3);
+
+                    var eable = map.GetClientsInRange(from.Location, range);
+
+                    foreach (var ns in eable)
+                        if (ns.Mobile != from)
+                            ns.Mobile.SendMessage(message);
+
+                    eable.Free();
+                }
+
+                var lossKarma = from.Karma > -625 ? -Utility.RandomMinMax(1, 300) : 0;
+                Titles.AwardKarma(from, lossKarma, true);
+
+                from.SendFailureMessage("You are noticed snooping in the backpack!");
+                from.SendFailureMessage(500210); // You failed to peek into the container.
+                from.CriminalAction(false);
+
+                return;
+            }
+
+            if (from.AccessLevel == AccessLevel.Player)
+            {
+                from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true,
+                    "You attempt to open the backpack...", from.NetState);
+
+                var snoopDelay = (int) (10 - snoopingSkill / 10) * 1000;
+
+                from.NextSkillTime = Core.TickCount + snoopDelay;
+                await Timer.Pause(snoopDelay);
+
+                if (!from.InRange(cont.GetWorldLocation(), 1))
+                {
+                    from.SendFailureMessage($"You need to stay close to {victim.Name}.");
+                    return;
+                }
+
+                if (cont is TrapableContainer container && container.ExecuteTrap(from))
+                    return;
+
+                from.PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, "...backpack opened!",
+                    from.NetState);
+                cont.DisplayTo(from);
+            }
+            else
+            {
+                cont.DisplayTo(from);
+            }
+
+            if (from.AccessLevel == AccessLevel.Player)
+                from.NextSkillTime = Core.TickCount + (int) Delay.TotalMilliseconds;
+        }
+    }
 }
