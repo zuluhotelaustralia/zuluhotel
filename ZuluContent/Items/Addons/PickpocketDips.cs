@@ -1,49 +1,31 @@
 using System;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 
 namespace Server.Items
 {
     [Flipable(0x1EC0, 0x1EC3)]
     public class PickpocketDip : AddonComponent
     {
-        private double m_MinSkill;
-        private double m_MaxSkill;
-
         private Timer m_Timer;
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public double MinSkill
-        {
-            get => m_MinSkill;
-            set => m_MinSkill = value;
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
-        public double MaxSkill
-        {
-            get => m_MaxSkill;
-            set => m_MaxSkill = value;
-        }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public bool Swinging => m_Timer != null;
 
         public PickpocketDip(int itemID) : base(itemID)
         {
-            m_MinSkill = -25.0;
-            m_MaxSkill = +25.0;
         }
 
         public void UpdateItemID()
         {
-            int baseItemID = 0x1EC0 + (ItemID - 0x1EC0) / 3 * 3;
+            var baseItemID = 0x1EC0 + (ItemID - 0x1EC0) / 3 * 3;
 
             ItemID = baseItemID + (Swinging ? 1 : 0);
         }
 
         public void BeginSwing()
         {
-            if (m_Timer != null)
-                m_Timer.Stop();
+            m_Timer?.Stop();
 
             m_Timer = new InternalTimer(this);
             m_Timer.Start();
@@ -53,8 +35,7 @@ namespace Server.Items
 
         public void EndSwing()
         {
-            if (m_Timer != null)
-                m_Timer.Stop();
+            m_Timer?.Stop();
 
             m_Timer = null;
 
@@ -67,9 +48,9 @@ namespace Server.Items
 
             Effects.PlaySound(GetWorldLocation(), Map, 0x4F);
 
-            if (from.CheckSkill(SkillName.Stealing, m_MinSkill, m_MaxSkill))
+            if (from.ShilCheckSkill(SkillName.Stealing, 10, 200))
             {
-                SendLocalizedMessageTo(from, 501834); // You successfully avoid disturbing the dip while searching it.
+                from.SendSuccessMessage(501834); // You successfully avoid disturbing the dip while searching it.
             }
             else
             {
@@ -77,21 +58,16 @@ namespace Server.Items
 
                 BeginSwing();
                 ProcessDelta();
-                SendLocalizedMessageTo(from, 501831); // You carelessly bump the dip and start it swinging.
+                from.SendFailureMessage(501831); // You carelessly bump the dip and start it swinging.
             }
         }
 
         public override void OnDoubleClick(Mobile from)
         {
             if (!from.InRange(GetWorldLocation(), 1))
-                SendLocalizedMessageTo(from, 501816); // You are too far away to do that.
+                from.SendFailureMessage(501816); // You are too far away to do that.
             else if (Swinging)
-                SendLocalizedMessageTo(from, 501815); // You have to wait until it stops swinging.
-            else if (from.Skills[SkillName.Stealing].Base >= m_MaxSkill)
-                SendLocalizedMessageTo(from,
-                    501830); // Your ability to steal cannot improve any further by simply practicing on a dummy.
-            else if (from.Mounted)
-                SendLocalizedMessageTo(from, 501829); // You can't practice on this while on a mount.
+                from.SendFailureMessage(501815); // You have to wait until it stops swinging.
             else
                 Use(from);
         }
@@ -104,41 +80,21 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0);
-
-            writer.Write(m_MinSkill);
-            writer.Write(m_MaxSkill);
+            writer.Write(0);
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
-
-            switch (version)
-            {
-                case 0:
-                {
-                    m_MinSkill = reader.ReadDouble();
-                    m_MaxSkill = reader.ReadDouble();
-
-                    if (m_MinSkill == 0.0 && m_MaxSkill == 30.0)
-                    {
-                        m_MinSkill = -25.0;
-                        m_MaxSkill = +25.0;
-                    }
-
-                    break;
-                }
-            }
-
+            var version = reader.ReadInt();
+            
             UpdateItemID();
         }
 
         private class InternalTimer : Timer
         {
-            private PickpocketDip m_Dip;
+            private readonly PickpocketDip m_Dip;
 
             public InternalTimer(PickpocketDip dip) : base(TimeSpan.FromSeconds(3.0))
             {
@@ -172,14 +128,14 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 
@@ -201,14 +157,14 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 
@@ -230,14 +186,14 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 
@@ -259,14 +215,14 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }
