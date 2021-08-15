@@ -982,9 +982,6 @@ namespace Server.Mobiles
             if (item is TrapableContainer && ((TrapableContainer) item).TrapType != TrapType.None)
                 return 1004044; // You may not trade trapped items.
 
-            if (SkillHandlers.StolenItem.IsStolen(item))
-                return 1004043; // You may not trade recently stolen items.
-
             if (item is Container)
             {
                 foreach (Item subItem in item.Items)
@@ -1120,8 +1117,6 @@ namespace Server.Mobiles
             NameMod = null;
 
             DisguiseTimers.RemoveTimer(this);
-
-            SkillHandlers.StolenItem.ReturnOnDeath(this, c);
 
             if (PermaFlags.Count > 0)
             {

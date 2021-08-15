@@ -164,11 +164,7 @@ namespace Server.Gumps
 							{
 								pk.SendLocalizedMessage(502134);//You are now known as a murderer!
 							}
-							else if (SkillHandlers.Stealing.SuspendOnMurder && pk.Kills == 1 && pk.NpcGuild == NpcGuild.ThievesGuild)
-							{
-								pk.SendLocalizedMessage(501562); // You have been suspended by the Thieves Guild.
-							}
-						}
+                        }
 					}
 					break;
 				}
