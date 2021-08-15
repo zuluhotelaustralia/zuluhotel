@@ -82,7 +82,7 @@ namespace Server.SkillHandlers
                 from.SendSuccessMessage($"This being is at {percent}% of their max vigor.");
             }
 
-            return ZhConfig.Skills.Entries[SkillName.Anatomy].Delay;
+            return Delay;
         }
     }
 }
