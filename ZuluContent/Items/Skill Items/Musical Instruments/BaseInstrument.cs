@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Network;
 using Server.Mobiles;
 using Server.Targeting;
@@ -172,7 +173,7 @@ namespace Server.Items
             else
             {
                 if (from != null)
-                    from.SendLocalizedMessage(502079); // The instrument played its last tune.
+                    from.SendFailureMessage(502079); // The instrument played its last tune.
 
                 Delete();
             }
@@ -193,167 +194,45 @@ namespace Server.Items
 
             return item;
         }
+        
+        public static BaseInstrument FindInstrument(Mobile from)
+        {
+            var backpack = from.Backpack;
+
+            var instrumentItem = backpack.FindItemByType(typeof(BaseInstrument));
+
+            if (instrumentItem is BaseInstrument instrument)
+            {
+                SetInstrument(from, instrument);
+                return instrument;
+            }
+
+            return null;
+        }
 
         public static int GetBardRange(Mobile bard, SkillName skill)
         {
             return 8 + (int) (bard.Skills[skill].Value / 15);
         }
 
-        public static void PickInstrument(Mobile from, InstrumentPickedCallback callback)
+        public static BaseInstrument PickInstrument(Mobile from)
         {
             var instrument = GetInstrument(from);
 
-            if (instrument != null)
-            {
-                callback?.Invoke(from, instrument);
-            }
-            else
-            {
-                from.SendLocalizedMessage(500617); // What instrument shall you play?
-                from.BeginTarget(1, false, TargetFlags.None, OnPickedInstrument, callback);
-            }
-        }
-
-        public static async Task<BaseInstrument> PickInstrumentAsync(Mobile from)
-        {
-            var instrument = GetInstrument(from);
             if (instrument != null)
                 return instrument;
+
+            return FindInstrument(from);
+        }
+
+        public static double GetDifficulty(BaseCreature creature)
+        {
+            var difficulty = creature.ProvokeSkillOverride;
             
-            from.SendLocalizedMessage(500617); // What instrument shall you play?
-            var target = new AsyncTarget<Item>(from, new TargetOptions
-            {
-                Range = 1,
-            });
-            
-            from.Target = target;
+            if (difficulty == 0)
+                difficulty = 100;
 
-            var (item, _) = await target;
-
-            switch (item)
-            {
-                case null:
-                    break;
-                case BaseInstrument targeted:
-                    SetInstrument(from, targeted);
-                    return targeted;
-                default:
-                    from.SendLocalizedMessage(500619); // That is not a musical instrument.
-                    break;
-            }
-
-            return null;
-        }
-
-        public static void OnPickedInstrument(Mobile from, object targeted, object state)
-        {
-            if (!(targeted is BaseInstrument instrument))
-            {
-                from.SendLocalizedMessage(500619); // That is not a musical instrument.
-            }
-            else
-            {
-                SetInstrument(from, instrument);
-
-                if (state is InstrumentPickedCallback callback)
-                    callback(from, instrument);
-            }
-        }
-
-        public static bool IsMageryCreature(BaseCreature bc)
-        {
-            return bc != null && bc.AI == AIType.AI_Mage && bc.Skills[SkillName.Magery].Base > 5.0;
-        }
-
-        public static bool IsFireBreathingCreature(BaseCreature bc)
-        {
-            if (bc == null)
-                return false;
-
-            return bc.HasBreath;
-        }
-
-        public static bool IsPoisonImmune(BaseCreature bc)
-        {
-            return bc != null && bc.PoisonImmune != null;
-        }
-
-        public static int GetPoisonLevel(BaseCreature bc)
-        {
-            if (bc == null)
-                return 0;
-
-            Poison p = bc.HitPoison;
-
-            if (p == null)
-                return 0;
-
-            return p.Level + 1;
-        }
-
-        public static double GetBaseDifficulty(Mobile targ)
-        {
-            /* Difficulty TODO: Add another 100 points for each of the following abilities:
-              - Radiation or Aura Damage (Heat, Cold etc.)
-              - Summoning Undead
-            */
-
-            double val = targ.HitsMax * 1.6 + targ.StamMax + targ.ManaMax;
-
-            val += targ.SkillsTotal / 10;
-
-            if (val > 700)
-                val = 700 + (int) ((val - 700) * (3.0 / 11));
-
-            BaseCreature bc = targ as BaseCreature;
-
-            if (IsMageryCreature(bc))
-                val += 100;
-
-            if (IsFireBreathingCreature(bc))
-                val += 100;
-
-            if (IsPoisonImmune(bc))
-                val += 100;
-
-            val += GetPoisonLevel(bc) * 20;
-
-            val /= 10;
-
-            return val;
-        }
-
-        public double GetDifficultyFor(Mobile targ)
-        {
-            double val = GetBaseDifficulty(targ);
-
-            if (m_Slayer != SlayerName.None)
-            {
-                SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer);
-
-                if (entry != null)
-                {
-                    if (entry.Slays(targ))
-                        val -= 10.0; // 20%
-                    else if (entry.Group.OppositionSuperSlays(targ))
-                        val += 10.0; // -20%
-                }
-            }
-
-            if (m_Slayer2 != SlayerName.None)
-            {
-                SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer2);
-
-                if (entry != null)
-                {
-                    if (entry.Slays(targ))
-                        val -= 10.0; // 20%
-                    else if (entry.Group.OppositionSuperSlays(targ))
-                        val += 10.0; // -20%
-                }
-            }
-
-            return val;
+            return difficulty;
         }
 
         public static void SetInstrument(Mobile from, BaseInstrument item)
@@ -459,6 +338,8 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             HandleSingleClick(this, from);
+            from.NetState.SendMessage(Serial, ItemID, MessageType.Label, 0, 3, true, null, "",
+                $"{UsesRemaining} uses remaining");
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -470,9 +351,13 @@ namespace Server.Items
             else if (from.BeginAction(typeof(BaseInstrument)))
             {
                 SetInstrument(from, this);
+                
+                var prevLocation = from.Location;
 
                 // Delay of 7 second before beign able to play another instrument again
-                new InternalTimer(from).Start();
+                new InternalTimer(from, prevLocation, this).Start();
+                
+                from.SendSuccessMessage("You begin playing...");
 
                 if (CheckMusicianship(from))
                     PlayInstrumentWell(from);
@@ -511,9 +396,17 @@ namespace Server.Items
             return mark;
         }
 
-        public static bool CheckMusicianship(Mobile m)
+        public bool CheckMusicianship(Mobile m)
         {
-            return m.ShilCheckSkill(SkillName.Musicianship);
+            var difficulty = (int) m.Skills[SkillName.Musicianship].Value - 10;
+            difficulty = Math.Max(difficulty, 10);
+
+            var points = difficulty * 2;
+
+            if (this is Harp)
+                points *= 2;
+            
+            return m.ShilCheckSkill(SkillName.Musicianship, difficulty, points);
         }
 
         public void PlayInstrumentWell(Mobile from)
@@ -526,18 +419,58 @@ namespace Server.Items
             from.PlaySound(m_BadlySound);
         }
 
+        public void PlayMusicEffect(Mobile musician, int hue)
+        {
+            new MusicEffectTimer(musician, ItemID, hue).Start();
+        }
+
+        private class MusicEffectTimer : Timer
+        {
+            private Mobile m_From;
+            private int m_ItemID;
+            private int m_Hue;
+
+            public MusicEffectTimer(Mobile from, int itemID, int hue) : base(TimeSpan.Zero, TimeSpan.FromMilliseconds(50), 30)
+            {
+                m_From = from;
+                m_ItemID = itemID;
+                m_Hue = hue;
+            }
+
+            protected override void OnTick()
+            {
+                var map = m_From.Map;
+                var fromLocation = new Point3D(m_From.Location.X - 1, m_From.Location.Y, m_From.Location.Z);
+                var x = fromLocation.X - Utility.RandomMinMax(5, 15);
+                var y = fromLocation.Y + Utility.RandomMinMax(-10, 10);
+                var z = fromLocation.Z + 20;
+                var toLocation = new Point3D(x, y, z);
+
+                Effects.SendMovingEffect(map, m_ItemID, fromLocation, toLocation, 10, 10, false, true, m_Hue);
+            }
+        }
+
         private class InternalTimer : Timer
         {
             private Mobile m_From;
+            private Point3D m_PrevLocation;
+            private BaseInstrument m_Instrument;
 
-            public InternalTimer(Mobile from) : base(TimeSpan.FromSeconds(6.0))
+            public InternalTimer(Mobile from, Point3D prevLocation, BaseInstrument instrument) : base(TimeSpan.FromSeconds(6.0))
             {
                 m_From = from;
+                m_PrevLocation = prevLocation;
+                m_Instrument = instrument;
             }
 
             protected override void OnTick()
             {
                 m_From.EndAction(typeof(BaseInstrument));
+                
+                if (m_From.Location == m_PrevLocation)
+                    m_Instrument.OnDoubleClick(m_From);
+                else
+                    m_From.SendSuccessMessage("You stop playing...");
             }
         }
     }

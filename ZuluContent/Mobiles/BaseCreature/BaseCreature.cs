@@ -3144,14 +3144,26 @@ namespace Server.Mobiles
             if (IsInvulnerable)
                 val += " [invulnerable]";
 
+            if (BardEndTime > DateTime.Now)
+            {
+                var timeDiff = BardEndTime - DateTime.Now;
+                var timeVal = "";
+
+                if (timeDiff.Minutes > 0)
+                    timeVal += $"{timeDiff.Minutes}m ";
+
+                if (timeDiff.Seconds > 0)
+                    timeVal += $"{timeDiff.Seconds}s";
+                
+                if (BardPacified)
+                    PrivateOverheadMessage(MessageType.Label, 0x9B, true, $"*pacified {timeVal}*", from.NetState);
+                else if (BardProvoked)
+                    PrivateOverheadMessage(MessageType.Label, 0x9B, true, $"*provoked {timeVal}*", from.NetState);
+                
+            }
+
             PrivateOverheadMessage(MessageType.Label, hue, true, val, from.NetState);
         }
-
-        public virtual double TreasureMapChance
-        {
-            get { return TreasureMap.LootChance; }
-        }
-
 
         public virtual bool IgnoreYoungProtection
         {
@@ -4023,6 +4035,7 @@ namespace Server.Mobiles
 
         public void Pacify(Mobile master, DateTime endtime)
         {
+            PublicOverheadMessage(MessageType.Emote, EmoteHue, false, "*looks calm*");
             BardPacified = true;
             BardEndTime = endtime;
         }
