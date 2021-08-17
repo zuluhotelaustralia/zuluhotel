@@ -62,6 +62,7 @@ namespace ZuluContent.Configuration
             public double? Skill2 { get; init; }
 
             public CraftResource[] Resources { get; init; }
+            
             public bool UseAllRes { get; init; }
             public bool NeedHeat { get; init; }
             public bool NeedOven { get; init; }

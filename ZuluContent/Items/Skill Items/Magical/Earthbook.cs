@@ -57,9 +57,9 @@ namespace Server.Items
             if (obj is Earthbook book)
             {
                 if (book.BookCount == 16)
-                    book.Entries = ulong.MaxValue;
+                    book.Content = ulong.MaxValue;
                 else
-                    book.Entries = (1ul << book.BookCount) - 1;
+                    book.Content = (1ul << book.BookCount) - 1;
 
                 from.SendMessage("The Earth Book has been filled.");
 

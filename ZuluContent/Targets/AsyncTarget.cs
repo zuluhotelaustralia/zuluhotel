@@ -104,7 +104,7 @@ namespace Server.Targeting
 
         public void OnCompleted(Action continuation)
         {
-            if (!IsCompleted && TimeoutTime < Core.TickCount)
+            if (!IsCompleted && TimeoutTime > Core.TickCount)
             {
                 Continuation = continuation;
                 BeginTimeout(Mobile, TargetTimeout);

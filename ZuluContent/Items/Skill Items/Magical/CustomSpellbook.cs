@@ -8,7 +8,7 @@ using Server.Spells;
 
 namespace Server.Items
 {
-    public abstract class CustomSpellbook : Item, ISecurable
+    public abstract class CustomSpellbook : Item, ISecurable, ISpellbook
     {
         [CommandProperty(AccessLevel.GameMaster)]
         public SecureLevel Level { get; set; }
@@ -16,7 +16,7 @@ namespace Server.Items
         public List<Mobile> Openers { get; set; } = new();
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public ulong Entries { get; set; }
+        public ulong Content { get; set; }
         public abstract Type SpellType { get; }
         public virtual int BookOffset { get; } = 0;
         public virtual int BookCount { get; } = 16;
@@ -30,7 +30,7 @@ namespace Server.Items
 
             Layer = Layer.OneHanded;
 
-            Entries = (ulong) 0;
+            Content = (ulong) 0;
 
             Level = SecureLevel.CoOwners;
         }
@@ -44,7 +44,7 @@ namespace Server.Items
         {
             spellId -= BookOffset;
 
-            return spellId >= 0 && (int) spellId < BookCount && (Entries & ((ulong) 1 << (int) spellId)) != 0;
+            return spellId >= 0 && (int) spellId < BookCount && (Content & ((ulong) 1 << (int) spellId)) != 0;
         }
 
         public override bool AllowEquippedCast(Mobile from)
@@ -72,7 +72,7 @@ namespace Server.Items
 
                 if (val >= 0 && val < BookCount)
                 {
-                    Entries |= (ulong) 1 << val;
+                    Content |= (ulong) 1 << val;
 
                     scroll.Delete();
                     return true;
@@ -86,16 +86,13 @@ namespace Server.Items
 
         public void AddEntry(CustomSpellScroll scroll)
         {
-            if (scroll.Amount == 1)
+            var val = (int) scroll.SpellEntry - BookOffset;
+
+            if (val >= 0 && val < BookCount)
             {
-                var val = (int) scroll.SpellEntry - BookOffset;
+                Content |= (ulong) 1 << val;
 
-                if (val >= 0 && val < BookCount)
-                {
-                    Entries |= (ulong) 1 << val;
-
-                    scroll.Delete();
-                }
+                scroll.Consume();
             }
         }
 
@@ -167,7 +164,7 @@ namespace Server.Items
             if (!(newItem is CustomSpellbook book))
                 return;
 
-            book.Entries = Entries;
+            book.Content = Content;
         }
 
         public bool CheckAccess(Mobile m)
@@ -185,7 +182,7 @@ namespace Server.Items
             base.Serialize(writer);
             writer.Write(0);
             writer.Write((int) Level);
-            writer.Write(Entries);
+            writer.Write(Content);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -200,7 +197,7 @@ namespace Server.Items
                 case 0:
                 {
                     Level = (SecureLevel) reader.ReadInt();
-                    Entries = reader.ReadULong();
+                    Content = reader.ReadULong();
                     break;
                 }
             }

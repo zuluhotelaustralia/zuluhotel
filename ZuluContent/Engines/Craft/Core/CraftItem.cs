@@ -195,6 +195,9 @@ namespace Server.Engines.Craft
             bool consumHits = false;
             bool consumStam = false;
 
+            var manaCost = (double) Mana;
+            manaCost /= from.GetClassModifier(SkillName.Inscribe);
+
             if (Hits > 0 && from.Hits < Hits)
             {
                 message = "You lack the required hit points to make that.";
@@ -205,7 +208,7 @@ namespace Server.Engines.Craft
                 consumHits = consume;
             }
 
-            if (Mana > 0 && from.Mana < Mana)
+            if (manaCost > 0 && from.Mana < manaCost)
             {
                 message = "You lack the required mana to make that.";
                 return false;
@@ -226,7 +229,7 @@ namespace Server.Engines.Craft
             }
 
             if (consumMana)
-                from.Mana -= Mana;
+                from.Mana -= (int) manaCost;
 
             if (consumHits)
                 from.Hits -= Hits;
