@@ -21,7 +21,7 @@ namespace Server.SkillHandlers
             var target = new AsyncTarget<Mobile>(from, TargetOptions);
             from.Target = target;
             
-            from.SendLocalizedMessage(500321); // Whom shall I examine?
+            from.SendSuccessMessage(500321); // Whom shall I examine?
             
             var (targeted, responseType) = await target;
 

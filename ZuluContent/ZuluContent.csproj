@@ -53,8 +53,8 @@
 
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'UNIX'">
-      robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /IT /FFT /XA:H
-      robocopy "$(SolutionDir)Distribution\Data" "$(OutDir)\..\Data" /MIR /IT /FFT /XA:H
+      robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /FFT /XA:H
+      robocopy "$(SolutionDir)Distribution\Data" "$(OutDir)\..\Data" /MIR /FFT /XA:H
     </PostBuildEvent>
   </PropertyGroup>
 
