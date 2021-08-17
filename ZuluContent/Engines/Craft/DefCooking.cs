@@ -8,8 +8,13 @@ namespace Server.Engines.Craft
     {
         public static CraftSystem CraftSystem => new DefCooking(ZhConfig.Crafting.Cooking);
 
-        private DefCooking(CraftSettings settings) : base(settings) // 1 1 1.25
+        private DefCooking(CraftSettings settings) : base(settings)
         {
+        }
+        
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return itemSkillRequired * 15;
         }
 
         public override int CanCraft(Mobile from, BaseTool tool, Type itemType)
