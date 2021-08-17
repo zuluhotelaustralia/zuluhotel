@@ -23,14 +23,14 @@ namespace Server.SkillHandlers
                 return Delay;
             }
             
-            var target1 = new AsyncTarget<BaseCreature>(from,
+            var provokeTarget = new AsyncTarget<BaseCreature>(from,
                 new TargetOptions {Range = BaseInstrument.GetBardRange(from, SkillName.Provocation)});
-            from.Target = target1;
+            from.Target = provokeTarget;
             from.RevealingAction();
 
             from.SendSuccessMessage(501587); // Whom do you wish to incite?
 
-            var (targeted1, _) = await target1;
+            var (provokeTargeted, _) = await provokeTarget;
             
             if (!instrument.IsChildOf(from.Backpack))
             {
@@ -38,27 +38,27 @@ namespace Server.SkillHandlers
                 return Delay;
             }
             
-            if (targeted1 == null || (targeted1.BardImmune || !from.CanBeHarmful(targeted1, false)))
+            if (provokeTargeted == null || (provokeTargeted.BardImmune || !from.CanBeHarmful(provokeTargeted, false)))
             {
                 from.SendFailureMessage(501589); // You can't incite that!
                 return Delay;
             }
 
-            if (targeted1.Controlled && targeted1.ControlMaster != from)
+            if (provokeTargeted.Controlled && provokeTargeted.ControlMaster != from)
             {
                 from.SendFailureMessage(501590); // They are too loyal to their master to be provoked.
                 return Delay;
             }
             
-            var target2 = new AsyncTarget<BaseCreature>(from,
+            var victimTarget = new AsyncTarget<BaseCreature>(from,
                 new TargetOptions {Range = BaseInstrument.GetBardRange(from, SkillName.Provocation)});
-            from.Target = target2;
+            from.Target = victimTarget;
             
             from.RevealingAction();
             instrument.PlayInstrumentWell(from);
             from.SendSuccessMessage(1008085); // You play your music and your target becomes angered.  Whom do you wish them to attack?
 
-            var (targeted2, _) = await target2;
+            var (victimTargeted, _) = await victimTarget;
             
             if (!instrument.IsChildOf( from.Backpack ))
             {
@@ -66,31 +66,31 @@ namespace Server.SkillHandlers
                 return Delay;
             }
             
-            if (targeted1.Unprovokable)
+            if (provokeTargeted.Unprovokable)
             {
                 from.SendFailureMessage(1049446); // You have no chance of provoking those creatures.
                 return Delay;
             }
             
-            if (targeted2.Unprovokable || !from.CanBeHarmful(targeted2, false))
+            if (victimTargeted.Unprovokable || !from.CanBeHarmful(victimTargeted, false))
             {
                 from.SendFailureMessage(1049446); // You have no chance of provoking those creatures.
                 return Delay;
             }
 
-            if (targeted1 == targeted2)
+            if (provokeTargeted == victimTargeted)
             {
                 from.SendFailureMessage(501593); // You can't tell someone to attack themselves!
                 return Delay;
             }
 
-            if (targeted1.Map != targeted2.Map || !targeted1.InRange(targeted2, BaseInstrument.GetBardRange(from, SkillName.Provocation)))
+            if (provokeTargeted.Map != victimTargeted.Map || !provokeTargeted.InRange(victimTargeted, BaseInstrument.GetBardRange(from, SkillName.Provocation)))
             {
                 from.SendFailureMessage(1049450); // The creatures you are trying to provoke are too far away from each other for your music to have an effect.
                 return Delay;
             }
 
-            var difficulty = BaseInstrument.GetDifficulty(targeted1);
+            var difficulty = BaseInstrument.GetDifficulty(provokeTargeted);
             
             difficulty /= from.GetClassModifier(Skill);
 
@@ -101,7 +101,7 @@ namespace Server.SkillHandlers
                     from.SendSuccessMessage(501602); // Your music succeeds, as you start a fight.
                     instrument.PlayInstrumentWell(from);
                     instrument.ConsumeUse(from);
-                    targeted1.Provoke(from, targeted2, true);
+                    provokeTargeted.Provoke(from, victimTargeted, true);
                 }
                 else
                 {
