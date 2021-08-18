@@ -44,7 +44,6 @@ namespace Server.SkillHandlers
         {
             var target = new TimeoutAsyncTarget(from, TargetOptions);
             from.Target = target;
-            target.BeginTimeout(from, AsyncTarget.TargetTimeout);
 
             from.SendSuccessMessage(501620); // What would you like to inscribe?
 
@@ -63,7 +62,6 @@ namespace Server.SkillHandlers
 
                 var emptySpellbookTarget = new TimeoutAsyncTarget(from, TargetOptions);
                 from.Target = emptySpellbookTarget;
-                emptySpellbookTarget.BeginTimeout(from, AsyncTarget.TargetTimeout);
 
                 SetUser(spellbook.Serial, from);
 
@@ -134,7 +132,6 @@ namespace Server.SkillHandlers
             {
                 var spellbookTarget = new TimeoutAsyncTarget(from, TargetOptions);
                 from.Target = spellbookTarget;
-                spellbookTarget.BeginTimeout(from, AsyncTarget.TargetTimeout);
 
                 SetUser(customScroll.Serial, from);
 
