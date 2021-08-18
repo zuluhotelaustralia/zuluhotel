@@ -269,7 +269,7 @@ namespace Scripts.Zulu.Engines.Classes
             if (baseValue >= 2800)
                 return 0x7fffffff;
 
-            return Math.Pow(2.0, (int) baseValue / 100) * 10.24;
+            return Math.Pow(2.0, (int) (baseValue / 100)) * 10.24;
         }
     }
 }
