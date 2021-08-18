@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Zulu.Utilities;
 using Server;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
+using Server.Gumps;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
@@ -22,11 +24,11 @@ namespace Scripts.Zulu.Engines.Classes
         private const double SkillBase = 480;
         private const double PercentPerLevel = 0.08;
         private const double PercentBase = 0.52;
-        private const double PerLevel = 0.15; //25% per level
+        private const double PerLevel = 0.15; //15% per level
         private const double ClasseBonus = 1.5;
         private const int MaxLevel = 6;
 
-        private static readonly double[] MinSkills =
+        public static readonly double[] MinSkills =
             Enumerable
                 .Range(0, MaxLevel + 1) // Technically lvl 0 (none) is a level
                 .Select(i => SkillBase + ClassPointsPerLevel * i)
@@ -134,6 +136,7 @@ namespace Scripts.Zulu.Engines.Classes
         {
             CommandSystem.Register("Classe", AccessLevel.Player, ClassOnCommand);
             CommandSystem.Register("ShowClasse", AccessLevel.Player, ClassOnCommand);
+            CommandSystem.Register("TargetClasse", AccessLevel.Player, TargetClassOnCommand);
             CommandSystem.Register("SetClasse", AccessLevel.GameMaster, SetClass);
         }
 
@@ -149,14 +152,18 @@ namespace Scripts.Zulu.Engines.Classes
                 pm.Target = new InternalTarget();
                 return;
             }
+            
+            pm.CloseGump<ShowClasseGump>();
+            pm.SendGump(new ShowClasseGump(pm));
+        }
+        
+        public static void TargetClassOnCommand(CommandEventArgs e)
+        {
+            if (!(e.Mobile is PlayerMobile pm))
+                return;
 
-            pm.ZuluClass.ComputeClass();
-
-            var message = pm.ZuluClass.Type == ZuluClassType.None
-                ? "You aren't a member of any particular class."
-                : $"You are a qualified level {pm.ZuluClass.Level} {pm.ZuluClass.Type.FriendlyName()}.";
-
-            pm.SendMessage(message);
+            pm.CloseGump<TargetClasseGump>();
+            pm.SendGump(new TargetClasseGump());
         }
 
         [Usage("SetClasse <class> <level>")]
@@ -250,6 +257,11 @@ namespace Scripts.Zulu.Engines.Classes
             }
         }
 
+        public static double GetClassLevelPercent(int level)
+        {
+            return PercentBase + PercentPerLevel * level;
+        }
+
         //idx:    0    1     2     3     4     5      6
         //Min: [ 480, 600,  720,  840,  960,  1080, 1200 ]
         //Max: [ 923, 1000, 1058, 1105, 1142, 1173, 1200 ]
@@ -257,7 +269,7 @@ namespace Scripts.Zulu.Engines.Classes
         {
             for (int level = MinSkills.Length - 1; level >= 0; level--)
             {
-                var levelReq = PercentBase + PercentPerLevel * level;
+                var levelReq = GetClassLevelPercent(level);
                 var classPct = classTotal / allSkillsTotal;
 
                 if (classTotal >= MinSkills[level] && classPct >= levelReq)
@@ -266,7 +278,7 @@ namespace Scripts.Zulu.Engines.Classes
 
             return 0;
         }
-        
+
         public bool IsSkillInClass(SkillName sn)
         {
             return ClassSkills.FirstOrDefault(kv => kv.Value.Contains(sn)).Key == Type;

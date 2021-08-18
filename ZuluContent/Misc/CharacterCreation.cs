@@ -289,16 +289,13 @@ namespace Server.Misc
                 newChar.BankBox.DropItem(ticket);
             }
 
-
-            CityInfo city = GetStartLocation(args, young);
-
-            newChar.MoveToWorld(city.Location, city.Map);
+            // TODO: Should we make a custom race selection room in the Map?
+            newChar.MoveToWorld(new Point3D(5140, 1767, 0), Map.Felucca);
             if (args.State != null)
             {
                 Console.WriteLine("Login: {0}: New character being created (account={1})", args.State,
                     args.Account.Username);
                 Console.WriteLine(" - Character: {0} (serial={1})", newChar.Name, newChar.Serial);
-                Console.WriteLine(" - Started: {0} {1} in {2}", city.City, city.Location, newChar.Map);
 
                 new WelcomeTimer(newChar).Start();
             }
@@ -327,12 +324,6 @@ namespace Server.Misc
             {
                 m_Mobile.SendLocalizedMessage(m_Message);
             }
-        }
-
-        private static CityInfo GetStartLocation(CharacterCreatedEventArgs args, bool isYoung)
-        {
-            args.City.Map ??= Map.Felucca;
-            return args.City;
         }
 
         private static void FixStats(ref int str, ref int dex, ref int intel, int max)

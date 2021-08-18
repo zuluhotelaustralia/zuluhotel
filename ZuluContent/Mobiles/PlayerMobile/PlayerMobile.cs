@@ -1301,6 +1301,11 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 31:
+                {
+                    TargetZuluClass = (ZuluClassType) reader.ReadInt();
+                    goto case 30;
+                }
                 case 30:
                 {
                     ZuluRaceType = (ZuluRaceType) reader.ReadInt();
@@ -1464,8 +1469,10 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 30); // version
+            writer.Write((int) 31); // version
             
+            writer.Write((int) TargetZuluClass);
+
             writer.Write((int) ZuluRaceType);
             
             Enchantments.Serialize(writer);
@@ -1845,6 +1852,8 @@ namespace Server.Mobiles
         {
             get => m_ZuluClass ??= new ZuluClass(this);
         }
+        
+        public ZuluClassType TargetZuluClass { get; set; }
 
         #endregion
         
