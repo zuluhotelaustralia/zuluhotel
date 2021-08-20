@@ -2158,7 +2158,7 @@ namespace Server.Mobiles
                     if (doTeach)
                     {
                         Say(501539); // Let me show thee something of how this is done.
-                        m.SendLocalizedMessage(501540); // Your skill level increases.
+                        m.SendSuccessMessage(501540); // Your skill level increases.
 
                         m_Teaching = (SkillName) (-1);
 
@@ -2427,11 +2427,19 @@ namespace Server.Mobiles
         {
             base.OnCombatantChange();
 
-            Warmode = Combatant != null && !Combatant.Deleted && Combatant.Alive;
+            Warmode = Combatant is { Deleted: false, Alive: true };
 
             if (CanFly && Warmode && Flying)
             {
                 Flying = false;
+            }
+
+            if (Warmode)
+            {
+                if (Combatant.Combatant == null)
+                {
+                    Combatant.Combatant = this;
+                }
             }
         }
 
