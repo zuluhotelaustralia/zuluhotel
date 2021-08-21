@@ -8,20 +8,18 @@ namespace Server.Mobiles
 {
     public class AnimalTrainer : BaseVendor
     {
-        private List<SBInfo> m_SBInfos = new List<SBInfo>();
+        private readonly List<SBInfo> m_SBInfos = new();
 
-        protected override List<SBInfo> SBInfos
-        {
-            get { return m_SBInfos; }
-        }
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
 
         [Constructible]
         public AnimalTrainer() : base("the Animal Trainer")
         {
-            SetSkill(SkillName.AnimalLore, 64.0, 100.0);
-            SetSkill(SkillName.AnimalTaming, 90.0, 100.0);
-            SetSkill(SkillName.Veterinary, 65.0, 88.0);
+            SetSkill(SkillName.AnimalLore, 100.0);
+            SetSkill(SkillName.AnimalTaming, 100.0);
+            SetSkill(SkillName.Veterinary, 100.0);
+            SetSkill(SkillName.Anatomy, 100.0);
         }
 
         public override void InitSBInfo()
@@ -29,10 +27,7 @@ namespace Server.Mobiles
             m_SBInfos.Add(new SBAnimalTrainer());
         }
 
-        public override VendorShoeType ShoeType
-        {
-            get { return Female ? VendorShoeType.ThighBoots : VendorShoeType.Boots; }
-        }
+        public override VendorShoeType ShoeType => Female ? VendorShoeType.ThighBoots : VendorShoeType.Boots;
 
         public override int GetShoeHue()
         {
@@ -43,12 +38,12 @@ namespace Server.Mobiles
         {
             base.InitOutfit();
 
-            AddItem(Utility.RandomBool() ? (Item) new QuarterStaff() : (Item) new ShepherdsCrook());
+            AddItem(Utility.RandomBool() ? new QuarterStaff() : new ShepherdsCrook());
         }
 
         private class StableTarget : Target
         {
-            private AnimalTrainer m_Trainer;
+            private readonly AnimalTrainer m_Trainer;
 
             public StableTarget(AnimalTrainer trainer) : base(12, false, TargetFlags.None)
             {
@@ -58,7 +53,7 @@ namespace Server.Mobiles
             protected override void OnTarget(Mobile from, object targeted)
             {
                 if (targeted is BaseCreature)
-                    m_Trainer.EndStable(from, (BaseCreature) targeted);
+                    m_Trainer.EndStable(from, (BaseCreature)targeted);
                 else if (targeted == from)
                     m_Trainer.SayTo(from, 502672); // HA HA HA! Sorry, I am not an inn.
                 else
@@ -112,7 +107,7 @@ namespace Server.Mobiles
 
                 SayTo(from, true, $"I charge {amount} to take care of that {pet.Name}.");
 
-                if (@from.Backpack != null && @from.Backpack.ConsumeTotal(typeof(Gold), amount) ||
+                if (from.Backpack != null && from.Backpack.ConsumeTotal(typeof(Gold), amount) ||
                     bank != null && bank.ConsumeTotal(typeof(Gold), amount))
                 {
                     pet.ControlTarget = null;
@@ -125,7 +120,7 @@ namespace Server.Mobiles
                     pet.IsStabled = true;
                     pet.StabledBy = from;
 
-                    var petClaimTicket = new PetClaimTicket {Name = $"Pet claim ticket - Name: {pet.Name}"};
+                    var petClaimTicket = new PetClaimTicket { Name = $"Pet claim ticket - Name: {pet.Name}" };
                     petClaimTicket.Stabled = pet;
 
                     var cont = from.Backpack;
@@ -222,14 +217,14 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

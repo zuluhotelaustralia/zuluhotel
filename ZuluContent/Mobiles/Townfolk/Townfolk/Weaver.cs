@@ -3,46 +3,43 @@ using System.Collections.Generic;
 namespace Server.Mobiles
 {
     public class Weaver : BaseVendor
-	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
+    {
+        private readonly List<SBInfo> m_SBInfos = new();
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
-		public override NpcGuild NpcGuild{ get{ return NpcGuild.TailorsGuild; } }
+        public override NpcGuild NpcGuild => NpcGuild.TailorsGuild;
 
 
-		[Constructible]
-public Weaver() : base( "the weaver" )
-		{
-			SetSkill( SkillName.Tailoring, 65.0, 88.0 );
-		}
+        [Constructible]
+        public Weaver() : base("the Weaver")
+        {
+            SetSkill(SkillName.Tailoring, 90.0);
+        }
 
-		public override void InitSBInfo()
-		{
-			m_SBInfos.Add( new SBWeaver() );
-		}
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBWeaver());
+        }
 
-		public override VendorShoeType ShoeType
-		{
-			get{ return VendorShoeType.Sandals; }
-		}
+        public override VendorShoeType ShoeType => VendorShoeType.Sandals;
 
-		[Constructible]
-public Weaver( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public Weaver(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write(0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            var version = reader.ReadInt();
+        }
+    }
 }

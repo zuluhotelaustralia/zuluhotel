@@ -1,49 +1,51 @@
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
     public class Butcher : BaseVendor
-	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
+    {
+        private readonly List<SBInfo> m_SBInfos = new();
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
 
-		[Constructible]
-public Butcher() : base( "the butcher" )
-		{
-			SetSkill( SkillName.Anatomy, 45.0, 68.0 );
-		}
+        [Constructible]
+        public Butcher() : base("the Butcher")
+        {
+            SetSkill(SkillName.Cooking, 60.0);
+            SetSkill(SkillName.TasteID, 90.0);
+        }
 
-		public override void InitSBInfo()
-		{
-			m_SBInfos.Add( new SBButcher() );
-		}
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBButcher());
+        }
 
-		public override void InitOutfit()
-		{
-			base.InitOutfit();
+        public override void InitOutfit()
+        {
+            base.InitOutfit();
 
-			AddItem( new Server.Items.HalfApron() );
-			AddItem( new Server.Items.Cleaver() );
-		}
+            AddItem(new HalfApron());
+            AddItem(new Cleaver());
+        }
 
-		[Constructible]
-public Butcher( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public Butcher(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write(0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            var version = reader.ReadInt();
+        }
+    }
 }

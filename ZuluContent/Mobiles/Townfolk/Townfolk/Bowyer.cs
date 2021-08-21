@@ -1,62 +1,62 @@
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
-    [TypeAlias( "Server.Mobiles.Bower" )]
-	public class Bowyer : BaseVendor
-	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
+    [TypeAlias("Server.Mobiles.Bower")]
+    public class Bowyer : BaseVendor
+    {
+        private readonly List<SBInfo> m_SBInfos = new();
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
 
-		[Constructible]
-public Bowyer() : base( "the bowyer" )
-		{
-			SetSkill( SkillName.Fletching, 80.0, 100.0 );
-			SetSkill( SkillName.Archery, 80.0, 100.0 );
-		}
+        [Constructible]
+        public Bowyer() : base("the Bowyer")
+        {
+            SetSkill(SkillName.Fletching, 90.0);
+            SetSkill(SkillName.Archery, 60.0);
+            SetSkill(SkillName.Tactics, 50.0);
+            SetSkill(SkillName.Lumberjacking, 50.0);
+        }
 
-		public override VendorShoeType ShoeType
-		{
-			get{ return Female ? VendorShoeType.ThighBoots : VendorShoeType.Boots; }
-		}
+        public override VendorShoeType ShoeType => Female ? VendorShoeType.ThighBoots : VendorShoeType.Boots;
 
-		public override int GetShoeHue()
-		{
-			return 0;
-		}
+        public override int GetShoeHue()
+        {
+            return 0;
+        }
 
-		public override void InitOutfit()
-		{
-			base.InitOutfit();
+        public override void InitOutfit()
+        {
+            base.InitOutfit();
 
-			AddItem( new Server.Items.Bow() );
-			AddItem( new Server.Items.LeatherGorget() );
-		}
+            AddItem(new Bow());
+            AddItem(new LeatherGorget());
+        }
 
-		public override void InitSBInfo()
-		{
-			m_SBInfos.Add( new SBBowyer() );
-			m_SBInfos.Add( new SBRangedWeapon() );
-		}
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBBowyer());
+            m_SBInfos.Add(new SBRangedWeapon());
+        }
 
-		[Constructible]
-public Bowyer( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public Bowyer(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write(0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            var version = reader.ReadInt();
+        }
+    }
 }
