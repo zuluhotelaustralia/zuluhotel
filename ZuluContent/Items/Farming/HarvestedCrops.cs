@@ -58,4 +58,58 @@ namespace Server.Items
         {
         }
     }
+    
+    [Serializable(0, false)]
+    public partial class RawMandrake : BaseHarvestedCrop
+    {
+        protected override Item Product => new MandrakeRoot(10);
+
+        public override string DefaultName => "Raw Mandrake";
+        
+        [Constructible]
+        public RawMandrake() : this(1)
+        {
+        }
+
+        [Constructible]
+        public RawMandrake(int amount) : base(0x18DE, amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class RawNightshade : BaseHarvestedCrop
+    {
+        protected override Item Product => new Nightshade(10);
+
+        public override string DefaultName => "Raw Nightshade";
+        
+        [Constructible]
+        public RawNightshade() : this(1)
+        {
+        }
+
+        [Constructible]
+        public RawNightshade(int amount) : base(0x18E7, amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class RawGinseng : BaseHarvestedCrop
+    {
+        protected override Item Product => new Ginseng(10);
+
+        public override string DefaultName => "Raw Ginseng";
+        
+        [Constructible]
+        public RawGinseng() : this(1)
+        {
+        }
+
+        [Constructible]
+        public RawGinseng(int amount) : base(0x18EB, amount)
+        {
+        }
+    }
 }

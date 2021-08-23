@@ -5,7 +5,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Yew 2",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -15,7 +15,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Yew 1",
     "count": 5,
-    "entries": [{ "maxCount": 5, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 5, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -55,7 +55,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Skara Brae 1",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -65,7 +65,7 @@
     "map": "Felucca",
     "region": "A Carrot Field in Skara Brae",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableCarrot", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "CarrotCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -75,7 +75,7 @@
     "map": "Felucca",
     "region": "An Onion Field in Skara Brae",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableOnion", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "OnionCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -85,7 +85,7 @@
     "map": "Felucca",
     "region": "A Cabbage Field in Skara Brae 1",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableCabbage", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "CabbageCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -95,7 +95,7 @@
     "map": "Felucca",
     "region": "A Cabbage Field in Skara Brae 2",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableCabbage", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "CabbageCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -105,7 +105,7 @@
     "map": "Felucca",
     "region": "A Cotton Field in Skara Brae",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableCotton", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "CottonCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -115,7 +115,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Skara Brae 2",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -125,7 +125,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Britain 4",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -135,7 +135,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Britain 1",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -145,7 +145,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Britain 5",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -155,7 +155,7 @@
     "map": "Felucca",
     "region": "A Cabbage Field in Britain 1",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableCabbage", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "CabbageCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -165,7 +165,7 @@
     "map": "Felucca",
     "region": "A Turnip Field in Britain 1",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableTurnip", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "TurnipCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -175,7 +175,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Britain 2",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -185,7 +185,7 @@
     "map": "Felucca",
     "region": "A Carrot Field in Britain 1",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableCarrot", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "CarrotCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -195,7 +195,7 @@
     "map": "Felucca",
     "region": "A Turnip Field in Britain 2",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableTurnip", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "TurnipCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -205,7 +205,7 @@
     "map": "Felucca",
     "region": "An Onion Field in Britain 1",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableOnion", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "OnionCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -215,7 +215,7 @@
     "map": "Felucca",
     "region": "A Wheatfield in Britain 3",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableWheat", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "WheatCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -225,7 +225,7 @@
     "map": "Felucca",
     "region": "A Carrot Field in Britain 2",
     "count": 6,
-    "entries": [{ "maxCount": 6, "name": "FarmableCarrot", "probability": 100 }],
+    "entries": [{ "maxCount": 6, "name": "CarrotCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   },
@@ -235,7 +235,7 @@
     "map": "Felucca",
     "region": "A Cotton Field in Moonglow",
     "count": 8,
-    "entries": [{ "maxCount": 8, "name": "FarmableCotton", "probability": 100 }],
+    "entries": [{ "maxCount": 8, "name": "CottonCrop", "probability": 100 }],
     "minDelay": "00:00:10",
     "maxDelay": "00:00:30"
   }

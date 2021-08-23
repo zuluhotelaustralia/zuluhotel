@@ -7,12 +7,52 @@ namespace Server.Items
     [Serializable(0, false)]
     public partial class SeedDirt : Item
     {
+        [SerializableField(0)] private BaseCrop _crop;
+
         [Constructible]
-        public SeedDirt() : base(0x0914)
+        public SeedDirt(BaseCrop crop) : base(0x0914)
         {
             Movable = false;
 
-            Timer.DelayCall(TimeSpan.FromMinutes(1.0), Delete);
+            Crop = crop;
+
+            new GrowTimer(this).Start();
+        }
+
+        [AfterDeserialization]
+        private void OnAfterDeserialization()
+        {
+            Crop.MoveToWorld(Location, Map);
+            Delete();
+        }
+
+        private class GrowTimer : Timer
+        {
+            private int m_Count;
+            private SeedDirt m_Dirt;
+
+            public GrowTimer(SeedDirt dirt) : base(TimeSpan.FromMinutes(1.0), TimeSpan.FromMinutes(1.0))
+            {
+                m_Dirt = dirt;
+            }
+
+            protected override void OnTick()
+            {
+                m_Count++;
+
+                if (m_Count % 10 > 0)
+                {
+                    m_Dirt.PublicOverheadMessage(MessageType.Emote, 0, false,
+                        $"*{m_Dirt.Crop.Name} matures {m_Count * 10}%*");
+                }
+                else
+                {
+                    Stop();
+
+                    m_Dirt.Crop.MoveToWorld(m_Dirt.Location, m_Dirt.Map);
+                    m_Dirt.Delete();
+                }
+            }
         }
     }
 
@@ -73,23 +113,179 @@ namespace Server.Items
                 from.SendFailureMessage("You cannot plant here!");
                 return;
             }
-
-            var dirt = new SeedDirt();
-            dirt.MoveToWorld(from.Location, from.Map);
             
             Consume();
             
             from.PublicOverheadMessage(MessageType.Emote, from.EmoteHue, false,"*plants seed*");
             from.Animate(32, 5, 1, true, false, 0);
             from.PlaySound(0x383);
-            from.SendSuccessMessage("You plant the seed.");
             
-            Timer.DelayCall(TimeSpan.FromMinutes(1.0), GrowSeed_Callback, Crop, from.Location, from.Map);
+            var dirt = new SeedDirt(Crop);
+            dirt.MoveToWorld(from.Location, from.Map);
+            
+            from.SendSuccessMessage("You plant the seed.");
         }
+    }
+    
+    [Serializable(0, false)]
+    public partial class CabbageSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new CabbageCrop();
+        
+        public override string DefaultName => "cabbage seed";
 
-        public static void GrowSeed_Callback(Item crop, Point3D location, Map map)
+        [Constructible]
+        public CabbageSeed() : this(1)
         {
-            crop.MoveToWorld(location, map);
+        }
+        
+        [Constructible]
+        public CabbageSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class CarrotSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new CarrotCrop();
+        
+        public override string DefaultName => "carrot seed";
+
+        [Constructible]
+        public CarrotSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public CarrotSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class CottonSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new CottonCrop();
+        
+        public override string DefaultName => "cotton seed";
+
+        [Constructible]
+        public CottonSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public CottonSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class FlaxSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new FlaxCrop();
+        
+        public override string DefaultName => "flax seed";
+
+        [Constructible]
+        public FlaxSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public FlaxSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class LettuceSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new LettuceCrop();
+        
+        public override string DefaultName => "lettuce seed";
+
+        [Constructible]
+        public LettuceSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public LettuceSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class OnionSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new OnionCrop();
+        
+        public override string DefaultName => "onion seed";
+
+        [Constructible]
+        public OnionSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public OnionSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class PumpkinSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new PumpkinCrop();
+        
+        public override string DefaultName => "pumpkin seed";
+
+        [Constructible]
+        public PumpkinSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public PumpkinSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class TurnipSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new TurnipCrop();
+        
+        public override string DefaultName => "turnip seed";
+
+        [Constructible]
+        public TurnipSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public TurnipSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class WheatSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new WheatCrop();
+        
+        public override string DefaultName => "wheat seed";
+
+        [Constructible]
+        public WheatSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public WheatSeed(int amount) : base(amount)
+        {
         }
     }
 
@@ -98,7 +294,7 @@ namespace Server.Items
     {
         protected override BaseCrop Crop => new GarlicCrop();
         
-        public override string DefaultName => "Garlic Seed";
+        public override string DefaultName => "garlic seed";
 
         [Constructible]
         public GarlicSeed() : this(1)
@@ -107,6 +303,60 @@ namespace Server.Items
         
         [Constructible]
         public GarlicSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class MandrakeSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new MandrakeCrop();
+        
+        public override string DefaultName => "mandrake seed";
+
+        [Constructible]
+        public MandrakeSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public MandrakeSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class NightshadeSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new NightshadeCrop();
+        
+        public override string DefaultName => "nightshade seed";
+
+        [Constructible]
+        public NightshadeSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public NightshadeSeed(int amount) : base(amount)
+        {
+        }
+    }
+    
+    [Serializable(0, false)]
+    public partial class GinsengSeed : BaseSeed
+    {
+        protected override BaseCrop Crop => new GinsengCrop();
+        
+        public override string DefaultName => "ginseng seed";
+
+        [Constructible]
+        public GinsengSeed() : this(1)
+        {
+        }
+        
+        [Constructible]
+        public GinsengSeed(int amount) : base(amount)
         {
         }
     }
