@@ -536,7 +536,7 @@ namespace Server.Misc
                     EquipItem(NecroHue(new LeatherGorget()));
                     EquipItem(NecroHue(new LeatherLegs()));
                     EquipItem(NecroHue(new Skirt()));
-                    EquipItem(new Sandals(0x8FD));
+                    EquipItem(new Sandals());
 
                     addSkillItems = false;
 
@@ -550,7 +550,7 @@ namespace Server.Misc
                     EquipItem(new RingmailArms());
                     EquipItem(new RingmailChest());
                     EquipItem(new RingmailLegs());
-                    EquipItem(new ThighBoots(0x748));
+                    EquipItem(new ThighBoots());
                     EquipItem(new Cloak(0xCF));
                     EquipItem(new BodySash(0xCF));
 

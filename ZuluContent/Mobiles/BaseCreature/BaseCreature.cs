@@ -306,7 +306,7 @@ namespace Server.Mobiles
 
             Direction = GetDirectionTo(target);
 
-            Timer.DelayCall(TimeSpan.FromSeconds(BreathEffectDelay), BreathEffect_Callback, target);
+            Timer.StartTimer(TimeSpan.FromSeconds(BreathEffectDelay), () => BreathEffect_Callback(target));
         }
 
         public virtual void BreathStallMovement()
@@ -333,7 +333,7 @@ namespace Server.Mobiles
             BreathPlayEffectSound();
             BreathPlayEffect(target);
 
-            Timer.DelayCall(TimeSpan.FromSeconds(BreathDamageDelay), BreathDamage_Callback, target);
+            Timer.StartTimer(TimeSpan.FromSeconds(BreathDamageDelay), () => BreathDamage_Callback(target));
         }
 
         public virtual void BreathPlayEffectSound()
@@ -3739,7 +3739,7 @@ namespace Server.Mobiles
 
             double seconds = (onSelf ? HealDelay : HealOwnerDelay) + (patient.Alive ? 0.0 : 5.0);
 
-            m_HealTimer = Timer.DelayCall(TimeSpan.FromSeconds(seconds), Heal_Callback, patient);
+            m_HealTimer = Timer.DelayCall(TimeSpan.FromSeconds(seconds), () => Heal_Callback(patient));
         }
 
         private void Heal_Callback(Mobile mobile)

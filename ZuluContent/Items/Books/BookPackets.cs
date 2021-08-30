@@ -34,7 +34,7 @@ namespace Server.Items
         {
             var from = state.Mobile;
 
-            if (!(World.FindItem(reader.ReadUInt32()) is BaseBook book) || !book.Writable ||
+            if (!(World.FindItem((Serial) reader.ReadUInt32()) is BaseBook book) || !book.Writable ||
                 !from.InRange(book.GetWorldLocation(), 1) || !book.IsAccessibleTo(from))
             {
                 return;
@@ -53,7 +53,7 @@ namespace Server.Items
         {
             var from = state.Mobile;
 
-            if (!(World.FindItem(reader.ReadUInt32()) is BaseBook book) || !book.Writable ||
+            if (!(World.FindItem((Serial) reader.ReadUInt32()) is BaseBook book) || !book.Writable ||
                 !from.InRange(book.GetWorldLocation(), 1) || !book.IsAccessibleTo(from))
             {
                 return;
@@ -89,7 +89,7 @@ namespace Server.Items
         {
             var from = state.Mobile;
 
-            if (!(World.FindItem(reader.ReadUInt32()) is BaseBook book) || !book.Writable ||
+            if (!(World.FindItem((Serial) reader.ReadUInt32()) is BaseBook book) || !book.Writable ||
                 !from.InRange(book.GetWorldLocation(), 1) || !book.IsAccessibleTo(from))
             {
                 return;

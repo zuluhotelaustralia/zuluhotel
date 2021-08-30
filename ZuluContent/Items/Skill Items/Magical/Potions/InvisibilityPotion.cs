@@ -7,7 +7,7 @@ namespace Server.Items
     {
         public override uint PotionStrength { get; set; } = 1;
 
-        private static readonly Dictionary<Mobile, Timer> Table = new();
+        private static readonly Dictionary<Mobile, TimerExecutionToken> Table = new();
 
         [Constructible]
         public InvisibilityPotion() : base(0xF0A, PotionEffect.Invisibility) => Hue = 0x48D;
@@ -33,7 +33,8 @@ namespace Server.Items
             }
 
             Consume();
-            Table[from] = Timer.DelayCall(TimeSpan.FromSeconds(2), Hide, from);
+            Timer.StartTimer(TimeSpan.FromSeconds(2), () => Hide(from), out var timerToken);
+            Table[from] = timerToken;
             PlayDrinkEffect(from);
         }
 
@@ -48,7 +49,7 @@ namespace Server.Items
 
             RemoveTimer(m);
 
-            Timer.DelayCall(TimeSpan.FromSeconds(30), EndHide, m);
+            Timer.StartTimer(TimeSpan.FromSeconds(30), () => EndHide(m));
         }
 
         private static void EndHide(Mobile m)
@@ -61,12 +62,14 @@ namespace Server.Items
 
         public static void RemoveTimer(Mobile m, bool interrupted = false)
         {
-            if (Table.TryGetValue(m, out Timer timer))
+            if (Table.Remove(m, out var timer))
             {
                 if (interrupted)
+                {
                     m.SendLocalizedMessage(1073187); // The invisibility effect is interrupted.
-                timer.Stop();
-                Table.Remove(m);
+                }
+
+                timer.Cancel();
             }
         }
 

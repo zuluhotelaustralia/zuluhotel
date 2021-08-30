@@ -353,7 +353,7 @@ namespace Server.Mobiles
             {
                 m_Type = type;
 
-                m_Timer = Timer.DelayCall(duration, RemoveBlock, mobile);
+                m_Timer = Timer.DelayCall(duration, () => RemoveBlock(mobile));
             }
 
             private void RemoveBlock(Mobile mobile)
@@ -435,7 +435,7 @@ namespace Server.Mobiles
                     ? "The server is currently under lockdown. No players are allowed to log in at this time."
                     : "The server is currently under lockdown. You do not have sufficient access level to connect.";
 
-                Timer.DelayCall(TimeSpan.FromSeconds(1.0), Disconnect, from);
+                Timer.StartTimer(TimeSpan.FromSeconds(1.0), () => Disconnect(from));
             }
             else if (from.AccessLevel >= AccessLevel.Administrator)
             {

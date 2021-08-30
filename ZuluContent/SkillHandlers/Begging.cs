@@ -16,7 +16,7 @@ namespace Server.SkillHandlers
         private const int BegRange = 2;
         private const int BegDelayMs = 2000;
         private static readonly int BegCooldown = (int)TimeSpan.FromMinutes(30).TotalMilliseconds;
-        private static readonly Dictionary<uint, long> MobileBegCooldown = new();
+        private static readonly Dictionary<Serial, long> MobileBegCooldown = new();
 
         private static readonly string[] BeggingLines =
         {

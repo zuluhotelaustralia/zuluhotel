@@ -55,7 +55,7 @@ namespace Server.Items
             return this;
         }
 
-        private Timer m_Timer;
+        private TimerExecutionToken _timerToken;
 
         private ArrayList m_Users;
 
@@ -77,23 +77,20 @@ namespace Server.Items
 
             from.Target = new ThrowTarget(this);
 
-            if (m_Timer == null)
+            if (!_timerToken.Running)
             {
                 from.SendLocalizedMessage(500236); // You should throw it now!
 
-                m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(0.75), TimeSpan.FromSeconds(1.0), 4, Detonate_OnTick,
-                    new object[] {from, 3}); // 2.6 seconds explosion delay
+                var timer = 3;
+                
+                Timer.StartTimer(TimeSpan.FromSeconds(0.75), TimeSpan.FromSeconds(1.0), 4, () => Detonate_OnTick(from, timer--), out _timerToken);
             }
         }
 
-        private void Detonate_OnTick(object state)
+        private void Detonate_OnTick(Mobile from, int timer)
         {
             if (Deleted)
                 return;
-
-            object[] states = (object[]) state;
-            Mobile from = (Mobile) states[0];
-            int timer = (int) states[1];
 
             object parent = FindParent(from);
 
@@ -122,7 +119,7 @@ namespace Server.Items
                 }
 
                 Explode(from, true, loc, map);
-                m_Timer = null;
+                _timerToken.Cancel();
             }
             else
             {
@@ -130,21 +127,14 @@ namespace Server.Items
                     item.PublicOverheadMessage(MessageType.Regular, 0x22, false, timer.ToString());
                 else if (parent is Mobile mobile)
                     mobile.PublicOverheadMessage(MessageType.Regular, 0x22, false, timer.ToString());
-
-                states[1] = timer - 1;
             }
         }
 
-        private void Reposition_OnTick(object state)
+        private void Reposition_OnTick(Mobile from, IPoint3D p, Map map)
         {
             if (Deleted)
                 return;
-
-            object[] states = (object[]) state;
-            Mobile from = (Mobile) states[0];
-            IPoint3D p = (IPoint3D) states[1];
-            Map map = (Map) states[2];
-
+            
             Point3D loc = new Point3D(p);
 
             if (InstantExplosion)
@@ -183,19 +173,20 @@ namespace Server.Items
                     return;
 
                 SpellHelper.GetSurfaceTop(ref p);
+                var loc = new Point3D(p);
 
                 from.RevealingAction();
 
                 IEntity to;
 
-                to = new Entity(Serial.Zero, new Point3D(p), map);
+                to = new Entity(Serial.Zero, loc, map);
 
-                if (p is Mobile)
+                if (p is Mobile mobile)
                 {
                     if (!RelativeLocation) // explosion location = current mob location.
-                        p = ((Mobile) p).Location;
+                        loc = mobile.Location;
                     else
-                        to = (Mobile) p;
+                        to = mobile;
                 }
 
                 Effects.SendMovingEffect(from, to, m_Potion.ItemID, 7, 0, false, false, m_Potion.Hue, 0);
@@ -206,7 +197,7 @@ namespace Server.Items
                 }
 
                 m_Potion.Internalize();
-                Timer.DelayCall(TimeSpan.FromSeconds(1.0), m_Potion.Reposition_OnTick, new object[] {from, p, map});
+                Timer.StartTimer(TimeSpan.FromSeconds(1.0), () => m_Potion.Reposition_OnTick(from, loc, map));
             }
         }
 

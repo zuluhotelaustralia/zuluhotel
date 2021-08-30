@@ -27,7 +27,7 @@ namespace Server.Mobiles
             AddItem(new FancyShirt(0x3E4));
             AddItem(new LongPants(0x192));
             AddItem(new Pickaxe());
-            AddItem(new ThighBoots(0x283));
+            AddItem(new ThighBoots());
         }
 
         [Constructible]

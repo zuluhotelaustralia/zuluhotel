@@ -18,7 +18,7 @@ namespace Scripts.Zulu.Packets
             static void ZuluPlayerStatusEventHandler(Mobile mobile)
             {
                 if (mobile is PlayerMobile player) 
-                    Timer.DelayCall(TimeSpan.Zero, SendZuluPlayerStatus, player.NetState, player);
+                    Timer.StartTimer(() => SendZuluPlayerStatus(player.NetState, player));
             }
 
             EventSink.PlayerDeath += ZuluPlayerStatusEventHandler;
@@ -27,7 +27,7 @@ namespace Scripts.Zulu.Packets
             static void OnBuffManagerAddRemove(Mobile mobile, IBuff buff)
             {
                 if (buff is PoisonImmunity && mobile is PlayerMobile player)
-                    Timer.DelayCall(TimeSpan.Zero, SendZuluPlayerStatus, player.NetState, player);
+                    Timer.StartTimer(() => SendZuluPlayerStatus(player.NetState, player));
             }
             
             BuffManager.OnAddBuff += OnBuffManagerAddRemove;

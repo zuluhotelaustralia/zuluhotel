@@ -56,7 +56,7 @@ namespace Server.Mobiles
                 activate = true;
             else if (World.Loading)
                 activate = false;
-            else if (m.Map == null || m.Map == Map.Internal || !m.Map.GetSector(m).Active)
+            else if (m.Map == null || m.Map == Map.Internal || !m.Map.GetSector(m.Location).Active)
                 activate = false;
             else
                 activate = true;
@@ -2542,7 +2542,7 @@ namespace Server.Mobiles
                 }
                 else if (m_Owner.m_Mobile.PlayerRangeSensitive) //have to check this in the timer....
                 {
-                    Sector sect = m_Owner.m_Mobile.Map.GetSector(m_Owner.m_Mobile);
+                    Sector sect = m_Owner.m_Mobile.Map.GetSector(m_Owner.m_Mobile.Location);
                     if (!sect.Active)
                     {
                         m_Owner.Deactivate();

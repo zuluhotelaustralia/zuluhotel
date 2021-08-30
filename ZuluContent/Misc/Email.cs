@@ -1,81 +1,142 @@
 using System;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
-using System.Threading;
+using System.IO;
+using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MimeKit;
+using Server.Accounting;
+using Server.Configurations;
+using Server.Engines.Help;
 
 namespace Server.Misc
 {
-  public class Email
-  {
-    /* In order to support emailing, fill in EmailServer and FromAddress:
-     * Example:
-     *  public static readonly string EmailServer = "mail.domain.com";
-     *  public static readonly string FromAddress = "runuo@domain.com";
-     *
-     * If you want to add crash reporting emailing, fill in CrashAddresses:
-     * Example:
-     *  public static readonly string CrashAddresses = "first@email.here,second@email.here,third@email.here";
-     *
-     * If you want to add speech log page emailing, fill in SpeechLogPageAddresses:
-     * Example:
-     *  public static readonly string SpeechLogPageAddresses = "first@email.here,second@email.here,third@email.here";
-     */
-
-    public static readonly string EmailServer = null;
-    public static readonly string FromAddress = null;
-
-    public static readonly string CrashAddresses = null;
-    public static readonly string SpeechLogPageAddresses = null;
-
-    private static Regex _pattern = new Regex(@"^[a-z0-9.+_-]+@([a-z0-9-]+\.)+[a-z]+$",
-      RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-    public static bool IsValid(string address)
+    public static class Email
     {
-      if (address == null || address.Length > 320)
-        return false;
-
-      return _pattern.IsMatch(address);
-    }
-
-    private static SmtpClient _Client;
-
-    public static void Configure()
-    {
-      if (EmailServer != null)
-        _Client = new SmtpClient(EmailServer);
-    }
-
-    public static bool Send(MailMessage message)
-    {
-      try
-      {
-        lock (_Client)
+        /// <summary>
+        ///     Sends Queue-Page request using Email
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="pageType"></param>
+        public static void SendQueueEmail(PageEntry entry, string pageType)
         {
-          _Client.Send(message);
+            if (!EmailConfiguration.EmailEnabled)
+            {
+                return;
+            }
+
+            var sender = entry.Sender;
+            var time = Core.Now;
+
+            var message = new MimeMessage();
+            message.From.Add(EmailConfiguration.FromAddress);
+            message.To.Add(EmailConfiguration.SpeechLogPageAddress);
+            message.Subject = "ModernUO Speech Log Page Forwarding";
+
+            using (var writer = new StringWriter())
+            {
+                writer.WriteLine(
+                    @$"
+          ModernUO Speech Log Page - {pageType}
+          From: '{sender.RawName}', Account: '{(sender.Account is Account accSend ? accSend.Username : " ??? ")}'
+          Location: {sender.Location} [{sender.Map}]
+          Sent on: {time.Year}/{time.Month:00}/{time.Day:00} {time.Hour}:{time.Minute:00}:{time.Second:00}
+          Message:
+          '{entry.Message}'
+          Speech Log
+          ==========
+        "
+                );
+
+                foreach (var logEntry in entry.SpeechLog)
+                {
+                    var from = logEntry.From;
+                    var fromName = from.RawName;
+                    var fromAccount = from.Account is Account accFrom ? accFrom.Username : "???";
+                    var created = logEntry.Created;
+                    var speech = logEntry.Speech;
+                    writer.WriteLine(
+                        @$"{created.Hour}:{created.Minute:00}:{created.Second:00} - {fromName} ({fromAccount}): '{speech}'"
+                    );
+                }
+
+                message.Body = new BodyBuilder
+                {
+                    TextBody = writer.ToString(),
+                    HtmlBody = null
+                }.ToMessageBody();
+            }
+
+            SendAsync(message);
         }
-      }
-      catch
-      {
-        return false;
-      }
 
-      return true;
+        /// <summary>
+        ///     Sends crash email
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void SendCrashEmail(string filePath)
+        {
+            if (EmailConfiguration.EmailEnabled)
+            {
+                return;
+            }
+
+            var message = new MimeMessage();
+            message.From.Add(EmailConfiguration.FromAddress);
+            message.To.Add(EmailConfiguration.CrashAddress);
+            message.Subject = "Automated ModernUO Crash Report";
+            var builder = new BodyBuilder
+            {
+                TextBody = "Automated ModernUO Crash Report. See attachment for details.",
+                HtmlBody = null
+            };
+            builder.Attachments.Add(filePath);
+            message.Body = builder.ToMessageBody();
+        }
+
+        /// <summary>
+        ///     Sends emails async
+        /// </summary>
+        /// <param name="message"></param>
+        private static async void SendAsync(MimeMessage message)
+        {
+            if (!EmailConfiguration.EmailEnabled)
+            {
+                return;
+            }
+
+            var now = Core.Now;
+            var messageID = $"<{now:yyyyMMdd}.{now:HHmmssff}@{EmailConfiguration.EmailServer}>";
+            message.Headers.Add("Message-ID", messageID);
+            message.From.Add(EmailConfiguration.FromAddress);
+
+            var delay = EmailConfiguration.EmailSendRetryDelay;
+
+            for (var i = 0; i < EmailConfiguration.EmailSendRetryCount; i++)
+            {
+                try
+                {
+                    using var client = new SmtpClient();
+                    await client.ConnectAsync(EmailConfiguration.EmailServer, EmailConfiguration.EmailPort, true).ConfigureAwait(false);
+                    await client.AuthenticateAsync(
+                        EmailConfiguration.EmailServerUsername,
+                        EmailConfiguration.EmailServerPassword
+                    ).ConfigureAwait(false);
+                    await client.SendAsync(message).ConfigureAwait(false);
+                    await client.DisconnectAsync(true).ConfigureAwait(false);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    if (i == 0)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                    }
+
+                    delay *= delay;
+
+                    await Task.Delay(delay * 1000).ConfigureAwait(false);
+                }
+            }
+        }
     }
-
-    public static void AsyncSend(MailMessage message)
-    {
-      ThreadPool.QueueUserWorkItem(SendCallback, message);
-    }
-
-    private static void SendCallback(object state)
-    {
-      MailMessage message = (MailMessage) state;
-
-      if (Send(message))
-        Console.WriteLine("Sent e-mail '{0}' to '{1}'.", message.Subject, message.To);
-      else
-        Console.WriteLine("Failure sending e-mail '{0}' to '{1}'.", message.Subject, message.To);
-    }
-  }
 }

@@ -24,19 +24,19 @@ namespace Server.Spells
             EventSink.ClientVersionReceived += (ns, _) =>
             {
                 if (ns.Mobile is IBuffable buffable)
-                    Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.ResendAllBuffs);
+                    Timer.StartTimer(TimeSpan.Zero, buffable.BuffManager.ResendAllBuffs);
             };
 
             EventSink.PlayerDeath += mobile =>
             {
                 if (mobile is IBuffable buffable)
-                    Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.RemoveBuffsOnDeath);
+                    Timer.StartTimer(TimeSpan.Zero, buffable.BuffManager.RemoveBuffsOnDeath);
             };
 
             EventSink.Login += mobile =>
             {
                 if (mobile is IBuffable buffable) 
-                    Timer.DelayCall(TimeSpan.Zero, buffable.BuffManager.Start);
+                    Timer.StartTimer(TimeSpan.Zero, buffable.BuffManager.Start);
             };
         }
 

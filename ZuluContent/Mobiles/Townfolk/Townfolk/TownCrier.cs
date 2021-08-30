@@ -20,28 +20,7 @@ namespace Server.Mobiles
     {
         private static GlobalTownCrierEntryList m_Instance;
 
-        public static void Initialize()
-        {
-            CommandSystem.Register("TownCriers", AccessLevel.GameMaster, TownCriers_OnCommand);
-        }
-
-        [Usage("TownCriers")]
-        [Description("Manages the global town crier list.")]
-        public static void TownCriers_OnCommand(CommandEventArgs e)
-        {
-            e.Mobile.SendGump(new TownCrierGump(e.Mobile, Instance));
-        }
-
-        public static GlobalTownCrierEntryList Instance
-        {
-            get
-            {
-                if (m_Instance == null)
-                    m_Instance = new GlobalTownCrierEntryList();
-
-                return m_Instance;
-            }
-        }
+        public static GlobalTownCrierEntryList Instance => m_Instance ??= new GlobalTownCrierEntryList();
 
         public bool IsEmpty => Entries == null || Entries.Count == 0;
 
@@ -50,29 +29,31 @@ namespace Server.Mobiles
         public TownCrierEntry GetRandomEntry()
         {
             if (Entries == null || Entries.Count == 0)
+            {
                 return null;
+            }
 
             for (var i = Entries.Count - 1; Entries != null && i >= 0; --i)
             {
                 if (i >= Entries.Count)
+                {
                     continue;
+                }
 
                 var tce = Entries[i];
 
                 if (tce.Expired)
+                {
                     RemoveEntry(tce);
+                }
             }
 
-            if (Entries == null || Entries.Count == 0)
-                return null;
-
-            return Entries[Utility.Random(Entries.Count)];
+            return Entries?.RandomElement();
         }
 
         public TownCrierEntry AddEntry(string[] lines, TimeSpan duration)
         {
-            if (Entries == null)
-                Entries = new List<TownCrierEntry>();
+            Entries ??= new List<TownCrierEntry>();
 
             var tce = new TownCrierEntry(lines, duration);
 
@@ -81,7 +62,9 @@ namespace Server.Mobiles
             var instances = TownCrier.Instances;
 
             for (var i = 0; i < instances.Count; ++i)
+            {
                 instances[i].ForceBeginAutoShout();
+            }
 
             return tce;
         }
@@ -89,50 +72,55 @@ namespace Server.Mobiles
         public void RemoveEntry(TownCrierEntry tce)
         {
             if (Entries == null)
+            {
                 return;
+            }
 
             Entries.Remove(tce);
 
             if (Entries.Count == 0)
+            {
                 Entries = null;
+            }
+        }
+
+        public static void Initialize()
+        {
+            CommandSystem.Register("TownCriers", AccessLevel.GameMaster, TownCriers_OnCommand);
+        }
+
+        [Usage("TownCriers"), Description("Manages the global town crier list.")]
+        public static void TownCriers_OnCommand(CommandEventArgs e)
+        {
+            e.Mobile.SendGump(new TownCrierGump(e.Mobile, Instance));
         }
     }
 
     public class TownCrierEntry
     {
-        public string[] Lines { get; }
-
-        public DateTime ExpireTime { get; }
-
-        public bool Expired => DateTime.Now >= ExpireTime;
-
         public TownCrierEntry(string[] lines, TimeSpan duration)
         {
             Lines = lines;
 
-            if (duration < TimeSpan.Zero)
-                duration = TimeSpan.Zero;
-            else if (duration > TimeSpan.FromDays(365.0))
-                duration = TimeSpan.FromDays(365.0);
-
-            ExpireTime = DateTime.Now + duration;
+            ExpireTime = Core.Now + duration.Clamp(TimeSpan.Zero, TimeSpan.FromDays(365));
         }
+
+        public string[] Lines { get; }
+
+        public DateTime ExpireTime { get; }
+
+        public bool Expired => Core.Now >= ExpireTime;
     }
 
     public class TownCrierDurationPrompt : Prompt
     {
         private readonly ITownCrierEntryList m_Owner;
 
-        public TownCrierDurationPrompt(ITownCrierEntryList owner)
-        {
-            m_Owner = owner;
-        }
+        public TownCrierDurationPrompt(ITownCrierEntryList owner) => m_Owner = owner;
 
         public override void OnResponse(Mobile from, string text)
         {
-            TimeSpan ts;
-
-            if (!TimeSpan.TryParse(text, out ts))
+            if (!TimeSpan.TryParse(text, out var ts))
             {
                 from.SendMessage("Value was not properly formatted. Use: <hours:minutes:seconds>");
                 from.SendGump(new TownCrierGump(from, m_Owner));
@@ -140,7 +128,9 @@ namespace Server.Mobiles
             }
 
             if (ts < TimeSpan.Zero)
+            {
                 ts = TimeSpan.Zero;
+            }
 
             from.SendMessage("Duration set to: {0}", ts);
             from.SendMessage("Enter the first line to shout:");
@@ -157,13 +147,12 @@ namespace Server.Mobiles
 
     public class TownCrierLinesPrompt : Prompt
     {
-        private readonly ITownCrierEntryList m_Owner;
+        private readonly TimeSpan m_Duration;
         private readonly TownCrierEntry m_Entry;
         private readonly List<string> m_Lines;
-        private readonly TimeSpan m_Duration;
+        private readonly ITownCrierEntryList m_Owner;
 
-        public TownCrierLinesPrompt(ITownCrierEntryList owner, TownCrierEntry entry, List<string> lines,
-            TimeSpan duration)
+        public TownCrierLinesPrompt(ITownCrierEntryList owner, TownCrierEntry entry, List<string> lines, TimeSpan duration)
         {
             m_Owner = owner;
             m_Entry = entry;
@@ -182,7 +171,9 @@ namespace Server.Mobiles
         public override void OnCancel(Mobile from)
         {
             if (m_Entry != null)
+            {
                 m_Owner.RemoveEntry(m_Entry);
+            }
 
             if (m_Lines.Count > 0)
             {
@@ -192,9 +183,13 @@ namespace Server.Mobiles
             else
             {
                 if (m_Entry != null)
+                {
                     from.SendMessage("Message deleted.");
+                }
                 else
+                {
                     from.SendLocalizedMessage(502980); // Message entry cancelled.
+                }
             }
 
             from.SendGump(new TownCrierGump(from, m_Owner));
@@ -206,40 +201,12 @@ namespace Server.Mobiles
         private readonly Mobile m_From;
         private readonly ITownCrierEntryList m_Owner;
 
-        public override void OnResponse(NetState sender, RelayInfo info)
-        {
-            if (info.ButtonID == 1)
-            {
-                m_From.SendMessage("Enter the duration for the new message. Format: <hours:minutes:seconds>");
-                m_From.Prompt = new TownCrierDurationPrompt(m_Owner);
-            }
-            else if (info.ButtonID > 1)
-            {
-                var entries = m_Owner.Entries;
-                var index = info.ButtonID - 2;
-
-                if (entries != null && index < entries.Count)
-                {
-                    var tce = entries[index];
-                    var ts = tce.ExpireTime - DateTime.Now;
-
-                    if (ts < TimeSpan.Zero)
-                        ts = TimeSpan.Zero;
-
-                    m_From.SendMessage("Editing entry #{0}.", index + 1);
-                    m_From.SendMessage("Enter the first line to shout:");
-                    m_From.Prompt = new TownCrierLinesPrompt(m_Owner, tce, new List<string>(), ts);
-                }
-            }
-        }
-
         public TownCrierGump(Mobile from, ITownCrierEntryList owner) : base(50, 50)
         {
             m_From = from;
             m_Owner = owner;
 
             from.CloseGump<TownCrierGump>();
-            ;
 
             AddPage(0);
 
@@ -247,10 +214,7 @@ namespace Server.Mobiles
 
             owner.GetRandomEntry(); // force expiration checks
 
-            var count = 0;
-
-            if (entries != null)
-                count = entries.Count;
+            var count = entries?.Count ?? 0;
 
             AddImageTiled(0, 0, 300, 38 + (count == 0 ? 20 : count * 85), 0xA40);
             AddAlphaRegion(1, 1, 298, 36 + (count == 0 ? 20 : count * 85));
@@ -260,16 +224,16 @@ namespace Server.Mobiles
             AddButton(300 - 8 - 30, 8, 0xFAB, 0xFAD, 1);
 
             if (count == 0)
+            {
                 AddHtml(8, 30, 284, 20, "<basefont color=#FFFFFF>The crier has no news.</basefont>");
+            }
             else
-                for (var i = 0; i < entries.Count; ++i)
+            {
+                for (var i = 0; i < entries!.Count; ++i)
                 {
                     var tce = entries[i];
 
-                    var toExpire = tce.ExpireTime - DateTime.Now;
-
-                    if (toExpire < TimeSpan.Zero)
-                        toExpire = TimeSpan.Zero;
+                    var toExpire = Utility.Max(tce.ExpireTime - Core.Now, TimeSpan.Zero);
 
                     var sb = new StringBuilder();
 
@@ -294,7 +258,9 @@ namespace Server.Mobiles
                     for (var j = 0; j < tce.Lines.Length; ++j)
                     {
                         if (j > 0)
+                        {
                             sb.Append("<br>");
+                        }
 
                         sb.Append(tce.Lines[j]);
                     }
@@ -303,162 +269,38 @@ namespace Server.Mobiles
 
                     AddButton(300 - 8 - 26, 35 + i * 85, 0x15E1, 0x15E5, 2 + i);
                 }
+            }
+        }
+
+        public override void OnResponse(NetState sender, RelayInfo info)
+        {
+            if (info.ButtonID == 1)
+            {
+                m_From.SendMessage("Enter the duration for the new message. Format: <hours:minutes:seconds>");
+                m_From.Prompt = new TownCrierDurationPrompt(m_Owner);
+            }
+            else if (info.ButtonID > 1)
+            {
+                var entries = m_Owner.Entries;
+                var index = info.ButtonID - 2;
+
+                if (index < entries?.Count)
+                {
+                    var tce = entries[index];
+                    var ts = Utility.Max(tce.ExpireTime - Core.Now, TimeSpan.Zero);
+
+                    m_From.SendMessage("Editing entry #{0}.", index + 1);
+                    m_From.SendMessage("Enter the first line to shout:");
+                    m_From.Prompt = new TownCrierLinesPrompt(m_Owner, tce, new List<string>(), ts);
+                }
+            }
         }
     }
 
     public class TownCrier : Mobile, ITownCrierEntryList
     {
-        private Timer m_NewsTimer;
-        private Timer m_AutoShoutTimer;
-
-        public List<TownCrierEntry> Entries { get; private set; }
-
-        public TownCrierEntry GetRandomEntry()
-        {
-            if (Entries == null || Entries.Count == 0)
-                return GlobalTownCrierEntryList.Instance.GetRandomEntry();
-
-            for (var i = Entries.Count - 1; Entries != null && i >= 0; --i)
-            {
-                if (i >= Entries.Count)
-                    continue;
-
-                var tce = Entries[i];
-
-                if (tce.Expired)
-                    RemoveEntry(tce);
-            }
-
-            if (Entries == null || Entries.Count == 0)
-                return GlobalTownCrierEntryList.Instance.GetRandomEntry();
-
-            var entry = GlobalTownCrierEntryList.Instance.GetRandomEntry();
-
-            if (entry == null || Utility.RandomBool())
-                entry = Entries[Utility.Random(Entries.Count)];
-
-            return entry;
-        }
-
-        public void ForceBeginAutoShout()
-        {
-            if (m_AutoShoutTimer == null)
-                m_AutoShoutTimer = Timer.DelayCall(TimeSpan.FromSeconds(5.0), TimeSpan.FromMinutes(1.0),
-                    AutoShout_Callback);
-        }
-
-        public TownCrierEntry AddEntry(string[] lines, TimeSpan duration)
-        {
-            if (Entries == null)
-                Entries = new List<TownCrierEntry>();
-
-            var tce = new TownCrierEntry(lines, duration);
-
-            Entries.Add(tce);
-
-            if (m_AutoShoutTimer == null)
-                m_AutoShoutTimer = Timer.DelayCall(TimeSpan.FromSeconds(5.0), TimeSpan.FromMinutes(1.0),
-                    AutoShout_Callback);
-
-            return tce;
-        }
-
-        public void RemoveEntry(TownCrierEntry tce)
-        {
-            if (Entries == null)
-                return;
-
-            Entries.Remove(tce);
-
-            if (Entries.Count == 0)
-                Entries = null;
-
-            if (Entries == null && GlobalTownCrierEntryList.Instance.IsEmpty)
-            {
-                if (m_AutoShoutTimer != null)
-                    m_AutoShoutTimer.Stop();
-
-                m_AutoShoutTimer = null;
-            }
-        }
-
-        private void AutoShout_Callback()
-        {
-            var tce = GetRandomEntry();
-
-            if (tce == null)
-            {
-                if (m_AutoShoutTimer != null)
-                    m_AutoShoutTimer.Stop();
-
-                m_AutoShoutTimer = null;
-            }
-            else if (m_NewsTimer == null)
-            {
-                m_NewsTimer = Timer.DelayCall(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(3.0), ShoutNews_Callback,
-                    new object[] { tce, 0 });
-
-                PublicOverheadMessage(MessageType.Regular, 0x3B2, 502976); // Hear ye! Hear ye!
-            }
-        }
-
-        private void ShoutNews_Callback(object state)
-        {
-            var states = (object[])state;
-            var tce = (TownCrierEntry)states[0];
-            var index = (int)states[1];
-
-            if (index < 0 || index >= tce.Lines.Length)
-            {
-                if (m_NewsTimer != null)
-                    m_NewsTimer.Stop();
-
-                m_NewsTimer = null;
-            }
-            else
-            {
-                PublicOverheadMessage(MessageType.Regular, 0x3B2, false, tce.Lines[index]);
-                states[1] = index + 1;
-            }
-        }
-
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (from.AccessLevel >= AccessLevel.GameMaster)
-                from.SendGump(new TownCrierGump(from, this));
-            else
-                base.OnDoubleClick(from);
-        }
-
-        public override bool HandlesOnSpeech(Mobile from)
-        {
-            return m_NewsTimer == null && from.Alive && InRange(from, 12);
-        }
-
-        public override void OnSpeech(SpeechEventArgs e)
-        {
-            if (m_NewsTimer == null && e.HasKeyword(0x30) && e.Mobile.Alive && InRange(e.Mobile, 12)) // *news*
-            {
-                Direction = GetDirectionTo(e.Mobile);
-
-                var tce = GetRandomEntry();
-
-                if (tce == null)
-                {
-                    PublicOverheadMessage(MessageType.Regular, 0x3B2, 1005643); // I have no news at this time.
-                }
-                else
-                {
-                    m_NewsTimer = Timer.DelayCall(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(3.0),
-                        ShoutNews_Callback, new object[] { tce, 0 });
-
-                    PublicOverheadMessage(MessageType.Regular, 0x3B2, 502978); // Some of the latest news!
-                }
-            }
-        }
-
-        public static List<TownCrier> Instances { get; } = new();
-
+        private Timer _autoShoutTimer;
+        private Timer _newsTimer;
 
         [Constructible]
         public TownCrier()
@@ -468,9 +310,12 @@ namespace Server.Mobiles
             InitStats(100, 100, 25);
 
             Title = "the town crier";
-            Hue = Race.RandomSkinHue();
+            Hue = Race.Human.RandomSkinHue();
 
-            NameHue = 0x35;
+            if (!Core.AOS)
+            {
+                NameHue = 0x35;
+            }
 
             if (Female = Utility.RandomBool())
             {
@@ -485,18 +330,12 @@ namespace Server.Mobiles
 
             AddItem(new FancyShirt(Utility.RandomBlueHue()));
 
-            Item skirt;
-
-            switch (Utility.Random(2))
+            var skirt = Utility.Random(2) switch
             {
-                case 0:
-                    skirt = new Skirt();
-                    break;
-                default:
-                case 1:
-                    skirt = new Kilt();
-                    break;
-            }
+                0 => (Item)new Skirt(),
+                1 => new Kilt(),
+                _ => new Kilt()
+            };
 
             skirt.Hue = Utility.RandomGreenHue();
 
@@ -504,39 +343,175 @@ namespace Server.Mobiles
 
             AddItem(new FeatheredHat(Utility.RandomGreenHue()));
 
-            Item boots;
-
-            switch (Utility.Random(2))
+            var boots = Utility.Random(2) switch
             {
-                case 0:
-                    boots = new Boots();
-                    break;
-                default:
-                case 1:
-                    boots = new ThighBoots();
-                    break;
-            }
+                0 => (Item)new Boots(),
+                1 => new ThighBoots(),
+                _ => new ThighBoots()
+            };
 
             AddItem(boots);
 
             Utility.AssignRandomHair(this);
         }
 
-        public override bool CanBeDamaged()
+        public TownCrier(Serial serial) : base(serial)
         {
-            return false;
+            Instances.Add(this);
         }
+
+        public static List<TownCrier> Instances { get; } = new();
+
+        public List<TownCrierEntry> Entries { get; private set; }
+
+        public TownCrierEntry GetRandomEntry()
+        {
+            if (Entries == null || Entries.Count == 0)
+            {
+                return GlobalTownCrierEntryList.Instance.GetRandomEntry();
+            }
+
+            for (var i = Entries.Count - 1; Entries != null && i >= 0; --i)
+            {
+                if (i >= Entries.Count)
+                {
+                    continue;
+                }
+
+                var tce = Entries[i];
+
+                if (tce.Expired)
+                {
+                    RemoveEntry(tce);
+                }
+            }
+
+            var entry = GlobalTownCrierEntryList.Instance.GetRandomEntry();
+
+            return entry ?? (Entries?.Count > 0 && Utility.RandomBool() ? Entries.RandomElement() : null);
+        }
+
+        public TownCrierEntry AddEntry(string[] lines, TimeSpan duration)
+        {
+            Entries ??= new List<TownCrierEntry>();
+
+            var tce = new TownCrierEntry(lines, duration);
+
+            Entries.Add(tce);
+
+            ForceBeginAutoShout();
+
+            return tce;
+        }
+
+        public void RemoveEntry(TownCrierEntry tce)
+        {
+            if (Entries == null)
+            {
+                return;
+            }
+
+            Entries.Remove(tce);
+
+            if (Entries.Count == 0)
+            {
+                Entries = null;
+            }
+
+            if (Entries == null && GlobalTownCrierEntryList.Instance.IsEmpty)
+            {
+                _autoShoutTimer.Stop();
+                _autoShoutTimer = null;
+            }
+        }
+
+        public void ForceBeginAutoShout()
+        {
+            _autoShoutTimer ??= Timer.DelayCall(TimeSpan.FromSeconds(5.0), TimeSpan.FromMinutes(1.0), AutoShout_Callback);
+        }
+
+        private void AutoShout_Callback()
+        {
+            var tce = GetRandomEntry();
+
+            if (tce == null)
+            {
+                _autoShoutTimer.Stop();
+                _autoShoutTimer = null;
+            }
+            else if (_newsTimer == null)
+            {
+                _newsTimer = Timer.DelayCall(
+                    TimeSpan.FromSeconds(1.0),
+                    TimeSpan.FromSeconds(3.0),
+                    tce.Lines.Length,
+                    () => ShoutNews_Callback(tce)
+                );
+
+                PublicOverheadMessage(MessageType.Regular, 0x3B2, 502976); // Hear ye! Hear ye!
+            }
+        }
+
+        private void ShoutNews_Callback(TownCrierEntry tce)
+        {
+            var index = _newsTimer.Index;
+            if (index >= tce.Lines.Length)
+            {
+                _newsTimer.Stop();
+                _newsTimer = null;
+            }
+            else
+            {
+                PublicOverheadMessage(MessageType.Regular, 0x3B2, false, tce.Lines[index]);
+            }
+        }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (from.AccessLevel >= AccessLevel.GameMaster)
+            {
+                from.SendGump(new TownCrierGump(from, this));
+            }
+            else
+            {
+                base.OnDoubleClick(from);
+            }
+        }
+
+        public override bool HandlesOnSpeech(Mobile from) => _newsTimer == null && from.Alive && InRange(from, 12);
+
+        public override void OnSpeech(SpeechEventArgs e)
+        {
+            if (_newsTimer == null && e.HasKeyword(0x30) && e.Mobile.Alive && InRange(e.Mobile, 12)) // *news*
+            {
+                Direction = GetDirectionTo(e.Mobile);
+
+                var tce = GetRandomEntry();
+
+                if (tce == null)
+                {
+                    PublicOverheadMessage(MessageType.Regular, 0x3B2, 1005643); // I have no news at this time.
+                }
+                else
+                {
+                    _newsTimer = Timer.DelayCall(
+                        TimeSpan.FromSeconds(1.0),
+                        TimeSpan.FromSeconds(3.0),
+                        tce.Lines.Length,
+                        () => ShoutNews_Callback(tce)
+                    );
+
+                    PublicOverheadMessage(MessageType.Regular, 0x3B2, 502978); // Some of the latest news!
+                }
+            }
+        }
+
+        public override bool CanBeDamaged() => false;
 
         public override void OnDelete()
         {
             Instances.Remove(this);
             base.OnDelete();
-        }
-
-        [Constructible]
-        public TownCrier(Serial serial) : base(serial)
-        {
-            Instances.Add(this);
         }
 
         public override void Serialize(IGenericWriter writer)
@@ -551,6 +526,11 @@ namespace Server.Mobiles
             base.Deserialize(reader);
 
             var version = reader.ReadInt();
+
+            if (Core.AOS && NameHue == 0x35)
+            {
+                NameHue = -1;
+            }
         }
     }
 }

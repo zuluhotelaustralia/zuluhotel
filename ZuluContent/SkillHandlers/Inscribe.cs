@@ -23,7 +23,7 @@ namespace Server.SkillHandlers
 
         private static readonly int PointMultiplier = 15;
 
-        private static readonly Dictionary<uint, uint> Users = new();
+        private static readonly Dictionary<Serial, Serial> Users = new();
 
         private static void SetUser(Serial itemSerial, Mobile mob)
         {

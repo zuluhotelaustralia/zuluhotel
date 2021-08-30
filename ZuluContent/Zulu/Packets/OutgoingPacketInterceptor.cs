@@ -58,7 +58,7 @@ namespace Scripts.Zulu.Packets
             reader.Seek(3, SeekOrigin.Current);
             
             var sub = reader.ReadInt16();
-            var serial = reader.ReadUInt32();
+            var serial = (Serial) reader.ReadUInt32();
             var label = reader.ReadInt32();
 
             var item = World.FindItem(serial);
@@ -104,7 +104,7 @@ namespace Scripts.Zulu.Packets
             var reader = new SpanReader(input);
             reader.Seek(3, SeekOrigin.Current);
 
-            var serial = reader.ReadUInt32();
+            var serial = (Serial) reader.ReadUInt32();
             var graphic = reader.ReadInt16();
             var type = (MessageType) reader.ReadByte();
             var hue = reader.ReadInt16();

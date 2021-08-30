@@ -115,7 +115,7 @@ namespace Server.Multis
                     return;
                 }
 
-                if (from.Region.IsPartOf<HouseRegion>() || BaseBoat.FindBoatAt(from, from.Map) != null)
+                if (from.Region.IsPartOf<HouseRegion>() || BaseBoat.FindBoatAt(from.Location, from.Map) != null)
                 {
                     from.SendLocalizedMessage(
                         1010568,
