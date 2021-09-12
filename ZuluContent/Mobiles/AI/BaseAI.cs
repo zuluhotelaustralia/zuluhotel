@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Scripts.Zulu.Engines.Classes;
 using Server.Items;
 using Server.Targets;
 using Server.Network;
-using Server.Regions;
 using MoveImpl = Server.Movement.MovementImpl;
 
 namespace Server.Mobiles
@@ -40,6 +40,7 @@ namespace Server.Mobiles
         public Timer m_Timer;
         protected ActionType m_Action;
         private long m_NextDetectHidden;
+        private long m_NextHide;
         private long m_NextStopGuard;
 
         public BaseCreature m_Mobile;
@@ -1987,7 +1988,7 @@ namespace Server.Mobiles
 
         public virtual void WalkRandomInHome(int iChanceToNotMove, int iChanceToDir, int iSteps)
         {
-            if (m_Mobile.Deleted || m_Mobile.DisallowAllMoves)
+            if (m_Mobile.Deleted || m_Mobile.DisallowAllMoves || m_Mobile.Hidden)
                 return;
 
             if (m_Mobile.Home == Point3D.Zero)
@@ -2382,7 +2383,12 @@ namespace Server.Mobiles
                 m_Mobile.FocusMob = newFocusMob;
             }
 
-            return m_Mobile.FocusMob != null;
+            var focusedMob = m_Mobile.FocusMob != null;
+
+            if (m_Mobile.Hidden && focusedMob)
+                Timer.StartTimer(TimeSpan.FromMilliseconds(100), () => AlertUnhidden(m_Mobile));
+
+            return focusedMob;
         }
 
         private bool IsHostile(Mobile from)
@@ -2413,6 +2419,10 @@ namespace Server.Mobiles
             return false;
         }
 
+        public static void AlertUnhidden(Mobile mobile)
+        {
+            mobile.Say($"*{mobile.Name} springs out from hiding!*");
+        }
 
         public virtual void DetectHidden()
         {
@@ -2449,6 +2459,24 @@ namespace Server.Mobiles
                         trg.SendLocalizedMessage(500814); // You have been revealed!
                     }
                 }
+            }
+        }
+
+        public virtual void Hide()
+        {
+            if (m_Mobile.Deleted || m_Mobile.Map == null || m_Mobile.Controlled)
+                return;
+
+            m_Mobile.DebugSay("Hiding");
+
+            if (m_Mobile.ShilCheckSkill(SkillName.Hiding))
+            {
+                m_Mobile.Hidden = true;
+                m_Mobile.DebugSay("I have hidden");
+            }
+            else
+            {
+                m_Mobile.DebugSay("I failed hiding");
             }
         }
 
@@ -2507,10 +2535,10 @@ namespace Server.Mobiles
             m_Timer.Start();
         }
 
-        public virtual bool CanDetectHidden
-        {
-            get { return m_Mobile.Skills[SkillName.DetectHidden].Value > 0; }
-        }
+        public virtual bool CanDetectHidden => m_Mobile.Skills[SkillName.DetectHidden].Value > 0;
+
+        public virtual bool CanHide => m_Mobile.Skills[SkillName.Hiding].Value > 0 &&
+                                       !m_Mobile.Hidden && m_Mobile.Combatant == null;
 
         /*
          *  The Timer object
@@ -2526,6 +2554,7 @@ namespace Server.Mobiles
                 m_Owner = owner;
 
                 m_Owner.m_NextDetectHidden = Core.TickCount;
+                m_Owner.m_NextHide = Core.TickCount;
             }
 
             protected override void OnTick()
@@ -2607,6 +2636,15 @@ namespace Server.Mobiles
                     m_Owner.m_NextDetectHidden = Core.TickCount +
                                                  (int) TimeSpan.FromSeconds(Utility.RandomMinMax(min, max))
                                                      .TotalMilliseconds;
+                }
+                
+                if (m_Owner.CanHide && Core.TickCount > m_Owner.m_NextHide)
+                {
+                    m_Owner.Hide();
+
+                    m_Owner.m_NextHide = Core.TickCount +
+                                         (int) TimeSpan.FromSeconds(10)
+                                             .TotalMilliseconds;
                 }
             }
         }

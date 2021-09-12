@@ -74,6 +74,12 @@ namespace Server.Mobiles
         public DarkElfArcher() : base(CreatureProperties.Get<DarkElfArcher>())
         {
             // Add customization here
+            AddItem(new Bow
+            {
+                Movable = false,
+                Name = "Dark Elf Weapon"
+            });
+            PackItem(new Arrow(Utility.RandomMinMax(150, 170)));
         }
 
         [Constructible]

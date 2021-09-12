@@ -776,14 +776,14 @@ namespace Server.Items
             return damage;
         }
 
-        public double ModByDist(Mobile attacker, Mobile defender, double damage, BaseWeapon weapon)
+        public double ModByDist(Mobile attacker, Mobile? defender, double damage, BaseWeapon weapon)
         {
             if (weapon.GetUsedSkill(attacker) == SkillName.Archery)
             {
                 damage *= (attacker.Dex + 60) * 0.01 /
                           ((attacker.Skills[SkillName.Tactics].Value + 50.0 + attacker.Str / 5.0) * 0.01);
 
-                var dist = attacker.GetDistanceToSqrt(defender);
+                var dist = defender != null ? attacker.GetDistanceToSqrt(defender) : 2;
 
                 if (dist <= 1 || dist > 10)
                     damage *= 0.25;
