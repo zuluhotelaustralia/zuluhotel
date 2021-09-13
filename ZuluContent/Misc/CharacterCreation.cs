@@ -52,7 +52,7 @@ namespace Server.Misc
 
             // Bag containing 50 of each reagent
             for (int i = 0; i < 5; ++i)
-                bank.DropItem(new BagOfReagents(50));
+                bank.DropItem(new BagOfReagents(3));
 
             // Craft tools
             bank.DropItem(MakeNewbie(new Scissors()));

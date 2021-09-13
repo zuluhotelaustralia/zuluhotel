@@ -14,6 +14,8 @@ namespace Server.Items
 
         public override string DefaultName => $"{CraftResources.GetName(Resource)} ore";
 
+        public override double DefaultWeight => 0.5;
+
         public abstract BaseIngot GetIngot();
 
         public override void Serialize(IGenericWriter writer)
@@ -55,7 +57,6 @@ namespace Server.Items
             Stackable = true;
             Amount = amount;
             Hue = CraftResources.GetHue(resource);
-
             Resource = resource;
         }
 

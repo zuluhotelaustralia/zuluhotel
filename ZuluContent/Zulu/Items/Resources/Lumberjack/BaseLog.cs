@@ -9,15 +9,15 @@ namespace Server.Items
         public override string DefaultName => CraftResources.GetName(Resource).Length > 0
             ? $"{CraftResources.GetName(Resource)} log"
             : "log";
+        
+        public override double DefaultWeight => 0.5;
 
         [Constructible]
         public BaseLog(CraftResource resource, int amount)
             : base(0x1BDD)
         {
             Stackable = true;
-            Weight = 2.0;
             Amount = amount;
-
             Resource = resource;
             Hue = CraftResources.GetHue(resource);
         }

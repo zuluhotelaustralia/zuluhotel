@@ -24,9 +24,7 @@ namespace Server.Mobiles
 				Add( new GenericBuyInfo( typeof( ScribesPen ), 8, 10, 0xFBF, 0 ) );
 				Add( new GenericBuyInfo( typeof( BlankScroll ), 5, 20, 0x0E34, 0 ) );
 
-				Add( new GenericBuyInfo( "1041072", typeof( MagicWizardsHat ), 11, 10, 0x1718, Utility.RandomDyedHue() ) );
-
-				Add( new GenericBuyInfo( typeof( RecallRune ), 15, 10, 0x1f14, 0 ) );
+                Add( new GenericBuyInfo( typeof( RecallRune ), 15, 10, 0x1f14, 0 ) );
 
 				Add( new GenericBuyInfo( typeof( RefreshPotion ), 15, 20, 0xF0B, 0 ) );
 				Add( new GenericBuyInfo( typeof( AgilityPotion ), 15, 20, 0xF08, 0 ) );
@@ -64,17 +62,17 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( BlackPearl ), 3 ); 
-				Add( typeof( Bloodmoss ), 3 ); 
-				Add( typeof( MandrakeRoot ), 2 ); 
-				Add( typeof( Garlic ), 2 ); 
-				Add( typeof( Ginseng ), 2 ); 
-				Add( typeof( Nightshade ), 2 ); 
-				Add( typeof( SpidersSilk ), 2 ); 
-				Add( typeof( SulfurousAsh ), 2 ); 
-				Add( typeof( RecallRune ), 8 );
+				Add( typeof( BlackPearl ), 1 ); 
+				Add( typeof( Bloodmoss ), 1 ); 
+				Add( typeof( MandrakeRoot ), 1 ); 
+				Add( typeof( Garlic ), 1 ); 
+				Add( typeof( Ginseng ), 1 ); 
+				Add( typeof( Nightshade ), 1 ); 
+				Add( typeof( SpidersSilk ), 1 ); 
+				Add( typeof( SulfurousAsh ), 1 ); 
+				Add( typeof( RecallRune ), 1 );
 				Add( typeof( Spellbook ), 9 );
-				Add( typeof( BlankScroll ), 3 );
+				Add( typeof( BlankScroll ), 1 );
 
 				Add( typeof( NightSightPotion ), 7 );
 				Add( typeof( AgilityPotion ), 7 );

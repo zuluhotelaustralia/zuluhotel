@@ -2537,8 +2537,9 @@ namespace Server.Mobiles
 
         public virtual bool CanDetectHidden => m_Mobile.Skills[SkillName.DetectHidden].Value > 0;
 
-        public virtual bool CanHide => m_Mobile.Skills[SkillName.Hiding].Value > 0 &&
-                                       !m_Mobile.Hidden && m_Mobile.Combatant == null;
+        public virtual bool CanHide => m_Mobile is not BaseVendor && m_Mobile.Skills[SkillName.Hiding].Value > 0 &&
+                                       !m_Mobile.Hidden && m_Mobile.Warmode == false &&
+                                       m_Mobile.Combatant == null;
 
         /*
          *  The Timer object

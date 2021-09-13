@@ -50,7 +50,7 @@ namespace Server.SkillHandlers
                 return Delay;
             }
             
-            var victimTarget = new AsyncTarget<BaseCreature>(from,
+            var victimTarget = new AsyncTarget<Mobile>(from,
                 new TargetOptions {Range = BaseInstrument.GetBardRange(from, SkillName.Provocation)});
             from.Target = victimTarget;
             
@@ -66,13 +66,19 @@ namespace Server.SkillHandlers
                 return Delay;
             }
             
+            if (victimTargeted == null)
+            {
+                from.SendFailureMessage(501589); // You can't incite that!
+                return Delay;
+            }
+            
             if (provokeTargeted.Unprovokable)
             {
                 from.SendFailureMessage(1049446); // You have no chance of provoking those creatures.
                 return Delay;
             }
             
-            if (victimTargeted.Unprovokable || !from.CanBeHarmful(victimTargeted, false))
+            if (!from.CanBeHarmful(victimTargeted, false))
             {
                 from.SendFailureMessage(1049446); // You have no chance of provoking those creatures.
                 return Delay;

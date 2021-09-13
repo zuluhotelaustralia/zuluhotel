@@ -12,10 +12,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public CraftResource Resource { get; set; }
 
-        public override double DefaultWeight
-        {
-            get { return 0.1; }
-        }
+        public override double DefaultWeight => 0.25;
 
         public override void Serialize(IGenericWriter writer)
         {
@@ -55,7 +52,6 @@ namespace Server.Items
             Stackable = true;
             Amount = amount;
             Hue = CraftResources.GetHue(resource);
-
             Resource = resource;
         }
 

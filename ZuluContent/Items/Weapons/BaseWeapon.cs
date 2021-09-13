@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
@@ -506,10 +507,16 @@ namespace Server.Items
         public SkillName GetUsedSkill(Mobile m)
         {
             var sk = Skill;
-
+            
             if (sk != SkillName.Wrestling && !m.Player && !m.Body.IsHuman &&
                 m.Skills[SkillName.Wrestling].Value > m.Skills[sk].Value)
                 sk = SkillName.Wrestling;
+            // TODO: Remove this once the new NPC config is merged
+            else if (!m.Player && m.Skills[sk].Value == 0)
+            {
+                var weaponSkills = new List<SkillName> { SkillName.Swords, SkillName.Macing, SkillName.Fencing };
+                sk = weaponSkills.OrderByDescending(s => m.Skills[s].Value).First();
+            }
 
             return sk;
         }

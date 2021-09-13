@@ -51,7 +51,7 @@ namespace Server.SkillHandlers
             from.Target = target;
             from.RevealingAction();
 
-            from.SendLocalizedMessage(500397); // To whom do you wish to grovel?
+            from.SendSuccessMessage(500397); // To whom do you wish to grovel?
 
             var (targeted, responseType) = await target;
 
@@ -107,7 +107,7 @@ namespace Server.SkillHandlers
 
             if (!from.ShilCheckSkill(SkillName.Begging))
             {
-                targeted.SendFailureMessage(500404); // They seem unwilling to give you any money.
+                from.SendFailureMessage(500404); // They seem unwilling to give you any money.
                 return Delay;
             }
 
