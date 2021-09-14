@@ -1129,17 +1129,6 @@ namespace Server.Mobiles
                     Criminal = true;
             }
 
-            Mobile killer = FindMostRecentDamager(true);
-
-            if (killer is BaseCreature)
-            {
-                BaseCreature bc = (BaseCreature) killer;
-
-                Mobile master = bc.GetMaster();
-                if (master != null)
-                    killer = master;
-            }
-
             var resurrect = false;
 
             this.FireHook(h => h.OnDeath(this, ref resurrect));
@@ -1520,6 +1509,7 @@ namespace Server.Mobiles
                 m_ShortTermElapse += TimeSpan.FromHours(8);
                 if (ShortTermMurders > 0)
                     --ShortTermMurders;
+                OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
             }
 
             if (m_LongTermElapse < GameTime)
@@ -1527,6 +1517,7 @@ namespace Server.Mobiles
                 m_LongTermElapse += TimeSpan.FromHours(40);
                 if (Kills > 0)
                     --Kills;
+                OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
             }
         }
 
