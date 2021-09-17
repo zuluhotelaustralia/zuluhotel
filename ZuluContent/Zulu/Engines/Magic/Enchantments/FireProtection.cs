@@ -23,6 +23,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
+        
+        [CallPriority(1)]
+        public override bool GetShouldDye() => true;
 
         public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
             ref int damage)

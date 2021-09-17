@@ -13,7 +13,7 @@ namespace Server.Gumps
         {
             AddPage(0);
             
-            AddBackground(0, 0, 460, 540, 83);
+            AddBackground(0, 0, 460, 540, 2620);
         }
 
         public TargetClasseGump() : base(250, 200)

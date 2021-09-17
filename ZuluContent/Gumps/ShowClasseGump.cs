@@ -14,7 +14,7 @@ namespace Server.Gumps
         {
             AddPage(0);
             
-            AddBackground(0, 0, 460, 350, 83);
+            AddBackground(0, 0, 460, 350, 2620);
         }
 
         public ShowClasseGump(PlayerMobile from) : base(250, 200)
@@ -39,12 +39,12 @@ namespace Server.Gumps
                 classType = from.ZuluClass.Type;
                 message = $"You are a qualified level {from.ZuluClass.Level} {classType.FriendlyName()}.";
             }
+
+            var fontSize = 35;
+            var textHeight = fontSize;
+            var htmlMessage = $"<CENTER>{message}</CENTER>";
             
             AddBackground();
-
-            AddLabel(40, 50, 590, message);
-
-            var offset = 0;
 
             if (classType != ZuluClassType.None)
             {
@@ -61,23 +61,35 @@ namespace Server.Gumps
                 
                 if (from.ZuluClass.Level > 0)
                 {
-                    AddLabel(40, 70, 590, $"In-classe skills are {totalInClassSkills}, Out-of-classe skills are {totalOutClassSkills}.");
-                    AddLabel(40, 90, 590, $"You need {levelReqPercent}% of all skills in-classe, and have {currentPercent}% in-classe.");
-                    offset = 40;
+                    htmlMessage += $"<CENTER>In-classe skills are {totalInClassSkills}, Out-of-classe skills are {totalOutClassSkills}.</CENTER>";
+                    textHeight += fontSize;
+                    htmlMessage += $"<CENTER>You need {levelReqPercent}% of all skills in-classe, and have {currentPercent}% in-classe.</CENTER>";
+                    textHeight += fontSize;
                 }
                 
                 var nextLevelReqPercent = (int) (ZuluClass.GetClassLevelPercent(from.ZuluClass.Level + 1) * 100.0);
                 var nextLevelInClassSkills = ZuluClass.MinSkills[from.ZuluClass.Level + 1];
                 var nextLevelProgress = (int) (totalInClassSkills / nextLevelInClassSkills * 100.0);
                 
-                AddLabel(40, 90 + offset, 590, $"Your requirements for level {from.ZuluClass.Level + 1} {classType.FriendlyName()} are:");
-                AddLabel(40, 110 + offset, 590, $"In-classe skills: {(int) nextLevelInClassSkills}.");
-                AddLabel(40, 130 + offset, 590, $"In-classe skills must account for {nextLevelReqPercent}% of total skills.");
+                htmlMessage += $"<CENTER>Your requirements for level {from.ZuluClass.Level + 1} {classType.FriendlyName()} are:</CENTER>";
+                textHeight += fontSize;
+                htmlMessage += $"<CENTER>In-classe skills: {(int) nextLevelInClassSkills}.</CENTER>";
+                textHeight += fontSize;
+                htmlMessage += $"<CENTER>In-classe skills must account for {nextLevelReqPercent}% of total skills.</CENTER>";
+                textHeight += fontSize;
+
+                AddHtml(10, 50, 440, textHeight, $"<BASEFONT COLOR=#FFFFFF>{htmlMessage}</BASEFONT>", false,
+                    false);
                 
-                AddLabel(185, 170 + offset, 590, "Progress");
-                AddLabel(250, 170 + offset, 55, $"{nextLevelProgress}%");
-                AddImage(175, 200 + offset, 0x806, 1155);
-                AddImageTiled(175, 200 + offset, (int) (110.0 * nextLevelProgress / 100.0), 12, 0x809);
+                AddLabel(185, 80 + textHeight, 590, "Progress");
+                AddLabel(250, 80 + textHeight, 55, $"{nextLevelProgress}%");
+                AddImage(175, 110 + textHeight, 0x806, 1155);
+                AddImageTiled(175, 109 + textHeight, (int) (110.0 * nextLevelProgress / 100.0), 12, 0x809);
+            }
+            else
+            {
+                AddHtml(10, 50, 440, textHeight, $"<BASEFONT COLOR=#FFFFFF>{htmlMessage}</BASEFONT>", false,
+                    false);
             }
 
             // Okay

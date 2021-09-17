@@ -33,6 +33,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         [Key(1)] public EffectHitType EffectHitType { get; set; } = EffectHitType.None;
 
         [Key(2)] public double Chance { get; set; } = 0.0;
+        
+        [CallPriority(1)]
+        public override bool GetShouldDye() => true;
 
         public override void OnMeleeHit(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
         {

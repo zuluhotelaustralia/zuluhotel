@@ -14,6 +14,7 @@ using Server.Items;
 using Server.Engines.PartySystem;
 using Server.Engines.Spawners;
 using Server.Guilds;
+using Server.Gumps;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
 using Server.Utilities;
@@ -1233,8 +1234,8 @@ namespace Server.Mobiles
 
         public virtual bool CheckGold(Mobile from, Item dropped)
         {
-            if (dropped is Gold)
-                return OnGoldGiven(from, (Gold) dropped);
+            if (dropped is Gold gold)
+                return OnGoldGiven(from, gold);
 
             return false;
         }
@@ -1271,6 +1272,36 @@ namespace Server.Mobiles
                 dropped.Delete();
                 return true;
             }
+
+            return false;
+        }
+        
+        public virtual bool CheckTrainingDeed(Mobile from, Item dropped)
+        {
+            if (dropped is SkillTrainingDeed deed)
+                return OnTrainingDeedGiven(from, deed);
+
+            return false;
+        }
+        
+        public virtual bool OnTrainingDeedGiven(Mobile from, SkillTrainingDeed dropped)
+        {
+            if (from != dropped.Player)
+            {
+                Say("That is not yours to use! I have confiscated it.");
+                dropped.Delete();
+                return false;
+            }
+            
+            if (CheckTeachingMatch(from))
+            {
+                var pointsToLearn = 0;
+                CheckTeachSkills(m_Teaching, from, 0, ref pointsToLearn, false);
+                from.SendGump(new TrainSkillsGump(from, this, dropped, m_Teaching, pointsToLearn));
+                return false;
+            }
+
+            Say("Unfortunately I can only accept that for training skills!");
 
             return false;
         }
@@ -1456,7 +1487,11 @@ namespace Server.Mobiles
         {
             if (CheckFeed(from, dropped))
                 return true;
-            else if (CheckGold(from, dropped))
+            
+            if (CheckGold(from, dropped))
+                return true;
+            
+            if (CheckTrainingDeed(from, dropped))
                 return true;
 
             return base.OnDragDrop(from, dropped);

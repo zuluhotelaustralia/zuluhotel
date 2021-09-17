@@ -1447,14 +1447,6 @@ namespace Server.Items
         {
         }
 
-        [Hue]
-        [CommandProperty(AccessLevel.GameMaster)]
-        public override int Hue
-        {
-            get => Identified ? base.Hue : 0x0;
-            set => base.Hue = value;
-        }
-
         public override bool AllowEquippedCast(Mobile from)
         {
             var type = Enchantments.Get((MagicalWeapon e) => e.Value);

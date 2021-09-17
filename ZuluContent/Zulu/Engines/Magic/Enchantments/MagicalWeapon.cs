@@ -15,6 +15,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override EnchantmentInfo Info => MagicalWeaponInfo.GetVariant(Value);
         [Key(1)] 
         public MagicalWeaponType Value { get; set; } = MagicalWeaponType.None;
+        
+        [CallPriority(1)]
+        public override bool GetShouldDye() => Value > MagicalWeaponType.None;
 
         public override void OnGetSwingDelay(ref double delay, Mobile m)
         {

@@ -25,6 +25,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
+        
+        [CallPriority(1)]
+        public override bool GetShouldDye() => true;
 
         public override void OnAbsorbMeleeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, ref double damage)
         {
