@@ -18,11 +18,11 @@ namespace Server.Items
         public override string DefaultName => "Skill Training Deed";
 
         [Constructible]
-        public SkillTrainingDeed(Mobile player) : base(0x14EF)
+        public SkillTrainingDeed(Mobile player, int credits) : base(0x14EF)
         {
             Hue = 0x2F;
             Player = player;
-            Credits = 1000;
+            Credits = credits;
             Weight = 1.0;
         }
 
@@ -34,8 +34,8 @@ namespace Server.Items
         public override void OnSingleClick(Mobile from)
         {
             LabelTo(from, Name);
-            LabelTo(from, $"{Credits} credits remaining");
-            LabelTo(from, $"(bound to {Player.Name})");
+            LabelTo(from, $"({Credits} credits remaining)");
+            LabelTo(from, $"[bound to {Player.Name}]");
         }
     }
 }

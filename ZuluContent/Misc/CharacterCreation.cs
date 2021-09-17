@@ -29,7 +29,7 @@ namespace Server.Misc
             }
 
             PackItem(new RedBook("a book", m.Name, 20, true));
-            PackItem(new SkillTrainingDeed(m)); // Starting gold can be customized here
+            PackItem(new SkillTrainingDeed(m, 1000)); // Starting gold can be customized here
             PackItem(new Dagger());
             PackItem(new Candle());
         }
