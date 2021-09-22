@@ -3,7 +3,6 @@ package Undead
 Revenant: {
 	Name:               "a Revenant"
 	CorpseNameOverride: "corpse of a Revenant"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                135
 	Int:                15
 	Dex:                120

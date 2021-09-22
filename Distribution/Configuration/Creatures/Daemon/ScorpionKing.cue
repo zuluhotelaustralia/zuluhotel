@@ -3,7 +3,7 @@ package Daemon
 ScorpionKing: {
 	Name:                 "a Scorpion King"
 	CorpseNameOverride:   "corpse of a Scorpion King"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1500
 	Int:                  2000
 	Dex:                  200
@@ -53,7 +53,7 @@ ScorpionKing: {
 		HitSound: 399
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

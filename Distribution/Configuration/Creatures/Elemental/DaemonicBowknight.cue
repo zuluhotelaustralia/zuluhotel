@@ -3,7 +3,7 @@ package Elemental
 DaemonicBowknight: {
 	Name:                 "a Daemonic Bowknight"
 	CorpseNameOverride:   "corpse of a Daemonic Bowknight"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  2250
 	Int:                  55
 	Dex:                  400
@@ -46,7 +46,7 @@ DaemonicBowknight: {
 		HitSound: 252
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Bow"
+		ItemType: "SBow"
 		Name:     "Tainted Ranger Weapon"
 		Hue:      1171
 	}]

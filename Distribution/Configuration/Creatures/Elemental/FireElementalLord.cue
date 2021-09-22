@@ -3,7 +3,6 @@ package Elemental
 FireElementalLord: {
 	Name:               "a fire elemental lord"
 	CorpseNameOverride: "corpse of a fire elemental lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                400
 	Dex:                300

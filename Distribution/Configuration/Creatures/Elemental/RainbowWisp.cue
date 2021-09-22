@@ -3,7 +3,7 @@ package Elemental
 RainbowWisp: {
 	Name:                 "The Rainbow Wisp"
 	CorpseNameOverride:   "corpse of The Rainbow Wisp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1000
 	Int:                  20000
 	Dex:                  400
@@ -52,6 +52,6 @@ RainbowWisp: {
 		MaxRange:  12
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Bow"
+		ItemType: "SBow"
 	}]
 }

@@ -3,7 +3,6 @@ package Daemon
 MulticolouredHoardeDemon: {
 	Name:               "a Multicoloured Hoarde Demon"
 	CorpseNameOverride: "corpse of a Multicoloured Hoarde Demon"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2000
 	Int:                200
 	Dex:                200

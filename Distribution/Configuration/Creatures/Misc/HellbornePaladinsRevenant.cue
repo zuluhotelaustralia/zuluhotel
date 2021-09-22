@@ -3,7 +3,7 @@ package Misc
 HellbornePaladinsRevenant: {
 	Name:                 "The Hellborne Paladin's Revenant"
 	CorpseNameOverride:   "corpse of The Hellborne Paladin's Revenant"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1500
 	Int:                  2000
 	Dex:                  200

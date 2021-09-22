@@ -3,7 +3,7 @@ package Giantkin
 OgreLord: {
 	Name:                 "<random> the Ogre Lord"
 	CorpseNameOverride:   "corpse of <random> the Ogre Lord"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  75
 	Dex:                  230

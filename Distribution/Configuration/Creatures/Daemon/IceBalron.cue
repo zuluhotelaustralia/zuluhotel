@@ -3,7 +3,6 @@ package Daemon
 IceBalron: {
 	Name:               "an Ice Balron"
 	CorpseNameOverride: "corpse of an Ice Balron"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1100
 	Int:                2200
 	Dex:                150
@@ -50,7 +49,7 @@ IceBalron: {
 		}
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

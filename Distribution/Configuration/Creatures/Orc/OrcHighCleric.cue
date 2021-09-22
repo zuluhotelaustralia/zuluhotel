@@ -3,7 +3,6 @@ package Orc
 OrcHighCleric: {
 	Name:               "Orc High Cleric"
 	CorpseNameOverride: "corpse of Orc High Cleric"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1200
 	Int:                2750
 	Dex:                310

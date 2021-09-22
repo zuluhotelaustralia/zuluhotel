@@ -43,8 +43,7 @@ namespace Scripts.Configuration
             
             try
             {
-                var files = Directory.GetFiles(Path.Combine(configRoot, "Creatures/"), "*.cue",
-                    new EnumerationOptions { RecurseSubdirectories = true });
+                var files = Directory.GetFiles(configRoot, "*.cue", new EnumerationOptions { RecurseSubdirectories = true });
                 var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
 
                 if (!File.Exists(jsonCachePath) || lastWrite != File.GetLastWriteTimeUtc(jsonCachePath))

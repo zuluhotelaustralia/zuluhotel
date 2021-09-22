@@ -3,7 +3,7 @@ package Dragonkin
 TidalDragon: {
 	Name:                 "a Tidal Dragon"
 	CorpseNameOverride:   "corpse of a Tidal Dragon"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  400
 	Dex:                  340

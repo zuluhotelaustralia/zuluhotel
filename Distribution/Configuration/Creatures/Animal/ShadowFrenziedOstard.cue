@@ -3,7 +3,7 @@ package Animal
 ShadowFrenziedOstard: {
 	Name:                 "a shadow frenzied ostard"
 	CorpseNameOverride:   "corpse of a shadow frenzied ostard"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  210
 	Int:                  170
 	Dex:                  320

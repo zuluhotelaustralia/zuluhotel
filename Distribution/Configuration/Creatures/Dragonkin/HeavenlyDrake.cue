@@ -3,7 +3,7 @@ package Dragonkin
 HeavenlyDrake: {
 	Name:                 "a Heavenly Drake"
 	CorpseNameOverride:   "corpse of a Heavenly Drake"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  400
 	Int:                  90
 	Dex:                  300

@@ -3,7 +3,7 @@ package Ophidian
 OphidianKnightErrant: {
 	Name:                 "an Ophidian Knight-Errant"
 	CorpseNameOverride:   "corpse of an Ophidian Knight-Errant"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  750
 	Int:                  160
 	Dex:                  310

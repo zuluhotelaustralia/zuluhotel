@@ -3,7 +3,6 @@ package Orc
 GoblinTribeMaster: {
 	Name:               "<random> the Goblin Tribe Master"
 	CorpseNameOverride: "corpse of <random> the Goblin Tribe Master"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2250
 	Int:                55
 	Dex:                400
@@ -46,12 +45,12 @@ GoblinTribeMaster: {
 		MissSound: 563
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.OrcHelm"
+		ItemType:    "SOrcHelm"
 		Name:        "Goblin Helmet"
 		Hue:         1418
 		ArmorRating: 18
 	}, {
-		ItemType: "Server.Items.WarHammer"
+		ItemType: "SWarHammer"
 		Name:     "Goblin Tribe Master Weapon"
 	}]
 }

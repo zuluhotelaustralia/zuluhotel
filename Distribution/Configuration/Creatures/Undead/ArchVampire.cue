@@ -3,7 +3,6 @@ package Undead
 ArchVampire: {
 	Name:               "Arch Vampire"
 	CorpseNameOverride: "corpse of Arch Vampire"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                550
 	Int:                700
 	Dex:                550
@@ -41,7 +40,7 @@ ArchVampire: {
 		HitSound: 363
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}]
 }

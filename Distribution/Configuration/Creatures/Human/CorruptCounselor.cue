@@ -3,7 +3,6 @@ package Human
 CorruptCounselor: {
 	Name:               "<random> the Corrupt Counselor"
 	CorpseNameOverride: "corpse of <random> the Corrupt Counselor"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1500
 	Int:                1000
 	Dex:                250
@@ -50,7 +49,7 @@ CorruptCounselor: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.MetalShield"
+		ItemType:    "SMetalShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

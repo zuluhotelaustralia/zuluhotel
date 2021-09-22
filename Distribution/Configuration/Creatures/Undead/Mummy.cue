@@ -3,7 +3,6 @@ package Undead
 Mummy: {
 	Name:               "a mummy"
 	CorpseNameOverride: "corpse of a mummy"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                250
 	Int:                25
 	Dex:                50

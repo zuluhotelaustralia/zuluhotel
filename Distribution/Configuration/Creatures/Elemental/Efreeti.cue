@@ -3,7 +3,6 @@ package Elemental
 Efreeti: {
 	Name:               "an efreeti"
 	CorpseNameOverride: "corpse of an efreeti"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                355
 	Dex:                100

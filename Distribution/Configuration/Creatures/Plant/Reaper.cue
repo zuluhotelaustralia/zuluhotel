@@ -3,7 +3,6 @@ package Plant
 Reaper: {
 	Name:               "a reaper"
 	CorpseNameOverride: "corpse of a reaper"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                210
 	Int:                35
 	Dex:                110

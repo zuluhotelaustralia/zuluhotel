@@ -3,7 +3,7 @@ package Dragonkin
 WaterDrake: {
 	Name:                 "a Water Drake"
 	CorpseNameOverride:   "corpse of a Water Drake"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  400
 	Int:                  90
 	Dex:                  400

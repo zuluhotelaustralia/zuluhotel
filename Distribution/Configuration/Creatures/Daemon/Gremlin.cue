@@ -3,7 +3,7 @@ package Daemon
 Gremlin: {
 	Name:                 "a gremlin"
 	CorpseNameOverride:   "corpse of a gremlin"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  205
 	Int:                  85
 	Dex:                  60

@@ -3,7 +3,6 @@ package Human
 TaintedWarrior: {
 	Name:               "<random> the Tainted Warrior"
 	CorpseNameOverride: "corpse of <random> the Tainted Warrior"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                400
 	Int:                200
 	Dex:                250
@@ -42,26 +41,26 @@ TaintedWarrior: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Halberd"
+		ItemType: "SHalberd"
 		Name:     "a stygian-bladed halberd"
 		Hue:      1283
 	}, {
-		ItemType:    "Server.Items.BoneHelm"
+		ItemType:    "SBoneHelm"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneGloves"
+		ItemType:    "SBoneGloves"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneLegs"
+		ItemType:    "SBoneLegs"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneChest"
+		ItemType:    "SBoneChest"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1

@@ -3,7 +3,6 @@ package Daemon
 SkitteringHopper: {
 	Name:               "a Skittering Hopper"
 	CorpseNameOverride: "corpse of a Skittering Hopper"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                200
 	Int:                200
 	Dex:                200

@@ -3,7 +3,6 @@ package Animal
 Anaconda: {
 	Name:               "the Anaconda"
 	CorpseNameOverride: "corpse of the Anaconda"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2500
 	Int:                0
 	Dex:                500

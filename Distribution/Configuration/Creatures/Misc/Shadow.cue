@@ -3,7 +3,6 @@ package Misc
 Shadow: {
 	Name:               "a shadow"
 	CorpseNameOverride: "corpse of a shadow"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1200
 	Int:                1200
 	Dex:                500

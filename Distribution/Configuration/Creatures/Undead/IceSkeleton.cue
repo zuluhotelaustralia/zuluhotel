@@ -3,7 +3,6 @@ package Undead
 IceSkeleton: {
 	Name:               "an ice skeleton"
 	CorpseNameOverride: "corpse of an ice skeleton"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                200
 	Int:                35
 	Dex:                180

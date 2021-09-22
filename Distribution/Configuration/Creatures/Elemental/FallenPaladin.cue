@@ -3,7 +3,7 @@ package Elemental
 FallenPaladin: {
 	Name:                 "a Fallen Paladin"
 	CorpseNameOverride:   "corpse of a Fallen Paladin"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  2500
 	Int:                  250
 	Dex:                  1000
@@ -45,37 +45,37 @@ FallenPaladin: {
 		MissSound: 562
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.PlateChest"
+		ItemType:    "SPlateChest"
 		Name:        "Platemail of the Paladin"
 		Hue:         1176
 		ArmorRating: 70
 	}, {
-		ItemType:    "Server.Items.PlateGloves"
+		ItemType:    "SPlateGloves"
 		Name:        "Platemail Gloves of the Paladin"
 		Hue:         1176
 		ArmorRating: 70
 	}, {
-		ItemType:    "Server.Items.PlateGorget"
+		ItemType:    "SPlateGorget"
 		Name:        "Platemail Gorget of the Paladin"
 		Hue:         1176
 		ArmorRating: 70
 	}, {
-		ItemType:    "Server.Items.PlateLegs"
+		ItemType:    "SPlateLegs"
 		Name:        "Platemail Legs of the Paladin"
 		Hue:         1176
 		ArmorRating: 70
 	}, {
-		ItemType:    "Server.Items.PlateArms"
+		ItemType:    "SPlateArms"
 		Name:        "Platemail Arms of the Paladin"
 		Hue:         1176
 		ArmorRating: 70
 	}, {
-		ItemType:    "Server.Items.PlateHelm"
+		ItemType:    "SPlateHelm"
 		Name:        "Platemail Helm of the Paladin"
 		Hue:         1176
 		ArmorRating: 70
 	}, {
-		ItemType: "Server.Items.Halberd"
+		ItemType: "SHalberd"
 		Name:     "Paladin's Halberd of Destruction"
 		Hue:      1157
 	}]

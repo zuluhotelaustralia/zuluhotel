@@ -3,7 +3,6 @@ package Misc
 GreaterBeholder: {
 	Name:               "Greater Beholder"
 	CorpseNameOverride: "corpse of Greater Beholder"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1500
 	Int:                1600
 	Dex:                500

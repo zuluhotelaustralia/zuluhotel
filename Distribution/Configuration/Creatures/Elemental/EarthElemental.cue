@@ -3,7 +3,6 @@ package Elemental
 EarthElemental: {
 	Name:               "an earth elemental"
 	CorpseNameOverride: "corpse of an earth elemental"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                230
 	Int:                45
 	Dex:                50
@@ -39,7 +38,7 @@ EarthElemental: {
 		HitSound: 270
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR20"
 		ArmorRating: 20
 	}]

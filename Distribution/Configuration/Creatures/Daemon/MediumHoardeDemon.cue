@@ -3,7 +3,6 @@ package Daemon
 MediumHoardeDemon: {
 	Name:               "a Medium Hoarde Demon"
 	CorpseNameOverride: "corpse of a Medium Hoarde Demon"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1000
 	Int:                200
 	Dex:                200

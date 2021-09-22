@@ -3,7 +3,6 @@ package Elemental
 UmbralFlicker: {
 	Name:               "an Umbral Flicker"
 	CorpseNameOverride: "corpse of an Umbral Flicker"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                450
 	Int:                2200
 	Dex:                250

@@ -3,7 +3,7 @@ package Animal
 Firecrow: {
 	Name:                 "a firecrow"
 	CorpseNameOverride:   "corpse of a firecrow"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  18
 	Int:                  15
 	Dex:                  60

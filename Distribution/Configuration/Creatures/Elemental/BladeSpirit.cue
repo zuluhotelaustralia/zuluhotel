@@ -3,7 +3,6 @@ package Elemental
 BladeSpirit: {
 	Name:               "a blade spirit"
 	CorpseNameOverride: "corpse of a blade spirit"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                200
 	Int:                25
 	Dex:                200

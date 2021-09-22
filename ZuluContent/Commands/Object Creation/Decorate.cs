@@ -881,7 +881,7 @@ namespace Server.Commands
             var indexOf = line.IndexOf(' ');
 
             var name = line.Substring(0, indexOf++);
-            list.m_Type = AssemblyHandler.FindTypeByName(name, true);
+            list.m_Type = AssemblyHandler.FindTypeByName(name, ignoreCase: true);
 
             if (list.m_Type == null)
                 throw new ArgumentException($"Type not found for header: '{line}', '{name}'");

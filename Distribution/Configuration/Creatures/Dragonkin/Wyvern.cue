@@ -3,7 +3,7 @@ package Dragonkin
 Wyvern: {
 	Name:                 "a Wyvern"
 	CorpseNameOverride:   "corpse of a Wyvern"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  450
 	Int:                  90
 	Dex:                  110

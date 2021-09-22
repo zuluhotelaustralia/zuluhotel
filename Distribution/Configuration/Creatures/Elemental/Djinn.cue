@@ -3,7 +3,6 @@ package Elemental
 Djinn: {
 	Name:               "a Djinn"
 	CorpseNameOverride: "corpse of a Djinn"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                450
 	Int:                255
 	Dex:                100

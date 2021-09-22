@@ -3,7 +3,6 @@ package Human
 BrigandKing: {
 	Name:               "Brigand King"
 	CorpseNameOverride: "corpse of Brigand King"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                600
 	Int:                400
 	Dex:                400
@@ -32,7 +31,7 @@ BrigandKing: {
 		}
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Cutlass"
+		ItemType: "SCutlass"
 		Name:     "Brigand King Weapon"
 		Hue:      1172
 	}]

@@ -3,7 +3,7 @@ package Human
 Murderer: {
 	Name:                 "a murderer"
 	CorpseNameOverride:   "corpse of a murderer"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  650
 	Int:                  105
 	Dex:                  200
@@ -30,10 +30,10 @@ Murderer: {
 		MissSound: 569
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}, {
-		ItemType: "Server.Items.Dagger"
+		ItemType: "SDagger"
 		Name:     "Murderer's Dagger"
 	}]
 }

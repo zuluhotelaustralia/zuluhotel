@@ -3,7 +3,7 @@ package Ratkin
 Ratlord: {
 	Name:                 "<random> the Ratlord"
 	CorpseNameOverride:   "corpse of <random> the Ratlord"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  300
 	Int:                  65
 	Dex:                  450

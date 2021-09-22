@@ -3,7 +3,7 @@ package Misc
 BloodWarhorse: {
 	Name:                 "a blood warhorse"
 	CorpseNameOverride:   "corpse of a blood warhorse"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  500
 	Dex:                  500

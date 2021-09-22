@@ -3,7 +3,7 @@ package Human
 ElfLord: {
 	Name:                 "an Elf Lord"
 	CorpseNameOverride:   "corpse of an Elf Lord"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  700
 	Int:                  1500
 	Dex:                  195
@@ -49,16 +49,16 @@ ElfLord: {
 		MaxRange:  12
 	}
 	Equipment: [{
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "Staff of Water"
 		Hue:      1099
 	}, {
-		ItemType:    "Server.Items.PlateChest"
+		ItemType:    "SPlateChest"
 		Name:        "Elven Breastplate"
 		Hue:         1172
 		ArmorRating: 80
 	}, {
-		ItemType:    "Server.Items.PlateLegs"
+		ItemType:    "SPlateLegs"
 		Name:        "Long pants"
 		Hue:         1172
 		ArmorRating: 70

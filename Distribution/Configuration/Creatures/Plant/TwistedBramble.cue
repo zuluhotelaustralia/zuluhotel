@@ -3,7 +3,6 @@ package Plant
 TwistedBramble: {
 	Name:               "a Twisted Bramble"
 	CorpseNameOverride: "corpse of a Twisted Bramble"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                500
 	Int:                500
 	Dex:                150

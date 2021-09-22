@@ -3,7 +3,7 @@ package Animated
 BewitchedGauntlets: {
 	Name:                 "Bewitched Gauntlets"
 	CorpseNameOverride:   "corpse of Bewitched Gauntlets"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  210
 	Int:                  110
 	Dex:                  110

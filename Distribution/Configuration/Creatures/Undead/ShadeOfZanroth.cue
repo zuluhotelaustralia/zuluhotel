@@ -3,7 +3,6 @@ package Undead
 ShadeOfZanroth: {
 	Name:               "a Shade of Zanroth"
 	CorpseNameOverride: "corpse of a Shade of Zanroth"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                500
 	Int:                500
 	Dex:                500

@@ -3,7 +3,6 @@ package Orc
 Sapper: {
 	Name:               "<random> the Sapper"
 	CorpseNameOverride: "corpse of <random> the Sapper"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                205
 	Int:                30
 	Dex:                90
@@ -34,7 +33,7 @@ Sapper: {
 		HitSound: 364
 	}
 	Equipment: [{
-		ItemType: "Server.Items.WarHammer"
+		ItemType: "SWarHammer"
 		Name:     "Bomber weapon"
 	}]
 }

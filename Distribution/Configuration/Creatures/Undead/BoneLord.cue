@@ -3,7 +3,6 @@ package Undead
 BoneLord: {
 	Name:               "a Bone Lord"
 	CorpseNameOverride: "corpse of a Bone Lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2250
 	Int:                55
 	Dex:                400

@@ -3,7 +3,6 @@ package Elemental
 EarthQuaker: {
 	Name:               "an Earth Quaker"
 	CorpseNameOverride: "corpse of an Earth Quaker"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2250
 	Int:                55
 	Dex:                400

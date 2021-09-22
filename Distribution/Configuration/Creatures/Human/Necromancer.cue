@@ -3,7 +3,7 @@ package Human
 Necromancer: {
 	Name:                 "<random> the Necromancer"
 	CorpseNameOverride:   "corpse of <random> the Necromancer"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  130
 	Int:                  300
 	Dex:                  90
@@ -41,10 +41,10 @@ Necromancer: {
 		HitSound: 330
 	}
 	Equipment: [{
-		ItemType: "Server.Items.LongHair"
+		ItemType: "SLongHair"
 		Hue:      1136
 	}, {
-		ItemType: "Server.Items.BlackStaff"
+		ItemType: "SBlackStaff"
 		Name:     "Necromancer Weapon"
 	}]
 }

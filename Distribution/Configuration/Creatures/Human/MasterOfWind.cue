@@ -3,7 +3,7 @@ package Human
 MasterOfWind: {
 	Name:                 "a master of the wind"
 	CorpseNameOverride:   "corpse of a master of the wind"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  160
 	Int:                  295
 	Dex:                  90
@@ -39,10 +39,10 @@ MasterOfWind: {
 		}
 	}
 	Equipment: [{
-		ItemType: "Server.Items.LongHair"
+		ItemType: "SLongHair"
 		Hue:      1128
 	}, {
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "Air Master Weapon"
 	}]
 }

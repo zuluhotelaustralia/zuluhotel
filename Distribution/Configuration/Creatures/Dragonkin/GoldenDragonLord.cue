@@ -3,7 +3,7 @@ package Dragonkin
 GoldenDragonLord: {
 	Name:                 "a Golden Dragon Lord"
 	CorpseNameOverride:   "corpse of a Golden Dragon Lord"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  2250
 	Int:                  500
 	Dex:                  450

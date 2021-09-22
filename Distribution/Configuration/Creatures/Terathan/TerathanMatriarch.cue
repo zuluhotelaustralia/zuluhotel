@@ -3,7 +3,6 @@ package Terathan
 TerathanMatriarch: {
 	Name:               "a Terathan Matriarch"
 	CorpseNameOverride: "corpse of a Terathan Matriarch"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                650
 	Dex:                70

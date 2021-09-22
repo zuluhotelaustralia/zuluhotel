@@ -3,7 +3,6 @@ package Daemon
 BalronSpawn: {
 	Name:               "a Balron Spawn"
 	CorpseNameOverride: "corpse of a Balron Spawn"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                600
 	Int:                400
 	Dex:                400

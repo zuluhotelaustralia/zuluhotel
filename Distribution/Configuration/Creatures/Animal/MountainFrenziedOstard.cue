@@ -3,7 +3,7 @@ package Animal
 MountainFrenziedOstard: {
 	Name:                 "a mountain frenzied ostard"
 	CorpseNameOverride:   "corpse of a mountain frenzied ostard"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  130
 	Int:                  35
 	Dex:                  180

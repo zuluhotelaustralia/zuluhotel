@@ -3,7 +3,6 @@ package Human
 InvisibleMan: {
 	Name:               "an invisible man"
 	CorpseNameOverride: "corpse of an invisible man"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                176
 	Int:                126
 	Dex:                60

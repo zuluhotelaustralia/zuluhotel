@@ -3,7 +3,6 @@ package Elemental
 EnergyVortex: {
 	Name:               "an energy vortex"
 	CorpseNameOverride: "corpse of an energy vortex"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                110
 	Dex:                190

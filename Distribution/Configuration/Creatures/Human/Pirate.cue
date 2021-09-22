@@ -3,7 +3,6 @@ package Human
 Pirate: {
 	Name:               "<random> the pirate"
 	CorpseNameOverride: "corpse of <random> the pirate"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                110
 	Int:                60
 	Dex:                210

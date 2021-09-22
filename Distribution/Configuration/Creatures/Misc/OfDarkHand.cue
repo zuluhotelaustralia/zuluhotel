@@ -3,7 +3,6 @@ package Misc
 OfDarkHand: {
 	Name:               "<random> of the Dark Hand"
 	CorpseNameOverride: "corpse of <random> of the Dark Hand"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                500
 	Int:                210
 	Dex:                300

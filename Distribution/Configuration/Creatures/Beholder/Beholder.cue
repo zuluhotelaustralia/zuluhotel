@@ -3,7 +3,7 @@ package Beholder
 Beholder: {
 	Name:                 "a beholder"
 	CorpseNameOverride:   "corpse of a beholder"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  160
 	Int:                  600
 	Dex:                  10

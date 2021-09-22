@@ -3,7 +3,6 @@ package Undead
 GwennoUndeadBard: {
 	Name:               "Gwenno the Undead Bard"
 	CorpseNameOverride: "corpse of Gwenno the Undead Bard"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                510
 	Int:                510
 	Dex:                510

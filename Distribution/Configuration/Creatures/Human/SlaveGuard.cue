@@ -3,7 +3,6 @@ package Human
 SlaveGuard: {
 	Name:               "<random> the Slave Guard"
 	CorpseNameOverride: "corpse of <random> the Slave Guard"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1000
 	Int:                55
 	Dex:                400
@@ -45,7 +44,7 @@ SlaveGuard: {
 		MissSound: 563
 	}
 	Equipment: [{
-		ItemType: "Server.Items.WarHammer"
+		ItemType: "SWarHammer"
 		Name:     "Enslavers Weapon"
 		Hue:      1162
 	}]

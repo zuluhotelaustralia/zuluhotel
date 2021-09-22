@@ -3,7 +3,6 @@ package Daemon
 ShadowWarrior: {
 	Name:               "Shadow Warrior"
 	CorpseNameOverride: "corpse of Shadow Warrior"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1200
 	Int:                400
 	Dex:                1000
@@ -35,7 +34,7 @@ ShadowWarrior: {
 		HitSound: 601
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}]
 }

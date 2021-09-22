@@ -3,7 +3,7 @@ package Gargoyle
 FrostGargoyle: {
 	Name:                 "a frost gargoyle"
 	CorpseNameOverride:   "corpse of a frost gargoyle"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  250
 	Int:                  285
 	Dex:                  95

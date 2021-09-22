@@ -3,7 +3,7 @@ package Daemon
 DeathChaser: {
 	Name:                 "a Death Chaser"
 	CorpseNameOverride:   "corpse of a Death Chaser"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  950
 	Int:                  650
 	Dex:                  475

@@ -3,7 +3,7 @@ package Misc
 Kraken: {
 	Name:                 "a kraken"
 	CorpseNameOverride:   "corpse of a kraken"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  780
 	Int:                  40
 	Dex:                  245

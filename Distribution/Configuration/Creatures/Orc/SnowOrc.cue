@@ -3,7 +3,7 @@ package Orc
 SnowOrc: {
 	Name:                 "<random> the snow orc"
 	CorpseNameOverride:   "corpse of <random> the snow orc"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  150
 	Int:                  35
 	Dex:                  135

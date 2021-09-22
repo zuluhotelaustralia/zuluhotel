@@ -3,7 +3,7 @@ package Animal
 WarDog: {
 	Name:                 "a war dog"
 	CorpseNameOverride:   "corpse of a war dog"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  80
 	Int:                  35
 	Dex:                  75

@@ -3,7 +3,6 @@ package Elemental
 MageHunter: {
 	Name:               "a Mage Hunter"
 	CorpseNameOverride: "corpse of a Mage Hunter"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                25
 	Dex:                150

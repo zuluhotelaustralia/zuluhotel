@@ -3,7 +3,6 @@ package Daemon
 BalronLord: {
 	Name:               "a Balron Lord"
 	CorpseNameOverride: "corpse of a Balron Lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1100
 	Int:                3000
 	Dex:                300
@@ -57,7 +56,7 @@ BalronLord: {
 		MaxRange:  3
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

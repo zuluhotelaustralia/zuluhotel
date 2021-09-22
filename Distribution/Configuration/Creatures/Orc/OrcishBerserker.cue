@@ -3,7 +3,6 @@ package Orc
 OrcishBerserker: {
 	Name:               "Orcish Berserker"
 	CorpseNameOverride: "corpse of Orcish Berserker"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2250
 	Int:                55
 	Dex:                400

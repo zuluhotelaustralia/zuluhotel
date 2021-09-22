@@ -3,7 +3,7 @@ package Dragonkin
 SpectralDrake: {
 	Name:                 "a spectral drake"
 	CorpseNameOverride:   "corpse of a spectral drake"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  550
 	Int:                  360
 	Dex:                  105

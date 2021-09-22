@@ -3,7 +3,7 @@ package Elemental
 RubyWisp: {
 	Name:                 "a ruby wisp"
 	CorpseNameOverride:   "corpse of a ruby wisp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  700
 	Int:                  1100
 	Dex:                  575

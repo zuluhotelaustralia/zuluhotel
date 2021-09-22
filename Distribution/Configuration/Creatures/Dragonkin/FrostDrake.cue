@@ -3,7 +3,7 @@ package Dragonkin
 FrostDrake: {
 	Name:                 "a frost drake"
 	CorpseNameOverride:   "corpse of a frost drake"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  350
 	Int:                  385
 	Dex:                  290

@@ -3,7 +3,6 @@ package Elemental
 ShadowLord: {
 	Name:               "a Shadow Lord"
 	CorpseNameOverride: "corpse of a Shadow Lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                550
 	Int:                200
 	Dex:                300
@@ -43,12 +42,12 @@ ShadowLord: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.BoneGloves"
+		ItemType:    "SBoneGloves"
 		Name:        "Blue Bone Gloves AR10"
 		Hue:         1170
 		ArmorRating: 10
 	}, {
-		ItemType:    "Server.Items.BoneHelm"
+		ItemType:    "SBoneHelm"
 		Name:        "Red Bone Helm AR45"
 		Hue:         1172
 		ArmorRating: 45

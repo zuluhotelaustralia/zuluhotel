@@ -3,7 +3,7 @@ package Misc
 BlackGateDaemon: {
 	Name:                 "a black gate daemon"
 	CorpseNameOverride:   "corpse of a black gate daemon"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1500
 	Int:                  290
 	Dex:                  165

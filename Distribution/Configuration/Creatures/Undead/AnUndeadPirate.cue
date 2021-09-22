@@ -3,7 +3,6 @@ package Undead
 AnUndeadPirate: {
 	Name:               "<random>, an undead pirate"
 	CorpseNameOverride: "corpse of <random>, an undead pirate"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                110
 	Int:                20
 	Dex:                110

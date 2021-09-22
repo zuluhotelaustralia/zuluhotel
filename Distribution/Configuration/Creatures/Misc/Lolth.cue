@@ -3,7 +3,7 @@ package Misc
 Lolth: {
 	Name:                 "Lolth"
 	CorpseNameOverride:   "corpse of Lolth"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1000
 	Int:                  20000
 	Dex:                  400
@@ -51,6 +51,6 @@ Lolth: {
 		MaxRange:  12
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Bow"
+		ItemType: "SBow"
 	}]
 }

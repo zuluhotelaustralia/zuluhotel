@@ -3,7 +3,6 @@ package Elemental
 FireElemental: {
 	Name:               "a fire elemental"
 	CorpseNameOverride: "corpse of a fire elemental"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                180
 	Int:                205
 	Dex:                80

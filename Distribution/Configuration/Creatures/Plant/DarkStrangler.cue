@@ -3,7 +3,6 @@ package Plant
 DarkStrangler: {
 	Name:               "a Dark Strangler"
 	CorpseNameOverride: "corpse of a Dark Strangler"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                400
 	Int:                45
 	Dex:                200
@@ -41,11 +40,11 @@ DarkStrangler: {
 		MissSound: 457
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Bow"
+		ItemType: "SBow"
 		Name:     "Dark Strangler Weapon"
 		Hue:      1171
 	}, {
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR30"
 		ArmorRating: 30
 	}]

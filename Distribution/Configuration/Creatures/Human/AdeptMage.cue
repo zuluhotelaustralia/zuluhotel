@@ -3,7 +3,7 @@ package Human
 AdeptMage: {
 	Name:                 "an adept mage"
 	CorpseNameOverride:   "corpse of an adept mage"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  200
 	Int:                  295
 	Dex:                  90
@@ -33,10 +33,10 @@ AdeptMage: {
 		HitSound: 315
 	}
 	Equipment: [{
-		ItemType: "Server.Items.LongHair"
+		ItemType: "SLongHair"
 		Hue:      1140
 	}, {
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "Evil Mage Weapon"
 	}]
 }

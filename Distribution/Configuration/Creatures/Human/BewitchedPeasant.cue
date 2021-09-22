@@ -3,7 +3,6 @@ package Human
 BewitchedPeasant: {
 	Name:               "<random> the bewitched peasant"
 	CorpseNameOverride: "corpse of <random> the bewitched peasant"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                80
 	Int:                60
 	Dex:                60

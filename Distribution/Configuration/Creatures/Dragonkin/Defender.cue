@@ -3,7 +3,7 @@ package Dragonkin
 Defender: {
 	Name:                 "<random> the Defender"
 	CorpseNameOverride:   "corpse of <random> the Defender"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  275
 	Int:                  45
 	Dex:                  180

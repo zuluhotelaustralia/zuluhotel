@@ -3,7 +3,7 @@ package Animal
 Hart: {
 	Name:                 "a hart"
 	CorpseNameOverride:   "corpse of a hart"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  70
 	Int:                  35
 	Dex:                  90

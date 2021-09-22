@@ -3,7 +3,7 @@ package Misc
 GiantBeetle: {
 	Name:                 "a giant beetle"
 	CorpseNameOverride:   "corpse of a giant beetle"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  300
 	Int:                  500
 	Dex:                  100

@@ -3,7 +3,7 @@ package Daemon
 FallenAngel: {
 	Name:                 "a fallen angel"
 	CorpseNameOverride:   "corpse of a fallen angel"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  600
 	Int:                  285
 	Dex:                  285

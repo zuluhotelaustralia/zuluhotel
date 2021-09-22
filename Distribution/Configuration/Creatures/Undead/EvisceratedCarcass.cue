@@ -3,7 +3,6 @@ package Undead
 EvisceratedCarcass: {
 	Name:               "an Eviscerated Carcass"
 	CorpseNameOverride: "corpse of an Eviscerated Carcass"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                15
 	Dex:                400

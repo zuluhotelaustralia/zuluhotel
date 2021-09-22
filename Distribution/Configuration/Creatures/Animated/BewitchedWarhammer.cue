@@ -3,7 +3,7 @@ package Animated
 BewitchedWarhammer: {
 	Name:                 "a Bewitched Warhammer"
 	CorpseNameOverride:   "corpse of a Bewitched Warhammer"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  210
 	Int:                  110
 	Dex:                  110

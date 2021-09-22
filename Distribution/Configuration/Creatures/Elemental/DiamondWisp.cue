@@ -3,7 +3,7 @@ package Elemental
 DiamondWisp: {
 	Name:                 "a diamond wisp"
 	CorpseNameOverride:   "corpse of a diamond wisp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1700
 	Int:                  1100
 	Dex:                  575

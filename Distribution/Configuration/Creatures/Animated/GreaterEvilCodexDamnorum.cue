@@ -3,7 +3,6 @@ package Animated
 GreaterEvilCodexDamnorum: {
 	Name:               "a Greater Evil Codex Damnorum"
 	CorpseNameOverride: "corpse of a Greater Evil Codex Damnorum"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1600
 	Int:                1910
 	Dex:                1600

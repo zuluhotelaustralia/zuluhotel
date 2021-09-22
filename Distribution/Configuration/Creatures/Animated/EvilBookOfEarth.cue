@@ -3,7 +3,6 @@ package Animated
 EvilBookOfEarth: {
 	Name:               "an Evil Book Of The Earth"
 	CorpseNameOverride: "corpse of an Evil Book Of The Earth"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                600
 	Int:                910
 	Dex:                600

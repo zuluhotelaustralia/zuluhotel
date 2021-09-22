@@ -3,7 +3,6 @@ package Misc
 Hero: {
 	Name:               "<random> the Hero"
 	CorpseNameOverride: "corpse of <random> the Hero"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                210
 	Dex:                300
@@ -33,7 +32,7 @@ Hero: {
 		MissSound: 569
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Longsword"
+		ItemType: "SLongsword"
 		Name:     "The Hero Longsword"
 		Hue:      1182
 	}]

@@ -3,7 +3,6 @@ package Animated
 GreaterEvilBookOfEarth: {
 	Name:               "a Greater Evil Book of the Earth"
 	CorpseNameOverride: "corpse of a Greater Evil Book of the Earth"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1600
 	Int:                1910
 	Dex:                1600

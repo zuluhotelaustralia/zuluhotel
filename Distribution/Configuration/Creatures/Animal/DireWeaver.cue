@@ -3,7 +3,6 @@ package Animal
 DireWeaver: {
 	Name:               "a Dire Weaver"
 	CorpseNameOverride: "corpse of a Dire Weaver"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                450
 	Int:                35
 	Dex:                300
@@ -36,7 +35,7 @@ DireWeaver: {
 		MissSound: 390
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR20"
 		ArmorRating: 20
 	}]

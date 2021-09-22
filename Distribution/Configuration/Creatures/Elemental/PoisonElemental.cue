@@ -3,7 +3,7 @@ package Elemental
 PoisonElemental: {
 	Name:                 "a poison elemental"
 	CorpseNameOverride:   "corpse of a poison elemental"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  350
 	Int:                  350
 	Dex:                  160

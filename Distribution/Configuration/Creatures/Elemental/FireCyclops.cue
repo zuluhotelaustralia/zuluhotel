@@ -3,7 +3,6 @@ package Elemental
 FireCyclops: {
 	Name:               "a Fire Cyclops"
 	CorpseNameOverride: "corpse of a Fire Cyclops"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1000
 	Int:                255
 	Dex:                300

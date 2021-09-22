@@ -3,7 +3,7 @@ package Giantkin
 Titan: {
 	Name:                 "a Titan"
 	CorpseNameOverride:   "corpse of a Titan"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  600
 	Int:                  210
 	Dex:                  180

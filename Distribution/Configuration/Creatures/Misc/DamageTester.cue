@@ -3,7 +3,6 @@ package Misc
 DamageTester: {
 	Name:               "<random> the damage tester"
 	CorpseNameOverride: "corpse of <random> the damage tester"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                60000
 	Int:                200
 	Dex:                200

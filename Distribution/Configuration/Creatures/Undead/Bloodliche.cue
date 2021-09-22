@@ -3,7 +3,6 @@ package Undead
 Bloodliche: {
 	Name:               "a Bloodliche"
 	CorpseNameOverride: "corpse of a Bloodliche"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                275
 	Int:                900
 	Dex:                210

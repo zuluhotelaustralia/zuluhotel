@@ -3,7 +3,6 @@ package Undead
 UndeadFlayer: {
 	Name:               "an Undead Flayer"
 	CorpseNameOverride: "corpse of an Undead Flayer"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1200
 	Int:                2750
 	Dex:                310

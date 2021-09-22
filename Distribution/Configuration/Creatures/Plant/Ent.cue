@@ -3,7 +3,6 @@ package Plant
 Ent: {
 	Name:               "an ent"
 	CorpseNameOverride: "corpse of an ent"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                75
 	Dex:                160

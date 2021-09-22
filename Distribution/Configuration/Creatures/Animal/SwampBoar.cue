@@ -3,7 +3,7 @@ package Animal
 SwampBoar: {
 	Name:                 "a swamp boar"
 	CorpseNameOverride:   "corpse of a swamp boar"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  60
 	Int:                  25
 	Dex:                  50

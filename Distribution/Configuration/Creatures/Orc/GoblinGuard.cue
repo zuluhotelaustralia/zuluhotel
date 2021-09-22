@@ -3,7 +3,6 @@ package Orc
 GoblinGuard: {
 	Name:               "<random> the Goblin Guard"
 	CorpseNameOverride: "corpse of <random> the Goblin Guard"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                500
 	Int:                210
 	Dex:                300
@@ -39,7 +38,7 @@ GoblinGuard: {
 		MissSound: 432
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.OrcHelm"
+		ItemType:    "SOrcHelm"
 		Name:        "Goblin Helmet"
 		Hue:         1418
 		ArmorRating: 18

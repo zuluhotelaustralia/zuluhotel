@@ -3,7 +3,7 @@ package Daemon
 Imp: {
 	Name:                 "an imp"
 	CorpseNameOverride:   "corpse of an imp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  175
 	Int:                  85
 	Dex:                  150

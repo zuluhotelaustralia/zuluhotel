@@ -3,7 +3,7 @@ package Beholder
 EyesOfEradication: {
 	Name:                 "Eyes of Eradication"
 	CorpseNameOverride:   "corpse of Eyes of Eradication"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  600
 	Dex:                  500

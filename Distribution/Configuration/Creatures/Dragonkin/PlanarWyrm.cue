@@ -3,7 +3,6 @@ package Dragonkin
 PlanarWyrm: {
 	Name:               "a Planar Wyrm"
 	CorpseNameOverride: "corpse of a Planar Wyrm"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1800
 	Int:                650
 	Dex:                1475

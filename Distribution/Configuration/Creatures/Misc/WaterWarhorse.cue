@@ -3,7 +3,7 @@ package Misc
 WaterWarhorse: {
 	Name:                 "a water warhorse"
 	CorpseNameOverride:   "corpse of a water warhorse"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  500
 	Dex:                  500

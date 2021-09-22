@@ -3,7 +3,6 @@ package Terathan
 CorruptedTerathan: {
 	Name:               "a Corrupted Terathan"
 	CorpseNameOverride: "corpse of a Corrupted Terathan"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                400
 	Int:                110
 	Dex:                250
@@ -35,7 +34,7 @@ CorruptedTerathan: {
 		MissSound: 589
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR20"
 		ArmorRating: 20
 	}]

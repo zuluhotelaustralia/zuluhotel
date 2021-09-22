@@ -3,7 +3,7 @@ package Dragonkin
 StormDragon: {
 	Name:                 "a Storm Dragon"
 	CorpseNameOverride:   "corpse of a Storm Dragon"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  600
 	Int:                  400
 	Dex:                  340

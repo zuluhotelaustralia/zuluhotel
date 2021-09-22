@@ -3,7 +3,7 @@ package Misc
 SkeletalSteed: {
 	Name:                 "a skeletal steed"
 	CorpseNameOverride:   "corpse of a skeletal steed"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  60
 	Dex:                  55

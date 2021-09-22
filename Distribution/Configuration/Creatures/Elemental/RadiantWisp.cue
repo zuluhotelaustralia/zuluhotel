@@ -3,7 +3,7 @@ package Elemental
 RadiantWisp: {
 	Name:                 "a Radiant Wisp"
 	CorpseNameOverride:   "corpse of a Radiant Wisp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  350
 	Int:                  550
 	Dex:                  275

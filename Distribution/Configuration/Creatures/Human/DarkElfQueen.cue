@@ -3,7 +3,7 @@ package Human
 DarkElfQueen: {
 	Name:                 "a Dark-Elf Queen"
 	CorpseNameOverride:   "corpse of a Dark-Elf Queen"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  700
 	Int:                  1500
 	Dex:                  195
@@ -52,20 +52,20 @@ DarkElfQueen: {
 		MaxRange:  12
 	}
 	Equipment: [{
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "Staff of Fire"
 		Hue:      1100
 	}, {
-		ItemType:    "Server.Items.FemalePlateChest"
+		ItemType:    "SFemalePlateChest"
 		Name:        "Elven Platemail"
 		ArmorRating: 80
 	}, {
-		ItemType:    "Server.Items.PlateLegs"
+		ItemType:    "SPlateLegs"
 		Name:        "Long pants"
 		Hue:         1172
 		ArmorRating: 70
 	}, {
-		ItemType: "Server.Items.LongHair"
+		ItemType: "SLongHair"
 		Hue:      1156
 	}]
 }

@@ -3,7 +3,7 @@ package Giantkin
 Cyclops: {
 	Name:                 "a cyclops"
 	CorpseNameOverride:   "corpse of a cyclops"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  350
 	Int:                  65
 	Dex:                  130

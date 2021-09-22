@@ -3,7 +3,6 @@ package Human
 OrderOfIronFist: {
 	Name:               "<random>, Order of the Iron Fist"
 	CorpseNameOverride: "corpse of <random>, Order of the Iron Fist"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                210
 	Dex:                300

@@ -3,7 +3,7 @@ package Animal
 GiantScorpion: {
 	Name:                 "a giant scorpion"
 	CorpseNameOverride:   "corpse of a giant scorpion"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  100
 	Int:                  35
 	Dex:                  90

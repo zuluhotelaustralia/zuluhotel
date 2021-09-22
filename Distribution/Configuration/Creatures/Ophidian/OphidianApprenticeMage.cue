@@ -3,7 +3,7 @@ package Ophidian
 OphidianApprenticeMage: {
 	Name:                 "an Ophidian Apprentice Mage"
 	CorpseNameOverride:   "corpse of an Ophidian Apprentice Mage"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  150
 	Int:                  400
 	Dex:                  210

@@ -3,7 +3,6 @@ package Undead
 FlamingSkeleton: {
 	Name:               "a flaming skeleton"
 	CorpseNameOverride: "corpse of a flaming skeleton"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                170
 	Int:                180
 	Dex:                180

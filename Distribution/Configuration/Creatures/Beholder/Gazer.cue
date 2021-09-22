@@ -3,7 +3,7 @@ package Beholder
 Gazer: {
 	Name:                 "a gazer"
 	CorpseNameOverride:   "corpse of a gazer"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  150
 	Int:                  205
 	Dex:                  90

@@ -3,7 +3,7 @@ package Elemental
 BlackWisp: {
 	Name:                 "a black wisp"
 	CorpseNameOverride:   "corpse of a black wisp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  700
 	Int:                  1100
 	Dex:                  575

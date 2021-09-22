@@ -3,7 +3,7 @@ package Dragonkin
 RockLizard: {
 	Name:                 "a rock lizard"
 	CorpseNameOverride:   "corpse of a rock lizard"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  190
 	Int:                  20
 	Dex:                  80

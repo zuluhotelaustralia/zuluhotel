@@ -3,7 +3,6 @@ package Elemental
 GreaterShadow: {
 	Name:               "a Greater Shadow"
 	CorpseNameOverride: "corpse of a Greater Shadow"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                200
 	Dex:                275
@@ -41,12 +40,12 @@ GreaterShadow: {
 		MissSound: 641
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.BoneGloves"
+		ItemType:    "SBoneGloves"
 		Name:        "Green Bone Gloves AR10"
 		Hue:         1169
 		ArmorRating: 10
 	}, {
-		ItemType:    "Server.Items.BoneHelm"
+		ItemType:    "SBoneHelm"
 		Name:        "Red Bone Helm AR45"
 		Hue:         1172
 		ArmorRating: 45

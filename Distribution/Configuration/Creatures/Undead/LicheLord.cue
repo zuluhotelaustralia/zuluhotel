@@ -3,7 +3,6 @@ package Undead
 LicheLord: {
 	Name:               "a Liche Lord"
 	CorpseNameOverride: "corpse of a Liche Lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                450
 	Int:                600
 	Dex:                85

@@ -3,7 +3,6 @@ package Elemental
 NightWalker: {
 	Name:               "a Night Walker"
 	CorpseNameOverride: "corpse of a Night Walker"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                4000
 	Int:                1000
 	Dex:                600
@@ -51,7 +50,7 @@ NightWalker: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.MetalShield"
+		ItemType:    "SMetalShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

@@ -3,7 +3,7 @@ package Animal
 FrostWolf: {
 	Name:                 "a frost wolf"
 	CorpseNameOverride:   "corpse of a frost wolf"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  135
 	Int:                  35
 	Dex:                  150

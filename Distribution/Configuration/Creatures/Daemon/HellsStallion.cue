@@ -3,7 +3,7 @@ package Daemon
 HellsStallion: {
 	Name:                 "a Hells Stallion"
 	CorpseNameOverride:   "corpse of a Hells Stallion"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1950
 	Int:                  450
 	Dex:                  650
@@ -45,7 +45,7 @@ HellsStallion: {
 		HasBreath: true
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

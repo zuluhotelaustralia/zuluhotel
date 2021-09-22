@@ -3,7 +3,7 @@ package Human
 RogueKnight: {
 	Name:                 "a rogue knight"
 	CorpseNameOverride:   "corpse of a rogue knight"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  350
 	Int:                  80
 	Dex:                  140

@@ -3,7 +3,6 @@ package Terathan
 TerathanQueen: {
 	Name:               "a Terathan Queen"
 	CorpseNameOverride: "corpse of a Terathan Queen"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1350
 	Int:                2000
 	Dex:                70

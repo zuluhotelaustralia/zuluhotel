@@ -3,7 +3,6 @@ package Human
 TaintedKnight: {
 	Name:               "<random> the Tainted Knight"
 	CorpseNameOverride: "corpse of <random> the Tainted Knight"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                400
 	Int:                200
 	Dex:                250
@@ -41,31 +40,31 @@ TaintedKnight: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Longsword"
+		ItemType: "SLongsword"
 		Name:     "a stygian-bladed sword"
 		Hue:      1283
 	}, {
-		ItemType:    "Server.Items.BoneHelm"
+		ItemType:    "SBoneHelm"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneGloves"
+		ItemType:    "SBoneGloves"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneLegs"
+		ItemType:    "SBoneLegs"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneChest"
+		ItemType:    "SBoneChest"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.MetalShield"
+		ItemType:    "SMetalShield"
 		Name:        "a shield of stygian darkness"
 		ArmorRating: 30
 	}]

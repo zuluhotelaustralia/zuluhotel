@@ -3,7 +3,7 @@ package Animated
 HauntedBlade: {
 	Name:                 "a haunted blade"
 	CorpseNameOverride:   "corpse of a haunted blade"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  180
 	Int:                  35
 	Dex:                  250

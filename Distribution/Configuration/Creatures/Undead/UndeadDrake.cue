@@ -3,7 +3,7 @@ package Undead
 UndeadDrake: {
 	Name:                 "an Undead Drake"
 	CorpseNameOverride:   "corpse of an Undead Drake"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  300
 	Int:                  400
 	Dex:                  110

@@ -3,7 +3,7 @@ package Animal
 HeavenlyOstard: {
 	Name:                 "a heavenly ostard"
 	CorpseNameOverride:   "corpse of a heavenly ostard"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  250
 	Int:                  160
 	Dex:                  400

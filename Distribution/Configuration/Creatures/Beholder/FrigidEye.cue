@@ -3,7 +3,7 @@ package Beholder
 FrigidEye: {
 	Name:                 "a frigid eye"
 	CorpseNameOverride:   "corpse of a frigid eye"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  250
 	Int:                  450
 	Dex:                  100

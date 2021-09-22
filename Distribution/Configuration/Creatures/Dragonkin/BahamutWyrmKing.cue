@@ -3,7 +3,6 @@ package Dragonkin
 BahamutWyrmKing: {
 	Name:               "Bahamut, the Wyrm King"
 	CorpseNameOverride: "corpse of Bahamut, the Wyrm King"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1900
 	Int:                650
 	Dex:                2475

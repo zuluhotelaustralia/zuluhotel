@@ -3,7 +3,7 @@ package Daemon
 MinorDaemon: {
 	Name:                 "a minor daemon"
 	CorpseNameOverride:   "corpse of a minor daemon"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  275
 	Int:                  85
 	Dex:                  180

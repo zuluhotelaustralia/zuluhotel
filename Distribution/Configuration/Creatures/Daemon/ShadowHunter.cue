@@ -3,7 +3,6 @@ package Daemon
 ShadowHunter: {
 	Name:               "<random> the Shadow Hunter"
 	CorpseNameOverride: "corpse of <random> the Shadow Hunter"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                60
 	Dex:                350
@@ -37,29 +36,29 @@ ShadowHunter: {
 		HitSound: 252
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Bow"
+		ItemType: "SBow"
 		Name:     "Tainted Ranger Weapon"
 		Hue:      1171
 	}, {
-		ItemType:    "Server.Items.LeatherGloves"
+		ItemType:    "SLeatherGloves"
 		Name:        "a pair of dark leather gloves"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType: "Server.Items.Boots"
+		ItemType: "SBoots"
 		Name:     "a pair of black leather boots"
 		Hue:      1
 	}, {
-		ItemType: "Server.Items.LongPants"
+		ItemType: "SLongPants"
 		Name:     "a pair of black leather pants"
 		Hue:      1157
 	}, {
-		ItemType:    "Server.Items.LeatherChest"
+		ItemType:    "SLeatherChest"
 		Name:        "a Tunic of Woven Shadows"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "Server.Items.BoneArms"
+		ItemType:    "SBoneArms"
 		Name:        "a Bracer of Woven Shadows"
 		Hue:         1302
 		ArmorRating: 1

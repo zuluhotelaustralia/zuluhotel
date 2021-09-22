@@ -3,7 +3,6 @@ package Elemental
 WaterElementalLord: {
 	Name:               "a water elemental lord"
 	CorpseNameOverride: "corpse of a water elemental lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                410
 	Dex:                300

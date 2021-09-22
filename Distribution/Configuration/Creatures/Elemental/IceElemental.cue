@@ -3,7 +3,6 @@ package Elemental
 IceElemental: {
 	Name:               "an ice elemental"
 	CorpseNameOverride: "corpse of an ice elemental"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                140
 	Int:                110
 	Dex:                70

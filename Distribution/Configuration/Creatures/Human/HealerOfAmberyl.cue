@@ -3,7 +3,6 @@ package Human
 HealerOfAmberyl: {
 	Name:               "<random>, Healer of Amberyl"
 	CorpseNameOverride: "corpse of <random>, Healer of Amberyl"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                300
 	Dex:                200

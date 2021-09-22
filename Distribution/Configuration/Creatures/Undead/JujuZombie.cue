@@ -3,7 +3,6 @@ package Undead
 JujuZombie: {
 	Name:               "a juju zombie"
 	CorpseNameOverride: "corpse of a juju zombie"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                375
 	Int:                15
 	Dex:                400

@@ -3,7 +3,7 @@ package Daemon
 UnholyMenace: {
 	Name:                 "an Unholy Menace"
 	CorpseNameOverride:   "corpse of an Unholy Menace"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1250
 	Int:                  500
 	Dex:                  450
@@ -51,7 +51,7 @@ UnholyMenace: {
 		HasBreath: true
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

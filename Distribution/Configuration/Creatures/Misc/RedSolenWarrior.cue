@@ -3,7 +3,7 @@ package Misc
 RedSolenWarrior: {
 	Name:                 "a red solen warrior"
 	CorpseNameOverride:   "corpse of a red solen warrior"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  500
 	Int:                  60
 	Dex:                  125

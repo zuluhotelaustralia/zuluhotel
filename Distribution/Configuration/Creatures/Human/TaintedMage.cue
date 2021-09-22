@@ -3,7 +3,6 @@ package Human
 TaintedMage: {
 	Name:               "<random> the Tainted Mage"
 	CorpseNameOverride: "corpse of <random> the Tainted Mage"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                200
 	Int:                1000
 	Dex:                150
@@ -39,20 +38,20 @@ TaintedMage: {
 		MissSound: 563
 	}
 	Equipment: [{
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "an ebony staff"
 		Hue:      1157
 	}, {
-		ItemType: "Server.Items.DeathShroud"
+		ItemType: "SDeathShroud"
 		Name:     "a tattered mage's robe"
 		Hue:      1302
 	}, {
-		ItemType:    "Server.Items.LeatherGloves"
+		ItemType:    "SLeatherGloves"
 		Name:        "a pair of black leather gloves"
 		Hue:         1
 		ArmorRating: 1
 	}, {
-		ItemType: "Server.Items.Boots"
+		ItemType: "SBoots"
 		Name:     "a pair of black leather boots"
 		Hue:      1
 	}]

@@ -3,7 +3,7 @@ package Dragonkin
 AncientDracoliche: {
 	Name:                 "an Ancient Dracoliche"
 	CorpseNameOverride:   "corpse of an Ancient Dracoliche"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  3000
 	Int:                  1500
 	Dex:                  175

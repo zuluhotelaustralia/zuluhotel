@@ -3,7 +3,7 @@ package Daemon
 Harpy: {
 	Name:                 "a harpy"
 	CorpseNameOverride:   "corpse of a harpy"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  85
 	Int:                  75
 	Dex:                  70

@@ -3,7 +3,6 @@ package Elemental
 GlacierGiant: {
 	Name:               "a Glacier Giant"
 	CorpseNameOverride: "corpse of a Glacier Giant"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2320
 	Int:                55
 	Dex:                410

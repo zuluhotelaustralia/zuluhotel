@@ -3,7 +3,6 @@ package Slime
 CorrosiveSlime: {
 	Name:               "a corrosive slime"
 	CorpseNameOverride: "corpse of a corrosive slime"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                600
 	Int:                10
 	Dex:                150

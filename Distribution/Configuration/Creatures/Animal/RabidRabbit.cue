@@ -3,7 +3,7 @@ package Animal
 RabidRabbit: {
 	Name:                 "a rabid rabbit"
 	CorpseNameOverride:   "corpse of a rabid rabbit"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  90
 	Int:                  25
 	Dex:                  550

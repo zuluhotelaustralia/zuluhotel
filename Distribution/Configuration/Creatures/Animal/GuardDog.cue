@@ -3,7 +3,7 @@ package Animal
 GuardDog: {
 	Name:                 "a guard dog"
 	CorpseNameOverride:   "corpse of a guard dog"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  50
 	Int:                  35
 	Dex:                  80

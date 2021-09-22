@@ -3,7 +3,7 @@ package Daemon
 ShadowDestroyer: {
 	Name:                 "Shadow Destroyer"
 	CorpseNameOverride:   "corpse of Shadow Destroyer"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1550
 	Int:                  500
 	Dex:                  450
@@ -50,7 +50,7 @@ ShadowDestroyer: {
 		HitSound: 572
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

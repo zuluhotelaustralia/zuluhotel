@@ -3,7 +3,6 @@ package Elemental
 Juggernaught: {
 	Name:               "a Juggernaught"
 	CorpseNameOverride: "corpse of a Juggernaught"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1000
 	Int:                1000
 	Dex:                10
@@ -54,10 +53,10 @@ Juggernaught: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Spear"
+		ItemType: "SSpear"
 		Name:     "Juggernaught Weapon"
 	}, {
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR40"
 		ArmorRating: 40
 	}]

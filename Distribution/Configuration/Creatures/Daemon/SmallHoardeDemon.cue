@@ -3,7 +3,6 @@ package Daemon
 SmallHoardeDemon: {
 	Name:               "a Small Hoarde Demon"
 	CorpseNameOverride: "corpse of a Small Hoarde Demon"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                600
 	Int:                100
 	Dex:                500
@@ -37,7 +36,7 @@ SmallHoardeDemon: {
 		HitSound: 601
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}]
 }

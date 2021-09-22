@@ -3,7 +3,6 @@ package Daemon
 DaemonLieutenant: {
 	Name:               "a Daemon Lieutenant"
 	CorpseNameOverride: "corpse of a Daemon Lieutenant"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                550
 	Int:                350
 	Dex:                350

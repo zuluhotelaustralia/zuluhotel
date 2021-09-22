@@ -3,7 +3,7 @@ package Daemon
 WingedAvenger: {
 	Name:                 "a Winged Avenger"
 	CorpseNameOverride:   "corpse of a Winged Avenger"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  305
 	Int:                  295
 	Dex:                  350

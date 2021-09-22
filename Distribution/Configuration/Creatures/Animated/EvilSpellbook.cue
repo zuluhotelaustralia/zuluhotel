@@ -3,7 +3,6 @@ package Animated
 EvilSpellbook: {
 	Name:               "evil spellbook"
 	CorpseNameOverride: "corpse of evil spellbook"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                400
 	Int:                900
 	Dex:                600

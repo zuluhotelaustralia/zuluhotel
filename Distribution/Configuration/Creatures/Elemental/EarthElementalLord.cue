@@ -3,7 +3,7 @@ package Elemental
 EarthElementalLord: {
 	Name:               "an earth elemental lord"
 	CorpseNameOverride: "corpse of an earth elemental lord"
-	BaseType:           "Server.Mobiles.BaseElementalLord"
+	BaseType:           "BaseElementalLord"
 	Str:                450
 	Int:                55
 	Dex:                150

@@ -3,7 +3,7 @@ package Daemon
 HeadlessOne: {
 	Name:                 "a headless one"
 	CorpseNameOverride:   "corpse of a headless one"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  60
 	Int:                  25
 	Dex:                  60

@@ -3,7 +3,6 @@ package Undead
 Dracula: {
 	Name:               "Dracula"
 	CorpseNameOverride: "corpse of Dracula"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                600
 	Int:                400
 	Dex:                400
@@ -36,7 +35,7 @@ Dracula: {
 		HitSound: 601
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}]
 }

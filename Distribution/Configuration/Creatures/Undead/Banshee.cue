@@ -3,7 +3,6 @@ package Undead
 Banshee: {
 	Name:               "a banshee"
 	CorpseNameOverride: "corpse of a banshee"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                925
 	Int:                1025
 	Dex:                380

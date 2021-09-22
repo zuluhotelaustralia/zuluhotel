@@ -3,7 +3,7 @@ package Misc
 Seserpent: {
 	Name:                 "a sea serpent"
 	CorpseNameOverride:   "corpse of a sea serpent"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  250
 	Int:                  35
 	Dex:                  180

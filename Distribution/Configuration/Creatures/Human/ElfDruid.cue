@@ -3,7 +3,7 @@ package Human
 ElfDruid: {
 	Name:                 "an Elf Druid"
 	CorpseNameOverride:   "corpse of an Elf Druid"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  200
 	Int:                  1000
 	Dex:                  195
@@ -44,11 +44,11 @@ ElfDruid: {
 		HitSound: 315
 	}
 	Equipment: [{
-		ItemType: "Server.Items.DeathShroud"
+		ItemType: "SDeathShroud"
 		Name:     "Druid's Robe"
 		Hue:      1285
 	}, {
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "Evil Mage Weapon"
 	}]
 }

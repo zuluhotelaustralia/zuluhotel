@@ -3,7 +3,7 @@ package Familiars
 Humuc: {
 	Name:                 "totem"
 	CorpseNameOverride:   "corpse of a totem"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  200
 	Int:                  75
 	Dex:                  100
@@ -38,10 +38,10 @@ Humuc: {
 		HitSound: 424
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}, {
-		ItemType: "Server.Items.StrongBackpack"
+		ItemType: "SStrongBackpack"
 	}]
 }

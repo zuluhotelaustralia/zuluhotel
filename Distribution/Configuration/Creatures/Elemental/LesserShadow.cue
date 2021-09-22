@@ -3,7 +3,6 @@ package Elemental
 LesserShadow: {
 	Name:               "a Lesser Shadow"
 	CorpseNameOverride: "corpse of a Lesser Shadow"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                300
 	Int:                500
 	Dex:                200
@@ -48,12 +47,12 @@ LesserShadow: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.BoneGloves"
+		ItemType:    "SBoneGloves"
 		Name:        "Red Bone Gloves AR10"
 		Hue:         1172
 		ArmorRating: 10
 	}, {
-		ItemType:    "Server.Items.BoneHelm"
+		ItemType:    "SBoneHelm"
 		Name:        "Red Bone Helm AR45"
 		Hue:         1172
 		ArmorRating: 45

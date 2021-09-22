@@ -3,7 +3,6 @@ package Elemental
 MageMenacer: {
 	Name:               "a Mage Menacer"
 	CorpseNameOverride: "corpse of a Mage Menacer"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2500
 	Int:                25
 	Dex:                600

@@ -3,7 +3,7 @@ package Daemon
 HellHound: {
 	Name:                 "a hell hound"
 	CorpseNameOverride:   "corpse of a hell hound"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  170
 	Int:                  60
 	Dex:                  185

@@ -3,7 +3,7 @@ package Animal
 GoldenOstard: {
 	Name:                 "a golden ostard"
 	CorpseNameOverride:   "corpse of a golden ostard"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  120
 	Int:                  35
 	Dex:                  240

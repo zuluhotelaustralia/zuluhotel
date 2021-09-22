@@ -3,7 +3,7 @@ package Daemon
 Valkerie: {
 	Name:                 "a Valkerie"
 	CorpseNameOverride:   "corpse of a Valkerie"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  180
 	Int:                  80
 	Dex:                  180

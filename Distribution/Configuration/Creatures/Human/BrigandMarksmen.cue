@@ -3,7 +3,7 @@ package Human
 BrigandMarksmen: {
 	Name:                 "a brigand Marksmen"
 	CorpseNameOverride:   "corpse of a brigand Marksmen"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  95
 	Int:                  45
 	Dex:                  105

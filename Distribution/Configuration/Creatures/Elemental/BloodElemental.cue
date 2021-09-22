@@ -3,7 +3,7 @@ package Elemental
 BloodElemental: {
 	Name:                 "a blood elemental"
 	CorpseNameOverride:   "corpse of a blood elemental"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  450
 	Int:                  400
 	Dex:                  185

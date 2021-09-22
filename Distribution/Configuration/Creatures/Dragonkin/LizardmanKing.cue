@@ -3,7 +3,7 @@ package Dragonkin
 LizardmanKing: {
 	Name:                 "<random> the Lizardman King"
 	CorpseNameOverride:   "corpse of <random> the Lizardman King"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  300
 	Int:                  75
 	Dex:                  200

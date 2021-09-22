@@ -3,7 +3,7 @@ package Dragonkin
 GreatWyrm: {
 	Name:                 "a Great Wyrm"
 	CorpseNameOverride:   "corpse of a Great Wyrm"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  900
 	Int:                  650
 	Dex:                  475

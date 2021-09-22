@@ -3,7 +3,6 @@ package Elemental
 TwistedAnimation: {
 	Name:               "a Twisted Animation"
 	CorpseNameOverride: "corpse of a Twisted Animation"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                700
 	Int:                200
 	Dex:                100
@@ -37,11 +36,11 @@ TwistedAnimation: {
 		MissSound: 569
 	}
 	Equipment: [{
-		ItemType: "Server.Items.Longsword"
+		ItemType: "SLongsword"
 		Name:     "an animation's blade"
 		Hue:      33870
 	}, {
-		ItemType: "Server.Items.GoldBracelet"
+		ItemType: "SGoldBracelet"
 		Name:     "a animation's shield"
 	}]
 }

@@ -3,7 +3,7 @@ package Dragonkin
 PoisonWyrm: {
 	Name:                 "a Poison Wyrm"
 	CorpseNameOverride:   "corpse of a Poison Wyrm"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  1900
 	Int:                  400
 	Dex:                  340

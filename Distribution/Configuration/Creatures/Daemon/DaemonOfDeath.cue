@@ -3,7 +3,7 @@ package Daemon
 DaemonOfDeath: {
 	Name:                 "a Daemon Of Death"
 	CorpseNameOverride:   "corpse of a Daemon Of Death"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  2000
 	Int:                  2000
 	Dex:                  200
@@ -57,7 +57,7 @@ DaemonOfDeath: {
 		MaxRange:  5
 	}
 	Equipment: [{
-		ItemType:    "Server.Items.HeaterShield"
+		ItemType:    "SHeaterShield"
 		Name:        "Shield AR40"
 		ArmorRating: 40
 	}]

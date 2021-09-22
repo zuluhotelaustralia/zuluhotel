@@ -3,7 +3,7 @@ package Slime
 Slime: {
 	Name:                 "a slime"
 	CorpseNameOverride:   "corpse of a slime"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  40
 	Int:                  15
 	Dex:                  50

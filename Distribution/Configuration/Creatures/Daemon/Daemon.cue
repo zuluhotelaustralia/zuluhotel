@@ -3,7 +3,6 @@ package Daemon
 Daemon: {
 	Name:               "<random> the Daemon"
 	CorpseNameOverride: "corpse of <random> the Daemon"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                450
 	Int:                350
 	Dex:                80

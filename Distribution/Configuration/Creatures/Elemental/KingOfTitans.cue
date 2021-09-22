@@ -3,7 +3,6 @@ package Elemental
 KingOfTitans: {
 	Name:               "a King of Titans"
 	CorpseNameOverride: "corpse of a King of Titans"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2050
 	Int:                1255
 	Dex:                300

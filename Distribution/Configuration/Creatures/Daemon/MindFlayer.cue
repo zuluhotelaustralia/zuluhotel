@@ -3,7 +3,6 @@ package Daemon
 MindFlayer: {
 	Name:               "a Mind Flayer"
 	CorpseNameOverride: "corpse of a Mind Flayer"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1200
 	Int:                2750
 	Dex:                310

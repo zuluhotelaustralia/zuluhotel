@@ -3,7 +3,6 @@ package Elemental
 BehemothLord: {
 	Name:               "a Behemoth Lord"
 	CorpseNameOverride: "corpse of a Behemoth Lord"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2950
 	Int:                55
 	Dex:                400

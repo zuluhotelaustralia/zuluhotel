@@ -3,7 +3,7 @@ package Elemental
 ArachnidQueen: {
 	Name:                 "an Arachnid Queen"
 	CorpseNameOverride:   "corpse of an Arachnid Queen"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  2250
 	Int:                  55
 	Dex:                  400

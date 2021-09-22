@@ -3,7 +3,7 @@ package Daemon
 Mongbat: {
 	Name:                 "a mongbat"
 	CorpseNameOverride:   "corpse of a mongbat"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  20
 	Int:                  35
 	Dex:                  60

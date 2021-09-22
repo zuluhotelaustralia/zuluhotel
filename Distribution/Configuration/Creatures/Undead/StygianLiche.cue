@@ -3,7 +3,6 @@ package Undead
 StygianLiche: {
 	Name:               "a Stygian Liche"
 	CorpseNameOverride: "corpse of a Stygian Liche"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                2000
 	Int:                2800
 	Dex:                300

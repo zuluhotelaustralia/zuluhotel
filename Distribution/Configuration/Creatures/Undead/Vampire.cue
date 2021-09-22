@@ -3,7 +3,6 @@ package Undead
 Vampire: {
 	Name:               "Vampire"
 	CorpseNameOverride: "corpse of Vampire"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                350
 	Int:                350
 	Dex:                350
@@ -37,7 +36,7 @@ Vampire: {
 		HitSound: 363
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}]
 }

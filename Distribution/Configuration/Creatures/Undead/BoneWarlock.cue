@@ -3,7 +3,6 @@ package Undead
 BoneWarlock: {
 	Name:               "a bone warlock"
 	CorpseNameOverride: "corpse of a bone warlock"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                270
 	Int:                295
 	Dex:                94

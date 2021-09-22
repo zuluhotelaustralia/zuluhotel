@@ -3,7 +3,6 @@ package Undead
 Spectre: {
 	Name:               "a spectre"
 	CorpseNameOverride: "corpse of a spectre"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                135
 	Int:                35
 	Dex:                90

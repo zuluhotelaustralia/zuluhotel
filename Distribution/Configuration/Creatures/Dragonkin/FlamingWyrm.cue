@@ -3,7 +3,7 @@ package Dragonkin
 FlamingWyrm: {
 	Name:                 "a Flaming Wyrm"
 	CorpseNameOverride:   "corpse of a Flaming Wyrm"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  2800
 	Int:                  3500
 	Dex:                  475

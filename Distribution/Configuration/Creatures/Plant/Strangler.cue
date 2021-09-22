@@ -3,7 +3,6 @@ package Plant
 Strangler: {
 	Name:               "a Strangler"
 	CorpseNameOverride: "corpse of a Strangler"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1500
 	Int:                255
 	Dex:                400

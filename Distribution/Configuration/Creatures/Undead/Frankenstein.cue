@@ -3,7 +3,6 @@ package Undead
 Frankenstein: {
 	Name:               "Frankenstein"
 	CorpseNameOverride: "corpse of Frankenstein"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                450
 	Int:                450
 	Dex:                450
@@ -33,7 +32,7 @@ Frankenstein: {
 		HitSound: 601
 	}
 	Equipment: [{
-		ItemType: "Server.Items.ShortHair"
+		ItemType: "SShortHair"
 		Hue:      1
 	}]
 }

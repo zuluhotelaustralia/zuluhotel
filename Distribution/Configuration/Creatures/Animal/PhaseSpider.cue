@@ -3,7 +3,7 @@ package Animal
 PhaseSpider: {
 	Name:                 "a phase spider"
 	CorpseNameOverride:   "corpse of a phase spider"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  700
 	Int:                  350
 	Dex:                  60

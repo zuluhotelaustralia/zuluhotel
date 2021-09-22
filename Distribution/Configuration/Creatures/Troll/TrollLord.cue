@@ -3,7 +3,7 @@ package Troll
 TrollLord: {
 	Name:                 "a troll lord"
 	CorpseNameOverride:   "corpse of a troll lord"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  350
 	Int:                  65
 	Dex:                  150

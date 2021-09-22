@@ -3,7 +3,6 @@ package Undead
 SoulSearcher: {
 	Name:               "a Soul Searcher"
 	CorpseNameOverride: "corpse of a Soul Searcher"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1200
 	Int:                2750
 	Dex:                310

@@ -3,7 +3,7 @@ package Human
 EvilMage: {
 	Name:                 "<random> the Evil Mage"
 	CorpseNameOverride:   "corpse of <random> the Evil Mage"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  180
 	Int:                  385
 	Dex:                  90
@@ -31,10 +31,10 @@ EvilMage: {
 		HitSound: 315
 	}
 	Equipment: [{
-		ItemType: "Server.Items.LongHair"
+		ItemType: "SLongHair"
 		Hue:      1110
 	}, {
-		ItemType: "Server.Items.GnarledStaff"
+		ItemType: "SGnarledStaff"
 		Name:     "Evil Mage Weapon"
 	}]
 }

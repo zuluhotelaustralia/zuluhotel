@@ -3,7 +3,7 @@ package Animal
 Hildisvini: {
 	Name:                 "Hildisvini"
 	CorpseNameOverride:   "corpse of Hildisvini"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  70
 	Int:                  55
 	Dex:                  90

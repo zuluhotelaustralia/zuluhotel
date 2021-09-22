@@ -3,7 +3,6 @@ package Daemon
 SoulSlayer: {
 	Name:               "a Soul Slayer"
 	CorpseNameOverride: "corpse of a Soul Slayer"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                1100
 	Int:                3000
 	Dex:                300

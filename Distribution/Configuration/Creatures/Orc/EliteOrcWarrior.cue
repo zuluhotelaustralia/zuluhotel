@@ -3,7 +3,7 @@ package Orc
 EliteOrcWarrior: {
 	Name:                 "an elite orc warrior"
 	CorpseNameOverride:   "corpse of an elite orc warrior"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  215
 	Int:                  35
 	Dex:                  195

@@ -3,7 +3,7 @@ package Human
 DarkElfArcher: {
 	Name:                 "a dark elf archer"
 	CorpseNameOverride:   "corpse of a dark elf archer"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  165
 	Int:                  95
 	Dex:                  130

@@ -3,7 +3,7 @@ package Dragonkin
 FireLizard: {
 	Name:                 "a fire lizard"
 	CorpseNameOverride:   "corpse of a fire lizard"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  140
 	Int:                  30
 	Dex:                  80

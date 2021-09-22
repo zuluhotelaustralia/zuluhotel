@@ -3,7 +3,7 @@ package Misc
 FieryGargoyle: {
 	Name:                 "a fiery gargoyle"
 	CorpseNameOverride:   "corpse of a fiery gargoyle"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  600
 	Int:                  250
 	Dex:                  145

@@ -3,7 +3,6 @@ package Plant
 Corpser: {
 	Name:               "a corpser"
 	CorpseNameOverride: "corpse of a corpser"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                150
 	Int:                45
 	Dex:                105

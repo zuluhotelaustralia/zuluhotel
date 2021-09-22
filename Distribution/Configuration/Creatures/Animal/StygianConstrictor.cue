@@ -3,7 +3,6 @@ package Animal
 StygianConstrictor: {
 	Name:               "a Stygian Constrictor"
 	CorpseNameOverride: "corpse of a Stygian Constrictor"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                275
 	Int:                175
 	Dex:                110

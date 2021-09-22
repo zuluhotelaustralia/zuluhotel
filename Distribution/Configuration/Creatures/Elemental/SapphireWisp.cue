@@ -3,7 +3,7 @@ package Elemental
 SapphireWisp: {
 	Name:                 "a sapphire wisp"
 	CorpseNameOverride:   "corpse of a sapphire wisp"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  700
 	Int:                  1100
 	Dex:                  575

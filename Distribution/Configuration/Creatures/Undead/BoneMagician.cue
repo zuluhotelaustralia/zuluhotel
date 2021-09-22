@@ -3,7 +3,6 @@ package Undead
 BoneMagician: {
 	Name:               "a bone magician"
 	CorpseNameOverride: "corpse of a bone magician"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                200
 	Int:                295
 	Dex:                180

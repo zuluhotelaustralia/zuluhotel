@@ -3,7 +3,6 @@ package Undead
 Wraith: {
 	Name:               "a wraith"
 	CorpseNameOverride: "corpse of a wraith"
-	BaseType:           "Server.Mobiles.BaseCreatureTemplate"
 	Str:                125
 	Int:                1025
 	Dex:                380

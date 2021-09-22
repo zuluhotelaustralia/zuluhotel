@@ -3,7 +3,7 @@ package Elemental
 Phoenix: {
 	Name:                 "a Phoenix"
 	CorpseNameOverride:   "corpse of a Phoenix"
-	BaseType:             "Server.Mobiles.BaseCreatureTemplate"
+
 	Str:                  450
 	Int:                  500
 	Dex:                  400
