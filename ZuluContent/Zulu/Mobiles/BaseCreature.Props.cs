@@ -164,7 +164,7 @@ namespace Server.Mobiles
             }
         }
         
-        public virtual WeaponAbility GetWeaponAbility() => InitProperties?.WeaponAbility;
+        public virtual WeaponAbility GetWeaponAbility() => InitProperties?.Attack?.Ability;
         public virtual void OnRiseSpawn(string creatureType, Container corpse)
         {
             if (!Creatures.Exists(creatureType))

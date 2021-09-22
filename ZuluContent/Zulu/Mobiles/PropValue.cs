@@ -1,8 +1,13 @@
 using System;
 using System.ComponentModel;
+using Scripts.Cue;
 
 namespace Server.Mobiles
 {
+    [CueExpression(@"(number | {
+    Min: number
+    Max: number
+})")]
     public record PropValue
     {
         public double Min { get; set; }

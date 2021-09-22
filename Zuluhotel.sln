@@ -13,6 +13,8 @@ ProjectSection(SolutionItems) = preProject
 	.run\Server.run.xml = .run\Server.run.xml
 EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CueFSharp", "CueFSharp\CueFSharp.fsproj", "{544C2B55-8340-4861-B22E-FC40BC17063B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,10 @@ Global
 		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Debug|x64.Build.0 = Debug|x64
 		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.ActiveCfg = Release|x64
 		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.Build.0 = Release|x64
+		{544C2B55-8340-4861-B22E-FC40BC17063B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{544C2B55-8340-4861-B22E-FC40BC17063B}.Debug|x64.Build.0 = Debug|Any CPU
+		{544C2B55-8340-4861-B22E-FC40BC17063B}.Release|x64.ActiveCfg = Release|Any CPU
+		{544C2B55-8340-4861-B22E-FC40BC17063B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9637ACEC-800E-4712-BE05-0AD045440641} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}

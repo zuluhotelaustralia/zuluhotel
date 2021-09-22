@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Server.Mobiles;
 
-namespace Server
+namespace Server.Mobiles
 {
     public class OppositionGroup
     {

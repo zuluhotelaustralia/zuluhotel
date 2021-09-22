@@ -2,3 +2,6 @@
 	path = ModernUO
 	url = https://github.com/modernuo/ModernUO.git
 	ignore = untracked
+[submodule "CueFSharp"]
+	path = CueFSharp
+	url = https://github.com/zuluhotelaustralia/CueFSharp.git

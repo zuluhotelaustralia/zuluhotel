@@ -27,6 +27,7 @@
     <PackageReference Include="MessagePackAnalyzer" Version="2.2.60" />
     <PackageReference Include="MailKit" Version="2.10.1" />
     <PackageReference Include="Microsoft.Toolkit.HighPerformance" Version="7.0.0-preview5" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="5.0.1" />
     <PackageReference Include="Zlib.Bindings" Version="1.4.0" />
     <PackageReference Include="Argon2.Bindings" Version="1.8.0" />
   </ItemGroup>
@@ -36,15 +37,7 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Network\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Items\Body Parts\PentagramPiece.cs" />
-  </ItemGroup>
-
+  
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'UNIX'">
       robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /FFT /XA:H

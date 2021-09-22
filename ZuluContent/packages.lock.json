@@ -89,6 +89,12 @@
         "resolved": "7.0.0-preview5",
         "contentHash": "T+ozZZDYFk9Moi97TQteZ+2ZqhY4fpAVJDBVjkj4xUnNBnlWlni9VnV7jS3yE9c1Gsqkx5ouWP54Z9OklVc7ZA=="
       },
+      "System.Reflection.MetadataLoadContext": {
+        "type": "Direct",
+        "requested": "[5.0.1, )",
+        "resolved": "5.0.1",
+        "contentHash": "JRI6RMInoZs4KtNeooDNl9KRQyYF5q0VJi1CPxbPPWk5x9Uc0FyCJTcAcWpvrgtDPBh0D91TYJ4OYrv7g6mjeQ=="
+      },
       "Zlib.Bindings": {
         "type": "Direct",
         "requested": "[1.4.0, )",

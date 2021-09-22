@@ -44,7 +44,7 @@ namespace Scripts.Zulu.Utilities
         public static Type[] GetInheritedClasses(this Type parent)
         {
             return Assembly.GetAssembly(parent)?.GetTypes()
-                .Where(target => target.GetInterfaces().Contains(parent) && !target.IsAbstract)
+                .Where(target => target.IsClass && (target.GetInterfaces().Contains(parent) || target.IsSubclassOf(parent)) && !target.IsAbstract)
                 .ToArray();
         }
 

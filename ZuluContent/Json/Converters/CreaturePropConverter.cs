@@ -63,9 +63,9 @@ namespace Server.Json
             if (value.Max.HasValue)
             {
                 writer.WriteStartObject();
-                writer.WritePropertyName(nameof(PropValue.Min));
+                writer.WritePropertyName("min");
                 writer.WriteNumberValue(value.Min);
-                writer.WritePropertyName(nameof(PropValue.Max));
+                writer.WritePropertyName("max");
                 writer.WriteNumberValue(value.Max.Value);
                 writer.WriteEndObject();
             }

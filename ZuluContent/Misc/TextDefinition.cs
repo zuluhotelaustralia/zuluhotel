@@ -1,9 +1,10 @@
 using System;
 using System.Globalization;
+using Scripts.Cue;
 using Server.Gumps;
 using Server.Network;
 
-namespace Server
+namespace Server.Misc
 {
     [Parsable]
     public class TextDefinition

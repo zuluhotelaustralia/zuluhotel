@@ -3,6 +3,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Server.Engines.Magic.HitScripts;
+using Server.Spells;
 using Server.Utilities;
 
 namespace Server.Json
@@ -20,7 +21,7 @@ namespace Server.Json
         public override WeaponAbility Read(ref Utf8JsonReader reader, Type typeToConvert,
             JsonSerializerOptions options)
         {
-            switch (reader.TokenType)
+            switch (reader.TokenType) 
             {
                 case JsonTokenType.StartObject:
                 {
@@ -29,7 +30,7 @@ namespace Server.Json
                     if (reader.TokenType != JsonTokenType.PropertyName) 
                         throw new JsonException();
                     if (reader.GetString()?.ToLowerInvariant() != nameof(Type).ToLowerInvariant()) 
-                        throw new JsonException();
+                        throw new JsonException(); 
 
                     reader.Read();
                     if (reader.TokenType != JsonTokenType.String) 
@@ -47,10 +48,16 @@ namespace Server.Json
                                 throw new JsonException();
 
                             reader.Read();
+                            
                             if (reader.TokenType != JsonTokenType.String) 
                                 throw new JsonException();
 
-                            var type = AssemblyHandler.FindTypeByName(reader.GetString());
+
+                            var spellValue = reader.GetString();
+                            if (!Enum.TryParse<SpellEntry>(spellValue, out var entry))
+                                throw new ArgumentOutOfRangeException($"{spellValue} is not a valid SpellEntry Enum value");
+
+                            var type = SpellRegistry.SpellTypes[entry];
                             
                             ability = new SpellStrike(type);
                             break;

@@ -3,7 +3,7 @@ using System;
 using Server.Mobiles;
 using Server.Utilities;
 
-namespace Server
+namespace Server.Mobiles
 {
     public static class Creatures
     {
