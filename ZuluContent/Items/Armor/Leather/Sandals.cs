@@ -1,7 +1,7 @@
 namespace Server.Items
 {
     [Flipable(0x170d, 0x170e)]
-    public class Sandals : BaseClothing
+    public class Sandals : BaseShoes
     {
         public override int InitMinHits => 70;
 

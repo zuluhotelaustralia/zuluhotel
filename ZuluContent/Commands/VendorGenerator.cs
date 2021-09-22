@@ -458,7 +458,7 @@ namespace Server
 			LandTile lt = map.Tiles.GetLandTile( x, y );
 			int lowZ = 0, avgZ = 0, topZ = 0;
 
-			map.GetAverageZ( x, y, ref lowZ, ref avgZ, ref topZ );
+			map.GetAverageZ( x, y, out lowZ, out avgZ, out topZ );
 			TileFlag landFlags = TileData.LandTable[lt.ID & TileData.MaxLandValue].Flags;
 
 			if ( (landFlags & TileFlag.Impassable) != 0 && topZ > z && z + 16 > lowZ )

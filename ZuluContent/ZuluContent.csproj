@@ -26,9 +26,8 @@
     <PackageReference Include="MessagePack" Version="2.2.60" />
     <PackageReference Include="MessagePackAnalyzer" Version="2.2.60" />
     <PackageReference Include="MailKit" Version="2.10.1" />
-    <PackageReference Include="Microsoft.Toolkit.HighPerformance" Version="7.0.0-preview5" />
-    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="5.0.1" />
-    <PackageReference Include="Zlib.Bindings" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Toolkit.HighPerformance" Version="7.0.2" />
+    <PackageReference Include="Zlib.Bindings" Version="1.5.0" />
     <PackageReference Include="Argon2.Bindings" Version="1.8.0" />
   </ItemGroup>
 
@@ -38,6 +37,19 @@
     </ProjectReference>
   </ItemGroup>
   
+  <ItemGroup>
+    <ProjectReference Include="..\ModernUO\Projects\SerializationGenerator\SerializationGenerator.csproj">
+      <SetTargetFramework>TargetFramework=netstandard2.0</SetTargetFramework>
+      <OutputItemType>Analyzer</OutputItemType>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Migrations/*.v*.json" />
+  </ItemGroup>
+
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'UNIX'">
       robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /FFT /XA:H

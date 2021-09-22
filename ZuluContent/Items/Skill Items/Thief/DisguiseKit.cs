@@ -280,7 +280,6 @@ public DisguiseKit( Serial serial ) : base( serial )
 			public InternalTimer( Mobile m, TimeSpan delay ) : base( delay )
 			{
 				m_Player = m;
-				Priority = TimerPriority.OneMinute;
 			}
 
 			protected override void OnTick()

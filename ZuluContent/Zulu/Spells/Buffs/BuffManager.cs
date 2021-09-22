@@ -144,7 +144,7 @@ namespace Server.Spells
             private readonly BuffManager m_Manager;
 
             public BuffTimer(BuffManager m) : base(TimeSpan.Zero, TimeSpan.FromSeconds(1.0)) =>
-                (m_Manager, Priority) = (m, TimerPriority.OneSecond);
+                m_Manager = m;
 
             protected override void OnTick() => m_Manager.ExpireBuffs();
         }

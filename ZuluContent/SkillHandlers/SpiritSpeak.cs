@@ -207,7 +207,6 @@ namespace Server.SkillHandlers
             public SpiritSpeakTimer(Mobile m, TimeSpan duration) : base(duration)
             {
                 m_Owner = m;
-                Priority = TimerPriority.FiveSeconds;
             }
 
             protected override void OnTick()

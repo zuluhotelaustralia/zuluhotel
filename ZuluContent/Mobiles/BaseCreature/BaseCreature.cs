@@ -148,7 +148,6 @@ namespace Server.Mobiles
             public DeleteTimer(Mobile creature, TimeSpan delay) : base(delay)
             {
                 m = creature;
-                Priority = TimerPriority.OneMinute;
             }
 
             protected override void OnTick()
@@ -406,7 +405,7 @@ namespace Server.Mobiles
 
         public virtual double SpitWebMaxDelay
         {
-            get { return 20.0; }
+            get { return 15.0; }
         }
         
         #endregion
@@ -3117,14 +3116,26 @@ namespace Server.Mobiles
             if (IsInvulnerable)
                 val += " [invulnerable]";
 
+            if (BardEndTime > DateTime.Now)
+            {
+                var timeDiff = BardEndTime - DateTime.Now;
+                var timeVal = "";
+
+                if (timeDiff.Minutes > 0)
+                    timeVal += $"{timeDiff.Minutes}m ";
+
+                if (timeDiff.Seconds > 0)
+                    timeVal += $"{timeDiff.Seconds}s";
+                
+                if (BardPacified)
+                    PrivateOverheadMessage(MessageType.Label, 0x9B, true, $"*pacified {timeVal}*", from.NetState);
+                else if (BardProvoked)
+                    PrivateOverheadMessage(MessageType.Label, 0x9B, true, $"*provoked {timeVal}*", from.NetState);
+                
+            }
+
             PrivateOverheadMessage(MessageType.Label, hue, true, val, from.NetState);
         }
-
-        public virtual double TreasureMapChance
-        {
-            get { return TreasureMap.LootChance; }
-        }
-
 
         public virtual bool IgnoreYoungProtection
         {
@@ -3550,15 +3561,17 @@ namespace Server.Mobiles
         {
             Say("The spider spits a web!");
 
-            var location = target.Location;
+            var toLocation = target.Location;
             
             await Timer.Pause(300);
-
-            var web = new SpiderWeb(location, target.Map, TimeSpan.FromMinutes(2));
             
-            MovingParticles(web, 0xEE4, 7, 0, false, true, 3043, 4043, 0x211);
+            Effects.SendMovingEffect(target.Map, 0xEE4, Location, toLocation, 7, 0);
 
-            if (target.Location == location)
+            await Timer.Pause(200);
+            
+            new SpiderWeb(toLocation, target.Map, TimeSpan.FromMinutes(2));
+
+            if (target.Location == toLocation)
             {
                 SpiderWeb.Stick(target);
             }
@@ -3994,6 +4007,7 @@ namespace Server.Mobiles
 
         public void Pacify(Mobile master, DateTime endtime)
         {
+            PublicOverheadMessage(MessageType.Emote, EmoteHue, false, "*looks calm*");
             BardPacified = true;
             BardEndTime = endtime;
         }

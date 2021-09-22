@@ -951,11 +951,6 @@ namespace Server.Engines.Spawners
 
             public InternalTimer(BaseSpawner spawner, TimeSpan delay) : base(delay)
             {
-                if (spawner.IsFull)
-                    Priority = TimerPriority.FiveSeconds;
-                else
-                    Priority = TimerPriority.OneSecond;
-
                 m_Spawner = spawner;
             }
 

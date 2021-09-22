@@ -414,9 +414,7 @@ public TallCabinet( Serial serial ) : base( serial )
 
 		public FurnitureTimer( Container c, Mobile m ) : base( TimeSpan.FromSeconds( 0.5 ), TimeSpan.FromSeconds( 0.5 ) )
 		{
-			Priority = TimerPriority.TwoFiftyMS;
-
-			m_Container = c;
+            m_Container = c;
 			m_Mobile = m;
 		}
 

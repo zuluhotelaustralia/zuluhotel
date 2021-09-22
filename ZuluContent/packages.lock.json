@@ -85,21 +85,15 @@
       },
       "Microsoft.Toolkit.HighPerformance": {
         "type": "Direct",
-        "requested": "[7.0.0-preview5, )",
-        "resolved": "7.0.0-preview5",
-        "contentHash": "T+ozZZDYFk9Moi97TQteZ+2ZqhY4fpAVJDBVjkj4xUnNBnlWlni9VnV7jS3yE9c1Gsqkx5ouWP54Z9OklVc7ZA=="
-      },
-      "System.Reflection.MetadataLoadContext": {
-        "type": "Direct",
-        "requested": "[5.0.1, )",
-        "resolved": "5.0.1",
-        "contentHash": "JRI6RMInoZs4KtNeooDNl9KRQyYF5q0VJi1CPxbPPWk5x9Uc0FyCJTcAcWpvrgtDPBh0D91TYJ4OYrv7g6mjeQ=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "tG6v0AhDw/yJMtiH/tI4F6I/+sNIfu4++6WFfN73FyNcPh31et33w45wo8Lx1sfxcfLtkYk+w2fvU/MubYg4VQ=="
       },
       "Zlib.Bindings": {
         "type": "Direct",
-        "requested": "[1.4.0, )",
-        "resolved": "1.4.0",
-        "contentHash": "ynaf1cOY3jLmD9Z+JwI0/CVWY7PP7TVGNPmU2Avo/nR/tciaL0eL7FfxAVdo8xjUj1CfCpW/Og1+FFVdfADHHg=="
+        "requested": "[1.5.0, )",
+        "resolved": "1.5.0",
+        "contentHash": "OmH15iciKDzx8WrVRXuBNg6++UPb2YNRNwzFVsqenG/q5P8b3iuxYOHJdnYWjzFznTywD0ZUno5GrfxqIni7xA=="
       },
       "MessagePack.Annotations": {
         "type": "Transitive",

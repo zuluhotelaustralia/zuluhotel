@@ -39,7 +39,7 @@ namespace Scripts.Configuration
                     if (entry.Value.Contains("MissingObject"))
                         continue;
 
-                    var type = AssemblyHandler.FindTypeByName(entry.Value);
+                    var type = AssemblyHandler.FindTypeByFullName(entry.Value);
                     if (type == null)
                         continue;
 
@@ -75,7 +75,7 @@ namespace Scripts.Configuration
                         continue;
                     }
 
-                    var type = AssemblyHandler.FindTypeByName(entry.Value);
+                    var type = AssemblyHandler.FindTypeByFullName(entry.Value);
 
                     if (type == null)
                         continue;

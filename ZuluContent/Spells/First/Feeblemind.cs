@@ -22,7 +22,7 @@ namespace Server.Spells.First
 
             SpellHelper.Turn(Caster, target);
             
-            if (!Caster.CanBuff(target, icons: BuffIcon.FeebleMind))
+            if (!Caster.CanBuff(target, true,  BuffIcon.Bless, BuffIcon.Cunning, BuffIcon.Resilience, BuffIcon.FeebleMind))
                 return;
             
             target.TryAddBuff(new StatBuff(StatType.Int)

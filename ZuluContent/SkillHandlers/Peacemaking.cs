@@ -1,198 +1,180 @@
 using System;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Mobiles;
 using Server.Items;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class Peacemaking
-	{
-		public static void Initialize()
-		{
-			SkillInfo.Table[(int)SkillName.Peacemaking].Callback = OnUse;
-		}
+    public class Peacemaking : BaseSkillHandler
+    {
+        public override SkillName Skill => SkillName.Peacemaking;
 
-		public static TimeSpan OnUse( Mobile m )
-		{
-			m.RevealingAction();
+        public override async Task<TimeSpan> OnUse(Mobile from)
+        {
+            var instrument = BaseInstrument.PickInstrument(from);
 
-			BaseInstrument.PickInstrument( m, OnPickedInstrument );
+            if (instrument == null)
+            {
+                from.SendFailureMessage("You don't have an instrument to play!");
+                return Delay;
+            }
+            
+            var target = new AsyncTarget<Mobile>(from,
+                new TargetOptions {Range = BaseInstrument.GetBardRange(from, SkillName.Provocation)});
+            from.Target = target;
+            from.RevealingAction();
 
-			return TimeSpan.FromSeconds( 1.0 ); // Cannot use another skill for 1 second
-		}
+            from.SendSuccessMessage(1049525); // Whom do you wish to calm?
 
-		public static void OnPickedInstrument( Mobile from, BaseInstrument instrument )
-		{
-			from.RevealingAction();
-			from.SendLocalizedMessage( 1049525 ); // Whom do you wish to calm?
-			from.Target = new InternalTarget( from, instrument );
-			from.NextSkillTime = Core.TickCount + 6000000;
-		}
+            var (targeted, _) = await target;
+            
+            if (targeted == null)
+            {
+                from.SendFailureMessage(1049528); // You cannot calm that!
+                return Delay;
+            }
+            
+            if (!instrument.IsChildOf(from.Backpack))
+            {
+                from.SendFailureMessage(1062488); // The instrument you are trying to play is no longer in your backpack!
+                return Delay;
+            }
 
-		private class InternalTarget : Target
-		{
-			private BaseInstrument m_Instrument;
-			private bool m_SetSkillTime = true;
+            if (targeted == from)
+            {
+                instrument.PlayMusicEffect(from, 0x5A);
 
-			public InternalTarget( Mobile from, BaseInstrument instrument ) :  base( BaseInstrument.GetBardRange( from, SkillName.Peacemaking ), false, TargetFlags.None )
-			{
-				m_Instrument = instrument;
-			}
+                // Standard mode : reset combatants for everyone in the area
+                var map = from.Map;
 
-			protected override void OnTargetFinish( Mobile from )
-			{
-				if ( m_SetSkillTime )
-					from.NextSkillTime = Core.TickCount;
-			}
+                if (map != null)
+                {
+                    var range = BaseInstrument.GetBardRange(from, SkillName.Peacemaking);
 
-			protected override void OnTarget( Mobile from, object targeted )
-			{
-				from.RevealingAction();
+                    var calmed = false;
 
-				if ( !(targeted is Mobile) )
-				{
-					from.SendLocalizedMessage( 1049528 ); // You cannot calm that!
-				}
-				else if ( !m_Instrument.IsChildOf( from.Backpack ) )
-				{
-					from.SendLocalizedMessage( 1062488 ); // The instrument you are trying to play is no longer in your backpack!
-				}
-				else
-				{
-					m_SetSkillTime = false;
-					from.NextSkillTime = Core.TickCount + (int)TimeSpan.FromSeconds( 10.0 ).TotalMilliseconds;
+                    var eable = from.GetMobilesInRange(range);
 
-					if ( targeted == from )
-					{
-						// Standard mode : reset combatants for everyone in the area
+                    foreach (var m in eable)
+                    {
+                        if (m is BaseCreature {Uncalmable: true} ||
+                            m is BaseCreature {AreaPeaceImmune: true} || m == from ||
+                            !from.CanBeHarmful(m, false))
+                            continue;
 
-						if ( !BaseInstrument.CheckMusicianship( from ) )
-						{
-							from.SendLocalizedMessage( 500612 ); // You play poorly, and there is no effect.
-							m_Instrument.PlayInstrumentBadly( from );
-							m_Instrument.ConsumeUse( from );
-						}
-						else if ( !from.CheckSkill( SkillName.Peacemaking, 0.0, 120.0 ) )
-						{
-							from.SendLocalizedMessage( 500613 ); // You attempt to calm everyone, but fail.
-							m_Instrument.PlayInstrumentBadly( from );
-							m_Instrument.ConsumeUse( from );
-						}
-						else
-						{
-							from.NextSkillTime = Core.TickCount + (int)TimeSpan.FromSeconds( 5.0 ).TotalMilliseconds;
-							m_Instrument.PlayInstrumentWell( from );
-							m_Instrument.ConsumeUse( from );
+                        var difficulty  = m is BaseCreature creature ? BaseInstrument.GetDifficulty(creature) : m.Int;
+                        
+                        difficulty /= from.GetClassModifier(Skill);
 
-							Map map = from.Map;
+                        var points = calmed ? 0 : difficulty * 10;
 
-							if ( map != null )
-							{
-								int range = BaseInstrument.GetBardRange( from, SkillName.Peacemaking );
+                        if (from.ShilCheckSkill(SkillName.Peacemaking, (int) difficulty, (int) points))
+                        {
+                            if (from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (points / 3)))
+                            {
+                                calmed = true;
 
-								bool calmed = false;
+                                m.SendSuccessMessage(500616); // You hear lovely music, and forget to continue battling!
+                                m.Combatant = null;
+                                m.Warmode = false;
 
-								foreach ( Mobile m in from.GetMobilesInRange( range ) )
-								{
-									if (m is BaseCreature && ((BaseCreature)m).Uncalmable || m is BaseCreature && ((BaseCreature)m).AreaPeaceImmune || m == from || !from.CanBeHarmful ( m, false ))
-										continue;
+                                if (m is BaseCreature {BardPacified: false} baseCreature)
+                                    baseCreature.Pacify(from, DateTime.Now + TimeSpan.FromSeconds(5.0));
+                            }
+                        }
+                    }
+                    
+                    eable.Free();
 
-									calmed = true;
+                    if (!calmed)
+                    {
+                        from.SendFailureMessage(500612); // You play poorly, and there is no effect.
+                        instrument.PlayInstrumentBadly(from);
+                        instrument.ConsumeUse(from);
+                    }
+                    else
+                    {
+                        from.SendSuccessMessage(500615); // You play your hypnotic music, stopping the battle.
+                        instrument.PlayInstrumentWell(from);
+                        instrument.ConsumeUse(from);
+                    }
+                }
+            }
+            else
+            {
+                // Target mode : pacify a single target for a longer duration
+                if (!from.CanBeHarmful(targeted, false))
+                {
+                    from.SendFailureMessage(1049528);
+                }
+                else if (targeted is BaseCreature { Uncalmable: true })
+                {
+                    from.SendFailureMessage(1049526); // You have no chance of calming that creature.
+                }
+                else if (targeted is BaseCreature { BardPacified: true })
+                {
+                    from.SendFailureMessage(1049527); // That creature is already being calmed.
+                }
+                else
+                {
+                    var difficulty = targeted is BaseCreature creature ? BaseInstrument.GetDifficulty(creature) : targeted.Int;
+                    var points = difficulty * 10;
+                    
+                    if (from.ShilCheckSkill(SkillName.Peacemaking, (int) difficulty, (int) points))
+                    {
+                        if (from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (points / 3)))
+                        {
+                            instrument.PlayInstrumentWell(from);
+                            instrument.ConsumeUse(from);
+                            
+                            if (targeted is BaseCreature bc)
+                            {
+                                from.SendSuccessMessage(1049532); // You play hypnotic music, calming your target.
 
-									m.SendLocalizedMessage( 500616 ); // You hear lovely music, and forget to continue battling!
-									m.Combatant = null;
-									m.Warmode = false;
+                                targeted.Combatant = null;
+                                targeted.Warmode = false;
 
-									if ( m is BaseCreature && !((BaseCreature)m).BardPacified )
-										((BaseCreature)m).Pacify( from, DateTime.Now + TimeSpan.FromSeconds( 1.0 ) );
-								}
+                                var seconds = 100 - difficulty / 1.5;
 
-								if ( !calmed )
-									from.SendLocalizedMessage( 1049648 ); // You play hypnotic music, but there is nothing in range for you to calm.
-								else
-									from.SendLocalizedMessage( 500615 ); // You play your hypnotic music, stopping the battle.
-							}
-						}
-					}
-					else
-					{
-						// Target mode : pacify a single target for a longer duration
+                                seconds = seconds switch
+                                {
+                                    > 120 => 120,
+                                    < 10 => 10,
+                                    _ => seconds
+                                };
 
-						Mobile targ = (Mobile)targeted;
+                                bc.Pacify(from, DateTime.Now + TimeSpan.FromSeconds(seconds));
+                            }
+                            else
+                            {
+                                from.SendSuccessMessage(1049532); // You play hypnotic music, calming your target.
 
-						if ( !from.CanBeHarmful( targ, false ) )
-						{
-							from.SendLocalizedMessage( 1049528 );
-							m_SetSkillTime = true;
-						}
-						else if ( targ is BaseCreature && ((BaseCreature)targ).Uncalmable )
-						{
-							from.SendLocalizedMessage( 1049526 ); // You have no chance of calming that creature.
-							m_SetSkillTime = true;
-						}
-						else if ( targ is BaseCreature && ((BaseCreature)targ).BardPacified )
-						{
-							from.SendLocalizedMessage( 1049527 ); // That creature is already being calmed.
-							m_SetSkillTime = true;
-						}
-						else if ( !BaseInstrument.CheckMusicianship( from ) )
-						{
-							from.SendLocalizedMessage( 500612 ); // You play poorly, and there is no effect.
-							from.NextSkillTime = Core.TickCount + (int)TimeSpan.FromSeconds( 5.0 ).TotalMilliseconds;
-							m_Instrument.PlayInstrumentBadly( from );
-							m_Instrument.ConsumeUse( from );
-						}
-						else
-						{
-							double diff = m_Instrument.GetDifficultyFor( targ ) - 10.0;
-							double music = from.Skills[SkillName.Musicianship].Value;
+                                targeted.SendSuccessMessage(500616); // You hear lovely music, and forget to continue battling!
+                                targeted.Combatant = null;
+                                targeted.Warmode = false;
+                            }
+                        }
+                        else
+                        {
+                            from.SendFailureMessage(500612); // You play poorly, and there is no effect.
+                            instrument.PlayInstrumentBadly( from );
+                            instrument.ConsumeUse(from);
+                        }
+                    }
+                    else
+                    {
+                        from.SendFailureMessage(1049531); // // You attempt to calm your target, but fail.
+                        instrument.PlayInstrumentBadly(from);
+                        instrument.ConsumeUse(from);
+                    }
+                }
+            }
 
-							if ( music > 100.0 )
-								diff -= (music - 100.0) * 0.5;
-
-							if ( !from.CheckTargetSkill( SkillName.Peacemaking, targ, diff - 25.0, diff + 25.0 ) )
-							{
-								from.SendLocalizedMessage( 1049531 ); // You attempt to calm your target, but fail.
-								m_Instrument.PlayInstrumentBadly( from );
-								m_Instrument.ConsumeUse( from );
-							}
-							else
-							{
-								m_Instrument.PlayInstrumentWell( from );
-								m_Instrument.ConsumeUse( from );
-
-								from.NextSkillTime = Core.TickCount + (int)TimeSpan.FromSeconds( 5.0 ).TotalMilliseconds;
-								if ( targ is BaseCreature )
-								{
-									BaseCreature bc = (BaseCreature)targ;
-
-									from.SendLocalizedMessage( 1049532 ); // You play hypnotic music, calming your target.
-
-									targ.Combatant = null;
-									targ.Warmode = false;
-
-									double seconds = 100 - diff / 1.5;
-
-									if ( seconds > 120 )
-										seconds = 120;
-									else if ( seconds < 10 )
-										seconds = 10;
-
-									bc.Pacify( from, DateTime.Now + TimeSpan.FromSeconds( seconds ) );
-								}
-								else
-								{
-									from.SendLocalizedMessage( 1049532 ); // You play hypnotic music, calming your target.
-
-									targ.SendLocalizedMessage( 500616 ); // You hear lovely music, and forget to continue battling!
-									targ.Combatant = null;
-									targ.Warmode = false;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+            return Delay;
+        }
+    }
 }

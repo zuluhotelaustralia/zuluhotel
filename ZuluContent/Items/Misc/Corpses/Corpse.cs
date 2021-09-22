@@ -439,7 +439,6 @@ namespace Server.Items
             public InternalTimer(Corpse c, TimeSpan delay) : base(delay)
             {
                 m_Corpse = c;
-                Priority = TimerPriority.FiveSeconds;
             }
 
             protected override void OnTick()

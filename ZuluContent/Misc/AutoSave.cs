@@ -42,7 +42,6 @@ namespace Server.Misc
 
         public AutoSave() : base(m_Delay - m_Warning, m_Delay)
         {
-            Priority = TimerPriority.OneMinute;
         }
 
         protected override void OnTick()

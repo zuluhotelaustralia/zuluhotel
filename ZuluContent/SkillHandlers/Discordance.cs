@@ -15,23 +15,22 @@ namespace Server.SkillHandlers
         private static readonly Dictionary<Serial, DiscordanceInfo> ActiveDiscords = new();
 
         public override SkillName Skill { get; } = SkillName.Discordance;
-        
-        private static readonly TargetOptions TargetOptions = new()
-        {
-            Range = 12,
-        };
 
         public override async Task<TimeSpan> OnUse(Mobile from)
         {
             from.RevealingAction();
 
-            var instrument = await BaseInstrument.PickInstrumentAsync(from);
+            var instrument = BaseInstrument.PickInstrument(from);
 
             if (instrument == null)
+            {
+                from.SendFailureMessage("You don't have an instrument to play!");
                 return Delay;
+            }
 
-            from.SendLocalizedMessage(1049541); // Choose the target for your song of discordance.
-            var target = new AsyncTarget<BaseCreature>(from, TargetOptions);
+            from.SendSuccessMessage(1049541); // Choose the target for your song of discordance.
+            var target = new AsyncTarget<BaseCreature>(from,
+                new TargetOptions {Range = BaseInstrument.GetBardRange(from, SkillName.Provocation)});
             from.Target = target;
 
             var (creature, _) = await target;
@@ -55,15 +54,11 @@ namespace Server.SkillHandlers
                 return Delay;
             }
 
-            var diff = instrument.GetDifficultyFor(creature) - 10.0;
-            var music = from.Skills[SkillName.Musicianship].Value;
+            var difficulty = BaseInstrument.GetDifficulty(creature);
 
-            if (music > 100.0)
-                diff -= (music - 100.0) * 0.5;
+            difficulty /= from.GetClassModifier(Skill);
 
-            diff /= from.GetClassModifier(Skill);
-
-            if (!BaseInstrument.CheckMusicianship(from))
+            if (!from.ShilCheckSkill(SkillName.Musicianship, (int) difficulty, (int) (difficulty * 10)))
             {
                 from.SendFailureMessage(500612); // You play poorly, and there is no effect.
                 instrument.PlayInstrumentBadly(from);
@@ -71,7 +66,7 @@ namespace Server.SkillHandlers
                 return Delay;
             }
 
-            if (!from.ShilCheckSkill(SkillName.Discordance, (int)diff, (int)(diff * 10)))
+            if (!from.ShilCheckSkill(SkillName.Discordance, (int) difficulty, (int) (difficulty * 10)))
             {
                 from.SendFailureMessage(1049540); // You fail to disrupt your target
                 instrument.PlayInstrumentBadly(from);

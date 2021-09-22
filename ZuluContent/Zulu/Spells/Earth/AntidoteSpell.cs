@@ -44,10 +44,12 @@ namespace Scripts.Zulu.Spells.Earth
                     
                 var duration = Caster.Skills[SkillName.Magery].Value * 2;
                 Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
+
+                power = Math.Min(power, 5);
                     
                 target.TryAddBuff(new PoisonImmunity
                 {
-                    Value = (int) power,
+                    Value = (PoisonLevel) power,
                     Duration = TimeSpan.FromSeconds(duration),
                 });
             }

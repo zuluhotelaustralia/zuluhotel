@@ -417,8 +417,6 @@ namespace Server.Items
 
                 m_Location = location;
                 m_Map = map;
-
-                Priority = TimerPriority.TenMS;
             }
 
             protected override void OnTick()
@@ -509,8 +507,6 @@ namespace Server.Items
                 {
                     m_From = from;
                     m_SoundID = soundID;
-
-                    Priority = TimerPriority.TenMS;
                 }
 
                 protected override void OnTick()

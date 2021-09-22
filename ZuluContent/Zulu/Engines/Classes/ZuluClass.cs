@@ -379,6 +379,7 @@ namespace Scripts.Zulu.Engines.Classes
                 var bonus = cls.Type switch
                 {
                     ZuluClassType.Warrior when source is Bandage => cls.Bonus,
+                    ZuluClassType.Ranger when source is Bandage => cls.Bonus,
                     ZuluClassType.Mage when source is Spell => cls.Bonus,
                     _ => 1.0
                 };

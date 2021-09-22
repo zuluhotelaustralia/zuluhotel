@@ -24,14 +24,10 @@ namespace Scripts.Zulu.Spells.Earth
             
             SpellHelper.Turn(Caster, target);
             
-            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
-            
-            target.FixedParticles(0x37CC, 30, 30, 5028, EffectLayer.LeftFoot);
+            target.FixedParticles(0x3A92, 30, 30, 5028, EffectLayer.LeftFoot);
             target.PlaySound(0x0107);
             target.PlaySound(0x0108);
-            
-            SpellHelper.Damage(damage, target, Caster, this);
-            
+
             var magery = Caster.Skills[SkillName.Magery].Value / 10;
             
             // TODO: Check for cursed to amplify magery?
@@ -44,7 +40,10 @@ namespace Scripts.Zulu.Spells.Earth
             var map = target.Map;
 
             if (map.LineOfSight(Caster, newTargetLocation) && map.CanSpawnMobile(newTargetLocation))
-                target.Location = newTargetLocation;
+                target.MoveToWorld(newTargetLocation, map);
+
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
+            SpellHelper.Damage(damage, target, Caster, this);
         }
     }
 }

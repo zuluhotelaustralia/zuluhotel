@@ -133,7 +133,7 @@ namespace Server.Multis
 
 					int landStartZ = 0, landAvgZ = 0, landTopZ = 0;
 
-					map.GetAverageZ( tileX, tileY, ref landStartZ, ref landAvgZ, ref landTopZ );
+					map.GetAverageZ( tileX, tileY, out landStartZ, out landAvgZ, out landTopZ );
 
 					bool hasFoundation = false;
 
