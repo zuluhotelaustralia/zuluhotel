@@ -14,7 +14,7 @@ namespace Server.Gumps
         {
             AddPage(0);
             
-            AddBackground(0, 0, 460, 350, 2620);
+            AddBackground(0, 0, 460, 430, 2620);
         }
 
         public ShowClasseGump(PlayerMobile from) : base(250, 200)
@@ -93,7 +93,7 @@ namespace Server.Gumps
             }
 
             // Okay
-            AddButton(200, 300, 249, 248, 0, GumpButtonType.Reply, 1);
+            AddButton(200, 380, 249, 248, 0, GumpButtonType.Reply, 1);
         }
     }
 }

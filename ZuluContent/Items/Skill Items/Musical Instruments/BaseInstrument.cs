@@ -230,7 +230,7 @@ namespace Server.Items
             var difficulty = creature.ProvokeSkillOverride;
             
             if (difficulty <= 0)
-                difficulty = 100;
+                difficulty = creature.GetCreatureScore();
 
             return difficulty;
         }

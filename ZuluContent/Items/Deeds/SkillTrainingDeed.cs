@@ -1,9 +1,3 @@
-using Server.Network;
-using Server.Targeting;
-using Server.Gumps;
-using System.Collections.Generic;
-using Server.Mobiles;
-
 namespace Server.Items
 {
     [Serializable(0, false)]
@@ -21,8 +15,8 @@ namespace Server.Items
         public SkillTrainingDeed(Mobile player, int credits) : base(0x14EF)
         {
             Hue = 0x2F;
-            Player = player;
-            Credits = credits;
+            _player = player;
+            _credits = credits;
             Weight = 1.0;
         }
 
