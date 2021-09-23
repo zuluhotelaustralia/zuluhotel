@@ -3,8 +3,7 @@ package Giantkin
 Ettin: {
 	Name:                 "an ettin"
 	CorpseNameOverride:   "corpse of an ettin"
-
-	Str:                  140
+  Str:                  140
 	Int:                  10
 	Dex:                  130
 	AlwaysMurderer:       true

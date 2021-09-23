@@ -3,8 +3,7 @@ package Misc
 SkeletalSteed: {
 	Name:                 "a skeletal steed"
 	CorpseNameOverride:   "corpse of a skeletal steed"
-
-	Str:                  500
+  Str:                  500
 	Int:                  60
 	Dex:                  55
 	AiType:               "AI_Animal"

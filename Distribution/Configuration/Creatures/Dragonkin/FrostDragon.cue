@@ -3,8 +3,7 @@ package Dragonkin
 FrostDragon: {
 	Name:                 "a Frost Dragon"
 	CorpseNameOverride:   "corpse of a Frost Dragon"
-
-	Str:                  800
+  Str:                  800
 	Int:                  400
 	Dex:                  60
 	AlwaysMurderer:       true

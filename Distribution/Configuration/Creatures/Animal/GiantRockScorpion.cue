@@ -3,8 +3,7 @@ package Animal
 GiantRockScorpion: {
 	Name:                 "a giant rock scorpion"
 	CorpseNameOverride:   "corpse of a giant rock scorpion"
-
-	Str:                  230
+  Str:                  230
 	Int:                  40
 	Dex:                  80
 	AlwaysMurderer:       true
@@ -12,7 +11,6 @@ GiantRockScorpion: {
 	Body:                 48
 	CreatureType:         "Animal"
 	VirtualArmor:         35
-	HitPoison:            "Greater"
 	HitsMax:              230
 	Hue:                  1118
 	ManaMaxSeed:          0
@@ -33,5 +31,6 @@ GiantRockScorpion: {
 			Max: 35
 		}
 		HitSound: 399
+		HitPoison: "Greater"
 	}
 }

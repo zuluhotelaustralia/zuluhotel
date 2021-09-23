@@ -3,8 +3,7 @@ package Beholder
 Gazer: {
 	Name:                 "a gazer"
 	CorpseNameOverride:   "corpse of a gazer"
-
-	Str:                  150
+  Str:                  150
 	Int:                  205
 	Dex:                  90
 	AiType:               "AI_Mage"

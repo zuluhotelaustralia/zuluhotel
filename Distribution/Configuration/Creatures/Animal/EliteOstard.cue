@@ -3,8 +3,7 @@ package Animal
 EliteOstard: {
 	Name:                 "Elite Ostard"
 	CorpseNameOverride:   "corpse of Elite Ostard"
-
-	Str:                  600
+  Str:                  600
 	Int:                  650
 	Dex:                  300
 	PassiveSpeed:         0.2

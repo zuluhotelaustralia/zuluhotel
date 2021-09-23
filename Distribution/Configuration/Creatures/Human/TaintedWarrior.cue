@@ -41,26 +41,26 @@ TaintedWarrior: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType: "SHalberd"
+		ItemType: "Halberd"
 		Name:     "a stygian-bladed halberd"
 		Hue:      1283
 	}, {
-		ItemType:    "SBoneHelm"
+		ItemType:    "BoneHelm"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneGloves"
+		ItemType:    "BoneGloves"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneLegs"
+		ItemType:    "BoneLegs"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneChest"
+		ItemType:    "BoneChest"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1

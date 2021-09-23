@@ -52,7 +52,7 @@ Balron: {
 		}
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

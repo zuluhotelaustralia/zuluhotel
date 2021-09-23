@@ -3,8 +3,7 @@ package Orc
 OrcDragonDefender: {
 	Name:                 "<random> the Orc Dragon Defender"
 	CorpseNameOverride:   "corpse of <random> the Orc Dragon Defender"
-
-	Str:                  305
+  Str:                  305
 	Int:                  85
 	Dex:                  230
 	AlwaysMurderer:       true

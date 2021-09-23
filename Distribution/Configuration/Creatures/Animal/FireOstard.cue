@@ -3,8 +3,7 @@ package Animal
 FireOstard: {
 	Name:                 "a fire ostard"
 	CorpseNameOverride:   "corpse of a fire ostard"
-
-	Str:                  160
+  Str:                  160
 	Int:                  110
 	Dex:                  400
 	PassiveSpeed:         0.2

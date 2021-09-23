@@ -43,9 +43,30 @@ SlaveGuard: {
 		HitSound:  315
 		MissSound: 563
 	}
-	Equipment: [{
-		ItemType: "SWarHammer"
-		Name:     "Enslavers Weapon"
-		Hue:      1162
-	}]
+	Equipment: [
+		{
+			ItemType: "WarHammer"
+			Hue:      1162
+		},
+		{
+			ItemType: "ChainChest"
+			Lootable: true
+		},
+		{
+			ItemType: "LeatherArms"
+			Lootable: true
+		},
+		{
+			ItemType: "LeatherLegs"
+			Lootable: true
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      1153
+		},
+		{
+			ItemType: "HeaterShield"
+			Lootable: true
+		},
+	]
 }

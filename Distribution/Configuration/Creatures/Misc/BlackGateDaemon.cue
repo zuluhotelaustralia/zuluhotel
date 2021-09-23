@@ -3,8 +3,7 @@ package Misc
 BlackGateDaemon: {
 	Name:                 "a black gate daemon"
 	CorpseNameOverride:   "corpse of a black gate daemon"
-
-	Str:                  1500
+  Str:                  1500
 	Int:                  290
 	Dex:                  165
 	AiType:               "AI_Mage"

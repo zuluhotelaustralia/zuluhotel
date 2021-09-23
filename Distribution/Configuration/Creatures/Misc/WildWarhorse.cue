@@ -3,8 +3,7 @@ package Misc
 WildWarhorse: {
 	Name:                 "a wild warhorse"
 	CorpseNameOverride:   "corpse of a wild warhorse"
-
-	Str:                  500
+  Str:                  500
 	Int:                  500
 	Dex:                  500
 	BaseSoundID:          168

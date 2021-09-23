@@ -3,8 +3,7 @@ package Ophidian
 OphidianKing: {
 	Name:                 "The Ophidian King"
 	CorpseNameOverride:   "corpse of The Ophidian King"
-
-	Str:                  2050
+  Str:                  2050
 	Dex:                  800
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true

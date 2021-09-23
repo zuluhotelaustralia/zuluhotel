@@ -3,7 +3,6 @@ package Human
 Necromancer: {
 	Name:                 "<random> the Necromancer"
 	CorpseNameOverride:   "corpse of <random> the Necromancer"
-
 	Str:                  130
 	Int:                  300
 	Dex:                  90
@@ -40,11 +39,21 @@ Necromancer: {
 		}
 		HitSound: 330
 	}
-	Equipment: [{
-		ItemType: "SLongHair"
-		Hue:      1136
-	}, {
-		ItemType: "SBlackStaff"
-		Name:     "Necromancer Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      1136
+		},
+		{
+			ItemType: "BlackStaff"
+		},
+		{
+			ItemType: "Robe"
+			Lootable: true
+			Hue:      0x044e
+		},
+		{
+			ItemType: "Spellbook"
+		},
+	]
 }

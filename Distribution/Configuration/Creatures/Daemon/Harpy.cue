@@ -3,8 +3,7 @@ package Daemon
 Harpy: {
 	Name:                 "a harpy"
 	CorpseNameOverride:   "corpse of a harpy"
-
-	Str:                  85
+  Str:                  85
 	Int:                  75
 	Dex:                  70
 	AlwaysMurderer:       true

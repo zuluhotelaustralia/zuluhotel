@@ -3,8 +3,7 @@ package Dragonkin
 CelestialDragon: {
 	Name:                 "a Celestial Dragon"
 	CorpseNameOverride:   "corpse of a Celestial Dragon"
-
-	Str:                  850
+  Str:                  850
 	Int:                  400
 	Dex:                  150
 	PassiveSpeed:         0.2

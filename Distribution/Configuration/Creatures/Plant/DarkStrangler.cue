@@ -14,7 +14,6 @@ DarkStrangler: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitPoison:          "Regular"
 	HitsMax:            400
 	Hue:                1285
 	LootItemChance:     50
@@ -38,13 +37,14 @@ DarkStrangler: {
 		}
 		HitSound:  458
 		MissSound: 457
+		HitPoison: "Regular"
 	}
 	Equipment: [{
-		ItemType: "SBow"
+		ItemType: "Bow"
 		Name:     "Dark Strangler Weapon"
 		Hue:      1171
 	}, {
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR30"
 		ArmorRating: 30
 	}]

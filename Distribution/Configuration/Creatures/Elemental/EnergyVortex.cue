@@ -13,7 +13,6 @@ EnergyVortex: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       30
 	FightMode:          "Aggressor"
-	HitPoison:          "Regular"
 	HitsMax:            350
 	ManaMaxSeed:        125
 	MinTameSkill:       130
@@ -32,5 +31,6 @@ EnergyVortex: {
 			Max: 20
 		}
 		HitSound: 529
+		HitPoison: "Regular"
 	}
 }

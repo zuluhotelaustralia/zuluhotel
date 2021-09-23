@@ -42,12 +42,12 @@ ShadowLord: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType:    "SBoneGloves"
+		ItemType:    "BoneGloves"
 		Name:        "Blue Bone Gloves AR10"
 		Hue:         1170
 		ArmorRating: 10
 	}, {
-		ItemType:    "SBoneHelm"
+		ItemType:    "BoneHelm"
 		Name:        "Red Bone Helm AR45"
 		Hue:         1172
 		ArmorRating: 45

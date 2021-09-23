@@ -3,8 +3,7 @@ package Dragonkin
 Defender: {
 	Name:                 "<random> the Defender"
 	CorpseNameOverride:   "corpse of <random> the Defender"
-
-	Str:                  275
+  Str:                  275
 	Int:                  45
 	Dex:                  180
 	AlwaysMurderer:       true

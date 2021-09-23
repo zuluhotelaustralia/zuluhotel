@@ -3,8 +3,7 @@ package Daemon
 FallenAngel: {
 	Name:                 "a fallen angel"
 	CorpseNameOverride:   "corpse of a fallen angel"
-
-	Str:                  600
+  Str:                  600
 	Int:                  285
 	Dex:                  285
 	AlwaysMurderer:       true

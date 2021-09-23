@@ -3,12 +3,10 @@ package Human
 Murderer: {
 	Name:                 "a murderer"
 	CorpseNameOverride:   "corpse of a murderer"
-
 	Str:                  650
 	Int:                  105
 	Dex:                  200
 	CreatureType:         "Human"
-	HitPoison:            "Regular"
 	HitsMax:              160
 	LootItemChance:       1
 	LootTable:            "47"
@@ -28,12 +26,24 @@ Murderer: {
 		}
 		HitSound:  571
 		MissSound: 569
+		HitPoison: "Regular"
 	}
-	Equipment: [{
-		ItemType: "SShortHair"
-		Hue:      1
-	}, {
-		ItemType: "SDagger"
-		Name:     "Murderer's Dagger"
-	}]
+	Equipment: [
+		{
+			ItemType: "ShortHair"
+			Hue:      1
+		},
+		{
+			ItemType: "Dagger"
+			Name:     "Murderer's Dagger"
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      0x1
+		},
+		{
+			ItemType: "LongPants"
+			Hue:      0x1
+		},
+	]
 }

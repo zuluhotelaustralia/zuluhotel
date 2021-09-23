@@ -3,8 +3,7 @@ package Animal
 Semonster: {
 	Name:                 "a sea monster"
 	CorpseNameOverride:   "corpse of a sea monster"
-
-	Str:                  250
+  Str:                  250
 	Int:                  35
 	Dex:                  160
 	BaseSoundID:          444

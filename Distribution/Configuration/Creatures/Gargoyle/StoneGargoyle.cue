@@ -3,8 +3,7 @@ package Gargoyle
 StoneGargoyle: {
 	Name:                 "a stone gargoyle"
 	CorpseNameOverride:   "corpse of a stone gargoyle"
-
-	Str:                  495
+  Str:                  495
 	Int:                  90
 	Dex:                  80
 	AlwaysMurderer:       true

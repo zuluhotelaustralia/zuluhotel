@@ -3,8 +3,7 @@ package Ophidian
 OphidianAvenger: {
 	Name:                 "an Ophidian Avenger"
 	CorpseNameOverride:   "corpse of an Ophidian Avenger"
-
-	Str:                  350
+  Str:                  350
 	Int:                  35
 	Dex:                  210
 	ActiveSpeed:          0.15
@@ -17,7 +16,6 @@ OphidianAvenger: {
 	FightMode:            "Aggressor"
 	HideType:             "Serpent"
 	Hides:                5
-	HitPoison:            "Regular"
 	HitsMax:              350
 	LootItemChance:       20
 	LootItemLevel:        2
@@ -43,5 +41,6 @@ OphidianAvenger: {
 			Max: 43
 		}
 		MissSound: 360
+		HitPoison: "Regular"
 	}
 }

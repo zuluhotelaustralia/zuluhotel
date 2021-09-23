@@ -53,10 +53,10 @@ Juggernaught: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType: "SSpear"
+		ItemType: "Spear"
 		Name:     "Juggernaught Weapon"
 	}, {
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR40"
 		ArmorRating: 40
 	}]

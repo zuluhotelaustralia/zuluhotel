@@ -3,8 +3,7 @@ package Animal
 Raptor: {
 	Name:                 "a Raptor"
 	CorpseNameOverride:   "corpse of a Raptor"
-
-	Str:                  110
+  Str:                  110
 	Int:                  90
 	Dex:                  160
 	BaseSoundID:          624

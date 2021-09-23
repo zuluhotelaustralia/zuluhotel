@@ -45,12 +45,12 @@ GoblinTribeMaster: {
 		MissSound: 563
 	}
 	Equipment: [{
-		ItemType:    "SOrcHelm"
+		ItemType:    "OrcHelm"
 		Name:        "Goblin Helmet"
 		Hue:         1418
 		ArmorRating: 18
 	}, {
-		ItemType: "SWarHammer"
+		ItemType: "WarHammer"
 		Name:     "Goblin Tribe Master Weapon"
 	}]
 }

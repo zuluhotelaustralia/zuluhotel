@@ -30,9 +30,26 @@ BrigandKing: {
 			Max: 31
 		}
 	}
-	Equipment: [{
-		ItemType: "SCutlass"
-		Name:     "Brigand King Weapon"
-		Hue:      1172
-	}]
+	Equipment: [
+		{
+			ItemType: "Cutlass"
+			Hue:      1172
+		},
+		{
+			ItemType: "LongPants"
+			Hue:      1172
+		},
+		{
+			ItemType: "FancyShirt"
+			Hue:      1172
+		},
+		{
+			ItemType: "SkullCap"
+			Hue:      1172
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      1172
+		},
+	]
 }

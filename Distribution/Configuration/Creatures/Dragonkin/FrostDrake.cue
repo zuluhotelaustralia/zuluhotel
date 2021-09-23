@@ -3,8 +3,7 @@ package Dragonkin
 FrostDrake: {
 	Name:                 "a frost drake"
 	CorpseNameOverride:   "corpse of a frost drake"
-
-	Str:                  350
+  Str:                  350
 	Int:                  385
 	Dex:                  290
 	AiType:               "AI_Mage"

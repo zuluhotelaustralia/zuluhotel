@@ -3,8 +3,7 @@ package Animal
 GuardDog: {
 	Name:                 "a guard dog"
 	CorpseNameOverride:   "corpse of a guard dog"
-
-	Str:                  50
+  Str:                  50
 	Int:                  35
 	Dex:                  80
 	AiType:               "AI_Animal"

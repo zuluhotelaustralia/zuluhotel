@@ -3,7 +3,6 @@ package Human
 Brigand: {
 	Name:                 "a brigand"
 	CorpseNameOverride:   "corpse of a brigand"
-
 	Str:                  130
 	Int:                  105
 	Dex:                  300
@@ -26,8 +25,34 @@ Brigand: {
 			Max: 50
 		}
 	}
-	Equipment: [{
-		ItemType: "SCutlass"
-		Name:     "Brigand1 Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "Cutlass"
+			Lootable: true
+		},
+		{
+			ItemType: "LongPants"
+			Hue:      71
+			Lootable: true
+		},
+		{
+			ItemType: "FancyShirt"
+			Hue:      443
+			Lootable: true
+		},
+		{
+			ItemType: "SkullCap"
+			Hue:      0x215
+			Lootable: true
+		},
+		{
+			ItemType: "LeatherGloves"
+			Lootable: true
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      443
+			Lootable: true
+		},
+	]
 }

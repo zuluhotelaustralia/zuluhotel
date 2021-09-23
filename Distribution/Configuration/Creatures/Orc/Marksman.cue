@@ -3,8 +3,7 @@ package Orc
 Marksman: {
 	Name:                 "<random> the marksman"
 	CorpseNameOverride:   "corpse of <random> the marksman"
-
-	Str:                  135
+  Str:                  135
 	Int:                  35
 	Dex:                  190
 	AiType:               "AI_Archer"
@@ -32,5 +31,11 @@ Marksman: {
 			Max: 12
 		}
 		HitSound: 231
-	}
+	},
+	Equipment: [
+		{
+			ItemType: "Bow"
+			Lootable: true
+		},
+	]
 }

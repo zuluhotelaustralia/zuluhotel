@@ -3,8 +3,7 @@ package Orc
 SnowOrc: {
 	Name:                 "<random> the snow orc"
 	CorpseNameOverride:   "corpse of <random> the snow orc"
-
-	Str:                  150
+  Str:                  150
 	Int:                  35
 	Dex:                  135
 	AlwaysMurderer:       true

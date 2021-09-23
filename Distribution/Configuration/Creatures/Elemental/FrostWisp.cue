@@ -3,8 +3,7 @@ package Elemental
 FrostWisp: {
 	Name:                 "a frost wisp"
 	CorpseNameOverride:   "corpse of a frost wisp"
-
-	Str:                  900
+  Str:                  900
 	Int:                  1600
 	Dex:                  575
 	AiType:               "AI_Mage"

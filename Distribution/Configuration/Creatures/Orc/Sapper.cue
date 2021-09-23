@@ -33,7 +33,7 @@ Sapper: {
 		HitSound: 364
 	}
 	Equipment: [{
-		ItemType: "SWarHammer"
+		ItemType: "WarHammer"
 		Name:     "Bomber weapon"
 	}]
 }

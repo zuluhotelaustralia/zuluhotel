@@ -3,8 +3,7 @@ package Animated
 HauntedBlade: {
 	Name:                 "a haunted blade"
 	CorpseNameOverride:   "corpse of a haunted blade"
-
-	Str:                  180
+  Str:                  180
 	Int:                  35
 	Dex:                  250
 	AlwaysMurderer:       true

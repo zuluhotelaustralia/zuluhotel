@@ -3,8 +3,7 @@ package Animal
 GiantFlamingSpider: {
 	Name:                 "a giant flaming spider"
 	CorpseNameOverride:   "corpse of a giant flaming spider"
-
-	Str:                  250
+  Str:                  250
 	Int:                  90
 	Dex:                  80
 	PassiveSpeed:         0.2
@@ -14,7 +13,6 @@ GiantFlamingSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	FightMode:            "Aggressor"
-	HitPoison:            "Regular"
 	HitsMax:              250
 	Hue:                  232
 	ManaMaxSeed:          40
@@ -39,5 +37,6 @@ GiantFlamingSpider: {
 		HitSound:  389
 		HasBreath: true
 		HasWebs:   true
+		HitPoison: "Regular"
 	}
 }

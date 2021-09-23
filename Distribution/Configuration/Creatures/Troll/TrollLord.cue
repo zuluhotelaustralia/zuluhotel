@@ -3,8 +3,7 @@ package Troll
 TrollLord: {
 	Name:                 "a troll lord"
 	CorpseNameOverride:   "corpse of a troll lord"
-
-	Str:                  350
+  Str:                  350
 	Int:                  65
 	Dex:                  150
 	AlwaysMurderer:       true

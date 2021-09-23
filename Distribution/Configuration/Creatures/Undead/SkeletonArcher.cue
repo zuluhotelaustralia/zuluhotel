@@ -29,5 +29,11 @@ SkeletonArcher: {
 			Min: 10
 			Max: 22
 		}
-	}
+	},
+	Equipment: [
+		{
+			ItemType: "Bow"
+			Lootable: true
+		},
+	]
 }

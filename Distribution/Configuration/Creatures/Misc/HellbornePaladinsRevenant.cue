@@ -3,8 +3,7 @@ package Misc
 HellbornePaladinsRevenant: {
 	Name:                 "The Hellborne Paladin's Revenant"
 	CorpseNameOverride:   "corpse of The Hellborne Paladin's Revenant"
-
-	Str:                  1500
+  Str:                  1500
 	Int:                  2000
 	Dex:                  200
 	PassiveSpeed:         0.2

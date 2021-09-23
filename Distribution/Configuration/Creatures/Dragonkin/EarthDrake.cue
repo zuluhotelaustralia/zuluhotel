@@ -3,8 +3,7 @@ package Dragonkin
 EarthDrake: {
 	Name:                 "an Earth Drake"
 	CorpseNameOverride:   "corpse of an Earth Drake"
-
-	Str:                  500
+  Str:                  500
 	Int:                  90
 	Dex:                  60
 	PassiveSpeed:         0.2

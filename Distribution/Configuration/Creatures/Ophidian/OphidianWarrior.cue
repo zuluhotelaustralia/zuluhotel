@@ -3,8 +3,7 @@ package Ophidian
 OphidianWarrior: {
 	Name:                 "an Ophidian Warrior"
 	CorpseNameOverride:   "corpse of an Ophidian Warrior"
-
-	Str:                  300
+  Str:                  300
 	Int:                  160
 	Dex:                  160
 	ActiveSpeed:          0.15

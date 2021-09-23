@@ -3,8 +3,7 @@ package Animal
 WarDog: {
 	Name:                 "a war dog"
 	CorpseNameOverride:   "corpse of a war dog"
-
-	Str:                  80
+  Str:                  80
 	Int:                  35
 	Dex:                  75
 	BaseSoundID:          133

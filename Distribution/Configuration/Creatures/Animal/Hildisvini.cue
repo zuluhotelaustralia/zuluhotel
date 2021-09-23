@@ -3,8 +3,7 @@ package Animal
 Hildisvini: {
 	Name:                 "Hildisvini"
 	CorpseNameOverride:   "corpse of Hildisvini"
-
-	Str:                  70
+  Str:                  70
 	Int:                  55
 	Dex:                  90
 	BaseSoundID:          196

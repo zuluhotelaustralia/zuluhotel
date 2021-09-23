@@ -3,8 +3,7 @@ package Animal
 ValleyFrenziedOstard: {
 	Name:                 "a valley frenzied ostard"
 	CorpseNameOverride:   "corpse of a valley frenzied ostard"
-
-	Str:                  210
+  Str:                  210
 	Int:                  170
 	Dex:                  320
 	BaseSoundID:          629

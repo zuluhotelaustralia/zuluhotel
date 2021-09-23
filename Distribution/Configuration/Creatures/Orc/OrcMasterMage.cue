@@ -3,8 +3,7 @@ package Orc
 OrcMasterMage: {
 	Name:                 "<random> the Orc Master Mage"
 	CorpseNameOverride:   "corpse of <random> the Orc Master Mage"
-
-	Str:                  255
+  Str:                  255
 	Int:                  255
 	Dex:                  90
 	AiType:               "AI_Mage"

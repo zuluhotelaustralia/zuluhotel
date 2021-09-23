@@ -43,6 +43,7 @@ namespace Scripts.Configuration
             
             try
             {
+                
                 var files = Directory.GetFiles(configRoot, "*.cue", new EnumerationOptions { RecurseSubdirectories = true });
                 var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
 
@@ -54,7 +55,7 @@ namespace Scripts.Configuration
 
                     if (exitCode != 0)
                         throw new ApplicationException(
-                            $"Failed to run cli command line, received non-zero exit code ${exitCode}: ${stderr}"
+                            $"Failed to run cli command line, received non-zero exit code {exitCode}: {stderr}"
                         );
                     
                     Utility.PushColor(ConsoleColor.Green);

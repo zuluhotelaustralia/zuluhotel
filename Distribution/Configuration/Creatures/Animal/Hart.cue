@@ -3,8 +3,7 @@ package Animal
 Hart: {
 	Name:                 "a hart"
 	CorpseNameOverride:   "corpse of a hart"
-
-	Str:                  70
+  Str:                  70
 	Int:                  35
 	Dex:                  90
 	AiType:               "AI_Animal"

@@ -3,7 +3,6 @@ package Human
 DarkElfNecromancer: {
 	Name:                 "a Dark-Elf Necromancer"
 	CorpseNameOverride:   "corpse of a Dark-Elf Necromancer"
-
 	Str:                  200
 	Int:                  1000
 	Dex:                  195
@@ -37,11 +36,20 @@ DarkElfNecromancer: {
 		}
 		HitSound: 315
 	}
-	Equipment: [{
-		ItemType: "SLongHair"
-		Hue:      1
-	}, {
-		ItemType: "SGnarledStaff"
-		Name:     "Evil Mage Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      1
+			Lootable: true
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Hue:      1
+			Lootable: true
+		},
+	]
 }

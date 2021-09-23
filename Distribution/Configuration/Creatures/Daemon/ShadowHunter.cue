@@ -36,29 +36,29 @@ ShadowHunter: {
 		HitSound: 252
 	}
 	Equipment: [{
-		ItemType: "SBow"
+		ItemType: "Bow"
 		Name:     "Tainted Ranger Weapon"
 		Hue:      1171
 	}, {
-		ItemType:    "SLeatherGloves"
+		ItemType:    "LeatherGloves"
 		Name:        "a pair of dark leather gloves"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType: "SBoots"
+		ItemType: "Boots"
 		Name:     "a pair of black leather boots"
 		Hue:      1
 	}, {
-		ItemType: "SLongPants"
+		ItemType: "LongPants"
 		Name:     "a pair of black leather pants"
 		Hue:      1157
 	}, {
-		ItemType:    "SLeatherChest"
+		ItemType:    "LeatherChest"
 		Name:        "a Tunic of Woven Shadows"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneArms"
+		ItemType:    "BoneArms"
 		Name:        "a Bracer of Woven Shadows"
 		Hue:         1302
 		ArmorRating: 1

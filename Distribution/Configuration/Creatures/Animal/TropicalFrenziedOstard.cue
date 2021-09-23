@@ -3,8 +3,7 @@ package Animal
 TropicalFrenziedOstard: {
 	Name:                 "a tropical frenzied ostard"
 	CorpseNameOverride:   "corpse of a tropical frenzied ostard"
-
-	Str:                  275
+  Str:                  275
 	Int:                  135
 	Dex:                  400
 	AiType:               "AI_Mage"

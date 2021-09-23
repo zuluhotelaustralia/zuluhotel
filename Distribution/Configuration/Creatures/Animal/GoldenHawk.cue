@@ -3,8 +3,7 @@ package Animal
 GoldenHawk: {
 	Name:                 "a golden hawk"
 	CorpseNameOverride:   "corpse of a golden hawk"
-
-	Str:                  90
+  Str:                  90
 	Int:                  50
 	Dex:                  90
 	AiType:               "AI_Animal"

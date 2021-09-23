@@ -3,7 +3,6 @@ package Human
 DarkElfQueen: {
 	Name:                 "a Dark-Elf Queen"
 	CorpseNameOverride:   "corpse of a Dark-Elf Queen"
-
 	Str:                  700
 	Int:                  1500
 	Dex:                  195
@@ -51,21 +50,31 @@ DarkElfQueen: {
 		MissSound: 284
 		MaxRange:  12
 	}
-	Equipment: [{
-		ItemType: "SGnarledStaff"
-		Name:     "Staff of Fire"
-		Hue:      1100
-	}, {
-		ItemType:    "SFemalePlateChest"
-		Name:        "Elven Platemail"
-		ArmorRating: 80
-	}, {
-		ItemType:    "SPlateLegs"
-		Name:        "Long pants"
-		Hue:         1172
-		ArmorRating: 70
-	}, {
-		ItemType: "SLongHair"
-		Hue:      1156
-	}]
+	Equipment: [
+		{
+			ItemType: "GnarledStaff"
+			Name:     "Staff of Fire"
+			Hue:      1100
+		},
+		{
+			ItemType:    "FemalePlateChest"
+			Name:        "Elven Platemail"
+			Hue:         1172
+			ArmorRating: 80
+		},
+		{
+			ItemType:    "PlateLegs"
+			Name:        "Elven Platemail"
+			Hue:         1172
+			ArmorRating: 70
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      1
+		},
+		{
+			ItemType: "LongHair"
+			Hue:      1156
+		},
+	]
 }

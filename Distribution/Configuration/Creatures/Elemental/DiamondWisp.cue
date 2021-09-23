@@ -3,8 +3,7 @@ package Elemental
 DiamondWisp: {
 	Name:                 "a diamond wisp"
 	CorpseNameOverride:   "corpse of a diamond wisp"
-
-	Str:                  1700
+  Str:                  1700
 	Int:                  1100
 	Dex:                  575
 	AiType:               "AI_Mage"

@@ -3,8 +3,7 @@ package Dragonkin
 Wyvern: {
 	Name:                 "a Wyvern"
 	CorpseNameOverride:   "corpse of a Wyvern"
-
-	Str:                  450
+  Str:                  450
 	Int:                  90
 	Dex:                  110
 	AlwaysMurderer:       true
@@ -15,7 +14,6 @@ Wyvern: {
 	FightMode:            "Aggressor"
 	HideType:             "Wyrm"
 	Hides:                5
-	HitPoison:            "Greater"
 	HitsMax:              450
 	Hue:                  1304
 	LootItemChance:       25
@@ -44,5 +42,6 @@ Wyvern: {
 			Max: 73
 		}
 		HitSound: 364
+		HitPoison: "Greater"
 	}
 }

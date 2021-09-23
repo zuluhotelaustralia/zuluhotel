@@ -3,8 +3,7 @@ package Daemon
 Valkerie: {
 	Name:                 "a Valkerie"
 	CorpseNameOverride:   "corpse of a Valkerie"
-
-	Str:                  180
+  Str:                  180
 	Int:                  80
 	Dex:                  180
 	BaseSoundID:          402

@@ -3,8 +3,7 @@ package Elemental
 BloodElemental: {
 	Name:                 "a blood elemental"
 	CorpseNameOverride:   "corpse of a blood elemental"
-
-	Str:                  450
+  Str:                  450
 	Int:                  400
 	Dex:                  185
 	AiType:               "AI_Mage"

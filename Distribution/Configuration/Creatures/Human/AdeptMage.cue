@@ -3,7 +3,6 @@ package Human
 AdeptMage: {
 	Name:                 "an adept mage"
 	CorpseNameOverride:   "corpse of an adept mage"
-
 	Str:                  200
 	Int:                  295
 	Dex:                  90
@@ -32,11 +31,19 @@ AdeptMage: {
 		}
 		HitSound: 315
 	}
-	Equipment: [{
-		ItemType: "SLongHair"
-		Hue:      1140
-	}, {
-		ItemType: "SGnarledStaff"
-		Name:     "Evil Mage Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      1140
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Hue:      0x04b9
+			Lootable: true
+		},
+	]
 }

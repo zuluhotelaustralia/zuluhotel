@@ -3,8 +3,7 @@ package Misc
 GiantBeetle: {
 	Name:                 "a giant beetle"
 	CorpseNameOverride:   "corpse of a giant beetle"
-
-	Str:                  300
+  Str:                  300
 	Int:                  500
 	Dex:                  100
 	AiType:               "AI_Animal"

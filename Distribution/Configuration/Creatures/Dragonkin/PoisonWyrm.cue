@@ -3,8 +3,7 @@ package Dragonkin
 PoisonWyrm: {
 	Name:                 "a Poison Wyrm"
 	CorpseNameOverride:   "corpse of a Poison Wyrm"
-
-	Str:                  1900
+  Str:                  1900
 	Int:                  400
 	Dex:                  340
 	PassiveSpeed:         0.2
@@ -16,7 +15,6 @@ PoisonWyrm: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         60
 	FightMode:            "Aggressor"
-	HitPoison:            "Deadly"
 	HitsMax:              800
 	Hue:                  264
 	LootItemChance:       90
@@ -48,5 +46,6 @@ PoisonWyrm: {
 		}
 		HitSound:  362
 		HasBreath: true
+		HitPoison: "Deadly"
 	}
 }

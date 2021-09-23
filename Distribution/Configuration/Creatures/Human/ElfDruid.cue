@@ -3,7 +3,6 @@ package Human
 ElfDruid: {
 	Name:                 "an Elf Druid"
 	CorpseNameOverride:   "corpse of an Elf Druid"
-
 	Str:                  200
 	Int:                  1000
 	Dex:                  195
@@ -43,12 +42,15 @@ ElfDruid: {
 		}
 		HitSound: 315
 	}
-	Equipment: [{
-		ItemType: "SDeathShroud"
-		Name:     "Druid's Robe"
-		Hue:      1285
-	}, {
-		ItemType: "SGnarledStaff"
-		Name:     "Evil Mage Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "DeathShroud"
+			Name:     "Druid's Robe"
+			Hue:      1285
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+	]
 }

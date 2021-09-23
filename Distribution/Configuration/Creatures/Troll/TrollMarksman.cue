@@ -3,8 +3,7 @@ package Troll
 TrollMarksman: {
 	Name:                 "a troll marksman"
 	CorpseNameOverride:   "corpse of a troll marksman"
-
-	Str:                  185
+  Str:                  185
 	Int:                  55
 	Dex:                  120
 	AiType:               "AI_Archer"
@@ -33,5 +32,11 @@ TrollMarksman: {
 			Min: 12
 			Max: 27
 		}
-	}
+	},
+	Equipment: [
+		{
+			ItemType: "Bow"
+			Lootable: true
+		},
+	]
 }

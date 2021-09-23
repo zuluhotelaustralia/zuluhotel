@@ -3,8 +3,7 @@ package Familiars
 Humuc: {
 	Name:                 "totem"
 	CorpseNameOverride:   "corpse of a totem"
-
-	Str:                  200
+  Str:                  200
 	Int:                  75
 	Dex:                  100
 	PassiveSpeed:         0.5
@@ -38,10 +37,10 @@ Humuc: {
 		HitSound: 424
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}, {
-		ItemType: "SStrongBackpack"
+		ItemType: "StrongBackpack"
 	}]
 }

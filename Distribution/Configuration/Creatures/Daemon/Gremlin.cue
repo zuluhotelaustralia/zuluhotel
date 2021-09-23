@@ -3,8 +3,7 @@ package Daemon
 Gremlin: {
 	Name:                 "a gremlin"
 	CorpseNameOverride:   "corpse of a gremlin"
-
-	Str:                  205
+  Str:                  205
 	Int:                  85
 	Dex:                  60
 	AlwaysMurderer:       true

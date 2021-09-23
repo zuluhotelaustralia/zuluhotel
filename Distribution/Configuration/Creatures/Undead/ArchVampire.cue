@@ -40,7 +40,7 @@ ArchVampire: {
 		HitSound: 363
 	}
 	Equipment: [{
-		ItemType: "SShortHair"
+		ItemType: "ShortHair"
 		Hue:      1
 	}]
 }

@@ -3,8 +3,7 @@ package Daemon
 IceFiend: {
 	Name:                 "<random> the Ice Fiend"
 	CorpseNameOverride:   "corpse of <random> the Ice Fiend"
-
-	Str:                  500
+  Str:                  500
 	Int:                  500
 	Dex:                  300
 	AiType:               "AI_Mage"

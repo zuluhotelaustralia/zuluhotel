@@ -3,8 +3,7 @@ package Ratkin
 Ratlord: {
 	Name:                 "<random> the Ratlord"
 	CorpseNameOverride:   "corpse of <random> the Ratlord"
-
-	Str:                  300
+  Str:                  300
 	Int:                  65
 	Dex:                  450
 	AlwaysMurderer:       true

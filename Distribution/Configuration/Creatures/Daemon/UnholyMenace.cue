@@ -3,8 +3,7 @@ package Daemon
 UnholyMenace: {
 	Name:                 "an Unholy Menace"
 	CorpseNameOverride:   "corpse of an Unholy Menace"
-
-	Str:                  1250
+  Str:                  1250
 	Int:                  500
 	Dex:                  450
 	PassiveSpeed:         0.2
@@ -51,7 +50,7 @@ UnholyMenace: {
 		HasBreath: true
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

@@ -3,8 +3,7 @@ package Giantkin
 OgreLord: {
 	Name:                 "<random> the Ogre Lord"
 	CorpseNameOverride:   "corpse of <random> the Ogre Lord"
-
-	Str:                  500
+  Str:                  500
 	Int:                  75
 	Dex:                  230
 	AlwaysMurderer:       true

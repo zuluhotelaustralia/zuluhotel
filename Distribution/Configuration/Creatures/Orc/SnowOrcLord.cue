@@ -3,8 +3,7 @@ package Orc
 SnowOrcLord: {
 	Name:                 "<random> the snow orc lord"
 	CorpseNameOverride:   "corpse of <random> the snow orc lord"
-
-	Str:                  180
+  Str:                  180
 	Int:                  30
 	Dex:                  210
 	BaseSoundID:          1114

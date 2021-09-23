@@ -3,8 +3,7 @@ package Animal
 FrostWolf: {
 	Name:                 "a frost wolf"
 	CorpseNameOverride:   "corpse of a frost wolf"
-
-	Str:                  135
+  Str:                  135
 	Int:                  35
 	Dex:                  150
 	AlwaysMurderer:       true

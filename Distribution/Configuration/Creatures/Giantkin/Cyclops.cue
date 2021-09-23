@@ -3,8 +3,7 @@ package Giantkin
 Cyclops: {
 	Name:                 "a cyclops"
 	CorpseNameOverride:   "corpse of a cyclops"
-
-	Str:                  350
+  Str:                  350
 	Int:                  65
 	Dex:                  130
 	AlwaysMurderer:       true

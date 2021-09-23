@@ -3,8 +3,7 @@ package Animal
 CelestialOstard: {
 	Name:                 "Celestial Ostard"
 	CorpseNameOverride:   "corpse of Celestial Ostard"
-
-	Str:                  650
+  Str:                  650
 	Int:                  400
 	Dex:                  300
 	AiType:               "AI_Healer"

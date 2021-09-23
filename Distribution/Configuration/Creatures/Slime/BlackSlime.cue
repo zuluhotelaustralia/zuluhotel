@@ -3,8 +3,7 @@ package Slime
 BlackSlime: {
 	Name:                 "a black slime"
 	CorpseNameOverride:   "corpse of a black slime"
-
-	Str:                  230
+  Str:                  230
 	Int:                  15
 	Dex:                  50
 	BaseSoundID:          456

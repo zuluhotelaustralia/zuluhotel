@@ -3,7 +3,6 @@ package Human
 RogueKnight: {
 	Name:                 "a rogue knight"
 	CorpseNameOverride:   "corpse of a rogue knight"
-
 	Str:                  350
 	Int:                  80
 	Dex:                  140
@@ -29,4 +28,39 @@ RogueKnight: {
 			Max: 35
 		}
 	}
+	Equipment: [
+		{
+			ItemType: "Halberd"
+			Lootable: true
+		},
+		{
+			ItemType: "LongPants"
+			Hue:      0x455
+			Lootable: true
+		},
+		{
+			ItemType: "PlateLegs"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateArms"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateChest"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateGloves"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateGorget"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateHelm"
+			Lootable: true
+		},
+	]
 }

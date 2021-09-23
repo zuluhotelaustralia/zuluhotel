@@ -3,8 +3,7 @@ package Animated
 BewitchedSpear: {
 	Name:                 "a Bewitched Spear"
 	CorpseNameOverride:   "corpse of a Bewitched Spear"
-
-	Str:                  210
+  Str:                  210
 	Int:                  110
 	Dex:                  110
 	AlwaysMurderer:       true

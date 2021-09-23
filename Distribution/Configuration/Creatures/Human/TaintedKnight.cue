@@ -40,31 +40,31 @@ TaintedKnight: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType: "SLongsword"
+		ItemType: "Longsword"
 		Name:     "a stygian-bladed sword"
 		Hue:      1283
 	}, {
-		ItemType:    "SBoneHelm"
+		ItemType:    "BoneHelm"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneGloves"
+		ItemType:    "BoneGloves"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneLegs"
+		ItemType:    "BoneLegs"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SBoneChest"
+		ItemType:    "BoneChest"
 		Name:        "the bones of the damned"
 		Hue:         1302
 		ArmorRating: 1
 	}, {
-		ItemType:    "SMetalShield"
+		ItemType:    "MetalShield"
 		Name:        "a shield of stygian darkness"
 		ArmorRating: 30
 	}]

@@ -3,8 +3,7 @@ package Dragonkin
 WaterDrake: {
 	Name:                 "a Water Drake"
 	CorpseNameOverride:   "corpse of a Water Drake"
-
-	Str:                  400
+  Str:                  400
 	Int:                  90
 	Dex:                  400
 	AlwaysMurderer:       true

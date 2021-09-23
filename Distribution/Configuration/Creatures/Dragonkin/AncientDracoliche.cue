@@ -3,8 +3,7 @@ package Dragonkin
 AncientDracoliche: {
 	Name:                 "an Ancient Dracoliche"
 	CorpseNameOverride:   "corpse of an Ancient Dracoliche"
-
-	Str:                  3000
+  Str:                  3000
 	Int:                  1500
 	Dex:                  175
 	AiType:               "AI_Mage"

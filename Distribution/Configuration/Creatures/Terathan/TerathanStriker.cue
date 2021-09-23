@@ -3,8 +3,7 @@ package Terathan
 TerathanStriker: {
 	Name:                 "a Terathan Striker"
 	CorpseNameOverride:   "corpse of a Terathan Striker"
-
-	Str:                  370
+  Str:                  370
 	Int:                  55
 	Dex:                  635
 	ActiveSpeed:          0.15

@@ -3,7 +3,6 @@ package Human
 DarkMage: {
 	Name:                 "<random> the Dark Mage"
 	CorpseNameOverride:   "corpse of <random> the Dark Mage"
-
 	Str:                  200
 	Int:                  1000
 	Dex:                  195
@@ -24,7 +23,26 @@ DarkMage: {
 	ManaMaxSeed:          1000
 	ProvokeSkillOverride: 120
 	StamMaxSeed:          195
-	PreferredSpells: ["FlameStrike", "WyvernStrike", "AbyssalFlame", "EnergyBolt", "Plague", "SorcerersBane", "WyvernStrike", "DispelField", "SpectresTouch", "Darkness", "GustOfAir", "RisingFire", "MindBlast", "FireField", "IceStrike", "MeteorSwarm", "ShiftingEarth", "CallLightning"]
+	PreferredSpells: [
+		"FlameStrike",
+		"WyvernStrike",
+		"AbyssalFlame",
+		"EnergyBolt",
+		"Plague",
+		"SorcerersBane",
+		"WyvernStrike",
+		"DispelField",
+		"SpectresTouch",
+		"Darkness",
+		"GustOfAir",
+		"RisingFire",
+		"MindBlast",
+		"FireField",
+		"IceStrike",
+		"MeteorSwarm",
+		"ShiftingEarth",
+		"CallLightning",
+	]
 	Resistances: MagicImmunity: 6
 	Skills: {
 		Macing:      95
@@ -39,11 +57,19 @@ DarkMage: {
 		}
 		HitSound: 315
 	}
-	Equipment: [{
-		ItemType: "SLongHair"
-		Hue:      1
-	}, {
-		ItemType: "SGnarledStaff"
-		Name:     "Evil Mage Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      1
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Hue:      1
+			Lootable: true
+		},
+	]
 }

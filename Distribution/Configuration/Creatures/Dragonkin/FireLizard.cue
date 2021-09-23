@@ -3,8 +3,7 @@ package Dragonkin
 FireLizard: {
 	Name:                 "a fire lizard"
 	CorpseNameOverride:   "corpse of a fire lizard"
-
-	Str:                  140
+  Str:                  140
 	Int:                  30
 	Dex:                  80
 	PassiveSpeed:         0.2

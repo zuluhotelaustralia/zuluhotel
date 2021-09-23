@@ -3,8 +3,7 @@ package Dragonkin
 HeavenlyDrake: {
 	Name:                 "a Heavenly Drake"
 	CorpseNameOverride:   "corpse of a Heavenly Drake"
-
-	Str:                  400
+  Str:                  400
 	Int:                  90
 	Dex:                  300
 	PassiveSpeed:         0.2

@@ -3,8 +3,7 @@ package Dragonkin
 StormDragon: {
 	Name:                 "a Storm Dragon"
 	CorpseNameOverride:   "corpse of a Storm Dragon"
-
-	Str:                  600
+  Str:                  600
 	Int:                  400
 	Dex:                  340
 	PassiveSpeed:         0.2

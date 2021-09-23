@@ -3,8 +3,7 @@ package Troll
 IceTroll: {
 	Name:                 "an ice troll"
 	CorpseNameOverride:   "corpse of an ice troll"
-
-	Str:                  250
+  Str:                  250
 	Int:                  70
 	Dex:                  185
 	AlwaysMurderer:       true

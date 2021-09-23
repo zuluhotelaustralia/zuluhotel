@@ -3,8 +3,7 @@ package Undead
 UndeadDrake: {
 	Name:                 "an Undead Drake"
 	CorpseNameOverride:   "corpse of an Undead Drake"
-
-	Str:                  300
+  Str:                  300
 	Int:                  400
 	Dex:                  110
 	AiType:               "AI_Mage"

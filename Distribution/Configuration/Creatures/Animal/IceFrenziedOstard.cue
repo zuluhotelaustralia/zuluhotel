@@ -3,8 +3,7 @@ package Animal
 IceFrenziedOstard: {
 	Name:                 "an ice frenzied ostard"
 	CorpseNameOverride:   "corpse of an ice frenzied ostard"
-
-	Str:                  225
+  Str:                  225
 	Int:                  135
 	Dex:                  400
 	BaseSoundID:          629

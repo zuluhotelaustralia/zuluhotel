@@ -3,8 +3,7 @@ package Dragonkin
 Warlock: {
 	Name:                 "<random> the Warlock"
 	CorpseNameOverride:   "corpse of <random> the Warlock"
-
-	Str:                  225
+  Str:                  225
 	Int:                  295
 	Dex:                  180
 	AiType:               "AI_Mage"

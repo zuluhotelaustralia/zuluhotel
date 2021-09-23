@@ -3,8 +3,7 @@ package Dragonkin
 Dragon: {
 	Name:                 "a dragon"
 	CorpseNameOverride:   "corpse of a dragon"
-
-	Str:                  750
+  Str:                  750
 	Int:                  110
 	Dex:                  160
 	PassiveSpeed:         0.2

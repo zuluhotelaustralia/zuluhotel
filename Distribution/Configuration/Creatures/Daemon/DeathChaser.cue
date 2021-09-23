@@ -3,8 +3,7 @@ package Daemon
 DeathChaser: {
 	Name:                 "a Death Chaser"
 	CorpseNameOverride:   "corpse of a Death Chaser"
-
-	Str:                  950
+  Str:                  950
 	Int:                  650
 	Dex:                  475
 	AlwaysMurderer:       true

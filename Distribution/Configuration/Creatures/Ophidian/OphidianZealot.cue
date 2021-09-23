@@ -3,8 +3,7 @@ package Ophidian
 OphidianZealot: {
 	Name:                 "an Ophidian Zealot"
 	CorpseNameOverride:   "corpse of an Ophidian Zealot"
-
-	Str:                  375
+  Str:                  375
 	Int:                  400
 	Dex:                  510
 	AiType:               "AI_Mage"

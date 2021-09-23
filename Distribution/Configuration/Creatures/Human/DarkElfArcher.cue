@@ -3,7 +3,6 @@ package Human
 DarkElfArcher: {
 	Name:                 "a dark elf archer"
 	CorpseNameOverride:   "corpse of a dark elf archer"
-
 	Str:                  165
 	Int:                  95
 	Dex:                  130
@@ -33,4 +32,10 @@ DarkElfArcher: {
 			Max: 22
 		}
 	}
+	Equipment: [
+		{
+			ItemType: "Bow"
+			Lootable: true
+		},
+	]
 }

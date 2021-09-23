@@ -3,8 +3,7 @@ package Daemon
 Mongbat: {
 	Name:                 "a mongbat"
 	CorpseNameOverride:   "corpse of a mongbat"
-
-	Str:                  20
+  Str:                  20
 	Int:                  35
 	Dex:                  60
 	AlwaysMurderer:       true

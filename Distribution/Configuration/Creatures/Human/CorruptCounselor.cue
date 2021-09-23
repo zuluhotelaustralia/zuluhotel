@@ -20,6 +20,7 @@ CorruptCounselor: {
 	LootTable:          "9"
 	ManaMaxSeed:        1000
 	StamMaxSeed:        500
+	VirtualArmor:       50
 	Resistances: {
 		Fire:          100
 		Air:           75
@@ -48,9 +49,14 @@ CorruptCounselor: {
 		Ability:       "TriElementalStrike"
 		AbilityChance: 1
 	}
-	Equipment: [{
-		ItemType:    "SMetalShield"
-		Name:        "Shield AR50"
-		ArmorRating: 50
-	}]
+	Equipment: [
+		{
+			ItemType: "BoneGloves"
+			Hue:      0x0492
+		},
+		{
+			ItemType: "BoneHelm"
+			Hue:      0x0494
+		},
+	]
 }

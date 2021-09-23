@@ -3,8 +3,7 @@ package Dragonkin
 PoisonDragon: {
 	Name:                 "a Poison Dragon"
 	CorpseNameOverride:   "corpse of a Poison Dragon"
-
-	Str:                  600
+  Str:                  600
 	Int:                  400
 	Dex:                  340
 	PassiveSpeed:         0.2
@@ -17,7 +16,6 @@ PoisonDragon: {
 	FightMode:            "Aggressor"
 	HideType:             "Dragon"
 	Hides:                5
-	HitPoison:            "Deadly"
 	HitsMax:              600
 	Hue:                  264
 	LootItemChance:       75
@@ -46,5 +44,6 @@ PoisonDragon: {
 		}
 		HitSound:  364
 		HasBreath: true
+		HitPoison:            "Deadly"
 	}
 }

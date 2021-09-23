@@ -3,7 +3,6 @@ package Human
 Bandit: {
 	Name:                 "a bandit"
 	CorpseNameOverride:   "corpse of a bandit"
-
 	Str:                  30
 	Int:                  20
 	Dex:                  30
@@ -24,8 +23,22 @@ Bandit: {
 			Max: 50
 		}
 	}
-	Equipment: [{
-		ItemType: "SCutlass"
-		Name:     "Brigand1 Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "Cutlass"
+			Lootable: true
+		},
+		{
+			ItemType: "LongPants"
+			Lootable: true
+		},
+		{
+			ItemType: "FancyShirt"
+			Lootable: true
+		},
+		{
+			ItemType: "SkullCap"
+			Lootable: true
+		},
+	]
 }

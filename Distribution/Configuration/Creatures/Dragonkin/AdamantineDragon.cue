@@ -3,8 +3,7 @@ package Dragonkin
 AdamantineDragon: {
 	Name:                 "an Adamantine Dragon"
 	CorpseNameOverride:   "corpse of an Adamantine Dragon"
-
-	Str:                  600
+  Str:                  600
 	Int:                  600
 	Dex:                  450
 	PassiveSpeed:         0.2

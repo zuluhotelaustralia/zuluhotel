@@ -3,8 +3,7 @@ package Animated
 BewitchedBardiche: {
 	Name:                 "a Bewitched Bardiche"
 	CorpseNameOverride:   "corpse of a Bewitched Bardiche"
-
-	Str:                  210
+  Str:                  210
 	Int:                  110
 	Dex:                  110
 	AlwaysMurderer:       true

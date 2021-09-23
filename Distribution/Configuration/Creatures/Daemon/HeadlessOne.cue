@@ -3,8 +3,7 @@ package Daemon
 HeadlessOne: {
 	Name:                 "a headless one"
 	CorpseNameOverride:   "corpse of a headless one"
-
-	Str:                  60
+  Str:                  60
 	Int:                  25
 	Dex:                  60
 	AlwaysMurderer:       true

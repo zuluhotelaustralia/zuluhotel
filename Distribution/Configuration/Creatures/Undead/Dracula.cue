@@ -35,7 +35,7 @@ Dracula: {
 		HitSound: 601
 	}
 	Equipment: [{
-		ItemType: "SShortHair"
+		ItemType: "ShortHair"
 		Hue:      1
 	}]
 }

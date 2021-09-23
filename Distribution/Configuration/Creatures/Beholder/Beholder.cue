@@ -3,8 +3,7 @@ package Beholder
 Beholder: {
 	Name:                 "a beholder"
 	CorpseNameOverride:   "corpse of a beholder"
-
-	Str:                  160
+  Str:                  160
 	Int:                  600
 	Dex:                  10
 	AiType:               "AI_Mage"

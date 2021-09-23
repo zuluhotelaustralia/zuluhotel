@@ -17,6 +17,8 @@ namespace Server.Mobiles
         
         [DefaultValue(0)]
         public PropValue ArmorRating { get; set; } = 0;
+
+        [DefaultValue(false)] public bool Lootable { get; set; } = false;
     }
 
     public record CreatureAttack
@@ -34,29 +36,5 @@ namespace Server.Mobiles
         public bool? HasWebs { get; set; }
         public Poison HitPoison { get; set; }
         public double? HitPoisonChance { get; set; } 
-    }
-
-    // [Register.CueExpression(@"""First"" | ""Second""")]
-    public enum TestEnum
-    {
-        First,
-        Second
-    }
-
-    public class TestCueType
-    {
-        public TestEnum Value { get; set; }
-        public SpellEntry Spell { get; set; }
-    }
-
-    public abstract class TestCueTypeAbstract
-    {
-        public void OnHit(int attacker, ref int defender) {}
-    }
-    
-    public record TestCueTypeRecord
-    {
-        public int Damage = 100;
-        public TestCueTypeAbstract CueTypeAbstract;
     }
 }

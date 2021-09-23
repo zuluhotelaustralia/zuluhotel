@@ -3,8 +3,7 @@ package Orc
 SnowOrcArcher: {
 	Name:                 "<random> the snow orc archer"
 	CorpseNameOverride:   "corpse of <random> the snow orc archer"
-
-	Str:                  125
+  Str:                  125
 	Int:                  35
 	Dex:                  250
 	AiType:               "AI_Archer"
@@ -31,5 +30,11 @@ SnowOrcArcher: {
 			Min: 12
 			Max: 27
 		}
-	}
+	},
+	Equipment: [
+		{
+			ItemType: "Bow"
+			Lootable: true
+		},
+	]
 }

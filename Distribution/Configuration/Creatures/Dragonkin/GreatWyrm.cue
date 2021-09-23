@@ -3,8 +3,7 @@ package Dragonkin
 GreatWyrm: {
 	Name:                 "a Great Wyrm"
 	CorpseNameOverride:   "corpse of a Great Wyrm"
-
-	Str:                  900
+  Str:                  900
 	Int:                  650
 	Dex:                  475
 	PassiveSpeed:         0.2

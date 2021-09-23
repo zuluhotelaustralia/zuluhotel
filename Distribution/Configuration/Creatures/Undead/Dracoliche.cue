@@ -3,8 +3,7 @@ package Undead
 Dracoliche: {
 	Name:                 "a Dracoliche"
 	CorpseNameOverride:   "corpse of a Dracoliche"
-
-	Str:                  650
+  Str:                  650
 	Int:                  700
 	Dex:                  150
 	AiType:               "AI_Mage"

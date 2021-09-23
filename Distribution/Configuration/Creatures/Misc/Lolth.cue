@@ -3,8 +3,7 @@ package Misc
 Lolth: {
 	Name:                 "Lolth"
 	CorpseNameOverride:   "corpse of Lolth"
-
-	Str:                  1000
+  Str:                  1000
 	Int:                  20000
 	Dex:                  400
 	AiType:               "AI_Mage"
@@ -17,7 +16,6 @@ Lolth: {
 	Female:               true
 	FightMode:            "Closest"
 	FightRange:           12
-	HitPoison:            "Greater"
 	HitsMax:              3000
 	Hue:                  1109
 	LootItemChance:       60
@@ -49,8 +47,9 @@ Lolth: {
 		HitSound:  458
 		MissSound: 457
 		MaxRange:  12
+		HitPoison: "Greater"
 	}
 	Equipment: [{
-		ItemType: "SBow"
+		ItemType: "Bow"
 	}]
 }

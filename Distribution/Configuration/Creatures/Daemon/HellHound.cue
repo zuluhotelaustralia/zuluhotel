@@ -3,8 +3,7 @@ package Daemon
 HellHound: {
 	Name:                 "a hell hound"
 	CorpseNameOverride:   "corpse of a hell hound"
-
-	Str:                  170
+  Str:                  170
 	Int:                  60
 	Dex:                  185
 	AiType:               "AI_Mage"

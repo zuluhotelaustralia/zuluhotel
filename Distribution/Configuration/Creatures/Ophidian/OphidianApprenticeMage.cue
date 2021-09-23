@@ -3,8 +3,7 @@ package Ophidian
 OphidianApprenticeMage: {
 	Name:                 "an Ophidian Apprentice Mage"
 	CorpseNameOverride:   "corpse of an Ophidian Apprentice Mage"
-
-	Str:                  150
+  Str:                  150
 	Int:                  400
 	Dex:                  210
 	AiType:               "AI_Mage"

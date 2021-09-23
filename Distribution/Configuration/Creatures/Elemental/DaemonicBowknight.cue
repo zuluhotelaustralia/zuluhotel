@@ -3,8 +3,7 @@ package Elemental
 DaemonicBowknight: {
 	Name:                 "a Daemonic Bowknight"
 	CorpseNameOverride:   "corpse of a Daemonic Bowknight"
-
-	Str:                  2250
+  Str:                  2250
 	Int:                  55
 	Dex:                  400
 	AiType:               "AI_Archer"
@@ -46,8 +45,7 @@ DaemonicBowknight: {
 		HitSound: 252
 	}
 	Equipment: [{
-		ItemType: "SBow"
-		Name:     "Tainted Ranger Weapon"
+		ItemType: "Bow"
 		Hue:      1171
 	}]
 }

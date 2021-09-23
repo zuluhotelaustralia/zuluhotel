@@ -3,8 +3,7 @@ package Elemental
 BlackWisp: {
 	Name:                 "a black wisp"
 	CorpseNameOverride:   "corpse of a black wisp"
-
-	Str:                  700
+  Str:                  700
 	Int:                  1100
 	Dex:                  575
 	AiType:               "AI_Mage"

@@ -34,7 +34,7 @@ CorruptedTerathan: {
 		MissSound: 589
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR20"
 		ArmorRating: 20
 	}]

@@ -38,20 +38,20 @@ TaintedMage: {
 		MissSound: 563
 	}
 	Equipment: [{
-		ItemType: "SGnarledStaff"
+		ItemType: "GnarledStaff"
 		Name:     "an ebony staff"
 		Hue:      1157
 	}, {
-		ItemType: "SDeathShroud"
+		ItemType: "DeathShroud"
 		Name:     "a tattered mage's robe"
 		Hue:      1302
 	}, {
-		ItemType:    "SLeatherGloves"
+		ItemType:    "LeatherGloves"
 		Name:        "a pair of black leather gloves"
 		Hue:         1
 		ArmorRating: 1
 	}, {
-		ItemType: "SBoots"
+		ItemType: "Boots"
 		Name:     "a pair of black leather boots"
 		Hue:      1
 	}]

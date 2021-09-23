@@ -3,8 +3,7 @@ package Animal
 SnowOstard: {
 	Name:                 "a snow ostard"
 	CorpseNameOverride:   "corpse of a snow ostard"
-
-	Str:                  210
+  Str:                  210
 	Int:                  110
 	Dex:                  400
 	AiType:               "AI_Animal"

@@ -3,8 +3,7 @@ package Dragonkin
 EliteWarrior: {
 	Name:                 "<random> the elite warrior"
 	CorpseNameOverride:   "corpse of <random> the elite warrior"
-
-	Str:                  220
+  Str:                  220
 	Int:                  50
 	Dex:                  103
 	AlwaysMurderer:       true

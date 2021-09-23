@@ -3,8 +3,7 @@ package Animal
 BreedingOstard: {
 	Name:                 "breeding ostard"
 	CorpseNameOverride:   "corpse of breeding ostard"
-
-	Str:                  100
+ 	Str:                  100
 	Int:                  35
 	Dex:                  90
 	AiType:               "AI_Animal"

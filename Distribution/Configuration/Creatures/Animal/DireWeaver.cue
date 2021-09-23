@@ -12,12 +12,13 @@ DireWeaver: {
 	CreatureType:       "Animal"
 	VirtualArmor:       40
 	FightMode:          "Aggressor"
-	HitPoison:          "Greater"
 	HitsMax:            450
 	Hue:                1409
 	ManaMaxSeed:        25
 	StamMaxSeed:        50
-	Resistances: Poison: 3
+	Resistances: {
+		Poison: 3	
+	}
 	Skills: {
 		Parry:       85
 		Poisoning:   70
@@ -33,9 +34,10 @@ DireWeaver: {
 		Skill:     "Swords"
 		HitSound:  389
 		MissSound: 390
+		HitPoison: "Greater"
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR20"
 		ArmorRating: 20
 	}]

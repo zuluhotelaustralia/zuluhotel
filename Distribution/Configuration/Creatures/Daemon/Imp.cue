@@ -3,8 +3,7 @@ package Daemon
 Imp: {
 	Name:                 "an imp"
 	CorpseNameOverride:   "corpse of an imp"
-
-	Str:                  175
+  Str:                  175
 	Int:                  85
 	Dex:                  150
 	PassiveSpeed:         0.2

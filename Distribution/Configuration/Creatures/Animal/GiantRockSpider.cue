@@ -3,8 +3,7 @@ package Animal
 GiantRockSpider: {
 	Name:                 "a giant rock spider"
 	CorpseNameOverride:   "corpse of a giant rock spider"
-
-	Str:                  185
+  Str:                  185
 	Int:                  50
 	Dex:                  110
 	AlwaysMurderer:       true
@@ -13,7 +12,6 @@ GiantRockSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	FightMode:            "Aggressor"
-	HitPoison:            "Regular"
 	HitsMax:              185
 	Hue:                  1118
 	ManaMaxSeed:          40
@@ -35,5 +33,6 @@ GiantRockSpider: {
 		}
 		HitSound: 389
 		HasWebs:  true
+		HitPoison: "Regular"
 	}
 }

@@ -3,8 +3,7 @@ package Daemon
 WingedAvenger: {
 	Name:                 "a Winged Avenger"
 	CorpseNameOverride:   "corpse of a Winged Avenger"
-
-	Str:                  305
+  Str:                  305
 	Int:                  295
 	Dex:                  350
 	AiType:               "AI_Mage"

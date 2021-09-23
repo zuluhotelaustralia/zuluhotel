@@ -3,8 +3,7 @@ package Gargoyle
 FlamingGargoyle: {
 	Name:                 "a flaming gargoyle"
 	CorpseNameOverride:   "corpse of a flaming gargoyle"
-
-	Str:                  250
+  Str:                  250
 	Int:                  335
 	Dex:                  95
 	AiType:               "AI_Mage"

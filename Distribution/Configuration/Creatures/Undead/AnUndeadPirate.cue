@@ -27,4 +27,34 @@ AnUndeadPirate: {
 			Max: 16
 		}
 	}
+	Equipment: [
+		{
+			ItemType: "Cutlass"
+			Lootable: true
+		},
+		{
+			ItemType: "ShortPants"
+			Hue:      32
+			Lootable: true
+		},
+		{
+			ItemType: "Shirt"
+			Hue:      72
+			Lootable: true
+		},
+		{
+			ItemType: "SkullCap"
+			Hue:      32
+			Lootable: true
+		},
+		{
+			ItemType: "LeatherGloves"
+			Lootable: true
+		},
+		{
+			ItemType: "BodySash"
+			Hue:      40
+			Lootable: true
+		},
+	]
 }

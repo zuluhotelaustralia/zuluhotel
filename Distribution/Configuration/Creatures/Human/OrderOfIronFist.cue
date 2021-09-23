@@ -23,4 +23,34 @@ OrderOfIronFist: {
 			Max: 35
 		}
 	}
+	Equipment: [
+		{
+			ItemType: "Halberd"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateLegs"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateArms"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateChest"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateGloves"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateGorget"
+			Lootable: true
+		},
+		{
+			ItemType: "PlateHelm"
+			Lootable: true
+		},
+	]
 }

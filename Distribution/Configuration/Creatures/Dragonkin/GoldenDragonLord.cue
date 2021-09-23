@@ -3,8 +3,7 @@ package Dragonkin
 GoldenDragonLord: {
 	Name:                 "a Golden Dragon Lord"
 	CorpseNameOverride:   "corpse of a Golden Dragon Lord"
-
-	Str:                  2250
+  Str:                  2250
 	Int:                  500
 	Dex:                  450
 	PassiveSpeed:         0.2

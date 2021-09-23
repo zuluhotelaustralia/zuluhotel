@@ -3,7 +3,6 @@ package Human
 DarkElfMage: {
 	Name:                 "a dark elf mage"
 	CorpseNameOverride:   "corpse of a dark elf mage"
-
 	Str:                  160
 	Int:                  300
 	Dex:                  195
@@ -40,7 +39,7 @@ DarkElfMage: {
 		HitSound: 315
 	}
 	Equipment: [{
-		ItemType: "SLongsword"
-		Name:     "Drow Weapon"
+		ItemType: "Longsword"
+		Lootable: true
 	}]
 }

@@ -3,8 +3,7 @@ package Daemon
 ShadowDestroyer: {
 	Name:                 "Shadow Destroyer"
 	CorpseNameOverride:   "corpse of Shadow Destroyer"
-
-	Str:                  1550
+  Str:                  1550
 	Int:                  500
 	Dex:                  450
 	ActiveSpeed:          0.15
@@ -50,7 +49,7 @@ ShadowDestroyer: {
 		HitSound: 572
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

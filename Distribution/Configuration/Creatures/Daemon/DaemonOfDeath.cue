@@ -3,8 +3,7 @@ package Daemon
 DaemonOfDeath: {
 	Name:                 "a Daemon Of Death"
 	CorpseNameOverride:   "corpse of a Daemon Of Death"
-
-	Str:                  2000
+  Str:                  2000
 	Int:                  2000
 	Dex:                  200
 	PassiveSpeed:         0.2
@@ -57,7 +56,7 @@ DaemonOfDeath: {
 		MaxRange:  5
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR40"
 		ArmorRating: 40
 	}]

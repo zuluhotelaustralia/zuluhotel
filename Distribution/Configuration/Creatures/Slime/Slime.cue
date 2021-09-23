@@ -3,8 +3,7 @@ package Slime
 Slime: {
 	Name:                 "a slime"
 	CorpseNameOverride:   "corpse of a slime"
-
-	Str:                  40
+  Str:                  40
 	Int:                  15
 	Dex:                  50
 	AlwaysMurderer:       true

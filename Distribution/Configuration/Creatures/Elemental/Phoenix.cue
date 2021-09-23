@@ -3,8 +3,7 @@ package Elemental
 Phoenix: {
 	Name:                 "a Phoenix"
 	CorpseNameOverride:   "corpse of a Phoenix"
-
-	Str:                  450
+  Str:                  450
 	Int:                  500
 	Dex:                  400
 	AiType:               "AI_Mage"

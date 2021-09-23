@@ -3,8 +3,7 @@ package Terathan
 TerathanDrone: {
 	Name:                 "a Terathan Drone"
 	CorpseNameOverride:   "corpse of a Terathan Drone"
-
-	Str:                  170
+  Str:                  170
 	Int:                  55
 	Dex:                  135
 	AlwaysMurderer:       true

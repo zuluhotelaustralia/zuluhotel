@@ -3,8 +3,7 @@ package Orc
 OrcishLord: {
 	Name:                 "<random> the Orcish Lord"
 	CorpseNameOverride:   "corpse of <random> the Orcish Lord"
-
-	Str:                  205
+  Str:                  205
 	Int:                  30
 	Dex:                  90
 	AlwaysMurderer:       true

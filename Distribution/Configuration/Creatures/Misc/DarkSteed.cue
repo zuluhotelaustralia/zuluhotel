@@ -3,8 +3,7 @@ package Misc
 DarkSteed: {
 	Name:                 "a dark steed"
 	CorpseNameOverride:   "corpse of a dark steed"
-
-	Str:                  1200
+  Str:                  1200
 	Int:                  600
 	Dex:                  120
 	AiType:               "AI_Mage"

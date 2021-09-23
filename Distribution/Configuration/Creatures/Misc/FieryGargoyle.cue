@@ -3,8 +3,7 @@ package Misc
 FieryGargoyle: {
 	Name:                 "a fiery gargoyle"
 	CorpseNameOverride:   "corpse of a fiery gargoyle"
-
-	Str:                  600
+  Str:                  600
 	Int:                  250
 	Dex:                  145
 	AiType:               "AI_Mage"

@@ -38,7 +38,7 @@ EarthElemental: {
 		HitSound: 270
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR20"
 		ArmorRating: 20
 	}]

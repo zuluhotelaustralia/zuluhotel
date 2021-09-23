@@ -3,7 +3,6 @@ package Human
 MasterOfWind: {
 	Name:                 "a master of the wind"
 	CorpseNameOverride:   "corpse of a master of the wind"
-
 	Str:                  160
 	Int:                  295
 	Dex:                  90
@@ -38,11 +37,17 @@ MasterOfWind: {
 			Max: 60
 		}
 	}
-	Equipment: [{
-		ItemType: "SLongHair"
-		Hue:      1128
-	}, {
-		ItemType: "SGnarledStaff"
-		Name:     "Air Master Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "LongHair"
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Hue:      0x04b9
+		},
+	]
 }

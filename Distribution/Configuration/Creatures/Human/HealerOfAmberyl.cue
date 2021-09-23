@@ -23,4 +23,19 @@ HealerOfAmberyl: {
 			Max: 0
 		}
 	}
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      36
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Lootable: true
+			Hue:      52
+		},
+	]
 }

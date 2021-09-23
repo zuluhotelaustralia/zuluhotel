@@ -3,8 +3,7 @@ package Elemental
 RubyWisp: {
 	Name:                 "a ruby wisp"
 	CorpseNameOverride:   "corpse of a ruby wisp"
-
-	Str:                  700
+  Str:                  700
 	Int:                  1100
 	Dex:                  575
 	AiType:               "AI_Mage"

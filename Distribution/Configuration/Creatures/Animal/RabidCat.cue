@@ -3,8 +3,7 @@ package Animal
 RabidCat: {
 	Name:                 "a rabid cat"
 	CorpseNameOverride:   "corpse of a rabid cat"
-
-	Str:                  22
+  Str:                  22
 	Int:                  25
 	Dex:                  80
 	BaseSoundID:          105

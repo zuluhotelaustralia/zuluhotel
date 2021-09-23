@@ -3,8 +3,7 @@ package Daemon
 MinorDaemon: {
 	Name:                 "a minor daemon"
 	CorpseNameOverride:   "corpse of a minor daemon"
-
-	Str:                  275
+  Str:                  275
 	Int:                  85
 	Dex:                  180
 	AlwaysMurderer:       true

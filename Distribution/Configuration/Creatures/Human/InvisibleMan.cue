@@ -31,4 +31,10 @@ InvisibleMan: {
 		}
 		HitSound: 570
 	}
+	Equipment: [
+		{
+			ItemType: "Lantern"
+			Lootable: true
+		},
+	]
 }

@@ -32,7 +32,7 @@ Hero: {
 		MissSound: 569
 	}
 	Equipment: [{
-		ItemType: "SLongsword"
+		ItemType: "Longsword"
 		Name:     "The Hero Longsword"
 		Hue:      1182
 	}]

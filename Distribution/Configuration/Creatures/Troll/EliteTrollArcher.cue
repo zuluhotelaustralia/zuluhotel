@@ -3,8 +3,7 @@ package Troll
 EliteTrollArcher: {
 	Name:                 "an elite troll archer"
 	CorpseNameOverride:   "corpse of an elite troll archer"
-
-	Str:                  200
+  Str:                  200
 	Int:                  60
 	Dex:                  120
 	AiType:               "AI_Archer"
@@ -33,5 +32,11 @@ EliteTrollArcher: {
 			Min: 10
 			Max: 22
 		}
-	}
+	},
+	Equipment: [
+		{
+			ItemType: "Bow"
+			Lootable: true
+		},
+	]
 }

@@ -3,8 +3,7 @@ package Troll
 EliteTrollWarrior: {
 	Name:                 "an elite troll warrior"
 	CorpseNameOverride:   "corpse of an elite troll warrior"
-
-	Str:                  235
+  Str:                  235
 	Int:                  65
 	Dex:                  85
 	BaseSoundID:          461

@@ -50,7 +50,7 @@ NightWalker: {
 		AbilityChance: 1
 	}
 	Equipment: [{
-		ItemType:    "SMetalShield"
+		ItemType:    "MetalShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

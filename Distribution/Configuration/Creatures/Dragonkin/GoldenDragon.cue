@@ -3,8 +3,7 @@ package Dragonkin
 GoldenDragon: {
 	Name:                 "a Golden Dragon"
 	CorpseNameOverride:   "corpse of a Golden Dragon"
-
-	Str:                  1250
+  Str:                  1250
 	Int:                  500
 	Dex:                  450
 	ActiveSpeed:          0.05
@@ -29,7 +28,6 @@ GoldenDragon: {
 	ProvokeSkillOverride: 160
 	StamMaxSeed:          1000
 	Tamable:              true
-	PreferredSpells: ["EnergyBolt", "Lightning", "MassCurse", "GreaterHeal", "Earthquake", "ManaVampire", "Paralyze"]
 	Resistances: {
 		Poison:        6
 		Fire:          100

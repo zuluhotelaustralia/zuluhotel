@@ -3,8 +3,7 @@ package Misc
 Seserpent: {
 	Name:                 "a sea serpent"
 	CorpseNameOverride:   "corpse of a sea serpent"
-
-	Str:                  250
+  Str:                  250
 	Int:                  35
 	Dex:                  180
 	BaseSoundID:          447

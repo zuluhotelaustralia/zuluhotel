@@ -3,8 +3,7 @@ package Dragonkin
 LizardShaman: {
 	Name:                 "<random> the Lizard Shaman"
 	CorpseNameOverride:   "corpse of <random> the Lizard Shaman"
-
-	Str:                  170
+  Str:                  170
 	Int:                  280
 	Dex:                  110
 	AiType:               "AI_Mage"

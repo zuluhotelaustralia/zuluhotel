@@ -3,8 +3,7 @@ package Gargoyle
 FrostGargoyle: {
 	Name:                 "a frost gargoyle"
 	CorpseNameOverride:   "corpse of a frost gargoyle"
-
-	Str:                  250
+  Str:                  250
 	Int:                  285
 	Dex:                  95
 	AiType:               "AI_Mage"

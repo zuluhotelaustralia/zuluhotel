@@ -3,8 +3,7 @@ package Daemon
 HellsStallion: {
 	Name:                 "a Hells Stallion"
 	CorpseNameOverride:   "corpse of a Hells Stallion"
-
-	Str:                  1950
+  Str:                  1950
 	Int:                  450
 	Dex:                  650
 	PassiveSpeed:         0.2
@@ -45,7 +44,7 @@ HellsStallion: {
 		HasBreath: true
 	}
 	Equipment: [{
-		ItemType:    "SHeaterShield"
+		ItemType:    "HeaterShield"
 		Name:        "Shield AR50"
 		ArmorRating: 50
 	}]

@@ -3,8 +3,7 @@ package Dragonkin
 FlamingWyrm: {
 	Name:                 "a Flaming Wyrm"
 	CorpseNameOverride:   "corpse of a Flaming Wyrm"
-
-	Str:                  2800
+  Str:                  2800
 	Int:                  3500
 	Dex:                  475
 	PassiveSpeed:         0.2

@@ -36,11 +36,11 @@ TwistedAnimation: {
 		MissSound: 569
 	}
 	Equipment: [{
-		ItemType: "SLongsword"
+		ItemType: "Longsword"
 		Name:     "an animation's blade"
 		Hue:      33870
 	}, {
-		ItemType: "SGoldBracelet"
+		ItemType: "GoldBracelet"
 		Name:     "a animation's shield"
 	}]
 }

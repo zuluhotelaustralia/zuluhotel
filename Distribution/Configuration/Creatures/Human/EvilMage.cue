@@ -3,7 +3,6 @@ package Human
 EvilMage: {
 	Name:                 "<random> the Evil Mage"
 	CorpseNameOverride:   "corpse of <random> the Evil Mage"
-
 	Str:                  180
 	Int:                  385
 	Dex:                  90
@@ -30,11 +29,19 @@ EvilMage: {
 		}
 		HitSound: 315
 	}
-	Equipment: [{
-		ItemType: "SLongHair"
-		Hue:      1110
-	}, {
-		ItemType: "SGnarledStaff"
-		Name:     "Evil Mage Weapon"
-	}]
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      1110
+		},
+		{
+			ItemType: "GnarledStaff"
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Lootable: true
+			Hue:      0x04b9
+		},
+	]
 }

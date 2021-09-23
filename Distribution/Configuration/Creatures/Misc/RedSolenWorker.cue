@@ -3,8 +3,7 @@ package Misc
 RedSolenWorker: {
 	Name:                 "a red solen worker"
 	CorpseNameOverride:   "corpse of a red solen worker"
-
-	Str:                  400
+  Str:                  400
 	Int:                  60
 	Dex:                  105
 	BaseSoundID:          959

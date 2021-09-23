@@ -3,7 +3,6 @@ package Human
 ElfLord: {
 	Name:                 "an Elf Lord"
 	CorpseNameOverride:   "corpse of an Elf Lord"
-
 	Str:                  700
 	Int:                  1500
 	Dex:                  195
@@ -48,19 +47,31 @@ ElfLord: {
 		MissSound: 37
 		MaxRange:  12
 	}
-	Equipment: [{
-		ItemType: "SGnarledStaff"
-		Name:     "Staff of Water"
-		Hue:      1099
-	}, {
-		ItemType:    "SPlateChest"
-		Name:        "Elven Breastplate"
-		Hue:         1172
-		ArmorRating: 80
-	}, {
-		ItemType:    "SPlateLegs"
-		Name:        "Long pants"
-		Hue:         1172
-		ArmorRating: 70
-	}]
+	Equipment: [
+		{
+			ItemType: "GnarledStaff"
+			Name:     "Staff of Water"
+			Hue:      1099
+		},
+		{
+			ItemType:    "PlateChest"
+			Name:        "Elven Platemail"
+			Hue:         1176
+			ArmorRating: 80
+		},
+		{
+			ItemType:    "PlateLegs"
+			Name:        "Elven Platemail"
+			Hue:         1176
+			ArmorRating: 70
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      72
+		},
+		{
+			ItemType: "DeerMask"
+			Hue:      72
+		},
+	]
 }
