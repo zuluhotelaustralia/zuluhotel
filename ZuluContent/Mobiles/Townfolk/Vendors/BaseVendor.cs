@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Server.ContextMenus;
 using Server.Items;
+using Server.Mobiles;
 using Server.Network;
 using Server.Regions;
 
@@ -1121,6 +1123,24 @@ namespace Server.Mobiles
                 }
             }
         }
+        
+        public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            if (from.Alive && IsActiveVendor)
+            {
+                if (IsActiveSeller)
+                {
+                    list.Add(new VendorBuyEntry(from, this));
+                }
+
+                if (IsActiveBuyer)
+                {
+                    list.Add(new VendorSellEntry(from, this));
+                }
+            }
+
+            base.AddCustomContextEntries(from, list);
+        }
 
         public virtual IShopSellInfo[] GetSellInfo()
         {
@@ -1130,6 +1150,43 @@ namespace Server.Mobiles
         public virtual IBuyItemInfo[] GetBuyInfo()
         {
             return (IBuyItemInfo[]) m_ArmorBuyInfo.ToArray(typeof(IBuyItemInfo));
+        }
+    }
+}
+
+namespace Server.ContextMenus
+{
+    public class VendorBuyEntry : ContextMenuEntry
+    {
+        private readonly BaseVendor m_Vendor;
+
+        public VendorBuyEntry(Mobile from, BaseVendor vendor)
+            : base(6103, 8)
+        {
+            m_Vendor = vendor;
+            Enabled = vendor.CheckVendorAccess(from);
+        }
+
+        public override void OnClick()
+        {
+            m_Vendor.VendorBuy(Owner.From);
+        }
+    }
+
+    public class VendorSellEntry : ContextMenuEntry
+    {
+        private readonly BaseVendor m_Vendor;
+
+        public VendorSellEntry(Mobile from, BaseVendor vendor)
+            : base(6104, 8)
+        {
+            m_Vendor = vendor;
+            Enabled = vendor.CheckVendorAccess(from);
+        }
+
+        public override void OnClick()
+        {
+            m_Vendor.VendorSell(Owner.From);
         }
     }
 }

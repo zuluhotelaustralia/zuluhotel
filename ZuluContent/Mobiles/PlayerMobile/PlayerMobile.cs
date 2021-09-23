@@ -13,8 +13,10 @@ using Server.Accounting;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Packets;
 using Scripts.Zulu.Engines.Races;
+using Server.ContextMenus;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
+using Server.Engines.PartySystem;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -869,6 +871,43 @@ namespace Server.Mobiles
             if (isTeleport || --m_NextProtectionCheck == 0)
                 RecheckTownProtection();
         }
+        
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
+
+            if (from != this)
+            {
+                if (Alive)
+                {
+                    var theirParty = from.Party as Party;
+                    var ourParty = Party as Party;
+
+                    if (theirParty == null && ourParty == null)
+                    {
+                        list.Add(new AddToPartyEntry(from, this));
+                    }
+                    else if (theirParty != null && theirParty.Leader == from)
+                    {
+                        if (ourParty == null)
+                        {
+                            list.Add(new AddToPartyEntry(from, this));
+                        }
+                        else if (ourParty == theirParty)
+                        {
+                            list.Add(new RemoveFromPartyEntry(from, this));
+                        }
+                    }
+                }
+
+                var curhouse = BaseHouse.FindHouseAt(this);
+
+                if (curhouse != null && Alive && curhouse.IsFriend(from))
+                {
+                    list.Add(new EjectPlayerEntry(from, this));
+                }
+            }
+        }
 
         public override void Paralyze(TimeSpan duration)
         {
@@ -975,7 +1014,8 @@ namespace Server.Mobiles
             return true;
         }
 
-        public override bool CheckContextMenuDisplay(IEntity target) => false;
+        // TODO: Add config check here if context menus are actually wanted
+        public override bool CheckContextMenuDisplay(IEntity target) => true;
 
         private static int CheckContentForTrade(Item item)
         {

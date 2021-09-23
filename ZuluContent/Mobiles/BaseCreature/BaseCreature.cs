@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
+using Server.ContextMenus;
 using Server.Engines.Magic;
 using Server.Regions;
 using Server.Network;
@@ -46,6 +47,7 @@ namespace Server.Mobiles
         private bool m_bControlled; // Is controlled
         private Mobile m_ControlMaster; // My master
         private OrderType m_ControlOrder; // My order
+        private int m_ControlSlots;
 
         private int m_Loyalty;
 
@@ -524,9 +526,7 @@ namespace Server.Mobiles
                         (creature.ControlMaster == owner || creature.SummonMaster == owner))
                     {
                         if (creature.Summoned && creature.Serial != Serial &&
-                            (creature is AirElementalLord || creature is EarthElementalLord ||
-                             creature is FireElementalLord ||
-                             creature is WaterElementalLord))
+                            creature is AirElementalLord or EarthElementalLord or FireElementalLord or WaterElementalLord)
                             creature.AIObject.DoOrderRelease(true);
                         else
                             petSlots += creature.GetPetSlots(owner);
@@ -545,7 +545,7 @@ namespace Server.Mobiles
 
                 var animalLore = (int) m.Skills[SkillName.AnimalLore].Value;
                 var animalTaming = (int) m.Skills[SkillName.AnimalTaming].Value;
-                maxSlots = (int) ((animalLore + animalTaming) / 15);
+                maxSlots = (animalLore + animalTaming) / 15;
                 return !(petSlots > maxSlots && petSlots > minSlots);
             }
 
@@ -983,7 +983,7 @@ namespace Server.Mobiles
             if (m_bSummoned)
                 writer.WriteDeltaTime(SummonEnd);
 
-            writer.Write((int) ControlSlots);
+            writer.Write((int) m_ControlSlots);
 
             // Version 3
             writer.Write((int) m_Loyalty);
@@ -1123,7 +1123,7 @@ namespace Server.Mobiles
                     new UnsummonTimer(m_ControlMaster, this, SummonEnd - DateTime.Now).Start();
                 }
 
-                ControlSlots = reader.ReadInt();
+                m_ControlSlots = reader.ReadInt();
             }
             else
             {
@@ -1764,7 +1764,15 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.Administrator)]
-        public int ControlSlots { get; set; } = 1;
+        public int ControlSlots
+        {
+            get
+            {
+                var creatureScoreSlots = GetCreatureScore() / 30;
+                return Math.Max(m_ControlSlots, creatureScoreSlots);
+            }
+            set => m_ControlSlots = value;
+        }
 
         public virtual bool NoHouseRestrictions
         {
@@ -1809,6 +1817,15 @@ namespace Server.Mobiles
         public virtual bool IsScaredOfScaryThings
         {
             get { return true; }
+        }
+
+        public virtual int GetCreatureScore()
+        {
+            var highestStat = new List<int> { Str, Int, Dex }.Max() / 10;
+            highestStat = (int) (highestStat * ZuluClass.Bonus);
+            highestStat = Math.Min(highestStat, 150);
+            
+            return highestStat;
         }
 
         public virtual int GetPetSlots(PlayerMobile owner)
@@ -2262,6 +2279,51 @@ namespace Server.Mobiles
         public virtual bool CanDrop
         {
             get { return false; }
+        }
+        
+        public virtual void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+        }
+
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
+
+            if (Commandable)
+            {
+                AIObject?.GetContextMenuEntries(from, list);
+            }
+
+            if (Tamable && !Controlled && from.Alive)
+            {
+                list.Add(new TameEntry(from, this));
+            }
+
+            AddCustomContextEntries(from, list);
+
+            if (CanTeach && from.Alive)
+            {
+                var ourSkills = Skills;
+                var theirSkills = from.Skills;
+
+                for (var i = 0; i < ourSkills.Length && i < theirSkills.Length; ++i)
+                {
+                    var skill = ourSkills[i];
+                    var theirSkill = theirSkills[i];
+
+                    if (skill?.Base >= 60.0 && CheckTeach(skill.SkillName, from))
+                    {
+                        var toTeach = skill.BaseFixedPoint / 3;
+
+                        if (toTeach > 420)
+                        {
+                            toTeach = 420;
+                        }
+
+                        list.Add(new TeachEntry((SkillName)i, this, from, toTeach > theirSkill.BaseFixedPoint));
+                    }
+                }
+            }
         }
 
         public override bool HandlesOnSpeech(Mobile from)
@@ -3535,11 +3597,17 @@ namespace Server.Mobiles
             }
             else
             {
-                ISpawner se = Spawner;
-                if (se != null && se.UnlinkOnTaming)
+                var se = Spawner;
+                if (se is { UnlinkOnTaming: true })
                 {
                     Spawner.Remove(this);
                     Spawner = null;
+                }
+                
+                if (m.Followers + ControlSlots > m.FollowersMax)
+                {
+                    m.SendFailureMessage(1049607); // You have too many followers to control that creature.
+                    return false;
                 }
 
                 CurrentWayPoint = null; //so tamed animals don't try to go back
@@ -3593,6 +3661,13 @@ namespace Server.Mobiles
         public static bool Summon(BaseCreature creature, bool controlled, Mobile caster, Point3D p, int sound,
             TimeSpan duration)
         {
+            if (caster.Followers + creature.ControlSlots > caster.FollowersMax)
+            {
+                caster.SendFailureMessage(1049645); // You have too many followers to summon that creature.
+                creature.Delete();
+                return false;
+            }
+            
             Summoning = true;
 
             if (controlled)
@@ -3926,6 +4001,33 @@ namespace Server.Mobiles
         }
 
         #endregion
+        
+        private class TameEntry : ContextMenuEntry
+        {
+            private readonly BaseCreature m_Mobile;
+
+            public TameEntry(Mobile from, BaseCreature creature) : base(6130, 6)
+            {
+                m_Mobile = creature;
+            }
+
+            public override void OnClick()
+            {
+                if (!Owner.From.CheckAlive())
+                {
+                    return;
+                }
+
+                Owner.From.TargetLocked = true;
+
+                if (Owner.From.UseSkill(SkillName.AnimalTaming))
+                {
+                    Owner.From.Target.Invoke(Owner.From, m_Mobile);
+                }
+                
+                Owner.From.TargetLocked = false;
+            }
+        }
 
         public virtual void OnThink()
         {

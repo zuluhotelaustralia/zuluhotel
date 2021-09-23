@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Server.ContextMenus;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -276,6 +277,16 @@ namespace Server.Mobiles
                 }
 
             base.OnSpeech(e);
+        }
+        
+        public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            if (from.Alive)
+            {
+                list.Add(new OpenBankEntry(this));
+            }
+
+            base.AddCustomContextEntries(from, list);
         }
 
         public override void Serialize(IGenericWriter writer)
