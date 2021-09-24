@@ -32,4 +32,15 @@ GwennoUndeadBard: {
 			Max: 50
 		}
 	}
+	Equipment: [
+		{
+			ItemType: "LongHair"
+			Hue:      12
+		},
+		{
+			ItemType: "Robe"
+			Lootable: true
+			Hue:      0x0020
+		},
+	]
 }

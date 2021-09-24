@@ -31,8 +31,20 @@ Frankenstein: {
 		}
 		HitSound: 601
 	}
-	Equipment: [{
-		ItemType: "ShortHair"
-		Hue:      1
-	}]
+	Equipment: [
+		{
+			ItemType: "ShortHair"
+			Hue:      1
+		},
+		{
+			ItemType: "ShortPants"
+			Hue:      0x544
+			Lootable: true
+		},
+		{
+			ItemType: "Shirt"
+			Hue:      0x52F
+			Lootable: true
+		},
+	]
 }

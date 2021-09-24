@@ -33,28 +33,23 @@ AnUndeadPirate: {
 			Lootable: true
 		},
 		{
-			ItemType: "ShortPants"
-			Hue:      32
+			ItemType: "LongPants"
+			Hue:      0x3E5
 			Lootable: true
 		},
 		{
 			ItemType: "Shirt"
-			Hue:      72
+			Hue:      0x192
 			Lootable: true
 		},
 		{
 			ItemType: "SkullCap"
-			Hue:      32
+			Hue:      0x215
 			Lootable: true
 		},
 		{
 			ItemType: "LeatherGloves"
 			Lootable: true
-		},
-		{
-			ItemType: "BodySash"
-			Hue:      40
-			Lootable: true
-		},
+		}
 	]
 }

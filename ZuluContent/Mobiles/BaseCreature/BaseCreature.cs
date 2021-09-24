@@ -1053,9 +1053,7 @@ namespace Server.Mobiles
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
-
-            CreatureProperties.Get(GetType())?.ApplyTo(this);
-
+            
             int version = reader.ReadInt();
 
             m_CurrentAI = (AIType) reader.ReadInt();

@@ -29,14 +29,28 @@ Vampire: {
 		Magery:      100
 	}
 	Attack: {
+		Ability: "LifeDrainStrike"
+		AbilityChance: 1.0
 		Damage: {
 			Min: 12
 			Max: 40
 		}
 		HitSound: 363
 	}
-	Equipment: [{
-		ItemType: "ShortHair"
-		Hue:      1
-	}]
+	Equipment: [
+		{
+			ItemType: "ShortHair"
+			Hue:      1
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      0x66d
+			Lootable: true
+		},
+		{
+			ItemType: "Robe"
+			Hue:      0x66d
+			Lootable: true
+		},
+	]
 }

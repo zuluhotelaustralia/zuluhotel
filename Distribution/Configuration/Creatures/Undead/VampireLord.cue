@@ -3,7 +3,7 @@ package Undead
 VampireLord: {
 	Name:                 "a Vampire Lord"
 	CorpseNameOverride:   "corpse of a Vampire Lord"
-  Str:                  1500
+	Str:                  1500
 	Int:                  1500
 	Dex:                  500
 	PassiveSpeed:         0.2
@@ -40,8 +40,25 @@ VampireLord: {
 		}
 		HitSound: 601
 	}
-	Equipment: [{
-		ItemType: "ShortHair"
-		Hue:      1
-	}]
+	Equipment: [
+		{
+			ItemType: "ShortHair"
+			Hue:      1
+		},
+		{
+			ItemType: "ShortPants"
+			Hue:      0x66d
+			Lootable: true
+		},
+		{
+			ItemType: "Shirt"
+			Hue:      0x66d
+			Lootable: true
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      0x1
+			Lootable: true
+		},
+	]
 }

@@ -27,6 +27,8 @@ Dracula: {
 		MagicResist: 130
 	}
 	Attack: {
+		Ability: "LifeDrainStrike"
+		AbilityChance: 1.0
 		Speed: 35
 		Damage: {
 			Min: 33
@@ -34,8 +36,29 @@ Dracula: {
 		}
 		HitSound: 601
 	}
-	Equipment: [{
-		ItemType: "ShortHair"
-		Hue:      1
-	}]
+	Equipment: [
+		{
+			ItemType: "ShortHair"
+			Hue:      1
+		},
+		{
+			ItemType: "Cloak"
+			Hue:      0x1
+			Lootable: true
+		},
+		{
+			ItemType: "FancyShirt"
+			Lootable: true
+		},
+		{
+			ItemType: "LongPants"
+			Hue:      0x1
+			Lootable: true
+		},
+		{
+			ItemType: "SkullCap"
+			Hue:      0x20
+			Lootable: true
+		},
+	]
 }

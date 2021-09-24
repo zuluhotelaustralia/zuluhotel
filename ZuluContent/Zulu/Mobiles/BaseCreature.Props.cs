@@ -19,7 +19,7 @@ namespace Server.Mobiles
 
         private ZuluClass m_ZuluClass;
 
-        public virtual CreatureProperties InitProperties => CreatureProperties.Get(GetType());
+        public virtual CreatureProperties InitProperties => this is BaseCreatureTemplate bt ? bt.Properties : null;
 
         #region IElementalResistible
 

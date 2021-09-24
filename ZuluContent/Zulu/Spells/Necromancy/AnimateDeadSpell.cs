@@ -46,7 +46,7 @@ namespace Scripts.Zulu.Spells.Necromancy
             if (power > 95)
                 power = 95;
 
-            var props = CreatureProperties.Get(creature.GetType());
+            var props = creature is BaseCreatureTemplate bt ? bt.Properties : null;
 
             if (props is null)
                 return;

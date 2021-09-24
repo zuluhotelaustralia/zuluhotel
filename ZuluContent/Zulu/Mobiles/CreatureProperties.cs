@@ -12,6 +12,8 @@ using Server.Items;
 using Server.Spells;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+
 // ReSharper disable InconsistentNaming
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
@@ -20,24 +22,6 @@ namespace Server.Mobiles
 {
     public record CreatureProperties
     {
-        private static readonly Dictionary<Type, CreatureProperties> CreatureMap = new();
-        public static IReadOnlyDictionary<Type, CreatureProperties> Creatures => CreatureMap;
-
-        public static bool Register<T>(CreatureProperties props) where T : BaseCreature
-        {
-            return CreatureMap.TryAdd(typeof(T), props);
-        }
-
-        public static CreatureProperties Get<T>() where T : BaseCreature
-        {
-            return Get(typeof(T));
-        }
-
-        public static CreatureProperties Get(Type T)
-        {
-            return CreatureMap.GetValueOrDefault(T);
-        }
-
         public string Name { get; set; } = "<CreatureProperties unset>";
         public string Kind { get; set; } = "Npc";
         public string? CorpseNameOverride { get; set; }

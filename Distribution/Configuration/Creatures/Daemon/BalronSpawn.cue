@@ -30,6 +30,8 @@ BalronSpawn: {
 		MagicResist: 130
 	}
 	Attack: {
+		Ability: "LifeDrainStrike"
+		AbilityChance: 1.0
 		Speed: 35
 		Damage: {
 			Min: 33

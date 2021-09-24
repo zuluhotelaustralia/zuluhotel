@@ -40,6 +40,8 @@ UndeadDrake: {
 		DetectHidden: 130
 	}
 	Attack: {
+		Ability: "LifeDrainStrike"
+		AbilityChance: 1.0
 		Speed: 45
 		Damage: {
 			Min: 33
