@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations" />
     <Folder Include="Network\" />
   </ItemGroup>
 
@@ -57,6 +58,23 @@
   <ItemGroup>
     <AdditionalFiles Include="Migrations/*.v*.json" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(RiderVersion)' != '' AND $([MSBuild]::VersionLessThan($(RiderVersion), '2021.2.0'))">
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+  
+  <Target Name="RemoveSourceGeneratedFiles" BeforeTargets="CoreCompile" Condition="'$(RiderVersion)' != '' AND $([MSBuild]::VersionLessThan($(RiderVersion), '2021.2.0'))">
+    <ItemGroup>
+      <Compile Remove="Generated\**" />
+    </ItemGroup>
+  </Target>
+  
+  <Target Name="AddSourceGeneratedFiles" AfterTargets="CoreCompile" Condition="'$(RiderVersion)' != '' AND $([MSBuild]::VersionLessThan($(RiderVersion), '2021.2.0'))">
+    <ItemGroup>
+      <Compile Include="Generated\**" />
+    </ItemGroup>
+  </Target>
 
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'UNIX'">

@@ -4,19 +4,19 @@
       "MinQuantity": 2,
       "MaxQuantity": 10,
       "Chance": 0.5,
-      "Value": "MissingObject.thunderbolt"
+      "Value": "Server.Items.ThunderBolt"
     },
     {
       "MinQuantity": 7,
       "MaxQuantity": 15,
       "Chance": 1,
-      "Value": "MissingObject.icearrow"
+      "Value": "Server.Items.IceArrow"
     },
     {
       "MinQuantity": 7,
       "MaxQuantity": 15,
       "Chance": 1,
-      "Value": "MissingObject.firearrow"
+      "Value": "Server.Items.FireArrow"
     },
     {
       "MinQuantity": 12,
@@ -578,19 +578,19 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.75,
-      "Value": "MissingObject.FrenziedEgg"
+      "Value": "Server.Items.FrenziedOstardEgg"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 1,
-      "Value": "MissingObject.OstardEgg"
+      "Value": "Server.Items.OstardEgg"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.DragonEgg"
+      "Value": "Server.Items.DragonEgg"
     }
   ],
   "GMArmor": [
@@ -1206,7 +1206,7 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 1,
-      "Value": "MissingObject.fryingpan"
+      "Value": "Server.Items.Frypan"
     },
     {
       "MinQuantity": 1,
@@ -2568,13 +2568,13 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.25,
-      "Value": "MissingObject.Icebow"
+      "Value": "Server.Items.IceBow"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.75,
-      "Value": "MissingObject.firebow"
+      "Value": "Server.Items.FireBow"
     }
   ],
   "MiscMagicItem": [
@@ -2582,325 +2582,325 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent9"
+      "Value": "Server.Items.PoisonElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent8"
+      "Value": "Server.Items.PoisonElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent7"
+      "Value": "Server.Items.PoisonElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent6"
+      "Value": "Server.Items.PoisonElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent5"
+      "Value": "Server.Items.PoisonElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent4"
+      "Value": "Server.Items.PoisonElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent3"
+      "Value": "Server.Items.PoisonElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent2"
+      "Value": "Server.Items.PoisonElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent1"
+      "Value": "Server.Items.PoisonElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent9"
+      "Value": "Server.Items.ShadowElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent8"
+      "Value": "Server.Items.ShadowElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent7"
+      "Value": "Server.Items.ShadowElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent6"
+      "Value": "Server.Items.ShadowElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent5"
+      "Value": "Server.Items.ShadowElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent4"
+      "Value": "Server.Items.ShadowElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent3"
+      "Value": "Server.Items.ShadowElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent2"
+      "Value": "Server.Items.ShadowElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent1"
+      "Value": "Server.Items.ShadowElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent9"
+      "Value": "Server.Items.FireElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent8"
+      "Value": "Server.Items.FireElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent7"
+      "Value": "Server.Items.FireElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent6"
+      "Value": "Server.Items.FireElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent5"
+      "Value": "Server.Items.FireElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent4"
+      "Value": "Server.Items.FireElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent3"
+      "Value": "Server.Items.FireElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent2"
+      "Value": "Server.Items.FireElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent1"
+      "Value": "Server.Items.FireElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent9"
+      "Value": "Server.Items.AirElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent8"
+      "Value": "Server.Items.AirElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent7"
+      "Value": "Server.Items.AirElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent6"
+      "Value": "Server.Items.AirElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent5"
+      "Value": "Server.Items.AirElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent4"
+      "Value": "Server.Items.AirElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent3"
+      "Value": "Server.Items.AirElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent2"
+      "Value": "Server.Items.AirElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent1"
+      "Value": "Server.Items.AirElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent9"
+      "Value": "Server.Items.EarthElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent8"
+      "Value": "Server.Items.EarthElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent7"
+      "Value": "Server.Items.EarthElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent6"
+      "Value": "Server.Items.EarthElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent5"
+      "Value": "Server.Items.EarthElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent4"
+      "Value": "Server.Items.EarthElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent3"
+      "Value": "Server.Items.EarthElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent2"
+      "Value": "Server.Items.EarthElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent1"
+      "Value": "Server.Items.EarthElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent9"
+      "Value": "Server.Items.WaterElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent8"
+      "Value": "Server.Items.WaterElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent7"
+      "Value": "Server.Items.WaterElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent6"
+      "Value": "Server.Items.WaterElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent5"
+      "Value": "Server.Items.WaterElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent4"
+      "Value": "Server.Items.WaterElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent3"
+      "Value": "Server.Items.WaterElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent2"
+      "Value": "Server.Items.WaterElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent1"
+      "Value": "Server.Items.WaterElementalPentagram1"
     }
   ],
   "NecroItem": [
@@ -3004,7 +3004,7 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.1,
-      "Value": "MissingObject.necrobook"
+      "Value": "Server.Items.Codex"
     }
   ],
   "NormalArmor": [
@@ -3774,325 +3774,325 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent9"
+      "Value": "Server.Items.PoisonElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent8"
+      "Value": "Server.Items.PoisonElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent7"
+      "Value": "Server.Items.PoisonElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent6"
+      "Value": "Server.Items.PoisonElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent5"
+      "Value": "Server.Items.PoisonElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent4"
+      "Value": "Server.Items.PoisonElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent3"
+      "Value": "Server.Items.PoisonElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent2"
+      "Value": "Server.Items.PoisonElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.poisonpent1"
+      "Value": "Server.Items.PoisonElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent9"
+      "Value": "Server.Items.ShadowElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent8"
+      "Value": "Server.Items.ShadowElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent7"
+      "Value": "Server.Items.ShadowElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent6"
+      "Value": "Server.Items.ShadowElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent5"
+      "Value": "Server.Items.ShadowElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent4"
+      "Value": "Server.Items.ShadowElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent3"
+      "Value": "Server.Items.ShadowElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent2"
+      "Value": "Server.Items.ShadowElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.shadowpent1"
+      "Value": "Server.Items.ShadowElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent9"
+      "Value": "Server.Items.FireElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent8"
+      "Value": "Server.Items.FireElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent7"
+      "Value": "Server.Items.FireElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent6"
+      "Value": "Server.Items.FireElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent5"
+      "Value": "Server.Items.FireElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent4"
+      "Value": "Server.Items.FireElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent3"
+      "Value": "Server.Items.FireElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent2"
+      "Value": "Server.Items.FireElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.firepent1"
+      "Value": "Server.Items.FireElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent9"
+      "Value": "Server.Items.AirElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent8"
+      "Value": "Server.Items.AirElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent7"
+      "Value": "Server.Items.AirElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent6"
+      "Value": "Server.Items.AirElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent5"
+      "Value": "Server.Items.AirElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent4"
+      "Value": "Server.Items.AirElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent3"
+      "Value": "Server.Items.AirElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent2"
+      "Value": "Server.Items.AirElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.airpent1"
+      "Value": "Server.Items.AirElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent9"
+      "Value": "Server.Items.EarthElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent8"
+      "Value": "Server.Items.EarthElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent7"
+      "Value": "Server.Items.EarthElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent6"
+      "Value": "Server.Items.EarthElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent5"
+      "Value": "Server.Items.EarthElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent4"
+      "Value": "Server.Items.EarthElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent3"
+      "Value": "Server.Items.EarthElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent2"
+      "Value": "Server.Items.EarthElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.earthpent1"
+      "Value": "Server.Items.EarthElementalPentagram1"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent9"
+      "Value": "Server.Items.WaterElementalPentagram9"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent8"
+      "Value": "Server.Items.WaterElementalPentagram8"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent7"
+      "Value": "Server.Items.WaterElementalPentagram7"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent6"
+      "Value": "Server.Items.WaterElementalPentagram6"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent5"
+      "Value": "Server.Items.WaterElementalPentagram5"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent4"
+      "Value": "Server.Items.WaterElementalPentagram4"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent3"
+      "Value": "Server.Items.WaterElementalPentagram3"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent2"
+      "Value": "Server.Items.WaterElementalPentagram2"
     },
     {
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.5,
-      "Value": "MissingObject.waterpent1"
+      "Value": "Server.Items.WaterElementalPentagram1"
     },
     {
       "MinQuantity": 1,
@@ -4296,7 +4296,7 @@
       "MinQuantity": 1,
       "MaxQuantity": 1,
       "Chance": 0.1,
-      "Value": "MissingObject.necrobook"
+      "Value": "Server.Items.Codex"
     }
   ],
   "PaganReagents": [
@@ -4376,7 +4376,7 @@
       "MinQuantity": 2,
       "MaxQuantity": 6,
       "Chance": 1,
-      "Value": "MissingObject.SerpentsScales"
+      "Value": "Server.Items.SerpentScale"
     },
     {
       "MinQuantity": 2,

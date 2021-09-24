@@ -33,6 +33,14 @@ namespace ZuluContent.Zulu.Items
             }
         }
         
+        [Hue]
+        [CommandProperty(AccessLevel.GameMaster)]
+        public override int Hue
+        {
+            get => Identified ? base.Hue : 0x0;
+            set => base.Hue = value;
+        }
+        
         [CommandProperty(AccessLevel.GameMaster)]
         public CurseType Cursed
         {

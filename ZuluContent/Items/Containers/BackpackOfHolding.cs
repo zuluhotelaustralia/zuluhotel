@@ -6,7 +6,7 @@ namespace Server.Items
         public override int Hue { get; set; } = 1282;
 
         [Constructible]
-        public BackpackOfHolding() : base(0xE75)
+        public BackpackOfHolding()
         {
             Weight = 0.0;
             MaxItems = 0;

@@ -229,8 +229,8 @@ namespace Server.Items
         {
             var difficulty = creature.ProvokeSkillOverride;
             
-            if (difficulty == 0)
-                difficulty = 100;
+            if (difficulty <= 0)
+                difficulty = creature.GetCreatureScore();
 
             return difficulty;
         }
@@ -446,7 +446,7 @@ namespace Server.Items
                 var z = fromLocation.Z + 20;
                 var toLocation = new Point3D(x, y, z);
 
-                Effects.SendMovingEffect(map, m_ItemID, fromLocation, toLocation, 10, 10, false, true, m_Hue);
+                Effects.SendMovingEffect(map, m_ItemID, fromLocation, toLocation, 10, 10, false, false, m_Hue);
             }
         }
 

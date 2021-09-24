@@ -48,7 +48,7 @@ namespace Server.Mobiles
                 DamageMin = 25,
                 Dex = 250,
                 Female = false,
-                FightMode = FightMode.Aggressor,
+                FightMode = FightMode.Closest,
                 FightRange = 1,
                 HitsMax = 400,
                 Hue = 1302,
@@ -89,7 +89,7 @@ namespace Server.Mobiles
                 HitPoints = 250,
                 HitSound = 0x23C,
                 MissSound = 0x23A,
-                Animation = (WeaponAnimation) 0x0009
+                Animation = (WeaponAnimation)0x0009
             });
 
             AddItem(new BoneHelm
@@ -151,7 +151,7 @@ namespace Server.Mobiles
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int) 0);
+            writer.Write((int)0);
         }
 
         public override void Deserialize(IGenericReader reader)

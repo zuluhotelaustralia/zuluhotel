@@ -59,7 +59,7 @@ namespace Server.Items
 
                         Consume();
 
-                        Timer.DelayCall(TimeSpan.FromSeconds(Delay), ReleaseHealLock, from);
+                        Timer.StartTimer(TimeSpan.FromSeconds(Delay), () => ReleaseHealLock(from));
                     }
                     else
                     {

@@ -164,7 +164,7 @@ public Teleporter(Point3D pointDest, Map mapDest, bool creatures)
 			if (m_Delay == TimeSpan.Zero)
 				DoTeleport(m);
 			else
-				Timer.DelayCall<Mobile>(m_Delay, DoTeleport, m);
+				Timer.StartTimer(m_Delay, () => DoTeleport(m));
 		}
 
 		public virtual void DoTeleport(Mobile m)
@@ -334,7 +334,7 @@ public Teleporter(Serial serial)
 					else if (m_MessageNumber != 0)
 						m.NetState.SendMessageLocalized(Serial, ItemID, MessageType.Regular, 0x3B2, 3, m_MessageNumber, null);
 
-					Timer.DelayCall(TimeSpan.FromSeconds(5.0), EndMessageLock, m);
+					Timer.StartTimer(TimeSpan.FromSeconds(5.0), () => EndMessageLock(m));
 				}
 
 				return false;
@@ -513,7 +513,7 @@ public Teleporter(Serial serial)
 			if (from == null || !m_Table.TryGetValue(from, out info))
 				return;
 
-			info.Timer.Stop();
+			info.TimerToken.Cancel();
 			m_Table.Remove(from);
 		}
 
@@ -601,16 +601,16 @@ public Teleporter(Serial serial)
 							m.SendLocalizedMessage(m_ProgressNumber);
 
 						if (m_ShowTimeRemaining)
-							m.SendMessage("Time remaining: {0}", FormatTime(m_Table[m].Timer.Next - DateTime.Now));
+							m.SendMessage("Time remaining: {0}", FormatTime(m_Table[m].TimerToken.Next - Core.Now));
 
-						Timer.DelayCall<Mobile>(TimeSpan.FromSeconds(5), EndLock, m);
+						Timer.StartTimer(TimeSpan.FromSeconds(5), () => EndLock(m));
 					}
 
 					return;
 				}
 				else
 				{
-					info.Timer.Stop();
+					info.TimerToken.Cancel();
 				}
 			}
 
@@ -621,9 +621,12 @@ public Teleporter(Serial serial)
 
 			if (Delay == TimeSpan.Zero)
 				DoTeleport(m);
-			else
-				m_Table[m] = new TeleportingInfo(this, Timer.DelayCall<Mobile>(Delay, DoTeleport, m));
-		}
+            else
+            {
+                Timer.StartTimer(Delay, () => DoTeleport(m), out var timerToken);
+                m_Table[m] = new TeleportingInfo(this, timerToken);
+            }
+        }
 
 		public override void DoTeleport(Mobile m)
 		{
@@ -665,16 +668,14 @@ public Teleporter(Serial serial)
 
 		private class TeleportingInfo
 		{
-			private WaitTeleporter m_Teleporter;
-			private Timer m_Timer;
+            public WaitTeleporter Teleporter { get; }
 
-			public WaitTeleporter Teleporter { get { return m_Teleporter; } }
-			public Timer Timer { get { return m_Timer; } }
+            public TimerExecutionToken TimerToken { get; }
 
-			public TeleportingInfo(WaitTeleporter tele, Timer t)
+			public TeleportingInfo(WaitTeleporter tele, TimerExecutionToken token)
 			{
-				m_Teleporter = tele;
-				m_Timer = t;
+                Teleporter  = tele;
+                TimerToken  = token;
 			}
 		}
 	}
@@ -682,7 +683,7 @@ public Teleporter(Serial serial)
 	public class TimeoutTeleporter : Teleporter
 	{
 		private TimeSpan m_TimeoutDelay;
-		private Dictionary<Mobile, Timer> m_Teleporting;
+		private Dictionary<Mobile, TimerExecutionToken> m_Teleporting;
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public TimeSpan TimeoutDelay
@@ -707,7 +708,7 @@ public Teleporter(Serial serial)
 		public TimeoutTeleporter(Point3D pointDest, Map mapDest, bool creatures)
 			: base(pointDest, mapDest, creatures)
 		{
-			m_Teleporting = new Dictionary<Mobile, Timer>();
+			m_Teleporting = new Dictionary<Mobile, TimerExecutionToken>();
 		}
 
 		public void StartTimer(Mobile m)
@@ -717,23 +718,17 @@ public Teleporter(Serial serial)
 
 		private void StartTimer(Mobile m, TimeSpan delay)
 		{
-			Timer t;
-
-			if (m_Teleporting.TryGetValue(m, out t))
-				t.Stop();
-
-			m_Teleporting[m] = Timer.DelayCall<Mobile>(delay, StartTeleport, m);
+            StopTimer(m);
+            Timer.StartTimer(delay, () => StartTeleport(m), out var timerToken);
+            m_Teleporting[m] = timerToken;
 		}
 
 		public void StopTimer(Mobile m)
 		{
-			Timer t;
-
-			if (m_Teleporting.TryGetValue(m, out t))
-			{
-				t.Stop();
-				m_Teleporting.Remove(m);
-			}
+            if (m_Teleporting.Remove(m, out var t))
+            {
+                t.Cancel();
+            }
 		}
 
 		public override void DoTeleport(Mobile m)
@@ -770,7 +765,7 @@ public Teleporter(Serial serial)
 			writer.Write(m_TimeoutDelay);
 			writer.Write(m_Teleporting.Count);
 
-			foreach (KeyValuePair<Mobile, Timer> kvp in m_Teleporting)
+			foreach (var kvp in m_Teleporting)
 			{
 				writer.Write(kvp.Key);
 				writer.Write(kvp.Value.Next);
@@ -784,7 +779,7 @@ public Teleporter(Serial serial)
 			int version = reader.ReadInt();
 
 			m_TimeoutDelay = reader.ReadTimeSpan();
-			m_Teleporting = new Dictionary<Mobile, Timer>();
+			m_Teleporting = new Dictionary<Mobile, TimerExecutionToken>();
 
 			int count = reader.ReadInt();
 
@@ -793,7 +788,7 @@ public Teleporter(Serial serial)
 				Mobile m = reader.ReadEntity<Mobile>();
 				DateTime end = reader.ReadDateTime();
 
-				StartTimer(m, end - DateTime.Now);
+				StartTimer(m, end - Core.Now);
 			}
 		}
 	}

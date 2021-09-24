@@ -656,7 +656,7 @@ namespace Server.Mobiles
                 if (GetVendorItem(item) == null)
                 {
                     // We must wait until the item is added
-                    Timer.DelayCall(TimeSpan.Zero, NonLocalDropCallback, new object[] {from, item});
+                    Timer.StartTimer(TimeSpan.Zero, () => NonLocalDropCallback(from, item));
                 }
 
                 return true;
@@ -668,13 +668,8 @@ namespace Server.Mobiles
             }
         }
 
-        private void NonLocalDropCallback(object state)
+        private void NonLocalDropCallback(Mobile from, Item item)
         {
-            object[] aState = (object[]) state;
-
-            Mobile from = (Mobile) aState[0];
-            Item item = (Item) aState[1];
-
             OnItemGiven(from, item);
         }
 
@@ -716,7 +711,7 @@ namespace Server.Mobiles
 
         public bool CanInteractWith(Mobile from, bool ownerOnly)
         {
-            if (!from.CanSee(this) || !Utility.InUpdateRange(from, this) || !from.CheckAlive())
+            if (!from.CanSee(this) || !Utility.InUpdateRange(from.Location, Location) || !from.CheckAlive())
                 return false;
 
             if (ownerOnly)

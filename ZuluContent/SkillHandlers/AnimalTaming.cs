@@ -19,7 +19,7 @@ namespace Server.SkillHandlers
         private const int PointMultiplier = 15;
         private static readonly TimeSpan DelayBetweenSpeech = TimeSpan.FromSeconds(3.0);
         private static readonly TimeSpan UnresponsiveTime = TimeSpan.FromSeconds(300.0);
-        private static readonly Dictionary<uint, uint> BeingTamed = new();
+        private static readonly Dictionary<Serial, Serial> BeingTamed = new();
 
         private static readonly string[] SpeechLines = {
             "What a nice {0}",
@@ -40,7 +40,7 @@ namespace Server.SkillHandlers
             from.Target = target;
             from.RevealingAction();
 
-            from.SendLocalizedMessage(502789); // Tame which animal?
+            from.SendSuccessMessage(502789); // Tame which animal?
 
             var (creature, responseType) = await target;
 
@@ -53,7 +53,7 @@ namespace Server.SkillHandlers
             if (creature.Controlled)
                 return FinishTaming(from, creature, "That creature looks pretty tame already.");
 
-            var difficulty = (int) creature.MinTameSkill;
+            var difficulty = GetCreatureDifficulty(creature);
 
             if (from.Skills[SkillName.AnimalTaming].Value < difficulty)
                 return FinishTaming(from, creature, "You have no chance of taming this creature!");
@@ -128,7 +128,8 @@ namespace Server.SkillHandlers
                 creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799, from.NetState);
                 creature.Owners.Add(from);
                 creature.SetControlMaster(from);
-                PacifyBeast(creature, from);
+                if (creature.Combatant != null)
+                    PacifyBeast(creature, from);
             }
             else
             {
@@ -158,6 +159,16 @@ namespace Server.SkillHandlers
                 from.SendFailureMessage(message);
             
             return Delay;
+        }
+
+        private static int GetCreatureDifficulty(BaseCreature creature)
+        {
+            var difficulty = (int) creature.MinTameSkill;
+
+            if (difficulty <= 0)
+                difficulty = creature.GetCreatureScore();
+
+            return difficulty;
         }
 
         private static bool CanPath(IEntity from, Mobile targeted)

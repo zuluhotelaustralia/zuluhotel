@@ -57,7 +57,7 @@ namespace Server.Engines.PartySystem
                 var c = Members[i].Mobile;
                 var ns = c.NetState;
 
-                if (c != m && ns != null && m.Map == c.Map && Utility.InUpdateRange(c, m) && c.CanSee(m))
+                if (c != m && ns != null && m.Map == c.Map && Utility.InUpdateRange(c.Location, m.Location) && c.CanSee(m))
                 {
                     ns.Send(p);
                 }
@@ -74,7 +74,7 @@ namespace Server.Engines.PartySystem
                 var c = Members[i].Mobile;
                 var ns = c.NetState;
 
-                if (c != m && ns != null && m.Map == c.Map && Utility.InUpdateRange(c, m) && c.CanSee(m))
+                if (c != m && ns != null && m.Map == c.Map && Utility.InUpdateRange(c.Location, m.Location) && c.CanSee(m))
                 {
                     ns.Send(p);
                 }
@@ -84,7 +84,7 @@ namespace Server.Engines.PartySystem
         public void OnStatsQuery(Mobile beholder, Mobile beheld)
         {
             if (beholder != beheld && Contains(beholder) && beholder.Map == beheld.Map &&
-                Utility.InUpdateRange(beholder, beheld))
+                Utility.InUpdateRange(beholder.Location, beheld.Location))
             {
                 if (!beholder.CanSee(beheld))
                 {

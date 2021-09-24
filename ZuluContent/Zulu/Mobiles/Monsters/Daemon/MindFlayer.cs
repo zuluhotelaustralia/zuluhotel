@@ -47,7 +47,7 @@ namespace Server.Mobiles
                 DamageMin = 14,
                 Dex = 310,
                 Female = false,
-                FightMode = FightMode.Aggressor,
+                FightMode = FightMode.Closest,
                 FightRange = 6,
                 HitsMax = 1200,
                 Hue = 2222,
@@ -106,7 +106,7 @@ namespace Server.Mobiles
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int) 0);
+            writer.Write((int)0);
         }
 
         public override void Deserialize(IGenericReader reader)

@@ -19,6 +19,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)] public int Value { get; set; } = 0;
         [Key(2)] public int Charges { get; set; } = int.MaxValue;
+        
+        [CallPriority(1)]
+        public override bool GetShouldDye() => Value > 0;
 
         public override void OnSpellDamage(Mobile attacker, Mobile defender, Spell spell, ElementalType damageType,
             ref int damage)

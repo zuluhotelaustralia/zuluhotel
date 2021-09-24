@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Items;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
@@ -25,15 +26,15 @@ namespace Server.Engines.Harvest
         public virtual bool CheckTool(Mobile from, Item tool)
         {
             var wornOut = tool == null || tool.Deleted ||
-                          tool is IUsesRemaining && ((IUsesRemaining) tool).UsesRemaining <= 0;
-            var checkEquip = !(tool is Shovel);
+                          tool is IUsesRemaining { UsesRemaining: <= 0 };
+            var checkEquip = tool is not Shovel;
             var equipped = tool?.Parent == from;
 
             if (wornOut)
-                from.SendLocalizedMessage(1044038); // You have worn out your tool!
+                from.SendFailureMessage(1044038); // You have worn out your tool!
 
             if (checkEquip && !equipped)
-                from.SendLocalizedMessage(502641); // You must equip this item to use it.
+                from.SendFailureMessage(502641); // You must equip this item to use it.
 
             return wornOut || !checkEquip || equipped;
         }
@@ -123,6 +124,12 @@ namespace Server.Engines.Harvest
 
         public virtual bool BeginHarvesting(Mobile from, Item tool)
         {
+            if (Core.TickCount - from.NextSkillTime < 0)
+            {
+                from.SendSkillMessage();
+                return false;
+            }
+            
             if (!CheckHarvest(from, tool))
                 return false;
 
@@ -138,16 +145,13 @@ namespace Server.Engines.Harvest
             if (!CheckHarvest(from, tool))
                 return;
 
-            int tileID;
-            Map map;
-            Point3D loc;
-
-            if (!GetHarvestDetails(from, tool, toHarvest, out tileID, out map, out loc))
+            if (!GetHarvestDetails(from, tool, toHarvest, out var tileID, out var map, out var loc))
             {
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return;
             }
-            else if (!def.Validate(tileID))
+            
+            if (!def.Validate(tileID))
             {
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return;
@@ -155,12 +159,14 @@ namespace Server.Engines.Harvest
 
             if (!CheckRange(from, tool, def, map, loc, true))
                 return;
-            else if (!CheckResources(from, tool, def, map, loc, true))
+            
+            if (!CheckResources(from, tool, def, map, loc, true))
                 return;
-            else if (!CheckHarvest(from, tool, def, toHarvest))
+            
+            if (!CheckHarvest(from, tool, def, toHarvest))
                 return;
 
-            HarvestBank bank = def.GetBank(map, loc.X, loc.Y);
+            var bank = def.GetBank(map, loc.X, loc.Y);
 
             if (bank == null)
                 return;
@@ -331,33 +337,33 @@ namespace Server.Engines.Harvest
                 return false;
             }
 
-            int tileID;
-            Map map;
-            Point3D loc;
-
-            if (!GetHarvestDetails(from, tool, toHarvest, out tileID, out map, out loc))
+            if (!GetHarvestDetails(from, tool, toHarvest, out var tileID, out var map, out var loc))
             {
                 from.EndAction(locked);
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return false;
             }
-            else if (!def.Validate(tileID))
+            
+            if (!def.Validate(tileID))
             {
                 from.EndAction(locked);
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return false;
             }
-            else if (!CheckRange(from, tool, def, map, loc, true))
+            
+            if (!CheckRange(from, tool, def, map, loc, true))
             {
                 from.EndAction(locked);
                 return false;
             }
-            else if (!CheckResources(from, tool, def, map, loc, true))
+            
+            if (!CheckResources(from, tool, def, map, loc, true))
             {
                 from.EndAction(locked);
                 return false;
             }
-            else if (!CheckHarvest(from, tool, def, toHarvest))
+            
+            if (!CheckHarvest(from, tool, def, toHarvest))
             {
                 from.EndAction(locked);
                 return false;
@@ -405,11 +411,7 @@ namespace Server.Engines.Harvest
             if (!CheckHarvest(from, tool))
                 return;
 
-            int tileID;
-            Map map;
-            Point3D loc;
-
-            if (!GetHarvestDetails(from, tool, toHarvest, out tileID, out map, out loc))
+            if (!GetHarvestDetails(from, tool, toHarvest, out var tileID, out var map, out var loc))
             {
                 OnBadHarvestTarget(from, tool, toHarvest);
                 return;
@@ -425,12 +427,14 @@ namespace Server.Engines.Harvest
 
             if (!CheckRange(from, tool, def, map, loc, false))
                 return;
-            else if (!CheckResources(from, tool, def, map, loc, false))
+            
+            if (!CheckResources(from, tool, def, map, loc, false))
                 return;
-            else if (!CheckHarvest(from, tool, def, toHarvest))
+            
+            if (!CheckHarvest(from, tool, def, toHarvest))
                 return;
 
-            object toLock = GetLock(from, tool, def, toHarvest);
+            var toLock = GetLock(from, tool, def, toHarvest);
 
             if (!from.BeginAction(toLock))
             {

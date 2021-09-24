@@ -1,14 +1,8 @@
 using System;
-using System.Collections;
-using System.Net.Mail;
-using System.IO;
-using Server;
+using System.Collections.Generic;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Network;
-using Server.Misc;
-using Server.Accounting;
-using Server.Commands;
-using System.Collections.Generic;
 
 namespace Server.Engines.Help
 {
@@ -27,34 +21,38 @@ namespace Server.Engines.Help
     public class PageEntry
     {
         // What page types should have a speech log as attachment?
-        public static readonly PageType[] SpeechLogAttachment = new[]
-            {
-                PageType.VerbalHarassment
-            };
-
-        private Mobile m_Sender;
-        private Mobile m_Handler;
-        private DateTime m_Sent;
-        private string m_Message;
-        private PageType m_Type;
-        private Point3D m_PageLocation;
-        private Map m_PageMap;
-        private List<SpeechLogEntry> m_SpeechLog;
-
-        public Mobile Sender
+        public static readonly PageType[] SpeechLogAttachment =
         {
-            get
+            PageType.VerbalHarassment
+        };
+
+        private Mobile m_Handler;
+
+        private Timer m_Timer;
+
+        public PageEntry(Mobile sender, string message, PageType type)
+        {
+            Sender = sender;
+            Sent = Core.Now;
+            Message = Utility.FixHtml(message);
+            Type = type;
+            PageLocation = sender.Location;
+            PageMap = sender.Map;
+
+            if (sender is PlayerMobile pm && pm.SpeechLog != null && Array.IndexOf(SpeechLogAttachment, type) >= 0)
             {
-                return m_Sender;
+                SpeechLog = new List<SpeechLogEntry>(pm.SpeechLog);
             }
+
+            m_Timer = new InternalTimer(this);
+            m_Timer.Start();
         }
+
+        public Mobile Sender { get; }
 
         public Mobile Handler
         {
-            get
-            {
-                return m_Handler;
-            }
+            get => m_Handler;
             set
             {
                 PageQueue.OnHandlerChanged(m_Handler, value, this);
@@ -62,104 +60,43 @@ namespace Server.Engines.Help
             }
         }
 
-        public DateTime Sent
-        {
-            get
-            {
-                return m_Sent;
-            }
-        }
+        public DateTime Sent { get; }
 
-        public string Message
-        {
-            get
-            {
-                return m_Message;
-            }
-        }
+        public string Message { get; }
 
-        public PageType Type
-        {
-            get
-            {
-                return m_Type;
-            }
-        }
+        public PageType Type { get; }
 
-        public Point3D PageLocation
-        {
-            get
-            {
-                return m_PageLocation;
-            }
-        }
+        public Point3D PageLocation { get; }
 
-        public Map PageMap
-        {
-            get
-            {
-                return m_PageMap;
-            }
-        }
+        public Map PageMap { get; }
 
-        public List<SpeechLogEntry> SpeechLog
-        {
-            get
-            {
-                return m_SpeechLog;
-            }
-        }
-
-        private Timer m_Timer;
+        public List<SpeechLogEntry> SpeechLog { get; }
 
         public void Stop()
         {
-            if (m_Timer != null)
-                m_Timer.Stop();
+            m_Timer?.Stop();
 
             m_Timer = null;
         }
 
-        public void AddResponse(Mobile mob, string text)
-        {
-        }
-
-        public PageEntry(Mobile sender, string message, PageType type)
-        {
-            m_Sender = sender;
-            m_Sent = DateTime.UtcNow;
-            m_Message = Utility.FixHtml(message);
-            m_Type = type;
-            m_PageLocation = sender.Location;
-            m_PageMap = sender.Map;
-
-            PlayerMobile pm = sender as PlayerMobile;
-            if (pm != null && pm.SpeechLog != null && Array.IndexOf(SpeechLogAttachment, type) >= 0)
-                m_SpeechLog = new List<SpeechLogEntry>(pm.SpeechLog);
-
-            m_Timer = new InternalTimer(this);
-            m_Timer.Start();
-        }
-
         private class InternalTimer : Timer
         {
-            private static TimeSpan StatusDelay = TimeSpan.FromMinutes(2.0);
+            private static readonly TimeSpan StatusDelay = TimeSpan.FromMinutes(2.0);
 
-            private PageEntry m_Entry;
+            private readonly PageEntry m_Entry;
 
-            public InternalTimer(PageEntry entry) : base(TimeSpan.FromSeconds(1.0), StatusDelay)
-            {
-                m_Entry = entry;
-            }
+            public InternalTimer(PageEntry entry) : base(TimeSpan.FromSeconds(1.0), StatusDelay) => m_Entry = entry;
 
             protected override void OnTick()
             {
-                int index = PageQueue.IndexOf(m_Entry);
+                var index = PageQueue.IndexOf(m_Entry);
 
                 if (m_Entry.Sender.NetState != null && index != -1)
                 {
-                    m_Entry.Sender.SendLocalizedMessage(1008077, true, (index + 1).ToString()); // Thank you for paging. Queue status :
-                    m_Entry.Sender.SendLocalizedMessage(1008084); // You can reference our website at www.uo.com or contact us at support@uo.com. To cancel your page, please select the help button again and select cancel.
+                    // Thank you for paging. Queue status :
+                    m_Entry.Sender.SendLocalizedMessage(1008077, true, (index + 1).ToString());
+                    // You can reference our website at www.uo.com or contact us at support@uo.com. To cancel your page, please select the help button again and select cancel.
+                    m_Entry.Sender.SendLocalizedMessage(1008084);
 
                     if (m_Entry.Handler != null && m_Entry.Handler.NetState == null)
                     {
@@ -169,19 +106,20 @@ namespace Server.Engines.Help
                 else
                 {
                     if (index != -1)
-                        m_Entry.AddResponse(m_Entry.Sender, "[Logout]");
-
-                    PageQueue.Remove(m_Entry);
+                    {
+                        PageQueue.Remove(m_Entry);
+                    }
                 }
             }
         }
     }
 
-    public class PageQueue
+    public static class PageQueue
     {
-        private static ArrayList m_List = new ArrayList();
-        private static Hashtable m_KeyedByHandler = new Hashtable();
-        private static Hashtable m_KeyedBySender = new Hashtable();
+        private static readonly Dictionary<Mobile, PageEntry> m_KeyedByHandler = new();
+        private static readonly Dictionary<Mobile, PageEntry> m_KeyedBySender = new();
+
+        public static List<PageEntry> List { get; } = new();
 
         public static void Initialize()
         {
@@ -190,10 +128,10 @@ namespace Server.Engines.Help
 
         public static bool CheckAllowedToPage(Mobile from)
         {
-            PlayerMobile pm = from as PlayerMobile;
-
-            if (pm == null)
+            if (!(from is PlayerMobile pm))
+            {
                 return true;
+            }
 
             if (pm.PagingSquelched)
             {
@@ -206,34 +144,35 @@ namespace Server.Engines.Help
 
         public static string GetPageTypeName(PageType type)
         {
-            if (type == PageType.VerbalHarassment)
-                return "Verbal Harassment";
-            else if (type == PageType.PhysicalHarassment)
-                return "Physical Harassment";
-            else
-                return type.ToString();
+            return type switch
+            {
+                PageType.VerbalHarassment   => "Verbal Harassment",
+                PageType.PhysicalHarassment => "Physical Harassment",
+                _                           => type.ToString()
+            };
         }
 
         public static void OnHandlerChanged(Mobile old, Mobile value, PageEntry entry)
         {
             if (old != null)
+            {
                 m_KeyedByHandler.Remove(old);
+            }
 
             if (value != null)
+            {
                 m_KeyedByHandler[value] = entry;
+            }
         }
 
-        [Usage("Pages")]
-        [Description("Opens the page queue menu.")]
+        [Usage("Pages"), Description("Opens the page queue menu.")]
         private static void Pages_OnCommand(CommandEventArgs e)
         {
-            PageEntry entry = (PageEntry)m_KeyedByHandler[e.Mobile];
-
-            if (entry != null)
+            if (m_KeyedByHandler.TryGetValue(e.Mobile, out var entry))
             {
                 e.Mobile.SendGump(new PageEntryGump(e.Mobile, entry));
             }
-            else if (m_List.Count > 0)
+            else if (List.Count > 0)
             {
                 e.Mobile.SendGump(new PageQueueGump());
             }
@@ -243,43 +182,34 @@ namespace Server.Engines.Help
             }
         }
 
-        public static bool IsHandling(Mobile check)
-        {
-            return m_KeyedByHandler.ContainsKey(check);
-        }
+        public static bool IsHandling(Mobile check) => m_KeyedByHandler.ContainsKey(check);
 
-        public static bool Contains(Mobile sender)
-        {
-            return m_KeyedBySender.ContainsKey(sender);
-        }
+        public static bool Contains(Mobile sender) => m_KeyedBySender.ContainsKey(sender);
 
-        public static int IndexOf(PageEntry e)
-        {
-            return m_List.IndexOf(e);
-        }
-
-        public static void Cancel(Mobile sender)
-        {
-            Remove((PageEntry)m_KeyedBySender[sender]);
-        }
+        public static int IndexOf(PageEntry e) => List.IndexOf(e);
 
         public static void Remove(PageEntry e)
         {
             if (e == null)
+            {
                 return;
+            }
 
             e.Stop();
 
-            m_List.Remove(e);
+            List.Remove(e);
             m_KeyedBySender.Remove(e.Sender);
 
             if (e.Handler != null)
+            {
                 m_KeyedByHandler.Remove(e.Handler);
+            }
         }
 
         public static PageEntry GetEntry(Mobile sender)
         {
-            return (PageEntry)m_KeyedBySender[sender];
+            m_KeyedBySender.TryGetValue(sender, out var entry);
+            return entry;
         }
 
         public static void Remove(Mobile sender)
@@ -287,80 +217,40 @@ namespace Server.Engines.Help
             Remove(GetEntry(sender));
         }
 
-        public static ArrayList List
-        {
-            get
-            {
-                return m_List;
-            }
-        }
-
         public static void Enqueue(PageEntry entry)
         {
-            m_List.Add(entry);
+            List.Add(entry);
             m_KeyedBySender[entry.Sender] = entry;
 
-            bool isStaffOnline = false;
+            var isStaffOnline = false;
 
-            foreach (NetState ns in TcpServer.Instances)
+            foreach (var ns in TcpServer.Instances)
             {
-                Mobile m = ns.Mobile;
+                var m = ns.Mobile;
 
-                if (m != null && m.AccessLevel >= AccessLevel.Counselor && m.AutoPageNotify && !IsHandling(m))
+                if (m?.AccessLevel >= AccessLevel.Counselor && m.AutoPageNotify && !IsHandling(m))
+                {
                     m.SendMessage("A new page has been placed in the queue.");
+                }
 
-                if (m != null && m.AccessLevel >= AccessLevel.Counselor && m.AutoPageNotify)
+                if (m?.AccessLevel >= AccessLevel.Counselor && m.AutoPageNotify &&
+                    Core.TickCount - m.LastMoveTime < 600000)
+                {
                     isStaffOnline = true;
+                }
             }
 
             if (!isStaffOnline)
-                entry.Sender.SendMessage("We are sorry, but no staff members are currently available to assist you.  Your page will remain in the queue until one becomes available, or until you cancel it manually.");
-
-            if (Email.FromAddress != null && Email.SpeechLogPageAddresses != null && entry.SpeechLog != null)
-                SendEmail(entry);
-        }
-
-        private static void SendEmail(PageEntry entry)
-        {
-            Mobile sender = entry.Sender;
-            DateTime time = DateTime.UtcNow;
-
-            MailMessage mail = new MailMessage(Email.FromAddress, Email.SpeechLogPageAddresses);
-
-            mail.Subject = "RunUO Speech Log Page Forwarding";
-
-            using (StringWriter writer = new StringWriter())
             {
-                writer.WriteLine("RunUO Speech Log Page - {0}", GetPageTypeName(entry.Type));
-                writer.WriteLine();
-
-                writer.WriteLine("From: '{0}', Account: '{1}'", sender.RawName, sender.Account is Account ? sender.Account.Username : "???");
-                writer.WriteLine("Location: {0} [{1}]", sender.Location, sender.Map);
-                writer.WriteLine("Sent on: {0}/{1:00}/{2:00} {3}:{4:00}:{5:00}", time.Year, time.Month, time.Day, time.Hour, time.Minute, time.Second);
-                writer.WriteLine();
-
-                writer.WriteLine("Message:");
-                writer.WriteLine("'{0}'", entry.Message);
-                writer.WriteLine();
-
-                writer.WriteLine("Speech Log");
-                writer.WriteLine("==========");
-
-                foreach (SpeechLogEntry logEntry in entry.SpeechLog)
-                {
-                    Mobile from = logEntry.From;
-                    string fromName = from.RawName;
-                    string fromAccount = from.Account is Account ? from.Account.Username : "???";
-                    DateTime created = logEntry.Created;
-                    string speech = logEntry.Speech;
-
-                    writer.WriteLine("{0}:{1:00}:{2:00} - {3} ({4}): '{5}'", created.Hour, created.Minute, created.Second, fromName, fromAccount, speech);
-                }
-
-                mail.Body = writer.ToString();
+                entry.Sender.SendMessage(
+                    "We are sorry, but no staff members are currently available to assist you.  Your page will remain in the queue until one becomes available, or until you cancel it manually."
+                );
             }
 
-            Email.AsyncSend(mail);
+            if (entry.SpeechLog != null)
+            {
+                Email.SendQueueEmail(entry, GetPageTypeName(entry.Type));
+            }
         }
     }
 }

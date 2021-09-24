@@ -58,7 +58,7 @@ public SerpentPillar( string word, Rectangle2D destination, bool active ) : base
 
 			if ( !e.Handled && from.InRange( this, 10 ) && e.Speech.ToLower() == Word )
 			{
-				BaseBoat boat = BaseBoat.FindBoatAt( from, from.Map );
+				BaseBoat boat = BaseBoat.FindBoatAt( from.Location, from.Map );
 
 				if ( boat == null )
 					return;

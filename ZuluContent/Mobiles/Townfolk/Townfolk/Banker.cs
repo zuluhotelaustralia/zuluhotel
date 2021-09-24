@@ -1,18 +1,19 @@
 using System.Collections.Generic;
+using Server.ContextMenus;
 using Server.Items;
 
 namespace Server.Mobiles
 {
     public class Banker : BaseVendor
     {
-        private List<SBInfo> m_SBInfos = new List<SBInfo>();
-        protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
+        private readonly List<SBInfo> m_SBInfos = new();
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
-        public override NpcGuild NpcGuild { get { return NpcGuild.MerchantsGuild; } }
+        public override NpcGuild NpcGuild => NpcGuild.MerchantsGuild;
 
 
         [Constructible]
-public Banker() : base("the banker")
+        public Banker() : base("the Banker")
         {
         }
 
@@ -30,7 +31,7 @@ public Banker() : base("the banker")
 
         public static int GetBalance(Mobile from, out Item[] gold)
         {
-            int balance = 0;
+            var balance = 0;
 
             Container bank = from.FindBankNoCreate();
 
@@ -38,7 +39,7 @@ public Banker() : base("the banker")
             {
                 gold = bank.FindItemsByType(typeof(Gold));
 
-                for (int i = 0; i < gold.Length; ++i)
+                for (var i = 0; i < gold.Length; ++i)
                     balance += gold[i].Amount;
             }
             else
@@ -52,13 +53,12 @@ public Banker() : base("the banker")
         public static bool Withdraw(Mobile from, int amount)
         {
             Item[] gold;
-            int balance = GetBalance(from, out gold);
+            var balance = GetBalance(from, out gold);
 
             if (balance < amount)
                 return false;
 
-            for (int i = 0; amount > 0 && i < gold.Length; ++i)
-            {
+            for (var i = 0; amount > 0 && i < gold.Length; ++i)
                 if (gold[i].Amount <= amount)
                 {
                     amount -= gold[i].Amount;
@@ -69,18 +69,17 @@ public Banker() : base("the banker")
                     gold[i].Amount -= amount;
                     amount = 0;
                 }
-            }
 
             return true;
         }
 
         public static bool Deposit(Mobile from, int amount)
         {
-            BankBox box = from.FindBankNoCreate();
+            var box = from.FindBankNoCreate();
             if (box == null)
                 return false;
 
-            List<Item> items = new List<Item>();
+            var items = new List<Item>();
 
             while (amount > 0)
             {
@@ -103,10 +102,7 @@ public Banker() : base("the banker")
                 else
                 {
                     item.Delete();
-                    foreach (Item curItem in items)
-                    {
-                        curItem.Delete();
-                    }
+                    foreach (var curItem in items) curItem.Delete();
 
                     return false;
                 }
@@ -117,11 +113,11 @@ public Banker() : base("the banker")
 
         public static int DepositUpTo(Mobile from, int amount)
         {
-            BankBox box = from.FindBankNoCreate();
+            var box = from.FindBankNoCreate();
             if (box == null)
                 return 0;
 
-            int amountLeft = amount;
+            var amountLeft = amount;
             while (amountLeft > 0)
             {
                 Item item;
@@ -174,13 +170,13 @@ public Banker() : base("the banker")
         }
 
         [Constructible]
-public Banker(Serial serial) : base(serial)
+        public Banker(Serial serial) : base(serial)
         {
         }
 
         public override bool HandlesOnSpeech(Mobile from)
         {
-            if (from.InRange(this.Location, 12))
+            if (from.InRange(Location, 12))
                 return true;
 
             return base.HandlesOnSpeech(from);
@@ -188,114 +184,123 @@ public Banker(Serial serial) : base(serial)
 
         public override void OnSpeech(SpeechEventArgs e)
         {
-            if (!e.Handled && e.Mobile.InRange(this.Location, 12))
-            {
-                for (int i = 0; i < e.Keywords.Length; ++i)
+            if (!e.Handled && e.Mobile.InRange(Location, 12))
+                for (var i = 0; i < e.Keywords.Length; ++i)
                 {
-                    int keyword = e.Keywords[i];
+                    var keyword = e.Keywords[i];
 
                     switch (keyword)
                     {
                         case 0x0000: // *withdraw*
+                        {
+                            e.Handled = true;
+
+                            if (e.Mobile.Criminal)
                             {
-                                e.Handled = true;
-
-                                if (e.Mobile.Criminal)
-                                {
-                                    this.Say(500389); // I will not do business with a criminal!
-                                    break;
-                                }
-
-                                string[] split = e.Speech.Split(' ');
-
-                                if (split.Length >= 2)
-                                {
-                                    int amount;
-
-                                    Container pack = e.Mobile.Backpack;
-
-                                    if (!int.TryParse(split[1], out amount))
-                                        break;
-
-                                    if (amount > 5000)
-                                    {
-                                        this.Say(500381); // Thou canst not withdraw so much at one time!
-                                    }
-                                    else if (pack == null || pack.Deleted || !(pack.TotalWeight < pack.MaxWeight) || !(pack.TotalItems < pack.MaxItems))
-                                    {
-                                        this.Say(1048147); // Your backpack can't hold anything else.
-                                    }
-                                    else if (amount > 0)
-                                    {
-                                        BankBox box = e.Mobile.FindBankNoCreate();
-
-                                        if (box == null || !box.ConsumeTotal(typeof(Gold), amount))
-                                        {
-                                            this.Say(500384); // Ah, art thou trying to fool me? Thou hast not so much gold!
-                                        }
-                                        else
-                                        {
-                                            pack.DropItem(new Gold(amount));
-
-                                            this.Say(1010005); // Thou hast withdrawn gold from thy account.
-                                        }
-                                    }
-                                }
-
+                                Say(500389); // I will not do business with a criminal!
                                 break;
                             }
+
+                            var split = e.Speech.Split(' ');
+
+                            if (split.Length >= 2)
+                            {
+                                int amount;
+
+                                var pack = e.Mobile.Backpack;
+
+                                if (!int.TryParse(split[1], out amount))
+                                    break;
+
+                                if (amount > 5000)
+                                {
+                                    Say(500381); // Thou canst not withdraw so much at one time!
+                                }
+                                else if (pack == null || pack.Deleted || !(pack.TotalWeight < pack.MaxWeight) ||
+                                         !(pack.TotalItems < pack.MaxItems))
+                                {
+                                    Say(1048147); // Your backpack can't hold anything else.
+                                }
+                                else if (amount > 0)
+                                {
+                                    var box = e.Mobile.FindBankNoCreate();
+
+                                    if (box == null || !box.ConsumeTotal(typeof(Gold), amount))
+                                    {
+                                        Say(500384); // Ah, art thou trying to fool me? Thou hast not so much gold!
+                                    }
+                                    else
+                                    {
+                                        pack.DropItem(new Gold(amount));
+
+                                        Say(1010005); // Thou hast withdrawn gold from thy account.
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
                         case 0x0001: // *balance*
+                        {
+                            e.Handled = true;
+
+                            if (e.Mobile.Criminal)
                             {
-                                e.Handled = true;
-
-                                if (e.Mobile.Criminal)
-                                {
-                                    this.Say(500389); // I will not do business with a criminal!
-                                    break;
-                                }
-
-                                BankBox box = e.Mobile.FindBankNoCreate();
-
-                                if (box != null)
-                                    this.Say(1042759, box.TotalGold.ToString()); // Thy current bank balance is ~1_AMOUNT~ gold.
-                                else
-                                    this.Say(1042759, "0"); // Thy current bank balance is ~1_AMOUNT~ gold.
-
+                                Say(500389); // I will not do business with a criminal!
                                 break;
                             }
+
+                            var box = e.Mobile.FindBankNoCreate();
+
+                            if (box != null)
+                                Say(1042759, box.TotalGold.ToString()); // Thy current bank balance is ~1_AMOUNT~ gold.
+                            else
+                                Say(1042759, "0"); // Thy current bank balance is ~1_AMOUNT~ gold.
+
+                            break;
+                        }
                         case 0x0002: // *bank*
+                        {
+                            e.Handled = true;
+
+                            if (e.Mobile.Criminal)
                             {
-                                e.Handled = true;
-
-                                if (e.Mobile.Criminal)
-                                {
-                                    this.Say(500378); // Thou art a criminal and cannot access thy bank box.
-                                    break;
-                                }
-
-                                e.Mobile.BankBox.Open();
-
+                                Say(500378); // Thou art a criminal and cannot access thy bank box.
                                 break;
                             }
+
+                            e.Mobile.BankBox.Open();
+
+                            break;
+                        }
                     }
                 }
-            }
 
             base.OnSpeech(e);
+        }
+        
+        public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            if (from.Alive)
+            {
+                list.Add(new OpenBankEntry(this));
+            }
+
+            base.AddCustomContextEntries(from, list);
         }
 
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write((int)0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

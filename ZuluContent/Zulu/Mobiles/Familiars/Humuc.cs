@@ -29,7 +29,7 @@ namespace Server.Mobiles
                 DamageMin = 13,
                 Dex = 100,
                 Female = false,
-                FightMode = FightMode.Aggressor,
+                FightMode = FightMode.Closest,
                 FightRange = 1,
                 HitsMax = 20,
                 Hue = 746,
@@ -86,7 +86,7 @@ namespace Server.Mobiles
             });
 
             Backpack?.Delete();
-            var pack = new StrongBackpack {Movable = false};
+            var pack = new StrongBackpack { Movable = false };
             AddItem(pack);
 
             RemoveIfUntamed = true;
@@ -117,7 +117,7 @@ namespace Server.Mobiles
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write((int) 0);
+            writer.Write((int)0);
         }
 
         public override void Deserialize(IGenericReader reader)
