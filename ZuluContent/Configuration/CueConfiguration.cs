@@ -37,17 +37,18 @@ namespace Scripts.Configuration
                 }
             );
 
-            var configRoot = Path.Combine(Core.BaseDirectory, "Configuration/");
-            var jsonCachePath = Path.Combine(configRoot, ".zhcache.json");
-            var cueArgs = $"export --force --outfile {jsonCachePath} Zuluhotel.cue";
-            
+            var configRoot = Path.Combine(Core.BaseDirectory, "Configuration");
+            const string jsonCacheFile = ".zhcache.json";
+            var jsonCachePath = Path.Combine(configRoot, jsonCacheFile);
+
+            var cueArgs = $"export --force --outfile {jsonCacheFile} Zuluhotel.cue";
+
             try
             {
-                
                 var files = Directory.GetFiles(configRoot, "*.cue", new EnumerationOptions { RecurseSubdirectories = true });
                 var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
 
-                if (!File.Exists(jsonCachePath) || lastWrite != File.GetLastWriteTimeUtc(jsonCachePath))
+                if (!File.Exists(jsonCacheFile) || lastWrite != File.GetLastWriteTimeUtc(jsonCacheFile))
                 {
                     Console.Write($"\tCUE Configuration is out of date, rebuilding via cli `cue {cueArgs}` ... ");
 

@@ -5,7 +5,6 @@ namespace Server.Items
 {
     public abstract class BaseRanged : BaseMeleeWeapon
     {
-        public virtual int EffectId { get; set; }
         public abstract Type AmmoType { get; }
         public abstract Item Ammo { get; }
 
@@ -26,6 +25,9 @@ namespace Server.Items
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int Velocity { get; set; }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual int EffectId { get; set; }
 
         public BaseRanged(int itemId) : base(itemId)
         {

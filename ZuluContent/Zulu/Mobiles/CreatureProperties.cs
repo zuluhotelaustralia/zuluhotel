@@ -22,6 +22,7 @@ namespace Server.Mobiles
 {
     public record CreatureProperties
     {
+        #region Properties
         public string Name { get; set; } = "<CreatureProperties unset>";
         public string Kind { get; set; } = "Npc";
         public string? CorpseNameOverride { get; set; }
@@ -95,6 +96,8 @@ namespace Server.Mobiles
 
         private static readonly Action<CreatureProperties, BaseCreature> MapAction
             = ZuluUtil.BuildMapAction<CreatureProperties, BaseCreature>();
+        
+        #endregion
 
         public void ApplyTo<T>(T dest) where T : BaseCreature
         {
@@ -163,6 +166,7 @@ namespace Server.Mobiles
                 {
                     dest.AddItem(new Fists());
                 }
+                
 
                 if (dest.Weapon is BaseWeapon weapon)
                 {
@@ -183,6 +187,9 @@ namespace Server.Mobiles
 
                     if (Attack.HitPoison != null)
                         weapon.Poison = Attack.HitPoison;
+
+                    if (Attack.ProjectileEffectId != null && weapon is BaseRanged br)
+                        br.EffectId = Attack.ProjectileEffectId.Value;
                 }
             }
         }

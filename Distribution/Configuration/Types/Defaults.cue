@@ -63,21 +63,22 @@ package Types
 	PreferredSpells: []
 	OppositionGroup: null
 	Attack: {
-		Animation: "Slash1H"
+		Animation: null
 		Speed:     30
 		Damage: {
 			Min: 1
 			Max: 2
 		}
-		Ability:         null
-		AbilityChance:   0.4
-		HasBreath:       false
-		HasWebs:         false
-		HitSound:        359
-		MissSound:       568
-		MaxRange:        1
-		Skill:           "Wrestling"
-		HitPoison:       null
-		HitPoisonChance: 0.5
+		Ability:            null
+		AbilityChance:      0.4
+		HasBreath:          false
+		HasWebs:            false
+		HitSound:           359
+		MissSound:          568
+		MaxRange:           null
+		Skill:              "Wrestling"
+		HitPoison:          null
+		HitPoisonChance:    0.5
+		ProjectileEffectId: null
 	}
 }

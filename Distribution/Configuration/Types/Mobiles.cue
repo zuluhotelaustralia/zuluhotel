@@ -25,7 +25,7 @@ package Types
 		for _, v in #CreatureTypeEnum {
 		v
 	}])
-	
+
 #CreatureTypeArray: [...#CreatureType]
 
 #OppositionGroup: {
@@ -44,23 +44,24 @@ package Types
 	Name:        *"" | string
 	Hue:         (*0 | #PropValue)
 	ArmorRating: (*0 | #PropValue)
-	Lootable: 	 (*false | bool)
+	Lootable:    (*false | bool)
 }
 
 #CreatureAttack: {
-	Speed:           (#PropValue | null)
-	Damage:          (#PropValue | null)
-	Skill:           (#SkillName | null)
-	Animation:       (#WeaponAnimation | null)
-	HitSound:        (int32 | null)
-	MissSound:       (int32 | null)
-	MaxRange:        (int32 | null)
-	Ability:         (#WeaponAbility | null)
-	AbilityChance:   (number | null)
-	HasBreath:       (bool | null)
-	HasWebs:         (bool | null)
-	HitPoison:       (#Poison | null)
-	HitPoisonChance: (number | null)
+	Speed:              (#PropValue | null)
+	Damage:             (#PropValue | null)
+	Skill:              (#SkillName | null)
+	Animation:          (#WeaponAnimation | null)
+	HitSound:           (int32 | null)
+	MissSound:          (int32 | null)
+	MaxRange:           (int32 | null)
+	Ability:            (#WeaponAbility | null)
+	AbilityChance:      (number | null)
+	HasBreath:          (bool | null)
+	HasWebs:            (bool | null)
+	HitPoison:          (#Poison | null)
+	HitPoisonChance:    (number | null)
+	ProjectileEffectId: (int32 | null)
 }
 #AITypeEnum: {
 	AI_Use_Default: "AI_Use_Default"

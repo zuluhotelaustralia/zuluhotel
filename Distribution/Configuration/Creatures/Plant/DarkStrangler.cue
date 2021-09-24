@@ -38,6 +38,7 @@ DarkStrangler: {
 		HitSound:  458
 		MissSound: 457
 		HitPoison: "Regular"
+		ProjectileEffectId: 0x37C4
 	}
 	Equipment: [{
 		ItemType: "Bow"

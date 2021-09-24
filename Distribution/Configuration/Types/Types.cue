@@ -2,15 +2,15 @@ package Types
 
 // TODO: Disabled due to perf issues with field comprehension in current version of CUE
 //#NpcEntry: {
-//	Kind:   "NpcEntry"
-//	for key, val in #CreatureProperties {
-//		"\(key)": *#NpcDefaults[key] | val
-//	}
-//	Attack: {
-//		for key, val in #CreatureAttack {
-//			"\(key)": *#NpcDefaults.Attack[key] | val
-//		}
-//	}
+// Kind:   "NpcEntry"
+// for key, val in #CreatureProperties {
+//  "\(key)": *#NpcDefaults[key] | val
+// }
+// Attack: {
+//  for key, val in #CreatureAttack {
+//   "\(key)": *#NpcDefaults.Attack[key] | val
+//  }
+// }
 //}
 
 // TODO: Replace with above field comprehension when perf issues solved
@@ -58,7 +58,7 @@ package Types
 	Meat:                    *#NpcDefaults.Meat | #CreatureProperties.Meat
 	PerceptionRange:         *#NpcDefaults.PerceptionRange | #CreatureProperties.PerceptionRange
 	MinTameSkill:            *#NpcDefaults.MinTameSkill | #CreatureProperties.MinTameSkill
-	OppositionGroup:        *#NpcDefaults.OppositionGroup | #CreatureProperties.OppositionGroup
+	OppositionGroup:         *#NpcDefaults.OppositionGroup | #CreatureProperties.OppositionGroup
 	Race:                    *#NpcDefaults.Race | #CreatureProperties.Race
 	ReacquireDelay:          *#NpcDefaults.ReacquireDelay | #CreatureProperties.ReacquireDelay
 	RiseCreatureDelay:       *#NpcDefaults.RiseCreatureDelay | #CreatureProperties.RiseCreatureDelay
@@ -79,18 +79,19 @@ package Types
 	OppositionGroup:         *#NpcDefaults.OppositionGroup | #CreatureProperties.OppositionGroup
 
 	Attack: {
-		Damage:          *#NpcDefaults.Attack.Damage | #CreatureAttack.Damage
-		Animation:       *#NpcDefaults.Attack.Animation | #CreatureAttack.Animation
-		Speed:           *#NpcDefaults.Attack.Speed | #CreatureAttack.Speed
-		Ability:         *#NpcDefaults.Attack.Ability | #CreatureAttack.Ability
-		AbilityChance:   *#NpcDefaults.Attack.AbilityChance | #CreatureAttack.AbilityChance
-		HasBreath:       *#NpcDefaults.Attack.HasBreath | #CreatureAttack.HasBreath
-		HasWebs:         *#NpcDefaults.Attack.HasWebs | #CreatureAttack.HasWebs
-		HitSound:        *#NpcDefaults.Attack.HitSound | #CreatureAttack.HitSound
-		MissSound:       *#NpcDefaults.Attack.MissSound | #CreatureAttack.MissSound
-		MaxRange:        *#NpcDefaults.Attack.MaxRange | #CreatureAttack.MaxRange
-		Skill:           *#NpcDefaults.Attack.Skill | #CreatureAttack.Skill
-		HitPoison:       *#NpcDefaults.Attack.HitPoison | #CreatureAttack.HitPoison
-		HitPoisonChance: *#NpcDefaults.Attack.HitPoisonChance | #CreatureAttack.HitPoisonChance
+		Damage:             *#NpcDefaults.Attack.Damage | #CreatureAttack.Damage
+		Animation:          *#NpcDefaults.Attack.Animation | #CreatureAttack.Animation
+		Speed:              *#NpcDefaults.Attack.Speed | #CreatureAttack.Speed
+		Ability:            *#NpcDefaults.Attack.Ability | #CreatureAttack.Ability
+		AbilityChance:      *#NpcDefaults.Attack.AbilityChance | #CreatureAttack.AbilityChance
+		HasBreath:          *#NpcDefaults.Attack.HasBreath | #CreatureAttack.HasBreath
+		HasWebs:            *#NpcDefaults.Attack.HasWebs | #CreatureAttack.HasWebs
+		HitSound:           *#NpcDefaults.Attack.HitSound | #CreatureAttack.HitSound
+		MissSound:          *#NpcDefaults.Attack.MissSound | #CreatureAttack.MissSound
+		MaxRange:           *#NpcDefaults.Attack.MaxRange | #CreatureAttack.MaxRange
+		Skill:              *#NpcDefaults.Attack.Skill | #CreatureAttack.Skill
+		HitPoison:          *#NpcDefaults.Attack.HitPoison | #CreatureAttack.HitPoison
+		HitPoisonChance:    *#NpcDefaults.Attack.HitPoisonChance | #CreatureAttack.HitPoisonChance
+		ProjectileEffectId: *#NpcDefaults.Attack.ProjectileEffectId | #CreatureAttack.ProjectileEffectId
 	}
 }

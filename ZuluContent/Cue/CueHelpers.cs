@@ -88,7 +88,7 @@ namespace Scripts.Cue
         public static (string stdout, string stderr, int exitCode) RunCueCli(string workingDir, params string[] args)
         {
             var cueFileName = $"cue{(Core.IsWindows ? ".exe" : "")}";
-            var cueCliRoot = Path.Combine(Core.BaseDirectory, "Configuration/cue/");
+            var cueCliRoot = Path.Combine(Core.BaseDirectory, "Configuration", "cue");
             var cueCliPath = Path.Combine(cueCliRoot, cueFileName);
 
             if (!File.Exists(cueCliPath))

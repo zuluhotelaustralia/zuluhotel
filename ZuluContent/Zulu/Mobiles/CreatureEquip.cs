@@ -36,5 +36,6 @@ namespace Server.Mobiles
         public bool? HasWebs { get; set; }
         public Poison HitPoison { get; set; }
         public double? HitPoisonChance { get; set; } 
+        public int? ProjectileEffectId { get; set; }
     }
 }
