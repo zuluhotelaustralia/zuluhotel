@@ -43,7 +43,7 @@ package Types
 	Meat:                    0
 	PerceptionRange:         10
 	MinTameSkill:            0
-	OpposistionGroup:        null
+	OppositionGroup:         null
 	Race:                    null
 	ReacquireDelay:          "00:00:10"
 	RiseCreatureDelay:       "00:00:10"
@@ -56,16 +56,16 @@ package Types
 	TreasureMapLevel:        0
 	ProvokeSkillOverride:    0
 	StamMaxSeed:             1
-	Tamable: false
+	Tamable:                 false
 	Skills: {}
-	Resitances: {}
+	Resistances: {}
 	Equipment: []
 	PreferredSpells: []
 	OppositionGroup: null
 	Attack: {
 		Animation: "Slash1H"
 		Speed:     30
-		Damage: { 
+		Damage: {
 			Min: 1
 			Max: 2
 		}
