@@ -12,8 +12,13 @@ namespace Server.Engines.Craft
 	{
         public static CraftSystem CraftSystem => new DefCartography(ZhConfig.Crafting.Cartography);
 
-        private DefCartography(CraftSettings settings) : base(settings) // 1 1 1.25
+        private DefCartography(CraftSettings settings) : base(settings)
 		{
+        }
+        
+        public override int GetCraftPoints(int itemSkillRequired, int materialAmount)
+        {
+            return itemSkillRequired * 15;
         }
 
 		public override int CanCraft( Mobile from, BaseTool tool, Type itemType )

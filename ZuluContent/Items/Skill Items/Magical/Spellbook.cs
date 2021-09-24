@@ -14,7 +14,7 @@ namespace Server.Items
         Regular
     }
 
-    public class Spellbook : BaseTinkerItem, ISlayer
+    public class Spellbook : BaseTinkerItem, ISlayer, ISpellbook
     {
         [CommandProperty(AccessLevel.GameMaster)]
         public string EngravedText { get; set; }
@@ -83,7 +83,7 @@ namespace Server.Items
             }
         }
 
-        private static readonly Dictionary<Mobile, List<Spellbook>> Table = new Dictionary<Mobile, List<Spellbook>>();
+        private static readonly Dictionary<Mobile, List<Spellbook>> Table = new();
 
         public static SpellbookType GetTypeForSpell(SpellEntry spellId)
         {

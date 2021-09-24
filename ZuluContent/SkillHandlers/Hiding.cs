@@ -12,7 +12,7 @@ namespace Server.SkillHandlers
 {
     public class Hiding : BaseSkillHandler
     {
-        public override SkillName Skill { get; } = SkillName.Hiding;
+        public override SkillName Skill => SkillName.Hiding;
 
         public override async Task<TimeSpan> OnUse(Mobile mobile)
         {
@@ -21,14 +21,14 @@ namespace Server.SkillHandlers
                 mobile.SendLocalizedMessage(501238); // You are busy doing something else and cannot hide.
                 return TimeSpan.FromSeconds(1.0);
             }
-            
+
             if (mobile.Warmode)
             {
                 mobile.SendFailureLocalOverHeadMessage("You cannot hide while in War Mode.");
                 return Delay;
             }
 
-            var range = (int)(mobile.Skills[Skill].Value switch
+            var range = (int) (mobile.Skills[Skill].Value switch
             {
                 > 130 => 1,
                 > 110 => 2,
@@ -44,7 +44,7 @@ namespace Server.SkillHandlers
             var eable = mobile.GetMobilesInRange(range);
             var hostiles = eable.Any(m => m.Combatant == mobile);
             eable.Free();
-            
+
             if (hostiles)
             {
                 mobile.SendFailureLocalOverHeadMessage("You cannot hide as there are hostiles in view!");
@@ -57,8 +57,8 @@ namespace Server.SkillHandlers
                 mobile.TryAddBuff(new Invisibility());
                 return Delay;
             }
-            
-            mobile.SendFailureLocalOverHeadMessage(501237);  // You can't seem to hide right now.
+
+            mobile.SendFailureLocalOverHeadMessage(501237); // You can't seem to hide right now.
 
             return Delay;
         }

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Configuration;
 using Server.Items;
 using Server.Misc;
-using Scripts.Configuration;
+using Server.Spells;
 
 namespace Server.Engines.Craft
 {
@@ -276,6 +277,17 @@ namespace Server.Engines.Craft
                 foreach (var c in entry.Resources.Skip(1))
                 {
                     AddRes(idx, c.ItemType, c.Name, c.Amount, c.Message);
+                }
+
+                if (typeof(SpellScroll).IsAssignableFrom(entry.ItemType))
+                {
+                    var scroll = (SpellScroll) Activator.CreateInstance(entry.ItemType);
+
+                    if (scroll != null)
+                    {
+                        var spellInfo = SpellRegistry.GetInfo(scroll.SpellEntry);
+                        SetManaReq(idx, spellInfo.Circle.Mana);
+                    }
                 }
                 
                 if (entry.UseAllRes)

@@ -1,152 +1,154 @@
 using System;
-using Server.Targeting;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Items;
+using Server.Misc;
+using Server.Targeting;
+using ZuluContent.Zulu.Items;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class Poisoning
+    public class Poisoning : BaseSkillHandler
     {
-        public static void Initialize()
+        public override SkillName Skill => SkillName.Poisoning;
+
+        public override async Task<TimeSpan> OnUse(Mobile from)
         {
-            SkillInfo.Table[(int) SkillName.Poisoning].Callback = OnUse;
-        }
+            from.SendSuccessMessage(502137); // Select the poison you wish to use
 
-        public static TimeSpan OnUse(Mobile m)
-        {
-            m.Target = new InternalTargetPoison();
+            var target1 = new AsyncTarget<object>(from,
+                new TargetOptions {Range = 1});
+            from.Target = target1;
 
-            m.SendLocalizedMessage(502137); // Select the poison you wish to use
+            var (targeted1, _) = await target1;
 
-            return TimeSpan.FromSeconds(10.0); // 10 second delay before beign able to re-use a skill
-        }
-
-        private class InternalTargetPoison : Target
-        {
-            public InternalTargetPoison() : base(2, false, TargetFlags.None)
+            if (!(targeted1 is BasePoisonPotion poisonPotion))
             {
+                from.SendFailureMessage(502139); // That is not a poison potion.
+                return Delay;
             }
 
-            protected override void OnTarget(Mobile from, object targeted)
+            from.SendSuccessMessage(502142); // To what do you wish to apply the poison?
+
+            var target2 = new AsyncTarget<object>(from,
+                new TargetOptions {Range = 1});
+            from.Target = target2;
+
+            var (targeted2, _) = await target2;
+
+            if (poisonPotion.Deleted)
+                return Delay;
+
+            if (targeted2 is Food food)
+                PoisonFood(@from, poisonPotion, food);
+            else if (targeted2 is BaseWeapon
+                {Layer: Layer.OneHanded, Type: WeaponType.Slashing or WeaponType.Piercing} weapon)
+                PoisonWeapon(@from, poisonPotion, weapon);
+            else // Target can't be poisoned
+                @from.SendFailureMessage(
+                    502145); // You cannot poison that! You can only poison bladed or piercing weapons, food or drink.
+
+            return Delay;
+        }
+
+        private void PoisonFood(Mobile from, BasePoisonPotion poisonPotion, Food food)
+        {
+            var power = (double) poisonPotion.Poison.Level;
+            var difficulty = power * 20;
+
+            if (difficulty > 120.0)
+                difficulty = 120.0;
+
+            Titles.AwardKarma(from, -50, true);
+
+            poisonPotion.Consume();
+            from.AddToBackpack(new Bottle());
+
+            if (from.ShilCheckSkill(Skill, (int) difficulty, (int) (difficulty * 20)))
             {
-                if (targeted is BasePoisonPotion potion)
+                power *= from.GetClassModifier(Skill);
+
+                var poison = Poison.GetPoison(Math.Min((int) power, Poison.Poisons.Count - 1));
+
+                from.PlaySound(0x247);
+                from.SendSuccessMessage(1010517); // You apply the poison
+                food.Poison = poison;
+            }
+            else
+            {
+                var poisoningSkill = from.Skills[Skill].Value;
+                poisoningSkill *= from.GetClassModifier(Skill);
+
+                if (Utility.Random(100) > poisoningSkill)
                 {
-                    from.SendLocalizedMessage(502142); // To what do you wish to apply the poison?
-                    from.Target = new InternalTarget(potion);
+                    from.SendFailureMessage(
+                        502148); // You make a grave mistake while applying the poison.
+                    from.ApplyPoison(from, poisonPotion.Poison);
                 }
-                else // Not a Poison Potion
+                else
                 {
-                    from.SendLocalizedMessage(502139); // That is not a poison potion.
+                    @from.SendFailureMessage(1010518); // You fail to apply a sufficient dose of poison
                 }
             }
+        }
 
-            private class InternalTarget : Target
+        private void PoisonWeapon(Mobile from, BasePoisonPotion poisonPotion, BaseWeapon weapon)
+        {
+            var power = (double) poisonPotion.Poison.Level;
+            var difficulty = power * 25;
+
+            if (weapon is IGMItem)
+                difficulty += 20.0;
+
+            if (difficulty > 160.0)
+                difficulty = 160.0;
+
+            var poisoningSkill = from.Skills[Skill].Value;
+
+            power = poisoningSkill switch
             {
-                private readonly BasePoisonPotion m_Potion;
+                < 50.0 => power - 2.0,
+                < 75 => power - 1.0,
+                > 160 => power + 2.0,
+                > 135 => power + 1.0,
+                _ => power
+            };
+            power = Math.Max(power, 1.0);
 
-                public InternalTarget(BasePoisonPotion potion) : base(2, false, TargetFlags.None)
+            Titles.AwardKarma(from, -50, true);
+
+            poisonPotion.Consume();
+            from.AddToBackpack(new Bottle());
+
+            if (from.ShilCheckSkill(Skill, (int) difficulty, (int) (difficulty * 20)))
+            {
+                if (from.ClassContainsSkill(Skill))
+                    power += 1;
+
+                var poison = Poison.GetPoison(Math.Min((int) power, Poison.Poisons.Count - 1));
+
+                from.PlaySound(0x247);
+                from.SendSuccessMessage(1010517); // You apply the poison
+
+                weapon.Poison = poison;
+                weapon.PoisonCharges = (int) (power * 3);
+            }
+            else
+            {
+                poisoningSkill -= (int) (difficulty / 2);
+                poisoningSkill *= from.GetClassModifier(Skill);
+
+                if (Utility.Random(100) > poisoningSkill)
                 {
-                    m_Potion = potion;
+                    from.SendFailureMessage(
+                        502148); // You make a grave mistake while applying the poison.
+                    from.ApplyPoison(from, poisonPotion.Poison);
                 }
-
-                protected override void OnTarget(Mobile from, object targeted)
+                else
                 {
-                    if (m_Potion.Deleted)
-                        return;
-
-                    bool startTimer = false;
-
-                    if (targeted is Food)
-                    {
-                        startTimer = true;
-                    }
-                    else if (targeted is BaseWeapon weapon)
-                    {
-                        if (weapon.Layer == Layer.OneHanded)
-                        {
-                            // Only Bladed or Piercing weapon can be poisoned
-                            startTimer = weapon.Type == WeaponType.Slashing || weapon.Type == WeaponType.Piercing;
-                        }
-                    }
-
-                    if (startTimer)
-                    {
-                        new InternalTimer(from, (Item) targeted, m_Potion).Start();
-
-                        from.PlaySound(0x4F);
-
-                        m_Potion.Consume();
-                        from.AddToBackpack(new Bottle());
-                    }
-                    else // Target can't be poisoned
-                    {
-                        from.SendLocalizedMessage(
-                            502145); // You cannot poison that! You can only poison bladed or piercing weapons, food or drink.
-                    }
-                }
-
-                private class InternalTimer : Timer
-                {
-                    private readonly Mobile m_From;
-                    private readonly Item m_Target;
-                    private readonly Poison m_Poison;
-                    private readonly double m_MinSkill;
-                    private readonly double m_MaxSkill;
-
-                    public InternalTimer(Mobile from, Item target, BasePoisonPotion potion) : base(
-                        TimeSpan.FromSeconds(2.0))
-                    {
-                        m_From = from;
-                        m_Target = target;
-                        m_Poison = potion.Poison;
-                        m_MinSkill = potion.MinPoisoningSkill;
-                        m_MaxSkill = potion.MaxPoisoningSkill;
-                    }
-
-                    protected override void OnTick()
-                    {
-                        if (m_From.CheckTargetSkill(SkillName.Poisoning, m_Target, m_MinSkill, m_MaxSkill))
-                        {
-                            if (m_Target is Food food)
-                            {
-                                food.Poison = m_Poison;
-                            }
-                            else if (m_Target is BaseWeapon weapon)
-                            {
-                                weapon.Poison = m_Poison;
-                                weapon.PoisonCharges = 18 - m_Poison.Level * 2;
-                            }
-
-                            m_From.SendLocalizedMessage(1010517); // You apply the poison
-
-                            Misc.Titles.AwardKarma(m_From, -20, true);
-                        }
-                        else // Failed
-                        {
-                            // 5% of chance of getting poisoned if failed
-                            if (m_From.Skills[SkillName.Poisoning].Base < 80.0 && Utility.Random(20) == 0)
-                            {
-                                m_From.SendLocalizedMessage(
-                                    502148); // You make a grave mistake while applying the poison.
-                                m_From.ApplyPoison(m_From, m_Poison);
-                            }
-                            else
-                            {
-                                if (m_Target is BaseWeapon weapon)
-                                {
-                                    m_From.SendLocalizedMessage(
-                                        weapon.Type == WeaponType.Slashing 
-                                        ? 1010516 // You fail to apply a sufficient dose of poison on the blade
-                                        : 1010518 // You fail to apply a sufficient dose of poison
-                                    );
-                                }
-                                else
-                                {
-                                    // You fail to apply a sufficient dose of poison
-                                    m_From.SendLocalizedMessage(1010518); 
-                                }
-                            }
-                        }
-                    }
+                    @from.SendFailureMessage(1010518); // You fail to apply a sufficient dose of poison
                 }
             }
         }

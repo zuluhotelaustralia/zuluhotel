@@ -1,209 +1,171 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Targeting;
 using Server.Items;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public class Inscribe
+    public class Inscribe : BaseSkillHandler
     {
-        private static readonly long TargetTimeout = (int) TimeSpan.FromMinutes(1.0).TotalMilliseconds;
-        
-        public static void Initialize()
+        public override SkillName Skill => SkillName.Inscribe;
+
+        private static readonly TargetOptions TargetOptions = new()
         {
-            SkillInfo.Table[(int) SkillName.Inscribe].Callback = OnUse;
+            Range = 3,
+            CheckLos = true
+        };
+
+        private static readonly int PointMultiplier = 15;
+
+        private static readonly Dictionary<uint, uint> Users = new();
+
+        private static void SetUser(Serial itemSerial, Mobile mob)
+        {
+            Users[itemSerial] = mob.Serial;
         }
 
-        public static TimeSpan OnUse(Mobile m)
+        private static void CancelUser(Serial itemSerial)
         {
-            Target target = new InternalTargetSrc();
-            m.Target = target;
-            m.SendAsciiMessage("What would you like to inscribe?");
-            target.BeginTimeout(m, TargetTimeout);
-
-            return TimeSpan.FromSeconds(1.0);
+            Users.Remove(itemSerial);
         }
 
-        private static Hashtable m_UseTable = new Hashtable();
-
-        private static void SetUser(BaseBook book, Mobile mob)
+        private static bool GetUser(Serial itemSerial)
         {
-            m_UseTable[book] = mob;
+            return Users.ContainsKey(itemSerial);
         }
 
-        private static void CancelUser(BaseBook book)
+        public override async Task<TimeSpan> OnUse(Mobile from)
         {
-            m_UseTable.Remove(book);
-        }
+            var target = new TimeoutAsyncTarget(from, TargetOptions);
+            from.Target = target;
 
-        public static Mobile GetUser(BaseBook book)
-        {
-            return (Mobile) m_UseTable[book];
-        }
+            from.SendSuccessMessage(501620); // What would you like to inscribe?
 
-        public static bool IsEmpty(BaseBook book)
-        {
-            foreach (BookPageInfo page in book.Pages)
+            var (targeted, responseType) = await target;
+
+            if (responseType != TargetResponseType.Success)
+                return Delay;
+
+            if (targeted is ISpellbook spellbook)
             {
-                foreach (string line in page.Lines)
+                if (GetUser(spellbook.Serial))
                 {
-                    if (line.Trim().Length != 0)
-                        return false;
+                    from.SendFailureMessage(501621); // Someone else is inscribing that item.
+                    return Delay;
                 }
-            }
 
-            return true;
-        }
+                var emptySpellbookTarget = new TimeoutAsyncTarget(from, TargetOptions);
+                from.Target = emptySpellbookTarget;
 
-        public static void Copy(BaseBook bookSrc, BaseBook bookDst)
-        {
-            bookDst.Title = bookSrc.Title;
-            bookDst.Author = bookSrc.Author;
+                SetUser(spellbook.Serial, from);
 
-            BookPageInfo[] pagesSrc = bookSrc.Pages;
-            BookPageInfo[] pagesDst = bookDst.Pages;
-            for (int i = 0; i < pagesSrc.Length && i < pagesDst.Length; i++)
-            {
-                BookPageInfo pageSrc = pagesSrc[i];
-                BookPageInfo pageDst = pagesDst[i];
+                from.SendSuccessMessage($"Select an empty {spellbook.Name} to copy to.");
 
-                int length = pageSrc.Lines.Length;
-                pageDst.Lines = new string[length];
+                var (targetedEmptySpellbook, responseTypeEmptySpellbook) = await emptySpellbookTarget;
 
-                for (int j = 0; j < length; j++)
-                    pageDst.Lines[j] = pageSrc.Lines[j];
-            }
-        }
+                CancelUser(spellbook.Serial);
 
-        private class InternalTargetSrc : Target
-        {
-            public InternalTargetSrc() : base(3, false, TargetFlags.None)
-            {
-            }
+                if (responseTypeEmptySpellbook != TargetResponseType.Success)
+                    return Delay;
 
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                if (targeted is BaseBook book)
+                if (GetUser(targetedEmptySpellbook.Serial))
                 {
-                    if (IsEmpty(book))
-                        from.SendLocalizedMessage(501611); // Can't copy an empty book.
-                    else if (GetUser(book) != null)
-                        from.SendLocalizedMessage(501621); // Someone else is inscribing that item.
-                    else
+                    from.SendFailureMessage(501621); // Someone else is inscribing that item.
+                    return Delay;
+                }
+
+                if (targetedEmptySpellbook is not ISpellbook emptySpellBook ||
+                    emptySpellBook.BookOffset != spellbook.BookOffset)
+                {
+                    from.SendFailureMessage($"You must target a {spellbook.Name}.");
+                    return Delay;
+                }
+
+                if (emptySpellBook.Content != 0)
+                {
+                    from.SendFailureMessage($"You must target an empty {spellbook.Name}.");
+                    return Delay;
+                }
+
+                SetUser(emptySpellBook.Serial, from);
+
+                var difficulty = spellbook switch
+                {
+                    Spellbook => 110.0,
+                    Earthbook => 150.0,
+                    Codex => 160.0,
+                    _ => 0.0
+                };
+                var manaCost = difficulty;
+                manaCost /= from.GetClassModifier(Skill);
+
+                if (from.Mana < manaCost)
+                {
+                    from.SendFailureMessage("You don't have enough mana.");
+                    from.Mana = 0;
+                    CancelUser(emptySpellBook.Serial);
+                    return Delay;
+                }
+
+                from.Mana -= (int)manaCost;
+
+                if (!from.ShilCheckSkill(Skill, (int)difficulty, (int)(difficulty * PointMultiplier)))
+                {
+                    from.SendFailureMessage($"You fail to copy the {spellbook.Name}.");
+                    CancelUser(emptySpellBook.Serial);
+                    targetedEmptySpellbook.Delete();
+                    return Delay;
+                }
+
+                from.PlaySound(0x249);
+                emptySpellBook.Content = spellbook.Content;
+                from.SendSuccessMessage($"You copied the {spellbook.Name} successfully.");
+                CancelUser(emptySpellBook.Serial);
+            }
+            else if (targeted is CustomSpellScroll customScroll)
+            {
+                var spellbookTarget = new TimeoutAsyncTarget(from, TargetOptions);
+                from.Target = spellbookTarget;
+
+                SetUser(customScroll.Serial, from);
+
+                from.SendSuccessMessage("Select a book to inscribe this to.");
+
+                var (targetedSpellbook, responseTypeSpellbook) = await spellbookTarget;
+
+                CancelUser(customScroll.Serial);
+
+                if (responseTypeSpellbook != TargetResponseType.Success)
+                    return Delay;
+
+                if (customScroll.Deleted)
+                    return Delay;
+
+                if (targetedSpellbook is CustomSpellbook customBook)
+                {
+                    if (!customBook.CanAddEntry(from, customScroll))
+                        return Delay;
+
+                    var scrollData =
+                        ZhConfig.Crafting.Inscription.CraftEntries.First(e => e.ItemType == customScroll.GetType());
+                    var difficulty = scrollData.Skill2 ?? 80.0;
+
+                    if (from.ShilCheckSkill(Skill, (int)difficulty, (int)(difficulty * PointMultiplier + 5)))
                     {
-                        Target target = new InternalTargetBookDst(book);
-                        from.Target = target;
-                        from.SendLocalizedMessage(501612); // Select a book to copy this to.
-                        target.BeginTimeout(from, 60000);
-                        SetUser(book, from);
-                    }
-                }
-                else if (targeted is CustomSpellScroll customScroll)
-                {
-                    Target target = new InternalTargetScrollDst(customScroll);
-                    from.Target = target;
-                    from.SendAsciiMessage("Select a book to inscribe this to.");
-                    target.BeginTimeout(from, 60000);
-                }
-                else
-                {
-                    from.SendFailureMessage("That is not a valid selection.");
-                }
-            }
-
-            protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
-            {
-                if (cancelType == TargetCancelType.Timeout)
-                    from.SendLocalizedMessage(
-                        501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
-            }
-        }
-
-        private class InternalTargetBookDst : Target
-        {
-            private BaseBook m_BookSrc;
-
-            public InternalTargetBookDst(BaseBook bookSrc) : base(3, false, TargetFlags.None)
-            {
-                m_BookSrc = bookSrc;
-            }
-
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                if (m_BookSrc.Deleted)
-                    return;
-
-                BaseBook bookDst = targeted as BaseBook;
-
-                if (bookDst == null)
-                    from.SendLocalizedMessage(1046296); // That is not a book
-                else if (IsEmpty(m_BookSrc))
-                    from.SendLocalizedMessage(501611); // Can't copy an empty book.
-                else if (bookDst == m_BookSrc)
-                    from.SendLocalizedMessage(501616); // Cannot copy a book onto itself.
-                else if (!bookDst.Writable)
-                    from.SendLocalizedMessage(501614); // Cannot write into that book.
-                else if (GetUser(bookDst) != null)
-                    from.SendLocalizedMessage(501621); // Someone else is inscribing that item.
-                else
-                {
-                    if (from.CheckTargetSkill(SkillName.Inscribe, bookDst, 0, 50))
-                    {
-                        Copy(m_BookSrc, bookDst);
-
-                        from.SendLocalizedMessage(501618); // You make a copy of the book.
+                        customBook.AddEntry(customScroll);
+                        from.SendSuccessMessage($"You inscribe the spell into your {customBook.Name}.");
                         from.PlaySound(0x249);
                     }
                     else
                     {
-                        from.SendLocalizedMessage(501617); // You fail to make a copy of the book.
-                    }
-                }
-            }
-
-            protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
-            {
-                if (cancelType == TargetCancelType.Timeout)
-                    from.SendLocalizedMessage(
-                        501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                CancelUser(m_BookSrc);
-            }
-        }
-
-        private class InternalTargetScrollDst : Target
-        {
-            private CustomSpellScroll m_ScrollSrc;
-
-            public InternalTargetScrollDst(CustomSpellScroll scrollSrc) : base(3, false, TargetFlags.None)
-            {
-                m_ScrollSrc = scrollSrc;
-            }
-
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                if (m_ScrollSrc.Deleted)
-                    return;
-
-                if (targeted is CustomSpellbook customBook)
-                {
-                    if (!customBook.CanAddEntry(from, m_ScrollSrc))
-                        return;
-
-                    if (from.CheckTargetSkill(SkillName.Inscribe, customBook, 100, 150))
-                    {
-                        customBook.AddEntry(m_ScrollSrc);
-                        from.SendSuccessMessage("You have successfully inscribed that spell.");
-                        from.PlaySound(0x249);
-                    }
-                    else
-                    {
-                        m_ScrollSrc.Delete();
-                        from.SendFailureMessage("You fail to inscribe that scroll.");
+                        customScroll.Consume();
+                        from.SendFailureMessage("You fail, and destroy the scroll.");
                     }
                 }
                 else
@@ -211,11 +173,24 @@ namespace Server.SkillHandlers
                     from.SendFailureMessage("You cannot inscribe to that.");
                 }
             }
+            else
+            {
+                from.SendFailureMessage(501624); // Can't inscribe that item.
+            }
+
+            return Delay;
+        }
+
+        private class TimeoutAsyncTarget : AsyncTarget<Item>
+        {
+            public TimeoutAsyncTarget(Mobile from, TargetOptions opts) : base(from, opts)
+            {
+            }
 
             protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
             {
                 if (cancelType == TargetCancelType.Timeout)
-                    from.SendLocalizedMessage(
+                    from.SendFailureMessage(
                         501619); // You have waited too long to make your inscribe selection, your inscription attempt has timed out.
             }
         }
