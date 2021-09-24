@@ -30,7 +30,7 @@ namespace Server.SkillHandlers
             if (victim is BaseVendor)
                 return 40;
 
-            if (victim is Warrior)
+            if (victim is WarriorGuard)
                 return 80;
 
             if (victim is BaseGuard)
