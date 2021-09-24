@@ -19,7 +19,7 @@ namespace Server.Items
         {
         }
         
-        private static bool Summon<T>(Mobile caster) where T : BaseCreature
+        private static bool Summon(string template, Mobile caster)
         {
             var map = caster.Map;
 
@@ -28,7 +28,7 @@ namespace Server.Items
 
             var p = new Point3D(caster);
 
-            var creature = typeof(T).CreateInstance<Humuc>();
+            var creature = Creatures.Create(template);
             
             if (SpellHelper.FindValidSpawnLocation(map, ref p, true))
             {
@@ -54,7 +54,7 @@ namespace Server.Items
 
         public override void Drink(Mobile from)
         {
-            if (!(from is PlayerMobile player) || player.AllFollowers.Any(f => f is Humuc))
+            if (!(from is PlayerMobile player) || player.AllFollowers.Any(f => f is BaseCreature {AI: AIType.AI_Familiar}))
             {
                 from.SendLocalizedMessage(1061605); // You already have a familiar.
                 return;
@@ -68,7 +68,7 @@ namespace Server.Items
                 return;
             }
             
-            if (Summon<Humuc>(from) && player.Backpack.ConsumeUpTo(type, 1) == 1)
+            if (Summon("humuc", from) && player.Backpack.ConsumeUpTo(type, 1) == 1)
             {
                 from.FixedEffect(0x3727, 10, 15);
                 from.PlaySound(0x1FD);

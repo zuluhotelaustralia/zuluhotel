@@ -1,3 +1,5 @@
+using Server.Misc;
+
 namespace Server.Engines.Craft
 {
     public class CraftGroup

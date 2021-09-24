@@ -1,4 +1,6 @@
+using System.Text.Json;
 using Server.Network;
+using Server.Spells.First;
 
 namespace Server.Engines.Magic.HitScripts
 {

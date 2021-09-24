@@ -12,50 +12,23 @@ namespace Server.Items
             EventSink.StunRequest += EventSink_StunRequest;
         }
 
-        public override int DefaultStrengthReq
-        {
-            get { return 0; }
-        }
+        public override int DefaultStrengthReq { get; } = 0;
 
-        public override int DefaultMinDamage
-        {
-            get { return 1; }
-        }
+        public override int DefaultMinDamage { get; } = 1;
 
-        public override int DefaultMaxDamage
-        {
-            get { return 8; }
-        }
+        public override int DefaultMaxDamage { get; } = 8;
 
-        public override int DefaultSpeed
-        {
-            get { return 30; }
-        }
+        public override int DefaultSpeed { get; } = 30;
 
-        public override int DefaultHitSound
-        {
-            get { return -1; }
-        }
+        public override int DefaultHitSound { get; } = -1;
 
-        public override int DefaultMissSound
-        {
-            get { return -1; }
-        }
+        public override int DefaultMissSound { get; } = -1;
 
-        public override SkillName DefaultSkill
-        {
-            get { return SkillName.Wrestling; }
-        }
+        public override SkillName DefaultSkill { get; } = SkillName.Wrestling;
 
-        public override WeaponType DefaultWeaponType
-        {
-            get { return WeaponType.Fists; }
-        }
+        public override WeaponType DefaultWeaponType { get; } = WeaponType.Fists;
 
-        public override WeaponAnimation DefaultAnimation
-        {
-            get { return WeaponAnimation.Wrestle; }
-        }
+        public override WeaponAnimation DefaultAnimation { get; } = WeaponAnimation.Wrestle;
 
         public Fists() : base(0)
         {

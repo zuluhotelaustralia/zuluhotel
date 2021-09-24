@@ -25,9 +25,6 @@ namespace Server.Configurations
             MaxStatCap = config.MaxStatCap;
             StatCap = config.StatCap;
 
-            var path = Path.Combine(Core.BaseDirectory, "Data/skills2.json");
-            JsonConfig.Serialize(path, config);
-            
             RegisterSkillHandlers(Entries);
         }
 

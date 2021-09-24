@@ -273,11 +273,11 @@ namespace Server.Items
                     BaseCreature spawn = null;
 
                     if (Utility.Random(11) > 9)
-                        spawn = new Kraken();
+                        spawn = "Kraken";
                     else if (Utility.Random(11) > 9)
-                        spawn = new Kraken();
+                        spawn = "Kraken";
                     else if (Utility.Random(11) > 9)
-                        spawn = new SeaSerpent();
+                        spawn = "SeaSerpent";
 
                     if (spawn != null)
                     {
@@ -359,7 +359,7 @@ namespace Server.Items
                 }
                 case 9:
                 {
-                    var seaSerpent = new SeaSerpent();
+                    var seaSerpent = "SeaSerpent";
                     Spawn(from.Location, from.Map, seaSerpent);
                     from.SendFailureMessage("You did not catch anything, except...");
                     break;

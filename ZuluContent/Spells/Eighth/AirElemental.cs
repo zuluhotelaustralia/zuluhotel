@@ -11,7 +11,7 @@ namespace Server.Spells.Eighth
 
         public async Task CastAsync()
         {
-            SpellHelper.Summon(new AirElemental(), Caster, 0x217);
+            SpellHelper.Summon("AirElemental", Caster, 0x217);
         }
     }
 }

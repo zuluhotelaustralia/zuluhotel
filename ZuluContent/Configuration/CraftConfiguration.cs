@@ -1,8 +1,11 @@
 using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using Server;
+using Server.Misc;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
-namespace ZuluContent.Configuration
+namespace Scripts.Configuration
 {
     public class CraftConfiguration : BaseSingleton<CraftConfiguration>
     {
@@ -44,37 +47,37 @@ namespace ZuluContent.Configuration
     {
         public SkillName MainSkill { get; init; }
         public TextDefinition GumpTitleId { get; init; }
-        public CraftEntry[] CraftEntries { get; init; }
+        public List<CraftEntry> CraftEntries { get; init; }
         public int MinCraftDelays { get; init; }
         public int MaxCraftDelays { get; init; }
         public double Delay { get; init; }
         public double MinCraftChance { get; init; }
         public int CraftWorkSound { get; init; }
         public int CraftEndSound { get; init; }
+    }
+    
+    public record CraftResource
+    {
+        public Type ItemType { get; init; }
+        public TextDefinition Name { get; init; }
+        public int Amount { get; init; }
+        public TextDefinition Message { get; init; }
+    }
+    
+    public record CraftEntry
+    {
+        public Type ItemType { get; init; }
+        public TextDefinition Name { get; init; }
+        public TextDefinition GroupName { get; init; }
+        public double Skill { get; init; }
+        public SkillName? SecondarySkill { get; init; }
+        public double? Skill2 { get; init; }
 
-        public record CraftEntry
-        {
-            public Type ItemType { get; init; }
-            public TextDefinition Name { get; init; }
-            public TextDefinition GroupName { get; init; }
-            public double Skill { get; init; }
-            public SkillName? SecondarySkill { get; init; }
-            public double? Skill2 { get; init; }
+        public List<CraftResource> Resources { get; init; }
+        public bool UseAllRes { get; init; }
+        public bool NeedHeat { get; init; }
+        public bool NeedOven { get; init; }
+        public bool NeedMill { get; init; }
 
-            public CraftResource[] Resources { get; init; }
-            public bool UseAllRes { get; init; }
-            public bool NeedHeat { get; init; }
-            public bool NeedOven { get; init; }
-            public bool NeedMill { get; init; }
-
-        }
-
-        public record CraftResource
-        {
-            public Type ItemType { get; init; }
-            public TextDefinition Name { get; init; }
-            public int Amount { get; init; }
-            public TextDefinition Message { get; init; }
-        }
     }
 }

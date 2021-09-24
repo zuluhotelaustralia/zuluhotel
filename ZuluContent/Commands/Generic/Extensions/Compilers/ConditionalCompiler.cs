@@ -22,7 +22,7 @@ namespace Server.Commands.Generic
 
     public sealed class TypeCondition : ICondition
     {
-        public static TypeCondition Default = new TypeCondition();
+        public static TypeCondition Default = new();
 
         void ICondition.Construct(TypeBuilder typeBuilder, ILGenerator il, int index)
         {
@@ -53,7 +53,10 @@ namespace Server.Commands.Generic
 
         public FieldInfo Field { get; private set; }
 
-        public bool HasField => Field != null;
+        public bool HasField
+        {
+            get { return Field != null; }
+        }
 
         public void Load(MethodEmitter method)
         {
@@ -114,7 +117,7 @@ namespace Server.Commands.Generic
                 MethodInfo parseMethod;
                 object[] parseArgs;
 
-                MethodInfo parseNumber = Type.GetMethod(
+                var parseNumber = Type.GetMethod(
                     "Parse",
                     BindingFlags.Public | BindingFlags.Static,
                     null,
@@ -123,7 +126,7 @@ namespace Server.Commands.Generic
 
                 if (parseNumber != null)
                 {
-                    NumberStyles style = NumberStyles.Integer;
+                    var style = NumberStyles.Integer;
 
                     if (InsensitiveStringHelpers.InsensitiveStartsWith(toParse, "0x"))
                     {
@@ -136,7 +139,7 @@ namespace Server.Commands.Generic
                 }
                 else
                 {
-                    MethodInfo parseGeneral = Type.GetMethod(
+                    var parseGeneral = Type.GetMethod(
                         "Parse",
                         BindingFlags.Public | BindingFlags.Static,
                         null,
@@ -230,7 +233,7 @@ namespace Server.Commands.Generic
 
         public override void Compile(MethodEmitter emitter)
         {
-            bool inverse = false;
+            var inverse = false;
 
             string methodName;
 
@@ -263,7 +266,7 @@ namespace Server.Commands.Generic
 
             if (m_IgnoreCase || methodName == "Equals")
             {
-                Type type = m_IgnoreCase ? typeof(InsensitiveStringHelpers) : typeof(string);
+                var type = m_IgnoreCase ? typeof(InsensitiveStringHelpers) : typeof(string);
 
                 emitter.BeginCall(
                     type.GetMethod(
@@ -284,10 +287,10 @@ namespace Server.Commands.Generic
             }
             else
             {
-                Label notNull = emitter.CreateLabel();
-                Label moveOn = emitter.CreateLabel();
+                var notNull = emitter.CreateLabel();
+                var moveOn = emitter.CreateLabel();
 
-                LocalBuilder temp = emitter.AcquireTemp(m_Property.Type);
+                var temp = emitter.AcquireTemp(m_Property.Type);
 
                 emitter.Chain(m_Property);
 
@@ -357,9 +360,9 @@ namespace Server.Commands.Generic
         {
             emitter.Chain(m_Property);
 
-            bool inverse = false;
+            var inverse = false;
 
-            bool couldCompare =
+            var couldCompare =
                 emitter.CompareTo(1, () => { m_Value.Load(emitter); });
 
             if (couldCompare)
@@ -438,23 +441,23 @@ namespace Server.Commands.Generic
         public static IConditional Compile(AssemblyEmitter assembly, Type objectType, ICondition[] conditions,
             int index)
         {
-            TypeBuilder typeBuilder = assembly.DefineType(
+            var typeBuilder = assembly.DefineType(
                 $"__conditional{index}",
                 TypeAttributes.Public,
                 typeof(object));
             {
-                ConstructorBuilder ctor = typeBuilder.DefineConstructor(
+                var ctor = typeBuilder.DefineConstructor(
                     MethodAttributes.Public,
                     CallingConventions.Standard,
                     Type.EmptyTypes);
 
-                ILGenerator il = ctor.GetILGenerator();
+                var il = ctor.GetILGenerator();
 
                 // : base()
                 il.Emit(OpCodes.Ldarg_0);
                 il.Emit(OpCodes.Call, typeof(object).GetConstructor(Type.EmptyTypes));
 
-                for (int i = 0; i < conditions.Length; ++i)
+                for (var i = 0; i < conditions.Length; ++i)
                     conditions[i].Construct(typeBuilder, il, i);
 
                 // return;
@@ -465,7 +468,7 @@ namespace Server.Commands.Generic
 
             MethodBuilder compareMethod;
             {
-                MethodEmitter emitter = new MethodEmitter(typeBuilder);
+                var emitter = new MethodEmitter(typeBuilder);
 
                 emitter.Define(
                     /*  name  */ "Verify",
@@ -473,16 +476,16 @@ namespace Server.Commands.Generic
                     /* return */ typeof(bool),
                     /* params */ new[] {typeof(object)});
 
-                LocalBuilder obj = emitter.CreateLocal(objectType);
-                LocalBuilder eq = emitter.CreateLocal(typeof(bool));
+                var obj = emitter.CreateLocal(objectType);
+                var eq = emitter.CreateLocal(typeof(bool));
 
                 emitter.LoadArgument(1);
                 emitter.CastAs(objectType);
                 emitter.StoreLocal(obj);
 
-                Label done = emitter.CreateLabel();
+                var done = emitter.CreateLabel();
 
-                for (int i = 0; i < conditions.Length; ++i)
+                for (var i = 0; i < conditions.Length; ++i)
                 {
                     if (i > 0)
                     {
@@ -516,7 +519,7 @@ namespace Server.Commands.Generic
                 compareMethod = emitter.Method;
             }
 
-            Type conditionalType = typeBuilder.CreateType();
+            var conditionalType = typeBuilder.CreateType();
 
             return conditionalType.CreateInstance<IConditional>();
         }

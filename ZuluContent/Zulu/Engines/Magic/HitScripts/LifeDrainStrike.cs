@@ -1,5 +1,6 @@
 using System;
 using Server.Items;
+using Server.Mobiles;
 using Server.Spells;
 using Server.Spells.Sixth;
 
@@ -12,7 +13,7 @@ namespace Server.Engines.Magic.HitScripts
             if (!Validate(attacker))
                 return;
 
-            if (attacker.Weapon != attacker.GetDefaultWeapon() && attacker.Weapon is BaseMeleeWeapon)
+            if (attacker is BaseCreature || (attacker.Weapon is BaseMeleeWeapon && attacker.Weapon != attacker.GetDefaultWeapon()))
             {
                 var drain = (int)(damage * 0.25);
 

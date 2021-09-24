@@ -1,6 +1,6 @@
 using System;
 using Server.Items;
-using ZuluContent.Configuration;
+using Scripts.Configuration;
 
 namespace Server.Engines.Craft
 {

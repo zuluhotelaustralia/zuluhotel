@@ -598,9 +598,7 @@ namespace Server.Items
 
         public virtual int GetMissAttackSound(Mobile attacker, Mobile defender)
         {
-            if (attacker.GetAttackSound() == -1)
-                return MissSound;
-            return -1;
+            return MissSound;
         }
 
         public virtual int GetMissDefendSound(Mobile attacker, Mobile defender)
@@ -713,10 +711,8 @@ namespace Server.Items
 
         public void GetBaseDamageRange(Mobile attacker, out int min, out int max)
         {
-            if (attacker is BaseCreature)
+            if (attacker is BaseCreature c)
             {
-                var c = (BaseCreature) attacker;
-
                 if (c.DamageMin >= 0)
                 {
                     min = c.DamageMin;
@@ -724,10 +720,10 @@ namespace Server.Items
                     return;
                 }
 
-                if (this is Fists && !attacker.Body.IsHuman)
+                if (this is Fists && !c.Body.IsHuman)
                 {
-                    min = attacker.Str / 28;
-                    max = attacker.Str / 28;
+                    min = c.Str / 28;
+                    max = c.Str / 28;
                     return;
                 }
             }

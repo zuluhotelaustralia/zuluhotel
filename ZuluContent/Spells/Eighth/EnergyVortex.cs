@@ -21,7 +21,7 @@ namespace Server.Spells.Eighth
             var duration = Caster.Skills[SkillName.Magery].Value / 3.0;
             Caster.FireHook(h => h.OnModifyWithMagicEfficiency(Caster, ref duration));
             
-            BaseCreature.Summon(new EnergyVortex(), false, Caster, point, 0x212, TimeSpan.FromSeconds(duration));
+            BaseCreature.Summon("EnergyVortex", false, Caster, point, 0x212, TimeSpan.FromSeconds(duration));
         }
     }
 }

@@ -6,7 +6,7 @@ using System.IO;
 using System.Text.Json;
 using Server.Configurations;
 using Server.Json;
-using ZuluContent.Configuration;
+using Scripts.Configuration;
 
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
 namespace Server
@@ -19,14 +19,28 @@ namespace Server
         public static LootConfiguration Loot => Get<LootConfiguration>();
         public static SkillConfiguration Skills => Get<SkillConfiguration>();
         public static SpellConfiguration Spells => Get<SpellConfiguration>();
-
-
+        public static CreatureConfiguration Creatures => Get<CreatureConfiguration>();
+        
         private static readonly Dictionary<Type, object> Cache = new();
+
+        public static JsonSerializerOptions DefaultSerializerOptions { get; private set; }
 
         // ReSharper disable once UnusedMember.Global
         [CallPriority(ushort.MaxValue)]
         public static void Configure()
         {
+            DefaultSerializerOptions = JsonConfig.GetOptions(
+                new TextDefinitionConverterFactory(),
+                new CreaturePropConverterFactory(),
+                new BodyConverterFactory(),
+                new PoisonConverterFactory(),
+                new WeaponAbilityConverterFactory(),
+                new RaceConverterFactory()
+            );
+
+            DefaultSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            DefaultSerializerOptions.PropertyNameCaseInsensitive = true;
+            
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             Console.WriteLine("Starting load of Zuluhotel configurations.");
@@ -37,6 +51,8 @@ namespace Server
             Add<LootConfiguration>();
             Add<SkillConfiguration>();
             Add<SpellConfiguration>();
+            Add<CueConfiguration>();
+            Add<CreatureConfiguration>();
 
             stopwatch.Stop();
             Console.WriteLine($"Finished loading Zuluhotel configurations ({stopwatch.Elapsed.TotalSeconds:F2} seconds).");
@@ -89,7 +105,7 @@ namespace Server
                 throw new FileLoadException($"DeserializeJsonConfig<{typeof(T).Name}>: {path} was not found!");
             }
             
-            var config = JsonConfig.Deserialize<T>(path, options ?? JsonConfig.GetOptions(new TextDefinitionConverterFactory()));
+            var config = JsonConfig.Deserialize<T>(path, options ?? DefaultSerializerOptions);
 
             if (config == null)
                 throw new DataException($"DeserializeJsonConfig<{typeof(T).Name}>: failed to deserialize {path}!");

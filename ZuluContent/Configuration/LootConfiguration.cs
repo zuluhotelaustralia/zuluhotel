@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Server;
 using Server.Scripts.Engines.Loot;
 
-namespace ZuluContent.Configuration
+namespace Scripts.Configuration
 {
     public class LootConfiguration : BaseSingleton<LootConfiguration>
     {

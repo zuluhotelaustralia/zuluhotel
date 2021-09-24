@@ -22,25 +22,35 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Server.Misc;
 
 namespace Server.Json
 {
-  public class TextDefinitionConverter : JsonConverter<TextDefinition>
-  {
-    public override TextDefinition Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-      reader.TokenType switch
-      {
-        JsonTokenType.String => new TextDefinition(reader.GetString()),
-        JsonTokenType.Number => new TextDefinition(reader.GetInt32()),
-        _ => throw new JsonException("TextDefinition value must be an integer or string")
-      };
-
-    public override void Write(Utf8JsonWriter writer, TextDefinition value, JsonSerializerOptions options)
+    public class TextDefinitionConverterFactory : JsonConverterFactory
     {
-      if (value.Number > 0)
-        writer.WriteNumberValue(value.Number);
-      else
-        writer.WriteStringValue(value.String);
+        public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(TextDefinition);
+
+        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
+            new TextDefinitionConverter();
     }
-  }
+
+    public class TextDefinitionConverter : JsonConverter<TextDefinition>
+    {
+        public override TextDefinition Read(ref Utf8JsonReader reader, Type typeToConvert,
+            JsonSerializerOptions options) =>
+            reader.TokenType switch
+            {
+                JsonTokenType.String => new TextDefinition(reader.GetString()),
+                JsonTokenType.Number => new TextDefinition(reader.GetInt32()),
+                _ => throw new JsonException("TextDefinition value must be an integer or string")
+            };
+
+        public override void Write(Utf8JsonWriter writer, TextDefinition value, JsonSerializerOptions options)
+        {
+            if (value.Number > 0)
+                writer.WriteNumberValue(value.Number);
+            else
+                writer.WriteStringValue(value.String);
+        }
+    }
 }

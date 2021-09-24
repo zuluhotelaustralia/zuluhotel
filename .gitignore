@@ -9,3 +9,6 @@
 /ModernUO/Distribution/
 .vs
 .dev
+.zhconfig.json
+*.so
+*.dll

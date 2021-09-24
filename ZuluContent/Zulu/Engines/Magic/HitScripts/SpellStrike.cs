@@ -6,15 +6,25 @@ using Server.Targeting;
 
 namespace Server.Engines.Magic.HitScripts
 {
-    public class SpellStrike<T> : WeaponAbility where T : Spell
+    public class SpellStrike : WeaponAbility
     {
+        public Type SpellType { get; protected set; }
+
+        public SpellStrike(Type spellType)
+        {
+            if (!spellType.IsSubclassOf(typeof(Spell)))
+                throw new ArgumentOutOfRangeException($"{nameof(spellType)} {spellType.Name} must inherit from {typeof(Spell)}");
+            
+            SpellType = spellType;
+        }
+        
         public override void OnHit(Mobile attacker, Mobile defender, ref int damage)
         {
             if (!Validate(attacker))
                 return;
             try
             {
-                switch (SpellRegistry.Create<T>(attacker))
+                switch (SpellRegistry.Create(SpellType, attacker))
                 {
                     case ITargetableAsyncSpell<Mobile> targetableAsyncSpell:
                         targetableAsyncSpell.OnTargetAsync(new TargetResponse<Mobile>
@@ -31,13 +41,8 @@ namespace Server.Engines.Magic.HitScripts
             catch (Exception e)
             {
                 Console.WriteLine(
-                    $"Failed to invoke {GetType().Name}<{typeof(T).Name}> for Mobile: {attacker.GetType().Name}, Serial: {attacker.Serial}");
+                    $"Failed to invoke {GetType().Name}<{SpellType.Name}> for Mobile: {attacker.GetType().Name}, Serial: {attacker.Serial}");
             }
-        }
-
-        public Type GetSpellType()
-        {
-            return typeof(T);
         }
 
         public override bool Validate(Mobile @from)

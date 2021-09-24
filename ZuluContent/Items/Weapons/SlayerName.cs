@@ -28,7 +28,7 @@ namespace Server.Items
         EarthShatter,
         BloodDrinking,
         SummerWind,
-        ElementalBan, // Bane?
+        ElementalBane, // Bane?
         Fey
     }
 }

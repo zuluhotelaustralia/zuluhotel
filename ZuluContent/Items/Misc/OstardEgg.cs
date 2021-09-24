@@ -5,29 +5,29 @@ namespace Server.Items
 {
     public class OstardEgg : BaseEgg
     {        
-        public static WeightedRandomType<BaseCreature> WeightedOstards;
+        public static WeightedRandom<string> WeightedOstards;
         static OstardEgg()
         {
-            WeightedOstards = new WeightedRandomType<BaseCreature>();
+            WeightedOstards = new WeightedRandom<string>();
 
             // Weight 4
-            WeightedOstards.Add<GoldenOstard>(4);
-            WeightedOstards.Add<PlainsOstard>(4);
-            WeightedOstards.Add<MountainOstard>(4);
-            WeightedOstards.Add<SwampOstard>(4);
-            WeightedOstards.Add<HighlandOstard>(4);
+            WeightedOstards.Add(4, "GoldenOstard");
+            WeightedOstards.Add(4, "PlainsOstard");
+            WeightedOstards.Add(4, "MountainOstard");
+            WeightedOstards.Add(4, "SwampOstard");
+            WeightedOstards.Add(4, "HighlandOstard");
             // Weight 2
-            WeightedOstards.Add<ShadowOstard>(2);
-            WeightedOstards.Add<ValleyOstard>(2);
-            WeightedOstards.Add<StoneOstard>(2);
-            WeightedOstards.Add<EmeraldOstard>(2);
-            WeightedOstards.Add<RubyOstard>(2);
+            WeightedOstards.Add(2, "ShadowOstard");
+            WeightedOstards.Add(2, "ValleyOstard");
+            WeightedOstards.Add(2, "StoneOstard");
+            WeightedOstards.Add(2, "EmeraldOstard");
+            WeightedOstards.Add(2, "RubyOstard");
             // Weight 1
-            WeightedOstards.Add<TropicalOstard>(1);
-            WeightedOstards.Add<SnowOstard>(1);
-            WeightedOstards.Add<IceOstard>(1);
-            WeightedOstards.Add<FireOstard>(1);
-            WeightedOstards.Add<HeavenlyOstard>(1);
+            WeightedOstards.Add(1, "TropicalOstard");
+            WeightedOstards.Add(1, "SnowOstard");
+            WeightedOstards.Add(1, "IceOstard");
+            WeightedOstards.Add(1, "FireOstard");
+            WeightedOstards.Add(1, "HeavenlyOstard");
         }
 
         [Constructible]
@@ -85,7 +85,7 @@ namespace Server.Items
 
         static BaseCreature GetOstardByChance()
         {
-            return WeightedOstards.GetRandom();
+            return Creatures.Create(WeightedOstards.GetRandom());
         }
     }
 }

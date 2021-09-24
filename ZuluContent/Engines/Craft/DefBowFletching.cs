@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using Server.Items;
 using Server.Json;
-using ZuluContent.Configuration;
+using Scripts.Configuration;
 
 namespace Server.Engines.Craft
 {

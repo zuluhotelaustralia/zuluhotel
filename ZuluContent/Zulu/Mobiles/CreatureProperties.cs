@@ -1,170 +1,100 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Linq;
+using Scripts.Cue;
 using Server.Engines.Magic;
 using Server.Engines.Magic.HitScripts;
-using Server.Items;
 using Server.Misc;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
+using Server.Items;
 using Server.Spells;
-using Server.Spells.Fourth;
-using Server.Scripts.Engines.Loot;
+using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Engines.Magic.Enchantments;
+
+// ReSharper disable InconsistentNaming
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Server.Mobiles
 {
-    public record CreatureProp
-    {
-        public double Min { get; private set; }
-        public double? Max { get; private set; }
-
-        public CreatureProp(double min, double? max = null)
-        {
-            Min = min;
-            Max = max;
-        }
-
-        public static CreatureProp Between(double min, double max)
-        {
-            return new(min, max);
-        }
-
-        public static CreatureProp Dice(string d)
-        {
-            DiceRoll dice = d;
-            var value = new CreatureProp(dice.Count + dice.Bonus, dice.Count * dice.Sides + dice.Bonus);
-
-            return value;
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public void Deconstruct(out double min, out double? max)
-        {
-            min = Min;
-            max = Max;
-        }
-
-        public static implicit operator int(CreatureProp d)
-        {
-            return Convert.ToInt32(d.Next());
-        }
-
-        public static implicit operator double(CreatureProp d)
-        {
-            return d.Next();
-        }
-
-        public static implicit operator CreatureProp(double d)
-        {
-            return new(d);
-        }
-
-        private double Next()
-        {
-            if (!Max.HasValue)
-                return Min;
-
-            return Min + Utility.RandomDouble() * (Max.GetValueOrDefault(0.0) - Min);
-        }
-    }
-
     public record CreatureProperties
     {
-        private static readonly Dictionary<Type, CreatureProperties> CreatureMap = new();
+        public string Name { get; set; } = "<CreatureProperties unset>";
+        public string Kind { get; set; } = "Npc";
+        public string? CorpseNameOverride { get; set; }
+        
+        public Type BaseType { get; set; } = typeof(BaseCreatureTemplate);
 
-        public static IReadOnlyDictionary<Type, CreatureProperties> Creatures
-        {
-            get { return CreatureMap; }
-        }
+        public PropValue Str { get; set; } = 1;
+        public PropValue Int { get; set; } = 1;
+        public PropValue Dex { get; set; } = 1;
+        public PropValue ActiveSpeed { get; set; } = 0.2;
+        public PropValue PassiveSpeed { get; set; } = 0.2;
+        public AIType AiType { get; set; }
+        public bool? AlwaysAttackable { get; set; }
+        public bool? AlwaysMurderer { get; set; }
+        public bool? AutoDispel { get; set; }
+        public bool? BardImmune { get; set; }
+        public int? BaseSoundID { get; set; }
+        public Body Body { get; set; }
+        public bool? CanFly { get; set; }
+        public bool? CanRummageCorpses { get; set; } = true;
+        public bool? CanSwim { get; set; }
+        public int? ClassLevel { get; set; }
+        public ZuluClassType? ClassType { get; set; }
+        public bool? ClickTitle { get; set; }
+        public int? ControlSlots { get; set; }
+        public CreatureType? CreatureType { get; set; }
+        public PropValue VirtualArmor { get; set; } = 0;
+        public bool? DeleteCorpseOnDeath { get; set; }
+        public PropValue Fame { get; set; } = 0;
+        public bool? Female { get; set; }
+        public FightMode FightMode { get; set; }
+        public PropValue FightRange { get; set; } = 1;
+        public HideType? HideType { get; set; }
+        public int? Hides { get; set; }
+        public PropValue HitsMax { get; set; } = 1;
+        public PropValue Hue { get; set; } = 0;
+        public bool? InitialInnocent { get; set; }
+        public PropValue Karma { get; set; } = 0;
+        public int? LootItemChance { get; set; }
+        public int? LootItemLevel { get; set; }
+        public string? LootTable { get; set; }
+        public PropValue ManaMaxSeed { get; set; } = 0;
+        public PropValue Meat { get; set; } = 0;
+        public PropValue MinTameSkill { get; set; } = 0;
+        public OppositionGroup? OppositionGroup { get; set; }
+        public PropValue PerceptionRange { get; set; } = 1;
+        public int? ProvokeSkillOverride { get; set; }
+        public Race? Race { get; set; }
+        public TimeSpan? ReacquireDelay { get; set; }
+        public TimeSpan? RiseCreatureDelay { get; set; }
+        public Type? RiseCreatureType { get; set; }
+        public bool? SaySpellMantra { get; set; }
+        public InhumanSpeech? SpeechType { get; set; }
+        public PropValue StamMaxSeed { get; set; } = 1;
+        public bool? Tamable { get; set; }
+        public bool? TargetAcquireExhaustion { get; set; }
+        public int? Team { get; set; }
+        public string Title { get; set; }
+        public PropValue? TreasureMapLevel { get; set; }
 
-        public static bool Register<T>(CreatureProperties props) where T : BaseCreature
-        {
-            return CreatureMap.TryAdd(typeof(T), props);
-        }
+        [CueExpression(@"[...string]")]
+        public List<SpellEntry> PreferredSpells { get; set; } = new();
 
-        public static CreatureProperties Get<T>() where T : BaseCreature
-        {
-            return Get(typeof(T));
-        }
-
-        public static CreatureProperties Get(Type T)
-        {
-            return CreatureMap.GetValueOrDefault(T);
-        }
-
-        public bool InitialInnocent { get; init; }
-        public CreatureProp Str { get; init; } = 0;
-        public CreatureProp Dex { get; init; } = 0;
-        public CreatureProp Int { get; init; } = 0;
-        public CreatureProp HitsMax { get; init; } = 0;
-        public CreatureProp DamageMin { get; init; } = 0;
-        public CreatureProp DamageMax { get; init; } = 0;
-        public CreatureProp ManaMaxSeed { get; init; } = 0;
-        public CreatureProp StamMaxSeed { get; init; } = 0;
-        public bool HasBreath { get; init; } = false;
-        public bool HasWebs { get; init; } = false;
-        public Poison HitPoison { get; init; } = null;
-        public bool CanSwim { get; init; } = false;
-        public bool CanFly { get; init; } = false;
-        public string Title { get; init; }
-        public string CorpseNameOverride { get; init; }
-        public string Name { get; init; } = "<MobileInitProperties unset>";
-        public Body Body { get; init; } = 0;
-        public Race Race { get; init; }
-        public CreatureProp Hue { get; init; }
-        public int BaseSoundID { get; init; }
-        public AIType AiType { get; init; } = AIType.AI_Mage;
-        public FightMode FightMode { get; init; } = FightMode.Aggressor;
-        public CreatureProp PerceptionRange { get; init; } = 10;
-        public CreatureProp FightRange { get; init; } = 1;
-
-        public CreatureProp ActiveSpeed { get; init; } = 0.2;
-        public CreatureProp PassiveSpeed { get; init; } = 0.2;
-        public InhumanSpeech SpeechType { get; init; } = null;
-        public int Team { get; init; } = 0;
-        public bool Female { get; init; } = false;
-        public CreatureProp Fame { get; init; } = 0;
-        public CreatureProp Karma { get; init; } = 0;
-        public CreatureProp VirtualArmor { get; init; } = 0;
-        public OppositionGroup OppositionGroup { get; init; }
-        public TimeSpan ReacquireDelay { get; init; } = TimeSpan.FromSeconds(10.0);
-        public bool ClickTitle { get; init; } = false;
-        public bool CanRummageCorpses { get; init; } = true;
-        public CreatureProp TreasureMapLevel { get; init; } = 0;
-        public CreatureProp Meat { get; init; } = 0;
-        public bool AlwaysMurderer { get; init; } = false;
-        public bool Tamable { get; init; } = false;
-        public int ControlSlots { get; init; }
-        public CreatureProp MinTameSkill { get; init; }
-        public Dictionary<SkillName, CreatureProp> Skills { get; init; } = new();
-        public Dictionary<ElementalType, CreatureProp> Resistances { get; init; } = new();
-        public Dictionary<ElementalType, CreatureProp> DamageTypes { get; init; } = new();
-        public WeaponAbility WeaponAbility { get; init; } = null;
-        public double WeaponAbilityChance { get; init; } = 0.4;
-        public bool AutoDispel { get; init; } = false;
-        public bool AlwaysAttackable { get; init; } = false;
-        public bool DeleteCorpseOnDeath { get; init; } = false;
-        public Type RiseCreatureType { get; init; } = null;
-        public TimeSpan RiseCreatureDelay { get; init; } = TimeSpan.MaxValue;
-        public bool BardImmune { get; init; }
-        public int ProvokeSkillOverride { get; init; }
-        public bool SaySpellMantra { get; init; }
-        public List<Type> PreferredSpells { get; init; }
-        public ZuluClassType ClassType { get; init; }
-        public int ClassLevel { get; init; }
-        public CreatureType CreatureType { get; init; }
-        public HideType HideType { get; init; }
-        public int Hides { get; init; }
-        public bool TargetAcquireExhaustion { get; init; }
-        public string LootTable { get; set; }
-        public int LootItemLevel { get; set; }
-        public int LootItemChance { get; set; }
+        [CueExpression(@"{ ... }")]
+        public Dictionary<ElementalType, PropValue> Resistances { get; set; } = new();
+        
+        [CueExpression(@"{ ... }")]
+        public Dictionary<SkillName, PropValue> Skills { get; set; } = new();
+        public CreatureAttack Attack { get; set; } = new ();
+        public List<CreatureEquip> Equipment { get; set; } = new();
 
         private static readonly Action<CreatureProperties, BaseCreature> MapAction
             = ZuluUtil.BuildMapAction<CreatureProperties, BaseCreature>();
-
 
         public void ApplyTo<T>(T dest) where T : BaseCreature
         {
@@ -174,21 +104,87 @@ namespace Server.Mobiles
 
             MapAction(this, dest);
 
-            // Bug? Need to set it automatically
             dest.SetStam(dest.StamMax);
             dest.SetMana(dest.ManaMax);
             dest.SetHits(dest.HitsMax);
 
             // Non-mappable props
-            foreach (var (skill, prop) in Skills)
-                dest.SetSkill(skill, prop);
+            if (Skills.Any())
+            {
+                foreach (var (skill, prop) in Skills)
+                    dest.SetSkill(skill, prop);
+            }
 
-            foreach (var (resistance, prop) in Resistances)
-                dest.TrySetResist(resistance, prop);
+            if (Resistances.Any())
+            {
+                foreach (var (resistance, prop) in Resistances)
+                    dest.TrySetResist(resistance, prop);
+            }
+
+            Dress(dest);
+        }
+
+        private void Dress(BaseCreature dest)
+        {
+            if (!dest.Items.Any() && Equipment.Any())
+            {
+                foreach (var equip in Equipment)
+                {
+                    var item = equip.ItemType?.CreateInstance<Item>();
+
+                    if (item == null)
+                        continue;
+
+                    if (equip.Name != null)
+                        item.Name = equip.Name;
+
+                    if (equip.Hue != null)
+                        item.Hue = equip.Hue;
+
+                    if (item is BaseArmor armor && equip.ArmorRating != null)
+                        armor.BaseArmorRating = (int)equip.ArmorRating;
+
+                    dest.AddItem(item);
+                    item.Movable = false;
+                }
+            }
 
 
-            // foreach (var (damageType, prop) in ElementalType.
-            //     dest.SetDamageType(damageType, prop);
+            if (Attack != null)
+            {
+                dest.DamageMin = (int)Attack.Damage.Min;
+                dest.DamageMax = (int)(Attack.Damage.Max ?? Attack.Damage.Min);
+
+                if (dest.Weapon == null && (
+                        Attack.Animation != null || Attack.HitSound != null ||
+                        Attack.MissSound != null || Attack.MaxRange != null
+                    )
+                )
+                {
+                    dest.AddItem(new Fists());
+                }
+
+                if (dest.Weapon is BaseWeapon weapon)
+                {
+                    if (Attack.Animation != null)
+                        weapon.Animation = Attack.Animation.Value;
+
+                    if (Attack.HitSound != null)
+                        weapon.HitSound = Attack.HitSound.Value;
+
+                    if (Attack.MissSound != null)
+                        weapon.MissSound = Attack.MissSound.Value;
+
+                    if (Attack.MaxRange != null)
+                        weapon.MaxRange = Attack.MaxRange.Value;
+
+                    if (Attack.Speed != null)
+                        weapon.Speed = Attack.Speed;
+
+                    if (Attack.HitPoison != null)
+                        weapon.Poison = Attack.HitPoison;
+                }
+            }
         }
     }
 }

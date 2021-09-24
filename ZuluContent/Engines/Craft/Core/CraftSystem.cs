@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Server.Items;
-using ZuluContent.Configuration;
+using Server.Misc;
+using Scripts.Configuration;
 
 namespace Server.Engines.Craft
 {

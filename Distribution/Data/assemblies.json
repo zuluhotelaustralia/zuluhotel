@@ -2,6 +2,7 @@
   "Argon2.Bindings.dll",
   "BouncyCastle.Crypto.dll",
   "MailKit.dll",
+  "System.Reflection.MetadataLoadContext.dll",
   "Microsoft.AspNetCore.Connections.Abstractions.dll",
   "Microsoft.AspNetCore.Http.Features.dll",
   "Microsoft.Extensions.Configuration.Abstractions.dll",

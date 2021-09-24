@@ -22,10 +22,10 @@ namespace Scripts.Zulu.Spells.Necromancy
 
                 BaseCreature creature = choice switch
                 {
-                    <= 4 => new Shade(),
-                    <= 7 => new Liche(),
-                    <= 9 => new LicheLord(),
-                    _ => new Dracoliche()
+                    <= 4 => "Shade",
+                    <= 7 => "Liche",
+                    <= 9 => "LicheLord",
+                    _ => "Dracoliche",
                 };
 
                 SpellHelper.Summon(creature, Caster, 0x22A, null, false);
