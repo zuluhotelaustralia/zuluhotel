@@ -56,14 +56,6 @@ namespace Scripts.Configuration
         public int CraftEndSound { get; init; }
     }
     
-    public record CraftResource
-    {
-        public Type ItemType { get; init; }
-        public TextDefinition Name { get; init; }
-        public int Amount { get; init; }
-        public TextDefinition Message { get; init; }
-    }
-    
     public record CraftEntry
     {
         public Type ItemType { get; init; }
@@ -73,11 +65,19 @@ namespace Scripts.Configuration
         public SkillName? SecondarySkill { get; init; }
         public double? Skill2 { get; init; }
 
-        public List<CraftResource> Resources { get; init; }
+        public CraftResource[] Resources { get; init; }
+            
         public bool UseAllRes { get; init; }
         public bool NeedHeat { get; init; }
         public bool NeedOven { get; init; }
         public bool NeedMill { get; init; }
-
+    }
+    
+    public record CraftResource
+    {
+        public Type ItemType { get; init; }
+        public TextDefinition Name { get; init; }
+        public int Amount { get; init; }
+        public TextDefinition Message { get; init; }
     }
 }

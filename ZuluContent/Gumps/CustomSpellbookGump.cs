@@ -49,7 +49,7 @@ namespace Server.Gumps
             AddPage(1);
 
             // List of entries
-            ulong entries = m_Book.Entries;
+            ulong entries = m_Book.Content;
 
             int negativeOffset = 0;
 
