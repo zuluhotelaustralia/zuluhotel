@@ -97,12 +97,12 @@ namespace Server.Engines.Craft
             // Add every material you want the player to be able to choose from
             // This will override the overridable material
             ZhConfig.Resources.Ores.Entries.ToList()
-                .ForEach(e => AddSubRes(e.SmeltType, e.Name, e.CraftSkillRequired, 1160300, e.Name));
+                .ForEach(e => AddSubRes(e.SmeltType, e.Name, e.CraftSkillRequired, 1160300, 1044268));
             
             SetSubRes2(typeof(Log), 1027136);
 
             ZhConfig.Resources.Logs.Entries.ToList()
-                .ForEach(e => AddSubRes2(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired, e.Name));
+                .ForEach(e => AddSubRes2(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired, 1072652));
 
             MarkOption = true;
             Repair = true;

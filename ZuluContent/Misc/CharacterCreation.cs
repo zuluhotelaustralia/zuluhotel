@@ -284,7 +284,7 @@ namespace Server.Misc
                 FillBankbox(newChar);
 
             // TODO: Should we make a custom race selection room in the Map?
-            newChar.MoveToWorld(new Point3D(5140, 1767, 0), Map.Felucca);
+            newChar.MoveToWorld(new Point3D(5197, 1171, 0), Map.Felucca);
             if (args.State != null)
             {
                 Console.WriteLine("Login: {0}: New character being created (account={1})", args.State,
