@@ -1,8 +1,0 @@
-# .gitignore for keeping Hourly/Daily/Monthly server save archives
-
-# Untrack everything
-*
-
-# Exclusions
-!.gitignore
-!*/**/.gitkeep
