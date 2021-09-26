@@ -12,7 +12,7 @@ MageMenacer: {
 	Body:               574
 	CreatureType:       "Elemental"
 	VirtualArmor:       60
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            3000
 	Hue:                1306
 	LootItemChance:     80

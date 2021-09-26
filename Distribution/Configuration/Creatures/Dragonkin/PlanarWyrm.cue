@@ -13,7 +13,7 @@ PlanarWyrm: {
 	Body:               59
 	CreatureType:       "Dragonkin"
 	VirtualArmor:       50
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	FightRange:         7
 	HitsMax:            3000
 	Hue:                1301

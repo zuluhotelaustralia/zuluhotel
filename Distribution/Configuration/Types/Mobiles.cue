@@ -169,7 +169,7 @@ package Types
 	Race:                    (#Race | null)
 	ReacquireDelay:          (#TimeSpan | null)
 	RiseCreatureDelay:       (#TimeSpan | null)
-	RiseCreatureType:        #Type
+	RiseCreatureTemplate:    (string | null)
 	SaySpellMantra:          (bool | null)
 	SpeechType:              (#InhumanSpeech | null)
 	StamMaxSeed:             (#PropValue | null)

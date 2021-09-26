@@ -13,7 +13,7 @@ ShadeOfZanroth: {
 	Body:               970
 	CreatureType:       "Undead"
 	VirtualArmor:       60
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	FightRange:         8
 	HitsMax:            500
 	Hue:                17969

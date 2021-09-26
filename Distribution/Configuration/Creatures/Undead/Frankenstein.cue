@@ -9,7 +9,7 @@ Frankenstein: {
 	AlwaysMurderer:     true
 	CreatureType:       "Undead"
 	VirtualArmor:       40
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            450
 	Hue:                1433
 	LootItemChance:     15

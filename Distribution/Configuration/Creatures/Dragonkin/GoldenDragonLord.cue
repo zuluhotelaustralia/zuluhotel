@@ -14,7 +14,7 @@ GoldenDragonLord: {
 	Body:                 12
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              5250
 	Hue:                  1300
 	LootItemChance:       100

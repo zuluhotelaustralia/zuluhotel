@@ -9,7 +9,7 @@ Shade: {
 	AlwaysMurderer:     true
 	CreatureType:       "Undead"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	Hue:                17969
 	LootItemChance:     50

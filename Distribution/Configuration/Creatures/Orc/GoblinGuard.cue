@@ -13,7 +13,7 @@ GoblinGuard: {
 	ClassType:          "Warrior"
 	CreatureType:       "Orc"
 	VirtualArmor:       60
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            500
 	Hue:                34186
 	LootTable:          "59"

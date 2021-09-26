@@ -11,7 +11,7 @@ Troll: {
 	Body:                 55
 	CreatureType:         "Troll"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
 	HitsMax:              185

@@ -14,6 +14,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
         [Key(1)] 
         public int Value { get; set; } = 0;
+        
+        [CallPriority(1)]
+        public override bool GetShouldDye() => true;
 
         public override void OnParalysis(Mobile mobile, ref TimeSpan duration, ref bool paralyze)
         {

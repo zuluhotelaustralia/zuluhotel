@@ -14,7 +14,7 @@ Strangler: {
 	Body:               28
 	CreatureType:       "Plant"
 	VirtualArmor:       30
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2000
 	Hue:                1175
 	LootItemChance:     100

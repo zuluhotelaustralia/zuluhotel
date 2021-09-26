@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
+using Server.Misc;
 using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Engines.Harvest
@@ -44,19 +46,19 @@ namespace Server.Engines.Harvest
 
         public TimeSpan EffectDelay { get; set; }
 
-        public object NoResourcesMessage { get; set; }
+        public TextDefinition NoResourcesMessage { get; set; }
 
-        public object OutOfRangeMessage { get; set; }
+        public TextDefinition OutOfRangeMessage { get; set; }
 
-        public object TimedOutOfRangeMessage { get; set; }
+        public TextDefinition TimedOutOfRangeMessage { get; set; }
 
-        public object DoubleHarvestMessage { get; set; }
+        public TextDefinition DoubleHarvestMessage { get; set; }
 
-        public object FailMessage { get; set; }
+        public TextDefinition FailMessage { get; set; }
 
-        public object PackFullMessage { get; set; }
+        public TextDefinition PackFullMessage { get; set; }
 
-        public object ToolBrokeMessage { get; set; }
+        public TextDefinition ToolBrokeMessage { get; set; }
 
         public HarvestResource[] Resources { get; set; }
 
@@ -68,12 +70,9 @@ namespace Server.Engines.Harvest
 
         public Dictionary<Map, Dictionary<Point2D, HarvestBank>> Banks { get; set; }
 
-        public void SendMessageTo(Mobile from, object message)
+        public void SendMessageTo(Mobile from, TextDefinition message)
         {
-            if (message is int)
-                from.SendLocalizedMessage((int) message);
-            else if (message is string)
-                from.SendMessage((string) message);
+            from.SendFailureMessage(message);
         }
 
         public HarvestBank GetBank(Map map, int x, int y)

@@ -11,7 +11,7 @@ EliteOrcWarrior: {
 	Body:                 41
 	CreatureType:         "Orc"
 	VirtualArmor:         25
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              215
 	LootTable:            "43"
 	ManaMaxSeed:          0

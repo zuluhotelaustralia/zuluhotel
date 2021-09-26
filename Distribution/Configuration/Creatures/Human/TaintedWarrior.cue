@@ -13,7 +13,7 @@ TaintedWarrior: {
 	ClassType:          "Warrior"
 	CreatureType:       "Human"
 	VirtualArmor:       50
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            400
 	Hue:                1302
 	LootItemChance:     50

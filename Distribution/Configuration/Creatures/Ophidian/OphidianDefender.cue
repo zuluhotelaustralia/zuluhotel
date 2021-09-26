@@ -15,7 +15,7 @@ OphidianDefender: {
 	ClassType:            "Warrior"
 	CreatureType:         "Ophidian"
 	VirtualArmor:         25
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
 	HitsMax:              250

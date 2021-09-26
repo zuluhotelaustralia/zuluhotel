@@ -13,7 +13,7 @@ ArachnidQueen: {
 	Body:                 28
 	CreatureType:         "Elemental"
 	VirtualArmor:         45
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              5250
 	Hue:                  1175
 	LootItemChance:       80

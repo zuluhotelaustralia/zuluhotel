@@ -12,7 +12,7 @@ FrostDragon: {
 	CanFly:               true
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
 	HitsMax:              800

@@ -12,7 +12,7 @@ EarthElementalLord: {
 	Body:               14
 	CreatureType:       "Elemental"
 	VirtualArmor:       50
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            450
 	Hue:                1538
 	LootItemChance:     60

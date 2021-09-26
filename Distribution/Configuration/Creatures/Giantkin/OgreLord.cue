@@ -11,7 +11,7 @@ OgreLord: {
 	Body:                 1
 	CreatureType:         "Giantkin"
 	VirtualArmor:         35
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              500
 	LootItemChance:       5
 	LootItemLevel:        4

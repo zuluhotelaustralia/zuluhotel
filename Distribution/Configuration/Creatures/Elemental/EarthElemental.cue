@@ -11,7 +11,7 @@ EarthElemental: {
 	Body:               14
 	CreatureType:       "Elemental"
 	VirtualArmor:       35
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            230
 	Hue:                33784
 	LootItemChance:     25

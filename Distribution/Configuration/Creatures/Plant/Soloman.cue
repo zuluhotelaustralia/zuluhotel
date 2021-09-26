@@ -12,7 +12,7 @@ Soloman: {
 	Body:               301
 	CreatureType:       "Plant"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                1497
 	LootItemChance:     90

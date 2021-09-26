@@ -13,7 +13,7 @@ Anaconda: {
 	Body:               21
 	CreatureType:       "Animal"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                1157
 	ManaMaxSeed:        0

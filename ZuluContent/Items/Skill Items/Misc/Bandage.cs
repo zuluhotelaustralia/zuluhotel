@@ -228,7 +228,7 @@ namespace Server.Items
             }
             else if (Patient.Poisoned)
             {
-                Healer.SendLocalizedMessage(500969); // You finish applying the bandages.
+                Healer.SendSuccessMessage(500969); // You finish applying the bandages.
 
                 var poisonLevel = Patient.Poison.Level;
                 var difficulty = poisonLevel * 20 + 15;
@@ -297,10 +297,10 @@ namespace Server.Items
             }
 
             if (healerNumber != -1)
-                Healer.SendLocalizedMessage(healerNumber);
+                Healer.SendSuccessMessage(healerNumber);
 
             if (patientNumber != -1)
-                Patient.SendLocalizedMessage(patientNumber);
+                Patient.SendSuccessMessage(patientNumber);
 
             if (playSound)
                 Patient.PlaySound(0x57);

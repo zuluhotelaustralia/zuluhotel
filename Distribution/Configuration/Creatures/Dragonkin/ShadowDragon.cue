@@ -14,7 +14,7 @@ ShadowDragon: {
 	CanFly:             true
 	CreatureType:       "Dragonkin"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HideType:           "Dragon"
 	Hides:              5
 	HitsMax:            3000

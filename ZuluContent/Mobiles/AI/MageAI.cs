@@ -225,7 +225,10 @@ namespace Server.Mobiles
 
         public virtual Spell GetRandomDamageSpellMage()
         {
-            int maxCircle = (int) ((m_Mobile.Skills[SkillName.Magery].Value + 20.0) / (100.0 / 7.0));
+            if (m_Mobile.PreferredSpells?.Count > 0 && Utility.RandomDouble() < 0.75)
+                return SpellRegistry.Create(m_Mobile.PreferredSpells.RandomElement(), m_Mobile);
+            
+            var maxCircle = (int) ((m_Mobile.Skills[SkillName.Magery].Value + 20.0) / (100.0 / 7.0));
 
             maxCircle = maxCircle switch
             {
@@ -233,9 +236,6 @@ namespace Server.Mobiles
                 > 8 => 8,
                 _ => maxCircle
             };
-
-            if (m_Mobile.PreferredSpells?.Count > 0 && Utility.RandomDouble() < 0.75)
-                return SpellRegistry.Create(m_Mobile.PreferredSpells.RandomElement(), m_Mobile);
 
             switch (Utility.Random(maxCircle * 2))
             {

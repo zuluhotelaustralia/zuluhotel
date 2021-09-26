@@ -12,7 +12,7 @@ MediumHoardeDemon: {
 	Body:               795
 	CreatureType:       "Daemon"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            1200
 	LootItemChance:     10
 	LootItemLevel:      5

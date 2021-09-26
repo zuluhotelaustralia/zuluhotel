@@ -18,16 +18,23 @@ namespace Scripts.Zulu.Packets
             static void ZuluPlayerStatusEventHandler(Mobile mobile)
             {
                 if (mobile is PlayerMobile player) 
-                    Timer.DelayCall(TimeSpan.Zero, SendZuluPlayerStatus, player.NetState, player);
+                    Timer.StartTimer(() => SendZuluPlayerStatus(player.NetState, player));
+            }
+            
+            static void ZuluPlayerHungerEventHandler(Mobile mobile, int oldHunger)
+            {
+                if (mobile is PlayerMobile player) 
+                    Timer.StartTimer(() => SendZuluPlayerStatus(player.NetState, player));
             }
 
             EventSink.PlayerDeath += ZuluPlayerStatusEventHandler;
             EventSink.Login += ZuluPlayerStatusEventHandler;
+            EventSink.HungerChanged += ZuluPlayerHungerEventHandler;
 
             static void OnBuffManagerAddRemove(Mobile mobile, IBuff buff)
             {
                 if (buff is PoisonImmunity && mobile is PlayerMobile player)
-                    Timer.DelayCall(TimeSpan.Zero, SendZuluPlayerStatus, player.NetState, player);
+                    Timer.StartTimer(() => SendZuluPlayerStatus(player.NetState, player));
             }
             
             BuffManager.OnAddBuff += OnBuffManagerAddRemove;
@@ -47,7 +54,7 @@ namespace Scripts.Zulu.Packets
             writer.Write((byte)0xF9); // Packet ID
             writer.Write((byte)0x1); // Sub-command PlayerStatus
             writer.Write(player.Serial);
-            writer.Write((short)0); // Hunger
+            writer.Write((short)player.Hunger);
             writer.Write((short)player.HealingBonus);
             writer.Write((short)player.MagicImmunity);
             writer.Write((short)player.MagicReflection);
@@ -58,10 +65,10 @@ namespace Scripts.Zulu.Packets
             writer.Write((short)player.AirResist);
             writer.Write((short)player.EarthResist);
             writer.Write((short)player.NecroResist);
-            writer.Write((short)0); // Criminal Timer Minutes
-            writer.Write((short)0); // Murderer Timer Minutes
-            writer.Write((short)minDamage); // Min Damage
-            writer.Write((short)maxDamage); // Max Damage
+            writer.Write((short)player.ShortTermMurders);
+            writer.Write((short)player.Kills);
+            writer.Write((short)minDamage);
+            writer.Write((short)maxDamage);
             
             ns.Send(writer.Span);
         }

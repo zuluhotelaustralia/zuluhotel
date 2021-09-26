@@ -23,11 +23,11 @@ namespace Scripts.Zulu.Spells.Earth
             
             SpellHelper.Turn(Caster, target);
             
-            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
             target.BoltEffect(0);
             await Timer.Pause(100);
             target.BoltEffect(0);
             
+            var damage = SpellHelper.CalcSpellDamage(Caster, target, this);
             SpellHelper.Damage(damage, target, Caster, this);
         }
     }

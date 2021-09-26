@@ -11,7 +11,7 @@ Cyclops: {
 	Body:                 75
 	CreatureType:         "Giantkin"
 	VirtualArmor:         35
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              350
 	Hue:                  33784
 	LootItemChance:       50

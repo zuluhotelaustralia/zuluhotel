@@ -11,7 +11,7 @@ SkeletalAssassin: {
 	Body:               50
 	CreatureType:       "Undead"
 	VirtualArmor:       35
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            130
 	Hue:                17969
 	LootItemChance:     4

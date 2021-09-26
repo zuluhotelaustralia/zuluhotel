@@ -15,7 +15,7 @@ GoldenDragon: {
 	CanFly:               true
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         75
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "GoldenDragon"
 	Hides:                5
 	HitsMax:              1250

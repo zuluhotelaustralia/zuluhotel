@@ -8,7 +8,7 @@ OrderOfIronFist: {
 	Dex:                300
 	AlwaysMurderer:     true
 	CreatureType:       "Human"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	LootTable:          "59"
 	ManaMaxSeed:        200

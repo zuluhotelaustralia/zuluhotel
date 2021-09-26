@@ -15,7 +15,7 @@ MindFlayer: {
 	ClassType:          "Warrior"
 	CreatureType:       "Daemon"
 	VirtualArmor:       60
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	FightRange:         6
 	HitsMax:            1200
 	Hue:                2222

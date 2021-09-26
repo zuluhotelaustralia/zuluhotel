@@ -12,7 +12,7 @@ FallenAngel: {
 	CanSwim:              true
 	CreatureType:         "Daemon"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              600
 	Hue:                  1174
 	LootItemChance:       25

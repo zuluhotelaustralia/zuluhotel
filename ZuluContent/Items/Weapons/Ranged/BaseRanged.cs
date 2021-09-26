@@ -98,7 +98,8 @@ namespace Server.Items
                     return false;
             }
 
-            attacker.MovingEffect(defender, EffectId, 18, 1, false, false);
+            // TODO: Revert duration back to 1 once CUO has found a fix for animating
+            attacker.MovingEffect(defender, EffectId, 18, 0, false, false);
 
             return true;
         }

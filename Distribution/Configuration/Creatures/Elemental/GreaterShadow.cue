@@ -11,7 +11,7 @@ GreaterShadow: {
 	Body:               573
 	CanSwim:            true
 	CreatureType:       "Elemental"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            350
 	Hue:                1
 	LootItemChance:     15

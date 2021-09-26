@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Scripts.Zulu.Engines.Classes;
+using Server.ContextMenus;
+using Server.Gumps;
 using Server.Items;
 using Server.Targets;
 using Server.Network;
-using Server.Regions;
 using MoveImpl = Server.Movement.MovementImpl;
 
 namespace Server.Mobiles
@@ -40,6 +42,7 @@ namespace Server.Mobiles
         public Timer m_Timer;
         protected ActionType m_Action;
         private long m_NextDetectHidden;
+        private long m_NextHide;
         private long m_NextStopGuard;
 
         public BaseCreature m_Mobile;
@@ -56,7 +59,7 @@ namespace Server.Mobiles
                 activate = true;
             else if (World.Loading)
                 activate = false;
-            else if (m.Map == null || m.Map == Map.Internal || !m.Map.GetSector(m).Active)
+            else if (m.Map == null || m.Map == Map.Internal || !m.Map.GetSector(m.Location).Active)
                 activate = false;
             else
                 activate = true;
@@ -82,6 +85,43 @@ namespace Server.Mobiles
             string name = m_Mobile.Name;
 
             return name != null && InsensitiveStringHelpers.InsensitiveStartsWith(speech, name);
+        }
+        
+        public virtual void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            if (from.Alive && m_Mobile.Controlled && from.InRange(m_Mobile, 14))
+            {
+                if (from == m_Mobile.ControlMaster)
+                {
+                    list.Add(new InternalEntry(from, 6107, 14, m_Mobile, this, OrderType.Guard));  // Command: Guard
+                    list.Add(new InternalEntry(from, 6108, 14, m_Mobile, this, OrderType.Follow)); // Command: Follow
+
+                    if (m_Mobile.CanDrop)
+                    {
+                        list.Add(new InternalEntry(from, 6109, 14, m_Mobile, this, OrderType.Drop)); // Command: Drop
+                    }
+
+                    list.Add(new InternalEntry(from, 6111, 14, m_Mobile, this, OrderType.Attack)); // Command: Kill
+
+                    list.Add(new InternalEntry(from, 6112, 14, m_Mobile, this, OrderType.Stop)); // Command: Stop
+                    list.Add(new InternalEntry(from, 6114, 14, m_Mobile, this, OrderType.Stay)); // Command: Stay
+
+                    if (!m_Mobile.Summoned)
+                    {
+                        list.Add(new InternalEntry(from, 6110, 14, m_Mobile, this, OrderType.Friend));   // Add Friend
+                        list.Add(new InternalEntry(from, 6099, 14, m_Mobile, this, OrderType.Unfriend)); // Remove Friend
+                        list.Add(new InternalEntry(from, 6113, 14, m_Mobile, this, OrderType.Transfer)); // Transfer
+                    }
+
+                    list.Add(new InternalEntry(from, 6118, 14, m_Mobile, this, OrderType.Release)); // Release
+                }
+                else if (m_Mobile.IsPetFriend(from))
+                {
+                    list.Add(new InternalEntry(from, 6108, 14, m_Mobile, this, OrderType.Follow)); // Command: Follow
+                    list.Add(new InternalEntry(from, 6112, 14, m_Mobile, this, OrderType.Stop));   // Command: Stop
+                    list.Add(new InternalEntry(from, 6114, 14, m_Mobile, this, OrderType.Stay));   // Command: Stay
+                }
+            }
         }
 
         public virtual void BeginPickTarget(Mobile from, OrderType order)
@@ -794,9 +834,6 @@ namespace Server.Mobiles
                 Action = ActionType.Wander;
             }
 
-            if (m_Mobile.CanFly && m_Mobile.Flying)
-                m_Mobile.Flying = false;
-
             return true;
         }
 
@@ -1020,8 +1057,6 @@ namespace Server.Mobiles
             else
             {
                 m_Mobile.Warmode = false;
-                if (m_Mobile.CanFly && m_Mobile.Flying)
-                    m_Mobile.Flying = false;
             }
 
             return true;
@@ -1835,15 +1870,6 @@ namespace Server.Mobiles
 
             m_Mobile.Pushing = false;
 
-            if (m_Mobile.CanFly && m_Mobile.Warmode && m_Mobile.Combatant != null)
-            {
-                var distance = m_Mobile.GetDistanceToSqrt(m_Mobile.Combatant);
-                if (!m_Mobile.Flying && distance > 1)
-                    m_Mobile.Flying = true;
-                else if (m_Mobile.Flying && distance <= 1)
-                    m_Mobile.Flying = false;
-            }
-
             MoveImpl.IgnoreMovableImpassables = m_Mobile.CanMoveOverObstacles && !m_Mobile.CanDestroyObstacles;
 
             if ((m_Mobile.Direction & Direction.Mask) != (d & Direction.Mask))
@@ -1987,7 +2013,7 @@ namespace Server.Mobiles
 
         public virtual void WalkRandomInHome(int iChanceToNotMove, int iChanceToDir, int iSteps)
         {
-            if (m_Mobile.Deleted || m_Mobile.DisallowAllMoves)
+            if (m_Mobile.Deleted || m_Mobile.DisallowAllMoves || m_Mobile.Hidden)
                 return;
 
             if (m_Mobile.Home == Point3D.Zero)
@@ -2382,7 +2408,12 @@ namespace Server.Mobiles
                 m_Mobile.FocusMob = newFocusMob;
             }
 
-            return m_Mobile.FocusMob != null;
+            var focusedMob = m_Mobile.FocusMob != null;
+
+            if (m_Mobile.Hidden && focusedMob)
+                Timer.StartTimer(TimeSpan.FromMilliseconds(100), () => AlertUnhidden(m_Mobile));
+
+            return focusedMob;
         }
 
         private bool IsHostile(Mobile from)
@@ -2413,6 +2444,10 @@ namespace Server.Mobiles
             return false;
         }
 
+        public static void AlertUnhidden(Mobile mobile)
+        {
+            mobile.Say($"*{mobile.Name} springs out from hiding!*");
+        }
 
         public virtual void DetectHidden()
         {
@@ -2449,6 +2484,24 @@ namespace Server.Mobiles
                         trg.SendLocalizedMessage(500814); // You have been revealed!
                     }
                 }
+            }
+        }
+
+        public virtual void Hide()
+        {
+            if (m_Mobile.Deleted || m_Mobile.Map == null || m_Mobile.Controlled)
+                return;
+
+            m_Mobile.DebugSay("Hiding");
+
+            if (m_Mobile.ShilCheckSkill(SkillName.Hiding))
+            {
+                m_Mobile.Hidden = true;
+                m_Mobile.DebugSay("I have hidden");
+            }
+            else
+            {
+                m_Mobile.DebugSay("I failed hiding");
             }
         }
 
@@ -2507,9 +2560,103 @@ namespace Server.Mobiles
             m_Timer.Start();
         }
 
-        public virtual bool CanDetectHidden
+        public virtual bool CanDetectHidden => m_Mobile.Skills[SkillName.DetectHidden].Value > 0;
+
+        public virtual bool CanHide => m_Mobile is not BaseVendor && m_Mobile.Skills[SkillName.Hiding].Value > 0 &&
+                                       !m_Mobile.Hidden && m_Mobile.Warmode == false &&
+                                       m_Mobile.Combatant == null;
+        
+        private class InternalEntry : ContextMenuEntry
         {
-            get { return m_Mobile.Skills[SkillName.DetectHidden].Value > 0; }
+            private readonly BaseAI m_AI;
+            private readonly Mobile m_From;
+            private readonly BaseCreature m_Mobile;
+            private readonly OrderType m_Order;
+
+            public InternalEntry(Mobile from, int number, int range, BaseCreature mobile, BaseAI ai, OrderType order)
+                : base(number, range)
+            {
+                m_From = from;
+                m_Mobile = mobile;
+                m_AI = ai;
+                m_Order = order;
+
+                if (!mobile.Alive && (order == OrderType.Guard || order == OrderType.Attack ||
+                                         order == OrderType.Transfer || order == OrderType.Drop))
+                {
+                    Enabled = false;
+                }
+            }
+
+            public override void OnClick()
+            {
+                if (!m_Mobile.Deleted && m_Mobile.Controlled && m_From.CheckAlive())
+                {
+                    if (!m_Mobile.Alive && (m_Order == OrderType.Guard || m_Order == OrderType.Attack ||
+                                               m_Order == OrderType.Transfer || m_Order == OrderType.Drop))
+                    {
+                        return;
+                    }
+
+                    var isOwner = m_From == m_Mobile.ControlMaster;
+                    var isFriend = !isOwner && m_Mobile.IsPetFriend(m_From);
+
+                    if (!isOwner && !isFriend)
+                    {
+                        return;
+                    }
+
+                    if (isFriend && m_Order != OrderType.Follow && m_Order != OrderType.Stay && m_Order != OrderType.Stop)
+                    {
+                        return;
+                    }
+
+                    switch (m_Order)
+                    {
+                        case OrderType.Follow:
+                        case OrderType.Attack:
+                        case OrderType.Transfer:
+                        case OrderType.Friend:
+                        case OrderType.Unfriend:
+                            {
+                                if (m_Order == OrderType.Transfer && m_From.HasTrade)
+                                {
+                                    m_From.SendLocalizedMessage(1010507); // You cannot transfer a pet with a trade pending
+                                }
+                                else if (m_Order == OrderType.Friend && m_From.HasTrade)
+                                {
+                                    m_From.SendLocalizedMessage(1070947); // You cannot friend a pet with a trade pending
+                                }
+                                else
+                                {
+                                    m_AI.BeginPickTarget(m_From, m_Order);
+                                }
+
+                                break;
+                            }
+                        case OrderType.Release:
+                            {
+                                if (m_Mobile.Summoned)
+                                {
+                                    goto default;
+                                }
+
+                                m_From.SendGump(new ConfirmReleaseGump(m_From, m_Mobile));
+
+                                break;
+                            }
+                        default:
+                            {
+                                if (m_Mobile.CheckControlChance(m_From))
+                                {
+                                    m_Mobile.ControlOrder = m_Order;
+                                }
+
+                                break;
+                            }
+                    }
+                }
+            }
         }
 
         /*
@@ -2526,6 +2673,7 @@ namespace Server.Mobiles
                 m_Owner = owner;
 
                 m_Owner.m_NextDetectHidden = Core.TickCount;
+                m_Owner.m_NextHide = Core.TickCount;
             }
 
             protected override void OnTick()
@@ -2542,7 +2690,7 @@ namespace Server.Mobiles
                 }
                 else if (m_Owner.m_Mobile.PlayerRangeSensitive) //have to check this in the timer....
                 {
-                    Sector sect = m_Owner.m_Mobile.Map.GetSector(m_Owner.m_Mobile);
+                    Sector sect = m_Owner.m_Mobile.Map.GetSector(m_Owner.m_Mobile.Location);
                     if (!sect.Active)
                     {
                         m_Owner.Deactivate();
@@ -2607,6 +2755,15 @@ namespace Server.Mobiles
                     m_Owner.m_NextDetectHidden = Core.TickCount +
                                                  (int) TimeSpan.FromSeconds(Utility.RandomMinMax(min, max))
                                                      .TotalMilliseconds;
+                }
+                
+                if (m_Owner.CanHide && Core.TickCount > m_Owner.m_NextHide)
+                {
+                    m_Owner.Hide();
+
+                    m_Owner.m_NextHide = Core.TickCount +
+                                         (int) TimeSpan.FromSeconds(10)
+                                             .TotalMilliseconds;
                 }
             }
         }

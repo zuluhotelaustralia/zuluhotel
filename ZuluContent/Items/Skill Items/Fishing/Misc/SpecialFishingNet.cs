@@ -125,7 +125,7 @@ namespace Server.Items
             }
             else if (FullValidation(map, x, y))
             {
-                Point3D p = new Point3D(x, y, z);
+                var p = new Point3D(x, y, z);
 
                 if (GetType() == typeof(SpecialFishingNet))
                 {
@@ -142,9 +142,10 @@ namespace Server.Items
 
                 Effects.SendLocationEffect(p, map, 0x352D, 16, 4);
                 Effects.PlaySound(p, map, 0x364);
+                
+                var index = 0;
 
-                Timer.DelayCall(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.25), 14, DoEffect,
-                    new object[] {p, 0, from});
+                Timer.StartTimer(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.25), 14, () => DoEffect(from, p, index++));
 
                 from.SendLocalizedMessage(1010487); // You plunge the net into the sea...
             }
@@ -154,18 +155,10 @@ namespace Server.Items
             }
         }
 
-        private void DoEffect(object state)
+        private void DoEffect(Mobile from, Point3D p, int index)
         {
             if (Deleted)
                 return;
-
-            object[] states = (object[]) state;
-
-            Point3D p = (Point3D) states[0];
-            int index = (int) states[1];
-            Mobile from = (Mobile) states[2];
-
-            states[1] = ++index;
 
             if (index == 1)
             {

@@ -11,7 +11,7 @@ PoisonElemental: {
 	Body:                 13
 	CreatureType:         "Elemental"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              350
 	Hue:                  2006
 	LootItemChance:       50

@@ -13,7 +13,7 @@ DemonicOstard: {
 	Body:                 218
 	CreatureType:         "Animal"
 	VirtualArmor:         50
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              850
 	Hue:                  1259
 	ManaMaxSeed:          150

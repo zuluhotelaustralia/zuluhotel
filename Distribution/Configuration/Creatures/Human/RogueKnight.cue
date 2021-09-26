@@ -9,7 +9,7 @@ RogueKnight: {
 	AlwaysMurderer:       true
 	CreatureType:         "Human"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              350
 	Hue:                  33784
 	LootItemChance:       1

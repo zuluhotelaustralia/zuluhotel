@@ -10,7 +10,7 @@ RedSolenWarrior: {
 	Body:                 782
 	VirtualArmor:         35
 	Fame:                 3
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              400
 	Karma:                3
 	LootItemChance:       100

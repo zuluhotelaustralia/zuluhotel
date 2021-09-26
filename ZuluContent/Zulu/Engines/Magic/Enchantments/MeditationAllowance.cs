@@ -1,4 +1,5 @@
 using MessagePack;
+using Server;
 using Server.Items;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 
@@ -20,6 +21,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             get => Cursed > CurseType.None ? (ArmorMeditationAllowance)(ArmorMeditationAllowance.None - m_Value) : m_Value;
             set => m_Value = value;
         }
+
+        [CallPriority(1)]
+        public override bool GetShouldDye() => Value > ArmorMeditationAllowance.None;
     }
     
     public class MeditationAllowanceInfo : EnchantmentInfo

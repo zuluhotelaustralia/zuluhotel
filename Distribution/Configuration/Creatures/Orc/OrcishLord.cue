@@ -11,7 +11,7 @@ OrcishLord: {
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         25
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              205
 	Hue:                  33784
 	LootItemChance:       6

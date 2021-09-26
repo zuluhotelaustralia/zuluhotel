@@ -11,7 +11,7 @@ Skeleton: {
 	Body:               57
 	CreatureType:       "Undead"
 	VirtualArmor:       5
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            60
 	Hue:                33784
 	LootTable:          "15"

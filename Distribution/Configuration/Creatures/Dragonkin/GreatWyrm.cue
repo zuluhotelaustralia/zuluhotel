@@ -13,7 +13,7 @@ GreatWyrm: {
 	Body:                 46
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         50
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Wyrm"
 	Hides:                5
 	HitsMax:              900

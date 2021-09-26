@@ -13,7 +13,7 @@ Dragon: {
 	Body:                 59
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         55
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
 	HitsMax:              750

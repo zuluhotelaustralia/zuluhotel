@@ -8,6 +8,8 @@ namespace Server.Items
         public override string DefaultName => CraftResources.GetName(Resource).Length > 0
             ? $"{CraftResources.GetName(Resource)} hide"
             : "hide";
+        
+        public override double DefaultWeight => 0.1;
 
         public override void Serialize(IGenericWriter writer)
         {
@@ -33,9 +35,7 @@ namespace Server.Items
                 }
                 case 0:
                 {
-                    OreInfo info = new OreInfo(reader.ReadInt(), reader.ReadInt(), reader.ReadString());
-
-                    Resource = CraftResources.GetFromOreInfo(info);
+                    Resource = CraftResource.RegularLeather;
                     break;
                 }
             }
@@ -48,20 +48,13 @@ namespace Server.Items
         public BaseHide(CraftResource resource, int amount) : base(0x1079)
         {
             Stackable = true;
-            Weight = 5.0;
             Amount = amount;
             Hue = CraftResources.GetHue(resource);
-
             Resource = resource;
         }
 
         public BaseHide(Serial serial) : base(serial)
         {
-        }
-
-        public override int LabelNumber
-        {
-            get { return 1047023; }
         }
     }
 }

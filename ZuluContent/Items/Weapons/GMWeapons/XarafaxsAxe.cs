@@ -4,7 +4,8 @@ using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    public class XarafaxsAxe : BaseAxe, IUsesRemaining, IGMItem
+    [Serializable(0, false)]
+    public partial class XarafaxsAxe : BaseAxe, IUsesRemaining, IGMItem
     {
         public override HarvestSystem HarvestSystem => Lumberjacking.System;
 
@@ -35,25 +36,6 @@ namespace Server.Items
             ShowUsesRemaining = true;
             HarvestBonus = 2;
             Identified = false;
-        }
-
-        [Constructible]
-        public XarafaxsAxe(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
         }
     }
 }

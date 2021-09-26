@@ -12,7 +12,7 @@ SlaveGuard: {
 	ClassType:          "Warrior"
 	CreatureType:       "Human"
 	VirtualArmor:       60
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            1000
 	Hue:                1159
 	LootItemChance:     20

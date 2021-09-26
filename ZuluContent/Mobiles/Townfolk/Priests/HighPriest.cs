@@ -158,7 +158,7 @@ namespace Server.Mobiles
                     Direction = GetDirectionTo(from);
                     PublicOverheadMessage(MessageType.Regular, 0x3B2, true,
                         "Great Essence of the Virtues, I'm calling upon you to purify this item from all curses");
-                    Animate(17, 10, 1, true, false, 0);
+                    Animate(17, 7, 1, true, false, 0);
                     Timer.DelayCall(TimeSpan.FromSeconds(8), () => {
                         item.Cursed = CurseType.None;
                         from.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);

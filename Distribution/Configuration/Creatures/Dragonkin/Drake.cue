@@ -12,7 +12,7 @@ Drake: {
 	Body:                 61
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                2
 	HitsMax:              500

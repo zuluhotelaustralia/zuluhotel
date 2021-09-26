@@ -11,7 +11,7 @@ OrcWarrior: {
 	Body:                 41
 	CreatureType:         "Orc"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              160
 	LootTable:            "43"
 	ManaMaxSeed:          25

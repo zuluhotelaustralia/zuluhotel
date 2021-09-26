@@ -13,7 +13,7 @@ BehemothLord: {
 	Body:               14
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                54
 	LootItemChance:     80

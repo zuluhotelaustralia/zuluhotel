@@ -8,7 +8,7 @@ namespace Server.Misc
   {
     public static void Initialize()
     {
-      Timer.DelayCall(TimeSpan.FromSeconds(2.5), Run);
+      Timer.StartTimer(TimeSpan.FromSeconds(2.5), Run);
     }
 
     public static void Run()

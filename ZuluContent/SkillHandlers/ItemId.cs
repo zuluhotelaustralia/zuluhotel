@@ -11,7 +11,7 @@ namespace Server.SkillHandlers
 {
     public class ItemId : BaseSkillHandler
     {
-        public override SkillName Skill { get; } = SkillName.ItemID;
+        public override SkillName Skill => SkillName.ItemID;
 
         private static readonly TargetOptions TargetOptions = new()
         {
@@ -23,7 +23,7 @@ namespace Server.SkillHandlers
             var target = new AsyncTarget<object>(from, TargetOptions);
             from.Target = target;
             
-            from.SendLocalizedMessage(500343); // What do you wish to appraise and identify?
+            from.SendSuccessMessage(500343); // What do you wish to appraise and identify?
             
             var (targeted, responseType) = await target;
 

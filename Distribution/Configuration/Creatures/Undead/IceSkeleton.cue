@@ -11,7 +11,7 @@ IceSkeleton: {
 	Body:               57
 	CreatureType:       "Undead"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            200
 	Hue:                1301
 	LootItemChance:     2

@@ -14,7 +14,7 @@ TwistedAnimation: {
 	ClassType:          "Warrior"
 	CreatureType:       "Elemental"
 	VirtualArmor:       50
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            700
 	Hue:                49408
 	LootItemChance:     75

@@ -220,7 +220,7 @@ public EffectController( Serial serial ) : base( serial )
 
 		private IEntity ReadEntity( IGenericReader reader )
 		{
-			return World.FindEntity( reader.ReadUInt() );
+			return World.FindEntity( (Serial) reader.ReadUInt() );
 		}
 
 		public override void Deserialize( IGenericReader reader )
@@ -288,13 +288,13 @@ public EffectController( Serial serial ) : base( serial )
 				return;
 
 			if ( m_SoundID > 0 )
-				Timer.DelayCall( m_SoundDelay, PlaySound, trigger );
+				Timer.StartTimer( m_SoundDelay, () => PlaySound(trigger) );
 
 			if ( m_Trigger != null )
-				Timer.DelayCall( m_TriggerDelay, m_Trigger.DoEffect, trigger );
+				Timer.StartTimer( m_TriggerDelay, () => m_Trigger.DoEffect(trigger) );
 
 			if ( m_EffectType != ECEffectType.None )
-				Timer.DelayCall( m_EffectDelay, InternalDoEffect, trigger );
+				Timer.StartTimer( m_EffectDelay, () => InternalDoEffect(trigger) );
 		}
 
 		public void InternalDoEffect( object trigger )

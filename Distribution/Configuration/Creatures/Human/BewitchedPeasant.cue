@@ -12,7 +12,7 @@ BewitchedPeasant: {
 	LootTable:          "47"
 	ManaMaxSeed:        0
 	RiseCreatureDelay:  "00:00:25"
-	RiseCreatureType:   "Spectre"
+	RiseCreatureTemplate: "Spectre"
 	StamMaxSeed:        50
 	Skills: Tactics: 50
 	Attack: {

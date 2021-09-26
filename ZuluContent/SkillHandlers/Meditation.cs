@@ -14,7 +14,7 @@ namespace Server.SkillHandlers
 {
     class Meditation : BaseSkillHandler
     {
-        public override SkillName Skill { get; } = SkillName.Meditation;
+        public override SkillName Skill => SkillName.Meditation;
 
         public override async Task<TimeSpan> OnUse(Mobile mobile)
         {
@@ -93,8 +93,13 @@ namespace Server.SkillHandlers
                     }
                 }
             }
-            mobile.Meditating = false;
-            mobile.SendLocalizedMessage(500134); // You stop meditating.
+
+            // Disruptive action can also break meditation so don't message twice
+            if (mobile.Meditating)
+            {
+                mobile.Meditating = false;
+                mobile.SendLocalizedMessage(500134); // You stop meditating.
+            }
 
             return Delay;
         }

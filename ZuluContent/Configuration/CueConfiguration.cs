@@ -48,7 +48,7 @@ namespace Scripts.Configuration
                 var files = Directory.GetFiles(configRoot, "*.cue", new EnumerationOptions { RecurseSubdirectories = true });
                 var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
 
-                if (!File.Exists(jsonCacheFile) || lastWrite != File.GetLastWriteTimeUtc(jsonCacheFile))
+                if (!File.Exists(jsonCachePath) || lastWrite != File.GetLastWriteTimeUtc(jsonCachePath))
                 {
                     Console.Write($"\tCUE Configuration is out of date, rebuilding via cli `cue {cueArgs}` ... ");
 

@@ -11,7 +11,7 @@ Ettin: {
 	Body:                 18
 	CreatureType:         "Giantkin"
 	VirtualArmor:         15
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              140
 	Hue:                  33784
 	LootItemChance:       2

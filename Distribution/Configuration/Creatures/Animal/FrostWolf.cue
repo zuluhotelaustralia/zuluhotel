@@ -11,7 +11,7 @@ FrostWolf: {
 	Body:                 225
 	CreatureType:         "Animal"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Wolf"
 	Hides:                5
 	HitsMax:              135

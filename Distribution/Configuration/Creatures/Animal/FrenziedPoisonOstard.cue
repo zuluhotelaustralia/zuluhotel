@@ -11,7 +11,7 @@ FrenziedPoisonOstard: {
 	Body:                 218
 	CreatureType:         "Animal"
 	VirtualArmor:         15
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              225
 	Hue:                  264
 	ManaMaxSeed:          175

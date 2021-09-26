@@ -879,9 +879,9 @@ namespace Server.Commands
             var list = new DecorationList();
 
             var indexOf = line.IndexOf(' ');
-
+            
             var name = line.Substring(0, indexOf++);
-            list.m_Type = AssemblyHandler.FindTypeByName(name, ignoreCase: true);
+            list.m_Type = AssemblyHandler.FindTypeByName(name);
 
             if (list.m_Type == null)
                 throw new ArgumentException($"Type not found for header: '{line}', '{name}'");

@@ -13,7 +13,7 @@ TerathanStriker: {
 	Body:                 71
 	CreatureType:         "Terathan"
 	VirtualArmor:         10
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              370
 	Hue:                  11
 	LootTable:            "64"

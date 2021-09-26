@@ -11,7 +11,7 @@ SmallHoardeDemon: {
 	Body:               776
 	CreatureType:       "Daemon"
 	VirtualArmor:       35
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            600
 	LootItemChance:     50
 	LootItemLevel:      5

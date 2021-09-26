@@ -56,7 +56,7 @@ namespace Server.Commands
         {
             if (e.Length == 1)
             {
-                IEntity ent = World.FindEntity(e.GetUInt32(0));
+                IEntity ent = World.FindEntity((Serial) e.GetUInt32(0));
 
                 if (ent == null)
                     e.Mobile.SendMessage("No object with that serial was found.");

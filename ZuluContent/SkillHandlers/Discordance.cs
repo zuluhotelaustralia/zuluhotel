@@ -96,7 +96,9 @@ namespace Server.SkillHandlers
             }
 
             var info = new DiscordanceInfo(from, creature, mods);
-            info.Timer = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.25), ProcessDiscordance, info);
+            
+            Timer.StartTimer(TimeSpan.Zero, TimeSpan.FromSeconds(1.25), () => ProcessDiscordance(info), out var timerToken);
+            info.TimerToken = timerToken;
 
             ActiveDiscords[creature.Serial] = info;
 
@@ -109,7 +111,7 @@ namespace Server.SkillHandlers
             public readonly Mobile Creature;
             public long EndTime;
             public bool Ending;
-            public Timer Timer;
+            public TimerExecutionToken TimerToken;
             public readonly List<object> Mods;
 
             public DiscordanceInfo(Mobile from, Mobile creature, List<object> mods)
@@ -179,7 +181,7 @@ namespace Server.SkillHandlers
 
             if (ends && info.Ending && info.EndTime < Core.TickCount)
             {
-                info.Timer?.Stop();
+                info.TimerToken.Cancel();
                 info.Clear();
                 ActiveDiscords.Remove(creature.Serial);
             }

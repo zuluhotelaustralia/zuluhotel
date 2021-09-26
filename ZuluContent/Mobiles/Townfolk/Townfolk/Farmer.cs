@@ -1,60 +1,58 @@
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
     public class Farmer : BaseVendor
-	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
+    {
+        private readonly List<SBInfo> m_SBInfos = new();
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
 
-		[Constructible]
-public Farmer() : base( "the farmer" )
-		{
-			SetSkill( SkillName.Lumberjacking, 36.0, 68.0 );
-			SetSkill( SkillName.TasteID, 36.0, 68.0 );
-			SetSkill( SkillName.Cooking, 36.0, 68.0 );
-		}
+        [Constructible]
+        public Farmer() : base("the Farmer")
+        {
+            SetSkill(SkillName.Fishing, 120.0);
+            SetSkill(SkillName.Cooking, 90.0);
+            SetSkill(SkillName.Alchemy, 80.0);
+        }
 
-		public override void InitSBInfo()
-		{
-			m_SBInfos.Add( new SBFarmer() );
-		}
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBFarmer());
+        }
 
-		public override VendorShoeType ShoeType
-		{
-			get{ return VendorShoeType.ThighBoots; }
-		}
+        public override VendorShoeType ShoeType => VendorShoeType.ThighBoots;
 
-		public override int GetShoeHue()
-		{
-			return 0;
-		}
+        public override int GetShoeHue()
+        {
+            return 0;
+        }
 
-		public override void InitOutfit()
-		{
-			base.InitOutfit();
+        public override void InitOutfit()
+        {
+            base.InitOutfit();
 
-			AddItem( new Server.Items.WideBrimHat( Utility.RandomNeutralHue() ) );
-		}
+            AddItem(new WideBrimHat(Utility.RandomNeutralHue()));
+        }
 
-		[Constructible]
-public Farmer( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public Farmer(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write(0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            var version = reader.ReadInt();
+        }
+    }
 }

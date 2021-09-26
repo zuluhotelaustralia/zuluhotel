@@ -11,7 +11,7 @@ Ent: {
 	Body:               47
 	CreatureType:       "Plant"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	LootItemChance:     1
 	LootTable:          "34"

@@ -9,7 +9,7 @@ Dracula: {
 	AlwaysMurderer:     true
 	CreatureType:       "Undead"
 	VirtualArmor:       35
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            600
 	LootItemChance:     50
 	LootItemLevel:      5

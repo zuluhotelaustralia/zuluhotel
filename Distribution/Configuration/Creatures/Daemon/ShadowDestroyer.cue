@@ -15,7 +15,7 @@ ShadowDestroyer: {
 	Body:                 311
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              1200
 	Hue:                  1172
 	LootItemChance:       90

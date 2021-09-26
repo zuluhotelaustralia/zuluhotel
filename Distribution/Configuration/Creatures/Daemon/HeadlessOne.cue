@@ -11,7 +11,7 @@ HeadlessOne: {
 	Body:                 31
 	CreatureType:         "Daemon"
 	VirtualArmor:         5
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              60
 	LootTable:            "3"
 	ManaMaxSeed:          15

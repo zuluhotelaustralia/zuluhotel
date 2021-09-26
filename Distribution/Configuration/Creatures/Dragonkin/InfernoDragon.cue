@@ -12,7 +12,7 @@ InfernoDragon: {
 	Body:                 59
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Lava"
 	Hides:                5
 	HitsMax:              500

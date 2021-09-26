@@ -10,7 +10,7 @@ Revenant: {
 	Body:               3
 	CreatureType:       "Undead"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            135
 	Hue:                1285
 	LootTable:          "14"

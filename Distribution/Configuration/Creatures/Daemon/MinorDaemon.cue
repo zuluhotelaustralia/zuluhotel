@@ -11,7 +11,7 @@ MinorDaemon: {
 	Body:                 4
 	CreatureType:         "Daemon"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              275
 	Hue:                  35
 	LootItemChance:       10

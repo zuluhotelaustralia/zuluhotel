@@ -62,7 +62,7 @@ package Types
 	Race:                    *#NpcDefaults.Race | #CreatureProperties.Race
 	ReacquireDelay:          *#NpcDefaults.ReacquireDelay | #CreatureProperties.ReacquireDelay
 	RiseCreatureDelay:       *#NpcDefaults.RiseCreatureDelay | #CreatureProperties.RiseCreatureDelay
-	RiseCreatureType:        *#NpcDefaults.RiseCreatureType | #CreatureProperties.RiseCreatureType
+	RiseCreatureTemplate:    *#NpcDefaults.RiseCreatureTemplate | #CreatureProperties.RiseCreatureTemplate
 	SaySpellMantra:          *#NpcDefaults.SaySpellMantra | #CreatureProperties.SaySpellMantra
 	SpeechType:              *#NpcDefaults.SpeechType | #CreatureProperties.SpeechType
 	TargetAcquireExhaustion: *#NpcDefaults.TargetAcquireExhaustion | #CreatureProperties.TargetAcquireExhaustion

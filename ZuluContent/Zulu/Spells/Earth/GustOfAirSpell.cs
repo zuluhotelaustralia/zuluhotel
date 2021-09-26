@@ -24,7 +24,7 @@ namespace Scripts.Zulu.Spells.Earth
             
             SpellHelper.Turn(Caster, target);
             
-            target.FixedParticles(0x3A92, 30, 30, 5028, EffectLayer.LeftFoot);
+            target.FixedParticles(0x37CC, 30, 30, 5028, EffectLayer.LeftFoot);
             target.PlaySound(0x0107);
             target.PlaySound(0x0108);
 

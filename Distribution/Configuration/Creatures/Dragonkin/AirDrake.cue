@@ -12,7 +12,7 @@ AirDrake: {
 	Body:                 61
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
 	HitsMax:              400

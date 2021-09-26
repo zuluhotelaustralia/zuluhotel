@@ -13,7 +13,7 @@ OphidianAvenger: {
 	Body:                 86
 	CreatureType:         "Ophidian"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
 	HitsMax:              350

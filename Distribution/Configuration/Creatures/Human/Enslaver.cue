@@ -13,7 +13,7 @@ Enslaver: {
 	ClassType:          "Warrior"
 	CreatureType:       "Human"
 	VirtualArmor:       60
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2000
 	Hue:                1645
 	LootItemChance:     50

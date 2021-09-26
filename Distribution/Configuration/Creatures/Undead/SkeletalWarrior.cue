@@ -11,7 +11,7 @@ SkeletalWarrior: {
 	Body:               57
 	CreatureType:       "Undead"
 	VirtualArmor:       35
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	Hue:                1127
 	LootItemChance:     5

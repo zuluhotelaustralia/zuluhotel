@@ -13,7 +13,7 @@ HellsStallion: {
 	Body:                 793
 	CreatureType:         "Daemon"
 	VirtualArmor:         60
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              1050
 	Hue:                  1305
 	LootItemChance:       90

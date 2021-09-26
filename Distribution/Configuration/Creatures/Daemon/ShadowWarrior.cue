@@ -9,7 +9,7 @@ ShadowWarrior: {
 	AlwaysMurderer:     true
 	CreatureType:       "Daemon"
 	VirtualArmor:       35
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            1000
 	LootItemChance:     50
 	LootItemLevel:      5

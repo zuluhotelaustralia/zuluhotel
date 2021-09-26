@@ -24,6 +24,9 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             set => m_Value = value;
         }
         
+        [CallPriority(1)]
+        public override bool GetShouldDye() => Value > 0;
+        
         [Key(2)] public virtual int Charges { get; set; } = int.MaxValue;
 
         public override void OnCheckMagicReflection(Mobile parent, Spell spell, ref bool reflected)

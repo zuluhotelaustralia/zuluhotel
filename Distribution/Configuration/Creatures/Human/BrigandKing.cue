@@ -8,7 +8,7 @@ BrigandKing: {
 	Dex:                400
 	AlwaysMurderer:     true
 	CreatureType:       "Human"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            600
 	LootItemChance:     100
 	LootItemLevel:      5

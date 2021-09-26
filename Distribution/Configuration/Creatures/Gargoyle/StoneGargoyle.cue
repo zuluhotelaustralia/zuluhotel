@@ -11,7 +11,7 @@ StoneGargoyle: {
 	Body:                 4
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              495
 	Hue:                  1154
 	LootItemChance:       15

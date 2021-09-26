@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Server.Items;
-using Server.Mobiles;
+using Server.Commands.Generic;
 using Server.Gumps;
+using Server.Items;
+using Server.Misc;
+using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
-using Server.Commands;
-using Server.Commands.Generic;
-using Server.Misc;
 
 namespace Server.Guilds
 {
@@ -34,69 +33,47 @@ namespace Server.Guilds
 
     public class RankDefinition
     {
-        public static RankDefinition[] Ranks = new[]
+        public static RankDefinition[] Ranks =
         {
-            new RankDefinition(1062963, 0, RankFlags.None), //Ronin
-            new RankDefinition(1062962, 1, RankFlags.Member), //Member
-            new RankDefinition(1062961, 2,
+            new(1062963, 0, RankFlags.None), //Ronin
+            new(1062962, 1, RankFlags.Member), //Member
+            new(1062961, 2,
                 RankFlags.Member | RankFlags.RemovePlayers | RankFlags.CanInvitePlayer | RankFlags.CanSetGuildTitle |
                 RankFlags.CanPromoteDemote), //Emmissary
-            new RankDefinition(1062960, 3, RankFlags.Member | RankFlags.ControlWarStatus), //Warlord
-            new RankDefinition(1062959, 4, RankFlags.All) //Leader
+            new(1062960, 3, RankFlags.Member | RankFlags.ControlWarStatus), //Warlord
+            new(1062959, 4, RankFlags.All) //Leader
         };
 
-        public static RankDefinition Leader
-        {
-            get { return Ranks[4]; }
-        }
+        public static RankDefinition Leader => Ranks[4];
 
-        public static RankDefinition Member
-        {
-            get { return Ranks[1]; }
-        }
+        public static RankDefinition Member => Ranks[1];
 
-        public static RankDefinition Lowest
-        {
-            get { return Ranks[0]; }
-        }
+        public static RankDefinition Lowest => Ranks[0];
 
-        private TextDefinition m_Name;
-        private int m_Rank;
-        private RankFlags m_Flags;
+        public TextDefinition Name { get; }
 
-        public TextDefinition Name
-        {
-            get { return m_Name; }
-        }
+        public int Rank { get; }
 
-        public int Rank
-        {
-            get { return m_Rank; }
-        }
-
-        public RankFlags Flags
-        {
-            get { return m_Flags; }
-        }
+        public RankFlags Flags { get; private set; }
 
         public RankDefinition(TextDefinition name, int rank, RankFlags flags)
         {
-            m_Name = name;
-            m_Rank = rank;
-            m_Flags = flags;
+            Name = name;
+            Rank = rank;
+            Flags = flags;
         }
 
         public bool GetFlag(RankFlags flag)
         {
-            return (m_Flags & flag) != 0;
+            return (Flags & flag) != 0;
         }
 
         public void SetFlag(RankFlags flag, bool value)
         {
             if (value)
-                m_Flags |= flag;
+                Flags |= flag;
             else
-                m_Flags &= ~flag;
+                Flags &= ~flag;
         }
     }
 
@@ -118,8 +95,8 @@ namespace Server.Guilds
             "Opens a menu where you can view and edit guild properties of a targeted player or guild stone.  If the new Guild system is active, also brings up the guild gump.")]
         private static void GuildProps_OnCommand(CommandEventArgs e)
         {
-            string arg = e.ArgString.Trim();
-            Mobile from = e.Mobile;
+            var arg = e.ArgString.Trim();
+            var from = e.Mobile;
 
             if (arg.Length == 0)
             {
@@ -128,13 +105,10 @@ namespace Server.Guilds
             else
             {
                 var g = uint.TryParse(arg, out var id)
-                    ? World.FindGuild(id) as Guild
+                    ? World.FindGuild((Serial)id) as Guild
                     : FindByAbbrev(arg) as Guild ?? FindByName(arg) as Guild;
-                
-                if (g != null)
-                {
-                    from.SendGump(new PropertiesGump(from, g));
-                }
+
+                if (g != null) from.SendGump(new PropertiesGump(from, g));
             }
         }
 
@@ -156,28 +130,24 @@ namespace Server.Guilds
 
                 if (o is Guildstone)
                 {
-                    Guildstone stone = o as Guildstone;
+                    var stone = o as Guildstone;
                     if (stone.Guild == null || stone.Guild.Disbanded)
                     {
                         from.SendMessage("The guild associated with that Guildstone no longer exists");
                         return;
                     }
-                    else
-                        g = stone.Guild;
+
+                    g = stone.Guild;
                 }
                 else if (o is Mobile)
                 {
-                    g = ((Mobile) o).Guild as Guild;
+                    g = ((Mobile)o).Guild as Guild;
                 }
 
                 if (g != null)
-                {
                     from.SendGump(new PropertiesGump(from, g));
-                }
                 else
-                {
                     from.SendMessage("That is not in a guild!");
-                }
             }
         }
 
@@ -187,7 +157,6 @@ namespace Server.Guilds
 
         public static void EventSink_GuildGumpRequest(Mobile mobile)
         {
-            return;
         }
 
         #endregion
@@ -205,26 +174,7 @@ namespace Server.Guilds
         private string m_Name;
         private string m_Abbreviation;
 
-        private List<Guild> m_Allies;
-        private List<Guild> m_Enemies;
-
-        private List<Mobile> m_Members;
-
-        private Item m_Guildstone;
-        private Item m_Teleporter;
-
-        private string m_Charter;
-        private string m_Website;
-
-        private DateTime m_LastFealty;
-
         private GuildType m_Type;
-        private DateTime m_TypeLastChange;
-
-        private List<Guild> m_AllyDeclarations, m_AllyInvitations;
-
-        private List<Guild> m_WarDeclarations, m_WarInvitations;
-        private List<Mobile> m_Candidates, m_Accepted;
 
         #endregion
 
@@ -234,32 +184,32 @@ namespace Server.Guilds
 
             m_Leader = leader;
 
-            m_Members = new List<Mobile>();
-            m_Allies = new List<Guild>();
-            m_Enemies = new List<Guild>();
-            m_WarDeclarations = new List<Guild>();
-            m_WarInvitations = new List<Guild>();
-            m_AllyDeclarations = new List<Guild>();
-            m_AllyInvitations = new List<Guild>();
-            m_Candidates = new List<Mobile>();
-            m_Accepted = new List<Mobile>();
+            Members = new List<Mobile>();
+            Allies = new List<Guild>();
+            Enemies = new List<Guild>();
+            WarDeclarations = new List<Guild>();
+            WarInvitations = new List<Guild>();
+            AllyDeclarations = new List<Guild>();
+            AllyInvitations = new List<Guild>();
+            Candidates = new List<Mobile>();
+            Accepted = new List<Mobile>();
 
-            m_LastFealty = DateTime.Now;
+            LastFealty = DateTime.Now;
 
             m_Name = name;
             m_Abbreviation = abbreviation;
 
-            m_TypeLastChange = DateTime.MinValue;
+            TypeLastChange = DateTime.MinValue;
 
             AddMember(m_Leader);
 
             if (m_Leader is PlayerMobile)
-                ((PlayerMobile) m_Leader).GuildRank = RankDefinition.Leader;
+                ((PlayerMobile)m_Leader).GuildRank = RankDefinition.Leader;
 
             #endregion
         }
 
-        public Guild(uint id) : base(id) //serialization ctor
+        public Guild(Serial serial) : base(serial) //serialization ctor
         {
         }
 
@@ -270,25 +220,21 @@ namespace Server.Guilds
 
         public void InvalidateMemberProperties(bool onlyOPL)
         {
-            if (m_Members != null)
-            {
-                for (int i = 0; i < m_Members.Count; i++)
+            if (Members != null)
+                for (var i = 0; i < Members.Count; i++)
                 {
-                    Mobile m = m_Members[i];
+                    var m = Members[i];
 
                     if (!onlyOPL)
                         m.Delta(MobileDelta.Noto);
                 }
-            }
         }
 
         public void InvalidateMemberNotoriety()
         {
-            if (m_Members != null)
-            {
-                for (int i = 0; i < m_Members.Count; i++)
-                    m_Members[i].Delta(MobileDelta.Noto);
-            }
+            if (Members != null)
+                for (var i = 0; i < Members.Count; i++)
+                    Members[i].Delta(MobileDelta.Noto);
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -306,66 +252,63 @@ namespace Server.Guilds
                 if (value != null)
                     AddMember(value); //Also removes from old guild.
 
-                if (m_Leader is PlayerMobile && m_Leader.Guild == this)
-                    ((PlayerMobile) m_Leader).GuildRank = RankDefinition.Member;
+                if (m_Leader is PlayerMobile mobile && mobile.Guild == this)
+                    mobile.GuildRank = RankDefinition.Member;
 
                 m_Leader = value;
 
                 if (m_Leader is PlayerMobile)
-                    ((PlayerMobile) m_Leader).GuildRank = RankDefinition.Leader;
+                    ((PlayerMobile)m_Leader).GuildRank = RankDefinition.Leader;
             }
         }
 
 
-        public override bool Disbanded
-        {
-            get { return m_Leader == null || m_Leader.Deleted; }
-        }
+        public override bool Disbanded => m_Leader == null || m_Leader.Deleted;
 
         public override void OnDelete(Mobile mob)
         {
             RemoveMember(mob);
         }
-        
+
         public void Disband()
         {
             m_Leader = null;
-            
-            foreach (Mobile m in m_Members)
+
+            foreach (var m in Members)
             {
                 m.SendLocalizedMessage(502131); // Your guild has disbanded.
 
                 if (m is PlayerMobile)
-                    ((PlayerMobile) m).GuildRank = RankDefinition.Lowest;
+                    ((PlayerMobile)m).GuildRank = RankDefinition.Lowest;
 
                 m.Guild = null;
             }
 
-            m_Members.Clear();
+            Members.Clear();
 
-            for (int i = m_Allies.Count - 1; i >= 0; --i)
-                if (i < m_Allies.Count)
-                    RemoveAlly(m_Allies[i]);
+            for (var i = Allies.Count - 1; i >= 0; --i)
+                if (i < Allies.Count)
+                    RemoveAlly(Allies[i]);
 
-            for (int i = m_Enemies.Count - 1; i >= 0; --i)
-                if (i < m_Enemies.Count)
-                    RemoveEnemy(m_Enemies[i]);
+            for (var i = Enemies.Count - 1; i >= 0; --i)
+                if (i < Enemies.Count)
+                    RemoveEnemy(Enemies[i]);
 
-            m_Guildstone?.Delete();
+            Guildstone?.Delete();
 
-            m_Guildstone = null;
+            Guildstone = null;
         }
 
         #region Is<something>(...)
 
         public bool IsMember(Mobile m)
         {
-            return m_Members.Contains(m);
+            return Members.Contains(m);
         }
 
         public bool IsAlly(Guild g)
         {
-            return m_Allies.Contains(g);
+            return Allies.Contains(g);
         }
 
         public bool IsEnemy(Guild g)
@@ -381,47 +324,51 @@ namespace Server.Guilds
             if (g == null)
                 return false;
 
-            return m_Enemies.Contains(g);
+            return Enemies.Contains(g);
         }
 
         #endregion
 
         #region Serialization
+        
+        public override void BeforeSerialize()
+        {
+        }
 
         public override void Serialize(IGenericWriter writer)
         {
             if (LastFealty + TimeSpan.FromDays(1.0) < DateTime.Now)
                 CalculateGuildmaster();
 
-            writer.Write((int) 5); //version
+            writer.Write(5); //version
 
-            writer.Write(m_AllyDeclarations);
-            writer.Write(m_AllyInvitations);
+            writer.Write(AllyDeclarations);
+            writer.Write(AllyInvitations);
 
-            writer.Write(m_TypeLastChange);
+            writer.Write(TypeLastChange);
 
-            writer.Write((int) m_Type);
+            writer.Write((int)m_Type);
 
-            writer.Write(m_LastFealty);
+            writer.Write(LastFealty);
 
             writer.Write(m_Leader);
             writer.Write(m_Name);
             writer.Write(m_Abbreviation);
 
-            writer.Write<Guild>(m_Allies);
-            writer.Write<Guild>(m_Enemies);
-            writer.Write(m_WarDeclarations);
-            writer.Write(m_WarInvitations);
+            writer.Write(Allies);
+            writer.Write(Enemies);
+            writer.Write(WarDeclarations);
+            writer.Write(WarInvitations);
 
-            writer.Write(m_Members);
-            writer.Write(m_Candidates);
-            writer.Write(m_Accepted);
+            writer.Write(Members);
+            writer.Write(Candidates);
+            writer.Write(Accepted);
 
-            writer.Write(m_Guildstone);
-            writer.Write(m_Teleporter);
+            writer.Write(Guildstone);
+            writer.Write(Teleporter);
 
-            writer.Write(m_Charter);
-            writer.Write(m_Website);
+            writer.Write(Charter);
+            writer.Write(Website);
         }
 
         public override void Delete()
@@ -431,33 +378,33 @@ namespace Server.Guilds
 
         public override void Deserialize(IGenericReader reader)
         {
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
 
             switch (version)
             {
                 case 5:
                 case 4:
                 {
-                    m_AllyDeclarations = reader.ReadEntityList<Guild>();
-                    m_AllyInvitations = reader.ReadEntityList<Guild>();
+                    AllyDeclarations = reader.ReadEntityList<Guild>();
+                    AllyInvitations = reader.ReadEntityList<Guild>();
 
                     goto case 3;
                 }
                 case 3:
                 {
-                    m_TypeLastChange = reader.ReadDateTime();
+                    TypeLastChange = reader.ReadDateTime();
 
                     goto case 2;
                 }
                 case 2:
                 {
-                    m_Type = (GuildType) reader.ReadInt();
+                    m_Type = (GuildType)reader.ReadInt();
 
                     goto case 1;
                 }
                 case 1:
                 {
-                    m_LastFealty = reader.ReadDateTime();
+                    LastFealty = reader.ReadDateTime();
 
                     goto case 0;
                 }
@@ -466,45 +413,45 @@ namespace Server.Guilds
                     m_Leader = reader.ReadEntity<Mobile>();
 
                     if (m_Leader is PlayerMobile)
-                        ((PlayerMobile) m_Leader).GuildRank = RankDefinition.Leader;
+                        ((PlayerMobile)m_Leader).GuildRank = RankDefinition.Leader;
 
                     m_Name = reader.ReadString();
                     m_Abbreviation = reader.ReadString();
 
-                    m_Allies = reader.ReadEntityList<Guild>();
-                    m_Enemies = reader.ReadEntityList<Guild>();
-                    m_WarDeclarations = reader.ReadEntityList<Guild>();
-                    m_WarInvitations = reader.ReadEntityList<Guild>();
+                    Allies = reader.ReadEntityList<Guild>();
+                    Enemies = reader.ReadEntityList<Guild>();
+                    WarDeclarations = reader.ReadEntityList<Guild>();
+                    WarInvitations = reader.ReadEntityList<Guild>();
 
-                    m_Members = reader.ReadEntityList<Mobile>();
+                    Members = reader.ReadEntityList<Mobile>();
                     ;
-                    m_Candidates = reader.ReadEntityList<Mobile>();
+                    Candidates = reader.ReadEntityList<Mobile>();
                     ;
-                    m_Accepted = reader.ReadEntityList<Mobile>();
+                    Accepted = reader.ReadEntityList<Mobile>();
                     ;
 
-                    m_Guildstone = reader.ReadEntity<Item>();
-                    m_Teleporter = reader.ReadEntity<Item>();
+                    Guildstone = reader.ReadEntity<Item>();
+                    Teleporter = reader.ReadEntity<Item>();
 
-                    m_Charter = reader.ReadString();
-                    m_Website = reader.ReadString();
+                    Charter = reader.ReadString();
+                    Website = reader.ReadString();
 
                     break;
                 }
             }
 
-            if (m_AllyDeclarations == null)
-                m_AllyDeclarations = new List<Guild>();
+            if (AllyDeclarations == null)
+                AllyDeclarations = new List<Guild>();
 
-            if (m_AllyInvitations == null)
-                m_AllyInvitations = new List<Guild>();
+            if (AllyInvitations == null)
+                AllyInvitations = new List<Guild>();
 
             Timer.DelayCall(TimeSpan.Zero, VerifyGuild_Callback);
         }
 
         private void VerifyGuild_Callback()
         {
-            if (m_Guildstone == null || m_Members.Count == 0)
+            if (Guildstone == null || Members.Count == 0)
                 Disband();
         }
 
@@ -514,17 +461,17 @@ namespace Server.Guilds
 
         public void AddMember(Mobile m)
         {
-            if (!m_Members.Contains(m))
+            if (!Members.Contains(m))
             {
                 if (m.Guild != null && m.Guild != this)
-                    ((Guild) m.Guild).RemoveMember(m);
+                    ((Guild)m.Guild).RemoveMember(m);
 
-                m_Members.Add(m);
+                Members.Add(m);
                 m.Guild = this;
                 m.GuildFealty = m_Leader;
 
                 if (m is PlayerMobile)
-                    ((PlayerMobile) m).GuildRank = RankDefinition.Lowest;
+                    ((PlayerMobile)m).GuildRank = RankDefinition.Lowest;
             }
         }
 
@@ -535,16 +482,16 @@ namespace Server.Guilds
 
         public void RemoveMember(Mobile m, int message)
         {
-            if (m_Members.Contains(m))
+            if (Members.Contains(m))
             {
-                m_Members.Remove(m);
+                Members.Remove(m);
 
-                Guild guild = m.Guild as Guild;
+                var guild = m.Guild as Guild;
 
                 m.Guild = null;
 
                 if (m is PlayerMobile)
-                    ((PlayerMobile) m).GuildRank = RankDefinition.Lowest;
+                    ((PlayerMobile)m).GuildRank = RankDefinition.Lowest;
 
                 if (message > 0)
                     m.SendLocalizedMessage(message);
@@ -557,7 +504,7 @@ namespace Server.Guilds
                         Disband();
                 }
 
-                if (m_Members.Count == 0)
+                if (Members.Count == 0)
                     Disband();
 
                 m.Delta(MobileDelta.Noto);
@@ -566,9 +513,9 @@ namespace Server.Guilds
 
         public void AddAlly(Guild g)
         {
-            if (!m_Allies.Contains(g))
+            if (!Allies.Contains(g))
             {
-                m_Allies.Add(g);
+                Allies.Add(g);
 
                 g.AddAlly(this);
             }
@@ -576,9 +523,9 @@ namespace Server.Guilds
 
         public void RemoveAlly(Guild g)
         {
-            if (m_Allies.Contains(g))
+            if (Allies.Contains(g))
             {
-                m_Allies.Remove(g);
+                Allies.Remove(g);
 
                 g.RemoveAlly(this);
             }
@@ -586,9 +533,9 @@ namespace Server.Guilds
 
         public void AddEnemy(Guild g)
         {
-            if (!m_Enemies.Contains(g))
+            if (!Enemies.Contains(g))
             {
-                m_Enemies.Add(g);
+                Enemies.Add(g);
 
                 g.AddEnemy(this);
             }
@@ -596,9 +543,9 @@ namespace Server.Guilds
 
         public void RemoveEnemy(Guild g)
         {
-            if (m_Enemies != null && m_Enemies.Contains(g))
+            if (Enemies != null && Enemies.Contains(g))
             {
-                m_Enemies.Remove(g);
+                Enemies.Remove(g);
 
                 g.RemoveEnemy(this);
             }
@@ -610,13 +557,13 @@ namespace Server.Guilds
 
         public void GuildMessage(int num, bool append, string format, params object[] args)
         {
-            GuildMessage(num, append, String.Format(format, args));
+            GuildMessage(num, append, string.Format(format, args));
         }
 
         public void GuildMessage(int number)
         {
-            for (int i = 0; i < m_Members.Count; ++i)
-                m_Members[i].SendLocalizedMessage(number);
+            for (var i = 0; i < Members.Count; ++i)
+                Members[i].SendLocalizedMessage(number);
         }
 
         public void GuildMessage(int number, string args)
@@ -626,8 +573,8 @@ namespace Server.Guilds
 
         public void GuildMessage(int number, string args, int hue)
         {
-            for (int i = 0; i < m_Members.Count; ++i)
-                m_Members[i].SendLocalizedMessage(number, args, hue);
+            for (var i = 0; i < Members.Count; ++i)
+                Members[i].SendLocalizedMessage(number, args, hue);
         }
 
         public void GuildMessage(int number, bool append, string affix)
@@ -642,8 +589,8 @@ namespace Server.Guilds
 
         public void GuildMessage(int number, bool append, string affix, string args, int hue)
         {
-            for (int i = 0; i < m_Members.Count; ++i)
-                m_Members[i].SendLocalizedMessage(number, append, affix, args, hue);
+            for (var i = 0; i < Members.Count; ++i)
+                Members[i].SendLocalizedMessage(number, append, affix, args, hue);
         }
 
         public void GuildTextMessage(string text)
@@ -653,23 +600,23 @@ namespace Server.Guilds
 
         public void GuildTextMessage(string format, params object[] args)
         {
-            GuildTextMessage(0x3B2, String.Format(format, args));
+            GuildTextMessage(0x3B2, string.Format(format, args));
         }
 
         public void GuildTextMessage(int hue, string text)
         {
-            for (int i = 0; i < m_Members.Count; ++i)
-                m_Members[i].SendMessage(hue, text);
+            for (var i = 0; i < Members.Count; ++i)
+                Members[i].SendMessage(hue, text);
         }
 
         public void GuildTextMessage(int hue, string format, params object[] args)
         {
-            GuildTextMessage(hue, String.Format(format, args));
+            GuildTextMessage(hue, string.Format(format, args));
         }
 
         public void GuildChat(Mobile from, int hue, string text)
         {
-            Span<byte> buffer = stackalloc byte[OutgoingMessagePackets.GetMaxMessageLength(text)].InitializePacket();
+            var buffer = stackalloc byte[OutgoingMessagePackets.GetMaxMessageLength(text)].InitializePacket();
 
             for (var i = 0; i < Members.Count; i++)
             {
@@ -678,10 +625,7 @@ namespace Server.Guilds
                     from.Name, text
                 );
 
-                if (length != buffer.Length)
-                {
-                    buffer = buffer.Slice(0, length); // Adjust to the actual size
-                }
+                if (length != buffer.Length) buffer = buffer.Slice(0, length); // Adjust to the actual size
 
                 Members[i].NetState?.Send(buffer);
             }
@@ -689,7 +633,7 @@ namespace Server.Guilds
 
         public void GuildChat(Mobile from, string text)
         {
-            PlayerMobile pm = from as PlayerMobile;
+            var pm = from as PlayerMobile;
 
             GuildChat(from, pm == null ? 0x3B2 : pm.GuildMessageHue, text);
         }
@@ -710,18 +654,18 @@ namespace Server.Guilds
 
         public void CalculateGuildmaster()
         {
-            Dictionary<Mobile, int> votes = new Dictionary<Mobile, int>();
+            var votes = new Dictionary<Mobile, int>();
 
-            int votingMembers = 0;
+            var votingMembers = 0;
 
-            for (int i = 0; m_Members != null && i < m_Members.Count; ++i)
+            for (var i = 0; Members != null && i < Members.Count; ++i)
             {
-                Mobile memb = m_Members[i];
+                var memb = Members[i];
 
                 if (!CanVote(memb))
                     continue;
 
-                Mobile m = memb.GuildFealty;
+                var m = memb.GuildFealty;
 
                 if (!CanBeVotedFor(m))
                 {
@@ -745,12 +689,12 @@ namespace Server.Guilds
             }
 
             Mobile winner = null;
-            int highVotes = 0;
+            var highVotes = 0;
 
-            foreach (KeyValuePair<Mobile, int> kvp in votes)
+            foreach (var kvp in votes)
             {
-                Mobile m = (Mobile) kvp.Key;
-                int val = (int) kvp.Value;
+                var m = kvp.Key;
+                var val = kvp.Value;
 
                 if (winner == null || val > highVotes)
                 {
@@ -763,7 +707,7 @@ namespace Server.Guilds
                 GuildMessage(1018015, true, winner.Name); // Guild Message: Guildmaster changed to:
 
             Leader = winner;
-            m_LastFealty = DateTime.Now;
+            LastFealty = DateTime.Now;
         }
 
         #endregion
@@ -771,23 +715,15 @@ namespace Server.Guilds
         #region Getters & Setters
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Item Guildstone
-        {
-            get { return m_Guildstone; }
-            set { m_Guildstone = value; }
-        }
+        public Item Guildstone { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Item Teleporter
-        {
-            get { return m_Teleporter; }
-            set { m_Teleporter = value; }
-        }
+        public Item Teleporter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public override string Name
         {
-            get { return m_Name; }
+            get => m_Name;
             set
             {
                 m_Name = value;
@@ -797,16 +733,12 @@ namespace Server.Guilds
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public string Website
-        {
-            get { return m_Website; }
-            set { m_Website = value; }
-        }
+        public string Website { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public override string Abbreviation
         {
-            get { return m_Abbreviation; }
+            get => m_Abbreviation;
             set
             {
                 m_Abbreviation = value;
@@ -816,22 +748,18 @@ namespace Server.Guilds
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public string Charter
-        {
-            get { return m_Charter; }
-            set { m_Charter = value; }
-        }
+        public string Charter { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public override GuildType Type
         {
-            get { return GuildType.Regular; }
+            get => GuildType.Regular;
             set
             {
                 if (m_Type != value)
                 {
                     m_Type = value;
-                    m_TypeLastChange = DateTime.Now;
+                    TypeLastChange = DateTime.Now;
 
                     InvalidateMemberProperties();
                 }
@@ -839,62 +767,28 @@ namespace Server.Guilds
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime LastFealty
-        {
-            get { return m_LastFealty; }
-            set { m_LastFealty = value; }
-        }
+        public DateTime LastFealty { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public DateTime TypeLastChange
-        {
-            get { return m_TypeLastChange; }
-        }
+        public DateTime TypeLastChange { get; private set; }
 
-        public List<Guild> Allies
-        {
-            get { return m_Allies; }
-        }
+        public List<Guild> Allies { get; private set; }
 
-        public List<Guild> Enemies
-        {
-            get { return m_Enemies; }
-        }
+        public List<Guild> Enemies { get; private set; }
 
-        public List<Guild> AllyDeclarations
-        {
-            get { return m_AllyDeclarations; }
-        }
+        public List<Guild> AllyDeclarations { get; private set; }
 
-        public List<Guild> AllyInvitations
-        {
-            get { return m_AllyInvitations; }
-        }
+        public List<Guild> AllyInvitations { get; private set; }
 
-        public List<Guild> WarDeclarations
-        {
-            get { return m_WarDeclarations; }
-        }
+        public List<Guild> WarDeclarations { get; private set; }
 
-        public List<Guild> WarInvitations
-        {
-            get { return m_WarInvitations; }
-        }
+        public List<Guild> WarInvitations { get; private set; }
 
-        public List<Mobile> Candidates
-        {
-            get { return m_Candidates; }
-        }
+        public List<Mobile> Candidates { get; private set; }
 
-        public List<Mobile> Accepted
-        {
-            get { return m_Accepted; }
-        }
+        public List<Mobile> Accepted { get; private set; }
 
-        public List<Mobile> Members
-        {
-            get { return m_Members; }
-        }
+        public List<Mobile> Members { get; private set; }
 
         #endregion
     }

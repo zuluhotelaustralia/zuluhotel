@@ -11,7 +11,7 @@ SnowOrcWarrior: {
 	Body:                 41
 	CreatureType:         "Orc"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              175
 	Hue:                  1154
 	LootTable:            "44"

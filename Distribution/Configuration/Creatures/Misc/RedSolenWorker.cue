@@ -10,7 +10,7 @@ RedSolenWorker: {
 	Body:                 781
 	VirtualArmor:         30
 	Fame:                 1
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              72
 	Karma:                1
 	LootTable:            "23"

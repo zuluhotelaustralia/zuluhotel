@@ -11,7 +11,7 @@ TerathanDrone: {
 	Body:                 71
 	CreatureType:         "Terathan"
 	VirtualArmor:         10
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              70
 	LootTable:            "64"
 	ManaMaxSeed:          0

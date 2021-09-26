@@ -11,7 +11,7 @@ IceTroll: {
 	Body:                 53
 	CreatureType:         "Troll"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
 	HitsMax:              250

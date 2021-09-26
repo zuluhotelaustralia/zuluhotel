@@ -11,7 +11,7 @@ CorruptedTerathan: {
 	Body:               70
 	CreatureType:       "Terathan"
 	VirtualArmor:       30
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            400
 	Hue:                1304
 	LootItemChance:     90

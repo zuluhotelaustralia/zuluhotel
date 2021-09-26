@@ -11,7 +11,7 @@ Corpser: {
 	Body:               8
 	CreatureType:       "Plant"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            150
 	LootTable:          "32"
 	ManaMaxSeed:        35

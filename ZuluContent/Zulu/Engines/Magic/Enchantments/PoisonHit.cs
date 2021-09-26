@@ -21,6 +21,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         
         [Key(3)] public double Chance { get; set; } = 0;
 
+        [CallPriority(1)]
+        public override bool GetShouldDye() => true;
         
         public override void OnMeleeHit(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
         {

@@ -43,11 +43,6 @@ namespace Server.Commands
 
             Register("Help", AccessLevel.Player, Help_OnCommand);
 
-            Register("Save", AccessLevel.Administrator, Save_OnCommand);
-            Register("BackgroundSave", AccessLevel.Administrator, BackgroundSave_OnCommand);
-            Register("BGSave", AccessLevel.Administrator, BackgroundSave_OnCommand);
-            Register("SaveBG", AccessLevel.Administrator, BackgroundSave_OnCommand);
-
             Register("Move", AccessLevel.GameMaster, Move_OnCommand);
             Register("Client", AccessLevel.Counselor, Client_OnCommand);
 
@@ -386,21 +381,6 @@ namespace Server.Commands
             e.Mobile.Target = new PickMoveTarget();
         }
 
-        [Usage("Save")]
-        [Description("Saves the world.")]
-        private static void Save_OnCommand(CommandEventArgs e)
-        {
-            AutoSave.Save();
-        }
-
-        [Usage("BackgroundSave")]
-        [Aliases("BGSave", "SaveBG")]
-        [Description("Saves the world, writing to the disk in the background")]
-        private static void BackgroundSave_OnCommand(CommandEventArgs e)
-        {
-            AutoSave.Save(true);
-        }
-
         private static bool FixMap(ref Map map, ref Point3D loc, Item item) => (map != null && map != Map.Internal) ||
                                                                                (item.RootParent is Mobile m &&
                                                                                    FixMap(ref map, ref loc, m));
@@ -435,7 +415,7 @@ namespace Server.Commands
             {
                 try
                 {
-                    uint ser = e.GetUInt32(0);
+                    var ser = (Serial) e.GetUInt32(0);
 
                     IEntity ent = World.FindEntity(ser);
 
