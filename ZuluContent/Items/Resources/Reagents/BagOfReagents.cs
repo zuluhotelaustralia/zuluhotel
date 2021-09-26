@@ -3,7 +3,8 @@ using Server.Spells;
 
 namespace Server.Items
 {
-    public class BagOfReagents : Bag
+    [Serializable(0, false)]
+    public partial class BagOfReagents : Bag
     {
         [Constructible]
         public BagOfReagents() : this(50)
@@ -14,7 +15,7 @@ namespace Server.Items
         [Constructible]
         public BagOfReagents(int amount)
         {
-            foreach (var t in Reagent.AllReagents)
+            foreach (var t in Reagent.NormalReagents)
             {
                 var reg = (BaseReagent) Activator.CreateInstance(t);
                 if (reg != null)
@@ -23,25 +24,6 @@ namespace Server.Items
                     DropItem(reg);
                 }
             }
-        }
-
-        [Constructible]
-        public BagOfReagents(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write(0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            var version = reader.ReadInt();
         }
     }
 }

@@ -14,7 +14,7 @@ OphidianKing: {
 	ClassType:            "Warrior"
 	CreatureType:         "Ophidian"
 	VirtualArmor:         50
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              2050
 	Hue:                  1209
 	LootItemChance:       75

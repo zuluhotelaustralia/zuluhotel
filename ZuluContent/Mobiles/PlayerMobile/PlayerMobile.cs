@@ -13,8 +13,10 @@ using Server.Accounting;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Packets;
 using Scripts.Zulu.Engines.Races;
+using Server.ContextMenus;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
 using Server.Engines.Magic;
+using Server.Engines.PartySystem;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -353,7 +355,7 @@ namespace Server.Mobiles
             {
                 m_Type = type;
 
-                m_Timer = Timer.DelayCall(duration, RemoveBlock, mobile);
+                m_Timer = Timer.DelayCall(duration, () => RemoveBlock(mobile));
             }
 
             private void RemoveBlock(Mobile mobile)
@@ -435,7 +437,7 @@ namespace Server.Mobiles
                     ? "The server is currently under lockdown. No players are allowed to log in at this time."
                     : "The server is currently under lockdown. You do not have sufficient access level to connect.";
 
-                Timer.DelayCall(TimeSpan.FromSeconds(1.0), Disconnect, from);
+                Timer.StartTimer(TimeSpan.FromSeconds(1.0), () => Disconnect(from));
             }
             else if (from.AccessLevel >= AccessLevel.Administrator)
             {
@@ -869,6 +871,43 @@ namespace Server.Mobiles
             if (isTeleport || --m_NextProtectionCheck == 0)
                 RecheckTownProtection();
         }
+        
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
+
+            if (from != this)
+            {
+                if (Alive)
+                {
+                    var theirParty = from.Party as Party;
+                    var ourParty = Party as Party;
+
+                    if (theirParty == null && ourParty == null)
+                    {
+                        list.Add(new AddToPartyEntry(from, this));
+                    }
+                    else if (theirParty != null && theirParty.Leader == from)
+                    {
+                        if (ourParty == null)
+                        {
+                            list.Add(new AddToPartyEntry(from, this));
+                        }
+                        else if (ourParty == theirParty)
+                        {
+                            list.Add(new RemoveFromPartyEntry(from, this));
+                        }
+                    }
+                }
+
+                var curhouse = BaseHouse.FindHouseAt(this);
+
+                if (curhouse != null && Alive && curhouse.IsFriend(from))
+                {
+                    list.Add(new EjectPlayerEntry(from, this));
+                }
+            }
+        }
 
         public override void Paralyze(TimeSpan duration)
         {
@@ -975,7 +1014,8 @@ namespace Server.Mobiles
             return true;
         }
 
-        public override bool CheckContextMenuDisplay(IEntity target) => false;
+        // TODO: Add config check here if context menus are actually wanted
+        public override bool CheckContextMenuDisplay(IEntity target) => true;
 
         private static int CheckContentForTrade(Item item)
         {
@@ -1127,17 +1167,6 @@ namespace Server.Mobiles
 
                 if (SkillHandlers.Stealing.ClassicMode)
                     Criminal = true;
-            }
-
-            Mobile killer = FindMostRecentDamager(true);
-
-            if (killer is BaseCreature)
-            {
-                BaseCreature bc = (BaseCreature) killer;
-
-                Mobile master = bc.GetMaster();
-                if (master != null)
-                    killer = master;
             }
 
             var resurrect = false;
@@ -1301,6 +1330,11 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 31:
+                {
+                    TargetZuluClass = (ZuluClassType) reader.ReadInt();
+                    goto case 30;
+                }
                 case 30:
                 {
                     ZuluRaceType = (ZuluRaceType) reader.ReadInt();
@@ -1464,8 +1498,10 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 30); // version
+            writer.Write((int) 31); // version
             
+            writer.Write((int) TargetZuluClass);
+
             writer.Write((int) ZuluRaceType);
             
             Enchantments.Serialize(writer);
@@ -1513,6 +1549,7 @@ namespace Server.Mobiles
                 m_ShortTermElapse += TimeSpan.FromHours(8);
                 if (ShortTermMurders > 0)
                     --ShortTermMurders;
+                OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
             }
 
             if (m_LongTermElapse < GameTime)
@@ -1520,6 +1557,7 @@ namespace Server.Mobiles
                 m_LongTermElapse += TimeSpan.FromHours(40);
                 if (Kills > 0)
                     --Kills;
+                OutgoingZuluPackets.SendZuluPlayerStatus(NetState, this);
             }
         }
 
@@ -1845,6 +1883,8 @@ namespace Server.Mobiles
         {
             get => m_ZuluClass ??= new ZuluClass(this);
         }
+        
+        public ZuluClassType TargetZuluClass { get; set; }
 
         #endregion
         

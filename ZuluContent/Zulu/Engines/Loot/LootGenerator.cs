@@ -151,9 +151,12 @@ namespace Server.Scripts.Engines.Loot
                         value.Cursed = CurseType.Unrevealed;
                     }
                 }
-                
+
                 if (StaffRevealMagicItems && killedBy.AccessLevel >= AccessLevel.GameMaster)
+                {
                     magicItem.Identified = true;
+                    magicItem.Enchantments.OnIdentified(item);
+                }
                 else
                     magicItem.Identified = false;
             }
@@ -388,7 +391,6 @@ namespace Server.Scripts.Engines.Loot
 
             item.SkillBonusName = skill;
             item.SkillBonusValue = value;
-            item.Hue = 1109;
         }
 
         private static void ApplyOnHitScript(LootItem item)
@@ -404,38 +406,33 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyWeaponHitScript(LootItem item)
         {
-            var scriptType = Utility.Random(1, 100) + item.ItemLevel * 2;
+            var scriptType = Utility.Random(1, 94) + item.ItemLevel * 2;
 
-            if (scriptType <= 50)
+            if (scriptType <= 40)
                 ApplySpellHitscript(item);
-            else if (scriptType <= 85)
+            else if (scriptType <= 80)
                 ApplySlayerHitscript(item);
-            else if (scriptType <= 112)
+            else if (scriptType <= 100)
                 ApplyEffectHitscript(item);
-            else if (scriptType <= 116)
+            else if (scriptType <= 105)
             {
-                if (RandomBool())
-                    ApplyGreaterHitscript(item);
-                else
-                {
-                    // TODO: GM Item
-                    // DestroyItem(item);
-                    // CreateFromRandomString(who, "GMWeapon");
-                }
+                // TODO: GM Item
+                // DestroyItem(item);
+                // CreateFromRandomString(who, "GMWeapon");
             }
             else
-                ApplyEffectHitscript(item);
+                ApplyGreaterHitscript(item);
         }
 
         private static void ApplyGreaterHitscript(LootItem item)
         {
-            item.EffectHitType = (EffectHitType) RandomMinMax(1, 6);
+            item.EffectHitType = (EffectHitType) RandomMinMax(6, 8);
             item.EffectHitTypeChance = 1.0;
         }
 
         private static void ApplyEffectHitscript(LootItem item)
         {
-            item.EffectHitType = (EffectHitType) RandomMinMax(7, 9);
+            item.EffectHitType = (EffectHitType) RandomMinMax(1, 5);
             item.EffectHitTypeChance = 1.0;
         }
 

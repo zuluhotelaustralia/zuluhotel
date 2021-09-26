@@ -12,7 +12,7 @@ EvisceratedCarcass: {
 	ClassType:          "Warrior"
 	CreatureType:       "Undead"
 	VirtualArmor:       30
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	Hue:                1290
 	LootItemChance:     50

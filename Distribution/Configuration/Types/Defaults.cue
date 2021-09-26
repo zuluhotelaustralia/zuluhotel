@@ -47,7 +47,7 @@ package Types
 	Race:                    null
 	ReacquireDelay:          "00:00:10"
 	RiseCreatureDelay:       "00:00:10"
-	RiseCreatureType:        null
+	RiseCreatureTemplate:    null
 	SaySpellMantra:          true
 	SpeechType:              null
 	TargetAcquireExhaustion: true

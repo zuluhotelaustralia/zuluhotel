@@ -10,7 +10,7 @@ BewitchedBardiche: {
 	Body:                 614
 	CreatureType:         "Animated"
 	VirtualArmor:         35
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              210
 	LootItemChance:       1
 	LootTable:            "48"

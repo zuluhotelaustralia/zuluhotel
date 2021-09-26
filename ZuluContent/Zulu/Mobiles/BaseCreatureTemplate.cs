@@ -9,7 +9,7 @@ namespace Server.Mobiles
     public class BaseCreatureTemplate : BaseCreature
     {
         public string TemplateName { get; private set; }
-        public CreatureProperties Properties => ZhConfig.Creatures.Entries[TemplateName];
+        public CreatureProperties Properties => TemplateName != null ? ZhConfig.Creatures.Entries[TemplateName] : null;
 
         [Constructible]
         public BaseCreatureTemplate(string templateName) : base(ZhConfig.Creatures.Entries[templateName])

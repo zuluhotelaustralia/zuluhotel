@@ -16,6 +16,7 @@ namespace Server.Engines.Spawners
     public abstract class BaseSpawner : Item, ISpawner
     {
         private static WarnTimer m_WarnTimer;
+        private Guid _guid;
         private int m_Count;
         private bool m_Group;
         private int m_HomeRange;
@@ -45,6 +46,7 @@ namespace Server.Engines.Spawners
         public BaseSpawner(int amount, TimeSpan minDelay, TimeSpan maxDelay, int team, int homeRange,
             params string[] spawnedNames) : base(0x1f13)
         {
+            _guid = Guid.NewGuid();
             InitSpawn(amount, minDelay, maxDelay, team, homeRange);
             for (var i = 0; i < spawnedNames.Length; i++)
                 AddEntry(spawnedNames[i], 100, amount, false);
@@ -52,6 +54,16 @@ namespace Server.Engines.Spawners
 
         public BaseSpawner(DynamicJson json, JsonSerializerOptions options) : base(0x1f13)
         {
+            if (!json.GetProperty("guid", options, out _guid))
+            {
+                _guid = Guid.NewGuid();
+            }
+
+            if (json.GetProperty("name", options, out string name))
+            {
+                Name = name;
+            }
+            
             json.GetProperty("count", options, out int amount);
             json.GetProperty("minDelay", options, out TimeSpan minDelay);
             json.GetProperty("maxDelay", options, out TimeSpan maxDelay);
@@ -86,6 +98,13 @@ namespace Server.Engines.Spawners
 
         [CommandProperty(AccessLevel.Developer)]
         public bool ReturnOnDeactivate { get; set; }
+        
+        [CommandProperty(AccessLevel.Developer)]
+        public Guid Guid
+        {
+            get => _guid;
+            set => _guid = value;
+        }
 
         [CommandProperty(AccessLevel.Developer)]
         public int Count
@@ -771,7 +790,9 @@ namespace Server.Engines.Spawners
         {
             base.Serialize(writer);
 
-            writer.Write(8); // version
+            writer.Write(9); // version
+            
+            writer.Write(_guid);
 
             writer.Write(ReturnOnDeactivate);
 
@@ -810,6 +831,11 @@ namespace Server.Engines.Spawners
 
             switch (version)
             {
+                case 9:
+                {
+                    _guid = reader.ReadGuid();
+                    goto case 8;
+                }
                 case 8:
                 {
                     ReturnOnDeactivate = reader.ReadBool();

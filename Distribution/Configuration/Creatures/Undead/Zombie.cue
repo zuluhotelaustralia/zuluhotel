@@ -10,7 +10,7 @@ Zombie: {
 	Body:               3
 	CreatureType:       "Undead"
 	VirtualArmor:       10
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            75
 	LootTable:          "24"
 	ManaMaxSeed:        5

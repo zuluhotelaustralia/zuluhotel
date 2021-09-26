@@ -11,7 +11,7 @@ Spectre: {
 	Body:               26
 	CreatureType:       "Undead"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            135
 	Hue:                25125
 	LootItemChance:     5

@@ -10,8 +10,9 @@ namespace Server.Items
         Red
     }
     
+    [Serializable(0, false)]
     [Flipable]
-    public class ThiefGloves : BaseArmor
+    public partial class ThiefGloves : BaseArmor
     {
         public override int InitMinHits => 70;
 
@@ -21,7 +22,10 @@ namespace Server.Items
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
 
-        public override string DefaultName => "Thief Gloves";
+        [Constructible]
+        public ThiefGloves() : this((ThiefGlovesHue) Utility.Random(2))
+        {
+        }
         
         [Constructible]
         public ThiefGloves(ThiefGlovesHue hue) : base(0x13C6)
@@ -35,10 +39,10 @@ namespace Server.Items
                 ThiefGlovesHue.Red => 0x494
             };
         }
-
-        [Constructible]
-        public ThiefGloves(Serial serial) : base(serial)
+        
+        public override void OnSingleClick(Mobile from)
         {
+            LabelTo(from, "Thief Gloves");
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -52,20 +56,6 @@ namespace Server.Items
             from.SendSuccessMessage("Who would you like to snoop?");
 
             from.Target = new SnoopingTarget();
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
         }
 
         private class SnoopingTarget : Target

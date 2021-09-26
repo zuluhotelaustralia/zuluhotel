@@ -6,19 +6,18 @@ namespace Server.Items
         {
             base.ScissorHelper(from, new RawFishSteak(), 4);
         }
-
+        
+        public override double DefaultWeight => 0.5;
 
         [Constructible]
         public Fish() : this(1)
         {
         }
 
-
         [Constructible]
         public Fish(int amount) : base(Utility.Random(0x09CC, 4))
         {
             Stackable = true;
-            Weight = 1.0;
             Amount = amount;
         }
 

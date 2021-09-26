@@ -14,7 +14,7 @@ UnholyMenace: {
 	Body:                 309
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              1000
 	Hue:                  1305
 	LootItemChance:       80

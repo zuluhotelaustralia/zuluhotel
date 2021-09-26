@@ -12,7 +12,7 @@ Sapper: {
 	Body:               17
 	CreatureType:       "Orc"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            205
 	Hue:                1295
 	LootItemChance:     6

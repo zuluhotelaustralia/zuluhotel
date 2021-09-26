@@ -12,7 +12,7 @@ OrcishBerserker: {
 	Body:               7
 	CreatureType:       "Orc"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                1172
 	LootItemChance:     70

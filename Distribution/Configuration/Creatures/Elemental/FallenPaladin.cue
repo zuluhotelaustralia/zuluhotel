@@ -8,7 +8,7 @@ FallenPaladin: {
 	Dex:                  1000
 	AlwaysMurderer:       true
 	CreatureType:         "Elemental"
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              6000
 	Hue:                  33784
 	ManaMaxSeed:          0

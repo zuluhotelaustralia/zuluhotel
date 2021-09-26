@@ -48,7 +48,7 @@ namespace Server.SkillHandlers
             mobile.AllowedStealthSteps = (int) steps;
             mobile.SendSuccessMessage(502730); // You begin to move quietly.
 
-            Timer.DelayCall(Delay, StealthReady_Callback, mobile);
+            Timer.StartTimer(Delay, () => StealthReady_Callback(mobile));
 
             return Delay;
         }

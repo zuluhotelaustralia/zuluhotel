@@ -132,7 +132,7 @@ namespace Server.Items
         public virtual void ApplyDelayTo(Mobile from)
         {
             from.BeginAction(typeof(BaseWand));
-            Timer.DelayCall(GetUseDelay, ReleaseWandLock_Callback, from);
+            Timer.StartTimer(GetUseDelay, () => ReleaseWandLock_Callback(from));
         }
 
         public virtual void ReleaseWandLock_Callback(object state)

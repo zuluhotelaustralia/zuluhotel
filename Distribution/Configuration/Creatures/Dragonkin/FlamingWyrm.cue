@@ -12,7 +12,7 @@ FlamingWyrm: {
 	Body:                 46
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              2000
 	Hue:                  1305
 	LootItemChance:       65

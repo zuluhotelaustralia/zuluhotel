@@ -12,7 +12,7 @@ PhaseSpider: {
 	Body:                 28
 	CreatureType:         "Animal"
 	VirtualArmor:         25
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              250
 	Hue:                  25125
 	ManaMaxSeed:          0

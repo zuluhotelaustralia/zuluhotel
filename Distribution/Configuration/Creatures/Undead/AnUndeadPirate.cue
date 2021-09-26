@@ -9,7 +9,7 @@ AnUndeadPirate: {
 	AlwaysMurderer:     true
 	CreatureType:       "Undead"
 	VirtualArmor:       25
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            110
 	LootItemChance:     10
 	LootItemLevel:      1

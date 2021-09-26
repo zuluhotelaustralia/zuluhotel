@@ -11,7 +11,7 @@ OrcishKing: {
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         35
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              300
 	Hue:                  1125
 	LootItemChance:       25

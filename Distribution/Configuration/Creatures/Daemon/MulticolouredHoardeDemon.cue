@@ -13,7 +13,7 @@ MulticolouredHoardeDemon: {
 	Body:               999
 	CreatureType:       "Daemon"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	LootItemChance:     70
 	LootItemLevel:      6

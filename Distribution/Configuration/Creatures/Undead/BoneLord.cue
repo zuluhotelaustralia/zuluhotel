@@ -12,7 +12,7 @@ BoneLord: {
 	Body:               308
 	CreatureType:       "Undead"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                33784
 	LootItemChance:     70

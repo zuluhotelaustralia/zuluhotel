@@ -12,7 +12,7 @@ VampireLord: {
 	Body:                 401
 	CreatureType:         "Undead"
 	VirtualArmor:         40
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              5000
 	LootItemChance:       100
 	LootItemLevel:        7

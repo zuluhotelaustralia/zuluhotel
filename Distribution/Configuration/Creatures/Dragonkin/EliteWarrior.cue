@@ -11,7 +11,7 @@ EliteWarrior: {
 	Body:                 36
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
 	HitsMax:              220

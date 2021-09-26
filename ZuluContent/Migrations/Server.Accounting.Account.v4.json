@@ -1,60 +1,64 @@
 {
-  "version": 2,
+  "version": 4,
   "type": "Server.Accounting.Account",
   "properties": [
     {
       "name": "Username",
       "type": "string",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     },
     {
       "name": "PasswordAlgorithm",
       "type": "Server.Accounting.Security.PasswordProtectionAlgorithm",
-      "rule": "EnumMigrationRule",
-      "ruleArguments": []
+      "rule": "EnumMigrationRule"
     },
     {
       "name": "Password",
       "type": "string",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     },
     {
       "name": "AccessLevel",
       "type": "Server.AccessLevel",
-      "rule": "EnumMigrationRule",
-      "ruleArguments": []
+      "rule": "EnumMigrationRule"
     },
     {
       "name": "Flags",
       "type": "int",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
-    },
-    {
-      "name": "Created",
-      "type": "System.DateTime",
-      "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     },
     {
       "name": "LastLogin",
       "type": "System.DateTime",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     },
     {
       "name": "TotalGold",
       "type": "int",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     },
     {
       "name": "TotalPlat",
       "type": "int",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     },
     {
       "name": "Mobiles",
@@ -70,8 +74,10 @@
       "type": "System.Collections.Generic.List\u003CServer.Accounting.AccountComment\u003E",
       "rule": "ListMigrationRule",
       "ruleArguments": [
+        "",
         "Server.Accounting.AccountComment",
-        "SerializationMethodSignatureMigrationRule"
+        "SerializationMethodSignatureMigrationRule",
+        ""
       ]
     },
     {
@@ -79,8 +85,10 @@
       "type": "System.Collections.Generic.List\u003CServer.Accounting.AccountTag\u003E",
       "rule": "ListMigrationRule",
       "ruleArguments": [
+        "",
         "Server.Accounting.AccountTag",
-        "SerializationMethodSignatureMigrationRule"
+        "SerializationMethodSignatureMigrationRule",
+        ""
       ]
     },
     {
@@ -98,20 +106,22 @@
       "rule": "ArrayMigrationRule",
       "ruleArguments": [
         "string",
-        "PrimitiveTypeMigrationRule"
+        "PrimitiveTypeMigrationRule",
+        ""
       ]
     },
     {
       "name": "TotalGameTime",
       "type": "System.TimeSpan",
-      "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "rule": "PrimitiveTypeMigrationRule"
     },
     {
       "name": "Email",
       "type": "string",
       "rule": "PrimitiveTypeMigrationRule",
-      "ruleArguments": []
+      "ruleArguments": [
+        ""
+      ]
     }
   ]
 }

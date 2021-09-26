@@ -11,7 +11,7 @@ Reaper: {
 	Body:               47
 	CreatureType:       "Plant"
 	VirtualArmor:       30
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            210
 	LootTable:          "34"
 	ManaMaxSeed:        25

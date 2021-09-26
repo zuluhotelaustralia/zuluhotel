@@ -12,7 +12,7 @@ Hero: {
 	ClassLevel:         6
 	ClassType:          "Warrior"
 	VirtualArmor:       80
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2000
 	Hue:                1002
 	LootTable:          "59"

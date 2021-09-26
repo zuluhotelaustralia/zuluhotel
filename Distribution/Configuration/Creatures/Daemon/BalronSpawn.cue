@@ -11,7 +11,7 @@ BalronSpawn: {
 	BaseSoundID:        422
 	Body:               74
 	CreatureType:       "Daemon"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            600
 	Hue:                17969
 	LootItemChance:     80

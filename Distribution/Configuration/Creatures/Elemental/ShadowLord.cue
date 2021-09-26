@@ -11,7 +11,7 @@ ShadowLord: {
 	Body:               146
 	CanSwim:            true
 	CreatureType:       "Elemental"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            550
 	Hue:                1
 	LootItemChance:     15

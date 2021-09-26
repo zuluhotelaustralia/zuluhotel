@@ -16,7 +16,7 @@ namespace Server.SkillHandlers
         private const int BegRange = 2;
         private const int BegDelayMs = 2000;
         private static readonly int BegCooldown = (int)TimeSpan.FromMinutes(30).TotalMilliseconds;
-        private static readonly Dictionary<uint, long> MobileBegCooldown = new();
+        private static readonly Dictionary<Serial, long> MobileBegCooldown = new();
 
         private static readonly string[] BeggingLines =
         {
@@ -51,7 +51,7 @@ namespace Server.SkillHandlers
             from.Target = target;
             from.RevealingAction();
 
-            from.SendLocalizedMessage(500397); // To whom do you wish to grovel?
+            from.SendSuccessMessage(500397); // To whom do you wish to grovel?
 
             var (targeted, responseType) = await target;
 
@@ -107,7 +107,7 @@ namespace Server.SkillHandlers
 
             if (!from.ShilCheckSkill(SkillName.Begging))
             {
-                targeted.SendFailureMessage(500404); // They seem unwilling to give you any money.
+                from.SendFailureMessage(500404); // They seem unwilling to give you any money.
                 return Delay;
             }
 

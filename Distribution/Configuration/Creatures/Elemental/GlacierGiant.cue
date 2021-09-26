@@ -12,7 +12,7 @@ GlacierGiant: {
 	Body:               2
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                1152
 	LootItemChance:     85

@@ -11,7 +11,7 @@ Gremlin: {
 	Body:                 39
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              205
 	Hue:                  2001
 	LootTable:            "58"

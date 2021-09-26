@@ -11,7 +11,7 @@ LizardmanKing: {
 	Body:                 33
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
 	HitsMax:              300

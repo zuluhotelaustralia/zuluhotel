@@ -11,7 +11,7 @@ StygianConstrictor: {
 	Body:               21
 	CreatureType:       "Animal"
 	VirtualArmor:       40
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HideType:           "Serpent"
 	Hides:              5
 	HitsMax:            275

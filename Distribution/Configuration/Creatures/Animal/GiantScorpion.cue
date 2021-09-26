@@ -11,7 +11,7 @@ GiantScorpion: {
 	Body:                 48
 	CreatureType:         "Animal"
 	VirtualArmor:         15
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              100
 	ManaMaxSeed:          25
 	MinTameSkill:         70

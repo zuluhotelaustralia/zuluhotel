@@ -1,53 +1,56 @@
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
     public class Carpenter : BaseVendor
-	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
+    {
+        private readonly List<SBInfo> m_SBInfos = new();
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
-		public override NpcGuild NpcGuild{ get{ return NpcGuild.TinkersGuild; } }
+        public override NpcGuild NpcGuild => NpcGuild.TinkersGuild;
 
 
-		[Constructible]
-public Carpenter() : base( "the carpenter" )
-		{
-			SetSkill( SkillName.Carpentry, 85.0, 100.0 );
-			SetSkill( SkillName.Lumberjacking, 60.0, 83.0 );
-		}
+        [Constructible]
+        public Carpenter() : base("the Carpenter")
+        {
+            SetSkill(SkillName.Carpentry, 90.0);
+            SetSkill(SkillName.Lumberjacking, 50.0);
+            SetSkill(SkillName.Swords, 50.0);
+            SetSkill(SkillName.Tactics, 40.0);
+        }
 
-		public override void InitSBInfo()
-		{
-			m_SBInfos.Add( new SBStavesWeapon() );
-			m_SBInfos.Add( new SBCarpenter() );
-			m_SBInfos.Add( new SBWoodenShields() );
-		}
+        public override void InitSBInfo()
+        {
+            m_SBInfos.Add(new SBStavesWeapon());
+            m_SBInfos.Add(new SBCarpenter());
+            m_SBInfos.Add(new SBWoodenShields());
+        }
 
-		public override void InitOutfit()
-		{
-			base.InitOutfit();
+        public override void InitOutfit()
+        {
+            base.InitOutfit();
 
-			AddItem( new Server.Items.HalfApron() );
-		}
+            AddItem(new HalfApron());
+        }
 
-		[Constructible]
-public Carpenter( Serial serial ) : base( serial )
-		{
-		}
+        [Constructible]
+        public Carpenter(Serial serial) : base(serial)
+        {
+        }
 
-		public override void Serialize( IGenericWriter writer )
-		{
-			base.Serialize( writer );
+        public override void Serialize(IGenericWriter writer)
+        {
+            base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
-		}
+            writer.Write(0); // version
+        }
 
-		public override void Deserialize( IGenericReader reader )
-		{
-			base.Deserialize( reader );
+        public override void Deserialize(IGenericReader reader)
+        {
+            base.Deserialize(reader);
 
-			int version = reader.ReadInt();
-		}
-	}
+            var version = reader.ReadInt();
+        }
+    }
 }

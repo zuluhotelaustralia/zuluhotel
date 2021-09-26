@@ -11,7 +11,7 @@ Ghost: {
 	Body:               970
 	CreatureType:       "Undead"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            126
 	LootItemChance:     1
 	LootTable:          "47"

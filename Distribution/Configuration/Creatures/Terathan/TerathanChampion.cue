@@ -15,7 +15,7 @@ TerathanChampion: {
 	ClassType:            "Warrior"
 	CreatureType:         "Terathan"
 	VirtualArmor:         25
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              650
 	Hue:                  1127
 	LootTable:            "63"

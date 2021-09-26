@@ -11,7 +11,7 @@ PoisonDrake: {
 	Body:                 60
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         20
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
 	HitsMax:              350

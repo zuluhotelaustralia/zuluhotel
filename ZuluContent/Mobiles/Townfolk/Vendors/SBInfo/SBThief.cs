@@ -27,7 +27,8 @@ namespace Server.Mobiles
 				Add( new GenericBuyInfo( typeof( Lockpick ), 12, 20, 0x14FC, 0 ) );
 				Add( new GenericBuyInfo( typeof( WoodenBox ), 14, 20, 0x9AA, 0 ) );
 				Add( new GenericBuyInfo( typeof( Key ), 2, 20, 0x100E, 0 ) );
-				Add( new GenericBuyInfo( typeof( HairDye ), 37, 20, 0xEFF, 0 ) );
+                Add( new GenericBuyInfo( typeof( HairDye ), 37, 20, 0xEFF, 0 ) );
+                Add( new GenericBuyInfo( typeof( ThiefGloves ), 500, 20, 0x13C6, 0 ) );
 			}
 		}
 
@@ -43,7 +44,8 @@ namespace Server.Mobiles
 				Add( typeof( Lockpick ), 6 );
 				Add( typeof( WoodenBox ), 7 );
 				Add( typeof( HairDye ), 19 );
-			}
+                Add( typeof( ThiefGloves ), 35 );
+            }
 		}
 	}
 }

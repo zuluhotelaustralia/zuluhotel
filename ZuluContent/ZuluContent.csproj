@@ -14,7 +14,7 @@
     <Platforms>x64</Platforms>
     <NoWarn>1998</NoWarn>
   </PropertyGroup>
-  
+
   <ItemGroup>
 
     <PackageReference Include="FastExpressionCompiler" Version="3.0.0-preview-07" />
@@ -37,7 +37,7 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\ModernUO\Projects\SerializationGenerator\SerializationGenerator.csproj">
       <SetTargetFramework>TargetFramework=netstandard2.0</SetTargetFramework>

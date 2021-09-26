@@ -11,7 +11,7 @@ BladeSpirit: {
 	Body:               574
 	CreatureType:       "Elemental"
 	VirtualArmor:       15
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            200
 	Hue:                33784
 	ManaMaxSeed:        0

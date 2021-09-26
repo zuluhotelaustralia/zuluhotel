@@ -10,7 +10,7 @@ HauntedBlade: {
 	Body:                 614
 	CreatureType:         "Animated"
 	VirtualArmor:         10
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              180
 	LootTable:            "48"
 	ManaMaxSeed:          0

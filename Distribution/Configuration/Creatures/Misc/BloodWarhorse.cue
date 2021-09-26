@@ -10,7 +10,7 @@ BloodWarhorse: {
 	Body:                 120
 	VirtualArmor:         40
 	Fame:                 1
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              500
 	Karma:                1
 	LootItemChance:       100

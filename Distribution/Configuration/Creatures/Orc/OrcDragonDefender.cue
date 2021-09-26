@@ -11,7 +11,7 @@ OrcDragonDefender: {
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              305
 	Hue:                  1109
 	LootItemChance:       1

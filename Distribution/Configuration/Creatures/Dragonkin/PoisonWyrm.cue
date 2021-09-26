@@ -14,7 +14,7 @@ PoisonWyrm: {
 	CanFly:               true
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         60
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              800
 	Hue:                  264
 	LootItemChance:       90

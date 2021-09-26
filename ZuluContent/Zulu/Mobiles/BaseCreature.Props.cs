@@ -48,7 +48,7 @@ namespace Server.Mobiles
         public int HealingBonus => this.GetResist(ElementalType.HealingBonus);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public PoisonLevel PoisonImmunity => (PoisonLevel) this.GetResist(ElementalType.Poison);
+        public PoisonLevel PoisonImmunity => (PoisonLevel)this.GetResist(ElementalType.Poison);
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SpellCircle MagicImmunity => this.GetResist(ElementalType.MagicImmunity);
@@ -77,17 +77,17 @@ namespace Server.Mobiles
         public virtual TimeSpan RiseCreatureDelay { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual List<Type> PreferredSpells { get; set; }
+        public virtual List<SpellEntry> PreferredSpells { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual CreatureType CreatureType { get; set; } = CreatureType.None;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual double WeaponAbilityChance { get; set; } = 0.4;
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool HasBreath { get; set; }
-        
+
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool HasWebs { get; set; }
 
@@ -163,7 +163,7 @@ namespace Server.Mobiles
                 return m_ZuluClass;
             }
         }
-        
+
         public virtual WeaponAbility GetWeaponAbility() => InitProperties?.Attack?.Ability;
         public virtual void OnRiseSpawn(string creatureType, Container corpse)
         {
@@ -207,7 +207,7 @@ namespace Server.Mobiles
 
             Timer.DelayCall(RiseCreatureDelay, Rise);
         }
-        
+
         public static implicit operator BaseCreature(string template)
         {
             return Creatures.Create(template);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
@@ -506,7 +507,7 @@ namespace Server.Items
         public SkillName GetUsedSkill(Mobile m)
         {
             var sk = Skill;
-
+            
             if (sk != SkillName.Wrestling && !m.Player && !m.Body.IsHuman &&
                 m.Skills[SkillName.Wrestling].Value > m.Skills[sk].Value)
                 sk = SkillName.Wrestling;
@@ -772,14 +773,14 @@ namespace Server.Items
             return damage;
         }
 
-        public double ModByDist(Mobile attacker, Mobile defender, double damage, BaseWeapon weapon)
+        public double ModByDist(Mobile attacker, Mobile? defender, double damage, BaseWeapon weapon)
         {
             if (weapon.GetUsedSkill(attacker) == SkillName.Archery)
             {
                 damage *= (attacker.Dex + 60) * 0.01 /
                           ((attacker.Skills[SkillName.Tactics].Value + 50.0 + attacker.Str / 5.0) * 0.01);
 
-                var dist = attacker.GetDistanceToSqrt(defender);
+                var dist = defender != null ? attacker.GetDistanceToSqrt(defender) : 2;
 
                 if (dist <= 1 || dist > 10)
                     damage *= 0.25;
@@ -1434,14 +1435,6 @@ namespace Server.Items
 
         public BaseWeapon(Serial serial) : base(serial)
         {
-        }
-
-        [Hue]
-        [CommandProperty(AccessLevel.GameMaster)]
-        public override int Hue
-        {
-            get => Identified ? base.Hue : 0x0;
-            set => base.Hue = value;
         }
 
         public override bool AllowEquippedCast(Mobile from)

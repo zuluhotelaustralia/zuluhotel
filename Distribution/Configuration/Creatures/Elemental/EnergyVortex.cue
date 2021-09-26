@@ -12,7 +12,7 @@ EnergyVortex: {
 	CanSwim:            true
 	CreatureType:       "Elemental"
 	VirtualArmor:       30
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            350
 	ManaMaxSeed:        125
 	MinTameSkill:       130

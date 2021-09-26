@@ -13,7 +13,7 @@ TerathanAvenger: {
 	Body:                 70
 	CreatureType:         "Terathan"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              225
 	LootItemChance:       10
 	LootItemLevel:        2

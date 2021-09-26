@@ -11,7 +11,7 @@ WaterDrake: {
 	Body:                 61
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
 	HitsMax:              400

@@ -3,8 +3,9 @@ using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
+    [Serializable(0, false)]
     [FlipableAttribute(0x13FD, 0x13FC)]
-    public class DartThrowerOfAmroth : BaseRanged, IGMItem
+    public partial class DartThrowerOfAmroth : BaseRanged, IGMItem
     {
         public override int EffectId => 0x379F;
         public override int DefaultHitSound => 0x206;
@@ -35,25 +36,6 @@ namespace Server.Items
             Identified = false;
             Weight = 9.0;
             Layer = Layer.OneHanded;
-        }
-
-        [Constructible]
-        public DartThrowerOfAmroth(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write((int) 0); // version
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
         }
     }
 }

@@ -11,7 +11,7 @@ TrollWarrior: {
 	Body:                 54
 	CreatureType:         "Troll"
 	VirtualArmor:         10
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
 	HitsMax:              225

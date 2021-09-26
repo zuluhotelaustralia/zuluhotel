@@ -11,7 +11,7 @@ DireWeaver: {
 	Body:               28
 	CreatureType:       "Animal"
 	VirtualArmor:       40
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            450
 	Hue:                1409
 	ManaMaxSeed:        25

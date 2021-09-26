@@ -11,7 +11,7 @@ Ratlord: {
 	Body:                 45
 	CreatureType:         "Ratkin"
 	VirtualArmor:         30
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HideType:             "Rat"
 	Hides:                5
 	HitsMax:              300

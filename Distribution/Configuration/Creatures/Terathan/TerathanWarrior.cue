@@ -11,7 +11,7 @@ TerathanWarrior: {
 	Body:                 70
 	CreatureType:         "Terathan"
 	VirtualArmor:         25
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              550
 	LootTable:            "63"
 	ManaMaxSeed:          0

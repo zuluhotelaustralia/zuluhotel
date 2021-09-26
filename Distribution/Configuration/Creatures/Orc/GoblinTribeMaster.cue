@@ -13,7 +13,7 @@ GoblinTribeMaster: {
 	ClassType:          "Warrior"
 	CreatureType:       "Orc"
 	VirtualArmor:       50
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            2250
 	Hue:                34186
 	LootItemChance:     50

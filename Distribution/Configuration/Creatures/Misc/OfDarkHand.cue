@@ -11,7 +11,7 @@ OfDarkHand: {
 	BardImmune:         true
 	ClassLevel:         6
 	ClassType:          "Warrior"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	Hue:                1172
 	LootTable:          "59"

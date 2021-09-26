@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Zulu.Utilities;
 using Server.Engines.Craft;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
@@ -562,7 +563,7 @@ namespace Server.Items
         {
             if (!IsChildOf(from.Backpack))
             {
-                from.SendLocalizedMessage(502437); // Items you wish to cut must be in your backpack.
+                from.SendFailureMessage(502437); // Items you wish to cut must be in your backpack.
                 return false;
             }
 

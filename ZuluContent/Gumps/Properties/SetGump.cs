@@ -69,9 +69,8 @@ namespace Server.Gumps
 
 			bool canNull = !prop.PropertyType.IsValueType;
 			bool canDye = prop.IsDefined( typeof( HueAttribute ), false );
-			bool isBody = prop.IsDefined( typeof( BodyAttribute ), false );
 
-			object val = prop.GetValue( m_Object, null );
+            object val = prop.GetValue( m_Object, null );
 			string initialText;
 
 			if ( val == null )
@@ -83,8 +82,8 @@ namespace Server.Gumps
 
 			AddPage( 0 );
 
-			AddBackground( 0, 0, BackWidth, BackHeight + (canNull ? EntryHeight + OffsetSize : 0) + (canDye ? EntryHeight + OffsetSize : 0) + (isBody ? EntryHeight + OffsetSize : 0), BackGumpID );
-			AddImageTiled( BorderSize, BorderSize, TotalWidth - (DefaultStyle ? SetWidth + OffsetSize : 0), TotalHeight + (canNull ? EntryHeight + OffsetSize : 0) + (canDye ? EntryHeight + OffsetSize : 0) + (isBody ? EntryHeight + OffsetSize : 0), OffsetGumpID );
+			AddBackground( 0, 0, BackWidth, BackHeight + (canNull ? EntryHeight + OffsetSize : 0) + (canDye ? EntryHeight + OffsetSize : 0), BackGumpID );
+			AddImageTiled( BorderSize, BorderSize, TotalWidth - (DefaultStyle ? SetWidth + OffsetSize : 0), TotalHeight + (canNull ? EntryHeight + OffsetSize : 0) + (canDye ? EntryHeight + OffsetSize : 0), OffsetGumpID );
 
 			int x = BorderSize + OffsetSize;
 			int y = BorderSize + OffsetSize;
@@ -137,22 +136,7 @@ namespace Server.Gumps
 
 				AddButton( x + SetOffsetX, y + SetOffsetY, SetButtonID1, SetButtonID2, 3, GumpButtonType.Reply, 0 );
 			}
-
-			if ( isBody )
-			{
-				x = BorderSize + OffsetSize;
-				y += EntryHeight + OffsetSize;
-
-				AddImageTiled( x, y, EntryWidth, EntryHeight, EntryGumpID );
-				AddLabelCropped( x + TextOffsetX, y, EntryWidth - TextOffsetX, EntryHeight, TextHue, "Body Picker" );
-				x += EntryWidth + OffsetSize;
-
-				if ( SetGumpID != 0 )
-					AddImageTiled( x, y, SetWidth, EntryHeight, SetGumpID );
-
-				AddButton( x + SetOffsetX, y + SetOffsetY, SetButtonID1, SetButtonID2, 4, GumpButtonType.Reply, 0 );
-			}
-		}
+        }
 
 		private class InternalPicker : HuePicker
 		{
@@ -240,17 +224,7 @@ namespace Server.Gumps
 
 					break;
 				}
-				case 4: // Body Picker
-				{
-					toSet = null;
-					shouldSet = false;
-					shouldSend = false;
-
-					m_Mobile.SendGump( new SetBodyGump( m_Property, m_Mobile, m_Object, m_Stack, m_Page, m_List ) );
-
-					break;
-				}
-				default:
+                default:
 				{
 					toSet = null;
 					shouldSet = false;

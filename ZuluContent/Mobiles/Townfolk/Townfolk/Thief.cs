@@ -1,26 +1,28 @@
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
     public class Thief : BaseVendor
     {
-        private List<SBInfo> m_SBInfos = new List<SBInfo>();
+        private readonly List<SBInfo> m_SBInfos = new();
 
-        protected override List<SBInfo> SBInfos
-        {
-            get { return m_SBInfos; }
-        }
+        protected override List<SBInfo> SBInfos => m_SBInfos;
 
 
         [Constructible]
-        public Thief() : base("the thief")
+        public Thief() : base("the Thief")
         {
-            SetSkill(SkillName.Camping, 55.0, 78.0);
-            SetSkill(SkillName.DetectHidden, 65.0, 88.0);
-            SetSkill(SkillName.Hiding, 45.0, 68.0);
-            SetSkill(SkillName.Archery, 65.0, 88.0);
-            SetSkill(SkillName.Tracking, 65.0, 88.0);
-            SetSkill(SkillName.Veterinary, 60.0, 83.0);
+            SetSkill(SkillName.Tactics, 50.0);
+            SetSkill(SkillName.Lockpicking, 80.0);
+            SetSkill(SkillName.Snooping, 80.0);
+            SetSkill(SkillName.DetectHidden, 60.0);
+            SetSkill(SkillName.Hiding, 50.0);
+            SetSkill(SkillName.Poisoning, 60.0);
+            SetSkill(SkillName.Stealing, 60.0);
+            SetSkill(SkillName.TasteID, 40.0);
+            SetSkill(SkillName.Stealth, 40.0);
+            SetSkill(SkillName.RemoveTrap, 50.0);
         }
 
         public override void InitSBInfo()
@@ -32,10 +34,10 @@ namespace Server.Mobiles
         {
             base.InitOutfit();
 
-            AddItem(new Server.Items.Shirt(Utility.RandomNeutralHue()));
-            AddItem(new Server.Items.LongPants(Utility.RandomNeutralHue()));
-            AddItem(new Server.Items.Dagger());
-            AddItem(new Server.Items.ThighBoots());
+            AddItem(new Shirt(Utility.RandomNeutralHue()));
+            AddItem(new LongPants(Utility.RandomNeutralHue()));
+            AddItem(new Dagger());
+            AddItem(new ThighBoots());
         }
 
         [Constructible]
@@ -47,14 +49,14 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write((int) 0); // version
+            writer.Write(0); // version
         }
 
         public override void Deserialize(IGenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+            var version = reader.ReadInt();
         }
     }
 }

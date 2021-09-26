@@ -11,7 +11,7 @@ MageHunter: {
 	Body:               574
 	CreatureType:       "Elemental"
 	VirtualArmor:       30
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            300
 	Hue:                1170
 	ManaMaxSeed:        0

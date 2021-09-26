@@ -10,7 +10,7 @@ Mummy: {
 	Body:               3
 	CreatureType:       "Undead"
 	VirtualArmor:       25
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            250
 	Hue:                1109
 	LootItemChance:     1

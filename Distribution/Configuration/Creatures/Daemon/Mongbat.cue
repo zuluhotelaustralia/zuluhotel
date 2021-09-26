@@ -11,7 +11,7 @@ Mongbat: {
 	Body:                 39
 	CreatureType:         "Daemon"
 	VirtualArmor:         5
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              20
 	LootTable:            "33"
 	ManaMaxSeed:          0

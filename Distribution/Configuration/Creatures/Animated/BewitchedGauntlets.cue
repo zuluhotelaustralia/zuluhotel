@@ -10,7 +10,7 @@ BewitchedGauntlets: {
 	BaseSoundID:          380
 	Body:                 530
 	CreatureType:         "Animated"
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              210
 	LootItemChance:       1
 	LootTable:            "48"

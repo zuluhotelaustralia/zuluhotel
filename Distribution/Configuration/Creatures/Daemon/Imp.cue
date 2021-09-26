@@ -12,7 +12,7 @@ Imp: {
 	Body:                 39
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
-	FightMode:            "Aggressor"
+	FightMode:            "Closest"
 	HitsMax:              175
 	Hue:                  35
 	LootTable:            "58"

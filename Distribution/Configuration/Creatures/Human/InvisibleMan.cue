@@ -11,7 +11,7 @@ InvisibleMan: {
 	Body:               424
 	CreatureType:       "Human"
 	VirtualArmor:       20
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            176
 	LootItemChance:     1
 	LootTable:          "47"

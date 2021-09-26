@@ -12,7 +12,7 @@ CorruptCounselor: {
 	Body:               970
 	CanSwim:            true
 	CreatureType:       "Human"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            4000
 	Hue:                1157
 	LootItemChance:     50

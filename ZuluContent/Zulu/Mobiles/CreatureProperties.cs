@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Scripts.Cue;
 using Server.Engines.Magic;
-using Server.Engines.Magic.HitScripts;
 using Server.Misc;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
@@ -12,7 +11,6 @@ using Server.Items;
 using Server.Spells;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
 
 // ReSharper disable InconsistentNaming
 
@@ -26,7 +24,7 @@ namespace Server.Mobiles
         public string Name { get; set; } = "<CreatureProperties unset>";
         public string Kind { get; set; } = "Npc";
         public string? CorpseNameOverride { get; set; }
-        
+
         public Type BaseType { get; set; } = typeof(BaseCreatureTemplate);
 
         public PropValue Str { get; set; } = 1;
@@ -73,7 +71,7 @@ namespace Server.Mobiles
         public Race? Race { get; set; }
         public TimeSpan? ReacquireDelay { get; set; }
         public TimeSpan? RiseCreatureDelay { get; set; }
-        public Type? RiseCreatureType { get; set; }
+        public string? RiseCreatureTemplate { get; set; }
         public bool? SaySpellMantra { get; set; }
         public InhumanSpeech? SpeechType { get; set; }
         public PropValue StamMaxSeed { get; set; } = 1;
@@ -88,15 +86,15 @@ namespace Server.Mobiles
 
         [CueExpression(@"{ ... }")]
         public Dictionary<ElementalType, PropValue> Resistances { get; set; } = new();
-        
+
         [CueExpression(@"{ ... }")]
         public Dictionary<SkillName, PropValue> Skills { get; set; } = new();
-        public CreatureAttack Attack { get; set; } = new ();
+        public CreatureAttack Attack { get; set; } = new();
         public List<CreatureEquip> Equipment { get; set; } = new();
 
         private static readonly Action<CreatureProperties, BaseCreature> MapAction
             = ZuluUtil.BuildMapAction<CreatureProperties, BaseCreature>();
-        
+
         #endregion
 
         public void ApplyTo<T>(T dest) where T : BaseCreature
@@ -166,7 +164,7 @@ namespace Server.Mobiles
                 {
                     dest.AddItem(new Fists());
                 }
-                
+
 
                 if (dest.Weapon is BaseWeapon weapon)
                 {

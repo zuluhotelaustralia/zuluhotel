@@ -12,7 +12,7 @@ JujuZombie: {
 	Body:               3
 	CreatureType:       "Undead"
 	VirtualArmor:       50
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	FightRange:         4
 	HitsMax:            375
 	Hue:                1300

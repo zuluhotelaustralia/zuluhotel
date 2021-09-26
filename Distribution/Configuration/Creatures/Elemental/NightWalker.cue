@@ -13,7 +13,7 @@ NightWalker: {
 	Body:               311
 	CanSwim:            true
 	CreatureType:       "Elemental"
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            4000
 	Hue:                1157
 	LootItemChance:     100

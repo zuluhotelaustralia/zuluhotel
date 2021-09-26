@@ -11,7 +11,7 @@ BoneKnight: {
 	Body:               57
 	CreatureType:       "Undead"
 	VirtualArmor:       15
-	FightMode:          "Aggressor"
+	FightMode:          "Closest"
 	HitsMax:            160
 	Hue:                33784
 	LootItemChance:     2

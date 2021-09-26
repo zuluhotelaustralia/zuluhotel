@@ -34,7 +34,7 @@ namespace Server.Engines.Harvest
                 DestroyFurniture(from, (Item) targeted);
             else if (m_System is Mining && targeted is TreasureMap map)
                 map.OnBeginDig(from);
-            else if (!(m_Tool is Shovel))
+            else if (m_Tool is not Shovel)
                 m_System.StartHarvesting(from, m_Tool, targeted);
         }
 
