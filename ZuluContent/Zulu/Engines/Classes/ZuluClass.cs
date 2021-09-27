@@ -26,7 +26,7 @@ namespace Scripts.Zulu.Engines.Classes
         private const double PercentBase = 0.52;
         private const double PerLevel = 0.15; //15% per level
         private const double ClasseBonus = 1.5;
-        private const int MaxLevel = 6;
+        public const int MaxLevel = 6;
 
         public static readonly double[] MinSkills =
             Enumerable
@@ -177,7 +177,7 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 var level = e.GetInt32(1);
 
-                if (level > MaxLevel || level < 0)
+                if (level is > MaxLevel or < 0)
                     level = 0;
 
                 foreach (var skill in pm.Skills)
