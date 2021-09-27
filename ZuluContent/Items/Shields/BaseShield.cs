@@ -50,7 +50,7 @@ namespace Server.Items
 
                 if (Utility.RandomMinMax(1, 100) <= (int) (parrySkillVal / 2))
                 {
-                    owner.FixedEffect(0x37B9, 10, 16);
+                    owner.Animate(19, 7, 1, true, false, 0);
                     owner.SendSuccessMessage("You successfully parry the attack.");
 
                     double absorbAmount;

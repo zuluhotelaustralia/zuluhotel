@@ -2082,8 +2082,8 @@ namespace Server.Mobiles
             if (!CheckTeach(skill, m) || !m.CheckAlive())
                 return TeachResult.Failure;
 
-            Skill ourSkill = Skills[skill];
-            Skill theirSkill = m.Skills[skill];
+            var ourSkill = Skills[skill];
+            var theirSkill = m.Skills[skill];
 
             if (ourSkill == null || theirSkill == null)
                 return TeachResult.Failure;
@@ -2115,61 +2115,8 @@ namespace Server.Mobiles
             if (theirSkill.Lock != SkillLock.Up)
                 return TeachResult.SkillNotRaisable;
 
-            int freePoints = m.Skills.Cap - m.Skills.Total;
-            int freeablePoints = 0;
-
-            if (freePoints < 0)
-                freePoints = 0;
-
-            for (int i = 0; freePoints + freeablePoints < pointsToLearn && i < m.Skills.Length; ++i)
-            {
-                Skill sk = m.Skills[i];
-
-                if (sk == theirSkill || sk.Lock != SkillLock.Down)
-                    continue;
-
-                freeablePoints += sk.BaseFixedPoint;
-            }
-
-            if (freePoints + freeablePoints == 0)
-                return TeachResult.NotEnoughFreePoints;
-
-            if (freePoints + freeablePoints < pointsToLearn)
-            {
-                pointsToLearn = freePoints + freeablePoints;
-                baseToSet = theirSkill.BaseFixedPoint + pointsToLearn;
-            }
-
             if (doTeach)
-            {
-                int need = pointsToLearn - freePoints;
-
-                for (int i = 0; need > 0 && i < m.Skills.Length; ++i)
-                {
-                    Skill sk = m.Skills[i];
-
-                    if (sk == theirSkill || sk.Lock != SkillLock.Down)
-                        continue;
-
-                    if (sk.BaseFixedPoint < need)
-                    {
-                        need -= sk.BaseFixedPoint;
-                        sk.BaseFixedPoint = 0;
-                    }
-                    else
-                    {
-                        sk.BaseFixedPoint -= need;
-                        need = 0;
-                    }
-                }
-
-                /* Sanity check */
-                if (baseToSet > theirSkill.CapFixedPoint ||
-                    m.Skills.Total - theirSkill.BaseFixedPoint + baseToSet > m.Skills.Cap)
-                    return TeachResult.NotEnoughFreePoints;
-
                 theirSkill.BaseFixedPoint = baseToSet;
-            }
 
             return TeachResult.Success;
         }
