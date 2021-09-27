@@ -72,7 +72,7 @@ namespace Server.Engines.Craft
 
             ZhConfig.Resources.Logs.Entries.ToList()
                 .ForEach(e => AddSubRes(e.ResourceType, e.Name.Length > 0 ? e.Name : "Log", e.CraftSkillRequired,
-                    1044022, e.Name));
+                    1044022, 1072652));
 
             MarkOption = true;
             Repair = true;

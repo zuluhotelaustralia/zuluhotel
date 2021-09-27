@@ -262,6 +262,7 @@ namespace Server.Saves
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
+            AssemblyHandler.EnsureDirectory(BackupPath);
             var allFolders = Directory.EnumerateDirectories(BackupPath, "????-??-??-??-??-??");
 
             var rangeEnd = archivePeriod switch
