@@ -3,7 +3,7 @@ package Animal
 DemonicOstard: {
 	Name:                 "a Demonic Ostard"
 	CorpseNameOverride:   "corpse of a Demonic Ostard"
-  Str:                  850
+	Str:                  850
 	Int:                  650
 	Dex:                  475
 	PassiveSpeed:         0.2
@@ -14,7 +14,7 @@ DemonicOstard: {
 	CreatureType:         "Animal"
 	VirtualArmor:         50
 	FightMode:            "Closest"
-	HitsMaxSeed:              850
+	HitsMaxSeed:          850
 	Hue:                  1259
 	ManaMaxSeed:          150
 	MinTameSkill:         115

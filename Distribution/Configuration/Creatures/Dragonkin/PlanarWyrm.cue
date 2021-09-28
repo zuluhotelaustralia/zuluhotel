@@ -15,7 +15,7 @@ PlanarWyrm: {
 	VirtualArmor:       50
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMaxSeed:            3000
+	HitsMaxSeed:        3000
 	Hue:                1301
 	LootItemChance:     80
 	LootItemLevel:      5

@@ -3,7 +3,7 @@ package Animal
 Semonster: {
 	Name:                 "a sea monster"
 	CorpseNameOverride:   "corpse of a sea monster"
-  Str:                  250
+	Str:                  250
 	Int:                  35
 	Dex:                  160
 	BaseSoundID:          444
@@ -11,7 +11,7 @@ Semonster: {
 	CanSwim:              true
 	CreatureType:         "Animal"
 	VirtualArmor:         30
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  33784
 	LootItemChance:       1
 	LootTable:            "50"

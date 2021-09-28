@@ -3,14 +3,14 @@ package Animal
 RabidCat: {
 	Name:                 "a rabid cat"
 	CorpseNameOverride:   "corpse of a rabid cat"
-  Str:                  22
+	Str:                  22
 	Int:                  25
 	Dex:                  80
 	BaseSoundID:          105
 	Body:                 201
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMaxSeed:              22
+	HitsMaxSeed:          22
 	Hue:                  33784
 	ManaMaxSeed:          15
 	MinTameSkill:         30

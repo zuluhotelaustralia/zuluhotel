@@ -3,7 +3,7 @@ package Dragonkin
 CelestialDragon: {
 	Name:                 "a Celestial Dragon"
 	CorpseNameOverride:   "corpse of a Celestial Dragon"
-  Str:                  850
+	Str:                  850
 	Int:                  400
 	Dex:                  150
 	PassiveSpeed:         0.2
@@ -15,7 +15,7 @@ CelestialDragon: {
 	FightMode:            "Closest"
 	HideType:             "Wyrm"
 	Hides:                5
-	HitsMaxSeed:              850
+	HitsMaxSeed:          850
 	Hue:                  1301
 	InitialInnocent:      true
 	LootItemChance:       75

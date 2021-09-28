@@ -3,7 +3,7 @@ package Troll
 Troll: {
 	Name:                 "a troll"
 	CorpseNameOverride:   "corpse of a troll"
-  Str:                  185
+	Str:                  185
 	Int:                  35
 	Dex:                  70
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ Troll: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              185
+	HitsMaxSeed:          185
 	Hue:                  33784
 	LootTable:            "14"
 	ManaMaxSeed:          0

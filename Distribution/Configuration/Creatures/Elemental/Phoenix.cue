@@ -3,7 +3,7 @@ package Elemental
 Phoenix: {
 	Name:                 "a Phoenix"
 	CorpseNameOverride:   "corpse of a Phoenix"
-  Str:                  450
+	Str:                  450
 	Int:                  500
 	Dex:                  400
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ Phoenix: {
 	VirtualArmor:         40
 	HideType:             "Lava"
 	Hides:                2
-	HitsMaxSeed:              450
+	HitsMaxSeed:          450
 	Hue:                  1645
 	LootItemChance:       95
 	LootItemLevel:        4

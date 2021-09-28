@@ -3,7 +3,7 @@ package Troll
 TrollShaman: {
 	Name:                 "a Troll Shaman"
 	CorpseNameOverride:   "corpse of a Troll Shaman"
-  Str:                  225
+	Str:                  225
 	Int:                  285
 	Dex:                  170
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ TrollShaman: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              225
+	HitsMaxSeed:          225
 	Hue:                  544
 	LootItemChance:       60
 	LootItemLevel:        2

@@ -3,7 +3,7 @@ package Animal
 GiantFrostSpider: {
 	Name:                 "a giant frost spider"
 	CorpseNameOverride:   "corpse of a giant frost spider"
-  Str:                  90
+	Str:                  90
 	Int:                  60
 	Dex:                  125
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ GiantFrostSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              90
+	HitsMaxSeed:          90
 	Hue:                  1154
 	ManaMaxSeed:          0
 	MinTameSkill:         80
@@ -31,8 +31,8 @@ GiantFrostSpider: {
 			Min: 9
 			Max: 21
 		}
-		HitSound: 389
-		HasWebs:  true
+		HitSound:  389
+		HasWebs:   true
 		HitPoison: "Regular"
 	}
 }

@@ -3,7 +3,7 @@ package Animal
 HeavenlyOstard: {
 	Name:                 "a heavenly ostard"
 	CorpseNameOverride:   "corpse of a heavenly ostard"
-  Str:                  250
+	Str:                  250
 	Int:                  160
 	Dex:                  400
 	AiType:               "AI_Healer"
@@ -13,7 +13,7 @@ HeavenlyOstard: {
 	VirtualArmor:         30
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  1181
 	ManaMaxSeed:          150
 	MinTameSkill:         105

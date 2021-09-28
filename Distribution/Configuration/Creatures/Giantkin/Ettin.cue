@@ -3,7 +3,7 @@ package Giantkin
 Ettin: {
 	Name:                 "an ettin"
 	CorpseNameOverride:   "corpse of an ettin"
-  Str:                  140
+	Str:                  140
 	Int:                  10
 	Dex:                  130
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ Ettin: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMaxSeed:              140
+	HitsMaxSeed:          140
 	Hue:                  33784
 	LootItemChance:       2
 	LootItemLevel:        1

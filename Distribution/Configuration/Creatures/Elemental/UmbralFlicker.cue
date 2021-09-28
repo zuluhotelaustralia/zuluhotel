@@ -16,7 +16,7 @@ UmbralFlicker: {
 	ClassType:          "Mage"
 	CreatureType:       "Elemental"
 	VirtualArmor:       40
-	HitsMaxSeed:            450
+	HitsMaxSeed:        450
 	Hue:                25125
 	LootItemChance:     75
 	LootItemLevel:      5

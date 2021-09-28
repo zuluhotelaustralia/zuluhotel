@@ -3,7 +3,7 @@ package Ratkin
 Ratlord: {
 	Name:                 "<random> the Ratlord"
 	CorpseNameOverride:   "corpse of <random> the Ratlord"
-  Str:                  300
+	Str:                  300
 	Int:                  65
 	Dex:                  450
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ Ratlord: {
 	FightMode:            "Closest"
 	HideType:             "Rat"
 	Hides:                5
-	HitsMaxSeed:              300
+	HitsMaxSeed:          300
 	LootItemChance:       50
 	LootItemLevel:        1
 	LootTable:            "27"

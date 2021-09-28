@@ -12,7 +12,7 @@ ShadowLord: {
 	CanSwim:            true
 	CreatureType:       "Elemental"
 	FightMode:          "Closest"
-	HitsMaxSeed:            550
+	HitsMaxSeed:        550
 	Hue:                1
 	LootItemChance:     15
 	LootItemLevel:      5

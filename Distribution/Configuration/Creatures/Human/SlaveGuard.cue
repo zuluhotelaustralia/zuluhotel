@@ -13,7 +13,7 @@ SlaveGuard: {
 	CreatureType:       "Human"
 	VirtualArmor:       60
 	FightMode:          "Closest"
-	HitsMaxSeed:            1000
+	HitsMaxSeed:        1000
 	Hue:                1159
 	LootItemChance:     20
 	LootItemLevel:      1

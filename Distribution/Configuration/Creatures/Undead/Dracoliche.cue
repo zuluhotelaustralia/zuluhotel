@@ -3,7 +3,7 @@ package Undead
 Dracoliche: {
 	Name:                 "a Dracoliche"
 	CorpseNameOverride:   "corpse of a Dracoliche"
-  Str:                  650
+	Str:                  650
 	Int:                  700
 	Dex:                  150
 	AiType:               "AI_Mage"
@@ -16,7 +16,7 @@ Dracoliche: {
 	FightMode:            "Closest"
 	HideType:             "Liche"
 	Hides:                5
-	HitsMaxSeed:              650
+	HitsMaxSeed:          650
 	Hue:                  1282
 	LootItemChance:       75
 	LootItemLevel:        5

@@ -3,7 +3,7 @@ package Troll
 TrollArcher: {
 	Name:                 "a troll archer"
 	CorpseNameOverride:   "corpse of a troll archer"
-  Str:                  190
+	Str:                  190
 	Int:                  50
 	Dex:                  105
 	AiType:               "AI_Archer"
@@ -15,7 +15,7 @@ TrollArcher: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              190
+	HitsMaxSeed:          190
 	Hue:                  33784
 	LootTable:            "41"
 	ManaMaxSeed:          40
@@ -32,7 +32,7 @@ TrollArcher: {
 			Min: 10
 			Max: 22
 		}
-	},
+	}
 	Equipment: [
 		{
 			ItemType: "Bow"

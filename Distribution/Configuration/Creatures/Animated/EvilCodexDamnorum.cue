@@ -13,7 +13,7 @@ EvilCodexDamnorum: {
 	CreatureType:       "Animated"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMaxSeed:            850
+	HitsMaxSeed:        850
 	Hue:                1645
 	LootItemChance:     75
 	LootItemLevel:      6

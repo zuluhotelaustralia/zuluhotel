@@ -3,7 +3,7 @@ package Orc
 OrcWarrior: {
 	Name:                 "<random> the orc warrior"
 	CorpseNameOverride:   "corpse of <random> the orc warrior"
-  Str:                  160
+	Str:                  160
 	Int:                  35
 	Dex:                  190
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ OrcWarrior: {
 	CreatureType:         "Orc"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMaxSeed:              160
+	HitsMaxSeed:          160
 	LootTable:            "43"
 	ManaMaxSeed:          25
 	ProvokeSkillOverride: 70

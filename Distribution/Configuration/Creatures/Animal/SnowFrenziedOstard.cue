@@ -3,7 +3,7 @@ package Animal
 SnowFrenziedOstard: {
 	Name:                 "a snow frenzied ostard"
 	CorpseNameOverride:   "corpse of a snow frenzied ostard"
-  Str:                  275
+	Str:                  275
 	Int:                  135
 	Dex:                  400
 	BaseSoundID:          629
@@ -12,7 +12,7 @@ SnowFrenziedOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              275
+	HitsMaxSeed:          275
 	Hue:                  1156
 	ManaMaxSeed:          125
 	MinTameSkill:         105

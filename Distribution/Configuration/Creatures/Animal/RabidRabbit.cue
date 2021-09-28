@@ -3,14 +3,14 @@ package Animal
 RabidRabbit: {
 	Name:                 "a rabid rabbit"
 	CorpseNameOverride:   "corpse of a rabid rabbit"
-  Str:                  90
+	Str:                  90
 	Int:                  25
 	Dex:                  550
 	BaseSoundID:          201
 	Body:                 205
 	CreatureType:         "Animal"
 	VirtualArmor:         20
-	HitsMaxSeed:              90
+	HitsMaxSeed:          90
 	Hue:                  1154
 	ManaMaxSeed:          15
 	MinTameSkill:         55

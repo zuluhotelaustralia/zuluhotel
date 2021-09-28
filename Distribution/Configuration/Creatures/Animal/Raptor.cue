@@ -3,7 +3,7 @@ package Animal
 Raptor: {
 	Name:                 "a Raptor"
 	CorpseNameOverride:   "corpse of a Raptor"
-  Str:                  110
+	Str:                  110
 	Int:                  90
 	Dex:                  160
 	BaseSoundID:          624
@@ -12,7 +12,7 @@ Raptor: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              110
+	HitsMaxSeed:          110
 	Hue:                  1109
 	LootTable:            "48"
 	ManaMaxSeed:          80

@@ -13,7 +13,7 @@ Behemoth: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMaxSeed:            2250
+	HitsMaxSeed:        2250
 	Hue:                1160
 	LootItemChance:     70
 	LootItemLevel:      6

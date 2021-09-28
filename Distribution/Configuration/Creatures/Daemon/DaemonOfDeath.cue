@@ -3,7 +3,7 @@ package Daemon
 DaemonOfDeath: {
 	Name:                 "a Daemon Of Death"
 	CorpseNameOverride:   "corpse of a Daemon Of Death"
-  Str:                  2000
+	Str:                  2000
 	Int:                  2000
 	Dex:                  200
 	PassiveSpeed:         0.2
@@ -17,7 +17,7 @@ DaemonOfDeath: {
 	VirtualArmor:         30
 	FightMode:            "Closest"
 	FightRange:           5
-	HitsMaxSeed:              6000
+	HitsMaxSeed:          6000
 	Hue:                  1160
 	LootItemChance:       90
 	LootItemLevel:        9

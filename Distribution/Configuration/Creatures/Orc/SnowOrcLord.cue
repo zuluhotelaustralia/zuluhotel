@@ -3,14 +3,14 @@ package Orc
 SnowOrcLord: {
 	Name:                 "<random> the snow orc lord"
 	CorpseNameOverride:   "corpse of <random> the snow orc lord"
-  Str:                  180
+	Str:                  180
 	Int:                  30
 	Dex:                  210
 	BaseSoundID:          1114
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         30
-	HitsMaxSeed:              180
+	HitsMaxSeed:          180
 	Hue:                  1154
 	LootItemChance:       20
 	LootItemLevel:        2

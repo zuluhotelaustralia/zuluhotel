@@ -3,7 +3,7 @@ package Orc
 EliteOrcWarrior: {
 	Name:                 "an elite orc warrior"
 	CorpseNameOverride:   "corpse of an elite orc warrior"
-  Str:                  215
+	Str:                  215
 	Int:                  35
 	Dex:                  195
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ EliteOrcWarrior: {
 	CreatureType:         "Orc"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              215
+	HitsMaxSeed:          215
 	LootTable:            "43"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

@@ -15,7 +15,7 @@ Bloodliche: {
 	FightMode:          "Closest"
 	HideType:           "Liche"
 	Hides:              3
-	HitsMaxSeed:            275
+	HitsMaxSeed:        275
 	Hue:                1209
 	LootItemChance:     25
 	LootItemLevel:      5

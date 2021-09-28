@@ -3,7 +3,7 @@ package Dragonkin
 GoldenDragon: {
 	Name:                 "a Golden Dragon"
 	CorpseNameOverride:   "corpse of a Golden Dragon"
-  Str:                  1250
+	Str:                  1250
 	Int:                  500
 	Dex:                  450
 	ActiveSpeed:          0.05
@@ -18,7 +18,7 @@ GoldenDragon: {
 	FightMode:            "Closest"
 	HideType:             "GoldenDragon"
 	Hides:                5
-	HitsMaxSeed:              1250
+	HitsMaxSeed:          1250
 	Hue:                  48
 	LootItemChance:       65
 	LootItemLevel:        6

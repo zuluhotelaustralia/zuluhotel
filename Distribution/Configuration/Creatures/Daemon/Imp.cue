@@ -3,7 +3,7 @@ package Daemon
 Imp: {
 	Name:                 "an imp"
 	CorpseNameOverride:   "corpse of an imp"
-  Str:                  175
+	Str:                  175
 	Int:                  85
 	Dex:                  150
 	PassiveSpeed:         0.2
@@ -13,7 +13,7 @@ Imp: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMaxSeed:              175
+	HitsMaxSeed:          175
 	Hue:                  35
 	LootTable:            "58"
 	ManaMaxSeed:          0

@@ -11,7 +11,7 @@ Vampire: {
 	CreatureType:       "Undead"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMaxSeed:            350
+	HitsMaxSeed:        350
 	LootItemChance:     75
 	LootItemLevel:      3
 	LootTable:          "71"
@@ -29,7 +29,7 @@ Vampire: {
 		Magery:      100
 	}
 	Attack: {
-		Ability: "LifeDrainStrike"
+		Ability:       "LifeDrainStrike"
 		AbilityChance: 1.0
 		Damage: {
 			Min: 12

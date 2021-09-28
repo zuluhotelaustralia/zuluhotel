@@ -3,7 +3,7 @@ package Dragonkin
 HeavenlyDrake: {
 	Name:                 "a Heavenly Drake"
 	CorpseNameOverride:   "corpse of a Heavenly Drake"
-  Str:                  400
+	Str:                  400
 	Int:                  90
 	Dex:                  300
 	PassiveSpeed:         0.2
@@ -14,7 +14,7 @@ HeavenlyDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              400
+	HitsMaxSeed:          400
 	Hue:                  1181
 	InitialInnocent:      true
 	LootItemChance:       25

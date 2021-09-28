@@ -3,7 +3,7 @@ package Troll
 EliteTrollWarrior: {
 	Name:                 "an elite troll warrior"
 	CorpseNameOverride:   "corpse of an elite troll warrior"
-  Str:                  235
+	Str:                  235
 	Int:                  65
 	Dex:                  85
 	BaseSoundID:          461
@@ -12,7 +12,7 @@ EliteTrollWarrior: {
 	VirtualArmor:         20
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              235
+	HitsMaxSeed:          235
 	Hue:                  33784
 	LootTable:            "43"
 	ManaMaxSeed:          55

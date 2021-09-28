@@ -12,7 +12,7 @@ OfDarkHand: {
 	ClassLevel:         6
 	ClassType:          "Warrior"
 	FightMode:          "Closest"
-	HitsMaxSeed:            300
+	HitsMaxSeed:        300
 	Hue:                1172
 	LootTable:          "59"
 	ManaMaxSeed:        200

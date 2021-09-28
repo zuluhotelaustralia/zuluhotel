@@ -3,7 +3,7 @@ package Daemon
 Harpy: {
 	Name:                 "a harpy"
 	CorpseNameOverride:   "corpse of a harpy"
-  Str:                  85
+	Str:                  85
 	Int:                  75
 	Dex:                  70
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ Harpy: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMaxSeed:              85
+	HitsMaxSeed:          85
 	LootTable:            "29"
 	ManaMaxSeed:          95
 	ProvokeSkillOverride: 75

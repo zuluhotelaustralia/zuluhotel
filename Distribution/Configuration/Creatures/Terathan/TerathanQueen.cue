@@ -15,7 +15,7 @@ TerathanQueen: {
 	CreatureType:       "Terathan"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMaxSeed:            2350
+	HitsMaxSeed:        2350
 	Hue:                1177
 	LootItemChance:     70
 	LootItemLevel:      6

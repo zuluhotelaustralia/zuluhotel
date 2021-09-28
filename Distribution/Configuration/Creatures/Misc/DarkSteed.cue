@@ -3,7 +3,7 @@ package Misc
 DarkSteed: {
 	Name:                 "a dark steed"
 	CorpseNameOverride:   "corpse of a dark steed"
-  Str:                  1200
+	Str:                  1200
 	Int:                  600
 	Dex:                  120
 	AiType:               "AI_Mage"
@@ -12,7 +12,7 @@ DarkSteed: {
 	VirtualArmor:         40
 	Fame:                 4
 	FightMode:            "Closest"
-	HitsMaxSeed:              1200
+	HitsMaxSeed:          1200
 	Karma:                4
 	LootItemChance:       100
 	LootTable:            "26"

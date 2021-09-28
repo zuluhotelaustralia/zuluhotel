@@ -3,7 +3,7 @@ package Orc
 OrcishLord: {
 	Name:                 "<random> the Orcish Lord"
 	CorpseNameOverride:   "corpse of <random> the Orcish Lord"
-  Str:                  205
+	Str:                  205
 	Int:                  30
 	Dex:                  90
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ OrcishLord: {
 	CreatureType:         "Orc"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              205
+	HitsMaxSeed:          205
 	Hue:                  33784
 	LootItemChance:       6
 	LootItemLevel:        3

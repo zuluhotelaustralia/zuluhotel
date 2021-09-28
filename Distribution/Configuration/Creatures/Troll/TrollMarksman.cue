@@ -3,7 +3,7 @@ package Troll
 TrollMarksman: {
 	Name:                 "a troll marksman"
 	CorpseNameOverride:   "corpse of a troll marksman"
-  Str:                  185
+	Str:                  185
 	Int:                  55
 	Dex:                  120
 	AiType:               "AI_Archer"
@@ -15,7 +15,7 @@ TrollMarksman: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              185
+	HitsMaxSeed:          185
 	Hue:                  33784
 	LootTable:            "41"
 	ManaMaxSeed:          0
@@ -32,7 +32,7 @@ TrollMarksman: {
 			Min: 12
 			Max: 27
 		}
-	},
+	}
 	Equipment: [
 		{
 			ItemType: "Bow"

@@ -3,7 +3,7 @@ package Dragonkin
 Defender: {
 	Name:                 "<random> the Defender"
 	CorpseNameOverride:   "corpse of <random> the Defender"
-  Str:                  275
+	Str:                  275
 	Int:                  45
 	Dex:                  180
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ Defender: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              275
+	HitsMaxSeed:          275
 	Hue:                  1454
 	LootItemChance:       2
 	LootTable:            "56"

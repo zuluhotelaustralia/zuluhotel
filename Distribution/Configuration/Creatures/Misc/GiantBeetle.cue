@@ -3,7 +3,7 @@ package Misc
 GiantBeetle: {
 	Name:                 "a giant beetle"
 	CorpseNameOverride:   "corpse of a giant beetle"
-  Str:                  300
+	Str:                  300
 	Int:                  500
 	Dex:                  100
 	AiType:               "AI_Animal"
@@ -11,7 +11,7 @@ GiantBeetle: {
 	Body:                 133
 	VirtualArmor:         20
 	Fame:                 3
-	HitsMaxSeed:              200
+	HitsMaxSeed:          200
 	Karma:                3
 	ManaMaxSeed:          500
 	MinTameSkill:         115

@@ -3,7 +3,7 @@ package Undead
 UndeadDrake: {
 	Name:                 "an Undead Drake"
 	CorpseNameOverride:   "corpse of an Undead Drake"
-  Str:                  300
+	Str:                  300
 	Int:                  400
 	Dex:                  110
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ UndeadDrake: {
 	FightMode:            "Closest"
 	HideType:             "Liche"
 	Hides:                5
-	HitsMaxSeed:              300
+	HitsMaxSeed:          300
 	Hue:                  1109
 	LootItemChance:       25
 	LootItemLevel:        4
@@ -40,9 +40,9 @@ UndeadDrake: {
 		DetectHidden: 130
 	}
 	Attack: {
-		Ability: "LifeDrainStrike"
+		Ability:       "LifeDrainStrike"
 		AbilityChance: 1.0
-		Speed: 45
+		Speed:         45
 		Damage: {
 			Min: 33
 			Max: 73

@@ -3,7 +3,7 @@ package Beholder
 EyesOfEradication: {
 	Name:                 "Eyes of Eradication"
 	CorpseNameOverride:   "corpse of Eyes of Eradication"
-  Str:                  500
+	Str:                  500
 	Int:                  600
 	Dex:                  500
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ EyesOfEradication: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Hue:                  1172
 	LootItemChance:       75
 	LootItemLevel:        4

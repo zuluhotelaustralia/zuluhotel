@@ -3,7 +3,7 @@ package Terathan
 TerathanAvenger: {
 	Name:                 "a Terathan Avenger"
 	CorpseNameOverride:   "corpse of a Terathan Avenger"
-  Str:                  225
+	Str:                  225
 	Int:                  250
 	Dex:                  160
 	ActiveSpeed:          0.15
@@ -14,7 +14,7 @@ TerathanAvenger: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              225
+	HitsMaxSeed:          225
 	LootItemChance:       10
 	LootItemLevel:        2
 	LootTable:            "68"

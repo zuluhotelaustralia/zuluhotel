@@ -3,7 +3,7 @@ package Daemon
 HellHound: {
 	Name:                 "a hell hound"
 	CorpseNameOverride:   "corpse of a hell hound"
-  Str:                  170
+	Str:                  170
 	Int:                  60
 	Dex:                  185
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ HellHound: {
 	FightMode:            "Closest"
 	HideType:             "Wolf"
 	Hides:                5
-	HitsMaxSeed:              170
+	HitsMaxSeed:          170
 	Hue:                  232
 	LootTable:            "61"
 	ManaMaxSeed:          50

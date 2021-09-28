@@ -3,7 +3,7 @@ package Misc
 BlackGateDaemon: {
 	Name:                 "a black gate daemon"
 	CorpseNameOverride:   "corpse of a black gate daemon"
-  Str:                  1500
+	Str:                  1500
 	Int:                  290
 	Dex:                  165
 	AiType:               "AI_Mage"
@@ -11,7 +11,7 @@ BlackGateDaemon: {
 	Body:                 228
 	VirtualArmor:         20
 	Fame:                 4
-	HitsMaxSeed:              1500
+	HitsMaxSeed:          1500
 	Karma:                5
 	ManaMaxSeed:          465
 	ProvokeSkillOverride: 150

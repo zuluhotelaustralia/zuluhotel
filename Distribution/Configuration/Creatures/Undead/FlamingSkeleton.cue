@@ -13,7 +13,7 @@ FlamingSkeleton: {
 	CreatureType:       "Undead"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            170
+	HitsMaxSeed:        170
 	Hue:                1201
 	LootItemChance:     1
 	LootTable:          "23"

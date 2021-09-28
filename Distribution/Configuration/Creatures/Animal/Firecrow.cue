@@ -3,7 +3,7 @@ package Animal
 Firecrow: {
 	Name:                 "a firecrow"
 	CorpseNameOverride:   "corpse of a firecrow"
-  Str:                  18
+	Str:                  18
 	Int:                  15
 	Dex:                  60
 	PassiveSpeed:         0.2
@@ -11,7 +11,7 @@ Firecrow: {
 	Body:                 6
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMaxSeed:              18
+	HitsMaxSeed:          18
 	Hue:                  1109
 	ManaMaxSeed:          0
 	MinTameSkill:         25

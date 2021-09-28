@@ -3,7 +3,7 @@ package Orc
 Marksman: {
 	Name:                 "<random> the marksman"
 	CorpseNameOverride:   "corpse of <random> the marksman"
-  Str:                  135
+	Str:                  135
 	Int:                  35
 	Dex:                  190
 	AiType:               "AI_Archer"
@@ -13,7 +13,7 @@ Marksman: {
 	CreatureType:         "Orc"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMaxSeed:              135
+	HitsMaxSeed:          135
 	LootTable:            "52"
 	ManaMaxSeed:          25
 	ProvokeSkillOverride: 80
@@ -31,7 +31,7 @@ Marksman: {
 			Max: 12
 		}
 		HitSound: 231
-	},
+	}
 	Equipment: [
 		{
 			ItemType: "Bow"

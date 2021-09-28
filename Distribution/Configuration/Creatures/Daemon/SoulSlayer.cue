@@ -16,7 +16,7 @@ SoulSlayer: {
 	VirtualArmor:       60
 	FightMode:          "Closest"
 	FightRange:         5
-	HitsMaxSeed:            1000
+	HitsMaxSeed:        1000
 	Hue:                1302
 	LootItemChance:     100
 	LootItemLevel:      6

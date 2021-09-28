@@ -12,7 +12,7 @@ BalronSpawn: {
 	Body:               74
 	CreatureType:       "Daemon"
 	FightMode:          "Closest"
-	HitsMaxSeed:            600
+	HitsMaxSeed:        600
 	Hue:                17969
 	LootItemChance:     80
 	LootItemLevel:      4
@@ -30,9 +30,9 @@ BalronSpawn: {
 		MagicResist: 130
 	}
 	Attack: {
-		Ability: "LifeDrainStrike"
+		Ability:       "LifeDrainStrike"
 		AbilityChance: 1.0
-		Speed: 35
+		Speed:         35
 		Damage: {
 			Min: 33
 			Max: 73

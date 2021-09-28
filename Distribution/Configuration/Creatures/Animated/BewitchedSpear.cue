@@ -3,7 +3,7 @@ package Animated
 BewitchedSpear: {
 	Name:                 "a Bewitched Spear"
 	CorpseNameOverride:   "corpse of a Bewitched Spear"
-  Str:                  210
+	Str:                  210
 	Int:                  110
 	Dex:                  110
 	AlwaysMurderer:       true
@@ -11,7 +11,7 @@ BewitchedSpear: {
 	CreatureType:         "Animated"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMaxSeed:              210
+	HitsMaxSeed:          210
 	LootItemChance:       1
 	LootTable:            "48"
 	ManaMaxSeed:          0

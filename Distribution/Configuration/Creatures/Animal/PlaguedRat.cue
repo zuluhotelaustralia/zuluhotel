@@ -3,14 +3,14 @@ package Animal
 PlaguedRat: {
 	Name:                 "a plagued rat"
 	CorpseNameOverride:   "corpse of a plagued rat"
-  Str:                  30
+	Str:                  30
 	Int:                  110
 	Dex:                  80
 	BaseSoundID:          204
 	Body:                 238
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMaxSeed:              30
+	HitsMaxSeed:          30
 	Hue:                  33784
 	ManaMaxSeed:          200
 	MinTameSkill:         35
@@ -28,7 +28,7 @@ PlaguedRat: {
 			Min: 1
 			Max: 10
 		}
-		HitSound: 206
-		HitPoison:            "Lesser"
+		HitSound:  206
+		HitPoison: "Lesser"
 	}
 }

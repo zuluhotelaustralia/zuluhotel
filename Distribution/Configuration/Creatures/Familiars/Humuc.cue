@@ -3,7 +3,7 @@ package Familiars
 Humuc: {
 	Name:                 "totem"
 	CorpseNameOverride:   "corpse of a totem"
-  Str:                  200
+	Str:                  200
 	Int:                  75
 	Dex:                  100
 	PassiveSpeed:         0.5
@@ -14,7 +14,7 @@ Humuc: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         100
 	FightMode:            "Aggressor"
-	HitsMaxSeed:              20
+	HitsMaxSeed:          20
 	Hue:                  746
 	InitialInnocent:      true
 	ManaMaxSeed:          75

@@ -13,7 +13,7 @@ Wraith: {
 	CreatureType:       "Undead"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMaxSeed:            125
+	HitsMaxSeed:        125
 	Hue:                16385
 	LootItemChance:     80
 	LootItemLevel:      5

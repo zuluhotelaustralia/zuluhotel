@@ -3,7 +3,7 @@ package Daemon
 ScorpionKing: {
 	Name:                 "a Scorpion King"
 	CorpseNameOverride:   "corpse of a Scorpion King"
-  Str:                  1500
+	Str:                  1500
 	Int:                  2000
 	Dex:                  200
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ ScorpionKing: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
 	FightMode:            "Closest"
-	HitsMaxSeed:              5000
+	HitsMaxSeed:          5000
 	Hue:                  1172
 	LootItemChance:       90
 	LootItemLevel:        8
@@ -48,7 +48,7 @@ ScorpionKing: {
 			Min: 14
 			Max: 140
 		}
-		HitSound: 399
+		HitSound:  399
 		HitPoison: "Lethal"
 	}
 	Equipment: [{

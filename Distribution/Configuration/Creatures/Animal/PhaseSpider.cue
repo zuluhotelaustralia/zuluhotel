@@ -3,7 +3,7 @@ package Animal
 PhaseSpider: {
 	Name:                 "a phase spider"
 	CorpseNameOverride:   "corpse of a phase spider"
-  Str:                  700
+	Str:                  700
 	Int:                  350
 	Dex:                  60
 	PassiveSpeed:         0.2
@@ -13,7 +13,7 @@ PhaseSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  25125
 	ManaMaxSeed:          0
 	MinTameSkill:         150
@@ -33,8 +33,8 @@ PhaseSpider: {
 			Min: 4
 			Max: 32
 		}
-		HitSound: 389
-		HasWebs:  true
+		HitSound:  389
+		HasWebs:   true
 		HitPoison: "Regular"
 	}
 }

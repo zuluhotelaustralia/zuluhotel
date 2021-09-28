@@ -3,7 +3,7 @@ package Gargoyle
 StoneGargoyle: {
 	Name:                 "a stone gargoyle"
 	CorpseNameOverride:   "corpse of a stone gargoyle"
-  Str:                  495
+	Str:                  495
 	Int:                  90
 	Dex:                  80
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ StoneGargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMaxSeed:              495
+	HitsMaxSeed:          495
 	Hue:                  1154
 	LootItemChance:       15
 	LootItemLevel:        2

@@ -3,7 +3,7 @@ package Animal
 GiantScorpion: {
 	Name:                 "a giant scorpion"
 	CorpseNameOverride:   "corpse of a giant scorpion"
-  Str:                  100
+	Str:                  100
 	Int:                  35
 	Dex:                  90
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ GiantScorpion: {
 	CreatureType:         "Animal"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMaxSeed:              100
+	HitsMaxSeed:          100
 	ManaMaxSeed:          25
 	MinTameSkill:         70
 	ProvokeSkillOverride: 90
@@ -29,8 +29,8 @@ GiantScorpion: {
 			Min: 3
 			Max: 24
 		}
-		Skill:    "Swords"
-		HitSound: 399
+		Skill:     "Swords"
+		HitSound:  399
 		HitPoison: "Regular"
 	}
 }

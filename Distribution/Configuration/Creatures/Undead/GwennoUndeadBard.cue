@@ -11,7 +11,7 @@ GwennoUndeadBard: {
 	Body:               401
 	CreatureType:       "Undead"
 	FightMode:          "Closest"
-	HitsMaxSeed:            510
+	HitsMaxSeed:        510
 	LootItemChance:     70
 	LootItemLevel:      5
 	LootTable:          "35"

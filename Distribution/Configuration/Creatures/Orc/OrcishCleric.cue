@@ -3,7 +3,7 @@ package Orc
 OrcishCleric: {
 	Name:                 "<random> the Orcish Cleric"
 	CorpseNameOverride:   "corpse of <random> the Orcish Cleric"
-  Str:                  215
+	Str:                  215
 	Int:                  290
 	Dex:                  90
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ OrcishCleric: {
 	CreatureType:         "Orc"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMaxSeed:              215
+	HitsMaxSeed:          215
 	Hue:                  1401
 	LootItemChance:       60
 	LootItemLevel:        1

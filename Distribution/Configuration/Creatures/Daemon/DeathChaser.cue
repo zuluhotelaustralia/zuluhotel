@@ -3,7 +3,7 @@ package Daemon
 DeathChaser: {
 	Name:                 "a Death Chaser"
 	CorpseNameOverride:   "corpse of a Death Chaser"
-  Str:                  950
+	Str:                  950
 	Int:                  650
 	Dex:                  475
 	AlwaysMurderer:       true
@@ -13,7 +13,7 @@ DeathChaser: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         50
 	FightMode:            "Closest"
-	HitsMaxSeed:              1100
+	HitsMaxSeed:          1100
 	Hue:                  1489
 	LootItemChance:       80
 	LootItemLevel:        5

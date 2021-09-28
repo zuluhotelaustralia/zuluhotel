@@ -3,14 +3,14 @@ package Animal
 WarDog: {
 	Name:                 "a war dog"
 	CorpseNameOverride:   "corpse of a war dog"
-  Str:                  80
+	Str:                  80
 	Int:                  35
 	Dex:                  75
 	BaseSoundID:          133
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         15
-	HitsMaxSeed:              80
+	HitsMaxSeed:          80
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         50

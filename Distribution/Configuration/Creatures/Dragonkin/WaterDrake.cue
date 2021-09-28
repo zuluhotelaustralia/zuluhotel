@@ -3,7 +3,7 @@ package Dragonkin
 WaterDrake: {
 	Name:                 "a Water Drake"
 	CorpseNameOverride:   "corpse of a Water Drake"
-  Str:                  400
+	Str:                  400
 	Int:                  90
 	Dex:                  400
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ WaterDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              400
+	HitsMaxSeed:          400
 	Hue:                  1165
 	LootItemChance:       25
 	LootItemLevel:        4

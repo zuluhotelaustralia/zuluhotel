@@ -3,7 +3,7 @@ package Orc
 OrcCaptain: {
 	Name:                 "<random> the Orc Captain"
 	CorpseNameOverride:   "corpse of <random> the Orc Captain"
-  Str:                  285
+	Str:                  285
 	Int:                  40
 	Dex:                  190
 	AlwaysMurderer:       true
@@ -11,7 +11,7 @@ OrcCaptain: {
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         30
-	HitsMaxSeed:              285
+	HitsMaxSeed:          285
 	Hue:                  33784
 	LootTable:            "42"
 	ManaMaxSeed:          30

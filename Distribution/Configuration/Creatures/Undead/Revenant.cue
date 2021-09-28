@@ -11,7 +11,7 @@ Revenant: {
 	CreatureType:       "Undead"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            135
+	HitsMaxSeed:        135
 	Hue:                1285
 	LootTable:          "14"
 	ManaMaxSeed:        5

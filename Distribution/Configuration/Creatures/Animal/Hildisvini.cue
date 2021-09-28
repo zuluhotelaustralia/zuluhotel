@@ -3,14 +3,14 @@ package Animal
 Hildisvini: {
 	Name:                 "Hildisvini"
 	CorpseNameOverride:   "corpse of Hildisvini"
-  Str:                  70
+	Str:                  70
 	Int:                  55
 	Dex:                  90
 	BaseSoundID:          196
 	Body:                 203
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMaxSeed:              70
+	HitsMaxSeed:          70
 	Hue:                  448
 	ManaMaxSeed:          0
 	MinTameSkill:         35

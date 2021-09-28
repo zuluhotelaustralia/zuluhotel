@@ -3,7 +3,7 @@ package Terathan
 TerathanChampion: {
 	Name:                 "a Terathan Champion"
 	CorpseNameOverride:   "corpse of a Terathan Champion"
-  Str:                  650
+	Str:                  650
 	Int:                  35
 	Dex:                  105
 	ActiveSpeed:          0.15
@@ -16,7 +16,7 @@ TerathanChampion: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              650
+	HitsMaxSeed:          650
 	Hue:                  1127
 	LootTable:            "63"
 	ManaMaxSeed:          0

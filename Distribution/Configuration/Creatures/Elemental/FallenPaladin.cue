@@ -3,13 +3,13 @@ package Elemental
 FallenPaladin: {
 	Name:                 "a Fallen Paladin"
 	CorpseNameOverride:   "corpse of a Fallen Paladin"
-  Str:                  2500
+	Str:                  2500
 	Int:                  250
 	Dex:                  1000
 	AlwaysMurderer:       true
 	CreatureType:         "Elemental"
 	FightMode:            "Closest"
-	HitsMaxSeed:              6000
+	HitsMaxSeed:          6000
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         170

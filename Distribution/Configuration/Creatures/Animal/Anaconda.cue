@@ -3,7 +3,7 @@ package Animal
 Anaconda: {
 	Name:               "the Anaconda"
 	CorpseNameOverride: "corpse of the Anaconda"
-  Str:                2500
+	Str:                2500
 	Int:                0
 	Dex:                500
 	PassiveSpeed:       0.2
@@ -14,7 +14,7 @@ Anaconda: {
 	CreatureType:       "Animal"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMaxSeed:            2250
+	HitsMaxSeed:        2250
 	Hue:                1157
 	ManaMaxSeed:        0
 	StamMaxSeed:        400

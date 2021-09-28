@@ -13,7 +13,7 @@ ElfLord: {
 	Female:               true
 	FightMode:            "Closest"
 	FightRange:           12
-	HitsMaxSeed:              1500
+	HitsMaxSeed:          1500
 	Hue:                  770
 	InitialInnocent:      true
 	LootItemChance:       60

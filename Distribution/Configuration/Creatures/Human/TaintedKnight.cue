@@ -14,7 +14,7 @@ TaintedKnight: {
 	CreatureType:       "Human"
 	VirtualArmor:       50
 	FightMode:          "Closest"
-	HitsMaxSeed:            400
+	HitsMaxSeed:        400
 	Hue:                1302
 	LootItemChance:     50
 	LootItemLevel:      4

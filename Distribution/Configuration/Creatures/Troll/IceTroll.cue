@@ -3,7 +3,7 @@ package Troll
 IceTroll: {
 	Name:                 "an ice troll"
 	CorpseNameOverride:   "corpse of an ice troll"
-  Str:                  250
+	Str:                  250
 	Int:                  70
 	Dex:                  185
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ IceTroll: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  1154
 	LootTable:            "14"
 	ManaMaxSeed:          60

@@ -10,7 +10,7 @@ Dracula: {
 	CreatureType:       "Undead"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMaxSeed:            600
+	HitsMaxSeed:        600
 	LootItemChance:     50
 	LootItemLevel:      5
 	LootTable:          "69"
@@ -27,9 +27,9 @@ Dracula: {
 		MagicResist: 130
 	}
 	Attack: {
-		Ability: "LifeDrainStrike"
+		Ability:       "LifeDrainStrike"
 		AbilityChance: 1.0
-		Speed: 35
+		Speed:         35
 		Damage: {
 			Min: 33
 			Max: 73

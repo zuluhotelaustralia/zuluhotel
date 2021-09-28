@@ -12,7 +12,7 @@ SmallHoardeDemon: {
 	CreatureType:       "Daemon"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMaxSeed:            600
+	HitsMaxSeed:        600
 	LootItemChance:     50
 	LootItemLevel:      5
 	LootTable:          "69"

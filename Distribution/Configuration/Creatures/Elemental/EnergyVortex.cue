@@ -13,7 +13,7 @@ EnergyVortex: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMaxSeed:            350
+	HitsMaxSeed:        350
 	ManaMaxSeed:        125
 	MinTameSkill:       130
 	StamMaxSeed:        80
@@ -30,7 +30,7 @@ EnergyVortex: {
 			Min: 5
 			Max: 20
 		}
-		HitSound: 529
+		HitSound:  529
 		HitPoison: "Regular"
 	}
 }

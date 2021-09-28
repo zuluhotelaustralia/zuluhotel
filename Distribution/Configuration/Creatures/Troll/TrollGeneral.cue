@@ -3,7 +3,7 @@ package Troll
 TrollGeneral: {
 	Name:                 "a troll General"
 	CorpseNameOverride:   "corpse of a troll General"
-  Str:                  295
+	Str:                  295
 	Int:                  80
 	Dex:                  90
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ TrollGeneral: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              295
+	HitsMaxSeed:          295
 	Hue:                  33784
 	LootTable:            "46"
 	ManaMaxSeed:          70

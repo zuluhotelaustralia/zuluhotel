@@ -3,7 +3,7 @@ package Dragonkin
 Dragon: {
 	Name:                 "a dragon"
 	CorpseNameOverride:   "corpse of a dragon"
-  Str:                  750
+	Str:                  750
 	Int:                  110
 	Dex:                  160
 	PassiveSpeed:         0.2
@@ -16,7 +16,7 @@ Dragon: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              750
+	HitsMaxSeed:          750
 	LootItemChance:       60
 	LootItemLevel:        5
 	LootTable:            "37"

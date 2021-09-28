@@ -3,7 +3,7 @@ package Animal
 StoneFrenziedOstard: {
 	Name:                 "a stone frenzied ostard"
 	CorpseNameOverride:   "corpse of a stone frenzied ostard"
-  Str:                  260
+	Str:                  260
 	Int:                  170
 	Dex:                  260
 	BaseSoundID:          629
@@ -12,7 +12,7 @@ StoneFrenziedOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              260
+	HitsMaxSeed:          260
 	Hue:                  1154
 	ManaMaxSeed:          160
 	MinTameSkill:         95

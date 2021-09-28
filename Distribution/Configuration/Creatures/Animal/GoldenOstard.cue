@@ -3,7 +3,7 @@ package Animal
 GoldenOstard: {
 	Name:                 "a golden ostard"
 	CorpseNameOverride:   "corpse of a golden ostard"
-  Str:                  120
+	Str:                  120
 	Int:                  35
 	Dex:                  240
 	AiType:               "AI_Animal"
@@ -13,7 +13,7 @@ GoldenOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              120
+	HitsMaxSeed:          120
 	Hue:                  48
 	ManaMaxSeed:          0
 	MinTameSkill:         50

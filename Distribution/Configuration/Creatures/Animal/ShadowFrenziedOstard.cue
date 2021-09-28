@@ -3,7 +3,7 @@ package Animal
 ShadowFrenziedOstard: {
 	Name:                 "a shadow frenzied ostard"
 	CorpseNameOverride:   "corpse of a shadow frenzied ostard"
-  Str:                  210
+	Str:                  210
 	Int:                  170
 	Dex:                  320
 	BaseSoundID:          629
@@ -12,7 +12,7 @@ ShadowFrenziedOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              210
+	HitsMaxSeed:          210
 	Hue:                  1904
 	ManaMaxSeed:          160
 	MinTameSkill:         85

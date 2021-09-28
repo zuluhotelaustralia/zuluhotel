@@ -3,7 +3,7 @@ package Animal
 BirdDog: {
 	Name:                 "a bird dog"
 	CorpseNameOverride:   "corpse of a bird dog"
-  Str:                  30
+	Str:                  30
 	Int:                  25
 	Dex:                  70
 	AiType:               "AI_Animal"
@@ -11,7 +11,7 @@ BirdDog: {
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMaxSeed:              30
+	HitsMaxSeed:          30
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         10

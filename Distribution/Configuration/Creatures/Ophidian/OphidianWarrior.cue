@@ -3,7 +3,7 @@ package Ophidian
 OphidianWarrior: {
 	Name:                 "an Ophidian Warrior"
 	CorpseNameOverride:   "corpse of an Ophidian Warrior"
-  Str:                  300
+	Str:                  300
 	Int:                  160
 	Dex:                  160
 	ActiveSpeed:          0.15
@@ -16,7 +16,7 @@ OphidianWarrior: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMaxSeed:              600
+	HitsMaxSeed:          600
 	LootTable:            "67"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 110

@@ -14,7 +14,7 @@ NightWalker: {
 	CanSwim:            true
 	CreatureType:       "Elemental"
 	FightMode:          "Closest"
-	HitsMaxSeed:            4000
+	HitsMaxSeed:        4000
 	Hue:                1157
 	LootItemChance:     100
 	LootItemLevel:      9

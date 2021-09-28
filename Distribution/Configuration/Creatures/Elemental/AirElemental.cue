@@ -14,7 +14,7 @@ AirElemental: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            205
+	HitsMaxSeed:        205
 	Hue:                33784
 	LootItemChance:     25
 	LootItemLevel:      3

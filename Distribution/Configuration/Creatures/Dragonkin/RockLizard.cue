@@ -3,7 +3,7 @@ package Dragonkin
 RockLizard: {
 	Name:                 "a rock lizard"
 	CorpseNameOverride:   "corpse of a rock lizard"
-  Str:                  190
+	Str:                  190
 	Int:                  20
 	Dex:                  80
 	BaseSoundID:          660
@@ -13,7 +13,7 @@ RockLizard: {
 	VirtualArmor:         15
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              190
+	HitsMaxSeed:          190
 	Hue:                  1546
 	ManaMaxSeed:          20
 	MinTameSkill:         75

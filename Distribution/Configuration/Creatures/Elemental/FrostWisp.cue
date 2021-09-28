@@ -3,7 +3,7 @@ package Elemental
 FrostWisp: {
 	Name:                 "a frost wisp"
 	CorpseNameOverride:   "corpse of a frost wisp"
-  Str:                  900
+	Str:                  900
 	Int:                  1600
 	Dex:                  575
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ FrostWisp: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              650
+	HitsMaxSeed:          650
 	Hue:                  1154
 	LootItemChance:       80
 	LootItemLevel:        6

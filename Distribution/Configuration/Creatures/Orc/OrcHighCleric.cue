@@ -13,7 +13,7 @@ OrcHighCleric: {
 	CreatureType:       "Orc"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMaxSeed:            1200
+	HitsMaxSeed:        1200
 	Hue:                1170
 	LootItemChance:     100
 	LootItemLevel:      6

@@ -11,7 +11,7 @@ Necromancer: {
 	VirtualArmor:         25
 	HideType:             "Necromancer"
 	Hides:                3
-	HitsMaxSeed:              130
+	HitsMaxSeed:          130
 	LootItemChance:       50
 	LootItemLevel:        3
 	LootTable:            "46"

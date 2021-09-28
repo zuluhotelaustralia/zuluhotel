@@ -16,7 +16,7 @@ KingOfNujelm: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMaxSeed:            800
+	HitsMaxSeed:        800
 	Hue:                1300
 	LootItemChance:     50
 	LootItemLevel:      6

@@ -3,14 +3,14 @@ package Slime
 BlackSlime: {
 	Name:                 "a black slime"
 	CorpseNameOverride:   "corpse of a black slime"
-  Str:                  230
+	Str:                  230
 	Int:                  15
 	Dex:                  50
 	BaseSoundID:          456
 	Body:                 51
 	CreatureType:         "Slime"
 	VirtualArmor:         10
-	HitsMaxSeed:              230
+	HitsMaxSeed:          230
 	Hue:                  1109
 	LootTable:            "58"
 	ManaMaxSeed:          5

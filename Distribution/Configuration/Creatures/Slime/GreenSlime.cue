@@ -3,14 +3,14 @@ package Slime
 GreenSlime: {
 	Name:                 "a green slime"
 	CorpseNameOverride:   "corpse of a green slime"
-  Str:                  140
+	Str:                  140
 	Int:                  15
 	Dex:                  50
 	BaseSoundID:          456
 	Body:                 51
 	CreatureType:         "Slime"
 	VirtualArmor:         20
-	HitsMaxSeed:              140
+	HitsMaxSeed:          140
 	Hue:                  2001
 	ManaMaxSeed:          0
 	MinTameSkill:         40

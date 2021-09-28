@@ -15,7 +15,7 @@ LicheLord: {
 	FightMode:          "Closest"
 	HideType:           "Liche"
 	Hides:              3
-	HitsMaxSeed:            450
+	HitsMaxSeed:        450
 	Hue:                17969
 	LootItemChance:     40
 	LootItemLevel:      3

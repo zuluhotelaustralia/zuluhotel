@@ -15,7 +15,7 @@ OphidianElder: {
 	CreatureType:       "Ophidian"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            960
+	HitsMaxSeed:        960
 	Hue:                1250
 	LootItemChance:     50
 	LootItemLevel:      3

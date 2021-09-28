@@ -3,7 +3,7 @@ package Animal
 HuntingDog: {
 	Name:                 "a hunting dog"
 	CorpseNameOverride:   "corpse of a hunting dog"
-  Str:                  45
+	Str:                  45
 	Int:                  25
 	Dex:                  80
 	AiType:               "AI_Animal"
@@ -11,7 +11,7 @@ HuntingDog: {
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMaxSeed:              45
+	HitsMaxSeed:          45
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         10

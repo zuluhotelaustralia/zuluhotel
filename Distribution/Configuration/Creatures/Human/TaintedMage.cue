@@ -13,7 +13,7 @@ TaintedMage: {
 	CreatureType:       "Human"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMaxSeed:            200
+	HitsMaxSeed:        200
 	Hue:                1
 	LootItemChance:     50
 	LootItemLevel:      4

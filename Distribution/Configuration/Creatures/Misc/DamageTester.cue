@@ -8,7 +8,7 @@ DamageTester: {
 	Dex:                200
 	AiType:             "AI_Animal"
 	AlwaysMurderer:     true
-	HitsMaxSeed:            100000
+	HitsMaxSeed:        100000
 	Hue:                33784
 	ManaMaxSeed:        200
 	StamMaxSeed:        200

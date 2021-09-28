@@ -12,7 +12,7 @@ Corpser: {
 	CreatureType:       "Plant"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            150
+	HitsMaxSeed:        150
 	LootTable:          "32"
 	ManaMaxSeed:        35
 	StamMaxSeed:        95

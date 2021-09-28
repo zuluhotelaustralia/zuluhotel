@@ -3,7 +3,7 @@ package Slime
 Slime: {
 	Name:                 "a slime"
 	CorpseNameOverride:   "corpse of a slime"
-  Str:                  40
+	Str:                  40
 	Int:                  15
 	Dex:                  50
 	AlwaysMurderer:       true
@@ -11,7 +11,7 @@ Slime: {
 	Body:                 51
 	CreatureType:         "Slime"
 	VirtualArmor:         5
-	HitsMaxSeed:              40
+	HitsMaxSeed:          40
 	LootTable:            "62"
 	ManaMaxSeed:          0
 	MinTameSkill:         20

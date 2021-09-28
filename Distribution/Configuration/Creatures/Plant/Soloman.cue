@@ -13,7 +13,7 @@ Soloman: {
 	CreatureType:       "Plant"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMaxSeed:            2250
+	HitsMaxSeed:        2250
 	Hue:                1497
 	LootItemChance:     90
 	LootItemLevel:      8

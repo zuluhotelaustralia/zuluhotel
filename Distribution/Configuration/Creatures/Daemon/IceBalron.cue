@@ -15,7 +15,7 @@ IceBalron: {
 	CreatureType:       "Daemon"
 	VirtualArmor:       75
 	FightMode:          "Closest"
-	HitsMaxSeed:            1100
+	HitsMaxSeed:        1100
 	Hue:                1152
 	LootItemChance:     95
 	LootItemLevel:      7

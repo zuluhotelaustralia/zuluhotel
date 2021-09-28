@@ -13,7 +13,7 @@ Sapper: {
 	CreatureType:       "Orc"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMaxSeed:            205
+	HitsMaxSeed:        205
 	Hue:                1295
 	LootItemChance:     6
 	LootItemLevel:      3

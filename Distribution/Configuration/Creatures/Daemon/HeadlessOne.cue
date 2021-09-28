@@ -3,7 +3,7 @@ package Daemon
 HeadlessOne: {
 	Name:                 "a headless one"
 	CorpseNameOverride:   "corpse of a headless one"
-  Str:                  60
+	Str:                  60
 	Int:                  25
 	Dex:                  60
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ HeadlessOne: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         5
 	FightMode:            "Closest"
-	HitsMaxSeed:              60
+	HitsMaxSeed:          60
 	LootTable:            "3"
 	ManaMaxSeed:          15
 	ProvokeSkillOverride: 40

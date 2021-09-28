@@ -3,7 +3,7 @@ package Misc
 ForestWarhorse: {
 	Name:                 "a forest warhorse"
 	CorpseNameOverride:   "corpse of a forest warhorse"
-  Str:                  500
+	Str:                  500
 	Int:                  500
 	Dex:                  500
 	BaseSoundID:          168
@@ -11,7 +11,7 @@ ForestWarhorse: {
 	VirtualArmor:         40
 	Fame:                 1
 	FightMode:            "Closest"
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Karma:                1
 	LootItemChance:       100
 	LootTable:            "26"

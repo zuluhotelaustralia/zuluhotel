@@ -3,7 +3,7 @@ package Daemon
 Gremlin: {
 	Name:                 "a gremlin"
 	CorpseNameOverride:   "corpse of a gremlin"
-  Str:                  205
+	Str:                  205
 	Int:                  85
 	Dex:                  60
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ Gremlin: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMaxSeed:              205
+	HitsMaxSeed:          205
 	Hue:                  2001
 	LootTable:            "58"
 	ManaMaxSeed:          75

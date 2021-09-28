@@ -3,7 +3,7 @@ package Beholder
 Gazer: {
 	Name:                 "a gazer"
 	CorpseNameOverride:   "corpse of a gazer"
-  Str:                  150
+	Str:                  150
 	Int:                  205
 	Dex:                  90
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ Gazer: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMaxSeed:              150
+	HitsMaxSeed:          150
 	LootItemChance:       100
 	LootItemLevel:        2
 	LootTable:            "30"

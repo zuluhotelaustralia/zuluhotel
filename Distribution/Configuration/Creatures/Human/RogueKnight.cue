@@ -10,7 +10,7 @@ RogueKnight: {
 	CreatureType:         "Human"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  33784
 	LootItemChance:       1
 	LootTable:            "59"

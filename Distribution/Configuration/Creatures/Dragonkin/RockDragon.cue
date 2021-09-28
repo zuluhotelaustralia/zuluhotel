@@ -3,7 +3,7 @@ package Dragonkin
 RockDragon: {
 	Name:                 "a Rock Dragon"
 	CorpseNameOverride:   "corpse of a Rock Dragon"
-  Str:                  800
+	Str:                  800
 	Int:                  400
 	Dex:                  60
 	PassiveSpeed:         0.2
@@ -16,7 +16,7 @@ RockDragon: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              800
+	HitsMaxSeed:          800
 	Hue:                  1160
 	LootItemChance:       75
 	LootItemLevel:        5

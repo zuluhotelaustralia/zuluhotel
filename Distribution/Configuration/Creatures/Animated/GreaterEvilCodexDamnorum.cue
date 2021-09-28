@@ -15,7 +15,7 @@ GreaterEvilCodexDamnorum: {
 	CreatureType:       "Animated"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMaxSeed:            1850
+	HitsMaxSeed:        1850
 	Hue:                1645
 	LootItemChance:     75
 	LootItemLevel:      6

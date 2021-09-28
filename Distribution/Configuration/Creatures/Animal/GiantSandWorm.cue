@@ -3,7 +3,7 @@ package Animal
 GiantSandWorm: {
 	Name:                 "a Giant Sand Worm"
 	CorpseNameOverride:   "corpse of a Giant Sand Worm"
-  Str:                  300
+	Str:                  300
 	Int:                  30
 	Dex:                  210
 	BaseSoundID:          447
@@ -12,7 +12,7 @@ GiantSandWorm: {
 	VirtualArmor:         30
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMaxSeed:              300
+	HitsMaxSeed:          300
 	Hue:                  351
 	LootTable:            "59"
 	ManaMaxSeed:          56

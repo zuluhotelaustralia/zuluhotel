@@ -3,7 +3,7 @@ package Dragonkin
 FrostDrake: {
 	Name:                 "a frost drake"
 	CorpseNameOverride:   "corpse of a frost drake"
-  Str:                  350
+	Str:                  350
 	Int:                  385
 	Dex:                  290
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ FrostDrake: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  1154
 	LootItemChance:       60
 	LootItemLevel:        3

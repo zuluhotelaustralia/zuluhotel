@@ -3,7 +3,7 @@ package Daemon
 WingedAvenger: {
 	Name:                 "a Winged Avenger"
 	CorpseNameOverride:   "corpse of a Winged Avenger"
-  Str:                  305
+	Str:                  305
 	Int:                  295
 	Dex:                  350
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ WingedAvenger: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              305
+	HitsMaxSeed:          305
 	Hue:                  1109
 	LootItemChance:       50
 	LootItemLevel:        2

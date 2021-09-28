@@ -3,7 +3,7 @@ package Terathan
 TerathanWarrior: {
 	Name:                 "a Terathan Warrior"
 	CorpseNameOverride:   "corpse of a Terathan Warrior"
-  Str:                  550
+	Str:                  550
 	Int:                  35
 	Dex:                  105
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ TerathanWarrior: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              550
+	HitsMaxSeed:          550
 	LootTable:            "63"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

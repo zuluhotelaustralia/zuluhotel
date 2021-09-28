@@ -3,7 +3,7 @@ package Gargoyle
 Gargoyle: {
 	Name:                 "a gargoyle"
 	CorpseNameOverride:   "corpse of a gargoyle"
-  Str:                  130
+	Str:                  130
 	Int:                  210
 	Dex:                  80
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ Gargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              130
+	HitsMaxSeed:          130
 	LootItemChance:       10
 	LootItemLevel:        2
 	LootTable:            "38"
