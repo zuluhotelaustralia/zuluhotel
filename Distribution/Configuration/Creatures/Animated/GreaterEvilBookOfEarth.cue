@@ -15,7 +15,7 @@ GreaterEvilBookOfEarth: {
 	CreatureType:       "Animated"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMax:            1850
+	HitsMaxSeed:            1850
 	Hue:                1645
 	LootItemChance:     65
 	LootItemLevel:      7

@@ -12,7 +12,7 @@ Harpy: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMax:              85
+	HitsMaxSeed:              85
 	LootTable:            "29"
 	ManaMaxSeed:          95
 	ProvokeSkillOverride: 75

@@ -11,7 +11,7 @@ GuardDog: {
 	Body:                 225
 	CreatureType:         "Animal"
 	VirtualArmor:         15
-	HitsMax:              50
+	HitsMaxSeed:              50
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         10

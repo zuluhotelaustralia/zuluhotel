@@ -12,7 +12,7 @@ Efreeti: {
 	Body:               13
 	CreatureType:       "Elemental"
 	VirtualArmor:       40
-	HitsMax:            350
+	HitsMaxSeed:            350
 	Hue:                93
 	LootItemChance:     50
 	LootItemLevel:      4

@@ -12,7 +12,7 @@ BladeSpirit: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       15
 	FightMode:          "Closest"
-	HitsMax:            200
+	HitsMaxSeed:            200
 	Hue:                33784
 	ManaMaxSeed:        0
 	StamMaxSeed:        50

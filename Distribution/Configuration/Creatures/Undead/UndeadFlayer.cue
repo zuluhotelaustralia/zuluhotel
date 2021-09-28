@@ -15,7 +15,7 @@ UndeadFlayer: {
 	FightMode:          "Closest"
 	HideType:           "Liche"
 	Hides:              3
-	HitsMax:            1200
+	HitsMaxSeed:            1200
 	Hue:                1172
 	LootItemChance:     100
 	LootItemLevel:      6

@@ -13,7 +13,7 @@ Hero: {
 	ClassType:          "Warrior"
 	VirtualArmor:       80
 	FightMode:          "Closest"
-	HitsMax:            2000
+	HitsMaxSeed:            2000
 	Hue:                1002
 	LootTable:          "59"
 	ManaMaxSeed:        200

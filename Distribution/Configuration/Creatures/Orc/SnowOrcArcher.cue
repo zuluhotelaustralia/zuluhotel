@@ -13,7 +13,7 @@ SnowOrcArcher: {
 	CreatureType:         "Orc"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              125
+	HitsMaxSeed:              125
 	Hue:                  1154
 	LootTable:            "72"
 	ManaMaxSeed:          0

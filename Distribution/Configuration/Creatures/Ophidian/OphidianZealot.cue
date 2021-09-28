@@ -15,7 +15,7 @@ OphidianZealot: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              375
+	HitsMaxSeed:              375
 	LootTable:            "66"
 	ManaMaxSeed:          400
 	ProvokeSkillOverride: 120

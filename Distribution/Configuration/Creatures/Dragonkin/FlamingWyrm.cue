@@ -13,7 +13,7 @@ FlamingWyrm: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
 	FightMode:            "Closest"
-	HitsMax:              2000
+	HitsMaxSeed:              2000
 	Hue:                  1305
 	LootItemChance:       65
 	LootItemLevel:        6

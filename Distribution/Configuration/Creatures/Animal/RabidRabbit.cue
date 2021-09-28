@@ -10,7 +10,7 @@ RabidRabbit: {
 	Body:                 205
 	CreatureType:         "Animal"
 	VirtualArmor:         20
-	HitsMax:              90
+	HitsMaxSeed:              90
 	Hue:                  1154
 	ManaMaxSeed:          15
 	MinTameSkill:         55

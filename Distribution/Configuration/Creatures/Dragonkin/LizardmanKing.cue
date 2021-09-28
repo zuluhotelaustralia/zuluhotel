@@ -14,7 +14,7 @@ LizardmanKing: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              300
+	HitsMaxSeed:              300
 	Hue:                  1125
 	LootItemChance:       50
 	LootItemLevel:        3

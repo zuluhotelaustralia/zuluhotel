@@ -13,7 +13,7 @@ OrcishCleric: {
 	CreatureType:         "Orc"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMax:              215
+	HitsMaxSeed:              215
 	Hue:                  1401
 	LootItemChance:       60
 	LootItemLevel:        1

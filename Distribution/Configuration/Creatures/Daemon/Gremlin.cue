@@ -12,7 +12,7 @@ Gremlin: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMax:              205
+	HitsMaxSeed:              205
 	Hue:                  2001
 	LootTable:            "58"
 	ManaMaxSeed:          75

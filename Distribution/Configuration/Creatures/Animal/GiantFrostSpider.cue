@@ -12,7 +12,7 @@ GiantFrostSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              90
+	HitsMaxSeed:              90
 	Hue:                  1154
 	ManaMaxSeed:          0
 	MinTameSkill:         80

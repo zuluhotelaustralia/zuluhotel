@@ -8,7 +8,7 @@ Pirate: {
 	Dex:                210
 	CreatureType:       "Human"
 	VirtualArmor:       25
-	HitsMax:            110
+	HitsMaxSeed:            110
 	Hue:                33784
 	LootTable:          "47"
 	ManaMaxSeed:        0

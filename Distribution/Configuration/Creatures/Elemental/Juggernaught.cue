@@ -15,7 +15,7 @@ Juggernaught: {
 	VirtualArmor:       100
 	FightMode:          "Closest"
 	FightRange:         6
-	HitsMax:            2000
+	HitsMaxSeed:            2000
 	LootItemChance:     50
 	LootItemLevel:      6
 	LootTable:          "9"

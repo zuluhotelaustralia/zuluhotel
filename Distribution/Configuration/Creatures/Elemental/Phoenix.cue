@@ -14,7 +14,7 @@ Phoenix: {
 	VirtualArmor:         40
 	HideType:             "Lava"
 	Hides:                2
-	HitsMax:              450
+	HitsMaxSeed:              450
 	Hue:                  1645
 	LootItemChance:       95
 	LootItemLevel:        4

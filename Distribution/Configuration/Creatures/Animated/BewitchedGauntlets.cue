@@ -11,7 +11,7 @@ BewitchedGauntlets: {
 	Body:                 530
 	CreatureType:         "Animated"
 	FightMode:            "Closest"
-	HitsMax:              210
+	HitsMaxSeed:              210
 	LootItemChance:       1
 	LootTable:            "48"
 	ManaMaxSeed:          0

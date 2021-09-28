@@ -10,7 +10,7 @@ AnUndeadPirate: {
 	CreatureType:       "Undead"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMax:            110
+	HitsMaxSeed:            110
 	LootItemChance:     10
 	LootItemLevel:      1
 	LootTable:          "47"

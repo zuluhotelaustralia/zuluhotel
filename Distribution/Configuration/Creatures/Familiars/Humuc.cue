@@ -14,7 +14,7 @@ Humuc: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         100
 	FightMode:            "Aggressor"
-	HitsMax:              20
+	HitsMaxSeed:              20
 	Hue:                  746
 	InitialInnocent:      true
 	ManaMaxSeed:          75

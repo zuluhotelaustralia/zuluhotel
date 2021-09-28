@@ -14,7 +14,7 @@ FrostWisp: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              650
+	HitsMaxSeed:              650
 	Hue:                  1154
 	LootItemChance:       80
 	LootItemLevel:        6

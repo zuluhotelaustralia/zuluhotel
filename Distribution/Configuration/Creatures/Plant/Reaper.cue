@@ -12,7 +12,7 @@ Reaper: {
 	CreatureType:       "Plant"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMax:            210
+	HitsMaxSeed:            210
 	LootTable:          "34"
 	ManaMaxSeed:        25
 	StamMaxSeed:        100

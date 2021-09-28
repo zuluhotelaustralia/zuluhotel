@@ -13,7 +13,7 @@ Imp: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMax:              175
+	HitsMaxSeed:              175
 	Hue:                  35
 	LootTable:            "58"
 	ManaMaxSeed:          0

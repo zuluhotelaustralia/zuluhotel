@@ -13,7 +13,7 @@ IceElemental: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMax:            140
+	HitsMaxSeed:            140
 	Hue:                1153
 	LootItemChance:     50
 	LootItemLevel:      3

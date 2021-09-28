@@ -14,7 +14,7 @@ TrollGeneral: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              295
+	HitsMaxSeed:              295
 	Hue:                  33784
 	LootTable:            "46"
 	ManaMaxSeed:          70

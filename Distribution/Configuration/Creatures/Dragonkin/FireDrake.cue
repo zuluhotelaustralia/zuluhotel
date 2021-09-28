@@ -15,7 +15,7 @@ FireDrake: {
 	FightMode:            "Closest"
 	HideType:             "Lava"
 	Hides:                5
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  1158
 	LootItemChance:       25
 	LootItemLevel:        4

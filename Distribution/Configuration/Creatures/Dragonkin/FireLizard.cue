@@ -15,7 +15,7 @@ FireLizard: {
 	VirtualArmor:         10
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              140
+	HitsMaxSeed:              140
 	Hue:                  1882
 	ManaMaxSeed:          20
 	MinTameSkill:         90

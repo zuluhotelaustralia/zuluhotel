@@ -55,7 +55,7 @@ namespace Server.Mobiles
         public PropValue FightRange { get; set; } = 1;
         public HideType? HideType { get; set; }
         public int? Hides { get; set; }
-        public PropValue HitsMax { get; set; } = 1;
+        public PropValue HitsMaxSeed { get; set; } = 1;
         public PropValue Hue { get; set; } = 0;
         public bool? InitialInnocent { get; set; }
         public PropValue Karma { get; set; } = 0;
@@ -105,9 +105,9 @@ namespace Server.Mobiles
 
             MapAction(this, dest);
 
-            dest.SetStam(dest.StamMax);
-            dest.SetMana(dest.ManaMax);
-            dest.SetHits(dest.HitsMax);
+            dest.SetStam(StamMaxSeed);
+            dest.SetMana(ManaMaxSeed);
+            dest.SetHits(HitsMaxSeed);
 
             // Non-mappable props
             if (Skills.Any())

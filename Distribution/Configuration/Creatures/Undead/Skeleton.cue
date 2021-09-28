@@ -12,7 +12,7 @@ Skeleton: {
 	CreatureType:       "Undead"
 	VirtualArmor:       5
 	FightMode:          "Closest"
-	HitsMax:            60
+	HitsMaxSeed:            60
 	Hue:                33784
 	LootTable:          "15"
 	ManaMaxSeed:        0

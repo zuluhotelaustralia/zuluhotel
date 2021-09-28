@@ -10,7 +10,7 @@ WarDog: {
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         15
-	HitsMax:              80
+	HitsMaxSeed:              80
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         50

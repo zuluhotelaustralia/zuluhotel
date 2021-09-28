@@ -18,7 +18,7 @@ EarthQuaker: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	Hue:                1000
 	LootItemChance:     50
 	LootItemLevel:      6

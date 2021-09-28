@@ -12,7 +12,7 @@ OrcishLord: {
 	CreatureType:         "Orc"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              205
+	HitsMaxSeed:              205
 	Hue:                  33784
 	LootItemChance:       6
 	LootItemLevel:        3

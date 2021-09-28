@@ -12,7 +12,7 @@ Ettin: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMax:              140
+	HitsMaxSeed:              140
 	Hue:                  33784
 	LootItemChance:       2
 	LootItemLevel:        1

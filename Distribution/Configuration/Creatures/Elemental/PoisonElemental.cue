@@ -12,7 +12,7 @@ PoisonElemental: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  2006
 	LootItemChance:       50
 	LootItemLevel:        4

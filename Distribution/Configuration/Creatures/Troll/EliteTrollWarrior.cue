@@ -12,7 +12,7 @@ EliteTrollWarrior: {
 	VirtualArmor:         20
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              235
+	HitsMaxSeed:              235
 	Hue:                  33784
 	LootTable:            "43"
 	ManaMaxSeed:          55

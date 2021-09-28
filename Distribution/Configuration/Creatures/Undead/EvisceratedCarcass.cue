@@ -13,7 +13,7 @@ EvisceratedCarcass: {
 	CreatureType:       "Undead"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMax:            300
+	HitsMaxSeed:            300
 	Hue:                1290
 	LootItemChance:     50
 	LootItemLevel:      4

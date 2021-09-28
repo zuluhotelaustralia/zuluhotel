@@ -15,7 +15,7 @@ LizardShaman: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              170
+	HitsMaxSeed:              170
 	Hue:                  1218
 	LootItemChance:       50
 	LootItemLevel:        1

@@ -12,7 +12,7 @@ Seserpent: {
 	VirtualArmor:         15
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  33784
 	LootTable:            "50"
 	ManaMaxSeed:          0

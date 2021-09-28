@@ -19,7 +19,7 @@ Balron: {
 	FightMode:          "Closest"
 	HideType:           "Balron"
 	Hides:              1
-	HitsMax:            1100
+	HitsMaxSeed:            1100
 	Hue:                16385
 	LootItemChance:     80
 	LootItemLevel:      6

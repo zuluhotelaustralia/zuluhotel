@@ -14,7 +14,7 @@ RadiantWisp: {
 	CanSwim:              true
 	CreatureType:         "Elemental"
 	VirtualArmor:         40
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  1154
 	InitialInnocent:      true
 	LootItemChance:       25

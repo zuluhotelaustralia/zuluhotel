@@ -12,7 +12,7 @@ Raptor: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              110
+	HitsMaxSeed:              110
 	Hue:                  1109
 	LootTable:            "48"
 	ManaMaxSeed:          80

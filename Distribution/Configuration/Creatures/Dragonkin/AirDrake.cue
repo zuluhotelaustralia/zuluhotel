@@ -15,7 +15,7 @@ AirDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              400
+	HitsMaxSeed:              400
 	Hue:                  1170
 	LootItemChance:       25
 	LootItemLevel:        4

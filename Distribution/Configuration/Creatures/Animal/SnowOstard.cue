@@ -13,7 +13,7 @@ SnowOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              210
+	HitsMaxSeed:              210
 	Hue:                  1156
 	ManaMaxSeed:          100
 	MinTameSkill:         95

@@ -12,7 +12,7 @@ Kraken: {
 	VirtualArmor:         45
 	Fame:                 5
 	FightMode:            "Closest"
-	HitsMax:              468
+	HitsMaxSeed:              468
 	Karma:                5
 	LootItemChance:       100
 	LootTable:            "100"

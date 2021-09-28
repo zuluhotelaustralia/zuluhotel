@@ -16,7 +16,7 @@ ShadowDestroyer: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
 	FightMode:            "Closest"
-	HitsMax:              1200
+	HitsMaxSeed:              1200
 	Hue:                  1172
 	LootItemChance:       90
 	LootItemLevel:        7

@@ -14,7 +14,7 @@ BehemothLord: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	Hue:                54
 	LootItemChance:     80
 	LootItemLevel:      7

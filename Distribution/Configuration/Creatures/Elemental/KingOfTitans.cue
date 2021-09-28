@@ -12,7 +12,7 @@ KingOfTitans: {
 	Body:               189
 	CreatureType:       "Elemental"
 	VirtualArmor:       100
-	HitsMax:            6750
+	HitsMaxSeed:            6750
 	Hue:                1172
 	LootItemChance:     100
 	LootItemLevel:      9

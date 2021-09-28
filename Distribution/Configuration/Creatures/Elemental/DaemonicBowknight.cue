@@ -14,7 +14,7 @@ DaemonicBowknight: {
 	VirtualArmor:         45
 	FightMode:            "Closest"
 	FightRange:           7
-	HitsMax:              2250
+	HitsMaxSeed:              2250
 	Hue:                  16385
 	LootItemChance:       50
 	LootItemLevel:        5

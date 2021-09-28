@@ -7,7 +7,7 @@ BewitchedPeasant: {
 	Int:                60
 	Dex:                60
 	CreatureType:       "Human"
-	HitsMax:            80
+	HitsMaxSeed:            80
 	Hue:                33784
 	LootTable:          "47"
 	ManaMaxSeed:        0

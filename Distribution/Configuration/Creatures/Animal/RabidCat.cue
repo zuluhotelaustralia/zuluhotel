@@ -10,7 +10,7 @@ RabidCat: {
 	Body:                 201
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMax:              22
+	HitsMaxSeed:              22
 	Hue:                  33784
 	ManaMaxSeed:          15
 	MinTameSkill:         30

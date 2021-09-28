@@ -14,7 +14,7 @@ Anaconda: {
 	CreatureType:       "Animal"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	Hue:                1157
 	ManaMaxSeed:        0
 	StamMaxSeed:        400

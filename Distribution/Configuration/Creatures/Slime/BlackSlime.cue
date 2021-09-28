@@ -10,7 +10,7 @@ BlackSlime: {
 	Body:                 51
 	CreatureType:         "Slime"
 	VirtualArmor:         10
-	HitsMax:              230
+	HitsMaxSeed:              230
 	Hue:                  1109
 	LootTable:            "58"
 	ManaMaxSeed:          5

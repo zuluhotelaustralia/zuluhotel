@@ -16,7 +16,7 @@ OphidianKnightErrant: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              1750
+	HitsMaxSeed:              1750
 	LootTable:            "71"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 120

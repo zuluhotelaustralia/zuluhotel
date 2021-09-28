@@ -14,7 +14,7 @@ Wyvern: {
 	FightMode:            "Closest"
 	HideType:             "Wyrm"
 	Hides:                5
-	HitsMax:              450
+	HitsMaxSeed:              450
 	Hue:                  1304
 	LootItemChance:       25
 	LootItemLevel:        4

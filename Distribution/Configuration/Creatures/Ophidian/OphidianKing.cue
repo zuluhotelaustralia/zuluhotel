@@ -15,7 +15,7 @@ OphidianKing: {
 	CreatureType:         "Ophidian"
 	VirtualArmor:         50
 	FightMode:            "Closest"
-	HitsMax:              2050
+	HitsMaxSeed:              2050
 	Hue:                  1209
 	LootItemChance:       75
 	LootItemLevel:        7

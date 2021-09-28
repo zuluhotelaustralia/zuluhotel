@@ -12,7 +12,7 @@ DarkSteed: {
 	VirtualArmor:         40
 	Fame:                 4
 	FightMode:            "Closest"
-	HitsMax:              1200
+	HitsMaxSeed:              1200
 	Karma:                4
 	LootItemChance:       100
 	LootTable:            "26"

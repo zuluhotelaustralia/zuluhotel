@@ -17,7 +17,7 @@ ShadowDragon: {
 	FightMode:          "Closest"
 	HideType:           "Dragon"
 	Hides:              5
-	HitsMax:            3000
+	HitsMaxSeed:            3000
 	Hue:                17969
 	LootItemChance:     75
 	LootItemLevel:      4

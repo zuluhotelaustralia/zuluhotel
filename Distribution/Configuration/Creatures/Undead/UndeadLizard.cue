@@ -15,7 +15,7 @@ UndeadLizard: {
 	FightMode:          "Closest"
 	HideType:           "Lizard"
 	Hides:              5
-	HitsMax:            290
+	HitsMaxSeed:            290
 	Hue:                17969
 	LootItemChance:     75
 	LootItemLevel:      3

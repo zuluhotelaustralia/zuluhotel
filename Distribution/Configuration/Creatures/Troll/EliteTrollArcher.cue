@@ -15,7 +15,7 @@ EliteTrollArcher: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              200
+	HitsMaxSeed:              200
 	Hue:                  33784
 	LootTable:            "41"
 	ManaMaxSeed:          0

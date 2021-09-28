@@ -14,7 +14,7 @@ LargeHoardeDemon: {
 	CreatureType:       "Daemon"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	LootItemChance:     10
 	LootItemLevel:      4
 	LootTable:          "9"

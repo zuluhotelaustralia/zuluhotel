@@ -14,7 +14,7 @@ DarkStrangler: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMax:            400
+	HitsMaxSeed:            400
 	Hue:                1285
 	LootItemChance:     50
 	LootItemLevel:      4

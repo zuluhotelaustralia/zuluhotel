@@ -12,7 +12,7 @@ IceFrenziedOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              225
+	HitsMaxSeed:              225
 	Hue:                  1152
 	ManaMaxSeed:          125
 	MinTameSkill:         105

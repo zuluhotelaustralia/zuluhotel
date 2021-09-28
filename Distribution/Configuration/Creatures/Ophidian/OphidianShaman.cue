@@ -15,7 +15,7 @@ OphidianShaman: {
 	FightMode:          "Closest"
 	HideType:           "Serpent"
 	Hides:              5
-	HitsMax:            500
+	HitsMaxSeed:            500
 	Hue:                88
 	LootItemChance:     30
 	LootItemLevel:      4

@@ -15,7 +15,7 @@ Strangler: {
 	CreatureType:       "Plant"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMax:            2000
+	HitsMaxSeed:            2000
 	Hue:                1175
 	LootItemChance:     100
 	LootItemLevel:      8

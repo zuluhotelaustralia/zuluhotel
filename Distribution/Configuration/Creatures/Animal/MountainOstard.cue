@@ -13,7 +13,7 @@ MountainOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              120
+	HitsMaxSeed:              120
 	Hue:                  1160
 	ManaMaxSeed:          0
 	MinTameSkill:         75

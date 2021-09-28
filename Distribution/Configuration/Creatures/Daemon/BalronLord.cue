@@ -18,7 +18,7 @@ BalronLord: {
 	VirtualArmor:       75
 	FightMode:          "Closest"
 	FightRange:         3
-	HitsMax:            2200
+	HitsMaxSeed:            2200
 	Hue:                1108
 	LootItemChance:     100
 	LootItemLevel:      9

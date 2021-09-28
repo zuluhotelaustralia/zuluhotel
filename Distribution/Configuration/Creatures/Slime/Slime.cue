@@ -11,7 +11,7 @@ Slime: {
 	Body:                 51
 	CreatureType:         "Slime"
 	VirtualArmor:         5
-	HitsMax:              40
+	HitsMaxSeed:              40
 	LootTable:            "62"
 	ManaMaxSeed:          0
 	MinTameSkill:         20

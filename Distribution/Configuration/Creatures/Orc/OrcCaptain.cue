@@ -11,7 +11,7 @@ OrcCaptain: {
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         30
-	HitsMax:              285
+	HitsMaxSeed:              285
 	Hue:                  33784
 	LootTable:            "42"
 	ManaMaxSeed:          30

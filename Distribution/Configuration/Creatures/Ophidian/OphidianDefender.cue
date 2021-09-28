@@ -18,7 +18,7 @@ OphidianDefender: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              250
+	HitsMaxSeed:              250
 	LootTable:            "70"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 110

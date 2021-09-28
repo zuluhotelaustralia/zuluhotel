@@ -13,7 +13,7 @@ FireElementalLord: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMax:            300
+	HitsMaxSeed:            300
 	Hue:                137
 	LootItemChance:     60
 	LootItemLevel:      4

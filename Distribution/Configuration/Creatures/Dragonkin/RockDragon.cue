@@ -16,7 +16,7 @@ RockDragon: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              800
+	HitsMaxSeed:              800
 	Hue:                  1160
 	LootItemChance:       75
 	LootItemLevel:        5

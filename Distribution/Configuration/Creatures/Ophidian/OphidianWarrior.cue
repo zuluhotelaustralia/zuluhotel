@@ -16,7 +16,7 @@ OphidianWarrior: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              600
+	HitsMaxSeed:              600
 	LootTable:            "67"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 110

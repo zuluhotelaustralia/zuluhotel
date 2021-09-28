@@ -13,7 +13,7 @@ FrigidEye: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  1154
 	LootItemChance:       2
 	LootTable:            "45"

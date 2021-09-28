@@ -10,7 +10,7 @@ Hildisvini: {
 	Body:                 203
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMax:              70
+	HitsMaxSeed:              70
 	Hue:                  448
 	ManaMaxSeed:          0
 	MinTameSkill:         35

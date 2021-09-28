@@ -12,7 +12,7 @@ StoneFrenziedOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              260
+	HitsMaxSeed:              260
 	Hue:                  1154
 	ManaMaxSeed:          160
 	MinTameSkill:         95

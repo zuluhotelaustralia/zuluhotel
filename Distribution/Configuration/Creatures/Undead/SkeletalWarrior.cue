@@ -12,7 +12,7 @@ SkeletalWarrior: {
 	CreatureType:       "Undead"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMax:            300
+	HitsMaxSeed:            300
 	Hue:                1127
 	LootItemChance:     5
 	LootTable:          "59"

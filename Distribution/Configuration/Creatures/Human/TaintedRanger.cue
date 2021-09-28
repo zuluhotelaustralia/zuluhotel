@@ -16,7 +16,7 @@ TaintedRanger: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMax:            300
+	HitsMaxSeed:            300
 	Hue:                1157
 	LootItemChance:     50
 	LootItemLevel:      4

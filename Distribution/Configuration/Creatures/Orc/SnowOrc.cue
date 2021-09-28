@@ -12,7 +12,7 @@ SnowOrc: {
 	CreatureType:         "Orc"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              150
+	HitsMaxSeed:              150
 	Hue:                  1154
 	LootTable:            "43"
 	ManaMaxSeed:          0

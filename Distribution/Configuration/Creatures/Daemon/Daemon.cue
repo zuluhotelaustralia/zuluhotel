@@ -14,7 +14,7 @@ Daemon: {
 	CreatureType:       "Daemon"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMax:            450
+	HitsMaxSeed:            450
 	Hue:                33784
 	LootItemChance:     40
 	LootItemLevel:      5

@@ -14,7 +14,7 @@ TerathanAvenger: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              225
+	HitsMaxSeed:              225
 	LootItemChance:       10
 	LootItemLevel:        2
 	LootTable:            "68"

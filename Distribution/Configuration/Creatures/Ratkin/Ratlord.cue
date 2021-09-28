@@ -14,7 +14,7 @@ Ratlord: {
 	FightMode:            "Closest"
 	HideType:             "Rat"
 	Hides:                5
-	HitsMax:              300
+	HitsMaxSeed:              300
 	LootItemChance:       50
 	LootItemLevel:        1
 	LootTable:            "27"

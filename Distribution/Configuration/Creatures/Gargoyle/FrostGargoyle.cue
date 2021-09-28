@@ -13,7 +13,7 @@ FrostGargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  1154
 	LootItemChance:       25
 	LootItemLevel:        2

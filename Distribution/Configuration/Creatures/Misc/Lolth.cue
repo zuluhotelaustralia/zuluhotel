@@ -16,7 +16,7 @@ Lolth: {
 	Female:               true
 	FightMode:            "Closest"
 	FightRange:           12
-	HitsMax:              3000
+	HitsMaxSeed:              3000
 	Hue:                  1109
 	LootItemChance:       60
 	LootItemLevel:        6

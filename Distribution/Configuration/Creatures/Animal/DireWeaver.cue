@@ -12,7 +12,7 @@ DireWeaver: {
 	CreatureType:       "Animal"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMax:            450
+	HitsMaxSeed:            450
 	Hue:                1409
 	ManaMaxSeed:        25
 	StamMaxSeed:        50

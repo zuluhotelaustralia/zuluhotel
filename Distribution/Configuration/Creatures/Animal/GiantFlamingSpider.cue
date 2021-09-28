@@ -13,7 +13,7 @@ GiantFlamingSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  232
 	ManaMaxSeed:          40
 	MinTameSkill:         90

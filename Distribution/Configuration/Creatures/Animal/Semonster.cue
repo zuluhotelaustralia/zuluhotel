@@ -11,7 +11,7 @@ Semonster: {
 	CanSwim:              true
 	CreatureType:         "Animal"
 	VirtualArmor:         30
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  33784
 	LootItemChance:       1
 	LootTable:            "50"

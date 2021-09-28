@@ -15,7 +15,7 @@ FrostDrake: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  1154
 	LootItemChance:       60
 	LootItemLevel:        3

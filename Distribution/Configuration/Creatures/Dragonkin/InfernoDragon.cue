@@ -15,7 +15,7 @@ InfernoDragon: {
 	FightMode:            "Closest"
 	HideType:             "Lava"
 	Hides:                5
-	HitsMax:              500
+	HitsMaxSeed:              500
 	Hue:                  1172
 	LootItemChance:       75
 	LootItemLevel:        5

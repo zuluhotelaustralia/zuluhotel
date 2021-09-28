@@ -14,7 +14,7 @@ PoisonDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  264
 	LootItemChance:       25
 	LootItemLevel:        4

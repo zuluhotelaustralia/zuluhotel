@@ -13,7 +13,7 @@ HeavenlyOstard: {
 	VirtualArmor:         30
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  1181
 	ManaMaxSeed:          150
 	MinTameSkill:         105

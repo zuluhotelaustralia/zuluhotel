@@ -15,7 +15,7 @@ ElfDruid: {
 	VirtualArmor:         25
 	Female:               true
 	FightMode:            "Closest"
-	HitsMax:              500
+	HitsMaxSeed:              500
 	Hue:                  770
 	InitialInnocent:      true
 	LootItemChance:       60

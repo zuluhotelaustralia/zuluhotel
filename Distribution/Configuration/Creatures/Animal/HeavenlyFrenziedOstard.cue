@@ -13,7 +13,7 @@ HeavenlyFrenziedOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              225
+	HitsMaxSeed:              225
 	Hue:                  1181
 	ManaMaxSeed:          175
 	MinTameSkill:         110

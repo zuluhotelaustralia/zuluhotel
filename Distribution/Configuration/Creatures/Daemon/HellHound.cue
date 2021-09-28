@@ -15,7 +15,7 @@ HellHound: {
 	FightMode:            "Closest"
 	HideType:             "Wolf"
 	Hides:                5
-	HitsMax:              170
+	HitsMaxSeed:              170
 	Hue:                  232
 	LootTable:            "61"
 	ManaMaxSeed:          50

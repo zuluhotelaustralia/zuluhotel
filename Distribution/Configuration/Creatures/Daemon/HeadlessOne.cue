@@ -12,7 +12,7 @@ HeadlessOne: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         5
 	FightMode:            "Closest"
-	HitsMax:              60
+	HitsMaxSeed:              60
 	LootTable:            "3"
 	ManaMaxSeed:          15
 	ProvokeSkillOverride: 40

@@ -16,7 +16,7 @@ TerathanChampion: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              650
+	HitsMaxSeed:              650
 	Hue:                  1127
 	LootTable:            "63"
 	ManaMaxSeed:          0

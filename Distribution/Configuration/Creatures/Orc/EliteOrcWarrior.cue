@@ -12,7 +12,7 @@ EliteOrcWarrior: {
 	CreatureType:         "Orc"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              215
+	HitsMaxSeed:              215
 	LootTable:            "43"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

@@ -16,7 +16,7 @@ DarkElfQueen: {
 	Female:               true
 	FightMode:            "Closest"
 	FightRange:           12
-	HitsMax:              1500
+	HitsMaxSeed:              1500
 	Hue:                  1109
 	LootItemChance:       60
 	LootItemLevel:        5

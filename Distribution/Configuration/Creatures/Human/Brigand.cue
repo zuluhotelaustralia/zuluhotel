@@ -8,7 +8,7 @@ Brigand: {
 	Dex:                  300
 	CreatureType:         "Human"
 	VirtualArmor:         20
-	HitsMax:              130
+	HitsMaxSeed:              130
 	LootItemChance:       1
 	LootTable:            "47"
 	ManaMaxSeed:          95

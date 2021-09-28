@@ -11,7 +11,7 @@ UndeadPirateCaptain: {
 	CreatureType:       "Undead"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMax:            250
+	HitsMaxSeed:            250
 	LootItemChance:     1
 	LootItemLevel:      1
 	LootTable:          "23"

@@ -14,7 +14,7 @@ IceTroll: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  1154
 	LootTable:            "14"
 	ManaMaxSeed:          60

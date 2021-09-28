@@ -12,7 +12,7 @@ SkeletalAssassin: {
 	CreatureType:       "Undead"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMax:            130
+	HitsMaxSeed:            130
 	Hue:                17969
 	LootItemChance:     4
 	LootTable:          "10"

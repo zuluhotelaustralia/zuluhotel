@@ -11,7 +11,7 @@ BlackGateDaemon: {
 	Body:                 228
 	VirtualArmor:         20
 	Fame:                 4
-	HitsMax:              1500
+	HitsMaxSeed:              1500
 	Karma:                5
 	ManaMaxSeed:          465
 	ProvokeSkillOverride: 150

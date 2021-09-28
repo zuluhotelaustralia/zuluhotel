@@ -10,7 +10,7 @@ Shade: {
 	CreatureType:       "Undead"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMax:            300
+	HitsMaxSeed:            300
 	Hue:                17969
 	LootItemChance:     50
 	LootItemLevel:      1

@@ -12,7 +12,7 @@ MountainFrenziedOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              130
+	HitsMaxSeed:              130
 	Hue:                  1160
 	ManaMaxSeed:          0
 	MinTameSkill:         95

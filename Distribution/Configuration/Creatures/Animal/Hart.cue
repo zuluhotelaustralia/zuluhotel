@@ -11,7 +11,7 @@ Hart: {
 	Body:                 234
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMax:              70
+	HitsMaxSeed:              70
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         60

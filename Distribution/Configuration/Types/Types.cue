@@ -49,7 +49,7 @@ package Types
 	Female:                  *#NpcDefaults.Female | #CreatureProperties.Female
 	FightMode:               *#NpcDefaults.FightMode | #CreatureProperties.FightMode
 	FightRange:              *#NpcDefaults.FightRange | #CreatureProperties.FightRange
-	HitsMax:                 *#NpcDefaults.HitsMax | #CreatureProperties.HitsMax
+	HitsMaxSeed:             *#NpcDefaults.HitsMaxSeed | #CreatureProperties.HitsMaxSeed
 	Hue:                     *#NpcDefaults.Hue | #CreatureProperties.Hue
 	LootItemChance:          *#NpcDefaults.LootItemChance | #CreatureProperties.LootItemChance
 	LootItemLevel:           *#NpcDefaults.LootItemLevel | #CreatureProperties.LootItemLevel

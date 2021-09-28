@@ -12,7 +12,7 @@ OrcishKing: {
 	CreatureType:         "Orc"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMax:              300
+	HitsMaxSeed:              300
 	Hue:                  1125
 	LootItemChance:       25
 	LootItemLevel:        3

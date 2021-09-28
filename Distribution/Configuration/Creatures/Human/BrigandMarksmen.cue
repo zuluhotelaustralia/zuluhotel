@@ -10,7 +10,7 @@ BrigandMarksmen: {
 	AlwaysMurderer:       true
 	CreatureType:         "Human"
 	VirtualArmor:         20
-	HitsMax:              95
+	HitsMaxSeed:              95
 	LootItemChance:       1
 	LootTable:            "52"
 	ManaMaxSeed:          0

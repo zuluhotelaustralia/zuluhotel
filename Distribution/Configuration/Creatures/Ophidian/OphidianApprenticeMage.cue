@@ -15,7 +15,7 @@ OphidianApprenticeMage: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              550
+	HitsMaxSeed:              550
 	LootTable:            "76"
 	ManaMaxSeed:          400
 	ProvokeSkillOverride: 110

@@ -11,7 +11,7 @@ GiantRockScorpion: {
 	Body:                 48
 	CreatureType:         "Animal"
 	VirtualArmor:         35
-	HitsMax:              230
+	HitsMaxSeed:              230
 	Hue:                  1118
 	ManaMaxSeed:          0
 	MinTameSkill:         80

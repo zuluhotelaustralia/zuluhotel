@@ -16,7 +16,7 @@ GreaterBeholder: {
 	ClassType:          "Mage"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMax:            1500
+	HitsMaxSeed:            1500
 	Hue:                1173
 	LootItemChance:     75
 	LootItemLevel:      4

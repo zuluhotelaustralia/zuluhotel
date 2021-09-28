@@ -10,7 +10,7 @@ SwampBoar: {
 	Body:                 203
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMax:              60
+	HitsMaxSeed:              60
 	Hue:                  2006
 	LootTable:            "64"
 	ManaMaxSeed:          0

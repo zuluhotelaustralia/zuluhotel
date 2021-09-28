@@ -13,7 +13,7 @@ OrcishBerserker: {
 	CreatureType:       "Orc"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	Hue:                1172
 	LootItemChance:     70
 	LootItemLevel:      6

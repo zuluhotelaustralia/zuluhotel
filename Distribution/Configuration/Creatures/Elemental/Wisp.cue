@@ -13,7 +13,7 @@ Wisp: {
 	CanSwim:              true
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
-	HitsMax:              225
+	HitsMaxSeed:              225
 	InitialInnocent:      true
 	LootItemChance:       25
 	LootItemLevel:        3

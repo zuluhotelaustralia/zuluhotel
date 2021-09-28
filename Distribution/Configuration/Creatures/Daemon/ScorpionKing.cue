@@ -14,7 +14,7 @@ ScorpionKing: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
 	FightMode:            "Closest"
-	HitsMax:              5000
+	HitsMaxSeed:              5000
 	Hue:                  1172
 	LootItemChance:       90
 	LootItemLevel:        8
