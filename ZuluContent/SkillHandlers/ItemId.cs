@@ -46,13 +46,13 @@ namespace Server.SkillHandlers
                     break;
                 }
                 case Item:
-                    from.SendLocalizedMessage(500353); // You are not certain...
+                    from.SendFailureMessage(500353); // You are not certain...
                     break;
                 case Mobile mobile:
                     mobile.OnSingleClick(from);
                     break;
                 default:
-                    from.SendLocalizedMessage(500353); // You are not certain...
+                    from.SendFailureMessage(500353); // You are not certain...
                     break;
             }
 

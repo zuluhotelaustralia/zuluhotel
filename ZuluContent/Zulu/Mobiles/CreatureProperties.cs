@@ -105,10 +105,6 @@ namespace Server.Mobiles
 
             MapAction(this, dest);
 
-            dest.SetStam(StamMaxSeed);
-            dest.SetMana(ManaMaxSeed);
-            dest.SetHits(HitsMaxSeed);
-
             // Non-mappable props
             if (Skills.Any())
             {
