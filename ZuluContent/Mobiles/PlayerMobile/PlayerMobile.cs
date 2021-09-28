@@ -1100,6 +1100,9 @@ namespace Server.Mobiles
 
             WeightOverloading.FatigueOnDamage(this, amount);
 
+            if (Combatant == null)
+                Combatant = from;
+
             base.OnDamage(amount, from, willKill);
         }
 
