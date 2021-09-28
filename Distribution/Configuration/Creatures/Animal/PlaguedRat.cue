@@ -10,7 +10,7 @@ PlaguedRat: {
 	Body:                 238
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMax:              30
+	HitsMaxSeed:              30
 	Hue:                  33784
 	ManaMaxSeed:          200
 	MinTameSkill:         35

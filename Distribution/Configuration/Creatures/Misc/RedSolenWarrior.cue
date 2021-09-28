@@ -11,7 +11,7 @@ RedSolenWarrior: {
 	VirtualArmor:         35
 	Fame:                 3
 	FightMode:            "Closest"
-	HitsMax:              400
+	HitsMaxSeed:              400
 	Karma:                3
 	LootItemChance:       100
 	LootTable:            "51"

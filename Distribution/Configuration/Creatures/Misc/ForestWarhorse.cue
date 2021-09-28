@@ -11,7 +11,7 @@ ForestWarhorse: {
 	VirtualArmor:         40
 	Fame:                 1
 	FightMode:            "Closest"
-	HitsMax:              500
+	HitsMaxSeed:              500
 	Karma:                1
 	LootItemChance:       100
 	LootTable:            "26"

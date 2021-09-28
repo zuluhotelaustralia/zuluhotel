@@ -12,7 +12,7 @@ TerathanDrone: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMax:              70
+	HitsMaxSeed:              70
 	LootTable:            "64"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

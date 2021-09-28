@@ -15,7 +15,7 @@ UnholyMenace: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
 	FightMode:            "Closest"
-	HitsMax:              1000
+	HitsMaxSeed:              1000
 	Hue:                  1305
 	LootItemChance:       80
 	LootItemLevel:        6

@@ -11,7 +11,7 @@ BewitchedArmor: {
 	Body:                 527
 	CreatureType:         "Animated"
 	FightMode:            "Closest"
-	HitsMax:              210
+	HitsMaxSeed:              210
 	LootItemChance:       1
 	LootTable:            "48"
 	ManaMaxSeed:          0

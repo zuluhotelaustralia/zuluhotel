@@ -12,7 +12,7 @@ OrcWarrior: {
 	CreatureType:         "Orc"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMax:              160
+	HitsMaxSeed:              160
 	LootTable:            "43"
 	ManaMaxSeed:          25
 	ProvokeSkillOverride: 70

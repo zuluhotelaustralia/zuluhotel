@@ -11,7 +11,7 @@ GiantBeetle: {
 	Body:                 133
 	VirtualArmor:         20
 	Fame:                 3
-	HitsMax:              200
+	HitsMaxSeed:              200
 	Karma:                3
 	ManaMaxSeed:          500
 	MinTameSkill:         115

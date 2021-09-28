@@ -12,7 +12,7 @@ BalronSpawn: {
 	Body:               74
 	CreatureType:       "Daemon"
 	FightMode:          "Closest"
-	HitsMax:            600
+	HitsMaxSeed:            600
 	Hue:                17969
 	LootItemChance:     80
 	LootItemLevel:      4

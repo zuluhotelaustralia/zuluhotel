@@ -13,7 +13,7 @@ DeathChaser: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         50
 	FightMode:            "Closest"
-	HitsMax:              1100
+	HitsMaxSeed:              1100
 	Hue:                  1489
 	LootItemChance:       80
 	LootItemLevel:        5

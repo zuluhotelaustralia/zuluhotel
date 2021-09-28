@@ -13,7 +13,7 @@ TerathanMatriarch: {
 	CreatureType:       "Terathan"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMax:            350
+	HitsMaxSeed:            350
 	LootItemChance:     50
 	LootItemLevel:      4
 	LootTable:          "65"

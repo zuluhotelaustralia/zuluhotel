@@ -17,7 +17,7 @@ OphidianQueen: {
 	FightMode:          "Closest"
 	HideType:           "Serpent"
 	Hides:              5
-	HitsMax:            1950
+	HitsMaxSeed:            1950
 	Hue:                1165
 	LootItemChance:     60
 	LootItemLevel:      6

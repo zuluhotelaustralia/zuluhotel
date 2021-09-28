@@ -9,7 +9,7 @@ FallenPaladin: {
 	AlwaysMurderer:       true
 	CreatureType:         "Elemental"
 	FightMode:            "Closest"
-	HitsMax:              6000
+	HitsMaxSeed:              6000
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         170

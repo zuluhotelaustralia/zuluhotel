@@ -14,7 +14,7 @@ FrostWolf: {
 	FightMode:            "Closest"
 	HideType:             "Wolf"
 	Hides:                5
-	HitsMax:              135
+	HitsMaxSeed:              135
 	Hue:                  1154
 	ManaMaxSeed:          25
 	MinTameSkill:         75

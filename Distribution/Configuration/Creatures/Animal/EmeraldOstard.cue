@@ -13,7 +13,7 @@ EmeraldOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              175
+	HitsMaxSeed:              175
 	Hue:                  1159
 	ManaMaxSeed:          125
 	MinTameSkill:         75

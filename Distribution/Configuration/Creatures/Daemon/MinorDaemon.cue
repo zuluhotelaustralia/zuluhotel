@@ -12,7 +12,7 @@ MinorDaemon: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              275
+	HitsMaxSeed:              275
 	Hue:                  35
 	LootItemChance:       10
 	LootItemLevel:        3

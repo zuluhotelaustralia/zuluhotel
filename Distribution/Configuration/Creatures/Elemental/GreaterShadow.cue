@@ -12,7 +12,7 @@ GreaterShadow: {
 	CanSwim:            true
 	CreatureType:       "Elemental"
 	FightMode:          "Closest"
-	HitsMax:            350
+	HitsMaxSeed:            350
 	Hue:                1
 	LootItemChance:     15
 	LootItemLevel:      4

@@ -13,7 +13,7 @@ Titan: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMax:              1000
+	HitsMaxSeed:              1000
 	LootItemChance:       50
 	LootItemLevel:        4
 	LootTable:            "22"

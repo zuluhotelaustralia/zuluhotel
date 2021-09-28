@@ -12,7 +12,7 @@ GiantSandWorm: {
 	VirtualArmor:         30
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              300
+	HitsMaxSeed:              300
 	Hue:                  351
 	LootTable:            "59"
 	ManaMaxSeed:          56

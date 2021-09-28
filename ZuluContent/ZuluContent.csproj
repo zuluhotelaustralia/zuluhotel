@@ -16,7 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-
     <PackageReference Include="FastExpressionCompiler" Version="3.0.0-preview-07" />
     <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
@@ -30,6 +29,7 @@
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="5.0.1" />
     <PackageReference Include="Zlib.Bindings" Version="1.5.0" />
     <PackageReference Include="Argon2.Bindings" Version="1.8.0" />
+    <PackageReference Include="Zstd.Binaries" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,7 +14,7 @@ HellsStallion: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         60
 	FightMode:            "Closest"
-	HitsMax:              1050
+	HitsMaxSeed:              1050
 	Hue:                  1305
 	LootItemChance:       90
 	LootItemLevel:        5

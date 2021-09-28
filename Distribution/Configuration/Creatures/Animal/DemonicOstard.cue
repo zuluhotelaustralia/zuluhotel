@@ -14,7 +14,7 @@ DemonicOstard: {
 	CreatureType:         "Animal"
 	VirtualArmor:         50
 	FightMode:            "Closest"
-	HitsMax:              850
+	HitsMaxSeed:              850
 	Hue:                  1259
 	ManaMaxSeed:          150
 	MinTameSkill:         115

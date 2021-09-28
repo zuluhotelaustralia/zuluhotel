@@ -13,7 +13,7 @@ GoldenOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              120
+	HitsMaxSeed:              120
 	Hue:                  48
 	ManaMaxSeed:          0
 	MinTameSkill:         50

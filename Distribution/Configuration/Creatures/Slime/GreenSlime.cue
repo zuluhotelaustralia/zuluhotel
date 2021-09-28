@@ -10,7 +10,7 @@ GreenSlime: {
 	Body:                 51
 	CreatureType:         "Slime"
 	VirtualArmor:         20
-	HitsMax:              140
+	HitsMaxSeed:              140
 	Hue:                  2001
 	ManaMaxSeed:          0
 	MinTameSkill:         40

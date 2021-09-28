@@ -13,7 +13,7 @@ Beholder: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMax:              160
+	HitsMaxSeed:              160
 	Hue:                  33877
 	LootItemChance:       75
 	LootItemLevel:        2

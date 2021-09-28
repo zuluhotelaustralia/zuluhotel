@@ -10,7 +10,7 @@ ShadowWarrior: {
 	CreatureType:       "Daemon"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMax:            1000
+	HitsMaxSeed:            1000
 	LootItemChance:     50
 	LootItemLevel:      5
 	LootTable:          "69"

@@ -16,7 +16,7 @@ Dracoliche: {
 	FightMode:            "Closest"
 	HideType:             "Liche"
 	Hides:                5
-	HitsMax:              650
+	HitsMaxSeed:              650
 	Hue:                  1282
 	LootItemChance:       75
 	LootItemLevel:        5

@@ -15,7 +15,7 @@ OphidianJusticar: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              500
+	HitsMaxSeed:              500
 	LootTable:            "66"
 	ManaMaxSeed:          1000
 	ProvokeSkillOverride: 110

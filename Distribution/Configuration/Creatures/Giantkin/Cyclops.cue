@@ -12,7 +12,7 @@ Cyclops: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  33784
 	LootItemChance:       50
 	LootItemLevel:        3

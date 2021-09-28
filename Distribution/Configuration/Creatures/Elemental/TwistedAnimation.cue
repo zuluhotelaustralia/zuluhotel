@@ -15,7 +15,7 @@ TwistedAnimation: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       50
 	FightMode:          "Closest"
-	HitsMax:            700
+	HitsMaxSeed:            700
 	Hue:                49408
 	LootItemChance:     75
 	LootItemLevel:      5

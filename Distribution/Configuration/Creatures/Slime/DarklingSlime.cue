@@ -11,7 +11,7 @@ DarklingSlime: {
 	Body:               51
 	CreatureType:       "Slime"
 	VirtualArmor:       30
-	HitsMax:            200
+	HitsMaxSeed:            200
 	Hue:                25125
 	LootTable:          "125"
 	ManaMaxSeed:        0

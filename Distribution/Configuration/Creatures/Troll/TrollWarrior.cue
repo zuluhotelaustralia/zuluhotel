@@ -14,7 +14,7 @@ TrollWarrior: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              225
+	HitsMaxSeed:              225
 	Hue:                  33784
 	LootTable:            "14"
 	ManaMaxSeed:          30

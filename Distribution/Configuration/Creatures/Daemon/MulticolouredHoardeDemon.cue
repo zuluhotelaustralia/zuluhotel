@@ -14,7 +14,7 @@ MulticolouredHoardeDemon: {
 	CreatureType:       "Daemon"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	LootItemChance:     70
 	LootItemLevel:      6
 	LootTable:          "9"

@@ -15,7 +15,7 @@ Liche: {
 	FightMode:          "Closest"
 	HideType:           "Liche"
 	Hides:              3
-	HitsMax:            180
+	HitsMaxSeed:            180
 	LootItemChance:     80
 	LootItemLevel:      3
 	LootTable:          "23"

@@ -12,7 +12,7 @@ Archer: {
 	Body:                 17
 	CreatureType:         "Orc"
 	FightMode:            "Closest"
-	HitsMax:              170
+	HitsMaxSeed:              170
 	LootTable:            "52"
 	ManaMaxSeed:          25
 	ProvokeSkillOverride: 80

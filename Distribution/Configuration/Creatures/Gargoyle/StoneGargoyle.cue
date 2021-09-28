@@ -12,7 +12,7 @@ StoneGargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMax:              495
+	HitsMaxSeed:              495
 	Hue:                  1154
 	LootItemChance:       15
 	LootItemLevel:        2

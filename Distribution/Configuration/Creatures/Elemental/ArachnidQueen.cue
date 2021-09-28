@@ -14,7 +14,7 @@ ArachnidQueen: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         45
 	FightMode:            "Closest"
-	HitsMax:              5250
+	HitsMaxSeed:              5250
 	Hue:                  1175
 	LootItemChance:       80
 	LootItemLevel:        7

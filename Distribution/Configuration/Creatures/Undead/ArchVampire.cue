@@ -14,7 +14,7 @@ ArchVampire: {
 	CreatureType:       "Undead"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMax:            350
+	HitsMaxSeed:            350
 	LootItemChance:     75
 	LootItemLevel:      5
 	LootTable:          "71"

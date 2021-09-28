@@ -16,7 +16,7 @@ OphidianAvenger: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMax:              350
+	HitsMaxSeed:              350
 	LootItemChance:       20
 	LootItemLevel:        2
 	LootTable:            "71"

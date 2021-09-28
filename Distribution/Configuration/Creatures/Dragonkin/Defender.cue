@@ -14,7 +14,7 @@ Defender: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              275
+	HitsMaxSeed:              275
 	Hue:                  1454
 	LootItemChance:       2
 	LootTable:            "56"

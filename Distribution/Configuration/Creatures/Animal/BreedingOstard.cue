@@ -12,7 +12,7 @@ BreedingOstard: {
 	CreatureType:         "Animal"
 	VirtualArmor:         20
 	Female:               true
-	HitsMax:              100
+	HitsMaxSeed:              100
 	Hue:                  50
 	ManaMaxSeed:          0
 	MinTameSkill:         50

@@ -10,7 +10,7 @@ RabidDog: {
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMax:              40
+	HitsMaxSeed:              40
 	Hue:                  33784
 	ManaMaxSeed:          15
 	MinTameSkill:         35

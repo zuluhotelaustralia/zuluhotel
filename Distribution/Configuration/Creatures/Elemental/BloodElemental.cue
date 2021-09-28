@@ -13,7 +13,7 @@ BloodElemental: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         45
 	FightMode:            "Closest"
-	HitsMax:              450
+	HitsMaxSeed:              450
 	Hue:                  1209
 	LootItemChance:       25
 	LootItemLevel:        4

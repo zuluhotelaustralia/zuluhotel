@@ -11,7 +11,7 @@ HealerOfAmberyl: {
 	CreatureType:       "Human"
 	VirtualArmor:       100
 	Female:             true
-	HitsMax:            300
+	HitsMaxSeed:            300
 	Hue:                33784
 	InitialInnocent:    true
 	ManaMaxSeed:        200

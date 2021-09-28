@@ -14,7 +14,7 @@ Gazer: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMax:              150
+	HitsMaxSeed:              150
 	LootItemChance:       100
 	LootItemLevel:        2
 	LootTable:            "30"

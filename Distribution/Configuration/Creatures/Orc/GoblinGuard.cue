@@ -14,7 +14,7 @@ GoblinGuard: {
 	CreatureType:       "Orc"
 	VirtualArmor:       60
 	FightMode:          "Closest"
-	HitsMax:            500
+	HitsMaxSeed:            500
 	Hue:                34186
 	LootTable:          "59"
 	ManaMaxSeed:        200

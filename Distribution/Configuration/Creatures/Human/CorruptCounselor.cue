@@ -13,7 +13,7 @@ CorruptCounselor: {
 	CanSwim:            true
 	CreatureType:       "Human"
 	FightMode:          "Closest"
-	HitsMax:            4000
+	HitsMaxSeed:            4000
 	Hue:                1157
 	LootItemChance:     50
 	LootItemLevel:      5

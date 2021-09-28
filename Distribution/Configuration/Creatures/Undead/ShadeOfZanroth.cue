@@ -15,7 +15,7 @@ ShadeOfZanroth: {
 	VirtualArmor:       60
 	FightMode:          "Closest"
 	FightRange:         8
-	HitsMax:            500
+	HitsMaxSeed:            500
 	Hue:                17969
 	LootTable:          "142"
 	ManaMaxSeed:        500

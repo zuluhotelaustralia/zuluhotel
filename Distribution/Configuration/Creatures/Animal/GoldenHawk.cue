@@ -11,7 +11,7 @@ GoldenHawk: {
 	Body:                 5
 	CreatureType:         "Animal"
 	VirtualArmor:         20
-	HitsMax:              90
+	HitsMaxSeed:              90
 	Hue:                  1127
 	ManaMaxSeed:          40
 	MinTameSkill:         35

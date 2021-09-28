@@ -13,7 +13,7 @@ Gargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              130
+	HitsMaxSeed:              130
 	LootItemChance:       10
 	LootItemLevel:        2
 	LootTable:            "38"

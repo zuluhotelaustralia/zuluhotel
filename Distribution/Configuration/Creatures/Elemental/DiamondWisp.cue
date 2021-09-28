@@ -14,7 +14,7 @@ DiamondWisp: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              1400
+	HitsMaxSeed:              1400
 	Hue:                  1176
 	LootItemChance:       75
 	LootItemLevel:        6

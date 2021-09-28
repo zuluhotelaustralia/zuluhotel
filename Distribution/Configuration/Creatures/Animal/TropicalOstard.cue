@@ -13,7 +13,7 @@ TropicalOstard: {
 	VirtualArmor:         30
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              210
+	HitsMaxSeed:              210
 	Hue:                  1155
 	ManaMaxSeed:          100
 	MinTameSkill:         105

@@ -12,7 +12,7 @@ EliteOstard: {
 	Body:                 218
 	CreatureType:         "Animal"
 	VirtualArmor:         50
-	HitsMax:              600
+	HitsMaxSeed:              600
 	Hue:                  1298
 	ManaMaxSeed:          150
 	MinTameSkill:         115

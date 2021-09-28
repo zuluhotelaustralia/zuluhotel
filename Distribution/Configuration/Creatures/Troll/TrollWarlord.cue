@@ -14,7 +14,7 @@ TrollWarlord: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  1109
 	LootItemChance:       25
 	LootItemLevel:        3

@@ -16,7 +16,7 @@ GreatWyrm: {
 	FightMode:            "Closest"
 	HideType:             "Wyrm"
 	Hides:                5
-	HitsMax:              900
+	HitsMaxSeed:              900
 	Hue:                  1159
 	LootItemChance:       80
 	LootItemLevel:        5

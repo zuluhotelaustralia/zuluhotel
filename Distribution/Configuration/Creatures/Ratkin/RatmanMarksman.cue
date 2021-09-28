@@ -15,7 +15,7 @@ RatmanMarksman: {
 	FightMode:            "Closest"
 	HideType:             "Rat"
 	Hides:                5
-	HitsMax:              160
+	HitsMaxSeed:              160
 	LootTable:            "51"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 55

@@ -18,12 +18,12 @@ namespace Server.Items
         {
             playerMobile.FixedParticles(0x373A, 10, 10, 5007, EffectLayer.Waist);
                 
-            foreach (var skill in playerMobile.Skills)
-            {
-                skill.Base = ((IList)ZuluClass.ClassSkills[ClasseType]).Contains(skill.SkillName)
-                    ? ZuluClass.MinSkills[ClasseLevel] / ZuluClass.ClassSkills[ClasseType].Length
-                    : 0.0;
-            }
+            ZuluClass.SetClass(playerMobile, ClasseType, ClasseLevel);
+
+            var stat = 60 + ClasseLevel * 15;
+            playerMobile.Str = stat;
+            playerMobile.Dex = stat;
+            playerMobile.Int = stat;
 
             return true;
         }

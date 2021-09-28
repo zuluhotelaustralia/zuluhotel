@@ -11,7 +11,7 @@ SkeletalSteed: {
 	Body:                 133
 	VirtualArmor:         20
 	Fame:                 3
-	HitsMax:              300
+	HitsMaxSeed:              300
 	Karma:                3
 	ManaMaxSeed:          60
 	MinTameSkill:         120

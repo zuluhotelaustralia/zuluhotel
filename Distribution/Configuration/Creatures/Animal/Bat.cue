@@ -11,7 +11,7 @@ Bat: {
 	Body:                 6
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMax:              30
+	HitsMaxSeed:              30
 	Hue:                  5555
 	ManaMaxSeed:          50
 	MinTameSkill:         35

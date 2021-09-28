@@ -14,7 +14,7 @@ GoblinTribeMaster: {
 	CreatureType:       "Orc"
 	VirtualArmor:       50
 	FightMode:          "Closest"
-	HitsMax:            2250
+	HitsMaxSeed:            2250
 	Hue:                34186
 	LootItemChance:     50
 	LootItemLevel:      6

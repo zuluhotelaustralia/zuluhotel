@@ -12,7 +12,7 @@ SnowFrenziedOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              275
+	HitsMaxSeed:              275
 	Hue:                  1156
 	ManaMaxSeed:          125
 	MinTameSkill:         105

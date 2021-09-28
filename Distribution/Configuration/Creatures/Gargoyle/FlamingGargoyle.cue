@@ -13,7 +13,7 @@ FlamingGargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  232
 	LootItemChance:       60
 	LootItemLevel:        2

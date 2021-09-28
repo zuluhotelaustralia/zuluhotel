@@ -12,7 +12,7 @@ HellbornePaladinsRevenant: {
 	Body:                 970
 	CanFly:               true
 	FightMode:            "Closest"
-	HitsMax:              5000
+	HitsMaxSeed:              5000
 	Hue:                  1157
 	LootItemChance:       100
 	LootItemLevel:        10

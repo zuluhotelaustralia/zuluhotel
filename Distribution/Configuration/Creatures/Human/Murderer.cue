@@ -7,7 +7,7 @@ Murderer: {
 	Int:                  105
 	Dex:                  200
 	CreatureType:         "Human"
-	HitsMax:              160
+	HitsMaxSeed:              160
 	LootItemChance:       1
 	LootTable:            "47"
 	ManaMaxSeed:          95

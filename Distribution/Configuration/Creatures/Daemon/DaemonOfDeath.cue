@@ -17,7 +17,7 @@ DaemonOfDeath: {
 	VirtualArmor:         30
 	FightMode:            "Closest"
 	FightRange:           5
-	HitsMax:              6000
+	HitsMaxSeed:              6000
 	Hue:                  1160
 	LootItemChance:       90
 	LootItemLevel:        9

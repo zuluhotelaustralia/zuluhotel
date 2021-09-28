@@ -14,7 +14,7 @@ TrollChieftan: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              350
+	HitsMaxSeed:              350
 	Hue:                  1125
 	LootItemChance:       30
 	LootItemLevel:        3

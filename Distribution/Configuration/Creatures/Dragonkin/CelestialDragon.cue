@@ -15,7 +15,7 @@ CelestialDragon: {
 	FightMode:            "Closest"
 	HideType:             "Wyrm"
 	Hides:                5
-	HitsMax:              850
+	HitsMaxSeed:              850
 	Hue:                  1301
 	InitialInnocent:      true
 	LootItemChance:       75

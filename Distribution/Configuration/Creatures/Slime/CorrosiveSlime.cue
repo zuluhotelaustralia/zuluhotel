@@ -13,7 +13,7 @@ CorrosiveSlime: {
 	CreatureType:       "Slime"
 	VirtualArmor:       50
 	FightRange:         7
-	HitsMax:            500
+	HitsMaxSeed:            500
 	Hue:                1296
 	LootTable:          "125"
 	ManaMaxSeed:        0

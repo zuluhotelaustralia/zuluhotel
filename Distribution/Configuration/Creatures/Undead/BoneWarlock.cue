@@ -13,7 +13,7 @@ BoneWarlock: {
 	CreatureType:       "Undead"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMax:            270
+	HitsMaxSeed:            270
 	LootItemChance:     50
 	LootItemLevel:      2
 	LootTable:          "23"

@@ -12,7 +12,7 @@ Spectre: {
 	CreatureType:       "Undead"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMax:            135
+	HitsMaxSeed:            135
 	Hue:                25125
 	LootItemChance:     5
 	LootItemLevel:      1

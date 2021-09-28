@@ -13,7 +13,7 @@ RockLizard: {
 	VirtualArmor:         15
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              190
+	HitsMaxSeed:              190
 	Hue:                  1546
 	ManaMaxSeed:          20
 	MinTameSkill:         75

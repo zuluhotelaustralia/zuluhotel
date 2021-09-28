@@ -10,7 +10,7 @@ Raven: {
 	Body:                 6
 	CreatureType:         "Animal"
 	VirtualArmor:         15
-	HitsMax:              15
+	HitsMaxSeed:              15
 	Hue:                  1109
 	ManaMaxSeed:          0
 	MinTameSkill:         10

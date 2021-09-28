@@ -11,7 +11,7 @@ RedSolenWorker: {
 	VirtualArmor:         30
 	Fame:                 1
 	FightMode:            "Closest"
-	HitsMax:              72
+	HitsMaxSeed:              72
 	Karma:                1
 	LootTable:            "23"
 	ManaMaxSeed:          60

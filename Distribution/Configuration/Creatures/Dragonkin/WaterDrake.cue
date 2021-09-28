@@ -14,7 +14,7 @@ WaterDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              400
+	HitsMaxSeed:              400
 	Hue:                  1165
 	LootItemChance:       25
 	LootItemLevel:        4

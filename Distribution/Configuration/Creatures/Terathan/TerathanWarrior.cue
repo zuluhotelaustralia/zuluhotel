@@ -12,7 +12,7 @@ TerathanWarrior: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMax:              550
+	HitsMaxSeed:              550
 	LootTable:            "63"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

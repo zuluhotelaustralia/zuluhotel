@@ -13,7 +13,7 @@ HighlandOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              120
+	HitsMaxSeed:              120
 	Hue:                  1325
 	ManaMaxSeed:          0
 	MinTameSkill:         65

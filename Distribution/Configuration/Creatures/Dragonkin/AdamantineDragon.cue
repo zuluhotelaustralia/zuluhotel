@@ -13,7 +13,7 @@ AdamantineDragon: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
 	FightMode:            "Closest"
-	HitsMax:              2000
+	HitsMaxSeed:              2000
 	Hue:                  1006
 	LootItemChance:       80
 	LootItemLevel:        5

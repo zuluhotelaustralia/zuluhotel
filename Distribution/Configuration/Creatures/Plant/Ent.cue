@@ -12,7 +12,7 @@ Ent: {
 	CreatureType:       "Plant"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMax:            300
+	HitsMaxSeed:            300
 	LootItemChance:     1
 	LootTable:          "34"
 	ManaMaxSeed:        0

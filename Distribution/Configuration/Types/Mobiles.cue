@@ -153,7 +153,7 @@ package Types
 	FightRange:              (#PropValue | null)
 	HideType:                (#HideType | null)
 	Hides:                   (int32 | null)
-	HitsMax:                 (#PropValue | null)
+	HitsMaxSeed:             (#PropValue | null)
 	Hue:                     (#PropValue | null)
 	InitialInnocent:         (bool | null)
 	Karma:                   (#PropValue | null)

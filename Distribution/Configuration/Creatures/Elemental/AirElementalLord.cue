@@ -14,7 +14,7 @@ AirElementalLord: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMax:            210
+	HitsMaxSeed:            210
 	Hue:                1050
 	LootItemChance:     60
 	LootItemLevel:      4

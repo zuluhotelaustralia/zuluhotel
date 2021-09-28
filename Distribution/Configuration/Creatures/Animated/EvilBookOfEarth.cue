@@ -13,7 +13,7 @@ EvilBookOfEarth: {
 	CreatureType:       "Animated"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMax:            850
+	HitsMaxSeed:            850
 	Hue:                1162
 	LootItemChance:     60
 	LootItemLevel:      5

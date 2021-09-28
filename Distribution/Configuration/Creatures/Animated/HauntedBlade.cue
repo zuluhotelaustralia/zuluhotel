@@ -11,7 +11,7 @@ HauntedBlade: {
 	CreatureType:         "Animated"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMax:              180
+	HitsMaxSeed:              180
 	LootTable:            "48"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 60

@@ -15,7 +15,7 @@ TrollMarksman: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              185
+	HitsMaxSeed:              185
 	Hue:                  33784
 	LootTable:            "41"
 	ManaMaxSeed:          0

@@ -15,7 +15,7 @@ GoldenDragonLord: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
 	FightMode:            "Closest"
-	HitsMax:              5250
+	HitsMaxSeed:              5250
 	Hue:                  1300
 	LootItemChance:       100
 	LootItemLevel:        9

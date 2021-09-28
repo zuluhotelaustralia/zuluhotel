@@ -13,7 +13,7 @@ CelestialOstard: {
 	CanFly:               true
 	CreatureType:         "Animal"
 	VirtualArmor:         50
-	HitsMax:              650
+	HitsMaxSeed:              650
 	Hue:                  1176
 	InitialInnocent:      true
 	ManaMaxSeed:          200

@@ -13,7 +13,7 @@ ValleyOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              175
+	HitsMaxSeed:              175
 	Hue:                  1301
 	ManaMaxSeed:          125
 	MinTameSkill:         55

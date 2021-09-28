@@ -11,7 +11,7 @@ BirdDog: {
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMax:              30
+	HitsMaxSeed:              30
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         10

@@ -13,7 +13,7 @@ WingedAvenger: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              305
+	HitsMaxSeed:              305
 	Hue:                  1109
 	LootItemChance:       50
 	LootItemLevel:        2

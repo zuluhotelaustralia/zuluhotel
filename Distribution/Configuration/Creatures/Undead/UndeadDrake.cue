@@ -15,7 +15,7 @@ UndeadDrake: {
 	FightMode:            "Closest"
 	HideType:             "Liche"
 	Hides:                5
-	HitsMax:              300
+	HitsMaxSeed:              300
 	Hue:                  1109
 	LootItemChance:       25
 	LootItemLevel:        4

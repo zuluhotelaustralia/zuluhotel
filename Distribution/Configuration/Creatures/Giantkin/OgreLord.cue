@@ -12,7 +12,7 @@ OgreLord: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMax:              500
+	HitsMaxSeed:              500
 	LootItemChance:       5
 	LootItemLevel:        4
 	LootTable:            "59"

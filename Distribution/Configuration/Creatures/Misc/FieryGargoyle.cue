@@ -12,7 +12,7 @@ FieryGargoyle: {
 	VirtualArmor:         40
 	Fame:                 3
 	FightMode:            "Closest"
-	HitsMax:              600
+	HitsMaxSeed:              600
 	Karma:                3
 	LootItemChance:       100
 	LootTable:            "42"

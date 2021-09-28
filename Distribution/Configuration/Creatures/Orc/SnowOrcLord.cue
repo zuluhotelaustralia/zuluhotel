@@ -10,7 +10,7 @@ SnowOrcLord: {
 	Body:                 7
 	CreatureType:         "Orc"
 	VirtualArmor:         30
-	HitsMax:              180
+	HitsMaxSeed:              180
 	Hue:                  1154
 	LootItemChance:       20
 	LootItemLevel:        2

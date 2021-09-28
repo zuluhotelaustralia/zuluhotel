@@ -15,7 +15,7 @@ TwistedBramble: {
 	CreatureType:       "Plant"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMax:            500
+	HitsMaxSeed:            500
 	Hue:                1282
 	LootItemChance:     75
 	LootItemLevel:      4

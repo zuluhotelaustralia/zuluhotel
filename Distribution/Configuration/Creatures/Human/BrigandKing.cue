@@ -9,7 +9,7 @@ BrigandKing: {
 	AlwaysMurderer:     true
 	CreatureType:       "Human"
 	FightMode:          "Closest"
-	HitsMax:            600
+	HitsMaxSeed:            600
 	LootItemChance:     100
 	LootItemLevel:      5
 	LootTable:          "111"

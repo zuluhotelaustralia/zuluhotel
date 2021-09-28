@@ -15,7 +15,7 @@ DaemonLieutenant: {
 	FightMode:          "Closest"
 	HideType:           "Liche"
 	Hides:              3
-	HitsMax:            550
+	HitsMaxSeed:            550
 	Hue:                1209
 	LootItemChance:     50
 	LootItemLevel:      4

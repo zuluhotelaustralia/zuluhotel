@@ -15,7 +15,7 @@ TrollShaman: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              225
+	HitsMaxSeed:              225
 	Hue:                  544
 	LootItemChance:       60
 	LootItemLevel:        2

@@ -18,7 +18,7 @@ GoldenDragon: {
 	FightMode:            "Closest"
 	HideType:             "GoldenDragon"
 	Hides:                5
-	HitsMax:              1250
+	HitsMaxSeed:              1250
 	Hue:                  48
 	LootItemChance:       65
 	LootItemLevel:        6

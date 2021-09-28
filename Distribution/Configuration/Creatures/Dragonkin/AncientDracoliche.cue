@@ -14,7 +14,7 @@ AncientDracoliche: {
 	ClassType:            "Mage"
 	CreatureType:         "Dragonkin"
 	FightMode:            "Closest"
-	HitsMax:              2000
+	HitsMaxSeed:              2000
 	Hue:                  1282
 	LootItemChance:       70
 	LootItemLevel:        7

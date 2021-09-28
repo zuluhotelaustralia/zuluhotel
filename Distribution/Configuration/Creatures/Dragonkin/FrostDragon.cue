@@ -15,7 +15,7 @@ FrostDragon: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMax:              800
+	HitsMaxSeed:              800
 	Hue:                  1176
 	LootItemChance:       75
 	LootItemLevel:        5

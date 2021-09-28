@@ -15,7 +15,7 @@ PoisonWyrm: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         60
 	FightMode:            "Closest"
-	HitsMax:              800
+	HitsMaxSeed:              800
 	Hue:                  264
 	LootItemChance:       90
 	LootItemLevel:        6

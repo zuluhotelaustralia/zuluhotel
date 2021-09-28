@@ -15,7 +15,7 @@ Drake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                2
-	HitsMax:              500
+	HitsMaxSeed:              500
 	LootItemChance:       25
 	LootItemLevel:        4
 	LootTable:            "36"

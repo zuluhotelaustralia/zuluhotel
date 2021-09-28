@@ -13,7 +13,7 @@ EyesOfEradication: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMax:              500
+	HitsMaxSeed:              500
 	Hue:                  1172
 	LootItemChance:       75
 	LootItemLevel:        4

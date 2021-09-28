@@ -13,7 +13,7 @@ FallenAngel: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMax:              600
+	HitsMaxSeed:              600
 	Hue:                  1174
 	LootItemChance:       25
 	LootItemLevel:        2

@@ -14,7 +14,7 @@ ShadowHunter: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMax:            1000
+	HitsMaxSeed:            1000
 	Hue:                1157
 	LootItemChance:     50
 	LootItemLevel:      5

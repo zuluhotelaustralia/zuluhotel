@@ -11,7 +11,7 @@ HuntingDog: {
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMax:              45
+	HitsMaxSeed:              45
 	Hue:                  33784
 	ManaMaxSeed:          0
 	MinTameSkill:         10

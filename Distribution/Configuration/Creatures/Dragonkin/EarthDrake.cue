@@ -15,7 +15,7 @@ EarthDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              500
+	HitsMaxSeed:              500
 	Hue:                  1134
 	LootItemChance:       25
 	LootItemLevel:        4

@@ -11,7 +11,7 @@ Firecrow: {
 	Body:                 6
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMax:              18
+	HitsMaxSeed:              18
 	Hue:                  1109
 	ManaMaxSeed:          0
 	MinTameSkill:         25

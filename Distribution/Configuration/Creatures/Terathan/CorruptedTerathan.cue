@@ -12,7 +12,7 @@ CorruptedTerathan: {
 	CreatureType:       "Terathan"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMax:            400
+	HitsMaxSeed:            400
 	Hue:                1304
 	LootItemChance:     90
 	LootItemLevel:      3

@@ -10,7 +10,7 @@ Valkerie: {
 	Body:                 30
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
-	HitsMax:              180
+	HitsMaxSeed:              180
 	Hue:                  148
 	LootTable:            "29"
 	ManaMaxSeed:          0

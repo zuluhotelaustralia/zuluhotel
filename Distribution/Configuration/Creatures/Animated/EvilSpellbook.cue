@@ -13,7 +13,7 @@ EvilSpellbook: {
 	CreatureType:       "Animated"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMax:            400
+	HitsMaxSeed:            400
 	Hue:                1158
 	LootItemChance:     50
 	LootItemLevel:      5

@@ -13,7 +13,7 @@ IceOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              160
+	HitsMaxSeed:              160
 	Hue:                  1152
 	ManaMaxSeed:          100
 	MinTameSkill:         95

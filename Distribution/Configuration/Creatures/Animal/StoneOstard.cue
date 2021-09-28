@@ -13,7 +13,7 @@ StoneOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              250
+	HitsMaxSeed:              250
 	Hue:                  1154
 	ManaMaxSeed:          125
 	MinTameSkill:         75

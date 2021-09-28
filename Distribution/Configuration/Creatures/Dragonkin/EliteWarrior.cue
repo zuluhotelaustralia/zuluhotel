@@ -14,7 +14,7 @@ EliteWarrior: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              220
+	HitsMaxSeed:              220
 	LootTable:            "14"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

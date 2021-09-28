@@ -34,7 +34,7 @@ package Types
 	Female:                  false
 	FightMode:               "None"
 	FightRange:              1
-	HitsMax:                 1
+	HitsMaxSeed:             1
 	Hue:                     0
 	LootItemChance:          0
 	LootItemLevel:           0

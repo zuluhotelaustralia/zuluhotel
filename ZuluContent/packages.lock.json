@@ -101,6 +101,12 @@
         "resolved": "1.5.0",
         "contentHash": "OmH15iciKDzx8WrVRXuBNg6++UPb2YNRNwzFVsqenG/q5P8b3iuxYOHJdnYWjzFznTywD0ZUno5GrfxqIni7xA=="
       },
+      "Zstd.Binaries": {
+        "type": "Direct",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "Pmum5j7q/NJYWWU4rlQEWwFeZW8Xe6khbtZvF1CABr9nIbv7CiQK7dgU4W3KI945u4NH8blX6cBQtOARaEJCMQ=="
+      },
       "MessagePack.Annotations": {
         "type": "Transitive",
         "resolved": "2.2.60",

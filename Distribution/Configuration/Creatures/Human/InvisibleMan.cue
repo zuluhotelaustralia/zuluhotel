@@ -12,7 +12,7 @@ InvisibleMan: {
 	CreatureType:       "Human"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMax:            176
+	HitsMaxSeed:            176
 	LootItemChance:     1
 	LootTable:          "47"
 	ManaMaxSeed:        26

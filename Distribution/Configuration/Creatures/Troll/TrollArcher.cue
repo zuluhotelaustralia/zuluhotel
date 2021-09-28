@@ -15,7 +15,7 @@ TrollArcher: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMax:              190
+	HitsMaxSeed:              190
 	Hue:                  33784
 	LootTable:            "41"
 	ManaMaxSeed:          40

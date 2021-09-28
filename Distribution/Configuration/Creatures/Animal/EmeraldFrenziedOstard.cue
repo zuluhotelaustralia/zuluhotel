@@ -12,7 +12,7 @@ EmeraldFrenziedOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMax:              210
+	HitsMaxSeed:              210
 	Hue:                  1159
 	ManaMaxSeed:          160
 	MinTameSkill:         95

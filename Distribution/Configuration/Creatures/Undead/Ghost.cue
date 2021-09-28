@@ -12,7 +12,7 @@ Ghost: {
 	CreatureType:       "Undead"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMax:            126
+	HitsMaxSeed:            126
 	LootItemChance:     1
 	LootTable:          "47"
 	ManaMaxSeed:        26

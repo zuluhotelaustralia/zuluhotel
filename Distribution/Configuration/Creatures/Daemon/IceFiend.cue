@@ -15,7 +15,7 @@ IceFiend: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMax:              500
+	HitsMaxSeed:              500
 	Hue:                  1170
 	LootItemChance:       50
 	LootItemLevel:        4

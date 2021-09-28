@@ -10,7 +10,7 @@ Dracula: {
 	CreatureType:       "Undead"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMax:            600
+	HitsMaxSeed:            600
 	LootItemChance:     50
 	LootItemLevel:      5
 	LootTable:          "69"

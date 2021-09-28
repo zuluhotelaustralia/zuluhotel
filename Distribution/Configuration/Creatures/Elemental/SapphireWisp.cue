@@ -14,7 +14,7 @@ SapphireWisp: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              700
+	HitsMaxSeed:              700
 	Hue:                  1171
 	LootItemChance:       75
 	LootItemLevel:        5

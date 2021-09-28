@@ -15,7 +15,7 @@ SpectralDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              550
+	HitsMaxSeed:              550
 	Hue:                  17969
 	LootItemChance:       70
 	LootItemLevel:        4

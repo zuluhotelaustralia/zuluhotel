@@ -16,7 +16,7 @@ StormDragon: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              600
+	HitsMaxSeed:              600
 	Hue:                  1170
 	LootItemChance:       75
 	LootItemLevel:        5

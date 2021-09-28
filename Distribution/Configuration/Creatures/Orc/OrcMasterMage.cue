@@ -13,7 +13,7 @@ OrcMasterMage: {
 	CreatureType:         "Orc"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMax:              255
+	HitsMaxSeed:              255
 	Hue:                  1554
 	LootItemChance:       75
 	LootItemLevel:        3

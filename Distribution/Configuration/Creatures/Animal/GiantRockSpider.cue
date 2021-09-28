@@ -12,7 +12,7 @@ GiantRockSpider: {
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMax:              185
+	HitsMaxSeed:              185
 	Hue:                  1118
 	ManaMaxSeed:          40
 	MinTameSkill:         80

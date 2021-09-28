@@ -13,7 +13,7 @@ Marksman: {
 	CreatureType:         "Orc"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMax:              135
+	HitsMaxSeed:              135
 	LootTable:            "52"
 	ManaMaxSeed:          25
 	ProvokeSkillOverride: 80

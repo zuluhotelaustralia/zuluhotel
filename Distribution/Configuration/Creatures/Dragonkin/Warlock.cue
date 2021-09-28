@@ -15,7 +15,7 @@ Warlock: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMax:              225
+	HitsMaxSeed:              225
 	Hue:                  1201
 	LootItemChance:       50
 	LootItemLevel:        2

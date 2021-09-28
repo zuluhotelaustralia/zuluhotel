@@ -16,7 +16,7 @@ Dragon: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMax:              750
+	HitsMaxSeed:              750
 	LootItemChance:       60
 	LootItemLevel:        5
 	LootTable:            "37"

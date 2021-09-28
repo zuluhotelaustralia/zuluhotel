@@ -12,7 +12,7 @@ Mongbat: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         5
 	FightMode:            "Closest"
-	HitsMax:              20
+	HitsMaxSeed:              20
 	LootTable:            "33"
 	ManaMaxSeed:          0
 	MinTameSkill:         25
