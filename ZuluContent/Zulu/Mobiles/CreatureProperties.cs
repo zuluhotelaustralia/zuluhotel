@@ -104,6 +104,10 @@ namespace Server.Mobiles
                 throw new ArgumentNullException($"Failed to apply properties to {nameof(dest)}");
 
             MapAction(this, dest);
+            
+            dest.SetHits(HitsMaxSeed);
+            dest.SetStam(StamMaxSeed);
+            dest.SetMana(ManaMaxSeed);
 
             // Non-mappable props
             if (Skills.Any())

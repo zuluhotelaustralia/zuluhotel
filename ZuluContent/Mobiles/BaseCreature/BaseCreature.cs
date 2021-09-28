@@ -781,14 +781,9 @@ namespace Server.Mobiles
             if (BardPacified && (HitsMax - Hits) * 0.001 > Utility.RandomDouble())
                 Unpacify();
 
-            int disruptThreshold;
-
-            disruptThreshold = 0;
-
-            if (amount > disruptThreshold)
+            if (amount > 0)
             {
-                BandageContext c = BandageContext.GetContext(this);
-
+                var c = BandageContext.GetContext(this);
                 c?.Slip();
             }
 
@@ -2250,6 +2245,7 @@ namespace Server.Mobiles
             if (Tamable && !Controlled && from.Alive)
             {
                 list.Add(new TameEntry(from, this));
+                list.Add(new LoreEntry(from, this));
             }
 
             AddCustomContextEntries(from, list);
@@ -2649,21 +2645,12 @@ namespace Server.Mobiles
 
         public void SetHits(int val)
         {
-            if (val < 1000)
-                val = val * 100 / 60;
-
             HitsMaxSeed = val;
             Hits = HitsMax;
         }
 
         public void SetHits(int min, int max)
         {
-            if (min < 1000)
-            {
-                min = min * 100 / 60;
-                max = max * 100 / 60;
-            }
-
             HitsMaxSeed = Utility.RandomMinMax(min, max);
             Hits = HitsMax;
         }
@@ -3932,6 +3919,33 @@ namespace Server.Mobiles
                 Owner.From.TargetLocked = true;
 
                 if (Owner.From.UseSkill(SkillName.AnimalTaming))
+                {
+                    Owner.From.Target.Invoke(Owner.From, m_Mobile);
+                }
+
+                Owner.From.TargetLocked = false;
+            }
+        }
+        
+        private class LoreEntry : ContextMenuEntry
+        {
+            private readonly BaseCreature m_Mobile;
+
+            public LoreEntry(Mobile from, BaseCreature creature) : base(-1997993, 12)
+            {
+                m_Mobile = creature;
+            }
+
+            public override void OnClick()
+            {
+                if (!Owner.From.CheckAlive())
+                {
+                    return;
+                }
+
+                Owner.From.TargetLocked = true;
+
+                if (Owner.From.UseSkill(SkillName.AnimalLore))
                 {
                     Owner.From.Target.Invoke(Owner.From, m_Mobile);
                 }
