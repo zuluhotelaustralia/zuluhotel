@@ -15,17 +15,17 @@ Clay: Types.#OreSettings & {
 	MaxRange:   2
 	MaxChance:  155
 	ResourceEffect: {
-		Actions: [ 11]
-		Sounds: [ 66]
-		Counts: [ 4]
+		Actions: [11]
+		Sounds: [66]
+		Counts: [4]
 		Delay:      1.6
 		SoundDelay: 0.9
 	}
 	Messages: {
 		NoResourcesMessage:     "There is no clay here to mine."
 		DoubleHarvestMessage:   "There is no clay here to mine."
-		TimedOutOfRangeMessage: 503041
-		OutOfRangeMessage:      500446
+		TimedOutOfRangeMessage: 503041 // You have moved too far away to continue mining.
+		OutOfRangeMessage:      500446 // That is too far away.
 		FailMessage:            "You dig for a while but fail to find any clay."
 		PackFullMessage:        "Your backpack can't hold the clay, and it is lost!"
 		ToolBrokeMessage:       1044038

@@ -22,13 +22,13 @@ Fish: Types.#FishSettings & {
 		SoundDelay: 8.0
 	}
 	Messages: {
-		NoResourcesMessage:     503172
-		DoubleHarvestMessage:   1044629
-		TimedOutOfRangeMessage: 500976
-		OutOfRangeMessage:      500976
-		FailMessage:            503171
-		PackFullMessage:        503176
-		ToolBrokeMessage:       503174
+		NoResourcesMessage:     503172  // The fish don't seem to be biting here.
+		DoubleHarvestMessage:   1044629 // There is no sand here to mine.
+		TimedOutOfRangeMessage: 500976  // You need to be closer to the water to fish!
+		OutOfRangeMessage:      500976  // You need to be closer to the water to fish!
+		FailMessage:            503171  // You fish a while, but fail to catch anything.
+		PackFullMessage:        503176  // You do not have room in your backpack for a fish.
+		ToolBrokeMessage:       503174  // You broke your fishing pole.
 	}
 	Entries: [
 		{

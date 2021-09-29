@@ -16,20 +16,20 @@ Ores: Types.#OreSettings & {
 	MaxRange:   2
 	MaxChance:  155
 	ResourceEffect: {
-		Actions: [ 11]
-		Sounds: [ 66]
-		Counts: [ 4]
+		Actions: [11]
+		Sounds: [66]
+		Counts: [4]
 		Delay:      1.6
 		SoundDelay: 0.9
 	}
 	Messages: {
-		NoResourcesMessage:     503040
-		DoubleHarvestMessage:   503042
-		TimedOutOfRangeMessage: 503041
-		OutOfRangeMessage:      500446
-		FailMessage:            503043
-		PackFullMessage:        1010481
-		ToolBrokeMessage:       1044038
+		NoResourcesMessage:     503040  // There is no metal here to mine.
+		DoubleHarvestMessage:   503042  // Someone has gotten to the metal before you.
+		TimedOutOfRangeMessage: 503041  // You have moved too far away to continue mining.
+		OutOfRangeMessage:      500446  // That is too far away.
+		FailMessage:            503043  // You loosen some rocks but fail to find any useable ore.
+		PackFullMessage:        1010481 // Your backpack is full, so the ore you mined is lost.
+		ToolBrokeMessage:       1044038 // You have worn out your tool!
 	}
 	Entries: [
 		{

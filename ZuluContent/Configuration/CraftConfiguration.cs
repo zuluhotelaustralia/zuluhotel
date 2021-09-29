@@ -9,32 +9,20 @@ namespace Scripts.Configuration
 {
     public class CraftConfiguration : BaseSingleton<CraftConfiguration>
     {
-        public readonly AutoLoopSettings AutoLoop;
-        public readonly CraftSettings Alchemy;
-        public readonly CraftSettings AlchemyPlus;
-        public readonly CraftSettings Blacksmithy;
-        public readonly CraftSettings Carpentry;
-        public readonly CraftSettings Cartography;
-        public readonly CraftSettings Cooking;
-        public readonly CraftSettings Fletching;
-        public readonly CraftSettings Inscription;
-        public readonly CraftSettings Tailoring;
-        public readonly CraftSettings Tinkering;
+        public AutoLoopSettings AutoLoop => CueConfiguration.Instance.RootConfig.Crafting.AutoLoop;
+        public CraftSettings Alchemy => CueConfiguration.Instance.RootConfig.Crafting.Alchemy;
+        public CraftSettings AlchemyPlus => CueConfiguration.Instance.RootConfig.Crafting.AlchemyPlus;
+        public CraftSettings Blacksmithy => CueConfiguration.Instance.RootConfig.Crafting.Blacksmithy;
+        public CraftSettings Carpentry => CueConfiguration.Instance.RootConfig.Crafting.Carpentry;
+        public CraftSettings Cartography => CueConfiguration.Instance.RootConfig.Crafting.Cartography;
+        public CraftSettings Cooking => CueConfiguration.Instance.RootConfig.Crafting.Cooking;
+        public CraftSettings Fletching => CueConfiguration.Instance.RootConfig.Crafting.Fletching;
+        public CraftSettings Inscription => CueConfiguration.Instance.RootConfig.Crafting.Inscription;
+        public CraftSettings Tailoring => CueConfiguration.Instance.RootConfig.Crafting.Tailoring;
+        public CraftSettings Tinkering => CueConfiguration.Instance.RootConfig.Crafting.Tinkering;
         
         protected CraftConfiguration()
         {
-            const string baseDir = "Data/Crafting";
-            AutoLoop = ZhConfig.DeserializeJsonConfig<AutoLoopSettings>($"{baseDir}/autoloop.json");
-            Alchemy = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/alchemy.json");
-            AlchemyPlus = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/alchemyplus.json");
-            Blacksmithy = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/blacksmithy.json");
-            Carpentry = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/carpentry.json");
-            Cartography = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/cartography.json");
-            Cooking = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/cooking.json");
-            Fletching = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/fletching.json");
-            Inscription = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/inscription.json");
-            Tailoring = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/tailoring.json");
-            Tinkering = ZhConfig.DeserializeJsonConfig<CraftSettings>($"{baseDir}/tinkering.json");
         }
     }
     

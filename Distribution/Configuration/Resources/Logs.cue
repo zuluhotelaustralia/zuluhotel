@@ -23,11 +23,11 @@ Logs: Types.#LogSettings & {
 		SoundDelay: 0.9
 	}
 	Messages: {
-		NoResourcesMessage: 500493
-		OutOfRangeMessage:  500446
-		FailMessage:        500495
-		PackFullMessage:    500497
-		ToolBrokeMessage:   500499
+		NoResourcesMessage: 500493 // There's not enough wood here to harvest.
+		OutOfRangeMessage:  500446 // That is too far away.
+		FailMessage:        500495 // You hack at the tree for a while, but fail to produce any useable wood.
+		PackFullMessage:    500497 // You can't place any wood into your backpack!
+		ToolBrokeMessage:   500499 // You broke your axe.
 	}
 	Entries: [
 		{

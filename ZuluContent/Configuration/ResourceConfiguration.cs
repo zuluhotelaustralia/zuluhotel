@@ -1,4 +1,5 @@
 using System;
+using Scripts.Configuration;
 using Server.Misc;
 
 // ReSharper disable UnusedType.Global UnusedMember.Global ClassNeverInstantiated.Global
@@ -6,23 +7,15 @@ namespace Server.Configurations
 {
     public partial class ResourceConfiguration : BaseSingleton<ResourceConfiguration>
     {
-        public readonly ResourceSettings<OreEntry> Ores;
-        public readonly ResourceSettings<OreEntry> Sand;
-        public readonly ResourceSettings<OreEntry> Clay;
-        public readonly ResourceSettings<LogEntry> Logs;
-        public readonly ResourceSettings<HideEntry> Hides;
-        public readonly ResourceSettings<FishEntry> Fish;
+        
+        public ResourceSettings<OreEntry> Ores => CueConfiguration.Instance.RootConfig.Resources.Ores;
+        public ResourceSettings<OreEntry> Sand => CueConfiguration.Instance.RootConfig.Resources.Sand;
+        public ResourceSettings<OreEntry> Clay => CueConfiguration.Instance.RootConfig.Resources.Clay;
+        public ResourceSettings<LogEntry> Logs => CueConfiguration.Instance.RootConfig.Resources.Logs;
+        public ResourceSettings<HideEntry> Hides => CueConfiguration.Instance.RootConfig.Resources.Hides;
+        public ResourceSettings<FishEntry> Fish => CueConfiguration.Instance.RootConfig.Resources.Fish;
 
-        protected ResourceConfiguration()
-        {
-            const string baseDir = "Data/Crafting";
-            Ores = ZhConfig.DeserializeJsonConfig<ResourceSettings<OreEntry>>($"{baseDir}/ores.json");
-            Sand = ZhConfig.DeserializeJsonConfig<ResourceSettings<OreEntry>>($"{baseDir}/sand.json");
-            Clay = ZhConfig.DeserializeJsonConfig<ResourceSettings<OreEntry>>($"{baseDir}/clay.json");
-            Logs = ZhConfig.DeserializeJsonConfig<ResourceSettings<LogEntry>>($"{baseDir}/logs.json");
-            Hides = ZhConfig.DeserializeJsonConfig<ResourceSettings<HideEntry>>($"{baseDir}/hides.json");
-            Fish = ZhConfig.DeserializeJsonConfig<ResourceSettings<FishEntry>>($"{baseDir}/fish.json");
-        }
+        protected ResourceConfiguration() { }
     }
     
     public record OreEntry

@@ -6,7 +6,7 @@ import (
 
 Alchemy: Types.#CraftSettings & {
 	MainSkill:      "Alchemy"
-	GumpTitleId:    1044001
+	GumpTitleId:    1044001 // <CENTER>ALCHEMY MENU</CENTER>
 	MinCraftDelays: 4
 	MaxCraftDelays: 4
 	Delay:          1.0

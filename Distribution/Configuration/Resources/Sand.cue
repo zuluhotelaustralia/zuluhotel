@@ -16,20 +16,20 @@ Sand: Types.#OreSettings & {
 	MaxRange:   2
 	MaxChance:  155
 	ResourceEffect: {
-		Actions: [ 11]
-		Sounds: [ 66]
-		Counts: [ 4]
+		Actions: [11]
+		Sounds: [66]
+		Counts: [4]
 		Delay:      1.6
 		SoundDelay: 0.9
 	}
 	Messages: {
-		NoResourcesMessage:     1044629
-		DoubleHarvestMessage:   1044629
-		TimedOutOfRangeMessage: 503041
-		OutOfRangeMessage:      500446
-		FailMessage:            1044630
-		PackFullMessage:        1044632
-		ToolBrokeMessage:       1044038
+		NoResourcesMessage:     1044629 // There is no sand here to mine.
+		DoubleHarvestMessage:   1044629 // here is no sand here to mine.
+		TimedOutOfRangeMessage: 503041 // You have moved too far away to continue mining.
+		OutOfRangeMessage:      500446 // That is too far away.
+		FailMessage:            1044630 // You dig for a while but fail to find any of sufficient quality for glassblowing.
+		PackFullMessage:        1044632 // Your backpack can't hold the sand, and it is lost!
+		ToolBrokeMessage:       1044038 // You have worn out your tool!
 	}
 	Entries: [
 		{

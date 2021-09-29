@@ -107,6 +107,11 @@
         "resolved": "1.0.0",
         "contentHash": "Pmum5j7q/NJYWWU4rlQEWwFeZW8Xe6khbtZvF1CABr9nIbv7CiQK7dgU4W3KI945u4NH8blX6cBQtOARaEJCMQ=="
       },
+      "FSharp.Core": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "iHoYXA0VaSQUONGENB1aVafjDDZDZpwu39MtaRCTrmwFW/cTcK0b2yKNVYneFHJMc3ChtsSoM9lNtJ1dYXkHfA=="
+      },
       "MessagePack.Annotations": {
         "type": "Transitive",
         "resolved": "2.2.60",
@@ -474,6 +479,13 @@
         "type": "Transitive",
         "resolved": "4.5.3",
         "contentHash": "+MvhNtcvIbqmhANyKu91jQnvIRVSTiaOiFNfKWwXGHG48YAb4I/TyH8spsySiPYla7gKal5ZnF3teJqZAximyQ=="
+      },
+      "cuefsharp": {
+        "type": "Project",
+        "dependencies": {
+          "FSharp.Core": "5.0.0",
+          "System.Reflection.MetadataLoadContext": "5.0.1"
+        }
       },
       "ModernUO": {
         "type": "Project",

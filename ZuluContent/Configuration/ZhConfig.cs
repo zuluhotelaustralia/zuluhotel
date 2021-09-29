@@ -35,7 +35,8 @@ namespace Server
                 new BodyConverterFactory(),
                 new PoisonConverterFactory(),
                 new WeaponAbilityConverterFactory(),
-                new RaceConverterFactory()
+                new RaceConverterFactory(),
+                new LootTableConverterFactory()
             );
 
             DefaultSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
@@ -45,13 +46,13 @@ namespace Server
             stopwatch.Start();
             Console.WriteLine("Starting load of Zuluhotel configurations.");
 
+            Add<SpellConfiguration>();
+            Add<CueConfiguration>();
             Add<MessagingConfiguration>();
             Add<ResourceConfiguration>();
             Add<CraftConfiguration>();
             Add<LootConfiguration>();
             Add<SkillConfiguration>();
-            Add<SpellConfiguration>();
-            Add<CueConfiguration>();
             Add<CreatureConfiguration>();
 
             stopwatch.Stop();
