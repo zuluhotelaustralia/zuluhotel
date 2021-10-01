@@ -57,9 +57,7 @@ namespace Server.Json
                             if (!Enum.TryParse<SpellEntry>(spellValue, out var entry))
                                 throw new ArgumentOutOfRangeException($"{spellValue} is not a valid SpellEntry Enum value");
 
-                            var type = SpellRegistry.SpellTypes[entry];
-                            
-                            ability = new SpellStrike(type);
+                            ability = new SpellStrike(entry);
                             break;
                         }
                     }
@@ -97,7 +95,7 @@ namespace Server.Json
                     writer.WritePropertyName(nameof(Type));
                     writer.WriteStringValue(value.GetType().Name);
                     writer.WritePropertyName(nameof(SpellStrike.SpellType));
-                    writer.WriteStringValue(spellStrike.SpellType.Name);
+                    writer.WriteStringValue(spellStrike.SpellType.ToString());
                     writer.WriteEndObject();
                     break;
                 }

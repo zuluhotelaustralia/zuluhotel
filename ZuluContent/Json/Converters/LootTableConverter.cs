@@ -25,13 +25,13 @@ namespace Server.Json
             
             while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
             {
-                ReadEntry(table, ref reader);
+                ReadEntries(table, ref reader);
             }
 
             return table;
         }
 
-        private void ReadEntry(LootGroup table, ref Utf8JsonReader reader)
+        private void ReadEntries(LootGroup parent, ref Utf8JsonReader reader)
         {
             if (reader.TokenType != JsonTokenType.StartObject) 
                 throw new JsonException();
@@ -65,19 +65,19 @@ namespace Server.Json
                         group = new LootGroup();
                         while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
                         {
-                            ReadEntry(group, ref reader);
+                            ReadEntries(group, ref reader);
                         }
                         break;
                 }
             }
 
-            if (group != null && table is LootTable tbl)
+            if (group != null && parent is LootTable table)
             {
-                tbl.Add(group, minQuantity, maxQuantity, chance);
+                table.Add(group, minQuantity, maxQuantity, chance);
             }
             else if (type != null)
             {
-                table.Add(type, minQuantity, maxQuantity, chance);
+                parent.Add(type, minQuantity, maxQuantity, chance);
             }
         }
 

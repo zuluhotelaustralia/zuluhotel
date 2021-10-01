@@ -18,6 +18,7 @@ Necromancer: {
 	ManaMaxSeed:          95
 	ProvokeSkillOverride: 90
 	RiseCreatureDelay:    "00:00:08"
+	RiseCreatureTemplate: "LicheLord"
 	StamMaxSeed:          50
 	PreferredSpells: ["EnergyBolt", "Lightning", "Fireball", "MassCurse", "Explosion", "WraithForm", "LicheForm", "Darkness", "DecayingRay"]
 	Resistances: {

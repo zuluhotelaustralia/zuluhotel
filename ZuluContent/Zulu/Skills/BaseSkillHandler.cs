@@ -8,8 +8,13 @@ namespace ZuluContent.Zulu.Skills
     {
         public abstract SkillName Skill { get; }
         public static TimeSpan Delay => ZhConfig.Skills.Entries[SkillName.Anatomy].Delay;
-        
-        
+
+        public BaseSkillHandler()
+        {
+            // ReSharper disable once VirtualMemberCallInConstructor
+            SkillInfo.Table[(int)Skill].Callback = mobile => DispatchOnUseSkillHandler(mobile, this);
+        }
+
         public abstract Task<TimeSpan> OnUse(Mobile @from);
 
         public static TimeSpan DispatchOnUseSkillHandler(Mobile mobile, BaseSkillHandler handler)

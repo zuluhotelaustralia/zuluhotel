@@ -23,6 +23,7 @@ TaintedRanger: {
 	LootTable:          "131"
 	ManaMaxSeed:        0
 	RiseCreatureDelay:  "00:00:02"
+	RiseCreatureTemplate: "EvisceratedCarcass"
 	StamMaxSeed:        150
 	Skills: {
 		Tactics:      100

@@ -43,6 +43,12 @@ namespace Scripts.Configuration
         [JsonConverter(typeof(CaseInsensitiveDictionaryConverter<LootTable>))]
         public Dictionary<string, LootTable> Tables { get; init; }
     }
+
+    public record Magic
+    {
+        public List<SpellCircle> Circles { get; init; }
+        public Dictionary<SpellEntry, SpellInfo> Spells { get; init; }
+    }
     
     public record RootConfig
     {
@@ -51,7 +57,8 @@ namespace Scripts.Configuration
         public Crafting Crafting { get; init; }
         public Resources Resources { get; init; }
         public Loot Loot { get; init; }
-
+        public Magic Magic { get; init; }
+        public SkillSettings Skills { get; init; }
     }
 
     public class CueConfiguration : BaseSingleton<CueConfiguration>
@@ -77,7 +84,13 @@ namespace Scripts.Configuration
                     typeof(FishEntry).FullName,
                     typeof(CreatureEquip).FullName,
                     typeof(CreatureProperties).FullName,
-                    typeof(OppositionGroup).FullName
+                    typeof(OppositionGroup).FullName,
+                    typeof(SpellInfo).FullName,
+                    typeof(SpellCircle).FullName,
+                    typeof(SkillEntry).FullName,
+                    typeof(StatAdvancement).FullName,
+                    typeof(SkillSettings).FullName
+                    
                 }
             );
 
@@ -98,7 +111,6 @@ namespace Scripts.Configuration
                     Console.Write($"\tCUE Configuration is out of date, rebuilding via cli `cue {cueArgs}` ... ");
 
                     var (_, stderr, exitCode) = RunCueCli(configRoot, cueArgs);
-
                     if (exitCode != 0)
                         throw new ApplicationException(
                             $"Failed to run cli command line, received non-zero exit code {exitCode}: {stderr}"

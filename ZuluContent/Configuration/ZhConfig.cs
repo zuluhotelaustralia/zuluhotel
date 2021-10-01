@@ -36,7 +36,8 @@ namespace Server
                 new PoisonConverterFactory(),
                 new WeaponAbilityConverterFactory(),
                 new RaceConverterFactory(),
-                new LootTableConverterFactory()
+                new LootTableConverterFactory(),
+                new SkillHandlerConverterFactory()
             );
 
             DefaultSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Items;
@@ -8,10 +9,11 @@ using Server.Mobiles;
 using Server.Spells;
 using Server.Network;
 using Server.Utilities;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public static class SpiritSpeak
+    public class SpiritSpeak : BaseSkillHandler
     {
         private static readonly Dictionary<Point3D, long> UsedGravestones = new();
         private static readonly long GravestoneCooldown = (int) TimeSpan.FromHours(6).TotalMilliseconds;
@@ -34,12 +36,9 @@ namespace Server.SkillHandlers
             ("DaemonLieutenant", typeof(LicheScroll)),
         };
 
-        public static void Initialize()
-        {
-            SkillInfo.Table[(int) SkillName.SpiritSpeak].Callback = OnUse;
-        }
+        public override SkillName Skill => SkillName.SpiritSpeak;
 
-        public static TimeSpan OnUse(Mobile m)
+        public override async Task<TimeSpan> OnUse(Mobile m)
         {
             m.RevealingAction();
 

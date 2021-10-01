@@ -1,5 +1,7 @@
 package Types
 
+#StatType: "Int" | "Str" | "Dex"
+
 #CreatureTypeEnum: {
 	None:      "None"
 	Human:     "Human"

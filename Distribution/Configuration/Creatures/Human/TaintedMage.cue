@@ -1,26 +1,27 @@
 package Human
 
 TaintedMage: {
-	Name:               "<random> the Tainted Mage"
-	CorpseNameOverride: "corpse of <random> the Tainted Mage"
-	Str:                200
-	Int:                1000
-	Dex:                150
-	AiType:             "AI_Mage"
-	AlwaysMurderer:     true
-	ClassLevel:         3
-	ClassType:          "Mage"
-	CreatureType:       "Human"
-	VirtualArmor:       30
-	FightMode:          "Closest"
-	HitsMaxSeed:        200
-	Hue:                1
-	LootItemChance:     50
-	LootItemLevel:      4
-	LootTable:          "131"
-	ManaMaxSeed:        1000
-	RiseCreatureDelay:  "00:00:02"
-	StamMaxSeed:        50
+	Name:                 "<random> the Tainted Mage"
+	CorpseNameOverride:   "corpse of <random> the Tainted Mage"
+	Str:                  200
+	Int:                  1000
+	Dex:                  150
+	AiType:               "AI_Mage"
+	AlwaysMurderer:       true
+	ClassLevel:           3
+	ClassType:            "Mage"
+	CreatureType:         "Human"
+	VirtualArmor:         30
+	FightMode:            "Closest"
+	HitsMaxSeed:          200
+	Hue:                  1
+	LootItemChance:       50
+	LootItemLevel:        4
+	LootTable:            "131"
+	ManaMaxSeed:          1000
+	RiseCreatureDelay:    "00:00:02"
+	RiseCreatureTemplate: "EvisceratedCarcass"
+	StamMaxSeed:          50
 	PreferredSpells: ["WyvernStrike", "AbyssalFlame", "EnergyBolt", "Plague", "SorcerersBane", "WyvernStrike", "DispelField", "MassDispel", "WraithBreath", "Darkness"]
 	Skills: {
 		Tactics:     100

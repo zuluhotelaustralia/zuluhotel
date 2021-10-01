@@ -12,11 +12,11 @@ FallenPaladin: {
 	HitsMaxSeed:          6000
 	Hue:                  33784
 	ManaMaxSeed:          0
-	MinTameSkill:         170
 	ProvokeSkillOverride: 170
 	RiseCreatureDelay:    "00:00:00"
+	RiseCreatureTemplate: "HellbornePaladinsRevenant"
 	StamMaxSeed:          3000
-	Tamable:              true
+	Tamable:              false
 	Resistances: {
 		Poison:        6
 		Fire:          100

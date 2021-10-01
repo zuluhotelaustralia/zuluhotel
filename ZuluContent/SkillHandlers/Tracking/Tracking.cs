@@ -5,16 +5,19 @@ using Server.Mobiles;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
 using System.Linq;
+using System.Threading.Tasks;
 using Scripts.Zulu.Utilities;
+using ZuluContent.Zulu.Skills;
 
 namespace Server.SkillHandlers
 {
-    public static class Tracking
+    public class Tracking : BaseSkillHandler
     {
-        public static void Configure()
+        public override SkillName Skill => SkillName.Tracking;
+
+        static Tracking()
         {
             IncomingExtendedCommandPackets.RegisterExtended(0x07, true, QuestArrow);
-            SkillInfo.Table[(int) SkillName.Tracking].Callback = OnUse;
         }
 
         public static void QuestArrow(NetState state, CircularBufferReader reader, ref int packetLength)
@@ -26,8 +29,8 @@ namespace Server.SkillHandlers
                 from.QuestArrow?.OnClick(rightClick);
             }
         }
-
-        public static TimeSpan OnUse(Mobile m)
+        
+        public override async Task<TimeSpan> OnUse(Mobile m)
         {
             if (m is PlayerMobile from)
             {
