@@ -525,7 +525,7 @@ namespace Server.Mobiles
             if (m_Table == null)
                 LoadTable();
 
-            if (name == null || m_Table == null)
+            if (name == null || m_Table == null || !m_Table.ContainsKey(name))
                 return null;
 
             return m_Table[name];
