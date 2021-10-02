@@ -13,7 +13,7 @@ MageMenacer: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       60
 	FightMode:          "Closest"
-	HitsMaxSeed:            3000
+	HitsMaxSeed:        3000
 	Hue:                1306
 	LootItemChance:     80
 	LootItemLevel:      7
@@ -46,6 +46,6 @@ MageMenacer: {
 		HitSound:      364
 		Ability:       "BlackrockStrike"
 		AbilityChance: 1
-		HitPoison: "Deadly"
+		HitPoison:     "Deadly"
 	}
 }

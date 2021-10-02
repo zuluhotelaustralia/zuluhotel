@@ -3,7 +3,7 @@ package Animal
 IceOstard: {
 	Name:                 "an ice ostard"
 	CorpseNameOverride:   "corpse of an ice ostard"
-  Str:                  160
+	Str:                  160
 	Int:                  110
 	Dex:                  400
 	AiType:               "AI_Animal"
@@ -13,7 +13,7 @@ IceOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              160
+	HitsMaxSeed:          160
 	Hue:                  1152
 	ManaMaxSeed:          100
 	MinTameSkill:         95

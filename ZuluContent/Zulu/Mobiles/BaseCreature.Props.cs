@@ -7,6 +7,7 @@ using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Magic;
 using Server.Network;
 using Server.Spells;
+using ZuluContent.Configuration.Types.Creatures;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;

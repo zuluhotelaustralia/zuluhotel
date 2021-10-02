@@ -3,7 +3,7 @@ package Dragonkin
 Warlock: {
 	Name:                 "<random> the Warlock"
 	CorpseNameOverride:   "corpse of <random> the Warlock"
-  Str:                  225
+	Str:                  225
 	Int:                  295
 	Dex:                  180
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ Warlock: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              225
+	HitsMaxSeed:          225
 	Hue:                  1201
 	LootItemChance:       50
 	LootItemLevel:        2

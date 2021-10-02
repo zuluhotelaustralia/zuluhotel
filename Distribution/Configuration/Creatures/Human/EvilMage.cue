@@ -9,7 +9,7 @@ EvilMage: {
 	AiType:               "AI_Mage"
 	CreatureType:         "Human"
 	VirtualArmor:         20
-	HitsMaxSeed:              180
+	HitsMaxSeed:          180
 	LootItemChance:       2
 	LootTable:            "57"
 	ManaMaxSeed:          105

@@ -3,7 +3,7 @@ package Dragonkin
 Warrior: {
 	Name:                 "<random> the warrior"
 	CorpseNameOverride:   "corpse of <random> the warrior"
-  Str:                  205
+	Str:                  205
 	Int:                  60
 	Dex:                  103
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ Warrior: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              205
+	HitsMaxSeed:          205
 	LootTable:            "11"
 	ManaMaxSeed:          40
 	ProvokeSkillOverride: 70

@@ -3,7 +3,7 @@ package Dragonkin
 AdamantineDragon: {
 	Name:                 "an Adamantine Dragon"
 	CorpseNameOverride:   "corpse of an Adamantine Dragon"
-  Str:                  600
+	Str:                  600
 	Int:                  600
 	Dex:                  450
 	PassiveSpeed:         0.2
@@ -13,7 +13,7 @@ AdamantineDragon: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
 	FightMode:            "Closest"
-	HitsMaxSeed:              2000
+	HitsMaxSeed:          2000
 	Hue:                  1006
 	LootItemChance:       80
 	LootItemLevel:        5

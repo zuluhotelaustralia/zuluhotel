@@ -3,7 +3,7 @@ package Animal
 StoneOstard: {
 	Name:                 "a stone ostard"
 	CorpseNameOverride:   "corpse of a stone ostard"
-  Str:                  250
+	Str:                  250
 	Int:                  35
 	Dex:                  210
 	AiType:               "AI_Animal"
@@ -13,7 +13,7 @@ StoneOstard: {
 	VirtualArmor:         20
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  1154
 	ManaMaxSeed:          125
 	MinTameSkill:         75

@@ -12,7 +12,7 @@ SkeletonArcher: {
 	CreatureType:       "Undead"
 	VirtualArmor:       5
 	FightMode:          "Closest"
-	HitsMaxSeed:            100
+	HitsMaxSeed:        100
 	Hue:                33784
 	LootTable:          "49"
 	ManaMaxSeed:        0
@@ -29,7 +29,7 @@ SkeletonArcher: {
 			Min: 10
 			Max: 22
 		}
-	},
+	}
 	Equipment: [
 		{
 			ItemType: "Bow"

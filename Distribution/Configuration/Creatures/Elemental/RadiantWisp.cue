@@ -3,7 +3,7 @@ package Elemental
 RadiantWisp: {
 	Name:                 "a Radiant Wisp"
 	CorpseNameOverride:   "corpse of a Radiant Wisp"
-  Str:                  350
+	Str:                  350
 	Int:                  550
 	Dex:                  275
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ RadiantWisp: {
 	CanSwim:              true
 	CreatureType:         "Elemental"
 	VirtualArmor:         40
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  1154
 	InitialInnocent:      true
 	LootItemChance:       25

@@ -3,7 +3,7 @@ package Ophidian
 OphidianKnightErrant: {
 	Name:                 "an Ophidian Knight-Errant"
 	CorpseNameOverride:   "corpse of an Ophidian Knight-Errant"
-  Str:                  750
+	Str:                  750
 	Int:                  160
 	Dex:                  310
 	ActiveSpeed:          0.15
@@ -16,7 +16,7 @@ OphidianKnightErrant: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMaxSeed:              1750
+	HitsMaxSeed:          1750
 	LootTable:            "71"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 120

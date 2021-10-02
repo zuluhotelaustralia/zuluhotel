@@ -12,7 +12,7 @@ Shadow: {
 	VirtualArmor:       45
 	Fame:               5
 	FightMode:          "Closest"
-	HitsMaxSeed:            1200
+	HitsMaxSeed:        1200
 	Karma:              5
 	LootItemChance:     100
 	LootTable:          "97"

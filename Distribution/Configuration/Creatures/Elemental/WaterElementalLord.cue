@@ -14,7 +14,7 @@ WaterElementalLord: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
 	FightMode:          "Closest"
-	HitsMaxSeed:            350
+	HitsMaxSeed:        350
 	Hue:                102
 	LootItemChance:     60
 	LootItemLevel:      4

@@ -3,7 +3,7 @@ package Dragonkin
 AncientDracoliche: {
 	Name:                 "an Ancient Dracoliche"
 	CorpseNameOverride:   "corpse of an Ancient Dracoliche"
-  Str:                  3000
+	Str:                  3000
 	Int:                  1500
 	Dex:                  175
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ AncientDracoliche: {
 	ClassType:            "Mage"
 	CreatureType:         "Dragonkin"
 	FightMode:            "Closest"
-	HitsMaxSeed:              2000
+	HitsMaxSeed:          2000
 	Hue:                  1282
 	LootItemChance:       70
 	LootItemLevel:        7

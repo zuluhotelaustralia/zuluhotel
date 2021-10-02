@@ -8,13 +8,10 @@ namespace Server.Engines.Magic.HitScripts
 {
     public class SpellStrike : WeaponAbility
     {
-        public Type SpellType { get; protected set; }
+        public readonly SpellEntry SpellType;
 
-        public SpellStrike(Type spellType)
+        public SpellStrike(SpellEntry spellType)
         {
-            if (!spellType.IsSubclassOf(typeof(Spell)))
-                throw new ArgumentOutOfRangeException($"{nameof(spellType)} {spellType.Name} must inherit from {typeof(Spell)}");
-            
             SpellType = spellType;
         }
         
@@ -41,7 +38,7 @@ namespace Server.Engines.Magic.HitScripts
             catch (Exception e)
             {
                 Console.WriteLine(
-                    $"Failed to invoke {GetType().Name}<{SpellType.Name}> for Mobile: {attacker.GetType().Name}, Serial: {attacker.Serial}");
+                    $"Failed to invoke {GetType().Name}<{SpellType}> for Mobile: {attacker.GetType().Name}, Serial: {attacker.Serial}");
             }
         }
 

@@ -3,7 +3,7 @@ package Gargoyle
 FlamingGargoyle: {
 	Name:                 "a flaming gargoyle"
 	CorpseNameOverride:   "corpse of a flaming gargoyle"
-  Str:                  250
+	Str:                  250
 	Int:                  335
 	Dex:                  95
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ FlamingGargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  232
 	LootItemChance:       60
 	LootItemLevel:        2

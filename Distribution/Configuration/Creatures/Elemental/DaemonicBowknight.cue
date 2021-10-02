@@ -3,7 +3,7 @@ package Elemental
 DaemonicBowknight: {
 	Name:                 "a Daemonic Bowknight"
 	CorpseNameOverride:   "corpse of a Daemonic Bowknight"
-  Str:                  2250
+	Str:                  2250
 	Int:                  55
 	Dex:                  400
 	AiType:               "AI_Archer"
@@ -14,7 +14,7 @@ DaemonicBowknight: {
 	VirtualArmor:         45
 	FightMode:            "Closest"
 	FightRange:           7
-	HitsMaxSeed:              2250
+	HitsMaxSeed:          2250
 	Hue:                  16385
 	LootItemChance:       50
 	LootItemLevel:        5

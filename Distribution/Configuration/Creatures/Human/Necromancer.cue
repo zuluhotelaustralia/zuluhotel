@@ -11,13 +11,14 @@ Necromancer: {
 	VirtualArmor:         25
 	HideType:             "Necromancer"
 	Hides:                3
-	HitsMaxSeed:              130
+	HitsMaxSeed:          130
 	LootItemChance:       50
 	LootItemLevel:        3
 	LootTable:            "46"
 	ManaMaxSeed:          95
 	ProvokeSkillOverride: 90
 	RiseCreatureDelay:    "00:00:08"
+	RiseCreatureTemplate: "LicheLord"
 	StamMaxSeed:          50
 	PreferredSpells: ["EnergyBolt", "Lightning", "Fireball", "MassCurse", "Explosion", "WraithForm", "LicheForm", "Darkness", "DecayingRay"]
 	Resistances: {

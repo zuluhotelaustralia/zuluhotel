@@ -3,7 +3,7 @@ package Ophidian
 OphidianDefender: {
 	Name:                 "an Ophidian Defender"
 	CorpseNameOverride:   "corpse of an Ophidian Defender"
-  Str:                  2050
+	Str:                  2050
 	Int:                  35
 	Dex:                  210
 	ActiveSpeed:          0.15
@@ -18,7 +18,7 @@ OphidianDefender: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	LootTable:            "70"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 110

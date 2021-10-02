@@ -3,14 +3,14 @@ package Daemon
 Valkerie: {
 	Name:                 "a Valkerie"
 	CorpseNameOverride:   "corpse of a Valkerie"
-  Str:                  180
+	Str:                  180
 	Int:                  80
 	Dex:                  180
 	BaseSoundID:          402
 	Body:                 30
 	CreatureType:         "Daemon"
 	VirtualArmor:         15
-	HitsMaxSeed:              180
+	HitsMaxSeed:          180
 	Hue:                  148
 	LootTable:            "29"
 	ManaMaxSeed:          0

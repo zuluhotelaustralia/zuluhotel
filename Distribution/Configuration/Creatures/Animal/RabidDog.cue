@@ -3,14 +3,14 @@ package Animal
 RabidDog: {
 	Name:                 "a rabid dog"
 	CorpseNameOverride:   "corpse of a rabid dog"
-  Str:                  40
+	Str:                  40
 	Int:                  25
 	Dex:                  85
 	BaseSoundID:          133
 	Body:                 217
 	CreatureType:         "Animal"
 	VirtualArmor:         5
-	HitsMaxSeed:              40
+	HitsMaxSeed:          40
 	Hue:                  33784
 	ManaMaxSeed:          15
 	MinTameSkill:         35

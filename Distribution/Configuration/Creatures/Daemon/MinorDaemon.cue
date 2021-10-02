@@ -3,7 +3,7 @@ package Daemon
 MinorDaemon: {
 	Name:                 "a minor daemon"
 	CorpseNameOverride:   "corpse of a minor daemon"
-  Str:                  275
+	Str:                  275
 	Int:                  85
 	Dex:                  180
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ MinorDaemon: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              275
+	HitsMaxSeed:          275
 	Hue:                  35
 	LootItemChance:       10
 	LootItemLevel:        3

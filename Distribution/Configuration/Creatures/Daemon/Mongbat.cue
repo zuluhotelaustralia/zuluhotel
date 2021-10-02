@@ -3,7 +3,7 @@ package Daemon
 Mongbat: {
 	Name:                 "a mongbat"
 	CorpseNameOverride:   "corpse of a mongbat"
-  Str:                  20
+	Str:                  20
 	Int:                  35
 	Dex:                  60
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ Mongbat: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         5
 	FightMode:            "Closest"
-	HitsMaxSeed:              20
+	HitsMaxSeed:          20
 	LootTable:            "33"
 	ManaMaxSeed:          0
 	MinTameSkill:         25

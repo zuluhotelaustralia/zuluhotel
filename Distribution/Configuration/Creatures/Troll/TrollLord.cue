@@ -3,7 +3,7 @@ package Troll
 TrollLord: {
 	Name:                 "a troll lord"
 	CorpseNameOverride:   "corpse of a troll lord"
-  Str:                  350
+	Str:                  350
 	Int:                  65
 	Dex:                  150
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ TrollLord: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  33784
 	LootItemChance:       25
 	LootItemLevel:        2

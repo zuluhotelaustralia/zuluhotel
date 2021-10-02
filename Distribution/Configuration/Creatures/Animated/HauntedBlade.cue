@@ -3,7 +3,7 @@ package Animated
 HauntedBlade: {
 	Name:                 "a haunted blade"
 	CorpseNameOverride:   "corpse of a haunted blade"
-  Str:                  180
+	Str:                  180
 	Int:                  35
 	Dex:                  250
 	AlwaysMurderer:       true
@@ -11,7 +11,7 @@ HauntedBlade: {
 	CreatureType:         "Animated"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMaxSeed:              180
+	HitsMaxSeed:          180
 	LootTable:            "48"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 60

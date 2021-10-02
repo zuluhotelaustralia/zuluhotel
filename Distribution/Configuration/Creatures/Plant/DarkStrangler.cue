@@ -14,7 +14,7 @@ DarkStrangler: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMaxSeed:            400
+	HitsMaxSeed:        400
 	Hue:                1285
 	LootItemChance:     50
 	LootItemLevel:      4
@@ -35,9 +35,9 @@ DarkStrangler: {
 			Min: 16
 			Max: 46
 		}
-		HitSound:  458
-		MissSound: 457
-		HitPoison: "Regular"
+		HitSound:           458
+		MissSound:          457
+		HitPoison:          "Regular"
 		ProjectileEffectId: 0x37C4
 	}
 	Equipment: [{

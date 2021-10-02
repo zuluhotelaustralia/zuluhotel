@@ -3,7 +3,7 @@ package Terathan
 TerathanStriker: {
 	Name:                 "a Terathan Striker"
 	CorpseNameOverride:   "corpse of a Terathan Striker"
-  Str:                  370
+	Str:                  370
 	Int:                  55
 	Dex:                  635
 	ActiveSpeed:          0.15
@@ -14,7 +14,7 @@ TerathanStriker: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMaxSeed:              370
+	HitsMaxSeed:          370
 	Hue:                  11
 	LootTable:            "64"
 	ManaMaxSeed:          0

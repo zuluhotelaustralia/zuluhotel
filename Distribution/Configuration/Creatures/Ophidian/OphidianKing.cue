@@ -3,7 +3,7 @@ package Ophidian
 OphidianKing: {
 	Name:                 "The Ophidian King"
 	CorpseNameOverride:   "corpse of The Ophidian King"
-  Str:                  2050
+	Str:                  2050
 	Dex:                  800
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
@@ -15,7 +15,7 @@ OphidianKing: {
 	CreatureType:         "Ophidian"
 	VirtualArmor:         50
 	FightMode:            "Closest"
-	HitsMaxSeed:              2050
+	HitsMaxSeed:          2050
 	Hue:                  1209
 	LootItemChance:       75
 	LootItemLevel:        7

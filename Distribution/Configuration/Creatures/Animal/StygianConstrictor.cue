@@ -14,7 +14,7 @@ StygianConstrictor: {
 	FightMode:          "Closest"
 	HideType:           "Serpent"
 	Hides:              5
-	HitsMaxSeed:            275
+	HitsMaxSeed:        275
 	Hue:                1157
 	ManaMaxSeed:        70
 	StamMaxSeed:        75

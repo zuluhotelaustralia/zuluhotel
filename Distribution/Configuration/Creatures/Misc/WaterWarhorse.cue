@@ -3,14 +3,14 @@ package Misc
 WaterWarhorse: {
 	Name:                 "a water warhorse"
 	CorpseNameOverride:   "corpse of a water warhorse"
-  Str:                  500
+	Str:                  500
 	Int:                  500
 	Dex:                  500
 	Body:                 144
 	VirtualArmor:         40
 	Fame:                 1
 	FightMode:            "Closest"
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Karma:                1
 	LootItemChance:       100
 	LootTable:            "26"

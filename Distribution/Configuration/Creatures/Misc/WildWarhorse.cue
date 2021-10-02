@@ -3,7 +3,7 @@ package Misc
 WildWarhorse: {
 	Name:                 "a wild warhorse"
 	CorpseNameOverride:   "corpse of a wild warhorse"
-  Str:                  500
+	Str:                  500
 	Int:                  500
 	Dex:                  500
 	BaseSoundID:          168
@@ -11,7 +11,7 @@ WildWarhorse: {
 	VirtualArmor:         40
 	Fame:                 1
 	FightMode:            "Closest"
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Karma:                1
 	LootItemChance:       100
 	LootTable:            "26"

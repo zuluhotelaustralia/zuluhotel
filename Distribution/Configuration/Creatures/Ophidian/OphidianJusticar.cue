@@ -3,7 +3,7 @@ package Ophidian
 OphidianJusticar: {
 	Name:                 "an Ophidian Justicar"
 	CorpseNameOverride:   "corpse of an Ophidian Justicar"
-  Str:                  500
+	Str:                  500
 	Int:                  1000
 	Dex:                  210
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ OphidianJusticar: {
 	FightMode:            "Closest"
 	HideType:             "Serpent"
 	Hides:                5
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	LootTable:            "66"
 	ManaMaxSeed:          1000
 	ProvokeSkillOverride: 110

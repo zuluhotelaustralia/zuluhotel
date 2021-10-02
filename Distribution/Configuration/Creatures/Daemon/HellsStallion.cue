@@ -3,7 +3,7 @@ package Daemon
 HellsStallion: {
 	Name:                 "a Hells Stallion"
 	CorpseNameOverride:   "corpse of a Hells Stallion"
-  Str:                  1950
+	Str:                  1950
 	Int:                  450
 	Dex:                  650
 	PassiveSpeed:         0.2
@@ -14,7 +14,7 @@ HellsStallion: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         60
 	FightMode:            "Closest"
-	HitsMaxSeed:              1050
+	HitsMaxSeed:          1050
 	Hue:                  1305
 	LootItemChance:       90
 	LootItemLevel:        5

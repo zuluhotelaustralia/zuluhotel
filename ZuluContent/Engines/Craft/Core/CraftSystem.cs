@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Scripts.Configuration;
 using Server.Items;
 using Server.Misc;
 using Server.Spells;
+using ZuluContent.Configuration.Types;
+using ZuluContent.Configuration.Types.Crafting;
 
 namespace Server.Engines.Craft
 {

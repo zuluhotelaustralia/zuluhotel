@@ -10,7 +10,7 @@ Frankenstein: {
 	CreatureType:       "Undead"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMaxSeed:            450
+	HitsMaxSeed:        450
 	Hue:                1433
 	LootItemChance:     15
 	LootItemLevel:      4

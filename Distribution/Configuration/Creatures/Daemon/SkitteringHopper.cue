@@ -12,7 +12,7 @@ SkitteringHopper: {
 	Body:               302
 	CreatureType:       "Daemon"
 	FightMode:          "Closest"
-	HitsMaxSeed:            300
+	HitsMaxSeed:        300
 	Hue:                33784
 	LootItemChance:     70
 	LootItemLevel:      3

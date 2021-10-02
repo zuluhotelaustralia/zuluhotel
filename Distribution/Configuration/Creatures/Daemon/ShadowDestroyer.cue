@@ -3,7 +3,7 @@ package Daemon
 ShadowDestroyer: {
 	Name:                 "Shadow Destroyer"
 	CorpseNameOverride:   "corpse of Shadow Destroyer"
-  Str:                  1550
+	Str:                  1550
 	Int:                  500
 	Dex:                  450
 	ActiveSpeed:          0.15
@@ -16,7 +16,7 @@ ShadowDestroyer: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
 	FightMode:            "Closest"
-	HitsMaxSeed:              1200
+	HitsMaxSeed:          1200
 	Hue:                  1172
 	LootItemChance:       90
 	LootItemLevel:        7

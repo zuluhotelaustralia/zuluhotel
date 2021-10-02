@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Server.Items;
 using EDI = Server.Mobiles.EscortDestinationInfo;
@@ -500,7 +501,7 @@ namespace Server.Mobiles
             m_Region = region;
         }
 
-        private static Hashtable m_Table;
+        private static ConcurrentDictionary<string, EscortDestinationInfo> m_Table = new();
 
         public static void LoadTable()
         {
@@ -508,8 +509,6 @@ namespace Server.Mobiles
 
             if (list.Count == 0)
                 return;
-
-            m_Table = new Hashtable();
 
             foreach (Region r in list)
             {
@@ -529,7 +528,7 @@ namespace Server.Mobiles
             if (name == null || m_Table == null)
                 return null;
 
-            return (EscortDestinationInfo) m_Table[name];
+            return m_Table[name];
         }
     }
 }

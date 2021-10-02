@@ -3,7 +3,7 @@ package Dragonkin
 FrostDragon: {
 	Name:                 "a Frost Dragon"
 	CorpseNameOverride:   "corpse of a Frost Dragon"
-  Str:                  800
+	Str:                  800
 	Int:                  400
 	Dex:                  60
 	AlwaysMurderer:       true
@@ -15,7 +15,7 @@ FrostDragon: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMaxSeed:              800
+	HitsMaxSeed:          800
 	Hue:                  1176
 	LootItemChance:       75
 	LootItemLevel:        5

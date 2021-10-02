@@ -3,7 +3,7 @@ package Dragonkin
 PoisonDrake: {
 	Name:                 "a Poison Drake"
 	CorpseNameOverride:   "corpse of a Poison Drake"
-  Str:                  350
+	Str:                  350
 	Int:                  90
 	Dex:                  300
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ PoisonDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  264
 	LootItemChance:       25
 	LootItemLevel:        4
@@ -41,7 +41,7 @@ PoisonDrake: {
 			Min: 33
 			Max: 73
 		}
-		HitSound: 364
+		HitSound:  364
 		HitPoison: "Greater"
 	}
 }

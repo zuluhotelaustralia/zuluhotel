@@ -19,6 +19,7 @@ using Server.Gumps;
 using Server.SkillHandlers;
 using Server.Scripts.Engines.Loot;
 using Server.Utilities;
+using ZuluContent.Configuration.Types.Creatures;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 using ZuluContent.Zulu.Items;
@@ -927,7 +928,6 @@ namespace Server.Mobiles
         protected BaseCreature(CreatureProperties p) : this(p.AiType, p.FightMode, p.PerceptionRange, p.FightRange,
             p.ActiveSpeed, p.PassiveSpeed)
         {
-            p.ApplyTo(this);
         }
 
         public BaseCreature(Serial serial) : base(serial)

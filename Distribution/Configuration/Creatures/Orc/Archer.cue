@@ -3,7 +3,7 @@ package Orc
 Archer: {
 	Name:                 "<random> the archer"
 	CorpseNameOverride:   "corpse of <random> the archer"
-  Str:                  170
+	Str:                  170
 	Int:                  35
 	Dex:                  180
 	AiType:               "AI_Archer"
@@ -12,7 +12,7 @@ Archer: {
 	Body:                 17
 	CreatureType:         "Orc"
 	FightMode:            "Closest"
-	HitsMaxSeed:              170
+	HitsMaxSeed:          170
 	LootTable:            "52"
 	ManaMaxSeed:          25
 	ProvokeSkillOverride: 80
@@ -28,7 +28,7 @@ Archer: {
 			Min: 0
 			Max: 0
 		}
-	},
+	}
 	Equipment: [
 		{
 			ItemType: "Bow"

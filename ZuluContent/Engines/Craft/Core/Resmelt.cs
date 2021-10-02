@@ -1,7 +1,6 @@
 using System;
 using Server.Targeting;
 using Server.Items;
-using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Craft
 {

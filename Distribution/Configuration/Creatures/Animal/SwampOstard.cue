@@ -3,7 +3,7 @@ package Animal
 SwampOstard: {
 	Name:                 "a swamp ostard"
 	CorpseNameOverride:   "corpse of a swamp ostard"
-  Str:                  120
+	Str:                  120
 	Int:                  35
 	Dex:                  240
 	AiType:               "AI_Animal"
@@ -13,7 +13,7 @@ SwampOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              120
+	HitsMaxSeed:          120
 	Hue:                  2001
 	ManaMaxSeed:          0
 	MinTameSkill:         55

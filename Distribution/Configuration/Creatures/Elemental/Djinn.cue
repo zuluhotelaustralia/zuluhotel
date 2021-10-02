@@ -14,7 +14,7 @@ Djinn: {
 	VirtualArmor:       45
 	HideType:           "Lava"
 	Hides:              4
-	HitsMaxSeed:            450
+	HitsMaxSeed:        450
 	Hue:                1209
 	LootItemChance:     60
 	LootItemLevel:      5

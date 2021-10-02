@@ -3,7 +3,7 @@ package Dragonkin
 GoldenDragonLord: {
 	Name:                 "a Golden Dragon Lord"
 	CorpseNameOverride:   "corpse of a Golden Dragon Lord"
-  Str:                  2250
+	Str:                  2250
 	Int:                  500
 	Dex:                  450
 	PassiveSpeed:         0.2
@@ -15,7 +15,7 @@ GoldenDragonLord: {
 	CreatureType:         "Dragonkin"
 	VirtualArmor:         100
 	FightMode:            "Closest"
-	HitsMaxSeed:              5250
+	HitsMaxSeed:          5250
 	Hue:                  1300
 	LootItemChance:       100
 	LootItemLevel:        9

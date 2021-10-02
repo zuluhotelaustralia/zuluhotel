@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text.Json.Serialization;
 using Server.Engines.Magic;
+using Server.Json;
 using Server.Targeting;
 
 namespace Server.Spells
@@ -11,6 +12,8 @@ namespace Server.Spells
         public Type Type { get; set; }
         public string Name { get; init; }
         public string Mantra { init; get; }
+        
+        [JsonConverter(typeof(SpellCircleConverter))]
         public SpellCircle Circle { get; init; }
         public ElementalType DamageType { get; init; } = ElementalType.None;
         public int RightHandEffect { get; init; } = 9061;

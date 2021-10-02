@@ -3,7 +3,7 @@ package Elemental
 ArachnidQueen: {
 	Name:                 "an Arachnid Queen"
 	CorpseNameOverride:   "corpse of an Arachnid Queen"
-  Str:                  2250
+	Str:                  2250
 	Int:                  55
 	Dex:                  400
 	ActiveSpeed:          0.15
@@ -14,7 +14,7 @@ ArachnidQueen: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         45
 	FightMode:            "Closest"
-	HitsMaxSeed:              5250
+	HitsMaxSeed:          5250
 	Hue:                  1175
 	LootItemChance:       80
 	LootItemLevel:        7

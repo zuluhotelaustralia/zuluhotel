@@ -3,7 +3,7 @@ package Animal
 FrenziedPoisonOstard: {
 	Name:                 "a frenzied poison ostard"
 	CorpseNameOverride:   "corpse of a frenzied poison ostard"
-  Str:                  225
+	Str:                  225
 	Int:                  185
 	Dex:                  400
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ FrenziedPoisonOstard: {
 	CreatureType:         "Animal"
 	VirtualArmor:         15
 	FightMode:            "Closest"
-	HitsMaxSeed:              225
+	HitsMaxSeed:          225
 	Hue:                  264
 	ManaMaxSeed:          175
 	MinTameSkill:         110
@@ -33,8 +33,8 @@ FrenziedPoisonOstard: {
 			Min: 3
 			Max: 24
 		}
-		Skill:    "Swords"
-		HitSound: 399
+		Skill:     "Swords"
+		HitSound:  399
 		HitPoison: "Regular"
 	}
 }

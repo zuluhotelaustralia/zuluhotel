@@ -13,7 +13,7 @@ FireElemental: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            180
+	HitsMaxSeed:        180
 	Hue:                33784
 	LootItemChance:     25
 	LootItemLevel:      3

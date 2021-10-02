@@ -3,7 +3,7 @@ package Elemental
 Wisp: {
 	Name:                 "a wisp"
 	CorpseNameOverride:   "corpse of a wisp"
-  Str:                  225
+	Str:                  225
 	Int:                  500
 	Dex:                  185
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ Wisp: {
 	CanSwim:              true
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
-	HitsMaxSeed:              225
+	HitsMaxSeed:          225
 	InitialInnocent:      true
 	LootItemChance:       25
 	LootItemLevel:        3

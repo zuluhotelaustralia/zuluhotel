@@ -11,7 +11,7 @@ AdeptMage: {
 	CreatureType:         "Human"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMaxSeed:              200
+	HitsMaxSeed:          200
 	LootItemChance:       75
 	LootItemLevel:        2
 	LootTable:            "25"

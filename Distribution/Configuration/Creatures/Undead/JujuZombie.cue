@@ -14,7 +14,7 @@ JujuZombie: {
 	VirtualArmor:       50
 	FightMode:          "Closest"
 	FightRange:         4
-	HitsMaxSeed:            375
+	HitsMaxSeed:        375
 	Hue:                1300
 	LootTable:          "24"
 	ManaMaxSeed:        5

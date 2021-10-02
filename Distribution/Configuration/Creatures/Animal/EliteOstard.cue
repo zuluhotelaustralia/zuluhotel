@@ -3,7 +3,7 @@ package Animal
 EliteOstard: {
 	Name:                 "Elite Ostard"
 	CorpseNameOverride:   "corpse of Elite Ostard"
-  Str:                  600
+	Str:                  600
 	Int:                  650
 	Dex:                  300
 	PassiveSpeed:         0.2
@@ -12,7 +12,7 @@ EliteOstard: {
 	Body:                 218
 	CreatureType:         "Animal"
 	VirtualArmor:         50
-	HitsMaxSeed:              600
+	HitsMaxSeed:          600
 	Hue:                  1298
 	ManaMaxSeed:          150
 	MinTameSkill:         115

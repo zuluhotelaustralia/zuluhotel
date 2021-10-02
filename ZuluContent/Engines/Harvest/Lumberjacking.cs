@@ -5,7 +5,6 @@ using Server.Items;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
-using static Server.Configurations.ResourceConfiguration;
 
 namespace Server.Engines.Harvest
 {

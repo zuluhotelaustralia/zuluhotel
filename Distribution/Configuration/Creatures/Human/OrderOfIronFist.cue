@@ -9,7 +9,7 @@ OrderOfIronFist: {
 	AlwaysMurderer:     true
 	CreatureType:       "Human"
 	FightMode:          "Closest"
-	HitsMaxSeed:            300
+	HitsMaxSeed:        300
 	LootTable:          "59"
 	ManaMaxSeed:        200
 	StamMaxSeed:        200

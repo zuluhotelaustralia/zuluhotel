@@ -3,7 +3,7 @@ package Animal
 TropicalFrenziedOstard: {
 	Name:                 "a tropical frenzied ostard"
 	CorpseNameOverride:   "corpse of a tropical frenzied ostard"
-  Str:                  275
+	Str:                  275
 	Int:                  135
 	Dex:                  400
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ TropicalFrenziedOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              275
+	HitsMaxSeed:          275
 	Hue:                  1155
 	ManaMaxSeed:          125
 	MinTameSkill:         105

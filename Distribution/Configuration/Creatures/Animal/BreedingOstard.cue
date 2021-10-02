@@ -3,7 +3,7 @@ package Animal
 BreedingOstard: {
 	Name:                 "breeding ostard"
 	CorpseNameOverride:   "corpse of breeding ostard"
- 	Str:                  100
+	Str:                  100
 	Int:                  35
 	Dex:                  90
 	AiType:               "AI_Animal"
@@ -12,7 +12,7 @@ BreedingOstard: {
 	CreatureType:         "Animal"
 	VirtualArmor:         20
 	Female:               true
-	HitsMaxSeed:              100
+	HitsMaxSeed:          100
 	Hue:                  50
 	ManaMaxSeed:          0
 	MinTameSkill:         50

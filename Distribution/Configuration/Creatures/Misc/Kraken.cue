@@ -3,7 +3,7 @@ package Misc
 Kraken: {
 	Name:                 "a kraken"
 	CorpseNameOverride:   "corpse of a kraken"
-  Str:                  780
+	Str:                  780
 	Int:                  40
 	Dex:                  245
 	AiType:               "AI_Mage"
@@ -12,7 +12,7 @@ Kraken: {
 	VirtualArmor:         45
 	Fame:                 5
 	FightMode:            "Closest"
-	HitsMaxSeed:              468
+	HitsMaxSeed:          468
 	Karma:                5
 	LootItemChance:       100
 	LootTable:            "100"

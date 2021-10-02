@@ -3,7 +3,7 @@ package Animal
 HighlandOstard: {
 	Name:                 "a highland ostard"
 	CorpseNameOverride:   "corpse of a highland ostard"
-  Str:                  120
+	Str:                  120
 	Int:                  35
 	Dex:                  240
 	AiType:               "AI_Animal"
@@ -13,7 +13,7 @@ HighlandOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              120
+	HitsMaxSeed:          120
 	Hue:                  1325
 	ManaMaxSeed:          0
 	MinTameSkill:         65

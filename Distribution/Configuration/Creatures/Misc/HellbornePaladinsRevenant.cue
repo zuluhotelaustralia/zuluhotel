@@ -3,7 +3,7 @@ package Misc
 HellbornePaladinsRevenant: {
 	Name:                 "The Hellborne Paladin's Revenant"
 	CorpseNameOverride:   "corpse of The Hellborne Paladin's Revenant"
-  Str:                  1500
+	Str:                  1500
 	Int:                  2000
 	Dex:                  200
 	PassiveSpeed:         0.2
@@ -12,7 +12,7 @@ HellbornePaladinsRevenant: {
 	Body:                 970
 	CanFly:               true
 	FightMode:            "Closest"
-	HitsMaxSeed:              5000
+	HitsMaxSeed:          5000
 	Hue:                  1157
 	LootItemChance:       100
 	LootItemLevel:        10

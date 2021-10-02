@@ -3,7 +3,7 @@ package Misc
 SkeletalSteed: {
 	Name:                 "a skeletal steed"
 	CorpseNameOverride:   "corpse of a skeletal steed"
-  Str:                  500
+	Str:                  500
 	Int:                  60
 	Dex:                  55
 	AiType:               "AI_Animal"
@@ -11,7 +11,7 @@ SkeletalSteed: {
 	Body:                 133
 	VirtualArmor:         20
 	Fame:                 3
-	HitsMaxSeed:              300
+	HitsMaxSeed:          300
 	Karma:                3
 	ManaMaxSeed:          60
 	MinTameSkill:         120

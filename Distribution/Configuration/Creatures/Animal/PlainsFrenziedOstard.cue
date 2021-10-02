@@ -3,7 +3,7 @@ package Animal
 PlainsFrenziedOstard: {
 	Name:                 "a plains frenzied ostard"
 	CorpseNameOverride:   "corpse of a plains frenzied ostard"
-  Str:                  130
+	Str:                  130
 	Int:                  35
 	Dex:                  180
 	BaseSoundID:          629
@@ -12,7 +12,7 @@ PlainsFrenziedOstard: {
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              130
+	HitsMaxSeed:          130
 	Hue:                  53
 	ManaMaxSeed:          0
 	MinTameSkill:         80

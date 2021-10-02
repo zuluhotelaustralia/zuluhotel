@@ -17,7 +17,7 @@ MindFlayer: {
 	VirtualArmor:       60
 	FightMode:          "Closest"
 	FightRange:         6
-	HitsMaxSeed:            1200
+	HitsMaxSeed:        1200
 	Hue:                2222
 	LootItemChance:     90
 	LootItemLevel:      6

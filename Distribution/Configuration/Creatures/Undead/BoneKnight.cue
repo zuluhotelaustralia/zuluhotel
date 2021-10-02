@@ -12,7 +12,7 @@ BoneKnight: {
 	CreatureType:       "Undead"
 	VirtualArmor:       15
 	FightMode:          "Closest"
-	HitsMaxSeed:            160
+	HitsMaxSeed:        160
 	Hue:                33784
 	LootItemChance:     2
 	LootTable:          "16"

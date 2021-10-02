@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Server.Accounting;
-using Server.Configurations;
 using Server.Engines.Help;
 
 namespace Server.Misc
@@ -18,7 +17,7 @@ namespace Server.Misc
         /// <param name="pageType"></param>
         public static void SendQueueEmail(PageEntry entry, string pageType)
         {
-            if (!EmailConfiguration.EmailEnabled)
+            if (!ZhConfig.Email.Enabled)
             {
                 return;
             }
@@ -27,8 +26,8 @@ namespace Server.Misc
             var time = Core.Now;
 
             var message = new MimeMessage();
-            message.From.Add(EmailConfiguration.FromAddress);
-            message.To.Add(EmailConfiguration.SpeechLogPageAddress);
+            message.From.Add(new MailboxAddress(ZhConfig.Email.FromName, ZhConfig.Email.FromAddress));
+            message.To.Add(new MailboxAddress(ZhConfig.Email.SpeechLogPageName, ZhConfig.Email.SpeechLogPageAddress));
             message.Subject = "ModernUO Speech Log Page Forwarding";
 
             using (var writer = new StringWriter())
@@ -74,14 +73,14 @@ namespace Server.Misc
         /// <param name="filePath"></param>
         public static void SendCrashEmail(string filePath)
         {
-            if (EmailConfiguration.EmailEnabled)
+            if (ZhConfig.Email.Enabled)
             {
                 return;
             }
 
             var message = new MimeMessage();
-            message.From.Add(EmailConfiguration.FromAddress);
-            message.To.Add(EmailConfiguration.CrashAddress);
+            message.From.Add(new MailboxAddress(ZhConfig.Email.FromName, ZhConfig.Email.FromAddress));
+            message.To.Add(new MailboxAddress(ZhConfig.Email.CrashName, ZhConfig.Email.CrashAddress));
             message.Subject = "Automated ModernUO Crash Report";
             var builder = new BodyBuilder
             {
@@ -98,27 +97,28 @@ namespace Server.Misc
         /// <param name="message"></param>
         private static async void SendAsync(MimeMessage message)
         {
-            if (!EmailConfiguration.EmailEnabled)
+            if (!ZhConfig.Email.Enabled)
             {
                 return;
             }
 
             var now = Core.Now;
-            var messageID = $"<{now:yyyyMMdd}.{now:HHmmssff}@{EmailConfiguration.EmailServer}>";
+            var messageID = $"<{now:yyyyMMdd}.{now:HHmmssff}@{ZhConfig.Email.EmailServer}>";
             message.Headers.Add("Message-ID", messageID);
-            message.From.Add(EmailConfiguration.FromAddress);
+            message.From.Add(new MailboxAddress(ZhConfig.Email.FromName, ZhConfig.Email.FromAddress));
 
-            var delay = EmailConfiguration.EmailSendRetryDelay;
 
-            for (var i = 0; i < EmailConfiguration.EmailSendRetryCount; i++)
+            var delay = ZhConfig.Email.EmailSendRetryDelay;
+
+            for (var i = 0; i < ZhConfig.Email.EmailSendRetryCount; i++)
             {
                 try
                 {
                     using var client = new SmtpClient();
-                    await client.ConnectAsync(EmailConfiguration.EmailServer, EmailConfiguration.EmailPort, true).ConfigureAwait(false);
+                    await client.ConnectAsync(ZhConfig.Email.EmailServer, ZhConfig.Email.EmailPort, true).ConfigureAwait(false);
                     await client.AuthenticateAsync(
-                        EmailConfiguration.EmailServerUsername,
-                        EmailConfiguration.EmailServerPassword
+                        ZhConfig.Email.EmailUsername,
+                        ZhConfig.Email.EmailPassword
                     ).ConfigureAwait(false);
                     await client.SendAsync(message).ConfigureAwait(false);
                     await client.DisconnectAsync(true).ConfigureAwait(false);

@@ -12,7 +12,7 @@ FireCyclops: {
 	Body:               75
 	CreatureType:       "Elemental"
 	VirtualArmor:       45
-	HitsMaxSeed:            2000
+	HitsMaxSeed:        2000
 	Hue:                1209
 	LootItemChance:     100
 	LootItemLevel:      5

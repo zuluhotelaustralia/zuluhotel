@@ -3,7 +3,7 @@ package Dragonkin
 StormDragon: {
 	Name:                 "a Storm Dragon"
 	CorpseNameOverride:   "corpse of a Storm Dragon"
-  Str:                  600
+	Str:                  600
 	Int:                  400
 	Dex:                  340
 	PassiveSpeed:         0.2
@@ -16,7 +16,7 @@ StormDragon: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              600
+	HitsMaxSeed:          600
 	Hue:                  1170
 	LootItemChance:       75
 	LootItemLevel:        5

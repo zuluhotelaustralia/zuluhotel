@@ -3,7 +3,7 @@ package Misc
 RedSolenWorker: {
 	Name:                 "a red solen worker"
 	CorpseNameOverride:   "corpse of a red solen worker"
-  Str:                  400
+	Str:                  400
 	Int:                  60
 	Dex:                  105
 	BaseSoundID:          959
@@ -11,7 +11,7 @@ RedSolenWorker: {
 	VirtualArmor:         30
 	Fame:                 1
 	FightMode:            "Closest"
-	HitsMaxSeed:              72
+	HitsMaxSeed:          72
 	Karma:                1
 	LootTable:            "23"
 	ManaMaxSeed:          60

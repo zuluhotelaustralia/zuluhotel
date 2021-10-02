@@ -3,7 +3,7 @@ package Animal
 FireFrenziedOstard: {
 	Name:                 "a fire frenzied ostard"
 	CorpseNameOverride:   "corpse of a fire frenzied ostard"
-  Str:                  225
+	Str:                  225
 	Int:                  135
 	Dex:                  400
 	PassiveSpeed:         0.2
@@ -13,7 +13,7 @@ FireFrenziedOstard: {
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4
-	HitsMaxSeed:              225
+	HitsMaxSeed:          225
 	Hue:                  1158
 	ManaMaxSeed:          125
 	MinTameSkill:         115

@@ -3,7 +3,7 @@ package Troll
 TrollChieftan: {
 	Name:                 "a Troll Chieftan"
 	CorpseNameOverride:   "corpse of a Troll Chieftan"
-  Str:                  350
+	Str:                  350
 	Int:                  90
 	Dex:                  220
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ TrollChieftan: {
 	FightMode:            "Closest"
 	HideType:             "Troll"
 	Hides:                4
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  1125
 	LootItemChance:       30
 	LootItemLevel:        3

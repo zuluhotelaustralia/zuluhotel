@@ -3,7 +3,7 @@ package Dragonkin
 LizardShaman: {
 	Name:                 "<random> the Lizard Shaman"
 	CorpseNameOverride:   "corpse of <random> the Lizard Shaman"
-  Str:                  170
+	Str:                  170
 	Int:                  280
 	Dex:                  110
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ LizardShaman: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              170
+	HitsMaxSeed:          170
 	Hue:                  1218
 	LootItemChance:       50
 	LootItemLevel:        1

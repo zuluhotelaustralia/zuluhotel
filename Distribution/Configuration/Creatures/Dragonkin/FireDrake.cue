@@ -3,7 +3,7 @@ package Dragonkin
 FireDrake: {
 	Name:                 "a Fire Drake"
 	CorpseNameOverride:   "corpse of a Fire Drake"
-  Str:                  350
+	Str:                  350
 	Int:                  90
 	Dex:                  110
 	PassiveSpeed:         0.2
@@ -15,7 +15,7 @@ FireDrake: {
 	FightMode:            "Closest"
 	HideType:             "Lava"
 	Hides:                5
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  1158
 	LootItemChance:       25
 	LootItemLevel:        4

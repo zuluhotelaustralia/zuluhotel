@@ -16,13 +16,14 @@ TaintedRanger: {
 	VirtualArmor:       40
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMaxSeed:            300
+	HitsMaxSeed:        300
 	Hue:                1157
 	LootItemChance:     50
 	LootItemLevel:      4
 	LootTable:          "131"
 	ManaMaxSeed:        0
 	RiseCreatureDelay:  "00:00:02"
+	RiseCreatureTemplate: "EvisceratedCarcass"
 	StamMaxSeed:        150
 	Skills: {
 		Tactics:      100
@@ -36,7 +37,7 @@ TaintedRanger: {
 			Min: 17
 			Max: 57
 		}
-		HitSound: 252
+		HitSound:           252
 		ProjectileEffectId: 0x37C4
 	}
 	Equipment: [

@@ -3,7 +3,7 @@ package Dragonkin
 EarthDrake: {
 	Name:                 "an Earth Drake"
 	CorpseNameOverride:   "corpse of an Earth Drake"
-  Str:                  500
+	Str:                  500
 	Int:                  90
 	Dex:                  60
 	PassiveSpeed:         0.2
@@ -15,7 +15,7 @@ EarthDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Hue:                  1134
 	LootItemChance:       25
 	LootItemLevel:        4

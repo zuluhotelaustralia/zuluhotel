@@ -3,7 +3,7 @@ package Animal
 FrostWolf: {
 	Name:                 "a frost wolf"
 	CorpseNameOverride:   "corpse of a frost wolf"
-  Str:                  135
+	Str:                  135
 	Int:                  35
 	Dex:                  150
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ FrostWolf: {
 	FightMode:            "Closest"
 	HideType:             "Wolf"
 	Hides:                5
-	HitsMaxSeed:              135
+	HitsMaxSeed:          135
 	Hue:                  1154
 	ManaMaxSeed:          25
 	MinTameSkill:         75

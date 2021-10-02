@@ -13,7 +13,7 @@ DarkElfNecromancer: {
 	CreatureType:         "Human"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Hue:                  1109
 	LootItemChance:       60
 	LootItemLevel:        4

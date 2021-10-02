@@ -18,7 +18,7 @@ BahamutWyrmKing: {
 	VirtualArmor:       50
 	FightMode:          "Closest"
 	FightRange:         7
-	HitsMaxSeed:            1900
+	HitsMaxSeed:        1900
 	Hue:                1297
 	LootItemChance:     80
 	LootItemLevel:      5

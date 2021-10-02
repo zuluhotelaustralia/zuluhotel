@@ -3,7 +3,7 @@ package Dragonkin
 SpectralDrake: {
 	Name:                 "a spectral drake"
 	CorpseNameOverride:   "corpse of a spectral drake"
-  Str:                  550
+	Str:                  550
 	Int:                  360
 	Dex:                  105
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ SpectralDrake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                5
-	HitsMaxSeed:              550
+	HitsMaxSeed:          550
 	Hue:                  17969
 	LootItemChance:       70
 	LootItemLevel:        4

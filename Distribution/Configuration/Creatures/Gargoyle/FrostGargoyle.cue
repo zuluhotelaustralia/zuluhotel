@@ -3,7 +3,7 @@ package Gargoyle
 FrostGargoyle: {
 	Name:                 "a frost gargoyle"
 	CorpseNameOverride:   "corpse of a frost gargoyle"
-  Str:                  250
+	Str:                  250
 	Int:                  285
 	Dex:                  95
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ FrostGargoyle: {
 	CreatureType:         "Gargoyle"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  1154
 	LootItemChance:       25
 	LootItemLevel:        2

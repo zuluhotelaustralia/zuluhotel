@@ -3,7 +3,7 @@ package Daemon
 UnholyMenace: {
 	Name:                 "an Unholy Menace"
 	CorpseNameOverride:   "corpse of an Unholy Menace"
-  Str:                  1250
+	Str:                  1250
 	Int:                  500
 	Dex:                  450
 	PassiveSpeed:         0.2
@@ -15,7 +15,7 @@ UnholyMenace: {
 	CreatureType:         "Daemon"
 	VirtualArmor:         75
 	FightMode:            "Closest"
-	HitsMaxSeed:              1000
+	HitsMaxSeed:          1000
 	Hue:                  1305
 	LootItemChance:       80
 	LootItemLevel:        6

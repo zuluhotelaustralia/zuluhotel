@@ -3,7 +3,7 @@ package Beholder
 FrigidEye: {
 	Name:                 "a frigid eye"
 	CorpseNameOverride:   "corpse of a frigid eye"
-  Str:                  250
+	Str:                  250
 	Int:                  450
 	Dex:                  100
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ FrigidEye: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMaxSeed:              250
+	HitsMaxSeed:          250
 	Hue:                  1154
 	LootItemChance:       2
 	LootTable:            "45"

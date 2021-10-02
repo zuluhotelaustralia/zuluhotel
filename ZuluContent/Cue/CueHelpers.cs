@@ -157,7 +157,7 @@ namespace Scripts.Cue
 
         public static void ConvertTypesToCue(string dir, string name, string module, string[] types)
         {
-            /*
+            
             var path = Path.Combine(dir, $"{name}.dll");
             var asm = Load(path);
 
@@ -175,7 +175,7 @@ namespace Scripts.Cue
             };
 
             cfg.Dotnet.Types.Filter = Microsoft.FSharp.Core.FuncConvert.FromFunc((Type t) => types.Contains(t.FullName));
-            cfg.Write.RootDir = "Configuration";
+            cfg.Write.RootDir = "Configuration/Generated";
             cfg.Write.RootModule = $"{module}";
 
             var registry = CueFSharp.DotnetToCue.Register.Registry.New(cfg);
@@ -202,7 +202,6 @@ namespace Scripts.Cue
 
             registry.Assembly(asm);
             registry.Write();
-            */
         }
     }
 }

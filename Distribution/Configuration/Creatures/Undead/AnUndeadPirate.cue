@@ -10,7 +10,7 @@ AnUndeadPirate: {
 	CreatureType:       "Undead"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMaxSeed:            110
+	HitsMaxSeed:        110
 	LootItemChance:     10
 	LootItemLevel:      1
 	LootTable:          "47"
@@ -34,7 +34,7 @@ AnUndeadPirate: {
 		},
 		{
 			ItemType: "LongPants"
-			Hue:      0x3E5
+			Hue:      0x3e5
 			Lootable: true
 		},
 		{
@@ -50,6 +50,6 @@ AnUndeadPirate: {
 		{
 			ItemType: "LeatherGloves"
 			Lootable: true
-		}
+		},
 	]
 }

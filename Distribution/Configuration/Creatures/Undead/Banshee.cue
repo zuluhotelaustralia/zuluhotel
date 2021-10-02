@@ -17,7 +17,7 @@ Banshee: {
 	CreatureType:       "Undead"
 	VirtualArmor:       40
 	FightMode:          "Closest"
-	HitsMaxSeed:            925
+	HitsMaxSeed:        925
 	Hue:                1176
 	LootItemChance:     80
 	LootItemLevel:      5

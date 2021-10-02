@@ -12,7 +12,7 @@ IceSkeleton: {
 	CreatureType:       "Undead"
 	VirtualArmor:       20
 	FightMode:          "Closest"
-	HitsMaxSeed:            200
+	HitsMaxSeed:        200
 	Hue:                1301
 	LootItemChance:     2
 	LootTable:          "14"

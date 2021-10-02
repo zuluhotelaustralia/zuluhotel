@@ -3,7 +3,7 @@ package Dragonkin
 GreatWyrm: {
 	Name:                 "a Great Wyrm"
 	CorpseNameOverride:   "corpse of a Great Wyrm"
-  Str:                  900
+	Str:                  900
 	Int:                  650
 	Dex:                  475
 	PassiveSpeed:         0.2
@@ -16,7 +16,7 @@ GreatWyrm: {
 	FightMode:            "Closest"
 	HideType:             "Wyrm"
 	Hides:                5
-	HitsMaxSeed:              900
+	HitsMaxSeed:          900
 	Hue:                  1159
 	LootItemChance:       80
 	LootItemLevel:        5

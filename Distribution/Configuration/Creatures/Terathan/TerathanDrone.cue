@@ -3,7 +3,7 @@ package Terathan
 TerathanDrone: {
 	Name:                 "a Terathan Drone"
 	CorpseNameOverride:   "corpse of a Terathan Drone"
-  Str:                  170
+	Str:                  170
 	Int:                  55
 	Dex:                  135
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ TerathanDrone: {
 	CreatureType:         "Terathan"
 	VirtualArmor:         10
 	FightMode:            "Closest"
-	HitsMaxSeed:              70
+	HitsMaxSeed:          70
 	LootTable:            "64"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

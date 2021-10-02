@@ -3,7 +3,7 @@ package Daemon
 IceFiend: {
 	Name:                 "<random> the Ice Fiend"
 	CorpseNameOverride:   "corpse of <random> the Ice Fiend"
-  Str:                  500
+	Str:                  500
 	Int:                  500
 	Dex:                  300
 	AiType:               "AI_Mage"
@@ -15,7 +15,7 @@ IceFiend: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Hue:                  1170
 	LootItemChance:       50
 	LootItemLevel:        4

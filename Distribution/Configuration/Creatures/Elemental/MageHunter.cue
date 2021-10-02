@@ -12,7 +12,7 @@ MageHunter: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       30
 	FightMode:          "Closest"
-	HitsMaxSeed:            300
+	HitsMaxSeed:        300
 	Hue:                1170
 	ManaMaxSeed:        0
 	StamMaxSeed:        50

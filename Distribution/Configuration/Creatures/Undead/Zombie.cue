@@ -11,7 +11,7 @@ Zombie: {
 	CreatureType:       "Undead"
 	VirtualArmor:       10
 	FightMode:          "Closest"
-	HitsMaxSeed:            75
+	HitsMaxSeed:        75
 	LootTable:          "24"
 	ManaMaxSeed:        5
 	StamMaxSeed:        30

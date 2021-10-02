@@ -12,7 +12,7 @@ DarkElfArcher: {
 	CreatureType:         "Human"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              165
+	HitsMaxSeed:          165
 	Hue:                  1109
 	LootTable:            "41"
 	ManaMaxSeed:          85

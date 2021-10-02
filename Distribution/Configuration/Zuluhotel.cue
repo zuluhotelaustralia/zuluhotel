@@ -1,46 +1,67 @@
 import (
-	Animal "github.com/zuluhotelaustralia/zuluhotel/Creatures/Animal"
-	Animated "github.com/zuluhotelaustralia/zuluhotel/Creatures/Animated"
-	Beholder "github.com/zuluhotelaustralia/zuluhotel/Creatures/Beholder"
-	Daemon "github.com/zuluhotelaustralia/zuluhotel/Creatures/Daemon"
-	Dragonkin "github.com/zuluhotelaustralia/zuluhotel/Creatures/Dragonkin"
-	Elemental "github.com/zuluhotelaustralia/zuluhotel/Creatures/Elemental"
-	Familiars "github.com/zuluhotelaustralia/zuluhotel/Creatures/Familiars"
-	Gargoyle "github.com/zuluhotelaustralia/zuluhotel/Creatures/Gargoyle"
-	Giantkin "github.com/zuluhotelaustralia/zuluhotel/Creatures/Giantkin"
-	Human "github.com/zuluhotelaustralia/zuluhotel/Creatures/Human"
-	Misc "github.com/zuluhotelaustralia/zuluhotel/Creatures/Misc"
-	Ophidian "github.com/zuluhotelaustralia/zuluhotel/Creatures/Ophidian"
-	Orc "github.com/zuluhotelaustralia/zuluhotel/Creatures/Orc"
-	Plant "github.com/zuluhotelaustralia/zuluhotel/Creatures/Plant"
-	Ratkin "github.com/zuluhotelaustralia/zuluhotel/Creatures/Ratkin"
-	Slime "github.com/zuluhotelaustralia/zuluhotel/Creatures/Slime"
-	Terathan "github.com/zuluhotelaustralia/zuluhotel/Creatures/Terathan"
-	Troll "github.com/zuluhotelaustralia/zuluhotel/Creatures/Troll"
-	Undead "github.com/zuluhotelaustralia/zuluhotel/Creatures/Undead"
-
+	Creatures "github.com/zuluhotelaustralia/zuluhotel/Creatures"
+	Crafting "github.com/zuluhotelaustralia/zuluhotel/Crafting"
+	Resources "github.com/zuluhotelaustralia/zuluhotel/Resources"
+	Loot "github.com/zuluhotelaustralia/zuluhotel/Loot"
+	Magic "github.com/zuluhotelaustralia/zuluhotel/Magic"
+	Skills "github.com/zuluhotelaustralia/zuluhotel/Skills"
+	
 	Types "github.com/zuluhotelaustralia/zuluhotel/Types"
 )
 
+Core: Types.#CoreConfiguration & {
+	Expansion: "T2A"
+	InsuranceEnabled: false
+	ActionDelay: 500
+}
+
+Messaging: Types.#MessagingConfiguration & {
+	SuccessHue:            55
+	FailureHue:            33
+	VisibleDamage:         true
+	StaffRevealMagicItems: true
+	ObjectPropertyList:    true
+	GuildClickMessage:     true
+	AsciiClickMessage:     true
+	SingleClickProps:      true
+}
+
+Email: Types.#EmailConfiguration & {
+	Enabled:              false
+	FromAddress:          "support@modernuo.com"
+	FromName:             "ModernUO Team"
+	CrashAddress:         "crashes@modernuo.com"
+	CrashName:            "Crash Log"
+	SpeechLogPageAddress: "support@modernuo.com"
+	SpeechLogPageName:    "GM Support Conversation"
+	EmailServer:          "smtp.gmail.com"
+	EmailPort:            465
+	EmailUsername:        "support@modernuo.com"
+	EmailPassword:        "Some Password 123"
+	EmailSendRetryCount:  5
+	EmailSendRetryDelay:  3
+}
+
 Creatures: {
-	[string]: Types.#NpcEntry
-	Animal
-	Animated
-	Beholder
-	Daemon
-	Dragonkin
-	Elemental
-	Familiars
-	Gargoyle
-	Giantkin
-	Human
-	Misc
-	Ophidian
-	Orc
-	Plant
-	Ratkin
-	Slime
-	Terathan
-	Troll
-	Undead
+	Entries: Creatures
+}
+
+Loot: {
+	Loot
+}
+
+Crafting: {
+	Crafting
+}
+
+Resources: {
+	Crafting
+}
+
+Magic: {
+	Magic
+}
+
+Skills: {
+	Skills
 }

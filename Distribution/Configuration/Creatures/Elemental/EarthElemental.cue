@@ -12,7 +12,7 @@ EarthElemental: {
 	CreatureType:       "Elemental"
 	VirtualArmor:       35
 	FightMode:          "Closest"
-	HitsMaxSeed:            230
+	HitsMaxSeed:        230
 	Hue:                33784
 	LootItemChance:     25
 	LootItemLevel:      3

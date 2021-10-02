@@ -7,7 +7,7 @@ Bandit: {
 	Int:                  20
 	Dex:                  30
 	CreatureType:         "Human"
-	HitsMaxSeed:              30
+	HitsMaxSeed:          30
 	LootItemChance:       1
 	LootTable:            "47"
 	ManaMaxSeed:          10

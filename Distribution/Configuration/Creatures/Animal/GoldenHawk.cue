@@ -3,7 +3,7 @@ package Animal
 GoldenHawk: {
 	Name:                 "a golden hawk"
 	CorpseNameOverride:   "corpse of a golden hawk"
-  Str:                  90
+	Str:                  90
 	Int:                  50
 	Dex:                  90
 	AiType:               "AI_Animal"
@@ -11,7 +11,7 @@ GoldenHawk: {
 	Body:                 5
 	CreatureType:         "Animal"
 	VirtualArmor:         20
-	HitsMaxSeed:              90
+	HitsMaxSeed:          90
 	Hue:                  1127
 	ManaMaxSeed:          40
 	MinTameSkill:         35

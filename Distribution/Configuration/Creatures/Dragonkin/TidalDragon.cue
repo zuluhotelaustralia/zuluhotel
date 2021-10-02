@@ -3,7 +3,7 @@ package Dragonkin
 TidalDragon: {
 	Name:                 "a Tidal Dragon"
 	CorpseNameOverride:   "corpse of a Tidal Dragon"
-  Str:                  500
+	Str:                  500
 	Int:                  400
 	Dex:                  340
 	AlwaysMurderer:       true
@@ -15,7 +15,7 @@ TidalDragon: {
 	FightMode:            "Closest"
 	HideType:             "IceCrystal"
 	Hides:                5
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	Hue:                  1165
 	LootItemChance:       75
 	LootItemLevel:        5

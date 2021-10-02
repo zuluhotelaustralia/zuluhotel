@@ -3,7 +3,7 @@ package Elemental
 RainbowWisp: {
 	Name:                 "The Rainbow Wisp"
 	CorpseNameOverride:   "corpse of The Rainbow Wisp"
-  Str:                  1000
+	Str:                  1000
 	Int:                  20000
 	Dex:                  400
 	AiType:               "AI_Mage"
@@ -17,7 +17,7 @@ RainbowWisp: {
 	VirtualArmor:         100
 	FightMode:            "Closest"
 	FightRange:           12
-	HitsMaxSeed:              3000
+	HitsMaxSeed:          3000
 	Hue:                  1298
 	InitialInnocent:      true
 	LootItemChance:       60

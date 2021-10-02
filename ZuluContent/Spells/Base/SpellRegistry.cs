@@ -7,8 +7,15 @@ namespace Server.Spells
 {
     public static class SpellRegistry
     {
-        public static Dictionary<Type, SpellInfo> SpellInfos => ZhConfig.Spells.SpellInfos;
-        public static Dictionary<SpellEntry, Type> SpellTypes => ZhConfig.Spells.SpellTypes;
+        private static Dictionary<Type, SpellInfo> _spellInfos;
+        private static Dictionary<SpellEntry, Type> _spellTypes;
+
+        public static Dictionary<Type, SpellInfo> SpellInfos => _spellInfos ??=
+            ZhConfig.Magic.Spells.ToDictionary(kv => kv.Value.Type, kv => kv.Value);
+
+        public static Dictionary<SpellEntry, Type> SpellTypes => _spellTypes ??=
+            ZhConfig.Magic.Spells.ToDictionary(kv => kv.Key, kv => kv.Value.Type);
+
         public static readonly Dictionary<Type, Func<Mobile, Item, Spell>> SpellCreators =
             SpellInfos.Keys.ToDictionary(k => k, SpellCreatorLambda);
 
@@ -32,7 +39,7 @@ namespace Server.Spells
 
         public static T Create<T>(Mobile caster, Item scroll = null) where T : Spell
         {
-            return (T) Create(typeof(T), caster, scroll);
+            return (T)Create(typeof(T), caster, scroll);
         }
 
         public static SpellInfo GetInfo(SpellEntry spellEntry)
@@ -45,7 +52,7 @@ namespace Server.Spells
             var mobileArg = Expression.Parameter(typeof(Mobile), "caster");
             var itemArg = Expression.Parameter(typeof(Item), "item");
 
-            var constructor = type.GetConstructor(new[] {typeof(Mobile), typeof(Item)});
+            var constructor = type.GetConstructor(new[] { typeof(Mobile), typeof(Item) });
 
             if (constructor is null)
             {
@@ -54,8 +61,8 @@ namespace Server.Spells
 
             return Expression.Lambda<Func<Mobile, Item, Spell>>(
                 Expression.New(
-                    constructor, 
-                    mobileArg, 
+                    constructor,
+                    mobileArg,
                     itemArg
                 ),
                 mobileArg,

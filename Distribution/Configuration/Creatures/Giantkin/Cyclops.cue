@@ -3,7 +3,7 @@ package Giantkin
 Cyclops: {
 	Name:                 "a cyclops"
 	CorpseNameOverride:   "corpse of a cyclops"
-  Str:                  350
+	Str:                  350
 	Int:                  65
 	Dex:                  130
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ Cyclops: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         35
 	FightMode:            "Closest"
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  33784
 	LootItemChance:       50
 	LootItemLevel:        3

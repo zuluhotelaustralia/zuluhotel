@@ -3,7 +3,7 @@ package Elemental
 BlackWisp: {
 	Name:                 "a black wisp"
 	CorpseNameOverride:   "corpse of a black wisp"
-  Str:                  700
+	Str:                  700
 	Int:                  1100
 	Dex:                  575
 	AiType:               "AI_Mage"
@@ -14,7 +14,7 @@ BlackWisp: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              700
+	HitsMaxSeed:          700
 	Hue:                  1109
 	LootItemChance:       75
 	LootItemLevel:        5

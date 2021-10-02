@@ -3,7 +3,7 @@ package Dragonkin
 EliteWarrior: {
 	Name:                 "<random> the elite warrior"
 	CorpseNameOverride:   "corpse of <random> the elite warrior"
-  Str:                  220
+	Str:                  220
 	Int:                  50
 	Dex:                  103
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ EliteWarrior: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              220
+	HitsMaxSeed:          220
 	LootTable:            "14"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 70

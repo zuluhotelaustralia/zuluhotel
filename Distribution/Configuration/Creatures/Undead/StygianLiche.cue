@@ -14,7 +14,7 @@ StygianLiche: {
 	CreatureType:       "Undead"
 	VirtualArmor:       65
 	FightMode:          "Closest"
-	HitsMaxSeed:            2400
+	HitsMaxSeed:        2400
 	Hue:                1174
 	LootItemChance:     90
 	LootItemLevel:      8

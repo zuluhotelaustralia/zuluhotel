@@ -3,7 +3,7 @@ package Elemental
 BloodElemental: {
 	Name:                 "a blood elemental"
 	CorpseNameOverride:   "corpse of a blood elemental"
-  Str:                  450
+	Str:                  450
 	Int:                  400
 	Dex:                  185
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ BloodElemental: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         45
 	FightMode:            "Closest"
-	HitsMaxSeed:              450
+	HitsMaxSeed:          450
 	Hue:                  1209
 	LootItemChance:       25
 	LootItemLevel:        4

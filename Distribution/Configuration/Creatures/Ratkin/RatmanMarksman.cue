@@ -3,7 +3,7 @@ package Ratkin
 RatmanMarksman: {
 	Name:                 "<random> the ratman marksman"
 	CorpseNameOverride:   "corpse of <random> the ratman marksman"
-  Str:                  160
+	Str:                  160
 	Int:                  35
 	Dex:                  180
 	AiType:               "AI_Archer"
@@ -15,7 +15,7 @@ RatmanMarksman: {
 	FightMode:            "Closest"
 	HideType:             "Rat"
 	Hides:                5
-	HitsMaxSeed:              160
+	HitsMaxSeed:          160
 	LootTable:            "51"
 	ManaMaxSeed:          0
 	ProvokeSkillOverride: 55
@@ -31,7 +31,7 @@ RatmanMarksman: {
 			Min: 10
 			Max: 22
 		}
-	},
+	}
 	Equipment: [
 		{
 			ItemType: "Bow"

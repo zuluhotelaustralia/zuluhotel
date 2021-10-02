@@ -14,7 +14,7 @@ ArchVampire: {
 	CreatureType:       "Undead"
 	VirtualArmor:       25
 	FightMode:          "Closest"
-	HitsMaxSeed:            350
+	HitsMaxSeed:        350
 	LootItemChance:     75
 	LootItemLevel:      5
 	LootTable:          "71"
@@ -33,7 +33,7 @@ ArchVampire: {
 		Magery:      200
 	}
 	Attack: {
-		Ability: "LifeDrainStrike"
+		Ability:       "LifeDrainStrike"
 		AbilityChance: 1.0
 		Damage: {
 			Min: 12

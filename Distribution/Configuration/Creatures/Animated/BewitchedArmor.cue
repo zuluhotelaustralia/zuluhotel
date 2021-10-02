@@ -3,7 +3,7 @@ package Animated
 BewitchedArmor: {
 	Name:                 "Bewitched Armor"
 	CorpseNameOverride:   "corpse of Bewitched Armor"
-  Str:                  210
+	Str:                  210
 	Int:                  110
 	Dex:                  110
 	AlwaysMurderer:       true
@@ -11,7 +11,7 @@ BewitchedArmor: {
 	Body:                 527
 	CreatureType:         "Animated"
 	FightMode:            "Closest"
-	HitsMaxSeed:              210
+	HitsMaxSeed:          210
 	LootItemChance:       1
 	LootTable:            "48"
 	ManaMaxSeed:          0

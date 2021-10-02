@@ -3,7 +3,7 @@ package Animal
 Bat: {
 	Name:                 "a bat"
 	CorpseNameOverride:   "corpse of a bat"
-  Str:                  30
+	Str:                  30
 	Int:                  60
 	Dex:                  80
 	AiType:               "AI_Mage"
@@ -11,7 +11,7 @@ Bat: {
 	Body:                 6
 	CreatureType:         "Animal"
 	VirtualArmor:         10
-	HitsMaxSeed:              30
+	HitsMaxSeed:          30
 	Hue:                  5555
 	ManaMaxSeed:          50
 	MinTameSkill:         35
@@ -34,7 +34,7 @@ Bat: {
 			Min: 3
 			Max: 9
 		}
-		HitSound: 570
+		HitSound:  570
 		HitPoison: "Lesser"
 	}
 }

@@ -13,7 +13,7 @@ VampireLord: {
 	CreatureType:         "Undead"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMaxSeed:              5000
+	HitsMaxSeed:          5000
 	LootItemChance:       100
 	LootItemLevel:        7
 	LootTable:            "9"

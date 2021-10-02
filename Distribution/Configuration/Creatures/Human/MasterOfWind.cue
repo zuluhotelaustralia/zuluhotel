@@ -11,7 +11,7 @@ MasterOfWind: {
 	CreatureType:         "Human"
 	VirtualArmor:         30
 	FightMode:            "Closest"
-	HitsMaxSeed:              160
+	HitsMaxSeed:          160
 	LootItemChance:       66
 	LootItemLevel:        3
 	LootTable:            "57"

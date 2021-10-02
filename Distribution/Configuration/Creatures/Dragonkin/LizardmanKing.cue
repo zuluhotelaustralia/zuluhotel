@@ -3,7 +3,7 @@ package Dragonkin
 LizardmanKing: {
 	Name:                 "<random> the Lizardman King"
 	CorpseNameOverride:   "corpse of <random> the Lizardman King"
-  Str:                  300
+	Str:                  300
 	Int:                  75
 	Dex:                  200
 	AlwaysMurderer:       true
@@ -14,7 +14,7 @@ LizardmanKing: {
 	FightMode:            "Closest"
 	HideType:             "Lizard"
 	Hides:                5
-	HitsMaxSeed:              300
+	HitsMaxSeed:          300
 	Hue:                  1125
 	LootItemChance:       50
 	LootItemLevel:        3

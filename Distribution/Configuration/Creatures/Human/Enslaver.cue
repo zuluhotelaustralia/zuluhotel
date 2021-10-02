@@ -14,7 +14,7 @@ Enslaver: {
 	CreatureType:       "Human"
 	VirtualArmor:       60
 	FightMode:          "Closest"
-	HitsMaxSeed:            2000
+	HitsMaxSeed:        2000
 	Hue:                1645
 	LootItemChance:     50
 	LootItemLevel:      4

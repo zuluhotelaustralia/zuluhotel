@@ -3,7 +3,7 @@ package Beholder
 Beholder: {
 	Name:                 "a beholder"
 	CorpseNameOverride:   "corpse of a beholder"
-  Str:                  160
+	Str:                  160
 	Int:                  600
 	Dex:                  10
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ Beholder: {
 	CreatureType:         "Beholder"
 	VirtualArmor:         20
 	FightMode:            "Closest"
-	HitsMaxSeed:              160
+	HitsMaxSeed:          160
 	Hue:                  33877
 	LootItemChance:       75
 	LootItemLevel:        2

@@ -13,7 +13,7 @@ DarkElfMage: {
 	CreatureType:         "Human"
 	VirtualArmor:         25
 	FightMode:            "Closest"
-	HitsMaxSeed:              160
+	HitsMaxSeed:          160
 	Hue:                  1109
 	LootItemChance:       60
 	LootItemLevel:        3

@@ -3,7 +3,7 @@ package Elemental
 PoisonElemental: {
 	Name:                 "a poison elemental"
 	CorpseNameOverride:   "corpse of a poison elemental"
-  Str:                  350
+	Str:                  350
 	Int:                  350
 	Dex:                  160
 	AlwaysMurderer:       true
@@ -12,7 +12,7 @@ PoisonElemental: {
 	CreatureType:         "Elemental"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMaxSeed:              350
+	HitsMaxSeed:          350
 	Hue:                  2006
 	LootItemChance:       50
 	LootItemLevel:        4
@@ -32,7 +32,7 @@ PoisonElemental: {
 			Min: 25
 			Max: 50
 		}
-		HitSound: 468
+		HitSound:  468
 		HitPoison: "Deadly"
 	}
 }

@@ -3,7 +3,7 @@ package Dragonkin
 Drake: {
 	Name:                 "a drake"
 	CorpseNameOverride:   "corpse of a drake"
-  Str:                  500
+	Str:                  500
 	Int:                  90
 	Dex:                  110
 	PassiveSpeed:         0.2
@@ -15,7 +15,7 @@ Drake: {
 	FightMode:            "Closest"
 	HideType:             "Dragon"
 	Hides:                2
-	HitsMaxSeed:              500
+	HitsMaxSeed:          500
 	LootItemChance:       25
 	LootItemLevel:        4
 	LootTable:            "36"

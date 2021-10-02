@@ -3,7 +3,7 @@ package Giantkin
 Titan: {
 	Name:                 "a Titan"
 	CorpseNameOverride:   "corpse of a Titan"
-  Str:                  600
+	Str:                  600
 	Int:                  210
 	Dex:                  180
 	AiType:               "AI_Mage"
@@ -13,7 +13,7 @@ Titan: {
 	CreatureType:         "Giantkin"
 	VirtualArmor:         40
 	FightMode:            "Closest"
-	HitsMaxSeed:              1000
+	HitsMaxSeed:          1000
 	LootItemChance:       50
 	LootItemLevel:        4
 	LootTable:            "22"
