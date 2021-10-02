@@ -20,9 +20,9 @@ namespace Server
         public static MessagingConfiguration Messaging => _root.Messaging;
         public static ResourceConfiguration Resources => _root.Resources;
         public static CraftConfiguration Crafting => _root.Crafting;
-        public static LootConfiguration Loot => _root.LootConfiguration;
+        public static LootConfiguration Loot => _root.Loot;
         public static SkillConfiguration Skills => _root.Skills;
-        public static MagicConfiguration Magic => _root.MagicConfiguration;
+        public static MagicConfiguration Magic => _root.Magic;
         public static CreatureConfiguration Creatures => _root.Creatures;
         public static JsonSerializerOptions DefaultSerializerOptions { get; private set; }
 
@@ -73,8 +73,9 @@ namespace Server
             var files = Directory.GetFiles(configRoot, "*.cue",
                 new EnumerationOptions { RecurseSubdirectories = true });
             var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
+            var jsonCacheLastWrite = File.GetLastWriteTimeUtc(jsonCachePath);
 
-            if (!File.Exists(jsonCachePath) || lastWrite != File.GetLastWriteTimeUtc(jsonCachePath))
+            if (!File.Exists(jsonCachePath) || lastWrite != jsonCacheLastWrite)
             {
                 Logger.Information("CUE Configuration is out of date, rebuilding via cli {0} ... ", $"cue {cueArgs}");
 

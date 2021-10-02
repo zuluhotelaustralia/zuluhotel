@@ -8,8 +8,8 @@ namespace ZuluContent.Configuration.Types
         public CreatureConfiguration Creatures { get; init; }
         public CraftConfiguration Crafting { get; init; }
         public ResourceConfiguration Resources { get; init; }
-        public LootConfiguration LootConfiguration { get; init; }
-        public MagicConfiguration MagicConfiguration { get; init; }
+        public LootConfiguration Loot { get; init; }
+        public MagicConfiguration Magic { get; init; }
         public SkillConfiguration Skills { get; init; }
 
     }
