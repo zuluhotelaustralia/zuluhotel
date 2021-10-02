@@ -36,6 +36,7 @@ namespace Scripts.Zulu.Engines.Classes
 
         private readonly IZuluClassed m_Parent;
 
+        #region ClassSkills
         public static readonly IReadOnlyDictionary<ZuluClassType, SkillName[]> ClassSkills =
             new Dictionary<ZuluClassType, SkillName[]>
             {
@@ -106,6 +107,7 @@ namespace Scripts.Zulu.Engines.Classes
                     SkillName.Begging,
                 }
             };
+        #endregion
 
         [CommandProperty(AccessLevel.Counselor)]
         public int Level { get; set; } = 0;

@@ -1,5 +1,36 @@
 package Types
 
+#CoreConfiguration: {
+    Expansion: #Expansion
+    InsuranceEnabled: bool
+    ActionDelay: int32
+}
+#EmailConfiguration: {
+    Enabled: *false | bool
+    FromAddress: string
+    FromName: string
+    CrashAddress: string
+    CrashName: string
+    SpeechLogPageAddress: string
+    SpeechLogPageName: string
+    EmailServer: string
+    EmailPort: int32
+    EmailUsername: string
+    EmailPassword: string
+    EmailSendRetryCount: int32
+    EmailSendRetryDelay: int32
+}
+#MessagingConfiguration: {
+    SuccessHue: int32
+    FailureHue: int32
+    VisibleDamage: bool
+    ObjectPropertyList: bool
+    GuildClickMessage: bool
+    AsciiClickMessage: bool
+    SingleClickProps: bool
+    StaffRevealMagicItems: bool
+}
+
 #SkillName:
 	"Alchemy" |
 	"Anatomy" |
@@ -79,15 +110,15 @@ package Types
 
 #Race: "Human" | null
 
-#ExpansionEnum:  "None" 
-    | "T2A"
-    | "UOR"
-    | "UOTD"
-    | "LBR"
-    | "AOS"
-    | "SE"
-    | "ML"
-    | "SA"
-    | "HS"
-    | "TOL"
-    | "EJ"
+#Expansion:  "None" | 
+		"T2A" |
+    "UOR" |
+    "UOTD" |
+    "LBR" |
+    "AOS" |
+    "SE" |
+    "ML" |
+    "SA" |
+    "HS" |
+    "TOL" |
+    "EJ"

@@ -5,15 +5,17 @@ import (
 	Loot "github.com/zuluhotelaustralia/zuluhotel/Loot"
 	Magic "github.com/zuluhotelaustralia/zuluhotel/Magic"
 	Skills "github.com/zuluhotelaustralia/zuluhotel/Skills"
+	
+	Types "github.com/zuluhotelaustralia/zuluhotel/Types"
 )
 
-Core: {
+Core: Types.#CoreConfiguration & {
 	Expansion: "T2A"
 	InsuranceEnabled: false
 	ActionDelay: 500
 }
 
-Messaging: {
+Messaging: Types.#MessagingConfiguration & {
 	SuccessHue:            55
 	FailureHue:            33
 	VisibleDamage:         true
@@ -24,7 +26,7 @@ Messaging: {
 	SingleClickProps:      true
 }
 
-Email: {
+Email: Types.#EmailConfiguration & {
 	Enabled:              false
 	FromAddress:          "support@modernuo.com"
 	FromName:             "ModernUO Team"
