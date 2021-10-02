@@ -44,7 +44,7 @@ namespace Server.Mobiles
                     SetSkill(skill, prop);
             }
 
-            if (Resistances.Any())
+            if (props.Resistances.Any())
             {
                 foreach (var (resistance, prop) in props.Resistances)
                     this.TrySetResist(resistance, prop);
