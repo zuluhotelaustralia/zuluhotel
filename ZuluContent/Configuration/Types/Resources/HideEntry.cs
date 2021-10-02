@@ -1,0 +1,14 @@
+using System;
+
+namespace ZuluContent.Configuration.Types.Resources
+{
+    public record HideEntry
+    {
+        public string Name { get; init; }
+        public Type ResourceType { get; init; }
+        public double CraftSkillRequired { get; init; }
+        public int Hue { get; init; }
+        public double Quality { get; init; }
+        public EnchantmentEntry[] Enchantments { get; init; }
+    }
+}

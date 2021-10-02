@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Scripts.Configuration;
 
 namespace Server.Spells
 {
@@ -12,10 +11,10 @@ namespace Server.Spells
         private static Dictionary<SpellEntry, Type> _spellTypes;
 
         public static Dictionary<Type, SpellInfo> SpellInfos => _spellInfos ??=
-            CueConfiguration.Instance.RootConfig.Magic.Spells.ToDictionary(kv => kv.Value.Type, kv => kv.Value);
+            ZhConfig.Magic.Spells.ToDictionary(kv => kv.Value.Type, kv => kv.Value);
 
         public static Dictionary<SpellEntry, Type> SpellTypes => _spellTypes ??=
-            CueConfiguration.Instance.RootConfig.Magic.Spells.ToDictionary(kv => kv.Key, kv => kv.Value.Type);
+            ZhConfig.Magic.Spells.ToDictionary(kv => kv.Key, kv => kv.Value.Type);
 
         public static readonly Dictionary<Type, Func<Mobile, Item, Spell>> SpellCreators =
             SpellInfos.Keys.ToDictionary(k => k, SpellCreatorLambda);

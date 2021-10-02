@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Server.Items;
 using Server.Targeting;
-using Scripts.Configuration;
+using ZuluContent.Configuration.Types.Crafting;
 
 namespace Server.Engines.Craft
 {

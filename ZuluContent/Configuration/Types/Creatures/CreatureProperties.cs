@@ -1,25 +1,30 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Scripts.Cue;
-using Server.Engines.Magic;
-using Server.Misc;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
-using Server.Items;
+using Server;
+using Server.Engines.Magic;
+using Server.Misc;
+using Server.Mobiles;
 using Server.Spells;
-using Server.Utilities;
-using ZuluContent.Zulu.Engines.Magic;
 
+// ReSharper disable UnusedMember.Global
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable CollectionNeverUpdated.Global
+// ReSharper disable UnusedMember.Local
 // ReSharper disable InconsistentNaming
-
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace Server.Mobiles
+namespace ZuluContent.Configuration.Types.Creatures
 {
     public record CreatureProperties
     {
+        
+        private static readonly Action<CreatureProperties, BaseCreature> MapAction
+            = ZuluUtil.BuildMapAction<CreatureProperties, BaseCreature>();
+        
         #region Properties
         public string Name { get; set; } = "<CreatureProperties unset>";
         public string Kind { get; set; } = "Npc";
@@ -78,7 +83,7 @@ namespace Server.Mobiles
         public bool? Tamable { get; set; }
         public bool? TargetAcquireExhaustion { get; set; }
         public int? Team { get; set; }
-        public string Title { get; set; }
+        public string? Title { get; set; }
         public PropValue? TreasureMapLevel { get; set; }
 
         [CueExpression(@"[...string]")]
@@ -89,107 +94,9 @@ namespace Server.Mobiles
 
         [CueExpression(@"{ ... }")]
         public Dictionary<SkillName, PropValue> Skills { get; set; } = new();
-        public CreatureAttack Attack { get; set; } = new();
-        public List<CreatureEquip> Equipment { get; set; } = new();
-
-        private static readonly Action<CreatureProperties, BaseCreature> MapAction
-            = ZuluUtil.BuildMapAction<CreatureProperties, BaseCreature>();
+        public CreatureAttack? Attack { get; set; }
+        public List<CreatureEquip>? Equipment { get; set; } = new();
 
         #endregion
-
-        public void ApplyTo<T>(T dest) where T : BaseCreature
-        {
-            // If dest null throw an exception
-            if (dest == null)
-                throw new ArgumentNullException($"Failed to apply properties to {nameof(dest)}");
-
-            MapAction(this, dest);
-            
-            dest.SetHits(HitsMaxSeed);
-            dest.SetStam(StamMaxSeed);
-            dest.SetMana(ManaMaxSeed);
-
-            // Non-mappable props
-            if (Skills.Any())
-            {
-                foreach (var (skill, prop) in Skills)
-                    dest.SetSkill(skill, prop);
-            }
-
-            if (Resistances.Any())
-            {
-                foreach (var (resistance, prop) in Resistances)
-                    dest.TrySetResist(resistance, prop);
-            }
-
-            Dress(dest);
-        }
-
-        private void Dress(BaseCreature dest)
-        {
-            if (!dest.Items.Any() && Equipment.Any())
-            {
-                foreach (var equip in Equipment)
-                {
-                    var item = equip.ItemType?.CreateInstance<Item>();
-
-                    if (item == null)
-                        continue;
-
-                    if (equip.Name != null)
-                        item.Name = equip.Name;
-
-                    if (equip.Hue != null)
-                        item.Hue = equip.Hue;
-
-                    if (item is BaseArmor armor && equip.ArmorRating != null)
-                        armor.BaseArmorRating = (int)equip.ArmorRating;
-
-                    dest.AddItem(item);
-                    item.Movable = false;
-                }
-            }
-
-
-            if (Attack != null)
-            {
-                dest.DamageMin = (int)Attack.Damage.Min;
-                dest.DamageMax = (int)(Attack.Damage.Max ?? Attack.Damage.Min);
-
-                if (dest.Weapon == null && (
-                        Attack.Animation != null || Attack.HitSound != null ||
-                        Attack.MissSound != null || Attack.MaxRange != null
-                    )
-                )
-                {
-                    dest.AddItem(new Fists());
-                }
-
-
-                if (dest.Weapon is BaseWeapon weapon)
-                {
-                    if (Attack.Animation != null)
-                        weapon.Animation = Attack.Animation.Value;
-
-                    if (Attack.HitSound != null)
-                        weapon.HitSound = Attack.HitSound.Value;
-
-                    if (Attack.MissSound != null)
-                        weapon.MissSound = Attack.MissSound.Value;
-
-                    if (Attack.MaxRange != null)
-                        weapon.MaxRange = Attack.MaxRange.Value;
-
-                    if (Attack.Speed != null)
-                        weapon.Speed = Attack.Speed;
-
-                    if (Attack.HitPoison != null)
-                        weapon.Poison = Attack.HitPoison;
-
-                    if (Attack.ProjectileEffectId != null && weapon is BaseRanged br)
-                        br.EffectId = Attack.ProjectileEffectId.Value;
-                }
-            }
-        }
     }
 }

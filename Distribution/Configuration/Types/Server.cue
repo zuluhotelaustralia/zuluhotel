@@ -78,3 +78,16 @@ package Types
 	"MagicReflection"
 
 #Race: "Human" | null
+
+#ExpansionEnum:  "None" 
+    | "T2A"
+    | "UOR"
+    | "UOTD"
+    | "LBR"
+    | "AOS"
+    | "SE"
+    | "ML"
+    | "SA"
+    | "HS"
+    | "TOL"
+    | "EJ"

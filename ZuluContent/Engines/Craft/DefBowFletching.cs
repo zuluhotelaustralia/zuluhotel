@@ -1,10 +1,7 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using Server.Items;
-using Server.Json;
-using Scripts.Configuration;
+using ZuluContent.Configuration.Types.Crafting;
 
 namespace Server.Engines.Craft
 {

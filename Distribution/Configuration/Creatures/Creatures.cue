@@ -24,25 +24,23 @@ import (
 	Types "github.com/zuluhotelaustralia/zuluhotel/Types"
 )
 
-Creatures: {
-	[string]: Types.#NpcEntry
-	Animal
-	Animated
-	Beholder
-	Daemon
-	Dragonkin
-	Elemental
-	Familiars
-	Gargoyle
-	Giantkin
-	Human
-	Misc
-	Ophidian
-	Orc
-	Plant
-	Ratkin
-	Slime
-	Terathan
-	Troll
-	Undead
-}
+[string]: Types.#NpcEntry
+Animal
+Animated
+Beholder
+Daemon
+Dragonkin
+Elemental
+Familiars
+Gargoyle
+Giantkin
+Human
+Misc
+Ophidian
+Orc
+Plant
+Ratkin
+Slime
+Terathan
+Troll
+Undead

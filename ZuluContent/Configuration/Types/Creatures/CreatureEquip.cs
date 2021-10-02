@@ -1,10 +1,11 @@
 using System.ComponentModel;
+using Server;
 using Server.Engines.Magic.HitScripts;
 using Server.Items;
-using Server.Spells;
+using Server.Mobiles;
 using Type = System.Type;
 
-namespace Server.Mobiles
+namespace ZuluContent.Configuration.Types.Creatures
 {
     public record CreatureEquip
     {
