@@ -20,10 +20,10 @@ Messaging: Types.#MessagingConfiguration & {
 	FailureHue:            33
 	VisibleDamage:         true
 	StaffRevealMagicItems: true
-	ObjectPropertyList:    true
-	GuildClickMessage:     true
-	AsciiClickMessage:     true
-	SingleClickProps:      true
+	ObjectPropertyList:    false
+	GuildClickMessage:     false
+	AsciiClickMessage:     false
+	SingleClickProps:      false
 }
 
 Email: Types.#EmailConfiguration & {
@@ -55,7 +55,7 @@ Crafting: {
 }
 
 Resources: {
-	Crafting
+	Resources
 }
 
 Magic: {

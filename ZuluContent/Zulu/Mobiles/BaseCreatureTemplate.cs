@@ -49,6 +49,7 @@ namespace Server.Mobiles
                 foreach (var (resistance, prop) in props.Resistances)
                     this.TrySetResist(resistance, prop);
             }
+            
 
             Dress(props);
         }
