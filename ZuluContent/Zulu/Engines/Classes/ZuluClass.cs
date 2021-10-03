@@ -632,7 +632,7 @@ namespace Scripts.Zulu.Engines.Classes
         {
         }
 
-        public void OnAdded(IEntity entity)
+        public void OnAdded(IEntity entity, IEntity parent)
         {
         }
 

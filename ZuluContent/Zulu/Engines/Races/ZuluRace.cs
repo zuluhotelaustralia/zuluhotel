@@ -242,7 +242,7 @@ namespace Scripts.Zulu.Engines.Races
         {
         }
 
-        public void OnAdded(IEntity entity)
+        public void OnAdded(IEntity entity, IEntity parent)
         {
         }
 
