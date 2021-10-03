@@ -215,7 +215,7 @@ namespace ZuluContent.Zulu.Items
                     $"That item is cursed, and reveals itself to be a {SingleClickHandler.GetMagicItemName(this)}");    
             }
             
-            Enchantments.FireHook(e => e.OnAdded(this));
+            Enchantments.FireHook(e => e.OnAdded(this, parent));
         }
 
         public override void OnRemoved(IEntity parent)
@@ -245,8 +245,8 @@ namespace ZuluContent.Zulu.Items
         {
             base.Deserialize(reader);
             m_Enchantments = EnchantmentDictionary.Deserialize(reader);
-            if (Parent is Mobile m)
-                m_Enchantments.FireHook(e => e.OnAdded(this));
+            if (Parent is Mobile mobile)
+                m_Enchantments.FireHook(e => e.OnAdded(this, mobile));
         }
     }
 }

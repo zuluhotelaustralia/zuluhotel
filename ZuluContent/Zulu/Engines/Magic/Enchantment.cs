@@ -50,7 +50,7 @@ namespace ZuluContent.Zulu.Engines.Magic
         {
         }
 
-        public virtual void OnAdded(IEntity entity)
+        public virtual void OnAdded(IEntity entity, IEntity parent)
         {
         }
 

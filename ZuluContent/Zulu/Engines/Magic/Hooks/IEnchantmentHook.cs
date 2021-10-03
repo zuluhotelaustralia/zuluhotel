@@ -12,7 +12,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Hooks
     {
         public void OnIdentified(IEntity entity);
 
-        public void OnAdded(IEntity entity);
+        public void OnAdded(IEntity entity, IEntity parent);
 
         public void OnRemoved(IEntity entity, IEntity parent);
 

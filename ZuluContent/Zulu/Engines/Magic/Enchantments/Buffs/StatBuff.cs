@@ -73,7 +73,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs
         public void OnBuffAdded(Mobile parent)
         {
             (parent as IEnchanted)?.Enchantments.Set(this);
-            OnAdded(parent);
+            OnAdded(parent, parent);
         }
 
         public void OnBuffRemoved(Mobile parent)

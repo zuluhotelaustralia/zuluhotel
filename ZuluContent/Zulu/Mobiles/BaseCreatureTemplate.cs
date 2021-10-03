@@ -85,13 +85,13 @@ namespace Server.Mobiles
                 DamageMin = (int)props.Attack.Damage.Min;
                 DamageMax = (int)(props.Attack.Damage.Max ?? props.Attack.Damage.Min);
 
-                if (Weapon == null && (
+                if (Weapon == DefaultWeapon && (
                         props.Attack.Animation != null || props.Attack.HitSound != null ||
                         props.Attack.MissSound != null || props.Attack.MaxRange != null
                     )
                 )
                 {
-                    AddItem(new Fists());
+                    EquipItem(new CreatureWeapon());
                 }
 
 

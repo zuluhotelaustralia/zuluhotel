@@ -38,10 +38,10 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         private SkillMod m_Mod;
 
-        public override void OnAdded(IEntity entity)
+        public override void OnAdded(IEntity entity, IEntity parent)
         {
-            base.OnAdded(entity);
-            if (entity is Item {Parent: Mobile mobile} item)
+            base.OnAdded(entity, parent);
+            if (entity is Item item && parent is Mobile mobile)
             {
                 m_Mod = new EquippedSkillMod(Skill, true, Value, item, mobile);
                 mobile.AddSkillMod(m_Mod);

@@ -5,5 +5,5 @@ import (
 )
 
 Autoloop: Types.#AutoLoopSettings & {
-	Delay: 6.0
+	Delay: 1.0
 }

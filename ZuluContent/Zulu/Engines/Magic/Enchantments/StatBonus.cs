@@ -132,11 +132,11 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             mobile.AddStatMod(Mod);
         }
 
-        public override void OnAdded(IEntity entity)
+        public override void OnAdded(IEntity entity, IEntity parent)
         {
-            base.OnAdded(entity);
+            base.OnAdded(entity, parent);
 
-            if (entity is Mobile mobile)
+            if (parent is Mobile mobile)
             {
                 Mobile = mobile;
                 AddStatMod(mobile);

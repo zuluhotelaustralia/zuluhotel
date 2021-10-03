@@ -20,9 +20,9 @@ namespace Server.Items
 
         public override int DefaultSpeed { get; } = 30;
 
-        public override int DefaultHitSound { get; } = -1;
+        public override int DefaultHitSound { get; } = 0x13B;
 
-        public override int DefaultMissSound { get; } = -1;
+        public override int DefaultMissSound { get; } = 0x233;
 
         public override SkillName DefaultSkill { get; } = SkillName.Wrestling;
 

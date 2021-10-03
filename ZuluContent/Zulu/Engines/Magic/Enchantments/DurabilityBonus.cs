@@ -30,7 +30,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
         public override int CursedHue { get; protected set; } = 0;
         public override string[,] Names { get; protected set; } = {
             {string.Empty, string.Empty},
-            {"Durable", "Durable"},
+            {"Durable", "Chipped"},
             {"Substantial", "Flimsy"},
             {"Massive", "Broken"},
             {"Fortified", "Crumbling"},
