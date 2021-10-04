@@ -16,8 +16,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public bool InUse { get; set; }
 
-        private static readonly int[] Hues = new[]
-        {
+        private static readonly int[] Hues = {
             0x09B,
             0x0CD,
             0x0D3,
@@ -146,6 +145,7 @@ namespace Server.Items
                 var index = 0;
 
                 Timer.StartTimer(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.25), 14, () => DoEffect(from, p, index++));
+                
 
                 from.SendLocalizedMessage(1010487); // You plunge the net into the sea...
             }
@@ -160,72 +160,75 @@ namespace Server.Items
             if (Deleted)
                 return;
 
-            if (index == 1)
+            switch (index)
             {
-                Effects.SendLocationEffect(p, Map, 0x352D, 16, 4);
-                Effects.PlaySound(p, Map, 0x364);
-            }
-            else if (index <= 7 || index == 14)
-            {
-                for (int i = 0; i < 3; ++i)
+                case 1:
+                    Effects.SendLocationEffect(p, Map, 0x352D, 16, 4);
+                    Effects.PlaySound(p, Map, 0x364);
+                    break;
+                case <= 10 or 13:
                 {
-                    int x, y;
-
-                    switch (Utility.Random(8))
+                    for (var i = 0; i < 3; ++i)
                     {
-                        default:
-                        case 0:
-                            x = -1;
-                            y = -1;
-                            break;
-                        case 1:
-                            x = -1;
-                            y = 0;
-                            break;
-                        case 2:
-                            x = -1;
-                            y = +1;
-                            break;
-                        case 3:
-                            x = 0;
-                            y = -1;
-                            break;
-                        case 4:
-                            x = 0;
-                            y = +1;
-                            break;
-                        case 5:
-                            x = +1;
-                            y = -1;
-                            break;
-                        case 6:
-                            x = +1;
-                            y = 0;
-                            break;
-                        case 7:
-                            x = +1;
-                            y = +1;
-                            break;
+                        int x, y;
+
+                        switch (Utility.Random(8))
+                        {
+                            default:
+                            case 0:
+                                x = -1;
+                                y = -1;
+                                break;
+                            case 1:
+                                x = -1;
+                                y = 0;
+                                break;
+                            case 2:
+                                x = -1;
+                                y = +1;
+                                break;
+                            case 3:
+                                x = 0;
+                                y = -1;
+                                break;
+                            case 4:
+                                x = 0;
+                                y = +1;
+                                break;
+                            case 5:
+                                x = +1;
+                                y = -1;
+                                break;
+                            case 6:
+                                x = +1;
+                                y = 0;
+                                break;
+                            case 7:
+                                x = +1;
+                                y = +1;
+                                break;
+                        }
+
+                        Effects.SendLocationEffect(new Point3D(p.X + x, p.Y + y, p.Z), Map, 0x352D, 16, 4);
                     }
 
-                    Effects.SendLocationEffect(new Point3D(p.X + x, p.Y + y, p.Z), Map, 0x352D, 16, 4);
+                    if (Utility.RandomBool())
+                        Effects.PlaySound(p, Map, 0x364);
+
+                    if (index == 13)
+                        FinishEffect(p, Map, @from);
+                    else
+                        Z -= 1;
+                    break;
                 }
-
-                if (Utility.RandomBool())
-                    Effects.PlaySound(p, Map, 0x364);
-
-                if (index == 14)
-                    FinishEffect(p, Map, from);
-                else
-                    Z -= 1;
             }
         }
 
         protected void Spawn(Point3D p, Map map, BaseCreature spawn)
         {
-            if (map == null)
+            if (map == null || spawn == null)
             {
-                spawn.Delete();
+                spawn?.Delete();
                 return;
             }
 
@@ -257,7 +260,8 @@ namespace Server.Items
 
             from.ShilCheckSkill(SkillName.Fishing, points: 100);
 
-            switch (Utility.Random(10))
+            var rand = Utility.Random(10);
+            switch (rand)
             {
                 case 0:
                 case 1:
@@ -352,8 +356,7 @@ namespace Server.Items
                 }
                 case 9:
                 {
-                    var seaSerpent = "SeaSerpent";
-                    Spawn(from.Location, from.Map, seaSerpent);
+                    Spawn(from.Location, from.Map, "SeaSerpent");
                     from.SendFailureMessage("You did not catch anything, except...");
                     break;
                 }

@@ -1,6 +1,6 @@
 package Animal
 
-Semonster: {
+SeaSerpent: {
 	Name:                 "a sea monster"
 	CorpseNameOverride:   "corpse of a sea monster"
 	Str:                  250

@@ -50,7 +50,7 @@ namespace Server
         private static RootConfiguration LoadCueConfiguration()
         {
             #if DEBUG
-            ConvertTypesToCue(
+            /*ConvertTypesToCue(
                 "Assemblies",
                 "ZuluContent",
                 "github.com/zuluhotelaustralia/zuluhotel",
@@ -61,7 +61,7 @@ namespace Server
                     typeof(CoreConfiguration).FullName,
                     typeof(EmailConfiguration).FullName,
                 }
-            );
+            );*/
             #endif
 
             var configRoot = Path.Combine(Server.Core.BaseDirectory, "Configuration");
@@ -73,9 +73,8 @@ namespace Server
             var files = Directory.GetFiles(configRoot, "*.cue",
                 new EnumerationOptions { RecurseSubdirectories = true });
             var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
-            var jsonCacheLastWrite = File.GetLastWriteTimeUtc(jsonCachePath);
 
-            if (!File.Exists(jsonCachePath) || lastWrite != jsonCacheLastWrite)
+            if (!File.Exists(jsonCachePath) || lastWrite != File.GetLastWriteTimeUtc(jsonCachePath))
             {
                 Logger.Information("CUE Configuration is out of date, rebuilding via cli {0} ... ", $"cue {cueArgs}");
 

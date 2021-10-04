@@ -16,14 +16,34 @@ namespace Server.Engines.Harvest
 
         private Mining()
         {
-            var res = ZhConfig.Resources.Ores.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
-                new HarvestResource(e.HarvestSkillRequired, $"{e.Name} ore", e.ResourceType)).ToArray();
-            var veins = ZhConfig.Resources.Ores.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
-                new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
+            var res = ZhConfig.Resources.Ores.Entries
+                .Where(e => e.HarvestSkillRequired > 0.0)
+                .Select(e =>
+                    new HarvestResource(
+                        e.HarvestSkillRequired,
+                        e.Name,
+                        "ore",
+                        e.ResourceType
+                    )
+                )
+                .ToArray();
+
+            var veins = ZhConfig.Resources.Ores.Entries
+                .Where(e => e.VeinChance > 0.0)
+                .Select((e, i) => new HarvestVein(e.VeinChance, res[i]))
+                .OrderBy(v => v.VeinChance)
+                .ToArray();
+
             var defaultOre = ZhConfig.Resources.Ores.Entries[0];
-            var defaultVein = new HarvestVein(defaultOre.VeinChance, new HarvestResource(
-                defaultOre.HarvestSkillRequired,
-                defaultOre.Name, defaultOre.ResourceType));
+            var defaultVein = new HarvestVein(
+                defaultOre.VeinChance,
+                new HarvestResource(
+                    defaultOre.HarvestSkillRequired,
+                    defaultOre.Name,
+                    "ore",
+                    defaultOre.ResourceType
+                )
+            );
 
             #region Mining for ore and stone
 
@@ -31,23 +51,23 @@ namespace Server.Engines.Harvest
             {
                 BankWidth = ZhConfig.Resources.Ores.BankWidth,
                 BankHeight = ZhConfig.Resources.Ores.BankHeight,
-                
+
                 MinTotal = ZhConfig.Resources.Ores.MinTotal,
                 MaxTotal = ZhConfig.Resources.Ores.MaxTotal,
-                
+
                 MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MinRespawn),
                 MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Ores.MaxRespawn),
-                
+
                 Skill = ZhConfig.Resources.Ores.Skill,
-                
+
                 Tiles = m_MountainAndCaveTiles,
-                
+
                 MaxRange = ZhConfig.Resources.Ores.MaxRange,
-                
-                ConsumedPerHarvest = skillValue => (int) (skillValue / 15) + 1,
-                
+
+                ConsumedPerHarvest = skillValue => (int)(skillValue / 15) + 1,
+
                 MaxChance = ZhConfig.Resources.Ores.MaxChance,
-                
+
                 EffectActions = ZhConfig.Resources.Ores.ResourceEffect.Actions,
                 EffectSounds = ZhConfig.Resources.Ores.ResourceEffect.Sounds,
                 EffectCounts = ZhConfig.Resources.Ores.ResourceEffect.Counts,
@@ -69,39 +89,45 @@ namespace Server.Engines.Harvest
 
                 BonusEffect = HarvestBonusEffect
             };
-                
+
             Definitions.Add(oreAndStone);
-            
+
             var defaultSand = ZhConfig.Resources.Sand.Entries[0];
-            var defaultSandVein = new HarvestVein(defaultSand.VeinChance, new HarvestResource(
-                defaultSand.HarvestSkillRequired,
-                defaultSand.Name, defaultSand.ResourceType));
-            
+            var defaultSandVein = new HarvestVein(
+                defaultSand.VeinChance,
+                new HarvestResource(
+                    defaultSand.HarvestSkillRequired,
+                    defaultSand.Name,
+                    string.Empty,
+                    defaultSand.ResourceType
+                )
+            );
+
             var sand = new HarvestDefinition
             {
                 BankWidth = ZhConfig.Resources.Sand.BankWidth,
                 BankHeight = ZhConfig.Resources.Sand.BankHeight,
-                
+
                 MinTotal = ZhConfig.Resources.Sand.MinTotal,
                 MaxTotal = ZhConfig.Resources.Sand.MaxTotal,
-                
+
                 MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Sand.MinRespawn),
                 MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Sand.MaxRespawn),
-                
+
                 Skill = ZhConfig.Resources.Sand.Skill,
-                
+
                 Tiles = m_SandTiles,
-                
+
                 MaxRange = ZhConfig.Resources.Sand.MaxRange,
-                
+
                 ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
-                
+
                 EffectActions = ZhConfig.Resources.Sand.ResourceEffect.Actions,
                 EffectSounds = ZhConfig.Resources.Sand.ResourceEffect.Sounds,
                 EffectCounts = ZhConfig.Resources.Sand.ResourceEffect.Counts,
                 EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Sand.ResourceEffect.Delay),
                 EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Sand.ResourceEffect.SoundDelay),
-                
+
                 NoResourcesMessage = ZhConfig.Resources.Sand.Messages.NoResourcesMessage,
                 DoubleHarvestMessage = ZhConfig.Resources.Sand.Messages.DoubleHarvestMessage,
                 TimedOutOfRangeMessage = ZhConfig.Resources.Sand.Messages.TimedOutOfRangeMessage,
@@ -112,40 +138,46 @@ namespace Server.Engines.Harvest
 
                 DefaultVein = defaultSandVein
             };
-            
+
             Definitions.Add(sand);
-            
+
             var defaultClay = ZhConfig.Resources.Clay.Entries[0];
-            var defaultClayVein = new HarvestVein(defaultClay.VeinChance, new HarvestResource(
-                defaultClay.HarvestSkillRequired,
-                defaultClay.Name, defaultClay.ResourceType));
-            
+            var defaultClayVein = new HarvestVein(
+                defaultClay.VeinChance, 
+                new HarvestResource(
+                    defaultClay.HarvestSkillRequired,
+                    defaultClay.Name, 
+                    string.Empty,
+                    defaultClay.ResourceType
+                )
+            );
+
             var clay = new HarvestDefinition
             {
                 BankWidth = ZhConfig.Resources.Clay.BankWidth,
                 BankHeight = ZhConfig.Resources.Clay.BankHeight,
-                
+
                 MinTotal = ZhConfig.Resources.Clay.MinTotal,
                 MaxTotal = ZhConfig.Resources.Clay.MaxTotal,
-                
+
                 MinRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Clay.MinRespawn),
                 MaxRespawn = TimeSpan.FromMinutes(ZhConfig.Resources.Clay.MaxRespawn),
-                
+
                 Skill = ZhConfig.Resources.Clay.Skill,
-                
+
                 Tiles = m_SwampTiles,
                 RangedTiles = true,
-                
+
                 MaxRange = ZhConfig.Resources.Clay.MaxRange,
-                
+
                 ConsumedPerHarvest = skillValue => Utility.RandomMinMax(1, 6),
-                
+
                 EffectActions = ZhConfig.Resources.Clay.ResourceEffect.Actions,
                 EffectSounds = ZhConfig.Resources.Clay.ResourceEffect.Sounds,
                 EffectCounts = ZhConfig.Resources.Clay.ResourceEffect.Counts,
                 EffectDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Clay.ResourceEffect.Delay),
                 EffectSoundDelay = TimeSpan.FromSeconds(ZhConfig.Resources.Clay.ResourceEffect.SoundDelay),
-                
+
                 NoResourcesMessage = ZhConfig.Resources.Clay.Messages.NoResourcesMessage,
                 DoubleHarvestMessage = ZhConfig.Resources.Clay.Messages.DoubleHarvestMessage,
                 TimedOutOfRangeMessage = ZhConfig.Resources.Clay.Messages.TimedOutOfRangeMessage,
@@ -156,7 +188,7 @@ namespace Server.Engines.Harvest
 
                 DefaultVein = defaultClayVein
             };
-            
+
             Definitions.Add(clay);
 
             #endregion
@@ -165,7 +197,7 @@ namespace Server.Engines.Harvest
         private static void HarvestBonusEffect(Mobile harvester, Item tool)
         {
             var chance = Utility.Random(1, 100);
-            var bonus = (int) (harvester.Skills[SkillName.Mining].Value / 30);
+            var bonus = (int)(harvester.Skills[SkillName.Mining].Value / 30);
 
             harvester.FireHook(h => h.OnHarvestBonus(harvester, ref bonus));
 
@@ -436,7 +468,7 @@ namespace Server.Engines.Harvest
             1617, 1618, 1623, 1624, 1625, 1626, 1635, 1636, 1637,
             1638, 1639, 1640, 1641, 1642, 1647, 1648, 1649, 1650
         };
-        
+
         private static int[] m_SwampTiles = new[]
         {
             0x240, 0x250,

@@ -157,7 +157,6 @@ namespace Scripts.Cue
 
         public static void ConvertTypesToCue(string dir, string name, string module, string[] types)
         {
-            
             var path = Path.Combine(dir, $"{name}.dll");
             var asm = Load(path);
 
