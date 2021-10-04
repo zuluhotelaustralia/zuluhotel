@@ -6,10 +6,10 @@ WORKDIR /source
 RUN git submodule update --init --recursive
 
 RUN apt-get update \
- && apt-get install -y -q --no-install-recommends \
-    ca-certificates rsync \
- && apt-get clean \
- && rm -r /var/lib/apt/lists/*
+   && apt-get install -y -q --no-install-recommends \
+   ca-certificates rsync \
+   && apt-get clean \
+   && rm -r /var/lib/apt/lists/*
 
 RUN dotnet publish -r linux-x64 -c Release
 
@@ -22,15 +22,15 @@ ARG gid=1000
 
 
 RUN apt-get update \
- && apt-get install -y -q --no-install-recommends \
-    ca-certificates libargon2-1 libargon2-dev zlib1g zlib1g-dev libicu66 libicu-dev \
- && apt-get clean \
- && rm -r /var/lib/apt/lists/*
- 
+   && apt-get install -y -q --no-install-recommends \
+   ca-certificates libargon2-1 libargon2-dev zlib1g zlib1g-dev libicu66 libicu-dev zstd \
+   && apt-get clean \
+   && rm -r /var/lib/apt/lists/*
+
 RUN groupadd -g ${gid} ${group} && useradd -u ${uid} -g ${group} -s /bin/sh ${user}
 
 USER ${user}
- 
+
 COPY --chown=${user} --from=builder /source/ModernUO/Distribution /app
 
 WORKDIR /app

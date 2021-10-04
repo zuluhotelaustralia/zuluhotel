@@ -263,15 +263,17 @@ namespace Server.Items
                 patientNumber = -1;
                 
                 var difficulty = Patient.HitsMax - Patient.Hits;
+                difficulty = Math.Min(150, difficulty);
+
                 var points = difficulty * PointsMultiplier;
 
                 if (Healer.ShilCheckSkill(primarySkill, difficulty, points))
                 {
                     healerNumber = 500969; // You finish applying the bandages.
 
-                    var healing = Healer.Skills[primarySkill].Value / 10;
-                    var anatomy = Healer.Skills[secondarySkill].Value / 5;
-                    var toHeal = new DiceRoll($"{healing}d4+{healing}").Roll() + new DiceRoll("1d8+2").Roll() + anatomy;
+                    var primary = Healer.Skills[primarySkill].Value / 10;
+                    var secondary = Healer.Skills[secondarySkill].Value / 5;
+                    var toHeal = new DiceRoll($"{primary}d4+{primary}").Roll() + new DiceRoll("1d8+2").Roll() + secondary;
 
                     Healer.FireHook(h => h.OnHeal(Healer, Patient, this, ref toHeal));
 

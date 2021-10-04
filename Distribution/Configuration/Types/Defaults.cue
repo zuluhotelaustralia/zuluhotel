@@ -32,7 +32,7 @@ package Types
 	CanRummageCorpses:       true
 	CreatureType:            "None"
 	Female:                  false
-	FightMode:               "None"
+	FightMode:               "Closest"
 	FightRange:              1
 	HitsMaxSeed:             1
 	Hue:                     0

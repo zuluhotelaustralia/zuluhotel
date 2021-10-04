@@ -72,9 +72,10 @@ namespace Server
 
             var files = Directory.GetFiles(configRoot, "*.cue",
                 new EnumerationOptions { RecurseSubdirectories = true });
-            var lastWrite = files.Select(File.GetLastWriteTimeUtc).Max();
-
-            if (!File.Exists(jsonCachePath) || lastWrite != File.GetLastWriteTimeUtc(jsonCachePath))
+            var jsonCacheLastWrite = File.GetLastWriteTimeUtc(jsonCachePath);
+            var lastWrite = files.Length > 0 ? files.Select(File.GetLastWriteTimeUtc).Max() : jsonCacheLastWrite;
+            
+            if (!File.Exists(jsonCachePath) || lastWrite != jsonCacheLastWrite)
             {
                 Logger.Information("CUE Configuration is out of date, rebuilding via cli {0} ... ", $"cue {cueArgs}");
 
