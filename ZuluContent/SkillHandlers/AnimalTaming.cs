@@ -129,7 +129,7 @@ namespace Server.SkillHandlers
                 creature.PrivateOverheadMessage(MessageType.Regular, 0x3B2, 502799, from.NetState);
                 creature.Owners.Add(from);
                 creature.SetControlMaster(from);
-                if (creature.Combatant != null)
+                if (creature.Combatant != null || from.Combatant == creature)
                     PacifyBeast(creature, from);
             }
             else
@@ -210,9 +210,9 @@ namespace Server.SkillHandlers
 
         private static void PacifyBeast(BaseCreature creature, Mobile from)
         {
-            from.Combatant = null;
             creature.Combatant = null;
             creature.Warmode = false;
+            from.Combatant = null;
             creature.Pacify(from, DateTime.Now + TimeSpan.FromSeconds(1.0));
         }
     }

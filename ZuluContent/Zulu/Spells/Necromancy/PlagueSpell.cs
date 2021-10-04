@@ -45,7 +45,7 @@ namespace Scripts.Zulu.Spells.Necromancy
                 if (level > 0) 
                     mobile.ApplyPoison(Caster, Poison.GetPoison(level));
 
-                mobile.FixedParticles(0x3749, 7, 16, 5021, EffectLayer.Waist);
+                mobile.FixedParticles(0x3914, 8, 16, 5021, EffectLayer.Waist);
                 mobile.PlaySound(0x1E1);
                 
                 mobile.Spell?.OnCasterHurt();
