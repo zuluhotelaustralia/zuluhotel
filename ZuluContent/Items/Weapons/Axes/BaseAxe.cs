@@ -87,13 +87,14 @@ namespace Server.Items
                 from.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1019045); // I can't reach that
                 return;
             }
-            else if (!IsAccessibleTo(from))
+            
+            if (!IsAccessibleTo(from))
             {
                 PublicOverheadMessage(MessageType.Regular, 0x3E9, 1061637); // You are not allowed to access this.
                 return;
             }
 
-            if (!(HarvestSystem is Mining))
+            if (HarvestSystem is not Mining)
                 from.SendLocalizedMessage(1010018); // What do you want to use this item on?
 
             HarvestSystem.BeginHarvesting(from, this);

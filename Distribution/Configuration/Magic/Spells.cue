@@ -2314,7 +2314,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "ExecutionersCap"
@@ -2346,7 +2346,7 @@ Spells: {
 		AllowDead:        false
 		TargetOptions: {
 			Range:         12
-			AllowGround:   true
+			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
@@ -2713,7 +2713,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "VolcanicAsh"
@@ -2926,11 +2926,11 @@ Spells: {
 		AllowDead:        false
 		TargetOptions: {
 			Range:         12
-			AllowGround:   true
+			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "WyrmsHeart"
@@ -3106,11 +3106,11 @@ Spells: {
 		AllowDead:        false
 		TargetOptions: {
 			Range:         12
-			AllowGround:   true
+			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "BatWing"
