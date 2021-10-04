@@ -18,14 +18,27 @@ namespace Server.Engines.Harvest
 
         private Lumberjacking()
         {
-            var res = ZhConfig.Resources.Logs.Entries.Where(e => e.HarvestSkillRequired > 0.0).Select(e =>
-                new HarvestResource(e.HarvestSkillRequired, $"{e.Name}(s)", e.ResourceType)).ToArray();
-            var veins = ZhConfig.Resources.Logs.Entries.Where(e => e.VeinChance > 0.0).Select((e, i) =>
-                new HarvestVein(e.VeinChance, res[i])).OrderBy(v => v.VeinChance).ToArray();
+            var res = ZhConfig.Resources.Logs.Entries
+                .Where(e => e.HarvestSkillRequired > 0.0)
+                .Select(e => new HarvestResource(e.HarvestSkillRequired, e.Name, "log", e.ResourceType))
+                .ToArray();
+            
+            var veins = ZhConfig.Resources.Logs.Entries
+                .Where(e => e.VeinChance > 0.0)
+                .Select((e, i) => new HarvestVein(e.VeinChance, res[i]))
+                .OrderBy(v => v.VeinChance)
+                .ToArray();
+            
             var defaultLog = ZhConfig.Resources.Logs.Entries[0];
-            var defaultVein = new HarvestVein(defaultLog.VeinChance, new HarvestResource(
-                defaultLog.HarvestSkillRequired,
-                defaultLog.Name, defaultLog.ResourceType));
+            var defaultVein = new HarvestVein(
+                defaultLog.VeinChance, 
+                new HarvestResource(
+                    defaultLog.HarvestSkillRequired,
+                    defaultLog.Name, 
+                    "log",
+                    defaultLog.ResourceType
+                )
+            );
 
             #region Lumberjacking
 

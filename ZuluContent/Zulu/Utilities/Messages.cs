@@ -8,6 +8,9 @@ namespace Scripts.Zulu.Utilities
     {
         private static void SendAscii(Mobile mobile, bool success, TextDefinition def, string args = "")
         {
+            if (def == null)
+                return;
+            
             if (def.IsString)
                 mobile.SendAsciiMessage(
                     success ? ZhConfig.Messaging.SuccessHue : ZhConfig.Messaging.FailureHue,
@@ -23,6 +26,9 @@ namespace Scripts.Zulu.Utilities
 
         private static void SendLocalOverhead(Mobile mobile, bool success, TextDefinition def, string args = "")
         {
+            if (def == null)
+                return;
+            
             if (def.IsString)
                 mobile.LocalOverheadMessage(
                     MessageType.Regular,
@@ -41,6 +47,9 @@ namespace Scripts.Zulu.Utilities
         
         private static void SendPublicOverhead(Mobile mobile, bool success, TextDefinition def, string args = "")
         {
+            if (def == null)
+                return;
+            
             if (def.IsString)
                 mobile.PublicOverheadMessage(
                     MessageType.Regular,
@@ -59,6 +68,9 @@ namespace Scripts.Zulu.Utilities
         
         private static void SendPrivateOverhead(Mobile mobile, Mobile above, bool success, TextDefinition def, string args = "")
         {
+            if (def == null)
+                return;
+            
             if (def.IsString)
                 above.PrivateOverheadMessage(
                     MessageType.Regular,

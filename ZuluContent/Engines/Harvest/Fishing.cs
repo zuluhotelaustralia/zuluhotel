@@ -20,9 +20,15 @@ namespace Server.Engines.Harvest
             #region Fishing
             
             var defaultFish = ZhConfig.Resources.Fish.Entries[0];
-            var defaultVein = new HarvestVein(defaultFish.VeinChance, new HarvestResource(
-                defaultFish.HarvestSkillRequired,
-                defaultFish.Name, defaultFish.ResourceType));
+            var defaultVein = new HarvestVein(
+                defaultFish.VeinChance, 
+                new HarvestResource(
+                    defaultFish.HarvestSkillRequired,
+                    defaultFish.Name, 
+                    string.Empty,
+                    defaultFish.ResourceType
+                )
+            );
 
             var fish = new HarvestDefinition
             {

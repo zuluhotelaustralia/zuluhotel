@@ -16,9 +16,12 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static string GetItemDesc(Item item)
         {
-            return ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc)
-                ? TextInfo.ToTitleCase(desc)
-                : null;
+            return
+                item.DefaultName ?? (
+                    ZhConfig.Messaging.Cliloc.TryGetValue(item.LabelNumber, out var desc)
+                        ? TextInfo.ToTitleCase(desc)
+                        : null
+                );
         }
 
         private static (IEnumerable<string>, IEnumerable<string>) GetAffixes(IMagicItem item)
@@ -83,7 +86,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
 
         private static string GetCraftedFortified(ICraftable craftable)
         {
-            return craftable is BaseHat {Fortified: ItemFortificationType.Fortified} ? "Fortified " : "";
+            return craftable is BaseHat { Fortified: ItemFortificationType.Fortified } ? "Fortified " : "";
         }
 
         private static string GetCraftedExceptional(ICraftable craftable)
