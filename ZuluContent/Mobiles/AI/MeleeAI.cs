@@ -12,6 +12,9 @@ namespace Server.Mobiles
     {
         private readonly Dictionary<Serial, double> m_AcquireExhaustion = new();
 
+        private bool m_FleeCheckHits = true;
+        private int m_StepsCloserCount;
+
         public MeleeAI(BaseCreature m) : base(m)
         {
         }
@@ -58,12 +61,14 @@ namespace Server.Mobiles
 
         public override bool DoActionCombat()
         {
+            m_FleeCheckHits = true;
             Mobile combatant = m_Mobile.Combatant;
 
             if (combatant == null || combatant.Deleted || combatant.Map != m_Mobile.Map || !combatant.Alive)
             {
                 m_Mobile.DebugSay("My combatant is gone, so my guard is up");
 
+                m_StepsCloserCount = 0;
                 Action = ActionType.Guard;
 
                 return true;
@@ -72,6 +77,7 @@ namespace Server.Mobiles
             if (!m_Mobile.InRange(combatant, m_Mobile.RangePerception))
             {
                 // They are somewhat far away, can we find something else?
+                m_StepsCloserCount = 0;
 
                 if (AcquireFocusMob(m_Mobile.RangePerception, m_Mobile.FightMode, false, false, true))
                 {
@@ -105,6 +111,7 @@ namespace Server.Mobiles
 
             if (MoveTo(combatant, true, m_Mobile.RangeFight))
             {
+                m_StepsCloserCount = 0;
                 m_Mobile.Direction = m_Mobile.GetDirectionTo(combatant);
             }
             else if (AcquireFocusMob(m_Mobile.RangePerception, m_Mobile.FightMode, false, false, true))
@@ -112,6 +119,7 @@ namespace Server.Mobiles
                 if (m_Mobile.Debug)
                     m_Mobile.DebugSay("My move is blocked, so I am going to attack {0}", m_Mobile.FocusMob.Name);
 
+                m_StepsCloserCount = 0;
                 m_Mobile.Combatant = m_Mobile.FocusMob;
                 Action = ActionType.Combat;
 
@@ -121,7 +129,7 @@ namespace Server.Mobiles
             {
                 if (m_Mobile.Debug)
                     m_Mobile.DebugSay("I cannot find {0}, so my guard is up", combatant.Name);
-
+                
                 Action = ActionType.Guard;
 
                 return true;
@@ -130,6 +138,14 @@ namespace Server.Mobiles
             {
                 if (m_Mobile.Debug)
                     m_Mobile.DebugSay("I should be closer to {0}", combatant.Name);
+
+                m_StepsCloserCount++;
+                if (m_StepsCloserCount == 150)
+                {
+                    m_StepsCloserCount = 0;
+                    m_FleeCheckHits = false;
+                    Action = ActionType.Flee;
+                }
             }
 
             if (!m_Mobile.Controlled && !m_Mobile.Summoned && m_Mobile.CanFlee)
@@ -186,7 +202,7 @@ namespace Server.Mobiles
 
         public override bool DoActionFlee()
         {
-            if (m_Mobile.Hits > m_Mobile.HitsMax / 2)
+            if (m_FleeCheckHits && m_Mobile.Hits > m_Mobile.HitsMax / 2)
             {
                 m_Mobile.DebugSay("I am stronger now, so I will continue fighting");
                 Action = ActionType.Combat;
