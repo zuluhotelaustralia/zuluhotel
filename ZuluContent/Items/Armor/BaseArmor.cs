@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Server.Network;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
@@ -405,7 +406,7 @@ namespace Server.Items
             return false;
         }
 
-        public static Dictionary<ArmorBodyType, double> ArmorScalars = new()
+        public static readonly IReadOnlyDictionary<ArmorBodyType, double> ArmorScalars = new Dictionary<ArmorBodyType, double>
         {
             {ArmorBodyType.OuterChest, 0.44},
             {ArmorBodyType.InnerChest, 0.44},
@@ -417,7 +418,6 @@ namespace Server.Items
             {ArmorBodyType.Gorget, 0.07},
             {ArmorBodyType.Gloves, 0.07},
             {ArmorBodyType.Helmet, 0.14},
-            {ArmorBodyType.Shield, 0.56}
         };
 
         public static void ValidateMobile(Mobile m)
