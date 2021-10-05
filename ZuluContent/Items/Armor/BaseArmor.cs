@@ -146,7 +146,7 @@ namespace Server.Items
                 var ar = BaseArmorRating;
 
                 if (ProtectionLevel != ArmorProtectionLevel.Regular)
-                    ar += 10 + 5 * (int) ProtectionLevel;
+                    ar += 5 * (int) ProtectionLevel;
 
                 ar = (int) (ar * Quality);
 
@@ -407,12 +407,16 @@ namespace Server.Items
 
         public static Dictionary<ArmorBodyType, double> ArmorScalars = new()
         {
-            {ArmorBodyType.InnerChest, 0.4},
-            {ArmorBodyType.Arms, 0.15},
+            {ArmorBodyType.OuterChest, 0.44},
+            {ArmorBodyType.InnerChest, 0.44},
+            {ArmorBodyType.Arms, 0.14},
             {ArmorBodyType.InnerLegs, 0.15},
+            {ArmorBodyType.Pants, 0.14},
+            {ArmorBodyType.OuterLegs, 0.14},
+            {ArmorBodyType.Necklace, 0.7},
             {ArmorBodyType.Gorget, 0.07},
             {ArmorBodyType.Gloves, 0.07},
-            {ArmorBodyType.Helmet, 0.15},
+            {ArmorBodyType.Helmet, 0.14},
             {ArmorBodyType.Shield, 0.56}
         };
 
