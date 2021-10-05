@@ -18,18 +18,17 @@ namespace Server.Items
         public override int DefaultSpeed => 40;
 
         public override WeaponAnimation DefaultAnimation => WeaponAnimation.Bash1H;
-
+        
+        public override string DefaultName => "Xarafax's Axe";
 
         [Constructible]
-        public XarafaxsAxe() : this(200)
+        public XarafaxsAxe() : this(1000)
         {
         }
-
 
         [Constructible]
         public XarafaxsAxe(int uses) : base(0x0F49)
         {
-            Name = "Xarafax's Axe";
             Weight = 11.0;
             Hue = 1162;
             UsesRemaining = uses;

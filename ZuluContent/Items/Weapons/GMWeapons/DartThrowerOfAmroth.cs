@@ -27,6 +27,8 @@ namespace Server.Items
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
+        
+        public override string DefaultName => "One Handed Dart Thrower of Amroth";
 
         [Constructible]
         public DartThrowerOfAmroth() : base(0x13FD)

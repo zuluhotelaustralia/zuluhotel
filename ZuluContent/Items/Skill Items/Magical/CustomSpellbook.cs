@@ -131,12 +131,6 @@ namespace Server.Items
             return true;
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
-        }
-
         public override void OnDoubleClick(Mobile from)
         {
             if (from.InRange(GetWorldLocation(), 1) && CheckAccess(from))

@@ -19,17 +19,16 @@ namespace Server.Items
 
         public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash1H;
 
-
+        public override string DefaultName => "Omero's Pickaxe";
+        
         [Constructible]
-        public OmerosPickaxe() : this(200)
+        public OmerosPickaxe() : this(1000)
         {
         }
-
 
         [Constructible]
         public OmerosPickaxe(int uses) : base(0xE86)
         {
-            Name = "Omero's Pickaxe";
             Weight = 11.0;
             Hue = 1301;
             UsesRemaining = uses;

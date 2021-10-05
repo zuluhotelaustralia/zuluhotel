@@ -26,12 +26,6 @@ namespace Server.Items
             get => false;
         }
 
-        public override void OnSingleClick(Mobile from)
-        {
-            if (!string.IsNullOrEmpty(Name))
-                LabelTo(from, Name);
-        }
-
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
