@@ -30,11 +30,6 @@ namespace Server.Items
 
         public override WeaponAnimation DefaultAnimation => WeaponAnimation.ShootBow;
 
-        public override void OnSingleClick(Mobile from)
-        {
-            LabelTo(from, Name);
-        }
-
         [Constructible]
         public IceBow() : base(0x13B2)
         {

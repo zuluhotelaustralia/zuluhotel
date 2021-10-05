@@ -670,7 +670,9 @@ namespace Server.Items
 
             // Award skill points
             attacker.AwardSkillPoints(attackerWeapon.GetUsedSkill(attacker), 20);
-            attacker.AwardSkillPoints(SkillName.Tactics, 20);
+            
+            if(attackerWeapon.AccuracySkill == SkillName.Tactics)
+                attacker.AwardSkillPoints(SkillName.Tactics, 20);
 
             defenderArmor?.OnHit(attackerWeapon, damage);
 

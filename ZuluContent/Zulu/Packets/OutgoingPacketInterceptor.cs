@@ -1,5 +1,6 @@
 using System;
 using System.Buffers;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using Server;
@@ -11,14 +12,8 @@ namespace Scripts.Zulu.Packets
 {
     public static class OutgoingPacketInterceptor
     {
-        private static readonly bool RewriteOutgoingMessagesToAscii;
-        
-        static OutgoingPacketInterceptor()
-        {
-            RewriteOutgoingMessagesToAscii = 
-                ServerConfiguration.GetOrUpdateSetting("outgoingPacketInterceptor.rewriteMessagesToAscii", true);
-        }
-        
+        private static bool RewriteMessagesToAscii => ZhConfig.Messaging.RewriteMessagesToAscii;
+
         public static void Intercept(ReadOnlySpan<byte> input, CircularBuffer<byte> output, out int length)
         {
             switch (input[0])
@@ -26,14 +21,14 @@ namespace Scripts.Zulu.Packets
                 case 0x1C:
                     break;
                 case 0xBF:
-                    if (RewriteOutgoingMessagesToAscii && input[4] == 0x10)
+                    if (RewriteMessagesToAscii && input[4] == 0x10)
                     {
                         RewriteEquipmentInfo(input, output, out length);
                         return;
                     }
                     break;
                 case 0xAE:
-                    if (RewriteOutgoingMessagesToAscii)
+                    if (RewriteMessagesToAscii)
                     {
                         RewriteUnicodeMessage(input, output, out length);
                         return;
@@ -41,7 +36,7 @@ namespace Scripts.Zulu.Packets
                     break;
                 case 0xC1:
                 case 0xCC:
-                    if (RewriteOutgoingMessagesToAscii)
+                    if (RewriteMessagesToAscii)
                     {
                         RewriteMessageLocalized(input, output, out length);
                         return;
@@ -55,7 +50,7 @@ namespace Scripts.Zulu.Packets
         private static void RewriteEquipmentInfo(ReadOnlySpan<byte> input, CircularBuffer<byte> output, out int length)
         {
             var reader = new SpanReader(input);
-            reader.Seek(3, SeekOrigin.Current);
+            reader.Seek(3, SeekOrigin.Begin);
             
             var sub = reader.ReadInt16();
             var serial = (Serial) reader.ReadUInt32();
@@ -63,10 +58,38 @@ namespace Scripts.Zulu.Packets
 
             var item = World.FindItem(serial);
 
-            if ( !ZhConfig.Messaging.Cliloc.TryGetValue(label, out var text))
+            if (!ZhConfig.Messaging.Cliloc.TryGetValue(label, out var text))
             {
                 length = NetworkCompression.Compress(input, output);
                 return;
+            }
+
+            text = ClilocList.TextInfo.ToTitleCase(text);
+            
+            int attr;
+            while ((attr = reader.ReadInt32()) != -1)
+            {
+                switch (attr)
+                {
+                    case -3: // crafted by
+                    {
+                        var nameLen = reader.ReadUInt16();
+                        var name = reader.ReadAsciiSafe(nameLen);
+                        text += $"\nCrafted by {name}";
+                        break;
+                    }
+                    case -4: // unidentified
+                        break;
+                    default:
+                    {
+                        var charges = reader.ReadInt16();
+                        if (ZhConfig.Messaging.Cliloc.TryGetValue(attr, out var attrLabel))
+                        {
+                            text += $"\n{attrLabel}: {charges}";
+                        }
+                        break;
+                    }
+                }
             }
 
             var res = item switch
@@ -78,7 +101,7 @@ namespace Scripts.Zulu.Packets
                 _ => CraftResource.None
             };
 
-            if (res != CraftResource.None)
+            if (res > CraftResource.Iron)
                 text = $"{CraftResources.GetName(res)} {text}";
             
             var buffer = stackalloc byte[GetMaxMessageLength(text)].InitializePacket();
@@ -94,7 +117,7 @@ namespace Scripts.Zulu.Packets
                 "",
                 text
             );
-
+            
             buffer = buffer[..pLength];
             length = NetworkCompression.Compress(buffer, output);
         }

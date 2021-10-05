@@ -24,6 +24,8 @@ namespace ZuluContent.Configuration.Types
         public bool AsciiClickMessage { get; init; }
         public bool SingleClickProps { get; init; }
         public bool StaffRevealMagicItems { get; init; }
+        
+        public bool RewriteMessagesToAscii { get; init; }
 
         public static void Configure()
         {
