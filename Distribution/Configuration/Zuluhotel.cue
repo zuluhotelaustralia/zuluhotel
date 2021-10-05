@@ -5,25 +5,26 @@ import (
 	Loot "github.com/zuluhotelaustralia/zuluhotel/Loot"
 	Magic "github.com/zuluhotelaustralia/zuluhotel/Magic"
 	Skills "github.com/zuluhotelaustralia/zuluhotel/Skills"
-	
+
 	Types "github.com/zuluhotelaustralia/zuluhotel/Types"
 )
 
 Core: Types.#CoreConfiguration & {
-	Expansion: "T2A"
+	Expansion:        "T2A"
 	InsuranceEnabled: false
-	ActionDelay: 500
+	ActionDelay:      500
 }
 
 Messaging: Types.#MessagingConfiguration & {
-	SuccessHue:            55
-	FailureHue:            33
-	VisibleDamage:         true
-	StaffRevealMagicItems: true
-	ObjectPropertyList:    false
-	GuildClickMessage:     false
-	AsciiClickMessage:     false
-	SingleClickProps:      false
+	SuccessHue:             55
+	FailureHue:             33
+	VisibleDamage:          true
+	StaffRevealMagicItems:  true
+	ObjectPropertyList:     false
+	GuildClickMessage:      false
+	AsciiClickMessage:      false
+	SingleClickProps:       false
+	RewriteMessagesToAscii: true
 }
 
 Email: Types.#EmailConfiguration & {

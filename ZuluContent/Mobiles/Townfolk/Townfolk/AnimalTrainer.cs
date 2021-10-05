@@ -145,8 +145,12 @@ namespace Server.Mobiles
 
             if (pet == null || pet.Deleted)
             {
-                pet.IsStabled = false;
-                pet.StabledBy = null;
+                if (pet?.Deleted == true)
+                {
+                    pet.IsStabled = false;
+                    pet.StabledBy = null;
+                }
+
                 petClaimTicket.Stabled = null;
                 return;
             }

@@ -78,7 +78,7 @@ namespace Server.Items
 
         public override void OnMiss(Mobile attacker, Mobile defender)
         {
-            if (attacker.Player && 0.4 >= Utility.RandomDouble())
+            if (attacker.Player && 0.8 >= Utility.RandomDouble())
             {
                 Ammo.MoveToWorld(
                     new Point3D(defender.X + Utility.RandomMinMax(-1, 1), defender.Y + Utility.RandomMinMax(-1, 1),
