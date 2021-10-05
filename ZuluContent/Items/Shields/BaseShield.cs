@@ -20,6 +20,11 @@ namespace Server.Items
         {
         }
 
+        public override double ArmorRating =>
+            Parent is Mobile owner
+                ? 0.5 * 0.01 * base.ArmorRating * owner.Skills.Parry.Value
+                : base.ArmorRating;
+
         public override void Serialize(IGenericWriter writer)
         {
             base.Serialize(writer);
