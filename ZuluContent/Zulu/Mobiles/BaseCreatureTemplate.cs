@@ -74,7 +74,7 @@ namespace Server.Mobiles
                     if (item is BaseArmor armor && equip.ArmorRating != null)
                         armor.BaseArmorRating = (int)equip.ArmorRating;
 
-                    AddItem(item);
+                    EquipItem(item);
                     item.Movable = false;
                 }
             }
@@ -114,6 +114,9 @@ namespace Server.Mobiles
 
                     if (props.Attack.HitPoison != null)
                         weapon.Poison = props.Attack.HitPoison;
+                    
+                    if (props.Attack.HitPoisonChance != null)
+                        weapon.PoisonChance = props.Attack.HitPoisonChance.Value;
 
                     if (props.Attack.ProjectileEffectId != null && weapon is BaseRanged br)
                         br.EffectId = props.Attack.ProjectileEffectId.Value;

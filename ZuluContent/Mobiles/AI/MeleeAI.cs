@@ -41,6 +41,7 @@ namespace Server.Mobiles
 
         public override bool DoActionWander()
         {
+            m_FleeCheckHits = true;
             m_Mobile.DebugSay("I have no combatant");
 
             if (AcquireFocusMob(m_Mobile.RangePerception, m_Mobile.FightMode, false, false, true))
@@ -184,6 +185,7 @@ namespace Server.Mobiles
 
         public override bool DoActionGuard()
         {
+            m_FleeCheckHits = true;
             if (AcquireFocusMob(m_Mobile.RangePerception, m_Mobile.FightMode, false, false, true))
             {
                 if (m_Mobile.Debug)

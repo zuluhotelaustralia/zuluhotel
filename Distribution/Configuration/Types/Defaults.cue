@@ -27,7 +27,7 @@ package Types
 	Karma:                   0
 	HideType:                "Regular"
 	Hides:                   0
-	BaseSoundID:             471
+	BaseSoundID:             null
 	Body:                    400
 	CanRummageCorpses:       true
 	CreatureType:            "None"
@@ -73,12 +73,12 @@ package Types
 		AbilityChance:      0.4
 		HasBreath:          false
 		HasWebs:            false
-		HitSound:           359
-		MissSound:          568
+		HitSound:           null
+		MissSound:          null
 		MaxRange:           null
 		Skill:              "Wrestling"
 		HitPoison:          null
-		HitPoisonChance:    0.5
+		HitPoisonChance:    null
 		ProjectileEffectId: null
 	}
 }

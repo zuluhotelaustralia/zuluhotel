@@ -26,8 +26,8 @@ namespace ZuluContent.Configuration.Types.Creatures
     {
         public PropValue Speed { get; set; }
         public PropValue Damage { get; set; } = 1;
-        public SkillName Skill { get; set; } = SkillName.Wrestling;
-        public WeaponAnimation? Animation { get; set; } = WeaponAnimation.Wrestle;
+        public SkillName Skill { get; set; }
+        public WeaponAnimation? Animation { get; set; }
         public int? HitSound { get; set; }
         public int? MissSound { get; set; }
         public int? MaxRange { get; set; }
