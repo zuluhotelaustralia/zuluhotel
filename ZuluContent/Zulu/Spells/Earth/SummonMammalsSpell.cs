@@ -14,7 +14,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class SummonMammalsSpell : EarthSpell, IAsyncSpell
     {
-        public SummonMammalsSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public SummonMammalsSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task CastAsync()
         {

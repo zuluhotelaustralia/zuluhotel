@@ -5,7 +5,7 @@ namespace Server
     public class PoisonImpl : Poison
     {
         // ReSharper disable once UnusedMember.Global
-        [CallPriority(ushort.MinValue)]
+        [CallPriority(ZhConfig.CallPriorityLevel - 1)]
         public static void Configure()
         {
             Register(new PoisonImpl("Lesser", 0, 4, 26, 2.500, 3.5, 3.0, 10, 2));

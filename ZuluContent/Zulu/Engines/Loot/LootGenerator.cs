@@ -37,6 +37,8 @@ namespace Server.Scripts.Engines.Loot
 
         public bool Cursed = false;
 
+        public bool Deleted = false;
+
         //TODO: Temp attributes
 
         public ElementalType ProtectionType;
@@ -174,9 +176,14 @@ namespace Server.Scripts.Engines.Loot
                 .Select(lootItem =>
                 {
                     // Attempt to make the item magical, will do nothing if its not eligible.
-                    MakeItemMagical(lootItem);
+                    MakeItemMagical(lootItem, container);
+
+                    if (lootItem.Deleted)
+                        return null;
+                    
                     return lootItem.Create(killedBy);
                 })
+                .Where(item => item != null)
                 // Group the items by id and whether they're stackable
                 .GroupBy(item => new {item.Stackable, item.ItemID})
                 // Flattens a collection containing many collections of the same type,
@@ -201,7 +208,7 @@ namespace Server.Scripts.Engines.Loot
             return items.Count();
         }
 
-        public static bool MakeItemMagical(LootItem item)
+        public static bool MakeItemMagical(LootItem item, Container container)
         {
             bool isMagic = false;
 
@@ -248,7 +255,7 @@ namespace Server.Scripts.Engines.Loot
                             ApplyDamageMod(item);
                             break;
                         default:
-                            ApplyWeaponHitScript(item);
+                            ApplyWeaponHitScript(item, container);
                             break;
                     }
 
@@ -404,7 +411,7 @@ namespace Server.Scripts.Engines.Loot
         }
 
 
-        private static void ApplyWeaponHitScript(LootItem item)
+        private static void ApplyWeaponHitScript(LootItem item, Container container)
         {
             var scriptType = Utility.Random(1, 94) + item.ItemLevel * 2;
 
@@ -416,9 +423,9 @@ namespace Server.Scripts.Engines.Loot
                 ApplyEffectHitscript(item);
             else if (scriptType <= 105)
             {
-                // TODO: GM Item
-                // DestroyItem(item);
-                // CreateFromRandomString(who, "GMWeapon");
+                item.Deleted = true;
+                var gmWeapon = CreateRandomGMWeapon();
+                container.AddItem(gmWeapon);
             }
             else
                 ApplyGreaterHitscript(item);
@@ -987,6 +994,16 @@ namespace Server.Scripts.Engines.Loot
 
 
             item.DurabilityLevel = value;
+        }
+
+        private static Item CreateRandomGMWeapon()
+        {
+            var gmWeaponType = RandomList(typeof(LanceOfLothian), typeof(ScalpelOfTrevize), typeof(AnubisMaceOfDeath),
+                typeof(BardicheOfLynx), typeof(DekeronsThunder), typeof(BalthazaarsChillingScimitar),
+                typeof(AxeOfAnias), typeof(TjaldursStaffOfHaste), typeof(KatanaOfKieri), typeof(WarMaceOfErik),
+                typeof(HalberdfOfAlcatraz), typeof(SpearOfRenah), typeof(WeaponOfZulu), typeof(OmerosPickaxe),
+                typeof(XarafaxsAxe));
+            return gmWeaponType.CreateInstance<Item>();
         }
     }
 }

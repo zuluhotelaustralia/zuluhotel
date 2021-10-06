@@ -16,7 +16,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class EarthPortalSpell : EarthSpell, ITargetableAsyncSpell<Item>
     {
-        public EarthPortalSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public EarthPortalSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Item> response)
         {

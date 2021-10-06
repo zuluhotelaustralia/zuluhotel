@@ -12,7 +12,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class WaterSpiritSpell : EarthSpell, IAsyncSpell
     {
-        public WaterSpiritSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public WaterSpiritSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

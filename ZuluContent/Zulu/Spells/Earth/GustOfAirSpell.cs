@@ -7,7 +7,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class GustOfAirSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public GustOfAirSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public GustOfAirSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

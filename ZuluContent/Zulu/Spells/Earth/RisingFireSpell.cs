@@ -13,7 +13,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class RisingFireSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public RisingFireSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public RisingFireSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         private async void RaiseFire(Mobile target)
         {

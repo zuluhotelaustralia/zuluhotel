@@ -26,6 +26,8 @@ namespace Server
         public static CreatureConfiguration Creatures => _root.Creatures;
         public static JsonSerializerOptions DefaultSerializerOptions { get; private set; }
 
+        public const int CallPriorityLevel = 0;
+
         // ReSharper disable once UnusedMember.Global
         [CallPriority(ushort.MinValue)]
         public static void Configure()

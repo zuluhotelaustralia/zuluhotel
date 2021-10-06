@@ -19,6 +19,8 @@ namespace Server.Items
 
         public override WeaponAnimation DefaultAnimation => WeaponAnimation.Bash1H;
         
+        public override bool AllowEquippedCast(Mobile from) => true;
+
         public override string DefaultName => "Xarafax's Axe";
 
         [Constructible]

@@ -18,6 +18,8 @@ namespace Server.Items
         public override int DefaultSpeed => 40;
 
         public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash1H;
+        
+        public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Omero's Pickaxe";
         

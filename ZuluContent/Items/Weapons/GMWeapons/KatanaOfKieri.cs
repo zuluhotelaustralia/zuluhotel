@@ -24,6 +24,8 @@ namespace Server.Items
         public override int InitMinHits => 200;
 
         public override int InitMaxHits => 200;
+        
+        public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Katana of Kieri";
 

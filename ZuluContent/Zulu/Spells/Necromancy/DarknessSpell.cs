@@ -16,7 +16,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class DarknessSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public DarknessSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public DarknessSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

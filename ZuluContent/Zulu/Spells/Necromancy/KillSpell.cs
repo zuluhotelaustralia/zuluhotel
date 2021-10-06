@@ -10,7 +10,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class KillSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public KillSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public KillSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

@@ -1,4 +1,3 @@
-using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
 
@@ -15,16 +14,14 @@ namespace Server.Items
         public override int DefaultMinDamage => 37;
 
         public override int DefaultMaxDamage => 52;
-        
-        public override int DefaultHitSound => 0x23C;
-        
-        public override int DefaultMissSound => 0x23A;
 
         public override int DefaultSpeed => 50;
         
         public override int InitMinHits => 200;
 
         public override int InitMaxHits => 200;
+        
+        public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Lance of Lothian";
 
