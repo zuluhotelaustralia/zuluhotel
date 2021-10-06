@@ -659,7 +659,7 @@ namespace Server.Items
                 bc.WeaponAbilityChance >= Utility.RandomDouble())
                 ab.OnHit(attacker, defender, ref damage);
 
-            if (damage < 2)
+            if (attackerWeapon?.EffectHitType != EffectHitType.Piercing && damage < 2)
                 damage = 2;
 
             CheckApplyPoison(attacker, defender);
@@ -873,14 +873,13 @@ namespace Server.Items
             return rawDamage;
         }
 
-        public int ComputeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor = null,
-            bool piercing = false)
+        public int ComputeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor = null)
         {
             var baseDamage = GetBaseDamage(attacker);
 
             attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref baseDamage));
 
-            var damage = (int) ScaleDamage(attacker, defender, baseDamage, weapon, armor, piercing);
+            var damage = (int) ScaleDamage(attacker, defender, baseDamage, weapon, armor);
 
             return damage;
         }
