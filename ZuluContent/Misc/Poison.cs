@@ -1,12 +1,11 @@
 using System;
-using Server.Items;
-using Server.Network;
 
 namespace Server
 {
     public class PoisonImpl : Poison
     {
-        [CallPriority(10)]
+        // ReSharper disable once UnusedMember.Global
+        [CallPriority(ushort.MinValue)]
         public static void Configure()
         {
             Register(new PoisonImpl("Lesser", 0, 4, 26, 2.500, 3.5, 3.0, 10, 2));
