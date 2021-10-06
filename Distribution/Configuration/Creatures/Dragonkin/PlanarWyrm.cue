@@ -6,6 +6,7 @@ PlanarWyrm: {
 	Str:                1800
 	Int:                650
 	Dex:                1475
+	ActiveSpeed:          0.05
 	PassiveSpeed:       0.2
 	AlwaysMurderer:     true
 	BardImmune:         true

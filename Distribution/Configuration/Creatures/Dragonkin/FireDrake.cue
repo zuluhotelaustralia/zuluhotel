@@ -6,6 +6,7 @@ FireDrake: {
 	Str:                  350
 	Int:                  90
 	Dex:                  110
+	ActiveSpeed:          0.15
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362

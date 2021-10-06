@@ -6,6 +6,7 @@ GoldenDragonLord: {
 	Str:                  2250
 	Int:                  500
 	Dex:                  450
+	ActiveSpeed:          0.05
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	AutoDispel:           true

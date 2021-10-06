@@ -6,6 +6,7 @@ FlamingWyrm: {
 	Str:                  2800
 	Int:                  3500
 	Dex:                  475
+	ActiveSpeed:          0.05
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362

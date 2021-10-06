@@ -6,6 +6,8 @@ Wyvern: {
 	Str:                  450
 	Int:                  90
 	Dex:                  110
+	ActiveSpeed:          0.1
+	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362
 	Body:                 60

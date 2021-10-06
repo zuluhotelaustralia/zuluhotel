@@ -6,6 +6,8 @@ PoisonDrake: {
 	Str:                  350
 	Int:                  90
 	Dex:                  300
+	ActiveSpeed:          0.15
+	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362
 	Body:                 60
