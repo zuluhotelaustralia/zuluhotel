@@ -22,7 +22,7 @@ UndeadFlayer: {
 	LootTable:          "35"
 	ManaMaxSeed:        2750
 	StamMaxSeed:        50
-	PreferredSpells: ["Poison", "EnergyBolt", "Lightning", "Explosion", "WraithBreath", "WyvernStrike", "Plague", "DecayingRay", "Darkness", "WyvernStrike", "AbyssalFlame", "GreaterHeal"]
+	PreferredSpells: ["Poison", "EnergyBolt", "Lightning", "Explosion", "WraithBreath", "WyvernStrike", "Plague", "DecayingRay", "Darkness", "WyvernStrike", "AbyssalFlame"]
 	Resistances: {
 		Poison:        6
 		Necro:         100

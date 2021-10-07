@@ -13,7 +13,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class OwlSightSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public OwlSightSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public OwlSightSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

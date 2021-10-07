@@ -6,6 +6,7 @@ Dragon: {
 	Str:                  750
 	Int:                  110
 	Dex:                  160
+	ActiveSpeed:          0.1
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	AutoDispel:           true

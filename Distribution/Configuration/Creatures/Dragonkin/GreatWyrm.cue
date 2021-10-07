@@ -6,6 +6,7 @@ GreatWyrm: {
 	Str:                  900
 	Int:                  650
 	Dex:                  475
+	ActiveSpeed:          0.05
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	AutoDispel:           true

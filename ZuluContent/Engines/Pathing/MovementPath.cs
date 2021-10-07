@@ -1,163 +1,116 @@
 using System;
-using Server.Targeting;
+using System.Diagnostics;
+using Server.Items;
 using Server.PathAlgorithms;
-using Server.PathAlgorithms.SlowAStar;
 using Server.PathAlgorithms.FastAStar;
-using Server.Commands;
+using Server.Spells;
+using Server.Targeting;
 
 namespace Server
 {
     public sealed class MovementPath
-	{
-		private Map m_Map;
-		private Point3D m_Start;
-		private Point3D m_Goal;
-		private Direction[] m_Directions;
+    {
+        public MovementPath(Mobile m, Point3D goal)
+        {
+            var start = m.Location;
+            var map = m.Map;
 
-		public Map Map{ get{ return m_Map; } }
-		public Point3D Start{ get{ return m_Start; } }
-		public Point3D Goal{ get{ return m_Goal; } }
-		public Direction[] Directions{ get{ return m_Directions; } }
-		public bool Success{ get{ return m_Directions != null && m_Directions.Length > 0; } }
+            Map = map;
+            Start = start;
+            Goal = goal;
 
-		public static void Initialize()
-		{
-			CommandSystem.Register( "Path", AccessLevel.GameMaster, Path_OnCommand );
-		}
+            if (map == null || map == Map.Internal)
+            {
+                return;
+            }
 
-		public static void Path_OnCommand( CommandEventArgs e )
-		{
-			e.Mobile.BeginTarget( -1, true, TargetFlags.None, Path_OnTarget );
-			e.Mobile.SendMessage( "Target a location and a path will be drawn there." );
-		}
+            if (Utility.InRange(start, goal, 1))
+            {
+                return;
+            }
 
-		private static void Path( Mobile from, IPoint3D p, PathAlgorithm alg, string name, int zOffset )
-		{
-			m_OverrideAlgorithm = alg;
+            try
+            {
+                var alg = OverrideAlgorithm ?? FastAStarAlgorithm.Instance;
 
-			long start = DateTime.Now.Ticks;
-			MovementPath path = new MovementPath( from, new Point3D( p ) );
-			long end = DateTime.Now.Ticks;
-			double len = Math.Round( (end-start) / 10000.0, 2 );
+                if (alg?.CheckCondition(m, map, start, goal) == true)
+                {
+                    Directions = alg.Find(m, map, start, goal);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Warning: {0}: Pathing error from {1} to {2}", e.GetType().Name, start, goal);
+            }
+        }
 
-			if ( !path.Success )
-			{
-				from.SendMessage( "{0} path failed: {1}ms", name, len );
-			}
-			else
-			{
-				from.SendMessage( "{0} path success: {1}ms", name, len );
+        public Map Map { get; }
 
-				int x = from.X;
-				int y = from.Y;
-				int z = from.Z;
+        public Point3D Start { get; }
 
-				for ( int i = 0; i < path.Directions.Length; ++i )
-				{
-					Movement.Movement.Offset( path.Directions[i], ref x, ref y );
+        public Point3D Goal { get; }
 
-					new Items.RecallRune().MoveToWorld( new Point3D( x, y, z+zOffset ), from.Map );
-				}
-			}
-		}
+        public Direction[] Directions { get; }
 
-		public static void Path_OnTarget( Mobile from, object obj )
-		{
-			IPoint3D p = obj as IPoint3D;
+        public bool Success => Directions?.Length > 0;
 
-			if ( p == null )
-				return;
+        public static PathAlgorithm OverrideAlgorithm { get; set; }
 
-			Spells.SpellHelper.GetSurfaceTop( ref p );
+        public static void Initialize()
+        {
+            CommandSystem.Register("Path", AccessLevel.GameMaster, Path_OnCommand);
+        }
 
-			Path( from, p, FastAStarAlgorithm.Instance, "Fast", 0 );
-			Path( from, p, SlowAStarAlgorithm.Instance, "Slow", 2 );
-			m_OverrideAlgorithm = null;
+        public static void Path_OnCommand(CommandEventArgs e)
+        {
+            e.Mobile.BeginTarget(-1, true, TargetFlags.None, Path_OnTarget);
+            e.Mobile.SendMessage("Target a location and a path will be drawn there.");
+        }
 
-			/*MovementPath path = new MovementPath( from, new Point3D( p ) );
+        private static void Path(Mobile from, IPoint3D p, PathAlgorithm alg, string name, int zOffset)
+        {
+            OverrideAlgorithm = alg;
 
-			if ( !path.Success )
-			{
-				from.SendMessage( "No path to there could be found." );
-			}
-			else
-			{
-				//for ( int i = 0; i < path.Directions.Length; ++i )
-				//	Timer.DelayCall( TimeSpan.FromSeconds( 0.1 + (i * 0.3) ), Pathfind, new object[]{ from, path.Directions[i] } );
-				int x = from.X;
-				int y = from.Y;
-				int z = from.Z;
+            var watch = new Stopwatch();
+            watch.Start();
+            var path = new MovementPath(from, new Point3D(p));
+            watch.Stop();
 
-				for ( int i = 0; i < path.Directions.Length; ++i )
-				{
-					Movement.Movement.Offset( path.Directions[i], ref x, ref y );
+            if (!path.Success)
+            {
+                from.SendMessage("{0} path failed: {1}ms", name, watch.ElapsedMilliseconds);
+            }
+            else
+            {
+                from.SendMessage("{0} path success: {1}ms", name, watch.ElapsedMilliseconds);
 
-					new Items.RecallRune().MoveToWorld( new Point3D( x, y, z ), from.Map );
-				}
-			}*/
-		}
+                var x = from.X;
+                var y = from.Y;
+                var z = from.Z;
 
-		public static void Pathfind( object state )
-		{
-			object[] states = (object[])state;
-			Mobile from = (Mobile) states[0];
-			Direction d = (Direction) states[1];
+                WayPoint waypoint = null;
 
-			try
-			{
-				from.Direction = d;
-				from.NetState.BlockAllPackets=true;
-				from.Move( d );
-				from.NetState.BlockAllPackets=false;
-				from.ProcessDelta();
-			}
-			catch
-			{
-			}
-		}
+                for (var i = 0; i < path.Directions.Length; ++i)
+                {
+                    Movement.Movement.Offset(path.Directions[i], ref x, ref y);
 
-		private static PathAlgorithm m_OverrideAlgorithm;
+                    waypoint = new WayPoint(waypoint);
+                    waypoint.MoveToWorld(new Point3D(x, y, z + zOffset), from.Map);
+                }
+            }
+        }
 
-		public static PathAlgorithm OverrideAlgorithm
-		{
-			get{ return m_OverrideAlgorithm; }
-			set{ m_OverrideAlgorithm = value; }
-		}
+        public static void Path_OnTarget(Mobile from, object targeted)
+        {
+            if (targeted is not IPoint3D p)
+            {
+                return;
+            }
 
-		public MovementPath( Mobile m, Point3D goal )
-		{
-			Point3D start = m.Location;
-			Map map = m.Map;
+            SpellHelper.GetSurfaceTop(ref p);
 
-			m_Map = map;
-			m_Start = start;
-			m_Goal = goal;
-
-			if ( map == null || map == Map.Internal )
-				return;
-
-			if ( Utility.InRange( start, goal, 1 ) )
-				return;
-
-			try
-			{
-				PathAlgorithm alg = m_OverrideAlgorithm;
-
-				if ( alg == null )
-				{
-					alg = FastAStarAlgorithm.Instance;
-
-					//if ( !alg.CheckCondition( m, map, start, goal ) )	// SlowAstar is still broken
-					//	alg = SlowAStarAlgorithm.Instance;		// TODO: Fix SlowAstar
-				}
-
-				if ( alg != null && alg.CheckCondition( m, map, start, goal ) )
-					m_Directions = alg.Find( m, map, start, goal );
-			}
-			catch ( Exception e )
-			{
-				Console.WriteLine( "Warning: {0}: Pathing error from {1} to {2}", e.GetType().Name, start, goal );
-			}
-		}
-	}
+            Path(from, p, FastAStarAlgorithm.Instance, "Fast", 0);
+            OverrideAlgorithm = null;
+        }
+    }
 }

@@ -6,6 +6,7 @@ AdamantineDragon: {
 	Str:                  600
 	Int:                  600
 	Dex:                  450
+	ActiveSpeed:          0.1
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362

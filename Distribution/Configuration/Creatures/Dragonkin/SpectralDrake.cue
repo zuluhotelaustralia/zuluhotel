@@ -6,6 +6,8 @@ SpectralDrake: {
 	Str:                  550
 	Int:                  360
 	Dex:                  105
+	ActiveSpeed:          0.15
+	PassiveSpeed:         0.2
 	AiType:               "AI_Mage"
 	AlwaysMurderer:       true
 	BaseSoundID:          362

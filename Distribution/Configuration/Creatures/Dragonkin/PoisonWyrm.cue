@@ -6,6 +6,7 @@ PoisonWyrm: {
 	Str:                  1900
 	Int:                  400
 	Dex:                  340
+	ActiveSpeed:          0.05
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BardImmune:           true

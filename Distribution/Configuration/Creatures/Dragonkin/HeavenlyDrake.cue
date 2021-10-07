@@ -6,6 +6,7 @@ HeavenlyDrake: {
 	Str:                  400
 	Int:                  90
 	Dex:                  300
+	ActiveSpeed:          0.15
 	PassiveSpeed:         0.2
 	BaseSoundID:          362
 	Body:                 60

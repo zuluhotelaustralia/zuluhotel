@@ -18,21 +18,19 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         [Key(1)] public CreatureType Type { get; set; } = CreatureType.None;
 
-        [Key(2)] public double Chance { get; set; } = 0.0;
-        
         [CallPriority(1)]
         public override bool GetShouldDye() => true;
 
         public override void OnArmorHit(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor,
             ref double damage)
         {
-            if (Chance > Utility.RandomDouble() && attacker is BaseCreature creature && creature.CreatureType == Type)
+            if (attacker is BaseCreature creature && creature.CreatureType == Type)
                 damage /= 2;
         }
 
         public override void OnMeleeHit(Mobile attacker, Mobile defender, BaseWeapon weapon, ref int damage)
         {
-            if (Chance > Utility.RandomDouble() && defender is BaseCreature creature && creature.CreatureType == Type)
+            if (defender is BaseCreature creature && creature.CreatureType == Type)
                 damage *= 2;
         }
     }

@@ -13,7 +13,7 @@ namespace Server.Engines.Magic.HitScripts
             if (!Validate(attacker))
                 return;
 
-            if (defender is BaseCreature bc && bc.IsDispellable)
+            if (defender is BaseCreature { IsDispellable: true })
             {
                 Effects.SendLocationParticles(
                     EffectItem.Create(defender.Location, defender.Map, EffectItem.DefaultDuration), 0x3728, 8, 20,

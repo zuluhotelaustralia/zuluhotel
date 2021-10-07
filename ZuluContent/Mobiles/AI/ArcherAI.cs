@@ -64,17 +64,7 @@ namespace Server.Mobiles
                     }
                 }
             }
-
-            // When we have no ammo, we flee
-            Container pack = m_Mobile.Backpack;
-
-            if (pack?.FindItemByType(typeof(Arrow)) == null)
-            {
-                Action = ActionType.Flee;
-                return true;
-            }
-
-
+            
             // At 20% we should check if we must leave
             if (m_Mobile.Hits < m_Mobile.HitsMax * 20 / 100 && m_Mobile.CanFlee)
             {

@@ -6,6 +6,7 @@ ShadowDragon: {
 	Str:                3000
 	Int:                400
 	Dex:                440
+	ActiveSpeed:        0.1
 	PassiveSpeed:       0.2
 	AlwaysMurderer:     true
 	BardImmune:         true

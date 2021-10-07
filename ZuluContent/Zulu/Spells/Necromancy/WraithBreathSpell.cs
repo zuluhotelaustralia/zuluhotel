@@ -9,7 +9,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class WraithBreathSpell : NecromancerSpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public WraithBreathSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public WraithBreathSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

@@ -6,6 +6,7 @@ PoisonDragon: {
 	Str:                  600
 	Int:                  400
 	Dex:                  340
+	ActiveSpeed:          0.1
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362

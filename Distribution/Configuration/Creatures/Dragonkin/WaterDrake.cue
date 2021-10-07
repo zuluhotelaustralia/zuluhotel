@@ -6,6 +6,8 @@ WaterDrake: {
 	Str:                  400
 	Int:                  90
 	Dex:                  400
+	ActiveSpeed:          0.15
+	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362
 	Body:                 61

@@ -16,7 +16,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class NaturesTouchSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public NaturesTouchSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public NaturesTouchSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

@@ -41,7 +41,7 @@ namespace Scripts.Zulu.Spells.Earth
                 {PolymorphEntry.Wisp.BodyId, (120, 1200)},
             };
 
-        public ShapeshiftSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public ShapeshiftSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
         

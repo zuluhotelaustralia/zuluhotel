@@ -9,7 +9,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class WyvernStrikeSpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public WyvernStrikeSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public WyvernStrikeSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

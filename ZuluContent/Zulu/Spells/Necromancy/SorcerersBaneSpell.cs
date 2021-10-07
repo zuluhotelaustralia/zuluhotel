@@ -19,7 +19,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
         private static readonly int[] Pool = {6054, 6047, 6053, 6051, 6039, 6045, 6056, 6049, 6055};
         
-        public SorcerersBaneSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public SorcerersBaneSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

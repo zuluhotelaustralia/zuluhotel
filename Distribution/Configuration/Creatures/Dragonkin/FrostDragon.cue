@@ -7,6 +7,8 @@ FrostDragon: {
 	Int:                  400
 	Dex:                  60
 	AlwaysMurderer:       true
+	ActiveSpeed:          0.1
+	PassiveSpeed:         0.2
 	BaseSoundID:          362
 	Body:                 12
 	CanFly:               true

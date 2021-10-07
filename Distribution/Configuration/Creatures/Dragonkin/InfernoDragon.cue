@@ -6,6 +6,7 @@ InfernoDragon: {
 	Str:                  500
 	Int:                  110
 	Dex:                  160
+	ActiveSpeed:          0.1
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362

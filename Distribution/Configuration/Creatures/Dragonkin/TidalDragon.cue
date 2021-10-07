@@ -6,6 +6,8 @@ TidalDragon: {
 	Str:                  500
 	Int:                  400
 	Dex:                  340
+	ActiveSpeed:          0.1
+	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
 	BaseSoundID:          362
 	Body:                 12

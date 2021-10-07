@@ -7,7 +7,7 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public class CallLightningSpell : EarthSpell, ITargetableAsyncSpell<Mobile>
     {
-        public CallLightningSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public CallLightningSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

@@ -27,11 +27,14 @@ namespace Server.Items
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
+        
+        public override bool AllowEquippedCast(Mobile from) => true;
+
+        public override string DefaultName => "One Handed Dart Thrower of Amroth";
 
         [Constructible]
         public DartThrowerOfAmroth() : base(0x13FD)
         {
-            Name = "One Handed Dart Thrower of Amroth";
             Hue = 1181;
             Identified = false;
             Weight = 9.0;

@@ -13,7 +13,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class SpellbindSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public SpellbindSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public SpellbindSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<BaseCreature> response)
         {

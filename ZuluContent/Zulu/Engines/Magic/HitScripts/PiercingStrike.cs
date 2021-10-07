@@ -15,8 +15,8 @@ namespace Server.Engines.Magic.HitScripts
             // Kinda hacky, basically set the weapons damage to 0 and deal raw damage ourselves
             if (attacker.Weapon != attacker.GetDefaultWeapon() && attacker.Weapon is BaseWeapon weapon)
             {
+                defender.Damage((int) weapon.ScaleDamage(attacker, defender, damage, weapon, piercing: true), attacker);
                 damage = 0;
-                defender.Damage(weapon.ComputeDamage(attacker, defender, weapon, piercing: true), attacker);
             }
         }
     }

@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    [FlipableAttribute(0x13B9, 0x13Ba)]
+    [FlipableAttribute(0x13B9, 0x13BA)]
     public class VikingSword : BaseSword
     {
         public override int DefaultStrengthReq => 50;

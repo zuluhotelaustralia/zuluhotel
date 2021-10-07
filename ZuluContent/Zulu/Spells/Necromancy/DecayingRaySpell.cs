@@ -12,7 +12,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class DecayingRaySpell : NecromancerSpell, ITargetableAsyncSpell<Mobile>
     {
-        public DecayingRaySpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public DecayingRaySpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
         
         public async Task OnTargetAsync(ITargetResponse<Mobile> response)
         {

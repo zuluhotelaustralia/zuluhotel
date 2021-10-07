@@ -2,8 +2,9 @@ using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
+    [Serializable(0, false)]
     [FlipableAttribute(0x144f, 0x1454)]
-    public class TerrorChest : BaseArmor, IGMItem
+    public partial class TerrorChest : BaseArmor, IGMItem
     {
         public override int InitMinHits => 100;
 
@@ -19,31 +20,14 @@ namespace Server.Items
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Bone;
 
+        public override string DefaultName => "Bone Tunic of Terror";
 
         [Constructible]
         public TerrorChest() : base(0x144F)
         {
-            Name = "Bone Tunic of Terror";
             Hue = 1181;
             Identified = false;
             Weight = 6.0;
-        }
-
-        [Constructible]
-        public TerrorChest(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(IGenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0);
-        }
-
-        public override void Deserialize(IGenericReader reader)
-        {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
         }
     }
 }

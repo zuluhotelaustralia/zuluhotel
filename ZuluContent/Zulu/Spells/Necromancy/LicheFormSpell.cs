@@ -9,7 +9,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class LicheFormSpell : NecromancerSpell, IAsyncSpell
     {
-        public LicheFormSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public LicheFormSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task CastAsync()
         {

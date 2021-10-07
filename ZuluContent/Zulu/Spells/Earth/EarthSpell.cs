@@ -6,6 +6,6 @@ namespace Scripts.Zulu.Spells.Earth
 {
     public abstract class EarthSpell : Spell
     {
-        public EarthSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public EarthSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
     }
 }

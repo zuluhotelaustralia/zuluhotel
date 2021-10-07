@@ -14,7 +14,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class AnimateDeadSpell : NecromancerSpell, ITargetableAsyncSpell<Corpse>
     {
-        public AnimateDeadSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public AnimateDeadSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 

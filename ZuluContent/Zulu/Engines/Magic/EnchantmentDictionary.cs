@@ -7,6 +7,7 @@ using Server;
 using Server.Engines.Magic;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
+using ZuluContent.Zulu.Items;
 
 namespace ZuluContent.Zulu.Engines.Magic.Enums
 {
@@ -152,7 +153,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
         {
             foreach (var value in Values.Values)
             {
-                if (value.GetShouldDye())
+                if (item is not IGMItem && value.GetShouldDye())
                     item.Hue = value.Info.Hue;
 
                 value.OnIdentified(item);

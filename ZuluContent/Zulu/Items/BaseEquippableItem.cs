@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Server;
+using Server.ContextMenus;
 using Server.Engines.Magic;
 using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic;
@@ -192,6 +194,16 @@ namespace ZuluContent.Zulu.Items
         {
             get => Enchantments.Get((SecondSkillBonus e) => e.Value);
             set => Enchantments.Set((SecondSkillBonus e) => e.Value = value);
+        }
+        
+        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        {
+            base.GetContextMenuEntries(from, list);
+
+            if (from.Alive && Identified == false)
+            {
+                list.Add(new IdentifyEntry(from, this));
+            }
         }
 
         public BaseEquippableItem(Serial serial) : base(serial)

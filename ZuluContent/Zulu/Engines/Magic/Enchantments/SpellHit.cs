@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MessagePack;
+using Scripts.Zulu.Spells.Earth;
 using Server;
 using Server.Items;
 using Server.Spells;
@@ -41,6 +42,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             [SpellEntry.FlameStrike] = caster => new FlameStrikeSpell(caster),
             [SpellEntry.MeteorSwarm] = caster => new MeteorSwarmSpell(caster),
             [SpellEntry.Earthquake] = caster => new EarthquakeSpell(caster),
+            [SpellEntry.IceStrike] = caster => new IceStrikeSpell(caster),
         };
 
         private static readonly List<SpellEntry> Entries = Spells.Keys.ToList();

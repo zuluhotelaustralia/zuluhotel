@@ -8,7 +8,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class SpectresTouchSpell : NecromancerSpell, ITargetableAsyncSpell<IPoint3D>
     {
-        public SpectresTouchSpell(Mobile caster, Item spellItem) : base(caster, spellItem) { }
+        public SpectresTouchSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem) { }
 
         public async Task OnTargetAsync(ITargetResponse<IPoint3D> response)
         {

@@ -16,7 +16,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 {
     public class SacrificeSpell : NecromancerSpell, ITargetableAsyncSpell<BaseCreature>
     {
-        public SacrificeSpell(Mobile caster, Item spellItem) : base(caster, spellItem)
+        public SacrificeSpell(Mobile caster, Item spellItem = null) : base(caster, spellItem)
         {
         }
 
