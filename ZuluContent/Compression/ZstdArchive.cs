@@ -58,7 +58,7 @@ namespace Server.Compression
 
                 try
                 {
-                    if (!TarArchive.CreateFromPaths(paths, relativeTo, tempTarArchive))
+                    if (!TarArchive.CreateFromPaths(paths, tempTarArchive, relativeTo))
                     {
                         return false;
                     }
