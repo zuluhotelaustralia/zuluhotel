@@ -1,6 +1,6 @@
 [submodule "ModernUO"]
 	path = ModernUO
-	url = https://github.com/modernuo/ModernUO.git
+	url = https://github.com/zuluhotelaustralia/ModernUO.git
 	ignore = untracked
 [submodule "CueFSharp"]
 	path = CueFSharp
