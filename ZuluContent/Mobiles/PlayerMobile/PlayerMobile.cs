@@ -1063,6 +1063,14 @@ namespace Server.Mobiles
 
             return true;
         }
+        
+        public override int GetHurtSound()
+        {
+            if (Female)
+                return 0x14B + Utility.Random(5);
+            
+            return 0x154 + Utility.Random(5);
+        }
 
         protected override void OnLocationChange(Point3D oldLocation)
         {

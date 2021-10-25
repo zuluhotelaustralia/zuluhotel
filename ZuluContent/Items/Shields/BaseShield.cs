@@ -55,7 +55,7 @@ namespace Server.Items
 
                 if (Utility.RandomMinMax(1, 100) <= (int) (parrySkillVal / 2))
                 {
-                    owner.Animate(19, 7, 1, true, false, 0);
+                    owner.Animate(owner.Mounted ? 28 : 19, 7, 1, true, false, 0);
                     owner.SendSuccessMessage("You successfully parry the attack.");
 
                     double absorbAmount;

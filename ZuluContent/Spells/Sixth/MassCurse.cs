@@ -24,7 +24,7 @@ namespace Server.Spells.Sixth
             foreach (var mobile in eable)
             {
                 if (!Caster.CanBuff(mobile, false, BuffIcon.Curse, BuffIcon.Bless))
-                    return;
+                    continue;
 
                 Caster.DoHarmful(mobile);
                 mobile.TryAddBuff(new StatBuff(StatType.All)

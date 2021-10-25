@@ -256,7 +256,7 @@ namespace Server.Misc
 
             AddBackpack(newChar);
 
-            SetStats(newChar, args.State, args.Str, args.Dex, args.Int);
+            SetStats(newChar, args.State, args.Stats, args.Profession);
             SetSkills(newChar, args.Skills, args.Profession);
 
             Race race = newChar.Race;
@@ -320,43 +320,6 @@ namespace Server.Misc
             }
         }
 
-        private static void FixStats(ref int str, ref int dex, ref int intel, int max)
-        {
-            int vMax = max - 30;
-
-            int vStr = str - 10;
-            int vDex = dex - 10;
-            int vInt = intel - 10;
-
-            if (vStr < 0)
-                vStr = 0;
-
-            if (vDex < 0)
-                vDex = 0;
-
-            if (vInt < 0)
-                vInt = 0;
-
-            int total = vStr + vDex + vInt;
-
-            if (total == 0 || total == vMax)
-                return;
-
-            double scalar = vMax / (double) total;
-
-            vStr = (int) (vStr * scalar);
-            vDex = (int) (vDex * scalar);
-            vInt = (int) (vInt * scalar);
-
-            FixStat(ref vStr, vStr + vDex + vInt - vMax, vMax);
-            FixStat(ref vDex, vStr + vDex + vInt - vMax, vMax);
-            FixStat(ref vInt, vStr + vDex + vInt - vMax, vMax);
-
-            str = vStr + 10;
-            dex = vDex + 10;
-            intel = vInt + 10;
-        }
-
         private static void FixStat(ref int stat, int diff, int max)
         {
             stat += diff;
@@ -367,13 +330,31 @@ namespace Server.Misc
                 stat = max;
         }
 
-        private static void SetStats(Mobile m, NetState state, int str, int dex, int intel)
+        private static void SetStats(Mobile m, NetState state, StatNameValue[] stats, int prof)
         {
-            int max = state?.NewCharacterCreation ?? true ? 90 : 80;
+            var maxStats = state.NewCharacterCreation ? 90 : 80;
 
-            FixStats(ref str, ref dex, ref intel, max);
+            var str = 0;
+            var dex = 0;
+            var intel = 0;
 
-            if (str < 10 || str > 60 || dex < 10 || dex > 60 || intel < 10 || intel > 60 || str + dex + intel != max)
+            if (prof > 0)
+            {
+                stats = ProfessionInfo.Professions[prof]?.Stats ?? stats;
+            }
+
+            for (var i = 0; i < stats.Length; i++)
+            {
+                var (statType, value) = stats[i];
+                switch (statType)
+                {
+                    case StatType.Str: str = value; break;
+                    case StatType.Dex: dex = value; break;
+                    case StatType.Int: intel = value; break;
+                }
+            }
+
+            if (str is < 10 or > 60 || dex is < 10 or > 60 || intel is < 10 or > 60 || str + dex + intel != maxStats)
             {
                 str = 10;
                 dex = 10;

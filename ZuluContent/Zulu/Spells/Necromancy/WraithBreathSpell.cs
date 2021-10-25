@@ -38,7 +38,7 @@ namespace Scripts.Zulu.Spells.Necromancy
                     continue;
                 }
                 
-                mobile.Paralyze(duration);
+                mobile.Freeze(duration);
                 Caster.DoHarmful(mobile, true);
                 mobile.FixedParticles(0x374B, 7, 16, 5013, EffectLayer.Waist);
                 mobile.PlaySound(0x1F9);

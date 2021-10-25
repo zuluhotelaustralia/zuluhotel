@@ -1383,7 +1383,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "Harmful"
+			Flags:         "None"
 		}
 		ReagentCosts: [{
 			Reagent: "Garlic"

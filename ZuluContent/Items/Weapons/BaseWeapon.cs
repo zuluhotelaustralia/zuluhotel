@@ -790,10 +790,10 @@ namespace Server.Items
                 if (attacker.ClassContainsSkill(SkillName.Archery))
                     damage *= attacker.GetClassModifier(SkillName.Archery);
             }
-            else if (attacker.ClassContainsSkill(SkillName.Magery))
+            /*else if (attacker.ClassContainsSkill(SkillName.Magery))
             {
                 damage /= attacker.GetClassModifier(SkillName.Magery);
-            }
+            }*/
             else if (attacker.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
             {
                 if (defender is BaseCreature)
@@ -859,8 +859,9 @@ namespace Server.Items
             {
                 rawDamage = baseDamage;
             }
-
-            rawDamage *= 0.5;
+            
+            if (attacker is PlayerMobile && defender is BaseCreature)
+                rawDamage *= 0.5;
 
             if (defender != null)
             {
