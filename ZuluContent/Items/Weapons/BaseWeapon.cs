@@ -669,7 +669,7 @@ namespace Server.Items
             defender.Damage(damage, attacker);
 
             // Award skill points
-            attacker.AwardSkillPoints(attackerWeapon.GetUsedSkill(attacker), 20);
+            attacker.AwardSkillPoints(attackerWeapon!.GetUsedSkill(attacker), 20);
             
             if(attackerWeapon.AccuracySkill == SkillName.Tactics)
                 attacker.AwardSkillPoints(SkillName.Tactics, 20);
@@ -790,10 +790,10 @@ namespace Server.Items
                 if (attacker.ClassContainsSkill(SkillName.Archery))
                     damage *= attacker.GetClassModifier(SkillName.Archery);
             }
-            /*else if (attacker.ClassContainsSkill(SkillName.Magery))
+            else if (attacker.ClassContainsSkill(SkillName.Magery))
             {
                 damage /= attacker.GetClassModifier(SkillName.Magery);
-            }*/
+            }
             else if (attacker.ClassContainsSkill(SkillName.Swords, SkillName.Macing, SkillName.Anatomy))
             {
                 if (defender is BaseCreature)
@@ -839,9 +839,18 @@ namespace Server.Items
         public double ScaleDamage(Mobile attacker, Mobile? defender, double baseDamage, BaseWeapon weapon,
             BaseArmor armor = null, bool piercing = false)
         {
+            if (weapon.GetUsedSkill(attacker) != SkillName.Archery)
+            {
+                var damageMultiplier = attacker.Skills[SkillName.Tactics].Value + 50.0;
+                damageMultiplier += attacker.Str * 0.2;
+                damageMultiplier *= 0.01;
+
+                baseDamage *= damageMultiplier;
+            }
+            
             var anatomyVal = attacker.Skills[SkillName.Anatomy].Value;
             double rawDamage;
-
+            
             if (attacker is PlayerMobile && defender is BaseCreature)
                 baseDamage *= 1.5;
 
@@ -860,8 +869,7 @@ namespace Server.Items
                 rawDamage = baseDamage;
             }
             
-            if (attacker is PlayerMobile && defender is BaseCreature)
-                rawDamage *= 0.5;
+            rawDamage *= 0.5;
 
             if (defender != null)
             {
@@ -877,7 +885,7 @@ namespace Server.Items
         public int ComputeDamage(Mobile attacker, Mobile defender, BaseWeapon weapon, BaseArmor armor = null)
         {
             var baseDamage = GetBaseDamage(attacker);
-
+            
             attacker.FireHook(h => h.OnMeleeHit(attacker, defender, this, ref baseDamage));
 
             var damage = (int) ScaleDamage(attacker, defender, baseDamage, weapon, armor);

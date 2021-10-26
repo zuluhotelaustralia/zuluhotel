@@ -77,7 +77,7 @@ namespace Server.Items
             Mark = MarkQuality.Regular;
             PotionEffect = effect;
 
-            Stackable = false;
+            Stackable = true;
             Weight = 1.0;
         }
 
@@ -192,7 +192,7 @@ namespace Server.Items
             }
 
             if (version == 0)
-                Stackable = false;
+                Stackable = true;
         }
 
         public abstract void Drink(Mobile from);
