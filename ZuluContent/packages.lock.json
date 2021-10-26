@@ -85,9 +85,9 @@
       },
       "Microsoft.Toolkit.HighPerformance": {
         "type": "Direct",
-        "requested": "[7.0.2, )",
-        "resolved": "7.0.2",
-        "contentHash": "tG6v0AhDw/yJMtiH/tI4F6I/+sNIfu4++6WFfN73FyNcPh31et33w45wo8Lx1sfxcfLtkYk+w2fvU/MubYg4VQ=="
+        "requested": "[7.1.0, )",
+        "resolved": "7.1.0",
+        "contentHash": "0yXCjPSBFyJThDXg1eM9u034YLqD/o4IXyAtt1S4/QSgE4Pf1axgxBU9/c/iBG6eLAw5FMTBRLyCUwnwoc9K7Q=="
       },
       "Pluralize.NET": {
         "type": "Direct",
@@ -179,6 +179,11 @@
           "System.Security.Cryptography.Pkcs": "4.7.0",
           "System.Text.Encoding.CodePages": "4.4.0"
         }
+      },
+      "PollGroup": {
+        "type": "Transitive",
+        "resolved": "1.1.0",
+        "contentHash": "yptZwQgWrYipj6lznCppIIEJ3RJzxx1L8dn+7BjHefaDUjFr37kEFuYd39KXiOiA2HVUOIAvQ6/KYJWgasRiGA=="
       },
       "Portable.BouncyCastle": {
         "type": "Transitive",
@@ -496,7 +501,8 @@
       "ModernUO": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Toolkit.HighPerformance": "7.0.2",
+          "Microsoft.Toolkit.HighPerformance": "7.1.0",
+          "PollGroup": "1.1.0",
           "Serilog": "2.10.0",
           "Serilog.Sinks.Async": "1.5.0",
           "Serilog.Sinks.Console": "4.0.0",

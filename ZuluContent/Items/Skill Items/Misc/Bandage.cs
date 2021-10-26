@@ -153,8 +153,7 @@ namespace Server.Items
 
         public static BandageContext GetContext(Mobile healer)
         {
-            BandageContext bc = null;
-            m_Table.TryGetValue(healer, out bc);
+            m_Table.TryGetValue(healer, out var bc);
             return bc;
         }
 
@@ -325,6 +324,8 @@ namespace Server.Items
 
         public static BandageContext BeginHeal(Mobile healer, Mobile patient)
         {
+            var context = GetContext(healer);
+            
             if (!patient.Poisoned && patient.Hits == patient.HitsMax)
             {
                 healer.SendFailureMessage(500955); // That being is not damaged!
@@ -332,6 +333,10 @@ namespace Server.Items
             else if (!patient.Alive && (patient.Map == null || !patient.Map.CanFit(patient.Location, 16, false, false)))
             {
                 healer.SendFailureMessage(501042); // Target cannot be resurrected at that location.
+            }
+            else if (context?.Timer?.Running != null && context.Timer.Running)
+            {
+                healer.SendFailureMessage("You are still busy healing.");
             }
             else if (healer.CanBeBeneficial(patient, true, true))
             {
@@ -341,10 +346,7 @@ namespace Server.Items
                 
                 var healDelay = patient.Alive ? 5.0 : 10.0;
 
-                var context = GetContext(healer);
-
-                if (context != null)
-                    context.StopHeal();
+                context?.StopHeal();
 
                 context = new BandageContext(healer, patient, TimeSpan.FromSeconds(healDelay));
 

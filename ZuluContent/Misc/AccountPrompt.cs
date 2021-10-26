@@ -57,15 +57,20 @@ namespace Server.Misc
                     {
                         var account = new Account(DefaultOwnerAcctName, DefaultOwnerAcctPassword) {AccessLevel = AccessLevel.Owner};
                         
+                        var stats = new StatNameValue[]
+                        {
+                            new(StatType.Str, 130),
+                            new(StatType.Dex, 130),
+                            new(StatType.Int, 130)
+                        };
+
                         var args = new CharacterCreatedEventArgs(
                             null,
                             account,
                             DefaultOwnerPlayerName,
                             false,
                             Race.Human.RandomSkinHue(),
-                            130,
-                            130,
-                            130,
+                            stats,
                             Utility.RandomList(AccountHandler.StartingCities),
                             new SkillNameValue[]
                             {
