@@ -1,9 +1,9 @@
 package Animal
 
-GoldenFrenziedOstard: {
+FrenziedOstard: {
 	BaseType:             "BaseMount"
-	Name:                 "a golden frenzied ostard"
-	CorpseNameOverride:   "corpse of a golden frenzied ostard"
+	Name:                 "a frenzied ostard"
+	CorpseNameOverride:   "corpse of a frenzied ostard"
 	Str:                  130
 	Int:                  35
 	Dex:                  180
@@ -15,7 +15,10 @@ GoldenFrenziedOstard: {
 	HideType:             "Ostard"
 	Hides:                4
 	HitsMaxSeed:          130
-	Hue:                  48
+	Hue: {
+		Min: 2201
+		Max: 2225
+	}
 	ManaMaxSeed:          0
 	MinTameSkill:         80
 	ProvokeSkillOverride: 110

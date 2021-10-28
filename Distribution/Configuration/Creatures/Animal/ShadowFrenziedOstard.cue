@@ -1,6 +1,7 @@
 package Animal
 
 ShadowFrenziedOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a shadow frenzied ostard"
 	CorpseNameOverride:   "corpse of a shadow frenzied ostard"
 	Str:                  210
@@ -8,6 +9,7 @@ ShadowFrenziedOstard: {
 	Dex:                  320
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16036
 	CreatureType:         "Animal"
 	VirtualArmor:         20
 	HideType:             "Ostard"

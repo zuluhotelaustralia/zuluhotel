@@ -1,6 +1,7 @@
 package Animal
 
 FrenziedPoisonOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a frenzied poison ostard"
 	CorpseNameOverride:   "corpse of a frenzied poison ostard"
 	Str:                  225
@@ -9,6 +10,7 @@ FrenziedPoisonOstard: {
 	AlwaysMurderer:       true
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16036
 	CreatureType:         "Animal"
 	VirtualArmor:         15
 	FightMode:            "Closest"

@@ -802,7 +802,7 @@ namespace Server.Items
                 }
                 else
                 {
-                    var level = attacker.GetClassLevel(SkillName.Swords);
+                    var level = attacker is BaseCreature ? 0 : attacker.GetClassLevel(SkillName.Swords);
 
                     if (level > 0)
                     {

@@ -44,6 +44,7 @@ package Types
 	Hides:                   *#NpcDefaults.Hides | #CreatureProperties.Hides
 	BaseSoundID:             *#NpcDefaults.BaseSoundID | #CreatureProperties.BaseSoundID
 	Body:                    *#NpcDefaults.Body | #CreatureProperties.Body
+	ItemID:									 *#NpcDefaults.ItemID | #CreatureProperties.ItemID
 	CanRummageCorpses:       *#NpcDefaults.CanRummageCorpses | #CreatureProperties.CanRummageCorpses
 	CreatureType:            *#NpcDefaults.CreatureType | #CreatureProperties.CreatureType
 	Female:                  *#NpcDefaults.Female | #CreatureProperties.Female

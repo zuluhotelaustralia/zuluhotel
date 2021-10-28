@@ -1,6 +1,7 @@
 package Animal
 
 ValleyFrenziedOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a valley frenzied ostard"
 	CorpseNameOverride:   "corpse of a valley frenzied ostard"
 	Str:                  210
@@ -8,6 +9,7 @@ ValleyFrenziedOstard: {
 	Dex:                  320
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16036
 	CreatureType:         "Animal"
 	VirtualArmor:         20
 	HideType:             "Ostard"

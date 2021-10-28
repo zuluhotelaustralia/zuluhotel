@@ -109,7 +109,7 @@ namespace Server.Spells.Fourth
                 return;
             }
 
-            BaseCreature.TeleportPets(Caster, loc, map, true);
+            BaseCreature.TeleportPets(Caster, loc, map);
 
             if (m_Book != null)
                 --m_Book.CurCharges;

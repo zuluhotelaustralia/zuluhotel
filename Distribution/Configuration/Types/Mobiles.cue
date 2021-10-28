@@ -139,6 +139,7 @@ package Types
 	BardImmune:              (bool | null)
 	BaseSoundID:             (int32 | null)
 	Body:                    (#Body | null)
+	ItemID:									 (int32 | null)
 	CanFly:                  (bool | null)
 	CanRummageCorpses:       (bool | null)
 	CanSwim:                 (bool | null)

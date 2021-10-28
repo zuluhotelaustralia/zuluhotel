@@ -1,6 +1,7 @@
 package Animal
 
 DemonicOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a Demonic Ostard"
 	CorpseNameOverride:   "corpse of a Demonic Ostard"
 	Str:                  850
@@ -11,6 +12,7 @@ DemonicOstard: {
 	AutoDispel:           true
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         50
 	FightMode:            "Closest"

@@ -1,9 +1,9 @@
 package Animal
 
-SwampOstard: {
+ForestOstard: {
 	BaseType:             "BaseMount"
-	Name:                 "a swamp ostard"
-	CorpseNameOverride:   "corpse of a swamp ostard"
+	Name:                 "a forest ostard"
+	CorpseNameOverride:   "corpse of a forest ostard"
 	Str:                  120
 	Int:                  35
 	Dex:                  240
@@ -16,9 +16,12 @@ SwampOstard: {
 	HideType:             "Ostard"
 	Hides:                4
 	HitsMaxSeed:          120
-	Hue:                  2001
+	Hue: {
+		Min: 2201
+		Max: 2225
+	}
 	ManaMaxSeed:          0
-	MinTameSkill:         55
+	MinTameSkill:         50
 	ProvokeSkillOverride: 90
 	StamMaxSeed:          50
 	Tamable:              true

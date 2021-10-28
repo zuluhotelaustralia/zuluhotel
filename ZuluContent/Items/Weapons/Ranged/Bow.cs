@@ -19,7 +19,7 @@ namespace Server.Items
 
         public override int DefaultSpeed => 35;
 
-        public override int DefaultMaxRange => 7;
+        public override int DefaultMaxRange => 12;
 
         public override int InitMinHits => 70;
 

@@ -1,6 +1,7 @@
 package Animal
 
 FireOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a fire ostard"
 	CorpseNameOverride:   "corpse of a fire ostard"
 	Str:                  160
@@ -9,6 +10,7 @@ FireOstard: {
 	PassiveSpeed:         0.2
 	BaseSoundID:          624
 	Body:                 219
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	HideType:             "Ostard"

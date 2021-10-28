@@ -1,6 +1,7 @@
 package Animal
 
 RubyOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a ruby ostard"
 	CorpseNameOverride:   "corpse of a ruby ostard"
 	Str:                  175
@@ -9,6 +10,7 @@ RubyOstard: {
 	AiType:               "AI_Animal"
 	BaseSoundID:          624
 	Body:                 219
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         20
 	HideType:             "Ostard"

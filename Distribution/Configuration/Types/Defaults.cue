@@ -29,6 +29,7 @@ package Types
 	Hides:                   0
 	BaseSoundID:             null
 	Body:                    400
+	ItemID:									 0
 	CanRummageCorpses:       true
 	CreatureType:            "None"
 	Female:                  false

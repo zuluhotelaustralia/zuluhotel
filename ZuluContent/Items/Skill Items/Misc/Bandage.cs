@@ -262,7 +262,7 @@ namespace Server.Items
                 patientNumber = -1;
                 
                 var difficulty = Patient.HitsMax - Patient.Hits;
-                difficulty = Math.Min(150, difficulty);
+                difficulty = Math.Min(130, difficulty);
 
                 var points = difficulty * PointsMultiplier;
 
