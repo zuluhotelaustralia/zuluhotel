@@ -1,6 +1,7 @@
 package Animal
 
 EliteOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "Elite Ostard"
 	CorpseNameOverride:   "corpse of Elite Ostard"
 	Str:                  600
@@ -10,6 +11,7 @@ EliteOstard: {
 	AutoDispel:           true
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         50
 	HitsMaxSeed:          600

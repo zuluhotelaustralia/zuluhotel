@@ -123,7 +123,7 @@ namespace Scripts.Zulu.Engines.Classes
         }
 
         [CommandProperty(AccessLevel.Counselor)]
-        public double Bonus => Type == ZuluClassType.PowerPlayer || Type == ZuluClassType.None
+        public double Bonus => m_Parent is BaseCreature || Type is ZuluClassType.PowerPlayer or ZuluClassType.None
             ? 1.0
             : 1.0 + Level * PerLevel;
 

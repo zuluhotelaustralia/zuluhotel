@@ -1,6 +1,7 @@
 package Animal
 
 CelestialOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "Celestial Ostard"
 	CorpseNameOverride:   "corpse of Celestial Ostard"
 	Str:                  650
@@ -10,6 +11,7 @@ CelestialOstard: {
 	AutoDispel:           true
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16037
 	CanFly:               true
 	CreatureType:         "Animal"
 	VirtualArmor:         50

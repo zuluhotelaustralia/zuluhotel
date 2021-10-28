@@ -43,6 +43,7 @@ namespace ZuluContent.Configuration.Types.Creatures
         public bool? AutoDispel { get; set; }
         public bool? BardImmune { get; set; }
         public int? BaseSoundID { get; set; }
+        public int? ItemID { get; set; }
         public Body Body { get; set; }
         public bool? CanFly { get; set; }
         public bool? CanRummageCorpses { get; set; } = true;

@@ -1,6 +1,7 @@
 package Animal
 
 TropicalFrenziedOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a tropical frenzied ostard"
 	CorpseNameOverride:   "corpse of a tropical frenzied ostard"
 	Str:                  275
@@ -9,6 +10,7 @@ TropicalFrenziedOstard: {
 	AiType:               "AI_Mage"
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16036
 	CreatureType:         "Animal"
 	VirtualArmor:         35
 	HideType:             "Ostard"

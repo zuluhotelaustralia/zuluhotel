@@ -1199,10 +1199,7 @@ namespace Server.Mobiles
 
                 var pack = Backpack;
 
-                for (var i = 0; i < c.Items.Count; i++)
-                {
-                    pack.DropItem(c.Items[i]);
-                }
+                pack.TryDropItems(this, false, c.Items.ToArray());
 
                 c.Delete();
             }

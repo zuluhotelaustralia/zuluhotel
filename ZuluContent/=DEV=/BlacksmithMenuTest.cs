@@ -53,7 +53,8 @@ namespace Server.Menus.ItemLists
                 else if (m_Entries[index].Name == "a horse")
                 {
                     m_Mobile.SendAsciiMessage("You have spawned a Horse!");
-                    new Horse().MoveToWorld(m_Mobile.Location,Map.Felucca);
+                    var horse = Creatures.Create("Horse");
+                    horse?.MoveToWorld(m_Mobile.Location,Map.Felucca);
                 }
             }
         }

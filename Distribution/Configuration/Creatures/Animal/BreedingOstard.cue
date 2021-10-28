@@ -1,6 +1,7 @@
 package Animal
 
 BreedingOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "breeding ostard"
 	CorpseNameOverride:   "corpse of breeding ostard"
 	Str:                  100
@@ -9,6 +10,7 @@ BreedingOstard: {
 	AiType:               "AI_Animal"
 	BaseSoundID:          624
 	Body:                 219
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         20
 	Female:               true

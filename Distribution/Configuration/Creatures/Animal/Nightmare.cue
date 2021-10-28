@@ -1,22 +1,22 @@
-package Dragonkin
+package Animal
 
-Dragon: {
-	Name:                 "a dragon"
-	CorpseNameOverride:   "corpse of a dragon"
+Nightmare: {
+	BaseType:             "BaseMount"
+	Name:                 "a Nightmare"
+	CorpseNameOverride:   "corpse of a Nightmare"
 	Str:                  750
 	Int:                  110
 	Dex:                  160
 	ActiveSpeed:          0.15
 	PassiveSpeed:         0.2
 	AlwaysMurderer:       true
-	AutoDispel:           true
 	BaseSoundID:          362
-	Body:                 59
-	CreatureType:         "Dragonkin"
+	Body: 								284
+	ItemID:								16018
+	CreatureType:         "Animal"
 	VirtualArmor:         55
 	FightMode:            "Closest"
-	HideType:             "Dragon"
-	Hides:                5
+	Hides:                4
 	HitsMaxSeed:          750
 	LootItemChance:       60
 	LootItemLevel:        5
@@ -26,11 +26,6 @@ Dragon: {
 	ProvokeSkillOverride: 130
 	StamMaxSeed:          150
 	Tamable:              true
-	PreferredSpells: ["Fireball", "EnergyBolt", "Lightning", "Harm", "MindBlast", "MagicArrow", "Weaken", "MassCurse", "GreaterHeal"]
-	Resistances: {
-		Fire:          100
-		MagicImmunity: 3
-	}
 	Skills: {
 		Parry:        80
 		MagicResist:  95

@@ -1,24 +1,23 @@
 package Animal
 
-SwampOstard: {
+DesertOstard: {
 	BaseType:             "BaseMount"
-	Name:                 "a swamp ostard"
-	CorpseNameOverride:   "corpse of a swamp ostard"
+	Name:                 "a desert ostard"
+	CorpseNameOverride:   "corpse of a desert ostard"
 	Str:                  120
 	Int:                  35
 	Dex:                  240
 	AiType:               "AI_Animal"
 	BaseSoundID:          624
-	Body:                 219
-	ItemID:								16037
+	Body:                 210
+	ItemID:								16035
 	CreatureType:         "Animal"
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4
 	HitsMaxSeed:          120
-	Hue:                  2001
 	ManaMaxSeed:          0
-	MinTameSkill:         55
+	MinTameSkill:         50
 	ProvokeSkillOverride: 90
 	StamMaxSeed:          50
 	Tamable:              true

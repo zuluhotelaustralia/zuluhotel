@@ -1,6 +1,7 @@
 package Animal
 
 TropicalOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a tropical ostard"
 	CorpseNameOverride:   "corpse of a tropical ostard"
 	Str:                  210
@@ -9,6 +10,7 @@ TropicalOstard: {
 	AiType:               "AI_Mage"
 	BaseSoundID:          624
 	Body:                 219
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         30
 	HideType:             "Ostard"

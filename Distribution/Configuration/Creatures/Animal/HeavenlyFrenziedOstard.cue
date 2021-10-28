@@ -1,6 +1,7 @@
 package Animal
 
 HeavenlyFrenziedOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a heavenly frenzied ostard"
 	CorpseNameOverride:   "corpse of a heavenly frenzied ostard"
 	Str:                  225
@@ -9,6 +10,7 @@ HeavenlyFrenziedOstard: {
 	AiType:               "AI_Healer"
 	BaseSoundID:          629
 	Body:                 218
+	ItemID:								16036
 	CreatureType:         "Animal"
 	VirtualArmor:         35
 	HideType:             "Ostard"

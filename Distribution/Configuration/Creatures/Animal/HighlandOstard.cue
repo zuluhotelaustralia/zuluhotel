@@ -1,6 +1,7 @@
 package Animal
 
 HighlandOstard: {
+	BaseType:             "BaseMount"
 	Name:                 "a highland ostard"
 	CorpseNameOverride:   "corpse of a highland ostard"
 	Str:                  120
@@ -9,6 +10,7 @@ HighlandOstard: {
 	AiType:               "AI_Animal"
 	BaseSoundID:          624
 	Body:                 219
+	ItemID:								16037
 	CreatureType:         "Animal"
 	VirtualArmor:         10
 	HideType:             "Ostard"

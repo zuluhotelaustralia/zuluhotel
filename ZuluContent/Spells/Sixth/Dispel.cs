@@ -71,7 +71,7 @@ namespace Server.Spells.Sixth
 
             Effects.SendLocationParticles(
                 EffectItem.Create(loc, Caster.Map, EffectItem.DefaultDuration),
-                0x3729, 9, 20, 5042
+                0x3728, 8, 20, 5042
             );
             Effects.PlaySound(loc, Caster.Map, 0x201);
         }
