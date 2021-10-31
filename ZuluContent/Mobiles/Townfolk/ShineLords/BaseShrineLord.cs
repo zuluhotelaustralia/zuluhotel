@@ -11,8 +11,8 @@ namespace Server.Mobiles
     {
         protected override List<SBInfo> SBInfos { get; } = new();
         
-        [SerializableField(0)]
-        private Dictionary<Serial, List<BaseShrine>> _shrineCollections { get; set; }
+        /*[SerializableField(0)]
+        private Dictionary<Serial, List<BaseShrine>> _shrineCollections { get; set; }*/
         
         protected Type ShrineAcceptType { get; set; }
 
@@ -41,7 +41,7 @@ namespace Server.Mobiles
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
-            if (dropped is BaseShrine shrine && shrine.GetType() == ShrineAcceptType)
+            /*if (dropped is BaseShrine shrine && shrine.GetType() == ShrineAcceptType)
             {
                 if (_shrineCollections.TryGetValue(from.Serial, out var shrines))
                 {
@@ -67,7 +67,7 @@ namespace Server.Mobiles
             {
                 PublicOverheadMessage(MessageType.Regular, 0x3B2, 500607); // I'm not interested in that.
                 return false;
-            }
+            }*/
 
             return base.OnDragDrop(from, dropped);
         }
