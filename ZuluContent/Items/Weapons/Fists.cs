@@ -8,8 +8,8 @@ namespace Server.Items
         {
             Mobile.DefaultWeapon = new Fists();
 
-            EventSink.DisarmRequest += EventSink_DisarmRequest;
-            EventSink.StunRequest += EventSink_StunRequest;
+            // EventSink.DisarmRequest += EventSink_DisarmRequest;
+            // EventSink.StunRequest += EventSink_StunRequest;
         }
 
         public override int DefaultStrengthReq { get; } = 0;
@@ -41,7 +41,7 @@ namespace Server.Items
         {
         }
 
-        public override double GetDefendSkillValue(Mobile attacker, Mobile defender)
+        /*public override double GetDefendSkillValue(Mobile attacker, Mobile defender)
         {
             double wresValue = defender.Skills[SkillName.Wrestling].Value;
             double anatValue = defender.Skills[SkillName.Anatomy].Value;
@@ -55,9 +55,9 @@ namespace Server.Items
                 return wresValue;
             else
                 return incrValue;
-        }
+        }*/
 
-        private void CheckPreAOSMoves(Mobile attacker, Mobile defender)
+        /*private void CheckPreAOSMoves(Mobile attacker, Mobile defender)
         {
             if (attacker.StunReady)
             {
@@ -160,14 +160,14 @@ namespace Server.Items
                     }
                 }
             }
-        }
+        }*/
 
-        public override TimeSpan OnSwing(Mobile attacker, Mobile defender)
+        /*public override TimeSpan OnSwing(Mobile attacker, Mobile defender)
         {
             CheckPreAOSMoves(attacker, defender);
 
             return base.OnSwing(attacker, defender);
-        }
+        }*/
 
         /*public override void OnMiss( Mobile attacker, Mobile defender )
         {
@@ -192,7 +192,7 @@ namespace Server.Items
 
         /* Wrestling moves */
 
-        private static bool CheckMove(Mobile m, SkillName other)
+        /*private static bool CheckMove(Mobile m, SkillName other)
         {
             double wresValue = m.Skills[SkillName.Wrestling].Value;
             double scndValue = m.Skills[other].Value;
@@ -200,12 +200,12 @@ namespace Server.Items
             /* 40% chance at 80, 80
              * 50% chance at 100, 100
              * 60% chance at 120, 120
-             */
+             #1#
 
             double chance = (wresValue + scndValue) / 400.0;
 
             return chance >= Utility.RandomDouble();
-        }
+        }*/
 
         private static bool HasFreeHands(Mobile m)
         {
