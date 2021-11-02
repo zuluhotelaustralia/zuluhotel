@@ -1017,7 +1017,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static Item CreateRandomGMArmor()
         {
-            var gmArmortType = RandomList(typeof(FemaleDrakonChest), typeof(DrakonHelm), typeof(DrakonArms),
+            var gmArmorType = RandomList(typeof(FemaleDrakonChest), typeof(DrakonHelm), typeof(DrakonArms),
                 typeof(DrakonLegs), typeof(DrakonGloves), typeof(DrakonGorget),
                 typeof(DrakonChest), typeof(FemaleRyousChest), typeof(RyousHelm), typeof(RyousArms),
                 typeof(RyousLegs), typeof(RyousGloves), typeof(RyousGorget), typeof(RyousChest),
@@ -1034,7 +1034,7 @@ namespace Server.Scripts.Engines.Loot
                 typeof(SylvianLegs), typeof(SylvianChest), typeof(FemaleSylvianChest), typeof(SageRobe),
                 typeof(MagisterRobe),
                 typeof(MagisterMundiRobe), typeof(CelestialRobe), typeof(PracticusRobe), typeof(ZelatorRobe));
-            return gmArmortType.CreateInstance<Item>();
+            return gmArmorType.CreateInstance<Item>();
         }
     }
 }
