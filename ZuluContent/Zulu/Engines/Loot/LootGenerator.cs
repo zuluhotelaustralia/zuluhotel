@@ -1,20 +1,14 @@
 using System;
 using System.Linq;
 using Scripts.Zulu.Engines.Classes;
-using Server.Commands;
-using Server.Engines.Craft;
 using Server.Engines.Magic;
 using Server.Items;
 using Server.Mobiles;
 using Server.Spells;
-using Server.Targeting;
 using Server.Utilities;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
-using ZuluContent.Zulu.Items;
 using static Server.Utility;
-using static Server.Engines.Magic.IElementalResistible;
-using System.Collections.Generic;
 using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Scripts.Engines.Loot
@@ -330,7 +324,7 @@ namespace Server.Scripts.Engines.Loot
                             ApplyArmorMod(item);
                             break;
                         default:
-                            ApplyOnHitScript(item);
+                            ApplyOnHitScript(item, container);
                             break;
                     }
 
@@ -400,14 +394,18 @@ namespace Server.Scripts.Engines.Loot
             item.SkillBonusValue = value;
         }
 
-        private static void ApplyOnHitScript(LootItem item)
+        private static void ApplyOnHitScript(LootItem item, Container container)
         {
-            var creature = Enum.GetValues(typeof(CreatureType))
-                .OfType<CreatureType>()
-                .ToList()
-                .RandomElement();
-
-            item.CreatureProtection = creature;
+            var scriptType = Utility.Random(1, 94) + item.ItemLevel * 2;
+            
+            if (scriptType <= 80)
+                ApplyResistantHitscript(item);
+            else if (scriptType <= 105)
+            {
+                item.Deleted = true;
+                var gmArmor = CreateRandomGMArmor();
+                container.AddItem(gmArmor);
+            }
         }
 
 
@@ -445,11 +443,22 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplySlayerHitscript(LootItem item)
         {
-            var slayers = Enum.GetValues(typeof(CreatureType)).OfType<CreatureType>().ToList();
+            var creature = Enum.GetValues(typeof(CreatureType))
+                .OfType<CreatureType>()
+                .ToList()
+                .RandomElement();
 
-            var slayer = slayers[Utility.Random(slayers.Count)];
+            item.SlayerType = creature;
+        }
 
-            item.SlayerType = slayer;
+        private static void ApplyResistantHitscript(LootItem item)
+        {
+            var creature = Enum.GetValues(typeof(CreatureType))
+                .OfType<CreatureType>()
+                .ToList()
+                .RandomElement();
+
+            item.CreatureProtection = creature;
         }
 
         private static void ApplySpellHitscript(LootItem item)
@@ -1004,6 +1013,28 @@ namespace Server.Scripts.Engines.Loot
                 typeof(HalberdfOfAlcatraz), typeof(SpearOfRenah), typeof(WeaponOfZulu), typeof(OmerosPickaxe),
                 typeof(XarafaxsAxe));
             return gmWeaponType.CreateInstance<Item>();
+        }
+
+        private static Item CreateRandomGMArmor()
+        {
+            var gmArmorType = RandomList(typeof(FemaleDrakonChest), typeof(DrakonHelm), typeof(DrakonArms),
+                typeof(DrakonLegs), typeof(DrakonGloves), typeof(DrakonGorget),
+                typeof(DrakonChest), typeof(FemaleRyousChest), typeof(RyousHelm), typeof(RyousArms),
+                typeof(RyousLegs), typeof(RyousGloves), typeof(RyousGorget), typeof(RyousChest),
+                typeof(FemaleDarknessChest), typeof(DarknessHelm), typeof(DarknessArms),
+                typeof(DarknessLegs), typeof(DarknessGloves), typeof(DarknessGorget),
+                typeof(DarknessChest), typeof(FemaleElvenChest), typeof(ElvenHelm),
+                typeof(ElvenArms), typeof(ElvenLegs), typeof(ElvenGloves),
+                typeof(ElvenGorget), typeof(ElvenChest), typeof(DrakonShield),
+                typeof(RyousShield), typeof(DarknessShield), typeof(ElvenShield),
+                typeof(ZephyrCoif), typeof(ZephyrLegs), typeof(ZephyrChest), typeof(InfernalChest),
+                typeof(InfernalArms),
+                typeof(InfernalLegs), typeof(InfernalGloves), typeof(SylvianGorget), typeof(SylvianGloves),
+                typeof(SylvianArms),
+                typeof(SylvianLegs), typeof(SylvianChest), typeof(FemaleSylvianChest), typeof(SageRobe),
+                typeof(MagisterRobe),
+                typeof(MagisterMundiRobe), typeof(CelestialRobe), typeof(PracticusRobe), typeof(ZelatorRobe));
+            return gmArmorType.CreateInstance<Item>();
         }
     }
 }

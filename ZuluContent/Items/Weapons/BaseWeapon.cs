@@ -680,7 +680,8 @@ namespace Server.Items
                 if (MaxHitPoints > 0)
                     HitPoints -= 1;
 
-            if (Quality > 0 && HitPoints < 1) Delete();
+            if (Quality > 0 && HitPoints < 1)
+                Delete();
 
             if (attacker is BaseCreature attackingCreature)
                 attackingCreature.OnGaveMeleeAttack(defender);

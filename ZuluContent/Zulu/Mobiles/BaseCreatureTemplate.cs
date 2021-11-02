@@ -93,8 +93,6 @@ namespace Server.Mobiles
                 {
                     EquipItem(new CreatureWeapon());
                 }
-
-
                 
                 if (Weapon is BaseWeapon weapon)
                 {
