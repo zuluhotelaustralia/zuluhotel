@@ -9,9 +9,10 @@ Horse: {
 	Dex:                  75
 	AiType:               "AI_Animal"
 	BaseSoundID:          168
-	Body: 								200
-	ItemID:								16031
+	Body: 				  200
+	ItemID:				  16031
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         10
 	Hides:                4
 	HitsMaxSeed:          45

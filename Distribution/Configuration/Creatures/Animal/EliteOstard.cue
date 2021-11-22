@@ -11,8 +11,9 @@ EliteOstard: {
 	AutoDispel:           true
 	BaseSoundID:          629
 	Body:                 218
-	ItemID:								16037
+	ItemID:				  16037
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         50
 	HitsMaxSeed:          600
 	Hue:                  1298

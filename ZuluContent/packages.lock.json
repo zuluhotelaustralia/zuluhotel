@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "Argon2.Bindings": {
         "type": "Direct",
         "requested": "[1.8.0, )",
@@ -115,8 +115,8 @@
       },
       "FSharp.Core": {
         "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "iHoYXA0VaSQUONGENB1aVafjDDZDZpwu39MtaRCTrmwFW/cTcK0b2yKNVYneFHJMc3ChtsSoM9lNtJ1dYXkHfA=="
+        "resolved": "6.0.0",
+        "contentHash": "fbv1UwJ2LXVcFCt+GGDPu0sIYA5C6gdDvAupDj3iLQF3clRkua/6J33f+FiGQa8P1tEa+zmz3wrjoTnXZ1UiYg=="
       },
       "MessagePack.Annotations": {
         "type": "Transitive",
@@ -494,7 +494,7 @@
       "cuefsharp": {
         "type": "Project",
         "dependencies": {
-          "FSharp.Core": "5.0.0",
+          "FSharp.Core": "6.0.0-beta",
           "System.Reflection.MetadataLoadContext": "5.0.1"
         }
       },

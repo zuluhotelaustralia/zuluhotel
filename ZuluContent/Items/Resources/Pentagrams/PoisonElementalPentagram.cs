@@ -4,7 +4,7 @@ namespace Server.Items
     public abstract partial class PoisonElementalPentagram : ElementalPentagram
     {
         [Constructible]
-        public PoisonElementalPentagram(int piece) : base(piece)
+        public PoisonElementalPentagram(ushort piece) : base(piece)
         {
             Name = $"Poison Pentagram Piece {piece + 1}";
             Hue = 1162;

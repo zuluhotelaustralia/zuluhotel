@@ -17,6 +17,7 @@ RadiantWisp: {
 	HitsMaxSeed:          350
 	Hue:                  1154
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       25
 	LootItemLevel:        4
 	LootTable:            "80"

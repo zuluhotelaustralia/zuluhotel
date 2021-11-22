@@ -4,9 +4,8 @@ namespace Server.Items
     public abstract partial class ElementalPentagram : BaseShrine
     {
         [Constructible]
-        public ElementalPentagram(int piece) : base(4070 + piece)
+        public ElementalPentagram(ushort piece) : base(piece, 4070 + piece)
         {
-            Piece = piece;
             Weight = 1;
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Scripts.Zulu.Spells.Necromancy;
 using Server.Commands;
 using Server.Gumps;
@@ -12,18 +13,28 @@ namespace Server.Items
         public override int Hue { get; set; } = 0x66D;
         public override string DefaultName { get; } = "Codex Damnorum";
         public override int BookOffset { get; } = 100;
+
+        public override Dictionary<SpellEntry, int> SpellIcons { get; } = new()
+        {
+            { SpellEntry.ControlUndead, 20480 }, { SpellEntry.Darkness, 24012 }, { SpellEntry.DecayingRay, 24015 },
+            { SpellEntry.SpectresTouch, 20495 }, { SpellEntry.AbyssalFlame, 20488 }, { SpellEntry.AnimateDead, 24010 },
+            { SpellEntry.Sacrifice, 20739 }, { SpellEntry.WraithBreath, 23013 }, { SpellEntry.SorcerersBane, 24008 },
+            { SpellEntry.SummonSpirit, 23007 }, { SpellEntry.WraithForm, 20493 }, { SpellEntry.WyvernStrike, 20496 },
+            { SpellEntry.Kill, 20993 }, { SpellEntry.LicheForm, 20486 }, { SpellEntry.Plague, 20489 },
+            { SpellEntry.Spellbind, 20744 }
+        };
         
         public override Type SpellType { get; } = typeof(NecromancerSpell);
 
         [Constructible]
-        public Codex() : base(0x1C13) { }
+        public Codex() : base(0x42BF) { }
 
         [Constructible]
         public Codex(Serial serial) : base(serial) { }
         
         public override void OnOpenSpellbook(Mobile from)
         {
-            from.SendGump(new CustomSpellbookGump(from, this, 0x898));
+            from.SendGump(new CustomSpellbookGump(from, this, 0x2B32));
         }
 
         public override void Serialize(IGenericWriter writer)

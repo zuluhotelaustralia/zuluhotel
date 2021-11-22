@@ -11,13 +11,15 @@ CelestialOstard: {
 	AutoDispel:           true
 	BaseSoundID:          629
 	Body:                 218
-	ItemID:								16037
+	ItemID:				  16037
 	CanFly:               true
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         50
 	HitsMaxSeed:          650
 	Hue:                  1176
 	InitialInnocent:      true
+	AlwaysAttackable:	  false
 	ManaMaxSeed:          200
 	MinTameSkill:         115
 	ProvokeSkillOverride: 150

@@ -1,15 +1,10 @@
 using System;
-using System.Collections;
-using System.Linq;
 using System.Threading.Tasks;
-using Scripts.Zulu.Utilities;
 using Server;
 using Server.Network;
-using Server.Items;
 using Server.Spells;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Necromancy
@@ -63,7 +58,7 @@ namespace Scripts.Zulu.Spells.Necromancy
                 Duration = TimeSpan.FromSeconds(duration),
             });
 
-            target.FixedParticles(0x373B, 10, 10, 5007, EffectLayer.Waist);
+            target.FixedParticles(0x376A, 9, 32, 5007, EffectLayer.Waist);
             target.PlaySound(0x1E3);
         }
     }

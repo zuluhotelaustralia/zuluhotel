@@ -9,9 +9,10 @@ Llama: {
 	Dex:                  55
 	AiType:               "AI_Animal"
 	BaseSoundID:          1011
-	Body: 								220
-	ItemID:								16038
+	Body: 				  220
+	ItemID:				  16038
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         16
 	Hides:                4
 	HitsMaxSeed:          30

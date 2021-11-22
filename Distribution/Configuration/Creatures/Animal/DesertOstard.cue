@@ -10,8 +10,9 @@ DesertOstard: {
 	AiType:               "AI_Animal"
 	BaseSoundID:          624
 	Body:                 210
-	ItemID:								16035
+	ItemID:				  16035
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         10
 	HideType:             "Ostard"
 	Hides:                4

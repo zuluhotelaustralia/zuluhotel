@@ -10,8 +10,9 @@ HeavenlyOstard: {
 	AiType:               "AI_Healer"
 	BaseSoundID:          624
 	Body:                 219
-	ItemID:								16037
+	ItemID:				  16037
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         30
 	HideType:             "Ostard"
 	Hides:                4
