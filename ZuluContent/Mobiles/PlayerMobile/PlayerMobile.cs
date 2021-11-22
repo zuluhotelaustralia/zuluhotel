@@ -11,6 +11,7 @@ using Server.Network;
 using Server.Regions;
 using Server.Accounting;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Engines.CustomSpellHotBar;
 using Scripts.Zulu.Packets;
 using Scripts.Zulu.Engines.Races;
 using Server.ContextMenus;
@@ -425,6 +426,14 @@ namespace Server.Mobiles
 
         private static void OnLogin(Mobile from)
         {
+            if (from is PlayerMobile playerMobile && playerMobile.CustomSpellHotBars.Count > 0)
+            {
+                foreach (var hotBar in playerMobile.CustomSpellHotBars)
+                {
+                    from.SendGump(new CustomSpellHotBarGump(hotBar));
+                }
+            }
+            
             if (AccountHandler.LockdownLevel <= AccessLevel.Player)
                 return;
 
@@ -748,6 +757,8 @@ namespace Server.Mobiles
                 return value >= 0 ? value : 0;
             }
         }
+        
+        public List<CustomSpellHotBar> CustomSpellHotBars { get; private set; } = new();
 
         #region [Zulu] Resistances
 
@@ -1338,6 +1349,17 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 32:
+                {
+                    var count = reader.ReadInt();
+
+                    CustomSpellHotBars = new List<CustomSpellHotBar>(count);
+
+                    for (int i = 0; i < count; ++i)
+                        CustomSpellHotBars.Add(CustomSpellHotBar.Deserialize(reader));
+
+                    goto case 31;
+                }
                 case 31:
                 {
                     TargetZuluClass = (ZuluClassType) reader.ReadInt();
@@ -1426,7 +1448,6 @@ namespace Server.Mobiles
                 case 7:
                 {
                     PermaFlags = reader.ReadEntityList<Mobile>();
-                    ;
                     goto case 6;
                 }
                 case 6:
@@ -1506,7 +1527,12 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 31); // version
+            writer.Write((int) 32); // version
+            
+            writer.Write(CustomSpellHotBars.Count);
+
+            for (int i = 0; i < CustomSpellHotBars.Count; ++i)
+                CustomSpellHotBars[i].Serialize(writer);
             
             writer.Write((int) TargetZuluClass);
 

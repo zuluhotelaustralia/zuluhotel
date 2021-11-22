@@ -4,7 +4,7 @@ namespace Server.Items
     public abstract partial class WaterElementalPentagram : ElementalPentagram
     {
         [Constructible]
-        public WaterElementalPentagram(int piece) : base(piece)
+        public WaterElementalPentagram(ushort piece) : base(piece)
         {
             Name = $"Water Pentagram Piece {piece + 1}";
             Hue = 1167;

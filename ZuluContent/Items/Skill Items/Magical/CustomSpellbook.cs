@@ -22,6 +22,8 @@ namespace Server.Items
         public virtual int BookCount { get; } = 16;
         public override bool DisplayLootType { get; } = false;
 
+        public virtual Dictionary<SpellEntry, int> SpellIcons { get; }
+
         [Constructible]
         public CustomSpellbook(int itemId) : base(itemId)
         {
@@ -30,7 +32,7 @@ namespace Server.Items
 
             Layer = Layer.OneHanded;
 
-            Content = (ulong) 0;
+            Content = 0;
 
             Level = SecureLevel.CoOwners;
         }

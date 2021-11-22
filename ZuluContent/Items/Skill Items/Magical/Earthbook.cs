@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Scripts.Zulu.Spells.Earth;
 using Server.Commands;
 using Server.Gumps;
@@ -12,18 +13,28 @@ namespace Server.Items
         public override int Hue { get; set; } = 0x48A;
         public override string DefaultName { get; } = "Book of the Earth";
         public override int BookOffset { get; } = 600;
+        
+        public override Dictionary<SpellEntry, int> SpellIcons { get; } = new()
+        {
+            { SpellEntry.Antidote, 20481 }, { SpellEntry.OwlSight, 23002 }, { SpellEntry.ShiftingEarth, 20999 },
+            { SpellEntry.SummonMammals, 20491 }, { SpellEntry.CallLightning, 24000 }, { SpellEntry.EarthsBlessing, 23001 },
+            { SpellEntry.EarthPortal, 2275 }, { SpellEntry.NaturesTouch, 20740 }, { SpellEntry.GustOfAir, 24014 },
+            { SpellEntry.RisingFire, 2290 }, { SpellEntry.Shapeshift, 24005 }, { SpellEntry.IceStrike, 24011 },
+            { SpellEntry.EarthSpirit, 2301 }, { SpellEntry.FireSpirit, 2302 }, { SpellEntry.StormSpirit, 2299 },
+            { SpellEntry.WaterSpirit, 2303 }
+        };
 
         public override Type SpellType { get; } = typeof(EarthSpell);
 
         [Constructible]
-        public Earthbook() : base(0x0FF2) { }
+        public Earthbook() : base(0x42B7) { }
 
         [Constructible]
         public Earthbook(Serial serial) : base(serial) { }
         
         public override void OnOpenSpellbook(Mobile from)
         {
-            from.SendGump(new CustomSpellbookGump(from, this, 0x89B));
+            from.SendGump(new CustomSpellbookGump(from, this, 0x2B2F));
         }
 
         public override void Serialize(IGenericWriter writer)

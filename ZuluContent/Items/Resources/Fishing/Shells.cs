@@ -6,10 +6,12 @@ namespace Server.Items
         public override double DefaultWeight => 1.0;
 
         [SerializableField(0)]
-        private int _piece;
+        private ushort _piece;
 
-        public BaseShrine(int itemID) : base(itemID)
+        public BaseShrine(ushort piece, int itemID) : base(itemID)
         {
+            _piece = piece;
+            
         }
     }
 
@@ -23,9 +25,8 @@ namespace Server.Items
         private static readonly int[] Hues = { 0x504, 0x519, 0x606, 0x505, 0x501, 0x499, 0x480, 0x489, 0x496 };
 
         [Constructible]
-        public Shell(int piece) : base(ItemIDs[piece])
+        public Shell(ushort piece) : base(piece, ItemIDs[piece])
         {
-            Piece = piece;
             Name = Names[piece];
             Hue = Hues[piece];
         }

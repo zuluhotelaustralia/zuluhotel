@@ -18,6 +18,7 @@ HeavenlyDrake: {
 	HitsMaxSeed:          400
 	Hue:                  1181
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       25
 	LootItemLevel:        4
 	LootTable:            "37"

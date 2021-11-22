@@ -17,6 +17,7 @@ Humuc: {
 	HitsMaxSeed:          20
 	Hue:                  746
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	ManaMaxSeed:          75
 	ProvokeSkillOverride: 150
 	StamMaxSeed:          50

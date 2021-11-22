@@ -13,15 +13,17 @@ namespace Server.Mobiles
     public partial class WaterElementShrineLord : BaseShrineLord
     {
         public override bool CanTeach => false;
+        
+        public override Type[] ShrineAcceptTypes => new [] {typeof(WaterElementalPentagram), typeof(Shell)};
 
         [Constructible]
         public WaterElementShrineLord()
         {
             Title = "the Water Element Shrine Lord";
+            
+            Body = 0x10;
 
             Hue = 1181;
-
-            ShrineAcceptType = typeof(WaterElementalPentagram);
         }
 
         public override void InitBody()

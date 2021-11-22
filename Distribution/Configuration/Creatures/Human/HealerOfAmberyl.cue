@@ -14,6 +14,7 @@ HealerOfAmberyl: {
 	HitsMaxSeed:        300
 	Hue:                33784
 	InitialInnocent:    true
+	AlwaysAttackable:		false
 	ManaMaxSeed:        200
 	StamMaxSeed:        100
 	Skills: Magery: 200

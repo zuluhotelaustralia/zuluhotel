@@ -16,6 +16,7 @@ ElfLord: {
 	HitsMaxSeed:          1500
 	Hue:                  770
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       60
 	LootItemLevel:        5
 	LootTable:            "136"

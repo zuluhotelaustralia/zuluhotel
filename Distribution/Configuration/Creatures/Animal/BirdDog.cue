@@ -10,6 +10,7 @@ BirdDog: {
 	BaseSoundID:          133
 	Body:                 217
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         5
 	HitsMaxSeed:          30
 	Hue:                  33784

@@ -15,6 +15,7 @@ Wisp: {
 	VirtualArmor:         30
 	HitsMaxSeed:          225
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       25
 	LootItemLevel:        3
 	LootTable:            "125"

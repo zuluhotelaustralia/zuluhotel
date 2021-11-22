@@ -20,6 +20,7 @@ RainbowWisp: {
 	HitsMaxSeed:          3000
 	Hue:                  1298
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       60
 	LootItemLevel:        6
 	LootTable:            "9"

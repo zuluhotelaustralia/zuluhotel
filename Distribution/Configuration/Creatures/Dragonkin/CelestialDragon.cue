@@ -18,6 +18,7 @@ CelestialDragon: {
 	HitsMaxSeed:          850
 	Hue:                  1301
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       75
 	LootItemLevel:        5
 	LootTable:            "35"

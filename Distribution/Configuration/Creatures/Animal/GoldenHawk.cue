@@ -10,6 +10,7 @@ GoldenHawk: {
 	BaseSoundID:          750
 	Body:                 5
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         20
 	HitsMaxSeed:          90
 	Hue:                  1127

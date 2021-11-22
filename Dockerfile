@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS builder
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS builder
 
 COPY . /source
 WORKDIR /source

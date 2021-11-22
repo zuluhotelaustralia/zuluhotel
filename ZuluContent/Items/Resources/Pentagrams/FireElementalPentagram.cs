@@ -4,7 +4,7 @@ namespace Server.Items
     public abstract partial class FireElementalPentagram : ElementalPentagram
     {
         [Constructible]
-        public FireElementalPentagram(int piece) : base(piece)
+        public FireElementalPentagram(ushort piece) : base(piece)
         {
             Name = $"Fire Pentagram Piece {piece + 1}";
             Hue = 139;

@@ -2281,9 +2281,6 @@ Spells: {
 			Reagent: "VialOfBlood"
 			Amount:  1
 		}, {
-			Reagent: "VialOfBlood"
-			Amount:  1
-		}, {
 			Reagent: "VolcanicAsh"
 			Amount:  1
 		}, {

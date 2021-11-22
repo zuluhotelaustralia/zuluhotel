@@ -10,8 +10,9 @@ ValleyOstard: {
 	AiType:               "AI_Animal"
 	BaseSoundID:          624
 	Body:                 219
-	ItemID:								16037
+	ItemID:			      16037
 	CreatureType:         "Animal"
+	FightMode:            "Aggressor"
 	VirtualArmor:         35
 	HideType:             "Ostard"
 	Hides:                4

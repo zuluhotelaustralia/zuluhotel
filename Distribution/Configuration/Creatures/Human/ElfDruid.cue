@@ -18,6 +18,7 @@ ElfDruid: {
 	HitsMaxSeed:          500
 	Hue:                  770
 	InitialInnocent:      true
+	AlwaysAttackable:			false
 	LootItemChance:       60
 	LootItemLevel:        4
 	LootTable:            "133"
