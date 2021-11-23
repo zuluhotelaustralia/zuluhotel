@@ -1,6 +1,7 @@
 ﻿using Scripts.Zulu.Engines.CustomSpellHotBar;
 using Scripts.Zulu.Spells.Earth;
 using Scripts.Zulu.Spells.Necromancy;
+using Scripts.Zulu.Utilities;
 using Server.Mobiles;
 using Server.Network;
 using Server.Spells;
@@ -68,7 +69,17 @@ namespace Server.Gumps
                 }
                 else if (buttonID is >= 0 and < 16)
                 {
-                    SpellRegistry.Create((SpellEntry) m_HotBar.Book.BookOffset + buttonID, from, m_HotBar.Book).Cast();
+                    var spellEntry = (SpellEntry)m_HotBar.Book.BookOffset + buttonID;
+
+                    if (m_HotBar.Book.HasSpell(spellEntry))
+                    {
+                        SpellRegistry.Create(spellEntry, from, m_HotBar.Book).Cast();
+                    }
+                    else
+                    {
+                        playerMobile.SendFailureMessage("That spellbook does not have that spell.");
+                    }
+                    
                     playerMobile.SendGump(new CustomSpellHotBarGump(m_HotBar));
                 }
                 else if (buttonID == 16)

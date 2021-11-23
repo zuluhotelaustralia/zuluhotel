@@ -24,7 +24,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -85,7 +85,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -118,7 +118,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -154,7 +154,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -184,7 +184,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -217,7 +217,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -253,7 +253,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -286,7 +286,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -319,7 +319,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -352,7 +352,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -385,7 +385,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -418,7 +418,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -454,7 +454,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -487,7 +487,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -523,7 +523,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -556,7 +556,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -589,7 +589,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -619,7 +619,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -655,7 +655,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -685,7 +685,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -718,7 +718,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -751,7 +751,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -784,7 +784,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -817,7 +817,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -853,7 +853,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -892,7 +892,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -928,7 +928,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -964,7 +964,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1003,7 +1003,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1036,7 +1036,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1072,7 +1072,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1108,7 +1108,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1144,7 +1144,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1239,7 +1239,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1278,7 +1278,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1314,7 +1314,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1378,7 +1378,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1414,7 +1414,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1447,7 +1447,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1480,7 +1480,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1513,7 +1513,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1549,7 +1549,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1588,7 +1588,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1624,7 +1624,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1657,7 +1657,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1696,7 +1696,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1735,7 +1735,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1768,7 +1768,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1804,7 +1804,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1843,7 +1843,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1882,7 +1882,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -1980,7 +1980,7 @@ Spells: {
 		AllowTown:        false
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2019,7 +2019,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        true
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2201,7 +2201,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2237,7 +2237,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2270,7 +2270,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2306,7 +2306,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2342,7 +2342,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2381,7 +2381,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2420,7 +2420,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2459,7 +2459,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2498,7 +2498,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2596,7 +2596,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2635,7 +2635,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2705,7 +2705,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   true
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2753,7 +2753,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2792,7 +2792,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2828,7 +2828,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2858,7 +2858,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2922,7 +2922,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2958,7 +2958,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -2994,7 +2994,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -3030,7 +3030,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -3066,7 +3066,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -3102,7 +3102,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false
@@ -3166,7 +3166,7 @@ Spells: {
 		AllowTown:        true
 		AllowDead:        false
 		TargetOptions: {
-			Range:         12
+			Range:         15
 			AllowGround:   false
 			AllowMultis:   true
 			AllowNonLocal: false

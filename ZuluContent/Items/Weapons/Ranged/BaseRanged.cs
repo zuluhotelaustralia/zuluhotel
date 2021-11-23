@@ -37,7 +37,7 @@ namespace Server.Items
         {
         }
 
-        public override TimeSpan OnSwing(Mobile attacker, Mobile defender)
+        public override TimeSpan OnSwing(Mobile attacker, Mobile defender, double bonus)
         {
             if (Core.TickCount > attacker.LastMoveTime + 1000)
             {
