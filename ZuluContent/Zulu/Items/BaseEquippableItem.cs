@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Zulu.Engines.Classes;
 using Server;
 using Server.ContextMenus;
 using Server.Engines.Magic;
@@ -200,7 +201,7 @@ namespace ZuluContent.Zulu.Items
         {
             base.GetContextMenuEntries(from, list);
 
-            if (from.Alive && Identified == false)
+            if (from is IZuluClassed { ZuluClass.Type: ZuluClassType.Mage } && from.Alive && Identified == false)
             {
                 list.Add(new IdentifyEntry(from, this));
             }
@@ -245,6 +246,12 @@ namespace ZuluContent.Zulu.Items
                 canLift = Movable = false;
 
             return canLift;
+        }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (Movable && IsAccessibleTo(from))
+                from.EquipItem(this);
         }
 
         public override void Serialize(IGenericWriter writer)
