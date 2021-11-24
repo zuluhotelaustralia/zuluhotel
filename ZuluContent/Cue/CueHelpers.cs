@@ -160,7 +160,7 @@ namespace Scripts.Cue
             var path = Path.Combine(dir, $"{name}.dll");
             var asm = Load(path);
 
-            var cfg = new CueFSharp.DotnetToCue.Config.Config
+            /*var cfg = new CueFSharp.DotnetToCue.Config.Config
             {
                 Cue =
                 {
@@ -175,15 +175,13 @@ namespace Scripts.Cue
 
             cfg.Dotnet.Types.Filter = Microsoft.FSharp.Core.FuncConvert.FromFunc((Type t) => types.Contains(t.FullName));
             cfg.Write.RootDir = "Configuration/Generated";
-            cfg.Write.RootModule = $"{module}";
+            cfg.Write.RootModule = $"{module}";*/
 
-            var registry = CueFSharp.DotnetToCue.Register.Registry.New(cfg);
-
-            registry.AddTypeAlias(typeof(Type).FullName, "string | null");
-            registry.AddTypeAlias(typeof(TimeSpan).FullName, @"=~ ""^[0-9]+:[0-9]+:[0-9]+$""");
-            registry.AddTypeAlias(typeof(Body).FullName, @"int & >= 0");
-            registry.AddTypeAlias(typeof(Poison).FullName, string.Join(" | ", Poison.Poisons.Select(p => $"\"{p.Name}\"")) + " | null");
-            registry.AddTypeAlias(typeof(InhumanSpeech).FullName, @"string | null");
+            // registry.AddTypeAlias(typeof(Type).FullName, "string | null");
+            // registry.AddTypeAlias(typeof(TimeSpan).FullName, @"=~ ""^[0-9]+:[0-9]+:[0-9]+$""");
+            // registry.AddTypeAlias(typeof(Body).FullName, @"int & >= 0");
+            // registry.AddTypeAlias(typeof(Poison).FullName, string.Join(" | ", Poison.Poisons.Select(p => $"\"{p.Name}\"")) + " | null");
+            // registry.AddTypeAlias(typeof(InhumanSpeech).FullName, @"string | null");
 
             var weaponAbilities = typeof(WeaponAbility)
                 .GetInheritedClasses()
@@ -197,10 +195,10 @@ namespace Scripts.Cue
                 "}\n"
             );
 
-            registry.AddTypeAlias(typeof(WeaponAbility).FullName, string.Join(" | \n", weaponAbilities));
-
-            registry.Assembly(asm);
-            registry.Write();
+            // registry.AddTypeAlias(typeof(WeaponAbility).FullName, string.Join(" | \n", weaponAbilities));
+            //
+            // registry.Assembly(asm);
+            // registry.Write();
         }
     }
 }
