@@ -47,12 +47,28 @@ namespace Server.Gumps
 
                 if (hotBar.Direction == Direction.Right)
                 {
-                    AddButton(50 + x, y, spellIcon, spellIcon, 2 + i);
+                    if (m_HotBar.Book.HasSpell(spellEntry))
+                    {
+                        AddButton(50 + x, y, spellIcon, spellIcon, 2 + i);
+                    }
+                    else
+                    {
+                        AddImage(50 + x, y, spellIcon, 37);
+                    }
                 }
                 else if (hotBar.Direction == Direction.Down)
                 {
-                    AddButton(y, 70 + x, spellIcon, spellIcon, 2 + i);
+                    if (m_HotBar.Book.HasSpell(spellEntry))
+                    {
+                        AddButton(y, 70 + x, spellIcon, spellIcon, 2 + i);
+                    }
+                    else
+                    {
+                        AddImage(y, 70 + x, spellIcon, 37);
+                    }
                 }
+                
+                AddTooltip(1042971, SpellRegistry.GetInfo(spellEntry).Name);
             }
         }
 
@@ -70,14 +86,18 @@ namespace Server.Gumps
                 else if (buttonID is >= 0 and < 16)
                 {
                     var spellEntry = (SpellEntry)m_HotBar.Book.BookOffset + buttonID;
-
-                    if (m_HotBar.Book.HasSpell(spellEntry))
+                    
+                    if (m_HotBar.Book.RootParent != from)
                     {
-                        SpellRegistry.Create(spellEntry, from, m_HotBar.Book).Cast();
+                        playerMobile.SendFailureMessage("That spellbook is no longer in your possession.");
+                    }
+                    else if (!m_HotBar.Book.HasSpell(spellEntry))
+                    {
+                        playerMobile.SendFailureMessage("That spellbook does not have that spell.");
                     }
                     else
                     {
-                        playerMobile.SendFailureMessage("That spellbook does not have that spell.");
+                        SpellRegistry.Create(spellEntry, from).Cast();
                     }
                     
                     playerMobile.SendGump(new CustomSpellHotBarGump(m_HotBar));
