@@ -50,6 +50,10 @@ namespace Server.Misc
             {
                 Restart(e);
             }
+            else
+            {
+                e.Close = true;
+            }
         }
 
         private static void SendEmail(string filePath)

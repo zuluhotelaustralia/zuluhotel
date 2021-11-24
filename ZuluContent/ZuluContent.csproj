@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <UseNETCoreGenerator>true</UseNETCoreGenerator>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CueFSharp\CueFSharp.fsproj" />
     <ProjectReference Include="..\ModernUO\Projects\Server\Server.csproj">
       <Private>false</Private>
     </ProjectReference>
