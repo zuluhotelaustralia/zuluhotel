@@ -11,7 +11,7 @@ namespace Scripts.Zulu.Packets
 {
     public static class ClilocList
     {
-        public static readonly TextInfo TextInfo = new CultureInfo("en-US", false).TextInfo;
+        public static readonly TextInfo TextInfo = new CultureInfo("", false).TextInfo;
 
         
         public static SortedDictionary<int, string> Load(string path)

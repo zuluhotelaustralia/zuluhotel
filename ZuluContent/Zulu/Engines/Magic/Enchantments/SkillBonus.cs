@@ -67,7 +67,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public static string GetName(SkillName name, double value, CurseType curse)
         {
-            var n = Math.Abs(value) > 6 ? (int)  Math.Abs(value) / 5 : (int) Math.Abs(value);
+            var n = Math.Abs(value) > 6 ? (int)  Math.Abs(value) / 3 : (int) Math.Abs(value);
             return SkillSpecificNames[name][n, curse > CurseType.Unrevealed ? 1 : 0];
         }
 

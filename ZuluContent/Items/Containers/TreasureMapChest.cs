@@ -73,16 +73,28 @@ namespace Server.Items
             m_Timer = new DeleteTimer(this, m_DeleteTime);
             m_Timer.Start();
 
-            Fill(this, level);
+            Fill(this, owner, level);
         }
 
-        public static void Fill(LockableContainer cont, int level)
+        public static void Fill(LockableContainer cont, Mobile owner, int level)
         {
             cont.Movable = false;
             cont.Locked = true;
 
-            // TODO: Update to correct loot table based on map level
-            // LootGenerator.MakeLoot(cont, LootTable.Table2, 1, 1);
+            var lootTable = level switch
+            {
+                0 => "5",
+                1 => "6",
+                2 => "7",
+                3 => "8",
+                4 => "9",
+                5 => "9",
+                _ => "5"
+            };
+
+            ZhConfig.Loot.Tables.TryGetValue(lootTable, out var table);
+            
+            LootGenerator.MakeLoot(owner, cont, table, 1, 1);
         }
 
         public override bool CheckLocked(Mobile from)

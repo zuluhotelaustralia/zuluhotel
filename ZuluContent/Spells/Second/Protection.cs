@@ -28,7 +28,7 @@ namespace Server.Spells.Second
             
             SpellHelper.Turn(Caster, target);
 
-            target.FixedParticles(0x373B, 9, 20, 5027, EffectLayer.Waist);
+            target.FixedParticles(0x373A, 10, 15, 5018, EffectLayer.Waist);
             target.PlaySound(0x1ED);
         }
     }

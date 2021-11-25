@@ -46,7 +46,7 @@ package Types
 	MinTameSkill:            0
 	OppositionGroup:         null
 	Race:                    null
-	ReacquireDelay:          "00:00:10"
+	ReacquireDelay:          "00:00:04"
 	RiseCreatureDelay:       "00:00:10"
 	RiseCreatureTemplate:    null
 	SaySpellMantra:          true

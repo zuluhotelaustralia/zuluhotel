@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Server.Gumps;
+using Server.Mobiles;
 using Server.Network;
 
 namespace Server.Engines.Spawners
@@ -150,13 +151,13 @@ namespace Server.Engines.Spawners
                 if (cte == null)
                     continue;
 
-                var str = cte.Text.Trim().ToLower();
+                var str = cte.Text.Trim();
 
                 if (str.Length > 0)
                 {
-                    var type = AssemblyHandler.FindTypeByName(str);
+                    var exists = Creatures.Exists(str);
 
-                    if (type == null)
+                    if (!exists)
                     {
                         from.SendMessage("{0} is not a valid type name for entry #{1}.", str, i);
                         return;

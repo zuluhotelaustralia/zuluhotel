@@ -97,7 +97,7 @@ namespace Server.Saves
 
             Directory.CreateDirectory(AutomaticBackupPath);
             var backupPath = Path.Combine(AutomaticBackupPath, Utility.GetTimeStamp());
-            Directory.Move(args.OldSavePath, backupPath);
+            PathUtility.MoveDirectory(args.OldSavePath, backupPath);
 
             logger.Information($"Created backup at {backupPath}");
 
@@ -150,7 +150,7 @@ namespace Server.Saves
                 Directory.Delete(savePath, true);
                 var dirInfo = new DirectoryInfo(folder);
                 logger.Information($"Restoring backup {dirInfo.Name}");
-                Directory.Move(folder, savePath);
+                PathUtility.MoveDirectory(folder, savePath);
                 break;
             }
 
@@ -314,7 +314,7 @@ namespace Server.Saves
             foreach (var (rangeStart, sortedBackups) in items)
             {
                 var backups = sortedBackups.Values;
-                if (backups.Count == 0)
+                if (backups.Count <= minimum)
                 {
                     continue;
                 }
@@ -397,7 +397,9 @@ namespace Server.Saves
 
                 if (TryGetDate(name, out var date))
                 {
-                    items.Add(date, item);
+                    // Might give wrong results if there is a file that matches:
+                    // Example: 2021-09-01, and 2021-09-01-00
+                    items[date] = item;
                 }
             }
 
@@ -435,7 +437,6 @@ namespace Server.Saves
             }
             catch
             {
-                logger.Warning($"Path was not in the correct date format: {value}");
                 date = DateTime.MinValue;
                 return false;
             }

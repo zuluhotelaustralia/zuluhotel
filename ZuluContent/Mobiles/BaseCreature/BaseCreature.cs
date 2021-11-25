@@ -872,9 +872,8 @@ namespace Server.Mobiles
                     from.CriminalAction(true);
             }
         }
-
-        public const int DefaultRangePerception = 16;
-        public const int OldRangePerception = 10;
+        
+        public const int DefaultRangePerception = 10;
 
         public BaseCreature(AIType ai,
             FightMode mode,
@@ -883,9 +882,6 @@ namespace Server.Mobiles
             double dActiveSpeed,
             double dPassiveSpeed)
         {
-            if (iRangePerception == OldRangePerception)
-                iRangePerception = DefaultRangePerception;
-
             m_Loyalty = MaxLoyalty; // Wonderfully Happy
 
             m_CurrentAI = ai;
@@ -1065,9 +1061,6 @@ namespace Server.Mobiles
             ActiveSpeed = reader.ReadDouble();
             PassiveSpeed = reader.ReadDouble();
             m_dCurrentSpeed = reader.ReadDouble();
-
-            if (RangePerception == OldRangePerception)
-                RangePerception = DefaultRangePerception;
 
             m_pHome.X = reader.ReadInt();
             m_pHome.Y = reader.ReadInt();
@@ -3175,17 +3168,6 @@ namespace Server.Mobiles
 
         public override bool OnBeforeDeath()
         {
-            int treasureLevel = TreasureMapLevel;
-
-            if (!Summoned && !NoKillAwards)
-            {
-                if (treasureLevel >= 0)
-                {
-                    if (Map == Map.Felucca && TreasureMap.LootChance >= Utility.RandomDouble())
-                        PackItem(new TreasureMap(treasureLevel, Map));
-                }
-            }
-
             if (!Summoned && !NoKillAwards && !m_HasGeneratedLoot)
             {
                 m_HasGeneratedLoot = true;

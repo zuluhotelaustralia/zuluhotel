@@ -1149,7 +1149,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "BlackPearl"
@@ -1319,7 +1319,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "BlackPearl"
@@ -1383,7 +1383,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Beneficial"
 		}
 		ReagentCosts: [{
 			Reagent: "Garlic"
@@ -1554,7 +1554,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "Garlic"
@@ -1593,7 +1593,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "BlackPearl"
@@ -1662,7 +1662,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "BlackPearl"
@@ -1701,7 +1701,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "BlackPearl"
@@ -1848,7 +1848,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Beneficial"
 		}
 		ReagentCosts: [{
 			Reagent: "Garlic"
@@ -1887,7 +1887,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "Bloodmoss"
@@ -1985,7 +1985,7 @@ Spells: {
 			AllowMultis:   true
 			AllowNonLocal: false
 			CheckLos:      true
-			Flags:         "None"
+			Flags:         "Harmful"
 		}
 		ReagentCosts: [{
 			Reagent: "Bloodmoss"

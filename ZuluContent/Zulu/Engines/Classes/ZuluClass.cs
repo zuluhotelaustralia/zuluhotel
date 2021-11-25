@@ -192,9 +192,10 @@ namespace Scripts.Zulu.Engines.Classes
 
             foreach (var skill in pm.Skills)
             {
-                skill.Base = ClassSkills[classType].Contains(skill.SkillName)
+                var skillLevel = ClassSkills[classType].Contains(skill.SkillName)
                     ? MinSkills[level] / ClassSkills[classType].Length
                     : 0.0;
+                skill.Base = Math.Min(skillLevel, ZhConfig.Skills.StatCap / 10.0);
             }
         }
 
