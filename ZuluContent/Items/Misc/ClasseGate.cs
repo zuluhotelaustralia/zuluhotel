@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Scripts.Zulu.Engines.Classes;
 using Server.Mobiles;
@@ -21,6 +22,7 @@ namespace Server.Items
             ZuluClass.SetClass(playerMobile, ClasseType, ClasseLevel);
 
             var stat = 60 + ClasseLevel * 15;
+            stat = Math.Min(stat, ZhConfig.Skills.StatCap / 10);
             playerMobile.Str = stat;
             playerMobile.Dex = stat;
             playerMobile.Int = stat;

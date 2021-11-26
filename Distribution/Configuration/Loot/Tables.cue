@@ -893,7 +893,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -1046,13 +1046,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
@@ -1115,7 +1115,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.04
-			Value:       "MissingObject.Level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -1160,7 +1160,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.04
-			Value:       "MissingObject.Level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -1193,7 +1193,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.08
-			Value:       "MissingObject.Level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -1259,13 +1259,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.1
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.2
-			Value:       "MissingObject.Level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -1280,13 +1280,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.4
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.2
-			Value:       "MissingObject.Level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -1406,13 +1406,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.1
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.2
-			Value:       "MissingObject.Level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -1445,7 +1445,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -1625,7 +1625,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.level6map"
+			Value:       "TreasureMapLevel6"
 		},
 	]
 
@@ -1715,7 +1715,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.7
-			Value:       "MissingObject.level6map"
+			Value:       "TreasureMapLevel6"
 		},
 	]
 
@@ -1742,13 +1742,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 		{
 			MinQuantity: 1
@@ -1781,7 +1781,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 		{
 			MinQuantity: 1
@@ -1808,7 +1808,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 		{
 			MinQuantity: 1
@@ -1835,13 +1835,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -1907,13 +1907,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -2075,7 +2075,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.25
-			Value:       "MissingObject.level6map"
+			Value:       "TreasureMapLevel6"
 		},
 	]
 
@@ -2201,7 +2201,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.25
-			Value:       "MissingObject.level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -2318,13 +2318,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level5map"
+			Value:       "TreasureMapLevel5"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.1
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -2441,13 +2441,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level5map"
+			Value:       "TreasureMapLevel5"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.1
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -2480,7 +2480,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.03
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -2567,13 +2567,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.1
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -2654,13 +2654,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.Level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -2720,7 +2720,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -2771,13 +2771,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -2804,13 +2804,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 		{
 			MinQuantity: 1
@@ -2843,7 +2843,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -2906,7 +2906,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -2939,7 +2939,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.Level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3089,13 +3089,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level5map"
+			Value:       "TreasureMapLevel5"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.1
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -3146,13 +3146,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -3245,13 +3245,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.07
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.03
-			Value:       "MissingObject.level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -3296,13 +3296,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3347,13 +3347,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3389,13 +3389,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -3422,7 +3422,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3482,7 +3482,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3503,7 +3503,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3530,7 +3530,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.Level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -3599,13 +3599,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.Level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -3839,7 +3839,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -3860,7 +3860,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -3959,13 +3959,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -4061,13 +4061,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -4112,13 +4112,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -4184,13 +4184,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -4235,13 +4235,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 	]
 
@@ -4262,13 +4262,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -4301,13 +4301,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -4358,13 +4358,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -4460,13 +4460,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -4493,13 +4493,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -4520,7 +4520,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -4583,13 +4583,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.04
-			Value:       "MissingObject.Level3map"
+			Value:       "TreasureMapLevel3"
 		},
 	]
 
@@ -4628,7 +4628,7 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.03
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -4709,13 +4709,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -4742,13 +4742,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level2map"
+			Value:       "TreasureMapLevel2"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.05
-			Value:       "MissingObject.level1map"
+			Value:       "TreasureMapLevel1"
 		},
 	]
 
@@ -4805,13 +4805,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level3map"
+			Value:       "TreasureMapLevel3"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.Level4map"
+			Value:       "TreasureMapLevel4"
 		},
 	]
 
@@ -4874,13 +4874,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.01
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.Level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 
@@ -4949,13 +4949,13 @@ Tables: {
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.02
-			Value:       "MissingObject.level4map"
+			Value:       "TreasureMapLevel4"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      0.04
-			Value:       "MissingObject.Level5map"
+			Value:       "TreasureMapLevel5"
 		},
 	]
 

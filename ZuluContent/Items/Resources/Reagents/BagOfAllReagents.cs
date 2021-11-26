@@ -7,7 +7,7 @@ namespace Server.Items
     public partial class BagOfAllReagents : Bag
     {
         [Constructible]
-        public BagOfAllReagents() : this(50)
+        public BagOfAllReagents() : this(200)
         {
         }
 

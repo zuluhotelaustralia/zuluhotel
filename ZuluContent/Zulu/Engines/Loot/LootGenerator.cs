@@ -10,6 +10,7 @@ using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using static Server.Utility;
 using ZuluContent.Zulu.Engines.Magic;
+using ZuluContent.Zulu.Items;
 
 namespace Server.Scripts.Engines.Loot
 {
@@ -47,6 +48,7 @@ namespace Server.Scripts.Engines.Loot
         public int BonusDex;
         public SkillName SkillBonusName;
         public int SkillBonusValue;
+        public int SkillBonusMultiplier;
         public SpellEntry SpellHitEntry { get; set; } = SpellEntry.None;
         public double SpellHitChance { get; set; }
         public CreatureType CreatureProtection { get; set; }
@@ -63,7 +65,7 @@ namespace Server.Scripts.Engines.Loot
         public bool Is<T>() => Type.IsSubclassOf(typeof(T));
 
 
-        public Item Create(Mobile killedBy)
+        public Item Create(Mobile? killedBy)
         {
             Item item = null;
             try
@@ -148,7 +150,7 @@ namespace Server.Scripts.Engines.Loot
                     }
                 }
 
-                if (StaffRevealMagicItems && killedBy.AccessLevel >= AccessLevel.GameMaster)
+                if (StaffRevealMagicItems && killedBy?.AccessLevel >= AccessLevel.GameMaster)
                 {
                     magicItem.Identified = true;
                     magicItem.Enchantments.OnIdentified(item);
@@ -227,7 +229,15 @@ namespace Server.Scripts.Engines.Loot
 
             switch (item.Type)
             {
-                case not null when item.Is<BaseWeapon>():
+                case not null when !item.Is<IGMItem>() &&
+                                   (item.Type == typeof(SmithHammer) || item.Type == typeof(Pickaxe)):
+                {
+                    ApplyMiscSkillMod(item, item.Type == typeof(SmithHammer) ? SkillName.Blacksmith : SkillName.Mining,
+                        3);
+                    break;
+                }
+                
+                case not null when !item.Is<IGMItem>() && item.Is<BaseWeapon>() && item.Type != typeof(BaseWand):
                 {
                     if (RandomDouble() < 0.2)
                         if (RandomBool())
@@ -256,7 +266,7 @@ namespace Server.Scripts.Engines.Loot
                     break;
                 }
 
-                case not null when item.Is<BaseShield>():
+                case not null when !item.Is<IGMItem>() && item.Is<BaseShield>():
                 {
                     switch (item.EnchantLevel)
                     {
@@ -304,13 +314,7 @@ namespace Server.Scripts.Engines.Loot
                     break;
                 }
 
-                case not null when item.Is<BaseTool>() || item.Type == typeof(Pickaxe):
-                {
-                    ApplyMiscSkillMod(item);
-                    break;
-                }
-
-                case not null when item.Is<BaseArmor>():
+                case not null when item.Is<BaseArmor>() && !item.Is<IGMItem>():
                 {
                     switch (item.EnchantLevel)
                     {
@@ -339,22 +343,22 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyCursed(LootItem item)
         {
-            if (Utility.Random(1, 100) <= 5)
+            if (RandomMinMax(1, 100) <= 5)
                 item.Cursed = true;
         }
 
 
-        private static void ApplyMiscSkillMod(LootItem item)
+        private static void ApplyMiscSkillMod(LootItem item, SkillName? skillBonus = null, int skillBonusMultiplier = 0)
         {
-            var chance = Utility.Random(1, 1000);
+            var chance = RandomMinMax(1, 1000);
             if (chance <= 5)
             {
                 ApplyStatMod(item);
                 return;
             }
 
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
-            int value = 0;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
+            var value = 0;
 
 
             switch (item.ItemLevel / 3)
@@ -366,12 +370,6 @@ namespace Server.Scripts.Engines.Loot
                 case 2:
                     if (level < 300)
                         level = 300;
-                    break;
-                case 3:
-                case 4:
-                case 5:
-                    if (level < 400)
-                        level = 400;
                     break;
             }
 
@@ -385,18 +383,26 @@ namespace Server.Scripts.Engines.Loot
                 _ => 6
             };
 
-            var skill = RandomSkill();
+            if (skillBonus != null)
+            {
+                item.SkillBonusName = (SkillName)skillBonus;
+                item.SkillBonusValue = skillBonusMultiplier > 0 ? value * skillBonusMultiplier : value;
+            }
+            else
+            {
+                var skill = RandomSkill();
+            
+                if (ZuluClass.ClassSkills[ZuluClassType.Mage].Contains(skill) && item.ArmorMod > 0 && RandomBool())
+                    item.ArmorMod = 0;
 
-            if (ZuluClass.ClassSkills[ZuluClassType.Mage].Contains(skill) && item.ArmorMod > 0 && RandomBool())
-                item.ArmorMod = 0;
-
-            item.SkillBonusName = skill;
-            item.SkillBonusValue = value;
+                item.SkillBonusName = skill;
+                item.SkillBonusValue = value;
+            }
         }
 
         private static void ApplyOnHitScript(LootItem item, Container container)
         {
-            var scriptType = Utility.Random(1, 94) + item.ItemLevel * 2;
+            var scriptType = RandomMinMax(1, 94) + item.ItemLevel * 2;
             
             if (scriptType <= 80)
                 ApplyResistantHitscript(item);
@@ -411,7 +417,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyWeaponHitScript(LootItem item, Container container)
         {
-            var scriptType = Utility.Random(1, 94) + item.ItemLevel * 2;
+            var scriptType = RandomMinMax(1, 94) + item.ItemLevel * 2;
 
             if (scriptType <= 40)
                 ApplySpellHitscript(item);
@@ -463,7 +469,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplySpellHitscript(LootItem item)
         {
-            var roll = (Utility.Random(100) + 1) * (item.ItemLevel - 3);
+            var roll = RandomMinMax(1, 100) * (item.ItemLevel - 3);
 
             var circle = roll switch
             {
@@ -483,7 +489,7 @@ namespace Server.Scripts.Engines.Loot
                 .RandomElement();
 
 
-            var effectChance = Utility.Random(1, 10) * item.ItemLevel / (double) 100;
+            var effectChance = RandomMinMax(1, 10) * item.ItemLevel / (double) 100;
             // var effectChancemod = hitscriptcfg[n].ChanceOfEffectMod;
 
             var effectChanceMod = 0.0;
@@ -518,7 +524,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyStatMod(LootItem item)
         {
-            var level = Utility.Random(1, 100) * item.ItemLevel;
+            var level = RandomMinMax(1, 100) * item.ItemLevel;
 
             int amount = level switch
             {
@@ -530,7 +536,7 @@ namespace Server.Scripts.Engines.Loot
                 _ => 30
             };
 
-            switch (Utility.Random(1, 3))
+            switch (RandomMinMax(1, 3))
             {
                 case 1:
                     item.BonusStr = amount;
@@ -543,13 +549,13 @@ namespace Server.Scripts.Engines.Loot
                     break;
             }
 
-            if (Utility.Random(1, 100) <= 2 * item.ItemLevel)
+            if (RandomMinMax(1, 100) <= 2 * item.ItemLevel)
                 ApplyDurabilityMod(item);
         }
 
         private static void ApplyEnchant(LootItem item)
         {
-            var level = Utility.Random(1, 100) * item.ItemLevel;
+            var level = RandomMinMax(1, 100) * item.ItemLevel;
 
             if (level < 200)
             {
@@ -563,9 +569,9 @@ namespace Server.Scripts.Engines.Loot
             }
 
 
-            if (Utility.Random(1, 100) <= 5 * item.ItemLevel)
+            if (RandomMinMax(1, 100) <= 5 * item.ItemLevel)
             {
-                level = Utility.Random(1, 100);
+                level = RandomMinMax(1, 100);
 
                 if (level < 75)
                     ApplyMiscSkillMod(item);
@@ -576,7 +582,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyProtection(LootItem item)
         {
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
             int charges = 0;
             ElementalType chargeProtection = 0;
 
@@ -608,7 +614,7 @@ namespace Server.Scripts.Engines.Loot
                 _ => 30
             };
 
-            chargeProtection = Utility.Random(1, 3) switch
+            chargeProtection = RandomMinMax(1, 3) switch
             {
                 1 => ElementalType.Poison,
                 2 => ElementalType.MagicImmunity,
@@ -622,7 +628,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyImmunity(LootItem item)
         {
-            var level = Utility.Random(1, 100) * (item.ItemLevel - 3);
+            var level = RandomMinMax(1, 100) * (item.ItemLevel - 3);
             ElementalProtectionLevel value = 0;
             ElementalType element = 0;
 
@@ -654,7 +660,7 @@ namespace Server.Scripts.Engines.Loot
                 _ => ElementalProtectionLevel.Absorbsion
             };
 
-            switch (Utility.Random(1, 3))
+            switch (RandomMinMax(1, 3))
             {
                 case 1:
                     element = ElementalType.Poison;
@@ -673,7 +679,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyElementalImmunity(LootItem item)
         {
-            var level = Utility.Random(1, 100) * item.ItemLevel;
+            var level = RandomMinMax(1, 100) * item.ItemLevel;
             ElementalProtectionLevel value = 0;
             ElementalType element = 0;
 
@@ -705,7 +711,7 @@ namespace Server.Scripts.Engines.Loot
                 _ => ElementalProtectionLevel.Absorbsion
             };
 
-            switch (Utility.Random(1, 8))
+            switch (RandomMinMax(1, 8))
             {
                 case 1:
                     element = ElementalType.Fire;
@@ -742,13 +748,13 @@ namespace Server.Scripts.Engines.Loot
         {
             do
             {
-                item.Hue = Utility.Random(1, 1184);
+                item.Hue = RandomMinMax(1, 1184);
             } while (item.Hue > 999 && item.Hue < 1152);
         }
 
         private static void ApplyDamageMod(LootItem item)
         {
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
             WeaponDamageLevel value = 0;
 
             switch (item.ItemLevel / 3)
@@ -779,9 +785,9 @@ namespace Server.Scripts.Engines.Loot
                 _ => WeaponDamageLevel.Devastation
             };
 
-            if (Utility.Random(1, 100) <= 10 * item.ItemLevel)
+            if (RandomMinMax(1, 100) <= 10 * item.ItemLevel)
             {
-                if (Utility.Random(1, 100) <= 75)
+                if (RandomMinMax(1, 100) <= 75)
                     ApplyDurabilityMod(item);
                 else
                     ApplyArmorSkillMod(item);
@@ -792,7 +798,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyMiscArmorMod(LootItem item)
         {
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
             {
@@ -824,21 +830,21 @@ namespace Server.Scripts.Engines.Loot
 
             item.ArmorMod = value;
 
-            if (Utility.Random(100) + 1 <= 8 * item.ItemLevel)
+            if (RandomMinMax(1, 100) <= 8 * item.ItemLevel)
                 ApplyMiscSkillMod(item);
         }
 
 
         private static void ApplyWeaponSkillMod(LootItem item)
         {
-            var chance = Utility.Random(1, 1000);
+            var chance = RandomMinMax(1, 1000);
             if (chance <= 5)
             {
                 ApplyStatMod(item);
                 return;
             }
 
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
             {
@@ -849,12 +855,6 @@ namespace Server.Scripts.Engines.Loot
                 case 2:
                     if (level < 200)
                         level = 200;
-                    break;
-                case 3:
-                case 4:
-                case 5:
-                    if (level < 350)
-                        level = 350;
                     break;
             }
 
@@ -868,23 +868,22 @@ namespace Server.Scripts.Engines.Loot
                 _ => WeaponAccuracyLevel.Supremely
             };
 
-            // TODO: convert into weapon BaseWeapon.DefSkill on random bool
             item.AccuracyLevel = value;
 
-            if (Utility.Random(1, 100) < 5 * item.ItemLevel)
+            if (RandomMinMax(1, 100) < 5 * item.ItemLevel)
                 ApplyDurabilityMod(item);
         }
 
         private static void ApplyArmorSkillMod(LootItem item)
         {
-            var chance = Utility.Random(1, 1000);
+            var chance = RandomMinMax(1, 1000);
             if (chance <= 5)
             {
                 ApplyStatMod(item);
                 return;
             }
 
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
 
             switch (item.ItemLevel / 3)
             {
@@ -917,13 +916,13 @@ namespace Server.Scripts.Engines.Loot
             item.SkillBonusName = RandomBool() ? SkillName.MagicResist : SkillName.Hiding;
             item.SkillBonusValue = value;
 
-            if (Utility.Random(1, 100) <= 5 * item.ItemLevel)
+            if (RandomMinMax(1, 100) <= 5 * item.ItemLevel)
                 ApplyDurabilityMod(item);
         }
 
         private static void ApplyArmorMod(LootItem item)
         {
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
             var value = ArmorProtectionLevel.Regular;
 
             switch (item.ItemLevel / 3)
@@ -954,9 +953,9 @@ namespace Server.Scripts.Engines.Loot
                 _ => ArmorProtectionLevel.Invincibility
             };
 
-            if (Utility.Random(1, 100) <= 10 * item.ItemLevel)
+            if (RandomMinMax(1, 100) <= 10 * item.ItemLevel)
             {
-                if (Utility.Random(1, 100) <= 75)
+                if (RandomMinMax(1, 100) <= 75)
                     ApplyDurabilityMod(item);
                 else
                     ApplyArmorSkillMod(item);
@@ -967,7 +966,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyDurabilityMod(LootItem item)
         {
-            var level = Utility.Random(1, 50) * item.ItemLevel * 2;
+            var level = RandomMinMax(1, 50) * item.ItemLevel * 2;
             int value = 0;
 
             switch (item.ItemLevel / 3)

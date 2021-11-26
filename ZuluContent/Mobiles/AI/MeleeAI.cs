@@ -180,6 +180,10 @@ namespace Server.Mobiles
                 }
             }
 
+            // If the attacker is not attacking anything and I'm in range, attack me
+            if (combatant.Combatant == null)
+                combatant.Combatant = m_Mobile;
+
             return true;
         }
 

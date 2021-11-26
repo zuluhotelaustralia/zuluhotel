@@ -639,85 +639,85 @@ import (
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SagesRobe"
+			Value:       "SageRobe"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SylvianFemaleStudded"
+			Value:       "FemaleSylvianChest"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SylvianStuddedTunic"
+			Value:       "SylvianChest"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SylvianStuddedLeggings"
+			Value:       "SylvianLegs"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SylvianStuddedSleeves"
+			Value:       "SylvianArms"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SylvianStuddedGloves"
+			Value:       "SylvianGloves"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.SylvianStuddedGorget"
+			Value:       "SylvianGorget"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.InfernalRingmailGloves"
+			Value:       "InfernalGloves"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.InfernalRingmailLeggings"
+			Value:       "InfernalLegs"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.InfernalRingmailSleeves"
+			Value:       "InfernalArms"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.InfernalRingmailTunic"
+			Value:       "InfernalChest"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.ZephyrChainmailTunic"
+			Value:       "ZephyrChest"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.ZephyrChainmailLeggings"
+			Value:       "ZephyrLegs"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.ZephyrChainmailCoif"
+			Value:       "ZephyrCoif"
 		},
 		{
 			MinQuantity: 1
@@ -936,13 +936,13 @@ import (
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.XarafaxsAxe"
+			Value:       "XarafaxsAxe"
 		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.OmerosPickaxe"
+			Value:       "OmerosPickaxe"
 		},
 		{
 			MinQuantity: 1
@@ -1605,7 +1605,7 @@ import (
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.Honey"
+			Value:       "JarHoney"
 		},
 		{
 			MinQuantity: 1
@@ -2229,7 +2229,7 @@ import (
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.lifecrystal"
+			Value:       "LifeCrystal"
 		},
 		{
 			MinQuantity: 1
