@@ -1,6 +1,8 @@
 {
   "dataDirectories": [
-    "D:\\zhmodern\\Zulu Hotel Modern"
+    "/app/client/",
+    "C:\\Program Files (x86)\\Electronic Arts\\Ultima Online Classic",
+    "D:\\Program Files (x86)\\Electronic Arts\\Ultima Online Classic"
   ],
   "listeners": [
     "0.0.0.0:2593"
@@ -26,7 +28,6 @@
     "pathfinding.enable": "True",
     "visibleDamage": "True",
     "singleClickProps": "False",
-    "movement.enableFastWalkPrevention": "False",
-    "autoArchive.compressionFormat": "Zip"
+    "movement.enableFastWalkPrevention": "False"
   }
 }
