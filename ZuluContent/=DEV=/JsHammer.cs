@@ -1,4 +1,6 @@
 using System;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Server.Items;
 using Server.Network;
 
@@ -29,9 +31,11 @@ public class JsHammer : BaseBashing
         SendGump(from);
     }
 
+    record JsGumpResponse(string Text, bool? Something, string LongString);
+
     private async void SendGump(Mobile from)
     {
-        var response = await new JsGump<dynamic, string>(
+        var response = await new JsGump<dynamic, JsGumpResponse>(
             "TestGump", 
             from, 
             new
