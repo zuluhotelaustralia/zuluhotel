@@ -332,7 +332,7 @@ namespace Server.Misc
 
         private static void SetStats(Mobile m, NetState state, StatNameValue[] stats, int prof)
         {
-            var maxStats = state.NewCharacterCreation ? 90 : 80;
+            var maxStats = state?.NewCharacterCreation ?? false ? 90 : 80;
 
             var str = 0;
             var dex = 0;
