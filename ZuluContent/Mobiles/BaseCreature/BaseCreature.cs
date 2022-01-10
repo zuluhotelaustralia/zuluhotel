@@ -457,6 +457,12 @@ namespace Server.Mobiles
         public BaseAI AIObject { get; private set; }
 
         public const int MaxOwners = 5;
+        
+        public void StallMovement(TimeSpan stallTime)
+        {
+            if (AIObject != null)
+                AIObject.NextMove = Core.TickCount + (int)stallTime.TotalMilliseconds;
+        }
 
         #region Friends
 

@@ -7,7 +7,7 @@ BladeSpirit: {
 	Int:                25
 	Dex:                200
 	AlwaysMurderer:     true
-	BaseSoundID:        570
+	BaseSoundID:        569
 	Body:               574
 	CreatureType:       "Elemental"
 	VirtualArmor:       15

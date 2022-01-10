@@ -29,7 +29,7 @@ package Types
 	Hides:                   0
 	BaseSoundID:             null
 	Body:                    400
-	ItemID:									 0
+	ItemID:				     0
 	CanRummageCorpses:       true
 	CreatureType:            "None"
 	Female:                  false
@@ -46,7 +46,7 @@ package Types
 	MinTameSkill:            0
 	OppositionGroup:         null
 	Race:                    null
-	ReacquireDelay:          "00:00:04"
+	ReacquireDelay:          "00:00:02"
 	RiseCreatureDelay:       "00:00:10"
 	RiseCreatureTemplate:    null
 	SaySpellMantra:          true

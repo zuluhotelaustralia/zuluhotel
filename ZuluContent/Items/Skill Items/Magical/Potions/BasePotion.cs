@@ -2,6 +2,7 @@ using System;
 using Server.Engines.Craft;
 using System.Collections.Generic;
 using System.Linq;
+using Scripts.Zulu.Utilities;
 using Server.Network;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -85,7 +86,7 @@ namespace Server.Items
         {
         }
 
-        public virtual bool RequireFreeHand => true;
+        public virtual bool RequireFreeHand => false;
 
         public static bool HasFreeHand(Mobile m)
         {
@@ -112,13 +113,13 @@ namespace Server.Items
 
             if (!from.InRange(GetWorldLocation(), 1))
             {
-                from.SendLocalizedMessage(502138); // That is too far away for you to use
+                from.SendFailureMessage(502138); // That is too far away for you to use
                 return;
             }
 
             if (RequireFreeHand && !HasFreeHand(from))
             {
-                from.SendLocalizedMessage(502172); // You must have a free hand to drink a potion.
+                from.SendFailureMessage(502172); // You must have a free hand to drink a potion.
                 return;
             }
 

@@ -8,7 +8,7 @@ namespace Server.Items
 {
     public abstract class BaseExplosionPotion : BasePotion
     {
-        public override bool RequireFreeHand { get; } = false;
+        public override bool RequireFreeHand => false;
 
         private static bool LeveledExplosion = false; // Should explosion potions explode other nearby potions?
         private static bool InstantExplosion = false; // Should explosion potions explode on impact?
