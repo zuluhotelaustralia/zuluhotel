@@ -13,8 +13,6 @@ ProjectSection(SolutionItems) = preProject
 	.run\Server.run.xml = .run\Server.run.xml
 EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CueFSharp", "CueFSharp\CueFSharp.fsproj", "{544C2B55-8340-4861-B22E-FC40BC17063B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationGenerator", "ModernUO\Projects\SerializationGenerator\SerializationGenerator.csproj", "{515F5039-746A-48B8-BCB3-20752F03216B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationSchemaGenerator", "ModernUO\Projects\SerializationSchemaGenerator\SerializationSchemaGenerator.csproj", "{0858D431-9CB5-40DE-8069-5E70CC7A063A}"
@@ -37,10 +35,6 @@ Global
 		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Debug|x64.Build.0 = Debug|x64
 		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.ActiveCfg = Release|x64
 		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.Build.0 = Release|x64
-		{544C2B55-8340-4861-B22E-FC40BC17063B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{544C2B55-8340-4861-B22E-FC40BC17063B}.Debug|x64.Build.0 = Debug|Any CPU
-		{544C2B55-8340-4861-B22E-FC40BC17063B}.Release|x64.ActiveCfg = Release|Any CPU
-		{544C2B55-8340-4861-B22E-FC40BC17063B}.Release|x64.Build.0 = Release|Any CPU
 		{515F5039-746A-48B8-BCB3-20752F03216B}.Debug|x64.ActiveCfg = Debug|x64
 		{515F5039-746A-48B8-BCB3-20752F03216B}.Debug|x64.Build.0 = Debug|x64
 		{515F5039-746A-48B8-BCB3-20752F03216B}.Release|x64.ActiveCfg = Release|x64
