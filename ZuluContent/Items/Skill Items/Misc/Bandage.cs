@@ -84,7 +84,7 @@ namespace Server.Items
                         if (BandageContext.BeginHeal(from, targetedMobile) != null)
                         {
                             m_Bandage.Consume(amountToConsume);
-                            from.Backpack.TryDropItem(from, new BloodyBandage(amountToConsume), true, true);
+                            from.Backpack.TryDropItem(from, new BloodyBandage(amountToConsume), true, false);
                         }
                     }
                     else

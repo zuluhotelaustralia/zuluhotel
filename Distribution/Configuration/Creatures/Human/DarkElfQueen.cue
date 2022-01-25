@@ -48,7 +48,7 @@ DarkElfQueen: {
 		Animation: "Bash2H"
 		HitSound:  283
 		MissSound: 284
-		MaxRange:  12
+		MaxRange:  2
 	}
 	Equipment: [
 		{

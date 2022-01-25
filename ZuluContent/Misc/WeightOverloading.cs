@@ -1,4 +1,5 @@
 using System;
+using Scripts.Zulu.Utilities;
 using Server.Mobiles;
 
 namespace Server.Misc
@@ -20,18 +21,18 @@ namespace Server.Misc
 
         public static void FatigueOnDamage(Mobile m, int damage)
         {
-            double fatigue = 0.0;
+            var fatigue = 0.0;
             
             switch (DFA)
             {
                 case DFAlgorithm.Standard:
                 {
-                    fatigue = damage * (50.0 / m.Hits) * ((double) m.Stam / 100) - 5.0;
+                    fatigue = Utility.RandomMinMax(1, 3) * (Math.Max(100, damage) / 100.0);
                     break;
                 }
                 case DFAlgorithm.PainSpike:
                 {
-                    fatigue = damage * (50.0 / m.Hits + (50.0 + m.Stam) / 100 - 1.0) - 5.0;
+                    fatigue = damage * (25.0 / m.Hits + (50.0 + m.Stam) / 100 - 1.0) - 5.0;
                     break;
                 }
             }
@@ -63,24 +64,21 @@ namespace Server.Misc
 
                 if (from.Stam == 0)
                 {
-                    from.SendLocalizedMessage(
+                    from.SendFailureMessage(
                         500109); // You are too fatigued to move, because you are carrying too much weight!
                     e.Blocked = true;
                     return;
                 }
             }
 
-            if (@from.Stam * 100 / Math.Max(@from.StamMax, 1) < 10)
-                --from.Stam;
-
             if (from.Stam == 0)
             {
-                from.SendLocalizedMessage(500110); // You are too fatigued to move.
+                from.SendFailureMessage(500110); // You are too fatigued to move.
                 e.Blocked = true;
                 return;
             }
 
-            if (@from is PlayerMobile pm)
+            if (from is PlayerMobile pm)
             {
                 int amt = pm.Mounted ? 48 : 16;
 

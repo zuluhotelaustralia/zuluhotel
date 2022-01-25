@@ -53,7 +53,7 @@ BalronLord: {
 		}
 		HitSound:  772
 		MissSound: 770
-		MaxRange:  3
+		MaxRange:  2
 	}
 	Equipment: [{
 		ItemType:    "HeaterShield"

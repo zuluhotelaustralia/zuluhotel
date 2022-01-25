@@ -36,6 +36,6 @@ ShadeOfZanroth: {
 		Skill:     "Swords"
 		HitSound:  590
 		MissSound: 589
-		MaxRange:  8
+		MaxRange:  2
 	}
 }

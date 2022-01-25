@@ -43,7 +43,7 @@ MindFlayer: {
 			Max: 50
 		}
 		HitSound: 531
-		MaxRange: 6
+		MaxRange: 2
 		Ability: {
 			SpellType: "ControlUndead"
 		}

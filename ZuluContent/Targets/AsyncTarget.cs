@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.CompilerServices;
-using Server.Network;
 
 namespace Server.Targeting
 {
@@ -118,8 +117,12 @@ namespace Server.Targeting
         protected override void OnTargetFinish(Mobile from)
         {
             base.OnTargetFinish(from);
-            IsCompleted = true;
-            Continuation?.Invoke();
+
+            if (!IsCompleted)
+            {
+                IsCompleted = true;
+                Continuation?.Invoke();
+            }
         }
 
         protected override void OnTarget(Mobile from, object o)

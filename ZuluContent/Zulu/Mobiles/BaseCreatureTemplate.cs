@@ -93,6 +93,16 @@ namespace Server.Mobiles
                 {
                     EquipItem(new CreatureWeapon());
                 }
+
+                if (props.Attack.HasBreath == true)
+                {
+                    HasBreath = true;
+                }
+                
+                if (props.Attack.HasWebs == true)
+                {
+                    HasWebs = true;
+                }
                 
                 if (Weapon is BaseWeapon weapon)
                 {

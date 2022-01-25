@@ -48,6 +48,6 @@ BahamutWyrmKing: {
 		}
 		Skill:    "Swords"
 		HitSound: 362
-		MaxRange: 7
+		MaxRange: 2
 	}
 }

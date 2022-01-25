@@ -7,7 +7,7 @@ MageHunter: {
 	Int:                25
 	Dex:                150
 	AlwaysMurderer:     true
-	BaseSoundID:        570
+	BaseSoundID:        569
 	Body:               574
 	CreatureType:       "Elemental"
 	VirtualArmor:       30

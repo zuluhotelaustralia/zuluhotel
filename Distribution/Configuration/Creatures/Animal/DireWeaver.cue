@@ -34,6 +34,7 @@ DireWeaver: {
 		Skill:     "Swords"
 		HitSound:  389
 		MissSound: 390
+		HasWebs:   true
 		HitPoison: "Greater"
 	}
 	Equipment: [{

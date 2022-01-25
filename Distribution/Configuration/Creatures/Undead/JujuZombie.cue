@@ -36,6 +36,6 @@ JujuZombie: {
 		Skill:     "Swords"
 		HitSound:  283
 		MissSound: 284
-		MaxRange:  4
+		MaxRange:  2
 	}
 }
