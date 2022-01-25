@@ -46,7 +46,7 @@ Juggernaught: {
 		}
 		HitSound:  756
 		MissSound: 536
-		MaxRange:  6
+		MaxRange:  2
 		Ability: {
 			SpellType: "Lightning"
 		}

@@ -46,7 +46,7 @@ ElfLord: {
 		Animation: "Bash2H"
 		HitSound:  38
 		MissSound: 37
-		MaxRange:  12
+		MaxRange:  2
 	}
 	Equipment: [
 		{

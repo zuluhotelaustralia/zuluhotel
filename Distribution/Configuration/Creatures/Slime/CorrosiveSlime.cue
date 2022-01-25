@@ -35,6 +35,6 @@ CorrosiveSlime: {
 		}
 		Skill:    "Swords"
 		HitSound: 78
-		MaxRange: 7
+		MaxRange: 2
 	}
 }

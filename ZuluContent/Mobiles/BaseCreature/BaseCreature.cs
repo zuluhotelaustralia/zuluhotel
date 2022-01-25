@@ -404,7 +404,7 @@ namespace Server.Mobiles
 
         public virtual double SpitWebMinDelay
         {
-            get { return 10.0; }
+            get { return 5.0; }
         }
 
         public virtual double SpitWebMaxDelay

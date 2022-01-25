@@ -50,6 +50,6 @@ SoulSlayer: {
 		}
 		HitSound:  606
 		MissSound: 360
-		MaxRange:  5
+		MaxRange:  2
 	}
 }
