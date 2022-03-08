@@ -25,7 +25,7 @@ namespace Server.Network
         public static PacketHandler GetHandler(int packetID) =>
             packetID >= 0 && packetID < _handlers.Length ? _handlers[packetID] : null;
 
-        public static void DecodeBundledPacket(NetState state, CircularBufferReader reader, ref int packetLength)
+        public static void DecodeBundledPacket(NetState state, CircularBufferReader reader, int packetLength)
         {
             int packetID = reader.ReadByte();
 
@@ -46,18 +46,18 @@ namespace Server.Network
             }
             else
             {
-                ph.OnReceive(state, reader, ref packetLength);
+                ph.OnReceive(state, reader, packetLength);
             }
         }
 
-        public static void QueryGuildMemberLocations(NetState state, CircularBufferReader reader, ref int packetLength)
+        public static void QueryGuildMemberLocations(NetState state, CircularBufferReader reader, int packetLength)
         {
             Mobile from = state.Mobile;
 
             state.SendGuildMemberLocations(from, from.Guild as Guild, reader.ReadBoolean());
         }
 
-        public static void QueryPartyMemberLocations(NetState state, CircularBufferReader reader, ref int packetLength)
+        public static void QueryPartyMemberLocations(NetState state, CircularBufferReader reader, int packetLength)
         {
             Mobile from = state.Mobile;
             var party = Party.Get(from);

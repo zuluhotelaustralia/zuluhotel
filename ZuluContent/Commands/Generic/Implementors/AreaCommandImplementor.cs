@@ -39,13 +39,22 @@ namespace Server.Commands.Generic
                 if (!(items || mobiles))
                     return;
 
-                var eable = map.GetObjectsInBounds(rect, items, mobiles);
+                var eable = map.GetObjectsInBounds(rect);
 
                 var objs = new List<object>();
 
                 foreach (var obj in eable)
-                    if ((!mobiles || obj is Mobile) && BaseCommand.IsAccessible(from, obj) && ext.IsValid(obj))
+                {
+                    if (!mobiles && obj is Mobile || !items && obj is Item)
+                    {
+                        continue;
+                    }
+
+                    if (BaseCommand.IsAccessible(from, obj) && ext.IsValid(obj))
+                    {
                         objs.Add(obj);
+                    }
+                }
 
                 eable.Free();
                 ext.Filter(objs);
