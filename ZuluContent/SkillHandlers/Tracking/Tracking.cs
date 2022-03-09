@@ -20,7 +20,7 @@ namespace Server.SkillHandlers
             IncomingExtendedCommandPackets.RegisterExtended(0x07, true, QuestArrow);
         }
 
-        public static void QuestArrow(NetState state, CircularBufferReader reader, ref int packetLength)
+        public static void QuestArrow(NetState state, CircularBufferReader reader, int packetLength)
         {
             if (state.Mobile is PlayerMobile from)
             {
