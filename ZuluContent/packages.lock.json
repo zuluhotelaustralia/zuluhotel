@@ -483,6 +483,7 @@
       "ModernUO": {
         "type": "Project",
         "dependencies": {
+          "Argon2.Bindings": "1.12.0",
           "Microsoft.Toolkit.HighPerformance": "7.1.2",
           "ModernUO.SerializationGenerator": "1.0.4",
           "PollGroup": "1.1.0",

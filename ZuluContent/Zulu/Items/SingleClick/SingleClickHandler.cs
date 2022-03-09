@@ -46,7 +46,7 @@ namespace ZuluContent.Zulu.Items.SingleClick
             var (prefixes, suffixes) = GetAffixes(item);
 
             var prefix = prefixes.Any() ? $"{string.Join(' ', prefixes)} " : string.Empty;
-            var suffix = suffixes.Any() ? $" of {string.Join(' ', suffixes)}" : string.Empty;
+            var suffix = suffixes.Any() ? $" of {string.Join(" of ", suffixes)}" : string.Empty;
 
             var text = item switch
             {

@@ -1,21 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuluContent", "ZuluContent\ZuluContent.csproj", "{46C4A5C1-3655-4CCB-8546-CF2E5B320182}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZuluContent", "ZuluContent\ZuluContent.csproj", "{46C4A5C1-3655-4CCB-8546-CF2E5B320182}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "ModernUO\Projects\Server\Server.csproj", "{9637ACEC-800E-4712-BE05-0AD045440641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "ModernUO\Projects\Server\Server.csproj", "{9637ACEC-800E-4712-BE05-0AD045440641}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModernUO", "ModernUO", "{70A70554-D1A3-4700-ABA1-FDEE7118280F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Tests", "ModernUO\Projects\Server.Tests\Server.Tests.csproj", "{43D26E73-3732-481A-9C24-AC00B8ED2C76}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Run Configurations", "Run Configurations", "{FE8CDD99-547C-4D0A-A44F-5027D45C0DE1}"
-ProjectSection(SolutionItems) = preProject
-	.run\Server.run.xml = .run\Server.run.xml
-EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationGenerator", "ModernUO\Projects\SerializationGenerator\SerializationGenerator.csproj", "{515F5039-746A-48B8-BCB3-20752F03216B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationSchemaGenerator", "ModernUO\Projects\SerializationSchemaGenerator\SerializationSchemaGenerator.csproj", "{0858D431-9CB5-40DE-8069-5E70CC7A063A}"
+	ProjectSection(SolutionItems) = preProject
+		.run\Server.run.xml = .run\Server.run.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,31 +20,22 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Release|x64.ActiveCfg = Release|x64
-		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Release|x64.Build.0 = Release|x64
 		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Debug|x64.ActiveCfg = Debug|x64
 		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Debug|x64.Build.0 = Debug|x64
+		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Release|x64.ActiveCfg = Release|x64
+		{46C4A5C1-3655-4CCB-8546-CF2E5B320182}.Release|x64.Build.0 = Release|x64
 		{9637ACEC-800E-4712-BE05-0AD045440641}.Debug|x64.ActiveCfg = Debug|x64
 		{9637ACEC-800E-4712-BE05-0AD045440641}.Debug|x64.Build.0 = Debug|x64
 		{9637ACEC-800E-4712-BE05-0AD045440641}.Release|x64.ActiveCfg = Release|x64
 		{9637ACEC-800E-4712-BE05-0AD045440641}.Release|x64.Build.0 = Release|x64
-		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Debug|x64.ActiveCfg = Debug|x64
-		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Debug|x64.Build.0 = Debug|x64
-		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.ActiveCfg = Release|x64
-		{43D26E73-3732-481A-9C24-AC00B8ED2C76}.Release|x64.Build.0 = Release|x64
-		{515F5039-746A-48B8-BCB3-20752F03216B}.Debug|x64.ActiveCfg = Debug|x64
-		{515F5039-746A-48B8-BCB3-20752F03216B}.Debug|x64.Build.0 = Debug|x64
-		{515F5039-746A-48B8-BCB3-20752F03216B}.Release|x64.ActiveCfg = Release|x64
-		{515F5039-746A-48B8-BCB3-20752F03216B}.Release|x64.Build.0 = Release|x64
-		{0858D431-9CB5-40DE-8069-5E70CC7A063A}.Debug|x64.ActiveCfg = Debug|x64
-		{0858D431-9CB5-40DE-8069-5E70CC7A063A}.Debug|x64.Build.0 = Debug|x64
-		{0858D431-9CB5-40DE-8069-5E70CC7A063A}.Release|x64.ActiveCfg = Release|x64
-		{0858D431-9CB5-40DE-8069-5E70CC7A063A}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9637ACEC-800E-4712-BE05-0AD045440641} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}
-		{43D26E73-3732-481A-9C24-AC00B8ED2C76} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}
-		{515F5039-746A-48B8-BCB3-20752F03216B} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}
-		{0858D431-9CB5-40DE-8069-5E70CC7A063A} = {70A70554-D1A3-4700-ABA1-FDEE7118280F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {634D5790-283D-4F63-9AB7-0A42EF6AC465}
 	EndGlobalSection
 EndGlobal
