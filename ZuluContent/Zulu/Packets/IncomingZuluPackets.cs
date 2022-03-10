@@ -54,8 +54,6 @@ public static class IncomingZuluPackets
         var typeId = reader.ReadUInt32();
         var len = reader.ReadUInt16();
         var json = reader.ReadUTF8Safe(len);
-        
-        // Console.WriteLine("HandleJsGumpResponse: " + Encoding.UTF8.GetString(Convert.FromBase64String(json)));
 
         foreach (var g in state.Gumps)
         {
