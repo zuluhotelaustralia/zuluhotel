@@ -1,11 +1,15 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Server;
 using ZuluContent.Zulu.Items;
+using System.Buffers.Text;
 
 namespace Scripts.Zulu.Utilities
 {
@@ -199,6 +203,31 @@ namespace Scripts.Zulu.Utilities
             var expr = Expression.Lambda<Func<T>>(Expression.New(constructor), null).Compile();
 
             return expr;
+        }
+        
+        public static unsafe string SerializeAsBase64Json(object data)
+        {
+            byte[] outputChars = null;
+
+            try
+            {
+                var jsonBytes = JsonSerializer.SerializeToUtf8Bytes(data);
+
+                outputChars = ArrayPool<byte>.Shared.Rent(Base64.GetMaxEncodedToUtf8Length(jsonBytes.Length));
+
+                Base64.EncodeToUtf8(jsonBytes, outputChars, out var consumed, out var bytesWritten);
+
+                fixed (byte* bp = outputChars)
+                {
+                    return Encoding.UTF8.GetString(bp, bytesWritten);
+                }
+            }
+            finally
+            {
+                if (outputChars != null)
+                    ArrayPool<byte>.Shared.Return(outputChars);
+            }
+
         }
     }
 }
