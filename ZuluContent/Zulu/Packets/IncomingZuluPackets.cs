@@ -25,7 +25,7 @@ public static class IncomingZuluPackets
     private static PacketHandler GetHandler(int packetId) =>
         packetId >= 0 && packetId < Handlers.Length ? Handlers[packetId] : null;
 
-    private static void DecodeZuluPacket(NetState state, CircularBufferReader reader, ref int packetLength)
+    private static void DecodeZuluPacket(NetState state, CircularBufferReader reader, int packetLength)
     {
         int packetId = reader.ReadByte();
 
@@ -43,15 +43,15 @@ public static class IncomingZuluPackets
                 state.Disconnect(string.Empty);
                 break;
             default:
-                ph.OnReceive(state, reader, ref packetLength);
+                ph.OnReceive(state, reader, packetLength);
                 break;
         }
     }
 
-    private static void HandleJsGumpResponse(NetState state, CircularBufferReader reader, ref int packetLength)
+    private static void HandleJsGumpResponse(NetState state, CircularBufferReader reader, int packetLength)
     {
         var gumpId = (Serial)reader.ReadUInt32();
-        var typeId = reader.ReadUInt32();
+        var typeId = reader.ReadInt32();
         var len = reader.ReadUInt16();
         var json = reader.ReadUTF8Safe(len);
 
