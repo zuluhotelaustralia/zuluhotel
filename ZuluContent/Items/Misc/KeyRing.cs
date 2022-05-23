@@ -105,13 +105,15 @@ public KeyRing() : base( 0x1011 )
 		{
 			base.OnDelete();
 
-			foreach ( Key key in m_Keys )
-			{
-				key.Delete();
-			}
-
-			m_Keys.Clear();
-		}
+            if (m_Keys != null)
+            {
+                foreach (Key key in m_Keys)
+                {
+                    key.Delete();
+                }
+                m_Keys.Clear();
+            }
+        }
 
 		public void Add( Key key )
 		{
