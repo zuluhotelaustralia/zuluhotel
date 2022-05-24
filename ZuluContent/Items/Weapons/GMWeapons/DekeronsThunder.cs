@@ -1,9 +1,10 @@
 using System;
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13FD, 0x13FC)]
     public partial class DekeronsThunder : BaseRanged, IGMItem
     {
@@ -27,7 +28,7 @@ namespace Server.Items
         public override int InitMinHits => 200;
 
         public override int InitMaxHits => 200;
-        
+
         public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Dekeron's Thunder";

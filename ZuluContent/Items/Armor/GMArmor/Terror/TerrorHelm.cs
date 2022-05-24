@@ -1,9 +1,10 @@
+using ModernUO.Serialization;
 using Server.Engines.Craft;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x1451, 0x1456)]
     public partial class TerrorHelm : BaseArmor, IFortifiable, IGMItem
     {
@@ -20,7 +21,7 @@ namespace Server.Items
         public override int ArmorBase => 50;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Bone;
-        
+
         public override string DefaultName => "Bone Helm of Terror";
 
         [Constructible]

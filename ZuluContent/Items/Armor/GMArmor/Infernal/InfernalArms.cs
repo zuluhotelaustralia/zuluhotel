@@ -1,9 +1,10 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13ee, 0x13ef)]
     public partial class InfernalArms : BaseArmor, IGMItem
     {

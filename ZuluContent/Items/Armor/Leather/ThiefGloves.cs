@@ -1,3 +1,4 @@
+using ModernUO.Serialization;
 using Scripts.Zulu.Utilities;
 using Server.Targeting;
 
@@ -9,8 +10,8 @@ namespace Server.Items
         Blue,
         Red
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     [Flipable]
     public partial class ThiefGloves : BaseArmor
     {
@@ -23,10 +24,10 @@ namespace Server.Items
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
 
         [Constructible]
-        public ThiefGloves() : this((ThiefGlovesHue) Utility.Random(2))
+        public ThiefGloves() : this((ThiefGlovesHue)Utility.Random(2))
         {
         }
-        
+
         [Constructible]
         public ThiefGloves(ThiefGlovesHue hue) : base(0x13C6)
         {
@@ -39,7 +40,7 @@ namespace Server.Items
                 ThiefGlovesHue.Red => 0x494
             };
         }
-        
+
         public override void OnSingleClick(Mobile from)
         {
             LabelTo(from, "Thief Gloves");
@@ -52,7 +53,7 @@ namespace Server.Items
                 from.SendFailureMessage("You have to equip that to snoop!");
                 return;
             }
-            
+
             from.SendSuccessMessage("Who would you like to snoop?");
 
             from.Target = new SnoopingTarget();

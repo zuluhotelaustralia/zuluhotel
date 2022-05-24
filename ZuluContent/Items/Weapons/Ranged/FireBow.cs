@@ -1,15 +1,16 @@
 using System;
+using ModernUO.Serialization;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13B2, 0x13B1)]
     public partial class FireBow : BaseRanged
     {
         public override string DefaultName => "Fire Bow";
-        
+
         public override int EffectId => 0x36D4;
-        
+
         public override int DefaultHitSound => 0x15E;
 
         public override Type AmmoType => typeof(FireArrow);

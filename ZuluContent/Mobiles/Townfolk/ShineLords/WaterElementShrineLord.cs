@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ModernUO.Serialization;
 using Server.Gumps;
 using Server.Items;
 using Server.Network;
@@ -9,18 +10,18 @@ using ZuluContent.Zulu.Items;
 
 namespace Server.Mobiles
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class WaterElementShrineLord : BaseShrineLord
     {
         public override bool CanTeach => false;
-        
-        public override Type[] ShrineAcceptTypes => new [] {typeof(WaterElementalPentagram), typeof(Shell)};
+
+        public override Type[] ShrineAcceptTypes => new[] { typeof(WaterElementalPentagram), typeof(Shell) };
 
         [Constructible]
         public WaterElementShrineLord()
         {
             Title = "the Water Element Shrine Lord";
-            
+
             Body = 0x10;
 
             Hue = 1181;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ModernUO.Serialization;
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Items;
@@ -8,7 +9,7 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public abstract partial class BaseShrineLord : BaseVendor
     {
         protected override List<SBInfo> SBInfos { get; } = new();
@@ -60,7 +61,7 @@ namespace Server.Mobiles
                 {
                     if ((shrinesCollected & (1 << shrine.Piece)) == 0)
                     {
-                        shrinesCollected = (ushort) (shrinesCollected | 1 << shrine.Piece);
+                        shrinesCollected = (ushort)(shrinesCollected | 1 << shrine.Piece);
                         _shrineCollections[from.Serial.Value] = shrinesCollected;
                         AcceptShrine(shrine);
 
@@ -90,14 +91,14 @@ namespace Server.Mobiles
 
             return base.OnDragDrop(from, dropped);
         }
-        
+
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
-            
+
             list.Add(new HelpEntry(from, this));
         }
-        
+
         private class HelpEntry : ContextMenuEntry
         {
             private readonly BaseCreature m_Mobile;

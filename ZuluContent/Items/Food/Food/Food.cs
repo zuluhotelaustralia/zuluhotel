@@ -118,7 +118,7 @@ namespace Server.Items
 
             writer.Write(Poisoner);
 
-            Poison.Serialize(Poison, writer);
+            writer.Write(Poison);
             writer.Write(FillFactor);
         }
 
@@ -155,12 +155,12 @@ namespace Server.Items
                 }
                 case 2:
                 {
-                    Poison = Poison.Deserialize(reader);
+                    Poison = reader.ReadPoison();
                     break;
                 }
                 case 3:
                 {
-                    Poison = Poison.Deserialize(reader);
+                    Poison = reader.ReadPoison();
                     FillFactor = reader.ReadInt();
                     break;
                 }

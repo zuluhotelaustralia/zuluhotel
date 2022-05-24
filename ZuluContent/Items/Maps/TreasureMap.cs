@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ModernUO.Serialization;
 using Server.Engines.Harvest;
 using Server.Mobiles;
 using Server.Network;
@@ -618,7 +619,7 @@ public class TreasureMap : MapItem
     }
 }
 
-[Serializable(0, false)]
+[SerializationGenerator(0, false)]
 public partial class TreasureMapLevel1 : TreasureMap
 {
     [Constructible]
@@ -627,7 +628,7 @@ public partial class TreasureMapLevel1 : TreasureMap
     }
 }
 
-[Serializable(0, false)]
+[SerializationGenerator(0, false)]
 public partial class TreasureMapLevel2 : TreasureMap
 {
     [Constructible]
@@ -636,7 +637,7 @@ public partial class TreasureMapLevel2 : TreasureMap
     }
 }
 
-[Serializable(0, false)]
+[SerializationGenerator(0, false)]
 public partial class TreasureMapLevel3 : TreasureMap
 {
     [Constructible]
@@ -645,7 +646,7 @@ public partial class TreasureMapLevel3 : TreasureMap
     }
 }
 
-[Serializable(0, false)]
+[SerializationGenerator(0, false)]
 public partial class TreasureMapLevel4 : TreasureMap
 {
     [Constructible]
@@ -654,7 +655,7 @@ public partial class TreasureMapLevel4 : TreasureMap
     }
 }
 
-[Serializable(0, false)]
+[SerializationGenerator(0, false)]
 public partial class TreasureMapLevel5 : TreasureMap
 {
     [Constructible]
@@ -663,7 +664,7 @@ public partial class TreasureMapLevel5 : TreasureMap
     }
 }
 
-[Serializable(0, false)]
+[SerializationGenerator(0, false)]
 public partial class TreasureMapLevel6 : TreasureMap
 {
     [Constructible]

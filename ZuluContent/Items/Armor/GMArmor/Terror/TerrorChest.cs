@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x144f, 0x1454)]
     public partial class TerrorChest : BaseArmor, IGMItem
     {

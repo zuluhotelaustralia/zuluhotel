@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13cd, 0x13c5)]
     public partial class WaterElementLeatherArms : BaseArmor, IGMItem
     {

@@ -1,6 +1,8 @@
+using ModernUO.Serialization;
+
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public abstract partial class FireElementalPentagram : ElementalPentagram
     {
         [Constructible]
@@ -10,8 +12,8 @@ namespace Server.Items
             Hue = 139;
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram1 : FireElementalPentagram
     {
         [Constructible]
@@ -19,8 +21,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram2 : FireElementalPentagram
     {
         [Constructible]
@@ -28,8 +30,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram3 : FireElementalPentagram
     {
         [Constructible]
@@ -37,8 +39,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram4 : FireElementalPentagram
     {
         [Constructible]
@@ -46,8 +48,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram5 : FireElementalPentagram
     {
         [Constructible]
@@ -55,8 +57,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram6 : FireElementalPentagram
     {
         [Constructible]
@@ -64,8 +66,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram7 : FireElementalPentagram
     {
         [Constructible]
@@ -73,8 +75,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram8 : FireElementalPentagram
     {
         [Constructible]
@@ -82,8 +84,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class FireElementalPentagram9 : FireElementalPentagram
     {
         [Constructible]

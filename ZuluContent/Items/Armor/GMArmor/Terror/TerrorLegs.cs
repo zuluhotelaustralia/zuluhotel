@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x1452, 0x1457)]
     public partial class TerrorLegs : BaseArmor, IGMItem
     {
@@ -19,7 +20,7 @@ namespace Server.Items
         public override int ArmorBase => 50;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Bone;
-        
+
         public override string DefaultName => "Bone Legs of Terror";
 
         [Constructible]

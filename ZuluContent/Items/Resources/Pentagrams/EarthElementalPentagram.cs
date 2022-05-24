@@ -1,6 +1,8 @@
+using ModernUO.Serialization;
+
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public abstract partial class EarthElementalPentagram : ElementalPentagram
     {
         [Constructible]
@@ -10,8 +12,8 @@ namespace Server.Items
             Hue = 1538;
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram1 : EarthElementalPentagram
     {
         [Constructible]
@@ -19,8 +21,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram2 : EarthElementalPentagram
     {
         [Constructible]
@@ -28,8 +30,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram3 : EarthElementalPentagram
     {
         [Constructible]
@@ -37,8 +39,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram4 : EarthElementalPentagram
     {
         [Constructible]
@@ -46,8 +48,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram5 : EarthElementalPentagram
     {
         [Constructible]
@@ -55,8 +57,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram6 : EarthElementalPentagram
     {
         [Constructible]
@@ -64,8 +66,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram7 : EarthElementalPentagram
     {
         [Constructible]
@@ -73,8 +75,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram8 : EarthElementalPentagram
     {
         [Constructible]
@@ -82,8 +84,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class EarthElementalPentagram9 : EarthElementalPentagram
     {
         [Constructible]

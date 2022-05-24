@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ModernUO.Serialization;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.Gumps;
@@ -8,15 +9,15 @@ using ZuluContent.Zulu.Engines.Magic;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class Bandage : Item
     {
         public static int Range = 1;
 
         public static int AmountToHeal = 1;
-        
+
         public static int AmountToCure = 2;
-        
+
         public static int AmountToRes = 5;
 
         public override double DefaultWeight => 0.1;
@@ -78,7 +79,7 @@ namespace Server.Items
                         from.SendFailureMessage("You don't have enough bandages.");
                         return;
                     }
-                    
+
                     if (from.InRange(m_Bandage.GetWorldLocation(), Bandage.Range))
                     {
                         if (BandageContext.BeginHeal(from, targetedMobile) != null)
@@ -95,12 +96,12 @@ namespace Server.Items
             }
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class BloodyBandage : Item
     {
         public static int Range = 8;
-        
+
         public override double DefaultWeight => 0.1;
 
 
@@ -162,7 +163,7 @@ namespace Server.Items
                     from.SendFailureMessage("You must clean the bandages in clean water.");
                 }
             }
-            
+
             private bool Validate(int tileID)
             {
                 var waterTiles = new[]
@@ -174,7 +175,7 @@ namespace Server.Items
                     0x7490, 0x74AB,
                     0x74B5, 0x75D5
                 };
-            
+
                 var contains = false;
 
                 for (var i = 0; !contains && i < waterTiles.Length; i += 2)
@@ -334,7 +335,7 @@ namespace Server.Items
             else
             {
                 patientNumber = -1;
-                
+
                 var difficulty = Patient.HitsMax - Patient.Hits;
                 difficulty = Math.Min(130, difficulty);
 
@@ -362,7 +363,7 @@ namespace Server.Items
                         healerNumber = 500968; // You apply the bandages, but they barely help.
                     }
 
-                    Patient.Heal((int) toHeal, Healer, false);
+                    Patient.Heal((int)toHeal, Healer, false);
                 }
                 else
                 {
@@ -399,7 +400,7 @@ namespace Server.Items
         public static BandageContext BeginHeal(Mobile healer, Mobile patient)
         {
             var context = GetContext(healer);
-            
+
             if (!patient.Poisoned && patient.Hits == patient.HitsMax)
             {
                 healer.SendFailureMessage(500955); // That being is not damaged!
@@ -417,7 +418,7 @@ namespace Server.Items
                 healer.DoBeneficial(patient);
 
                 var onSelf = healer == patient;
-                
+
                 var healDelay = patient.Alive ? 5.0 : 10.0;
 
                 context?.StopHeal();

@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13cc, 0x13d3)]
     public partial class WaterElementLeatherChest : BaseArmor, IGMItem
     {
@@ -13,7 +14,7 @@ namespace Server.Items
         public override int ArmorBase => 40;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
-        
+
         public override string DefaultName => "Leather Tunic of the Water Element";
 
         [Constructible]

@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class WaterElementLeatherGorget : BaseArmor, IGMItem
     {
         public override int InitMinHits => 70;
@@ -12,7 +13,7 @@ namespace Server.Items
         public override int ArmorBase => 40;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
-        
+
         public override string DefaultName => "Leather Gorget of the Water Element";
 
         [Constructible]

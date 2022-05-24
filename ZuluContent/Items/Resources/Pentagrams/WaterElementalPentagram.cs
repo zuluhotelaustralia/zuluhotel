@@ -1,6 +1,8 @@
+using ModernUO.Serialization;
+
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public abstract partial class WaterElementalPentagram : ElementalPentagram
     {
         [Constructible]
@@ -10,8 +12,8 @@ namespace Server.Items
             Hue = 1167;
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram1 : WaterElementalPentagram
     {
         [Constructible]
@@ -19,8 +21,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram2 : WaterElementalPentagram
     {
         [Constructible]
@@ -28,8 +30,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram3 : WaterElementalPentagram
     {
         [Constructible]
@@ -37,8 +39,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram4 : WaterElementalPentagram
     {
         [Constructible]
@@ -46,8 +48,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram5 : WaterElementalPentagram
     {
         [Constructible]
@@ -55,8 +57,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram6 : WaterElementalPentagram
     {
         [Constructible]
@@ -64,8 +66,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram7 : WaterElementalPentagram
     {
         [Constructible]
@@ -73,8 +75,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram8 : WaterElementalPentagram
     {
         [Constructible]
@@ -82,8 +84,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class WaterElementalPentagram9 : WaterElementalPentagram
     {
         [Constructible]

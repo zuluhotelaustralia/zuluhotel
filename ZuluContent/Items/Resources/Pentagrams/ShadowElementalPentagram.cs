@@ -1,6 +1,8 @@
+using ModernUO.Serialization;
+
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public abstract partial class ShadowElementalPentagram : ElementalPentagram
     {
         [Constructible]
@@ -10,8 +12,8 @@ namespace Server.Items
             Hue = 1157;
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram1 : ShadowElementalPentagram
     {
         [Constructible]
@@ -19,8 +21,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram2 : ShadowElementalPentagram
     {
         [Constructible]
@@ -28,8 +30,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram3 : ShadowElementalPentagram
     {
         [Constructible]
@@ -37,8 +39,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram4 : ShadowElementalPentagram
     {
         [Constructible]
@@ -46,8 +48,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram5 : ShadowElementalPentagram
     {
         [Constructible]
@@ -55,8 +57,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram6 : ShadowElementalPentagram
     {
         [Constructible]
@@ -64,8 +66,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram7 : ShadowElementalPentagram
     {
         [Constructible]
@@ -73,8 +75,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram8 : ShadowElementalPentagram
     {
         [Constructible]
@@ -82,8 +84,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class ShadowElementalPentagram9 : ShadowElementalPentagram
     {
         [Constructible]

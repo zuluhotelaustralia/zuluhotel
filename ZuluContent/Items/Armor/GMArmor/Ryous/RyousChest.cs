@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x1415, 0x1416)]
     public partial class RyousChest : BaseArmor, IGMItem
     {
@@ -19,7 +20,7 @@ namespace Server.Items
         public override int ArmorBase => 75;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
-        
+
         public override string DefaultName => "Platemail of Ryous";
 
         [Constructible]
