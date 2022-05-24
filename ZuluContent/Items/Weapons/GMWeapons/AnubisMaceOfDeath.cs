@@ -1,3 +1,4 @@
+using ModernUO.Serialization;
 using Server.Engines.Magic.HitScripts;
 using Server.Mobiles;
 using ZuluContent.Zulu.Engines.Magic.Enums;
@@ -5,7 +6,7 @@ using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0xF5C, 0xF5D)]
     public partial class AnubisMaceOfDeath : BaseBashing, IGMItem
     {
@@ -16,15 +17,15 @@ namespace Server.Items
         public override int DefaultMaxDamage => 49;
 
         public override int DefaultSpeed => 35;
-        
+
         public override int InitMinHits => 200;
 
         public override int InitMaxHits => 200;
-        
+
         public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Anubis's Mace of Death";
-        
+
         [Constructible]
         public AnubisMaceOfDeath() : base(0xF5C)
         {

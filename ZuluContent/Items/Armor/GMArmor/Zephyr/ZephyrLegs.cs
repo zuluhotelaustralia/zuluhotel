@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13be, 0x13c3)]
     public partial class ZephyrLegs : BaseArmor, IGMItem
     {
@@ -19,7 +20,7 @@ namespace Server.Items
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
-        
+
         public override string DefaultName => "Zephyr Chainmail Leggings";
 
         [Constructible]

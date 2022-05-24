@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13B9, 0x13BA)]
     public partial class WeaponOfZulu : BaseSword, IGMItem
     {
@@ -13,11 +14,11 @@ namespace Server.Items
         public override int DefaultMaxDamage => 53;
 
         public override int DefaultSpeed => 36;
-        
+
         public override int InitMinHits => 200;
 
         public override int InitMaxHits => 200;
-        
+
         public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Enchanted Sword of Zulu";

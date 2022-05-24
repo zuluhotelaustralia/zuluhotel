@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class SylvianGorget : BaseArmor, IGMItem
     {
         public override int InitMinHits => 100;
@@ -14,7 +15,7 @@ namespace Server.Items
         public override int ArmorBase => 45;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Studded;
-        
+
         public override string DefaultName => "Sylvian Studded Gorget";
 
         [Constructible]

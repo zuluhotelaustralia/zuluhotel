@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x1db9, 0x1dba)]
     public partial class SylvianHelm : BaseArmor, IGMItem
     {
@@ -15,7 +16,7 @@ namespace Server.Items
         public override int ArmorBase => 45;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
-        
+
         public override string DefaultName => "Sylvian Leather Cap";
 
         [Constructible]

@@ -119,7 +119,7 @@ namespace Server.Items
 
             writer.Write((int) 0); // version
 
-            Poison.Serialize(m_Poison, writer);
+            writer.Write(m_Poison);
         }
 
         public override void Deserialize(IGenericReader reader)
@@ -132,7 +132,7 @@ namespace Server.Items
             {
                 case 0:
                 {
-                    m_Poison = Poison.Deserialize(reader);
+                    m_Poison = reader.ReadPoison();
                     break;
                 }
             }

@@ -1,9 +1,10 @@
 using System;
+using ModernUO.Serialization;
 using Server.Spells;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class BagOfReagents : Bag
     {
         [Constructible]
@@ -17,7 +18,7 @@ namespace Server.Items
         {
             foreach (var t in Reagent.NormalReagents)
             {
-                var reg = (BaseReagent) Activator.CreateInstance(t);
+                var reg = (BaseReagent)Activator.CreateInstance(t);
                 if (reg != null)
                 {
                     reg.Amount = amount;

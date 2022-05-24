@@ -1,13 +1,14 @@
 using System;
+using ModernUO.Serialization;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13B2, 0x13B1)]
     public partial class IceBow : BaseRanged
     {
         public override string DefaultName => "Ice Bow";
-        
+
         public override int EffectId => 0x3818;
 
         public override Type AmmoType => typeof(IceArrow);

@@ -1,10 +1,11 @@
+using ModernUO.Serialization;
 using Server.Engines.Harvest;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class AxeOfAnias : BaseAxe, IUsesRemaining, IGMItem
     {
         public override HarvestSystem HarvestSystem => Lumberjacking.System;
@@ -16,11 +17,11 @@ namespace Server.Items
         public override int DefaultMaxDamage => 55;
 
         public override int DefaultSpeed => 33;
-        
+
         public override int InitMinHits => 200;
 
         public override int InitMaxHits => 200;
-        
+
         public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Axe of Anias";

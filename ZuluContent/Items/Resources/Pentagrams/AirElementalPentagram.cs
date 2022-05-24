@@ -1,6 +1,8 @@
+using ModernUO.Serialization;
+
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public abstract partial class AirElementalPentagram : ElementalPentagram
     {
         [Constructible]
@@ -10,8 +12,8 @@ namespace Server.Items
             Hue = 1161;
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram1 : AirElementalPentagram
     {
         [Constructible]
@@ -19,8 +21,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram2 : AirElementalPentagram
     {
         [Constructible]
@@ -28,8 +30,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram3 : AirElementalPentagram
     {
         [Constructible]
@@ -37,8 +39,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram4 : AirElementalPentagram
     {
         [Constructible]
@@ -46,8 +48,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram5 : AirElementalPentagram
     {
         [Constructible]
@@ -55,8 +57,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram6 : AirElementalPentagram
     {
         [Constructible]
@@ -64,8 +66,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram7 : AirElementalPentagram
     {
         [Constructible]
@@ -73,8 +75,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram8 : AirElementalPentagram
     {
         [Constructible]
@@ -82,8 +84,8 @@ namespace Server.Items
         {
         }
     }
-    
-    [Serializable(0, false)]
+
+    [SerializationGenerator(0, false)]
     public partial class AirElementalPentagram9 : AirElementalPentagram
     {
         [Constructible]

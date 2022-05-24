@@ -151,8 +151,8 @@ namespace Server.Gumps
 				{
 					try
 					{
-						CommandLogging.LogChangeProperty( m_Mobile, m_Object, m_Property.Name, new Point2D( p ).ToString() );
-						m_Property.SetValue( m_Object, new Point2D( p ), null );
+						CommandLogging.LogChangeProperty( m_Mobile, m_Object, m_Property.Name, new Point2D( p.X, p.Y ).ToString() );
+						m_Property.SetValue( m_Object, new Point2D( p.X, p.Y ), null );
 						PropertiesGump.OnValueChanged( m_Object, m_Property, m_Stack );
 					}
 					catch
@@ -177,7 +177,7 @@ namespace Server.Gumps
 			{
 				case 1: // Current location
 				{
-					toSet = new Point2D( m_Mobile.Location );
+					toSet = new Point2D( m_Mobile.Location.X, m_Mobile.Location.Y );
 					shouldSet = true;
 					shouldSend = true;
 

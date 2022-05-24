@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13d5, 0x13dd)]
     public partial class SylvianGloves : BaseArmor, IGMItem
     {
@@ -15,7 +16,7 @@ namespace Server.Items
         public override int ArmorBase => 45;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Studded;
-        
+
         public override string DefaultName => "Sylvian Studded Gloves";
 
         [Constructible]

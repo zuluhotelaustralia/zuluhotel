@@ -1070,7 +1070,7 @@ namespace Server.Items
                 writer.Write((int) OldSlayer);
 
             if (GetSaveFlag(flags, SaveFlag.Poison))
-                Poison.Serialize(Poison, writer);
+                writer.Write(Poison);
 
             if (GetSaveFlag(flags, SaveFlag.PoisonCharges))
                 writer.Write(PoisonCharges);
@@ -1224,7 +1224,7 @@ namespace Server.Items
                         OldSlayer = (SlayerName) reader.ReadInt();
 
                     if (GetSaveFlag(flags, SaveFlag.Poison))
-                        Poison = Poison.Deserialize(reader);
+                        Poison = reader.ReadPoison();
 
                     if (GetSaveFlag(flags, SaveFlag.PoisonCharges))
                         PoisonCharges = reader.ReadInt();
@@ -1366,7 +1366,7 @@ namespace Server.Items
 
                     Crafter = reader.ReadEntity<Mobile>();
 
-                    Poison = Poison.Deserialize(reader);
+                    Poison = reader.ReadPoison();
                     PoisonCharges = reader.ReadInt();
 
                     if (m_StrReq == DefaultStrengthReq)

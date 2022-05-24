@@ -1,8 +1,9 @@
+using ModernUO.Serialization;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     [FlipableAttribute(0x13eb, 0x13f2)]
     public partial class InfernalGloves : BaseArmor, IGMItem
     {
@@ -19,7 +20,7 @@ namespace Server.Items
         public override int ArmorBase => 55;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Ringmail;
-        
+
         public override string DefaultName => "Infernal Ringmail Gloves";
 
 

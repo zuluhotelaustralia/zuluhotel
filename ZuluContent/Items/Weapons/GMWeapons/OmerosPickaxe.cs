@@ -1,10 +1,11 @@
+using ModernUO.Serialization;
 using Server.Engines.Harvest;
 using ZuluContent.Zulu.Engines.Magic;
 using ZuluContent.Zulu.Items;
 
 namespace Server.Items
 {
-    [Serializable(0, false)]
+    [SerializationGenerator(0, false)]
     public partial class OmerosPickaxe : BaseAxe, IUsesRemaining, IGMItem
     {
         public override HarvestSystem HarvestSystem => Mining.System;
@@ -18,11 +19,11 @@ namespace Server.Items
         public override int DefaultSpeed => 40;
 
         public override WeaponAnimation DefaultAnimation => WeaponAnimation.Slash1H;
-        
+
         public override bool AllowEquippedCast(Mobile from) => true;
 
         public override string DefaultName => "Omero's Pickaxe";
-        
+
         [Constructible]
         public OmerosPickaxe() : this(1000)
         {
