@@ -37,7 +37,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class DexBonus : BaseStatBonus<DexBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value / 5, Cursed);
+        public override string AffixName => Value > 0 ? EnchantmentInfo.GetName(Value / 5, Cursed) : string.Empty;
         public DexBonus() : base(StatType.Dex) { }
     }
 

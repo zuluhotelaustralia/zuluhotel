@@ -3146,9 +3146,9 @@ namespace Server.Mobiles
             if (IsInvulnerable)
                 val += " [invulnerable]";
 
-            if (BardEndTime > DateTime.Now)
+            if (BardEndTime > Core.Now)
             {
-                var timeDiff = BardEndTime - DateTime.Now;
+                var timeDiff = BardEndTime - Core.Now;
                 var timeVal = "";
 
                 if (timeDiff.Minutes > 0)
@@ -4089,6 +4089,16 @@ namespace Server.Mobiles
             }
 
             return false;
+        }
+        
+        public override int GetAttackSound()
+        {
+            if (Weapon is BaseWeapon { HitSound: > 0} weapon)
+            {
+                return weapon.HitSound;
+            }
+
+            return base.GetAttackSound();
         }
 
         public void Pacify(Mobile master, DateTime endtime)
