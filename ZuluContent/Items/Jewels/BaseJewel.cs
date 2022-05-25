@@ -1,7 +1,5 @@
 using System;
 using Server.Engines.Craft;
-using Server.Engines.Magic;
-using Server.Spells;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Enums;
 using ZuluContent.Zulu.Items;
@@ -166,9 +164,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write((int) 6); // version
-
-            Enchantments.Serialize(writer);
+            writer.Write(5); // version
 
             ICraftable.Serialize(writer, this);
 
@@ -187,9 +183,6 @@ namespace Server.Items
 
             switch (version)
             {
-                case 6:
-                    Enchantments = EnchantmentDictionary.Deserialize(reader);
-                    goto case 5;
                 case 5:
                     ICraftable.Deserialize(reader, this);
                     goto case 4;
