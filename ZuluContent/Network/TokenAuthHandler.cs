@@ -31,6 +31,12 @@ public record TokenAuthJwt
 public static class TokenAuthHandler
 {
     private const string LinkedAuthIdTagName = "token_auth_linked_id";
+    
+#if DEBUG
+    private const string DefaultJwksWellKnownUrl = "http://127.0.0.1:3334/.well-known/jwks.json";
+#else
+    private const string DefaultJwksWellKnownUrl = "https://game.zhmodern.com/.well-known/jwks.json";
+#endif
 
     private static readonly JwkSet KeySet = new();
     private static readonly ILogger Logger = LogFactory.GetLogger(typeof(TokenAuthHandler));
@@ -42,16 +48,14 @@ public static class TokenAuthHandler
     private static readonly byte[] FailedVerifyResponse = { 0x82, 0x83 };
     private static readonly byte[] NoLinkResponse = { 0x82, 0x84 };
 
-    private static readonly string[] JwkSetUrls =
-    {
-        "http://127.0.0.1:3334/.well-known/jwks.json"
-    };
+    private static readonly List<string> JwkSetUrls = new();
     
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static void Configure()
     {
         FreeshardProtocol.Register(0x80, false, HandleTokenPreAuth);
         CommandSystem.Register("LinkAccount", AccessLevel.Player, LinkAccount_OnCommand);
+        JwkSetUrls.Add(ServerConfiguration.GetSetting("accountHandler.jwksWellKnownUrl", DefaultJwksWellKnownUrl));
         DownloadKeys(JwkSetUrls);
     }
 
@@ -74,7 +78,7 @@ public static class TokenAuthHandler
     
     private static long GetUnixNow() => (long)DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
     
-    private static void DownloadKeys(string[] paths)
+    private static void DownloadKeys(IEnumerable<string> paths)
     {
         using var client = new HttpClient();
 
