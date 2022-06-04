@@ -8,8 +8,6 @@ using Server.Logging;
 using Server.Network;
 using Server.Regions;
 using Scripts.Zulu.Packets;
-using Server.Mobiles;
-using ZuluContent.Accounting;
 
 namespace Server.Misc
 {
