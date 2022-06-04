@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using Jose;
 using Server.Network;
 using Server;
 using Server.Accounting;
 using Server.Logging;
 using Server.Mobiles;
+using Timer = Server.Timer;
 
-namespace ZuluContent.Accounting;
+namespace Server.Network;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
@@ -27,6 +29,14 @@ public record TokenAuthJwt
     public string Iss { get; init; }
     public string Aud { get; init; }
 }
+
+public class TokenAuthCleanupTimer : Timer
+{
+    private static readonly TimeSpan TickInterval = TimeSpan.FromSeconds(300);
+    public TokenAuthCleanupTimer() : base(TimeSpan.Zero, TickInterval) { }
+
+    protected override void OnTick() => ThreadPool.QueueUserWorkItem(TokenAuthHandler.Cleanup);
+} 
 
 public static class TokenAuthHandler
 {
@@ -49,6 +59,7 @@ public static class TokenAuthHandler
     private static readonly byte[] NoLinkResponse = { 0x82, 0x84 };
 
     private static readonly List<string> JwkSetUrls = new();
+    private static readonly TokenAuthCleanupTimer CleanupTimer = new();
     
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static void Configure()
@@ -57,6 +68,7 @@ public static class TokenAuthHandler
         CommandSystem.Register("LinkAccount", AccessLevel.Player, LinkAccount_OnCommand);
         JwkSetUrls.Add(ServerConfiguration.GetSetting("accountHandler.jwksWellKnownUrl", DefaultJwksWellKnownUrl));
         DownloadKeys(JwkSetUrls);
+        CleanupTimer.Start();
     }
 
     [Usage("LinkAccount <userId>"),
@@ -67,7 +79,7 @@ public static class TokenAuthHandler
 
         if (from?.Account is Account account)
         {
-            account.SetTag(LinkedAuthIdTagName, e.GetString(0));
+            account.SetTag(LinkedAuthIdTagName, e.GetString(0)[..17]);
             from.SendMessage($"Account now linked to {account.GetTag(LinkedAuthIdTagName)}");
         }
         else
@@ -78,7 +90,7 @@ public static class TokenAuthHandler
     
     private static long GetUnixNow() => (long)DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
     
-    private static void DownloadKeys(IEnumerable<string> paths)
+    private static void DownloadKeys(List<string> paths)
     {
         using var client = new HttpClient();
 
@@ -140,7 +152,7 @@ public static class TokenAuthHandler
 
         if (account == null || tag == null || tag != jwt.UserId)
         {
-            Logger.Warning("{0}: No link exists between username '{1}' and userId '{2}' for token '{3}'", state, jwt);
+            Logger.Warning("{0}: No link exists between username '{1}' and userId '{2}' for token '{3}'", state, jwt.Username, jwt.Token);
             state.Send(NoLinkResponse);
             // No disconnection, they can attempt normal password login
         }
@@ -155,7 +167,7 @@ public static class TokenAuthHandler
         }
     }
 
-    private static TokenAuthJwt Verify(string token)
+    public static TokenAuthJwt Verify(string token)
     {
         var headers = JWT.Headers(token);
         if (!headers.TryGetValue("kid", out var kid) || kid is not string tokenKid)
@@ -180,5 +192,15 @@ public static class TokenAuthHandler
             return ValidTokens.Remove(acct, out _);
         
         return false;
+    }
+
+    public static void Cleanup(object state)
+    {
+        var expired = ValidTokens
+            .Where(kv => kv.Value.Exp < GetUnixNow())
+            .ToArray();
+        
+        foreach (var (acct, _) in expired) 
+            ValidTokens.TryRemove(acct, out _);
     }
 }
