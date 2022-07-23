@@ -4093,7 +4093,7 @@ namespace Server.Mobiles
         
         public override int GetAttackSound()
         {
-            if (Weapon is BaseWeapon { HitSound: > 0} weapon)
+            if (Weapon is BaseWeapon weapon && weapon.HitSound != null && weapon.HitSound > 0)
             {
                 return weapon.HitSound;
             }
