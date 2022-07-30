@@ -2219,6 +2219,9 @@ namespace Server.Mobiles
         {
             if (m is BaseCreature && !((BaseCreature)m).Controlled)
                 return !Alive || !m.Alive || Hidden && AccessLevel > AccessLevel.Player;
+            
+            if (GetMaster() == m)
+                return true;
 
             return base.OnMoveOver(m);
         }
@@ -3101,7 +3104,9 @@ namespace Server.Mobiles
             if (NameHue != -1)
                 hue = NameHue;
             else
+            {
                 hue = Notoriety.GetHue(Notoriety.Compute(from, this));
+            }
 
             string name = Name;
 
@@ -4327,7 +4332,7 @@ namespace Server.Mobiles
 
         public bool CheckSkill(SkillName skillName, int difficulty, int points)
         {
-            if (skillName != SkillName.DetectHidden)
+            if (skillName != SkillName.DetectHidden && skillName != SkillName.MagicResist)
                 return true;
 
             return PercentSkillCheck(this, skillName, points);

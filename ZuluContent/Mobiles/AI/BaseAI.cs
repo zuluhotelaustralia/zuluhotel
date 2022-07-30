@@ -1791,8 +1791,19 @@ namespace Server.Mobiles
         {
             MoveResult res = DoMoveImpl(d);
 
-            return res == MoveResult.Success || res == MoveResult.SuccessAutoTurn ||
+            var success = res == MoveResult.Success || res == MoveResult.SuccessAutoTurn ||
                    badStateOk && res == MoveResult.BadState;
+
+            if (success && m_Mobile.ControlOrder is OrderType.Come or OrderType.Follow)
+            {
+                var master = m_Mobile.GetMaster();
+                if (master != null && m_Mobile.GetDistanceToSqrt(master) > 4)
+                {
+                    m_Mobile.MoveToWorld(master.Location, master.Map);
+                }
+            }
+
+            return success;
         }
 
         private static Queue m_Obstacles = new Queue();
@@ -1820,16 +1831,19 @@ namespace Server.Mobiles
             if (isPassive)
                 delay += 0.2;
 
-            if (!isControlled)
+            
+            if (isControlled)
             {
-                delay += 0.1;
-            }
-            else if (m_Mobile.Controlled)
-            {
-                if (m_Mobile.ControlOrder == OrderType.Follow && m_Mobile.ControlTarget == m_Mobile.ControlMaster)
+                if (m_Mobile.ControlOrder is OrderType.Follow or OrderType.Come)
+                {
                     delay *= 0.5;
+                }
 
                 delay -= 0.075;
+            }
+            else
+            {
+                delay += 0.1;
             }
 
             if (delay < 0.0)
