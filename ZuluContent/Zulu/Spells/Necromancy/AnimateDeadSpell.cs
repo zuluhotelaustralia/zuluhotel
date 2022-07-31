@@ -75,7 +75,7 @@ public class AnimateDeadSpell : NecromancerSpell, ITargetableAsyncSpell<Corpse>
 
                 // ReSharper disable once ForCanBeConvertedToForeach
                 for (var i = 0; i < summoned.Skills.Length; i++)
-                    summoned.Skills[i].BaseFixedPoint = (int)(summoned.Skills[i].BaseFixedPoint * power / 10.0);
+                    summoned.Skills[i].BaseFixedPoint = (int)(summoned.Skills[i].BaseFixedPoint * power / 100.0);
 
                 summoned.CreatureType = CreatureType.Undead;
 

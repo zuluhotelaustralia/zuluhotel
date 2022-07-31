@@ -9,7 +9,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
     public class IntBonus : BaseStatBonus<IntBonusInfo>
     {
         [IgnoreMember]
-        public override string AffixName => EnchantmentInfo.GetName(Value, Cursed);
+        public override string AffixName => Value > 0 ? EnchantmentInfo.GetName(Value / 5, Cursed) : string.Empty;
         public IntBonus() : base(StatType.Int) { }
     }
     
