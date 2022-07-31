@@ -1794,7 +1794,7 @@ namespace Server.Mobiles
             var success = res == MoveResult.Success || res == MoveResult.SuccessAutoTurn ||
                    badStateOk && res == MoveResult.BadState;
 
-            if (success && m_Mobile.ControlOrder is OrderType.Come or OrderType.Follow)
+            if (success && (m_Mobile.Controlled || m_Mobile.Summoned) && m_Mobile.ControlOrder is OrderType.Come or OrderType.Follow)
             {
                 var master = m_Mobile.GetMaster();
                 if (master != null && m_Mobile.GetDistanceToSqrt(master) > 4)
