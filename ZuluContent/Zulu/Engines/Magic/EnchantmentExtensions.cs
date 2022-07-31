@@ -104,12 +104,15 @@ namespace ZuluContent.Zulu.Engines.Magic
         }
 
         public static bool TrySetResist(this IEnchanted enchanted, ElementalType type,
-            ElementalProtectionLevel level) =>
-            enchanted.TrySetResist(type,
-                (type == ElementalType.Poison || type == ElementalType.MagicImmunity ||
-                 type == ElementalType.MagicReflection)
-                    ? (int) level
+            ElementalProtectionLevel level)
+        {
+            return enchanted.TrySetResist(type,
+                type == ElementalType.Poison || type == ElementalType.MagicImmunity ||
+                type == ElementalType.MagicReflection || type == ElementalType.Paralysis ||
+                type == ElementalType.HealingBonus
+                    ? (int)level
                     : IElementalResistible.GetResistForProtectionLevel(level));
+        }
 
         public static bool TrySetResist(this Mobile mobile, ElementalType type, ElementalProtectionLevel level) =>
             mobile is IEnchanted enchanted && TrySetResist(enchanted, type, level);

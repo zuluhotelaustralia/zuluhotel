@@ -13,6 +13,7 @@ using Server.Spells.Second;
 using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic.Enchantments;
 using ZuluContent.Zulu.Engines.Magic.Hooks;
+using ZuluContent.Zulu.Items;
 
 namespace Scripts.Zulu.Engines.Classes
 {
@@ -323,13 +324,14 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 var armour = new[]
                 {
-                    mobile.ShieldArmor as BaseArmor,
-                    mobile.NeckArmor as BaseArmor,
-                    mobile.HandArmor as BaseArmor,
-                    mobile.HeadArmor as BaseArmor,
-                    mobile.ArmsArmor as BaseArmor,
-                    mobile.LegsArmor as BaseArmor,
-                    mobile.ChestArmor as BaseArmor,
+                    mobile.ShieldArmor as BaseEquippableItem,
+                    mobile.NeckArmor as BaseEquippableItem,
+                    mobile.HandArmor as BaseEquippableItem,
+                    mobile.HeadArmor as BaseEquippableItem,
+                    mobile.ArmsArmor as BaseEquippableItem,
+                    mobile.LegsArmor as BaseEquippableItem,
+                    mobile.ChestArmor as BaseEquippableItem,
+                    mobile.FindItemOnLayer(Layer.OuterTorso) as BaseEquippableItem
                 };
 
                 return armour.Sum(a => a?.Enchantments.Get((MagicEfficiencyPenalty e) => e.Value) ?? 0);
@@ -396,13 +398,13 @@ namespace Scripts.Zulu.Engines.Classes
 
         public void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
         {
-            if (healer is IZuluClassed { ZuluClass: { } cls })
+            if (healer is IZuluClassed cls)
             {
-                var bonus = cls.Type switch
+                var bonus = cls.ZuluClass.Type switch
                 {
-                    ZuluClassType.Warrior when source is Bandage => cls.Bonus,
-                    ZuluClassType.Ranger when source is Bandage => cls.Bonus,
-                    ZuluClassType.Mage when source is Spell => cls.Bonus,
+                    ZuluClassType.Warrior when source is BandageContext => cls.ZuluClass.Bonus,
+                    ZuluClassType.Ranger when source is BandageContext => cls.ZuluClass.Bonus,
+                    ZuluClassType.Mage when source is Spell => cls.ZuluClass.Bonus,
                     _ => 1.0
                 };
 
@@ -410,8 +412,8 @@ namespace Scripts.Zulu.Engines.Classes
 
                 if (bonus > 1.0)
                     DebugLog(healer, $"Increased healing from {source} " +
-                                     $"by {cls.Bonus} " +
-                                     $"(level {cls.Level} {cls.Type})");
+                                     $"by {cls.ZuluClass.Bonus} " +
+                                     $"(level {cls.ZuluClass.Level} {cls.ZuluClass.Type})");
             }
         }
 

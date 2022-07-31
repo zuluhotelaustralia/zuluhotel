@@ -21,8 +21,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
 
         public override void OnHeal(Mobile healer, Mobile patient, object source, ref double healAmount)
         {
-            var healingBonusLevel = GetProtectionLevelForResist(Value);
-            var healDelta = healAmount * (int) healingBonusLevel * 0.1;
+            var healDelta = healAmount * Value * 0.1;
             if (Cursed > CurseType.None)
                 healAmount -= healDelta;
             else

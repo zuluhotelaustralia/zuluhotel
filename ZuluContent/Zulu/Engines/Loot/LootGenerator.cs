@@ -402,11 +402,11 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyOnHitScript(LootItem item, Container container)
         {
-            var scriptType = RandomMinMax(1, 94) + item.ItemLevel * 2;
+            var scriptType = RandomMinMax(1, 95) + item.ItemLevel * 2;
             
             if (scriptType <= 80)
                 ApplyResistantHitscript(item);
-            else if (scriptType <= 105)
+            else if (scriptType is > 100 and <= 105)
             {
                 item.Deleted = true;
                 var gmArmor = CreateRandomGMArmor();
@@ -417,7 +417,7 @@ namespace Server.Scripts.Engines.Loot
 
         private static void ApplyWeaponHitScript(LootItem item, Container container)
         {
-            var scriptType = RandomMinMax(1, 94) + item.ItemLevel * 2;
+            var scriptType = RandomMinMax(1, 95) + item.ItemLevel * 2;
 
             if (scriptType <= 40)
                 ApplySpellHitscript(item);

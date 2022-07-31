@@ -186,8 +186,8 @@
       },
       "PollGroup": {
         "type": "Transitive",
-        "resolved": "1.1.0",
-        "contentHash": "yptZwQgWrYipj6lznCppIIEJ3RJzxx1L8dn+7BjHefaDUjFr37kEFuYd39KXiOiA2HVUOIAvQ6/KYJWgasRiGA=="
+        "resolved": "1.2.1",
+        "contentHash": "tW80WbR0UPbftnK9rv3Tb4FKr2M+cYwmVx5wC19Wu7LARa1zwyqmHW469+EvspmuYv5qv5x+V7SYvZmT2cwc1g=="
       },
       "Portable.BouncyCastle": {
         "type": "Transitive",
@@ -492,7 +492,7 @@
           "Microsoft.Toolkit.HighPerformance": "7.1.2",
           "ModernUO.Serialization.Annotations": "2.0.2",
           "ModernUO.Serialization.Generator": "2.0.4",
-          "PollGroup": "1.1.0",
+          "PollGroup": "1.2.1",
           "Serilog": "2.11.0",
           "Serilog.Sinks.Async": "1.5.0",
           "Serilog.Sinks.Console": "4.0.1",
