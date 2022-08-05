@@ -26,8 +26,6 @@ ARG UID=1000
 RUN groupadd -g ${UID} ${USER} && \
     useradd -l -u ${UID} -g ${USER} -s /bin/sh ${USER}
 
-USER ${user}
-
 RUN apt-get update && \
    apt-get install -y -q --no-install-recommends \
    ca-certificates=20211016~20.04.1 \
@@ -43,6 +41,7 @@ RUN apt-get update && \
 
 COPY --chown=${USER} --from=builder /source/ModernUO/Distribution /app
 
+USER ${USER}
 WORKDIR /app
 EXPOSE 2593
 
