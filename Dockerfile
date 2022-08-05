@@ -6,9 +6,9 @@ WORKDIR /source
 RUN apt-get update && \
    apt-get install -y -q --no-install-recommends \
    ca-certificates=20211016~20.04.1 \
-   rsync=3.1.3-8ubuntu0.3 \
-   && apt-get clean \
-   && rm -r /var/lib/apt/lists/*
+   rsync=3.1.3-8ubuntu0.3 && \
+   apt-get clean && \
+   rm -r /var/lib/apt/lists/*
 
 COPY . .
 
