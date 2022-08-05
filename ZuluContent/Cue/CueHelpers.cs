@@ -28,14 +28,20 @@ namespace Scripts.Cue
                 [JsonPropertyName("browser_download_url")]
                 public string Url { get; init; }
             }
-        } 
-        
+        }
+
         public static void DownloadCueCli(string destination, string fileName)
         {
             if (!Directory.Exists(destination))
                 Directory.CreateDirectory(destination);
 
-            using (var client = new HttpClient())
+            using (var client = new HttpClient(
+                new HttpClientHandler
+                {
+                    AllowAutoRedirect = true,
+                    MaxAutomaticRedirections = 5
+                }
+            ))
             {
                 client.BaseAddress = new Uri("https://api.github.com");
                 client.DefaultRequestHeaders.Add("User-Agent", "Anything");
@@ -51,7 +57,7 @@ namespace Scripts.Cue
                 {
                     if (!a.Url.Contains(arch, StringComparison.InvariantCultureIgnoreCase))
                         return false;
-                    
+
                     if (Core.IsWindows && a.Url.Contains("windows", StringComparison.InvariantCultureIgnoreCase))
                         return true;
                     if (Core.IsDarwin && a.Url.Contains("darwin", StringComparison.InvariantCultureIgnoreCase))
@@ -84,7 +90,7 @@ namespace Scripts.Cue
             if (!File.Exists(Path.Combine(destination, fileName)))
                 throw new ApplicationException($"Failed to extract cue cli to ${destination}");
         }
-        
+
         public static (string stdout, string stderr, int exitCode) RunCueCli(string workingDir, params string[] args)
         {
             var cueFileName = $"cue{(Core.IsWindows ? ".exe" : "")}";
@@ -95,19 +101,19 @@ namespace Scripts.Cue
             {
                 Utility.PushColor(ConsoleColor.Yellow);
                 Console.Write("CUE cli is missing, downloading latest GitHub release ... ");
-                
+
                 DownloadCueCli(cueCliRoot, cueFileName);
-                if (Core.IsLinux || Core.IsDarwin) 
+                if (Core.IsLinux || Core.IsDarwin)
                     Process.Start("chmod", $"755 {cueCliPath}");
-                
+
                 Utility.PopColor();
                 Utility.PushColor(ConsoleColor.Green);
                 Console.Write("done; ");
                 Utility.PopColor();
                 Console.Write("running cli ... ");
 
-            } 
-            
+            }
+
             var startInfo = new ProcessStartInfo
             {
                 Arguments = string.Join(" ", args),

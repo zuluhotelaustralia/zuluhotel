@@ -25,10 +25,22 @@ namespace Scripts.Cue
         /// <param name="outputDir">Output directory to write the files.</param>
         public static void ExtractTarGz(Stream stream, string outputDir)
         {
+            // A GZipStream is not seekable, so copy it first to a MemoryStream
             using (var gzip = new GZipStream(stream, CompressionMode.Decompress))
             {
-                // removed convertation to MemoryStream
-                ExtractTar(gzip, outputDir);
+                const int chunk = 4096;
+                using (var memStr = new MemoryStream())
+                {
+                    int read;
+                    var buffer = new byte[chunk];
+                    while ((read = gzip.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        memStr.Write(buffer, 0, read);
+                    }
+
+                    memStr.Seek(0, SeekOrigin.Begin);
+                    ExtractTar(memStr, outputDir);
+                }
             }
         }
 

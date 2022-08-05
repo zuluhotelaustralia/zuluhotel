@@ -45,10 +45,10 @@ namespace Server
 
             DefaultSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             DefaultSerializerOptions.PropertyNameCaseInsensitive = true;
-            
+
             _root = LoadCueConfiguration();
         }
-        
+
         private static RootConfiguration LoadCueConfiguration()
         {
             #if DEBUG
@@ -76,7 +76,7 @@ namespace Server
                 new EnumerationOptions { RecurseSubdirectories = true });
             var jsonCacheLastWrite = File.GetLastWriteTimeUtc(jsonCachePath);
             var lastWrite = files.Length > 0 ? files.Select(File.GetLastWriteTimeUtc).Max() : jsonCacheLastWrite;
-            
+
             if (!File.Exists(jsonCachePath) || lastWrite != jsonCacheLastWrite)
             {
                 Logger.Information("CUE Configuration is out of date, rebuilding via cli {0} ... ", $"cue {cueArgs}");
@@ -86,12 +86,12 @@ namespace Server
                     throw new ApplicationException(
                         $"Failed to run cli command line, received non-zero exit code {exitCode}: {stderr}"
                     );
-                    
+
                 Logger.Information("Finished building CUE configuration.");
 
                 File.SetLastWriteTime(jsonCachePath, lastWrite);
             }
-                
+
             return DeserializeJsonConfig<RootConfiguration>(jsonCachePath);
         }
 
@@ -99,21 +99,21 @@ namespace Server
         public static T DeserializeJsonConfig<T>(string configFile, JsonSerializerOptions options = null)
         {
             var path = Path.Combine(Server.Core.BaseDirectory, configFile);
-            
+
             if (!File.Exists(path))
             {
                 throw new FileLoadException($"Configuration not found {path}!");
             }
-            
+
             Logger.Information("Deserializing {0} ... ", path);
 
             var config = JsonConfig.Deserialize<T>(path, options ?? DefaultSerializerOptions);
 
             if (config == null)
                 throw new DataException($"DeserializeJsonConfig<{typeof(T).Name}>: failed to deserialize {path}!");
-            
+
             Logger.Information("Finished deserialization.");
-            
+
             return config;
         }
     }

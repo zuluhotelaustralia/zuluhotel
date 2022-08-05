@@ -36,8 +36,8 @@ public class JsHammer : BaseBashing
     private async void SendGump(Mobile from)
     {
         var response = await new JsGump<dynamic, JsGumpResponse>(
-            "TestGump", 
-            from, 
+            "TestGump",
+            from,
             new
             {
                 serial = Serial.Value,
