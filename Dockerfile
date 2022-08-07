@@ -12,8 +12,7 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN rm -rf ModernUO && \
-   git submodule update --init --recursive && \
+RUN git submodule update --init --recursive && \
    dotnet publish -r linux-x64 -c Release
 
 # Server
