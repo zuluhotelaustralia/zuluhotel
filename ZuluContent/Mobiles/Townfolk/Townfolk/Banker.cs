@@ -22,6 +22,21 @@ namespace Server.Mobiles
             m_SBInfos.Add(new SBBanker());
         }
 
+		public override void InitOutfit()
+		{
+			AddItem(new FancyShirt());
+			AddItem(new Surcoat());
+			AddItem(new LongPants{ Hue = 2 });
+			AddItem(new Cloak{ Hue = 753 });
+			AddItem(new Shoes());
+
+			var hairHue = GetHairHue();
+
+			Utility.AssignRandomHair(this, hairHue);
+			Utility.AssignRandomFacialHair(this, hairHue);
+
+		}
+
         public static int GetBalance(Mobile from)
         {
             Item[] gold;
