@@ -4,6 +4,7 @@ using ZuluContent.Zulu.Items;
 namespace Server.Items
 {
     [SerializationGenerator(0, false)]
+	[FlipableAttribute(0x1412, 0x1419)]
     public partial class WaterElementHelm : BaseArmor, IGMItem
     {
         public override int InitMinHits => 70;
