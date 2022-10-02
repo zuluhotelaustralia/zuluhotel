@@ -11,11 +11,11 @@ namespace Server.Items
 
         public override int InitMaxHits => 70;
 
-		public override int DefaultStrReq => 60;
+        public override int DefaultStrReq => 60;
 
-		public override int DefaultDexBonus => -5;
+        public override int DefaultDexBonus => -5;
 
-		public override double DefaultMagicEfficiencyPenalty => 13.0;
+        public override double DefaultMagicEfficiencyPenalty => 13.0;
 
         public override int ArmorBase => 50;
 
@@ -27,7 +27,7 @@ namespace Server.Items
         public EarthElementLeatherChest() : base(0x13CC)
         {
             Hue = 1134;
-			EarthResist = 50;
+            EarthResist = 50;
             Weight = 6.0;
         }
     }

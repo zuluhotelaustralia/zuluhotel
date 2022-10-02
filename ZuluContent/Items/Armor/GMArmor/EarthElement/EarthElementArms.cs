@@ -4,8 +4,8 @@ using ZuluContent.Zulu.Items;
 namespace Server.Items
 {
     [SerializationGenerator(0, false)]
-    [FlipableAttribute(0x1411, 0x141a)]
-    public partial class EarthElementLegs : BaseArmor, IGMItem
+    [FlipableAttribute(0x1410, 0x1417)]
+    public partial class EarthElementArms : BaseArmor, IGMItem
     {
         public override int InitMinHits => 70;
 
@@ -13,22 +13,22 @@ namespace Server.Items
 
         public override int DefaultStrReq => 110;
 
-		public override int DefaultDexBonus => -4;
+        public override int DefaultDexBonus => -4;
 
-		public override double DefaultMagicEfficiencyPenalty => 9.0;
+        public override double DefaultMagicEfficiencyPenalty => 9.0;
 
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 
-        public override string DefaultName => "Plate Legs of the Earth Element";
+        public override string DefaultName => "Plate Arms of the Earth Element";
 
         [Constructible]
-        public EarthElementLegs() : base(0x1411)
+        public EarthElementArms() : base(0x1410)
         {
             Hue = 1134;
-			EarthResist = 50;
-            Weight = 7.0;
+            EarthResist = 50;
+            Weight = 5.0;
         }
     }
 }

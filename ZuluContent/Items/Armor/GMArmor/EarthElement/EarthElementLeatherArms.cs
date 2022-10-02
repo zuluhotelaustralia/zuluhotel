@@ -11,23 +11,23 @@ namespace Server.Items
 
         public override int InitMaxHits => 70;
 
-		public override int DefaultStrReq => 60;
+        public override int DefaultStrReq => 60;
 
-		public override int DefaultDexBonus => -2;
+        public override int DefaultDexBonus => -2;
 
-		public override double DefaultMagicEfficiencyPenalty => 5.0;
+        public override double DefaultMagicEfficiencyPenalty => 5.0;
 
         public override int ArmorBase => 50;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
-        
+
         public override string DefaultName => "Leather Sleeves of the Earth Element";
 
         [Constructible]
         public EarthElementLeatherArms() : base(0x13CD)
         {
             Hue = 1134;
-			EarthResist = 50;
+            EarthResist = 50;
             Weight = 2.0;
         }
     }

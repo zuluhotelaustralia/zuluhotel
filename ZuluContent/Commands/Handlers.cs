@@ -20,7 +20,7 @@ namespace Server.Commands
     {
         public static void Initialize()
         {
-			CommandSystem.Prefix = ServerConfiguration.GetSetting("commandsystem.prefix", "[");
+            CommandSystem.Prefix = ServerConfiguration.GetSetting("commandsystem.prefix", "[");
 
             Register("Go", AccessLevel.Counselor, Go_OnCommand);
 
