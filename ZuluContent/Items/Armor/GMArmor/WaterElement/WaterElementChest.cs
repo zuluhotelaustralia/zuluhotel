@@ -16,13 +16,14 @@ namespace Server.Items
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
-        
+
         public override string DefaultName => "Breastplate of the Water Element";
 
         [Constructible]
         public WaterElementChest() : base(0x1415)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 10.0;
         }
     }

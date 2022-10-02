@@ -16,14 +16,14 @@ namespace Server.Items
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
-        
-        public override string DefaultName => "Plate Gloves of the Water Element";
 
+        public override string DefaultName => "Plate Gloves of the Water Element";
 
         [Constructible]
         public WaterElementGloves() : base(0x1414)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 2.0;
         }
     }

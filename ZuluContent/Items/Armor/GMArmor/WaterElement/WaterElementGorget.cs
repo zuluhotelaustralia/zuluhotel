@@ -15,13 +15,14 @@ namespace Server.Items
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
-        
+
         public override string DefaultName => "Plate Gorget of the Water Element";
 
         [Constructible]
         public WaterElementGorget() : base(0x1413)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 2.0;
         }
     }

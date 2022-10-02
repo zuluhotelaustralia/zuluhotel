@@ -21,6 +21,7 @@ namespace Server.Items
         public WaterElementLeatherLegs() : base(0x13CB)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 4.0;
         }
     }

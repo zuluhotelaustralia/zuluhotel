@@ -23,6 +23,7 @@ namespace Server.Items
         public WaterElementArms() : base(0x1410)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 5.0;
         }
     }

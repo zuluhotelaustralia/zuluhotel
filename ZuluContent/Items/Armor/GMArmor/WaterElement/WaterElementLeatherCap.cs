@@ -21,6 +21,7 @@ namespace Server.Items
         public WaterElementLeatherCap() : base(0x1DB9)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 2.0;
         }
     }
