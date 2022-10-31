@@ -61,7 +61,7 @@ namespace Scripts.Zulu.Packets
         }
 
         private static bool IsZuluClient(NetState ns) =>
-            ns?.Mobile != null && ns.Version.SourceString.InsensitiveContains(ZuluClientSuffix);
+            ns?.Mobile != null && ns.Version?.SourceString != null && ns.Version.SourceString.InsensitiveContains(ZuluClientSuffix);
 
         public static void SendZuluPlayerStatus(NetState ns, PlayerMobile player)
         {
