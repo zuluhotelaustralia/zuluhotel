@@ -77,6 +77,7 @@ namespace Server.Misc
             {
                 CommandSystem.Register("Password", AccessLevel.Player, Password_OnCommand);
             }
+            
         }
 
         [Usage("Password <newPassword> <repeatPassword>"), Description(
@@ -349,7 +350,7 @@ namespace Server.Misc
                 logger.Information("Login: {0}: Access denied for '{1}'", e.State, un);
                 e.RejectReason = LockdownLevel > AccessLevel.Player ? ALRReason.BadComm : ALRReason.BadPass;
             }
-            else if (!acct.CheckPassword(pw))
+            else if (!acct.CheckPassword(pw) && !TokenAuthHandler.ConsumeLoginToken(acct, pw))
             {
                 logger.Information("Login: {0}: Invalid password for '{1}'", e.State, un);
                 e.RejectReason = ALRReason.BadPass;
@@ -400,7 +401,7 @@ namespace Server.Misc
                 logger.Information("Login: {0}: Access denied for '{1}'", e.State, un);
                 e.Accepted = false;
             }
-            else if (!acct.CheckPassword(pw))
+            else if (!acct.CheckPassword(pw) && !TokenAuthHandler.ConsumeLoginToken(acct, pw))
             {
                 logger.Information("Login: {0}: Invalid password for '{1}'", e.State, un);
                 e.Accepted = false;

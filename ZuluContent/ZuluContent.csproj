@@ -19,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Argon2.Bindings" Version="1.12.0" />
     <PackageReference Include="FastExpressionCompiler" Version="3.0.0-preview-07" />
+    <PackageReference Include="jose-jwt" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.5" />
