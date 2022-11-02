@@ -4,25 +4,29 @@ using ZuluContent.Zulu.Items;
 namespace Server.Items
 {
     [SerializationGenerator(0, false)]
-    public partial class WaterElementGorget : BaseArmor, IGMItem
+    public partial class EarthElementGorget : BaseArmor, IGMItem
     {
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
 
-        public override int DefaultStrReq => 100;
+        public override int DefaultStrReq => 110;
+
+        public override int DefaultDexBonus => -2;
+
+        public override double DefaultMagicEfficiencyPenalty => 5.0;
 
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 
-        public override string DefaultName => "Plate Gorget of the Water Element";
+        public override string DefaultName => "Plate Gorget of the Earth Element";
 
         [Constructible]
-        public WaterElementGorget() : base(0x1413)
+        public EarthElementGorget() : base(0x1413)
         {
-            Hue = 1167;
-            WaterResist = 50;
+            Hue = 1134;
+            EarthResist = 50;
             Weight = 2.0;
         }
     }

@@ -5,25 +5,29 @@ namespace Server.Items
 {
     [SerializationGenerator(0, false)]
     [FlipableAttribute(0x1414, 0x1418)]
-    public partial class WaterElementGloves : BaseArmor, IGMItem
+    public partial class EarthElementGloves : BaseArmor, IGMItem
     {
         public override int InitMinHits => 70;
 
         public override int InitMaxHits => 70;
 
-        public override int DefaultStrReq => 100;
+        public override int DefaultStrReq => 110;
+
+        public override int DefaultDexBonus => -2;
+
+        public override double DefaultMagicEfficiencyPenalty => 6.0;
 
         public override int ArmorBase => 60;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 
-        public override string DefaultName => "Plate Gloves of the Water Element";
+        public override string DefaultName => "Plate Gloves of the Earth Element";
 
         [Constructible]
-        public WaterElementGloves() : base(0x1414)
+        public EarthElementGloves() : base(0x1414)
         {
-            Hue = 1167;
-            WaterResist = 50;
+            Hue = 1134;
+            EarthResist = 50;
             Weight = 2.0;
         }
     }

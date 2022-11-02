@@ -14,13 +14,14 @@ namespace Server.Items
         public override int ArmorBase => 40;
 
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
-        
+
         public override string DefaultName => "Leather Sleeves of the Water Element";
 
         [Constructible]
         public WaterElementLeatherArms() : base(0x13CD)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 2.0;
         }
     }

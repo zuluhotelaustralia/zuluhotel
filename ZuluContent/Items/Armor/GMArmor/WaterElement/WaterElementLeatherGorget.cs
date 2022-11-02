@@ -20,6 +20,7 @@ namespace Server.Items
         public WaterElementLeatherGorget() : base(0x13C7)
         {
             Hue = 1167;
+            WaterResist = 50;
             Weight = 1.0;
         }
     }
