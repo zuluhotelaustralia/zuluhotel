@@ -50,20 +50,20 @@
     <AdditionalFiles Include="Migrations/*.v*.json" />
   </ItemGroup>
 
-<!--  <PropertyGroup>-->
-<!--    <PostBuildEvent Condition="'$(OS)' != 'UNIX'">-->
-<!--      robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /IT /S /XA:H-->
-<!--      robocopy "$(SolutionDir)Distribution\Data" "$(OutDir)\..\Data" /MIR /FFT /XA:H-->
-<!--      if %errorlevel% leq 3 exit 0 else exit %errorlevel%-->
-<!--    </PostBuildEvent>-->
-<!--  </PropertyGroup>-->
+  <PropertyGroup>
+    <PostBuildEvent Condition="'$(OS)' != 'UNIX'">
+      robocopy "$(SolutionDir)Distribution\Configuration" "$(OutDir)\..\Configuration" /IT /S /XA:H
+      robocopy "$(SolutionDir)Distribution\Data" "$(OutDir)\..\Data" /MIR /FFT /XA:H
+      if %errorlevel% leq 3 exit 0 else exit %errorlevel%
+    </PostBuildEvent>
+  </PropertyGroup>
 
-<!--  <PropertyGroup>-->
-<!--    <PostBuildEvent Condition="'$(OS)' == 'UNIX'">-->
-<!--      rsync -avh $(SolutionDir)Distribution/ $(OutDir)/../-->
-<!--      rsync -avh $(SolutionDir)Distribution/Data/ $(OutDir)/../Data/ &#45;&#45;delete-->
-<!--    </PostBuildEvent>-->
+  <PropertyGroup>
+    <PostBuildEvent Condition="'$(OS)' == 'UNIX'">
+      rsync -avh $(SolutionDir)Distribution/ $(OutDir)/../
+      rsync -avh $(SolutionDir)Distribution/Data/ $(OutDir)/../Data/ --delete
+    </PostBuildEvent>
 
-<!--  </PropertyGroup>-->
+  </PropertyGroup>
 
 </Project>
