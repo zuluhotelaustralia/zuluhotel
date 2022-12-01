@@ -1,4 +1,6 @@
 using System;
+using System.Dynamic;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Server.Items;
@@ -31,21 +33,51 @@ public class JsHammer : BaseBashing
         SendGump(from);
     }
 
-    record JsGumpResponse(string Text, bool? Something, string LongString);
+    record WebGumpResponse(string Text, int Blah);
 
     private async void SendGump(Mobile from)
     {
-        var response = await new JsGump<dynamic, JsGumpResponse>(
-            "TestGump", 
-            from, 
+        from.CloseGump<WebTestGump>();
+
+        var gump = new WebTestGump();
+        from.NetState.Gumps.Add(gump);
+
+        var firstResponse = await gump.SendAsync<dynamic, JsonNode>(
+            from.NetState, 
             new
             {
-                serial = Serial.Value,
-                testData = "Hello",
+                serial = Serial.Value, 
+                testData = "Hello"
             }
         );
 
-        Console.WriteLine($"Response from JsGump: {response}");
+        if (firstResponse is null)
+        {
+            Console.WriteLine("Gump was closed");
+            return;
+        }
+        
+        Console.WriteLine($"First Response from WebGump: {firstResponse}");
+
+        var secondResponse = await gump.SendAsync<dynamic, JsonNode>(
+            from.NetState, 
+            new
+            {
+                serial = Serial.Value, 
+                testData = "Second Hello", 
+                echo = firstResponse["text"]?.GetValue<string>()
+            }
+        ); 
+        
+        if (secondResponse is null)
+        {
+            Console.WriteLine("Gump was closed");
+            return;
+        }
+
+        Console.WriteLine($"Second Response from WebGump: {secondResponse}");
+
+        gump.Close(from.NetState);
     }
 
     public override void Serialize(IGenericWriter writer)

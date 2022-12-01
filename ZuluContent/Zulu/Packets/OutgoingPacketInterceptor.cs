@@ -3,8 +3,11 @@ using System.Buffers;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Org.BouncyCastle.Bcpg;
 using Server;
+using Server.Gumps;
 using Server.Items;
+using Server.Mobiles;
 using Server.Network;
 using static Server.Network.OutgoingMessagePackets;
 
@@ -18,6 +21,21 @@ namespace Scripts.Zulu.Packets
         {
             switch (input[0])
             {
+                case 0xA1:
+                case 0xA2:
+                case 0xA3:
+                case 0x2D:
+                case 0x98:
+                case 0x11:
+                    var reader = new SpanReader(input);
+                    reader.Seek(reader.ReadByte() is 0x98 or 0x11 ? 3 : 1, SeekOrigin.Begin);
+                    var serial = (Serial) reader.ReadUInt32();
+                    if (World.FindEntity(serial) is PlayerMobile player)
+                    {
+                        Timer.StartTimer(() => WebPlayerStatusGump.Update(player));
+                    }
+                    
+                    break;
                 case 0x1C:
                     break;
                 case 0xBF:

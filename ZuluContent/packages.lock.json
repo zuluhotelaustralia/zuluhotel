@@ -705,14 +705,14 @@
       "ModernUO": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Toolkit.HighPerformance": "7.1.2",
-          "ModernUO.Serialization.Annotations": "2.0.2",
-          "ModernUO.Serialization.Generator": "2.0.4",
-          "PollGroup": "1.2.1",
-          "Serilog": "2.11.0",
-          "Serilog.Sinks.Async": "1.5.0",
-          "Serilog.Sinks.Console": "4.0.1",
-          "Zlib.Bindings": "1.9.2"
+          "Microsoft.Toolkit.HighPerformance": "[7.1.2, )",
+          "ModernUO.Serialization.Annotations": "[2.0.2, )",
+          "ModernUO.Serialization.Generator": "[2.0.4, )",
+          "PollGroup": "[1.2.1, )",
+          "Serilog": "[2.11.0, )",
+          "Serilog.Sinks.Async": "[1.5.0, )",
+          "Serilog.Sinks.Console": "[4.0.1, )",
+          "Zlib.Bindings": "[1.9.2, )"
         }
       }
     }
