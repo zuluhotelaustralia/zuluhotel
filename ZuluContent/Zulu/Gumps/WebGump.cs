@@ -34,10 +34,10 @@ public abstract class WebGump : Gump
     protected virtual void Prepare<TRequest>(TRequest requestData, int maxResponseSegments) where TRequest : class
     {
         Entries.Clear();
-        Entries.Add(new GumpLabel(0, 0, 0, $"WebGump {m_Type}"));
-        Entries.Add(new GumpButton(0, 0, 0, 0, 1000));
+        Entries.Add(new GumpTextEntry(0, 0, 0, 0, 0, 0, $"WebGump {m_Type}"));
+        Entries.Add(new GumpButton(0, 0, 29, 29, 1000));
         var json = JsonSerializer.Serialize(requestData, SerializerOptions);
-        Entries.Add(new GumpHtml(0, 0, 0, 0, json, false, false));
+        Entries.Add(new GumpTextEntry(0, 0, 0, 0, 0, 0, json));
         
         for (var i = 0; i < maxResponseSegments; i++) 
             Entries.Add(new GumpTextEntry(0, 0, 0, 0, 0, 0, string.Empty));
