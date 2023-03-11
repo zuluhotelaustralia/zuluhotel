@@ -25,6 +25,8 @@ namespace Server.Mobiles
             m_SBInfos.Add(new SBStavesWeapon());
             m_SBInfos.Add(new SBCarpenter());
             m_SBInfos.Add(new SBWoodenShields());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         public override void InitOutfit()

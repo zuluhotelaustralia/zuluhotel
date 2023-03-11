@@ -21,6 +21,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBBeekeeper());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         public override VendorShoeType ShoeType => VendorShoeType.Boots;

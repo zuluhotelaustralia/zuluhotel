@@ -23,6 +23,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBHolyMage());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         public Item ApplyHue(Item item, int hue)

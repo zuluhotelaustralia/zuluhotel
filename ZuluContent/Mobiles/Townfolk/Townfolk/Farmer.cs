@@ -20,6 +20,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBFarmer());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         public override VendorShoeType ShoeType => VendorShoeType.ThighBoots;

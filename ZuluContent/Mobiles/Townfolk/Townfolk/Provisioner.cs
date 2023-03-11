@@ -22,6 +22,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBProvisioner());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         [Constructible]

@@ -18,6 +18,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBJewel());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         [Constructible]

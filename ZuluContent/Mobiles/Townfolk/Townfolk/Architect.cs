@@ -21,6 +21,8 @@ namespace Server.Mobiles
         {
             m_SBInfos.Add(new SBHouseDeed());
             m_SBInfos.Add(new SBArchitect());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         [Constructible]
