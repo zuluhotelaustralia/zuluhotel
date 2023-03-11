@@ -29,6 +29,9 @@ namespace Server.Mobiles
 
         private DateTime m_LastRestock;
 
+        //All vendors will buy anything from the player while this is true.
+        public static bool zuluStyleSell = true;
+
         public override bool CanTeach
         {
             get { return true; }
@@ -982,7 +985,7 @@ namespace Server.Mobiles
                     }
                 }
             }
-
+            int BeforeGiveGold = GiveGold;
             if (GiveGold > 0)
             {
                 while (GiveGold > 60000)
@@ -995,8 +998,7 @@ namespace Server.Mobiles
 
                 seller.PlaySound(0x0037); //Gold dropping sound
             }
-            //no cliloc for this?
-            //SayTo( seller, true, "Thank you! I bought {0} item{1}. Here is your {2}gp.", Sold, (Sold > 1 ? "s" : ""), GiveGold );
+            SayTo( seller, true, "Thank you! I bought {0} item{1}. Here is your {2}gp.", Sold, (Sold > 1 ? "s" : ""), BeforeGiveGold );
 
             return true;
         }

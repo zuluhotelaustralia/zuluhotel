@@ -28,6 +28,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBThief());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         public override void InitOutfit()

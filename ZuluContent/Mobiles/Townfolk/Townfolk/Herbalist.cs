@@ -21,6 +21,8 @@ namespace Server.Mobiles
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBHerbalist());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         public override VendorShoeType ShoeType => Utility.RandomBool() ? VendorShoeType.Shoes : VendorShoeType.Sandals;

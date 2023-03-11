@@ -38,6 +38,8 @@ namespace Server.Mobiles
         {
             m_SBInfos.Add(new SBBowyer());
             m_SBInfos.Add(new SBRangedWeapon());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         [Constructible]

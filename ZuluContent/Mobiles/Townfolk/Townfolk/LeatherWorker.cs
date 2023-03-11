@@ -21,6 +21,8 @@ namespace Server.Mobiles
             m_SBInfos.Add(new SBLeatherArmor());
             m_SBInfos.Add(new SBStuddedArmor());
             m_SBInfos.Add(new SBLeatherWorker());
+            if (zuluStyleSell)
+                m_SBInfos.Add(new SAll());
         }
 
         [Constructible]
