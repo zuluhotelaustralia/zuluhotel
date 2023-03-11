@@ -145,14 +145,15 @@ namespace Scripts.Zulu.Engines.Classes
             {
                 var baseSkill = (int) (skill.Base);
                 var amount = 1;
+
+                skill.BaseFixedPoint -= amount * 10;
+
                 if (amount > baseSkill)
                 {
                     amount = baseSkill;
                     skill.SetLockNoRelay(SkillLock.Locked);
                     skill.Update();
                 }
-
-                skill.BaseFixedPoint -= amount * 10;
                 return;
             }
 
