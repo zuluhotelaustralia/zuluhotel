@@ -176,6 +176,7 @@ namespace Server.Items
             get => Enchantments.Get((PoisonHit e) => e.Poison);
             set => Enchantments.Set((PoisonHit e) => e.Level = (PoisonLevel) value.Level);
         }
+        public bool PermaPoison { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public MarkQuality Mark
@@ -631,13 +632,14 @@ namespace Server.Items
 
         public void CheckApplyPoison(Mobile attacker, Mobile defender)
         {
-            if (Poison != null && PoisonCharges > 0)
+            if (Poison != null && (PoisonCharges > 0 || PermaPoison))
             {
-                PoisonCharges -= 1;
+                if (!PermaPoison)
+                    PoisonCharges -= 1;
 
                 defender.ApplyPoison(attacker, Poison);
 
-                if (PoisonCharges == 0)
+                if (PoisonCharges == 0 && !PermaPoison)
                     Poison = null;
             }
         }
