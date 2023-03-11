@@ -110,11 +110,15 @@ namespace Server.Mobiles
 
             public override void OnClick()
             {
-                m_Mobile.Say("What to do with all 9 Pentagram/Shell pieces?");
+                if (m_Mobile.Title == "the Water Element Shrine Lord")
+                    m_Mobile.Say("What to do with all 9 Pentagram/Shell pieces?");
+                else
+                    m_Mobile.Say("What to do with all 9 Pentagram pieces?");
                 m_Mobile.Say("Bring them to me and drop them on me.");
                 m_Mobile.Say("You do not have to bring them all at the same time.");
                 m_Mobile.Say("Pentagram pieces can be found on stronger monsters.");
-                m_Mobile.Say("Shell pieces can be found while fishing.");
+                if (m_Mobile.Title == "the Water Element Shrine Lord")
+                    m_Mobile.Say("Shell pieces can be found while fishing.");
                 m_Mobile.Say("Good luck brave traveler!");
             }
         }
