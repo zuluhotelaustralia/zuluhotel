@@ -155,7 +155,7 @@ namespace Server.Engines.Spawners
 
                 if (str.Length > 0)
                 {
-                    var exists = Creatures.Exists(str);
+                    var exists = Creatures.Exists(str) || AssemblyHandler.FindTypeByName(str) != null;
 
                     if (!exists)
                     {

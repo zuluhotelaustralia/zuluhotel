@@ -781,6 +781,20 @@ Carpentry: Types.#CraftSettings & {
 			]
 		},
 		{
+            ItemType:  "YoungOakStaff"
+            Name:      "young oak staff"
+            GroupName: 1044295
+            Skill:     89
+            Resources: [
+                {
+                    ItemType: "YoungOakLog"
+                    Name:     "young oak log"
+                    Amount:   15
+                    Message:  1044351
+                },
+            ]
+        },
+		{
 			ItemType:  "WoodenKiteShield"
 			Name:      1027032
 			GroupName: 1044295

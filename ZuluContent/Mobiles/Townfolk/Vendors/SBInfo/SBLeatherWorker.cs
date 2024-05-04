@@ -35,8 +35,8 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(Hide), 2);
-                Add(typeof(ThighBoots), 28);
+                Add(typeof(Hide), 1);
+                Add(typeof(ThighBoots), 2);
             }
         }
     }

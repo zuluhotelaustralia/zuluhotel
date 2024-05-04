@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Scripts.Zulu.Engines.Classes;
 using Server.Engines.Craft;
 using Server.Engines.Magic;
@@ -659,8 +658,10 @@ namespace Server.Items
                 bc.WeaponAbilityChance >= Utility.RandomDouble())
                 ab.OnHit(attacker, defender, ref damage);
 
-            if (attackerWeapon?.EffectHitType != EffectHitType.Piercing && damage < 2)
+            if (defender is BaseCreature { PhysicalImmune: true } || attackerWeapon?.EffectHitType != EffectHitType.Piercing && damage < 2)
                 damage = 2;
+            else if (attacker is BaseSparringPartner || defender is BaseSparringPartner)
+                damage = 0;
 
             CheckApplyPoison(attacker, defender);
 
@@ -863,7 +864,7 @@ namespace Server.Items
                 var armorRating = armor?.ArmorRating ?? 0 + defender.VirtualArmor + defender.VirtualArmorMod;
 
                 rawDamage = ShieldAbsorbDamage(attacker, defender, baseDamage);
-                rawDamage -= armorRating * (Utility.Random(51) + 50) * 0.01;
+                rawDamage -= armorRating * (Utility.RandomMinMax(1, 50) + 50) * 0.01;
             }
             else
             {

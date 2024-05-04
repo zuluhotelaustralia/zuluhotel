@@ -1,22 +1,41 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server;
-using Server.Network;
 using Server.Items;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Spells;
-using Server.Targeting;
 using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 
 namespace Scripts.Zulu.Spells.Earth
 {
     public class ShapeshiftSpell : EarthSpell, IAsyncSpell
     {
+        private static readonly PolymorphEntry[] Entries =
+        {
+            PolymorphEntry.Bird,
+            PolymorphEntry.Rabbit,
+            PolymorphEntry.Eagle,
+            PolymorphEntry.Cat,
+            PolymorphEntry.Dog,
+            PolymorphEntry.Wolf,
+            PolymorphEntry.Deer,
+            PolymorphEntry.Panther,
+            PolymorphEntry.BlackBear,
+            PolymorphEntry.GrizzlyBear,
+            PolymorphEntry.PolarBear,
+            PolymorphEntry.GiantSerpent,
+            PolymorphEntry.EarthElemental,
+            PolymorphEntry.FireElemental,
+            PolymorphEntry.WaterElemental,
+            PolymorphEntry.AirElemental,
+            PolymorphEntry.Dragon,
+            PolymorphEntry.Reaper,
+            PolymorphEntry.Wisp
+        };
+        
         private static readonly Dictionary<int, (int Difficulty, int Points)> BodyData =
             new()
             {
@@ -79,7 +98,7 @@ namespace Scripts.Zulu.Spells.Earth
                 return;
             }
 
-            var bodyId = await new NewPolymorphGump(Caster);
+            var bodyId = await new NewPolymorphGump(Caster, Entries);
 
             if (bodyId <= 0)
                 return;

@@ -69,52 +69,52 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( Scissors ), 6 );
+				Add( typeof( Scissors ), 2 );
 				Add( typeof( SewingKit ), 1 );
-				Add( typeof( Dyes ), 4 );
-				Add( typeof( DyeTub ), 4 );
+				Add( typeof( Dyes ), 2 );
+				Add( typeof( DyeTub ), 2 );
 
-				Add( typeof( BoltOfCloth ), 50 );
+				Add( typeof( BoltOfCloth ), 1 );
 
-				Add( typeof( FancyShirt ), 10 );
-				Add( typeof( Shirt ), 6 );
+				Add( typeof( FancyShirt ), 2 );
+				Add( typeof( Shirt ), 2 );
 
-				Add( typeof( ShortPants ), 3 );
-				Add( typeof( LongPants ), 5 );
+				Add( typeof( ShortPants ), 2 );
+				Add( typeof( LongPants ), 2 );
 
-				Add( typeof( Cloak ), 4 );
-				Add( typeof( FancyDress ), 12 );
-				Add( typeof( Robe ), 9 );
-				Add( typeof( PlainDress ), 7 );
+				Add( typeof( Cloak ), 2 );
+				Add( typeof( FancyDress ), 2 );
+				Add( typeof( Robe ), 2 );
+				Add( typeof( PlainDress ), 2 );
 
-				Add( typeof( Skirt ), 5 );
-				Add( typeof( Kilt ), 5 );
+				Add( typeof( Skirt ), 2 );
+				Add( typeof( Kilt ), 2 );
 
-				Add( typeof( Doublet ), 7 );
-				Add( typeof( Tunic ), 9 );
-				Add( typeof( JesterSuit ), 13 );
+				Add( typeof( Doublet ), 2 );
+				Add( typeof( Tunic ), 2 );
+				Add( typeof( JesterSuit ), 2 );
 
-				Add( typeof( FullApron ), 5 );
-				Add( typeof( HalfApron ), 5 );
+				Add( typeof( FullApron ), 2 );
+				Add( typeof( HalfApron ), 2 );
 
-				Add( typeof( JesterHat ), 6 );
-				Add( typeof( FloppyHat ), 3 );
-				Add( typeof( WideBrimHat ), 4 );
-				Add( typeof( Cap ), 5 );
-				Add( typeof( SkullCap ), 3 );
-				Add( typeof( Bandana ), 3 );
-				Add( typeof( TallStrawHat ), 4 );
-				Add( typeof( StrawHat ), 4 );
-				Add( typeof( WizardsHat ), 5 );
-				Add( typeof( Bonnet ), 4 );
-				Add( typeof( FeatheredHat ), 5 );
-				Add( typeof( TricorneHat ), 4 );
+				Add( typeof( JesterHat ), 2 );
+				Add( typeof( FloppyHat ), 2 );
+				Add( typeof( WideBrimHat ), 2 );
+				Add( typeof( Cap ), 2 );
+				Add( typeof( SkullCap ), 2 );
+				Add( typeof( Bandana ), 2 );
+				Add( typeof( TallStrawHat ), 2 );
+				Add( typeof( StrawHat ), 2 );
+				Add( typeof( WizardsHat ), 2 );
+				Add( typeof( Bonnet ), 2 );
+				Add( typeof( FeatheredHat ), 2 );
+				Add( typeof( TricorneHat ), 2 );
 
-				Add( typeof( SpoolOfThread ), 9 );
+				Add( typeof( SpoolOfThread ), 1 );
 
-				Add( typeof( Flax ), 51 );
-				Add( typeof( Cotton ), 51 );
-				Add( typeof( Wool ), 31 );
+				Add( typeof( Flax ), 1 );
+				Add( typeof( Cotton ), 1 );
+				Add( typeof( Wool ), 1 );
 			}
 		}
 	}

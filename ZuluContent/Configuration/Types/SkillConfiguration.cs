@@ -8,6 +8,7 @@ namespace ZuluContent.Configuration.Types
     {
         public int MaxStatCap { get; init; }
         public int StatCap { get; init; }
+        public int PointsMultiplier { get; init; }
         public Dictionary<SkillName, SkillEntry> Entries { get; init; }
     }
 }

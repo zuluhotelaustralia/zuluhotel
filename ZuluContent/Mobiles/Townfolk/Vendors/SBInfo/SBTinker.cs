@@ -86,48 +86,48 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(Drums), 10);
-                Add(typeof(Tambourine), 10);
-                Add(typeof(LapHarp), 10);
-                Add(typeof(Lute), 10);
+                Add(typeof(Drums), 2);
+                Add(typeof(Tambourine), 2);
+                Add(typeof(LapHarp), 2);
+                Add(typeof(Lute), 2);
 
-                Add(typeof(Shovel), 6);
+                Add(typeof(Shovel), 2);
                 Add(typeof(SewingKit), 1);
-                Add(typeof(Scissors), 6);
-                Add(typeof(Tongs), 7);
+                Add(typeof(Scissors), 2);
+                Add(typeof(Tongs), 2);
                 Add(typeof(Key), 1);
 
-                Add(typeof(DovetailSaw), 6);
-                Add(typeof(MouldingPlane), 6);
+                Add(typeof(DovetailSaw), 2);
+                Add(typeof(MouldingPlane), 2);
                 Add(typeof(Nails), 1);
-                Add(typeof(JointingPlane), 6);
-                Add(typeof(SmoothingPlane), 6);
-                Add(typeof(Saw), 7);
+                Add(typeof(JointingPlane), 2);
+                Add(typeof(SmoothingPlane), 2);
+                Add(typeof(Saw), 2);
 
-                Add(typeof(Clock), 11);
+                Add(typeof(Clock), 2);
                 Add(typeof(ClockParts), 1);
                 Add(typeof(AxleGears), 1);
                 Add(typeof(Gears), 1);
                 Add(typeof(Hinge), 1);
-                Add(typeof(Sextant), 6);
+                Add(typeof(Sextant), 2);
                 Add(typeof(SextantParts), 2);
                 Add(typeof(Axle), 1);
                 Add(typeof(Springs), 1);
 
-                Add(typeof(DrawKnife), 5);
-                Add(typeof(Froe), 5);
-                Add(typeof(Inshave), 5);
-                Add(typeof(Scorp), 5);
+                Add(typeof(DrawKnife), 2);
+                Add(typeof(Froe), 2);
+                Add(typeof(Inshave), 2);
+                Add(typeof(Scorp), 2);
 
-                Add(typeof(Lockpick), 6);
-                Add(typeof(TinkerTools), 3);
+                Add(typeof(Lockpick), 2);
+                Add(typeof(TinkerTools), 2);
 
                 Add(typeof(Log), 1);
 
-                Add(typeof(Pickaxe), 16);
-                Add(typeof(Hammer), 3);
-                Add(typeof(SmithHammer), 11);
-                Add(typeof(ButcherKnife), 6);
+                Add(typeof(Pickaxe), 2);
+                Add(typeof(Hammer), 2);
+                Add(typeof(SmithHammer), 2);
+                Add(typeof(ButcherKnife), 2);
             }
         }
     }

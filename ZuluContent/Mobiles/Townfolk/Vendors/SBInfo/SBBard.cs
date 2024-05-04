@@ -30,11 +30,11 @@ namespace Server.Mobiles
 		{ 
 			public InternalSellInfo() 
 			{ 
-				Add( typeof( LapHarp ), 10 ); 
-				Add( typeof( Lute ), 10 ); 
-				Add( typeof( Drums ), 10 ); 
-				Add( typeof( Harp ), 10 ); 
-				Add( typeof( Tambourine ), 10 ); 
+				Add( typeof( LapHarp ), 2 ); 
+				Add( typeof( Lute ), 2 ); 
+				Add( typeof( Drums ), 2 ); 
+				Add( typeof( Harp ), 2 ); 
+				Add( typeof( Tambourine ), 2 ); 
 			} 
 		} 
 	} 

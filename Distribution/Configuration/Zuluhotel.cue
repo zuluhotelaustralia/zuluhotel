@@ -2,6 +2,7 @@ import (
 	Creatures "github.com/zuluhotelaustralia/zuluhotel/Creatures"
 	Crafting "github.com/zuluhotelaustralia/zuluhotel/Crafting"
 	Resources "github.com/zuluhotelaustralia/zuluhotel/Resources"
+	Rituals "github.com/zuluhotelaustralia/zuluhotel/Rituals"
 	Loot "github.com/zuluhotelaustralia/zuluhotel/Loot"
 	Magic "github.com/zuluhotelaustralia/zuluhotel/Magic"
 	Skills "github.com/zuluhotelaustralia/zuluhotel/Skills"
@@ -57,6 +58,10 @@ Crafting: {
 
 Resources: {
 	Resources
+}
+
+Rituals: {
+	Rituals
 }
 
 Magic: {

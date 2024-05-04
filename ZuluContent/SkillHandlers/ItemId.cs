@@ -17,6 +17,14 @@ namespace Server.SkillHandlers
         {
             Range = 2,
         };
+
+        private static TimeSpan GetDelay(Mobile from)
+        {
+            if (from is IZuluClassed { ZuluClass: { Type: ZuluClassType.Mage, Level: >= 5 } })
+                return TimeSpan.Zero;
+
+            return Delay;
+        }
         
         public override async Task<TimeSpan> OnUse(Mobile from)
         {
@@ -28,7 +36,7 @@ namespace Server.SkillHandlers
             var (targeted, responseType) = await target;
 
             if (responseType != TargetResponseType.Success)
-                return Delay;
+                return GetDelay(from);
 
             switch (targeted)
             {
@@ -56,7 +64,7 @@ namespace Server.SkillHandlers
                     break;
             }
 
-            return ZhConfig.Skills.Entries[SkillName.ItemID].Delay;
+            return GetDelay(from);
         }
     }
 }

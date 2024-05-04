@@ -10,6 +10,7 @@ BrigandArcher: {
 	AlwaysMurderer:       true
 	CreatureType:         "Human"
 	VirtualArmor:         20
+	FightRange:           10
 	HitsMaxSeed:          150
 	LootItemChance:       1
 	LootTable:            "41"

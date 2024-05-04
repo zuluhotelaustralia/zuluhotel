@@ -37,6 +37,31 @@ package Types
 	CraftEndSound:  int32
 }
 
+#RitualDrawSetting: {
+	Speech:      string
+	Direction:   int32
+	XMod:        int32
+	YMod:        int32
+	SoundEffect: int32 | null
+	Text:        string
+	Appear:      #Type | null
+}
+
+#RitualDrawSettings: [...#RitualDrawSetting]
+
+#RitualAppear: {
+    XMod:   int32
+    YMod:   int32
+    ItemId: int32
+}
+
+#RitualSetting: {
+	Speech:      string
+	SoundEffect: int32 | null
+	Text:        string
+	Appear:      [...#RitualAppear]
+}
+
 #ResourceSettings: {
 	BankWidth:      int32
 	BankHeight:     int32

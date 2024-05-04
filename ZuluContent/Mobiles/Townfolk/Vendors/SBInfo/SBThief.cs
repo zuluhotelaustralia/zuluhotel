@@ -36,15 +36,15 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( Backpack ), 7 );
-				Add( typeof( Pouch ), 3 );
-				Add( typeof( Torch ), 3 );
+				Add( typeof( Backpack ), 2 );
+				Add( typeof( Pouch ), 2 );
+				Add( typeof( Torch ), 2 );
 				Add( typeof( Lantern ), 1 );
-				//Add( typeof( OilFlask ), 4 );
-				Add( typeof( Lockpick ), 6 );
-				Add( typeof( WoodenBox ), 7 );
-				Add( typeof( HairDye ), 19 );
-                Add( typeof( ThiefGloves ), 35 );
+				//Add( typeof( OilFlask ), 2 );
+				Add( typeof( Lockpick ), 2 );
+				Add( typeof( WoodenBox ), 2 );
+				Add( typeof( HairDye ), 2 );
+                Add( typeof( ThiefGloves ), 2 );
             }
 		}
 	}

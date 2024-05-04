@@ -31,9 +31,9 @@ namespace Server.Mobiles
 		{ 
 			public InternalSellInfo() 
 			{ 
-				Add( typeof( Shoes ), 4 ); 
-				Add( typeof( Boots ), 5 ); 
-				Add( typeof( ThighBoots ), 7 ); 
+				Add( typeof( Shoes ), 2 ); 
+				Add( typeof( Boots ), 2 ); 
+				Add( typeof( ThighBoots ), 2 ); 
 				Add( typeof( Sandals ), 2 ); 
 			} 
 		} 

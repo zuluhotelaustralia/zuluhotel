@@ -103,7 +103,7 @@ namespace Server.Spells.Seventh
         
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.AnimalForm, BuffIcon.LichForm))
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.AnimalForm, BuffIcon.LichForm, BuffIcon.WraithForm, BuffIcon.StoneForm))
                 return;
 
             var magery = Caster.Skills[SkillName.Magery].Value;

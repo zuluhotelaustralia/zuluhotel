@@ -32,11 +32,10 @@ namespace Server.Engines.Harvest
 
             if (wornOut)
                 from.SendFailureMessage(1044038); // You have worn out your tool!
-
-            if (checkEquip && !equipped)
+            else if (checkEquip && !equipped)
                 from.SendFailureMessage(502641); // You must equip this item to use it.
 
-            return wornOut || !checkEquip || equipped;
+            return !wornOut && (!checkEquip || equipped);
         }
 
         public virtual bool CheckHarvest(Mobile from, Item tool)

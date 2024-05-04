@@ -49,45 +49,45 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(WoodenBox), 7);
-                Add(typeof(SmallCrate), 5);
-                Add(typeof(MediumCrate), 6);
-                Add(typeof(LargeCrate), 7);
-                Add(typeof(WoodenChest), 15);
+                Add(typeof(WoodenBox), 2);
+                Add(typeof(SmallCrate), 2);
+                Add(typeof(MediumCrate), 2);
+                Add(typeof(LargeCrate), 2);
+                Add(typeof(WoodenChest), 2);
 
-                Add(typeof(LargeTable), 10);
-                Add(typeof(Nightstand), 7);
-                Add(typeof(YewWoodTable), 10);
+                Add(typeof(LargeTable), 2);
+                Add(typeof(Nightstand), 2);
+                Add(typeof(YewWoodTable), 2);
 
-                Add(typeof(Throne), 24);
-                Add(typeof(WoodenThrone), 6);
-                Add(typeof(Stool), 6);
-                Add(typeof(FootStool), 6);
+                Add(typeof(Throne), 2);
+                Add(typeof(WoodenThrone), 2);
+                Add(typeof(Stool), 2);
+                Add(typeof(FootStool), 2);
 
-                Add(typeof(FancyWoodenChairCushion), 12);
-                Add(typeof(WoodenChairCushion), 10);
-                Add(typeof(WoodenChair), 8);
-                Add(typeof(BambooChair), 6);
-                Add(typeof(WoodenBench), 6);
+                Add(typeof(FancyWoodenChairCushion), 2);
+                Add(typeof(WoodenChairCushion), 2);
+                Add(typeof(WoodenChair), 2);
+                Add(typeof(BambooChair), 2);
+                Add(typeof(WoodenBench), 2);
 
-                Add(typeof(Saw), 9);
-                Add(typeof(Scorp), 6);
-                Add(typeof(SmoothingPlane), 6);
-                Add(typeof(DrawKnife), 6);
-                Add(typeof(Froe), 6);
-                Add(typeof(Hammer), 14);
-                Add(typeof(Inshave), 6);
-                Add(typeof(JointingPlane), 6);
-                Add(typeof(MouldingPlane), 6);
-                Add(typeof(DovetailSaw), 7);
-                Add(typeof(Axle), 1);
+                Add(typeof(Saw), 2);
+                Add(typeof(Scorp), 2);
+                Add(typeof(SmoothingPlane), 2);
+                Add(typeof(DrawKnife), 2);
+                Add(typeof(Froe), 2);
+                Add(typeof(Hammer), 2);
+                Add(typeof(Inshave), 2);
+                Add(typeof(JointingPlane), 2);
+                Add(typeof(MouldingPlane), 2);
+                Add(typeof(DovetailSaw), 2);
+                Add(typeof(Axle), 2);
 
-                Add(typeof(Club), 13);
+                Add(typeof(Club), 2);
 
-                Add(typeof(Lute), 10);
-                Add(typeof(LapHarp), 10);
-                Add(typeof(Tambourine), 10);
-                Add(typeof(Drums), 10);
+                Add(typeof(Lute), 2);
+                Add(typeof(LapHarp), 2);
+                Add(typeof(Tambourine), 2);
+                Add(typeof(Drums), 2);
 
                 Add(typeof(Log), 1);
             }

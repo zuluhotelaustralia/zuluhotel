@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
+using Scripts.Zulu.Utilities;
 using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
@@ -19,6 +20,8 @@ namespace Server.SkillHandlers
 
         public override async Task<TimeSpan> OnUse(Mobile from)
         {
+            from.SendSuccessMessage(500906); // What do you wish to evaluate?
+
             var asyncTarget = new AsyncTarget<IEntity>(from, TargetOptions);
             from.Target = asyncTarget;
 
@@ -100,9 +103,7 @@ namespace Server.SkillHandlers
                     break;
                 }
             }
-
-            from.SendLocalizedMessage(500906); // What do you wish to evaluate?
-
+            
             return Delay;
         }
     }

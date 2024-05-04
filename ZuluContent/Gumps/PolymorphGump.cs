@@ -60,7 +60,9 @@ namespace Server.Gumps
         public static readonly PolymorphEntry BlackBear = new(8399, 211, 1015241, 22, 10);
         public static readonly PolymorphEntry GrizzlyBear = new(8411, 212, 1015242, 22, 12);
         public static readonly PolymorphEntry PolarBear = new(8417, 213, 1015243, 26, 10);
-        public static readonly PolymorphEntry Troll = new(8425, 54, 1015251, 25, 9);
+        public static readonly PolymorphEntry Titan = new(9648, 76, 1029677, 25, 9);
+        public static readonly PolymorphEntry Troll = new(8425, 54, 1015251, 25, 11);
+        public static readonly PolymorphEntry Ostard = new(8502, 218, 1072469, 25, 13);
         
         
         public static readonly PolymorphEntry HumanMale = new(8397, 400, 1015244, 29, 8);

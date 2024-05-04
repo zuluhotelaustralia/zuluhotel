@@ -38,9 +38,9 @@ namespace Server.Mobiles
 				Add( typeof( Shaft ), 1 );
 				Add( typeof( Feather ), 1 );			
 
-				Add( typeof( HeavyCrossbow ), 27 );
-				Add( typeof( Bow ), 17 );
-				Add( typeof( Crossbow ), 25 ); 
+				Add( typeof( HeavyCrossbow ), 2 );
+				Add( typeof( Bow ), 2 );
+				Add( typeof( Crossbow ), 2 ); 
 			}
 		}
 	}

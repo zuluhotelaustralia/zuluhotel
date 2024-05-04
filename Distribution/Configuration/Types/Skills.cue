@@ -7,8 +7,9 @@ package Types
 }
 
 #SkillSettings: {
-	MaxStatCap: int32
-	StatCap:    int32
+	MaxStatCap:       int32
+	StatCap:          int32
+	PointsMultiplier: int32
 	Entries: {
 		[#SkillName]: #SkillEntry
 	}

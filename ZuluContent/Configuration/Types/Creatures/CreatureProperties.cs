@@ -73,6 +73,7 @@ namespace ZuluContent.Configuration.Types.Creatures
         public PropValue MinTameSkill { get; set; } = 0;
         public OppositionGroup? OppositionGroup { get; set; }
         public PropValue PerceptionRange { get; set; } = 1;
+        public bool? PhysicalImmune { get; set; }
         public int? ProvokeSkillOverride { get; set; }
         public Race? Race { get; set; }
         public TimeSpan? ReacquireDelay { get; set; }

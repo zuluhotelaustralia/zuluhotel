@@ -33,13 +33,13 @@ namespace Server.Mobiles
 		{ 
 			public InternalSellInfo() 
 			{ 
-				Add( typeof( Bloodmoss ), 3 ); 
-				Add( typeof( MandrakeRoot ), 2 ); 
-				Add( typeof( Garlic ), 2 ); 
-				Add( typeof( Ginseng ), 2 ); 
-				Add( typeof( Nightshade ), 2 ); 
-				Add( typeof( Bottle ), 3 ); 
-				Add( typeof( MortarPestle ), 4 ); 
+				Add( typeof( Bloodmoss ), 1 ); 
+				Add( typeof( MandrakeRoot ), 1 ); 
+				Add( typeof( Garlic ), 1 ); 
+				Add( typeof( Ginseng ), 1 ); 
+				Add( typeof( Nightshade ), 1 ); 
+				Add( typeof( Bottle ), 2 ); 
+				Add( typeof( MortarPestle ), 2 ); 
 			} 
 		} 
 	} 

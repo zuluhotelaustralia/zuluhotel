@@ -13,7 +13,7 @@ namespace Scripts.Zulu.Spells.Necromancy
 
         public async Task CastAsync()
         {
-            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.LichForm))
+            if (!Caster.CanBuff(Caster, true, BuffIcon.Polymorph, BuffIcon.WraithForm, BuffIcon.LichForm, BuffIcon.StoneForm))
                 return;
 
             var casterSkill = Caster.Skills.Magery.Value;

@@ -168,6 +168,7 @@ package Types
 	MinTameSkill:            (#PropValue | null)
 	OppositionGroup:         (#OppositionGroup | null)
 	PerceptionRange:         (#PropValue | null)
+	PhysicalImmune:          (bool | null)
 	ProvokeSkillOverride:    (int32 | null)
 	Race:                    (#Race | null)
 	ReacquireDelay:          (#TimeSpan | null)

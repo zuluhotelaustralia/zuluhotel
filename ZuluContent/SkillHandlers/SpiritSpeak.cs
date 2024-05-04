@@ -152,7 +152,8 @@ namespace Server.SkillHandlers
             creature.Blessed = true; // Invulnerable
             creature.BardImmune = true;
             creature.MoveToWorld(stone, m.Map);
-            creature.AIObject.Deactivate();
+            creature.AIObject?.Deactivate();
+            creature.BTAIObject?.Deactivate();
             creature.PlaySound(creature.GetIdleSound());
             creature.Direction = creature.GetDirectionTo(m);
 
@@ -168,7 +169,8 @@ namespace Server.SkillHandlers
 
                 await Timer.Pause(2000);
 
-                creature.AIObject.Activate();
+                creature.AIObject?.Activate();
+                creature.BTAIObject?.Activate();
                 creature.Blessed = false;
                 m.Paralyzed = false;
                 // Give AI time to activate

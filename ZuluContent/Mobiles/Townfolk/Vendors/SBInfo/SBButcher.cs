@@ -36,16 +36,16 @@ namespace Server.Mobiles
 		{ 
 			public InternalSellInfo() 
 			{ 
-				Add( typeof( RawRibs ), 8 ); 
-				Add( typeof( RawLambLeg ), 4 ); 
-				Add( typeof( RawChickenLeg ), 3 ); 
-				Add( typeof( RawBird ), 4 ); 
-				Add( typeof( Bacon ), 3 ); 
-				Add( typeof( Sausage ), 9 ); 
-				Add( typeof( Ham ), 13 ); 
-				Add( typeof( ButcherKnife ), 7 ); 
-				Add( typeof( Cleaver ), 7 ); 
-				Add( typeof( SkinningKnife ), 7 ); 
+				Add( typeof( RawRibs ), 2 ); 
+				Add( typeof( RawLambLeg ), 2 ); 
+				Add( typeof( RawChickenLeg ), 2 ); 
+				Add( typeof( RawBird ), 2 ); 
+				Add( typeof( Bacon ), 2 ); 
+				Add( typeof( Sausage ), 2 ); 
+				Add( typeof( Ham ), 2 ); 
+				Add( typeof( ButcherKnife ), 2 ); 
+				Add( typeof( Cleaver ), 2 ); 
+				Add( typeof( SkinningKnife ), 2 ); 
 			} 
 		} 
 	} 
