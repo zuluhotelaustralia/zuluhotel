@@ -143,9 +143,6 @@ namespace Server.Scripts.Engines.Loot
                                 jewelry.SetResistCharges(ProtectionType, ProtectionCharges);
                         }
                         break;
-                    case PowerCombineBeads beads:
-                        beads.ArmorBonusType = ArmorMod;
-                        break;
                 }
 
                 if (Cursed)
