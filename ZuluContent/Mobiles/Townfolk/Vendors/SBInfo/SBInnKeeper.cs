@@ -73,20 +73,20 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( BeverageBottle ), 3 );
-				Add( typeof( Jug ), 6 );
-				Add( typeof( Pitcher ), 5 );
+				Add( typeof( BeverageBottle ), 2 );
+				Add( typeof( Jug ), 2 );
+				Add( typeof( Pitcher ), 2 );
 				Add( typeof( GlassMug ), 1 );
-				Add( typeof( BreadLoaf ), 3 );
-				Add( typeof( CheeseWheel ), 12 );
-				Add( typeof( Ribs ), 6 );
+				Add( typeof( BreadLoaf ), 2 );
+				Add( typeof( CheeseWheel ), 2 );
+				Add( typeof( Ribs ), 2 );
 				Add( typeof( Peach ), 1 );
 				Add( typeof( Pear ), 1 );
 				Add( typeof( Grapes ), 1 );
 				Add( typeof( Apple ), 1 );
 				Add( typeof( Banana ), 1 );
-				Add( typeof( Torch ), 3 );
-				Add( typeof( Candle ), 3 );
+				Add( typeof( Torch ), 2 );
+				Add( typeof( Candle ), 2 );
 				Add( typeof( Chessboard ), 1 );
 				Add( typeof( CheckerBoard ), 1 );
 				Add( typeof( Backgammon ), 1 );

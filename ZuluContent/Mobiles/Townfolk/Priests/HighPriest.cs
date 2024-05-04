@@ -15,6 +15,7 @@ namespace Server.Mobiles
         RemoveCurse,
         DetectCurse,
         Purify,
+        Identify,
         CastHeal,
         CastCure,
         CastProtect,
@@ -135,6 +136,11 @@ namespace Server.Mobiles
                             e.Mobile.BeginTarget(12, false, TargetFlags.None, Purify_OnTarget);
                             e.Handled = true;
                             break;
+                        case "identify":
+                            Say("What item dost thou want me to identify?");
+                            e.Mobile.BeginTarget(12, false, TargetFlags.None, Identify_OnTarget);
+                            e.Handled = true;
+                            break;
                     }
                 }
             }
@@ -227,6 +233,34 @@ namespace Server.Mobiles
             else
             {
                 Say("I can't purify something I know nothing about.");
+            }
+        }
+        
+        private async void Identify_OnTarget(Mobile from, object obj)
+        {
+            if (obj is BaseEquippableItem equippableItem)
+            {
+                if (equippableItem.Identified)
+                {
+                    Say("That item is already identified.");
+                }
+                else
+                {
+                    var price = from.Str;
+
+                    PriestRequests[from.Serial.Value] =
+                        new PriestRequest(PriestDemand.Identify, price, equippableItem);
+
+                    Say($"I'll identify that item if thee can spare at least {price} gold pieces.");
+                }
+            }
+            else if (obj is PlayerMobile)
+            {
+                Say("I really don't think that can be identified, nor that it will ever be.");
+            }
+            else
+            {
+                Say("I can't identify something I know nothing about.");
             }
         }
         
@@ -332,6 +366,48 @@ namespace Server.Mobiles
                 Say($"Maybe if thee had give me more than {donation} gold pieces, I would have succeeded.");
             }
         }
+        
+        private async void Identify(Mobile from, BaseEquippableItem item, int donation, int price)
+        {
+            var chance = 90;
+
+            if (donation > price)
+            {
+                chance += (donation - price) / 2;
+            }
+
+            Direction = GetDirectionTo(from);
+            StallMovement(TimeSpan.FromSeconds(10));
+            
+            Say("Powers of the Virtues, I'm calling upon you to identify this item.");
+            Animate(203, 7, 1, true, false, 0);
+            await Timer.Pause(5000);
+
+            if (Utility.RandomMinMax(1, 100) <= chance)
+            {
+                if (item is IMagicItem { Identified: false } magicItem)
+                {
+                    magicItem.Identified = true;
+                    Say($"Ah ah! That item has revealed itself to be a {SingleClickHandler.GetMagicItemName(item)}.");
+                    from.PlaySound(0x1FD);
+                    
+                    // Update the color of the item
+                    item.Delta(ItemDelta.Update);
+                }
+                else
+                {
+                    Say("I cannot identify that item.");
+                }
+            }
+            else
+            {
+                Say("I failed to identify that item!");
+                FixedEffect(0x3735, 6, 30);
+                from.PlaySound(0x05A);
+                await Timer.Pause(2000);
+                Say($"Maybe if thee had give me more than {donation} gold pieces, I would have succeeded.");
+            }
+        }
 
         public override bool OnDragDrop(Mobile from, Item dropped)
         {
@@ -392,6 +468,11 @@ namespace Server.Mobiles
                 case PriestDemand.Purify:
                 {
                     Purify(from, demand.TargetedItem, gold.Amount, demand.PriestPrice);
+                    break;
+                }
+                case PriestDemand.Identify:
+                {
+                    Identify(from, demand.TargetedItem, gold.Amount, demand.PriestPrice);
                     break;
                 }
             }

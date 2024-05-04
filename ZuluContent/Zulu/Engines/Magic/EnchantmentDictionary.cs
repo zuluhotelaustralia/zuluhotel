@@ -65,7 +65,8 @@ namespace ZuluContent.Zulu.Engines.Magic.Enums
 
         public T Set<T>(T value) where T : class, IEnchantmentValue
         {
-            Values.TryAdd(EnchantUnionMap[typeof(T)], value);
+            var type = value.GetType();
+            Values.TryAdd(EnchantUnionMap[type], value);
             return value;
         }
 

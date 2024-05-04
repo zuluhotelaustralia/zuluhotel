@@ -118,6 +118,12 @@ namespace Server.Mobiles
 
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime LastOnline { get; set; }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public DateTime LastPowerHourUsed { get; set; }
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public BaseMount InternalizedMount { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public long LastMoved
@@ -190,6 +196,9 @@ namespace Server.Mobiles
         {
             get { return DisguiseTimers.TimeRemaining(this); }
         }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public bool IsInPowerHour => (Core.Now - LastPowerHourUsed).TotalHours <= 1.0;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime PeacedUntil { get; set; }
@@ -1137,6 +1146,8 @@ namespace Server.Mobiles
 
                 if (!EquipItem(deathRobe))
                     deathRobe.Delete();
+                
+                this.FireHook(h => h.OnResurrect(this));
             }
         }
 
@@ -1148,6 +1159,9 @@ namespace Server.Mobiles
 
             DropHolding();
 
+            /*SendMessage("YOU DIED!");
+            return false;*/
+            
             return base.OnBeforeDeath();
         }
 
@@ -1349,6 +1363,16 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 34:
+                {
+                    InternalizedMount = reader.ReadEntity<BaseMount>();
+                    goto case 33;
+                }
+                case 33:
+                {
+                    LastPowerHourUsed = reader.ReadDateTime();
+                    goto case 32;
+                }
                 case 32:
                 {
                     var count = reader.ReadInt();
@@ -1527,7 +1551,11 @@ namespace Server.Mobiles
 
             base.Serialize(writer);
 
-            writer.Write((int) 32); // version
+            writer.Write((int) 34); // version
+            
+            writer.Write(InternalizedMount);
+
+            writer.Write(LastPowerHourUsed);
             
             writer.Write(CustomSpellHotBars.Count);
 
@@ -1640,6 +1668,8 @@ namespace Server.Mobiles
             BaseHouse.HandleDeletion(this);
 
             DisguiseTimers.RemoveTimer(this);
+
+            InternalizedMount?.Delete();
         }
 
         public bool BedrollLogout { get; set; }

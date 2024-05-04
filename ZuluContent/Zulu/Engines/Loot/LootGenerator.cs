@@ -62,7 +62,7 @@ namespace Server.Scripts.Engines.Loot
             Type = t;
         }
 
-        public bool Is<T>() => Type.IsSubclassOf(typeof(T));
+        public bool Is<T>() => Type.IsSubclassOf(typeof(T)) || Type == typeof(T);
 
 
         public Item Create(Mobile? killedBy)
@@ -94,6 +94,13 @@ namespace Server.Scripts.Engines.Loot
                     });
                 }
 
+                if (magicItem is BaseEquippableItem equippableItem)
+                {
+                    equippableItem.DexBonus = BonusDex;
+                    equippableItem.StrBonus = BonusStr;
+                    equippableItem.IntBonus = BonusInt;
+                }
+
                 switch (magicItem)
                 {
                     case BaseWeapon weapon:
@@ -117,10 +124,6 @@ namespace Server.Scripts.Engines.Loot
                         weapon.MagicalWeaponType = MagicalWeaponType;
                         break;
                     case BaseArmor armor:
-                        armor.DexBonus = BonusDex;
-                        armor.StrBonus = BonusStr;
-                        armor.IntBonus = BonusInt;
-
                         armor.CreatureProtection = CreatureProtection;
                         armor.ProtectionLevel = ArmorProtectionLevel;
                         armor.Durability = (ArmorDurabilityLevel) DurabilityLevel;

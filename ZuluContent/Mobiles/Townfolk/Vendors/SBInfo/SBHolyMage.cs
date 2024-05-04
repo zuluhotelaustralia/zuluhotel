@@ -71,15 +71,15 @@ namespace Server.Mobiles
 				Add( typeof( SpidersSilk ), 1 ); 
 				Add( typeof( SulfurousAsh ), 1 ); 
 				Add( typeof( RecallRune ), 1 );
-				Add( typeof( Spellbook ), 9 );
+				Add( typeof( Spellbook ), 2 );
 				Add( typeof( BlankScroll ), 1 );
 
-				Add( typeof( NightSightPotion ), 7 );
-				Add( typeof( AgilityPotion ), 7 );
-				Add( typeof( StrengthPotion ), 7 );
-				Add( typeof( RefreshPotion ), 7 );
-				Add( typeof( LesserCurePotion ), 7 );
-				Add( typeof( LesserHealPotion ), 7 );
+				Add( typeof( NightSightPotion ), 2 );
+				Add( typeof( AgilityPotion ), 2 );
+				Add( typeof( StrengthPotion ), 2 );
+				Add( typeof( RefreshPotion ), 2 );
+				Add( typeof( LesserCurePotion ), 2 );
+				Add( typeof( LesserHealPotion ), 2 );
 
 				Type[] types = Loot.RegularScrollTypes;
 

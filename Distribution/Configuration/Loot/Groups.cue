@@ -615,32 +615,182 @@ import (
 			MinQuantity: 1
 			MaxQuantity: 1
 			Chance:      1
-			Value:       "MissingObject.KrakenLeatherLeggings"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.KrakenLeatherTunic"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.KrakenLeatherSleeves"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.KrakenLeatherGloves"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
 			Value:       "SageRobe"
 		},
+		{
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "MagisterRobe"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "MagisterMundiRobe"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "CelestialRobe"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "PracticusRobe"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ZelatorRobe"
+        },
+		{
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "FemaleRyousChest"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousChest"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousLegs"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousArms"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousGloves"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousGorget"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousHelm"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "FemaleDarknessChest"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessChest"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessLegs"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessArms"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessGloves"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessGorget"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessHelm"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "FemaleElvenChest"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenChest"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenLegs"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenArms"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenGloves"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenGorget"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenHelm"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RyousShield"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ElvenShield"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DarknessShield"
+        },
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
@@ -719,219 +869,9 @@ import (
 			Chance:      1
 			Value:       "ZephyrCoif"
 		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.ShieldofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.ShieldofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.ShieldofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.ShieldofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlatemailofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGorgetofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGlovesofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateLeggingsofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateArmsofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateHelmofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.FemalePlateofTheDamned"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlatemailofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGorgetofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGlovesofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateLeggingsofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateArmsofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateHelmofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.FemalePlateofTheAbyss"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlatemailofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGorgetofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGlovesofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateLeggingsofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateArmsofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateHelmofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.FemalePlateofTheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlatemailofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGorgetofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateGlovesofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateLeggingsofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateArmsofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.PlateHelmofHavoc"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.FemalePlateofHavoc"
-		},
 	]
 
 	GMWeapon: [
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.bowoftaintedblood"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.kryssoftheholyavenger"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.sniperscrossbowoferadication"
-		},
 		{
 			MinQuantity: 1
 			MaxQuantity: 1
@@ -945,71 +885,113 @@ import (
 			Value:       "OmerosPickaxe"
 		},
 		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.SwordofthePowerPlayer"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.MaceofMutilation"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.HalberdofthefallenPaladin"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.MaceoftheWarlord"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.katanaoftheDeadlyAssassin"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.StaffofMenace"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.Undeadsaxeofexecution"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.ScimitarofIcyDoom"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.CrossbowoftheGods"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.Scalpeloftheduelist"
-		},
-		{
-			MinQuantity: 1
-			MaxQuantity: 1
-			Chance:      1
-			Value:       "MissingObject.LanceOftheLostSouls"
-		},
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "LanceOfLothian"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ScalpelOfTrevize"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "AnubisMaceOfDeath"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "BardicheOfLynx"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "DekeronsThunder"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "BalthazaarsChillingScimitar"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "AxeOfAnias"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "TjaldursStaffOfHaste"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "KatanaOfKieri"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "WarMaceOfErik"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "HalberdfOfAlcatraz"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "SpearOfRenah"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "WeaponOfZulu"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "JustaesAvengingKatanaOfJustice"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "RaptsSavageKatanaOfChaos"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "ShurugwisDevastatingKatanaOfAnnihilation"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "BowOfTheWoodlandGaladriel"
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      1
+            Value:       "LegolasShieldOfTheForest"
+        },
 	]
 
 	Gems: [
@@ -1118,6 +1100,12 @@ import (
 			Chance:      1
 			Value:       "GoldRing"
 		},
+		{
+			MinQuantity: 1
+			MaxQuantity: 1
+			Chance:      0.1
+			Value:       "PowerCombineBeads"
+		}
 	]
 
 	Junk: [

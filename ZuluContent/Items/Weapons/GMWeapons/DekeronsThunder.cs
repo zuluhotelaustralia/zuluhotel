@@ -17,9 +17,9 @@ namespace Server.Items
 
         public override int DefaultStrengthReq => 80;
 
-        public override int DefaultMinDamage => 45;
+        public override int DefaultMinDamage => 40;
 
-        public override int DefaultMaxDamage => 70;
+        public override int DefaultMaxDamage => 60;
 
         public override int DefaultSpeed => 35;
 

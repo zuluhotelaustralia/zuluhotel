@@ -50,27 +50,27 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( Amber ), 25 );
-				Add( typeof( Amethyst ), 50 );
-				Add( typeof( Citrine ), 25 );
-				Add( typeof( Diamond ), 100 );
-				Add( typeof( Emerald ), 50 );
-				Add( typeof( Ruby ), 37 );
-				Add( typeof( Sapphire ), 50 );
-				Add( typeof( StarSapphire ), 62 );
-				Add( typeof( Tourmaline ), 47 );
-				Add( typeof( GoldRing ), 13 );
-				Add( typeof( SilverRing ), 10 );
-				Add( typeof( Necklace ), 13 );
-				Add( typeof( GoldNecklace ), 13 );
-				Add( typeof( GoldBeadNecklace ), 13 );
-				Add( typeof( SilverNecklace ), 10 );
-				Add( typeof( SilverBeadNecklace ), 10 );
-				Add( typeof( Beads ), 13 );
-				Add( typeof( GoldBracelet ), 13 );
-				Add( typeof( SilverBracelet ), 10 );
-				Add( typeof( GoldEarrings ), 13 );
-				Add( typeof( SilverEarrings ), 10 );
+				Add( typeof( Amber ), 5 );
+				Add( typeof( Amethyst ), 10 );
+				Add( typeof( Citrine ), 5 );
+				Add( typeof( Diamond ), 20 );
+				Add( typeof( Emerald ), 10 );
+				Add( typeof( Ruby ), 7 );
+				Add( typeof( Sapphire ), 10 );
+				Add( typeof( StarSapphire ), 12 );
+				Add( typeof( Tourmaline ), 7 );
+				Add( typeof( GoldRing ), 2 );
+				Add( typeof( SilverRing ), 2 );
+				Add( typeof( Necklace ), 2 );
+				Add( typeof( GoldNecklace ), 2 );
+				Add( typeof( GoldBeadNecklace ), 2 );
+				Add( typeof( SilverNecklace ), 2 );
+				Add( typeof( SilverBeadNecklace ), 2 );
+				Add( typeof( Beads ), 2 );
+				Add( typeof( GoldBracelet ), 2 );
+				Add( typeof( SilverBracelet ), 2 );
+				Add( typeof( GoldEarrings ), 2 );
+				Add( typeof( SilverEarrings ), 2 );
 			}
 		}
 	}

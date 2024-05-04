@@ -1718,6 +1718,99 @@ Tables: {
 			Value:       "TreasureMapLevel6"
 		},
 	]
+	
+	"160": [
+        {
+            MinQuantity: 16000
+            MaxQuantity: 21000
+            Chance:      1
+            Value:       "Gold"
+        },
+        {
+            MinQuantity: 16000
+            MaxQuantity: 21000
+            Chance:      1
+            Value:       "Gold"
+        },
+        {
+            MinQuantity: 16000
+            MaxQuantity: 21000
+            Chance:      1
+            Value:       "Gold"
+        },
+        {
+            MinQuantity: 6
+            MaxQuantity: 10
+            Chance:      1
+            Value:       #Groups.MiscMagicItem
+        },
+        {
+            MinQuantity: 3
+            MaxQuantity: 6
+            Chance:      0.5
+            Value:       #Groups.PaganMagicItem
+        },
+        {
+            MinQuantity: 3
+            MaxQuantity: 5
+            Chance:      1
+            Value:       #Groups.Jewelry
+        },
+        {
+            MinQuantity: 5
+            MaxQuantity: 7
+            Chance:      1
+            Value:       #Groups.Clothes
+        },
+        {
+            MinQuantity: 3
+            MaxQuantity: 6
+            Chance:      0.5
+            Value:       #Groups.MagicWeapons
+        },
+        {
+            MinQuantity: 2
+            MaxQuantity: 6
+            Chance:      0.5
+            Value:       #Groups.NormalArmor
+        },
+        {
+            MinQuantity: 2
+            MaxQuantity: 6
+            Chance:      0.5
+            Value:       #Groups.NormalWeapons
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      0.5
+            Value:       #Groups.GMArmor
+        },
+        {
+            MinQuantity: 1
+            MaxQuantity: 1
+            Chance:      0.5
+            Value:       #Groups.GMWeapon
+        },
+        {
+            MinQuantity: 4
+            MaxQuantity: 6
+            Chance:      1
+            Value:       #Groups.Ammo
+        },
+        {
+            MinQuantity: 6
+            MaxQuantity: 10
+            Chance:      1
+            Value:       #Groups.Gems
+        },
+        {
+            MinQuantity: 3
+            MaxQuantity: 3
+            Chance:      1
+            Value:       "TreasureMapLevel6"
+        },
+    ]
 
 	"16": [
 		{

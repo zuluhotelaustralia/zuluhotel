@@ -102,93 +102,93 @@ namespace Server.Mobiles
 		{ 
 			public InternalSellInfo() 
 			{ 
-				Add( typeof( Tongs ), 7 ); 
-				Add( typeof( IronIngot ), 4 ); 
+				Add( typeof( Tongs ), 2 ); 
+				Add( typeof( IronIngot ), 1 ); 
 
-				Add( typeof( Buckler ), 25 );
-				Add( typeof( BronzeShield ), 33 );
-				Add( typeof( MetalShield ), 60 );
-				Add( typeof( MetalKiteShield ), 62 );
-				Add( typeof( HeaterShield ), 115 );
-				Add( typeof( WoodenKiteShield ), 35 );
+				Add( typeof( Buckler ), 2 );
+				Add( typeof( BronzeShield ), 2 );
+				Add( typeof( MetalShield ), 2 );
+				Add( typeof( MetalKiteShield ), 2 );
+				Add( typeof( HeaterShield ), 2 );
+				Add( typeof( WoodenKiteShield ), 2 );
 
-				Add( typeof( WoodenShield ), 15 );
+				Add( typeof( WoodenShield ), 2 );
 
-				Add( typeof( PlateArms ), 94 );
-				Add( typeof( PlateChest ), 121 );
-				Add( typeof( PlateGloves ), 72 );
-				Add( typeof( PlateGorget ), 52 );
-				Add( typeof( PlateLegs ), 109 );
+				Add( typeof( PlateArms ), 2 );
+				Add( typeof( PlateChest ), 2 );
+				Add( typeof( PlateGloves ), 2 );
+				Add( typeof( PlateGorget ), 2 );
+				Add( typeof( PlateLegs ), 2 );
 
-				Add( typeof( FemalePlateChest ), 113 );
-				Add( typeof( FemaleLeatherChest ), 18 );
-				Add( typeof( FemaleStuddedChest ), 25 );
-				Add( typeof( LeatherShorts ), 14 );
-				Add( typeof( LeatherSkirt ), 11 );
-				Add( typeof( LeatherBustierArms ), 11 );
-				Add( typeof( StuddedBustierArms ), 27 );
+				Add( typeof( FemalePlateChest ), 2 );
+				Add( typeof( FemaleLeatherChest ), 2 );
+				Add( typeof( FemaleStuddedChest ), 2 );
+				Add( typeof( LeatherShorts ), 2 );
+				Add( typeof( LeatherSkirt ), 2 );
+				Add( typeof( LeatherBustierArms ), 2 );
+				Add( typeof( StuddedBustierArms ), 2 );
 
-				Add( typeof( Bascinet ), 9 );
-				Add( typeof( CloseHelm ), 9 );
-				Add( typeof( Helmet ), 9 );
-				Add( typeof( NorseHelm ), 9 );
-				Add( typeof( PlateHelm ), 10 );
+				Add( typeof( Bascinet ), 2 );
+				Add( typeof( CloseHelm ), 2 );
+				Add( typeof( Helmet ), 2 );
+				Add( typeof( NorseHelm ), 2 );
+				Add( typeof( PlateHelm ), 2 );
 
-				Add( typeof( ChainCoif ), 6 );
-				Add( typeof( ChainChest ), 71 );
-				Add( typeof( ChainLegs ), 74 );
+				Add( typeof( ChainCoif ), 2 );
+				Add( typeof( ChainChest ), 2 );
+				Add( typeof( ChainLegs ), 2 );
 
-				Add( typeof( RingmailArms ), 42 );
-				Add( typeof( RingmailChest ), 60 );
-				Add( typeof( RingmailGloves ), 26 );
-				Add( typeof( RingmailLegs ), 45 );
+				Add( typeof( RingmailArms ), 2 );
+				Add( typeof( RingmailChest ), 2 );
+				Add( typeof( RingmailGloves ), 2 );
+				Add( typeof( RingmailLegs ), 2 );
 
-				Add( typeof( BattleAxe ), 13 );
-				Add( typeof( DoubleAxe ), 26 );
-				Add( typeof( ExecutionersAxe ), 15 );
-				Add( typeof( LargeBattleAxe ),16 );
-				Add( typeof( Pickaxe ), 11 );
-				Add( typeof( TwoHandedAxe ), 16 );
-				Add( typeof( WarAxe ), 14 );
-				Add( typeof( Axe ), 20 );
+				Add( typeof( BattleAxe ), 2 );
+				Add( typeof( DoubleAxe ), 2 );
+				Add( typeof( ExecutionersAxe ), 2 );
+				Add( typeof( LargeBattleAxe ),2 );
+				Add( typeof( Pickaxe ), 2 );
+				Add( typeof( TwoHandedAxe ), 2 );
+				Add( typeof( WarAxe ), 2 );
+				Add( typeof( Axe ), 2 );
 
-				Add( typeof( Bardiche ), 30 );
-				Add( typeof( Halberd ), 21 );
+				Add( typeof( Bardiche ), 2 );
+				Add( typeof( Halberd ), 2 );
 
-				Add( typeof( ButcherKnife ), 7 );
-				Add( typeof( Cleaver ), 7 );
-				Add( typeof( Dagger ), 10 );
-				Add( typeof( SkinningKnife ), 7 );
+				Add( typeof( ButcherKnife ), 2 );
+				Add( typeof( Cleaver ), 2 );
+				Add( typeof( Dagger ), 2 );
+				Add( typeof( SkinningKnife ), 2 );
 
-				Add( typeof( Club ), 8 );
-				Add( typeof( HammerPick ), 13 );
-				Add( typeof( Mace ), 14 );
-				Add( typeof( Maul ), 10 );
-				Add( typeof( WarHammer ), 12 );
-				Add( typeof( WarMace ), 15 );
+				Add( typeof( Club ), 2 );
+				Add( typeof( HammerPick ), 2 );
+				Add( typeof( Mace ), 2 );
+				Add( typeof( Maul ), 2 );
+				Add( typeof( WarHammer ), 2 );
+				Add( typeof( WarMace ), 2 );
 
-				Add( typeof( HeavyCrossbow ), 27 );
-				Add( typeof( Bow ), 17 );
-				Add( typeof( Crossbow ), 23 ); 
+				Add( typeof( HeavyCrossbow ), 2 );
+				Add( typeof( Bow ), 2 );
+				Add( typeof( Crossbow ), 2 ); 
 
-				Add( typeof( Spear ), 15 );
-				Add( typeof( Pitchfork ), 9 );
-				Add( typeof( ShortSpear ), 11 );
+				Add( typeof( Spear ), 2 );
+				Add( typeof( Pitchfork ), 2 );
+				Add( typeof( ShortSpear ), 2 );
 
-				Add( typeof( BlackStaff ), 11 );
-				Add( typeof( GnarledStaff ), 8 );
-				Add( typeof( QuarterStaff ), 9 );
-				Add( typeof( ShepherdsCrook ), 10 );
+				Add( typeof( BlackStaff ), 2 );
+				Add( typeof( GnarledStaff ), 2 );
+				Add( typeof( QuarterStaff ), 2 );
+				Add( typeof( ShepherdsCrook ), 2 );
 
-				Add( typeof( SmithHammer ), 10 );
+				Add( typeof( SmithHammer ), 2 );
 
-				Add( typeof( Broadsword ), 17 );
-				Add( typeof( Cutlass ), 12 );
-				Add( typeof( Katana ), 16 );
-				Add( typeof( Kryss ), 16 );
-				Add( typeof( Longsword ), 27 );
-				Add( typeof( Scimitar ), 18 );
-				Add( typeof( VikingSword ), 27 );
+				Add( typeof( Broadsword ), 2 );
+				Add( typeof( Cutlass ), 2 );
+				Add( typeof( Katana ), 2 );
+				Add( typeof( Kryss ), 2 );
+				Add( typeof( Longsword ), 2 );
+				Add( typeof( Scimitar ), 2 );
+				Add( typeof( VikingSword ), 2 );
 
 
 			} 

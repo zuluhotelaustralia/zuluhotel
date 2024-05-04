@@ -62,34 +62,34 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(Bag), 3);
-                Add(typeof(Pouch), 3);
-                Add(typeof(Backpack), 7);
+                Add(typeof(Bag), 2);
+                Add(typeof(Pouch), 2);
+                Add(typeof(Backpack), 2);
 
-                Add(typeof(Hide), 5);
+                Add(typeof(Hide), 1);
 
-                Add(typeof(SkinningKnife), 7);
+                Add(typeof(SkinningKnife), 2);
 
-                Add(typeof(LeatherArms), 18);
-                Add(typeof(LeatherChest), 23);
-                Add(typeof(LeatherGloves), 15);
-                Add(typeof(LeatherGorget), 15);
-                Add(typeof(LeatherLegs), 18);
-                Add(typeof(LeatherCap), 5);
+                Add(typeof(LeatherArms), 2);
+                Add(typeof(LeatherChest), 2);
+                Add(typeof(LeatherGloves), 2);
+                Add(typeof(LeatherGorget), 2);
+                Add(typeof(LeatherLegs), 2);
+                Add(typeof(LeatherCap), 2);
 
-                Add(typeof(StuddedArms), 43);
-                Add(typeof(StuddedChest), 37);
-                Add(typeof(StuddedGloves), 39);
-                Add(typeof(StuddedGorget), 22);
-                Add(typeof(StuddedLegs), 33);
+                Add(typeof(StuddedArms), 2);
+                Add(typeof(StuddedChest), 2);
+                Add(typeof(StuddedGloves), 2);
+                Add(typeof(StuddedGorget), 2);
+                Add(typeof(StuddedLegs), 2);
 
-                Add(typeof(FemaleStuddedChest), 31);
-                Add(typeof(StuddedBustierArms), 23);
-                Add(typeof(FemalePlateChest), 103);
-                Add(typeof(FemaleLeatherChest), 18);
-                Add(typeof(LeatherBustierArms), 12);
-                Add(typeof(LeatherShorts), 14);
-                Add(typeof(LeatherSkirt), 12);
+                Add(typeof(FemaleStuddedChest), 2);
+                Add(typeof(StuddedBustierArms), 2);
+                Add(typeof(FemalePlateChest), 2);
+                Add(typeof(FemaleLeatherChest), 2);
+                Add(typeof(LeatherBustierArms), 2);
+                Add(typeof(LeatherShorts), 2);
+                Add(typeof(LeatherSkirt), 2);
             }
         }
     }

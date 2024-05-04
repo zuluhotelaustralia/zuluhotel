@@ -28,8 +28,8 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( ScribesPen ), 4 );
-				Add( typeof( BlankScroll ), 2 );
+				Add( typeof( ScribesPen ), 2 );
+				Add( typeof( BlankScroll ), 1 );
 			}
 		}
 	}

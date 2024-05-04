@@ -20,14 +20,14 @@ namespace Server.Mobiles
 			public InternalBuyInfo()
 			{
 				Add( new GenericBuyInfo( typeof( WoodenShield ), 30, 20, 0x1B7A, 0 ) );
-			}
+            }
 		}
 
 		public class InternalSellInfo : GenericSellInfo
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( WoodenShield ), 15 );
+				Add( typeof( WoodenShield ), 2 );
 			}
 		}
 	}

@@ -33,13 +33,13 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( StuddedArms ), 43 );
-				Add( typeof( StuddedChest ), 64 );
-				Add( typeof( StuddedGloves ), 39 );
-				Add( typeof( StuddedGorget ), 36 );
-				Add( typeof( StuddedLegs ), 51 );
-				Add( typeof( FemaleStuddedChest ), 71 );
-				Add( typeof( StuddedBustierArms ), 60 );
+				Add( typeof( StuddedArms ), 2 );
+				Add( typeof( StuddedChest ), 2 );
+				Add( typeof( StuddedGloves ), 2 );
+				Add( typeof( StuddedGorget ), 2 );
+				Add( typeof( StuddedLegs ), 2 );
+				Add( typeof( FemaleStuddedChest ), 2 );
+				Add( typeof( StuddedBustierArms ), 2 );
 			}
 		}
 	}

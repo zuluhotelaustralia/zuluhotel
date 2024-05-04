@@ -78,7 +78,7 @@ namespace Server.Mobiles
 	            Add(typeof(SulfurousAsh), 1);
 
 	            Add(typeof(RecallRune), 1);
-	            Add(typeof(Spellbook),  25);
+	            Add(typeof(Spellbook),  2);
 
 	            Type[] types = Loot.RegularScrollTypes;
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Scripts.Zulu.Engines.Classes;
 using Scripts.Zulu.Utilities;
 using Server.ContextMenus;
-using Server.Engines.Magic;
 using Server.Regions;
 using Server.Network;
 using Server.Multis;
@@ -21,9 +20,9 @@ using Server.Scripts.Engines.Loot;
 using Server.Utilities;
 using ZuluContent.Configuration.Types.Creatures;
 using ZuluContent.Zulu.Engines.Magic;
-using ZuluContent.Zulu.Engines.Magic.Enchantments.Buffs;
 using ZuluContent.Zulu.Items;
 using static Scripts.Zulu.Engines.Classes.SkillCheck;
+using MoveImpl = Server.Movement.MovementImpl;
 
 namespace Server.Mobiles
 {
@@ -451,10 +450,13 @@ namespace Server.Mobiles
 
         public virtual bool IsInvulnerable
         {
-            get { return false; }
-        }
+            get;
+            set;
+        } = false;
 
         public BaseAI AIObject { get; private set; }
+        
+        public BaseBTAI<AIState> BTAIObject { get; private set; }
 
         public const int MaxOwners = 5;
         
@@ -1511,6 +1513,7 @@ namespace Server.Mobiles
         public void ChangeAIType(AIType newAi)
         {
             AIObject?.m_Timer.Stop();
+            BTAIObject?.StopTimer();
 
             if (ForcedAI != null)
             {
@@ -1518,12 +1521,28 @@ namespace Server.Mobiles
                 return;
             }
 
+            if (newAi == AIType.AI_Melee)
+            {
+                var state = new AIState { Creature = this };
+                
+                BTAIObject = new BaseBTAI<AIState>(state, MeleeBT<AIState>.Instance);
+                return;
+            }
+            
+            if (newAi == AIType.AI_Archer)
+            {
+                var state = new AIState { Creature = this };
+                
+                BTAIObject = new BaseBTAI<AIState>(state, RangedBT<AIState>.Instance);
+                return;
+            }
+
             AIObject = newAi switch
             {
-                AIType.AI_Melee => new MeleeAI(this),
+                // AIType.AI_Melee => new MeleeAI(this),
                 AIType.AI_Animal => new AnimalAI(this),
                 AIType.AI_Berserk => new BerserkAI(this),
-                AIType.AI_Archer => new ArcherAI(this),
+                // AIType.AI_Archer => new ArcherAI(this),
                 AIType.AI_Healer => new HealerAi(this),
                 AIType.AI_Vendor => new VendorAI(this),
                 AIType.AI_Mage => new MageAI(this),
@@ -1722,6 +1741,8 @@ namespace Server.Mobiles
             get { return m_ControlOrder; }
             set
             {
+                BTAIObject?.OnBeforeCurrentOrderChanged();
+                
                 m_ControlOrder = value;
 
                 AIObject?.OnCurrentOrderChanged();
@@ -1928,6 +1949,13 @@ namespace Server.Mobiles
                 AIObject.m_Timer?.Stop();
 
                 AIObject = null;
+            }
+            
+            if (BTAIObject != null)
+            {
+                BTAIObject.StopTimer();
+
+                BTAIObject = null;
             }
 
             if (m_DeleteTimer != null)
@@ -2196,6 +2224,12 @@ namespace Server.Mobiles
             OrderType ct = m_ControlOrder;
 
             AIObject?.OnAggressiveAction(aggressor);
+            
+            var currentCombatant = Combatant;
+            
+            if (currentCombatant != null && !aggressor.Hidden && currentCombatant != aggressor &&
+                GetDistanceToSqrt(currentCombatant) > GetDistanceToSqrt(aggressor))
+                Combatant = aggressor;
 
             StopFlee();
 
@@ -2213,6 +2247,386 @@ namespace Server.Mobiles
                 Warmode = true;
                 Combatant = aggressor;
             }
+        }
+
+        public bool AcquireFocusMob(int iRange, FightMode acqType, bool bPlayerOnly,
+            bool bFacFriend,
+            bool bFacFoe)
+        {
+            if (Deleted)
+                return false;
+
+            if (BardProvoked)
+            {
+                if (BardTarget == null || BardTarget.Deleted)
+                {
+                    FocusMob = null;
+                    return false;
+                }
+
+                FocusMob = BardTarget;
+                return FocusMob != null;
+            }
+
+            if (Controlled)
+            {
+                if (ControlTarget == null || ControlTarget.Deleted || ControlTarget.Hidden ||
+                    !ControlTarget.Alive ||
+                    !InRange(ControlTarget, RangePerception * 2))
+                {
+                    if (ControlTarget != null && ControlTarget != ControlMaster)
+                        ControlTarget = null;
+
+                    FocusMob = null;
+                    return false;
+                }
+
+                FocusMob = ControlTarget;
+                return FocusMob != null;
+            }
+
+            if (ConstantFocus != null)
+            {
+                DebugSay("Acquired my constant focus");
+                FocusMob = ConstantFocus;
+                return true;
+            }
+
+            if (acqType == FightMode.None)
+            {
+                FocusMob = null;
+                return false;
+            }
+
+            if (acqType == FightMode.Aggressor && Aggressors.Count == 0 && Aggressed.Count == 0)
+            {
+                FocusMob = null;
+                return false;
+            }
+
+            if (NextReacquireTime > Core.TickCount)
+            {
+                FocusMob = null;
+                return false;
+            }
+
+            NextReacquireTime = Core.TickCount + (int)ReacquireDelay.TotalMilliseconds;
+
+            DebugSay("Acquiring...");
+
+            var map = Map;
+
+            if (map != null)
+            {
+                Mobile newFocusMob = null;
+                var val = double.MinValue;
+                double theirVal;
+
+                IPooledEnumerable eable = map.GetMobilesInRange(Location, iRange);
+
+                foreach (Mobile m in eable)
+                {
+                    if (m.Deleted || m.Blessed)
+                        continue;
+
+                    // Let's not target ourselves...
+                    if (m == this)
+                        continue;
+
+                    // We consider Familiars to be neutral
+                    if (m is BaseCreature { AI: AIType.AI_Familiar })
+                        continue;
+
+                    // Dead targets are invalid.
+                    if (!m.Alive)
+                        continue;
+
+                    // Staff members cannot be targeted.
+                    if (m.AccessLevel > AccessLevel.Player)
+                        continue;
+
+                    // Does it have to be a player?
+                    if (bPlayerOnly && !m.Player)
+                        continue;
+
+                    // Can't acquire a target we can't see.
+                    if (!CanSee(m))
+                        continue;
+
+                    if (Summoned && SummonMaster != null)
+                    {
+                        // If this is a summon, it can't target its controller.
+                        if (m == SummonMaster)
+                            continue;
+
+                        // It also must abide by harmful spell rules.
+                        if (!SpellHelper.ValidIndirectTarget(SummonMaster, m))
+                            continue;
+                    }
+
+                    // If we only want faction friends, make sure it's one.
+                    if (bFacFriend && !IsFriend(m))
+                        continue;
+
+                    if (acqType == FightMode.Aggressor || acqType == FightMode.Evil)
+                    {
+                        var bValid = IsHostile(m);
+
+                        if (acqType == FightMode.Evil && !bValid)
+                        {
+                            if (m is BaseCreature && ((BaseCreature)m).Controlled &&
+                                ((BaseCreature)m).ControlMaster != null)
+                                bValid = ((BaseCreature)m).ControlMaster.Karma < 0;
+                            else
+                                bValid = m.Karma < 0;
+                        }
+
+                        if (!bValid)
+                            continue;
+                    }
+                    else
+                    {
+                        // Same goes for faction enemies.
+                        if (bFacFoe && !IsEnemy(m))
+                            continue;
+
+                        // If it's an enemy factioned mobile, make sure we can be harmful to it.
+                        if (bFacFoe && !bFacFriend && !CanBeHarmful(m, false))
+                            continue;
+                    }
+
+                    theirVal = GetFightModeRanking(m, acqType, bPlayerOnly);
+
+                    if (theirVal > val && InLOS(m))
+                    {
+                        newFocusMob = m;
+                        val = theirVal;
+                    }
+                }
+
+                eable.Free();
+
+                FocusMob = newFocusMob;
+            }
+
+            var focusedMob = FocusMob != null;
+
+            if (Hidden && focusedMob)
+                Timer.StartTimer(TimeSpan.FromMilliseconds(100), AlertUnhidden);
+
+            return focusedMob;
+        }
+
+        public bool IsHostile(Mobile from)
+        {
+            var count = Math.Max(Aggressors.Count, Aggressed.Count);
+
+            if (Combatant == from || from.Combatant == this)
+                return true;
+
+            if (count > 0)
+                for (var a = 0; a < count; ++a)
+                {
+                    if (a < Aggressed.Count && Aggressed[a].Attacker == from)
+                        return true;
+
+                    if (a < Aggressors.Count && Aggressors[a].Defender == from)
+                        return true;
+                }
+
+            return false;
+        }
+
+        public void AlertUnhidden()
+        {
+            Say($"*{Name} springs out from hiding!*");
+        }
+
+        private static readonly Queue<Item> Obstacles = new();
+
+        public long NextMove { get; set; }
+
+        public bool CheckMove()
+        {
+            return Core.TickCount - NextMove >= 0;
+        }
+
+        public double TransformMoveDelay(double delay)
+        {
+            if (this is { Controlled: false, Summoned: false } &&
+                Math.Abs(delay - PassiveSpeed) < 0.0001) delay *= 3;
+
+            var stats = Hits;
+            var statsMax = HitsMax;
+
+            var offset = statsMax <= 0 ? 1.0 : Math.Max(0, stats) / (double)statsMax;
+
+            if (offset < 1.0)
+                delay += PassiveSpeed * (1.0 - offset);
+
+            return delay;
+        }
+
+        public MoveResult DoMoveImpl(Direction d)
+        {
+            if (Deleted || Frozen || Paralyzed ||
+                Spell?.IsCasting == true || DisallowAllMoves)
+                return MoveResult.BadState;
+
+            if (!CheckMove())
+                return MoveResult.BadState;
+
+            // This makes them always move one step, never any direction changes
+            // TODO: This is firing off deltas which aren't needed. Look into replacing/removing this
+            Direction = d;
+
+            var delay = (int)(TransformMoveDelay(CurrentSpeed) * 1000);
+            NextMove += delay;
+
+            if (Core.TickCount - NextMove > 0)
+                NextMove = Core.TickCount;
+            
+            if ((Controlled || Summoned) && ControlOrder is OrderType.Come or OrderType.Follow)
+            {
+                var master = GetMaster();
+                if (master != null && GetDistanceToSqrt(master) > 4)
+                {
+                    MoveToWorld(master.Location, master.Map);
+                }
+            }
+
+            Pushing = false;
+
+            MoveImpl.IgnoreMovableImpassables = CanMoveOverObstacles && !CanDestroyObstacles;
+
+            if ((Direction & Direction.Mask) != (d & Direction.Mask))
+            {
+                var v = Move(d);
+
+                MoveImpl.IgnoreMovableImpassables = false;
+                return v ? MoveResult.Success : MoveResult.Blocked;
+            }
+
+            if (Move(d))
+            {
+                MoveImpl.IgnoreMovableImpassables = false;
+                return MoveResult.Success;
+            }
+
+            var wasPushing = Pushing;
+
+            var blocked = true;
+
+            var canOpenDoors = CanOpenDoors;
+            var canDestroyObstacles = CanDestroyObstacles;
+
+            if (canOpenDoors || canDestroyObstacles)
+            {
+                if (Debug) DebugSay("My movement was blocked, I will try to clear some obstacles.");
+
+                var map = Map;
+
+                if (map != null)
+                {
+                    int x = X, y = Y;
+                    Movement.Movement.Offset(d, ref x, ref y);
+
+                    var destroyables = 0;
+
+                    var eable = map.GetItemsInRange(new Point3D(x, y, Location.Z), 1);
+
+                    foreach (var item in eable)
+                        if (canOpenDoors && item is BaseDoor door && door.Z + door.ItemData.Height > Z &&
+                            Z + 16 > door.Z)
+                        {
+                            if (door.X != x || door.Y != y) continue;
+
+                            if (!door.Locked || !door.UseLocks()) Obstacles.Enqueue(door);
+
+                            if (!canDestroyObstacles) break;
+                        }
+                        else if (canDestroyObstacles && item.Movable && item.ItemData.Impassable &&
+                                 item.Z + item.ItemData.Height > Z && Z + 16 > item.Z)
+                        {
+                            if (!InRange(item.GetWorldLocation(), 1)) continue;
+
+                            Obstacles.Enqueue(item);
+                            ++destroyables;
+                        }
+
+                    eable.Free();
+
+                    if (destroyables > 0) Effects.PlaySound(new Point3D(x, y, Z), Map, 0x3B3);
+
+                    if (Obstacles.Count > 0) blocked = false; // retry movement
+
+                    while (Obstacles.Count > 0)
+                    {
+                        var item = Obstacles.Dequeue();
+
+                        if (item is BaseDoor door)
+                        {
+                            if (Debug)
+                                DebugSay(
+                                    "Little do they expect, I've learned how to open doors. Didn't they read the script??"
+                                );
+
+                            if (Debug) DebugSay("*twist*");
+
+                            door.Use(this);
+                        }
+                        else
+                        {
+                            if (Debug)
+                                DebugSay(
+                                    $"Ugabooga. I'm so big and tough I can destroy it: {item.GetType().Name}"
+                                );
+
+                            if (item is Container cont)
+                            {
+                                for (var i = 0; i < cont.Items.Count; ++i)
+                                {
+                                    var check = cont.Items[i];
+
+                                    if (check.Movable && check.ItemData.Impassable &&
+                                        cont.Z + check.ItemData.Height > Z)
+                                        Obstacles.Enqueue(check);
+                                }
+
+                                cont.Destroy();
+                            }
+                            else
+                            {
+                                item.Delete();
+                            }
+                        }
+                    }
+
+                    if (!blocked) blocked = !Move(d);
+                }
+            }
+
+            if (blocked)
+            {
+                var offset = Utility.RandomDouble() >= 0.6 ? 1 : -1;
+
+                for (var i = 0; i < 2; ++i)
+                {
+                    TurnInternal(offset);
+
+                    if (Move(Direction))
+                    {
+                        MoveImpl.IgnoreMovableImpassables = false;
+                        return MoveResult.SuccessAutoTurn;
+                    }
+                }
+
+                MoveImpl.IgnoreMovableImpassables = false;
+                return wasPushing ? MoveResult.BadState : MoveResult.Blocked;
+            }
+
+            MoveImpl.IgnoreMovableImpassables = false;
+            return MoveResult.Success;
         }
 
         public override bool OnMoveOver(Mobile m)
@@ -2242,6 +2656,7 @@ namespace Server.Mobiles
             if (Commandable)
             {
                 AIObject?.GetContextMenuEntries(from, list);
+                BTAIObject?.GetContextMenuEntries(from, list);
             }
 
             if (Tamable && !Controlled && from.Alive)
@@ -2284,7 +2699,10 @@ namespace Server.Mobiles
             if (speechType != null && (speechType.Flags & IHSFlags.OnSpeech) != 0 && from.InRange(this, 3))
                 return true;
 
-            return AIObject != null && AIObject.HandlesOnSpeech(@from) && @from.InRange(this, RangePerception);
+            if (AIObject != null && AIObject.HandlesOnSpeech(from) && from.InRange(this, RangePerception))
+                return true;
+
+            return BTAIObject != null && BTAIObject.HandlesOnSpeech(from) && from.InRange(this, RangePerception);
         }
 
         public override void OnSpeech(SpeechEventArgs e)
@@ -2295,6 +2713,8 @@ namespace Server.Mobiles
                 e.Handled = true;
             else if (!e.Handled && AIObject != null && e.Mobile.InRange(this, RangePerception))
                 AIObject.OnSpeech(e);
+            else if (!e.Handled && BTAIObject != null && e.Mobile.InRange(this, RangePerception))
+                BTAIObject.OnSpeech(e);
         }
 
         public override bool IsHarmfulCriminal(Mobile target)
@@ -2469,6 +2889,9 @@ namespace Server.Mobiles
 
             if (PlayerRangeSensitive && AIObject != null && map != null && map.GetSector(Location).Active)
                 AIObject.Activate();
+            
+            if (PlayerRangeSensitive && BTAIObject != null && map != null && map.GetSector(Location).Active)
+                BTAIObject.Activate();
         }
 
         public override void OnCombatantChange()
@@ -3993,7 +4416,7 @@ namespace Server.Mobiles
                 if (target != null && target.Alive && CanBeHarmful(target) && target.Map == Map &&
                     InLOS(target) && !BardPacified && !target.Paralyzed)
                 {
-                    if (Core.TickCount - m_NextSpitWebTime < (int)TimeSpan.FromSeconds(30).TotalMilliseconds && Utility.RandomBool())
+                    if (Core.TickCount - m_NextSpitWebTime < (int)TimeSpan.FromSeconds(15).TotalMilliseconds && Utility.RandomBool())
                     {
                         SpitWeb(target);
                     }
@@ -4283,6 +4706,7 @@ namespace Server.Mobiles
             else if (PlayerRangeSensitive)
             {
                 AIObject?.Deactivate();
+                BTAIObject?.Deactivate();
             }
 
             base.OnSectorDeactivate();
@@ -4299,6 +4723,7 @@ namespace Server.Mobiles
                     if (!Map.GetSector(X, Y).Active)
                     {
                         AIObject?.Deactivate();
+                        BTAIObject?.Deactivate();
                     }
                 }
             }
@@ -4311,6 +4736,7 @@ namespace Server.Mobiles
             if (PlayerRangeSensitive)
             {
                 AIObject?.Activate();
+                BTAIObject?.Activate();
             }
 
             base.OnSectorActivate();

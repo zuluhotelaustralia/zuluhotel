@@ -133,6 +133,9 @@ namespace Server.Mobiles
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual int ProvokeSkillOverride { get; set; } = -1;
+        
+        [CommandProperty(AccessLevel.GameMaster)]
+        public virtual bool PhysicalImmune { get; set; } = false;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public virtual bool SaySpellMantra { get; set; }

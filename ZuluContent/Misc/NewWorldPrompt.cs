@@ -44,7 +44,7 @@ namespace ZuluContent.Misc
                 DoorGenerator.Generate();
                 Decorate.Generate();
                 SignGenerator.Generate();
-                GenerateSpawners.Generate("felucca.json");
+                GenerateSpawnersCommand.Generate("felucca.json");
                 PublicMoongate.MoonGen(PMList.Felucca);
                 new GenTeleporter.TeleportersCreator().CreateTeleporters();
 

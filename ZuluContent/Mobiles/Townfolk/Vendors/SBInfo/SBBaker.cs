@@ -37,20 +37,20 @@ namespace Server.Mobiles
 		{ 
 			public InternalSellInfo() 
 			{ 
-				Add( typeof( BreadLoaf ), 3 ); 
-				Add( typeof( FrenchBread ), 1 ); 
-				Add( typeof( Cake ), 5 ); 
-				Add( typeof( Cookies ), 3 ); 
+				Add( typeof( BreadLoaf ), 2 ); 
+				Add( typeof( FrenchBread ), 2 ); 
+				Add( typeof( Cake ), 2 ); 
+				Add( typeof( Cookies ), 2 ); 
 				Add( typeof( Muffins ), 2 ); 
-				Add( typeof( CheesePizza ), 4 ); 
-				Add( typeof( ApplePie ), 5 ); 
-				Add( typeof( PeachCobbler ), 5 ); 
-				Add( typeof( Quiche ), 6 ); 
-				Add( typeof( Dough ), 4 ); 
-				Add( typeof( JarHoney ), 1 ); 
-				Add( typeof( Pitcher ), 5 );
-				Add( typeof( SackFlour ), 1 ); 
-				Add( typeof( Eggs ), 1 ); 
+				Add( typeof( CheesePizza ), 2 ); 
+				Add( typeof( ApplePie ), 2 ); 
+				Add( typeof( PeachCobbler ), 2 ); 
+				Add( typeof( Quiche ), 2 ); 
+				Add( typeof( Dough ), 2 ); 
+				Add( typeof( JarHoney ), 2 ); 
+				Add( typeof( Pitcher ), 2 );
+				Add( typeof( SackFlour ), 2 ); 
+				Add( typeof( Eggs ), 2 ); 
 			} 
 		} 
 	} 

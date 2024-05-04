@@ -32,13 +32,13 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( BlankScroll ), 6 );
-				Add( typeof( MapmakersPen ), 4 );
+				Add( typeof( BlankScroll ), 2 );
+				Add( typeof( MapmakersPen ), 2 );
 				Add( typeof( BlankMap ), 2 );
-				Add( typeof( CityMap ), 3 );
-				Add( typeof( LocalMap ), 3 );
-				Add( typeof( WorldMap ), 3 );
-				Add( typeof( PresetMapEntry ), 3 );
+				Add( typeof( CityMap ), 2 );
+				Add( typeof( LocalMap ), 2 );
+				Add( typeof( WorldMap ), 2 );
+				Add( typeof( PresetMapEntry ), 2 );
 				//TODO: Buy back maps that the mapmaker sells!!!
 			}
 		}

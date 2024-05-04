@@ -618,6 +618,10 @@ namespace Scripts.Zulu.Engines.Classes
         #endregion
 
         #region Unused hooks
+        
+        public void OnResurrect(Mobile patient)
+        {
+        }
 
         public void OnDeath(Mobile victim, ref bool resurrect)
         {

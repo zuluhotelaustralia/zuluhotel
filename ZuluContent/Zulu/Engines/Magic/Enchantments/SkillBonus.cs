@@ -35,7 +35,7 @@ namespace ZuluContent.Zulu.Engines.Magic.Enchantments
             get => Cursed > CurseType.None ? -m_Value : m_Value;
             set => m_Value = value;
         }
-
+        
         private SkillMod m_Mod;
 
         public override void OnAdded(IEntity entity, IEntity parent)

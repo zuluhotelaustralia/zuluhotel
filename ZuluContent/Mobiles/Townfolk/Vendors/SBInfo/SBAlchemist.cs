@@ -49,26 +49,26 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( BlackPearl ), 3 ); 
-				Add( typeof( Bloodmoss ), 3 ); 
-				Add( typeof( MandrakeRoot ), 2 ); 
-				Add( typeof( Garlic ), 2 ); 
-				Add( typeof( Ginseng ), 2 ); 
-				Add( typeof( Nightshade ), 2 ); 
-				Add( typeof( SpidersSilk ), 2 ); 
-				Add( typeof( SulfurousAsh ), 2 ); 
-				Add( typeof( Bottle ), 3 );
-				Add( typeof( MortarPestle ), 4 );
-				Add( typeof( HairDye ), 19 );
+				Add( typeof( BlackPearl ), 1 ); 
+				Add( typeof( Bloodmoss ), 1 ); 
+				Add( typeof( MandrakeRoot ), 1 ); 
+				Add( typeof( Garlic ), 1 ); 
+				Add( typeof( Ginseng ), 1 ); 
+				Add( typeof( Nightshade ), 1 ); 
+				Add( typeof( SpidersSilk ), 1 ); 
+				Add( typeof( SulfurousAsh ), 1 ); 
+				Add( typeof( Bottle ), 2 );
+				Add( typeof( MortarPestle ), 2 );
+				Add( typeof( HairDye ), 2 );
 
-				Add( typeof( NightSightPotion ), 7 );
-				Add( typeof( AgilityPotion ), 7 );
-				Add( typeof( StrengthPotion ), 7 );
-				Add( typeof( RefreshPotion ), 7 );
-				Add( typeof( LesserCurePotion ), 7 );
-				Add( typeof( LesserHealPotion ), 7 );
-				Add( typeof( LesserPoisonPotion ), 7 );
-				Add( typeof( LesserExplosionPotion ), 10 );
+				Add( typeof( NightSightPotion ), 2 );
+				Add( typeof( AgilityPotion ), 2 );
+				Add( typeof( StrengthPotion ), 2 );
+				Add( typeof( RefreshPotion ), 2 );
+				Add( typeof( LesserCurePotion ), 2 );
+				Add( typeof( LesserHealPotion ), 2 );
+				Add( typeof( LesserPoisonPotion ), 2 );
+				Add( typeof( LesserExplosionPotion ), 2 );
 			}
 		}
 	}

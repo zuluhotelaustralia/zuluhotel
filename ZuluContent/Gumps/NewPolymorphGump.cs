@@ -1,39 +1,18 @@
 using System;
 using System.Runtime.CompilerServices;
 using Server.Network;
-using static Server.Gumps.PolymorphEntry;
 namespace Server.Gumps
 {
     public class NewPolymorphGump : Gump, INotifyCompletion
     {
-        private static readonly PolymorphEntry[] m_Entries =
-        {
-            Bird,
-            Rabbit,
-            Eagle,
-            Cat,
-            Dog,
-            Wolf,
-            Deer,
-            Panther,
-            BlackBear,
-            GrizzlyBear,
-            PolarBear,
-            GiantSerpent,
-            EarthElemental,
-            FireElemental,
-            WaterElemental,
-            AirElemental,
-            Dragon,
-            Reaper,
-            Wisp
-        };
+        private readonly PolymorphEntry[] m_Entries;
 
         private readonly Mobile m_Caster;
 
-        public NewPolymorphGump(Mobile caster) : base(0, 0)
+        public NewPolymorphGump(Mobile caster, PolymorphEntry[] entries) : base(0, 0)
         {
             m_Caster = caster;
+            m_Entries = entries;
 
             AddPage(0);
 

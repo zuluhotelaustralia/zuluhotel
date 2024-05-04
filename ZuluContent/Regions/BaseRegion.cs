@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Scripts.Zulu.Utilities;
 using Server.Gumps;
 using Server.Json;
 using Server.Mobiles;
@@ -12,6 +13,8 @@ namespace Server.Regions
     {
         private static readonly List<Rectangle3D> m_RectBuffer1 = new();
         private static readonly List<Rectangle3D> m_RectBuffer2 = new();
+
+        protected bool AllowMounts { get; set; } = true;
 
         public BaseRegion(string name, Map map, int priority, params Rectangle2D[] area) : base(name, map, priority, area)
         {
@@ -83,6 +86,40 @@ namespace Server.Regions
             if (m is PlayerMobile mobile && mobile.Young && !YoungProtected)
             {
                 mobile.SendGump(new YoungDungeonWarning());
+            }
+            
+            if (!AllowMounts && m.AccessLevel == AccessLevel.Player)
+            {
+                var mount = m.Mount;
+
+                if (mount != null)
+                    mount.Rider = null;
+            
+                if (mount is BaseMount creatureMount && m is PlayerMobile player)
+                {
+                    player.InternalizedMount = creatureMount;
+                    creatureMount.Internalize();
+                    player.SendSuccessMessage("Your mount finds a place to stay while you fight your battle!");
+                }
+            }
+        }
+
+        public override void OnExit(Mobile m)
+        {
+            if (!AllowMounts && m.AccessLevel == AccessLevel.Player)
+            {
+                if (m is PlayerMobile player)
+                {
+                    var mount = player.InternalizedMount;
+
+                    if (mount != null)
+                    {
+                        mount.MoveToWorld(player.Location, player.Map);
+                        mount.Rider = player;
+                        player.InternalizedMount = null;
+                        m.SendSuccessMessage("Your mount returns to you as you head out of battle!");
+                    }
+                }
             }
         }
 

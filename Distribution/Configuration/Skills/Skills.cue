@@ -8,6 +8,7 @@ Types.#SkillSettings
 
 MaxStatCap: 60000
 StatCap:    1300
+PointsMultiplier: 3
 Entries: {
 	Anatomy: {
 		OnUseHandler:  "Anatomy"

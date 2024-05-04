@@ -34,7 +34,7 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(Hide), 2);
+                Add(typeof(Hide), 1);
             }
         }
     }

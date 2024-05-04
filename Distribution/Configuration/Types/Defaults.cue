@@ -43,6 +43,7 @@ package Types
 	ManaMaxSeed:             1
 	Meat:                    0
 	PerceptionRange:         10
+	PhysicalImmune:          false
 	MinTameSkill:            0
 	OppositionGroup:         null
 	Race:                    null

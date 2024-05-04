@@ -197,6 +197,22 @@ namespace ZuluContent.Zulu.Items
             set => Enchantments.Set((SecondSkillBonus e) => e.Value = value);
         }
         
+        [CommandProperty(AccessLevel.GameMaster)]
+        public int GearScore
+        {
+            get
+            {
+                var score = 0;
+
+                score += (int) FirstSkillBonusValue;
+                score += StrBonus / 5;
+                score += DexBonus / 5;
+                score += IntBonus / 5;
+                
+                return score;
+            }
+        }
+        
         public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);

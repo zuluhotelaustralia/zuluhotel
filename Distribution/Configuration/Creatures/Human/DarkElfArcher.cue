@@ -12,6 +12,7 @@ DarkElfArcher: {
 	CreatureType:         "Human"
 	VirtualArmor:         25
 	FightMode:            "Closest"
+	FightRange:           10
 	HitsMaxSeed:          165
 	Hue:                  1109
 	LootTable:            "41"

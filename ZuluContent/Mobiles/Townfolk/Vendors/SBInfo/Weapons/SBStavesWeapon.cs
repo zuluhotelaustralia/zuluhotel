@@ -30,10 +30,10 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add( typeof( BlackStaff ), 11 );
-				Add( typeof( GnarledStaff ), 8 );
-				Add( typeof( QuarterStaff ), 9 );
-				Add( typeof( ShepherdsCrook ), 10 );
+				Add( typeof( BlackStaff ), 2 );
+				Add( typeof( GnarledStaff ), 2 );
+				Add( typeof( QuarterStaff ), 2 );
+				Add( typeof( ShepherdsCrook ), 2 );
 			}
 		}
 	}

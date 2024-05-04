@@ -58,6 +58,7 @@ package Types
 	ManaMaxSeed:             *#NpcDefaults.ManaMaxSeed | #CreatureProperties.ManaMaxSeed
 	Meat:                    *#NpcDefaults.Meat | #CreatureProperties.Meat
 	PerceptionRange:         *#NpcDefaults.PerceptionRange | #CreatureProperties.PerceptionRange
+	PhysicalImmune:          *#NpcDefaults.PhysicalImmune | #CreatureProperties.PhysicalImmune
 	MinTameSkill:            *#NpcDefaults.MinTameSkill | #CreatureProperties.MinTameSkill
 	OppositionGroup:         *#NpcDefaults.OppositionGroup | #CreatureProperties.OppositionGroup
 	Race:                    *#NpcDefaults.Race | #CreatureProperties.Race

@@ -19,7 +19,7 @@ namespace Server.Items
 
         public override int DefaultMinDamage => 30;
 
-        public override int DefaultMaxDamage => 65;
+        public override int DefaultMaxDamage => 55;
 
         public override int DefaultSpeed => 35;
 
